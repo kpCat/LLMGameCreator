@@ -1,61 +1,91 @@
+#nullable disable
+
 using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
-namespace LLMGameCreator.WinForms;
-
-public sealed partial class MainForm
+namespace LLMGameCreator.WinForms
 {
-    private IContainer? components;
-    private ListBox _navigation = null!;
-    private Panel _workspace = null!;
-    private StatusStrip _statusStrip = null!;
-    private ToolStripStatusLabel _statusLabel = null!;
-
-    protected override void Dispose(bool disposing)
+    partial class MainForm
     {
-        if (disposing)
+        private IContainer components;
+        private ListBox _navigation;
+        private Panel _workspace;
+        private StatusStrip _statusStrip;
+        private ToolStripStatusLabel _statusLabel;
+
+        protected override void Dispose(bool disposing)
         {
-            components?.Dispose();
+            if (disposing)
+            {
+                components?.Dispose();
+            }
+
+            base.Dispose(disposing);
         }
 
-        base.Dispose(disposing);
-    }
-
-    private void InitializeComponent()
-    {
-        components = new Container();
-        _navigation = new ListBox();
-        _workspace = new Panel();
-        _statusStrip = new StatusStrip();
-        _statusLabel = new ToolStripStatusLabel();
-        _statusStrip.SuspendLayout();
-        SuspendLayout();
-
-        _navigation.Dock = DockStyle.Left;
-        _navigation.Width = 220;
-        _navigation.DisplayMember = "Title";
-
-        _workspace.Dock = DockStyle.Fill;
-        _workspace.BackColor = SystemColors.Control;
-
-        _statusStrip.Dock = DockStyle.Bottom;
-        _statusStrip.Items.AddRange(new ToolStripItem[]
+        private void InitializeComponent()
         {
-            _statusLabel
-        });
-
-        AutoScaleDimensions = new SizeF(7F, 15F);
-        AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1280, 800);
-        Controls.Add(_workspace);
-        Controls.Add(_navigation);
-        Controls.Add(_statusStrip);
-        Name = "MainForm";
-        StartPosition = FormStartPosition.CenterScreen;
-        Text = "LLMGameCreator";
-
-        _statusStrip.ResumeLayout(false);
-        _statusStrip.PerformLayout();
-        ResumeLayout(false);
-        PerformLayout();
+            this.components = new Container();
+            this._navigation = new ListBox();
+            this._workspace = new Panel();
+            this._statusStrip = new StatusStrip();
+            this._statusLabel = new ToolStripStatusLabel();
+            this._statusStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // _navigation
+            // 
+            this._navigation.DisplayMember = "Title";
+            this._navigation.Dock = DockStyle.Left;
+            this._navigation.FormattingEnabled = true;
+            this._navigation.ItemHeight = 15;
+            this._navigation.Location = new Point(0, 0);
+            this._navigation.Name = "_navigation";
+            this._navigation.Size = new Size(220, 778);
+            this._navigation.TabIndex = 0;
+            // 
+            // _workspace
+            // 
+            this._workspace.BackColor = SystemColors.Control;
+            this._workspace.Dock = DockStyle.Fill;
+            this._workspace.Location = new Point(220, 0);
+            this._workspace.Name = "_workspace";
+            this._workspace.Size = new Size(1060, 778);
+            this._workspace.TabIndex = 1;
+            // 
+            // _statusStrip
+            // 
+            this._statusStrip.Items.AddRange(new ToolStripItem[]
+            {
+                this._statusLabel
+            });
+            this._statusStrip.Location = new Point(0, 778);
+            this._statusStrip.Name = "_statusStrip";
+            this._statusStrip.Size = new Size(1280, 22);
+            this._statusStrip.TabIndex = 2;
+            // 
+            // _statusLabel
+            // 
+            this._statusLabel.Name = "_statusLabel";
+            this._statusLabel.Size = new Size(126, 17);
+            this._statusLabel.Text = "Проект игры не открыт";
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.ClientSize = new Size(1280, 800);
+            this.Controls.Add(this._workspace);
+            this.Controls.Add(this._navigation);
+            this.Controls.Add(this._statusStrip);
+            this.Name = "MainForm";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Text = "LLMGameCreator";
+            this._statusStrip.ResumeLayout(false);
+            this._statusStrip.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
     }
 }

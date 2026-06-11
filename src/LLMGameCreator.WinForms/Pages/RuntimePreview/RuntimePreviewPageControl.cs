@@ -6,16 +6,20 @@ namespace LLMGameCreator.WinForms.Pages;
 
 public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 {
-    private readonly ICurrentGamePackageService _currentGamePackageService;
-    private readonly IGameRuntime _runtime;
+    private readonly ICurrentGamePackageService? _currentGamePackageService;
+    private readonly IGameRuntime? _runtime;
     private GameState? _state;
+
+    public RuntimePreviewPageControl()
+    {
+        InitializeComponent();
+    }
 
     public RuntimePreviewPageControl(ICurrentGamePackageService currentGamePackageService, IGameRuntime runtime)
     {
         _currentGamePackageService = currentGamePackageService;
         _runtime = runtime;
         InitializeComponent();
-
         _startButton.Click += (_, _) => StartRuntime();
         _canvas.CommandRequested += command => ExecuteCommand(command);
     }
@@ -32,10 +36,10 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
     private void StartRuntime()
     {
-        var package = _currentGamePackageService.CurrentPackage;
-        if (package == null)
+        var package = _currentGamePackageService?.CurrentPackage;
+        if (package == null || _runtime == null)
         {
-            AppendLog("Проект игры не открыт.");
+            AppendLog("Проект игры не открыт или runtime недоступен.");
             return;
         }
 
@@ -46,8 +50,8 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
     private void ExecuteCommand(PlayerCommand command)
     {
-        var package = _currentGamePackageService.CurrentPackage;
-        if (package == null || _state == null)
+        var package = _currentGamePackageService?.CurrentPackage;
+        if (package == null || _state == null || _runtime == null)
         {
             AppendLog("Сначала запусти runtime.");
             return;

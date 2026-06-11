@@ -1,13 +1,38 @@
-namespace LLMGameCreator.WinForms.Pages;
+#nullable disable
 
-public sealed partial class RuntimeMapCanvas
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace LLMGameCreator.WinForms.Pages
 {
-    private void InitializeComponent()
+    partial class RuntimeMapCanvas
     {
-        BackColor = Color.Black;
-        Name = "RuntimeMapCanvas";
-        Size = new Size(640, 480);
-        TabStop = true;
-        DoubleBuffered = true;
+        private IContainer components;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                components?.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            this.components = new Container();
+            this.SuspendLayout();
+            // 
+            // RuntimeMapCanvas
+            // 
+            this.BackColor = Color.Black;
+            this.DoubleBuffered = true;
+            this.Name = "RuntimeMapCanvas";
+            this.Size = new Size(640, 480);
+            this.TabStop = true;
+            this.ResumeLayout(false);
+        }
     }
 }

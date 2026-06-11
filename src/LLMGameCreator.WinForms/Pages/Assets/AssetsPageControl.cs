@@ -4,7 +4,12 @@ namespace LLMGameCreator.WinForms.Pages;
 
 public sealed partial class AssetsPageControl : UserControl, IEditorPage
 {
-    private readonly ICurrentGamePackageService _currentGamePackageService;
+    private readonly ICurrentGamePackageService? _currentGamePackageService;
+
+    public AssetsPageControl()
+    {
+        InitializeComponent();
+    }
 
     public AssetsPageControl(ICurrentGamePackageService currentGamePackageService)
     {
@@ -25,7 +30,7 @@ public sealed partial class AssetsPageControl : UserControl, IEditorPage
     private void RefreshAssets()
     {
         _listView.Items.Clear();
-        var package = _currentGamePackageService.CurrentPackage;
+        var package = _currentGamePackageService?.CurrentPackage;
         if (package == null)
         {
             return;

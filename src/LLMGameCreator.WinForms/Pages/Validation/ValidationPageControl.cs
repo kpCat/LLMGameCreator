@@ -5,15 +5,19 @@ namespace LLMGameCreator.WinForms.Pages;
 
 public sealed partial class ValidationPageControl : UserControl, IEditorPage
 {
-    private readonly ICurrentGamePackageService _currentGamePackageService;
-    private readonly IGamePackageValidator _validator;
+    private readonly ICurrentGamePackageService? _currentGamePackageService;
+    private readonly IGamePackageValidator? _validator;
+
+    public ValidationPageControl()
+    {
+        InitializeComponent();
+    }
 
     public ValidationPageControl(ICurrentGamePackageService currentGamePackageService, IGamePackageValidator validator)
     {
         _currentGamePackageService = currentGamePackageService;
         _validator = validator;
         InitializeComponent();
-
         _validateButton.Click += (_, _) => ValidateCurrent();
     }
 
@@ -26,10 +30,16 @@ public sealed partial class ValidationPageControl : UserControl, IEditorPage
     private void ValidateCurrent()
     {
         _issuesListBox.Items.Clear();
-        var package = _currentGamePackageService.CurrentPackage;
+        var package = _currentGamePackageService?.CurrentPackage;
         if (package == null)
         {
             _issuesListBox.Items.Add("Проект игры не открыт.");
+            return;
+        }
+
+        if (_validator == null)
+        {
+            _issuesListBox.Items.Add("Валидатор недоступен.");
             return;
         }
 

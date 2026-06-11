@@ -1,81 +1,75 @@
 # WinForms Designer Rules
 
-Этот документ фиксирует обязательный стиль UI-кода для `LLMGameCreator.WinForms`.
+These rules are mandatory for every `Form` and `UserControl` in `LLMGameCreator.WinForms`.
 
-## Главный принцип
+## Required structure
 
-Весь визуальный код WinForms-форм и UserControl должен быть вынесен в `InitializeComponent()` в отдельный `.Designer.cs` partial-файл.
+Every visual class must be split into two files:
 
-Файл `.cs` содержит только:
-
-- зависимости, полученные через DI;
-- constructor flow;
-- подписки на события;
-- обработчики событий;
-- загрузку/обновление данных;
-- бизнес-логику presentation-слоя;
-- вызовы Application/Runtime сервисов.
-
-Файл `.Designer.cs` содержит:
-
-- поля визуальных контролов;
-- создание контролов;
-- layout;
-- Dock/Anchor/Size/Location/Text/Name;
-- ColumnHeader/ColumnStyle/RowStyle;
-- `SuspendLayout`/`ResumeLayout`;
-- `Dispose(bool disposing)` для Form, если нужен `components`.
-
-## Запрещено
-
-Не создавать визуальные контролы напрямую в constructor/body основного `.cs` файла:
-
-```csharp
-public MyPageControl()
-{
-    var button = new Button(); // нельзя
-    Controls.Add(button);      // нельзя
-}
+```text
+SomeControl.cs
+SomeControl.Designer.cs
 ```
 
-Не смешивать в одном методе:
+`SomeControl.cs` contains:
 
-- создание UI;
-- чтение файлов;
-- обращение к LLM;
-- runtime execution;
-- генерацию данных.
+- injected services;
+- constructor overloads;
+- event wiring;
+- UI reaction logic;
+- refresh/update methods.
 
-## Допустимо
+`SomeControl.Designer.cs` contains:
 
-В `.cs` можно подписывать события после `InitializeComponent()`:
+- visual fields;
+- `InitializeComponent()`;
+- `Dispose(bool disposing)`;
+- layout, docking, sizes, static text, columns and static child controls.
+
+## Visual Studio Designer compatibility
+
+Designer files must be conservative and CodeDOM-friendly:
+
+- use block-scoped namespace syntax, not file-scoped namespace syntax;
+- avoid target-typed `new()` in designer code;
+- avoid collection expressions;
+- avoid LINQ;
+- avoid loops;
+- avoid lambdas/event handlers;
+- avoid injected services;
+- avoid runtime data loading;
+- avoid async code;
+- prefer explicit arrays such as `new ColumnHeader[] { ... }`;
+- prefer `this.` for fields and control calls.
+
+## Constructors
+
+Designable WinForms controls with injected services should expose a parameterless constructor for Visual Studio Designer:
 
 ```csharp
-public ProjectsPageControl(ICurrentGamePackageService currentGamePackageService)
+public SomePageControl()
 {
-    _currentGamePackageService = currentGamePackageService;
     InitializeComponent();
-
-    _browseButton.Click += (_, _) => BrowseFolder();
-    _loadButton.Click += async (_, _) => await LoadSelectedFolderAsync();
 }
 ```
 
-В `.Designer.cs` можно оставлять простые статичные свойства контролов.
+The runtime constructor may accept services:
 
-## Исключения
+```csharp
+public SomePageControl(IMyService service)
+{
+    _service = service;
+    InitializeComponent();
+    WireEvents();
+}
+```
 
-Custom-drawing controls, например map canvas, могут содержать rendering/input logic в основном `.cs`, но их базовые WinForms-свойства всё равно должны жить в `InitializeComponent()`.
+The parameterless constructor must not start runtime operations, load files, call LLM, run validation or access DI.
 
-Пример:
+## Event handlers
 
-- `RuntimeMapCanvas.cs` — `OnPaint`, `OnKeyDown`, runtime input mapping;
-- `RuntimeMapCanvas.Designer.cs` — `BackColor`, `TabStop`, `Size`, `DoubleBuffered`.
+Event handlers should normally be wired in the runtime constructor or a dedicated `WireEvents()` method, not in `InitializeComponent()`.
 
-## Почему это важно
+## Business logic ban
 
-- Visual Studio Designer сможет открыть форму/контрол.
-- UI становится читаемым.
-- Codex меньше путает layout и бизнес-логику.
-- Будущие правки дизайна можно делать руками через дизайнер.
-- MainForm и страницы не превращаются в god-controls.
+Designer files must not contain business logic, data access, generation logic, runtime logic, validation logic or script execution.

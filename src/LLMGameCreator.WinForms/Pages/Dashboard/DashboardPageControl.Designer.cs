@@ -1,25 +1,51 @@
-namespace LLMGameCreator.WinForms.Pages;
+#nullable disable
 
-public sealed partial class DashboardPageControl
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace LLMGameCreator.WinForms.Pages
 {
-    private Label _summaryLabel = null!;
-
-    private void InitializeComponent()
+    partial class DashboardPageControl
     {
-        _summaryLabel = new Label();
-        SuspendLayout();
+        private IContainer components;
+        private Label _summaryLabel;
 
-        _summaryLabel.Dock = DockStyle.Fill;
-        _summaryLabel.Font = new Font(FontFamily.GenericSansSerif, 12F, FontStyle.Regular, GraphicsUnit.Point);
-        _summaryLabel.TextAlign = ContentAlignment.MiddleCenter;
-        _summaryLabel.Text = "LLMGameCreator v0.1 skeleton\r\n\r\nЦель: GamePackage + typed Lua + asset catalog + headless runtime + WinForms editor shell.";
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                components?.Dispose();
+            }
 
-        AutoScaleDimensions = new SizeF(7F, 15F);
-        AutoScaleMode = AutoScaleMode.Font;
-        Controls.Add(_summaryLabel);
-        Name = "DashboardPageControl";
-        Size = new Size(800, 450);
+            base.Dispose(disposing);
+        }
 
-        ResumeLayout(false);
+        private void InitializeComponent()
+        {
+            this.components = new Container();
+            this._summaryLabel = new Label();
+            this.SuspendLayout();
+            // 
+            // _summaryLabel
+            // 
+            this._summaryLabel.Dock = DockStyle.Fill;
+            this._summaryLabel.Font = new Font(FontFamily.GenericSansSerif, 12F, FontStyle.Regular, GraphicsUnit.Point);
+            this._summaryLabel.Location = new Point(0, 0);
+            this._summaryLabel.Name = "_summaryLabel";
+            this._summaryLabel.Size = new Size(800, 450);
+            this._summaryLabel.TabIndex = 0;
+            this._summaryLabel.Text = "LLMGameCreator v0.1 skeleton\r\n\r\nЦель: GamePackage + typed Lua + asset catalog + headless runtime + WinForms editor shell.";
+            this._summaryLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // DashboardPageControl
+            // 
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.Controls.Add(this._summaryLabel);
+            this.Name = "DashboardPageControl";
+            this.Size = new Size(800, 450);
+            this.ResumeLayout(false);
+        }
     }
 }

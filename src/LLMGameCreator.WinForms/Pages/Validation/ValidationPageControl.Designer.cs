@@ -1,40 +1,77 @@
-namespace LLMGameCreator.WinForms.Pages;
+#nullable disable
 
-public sealed partial class ValidationPageControl
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace LLMGameCreator.WinForms.Pages
 {
-    private Panel _rootPanel = null!;
-    private Button _validateButton = null!;
-    private ListBox _issuesListBox = null!;
-
-    private void InitializeComponent()
+    partial class ValidationPageControl
     {
-        _rootPanel = new Panel();
-        _validateButton = new Button();
-        _issuesListBox = new ListBox();
-        _rootPanel.SuspendLayout();
-        SuspendLayout();
+        private IContainer components;
+        private Panel _rootPanel;
+        private Button _validateButton;
+        private ListBox _issuesListBox;
 
-        _rootPanel.Dock = DockStyle.Fill;
-        _rootPanel.Padding = new Padding(12);
-        _rootPanel.Controls.Add(_issuesListBox);
-        _rootPanel.Controls.Add(_validateButton);
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                components?.Dispose();
+            }
 
-        _validateButton.Dock = DockStyle.Top;
-        _validateButton.Height = 36;
-        _validateButton.Text = "Проверить текущий GamePackage";
-        _validateButton.UseVisualStyleBackColor = true;
+            base.Dispose(disposing);
+        }
 
-        _issuesListBox.Dock = DockStyle.Fill;
-        _issuesListBox.FormattingEnabled = true;
-        _issuesListBox.ItemHeight = 15;
-
-        AutoScaleDimensions = new SizeF(7F, 15F);
-        AutoScaleMode = AutoScaleMode.Font;
-        Controls.Add(_rootPanel);
-        Name = "ValidationPageControl";
-        Size = new Size(800, 450);
-
-        _rootPanel.ResumeLayout(false);
-        ResumeLayout(false);
+        private void InitializeComponent()
+        {
+            this.components = new Container();
+            this._rootPanel = new Panel();
+            this._issuesListBox = new ListBox();
+            this._validateButton = new Button();
+            this._rootPanel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // _rootPanel
+            // 
+            this._rootPanel.Controls.Add(this._issuesListBox);
+            this._rootPanel.Controls.Add(this._validateButton);
+            this._rootPanel.Dock = DockStyle.Fill;
+            this._rootPanel.Location = new Point(0, 0);
+            this._rootPanel.Name = "_rootPanel";
+            this._rootPanel.Padding = new Padding(12);
+            this._rootPanel.Size = new Size(800, 450);
+            this._rootPanel.TabIndex = 0;
+            // 
+            // _issuesListBox
+            // 
+            this._issuesListBox.Dock = DockStyle.Fill;
+            this._issuesListBox.FormattingEnabled = true;
+            this._issuesListBox.ItemHeight = 15;
+            this._issuesListBox.Location = new Point(12, 48);
+            this._issuesListBox.Name = "_issuesListBox";
+            this._issuesListBox.Size = new Size(776, 390);
+            this._issuesListBox.TabIndex = 1;
+            // 
+            // _validateButton
+            // 
+            this._validateButton.Dock = DockStyle.Top;
+            this._validateButton.Location = new Point(12, 12);
+            this._validateButton.Name = "_validateButton";
+            this._validateButton.Size = new Size(776, 36);
+            this._validateButton.TabIndex = 0;
+            this._validateButton.Text = "Проверить текущий GamePackage";
+            this._validateButton.UseVisualStyleBackColor = true;
+            // 
+            // ValidationPageControl
+            // 
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.Controls.Add(this._rootPanel);
+            this.Name = "ValidationPageControl";
+            this.Size = new Size(800, 450);
+            this._rootPanel.ResumeLayout(false);
+            this.ResumeLayout(false);
+        }
     }
 }

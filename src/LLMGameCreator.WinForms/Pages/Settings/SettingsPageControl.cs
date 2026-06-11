@@ -5,7 +5,13 @@ namespace LLMGameCreator.WinForms.Pages;
 
 public sealed partial class SettingsPageControl : UserControl, IEditorPage
 {
-    private readonly IAppSettingsRepository _settingsRepository;
+    private readonly IAppSettingsRepository? _settingsRepository;
+
+    public SettingsPageControl()
+    {
+        InitializeComponent();
+        _settingsTextBox.Text = "Design-time preview. Runtime settings repository is not available in Visual Studio Designer.";
+    }
 
     public SettingsPageControl(IAppSettingsRepository settingsRepository)
     {
@@ -25,7 +31,12 @@ public sealed partial class SettingsPageControl : UserControl, IEditorPage
 
     private async Task LoadSettingsAsync()
     {
-        AppSettings settings = await _settingsRepository.LoadAsync(CancellationToken.None);
+        if (_settingsRepository == null)
+        {
+            return;
+        }
+
+        AppSettings settings = await _settingsRepository.LoadAsync(CancellationToken.None).ConfigureAwait(true);
         _settingsTextBox.Text =
             $"GamesRootPath: {settings.GamesRootPath}\r\n" +
             $"LogsPath: {settings.LogsPath}\r\n" +
