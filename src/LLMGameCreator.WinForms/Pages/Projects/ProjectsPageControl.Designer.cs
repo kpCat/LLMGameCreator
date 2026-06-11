@@ -17,10 +17,15 @@ namespace LLMGameCreator.WinForms.Pages
         private Button _refreshButton;
         private ListView _projectsListView;
         private ColumnHeader _gameNameColumnHeader;
+        private ColumnHeader _packageIdColumnHeader;
+        private ColumnHeader _versionColumnHeader;
+        private ColumnHeader _statusColumnHeader;
         private ColumnHeader _gameFolderColumnHeader;
         private FlowLayoutPanel _actionsPanel;
+        private Button _newGameButton;
         private Button _openSelectedButton;
         private Button _openFolderButton;
+        private Button _saveCurrentButton;
         private TextBox _infoTextBox;
 
         protected override void Dispose(bool disposing)
@@ -44,10 +49,15 @@ namespace LLMGameCreator.WinForms.Pages
             this._refreshButton = new Button();
             this._projectsListView = new ListView();
             this._gameNameColumnHeader = new ColumnHeader();
+            this._packageIdColumnHeader = new ColumnHeader();
+            this._versionColumnHeader = new ColumnHeader();
+            this._statusColumnHeader = new ColumnHeader();
             this._gameFolderColumnHeader = new ColumnHeader();
             this._actionsPanel = new FlowLayoutPanel();
+            this._newGameButton = new Button();
             this._openSelectedButton = new Button();
             this._openFolderButton = new Button();
+            this._saveCurrentButton = new Button();
             this._infoTextBox = new TextBox();
             this._layoutPanel.SuspendLayout();
             this._actionsPanel.SuspendLayout();
@@ -134,6 +144,9 @@ namespace LLMGameCreator.WinForms.Pages
             this._projectsListView.Columns.AddRange(new ColumnHeader[]
             {
                 this._gameNameColumnHeader,
+                this._packageIdColumnHeader,
+                this._versionColumnHeader,
+                this._statusColumnHeader,
                 this._gameFolderColumnHeader
             });
             this._layoutPanel.SetColumnSpan(this._projectsListView, 4);
@@ -150,41 +163,76 @@ namespace LLMGameCreator.WinForms.Pages
             // _gameNameColumnHeader
             // 
             this._gameNameColumnHeader.Text = "Игра";
-            this._gameNameColumnHeader.Width = 220;
+            this._gameNameColumnHeader.Width = 180;
+            // 
+            // _packageIdColumnHeader
+            // 
+            this._packageIdColumnHeader.Text = "PackageId";
+            this._packageIdColumnHeader.Width = 160;
+            // 
+            // _versionColumnHeader
+            // 
+            this._versionColumnHeader.Text = "Version";
+            this._versionColumnHeader.Width = 80;
+            // 
+            // _statusColumnHeader
+            // 
+            this._statusColumnHeader.Text = "Status";
+            this._statusColumnHeader.Width = 180;
             // 
             // _gameFolderColumnHeader
             // 
             this._gameFolderColumnHeader.Text = "Папка";
-            this._gameFolderColumnHeader.Width = 620;
+            this._gameFolderColumnHeader.Width = 300;
             // 
             // _actionsPanel
             // 
             this._layoutPanel.SetColumnSpan(this._actionsPanel, 4);
+            this._actionsPanel.Controls.Add(this._newGameButton);
             this._actionsPanel.Controls.Add(this._openSelectedButton);
             this._actionsPanel.Controls.Add(this._openFolderButton);
+            this._actionsPanel.Controls.Add(this._saveCurrentButton);
             this._actionsPanel.Dock = DockStyle.Fill;
             this._actionsPanel.Location = new Point(15, 344);
             this._actionsPanel.Name = "_actionsPanel";
             this._actionsPanel.Size = new Size(870, 36);
             this._actionsPanel.TabIndex = 6;
             // 
+            // _newGameButton
+            // 
+            this._newGameButton.Location = new Point(3, 3);
+            this._newGameButton.Name = "_newGameButton";
+            this._newGameButton.Size = new Size(110, 30);
+            this._newGameButton.TabIndex = 0;
+            this._newGameButton.Text = "Новая игра";
+            this._newGameButton.UseVisualStyleBackColor = true;
+            // 
             // _openSelectedButton
             // 
-            this._openSelectedButton.Location = new Point(3, 3);
+            this._openSelectedButton.Location = new Point(119, 3);
             this._openSelectedButton.Name = "_openSelectedButton";
-            this._openSelectedButton.Size = new Size(150, 30);
-            this._openSelectedButton.TabIndex = 0;
+            this._openSelectedButton.Size = new Size(170, 30);
+            this._openSelectedButton.TabIndex = 1;
             this._openSelectedButton.Text = "Открыть выбранную";
             this._openSelectedButton.UseVisualStyleBackColor = true;
             // 
             // _openFolderButton
             // 
-            this._openFolderButton.Location = new Point(159, 3);
+            this._openFolderButton.Location = new Point(295, 3);
             this._openFolderButton.Name = "_openFolderButton";
-            this._openFolderButton.Size = new Size(180, 30);
-            this._openFolderButton.TabIndex = 1;
+            this._openFolderButton.Size = new Size(190, 30);
+            this._openFolderButton.TabIndex = 2;
             this._openFolderButton.Text = "Открыть папку вручную";
             this._openFolderButton.UseVisualStyleBackColor = true;
+            // 
+            // _saveCurrentButton
+            // 
+            this._saveCurrentButton.Location = new Point(491, 3);
+            this._saveCurrentButton.Name = "_saveCurrentButton";
+            this._saveCurrentButton.Size = new Size(170, 30);
+            this._saveCurrentButton.TabIndex = 3;
+            this._saveCurrentButton.Text = "Сохранить текущую";
+            this._saveCurrentButton.UseVisualStyleBackColor = true;
             // 
             // _infoTextBox
             // 

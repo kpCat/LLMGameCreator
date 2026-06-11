@@ -9,6 +9,7 @@ public interface ICurrentGamePackageService
     GamePackageDefinition? CurrentPackage { get; }
     event EventHandler? CurrentChanged;
     Task LoadAsync(string projectFolder, CancellationToken cancellationToken);
+    Task SaveAsync(CancellationToken cancellationToken);
 }
 
 public sealed class CurrentGamePackageService : ICurrentGamePackageService
@@ -28,6 +29,22 @@ public sealed class CurrentGamePackageService : ICurrentGamePackageService
     {
         CurrentPackage = await _repository.LoadAsync(projectFolder, cancellationToken).ConfigureAwait(false);
         CurrentFolder = projectFolder;
+        CurrentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public async Task SaveAsync(CancellationToken cancellationToken)
+    {
+        if (CurrentPackage == null)
+        {
+            throw new InvalidOperationException("No current game package is loaded.");
+        }
+
+        if (string.IsNullOrWhiteSpace(CurrentFolder))
+        {
+            throw new InvalidOperationException("Current game package folder is not set.");
+        }
+
+        await _repository.SaveAsync(CurrentFolder, CurrentPackage, cancellationToken).ConfigureAwait(false);
         CurrentChanged?.Invoke(this, EventArgs.Empty);
     }
 }

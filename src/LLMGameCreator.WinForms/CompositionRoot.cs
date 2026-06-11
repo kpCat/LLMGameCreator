@@ -36,6 +36,8 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<IAppSettingsRepository>(_ => new JsonAppSettingsRepository(settingsPath), Reuse.Singleton);
         _container.Register<IGamePackageRepository, JsonGamePackageRepository>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
+        _container.Register<NewGamePackageFactory>(Reuse.Singleton);
+        _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
         _container.Register<IGameRuntime, DefaultGameRuntime>(Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);

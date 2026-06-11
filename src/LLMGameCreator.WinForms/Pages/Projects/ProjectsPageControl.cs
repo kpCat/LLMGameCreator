@@ -1,6 +1,8 @@
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Settings;
+using LLMGameCreator.Application.Validation;
+using LLMGameCreator.Domain.Validation;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -8,6 +10,8 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
 {
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly IAppSettingsRepository? _settingsRepository;
+    private readonly IGameProjectService? _gameProjectService;
+    private readonly IGamePackageValidator? _validator;
     private AppSettings? _settings;
 
     public ProjectsPageControl()
@@ -16,10 +20,16 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _infoTextBox.Text = "Design-time preview. Runtime services are not available in Visual Studio Designer.";
     }
 
-    public ProjectsPageControl(ICurrentGamePackageService currentGamePackageService, IAppSettingsRepository settingsRepository)
+    public ProjectsPageControl(
+        ICurrentGamePackageService currentGamePackageService,
+        IAppSettingsRepository settingsRepository,
+        IGameProjectService gameProjectService,
+        IGamePackageValidator validator)
     {
         _currentGamePackageService = currentGamePackageService;
         _settingsRepository = settingsRepository;
+        _gameProjectService = gameProjectService;
+        _validator = validator;
         InitializeComponent();
         WireEvents();
     }
@@ -38,9 +48,11 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
     {
         _browseGamesRootButton.Click += (_, _) => BrowseGamesRoot();
         _saveGamesRootButton.Click += async (_, _) => await SaveGamesRootAsync();
-        _refreshButton.Click += (_, _) => RefreshProjectsList();
+        _refreshButton.Click += async (_, _) => await RefreshProjectsListAsync();
+        _newGameButton.Click += async (_, _) => await CreateNewGameAsync();
         _openSelectedButton.Click += async (_, _) => await OpenSelectedProjectAsync();
         _openFolderButton.Click += async (_, _) => await OpenArbitraryFolderAsync();
+        _saveCurrentButton.Click += async (_, _) => await SaveCurrentGameAsync();
         _projectsListView.DoubleClick += async (_, _) => await OpenSelectedProjectAsync();
     }
 
@@ -53,7 +65,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
 
         _settings = await _settingsRepository.LoadAsync(CancellationToken.None).ConfigureAwait(true);
         _gamesRootTextBox.Text = _settings.GamesRootPath;
-        RefreshProjectsList();
+        await RefreshProjectsListAsync();
         RefreshInfo();
     }
 
@@ -79,11 +91,11 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         _settings ??= await _settingsRepository.LoadAsync(CancellationToken.None).ConfigureAwait(true);
         _settings.GamesRootPath = _gamesRootTextBox.Text.Trim();
         await _settingsRepository.SaveAsync(_settings, CancellationToken.None).ConfigureAwait(true);
-        RefreshProjectsList();
+        await RefreshProjectsListAsync();
         RefreshInfo();
     }
 
-    private void RefreshProjectsList()
+    private async Task RefreshProjectsListAsync()
     {
         _projectsListView.Items.Clear();
         var root = _gamesRootTextBox.Text.Trim();
@@ -93,38 +105,55 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             return;
         }
 
-        if (!Directory.Exists(root))
+        if (_gameProjectService == null)
         {
-            _infoTextBox.Text = $"Корневая папка игр не существует:\r\n{root}";
+            _infoTextBox.Text = "Project service is not available.";
             return;
         }
 
-        foreach (var folder in EnumerateGameFolders(root))
+        try
         {
-            var item = new ListViewItem(Path.GetFileName(folder));
-            item.SubItems.Add(folder);
-            item.Tag = folder;
-            _projectsListView.Items.Add(item);
+            var summaries = await _gameProjectService.ListAsync(root, CancellationToken.None).ConfigureAwait(true);
+            foreach (var summary in summaries)
+            {
+                var item = new ListViewItem(string.IsNullOrWhiteSpace(summary.Title) ? summary.FolderName : summary.Title);
+                item.SubItems.Add(summary.PackageId ?? string.Empty);
+                item.SubItems.Add(summary.Version ?? string.Empty);
+                item.SubItems.Add(GetStatusText(summary));
+                item.SubItems.Add(summary.FolderPath);
+                item.Tag = summary;
+                _projectsListView.Items.Add(item);
+            }
+        }
+        catch (Exception ex)
+        {
+            _infoTextBox.Text = $"Не удалось обновить список игр:\r\n{ex.Message}";
+            return;
         }
 
         RefreshInfo();
     }
 
-    private static IEnumerable<string> EnumerateGameFolders(string root)
+    private static string GetStatusText(GameProjectSummary summary)
     {
-        if (File.Exists(Path.Combine(root, "package.json")))
+        if (!summary.HasPackageFile)
         {
-            yield return root;
-            yield break;
+            return "No package.json";
         }
 
-        foreach (var directory in Directory.EnumerateDirectories(root).OrderBy(Path.GetFileName))
+        if (!summary.IsValidPackage)
         {
-            if (File.Exists(Path.Combine(directory, "package.json")))
-            {
-                yield return directory;
-            }
+            return string.IsNullOrWhiteSpace(summary.ErrorMessage)
+                ? $"Invalid ({summary.ErrorCount} errors)"
+                : $"Invalid: {summary.ErrorMessage}";
         }
+
+        if (summary.WarningCount > 0)
+        {
+            return $"Valid, {summary.WarningCount} warnings";
+        }
+
+        return "Valid";
     }
 
     private async Task OpenSelectedProjectAsync()
@@ -135,9 +164,9 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             return;
         }
 
-        if (_projectsListView.SelectedItems[0].Tag is string folder)
+        if (_projectsListView.SelectedItems[0].Tag is GameProjectSummary summary)
         {
-            await LoadProjectFolderAsync(folder);
+            await LoadProjectFolderAsync(summary.FolderPath);
         }
     }
 
@@ -150,6 +179,57 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
         if (dialog.ShowDialog(this) == DialogResult.OK)
         {
             await LoadProjectFolderAsync(dialog.SelectedPath);
+        }
+    }
+
+    private async Task CreateNewGameAsync()
+    {
+        if (_gameProjectService == null)
+        {
+            return;
+        }
+
+        var root = _gamesRootTextBox.Text.Trim();
+        if (string.IsNullOrWhiteSpace(root))
+        {
+            MessageBox.Show(this, "Сначала укажи корневую папку игр.", "Новая игра", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        using var dialog = new CreateGameDialog();
+        if (dialog.ShowDialog(this) != DialogResult.OK)
+        {
+            return;
+        }
+
+        try
+        {
+            var summary = await _gameProjectService.CreateAsync(dialog.CreateRequest(root), CancellationToken.None).ConfigureAwait(true);
+            await RefreshProjectsListAsync();
+            await LoadProjectFolderAsync(summary.FolderPath);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this, ex.Message, "Не удалось создать игру", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    private async Task SaveCurrentGameAsync()
+    {
+        if (_currentGamePackageService == null)
+        {
+            return;
+        }
+
+        try
+        {
+            await _currentGamePackageService.SaveAsync(CancellationToken.None).ConfigureAwait(true);
+            RefreshInfo();
+            MessageBox.Show(this, "Текущая игра сохранена.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this, ex.Message, "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -183,14 +263,30 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
             return;
         }
 
+        var validationSummary = GetCurrentValidationSummary(package);
+
         _infoTextBox.Text =
             $"Открыт проект: {package.Manifest.Title}\r\n" +
             $"PackageId: {package.Manifest.PackageId}\r\n" +
             $"Папка: {_currentGamePackageService?.CurrentFolder}\r\n\r\n" +
+            $"Validation: {validationSummary}\r\n" +
             $"Maps: {package.Game.Maps.Count}\r\n" +
             $"Tiles: {package.Game.TilePrototypes.Count}\r\n" +
             $"Entities: {package.Game.EntityPrototypes.Count}\r\n" +
             $"Assets: {package.AssetCatalog.Assets.Count}\r\n" +
             $"Scripts: {package.ScriptCatalog.Scripts.Count}";
+    }
+
+    private string GetCurrentValidationSummary(LLMGameCreator.GamePackage.GamePackageDefinition package)
+    {
+        if (_validator == null)
+        {
+            return "validator is not available";
+        }
+
+        var report = _validator.Validate(package, _currentGamePackageService?.CurrentFolder);
+        var errors = report.Issues.Count(issue => issue.Severity == ValidationSeverity.Error || issue.Severity == ValidationSeverity.Critical);
+        var warnings = report.Issues.Count(issue => issue.Severity == ValidationSeverity.Warning);
+        return report.IsValid ? $"valid, {warnings} warnings" : $"invalid, {errors} errors, {warnings} warnings";
     }
 }
