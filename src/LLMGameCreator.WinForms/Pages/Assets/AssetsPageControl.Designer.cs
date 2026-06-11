@@ -51,7 +51,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._listView.Size = new Size(800, 450);
             this._listView.TabIndex = 0;
             this._listView.UseCompatibleStateImageBehavior = false;
-            this._listView.View = View.Details;
+            this._listView.View = System.Windows.Forms.View.Details;
             // 
             // _idColumnHeader
             // 
