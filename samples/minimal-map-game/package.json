@@ -1,0 +1,356 @@
+{
+  "manifest": {
+    "packageId": "game/minimal-map-game",
+    "title": "Minimal Map Game",
+    "version": "0.1.0",
+    "formatVersion": "0.1",
+    "startMapId": "map/village",
+    "description": "Минимальный пакет игры для проверки карты, WASD и Enter interaction."
+  },
+  "game": {
+    "tilePrototypes": [
+      {
+        "id": "tile/grass",
+        "name": "Трава",
+        "walkable": true,
+        "movementCost": 1.0,
+        "assetId": "asset/tile/grass"
+      },
+      {
+        "id": "tile/wall",
+        "name": "Стена",
+        "walkable": false,
+        "movementCost": 999.0,
+        "assetId": "asset/tile/wall"
+      },
+      {
+        "id": "tile/road",
+        "name": "Дорога",
+        "walkable": true,
+        "movementCost": 0.8,
+        "assetId": "asset/tile/road"
+      }
+    ],
+    "entityPrototypes": [
+      {
+        "id": "prototype/npc/old_guard",
+        "name": "Старый стражник",
+        "assetId": "asset/npc/old_guard/spritesheet",
+        "components": [
+          {
+            "type": "interactable",
+            "args": {
+              "dialogueId": "dialogue/old_guard_intro"
+            }
+          },
+          {
+            "type": "collidable",
+            "args": {
+              "blocksMovement": "true"
+            }
+          }
+        ]
+      },
+      {
+        "id": "prototype/object/sign",
+        "name": "Указатель",
+        "assetId": "asset/object/sign",
+        "components": [
+          {
+            "type": "interactable",
+            "args": {
+              "text": "На табличке написано: северная дорога закрыта."
+            }
+          }
+        ]
+      }
+    ],
+    "maps": [
+      {
+        "id": "map/village",
+        "name": "Деревня",
+        "width": 12,
+        "height": 8,
+        "defaultTileId": "tile/grass",
+        "startPosition": {
+          "x": 1,
+          "y": 1
+        },
+        "tiles": [
+          {
+            "x": 0,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 1,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 3,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 5,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 7,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 8,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 9,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 10,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 11,
+            "y": 0,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 6,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "tileId": "tile/wall"
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "tileId": "tile/road"
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "tileId": "tile/road"
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "tileId": "tile/road"
+          }
+        ],
+        "entities": [
+          {
+            "id": "entity/village/old_guard",
+            "prototypeId": "prototype/npc/old_guard",
+            "position": {
+              "x": 4,
+              "y": 1
+            },
+            "components": []
+          },
+          {
+            "id": "entity/village/sign",
+            "prototypeId": "prototype/object/sign",
+            "position": {
+              "x": 2,
+              "y": 2
+            },
+            "components": []
+          }
+        ]
+      }
+    ],
+    "items": [],
+    "abilities": [],
+    "quests": [],
+    "dialogues": [
+      {
+        "id": "dialogue/old_guard_intro",
+        "title": "Старый стражник",
+        "startNodeId": "start",
+        "backgroundAssetId": "asset/background/village_gate",
+        "nodes": [
+          {
+            "id": "start",
+            "speakerId": "npc/old_guard",
+            "expression": "neutral",
+            "text": "Дальше дороги нет. Пока нет.",
+            "choices": []
+          }
+        ]
+      }
+    ],
+    "formulas": [],
+    "interactions": []
+  },
+  "assetCatalog": {
+    "contracts": [
+      {
+        "id": "contract/tileset/topdown_32",
+        "assetType": "tileset",
+        "tileWidth": 32,
+        "tileHeight": 32
+      },
+      {
+        "id": "contract/spritesheet/4dir_4frames",
+        "assetType": "character_spritesheet",
+        "frameWidth": 32,
+        "frameHeight": 48,
+        "framesPerDirection": 4,
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      {
+        "id": "contract/portrait_set/basic",
+        "assetType": "portrait_expression_set",
+        "requiredVariants": [
+          "neutral"
+        ],
+        "optionalVariants": [
+          "smile",
+          "angry",
+          "wounded",
+          "dead"
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "id": "asset/tile/grass",
+        "type": "tile",
+        "role": "map",
+        "path": "assets/tiles/grass.png",
+        "contractId": "contract/tileset/topdown_32",
+        "linkedEntityIds": [],
+        "variants": {}
+      },
+      {
+        "id": "asset/tile/wall",
+        "type": "tile",
+        "role": "map",
+        "path": "assets/tiles/wall.png",
+        "contractId": "contract/tileset/topdown_32",
+        "linkedEntityIds": [],
+        "variants": {}
+      },
+      {
+        "id": "asset/tile/road",
+        "type": "tile",
+        "role": "map",
+        "path": "assets/tiles/road.png",
+        "contractId": "contract/tileset/topdown_32",
+        "linkedEntityIds": [],
+        "variants": {}
+      },
+      {
+        "id": "asset/npc/old_guard/spritesheet",
+        "type": "character_spritesheet",
+        "role": "map_entity",
+        "path": "assets/characters/old_guard.png",
+        "contractId": "contract/spritesheet/4dir_4frames",
+        "linkedEntityIds": [
+          "prototype/npc/old_guard"
+        ],
+        "variants": {}
+      },
+      {
+        "id": "asset/npc/old_guard/portrait_set",
+        "type": "portrait_expression_set",
+        "role": "dialogue",
+        "contractId": "contract/portrait_set/basic",
+        "linkedEntityIds": [
+          "npc/old_guard"
+        ],
+        "variants": {
+          "neutral": {
+            "path": "assets/portraits/old_guard/neutral.png",
+            "expression": "neutral"
+          }
+        }
+      }
+    ],
+    "generationRequests": []
+  },
+  "scriptCatalog": {
+    "scripts": [
+      {
+        "id": "script/generator/basic_village",
+        "kind": "Generator",
+        "path": "scripts/generators/basic_village.lua",
+        "entryPoints": [
+          "generate_chunk"
+        ],
+        "capabilities": [
+          "noise",
+          "random",
+          "return_chunk_draft"
+        ],
+        "usedBy": [
+          "map/village"
+        ]
+      }
+    ],
+    "generators": [
+      {
+        "id": "generator/chunk/basic_village",
+        "kind": "chunk",
+        "scriptId": "script/generator/basic_village",
+        "entryPoint": "generate_chunk"
+      }
+    ]
+  }
+}

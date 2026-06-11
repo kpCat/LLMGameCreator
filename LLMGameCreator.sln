@@ -1,0 +1,84 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Domain", "src\LLMGameCreator.Domain\LLMGameCreator.Domain.csproj", "{2E388B4E-BD3E-4A19-9E76-FC0DFEB031E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.GamePackage", "src\LLMGameCreator.GamePackage\LLMGameCreator.GamePackage.csproj", "{C7B0DD8D-F69F-4503-9A2B-B50944B2FE56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Runtime.Abstractions", "src\LLMGameCreator.Runtime.Abstractions\LLMGameCreator.Runtime.Abstractions.csproj", "{E0BE7190-1DE0-410B-BA79-6A95E891B0E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Runtime", "src\LLMGameCreator.Runtime\LLMGameCreator.Runtime.csproj", "{85DA5122-DFD0-43F9-B9C5-A5EE47A1BA69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Scripting", "src\LLMGameCreator.Scripting\LLMGameCreator.Scripting.csproj", "{66DF14D3-45DC-4D59-BAAB-8593150F0725}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Generation", "src\LLMGameCreator.Generation\LLMGameCreator.Generation.csproj", "{C46CDC49-268E-46D7-AD05-1EE8A2FBCC5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.AssetPipeline", "src\LLMGameCreator.AssetPipeline\LLMGameCreator.AssetPipeline.csproj", "{1FA0BD66-68BE-4643-B302-B3921458BF3A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Application", "src\LLMGameCreator.Application\LLMGameCreator.Application.csproj", "{93FD1C43-41AD-4C78-ACC8-378B3421C1F7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Infrastructure", "src\LLMGameCreator.Infrastructure\LLMGameCreator.Infrastructure.csproj", "{01388D7B-78F9-45D1-9C36-CBDC419CB53A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.WinForms", "src\LLMGameCreator.WinForms\LLMGameCreator.WinForms.csproj", "{EEFEFE3B-F1CF-4DC1-8802-D2E700F0B684}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556F}") = "LLMGameCreator.Tests", "tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj", "{C6EE0E6E-6F9D-40EC-9ACD-EB5111087A56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E388B4E-BD3E-4A19-9E76-FC0DFEB031E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E388B4E-BD3E-4A19-9E76-FC0DFEB031E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E388B4E-BD3E-4A19-9E76-FC0DFEB031E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E388B4E-BD3E-4A19-9E76-FC0DFEB031E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B0DD8D-F69F-4503-9A2B-B50944B2FE56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B0DD8D-F69F-4503-9A2B-B50944B2FE56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B0DD8D-F69F-4503-9A2B-B50944B2FE56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B0DD8D-F69F-4503-9A2B-B50944B2FE56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0BE7190-1DE0-410B-BA79-6A95E891B0E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0BE7190-1DE0-410B-BA79-6A95E891B0E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0BE7190-1DE0-410B-BA79-6A95E891B0E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0BE7190-1DE0-410B-BA79-6A95E891B0E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85DA5122-DFD0-43F9-B9C5-A5EE47A1BA69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85DA5122-DFD0-43F9-B9C5-A5EE47A1BA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85DA5122-DFD0-43F9-B9C5-A5EE47A1BA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85DA5122-DFD0-43F9-B9C5-A5EE47A1BA69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66DF14D3-45DC-4D59-BAAB-8593150F0725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66DF14D3-45DC-4D59-BAAB-8593150F0725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66DF14D3-45DC-4D59-BAAB-8593150F0725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66DF14D3-45DC-4D59-BAAB-8593150F0725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C46CDC49-268E-46D7-AD05-1EE8A2FBCC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46CDC49-268E-46D7-AD05-1EE8A2FBCC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46CDC49-268E-46D7-AD05-1EE8A2FBCC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46CDC49-268E-46D7-AD05-1EE8A2FBCC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FA0BD66-68BE-4643-B302-B3921458BF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA0BD66-68BE-4643-B302-B3921458BF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FA0BD66-68BE-4643-B302-B3921458BF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FA0BD66-68BE-4643-B302-B3921458BF3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93FD1C43-41AD-4C78-ACC8-378B3421C1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93FD1C43-41AD-4C78-ACC8-378B3421C1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93FD1C43-41AD-4C78-ACC8-378B3421C1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93FD1C43-41AD-4C78-ACC8-378B3421C1F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01388D7B-78F9-45D1-9C36-CBDC419CB53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01388D7B-78F9-45D1-9C36-CBDC419CB53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01388D7B-78F9-45D1-9C36-CBDC419CB53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01388D7B-78F9-45D1-9C36-CBDC419CB53A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEFEFE3B-F1CF-4DC1-8802-D2E700F0B684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEFEFE3B-F1CF-4DC1-8802-D2E700F0B684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEFEFE3B-F1CF-4DC1-8802-D2E700F0B684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEFEFE3B-F1CF-4DC1-8802-D2E700F0B684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6EE0E6E-6F9D-40EC-9ACD-EB5111087A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6EE0E6E-6F9D-40EC-9ACD-EB5111087A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6EE0E6E-6F9D-40EC-9ACD-EB5111087A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6EE0E6E-6F9D-40EC-9ACD-EB5111087A56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B75FB3F7-913B-4CDC-8F8C-F9B4351514CE}
+	EndGlobalSection
+EndGlobal

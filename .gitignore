@@ -46,6 +46,13 @@ CodeCoverage/
 
 # MSBuild Binary and Structured Log
 *.binlog
+*.log
+*.suo
+*.sqlite
+*.sqlite3
+.cache/
+*.db
+.vs/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

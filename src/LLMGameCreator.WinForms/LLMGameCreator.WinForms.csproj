@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LLMGameCreator.Domain\LLMGameCreator.Domain.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.GamePackage\LLMGameCreator.GamePackage.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.Runtime.Abstractions\LLMGameCreator.Runtime.Abstractions.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.Runtime\LLMGameCreator.Runtime.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.Application\LLMGameCreator.Application.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.Infrastructure\LLMGameCreator.Infrastructure.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.Generation\LLMGameCreator.Generation.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.AssetPipeline\LLMGameCreator.AssetPipeline.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.Scripting\LLMGameCreator.Scripting.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DryIoc.dll" Version="5.4.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+</Project>
