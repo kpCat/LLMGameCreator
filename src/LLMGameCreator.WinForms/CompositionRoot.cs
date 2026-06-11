@@ -44,7 +44,13 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
 
         _container.Register<DashboardPageControl>(Reuse.Singleton);
-        _container.Register<ProjectsPageControl>(Reuse.Singleton);
+
+        _container.RegisterDelegate<ProjectsPageControl>(resolver => new ProjectsPageControl(
+    resolver.Resolve<ICurrentGamePackageService>(),
+    resolver.Resolve<IAppSettingsRepository>(),
+    resolver.Resolve<IGameProjectService>(),
+    resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
+
         _container.Register<GenerationPageControl>(Reuse.Singleton);
         _container.Register<ValidationPageControl>(Reuse.Singleton);
         _container.Register<RuntimePreviewPageControl>(Reuse.Singleton);
