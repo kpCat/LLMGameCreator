@@ -43,7 +43,8 @@ public sealed partial class ValidationPageControl : UserControl, IEditorPage
             return;
         }
 
-        var report = _validator.Validate(package);
+        var projectFolder = _currentGamePackageService?.CurrentFolder;
+        var report = _validator.Validate(package, projectFolder);
         if (report.Issues.Count == 0)
         {
             _issuesListBox.Items.Add("Ошибок не найдено.");

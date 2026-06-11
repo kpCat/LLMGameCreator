@@ -1,3 +1,4 @@
+using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.Domain.Validation;
 using LLMGameCreator.GamePackage;
 
@@ -6,17 +7,24 @@ namespace LLMGameCreator.Application.Validation;
 public interface IGamePackageValidator
 {
     ValidationReport Validate(GamePackageDefinition package);
+    ValidationReport Validate(GamePackageDefinition package, string? projectFolder);
 }
 
 public sealed class GamePackageValidator : IGamePackageValidator
 {
     public ValidationReport Validate(GamePackageDefinition package)
     {
+        return Validate(package, null);
+    }
+
+    public ValidationReport Validate(GamePackageDefinition package, string? projectFolder)
+    {
         var report = new ValidationReport();
         ValidateManifest(package, report);
         ValidateDuplicates(package, report);
         ValidateMaps(package, report);
         ValidateEntities(package, report);
+        ValidateScripts(package, projectFolder, report);
         return report;
     }
 
@@ -87,6 +95,97 @@ public sealed class GamePackageValidator : IGamePackageValidator
         }
     }
 
+    private static void ValidateScripts(GamePackageDefinition package, string? projectFolder, ValidationReport report)
+    {
+        var scriptById = package.ScriptCatalog.Scripts
+            .Where(script => !string.IsNullOrWhiteSpace(script.Id))
+            .GroupBy(script => script.Id)
+            .ToDictionary(group => group.Key, group => group.First());
+
+        foreach (var script in package.ScriptCatalog.Scripts)
+        {
+            ValidateScriptDefinition(script, projectFolder, report);
+        }
+
+        foreach (var generator in package.ScriptCatalog.Generators)
+        {
+            ValidateGeneratorDefinition(generator, scriptById, report);
+        }
+    }
+
+    private static void ValidateScriptDefinition(ScriptDefinition script, string? projectFolder, ValidationReport report)
+    {
+        if (string.IsNullOrWhiteSpace(script.Id))
+        {
+            Add(report, "script.id.empty", ValidationSeverity.Error, "Script id не заполнен.", null);
+        }
+
+        if (string.IsNullOrWhiteSpace(script.Path))
+        {
+            Add(report, "script.path.empty", ValidationSeverity.Error, "Script path не заполнен.", script.Id);
+        }
+        else if (Path.IsPathRooted(script.Path))
+        {
+            Add(report, "script.path.rooted", ValidationSeverity.Error, "Script path должен быть относительным.", script.Id);
+        }
+        else if (!string.IsNullOrWhiteSpace(projectFolder) && !File.Exists(Path.Combine(projectFolder, script.Path)))
+        {
+            Add(report, "script.path.missing", ValidationSeverity.Error, "Script path указывает на несуществующий файл.", script.Id);
+        }
+
+        if (!Enum.IsDefined(typeof(LuaScriptKind), script.Kind))
+        {
+            Add(report, "script.kind.invalid", ValidationSeverity.Error, "Script kind неизвестен.", script.Id);
+        }
+
+        if (!HasAnyText(script.EntryPoints))
+        {
+            Add(report, "script.entry_points.empty", ValidationSeverity.Error, "Script entryPoints не заполнены.", script.Id);
+        }
+
+        if (!HasAnyText(script.Capabilities))
+        {
+            Add(report, "script.capabilities.empty", ValidationSeverity.Error, "Script capabilities не заполнены.", script.Id);
+        }
+    }
+
+    private static void ValidateGeneratorDefinition(
+        GeneratorDefinition generator,
+        IReadOnlyDictionary<string, ScriptDefinition> scriptById,
+        ValidationReport report)
+    {
+        if (string.IsNullOrWhiteSpace(generator.Id))
+        {
+            Add(report, "generator.id.empty", ValidationSeverity.Error, "Generator id не заполнен.", null);
+        }
+
+        if (string.IsNullOrWhiteSpace(generator.ScriptId))
+        {
+            Add(report, "generator.script_id.empty", ValidationSeverity.Error, "Generator scriptId не заполнен.", generator.Id);
+            return;
+        }
+
+        if (!scriptById.TryGetValue(generator.ScriptId, out var script))
+        {
+            Add(report, "generator.script_id.missing", ValidationSeverity.Error, "Generator scriptId ссылается на несуществующий script.", generator.Id);
+            return;
+        }
+
+        if (script.Kind != LuaScriptKind.Generator)
+        {
+            Add(report, "generator.script_kind.invalid", ValidationSeverity.Error, "Generator scriptId должен ссылаться на script с Kind == Generator.", generator.Id);
+        }
+
+        if (string.IsNullOrWhiteSpace(generator.EntryPoint))
+        {
+            Add(report, "generator.entry_point.empty", ValidationSeverity.Error, "Generator entryPoint не заполнен.", generator.Id);
+        }
+        else if (!script.EntryPoints.Any(entryPoint => entryPoint == generator.EntryPoint))
+        {
+            Add(report, "generator.entry_point.missing", ValidationSeverity.Error, "Generator entryPoint отсутствует в script.EntryPoints.", generator.Id);
+        }
+    }
+
     private static void CheckDuplicates(ValidationReport report, IEnumerable<string> ids, string group)
     {
         foreach (var duplicate in ids.Where(id => !string.IsNullOrWhiteSpace(id)).GroupBy(id => id).Where(g => g.Count() > 1))
@@ -104,5 +203,10 @@ public sealed class GamePackageValidator : IGamePackageValidator
             Message = message,
             TargetId = targetId
         });
+    }
+
+    private static bool HasAnyText(IEnumerable<string> values)
+    {
+        return values.Any(value => !string.IsNullOrWhiteSpace(value));
     }
 }
