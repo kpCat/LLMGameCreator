@@ -22,6 +22,8 @@ public sealed class GamePackageValidator : IGamePackageValidator
         var report = new ValidationReport();
         ValidateManifest(package, report);
         ValidateDuplicates(package, report);
+        ValidateAssets(package, projectFolder, report);
+        ValidateAssetReferences(package, report);
         ValidateMaps(package, report);
         ValidateEntities(package, report);
         ValidateScripts(package, projectFolder, report);
@@ -95,12 +97,116 @@ public sealed class GamePackageValidator : IGamePackageValidator
         }
     }
 
+    private static void ValidateAssets(GamePackageDefinition package, string? projectFolder, ValidationReport report)
+    {
+        var assetIds = package.AssetCatalog.Assets
+            .Where(asset => !string.IsNullOrWhiteSpace(asset.Id))
+            .Select(asset => asset.Id)
+            .ToHashSet();
+        var contractIds = package.AssetCatalog.Contracts
+            .Where(contract => !string.IsNullOrWhiteSpace(contract.Id))
+            .Select(contract => contract.Id)
+            .ToHashSet();
+
+        foreach (var asset in package.AssetCatalog.Assets)
+        {
+            if (string.IsNullOrWhiteSpace(asset.Id))
+            {
+                Add(report, "asset.id.empty", ValidationSeverity.Error, "Asset id is empty.", null);
+            }
+
+            if (string.IsNullOrWhiteSpace(asset.Type))
+            {
+                Add(report, "asset.type.empty", ValidationSeverity.Error, "Asset type is empty.", asset.Id);
+            }
+
+            ValidateAssetPath(asset, projectFolder, report);
+
+            if (!string.IsNullOrWhiteSpace(asset.FallbackAssetId) && !assetIds.Contains(asset.FallbackAssetId))
+            {
+                Add(report, "asset.fallback.missing", ValidationSeverity.Error, "FallbackAssetId references a missing asset.", asset.Id);
+            }
+
+            if (!string.IsNullOrWhiteSpace(asset.ContractId) && !contractIds.Contains(asset.ContractId))
+            {
+                Add(report, "asset.contract.missing", ValidationSeverity.Error, "ContractId references a missing asset contract.", asset.Id);
+            }
+        }
+    }
+
+    private static void ValidateAssetPath(AssetDefinition asset, string? projectFolder, ValidationReport report)
+    {
+        if (string.IsNullOrWhiteSpace(asset.Path))
+        {
+            return;
+        }
+
+        if (Path.IsPathRooted(asset.Path))
+        {
+            Add(report, "asset.path.rooted", ValidationSeverity.Error, "Asset path must be relative.", asset.Id);
+            return;
+        }
+
+        if (ContainsPathTraversal(asset.Path))
+        {
+            Add(report, "asset.path.traversal", ValidationSeverity.Error, "Asset path must not contain path traversal.", asset.Id);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(projectFolder))
+        {
+            return;
+        }
+
+        if (!TryResolveInsideProject(projectFolder, asset.Path, out var resolvedPath))
+        {
+            Add(report, "asset.path.outside_project", ValidationSeverity.Error, "Asset path normalizes outside projectFolder.", asset.Id);
+            return;
+        }
+
+        if (!File.Exists(resolvedPath))
+        {
+            Add(report, "asset.path.missing", ValidationSeverity.Warning, "Asset path points to a missing file.", asset.Id);
+        }
+    }
+
+    private static void ValidateAssetReferences(GamePackageDefinition package, ValidationReport report)
+    {
+        var assetIds = package.AssetCatalog.Assets
+            .Where(asset => !string.IsNullOrWhiteSpace(asset.Id))
+            .Select(asset => asset.Id)
+            .ToHashSet();
+
+        foreach (var tile in package.Game.TilePrototypes)
+        {
+            if (!string.IsNullOrWhiteSpace(tile.AssetId) && !assetIds.Contains(tile.AssetId))
+            {
+                Add(report, "tile.asset.missing", ValidationSeverity.Error, "TilePrototype AssetId references a missing asset.", tile.Id);
+            }
+        }
+
+        foreach (var entity in package.Game.EntityPrototypes)
+        {
+            if (!string.IsNullOrWhiteSpace(entity.AssetId) && !assetIds.Contains(entity.AssetId))
+            {
+                Add(report, "entity.asset.missing", ValidationSeverity.Error, "EntityPrototype AssetId references a missing asset.", entity.Id);
+            }
+        }
+    }
+
     private static void ValidateScripts(GamePackageDefinition package, string? projectFolder, ValidationReport report)
     {
         var scriptById = package.ScriptCatalog.Scripts
             .Where(script => !string.IsNullOrWhiteSpace(script.Id))
             .GroupBy(script => script.Id)
             .ToDictionary(group => group.Key, group => group.First());
+        var duplicateGeneratorIds = package.ScriptCatalog.Generators
+            .Select(generator => generator.Id)
+            .Where(id => !string.IsNullOrWhiteSpace(id))
+            .GroupBy(id => id)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key)
+            .ToHashSet();
 
         foreach (var script in package.ScriptCatalog.Scripts)
         {
@@ -109,7 +215,7 @@ public sealed class GamePackageValidator : IGamePackageValidator
 
         foreach (var generator in package.ScriptCatalog.Generators)
         {
-            ValidateGeneratorDefinition(generator, scriptById, report);
+            ValidateGeneratorDefinition(generator, scriptById, duplicateGeneratorIds, report);
         }
     }
 
@@ -120,6 +226,7 @@ public sealed class GamePackageValidator : IGamePackageValidator
             Add(report, "script.id.empty", ValidationSeverity.Error, "Script id не заполнен.", null);
         }
 
+        var resolvedPath = string.Empty;
         if (string.IsNullOrWhiteSpace(script.Path))
         {
             Add(report, "script.path.empty", ValidationSeverity.Error, "Script path не заполнен.", script.Id);
@@ -128,7 +235,15 @@ public sealed class GamePackageValidator : IGamePackageValidator
         {
             Add(report, "script.path.rooted", ValidationSeverity.Error, "Script path должен быть относительным.", script.Id);
         }
-        else if (!string.IsNullOrWhiteSpace(projectFolder) && !File.Exists(Path.Combine(projectFolder, script.Path)))
+        else if (ContainsPathTraversal(script.Path))
+        {
+            Add(report, "script.path.traversal", ValidationSeverity.Error, "Script path must not contain path traversal.", script.Id);
+        }
+        else if (!string.IsNullOrWhiteSpace(projectFolder) && !TryResolveInsideProject(projectFolder, script.Path, out resolvedPath))
+        {
+            Add(report, "script.path.outside_project", ValidationSeverity.Error, "Script path normalizes outside projectFolder.", script.Id);
+        }
+        else if (!string.IsNullOrWhiteSpace(projectFolder) && !File.Exists(resolvedPath))
         {
             Add(report, "script.path.missing", ValidationSeverity.Error, "Script path указывает на несуществующий файл.", script.Id);
         }
@@ -152,11 +267,22 @@ public sealed class GamePackageValidator : IGamePackageValidator
     private static void ValidateGeneratorDefinition(
         GeneratorDefinition generator,
         IReadOnlyDictionary<string, ScriptDefinition> scriptById,
+        IReadOnlySet<string> duplicateGeneratorIds,
         ValidationReport report)
     {
         if (string.IsNullOrWhiteSpace(generator.Id))
         {
             Add(report, "generator.id.empty", ValidationSeverity.Error, "Generator id не заполнен.", null);
+        }
+
+        if (!string.IsNullOrWhiteSpace(generator.Id) && duplicateGeneratorIds.Contains(generator.Id))
+        {
+            Add(report, "duplicate.generator", ValidationSeverity.Error, $"Duplicate generator id: {generator.Id}", generator.Id);
+        }
+
+        if (string.IsNullOrWhiteSpace(generator.Kind))
+        {
+            Add(report, "generator.kind.empty", ValidationSeverity.Error, "Generator kind is empty.", generator.Id);
         }
 
         if (string.IsNullOrWhiteSpace(generator.ScriptId))
@@ -180,7 +306,7 @@ public sealed class GamePackageValidator : IGamePackageValidator
         {
             Add(report, "generator.entry_point.empty", ValidationSeverity.Error, "Generator entryPoint не заполнен.", generator.Id);
         }
-        else if (!script.EntryPoints.Any(entryPoint => entryPoint == generator.EntryPoint))
+        else if (!script.EntryPoints.Any(entryPoint => string.Equals(entryPoint, generator.EntryPoint.Trim(), StringComparison.Ordinal)))
         {
             Add(report, "generator.entry_point.missing", ValidationSeverity.Error, "Generator entryPoint отсутствует в script.EntryPoints.", generator.Id);
         }
@@ -208,5 +334,56 @@ public sealed class GamePackageValidator : IGamePackageValidator
     private static bool HasAnyText(IEnumerable<string> values)
     {
         return values.Any(value => !string.IsNullOrWhiteSpace(value));
+    }
+
+    private static bool ContainsPathTraversal(string path)
+    {
+        return path
+            .Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries)
+            .Any(segment => segment == "..");
+    }
+
+    private static bool TryResolveInsideProject(string projectFolder, string relativePath, out string resolvedPath)
+    {
+        resolvedPath = string.Empty;
+
+        try
+        {
+            var projectRoot = Path.GetFullPath(projectFolder);
+            var projectRootWithSeparator = EnsureTrailingSeparator(projectRoot);
+            var candidate = Path.GetFullPath(Path.Combine(projectRoot, relativePath));
+
+            if (!candidate.StartsWith(projectRootWithSeparator, StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(candidate, projectRoot, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            resolvedPath = candidate;
+            return true;
+        }
+        catch (ArgumentException)
+        {
+            return false;
+        }
+        catch (NotSupportedException)
+        {
+            return false;
+        }
+        catch (PathTooLongException)
+        {
+            return false;
+        }
+    }
+
+    private static string EnsureTrailingSeparator(string path)
+    {
+        if (path.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal) ||
+            path.EndsWith(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+        {
+            return path;
+        }
+
+        return path + Path.DirectorySeparatorChar;
     }
 }

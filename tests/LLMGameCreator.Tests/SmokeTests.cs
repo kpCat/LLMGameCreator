@@ -88,11 +88,91 @@ public sealed class SmokeTests
             ScriptId = "script/behavior/npc",
             EntryPoint = "decide_action"
         });
+        package.ScriptCatalog.Scripts.Add(new ScriptDefinition
+        {
+            Id = "script/generator/chunk",
+            Kind = LuaScriptKind.Generator,
+            Path = "scripts/generators/chunk.lua",
+            EntryPoints = new List<string> { "generate_chunk" },
+            Capabilities = new List<string> { "return_chunk_draft" }
+        });
+        package.ScriptCatalog.Generators.Add(new GeneratorDefinition
+        {
+            Id = "generator/duplicate",
+            Kind = "",
+            ScriptId = "script/generator/chunk",
+            EntryPoint = " generate_chunk "
+        });
+        package.ScriptCatalog.Generators.Add(new GeneratorDefinition
+        {
+            Id = "generator/duplicate",
+            ScriptId = "script/generator/chunk",
+            EntryPoint = "generate_chunk"
+        });
 
         var report = new GamePackageValidator().Validate(package);
 
         Assert.Contains(report.Issues, issue => issue.Code == "generator.script_id.missing" && issue.TargetId == "generator/missing");
         Assert.Contains(report.Issues, issue => issue.Code == "generator.script_kind.invalid" && issue.TargetId == "generator/non_generator");
+        Assert.Contains(report.Issues, issue => issue.Code == "duplicate.generator" && issue.TargetId == "generator/duplicate");
+        Assert.Contains(report.Issues, issue => issue.Code == "generator.kind.empty" && issue.TargetId == "generator/duplicate");
+        Assert.DoesNotContain(report.Issues, issue => issue.Code == "generator.entry_point.missing" && issue.TargetId == "generator/duplicate");
+    }
+
+    [Fact]
+    public void ScriptCatalog_PathTraversal_ProducesValidationError()
+    {
+        var package = CreateMinimalValidPackage();
+        package.ScriptCatalog.Scripts.Add(new ScriptDefinition
+        {
+            Id = "script/generator/escape",
+            Kind = LuaScriptKind.Generator,
+            Path = "../escape.lua",
+            EntryPoints = new List<string> { "generate_chunk" },
+            Capabilities = new List<string> { "return_chunk_draft" }
+        });
+
+        var report = new GamePackageValidator().Validate(package);
+
+        Assert.Contains(report.Issues, issue => issue.Code == "script.path.traversal" && issue.TargetId == "script/generator/escape");
+    }
+
+    [Fact]
+    public void AssetCatalog_BrokenFallbackContractAndPath_ProducesValidationIssues()
+    {
+        var package = CreateMinimalValidPackage();
+        package.AssetCatalog.Assets.Add(new AssetDefinition
+        {
+            Id = "asset/broken",
+            Type = "tile",
+            Path = "../escape.png",
+            FallbackAssetId = "asset/missing",
+            ContractId = "contract/missing"
+        });
+
+        var report = new GamePackageValidator().Validate(package, FindRepositoryRoot());
+
+        Assert.Contains(report.Issues, issue => issue.Code == "asset.path.traversal" && issue.TargetId == "asset/broken");
+        Assert.Contains(report.Issues, issue => issue.Code == "asset.fallback.missing" && issue.TargetId == "asset/broken");
+        Assert.Contains(report.Issues, issue => issue.Code == "asset.contract.missing" && issue.TargetId == "asset/broken");
+    }
+
+    [Fact]
+    public void GameDefinitions_MissingTileAndEntityAssetReferences_ProduceValidationErrors()
+    {
+        var package = CreateMinimalValidPackage();
+        package.Game.TilePrototypes[0].AssetId = "asset/missing/tile";
+        package.Game.EntityPrototypes.Add(new EntityPrototypeDefinition
+        {
+            Id = "prototype/npc/missing_asset",
+            Name = "Missing Asset NPC",
+            AssetId = "asset/missing/entity"
+        });
+
+        var report = new GamePackageValidator().Validate(package);
+
+        Assert.Contains(report.Issues, issue => issue.Code == "tile.asset.missing" && issue.TargetId == "tile/grass");
+        Assert.Contains(report.Issues, issue => issue.Code == "entity.asset.missing" && issue.TargetId == "prototype/npc/missing_asset");
     }
 
     private static string FindRepositoryRoot()

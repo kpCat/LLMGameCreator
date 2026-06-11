@@ -321,6 +321,15 @@
             "expression": "neutral"
           }
         }
+      },
+      {
+        "id": "asset/object/sign",
+        "type": "scene_image",
+        "role": "map_entity",
+        "linkedEntityIds": [
+          "prototype/object/sign"
+        ],
+        "variants": {}
       }
     ],
     "generationRequests": []
