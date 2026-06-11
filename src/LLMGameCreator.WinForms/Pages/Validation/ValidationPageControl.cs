@@ -24,7 +24,7 @@ public sealed partial class ValidationPageControl : UserControl, IEditorPage
     public string Id => "validation";
     public string Title => "Валидация";
     public int SortOrder => 40;
-    public Control View => this;
+    Control IEditorPage. View => this;
     public void OnActivated() { }
 
     private void ValidateCurrent()

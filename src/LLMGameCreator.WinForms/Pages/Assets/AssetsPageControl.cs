@@ -20,7 +20,7 @@ public sealed partial class AssetsPageControl : UserControl, IEditorPage
     public string Id => "assets";
     public string Title => "Ассеты";
     public int SortOrder => 60;
-    public Control View => this;
+    Control IEditorPage.View => this;
 
     public void OnActivated()
     {

@@ -27,7 +27,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     public string Id => "runtime-preview";
     public string Title => "Runtime Preview";
     public int SortOrder => 50;
-    public Control View => this;
+    Control IEditorPage. View => this;
 
     public void OnActivated()
     {

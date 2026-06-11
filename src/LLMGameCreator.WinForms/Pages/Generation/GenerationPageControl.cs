@@ -10,6 +10,6 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
     public string Id => "generation";
     public string Title => "Генерация";
     public int SortOrder => 30;
-    public Control View => this;
+    Control IEditorPage.View => this;
     public void OnActivated() { }
 }

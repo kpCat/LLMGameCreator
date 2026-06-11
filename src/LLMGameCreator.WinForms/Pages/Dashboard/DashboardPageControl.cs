@@ -10,6 +10,6 @@ public sealed partial class DashboardPageControl : UserControl, IEditorPage
     public string Id => "dashboard";
     public string Title => "Обзор";
     public int SortOrder => 0;
-    public Control View => this;
+    Control IEditorPage.View => this;
     public void OnActivated() { }
 }

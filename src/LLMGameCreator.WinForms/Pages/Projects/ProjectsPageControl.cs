@@ -37,7 +37,7 @@ public sealed partial class ProjectsPageControl : UserControl, IEditorPage
     public string Id => "projects";
     public string Title => "Игры";
     public int SortOrder => 10;
-    public Control View => this;
+    Control IEditorPage.View => this;
 
     public async void OnActivated()
     {

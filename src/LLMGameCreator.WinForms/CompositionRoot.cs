@@ -46,16 +46,26 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<DashboardPageControl>(Reuse.Singleton);
 
         _container.RegisterDelegate<ProjectsPageControl>(resolver => new ProjectsPageControl(
-    resolver.Resolve<ICurrentGamePackageService>(),
-    resolver.Resolve<IAppSettingsRepository>(),
-    resolver.Resolve<IGameProjectService>(),
-    resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<IAppSettingsRepository>(),
+            resolver.Resolve<IGameProjectService>(),
+            resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
 
         _container.Register<GenerationPageControl>(Reuse.Singleton);
-        _container.Register<ValidationPageControl>(Reuse.Singleton);
-        _container.Register<RuntimePreviewPageControl>(Reuse.Singleton);
-        _container.Register<AssetsPageControl>(Reuse.Singleton);
-        _container.Register<SettingsPageControl>(Reuse.Singleton);
+
+        _container.RegisterDelegate<ValidationPageControl>(resolver => new ValidationPageControl(
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
+
+        _container.RegisterDelegate<RuntimePreviewPageControl>(resolver => new RuntimePreviewPageControl(
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<IGameRuntime>()), Reuse.Singleton);
+
+        _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
+            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+
+        _container.RegisterDelegate<SettingsPageControl>(resolver => new SettingsPageControl(
+            resolver.Resolve<IAppSettingsRepository>()), Reuse.Singleton);
 
         _container.RegisterDelegate<IEditorPageRegistry>(resolver => new EditorPageRegistry(new IEditorPage[]
         {
@@ -68,7 +78,10 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<SettingsPageControl>()
         }), Reuse.Singleton);
 
-        _container.Register<MainForm>(Reuse.Singleton);
+        _container.RegisterDelegate<MainForm>(resolver => new MainForm(
+    resolver.Resolve<IEditorPageRegistry>(),
+    resolver.Resolve<ICurrentGamePackageService>(),
+    resolver.Resolve<ILoggerFactory>()), Reuse.Singleton);
     }
 
     public MainForm ResolveMainForm() => _container.Resolve<MainForm>();

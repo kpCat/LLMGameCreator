@@ -22,7 +22,7 @@ public sealed partial class SettingsPageControl : UserControl, IEditorPage
     public string Id => "settings";
     public string Title => "Настройки";
     public int SortOrder => 90;
-    public Control View => this;
+    Control IEditorPage. View => this;
 
     public async void OnActivated()
     {

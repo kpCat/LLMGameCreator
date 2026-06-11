@@ -150,7 +150,7 @@ namespace LLMGameCreator.WinForms.Pages
             _projectsListView.Size = new Size(870, 249);
             _projectsListView.TabIndex = 5;
             _projectsListView.UseCompatibleStateImageBehavior = false;
-            _projectsListView.View = System.Windows.Forms.View.Details;
+            _projectsListView.View = View.Details;
             // 
             // _gameNameColumnHeader
             // 
