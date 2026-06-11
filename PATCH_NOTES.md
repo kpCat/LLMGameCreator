@@ -1,35 +1,19 @@
-# LLMGameCreator patch v0.1.1 — docs + Lua baseline
+# LLMGameCreator v0.1.2 local patch
 
-Этот патч добавляет то, чего не хватало в первом скелете:
+Назначение патча:
 
-- подробное описание итоговой архитектурной идеи;
-- правила, которые нельзя нарушать при следующих патчах Codex;
-- план Unity Player как отдельного универсального runtime/frontend;
-- строгую типизацию Lua-файлов;
-- стандартную Lua-библиотеку-заготовку, которую не нужно каждый раз генерировать через LLM;
-- план ассетного пайплайна для ComfyUI/Fooocus и ручного импорта;
-- заготовки workflow-profile документов;
-- примеры prototype/generator/interaction/formula Lua.
+1. Исправить ошибку компиляции `CS0234` в `Program.cs`, где `Application.Run(...)` мог разрешаться как namespace `LLMGameCreator.Application`, а не как `System.Windows.Forms.Application`.
+2. Зафиксировать Unity Player Contract, чтобы GamePackage дальше проектировался под будущий Unity runtime, а не только под WinForms preview.
+3. Расширить Lua-заготовки: добавить blueprint-скрипты для бесконечной/ограниченной карты, биомов, поселений, дорог, NPC поведения, взаимодействий, loot, encounter, погоды и базовых формул.
 
-Патч не должен ломать текущую сборку, потому что добавляет в основном документацию, templates и sample Lua-файлы. Если в проекте уже есть одноимённые docs, они будут заменены более подробными версиями.
+Патч в основном добавляет документы и template/sample Lua-файлы. Из C# изменён только `src/LLMGameCreator.WinForms/Program.cs`.
 
-## Как применить
-
-Распаковать содержимое архива в корень репозитория `LLMGameCreator` с заменой файлов.
-
-После этого проверить:
+После распаковки поверх репозитория выполнить:
 
 ```powershell
+dotnet restore
 dotnet build
 dotnet test
 ```
 
-## Что не реализовано кодом
-
-- реальный Lua engine;
-- ComfyUI API client;
-- Unity Player;
-- SQLite cache/save layer;
-- реальный asset import validator.
-
-Это специально оставлено для отдельных маленьких патчей.
+В этом окружении `dotnet` недоступен, поэтому сборка здесь не выполнялась.

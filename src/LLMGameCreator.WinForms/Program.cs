@@ -5,8 +5,8 @@ internal static class Program
     [STAThread]
     private static void Main()
     {
-        ApplicationConfiguration.Initialize();
+        global::System.Windows.Forms.ApplicationConfiguration.Initialize();
         using var compositionRoot = new CompositionRoot();
-        Application.Run(compositionRoot.ResolveMainForm());
+        global::System.Windows.Forms.Application.Run(compositionRoot.ResolveMainForm());
     }
 }
