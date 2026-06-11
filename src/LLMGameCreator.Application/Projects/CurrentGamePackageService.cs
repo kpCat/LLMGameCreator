@@ -27,7 +27,7 @@ public sealed class CurrentGamePackageService : ICurrentGamePackageService
 
     public async Task LoadAsync(string projectFolder, CancellationToken cancellationToken)
     {
-        CurrentPackage = await _repository.LoadAsync(projectFolder, cancellationToken).ConfigureAwait(false);
+        CurrentPackage = await _repository.LoadAsync(projectFolder, cancellationToken);
         CurrentFolder = projectFolder;
         CurrentChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -44,7 +44,7 @@ public sealed class CurrentGamePackageService : ICurrentGamePackageService
             throw new InvalidOperationException("Current game package folder is not set.");
         }
 
-        await _repository.SaveAsync(CurrentFolder, CurrentPackage, cancellationToken).ConfigureAwait(false);
+        await _repository.SaveAsync(CurrentFolder, CurrentPackage, cancellationToken);
         CurrentChanged?.Invoke(this, EventArgs.Empty);
     }
 }
