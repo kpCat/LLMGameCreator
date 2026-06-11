@@ -1,34 +1,163 @@
-# Architecture
+# Архитектура LLMGameCreator
 
-## Главные правила
+## Цель архитектуры
 
-1. Runtime никогда не вызывает LLM.
-2. LLM используется только в editor/generation pipeline.
-3. GamePackage является единственным источником правды для готовой игры.
-4. Unity/MonoGame/Godot/WinForms Preview — это только frontends/player-ы.
-5. WinForms editor не содержит runtime-логики конкретной игры.
-6. Каждая страница WinForms — отдельный `UserControl`.
-7. `MainForm` — только shell.
-8. Domain не зависит от WinForms, DryIoc, JSON-хранилища, LLM и ComfyUI.
-9. Lua-файлы имеют строгий тип: prototype/generator/behavior/interaction/formula/event/migration.
-10. Ассеты являются data-driven сущностями и подключаются через `assetId`.
-11. ComfyUI/Fooocus — внешние providers editor pipeline, не часть runtime.
-12. Готовая игра должна исполняться без модели и без контекста LLM.
+Проект должен поддерживать несколько классов игр:
 
-## Контуры
+- простая текстовая/narrative игра;
+- игра с картой и WASD-передвижением;
+- 2D/изометрическая пошаговая RPG;
+- процедурная игра с чанками, NPC, квестами, предметами, способностями, Lua-логикой и ассетами;
+- гибридная игра: карта + диалоги + сцены + боёвка + события.
+
+При этом первый скелет не должен реализовывать всё сразу. Он должен заложить правильные границы.
+
+## Слои решения
 
 ```text
-WinForms Editor
-  -> Application Use Cases
-  -> GamePackage / Runtime / Validation / Generation / AssetPipeline
+Domain
+  Чистые модели и value objects.
 
-Runtime Player
-  -> GamePackage
-  -> Runtime commands
-  -> Runtime events
-  -> Rendering/audio/input frontend
+GamePackage
+  DTO/контракты пакета игры, совместимые с будущим Unity Player.
+
+Runtime.Abstractions
+  Команды, события, состояния и контракты исполнения.
+
+Runtime
+  Headless runtime без UI и без LLM.
+
+Scripting
+  Контракты typed Lua, script manifests, script diagnostics.
+
+Generation
+  LLM sessions, jobs, context packs, draft workflow.
+
+AssetPipeline
+  Asset catalog, asset contracts, generation requests, providers.
+
+Application
+  Use-cases: открыть проект, сохранить, валидировать, запускать preview, применять draft.
+
+Infrastructure
+  JSON storage, settings storage, logging, future SQLite/cache providers.
+
+WinForms
+  Editor shell, pages, presenters, composition root.
 ```
 
-## Почему GamePackage отдельный
+## Зависимости
 
-В будущем Unity Player должен уметь читать тот же GamePackage. Поэтому DTO/контракты должны оставаться простыми, сериализуемыми и не завязанными на WinForms.
+```text
+Domain <- GamePackage
+Domain <- Runtime.Abstractions
+Domain <- Runtime
+Domain <- Scripting
+Domain <- AssetPipeline
+Domain <- Generation
+Domain <- Application
+Application <- Infrastructure
+Application <- WinForms
+```
+
+Правило: `Domain` не знает ни про WinForms, ни про DryIoc, ни про JSON storage, ни про LLM, ни про Unity.
+
+## Runtime
+
+Runtime должен быть command-based:
+
+```text
+GameState + RuntimeCommand -> RuntimeResult + RuntimeEvents + NewGameState
+```
+
+Минимальные команды:
+
+- `StartGame`;
+- `MoveNorth/MoveSouth/MoveWest/MoveEast`;
+- `Interact`;
+- `UseItem`;
+- `UseAbility`;
+- `ChooseDialogueOption`;
+- `Wait`.
+
+Runtime не отображает графику. Он только меняет состояние и возвращает события.
+
+## Unity Player
+
+Unity Player должен быть отдельным frontend/player:
+
+```text
+UnityPlayer
+  loads GamePackage
+  renders maps/entities/assets
+  plays audio
+  displays dialogues
+  sends RuntimeCommands
+  consumes RuntimeEvents
+```
+
+Unity Player не должен содержать конкретную игровую логику.
+
+## Lua
+
+Lua разделяется на строгие типы:
+
+- `prototype.lua` — объявления data/prototypes;
+- `generator.lua` — генерация чанков/биомов/loot/events;
+- `behavior.lua` — поведение NPC/врагов;
+- `interaction.lua` — реакции на interact/use/talk;
+- `formula.lua` — сложные вычисления;
+- `event.lua` — сценарные/global события;
+- `migration.lua` — миграции пакета в будущем.
+
+Каждый тип имеет свой sandbox API.
+
+## Assets
+
+Ассеты — отдельные сущности:
+
+- `tile`;
+- `tileset`;
+- `character_spritesheet`;
+- `npc_spritesheet`;
+- `item_icon`;
+- `ability_icon`;
+- `portrait`;
+- `portrait_expression_set`;
+- `dialogue_background`;
+- `sound_effect`;
+- `music_loop`;
+- `ambient_loop`;
+- `vfx_spritesheet`.
+
+Игровые сущности ссылаются на `assetId`, а не на прямой путь.
+
+## Settings-first подход
+
+В настройки выносятся:
+
+- корневая папка игр;
+- папка ассетов;
+- профили LLM endpoints;
+- профили ComfyUI endpoints;
+- workflow profiles;
+- лимиты контекста;
+- параллельность generation jobs;
+- логирование;
+- подтверждения применения draft.
+
+## Минимальный вертикальный срез
+
+Первый рабочий vertical slice:
+
+```text
+Open project
+ -> Load GamePackage
+ -> Validate
+ -> Start Runtime Preview
+ -> Move player on map
+ -> Interact with object/NPC
+ -> Runtime event appears in log
+```
+
+Все будущие системы должны расширять этот срез, а не обходить его.

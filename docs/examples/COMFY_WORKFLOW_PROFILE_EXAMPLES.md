@@ -1,0 +1,42 @@
+# ComfyUI workflow profile examples
+
+Эти примеры не являются готовыми ComfyUI workflow. Это формат профиля, который LLMGameCreator сможет использовать позже.
+
+## Portrait expression set
+
+```json
+{
+  "id": "workflow/comfy/portrait_expression_set_v1",
+  "provider": "comfyui",
+  "assetType": "portrait_expression_set",
+  "targetContractId": "contract/portrait_set/basic_expressions",
+  "workflowFile": "workflows/comfyui/portrait_expression_set_v1.json",
+  "outputMode": "multiple_files",
+  "variants": ["neutral", "smile", "angry", "sad", "wounded", "dead"],
+  "parameters": {
+    "positivePrompt": "nodes.6.inputs.text",
+    "negativePrompt": "nodes.7.inputs.text",
+    "seed": "nodes.3.inputs.seed",
+    "outputPrefix": "nodes.12.inputs.filename_prefix"
+  }
+}
+```
+
+## Short SFX
+
+```json
+{
+  "id": "workflow/comfy/sfx_short_0_5_3s_v1",
+  "provider": "comfyui",
+  "assetType": "sound_effect",
+  "targetContractId": "contract/sfx/short_0_5_3s",
+  "workflowFile": "workflows/comfyui/sfx_short_0_5_3s_v1.json",
+  "outputMode": "single_file",
+  "parameters": {
+    "prompt": "nodes.5.inputs.text",
+    "durationSeconds": "nodes.8.inputs.duration",
+    "seed": "nodes.3.inputs.seed",
+    "outputPrefix": "nodes.12.inputs.filename_prefix"
+  }
+}
+```

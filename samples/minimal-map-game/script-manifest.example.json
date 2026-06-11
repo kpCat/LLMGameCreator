@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "scripts": [
+    {
+      "id": "script/prototypes/base_tiles",
+      "type": "prototype",
+      "path": "scripts/prototypes/base_tiles.lua",
+      "entryPoints": ["data:extend"],
+      "capabilities": ["declare_prototypes"]
+    },
+    {
+      "id": "script/prototypes/base_entities",
+      "type": "prototype",
+      "path": "scripts/prototypes/base_entities.lua",
+      "entryPoints": ["data:extend"],
+      "capabilities": ["declare_prototypes"]
+    },
+    {
+      "id": "script/generators/forest_chunk_generator",
+      "type": "generator",
+      "path": "scripts/generators/forest_chunk_generator.lua",
+      "entryPoints": ["generate_chunk"],
+      "capabilities": ["read_generation_context", "use_noise", "use_random", "return_chunk_draft"]
+    },
+    {
+      "id": "script/interactions/open_locked_chest",
+      "type": "interaction",
+      "path": "scripts/interactions/open_locked_chest.lua",
+      "entryPoints": ["on_interact"],
+      "capabilities": ["read_flags", "read_inventory", "return_effects", "request_sfx"]
+    },
+    {
+      "id": "script/formulas/simple_damage",
+      "type": "formula",
+      "path": "scripts/formulas/simple_damage.lua",
+      "entryPoints": ["calculate"],
+      "capabilities": ["read_stats", "use_random", "return_number"]
+    }
+  ]
+}

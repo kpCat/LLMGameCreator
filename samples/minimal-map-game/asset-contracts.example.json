@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "contracts": [
+    {
+      "id": "contract/spritesheet/4dir_4frames_32x48",
+      "assetType": "character_spritesheet",
+      "frameWidth": 32,
+      "frameHeight": 48,
+      "directions": ["down", "left", "right", "up"],
+      "framesPerDirection": 4,
+      "layout": "rows_by_direction"
+    },
+    {
+      "id": "contract/portrait_set/basic_expressions",
+      "assetType": "portrait_expression_set",
+      "requiredVariants": ["neutral"],
+      "optionalVariants": ["smile", "happy", "sad", "angry", "crying", "wounded", "dead"],
+      "fallbackVariant": "neutral"
+    },
+    {
+      "id": "contract/sfx/short_0_5_3s",
+      "assetType": "sound_effect",
+      "allowedFormats": ["wav", "ogg"],
+      "minDurationMs": 500,
+      "maxDurationMs": 3000,
+      "loop": false
+    }
+  ]
+}
