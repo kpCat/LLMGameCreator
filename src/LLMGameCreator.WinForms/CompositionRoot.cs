@@ -1,5 +1,6 @@
 using DryIoc;
 using LLMGameCreator.Application.Abstractions;
+using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.AssetPipeline;
@@ -39,11 +40,14 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
+        _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.Register<IGameRuntime, DefaultGameRuntime>(Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
 
-        _container.Register<DashboardPageControl>(Reuse.Singleton);
+        _container.RegisterDelegate<DashboardPageControl>(resolver => new DashboardPageControl(
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<IPackageEditorService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<ProjectsPageControl>(resolver => new ProjectsPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
