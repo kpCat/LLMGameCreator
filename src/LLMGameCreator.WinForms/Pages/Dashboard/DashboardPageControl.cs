@@ -1,17 +1,10 @@
 namespace LLMGameCreator.WinForms.Pages;
 
-public sealed class DashboardPageControl : UserControl, IEditorPage
+public sealed partial class DashboardPageControl : UserControl, IEditorPage
 {
     public DashboardPageControl()
     {
-        var label = new Label
-        {
-            Dock = DockStyle.Fill,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Font = new Font(FontFamily.GenericSansSerif, 12),
-            Text = "LLMGameCreator v0.1 skeleton\r\n\r\nЦель: GamePackage + typed Lua + asset catalog + headless runtime + WinForms editor shell."
-        };
-        Controls.Add(label);
+        InitializeComponent();
     }
 
     public string Id => "dashboard";

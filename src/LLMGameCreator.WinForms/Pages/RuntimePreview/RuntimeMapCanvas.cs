@@ -4,7 +4,7 @@ using LLMGameCreator.Runtime.Abstractions;
 
 namespace LLMGameCreator.WinForms.Pages;
 
-public sealed class RuntimeMapCanvas : Control
+public sealed partial class RuntimeMapCanvas : Control
 {
     private GamePackageDefinition? _package;
     private GameState? _state;
@@ -12,9 +12,7 @@ public sealed class RuntimeMapCanvas : Control
 
     public RuntimeMapCanvas()
     {
-        DoubleBuffered = true;
-        BackColor = Color.Black;
-        TabStop = true;
+        InitializeComponent();
     }
 
     public event Action<PlayerCommand>? CommandRequested;

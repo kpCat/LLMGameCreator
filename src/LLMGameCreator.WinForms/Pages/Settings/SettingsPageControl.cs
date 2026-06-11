@@ -3,15 +3,14 @@ using LLMGameCreator.Application.Settings;
 
 namespace LLMGameCreator.WinForms.Pages;
 
-public sealed class SettingsPageControl : UserControl, IEditorPage
+public sealed partial class SettingsPageControl : UserControl, IEditorPage
 {
     private readonly IAppSettingsRepository _settingsRepository;
-    private readonly TextBox _settingsTextBox = new TextBox();
 
     public SettingsPageControl(IAppSettingsRepository settingsRepository)
     {
         _settingsRepository = settingsRepository;
-        BuildLayout();
+        InitializeComponent();
     }
 
     public string Id => "settings";
@@ -22,15 +21,6 @@ public sealed class SettingsPageControl : UserControl, IEditorPage
     public async void OnActivated()
     {
         await LoadSettingsAsync();
-    }
-
-    private void BuildLayout()
-    {
-        _settingsTextBox.Dock = DockStyle.Fill;
-        _settingsTextBox.Multiline = true;
-        _settingsTextBox.ReadOnly = true;
-        _settingsTextBox.ScrollBars = ScrollBars.Vertical;
-        Controls.Add(_settingsTextBox);
     }
 
     private async Task LoadSettingsAsync()

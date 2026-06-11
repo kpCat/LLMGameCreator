@@ -4,15 +4,11 @@ using Microsoft.Extensions.Logging;
 
 namespace LLMGameCreator.WinForms;
 
-public sealed class MainForm : Form
+public sealed partial class MainForm : Form
 {
     private readonly IEditorPageRegistry _pageRegistry;
     private readonly ICurrentGamePackageService _currentGamePackageService;
     private readonly ILogger _logger;
-    private readonly ListBox _navigation = new ListBox();
-    private readonly Panel _workspace = new Panel();
-    private readonly StatusStrip _statusStrip = new StatusStrip();
-    private readonly ToolStripStatusLabel _statusLabel = new ToolStripStatusLabel();
 
     public MainForm(IEditorPageRegistry pageRegistry, ICurrentGamePackageService currentGamePackageService, ILoggerFactory loggerFactory)
     {
@@ -20,33 +16,11 @@ public sealed class MainForm : Form
         _currentGamePackageService = currentGamePackageService;
         _logger = loggerFactory.CreateLogger<MainForm>();
 
-        Text = "LLMGameCreator";
-        Width = 1280;
-        Height = 800;
-        StartPosition = FormStartPosition.CenterScreen;
-
-        BuildLayout();
+        InitializeComponent();
         BindPages();
 
         _currentGamePackageService.CurrentChanged += (_, _) => UpdateStatus();
         UpdateStatus();
-    }
-
-    private void BuildLayout()
-    {
-        _navigation.Dock = DockStyle.Left;
-        _navigation.Width = 220;
-        _navigation.DisplayMember = nameof(IEditorPage.Title);
-
-        _workspace.Dock = DockStyle.Fill;
-        _workspace.BackColor = SystemColors.Control;
-
-        _statusStrip.Items.Add(_statusLabel);
-        _statusStrip.Dock = DockStyle.Bottom;
-
-        Controls.Add(_workspace);
-        Controls.Add(_navigation);
-        Controls.Add(_statusStrip);
     }
 
     private void BindPages()
