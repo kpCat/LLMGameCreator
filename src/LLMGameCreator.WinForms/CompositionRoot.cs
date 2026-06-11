@@ -1,9 +1,11 @@
 using DryIoc;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Editing;
+using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.AssetPipeline;
+using LLMGameCreator.Infrastructure.Generation;
 using LLMGameCreator.Infrastructure.Logging;
 using LLMGameCreator.Infrastructure.Storage;
 using LLMGameCreator.Runtime;
@@ -41,6 +43,8 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
+        _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
+        _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
         _container.Register<IGameRuntime, DefaultGameRuntime>(Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
@@ -55,7 +59,11 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IGameProjectService>(),
             resolver.Resolve<IGamePackageValidator>()), Reuse.Singleton);
 
-        _container.Register<GenerationPageControl>(Reuse.Singleton);
+        _container.RegisterDelegate<GenerationPageControl>(resolver => new GenerationPageControl(
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<IFirstPlayableSliceGenerator>(),
+            resolver.Resolve<IGamePackageValidator>(),
+            resolver.Resolve<IAppSettingsRepository>()), Reuse.Singleton);
 
         _container.RegisterDelegate<ValidationPageControl>(resolver => new ValidationPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),

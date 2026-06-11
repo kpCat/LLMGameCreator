@@ -250,6 +250,12 @@ public sealed class PackageEditorServiceTests
             CurrentChanged?.Invoke(this, EventArgs.Empty);
             return Task.CompletedTask;
         }
+
+        public void ReplaceCurrent(GamePackageDefinition package)
+        {
+            CurrentPackage = package;
+            CurrentChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private sealed class TempDirectory : IDisposable

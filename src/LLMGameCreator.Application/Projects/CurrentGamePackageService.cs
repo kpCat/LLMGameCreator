@@ -10,6 +10,7 @@ public interface ICurrentGamePackageService
     event EventHandler? CurrentChanged;
     Task LoadAsync(string projectFolder, CancellationToken cancellationToken);
     Task SaveAsync(CancellationToken cancellationToken);
+    void ReplaceCurrent(GamePackageDefinition package);
 }
 
 public sealed class CurrentGamePackageService : ICurrentGamePackageService
@@ -45,6 +46,12 @@ public sealed class CurrentGamePackageService : ICurrentGamePackageService
         }
 
         await _repository.SaveAsync(CurrentFolder, CurrentPackage, cancellationToken);
+        CurrentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void ReplaceCurrent(GamePackageDefinition package)
+    {
+        CurrentPackage = package ?? throw new ArgumentNullException(nameof(package));
         CurrentChanged?.Invoke(this, EventArgs.Empty);
     }
 }
