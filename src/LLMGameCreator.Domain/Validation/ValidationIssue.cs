@@ -14,12 +14,16 @@ public sealed class ValidationIssue
     public ValidationSeverity Severity { get; set; } = ValidationSeverity.Error;
     public string Message { get; set; } = string.Empty;
     public string? TargetId { get; set; }
+    public string? Category { get; set; }
+    public string? TargetPath { get; set; }
     public string? FilePath { get; set; }
 
     public override string ToString()
     {
         var target = string.IsNullOrWhiteSpace(TargetId) ? string.Empty : $" [{TargetId}]";
-        return $"{Severity}: {Code}{target} - {Message}";
+        var targetPath = TargetPath ?? FilePath;
+        var path = string.IsNullOrWhiteSpace(targetPath) ? string.Empty : $" ({targetPath})";
+        return $"{Severity}: {Code}{target}{path} - {Message}";
     }
 }
 

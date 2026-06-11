@@ -1,5 +1,6 @@
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.Domain.Definitions;
+using LLMGameCreator.Domain.Validation;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Infrastructure.Storage;
 using LLMGameCreator.Runtime;
@@ -60,8 +61,8 @@ public sealed class SmokeTests
 
         var report = new GamePackageValidator().Validate(package);
 
-        Assert.Contains(report.Issues, issue => issue.Code == "script.path.empty" && issue.TargetId == "script/generator/broken");
-        Assert.Contains(report.Issues, issue => issue.Code == "script.entry_points.empty" && issue.TargetId == "script/generator/broken");
+        Assert.Contains(report.Issues, issue => issue.Code == "script.path.empty" && issue.TargetId == "script/generator/broken" && issue.Category == "Script");
+        Assert.Contains(report.Issues, issue => issue.Code == "script.entry_points.empty" && issue.TargetId == "script/generator/broken" && issue.Category == "Script");
     }
 
     [Fact]
@@ -152,9 +153,9 @@ public sealed class SmokeTests
 
         var report = new GamePackageValidator().Validate(package, FindRepositoryRoot());
 
-        Assert.Contains(report.Issues, issue => issue.Code == "asset.path.traversal" && issue.TargetId == "asset/broken");
-        Assert.Contains(report.Issues, issue => issue.Code == "asset.fallback.missing" && issue.TargetId == "asset/broken");
-        Assert.Contains(report.Issues, issue => issue.Code == "asset.contract.missing" && issue.TargetId == "asset/broken");
+        Assert.Contains(report.Issues, issue => issue.Code == "asset.path.traversal" && issue.TargetId == "asset/broken" && issue.Category == "Asset" && issue.TargetPath == "../escape.png");
+        Assert.Contains(report.Issues, issue => issue.Code == "asset.fallback.missing" && issue.TargetId == "asset/broken" && issue.Category == "Asset");
+        Assert.Contains(report.Issues, issue => issue.Code == "asset.contract.missing" && issue.TargetId == "asset/broken" && issue.Category == "Asset");
     }
 
     [Fact]
@@ -173,6 +174,120 @@ public sealed class SmokeTests
 
         Assert.Contains(report.Issues, issue => issue.Code == "tile.asset.missing" && issue.TargetId == "tile/grass");
         Assert.Contains(report.Issues, issue => issue.Code == "entity.asset.missing" && issue.TargetId == "prototype/npc/missing_asset");
+    }
+
+    [Fact]
+    public void AssetCatalog_MissingPhysicalAssetFile_RemainsWarning()
+    {
+        var package = CreateMinimalValidPackage();
+        package.AssetCatalog.Assets.Add(new AssetDefinition
+        {
+            Id = "asset/missing/file",
+            Type = "tile",
+            Path = "assets/missing-file.png"
+        });
+
+        var report = new GamePackageValidator().Validate(package, FindRepositoryRoot());
+
+        var issue = Assert.Single(report.Issues, issue => issue.Code == "asset.path.missing");
+        Assert.Equal(ValidationSeverity.Warning, issue.Severity);
+        Assert.Equal("asset/missing/file", issue.TargetId);
+        Assert.Equal("assets/missing-file.png", issue.TargetPath);
+        Assert.True(report.IsValid);
+    }
+
+    [Fact]
+    public void ValidationIssue_ToString_KeepsLegacyShapeAndAddsOptionalPath()
+    {
+        var legacyIssue = new ValidationIssue
+        {
+            Code = "legacy.code",
+            Severity = ValidationSeverity.Error,
+            Message = "Legacy message.",
+            TargetId = "target/id"
+        };
+        var pathIssue = new ValidationIssue
+        {
+            Code = "path.code",
+            Severity = ValidationSeverity.Warning,
+            Message = "Path message.",
+            TargetId = "target/path",
+            Category = "Asset",
+            TargetPath = "assets/missing.png"
+        };
+
+        Assert.Equal("Error: legacy.code [target/id] - Legacy message.", legacyIssue.ToString());
+        Assert.Equal("Warning: path.code [target/path] (assets/missing.png) - Path message.", pathIssue.ToString());
+    }
+
+    [Fact]
+    public void ValidationReportFormatter_GroupsBySeverityThenCategoryDeterministically()
+    {
+        var report = new ValidationReport();
+        report.Issues.Add(new ValidationIssue
+        {
+            Code = "warning.asset",
+            Severity = ValidationSeverity.Warning,
+            Category = "Asset",
+            TargetId = "asset/a",
+            TargetPath = "assets/a.png",
+            Message = "Asset warning."
+        });
+        report.Issues.Add(new ValidationIssue
+        {
+            Code = "error.script",
+            Severity = ValidationSeverity.Error,
+            Category = "Script",
+            TargetId = "script/a",
+            Message = "Script error."
+        });
+        report.Issues.Add(new ValidationIssue
+        {
+            Code = "error.game",
+            Severity = ValidationSeverity.Error,
+            Category = "Game",
+            TargetId = "map/a",
+            Message = "Game error."
+        });
+
+        var formatted = new ValidationReportFormatter().Format(report);
+
+        Assert.Equal(
+            string.Join(Environment.NewLine, new[]
+            {
+                "Error",
+                "  Game",
+                "    error.game [map/a]: Game error.",
+                "  Script",
+                "    error.script [script/a]: Script error.",
+                "Warning",
+                "  Asset",
+                "    warning.asset [asset/a; assets/a.png]: Asset warning."
+            }),
+            formatted);
+    }
+
+    [Fact]
+    public void GamePackageValidator_ModularValidators_PreserveManifestGameAndScriptIssues()
+    {
+        var package = CreateMinimalValidPackage();
+        package.Manifest.StartMapId = "map/missing";
+        package.Game.Maps[0].DefaultTileId = "tile/missing";
+        package.ScriptCatalog.Scripts.Add(new ScriptDefinition
+        {
+            Id = "script/broken",
+            Kind = LuaScriptKind.Event,
+            Path = "",
+            EntryPoints = new List<string> { "on_event" },
+            Capabilities = new List<string>()
+        });
+
+        var report = new GamePackageValidator().Validate(package);
+
+        Assert.Contains(report.Issues, issue => issue.Code == "manifest.start_map.missing" && issue.Category == "Manifest");
+        Assert.Contains(report.Issues, issue => issue.Code == "map.default_tile.missing" && issue.Category == "Game");
+        Assert.Contains(report.Issues, issue => issue.Code == "script.path.empty" && issue.Category == "Script");
+        Assert.Contains(report.Issues, issue => issue.Code == "script.capabilities.empty" && issue.Category == "Script");
     }
 
     private static string FindRepositoryRoot()

@@ -51,9 +51,10 @@ public sealed partial class ValidationPageControl : UserControl, IEditorPage
             return;
         }
 
-        foreach (var issue in report.Issues)
+        var formatter = new ValidationReportFormatter();
+        foreach (var line in formatter.Format(report).Split(new[] { Environment.NewLine }, StringSplitOptions.None))
         {
-            _issuesListBox.Items.Add(issue.ToString());
+            _issuesListBox.Items.Add(line);
         }
     }
 }
