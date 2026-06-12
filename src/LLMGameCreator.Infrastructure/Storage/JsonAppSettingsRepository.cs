@@ -1,3 +1,4 @@
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Settings;
@@ -12,7 +13,8 @@ public sealed class JsonAppSettingsRepository : IAppSettingsRepository
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         WriteIndented = true,
-        PropertyNameCaseInsensitive = true
+        PropertyNameCaseInsensitive = true,
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
 
     public JsonAppSettingsRepository(string settingsPath)

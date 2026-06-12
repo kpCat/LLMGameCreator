@@ -35,6 +35,52 @@ public sealed class FirstPlayableSliceGeneratorTests
     }
 
     [Fact]
+    public async Task GenerateAsync_PromptIncludesAdvancedBriefScopeAndLogicInstructions()
+    {
+        var current = new InMemoryCurrentGamePackageService(CreateMinimalPackage());
+        var llm = new FakeLlmChatClient(CreateValidJson());
+        var service = CreateService(current, llm);
+
+        await service.GenerateAsync(new GenerationInterviewModel
+        {
+            LoreNotes = "old lore",
+            HardConstraints = "no guns",
+            MustInclude = "elder",
+            MustAvoid = "comedy",
+            PlayerFantasy = "investigate danger",
+            GameplayLogicNotes = "future hook on gate",
+            MaxTileOverrides = 40,
+            LogicMode = "data-plus-script-plan"
+        }, CancellationToken.None);
+
+        Assert.Contains("old lore", llm.LastRequest.UserPrompt);
+        Assert.Contains("no guns", llm.LastRequest.UserPrompt);
+        Assert.Contains("elder", llm.LastRequest.UserPrompt);
+        Assert.Contains("comedy", llm.LastRequest.UserPrompt);
+        Assert.Contains("investigate danger", llm.LastRequest.UserPrompt);
+        Assert.Contains("future hook on gate", llm.LastRequest.UserPrompt);
+        Assert.Contains("MaxTileOverrides: 40", llm.LastRequest.UserPrompt);
+        Assert.Contains("Do not enumerate full map borders cell-by-cell", llm.LastRequest.UserPrompt);
+        Assert.Contains("Do not generate Lua code", llm.LastRequest.SystemPrompt);
+        Assert.Contains("LogicMode: data-plus-script-plan", llm.LastRequest.UserPrompt);
+    }
+
+    [Fact]
+    public async Task GenerateAsync_ParsesLogicNotesAndScriptPlans()
+    {
+        var service = CreateService(CreateMinimalPackage(), CreateValidJsonWithScriptPlans());
+
+        var result = await service.GenerateAsync(new GenerationInterviewModel(), CancellationToken.None);
+
+        Assert.True(result.Success, FormatIssues(result));
+        Assert.NotNull(result.Draft);
+        Assert.Equal("Use data-driven dialogue first.", result.Draft.LogicNotes);
+        var plan = Assert.Single(result.Draft.ScriptPlans);
+        Assert.Equal("script-plan/gate", plan.Id);
+        Assert.Equal("interaction", plan.Kind);
+    }
+
+    [Fact]
     public void ApplyDraft_RejectsUnknownTileReference()
     {
         var package = CreateMinimalPackage();
@@ -90,6 +136,32 @@ public sealed class FirstPlayableSliceGeneratorTests
         Assert.Contains(current.CurrentPackage!.Game.Maps[0].Tiles, tile => tile.TileId == "tile/wall");
     }
 
+    [Fact]
+    public void ApplyDraft_IgnoresScriptPlansForPackageMutation()
+    {
+        var current = new InMemoryCurrentGamePackageService(CreateMinimalPackage());
+        var service = CreateService(current, CreateValidJson());
+        var draft = CreateValidDraft();
+        draft.LogicNotes = "Future hooks only.";
+        draft.ScriptPlans.Add(new ScriptPlanModel
+        {
+            Id = "script-plan/gate",
+            Kind = "interaction",
+            Trigger = "inspect gate",
+            TargetId = "entity/gate",
+            Purpose = "Future richer gate behavior.",
+            SuggestedEntryPoint = "on_interact",
+            RequiredCapabilities = new List<string> { "return_effects" },
+            UsedBy = new List<string> { "entity/gate" }
+        });
+
+        var result = service.ApplyDraft(draft);
+
+        Assert.True(result.Success, FormatIssues(result));
+        Assert.Empty(current.CurrentPackage!.ScriptCatalog.Scripts);
+        Assert.Empty(current.CurrentPackage.ScriptCatalog.Generators);
+    }
+
     private static FirstPlayableSliceGenerator CreateService(GamePackageDefinition package, string response)
     {
         return CreateService(new InMemoryCurrentGamePackageService(package), response);
@@ -97,9 +169,14 @@ public sealed class FirstPlayableSliceGeneratorTests
 
     private static FirstPlayableSliceGenerator CreateService(InMemoryCurrentGamePackageService current, string response)
     {
+        return CreateService(current, new FakeLlmChatClient(response));
+    }
+
+    private static FirstPlayableSliceGenerator CreateService(InMemoryCurrentGamePackageService current, FakeLlmChatClient llmChatClient)
+    {
         return new FirstPlayableSliceGenerator(
             new InMemorySettingsRepository(),
-            new FakeLlmChatClient(response),
+            llmChatClient,
             current,
             new GamePackageValidator());
     }
@@ -194,6 +271,60 @@ public sealed class FirstPlayableSliceGeneratorTests
 """;
     }
 
+    private static string CreateValidJsonWithScriptPlans()
+    {
+        return """
+{
+  "title": "Generated Slice",
+  "packageId": "game/generated",
+  "description": "Generated description.",
+  "startMapId": "map/generated",
+  "tilePrototypes": [
+    { "id": "tile/grass", "name": "Grass", "walkable": true, "movementCost": 1.0, "assetId": null },
+    { "id": "tile/wall", "name": "Wall", "walkable": false, "movementCost": 999.0, "assetId": null },
+    { "id": "tile/road", "name": "Road", "walkable": true, "movementCost": 0.8, "assetId": null }
+  ],
+  "entityPrototypes": [
+    { "id": "prototype/npc/elder", "name": "Elder", "assetId": null, "components": [] }
+  ],
+  "maps": [
+    {
+      "id": "map/generated",
+      "name": "Generated Map",
+      "width": 12,
+      "height": 8,
+      "defaultTileId": "tile/grass",
+      "startPosition": { "x": 2, "y": 2 },
+      "tiles": [
+        { "x": 0, "y": 0, "tileId": "tile/wall" },
+        { "x": 1, "y": 0, "tileId": "tile/wall" },
+        { "x": 2, "y": 1, "tileId": "tile/road" }
+      ],
+      "entities": [
+        { "id": "entity/elder", "prototypeId": "prototype/npc/elder", "position": { "x": 5, "y": 5 }, "components": [] }
+      ]
+    }
+  ],
+  "dialogues": [],
+  "quests": [],
+  "logicNotes": "Use data-driven dialogue first.",
+  "scriptPlans": [
+    {
+      "id": "script-plan/gate",
+      "kind": "interaction",
+      "trigger": "inspect gate",
+      "targetId": "entity/gate",
+      "purpose": "Future richer gate behavior.",
+      "suggestedEntryPoint": "on_interact",
+      "requiredCapabilities": ["return_effects"],
+      "usedBy": ["entity/gate"],
+      "notes": "Planning only."
+    }
+  ]
+}
+""";
+    }
+
     private static GamePackageDefinition CreateMinimalPackage()
     {
         return new GamePackageDefinition
@@ -247,8 +378,11 @@ public sealed class FirstPlayableSliceGeneratorTests
             _response = response;
         }
 
+        public LlmChatRequest LastRequest { get; private set; } = new LlmChatRequest();
+
         public Task<LlmChatResponse> CompleteAsync(LlmEndpointSettings profile, LlmChatRequest request, CancellationToken cancellationToken)
         {
+            LastRequest = request;
             return Task.FromResult(new LlmChatResponse
             {
                 Content = _response,

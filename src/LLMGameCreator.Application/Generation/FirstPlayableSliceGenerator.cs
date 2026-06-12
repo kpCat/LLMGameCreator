@@ -118,6 +118,28 @@ public sealed partial class FirstPlayableSliceGenerator : IFirstPlayableSliceGen
         return result;
     }
 
+    public async Task<GenerationResult> AnalyzeBriefAsync(GenerationInterviewModel interview, CancellationToken cancellationToken)
+    {
+        var profile = await LoadDefaultProfileAsync(cancellationToken).ConfigureAwait(false);
+        var response = await _llmChatClient.CompleteAsync(profile, new LlmChatRequest
+        {
+            SystemPrompt = BuildHelperSystemPrompt(),
+            UserPrompt = BuildHelperUserPrompt(interview),
+            Temperature = 0.35,
+            MaxTokens = 1800
+        }, cancellationToken).ConfigureAwait(false);
+
+        return new GenerationResult
+        {
+            Success = true,
+            RawContent = response.Content,
+            Message = "ИИ вернул вопросы и варианты. Package не изменён.",
+            ProfileTitle = profile.Title,
+            Endpoint = response.Endpoint,
+            Model = response.Model
+        };
+    }
+
     public FirstPlayableSliceApplyResult ApplyDraft(FirstPlayableSliceDraft draft)
     {
         var draftReport = ValidateDraft(draft);
@@ -192,11 +214,17 @@ public sealed partial class FirstPlayableSliceGenerator : IFirstPlayableSliceGen
         var package = _currentGamePackageService.CurrentPackage;
         var builder = new StringBuilder();
         builder.AppendLine("Generate one first playable slice draft for the current GamePackage.");
-        builder.AppendLine($"Current package id: {package?.Manifest.PackageId ?? "not_open"}");
-        builder.AppendLine($"Current package title: {package?.Manifest.Title ?? "not_open"}");
         builder.AppendLine();
-        builder.AppendLine("Interview:");
-        builder.AppendLine($"game idea/free text: {interview.GameIdea}");
+        builder.AppendLine("1. Current package context");
+        builder.AppendLine($"packageId: {package?.Manifest.PackageId ?? "not_open"}");
+        builder.AppendLine($"title: {package?.Manifest.Title ?? "not_open"}");
+        builder.AppendLine($"current startMapId: {package?.Manifest.StartMapId ?? "not_open"}");
+        builder.AppendLine("Use current package identity; do not change project id.");
+        builder.AppendLine();
+        builder.AppendLine("2. Core idea");
+        builder.AppendLine(EmptyAsDash(interview.GameIdea));
+        builder.AppendLine();
+        builder.AppendLine("3. Steering fields");
         builder.AppendLine($"genre: {interview.Genre}");
         builder.AppendLine($"tone: {interview.Tone}");
         builder.AppendLine($"camera/view: {interview.CameraView}");
@@ -208,6 +236,42 @@ public sealed partial class FirstPlayableSliceGenerator : IFirstPlayableSliceGen
         builder.AppendLine($"map size preference: {interview.MapWidth}x{interview.MapHeight}");
         builder.AppendLine($"generation mode: {interview.GenerationMode}");
         builder.AppendLine();
+        builder.AppendLine("4. Lore");
+        builder.AppendLine(EmptyAsDash(interview.LoreNotes));
+        builder.AppendLine();
+        builder.AppendLine("5. Hard constraints");
+        builder.AppendLine(EmptyAsDash(interview.HardConstraints));
+        builder.AppendLine();
+        builder.AppendLine("6. Must include");
+        builder.AppendLine(EmptyAsDash(interview.MustInclude));
+        builder.AppendLine();
+        builder.AppendLine("7. Must avoid");
+        builder.AppendLine(EmptyAsDash(interview.MustAvoid));
+        builder.AppendLine();
+        builder.AppendLine("8. Player fantasy");
+        builder.AppendLine(EmptyAsDash(interview.PlayerFantasy));
+        builder.AppendLine();
+        builder.AppendLine("9. Gameplay logic wishes / Lua notes");
+        builder.AppendLine(EmptyAsDash(interview.GameplayLogicNotes));
+        builder.AppendLine();
+        builder.AppendLine("10. Scope controls");
+        builder.AppendLine($"MaxTileOverrides: {Math.Clamp(interview.MaxTileOverrides, 10, 160)}");
+        builder.AppendLine($"TargetNpcCount: {Math.Clamp(interview.TargetNpcCount, 1, 6)}");
+        builder.AppendLine($"TargetEntityInstanceCount: {Math.Clamp(interview.TargetEntityInstanceCount, 0, 20)}");
+        builder.AppendLine($"TargetQuestCount: {Math.Clamp(interview.TargetQuestCount, 0, 3)}");
+        builder.AppendLine($"TargetDialogueCount: {Math.Clamp(interview.TargetDialogueCount, 0, 3)}");
+        builder.AppendLine($"DetailMode: {interview.DetailMode}");
+        builder.AppendLine($"LogicMode: {interview.LogicMode}");
+        builder.AppendLine("Use at most MaxTileOverrides tile overrides.");
+        builder.AppendLine("Do not enumerate full map borders cell-by-cell.");
+        builder.AppendLine("Use sparse tile overrides.");
+        builder.AppendLine("Keep JSON compact in compact/balanced modes.");
+        builder.AppendLine("Use detail mode to control amount of generated text.");
+        builder.AppendLine("Respect target counts as approximate targets, but remain valid.");
+        builder.AppendLine("Respect LogicMode.");
+        builder.AppendLine(GetLogicModeInstruction(interview.LogicMode));
+        builder.AppendLine();
+        builder.AppendLine("11. Required JSON schema example");
         builder.AppendLine("Use this exact JSON shape and no other fields:");
         builder.AppendLine(GetSchemaExample(interview.MapWidth, interview.MapHeight));
         return builder.ToString();
@@ -218,23 +282,83 @@ public sealed partial class FirstPlayableSliceGenerator : IFirstPlayableSliceGen
         return string.Join(Environment.NewLine, new[]
         {
             "You are generating data for LLMGameCreator.",
-            "Return ONLY valid JSON.",
-            "Do not return markdown.",
-            "Do not invent fields outside the schema.",
-            "All ids must be stable lowercase slash ids.",
+            "Return ONLY valid JSON object.",
+            "No markdown.",
+            "No explanations outside JSON.",
+            "Do not invent fields outside schema.",
+            "Use current package identity; do not change project id.",
+            "IDs are lowercase slash ids.",
             "Every tileId must reference tilePrototypes.",
             "Every prototypeId must reference entityPrototypes.",
             "startMapId must reference an existing map.",
             "startPosition must be inside map bounds and on a walkable tile.",
-            "Use DefaultTileId plus tile overrides to create a mixed map.",
-            "Create visible paths/walls/water/blocked areas using tile overrides.",
-            "No Lua.",
-            "No code.",
+            "Use DefaultTileId plus sparse tile overrides.",
+            "Do not enumerate full map borders cell-by-cell.",
+            "Use at most requested MaxTileOverrides.",
+            "Keep map visually meaningful: road, obstacle, landmark, NPC position.",
+            "No Lua code.",
+            "Do not generate Lua code.",
+            "Do not create Lua files.",
             "No Unity.",
             "No asset generation.",
+            "Prefer data-driven quests/dialogues/interactions/effects.",
+            "If logic would need Lua later, output ScriptPlans only.",
+            "ScriptPlans describe trigger, target, purpose, future entry point and capabilities.",
+            "ScriptPlans are planning notes, not executable code.",
+            "Respect lore, hard constraints, must include, must avoid, player fantasy.",
+            "Treat Genre/Tone/Camera/Setting/FirstConflict as steering labels, not rigid enums.",
             "Keep all components empty arrays for this goal unless existing component shape is explicitly known.",
             "Output limits: exactly 1 start map; map width 12-40; map height 8-30; 3-8 tile prototypes; 1-6 entity prototypes; 0-20 entity instances; 0-3 dialogues; 0-3 quests; sparse tile overrides only."
         });
+    }
+
+    private static string BuildHelperSystemPrompt()
+    {
+        return string.Join(Environment.NewLine, new[]
+        {
+            "Analyze this game idea and return compact JSON with clarifying questions, suggested variants, recommended field values, and generation risks.",
+            "Do not generate GamePackage.",
+            "Do not generate Lua code.",
+            "Keep response short.",
+            "Return JSON only."
+        });
+    }
+
+    private string BuildHelperUserPrompt(GenerationInterviewModel interview)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine("Current fields and brief:");
+        builder.AppendLine(BuildUserPrompt(interview));
+        builder.AppendLine();
+        builder.AppendLine("Return this compact helper shape:");
+        builder.AppendLine("""
+{
+  "questions": [
+    {
+      "id": "tone",
+      "question": "Какой уровень мрачности нужен?",
+      "why": "Это влияет на NPC/dialogue/quest tone.",
+      "options": ["dark fantasy", "grimdark", "dark fairy tale"]
+    }
+  ],
+  "suggestions": [
+    {
+      "title": "Village under quarantine",
+      "description": "..."
+    }
+  ],
+  "recommendedFields": {
+    "genre": "rpg",
+    "tone": "dark fantasy",
+    "setting": "cursed village",
+    "firstConflict": "blocked road"
+  },
+  "risks": [
+    "Current idea does not define player goal after talking to elder."
+  ]
+}
+""");
+        return builder.ToString();
     }
 
     private static string GetSchemaExample(int width, int height)
@@ -299,9 +423,38 @@ public sealed partial class FirstPlayableSliceGenerator : IFirstPlayableSliceGen
         { "id": "stage/start", "text": "Talk to the elder.", "completeConditions": [] }
       ]
     }
+  ],
+  "logicNotes": "Short data-driven behavior summary. No Lua code.",
+  "scriptPlans": [
+    {
+      "id": "script-plan/blocked_road_interaction",
+      "kind": "interaction",
+      "trigger": "player inspects blocked road",
+      "targetId": "entity/blocked_road",
+      "purpose": "Future hook for richer blocked road interaction.",
+      "suggestedEntryPoint": "on_interact",
+      "requiredCapabilities": ["return_effects"],
+      "usedBy": ["entity/blocked_road"],
+      "notes": "Planning only. Do not create Lua source in this draft."
+    }
   ]
 }
 """;
+    }
+
+    private static string GetLogicModeInstruction(string logicMode)
+    {
+        return logicMode switch
+        {
+            "no-scripts" => "LogicMode no-scripts: do not output scriptPlans.",
+            "data-plus-script-plan" => "LogicMode data-plus-script-plan: include scriptPlans for future hooks where useful, but no Lua code.",
+            _ => "LogicMode data-only: express behavior through quests/dialogues/interactions only, no scriptPlans unless unavoidable."
+        };
+    }
+
+    private static string EmptyAsDash(string? value)
+    {
+        return string.IsNullOrWhiteSpace(value) ? "-" : value.Trim();
     }
 
     private static string? ExtractStrictJson(string content)

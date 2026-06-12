@@ -16,7 +16,7 @@ public sealed class OpenAiCompatibleLlmChatClient : ILlmChatClient
     };
 
     public OpenAiCompatibleLlmChatClient()
-        : this(new HttpClient { Timeout = TimeSpan.FromSeconds(180) })
+        : this(new HttpClient { Timeout = Timeout.InfiniteTimeSpan })
     {
     }
 
@@ -64,9 +64,13 @@ public sealed class OpenAiCompatibleLlmChatClient : ILlmChatClient
                 Model = profile.Model
             };
         }
-        catch (TaskCanceledException ex) when (!cancellationToken.IsCancellationRequested)
+        catch (TaskCanceledException ex) when (cancellationToken.IsCancellationRequested)
         {
-            throw new TimeoutException("LM Studio request превысил timeout 180 секунд.", ex);
+            throw new InvalidOperationException("Операция отменена пользователем.", ex);
+        }
+        catch (TaskCanceledException ex)
+        {
+            throw new InvalidOperationException("LM Studio request был отменён или соединение оборвалось.", ex);
         }
         catch (HttpRequestException ex)
         {

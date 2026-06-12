@@ -15,6 +15,7 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
     private readonly ValidationReportFormatter _validationFormatter = new ValidationReportFormatter();
     private FirstPlayableSliceDraft? _latestDraft;
     private bool _isBusy;
+    private CancellationTokenSource? _currentOperationCts;
 
     public GenerationPageControl()
     {
@@ -51,10 +52,12 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
     private void WireEvents()
     {
         _testLmStudioButton.Click += async (_, _) => await TestLmStudioAsync();
+        _aiHelperButton.Click += async (_, _) => await AnalyzeBriefAsync();
         _generateButton.Click += async (_, _) => await GenerateAsync();
         _applyButton.Click += (_, _) => ApplyDraft();
         _saveButton.Click += async (_, _) => await SavePackageAsync();
         _validateButton.Click += (_, _) => ValidatePackage();
+        _cancelButton.Click += (_, _) => CancelCurrentOperation();
     }
 
     private void CurrentGamePackageService_CurrentChanged(object? sender, EventArgs e)
@@ -87,7 +90,7 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
                 ?? settings.LlmProfiles.FirstOrDefault();
             _profileValueLabel.Text = profile == null
                 ? "LLM profile не найден"
-                : $"{profile.Title} | {profile.Endpoint.TrimEnd('/')}/chat/completions | model: {profile.Model}";
+                : $"{profile.Id} | {profile.Title} | {profile.Endpoint.TrimEnd('/')}/chat/completions | model: {profile.Model} | ctx: {profile.ContextWindowTokens}";
         }
         catch (Exception ex)
         {
@@ -121,10 +124,34 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
             return;
         }
 
-        await RunBusyAsync("Проверяю LM Studio...", async () =>
+        await RunBusyAsync("Проверяю LM Studio...", async cancellationToken =>
         {
-            var result = await _generator.TestConnectionAsync(CancellationToken.None).ConfigureAwait(true);
+            var result = await _generator.TestConnectionAsync(cancellationToken).ConfigureAwait(true);
             _resultTextBox.Text = $"{result.Message}\r\nEndpoint: {result.Endpoint}\r\nModel: {result.Model}\r\n\r\n{result.RawContent}";
+        });
+    }
+
+    private async Task AnalyzeBriefAsync()
+    {
+        if (_generator == null)
+        {
+            SetNoRuntimeState("Generation service недоступен.");
+            return;
+        }
+
+        await RunBusyAsync("ИИ анализирует brief и предлагает вопросы...", async cancellationToken =>
+        {
+            var result = await _generator.AnalyzeBriefAsync(ReadInterview(), cancellationToken).ConfigureAwait(true);
+            _rawJsonTextBox.Text = result.RawContent;
+            _resultTextBox.Text = string.Join("\r\n", new[]
+            {
+                result.Message,
+                $"Profile: {result.ProfileTitle}",
+                $"Endpoint: {result.Endpoint}",
+                $"Model: {result.Model}",
+                string.Empty,
+                result.RawContent
+            });
         });
     }
 
@@ -142,10 +169,10 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
             return;
         }
 
-        await RunBusyAsync("Генерирую playable slice через LM Studio...", async () =>
+        await RunBusyAsync("Генерирую playable slice через LM Studio...", async cancellationToken =>
         {
             _latestDraft = null;
-            var result = await _generator.GenerateAsync(ReadInterview(), CancellationToken.None).ConfigureAwait(true);
+            var result = await _generator.GenerateAsync(ReadInterview(), cancellationToken).ConfigureAwait(true);
             _rawJsonTextBox.Text = string.IsNullOrWhiteSpace(result.RawJson) ? result.RawContent : result.RawJson;
             _resultTextBox.Text = BuildGenerationLog(result);
             if (result.Success)
@@ -190,9 +217,9 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
             return;
         }
 
-        await RunBusyAsync("Сохраняю package...", async () =>
+        await RunBusyAsync("Сохраняю package...", async cancellationToken =>
         {
-            await _currentGamePackageService.SaveAsync(CancellationToken.None).ConfigureAwait(true);
+            await _currentGamePackageService.SaveAsync(cancellationToken).ConfigureAwait(true);
             _resultTextBox.Text = "Package сохранён.";
         });
     }
@@ -210,12 +237,26 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
         _resultTextBox.Text = BuildValidationLog(report);
     }
 
-    private async Task RunBusyAsync(string status, Func<Task> action)
+    private async Task RunBusyAsync(string status, Func<CancellationToken, Task> action)
     {
+        if (_currentOperationCts != null)
+        {
+            return;
+        }
+
+        _currentOperationCts = new CancellationTokenSource();
         try
         {
             SetBusy(true, status);
-            await action().ConfigureAwait(true);
+            await action(_currentOperationCts.Token).ConfigureAwait(true);
+        }
+        catch (OperationCanceledException)
+        {
+            _resultTextBox.Text = "Операция отменена пользователем.";
+        }
+        catch (InvalidOperationException ex) when (ex.Message.Contains("Операция отменена пользователем.", StringComparison.Ordinal))
+        {
+            _resultTextBox.Text = "Операция отменена пользователем.";
         }
         catch (Exception ex)
         {
@@ -223,8 +264,23 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
         }
         finally
         {
+            _currentOperationCts.Dispose();
+            _currentOperationCts = null;
             SetBusy(false, string.Empty);
             RefreshCurrentPackageState();
+        }
+    }
+
+    private void CancelCurrentOperation()
+    {
+        try
+        {
+            _currentOperationCts?.Cancel();
+            _cancelButton.Enabled = false;
+            _statusLabel.Text = "Отмена...";
+        }
+        catch (ObjectDisposedException)
+        {
         }
     }
 
@@ -233,10 +289,12 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
         _isBusy = busy;
         _statusLabel.Text = status;
         _testLmStudioButton.Enabled = !busy;
+        _aiHelperButton.Enabled = !busy;
         _generateButton.Enabled = !busy;
         _applyButton.Enabled = !busy && _latestDraft != null;
         _saveButton.Enabled = !busy && _currentGamePackageService?.CurrentPackage != null;
         _validateButton.Enabled = !busy && _currentGamePackageService?.CurrentPackage != null;
+        _cancelButton.Enabled = busy;
     }
 
     private void SetNoRuntimeState(string message)
@@ -244,10 +302,12 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
         _currentPackageLabel.Text = message;
         _resultTextBox.Text = message;
         _testLmStudioButton.Enabled = false;
+        _aiHelperButton.Enabled = false;
         _generateButton.Enabled = false;
         _applyButton.Enabled = false;
         _saveButton.Enabled = false;
         _validateButton.Enabled = false;
+        _cancelButton.Enabled = false;
     }
 
     private GenerationInterviewModel ReadInterview()
@@ -265,13 +325,26 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
             RequiredNpc = _requiredNpcTextBox.Text,
             MapWidth = (int)_mapWidthNumeric.Value,
             MapHeight = (int)_mapHeightNumeric.Value,
-            GenerationMode = "first_playable_slice"
+            GenerationMode = "first_playable_slice",
+            LoreNotes = _loreTextBox.Text,
+            HardConstraints = _hardConstraintsTextBox.Text,
+            MustInclude = _mustIncludeTextBox.Text,
+            MustAvoid = _mustAvoidTextBox.Text,
+            PlayerFantasy = _playerFantasyTextBox.Text,
+            GameplayLogicNotes = _gameplayLogicTextBox.Text,
+            MaxTileOverrides = (int)_maxTileOverridesNumeric.Value,
+            TargetNpcCount = (int)_targetNpcNumeric.Value,
+            TargetEntityInstanceCount = (int)_targetEntityNumeric.Value,
+            TargetQuestCount = (int)_targetQuestNumeric.Value,
+            TargetDialogueCount = (int)_targetDialogueNumeric.Value,
+            DetailMode = _detailModeComboBox.Text,
+            LogicMode = _logicModeComboBox.Text
         };
     }
 
     private string BuildGenerationLog(GenerationResult result)
     {
-        return string.Join("\r\n", new[]
+        var lines = new List<string>
         {
             result.Success ? "Draft готов к применению." : "Draft не готов к применению.",
             result.Message,
@@ -280,7 +353,24 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
             $"Model: {result.Model}",
             string.Empty,
             _validationFormatter.Format(result.DraftValidationReport)
-        });
+        };
+
+        if (result.Draft != null && (!string.IsNullOrWhiteSpace(result.Draft.LogicNotes) || result.Draft.ScriptPlans.Count > 0))
+        {
+            lines.Add(string.Empty);
+            lines.Add("Logic/script planning metadata (draft-only, не применяется к package):");
+            if (!string.IsNullOrWhiteSpace(result.Draft.LogicNotes))
+            {
+                lines.Add(result.Draft.LogicNotes);
+            }
+
+            foreach (var plan in result.Draft.ScriptPlans)
+            {
+                lines.Add($"- {plan.Id} [{plan.Kind}] trigger={plan.Trigger}; target={plan.TargetId}; entry={plan.SuggestedEntryPoint}; purpose={plan.Purpose}");
+            }
+        }
+
+        return string.Join("\r\n", lines);
     }
 
     private string BuildApplyLog(FirstPlayableSliceApplyResult result)
