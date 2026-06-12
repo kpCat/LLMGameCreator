@@ -12,6 +12,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
     private readonly IGeneratorLibraryIntegrityValidator? _integrityValidator;
     private readonly IGeneratorPlanDraftService? _planDraftService;
     private readonly IGeneratorPlanRepository? _planRepository;
+    private readonly IGeneratorPlanReviewService? _planReviewService;
 
     public GeneratorLibraryPageControl()
     {
@@ -25,7 +26,8 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         IGeneratorLibraryRegistry registry,
         IGeneratorLibraryIntegrityValidator integrityValidator,
         IGeneratorPlanDraftService planDraftService,
-        IGeneratorPlanRepository planRepository)
+        IGeneratorPlanRepository planRepository,
+        IGeneratorPlanReviewService planReviewService)
     {
         _currentGamePackageService = currentGamePackageService;
         _databaseInitializer = databaseInitializer;
@@ -34,8 +36,9 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         _integrityValidator = integrityValidator;
         _planDraftService = planDraftService;
         _planRepository = planRepository;
+        _planReviewService = planReviewService;
         InitializeComponent();
-        _plansTab.Configure(_planDraftService, _planRepository);
+        _plansTab.Configure(_planDraftService, _planRepository, _planReviewService);
         WireEvents();
     }
 

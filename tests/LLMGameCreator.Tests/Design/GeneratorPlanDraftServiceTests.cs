@@ -159,9 +159,25 @@ public sealed class GeneratorPlanDraftServiceTests
             return Task.FromResult<IReadOnlyList<GeneratorPlanRecord>>(SavedPlan == null ? Array.Empty<GeneratorPlanRecord>() : new[] { SavedPlan });
         }
 
+        public Task<GeneratorPlanRecord?> GetGeneratorPlanByIdAsync(string planId, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(SavedPlan?.Id == planId ? SavedPlan : null);
+        }
+
         public Task<IReadOnlyList<GeneratorPlanStepRecord>> GetGeneratorPlanStepsAsync(string planId, CancellationToken cancellationToken)
         {
             return Task.FromResult(SavedSteps);
+        }
+
+        public Task<bool> UpdateGeneratorPlanStatusAsync(string planId, string status, string? note, CancellationToken cancellationToken)
+        {
+            if (SavedPlan == null || SavedPlan.Id != planId)
+            {
+                return Task.FromResult(false);
+            }
+
+            SavedPlan = SavedPlan with { Status = status, UpdatedUtc = DateTimeOffset.UtcNow };
+            return Task.FromResult(true);
         }
     }
 

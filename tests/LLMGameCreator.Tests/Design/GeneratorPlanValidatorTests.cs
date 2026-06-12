@@ -47,6 +47,26 @@ public sealed class GeneratorPlanValidatorTests
     }
 
     [Fact]
+    public void ValidatorRejectsDependencyOrderWhenDependencyIsNotEarlier()
+    {
+        var issues = _validator.Validate(
+            new GeneratorPlanDraft
+            {
+                Title = "Plan",
+                Goal = "Goal",
+                Steps =
+                {
+                    new GeneratorPlanDraftStep { Order = 1, ModuleId = "world/map/v1", ConfigJson = "{}" },
+                    new GeneratorPlanDraftStep { Order = 2, ModuleId = "core/base/v1", ConfigJson = "{}" }
+                }
+            },
+            new[] { Module("core/base/v1"), Module("world/map/v1", dependenciesJson: "[\"core/base/v1\"]") },
+            new GeneratorPlanDraftRequest("Plan", "Goal", "Brief"));
+
+        Assert.Contains(issues, issue => issue.Code == "plan.dependency.order" && issue.Target == "world/map/v1");
+    }
+
+    [Fact]
     public void ValidatorRejectsRawExecutionCodeFields()
     {
         var issues = _validator.Validate(

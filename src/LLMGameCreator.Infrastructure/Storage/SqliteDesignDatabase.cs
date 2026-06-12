@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using LLMGameCreator.Application.Design;
 using Microsoft.Data.Sqlite;
 
@@ -314,9 +315,51 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
         return await QueryAsync("SELECT * FROM generator_plans ORDER BY updated_utc DESC, title, id;", ReadPlan, cancellationToken).ConfigureAwait(false);
     }
 
+    public async Task<GeneratorPlanRecord?> GetGeneratorPlanByIdAsync(string planId, CancellationToken cancellationToken)
+    {
+        var rows = await QueryAsync("SELECT * FROM generator_plans WHERE id = $id LIMIT 1;", ReadPlan, cancellationToken, ("$id", planId)).ConfigureAwait(false);
+        return rows.FirstOrDefault();
+    }
+
     public async Task<IReadOnlyList<GeneratorPlanStepRecord>> GetGeneratorPlanStepsAsync(string planId, CancellationToken cancellationToken)
     {
         return await QueryAsync("SELECT * FROM generator_plan_steps WHERE plan_id = $plan_id ORDER BY step_order, module_id;", ReadPlanStep, cancellationToken, ("$plan_id", planId)).ConfigureAwait(false);
+    }
+
+    public async Task<bool> UpdateGeneratorPlanStatusAsync(string planId, string status, string? note, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(planId))
+        {
+            return false;
+        }
+
+        var normalizedStatus = status.Trim().ToLowerInvariant();
+        if (!IsAllowedPlanStatus(normalizedStatus))
+        {
+            throw new ArgumentException($"Unsupported generator plan status: {status}", nameof(status));
+        }
+
+        var existing = await GetGeneratorPlanByIdAsync(planId, cancellationToken).ConfigureAwait(false);
+        if (existing == null)
+        {
+            return false;
+        }
+
+        var now = DateTimeOffset.UtcNow;
+        var metadataJson = BuildStatusMetadataJson(existing.MetadataJson, normalizedStatus, note, now);
+        var affected = await ExecuteInitializedNonQueryAsync("""
+        UPDATE generator_plans
+        SET status = $status,
+            metadata_json = $metadata_json,
+            updated_utc = $updated_utc
+        WHERE id = $id;
+        """, cancellationToken,
+        ("$id", planId),
+        ("$status", normalizedStatus),
+        ("$metadata_json", metadataJson),
+        ("$updated_utc", now.ToString("O"))).ConfigureAwait(false);
+
+        return affected > 0;
     }
 
     private SqliteConnection CreateConnection()
@@ -344,6 +387,16 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
         await using var connection = CreateConnection();
         await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
         await ExecuteAsync(connection, null, sql, cancellationToken, parameters).ConfigureAwait(false);
+    }
+
+    private async Task<int> ExecuteInitializedNonQueryAsync(string sql, CancellationToken cancellationToken, params (string Name, object? Value)[] parameters)
+    {
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
+        await using var command = connection.CreateCommand();
+        command.CommandText = sql;
+        AddParameters(command, parameters);
+        return await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
     }
 
     private static async Task ExecuteAsync(SqliteConnection connection, System.Data.Common.DbTransaction? transaction, string sql, CancellationToken cancellationToken, params (string Name, object? Value)[] parameters)
@@ -378,6 +431,43 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
         {
             command.Parameters.AddWithValue(parameter.Name, parameter.Value ?? DBNull.Value);
         }
+    }
+
+    private static bool IsAllowedPlanStatus(string status)
+    {
+        return status is "draft" or "approved" or "rejected" or "archived";
+    }
+
+    private static string BuildStatusMetadataJson(string metadataJson, string status, string? note, DateTimeOffset updatedUtc)
+    {
+        JsonObject root;
+        try
+        {
+            root = JsonNode.Parse(string.IsNullOrWhiteSpace(metadataJson) ? "{}" : metadataJson)?.AsObject() ?? new JsonObject();
+        }
+        catch (JsonException)
+        {
+            root = new JsonObject
+            {
+                ["previousMetadataJson"] = metadataJson
+            };
+        }
+
+        var history = root["lifecycleHistory"] as JsonArray;
+        if (history == null)
+        {
+            history = new JsonArray();
+            root["lifecycleHistory"] = history;
+        }
+
+        history.Add(new JsonObject
+        {
+            ["status"] = status,
+            ["note"] = string.IsNullOrWhiteSpace(note) ? null : note.Trim(),
+            ["updatedUtc"] = updatedUtc.ToString("O")
+        });
+
+        return root.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
     }
 
     private static async Task<int> GetUserVersionAsync(SqliteConnection connection, CancellationToken cancellationToken)

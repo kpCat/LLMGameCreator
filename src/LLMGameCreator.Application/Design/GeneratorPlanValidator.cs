@@ -48,6 +48,7 @@ public sealed class GeneratorPlanValidator
         }
 
         var selectedModuleIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var selectedModuleOrders = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         var seenOrders = new HashSet<int>();
 
         foreach (var step in plan.Steps)
@@ -80,6 +81,10 @@ public sealed class GeneratorPlanValidator
             {
                 Add(issues, "warning", "plan.module_id.duplicate", $"Module id is selected more than once: {step.ModuleId}", step.ModuleId);
             }
+            else
+            {
+                selectedModuleOrders[step.ModuleId] = step.Order;
+            }
 
             CheckJson(step, issues);
             CheckCompatibility(module, request.RuntimeTarget, "runtime target", "plan.runtime_target.incompatible", module.RuntimeTargetsJson, issues);
@@ -103,6 +108,14 @@ public sealed class GeneratorPlanValidator
                 if (!selectedModuleIds.Contains(requiredDependency))
                 {
                     Add(issues, "error", "plan.dependency.missing", $"Required dependency is not included in the plan: {requiredDependency}", step.ModuleId);
+                    continue;
+                }
+
+                if (selectedModuleOrders.TryGetValue(requiredDependency, out var dependencyOrder)
+                    && selectedModuleOrders.TryGetValue(step.ModuleId, out var dependentOrder)
+                    && dependencyOrder >= dependentOrder)
+                {
+                    Add(issues, "error", "plan.dependency.order", $"Required dependency must appear before dependent module: {requiredDependency}", step.ModuleId);
                 }
             }
         }

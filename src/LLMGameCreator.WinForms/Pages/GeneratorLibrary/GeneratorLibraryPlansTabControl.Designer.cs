@@ -26,6 +26,10 @@ namespace LLMGameCreator.WinForms.Pages
         private FlowLayoutPanel _toolbarPanel;
         private Button _createButton;
         private Button _refreshButton;
+        private Button _revalidateButton;
+        private Button _approveButton;
+        private Button _rejectButton;
+        private Button _archiveButton;
         private Label _statusLabel;
         private TabControl _detailsTabs;
         private TabPage _plansPage;
@@ -75,6 +79,10 @@ namespace LLMGameCreator.WinForms.Pages
             this._toolbarPanel = new FlowLayoutPanel();
             this._createButton = new Button();
             this._refreshButton = new Button();
+            this._revalidateButton = new Button();
+            this._approveButton = new Button();
+            this._rejectButton = new Button();
+            this._archiveButton = new Button();
             this._statusLabel = new Label();
             this._detailsTabs = new TabControl();
             this._plansPage = new TabPage();
@@ -149,7 +157,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 68F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
             this._inputTable.Size = new Size(306, 396);
             this._inputTable.TabIndex = 0;
@@ -181,12 +189,17 @@ namespace LLMGameCreator.WinForms.Pages
             // 
             // _toolbarPanel
             // 
+            this._toolbarPanel.AutoScroll = true;
             this._toolbarPanel.Controls.Add(this._createButton);
             this._toolbarPanel.Controls.Add(this._refreshButton);
+            this._toolbarPanel.Controls.Add(this._revalidateButton);
+            this._toolbarPanel.Controls.Add(this._approveButton);
+            this._toolbarPanel.Controls.Add(this._rejectButton);
+            this._toolbarPanel.Controls.Add(this._archiveButton);
             this._toolbarPanel.Dock = DockStyle.Fill;
-            this._toolbarPanel.Location = new Point(3, 335);
+            this._toolbarPanel.Location = new Point(3, 303);
             this._toolbarPanel.Name = "_toolbarPanel";
-            this._toolbarPanel.Size = new Size(300, 30);
+            this._toolbarPanel.Size = new Size(300, 62);
             this._toolbarPanel.TabIndex = 12;
             this._inputTable.SetColumnSpan(this._toolbarPanel, 2);
             this._createButton.Location = new Point(3, 3);
@@ -201,6 +214,30 @@ namespace LLMGameCreator.WinForms.Pages
             this._refreshButton.TabIndex = 1;
             this._refreshButton.Text = "Refresh Plans";
             this._refreshButton.UseVisualStyleBackColor = true;
+            this._revalidateButton.Location = new Point(245, 3);
+            this._revalidateButton.Name = "_revalidateButton";
+            this._revalidateButton.Size = new Size(120, 26);
+            this._revalidateButton.TabIndex = 2;
+            this._revalidateButton.Text = "Revalidate Selected";
+            this._revalidateButton.UseVisualStyleBackColor = true;
+            this._approveButton.Location = new Point(371, 3);
+            this._approveButton.Name = "_approveButton";
+            this._approveButton.Size = new Size(110, 26);
+            this._approveButton.TabIndex = 3;
+            this._approveButton.Text = "Approve Selected";
+            this._approveButton.UseVisualStyleBackColor = true;
+            this._rejectButton.Location = new Point(487, 3);
+            this._rejectButton.Name = "_rejectButton";
+            this._rejectButton.Size = new Size(100, 26);
+            this._rejectButton.TabIndex = 4;
+            this._rejectButton.Text = "Reject Selected";
+            this._rejectButton.UseVisualStyleBackColor = true;
+            this._archiveButton.Location = new Point(593, 3);
+            this._archiveButton.Name = "_archiveButton";
+            this._archiveButton.Size = new Size(110, 26);
+            this._archiveButton.TabIndex = 5;
+            this._archiveButton.Text = "Archive Selected";
+            this._archiveButton.UseVisualStyleBackColor = true;
             // 
             // _statusLabel
             // 

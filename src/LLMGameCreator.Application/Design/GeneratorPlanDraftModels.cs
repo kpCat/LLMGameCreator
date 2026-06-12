@@ -20,6 +20,18 @@ public sealed record GeneratorPlanDraftResult(
     string RawLlmResponse,
     bool Saved);
 
+public sealed record GeneratorPlanReviewResult(
+    GeneratorPlanRecord? Plan,
+    IReadOnlyList<GeneratorPlanStepRecord> Steps,
+    IReadOnlyList<GeneratorPlanValidationIssue> ValidationIssues,
+    bool CanApprove);
+
+public sealed record GeneratorPlanStatusUpdateResult(
+    GeneratorPlanRecord? Plan,
+    IReadOnlyList<GeneratorPlanValidationIssue> ValidationIssues,
+    bool Updated,
+    string Message);
+
 public sealed record GeneratorPlanValidationIssue(
     string Severity,
     string Code,

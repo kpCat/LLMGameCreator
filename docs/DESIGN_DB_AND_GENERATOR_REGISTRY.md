@@ -44,7 +44,7 @@ prompt_context_packs
 import_issues
 ```
 
-The initial implementation focuses on deterministic initialization, knowledge/decision/constraint upserts, generator module registry imports, import diagnostics, and query APIs for modules, capabilities, and issues.
+The implementation focuses on deterministic initialization, knowledge/decision/constraint upserts, generator module registry imports, import diagnostics, query APIs for modules/capabilities/issues, registry-backed draft `GeneratorPlan` creation, and saved plan review/lifecycle status updates.
 
 ## Generator Library Import
 
@@ -112,15 +112,42 @@ Integrity validation is not the same as manifest import:
 - Import may still run when integrity errors exist, but the Import tab warns that the import may be incomplete.
 - Neither path executes Lua, loads dynamic code, changes GamePackage format, or generates Unity/codegen output.
 
+## Generator Plans
+
+Registry-backed draft `GeneratorPlan` creation is implemented for editor-side planning. The LLM may propose a draft plan from imported registry metadata and compact design context, but C# owns strict JSON parsing, validation, storage, and lifecycle status updates.
+
+Saved plans can be reviewed in the WinForms `Plans` tab:
+
+```text
+draft -> approved
+draft -> rejected
+draft -> archived
+```
+
+Approval is deterministic and human-triggered. Before a plan is approved, the saved plan is rebuilt from `generator_plans` and `generator_plan_steps`, revalidated against the current imported registry, and rejected if validation has errors. Warnings do not block approval.
+
+Approved plans are not executed. Approval only means the saved plan was human-reviewed and currently valid enough for a future deterministic execution/apply pipeline.
+
+Plan creation, revalidation, approval, rejection, and archiving intentionally do not:
+
+```text
+execute Lua
+execute generator modules
+run code generation
+change GamePackage format
+mutate GamePackage content
+generate Unity code
+```
+
 ## Future Flow
 
 This baseline supports the planned LLM role:
 
 ```text
-design knowledge -> capability selection -> GeneratorPlan -> validated artifacts -> GamePackage/runtime adapters
+design knowledge -> capability selection -> GeneratorPlan -> approval -> deterministic execution/apply pipeline -> validated artifacts -> GamePackage/runtime adapters
 ```
 
-The next goal should let the LLM choose imported capabilities and produce a `GeneratorPlan` record. Lua execution, Unity/codegen IR, and real generator execution remain future work.
+Lua execution, Unity/codegen IR, real generator execution, and applying approved plans to `GamePackage` remain future work.
 
 ## WinForms UI
 
@@ -132,6 +159,7 @@ GeneratorLibraryImportTabControl
 GeneratorLibraryModulesTabControl
 GeneratorLibraryCapabilitiesTabControl
 GeneratorLibraryIssuesTabControl
+GeneratorLibraryPlansTabControl
 ```
 
 The parent page owns only the tab layout and service coordination. Each tab owns its own layout and UI events.

@@ -1,0 +1,194 @@
+{
+  "id": "batch/city_builder/v1",
+  "version": "0.1.0",
+  "batch": "016",
+  "title": "City-builder / simulation basics",
+  "purpose": "Batch 016 manifest for deterministic city-builder and simulation baseline IR covering citizen needs, job configuration, compact building catalogs, service coverage metadata, zones, economy hooks and simulation tick-mode configuration.",
+  "files": [
+    "lua/simulation/citizen_needs.lua",
+    "lua/simulation/job_system_config.lua",
+    "lua/simulation/building_catalog.lua",
+    "lua/simulation/service_coverage.lua",
+    "docs/lua/city_builder_simulation.md",
+    "manifests/city_builder.manifest.json",
+    "tests/city_builder_examples.lua",
+    "BATCH_016_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "simulation/citizen_needs/v1",
+      "path": "lua/simulation/citizen_needs.lua",
+      "category": "simulation",
+      "capabilities": [
+        "city_builder.citizen_needs.generate",
+        "city_builder.needs.validate",
+        "simulation.tick_metadata"
+      ],
+      "depends_on": [
+        "core/id/v1",
+        "core/schema/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "unity2d",
+        "unity3d",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "simulation/job_system_config/v1",
+      "path": "lua/simulation/job_system_config.lua",
+      "category": "simulation",
+      "capabilities": [
+        "city_builder.jobs.configure",
+        "city_builder.workplaces.configure",
+        "simulation.tick_metadata"
+      ],
+      "depends_on": [
+        "simulation/building_catalog/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "unity2d",
+        "unity3d",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "simulation/building_catalog/v1",
+      "path": "lua/simulation/building_catalog.lua",
+      "category": "simulation",
+      "capabilities": [
+        "city_builder.buildings.generate",
+        "city_builder.zones.configure",
+        "city_builder.economy_hooks"
+      ],
+      "depends_on": [
+        "core/id/v1",
+        "item/item_schema/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "unity2d",
+        "unity3d",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "simulation/service_coverage/v1",
+      "path": "lua/simulation/service_coverage.lua",
+      "category": "simulation",
+      "capabilities": [
+        "city_builder.service_coverage.generate",
+        "city_builder.services.validate",
+        "simulation.coverage_metadata"
+      ],
+      "depends_on": [
+        "simulation/building_catalog/v1",
+        "simulation/citizen_needs/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "unity2d",
+        "unity3d",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "editor",
+    "simulation",
+    "unity2d",
+    "unity3d",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "city_builder_contract": "Generated data is deterministic JSON-serializable IR/config for city-builder planning and validation.",
+    "simulation_boundary": "This batch defines tick metadata and hooks but does not run a full live simulation engine.",
+    "backfill_boundary": "Batch 016 does not depend on Batch 017 and does not modify UI IR files."
+  }
+}
