@@ -1,0 +1,240 @@
+{
+  "id": "batch/ui_ir/v1",
+  "version": "0.1.0",
+  "batch": "017",
+  "title": "UI IR",
+  "purpose": "Batch 017 manifest for deterministic renderer-agnostic UI IR covering HUD layouts, minimap/global map config, inventory UI and quest journal/notes UI for future adapters.",
+  "files": [
+    "lua/ui/ui_schema.lua",
+    "lua/ui/hud_layout.lua",
+    "lua/ui/minimap_config.lua",
+    "lua/ui/inventory_ui.lua",
+    "lua/ui/quest_journal_ui.lua",
+    "docs/lua/ui_ir.md",
+    "manifests/ui_ir.manifest.json",
+    "tests/ui_ir_examples.lua",
+    "BATCH_017_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "ui/ui_schema/v1",
+      "path": "lua/ui/ui_schema.lua",
+      "category": "ui",
+      "capabilities": [
+        "ui.schema.validate",
+        "ui.element.validate",
+        "ui.binding.reference",
+        "ui.action.reference"
+      ],
+      "depends_on": [
+        "core/id/v1",
+        "core/schema/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "ui/hud_layout/v1",
+      "path": "lua/ui/hud_layout.lua",
+      "category": "ui",
+      "capabilities": [
+        "ui.hud.generate",
+        "ui.status_bar.generate",
+        "ui.stat_bar.generate",
+        "ui.action_slots.generate",
+        "ui.build_menu.layout"
+      ],
+      "depends_on": [
+        "ui/ui_schema/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "ui/minimap_config/v1",
+      "path": "lua/ui/minimap_config.lua",
+      "category": "ui",
+      "capabilities": [
+        "ui.minimap.generate",
+        "ui.global_map.generate",
+        "ui.map_layers.configure",
+        "ui.map_markers.configure"
+      ],
+      "depends_on": [
+        "ui/ui_schema/v1",
+        "world/world_blueprint/v1",
+        "world/region_graph/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "ui/inventory_ui/v1",
+      "path": "lua/ui/inventory_ui.lua",
+      "category": "ui",
+      "capabilities": [
+        "ui.inventory.generate",
+        "ui.inventory_slots.configure",
+        "ui.equipment_slots.configure",
+        "ui.item_details.configure"
+      ],
+      "depends_on": [
+        "ui/ui_schema/v1",
+        "item/item_schema/v1",
+        "item/inventory_rules/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "ui/quest_journal_ui/v1",
+      "path": "lua/ui/quest_journal_ui.lua",
+      "category": "ui",
+      "capabilities": [
+        "ui.quest_journal.generate",
+        "ui.quest_objectives.configure",
+        "ui.notes.generate",
+        "ui.codex.generate"
+      ],
+      "depends_on": [
+        "ui/ui_schema/v1",
+        "quest/quest_schema/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "editor",
+    "unity2d",
+    "unity3d",
+    "unity_ui_ir",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "ui_ir_contract": "UI output is deterministic renderer-agnostic JSON-serializable IR/config, not a live renderer or Unity object graph.",
+    "binding_contract": "Bindings and actions are lowercase reference ids for future host/runtime adapters.",
+    "adapter_contract": "Future Unity adapters may consume this IR without direct Unity coupling in Lua."
+  }
+}
