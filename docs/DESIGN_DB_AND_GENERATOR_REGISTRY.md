@@ -166,6 +166,37 @@ call an LLM
 
 Before saving an artifact, the service requires the plan status to be `approved` and revalidates the plan against the current registry. Plans with current validation errors do not create staged artifacts. Validation results for a saved preview are stored as Design DB rows for audit and future execution/apply pipeline work.
 
+## GamePackage Patch Artifacts
+
+The first safe apply layer is represented by generated artifacts with kind:
+
+```text
+game_package_patch_v1
+```
+
+Patch artifacts are strict data-only contracts. They can be created from `generator_plan_preview` artifacts only when a preview step config contains an explicit `package_operations` array. The patch service extracts those operations deterministically from config JSON; it does not infer operations from module ids, module paths, Lua source, or generator metadata.
+
+Supported operations in schema version 1 are intentionally small:
+
+- `upsert_tile_prototype`
+- `upsert_map`
+- `upsert_entity_prototype`
+- `update_manifest`
+
+Delete operations, arbitrary JSON Patch/RFC6902 paths, reflection-based mutation, nested object merge, script edits, asset file writes, Lua changes, map chunks, and tile-grid edits are not supported by this layer.
+
+Dry-run loads the current in-memory `GamePackage`, deep-clones it, applies the patch to the clone only, validates the clone with the existing package validator, and returns deterministic readable diff lines. Dry-run does not save `package.json` and does not mutate the current package.
+
+Apply is explicit and human-triggered through the application service or the WinForms `Artifacts` tab. Apply runs dry-run first, creates a rollback snapshot before mutation/save, applies the same data-only operations, validates after apply, then saves through the existing package save path only when validation passes.
+
+Rollback snapshots are stored under:
+
+```text
+<projectFolder>/.llmgc/backups/package-YYYYMMDD-HHMMSS-fff.json
+```
+
+Apply writes an audit generated artifact with kind `game_package_patch_apply_result_v1` and validation/audit rows in the Design DB. The layer still does not execute Lua, execute generator modules, call an LLM, run Unity, run codegen, or change the `GamePackage` JSON format.
+
 ## Future Flow
 
 This baseline supports the planned LLM role:
@@ -187,6 +218,7 @@ GeneratorLibraryModulesTabControl
 GeneratorLibraryCapabilitiesTabControl
 GeneratorLibraryIssuesTabControl
 GeneratorLibraryPlansTabControl
+GeneratorLibraryArtifactsTabControl
 ```
 
 The parent page owns only the tab layout and service coordination. Each tab owns its own layout and UI events.

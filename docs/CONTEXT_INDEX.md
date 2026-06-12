@@ -80,6 +80,7 @@ Current style:
 - Do not execute Lua, load arbitrary code, generate Unity code, or change GamePackage format.
 - Unknown manifest fields go to `metadata_json`.
 - WinForms tabbed pages split each tab into a dedicated `UserControl`.
+- Data-only GamePackage apply work uses `game_package_patch_v1` generated artifacts in the Design DB. Read `src/LLMGameCreator.Application/Design/GamePackagePatchService.cs`, `docs/DESIGN_DB_AND_GENERATOR_REGISTRY.md`, current package services, and package validators; do not add Lua/module/LLM/Unity/codegen execution.
 
 ### Runtime command pattern
 

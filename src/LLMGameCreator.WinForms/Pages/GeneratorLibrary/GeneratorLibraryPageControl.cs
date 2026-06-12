@@ -14,6 +14,8 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
     private readonly IGeneratorPlanRepository? _planRepository;
     private readonly IGeneratorPlanReviewService? _planReviewService;
     private readonly IGeneratorPlanPreviewService? _planPreviewService;
+    private readonly IGeneratedArtifactRepository? _artifactRepository;
+    private readonly IGamePackagePatchService? _patchService;
 
     public GeneratorLibraryPageControl()
     {
@@ -29,7 +31,9 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         IGeneratorPlanDraftService planDraftService,
         IGeneratorPlanRepository planRepository,
         IGeneratorPlanReviewService planReviewService,
-        IGeneratorPlanPreviewService planPreviewService)
+        IGeneratorPlanPreviewService planPreviewService,
+        IGeneratedArtifactRepository artifactRepository,
+        IGamePackagePatchService patchService)
     {
         _currentGamePackageService = currentGamePackageService;
         _databaseInitializer = databaseInitializer;
@@ -40,8 +44,11 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         _planRepository = planRepository;
         _planReviewService = planReviewService;
         _planPreviewService = planPreviewService;
+        _artifactRepository = artifactRepository;
+        _patchService = patchService;
         InitializeComponent();
         _plansTab.Configure(_planDraftService, _planRepository, _planReviewService, _planPreviewService);
+        _artifactsTab.Configure(_artifactRepository, _patchService);
         WireEvents();
     }
 
@@ -166,6 +173,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         _capabilitiesTab.SetCapabilities(capabilities);
         _issuesTab.SetIssues(issues);
         await _plansTab.RefreshPlansAsync().ConfigureAwait(true);
+        await _artifactsTab.RefreshArtifactsAsync().ConfigureAwait(true);
     }
 
     private string ResolveDatabasePath()

@@ -51,6 +51,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IGeneratorPlanDraftService, GeneratorPlanDraftService>(Reuse.Singleton);
         _container.Register<IGeneratorPlanReviewService, GeneratorPlanReviewService>(Reuse.Singleton);
         _container.Register<IGeneratorPlanPreviewService, GeneratorPlanPreviewService>(Reuse.Singleton);
+        _container.Register<IGamePackagePatchService, GamePackagePatchService>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
@@ -95,7 +96,9 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IGeneratorPlanDraftService>(),
             resolver.Resolve<IGeneratorPlanRepository>(),
             resolver.Resolve<IGeneratorPlanReviewService>(),
-            resolver.Resolve<IGeneratorPlanPreviewService>()), Reuse.Singleton);
+            resolver.Resolve<IGeneratorPlanPreviewService>(),
+            resolver.Resolve<IGeneratedArtifactRepository>(),
+            resolver.Resolve<IGamePackagePatchService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

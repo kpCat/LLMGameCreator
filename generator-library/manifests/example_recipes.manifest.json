@@ -1,0 +1,232 @@
+{
+  "id": "batch/example_recipes/v1",
+  "version": "0.1.0",
+  "batch": "021",
+  "title": "Example game recipes",
+  "purpose": "Batch 021 final roadmap manifest for compact example game recipes that demonstrate selected capabilities, module selections, generator plan metadata, expected artifacts, validation plans and context pack hints without executing modules or generating full games.",
+  "files": [
+    "examples/dark_fantasy_village_recipe.lua",
+    "examples/factorio_like_alchemy_recipe.lua",
+    "examples/open_world_rpg_recipe.lua",
+    "examples/city_builder_frontier_recipe.lua",
+    "examples/space_quest_recipe.lua",
+    "docs/lua/example_game_recipes.md",
+    "manifests/example_recipes.manifest.json",
+    "BATCH_021_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "examples/dark_fantasy_village_recipe/v1",
+      "path": "examples/dark_fantasy_village_recipe.lua",
+      "category": "examples",
+      "capabilities": [
+        "examples.recipe.dark_fantasy_village"
+      ],
+      "depends_on": [
+        "world/world_blueprint/v1",
+        "world/region_graph/v1",
+        "npc/npc_archetype_generator/v1",
+        "dialogue/dialogue_schema/v1",
+        "quest/quest_schema/v1",
+        "combat/combat_schema/v1",
+        "ui/hud_layout/v1",
+        "validation/world_validation/v1",
+        "generation/artifact_manifest/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "validation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "turn_based",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "examples/factorio_like_alchemy_recipe/v1",
+      "path": "examples/factorio_like_alchemy_recipe.lua",
+      "category": "examples",
+      "capabilities": [
+        "examples.recipe.factorio_like_alchemy"
+      ],
+      "depends_on": [
+        "automation/recipe_graph/v1",
+        "automation/machine_catalog/v1",
+        "automation/conveyor_grid/v1",
+        "automation/power_network/v1",
+        "ui/hud_layout/v1",
+        "generation/artifact_manifest/v1",
+        "generation/dependency_sort/v1",
+        "validation/module_contract_validation/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "validation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "examples/open_world_rpg_recipe/v1",
+      "path": "examples/open_world_rpg_recipe.lua",
+      "category": "examples",
+      "capabilities": [
+        "examples.recipe.open_world_rpg"
+      ],
+      "depends_on": [
+        "world/world_blueprint/v1",
+        "world/region_graph/v1",
+        "world/biome_catalog/v1",
+        "world/reachability/v1",
+        "npc/npc_archetype_generator/v1",
+        "npc/schedule_generator/v1",
+        "quest/quest_schema/v1",
+        "dialogue/dialogue_schema/v1",
+        "ui/minimap_config/v1",
+        "validation/world_validation/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "validation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "examples/city_builder_frontier_recipe/v1",
+      "path": "examples/city_builder_frontier_recipe.lua",
+      "category": "examples",
+      "capabilities": [
+        "examples.recipe.city_builder_frontier"
+      ],
+      "depends_on": [
+        "simulation/citizen_needs/v1",
+        "simulation/job_system_config/v1",
+        "simulation/building_catalog/v1",
+        "simulation/service_coverage/v1",
+        "ui/hud_layout/v1",
+        "validation/world_validation/v1",
+        "generation/context_pack_plan/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "validation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "examples/space_quest_recipe/v1",
+      "path": "examples/space_quest_recipe.lua",
+      "category": "examples",
+      "capabilities": [
+        "examples.recipe.space_quest"
+      ],
+      "depends_on": [
+        "world/world_blueprint/v1",
+        "npc/npc_archetype_generator/v1",
+        "dialogue/fact_based_dialogue/v1",
+        "quest/simple_investigation/v1",
+        "item/item_schema/v1",
+        "progression/progress_track/v1",
+        "ui/quest_journal_ui/v1",
+        "unity/unity_runtime_plan/v1",
+        "validation/quest_validation/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "simulation",
+        "validation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "editor",
+    "simulation",
+    "validation",
+    "codegen_ir",
+    "unity_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "recipe_contract": "Each recipe file returns a Lua table with manifest, recipe metadata and compatibility helpers; recipe data is JSON-serializable.",
+    "boundary_contract": "Recipes are compact orchestration/config examples and do not execute modules, generate games, integrate Unity, generate C# source, compile, load files or call external commands.",
+    "final_roadmap_batch": "Batch 021 is the final Lua batch in the current roadmap; no Batch 022 is generated."
+  }
+}
