@@ -1,0 +1,89 @@
+{
+  "id": "batch/dialogue_generation/v1",
+  "version": "0.1.0",
+  "batch": "009",
+  "title": "Dialogue generation foundation",
+  "description": "Static, procedural, fact-based and dialogue-combat generator modules for compact dialogue IR.",
+  "files": [
+    "lua/dialogue/dialogue_schema.lua",
+    "lua/dialogue/procedural_npc_dialogue.lua",
+    "lua/dialogue/fact_based_dialogue.lua",
+    "lua/dialogue/dialogue_combat.lua",
+    "docs/lua/dialogue_generation.md",
+    "tests/dialogue_generation_examples.lua",
+    "BATCH_009_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "dialogue/dialogue_schema/v1",
+      "path": "lua/dialogue/dialogue_schema.lua",
+      "capabilities": [
+        "dialogue.schema.define",
+        "dialogue.static_graph.normalize",
+        "dialogue.choice.validate"
+      ]
+    },
+    {
+      "id": "dialogue/procedural_npc_dialogue/v1",
+      "path": "lua/dialogue/procedural_npc_dialogue.lua",
+      "capabilities": [
+        "dialogue.procedural_npc.generate",
+        "dialogue.fact.topic_nodes",
+        "npc.dialogue.seed"
+      ]
+    },
+    {
+      "id": "dialogue/fact_based_dialogue/v1",
+      "path": "lua/dialogue/fact_based_dialogue.lua",
+      "capabilities": [
+        "dialogue.fact_based.generate",
+        "dialogue.quest_state.branch",
+        "dialogue.conditions.effects"
+      ]
+    },
+    {
+      "id": "dialogue/dialogue_combat/v1",
+      "path": "lua/dialogue/dialogue_combat.lua",
+      "capabilities": [
+        "dialogue.combat.encounter_ir",
+        "dialogue.choice.track_effects",
+        "combat.dialogue_bridge"
+      ]
+    }
+  ],
+  "supports": {
+    "turn_modes": [
+      "realtime",
+      "turn_based",
+      "mixed",
+      "paused_planning"
+    ],
+    "combat_modes": [
+      "none",
+      "dialogue_combat",
+      "hybrid"
+    ],
+    "runtime_targets": [
+      "debug",
+      "unity2d",
+      "unity_ui_ir"
+    ]
+  },
+  "global_restrictions": {
+    "lua_version": "5.4-compatible",
+    "external_dependencies": false,
+    "forbidden_apis": [
+      "io",
+      "os",
+      "debug",
+      "package",
+      "load",
+      "loadfile",
+      "dofile",
+      "require",
+      "math.random"
+    ],
+    "deterministic": true,
+    "json_serializable_outputs": true
+  }
+}
