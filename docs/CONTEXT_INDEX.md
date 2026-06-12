@@ -19,6 +19,7 @@ Read this file after `AGENTS.md` when a task touches code. This file is a routin
 | `src/LLMGameCreator.Infrastructure/` | JSON storage, settings persistence, file logging. No UI logic. | Storage, serialization, app settings, logging. |
 | `src/LLMGameCreator.WinForms/` | Editor shell and pages. Designer layout in `*.Designer.cs`, logic in `*.cs`. | UI page work, preview page, settings/projects/assets pages. |
 | `tests/LLMGameCreator.Tests/` | Smoke/contract/regression tests. Keep tests useful and small. | Any behavior/validator/runtime change. |
+| `generator-library/` | Lua generator/capability library assets and manifests. Imported as metadata only; Lua is not executed by the registry. | Generator library, capability registry, manifest import tasks. |
 | `samples/minimal-map-game/` | Minimal GamePackage sample. Should stay valid. | Package, validation, runtime, Lua/asset examples. |
 | `templates/lua-stdlib/` | Shared Lua helper library baseline. | Lua authoring/sandbox/API tasks. |
 | `templates/lua-blueprints/` | Reusable Lua blueprint examples for LLM-assisted game creation. | Lua generation task design. |
@@ -45,6 +46,8 @@ Current style:
 
 Primary files:
 - `src/LLMGameCreator.Infrastructure/Storage/JsonGamePackageRepository.cs`
+- `src/LLMGameCreator.Infrastructure/Storage/SqliteDesignDatabase.cs`
+- `src/LLMGameCreator.Infrastructure/Storage/SqliteDesignSchema.cs`
 - `src/LLMGameCreator.Infrastructure/Storage/JsonAppSettingsRepository.cs`
 - `src/LLMGameCreator.Application/Abstractions/Repositories.cs`
 - `src/LLMGameCreator.GamePackage/GamePackageDefinition.cs`
@@ -57,6 +60,23 @@ Current style:
 - `JsonStringEnumConverter` for enum strings.
 - `package.json` is currently the loaded source for `GamePackageDefinition`.
 - Do not introduce additional package files without an explicit task.
+- Design DB is editor-side SQLite under `.llmgc/design.db`; it stores design and generator registry metadata, not runtime package content.
+
+### Generator library registry pattern
+
+Primary files:
+- `docs/DESIGN_DB_AND_GENERATOR_REGISTRY.md`
+- `src/LLMGameCreator.Application/Design/`
+- `src/LLMGameCreator.Infrastructure/Storage/SqliteDesignDatabase.cs`
+- `src/LLMGameCreator.WinForms/Pages/GeneratorLibrary/`
+- `tests/LLMGameCreator.Tests/Design/GeneratorLibraryRegistryTests.cs`
+
+Current style:
+- Import only `generator-library/manifests/*.manifest.json`.
+- Store module/capability metadata, declared paths, and diagnostics.
+- Do not execute Lua, load arbitrary code, generate Unity code, or change GamePackage format.
+- Unknown manifest fields go to `metadata_json`.
+- WinForms tabbed pages split each tab into a dedicated `UserControl`.
 
 ### Runtime command pattern
 

@@ -1,5 +1,6 @@
 using DryIoc;
 using LLMGameCreator.Application.Abstractions;
+using LLMGameCreator.Application.Design;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
@@ -38,6 +39,11 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<ILoggerFactory>(_ => _loggerFactory, Reuse.Singleton);
         _container.RegisterDelegate<IAppSettingsRepository>(_ => new JsonAppSettingsRepository(settingsPath), Reuse.Singleton);
         _container.Register<IGamePackageRepository, JsonGamePackageRepository>(Reuse.Singleton);
+        _container.Register<SqliteDesignDatabase>(Reuse.Singleton);
+        _container.RegisterDelegate<IDesignDatabaseInitializer>(resolver => resolver.Resolve<SqliteDesignDatabase>(), Reuse.Singleton);
+        _container.RegisterDelegate<IDesignKnowledgeRepository>(resolver => resolver.Resolve<SqliteDesignDatabase>(), Reuse.Singleton);
+        _container.RegisterDelegate<IGeneratorLibraryRegistry>(resolver => resolver.Resolve<SqliteDesignDatabase>(), Reuse.Singleton);
+        _container.Register<IGeneratorLibraryImporter, GeneratorLibraryImportService>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
@@ -73,6 +79,12 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ICurrentGamePackageService>(),
             resolver.Resolve<IGameRuntime>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<GeneratorLibraryPageControl>(resolver => new GeneratorLibraryPageControl(
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<IDesignDatabaseInitializer>(),
+            resolver.Resolve<IGeneratorLibraryImporter>(),
+            resolver.Resolve<IGeneratorLibraryRegistry>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -85,6 +97,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ProjectsPageControl>(),
             resolver.Resolve<GenerationPageControl>(),
             resolver.Resolve<ValidationPageControl>(),
+            resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),
             resolver.Resolve<AssetsPageControl>(),
             resolver.Resolve<SettingsPageControl>()
