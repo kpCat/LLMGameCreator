@@ -1,0 +1,207 @@
+{
+  "id": "batch/npc_pathfinding/v1",
+  "version": "0.1.0",
+  "batch": "014",
+  "title": "NPC, schedule and pathfinding",
+  "purpose": "Batch 014 manifest for NPC archetype generation, NPC schedules, pathfinding configuration and faction-role modeling with realtime and turn-based compatibility.",
+  "files": [
+    "lua/npc/npc_archetype_generator.lua",
+    "lua/npc/schedule_generator.lua",
+    "lua/pathfinding/pathfinding_config.lua",
+    "lua/faction/faction_model.lua",
+    "docs/lua/npc_schedule_pathfinding.md",
+    "manifests/npc_pathfinding.manifest.json",
+    "tests/npc_pathfinding_examples.lua",
+    "BATCH_014_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "npc/npc_archetype_generator/v1",
+      "path": "lua/npc/npc_archetype_generator.lua",
+      "category": "npc",
+      "capabilities": [
+        "npc.archetype.generate",
+        "npc.behavior.static",
+        "npc.behavior.walking",
+        "npc.behavior.scheduled",
+        "faction.role.reference"
+      ],
+      "depends_on": [
+        "entity/entity_factory/v1",
+        "interaction/talk_to_npc/v1",
+        "faction/faction_model/v1",
+        "pathfinding/pathfinding_config/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_tilemap",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "npc/schedule_generator/v1",
+      "path": "lua/npc/schedule_generator.lua",
+      "category": "npc",
+      "capabilities": [
+        "npc.schedule.generate",
+        "schedule.time_windows",
+        "pathfinding.goal_reference",
+        "npc.availability.ir"
+      ],
+      "depends_on": [
+        "npc/npc_archetype_generator/v1",
+        "core/time_model/v1",
+        "pathfinding/pathfinding_config/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_tilemap",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "pathfinding/pathfinding_config/v1",
+      "path": "lua/pathfinding/pathfinding_config.lua",
+      "category": "pathfinding",
+      "capabilities": [
+        "pathfinding.config.generate",
+        "pathfinding.dynamic_obstacles",
+        "pathfinding.agent_profile",
+        "world.reachability.reference"
+      ],
+      "depends_on": [
+        "core/grid/v1",
+        "core/coordinates/v1",
+        "world/reachability/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_tilemap",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "faction/faction_model/v1",
+      "path": "lua/faction/faction_model.lua",
+      "category": "faction",
+      "capabilities": [
+        "faction.model.generate",
+        "faction.role.define",
+        "faction.relationship_matrix",
+        "progression.reputation_reference"
+      ],
+      "depends_on": [
+        "progression/progress_track/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "unity_tilemap",
+    "unity_ui_ir",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "npc_contract": "NPC archetypes are compact IR and reference entity, interaction, faction, schedule and pathfinding data by lowercase slash ids.",
+    "schedule_contract": "Schedules describe deterministic time windows and pathfinding goals; they do not run a live simulation.",
+    "pathfinding_contract": "Pathfinding output is configuration IR, not a live path solver.",
+    "faction_contract": "Faction roles and relations are normalized relationship metadata for future dialogue, quest and combat systems."
+  }
+}
