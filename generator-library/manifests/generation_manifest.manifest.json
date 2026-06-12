@@ -1,0 +1,81 @@
+{
+  "id": "manifests/generation_manifest/v1",
+  "version": "0.1.0",
+  "batch": "004",
+  "title": "Capability and generator module manifest helpers",
+  "purpose": "Validate capability manifests, Lua module manifests, and ordered generator plan steps for LLMGameCreator generator-library imports.",
+  "files": [
+    "lua/generation/capability_manifest.lua",
+    "lua/generation/module_manifest.lua",
+    "lua/generation/generator_plan.lua",
+    "docs/lua/capability_and_module_manifests.md",
+    "manifests/generation_manifest.manifest.json",
+    "tests/generation_manifest_examples.lua",
+    "BATCH_004_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "generation/capability_manifest/v1",
+      "path": "lua/generation/capability_manifest.lua",
+      "capabilities": [
+        "generation.capability_manifest.validate",
+        "generation.capability_manifest.normalize",
+        "generation.capability_manifest.index"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "generation/module_manifest/v1",
+      "path": "lua/generation/module_manifest.lua",
+      "capabilities": [
+        "generation.module_manifest.validate",
+        "generation.module_manifest.normalize",
+        "generation.module_manifest.index",
+        "generation.module_manifest.capability_lookup"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "generation/generator_plan/v1",
+      "path": "lua/generation/generator_plan.lua",
+      "capabilities": [
+        "generation.generator_plan.validate",
+        "generation.generator_plan.normalize",
+        "generation.generator_plan.execution_order",
+        "generation.generator_plan.compatibility_check"
+      ],
+      "depends_on": []
+    }
+  ],
+  "supported_runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "simulation",
+    "codegen_ir",
+    "validation",
+    "editor"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "contracts_introduced": [
+    "Capability ids use lowercase dot notation such as world.chunk.generate.",
+    "Module ids use lowercase slash notation such as generation/module_manifest/v1.",
+    "Module dependencies and incompatibilities can reference modules and capabilities separately.",
+    "Generator plans are ordered step arrays; Batch 004 validates that dependencies appear earlier."
+  ],
+  "deterministic": true,
+  "unsafe_features": []
+}
