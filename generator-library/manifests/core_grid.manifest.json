@@ -1,0 +1,116 @@
+{
+  "id": "batch/core_grid/v1",
+  "version": "0.1.0",
+  "batch": "002",
+  "name": "ids_grid_coordinates",
+  "title": "IDs, grid, coordinates",
+  "purpose": "Lowercase slash ID validation, 0-based coordinates, chunk/local coordinate conversion, sparse grids, facing, adjacency, and target disambiguation helpers.",
+  "deterministic": true,
+  "lua_version": "5.4",
+  "files": [
+    "lua/core/id.lua",
+    "lua/core/grid.lua",
+    "lua/core/coordinates.lua",
+    "docs/lua/core_grid_and_ids.md",
+    "manifests/core_grid.manifest.json",
+    "tests/core_grid_examples.lua",
+    "BATCH_002_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "core/id/v1",
+      "path": "lua/core/id.lua",
+      "category": "core",
+      "capabilities": [
+        "core.id.validate",
+        "core.id.build",
+        "core.id.split"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "core/coordinates/v1",
+      "path": "lua/core/coordinates.lua",
+      "category": "core",
+      "capabilities": [
+        "core.coordinates.position2d",
+        "core.coordinates.chunk_local",
+        "core.coordinates.facing",
+        "core.coordinates.adjacency",
+        "core.coordinates.target_disambiguation"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "core/grid/v1",
+      "path": "lua/core/grid.lua",
+      "category": "core",
+      "capabilities": [
+        "core.grid.create",
+        "core.grid.bounds",
+        "core.grid.get_set",
+        "core.grid.sparse_overrides",
+        "core.grid.neighborhood",
+        "core.grid.facing_target"
+      ],
+      "dependencies": []
+    }
+  ],
+  "contracts_introduced": [
+    "lowercase slash IDs",
+    "position2d integer table",
+    "chunk coordinate plus local coordinate conversion",
+    "finite and unbounded sparse grid shape",
+    "same_cell/cardinal_adjacent/diagonal_adjacent/radius/facing_cell target modes",
+    "deterministic target disambiguation result shape"
+  ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "simulation",
+    "codegen_ir"
+  ],
+  "architecture_notes": {
+    "turn_modes": [
+      "realtime",
+      "turn_based",
+      "mixed",
+      "paused_planning"
+    ],
+    "combat_modes": [
+      "none",
+      "realtime",
+      "turn_based",
+      "tactical",
+      "dialogue_combat",
+      "hybrid"
+    ],
+    "ui_modes": [
+      "minimal_hud",
+      "rpg_hud",
+      "automation_hud",
+      "city_builder_ui",
+      "dialogue_focus",
+      "tactical_ui"
+    ],
+    "world_scales": [
+      "single_map",
+      "multi_map",
+      "region",
+      "continent",
+      "planet",
+      "infinite_chunks"
+    ],
+    "note": "Batch 002 is foundational; it provides engine-neutral coordinate, ID, grid, and targeting helpers for later game-domain modules."
+  },
+  "unsafe_features": [],
+  "global_lua_restrictions": {
+    "external_dependencies": false,
+    "direct_random": false,
+    "global_writes": false,
+    "dynamic_loading": false,
+    "filesystem": false,
+    "network": false
+  }
+}
