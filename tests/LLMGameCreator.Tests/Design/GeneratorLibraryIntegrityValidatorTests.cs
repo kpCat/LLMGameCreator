@@ -114,6 +114,33 @@ public sealed class GeneratorLibraryIntegrityValidatorTests
     }
 
     [Fact]
+    public async Task IntegrityValidatorReportsRootLevelTestsLuaLeakage()
+    {
+        using var temp = new TempDirectory();
+        await CreateManifestAsync(temp.Path, """
+        {
+          "id": "batch/test/v1",
+          "batch": "001",
+          "title": "Test",
+          "purpose": "Test",
+          "files": ["lua/test.lua", "tests/library_example.lua", "BATCH_001_REPORT.md"],
+          "modules": [{ "id": "core/test/v1", "path": "lua/test.lua", "category": "core", "capabilities": ["core.test"] }]
+        }
+        """);
+        WriteLibraryFile(temp.Path, "lua/test.lua");
+        WriteLibraryFile(temp.Path, "tests/library_example.lua");
+        WriteLibraryFile(temp.Path, "BATCH_001_REPORT.md");
+        var rootTestsLua = Path.Combine(temp.Path, "tests", "leaked.lua");
+        Directory.CreateDirectory(Path.GetDirectoryName(rootTestsLua)!);
+        await File.WriteAllTextAsync(rootTestsLua, "return {}", CancellationToken.None);
+
+        var report = await new GeneratorLibraryIntegrityValidator().ValidateAsync(temp.Path, CancellationToken.None);
+
+        Assert.Contains(report.Issues, issue => issue.Code == "root.leakage" && issue.Target.EndsWith(Path.Combine("tests", "leaked.lua"), StringComparison.OrdinalIgnoreCase));
+        Assert.DoesNotContain(report.Issues, issue => issue.Target.Contains(Path.Combine("generator-library", "tests"), StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
     public async Task IntegrityValidatorReportsDuplicateModuleIds()
     {
         using var temp = new TempDirectory();

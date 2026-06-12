@@ -10,6 +10,8 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
     private readonly IGeneratorLibraryImporter? _importer;
     private readonly IGeneratorLibraryRegistry? _registry;
     private readonly IGeneratorLibraryIntegrityValidator? _integrityValidator;
+    private readonly IGeneratorPlanDraftService? _planDraftService;
+    private readonly IGeneratorPlanRepository? _planRepository;
 
     public GeneratorLibraryPageControl()
     {
@@ -21,14 +23,19 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         IDesignDatabaseInitializer databaseInitializer,
         IGeneratorLibraryImporter importer,
         IGeneratorLibraryRegistry registry,
-        IGeneratorLibraryIntegrityValidator integrityValidator)
+        IGeneratorLibraryIntegrityValidator integrityValidator,
+        IGeneratorPlanDraftService planDraftService,
+        IGeneratorPlanRepository planRepository)
     {
         _currentGamePackageService = currentGamePackageService;
         _databaseInitializer = databaseInitializer;
         _importer = importer;
         _registry = registry;
         _integrityValidator = integrityValidator;
+        _planDraftService = planDraftService;
+        _planRepository = planRepository;
         InitializeComponent();
+        _plansTab.Configure(_planDraftService, _planRepository);
         WireEvents();
     }
 
@@ -152,6 +159,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         _modulesTab.SetModules(modules);
         _capabilitiesTab.SetCapabilities(capabilities);
         _issuesTab.SetIssues(issues);
+        await _plansTab.RefreshPlansAsync().ConfigureAwait(true);
     }
 
     private string ResolveDatabasePath()

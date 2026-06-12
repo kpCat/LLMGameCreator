@@ -125,6 +125,80 @@ public sealed class GeneratorLibraryRegistryTests
     }
 
     [Fact]
+    public async Task GeneratorLibraryImporterIgnoresSchemaExampleManifest()
+    {
+        using var temp = new TempDirectory();
+        var manifests = CreateManifestsFolder(temp.Path);
+        await WriteManifestAsync(manifests, "MANIFEST_CONTRACT.schema.example.json", "{ }");
+        await WriteManifestAsync(manifests, "valid.manifest.json", """
+        { "id": "batch/valid/v1", "modules": [{ "id": "core/valid/v1", "path": "lua/core/valid.lua", "capabilities": ["core.valid"] }] }
+        """);
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+
+        var report = await new GeneratorLibraryImportService(database).ImportGeneratorLibraryAsync(temp.Path, CancellationToken.None);
+
+        Assert.Equal(1, report.ManifestCount);
+        Assert.DoesNotContain(report.Issues, issue => issue.Code == "manifest.id.empty");
+        Assert.Contains(await database.ListModulesAsync(CancellationToken.None), module => module.Id == "core/valid/v1");
+    }
+
+    [Fact]
+    public async Task CleanImportClearsOldImportIssues()
+    {
+        using var temp = new TempDirectory();
+        var manifests = CreateManifestsFolder(temp.Path);
+        await WriteManifestAsync(manifests, "invalid.manifest.json", "{ \"modules\": [] }");
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+        var importer = new GeneratorLibraryImportService(database);
+
+        await importer.ImportGeneratorLibraryAsync(temp.Path, CancellationToken.None);
+        Assert.NotEmpty(await database.ListImportIssuesAsync(CancellationToken.None));
+
+        File.Delete(Path.Combine(manifests, "invalid.manifest.json"));
+        await WriteManifestAsync(manifests, "valid.manifest.json", """
+        { "id": "batch/valid/v1", "modules": [{ "id": "core/valid/v1", "path": "lua/core/valid.lua", "capabilities": ["core.valid"] }] }
+        """);
+        await importer.ImportGeneratorLibraryAsync(temp.Path, CancellationToken.None);
+
+        Assert.Empty(await database.ListImportIssuesAsync(CancellationToken.None));
+    }
+
+    [Fact]
+    public async Task SecondImportRemovesStaleRegistrySnapshotRows()
+    {
+        using var temp = new TempDirectory();
+        var manifests = CreateManifestsFolder(temp.Path);
+        await WriteManifestAsync(manifests, "first.manifest.json", """
+        {
+          "id": "batch/first/v1",
+          "files": ["lua/core/first.lua"],
+          "modules": [{ "id": "core/first/v1", "path": "lua/core/first.lua", "capabilities": ["core.first"] }]
+        }
+        """);
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+        var importer = new GeneratorLibraryImportService(database);
+
+        await importer.ImportGeneratorLibraryAsync(temp.Path, CancellationToken.None);
+        Assert.Contains(await database.ListModulesAsync(CancellationToken.None), module => module.Id == "core/first/v1");
+
+        File.Delete(Path.Combine(manifests, "first.manifest.json"));
+        await WriteManifestAsync(manifests, "second.manifest.json", """
+        {
+          "id": "batch/second/v1",
+          "files": ["lua/core/second.lua"],
+          "modules": [{ "id": "core/second/v1", "path": "lua/core/second.lua", "capabilities": ["core.second"] }]
+        }
+        """);
+        await importer.ImportGeneratorLibraryAsync(temp.Path, CancellationToken.None);
+
+        var modules = await database.ListModulesAsync(CancellationToken.None);
+        var capabilities = await database.ListCapabilitiesAsync(CancellationToken.None);
+        Assert.DoesNotContain(modules, module => module.Id == "core/first/v1");
+        Assert.DoesNotContain(capabilities, capability => capability.Id == "core.first");
+        Assert.Equal(1, await CountRowsAsync(Path.Combine(temp.Path, ".llmgc", "design.db"), "generator_module_files"));
+    }
+
+    [Fact]
     public async Task RegistryCanQueryModulesByCapability()
     {
         using var temp = CreateLibraryWithRepositoryManifests();

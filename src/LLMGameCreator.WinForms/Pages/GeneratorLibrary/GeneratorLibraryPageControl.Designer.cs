@@ -13,11 +13,13 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _importTabPage;
         private TabPage _modulesTabPage;
         private TabPage _capabilitiesTabPage;
+        private TabPage _plansTabPage;
         private TabPage _integrityTabPage;
         private TabPage _issuesTabPage;
         private GeneratorLibraryImportTabControl _importTab;
         private GeneratorLibraryModulesTabControl _modulesTab;
         private GeneratorLibraryCapabilitiesTabControl _capabilitiesTab;
+        private GeneratorLibraryPlansTabControl _plansTab;
         private GeneratorLibraryIntegrityTabControl _integrityTab;
         private GeneratorLibraryIssuesTabControl _issuesTab;
 
@@ -38,17 +40,20 @@ namespace LLMGameCreator.WinForms.Pages
             this._importTabPage = new TabPage();
             this._modulesTabPage = new TabPage();
             this._capabilitiesTabPage = new TabPage();
+            this._plansTabPage = new TabPage();
             this._integrityTabPage = new TabPage();
             this._issuesTabPage = new TabPage();
             this._importTab = new GeneratorLibraryImportTabControl();
             this._modulesTab = new GeneratorLibraryModulesTabControl();
             this._capabilitiesTab = new GeneratorLibraryCapabilitiesTabControl();
+            this._plansTab = new GeneratorLibraryPlansTabControl();
             this._integrityTab = new GeneratorLibraryIntegrityTabControl();
             this._issuesTab = new GeneratorLibraryIssuesTabControl();
             this._tabs.SuspendLayout();
             this._importTabPage.SuspendLayout();
             this._modulesTabPage.SuspendLayout();
             this._capabilitiesTabPage.SuspendLayout();
+            this._plansTabPage.SuspendLayout();
             this._integrityTabPage.SuspendLayout();
             this._issuesTabPage.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +63,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._importTabPage);
             this._tabs.Controls.Add(this._modulesTabPage);
             this._tabs.Controls.Add(this._capabilitiesTabPage);
+            this._tabs.Controls.Add(this._plansTabPage);
             this._tabs.Controls.Add(this._integrityTabPage);
             this._tabs.Controls.Add(this._issuesTabPage);
             this._tabs.Dock = DockStyle.Fill;
@@ -100,6 +106,17 @@ namespace LLMGameCreator.WinForms.Pages
             this._capabilitiesTabPage.Text = "Capabilities";
             this._capabilitiesTabPage.UseVisualStyleBackColor = true;
             // 
+            // _plansTabPage
+            // 
+            this._plansTabPage.Controls.Add(this._plansTab);
+            this._plansTabPage.Location = new Point(4, 24);
+            this._plansTabPage.Name = "_plansTabPage";
+            this._plansTabPage.Padding = new Padding(3);
+            this._plansTabPage.Size = new Size(792, 422);
+            this._plansTabPage.TabIndex = 3;
+            this._plansTabPage.Text = "Plans";
+            this._plansTabPage.UseVisualStyleBackColor = true;
+            // 
             // _integrityTabPage
             // 
             this._integrityTabPage.Controls.Add(this._integrityTab);
@@ -107,7 +124,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._integrityTabPage.Name = "_integrityTabPage";
             this._integrityTabPage.Padding = new Padding(3);
             this._integrityTabPage.Size = new Size(792, 422);
-            this._integrityTabPage.TabIndex = 3;
+            this._integrityTabPage.TabIndex = 4;
             this._integrityTabPage.Text = "Integrity";
             this._integrityTabPage.UseVisualStyleBackColor = true;
             // 
@@ -118,7 +135,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._issuesTabPage.Name = "_issuesTabPage";
             this._issuesTabPage.Padding = new Padding(3);
             this._issuesTabPage.Size = new Size(792, 422);
-            this._issuesTabPage.TabIndex = 4;
+            this._issuesTabPage.TabIndex = 5;
             this._issuesTabPage.Text = "Import Issues";
             this._issuesTabPage.UseVisualStyleBackColor = true;
             // 
@@ -139,6 +156,11 @@ namespace LLMGameCreator.WinForms.Pages
             this._capabilitiesTab.Name = "_capabilitiesTab";
             this._capabilitiesTab.Size = new Size(786, 416);
             this._capabilitiesTab.TabIndex = 0;
+            this._plansTab.Dock = DockStyle.Fill;
+            this._plansTab.Location = new Point(3, 3);
+            this._plansTab.Name = "_plansTab";
+            this._plansTab.Size = new Size(786, 416);
+            this._plansTab.TabIndex = 0;
             this._integrityTab.Dock = DockStyle.Fill;
             this._integrityTab.Location = new Point(3, 3);
             this._integrityTab.Name = "_integrityTab";
@@ -161,6 +183,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._importTabPage.ResumeLayout(false);
             this._modulesTabPage.ResumeLayout(false);
             this._capabilitiesTabPage.ResumeLayout(false);
+            this._plansTabPage.ResumeLayout(false);
             this._integrityTabPage.ResumeLayout(false);
             this._issuesTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
