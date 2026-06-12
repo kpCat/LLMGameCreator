@@ -154,6 +154,24 @@ public sealed class GamePackagePatchServiceTests
     }
 
     [Fact]
+    public async Task DryRunAddRecipeProducesReadableDiffAndDoesNotMutateCurrentPackage()
+    {
+        var package = CreateMinimalPackage();
+        var json = ValidPatchJson(
+            ItemOperation("item/red_herb", "Red Herb"),
+            ResourceOperation("resource/mana", "Mana"),
+            RecipeOperation("recipe/healing_potion"));
+        var current = new InMemoryCurrentGamePackageService(package, "C:\\temp\\project");
+        var service = CreateService(new InMemoryArtifactStore(PatchArtifact(json)), current);
+
+        var result = await service.DryRunPatchArtifactAsync("artifact/patch/test", CancellationToken.None);
+
+        Assert.True(result.CanApply, result.Message);
+        Assert.Contains(result.DiffLines, line => line.ChangeKind == "add" && line.Target == "recipe/healing_potion" && line.Message == "Add recipe recipe/healing_potion.");
+        Assert.Empty(package.Game.Recipes);
+    }
+
+    [Fact]
     public async Task DryRunRejectsMapStartPositionOutsideBounds()
     {
         var json = ValidPatchJson(MapOperation("map/bad", "tile/grass", 9, 0));
@@ -392,6 +410,54 @@ public sealed class GamePackagePatchServiceTests
           "default_tile_id": "{{defaultTileId}}",
           "start_x": {{startX}},
           "start_y": {{startY}}
+        }
+        """;
+    }
+
+    private static string ItemOperation(string id, string name)
+    {
+        return $$"""
+        {
+          "op": "upsert_item_prototype",
+          "id": "{{id}}",
+          "name": "{{name}}",
+          "kind": "material",
+          "max_stack": 20
+        }
+        """;
+    }
+
+    private static string ResourceOperation(string id, string name)
+    {
+        return $$"""
+        {
+          "op": "upsert_resource",
+          "id": "{{id}}",
+          "name": "{{name}}",
+          "kind": "magic",
+          "min_value": 0,
+          "max_value": 100
+        }
+        """;
+    }
+
+    private static string RecipeOperation(string id)
+    {
+        return $$"""
+        {
+          "op": "upsert_recipe",
+          "id": "{{id}}",
+          "name": "Healing Potion",
+          "category": "alchemy",
+          "inputs": [
+            { "kind": "item", "id": "item/red_herb", "amount": 2 }
+          ],
+          "costs": [
+            { "kind": "resource", "id": "resource/mana", "amount": 5 }
+          ],
+          "outputs": [
+            { "kind": "item", "id": "item/red_herb", "amount": 1 }
+          ]
         }
         """;
     }

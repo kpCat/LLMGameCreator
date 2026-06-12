@@ -181,6 +181,15 @@ Supported operations in schema version 1 are intentionally small:
 - `upsert_tile_prototype`
 - `upsert_map`
 - `upsert_entity_prototype`
+- `upsert_item_prototype`
+- `upsert_resource`
+- `upsert_status`
+- `upsert_recipe`
+- `upsert_loot_table`
+- `upsert_transaction`
+- `upsert_resource_network`
+- `upsert_resource_node`
+- `upsert_inventory`
 - `update_manifest`
 
 Delete operations, arbitrary JSON Patch/RFC6902 paths, reflection-based mutation, nested object merge, script edits, asset file writes, Lua changes, map chunks, and tile-grid edits are not supported by this layer.
@@ -201,7 +210,7 @@ Apply writes an audit generated artifact with kind `game_package_patch_apply_res
 
 Prototype Lua can now create `game_package_patch_v1` artifacts from controlled `data:extend(...)` declarations.
 
-The supported declarations are `tile`, `map`, `entity_prototype`, and `manifest_update`. C# executes the source in a fresh sandbox, captures declarations, maps them to the same strict package operations used by patch-capable plans, validates them with `GamePackagePatchOperationValidator`, and saves the patch artifact in the Design DB.
+The supported declarations are `tile`, `map`, `entity_prototype`, `manifest_update`, `item`, `resource`, `status`, `recipe`, `loot_table`, `transaction`, `resource_network`, `resource_node`, and `inventory`. C# executes the source in a fresh sandbox, captures declarations, maps them to the same strict package operations used by patch-capable plans, validates them with `GamePackagePatchOperationValidator`, and saves the patch artifact in the Design DB.
 
 This path does not execute generator modules, does not infer operations from module metadata, does not mutate `GamePackage` directly, and does not apply automatically. Dry-run/apply/rollback still use the same explicit `GamePackagePatchService` pipeline as other patch artifacts.
 
@@ -220,6 +229,15 @@ This field uses the same strict `game_package_patch_v1` operation shapes that pa
 - `upsert_tile_prototype`
 - `upsert_map`
 - `upsert_entity_prototype`
+- `upsert_item_prototype`
+- `upsert_resource`
+- `upsert_status`
+- `upsert_recipe`
+- `upsert_loot_table`
+- `upsert_transaction`
+- `upsert_resource_network`
+- `upsert_resource_node`
+- `upsert_inventory`
 - `update_manifest`
 
 `package_operations` may originate from an LLM-proposed draft plan, but C# owns strict JSON parsing, registry validation, patch operation validation, human approval, preview artifact creation, patch artifact extraction, dry-run, explicit apply, rollback, audit and package validation.

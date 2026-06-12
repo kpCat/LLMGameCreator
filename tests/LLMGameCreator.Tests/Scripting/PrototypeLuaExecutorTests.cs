@@ -27,12 +27,20 @@ public sealed class PrototypeLuaExecutorTests
         data:extend({
           { type = "tile", id = "tile/grass", name = "Grass", walkable = true, movement_cost = 1.0 },
           { type = "map", id = "map/start", name = "Start", width = 4, height = 3, default_tile_id = "tile/grass", start_x = 1, start_y = 1 },
-          { type = "entity_prototype", id = "entity/guard", name = "Guard" }
+          { type = "entity_prototype", id = "entity/guard", name = "Guard" },
+          { type = "item", id = "item/red_herb", name = "Red Herb" },
+          { type = "resource", id = "resource/mana", name = "Mana" },
+          { type = "recipe", id = "recipe/healing_potion", name = "Healing Potion" },
+          { type = "loot_table", id = "loot/goblin_common", name = "Goblin Common Loot" },
+          { type = "transaction", id = "transaction/mage_training", name = "Mage Training" },
+          { type = "resource_network", id = "network/base_power", name = "Base Power Grid", resource_id = "resource/mana" },
+          { type = "resource_node", id = "node/mana_generator", name = "Mana Generator" },
+          { type = "inventory", id = "inventory/player_start", owner_kind = "player" }
         })
         """), CancellationToken.None);
 
         Assert.True(result.Success);
-        Assert.Equal(new[] { "tile", "map", "entity_prototype" }, result.Declarations.Select(item => item.Type));
+        Assert.Equal(new[] { "tile", "map", "entity_prototype", "item", "resource", "recipe", "loot_table", "transaction", "resource_network", "resource_node", "inventory" }, result.Declarations.Select(item => item.Type));
     }
 
     [Fact]

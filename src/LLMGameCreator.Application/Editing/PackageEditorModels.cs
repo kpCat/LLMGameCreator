@@ -10,6 +10,7 @@ public sealed class PackageEditorSnapshot
     public IReadOnlyList<EntityPrototypeEditModel> EntityPrototypes { get; set; } = Array.Empty<EntityPrototypeEditModel>();
     public IReadOnlyList<AssetSummaryModel> Assets { get; set; } = Array.Empty<AssetSummaryModel>();
     public IReadOnlyList<ScriptSummaryModel> Scripts { get; set; } = Array.Empty<ScriptSummaryModel>();
+    public EconomySystemsSummaryModel EconomySystems { get; set; } = new EconomySystemsSummaryModel();
 }
 
 public sealed class ManifestEditModel
@@ -65,4 +66,17 @@ public sealed class ScriptSummaryModel
     public string Kind { get; set; } = string.Empty;
     public string Path { get; set; } = string.Empty;
     public IReadOnlyList<string> EntryPoints { get; set; } = Array.Empty<string>();
+}
+
+public sealed class EconomySystemsSummaryModel
+{
+    public int Items { get; set; }
+    public int Resources { get; set; }
+    public int Statuses { get; set; }
+    public int Recipes { get; set; }
+    public int LootTables { get; set; }
+    public int Transactions { get; set; }
+    public int ResourceNetworks { get; set; }
+    public int ResourceNodes { get; set; }
+    public int Inventories { get; set; }
 }

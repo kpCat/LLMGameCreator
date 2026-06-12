@@ -6,7 +6,22 @@ public sealed class ItemDefinition
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string? IconAssetId { get; set; }
+    public string Kind { get; set; } = "generic";
+    public string? Rarity { get; set; }
+    public int? MaxStack { get; set; }
+    public double? Value { get; set; }
+    public double? Weight { get; set; }
+    public bool? QuestItem { get; set; }
+    public bool? Unique { get; set; }
+    public double? MaxDurability { get; set; }
+    public double? MaxCharge { get; set; }
+    public string? AmmoType { get; set; }
+    public string? FuelType { get; set; }
+    public bool? CannotSell { get; set; }
+    public bool? CannotDrop { get; set; }
+    public List<RequirementDefinition> Requirements { get; set; } = new List<RequirementDefinition>();
     public List<string> Tags { get; set; } = new List<string>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
     public List<ConditionDefinition> UseConditions { get; set; } = new List<ConditionDefinition>();
     public List<EffectDefinition> UseEffects { get; set; } = new List<EffectDefinition>();
 }

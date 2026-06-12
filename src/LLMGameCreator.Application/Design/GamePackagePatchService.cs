@@ -567,6 +567,33 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 case UpsertEntityPrototypePatchOperation entity:
                     UpsertEntity(package, entity, diffLines);
                     break;
+                case UpsertItemPrototypePatchOperation item:
+                    UpsertDefinition(package.Game.Items, item.Item, item.Op, item.Target, "item prototype", diffLines);
+                    break;
+                case UpsertResourcePatchOperation resource:
+                    UpsertDefinition(package.Game.Resources, resource.Resource, resource.Op, resource.Target, "resource", diffLines);
+                    break;
+                case UpsertStatusPatchOperation status:
+                    UpsertDefinition(package.Game.Statuses, status.Status, status.Op, status.Target, "status", diffLines);
+                    break;
+                case UpsertRecipePatchOperation recipe:
+                    UpsertDefinition(package.Game.Recipes, recipe.Recipe, recipe.Op, recipe.Target, "recipe", diffLines);
+                    break;
+                case UpsertLootTablePatchOperation lootTable:
+                    UpsertDefinition(package.Game.LootTables, lootTable.LootTable, lootTable.Op, lootTable.Target, "loot table", diffLines);
+                    break;
+                case UpsertTransactionPatchOperation transaction:
+                    UpsertDefinition(package.Game.Transactions, transaction.Transaction, transaction.Op, transaction.Target, "transaction", diffLines);
+                    break;
+                case UpsertResourceNetworkPatchOperation resourceNetwork:
+                    UpsertDefinition(package.Game.ResourceNetworks, resourceNetwork.ResourceNetwork, resourceNetwork.Op, resourceNetwork.Target, "resource network", diffLines);
+                    break;
+                case UpsertResourceNodePatchOperation resourceNode:
+                    UpsertDefinition(package.Game.ResourceNodes, resourceNode.ResourceNode, resourceNode.Op, resourceNode.Target, "resource node", diffLines);
+                    break;
+                case UpsertInventoryPatchOperation inventory:
+                    UpsertDefinition(package.Game.Inventories, inventory.Inventory, inventory.Op, inventory.Target, "inventory", diffLines);
+                    break;
                 case UpdateManifestPatchOperation manifest:
                     if (!string.IsNullOrWhiteSpace(manifest.StartMapId) && !package.Game.Maps.Any(map => IdEquals(map.Id, manifest.StartMapId)))
                     {
@@ -664,6 +691,23 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
         diffLines.Add(new GamePackagePatchDiffLine(operation.Op, operation.Id, changeKind, before, after, $"{ChangeVerb(changeKind)} entity prototype {operation.Id}."));
     }
 
+    private static void UpsertDefinition<T>(List<T> definitions, T replacement, string operation, string target, string label, List<GamePackagePatchDiffLine> diffLines)
+    {
+        var existingIndex = definitions.FindIndex(definition => IdEquals(GetId(definition), target));
+        var before = existingIndex < 0 ? string.Empty : ToJson(definitions[existingIndex]);
+        var after = ToJson(replacement);
+        if (existingIndex < 0)
+        {
+            definitions.Add(replacement);
+            diffLines.Add(new GamePackagePatchDiffLine(operation, target, "add", before, after, $"Add {label} {target}."));
+            return;
+        }
+
+        var changeKind = before == after ? "no_change" : "update";
+        definitions[existingIndex] = replacement;
+        diffLines.Add(new GamePackagePatchDiffLine(operation, target, changeKind, before, after, $"{ChangeVerb(changeKind)} {label} {target}."));
+    }
+
     private static void UpdateManifest(GamePackageDefinition package, UpdateManifestPatchOperation operation, List<GamePackagePatchDiffLine> diffLines)
     {
         var before = ToJson(package.Manifest);
@@ -757,6 +801,24 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 }
 
                 return entityJson;
+            case UpsertItemPrototypePatchOperation item:
+                return DefinitionOperationToJson(item.Op, item.Item);
+            case UpsertResourcePatchOperation resource:
+                return DefinitionOperationToJson(resource.Op, resource.Resource);
+            case UpsertStatusPatchOperation status:
+                return DefinitionOperationToJson(status.Op, status.Status);
+            case UpsertRecipePatchOperation recipe:
+                return DefinitionOperationToJson(recipe.Op, recipe.Recipe);
+            case UpsertLootTablePatchOperation lootTable:
+                return DefinitionOperationToJson(lootTable.Op, lootTable.LootTable);
+            case UpsertTransactionPatchOperation transaction:
+                return DefinitionOperationToJson(transaction.Op, transaction.Transaction);
+            case UpsertResourceNetworkPatchOperation resourceNetwork:
+                return DefinitionOperationToJson(resourceNetwork.Op, resourceNetwork.ResourceNetwork);
+            case UpsertResourceNodePatchOperation resourceNode:
+                return DefinitionOperationToJson(resourceNode.Op, resourceNode.ResourceNode);
+            case UpsertInventoryPatchOperation inventory:
+                return DefinitionOperationToJson(inventory.Op, inventory.Inventory);
             case UpdateManifestPatchOperation manifest:
                 var manifestJson = new JsonObject
                 {
@@ -786,6 +848,31 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
             default:
                 throw new InvalidOperationException($"Unsupported patch operation type: {operation.GetType().Name}");
         }
+    }
+
+    private static JsonObject DefinitionOperationToJson<T>(string op, T definition)
+    {
+        var json = JsonSerializer.SerializeToNode(definition, PatchJsonOptions)?.AsObject()
+            ?? throw new InvalidOperationException($"Failed to serialize {typeof(T).Name}.");
+        json["op"] = op;
+        return json;
+    }
+
+    private static string? GetId<T>(T definition)
+    {
+        return definition switch
+        {
+            ItemDefinition item => item.Id,
+            ResourceDefinition resource => resource.Id,
+            StatusDefinition status => status.Id,
+            RecipeDefinition recipe => recipe.Id,
+            LootTableDefinition lootTable => lootTable.Id,
+            TransactionDefinition transaction => transaction.Id,
+            ResourceNetworkDefinition resourceNetwork => resourceNetwork.Id,
+            ResourceNodeDefinition resourceNode => resourceNode.Id,
+            InventoryDefinition inventory => inventory.Id,
+            _ => null
+        };
     }
 
     private static GeneratedArtifactRecord BuildApplyAuditArtifact(

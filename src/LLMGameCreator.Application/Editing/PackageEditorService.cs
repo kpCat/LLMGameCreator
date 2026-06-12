@@ -51,7 +51,19 @@ public sealed class PackageEditorService : IPackageEditorService
                 Kind = script.Kind.ToString(),
                 Path = script.Path,
                 EntryPoints = script.EntryPoints.ToList()
-            }).ToList()
+            }).ToList(),
+            EconomySystems = new EconomySystemsSummaryModel
+            {
+                Items = package.Game.Items.Count,
+                Resources = package.Game.Resources.Count,
+                Statuses = package.Game.Statuses.Count,
+                Recipes = package.Game.Recipes.Count,
+                LootTables = package.Game.LootTables.Count,
+                Transactions = package.Game.Transactions.Count,
+                ResourceNetworks = package.Game.ResourceNetworks.Count,
+                ResourceNodes = package.Game.ResourceNodes.Count,
+                Inventories = package.Game.Inventories.Count
+            }
         };
     }
 

@@ -11,7 +11,16 @@ public sealed class PrototypeLuaExecutor : IPrototypeLuaExecutor
         "tile",
         "map",
         "entity_prototype",
-        "manifest_update"
+        "manifest_update",
+        "item",
+        "resource",
+        "status",
+        "recipe",
+        "loot_table",
+        "transaction",
+        "resource_network",
+        "resource_node",
+        "inventory"
     };
 
     private readonly PrototypeLuaStaticAnalyzer _staticAnalyzer;

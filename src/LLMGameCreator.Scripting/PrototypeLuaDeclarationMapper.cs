@@ -35,6 +35,15 @@ public sealed class PrototypeLuaDeclarationMapper
             "map" => CopyFields(declaration, index, diagnostics, "upsert_map", "id", "name", "width", "height", "default_tile_id", "start_x", "start_y"),
             "entity_prototype" => CopyFields(declaration, index, diagnostics, "upsert_entity_prototype", "id", "name", "asset_id"),
             "manifest_update" => CopyFields(declaration, index, diagnostics, "update_manifest", "title", "description", "version", "start_map_id"),
+            "item" => CopyFields(declaration, index, diagnostics, "upsert_item_prototype", "id", "name", "description", "icon_asset_id", "kind", "rarity", "max_stack", "value", "weight", "quest_item", "unique", "max_durability", "max_charge", "ammo_type", "fuel_type", "cannot_sell", "cannot_drop", "requirements", "tags", "metadata", "use_conditions", "use_effects"),
+            "resource" => CopyFields(declaration, index, diagnostics, "upsert_resource", "id", "name", "kind", "description", "icon_asset_id", "default_value", "min_value", "max_value", "regen_per_tick", "tags", "metadata"),
+            "status" => CopyFields(declaration, index, diagnostics, "upsert_status", "id", "name", "description", "kind", "duration_mode", "effects", "tags", "metadata"),
+            "recipe" => CopyFields(declaration, index, diagnostics, "upsert_recipe", "id", "name", "category", "station_id", "requirements", "inputs", "costs", "outputs", "failure_outputs", "duration", "cooldown", "success_chance", "tags", "metadata"),
+            "loot_table" => CopyFields(declaration, index, diagnostics, "upsert_loot_table", "id", "name", "kind", "entries", "tags", "metadata"),
+            "transaction" => CopyFields(declaration, index, diagnostics, "upsert_transaction", "id", "name", "kind", "vendor_id", "requirements", "costs", "outputs", "stock_loot_table_id", "restock_rule", "tags", "metadata"),
+            "resource_network" => CopyFields(declaration, index, diagnostics, "upsert_resource_network", "id", "name", "resource_id", "kind", "tags", "metadata"),
+            "resource_node" => CopyFields(declaration, index, diagnostics, "upsert_resource_node", "id", "name", "kind", "network_id", "entity_prototype_id", "production", "consumption", "storage", "conversion_inputs", "conversion_outputs", "requirements", "tags", "metadata"),
+            "inventory" => CopyFields(declaration, index, diagnostics, "upsert_inventory", "id", "owner_kind", "owner_id", "slots", "stacks", "tags", "metadata"),
             _ => UnknownType(declaration, index, diagnostics)
         };
     }
@@ -96,4 +105,3 @@ public sealed class PrototypeLuaMappingResult
     public string OperationsJson { get; set; } = "[]";
     public IReadOnlyList<PrototypeLuaDiagnostic> Diagnostics { get; set; } = Array.Empty<PrototypeLuaDiagnostic>();
 }
-

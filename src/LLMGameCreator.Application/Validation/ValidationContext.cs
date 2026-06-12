@@ -17,6 +17,26 @@ public sealed class ValidationContext
             .Where(prototype => !string.IsNullOrWhiteSpace(prototype.Id))
             .Select(prototype => prototype.Id)
             .ToHashSet();
+        ItemIds = package.Game.Items
+            .Where(item => !string.IsNullOrWhiteSpace(item.Id))
+            .Select(item => item.Id)
+            .ToHashSet();
+        ResourceIds = package.Game.Resources
+            .Where(resource => !string.IsNullOrWhiteSpace(resource.Id))
+            .Select(resource => resource.Id)
+            .ToHashSet();
+        StatusIds = package.Game.Statuses
+            .Where(status => !string.IsNullOrWhiteSpace(status.Id))
+            .Select(status => status.Id)
+            .ToHashSet();
+        LootTableIds = package.Game.LootTables
+            .Where(loot => !string.IsNullOrWhiteSpace(loot.Id))
+            .Select(loot => loot.Id)
+            .ToHashSet();
+        ResourceNetworkIds = package.Game.ResourceNetworks
+            .Where(network => !string.IsNullOrWhiteSpace(network.Id))
+            .Select(network => network.Id)
+            .ToHashSet();
         AssetIds = package.AssetCatalog.Assets
             .Where(asset => !string.IsNullOrWhiteSpace(asset.Id))
             .Select(asset => asset.Id)
@@ -35,6 +55,11 @@ public sealed class ValidationContext
     public string? ProjectFolder { get; }
     public IReadOnlySet<string> TileIds { get; }
     public IReadOnlySet<string> EntityPrototypeIds { get; }
+    public IReadOnlySet<string> ItemIds { get; }
+    public IReadOnlySet<string> ResourceIds { get; }
+    public IReadOnlySet<string> StatusIds { get; }
+    public IReadOnlySet<string> LootTableIds { get; }
+    public IReadOnlySet<string> ResourceNetworkIds { get; }
     public IReadOnlySet<string> AssetIds { get; }
     public IReadOnlySet<string> AssetContractIds { get; }
     public IReadOnlyDictionary<string, ScriptDefinition> ScriptsById { get; }

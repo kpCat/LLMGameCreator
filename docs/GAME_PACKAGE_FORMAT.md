@@ -95,3 +95,70 @@ SQLite/cache:
 GamePackage не должен зависеть от WinForms или Unity.
 
 Unity Player должен быть способен загрузить GamePackage без знания конкретной игры.
+
+## Optional Economy Definition Lists
+
+`game` may include these optional/default-empty lists. Older packages that omit them remain loadable:
+
+```json
+{
+  "game": {
+    "resources": [],
+    "statuses": [],
+    "recipes": [],
+    "lootTables": [],
+    "transactions": [],
+    "resourceNetworks": [],
+    "resourceNodes": [],
+    "inventories": []
+  }
+}
+```
+
+`items` also supports optional economy metadata such as `kind`, `rarity`, `maxStack`, `value`, `weight`, `questItem`, `unique`, `maxDurability`, `maxCharge`, `ammoType`, `fuelType`, `cannotSell`, `cannotDrop`, `requirements` and `metadata`.
+
+Example:
+
+```json
+{
+  "items": [
+    {
+      "id": "item/red_herb",
+      "name": "Red Herb",
+      "kind": "material",
+      "maxStack": 20,
+      "tags": ["herb", "alchemy"]
+    }
+  ],
+  "resources": [
+    {
+      "id": "resource/mana",
+      "name": "Mana",
+      "kind": "magic",
+      "minValue": 0,
+      "maxValue": 100,
+      "regenPerTick": 1
+    }
+  ],
+  "recipes": [
+    {
+      "id": "recipe/healing_potion",
+      "name": "Healing Potion",
+      "category": "alchemy",
+      "inputs": [{ "kind": "item", "id": "item/red_herb", "amount": 2 }],
+      "costs": [{ "kind": "resource", "id": "resource/mana", "amount": 5 }],
+      "outputs": [{ "kind": "item", "id": "item/healing_potion", "amount": 1 }]
+    }
+  ],
+  "resourceNetworks": [
+    {
+      "id": "network/base_power",
+      "name": "Base Power Grid",
+      "resourceId": "resource/electricity",
+      "kind": "electricity"
+    }
+  ]
+}
+```
+
+These definitions are contracts and validation inputs only. Crafting, shops and base resource simulation are not executed by the package format layer.

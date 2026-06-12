@@ -99,7 +99,16 @@ Supported declaration types:
 - `tile`;
 - `map`;
 - `entity_prototype`;
-- `manifest_update`.
+- `manifest_update`;
+- `item`;
+- `resource`;
+- `status`;
+- `recipe`;
+- `loot_table`;
+- `transaction`;
+- `resource_network`;
+- `resource_node`;
+- `inventory`.
 
 The editor-side flow is:
 
@@ -117,6 +126,30 @@ Prototype Lua source
 Lua does not receive a `GamePackage`, `GameState`, filesystem, process, network or direct host object API. The sandbox registers only `data:extend(...)` and `llmgc.version`. The static analyzer conservatively rejects obvious unsafe tokens such as `io`, `os`, `debug`, `dofile`, `loadfile`, `load`, `require`, `package`, `collectgarbage`, environment APIs, `coroutine`, `math.random`, `math.randomseed`, and loop keywords. Declaration count is capped; MoonSharp 2.0.0 does not expose a simple per-script timeout/instruction-limit option in this target, so loops are rejected for this first declarative layer. The analyzer is not a full Lua parser; false positives are acceptable for safety.
 
 Prototype Lua output is not applied automatically. It becomes a `game_package_patch_v1` artifact and apply remains explicit through the existing dry-run/apply/rollback pipeline.
+
+Economy declarations use the same data-only patch path:
+
+```lua
+data:extend({
+  {
+    type = "recipe",
+    id = "recipe/healing_potion",
+    name = "Healing Potion",
+    category = "alchemy",
+    inputs = {
+      { kind = "item", id = "item/red_herb", amount = 2 }
+    },
+    costs = {
+      { kind = "resource", id = "resource/mana", amount = 5 }
+    },
+    outputs = {
+      { kind = "item", id = "item/healing_potion", amount = 1 }
+    }
+  }
+})
+```
+
+The mapper creates allowlisted patch operations such as `upsert_recipe`; Lua still cannot mutate `GamePackage` directly.
 
 Runtime Lua, generator Lua, behavior Lua, interaction Lua, formula Lua, event Lua and migration Lua execution are still not implemented. Generator modules are not executed by this layer.
 

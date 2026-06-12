@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
+using LLMGameCreator.Domain.Definitions;
 
 namespace LLMGameCreator.Application.Design;
 
@@ -16,6 +17,12 @@ public sealed record GamePackagePatchOperationsValidationResult(
 public sealed partial class GamePackagePatchOperationValidator
 {
     private const int SchemaVersion = 1;
+
+    private static readonly JsonSerializerOptions OperationJsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+        PropertyNameCaseInsensitive = true
+    };
 
     private static readonly HashSet<string> ForbiddenFieldNames = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -78,6 +85,57 @@ public sealed partial class GamePackagePatchOperationValidator
         "description",
         "version",
         "start_map_id"
+    };
+
+    private static readonly HashSet<string> ItemFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "description", "icon_asset_id", "kind", "rarity", "max_stack", "value", "weight",
+        "quest_item", "unique", "max_durability", "max_charge", "ammo_type", "fuel_type", "cannot_sell",
+        "cannot_drop", "requirements", "tags", "metadata", "use_conditions", "use_effects"
+    };
+
+    private static readonly HashSet<string> ResourceFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "description", "icon_asset_id", "default_value", "min_value", "max_value",
+        "regen_per_tick", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> StatusFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "description", "kind", "duration_mode", "effects", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> RecipeFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "category", "station_id", "requirements", "inputs", "costs", "outputs",
+        "failure_outputs", "duration", "cooldown", "success_chance", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> LootTableFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "entries", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> TransactionFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "vendor_id", "requirements", "costs", "outputs", "stock_loot_table_id",
+        "restock_rule", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> ResourceNetworkFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "resource_id", "kind", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> ResourceNodeFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "network_id", "entity_prototype_id", "production", "consumption", "storage",
+        "conversion_inputs", "conversion_outputs", "requirements", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> InventoryFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "owner_kind", "owner_id", "slots", "stacks", "tags", "metadata"
     };
 
     public GamePackagePatchParseResult ParsePatchDocument(string json, string artifactId)
@@ -253,6 +311,15 @@ public sealed partial class GamePackagePatchOperationValidator
             "upsert_map" => ParseMapOperation(operationNode, artifactId, target, results),
             "upsert_entity_prototype" => ParseEntityOperation(operationNode, artifactId, target, results),
             "update_manifest" => ParseManifestOperation(operationNode, artifactId, target, results),
+            "upsert_item_prototype" => ParseEconomyOperation(operationNode, ItemFields, node => new UpsertItemPrototypePatchOperation(ReadDefinition<ItemDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_resource" => ParseEconomyOperation(operationNode, ResourceFields, node => new UpsertResourcePatchOperation(ReadDefinition<ResourceDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_status" => ParseEconomyOperation(operationNode, StatusFields, node => new UpsertStatusPatchOperation(ReadDefinition<StatusDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_recipe" => ParseEconomyOperation(operationNode, RecipeFields, node => new UpsertRecipePatchOperation(ReadDefinition<RecipeDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_loot_table" => ParseEconomyOperation(operationNode, LootTableFields, node => new UpsertLootTablePatchOperation(ReadDefinition<LootTableDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_transaction" => ParseEconomyOperation(operationNode, TransactionFields, node => new UpsertTransactionPatchOperation(ReadDefinition<TransactionDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_resource_network" => ParseEconomyOperation(operationNode, ResourceNetworkFields, node => new UpsertResourceNetworkPatchOperation(ReadDefinition<ResourceNetworkDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_resource_node" => ParseEconomyOperation(operationNode, ResourceNodeFields, node => new UpsertResourceNodePatchOperation(ReadDefinition<ResourceNodeDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_inventory" => ParseEconomyOperation(operationNode, InventoryFields, node => new UpsertInventoryPatchOperation(ReadDefinition<InventoryDefinition>(node)), artifactId, target, results, requireName: false),
             _ => UnknownOperation(op, artifactId, target, results)
         };
     }
@@ -330,6 +397,45 @@ public sealed partial class GamePackagePatchOperationValidator
         return results.Any(IsError) ? null : new UpdateManifestPatchOperation(title, description, version, startMapId);
     }
 
+    private static GamePackagePatchOperation? ParseEconomyOperation(
+        JsonObject node,
+        HashSet<string> fields,
+        Func<JsonObject, GamePackagePatchOperation> create,
+        string artifactId,
+        string target,
+        List<GeneratedArtifactValidationResultRecord> results,
+        bool requireName)
+    {
+        CheckFields(node, fields, artifactId, target, results);
+        CheckForbiddenFieldsRecursive(node, artifactId, target, results);
+        var id = RequiredId(node, "id", artifactId, target, results);
+        if (requireName)
+        {
+            RequiredString(node, "name", artifactId, target, results);
+        }
+
+        ValidateEconomyNumbers(node, artifactId, target, results);
+        if (id == null || results.Any(IsError))
+        {
+            return null;
+        }
+
+        try
+        {
+            return create(node);
+        }
+        catch (JsonException ex)
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.json.invalid", ex.Message, target, results.Count));
+            return null;
+        }
+        catch (InvalidOperationException ex)
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.json.invalid", ex.Message, target, results.Count));
+            return null;
+        }
+    }
+
     private static GamePackagePatchOperation? UnknownOperation(string op, string artifactId, string target, List<GeneratedArtifactValidationResultRecord> results)
     {
         results.Add(ValidationResult(artifactId, "error", "patch.operation.op.unknown", $"Unsupported patch operation: {op}", $"{target}.op", results.Count));
@@ -351,6 +457,97 @@ public sealed partial class GamePackagePatchOperationValidator
                 results.Add(ValidationResult(artifactId, "error", "patch.operation.field.unknown", $"Operation field is not supported: {property.Key}", $"{target}.{property.Key}", results.Count));
             }
         }
+    }
+
+    private static void CheckForbiddenFieldsRecursive(JsonNode? node, string artifactId, string target, List<GeneratedArtifactValidationResultRecord> results)
+    {
+        if (node is JsonObject obj)
+        {
+            foreach (var property in obj)
+            {
+                var childTarget = $"{target}.{property.Key}";
+                if (ForbiddenFieldNames.Contains(property.Key))
+                {
+                    results.Add(ValidationResult(artifactId, "error", "patch.operation.field.forbidden", $"Operation field is forbidden: {property.Key}", childTarget, results.Count));
+                }
+
+                CheckForbiddenFieldsRecursive(property.Value, artifactId, childTarget, results);
+            }
+        }
+        else if (node is JsonArray array)
+        {
+            for (var index = 0; index < array.Count; index++)
+            {
+                CheckForbiddenFieldsRecursive(array[index], artifactId, $"{target}[{index}]", results);
+            }
+        }
+    }
+
+    private static void ValidateEconomyNumbers(JsonObject node, string artifactId, string target, List<GeneratedArtifactValidationResultRecord> results)
+    {
+        CheckOptionalPositive(node, "amount", artifactId, target, results);
+        CheckOptionalPositive(node, "max_stack", artifactId, target, results);
+        CheckOptionalNonNegative(node, "value", artifactId, target, results);
+        CheckOptionalNonNegative(node, "weight", artifactId, target, results);
+        CheckOptionalNonNegative(node, "max_durability", artifactId, target, results);
+        CheckOptionalNonNegative(node, "max_charge", artifactId, target, results);
+        CheckOptionalNonNegative(node, "default_value", artifactId, target, results);
+        CheckOptionalNonNegative(node, "min_value", artifactId, target, results);
+        CheckOptionalNonNegative(node, "max_value", artifactId, target, results);
+        CheckOptionalNonNegative(node, "regen_per_tick", artifactId, target, results);
+        CheckOptionalNonNegative(node, "duration", artifactId, target, results);
+        CheckOptionalNonNegative(node, "cooldown", artifactId, target, results);
+        CheckOptionalNonNegative(node, "slots", artifactId, target, results);
+
+        var successChance = OptionalDouble(node, "success_chance", artifactId, target, results);
+        if (successChance.HasValue && (successChance.Value < 0 || successChance.Value > 1))
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.number.invalid", "success_chance must be between 0 and 1.", $"{target}.success_chance", results.Count));
+        }
+
+        var minValue = OptionalDouble(node, "min_value", artifactId, target, results);
+        var maxValue = OptionalDouble(node, "max_value", artifactId, target, results);
+        if (minValue.HasValue && maxValue.HasValue && maxValue.Value < minValue.Value)
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.number.invalid", "max_value must be greater than or equal to min_value.", $"{target}.max_value", results.Count));
+        }
+    }
+
+    private static void CheckOptionalPositive(JsonObject node, string propertyName, string artifactId, string target, List<GeneratedArtifactValidationResultRecord> results)
+    {
+        var value = OptionalDouble(node, propertyName, artifactId, target, results);
+        if (value.HasValue && value.Value <= 0)
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.number.invalid", $"{propertyName} must be positive.", $"{target}.{propertyName}", results.Count));
+        }
+    }
+
+    private static void CheckOptionalNonNegative(JsonObject node, string propertyName, string artifactId, string target, List<GeneratedArtifactValidationResultRecord> results)
+    {
+        var value = OptionalDouble(node, propertyName, artifactId, target, results);
+        if (value.HasValue && value.Value < 0)
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.number.invalid", $"{propertyName} must be non-negative.", $"{target}.{propertyName}", results.Count));
+        }
+    }
+
+    private static double? OptionalDouble(JsonObject node, string propertyName, string artifactId, string target, List<GeneratedArtifactValidationResultRecord> results)
+    {
+        try
+        {
+            return node[propertyName]?.GetValue<double>();
+        }
+        catch (InvalidOperationException)
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.field.type", $"Operation field must be numeric: {propertyName}", $"{target}.{propertyName}", results.Count));
+            return null;
+        }
+    }
+
+    private static T ReadDefinition<T>(JsonObject node)
+    {
+        return node.Deserialize<T>(OperationJsonOptions)
+            ?? throw new InvalidOperationException($"Failed to parse {typeof(T).Name}.");
     }
 
     private static string? RequiredId(JsonObject node, string propertyName, string artifactId, string target, List<GeneratedArtifactValidationResultRecord> results)

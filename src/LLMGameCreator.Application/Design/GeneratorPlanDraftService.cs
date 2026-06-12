@@ -189,7 +189,7 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
             {
                 "For game creation plans, prefer config.package_operations as the only supported way to propose GamePackage changes.",
                 "package_operations must use the data-only game_package_patch_v1 operation shapes.",
-                "Allowed ops: upsert_tile_prototype, upsert_map, upsert_entity_prototype, update_manifest.",
+                "Allowed ops: upsert_tile_prototype, upsert_map, upsert_entity_prototype, upsert_item_prototype, upsert_resource, upsert_status, upsert_recipe, upsert_loot_table, upsert_transaction, upsert_resource_network, upsert_resource_node, upsert_inventory, update_manifest.",
                 "Do not include delete operations, JSON Patch/RFC6902 paths, scripts, assets, chunks, tile grids, Lua, code, or raw code fields.",
                 "Prefer a small first playable data-only slice: 1-4 tile prototypes, 1 map, 0-3 entity prototypes, optional manifest title/description/start_map_id.",
                 "Plans may omit package_operations when a generic registry-only plan is more appropriate."
@@ -226,6 +226,9 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
   { "op": "upsert_tile_prototype", "id": "tile/grass", "name": "Grass", "walkable": true, "movement_cost": 1.0, "asset_id": null },
   { "op": "upsert_map", "id": "map/start", "name": "Start", "width": 12, "height": 8, "default_tile_id": "tile/grass", "start_x": 1, "start_y": 1 },
   { "op": "upsert_entity_prototype", "id": "prototype/npc/guide", "name": "Guide", "asset_id": null },
+  { "op": "upsert_resource", "id": "resource/gold", "name": "Gold", "kind": "currency", "min_value": 0 },
+  { "op": "upsert_item_prototype", "id": "item/red_herb", "name": "Red Herb", "kind": "material", "max_stack": 20 },
+  { "op": "upsert_recipe", "id": "recipe/healing_potion", "name": "Healing Potion", "category": "alchemy", "inputs": [{ "kind": "item", "id": "item/red_herb", "amount": 2 }], "outputs": [{ "kind": "resource", "id": "resource/gold", "amount": 1 }] },
   { "op": "update_manifest", "title": "Generated Game", "description": "Short playable slice.", "start_map_id": "map/start" }
 ]
 """);

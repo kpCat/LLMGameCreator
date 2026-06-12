@@ -109,6 +109,66 @@ resource/action_points
 
 Ресурс может быть finite, currency, consumable, regenerating или abstract.
 
+## Economy Bundles
+
+Economy systems use reusable data bundles instead of hardcoded engine fields.
+
+`RequirementDefinition` describes a gate:
+
+```text
+kind, id, operator, amount, value, scope, tags, metadata
+```
+
+Examples: `has_item`, `resource_at_least`, `stat_at_least`, `flag_equals`, `quest_state`, `faction_reputation_at_least`, `recipe_known`, `station_available`, `network_resource_at_least`, `time_available`.
+
+`CostDefinition` describes something consumed or reserved:
+
+```text
+kind, id, amount, scope, consume_mode, tags, metadata
+```
+
+Examples: item cost, resource/currency cost, mana/stamina/stat cost, time cost, durability/charge cost, faction reputation, quest token, base electricity/water/fuel.
+
+`OutputDefinition` describes something produced or granted:
+
+```text
+kind, id, amount, scope, mode, tags, metadata
+```
+
+Examples: give item/resource, set flag, unlock recipe, add status, progression gain, reputation change, spawn entity, add loot roll, add base resource.
+
+## Recipes, Crafting, Alchemy and Production
+
+`RecipeDefinition` is data-only and supports crafting, alchemy, cooking, smithing, rituals, research, base production, repair and upgrades. Recipes declare requirements, item/resource inputs, additional costs, outputs, failure outputs, optional station id, duration, cooldown and success chance.
+
+The runtime simulation for crafting is not implemented in this layer. Validators only check ids, numeric ranges and references.
+
+## Loot Tables
+
+`LootTableDefinition` contains weighted `LootEntryDefinition` records. Entries point to an `OutputDefinition`, may declare requirements, rarity, min/max counts, quest item and unique flags, max global count, and optional flag hooks.
+
+Quest loot and unique loot are data contracts. A unique quest entry with `max_global_count = 1` is valid; duplicate guaranteed unique outputs are surfaced as diagnostics.
+
+## Transactions
+
+`TransactionDefinition` models shops, barter, services, training, repair, upgrades, rent, bribes, tribute, quest exchange, faction vendors and black markets. Transactions declare requirements, costs, outputs, optional vendor id, stock loot table id and restock rule.
+
+No shop or transaction runtime is implemented here; data with known references validates, while not-yet-handled output systems can surface warnings.
+
+## Resource Networks and Nodes
+
+Base systems such as electricity, water, heat, fuel, oxygen, steam, mana flow, pressure, waste and data networks are modeled as resources plus `ResourceNetworkDefinition`.
+
+`ResourceNodeDefinition` describes producers, consumers, storage, converters, switches, generic network nodes and harvesters. Nodes can reference a network, an entity prototype, production, consumption, storage, conversion inputs/outputs and requirements.
+
+No full base electricity or resource-network simulation is implemented in this layer.
+
+## Inventories and Item Stacks
+
+`InventoryDefinition` declares owner kind/id, slots and starting stacks. `ItemStackDefinition` stores item id, amount, optional unique instance id, quest flag, durability, charge and metadata.
+
+Items remain normal definitions and can optionally describe kind, rarity, max stack, value, weight, quest/unique flags, durability, charge, ammo/fuel type, sell/drop restrictions, requirements and metadata.
+
 ## Progression
 
 `ProgressionDefinition` — способ развития чего-либо.

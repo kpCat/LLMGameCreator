@@ -210,7 +210,202 @@
         ]
       }
     ],
-    "items": [],
+    "items": [
+      {
+        "id": "item/red_herb",
+        "name": "Red Herb",
+        "description": "A simple alchemy herb.",
+        "kind": "material",
+        "rarity": "common",
+        "maxStack": 20,
+        "tags": [
+          "herb",
+          "alchemy"
+        ]
+      },
+      {
+        "id": "item/water_flask",
+        "name": "Water Flask",
+        "description": "Clean water in a small flask.",
+        "kind": "material",
+        "maxStack": 10
+      },
+      {
+        "id": "item/healing_potion",
+        "name": "Healing Potion",
+        "description": "A small restorative potion.",
+        "kind": "consumable",
+        "rarity": "common",
+        "maxStack": 5,
+        "value": 25
+      },
+      {
+        "id": "item/fuel_can",
+        "name": "Fuel Can",
+        "description": "Fuel for base machinery.",
+        "kind": "fuel",
+        "maxStack": 4,
+        "fuelType": "diesel"
+      }
+    ],
+    "resources": [
+      {
+        "id": "resource/gold",
+        "name": "Gold",
+        "kind": "currency",
+        "minValue": 0
+      },
+      {
+        "id": "resource/mana",
+        "name": "Mana",
+        "kind": "magic",
+        "defaultValue": 10,
+        "minValue": 0,
+        "maxValue": 100,
+        "regenPerTick": 1
+      },
+      {
+        "id": "resource/electricity",
+        "name": "Electricity",
+        "kind": "network_resource",
+        "minValue": 0
+      }
+    ],
+    "statuses": [],
+    "recipes": [
+      {
+        "id": "recipe/healing_potion",
+        "name": "Healing Potion",
+        "category": "alchemy",
+        "inputs": [
+          {
+            "kind": "item",
+            "id": "item/red_herb",
+            "amount": 2
+          },
+          {
+            "kind": "item",
+            "id": "item/water_flask",
+            "amount": 1
+          }
+        ],
+        "costs": [
+          {
+            "kind": "resource",
+            "id": "resource/mana",
+            "amount": 5
+          }
+        ],
+        "outputs": [
+          {
+            "kind": "item",
+            "id": "item/healing_potion",
+            "amount": 1
+          }
+        ],
+        "duration": 3,
+        "successChance": 1,
+        "tags": [
+          "alchemy",
+          "potion"
+        ]
+      }
+    ],
+    "lootTables": [
+      {
+        "id": "loot/goblin_common",
+        "name": "Goblin Common Loot",
+        "kind": "common",
+        "entries": [
+          {
+            "id": "entry/gold",
+            "weight": 10,
+            "output": {
+              "kind": "resource",
+              "id": "resource/gold",
+              "amount": 3
+            }
+          },
+          {
+            "id": "entry/healing_potion",
+            "weight": 1,
+            "output": {
+              "kind": "item",
+              "id": "item/healing_potion",
+              "amount": 1
+            }
+          }
+        ]
+      }
+    ],
+    "transactions": [
+      {
+        "id": "transaction/buy_healing_potion",
+        "name": "Buy Healing Potion",
+        "kind": "shop",
+        "costs": [
+          {
+            "kind": "resource",
+            "id": "resource/gold",
+            "amount": 25
+          }
+        ],
+        "outputs": [
+          {
+            "kind": "item",
+            "id": "item/healing_potion",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "resourceNetworks": [
+      {
+        "id": "network/base_power",
+        "name": "Base Power Grid",
+        "resourceId": "resource/electricity",
+        "kind": "electricity"
+      }
+    ],
+    "resourceNodes": [
+      {
+        "id": "node/diesel_generator",
+        "name": "Diesel Generator",
+        "kind": "producer",
+        "networkId": "network/base_power",
+        "production": [
+          {
+            "kind": "resource",
+            "id": "resource/electricity",
+            "amount": 20
+          }
+        ],
+        "conversionInputs": [
+          {
+            "kind": "item",
+            "id": "item/fuel_can",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "inventories": [
+      {
+        "id": "inventory/player_start",
+        "ownerKind": "player",
+        "slots": 16,
+        "stacks": [
+          {
+            "itemId": "item/red_herb",
+            "amount": 2
+          },
+          {
+            "itemId": "item/water_flask",
+            "amount": 1
+          }
+        ]
+      }
+    ],
     "abilities": [],
     "quests": [],
     "dialogues": [

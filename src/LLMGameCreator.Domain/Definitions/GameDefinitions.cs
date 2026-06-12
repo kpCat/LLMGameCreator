@@ -16,6 +16,14 @@ public sealed class GameDefinition
     public List<EntityPrototypeDefinition> EntityPrototypes { get; set; } = new List<EntityPrototypeDefinition>();
     public List<MapDefinition> Maps { get; set; } = new List<MapDefinition>();
     public List<ItemDefinition> Items { get; set; } = new List<ItemDefinition>();
+    public List<ResourceDefinition> Resources { get; set; } = new List<ResourceDefinition>();
+    public List<StatusDefinition> Statuses { get; set; } = new List<StatusDefinition>();
+    public List<RecipeDefinition> Recipes { get; set; } = new List<RecipeDefinition>();
+    public List<LootTableDefinition> LootTables { get; set; } = new List<LootTableDefinition>();
+    public List<TransactionDefinition> Transactions { get; set; } = new List<TransactionDefinition>();
+    public List<ResourceNetworkDefinition> ResourceNetworks { get; set; } = new List<ResourceNetworkDefinition>();
+    public List<ResourceNodeDefinition> ResourceNodes { get; set; } = new List<ResourceNodeDefinition>();
+    public List<InventoryDefinition> Inventories { get; set; } = new List<InventoryDefinition>();
     public List<AbilityDefinition> Abilities { get; set; } = new List<AbilityDefinition>();
     public List<QuestDefinition> Quests { get; set; } = new List<QuestDefinition>();
     public List<DialogueDefinition> Dialogues { get; set; } = new List<DialogueDefinition>();
