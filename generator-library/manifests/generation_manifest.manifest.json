@@ -17,37 +17,115 @@
     {
       "id": "generation/capability_manifest/v1",
       "path": "lua/generation/capability_manifest.lua",
+      "category": "generation",
       "capabilities": [
         "generation.capability_manifest.validate",
         "generation.capability_manifest.normalize",
         "generation.capability_manifest.index"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir",
+        "validation",
+        "editor"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "generation/module_manifest/v1",
       "path": "lua/generation/module_manifest.lua",
+      "category": "generation",
       "capabilities": [
         "generation.module_manifest.validate",
         "generation.module_manifest.normalize",
         "generation.module_manifest.index",
         "generation.module_manifest.capability_lookup"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir",
+        "validation",
+        "editor"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "generation/generator_plan/v1",
       "path": "lua/generation/generator_plan.lua",
+      "category": "generation",
       "capabilities": [
         "generation.generator_plan.validate",
         "generation.generator_plan.normalize",
         "generation.generator_plan.execution_order",
         "generation.generator_plan.compatibility_check"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir",
+        "validation",
+        "editor"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
-  "supported_runtime_targets": [
+  "runtime_targets": [
     "debug",
     "unity2d",
     "unity3d",
@@ -70,12 +148,11 @@
     "dialogue_combat",
     "hybrid"
   ],
+  "unsafe_features": [],
   "contracts_introduced": [
     "Capability ids use lowercase dot notation such as world.chunk.generate.",
     "Module ids use lowercase slash notation such as generation/module_manifest/v1.",
-    "Module dependencies and incompatibilities can reference modules and capabilities separately.",
-    "Generator plans are ordered step arrays; Batch 004 validates that dependencies appear earlier."
-  ],
-  "deterministic": true,
-  "unsafe_features": []
+    "Module dependencies use depends_on and reference module ids.",
+    "Generator plans are ordered step arrays; dependency validation requires dependencies to appear earlier."
+  ]
 }

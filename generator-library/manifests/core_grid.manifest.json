@@ -2,11 +2,8 @@
   "id": "batch/core_grid/v1",
   "version": "0.1.0",
   "batch": "002",
-  "name": "ids_grid_coordinates",
   "title": "IDs, grid, coordinates",
   "purpose": "Lowercase slash ID validation, 0-based coordinates, chunk/local coordinate conversion, sparse grids, facing, adjacency, and target disambiguation helpers.",
-  "deterministic": true,
-  "lua_version": "5.4",
   "files": [
     "lua/core/id.lua",
     "lua/core/grid.lua",
@@ -26,7 +23,30 @@
         "core.id.build",
         "core.id.split"
       ],
-      "dependencies": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "core/coordinates/v1",
@@ -39,7 +59,30 @@
         "core.coordinates.adjacency",
         "core.coordinates.target_disambiguation"
       ],
-      "dependencies": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "core/grid/v1",
@@ -53,16 +96,31 @@
         "core.grid.neighborhood",
         "core.grid.facing_target"
       ],
-      "dependencies": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     }
-  ],
-  "contracts_introduced": [
-    "lowercase slash IDs",
-    "position2d integer table",
-    "chunk coordinate plus local coordinate conversion",
-    "finite and unbounded sparse grid shape",
-    "same_cell/cardinal_adjacent/diagonal_adjacent/radius/facing_cell target modes",
-    "deterministic target disambiguation result shape"
   ],
   "runtime_targets": [
     "debug",
@@ -71,46 +129,27 @@
     "simulation",
     "codegen_ir"
   ],
-  "architecture_notes": {
-    "turn_modes": [
-      "realtime",
-      "turn_based",
-      "mixed",
-      "paused_planning"
-    ],
-    "combat_modes": [
-      "none",
-      "realtime",
-      "turn_based",
-      "tactical",
-      "dialogue_combat",
-      "hybrid"
-    ],
-    "ui_modes": [
-      "minimal_hud",
-      "rpg_hud",
-      "automation_hud",
-      "city_builder_ui",
-      "dialogue_focus",
-      "tactical_ui"
-    ],
-    "world_scales": [
-      "single_map",
-      "multi_map",
-      "region",
-      "continent",
-      "planet",
-      "infinite_chunks"
-    ],
-    "note": "Batch 002 is foundational; it provides engine-neutral coordinate, ID, grid, and targeting helpers for later game-domain modules."
-  },
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
   "unsafe_features": [],
-  "global_lua_restrictions": {
-    "external_dependencies": false,
-    "direct_random": false,
-    "global_writes": false,
-    "dynamic_loading": false,
-    "filesystem": false,
-    "network": false
-  }
+  "contracts_introduced": [
+    "lowercase slash IDs",
+    "position2d integer table",
+    "chunk coordinate plus local coordinate conversion",
+    "finite and unbounded sparse grid shape",
+    "same_cell/cardinal_adjacent/diagonal_adjacent/radius/facing_cell target modes",
+    "deterministic target disambiguation result shape"
+  ]
 }

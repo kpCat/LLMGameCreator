@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "batch": "006",
   "title": "Chunk/grid map generation",
-  "description": "Batch 006 manifest for deterministic chunk generation, sparse tile painting, landmark placement, roads, blocked road cells, walkability, and minimap layer data.",
+  "purpose": "Batch 006 manifest for deterministic chunk generation, sparse tile painting, landmark placement, roads, blocked road cells, walkability, and minimap layer data.",
   "files": [
     "lua/world/chunk_generator.lua",
     "lua/world/tile_painter.lua",
@@ -16,7 +16,7 @@
   "modules": [
     {
       "id": "world/chunk_generator/v1",
-      "file": "lua/world/chunk_generator.lua",
+      "path": "lua/world/chunk_generator.lua",
       "category": "world",
       "capabilities": [
         "world.chunk.generate",
@@ -26,7 +26,7 @@
         "world.walkability.emit",
         "world.minimap.layer"
       ],
-      "depends_on_contracts": [
+      "depends_on": [
         "core/diagnostics/v1",
         "core/id/v1",
         "core/coordinates/v1",
@@ -39,7 +39,7 @@
         "simulation",
         "codegen_ir"
       ],
-      "supported_time_modes": [
+      "supported_turn_modes": [
         "realtime",
         "turn_based",
         "mixed",
@@ -53,11 +53,12 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "deterministic": true
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "world/tile_painter/v1",
-      "file": "lua/world/tile_painter.lua",
+      "path": "lua/world/tile_painter.lua",
       "category": "world",
       "capabilities": [
         "world.tile.paint",
@@ -65,7 +66,7 @@
         "world.road.paint",
         "world.minimap.layer"
       ],
-      "depends_on_contracts": [
+      "depends_on": [
         "core/diagnostics/v1",
         "core/id/v1",
         "core/grid/v1"
@@ -77,7 +78,7 @@
         "simulation",
         "codegen_ir"
       ],
-      "supported_time_modes": [
+      "supported_turn_modes": [
         "realtime",
         "turn_based",
         "mixed",
@@ -91,11 +92,12 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "deterministic": true
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "world/landmark_placer/v1",
-      "file": "lua/world/landmark_placer.lua",
+      "path": "lua/world/landmark_placer.lua",
       "category": "world",
       "capabilities": [
         "world.landmark.place",
@@ -103,7 +105,7 @@
         "world.landmark.road_aware",
         "world.minimap.layer"
       ],
-      "depends_on_contracts": [
+      "depends_on": [
         "core/diagnostics/v1",
         "core/id/v1",
         "core/coordinates/v1"
@@ -115,7 +117,7 @@
         "simulation",
         "codegen_ir"
       ],
-      "supported_time_modes": [
+      "supported_turn_modes": [
         "realtime",
         "turn_based",
         "mixed",
@@ -129,9 +131,32 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "deterministic": true
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "simulation",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
   "contracts": {
     "chunk_representation": "default_tile_plus_sparse_overrides",
     "coordinates": "0-based local chunk coordinates",

@@ -1,8 +1,9 @@
 {
   "id": "batch/world_paths/v1",
   "version": "0.1.0",
-  "batch": 7,
+  "batch": "007",
   "title": "World paths, barriers, reachability",
+  "purpose": "Path carving, road generation, barrier/gate/bridge generation, and reachability diagnostics for compact world map IR.",
   "files": [
     "lua/world/path_carver.lua",
     "lua/world/road_generator.lua",
@@ -22,6 +23,7 @@
         "world.path.carve",
         "world.path.ensure_connection"
       ],
+      "depends_on": [],
       "runtime_targets": [
         "debug",
         "unity2d",
@@ -40,8 +42,8 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "dependencies": [],
-      "incompatibilities": []
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "world/road_generator/v1",
@@ -51,6 +53,7 @@
         "world.road.generate",
         "world.path.ensure_connection"
       ],
+      "depends_on": [],
       "runtime_targets": [
         "debug",
         "unity2d",
@@ -69,8 +72,8 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "dependencies": [],
-      "incompatibilities": []
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "world/barrier_generator/v1",
@@ -81,6 +84,7 @@
         "world.gate.generate",
         "world.bridge.generate"
       ],
+      "depends_on": [],
       "runtime_targets": [
         "debug",
         "unity2d",
@@ -99,8 +103,8 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "dependencies": [],
-      "incompatibilities": []
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "world/reachability/v1",
@@ -110,6 +114,7 @@
         "world.reachability.validate",
         "world.path.diagnostics"
       ],
+      "depends_on": [],
       "runtime_targets": [
         "debug",
         "unity2d",
@@ -128,10 +133,29 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "dependencies": [],
-      "incompatibilities": []
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity_tilemap"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
   "contracts": {
     "coordinates": "0-based integer cells",
     "outputs": "JSON-serializable compact IR tables",
@@ -164,6 +188,5 @@
         "diagnostics"
       ]
     }
-  ],
-  "unsafe_features": []
+  ]
 }

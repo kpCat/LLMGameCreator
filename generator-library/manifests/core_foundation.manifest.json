@@ -2,11 +2,8 @@
   "id": "batch/core_foundation/v1",
   "version": "0.1.0",
   "batch": "001",
-  "name": "core_foundation",
   "title": "Core foundation",
   "purpose": "Diagnostics helpers, deterministic RNG, lightweight schema validation, and manual examples for future Lua generator batches.",
-  "deterministic": true,
-  "lua_version": "5.4",
   "files": [
     "lua/core/diagnostics.lua",
     "lua/core/rng.lua",
@@ -14,7 +11,7 @@
     "docs/lua/core_foundation.md",
     "manifests/core_foundation.manifest.json",
     "tests/core_foundation_examples.lua",
-    "BATCH_REPORT.md"
+    "BATCH_001_REPORT.md"
   ],
   "modules": [
     {
@@ -25,7 +22,30 @@
         "core.diagnostics.create",
         "core.diagnostics.aggregate"
       ],
-      "dependencies": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "core/rng/v1",
@@ -37,7 +57,30 @@
         "core.rng.choice",
         "core.rng.shuffle"
       ],
-      "dependencies": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "core/schema/v1",
@@ -47,7 +90,30 @@
         "core.schema.validate",
         "core.schema.json_serializable"
       ],
-      "dependencies": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
   "runtime_targets": [
@@ -57,33 +123,27 @@
     "simulation",
     "codegen_ir"
   ],
-  "architecture_notes": {
-    "turn_modes": [
-      "realtime",
-      "turn_based",
-      "mixed",
-      "paused_planning"
-    ],
-    "combat_modes": [
-      "none",
-      "realtime",
-      "turn_based",
-      "tactical",
-      "dialogue_combat",
-      "hybrid"
-    ],
-    "world_scales": [
-      "single_map",
-      "multi_map",
-      "region",
-      "continent",
-      "planet",
-      "infinite_chunks"
-    ],
-    "note": "Batch 001 does not implement game-domain modules; it provides reusable validation, diagnostics, and deterministic RNG primitives for later batches."
-  },
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
   "unsafe_features": [],
-  "global_lua_restrictions": {
+  "contracts": {
+    "diagnostics": "Array of { severity, code, message, target } diagnostic entries.",
+    "rng": "Deterministic RNG state passed through ctx or explicit state tables.",
+    "schema": "Lightweight JSON-serializable validation helpers."
+  },
+  "quality": {
     "external_dependencies": false,
     "direct_random": false,
     "global_writes": false,

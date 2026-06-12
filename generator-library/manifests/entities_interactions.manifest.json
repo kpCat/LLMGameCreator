@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "batch": "008",
   "title": "Entity and interaction foundation",
-  "description": "Entity prototype/instance normalization and compact interaction IR helpers.",
+  "purpose": "Entity prototype/instance normalization and compact interaction IR helpers.",
   "files": [
     "lua/entity/entity_factory.lua",
     "lua/interaction/targeting.lua",
@@ -23,7 +23,28 @@
         "entity.instance.create",
         "interaction.component.index"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "interaction/targeting/v1",
@@ -33,7 +54,28 @@
         "interaction.target.select",
         "interaction.target.disambiguate"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "interaction/inspect_object/v1",
@@ -43,7 +85,28 @@
         "interaction.inspect.generate",
         "entity.component.inspectable"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "interaction/talk_to_npc/v1",
@@ -54,9 +117,50 @@
         "entity.component.dialogue_source",
         "dialogue.start.ir"
       ],
-      "depends_on": []
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity_tilemap"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
   "contracts": {
     "entity_id": "lowercase slash id",
     "coordinates": "0-based integer x/y",
@@ -75,26 +179,5 @@
       "radius"
     ],
     "diagnostics": "array of { severity, code, message, target }"
-  },
-  "supported_runtime_targets": [
-    "debug",
-    "unity2d",
-    "unity_tilemap"
-  ],
-  "supported_turn_modes": [
-    "realtime",
-    "turn_based",
-    "mixed",
-    "paused_planning"
-  ],
-  "supported_combat_modes": [
-    "none",
-    "realtime",
-    "turn_based",
-    "tactical",
-    "dialogue_combat",
-    "hybrid"
-  ],
-  "unsafe_features": [],
-  "deterministic": true
+  }
 }

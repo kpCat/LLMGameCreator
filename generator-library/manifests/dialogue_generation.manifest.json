@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "batch": "009",
   "title": "Dialogue generation foundation",
-  "description": "Static, procedural, fact-based and dialogue-combat generator modules for compact dialogue IR.",
+  "purpose": "Static, procedural, fact-based and dialogue-combat generator modules for compact dialogue IR.",
   "files": [
     "lua/dialogue/dialogue_schema.lua",
     "lua/dialogue/procedural_npc_dialogue.lua",
@@ -17,58 +17,143 @@
     {
       "id": "dialogue/dialogue_schema/v1",
       "path": "lua/dialogue/dialogue_schema.lua",
+      "category": "dialogue",
       "capabilities": [
         "dialogue.schema.define",
         "dialogue.static_graph.normalize",
         "dialogue.choice.validate"
-      ]
+      ],
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_ui_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "dialogue/procedural_npc_dialogue/v1",
       "path": "lua/dialogue/procedural_npc_dialogue.lua",
+      "category": "dialogue",
       "capabilities": [
         "dialogue.procedural_npc.generate",
         "dialogue.fact.topic_nodes",
         "npc.dialogue.seed"
-      ]
+      ],
+      "depends_on": [
+        "dialogue/dialogue_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_ui_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "dialogue/fact_based_dialogue/v1",
       "path": "lua/dialogue/fact_based_dialogue.lua",
+      "category": "dialogue",
       "capabilities": [
         "dialogue.fact_based.generate",
         "dialogue.quest_state.branch",
         "dialogue.conditions.effects"
-      ]
+      ],
+      "depends_on": [
+        "dialogue/dialogue_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_ui_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "dialogue/dialogue_combat/v1",
       "path": "lua/dialogue/dialogue_combat.lua",
+      "category": "dialogue",
       "capabilities": [
         "dialogue.combat.encounter_ir",
         "dialogue.choice.track_effects",
         "combat.dialogue_bridge"
-      ]
+      ],
+      "depends_on": [
+        "dialogue/dialogue_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_ui_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
-  "supports": {
-    "turn_modes": [
-      "realtime",
-      "turn_based",
-      "mixed",
-      "paused_planning"
-    ],
-    "combat_modes": [
-      "none",
-      "dialogue_combat",
-      "hybrid"
-    ],
-    "runtime_targets": [
-      "debug",
-      "unity2d",
-      "unity_ui_ir"
-    ]
-  },
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity_ui_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
   "global_restrictions": {
     "lua_version": "5.4-compatible",
     "external_dependencies": false,

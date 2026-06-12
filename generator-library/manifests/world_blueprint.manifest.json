@@ -1,6 +1,7 @@
 {
   "id": "batch/005/world_blueprint",
   "version": "0.1.0",
+  "batch": "005",
   "title": "Batch 005 - World blueprint",
   "purpose": "World blueprint, region graph, and biome catalog helpers for compact generator-library IR.",
   "files": [
@@ -24,6 +25,10 @@
         "world.minimap.metadata",
         "world.seeded_infinite_blueprint"
       ],
+      "depends_on": [
+        "core/diagnostics/v1",
+        "core/id/v1"
+      ],
       "runtime_targets": [
         "debug",
         "unity2d",
@@ -31,7 +36,7 @@
         "simulation",
         "codegen_ir"
       ],
-      "supported_time_modes": [
+      "supported_turn_modes": [
         "realtime",
         "turn_based",
         "mixed",
@@ -45,7 +50,8 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "deterministic": true
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "world/region_graph/v1",
@@ -57,6 +63,10 @@
         "world.region_graph.adjacency",
         "world.region_graph.minimap_metadata"
       ],
+      "depends_on": [
+        "core/diagnostics/v1",
+        "core/id/v1"
+      ],
       "runtime_targets": [
         "debug",
         "unity2d",
@@ -64,7 +74,7 @@
         "simulation",
         "codegen_ir"
       ],
-      "supported_time_modes": [
+      "supported_turn_modes": [
         "realtime",
         "turn_based",
         "mixed",
@@ -78,7 +88,8 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "deterministic": true
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "world/biome_catalog/v1",
@@ -90,6 +101,10 @@
         "world.biome_catalog.index",
         "world.biome_catalog.tags"
       ],
+      "depends_on": [
+        "core/diagnostics/v1",
+        "core/id/v1"
+      ],
       "runtime_targets": [
         "debug",
         "unity2d",
@@ -97,7 +112,7 @@
         "simulation",
         "codegen_ir"
       ],
-      "supported_time_modes": [
+      "supported_turn_modes": [
         "realtime",
         "turn_based",
         "mixed",
@@ -111,9 +126,32 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "deterministic": true
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "simulation",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
   "contracts": {
     "world_scales": [
       "single_map",

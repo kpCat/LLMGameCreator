@@ -24,7 +24,14 @@
         "core.time_model.mode_support",
         "core.time_model.tick_units"
       ],
-      "dependencies": [],
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
       "supported_turn_modes": [
         "realtime",
         "turn_based",
@@ -38,13 +45,6 @@
         "tactical",
         "dialogue_combat",
         "hybrid"
-      ],
-      "runtime_targets": [
-        "debug",
-        "unity2d",
-        "unity3d",
-        "simulation",
-        "codegen_ir"
       ],
       "deterministic": true,
       "unsafe_features": []
@@ -60,7 +60,14 @@
         "core.turn_system.status_duration_ticks",
         "core.turn_system.end_turn"
       ],
-      "dependencies": [],
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
       "supported_turn_modes": [
         "turn_based",
         "mixed"
@@ -70,13 +77,6 @@
         "tactical",
         "dialogue_combat",
         "hybrid"
-      ],
-      "runtime_targets": [
-        "debug",
-        "unity2d",
-        "unity3d",
-        "simulation",
-        "codegen_ir"
       ],
       "deterministic": true,
       "unsafe_features": []
@@ -91,7 +91,14 @@
         "core.mode_transition.apply",
         "core.mode_transition.dialogue_combat"
       ],
-      "dependencies": [],
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
       "supported_turn_modes": [
         "realtime",
         "turn_based",
@@ -106,17 +113,32 @@
         "dialogue_combat",
         "hybrid"
       ],
-      "runtime_targets": [
-        "debug",
-        "unity2d",
-        "unity3d",
-        "simulation",
-        "codegen_ir"
-      ],
       "deterministic": true,
       "unsafe_features": []
     }
   ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "simulation",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
   "contracts": {
     "result_shape": [
       "ok",
@@ -137,27 +159,6 @@
       "dialogue_combat",
       "paused_planning"
     ],
-    "turn_modes": [
-      "realtime",
-      "turn_based",
-      "mixed",
-      "paused_planning"
-    ],
-    "combat_modes": [
-      "none",
-      "realtime",
-      "turn_based",
-      "tactical",
-      "dialogue_combat",
-      "hybrid"
-    ],
     "json_serializable_output": true
-  },
-  "quality": {
-    "external_dependencies": false,
-    "forbidden_apis_used": false,
-    "global_writes_expected": false,
-    "huge_content_dump": false,
-    "csharp_integration": false
   }
 }

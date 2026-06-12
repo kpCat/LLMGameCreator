@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llmgamecreator.local/generator-library/manifest-contract.schema.example.json",
+  "title": "LLMGameCreator Lua Generator Batch Manifest Contract Example",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "batch",
+    "title",
+    "purpose",
+    "files",
+    "modules",
+    "runtime_targets",
+    "supported_time_modes",
+    "supported_combat_modes",
+    "unsafe_features"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "batch": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "category",
+          "capabilities",
+          "depends_on",
+          "runtime_targets",
+          "supported_turn_modes",
+          "supported_combat_modes",
+          "deterministic",
+          "unsafe_features"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "runtime_targets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supported_turn_modes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supported_combat_modes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deterministic": {
+            "type": "boolean"
+          },
+          "unsafe_features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "module_id"
+              ]
+            },
+            {
+              "required": [
+                "file"
+              ]
+            },
+            {
+              "required": [
+                "depends_on_contracts"
+              ]
+            },
+            {
+              "required": [
+                "dependencies"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "runtime_targets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supported_time_modes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supported_combat_modes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unsafe_features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "description"
+        ]
+      },
+      {
+        "required": [
+          "supported_runtime_targets"
+        ]
+      },
+      {
+        "required": [
+          "supports"
+        ]
+      }
+    ]
+  },
+  "additionalProperties": true
+}

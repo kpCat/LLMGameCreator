@@ -1,9 +1,9 @@
 {
   "id": "batch/010/quest_generation",
   "version": "0.1.0",
+  "batch": "010",
   "title": "Batch 010 — Quest/progress foundation",
-  "category": "quest",
-  "description": "Quest schema and compact quest generators for investigation, fetch, and location discovery flows.",
+  "purpose": "Quest schema and compact quest generators for investigation, fetch, and location discovery flows.",
   "files": [
     "lua/quest/quest_schema.lua",
     "lua/quest/simple_investigation.lua",
@@ -18,54 +18,146 @@
     {
       "id": "quest/quest_schema/v1",
       "path": "lua/quest/quest_schema.lua",
+      "category": "quest",
       "capabilities": [
         "quest.schema.normalize",
         "quest.progress.validate"
       ],
-      "dependencies": [],
-      "runtime_targets": ["debug", "unity2d", "unity3d"],
-      "supported_turn_modes": ["realtime", "turn_based", "mixed", "paused_planning"],
-      "supported_combat_modes": ["none", "realtime", "turn_based", "tactical", "dialogue_combat", "hybrid"]
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "quest/simple_investigation/v1",
       "path": "lua/quest/simple_investigation.lua",
+      "category": "quest",
       "capabilities": [
         "quest.investigation.generate",
         "quest.from_dialogue",
         "quest.from_interaction"
       ],
-      "dependencies": ["quest/quest_schema/v1"],
-      "runtime_targets": ["debug", "unity2d", "unity3d"],
-      "supported_turn_modes": ["realtime", "turn_based", "mixed"],
-      "supported_combat_modes": ["none", "dialogue_combat", "hybrid"]
+      "depends_on": [
+        "quest/quest_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "quest/fetch_quest/v1",
       "path": "lua/quest/fetch_quest.lua",
+      "category": "quest",
       "capabilities": [
         "quest.fetch.generate",
         "quest.progress.abstract"
       ],
-      "dependencies": ["quest/quest_schema/v1"],
-      "runtime_targets": ["debug", "unity2d", "unity3d"],
-      "supported_turn_modes": ["realtime", "turn_based", "mixed"],
-      "supported_combat_modes": ["none", "realtime", "turn_based", "hybrid"]
+      "depends_on": [
+        "quest/quest_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     },
     {
       "id": "quest/location_discovery/v1",
       "path": "lua/quest/location_discovery.lua",
+      "category": "quest",
       "capabilities": [
         "quest.location_discovery.generate",
         "quest.from_interaction",
         "world.location.reveal"
       ],
-      "dependencies": ["quest/quest_schema/v1"],
-      "runtime_targets": ["debug", "unity2d", "unity3d"],
-      "supported_turn_modes": ["realtime", "turn_based", "mixed"],
-      "supported_combat_modes": ["none", "realtime", "turn_based", "hybrid"]
+      "depends_on": [
+        "quest/quest_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
     }
   ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
   "capabilities": [
     "quest.schema.normalize",
     "quest.progress.validate",
@@ -83,14 +175,5 @@
     "objective_ir": "Objective table with declarative type, target references, count/progress data, and completion conditions.",
     "condition_ir": "Declarative completion condition; evaluated by host runtime.",
     "effect_ir": "Declarative effect; applied by host runtime, not by generator modules."
-  },
-  "quality": {
-    "lua_version": "5.4-compatible",
-    "external_dependencies": false,
-    "deterministic": true,
-    "uses_file_system": false,
-    "uses_network": false,
-    "uses_math_random": false,
-    "json_serializable_outputs": true
   }
 }
