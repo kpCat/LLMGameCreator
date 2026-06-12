@@ -1,0 +1,162 @@
+{
+  "id": "batch/items_inventory/v1",
+  "version": "0.1.0",
+  "batch": "011",
+  "title": "Inventory, items and loot",
+  "description": "Batch 011 manifest for item schema, item catalog generation, loot table generation and inventory rules modules.",
+  "modules": [
+    {
+      "path": "lua/item/item_schema.lua",
+      "module_id": "item/item_schema/v1",
+      "category": "item",
+      "capabilities": [
+        "item.schema.normalize",
+        "item.validate",
+        "inventory.item_contract"
+      ],
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    },
+    {
+      "path": "lua/item/item_catalog_generator.lua",
+      "module_id": "item/item_catalog_generator/v1",
+      "category": "item",
+      "capabilities": [
+        "item.catalog.generate",
+        "item.description_config.generate",
+        "item.prototype.expand"
+      ],
+      "depends_on": [
+        "item/item_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    },
+    {
+      "path": "lua/item/loot_table_generator.lua",
+      "module_id": "item/loot_table_generator/v1",
+      "category": "item",
+      "capabilities": [
+        "item.loot_table.generate",
+        "item.loot_pool.validate",
+        "item.drop_rules.describe"
+      ],
+      "depends_on": [
+        "item/item_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    },
+    {
+      "path": "lua/item/inventory_rules.lua",
+      "module_id": "item/inventory_rules/v1",
+      "category": "item",
+      "capabilities": [
+        "inventory.rules.generate",
+        "inventory.constraints.validate",
+        "equipment.slot_rules.define"
+      ],
+      "depends_on": [
+        "item/item_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    }
+  ],
+  "files": [
+    "lua/item/item_schema.lua",
+    "lua/item/item_catalog_generator.lua",
+    "lua/item/loot_table_generator.lua",
+    "lua/item/inventory_rules.lua",
+    "docs/lua/items_inventory_loot.md",
+    "manifests/items_inventory.manifest.json",
+    "tests/items_inventory_examples.lua",
+    "BATCH_011_REPORT.md"
+  ],
+  "contracts": {
+    "item_id": "lowercase slash id",
+    "stacking": "per-item stack limit with explicit quest item handling",
+    "equipment": "slot-based equipment IR",
+    "loot": "guaranteed drops plus weighted entries, not runtime random resolution",
+    "inventory": "container and item constraint IR"
+  },
+  "quality": {
+    "deterministic": true,
+    "external_dependencies": false,
+    "forbidden_apis": [],
+    "huge_content_dumps": false,
+    "csharp_integration": false
+  }
+}
