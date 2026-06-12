@@ -84,6 +84,7 @@ Current style:
 - Patch-capable planning uses optional `config.package_operations` inside `GeneratorPlan` steps. Read `GeneratorPlanDraftService`, `GeneratorPlanValidator`, `GamePackagePatchOperationValidator`, `GeneratorPlanPipelineService`, and `GamePackagePatchService`. Plans may propose allowlisted data-only operations, but approval, preview, patch extraction, dry-run and apply are owned by C# services.
 - Pipeline orchestration is a convenience layer only: approved plan -> preview artifact -> patch artifact -> dry-run diff. Prepare must not mutate package state and must not auto-apply.
 - The older First Playable Slice `ApplyDraft` path is legacy direct apply. Treat it cautiously because it does not use `game_package_patch_v1` rollback/audit artifacts; prefer the Generator Library safe patch pipeline for new creator flows.
+- Prototype Lua execution is implemented only for typed `data:extend(...)` declarations in `src/LLMGameCreator.Scripting/`. Read `PrototypeLuaExecutor`, `PrototypeLuaStaticAnalyzer`, `PrototypeLuaDeclarationMapper`, `PrototypeLuaPatchArtifactService`, and `GamePackagePatchOperationValidator`. It captures declarations and creates `game_package_patch_v1` artifacts; runtime/generator/behavior/interaction/formula/event Lua and generator modules are still not executed.
 
 ### Runtime command pattern
 

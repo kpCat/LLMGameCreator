@@ -14,6 +14,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _modulesTabPage;
         private TabPage _capabilitiesTabPage;
         private TabPage _plansTabPage;
+        private TabPage _prototypeLuaTabPage;
         private TabPage _artifactsTabPage;
         private TabPage _integrityTabPage;
         private TabPage _issuesTabPage;
@@ -21,6 +22,7 @@ namespace LLMGameCreator.WinForms.Pages
         private GeneratorLibraryModulesTabControl _modulesTab;
         private GeneratorLibraryCapabilitiesTabControl _capabilitiesTab;
         private GeneratorLibraryPlansTabControl _plansTab;
+        private GeneratorLibraryPrototypeLuaTabControl _prototypeLuaTab;
         private GeneratorLibraryArtifactsTabControl _artifactsTab;
         private GeneratorLibraryIntegrityTabControl _integrityTab;
         private GeneratorLibraryIssuesTabControl _issuesTab;
@@ -43,6 +45,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._modulesTabPage = new TabPage();
             this._capabilitiesTabPage = new TabPage();
             this._plansTabPage = new TabPage();
+            this._prototypeLuaTabPage = new TabPage();
             this._artifactsTabPage = new TabPage();
             this._integrityTabPage = new TabPage();
             this._issuesTabPage = new TabPage();
@@ -50,6 +53,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._modulesTab = new GeneratorLibraryModulesTabControl();
             this._capabilitiesTab = new GeneratorLibraryCapabilitiesTabControl();
             this._plansTab = new GeneratorLibraryPlansTabControl();
+            this._prototypeLuaTab = new GeneratorLibraryPrototypeLuaTabControl();
             this._artifactsTab = new GeneratorLibraryArtifactsTabControl();
             this._integrityTab = new GeneratorLibraryIntegrityTabControl();
             this._issuesTab = new GeneratorLibraryIssuesTabControl();
@@ -58,6 +62,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._modulesTabPage.SuspendLayout();
             this._capabilitiesTabPage.SuspendLayout();
             this._plansTabPage.SuspendLayout();
+            this._prototypeLuaTabPage.SuspendLayout();
             this._artifactsTabPage.SuspendLayout();
             this._integrityTabPage.SuspendLayout();
             this._issuesTabPage.SuspendLayout();
@@ -69,6 +74,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._modulesTabPage);
             this._tabs.Controls.Add(this._capabilitiesTabPage);
             this._tabs.Controls.Add(this._plansTabPage);
+            this._tabs.Controls.Add(this._prototypeLuaTabPage);
             this._tabs.Controls.Add(this._artifactsTabPage);
             this._tabs.Controls.Add(this._integrityTabPage);
             this._tabs.Controls.Add(this._issuesTabPage);
@@ -122,6 +128,17 @@ namespace LLMGameCreator.WinForms.Pages
             this._plansTabPage.TabIndex = 3;
             this._plansTabPage.Text = "Plans";
             this._plansTabPage.UseVisualStyleBackColor = true;
+            // 
+            // _prototypeLuaTabPage
+            // 
+            this._prototypeLuaTabPage.Controls.Add(this._prototypeLuaTab);
+            this._prototypeLuaTabPage.Location = new Point(4, 24);
+            this._prototypeLuaTabPage.Name = "_prototypeLuaTabPage";
+            this._prototypeLuaTabPage.Padding = new Padding(3);
+            this._prototypeLuaTabPage.Size = new Size(792, 422);
+            this._prototypeLuaTabPage.TabIndex = 7;
+            this._prototypeLuaTabPage.Text = "Prototype Lua";
+            this._prototypeLuaTabPage.UseVisualStyleBackColor = true;
             // 
             // _artifactsTabPage
             // 
@@ -178,6 +195,11 @@ namespace LLMGameCreator.WinForms.Pages
             this._plansTab.Name = "_plansTab";
             this._plansTab.Size = new Size(786, 416);
             this._plansTab.TabIndex = 0;
+            this._prototypeLuaTab.Dock = DockStyle.Fill;
+            this._prototypeLuaTab.Location = new Point(3, 3);
+            this._prototypeLuaTab.Name = "_prototypeLuaTab";
+            this._prototypeLuaTab.Size = new Size(786, 416);
+            this._prototypeLuaTab.TabIndex = 0;
             this._artifactsTab.Dock = DockStyle.Fill;
             this._artifactsTab.Location = new Point(3, 3);
             this._artifactsTab.Name = "_artifactsTab";
@@ -206,6 +228,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._modulesTabPage.ResumeLayout(false);
             this._capabilitiesTabPage.ResumeLayout(false);
             this._plansTabPage.ResumeLayout(false);
+            this._prototypeLuaTabPage.ResumeLayout(false);
             this._artifactsTabPage.ResumeLayout(false);
             this._integrityTabPage.ResumeLayout(false);
             this._issuesTabPage.ResumeLayout(false);

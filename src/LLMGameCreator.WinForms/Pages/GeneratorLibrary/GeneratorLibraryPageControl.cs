@@ -1,5 +1,6 @@
 using LLMGameCreator.Application.Design;
 using LLMGameCreator.Application.Projects;
+using LLMGameCreator.Scripting;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -17,6 +18,8 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
     private readonly IGeneratorPlanPipelineService? _planPipelineService;
     private readonly IGeneratedArtifactRepository? _artifactRepository;
     private readonly IGamePackagePatchService? _patchService;
+    private readonly IPrototypeLuaExecutor? _prototypeLuaExecutor;
+    private readonly IPrototypeLuaPatchArtifactService? _prototypeLuaPatchArtifactService;
 
     public GeneratorLibraryPageControl()
     {
@@ -35,7 +38,9 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         IGeneratorPlanPreviewService planPreviewService,
         IGeneratorPlanPipelineService planPipelineService,
         IGeneratedArtifactRepository artifactRepository,
-        IGamePackagePatchService patchService)
+        IGamePackagePatchService patchService,
+        IPrototypeLuaExecutor prototypeLuaExecutor,
+        IPrototypeLuaPatchArtifactService prototypeLuaPatchArtifactService)
     {
         _currentGamePackageService = currentGamePackageService;
         _databaseInitializer = databaseInitializer;
@@ -49,9 +54,13 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         _planPipelineService = planPipelineService;
         _artifactRepository = artifactRepository;
         _patchService = patchService;
+        _prototypeLuaExecutor = prototypeLuaExecutor;
+        _prototypeLuaPatchArtifactService = prototypeLuaPatchArtifactService;
         InitializeComponent();
         _plansTab.Configure(_planDraftService, _planRepository, _planReviewService, _planPreviewService, _planPipelineService);
         _artifactsTab.Configure(_artifactRepository, _patchService);
+        _prototypeLuaTab.Configure(_prototypeLuaExecutor, _prototypeLuaPatchArtifactService, _patchService);
+        _prototypeLuaTab.PatchArtifactCreated = async () => await _artifactsTab.RefreshArtifactsAsync().ConfigureAwait(true);
         WireEvents();
     }
 

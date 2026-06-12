@@ -90,6 +90,36 @@ Lua file
  -> allow apply only after approval
 ```
 
+## Prototype Lua execution status
+
+Prototype Lua execution is implemented only for `data:extend(...)`.
+
+Supported declaration types:
+
+- `tile`;
+- `map`;
+- `entity_prototype`;
+- `manifest_update`.
+
+The editor-side flow is:
+
+```text
+Prototype Lua source
+ -> static forbidden API analyzer
+ -> fresh MoonSharp sandbox
+ -> capture data:extend declarations
+ -> map declarations to package_operations
+ -> validate through game_package_patch_v1 rules
+ -> save Design DB patch artifact
+ -> optional dry-run through the existing patch service
+```
+
+Lua does not receive a `GamePackage`, `GameState`, filesystem, process, network or direct host object API. The sandbox registers only `data:extend(...)` and `llmgc.version`. The static analyzer conservatively rejects obvious unsafe tokens such as `io`, `os`, `debug`, `dofile`, `loadfile`, `load`, `require`, `package`, `collectgarbage`, environment APIs, `coroutine`, `math.random`, `math.randomseed`, and loop keywords. Declaration count is capped; MoonSharp 2.0.0 does not expose a simple per-script timeout/instruction-limit option in this target, so loops are rejected for this first declarative layer. The analyzer is not a full Lua parser; false positives are acceptable for safety.
+
+Prototype Lua output is not applied automatically. It becomes a `game_package_patch_v1` artifact and apply remains explicit through the existing dry-run/apply/rollback pipeline.
+
+Runtime Lua, generator Lua, behavior Lua, interaction Lua, formula Lua, event Lua and migration Lua execution are still not implemented. Generator modules are not executed by this layer.
+
 ## LLM generation rules
 
 LLM должна получать:

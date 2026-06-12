@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\src\LLMGameCreator.Runtime\LLMGameCreator.Runtime.csproj" />
     <ProjectReference Include="..\..\src\LLMGameCreator.Application\LLMGameCreator.Application.csproj" />
     <ProjectReference Include="..\..\src\LLMGameCreator.Infrastructure\LLMGameCreator.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\LLMGameCreator.Scripting\LLMGameCreator.Scripting.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.2" />

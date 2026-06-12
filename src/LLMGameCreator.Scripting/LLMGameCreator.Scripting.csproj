@@ -9,4 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\LLMGameCreator.Domain\LLMGameCreator.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MoonSharp" Version="2.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
 </Project>

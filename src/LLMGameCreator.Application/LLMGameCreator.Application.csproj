@@ -10,5 +10,6 @@
     <ProjectReference Include="..\LLMGameCreator.Domain\LLMGameCreator.Domain.csproj" />
     <ProjectReference Include="..\LLMGameCreator.GamePackage\LLMGameCreator.GamePackage.csproj" />
     <ProjectReference Include="..\LLMGameCreator.Runtime.Abstractions\LLMGameCreator.Runtime.Abstractions.csproj" />
+    <ProjectReference Include="..\LLMGameCreator.Scripting\LLMGameCreator.Scripting.csproj" />
   </ItemGroup>
 </Project>

@@ -54,6 +54,10 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IGeneratorPlanPreviewService, GeneratorPlanPreviewService>(Reuse.Singleton);
         _container.Register<IGamePackagePatchService, GamePackagePatchService>(Reuse.Singleton);
         _container.Register<IGeneratorPlanPipelineService, GeneratorPlanPipelineService>(Reuse.Singleton);
+        _container.Register<PrototypeLuaStaticAnalyzer>(Reuse.Singleton);
+        _container.Register<PrototypeLuaDeclarationMapper>(Reuse.Singleton);
+        _container.Register<IPrototypeLuaExecutor, PrototypeLuaExecutor>(Reuse.Singleton);
+        _container.Register<IPrototypeLuaPatchArtifactService, PrototypeLuaPatchArtifactService>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
@@ -101,7 +105,9 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IGeneratorPlanPreviewService>(),
             resolver.Resolve<IGeneratorPlanPipelineService>(),
             resolver.Resolve<IGeneratedArtifactRepository>(),
-            resolver.Resolve<IGamePackagePatchService>()), Reuse.Singleton);
+            resolver.Resolve<IGamePackagePatchService>(),
+            resolver.Resolve<IPrototypeLuaExecutor>(),
+            resolver.Resolve<IPrototypeLuaPatchArtifactService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

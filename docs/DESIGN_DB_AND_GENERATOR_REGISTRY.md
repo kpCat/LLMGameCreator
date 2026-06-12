@@ -197,6 +197,14 @@ Rollback snapshots are stored under:
 
 Apply writes an audit generated artifact with kind `game_package_patch_apply_result_v1` and validation/audit rows in the Design DB. The layer still does not execute Lua, execute generator modules, call an LLM, run Unity, run codegen, or change the `GamePackage` JSON format.
 
+## Prototype Lua Patch Artifacts
+
+Prototype Lua can now create `game_package_patch_v1` artifacts from controlled `data:extend(...)` declarations.
+
+The supported declarations are `tile`, `map`, `entity_prototype`, and `manifest_update`. C# executes the source in a fresh sandbox, captures declarations, maps them to the same strict package operations used by patch-capable plans, validates them with `GamePackagePatchOperationValidator`, and saves the patch artifact in the Design DB.
+
+This path does not execute generator modules, does not infer operations from module metadata, does not mutate `GamePackage` directly, and does not apply automatically. Dry-run/apply/rollback still use the same explicit `GamePackagePatchService` pipeline as other patch artifacts.
+
 ## Patch-Capable Generator Plans
 
 Generator plan step configs may now include an optional data-only field:
