@@ -1,0 +1,163 @@
+{
+  "id": "manifest/time_turn/v1",
+  "version": "0.1.0",
+  "batch": "003",
+  "title": "Time, turn, mode model",
+  "purpose": "Registers core time model, turn system, and mode transition modules for deterministic game generator contracts.",
+  "files": [
+    "lua/core/time_model.lua",
+    "lua/core/turn_system.lua",
+    "lua/core/mode_transition.lua",
+    "docs/lua/time_turn_modes.md",
+    "manifests/time_turn.manifest.json",
+    "tests/time_turn_examples.lua",
+    "BATCH_003_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "core/time_model/v1",
+      "path": "lua/core/time_model.lua",
+      "category": "core",
+      "capabilities": [
+        "core.time_model.create",
+        "core.time_model.advance",
+        "core.time_model.mode_support",
+        "core.time_model.tick_units"
+      ],
+      "dependencies": [],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "core/turn_system/v1",
+      "path": "lua/core/turn_system.lua",
+      "category": "core",
+      "capabilities": [
+        "core.turn_system.create",
+        "core.turn_system.action_points",
+        "core.turn_system.cooldowns",
+        "core.turn_system.status_duration_ticks",
+        "core.turn_system.end_turn"
+      ],
+      "dependencies": [],
+      "supported_turn_modes": [
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "core/mode_transition/v1",
+      "path": "lua/core/mode_transition.lua",
+      "category": "core",
+      "capabilities": [
+        "core.mode_transition.rules",
+        "core.mode_transition.can_transition",
+        "core.mode_transition.apply",
+        "core.mode_transition.dialogue_combat"
+      ],
+      "dependencies": [],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "contracts": {
+    "result_shape": [
+      "ok",
+      "data",
+      "diagnostics",
+      "artifacts"
+    ],
+    "diagnostic_shape": [
+      "severity",
+      "code",
+      "message",
+      "target"
+    ],
+    "active_modes": [
+      "exploration",
+      "combat",
+      "dialogue",
+      "dialogue_combat",
+      "paused_planning"
+    ],
+    "turn_modes": [
+      "realtime",
+      "turn_based",
+      "mixed",
+      "paused_planning"
+    ],
+    "combat_modes": [
+      "none",
+      "realtime",
+      "turn_based",
+      "tactical",
+      "dialogue_combat",
+      "hybrid"
+    ],
+    "json_serializable_output": true
+  },
+  "quality": {
+    "external_dependencies": false,
+    "forbidden_apis_used": false,
+    "global_writes_expected": false,
+    "huge_content_dump": false,
+    "csharp_integration": false
+  }
+}
