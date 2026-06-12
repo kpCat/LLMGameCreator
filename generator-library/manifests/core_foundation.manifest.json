@@ -1,0 +1,94 @@
+{
+  "id": "batch/core_foundation/v1",
+  "version": "0.1.0",
+  "batch": "001",
+  "name": "core_foundation",
+  "title": "Core foundation",
+  "purpose": "Diagnostics helpers, deterministic RNG, lightweight schema validation, and manual examples for future Lua generator batches.",
+  "deterministic": true,
+  "lua_version": "5.4",
+  "files": [
+    "lua/core/diagnostics.lua",
+    "lua/core/rng.lua",
+    "lua/core/schema.lua",
+    "docs/lua/core_foundation.md",
+    "manifests/core_foundation.manifest.json",
+    "tests/core_foundation_examples.lua",
+    "BATCH_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "core/diagnostics/v1",
+      "path": "lua/core/diagnostics.lua",
+      "category": "core",
+      "capabilities": [
+        "core.diagnostics.create",
+        "core.diagnostics.aggregate"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "core/rng/v1",
+      "path": "lua/core/rng.lua",
+      "category": "core",
+      "capabilities": [
+        "core.rng.seed",
+        "core.rng.next",
+        "core.rng.choice",
+        "core.rng.shuffle"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "core/schema/v1",
+      "path": "lua/core/schema.lua",
+      "category": "core",
+      "capabilities": [
+        "core.schema.validate",
+        "core.schema.json_serializable"
+      ],
+      "dependencies": []
+    }
+  ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "simulation",
+    "codegen_ir"
+  ],
+  "architecture_notes": {
+    "turn_modes": [
+      "realtime",
+      "turn_based",
+      "mixed",
+      "paused_planning"
+    ],
+    "combat_modes": [
+      "none",
+      "realtime",
+      "turn_based",
+      "tactical",
+      "dialogue_combat",
+      "hybrid"
+    ],
+    "world_scales": [
+      "single_map",
+      "multi_map",
+      "region",
+      "continent",
+      "planet",
+      "infinite_chunks"
+    ],
+    "note": "Batch 001 does not implement game-domain modules; it provides reusable validation, diagnostics, and deterministic RNG primitives for later batches."
+  },
+  "unsafe_features": [],
+  "global_lua_restrictions": {
+    "external_dependencies": false,
+    "direct_random": false,
+    "global_writes": false,
+    "dynamic_loading": false,
+    "filesystem": false,
+    "network": false
+  }
+}
