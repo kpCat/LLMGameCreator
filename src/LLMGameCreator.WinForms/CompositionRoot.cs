@@ -75,11 +75,15 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<ILootRuntimeService, LootRuntimeService>(Reuse.Singleton);
         _container.Register<ITransactionRuntimeService, TransactionRuntimeService>(Reuse.Singleton);
         _container.Register<IResourceNetworkRuntimeService, ResourceNetworkRuntimeService>(Reuse.Singleton);
+        _container.Register<IEquipmentRuntimeService, EquipmentRuntimeService>(Reuse.Singleton);
+        _container.Register<IContainerRuntimeService, ContainerRuntimeService>(Reuse.Singleton);
+        _container.Register<IHarvestRuntimeService, HarvestRuntimeService>(Reuse.Singleton);
         _container.Register<IUseItemRuntimeService, UseItemRuntimeService>(Reuse.Singleton);
         _container.Register<IInteractionRuntimeService, InteractionRuntimeService>(Reuse.Singleton);
         _container.Register<IGameRuntimeService, GameRuntimeService>(Reuse.Singleton);
         _container.Register<IUnifiedGameRuntimeService, UnifiedGameRuntimeService>(Reuse.Singleton);
         _container.Register<IRuntimeStateSerializer, RuntimeStateSerializer>(Reuse.Singleton);
+        _container.Register<IRuntimeSnapshotStore, RuntimeSnapshotStore>(Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
 
@@ -111,7 +115,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ICurrentGamePackageService>(),
             resolver.Resolve<IGameRuntimeService>(),
             resolver.Resolve<IUnifiedGameRuntimeService>(),
-            resolver.Resolve<IRuntimeStateSerializer>()), Reuse.Singleton);
+            resolver.Resolve<IRuntimeStateSerializer>(),
+            resolver.Resolve<IRuntimeSnapshotStore>()), Reuse.Singleton);
 
         _container.RegisterDelegate<GeneratorLibraryPageControl>(resolver => new GeneratorLibraryPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),

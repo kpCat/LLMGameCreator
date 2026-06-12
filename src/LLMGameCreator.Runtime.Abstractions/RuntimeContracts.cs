@@ -86,10 +86,30 @@ public sealed class GameRuntimeState
     public string PlayerEntityId { get; set; } = "player";
     public long Tick { get; set; }
     public List<InventoryState> Inventories { get; set; } = new List<InventoryState>();
+    public List<EquipmentState> Equipment { get; set; } = new List<EquipmentState>();
     public List<ResourceState> Resources { get; set; } = new List<ResourceState>();
     public List<RuntimeFlagState> Flags { get; set; } = new List<RuntimeFlagState>();
     public List<StatusState> Statuses { get; set; } = new List<StatusState>();
     public Dictionary<string, string> QuestStates { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class EquipmentState
+{
+    public string OwnerKind { get; set; } = string.Empty;
+    public string OwnerId { get; set; } = string.Empty;
+    public List<EquipmentSlotState> Slots { get; set; } = new List<EquipmentSlotState>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class EquipmentSlotState
+{
+    public string SlotId { get; set; } = string.Empty;
+    public string? ItemId { get; set; }
+    public string? UniqueInstanceId { get; set; }
+    public bool QuestItem { get; set; }
+    public double? Durability { get; set; }
+    public double? Charge { get; set; }
     public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 }
 
@@ -150,7 +170,13 @@ public enum GameRuntimeCommandType
     TickResourceNodes = 8,
     SetFlag = 9,
     Wait = 10,
-    ExecuteInteraction = 11
+    ExecuteInteraction = 11,
+    EquipItem = 12,
+    UnequipItem = 13,
+    OpenContainer = 14,
+    TakeFromContainer = 15,
+    DepositToContainer = 16,
+    HarvestResourceNode = 17
 }
 
 public sealed class GameRuntimeCommand
@@ -182,6 +208,24 @@ public sealed class GameRuntimeCommand
 
     public static GameRuntimeCommand ExecuteInteraction(string interactionId, string? targetId = null)
         => new GameRuntimeCommand { Type = GameRuntimeCommandType.ExecuteInteraction, Id = interactionId, TargetId = targetId };
+
+    public static GameRuntimeCommand EquipItem(string itemId, string slotId, string? inventoryId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.EquipItem, Id = itemId, TargetId = slotId, InventoryId = inventoryId };
+
+    public static GameRuntimeCommand UnequipItem(string slotId, string? inventoryId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.UnequipItem, Id = slotId, InventoryId = inventoryId };
+
+    public static GameRuntimeCommand OpenContainer(string containerInventoryId)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.OpenContainer, Id = containerInventoryId };
+
+    public static GameRuntimeCommand TakeFromContainer(string containerInventoryId, string itemId, double amount = 1, string? inventoryId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.TakeFromContainer, Id = containerInventoryId, TargetId = itemId, Amount = amount, InventoryId = inventoryId };
+
+    public static GameRuntimeCommand DepositToContainer(string containerInventoryId, string itemId, double amount = 1, string? inventoryId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.DepositToContainer, Id = containerInventoryId, TargetId = itemId, Amount = amount, InventoryId = inventoryId };
+
+    public static GameRuntimeCommand HarvestResourceNode(string nodeId, string? inventoryId = null, string? toolItemId = null, int? seed = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.HarvestResourceNode, Id = nodeId, InventoryId = inventoryId, TargetId = toolItemId, Seed = seed };
 }
 
 public enum GameRuntimeEventType
@@ -200,7 +244,11 @@ public enum GameRuntimeEventType
     ResourceNodeTicked = 11,
     LogMessageAdded = 12,
     ValidationFailed = 13,
-    InteractionTriggered = 14
+    InteractionTriggered = 14,
+    EquipmentChanged = 15,
+    ContainerOpened = 16,
+    ItemTransferred = 17,
+    ResourceHarvested = 18
 }
 
 public sealed class GameRuntimeEvent
@@ -297,6 +345,24 @@ public interface IResourceNetworkRuntimeService
     GameRuntimeResult TickResourceNodes(GamePackageDefinition package, GameRuntimeState state, int ticks = 1);
 }
 
+public interface IEquipmentRuntimeService
+{
+    GameRuntimeResult EquipItem(GamePackageDefinition package, GameRuntimeState state, string itemId, string slotId, string? inventoryId = null);
+    GameRuntimeResult UnequipItem(GamePackageDefinition package, GameRuntimeState state, string slotId, string? inventoryId = null);
+}
+
+public interface IContainerRuntimeService
+{
+    GameRuntimeResult OpenContainer(GamePackageDefinition package, GameRuntimeState state, string containerInventoryId);
+    GameRuntimeResult TakeFromContainer(GamePackageDefinition package, GameRuntimeState state, string containerInventoryId, string itemId, double amount, string? playerInventoryId = null);
+    GameRuntimeResult DepositToContainer(GamePackageDefinition package, GameRuntimeState state, string containerInventoryId, string itemId, double amount, string? playerInventoryId = null);
+}
+
+public interface IHarvestRuntimeService
+{
+    GameRuntimeResult HarvestResourceNode(GamePackageDefinition package, GameRuntimeState state, string nodeId, string? inventoryId = null, string? toolItemId = null, int? seed = null);
+}
+
 public interface IUseItemRuntimeService
 {
     GameRuntimeResult UseItem(GamePackageDefinition package, GameRuntimeState state, string itemId, string? inventoryId = null, string? targetId = null);
@@ -347,4 +413,29 @@ public interface IRuntimeStateSerializer
     GameRuntimeState DeserializeGameRuntimeState(string json);
     string Serialize(UnifiedRuntimeSession session);
     UnifiedRuntimeSession DeserializeUnifiedSession(string json);
+}
+
+public sealed class RuntimeSnapshotResult
+{
+    public bool Success { get; set; }
+    public string Message { get; set; } = string.Empty;
+    public string? SlotName { get; set; }
+    public string? Path { get; set; }
+    public UnifiedRuntimeSession? Session { get; set; }
+    public List<RuntimeDiagnostic> Diagnostics { get; set; } = new List<RuntimeDiagnostic>();
+}
+
+public sealed class RuntimeSnapshotListResult
+{
+    public bool Success { get; set; }
+    public string Message { get; set; } = string.Empty;
+    public List<string> SlotNames { get; set; } = new List<string>();
+    public List<RuntimeDiagnostic> Diagnostics { get; set; } = new List<RuntimeDiagnostic>();
+}
+
+public interface IRuntimeSnapshotStore
+{
+    RuntimeSnapshotResult SaveSnapshot(string projectFolder, string slotName, UnifiedRuntimeSession session);
+    RuntimeSnapshotResult LoadSnapshot(string projectFolder, string slotName);
+    RuntimeSnapshotListResult ListSnapshots(string projectFolder);
 }

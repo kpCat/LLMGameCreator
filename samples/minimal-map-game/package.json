@@ -263,6 +263,65 @@
         "kind": "fuel",
         "maxStack": 4,
         "fuelType": "diesel"
+      },
+      {
+        "id": "item/rusty_knife",
+        "name": "Rusty Knife",
+        "description": "A worn utility blade.",
+        "kind": "weapon",
+        "maxStack": 1,
+        "tags": [
+          "weapon"
+        ],
+        "metadata": {
+          "equip_slot": "slot/weapon"
+        }
+      },
+      {
+        "id": "item/woodcutting_axe",
+        "name": "Woodcutting Axe",
+        "description": "A simple axe for gathering wood.",
+        "kind": "tool",
+        "maxStack": 1,
+        "maxDurability": 10,
+        "tags": [
+          "tool",
+          "axe"
+        ],
+        "metadata": {
+          "equip_slot": "slot/tool",
+          "break_on_zero": "true"
+        }
+      },
+      {
+        "id": "item/apple",
+        "name": "Apple",
+        "description": "A small foraged apple.",
+        "kind": "consumable",
+        "maxStack": 10,
+        "tags": [
+          "food"
+        ]
+      },
+      {
+        "id": "item/log",
+        "name": "Log",
+        "description": "Freshly cut wood.",
+        "kind": "material",
+        "maxStack": 20,
+        "tags": [
+          "wood"
+        ]
+      },
+      {
+        "id": "item/ore",
+        "name": "Ore",
+        "description": "A small chunk of raw ore.",
+        "kind": "material",
+        "maxStack": 20,
+        "tags": [
+          "ore"
+        ]
       }
     ],
     "resources": [
@@ -360,6 +419,24 @@
             }
           }
         ]
+      },
+      {
+        "id": "loot/apple_tree",
+        "name": "Apple Tree Forage",
+        "kind": "harvest",
+        "entries": [
+          {
+            "id": "entry/apple",
+            "weight": 1,
+            "minCount": 1,
+            "maxCount": 2,
+            "output": {
+              "kind": "item",
+              "id": "item/apple",
+              "amount": 1
+            }
+          }
+        ]
       }
     ],
     "transactions": [
@@ -411,6 +488,23 @@
             "amount": 1
           }
         ]
+      },
+      {
+        "id": "node/apple_tree",
+        "name": "Apple Tree",
+        "kind": "harvester",
+        "production": [
+          {
+            "kind": "item",
+            "id": "item/log",
+            "amount": 1
+          }
+        ],
+        "metadata": {
+          "required_tool_tag": "axe",
+          "durability_cost": "1",
+          "harvest_loot_table_id": "loot/apple_tree"
+        }
       }
     ],
     "inventories": [
@@ -434,7 +528,53 @@
           {
             "itemId": "item/fuel_can",
             "amount": 1
+          },
+          {
+            "itemId": "item/woodcutting_axe",
+            "amount": 1,
+            "durability": 10
           }
+        ]
+      },
+      {
+        "id": "inventory/chest_start",
+        "ownerKind": "container",
+        "ownerId": "entity/chest/start",
+        "slots": 8,
+        "stacks": [
+          {
+            "itemId": "item/rusty_knife",
+            "amount": 1
+          },
+          {
+            "itemId": "item/apple",
+            "amount": 2
+          }
+        ],
+        "tags": [
+          "container"
+        ]
+      }
+    ],
+    "equipmentSlots": [
+      {
+        "id": "slot/tool",
+        "name": "Tool",
+        "allowedTags": [
+          "tool"
+        ],
+        "allowedKinds": [
+          "tool"
+        ]
+      },
+      {
+        "id": "slot/weapon",
+        "name": "Weapon",
+        "allowedTags": [
+          "weapon"
+        ],
+        "allowedKinds": [
+          "weapon"
         ]
       }
     ],
@@ -478,6 +618,21 @@
             }
           }
         ]
+      },
+      {
+        "id": "interaction/open_start_chest",
+        "kind": "open_container",
+        "metadata": {
+          "container_id": "inventory/chest_start"
+        }
+      },
+      {
+        "id": "interaction/harvest_apple_tree",
+        "kind": "harvest_resource",
+        "metadata": {
+          "resource_node_id": "node/apple_tree",
+          "tool_item_id": "item/woodcutting_axe"
+        }
       }
     ]
   },

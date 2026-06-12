@@ -13,6 +13,9 @@ public sealed class GameRuntimeService : IGameRuntimeService
     private readonly IResourceNetworkRuntimeService _resourceNetworkRuntimeService;
     private readonly IUseItemRuntimeService _useItemRuntimeService;
     private readonly IInteractionRuntimeService _interactionRuntimeService;
+    private readonly IEquipmentRuntimeService _equipmentRuntimeService;
+    private readonly IContainerRuntimeService _containerRuntimeService;
+    private readonly IHarvestRuntimeService _harvestRuntimeService;
 
     public GameRuntimeService(
         IGameRuntimeStateFactory stateFactory,
@@ -21,7 +24,10 @@ public sealed class GameRuntimeService : IGameRuntimeService
         ITransactionRuntimeService transactionRuntimeService,
         IResourceNetworkRuntimeService resourceNetworkRuntimeService,
         IUseItemRuntimeService useItemRuntimeService,
-        IInteractionRuntimeService interactionRuntimeService)
+        IInteractionRuntimeService interactionRuntimeService,
+        IEquipmentRuntimeService? equipmentRuntimeService = null,
+        IContainerRuntimeService? containerRuntimeService = null,
+        IHarvestRuntimeService? harvestRuntimeService = null)
     {
         _stateFactory = stateFactory;
         _recipeRuntimeService = recipeRuntimeService;
@@ -30,6 +36,9 @@ public sealed class GameRuntimeService : IGameRuntimeService
         _resourceNetworkRuntimeService = resourceNetworkRuntimeService;
         _useItemRuntimeService = useItemRuntimeService;
         _interactionRuntimeService = interactionRuntimeService;
+        _equipmentRuntimeService = equipmentRuntimeService ?? new EquipmentRuntimeService(new RequirementEvaluator());
+        _containerRuntimeService = containerRuntimeService ?? new ContainerRuntimeService();
+        _harvestRuntimeService = harvestRuntimeService ?? new HarvestRuntimeService(new RequirementEvaluator(), new CostConsumer(), new OutputApplier());
     }
 
     public GameRuntimeResult CreateInitialState(GamePackageDefinition package)
@@ -74,6 +83,30 @@ public sealed class GameRuntimeService : IGameRuntimeService
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "Runtime command requires interaction id.", null)
                     : _interactionRuntimeService.ExecuteInteraction(package, state, command.Id.Trim(), command.TargetId, command.InventoryId);
+            case GameRuntimeCommandType.EquipItem:
+                return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
+                    ? Fail(state, "runtime.command.id_missing", "EquipItem requires item id and slot id.", command.Id ?? command.TargetId)
+                    : _equipmentRuntimeService.EquipItem(package, state, command.Id.Trim(), command.TargetId.Trim(), command.InventoryId);
+            case GameRuntimeCommandType.UnequipItem:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "UnequipItem requires slot id.", null)
+                    : _equipmentRuntimeService.UnequipItem(package, state, command.Id.Trim(), command.InventoryId);
+            case GameRuntimeCommandType.OpenContainer:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "OpenContainer requires container inventory id.", null)
+                    : _containerRuntimeService.OpenContainer(package, state, command.Id.Trim());
+            case GameRuntimeCommandType.TakeFromContainer:
+                return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
+                    ? Fail(state, "runtime.command.id_missing", "TakeFromContainer requires container inventory id and item id.", command.Id ?? command.TargetId)
+                    : _containerRuntimeService.TakeFromContainer(package, state, command.Id.Trim(), command.TargetId.Trim(), command.Amount <= 0 ? 1 : command.Amount, command.InventoryId);
+            case GameRuntimeCommandType.DepositToContainer:
+                return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
+                    ? Fail(state, "runtime.command.id_missing", "DepositToContainer requires container inventory id and item id.", command.Id ?? command.TargetId)
+                    : _containerRuntimeService.DepositToContainer(package, state, command.Id.Trim(), command.TargetId.Trim(), command.Amount <= 0 ? 1 : command.Amount, command.InventoryId);
+            case GameRuntimeCommandType.HarvestResourceNode:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "HarvestResourceNode requires resource node id.", null)
+                    : _harvestRuntimeService.HarvestResourceNode(package, state, command.Id.Trim(), command.InventoryId, command.TargetId, command.Seed);
             default:
                 return Fail(state, "runtime.command.unknown", $"Unknown runtime command: {command.Type}", command.Type.ToString());
         }

@@ -123,7 +123,8 @@ Unity Player должен быть способен загрузить GamePacka
     "transactions": [],
     "resourceNetworks": [],
     "resourceNodes": [],
-    "inventories": []
+    "inventories": [],
+    "equipmentSlots": []
   }
 }
 ```
@@ -175,3 +176,43 @@ Example:
 ```
 
 These definitions are contracts and validation inputs only. Crafting, shops and base resource simulation are not executed by the package format layer.
+
+## Exploration Inventory Fields
+
+`game.equipmentSlots` is optional and defaults to an empty list:
+
+```json
+{
+  "id": "slot/tool",
+  "name": "Tool",
+  "allowedTags": ["tool"],
+  "allowedKinds": ["tool"],
+  "requiredRequirements": []
+}
+```
+
+Items can opt into equipment routing with metadata such as `equip_slot=slot/tool` or by using matching tags/kinds like `tool`, `weapon`, `armor` or `accessory`.
+
+Container inventories use existing inventory data:
+
+```json
+{
+  "id": "inventory/chest_start",
+  "ownerKind": "container",
+  "tags": ["container"],
+  "stacks": []
+}
+```
+
+Harvest resource nodes can use metadata conventions:
+
+- `required_tool_tag`
+- `required_tool_item_id`
+- `tool_slot_id`
+- `durability_cost`
+- `charge_cost`
+- `loot_table_id`
+- `harvest_loot_table_id`
+- `deplete_on_harvest`
+
+Interaction metadata routing supports `container_id`, `resource_node_id`, `item_id`, `recipe_id`, `transaction_id`, `loot_table_id` and `tool_item_id`.

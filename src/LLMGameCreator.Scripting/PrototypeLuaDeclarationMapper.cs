@@ -44,6 +44,7 @@ public sealed class PrototypeLuaDeclarationMapper
             "resource_network" => CopyFields(declaration, index, diagnostics, "upsert_resource_network", "id", "name", "resource_id", "kind", "tags", "metadata"),
             "resource_node" => CopyFields(declaration, index, diagnostics, "upsert_resource_node", "id", "name", "kind", "network_id", "entity_prototype_id", "production", "consumption", "storage", "conversion_inputs", "conversion_outputs", "requirements", "tags", "metadata"),
             "inventory" => CopyFields(declaration, index, diagnostics, "upsert_inventory", "id", "owner_kind", "owner_id", "slots", "stacks", "tags", "metadata"),
+            "equipment_slot" => CopyFields(declaration, index, diagnostics, "upsert_equipment_slot", "id", "name", "allowed_tags", "allowed_kinds", "required_requirements", "metadata"),
             _ => UnknownType(declaration, index, diagnostics)
         };
     }

@@ -108,7 +108,8 @@ Supported declaration types:
 - `transaction`;
 - `resource_network`;
 - `resource_node`;
-- `inventory`.
+- `inventory`;
+- `equipment_slot`.
 
 The editor-side flow is:
 
@@ -150,6 +151,20 @@ data:extend({
 ```
 
 The mapper creates allowlisted patch operations such as `upsert_recipe`; Lua still cannot mutate `GamePackage` directly.
+
+Equipment slot declarations map to `upsert_equipment_slot`:
+
+```lua
+data:extend({
+  {
+    type = "equipment_slot",
+    id = "slot/tool",
+    name = "Tool",
+    allowed_tags = { "tool" },
+    allowed_kinds = { "tool" }
+  }
+})
+```
 
 Runtime Lua, generator Lua, behavior Lua, interaction Lua, formula Lua, event Lua and migration Lua execution are still not implemented. Generator modules are not executed by this layer.
 

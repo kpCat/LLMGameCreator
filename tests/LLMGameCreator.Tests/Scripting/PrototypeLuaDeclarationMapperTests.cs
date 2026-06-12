@@ -23,6 +23,7 @@ public sealed class PrototypeLuaDeclarationMapperTests
               { type = "transaction", id = "transaction/mage_training", name = "Mage Training", kind = "training", costs = { { kind = "resource", id = "resource/mana", amount = 10 } }, outputs = { { kind = "progression", id = "progression/fire_magic", amount = 1 } } },
               { type = "resource_network", id = "network/base_power", name = "Base Power Grid", resource_id = "resource/mana", kind = "mana_flow" },
               { type = "resource_node", id = "node/mana_generator", name = "Mana Generator", network_id = "network/base_power", production = { { kind = "resource", id = "resource/mana", amount = 20 } } },
+              { type = "equipment_slot", id = "slot/tool", name = "Tool", allowed_tags = { "tool" } },
               { type = "manifest_update", title = "My Game", description = "Short", start_map_id = "map/start" }
             })
             """
@@ -41,6 +42,7 @@ public sealed class PrototypeLuaDeclarationMapperTests
         Assert.Contains("upsert_transaction", result.OperationsJson);
         Assert.Contains("upsert_resource_network", result.OperationsJson);
         Assert.Contains("upsert_resource_node", result.OperationsJson);
+        Assert.Contains("upsert_equipment_slot", result.OperationsJson);
         Assert.Contains("update_manifest", result.OperationsJson);
     }
 

@@ -24,6 +24,7 @@ public sealed class GameDefinition
     public List<ResourceNetworkDefinition> ResourceNetworks { get; set; } = new List<ResourceNetworkDefinition>();
     public List<ResourceNodeDefinition> ResourceNodes { get; set; } = new List<ResourceNodeDefinition>();
     public List<InventoryDefinition> Inventories { get; set; } = new List<InventoryDefinition>();
+    public List<EquipmentSlotDefinition> EquipmentSlots { get; set; } = new List<EquipmentSlotDefinition>();
     public List<AbilityDefinition> Abilities { get; set; } = new List<AbilityDefinition>();
     public List<QuestDefinition> Quests { get; set; } = new List<QuestDefinition>();
     public List<DialogueDefinition> Dialogues { get; set; } = new List<DialogueDefinition>();

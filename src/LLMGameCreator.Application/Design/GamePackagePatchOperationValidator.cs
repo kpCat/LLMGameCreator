@@ -138,6 +138,11 @@ public sealed partial class GamePackagePatchOperationValidator
         "op", "id", "owner_kind", "owner_id", "slots", "stacks", "tags", "metadata"
     };
 
+    private static readonly HashSet<string> EquipmentSlotFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "allowed_tags", "allowed_kinds", "required_requirements", "metadata"
+    };
+
     public GamePackagePatchParseResult ParsePatchDocument(string json, string artifactId)
     {
         var results = new List<GeneratedArtifactValidationResultRecord>();
@@ -320,6 +325,7 @@ public sealed partial class GamePackagePatchOperationValidator
             "upsert_resource_network" => ParseEconomyOperation(operationNode, ResourceNetworkFields, node => new UpsertResourceNetworkPatchOperation(ReadDefinition<ResourceNetworkDefinition>(node)), artifactId, target, results, requireName: true),
             "upsert_resource_node" => ParseEconomyOperation(operationNode, ResourceNodeFields, node => new UpsertResourceNodePatchOperation(ReadDefinition<ResourceNodeDefinition>(node)), artifactId, target, results, requireName: true),
             "upsert_inventory" => ParseEconomyOperation(operationNode, InventoryFields, node => new UpsertInventoryPatchOperation(ReadDefinition<InventoryDefinition>(node)), artifactId, target, results, requireName: false),
+            "upsert_equipment_slot" => ParseEconomyOperation(operationNode, EquipmentSlotFields, node => new UpsertEquipmentSlotPatchOperation(ReadDefinition<EquipmentSlotDefinition>(node)), artifactId, target, results, requireName: true),
             _ => UnknownOperation(op, artifactId, target, results)
         };
     }

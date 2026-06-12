@@ -76,6 +76,32 @@ internal static class RuntimeStateHelpers
         stack.QuestItem = stack.QuestItem || questItem;
     }
 
+    public static void AddStack(InventoryState inventory, ItemStackState source)
+    {
+        if (source.Amount <= 0)
+        {
+            return;
+        }
+
+        var stack = string.IsNullOrWhiteSpace(source.UniqueInstanceId)
+            ? inventory.Stacks.FirstOrDefault(s =>
+                IdEquals(s.ItemId, source.ItemId)
+                && string.IsNullOrWhiteSpace(s.UniqueInstanceId)
+                && NullableEquals(s.Durability, source.Durability)
+                && NullableEquals(s.Charge, source.Charge)
+                && DictionaryEquals(s.Metadata, source.Metadata))
+            : null;
+
+        if (stack == null)
+        {
+            inventory.Stacks.Add(CloneStack(source));
+            return;
+        }
+
+        stack.Amount += source.Amount;
+        stack.QuestItem = stack.QuestItem || source.QuestItem;
+    }
+
     public static bool RemoveItem(InventoryState inventory, string itemId, double amount)
     {
         if (GetItemAmount(inventory, itemId) < amount)
@@ -101,6 +127,117 @@ internal static class RuntimeStateHelpers
         }
 
         return true;
+    }
+
+    public static List<ItemStackState>? TakeItemStacks(InventoryState inventory, string itemId, double amount)
+    {
+        if (amount <= 0 || GetItemAmount(inventory, itemId) < amount)
+        {
+            return null;
+        }
+
+        var remaining = amount;
+        var taken = new List<ItemStackState>();
+        foreach (var stack in inventory.Stacks.Where(s => IdEquals(s.ItemId, itemId)).ToList())
+        {
+            if (remaining <= 0)
+            {
+                break;
+            }
+
+            var consumed = Math.Min(stack.Amount, remaining);
+            var clone = CloneStack(stack);
+            clone.Amount = consumed;
+            taken.Add(clone);
+            stack.Amount -= consumed;
+            remaining -= consumed;
+            if (stack.Amount <= 0)
+            {
+                inventory.Stacks.Remove(stack);
+            }
+        }
+
+        return taken;
+    }
+
+    public static ItemStackState CloneStack(ItemStackState stack)
+    {
+        return new ItemStackState
+        {
+            ItemId = stack.ItemId,
+            Amount = stack.Amount,
+            UniqueInstanceId = stack.UniqueInstanceId,
+            QuestItem = stack.QuestItem,
+            Durability = stack.Durability,
+            Charge = stack.Charge,
+            Metadata = new Dictionary<string, string>(stack.Metadata)
+        };
+    }
+
+    public static EquipmentState EnsurePlayerEquipment(GameRuntimeState state)
+    {
+        var equipment = state.Equipment.FirstOrDefault(e => KindEquals(e.OwnerKind, "player") && IdEquals(e.OwnerId, state.PlayerEntityId))
+            ?? state.Equipment.FirstOrDefault(e => KindEquals(e.OwnerKind, "player"));
+
+        if (equipment != null)
+        {
+            return equipment;
+        }
+
+        equipment = new EquipmentState
+        {
+            OwnerKind = "player",
+            OwnerId = state.PlayerEntityId
+        };
+        state.Equipment.Add(equipment);
+        return equipment;
+    }
+
+    public static EquipmentSlotState EnsureEquipmentSlot(EquipmentState equipment, string slotId)
+    {
+        var slot = equipment.Slots.FirstOrDefault(s => IdEquals(s.SlotId, slotId));
+        if (slot != null)
+        {
+            return slot;
+        }
+
+        slot = new EquipmentSlotState { SlotId = slotId };
+        equipment.Slots.Add(slot);
+        return slot;
+    }
+
+    public static ItemStackState StackFromSlot(EquipmentSlotState slot)
+    {
+        return new ItemStackState
+        {
+            ItemId = slot.ItemId ?? string.Empty,
+            Amount = 1,
+            UniqueInstanceId = slot.UniqueInstanceId,
+            QuestItem = slot.QuestItem,
+            Durability = slot.Durability,
+            Charge = slot.Charge,
+            Metadata = new Dictionary<string, string>(slot.Metadata)
+        };
+    }
+
+    public static void SetSlotFromStack(EquipmentSlotState slot, ItemStackState stack)
+    {
+        slot.ItemId = stack.ItemId;
+        slot.UniqueInstanceId = stack.UniqueInstanceId;
+        slot.QuestItem = stack.QuestItem;
+        slot.Durability = stack.Durability;
+        slot.Charge = stack.Charge;
+        slot.Metadata = new Dictionary<string, string>(stack.Metadata);
+    }
+
+    public static void ClearSlot(EquipmentSlotState slot)
+    {
+        slot.ItemId = null;
+        slot.UniqueInstanceId = null;
+        slot.QuestItem = false;
+        slot.Durability = null;
+        slot.Charge = null;
+        slot.Metadata = new Dictionary<string, string>();
     }
 
     public static ResourceState EnsureResource(GameRuntimeState state, ResourceDefinition definition, string? scope = null, string? ownerId = null)
@@ -234,6 +371,22 @@ internal static class RuntimeStateHelpers
             Tick = state.Tick,
             QuestStates = new Dictionary<string, string>(state.QuestStates),
             Metadata = new Dictionary<string, string>(state.Metadata),
+            Equipment = state.Equipment.Select(equipment => new EquipmentState
+            {
+                OwnerKind = equipment.OwnerKind,
+                OwnerId = equipment.OwnerId,
+                Metadata = new Dictionary<string, string>(equipment.Metadata),
+                Slots = equipment.Slots.Select(slot => new EquipmentSlotState
+                {
+                    SlotId = slot.SlotId,
+                    ItemId = slot.ItemId,
+                    UniqueInstanceId = slot.UniqueInstanceId,
+                    QuestItem = slot.QuestItem,
+                    Durability = slot.Durability,
+                    Charge = slot.Charge,
+                    Metadata = new Dictionary<string, string>(slot.Metadata)
+                }).ToList()
+            }).ToList(),
             Inventories = state.Inventories.Select(inventory => new InventoryState
             {
                 Id = inventory.Id,
@@ -282,6 +435,7 @@ internal static class RuntimeStateHelpers
         target.PlayerEntityId = source.PlayerEntityId;
         target.Tick = source.Tick;
         target.Inventories = source.Inventories;
+        target.Equipment = source.Equipment;
         target.Resources = source.Resources;
         target.Flags = source.Flags;
         target.Statuses = source.Statuses;
@@ -297,6 +451,17 @@ internal static class RuntimeStateHelpers
     public static bool IdEquals(string? left, string? right)
     {
         return string.Equals(left?.Trim(), right?.Trim(), StringComparison.Ordinal);
+    }
+
+    private static bool NullableEquals(double? left, double? right)
+    {
+        return (!left.HasValue && !right.HasValue) || (left.HasValue && right.HasValue && Math.Abs(left.Value - right.Value) < double.Epsilon);
+    }
+
+    private static bool DictionaryEquals(Dictionary<string, string> left, Dictionary<string, string> right)
+    {
+        return left.Count == right.Count
+            && left.All(pair => right.TryGetValue(pair.Key, out var value) && string.Equals(value, pair.Value, StringComparison.Ordinal));
     }
 
     public static double Clamp(double value, double? min, double? max)

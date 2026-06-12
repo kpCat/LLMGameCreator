@@ -369,3 +369,13 @@ Runtime v1 deliberately does not implement combat, quest/dialogue execution, ful
 `UseItem` is implemented as a minimal gameplay runtime command. It checks the runtime inventory, evaluates `ItemDefinition.UseConditions`, applies `UseEffects`, and consumes one stack only when the item is marked consumable by `kind`, tag or `metadata.consumeOnUse=true`. Failures do not partially mutate runtime state.
 
 `InteractionDefinition` runtime v1 evaluates conditions and applies effects through the same requirement/output pipeline used by recipes, loot and transactions. Interaction kinds such as `inspect`, `craft`, `trade`, `harvest_resource`, `open_container`, `talk`, `train`, `heal` and `use_item_on_target` remain data labels. Full dialogue, quest, trade UI and combat runtime stay future work.
+
+## Exploration Inventory Runtime v1
+
+Equipment is inventory-linked runtime state, not hardcoded RPG stats. Slots are optional package definitions (`EquipmentSlotDefinition`) and may restrict allowed item tags/kinds and requirements. Equipped items preserve stack metadata, durability and charge.
+
+Containers are regular inventories with `ownerKind = "container"` or container tags/metadata. Runtime transfers move item stack state between inventories and do not mutate package definitions.
+
+Harvesting uses `ResourceNodeDefinition` as the data contract. A resource node can produce outputs, conversion outputs and deterministic loot rolls, and can require a tool by item id or tag through metadata. Tool durability/charge costs are runtime costs and can target either item ids or equipment slot ids.
+
+Runtime save snapshots are serialized `UnifiedRuntimeSession` files under `.llmgc/runtime-saves`. They are runtime state only; `GamePackage` remains the source of truth for definitions.

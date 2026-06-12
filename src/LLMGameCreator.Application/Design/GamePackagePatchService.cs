@@ -594,6 +594,9 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 case UpsertInventoryPatchOperation inventory:
                     UpsertDefinition(package.Game.Inventories, inventory.Inventory, inventory.Op, inventory.Target, "inventory", diffLines);
                     break;
+                case UpsertEquipmentSlotPatchOperation equipmentSlot:
+                    UpsertDefinition(package.Game.EquipmentSlots, equipmentSlot.EquipmentSlot, equipmentSlot.Op, equipmentSlot.Target, "equipment slot", diffLines);
+                    break;
                 case UpdateManifestPatchOperation manifest:
                     if (!string.IsNullOrWhiteSpace(manifest.StartMapId) && !package.Game.Maps.Any(map => IdEquals(map.Id, manifest.StartMapId)))
                     {
@@ -819,6 +822,8 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 return DefinitionOperationToJson(resourceNode.Op, resourceNode.ResourceNode);
             case UpsertInventoryPatchOperation inventory:
                 return DefinitionOperationToJson(inventory.Op, inventory.Inventory);
+            case UpsertEquipmentSlotPatchOperation equipmentSlot:
+                return DefinitionOperationToJson(equipmentSlot.Op, equipmentSlot.EquipmentSlot);
             case UpdateManifestPatchOperation manifest:
                 var manifestJson = new JsonObject
                 {
@@ -871,6 +876,7 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
             ResourceNetworkDefinition resourceNetwork => resourceNetwork.Id,
             ResourceNodeDefinition resourceNode => resourceNode.Id,
             InventoryDefinition inventory => inventory.Id,
+            EquipmentSlotDefinition equipmentSlot => equipmentSlot.Id,
             _ => null
         };
     }

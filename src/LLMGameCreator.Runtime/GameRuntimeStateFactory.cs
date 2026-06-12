@@ -44,6 +44,7 @@ public sealed class GameRuntimeStateFactory : IGameRuntimeStateFactory
         }
 
         RuntimeStateHelpers.EnsurePlayerInventory(state);
+        RuntimeStateHelpers.EnsurePlayerEquipment(state);
 
         foreach (var resource in package.Game.Resources)
         {

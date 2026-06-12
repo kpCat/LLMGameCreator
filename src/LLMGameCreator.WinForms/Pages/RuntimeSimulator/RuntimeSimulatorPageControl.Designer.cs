@@ -37,6 +37,29 @@ namespace LLMGameCreator.WinForms.Pages
         private Label _interactionLabel;
         private ComboBox _interactionComboBox;
         private Button _interactionButton;
+        private Label _equipmentSlotLabel;
+        private ComboBox _equipmentSlotComboBox;
+        private Button _equipButton;
+        private Button _unequipButton;
+        private Label _containerLabel;
+        private ComboBox _containerComboBox;
+        private Label _containerItemLabel;
+        private TextBox _containerItemTextBox;
+        private Label _containerAmountLabel;
+        private NumericUpDown _containerAmountNumericUpDown;
+        private Button _openContainerButton;
+        private Button _takeContainerButton;
+        private Button _depositContainerButton;
+        private Label _resourceNodeLabel;
+        private ComboBox _resourceNodeComboBox;
+        private Label _toolItemLabel;
+        private TextBox _toolItemTextBox;
+        private Button _harvestButton;
+        private Label _snapshotSlotLabel;
+        private TextBox _snapshotSlotTextBox;
+        private Button _saveSnapshotButton;
+        private Button _loadSnapshotButton;
+        private Button _listSnapshotsButton;
         private Label _ticksLabel;
         private NumericUpDown _ticksNumericUpDown;
         private Button _tickButton;
@@ -84,6 +107,29 @@ namespace LLMGameCreator.WinForms.Pages
             this._interactionLabel = new Label();
             this._interactionComboBox = new ComboBox();
             this._interactionButton = new Button();
+            this._equipmentSlotLabel = new Label();
+            this._equipmentSlotComboBox = new ComboBox();
+            this._equipButton = new Button();
+            this._unequipButton = new Button();
+            this._containerLabel = new Label();
+            this._containerComboBox = new ComboBox();
+            this._containerItemLabel = new Label();
+            this._containerItemTextBox = new TextBox();
+            this._containerAmountLabel = new Label();
+            this._containerAmountNumericUpDown = new NumericUpDown();
+            this._openContainerButton = new Button();
+            this._takeContainerButton = new Button();
+            this._depositContainerButton = new Button();
+            this._resourceNodeLabel = new Label();
+            this._resourceNodeComboBox = new ComboBox();
+            this._toolItemLabel = new Label();
+            this._toolItemTextBox = new TextBox();
+            this._harvestButton = new Button();
+            this._snapshotSlotLabel = new Label();
+            this._snapshotSlotTextBox = new TextBox();
+            this._saveSnapshotButton = new Button();
+            this._loadSnapshotButton = new Button();
+            this._listSnapshotsButton = new Button();
             this._ticksLabel = new Label();
             this._ticksNumericUpDown = new NumericUpDown();
             this._tickButton = new Button();
@@ -98,6 +144,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._commandPanel.SuspendLayout();
             this._topToolbarPanel.SuspendLayout();
             ((ISupportInitialize)this._ticksNumericUpDown).BeginInit();
+            ((ISupportInitialize)this._containerAmountNumericUpDown).BeginInit();
             ((ISupportInitialize)this._rightSplitContainer).BeginInit();
             this._rightSplitContainer.Panel1.SuspendLayout();
             this._rightSplitContainer.Panel2.SuspendLayout();
@@ -154,6 +201,29 @@ namespace LLMGameCreator.WinForms.Pages
             this._topToolbarPanel.Controls.Add(this._interactionLabel);
             this._topToolbarPanel.Controls.Add(this._interactionComboBox);
             this._topToolbarPanel.Controls.Add(this._interactionButton);
+            this._topToolbarPanel.Controls.Add(this._equipmentSlotLabel);
+            this._topToolbarPanel.Controls.Add(this._equipmentSlotComboBox);
+            this._topToolbarPanel.Controls.Add(this._equipButton);
+            this._topToolbarPanel.Controls.Add(this._unequipButton);
+            this._topToolbarPanel.Controls.Add(this._containerLabel);
+            this._topToolbarPanel.Controls.Add(this._containerComboBox);
+            this._topToolbarPanel.Controls.Add(this._containerItemLabel);
+            this._topToolbarPanel.Controls.Add(this._containerItemTextBox);
+            this._topToolbarPanel.Controls.Add(this._containerAmountLabel);
+            this._topToolbarPanel.Controls.Add(this._containerAmountNumericUpDown);
+            this._topToolbarPanel.Controls.Add(this._openContainerButton);
+            this._topToolbarPanel.Controls.Add(this._takeContainerButton);
+            this._topToolbarPanel.Controls.Add(this._depositContainerButton);
+            this._topToolbarPanel.Controls.Add(this._resourceNodeLabel);
+            this._topToolbarPanel.Controls.Add(this._resourceNodeComboBox);
+            this._topToolbarPanel.Controls.Add(this._toolItemLabel);
+            this._topToolbarPanel.Controls.Add(this._toolItemTextBox);
+            this._topToolbarPanel.Controls.Add(this._harvestButton);
+            this._topToolbarPanel.Controls.Add(this._snapshotSlotLabel);
+            this._topToolbarPanel.Controls.Add(this._snapshotSlotTextBox);
+            this._topToolbarPanel.Controls.Add(this._saveSnapshotButton);
+            this._topToolbarPanel.Controls.Add(this._loadSnapshotButton);
+            this._topToolbarPanel.Controls.Add(this._listSnapshotsButton);
             this._topToolbarPanel.Controls.Add(this._ticksLabel);
             this._topToolbarPanel.Controls.Add(this._ticksNumericUpDown);
             this._topToolbarPanel.Controls.Add(this._tickButton);
@@ -386,6 +456,214 @@ namespace LLMGameCreator.WinForms.Pages
             this._interactionButton.Text = "Execute Interaction";
             this._interactionButton.UseVisualStyleBackColor = true;
             // 
+            // _equipmentSlotLabel
+            // 
+            this._equipmentSlotLabel.AutoSize = true;
+            this._equipmentSlotLabel.Location = new Point(3, 496);
+            this._equipmentSlotLabel.Margin = new Padding(3, 12, 3, 0);
+            this._equipmentSlotLabel.Name = "_equipmentSlotLabel";
+            this._equipmentSlotLabel.Size = new Size(88, 15);
+            this._equipmentSlotLabel.TabIndex = 22;
+            this._equipmentSlotLabel.Text = "Equipment Slot";
+            // 
+            // _equipmentSlotComboBox
+            // 
+            this._equipmentSlotComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._equipmentSlotComboBox.FormattingEnabled = true;
+            this._equipmentSlotComboBox.Location = new Point(3, 514);
+            this._equipmentSlotComboBox.Name = "_equipmentSlotComboBox";
+            this._equipmentSlotComboBox.Size = new Size(290, 23);
+            this._equipmentSlotComboBox.TabIndex = 23;
+            // 
+            // _equipButton
+            // 
+            this._equipButton.Location = new Point(3, 543);
+            this._equipButton.Name = "_equipButton";
+            this._equipButton.Size = new Size(220, 30);
+            this._equipButton.TabIndex = 24;
+            this._equipButton.Text = "Equip Item";
+            this._equipButton.UseVisualStyleBackColor = true;
+            // 
+            // _unequipButton
+            // 
+            this._unequipButton.Location = new Point(3, 579);
+            this._unequipButton.Name = "_unequipButton";
+            this._unequipButton.Size = new Size(220, 30);
+            this._unequipButton.TabIndex = 25;
+            this._unequipButton.Text = "Unequip Slot";
+            this._unequipButton.UseVisualStyleBackColor = true;
+            // 
+            // _containerLabel
+            // 
+            this._containerLabel.AutoSize = true;
+            this._containerLabel.Location = new Point(3, 624);
+            this._containerLabel.Margin = new Padding(3, 12, 3, 0);
+            this._containerLabel.Name = "_containerLabel";
+            this._containerLabel.Size = new Size(60, 15);
+            this._containerLabel.TabIndex = 26;
+            this._containerLabel.Text = "Container";
+            // 
+            // _containerComboBox
+            // 
+            this._containerComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._containerComboBox.FormattingEnabled = true;
+            this._containerComboBox.Location = new Point(3, 642);
+            this._containerComboBox.Name = "_containerComboBox";
+            this._containerComboBox.Size = new Size(290, 23);
+            this._containerComboBox.TabIndex = 27;
+            // 
+            // _containerItemLabel
+            // 
+            this._containerItemLabel.AutoSize = true;
+            this._containerItemLabel.Location = new Point(3, 668);
+            this._containerItemLabel.Name = "_containerItemLabel";
+            this._containerItemLabel.Size = new Size(75, 15);
+            this._containerItemLabel.TabIndex = 28;
+            this._containerItemLabel.Text = "Transfer Item";
+            // 
+            // _containerItemTextBox
+            // 
+            this._containerItemTextBox.Location = new Point(3, 686);
+            this._containerItemTextBox.Name = "_containerItemTextBox";
+            this._containerItemTextBox.Size = new Size(290, 23);
+            this._containerItemTextBox.TabIndex = 29;
+            // 
+            // _containerAmountLabel
+            // 
+            this._containerAmountLabel.AutoSize = true;
+            this._containerAmountLabel.Location = new Point(3, 712);
+            this._containerAmountLabel.Name = "_containerAmountLabel";
+            this._containerAmountLabel.Size = new Size(51, 15);
+            this._containerAmountLabel.TabIndex = 30;
+            this._containerAmountLabel.Text = "Amount";
+            // 
+            // _containerAmountNumericUpDown
+            // 
+            this._containerAmountNumericUpDown.DecimalPlaces = 0;
+            this._containerAmountNumericUpDown.Location = new Point(3, 730);
+            this._containerAmountNumericUpDown.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            this._containerAmountNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            this._containerAmountNumericUpDown.Name = "_containerAmountNumericUpDown";
+            this._containerAmountNumericUpDown.Size = new Size(90, 23);
+            this._containerAmountNumericUpDown.TabIndex = 31;
+            this._containerAmountNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // _openContainerButton
+            // 
+            this._openContainerButton.Location = new Point(3, 759);
+            this._openContainerButton.Name = "_openContainerButton";
+            this._openContainerButton.Size = new Size(220, 30);
+            this._openContainerButton.TabIndex = 32;
+            this._openContainerButton.Text = "Open Container";
+            this._openContainerButton.UseVisualStyleBackColor = true;
+            // 
+            // _takeContainerButton
+            // 
+            this._takeContainerButton.Location = new Point(3, 795);
+            this._takeContainerButton.Name = "_takeContainerButton";
+            this._takeContainerButton.Size = new Size(220, 30);
+            this._takeContainerButton.TabIndex = 33;
+            this._takeContainerButton.Text = "Take From Container";
+            this._takeContainerButton.UseVisualStyleBackColor = true;
+            // 
+            // _depositContainerButton
+            // 
+            this._depositContainerButton.Location = new Point(3, 831);
+            this._depositContainerButton.Name = "_depositContainerButton";
+            this._depositContainerButton.Size = new Size(220, 30);
+            this._depositContainerButton.TabIndex = 34;
+            this._depositContainerButton.Text = "Deposit To Container";
+            this._depositContainerButton.UseVisualStyleBackColor = true;
+            // 
+            // _resourceNodeLabel
+            // 
+            this._resourceNodeLabel.AutoSize = true;
+            this._resourceNodeLabel.Location = new Point(3, 876);
+            this._resourceNodeLabel.Margin = new Padding(3, 12, 3, 0);
+            this._resourceNodeLabel.Name = "_resourceNodeLabel";
+            this._resourceNodeLabel.Size = new Size(86, 15);
+            this._resourceNodeLabel.TabIndex = 35;
+            this._resourceNodeLabel.Text = "Resource Node";
+            // 
+            // _resourceNodeComboBox
+            // 
+            this._resourceNodeComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._resourceNodeComboBox.FormattingEnabled = true;
+            this._resourceNodeComboBox.Location = new Point(3, 894);
+            this._resourceNodeComboBox.Name = "_resourceNodeComboBox";
+            this._resourceNodeComboBox.Size = new Size(290, 23);
+            this._resourceNodeComboBox.TabIndex = 36;
+            // 
+            // _toolItemLabel
+            // 
+            this._toolItemLabel.AutoSize = true;
+            this._toolItemLabel.Location = new Point(3, 920);
+            this._toolItemLabel.Name = "_toolItemLabel";
+            this._toolItemLabel.Size = new Size(56, 15);
+            this._toolItemLabel.TabIndex = 37;
+            this._toolItemLabel.Text = "Tool Item";
+            // 
+            // _toolItemTextBox
+            // 
+            this._toolItemTextBox.Location = new Point(3, 938);
+            this._toolItemTextBox.Name = "_toolItemTextBox";
+            this._toolItemTextBox.Size = new Size(290, 23);
+            this._toolItemTextBox.TabIndex = 38;
+            // 
+            // _harvestButton
+            // 
+            this._harvestButton.Location = new Point(3, 967);
+            this._harvestButton.Name = "_harvestButton";
+            this._harvestButton.Size = new Size(220, 30);
+            this._harvestButton.TabIndex = 39;
+            this._harvestButton.Text = "Harvest Resource Node";
+            this._harvestButton.UseVisualStyleBackColor = true;
+            // 
+            // _snapshotSlotLabel
+            // 
+            this._snapshotSlotLabel.AutoSize = true;
+            this._snapshotSlotLabel.Location = new Point(3, 1012);
+            this._snapshotSlotLabel.Margin = new Padding(3, 12, 3, 0);
+            this._snapshotSlotLabel.Name = "_snapshotSlotLabel";
+            this._snapshotSlotLabel.Size = new Size(77, 15);
+            this._snapshotSlotLabel.TabIndex = 40;
+            this._snapshotSlotLabel.Text = "Snapshot Slot";
+            // 
+            // _snapshotSlotTextBox
+            // 
+            this._snapshotSlotTextBox.Location = new Point(3, 1030);
+            this._snapshotSlotTextBox.Name = "_snapshotSlotTextBox";
+            this._snapshotSlotTextBox.Size = new Size(220, 23);
+            this._snapshotSlotTextBox.TabIndex = 41;
+            this._snapshotSlotTextBox.Text = "slot1";
+            // 
+            // _saveSnapshotButton
+            // 
+            this._saveSnapshotButton.Location = new Point(3, 1059);
+            this._saveSnapshotButton.Name = "_saveSnapshotButton";
+            this._saveSnapshotButton.Size = new Size(220, 30);
+            this._saveSnapshotButton.TabIndex = 42;
+            this._saveSnapshotButton.Text = "Save Snapshot";
+            this._saveSnapshotButton.UseVisualStyleBackColor = true;
+            // 
+            // _loadSnapshotButton
+            // 
+            this._loadSnapshotButton.Location = new Point(3, 1095);
+            this._loadSnapshotButton.Name = "_loadSnapshotButton";
+            this._loadSnapshotButton.Size = new Size(220, 30);
+            this._loadSnapshotButton.TabIndex = 43;
+            this._loadSnapshotButton.Text = "Load Snapshot";
+            this._loadSnapshotButton.UseVisualStyleBackColor = true;
+            // 
+            // _listSnapshotsButton
+            // 
+            this._listSnapshotsButton.Location = new Point(3, 1131);
+            this._listSnapshotsButton.Name = "_listSnapshotsButton";
+            this._listSnapshotsButton.Size = new Size(220, 30);
+            this._listSnapshotsButton.TabIndex = 44;
+            this._listSnapshotsButton.Text = "List Snapshots";
+            this._listSnapshotsButton.UseVisualStyleBackColor = true;
+            // 
             // _ticksLabel
             // 
             this._ticksLabel.AutoSize = true;
@@ -477,6 +755,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._topToolbarPanel.ResumeLayout(false);
             this._topToolbarPanel.PerformLayout();
             ((ISupportInitialize)this._ticksNumericUpDown).EndInit();
+            ((ISupportInitialize)this._containerAmountNumericUpDown).EndInit();
             this._rightSplitContainer.Panel1.ResumeLayout(false);
             this._rightSplitContainer.Panel1.PerformLayout();
             this._rightSplitContainer.Panel2.ResumeLayout(false);

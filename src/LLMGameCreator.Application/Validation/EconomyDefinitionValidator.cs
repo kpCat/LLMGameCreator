@@ -20,6 +20,7 @@ internal sealed class EconomyDefinitionValidator : IGamePackageValidationRule
         CheckIds(report, game.ResourceNetworks.Select(network => network.Id), "resource_network");
         CheckIds(report, game.ResourceNodes.Select(node => node.Id), "resource_node");
         CheckIds(report, game.Inventories.Select(inventory => inventory.Id), "inventory");
+        CheckIds(report, game.EquipmentSlots.Select(slot => slot.Id), "equipment_slot");
 
         ValidateItems(context, report);
         ValidateResources(context, report);
@@ -30,6 +31,8 @@ internal sealed class EconomyDefinitionValidator : IGamePackageValidationRule
         ValidateResourceNetworks(context, report);
         ValidateResourceNodes(context, report);
         ValidateInventories(context, report);
+        ValidateEquipmentSlots(context, report);
+        ValidateInteractions(context, report);
     }
 
     private static void ValidateItems(ValidationContext context, ValidationReport report)
@@ -199,6 +202,7 @@ internal sealed class EconomyDefinitionValidator : IGamePackageValidationRule
             ValidateCosts(context, report, node.ConversionInputs, node.Id, "resource_node.conversion_input");
             ValidateOutputs(context, report, node.ConversionOutputs, node.Id, "resource_node.conversion_output", allowProgressionWarning: false);
             ValidateRequirements(context, report, node.Requirements, node.Id);
+            ValidateResourceNodeHarvestMetadata(context, report, node);
         }
     }
 
@@ -227,6 +231,96 @@ internal sealed class EconomyDefinitionValidator : IGamePackageValidationRule
 
                 CheckOptionalNonNegative(report, stack.Durability, "inventory.stack.durability.invalid", "Inventory stack durability must be non-negative.", inventory.Id);
                 CheckOptionalNonNegative(report, stack.Charge, "inventory.stack.charge.invalid", "Inventory stack charge must be non-negative.", inventory.Id);
+            }
+        }
+    }
+
+    private static void ValidateEquipmentSlots(ValidationContext context, ValidationReport report)
+    {
+        foreach (var slot in context.Package.Game.EquipmentSlots)
+        {
+            RequireText(report, slot.Id, "equipment_slot.id.empty", "Equipment slot id is required.", slot.Id);
+            RequireText(report, slot.Name, "equipment_slot.name.empty", "Equipment slot name is required.", slot.Id);
+            if (slot.AllowedTags.Any(string.IsNullOrWhiteSpace))
+            {
+                Add(report, "equipment_slot.allowed_tag.empty", ValidationSeverity.Error, "Equipment slot allowed_tags must not contain empty values.", slot.Id);
+            }
+
+            if (slot.AllowedKinds.Any(string.IsNullOrWhiteSpace))
+            {
+                Add(report, "equipment_slot.allowed_kind.empty", ValidationSeverity.Error, "Equipment slot allowed_kinds must not contain empty values.", slot.Id);
+            }
+
+            ValidateRequirements(context, report, slot.RequiredRequirements, slot.Id);
+        }
+    }
+
+    private static void ValidateResourceNodeHarvestMetadata(ValidationContext context, ValidationReport report, ResourceNodeDefinition node)
+    {
+        if (TryMetadata(node.Metadata, "loot_table_id", out var lootTableId) && !context.LootTableIds.Contains(lootTableId))
+        {
+            Add(report, "resource_node.harvest_loot_table_missing", ValidationSeverity.Error, "Resource node harvest loot table references a missing loot table.", node.Id);
+        }
+
+        if (TryMetadata(node.Metadata, "harvest_loot_table_id", out var harvestLootTableId) && !context.LootTableIds.Contains(harvestLootTableId))
+        {
+            Add(report, "resource_node.harvest_loot_table_missing", ValidationSeverity.Error, "Resource node harvest loot table references a missing loot table.", node.Id);
+        }
+
+        if (TryMetadata(node.Metadata, "required_tool_item_id", out var toolItemId) && !context.ItemIds.Contains(toolItemId))
+        {
+            Add(report, "resource_node.required_tool_item_missing", ValidationSeverity.Error, "Resource node required tool item references a missing item.", node.Id);
+        }
+
+        if (node.Metadata.TryGetValue("required_tool_tag", out var toolTag) && string.IsNullOrWhiteSpace(toolTag))
+        {
+            Add(report, "resource_node.required_tool_tag.empty", ValidationSeverity.Error, "Resource node required tool tag must not be empty.", node.Id);
+        }
+    }
+
+    private static void ValidateInteractions(ValidationContext context, ValidationReport report)
+    {
+        foreach (var interaction in context.Package.Game.Interactions)
+        {
+            if (interaction.Kind.Equals("open_container", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!TryMetadata(interaction.Metadata, "container_id", out var containerId))
+                {
+                    Add(report, "interaction.container_missing", ValidationSeverity.Error, "open_container interaction requires metadata.container_id.", interaction.Id);
+                }
+                else if (!context.Package.Game.Inventories.Any(inventory => IdEquals(inventory.Id, containerId)))
+                {
+                    Add(report, "interaction.container_missing", ValidationSeverity.Error, "open_container interaction references a missing inventory.", interaction.Id);
+                }
+            }
+            else if (interaction.Kind.Equals("harvest_resource", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!TryMetadata(interaction.Metadata, "resource_node_id", out var nodeId) || !context.Package.Game.ResourceNodes.Any(node => IdEquals(node.Id, nodeId)))
+                {
+                    Add(report, "interaction.resource_node_missing", ValidationSeverity.Error, "harvest_resource interaction references a missing resource node.", interaction.Id);
+                }
+            }
+            else if (interaction.Kind.Equals("craft", StringComparison.OrdinalIgnoreCase)
+                && TryMetadata(interaction.Metadata, "recipe_id", out var recipeId)
+                && !context.Package.Game.Recipes.Any(recipe => IdEquals(recipe.Id, recipeId)))
+            {
+                Add(report, "interaction.recipe_missing", ValidationSeverity.Error, "craft interaction references a missing recipe.", interaction.Id);
+            }
+            else if (interaction.Kind.Equals("trade", StringComparison.OrdinalIgnoreCase)
+                && TryMetadata(interaction.Metadata, "transaction_id", out var transactionId)
+                && !context.Package.Game.Transactions.Any(transaction => IdEquals(transaction.Id, transactionId)))
+            {
+                Add(report, "interaction.transaction_missing", ValidationSeverity.Error, "trade interaction references a missing transaction.", interaction.Id);
+            }
+
+            if (TryMetadata(interaction.Metadata, "loot_table_id", out var lootTableId) && !context.LootTableIds.Contains(lootTableId))
+            {
+                Add(report, "interaction.loot_table_missing", ValidationSeverity.Error, "Interaction loot_table_id references a missing loot table.", interaction.Id);
+            }
+
+            if (TryMetadata(interaction.Metadata, "item_id", out var itemId) && !context.ItemIds.Contains(itemId))
+            {
+                Add(report, "interaction.item_missing", ValidationSeverity.Error, "Interaction item_id references a missing item.", interaction.Id);
             }
         }
     }
@@ -369,5 +463,10 @@ internal sealed class EconomyDefinitionValidator : IGamePackageValidationRule
     private static bool IdEquals(string? left, string? right)
     {
         return string.Equals(left?.Trim(), right?.Trim(), StringComparison.Ordinal);
+    }
+
+    private static bool TryMetadata(Dictionary<string, string> metadata, string key, out string value)
+    {
+        return metadata.TryGetValue(key, out value!) && !string.IsNullOrWhiteSpace(value);
     }
 }

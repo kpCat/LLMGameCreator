@@ -17,6 +17,7 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
     private readonly IGameRuntimeService? _runtimeService;
     private readonly IUnifiedGameRuntimeService? _unifiedRuntimeService;
     private readonly IRuntimeStateSerializer? _runtimeStateSerializer;
+    private readonly IRuntimeSnapshotStore? _runtimeSnapshotStore;
     private UnifiedRuntimeSession? _session;
 
     public RuntimeSimulatorPageControl()
@@ -28,12 +29,14 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         ICurrentGamePackageService currentGamePackageService,
         IGameRuntimeService runtimeService,
         IUnifiedGameRuntimeService unifiedRuntimeService,
-        IRuntimeStateSerializer runtimeStateSerializer)
+        IRuntimeStateSerializer runtimeStateSerializer,
+        IRuntimeSnapshotStore runtimeSnapshotStore)
     {
         _currentGamePackageService = currentGamePackageService;
         _runtimeService = runtimeService;
         _unifiedRuntimeService = unifiedRuntimeService;
         _runtimeStateSerializer = runtimeStateSerializer;
+        _runtimeSnapshotStore = runtimeSnapshotStore;
         InitializeComponent();
         WireEvents();
     }
@@ -61,6 +64,15 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _rollLootButton.Click += (_, _) => ExecuteSelected(GameRuntimeCommandType.RollLootTable);
         _transactionButton.Click += (_, _) => ExecuteSelected(GameRuntimeCommandType.ExecuteTransaction);
         _interactionButton.Click += (_, _) => ExecuteSelected(GameRuntimeCommandType.ExecuteInteraction);
+        _equipButton.Click += (_, _) => ExecuteEquip();
+        _unequipButton.Click += (_, _) => ExecuteUnequip();
+        _openContainerButton.Click += (_, _) => ExecuteContainer(GameRuntimeCommandType.OpenContainer);
+        _takeContainerButton.Click += (_, _) => ExecuteContainer(GameRuntimeCommandType.TakeFromContainer);
+        _depositContainerButton.Click += (_, _) => ExecuteContainer(GameRuntimeCommandType.DepositToContainer);
+        _harvestButton.Click += (_, _) => ExecuteHarvest();
+        _saveSnapshotButton.Click += (_, _) => SaveSnapshot();
+        _loadSnapshotButton.Click += (_, _) => LoadSnapshot();
+        _listSnapshotsButton.Click += (_, _) => ListSnapshots();
         _tickButton.Click += (_, _) => ExecuteTick();
         _waitButton.Click += (_, _) => ExecuteWait();
         _refreshButton.Click += (_, _) => RefreshOptions();
@@ -115,6 +127,104 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         };
 
         ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(package!, _session!, command));
+    }
+
+    private void ExecuteEquip()
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_itemComboBox.Text) || string.IsNullOrWhiteSpace(_equipmentSlotComboBox.Text))
+        {
+            AppendLog("Select item and equipment slot before EquipItem.");
+            return;
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            GameRuntimeCommand.EquipItem(_itemComboBox.Text.Trim(), _equipmentSlotComboBox.Text.Trim())));
+    }
+
+    private void ExecuteUnequip()
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_equipmentSlotComboBox.Text))
+        {
+            AppendLog("Select equipment slot before UnequipItem.");
+            return;
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            GameRuntimeCommand.UnequipItem(_equipmentSlotComboBox.Text.Trim())));
+    }
+
+    private void ExecuteContainer(GameRuntimeCommandType type)
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_containerComboBox.Text))
+        {
+            AppendLog("Select container inventory id first.");
+            return;
+        }
+
+        GameRuntimeCommand command;
+        if (type == GameRuntimeCommandType.OpenContainer)
+        {
+            command = GameRuntimeCommand.OpenContainer(_containerComboBox.Text.Trim());
+        }
+        else
+        {
+            if (string.IsNullOrWhiteSpace(_containerItemTextBox.Text))
+            {
+                AppendLog("Enter item id for container transfer.");
+                return;
+            }
+
+            var amount = (double)Math.Max(1, _containerAmountNumericUpDown.Value);
+            command = type == GameRuntimeCommandType.TakeFromContainer
+                ? GameRuntimeCommand.TakeFromContainer(_containerComboBox.Text.Trim(), _containerItemTextBox.Text.Trim(), amount)
+                : GameRuntimeCommand.DepositToContainer(_containerComboBox.Text.Trim(), _containerItemTextBox.Text.Trim(), amount);
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(package!, _session!, command));
+    }
+
+    private void ExecuteHarvest()
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_resourceNodeComboBox.Text))
+        {
+            AppendLog("Select resource node before HarvestResourceNode.");
+            return;
+        }
+
+        int? seed = int.TryParse(_seedTextBox.Text.Trim(), out var parsedSeed) ? parsedSeed : null;
+        var toolItemId = string.IsNullOrWhiteSpace(_toolItemTextBox.Text) ? null : _toolItemTextBox.Text.Trim();
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            GameRuntimeCommand.HarvestResourceNode(_resourceNodeComboBox.Text.Trim(), toolItemId: toolItemId, seed: seed)));
     }
 
     private void ExecuteUseItem()
@@ -207,6 +317,9 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _transactionComboBox.Items.Clear();
         _itemComboBox.Items.Clear();
         _interactionComboBox.Items.Clear();
+        _equipmentSlotComboBox.Items.Clear();
+        _containerComboBox.Items.Clear();
+        _resourceNodeComboBox.Items.Clear();
 
         if (package == null)
         {
@@ -238,11 +351,104 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             _interactionComboBox.Items.Add(interaction.Id);
         }
 
+        foreach (var slot in package.Game.EquipmentSlots)
+        {
+            _equipmentSlotComboBox.Items.Add(slot.Id);
+        }
+
+        foreach (var inventory in package.Game.Inventories.Where(inventory =>
+            inventory.OwnerKind.Equals("container", StringComparison.OrdinalIgnoreCase)
+            || inventory.Tags.Any(tag => tag.Equals("container", StringComparison.OrdinalIgnoreCase))
+            || inventory.Metadata.TryGetValue("container", out var value) && value.Equals("true", StringComparison.OrdinalIgnoreCase)))
+        {
+            _containerComboBox.Items.Add(inventory.Id);
+        }
+
+        foreach (var node in package.Game.ResourceNodes)
+        {
+            _resourceNodeComboBox.Items.Add(node.Id);
+        }
+
         SelectFirst(_recipeComboBox);
         SelectFirst(_lootComboBox);
         SelectFirst(_transactionComboBox);
         SelectFirst(_itemComboBox);
         SelectFirst(_interactionComboBox);
+        SelectFirst(_equipmentSlotComboBox);
+        SelectFirst(_containerComboBox);
+        SelectFirst(_resourceNodeComboBox);
+        RefreshStateJson();
+    }
+
+    private void SaveSnapshot()
+    {
+        if (!EnsureSnapshotReady())
+        {
+            return;
+        }
+
+        var result = _runtimeSnapshotStore!.SaveSnapshot(_currentGamePackageService!.CurrentFolder!, _snapshotSlotTextBox.Text.Trim(), _session!);
+        ApplySnapshotResult(result, replaceSession: false);
+    }
+
+    private void LoadSnapshot()
+    {
+        if (_runtimeSnapshotStore == null || _currentGamePackageService == null || string.IsNullOrWhiteSpace(_currentGamePackageService.CurrentFolder))
+        {
+            AppendLog("No current project folder or snapshot store.");
+            return;
+        }
+
+        var result = _runtimeSnapshotStore.LoadSnapshot(_currentGamePackageService.CurrentFolder, _snapshotSlotTextBox.Text.Trim());
+        ApplySnapshotResult(result, replaceSession: true);
+    }
+
+    private void ListSnapshots()
+    {
+        if (_runtimeSnapshotStore == null || _currentGamePackageService == null || string.IsNullOrWhiteSpace(_currentGamePackageService.CurrentFolder))
+        {
+            AppendLog("No current project folder or snapshot store.");
+            return;
+        }
+
+        var result = _runtimeSnapshotStore.ListSnapshots(_currentGamePackageService.CurrentFolder);
+        AppendLog(result.Success ? $"Snapshots: {string.Join(", ", result.SlotNames)}" : result.Message);
+        foreach (var diagnostic in result.Diagnostics)
+        {
+            AppendLog($"{diagnostic.Severity} {diagnostic.Code}: {diagnostic.Message}");
+        }
+    }
+
+    private bool EnsureSnapshotReady()
+    {
+        if (_runtimeSnapshotStore == null || _currentGamePackageService == null || string.IsNullOrWhiteSpace(_currentGamePackageService.CurrentFolder))
+        {
+            AppendLog("No current project folder or snapshot store.");
+            return false;
+        }
+
+        if (_session == null)
+        {
+            AppendLog("Initialize unified runtime session first.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void ApplySnapshotResult(RuntimeSnapshotResult result, bool replaceSession)
+    {
+        if (replaceSession && result.Success && result.Session != null)
+        {
+            _session = result.Session;
+        }
+
+        AppendLog(result.Message);
+        foreach (var diagnostic in result.Diagnostics)
+        {
+            AppendLog($"{diagnostic.Severity} {diagnostic.Code}: {diagnostic.Message}");
+        }
+
         RefreshStateJson();
     }
 

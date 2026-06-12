@@ -9,17 +9,26 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
     private readonly IOutputApplier _outputApplier;
     private readonly IRecipeRuntimeService _recipeRuntimeService;
     private readonly ITransactionRuntimeService _transactionRuntimeService;
+    private readonly IContainerRuntimeService _containerRuntimeService;
+    private readonly IHarvestRuntimeService _harvestRuntimeService;
+    private readonly IUseItemRuntimeService _useItemRuntimeService;
 
     public InteractionRuntimeService(
         IRequirementEvaluator requirementEvaluator,
         IOutputApplier outputApplier,
         IRecipeRuntimeService recipeRuntimeService,
-        ITransactionRuntimeService transactionRuntimeService)
+        ITransactionRuntimeService transactionRuntimeService,
+        IContainerRuntimeService? containerRuntimeService = null,
+        IHarvestRuntimeService? harvestRuntimeService = null,
+        IUseItemRuntimeService? useItemRuntimeService = null)
     {
         _requirementEvaluator = requirementEvaluator;
         _outputApplier = outputApplier;
         _recipeRuntimeService = recipeRuntimeService;
         _transactionRuntimeService = transactionRuntimeService;
+        _containerRuntimeService = containerRuntimeService ?? new ContainerRuntimeService();
+        _harvestRuntimeService = harvestRuntimeService ?? new HarvestRuntimeService(new RequirementEvaluator(), new CostConsumer(), new OutputApplier());
+        _useItemRuntimeService = useItemRuntimeService ?? new UseItemRuntimeService(new RequirementEvaluator(), new OutputApplier());
     }
 
     public GameRuntimeResult ExecuteInteraction(GamePackageDefinition package, GameRuntimeState state, string interactionId, string? targetId = null, string? inventoryId = null)
@@ -28,6 +37,12 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
         if (interaction == null)
         {
             return Failure(state, "interaction.missing", $"Interaction not found: {interactionId}", interactionId);
+        }
+
+        var routed = TryRouteMetadataInteraction(package, state, interaction, targetId, inventoryId);
+        if (routed != null)
+        {
+            return routed;
         }
 
         if (RuntimeStateHelpers.KindEquals(interaction.Kind, "craft")
@@ -90,6 +105,62 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
             interaction.Id,
             new Dictionary<string, string> { ["kind"] = interaction.Kind, ["targetId"] = targetId ?? string.Empty }));
         return result;
+    }
+
+    private GameRuntimeResult? TryRouteMetadataInteraction(GamePackageDefinition package, GameRuntimeState state, Domain.Definitions.InteractionDefinition interaction, string? targetId, string? inventoryId)
+    {
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "open_container"))
+        {
+            return TryGetMetadata(interaction, "container_id", out var containerId)
+                ? _containerRuntimeService.OpenContainer(package, state, containerId)
+                : Failure(state, "interaction.container_metadata_missing", "open_container interaction requires metadata.container_id.", interaction.Id);
+        }
+
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "harvest_resource"))
+        {
+            if (!TryGetMetadata(interaction, "resource_node_id", out var nodeId))
+            {
+                return Failure(state, "interaction.resource_node_metadata_missing", "harvest_resource interaction requires metadata.resource_node_id.", interaction.Id);
+            }
+
+            TryGetMetadata(interaction, "tool_item_id", out var toolItemId);
+            return _harvestRuntimeService.HarvestResourceNode(package, state, nodeId, inventoryId, toolItemId, ReadSeed(interaction));
+        }
+
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "use_item_on_target"))
+        {
+            return TryGetMetadata(interaction, "item_id", out var itemId)
+                ? _useItemRuntimeService.UseItem(package, state, itemId, inventoryId, targetId)
+                : Failure(state, "interaction.item_metadata_missing", "use_item_on_target interaction requires metadata.item_id.", interaction.Id);
+        }
+
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "craft"))
+        {
+            if (TryGetMetadata(interaction, "recipe_id", out var recipeId))
+            {
+                return _recipeRuntimeService.CraftRecipe(package, state, recipeId, inventoryId);
+            }
+        }
+
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "trade"))
+        {
+            if (TryGetMetadata(interaction, "transaction_id", out var transactionId))
+            {
+                return _transactionRuntimeService.ExecuteTransaction(package, state, transactionId, inventoryId);
+            }
+        }
+
+        return null;
+    }
+
+    private static bool TryGetMetadata(Domain.Definitions.InteractionDefinition interaction, string key, out string value)
+    {
+        return interaction.Metadata.TryGetValue(key, out value!) && !string.IsNullOrWhiteSpace(value);
+    }
+
+    private static int? ReadSeed(Domain.Definitions.InteractionDefinition interaction)
+    {
+        return interaction.Metadata.TryGetValue("seed", out var value) && int.TryParse(value, out var seed) ? seed : null;
     }
 
     private static bool TryGetMetadataTarget(string interactionId, string prefix, out string targetId)

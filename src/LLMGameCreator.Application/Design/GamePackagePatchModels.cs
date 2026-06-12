@@ -108,6 +108,11 @@ public sealed record UpsertInventoryPatchOperation(InventoryDefinition Inventory
     public override string Target => Inventory.Id;
 }
 
+public sealed record UpsertEquipmentSlotPatchOperation(EquipmentSlotDefinition EquipmentSlot) : GamePackagePatchOperation("upsert_equipment_slot")
+{
+    public override string Target => EquipmentSlot.Id;
+}
+
 public sealed record GamePackagePatchValidationIssue(
     string Severity,
     string Code,

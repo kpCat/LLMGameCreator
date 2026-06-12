@@ -39,6 +39,7 @@ public sealed class EconomyContractsTests
         Assert.Empty(package.Game.ResourceNetworks);
         Assert.Empty(package.Game.ResourceNodes);
         Assert.Empty(package.Game.Inventories);
+        Assert.Empty(package.Game.EquipmentSlots);
     }
 
     [Fact]
@@ -83,6 +84,16 @@ public sealed class EconomyContractsTests
                         Inputs = new List<CostDefinition> { new CostDefinition { Kind = "item", Id = "item/healing_potion", Amount = 1 } },
                         Outputs = new List<OutputDefinition> { new OutputDefinition { Kind = "resource", Id = "resource/mana", Amount = 5 } }
                     }
+                },
+                EquipmentSlots = new List<EquipmentSlotDefinition>
+                {
+                    new EquipmentSlotDefinition
+                    {
+                        Id = "slot/tool",
+                        Name = "Tool",
+                        AllowedTags = new List<string> { "tool" },
+                        AllowedKinds = new List<string> { "tool" }
+                    }
                 }
             }
         };
@@ -94,5 +105,6 @@ public sealed class EconomyContractsTests
         Assert.Equal("common", roundTrip!.Game.Items[0].Rarity);
         Assert.Equal(100, roundTrip.Game.Resources[0].MaxValue);
         Assert.Equal("recipe/healing_potion", roundTrip.Game.Recipes[0].Id);
+        Assert.Equal("slot/tool", roundTrip.Game.EquipmentSlots[0].Id);
     }
 }

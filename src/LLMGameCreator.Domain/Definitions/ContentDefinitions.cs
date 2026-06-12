@@ -66,4 +66,5 @@ public sealed class InteractionDefinition
     public string Kind { get; set; } = "inspect";
     public List<ConditionDefinition> Conditions { get; set; } = new List<ConditionDefinition>();
     public List<EffectDefinition> Effects { get; set; } = new List<EffectDefinition>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 }

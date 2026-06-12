@@ -159,6 +159,16 @@ public sealed class InventoryDefinition
     public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 }
 
+public sealed class EquipmentSlotDefinition
+{
+    public string Id { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public List<string> AllowedTags { get; set; } = new List<string>();
+    public List<string> AllowedKinds { get; set; } = new List<string>();
+    public List<RequirementDefinition> RequiredRequirements { get; set; } = new List<RequirementDefinition>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
 public sealed class ItemStackDefinition
 {
     public string ItemId { get; set; } = string.Empty;
