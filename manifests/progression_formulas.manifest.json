@@ -1,0 +1,155 @@
+{
+  "id": "batch/progression_formulas/v1",
+  "version": "0.1.0",
+  "batch": "012",
+  "title": "Stats, formulas and progression",
+  "description": "Batch 012 manifest for safe formula IR, XP curves, skill tree generation and abstract progress tracks.",
+  "modules": [
+    {
+      "path": "lua/formula/formula_schema.lua",
+      "module_id": "formula/formula_schema/v1",
+      "category": "formula",
+      "capabilities": [
+        "formula.schema.normalize",
+        "formula.validate",
+        "stats.attribute_formula_ir"
+      ],
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    },
+    {
+      "path": "lua/progression/xp_curve.lua",
+      "module_id": "progression/xp_curve/v1",
+      "category": "progression",
+      "capabilities": [
+        "progression.xp_curve.generate",
+        "progression.level_thresholds",
+        "formula.curve_reference"
+      ],
+      "depends_on": [
+        "formula/formula_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    },
+    {
+      "path": "lua/progression/skill_tree_generator.lua",
+      "module_id": "progression/skill_tree_generator/v1",
+      "category": "progression",
+      "capabilities": [
+        "progression.skill_tree.generate",
+        "progression.unlock_graph",
+        "stats.modifier_reference"
+      ],
+      "depends_on": [
+        "formula/formula_schema/v1",
+        "progression/xp_curve/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    },
+    {
+      "path": "lua/progression/progress_track.lua",
+      "module_id": "progression/progress_track/v1",
+      "category": "progression",
+      "capabilities": [
+        "progression.track.generate",
+        "progression.abstract_progress",
+        "quest.progress_reference"
+      ],
+      "depends_on": [
+        "formula/formula_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ]
+    }
+  ],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "formula_contract": "Formulas are safe IR trees, not raw executable code.",
+    "progression_contract": "Progression covers XP and abstract tracks such as reputation, research, faction favor, suspicion and morale."
+  },
+  "quality": {
+    "deterministic": true,
+    "external_dependencies": [],
+    "unsafe_features": [],
+    "large_content_dumps": false
+  }
+}
