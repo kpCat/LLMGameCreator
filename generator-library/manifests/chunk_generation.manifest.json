@@ -1,0 +1,148 @@
+{
+  "id": "manifest/chunk_generation/v1",
+  "version": "0.1.0",
+  "batch": "006",
+  "title": "Chunk/grid map generation",
+  "description": "Batch 006 manifest for deterministic chunk generation, sparse tile painting, landmark placement, roads, blocked road cells, walkability, and minimap layer data.",
+  "files": [
+    "lua/world/chunk_generator.lua",
+    "lua/world/tile_painter.lua",
+    "lua/world/landmark_placer.lua",
+    "docs/lua/chunk_generation.md",
+    "manifests/chunk_generation.manifest.json",
+    "tests/chunk_generation_examples.lua",
+    "BATCH_006_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "world/chunk_generator/v1",
+      "file": "lua/world/chunk_generator.lua",
+      "category": "world",
+      "capabilities": [
+        "world.chunk.generate",
+        "world.chunk.sparse_map",
+        "world.road.generate",
+        "world.landmark.place",
+        "world.walkability.emit",
+        "world.minimap.layer"
+      ],
+      "depends_on_contracts": [
+        "core/diagnostics/v1",
+        "core/id/v1",
+        "core/coordinates/v1",
+        "world/world_blueprint/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_time_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true
+    },
+    {
+      "id": "world/tile_painter/v1",
+      "file": "lua/world/tile_painter.lua",
+      "category": "world",
+      "capabilities": [
+        "world.tile.paint",
+        "world.tile.sparse_overrides",
+        "world.road.paint",
+        "world.minimap.layer"
+      ],
+      "depends_on_contracts": [
+        "core/diagnostics/v1",
+        "core/id/v1",
+        "core/grid/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_time_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true
+    },
+    {
+      "id": "world/landmark_placer/v1",
+      "file": "lua/world/landmark_placer.lua",
+      "category": "world",
+      "capabilities": [
+        "world.landmark.place",
+        "world.landmark.sparse_overrides",
+        "world.landmark.road_aware",
+        "world.minimap.layer"
+      ],
+      "depends_on_contracts": [
+        "core/diagnostics/v1",
+        "core/id/v1",
+        "core/coordinates/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_time_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true
+    }
+  ],
+  "contracts": {
+    "chunk_representation": "default_tile_plus_sparse_overrides",
+    "coordinates": "0-based local chunk coordinates",
+    "diagnostics": "severity/code/message/target",
+    "output": "JSON-serializable Lua tables only"
+  },
+  "quality": {
+    "external_dependencies": false,
+    "uses_forbidden_apis": false,
+    "uses_math_random": false,
+    "writes_globals": false,
+    "generates_huge_tile_arrays_by_default": false
+  }
+}

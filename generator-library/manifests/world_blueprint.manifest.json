@@ -1,0 +1,143 @@
+{
+  "id": "batch/005/world_blueprint",
+  "version": "0.1.0",
+  "title": "Batch 005 - World blueprint",
+  "purpose": "World blueprint, region graph, and biome catalog helpers for compact generator-library IR.",
+  "files": [
+    "lua/world/world_blueprint.lua",
+    "lua/world/region_graph.lua",
+    "lua/world/biome_catalog.lua",
+    "docs/lua/world_blueprint.md",
+    "manifests/world_blueprint.manifest.json",
+    "tests/world_blueprint_examples.lua",
+    "BATCH_005_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "world/world_blueprint/v1",
+      "path": "lua/world/world_blueprint.lua",
+      "category": "world",
+      "capabilities": [
+        "world.blueprint.generate",
+        "world.scale.model",
+        "world.global_map.metadata",
+        "world.minimap.metadata",
+        "world.seeded_infinite_blueprint"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_time_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true
+    },
+    {
+      "id": "world/region_graph/v1",
+      "path": "lua/world/region_graph.lua",
+      "category": "world",
+      "capabilities": [
+        "world.region_graph.validate",
+        "world.region_graph.normalize",
+        "world.region_graph.adjacency",
+        "world.region_graph.minimap_metadata"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_time_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true
+    },
+    {
+      "id": "world/biome_catalog/v1",
+      "path": "lua/world/biome_catalog.lua",
+      "category": "world",
+      "capabilities": [
+        "world.biome_catalog.validate",
+        "world.biome_catalog.normalize",
+        "world.biome_catalog.index",
+        "world.biome_catalog.tags"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_time_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true
+    }
+  ],
+  "contracts": {
+    "world_scales": [
+      "single_map",
+      "multi_map",
+      "region",
+      "continent",
+      "planet",
+      "infinite_chunks"
+    ],
+    "blueprint_modes": [
+      "finite_map",
+      "multi_map",
+      "region",
+      "chunked_world",
+      "infinite_seeded_world"
+    ],
+    "coordinate_origin": "zero_based",
+    "output_policy": "compact_ir_no_huge_tile_arrays"
+  },
+  "depends_on_batches": [
+    "001",
+    "002",
+    "003",
+    "004"
+  ],
+  "next_recommended_batch": "006"
+}
