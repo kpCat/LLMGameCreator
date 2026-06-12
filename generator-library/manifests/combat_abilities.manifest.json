@@ -1,0 +1,184 @@
+{
+  "id": "batch/combat_abilities/v1",
+  "version": "0.1.0",
+  "batch": "013",
+  "title": "Combat, status and abilities",
+  "purpose": "Batch 013 manifest for no-combat compatibility, turn-based combat configuration, dialogue-combat bridge metadata, status effects, cooldowns, action points, ability definitions and safe formula references.",
+  "files": [
+    "lua/combat/combat_schema.lua",
+    "lua/combat/turn_based_combat.lua",
+    "lua/combat/status_effects.lua",
+    "lua/ability/ability_catalog_generator.lua",
+    "docs/lua/combat_status_abilities.md",
+    "manifests/combat_abilities.manifest.json",
+    "tests/combat_examples.lua",
+    "BATCH_013_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "combat/combat_schema/v1",
+      "path": "lua/combat/combat_schema.lua",
+      "category": "combat",
+      "capabilities": [
+        "combat.schema.define",
+        "combat.mode.configure",
+        "combat.formula_reference"
+      ],
+      "depends_on": [],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "combat/turn_based_combat/v1",
+      "path": "lua/combat/turn_based_combat.lua",
+      "category": "combat",
+      "capabilities": [
+        "combat.turn_based.configure",
+        "combat.action_points",
+        "combat.cooldown_model",
+        "dialogue.combat_bridge"
+      ],
+      "depends_on": [
+        "combat/combat_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "combat/status_effects/v1",
+      "path": "lua/combat/status_effects.lua",
+      "category": "combat",
+      "capabilities": [
+        "combat.status_effect.generate",
+        "status_effect.duration",
+        "stats.modifier_reference"
+      ],
+      "depends_on": [
+        "combat/combat_schema/v1",
+        "formula/formula_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "ability/ability_catalog_generator/v1",
+      "path": "lua/ability/ability_catalog_generator.lua",
+      "category": "ability",
+      "capabilities": [
+        "ability.catalog.generate",
+        "ability.cooldown",
+        "combat.ability_reference",
+        "formula.damage_reference"
+      ],
+      "depends_on": [
+        "combat/combat_schema/v1",
+        "combat/status_effects/v1",
+        "formula/formula_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_ui_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "unity_ui_ir",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "formula_contract": "Formula fields are identifier references to safe formula IR and are never executed as raw code.",
+    "combat_contract": "Generated combat data is compact IR/config metadata for host-side validation and future runtime adapters."
+  }
+}

@@ -20,7 +20,7 @@ public sealed partial class GeneratorLibraryImportTabControl : UserControl
         _statusLabel.Text = status;
     }
 
-    public void SetReport(GeneratorLibraryImportReport? report)
+    public void SetReport(GeneratorLibraryImportReport? report, int integrityErrorCount = 0)
     {
         if (report == null)
         {
@@ -28,7 +28,12 @@ public sealed partial class GeneratorLibraryImportTabControl : UserControl
             return;
         }
 
+        var warning = integrityErrorCount > 0
+            ? $"Integrity validation has {integrityErrorCount} errors. Import may be incomplete.\r\n\r\n"
+            : string.Empty;
+
         _summaryTextBox.Text =
+            warning +
             $"Import: {report.ImportId}\r\n" +
             $"Manifests: {report.ImportedManifestCount}/{report.ManifestCount}\r\n" +
             $"Modules: {report.ModuleCount}\r\n" +

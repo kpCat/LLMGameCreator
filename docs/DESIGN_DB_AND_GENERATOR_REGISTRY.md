@@ -86,6 +86,32 @@ If a module category is missing, the importer infers it from the first slash-del
 
 Invalid manifests produce `import_issues` and do not stop valid manifests from importing. Re-running import is idempotent because registry rows use stable primary keys and upserts.
 
+## Generator Library Integrity Validation
+
+Integrity validation checks the physical `generator-library/` folder before a Lua batch is committed or pushed.
+
+It validates:
+
+- repository root or direct `generator-library` root resolution;
+- `generator-library/manifests/*.manifest.json` discovery, ignoring `MANIFEST_CONTRACT.schema.example.json`;
+- valid JSON and canonical manifest fields such as `id`, `batch`, `title`, `purpose`, `files`, `modules`, module `id`, module `path`, `category`, and `capabilities`;
+- legacy alias fields such as `module_id`, `file`, and `depends_on_contracts` as warnings;
+- declared `files[]` and module `path` entries exist under `generator-library`;
+- obvious root-level leakage such as `lua/`, `manifests/`, root `BATCH_*.md`, or root Lua files outside `generator-library`;
+- duplicate batch manifest ids and duplicate module ids;
+- numbered batch reports such as `BATCH_012_REPORT.md`;
+- manifest contract docs and schema example presence;
+- `unsafe_features` shape and claims that Lua execution is enabled.
+
+The WinForms Generator Library page exposes this as the `Integrity` tab. Use `Validate generator-library` before importing or before pushing a new Lua batch. The current library should have zero integrity errors.
+
+Integrity validation is not the same as manifest import:
+
+- Integrity validation checks files and contracts on disk and returns a deterministic report.
+- Manifest import stores registry metadata in the Design DB.
+- Import may still run when integrity errors exist, but the Import tab warns that the import may be incomplete.
+- Neither path executes Lua, loads dynamic code, changes GamePackage format, or generates Unity/codegen output.
+
 ## Future Flow
 
 This baseline supports the planned LLM role:

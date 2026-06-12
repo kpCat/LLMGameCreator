@@ -9,6 +9,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
     private readonly IDesignDatabaseInitializer? _databaseInitializer;
     private readonly IGeneratorLibraryImporter? _importer;
     private readonly IGeneratorLibraryRegistry? _registry;
+    private readonly IGeneratorLibraryIntegrityValidator? _integrityValidator;
 
     public GeneratorLibraryPageControl()
     {
@@ -19,12 +20,14 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         ICurrentGamePackageService currentGamePackageService,
         IDesignDatabaseInitializer databaseInitializer,
         IGeneratorLibraryImporter importer,
-        IGeneratorLibraryRegistry registry)
+        IGeneratorLibraryRegistry registry,
+        IGeneratorLibraryIntegrityValidator integrityValidator)
     {
         _currentGamePackageService = currentGamePackageService;
         _databaseInitializer = databaseInitializer;
         _importer = importer;
         _registry = registry;
+        _integrityValidator = integrityValidator;
         InitializeComponent();
         WireEvents();
     }
@@ -43,6 +46,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
     {
         _importTab.ImportRequested += async (_, _) => await ImportAsync();
         _importTab.RefreshRequested += async (_, _) => await InitializeAndRefreshAsync();
+        _integrityTab.ValidateRequested += async (_, _) => await ValidateIntegrityAsync();
     }
 
     private async Task InitializeAndRefreshAsync()
@@ -84,14 +88,54 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
                 return;
             }
 
+            var integrityErrors = 0;
+            if (_integrityValidator != null)
+            {
+                var integrityReport = await _integrityValidator.ValidateAsync(root, CancellationToken.None).ConfigureAwait(true);
+                _integrityTab.SetReport(integrityReport);
+                integrityErrors = integrityReport.Summary.ErrorCount;
+            }
+
             var report = await _importer.ImportGeneratorLibraryAsync(root, CancellationToken.None).ConfigureAwait(true);
-            _importTab.SetReport(report);
+            _importTab.SetReport(report, integrityErrors);
             await RefreshListsAsync().ConfigureAwait(true);
-            _importTab.SetStatus(databasePath, $"Imported {report.ModuleCount} modules and {report.CapabilityCount} capabilities.");
+            var status = $"Imported {report.ModuleCount} modules and {report.CapabilityCount} capabilities.";
+            if (integrityErrors > 0)
+            {
+                status = $"Integrity validation has {integrityErrors} errors. Import may be incomplete. " + status;
+            }
+
+            _importTab.SetStatus(databasePath, status);
         }
         catch (Exception ex)
         {
             _importTab.SetStatus(ResolveDatabasePath(), ex.Message);
+        }
+    }
+
+    private async Task ValidateIntegrityAsync()
+    {
+        if (_integrityValidator == null)
+        {
+            _integrityTab.SetStatus("Runtime services are not available.");
+            return;
+        }
+
+        try
+        {
+            var root = ResolveImportRoot();
+            if (root == null)
+            {
+                _integrityTab.SetStatus("generator-library folder was not found.");
+                return;
+            }
+
+            var report = await _integrityValidator.ValidateAsync(root, CancellationToken.None).ConfigureAwait(true);
+            _integrityTab.SetReport(report);
+        }
+        catch (Exception ex)
+        {
+            _integrityTab.SetStatus(ex.Message);
         }
     }
 

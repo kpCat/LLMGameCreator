@@ -10,6 +10,8 @@ namespace LLMGameCreator.WinForms.Pages
     {
         private IContainer components;
         private ListView _issuesListView;
+        private ColumnHeader _scopeColumn;
+        private ColumnHeader _importIdColumn;
         private ColumnHeader _severityColumn;
         private ColumnHeader _codeColumn;
         private ColumnHeader _messageColumn;
@@ -29,6 +31,8 @@ namespace LLMGameCreator.WinForms.Pages
         {
             this.components = new Container();
             this._issuesListView = new ListView();
+            this._scopeColumn = new ColumnHeader();
+            this._importIdColumn = new ColumnHeader();
             this._severityColumn = new ColumnHeader();
             this._codeColumn = new ColumnHeader();
             this._messageColumn = new ColumnHeader();
@@ -37,7 +41,7 @@ namespace LLMGameCreator.WinForms.Pages
             // 
             // _issuesListView
             // 
-            this._issuesListView.Columns.AddRange(new ColumnHeader[] { this._severityColumn, this._codeColumn, this._messageColumn, this._targetColumn });
+            this._issuesListView.Columns.AddRange(new ColumnHeader[] { this._scopeColumn, this._importIdColumn, this._severityColumn, this._codeColumn, this._messageColumn, this._targetColumn });
             this._issuesListView.Dock = DockStyle.Fill;
             this._issuesListView.FullRowSelect = true;
             this._issuesListView.GridLines = true;
@@ -50,6 +54,10 @@ namespace LLMGameCreator.WinForms.Pages
             // 
             // columns
             // 
+            this._scopeColumn.Text = "Scope";
+            this._scopeColumn.Width = 80;
+            this._importIdColumn.Text = "Import";
+            this._importIdColumn.Width = 160;
             this._severityColumn.Text = "Severity";
             this._severityColumn.Width = 80;
             this._codeColumn.Text = "Code";
