@@ -23,11 +23,13 @@ namespace LLMGameCreator.WinForms.Pages
         private TextBox _turnModeTextBox;
         private TextBox _combatModeTextBox;
         private TextBox _briefTextBox;
+        private CheckBox _dataPatchModeCheckBox;
         private FlowLayoutPanel _toolbarPanel;
         private Button _createButton;
         private Button _refreshButton;
         private Button _revalidateButton;
         private Button _createPreviewButton;
+        private Button _preparePipelineButton;
         private Button _approveButton;
         private Button _rejectButton;
         private Button _archiveButton;
@@ -79,11 +81,13 @@ namespace LLMGameCreator.WinForms.Pages
             this._turnModeTextBox = new TextBox();
             this._combatModeTextBox = new TextBox();
             this._briefTextBox = new TextBox();
+            this._dataPatchModeCheckBox = new CheckBox();
             this._toolbarPanel = new FlowLayoutPanel();
             this._createButton = new Button();
             this._refreshButton = new Button();
             this._revalidateButton = new Button();
             this._createPreviewButton = new Button();
+            this._preparePipelineButton = new Button();
             this._approveButton = new Button();
             this._rejectButton = new Button();
             this._archiveButton = new Button();
@@ -151,12 +155,13 @@ namespace LLMGameCreator.WinForms.Pages
             this._inputTable.Controls.Add(this._combatModeTextBox, 1, 4);
             this._inputTable.Controls.Add(this._briefLabel, 0, 5);
             this._inputTable.Controls.Add(this._briefTextBox, 0, 6);
-            this._inputTable.Controls.Add(this._toolbarPanel, 0, 7);
-            this._inputTable.Controls.Add(this._statusLabel, 0, 8);
+            this._inputTable.Controls.Add(this._dataPatchModeCheckBox, 0, 7);
+            this._inputTable.Controls.Add(this._toolbarPanel, 0, 8);
+            this._inputTable.Controls.Add(this._statusLabel, 0, 9);
             this._inputTable.Dock = DockStyle.Fill;
             this._inputTable.Location = new Point(12, 12);
             this._inputTable.Name = "_inputTable";
-            this._inputTable.RowCount = 9;
+            this._inputTable.RowCount = 10;
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
@@ -164,6 +169,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 68F));
             this._inputTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
             this._inputTable.Size = new Size(306, 396);
@@ -193,6 +199,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._briefTextBox.ScrollBars = ScrollBars.Vertical;
             this._inputTable.SetColumnSpan(this._briefLabel, 2);
             this._inputTable.SetColumnSpan(this._briefTextBox, 2);
+            this._dataPatchModeCheckBox.Checked = true;
+            this._dataPatchModeCheckBox.CheckState = CheckState.Checked;
+            this._dataPatchModeCheckBox.Dock = DockStyle.Fill;
+            this._dataPatchModeCheckBox.Location = new Point(3, 275);
+            this._dataPatchModeCheckBox.Name = "_dataPatchModeCheckBox";
+            this._dataPatchModeCheckBox.Size = new Size(300, 22);
+            this._dataPatchModeCheckBox.TabIndex = 12;
+            this._dataPatchModeCheckBox.Text = "Prefer data patch plan";
+            this._dataPatchModeCheckBox.UseVisualStyleBackColor = true;
+            this._inputTable.SetColumnSpan(this._dataPatchModeCheckBox, 2);
             // 
             // _toolbarPanel
             // 
@@ -201,6 +217,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._toolbarPanel.Controls.Add(this._refreshButton);
             this._toolbarPanel.Controls.Add(this._revalidateButton);
             this._toolbarPanel.Controls.Add(this._createPreviewButton);
+            this._toolbarPanel.Controls.Add(this._preparePipelineButton);
             this._toolbarPanel.Controls.Add(this._approveButton);
             this._toolbarPanel.Controls.Add(this._rejectButton);
             this._toolbarPanel.Controls.Add(this._archiveButton);
@@ -208,7 +225,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._toolbarPanel.Location = new Point(3, 303);
             this._toolbarPanel.Name = "_toolbarPanel";
             this._toolbarPanel.Size = new Size(300, 62);
-            this._toolbarPanel.TabIndex = 12;
+            this._toolbarPanel.TabIndex = 13;
             this._inputTable.SetColumnSpan(this._toolbarPanel, 2);
             this._createButton.Location = new Point(3, 3);
             this._createButton.Name = "_createButton";
@@ -234,22 +251,28 @@ namespace LLMGameCreator.WinForms.Pages
             this._createPreviewButton.TabIndex = 3;
             this._createPreviewButton.Text = "Create Preview Artifact";
             this._createPreviewButton.UseVisualStyleBackColor = true;
-            this._approveButton.Location = new Point(522, 3);
+            this._preparePipelineButton.Location = new Point(522, 3);
+            this._preparePipelineButton.Name = "_preparePipelineButton";
+            this._preparePipelineButton.Size = new Size(150, 26);
+            this._preparePipelineButton.TabIndex = 4;
+            this._preparePipelineButton.Text = "Prepare Patch Pipeline";
+            this._preparePipelineButton.UseVisualStyleBackColor = true;
+            this._approveButton.Location = new Point(678, 3);
             this._approveButton.Name = "_approveButton";
             this._approveButton.Size = new Size(110, 26);
-            this._approveButton.TabIndex = 4;
+            this._approveButton.TabIndex = 5;
             this._approveButton.Text = "Approve Selected";
             this._approveButton.UseVisualStyleBackColor = true;
-            this._rejectButton.Location = new Point(638, 3);
+            this._rejectButton.Location = new Point(794, 3);
             this._rejectButton.Name = "_rejectButton";
             this._rejectButton.Size = new Size(100, 26);
-            this._rejectButton.TabIndex = 5;
+            this._rejectButton.TabIndex = 6;
             this._rejectButton.Text = "Reject Selected";
             this._rejectButton.UseVisualStyleBackColor = true;
-            this._archiveButton.Location = new Point(744, 3);
+            this._archiveButton.Location = new Point(900, 3);
             this._archiveButton.Name = "_archiveButton";
             this._archiveButton.Size = new Size(110, 26);
-            this._archiveButton.TabIndex = 6;
+            this._archiveButton.TabIndex = 7;
             this._archiveButton.Text = "Archive Selected";
             this._archiveButton.UseVisualStyleBackColor = true;
             // 
@@ -259,7 +282,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._statusLabel.Location = new Point(3, 368);
             this._statusLabel.Name = "_statusLabel";
             this._statusLabel.Size = new Size(300, 28);
-            this._statusLabel.TabIndex = 13;
+            this._statusLabel.TabIndex = 14;
             this._statusLabel.Text = "Not initialized";
             this._statusLabel.TextAlign = ContentAlignment.MiddleLeft;
             this._inputTable.SetColumnSpan(this._statusLabel, 2);

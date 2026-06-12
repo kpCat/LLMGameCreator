@@ -75,6 +75,39 @@ public sealed class GeneratorPlanDraftServiceTests
         Assert.Contains("core/danger/v1", llm.LastRequest.UserPrompt);
     }
 
+    [Fact]
+    public async Task DraftServiceIncludesPackageOperationsContractInDataPatchMode()
+    {
+        var store = new InMemoryDesignStore(new[] { Module("core/base/v1") });
+        var llm = new FakeLlmChatClient("""
+        { "title": "Patch", "goal": "Patch", "steps": [{ "order": 1, "module_id": "core/base/v1", "config": {}, "depends_on": [] }] }
+        """);
+        var service = CreateService(store, llm);
+
+        var result = await service.CreateDraftPlanAsync(new GeneratorPlanDraftRequest("Patch", "Patch", "Brief", OutputMode: "data_patch_plan"), CancellationToken.None);
+
+        Assert.True(result.Saved, string.Join(Environment.NewLine, result.ValidationIssues.Select(issue => issue.Message)));
+        Assert.Contains("config.package_operations", llm.LastRequest.SystemPrompt);
+        Assert.Contains("game_package_patch_v1", llm.LastRequest.SystemPrompt);
+        Assert.Contains("upsert_tile_prototype", llm.LastRequest.UserPrompt);
+    }
+
+    [Fact]
+    public async Task DraftServiceKeepsGenericPlanModeWithoutPatchContract()
+    {
+        var store = new InMemoryDesignStore(new[] { Module("core/base/v1") });
+        var llm = new FakeLlmChatClient("""
+        { "title": "Generic", "goal": "Generic", "steps": [{ "order": 1, "module_id": "core/base/v1", "config": {}, "depends_on": [] }] }
+        """);
+        var service = CreateService(store, llm);
+
+        var result = await service.CreateDraftPlanAsync(new GeneratorPlanDraftRequest("Generic", "Generic", "Brief"), CancellationToken.None);
+
+        Assert.True(result.Saved, string.Join(Environment.NewLine, result.ValidationIssues.Select(issue => issue.Message)));
+        Assert.DoesNotContain("config.package_operations", llm.LastRequest.SystemPrompt);
+        Assert.DoesNotContain("Patch-capable plan contract", llm.LastRequest.UserPrompt);
+    }
+
     private static GeneratorPlanDraftService CreateService(InMemoryDesignStore store, FakeLlmChatClient llm)
     {
         return new GeneratorPlanDraftService(store, store, store, new InMemorySettingsRepository(), llm, new GeneratorPlanValidator());

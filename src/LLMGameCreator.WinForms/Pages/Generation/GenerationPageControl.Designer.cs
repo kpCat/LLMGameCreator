@@ -971,7 +971,7 @@ namespace LLMGameCreator.WinForms.Pages
             _applyButton.Name = "_applyButton";
             _applyButton.Size = new Size(139, 30);
             _applyButton.TabIndex = 3;
-            _applyButton.Text = "Применить";
+            _applyButton.Text = "Legacy direct apply";
             _applyButton.UseVisualStyleBackColor = true;
             // 
             // _saveButton

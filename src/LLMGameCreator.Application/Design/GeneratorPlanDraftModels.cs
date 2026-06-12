@@ -10,7 +10,8 @@ public sealed record GeneratorPlanDraftRequest(
     string? RuntimeTarget = null,
     string? TurnMode = null,
     string? CombatMode = null,
-    int? TokenBudget = null);
+    int? TokenBudget = null,
+    string? OutputMode = null);
 
 public sealed record GeneratorPlanDraftResult(
     GeneratorPlanRecord? Plan,

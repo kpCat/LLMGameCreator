@@ -197,6 +197,58 @@ Rollback snapshots are stored under:
 
 Apply writes an audit generated artifact with kind `game_package_patch_apply_result_v1` and validation/audit rows in the Design DB. The layer still does not execute Lua, execute generator modules, call an LLM, run Unity, run codegen, or change the `GamePackage` JSON format.
 
+## Patch-Capable Generator Plans
+
+Generator plan step configs may now include an optional data-only field:
+
+```json
+{
+  "package_operations": []
+}
+```
+
+This field uses the same strict `game_package_patch_v1` operation shapes that patch artifacts use. The supported operations remain:
+
+- `upsert_tile_prototype`
+- `upsert_map`
+- `upsert_entity_prototype`
+- `update_manifest`
+
+`package_operations` may originate from an LLM-proposed draft plan, but C# owns strict JSON parsing, registry validation, patch operation validation, human approval, preview artifact creation, patch artifact extraction, dry-run, explicit apply, rollback, audit and package validation.
+
+Plan validation rejects invalid package operations before approval. Plans without `package_operations` remain valid when they otherwise satisfy registry and dependency rules; they simply cannot produce a patch artifact through the safe patch pipeline.
+
+The end-to-end safe creator flow is:
+
+```text
+draft plan
+ -> human approval
+ -> prepare patch pipeline
+ -> generator_plan_preview artifact
+ -> game_package_patch_v1 artifact
+ -> dry-run diff
+ -> explicit apply
+ -> rollback/audit artifact
+ -> package validation
+ -> runtime preview can use the updated package
+```
+
+Prepare does not mutate `GamePackage` and does not apply automatically. Apply is data-only, allowlisted and human-triggered.
+
+This flow still does not:
+
+```text
+execute Lua
+execute generator modules
+run Unity
+run code generation
+support arbitrary JSON Patch/RFC6902
+support delete operations
+edit scripts
+write asset files
+auto-apply after LLM generation
+```
+
 ## Future Flow
 
 This baseline supports the planned LLM role:

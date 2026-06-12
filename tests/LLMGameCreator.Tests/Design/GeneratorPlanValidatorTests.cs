@@ -89,6 +89,72 @@ public sealed class GeneratorPlanValidatorTests
         Assert.Contains(issues, issue => issue.Code == "plan.config.invalid_json");
     }
 
+    [Fact]
+    public void ValidatorAcceptsPlanWithValidPackageOperations()
+    {
+        var issues = _validator.Validate(
+            new GeneratorPlanDraft
+            {
+                Title = "Plan",
+                Goal = "Goal",
+                Steps =
+                {
+                    new GeneratorPlanDraftStep
+                    {
+                        Order = 1,
+                        ModuleId = "core/base/v1",
+                        ConfigJson = """
+                        {
+                          "package_operations": [
+                            {
+                              "op": "upsert_tile_prototype",
+                              "id": "tile/stone",
+                              "name": "Stone",
+                              "walkable": true,
+                              "movement_cost": 1.0
+                            }
+                          ]
+                        }
+                        """
+                    }
+                }
+            },
+            new[] { Module("core/base/v1") },
+            new GeneratorPlanDraftRequest("Plan", "Goal", "Brief"));
+
+        Assert.DoesNotContain(issues, issue => issue.Severity == "error");
+    }
+
+    [Fact]
+    public void ValidatorRejectsPlanWithInvalidPackageOperations()
+    {
+        var issues = _validator.Validate(
+            new GeneratorPlanDraft
+            {
+                Title = "Plan",
+                Goal = "Goal",
+                Steps =
+                {
+                    new GeneratorPlanDraftStep
+                    {
+                        Order = 1,
+                        ModuleId = "core/base/v1",
+                        ConfigJson = """
+                        {
+                          "package_operations": [
+                            { "op": "delete_map", "id": "map/start" }
+                          ]
+                        }
+                        """
+                    }
+                }
+            },
+            new[] { Module("core/base/v1") },
+            new GeneratorPlanDraftRequest("Plan", "Goal", "Brief"));
+
+        Assert.Contains(issues, issue => issue.Code == "plan.package_operation.delete_forbidden");
+    }
+
     private static GeneratorModuleRecord Module(string id, string dependenciesJson = "[]")
     {
         return new GeneratorModuleRecord(id, "001", "lua/core/base.lua", "core", "[\"core.base\"]", dependenciesJson, "[]", "[]", "[]", "manifests/test.manifest.json", "{}", DateTimeOffset.UtcNow);

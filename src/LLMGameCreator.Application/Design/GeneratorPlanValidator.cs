@@ -4,6 +4,8 @@ namespace LLMGameCreator.Application.Design;
 
 public sealed class GeneratorPlanValidator
 {
+    private readonly GamePackagePatchOperationValidator _patchOperationValidator;
+
     private static readonly HashSet<string> ForbiddenExecutionFields = new(StringComparer.OrdinalIgnoreCase)
     {
         "lua",
@@ -17,6 +19,11 @@ public sealed class GeneratorPlanValidator
         "powershell",
         "cmd"
     };
+
+    public GeneratorPlanValidator(GamePackagePatchOperationValidator? patchOperationValidator = null)
+    {
+        _patchOperationValidator = patchOperationValidator ?? new GamePackagePatchOperationValidator();
+    }
 
     public IReadOnlyList<GeneratorPlanValidationIssue> Validate(
         GeneratorPlanDraft plan,
@@ -87,6 +94,7 @@ public sealed class GeneratorPlanValidator
             }
 
             CheckJson(step, issues);
+            CheckPackageOperations(step, issues);
             CheckCompatibility(module, request.RuntimeTarget, "runtime target", "plan.runtime_target.incompatible", module.RuntimeTargetsJson, issues);
             CheckCompatibility(module, request.TurnMode, "turn mode", "plan.turn_mode.incompatible", module.TurnModesJson, issues);
             CheckCompatibility(module, request.CombatMode, "combat mode", "plan.combat_mode.incompatible", module.CombatModesJson, issues);
@@ -152,6 +160,42 @@ public sealed class GeneratorPlanValidator
         catch (JsonException ex)
         {
             Add(issues, "error", "plan.config.invalid_json", $"Step config must be valid JSON: {ex.Message}", step.ModuleId);
+        }
+    }
+
+    private void CheckPackageOperations(GeneratorPlanDraftStep step, List<GeneratorPlanValidationIssue> issues)
+    {
+        JsonElement root;
+        try
+        {
+            using var document = JsonDocument.Parse(string.IsNullOrWhiteSpace(step.ConfigJson) ? "{}" : step.ConfigJson);
+            root = document.RootElement.Clone();
+        }
+        catch (JsonException)
+        {
+            return;
+        }
+
+        if (root.ValueKind != JsonValueKind.Object || !root.TryGetProperty("package_operations", out var operations))
+        {
+            return;
+        }
+
+        if (operations.ValueKind != JsonValueKind.Array)
+        {
+            Add(issues, "error", "plan.package_operation.invalid_shape", "config.package_operations must be a JSON array.", step.ModuleId);
+            return;
+        }
+
+        var result = _patchOperationValidator.ValidatePackageOperationsJson(operations.GetRawText(), $"plan/{step.ModuleId}/package_operations");
+        foreach (var validationResult in result.ValidationResults.Where(IsPatchError))
+        {
+            Add(
+                issues,
+                "error",
+                ToPlanPackageOperationCode(validationResult.Code),
+                validationResult.Message,
+                string.IsNullOrWhiteSpace(validationResult.Target) ? step.ModuleId : $"{step.ModuleId}:{validationResult.Target}");
         }
     }
 
@@ -237,5 +281,23 @@ public sealed class GeneratorPlanValidator
     private static void Add(List<GeneratorPlanValidationIssue> issues, string severity, string code, string message, string target)
     {
         issues.Add(new GeneratorPlanValidationIssue(severity, code, message, target));
+    }
+
+    private static bool IsPatchError(GeneratedArtifactValidationResultRecord result)
+    {
+        return result.Severity.Equals("error", StringComparison.OrdinalIgnoreCase)
+            || result.Severity.Equals("critical", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string ToPlanPackageOperationCode(string patchCode)
+    {
+        return patchCode switch
+        {
+            "patch.operation.op.unknown" => "plan.package_operation.unknown",
+            "patch.operation.delete.unsupported" => "plan.package_operation.delete_forbidden",
+            "patch.operation.duplicate_target" => "plan.package_operation.duplicate_target",
+            "patch.operation.id.invalid" => "plan.package_operation.invalid_id",
+            _ => "plan.package_operation.invalid_shape"
+        };
     }
 }

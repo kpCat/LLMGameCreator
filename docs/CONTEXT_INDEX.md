@@ -81,6 +81,9 @@ Current style:
 - Unknown manifest fields go to `metadata_json`.
 - WinForms tabbed pages split each tab into a dedicated `UserControl`.
 - Data-only GamePackage apply work uses `game_package_patch_v1` generated artifacts in the Design DB. Read `src/LLMGameCreator.Application/Design/GamePackagePatchService.cs`, `docs/DESIGN_DB_AND_GENERATOR_REGISTRY.md`, current package services, and package validators; do not add Lua/module/LLM/Unity/codegen execution.
+- Patch-capable planning uses optional `config.package_operations` inside `GeneratorPlan` steps. Read `GeneratorPlanDraftService`, `GeneratorPlanValidator`, `GamePackagePatchOperationValidator`, `GeneratorPlanPipelineService`, and `GamePackagePatchService`. Plans may propose allowlisted data-only operations, but approval, preview, patch extraction, dry-run and apply are owned by C# services.
+- Pipeline orchestration is a convenience layer only: approved plan -> preview artifact -> patch artifact -> dry-run diff. Prepare must not mutate package state and must not auto-apply.
+- The older First Playable Slice `ApplyDraft` path is legacy direct apply. Treat it cautiously because it does not use `game_package_patch_v1` rollback/audit artifacts; prefer the Generator Library safe patch pipeline for new creator flows.
 
 ### Runtime command pattern
 

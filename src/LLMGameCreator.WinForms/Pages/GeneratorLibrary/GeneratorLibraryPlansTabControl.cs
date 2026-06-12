@@ -8,6 +8,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
     private IGeneratorPlanRepository? _planRepository;
     private IGeneratorPlanReviewService? _reviewService;
     private IGeneratorPlanPreviewService? _previewService;
+    private IGeneratorPlanPipelineService? _pipelineService;
     private IReadOnlyList<GeneratorPlanRecord> _plans = Array.Empty<GeneratorPlanRecord>();
 
     public GeneratorLibraryPlansTabControl()
@@ -17,6 +18,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         _refreshButton.Click += async (_, _) => await RefreshPlansAsync();
         _revalidateButton.Click += async (_, _) => await RevalidateSelectedPlanAsync();
         _createPreviewButton.Click += async (_, _) => await CreatePreviewArtifactAsync();
+        _preparePipelineButton.Click += async (_, _) => await PreparePatchPipelineAsync();
         _approveButton.Click += async (_, _) => await ApproveSelectedPlanAsync();
         _rejectButton.Click += async (_, _) => await RejectSelectedPlanAsync();
         _archiveButton.Click += async (_, _) => await ArchiveSelectedPlanAsync();
@@ -28,12 +30,14 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         IGeneratorPlanDraftService draftService,
         IGeneratorPlanRepository planRepository,
         IGeneratorPlanReviewService reviewService,
-        IGeneratorPlanPreviewService previewService)
+        IGeneratorPlanPreviewService previewService,
+        IGeneratorPlanPipelineService pipelineService)
     {
         _draftService = draftService;
         _planRepository = planRepository;
         _reviewService = reviewService;
         _previewService = previewService;
+        _pipelineService = pipelineService;
     }
 
     public async Task RefreshPlansAsync()
@@ -81,7 +85,8 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
                 EmptyAsNull(_runtimeTargetTextBox.Text),
                 EmptyAsNull(_turnModeTextBox.Text),
                 EmptyAsNull(_combatModeTextBox.Text),
-                1800), CancellationToken.None).ConfigureAwait(true);
+                1800,
+                _dataPatchModeCheckBox.Checked ? "data_patch_plan" : "generic_plan"), CancellationToken.None).ConfigureAwait(true);
 
             _rawResponseTextBox.Text = result.RawLlmResponse;
             _issuesTextBox.Text = FormatIssues(result.ValidationIssues);
@@ -174,6 +179,28 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         }
     }
 
+    private async Task PreparePatchPipelineAsync()
+    {
+        var plan = GetSelectedPlan();
+        if (plan == null || _pipelineService == null)
+        {
+            SetStatus("Select an approved plan first.");
+            return;
+        }
+
+        try
+        {
+            var result = await _pipelineService.PreparePatchPipelineAsync(plan.Id, CancellationToken.None).ConfigureAwait(true);
+            _issuesTextBox.Text = FormatPipelineResult(result);
+            _previewArtifactTextBox.Text = result.PatchArtifact?.Json ?? result.PreviewArtifact?.Json ?? string.Empty;
+            SetStatus(result.Message);
+        }
+        catch (Exception ex)
+        {
+            SetStatus(ex.Message);
+        }
+    }
+
     private async Task RejectSelectedPlanAsync()
     {
         await UpdateSelectedPlanStatusAsync((service, plan, cancellationToken) => service.RejectPlanAsync(plan.Id, "Rejected from Plans tab.", cancellationToken)).ConfigureAwait(true);
@@ -223,6 +250,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         _rejectButton.Enabled = hasSelection;
         _archiveButton.Enabled = hasSelection;
         _createPreviewButton.Enabled = hasSelection;
+        _preparePipelineButton.Enabled = hasSelection;
     }
 
     private void SetStatus(string status)
@@ -296,6 +324,39 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         else
         {
             lines.AddRange(result.ValidationResults.Select(resultItem => $"{resultItem.Severity} {resultItem.Code}: {resultItem.Message} ({resultItem.Target})"));
+        }
+
+        return string.Join(Environment.NewLine, lines);
+    }
+
+    private static string FormatPipelineResult(GeneratorPlanPipelineResult result)
+    {
+        var lines = new List<string>
+        {
+            result.Message,
+            $"Can apply: {result.CanApply}"
+        };
+
+        if (result.Plan != null)
+        {
+            lines.Add($"Plan: {result.Plan.Id}");
+            lines.Add($"Plan status: {result.Plan.Status}");
+        }
+
+        lines.Add($"Preview artifact: {result.PreviewArtifact?.Id ?? "-"}");
+        lines.Add($"Patch artifact: {result.PatchArtifact?.Id ?? "-"}");
+        lines.Add(string.Empty);
+        lines.Add("Plan validation:");
+        lines.Add(FormatIssues(result.ValidationIssues));
+
+        if (result.DryRunResult != null)
+        {
+            lines.Add(string.Empty);
+            lines.Add("Dry-run diff:");
+            lines.AddRange(result.DryRunResult.DiffLines.Select(line => $"{line.ChangeKind} {line.Operation} {line.Target}: {line.Message}"));
+            lines.Add(string.Empty);
+            lines.Add("Package validation:");
+            lines.AddRange(result.DryRunResult.ValidationIssues.Select(issue => $"{issue.Severity} {issue.Code}: {issue.Message} ({issue.TargetId})"));
         }
 
         return string.Join(Environment.NewLine, lines);

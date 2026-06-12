@@ -214,7 +214,7 @@ public sealed class GamePackagePatchServiceTests
         var current = new CurrentGamePackageService(repository);
         await current.LoadAsync(temp.Path, CancellationToken.None);
         var validator = new FailOnSecondValidationValidator();
-        var service = new GamePackagePatchService(store, current, validator);
+        var service = new GamePackagePatchService(store, current, validator, new GamePackagePatchOperationValidator());
 
         var result = await service.ApplyPatchArtifactAsync("artifact/patch/test", CancellationToken.None);
 
@@ -307,7 +307,7 @@ public sealed class GamePackagePatchServiceTests
 
     private static IGamePackagePatchService CreateService(InMemoryArtifactStore store, ICurrentGamePackageService current)
     {
-        return new GamePackagePatchService(store, current, new GamePackageValidator());
+        return new GamePackagePatchService(store, current, new GamePackageValidator(), new GamePackagePatchOperationValidator());
     }
 
     private static async Task<IGamePackagePatchService> CreateFileBackedServiceAsync(string projectFolder, InMemoryArtifactStore store)
@@ -316,7 +316,7 @@ public sealed class GamePackagePatchServiceTests
         await repository.SaveAsync(projectFolder, CreateMinimalPackage(), CancellationToken.None);
         var current = new CurrentGamePackageService(repository);
         await current.LoadAsync(projectFolder, CancellationToken.None);
-        return new GamePackagePatchService(store, current, new GamePackageValidator());
+        return new GamePackagePatchService(store, current, new GamePackageValidator(), new GamePackagePatchOperationValidator());
     }
 
     private static GeneratedArtifactRecord PatchArtifact(string json)

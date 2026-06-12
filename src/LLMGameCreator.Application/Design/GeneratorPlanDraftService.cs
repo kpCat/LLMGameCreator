@@ -55,7 +55,7 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
 
         var response = await _llmChatClient.CompleteAsync(profile, new LlmChatRequest
         {
-            SystemPrompt = BuildSystemPrompt(),
+            SystemPrompt = BuildSystemPrompt(request),
             UserPrompt = BuildUserPrompt(request, contextText),
             Temperature = 0.1,
             MaxTokens = Math.Clamp(request.TokenBudget ?? 1800, 512, 6000)
@@ -171,9 +171,9 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
         return profile;
     }
 
-    private static string BuildSystemPrompt()
+    private static string BuildSystemPrompt(GeneratorPlanDraftRequest request)
     {
-        return string.Join(Environment.NewLine, new[]
+        var lines = new List<string>
         {
             "You are a deterministic planner for LLMGameCreator generator modules.",
             "Return ONLY one valid JSON object. No markdown. No comments.",
@@ -181,7 +181,22 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
             "Do not apply the plan to a GamePackage.",
             "Select only module_id values that appear in the registry context.",
             "Use this JSON shape: { \"title\": \"...\", \"goal\": \"...\", \"steps\": [ { \"order\": 1, \"module_id\": \"core/example/v1\", \"config\": {}, \"depends_on\": [] } ] }."
-        });
+        };
+
+        if (IsDataPatchMode(request))
+        {
+            lines.AddRange(new[]
+            {
+                "For game creation plans, prefer config.package_operations as the only supported way to propose GamePackage changes.",
+                "package_operations must use the data-only game_package_patch_v1 operation shapes.",
+                "Allowed ops: upsert_tile_prototype, upsert_map, upsert_entity_prototype, update_manifest.",
+                "Do not include delete operations, JSON Patch/RFC6902 paths, scripts, assets, chunks, tile grids, Lua, code, or raw code fields.",
+                "Prefer a small first playable data-only slice: 1-4 tile prototypes, 1 map, 0-3 entity prototypes, optional manifest title/description/start_map_id.",
+                "Plans may omit package_operations when a generic registry-only plan is more appropriate."
+            });
+        }
+
+        return string.Join(Environment.NewLine, lines);
     }
 
     private static string BuildUserPrompt(GeneratorPlanDraftRequest request, string contextText)
@@ -193,12 +208,30 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
         builder.AppendLine($"RuntimeTarget: {EmptyAsDash(request.RuntimeTarget)}");
         builder.AppendLine($"TurnMode: {EmptyAsDash(request.TurnMode)}");
         builder.AppendLine($"CombatMode: {EmptyAsDash(request.CombatMode)}");
+        builder.AppendLine($"OutputMode: {(IsDataPatchMode(request) ? "data_patch_plan" : "generic_plan")}");
         builder.AppendLine();
         builder.AppendLine("DesignBrief:");
         builder.AppendLine(EmptyAsDash(request.DesignBrief));
         builder.AppendLine();
         builder.AppendLine("Compact registry and design context:");
         builder.AppendLine(contextText);
+        if (IsDataPatchMode(request))
+        {
+            builder.AppendLine();
+            builder.AppendLine("Patch-capable plan contract:");
+            builder.AppendLine("Use config.package_operations only for data-only package changes.");
+            builder.AppendLine("Allowed operation examples:");
+            builder.AppendLine("""
+[
+  { "op": "upsert_tile_prototype", "id": "tile/grass", "name": "Grass", "walkable": true, "movement_cost": 1.0, "asset_id": null },
+  { "op": "upsert_map", "id": "map/start", "name": "Start", "width": 12, "height": 8, "default_tile_id": "tile/grass", "start_x": 1, "start_y": 1 },
+  { "op": "upsert_entity_prototype", "id": "prototype/npc/guide", "name": "Guide", "asset_id": null },
+  { "op": "update_manifest", "title": "Generated Game", "description": "Short playable slice.", "start_map_id": "map/start" }
+]
+""");
+            builder.AppendLine("No delete operations. No scripts/assets/chunks/Lua/code. No arbitrary JSON patch paths.");
+        }
+
         return builder.ToString();
     }
 
@@ -263,6 +296,7 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
             request.RuntimeTarget,
             request.TurnMode,
             request.CombatMode,
+            request.OutputMode,
             request.TokenBudget,
             response.Endpoint,
             response.Model
@@ -292,6 +326,11 @@ public sealed class GeneratorPlanDraftService : IGeneratorPlanDraftService
     private static string EmptyAsDash(string? value)
     {
         return string.IsNullOrWhiteSpace(value) ? "-" : value.Trim();
+    }
+
+    private static bool IsDataPatchMode(GeneratorPlanDraftRequest request)
+    {
+        return string.Equals(request.OutputMode, "data_patch_plan", StringComparison.OrdinalIgnoreCase);
     }
 
     private static string Truncate(string value, int maxLength)

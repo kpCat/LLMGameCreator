@@ -14,6 +14,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
     private readonly IGeneratorPlanRepository? _planRepository;
     private readonly IGeneratorPlanReviewService? _planReviewService;
     private readonly IGeneratorPlanPreviewService? _planPreviewService;
+    private readonly IGeneratorPlanPipelineService? _planPipelineService;
     private readonly IGeneratedArtifactRepository? _artifactRepository;
     private readonly IGamePackagePatchService? _patchService;
 
@@ -32,6 +33,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         IGeneratorPlanRepository planRepository,
         IGeneratorPlanReviewService planReviewService,
         IGeneratorPlanPreviewService planPreviewService,
+        IGeneratorPlanPipelineService planPipelineService,
         IGeneratedArtifactRepository artifactRepository,
         IGamePackagePatchService patchService)
     {
@@ -44,10 +46,11 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
         _planRepository = planRepository;
         _planReviewService = planReviewService;
         _planPreviewService = planPreviewService;
+        _planPipelineService = planPipelineService;
         _artifactRepository = artifactRepository;
         _patchService = patchService;
         InitializeComponent();
-        _plansTab.Configure(_planDraftService, _planRepository, _planReviewService, _planPreviewService);
+        _plansTab.Configure(_planDraftService, _planRepository, _planReviewService, _planPreviewService, _planPipelineService);
         _artifactsTab.Configure(_artifactRepository, _patchService);
         WireEvents();
     }

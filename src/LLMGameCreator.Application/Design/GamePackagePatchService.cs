@@ -38,15 +38,18 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
     private readonly IGeneratedArtifactRepository _artifactRepository;
     private readonly ICurrentGamePackageService _currentGamePackageService;
     private readonly IGamePackageValidator _validator;
+    private readonly GamePackagePatchOperationValidator _operationValidator;
 
     public GamePackagePatchService(
         IGeneratedArtifactRepository artifactRepository,
         ICurrentGamePackageService currentGamePackageService,
-        IGamePackageValidator validator)
+        IGamePackageValidator validator,
+        GamePackagePatchOperationValidator operationValidator)
     {
         _artifactRepository = artifactRepository;
         _currentGamePackageService = currentGamePackageService;
         _validator = validator;
+        _operationValidator = operationValidator;
     }
 
     public async Task<GamePackagePatchCreateResult> CreatePatchArtifactFromPreviewAsync(string previewArtifactId, CancellationToken cancellationToken)
@@ -80,7 +83,7 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
             new GamePackagePatchSource(extraction.PlanId, previewArtifact.Id),
             extraction.Operations);
         var json = SerializePatchDocument(document);
-        var validationResults = ValidatePatchJson(patchArtifactId, json);
+        var validationResults = _operationValidator.ValidatePatchJson(patchArtifactId, json);
         if (validationResults.Any(IsError))
         {
             return new GamePackagePatchCreateResult(previewArtifact, null, validationResults, false, "Patch operations failed validation; patch artifact was not saved.");
@@ -246,12 +249,12 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
             return new PatchLoadResult(artifact, null, results, "Artifact kind must be game_package_patch_v1.");
         }
 
-        var validationResults = ValidatePatchJson(artifact.Id, artifact.Json);
-        var document = validationResults.Any(IsError) ? null : ParsePatchDocument(artifact.Json, artifact.Id).Document;
+        var validationResults = _operationValidator.ValidatePatchJson(artifact.Id, artifact.Json);
+        var document = validationResults.Any(IsError) ? null : _operationValidator.ParsePatchDocument(artifact.Json, artifact.Id).Document;
         return new PatchLoadResult(artifact, document, validationResults, validationResults.Any(IsError) ? "Patch artifact validation failed." : "Patch artifact loaded.");
     }
 
-    private static PatchExtractionResult ExtractPatchOperationsFromPreview(GeneratedArtifactRecord previewArtifact)
+    private PatchExtractionResult ExtractPatchOperationsFromPreview(GeneratedArtifactRecord previewArtifact)
     {
         try
         {
@@ -307,7 +310,7 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 ["operations"] = operations
             }.ToJsonString(PatchJsonOptions);
 
-            var parse = ParsePatchDocument(candidate, BuildPatchArtifactId(previewArtifact.Id));
+            var parse = _operationValidator.ParsePatchDocument(candidate, BuildPatchArtifactId(previewArtifact.Id));
             if (parse.ValidationResults.Any(IsError) || parse.Document == null)
             {
                 return new PatchExtractionResult(planId ?? previewArtifact.GeneratedBy, Array.Empty<GamePackagePatchOperation>(), parse.ValidationResults, "Explicit package_operations failed patch validation.");
@@ -1085,4 +1088,3 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
         IReadOnlyList<GeneratedArtifactValidationResultRecord> ValidationResults,
         string Message);
 }
-

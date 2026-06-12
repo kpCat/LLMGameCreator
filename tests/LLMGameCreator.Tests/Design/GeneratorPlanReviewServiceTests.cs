@@ -64,6 +64,28 @@ public sealed class GeneratorPlanReviewServiceTests
     }
 
     [Fact]
+    public async Task ReviewServiceRejectsApprovalWhenPackageOperationsAreInvalid()
+    {
+        var store = Store(
+            new[] { Module("core/base/v1") },
+            Steps(Step("core/base/v1", 1, configJson: """
+            {
+              "package_operations": [
+                { "op": "delete_map", "id": "map/start" }
+              ]
+            }
+            """)));
+        var service = CreateService(store);
+
+        var result = await service.ApprovePlanAsync(store.Plan.Id, "reviewed", CancellationToken.None);
+
+        Assert.False(result.Updated);
+        Assert.Equal("draft", store.Plan.Status);
+        Assert.Contains(result.ValidationIssues, issue => issue.Code == "plan.package_operation.delete_forbidden");
+    }
+
+
+    [Fact]
     public async Task ReviewServiceAllowsApprovalWhenValidationHasNoErrors()
     {
         var store = Store(
@@ -137,14 +159,14 @@ public sealed class GeneratorPlanReviewServiceTests
         return steps;
     }
 
-    private static GeneratorPlanStepRecord Step(string moduleId, int order, string dependsOnJson = "[]")
+    private static GeneratorPlanStepRecord Step(string moduleId, int order, string dependsOnJson = "[]", string configJson = "{}")
     {
         return new GeneratorPlanStepRecord(
             $"step/{order}",
             "plan/test",
             order,
             moduleId,
-            "{}",
+            string.IsNullOrWhiteSpace(configJson) ? "{}" : configJson,
             string.IsNullOrWhiteSpace(dependsOnJson) ? "[]" : dependsOnJson,
             "pending");
     }

@@ -378,6 +378,7 @@ public sealed partial class GenerationPageControl : UserControl, IEditorPage
         return string.Join("\r\n", new[]
         {
             result.Success ? "Draft применён." : "Draft не применён.",
+            "Legacy direct apply: this path does not use the patch artifact rollback/audit pipeline. Prefer Generator Library -> Plans -> Prepare Patch Pipeline for new safe creator flow.",
             result.Message,
             string.Empty,
             _validationFormatter.Format(result.ValidationReport)
