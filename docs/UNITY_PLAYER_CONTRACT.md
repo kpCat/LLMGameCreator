@@ -1,3 +1,9 @@
+## Runtime v1 Command/Event Bridge
+
+Gameplay runtime v1 exposes `GameRuntimeCommand`, `GameRuntimeEvent` and `GameRuntimeResult` for economy/gameplay simulation. These contracts are frontend-friendly and can be adapted by a future Unity bridge without adding game-specific logic to Unity.
+
+Unity is still not implemented in this repository. Runtime v1 remains headless C# and does not execute Lua, generator modules, LLM calls, Unity codegen or asset providers.
+
 # Unity Player Contract
 
 ## Назначение

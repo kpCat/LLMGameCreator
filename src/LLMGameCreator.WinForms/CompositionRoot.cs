@@ -66,6 +66,15 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
         _container.Register<IGameRuntime, DefaultGameRuntime>(Reuse.Singleton);
+        _container.Register<IGameRuntimeStateFactory, GameRuntimeStateFactory>(Reuse.Singleton);
+        _container.Register<IRequirementEvaluator, RequirementEvaluator>(Reuse.Singleton);
+        _container.Register<ICostConsumer, CostConsumer>(Reuse.Singleton);
+        _container.Register<IOutputApplier, OutputApplier>(Reuse.Singleton);
+        _container.Register<IRecipeRuntimeService, RecipeRuntimeService>(Reuse.Singleton);
+        _container.Register<ILootRuntimeService, LootRuntimeService>(Reuse.Singleton);
+        _container.Register<ITransactionRuntimeService, TransactionRuntimeService>(Reuse.Singleton);
+        _container.Register<IResourceNetworkRuntimeService, ResourceNetworkRuntimeService>(Reuse.Singleton);
+        _container.Register<IGameRuntimeService, GameRuntimeService>(Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
 
@@ -92,6 +101,10 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<RuntimePreviewPageControl>(resolver => new RuntimePreviewPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
             resolver.Resolve<IGameRuntime>()), Reuse.Singleton);
+
+        _container.RegisterDelegate<RuntimeSimulatorPageControl>(resolver => new RuntimeSimulatorPageControl(
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<IGameRuntimeService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<GeneratorLibraryPageControl>(resolver => new GeneratorLibraryPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
@@ -123,6 +136,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ValidationPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),
+            resolver.Resolve<RuntimeSimulatorPageControl>(),
             resolver.Resolve<AssetsPageControl>(),
             resolver.Resolve<SettingsPageControl>()
         }), Reuse.Singleton);

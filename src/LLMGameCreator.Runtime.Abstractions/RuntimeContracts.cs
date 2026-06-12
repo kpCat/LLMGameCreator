@@ -78,3 +78,220 @@ public interface IChunkGenerator
 {
     string Id { get; }
 }
+
+public sealed class GameRuntimeState
+{
+    public string PackageId { get; set; } = string.Empty;
+    public string CurrentMapId { get; set; } = string.Empty;
+    public string PlayerEntityId { get; set; } = "player";
+    public long Tick { get; set; }
+    public List<InventoryState> Inventories { get; set; } = new List<InventoryState>();
+    public List<ResourceState> Resources { get; set; } = new List<ResourceState>();
+    public List<RuntimeFlagState> Flags { get; set; } = new List<RuntimeFlagState>();
+    public List<StatusState> Statuses { get; set; } = new List<StatusState>();
+    public Dictionary<string, string> QuestStates { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class InventoryState
+{
+    public string Id { get; set; } = string.Empty;
+    public string OwnerKind { get; set; } = string.Empty;
+    public string? OwnerId { get; set; }
+    public List<ItemStackState> Stacks { get; set; } = new List<ItemStackState>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class ItemStackState
+{
+    public string ItemId { get; set; } = string.Empty;
+    public double Amount { get; set; }
+    public string? UniqueInstanceId { get; set; }
+    public bool QuestItem { get; set; }
+    public double? Durability { get; set; }
+    public double? Charge { get; set; }
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class ResourceState
+{
+    public string ResourceId { get; set; } = string.Empty;
+    public double Amount { get; set; }
+    public double? Capacity { get; set; }
+    public string Scope { get; set; } = "global";
+    public string? OwnerId { get; set; }
+}
+
+public sealed class StatusState
+{
+    public string StatusId { get; set; } = string.Empty;
+    public string TargetId { get; set; } = string.Empty;
+    public long? RemainingTicks { get; set; }
+    public int Stacks { get; set; } = 1;
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class RuntimeFlagState
+{
+    public string Id { get; set; } = string.Empty;
+    public string Value { get; set; } = string.Empty;
+}
+
+public enum GameRuntimeCommandType
+{
+    Initialize = 0,
+    AddItem = 1,
+    RemoveItem = 2,
+    ChangeResource = 3,
+    UseItem = 4,
+    CraftRecipe = 5,
+    RollLootTable = 6,
+    ExecuteTransaction = 7,
+    TickResourceNodes = 8,
+    SetFlag = 9,
+    Wait = 10
+}
+
+public sealed class GameRuntimeCommand
+{
+    public GameRuntimeCommandType Type { get; set; }
+    public string? Id { get; set; }
+    public string? InventoryId { get; set; }
+    public string? TargetId { get; set; }
+    public double Amount { get; set; }
+    public int Ticks { get; set; } = 1;
+    public int? Seed { get; set; }
+    public string? Value { get; set; }
+    public Dictionary<string, string> Args { get; set; } = new Dictionary<string, string>();
+
+    public static GameRuntimeCommand CraftRecipe(string recipeId, string? inventoryId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.CraftRecipe, Id = recipeId, InventoryId = inventoryId };
+
+    public static GameRuntimeCommand RollLootTable(string lootTableId, string? inventoryId = null, int? seed = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.RollLootTable, Id = lootTableId, InventoryId = inventoryId, Seed = seed };
+
+    public static GameRuntimeCommand ExecuteTransaction(string transactionId, string? inventoryId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.ExecuteTransaction, Id = transactionId, InventoryId = inventoryId };
+
+    public static GameRuntimeCommand TickResourceNodes(int ticks = 1)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.TickResourceNodes, Ticks = ticks };
+}
+
+public enum GameRuntimeEventType
+{
+    GameStarted = 0,
+    InventoryChanged = 1,
+    ResourceChanged = 2,
+    StatusAdded = 3,
+    StatusRemoved = 4,
+    RecipeCrafted = 5,
+    LootRolled = 6,
+    TransactionExecuted = 7,
+    RequirementFailed = 8,
+    CostConsumed = 9,
+    OutputApplied = 10,
+    ResourceNodeTicked = 11,
+    LogMessageAdded = 12,
+    ValidationFailed = 13
+}
+
+public sealed class GameRuntimeEvent
+{
+    public GameRuntimeEventType Type { get; set; }
+    public string Message { get; set; } = string.Empty;
+    public string? TargetId { get; set; }
+    public Dictionary<string, string> Args { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class RuntimeDiagnostic
+{
+    public string Code { get; set; } = string.Empty;
+    public string Severity { get; set; } = "error";
+    public string Message { get; set; } = string.Empty;
+    public string? TargetId { get; set; }
+}
+
+public sealed class GameRuntimeResult
+{
+    public bool Success { get; set; } = true;
+    public GameRuntimeState State { get; set; } = new GameRuntimeState();
+    public List<GameRuntimeEvent> Events { get; set; } = new List<GameRuntimeEvent>();
+    public List<RuntimeDiagnostic> Diagnostics { get; set; } = new List<RuntimeDiagnostic>();
+    public string Message { get; set; } = string.Empty;
+}
+
+public sealed class RequirementEvaluationResult
+{
+    public bool Success => Failures.Count == 0;
+    public List<RequirementFailure> Failures { get; set; } = new List<RequirementFailure>();
+    public List<RuntimeDiagnostic> Diagnostics { get; set; } = new List<RuntimeDiagnostic>();
+}
+
+public sealed class RequirementFailure
+{
+    public string Code { get; set; } = string.Empty;
+    public string RequirementKind { get; set; } = string.Empty;
+    public string TargetId { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
+}
+
+public sealed class CostConsumptionResult
+{
+    public bool Success => Diagnostics.All(d => !d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase));
+    public List<GameRuntimeEvent> Events { get; set; } = new List<GameRuntimeEvent>();
+    public List<RuntimeDiagnostic> Diagnostics { get; set; } = new List<RuntimeDiagnostic>();
+}
+
+public sealed class OutputApplicationResult
+{
+    public bool Success => Diagnostics.All(d => !d.Severity.Equals("error", StringComparison.OrdinalIgnoreCase));
+    public List<GameRuntimeEvent> Events { get; set; } = new List<GameRuntimeEvent>();
+    public List<RuntimeDiagnostic> Diagnostics { get; set; } = new List<RuntimeDiagnostic>();
+}
+
+public interface IGameRuntimeStateFactory
+{
+    GameRuntimeResult CreateInitialState(GamePackageDefinition package);
+}
+
+public interface IRequirementEvaluator
+{
+    RequirementEvaluationResult Evaluate(GamePackageDefinition package, GameRuntimeState state, IEnumerable<RequirementDefinition> requirements, string? inventoryId = null);
+}
+
+public interface ICostConsumer
+{
+    CostConsumptionResult Consume(GamePackageDefinition package, GameRuntimeState state, IEnumerable<CostDefinition> costs, string? inventoryId = null);
+}
+
+public interface IOutputApplier
+{
+    OutputApplicationResult Apply(GamePackageDefinition package, GameRuntimeState state, IEnumerable<OutputDefinition> outputs, string? inventoryId = null, int? seed = null);
+}
+
+public interface IRecipeRuntimeService
+{
+    GameRuntimeResult CraftRecipe(GamePackageDefinition package, GameRuntimeState state, string recipeId, string? inventoryId = null);
+}
+
+public interface ILootRuntimeService
+{
+    GameRuntimeResult RollLootTable(GamePackageDefinition package, GameRuntimeState state, string lootTableId, string? targetInventoryId = null, int? seed = null);
+}
+
+public interface ITransactionRuntimeService
+{
+    GameRuntimeResult ExecuteTransaction(GamePackageDefinition package, GameRuntimeState state, string transactionId, string? inventoryId = null);
+}
+
+public interface IResourceNetworkRuntimeService
+{
+    GameRuntimeResult TickResourceNodes(GamePackageDefinition package, GameRuntimeState state, int ticks = 1);
+}
+
+public interface IGameRuntimeService
+{
+    GameRuntimeResult CreateInitialState(GamePackageDefinition package);
+    GameRuntimeResult Execute(GamePackageDefinition package, GameRuntimeState state, GameRuntimeCommand command);
+    GameRuntimeResult ExecuteMany(GamePackageDefinition package, GameRuntimeState state, IEnumerable<GameRuntimeCommand> commands);
+}

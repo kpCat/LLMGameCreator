@@ -1,3 +1,16 @@
+## Runtime Interpretation Notes
+
+Gameplay runtime v1 interprets the optional economy lists under `game` without changing the package format:
+
+- `inventories` are copied into `GameRuntimeState.Inventories`; if no player inventory exists, runtime creates an in-memory default player inventory;
+- `resources` initialize runtime resource values from `defaultValue`, falling back to `minValue` or zero, and clamp by `minValue`/`maxValue`;
+- `requirements`, `costs` and `outputs` are evaluated against runtime state, not by mutating package definitions;
+- `recipes`, `lootTables`, `transactions` and `resourceNodes` are executed by headless runtime services;
+- loot uses deterministic seeded random; the package format does not store random state;
+- `stockLootTableId` and restock rules are data contracts only in runtime v1 and do not implement merchant restocking.
+
+Runtime v1 does not execute runtime Lua, generator Lua, generator modules, LLM calls, Unity codegen or external asset providers.
+
 # GamePackage format
 
 GamePackage — переносимый пакет игры. Его должен читать WinForms Preview, headless runtime и будущий Unity Player.

@@ -346,3 +346,20 @@ LLM formula draft
 5. sample в GamePackage;
 6. smoke-test;
 7. UI/viewer или diagnostic report.
+## Gameplay Runtime v1
+
+Gameplay runtime v1 makes the economy definitions executable in a headless deterministic simulation.
+
+Runtime state is stored in `GameRuntimeState`, separate from `GamePackageDefinition`. It contains package id, current map id, player entity id, tick, inventories, resources, flags, statuses, optional quest states and metadata. Runtime state does not hold definition objects.
+
+Runtime v1 supports:
+
+- requirements: `has_item`, `inventory_has`, `resource_at_least`, `network_resource_at_least`, `flag_equals`, `status_present`, `status_active`, `time_available`, `always`;
+- costs: item, resource-like costs, time/tick, durability and charge;
+- outputs: item, resource-like outputs, status, flag, log message and simple loot-table output rolls;
+- recipes: requirements, inputs, costs and outputs are checked/applied through a working state copy;
+- loot tables: weighted deterministic rolls use a supplied seed or a stable package/table/tick seed, never global random;
+- transactions: shops, barter and services execute as generic requirement/cost/output bundles;
+- resource nodes: a simple tick loop evaluates each node, consumes conversion/consumption costs, applies production/storage/conversion outputs and clamps resources by definition min/max.
+
+Runtime v1 deliberately does not implement combat, quest/dialogue execution, full electricity-grid routing, building placement, multiplayer, runtime Lua or generator Lua. Missing fuel/input on a resource node is reported as a runtime diagnostic and the node produces nothing for that tick.
