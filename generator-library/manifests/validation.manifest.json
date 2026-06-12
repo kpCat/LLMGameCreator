@@ -1,0 +1,201 @@
+{
+  "id": "batch/validation/v1",
+  "version": "0.1.0",
+  "batch": "019",
+  "title": "Validation modules",
+  "purpose": "Batch 019 manifest for deterministic validation modules covering world reachability, quest references and conditions, interaction targeting, module contract metadata and capability dependency consistency.",
+  "files": [
+    "lua/validation/world_validation.lua",
+    "lua/validation/quest_validation.lua",
+    "lua/validation/interaction_validation.lua",
+    "lua/validation/module_contract_validation.lua",
+    "docs/lua/validation_modules.md",
+    "manifests/validation.manifest.json",
+    "tests/validation_examples.lua",
+    "BATCH_019_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "validation/world_validation/v1",
+      "path": "lua/validation/world_validation.lua",
+      "category": "validation",
+      "capabilities": [
+        "validation.world.validate",
+        "validation.world.reachability",
+        "validation.world.references"
+      ],
+      "depends_on": [
+        "core/id/v1",
+        "core/grid/v1",
+        "world/region_graph/v1",
+        "world/reachability/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "unity_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "validation/quest_validation/v1",
+      "path": "lua/validation/quest_validation.lua",
+      "category": "validation",
+      "capabilities": [
+        "validation.quest.validate",
+        "validation.quest.conditions",
+        "validation.quest.transitions"
+      ],
+      "depends_on": [
+        "quest/quest_schema/v1",
+        "progression/progress_track/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "unity_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "validation/interaction_validation/v1",
+      "path": "lua/validation/interaction_validation.lua",
+      "category": "validation",
+      "capabilities": [
+        "validation.interaction.validate",
+        "validation.interaction.targeting",
+        "validation.interaction.references"
+      ],
+      "depends_on": [
+        "entity/entity_factory/v1",
+        "interaction/targeting/v1",
+        "interaction/inspect_object/v1",
+        "interaction/talk_to_npc/v1",
+        "dialogue/dialogue_schema/v1",
+        "quest/quest_schema/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "unity_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "validation/module_contract_validation/v1",
+      "path": "lua/validation/module_contract_validation.lua",
+      "category": "validation",
+      "capabilities": [
+        "validation.module_contract.validate",
+        "validation.capability_dependencies",
+        "validation.manifest_metadata"
+      ],
+      "depends_on": [
+        "generation/capability_manifest/v1",
+        "generation/module_manifest/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "unity_ir",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "editor",
+    "validation",
+    "simulation",
+    "unity_ir",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "validation_contract": "Validation modules consume plain JSON-serializable IR/config tables and return diagnostics; they do not load, execute or mutate runtime systems.",
+    "diagnostic_contract": "Diagnostics are arrays of { severity, code, message, target } with severity error, warning or info.",
+    "dependency_contract": "Capability and module dependencies are validated from metadata supplied as plain tables."
+  }
+}

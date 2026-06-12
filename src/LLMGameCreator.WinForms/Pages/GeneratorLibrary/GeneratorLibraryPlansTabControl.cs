@@ -7,6 +7,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
     private IGeneratorPlanDraftService? _draftService;
     private IGeneratorPlanRepository? _planRepository;
     private IGeneratorPlanReviewService? _reviewService;
+    private IGeneratorPlanPreviewService? _previewService;
     private IReadOnlyList<GeneratorPlanRecord> _plans = Array.Empty<GeneratorPlanRecord>();
 
     public GeneratorLibraryPlansTabControl()
@@ -15,6 +16,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         _createButton.Click += async (_, _) => await CreateDraftPlanAsync();
         _refreshButton.Click += async (_, _) => await RefreshPlansAsync();
         _revalidateButton.Click += async (_, _) => await RevalidateSelectedPlanAsync();
+        _createPreviewButton.Click += async (_, _) => await CreatePreviewArtifactAsync();
         _approveButton.Click += async (_, _) => await ApproveSelectedPlanAsync();
         _rejectButton.Click += async (_, _) => await RejectSelectedPlanAsync();
         _archiveButton.Click += async (_, _) => await ArchiveSelectedPlanAsync();
@@ -22,11 +24,16 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         UpdateActionButtons();
     }
 
-    public void Configure(IGeneratorPlanDraftService draftService, IGeneratorPlanRepository planRepository, IGeneratorPlanReviewService reviewService)
+    public void Configure(
+        IGeneratorPlanDraftService draftService,
+        IGeneratorPlanRepository planRepository,
+        IGeneratorPlanReviewService reviewService,
+        IGeneratorPlanPreviewService previewService)
     {
         _draftService = draftService;
         _planRepository = planRepository;
         _reviewService = reviewService;
+        _previewService = previewService;
     }
 
     public async Task RefreshPlansAsync()
@@ -51,6 +58,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
 
         _stepsListView.Items.Clear();
         _issuesTextBox.Text = string.Empty;
+        _previewArtifactTextBox.Text = string.Empty;
         UpdateActionButtons();
         SetStatus(_plans.Count == 0 ? "No saved draft plans." : $"Loaded {_plans.Count} draft plans.");
     }
@@ -114,6 +122,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
             $"Goal: {plan.Goal}\r\n" +
             $"Status: {plan.Status}\r\n" +
             $"Metadata: {plan.MetadataJson}";
+        _previewArtifactTextBox.Text = string.Empty;
         UpdateActionButtons();
     }
 
@@ -141,6 +150,28 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
     private async Task ApproveSelectedPlanAsync()
     {
         await UpdateSelectedPlanStatusAsync((service, plan, cancellationToken) => service.ApprovePlanAsync(plan.Id, "Approved from Plans tab.", cancellationToken)).ConfigureAwait(true);
+    }
+
+    private async Task CreatePreviewArtifactAsync()
+    {
+        var plan = GetSelectedPlan();
+        if (plan == null || _previewService == null)
+        {
+            SetStatus("Select a plan first.");
+            return;
+        }
+
+        try
+        {
+            var result = await _previewService.CreatePreviewArtifactAsync(new GeneratorPlanPreviewRequest(plan.Id), CancellationToken.None).ConfigureAwait(true);
+            _issuesTextBox.Text = FormatPreviewResult(result);
+            _previewArtifactTextBox.Text = result.Artifact?.Json ?? string.Empty;
+            SetStatus(result.Message);
+        }
+        catch (Exception ex)
+        {
+            SetStatus(ex.Message);
+        }
     }
 
     private async Task RejectSelectedPlanAsync()
@@ -191,6 +222,7 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
         _approveButton.Enabled = hasSelection;
         _rejectButton.Enabled = hasSelection;
         _archiveButton.Enabled = hasSelection;
+        _createPreviewButton.Enabled = hasSelection;
     }
 
     private void SetStatus(string status)
@@ -239,6 +271,33 @@ public sealed partial class GeneratorLibraryPlansTabControl : UserControl
 
         lines.Add(string.Empty);
         lines.Add(FormatIssues(result.ValidationIssues));
+        return string.Join(Environment.NewLine, lines);
+    }
+
+    private static string FormatPreviewResult(GeneratorPlanPreviewResult result)
+    {
+        var lines = new List<string>
+        {
+            result.Message,
+            $"Saved: {result.Saved}"
+        };
+
+        if (result.Artifact != null)
+        {
+            lines.Add($"Artifact: {result.Artifact.Id}");
+            lines.Add($"Validation state: {result.Artifact.ValidationState}");
+        }
+
+        lines.Add(string.Empty);
+        if (result.ValidationResults.Count == 0)
+        {
+            lines.Add("No preview validation results.");
+        }
+        else
+        {
+            lines.AddRange(result.ValidationResults.Select(resultItem => $"{resultItem.Severity} {resultItem.Code}: {resultItem.Message} ({resultItem.Target})"));
+        }
+
         return string.Join(Environment.NewLine, lines);
     }
 

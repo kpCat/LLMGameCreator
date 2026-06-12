@@ -44,11 +44,13 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<IDesignKnowledgeRepository>(resolver => resolver.Resolve<SqliteDesignDatabase>(), Reuse.Singleton);
         _container.RegisterDelegate<IGeneratorLibraryRegistry>(resolver => resolver.Resolve<SqliteDesignDatabase>(), Reuse.Singleton);
         _container.RegisterDelegate<IGeneratorPlanRepository>(resolver => resolver.Resolve<SqliteDesignDatabase>(), Reuse.Singleton);
+        _container.RegisterDelegate<IGeneratedArtifactRepository>(resolver => resolver.Resolve<SqliteDesignDatabase>(), Reuse.Singleton);
         _container.Register<IGeneratorLibraryImporter, GeneratorLibraryImportService>(Reuse.Singleton);
         _container.Register<IGeneratorLibraryIntegrityValidator, GeneratorLibraryIntegrityValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanValidator>(Reuse.Singleton);
         _container.Register<IGeneratorPlanDraftService, GeneratorPlanDraftService>(Reuse.Singleton);
         _container.Register<IGeneratorPlanReviewService, GeneratorPlanReviewService>(Reuse.Singleton);
+        _container.Register<IGeneratorPlanPreviewService, GeneratorPlanPreviewService>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
@@ -92,7 +94,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IGeneratorLibraryIntegrityValidator>(),
             resolver.Resolve<IGeneratorPlanDraftService>(),
             resolver.Resolve<IGeneratorPlanRepository>(),
-            resolver.Resolve<IGeneratorPlanReviewService>()), Reuse.Singleton);
+            resolver.Resolve<IGeneratorPlanReviewService>(),
+            resolver.Resolve<IGeneratorPlanPreviewService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

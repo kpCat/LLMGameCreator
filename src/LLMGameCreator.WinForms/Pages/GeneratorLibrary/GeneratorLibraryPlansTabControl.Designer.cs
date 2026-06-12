@@ -27,6 +27,7 @@ namespace LLMGameCreator.WinForms.Pages
         private Button _createButton;
         private Button _refreshButton;
         private Button _revalidateButton;
+        private Button _createPreviewButton;
         private Button _approveButton;
         private Button _rejectButton;
         private Button _archiveButton;
@@ -35,6 +36,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _plansPage;
         private TabPage _stepsPage;
         private TabPage _issuesPage;
+        private TabPage _previewArtifactPage;
         private TabPage _rawPage;
         private ListView _plansListView;
         private ColumnHeader _planTitleColumn;
@@ -47,6 +49,7 @@ namespace LLMGameCreator.WinForms.Pages
         private ColumnHeader _stepStatusColumn;
         private ColumnHeader _stepDependsOnColumn;
         private TextBox _issuesTextBox;
+        private TextBox _previewArtifactTextBox;
         private TextBox _rawResponseTextBox;
 
         protected override void Dispose(bool disposing)
@@ -80,6 +83,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._createButton = new Button();
             this._refreshButton = new Button();
             this._revalidateButton = new Button();
+            this._createPreviewButton = new Button();
             this._approveButton = new Button();
             this._rejectButton = new Button();
             this._archiveButton = new Button();
@@ -88,6 +92,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._plansPage = new TabPage();
             this._stepsPage = new TabPage();
             this._issuesPage = new TabPage();
+            this._previewArtifactPage = new TabPage();
             this._rawPage = new TabPage();
             this._plansListView = new ListView();
             this._planTitleColumn = new ColumnHeader();
@@ -100,6 +105,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._stepStatusColumn = new ColumnHeader();
             this._stepDependsOnColumn = new ColumnHeader();
             this._issuesTextBox = new TextBox();
+            this._previewArtifactTextBox = new TextBox();
             this._rawResponseTextBox = new TextBox();
             ((ISupportInitialize)(this._rootSplitContainer)).BeginInit();
             this._rootSplitContainer.Panel1.SuspendLayout();
@@ -111,6 +117,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._plansPage.SuspendLayout();
             this._stepsPage.SuspendLayout();
             this._issuesPage.SuspendLayout();
+            this._previewArtifactPage.SuspendLayout();
             this._rawPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,6 +200,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._toolbarPanel.Controls.Add(this._createButton);
             this._toolbarPanel.Controls.Add(this._refreshButton);
             this._toolbarPanel.Controls.Add(this._revalidateButton);
+            this._toolbarPanel.Controls.Add(this._createPreviewButton);
             this._toolbarPanel.Controls.Add(this._approveButton);
             this._toolbarPanel.Controls.Add(this._rejectButton);
             this._toolbarPanel.Controls.Add(this._archiveButton);
@@ -220,22 +228,28 @@ namespace LLMGameCreator.WinForms.Pages
             this._revalidateButton.TabIndex = 2;
             this._revalidateButton.Text = "Revalidate Selected";
             this._revalidateButton.UseVisualStyleBackColor = true;
-            this._approveButton.Location = new Point(371, 3);
+            this._createPreviewButton.Location = new Point(371, 3);
+            this._createPreviewButton.Name = "_createPreviewButton";
+            this._createPreviewButton.Size = new Size(145, 26);
+            this._createPreviewButton.TabIndex = 3;
+            this._createPreviewButton.Text = "Create Preview Artifact";
+            this._createPreviewButton.UseVisualStyleBackColor = true;
+            this._approveButton.Location = new Point(522, 3);
             this._approveButton.Name = "_approveButton";
             this._approveButton.Size = new Size(110, 26);
-            this._approveButton.TabIndex = 3;
+            this._approveButton.TabIndex = 4;
             this._approveButton.Text = "Approve Selected";
             this._approveButton.UseVisualStyleBackColor = true;
-            this._rejectButton.Location = new Point(487, 3);
+            this._rejectButton.Location = new Point(638, 3);
             this._rejectButton.Name = "_rejectButton";
             this._rejectButton.Size = new Size(100, 26);
-            this._rejectButton.TabIndex = 4;
+            this._rejectButton.TabIndex = 5;
             this._rejectButton.Text = "Reject Selected";
             this._rejectButton.UseVisualStyleBackColor = true;
-            this._archiveButton.Location = new Point(593, 3);
+            this._archiveButton.Location = new Point(744, 3);
             this._archiveButton.Name = "_archiveButton";
             this._archiveButton.Size = new Size(110, 26);
-            this._archiveButton.TabIndex = 5;
+            this._archiveButton.TabIndex = 6;
             this._archiveButton.Text = "Archive Selected";
             this._archiveButton.UseVisualStyleBackColor = true;
             // 
@@ -255,6 +269,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._detailsTabs.Controls.Add(this._plansPage);
             this._detailsTabs.Controls.Add(this._stepsPage);
             this._detailsTabs.Controls.Add(this._issuesPage);
+            this._detailsTabs.Controls.Add(this._previewArtifactPage);
             this._detailsTabs.Controls.Add(this._rawPage);
             this._detailsTabs.Dock = DockStyle.Fill;
             this._detailsTabs.Location = new Point(12, 12);
@@ -289,12 +304,20 @@ namespace LLMGameCreator.WinForms.Pages
             this._issuesPage.TabIndex = 2;
             this._issuesPage.Text = "Issues";
             this._issuesPage.UseVisualStyleBackColor = true;
+            this._previewArtifactPage.Controls.Add(this._previewArtifactTextBox);
+            this._previewArtifactPage.Location = new Point(4, 24);
+            this._previewArtifactPage.Name = "_previewArtifactPage";
+            this._previewArtifactPage.Padding = new Padding(3);
+            this._previewArtifactPage.Size = new Size(390, 368);
+            this._previewArtifactPage.TabIndex = 3;
+            this._previewArtifactPage.Text = "Preview Artifact";
+            this._previewArtifactPage.UseVisualStyleBackColor = true;
             this._rawPage.Controls.Add(this._rawResponseTextBox);
             this._rawPage.Location = new Point(4, 24);
             this._rawPage.Name = "_rawPage";
             this._rawPage.Padding = new Padding(3);
             this._rawPage.Size = new Size(390, 368);
-            this._rawPage.TabIndex = 3;
+            this._rawPage.TabIndex = 4;
             this._rawPage.Text = "Raw JSON";
             this._rawPage.UseVisualStyleBackColor = true;
             // 
@@ -338,6 +361,11 @@ namespace LLMGameCreator.WinForms.Pages
             this._issuesTextBox.Multiline = true;
             this._issuesTextBox.ReadOnly = true;
             this._issuesTextBox.ScrollBars = ScrollBars.Vertical;
+            this._previewArtifactTextBox.Dock = DockStyle.Fill;
+            this._previewArtifactTextBox.Multiline = true;
+            this._previewArtifactTextBox.ReadOnly = true;
+            this._previewArtifactTextBox.ScrollBars = ScrollBars.Both;
+            this._previewArtifactTextBox.WordWrap = false;
             this._rawResponseTextBox.Dock = DockStyle.Fill;
             this._rawResponseTextBox.Multiline = true;
             this._rawResponseTextBox.ReadOnly = true;
@@ -363,6 +391,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._stepsPage.ResumeLayout(false);
             this._issuesPage.ResumeLayout(false);
             this._issuesPage.PerformLayout();
+            this._previewArtifactPage.ResumeLayout(false);
+            this._previewArtifactPage.PerformLayout();
             this._rawPage.ResumeLayout(false);
             this._rawPage.PerformLayout();
             this.ResumeLayout(false);

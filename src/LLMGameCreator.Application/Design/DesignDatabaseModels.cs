@@ -129,7 +129,7 @@ public sealed record GeneratedArtifactRecord(
     string ValidationState,
     string MetadataJson);
 
-public sealed record GeneratorValidationResultRecord(
+public sealed record GeneratedArtifactValidationResultRecord(
     string Id,
     string ArtifactId,
     string Severity,

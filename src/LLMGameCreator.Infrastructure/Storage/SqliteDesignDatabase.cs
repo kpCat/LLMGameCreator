@@ -5,7 +5,7 @@ using Microsoft.Data.Sqlite;
 
 namespace LLMGameCreator.Infrastructure.Storage;
 
-public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKnowledgeRepository, IGeneratorLibraryRegistry, IGeneratorPlanRepository
+public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKnowledgeRepository, IGeneratorLibraryRegistry, IGeneratorPlanRepository, IGeneratedArtifactRepository
 {
     private string? _databasePath;
 
@@ -362,6 +362,83 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
         return affected > 0;
     }
 
+    public async Task SaveGeneratedArtifactAsync(GeneratedArtifactRecord artifact, CancellationToken cancellationToken)
+    {
+        const string sql = """
+        INSERT INTO generated_artifacts(id, kind, path, json, generated_by, validation_state, metadata_json)
+        VALUES ($id, $kind, $path, $json, $generated_by, $validation_state, $metadata_json)
+        ON CONFLICT(id) DO UPDATE SET
+            kind = excluded.kind,
+            path = excluded.path,
+            json = excluded.json,
+            generated_by = excluded.generated_by,
+            validation_state = excluded.validation_state,
+            metadata_json = excluded.metadata_json;
+        """;
+        await ExecuteInitializedAsync(sql, cancellationToken,
+            ("$id", artifact.Id),
+            ("$kind", artifact.Kind),
+            ("$path", artifact.Path),
+            ("$json", artifact.Json),
+            ("$generated_by", artifact.GeneratedBy),
+            ("$validation_state", artifact.ValidationState),
+            ("$metadata_json", artifact.MetadataJson)).ConfigureAwait(false);
+    }
+
+    public async Task<IReadOnlyList<GeneratedArtifactRecord>> ListGeneratedArtifactsAsync(CancellationToken cancellationToken)
+    {
+        return await QueryAsync("SELECT * FROM generated_artifacts ORDER BY kind, generated_by, id;", ReadGeneratedArtifact, cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<IReadOnlyList<GeneratedArtifactRecord>> ListGeneratedArtifactsByPlanAsync(string planId, CancellationToken cancellationToken)
+    {
+        return await QueryAsync("SELECT * FROM generated_artifacts WHERE generated_by = $generated_by ORDER BY kind, id;", ReadGeneratedArtifact, cancellationToken, ("$generated_by", planId)).ConfigureAwait(false);
+    }
+
+    public async Task<GeneratedArtifactRecord?> GetGeneratedArtifactByIdAsync(string artifactId, CancellationToken cancellationToken)
+    {
+        var rows = await QueryAsync("SELECT * FROM generated_artifacts WHERE id = $id LIMIT 1;", ReadGeneratedArtifact, cancellationToken, ("$id", artifactId)).ConfigureAwait(false);
+        return rows.FirstOrDefault();
+    }
+
+    public async Task SaveValidationResultsAsync(string artifactId, IReadOnlyList<GeneratedArtifactValidationResultRecord> results, CancellationToken cancellationToken)
+    {
+        EnsureInitialized();
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
+        await using var transaction = await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+
+        await ExecuteAsync(connection, transaction, "DELETE FROM validation_results WHERE artifact_id = $artifact_id;", cancellationToken, ("$artifact_id", artifactId)).ConfigureAwait(false);
+        foreach (var result in results.OrderBy(result => result.Severity).ThenBy(result => result.Code).ThenBy(result => result.Target).ThenBy(result => result.Id))
+        {
+            await ExecuteAsync(connection, transaction, """
+            INSERT INTO validation_results(id, artifact_id, severity, code, message, target, metadata_json)
+            VALUES ($id, $artifact_id, $severity, $code, $message, $target, $metadata_json)
+            ON CONFLICT(id) DO UPDATE SET
+                artifact_id = excluded.artifact_id,
+                severity = excluded.severity,
+                code = excluded.code,
+                message = excluded.message,
+                target = excluded.target,
+                metadata_json = excluded.metadata_json;
+            """, cancellationToken,
+            ("$id", result.Id),
+            ("$artifact_id", artifactId),
+            ("$severity", result.Severity),
+            ("$code", result.Code),
+            ("$message", result.Message),
+            ("$target", result.Target),
+            ("$metadata_json", result.MetadataJson)).ConfigureAwait(false);
+        }
+
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<IReadOnlyList<GeneratedArtifactValidationResultRecord>> ListValidationResultsByArtifactAsync(string artifactId, CancellationToken cancellationToken)
+    {
+        return await QueryAsync("SELECT * FROM validation_results WHERE artifact_id = $artifact_id ORDER BY severity, code, target, id;", ReadGeneratedArtifactValidationResult, cancellationToken, ("$artifact_id", artifactId)).ConfigureAwait(false);
+    }
+
     private SqliteConnection CreateConnection()
     {
         EnsureInitialized();
@@ -594,5 +671,29 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
             reader.GetString(reader.GetOrdinal("config_json")),
             reader.GetString(reader.GetOrdinal("depends_on_json")),
             reader.GetString(reader.GetOrdinal("status")));
+    }
+
+    private static GeneratedArtifactRecord ReadGeneratedArtifact(SqliteDataReader reader)
+    {
+        return new GeneratedArtifactRecord(
+            reader.GetString(reader.GetOrdinal("id")),
+            reader.GetString(reader.GetOrdinal("kind")),
+            reader.GetString(reader.GetOrdinal("path")),
+            reader.GetString(reader.GetOrdinal("json")),
+            reader.GetString(reader.GetOrdinal("generated_by")),
+            reader.GetString(reader.GetOrdinal("validation_state")),
+            reader.GetString(reader.GetOrdinal("metadata_json")));
+    }
+
+    private static GeneratedArtifactValidationResultRecord ReadGeneratedArtifactValidationResult(SqliteDataReader reader)
+    {
+        return new GeneratedArtifactValidationResultRecord(
+            reader.GetString(reader.GetOrdinal("id")),
+            reader.GetString(reader.GetOrdinal("artifact_id")),
+            reader.GetString(reader.GetOrdinal("severity")),
+            reader.GetString(reader.GetOrdinal("code")),
+            reader.GetString(reader.GetOrdinal("message")),
+            reader.GetString(reader.GetOrdinal("target")),
+            reader.GetString(reader.GetOrdinal("metadata_json")));
     }
 }
