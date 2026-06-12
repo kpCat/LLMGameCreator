@@ -59,7 +59,8 @@
           {
             "type": "interactable",
             "args": {
-              "text": "На табличке написано: северная дорога закрыта."
+              "text": "На табличке написано: северная дорога закрыта.",
+              "interactionId": "interaction/sign_inspect"
             }
           }
         ]
@@ -237,7 +238,23 @@
         "kind": "consumable",
         "rarity": "common",
         "maxStack": 5,
-        "value": 25
+        "value": 25,
+        "useEffects": [
+          {
+            "type": "add_status",
+            "args": {
+              "id": "status/healed",
+              "amount": "3"
+            }
+          },
+          {
+            "type": "log",
+            "args": {
+              "id": "log/healing_potion_used",
+              "message": "Healing potion used."
+            }
+          }
+        ]
       },
       {
         "id": "item/fuel_can",
@@ -271,7 +288,14 @@
         "minValue": 0
       }
     ],
-    "statuses": [],
+    "statuses": [
+      {
+        "id": "status/healed",
+        "name": "Healed",
+        "description": "Temporary sample healing status.",
+        "kind": "buff"
+      }
+    ],
     "recipes": [
       {
         "id": "recipe/healing_potion",
@@ -402,6 +426,14 @@
           {
             "itemId": "item/water_flask",
             "amount": 1
+          },
+          {
+            "itemId": "item/healing_potion",
+            "amount": 1
+          },
+          {
+            "itemId": "item/fuel_can",
+            "amount": 1
           }
         ]
       }
@@ -426,7 +458,28 @@
       }
     ],
     "formulas": [],
-    "interactions": []
+    "interactions": [
+      {
+        "id": "interaction/sign_inspect",
+        "kind": "inspect",
+        "effects": [
+          {
+            "type": "set_flag",
+            "args": {
+              "id": "flag/sign_inspected",
+              "value": "true"
+            }
+          },
+          {
+            "type": "log",
+            "args": {
+              "id": "log/sign_inspected",
+              "message": "The sign was inspected through InteractionDefinition v1."
+            }
+          }
+        ]
+      }
+    ]
   },
   "assetCatalog": {
     "contracts": [

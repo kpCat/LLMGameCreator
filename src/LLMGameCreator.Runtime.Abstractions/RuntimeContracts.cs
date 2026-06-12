@@ -149,7 +149,8 @@ public enum GameRuntimeCommandType
     ExecuteTransaction = 7,
     TickResourceNodes = 8,
     SetFlag = 9,
-    Wait = 10
+    Wait = 10,
+    ExecuteInteraction = 11
 }
 
 public sealed class GameRuntimeCommand
@@ -175,6 +176,12 @@ public sealed class GameRuntimeCommand
 
     public static GameRuntimeCommand TickResourceNodes(int ticks = 1)
         => new GameRuntimeCommand { Type = GameRuntimeCommandType.TickResourceNodes, Ticks = ticks };
+
+    public static GameRuntimeCommand UseItem(string itemId, string? inventoryId = null, string? targetId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.UseItem, Id = itemId, InventoryId = inventoryId, TargetId = targetId };
+
+    public static GameRuntimeCommand ExecuteInteraction(string interactionId, string? targetId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.ExecuteInteraction, Id = interactionId, TargetId = targetId };
 }
 
 public enum GameRuntimeEventType
@@ -192,7 +199,8 @@ public enum GameRuntimeEventType
     OutputApplied = 10,
     ResourceNodeTicked = 11,
     LogMessageAdded = 12,
-    ValidationFailed = 13
+    ValidationFailed = 13,
+    InteractionTriggered = 14
 }
 
 public sealed class GameRuntimeEvent
@@ -289,9 +297,54 @@ public interface IResourceNetworkRuntimeService
     GameRuntimeResult TickResourceNodes(GamePackageDefinition package, GameRuntimeState state, int ticks = 1);
 }
 
+public interface IUseItemRuntimeService
+{
+    GameRuntimeResult UseItem(GamePackageDefinition package, GameRuntimeState state, string itemId, string? inventoryId = null, string? targetId = null);
+}
+
+public interface IInteractionRuntimeService
+{
+    GameRuntimeResult ExecuteInteraction(GamePackageDefinition package, GameRuntimeState state, string interactionId, string? targetId = null, string? inventoryId = null);
+}
+
 public interface IGameRuntimeService
 {
     GameRuntimeResult CreateInitialState(GamePackageDefinition package);
     GameRuntimeResult Execute(GamePackageDefinition package, GameRuntimeState state, GameRuntimeCommand command);
     GameRuntimeResult ExecuteMany(GamePackageDefinition package, GameRuntimeState state, IEnumerable<GameRuntimeCommand> commands);
+}
+
+public sealed class UnifiedRuntimeSession
+{
+    public GameState MapState { get; set; } = new GameState();
+    public GameRuntimeState GameplayState { get; set; } = new GameRuntimeState();
+    public List<RuntimeEvent> MapEvents { get; set; } = new List<RuntimeEvent>();
+    public List<GameRuntimeEvent> GameplayEvents { get; set; } = new List<GameRuntimeEvent>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class UnifiedRuntimeResult
+{
+    public bool Success { get; set; } = true;
+    public UnifiedRuntimeSession Session { get; set; } = new UnifiedRuntimeSession();
+    public List<RuntimeEvent> MapEvents { get; set; } = new List<RuntimeEvent>();
+    public List<GameRuntimeEvent> GameplayEvents { get; set; } = new List<GameRuntimeEvent>();
+    public List<RuntimeDiagnostic> Diagnostics { get; set; } = new List<RuntimeDiagnostic>();
+    public string Message { get; set; } = string.Empty;
+}
+
+public interface IUnifiedGameRuntimeService
+{
+    UnifiedRuntimeResult Start(GamePackageDefinition package);
+    UnifiedRuntimeResult ExecutePlayerCommand(GamePackageDefinition package, UnifiedRuntimeSession session, PlayerCommand command);
+    UnifiedRuntimeResult ExecuteGameplayCommand(GamePackageDefinition package, UnifiedRuntimeSession session, GameRuntimeCommand command);
+    UnifiedRuntimeResult ExecuteMany(GamePackageDefinition package, UnifiedRuntimeSession session, IEnumerable<GameRuntimeCommand> commands);
+}
+
+public interface IRuntimeStateSerializer
+{
+    string Serialize(GameRuntimeState state);
+    GameRuntimeState DeserializeGameRuntimeState(string json);
+    string Serialize(UnifiedRuntimeSession session);
+    UnifiedRuntimeSession DeserializeUnifiedSession(string json);
 }

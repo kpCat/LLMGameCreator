@@ -56,7 +56,8 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IGeneratorPlanPipelineService, GeneratorPlanPipelineService>(Reuse.Singleton);
         _container.Register<PrototypeLuaStaticAnalyzer>(Reuse.Singleton);
         _container.Register<PrototypeLuaDeclarationMapper>(Reuse.Singleton);
-        _container.Register<IPrototypeLuaExecutor, PrototypeLuaExecutor>(Reuse.Singleton);
+        _container.RegisterDelegate<IPrototypeLuaExecutor>(resolver => new PrototypeLuaExecutor(
+            resolver.Resolve<PrototypeLuaStaticAnalyzer>()), Reuse.Singleton);
         _container.Register<IPrototypeLuaPatchArtifactService, PrototypeLuaPatchArtifactService>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
@@ -74,7 +75,11 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<ILootRuntimeService, LootRuntimeService>(Reuse.Singleton);
         _container.Register<ITransactionRuntimeService, TransactionRuntimeService>(Reuse.Singleton);
         _container.Register<IResourceNetworkRuntimeService, ResourceNetworkRuntimeService>(Reuse.Singleton);
+        _container.Register<IUseItemRuntimeService, UseItemRuntimeService>(Reuse.Singleton);
+        _container.Register<IInteractionRuntimeService, InteractionRuntimeService>(Reuse.Singleton);
         _container.Register<IGameRuntimeService, GameRuntimeService>(Reuse.Singleton);
+        _container.Register<IUnifiedGameRuntimeService, UnifiedGameRuntimeService>(Reuse.Singleton);
+        _container.Register<IRuntimeStateSerializer, RuntimeStateSerializer>(Reuse.Singleton);
         _container.Register<IScriptEngine, NullScriptEngine>(Reuse.Singleton);
         _container.Register<IAssetGenerationProvider, NullAssetGenerationProvider>(Reuse.Singleton);
 
@@ -104,7 +109,9 @@ public sealed class CompositionRoot : IDisposable
 
         _container.RegisterDelegate<RuntimeSimulatorPageControl>(resolver => new RuntimeSimulatorPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
-            resolver.Resolve<IGameRuntimeService>()), Reuse.Singleton);
+            resolver.Resolve<IGameRuntimeService>(),
+            resolver.Resolve<IUnifiedGameRuntimeService>(),
+            resolver.Resolve<IRuntimeStateSerializer>()), Reuse.Singleton);
 
         _container.RegisterDelegate<GeneratorLibraryPageControl>(resolver => new GeneratorLibraryPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),

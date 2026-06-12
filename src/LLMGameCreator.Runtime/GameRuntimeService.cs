@@ -11,19 +11,25 @@ public sealed class GameRuntimeService : IGameRuntimeService
     private readonly ILootRuntimeService _lootRuntimeService;
     private readonly ITransactionRuntimeService _transactionRuntimeService;
     private readonly IResourceNetworkRuntimeService _resourceNetworkRuntimeService;
+    private readonly IUseItemRuntimeService _useItemRuntimeService;
+    private readonly IInteractionRuntimeService _interactionRuntimeService;
 
     public GameRuntimeService(
         IGameRuntimeStateFactory stateFactory,
         IRecipeRuntimeService recipeRuntimeService,
         ILootRuntimeService lootRuntimeService,
         ITransactionRuntimeService transactionRuntimeService,
-        IResourceNetworkRuntimeService resourceNetworkRuntimeService)
+        IResourceNetworkRuntimeService resourceNetworkRuntimeService,
+        IUseItemRuntimeService useItemRuntimeService,
+        IInteractionRuntimeService interactionRuntimeService)
     {
         _stateFactory = stateFactory;
         _recipeRuntimeService = recipeRuntimeService;
         _lootRuntimeService = lootRuntimeService;
         _transactionRuntimeService = transactionRuntimeService;
         _resourceNetworkRuntimeService = resourceNetworkRuntimeService;
+        _useItemRuntimeService = useItemRuntimeService;
+        _interactionRuntimeService = interactionRuntimeService;
     }
 
     public GameRuntimeResult CreateInitialState(GamePackageDefinition package)
@@ -61,7 +67,13 @@ public sealed class GameRuntimeService : IGameRuntimeService
             case GameRuntimeCommandType.SetFlag:
                 return SetFlag(state, command);
             case GameRuntimeCommandType.UseItem:
-                return Fail(state, "runtime.command.not_implemented", "UseItem command is reserved for a future item-use runtime.", command.Id);
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "Runtime command requires item id.", null)
+                    : _useItemRuntimeService.UseItem(package, state, command.Id.Trim(), command.InventoryId, command.TargetId);
+            case GameRuntimeCommandType.ExecuteInteraction:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "Runtime command requires interaction id.", null)
+                    : _interactionRuntimeService.ExecuteInteraction(package, state, command.Id.Trim(), command.TargetId, command.InventoryId);
             default:
                 return Fail(state, "runtime.command.unknown", $"Unknown runtime command: {command.Type}", command.Type.ToString());
         }

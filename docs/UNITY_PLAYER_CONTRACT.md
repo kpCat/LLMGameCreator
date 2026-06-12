@@ -4,6 +4,12 @@ Gameplay runtime v1 exposes `GameRuntimeCommand`, `GameRuntimeEvent` and `GameRu
 
 Unity is still not implemented in this repository. Runtime v1 remains headless C# and does not execute Lua, generator modules, LLM calls, Unity codegen or asset providers.
 
+## Unified Runtime Bridge Target
+
+Future Unity work should target `IUnifiedGameRuntimeService` as the command/event bridge. The bridge exposes a single `UnifiedRuntimeSession` containing legacy map state plus gameplay runtime state, while keeping `GamePackageDefinition` separate from runtime snapshots.
+
+Unity remains out of scope here: no Unity project, codegen, MonoBehaviour game logic or Unity-specific runtime execution is added by the bridge.
+
 # Unity Player Contract
 
 ## Назначение

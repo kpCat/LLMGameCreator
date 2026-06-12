@@ -218,7 +218,13 @@ public sealed class RuntimeGameplayTests
             new RecipeRuntimeService(requirementEvaluator, costConsumer, outputApplier),
             new LootRuntimeService(requirementEvaluator, outputApplier),
             new TransactionRuntimeService(requirementEvaluator, costConsumer, outputApplier),
-            new ResourceNetworkRuntimeService(requirementEvaluator, costConsumer, outputApplier));
+            new ResourceNetworkRuntimeService(requirementEvaluator, costConsumer, outputApplier),
+            new UseItemRuntimeService(requirementEvaluator, outputApplier),
+            new InteractionRuntimeService(
+                requirementEvaluator,
+                outputApplier,
+                new RecipeRuntimeService(requirementEvaluator, costConsumer, outputApplier),
+                new TransactionRuntimeService(requirementEvaluator, costConsumer, outputApplier)));
     }
 
     private static InventoryState PlayerInventory(GameRuntimeState state)

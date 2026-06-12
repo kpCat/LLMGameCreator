@@ -20,19 +20,39 @@ public sealed class OutputApplier : IOutputApplier
 
     private static void ApplyOne(GamePackageDefinition package, GameRuntimeState state, OutputDefinition output, string? inventoryId, Random random, OutputApplicationResult result, int depth)
     {
-        if (output.Amount < 0)
+        if (RuntimeStateHelpers.KindEquals(output.Kind, "item") || RuntimeStateHelpers.KindEquals(output.Kind, "add_item"))
         {
-            result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("output.amount.invalid", "Output amount must be non-negative.", output.Id));
-            return;
-        }
+            if (output.Amount < 0)
+            {
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("output.amount.invalid", "Output amount must be non-negative.", output.Id));
+                return;
+            }
 
-        if (RuntimeStateHelpers.KindEquals(output.Kind, "item"))
-        {
             var inventory = RuntimeStateHelpers.FindInventory(state, output.Scope ?? inventoryId) ?? RuntimeStateHelpers.EnsurePlayerInventory(state);
             var questItem = output.Metadata.TryGetValue("questItem", out var questValue)
                 && questValue.Equals("true", StringComparison.OrdinalIgnoreCase);
             RuntimeStateHelpers.AddItem(inventory, output.Id, output.Amount, questItem);
             result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Added item {output.Id} x{Format(output.Amount)}", output.Id));
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.InventoryChanged, $"Inventory changed: {inventory.Id}", inventory.Id));
+            return;
+        }
+
+        if (RuntimeStateHelpers.KindEquals(output.Kind, "remove_item"))
+        {
+            if (output.Amount <= 0)
+            {
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("output.amount.invalid", "Remove item amount must be positive.", output.Id));
+                return;
+            }
+
+            var inventory = RuntimeStateHelpers.FindInventory(state, output.Scope ?? inventoryId);
+            if (inventory == null || !RuntimeStateHelpers.RemoveItem(inventory, output.Id, output.Amount))
+            {
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("output.item_missing", $"Missing item {output.Id} x{Format(output.Amount)}", output.Id));
+                return;
+            }
+
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Removed item {output.Id} x{Format(output.Amount)}", output.Id));
             result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.InventoryChanged, $"Inventory changed: {inventory.Id}", inventory.Id));
             return;
         }
@@ -161,6 +181,7 @@ public sealed class OutputApplier : IOutputApplier
     private static bool IsResourceOutput(OutputDefinition output)
     {
         return RuntimeStateHelpers.KindEquals(output.Kind, "resource")
+            || RuntimeStateHelpers.KindEquals(output.Kind, "change_resource")
             || RuntimeStateHelpers.KindEquals(output.Kind, "network_resource")
             || RuntimeStateHelpers.KindEquals(output.Kind, "abstract_resource")
             || RuntimeStateHelpers.KindEquals(output.Kind, "progression")

@@ -363,3 +363,9 @@ Runtime v1 supports:
 - resource nodes: a simple tick loop evaluates each node, consumes conversion/consumption costs, applies production/storage/conversion outputs and clamps resources by definition min/max.
 
 Runtime v1 deliberately does not implement combat, quest/dialogue execution, full electricity-grid routing, building placement, multiplayer, runtime Lua or generator Lua. Missing fuel/input on a resource node is reported as a runtime diagnostic and the node produces nothing for that tick.
+
+## UseItem and Interaction Runtime v1
+
+`UseItem` is implemented as a minimal gameplay runtime command. It checks the runtime inventory, evaluates `ItemDefinition.UseConditions`, applies `UseEffects`, and consumes one stack only when the item is marked consumable by `kind`, tag or `metadata.consumeOnUse=true`. Failures do not partially mutate runtime state.
+
+`InteractionDefinition` runtime v1 evaluates conditions and applies effects through the same requirement/output pipeline used by recipes, loot and transactions. Interaction kinds such as `inspect`, `craft`, `trade`, `harvest_resource`, `open_container`, `talk`, `train`, `heal` and `use_item_on_target` remain data labels. Full dialogue, quest, trade UI and combat runtime stay future work.
