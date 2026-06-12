@@ -139,6 +139,33 @@ mutate GamePackage content
 generate Unity code
 ```
 
+## GeneratorPlan Preview / Staged Artifacts
+
+Approved plans can be compiled into deterministic preview artifacts. This is an editor-side staging and audit step that turns the saved `GeneratorPlan` and current registry metadata into a `generator_plan_preview` artifact row in the Design DB.
+
+Preview artifacts are stored in:
+
+```text
+generated_artifacts
+validation_results
+```
+
+They are not written to `GamePackage`, do not create package files, and do not change the `GamePackage` JSON format. The preview JSON records the plan id/title/goal/status, ordered module ids, module paths, categories, step configs, dependencies, and explicit no-execution policy flags.
+
+The preview compiler intentionally does not:
+
+```text
+execute Lua
+execute generator modules
+interpret module source files
+run code generation
+mutate GamePackage content
+generate Unity code
+call an LLM
+```
+
+Before saving an artifact, the service requires the plan status to be `approved` and revalidates the plan against the current registry. Plans with current validation errors do not create staged artifacts. Validation results for a saved preview are stored as Design DB rows for audit and future execution/apply pipeline work.
+
 ## Future Flow
 
 This baseline supports the planned LLM role:

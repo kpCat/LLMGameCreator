@@ -75,6 +75,7 @@ Current style:
 - Import only `generator-library/manifests/*.manifest.json`.
 - Store module/capability metadata, declared paths, and diagnostics.
 - Create saved draft `GeneratorPlan` records, then revalidate and update lifecycle status through Application services before any future execution/apply work.
+- Compile approved plans into Design DB preview artifacts through `IGeneratorPlanPreviewService`; previews store staged audit JSON and validation rows only.
 - Run `IGeneratorLibraryIntegrityValidator` to check physical files, canonical manifest fields, aliases, duplicate ids, batch reports, and root leakage before pushing new Lua batches.
 - Do not execute Lua, load arbitrary code, generate Unity code, or change GamePackage format.
 - Unknown manifest fields go to `metadata_json`.
