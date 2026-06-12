@@ -1,0 +1,197 @@
+{
+  "id": "batch/automation/v1",
+  "version": "0.1.0",
+  "batch": "015",
+  "title": "Automation / Factorio-like systems",
+  "purpose": "Batch 015 manifest for deterministic automation recipe graphs, machine catalogs, conveyor/logistics IR, power-network IR, compact production estimates and validation diagnostics for Factorio-like systems.",
+  "files": [
+    "lua/automation/recipe_graph.lua",
+    "lua/automation/machine_catalog.lua",
+    "lua/automation/conveyor_grid.lua",
+    "lua/automation/power_network.lua",
+    "docs/lua/automation_factorio_like.md",
+    "manifests/automation.manifest.json",
+    "tests/automation_examples.lua",
+    "BATCH_015_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "automation/recipe_graph/v1",
+      "path": "lua/automation/recipe_graph.lua",
+      "category": "automation",
+      "capabilities": [
+        "automation.recipe_graph.generate",
+        "automation.production_chain.validate",
+        "automation.throughput.estimate",
+        "automation.resource_node.reference"
+      ],
+      "depends_on": [
+        "item/item_schema/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "automation/machine_catalog/v1",
+      "path": "lua/automation/machine_catalog.lua",
+      "category": "automation",
+      "capabilities": [
+        "automation.machine_catalog.generate",
+        "machine.category.define",
+        "automation.recipe_machine_map"
+      ],
+      "depends_on": [
+        "automation/recipe_graph/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "automation/conveyor_grid/v1",
+      "path": "lua/automation/conveyor_grid.lua",
+      "category": "automation",
+      "capabilities": [
+        "automation.conveyor_grid.generate",
+        "automation.logistics_abstraction",
+        "automation.transport_link.ir"
+      ],
+      "depends_on": [
+        "core/grid/v1",
+        "core/coordinates/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "unity_tilemap",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "automation/power_network/v1",
+      "path": "lua/automation/power_network.lua",
+      "category": "automation",
+      "capabilities": [
+        "automation.power_network.generate",
+        "automation.power_balance.estimate",
+        "automation.energy_source.ir"
+      ],
+      "depends_on": [
+        "automation/machine_catalog/v1"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity3d",
+        "simulation",
+        "codegen_ir"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "debug",
+    "unity2d",
+    "unity3d",
+    "unity_tilemap",
+    "simulation",
+    "codegen_ir"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "automation_contract": "Automation outputs are compact deterministic IR/config metadata, not live runtime execution.",
+    "recipe_contract": "Recipe graphs describe inputs, outputs, producers, consumers and production chain diagnostics.",
+    "machine_contract": "Machine catalogs map recipe categories to machine profiles and power demand metadata.",
+    "logistics_contract": "Conveyor grids describe logistics nodes and links as data, not belt physics.",
+    "power_contract": "Power networks emit deterministic capacity/demand balance estimates and diagnostics."
+  }
+}

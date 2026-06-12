@@ -54,6 +54,7 @@ public sealed class GeneratorLibraryImportService : IGeneratorLibraryImporter
 
         var manifestPaths = Directory
             .EnumerateFiles(manifestsRoot, "*.manifest.json", SearchOption.TopDirectoryOnly)
+            .Where(path => !Path.GetFileName(path).Equals("MANIFEST_CONTRACT.schema.example.json", StringComparison.OrdinalIgnoreCase))
             .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
             .ToList();
 

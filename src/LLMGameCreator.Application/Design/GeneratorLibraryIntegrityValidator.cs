@@ -267,6 +267,15 @@ public sealed class GeneratorLibraryIntegrityValidator : IGeneratorLibraryIntegr
         {
             Add(issues, GeneratorLibraryIntegritySeverity.Error, "root.leakage", "Root-level Lua file looks like generator-library leakage.", file, null, "Move generated Lua files under generator-library/lua.");
         }
+
+        var rootTests = Path.Combine(repositoryRoot, "tests");
+        if (Directory.Exists(rootTests))
+        {
+            foreach (var file in Directory.EnumerateFiles(rootTests, "*.lua", SearchOption.AllDirectories))
+            {
+                Add(issues, GeneratorLibraryIntegritySeverity.Error, "root.leakage", "Root-level tests/ Lua file looks like generator-library leakage.", file, null, "Move generated Lua test files under generator-library/tests.");
+            }
+        }
     }
 
     private static void CheckAlias(Dictionary<string, JsonElement>? extensionData, string propertyName, string code, string target, string? manifestPath, List<GeneratorLibraryIntegrityIssue> issues)

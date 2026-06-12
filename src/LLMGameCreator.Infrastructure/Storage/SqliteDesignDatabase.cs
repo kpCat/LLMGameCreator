@@ -4,7 +4,7 @@ using Microsoft.Data.Sqlite;
 
 namespace LLMGameCreator.Infrastructure.Storage;
 
-public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKnowledgeRepository, IGeneratorLibraryRegistry
+public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKnowledgeRepository, IGeneratorLibraryRegistry, IGeneratorPlanRepository
 {
     private string? _databasePath;
 
@@ -133,6 +133,11 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
         await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
 
+        await ExecuteAsync(connection, transaction, "DELETE FROM capability_modules;", cancellationToken).ConfigureAwait(false);
+        await ExecuteAsync(connection, transaction, "DELETE FROM generator_modules;", cancellationToken).ConfigureAwait(false);
+        await ExecuteAsync(connection, transaction, "DELETE FROM generator_module_files;", cancellationToken).ConfigureAwait(false);
+        await ExecuteAsync(connection, transaction, "DELETE FROM import_issues;", cancellationToken).ConfigureAwait(false);
+
         foreach (var capability in data.Capabilities)
         {
             await ExecuteAsync(connection, transaction, """
@@ -246,6 +251,72 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
     public async Task<IReadOnlyList<GeneratorLibraryImportIssue>> ListImportIssuesAsync(CancellationToken cancellationToken)
     {
         return await QueryAsync("SELECT * FROM import_issues ORDER BY severity, code, target;", ReadIssue, cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task SaveGeneratorPlanAsync(
+        GeneratorPlanRecord plan,
+        IReadOnlyList<GeneratorPlanStepRecord> steps,
+        PromptContextPackRecord? contextPack,
+        CancellationToken cancellationToken)
+    {
+        EnsureInitialized();
+        await using var connection = CreateConnection();
+        await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
+        await using var transaction = await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+
+        await ExecuteAsync(connection, transaction, """
+        INSERT INTO generator_plans(id, title, goal, status, metadata_json, created_utc, updated_utc)
+        VALUES ($id, $title, $goal, $status, $metadata_json, $created_utc, $updated_utc)
+        ON CONFLICT(id) DO UPDATE SET
+            title = excluded.title,
+            goal = excluded.goal,
+            status = excluded.status,
+            metadata_json = excluded.metadata_json,
+            created_utc = excluded.created_utc,
+            updated_utc = excluded.updated_utc;
+        """, cancellationToken,
+        ("$id", plan.Id), ("$title", plan.Title), ("$goal", plan.Goal), ("$status", plan.Status),
+        ("$metadata_json", plan.MetadataJson), ("$created_utc", plan.CreatedUtc.ToString("O")), ("$updated_utc", plan.UpdatedUtc.ToString("O"))).ConfigureAwait(false);
+
+        await ExecuteAsync(connection, transaction, "DELETE FROM generator_plan_steps WHERE plan_id = $plan_id;", cancellationToken, ("$plan_id", plan.Id)).ConfigureAwait(false);
+        foreach (var step in steps.OrderBy(step => step.StepOrder).ThenBy(step => step.ModuleId, StringComparer.OrdinalIgnoreCase))
+        {
+            await ExecuteAsync(connection, transaction, """
+            INSERT INTO generator_plan_steps(id, plan_id, step_order, module_id, config_json, depends_on_json, status)
+            VALUES ($id, $plan_id, $step_order, $module_id, $config_json, $depends_on_json, $status);
+            """, cancellationToken,
+            ("$id", step.Id), ("$plan_id", step.PlanId), ("$step_order", step.StepOrder), ("$module_id", step.ModuleId),
+            ("$config_json", step.ConfigJson), ("$depends_on_json", step.DependsOnJson), ("$status", step.Status)).ConfigureAwait(false);
+        }
+
+        if (contextPack != null)
+        {
+            await ExecuteAsync(connection, transaction, """
+            INSERT INTO prompt_context_packs(id, purpose, included_knowledge_ids_json, included_module_ids_json, token_budget, metadata_json)
+            VALUES ($id, $purpose, $included_knowledge_ids_json, $included_module_ids_json, $token_budget, $metadata_json)
+            ON CONFLICT(id) DO UPDATE SET
+                purpose = excluded.purpose,
+                included_knowledge_ids_json = excluded.included_knowledge_ids_json,
+                included_module_ids_json = excluded.included_module_ids_json,
+                token_budget = excluded.token_budget,
+                metadata_json = excluded.metadata_json;
+            """, cancellationToken,
+            ("$id", contextPack.Id), ("$purpose", contextPack.Purpose), ("$included_knowledge_ids_json", contextPack.IncludedKnowledgeIdsJson),
+            ("$included_module_ids_json", contextPack.IncludedModuleIdsJson), ("$token_budget", contextPack.TokenBudget),
+            ("$metadata_json", contextPack.MetadataJson)).ConfigureAwait(false);
+        }
+
+        await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<IReadOnlyList<GeneratorPlanRecord>> ListGeneratorPlansAsync(CancellationToken cancellationToken)
+    {
+        return await QueryAsync("SELECT * FROM generator_plans ORDER BY updated_utc DESC, title, id;", ReadPlan, cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<IReadOnlyList<GeneratorPlanStepRecord>> GetGeneratorPlanStepsAsync(string planId, CancellationToken cancellationToken)
+    {
+        return await QueryAsync("SELECT * FROM generator_plan_steps WHERE plan_id = $plan_id ORDER BY step_order, module_id;", ReadPlanStep, cancellationToken, ("$plan_id", planId)).ConfigureAwait(false);
     }
 
     private SqliteConnection CreateConnection()
@@ -409,5 +480,29 @@ public sealed class SqliteDesignDatabase : IDesignDatabaseInitializer, IDesignKn
             reader.GetString(reader.GetOrdinal("message")),
             reader.GetString(reader.GetOrdinal("target")),
             reader.GetString(reader.GetOrdinal("metadata_json")));
+    }
+
+    private static GeneratorPlanRecord ReadPlan(SqliteDataReader reader)
+    {
+        return new GeneratorPlanRecord(
+            reader.GetString(reader.GetOrdinal("id")),
+            reader.GetString(reader.GetOrdinal("title")),
+            reader.GetString(reader.GetOrdinal("goal")),
+            reader.GetString(reader.GetOrdinal("status")),
+            reader.GetString(reader.GetOrdinal("metadata_json")),
+            DateTimeOffset.Parse(reader.GetString(reader.GetOrdinal("created_utc"))),
+            DateTimeOffset.Parse(reader.GetString(reader.GetOrdinal("updated_utc"))));
+    }
+
+    private static GeneratorPlanStepRecord ReadPlanStep(SqliteDataReader reader)
+    {
+        return new GeneratorPlanStepRecord(
+            reader.GetString(reader.GetOrdinal("id")),
+            reader.GetString(reader.GetOrdinal("plan_id")),
+            reader.GetInt32(reader.GetOrdinal("step_order")),
+            reader.GetString(reader.GetOrdinal("module_id")),
+            reader.GetString(reader.GetOrdinal("config_json")),
+            reader.GetString(reader.GetOrdinal("depends_on_json")),
+            reader.GetString(reader.GetOrdinal("status")));
     }
 }

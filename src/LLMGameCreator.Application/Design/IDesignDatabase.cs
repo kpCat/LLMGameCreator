@@ -30,3 +30,15 @@ public interface IGeneratorLibraryImporter
 {
     Task<GeneratorLibraryImportReport> ImportGeneratorLibraryAsync(string repositoryRootOrLibraryRoot, CancellationToken cancellationToken);
 }
+
+public interface IGeneratorPlanRepository
+{
+    Task SaveGeneratorPlanAsync(
+        GeneratorPlanRecord plan,
+        IReadOnlyList<GeneratorPlanStepRecord> steps,
+        PromptContextPackRecord? contextPack,
+        CancellationToken cancellationToken);
+
+    Task<IReadOnlyList<GeneratorPlanRecord>> ListGeneratorPlansAsync(CancellationToken cancellationToken);
+    Task<IReadOnlyList<GeneratorPlanStepRecord>> GetGeneratorPlanStepsAsync(string planId, CancellationToken cancellationToken);
+}
