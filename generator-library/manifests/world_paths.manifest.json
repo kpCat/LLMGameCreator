@@ -1,0 +1,169 @@
+{
+  "id": "batch/world_paths/v1",
+  "version": "0.1.0",
+  "batch": 7,
+  "title": "World paths, barriers, reachability",
+  "files": [
+    "lua/world/path_carver.lua",
+    "lua/world/road_generator.lua",
+    "lua/world/barrier_generator.lua",
+    "lua/world/reachability.lua",
+    "docs/lua/world_paths_barriers_reachability.md",
+    "manifests/world_paths.manifest.json",
+    "tests/world_paths_examples.lua",
+    "BATCH_007_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "world/path_carver/v1",
+      "path": "lua/world/path_carver.lua",
+      "category": "world",
+      "capabilities": [
+        "world.path.carve",
+        "world.path.ensure_connection"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "dependencies": [],
+      "incompatibilities": []
+    },
+    {
+      "id": "world/road_generator/v1",
+      "path": "lua/world/road_generator.lua",
+      "category": "world",
+      "capabilities": [
+        "world.road.generate",
+        "world.path.ensure_connection"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "dependencies": [],
+      "incompatibilities": []
+    },
+    {
+      "id": "world/barrier_generator/v1",
+      "path": "lua/world/barrier_generator.lua",
+      "category": "world",
+      "capabilities": [
+        "world.barrier.generate",
+        "world.gate.generate",
+        "world.bridge.generate"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "dependencies": [],
+      "incompatibilities": []
+    },
+    {
+      "id": "world/reachability/v1",
+      "path": "lua/world/reachability.lua",
+      "category": "world",
+      "capabilities": [
+        "world.reachability.validate",
+        "world.path.diagnostics"
+      ],
+      "runtime_targets": [
+        "debug",
+        "unity2d",
+        "unity_tilemap"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "dependencies": [],
+      "incompatibilities": []
+    }
+  ],
+  "contracts": {
+    "coordinates": "0-based integer cells",
+    "outputs": "JSON-serializable compact IR tables",
+    "diagnostics": "array of severity/code/message/target tables",
+    "large_maps": "use sparse tile overrides; do not emit huge tile arrays"
+  },
+  "generator_plan_steps": [
+    {
+      "step": "emit_barriers",
+      "module": "world/barrier_generator/v1",
+      "produces": [
+        "sparse_tiles",
+        "passability_overrides"
+      ]
+    },
+    {
+      "step": "generate_roads_or_paths",
+      "module": "world/road_generator/v1",
+      "produces": [
+        "road_graph",
+        "sparse_tiles"
+      ]
+    },
+    {
+      "step": "validate_reachability",
+      "module": "world/reachability/v1",
+      "produces": [
+        "reachable_objectives",
+        "unreachable_objectives",
+        "diagnostics"
+      ]
+    }
+  ],
+  "unsafe_features": []
+}
