@@ -1,0 +1,195 @@
+{
+  "id": "batch/orchestration/v1",
+  "version": "0.1.0",
+  "batch": "020",
+  "title": "Orchestration and artifact manifest",
+  "purpose": "Batch 020 manifest for deterministic orchestration metadata, dependency ordering, artifact manifest IR, future pipeline-runner plan IR and LLM context-pack plan metadata without runtime execution or C# integration.",
+  "files": [
+    "lua/generation/dependency_sort.lua",
+    "lua/generation/artifact_manifest.lua",
+    "lua/generation/pipeline_runner_plan.lua",
+    "lua/generation/context_pack_plan.lua",
+    "docs/lua/generator_orchestration.md",
+    "manifests/orchestration.manifest.json",
+    "tests/orchestration_examples.lua",
+    "BATCH_020_REPORT.md"
+  ],
+  "modules": [
+    {
+      "id": "generation/dependency_sort/v1",
+      "path": "lua/generation/dependency_sort.lua",
+      "category": "generation",
+      "capabilities": [
+        "generation.dependencies.sort",
+        "generation.dependencies.validate",
+        "generation.plan_steps.order"
+      ],
+      "depends_on": [
+        "generation/module_manifest/v1",
+        "validation/module_contract_validation/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "codegen_ir",
+        "generator_plan"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "generation/artifact_manifest/v1",
+      "path": "lua/generation/artifact_manifest.lua",
+      "category": "generation",
+      "capabilities": [
+        "generation.artifact_manifest.generate",
+        "generation.artifact_manifest.validate",
+        "generation.validation_result.reference"
+      ],
+      "depends_on": [
+        "validation/module_contract_validation/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "codegen_ir",
+        "generator_plan"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "generation/pipeline_runner_plan/v1",
+      "path": "lua/generation/pipeline_runner_plan.lua",
+      "category": "generation",
+      "capabilities": [
+        "generation.pipeline_runner_plan.generate",
+        "generation.pipeline_runner_plan.validate",
+        "generation.validation_checkpoints.plan"
+      ],
+      "depends_on": [
+        "generation/dependency_sort/v1",
+        "generation/artifact_manifest/v1",
+        "validation/module_contract_validation/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "codegen_ir",
+        "generator_plan"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    },
+    {
+      "id": "generation/context_pack_plan/v1",
+      "path": "lua/generation/context_pack_plan.lua",
+      "category": "generation",
+      "capabilities": [
+        "generation.context_pack_plan.generate",
+        "generation.context_pack_plan.validate",
+        "generation.context_budget.plan"
+      ],
+      "depends_on": [
+        "generation/artifact_manifest/v1",
+        "validation/module_contract_validation/v1"
+      ],
+      "runtime_targets": [
+        "editor",
+        "validation",
+        "simulation",
+        "codegen_ir",
+        "generator_plan"
+      ],
+      "supported_turn_modes": [
+        "realtime",
+        "turn_based",
+        "mixed",
+        "paused_planning"
+      ],
+      "supported_combat_modes": [
+        "none",
+        "realtime",
+        "turn_based",
+        "tactical",
+        "dialogue_combat",
+        "hybrid"
+      ],
+      "deterministic": true,
+      "unsafe_features": []
+    }
+  ],
+  "runtime_targets": [
+    "editor",
+    "validation",
+    "simulation",
+    "codegen_ir",
+    "generator_plan"
+  ],
+  "supported_time_modes": [
+    "realtime",
+    "turn_based",
+    "mixed",
+    "paused_planning"
+  ],
+  "supported_combat_modes": [
+    "none",
+    "realtime",
+    "turn_based",
+    "tactical",
+    "dialogue_combat",
+    "hybrid"
+  ],
+  "unsafe_features": [],
+  "contracts": {
+    "module_contract": "Every Lua module returns table, exposes manifest, validate_config(config), and generate(input, ctx).",
+    "orchestration_ir_contract": "All outputs are deterministic JSON-serializable planning metadata and not live execution.",
+    "artifact_manifest_contract": "Artifacts are declared by id, kind, logical path, producer id, validation state and dependency references.",
+    "context_pack_contract": "Context pack planning stores token budgets and selected reference ids only; it does not read files or call a model."
+  }
+}
