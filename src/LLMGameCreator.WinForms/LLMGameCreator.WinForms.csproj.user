@@ -14,10 +14,16 @@
     <Compile Update="Pages\Generation\GenerationPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryArtifactsTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryCapabilitiesTabControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryImportTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryIntegrityTabControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryIssuesTabControl.cs">
@@ -27,6 +33,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryPlansTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryPrototypeLuaTabControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\Projects\CreateGameDialog.cs">
@@ -39,6 +51,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Pages\RuntimePreview\RuntimePreviewPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\RuntimeSimulator\RuntimeSimulatorPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\Settings\SettingsPageControl.cs">
