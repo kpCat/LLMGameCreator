@@ -51,3 +51,13 @@ Harvesting is exposed as `HarvestResourceNode`. It evaluates node requirements, 
 Durability and charge costs can target an item id or an equipped slot id. If stack/item metadata contains `break_on_zero=true`, the runtime removes the stack or clears the equipment slot when the meter reaches zero; otherwise the meter remains at zero or below and diagnostics/events describe the consumption.
 
 `IRuntimeSnapshotStore` saves and loads `UnifiedRuntimeSession` JSON files under `.llmgc/runtime-saves/<slot>.runtime.json`. Snapshot files contain runtime state only, not package definitions. Slot names are sanitized and path traversal is rejected. There is no autosave, database persistence or save-game menu system in this layer.
+
+## Encounter and Combat Runtime v1
+
+Gameplay runtime now supports these encounter commands: `StartEncounter`, `UseAbility`, `BasicAttack`, `EndTurn`, `ResolveEncounter`, `FleeEncounter` and `RunCurrentTurnAi`.
+
+Encounter state lives in `GameRuntimeState.ActiveEncounter`. It stores only runtime values: encounter id/kind, active flag, round, turn index, participants, resources, stats, statuses, cooldowns, action history and metadata. It does not embed or mutate `GamePackageDefinition`.
+
+Events include `EncounterStarted`, `TurnStarted`, `AbilityUsed`, `DamageApplied`, `HealingApplied`, `ParticipantDefeated`, `EncounterWon`, `EncounterLost`, `EncounterEnded`, `RewardGranted`, `ProgressionChanged`, `ProgressionStageChanged` and `AiActionChosen`.
+
+Combat v1 is intentionally small: participant order is initiative, damage/healing uses resource deltas, status ticking only decrements remaining turns, AI chooses the first available action, and rewards/loot/progression are applied only when the encounter is won. Runtime still does not execute Lua, generator modules, LLM calls, Unity codegen or external providers.

@@ -407,7 +407,11 @@ internal sealed class EconomyDefinitionValidator : IGamePackageValidationRule
         {
             Add(report, $"{codePrefix}.loot_table_missing", ValidationSeverity.Error, $"Output references a missing loot table: {output.Id}", ownerId);
         }
-        else if (allowProgressionWarning && output.Kind.Equals("progression", StringComparison.OrdinalIgnoreCase))
+        else if (output.Kind.Equals("progression", StringComparison.OrdinalIgnoreCase) && !context.ProgressionIds.Contains(output.Id))
+        {
+            Add(report, $"{codePrefix}.progression_missing", ValidationSeverity.Error, $"Output references a missing progression: {output.Id}", ownerId);
+        }
+        else if (allowProgressionWarning && output.Kind.Equals("progression", StringComparison.OrdinalIgnoreCase) && context.ProgressionIds.Count == 0)
         {
             Add(report, "economy.runtime.not_implemented", ValidationSeverity.Warning, "Progression output is data-only; no runtime handler is implemented yet.", ownerId);
         }

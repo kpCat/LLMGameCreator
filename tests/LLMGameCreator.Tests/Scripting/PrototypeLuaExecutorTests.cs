@@ -36,12 +36,16 @@ public sealed class PrototypeLuaExecutorTests
           { type = "resource_network", id = "network/base_power", name = "Base Power Grid", resource_id = "resource/mana" },
           { type = "resource_node", id = "node/mana_generator", name = "Mana Generator" },
           { type = "inventory", id = "inventory/player_start", owner_kind = "player" },
-          { type = "equipment_slot", id = "slot/tool", name = "Tool" }
+          { type = "equipment_slot", id = "slot/tool", name = "Tool" },
+          { type = "stat", id = "stat/strength", name = "Strength" },
+          { type = "progression", id = "progression/level", name = "Level" },
+          { type = "ability", id = "ability/basic_attack", name = "Basic Attack" },
+          { type = "encounter", id = "encounter/test", name = "Test Encounter" }
         })
         """), CancellationToken.None);
 
         Assert.True(result.Success);
-        Assert.Equal(new[] { "tile", "map", "entity_prototype", "item", "resource", "recipe", "loot_table", "transaction", "resource_network", "resource_node", "inventory", "equipment_slot" }, result.Declarations.Select(item => item.Type));
+        Assert.Equal(new[] { "tile", "map", "entity_prototype", "item", "resource", "recipe", "loot_table", "transaction", "resource_network", "resource_node", "inventory", "equipment_slot", "stat", "progression", "ability", "encounter" }, result.Declarations.Select(item => item.Type));
     }
 
     [Fact]

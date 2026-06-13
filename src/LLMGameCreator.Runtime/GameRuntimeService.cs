@@ -16,6 +16,8 @@ public sealed class GameRuntimeService : IGameRuntimeService
     private readonly IEquipmentRuntimeService _equipmentRuntimeService;
     private readonly IContainerRuntimeService _containerRuntimeService;
     private readonly IHarvestRuntimeService _harvestRuntimeService;
+    private readonly IEncounterRuntimeService _encounterRuntimeService;
+    private readonly IEncounterAiService _encounterAiService;
 
     public GameRuntimeService(
         IGameRuntimeStateFactory stateFactory,
@@ -27,7 +29,9 @@ public sealed class GameRuntimeService : IGameRuntimeService
         IInteractionRuntimeService interactionRuntimeService,
         IEquipmentRuntimeService? equipmentRuntimeService = null,
         IContainerRuntimeService? containerRuntimeService = null,
-        IHarvestRuntimeService? harvestRuntimeService = null)
+        IHarvestRuntimeService? harvestRuntimeService = null,
+        IEncounterRuntimeService? encounterRuntimeService = null,
+        IEncounterAiService? encounterAiService = null)
     {
         _stateFactory = stateFactory;
         _recipeRuntimeService = recipeRuntimeService;
@@ -39,6 +43,8 @@ public sealed class GameRuntimeService : IGameRuntimeService
         _equipmentRuntimeService = equipmentRuntimeService ?? new EquipmentRuntimeService(new RequirementEvaluator());
         _containerRuntimeService = containerRuntimeService ?? new ContainerRuntimeService();
         _harvestRuntimeService = harvestRuntimeService ?? new HarvestRuntimeService(new RequirementEvaluator(), new CostConsumer(), new OutputApplier());
+        _encounterRuntimeService = encounterRuntimeService ?? new EncounterRuntimeService(new RequirementEvaluator(), new OutputApplier());
+        _encounterAiService = encounterAiService ?? new EncounterAiService(_encounterRuntimeService);
     }
 
     public GameRuntimeResult CreateInitialState(GamePackageDefinition package)
@@ -107,6 +113,26 @@ public sealed class GameRuntimeService : IGameRuntimeService
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "HarvestResourceNode requires resource node id.", null)
                     : _harvestRuntimeService.HarvestResourceNode(package, state, command.Id.Trim(), command.InventoryId, command.TargetId, command.Seed);
+            case GameRuntimeCommandType.StartEncounter:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "StartEncounter requires encounter id.", null)
+                    : _encounterRuntimeService.StartEncounter(package, state, command.Id.Trim(), command.Seed);
+            case GameRuntimeCommandType.UseAbility:
+                return string.IsNullOrWhiteSpace(command.Id) || !command.Args.TryGetValue("sourceParticipantId", out var sourceId) || string.IsNullOrWhiteSpace(sourceId)
+                    ? Fail(state, "runtime.command.id_missing", "UseAbility requires ability id and sourceParticipantId arg.", command.Id)
+                    : _encounterRuntimeService.UseAbility(package, state, command.Id.Trim(), sourceId.Trim(), command.TargetId);
+            case GameRuntimeCommandType.BasicAttack:
+                return !command.Args.TryGetValue("sourceParticipantId", out var basicSourceId) || string.IsNullOrWhiteSpace(basicSourceId)
+                    ? Fail(state, "runtime.command.id_missing", "BasicAttack requires sourceParticipantId arg.", command.Id)
+                    : _encounterRuntimeService.BasicAttack(package, state, basicSourceId.Trim(), command.TargetId);
+            case GameRuntimeCommandType.EndTurn:
+                return _encounterRuntimeService.EndTurn(package, state);
+            case GameRuntimeCommandType.ResolveEncounter:
+                return _encounterRuntimeService.ResolveEncounter(package, state);
+            case GameRuntimeCommandType.FleeEncounter:
+                return _encounterRuntimeService.FleeEncounter(package, state);
+            case GameRuntimeCommandType.RunCurrentTurnAi:
+                return _encounterAiService.RunCurrentTurnAi(package, state);
             default:
                 return Fail(state, "runtime.command.unknown", $"Unknown runtime command: {command.Type}", command.Type.ToString());
         }

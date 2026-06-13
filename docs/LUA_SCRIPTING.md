@@ -109,7 +109,11 @@ Supported declaration types:
 - `resource_network`;
 - `resource_node`;
 - `inventory`;
-- `equipment_slot`.
+- `equipment_slot`;
+- `stat`;
+- `progression`;
+- `encounter`;
+- `ability`.
 
 The editor-side flow is:
 
@@ -162,6 +166,26 @@ data:extend({
     name = "Tool",
     allowed_tags = { "tool" },
     allowed_kinds = { "tool" }
+  }
+})
+```
+
+Encounter declarations map to data-only patch operations:
+
+```lua
+data:extend({
+  { type = "stat", id = "stat/strength", name = "Strength", kind = "attribute", default_value = 5 },
+  { type = "progression", id = "progression/character_level", name = "Character Level", kind = "xp_level", stages = { { id = "level/1", name = "Level 1", required_amount = 0 } } },
+  { type = "ability", id = "ability/basic_attack", name = "Basic Attack", kind = "attack", power = 4, resource_id = "resource/health" },
+  {
+    type = "encounter",
+    id = "encounter/goblin_duel",
+    name = "Goblin Duel",
+    kind = "combat",
+    participants = {
+      { id = "player", name = "Player", kind = "player", team = "player", resources = { { kind = "resource", id = "resource/health", amount = 30 } }, abilities = { "ability/basic_attack" } },
+      { id = "goblin", name = "Goblin", kind = "enemy", team = "enemy", resources = { { kind = "resource", id = "resource/health", amount = 12 } }, abilities = { "ability/basic_attack" } }
+    }
   }
 })
 ```

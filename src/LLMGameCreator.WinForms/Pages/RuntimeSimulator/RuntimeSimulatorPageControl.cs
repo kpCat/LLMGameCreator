@@ -64,6 +64,13 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _rollLootButton.Click += (_, _) => ExecuteSelected(GameRuntimeCommandType.RollLootTable);
         _transactionButton.Click += (_, _) => ExecuteSelected(GameRuntimeCommandType.ExecuteTransaction);
         _interactionButton.Click += (_, _) => ExecuteSelected(GameRuntimeCommandType.ExecuteInteraction);
+        _startEncounterButton.Click += (_, _) => ExecuteStartEncounter();
+        _useAbilityButton.Click += (_, _) => ExecuteUseAbility();
+        _basicAttackButton.Click += (_, _) => ExecuteParticipantCommand(GameRuntimeCommandType.BasicAttack);
+        _endTurnButton.Click += (_, _) => ExecuteSimpleEncounterCommand(GameRuntimeCommandType.EndTurn);
+        _runAiButton.Click += (_, _) => ExecuteSimpleEncounterCommand(GameRuntimeCommandType.RunCurrentTurnAi);
+        _resolveEncounterButton.Click += (_, _) => ExecuteSimpleEncounterCommand(GameRuntimeCommandType.ResolveEncounter);
+        _fleeEncounterButton.Click += (_, _) => ExecuteSimpleEncounterCommand(GameRuntimeCommandType.FleeEncounter);
         _equipButton.Click += (_, _) => ExecuteEquip();
         _unequipButton.Click += (_, _) => ExecuteUnequip();
         _openContainerButton.Click += (_, _) => ExecuteContainer(GameRuntimeCommandType.OpenContainer);
@@ -147,6 +154,87 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             package!,
             _session!,
             GameRuntimeCommand.EquipItem(_itemComboBox.Text.Trim(), _equipmentSlotComboBox.Text.Trim())));
+    }
+
+    private void ExecuteStartEncounter()
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_encounterComboBox.Text))
+        {
+            AppendLog("Select encounter before StartEncounter.");
+            return;
+        }
+
+        int? seed = int.TryParse(_seedTextBox.Text.Trim(), out var parsedSeed) ? parsedSeed : null;
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            GameRuntimeCommand.StartEncounter(_encounterComboBox.Text.Trim(), seed)));
+        RefreshEncounterParticipantHints();
+    }
+
+    private void ExecuteUseAbility()
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_abilityComboBox.Text) || string.IsNullOrWhiteSpace(_sourceParticipantTextBox.Text))
+        {
+            AppendLog("Select ability and source participant before UseAbility.");
+            return;
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            GameRuntimeCommand.UseAbility(
+                _abilityComboBox.Text.Trim(),
+                _sourceParticipantTextBox.Text.Trim(),
+                string.IsNullOrWhiteSpace(_targetParticipantTextBox.Text) ? null : _targetParticipantTextBox.Text.Trim())));
+        RefreshEncounterParticipantHints();
+    }
+
+    private void ExecuteParticipantCommand(GameRuntimeCommandType type)
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_sourceParticipantTextBox.Text))
+        {
+            AppendLog("Enter source participant id first.");
+            return;
+        }
+
+        var command = type == GameRuntimeCommandType.BasicAttack
+            ? GameRuntimeCommand.BasicAttack(
+                _sourceParticipantTextBox.Text.Trim(),
+                string.IsNullOrWhiteSpace(_targetParticipantTextBox.Text) ? null : _targetParticipantTextBox.Text.Trim())
+            : new GameRuntimeCommand { Type = type };
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(package!, _session!, command));
+        RefreshEncounterParticipantHints();
+    }
+
+    private void ExecuteSimpleEncounterCommand(GameRuntimeCommandType type)
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(package!, _session!, new GameRuntimeCommand { Type = type }));
+        RefreshEncounterParticipantHints();
     }
 
     private void ExecuteUnequip()
@@ -317,6 +405,8 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _transactionComboBox.Items.Clear();
         _itemComboBox.Items.Clear();
         _interactionComboBox.Items.Clear();
+        _encounterComboBox.Items.Clear();
+        _abilityComboBox.Items.Clear();
         _equipmentSlotComboBox.Items.Clear();
         _containerComboBox.Items.Clear();
         _resourceNodeComboBox.Items.Clear();
@@ -351,6 +441,16 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             _interactionComboBox.Items.Add(interaction.Id);
         }
 
+        foreach (var encounter in package.Game.Encounters)
+        {
+            _encounterComboBox.Items.Add(encounter.Id);
+        }
+
+        foreach (var ability in package.Game.Abilities)
+        {
+            _abilityComboBox.Items.Add(ability.Id);
+        }
+
         foreach (var slot in package.Game.EquipmentSlots)
         {
             _equipmentSlotComboBox.Items.Add(slot.Id);
@@ -374,10 +474,13 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         SelectFirst(_transactionComboBox);
         SelectFirst(_itemComboBox);
         SelectFirst(_interactionComboBox);
+        SelectFirst(_encounterComboBox);
+        SelectFirst(_abilityComboBox);
         SelectFirst(_equipmentSlotComboBox);
         SelectFirst(_containerComboBox);
         SelectFirst(_resourceNodeComboBox);
         RefreshStateJson();
+        RefreshEncounterParticipantHints();
     }
 
     private void SaveSnapshot()
@@ -483,6 +586,23 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _stateTextBox.Text = _session == null
             ? string.Empty
             : _runtimeStateSerializer?.Serialize(_session) ?? JsonSerializer.Serialize(_session, JsonOptions);
+    }
+
+    private void RefreshEncounterParticipantHints()
+    {
+        var encounter = _session?.GameplayState.ActiveEncounter;
+        if (encounter == null || encounter.Participants.Count == 0)
+        {
+            return;
+        }
+
+        var current = encounter.Participants[Math.Max(0, Math.Min(encounter.TurnIndex, encounter.Participants.Count - 1))];
+        _sourceParticipantTextBox.Text = current.Id;
+        var target = encounter.Participants.FirstOrDefault(participant => participant.Alive && !string.Equals(participant.Team, current.Team, StringComparison.OrdinalIgnoreCase));
+        if (target != null)
+        {
+            _targetParticipantTextBox.Text = target.Id;
+        }
     }
 
     private void AppendLog(string message)

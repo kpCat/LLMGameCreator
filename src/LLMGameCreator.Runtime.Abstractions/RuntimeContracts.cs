@@ -88,10 +88,52 @@ public sealed class GameRuntimeState
     public List<InventoryState> Inventories { get; set; } = new List<InventoryState>();
     public List<EquipmentState> Equipment { get; set; } = new List<EquipmentState>();
     public List<ResourceState> Resources { get; set; } = new List<ResourceState>();
+    public List<ProgressionState> Progressions { get; set; } = new List<ProgressionState>();
     public List<RuntimeFlagState> Flags { get; set; } = new List<RuntimeFlagState>();
     public List<StatusState> Statuses { get; set; } = new List<StatusState>();
+    public EncounterRuntimeState? ActiveEncounter { get; set; }
     public Dictionary<string, string> QuestStates { get; set; } = new Dictionary<string, string>();
     public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class ProgressionState
+{
+    public string ProgressionId { get; set; } = string.Empty;
+    public double Amount { get; set; }
+    public string? StageId { get; set; }
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class EncounterRuntimeState
+{
+    public string EncounterId { get; set; } = string.Empty;
+    public string Kind { get; set; } = "combat";
+    public bool Active { get; set; }
+    public int Round { get; set; } = 1;
+    public int TurnIndex { get; set; }
+    public List<EncounterParticipantState> Participants { get; set; } = new List<EncounterParticipantState>();
+    public List<string> ActionHistory { get; set; } = new List<string>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class EncounterParticipantState
+{
+    public string Id { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Team { get; set; } = "neutral";
+    public bool Alive { get; set; } = true;
+    public List<StatValueState> Stats { get; set; } = new List<StatValueState>();
+    public List<ResourceState> Resources { get; set; } = new List<ResourceState>();
+    public List<StatusState> Statuses { get; set; } = new List<StatusState>();
+    public Dictionary<string, int> Cooldowns { get; set; } = new Dictionary<string, int>();
+    public string? InventoryId { get; set; }
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class StatValueState
+{
+    public string StatId { get; set; } = string.Empty;
+    public double Value { get; set; }
 }
 
 public sealed class EquipmentState
@@ -176,7 +218,14 @@ public enum GameRuntimeCommandType
     OpenContainer = 14,
     TakeFromContainer = 15,
     DepositToContainer = 16,
-    HarvestResourceNode = 17
+    HarvestResourceNode = 17,
+    StartEncounter = 18,
+    UseAbility = 19,
+    BasicAttack = 20,
+    EndTurn = 21,
+    ResolveEncounter = 22,
+    FleeEncounter = 23,
+    RunCurrentTurnAi = 24
 }
 
 public sealed class GameRuntimeCommand
@@ -226,6 +275,15 @@ public sealed class GameRuntimeCommand
 
     public static GameRuntimeCommand HarvestResourceNode(string nodeId, string? inventoryId = null, string? toolItemId = null, int? seed = null)
         => new GameRuntimeCommand { Type = GameRuntimeCommandType.HarvestResourceNode, Id = nodeId, InventoryId = inventoryId, TargetId = toolItemId, Seed = seed };
+
+    public static GameRuntimeCommand StartEncounter(string encounterId, int? seed = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.StartEncounter, Id = encounterId, Seed = seed };
+
+    public static GameRuntimeCommand UseAbility(string abilityId, string sourceParticipantId, string? targetParticipantId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.UseAbility, Id = abilityId, TargetId = targetParticipantId, Args = new Dictionary<string, string> { ["sourceParticipantId"] = sourceParticipantId } };
+
+    public static GameRuntimeCommand BasicAttack(string sourceParticipantId, string? targetParticipantId = null)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.BasicAttack, TargetId = targetParticipantId, Args = new Dictionary<string, string> { ["sourceParticipantId"] = sourceParticipantId } };
 }
 
 public enum GameRuntimeEventType
@@ -248,7 +306,20 @@ public enum GameRuntimeEventType
     EquipmentChanged = 15,
     ContainerOpened = 16,
     ItemTransferred = 17,
-    ResourceHarvested = 18
+    ResourceHarvested = 18,
+    EncounterStarted = 19,
+    TurnStarted = 20,
+    AbilityUsed = 21,
+    DamageApplied = 22,
+    HealingApplied = 23,
+    ParticipantDefeated = 24,
+    EncounterWon = 25,
+    EncounterLost = 26,
+    EncounterEnded = 27,
+    RewardGranted = 28,
+    ProgressionChanged = 29,
+    ProgressionStageChanged = 30,
+    AiActionChosen = 31
 }
 
 public sealed class GameRuntimeEvent
@@ -371,6 +442,21 @@ public interface IUseItemRuntimeService
 public interface IInteractionRuntimeService
 {
     GameRuntimeResult ExecuteInteraction(GamePackageDefinition package, GameRuntimeState state, string interactionId, string? targetId = null, string? inventoryId = null);
+}
+
+public interface IEncounterRuntimeService
+{
+    GameRuntimeResult StartEncounter(GamePackageDefinition package, GameRuntimeState state, string encounterId, int? seed = null);
+    GameRuntimeResult UseAbility(GamePackageDefinition package, GameRuntimeState state, string abilityId, string sourceParticipantId, string? targetParticipantId = null);
+    GameRuntimeResult BasicAttack(GamePackageDefinition package, GameRuntimeState state, string sourceParticipantId, string? targetParticipantId = null);
+    GameRuntimeResult EndTurn(GamePackageDefinition package, GameRuntimeState state);
+    GameRuntimeResult FleeEncounter(GamePackageDefinition package, GameRuntimeState state);
+    GameRuntimeResult ResolveEncounter(GamePackageDefinition package, GameRuntimeState state);
+}
+
+public interface IEncounterAiService
+{
+    GameRuntimeResult RunCurrentTurnAi(GamePackageDefinition package, GameRuntimeState state);
 }
 
 public interface IGameRuntimeService

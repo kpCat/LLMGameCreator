@@ -118,6 +118,10 @@ Unity Player должен быть способен загрузить GamePacka
   "game": {
     "resources": [],
     "statuses": [],
+    "stats": [],
+    "progressions": [],
+    "encounters": [],
+    "abilities": [],
     "recipes": [],
     "lootTables": [],
     "transactions": [],
@@ -176,6 +180,32 @@ Example:
 ```
 
 These definitions are contracts and validation inputs only. Crafting, shops and base resource simulation are not executed by the package format layer.
+
+## Optional Encounter Definition Lists
+
+`game.stats`, `game.progressions`, `game.encounters` and `game.abilities` are optional/default-empty. Older packages that omit them remain loadable.
+
+Minimal encounter example:
+
+```json
+{
+  "stats": [{ "id": "stat/strength", "name": "Strength", "kind": "attribute", "defaultValue": 5 }],
+  "progressions": [{ "id": "progression/character_level", "name": "Character Level", "kind": "xp_level", "stages": [{ "id": "level/1", "name": "Level 1", "requiredAmount": 0 }] }],
+  "abilities": [{ "id": "ability/basic_attack", "name": "Basic Attack", "kind": "attack", "power": 4, "resourceId": "resource/health" }],
+  "encounters": [
+    {
+      "id": "encounter/goblin_duel",
+      "name": "Goblin Duel",
+      "kind": "combat",
+      "participants": [
+        { "id": "player", "name": "Player", "kind": "player", "team": "player", "resources": [{ "kind": "resource", "id": "resource/health", "amount": 30 }], "abilities": ["ability/basic_attack"] },
+        { "id": "goblin", "name": "Goblin", "kind": "enemy", "team": "enemy", "resources": [{ "kind": "resource", "id": "resource/health", "amount": 12 }], "abilities": ["ability/basic_attack"] }
+      ],
+      "rewards": [{ "kind": "progression", "id": "progression/character_level", "amount": 10 }]
+    }
+  ]
+}
+```
 
 ## Exploration Inventory Fields
 

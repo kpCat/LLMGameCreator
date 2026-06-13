@@ -40,6 +40,9 @@ public sealed class EconomyContractsTests
         Assert.Empty(package.Game.ResourceNodes);
         Assert.Empty(package.Game.Inventories);
         Assert.Empty(package.Game.EquipmentSlots);
+        Assert.Empty(package.Game.Stats);
+        Assert.Empty(package.Game.Progressions);
+        Assert.Empty(package.Game.Encounters);
     }
 
     [Fact]
@@ -94,6 +97,23 @@ public sealed class EconomyContractsTests
                         AllowedTags = new List<string> { "tool" },
                         AllowedKinds = new List<string> { "tool" }
                     }
+                },
+                Stats = new List<StatDefinition>
+                {
+                    new StatDefinition { Id = "stat/strength", Name = "Strength", DefaultValue = 5 }
+                },
+                Progressions = new List<ProgressionDefinition>
+                {
+                    new ProgressionDefinition
+                    {
+                        Id = "progression/level",
+                        Name = "Level",
+                        Stages = new List<ProgressionStageDefinition> { new ProgressionStageDefinition { Id = "level/1", Name = "Level 1" } }
+                    }
+                },
+                Encounters = new List<EncounterDefinition>
+                {
+                    new EncounterDefinition { Id = "encounter/test", Name = "Test Encounter" }
                 }
             }
         };
@@ -106,5 +126,8 @@ public sealed class EconomyContractsTests
         Assert.Equal(100, roundTrip.Game.Resources[0].MaxValue);
         Assert.Equal("recipe/healing_potion", roundTrip.Game.Recipes[0].Id);
         Assert.Equal("slot/tool", roundTrip.Game.EquipmentSlots[0].Id);
+        Assert.Equal("stat/strength", roundTrip.Game.Stats[0].Id);
+        Assert.Equal("progression/level", roundTrip.Game.Progressions[0].Id);
+        Assert.Equal("encounter/test", roundTrip.Game.Encounters[0].Id);
     }
 }

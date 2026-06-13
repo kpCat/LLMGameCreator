@@ -22,12 +22,16 @@ public sealed class GamePackagePatchOperationValidatorTests
           {{ResourceNetworkOperation("network/base_power")}},
           {{ResourceNodeOperation("node/diesel_generator")}},
           {{InventoryOperation("inventory/player_start")}},
+          {{StatOperation("stat/strength")}},
+          {{ProgressionOperation("progression/level")}},
+          {{EncounterOperation("encounter/goblin_duel")}},
+          {{AbilityOperation("ability/basic_attack")}},
           { "op": "update_manifest", "title": "Stone Game", "start_map_id": "map/start" }
         ]
         """, "test");
 
         Assert.DoesNotContain(result.ValidationResults, item => item.Severity == "error");
-        Assert.Equal(11, result.Operations.Count);
+        Assert.Equal(15, result.Operations.Count);
     }
 
     [Fact]
@@ -126,5 +130,25 @@ public sealed class GamePackagePatchOperationValidatorTests
     private static string InventoryOperation(string id)
     {
         return $$"""{ "op": "upsert_inventory", "id": "{{id}}", "owner_kind": "player", "slots": 16, "stacks": [{ "item_id": "item/red_herb", "amount": 1 }] }""";
+    }
+
+    private static string StatOperation(string id)
+    {
+        return $$"""{ "op": "upsert_stat", "id": "{{id}}", "name": "Strength", "kind": "attribute", "default_value": 5 }""";
+    }
+
+    private static string ProgressionOperation(string id)
+    {
+        return $$"""{ "op": "upsert_progression", "id": "{{id}}", "name": "Level", "kind": "xp_level", "stages": [{ "id": "level/1", "name": "Level 1", "required_amount": 0 }] }""";
+    }
+
+    private static string EncounterOperation(string id)
+    {
+        return $$"""{ "op": "upsert_encounter", "id": "{{id}}", "name": "Goblin Duel", "kind": "combat", "participants": [{ "id": "player", "name": "Player", "team": "player" }] }""";
+    }
+
+    private static string AbilityOperation(string id)
+    {
+        return $$"""{ "op": "upsert_ability", "id": "{{id}}", "name": "Basic Attack", "kind": "attack", "power": 4, "resource_id": "resource/mana" }""";
     }
 }

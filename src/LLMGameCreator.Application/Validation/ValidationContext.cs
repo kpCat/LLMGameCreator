@@ -25,6 +25,18 @@ public sealed class ValidationContext
             .Where(resource => !string.IsNullOrWhiteSpace(resource.Id))
             .Select(resource => resource.Id)
             .ToHashSet();
+        StatIds = package.Game.Stats
+            .Where(stat => !string.IsNullOrWhiteSpace(stat.Id))
+            .Select(stat => stat.Id)
+            .ToHashSet();
+        ProgressionIds = package.Game.Progressions
+            .Where(progression => !string.IsNullOrWhiteSpace(progression.Id))
+            .Select(progression => progression.Id)
+            .ToHashSet();
+        AbilityIds = package.Game.Abilities
+            .Where(ability => !string.IsNullOrWhiteSpace(ability.Id))
+            .Select(ability => ability.Id)
+            .ToHashSet();
         StatusIds = package.Game.Statuses
             .Where(status => !string.IsNullOrWhiteSpace(status.Id))
             .Select(status => status.Id)
@@ -57,6 +69,9 @@ public sealed class ValidationContext
     public IReadOnlySet<string> EntityPrototypeIds { get; }
     public IReadOnlySet<string> ItemIds { get; }
     public IReadOnlySet<string> ResourceIds { get; }
+    public IReadOnlySet<string> StatIds { get; }
+    public IReadOnlySet<string> ProgressionIds { get; }
+    public IReadOnlySet<string> AbilityIds { get; }
     public IReadOnlySet<string> StatusIds { get; }
     public IReadOnlySet<string> LootTableIds { get; }
     public IReadOnlySet<string> ResourceNetworkIds { get; }

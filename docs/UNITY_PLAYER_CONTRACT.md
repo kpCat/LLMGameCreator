@@ -10,6 +10,10 @@ Future Unity work should target `IUnifiedGameRuntimeService` as the command/even
 
 Unity remains out of scope here: no Unity project, codegen, MonoBehaviour game logic or Unity-specific runtime execution is added by the bridge.
 
+Encounter runtime commands/events are part of the future bridge surface. A Unity adapter may send `StartEncounter`, `UseAbility`, `BasicAttack`, `EndTurn`, `ResolveEncounter`, `FleeEncounter` or `RunCurrentTurnAi` as gameplay commands and render encounter events such as `EncounterStarted`, `TurnStarted`, `AbilityUsed`, `DamageApplied`, `HealingApplied`, `ParticipantDefeated`, `EncounterWon`, `EncounterLost` and `RewardGranted`.
+
+Unity still must not contain game-specific combat rules in C#; it should display data and route commands/events through the runtime bridge.
+
 # Unity Player Contract
 
 ## Назначение

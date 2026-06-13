@@ -362,7 +362,7 @@ Runtime v1 supports:
 - transactions: shops, barter and services execute as generic requirement/cost/output bundles;
 - resource nodes: a simple tick loop evaluates each node, consumes conversion/consumption costs, applies production/storage/conversion outputs and clamps resources by definition min/max.
 
-Runtime v1 deliberately does not implement combat, quest/dialogue execution, full electricity-grid routing, building placement, multiplayer, runtime Lua or generator Lua. Missing fuel/input on a resource node is reported as a runtime diagnostic and the node produces nothing for that tick.
+Runtime v1 deliberately does not implement quest/dialogue execution, full electricity-grid routing, building placement, multiplayer, runtime Lua or generator Lua. Missing fuel/input on a resource node is reported as a runtime diagnostic and the node produces nothing for that tick.
 
 ## UseItem and Interaction Runtime v1
 
@@ -379,3 +379,13 @@ Containers are regular inventories with `ownerKind = "container"` or container t
 Harvesting uses `ResourceNodeDefinition` as the data contract. A resource node can produce outputs, conversion outputs and deterministic loot rolls, and can require a tool by item id or tag through metadata. Tool durability/charge costs are runtime costs and can target either item ids or equipment slot ids.
 
 Runtime save snapshots are serialized `UnifiedRuntimeSession` files under `.llmgc/runtime-saves`. They are runtime state only; `GamePackage` remains the source of truth for definitions.
+
+## Encounter and Combat Runtime v1
+
+Encounter runtime v1 makes combat a data-driven `EncounterDefinition`, not a standalone hardcoded mini-game. `game.stats`, `game.progressions` and `game.encounters` are optional/default-empty definition lists.
+
+The v1 turn loop is deterministic: start requirements are evaluated, participants are copied into runtime-only `EncounterRuntimeState`, turn order follows participant order, abilities consume participant resource costs, and damage/healing/status/stat outputs mutate only runtime state. Health convention is `resource/health` or a resource tagged/kind `health`.
+
+Supported ability outputs in encounters are minimal: `damage_resource`, `heal_resource`, `change_resource`, `add_status`, `remove_status`, `change_stat` and `log`. Rewards can grant items, resources, statuses, flags, loot rolls and progression through the shared output pipeline. Progression runtime stores amount and current stage in `ProgressionState`.
+
+Simple AI is deterministic: non-player participants choose the first declared usable ability and target the first living enemy. There is no tactical pathfinding, planning, personality model, runtime Lua, generator Lua, generator module execution, LLM call or Unity integration in this runtime layer.

@@ -597,6 +597,18 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 case UpsertEquipmentSlotPatchOperation equipmentSlot:
                     UpsertDefinition(package.Game.EquipmentSlots, equipmentSlot.EquipmentSlot, equipmentSlot.Op, equipmentSlot.Target, "equipment slot", diffLines);
                     break;
+                case UpsertStatPatchOperation stat:
+                    UpsertDefinition(package.Game.Stats, stat.Stat, stat.Op, stat.Target, "stat", diffLines);
+                    break;
+                case UpsertProgressionPatchOperation progression:
+                    UpsertDefinition(package.Game.Progressions, progression.Progression, progression.Op, progression.Target, "progression", diffLines);
+                    break;
+                case UpsertEncounterPatchOperation encounter:
+                    UpsertDefinition(package.Game.Encounters, encounter.Encounter, encounter.Op, encounter.Target, "encounter", diffLines);
+                    break;
+                case UpsertAbilityPatchOperation ability:
+                    UpsertDefinition(package.Game.Abilities, ability.Ability, ability.Op, ability.Target, "ability", diffLines);
+                    break;
                 case UpdateManifestPatchOperation manifest:
                     if (!string.IsNullOrWhiteSpace(manifest.StartMapId) && !package.Game.Maps.Any(map => IdEquals(map.Id, manifest.StartMapId)))
                     {
@@ -824,6 +836,14 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 return DefinitionOperationToJson(inventory.Op, inventory.Inventory);
             case UpsertEquipmentSlotPatchOperation equipmentSlot:
                 return DefinitionOperationToJson(equipmentSlot.Op, equipmentSlot.EquipmentSlot);
+            case UpsertStatPatchOperation stat:
+                return DefinitionOperationToJson(stat.Op, stat.Stat);
+            case UpsertProgressionPatchOperation progression:
+                return DefinitionOperationToJson(progression.Op, progression.Progression);
+            case UpsertEncounterPatchOperation encounter:
+                return DefinitionOperationToJson(encounter.Op, encounter.Encounter);
+            case UpsertAbilityPatchOperation ability:
+                return DefinitionOperationToJson(ability.Op, ability.Ability);
             case UpdateManifestPatchOperation manifest:
                 var manifestJson = new JsonObject
                 {
@@ -877,6 +897,10 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
             ResourceNodeDefinition resourceNode => resourceNode.Id,
             InventoryDefinition inventory => inventory.Id,
             EquipmentSlotDefinition equipmentSlot => equipmentSlot.Id,
+            StatDefinition stat => stat.Id,
+            ProgressionDefinition progression => progression.Id,
+            EncounterDefinition encounter => encounter.Id,
+            AbilityDefinition ability => ability.Id,
             _ => null
         };
     }

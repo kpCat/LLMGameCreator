@@ -308,6 +308,33 @@ internal static class RuntimeStateHelpers
         return state.Statuses.Any(s => IdEquals(s.StatusId, statusId) && (string.IsNullOrWhiteSpace(targetId) || IdEquals(s.TargetId, targetId)));
     }
 
+    public static ProgressionState EnsureProgression(GameRuntimeState state, ProgressionDefinition definition)
+    {
+        var progression = state.Progressions.FirstOrDefault(p => IdEquals(p.ProgressionId, definition.Id));
+        if (progression != null)
+        {
+            return progression;
+        }
+
+        progression = new ProgressionState
+        {
+            ProgressionId = definition.Id,
+            Amount = 0,
+            StageId = ResolveProgressionStage(definition, 0)
+        };
+        state.Progressions.Add(progression);
+        return progression;
+    }
+
+    public static string? ResolveProgressionStage(ProgressionDefinition definition, double amount)
+    {
+        return definition.Stages
+            .Where(stage => stage.RequiredAmount <= amount)
+            .OrderByDescending(stage => stage.RequiredAmount)
+            .FirstOrDefault()
+            ?.Id;
+    }
+
     public static bool IsUniqueLootAlreadyAcquired(GameRuntimeState state, string entryId)
     {
         return state.Metadata.TryGetValue(UniqueLootKey(entryId), out var value)
@@ -412,6 +439,13 @@ internal static class RuntimeStateHelpers
                 Scope = resource.Scope,
                 OwnerId = resource.OwnerId
             }).ToList(),
+            Progressions = state.Progressions.Select(progression => new ProgressionState
+            {
+                ProgressionId = progression.ProgressionId,
+                Amount = progression.Amount,
+                StageId = progression.StageId,
+                Metadata = new Dictionary<string, string>(progression.Metadata)
+            }).ToList(),
             Flags = state.Flags.Select(flag => new RuntimeFlagState
             {
                 Id = flag.Id,
@@ -424,7 +458,8 @@ internal static class RuntimeStateHelpers
                 RemainingTicks = status.RemainingTicks,
                 Stacks = status.Stacks,
                 Metadata = new Dictionary<string, string>(status.Metadata)
-            }).ToList()
+            }).ToList(),
+            ActiveEncounter = CloneEncounter(state.ActiveEncounter)
         };
     }
 
@@ -437,10 +472,62 @@ internal static class RuntimeStateHelpers
         target.Inventories = source.Inventories;
         target.Equipment = source.Equipment;
         target.Resources = source.Resources;
+        target.Progressions = source.Progressions;
         target.Flags = source.Flags;
         target.Statuses = source.Statuses;
+        target.ActiveEncounter = source.ActiveEncounter;
         target.QuestStates = source.QuestStates;
         target.Metadata = source.Metadata;
+    }
+
+    public static EncounterRuntimeState? CloneEncounter(EncounterRuntimeState? encounter)
+    {
+        if (encounter == null)
+        {
+            return null;
+        }
+
+        return new EncounterRuntimeState
+        {
+            EncounterId = encounter.EncounterId,
+            Kind = encounter.Kind,
+            Active = encounter.Active,
+            Round = encounter.Round,
+            TurnIndex = encounter.TurnIndex,
+            ActionHistory = encounter.ActionHistory.ToList(),
+            Metadata = new Dictionary<string, string>(encounter.Metadata),
+            Participants = encounter.Participants.Select(participant => new EncounterParticipantState
+            {
+                Id = participant.Id,
+                Name = participant.Name,
+                Team = participant.Team,
+                Alive = participant.Alive,
+                InventoryId = participant.InventoryId,
+                Metadata = new Dictionary<string, string>(participant.Metadata),
+                Cooldowns = new Dictionary<string, int>(participant.Cooldowns),
+                Stats = participant.Stats.Select(stat => new StatValueState
+                {
+                    StatId = stat.StatId,
+                    Value = stat.Value
+                }).ToList(),
+                Resources = participant.Resources.Select(resource => new ResourceState
+                {
+                    ResourceId = resource.ResourceId,
+                    Amount = resource.Amount,
+                    Capacity = resource.Capacity,
+                    Scope = resource.Scope,
+                    OwnerId = resource.OwnerId
+                }).ToList(),
+                Statuses = participant.Statuses.Select(status => new StatusState
+                {
+                    StatusId = status.StatusId,
+                    TargetId = status.TargetId,
+                    RemainingTicks = status.RemainingTicks,
+                    Stacks = status.Stacks,
+                    Metadata = new Dictionary<string, string>(status.Metadata)
+                }).ToList()
+            }).ToList()
+        };
     }
 
     public static bool KindEquals(string? left, string? right)

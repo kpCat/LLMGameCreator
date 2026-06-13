@@ -20,6 +20,7 @@ public sealed class GamePackageValidator : IGamePackageValidator
             new ManifestValidator(),
             new GameDefinitionValidator(),
             new EconomyDefinitionValidator(),
+            new EncounterDefinitionValidator(),
             new AssetCatalogValidator(),
             new ScriptCatalogValidator()
         };

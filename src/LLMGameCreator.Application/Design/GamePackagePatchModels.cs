@@ -113,6 +113,26 @@ public sealed record UpsertEquipmentSlotPatchOperation(EquipmentSlotDefinition E
     public override string Target => EquipmentSlot.Id;
 }
 
+public sealed record UpsertStatPatchOperation(StatDefinition Stat) : GamePackagePatchOperation("upsert_stat")
+{
+    public override string Target => Stat.Id;
+}
+
+public sealed record UpsertProgressionPatchOperation(ProgressionDefinition Progression) : GamePackagePatchOperation("upsert_progression")
+{
+    public override string Target => Progression.Id;
+}
+
+public sealed record UpsertEncounterPatchOperation(EncounterDefinition Encounter) : GamePackagePatchOperation("upsert_encounter")
+{
+    public override string Target => Encounter.Id;
+}
+
+public sealed record UpsertAbilityPatchOperation(AbilityDefinition Ability) : GamePackagePatchOperation("upsert_ability")
+{
+    public override string Target => Ability.Id;
+}
+
 public sealed record GamePackagePatchValidationIssue(
     string Severity,
     string Code,

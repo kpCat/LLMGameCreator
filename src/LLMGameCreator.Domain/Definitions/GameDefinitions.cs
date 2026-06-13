@@ -26,6 +26,9 @@ public sealed class GameDefinition
     public List<InventoryDefinition> Inventories { get; set; } = new List<InventoryDefinition>();
     public List<EquipmentSlotDefinition> EquipmentSlots { get; set; } = new List<EquipmentSlotDefinition>();
     public List<AbilityDefinition> Abilities { get; set; } = new List<AbilityDefinition>();
+    public List<StatDefinition> Stats { get; set; } = new List<StatDefinition>();
+    public List<ProgressionDefinition> Progressions { get; set; } = new List<ProgressionDefinition>();
+    public List<EncounterDefinition> Encounters { get; set; } = new List<EncounterDefinition>();
     public List<QuestDefinition> Quests { get; set; } = new List<QuestDefinition>();
     public List<DialogueDefinition> Dialogues { get; set; } = new List<DialogueDefinition>();
     public List<FormulaDefinition> Formulas { get; set; } = new List<FormulaDefinition>();

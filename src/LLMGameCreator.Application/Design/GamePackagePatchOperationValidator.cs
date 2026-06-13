@@ -143,6 +143,28 @@ public sealed partial class GamePackagePatchOperationValidator
         "op", "id", "name", "allowed_tags", "allowed_kinds", "required_requirements", "metadata"
     };
 
+    private static readonly HashSet<string> StatFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "description", "default_value", "min_value", "max_value", "icon_asset_id", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> ProgressionFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "description", "stages", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> EncounterFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "participants", "actions", "start_requirements", "win_conditions",
+        "lose_conditions", "rewards", "consequences", "loot_table_id", "default_seed", "tags", "metadata"
+    };
+
+    private static readonly HashSet<string> AbilityFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "kind", "requirements", "costs", "cooldown", "targeting", "range", "power",
+        "resource_id", "tags", "stages", "learn_conditions", "effects", "metadata"
+    };
+
     public GamePackagePatchParseResult ParsePatchDocument(string json, string artifactId)
     {
         var results = new List<GeneratedArtifactValidationResultRecord>();
@@ -326,6 +348,10 @@ public sealed partial class GamePackagePatchOperationValidator
             "upsert_resource_node" => ParseEconomyOperation(operationNode, ResourceNodeFields, node => new UpsertResourceNodePatchOperation(ReadDefinition<ResourceNodeDefinition>(node)), artifactId, target, results, requireName: true),
             "upsert_inventory" => ParseEconomyOperation(operationNode, InventoryFields, node => new UpsertInventoryPatchOperation(ReadDefinition<InventoryDefinition>(node)), artifactId, target, results, requireName: false),
             "upsert_equipment_slot" => ParseEconomyOperation(operationNode, EquipmentSlotFields, node => new UpsertEquipmentSlotPatchOperation(ReadDefinition<EquipmentSlotDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_stat" => ParseEconomyOperation(operationNode, StatFields, node => new UpsertStatPatchOperation(ReadDefinition<StatDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_progression" => ParseEconomyOperation(operationNode, ProgressionFields, node => new UpsertProgressionPatchOperation(ReadDefinition<ProgressionDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_encounter" => ParseEconomyOperation(operationNode, EncounterFields, node => new UpsertEncounterPatchOperation(ReadDefinition<EncounterDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_ability" => ParseEconomyOperation(operationNode, AbilityFields, node => new UpsertAbilityPatchOperation(ReadDefinition<AbilityDefinition>(node)), artifactId, target, results, requireName: true),
             _ => UnknownOperation(op, artifactId, target, results)
         };
     }

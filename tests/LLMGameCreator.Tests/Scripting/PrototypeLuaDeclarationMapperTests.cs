@@ -24,6 +24,10 @@ public sealed class PrototypeLuaDeclarationMapperTests
               { type = "resource_network", id = "network/base_power", name = "Base Power Grid", resource_id = "resource/mana", kind = "mana_flow" },
               { type = "resource_node", id = "node/mana_generator", name = "Mana Generator", network_id = "network/base_power", production = { { kind = "resource", id = "resource/mana", amount = 20 } } },
               { type = "equipment_slot", id = "slot/tool", name = "Tool", allowed_tags = { "tool" } },
+              { type = "stat", id = "stat/strength", name = "Strength", kind = "attribute", default_value = 5 },
+              { type = "progression", id = "progression/level", name = "Level", kind = "xp_level", stages = { { id = "level/1", name = "Level 1", required_amount = 0 } } },
+              { type = "ability", id = "ability/basic_attack", name = "Basic Attack", kind = "attack", power = 4, resource_id = "resource/mana" },
+              { type = "encounter", id = "encounter/goblin_duel", name = "Goblin Duel", kind = "combat", participants = { { id = "player", name = "Player", team = "player" } } },
               { type = "manifest_update", title = "My Game", description = "Short", start_map_id = "map/start" }
             })
             """
@@ -43,6 +47,10 @@ public sealed class PrototypeLuaDeclarationMapperTests
         Assert.Contains("upsert_resource_network", result.OperationsJson);
         Assert.Contains("upsert_resource_node", result.OperationsJson);
         Assert.Contains("upsert_equipment_slot", result.OperationsJson);
+        Assert.Contains("upsert_stat", result.OperationsJson);
+        Assert.Contains("upsert_progression", result.OperationsJson);
+        Assert.Contains("upsert_ability", result.OperationsJson);
+        Assert.Contains("upsert_encounter", result.OperationsJson);
         Assert.Contains("update_manifest", result.OperationsJson);
     }
 

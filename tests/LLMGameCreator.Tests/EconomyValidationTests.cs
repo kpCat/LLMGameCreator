@@ -8,15 +8,16 @@ namespace LLMGameCreator.Tests;
 public sealed class EconomyValidationTests
 {
     [Fact]
-    public void ValidEconomyDefinitionsPassWithDataOnlyProgressionWarning()
+    public void ValidEconomyDefinitionsPassWithProgressionOutput()
     {
         var package = CreateEconomyPackage();
         package.Game.Transactions[0].Outputs.Add(new OutputDefinition { Kind = "progression", Id = "progression/fire_magic", Amount = 1 });
+        package.Game.Progressions.Add(new ProgressionDefinition { Id = "progression/fire_magic", Name = "Fire Magic" });
 
         var report = new GamePackageValidator().Validate(package);
 
         Assert.DoesNotContain(report.Issues, issue => issue.Severity == Domain.Validation.ValidationSeverity.Error);
-        Assert.Contains(report.Issues, issue => issue.Code == "economy.runtime.not_implemented");
+        Assert.DoesNotContain(report.Issues, issue => issue.Code == "economy.runtime.not_implemented");
     }
 
     [Fact]

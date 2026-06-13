@@ -21,7 +21,11 @@ public sealed class PrototypeLuaExecutor : IPrototypeLuaExecutor
         "resource_network",
         "resource_node",
         "inventory",
-        "equipment_slot"
+        "equipment_slot",
+        "stat",
+        "progression",
+        "encounter",
+        "ability"
     };
 
     private readonly PrototypeLuaStaticAnalyzer _staticAnalyzer;

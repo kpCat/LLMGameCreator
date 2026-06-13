@@ -78,6 +78,8 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IEquipmentRuntimeService, EquipmentRuntimeService>(Reuse.Singleton);
         _container.Register<IContainerRuntimeService, ContainerRuntimeService>(Reuse.Singleton);
         _container.Register<IHarvestRuntimeService, HarvestRuntimeService>(Reuse.Singleton);
+        _container.Register<IEncounterRuntimeService, EncounterRuntimeService>(Reuse.Singleton);
+        _container.Register<IEncounterAiService, EncounterAiService>(Reuse.Singleton);
         _container.Register<IUseItemRuntimeService, UseItemRuntimeService>(Reuse.Singleton);
         _container.Register<IInteractionRuntimeService, InteractionRuntimeService>(Reuse.Singleton);
         _container.Register<IGameRuntimeService, GameRuntimeService>(Reuse.Singleton);

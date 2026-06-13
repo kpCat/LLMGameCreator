@@ -37,6 +37,21 @@ namespace LLMGameCreator.WinForms.Pages
         private Label _interactionLabel;
         private ComboBox _interactionComboBox;
         private Button _interactionButton;
+        private Label _encounterLabel;
+        private ComboBox _encounterComboBox;
+        private Button _startEncounterButton;
+        private Label _abilityLabel;
+        private ComboBox _abilityComboBox;
+        private Label _sourceParticipantLabel;
+        private TextBox _sourceParticipantTextBox;
+        private Label _targetParticipantLabel;
+        private TextBox _targetParticipantTextBox;
+        private Button _useAbilityButton;
+        private Button _basicAttackButton;
+        private Button _endTurnButton;
+        private Button _runAiButton;
+        private Button _resolveEncounterButton;
+        private Button _fleeEncounterButton;
         private Label _equipmentSlotLabel;
         private ComboBox _equipmentSlotComboBox;
         private Button _equipButton;
@@ -107,6 +122,21 @@ namespace LLMGameCreator.WinForms.Pages
             this._interactionLabel = new Label();
             this._interactionComboBox = new ComboBox();
             this._interactionButton = new Button();
+            this._encounterLabel = new Label();
+            this._encounterComboBox = new ComboBox();
+            this._startEncounterButton = new Button();
+            this._abilityLabel = new Label();
+            this._abilityComboBox = new ComboBox();
+            this._sourceParticipantLabel = new Label();
+            this._sourceParticipantTextBox = new TextBox();
+            this._targetParticipantLabel = new Label();
+            this._targetParticipantTextBox = new TextBox();
+            this._useAbilityButton = new Button();
+            this._basicAttackButton = new Button();
+            this._endTurnButton = new Button();
+            this._runAiButton = new Button();
+            this._resolveEncounterButton = new Button();
+            this._fleeEncounterButton = new Button();
             this._equipmentSlotLabel = new Label();
             this._equipmentSlotComboBox = new ComboBox();
             this._equipButton = new Button();
@@ -201,6 +231,21 @@ namespace LLMGameCreator.WinForms.Pages
             this._topToolbarPanel.Controls.Add(this._interactionLabel);
             this._topToolbarPanel.Controls.Add(this._interactionComboBox);
             this._topToolbarPanel.Controls.Add(this._interactionButton);
+            this._topToolbarPanel.Controls.Add(this._encounterLabel);
+            this._topToolbarPanel.Controls.Add(this._encounterComboBox);
+            this._topToolbarPanel.Controls.Add(this._startEncounterButton);
+            this._topToolbarPanel.Controls.Add(this._abilityLabel);
+            this._topToolbarPanel.Controls.Add(this._abilityComboBox);
+            this._topToolbarPanel.Controls.Add(this._sourceParticipantLabel);
+            this._topToolbarPanel.Controls.Add(this._sourceParticipantTextBox);
+            this._topToolbarPanel.Controls.Add(this._targetParticipantLabel);
+            this._topToolbarPanel.Controls.Add(this._targetParticipantTextBox);
+            this._topToolbarPanel.Controls.Add(this._useAbilityButton);
+            this._topToolbarPanel.Controls.Add(this._basicAttackButton);
+            this._topToolbarPanel.Controls.Add(this._endTurnButton);
+            this._topToolbarPanel.Controls.Add(this._runAiButton);
+            this._topToolbarPanel.Controls.Add(this._resolveEncounterButton);
+            this._topToolbarPanel.Controls.Add(this._fleeEncounterButton);
             this._topToolbarPanel.Controls.Add(this._equipmentSlotLabel);
             this._topToolbarPanel.Controls.Add(this._equipmentSlotComboBox);
             this._topToolbarPanel.Controls.Add(this._equipButton);
@@ -455,6 +500,140 @@ namespace LLMGameCreator.WinForms.Pages
             this._interactionButton.TabIndex = 20;
             this._interactionButton.Text = "Execute Interaction";
             this._interactionButton.UseVisualStyleBackColor = true;
+            // 
+            // _encounterLabel
+            // 
+            this._encounterLabel.AutoSize = true;
+            this._encounterLabel.Location = new Point(3, 496);
+            this._encounterLabel.Margin = new Padding(3, 12, 3, 0);
+            this._encounterLabel.Name = "_encounterLabel";
+            this._encounterLabel.Size = new Size(62, 15);
+            this._encounterLabel.TabIndex = 45;
+            this._encounterLabel.Text = "Encounter";
+            // 
+            // _encounterComboBox
+            // 
+            this._encounterComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._encounterComboBox.FormattingEnabled = true;
+            this._encounterComboBox.Location = new Point(3, 514);
+            this._encounterComboBox.Name = "_encounterComboBox";
+            this._encounterComboBox.Size = new Size(290, 23);
+            this._encounterComboBox.TabIndex = 46;
+            // 
+            // _startEncounterButton
+            // 
+            this._startEncounterButton.Location = new Point(3, 543);
+            this._startEncounterButton.Name = "_startEncounterButton";
+            this._startEncounterButton.Size = new Size(220, 30);
+            this._startEncounterButton.TabIndex = 47;
+            this._startEncounterButton.Text = "Start Encounter";
+            this._startEncounterButton.UseVisualStyleBackColor = true;
+            // 
+            // _abilityLabel
+            // 
+            this._abilityLabel.AutoSize = true;
+            this._abilityLabel.Location = new Point(3, 588);
+            this._abilityLabel.Margin = new Padding(3, 12, 3, 0);
+            this._abilityLabel.Name = "_abilityLabel";
+            this._abilityLabel.Size = new Size(39, 15);
+            this._abilityLabel.TabIndex = 48;
+            this._abilityLabel.Text = "Ability";
+            // 
+            // _abilityComboBox
+            // 
+            this._abilityComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._abilityComboBox.FormattingEnabled = true;
+            this._abilityComboBox.Location = new Point(3, 606);
+            this._abilityComboBox.Name = "_abilityComboBox";
+            this._abilityComboBox.Size = new Size(290, 23);
+            this._abilityComboBox.TabIndex = 49;
+            // 
+            // _sourceParticipantLabel
+            // 
+            this._sourceParticipantLabel.AutoSize = true;
+            this._sourceParticipantLabel.Location = new Point(3, 632);
+            this._sourceParticipantLabel.Name = "_sourceParticipantLabel";
+            this._sourceParticipantLabel.Size = new Size(103, 15);
+            this._sourceParticipantLabel.TabIndex = 50;
+            this._sourceParticipantLabel.Text = "Source Participant";
+            // 
+            // _sourceParticipantTextBox
+            // 
+            this._sourceParticipantTextBox.Location = new Point(3, 650);
+            this._sourceParticipantTextBox.Name = "_sourceParticipantTextBox";
+            this._sourceParticipantTextBox.Size = new Size(220, 23);
+            this._sourceParticipantTextBox.TabIndex = 51;
+            this._sourceParticipantTextBox.Text = "player";
+            // 
+            // _targetParticipantLabel
+            // 
+            this._targetParticipantLabel.AutoSize = true;
+            this._targetParticipantLabel.Location = new Point(3, 676);
+            this._targetParticipantLabel.Name = "_targetParticipantLabel";
+            this._targetParticipantLabel.Size = new Size(99, 15);
+            this._targetParticipantLabel.TabIndex = 52;
+            this._targetParticipantLabel.Text = "Target Participant";
+            // 
+            // _targetParticipantTextBox
+            // 
+            this._targetParticipantTextBox.Location = new Point(3, 694);
+            this._targetParticipantTextBox.Name = "_targetParticipantTextBox";
+            this._targetParticipantTextBox.Size = new Size(220, 23);
+            this._targetParticipantTextBox.TabIndex = 53;
+            // 
+            // _useAbilityButton
+            // 
+            this._useAbilityButton.Location = new Point(3, 723);
+            this._useAbilityButton.Name = "_useAbilityButton";
+            this._useAbilityButton.Size = new Size(220, 30);
+            this._useAbilityButton.TabIndex = 54;
+            this._useAbilityButton.Text = "Use Ability";
+            this._useAbilityButton.UseVisualStyleBackColor = true;
+            // 
+            // _basicAttackButton
+            // 
+            this._basicAttackButton.Location = new Point(3, 759);
+            this._basicAttackButton.Name = "_basicAttackButton";
+            this._basicAttackButton.Size = new Size(220, 30);
+            this._basicAttackButton.TabIndex = 55;
+            this._basicAttackButton.Text = "Basic Attack";
+            this._basicAttackButton.UseVisualStyleBackColor = true;
+            // 
+            // _endTurnButton
+            // 
+            this._endTurnButton.Location = new Point(3, 795);
+            this._endTurnButton.Name = "_endTurnButton";
+            this._endTurnButton.Size = new Size(220, 30);
+            this._endTurnButton.TabIndex = 56;
+            this._endTurnButton.Text = "End Turn";
+            this._endTurnButton.UseVisualStyleBackColor = true;
+            // 
+            // _runAiButton
+            // 
+            this._runAiButton.Location = new Point(3, 831);
+            this._runAiButton.Name = "_runAiButton";
+            this._runAiButton.Size = new Size(220, 30);
+            this._runAiButton.TabIndex = 57;
+            this._runAiButton.Text = "Run AI";
+            this._runAiButton.UseVisualStyleBackColor = true;
+            // 
+            // _resolveEncounterButton
+            // 
+            this._resolveEncounterButton.Location = new Point(3, 867);
+            this._resolveEncounterButton.Name = "_resolveEncounterButton";
+            this._resolveEncounterButton.Size = new Size(220, 30);
+            this._resolveEncounterButton.TabIndex = 58;
+            this._resolveEncounterButton.Text = "Resolve Encounter";
+            this._resolveEncounterButton.UseVisualStyleBackColor = true;
+            // 
+            // _fleeEncounterButton
+            // 
+            this._fleeEncounterButton.Location = new Point(3, 903);
+            this._fleeEncounterButton.Name = "_fleeEncounterButton";
+            this._fleeEncounterButton.Size = new Size(220, 30);
+            this._fleeEncounterButton.TabIndex = 59;
+            this._fleeEncounterButton.Text = "Flee Encounter";
+            this._fleeEncounterButton.UseVisualStyleBackColor = true;
             // 
             // _equipmentSlotLabel
             // 

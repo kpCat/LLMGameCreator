@@ -72,6 +72,29 @@ public sealed class OutputApplier : IOutputApplier
             return;
         }
 
+        if (IsProgressionOutput(output))
+        {
+            var definition = package.Game.Progressions.FirstOrDefault(p => RuntimeStateHelpers.IdEquals(p.Id, output.Id));
+            if (definition == null)
+            {
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("output.progression_missing", $"Output references a missing progression: {output.Id}", output.Id));
+                return;
+            }
+
+            var progression = RuntimeStateHelpers.EnsureProgression(state, definition);
+            var previousStage = progression.StageId;
+            progression.Amount += output.Amount;
+            progression.StageId = RuntimeStateHelpers.ResolveProgressionStage(definition, progression.Amount);
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Changed progression {output.Id} by {Format(output.Amount)}", output.Id));
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.ProgressionChanged, $"Progression changed: {output.Id}", output.Id));
+            if (!string.Equals(previousStage, progression.StageId, StringComparison.Ordinal))
+            {
+                result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.ProgressionStageChanged, $"Progression stage changed: {output.Id} -> {progression.StageId}", output.Id));
+            }
+
+            return;
+        }
+
         if (RuntimeStateHelpers.KindEquals(output.Kind, "status") || RuntimeStateHelpers.KindEquals(output.Kind, "add_status"))
         {
             var targetId = string.IsNullOrWhiteSpace(output.Scope) ? state.PlayerEntityId : output.Scope!;
@@ -184,9 +207,15 @@ public sealed class OutputApplier : IOutputApplier
             || RuntimeStateHelpers.KindEquals(output.Kind, "change_resource")
             || RuntimeStateHelpers.KindEquals(output.Kind, "network_resource")
             || RuntimeStateHelpers.KindEquals(output.Kind, "abstract_resource")
-            || RuntimeStateHelpers.KindEquals(output.Kind, "progression")
             || RuntimeStateHelpers.KindEquals(output.Kind, "faction")
             || RuntimeStateHelpers.KindEquals(output.Kind, "reputation");
+    }
+
+    private static bool IsProgressionOutput(OutputDefinition output)
+    {
+        return RuntimeStateHelpers.KindEquals(output.Kind, "progression")
+            || RuntimeStateHelpers.KindEquals(output.Kind, "change_progression")
+            || RuntimeStateHelpers.KindEquals(output.Kind, "advance_progression");
     }
 
     private static string Format(double value)

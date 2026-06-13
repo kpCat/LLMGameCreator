@@ -45,6 +45,10 @@ public sealed class PrototypeLuaDeclarationMapper
             "resource_node" => CopyFields(declaration, index, diagnostics, "upsert_resource_node", "id", "name", "kind", "network_id", "entity_prototype_id", "production", "consumption", "storage", "conversion_inputs", "conversion_outputs", "requirements", "tags", "metadata"),
             "inventory" => CopyFields(declaration, index, diagnostics, "upsert_inventory", "id", "owner_kind", "owner_id", "slots", "stacks", "tags", "metadata"),
             "equipment_slot" => CopyFields(declaration, index, diagnostics, "upsert_equipment_slot", "id", "name", "allowed_tags", "allowed_kinds", "required_requirements", "metadata"),
+            "stat" => CopyFields(declaration, index, diagnostics, "upsert_stat", "id", "name", "kind", "description", "default_value", "min_value", "max_value", "icon_asset_id", "tags", "metadata"),
+            "progression" => CopyFields(declaration, index, diagnostics, "upsert_progression", "id", "name", "kind", "description", "stages", "tags", "metadata"),
+            "encounter" => CopyFields(declaration, index, diagnostics, "upsert_encounter", "id", "name", "kind", "participants", "actions", "start_requirements", "win_conditions", "lose_conditions", "rewards", "consequences", "loot_table_id", "default_seed", "tags", "metadata"),
+            "ability" => CopyFields(declaration, index, diagnostics, "upsert_ability", "id", "name", "kind", "requirements", "costs", "cooldown", "targeting", "range", "power", "resource_id", "tags", "stages", "learn_conditions", "effects", "metadata"),
             _ => UnknownType(declaration, index, diagnostics)
         };
     }

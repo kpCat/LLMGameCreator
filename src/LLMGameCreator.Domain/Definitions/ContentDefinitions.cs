@@ -31,10 +31,18 @@ public sealed class AbilityDefinition
     public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string Kind { get; set; } = "active";
+    public List<RequirementDefinition> Requirements { get; set; } = new List<RequirementDefinition>();
+    public List<CostDefinition> Costs { get; set; } = new List<CostDefinition>();
+    public int? Cooldown { get; set; }
+    public string? Targeting { get; set; }
+    public double? Range { get; set; }
+    public double? Power { get; set; }
+    public string? ResourceId { get; set; }
     public List<string> Tags { get; set; } = new List<string>();
     public List<AbilityStageDefinition> Stages { get; set; } = new List<AbilityStageDefinition>();
     public List<ConditionDefinition> LearnConditions { get; set; } = new List<ConditionDefinition>();
     public List<EffectDefinition> Effects { get; set; } = new List<EffectDefinition>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 }
 
 public sealed class AbilityStageDefinition
