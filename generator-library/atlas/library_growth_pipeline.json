@@ -1,0 +1,233 @@
+{
+  "schema_version": "0.1",
+  "id": "library_growth_pipeline/v1",
+  "title": "Generator Library Growth Pipeline",
+  "purpose": "Data-only seed registry that defines how LLMGameCreator may safely propose, generate, validate, stage, approve and activate new generator-library modules, atlas records and artifact contracts without treating LLM output as trusted code.",
+  "principles": [
+    "Capability gaps are described before files are generated.",
+    "A proposed module starts as a staged library growth proposal, not as an active runtime feature.",
+    "LLM may draft specs, prompts, docs, manifests, examples and deterministic Lua modules, but C# validators own promotion gates.",
+    "Generated Lua remains restricted: no io, os, debug, package, load, loadfile, dofile, network or filesystem access.",
+    "New capabilities, artifact contracts and runtime targets require human approval before they influence planning or export.",
+    "Small data/doc changes may be committed directly after shape and reference checks; executable Lua or C# changes require stronger gates.",
+    "Adult/NSFW support is modeled as optional tagged content overlays and artifact metadata, not as hidden behavior inside a module.",
+    "Library growth should prefer extending atlas/contracts/validators before adding custom C# integration."
+  ],
+  "proposal_kinds": [
+    {
+      "id": "proposal_kind/capability_gap/v1",
+      "title": "Capability Gap",
+      "purpose": "A missing capability, feature bundle, runtime target, validator or artifact contract discovered during game profile planning.",
+      "default_required_approval": true
+    },
+    {
+      "id": "proposal_kind/atlas_data_patch/v1",
+      "title": "Atlas Data Patch",
+      "purpose": "A data-only addition or correction to capability atlas, reference profiles, validation pipeline or artifact contract registry.",
+      "default_required_approval": false
+    },
+    {
+      "id": "proposal_kind/lua_generator_module/v1",
+      "title": "Lua Generator Module",
+      "purpose": "A restricted deterministic Lua module that produces a named artifact contract or IR output.",
+      "default_required_approval": true
+    },
+    {
+      "id": "proposal_kind/validator_rule/v1",
+      "title": "Validator Rule",
+      "purpose": "A deterministic validation rule or validation-level mapping for a known artifact contract.",
+      "default_required_approval": true
+    },
+    {
+      "id": "proposal_kind/artifact_contract/v1",
+      "title": "Artifact Contract",
+      "purpose": "A new data-only contract that future generators may produce and validators/exporters may consume.",
+      "default_required_approval": true
+    },
+    {
+      "id": "proposal_kind/unity_ir_adapter/v1",
+      "title": "Unity IR Adapter",
+      "purpose": "A Unity-facing adapter plan or IR shape that maps compiled game data to Unity runtime shell features.",
+      "default_required_approval": true
+    }
+  ],
+  "pipeline_states": [
+    "gap_detected",
+    "proposal_drafted",
+    "proposal_normalized",
+    "proposal_validated",
+    "spec_staged",
+    "generation_prompt_prepared",
+    "files_generated",
+    "static_checks_passed",
+    "examples_checked",
+    "registry_previewed",
+    "human_review_required",
+    "approved",
+    "activated",
+    "rejected",
+    "archived"
+  ],
+  "pipeline_steps": [
+    {
+      "id": "library_growth.step_0_detect_gap",
+      "order": 0,
+      "title": "Detect capability gap",
+      "owner": "capability_selector_or_human",
+      "inputs": ["game_profile_v1", "feature_bundle_v1", "capability_atlas"],
+      "outputs": ["library_growth_proposal_v1"],
+      "automatic": true,
+      "required_validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs"]
+    },
+    {
+      "id": "library_growth.step_1_draft_spec",
+      "order": 1,
+      "title": "Draft module or data spec",
+      "owner": "designer_llm_or_human_architect",
+      "inputs": ["library_growth_proposal_v1", "artifact_contracts", "validation_pipeline"],
+      "outputs": ["library_module_spec_v1"],
+      "automatic": false,
+      "required_validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics"]
+    },
+    {
+      "id": "library_growth.step_2_prepare_strict_prompt",
+      "order": 2,
+      "title": "Prepare strict generation prompt",
+      "owner": "prompt_builder",
+      "inputs": ["library_module_spec_v1", "lua_contract_rules", "artifact_contracts"],
+      "outputs": ["strict_generation_prompt_v1"],
+      "automatic": true,
+      "required_validation_levels": ["validation.level_0_json_shape", "validation.level_2_contract_semantics"]
+    },
+    {
+      "id": "library_growth.step_3_generate_files",
+      "order": 3,
+      "title": "Generate staged files",
+      "owner": "batch_generator_llm_or_human",
+      "inputs": ["strict_generation_prompt_v1"],
+      "outputs": ["staged_file_set_v1"],
+      "automatic": false,
+      "required_validation_levels": ["validation.level_0_json_shape"]
+    },
+    {
+      "id": "library_growth.step_4_static_checks",
+      "order": 4,
+      "title": "Run static checks",
+      "owner": "validator_service",
+      "inputs": ["staged_file_set_v1"],
+      "outputs": ["validation_report_v1"],
+      "automatic": true,
+      "required_validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics"]
+    },
+    {
+      "id": "library_growth.step_5_examples_and_registry_preview",
+      "order": 5,
+      "title": "Check examples and registry preview",
+      "owner": "validator_service",
+      "inputs": ["staged_file_set_v1", "capability_atlas", "artifact_contracts"],
+      "outputs": ["registry_preview_v1", "validation_report_v1"],
+      "automatic": true,
+      "required_validation_levels": ["validation.level_3_cross_artifact_consistency", "validation.level_4_headless_smoke_test"]
+    },
+    {
+      "id": "library_growth.step_6_review_and_activate",
+      "order": 6,
+      "title": "Review and activate",
+      "owner": "human_reviewer",
+      "inputs": ["registry_preview_v1", "validation_report_v1", "staged_file_set_v1"],
+      "outputs": ["active_library_patch_v1"],
+      "automatic": false,
+      "required_validation_levels": ["validation.level_6_human_approval"]
+    }
+  ],
+  "strict_generation_prompt_requirements": [
+    "State target file paths exactly and forbid extra root-level files.",
+    "State the artifact contract produced by every generator or data file.",
+    "State canonical manifest fields and prohibit historical aliases.",
+    "For Lua modules, require manifest, validate_config(config), generate(input, ctx), deterministic output and JSON-serializable data only.",
+    "For generated data, require exact ids/enums copied from input and forbid hidden activation of optional content overlays.",
+    "For adult/NSFW-aware additions, require explicit content tags, overlay ids and export/platform filter metadata, while keeping mechanics functional without the overlay.",
+    "Require diagnostics instead of thrown errors for normal validation failures.",
+    "Require examples and minimal docs for every non-trivial module or contract."
+  ],
+  "static_check_categories": [
+    {
+      "id": "static_check/path_layout",
+      "title": "Path layout",
+      "checks": ["paths_under_generator_library_or_docs", "no_root_level_leakage", "declared_files_exist"]
+    },
+    {
+      "id": "static_check/manifest_contract",
+      "title": "Manifest contract",
+      "checks": ["canonical_fields", "no_alias_fields", "module_ids_unique", "module_paths_exist", "capabilities_valid"]
+    },
+    {
+      "id": "static_check/lua_safety",
+      "title": "Lua safety",
+      "checks": ["no_io", "no_os", "no_debug", "no_package", "no_load", "no_dofile", "no_external_require", "no_global_writes", "no_math_random_direct"]
+    },
+    {
+      "id": "static_check/artifact_contract",
+      "title": "Artifact contract compatibility",
+      "checks": ["known_contract_or_proposal", "required_sections_present", "must_not_not_violated", "validation_levels_declared"]
+    },
+    {
+      "id": "static_check/content_overlay",
+      "title": "Content overlay boundaries",
+      "checks": ["adult_nsfw_requires_explicit_overlay", "content_tags_present", "core_mechanics_do_not_depend_on_overlay", "export_filter_metadata_present"]
+    }
+  ],
+  "activation_rules": [
+    {
+      "id": "activation_rule/data_doc_seed",
+      "applies_to": ["proposal_kind/atlas_data_patch/v1"],
+      "required_outcomes": ["level_0_pass", "level_1_pass"],
+      "human_review": "recommended_for_new_domains",
+      "notes": "Small data/doc seeds may be committed without Codex when paths and JSON are valid."
+    },
+    {
+      "id": "activation_rule/new_lua_module",
+      "applies_to": ["proposal_kind/lua_generator_module/v1"],
+      "required_outcomes": ["level_0_pass", "level_1_pass", "level_2_pass", "level_3_pass", "static_lua_safety_pass", "examples_pass"],
+      "human_review": "required",
+      "notes": "Lua modules are not active just because files exist. They become active after manifest import/integrity checks and approval."
+    },
+    {
+      "id": "activation_rule/new_artifact_contract",
+      "applies_to": ["proposal_kind/artifact_contract/v1"],
+      "required_outcomes": ["level_0_pass", "level_1_pass", "level_2_pass", "cross_reference_pass"],
+      "human_review": "required",
+      "notes": "New contracts affect future generators, validators and exporters."
+    },
+    {
+      "id": "activation_rule/unity_runtime_target",
+      "applies_to": ["proposal_kind/unity_ir_adapter/v1"],
+      "required_outcomes": ["level_0_pass", "level_1_pass", "level_2_pass", "level_5_export_dry_run_pass"],
+      "human_review": "required",
+      "notes": "Unity adapters must remain IR/export-bound, not arbitrary generated source execution."
+    }
+  ],
+  "model_roles": [
+    {
+      "id": "model_role/designer_26b",
+      "title": "Designer / lore / architecture model",
+      "typical_model": "Gemma 4 26B A4B Instruct Ultra Uncensored Heretic or stronger",
+      "allowed_tasks": ["game_profile_draft", "lore_discussion", "capability_gap_analysis", "feature_bundle_spec_draft", "strict_prompt_draft"],
+      "not_allowed_tasks": ["trusted_runtime_mutation", "unreviewed_code_activation"]
+    },
+    {
+      "id": "model_role/batch_generator_e4b",
+      "title": "Batch generator model",
+      "typical_model": "Gemma 4 E4B Instruct Ultra Uncensored Heretic or similar small fast model",
+      "allowed_tasks": ["semantic_pack_generation", "text_pack_generation", "example_generation", "data_doc_seed_generation", "repairable_json_fix"],
+      "not_allowed_tasks": ["inventing_active_capabilities_without_proposal", "direct_unity_code_trust", "bypassing_validation"]
+    }
+  ],
+  "non_goals": [
+    "Do not make every new idea require C# and Unity work immediately.",
+    "Do not let generated Lua become unrestricted runtime code.",
+    "Do not treat a generated file as active just because it compiles or parses.",
+    "Do not require manual review for every low-risk generated item; use validation, repair loops and sampling.",
+    "Do not hard-code adult/NSFW behavior into core mechanics; keep it as explicit optional overlay metadata."
+  ]
+}
