@@ -1,0 +1,248 @@
+{
+  "schema_version": "0.1",
+  "id": "prompt_context_pack_map/v1",
+  "title": "Prompt Context Pack Map",
+  "purpose": "Data-only seed map that defines how LLMGameCreator should assemble small, relevant prompt context packs for model workflows without dumping the whole project, repository or lore into every request.",
+  "principles": [
+    "Context is a selected artifact, not an accidental full project dump.",
+    "Every model request should declare role, task kind, artifact contract, expected output schema and allowed context sources.",
+    "Designer prompts may include broader lore and discussion history; batch generation prompts must include only the minimal contract, rules, enums, relevant facts and examples required for one artifact.",
+    "Prompt context packs are data-only and traceable: each included section should identify source, reason, freshness and token budget class.",
+    "Large lore is reduced into canonical summaries, section summaries and tagged snippets before it reaches small batch models.",
+    "Adult/NSFW context is included only when the active game profile explicitly enables the corresponding content overlay; it remains tagged, filterable and export-aware.",
+    "Repair prompts must include the original input, invalid output, validation report and the exact contract; they must not invite unrelated redesign.",
+    "Context selectors may use deterministic tags first and optional model-assisted ranking only for ambiguous/high-value tasks."
+  ],
+  "context_pack_states": [
+    "draft",
+    "selected",
+    "budgeted",
+    "rendered",
+    "sent",
+    "response_received",
+    "validated",
+    "archived"
+  ],
+  "budget_classes": [
+    {
+      "id": "budget/tiny/v1",
+      "target_tokens": "1k-4k",
+      "purpose": "Strict repair, one small JSON artifact, enum-preserving normalization or targeted scoring."
+    },
+    {
+      "id": "budget/small/v1",
+      "target_tokens": "4k-12k",
+      "purpose": "Single artifact generation with schema, rules, few examples and relevant project snippets."
+    },
+    {
+      "id": "budget/medium/v1",
+      "target_tokens": "12k-32k",
+      "purpose": "Batch generation, semantic pack expansion, profile-scoped design tasks or multi-artifact consistency checks."
+    },
+    {
+      "id": "budget/large/v1",
+      "target_tokens": "32k-64k",
+      "purpose": "High-level design discussion, complex profile negotiation, canon consolidation or architecture planning."
+    }
+  ],
+  "context_source_types": [
+    {
+      "id": "source/game_profile/v1",
+      "priority": "high",
+      "summary": "Active game profile, runtime targets, required feature bundles and content overlays."
+    },
+    {
+      "id": "source/artifact_contract/v1",
+      "priority": "required",
+      "summary": "Exact contract that the model must produce or repair."
+    },
+    {
+      "id": "source/output_schema/v1",
+      "priority": "required_for_structured_output",
+      "summary": "JSON schema or compact shape definition for strict structured output."
+    },
+    {
+      "id": "source/canonical_enums/v1",
+      "priority": "required_for_enum_fields",
+      "summary": "Allowed ids, enum values and fields that must be copied exactly."
+    },
+    {
+      "id": "source/design_knowledge_summary/v1",
+      "priority": "high_for_design",
+      "summary": "Canonical compressed summary of lore, rules, style, mechanics and user decisions."
+    },
+    {
+      "id": "source/tagged_snippets/v1",
+      "priority": "medium",
+      "summary": "Relevant snippets selected by domain, capability, artifact contract, tags and active profile."
+    },
+    {
+      "id": "source/examples/v1",
+      "priority": "medium",
+      "summary": "Few-shot examples or negative examples for one contract. Must be short and representative."
+    },
+    {
+      "id": "source/validation_report/v1",
+      "priority": "required_for_repair",
+      "summary": "Structured validation errors, warnings and repair targets."
+    },
+    {
+      "id": "source/previous_outputs_summary/v1",
+      "priority": "optional",
+      "summary": "Compact summary or dedupe set from prior generated artifacts; never unbounded full logs."
+    },
+    {
+      "id": "source/content_overlay_rules/v1",
+      "priority": "conditional",
+      "summary": "Adult/NSFW, horror/gore or other overlay rules only when explicitly enabled by profile."
+    }
+  ],
+  "pack_templates": [
+    {
+      "id": "context_pack/design_discussion/v1",
+      "title": "Design Discussion Pack",
+      "intended_roles": ["role/designer_llm/v1"],
+      "recommended_budget": "budget/large/v1",
+      "required_sources": ["source/game_profile/v1", "source/design_knowledge_summary/v1"],
+      "optional_sources": ["source/tagged_snippets/v1", "source/content_overlay_rules/v1", "source/examples/v1"],
+      "must_include": ["current user goal", "known decisions", "open questions", "hard constraints", "do-not-change list"],
+      "must_not_include": ["raw full repository", "full prior chat logs", "unbounded generated artifacts"],
+      "expected_outputs": ["game_profile_v1", "feature_bundle_v1", "library_growth_proposal_v1", "design_decision_notes"]
+    },
+    {
+      "id": "context_pack/strict_single_json_artifact/v1",
+      "title": "Strict Single JSON Artifact Pack",
+      "intended_roles": ["role/batch_generator_llm/v1"],
+      "recommended_budget": "budget/small/v1",
+      "required_sources": ["source/artifact_contract/v1", "source/output_schema/v1", "source/canonical_enums/v1", "source/game_profile/v1"],
+      "optional_sources": ["source/tagged_snippets/v1", "source/examples/v1", "source/content_overlay_rules/v1"],
+      "must_include": ["exact output object shape", "copy-exact enum/id rules", "forbidden extra prose rule", "one task input", "validation summary hints"],
+      "must_not_include": ["multiple unrelated tasks", "large lore dumps", "ambiguous field aliases", "permission to invent new canon facts unless requested"],
+      "expected_outputs": ["semantic_pack_v1", "text_pack_v1", "dialogue_pack_v1", "rule_pack_v1", "formula_pack_v1", "content_overlay_pack_v1"]
+    },
+    {
+      "id": "context_pack/batch_generation_round_robin/v1",
+      "title": "Batch Generation Round-Robin Pack",
+      "intended_roles": ["role/batch_generator_llm/v1"],
+      "recommended_budget": "budget/medium/v1",
+      "required_sources": ["source/artifact_contract/v1", "source/output_schema/v1", "source/canonical_enums/v1", "source/previous_outputs_summary/v1"],
+      "optional_sources": ["source/tagged_snippets/v1", "source/examples/v1", "source/content_overlay_rules/v1"],
+      "must_include": ["batch item input", "dedupe hints", "strict JSON-only rule", "same contract for every item", "small compact memory of prior outputs"],
+      "must_not_include": ["full previous responses", "cross-task hidden dependencies", "unbounded context growth"],
+      "expected_outputs": ["many single contract-bound artifacts"]
+    },
+    {
+      "id": "context_pack/targeted_repair/v1",
+      "title": "Targeted Repair Pack",
+      "intended_roles": ["role/repair_llm/v1"],
+      "recommended_budget": "budget/tiny/v1",
+      "required_sources": ["source/artifact_contract/v1", "source/output_schema/v1", "source/canonical_enums/v1", "source/validation_report/v1"],
+      "optional_sources": ["source/original_input/v1", "source/invalid_output/v1"],
+      "must_include": ["exact failed fields", "original input", "invalid output", "repair constraints", "no redesign rule"],
+      "must_not_include": ["new creative instructions", "unrelated artifact examples", "permission to change ids/enums"],
+      "expected_outputs": ["repaired version of the same artifact contract"]
+    },
+    {
+      "id": "context_pack/lua_module_proposal/v1",
+      "title": "Lua Module Proposal Pack",
+      "intended_roles": ["role/designer_llm/v1", "role/batch_generator_llm/v1"],
+      "recommended_budget": "budget/medium/v1",
+      "required_sources": ["source/game_profile/v1", "source/artifact_contract/v1", "source/output_schema/v1", "source/canonical_enums/v1"],
+      "optional_sources": ["source/tagged_snippets/v1", "source/examples/v1"],
+      "must_include": ["capability gap", "module id", "input/output/config schemas", "Lua safety restrictions", "manifest requirements", "examples", "validation expectations"],
+      "must_not_include": ["runtime authority", "filesystem/network access", "hidden GamePackage mutation", "custom C# assumptions"],
+      "expected_outputs": ["library_growth_proposal_v1", "lua_module_spec_v1", "atlas_data_patch_v1"]
+    },
+    {
+      "id": "context_pack/quality_sample_review/v1",
+      "title": "Quality Sample Review Pack",
+      "intended_roles": ["role/quality_scorer_llm/v1"],
+      "recommended_budget": "budget/small/v1",
+      "required_sources": ["source/artifact_contract/v1", "source/examples/v1", "source/validation_report/v1"],
+      "optional_sources": ["source/design_knowledge_summary/v1", "source/content_overlay_rules/v1"],
+      "must_include": ["small sampled artifacts", "quality rubric", "known constraints", "report format"],
+      "must_not_include": ["all generated artifacts", "authority to approve runtime changes", "unbounded rewrite request"],
+      "expected_outputs": ["quality_review_report_v1", "repair_suggestions_v1"]
+    }
+  ],
+  "selection_pipeline": [
+    {
+      "id": "context_selection.step_0_identify_task",
+      "order": 0,
+      "goal": "Determine role, artifact contract, game profile, runtime target and whether content overlays are enabled.",
+      "automatic": true
+    },
+    {
+      "id": "context_selection.step_1_collect_candidates",
+      "order": 1,
+      "goal": "Collect candidate context sections from profile, contracts, schemas, enums, summaries, snippets, examples, prior outputs and validation reports.",
+      "automatic": true
+    },
+    {
+      "id": "context_selection.step_2_filter_by_permissions",
+      "order": 2,
+      "goal": "Drop disabled overlays, stale drafts, unapproved canon, irrelevant runtime targets and unrelated domains.",
+      "automatic": true
+    },
+    {
+      "id": "context_selection.step_3_rank_by_relevance",
+      "order": 3,
+      "goal": "Rank by exact contract match, capability tags, entity ids, validation targets, profile requirements and freshness.",
+      "automatic": true
+    },
+    {
+      "id": "context_selection.step_4_budget",
+      "order": 4,
+      "goal": "Fit selected context into the role budget by preferring schemas/enums/rules over verbose lore and using summaries before raw snippets.",
+      "automatic": true
+    },
+    {
+      "id": "context_selection.step_5_render_prompt_pack",
+      "order": 5,
+      "goal": "Render a traceable prompt pack with sections, source ids, reasons, constraints and expected output instructions.",
+      "automatic": true
+    },
+    {
+      "id": "context_selection.step_6_archive_trace",
+      "order": 6,
+      "goal": "Store prompt pack metadata, source list, token estimate and output validation result for debugging and repair loops.",
+      "automatic": true
+    }
+  ],
+  "priority_rules": [
+    "Required artifact contract and schema beat lore.",
+    "Canonical ids/enums beat stylistic examples.",
+    "Validation failure targets beat generic context.",
+    "Approved canon beats generated draft facts.",
+    "Profile-enabled overlays beat disabled overlay snippets; disabled overlay snippets must be excluded.",
+    "Summaries beat raw long text unless exact wording is required.",
+    "Recent explicit user decisions beat older inferred preferences."
+  ],
+  "anti_patterns": [
+    "Dumping entire repository or all JSON files into every prompt.",
+    "Using previous model outputs as trusted facts without validation/promotion.",
+    "Mixing several artifact contracts in one strict output request.",
+    "Giving the batch model broad creative permission while expecting enum-perfect JSON.",
+    "Including adult/NSFW context when the active project/profile did not enable that overlay.",
+    "Repair prompts that ask the model to rewrite the whole system instead of fixing exact validation failures.",
+    "Letting context grow linearly with every generated item."
+  ],
+  "trace_record_shape": {
+    "id": "prompt_context_trace_v1",
+    "required_fields": [
+      "trace_id",
+      "role_id",
+      "pack_template_id",
+      "artifact_contract_id",
+      "game_profile_id",
+      "enabled_overlays",
+      "included_sources",
+      "excluded_sources",
+      "budget_class",
+      "estimated_tokens",
+      "model_tier",
+      "created_utc"
+    ],
+    "notes": "Trace records are metadata for debugging, reproducibility and repair; they do not store unrestricted private chat dumps by default."
+  }
+}
