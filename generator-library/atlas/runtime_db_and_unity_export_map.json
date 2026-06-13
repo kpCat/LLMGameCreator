@@ -1,0 +1,284 @@
+{
+  "schema_version": "0.1",
+  "id": "runtime_db_and_unity_export_map/v1",
+  "title": "Runtime DB and Unity Export Map",
+  "purpose": "Data-only seed map that defines how approved LLMGameCreator artifacts should be compiled into runtime databases, save overlays, Unity IR, asset indexes and Unity runtime shell inputs.",
+  "principles": [
+    "Unity runtime consumes compiled runtime data, Unity IR, asset indexes and save overlays; it does not consume unbounded loose generated JSON files at runtime.",
+    "GamePackage and approved artifacts remain authoring/source data; runtime.db is a compiled read-optimized product.",
+    "Mutable player/world state is stored separately from immutable compiled content, usually in save.db or an equivalent save overlay.",
+    "Lua and LLM workflows may propose runtime DB build plans or Unity IR, but C# build/export services own compilation, indexing, validation, migration and export.",
+    "Unity adapters bind data to existing runtime shell capabilities; they should not require custom generated C# for every game mechanic.",
+    "Asset generation requests, including adult/NSFW image/audio/future animation requests when enabled, remain tagged artifacts and must pass export/platform filters before becoming asset references.",
+    "The runtime database is an optimization and deployment artifact, not the only source of truth for design history or generation decisions.",
+    "Every table, index, Unity IR group and asset binding must be traceable back to approved source artifacts and contract ids."
+  ],
+  "source_artifacts": [
+    "game_package_patch_v1",
+    "semantic_pack_v1",
+    "text_pack_v1",
+    "morphology_pack_v1",
+    "dialogue_pack_v1",
+    "rule_pack_v1",
+    "formula_pack_v1",
+    "content_overlay_pack_v1",
+    "unity_ir_v1",
+    "runtime_db_build_plan_v1",
+    "asset_request_pack_v1",
+    "audio_request_pack_v1",
+    "animation_request_pack_v1",
+    "asset_index_v1"
+  ],
+  "compiled_outputs": [
+    {
+      "id": "compiled/runtime.db",
+      "kind": "runtime_database",
+      "mutability": "read_only_in_player_runtime",
+      "purpose": "Read-optimized compiled game content, semantic data, text packs, rules, formulas, asset references and Unity binding data."
+    },
+    {
+      "id": "compiled/save_schema.db",
+      "kind": "save_schema_database_or_schema_artifact",
+      "mutability": "schema_only",
+      "purpose": "Schema/migration description for mutable player saves."
+    },
+    {
+      "id": "saves/save_001.db",
+      "kind": "save_database",
+      "mutability": "mutable_runtime_state",
+      "purpose": "Player/world state, NPC memory, quest progress, inventory state, chunk deltas and event log."
+    },
+    {
+      "id": "compiled/asset_index.json_or_db",
+      "kind": "asset_index",
+      "mutability": "read_only_in_player_runtime",
+      "purpose": "Asset ids, generated/imported asset references, variants, tags, platform filters and Unity addressable/prefab bindings."
+    },
+    {
+      "id": "compiled/unity_ir.json_or_db",
+      "kind": "unity_ir_bundle",
+      "mutability": "read_only_in_player_runtime",
+      "purpose": "Unity-facing scene, UI, camera, input, prefab, VFX, audio and runtime shell binding descriptors."
+    },
+    {
+      "id": "compiled/build_manifest.json",
+      "kind": "build_manifest",
+      "mutability": "read_only",
+      "purpose": "Build version, source artifact hashes, schema versions, contract ids, export target and validation summary."
+    }
+  ],
+  "storage_partitions": [
+    {
+      "id": "partition/authoring_source/v1",
+      "title": "Authoring Source",
+      "examples": ["GamePackage JSON", "Design DB", "approved generated artifacts", "generator library"],
+      "runtime_role": "not loaded directly by final Unity runtime except in debug/editor preview"
+    },
+    {
+      "id": "partition/static_runtime_content/v1",
+      "title": "Static Runtime Content",
+      "examples": ["items", "entities", "quests", "dialogue lines", "semantic traits", "formulas", "asset refs"],
+      "runtime_role": "loaded from runtime.db or prebuilt runtime bundles"
+    },
+    {
+      "id": "partition/mutable_save_state/v1",
+      "title": "Mutable Save State",
+      "examples": ["world variables", "NPC memory", "quest state", "inventory state", "chunk deltas", "event log"],
+      "runtime_role": "loaded and written by save.db or equivalent save overlay"
+    },
+    {
+      "id": "partition/unity_binding_data/v1",
+      "title": "Unity Binding Data",
+      "examples": ["prefab bindings", "UI screen descriptors", "input actions", "camera modes", "VFX/audio events"],
+      "runtime_role": "consumed by Unity runtime shell adapters"
+    }
+  ],
+  "runtime_db_table_groups": [
+    {
+      "id": "table_group/core_identity/v1",
+      "tables": ["content_items", "content_tags", "source_artifacts", "contract_versions", "build_metadata"],
+      "required_indexes": ["idx_content_items_kind", "idx_content_tags_tag", "idx_source_artifacts_contract"],
+      "purpose": "Universal lookup, traceability and versioning."
+    },
+    {
+      "id": "table_group/world_and_entities/v1",
+      "tables": ["worlds", "regions", "maps", "chunks", "tiles", "entity_prototypes", "entity_instances", "components"],
+      "required_indexes": ["idx_chunks_region_coord", "idx_entities_prototype", "idx_components_entity_type"],
+      "purpose": "World structure, maps, chunks, prototypes and placed entities."
+    },
+    {
+      "id": "table_group/items_equipment_inventory/v1",
+      "tables": ["items", "item_variants", "equipment_slots", "equipment_layouts", "inventory_containers", "loot_tables"],
+      "required_indexes": ["idx_items_kind", "idx_items_tags", "idx_loot_tables_id"],
+      "purpose": "Items, equipment, paper-doll/grid inventory and loot."
+    },
+    {
+      "id": "table_group/dialogue_text_morphology/v1",
+      "tables": ["dialogues", "dialogue_nodes", "dialogue_choices", "text_templates", "surface_variants", "morphology_lexemes", "phrase_plans"],
+      "required_indexes": ["idx_dialogue_npc_intent", "idx_text_templates_intent_style", "idx_morphology_lemma"],
+      "purpose": "Dialogue graphs, text realization, localized variants and morphology lookup."
+    },
+    {
+      "id": "table_group_rules_formulas_combat/v1",
+      "tables": ["rules", "rule_triggers", "formulas", "abilities", "statuses", "encounters", "combat_profiles"],
+      "required_indexes": ["idx_rules_trigger", "idx_formulas_id", "idx_abilities_kind"],
+      "purpose": "Data-driven mechanics, formulas, abilities, combat and status effects."
+    },
+    {
+      "id": "table_group_factions_quests_reputation/v1",
+      "tables": ["factions", "relationships", "reputation_tracks", "quests", "quest_stages", "objectives", "narrative_flags"],
+      "required_indexes": ["idx_quests_state", "idx_reputation_subject", "idx_objectives_quest"],
+      "purpose": "Faction, reputation, quest and narrative progression data."
+    },
+    {
+      "id": "table_group_assets_and_unity_bindings/v1",
+      "tables": ["asset_refs", "asset_variants", "prefab_bindings", "ui_screens", "audio_events", "vfx_events", "animation_requests"],
+      "required_indexes": ["idx_asset_refs_kind", "idx_prefab_bindings_content", "idx_ui_screens_mode"],
+      "purpose": "Asset and Unity runtime shell binding data."
+    },
+    {
+      "id": "table_group_content_overlays/v1",
+      "tables": ["content_overlays", "content_rating_tags", "export_filters", "platform_constraints"],
+      "required_indexes": ["idx_content_overlay_id", "idx_content_rating_tag", "idx_export_filter_target"],
+      "purpose": "Optional adult/NSFW, horror/gore and other tagged content overlays with export-aware filters."
+    }
+  ],
+  "save_db_table_groups": [
+    {
+      "id": "save_group/world_state/v1",
+      "tables": ["world_variables", "entity_state", "chunk_deltas", "visited_locations", "runtime_event_log"],
+      "purpose": "Mutable state produced by gameplay."
+    },
+    {
+      "id": "save_group/actor_state/v1",
+      "tables": ["party_state", "character_state", "inventory_state", "equipment_state", "status_state"],
+      "purpose": "Party/player/NPC mutable state."
+    },
+    {
+      "id": "save_group/social_narrative_state/v1",
+      "tables": ["npc_memory", "relationship_state", "reputation_state", "quest_state", "dialogue_history"],
+      "purpose": "Narrative, social and dialogue memory state."
+    }
+  ],
+  "unity_ir_groups": [
+    {
+      "id": "unity_ir_group/runtime_shell/v1",
+      "descriptors": ["runtime_target", "scene_mode", "camera_mode", "input_mode", "runtime_services"],
+      "examples": ["pseudo3d_party_rpg", "isometric_city_builder", "visual_novel", "automation_factory"],
+      "purpose": "Selects Unity runtime shell mode and core services."
+    },
+    {
+      "id": "unity_ir_group/prefab_binding/v1",
+      "descriptors": ["entity_prefab_binding", "item_prefab_binding", "tile_prefab_binding", "vfx_prefab_binding"],
+      "purpose": "Maps content ids to Unity prefabs/addressables without generating gameplay code."
+    },
+    {
+      "id": "unity_ir_group/ui/v1",
+      "descriptors": ["screen", "panel", "widget", "list_binding", "drag_drop_region", "paper_doll_slot", "dialogue_layout"],
+      "purpose": "Data-driven UI layout and binding hints for Unity runtime UI."
+    },
+    {
+      "id": "unity_ir_group/audio_vfx/v1",
+      "descriptors": ["audio_event", "music_state", "vfx_event", "animation_request", "voice_request"],
+      "purpose": "Audio, VFX and future animation hooks tied to approved content and runtime events."
+    },
+    {
+      "id": "unity_ir_group/navigation_and_world_view/v1",
+      "descriptors": ["tilemap_view", "grid_step_view", "pseudo3d_billboard_view", "isometric_view", "region_map_view"],
+      "purpose": "World visualization and navigation adapters."
+    }
+  ],
+  "export_pipeline": [
+    {
+      "id": "export.step_0_collect_approved_sources",
+      "order": 0,
+      "inputs": ["GamePackage", "approved artifacts", "asset index", "content overlay settings"],
+      "outputs": ["export_source_set_v1"],
+      "required_validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs"]
+    },
+    {
+      "id": "export.step_1_normalize_contracts",
+      "order": 1,
+      "inputs": ["export_source_set_v1"],
+      "outputs": ["normalized_export_set_v1"],
+      "required_validation_levels": ["validation.level_2_contract_semantics"]
+    },
+    {
+      "id": "export.step_2_build_runtime_db_plan",
+      "order": 2,
+      "inputs": ["normalized_export_set_v1", "runtime_db_build_plan_v1"],
+      "outputs": ["resolved_runtime_db_build_plan_v1"],
+      "required_validation_levels": ["validation.level_3_cross_artifact_consistency"]
+    },
+    {
+      "id": "export.step_3_compile_runtime_db",
+      "order": 3,
+      "inputs": ["resolved_runtime_db_build_plan_v1"],
+      "outputs": ["compiled/runtime.db", "compiled/build_manifest.json"],
+      "required_validation_levels": ["validation.level_4_headless_smoke_test"]
+    },
+    {
+      "id": "export.step_4_compile_unity_ir_and_asset_index",
+      "order": 4,
+      "inputs": ["unity_ir_v1", "asset_index_v1", "compiled/runtime.db"],
+      "outputs": ["compiled/unity_ir.json_or_db", "compiled/asset_index.json_or_db"],
+      "required_validation_levels": ["validation.level_5_export_dry_run"]
+    },
+    {
+      "id": "export.step_5_package_runtime_build_inputs",
+      "order": 5,
+      "inputs": ["compiled/runtime.db", "compiled/unity_ir.json_or_db", "compiled/asset_index.json_or_db", "compiled/build_manifest.json"],
+      "outputs": ["unity_runtime_input_bundle_v1"],
+      "required_validation_levels": ["validation.level_5_export_dry_run"]
+    }
+  ],
+  "runtime_load_pipeline": [
+    "read_build_manifest",
+    "open_runtime_db_read_only",
+    "open_or_create_save_db",
+    "validate_schema_versions",
+    "load_runtime_target_config",
+    "load_asset_index",
+    "initialize_unity_runtime_shell",
+    "bind_ui_and_prefabs",
+    "run_headless_or_unity_smoke_checks",
+    "enter_game_loop"
+  ],
+  "performance_rules": [
+    "Use many small authoring files if convenient, but compile them into indexed runtime data before Unity player runtime.",
+    "Prefer stable ids and indexed lookups over scanning JSON arrays at runtime.",
+    "Keep heavy generation, normalization and morphology compilation out of the final player runtime.",
+    "Use chunk/region/entity indexes for large or infinite worlds.",
+    "Use content tags and export filters for optional overlays instead of duplicating entire data sets.",
+    "Keep runtime.db read-only during play; write mutable data into save.db/save overlays.",
+    "Record source artifact hashes so compiled data can be invalidated and rebuilt deterministically."
+  ],
+  "profile_target_mappings": [
+    {
+      "profile": "profile/might_and_magic_like_party_rpg/v1",
+      "preferred_runtime_targets": ["pseudo3d", "first_person_grid", "unity3d"],
+      "important_unity_ir_groups": ["unity_ir_group/runtime_shell/v1", "unity_ir_group/navigation_and_world_view/v1", "unity_ir_group/ui/v1", "unity_ir_group/prefab_binding/v1"],
+      "important_table_groups": ["table_group/world_and_entities/v1", "table_group/items_equipment_inventory/v1", "table_group/dialogue_text_morphology/v1", "table_group_rules_formulas_combat/v1"]
+    },
+    {
+      "profile": "profile/anno1404_like_city_builder_conquest/v1",
+      "preferred_runtime_targets": ["city_builder", "isometric", "unity3d", "unity2d"],
+      "important_unity_ir_groups": ["unity_ir_group/runtime_shell/v1", "unity_ir_group/ui/v1", "unity_ir_group/navigation_and_world_view/v1"],
+      "important_table_groups": ["table_group/world_and_entities/v1", "table_group_factions_quests_reputation/v1", "table_group_assets_and_unity_bindings/v1"]
+    },
+    {
+      "profile": "profile/the_last_sovereign_like_narrative_political_rpg/v1",
+      "preferred_runtime_targets": ["visual_novel", "unity2d", "unity3d"],
+      "important_unity_ir_groups": ["unity_ir_group/ui/v1", "unity_ir_group/audio_vfx/v1", "unity_ir_group/prefab_binding/v1"],
+      "important_table_groups": ["table_group/dialogue_text_morphology/v1", "table_group_factions_quests_reputation/v1", "table_group_content_overlays/v1"]
+    }
+  ],
+  "must_not": [
+    "Do not make Unity runtime scan arbitrary generator-library Lua files.",
+    "Do not make Unity runtime trust raw LLM output.",
+    "Do not mix immutable compiled content and mutable player save state without a clear partition.",
+    "Do not silently enable adult/NSFW overlays during export.",
+    "Do not require custom generated C# for every small feature when a data-driven Unity adapter can consume IR.",
+    "Do not treat runtime.db as the only source of truth for authoring or design history."
+  ]
+}
