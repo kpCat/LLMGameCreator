@@ -1,0 +1,368 @@
+{
+  "schema_version": "0.1",
+  "id": "validation_pipeline/v1",
+  "title": "Validation Pipeline Atlas",
+  "purpose": "Data-only seed registry that describes validation levels, gates, outcomes, repair policies and promotion rules for LLMGameCreator generated artifacts.",
+  "principles": [
+    "Validation is staged: cheap structural checks run before expensive cross-artifact or runtime checks.",
+    "LLM output is draft until it passes deterministic parsing, normalization, validation and promotion gates.",
+    "Human approval is reserved for architectural, canon, content-overlay and runtime-impacting decisions, not for every generated item.",
+    "Adult/NSFW content is allowed only when an explicit project/profile content overlay enables it, and generated artifacts remain tagged, filterable and export-aware.",
+    "Lua and LLM workflows may propose or produce data artifacts, but they do not bypass C# validators, artifact contracts, dry-runs, approval or export gates.",
+    "Validation results must be stored as data so failed generations can be repaired, audited, sampled or rejected without losing context."
+  ],
+  "outcomes": [
+    {
+      "id": "pass",
+      "severity": "info",
+      "meaning": "The artifact passed the validation level without blocking issues."
+    },
+    {
+      "id": "warn",
+      "severity": "warning",
+      "meaning": "The artifact may continue, but warnings should be visible in reports and sampling reviews."
+    },
+    {
+      "id": "repairable_fail",
+      "severity": "error",
+      "meaning": "The artifact failed, but an automatic repair loop may be attempted while it is still draft/generated/staged."
+    },
+    {
+      "id": "blocked_fail",
+      "severity": "error",
+      "meaning": "The artifact failed a non-repairable or trust-boundary check and must not be promoted automatically."
+    },
+    {
+      "id": "review_required",
+      "severity": "review",
+      "meaning": "The artifact is structurally valid, but human approval is required before promotion or export."
+    }
+  ],
+  "artifact_states": [
+    "draft",
+    "generated",
+    "parsed",
+    "normalized",
+    "validated",
+    "staged",
+    "approved",
+    "compiled",
+    "exported",
+    "runtime_loaded",
+    "rejected",
+    "archived"
+  ],
+  "validation_levels": [
+    {
+      "id": "validation.level_0_json_shape",
+      "order": 0,
+      "title": "JSON and shape validation",
+      "goal": "Reject malformed outputs before any semantic or runtime work.",
+      "automatic": true,
+      "typical_checks": [
+        "valid_json",
+        "single_json_object_or_declared_array",
+        "schema_version_present_when_required",
+        "artifact_contract_id_present",
+        "required_top_level_sections_present",
+        "primitive_types_match_contract_shape",
+        "no_functions_or_non_json_values"
+      ],
+      "blocking_errors": [
+        "invalid_json",
+        "missing_required_section",
+        "wrong_top_level_shape",
+        "non_json_serializable_value"
+      ],
+      "repair_policy": "Allowed for LLM drafts. Repair prompt must ask to preserve meaning and return only corrected JSON.",
+      "promotion_on_pass": "generated -> parsed"
+    },
+    {
+      "id": "validation.level_1_ids_enums_refs",
+      "order": 1,
+      "title": "IDs, enums and references",
+      "goal": "Prevent drift in machine-facing ids, enums and references.",
+      "automatic": true,
+      "typical_checks": [
+        "canonical_slash_or_dot_ids",
+        "stable_enum_values_not_translated",
+        "duplicate_ids",
+        "required_references_resolve",
+        "declared_dependencies_exist",
+        "runtime_targets_known",
+        "content_overlays_known",
+        "artifact_contract_known"
+      ],
+      "blocking_errors": [
+        "unknown_artifact_contract",
+        "unknown_runtime_target",
+        "unknown_required_dependency",
+        "duplicate_id",
+        "enum_value_translated_or_mutated",
+        "reference_missing"
+      ],
+      "repair_policy": "Allowed only when the expected ids/enums are known from input context. Otherwise block and request review.",
+      "promotion_on_pass": "parsed -> normalized"
+    },
+    {
+      "id": "validation.level_2_contract_semantics",
+      "order": 2,
+      "title": "Artifact contract semantics",
+      "goal": "Validate artifact-specific invariants and data-only boundaries.",
+      "automatic": true,
+      "typical_checks": [
+        "artifact_required_sections_match_contract",
+        "must_not_rules_not_violated",
+        "allowed_sources_respected",
+        "content_tags_present_when_required",
+        "adult_content_not_hidden_in_unmarked_artifacts",
+        "new_facts_marked_as_proposals",
+        "no_direct_gamepackage_mutation_unless_contract_allows_patch",
+        "no_unapproved_codegen_output",
+        "no_unrestricted_lua_or_runtime_authority"
+      ],
+      "blocking_errors": [
+        "must_not_violation",
+        "unmarked_adult_content",
+        "unapproved_new_canon_fact",
+        "unsafe_operation_requested",
+        "contract_required_invariant_failed"
+      ],
+      "repair_policy": "Allowed for missing tags, shape normalization and contract-local fixes. Not allowed for unsafe-boundary violations without review.",
+      "promotion_on_pass": "normalized -> validated"
+    },
+    {
+      "id": "validation.level_3_cross_artifact_consistency",
+      "order": 3,
+      "title": "Cross-artifact consistency",
+      "goal": "Check that packs, profiles, Unity IR, runtime DB plans and assets agree with each other.",
+      "automatic": true,
+      "typical_checks": [
+        "semantic_traits_referenced_by_text_pack_exist",
+        "morphology_targets_have_lexemes_or_fallbacks",
+        "dialogue_refs_match_npc_and_quest_refs",
+        "formula_refs_exist_and_are_safe",
+        "asset_refs_exist_or_have_asset_request_pack",
+        "unity_ir_refs_gamepackage_or_runtime_db_entities",
+        "runtime_db_build_plan_sources_exist",
+        "content_overlay_compatibility_with_profile"
+      ],
+      "blocking_errors": [
+        "cross_artifact_reference_missing",
+        "profile_requires_missing_feature_bundle",
+        "runtime_db_source_missing",
+        "unity_ir_references_unknown_entity",
+        "content_overlay_conflict"
+      ],
+      "repair_policy": "Allowed for adding explicit missing proposal refs or fallback markers. Do not invent missing canonical data silently.",
+      "promotion_on_pass": "validated -> staged"
+    },
+    {
+      "id": "validation.level_4_headless_smoke_test",
+      "order": 4,
+      "title": "Headless smoke test",
+      "goal": "Run deterministic non-Unity simulations and dry-runs before export.",
+      "automatic": true,
+      "typical_checks": [
+        "generator_plan_dry_run",
+        "game_package_patch_dry_run",
+        "quest_graph_reachability",
+        "dialogue_graph_reachability",
+        "combat_formula_bounds",
+        "economy_or_production_graph_smoke_test",
+        "inventory_equipment_consistency",
+        "runtime_db_query_plan_smoke_test"
+      ],
+      "blocking_errors": [
+        "dry_run_failed",
+        "quest_unreachable",
+        "dialogue_dead_end_without_declared_terminal",
+        "formula_unbounded_or_invalid",
+        "runtime_db_required_index_missing"
+      ],
+      "repair_policy": "Usually no automatic LLM repair. Generate diagnostics and propose a targeted patch or artifact revision.",
+      "promotion_on_pass": "staged -> approved_candidate"
+    },
+    {
+      "id": "validation.level_5_export_dry_run",
+      "order": 5,
+      "title": "Export dry-run",
+      "goal": "Verify Unity/runtime export implications without producing trusted final output.",
+      "automatic": true,
+      "typical_checks": [
+        "unity_runtime_target_supported",
+        "unity_ir_sections_supported_by_adapter",
+        "asset_index_binding_check",
+        "runtime_db_build_plan_dry_run",
+        "compiled_content_size_estimate",
+        "no_thousands_of_loose_runtime_json_files_required",
+        "save_overlay_schema_compatible"
+      ],
+      "blocking_errors": [
+        "unsupported_unity_ir_section",
+        "asset_binding_missing_without_request_pack",
+        "runtime_db_build_plan_invalid",
+        "export_target_incompatible_with_content_overlay"
+      ],
+      "repair_policy": "Exporter may propose missing asset request packs or adapter gaps. New adapters require human approval.",
+      "promotion_on_pass": "approved_candidate -> compiled_or_export_ready"
+    },
+    {
+      "id": "validation.level_6_human_approval",
+      "order": 6,
+      "title": "Human approval",
+      "goal": "Reserve manual approval for decisions that alter architecture, canon, overlays, safety boundaries or runtime targets.",
+      "automatic": false,
+      "typical_checks": [
+        "new_capability_domain",
+        "new_artifact_contract",
+        "new_runtime_target",
+        "new_content_overlay_enabled_for_project",
+        "major_story_canon_change",
+        "new_lua_library_module_promoted_from_staging",
+        "new_codegen_or_unity_adapter_path",
+        "unsafe_boundary_change"
+      ],
+      "blocking_errors": [
+        "approval_missing",
+        "rejected_by_creator",
+        "requires_architecture_review"
+      ],
+      "repair_policy": "No automatic repair. The system may prepare a compact review summary and recommended decision options.",
+      "promotion_on_pass": "approved -> compiled/exported/runtime_loaded depending on artifact type"
+    }
+  ],
+  "contract_gate_defaults": [
+    {
+      "contract_id": "game_profile_v1",
+      "required_levels": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_6_human_approval"
+      ],
+      "notes": "Profiles drive future generation, so human approval is required. Optional adult/NSFW overlay can be enabled here explicitly."
+    },
+    {
+      "contract_id": "feature_bundle_v1",
+      "required_levels": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_6_human_approval"
+      ],
+      "notes": "Feature bundles affect planning and dependencies; approve once, then reuse many times."
+    },
+    {
+      "contract_id": "semantic_pack_v1",
+      "required_levels": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency"
+      ],
+      "notes": "Bulk semantic generation should be mostly automatic; sample review may be used instead of item-by-item approval."
+    },
+    {
+      "contract_id": "text_pack_v1",
+      "required_levels": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency"
+      ],
+      "notes": "Generated text should be tagged by style/content overlay and deduplicated."
+    },
+    {
+      "contract_id": "content_overlay_pack_v1",
+      "required_levels": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency",
+        "validation.level_6_human_approval"
+      ],
+      "notes": "Enabling a content overlay for a project/profile requires human approval; individual generated entries can then be validated automatically under that overlay."
+    },
+    {
+      "contract_id": "runtime_db_build_plan_v1",
+      "required_levels": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency",
+        "validation.level_4_headless_smoke_test",
+        "validation.level_5_export_dry_run"
+      ],
+      "notes": "Runtime database plans must be dry-run before Unity/runtime export."
+    },
+    {
+      "contract_id": "unity_ir_v1",
+      "required_levels": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency",
+        "validation.level_5_export_dry_run"
+      ],
+      "notes": "Unity IR must be adapter-compatible before export."
+    }
+  ],
+  "repair_loop_policy": {
+    "max_attempts_default": 2,
+    "allowed_until_states": ["draft", "generated", "parsed", "normalized", "staged"],
+    "never_repair_automatically": [
+      "new_artifact_contract",
+      "new_runtime_target",
+      "unsafe_boundary_change",
+      "unapproved_content_overlay_enablement",
+      "major_story_canon_decision",
+      "generated_source_code_output"
+    ],
+    "repair_prompt_rules": [
+      "Return only the corrected artifact JSON.",
+      "Do not translate or rename machine ids/enums.",
+      "Do not add new facts unless they are marked as proposals.",
+      "Do not remove required tags or content overlay metadata.",
+      "Preserve creator-approved decisions."
+    ]
+  },
+  "sampling_review_policy": {
+    "bulk_artifact_types": ["semantic_pack_v1", "text_pack_v1", "rule_pack_v1", "dialogue_pack_v1", "asset_request_pack_v1"],
+    "default_sample_rate_percent": 5,
+    "increase_sample_rate_when": [
+      "new model or prompt preset is used",
+      "warning rate exceeds threshold",
+      "content overlay is newly enabled",
+      "new genre/profile is being generated",
+      "generated artifact affects canon or runtime mechanics"
+    ],
+    "review_goal": "Avoid manual review of every generated item while still catching prompt/model drift."
+  },
+  "model_role_boundaries": [
+    {
+      "role": "designer_llm",
+      "preferred_model_class": "larger_local_or_remote_model",
+      "allowed_outputs": ["game_profile_v1", "feature_bundle_v1", "semantic_pack_v1", "content_overlay_pack_v1"],
+      "notes": "Used for lore, concepts, style, mechanics discussion and high-level drafts."
+    },
+    {
+      "role": "batch_generator_llm",
+      "preferred_model_class": "fast_local_model",
+      "allowed_outputs": ["semantic_pack_v1", "text_pack_v1", "dialogue_pack_v1", "rule_pack_v1", "asset_request_pack_v1"],
+      "notes": "Used for high-volume generation with strict prompts, selected context and validation."
+    },
+    {
+      "role": "repair_llm",
+      "preferred_model_class": "fast_local_model_or_same_as_generator",
+      "allowed_outputs": ["corrected_json_same_contract"],
+      "notes": "Used only for bounded repairs, not for inventing new architecture or changing approved decisions."
+    },
+    {
+      "role": "validator_service",
+      "preferred_model_class": "deterministic_csharp_service",
+      "allowed_outputs": ["validation_report_v1", "audit_record_v1"],
+      "notes": "C# validator is the trust boundary. LLM may explain or propose repairs, but it is not the validator of record."
+    }
+  ]
+}
