@@ -1,0 +1,566 @@
+{
+  "atlas_version": "0.1",
+  "purpose": "Static seed atlas for LLMGameCreator generator-library capabilities, feature bundles, artifact contracts, validation levels and runtime targets. This file is data-only and must not execute Lua, mutate GamePackage or generate Unity code by itself.",
+  "principles": [
+    "LLM proposes, C# validates, user approves important changes, runtime executes deterministic data.",
+    "Lua modules are deterministic generators, DSL modules or IR builders, not unrestricted runtime authority.",
+    "New functionality is described as capabilities and feature bundles before it becomes C# or Unity runtime code.",
+    "Final runtime should consume compiled data and IR, not thousands of loose generated JSON files.",
+    "Adult/NSFW content is an optional content layer that may be enabled per project/profile, with explicit tags, filters and platform/export constraints. It is not a default assumption."
+  ],
+  "runtime_targets": [
+    {
+      "id": "debug",
+      "title": "Debug Preview",
+      "purpose": "Editor-side deterministic preview and diagnostics."
+    },
+    {
+      "id": "headless",
+      "title": "Headless Simulation",
+      "purpose": "Automated validation, balance checks and runtime smoke tests without Unity visuals."
+    },
+    {
+      "id": "unity2d",
+      "title": "Unity 2D Runtime",
+      "purpose": "2D top-down, tile, UI-heavy or visual novel style runtime."
+    },
+    {
+      "id": "unity3d",
+      "title": "Unity 3D Runtime",
+      "purpose": "3D or pseudo-3D runtime shell with data-driven content."
+    },
+    {
+      "id": "isometric",
+      "title": "Isometric Runtime",
+      "purpose": "2.5D/isometric maps, tactical movement and city/colony views."
+    },
+    {
+      "id": "pseudo3d",
+      "title": "Pseudo-3D Runtime",
+      "purpose": "2D assets projected into first-person or party RPG style exploration."
+    },
+    {
+      "id": "first_person_grid",
+      "title": "First-Person Grid Runtime",
+      "purpose": "Dungeon crawler or Might-and-Magic-like grid/step exploration."
+    },
+    {
+      "id": "city_builder",
+      "title": "City Builder Runtime",
+      "purpose": "Settlement simulation, logistics, economy and region control."
+    },
+    {
+      "id": "visual_novel",
+      "title": "Visual Novel Runtime",
+      "purpose": "Scene, portrait, dialogue, route and relationship-heavy runtime."
+    },
+    {
+      "id": "automation",
+      "title": "Automation Runtime",
+      "purpose": "Factory-like recipes, machines, resources, networks and throughput."
+    }
+  ],
+  "domains": [
+    {
+      "id": "core",
+      "title": "Core Contracts",
+      "purpose": "IDs, diagnostics, schema validation, RNG and deterministic execution conventions.",
+      "capabilities": [
+        {
+          "id": "core.ids/v1",
+          "title": "Canonical IDs",
+          "summary": "Lowercase slash/dot id conventions for generated data, Lua modules, capabilities and artifact contracts.",
+          "provides": ["id_rules", "id_validation"],
+          "depends_on": [],
+          "input_contracts": [],
+          "output_contracts": ["diagnostics_v1"],
+          "validators": ["id_format", "duplicate_id"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d"],
+          "tags": ["core", "validation"],
+          "content_tags": [],
+          "llm_roles": ["none"],
+          "maturity": "draft"
+        },
+        {
+          "id": "core.diagnostics/v1",
+          "title": "Diagnostics",
+          "summary": "Standard warning/error/info records for validation and generation reports.",
+          "provides": ["diagnostics_v1"],
+          "depends_on": ["core.ids/v1"],
+          "input_contracts": [],
+          "output_contracts": ["diagnostics_v1"],
+          "validators": ["diagnostics_shape"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d"],
+          "tags": ["core", "validation"],
+          "content_tags": [],
+          "llm_roles": ["none"],
+          "maturity": "draft"
+        }
+      ]
+    },
+    {
+      "id": "semantic",
+      "title": "Semantic Layer",
+      "purpose": "Entity kinds, property channels, traits, tags, state channels and semantic packs.",
+      "capabilities": [
+        {
+          "id": "semantic.property_channels/v1",
+          "title": "Property Channels",
+          "summary": "Defines reusable property channels such as physical, material, social, memory, dialogue, technical, combat, magic and text_surface.",
+          "provides": ["property_channel_schema", "semantic_pack_v1"],
+          "depends_on": ["core.ids/v1", "core.diagnostics/v1"],
+          "input_contracts": ["game_profile_v1"],
+          "output_contracts": ["semantic_pack_v1"],
+          "validators": ["schema_valid", "channel_applies_to", "no_unknown_channel"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "pseudo3d"],
+          "tags": ["semantic", "schema", "extensibility"],
+          "content_tags": [],
+          "llm_roles": ["designer", "batch_generator", "validator"],
+          "maturity": "planned"
+        },
+        {
+          "id": "semantic.traits/v1",
+          "title": "Traits and State Channels",
+          "summary": "Defines traits and mutable state channels for items, NPCs, locations, factions, machines and events.",
+          "provides": ["trait_schema", "state_channel_schema", "semantic_pack_v1"],
+          "depends_on": ["semantic.property_channels/v1"],
+          "input_contracts": ["game_profile_v1", "semantic_pack_v1"],
+          "output_contracts": ["semantic_pack_v1"],
+          "validators": ["trait_id_valid", "state_type_valid", "persistent_flag_valid"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "pseudo3d", "city_builder"],
+          "tags": ["semantic", "state", "runtime"],
+          "content_tags": [],
+          "llm_roles": ["designer", "batch_generator", "validator"],
+          "maturity": "planned"
+        }
+      ]
+    },
+    {
+      "id": "text",
+      "title": "Text, Style and Morphology",
+      "purpose": "Text intents, templates, speech styles, morphology IR and runtime-safe phrase plans.",
+      "capabilities": [
+        {
+          "id": "text.intent_templates/v1",
+          "title": "Text Intent Templates",
+          "summary": "Defines templates by intent, style, target entity type and selected semantic signals.",
+          "provides": ["text_pack_v1", "template_schema"],
+          "depends_on": ["semantic.traits/v1"],
+          "input_contracts": ["semantic_pack_v1", "style_guide_v1"],
+          "output_contracts": ["text_pack_v1"],
+          "validators": ["template_slots_valid", "no_unknown_signal", "no_unapproved_new_fact"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "visual_novel", "pseudo3d"],
+          "tags": ["text", "dialogue", "description"],
+          "content_tags": ["optional_adult_content_aware"],
+          "llm_roles": ["designer", "batch_generator", "repair", "validator"],
+          "maturity": "planned"
+        },
+        {
+          "id": "text.morphology_ir_ru/v1",
+          "title": "Russian Morphology IR",
+          "summary": "Data-only phrase plans and grammar hints for Russian text realization; runtime C# should use compiled lexicon/cache, not LLM grammar guesses.",
+          "provides": ["morphology_pack_v1", "phrase_plan_v1"],
+          "depends_on": ["text.intent_templates/v1"],
+          "input_contracts": ["lexeme_list_v1", "text_pack_v1"],
+          "output_contracts": ["morphology_pack_v1", "phrase_plan_v1"],
+          "validators": ["lexeme_exists", "agreement_target_exists", "case_valid"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "visual_novel", "pseudo3d"],
+          "tags": ["text", "morphology", "russian"],
+          "content_tags": [],
+          "llm_roles": ["designer", "validator"],
+          "maturity": "planned"
+        }
+      ]
+    },
+    {
+      "id": "dialogue",
+      "title": "Dialogue and Free Text Input",
+      "purpose": "Static dialogue, procedural dialogue, free-text player input parsing and dialogue-combat bridges.",
+      "capabilities": [
+        {
+          "id": "dialogue.choice_graph/v1",
+          "title": "Choice Dialogue Graph",
+          "summary": "Node/choice dialogue with conditions, effects, quest links, faction links and validation.",
+          "provides": ["dialogue_graph_v1"],
+          "depends_on": ["semantic.traits/v1", "text.intent_templates/v1"],
+          "input_contracts": ["quest_pack_v1", "npc_pack_v1"],
+          "output_contracts": ["dialogue_graph_v1", "game_package_patch_v1"],
+          "validators": ["dialogue_graph_reachable", "choice_effect_allowed", "condition_refs_valid"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "visual_novel", "pseudo3d"],
+          "tags": ["dialogue", "quest", "narrative"],
+          "content_tags": ["optional_adult_content_aware"],
+          "llm_roles": ["designer", "batch_generator", "validator"],
+          "maturity": "planned"
+        },
+        {
+          "id": "dialogue.free_text_nlu/v1",
+          "title": "Free Text Dialogue NLU",
+          "summary": "Parses player free-text input into intent candidates, claims, requested actions and tone; does not mutate state directly.",
+          "provides": ["free_text_intent_v1", "claim_validation_request_v1"],
+          "depends_on": ["dialogue.choice_graph/v1", "semantic.traits/v1"],
+          "input_contracts": ["player_text_v1", "dialogue_context_v1"],
+          "output_contracts": ["free_text_intent_v1", "claim_validation_request_v1"],
+          "validators": ["no_direct_state_mutation", "claim_requires_runtime_validation"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "visual_novel", "pseudo3d"],
+          "tags": ["dialogue", "nlu", "runtime_optional"],
+          "content_tags": ["optional_adult_content_aware"],
+          "llm_roles": ["selector", "validator", "repair"],
+          "maturity": "planned"
+        }
+      ]
+    },
+    {
+      "id": "gameplay",
+      "title": "Gameplay Mechanics",
+      "purpose": "Reusable mechanics for items, equipment, inventory, party, stats, skills, spells, combat, economy and simulation.",
+      "capabilities": [
+        {
+          "id": "inventory.paper_doll_grid/v1",
+          "title": "Paper-Doll Grid Inventory",
+          "summary": "Grid inventory with item shapes, equipment slots and paper-doll/portrait overlay bindings.",
+          "provides": ["inventory_schema_v1", "equipment_layout_v1", "unity_inventory_ui_ir_v1"],
+          "depends_on": ["semantic.traits/v1", "unity_ir.ui/v1"],
+          "input_contracts": ["item_pack_v1", "equipment_slot_pack_v1"],
+          "output_contracts": ["game_package_patch_v1", "unity_ir_v1", "runtime_db_build_plan_v1"],
+          "validators": ["item_shape_valid", "inventory_no_overlap", "slot_compatible"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "pseudo3d"],
+          "tags": ["inventory", "equipment", "ui"],
+          "content_tags": [],
+          "llm_roles": ["designer", "validator"],
+          "maturity": "planned"
+        },
+        {
+          "id": "combat.realtime_turn_hybrid/v1",
+          "title": "Realtime / Turn-Based Hybrid Combat",
+          "summary": "Combat profile supporting realtime exploration, pause/turn/tactical combat and dialogue-combat compatibility.",
+          "provides": ["combat_mode_schema_v1", "ability_resolution_v1"],
+          "depends_on": ["semantic.traits/v1"],
+          "input_contracts": ["stats_pack_v1", "ability_pack_v1", "encounter_pack_v1"],
+          "output_contracts": ["game_package_patch_v1", "runtime_db_build_plan_v1", "unity_ir_v1"],
+          "validators": ["formula_safe", "damage_bounds", "combat_mode_supported"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "pseudo3d", "isometric"],
+          "tags": ["combat", "abilities", "balance"],
+          "content_tags": [],
+          "llm_roles": ["designer", "validator"],
+          "maturity": "planned"
+        },
+        {
+          "id": "party.party_roster/v1",
+          "title": "Party Roster",
+          "summary": "Party-based games with multiple playable characters, portraits, shared inventory and individual stats/equipment.",
+          "provides": ["party_schema_v1", "party_ui_ir_v1"],
+          "depends_on": ["inventory.paper_doll_grid/v1", "combat.realtime_turn_hybrid/v1"],
+          "input_contracts": ["character_pack_v1", "equipment_layout_v1"],
+          "output_contracts": ["game_package_patch_v1", "unity_ir_v1", "runtime_db_build_plan_v1"],
+          "validators": ["party_size_valid", "member_refs_valid", "equipment_refs_valid"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "pseudo3d", "first_person_grid"],
+          "tags": ["party", "rpg", "ui"],
+          "content_tags": [],
+          "llm_roles": ["designer", "validator"],
+          "maturity": "planned"
+        },
+        {
+          "id": "city_builder.production_conquest/v1",
+          "title": "City Builder Production and Conquest",
+          "summary": "Settlement economy, population needs, production chains, trade, military pressure and region conquest.",
+          "provides": ["city_builder_schema_v1", "production_chain_v1", "conquest_state_v1"],
+          "depends_on": ["semantic.traits/v1", "unity_ir.ui/v1"],
+          "input_contracts": ["resource_pack_v1", "building_pack_v1", "faction_pack_v1"],
+          "output_contracts": ["game_package_patch_v1", "runtime_db_build_plan_v1", "unity_ir_v1"],
+          "validators": ["production_graph_valid", "resource_balance_smoke", "conquest_refs_valid"],
+          "runtime_targets": ["debug", "headless", "city_builder", "unity2d", "unity3d", "isometric"],
+          "tags": ["city_builder", "economy", "war", "conquest"],
+          "content_tags": [],
+          "llm_roles": ["designer", "batch_generator", "validator"],
+          "maturity": "planned"
+        }
+      ]
+    },
+    {
+      "id": "runtime_export",
+      "title": "Runtime Export",
+      "purpose": "Unity IR, runtime DB build plans, asset/audio/VFX request packs and compiled runtime data.",
+      "capabilities": [
+        {
+          "id": "unity_ir.ui/v1",
+          "title": "Unity UI IR",
+          "summary": "Data-only UI screen/panel/control descriptions for Unity adapters; no direct Unity object mutation.",
+          "provides": ["unity_ui_ir_v1"],
+          "depends_on": ["core.ids/v1"],
+          "input_contracts": ["ui_screen_request_v1"],
+          "output_contracts": ["unity_ir_v1"],
+          "validators": ["ui_control_refs_valid", "no_direct_unity_code"],
+          "runtime_targets": ["debug", "unity2d", "unity3d", "visual_novel", "pseudo3d", "city_builder"],
+          "tags": ["unity", "ui", "ir"],
+          "content_tags": [],
+          "llm_roles": ["designer", "validator"],
+          "maturity": "planned"
+        },
+        {
+          "id": "runtime_db.build_plan/v1",
+          "title": "Runtime DB Build Plan",
+          "summary": "Plan for compiling GamePackage, semantic packs, text packs and Unity IR into indexed runtime databases.",
+          "provides": ["runtime_db_build_plan_v1"],
+          "depends_on": ["core.ids/v1"],
+          "input_contracts": ["game_package_v1", "semantic_pack_v1", "text_pack_v1", "unity_ir_v1"],
+          "output_contracts": ["runtime_db_build_plan_v1"],
+          "validators": ["table_plan_valid", "index_plan_valid", "source_artifact_exists"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "pseudo3d", "city_builder", "visual_novel"],
+          "tags": ["runtime_db", "compile", "performance"],
+          "content_tags": [],
+          "llm_roles": ["designer", "validator"],
+          "maturity": "planned"
+        }
+      ]
+    },
+    {
+      "id": "content_control",
+      "title": "Content Control",
+      "purpose": "Project-level content tags, ratings, platform filters and optional adult content layers.",
+      "capabilities": [
+        {
+          "id": "content.rating_and_filters/v1",
+          "title": "Content Rating and Filters",
+          "summary": "Declares project content tags and export filters, including optional adult/NSFW layers for consenting-adult content when a project enables them.",
+          "provides": ["content_rating_pack_v1", "content_filter_pack_v1"],
+          "depends_on": ["core.ids/v1"],
+          "input_contracts": ["project_content_policy_v1"],
+          "output_contracts": ["content_rating_pack_v1"],
+          "validators": ["content_tag_declared", "platform_filter_valid", "age_gate_declared_for_adult_content"],
+          "runtime_targets": ["debug", "headless", "unity2d", "unity3d", "visual_novel", "pseudo3d"],
+          "tags": ["content", "filters", "export"],
+          "content_tags": ["optional_adult_content_aware"],
+          "llm_roles": ["designer", "validator", "reviewer"],
+          "maturity": "planned",
+          "notes": "This capability does not make adult content mandatory. It makes adult content explicit, tagged, filterable and export-aware when a project enables it."
+        }
+      ]
+    },
+    {
+      "id": "library_growth",
+      "title": "Generator Library Growth",
+      "purpose": "Controlled process for proposing, validating and staging new generator-library capabilities/modules.",
+      "capabilities": [
+        {
+          "id": "library_growth.module_proposal/v1",
+          "title": "Module Proposal Pipeline",
+          "summary": "LLM-assisted proposal of new Lua generator modules with schemas, examples and validators before human approval.",
+          "provides": ["generator_library_module_proposal_v1"],
+          "depends_on": ["core.ids/v1", "core.diagnostics/v1"],
+          "input_contracts": ["capability_gap_v1", "module_spec_request_v1"],
+          "output_contracts": ["generator_library_module_proposal_v1"],
+          "validators": ["manifest_contract_valid", "lua_restrictions_valid", "examples_valid", "no_unsafe_api"],
+          "runtime_targets": ["debug", "headless"],
+          "tags": ["generator_library", "growth", "staging"],
+          "content_tags": [],
+          "llm_roles": ["designer", "batch_generator", "validator", "repair"],
+          "maturity": "planned"
+        }
+      ]
+    }
+  ],
+  "artifact_contracts": [
+    {
+      "id": "game_package_patch_v1",
+      "title": "GamePackage Patch",
+      "purpose": "Data-only allowlisted package operations with dry-run, rollback and validation.",
+      "producer_roles": ["C# patch service", "approved generator plan", "controlled Lua declaration capture"],
+      "consumer_roles": ["GamePackagePatchService", "GamePackageValidator"],
+      "must_validate": true
+    },
+    {
+      "id": "semantic_pack_v1",
+      "title": "Semantic Pack",
+      "purpose": "Entity kinds, property channels, traits, state channels, tags and semantic rules.",
+      "producer_roles": ["LLM draft generator", "Lua generator", "manual author"],
+      "consumer_roles": ["semantic validator", "runtime DB compiler", "text generator"],
+      "must_validate": true
+    },
+    {
+      "id": "text_pack_v1",
+      "title": "Text Pack",
+      "purpose": "Text intents, templates, speech styles, surface variants and narrative hooks.",
+      "producer_roles": ["LLM batch generator", "manual author"],
+      "consumer_roles": ["text validator", "morphology compiler", "runtime text lookup"],
+      "must_validate": true
+    },
+    {
+      "id": "morphology_pack_v1",
+      "title": "Morphology Pack",
+      "purpose": "Compiled lexemes, grammatical forms, phrase plans and agreement hints for runtime text realization.",
+      "producer_roles": ["offline morphology compiler", "manual overrides"],
+      "consumer_roles": ["runtime text realizer", "validator"],
+      "must_validate": true
+    },
+    {
+      "id": "unity_ir_v1",
+      "title": "Unity IR",
+      "purpose": "Data-only Unity-facing scene, prefab, UI, input, camera, audio and VFX binding descriptions.",
+      "producer_roles": ["C# exporter", "validated generator plan"],
+      "consumer_roles": ["Unity adapter", "Unity dry-run validator"],
+      "must_validate": true
+    },
+    {
+      "id": "runtime_db_build_plan_v1",
+      "title": "Runtime DB Build Plan",
+      "purpose": "Build plan for read-only runtime.db and mutable save overlay structures.",
+      "producer_roles": ["C# compiler", "approved generator plan"],
+      "consumer_roles": ["runtime DB builder", "Unity runtime data access"],
+      "must_validate": true
+    },
+    {
+      "id": "content_rating_pack_v1",
+      "title": "Content Rating Pack",
+      "purpose": "Project content tags, rating declarations, export filters and optional adult-content flags.",
+      "producer_roles": ["project settings", "LLM proposal", "manual author"],
+      "consumer_roles": ["export validator", "runtime filters", "platform packaging"],
+      "must_validate": true
+    },
+    {
+      "id": "generator_library_module_proposal_v1",
+      "title": "Generator Library Module Proposal",
+      "purpose": "Staged proposal for extending generator-library without direct unsafe commit/apply.",
+      "producer_roles": ["LLM library growth mode", "manual author"],
+      "consumer_roles": ["library proposal validator", "human reviewer"],
+      "must_validate": true
+    }
+  ],
+  "validation_levels": [
+    {
+      "id": "level_0_json_schema",
+      "title": "JSON and Schema Validation",
+      "purpose": "Reject malformed JSON, missing required fields and invalid primitive shapes.",
+      "blocks_apply": true
+    },
+    {
+      "id": "level_1_ids_enums_refs",
+      "title": "IDs, Enums and References",
+      "purpose": "Reject id drift, unknown enum values, broken refs and duplicate ids.",
+      "blocks_apply": true
+    },
+    {
+      "id": "level_2_contract_validation",
+      "title": "Artifact Contract Validation",
+      "purpose": "Validate artifact-specific invariants before preview/apply/export.",
+      "blocks_apply": true
+    },
+    {
+      "id": "level_3_semantic_warnings",
+      "title": "Semantic Consistency Warnings",
+      "purpose": "Detect suspicious material logic, unsupported content tags, lore drift and weak assumptions.",
+      "blocks_apply": false
+    },
+    {
+      "id": "level_4_simulation_smoke",
+      "title": "Runtime Simulation Smoke Test",
+      "purpose": "Run deterministic headless checks for quests, combat formulas, economy loops and basic interactions.",
+      "blocks_apply": true
+    },
+    {
+      "id": "level_5_unity_dry_run",
+      "title": "Unity Export Dry-Run",
+      "purpose": "Validate Unity IR and asset bindings before producing a playable Unity runtime package.",
+      "blocks_apply": true
+    },
+    {
+      "id": "level_6_human_approval",
+      "title": "Human Approval",
+      "purpose": "Require explicit approval for new capability domains, runtime targets, policy/content settings and important game-lore changes.",
+      "blocks_apply": true
+    }
+  ],
+  "feature_bundles": [
+    {
+      "id": "feature_bundle/might_and_magic_like_party_rpg/v1",
+      "title": "Might-and-Magic-like Party RPG",
+      "purpose": "Pseudo-3D party RPG with exploration, party roster, paper-doll inventory, quests, spells, factions and hybrid combat.",
+      "requires": [
+        "party.party_roster/v1",
+        "inventory.paper_doll_grid/v1",
+        "combat.realtime_turn_hybrid/v1",
+        "dialogue.choice_graph/v1",
+        "runtime_db.build_plan/v1"
+      ],
+      "optional": [
+        "dialogue.free_text_nlu/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "outputs": ["game_package_patch_v1", "semantic_pack_v1", "text_pack_v1", "unity_ir_v1", "runtime_db_build_plan_v1"],
+      "runtime_targets": ["pseudo3d", "first_person_grid", "unity3d", "headless"],
+      "content_tags": ["optional_adult_content_aware"],
+      "notes": "Used as a high-pressure reference profile for inventory, party UI, combat modes and generated open-world content."
+    },
+    {
+      "id": "feature_bundle/anno1404_like_city_builder_conquest/v1",
+      "title": "Anno-1404-like City Builder with Conquest",
+      "purpose": "Settlement/economy game with population needs, production chains, trade, diplomacy, military pressure and region capture.",
+      "requires": [
+        "city_builder.production_conquest/v1",
+        "semantic.property_channels/v1",
+        "runtime_db.build_plan/v1",
+        "unity_ir.ui/v1"
+      ],
+      "optional": [
+        "dialogue.choice_graph/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "outputs": ["semantic_pack_v1", "game_package_patch_v1", "unity_ir_v1", "runtime_db_build_plan_v1"],
+      "runtime_targets": ["city_builder", "isometric", "unity2d", "unity3d", "headless"],
+      "content_tags": ["optional_adult_content_aware"],
+      "notes": "Reference profile for economy loops, UI-heavy runtime, indexed runtime data and long simulation validation."
+    },
+    {
+      "id": "feature_bundle/narrative_political_rpg/v1",
+      "title": "Narrative Political RPG",
+      "purpose": "The-Last-Sovereign-like political/narrative RPG profile with relationships, factions, choices, mature themes and optional adult content layers.",
+      "requires": [
+        "dialogue.choice_graph/v1",
+        "text.intent_templates/v1",
+        "semantic.traits/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional": [
+        "dialogue.free_text_nlu/v1",
+        "runtime_db.build_plan/v1"
+      ],
+      "outputs": ["dialogue_graph_v1", "semantic_pack_v1", "text_pack_v1", "content_rating_pack_v1"],
+      "runtime_targets": ["visual_novel", "unity2d", "unity3d", "headless"],
+      "content_tags": ["optional_adult_content_aware", "mature_themes_optional"],
+      "notes": "Adult/NSFW material is optional per project and must remain tagged/filterable/export-aware."
+    },
+    {
+      "id": "feature_bundle/factorio_like_automation/v1",
+      "title": "Factorio-like Automation",
+      "purpose": "Factory simulation with machines, recipes, logistics, power, maintenance, pollution and technical descriptions.",
+      "requires": [
+        "semantic.property_channels/v1",
+        "runtime_db.build_plan/v1",
+        "unity_ir.ui/v1"
+      ],
+      "optional": [
+        "content.rating_and_filters/v1" ],
+      "outputs": ["semantic_pack_v1", "game_package_patch_v1", "runtime_db_build_plan_v1", "unity_ir_v1"],
+      "runtime_targets": ["automation", "unity2d", "unity3d", "headless"],
+      "content_tags": ["optional_adult_content_aware"],
+      "notes": "Reference profile for technical data, formula validation, throughput and indexed runtime lookup."
+    },
+    {
+      "id": "feature_bundle/visual_novel_dialogue_rpg/v1",
+      "title": "Visual Novel / Dialogue RPG",
+      "purpose": "Dialogue-first game with scenes, portraits, relationships, route logic, free-text optional input and optional mature/adult content layers.",
+      "requires": [
+        "dialogue.choice_graph/v1",
+        "text.intent_templates/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional": [
+        "dialogue.free_text_nlu/v1",
+        "runtime_db.build_plan/v1"
+      ],
+      "outputs": ["dialogue_graph_v1", "text_pack_v1", "content_rating_pack_v1", "unity_ir_v1"],
+      "runtime_targets": ["visual_novel", "unity2d", "unity3d", "headless"],
+      "content_tags": ["optional_adult_content_aware", "mature_themes_optional"],
+      "notes": "Important profile for content filtering, route consistency and high-volume text generation."
+    }
+  ]
+}

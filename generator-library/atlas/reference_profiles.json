@@ -1,0 +1,212 @@
+{
+  "schema_version": "0.1",
+  "purpose": "Reference game profiles used to test whether the Capability Atlas is flexible enough for very different genres and runtime targets.",
+  "content_overlays": [
+    {
+      "id": "content_overlay/optional_adult_nsfw/v1",
+      "title": "Optional Adult/NSFW Layer",
+      "summary": "Project-level optional layer for adult/NSFW themes when explicitly enabled by the creator. It must be tagged, filterable and export-aware. It is not a mandatory default for any profile.",
+      "requires": ["content.rating_and_filters/v1"],
+      "tags": ["optional_adult_content_aware", "mature_themes_optional"],
+      "notes": "This overlay may apply to text, images, future animation requests, dialogue routes and scene metadata. It must stay separate from core mechanics so projects can enable, disable or filter it per export target."
+    },
+    {
+      "id": "content_overlay/horror_gore_optional/v1",
+      "title": "Optional Horror/Gore Layer",
+      "summary": "Optional horror, gore and body-horror tags for projects that need them, with export/platform filtering.",
+      "requires": ["content.rating_and_filters/v1"],
+      "tags": ["horror_optional", "gore_optional"],
+      "notes": "Separate from adult content; may combine with survival, dark fantasy or alien profiles."
+    }
+  ],
+  "profiles": [
+    {
+      "id": "profile/might_and_magic_like_party_rpg/v1",
+      "title": "Might-and-Magic-like Party RPG",
+      "summary": "Pseudo-3D party RPG with open-world/region exploration, party roster, paper-doll inventory, skills, spells, quests, factions and hybrid realtime/turn-based combat.",
+      "primary_bundle": "feature_bundle/might_and_magic_like_party_rpg/v1",
+      "required_runtime_targets": ["pseudo3d", "first_person_grid", "unity3d", "headless"],
+      "important_capabilities": [
+        "party.party_roster/v1",
+        "inventory.paper_doll_grid/v1",
+        "combat.realtime_turn_hybrid/v1",
+        "dialogue.choice_graph/v1",
+        "runtime_db.build_plan/v1"
+      ],
+      "optional_capabilities": [
+        "dialogue.free_text_nlu/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional_content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1",
+        "content_overlay/horror_gore_optional/v1"
+      ],
+      "validation_focus": [
+        "party/equipment consistency",
+        "combat formula bounds",
+        "quest reachability",
+        "runtime DB lookup performance",
+        "Unity pseudo-3D adapter dry-run"
+      ]
+    },
+    {
+      "id": "profile/anno1404_like_city_builder_conquest/v1",
+      "title": "Anno-1404-like City Builder with War/Conquest",
+      "summary": "Settlement builder with population needs, production chains, trade routes, diplomacy, military pressure and region capture.",
+      "primary_bundle": "feature_bundle/anno1404_like_city_builder_conquest/v1",
+      "required_runtime_targets": ["city_builder", "isometric", "unity2d", "unity3d", "headless"],
+      "important_capabilities": [
+        "city_builder.production_conquest/v1",
+        "semantic.property_channels/v1",
+        "runtime_db.build_plan/v1",
+        "unity_ir.ui/v1"
+      ],
+      "optional_capabilities": [
+        "dialogue.choice_graph/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional_content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1"
+      ],
+      "validation_focus": [
+        "production graph validity",
+        "resource balance smoke tests",
+        "population needs loops",
+        "conquest state refs",
+        "large UI/runtime DB performance"
+      ]
+    },
+    {
+      "id": "profile/the_last_sovereign_like_narrative_political_rpg/v1",
+      "title": "The-Last-Sovereign-like Narrative Political RPG",
+      "summary": "Narrative-heavy RPG with politics, relationships, factions, route choices, long-term consequences, mature themes and optional adult content layers.",
+      "primary_bundle": "feature_bundle/narrative_political_rpg/v1",
+      "required_runtime_targets": ["visual_novel", "unity2d", "unity3d", "headless"],
+      "important_capabilities": [
+        "dialogue.choice_graph/v1",
+        "text.intent_templates/v1",
+        "semantic.traits/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional_capabilities": [
+        "dialogue.free_text_nlu/v1",
+        "runtime_db.build_plan/v1"
+      ],
+      "optional_content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1",
+        "content_overlay/horror_gore_optional/v1"
+      ],
+      "validation_focus": [
+        "route consistency",
+        "choice consequences",
+        "relationship/faction state",
+        "content tags and filters",
+        "dialogue graph reachability"
+      ]
+    },
+    {
+      "id": "profile/factorio_like_automation/v1",
+      "title": "Factorio-like Automation",
+      "summary": "Resource extraction, machine recipes, production chains, power networks, logistics, throughput, pollution and technical diagnostics.",
+      "primary_bundle": "feature_bundle/factorio_like_automation/v1",
+      "required_runtime_targets": ["automation", "unity2d", "unity3d", "headless"],
+      "important_capabilities": [
+        "semantic.property_channels/v1",
+        "runtime_db.build_plan/v1",
+        "unity_ir.ui/v1"
+      ],
+      "optional_capabilities": [
+        "content.rating_and_filters/v1"
+      ],
+      "optional_content_overlays": [],
+      "validation_focus": [
+        "recipe graph validity",
+        "throughput formulas",
+        "machine state schema",
+        "technical text pack quality",
+        "runtime DB indices"
+      ]
+    },
+    {
+      "id": "profile/survival_sandbox/v1",
+      "title": "Survival Sandbox",
+      "summary": "Open or semi-open survival world with weather, body state, injuries, shelter, resources, crafting, dangerous locations and persistent world deltas.",
+      "primary_bundle": "feature_bundle/might_and_magic_like_party_rpg/v1",
+      "required_runtime_targets": ["unity2d", "unity3d", "headless"],
+      "important_capabilities": [
+        "semantic.property_channels/v1",
+        "semantic.traits/v1",
+        "text.intent_templates/v1",
+        "runtime_db.build_plan/v1"
+      ],
+      "optional_capabilities": [
+        "dialogue.choice_graph/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional_content_overlays": [
+        "content_overlay/horror_gore_optional/v1",
+        "content_overlay/optional_adult_nsfw/v1"
+      ],
+      "validation_focus": [
+        "material/weather logic",
+        "state channel ranges",
+        "persistent chunk deltas",
+        "item condition rules",
+        "text repetition control"
+      ]
+    },
+    {
+      "id": "profile/visual_novel_dialogue_rpg/v1",
+      "title": "Visual Novel / Dialogue RPG",
+      "summary": "Scene and dialogue focused game with portraits, route logic, relationship state, choices, optional free-text input and optional mature/adult content.",
+      "primary_bundle": "feature_bundle/visual_novel_dialogue_rpg/v1",
+      "required_runtime_targets": ["visual_novel", "unity2d", "unity3d", "headless"],
+      "important_capabilities": [
+        "dialogue.choice_graph/v1",
+        "text.intent_templates/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional_capabilities": [
+        "dialogue.free_text_nlu/v1",
+        "runtime_db.build_plan/v1"
+      ],
+      "optional_content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1"
+      ],
+      "validation_focus": [
+        "route graph validity",
+        "speaker consistency",
+        "content filtering",
+        "text style consistency",
+        "save-state variables"
+      ]
+    },
+    {
+      "id": "profile/alien_nonhuman_perception/v1",
+      "title": "Alien / Non-Human Perception Game",
+      "summary": "Game where creatures perceive and speak through smell, heat, moisture, electricity, dreams, roots, spores or other non-human senses.",
+      "primary_bundle": "feature_bundle/narrative_political_rpg/v1",
+      "required_runtime_targets": ["unity2d", "unity3d", "visual_novel", "headless"],
+      "important_capabilities": [
+        "semantic.property_channels/v1",
+        "text.intent_templates/v1",
+        "dialogue.choice_graph/v1"
+      ],
+      "optional_capabilities": [
+        "dialogue.free_text_nlu/v1",
+        "content.rating_and_filters/v1"
+      ],
+      "optional_content_overlays": [
+        "content_overlay/horror_gore_optional/v1",
+        "content_overlay/optional_adult_nsfw/v1"
+      ],
+      "validation_focus": [
+        "species perception rules",
+        "speech style separation",
+        "semantic trait mapping",
+        "no generic-human dialogue drift",
+        "content tags"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llmgamecreator.local/schemas/capability_atlas.schema.json",
+  "title": "LLMGameCreator Capability Atlas",
+  "type": "object",
+  "required": [
+    "atlas_version",
+    "purpose",
+    "principles",
+    "runtime_targets",
+    "domains",
+    "artifact_contracts",
+    "validation_levels",
+    "feature_bundles"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "atlas_version": { "type": "string" },
+    "purpose": { "type": "string" },
+    "principles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "runtime_targets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/runtime_target" }
+    },
+    "domains": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/domain" }
+    },
+    "artifact_contracts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact_contract" }
+    },
+    "validation_levels": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/validation_level" }
+    },
+    "feature_bundles": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/feature_bundle" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_./-]+/v[0-9]+$"
+    },
+    "plain_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_.-]+$"
+    },
+    "runtime_target": {
+      "type": "object",
+      "required": ["id", "title", "purpose"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/plain_id" },
+        "title": { "type": "string" },
+        "purpose": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "required": ["id", "title", "purpose", "capabilities"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/plain_id" },
+        "title": { "type": "string" },
+        "purpose": { "type": "string" },
+        "capabilities": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/capability" }
+        }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "summary",
+        "provides",
+        "depends_on",
+        "output_contracts",
+        "validators",
+        "runtime_targets",
+        "llm_roles",
+        "maturity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "provides": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" }
+        },
+        "depends_on": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "input_contracts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" },
+          "default": []
+        },
+        "output_contracts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" }
+        },
+        "validators": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" }
+        },
+        "runtime_targets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" }
+        },
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" },
+          "default": []
+        },
+        "content_tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" },
+          "default": []
+        },
+        "llm_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["none", "designer", "batch_generator", "validator", "repair", "summarizer", "selector", "reviewer"]
+          }
+        },
+        "maturity": {
+          "type": "string",
+          "enum": ["planned", "draft", "experimental", "stable"]
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "artifact_contract": {
+      "type": "object",
+      "required": ["id", "title", "purpose", "producer_roles", "consumer_roles", "must_validate"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/plain_id" },
+        "title": { "type": "string" },
+        "purpose": { "type": "string" },
+        "producer_roles": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "consumer_roles": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "must_validate": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    },
+    "validation_level": {
+      "type": "object",
+      "required": ["id", "title", "blocks_apply", "purpose"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/plain_id" },
+        "title": { "type": "string" },
+        "purpose": { "type": "string" },
+        "blocks_apply": { "type": "boolean" }
+      }
+    },
+    "feature_bundle": {
+      "type": "object",
+      "required": ["id", "title", "purpose", "requires", "optional", "outputs", "runtime_targets"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "purpose": { "type": "string" },
+        "requires": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "optional": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" }
+        },
+        "runtime_targets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" }
+        },
+        "content_tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/plain_id" },
+          "default": []
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
