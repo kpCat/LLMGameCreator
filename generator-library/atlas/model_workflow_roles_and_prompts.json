@@ -1,0 +1,490 @@
+{
+  "schema_version": "0.1",
+  "id": "model_workflow_roles_and_prompts/v1",
+  "title": "Model Workflow Roles and Prompt Families",
+  "purpose": "Data-only seed map that defines how LLMGameCreator should use different local or remote models for design discussion, batch generation, repair, validation assistance, scoring and prompt/context selection without treating model output as trusted runtime state.",
+  "principles": [
+    "Model choice is role-based: the same project may use a larger creative model for design discussion and a smaller faster model for batch generation.",
+    "No model output is trusted until parsed, normalized, validated and promoted through artifact contracts and validation pipeline gates.",
+    "Prompt strictness depends on the role: creative discussion may be flexible, batch JSON generation must be contract-bound and enum-preserving.",
+    "Context is selected by capability, artifact contract, tags, project profile, current task and validation failure, not by dumping the entire project into the prompt.",
+    "Adult/NSFW content may be generated only when an explicit project/profile content overlay enables it; such output remains tagged, filterable, export-aware and separate from core mechanics.",
+    "Models may propose Lua modules, atlas patches or Unity IR, but C# validators and human approval own activation and runtime/export gates.",
+    "Repair loops must be bounded, logged and targeted at specific validation failures; they must not ask the model to redesign unrelated systems."
+  ],
+  "model_tiers": [
+    {
+      "id": "model_tier/designer_large/v1",
+      "title": "Designer Large Model",
+      "example_local_model": "Gemma 4 26B A4B Instruct Ultra Uncensored Heretic",
+      "expected_strengths": [
+        "lore",
+        "game concept",
+        "style",
+        "NPC/faction ideas",
+        "complex narrative",
+        "profile discussion",
+        "semantic design"
+      ],
+      "expected_weaknesses": [
+        "slower batch throughput",
+        "may over-elaborate",
+        "still needs contract validation"
+      ],
+      "recommended_context_budget": "24k-64k when needed, with selected design context instead of full project dumps",
+      "recommended_temperature_policy": "moderate for brainstorming, lower for structured specs"
+    },
+    {
+      "id": "model_tier/batch_small_fast/v1",
+      "title": "Batch Small/Fast Model",
+      "example_local_model": "Gemma 4 E4B Instruct Ultra Uncensored Heretic",
+      "expected_strengths": [
+        "mass JSON drafts",
+        "semantic variants",
+        "material/item/location/NPC packs",
+        "template variants",
+        "repair attempts"
+      ],
+      "expected_weaknesses": [
+        "enum drift without strict prompts",
+        "may invent facts",
+        "may need schema/repair loop"
+      ],
+      "recommended_context_budget": "16k-32k for one contract-bound generation task",
+      "recommended_temperature_policy": "low to moderate; prefer contract discipline over maximum creativity"
+    },
+    {
+      "id": "model_tier/validator_or_scorer/v1",
+      "title": "Validator/Scorer Assistant Model",
+      "example_local_model": "small or medium local model, optional",
+      "expected_strengths": [
+        "quality notes",
+        "semantic consistency hints",
+        "sample review",
+        "style scoring"
+      ],
+      "expected_weaknesses": [
+        "must not be final authority",
+        "may miss formal issues"
+      ],
+      "recommended_context_budget": "small targeted context containing artifact, schema and validation report",
+      "recommended_temperature_policy": "low"
+    }
+  ],
+  "workflow_roles": [
+    {
+      "id": "role/designer_llm/v1",
+      "title": "Designer LLM",
+      "preferred_model_tier": "model_tier/designer_large/v1",
+      "purpose": "Discusses game concepts, lore, tone, factions, core mechanics, content overlays and high-level profiles with the user.",
+      "typical_inputs": [
+        "user discussion",
+        "reference_profiles",
+        "capability_atlas",
+        "existing design decisions",
+        "selected lore"
+      ],
+      "typical_outputs": [
+        "game_profile_v1",
+        "feature_bundle_v1 draft",
+        "semantic_pack_v1 draft",
+        "library_growth_proposal_v1"
+      ],
+      "must_not": [
+        "directly mutate GamePackage",
+        "produce active Lua without staging",
+        "silently enable adult/NSFW overlay",
+        "invent approved canon without promotion"
+      ],
+      "required_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_6_human_approval when canon/profile/runtime-impacting"
+      ]
+    },
+    {
+      "id": "role/batch_generator_llm/v1",
+      "title": "Batch Generator LLM",
+      "preferred_model_tier": "model_tier/batch_small_fast/v1",
+      "purpose": "Produces many small contract-bound JSON artifacts or semantic records from approved context and strict prompts.",
+      "typical_inputs": [
+        "single artifact contract",
+        "strict schema",
+        "allowed enums",
+        "selected context snippets",
+        "negative examples",
+        "repair rules"
+      ],
+      "typical_outputs": [
+        "semantic_pack_v1 records",
+        "text_pack_v1 records",
+        "dialogue_pack_v1 records",
+        "rule_pack_v1 draft records",
+        "asset_request_pack_v1 records"
+      ],
+      "must_not": [
+        "change enum/id fields",
+        "invent new canon unless requested via proposed_new_facts",
+        "output markdown fences",
+        "output comments",
+        "mix multiple unrelated contracts in one response"
+      ],
+      "required_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics"
+      ]
+    },
+    {
+      "id": "role/repair_llm/v1",
+      "title": "Repair LLM",
+      "preferred_model_tier": "model_tier/batch_small_fast/v1",
+      "purpose": "Repairs a failed artifact using the original output, validation diagnostics and exact contract rules, without redesigning unrelated content.",
+      "typical_inputs": [
+        "failed artifact",
+        "validation report",
+        "contract excerpt",
+        "original immutable input",
+        "repair target list"
+      ],
+      "typical_outputs": [
+        "repaired artifact candidate"
+      ],
+      "must_not": [
+        "rewrite unrelated fields",
+        "change source ids/enums",
+        "add new facts to fix validation unless the diagnostic explicitly requests it",
+        "hide validation issues"
+      ],
+      "required_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics"
+      ]
+    },
+    {
+      "id": "role/context_selector/v1",
+      "title": "Context Selector",
+      "preferred_model_tier": "deterministic_service_first_optional_llm",
+      "purpose": "Selects relevant context packs, atlas sections, schemas and lore snippets for a task. Deterministic tag selection should run before optional LLM ranking.",
+      "typical_inputs": [
+        "task intent",
+        "artifact contract",
+        "game profile",
+        "capability ids",
+        "content overlay flags",
+        "validation failure codes"
+      ],
+      "typical_outputs": [
+        "prompt_context_pack_v1",
+        "context_selection_report_v1"
+      ],
+      "must_not": [
+        "include all project data by default",
+        "leak disabled content overlays",
+        "include unrelated canon",
+        "override explicit user/project constraints"
+      ],
+      "required_gates": [
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics"
+      ]
+    },
+    {
+      "id": "role/validator_service/v1",
+      "title": "Deterministic Validator Service",
+      "preferred_model_tier": "not_llm",
+      "purpose": "Performs authoritative JSON/schema/id/reference/contract/safety/export validation. This role is deterministic C# or tooling, not model judgment.",
+      "typical_inputs": [
+        "artifact candidate",
+        "artifact_contracts",
+        "validation_pipeline",
+        "capability_atlas",
+        "project settings"
+      ],
+      "typical_outputs": [
+        "validation_report_v1",
+        "repair_target_list",
+        "promotion_decision"
+      ],
+      "must_not": [
+        "delegate final pass/fail to an LLM",
+        "skip blocked failures",
+        "auto-approve architecture/runtime-impacting changes"
+      ],
+      "required_gates": [
+        "all configured validation levels for target contract"
+      ]
+    },
+    {
+      "id": "role/quality_scorer_llm/v1",
+      "title": "Quality Scorer LLM",
+      "preferred_model_tier": "model_tier/validator_or_scorer/v1",
+      "purpose": "Adds non-authoritative quality notes and sampling review signals for style, repetition, semantic plausibility and player-facing readability.",
+      "typical_inputs": [
+        "validated artifacts sample",
+        "style guide",
+        "project profile",
+        "quality criteria"
+      ],
+      "typical_outputs": [
+        "quality_score_report_v1",
+        "sample_review_notes"
+      ],
+      "must_not": [
+        "override deterministic validation",
+        "approve NSFW/export filters",
+        "mutate artifacts directly"
+      ],
+      "required_gates": [
+        "validation.level_3_cross_artifact_consistency when promoted as audit data"
+      ]
+    }
+  ],
+  "prompt_families": [
+    {
+      "id": "prompt_family/design_discussion/v1",
+      "title": "Design Discussion Prompt",
+      "used_by_roles": [
+        "role/designer_llm/v1"
+      ],
+      "strictness": "medium",
+      "output_mode": "structured notes or one named artifact draft",
+      "must_include": [
+        "project goal",
+        "game profile candidates",
+        "enabled/disabled content overlays",
+        "known constraints",
+        "requested decision scope"
+      ],
+      "must_forbid": [
+        "unapproved canon finalization",
+        "runtime state mutation",
+        "large bulk content dumps"
+      ],
+      "recommended_when": [
+        "new game profile",
+        "lore/faction discussion",
+        "mechanic brainstorming",
+        "content overlay planning"
+      ]
+    },
+    {
+      "id": "prompt_family/strict_single_json_artifact/v1",
+      "title": "Strict Single JSON Artifact Prompt",
+      "used_by_roles": [
+        "role/batch_generator_llm/v1",
+        "role/repair_llm/v1"
+      ],
+      "strictness": "high",
+      "output_mode": "exactly one JSON object, no markdown, no comments, no surrounding prose",
+      "must_include": [
+        "artifact contract id",
+        "required schema",
+        "allowed enum/id values",
+        "copy-exact fields",
+        "forbidden fields",
+        "content overlay flags",
+        "example valid shape"
+      ],
+      "must_forbid": [
+        "markdown fences",
+        "renaming ids/enums",
+        "inventing new facts outside proposed_new_facts",
+        "multiple JSON objects",
+        "natural language explanation after JSON"
+      ],
+      "recommended_when": [
+        "batch semantic generation",
+        "text pack records",
+        "dialogue records",
+        "asset/media request records"
+      ]
+    },
+    {
+      "id": "prompt_family/lua_module_proposal/v1",
+      "title": "Lua Module Proposal Prompt",
+      "used_by_roles": [
+        "role/designer_llm/v1",
+        "role/batch_generator_llm/v1"
+      ],
+      "strictness": "high",
+      "output_mode": "staged proposal/spec first; source files only after spec approval",
+      "must_include": [
+        "module id",
+        "capabilities",
+        "input_schema",
+        "output_schema",
+        "config_schema",
+        "artifact contract produced",
+        "unsafe feature ban",
+        "examples",
+        "diagnostics"
+      ],
+      "must_forbid": [
+        "io/os/debug/package/load/loadfile/dofile",
+        "external dependencies",
+        "filesystem/network access",
+        "global writes",
+        "runtime mutation",
+        "unbounded output dumps"
+      ],
+      "recommended_when": [
+        "library growth proposal",
+        "new deterministic generator module",
+        "new IR builder"
+      ]
+    },
+    {
+      "id": "prompt_family/targeted_repair/v1",
+      "title": "Targeted Repair Prompt",
+      "used_by_roles": [
+        "role/repair_llm/v1"
+      ],
+      "strictness": "very_high",
+      "output_mode": "same artifact shape as failed artifact",
+      "must_include": [
+        "failed artifact",
+        "validation errors",
+        "fields allowed to change",
+        "fields forbidden to change",
+        "original input",
+        "expected contract"
+      ],
+      "must_forbid": [
+        "rewriting unrelated fields",
+        "style improvement unrelated to diagnostic",
+        "new canon",
+        "new ids unless explicitly requested"
+      ],
+      "recommended_when": [
+        "repairable_fail",
+        "schema/key errors",
+        "enum drift",
+        "missing required fields"
+      ]
+    },
+    {
+      "id": "prompt_family/quality_sample_review/v1",
+      "title": "Quality Sample Review Prompt",
+      "used_by_roles": [
+        "role/quality_scorer_llm/v1"
+      ],
+      "strictness": "medium_high",
+      "output_mode": "JSON report with scores and notes",
+      "must_include": [
+        "sample artifacts",
+        "project style guide",
+        "quality rubric",
+        "known forbidden patterns"
+      ],
+      "must_forbid": [
+        "declaring formal validation pass/fail",
+        "rewriting artifacts unless requested",
+        "making platform/export decisions"
+      ],
+      "recommended_when": [
+        "sampling review",
+        "duplicate/repetition checks",
+        "style drift checks",
+        "semantic plausibility scoring"
+      ]
+    }
+  ],
+  "strict_single_json_rules": [
+    "Return exactly one JSON object.",
+    "Do not wrap the response in Markdown/code fences.",
+    "Do not add explanations before or after JSON.",
+    "Copy exact input ids/enums when a field says copy_exact=true.",
+    "Do not translate machine-readable ids/enums.",
+    "Use proposed_new_facts only for clearly marked optional suggestions; never treat them as approved canon.",
+    "When adult/NSFW overlay is disabled, do not generate adult/NSFW content or asset requests.",
+    "When adult/NSFW overlay is enabled, tag relevant records explicitly and keep them export-filterable.",
+    "Prefer arrays and objects with stable keys over free-form paragraphs for runtime-facing data.",
+    "If the contract cannot be satisfied, return a valid JSON object with ok=false and diagnostics, if the contract allows it."
+  ],
+  "context_selection_policy": {
+    "default_order": [
+      "artifact contract",
+      "exact task instruction",
+      "allowed enum/id lists",
+      "game profile and enabled overlays",
+      "relevant capability records",
+      "minimal lore/style snippets",
+      "previous approved artifacts relevant to the same ids",
+      "validation failure report for repair tasks"
+    ],
+    "exclude_by_default": [
+      "full project dump",
+      "unrelated lore",
+      "disabled content overlays",
+      "raw generated artifacts not approved or not needed",
+      "large asset lists unless the task targets assets"
+    ],
+    "selection_methods": [
+      "deterministic tags first",
+      "contract id matching",
+      "capability dependency matching",
+      "project profile matching",
+      "optional LLM ranking only after deterministic shortlist"
+    ]
+  },
+  "repair_loop_policy": {
+    "max_attempts_default": 2,
+    "allowed_for_outcomes": [
+      "repairable_fail"
+    ],
+    "blocked_for_outcomes": [
+      "blocked_fail",
+      "review_required"
+    ],
+    "must_log": [
+      "original artifact",
+      "validation report",
+      "repair prompt family",
+      "attempt number",
+      "changed fields",
+      "final result"
+    ],
+    "stop_conditions": [
+      "validation passes",
+      "same error repeats",
+      "model changes forbidden field",
+      "max attempts reached"
+    ]
+  },
+  "nsfw_overlay_policy": {
+    "default_state": "disabled unless explicit project/profile overlay enables it",
+    "applies_to": [
+      "text_pack_v1",
+      "dialogue_pack_v1",
+      "semantic_pack_v1",
+      "asset_request_pack_v1",
+      "audio_request_pack_v1",
+      "animation_request_pack_v1",
+      "content_overlay_pack_v1"
+    ],
+    "required_metadata_when_enabled": [
+      "content_overlay_id",
+      "content_tags",
+      "rating_tags",
+      "export_filters",
+      "user_visible_toggle"
+    ],
+    "must_not": [
+      "silently affect core mechanics",
+      "hide NSFW content in neutral tags",
+      "bypass export/platform filters",
+      "generate media requests when target export forbids them"
+    ]
+  },
+  "next_recommended_seed": {
+    "id": "prompt_context_pack_map/v1",
+    "files": [
+      "generator-library/atlas/prompt_context_pack_map.json",
+      "docs/PROMPT_CONTEXT_PACK_MAP.md"
+    ],
+    "purpose": "Define how selected context packs are assembled, cached, versioned and attached to model roles without dumping the whole project into prompts."
+  }
+}
