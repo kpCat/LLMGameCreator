@@ -1,0 +1,440 @@
+{
+  "schema_version": "0.1",
+  "id": "generator_plan_map/v1",
+  "title": "Generator Plan Map",
+  "purpose": "Data-only seed map that defines how selected feature bundles become ordered, validated, repairable generator plans without letting LLM or Lua output bypass artifact contracts, validation gates, staging or human approval.",
+  "principles": [
+    "A generator plan is an execution proposal, not trusted execution by itself.",
+    "Plans are built from approved or candidate game profiles, selected feature bundles, artifact contracts, prompt context packs and validation pipeline rules.",
+    "Each plan step must declare inputs, context pack template, producer role, expected artifact contract, validation gates, repair policy and promotion target.",
+    "LLM and Lua may produce draft artifacts, IR, semantic packs, text packs, module proposals or patch artifacts only through named contracts.",
+    "C# services own parsing, normalization, validation, staging, dry-run, approval, compilation and export gates.",
+    "Plans should be small and composable; huge monolithic all-game generation plans are anti-patterns.",
+    "Adult/NSFW generation appears only as explicit content overlay steps and tagged artifact contracts when the active profile enables the overlay.",
+    "Failed steps should produce validation reports and targeted repair prompts instead of restarting the whole plan."
+  ],
+  "plan_states": [
+    "draft",
+    "normalized",
+    "validated",
+    "awaiting_approval",
+    "approved",
+    "running",
+    "paused_for_review",
+    "repairing",
+    "completed",
+    "failed",
+    "rejected",
+    "archived"
+  ],
+  "step_states": [
+    "pending",
+    "context_selected",
+    "prompt_rendered",
+    "generated",
+    "parsed",
+    "normalized",
+    "validated",
+    "repair_requested",
+    "staged",
+    "approved",
+    "compiled",
+    "exported",
+    "failed",
+    "skipped"
+  ],
+  "plan_shape": {
+    "required_fields": [
+      "id",
+      "title",
+      "source_profile_id",
+      "selected_feature_bundles",
+      "target_artifacts",
+      "steps",
+      "validation_policy",
+      "promotion_policy"
+    ],
+    "optional_fields": [
+      "content_overlays",
+      "runtime_targets",
+      "context_budget",
+      "sampling_policy",
+      "repair_policy",
+      "execution_notes",
+      "blocked_reasons"
+    ]
+  },
+  "step_shape": {
+    "required_fields": [
+      "id",
+      "title",
+      "order",
+      "producer_role",
+      "inputs",
+      "context_pack_template",
+      "expected_artifact_contract",
+      "validation_gates",
+      "on_success",
+      "on_failure"
+    ],
+    "optional_fields": [
+      "model_tier",
+      "lua_module_id",
+      "generator_config_id",
+      "content_overlay",
+      "runtime_targets",
+      "max_repair_attempts",
+      "human_review_reason",
+      "notes"
+    ]
+  },
+  "plan_build_flow": [
+    {
+      "id": "generator_plan.step_0_read_profile_and_bundles",
+      "order": 0,
+      "title": "Read profile and selected bundles",
+      "inputs": [
+        "game_profile_v1",
+        "feature_bundle_selection_v1",
+        "feature_bundle_map"
+      ],
+      "outputs": [
+        "plan_requirements"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "generator_plan.step_1_resolve_contract_targets",
+      "order": 1,
+      "title": "Resolve target artifact contracts",
+      "inputs": [
+        "plan_requirements",
+        "artifact_contracts"
+      ],
+      "outputs": [
+        "target_artifact_contract_list"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "generator_plan.step_2_select_generators_or_gaps",
+      "order": 2,
+      "title": "Select known generators or create gaps",
+      "inputs": [
+        "target_artifact_contract_list",
+        "capability_atlas",
+        "library_growth_pipeline"
+      ],
+      "outputs": [
+        "generator_step_candidates",
+        "library_growth_proposal_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "generator_plan.step_3_order_steps_by_dependencies",
+      "order": 3,
+      "title": "Order steps by dependencies and validation cost",
+      "inputs": [
+        "generator_step_candidates",
+        "artifact_contracts",
+        "validation_pipeline"
+      ],
+      "outputs": [
+        "ordered_generator_plan_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "generator_plan.step_4_attach_context_templates",
+      "order": 4,
+      "title": "Attach prompt context templates",
+      "inputs": [
+        "ordered_generator_plan_v1",
+        "prompt_context_pack_map",
+        "model_workflow_roles_and_prompts"
+      ],
+      "outputs": [
+        "context_bound_generator_plan_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "generator_plan.step_5_validate_plan",
+      "order": 5,
+      "title": "Validate the plan before execution",
+      "inputs": [
+        "context_bound_generator_plan_v1",
+        "validation_pipeline"
+      ],
+      "outputs": [
+        "validated_generator_plan_v1",
+        "validation_report_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "generator_plan.step_6_approval_gate",
+      "order": 6,
+      "title": "Approve execution when required",
+      "inputs": [
+        "validated_generator_plan_v1",
+        "validation_report_v1"
+      ],
+      "outputs": [
+        "approved_generator_plan_v1"
+      ],
+      "automatic": false
+    }
+  ],
+  "step_kinds": [
+    {
+      "id": "step_kind/design_profile_summary/v1",
+      "title": "Design profile summary",
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/design_discussion/v1",
+      "expected_artifact_contract": "game_profile_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_6_human_approval"
+      ]
+    },
+    {
+      "id": "step_kind/semantic_pack_generation/v1",
+      "title": "Semantic pack generation",
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "semantic_pack_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency"
+      ],
+      "default_repair_policy": "targeted_repair_before_reject"
+    },
+    {
+      "id": "step_kind/text_pack_generation/v1",
+      "title": "Text pack generation",
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/batch_generation_round_robin/v1",
+      "expected_artifact_contract": "text_pack_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency"
+      ],
+      "default_repair_policy": "targeted_repair_before_reject"
+    },
+    {
+      "id": "step_kind/morphology_pack_compile_plan/v1",
+      "title": "Morphology pack compile plan",
+      "producer_role": "validator_service",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "morphology_pack_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics"
+      ]
+    },
+    {
+      "id": "step_kind/content_overlay_pack_generation/v1",
+      "title": "Content overlay pack generation",
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "content_overlay_pack_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency",
+        "validation.level_6_human_approval"
+      ],
+      "requires_explicit_overlay": true,
+      "default_repair_policy": "targeted_repair_or_review"
+    },
+    {
+      "id": "step_kind/lua_module_proposal/v1",
+      "title": "Lua module proposal",
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/lua_module_proposal/v1",
+      "expected_artifact_contract": "library_growth_proposal_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_6_human_approval"
+      ]
+    },
+    {
+      "id": "step_kind/runtime_db_build_plan/v1",
+      "title": "Runtime DB build plan",
+      "producer_role": "validator_service",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "runtime_db_build_plan_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_3_cross_artifact_consistency",
+        "validation.level_5_export_dry_run"
+      ]
+    },
+    {
+      "id": "step_kind/unity_ir_export_plan/v1",
+      "title": "Unity IR export plan",
+      "producer_role": "validator_service",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "unity_ir_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_5_export_dry_run"
+      ]
+    },
+    {
+      "id": "step_kind/media_request_generation/v1",
+      "title": "Media request generation",
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "asset_request_pack_v1",
+      "default_validation_gates": [
+        "validation.level_0_json_shape",
+        "validation.level_1_ids_enums_refs",
+        "validation.level_2_contract_semantics",
+        "validation.level_5_export_dry_run"
+      ],
+      "supports_optional_adult_overlay": true
+    }
+  ],
+  "plan_templates": [
+    {
+      "id": "plan_template/minimal_profile_to_semantic_pack/v1",
+      "title": "Minimal profile to semantic pack",
+      "purpose": "Small safe plan for turning an approved profile into first semantic/text packs.",
+      "recommended_for": [
+        "debug",
+        "headless",
+        "early_prototype"
+      ],
+      "steps": [
+        "step_kind/semantic_pack_generation/v1",
+        "step_kind/text_pack_generation/v1"
+      ],
+      "requires_human_approval_before_run": false,
+      "requires_human_approval_before_promotion": true
+    },
+    {
+      "id": "plan_template/profile_to_runtime_preview/v1",
+      "title": "Profile to runtime preview data",
+      "purpose": "Builds semantic/text/game package patches and a runtime DB build plan for debug/headless preview.",
+      "recommended_for": [
+        "debug",
+        "headless"
+      ],
+      "steps": [
+        "step_kind/semantic_pack_generation/v1",
+        "step_kind/text_pack_generation/v1",
+        "step_kind/morphology_pack_compile_plan/v1",
+        "step_kind/runtime_db_build_plan/v1"
+      ],
+      "requires_human_approval_before_run": true,
+      "requires_human_approval_before_promotion": true
+    },
+    {
+      "id": "plan_template/profile_to_unity_export_dry_run/v1",
+      "title": "Profile to Unity export dry-run",
+      "purpose": "Creates runtime DB plan, Unity IR and asset index preview without generating final Unity code.",
+      "recommended_for": [
+        "unity2d",
+        "unity3d",
+        "isometric",
+        "pseudo3d",
+        "visual_novel",
+        "city_builder"
+      ],
+      "steps": [
+        "step_kind/runtime_db_build_plan/v1",
+        "step_kind/unity_ir_export_plan/v1",
+        "step_kind/media_request_generation/v1"
+      ],
+      "requires_human_approval_before_run": true,
+      "requires_human_approval_before_promotion": true
+    },
+    {
+      "id": "plan_template/adult_overlay_generation/v1",
+      "title": "Adult overlay generation",
+      "purpose": "Optional explicit plan for generating adult/NSFW tagged content overlay artifacts when enabled by the project profile.",
+      "recommended_for": [
+        "visual_novel",
+        "party_rpg",
+        "sandbox",
+        "narrative_rpg"
+      ],
+      "steps": [
+        "step_kind/content_overlay_pack_generation/v1",
+        "step_kind/media_request_generation/v1"
+      ],
+      "requires_explicit_content_overlay": "content_overlay/optional_adult_nsfw/v1",
+      "requires_human_approval_before_run": true,
+      "requires_human_approval_before_promotion": true
+    },
+    {
+      "id": "plan_template/library_gap_to_module_proposal/v1",
+      "title": "Library gap to module proposal",
+      "purpose": "Turns a missing capability into a staged library growth proposal instead of inventing untracked code.",
+      "recommended_for": [
+        "library_growth",
+        "capability_gap"
+      ],
+      "steps": [
+        "step_kind/lua_module_proposal/v1"
+      ],
+      "requires_human_approval_before_run": true,
+      "requires_human_approval_before_promotion": true
+    }
+  ],
+  "repair_policies": [
+    {
+      "id": "repair_policy/none/v1",
+      "title": "No automatic repair",
+      "use_when": "Architecture, approval, security, overlay permission or runtime-impacting checks fail."
+    },
+    {
+      "id": "repair_policy/targeted_repair_before_reject/v1",
+      "title": "Targeted repair before reject",
+      "max_attempts": 2,
+      "context_template": "context_template/targeted_repair/v1",
+      "use_when": "JSON shape, missing required fields, enum drift, minor schema mismatch or local semantic issue."
+    },
+    {
+      "id": "repair_policy/targeted_repair_or_review/v1",
+      "title": "Targeted repair or review",
+      "max_attempts": 1,
+      "context_template": "context_template/targeted_repair/v1",
+      "use_when": "Content overlay artifact is structurally repairable but may require review due to content or export implications."
+    }
+  ],
+  "promotion_rules": [
+    "A plan may not run if required artifact contracts are unknown or unresolved.",
+    "A plan may not run adult/NSFW steps unless the active profile explicitly enables the matching content overlay.",
+    "A step may not promote generated output unless all required validation gates pass or the plan explicitly pauses for human review.",
+    "A plan may not compile runtime.db or Unity IR from draft artifacts; sources must be validated/staged or approved according to contract policy.",
+    "A generator plan that discovers missing capability must produce a library growth proposal, not untracked files.",
+    "Plan execution traces should be archived with selected context packs, prompts, model ids, outputs, validation reports and repair attempts."
+  ],
+  "anti_patterns": [
+    "one huge generate-the-whole-game prompt",
+    "generator step without expected_artifact_contract",
+    "context dump without selected source reasons",
+    "repair prompt that invites unrelated redesign",
+    "hidden adult/NSFW generation inside generic dialogue or image generation step",
+    "Unity code generation before Unity IR and export dry-run",
+    "runtime.db compilation from unapproved or unvalidated artifacts"
+  ]
+}
