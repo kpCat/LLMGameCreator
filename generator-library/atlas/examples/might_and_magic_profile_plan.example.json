@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.1",
+  "example_id": "example/might_and_magic_profile_plan/v1",
+  "title": "Might-and-Magic-like Party RPG Generator Plan Example",
+  "purpose": "Shows how a negotiated party RPG profile can become a small ordered generator plan without monolithic all-game generation.",
+  "source_profile": {
+    "id": "profile/might_and_magic_like_party_rpg/v1",
+    "summary": "Pseudo-3D party RPG with region exploration, party roster, paper-doll equipment, skills, spells, quests, factions and hybrid combat.",
+    "runtime_targets": ["pseudo3d", "first_person_grid", "unity3d", "headless"],
+    "world_scale": "region_based_open_world",
+    "combat_mode": "realtime_turn_hybrid",
+    "content_overlays": ["content_overlay/horror_gore_optional/v1"],
+    "media_scope": ["portraits", "items", "locations", "music", "sfx"]
+  },
+  "selected_feature_bundles": [
+    "feature_bundle/might_and_magic_like_party_rpg/v1",
+    "feature_bundle/inventory_paper_doll_grid/v1",
+    "feature_bundle/combat_realtime_turn_hybrid/v1",
+    "feature_bundle/dialogue_choice_graph/v1",
+    "feature_bundle/faction_reputation/v1",
+    "feature_bundle/runtime_db_build_plan/v1",
+    "feature_bundle/unity_ir_runtime_shell/v1",
+    "feature_bundle/media_request_generation/v1",
+    "feature_bundle/horror_gore_overlay/v1"
+  ],
+  "target_artifacts": [
+    "game_profile_v1",
+    "semantic_pack_v1",
+    "text_pack_v1",
+    "dialogue_pack_v1",
+    "formula_pack_v1",
+    "content_overlay_pack_v1",
+    "runtime_db_build_plan_v1",
+    "unity_ir_v1",
+    "asset_request_pack_v1",
+    "audio_request_pack_v1"
+  ],
+  "context_budget": "budget/medium/v1",
+  "steps": [
+    {
+      "id": "step/profile_summary",
+      "title": "Normalize party RPG profile summary",
+      "order": 0,
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/design_discussion/v1",
+      "expected_artifact_contract": "game_profile_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_6_human_approval"],
+      "on_success": "stage_profile",
+      "on_failure": "request_profile_clarification"
+    },
+    {
+      "id": "step/semantic_foundation",
+      "title": "Generate semantic foundation for regions, factions, items and party roles",
+      "order": 1,
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "semantic_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "on_success": "stage_semantic_pack",
+      "on_failure": "targeted_repair"
+    },
+    {
+      "id": "step/combat_formula_pack",
+      "title": "Draft bounded formulas for hybrid combat and status effects",
+      "order": 2,
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "formula_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_4_headless_smoke_test"],
+      "on_success": "stage_formula_pack",
+      "on_failure": "targeted_repair"
+    },
+    {
+      "id": "step/runtime_export_plan",
+      "title": "Build runtime DB and Unity IR export plan",
+      "order": 3,
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/lua_module_proposal/v1",
+      "expected_artifact_contract": "runtime_db_build_plan_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_3_cross_artifact_consistency", "validation.level_5_export_dry_run"],
+      "on_success": "stage_export_plan",
+      "on_failure": "targeted_repair"
+    }
+  ],
+  "anti_patterns_avoided": [
+    "generate entire world in one request",
+    "generate Unity code directly",
+    "mix combat formulas with unchecked story text",
+    "load loose JSON dumps in final Unity runtime"
+  ]
+}

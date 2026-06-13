@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.1",
+  "example_id": "example/anno_city_builder_profile_plan/v1",
+  "title": "Anno-like City Builder with Conquest Generator Plan Example",
+  "purpose": "Shows how a city-builder/conquest profile can become modular data-generation work instead of one giant simulation request.",
+  "source_profile": {
+    "id": "profile/anno1404_like_city_builder_conquest/v1",
+    "summary": "Settlement builder with population needs, production chains, trade routes, diplomacy, military pressure and region capture.",
+    "runtime_targets": ["city_builder", "isometric", "unity2d", "unity3d", "headless"],
+    "world_scale": "islands_regions_trade_network",
+    "combat_mode": "strategic_conquest",
+    "content_overlays": [],
+    "media_scope": ["buildings", "resources", "portraits", "maps", "music", "sfx"]
+  },
+  "selected_feature_bundles": [
+    "feature_bundle/anno1404_like_city_builder_conquest/v1",
+    "feature_bundle/faction_reputation/v1",
+    "feature_bundle/runtime_db_build_plan/v1",
+    "feature_bundle/unity_ir_runtime_shell/v1",
+    "feature_bundle/media_request_generation/v1"
+  ],
+  "target_artifacts": [
+    "game_profile_v1",
+    "semantic_pack_v1",
+    "rule_pack_v1",
+    "formula_pack_v1",
+    "runtime_db_build_plan_v1",
+    "unity_ir_v1",
+    "asset_request_pack_v1",
+    "audio_request_pack_v1"
+  ],
+  "context_budget": "budget/medium/v1",
+  "steps": [
+    {
+      "id": "step/profile_summary",
+      "title": "Normalize city-builder profile summary",
+      "order": 0,
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/design_discussion/v1",
+      "expected_artifact_contract": "game_profile_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_6_human_approval"],
+      "on_success": "stage_profile",
+      "on_failure": "request_profile_clarification"
+    },
+    {
+      "id": "step/production_graph_rules",
+      "title": "Generate production graph, needs tiers and logistics rules",
+      "order": 1,
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "rule_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_4_headless_smoke_test"],
+      "on_success": "stage_rule_pack",
+      "on_failure": "targeted_repair"
+    },
+    {
+      "id": "step/economy_balance_formulas",
+      "title": "Draft bounded formulas for population needs, production throughput and conquest pressure",
+      "order": 2,
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "formula_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_4_headless_smoke_test"],
+      "on_success": "stage_formula_pack",
+      "on_failure": "targeted_repair"
+    },
+    {
+      "id": "step/runtime_db_plan",
+      "title": "Plan compiled tables for resources, buildings, chains, settlements, trade and conquest state",
+      "order": 3,
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "runtime_db_build_plan_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_3_cross_artifact_consistency", "validation.level_5_export_dry_run"],
+      "on_success": "stage_runtime_db_plan",
+      "on_failure": "targeted_repair"
+    }
+  ],
+  "anti_patterns_avoided": [
+    "ask model to simulate economy directly at runtime",
+    "generate thousands of building instances before rules are validated",
+    "mix UI layout with economy formulas",
+    "skip headless balance smoke tests"
+  ]
+}

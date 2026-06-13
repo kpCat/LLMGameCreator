@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.1",
+  "example_id": "example/narrative_political_rpg_profile_plan/v1",
+  "title": "Narrative Political RPG / Visual Novel Generator Plan Example",
+  "purpose": "Shows how a The-Last-Sovereign-like profile can combine narrative routes, politics, factions, relationship systems and optional adult content overlays through tagged contracts.",
+  "source_profile": {
+    "id": "profile/the_last_sovereign_like_narrative_political_rpg/v1",
+    "summary": "Narrative-heavy political RPG/visual novel with factions, relationship routes, strategic choices, optional mature/adult overlays and RPG progression hooks.",
+    "runtime_targets": ["visual_novel", "unity2d", "headless"],
+    "world_scale": "chapter_regions_and_routes",
+    "combat_mode": "optional_turn_based_or_story_resolved",
+    "content_overlays": ["content_overlay/optional_adult_nsfw/v1"],
+    "media_scope": ["portraits", "scene_images", "music", "sfx", "future_animation_requests"]
+  },
+  "selected_feature_bundles": [
+    "feature_bundle/the_last_sovereign_like_narrative_political_rpg/v1",
+    "feature_bundle/dialogue_choice_graph/v1",
+    "feature_bundle/faction_reputation/v1",
+    "feature_bundle/optional_adult_nsfw_overlay/v1",
+    "feature_bundle/runtime_db_build_plan/v1",
+    "feature_bundle/unity_ir_runtime_shell/v1",
+    "feature_bundle/media_request_generation/v1"
+  ],
+  "target_artifacts": [
+    "game_profile_v1",
+    "semantic_pack_v1",
+    "dialogue_pack_v1",
+    "text_pack_v1",
+    "content_overlay_pack_v1",
+    "asset_request_pack_v1",
+    "audio_request_pack_v1",
+    "animation_request_pack_v1",
+    "runtime_db_build_plan_v1",
+    "unity_ir_v1"
+  ],
+  "context_budget": "budget/large/v1",
+  "steps": [
+    {
+      "id": "step/profile_summary",
+      "title": "Normalize narrative political RPG profile summary",
+      "order": 0,
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/design_discussion/v1",
+      "expected_artifact_contract": "game_profile_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_6_human_approval"],
+      "on_success": "stage_profile",
+      "on_failure": "request_profile_clarification"
+    },
+    {
+      "id": "step/faction_route_semantics",
+      "title": "Generate semantic pack for factions, routes, relationship flags and political consequences",
+      "order": 1,
+      "producer_role": "role/designer_llm/v1",
+      "context_pack_template": "context_template/design_discussion/v1",
+      "expected_artifact_contract": "semantic_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "on_success": "stage_semantic_pack",
+      "on_failure": "targeted_repair"
+    },
+    {
+      "id": "step/dialogue_route_pack",
+      "title": "Generate dialogue route graph and chapter-level scene descriptors",
+      "order": 2,
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "dialogue_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "on_success": "stage_dialogue_pack",
+      "on_failure": "targeted_repair"
+    },
+    {
+      "id": "step/adult_overlay_pack",
+      "title": "Generate optional adult/NSFW overlay metadata and media request tags if explicitly enabled",
+      "order": 3,
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "content_overlay_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_6_human_approval"],
+      "on_success": "stage_tagged_overlay_pack",
+      "on_failure": "block_overlay_generation"
+    },
+    {
+      "id": "step/media_request_pack",
+      "title": "Generate tagged image/audio/future-animation request packs from approved scene metadata",
+      "order": 4,
+      "producer_role": "role/batch_generator_llm/v1",
+      "context_pack_template": "context_template/strict_single_json_artifact/v1",
+      "expected_artifact_contract": "asset_request_pack_v1",
+      "validation_gates": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_5_export_dry_run"],
+      "on_success": "stage_media_request_pack",
+      "on_failure": "targeted_repair"
+    }
+  ],
+  "anti_patterns_avoided": [
+    "hide adult content inside normal dialogue records",
+    "generate final scene images before overlay approval",
+    "let free text mutate relationship or faction state directly",
+    "generate all routes as a single unvalidated dump"
+  ]
+}
