@@ -1,0 +1,287 @@
+{
+  "schema_version": "0.1",
+  "id": "game_profile_negotiation_map/v1",
+  "title": "Game Profile Negotiation Map",
+  "purpose": "Data-only seed map that defines how LLMGameCreator should negotiate a concrete game profile from user discussion before selecting capabilities, generator plans, artifact contracts, prompt context packs, runtime DB plans or Unity export targets.",
+  "principles": [
+    "A game profile is a contract input for planning, not a vague genre label.",
+    "The profile negotiation should ask only decision-bearing questions; cosmetic details can be deferred to design knowledge and semantic generation.",
+    "The result must be compact enough to drive capability selection, context selection, validation focus and runtime/export planning.",
+    "Profiles can combine multiple inspirations, for example party RPG exploration, city-builder economy, visual novel relationship routes and optional adult/NSFW content overlays.",
+    "Adult/NSFW content is an optional project/profile overlay and may apply across genres when explicitly enabled; it remains tagged, filterable, export-aware and separate from core mechanics.",
+    "Unknown or undecided answers should be represented explicitly instead of guessed; the planner may produce alternative profile variants when the user has not decided.",
+    "A negotiated profile must declare runtime targets, world scale, time/combat mode, content overlays, generation scale, persistence strategy and validation focus before heavy generator work starts.",
+    "The negotiation output does not mutate GamePackage, does not execute Lua and does not generate Unity code. It feeds atlas selection and downstream artifacts."
+  ],
+  "profile_states": [
+    "draft_discussion",
+    "candidate_profile",
+    "normalized_profile",
+    "validated_profile",
+    "profile_variant_review",
+    "approved_profile",
+    "archived_profile"
+  ],
+  "negotiation_outputs": [
+    "game_profile_v1",
+    "feature_bundle_selection_v1",
+    "content_overlay_selection_v1",
+    "runtime_target_selection_v1",
+    "prompt_context_plan_v1",
+    "validation_focus_plan_v1"
+  ],
+  "decision_groups": [
+    {
+      "id": "decision_group/game_identity/v1",
+      "title": "Game Identity",
+      "purpose": "Clarify the intended player fantasy, genre blend, tone, audience and reference inspirations.",
+      "required_for_profile": true,
+      "decisions": [
+        {
+          "id": "decision/player_fantasy/v1",
+          "question": "What should the player primarily feel they are doing?",
+          "answer_type": "short_text_or_ranked_choices",
+          "examples": ["exploring a dangerous world", "building a settlement empire", "leading a party", "surviving", "solving political intrigue", "managing relationships"],
+          "maps_to": ["profile.summary", "feature_bundle_selection_v1"]
+        },
+        {
+          "id": "decision/reference_profiles/v1",
+          "question": "Which reference profiles or inspirations should be combined?",
+          "answer_type": "list_of_profile_ids_or_freeform_inspirations",
+          "examples": ["profile/might_and_magic_like_party_rpg/v1", "profile/anno1404_like_city_builder_conquest/v1", "profile/the_last_sovereign_like_narrative_political_rpg/v1"],
+          "maps_to": ["profile.reference_profiles", "profile.primary_bundle", "profile.optional_feature_bundles"]
+        },
+        {
+          "id": "decision/tone_and_rating/v1",
+          "question": "What tone and content rating should the project target?",
+          "answer_type": "enum_plus_overlays",
+          "allowed_values": ["family_friendly", "teen", "mature", "adult_explicit_when_enabled", "dark", "comedic", "political", "romantic", "horror"],
+          "maps_to": ["profile.tone", "content_overlay_selection_v1", "validation_focus_plan_v1"]
+        }
+      ]
+    },
+    {
+      "id": "decision_group/runtime_view_and_platform/v1",
+      "title": "Runtime View and Platform",
+      "purpose": "Decide how the game is viewed and what runtime shell/export target should eventually support it.",
+      "required_for_profile": true,
+      "decisions": [
+        {
+          "id": "decision/runtime_targets/v1",
+          "question": "Which runtime targets must the profile support?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["debug", "headless", "unity2d", "unity3d", "isometric", "pseudo3d", "first_person_grid", "city_builder", "visual_novel", "automation"],
+          "maps_to": ["profile.runtime_targets", "runtime_target_selection_v1"]
+        },
+        {
+          "id": "decision/view_mode/v1",
+          "question": "How should the player view and navigate the world?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["top_down_2d", "isometric", "side_view", "visual_novel_scenes", "pseudo3d_party_view", "first_person_grid", "free_3d", "city_builder_camera", "tactical_grid", "map_overlay"],
+          "maps_to": ["profile.view_modes", "feature_bundle_selection_v1", "unity_ir_v1"]
+        },
+        {
+          "id": "decision/platform_filters/v1",
+          "question": "Are there platform/export restrictions that affect content or assets?",
+          "answer_type": "list_or_unknown",
+          "examples": ["desktop only", "itch.io adult build", "Steam safe build", "mobile later", "private offline build"],
+          "maps_to": ["profile.platform_filters", "content_overlay_selection_v1", "asset_request_pack_v1"]
+        }
+      ]
+    },
+    {
+      "id": "decision_group/world_and_generation/v1",
+      "title": "World and Generation",
+      "purpose": "Clarify world scale, procedural generation, persistence and chunking needs.",
+      "required_for_profile": true,
+      "decisions": [
+        {
+          "id": "decision/world_scale/v1",
+          "question": "What world scale should generation support?",
+          "answer_type": "enum",
+          "allowed_values": ["single_map", "multi_map", "region", "continent", "planet", "infinite_chunks", "scene_routes", "settlement_region"],
+          "maps_to": ["profile.world_scale", "runtime_db_build_plan_v1", "validation_focus_plan_v1"]
+        },
+        {
+          "id": "decision/procedural_scope/v1",
+          "question": "Which parts should be procedural, hand-authored, or hybrid?",
+          "answer_type": "section_map",
+          "sections": ["world", "locations", "quests", "dialogue", "items", "NPCs", "economy", "combat", "assets", "audio"],
+          "maps_to": ["profile.generation_scope", "generator_plan_v1", "prompt_context_plan_v1"]
+        },
+        {
+          "id": "decision/persistence_model/v1",
+          "question": "What must persist across saves and world updates?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["quest_state", "npc_memory", "relationships", "faction_state", "inventory_state", "chunk_deltas", "city_state", "economy_state", "generated_asset_refs", "adult_content_flags"],
+          "maps_to": ["runtime_db_build_plan_v1", "save_overlay_schema_v1"]
+        }
+      ]
+    },
+    {
+      "id": "decision_group/characters_party_and_progression/v1",
+      "title": "Characters, Party and Progression",
+      "purpose": "Choose protagonist structure, party model, stats, skills, classes and progression style.",
+      "required_for_profile": false,
+      "decisions": [
+        {
+          "id": "decision/player_structure/v1",
+          "question": "Is the player a single character, party, faction, city, colony or abstract role?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["single_character", "party", "faction_leader", "city_ruler", "colony_manager", "ship_crew", "visual_novel_protagonist", "god_view_controller"],
+          "maps_to": ["feature_bundle_selection_v1", "profile.player_structure"]
+        },
+        {
+          "id": "decision/progression_style/v1",
+          "question": "How should progression work?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["levels", "skills_by_use", "classes", "perks", "research", "reputation", "relationship_routes", "equipment_power", "city_tiers", "technology_tree"],
+          "maps_to": ["progression_capabilities", "formula_pack_v1", "validation_focus_plan_v1"]
+        },
+        {
+          "id": "decision/inventory_equipment_style/v1",
+          "question": "What inventory/equipment model should be supported?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["none", "simple_slots", "grid_inventory", "paper_doll", "party_inventory", "weight_based", "container_based", "city_stockpiles", "factory_buffers"],
+          "maps_to": ["feature_bundle/inventory", "unity_ir_v1", "runtime_db_build_plan_v1"]
+        }
+      ]
+    },
+    {
+      "id": "decision_group/combat_interaction_and_dialogue/v1",
+      "title": "Combat, Interaction and Dialogue",
+      "purpose": "Decide action model, combat mode, free text usage, dialogue style and social mechanics.",
+      "required_for_profile": true,
+      "decisions": [
+        {
+          "id": "decision/combat_mode/v1",
+          "question": "What combat mode should the game support?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["none", "realtime", "turn_based", "tactical", "dialogue_combat", "hybrid_realtime_turn_based", "auto_resolve", "army_battle", "city_conquest"],
+          "maps_to": ["profile.combat_modes", "combat_capabilities", "validation_focus_plan_v1"]
+        },
+        {
+          "id": "decision/dialogue_model/v1",
+          "question": "How should dialogue work?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["none", "static_choice_graph", "fact_based_choices", "relationship_routes", "free_text_nlu_optional", "dialogue_combat", "visual_novel_routes", "political_negotiation"],
+          "maps_to": ["dialogue_pack_v1", "semantic_pack_v1", "prompt_context_plan_v1"]
+        },
+        {
+          "id": "decision/action_authority/v1",
+          "question": "Which actions may be free text and which must be explicit runtime actions?",
+          "answer_type": "section_map",
+          "sections": ["movement", "combat", "dialogue", "romance/adult scenes when enabled", "crafting", "city orders", "quest actions", "asset generation requests"],
+          "maps_to": ["validation_focus_plan_v1", "artifact_contracts", "runtime_rules"]
+        }
+      ]
+    },
+    {
+      "id": "decision_group/content_overlays_and_media/v1",
+      "title": "Content Overlays and Media",
+      "purpose": "Clarify optional mature/adult/horror overlays and future text/image/audio/animation generation boundaries.",
+      "required_for_profile": true,
+      "decisions": [
+        {
+          "id": "decision/content_overlays/v1",
+          "question": "Which optional content overlays are enabled for this project?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["none", "optional_adult_nsfw", "horror_gore_optional", "dark_politics", "romance", "comedy", "psychological", "alien_nonhuman"],
+          "maps_to": ["content_overlay_selection_v1", "content_overlay_pack_v1", "prompt_context_plan_v1"]
+        },
+        {
+          "id": "decision/media_generation_scope/v1",
+          "question": "Which media may eventually be generated or requested?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["text", "portraits", "sprites", "tilesets", "items", "locations", "music", "sound_effects", "voice", "future_animation"],
+          "maps_to": ["asset_request_pack_v1", "audio_request_pack_v1", "animation_request_pack_v1", "asset_index_v1"]
+        },
+        {
+          "id": "decision/content_filter_variants/v1",
+          "question": "Should the project support multiple export variants with different content filters?",
+          "answer_type": "multi_enum",
+          "allowed_values": ["single_private_build", "safe_public_build", "adult_enabled_build", "platform_specific_filters", "creator_debug_unfiltered"],
+          "maps_to": ["content_overlay_pack_v1", "asset_index_v1", "build_manifest"]
+        }
+      ]
+    }
+  ],
+  "reference_negotiation_profiles": [
+    {
+      "id": "negotiation_profile/might_and_magic_like_party_rpg/v1",
+      "title": "Might-and-Magic-like Party RPG Negotiation",
+      "priority_decisions": ["decision/runtime_targets/v1", "decision/view_mode/v1", "decision/player_structure/v1", "decision/inventory_equipment_style/v1", "decision/combat_mode/v1", "decision/world_scale/v1"],
+      "default_answers": {
+        "runtime_targets": ["unity3d", "pseudo3d", "first_person_grid", "headless"],
+        "view_modes": ["pseudo3d_party_view", "first_person_grid"],
+        "player_structure": ["party"],
+        "inventory_equipment_style": ["grid_inventory", "paper_doll", "party_inventory"],
+        "combat_mode": ["hybrid_realtime_turn_based"],
+        "world_scale": "region"
+      },
+      "optional_overlays": ["optional_adult_nsfw", "horror_gore_optional", "romance"]
+    },
+    {
+      "id": "negotiation_profile/anno_like_city_builder_conquest/v1",
+      "title": "Anno-like City Builder with Conquest Negotiation",
+      "priority_decisions": ["decision/player_structure/v1", "decision/world_scale/v1", "decision/procedural_scope/v1", "decision/combat_mode/v1", "decision/persistence_model/v1", "decision/runtime_targets/v1"],
+      "default_answers": {
+        "runtime_targets": ["unity2d", "unity3d", "isometric", "city_builder", "headless"],
+        "player_structure": ["city_ruler", "faction_leader"],
+        "world_scale": "settlement_region",
+        "combat_mode": ["city_conquest", "army_battle"],
+        "progression_style": ["city_tiers", "technology_tree", "reputation"]
+      },
+      "optional_overlays": ["dark_politics", "optional_adult_nsfw"]
+    },
+    {
+      "id": "negotiation_profile/narrative_political_rpg_vn/v1",
+      "title": "Narrative Political RPG / Visual Novel Negotiation",
+      "priority_decisions": ["decision/tone_and_rating/v1", "decision/dialogue_model/v1", "decision/content_overlays/v1", "decision/media_generation_scope/v1", "decision/progression_style/v1"],
+      "default_answers": {
+        "runtime_targets": ["visual_novel", "unity2d", "headless"],
+        "dialogue_model": ["visual_novel_routes", "relationship_routes", "political_negotiation"],
+        "progression_style": ["relationship_routes", "reputation"],
+        "world_scale": "scene_routes"
+      },
+      "optional_overlays": ["optional_adult_nsfw", "romance", "dark_politics", "horror_gore_optional"]
+    }
+  ],
+  "profile_summary_shape": {
+    "id": "profile/example_game/v1",
+    "title": "Human readable title",
+    "reference_profiles": [],
+    "runtime_targets": [],
+    "view_modes": [],
+    "world_scale": "unknown",
+    "player_structure": [],
+    "combat_modes": [],
+    "dialogue_model": [],
+    "inventory_equipment_style": [],
+    "progression_style": [],
+    "generation_scope": {},
+    "content_overlays": [],
+    "media_generation_scope": [],
+    "persistence_model": [],
+    "platform_filters": [],
+    "validation_focus": [],
+    "open_questions": []
+  },
+  "validation_rules": [
+    {
+      "id": "profile_validation.required_runtime_target",
+      "level": "validation.level_1_ids_enums_refs",
+      "rule": "At least one runtime target is required before generator plan creation."
+    },
+    {
+      "id": "profile_validation.overlay_explicit",
+      "level": "validation.level_2_contract_semantics",
+      "rule": "Adult/NSFW and horror/gore content must be explicit content overlays, not implied by tone text."
+    },
+    {
+      "id": "profile_validation.unresolved_alternatives",
+      "level": "validation.level_6_human_approval",
+      "rule": "If two profile variants imply incompatible runtime targets or core mechanics, human approval is required before activation."
+    }
+  ]
+}
