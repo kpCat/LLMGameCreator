@@ -18,6 +18,10 @@ public sealed class GameRuntimeService : IGameRuntimeService
     private readonly IHarvestRuntimeService _harvestRuntimeService;
     private readonly IEncounterRuntimeService _encounterRuntimeService;
     private readonly IEncounterAiService _encounterAiService;
+    private readonly IQuestRuntimeService _questRuntimeService;
+    private readonly IDialogueRuntimeService _dialogueRuntimeService;
+    private readonly IFactionRuntimeService _factionRuntimeService;
+    private readonly IQuestObjectiveTracker _questObjectiveTracker;
 
     public GameRuntimeService(
         IGameRuntimeStateFactory stateFactory,
@@ -31,7 +35,11 @@ public sealed class GameRuntimeService : IGameRuntimeService
         IContainerRuntimeService? containerRuntimeService = null,
         IHarvestRuntimeService? harvestRuntimeService = null,
         IEncounterRuntimeService? encounterRuntimeService = null,
-        IEncounterAiService? encounterAiService = null)
+        IEncounterAiService? encounterAiService = null,
+        IQuestRuntimeService? questRuntimeService = null,
+        IDialogueRuntimeService? dialogueRuntimeService = null,
+        IFactionRuntimeService? factionRuntimeService = null,
+        IQuestObjectiveTracker? questObjectiveTracker = null)
     {
         _stateFactory = stateFactory;
         _recipeRuntimeService = recipeRuntimeService;
@@ -45,6 +53,10 @@ public sealed class GameRuntimeService : IGameRuntimeService
         _harvestRuntimeService = harvestRuntimeService ?? new HarvestRuntimeService(new RequirementEvaluator(), new CostConsumer(), new OutputApplier());
         _encounterRuntimeService = encounterRuntimeService ?? new EncounterRuntimeService(new RequirementEvaluator(), new OutputApplier());
         _encounterAiService = encounterAiService ?? new EncounterAiService(_encounterRuntimeService);
+        _factionRuntimeService = factionRuntimeService ?? new FactionRuntimeService();
+        _questRuntimeService = questRuntimeService ?? new QuestRuntimeService(new RequirementEvaluator(), new OutputApplier());
+        _dialogueRuntimeService = dialogueRuntimeService ?? new DialogueRuntimeService(new RequirementEvaluator(), new CostConsumer(), new OutputApplier(), _questRuntimeService, _transactionRuntimeService, _encounterRuntimeService);
+        _questObjectiveTracker = questObjectiveTracker ?? new QuestObjectiveTracker(_questRuntimeService);
     }
 
     public GameRuntimeResult CreateInitialState(GamePackageDefinition package)
@@ -59,80 +71,120 @@ public sealed class GameRuntimeService : IGameRuntimeService
             case GameRuntimeCommandType.Initialize:
                 return CreateInitialState(package);
             case GameRuntimeCommandType.AddItem:
-                return AddItem(state, command);
+                return Track(package, state, AddItem(state, command));
             case GameRuntimeCommandType.RemoveItem:
-                return RemoveItem(state, command);
+                return Track(package, state, RemoveItem(state, command));
             case GameRuntimeCommandType.ChangeResource:
-                return ChangeResource(package, state, command);
+                return Track(package, state, ChangeResource(package, state, command));
             case GameRuntimeCommandType.CraftRecipe:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "Runtime command requires recipe id.", null)
-                    : _recipeRuntimeService.CraftRecipe(package, state, command.Id.Trim(), command.InventoryId);
+                    : Track(package, state, _recipeRuntimeService.CraftRecipe(package, state, command.Id.Trim(), command.InventoryId));
             case GameRuntimeCommandType.RollLootTable:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "Runtime command requires loot table id.", null)
-                    : _lootRuntimeService.RollLootTable(package, state, command.Id.Trim(), command.InventoryId, command.Seed);
+                    : Track(package, state, _lootRuntimeService.RollLootTable(package, state, command.Id.Trim(), command.InventoryId, command.Seed));
             case GameRuntimeCommandType.ExecuteTransaction:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "Runtime command requires transaction id.", null)
-                    : _transactionRuntimeService.ExecuteTransaction(package, state, command.Id.Trim(), command.InventoryId);
+                    : Track(package, state, _transactionRuntimeService.ExecuteTransaction(package, state, command.Id.Trim(), command.InventoryId));
             case GameRuntimeCommandType.TickResourceNodes:
             case GameRuntimeCommandType.Wait:
-                return _resourceNetworkRuntimeService.TickResourceNodes(package, state, Math.Max(1, command.Ticks));
+                return Track(package, state, _resourceNetworkRuntimeService.TickResourceNodes(package, state, Math.Max(1, command.Ticks)));
             case GameRuntimeCommandType.SetFlag:
-                return SetFlag(state, command);
+                return Track(package, state, SetFlag(state, command));
             case GameRuntimeCommandType.UseItem:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "Runtime command requires item id.", null)
-                    : _useItemRuntimeService.UseItem(package, state, command.Id.Trim(), command.InventoryId, command.TargetId);
+                    : Track(package, state, _useItemRuntimeService.UseItem(package, state, command.Id.Trim(), command.InventoryId, command.TargetId));
             case GameRuntimeCommandType.ExecuteInteraction:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "Runtime command requires interaction id.", null)
-                    : _interactionRuntimeService.ExecuteInteraction(package, state, command.Id.Trim(), command.TargetId, command.InventoryId);
+                    : Track(package, state, _interactionRuntimeService.ExecuteInteraction(package, state, command.Id.Trim(), command.TargetId, command.InventoryId));
             case GameRuntimeCommandType.EquipItem:
                 return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
                     ? Fail(state, "runtime.command.id_missing", "EquipItem requires item id and slot id.", command.Id ?? command.TargetId)
-                    : _equipmentRuntimeService.EquipItem(package, state, command.Id.Trim(), command.TargetId.Trim(), command.InventoryId);
+                    : Track(package, state, _equipmentRuntimeService.EquipItem(package, state, command.Id.Trim(), command.TargetId.Trim(), command.InventoryId));
             case GameRuntimeCommandType.UnequipItem:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "UnequipItem requires slot id.", null)
-                    : _equipmentRuntimeService.UnequipItem(package, state, command.Id.Trim(), command.InventoryId);
+                    : Track(package, state, _equipmentRuntimeService.UnequipItem(package, state, command.Id.Trim(), command.InventoryId));
             case GameRuntimeCommandType.OpenContainer:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "OpenContainer requires container inventory id.", null)
-                    : _containerRuntimeService.OpenContainer(package, state, command.Id.Trim());
+                    : Track(package, state, _containerRuntimeService.OpenContainer(package, state, command.Id.Trim()));
             case GameRuntimeCommandType.TakeFromContainer:
                 return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
                     ? Fail(state, "runtime.command.id_missing", "TakeFromContainer requires container inventory id and item id.", command.Id ?? command.TargetId)
-                    : _containerRuntimeService.TakeFromContainer(package, state, command.Id.Trim(), command.TargetId.Trim(), command.Amount <= 0 ? 1 : command.Amount, command.InventoryId);
+                    : Track(package, state, _containerRuntimeService.TakeFromContainer(package, state, command.Id.Trim(), command.TargetId.Trim(), command.Amount <= 0 ? 1 : command.Amount, command.InventoryId));
             case GameRuntimeCommandType.DepositToContainer:
                 return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
                     ? Fail(state, "runtime.command.id_missing", "DepositToContainer requires container inventory id and item id.", command.Id ?? command.TargetId)
-                    : _containerRuntimeService.DepositToContainer(package, state, command.Id.Trim(), command.TargetId.Trim(), command.Amount <= 0 ? 1 : command.Amount, command.InventoryId);
+                    : Track(package, state, _containerRuntimeService.DepositToContainer(package, state, command.Id.Trim(), command.TargetId.Trim(), command.Amount <= 0 ? 1 : command.Amount, command.InventoryId));
             case GameRuntimeCommandType.HarvestResourceNode:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "HarvestResourceNode requires resource node id.", null)
-                    : _harvestRuntimeService.HarvestResourceNode(package, state, command.Id.Trim(), command.InventoryId, command.TargetId, command.Seed);
+                    : Track(package, state, _harvestRuntimeService.HarvestResourceNode(package, state, command.Id.Trim(), command.InventoryId, command.TargetId, command.Seed));
             case GameRuntimeCommandType.StartEncounter:
                 return string.IsNullOrWhiteSpace(command.Id)
                     ? Fail(state, "runtime.command.id_missing", "StartEncounter requires encounter id.", null)
-                    : _encounterRuntimeService.StartEncounter(package, state, command.Id.Trim(), command.Seed);
+                    : Track(package, state, _encounterRuntimeService.StartEncounter(package, state, command.Id.Trim(), command.Seed));
             case GameRuntimeCommandType.UseAbility:
                 return string.IsNullOrWhiteSpace(command.Id) || !command.Args.TryGetValue("sourceParticipantId", out var sourceId) || string.IsNullOrWhiteSpace(sourceId)
                     ? Fail(state, "runtime.command.id_missing", "UseAbility requires ability id and sourceParticipantId arg.", command.Id)
-                    : _encounterRuntimeService.UseAbility(package, state, command.Id.Trim(), sourceId.Trim(), command.TargetId);
+                    : Track(package, state, _encounterRuntimeService.UseAbility(package, state, command.Id.Trim(), sourceId.Trim(), command.TargetId));
             case GameRuntimeCommandType.BasicAttack:
                 return !command.Args.TryGetValue("sourceParticipantId", out var basicSourceId) || string.IsNullOrWhiteSpace(basicSourceId)
                     ? Fail(state, "runtime.command.id_missing", "BasicAttack requires sourceParticipantId arg.", command.Id)
-                    : _encounterRuntimeService.BasicAttack(package, state, basicSourceId.Trim(), command.TargetId);
+                    : Track(package, state, _encounterRuntimeService.BasicAttack(package, state, basicSourceId.Trim(), command.TargetId));
             case GameRuntimeCommandType.EndTurn:
                 return _encounterRuntimeService.EndTurn(package, state);
             case GameRuntimeCommandType.ResolveEncounter:
-                return _encounterRuntimeService.ResolveEncounter(package, state);
+                return Track(package, state, _encounterRuntimeService.ResolveEncounter(package, state));
             case GameRuntimeCommandType.FleeEncounter:
                 return _encounterRuntimeService.FleeEncounter(package, state);
             case GameRuntimeCommandType.RunCurrentTurnAi:
-                return _encounterAiService.RunCurrentTurnAi(package, state);
+                return Track(package, state, _encounterAiService.RunCurrentTurnAi(package, state));
+            case GameRuntimeCommandType.StartQuest:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "StartQuest requires quest id.", null)
+                    : _questRuntimeService.StartQuest(package, state, command.Id.Trim());
+            case GameRuntimeCommandType.AdvanceQuestObjective:
+                return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
+                    ? Fail(state, "runtime.command.id_missing", "AdvanceQuestObjective requires quest id and objective id.", command.Id ?? command.TargetId)
+                    : _questRuntimeService.AdvanceQuestObjective(package, state, command.Id.Trim(), command.TargetId.Trim(), command.Amount <= 0 ? 1 : command.Amount);
+            case GameRuntimeCommandType.SetQuestStage:
+                return string.IsNullOrWhiteSpace(command.Id) || string.IsNullOrWhiteSpace(command.TargetId)
+                    ? Fail(state, "runtime.command.id_missing", "SetQuestStage requires quest id and stage id.", command.Id ?? command.TargetId)
+                    : _questRuntimeService.SetQuestStage(package, state, command.Id.Trim(), command.TargetId.Trim());
+            case GameRuntimeCommandType.CompleteQuest:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "CompleteQuest requires quest id.", null)
+                    : _questRuntimeService.CompleteQuest(package, state, command.Id.Trim());
+            case GameRuntimeCommandType.FailQuest:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "FailQuest requires quest id.", null)
+                    : _questRuntimeService.FailQuest(package, state, command.Id.Trim());
+            case GameRuntimeCommandType.RefreshQuestObjectives:
+                return _questRuntimeService.RefreshQuestObjectives(package, state);
+            case GameRuntimeCommandType.OpenDialogue:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "OpenDialogue requires dialogue id.", null)
+                    : Track(package, state, _dialogueRuntimeService.OpenDialogue(package, state, command.Id.Trim()));
+            case GameRuntimeCommandType.ChooseDialogueOption:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "ChooseDialogueOption requires choice id.", null)
+                    : Track(package, state, _dialogueRuntimeService.ChooseDialogueOption(package, state, command.Id.Trim(), command.InventoryId));
+            case GameRuntimeCommandType.CloseDialogue:
+                return _dialogueRuntimeService.CloseDialogue(package, state);
+            case GameRuntimeCommandType.ChangeReputation:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "ChangeReputation requires faction id.", null)
+                    : _factionRuntimeService.ChangeReputation(package, state, command.Id.Trim(), command.Amount);
+            case GameRuntimeCommandType.SetReputation:
+                return string.IsNullOrWhiteSpace(command.Id)
+                    ? Fail(state, "runtime.command.id_missing", "SetReputation requires faction id.", null)
+                    : _factionRuntimeService.SetReputation(package, state, command.Id.Trim(), command.Amount);
             default:
                 return Fail(state, "runtime.command.unknown", $"Unknown runtime command: {command.Type}", command.Type.ToString());
         }
@@ -230,6 +282,20 @@ public sealed class GameRuntimeService : IGameRuntimeService
             Message = message,
             Events = new List<GameRuntimeEvent> { RuntimeStateHelpers.Event(eventType, message, targetId) }
         };
+    }
+
+    private GameRuntimeResult Track(GamePackageDefinition package, GameRuntimeState state, GameRuntimeResult result)
+    {
+        if (!result.Success || result.Events.Count == 0)
+        {
+            return result;
+        }
+
+        var tracking = _questObjectiveTracker.Track(package, state, result.Events);
+        result.Events.AddRange(tracking.Events);
+        result.Diagnostics.AddRange(tracking.Diagnostics);
+        result.Success = result.Success && tracking.Success;
+        return result;
     }
 
     private static GameRuntimeResult Fail(GameRuntimeState state, string code, string message, string? targetId)

@@ -45,6 +45,30 @@ public sealed class ValidationContext
             .Where(loot => !string.IsNullOrWhiteSpace(loot.Id))
             .Select(loot => loot.Id)
             .ToHashSet();
+        TransactionIds = package.Game.Transactions
+            .Where(transaction => !string.IsNullOrWhiteSpace(transaction.Id))
+            .Select(transaction => transaction.Id)
+            .ToHashSet();
+        RecipeIds = package.Game.Recipes
+            .Where(recipe => !string.IsNullOrWhiteSpace(recipe.Id))
+            .Select(recipe => recipe.Id)
+            .ToHashSet();
+        DialogueIds = package.Game.Dialogues
+            .Where(dialogue => !string.IsNullOrWhiteSpace(dialogue.Id))
+            .Select(dialogue => dialogue.Id)
+            .ToHashSet();
+        QuestIds = package.Game.Quests
+            .Where(quest => !string.IsNullOrWhiteSpace(quest.Id))
+            .Select(quest => quest.Id)
+            .ToHashSet();
+        FactionIds = package.Game.Factions
+            .Where(faction => !string.IsNullOrWhiteSpace(faction.Id))
+            .Select(faction => faction.Id)
+            .ToHashSet();
+        ResourceNodeIds = package.Game.ResourceNodes
+            .Where(node => !string.IsNullOrWhiteSpace(node.Id))
+            .Select(node => node.Id)
+            .ToHashSet();
         ResourceNetworkIds = package.Game.ResourceNetworks
             .Where(network => !string.IsNullOrWhiteSpace(network.Id))
             .Select(network => network.Id)
@@ -74,6 +98,12 @@ public sealed class ValidationContext
     public IReadOnlySet<string> AbilityIds { get; }
     public IReadOnlySet<string> StatusIds { get; }
     public IReadOnlySet<string> LootTableIds { get; }
+    public IReadOnlySet<string> TransactionIds { get; }
+    public IReadOnlySet<string> RecipeIds { get; }
+    public IReadOnlySet<string> DialogueIds { get; }
+    public IReadOnlySet<string> QuestIds { get; }
+    public IReadOnlySet<string> FactionIds { get; }
+    public IReadOnlySet<string> ResourceNodeIds { get; }
     public IReadOnlySet<string> ResourceNetworkIds { get; }
     public IReadOnlySet<string> AssetIds { get; }
     public IReadOnlySet<string> AssetContractIds { get; }

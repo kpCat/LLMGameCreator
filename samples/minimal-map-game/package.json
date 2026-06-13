@@ -767,7 +767,38 @@
         }
       }
     ],
-    "quests": [],
+    "quests": [
+      {
+        "id": "quest/help_healer",
+        "title": "Help the Healer",
+        "description": "Gather three red herbs and report back.",
+        "kind": "side_quest",
+        "objectives": [
+          {
+            "id": "objective/collect_red_herbs",
+            "kind": "has_item",
+            "targetId": "item/red_herb",
+            "requiredAmount": 3
+          }
+        ],
+        "rewards": [
+          {
+            "kind": "resource",
+            "id": "resource/gold",
+            "amount": 10
+          },
+          {
+            "kind": "reputation",
+            "id": "faction/village",
+            "amount": 5
+          }
+        ],
+        "tags": [
+          "sample",
+          "narrative"
+        ]
+      }
+    ],
     "dialogues": [
       {
         "id": "dialogue/old_guard_intro",
@@ -783,6 +814,58 @@
             "choices": []
           }
         ]
+      },
+      {
+        "id": "dialogue/healer",
+        "title": "Village Healer",
+        "startNodeId": "start",
+        "nodes": [
+          {
+            "id": "start",
+            "speakerId": "npc/healer",
+            "text": "Can you bring me three red herbs?",
+            "choices": [
+              {
+                "id": "accept",
+                "text": "I will help.",
+                "startQuestId": "quest/help_healer",
+                "targetNodeId": "accepted"
+              },
+              {
+                "id": "leave",
+                "text": "Not now.",
+                "closeDialogue": true
+              }
+            ]
+          },
+          {
+            "id": "accepted",
+            "speakerId": "npc/healer",
+            "text": "Thank you. Come back when you have them.",
+            "choices": [
+              {
+                "id": "close",
+                "text": "Goodbye.",
+                "closeDialogue": true
+              }
+            ]
+          }
+        ],
+        "tags": [
+          "sample",
+          "narrative"
+        ]
+      }
+    ],
+    "factions": [
+      {
+        "id": "faction/village",
+        "name": "Village",
+        "description": "The local settlement.",
+        "kind": "settlement",
+        "defaultReputation": 0,
+        "minReputation": -100,
+        "maxReputation": 100
       }
     ],
     "formulas": [],
@@ -820,6 +903,13 @@
         "metadata": {
           "resource_node_id": "node/apple_tree",
           "tool_item_id": "item/woodcutting_axe"
+        }
+      },
+      {
+        "id": "interaction/talk_healer",
+        "kind": "talk",
+        "metadata": {
+          "dialogue_id": "dialogue/healer"
         }
       }
     ]

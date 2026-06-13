@@ -26,12 +26,15 @@ public sealed class GamePackagePatchOperationValidatorTests
           {{ProgressionOperation("progression/level")}},
           {{EncounterOperation("encounter/goblin_duel")}},
           {{AbilityOperation("ability/basic_attack")}},
+          {{QuestOperation("quest/help_healer")}},
+          {{DialogueOperation("dialogue/healer")}},
+          {{FactionOperation("faction/village")}},
           { "op": "update_manifest", "title": "Stone Game", "start_map_id": "map/start" }
         ]
         """, "test");
 
         Assert.DoesNotContain(result.ValidationResults, item => item.Severity == "error");
-        Assert.Equal(15, result.Operations.Count);
+        Assert.Equal(18, result.Operations.Count);
     }
 
     [Fact]
@@ -150,5 +153,20 @@ public sealed class GamePackagePatchOperationValidatorTests
     private static string AbilityOperation(string id)
     {
         return $$"""{ "op": "upsert_ability", "id": "{{id}}", "name": "Basic Attack", "kind": "attack", "power": 4, "resource_id": "resource/mana" }""";
+    }
+
+    private static string QuestOperation(string id)
+    {
+        return $$"""{ "op": "upsert_quest", "id": "{{id}}", "title": "Help Healer", "description": "Gather herbs.", "objectives": [{ "id": "objective/herbs", "kind": "collect_item", "target_id": "item/red_herb", "required_amount": 3 }] }""";
+    }
+
+    private static string DialogueOperation(string id)
+    {
+        return $$"""{ "op": "upsert_dialogue", "id": "{{id}}", "title": "Healer", "start_node_id": "start", "nodes": [{ "id": "start", "text": "Hello", "choices": [{ "id": "close", "text": "Bye", "close_dialogue": true }] }] }""";
+    }
+
+    private static string FactionOperation(string id)
+    {
+        return $$"""{ "op": "upsert_faction", "id": "{{id}}", "name": "Village", "kind": "settlement", "default_reputation": 0, "min_reputation": -100, "max_reputation": 100 }""";
     }
 }

@@ -93,6 +93,49 @@ public sealed class GameRuntimeState
     public List<StatusState> Statuses { get; set; } = new List<StatusState>();
     public EncounterRuntimeState? ActiveEncounter { get; set; }
     public Dictionary<string, string> QuestStates { get; set; } = new Dictionary<string, string>();
+    public List<QuestRuntimeState> Quests { get; set; } = new List<QuestRuntimeState>();
+    public DialogueRuntimeState? ActiveDialogue { get; set; }
+    public List<FactionRuntimeState> Factions { get; set; } = new List<FactionRuntimeState>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class QuestRuntimeState
+{
+    public string QuestId { get; set; } = string.Empty;
+    public string State { get; set; } = "not_started";
+    public string? CurrentStageId { get; set; }
+    public List<QuestObjectiveRuntimeState> Objectives { get; set; } = new List<QuestObjectiveRuntimeState>();
+    public long? StartedTick { get; set; }
+    public long? CompletedTick { get; set; }
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class QuestObjectiveRuntimeState
+{
+    public string ObjectiveId { get; set; } = string.Empty;
+    public string Kind { get; set; } = string.Empty;
+    public string? TargetId { get; set; }
+    public double CurrentAmount { get; set; }
+    public double RequiredAmount { get; set; } = 1;
+    public bool Completed { get; set; }
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class DialogueRuntimeState
+{
+    public string DialogueId { get; set; } = string.Empty;
+    public string CurrentNodeId { get; set; } = string.Empty;
+    public string SpeakerId { get; set; } = string.Empty;
+    public bool Open { get; set; }
+    public List<string> History { get; set; } = new List<string>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+}
+
+public sealed class FactionRuntimeState
+{
+    public string FactionId { get; set; } = string.Empty;
+    public double Reputation { get; set; }
+    public string RelationKind { get; set; } = "neutral";
     public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 }
 
@@ -225,7 +268,18 @@ public enum GameRuntimeCommandType
     EndTurn = 21,
     ResolveEncounter = 22,
     FleeEncounter = 23,
-    RunCurrentTurnAi = 24
+    RunCurrentTurnAi = 24,
+    StartQuest = 25,
+    AdvanceQuestObjective = 26,
+    SetQuestStage = 27,
+    CompleteQuest = 28,
+    FailQuest = 29,
+    RefreshQuestObjectives = 30,
+    OpenDialogue = 31,
+    ChooseDialogueOption = 32,
+    CloseDialogue = 33,
+    ChangeReputation = 34,
+    SetReputation = 35
 }
 
 public sealed class GameRuntimeCommand
@@ -284,6 +338,21 @@ public sealed class GameRuntimeCommand
 
     public static GameRuntimeCommand BasicAttack(string sourceParticipantId, string? targetParticipantId = null)
         => new GameRuntimeCommand { Type = GameRuntimeCommandType.BasicAttack, TargetId = targetParticipantId, Args = new Dictionary<string, string> { ["sourceParticipantId"] = sourceParticipantId } };
+
+    public static GameRuntimeCommand StartQuest(string questId)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.StartQuest, Id = questId };
+
+    public static GameRuntimeCommand AdvanceQuestObjective(string questId, string objectiveId, double amount = 1)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.AdvanceQuestObjective, Id = questId, TargetId = objectiveId, Amount = amount <= 0 ? 1 : amount };
+
+    public static GameRuntimeCommand OpenDialogue(string dialogueId)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.OpenDialogue, Id = dialogueId };
+
+    public static GameRuntimeCommand ChooseDialogueOption(string choiceId)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.ChooseDialogueOption, Id = choiceId };
+
+    public static GameRuntimeCommand ChangeReputation(string factionId, double amount)
+        => new GameRuntimeCommand { Type = GameRuntimeCommandType.ChangeReputation, Id = factionId, Amount = amount };
 }
 
 public enum GameRuntimeEventType
@@ -319,7 +388,21 @@ public enum GameRuntimeEventType
     RewardGranted = 28,
     ProgressionChanged = 29,
     ProgressionStageChanged = 30,
-    AiActionChosen = 31
+    AiActionChosen = 31,
+    QuestStarted = 32,
+    QuestObjectiveUpdated = 33,
+    QuestStageChanged = 34,
+    QuestCompleted = 35,
+    QuestFailed = 36,
+    QuestRewardGranted = 37,
+    JournalUpdated = 38,
+    DialogueOpened = 39,
+    DialogueNodeChanged = 40,
+    DialogueChoiceSelected = 41,
+    DialogueClosed = 42,
+    DialogueEffectApplied = 43,
+    FactionReputationChanged = 44,
+    FactionRelationChanged = 45
 }
 
 public sealed class GameRuntimeEvent
@@ -457,6 +540,35 @@ public interface IEncounterRuntimeService
 public interface IEncounterAiService
 {
     GameRuntimeResult RunCurrentTurnAi(GamePackageDefinition package, GameRuntimeState state);
+}
+
+public interface IFactionRuntimeService
+{
+    GameRuntimeResult ChangeReputation(GamePackageDefinition package, GameRuntimeState state, string factionId, double amount);
+    GameRuntimeResult SetReputation(GamePackageDefinition package, GameRuntimeState state, string factionId, double value);
+    GameRuntimeResult SetFactionRelation(GamePackageDefinition package, GameRuntimeState state, string factionId, string relationKind);
+}
+
+public interface IQuestRuntimeService
+{
+    GameRuntimeResult StartQuest(GamePackageDefinition package, GameRuntimeState state, string questId);
+    GameRuntimeResult AdvanceQuestObjective(GamePackageDefinition package, GameRuntimeState state, string questId, string objectiveId, double amount = 1);
+    GameRuntimeResult SetQuestStage(GamePackageDefinition package, GameRuntimeState state, string questId, string stageId);
+    GameRuntimeResult CompleteQuest(GamePackageDefinition package, GameRuntimeState state, string questId);
+    GameRuntimeResult FailQuest(GamePackageDefinition package, GameRuntimeState state, string questId);
+    GameRuntimeResult RefreshQuestObjectives(GamePackageDefinition package, GameRuntimeState state);
+}
+
+public interface IDialogueRuntimeService
+{
+    GameRuntimeResult OpenDialogue(GamePackageDefinition package, GameRuntimeState state, string dialogueId);
+    GameRuntimeResult ChooseDialogueOption(GamePackageDefinition package, GameRuntimeState state, string choiceId, string? inventoryId = null);
+    GameRuntimeResult CloseDialogue(GamePackageDefinition package, GameRuntimeState state);
+}
+
+public interface IQuestObjectiveTracker
+{
+    GameRuntimeResult Track(GamePackageDefinition package, GameRuntimeState state, IEnumerable<GameRuntimeEvent> events);
 }
 
 public interface IGameRuntimeService

@@ -165,6 +165,24 @@ public sealed partial class GamePackagePatchOperationValidator
         "resource_id", "tags", "stages", "learn_conditions", "effects", "metadata"
     };
 
+    private static readonly HashSet<string> QuestFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "title", "description", "kind", "start_conditions", "start_effects", "objectives", "rewards",
+        "failure_conditions", "failure_effects", "repeatable", "auto_start", "tags", "metadata", "stages"
+    };
+
+    private static readonly HashSet<string> DialogueFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "title", "start_node_id", "background_asset_id", "conditions", "enter_effects", "exit_effects",
+        "tags", "metadata", "nodes"
+    };
+
+    private static readonly HashSet<string> FactionFields = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "op", "id", "name", "description", "kind", "default_reputation", "min_reputation", "max_reputation",
+        "relations", "tags", "metadata"
+    };
+
     public GamePackagePatchParseResult ParsePatchDocument(string json, string artifactId)
     {
         var results = new List<GeneratedArtifactValidationResultRecord>();
@@ -352,6 +370,9 @@ public sealed partial class GamePackagePatchOperationValidator
             "upsert_progression" => ParseEconomyOperation(operationNode, ProgressionFields, node => new UpsertProgressionPatchOperation(ReadDefinition<ProgressionDefinition>(node)), artifactId, target, results, requireName: true),
             "upsert_encounter" => ParseEconomyOperation(operationNode, EncounterFields, node => new UpsertEncounterPatchOperation(ReadDefinition<EncounterDefinition>(node)), artifactId, target, results, requireName: true),
             "upsert_ability" => ParseEconomyOperation(operationNode, AbilityFields, node => new UpsertAbilityPatchOperation(ReadDefinition<AbilityDefinition>(node)), artifactId, target, results, requireName: true),
+            "upsert_quest" => ParseEconomyOperation(operationNode, QuestFields, node => new UpsertQuestPatchOperation(ReadDefinition<QuestDefinition>(node)), artifactId, target, results, requireName: false),
+            "upsert_dialogue" => ParseEconomyOperation(operationNode, DialogueFields, node => new UpsertDialoguePatchOperation(ReadDefinition<DialogueDefinition>(node)), artifactId, target, results, requireName: false),
+            "upsert_faction" => ParseEconomyOperation(operationNode, FactionFields, node => new UpsertFactionPatchOperation(ReadDefinition<FactionDefinition>(node)), artifactId, target, results, requireName: true),
             _ => UnknownOperation(op, artifactId, target, results)
         };
     }

@@ -80,6 +80,10 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IHarvestRuntimeService, HarvestRuntimeService>(Reuse.Singleton);
         _container.Register<IEncounterRuntimeService, EncounterRuntimeService>(Reuse.Singleton);
         _container.Register<IEncounterAiService, EncounterAiService>(Reuse.Singleton);
+        _container.Register<IFactionRuntimeService, FactionRuntimeService>(Reuse.Singleton);
+        _container.Register<IQuestRuntimeService, QuestRuntimeService>(Reuse.Singleton);
+        _container.Register<IDialogueRuntimeService, DialogueRuntimeService>(Reuse.Singleton);
+        _container.Register<IQuestObjectiveTracker, QuestObjectiveTracker>(Reuse.Singleton);
         _container.Register<IUseItemRuntimeService, UseItemRuntimeService>(Reuse.Singleton);
         _container.Register<IInteractionRuntimeService, InteractionRuntimeService>(Reuse.Singleton);
         _container.Register<IGameRuntimeService, GameRuntimeService>(Reuse.Singleton);

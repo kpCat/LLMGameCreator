@@ -28,6 +28,9 @@ public sealed class PrototypeLuaDeclarationMapperTests
               { type = "progression", id = "progression/level", name = "Level", kind = "xp_level", stages = { { id = "level/1", name = "Level 1", required_amount = 0 } } },
               { type = "ability", id = "ability/basic_attack", name = "Basic Attack", kind = "attack", power = 4, resource_id = "resource/mana" },
               { type = "encounter", id = "encounter/goblin_duel", name = "Goblin Duel", kind = "combat", participants = { { id = "player", name = "Player", team = "player" } } },
+              { type = "faction", id = "faction/village", name = "Village", kind = "settlement", default_reputation = 0, min_reputation = -100, max_reputation = 100 },
+              { type = "quest", id = "quest/help_healer", title = "Help Healer", description = "Gather herbs.", objectives = { { id = "objective/herbs", kind = "collect_item", target_id = "item/red_herb", required_amount = 3 } } },
+              { type = "dialogue", id = "dialogue/healer", title = "Healer", start_node_id = "start", nodes = { { id = "start", text = "Can you help?", choices = { { id = "accept", text = "Yes", start_quest_id = "quest/help_healer", close_dialogue = true } } } } },
               { type = "manifest_update", title = "My Game", description = "Short", start_map_id = "map/start" }
             })
             """
@@ -51,6 +54,9 @@ public sealed class PrototypeLuaDeclarationMapperTests
         Assert.Contains("upsert_progression", result.OperationsJson);
         Assert.Contains("upsert_ability", result.OperationsJson);
         Assert.Contains("upsert_encounter", result.OperationsJson);
+        Assert.Contains("upsert_faction", result.OperationsJson);
+        Assert.Contains("upsert_quest", result.OperationsJson);
+        Assert.Contains("upsert_dialogue", result.OperationsJson);
         Assert.Contains("update_manifest", result.OperationsJson);
     }
 

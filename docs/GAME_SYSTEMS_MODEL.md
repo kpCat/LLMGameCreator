@@ -389,3 +389,18 @@ The v1 turn loop is deterministic: start requirements are evaluated, participant
 Supported ability outputs in encounters are minimal: `damage_resource`, `heal_resource`, `change_resource`, `add_status`, `remove_status`, `change_stat` and `log`. Rewards can grant items, resources, statuses, flags, loot rolls and progression through the shared output pipeline. Progression runtime stores amount and current stage in `ProgressionState`.
 
 Simple AI is deterministic: non-player participants choose the first declared usable ability and target the first living enemy. There is no tactical pathfinding, planning, personality model, runtime Lua, generator Lua, generator module execution, LLM call or Unity integration in this runtime layer.
+
+## Narrative Runtime v1
+
+Narrative runtime v1 makes quests, dialogue graphs and optional factions deterministic runtime systems.
+
+Definitions remain in `GamePackageDefinition`; runtime state lives separately in `GameRuntimeState.Quests`, `GameRuntimeState.ActiveDialogue` and `GameRuntimeState.Factions`. The runtime never mutates quest, dialogue or faction definitions.
+
+Supported narrative contracts include:
+
+- quests with start conditions/effects, objectives, stages, rewards, failure effects, tags and metadata;
+- quest objectives such as `has_item`, `collect_item`, `complete_encounter`, `talk_to`, `choose_dialogue`, `harvest_resource`, `craft_recipe`, `execute_transaction`, `equip_item`, `open_container`, `use_item`, `gain_resource`, `gain_reputation`, `set_flag` and custom counters;
+- dialogue graphs with node/choice conditions, costs, rewards, effects, quest links, transaction links and encounter links;
+- optional factions with default/min/max reputation and data-only relations.
+
+Objective tracking is event-driven for simple runtime events and may be refreshed explicitly for state-derived objectives such as `has_item`, resources and flags. There is no runtime Lua, generator Lua, LLM call, cinematic system, quest editor UI, localization system, Unity codegen or AI planner in this layer.

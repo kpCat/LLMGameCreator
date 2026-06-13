@@ -49,6 +49,9 @@ public sealed class PrototypeLuaDeclarationMapper
             "progression" => CopyFields(declaration, index, diagnostics, "upsert_progression", "id", "name", "kind", "description", "stages", "tags", "metadata"),
             "encounter" => CopyFields(declaration, index, diagnostics, "upsert_encounter", "id", "name", "kind", "participants", "actions", "start_requirements", "win_conditions", "lose_conditions", "rewards", "consequences", "loot_table_id", "default_seed", "tags", "metadata"),
             "ability" => CopyFields(declaration, index, diagnostics, "upsert_ability", "id", "name", "kind", "requirements", "costs", "cooldown", "targeting", "range", "power", "resource_id", "tags", "stages", "learn_conditions", "effects", "metadata"),
+            "quest" => CopyFields(declaration, index, diagnostics, "upsert_quest", "id", "title", "description", "kind", "start_conditions", "start_effects", "objectives", "rewards", "failure_conditions", "failure_effects", "repeatable", "auto_start", "tags", "metadata", "stages"),
+            "dialogue" => CopyFields(declaration, index, diagnostics, "upsert_dialogue", "id", "title", "start_node_id", "background_asset_id", "conditions", "enter_effects", "exit_effects", "tags", "metadata", "nodes"),
+            "faction" => CopyFields(declaration, index, diagnostics, "upsert_faction", "id", "name", "description", "kind", "default_reputation", "min_reputation", "max_reputation", "relations", "tags", "metadata"),
             _ => UnknownType(declaration, index, diagnostics)
         };
     }

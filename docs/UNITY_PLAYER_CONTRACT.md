@@ -14,6 +14,16 @@ Encounter runtime commands/events are part of the future bridge surface. A Unity
 
 Unity still must not contain game-specific combat rules in C#; it should display data and route commands/events through the runtime bridge.
 
+## Narrative Command/Event Notes
+
+Future Unity narrative UI should route quest, dialogue and faction actions through the existing runtime bridge instead of implementing game-specific rules in Unity C#.
+
+Relevant commands include `StartQuest`, `AdvanceQuestObjective`, `CompleteQuest`, `FailQuest`, `OpenDialogue`, `ChooseDialogueOption`, `CloseDialogue`, `ChangeReputation`, `SetReputation` and `RefreshQuestObjectives`.
+
+Relevant events include `QuestStarted`, `QuestObjectiveUpdated`, `QuestStageChanged`, `QuestCompleted`, `JournalUpdated`, `DialogueOpened`, `DialogueNodeChanged`, `DialogueChoiceSelected`, `DialogueClosed`, `FactionReputationChanged` and `FactionRelationChanged`.
+
+Unity remains out of scope: no Unity project, codegen, MonoBehaviour game logic or runtime Lua execution is added by narrative runtime v1.
+
 # Unity Player Contract
 
 ## Назначение

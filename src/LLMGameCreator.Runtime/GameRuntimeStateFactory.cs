@@ -56,6 +56,11 @@ public sealed class GameRuntimeStateFactory : IGameRuntimeStateFactory
             RuntimeStateHelpers.EnsureProgression(state, progression);
         }
 
+        foreach (var faction in package.Game.Factions)
+        {
+            RuntimeStateHelpers.EnsureFaction(state, faction);
+        }
+
         var result = new GameRuntimeResult
         {
             State = state,

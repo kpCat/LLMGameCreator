@@ -46,12 +46,12 @@ public sealed class CostConsumer : ICostConsumer
                 continue;
             }
 
-            if (IsResourceCost(cost))
+        if (IsResourceCost(cost))
+        {
+            var has = RuntimeStateHelpers.GetResourceAmount(state, cost.Id, cost.Scope);
+            if (has < cost.Amount)
             {
-                var has = RuntimeStateHelpers.GetResourceAmount(state, cost.Id, cost.Scope);
-                if (has < cost.Amount)
-                {
-                    result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("cost.resource_too_low", $"Resource {cost.Id} requires {Format(cost.Amount)}, has {Format(has)}", cost.Id));
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("cost.resource_too_low", $"Resource {cost.Id} requires {Format(cost.Amount)}, has {Format(has)}", cost.Id));
                 }
 
                 continue;
@@ -272,9 +272,7 @@ public sealed class CostConsumer : ICostConsumer
     {
         return RuntimeStateHelpers.KindEquals(cost.Kind, "resource")
             || RuntimeStateHelpers.KindEquals(cost.Kind, "network_resource")
-            || RuntimeStateHelpers.KindEquals(cost.Kind, "abstract_resource")
-            || RuntimeStateHelpers.KindEquals(cost.Kind, "faction")
-            || RuntimeStateHelpers.KindEquals(cost.Kind, "reputation");
+            || RuntimeStateHelpers.KindEquals(cost.Kind, "abstract_resource");
     }
 
     private static string Format(double value)

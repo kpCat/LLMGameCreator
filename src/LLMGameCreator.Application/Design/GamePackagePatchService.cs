@@ -469,10 +469,72 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 return ParseEntityOperation(operationNode, artifactId, index, results);
             case "update_manifest":
                 return ParseManifestOperation(operationNode, artifactId, index, results);
+            case "upsert_item_prototype":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertItemPrototypePatchOperation(ReadDefinition<ItemDefinition>(node)));
+            case "upsert_resource":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertResourcePatchOperation(ReadDefinition<ResourceDefinition>(node)));
+            case "upsert_status":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertStatusPatchOperation(ReadDefinition<StatusDefinition>(node)));
+            case "upsert_recipe":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertRecipePatchOperation(ReadDefinition<RecipeDefinition>(node)));
+            case "upsert_loot_table":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertLootTablePatchOperation(ReadDefinition<LootTableDefinition>(node)));
+            case "upsert_transaction":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertTransactionPatchOperation(ReadDefinition<TransactionDefinition>(node)));
+            case "upsert_resource_network":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertResourceNetworkPatchOperation(ReadDefinition<ResourceNetworkDefinition>(node)));
+            case "upsert_resource_node":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertResourceNodePatchOperation(ReadDefinition<ResourceNodeDefinition>(node)));
+            case "upsert_inventory":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertInventoryPatchOperation(ReadDefinition<InventoryDefinition>(node)));
+            case "upsert_equipment_slot":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertEquipmentSlotPatchOperation(ReadDefinition<EquipmentSlotDefinition>(node)));
+            case "upsert_stat":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertStatPatchOperation(ReadDefinition<StatDefinition>(node)));
+            case "upsert_progression":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertProgressionPatchOperation(ReadDefinition<ProgressionDefinition>(node)));
+            case "upsert_encounter":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertEncounterPatchOperation(ReadDefinition<EncounterDefinition>(node)));
+            case "upsert_ability":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertAbilityPatchOperation(ReadDefinition<AbilityDefinition>(node)));
+            case "upsert_quest":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertQuestPatchOperation(ReadDefinition<QuestDefinition>(node)));
+            case "upsert_dialogue":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertDialoguePatchOperation(ReadDefinition<DialogueDefinition>(node)));
+            case "upsert_faction":
+                return ParseDefinitionOperation(operationNode, artifactId, index, results, node => new UpsertFactionPatchOperation(ReadDefinition<FactionDefinition>(node)));
             default:
                 results.Add(ValidationResult(artifactId, "error", "patch.operation.op.unknown", $"Unsupported patch operation: {op}", $"operations[{index}].op", results.Count));
                 return null;
         }
+    }
+
+    private static GamePackagePatchOperation? ParseDefinitionOperation(JsonObject node, string artifactId, int index, List<GeneratedArtifactValidationResultRecord> results, Func<JsonObject, GamePackagePatchOperation> factory)
+    {
+        try
+        {
+            var operation = factory(node);
+            if (string.IsNullOrWhiteSpace(operation.Target))
+            {
+                results.Add(ValidationResult(artifactId, "error", "patch.operation.id.empty", "Definition operation id is required.", $"operations[{index}].id", results.Count));
+                return null;
+            }
+
+            return operation;
+        }
+        catch (JsonException ex)
+        {
+            results.Add(ValidationResult(artifactId, "error", "patch.operation.definition.invalid", ex.Message, $"operations[{index}]", results.Count));
+            return null;
+        }
+    }
+
+    private static T ReadDefinition<T>(JsonObject node)
+    {
+        var clone = node.DeepClone().AsObject();
+        clone.Remove("op");
+        return JsonSerializer.Deserialize<T>(clone.ToJsonString(), PatchJsonOptions)
+            ?? throw new JsonException($"Failed to parse {typeof(T).Name}.");
     }
 
     private static GamePackagePatchOperation? ParseTileOperation(JsonObject node, string artifactId, int index, List<GeneratedArtifactValidationResultRecord> results)
@@ -608,6 +670,15 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                     break;
                 case UpsertAbilityPatchOperation ability:
                     UpsertDefinition(package.Game.Abilities, ability.Ability, ability.Op, ability.Target, "ability", diffLines);
+                    break;
+                case UpsertQuestPatchOperation quest:
+                    UpsertDefinition(package.Game.Quests, quest.Quest, quest.Op, quest.Target, "quest", diffLines);
+                    break;
+                case UpsertDialoguePatchOperation dialogue:
+                    UpsertDefinition(package.Game.Dialogues, dialogue.Dialogue, dialogue.Op, dialogue.Target, "dialogue", diffLines);
+                    break;
+                case UpsertFactionPatchOperation faction:
+                    UpsertDefinition(package.Game.Factions, faction.Faction, faction.Op, faction.Target, "faction", diffLines);
                     break;
                 case UpdateManifestPatchOperation manifest:
                     if (!string.IsNullOrWhiteSpace(manifest.StartMapId) && !package.Game.Maps.Any(map => IdEquals(map.Id, manifest.StartMapId)))
@@ -844,6 +915,12 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
                 return DefinitionOperationToJson(encounter.Op, encounter.Encounter);
             case UpsertAbilityPatchOperation ability:
                 return DefinitionOperationToJson(ability.Op, ability.Ability);
+            case UpsertQuestPatchOperation quest:
+                return DefinitionOperationToJson(quest.Op, quest.Quest);
+            case UpsertDialoguePatchOperation dialogue:
+                return DefinitionOperationToJson(dialogue.Op, dialogue.Dialogue);
+            case UpsertFactionPatchOperation faction:
+                return DefinitionOperationToJson(faction.Op, faction.Faction);
             case UpdateManifestPatchOperation manifest:
                 var manifestJson = new JsonObject
                 {
@@ -901,6 +978,9 @@ public sealed class GamePackagePatchService : IGamePackagePatchService
             ProgressionDefinition progression => progression.Id,
             EncounterDefinition encounter => encounter.Id,
             AbilityDefinition ability => ability.Id,
+            QuestDefinition quest => quest.Id,
+            DialogueDefinition dialogue => dialogue.Id,
+            FactionDefinition faction => faction.Id,
             _ => null
         };
     }

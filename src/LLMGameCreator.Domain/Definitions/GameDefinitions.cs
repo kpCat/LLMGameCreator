@@ -31,6 +31,7 @@ public sealed class GameDefinition
     public List<EncounterDefinition> Encounters { get; set; } = new List<EncounterDefinition>();
     public List<QuestDefinition> Quests { get; set; } = new List<QuestDefinition>();
     public List<DialogueDefinition> Dialogues { get; set; } = new List<DialogueDefinition>();
+    public List<FactionDefinition> Factions { get; set; } = new List<FactionDefinition>();
     public List<FormulaDefinition> Formulas { get; set; } = new List<FormulaDefinition>();
     public List<InteractionDefinition> Interactions { get; set; } = new List<InteractionDefinition>();
 }

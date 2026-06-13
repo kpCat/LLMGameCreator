@@ -12,6 +12,9 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
     private readonly IContainerRuntimeService _containerRuntimeService;
     private readonly IHarvestRuntimeService _harvestRuntimeService;
     private readonly IUseItemRuntimeService _useItemRuntimeService;
+    private readonly IDialogueRuntimeService? _dialogueRuntimeService;
+    private readonly IQuestRuntimeService? _questRuntimeService;
+    private readonly IEncounterRuntimeService? _encounterRuntimeService;
 
     public InteractionRuntimeService(
         IRequirementEvaluator requirementEvaluator,
@@ -20,7 +23,10 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
         ITransactionRuntimeService transactionRuntimeService,
         IContainerRuntimeService? containerRuntimeService = null,
         IHarvestRuntimeService? harvestRuntimeService = null,
-        IUseItemRuntimeService? useItemRuntimeService = null)
+        IUseItemRuntimeService? useItemRuntimeService = null,
+        IDialogueRuntimeService? dialogueRuntimeService = null,
+        IQuestRuntimeService? questRuntimeService = null,
+        IEncounterRuntimeService? encounterRuntimeService = null)
     {
         _requirementEvaluator = requirementEvaluator;
         _outputApplier = outputApplier;
@@ -29,6 +35,9 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
         _containerRuntimeService = containerRuntimeService ?? new ContainerRuntimeService();
         _harvestRuntimeService = harvestRuntimeService ?? new HarvestRuntimeService(new RequirementEvaluator(), new CostConsumer(), new OutputApplier());
         _useItemRuntimeService = useItemRuntimeService ?? new UseItemRuntimeService(new RequirementEvaluator(), new OutputApplier());
+        _dialogueRuntimeService = dialogueRuntimeService;
+        _questRuntimeService = questRuntimeService;
+        _encounterRuntimeService = encounterRuntimeService;
     }
 
     public GameRuntimeResult ExecuteInteraction(GamePackageDefinition package, GameRuntimeState state, string interactionId, string? targetId = null, string? inventoryId = null)
@@ -116,6 +125,42 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
                 : Failure(state, "interaction.container_metadata_missing", "open_container interaction requires metadata.container_id.", interaction.Id);
         }
 
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "talk"))
+        {
+            if (_dialogueRuntimeService == null)
+            {
+                return Failure(state, "interaction.dialogue_service_missing", "talk interaction requires dialogue runtime service.", interaction.Id);
+            }
+
+            return TryGetMetadata(interaction, "dialogue_id", out var dialogueId)
+                ? _dialogueRuntimeService.OpenDialogue(package, state, dialogueId)
+                : Failure(state, "interaction.dialogue_metadata_missing", "talk interaction requires metadata.dialogue_id.", interaction.Id);
+        }
+
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "quest") || RuntimeStateHelpers.KindEquals(interaction.Kind, "start_quest"))
+        {
+            if (_questRuntimeService == null)
+            {
+                return Failure(state, "interaction.quest_service_missing", "quest interaction requires quest runtime service.", interaction.Id);
+            }
+
+            return TryGetMetadata(interaction, "quest_id", out var questId)
+                ? _questRuntimeService.StartQuest(package, state, questId)
+                : Failure(state, "interaction.quest_metadata_missing", "quest interaction requires metadata.quest_id.", interaction.Id);
+        }
+
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "complete_quest"))
+        {
+            if (_questRuntimeService == null)
+            {
+                return Failure(state, "interaction.quest_service_missing", "complete_quest interaction requires quest runtime service.", interaction.Id);
+            }
+
+            return TryGetMetadata(interaction, "quest_id", out var questId)
+                ? _questRuntimeService.CompleteQuest(package, state, questId)
+                : Failure(state, "interaction.quest_metadata_missing", "complete_quest interaction requires metadata.quest_id.", interaction.Id);
+        }
+
         if (RuntimeStateHelpers.KindEquals(interaction.Kind, "harvest_resource"))
         {
             if (!TryGetMetadata(interaction, "resource_node_id", out var nodeId))
@@ -148,6 +193,18 @@ public sealed class InteractionRuntimeService : IInteractionRuntimeService
             {
                 return _transactionRuntimeService.ExecuteTransaction(package, state, transactionId, inventoryId);
             }
+        }
+
+        if (RuntimeStateHelpers.KindEquals(interaction.Kind, "fight"))
+        {
+            if (_encounterRuntimeService == null)
+            {
+                return Failure(state, "interaction.encounter_service_missing", "fight interaction requires encounter runtime service.", interaction.Id);
+            }
+
+            return TryGetMetadata(interaction, "encounter_id", out var encounterId)
+                ? _encounterRuntimeService.StartEncounter(package, state, encounterId, ReadSeed(interaction))
+                : Failure(state, "interaction.encounter_metadata_missing", "fight interaction requires metadata.encounter_id.", interaction.Id);
         }
 
         return null;

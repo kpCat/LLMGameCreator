@@ -58,6 +58,17 @@ public sealed class QuestDefinition
     public string Id { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    public string Kind { get; set; } = "quest";
+    public List<RequirementDefinition> StartConditions { get; set; } = new List<RequirementDefinition>();
+    public List<OutputDefinition> StartEffects { get; set; } = new List<OutputDefinition>();
+    public List<QuestObjectiveDefinition> Objectives { get; set; } = new List<QuestObjectiveDefinition>();
+    public List<OutputDefinition> Rewards { get; set; } = new List<OutputDefinition>();
+    public List<RequirementDefinition> FailureConditions { get; set; } = new List<RequirementDefinition>();
+    public List<OutputDefinition> FailureEffects { get; set; } = new List<OutputDefinition>();
+    public bool Repeatable { get; set; }
+    public bool AutoStart { get; set; }
+    public List<string> Tags { get; set; } = new List<string>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
     public List<QuestStageDefinition> Stages { get; set; } = new List<QuestStageDefinition>();
 }
 
@@ -66,6 +77,15 @@ public sealed class QuestStageDefinition
     public string Id { get; set; } = string.Empty;
     public string Text { get; set; } = string.Empty;
     public List<ConditionDefinition> CompleteConditions { get; set; } = new List<ConditionDefinition>();
+    public List<QuestObjectiveDefinition> Objectives { get; set; } = new List<QuestObjectiveDefinition>();
+    public List<OutputDefinition> EnterEffects { get; set; } = new List<OutputDefinition>();
+    public List<OutputDefinition> CompleteEffects { get; set; } = new List<OutputDefinition>();
+    public List<OutputDefinition> Rewards { get; set; } = new List<OutputDefinition>();
+    public string? NextStageId { get; set; }
+    public bool Optional { get; set; }
+    public bool Hidden { get; set; }
+    public List<string> Tags { get; set; } = new List<string>();
+    public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 }
 
 public sealed class InteractionDefinition

@@ -133,6 +133,21 @@ public sealed record UpsertAbilityPatchOperation(AbilityDefinition Ability) : Ga
     public override string Target => Ability.Id;
 }
 
+public sealed record UpsertQuestPatchOperation(QuestDefinition Quest) : GamePackagePatchOperation("upsert_quest")
+{
+    public override string Target => Quest.Id;
+}
+
+public sealed record UpsertDialoguePatchOperation(DialogueDefinition Dialogue) : GamePackagePatchOperation("upsert_dialogue")
+{
+    public override string Target => Dialogue.Id;
+}
+
+public sealed record UpsertFactionPatchOperation(FactionDefinition Faction) : GamePackagePatchOperation("upsert_faction")
+{
+    public override string Target => Faction.Id;
+}
+
 public sealed record GamePackagePatchValidationIssue(
     string Severity,
     string Code,

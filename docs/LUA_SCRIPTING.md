@@ -113,7 +113,10 @@ Supported declaration types:
 - `stat`;
 - `progression`;
 - `encounter`;
-- `ability`.
+- `ability`;
+- `quest`;
+- `dialogue`;
+- `faction`.
 
 The editor-side flow is:
 
@@ -191,6 +194,37 @@ data:extend({
 ```
 
 Runtime Lua, generator Lua, behavior Lua, interaction Lua, formula Lua, event Lua and migration Lua execution are still not implemented. Generator modules are not executed by this layer.
+
+Narrative declarations map to data-only patch operations:
+
+```lua
+data:extend({
+  { type = "faction", id = "faction/village", name = "Village", kind = "settlement", default_reputation = 0, min_reputation = -100, max_reputation = 100 },
+  {
+    type = "quest",
+    id = "quest/help_healer",
+    title = "Help the Healer",
+    description = "Gather herbs.",
+    objectives = {
+      { id = "objective/herbs", kind = "collect_item", target_id = "item/red_herb", required_amount = 3 }
+    },
+    rewards = {
+      { kind = "reputation", id = "faction/village", amount = 5 }
+    }
+  },
+  {
+    type = "dialogue",
+    id = "dialogue/healer",
+    title = "Village Healer",
+    start_node_id = "start",
+    nodes = {
+      { id = "start", text = "Can you help?", choices = { { id = "accept", text = "Yes", start_quest_id = "quest/help_healer", close_dialogue = true } } }
+    }
+  }
+})
+```
+
+These declarations still produce `game_package_patch_v1` artifacts. They are not applied automatically and do not execute runtime Lua.
 
 ## LLM generation rules
 

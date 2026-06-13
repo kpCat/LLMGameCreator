@@ -70,6 +70,28 @@ namespace LLMGameCreator.WinForms.Pages
         private Label _toolItemLabel;
         private TextBox _toolItemTextBox;
         private Button _harvestButton;
+        private Label _questLabel;
+        private ComboBox _questComboBox;
+        private Label _objectiveLabel;
+        private TextBox _objectiveTextBox;
+        private Button _startQuestButton;
+        private Button _advanceObjectiveButton;
+        private Button _completeQuestButton;
+        private Button _failQuestButton;
+        private Button _refreshObjectivesButton;
+        private Label _dialogueLabel;
+        private ComboBox _dialogueComboBox;
+        private Label _choiceLabel;
+        private TextBox _choiceTextBox;
+        private Button _openDialogueButton;
+        private Button _chooseDialogueButton;
+        private Button _closeDialogueButton;
+        private Label _factionLabel;
+        private ComboBox _factionComboBox;
+        private Label _reputationLabel;
+        private NumericUpDown _reputationNumericUpDown;
+        private Button _changeReputationButton;
+        private Button _setReputationButton;
         private Label _snapshotSlotLabel;
         private TextBox _snapshotSlotTextBox;
         private Button _saveSnapshotButton;
@@ -155,6 +177,28 @@ namespace LLMGameCreator.WinForms.Pages
             this._toolItemLabel = new Label();
             this._toolItemTextBox = new TextBox();
             this._harvestButton = new Button();
+            this._questLabel = new Label();
+            this._questComboBox = new ComboBox();
+            this._objectiveLabel = new Label();
+            this._objectiveTextBox = new TextBox();
+            this._startQuestButton = new Button();
+            this._advanceObjectiveButton = new Button();
+            this._completeQuestButton = new Button();
+            this._failQuestButton = new Button();
+            this._refreshObjectivesButton = new Button();
+            this._dialogueLabel = new Label();
+            this._dialogueComboBox = new ComboBox();
+            this._choiceLabel = new Label();
+            this._choiceTextBox = new TextBox();
+            this._openDialogueButton = new Button();
+            this._chooseDialogueButton = new Button();
+            this._closeDialogueButton = new Button();
+            this._factionLabel = new Label();
+            this._factionComboBox = new ComboBox();
+            this._reputationLabel = new Label();
+            this._reputationNumericUpDown = new NumericUpDown();
+            this._changeReputationButton = new Button();
+            this._setReputationButton = new Button();
             this._snapshotSlotLabel = new Label();
             this._snapshotSlotTextBox = new TextBox();
             this._saveSnapshotButton = new Button();
@@ -175,6 +219,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._topToolbarPanel.SuspendLayout();
             ((ISupportInitialize)this._ticksNumericUpDown).BeginInit();
             ((ISupportInitialize)this._containerAmountNumericUpDown).BeginInit();
+            ((ISupportInitialize)this._reputationNumericUpDown).BeginInit();
             ((ISupportInitialize)this._rightSplitContainer).BeginInit();
             this._rightSplitContainer.Panel1.SuspendLayout();
             this._rightSplitContainer.Panel2.SuspendLayout();
@@ -264,6 +309,28 @@ namespace LLMGameCreator.WinForms.Pages
             this._topToolbarPanel.Controls.Add(this._toolItemLabel);
             this._topToolbarPanel.Controls.Add(this._toolItemTextBox);
             this._topToolbarPanel.Controls.Add(this._harvestButton);
+            this._topToolbarPanel.Controls.Add(this._questLabel);
+            this._topToolbarPanel.Controls.Add(this._questComboBox);
+            this._topToolbarPanel.Controls.Add(this._objectiveLabel);
+            this._topToolbarPanel.Controls.Add(this._objectiveTextBox);
+            this._topToolbarPanel.Controls.Add(this._startQuestButton);
+            this._topToolbarPanel.Controls.Add(this._advanceObjectiveButton);
+            this._topToolbarPanel.Controls.Add(this._completeQuestButton);
+            this._topToolbarPanel.Controls.Add(this._failQuestButton);
+            this._topToolbarPanel.Controls.Add(this._refreshObjectivesButton);
+            this._topToolbarPanel.Controls.Add(this._dialogueLabel);
+            this._topToolbarPanel.Controls.Add(this._dialogueComboBox);
+            this._topToolbarPanel.Controls.Add(this._choiceLabel);
+            this._topToolbarPanel.Controls.Add(this._choiceTextBox);
+            this._topToolbarPanel.Controls.Add(this._openDialogueButton);
+            this._topToolbarPanel.Controls.Add(this._chooseDialogueButton);
+            this._topToolbarPanel.Controls.Add(this._closeDialogueButton);
+            this._topToolbarPanel.Controls.Add(this._factionLabel);
+            this._topToolbarPanel.Controls.Add(this._factionComboBox);
+            this._topToolbarPanel.Controls.Add(this._reputationLabel);
+            this._topToolbarPanel.Controls.Add(this._reputationNumericUpDown);
+            this._topToolbarPanel.Controls.Add(this._changeReputationButton);
+            this._topToolbarPanel.Controls.Add(this._setReputationButton);
             this._topToolbarPanel.Controls.Add(this._snapshotSlotLabel);
             this._topToolbarPanel.Controls.Add(this._snapshotSlotTextBox);
             this._topToolbarPanel.Controls.Add(this._saveSnapshotButton);
@@ -798,6 +865,204 @@ namespace LLMGameCreator.WinForms.Pages
             this._harvestButton.Text = "Harvest Resource Node";
             this._harvestButton.UseVisualStyleBackColor = true;
             // 
+            // _questLabel
+            // 
+            this._questLabel.AutoSize = true;
+            this._questLabel.Location = new Point(3, 1012);
+            this._questLabel.Margin = new Padding(3, 12, 3, 0);
+            this._questLabel.Name = "_questLabel";
+            this._questLabel.Size = new Size(38, 15);
+            this._questLabel.TabIndex = 45;
+            this._questLabel.Text = "Quest";
+            // 
+            // _questComboBox
+            // 
+            this._questComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._questComboBox.FormattingEnabled = true;
+            this._questComboBox.Location = new Point(3, 1030);
+            this._questComboBox.Name = "_questComboBox";
+            this._questComboBox.Size = new Size(290, 23);
+            this._questComboBox.TabIndex = 46;
+            // 
+            // _objectiveLabel
+            // 
+            this._objectiveLabel.AutoSize = true;
+            this._objectiveLabel.Location = new Point(3, 1056);
+            this._objectiveLabel.Name = "_objectiveLabel";
+            this._objectiveLabel.Size = new Size(57, 15);
+            this._objectiveLabel.TabIndex = 47;
+            this._objectiveLabel.Text = "Objective";
+            // 
+            // _objectiveTextBox
+            // 
+            this._objectiveTextBox.Location = new Point(3, 1074);
+            this._objectiveTextBox.Name = "_objectiveTextBox";
+            this._objectiveTextBox.Size = new Size(290, 23);
+            this._objectiveTextBox.TabIndex = 48;
+            // 
+            // _startQuestButton
+            // 
+            this._startQuestButton.Location = new Point(3, 1103);
+            this._startQuestButton.Name = "_startQuestButton";
+            this._startQuestButton.Size = new Size(220, 30);
+            this._startQuestButton.TabIndex = 49;
+            this._startQuestButton.Text = "Start Quest";
+            this._startQuestButton.UseVisualStyleBackColor = true;
+            // 
+            // _advanceObjectiveButton
+            // 
+            this._advanceObjectiveButton.Location = new Point(3, 1139);
+            this._advanceObjectiveButton.Name = "_advanceObjectiveButton";
+            this._advanceObjectiveButton.Size = new Size(220, 30);
+            this._advanceObjectiveButton.TabIndex = 50;
+            this._advanceObjectiveButton.Text = "Advance Objective";
+            this._advanceObjectiveButton.UseVisualStyleBackColor = true;
+            // 
+            // _completeQuestButton
+            // 
+            this._completeQuestButton.Location = new Point(3, 1175);
+            this._completeQuestButton.Name = "_completeQuestButton";
+            this._completeQuestButton.Size = new Size(220, 30);
+            this._completeQuestButton.TabIndex = 51;
+            this._completeQuestButton.Text = "Complete Quest";
+            this._completeQuestButton.UseVisualStyleBackColor = true;
+            // 
+            // _failQuestButton
+            // 
+            this._failQuestButton.Location = new Point(3, 1211);
+            this._failQuestButton.Name = "_failQuestButton";
+            this._failQuestButton.Size = new Size(220, 30);
+            this._failQuestButton.TabIndex = 52;
+            this._failQuestButton.Text = "Fail Quest";
+            this._failQuestButton.UseVisualStyleBackColor = true;
+            // 
+            // _refreshObjectivesButton
+            // 
+            this._refreshObjectivesButton.Location = new Point(3, 1247);
+            this._refreshObjectivesButton.Name = "_refreshObjectivesButton";
+            this._refreshObjectivesButton.Size = new Size(220, 30);
+            this._refreshObjectivesButton.TabIndex = 53;
+            this._refreshObjectivesButton.Text = "Refresh Objectives";
+            this._refreshObjectivesButton.UseVisualStyleBackColor = true;
+            // 
+            // _dialogueLabel
+            // 
+            this._dialogueLabel.AutoSize = true;
+            this._dialogueLabel.Location = new Point(3, 1292);
+            this._dialogueLabel.Margin = new Padding(3, 12, 3, 0);
+            this._dialogueLabel.Name = "_dialogueLabel";
+            this._dialogueLabel.Size = new Size(55, 15);
+            this._dialogueLabel.TabIndex = 54;
+            this._dialogueLabel.Text = "Dialogue";
+            // 
+            // _dialogueComboBox
+            // 
+            this._dialogueComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._dialogueComboBox.FormattingEnabled = true;
+            this._dialogueComboBox.Location = new Point(3, 1310);
+            this._dialogueComboBox.Name = "_dialogueComboBox";
+            this._dialogueComboBox.Size = new Size(290, 23);
+            this._dialogueComboBox.TabIndex = 55;
+            // 
+            // _choiceLabel
+            // 
+            this._choiceLabel.AutoSize = true;
+            this._choiceLabel.Location = new Point(3, 1336);
+            this._choiceLabel.Name = "_choiceLabel";
+            this._choiceLabel.Size = new Size(44, 15);
+            this._choiceLabel.TabIndex = 56;
+            this._choiceLabel.Text = "Choice";
+            // 
+            // _choiceTextBox
+            // 
+            this._choiceTextBox.Location = new Point(3, 1354);
+            this._choiceTextBox.Name = "_choiceTextBox";
+            this._choiceTextBox.Size = new Size(290, 23);
+            this._choiceTextBox.TabIndex = 57;
+            // 
+            // _openDialogueButton
+            // 
+            this._openDialogueButton.Location = new Point(3, 1383);
+            this._openDialogueButton.Name = "_openDialogueButton";
+            this._openDialogueButton.Size = new Size(220, 30);
+            this._openDialogueButton.TabIndex = 58;
+            this._openDialogueButton.Text = "Open Dialogue";
+            this._openDialogueButton.UseVisualStyleBackColor = true;
+            // 
+            // _chooseDialogueButton
+            // 
+            this._chooseDialogueButton.Location = new Point(3, 1419);
+            this._chooseDialogueButton.Name = "_chooseDialogueButton";
+            this._chooseDialogueButton.Size = new Size(220, 30);
+            this._chooseDialogueButton.TabIndex = 59;
+            this._chooseDialogueButton.Text = "Choose Choice";
+            this._chooseDialogueButton.UseVisualStyleBackColor = true;
+            // 
+            // _closeDialogueButton
+            // 
+            this._closeDialogueButton.Location = new Point(3, 1455);
+            this._closeDialogueButton.Name = "_closeDialogueButton";
+            this._closeDialogueButton.Size = new Size(220, 30);
+            this._closeDialogueButton.TabIndex = 60;
+            this._closeDialogueButton.Text = "Close Dialogue";
+            this._closeDialogueButton.UseVisualStyleBackColor = true;
+            // 
+            // _factionLabel
+            // 
+            this._factionLabel.AutoSize = true;
+            this._factionLabel.Location = new Point(3, 1500);
+            this._factionLabel.Margin = new Padding(3, 12, 3, 0);
+            this._factionLabel.Name = "_factionLabel";
+            this._factionLabel.Size = new Size(46, 15);
+            this._factionLabel.TabIndex = 61;
+            this._factionLabel.Text = "Faction";
+            // 
+            // _factionComboBox
+            // 
+            this._factionComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            this._factionComboBox.FormattingEnabled = true;
+            this._factionComboBox.Location = new Point(3, 1518);
+            this._factionComboBox.Name = "_factionComboBox";
+            this._factionComboBox.Size = new Size(290, 23);
+            this._factionComboBox.TabIndex = 62;
+            // 
+            // _reputationLabel
+            // 
+            this._reputationLabel.AutoSize = true;
+            this._reputationLabel.Location = new Point(3, 1544);
+            this._reputationLabel.Name = "_reputationLabel";
+            this._reputationLabel.Size = new Size(67, 15);
+            this._reputationLabel.TabIndex = 63;
+            this._reputationLabel.Text = "Reputation";
+            // 
+            // _reputationNumericUpDown
+            // 
+            this._reputationNumericUpDown.DecimalPlaces = 2;
+            this._reputationNumericUpDown.Location = new Point(3, 1562);
+            this._reputationNumericUpDown.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            this._reputationNumericUpDown.Minimum = new decimal(new int[] { 100000, 0, 0, int.MinValue });
+            this._reputationNumericUpDown.Name = "_reputationNumericUpDown";
+            this._reputationNumericUpDown.Size = new Size(120, 23);
+            this._reputationNumericUpDown.TabIndex = 64;
+            // 
+            // _changeReputationButton
+            // 
+            this._changeReputationButton.Location = new Point(3, 1591);
+            this._changeReputationButton.Name = "_changeReputationButton";
+            this._changeReputationButton.Size = new Size(220, 30);
+            this._changeReputationButton.TabIndex = 65;
+            this._changeReputationButton.Text = "Change Reputation";
+            this._changeReputationButton.UseVisualStyleBackColor = true;
+            // 
+            // _setReputationButton
+            // 
+            this._setReputationButton.Location = new Point(3, 1627);
+            this._setReputationButton.Name = "_setReputationButton";
+            this._setReputationButton.Size = new Size(220, 30);
+            this._setReputationButton.TabIndex = 66;
+            this._setReputationButton.Text = "Set Reputation";
+            this._setReputationButton.UseVisualStyleBackColor = true;
+            // 
             // _snapshotSlotLabel
             // 
             this._snapshotSlotLabel.AutoSize = true;
@@ -935,6 +1200,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._topToolbarPanel.PerformLayout();
             ((ISupportInitialize)this._ticksNumericUpDown).EndInit();
             ((ISupportInitialize)this._containerAmountNumericUpDown).EndInit();
+            ((ISupportInitialize)this._reputationNumericUpDown).EndInit();
             this._rightSplitContainer.Panel1.ResumeLayout(false);
             this._rightSplitContainer.Panel1.PerformLayout();
             this._rightSplitContainer.Panel2.ResumeLayout(false);

@@ -246,3 +246,43 @@ Harvest resource nodes can use metadata conventions:
 - `deplete_on_harvest`
 
 Interaction metadata routing supports `container_id`, `resource_node_id`, `item_id`, `recipe_id`, `transaction_id`, `loot_table_id` and `tool_item_id`.
+
+## Optional Narrative Definition Lists
+
+`game.quests`, `game.dialogues` and `game.factions` are optional/default-empty. Older packages that omit the new narrative fields remain loadable.
+
+Minimal narrative example:
+
+```json
+{
+  "factions": [
+    { "id": "faction/village", "name": "Village", "kind": "settlement", "defaultReputation": 0, "minReputation": -100, "maxReputation": 100 }
+  ],
+  "quests": [
+    {
+      "id": "quest/help_healer",
+      "title": "Help the Healer",
+      "description": "Gather three red herbs.",
+      "objectives": [{ "id": "objective/herbs", "kind": "has_item", "targetId": "item/red_herb", "requiredAmount": 3 }],
+      "rewards": [{ "kind": "reputation", "id": "faction/village", "amount": 5 }]
+    }
+  ],
+  "dialogues": [
+    {
+      "id": "dialogue/healer",
+      "title": "Village Healer",
+      "startNodeId": "start",
+      "nodes": [
+        {
+          "id": "start",
+          "speakerId": "npc/healer",
+          "text": "Can you bring me three red herbs?",
+          "choices": [{ "id": "accept", "text": "I will help.", "startQuestId": "quest/help_healer", "closeDialogue": true }]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Narrative definitions are data contracts. Runtime quest journal, active dialogue, objective progress and faction reputation live in runtime state/snapshots only.

@@ -95,6 +95,22 @@ public sealed class OutputApplier : IOutputApplier
             return;
         }
 
+        if (IsFactionReputationOutput(output))
+        {
+            var definition = package.Game.Factions.FirstOrDefault(f => RuntimeStateHelpers.IdEquals(f.Id, output.Id));
+            if (definition == null)
+            {
+                result.Diagnostics.Add(RuntimeStateHelpers.Diagnostic("output.faction_missing", $"Output references a missing faction: {output.Id}", output.Id));
+                return;
+            }
+
+            var faction = RuntimeStateHelpers.EnsureFaction(state, definition);
+            faction.Reputation = RuntimeStateHelpers.Clamp(faction.Reputation + output.Amount, definition.MinReputation, definition.MaxReputation);
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.OutputApplied, $"Changed faction reputation {output.Id} by {Format(output.Amount)}", output.Id));
+            result.Events.Add(RuntimeStateHelpers.Event(GameRuntimeEventType.FactionReputationChanged, $"Faction reputation changed: {output.Id}", output.Id));
+            return;
+        }
+
         if (RuntimeStateHelpers.KindEquals(output.Kind, "status") || RuntimeStateHelpers.KindEquals(output.Kind, "add_status"))
         {
             var targetId = string.IsNullOrWhiteSpace(output.Scope) ? state.PlayerEntityId : output.Scope!;
@@ -206,9 +222,14 @@ public sealed class OutputApplier : IOutputApplier
         return RuntimeStateHelpers.KindEquals(output.Kind, "resource")
             || RuntimeStateHelpers.KindEquals(output.Kind, "change_resource")
             || RuntimeStateHelpers.KindEquals(output.Kind, "network_resource")
-            || RuntimeStateHelpers.KindEquals(output.Kind, "abstract_resource")
-            || RuntimeStateHelpers.KindEquals(output.Kind, "faction")
-            || RuntimeStateHelpers.KindEquals(output.Kind, "reputation");
+            || RuntimeStateHelpers.KindEquals(output.Kind, "abstract_resource");
+    }
+
+    private static bool IsFactionReputationOutput(OutputDefinition output)
+    {
+        return RuntimeStateHelpers.KindEquals(output.Kind, "reputation")
+            || RuntimeStateHelpers.KindEquals(output.Kind, "faction_reputation")
+            || RuntimeStateHelpers.KindEquals(output.Kind, "change_reputation");
     }
 
     private static bool IsProgressionOutput(OutputDefinition output)

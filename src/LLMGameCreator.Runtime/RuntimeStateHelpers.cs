@@ -308,6 +308,25 @@ internal static class RuntimeStateHelpers
         return state.Statuses.Any(s => IdEquals(s.StatusId, statusId) && (string.IsNullOrWhiteSpace(targetId) || IdEquals(s.TargetId, targetId)));
     }
 
+    public static FactionRuntimeState EnsureFaction(GameRuntimeState state, FactionDefinition definition)
+    {
+        var faction = state.Factions.FirstOrDefault(f => IdEquals(f.FactionId, definition.Id));
+        if (faction != null)
+        {
+            return faction;
+        }
+
+        faction = new FactionRuntimeState
+        {
+            FactionId = definition.Id,
+            Reputation = Clamp(definition.DefaultReputation ?? 0, definition.MinReputation, definition.MaxReputation),
+            RelationKind = "neutral",
+            Metadata = new Dictionary<string, string>(definition.Metadata)
+        };
+        state.Factions.Add(faction);
+        return faction;
+    }
+
     public static ProgressionState EnsureProgression(GameRuntimeState state, ProgressionDefinition definition)
     {
         var progression = state.Progressions.FirstOrDefault(p => IdEquals(p.ProgressionId, definition.Id));
@@ -398,6 +417,43 @@ internal static class RuntimeStateHelpers
             Tick = state.Tick,
             QuestStates = new Dictionary<string, string>(state.QuestStates),
             Metadata = new Dictionary<string, string>(state.Metadata),
+            Quests = state.Quests.Select(quest => new QuestRuntimeState
+            {
+                QuestId = quest.QuestId,
+                State = quest.State,
+                CurrentStageId = quest.CurrentStageId,
+                StartedTick = quest.StartedTick,
+                CompletedTick = quest.CompletedTick,
+                Metadata = new Dictionary<string, string>(quest.Metadata),
+                Objectives = quest.Objectives.Select(objective => new QuestObjectiveRuntimeState
+                {
+                    ObjectiveId = objective.ObjectiveId,
+                    Kind = objective.Kind,
+                    TargetId = objective.TargetId,
+                    CurrentAmount = objective.CurrentAmount,
+                    RequiredAmount = objective.RequiredAmount,
+                    Completed = objective.Completed,
+                    Metadata = new Dictionary<string, string>(objective.Metadata)
+                }).ToList()
+            }).ToList(),
+            ActiveDialogue = state.ActiveDialogue == null
+                ? null
+                : new DialogueRuntimeState
+                {
+                    DialogueId = state.ActiveDialogue.DialogueId,
+                    CurrentNodeId = state.ActiveDialogue.CurrentNodeId,
+                    SpeakerId = state.ActiveDialogue.SpeakerId,
+                    Open = state.ActiveDialogue.Open,
+                    History = state.ActiveDialogue.History.ToList(),
+                    Metadata = new Dictionary<string, string>(state.ActiveDialogue.Metadata)
+                },
+            Factions = state.Factions.Select(faction => new FactionRuntimeState
+            {
+                FactionId = faction.FactionId,
+                Reputation = faction.Reputation,
+                RelationKind = faction.RelationKind,
+                Metadata = new Dictionary<string, string>(faction.Metadata)
+            }).ToList(),
             Equipment = state.Equipment.Select(equipment => new EquipmentState
             {
                 OwnerKind = equipment.OwnerKind,
@@ -477,6 +533,9 @@ internal static class RuntimeStateHelpers
         target.Statuses = source.Statuses;
         target.ActiveEncounter = source.ActiveEncounter;
         target.QuestStates = source.QuestStates;
+        target.Quests = source.Quests;
+        target.ActiveDialogue = source.ActiveDialogue;
+        target.Factions = source.Factions;
         target.Metadata = source.Metadata;
     }
 

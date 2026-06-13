@@ -77,6 +77,16 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _takeContainerButton.Click += (_, _) => ExecuteContainer(GameRuntimeCommandType.TakeFromContainer);
         _depositContainerButton.Click += (_, _) => ExecuteContainer(GameRuntimeCommandType.DepositToContainer);
         _harvestButton.Click += (_, _) => ExecuteHarvest();
+        _startQuestButton.Click += (_, _) => ExecuteNarrative(GameRuntimeCommandType.StartQuest);
+        _advanceObjectiveButton.Click += (_, _) => ExecuteAdvanceObjective();
+        _completeQuestButton.Click += (_, _) => ExecuteNarrative(GameRuntimeCommandType.CompleteQuest);
+        _failQuestButton.Click += (_, _) => ExecuteNarrative(GameRuntimeCommandType.FailQuest);
+        _refreshObjectivesButton.Click += (_, _) => ExecuteNarrative(GameRuntimeCommandType.RefreshQuestObjectives);
+        _openDialogueButton.Click += (_, _) => ExecuteDialogue(GameRuntimeCommandType.OpenDialogue);
+        _chooseDialogueButton.Click += (_, _) => ExecuteChooseDialogue();
+        _closeDialogueButton.Click += (_, _) => ExecuteDialogue(GameRuntimeCommandType.CloseDialogue);
+        _changeReputationButton.Click += (_, _) => ExecuteFaction(GameRuntimeCommandType.ChangeReputation);
+        _setReputationButton.Click += (_, _) => ExecuteFaction(GameRuntimeCommandType.SetReputation);
         _saveSnapshotButton.Click += (_, _) => SaveSnapshot();
         _loadSnapshotButton.Click += (_, _) => LoadSnapshot();
         _listSnapshotsButton.Click += (_, _) => ListSnapshots();
@@ -315,6 +325,117 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             GameRuntimeCommand.HarvestResourceNode(_resourceNodeComboBox.Text.Trim(), toolItemId: toolItemId, seed: seed)));
     }
 
+    private void ExecuteNarrative(GameRuntimeCommandType type)
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        var command = new GameRuntimeCommand { Type = type };
+        if (type != GameRuntimeCommandType.RefreshQuestObjectives)
+        {
+            if (string.IsNullOrWhiteSpace(_questComboBox.Text))
+            {
+                AppendLog("Select quest before executing quest command.");
+                return;
+            }
+
+            command.Id = _questComboBox.Text.Trim();
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(package!, _session!, command));
+    }
+
+    private void ExecuteAdvanceObjective()
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_questComboBox.Text) || string.IsNullOrWhiteSpace(_objectiveTextBox.Text))
+        {
+            AppendLog("Select quest and enter objective id before Advance Objective.");
+            return;
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            GameRuntimeCommand.AdvanceQuestObjective(_questComboBox.Text.Trim(), _objectiveTextBox.Text.Trim(), 1)));
+    }
+
+    private void ExecuteDialogue(GameRuntimeCommandType type)
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        var command = new GameRuntimeCommand { Type = type };
+        if (type == GameRuntimeCommandType.OpenDialogue)
+        {
+            if (string.IsNullOrWhiteSpace(_dialogueComboBox.Text))
+            {
+                AppendLog("Select dialogue before Open Dialogue.");
+                return;
+            }
+
+            command.Id = _dialogueComboBox.Text.Trim();
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(package!, _session!, command));
+    }
+
+    private void ExecuteChooseDialogue()
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_choiceTextBox.Text))
+        {
+            AppendLog("Enter choice id before Choose Choice.");
+            return;
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            GameRuntimeCommand.ChooseDialogueOption(_choiceTextBox.Text.Trim())));
+    }
+
+    private void ExecuteFaction(GameRuntimeCommandType type)
+    {
+        var package = CurrentPackage();
+        if (!EnsureRuntime(package))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_factionComboBox.Text))
+        {
+            AppendLog("Select faction before reputation command.");
+            return;
+        }
+
+        ApplyUnifiedResult(_unifiedRuntimeService!.ExecuteGameplayCommand(
+            package!,
+            _session!,
+            new GameRuntimeCommand
+            {
+                Type = type,
+                Id = _factionComboBox.Text.Trim(),
+                Amount = (double)_reputationNumericUpDown.Value
+            }));
+    }
+
     private void ExecuteUseItem()
     {
         var package = CurrentPackage();
@@ -410,6 +531,9 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         _equipmentSlotComboBox.Items.Clear();
         _containerComboBox.Items.Clear();
         _resourceNodeComboBox.Items.Clear();
+        _questComboBox.Items.Clear();
+        _dialogueComboBox.Items.Clear();
+        _factionComboBox.Items.Clear();
 
         if (package == null)
         {
@@ -469,6 +593,21 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
             _resourceNodeComboBox.Items.Add(node.Id);
         }
 
+        foreach (var quest in package.Game.Quests)
+        {
+            _questComboBox.Items.Add(quest.Id);
+        }
+
+        foreach (var dialogue in package.Game.Dialogues)
+        {
+            _dialogueComboBox.Items.Add(dialogue.Id);
+        }
+
+        foreach (var faction in package.Game.Factions)
+        {
+            _factionComboBox.Items.Add(faction.Id);
+        }
+
         SelectFirst(_recipeComboBox);
         SelectFirst(_lootComboBox);
         SelectFirst(_transactionComboBox);
@@ -479,6 +618,9 @@ public sealed partial class RuntimeSimulatorPageControl : UserControl, IEditorPa
         SelectFirst(_equipmentSlotComboBox);
         SelectFirst(_containerComboBox);
         SelectFirst(_resourceNodeComboBox);
+        SelectFirst(_questComboBox);
+        SelectFirst(_dialogueComboBox);
+        SelectFirst(_factionComboBox);
         RefreshStateJson();
         RefreshEncounterParticipantHints();
     }

@@ -62,6 +62,43 @@ public sealed class RequirementEvaluator : IRequirementEvaluator
             return;
         }
 
+        if (RuntimeStateHelpers.KindEquals(kind, "quest_state"))
+        {
+            var expected = requirement.Value ?? "completed";
+            var actual = state.Quests.FirstOrDefault(q => RuntimeStateHelpers.IdEquals(q.QuestId, requirement.Id))?.State
+                ?? (state.QuestStates.TryGetValue(requirement.Id, out var legacy) ? legacy : "not_started");
+            if (!string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase))
+            {
+                AddFailure(result, "requirement.quest_state_mismatch", kind, requirement.Id, $"Quest {requirement.Id} is not {expected}");
+            }
+
+            return;
+        }
+
+        if (RuntimeStateHelpers.KindEquals(kind, "reputation_at_least") || RuntimeStateHelpers.KindEquals(kind, "faction_reputation_at_least"))
+        {
+            var required = requirement.Amount ?? 0;
+            var has = state.Factions.FirstOrDefault(f => RuntimeStateHelpers.IdEquals(f.FactionId, requirement.Id))?.Reputation ?? 0;
+            if (has < required)
+            {
+                AddFailure(result, "requirement.reputation_too_low", kind, requirement.Id, $"Faction reputation {requirement.Id} requires {Format(required)}, has {Format(has)}");
+            }
+
+            return;
+        }
+
+        if (RuntimeStateHelpers.KindEquals(kind, "faction_relation_is"))
+        {
+            var expected = requirement.Value ?? requirement.Metadata.GetValueOrDefault("relation_kind") ?? "neutral";
+            var actual = state.Factions.FirstOrDefault(f => RuntimeStateHelpers.IdEquals(f.FactionId, requirement.Id))?.RelationKind ?? "neutral";
+            if (!string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase))
+            {
+                AddFailure(result, "requirement.faction_relation_mismatch", kind, requirement.Id, $"Faction relation {requirement.Id} is not {expected}");
+            }
+
+            return;
+        }
+
         if (RuntimeStateHelpers.KindEquals(kind, "status_present") || RuntimeStateHelpers.KindEquals(kind, "status_active"))
         {
             var targetId = requirement.Scope;

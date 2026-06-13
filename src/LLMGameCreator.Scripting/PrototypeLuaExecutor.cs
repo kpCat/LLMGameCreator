@@ -25,7 +25,10 @@ public sealed class PrototypeLuaExecutor : IPrototypeLuaExecutor
         "stat",
         "progression",
         "encounter",
-        "ability"
+        "ability",
+        "quest",
+        "dialogue",
+        "faction"
     };
 
     private readonly PrototypeLuaStaticAnalyzer _staticAnalyzer;

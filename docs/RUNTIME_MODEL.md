@@ -61,3 +61,17 @@ Encounter state lives in `GameRuntimeState.ActiveEncounter`. It stores only runt
 Events include `EncounterStarted`, `TurnStarted`, `AbilityUsed`, `DamageApplied`, `HealingApplied`, `ParticipantDefeated`, `EncounterWon`, `EncounterLost`, `EncounterEnded`, `RewardGranted`, `ProgressionChanged`, `ProgressionStageChanged` and `AiActionChosen`.
 
 Combat v1 is intentionally small: participant order is initiative, damage/healing uses resource deltas, status ticking only decrements remaining turns, AI chooses the first available action, and rewards/loot/progression are applied only when the encounter is won. Runtime still does not execute Lua, generator modules, LLM calls, Unity codegen or external providers.
+
+## Narrative Runtime v1
+
+Gameplay runtime now supports narrative commands:
+
+- `StartQuest`, `AdvanceQuestObjective`, `SetQuestStage`, `CompleteQuest`, `FailQuest`, `RefreshQuestObjectives`;
+- `OpenDialogue`, `ChooseDialogueOption`, `CloseDialogue`;
+- `ChangeReputation`, `SetReputation`.
+
+Narrative events include `QuestStarted`, `QuestObjectiveUpdated`, `QuestStageChanged`, `QuestCompleted`, `QuestFailed`, `QuestRewardGranted`, `JournalUpdated`, `DialogueOpened`, `DialogueNodeChanged`, `DialogueChoiceSelected`, `DialogueClosed`, `DialogueEffectApplied`, `FactionReputationChanged` and `FactionRelationChanged`.
+
+`QuestRuntimeService`, `DialogueRuntimeService`, `FactionRuntimeService` and `QuestObjectiveTracker` operate on `GameRuntimeState` only. Definitions are read from `GamePackageDefinition` and are not embedded in runtime snapshots. Dialogue choices use existing requirements, costs and output application; quest and dialogue rewards can grant items, resources, progression and faction reputation.
+
+Limitations: no full dialogue UI, no quest editor, no localization system, no runtime Lua/generator Lua, no generator module execution, no LLM call and no Unity/codegen.
