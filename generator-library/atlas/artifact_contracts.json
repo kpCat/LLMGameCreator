@@ -1,0 +1,389 @@
+{
+  "schema_version": "0.1",
+  "purpose": "Seed registry of data-only artifact contracts for LLMGameCreator. Contracts define what generator modules, LLM workflows, validators, exporters and runtime build steps are allowed to produce or consume.",
+  "principles": [
+    "Contracts come before code: a new generator or runtime feature must declare which artifact contract it produces or consumes.",
+    "Artifacts are data-only unless explicitly marked as generated source output and passed through a dedicated codegen/export pipeline.",
+    "LLM output is draft until parsed, normalized, validated and promoted by deterministic C# services.",
+    "Lua modules may build IR, packs, plans and patch artifacts through restricted contracts, but must not act as unrestricted runtime authority.",
+    "Unity runtimes should consume compiled runtime data, Unity IR and asset indexes, not loose unbounded JSON dumps.",
+    "Adult/NSFW material is modeled as an optional content overlay and tagged artifact content, not as a default assumption or hidden side effect."
+  ],
+  "artifact_lifecycle": [
+    "draft",
+    "generated",
+    "parsed",
+    "normalized",
+    "validated",
+    "staged",
+    "approved",
+    "compiled",
+    "exported",
+    "runtime_loaded"
+  ],
+  "validation_levels": [
+    {
+      "id": "validation.level_0_json_shape",
+      "title": "JSON and shape validation",
+      "summary": "Valid JSON, required top-level fields and primitive data types."
+    },
+    {
+      "id": "validation.level_1_ids_enums_refs",
+      "title": "IDs, enums and references",
+      "summary": "Canonical IDs, stable enum values, duplicate detection and reference resolution."
+    },
+    {
+      "id": "validation.level_2_contract_semantics",
+      "title": "Contract semantics",
+      "summary": "Artifact-specific invariants, allowed sections, no forbidden operations and data-only boundaries."
+    },
+    {
+      "id": "validation.level_3_cross_artifact_consistency",
+      "title": "Cross-artifact consistency",
+      "summary": "Consistency across semantic packs, text packs, game package patches, Unity IR, asset indexes and runtime DB plans."
+    },
+    {
+      "id": "validation.level_4_headless_smoke_test",
+      "title": "Headless smoke test",
+      "summary": "Deterministic simulation or dry-run without Unity visuals."
+    },
+    {
+      "id": "validation.level_5_export_dry_run",
+      "title": "Export dry-run",
+      "summary": "Unity/runtime export checks, database build plan dry-run, asset binding checks and adapter compatibility."
+    },
+    {
+      "id": "validation.level_6_human_approval",
+      "title": "Human approval",
+      "summary": "Required for new capabilities, new artifact contracts, unsafe-impacting changes, story canon decisions and major runtime target changes."
+    }
+  ],
+  "contract_groups": [
+    {
+      "id": "contract_group/planning/v1",
+      "title": "Planning and capability artifacts",
+      "purpose": "Game profiles, feature bundles, generator plans and capability expansion proposals."
+    },
+    {
+      "id": "contract_group/game_content/v1",
+      "title": "Game content and semantic artifacts",
+      "purpose": "Semantic facts, traits, rules, formulas, dialogues, text packs, morphology and content overlays."
+    },
+    {
+      "id": "contract_group/runtime_export/v1",
+      "title": "Runtime export artifacts",
+      "purpose": "Unity IR, runtime database build plans, asset indexes and save overlay schemas."
+    },
+    {
+      "id": "contract_group/media_generation/v1",
+      "title": "Media generation request artifacts",
+      "purpose": "Image, audio, music, voice and future animation request packs generated from approved game data."
+    },
+    {
+      "id": "contract_group/validation/v1",
+      "title": "Validation and audit artifacts",
+      "purpose": "Reports, smoke-test plans, dry-run results and audit records."
+    }
+  ],
+  "contracts": [
+    {
+      "id": "game_profile_v1",
+      "title": "Game Profile",
+      "group": "contract_group/planning/v1",
+      "purpose": "Declares the intended game type, runtime targets, required feature bundles, optional overlays and validation focus.",
+      "typical_producers": ["user_discussion", "designer_llm", "editor_profile_builder"],
+      "typical_consumers": ["capability_selector", "generator_plan_builder", "validation_pipeline"],
+      "required_sections": ["id", "title", "runtime_targets", "required_feature_bundles", "optional_feature_bundles", "content_overlays"],
+      "allowed_sources": ["human_authored", "llm_draft", "imported_template"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_6_human_approval"],
+      "must_not": ["mutate GamePackage", "execute Lua", "generate Unity code"],
+      "promotion_policy": "Human approval required before this profile can drive generator plans."
+    },
+    {
+      "id": "feature_bundle_v1",
+      "title": "Feature Bundle",
+      "group": "contract_group/planning/v1",
+      "purpose": "Groups capabilities, dependencies, data contracts, runtime contracts, validators and runtime targets for one modular feature.",
+      "typical_producers": ["capability_atlas", "library_growth_pipeline", "human_architect"],
+      "typical_consumers": ["capability_selector", "generator_plan_builder", "unity_export_planner"],
+      "required_sections": ["id", "domain", "requires", "provides", "artifact_contracts", "validators", "runtime_targets"],
+      "allowed_sources": ["human_authored", "llm_draft_after_review"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_6_human_approval"],
+      "must_not": ["contain executable runtime logic", "silently enable adult/NSFW overlays", "bypass dependency checks"],
+      "promotion_policy": "New feature bundles require review because they affect future planning."
+    },
+    {
+      "id": "generator_plan_v1",
+      "title": "Generator Plan",
+      "group": "contract_group/planning/v1",
+      "purpose": "Ordered plan of selected generator modules, configs, inputs, expected artifacts and validation gates.",
+      "typical_producers": ["planner_llm", "editor_plan_builder", "capability_selector"],
+      "typical_consumers": ["plan_validator", "preview_compiler", "artifact_pipeline"],
+      "required_sections": ["id", "goal", "steps", "expected_artifacts", "validation_gates", "approval_status"],
+      "allowed_sources": ["llm_draft", "human_authored", "registry_generated"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_6_human_approval"],
+      "must_not": ["execute generator modules during planning", "auto-apply package changes", "reference unknown module ids"],
+      "promotion_policy": "Draft plans may be saved; approved plans may produce preview artifacts but still must not auto-apply."
+    },
+    {
+      "id": "game_package_patch_v1",
+      "title": "GamePackage Patch",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Strict allowlisted data-only operations for changing GamePackage definitions through dry-run/apply/rollback.",
+      "typical_producers": ["patch_capable_generator_plan", "prototype_lua_declaration_capture", "human_authored_patch"],
+      "typical_consumers": ["game_package_patch_service", "package_validator", "audit_log"],
+      "required_sections": ["schema_version", "operations"],
+      "allowed_sources": ["validated_plan", "sandboxed_lua_declaration", "human_authored"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency", "validation.level_6_human_approval"],
+      "must_not": ["delete arbitrary content", "apply arbitrary JSON Patch paths", "edit scripts", "write assets", "execute Lua during apply", "auto-apply after LLM generation"],
+      "promotion_policy": "Requires dry-run diff and explicit user apply."
+    },
+    {
+      "id": "semantic_pack_v1",
+      "title": "Semantic Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Reusable semantic definitions such as traits, tags, entity kinds, material profiles, relationships, world facts and constraints.",
+      "typical_producers": ["designer_llm", "batch_generator_llm", "lua_semantic_generator", "human_author"],
+      "typical_consumers": ["text_realizer", "runtime_db_builder", "dialogue_system", "validator"],
+      "required_sections": ["id", "scope", "definitions", "constraints", "source_notes"],
+      "allowed_sources": ["llm_draft", "human_authored", "generated_from_game_profile"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "must_not": ["invent canon facts without source_notes", "change stable enum ids", "contain player save state"],
+      "promotion_policy": "Can be batch-generated, but canon-level facts require approval or explicit draft status."
+    },
+    {
+      "id": "property_channel_pack_v1",
+      "title": "Property Channel Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Declares reusable property channels for entity kinds, items, NPCs, locations, spells, buildings, skills, statuses and technical systems.",
+      "typical_producers": ["capability_atlas", "semantic_schema_generator", "human_architect"],
+      "typical_consumers": ["entity_schema_builder", "runtime_db_builder", "validator", "ui_generator"],
+      "required_sections": ["id", "channels", "applies_to", "value_types", "runtime_mutability", "persistence"],
+      "allowed_sources": ["human_authored", "llm_draft_after_review"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_6_human_approval"],
+      "must_not": ["create unbounded arbitrary properties without type information", "silently override core schema"],
+      "promotion_policy": "New channels require review because they affect many generators and runtime tables."
+    },
+    {
+      "id": "rule_pack_v1",
+      "title": "Rule Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Data-only conditional rules for materials, weather, factions, reputation, abilities, reactions, generators and simulation logic.",
+      "typical_producers": ["batch_generator_llm", "lua_rule_generator", "human_author"],
+      "typical_consumers": ["headless_simulator", "runtime_db_builder", "dialogue_system", "combat_resolver"],
+      "required_sections": ["id", "domain", "rules", "conditions", "effects", "diagnostics"],
+      "allowed_sources": ["llm_draft", "human_authored", "lua_generated"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency", "validation.level_4_headless_smoke_test"],
+      "must_not": ["contain raw executable code", "directly mutate save state outside runtime actions", "use unknown effect types"],
+      "promotion_policy": "Mechanical rule packs require simulation/dry-run before gameplay use."
+    },
+    {
+      "id": "formula_pack_v1",
+      "title": "Formula Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Safe formula IR for stats, combat, progression, economy, production and balance systems.",
+      "typical_producers": ["designer_llm", "balance_tool", "human_author"],
+      "typical_consumers": ["formula_evaluator", "headless_simulator", "runtime_db_builder"],
+      "required_sections": ["id", "formulas", "variables", "bounds", "test_vectors"],
+      "allowed_sources": ["human_authored", "llm_draft", "generated_from_balance_simulation"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_4_headless_smoke_test"],
+      "must_not": ["contain Lua/C#/JavaScript expressions as executable source", "reference unknown variables", "create unbounded runaway results"],
+      "promotion_policy": "Requires formula bounds and test vectors before runtime export."
+    },
+    {
+      "id": "text_pack_v1",
+      "title": "Text Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Player-facing or editor-facing text templates, variants, phrase plans, surface strings and style rules.",
+      "typical_producers": ["batch_generator_llm", "text_template_generator", "human_writer"],
+      "typical_consumers": ["text_realizer", "dialogue_system", "runtime_db_builder", "localization_exporter"],
+      "required_sections": ["id", "language", "text_intents", "templates", "style_tags", "content_tags"],
+      "allowed_sources": ["llm_draft", "human_authored", "lua_generated"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "must_not": ["silently add canon facts", "hide adult/NSFW content without content_tags", "use unknown text intents"],
+      "promotion_policy": "Batch text can be auto-staged; sensitive/canon texts may require sampled review or approval."
+    },
+    {
+      "id": "morphology_pack_v1",
+      "title": "Morphology Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Language-specific lexemes, grammatical metadata, forms, agreement hints and phrase realization requirements.",
+      "typical_producers": ["offline_morphology_compiler", "human_editor", "llm_draft_for_missing_entries"],
+      "typical_consumers": ["text_realizer", "dialogue_system", "runtime_db_builder"],
+      "required_sections": ["id", "language", "lexemes", "forms", "agreement_rules", "fallback_policy"],
+      "allowed_sources": ["compiled", "human_authored", "llm_draft_repaired"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "must_not": ["treat LLM as the sole runtime morphology authority", "modify semantic facts", "contain executable code"],
+      "promotion_policy": "Prefer compiled forms; LLM-created entries require normalization and sampled review."
+    },
+    {
+      "id": "dialogue_pack_v1",
+      "title": "Dialogue Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Dialogue nodes, choices, facts, conditions, effects, speaker styles and route metadata.",
+      "typical_producers": ["designer_llm", "dialogue_generator", "human_writer"],
+      "typical_consumers": ["dialogue_runtime", "quest_system", "runtime_db_builder", "unity_dialogue_ui"],
+      "required_sections": ["id", "speakers", "nodes", "choices", "conditions", "effects", "content_tags"],
+      "allowed_sources": ["llm_draft", "human_authored", "imported_script"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency", "validation.level_4_headless_smoke_test"],
+      "must_not": ["change world state through free text", "hide adult/NSFW content without tags", "reference missing speakers or quest states"],
+      "promotion_policy": "Important story/canon dialogue requires review; generic barks may be batch-staged."
+    },
+    {
+      "id": "free_text_dialogue_intent_pack_v1",
+      "title": "Free Text Dialogue Intent Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "NLU/intent extraction contract for optional live typed dialogue with NPCs. It converts player text into proposed intents and claims, not direct world mutations.",
+      "typical_producers": ["designer_llm", "dialogue_system_designer", "human_architect"],
+      "typical_consumers": ["nlu_pipeline", "dialogue_validator", "npc_memory_system"],
+      "required_sections": ["id", "intents", "claim_types", "verification_policy", "allowed_response_modes"],
+      "allowed_sources": ["human_authored", "llm_draft_after_review"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_6_human_approval"],
+      "must_not": ["accept player claims as facts without validation", "mutate NPC memory before runtime verification", "bypass content overlay filters"],
+      "promotion_policy": "Requires human approval because it changes live dialogue behavior."
+    },
+    {
+      "id": "content_overlay_pack_v1",
+      "title": "Content Overlay Pack",
+      "group": "contract_group/game_content/v1",
+      "purpose": "Optional tagged content layers such as adult/NSFW, horror/gore, mature politics, relationship intensity or platform-specific filtering.",
+      "typical_producers": ["human_author", "designer_llm", "profile_builder"],
+      "typical_consumers": ["text_generator", "media_request_generator", "export_filter", "runtime_db_builder"],
+      "required_sections": ["id", "overlay_tags", "enabled_by_default", "applies_to", "filter_rules", "export_constraints"],
+      "allowed_sources": ["human_authored", "llm_draft_after_review", "profile_template"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency", "validation.level_6_human_approval"],
+      "must_not": ["enable itself implicitly", "merge with core mechanics irreversibly", "appear in untagged text/media artifacts", "ignore export target constraints"],
+      "promotion_policy": "Project-level explicit enable/disable decision required."
+    },
+    {
+      "id": "unity_ir_v1",
+      "title": "Unity IR",
+      "group": "contract_group/runtime_export/v1",
+      "purpose": "Unity-facing intermediate representation for scenes, prefab bindings, component bindings, UI screens, input actions, cameras, audio and VFX hooks.",
+      "typical_producers": ["unity_ir_generator", "export_planner", "human_author"],
+      "typical_consumers": ["unity_exporter", "runtime_db_builder", "unity_runtime_shell"],
+      "required_sections": ["id", "runtime_target", "bindings", "ui", "inputs", "assets", "diagnostics"],
+      "allowed_sources": ["validated_generator", "human_authored", "compiled_from_game_package"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency", "validation.level_5_export_dry_run"],
+      "must_not": ["contain arbitrary C# source by default", "assume specific Asset Store packages without declared adapter", "reference missing asset ids"],
+      "promotion_policy": "Export dry-run required before Unity project application."
+    },
+    {
+      "id": "runtime_db_build_plan_v1",
+      "title": "Runtime DB Build Plan",
+      "group": "contract_group/runtime_export/v1",
+      "purpose": "Plan for compiling validated package data, semantic packs, text packs, Unity IR and asset indexes into runtime lookup databases.",
+      "typical_producers": ["runtime_db_planner", "export_pipeline", "human_architect"],
+      "typical_consumers": ["runtime_db_builder", "unity_runtime_shell", "headless_runtime"],
+      "required_sections": ["id", "schema_version", "source_artifacts", "tables", "indexes", "migration_policy", "read_only_data", "save_overlay_policy"],
+      "allowed_sources": ["validated_generator", "human_authored"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency", "validation.level_5_export_dry_run"],
+      "must_not": ["mix immutable runtime content and mutable save state without explicit overlay policy", "write runtime DB during plan validation", "ignore index requirements for large data"],
+      "promotion_policy": "May produce compiled DB only after source artifacts validate."
+    },
+    {
+      "id": "asset_request_pack_v1",
+      "title": "Asset Request Pack",
+      "group": "contract_group/media_generation/v1",
+      "purpose": "Requests for sprites, portraits, tilesets, icons, prefabs or model placeholders generated from approved semantic/game data.",
+      "typical_producers": ["asset_prompt_generator", "designer_llm", "human_artist"],
+      "typical_consumers": ["image_generation_pipeline", "asset_importer", "unity_ir_generator"],
+      "required_sections": ["id", "asset_requests", "style_constraints", "source_refs", "content_tags", "export_targets"],
+      "allowed_sources": ["llm_draft", "human_authored", "compiled_from_semantic_pack"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "must_not": ["request untagged adult/NSFW media", "invent core gameplay data", "reference missing entities/items"],
+      "promotion_policy": "Requests may be staged; actual generated media requires separate import/approval."
+    },
+    {
+      "id": "image_request_pack_v1",
+      "title": "Image Request Pack",
+      "group": "contract_group/media_generation/v1",
+      "purpose": "Detailed prompt/request data for image generation, including sprites, portraits, UI art, tiles, equipment overlays and scene illustrations.",
+      "typical_producers": ["asset_prompt_generator", "human_artist", "designer_llm"],
+      "typical_consumers": ["image_generation_pipeline", "asset_importer"],
+      "required_sections": ["id", "requests", "prompt_parts", "negative_prompt_parts", "style", "dimensions", "content_tags"],
+      "allowed_sources": ["llm_draft", "human_authored", "compiled_from_asset_request_pack"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "must_not": ["hide adult/NSFW intent without content_tags", "overwrite existing asset ids without approval", "be treated as imported asset until output is validated"],
+      "promotion_policy": "Generation request only; generated files need asset import and binding validation."
+    },
+    {
+      "id": "audio_request_pack_v1",
+      "title": "Audio Request Pack",
+      "group": "contract_group/media_generation/v1",
+      "purpose": "Requests for music, ambience, UI sounds, spell sounds, combat sounds, voice placeholders and future voice lines.",
+      "typical_producers": ["audio_prompt_generator", "designer_llm", "human_audio_designer"],
+      "typical_consumers": ["audio_generation_pipeline", "asset_importer", "unity_ir_generator"],
+      "required_sections": ["id", "requests", "audio_kind", "style", "duration", "looping", "source_refs", "content_tags"],
+      "allowed_sources": ["llm_draft", "human_authored", "compiled_from_semantic_pack"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "must_not": ["reference missing runtime events", "invent gameplay effects", "replace existing audio bindings without approval"],
+      "promotion_policy": "Generation request only; generated audio needs asset import and binding validation."
+    },
+    {
+      "id": "animation_request_pack_v1",
+      "title": "Animation Request Pack",
+      "group": "contract_group/media_generation/v1",
+      "purpose": "Future-facing request contract for animation generation or animation state planning, including sprite sheets, character states, VFX loops and scene animation metadata.",
+      "typical_producers": ["animation_prompt_generator", "human_animator", "designer_llm"],
+      "typical_consumers": ["animation_generation_pipeline", "asset_importer", "unity_ir_generator"],
+      "required_sections": ["id", "requests", "animation_kind", "states", "duration", "looping", "source_refs", "content_tags"],
+      "allowed_sources": ["llm_draft", "human_authored", "compiled_from_asset_request_pack"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency"],
+      "must_not": ["be required by core runtime before animation support exists", "hide adult/NSFW intent without content_tags", "replace existing animation controllers without export dry-run"],
+      "promotion_policy": "Optional/future artifact; may be planned before implementation exists."
+    },
+    {
+      "id": "asset_index_v1",
+      "title": "Asset Index",
+      "group": "contract_group/runtime_export/v1",
+      "purpose": "Stable mapping from game/entity/UI/audio IDs to imported asset paths, generated files, Unity addressables or external package references.",
+      "typical_producers": ["asset_importer", "unity_exporter", "human_curator"],
+      "typical_consumers": ["unity_runtime_shell", "runtime_db_builder", "unity_ir_validator"],
+      "required_sections": ["id", "assets", "bindings", "missing_policy", "source_hashes"],
+      "allowed_sources": ["imported_assets", "human_authored", "generated_media_after_import"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_3_cross_artifact_consistency", "validation.level_5_export_dry_run"],
+      "must_not": ["reference files not imported or declared", "silently remap asset ids", "store large binary payloads inline"],
+      "promotion_policy": "Export dry-run required for Unity runtime use."
+    },
+    {
+      "id": "save_overlay_schema_v1",
+      "title": "Save Overlay Schema",
+      "group": "contract_group/runtime_export/v1",
+      "purpose": "Schema for mutable save/world state separate from immutable runtime content database.",
+      "typical_producers": ["runtime_architect", "save_system_designer", "human_author"],
+      "typical_consumers": ["runtime_db_builder", "unity_runtime_shell", "migration_system"],
+      "required_sections": ["id", "state_tables", "migration_policy", "runtime_variables", "event_log", "compatibility"],
+      "allowed_sources": ["human_authored", "validated_generator"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_5_export_dry_run", "validation.level_6_human_approval"],
+      "must_not": ["mix generated immutable data and mutable player state without explicit separation", "allow arbitrary variable names without registration", "break migration compatibility silently"],
+      "promotion_policy": "Human approval required because save compatibility is high impact."
+    },
+    {
+      "id": "validation_report_v1",
+      "title": "Validation Report",
+      "group": "contract_group/validation/v1",
+      "purpose": "Structured diagnostics from validation, import, dry-run, simulation, export and artifact promotion stages.",
+      "typical_producers": ["validator", "importer", "headless_simulator", "unity_export_dry_run"],
+      "typical_consumers": ["editor_ui", "audit_log", "approval_workflow", "repair_prompt_builder"],
+      "required_sections": ["id", "source_artifact_id", "status", "diagnostics", "summary", "created_utc"],
+      "allowed_sources": ["deterministic_tooling"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs"],
+      "must_not": ["mutate source artifacts", "hide errors as warnings", "be generated solely by LLM without deterministic checks"],
+      "promotion_policy": "Reports are audit records and should be immutable after creation."
+    },
+    {
+      "id": "headless_smoke_test_plan_v1",
+      "title": "Headless Smoke Test Plan",
+      "group": "contract_group/validation/v1",
+      "purpose": "Small deterministic simulation/test scenarios for validating gameplay systems, formulas, quests, economy and runtime DB lookups without Unity visuals.",
+      "typical_producers": ["test_plan_generator", "human_tester", "capability_bundle"],
+      "typical_consumers": ["headless_simulator", "validator", "balance_tool"],
+      "required_sections": ["id", "scenarios", "fixtures", "assertions", "limits"],
+      "allowed_sources": ["human_authored", "llm_draft_after_review", "generated_from_feature_bundle"],
+      "validation_levels": ["validation.level_0_json_shape", "validation.level_1_ids_enums_refs", "validation.level_2_contract_semantics", "validation.level_4_headless_smoke_test"],
+      "must_not": ["require Unity to run", "depend on nondeterministic randomness", "mutate approved content during test"],
+      "promotion_policy": "Should accompany mechanical feature bundles and runtime DB plans."
+    }
+  ]
+}
