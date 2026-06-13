@@ -4,7 +4,7 @@ namespace LLMGameCreator.Application.Design.Atlas;
 
 public sealed class AtlasRegistryImportService
 {
-    private static readonly string[] KnownAtlasFiles =
+    private static readonly string[] KnownAtlasJsonFiles =
     [
         "capability_atlas.json",
         "reference_profiles.json",
@@ -17,6 +17,13 @@ public sealed class AtlasRegistryImportService
         "game_profile_negotiation_map.json",
         "feature_bundle_map.json",
         "generator_plan_map.json"
+    ];
+
+    public static IReadOnlyList<string> KnownAtlasFileNames { get; } =
+    [
+        "ATLAS_INDEX.md",
+        .. KnownAtlasJsonFiles,
+        "examples/test.example.json"
     ];
 
     private static readonly string[] ReferencePrefixes =
@@ -94,7 +101,25 @@ public sealed class AtlasRegistryImportService
             return BuildResult(string.Empty, documents, examples, diagnostics, idOwners);
         }
 
-        foreach (var knownFile in KnownAtlasFiles)
+        var indexPath = Path.Combine(atlasRoot, "ATLAS_INDEX.md");
+        if (!File.Exists(indexPath))
+        {
+            diagnostics.Add(CreateDiagnostic(
+                AtlasDiagnosticSeverity.Warning,
+                AtlasDiagnosticCodes.MissingKnownFile,
+                "Known atlas file 'ATLAS_INDEX.md' was not found.",
+                "ATLAS_INDEX.md"));
+        }
+        else
+        {
+            diagnostics.Add(CreateDiagnostic(
+                AtlasDiagnosticSeverity.Info,
+                AtlasDiagnosticCodes.SkippedMarkdown,
+                "Atlas markdown index was found but not parsed.",
+                "ATLAS_INDEX.md"));
+        }
+
+        foreach (var knownFile in KnownAtlasJsonFiles)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

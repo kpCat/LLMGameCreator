@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using LLMGameCreator.Application.Design;
@@ -56,7 +54,7 @@ public sealed class AtlasRegistryPreviewArtifactService
 
         var resultArtifact = BuildResultArtifact(request, previewResult);
         var markdownArtifact = BuildMarkdownArtifact(request, previewResult);
-        var validationResults = BuildValidationResults(resultArtifact.Id, previewResult.ImportResult.Diagnostics);
+        var validationResults = AtlasRegistryValidationPolicy.ToValidationResults(resultArtifact.Id, previewResult.ImportResult.Diagnostics);
 
         await _artifactRepository.SaveGeneratedArtifactAsync(resultArtifact, cancellationToken).ConfigureAwait(false);
         await _artifactRepository.SaveValidationResultsAsync(resultArtifact.Id, validationResults, cancellationToken).ConfigureAwait(false);
@@ -97,7 +95,7 @@ public sealed class AtlasRegistryPreviewArtifactService
             AtlasRegistryPreviewArtifactIds.ResultArtifactPath,
             json,
             request.GeneratedBy.Trim(),
-            ToValidationState(previewResult.ImportResult.Summary),
+            AtlasRegistryValidationPolicy.ToValidationState(previewResult.ImportResult.Summary),
             BuildMetadataJson(previewResult));
     }
 
@@ -126,50 +124,8 @@ public sealed class AtlasRegistryPreviewArtifactService
             AtlasRegistryPreviewArtifactIds.MarkdownArtifactPath,
             json,
             request.GeneratedBy.Trim(),
-            ToValidationState(previewResult.ImportResult.Summary),
+            AtlasRegistryValidationPolicy.ToValidationState(previewResult.ImportResult.Summary),
             BuildMetadataJson(previewResult));
-    }
-
-    private static IReadOnlyList<GeneratedArtifactValidationResultRecord> BuildValidationResults(
-        string artifactId,
-        IReadOnlyList<AtlasDiagnostic> diagnostics)
-    {
-        return diagnostics
-            .Where(diagnostic => diagnostic.Severity is AtlasDiagnosticSeverity.Error or AtlasDiagnosticSeverity.Warning)
-            .OrderBy(diagnostic => SeverityOrder(diagnostic.Severity))
-            .ThenBy(diagnostic => diagnostic.Code, StringComparer.OrdinalIgnoreCase)
-            .ThenBy(diagnostic => diagnostic.Path, StringComparer.OrdinalIgnoreCase)
-            .ThenBy(diagnostic => diagnostic.Id, StringComparer.OrdinalIgnoreCase)
-            .Select((diagnostic, index) => new GeneratedArtifactValidationResultRecord(
-                StableId(artifactId, index.ToString(), diagnostic.Severity, diagnostic.Code, diagnostic.Path ?? string.Empty, diagnostic.Id ?? string.Empty, diagnostic.Message),
-                artifactId,
-                diagnostic.Severity,
-                diagnostic.Code,
-                diagnostic.Message,
-                diagnostic.Path ?? diagnostic.Id ?? artifactId,
-                BuildDiagnosticMetadataJson(diagnostic)))
-            .ToList();
-    }
-
-    private static string ToValidationState(AtlasRegistrySummary summary)
-    {
-        if (summary.ErrorCount > 0)
-        {
-            return "invalid";
-        }
-
-        return summary.WarningCount > 0 ? "warnings" : "valid";
-    }
-
-    private static int SeverityOrder(string severity)
-    {
-        return severity switch
-        {
-            AtlasDiagnosticSeverity.Error => 0,
-            AtlasDiagnosticSeverity.Warning => 1,
-            AtlasDiagnosticSeverity.Info => 2,
-            _ => 3
-        };
     }
 
     private static string BuildMetadataJson(AtlasRegistryPreviewResult previewResult)
@@ -186,22 +142,6 @@ public sealed class AtlasRegistryPreviewArtifactService
             warningCount = previewResult.ImportResult.Summary.WarningCount,
             writtenFiles = previewResult.WrittenFiles
         }, JsonOptions);
-    }
-
-    private static string BuildDiagnosticMetadataJson(AtlasDiagnostic diagnostic)
-    {
-        return JsonSerializer.Serialize(new
-        {
-            path = diagnostic.Path,
-            id = diagnostic.Id
-        }, JsonOptions);
-    }
-
-    private static string StableId(params string[] parts)
-    {
-        var text = string.Join("|", parts);
-        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(text));
-        return Convert.ToHexString(bytes).ToLowerInvariant();
     }
 
     private sealed record AtlasRegistryPreviewArtifactSnapshot

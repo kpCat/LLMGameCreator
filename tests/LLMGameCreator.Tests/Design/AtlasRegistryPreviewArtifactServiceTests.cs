@@ -9,8 +9,8 @@ public sealed class AtlasRegistryPreviewArtifactServiceTests
     [Fact]
     public async Task CaptureAsyncSavesPreviewAndMarkdownArtifacts()
     {
-        using var temp = new TempDirectory();
-        CreateMinimalAtlasRoot(temp.Path);
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRoot(temp.Path);
         var database = await CreateInitializedDatabaseAsync(temp.Path);
         var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
 
@@ -38,6 +38,8 @@ public sealed class AtlasRegistryPreviewArtifactServiceTests
         Assert.Equal(AtlasRegistryPreviewArtifactIds.ResultArtifactKind, storedPreview.Kind);
         Assert.Contains("capability_atlas/v1", storedPreview.Json);
         Assert.Contains("\"errorCount\": 0", storedPreview.MetadataJson);
+        Assert.Contains("\"warningCount\": 0", storedPreview.MetadataJson);
+        Assert.Contains("\"writtenFiles\": []", storedPreview.MetadataJson);
 
         var storedMarkdown = await database.GetGeneratedArtifactByIdAsync(AtlasRegistryPreviewArtifactIds.MarkdownArtifactId, CancellationToken.None);
         Assert.NotNull(storedMarkdown);
@@ -48,20 +50,8 @@ public sealed class AtlasRegistryPreviewArtifactServiceTests
     [Fact]
     public async Task CaptureAsyncMapsAtlasDiagnosticsToValidationResults()
     {
-        using var temp = new TempDirectory();
-        var atlasRoot = CreateMinimalAtlasRoot(temp.Path);
-        await File.WriteAllTextAsync(Path.Combine(atlasRoot, "capability_atlas.json"), """
-        {
-          "schema_version": "0.1",
-          "id": "capability_atlas/v1",
-          "title": "Capability Atlas",
-          "purpose": "References a missing bundle.",
-          "required_feature_bundles": [
-            "feature_bundle/missing/v1"
-          ]
-        }
-        """, CancellationToken.None);
-
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRootWithUnknownReference(temp.Path);
         var database = await CreateInitializedDatabaseAsync(temp.Path);
         var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
 
@@ -89,10 +79,8 @@ public sealed class AtlasRegistryPreviewArtifactServiceTests
     [Fact]
     public async Task CaptureAsyncSavesInvalidStateWhenAtlasHasErrors()
     {
-        using var temp = new TempDirectory();
-        var atlasRoot = CreateMinimalAtlasRoot(temp.Path);
-        await File.WriteAllTextAsync(Path.Combine(atlasRoot, "capability_atlas.json"), "{ invalid json", CancellationToken.None);
-
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateAtlasRootWithInvalidJson(temp.Path);
         var database = await CreateInitializedDatabaseAsync(temp.Path);
         var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
 
@@ -120,8 +108,8 @@ public sealed class AtlasRegistryPreviewArtifactServiceTests
     [Fact]
     public async Task CaptureAsyncSkipsMarkdownArtifactWhenMarkdownRenderingIsDisabled()
     {
-        using var temp = new TempDirectory();
-        CreateMinimalAtlasRoot(temp.Path);
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRoot(temp.Path);
         var database = await CreateInitializedDatabaseAsync(temp.Path);
         var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
 
@@ -144,104 +132,131 @@ public sealed class AtlasRegistryPreviewArtifactServiceTests
         Assert.DoesNotContain(artifacts, artifact => artifact.Id == AtlasRegistryPreviewArtifactIds.MarkdownArtifactId);
     }
 
-    private static async Task<SqliteDesignDatabase> CreateInitializedDatabaseAsync(string root)
+    [Fact]
+    public async Task CaptureAsyncIsIdempotentForSameArtifactIds()
+    {
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRootWithUnknownReference(temp.Path);
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+        var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
+
+        var request = new AtlasRegistryPreviewArtifactRequest
+        {
+            PreviewRequest = new AtlasRegistryPreviewRequest
+            {
+                RepositoryRootOrAtlasRoot = temp.Path
+            }
+        };
+
+        await service.CaptureAsync(request, CancellationToken.None);
+        await service.CaptureAsync(request, CancellationToken.None);
+
+        var artifacts = await database.ListGeneratedArtifactsAsync(CancellationToken.None);
+        Assert.Equal(2, artifacts.Count);
+        var validationResults = await database.ListValidationResultsByArtifactAsync(AtlasRegistryPreviewArtifactIds.ResultArtifactId, CancellationToken.None);
+        Assert.Single(validationResults);
+    }
+
+    [Fact]
+    public async Task CaptureAsyncCanUseCustomArtifactIds()
+    {
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRoot(temp.Path);
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+        var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
+
+        var result = await service.CaptureAsync(
+            new AtlasRegistryPreviewArtifactRequest
+            {
+                PreviewRequest = new AtlasRegistryPreviewRequest
+                {
+                    RepositoryRootOrAtlasRoot = temp.Path
+                },
+                ResultArtifactId = "artifact/atlas/custom-result",
+                MarkdownArtifactId = "artifact/atlas/custom-markdown",
+                GeneratedBy = "test"
+            },
+            CancellationToken.None);
+
+        Assert.Equal("artifact/atlas/custom-result", result.ResultArtifact.Id);
+        Assert.Equal("artifact/atlas/custom-markdown", result.MarkdownArtifact?.Id);
+        Assert.NotNull(await database.GetGeneratedArtifactByIdAsync("artifact/atlas/custom-result", CancellationToken.None));
+        Assert.NotNull(await database.GetGeneratedArtifactByIdAsync("artifact/atlas/custom-markdown", CancellationToken.None));
+    }
+
+    [Fact]
+    public async Task CaptureAsyncDoesNotWriteReportFilesUnlessRequested()
+    {
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRoot(temp.Path);
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+        var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
+
+        var result = await service.CaptureAsync(
+            new AtlasRegistryPreviewArtifactRequest
+            {
+                PreviewRequest = new AtlasRegistryPreviewRequest
+                {
+                    RepositoryRootOrAtlasRoot = temp.Path
+                }
+            },
+            CancellationToken.None);
+
+        Assert.Empty(result.PreviewResult.WrittenFiles);
+        Assert.False(File.Exists(Path.Combine(temp.Path, ".llmgc", "atlas", "atlas_registry_import_report.md")));
+    }
+
+    [Fact]
+    public async Task CaptureAsyncWritesReportFilesWhenRequested()
+    {
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRoot(temp.Path);
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+        var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
+
+        var result = await service.CaptureAsync(
+            new AtlasRegistryPreviewArtifactRequest
+            {
+                PreviewRequest = new AtlasRegistryPreviewRequest
+                {
+                    RepositoryRootOrAtlasRoot = temp.Path,
+                    WriteReportFiles = true
+                }
+            },
+            CancellationToken.None);
+
+        Assert.Equal(2, result.PreviewResult.WrittenFiles.Count);
+        Assert.True(File.Exists(Path.Combine(temp.Path, ".llmgc", "atlas", "atlas_registry_import_report.md")));
+        Assert.Contains("atlas_registry_import_report.md", result.ResultArtifact.MetadataJson);
+    }
+
+    [Fact]
+    public async Task CaptureAsyncDoesNotMapInfoDiagnosticsToValidationResults()
+    {
+        using var temp = new AtlasTempDirectory();
+        AtlasTestFixture.CreateCompleteAtlasRoot(temp.Path);
+        var database = await CreateInitializedDatabaseAsync(temp.Path);
+        var service = new AtlasRegistryPreviewArtifactService(new AtlasRegistryPreviewService(), database);
+
+        var result = await service.CaptureAsync(
+            new AtlasRegistryPreviewArtifactRequest
+            {
+                PreviewRequest = new AtlasRegistryPreviewRequest
+                {
+                    RepositoryRootOrAtlasRoot = temp.Path
+                }
+            },
+            CancellationToken.None);
+
+        Assert.Contains(result.PreviewResult.ImportResult.Diagnostics, diagnostic => diagnostic.Severity == AtlasDiagnosticSeverity.Info);
+        Assert.Empty(result.ValidationResults);
+        Assert.Empty(await database.ListValidationResultsByArtifactAsync(AtlasRegistryPreviewArtifactIds.ResultArtifactId, CancellationToken.None));
+    }
+
+    internal static async Task<SqliteDesignDatabase> CreateInitializedDatabaseAsync(string root)
     {
         var database = new SqliteDesignDatabase();
         await database.InitializeAsync(Path.Combine(root, ".llmgc", "design.db"), CancellationToken.None);
         return database;
-    }
-
-    private static string CreateMinimalAtlasRoot(string root)
-    {
-        var atlasRoot = Path.Combine(root, "generator-library", "atlas");
-        Directory.CreateDirectory(atlasRoot);
-        Directory.CreateDirectory(Path.Combine(atlasRoot, "examples"));
-        File.WriteAllText(Path.Combine(atlasRoot, "ATLAS_INDEX.md"), "# Test Atlas Index");
-
-        File.WriteAllText(Path.Combine(atlasRoot, "capability_atlas.json"), """
-        {
-          "schema_version": "0.1",
-          "id": "capability_atlas/v1",
-          "title": "Capability Atlas",
-          "purpose": "Test capability atlas."
-        }
-        """);
-
-        File.WriteAllText(Path.Combine(atlasRoot, "reference_profiles.json"), """
-        {
-          "schema_version": "0.1",
-          "id": "reference_profiles/v1",
-          "title": "Reference Profiles",
-          "purpose": "Test reference profiles.",
-          "profiles": [
-            {
-              "id": "profile/test/v1",
-              "title": "Test Profile",
-              "purpose": "Test profile."
-            }
-          ]
-        }
-        """);
-
-        File.WriteAllText(Path.Combine(atlasRoot, "feature_bundle_map.json"), """
-        {
-          "schema_version": "0.1",
-          "id": "feature_bundle_map/v1",
-          "title": "Feature Bundle Map",
-          "purpose": "Test bundles.",
-          "feature_bundles": [
-            {
-              "id": "feature_bundle/test/v1",
-              "title": "Test Bundle",
-              "purpose": "Test bundle."
-            }
-          ]
-        }
-        """);
-
-        File.WriteAllText(Path.Combine(atlasRoot, "examples", "test.example.json"), """
-        {
-          "schema_version": "0.1",
-          "example_id": "example/test/v1",
-          "title": "Test Example",
-          "purpose": "Test example.",
-          "source_profile": {
-            "id": "profile/test/v1"
-          },
-          "selected_feature_bundles": [
-            "feature_bundle/test/v1"
-          ],
-          "target_artifacts": [
-            "game_profile_v1"
-          ],
-          "steps": [
-            {
-              "id": "step/profile_summary",
-              "title": "Normalize profile"
-            }
-          ]
-        }
-        """);
-
-        return atlasRoot;
-    }
-
-    private sealed class TempDirectory : IDisposable
-    {
-        public TempDirectory()
-        {
-            Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "LLMGameCreator.Tests", Guid.NewGuid().ToString("N"));
-            Directory.CreateDirectory(Path);
-        }
-
-        public string Path { get; }
-
-        public void Dispose()
-        {
-            if (Directory.Exists(Path))
-            {
-                Directory.Delete(Path, true);
-            }
-        }
     }
 }

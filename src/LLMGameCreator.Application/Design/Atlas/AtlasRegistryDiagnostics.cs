@@ -11,6 +11,7 @@ public static class AtlasDiagnosticCodes
 {
     public const string LoadedFile = "atlas.loaded_file";
     public const string DiscoveredExample = "atlas.discovered_example";
+    public const string SkippedMarkdown = "atlas.skipped_markdown";
     public const string MissingRoot = "atlas.missing_root";
     public const string MissingKnownFile = "atlas.missing_known_file";
     public const string ExamplesRootNotFound = "atlas.examples_root_not_found";
