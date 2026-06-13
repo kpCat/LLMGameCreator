@@ -1,0 +1,1553 @@
+{
+  "schema_version": "0.1",
+  "id": "feature_bundle_map/v1",
+  "title": "Feature Bundle Map",
+  "purpose": "Data-only seed map that connects negotiated game profiles to reusable feature bundles, capabilities, artifact contracts, validators and runtime/export targets.",
+  "principles": [
+    "A feature bundle is a planning unit, not an implementation shortcut.",
+    "Feature bundles group capabilities and contracts so new game ideas do not immediately become custom C# or Unity glue.",
+    "A game profile selects feature bundles; feature bundles select capabilities, artifact contracts, validators, prompt context packs and runtime/export requirements.",
+    "Bundles may be combined across genres: party RPG, city builder, visual novel, automation, survival, tactical and optional adult/NSFW overlays can coexist when explicitly selected.",
+    "Adult/NSFW support is represented as optional content overlay bundles and tagged artifact contracts, not as hidden behavior inside unrelated mechanics.",
+    "A feature bundle may require future Lua modules, C# validators or Unity adapters, but the bundle itself remains data-only.",
+    "When a required capability is missing, the system should create a library growth proposal instead of inventing untracked files.",
+    "Every bundle must declare validation focus so generated data can be checked automatically before human review."
+  ],
+  "bundle_states": [
+    "draft",
+    "normalized",
+    "validated",
+    "approved",
+    "active",
+    "deprecated",
+    "archived"
+  ],
+  "bundle_shape": {
+    "required_fields": [
+      "id",
+      "title",
+      "domain",
+      "purpose",
+      "requires",
+      "provides",
+      "artifact_contracts",
+      "validators",
+      "runtime_targets",
+      "prompt_context_templates",
+      "validation_focus"
+    ],
+    "optional_fields": [
+      "incompatible_with",
+      "recommended_with",
+      "content_overlays",
+      "unity_ir_groups",
+      "runtime_db_groups",
+      "future_module_gaps",
+      "notes"
+    ]
+  },
+  "selection_flow": [
+    {
+      "id": "feature_selection.step_0_read_profile",
+      "title": "Read approved or candidate game profile",
+      "inputs": [
+        "game_profile_v1",
+        "reference_profiles",
+        "game_profile_negotiation_map"
+      ],
+      "outputs": [
+        "profile_feature_requirements"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "feature_selection.step_1_match_required_bundles",
+      "title": "Match required feature bundles",
+      "inputs": [
+        "profile_feature_requirements",
+        "feature_bundle_map"
+      ],
+      "outputs": [
+        "required_feature_bundle_selection_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "feature_selection.step_2_match_optional_bundles",
+      "title": "Match optional feature bundles and overlays",
+      "inputs": [
+        "profile_feature_requirements",
+        "content_overlay_selection_v1",
+        "feature_bundle_map"
+      ],
+      "outputs": [
+        "optional_feature_bundle_selection_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "feature_selection.step_3_resolve_dependencies",
+      "title": "Resolve bundle dependencies and incompatibilities",
+      "inputs": [
+        "required_feature_bundle_selection_v1",
+        "optional_feature_bundle_selection_v1"
+      ],
+      "outputs": [
+        "resolved_feature_bundle_selection_v1",
+        "capability_gap_report_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "feature_selection.step_4_build_generator_plan_inputs",
+      "title": "Build generator plan inputs",
+      "inputs": [
+        "resolved_feature_bundle_selection_v1",
+        "artifact_contracts",
+        "validation_pipeline",
+        "prompt_context_pack_map"
+      ],
+      "outputs": [
+        "generator_plan_seed_v1",
+        "prompt_context_plan_v1",
+        "validation_focus_plan_v1"
+      ],
+      "automatic": true
+    },
+    {
+      "id": "feature_selection.step_5_review_impact",
+      "title": "Review high-impact selections",
+      "inputs": [
+        "generator_plan_seed_v1",
+        "content_overlay_selection_v1",
+        "runtime_target_selection_v1"
+      ],
+      "outputs": [
+        "approved_feature_bundle_selection_v1"
+      ],
+      "automatic": false
+    }
+  ],
+  "bundle_categories": [
+    {
+      "id": "bundle_category/core_planning/v1",
+      "title": "Core planning and validation",
+      "purpose": "Atlas, profile, validation, context and generator planning infrastructure."
+    },
+    {
+      "id": "bundle_category/gameplay_foundation/v1",
+      "title": "Gameplay foundation",
+      "purpose": "World, entities, items, stats, progression, quests, dialogue, combat and interaction."
+    },
+    {
+      "id": "bundle_category/runtime_export/v1",
+      "title": "Runtime and export",
+      "purpose": "Runtime DB, Unity IR, asset index, save overlay and shell binding."
+    },
+    {
+      "id": "bundle_category/genre_systems/v1",
+      "title": "Genre systems",
+      "purpose": "Party RPG, city builder, automation, survival, tactical, visual novel and narrative political systems."
+    },
+    {
+      "id": "bundle_category/content_overlays/v1",
+      "title": "Content overlays",
+      "purpose": "Optional adult/NSFW, horror/gore and other rating/media layers."
+    },
+    {
+      "id": "bundle_category/media_generation/v1",
+      "title": "Media generation",
+      "purpose": "Image, audio, music, voice, sprite, tile, portrait and future animation request packs."
+    }
+  ],
+  "feature_bundles": [
+    {
+      "id": "feature_bundle/core_atlas_planning/v1",
+      "title": "Core Atlas Planning",
+      "domain": "core",
+      "category": "bundle_category/core_planning/v1",
+      "purpose": "Provides the common planning spine: capability atlas, reference profiles, artifact contracts, validation levels and prompt context rules.",
+      "requires": [
+        "capability_atlas/v1",
+        "artifact_contracts/v1",
+        "validation_pipeline/v1",
+        "prompt_context_pack_map/v1"
+      ],
+      "provides": [
+        "feature_bundle_selection_v1",
+        "generator_plan_seed_v1",
+        "validation_focus_plan_v1"
+      ],
+      "artifact_contracts": [
+        "game_profile_v1",
+        "feature_bundle_v1",
+        "generator_plan_v1"
+      ],
+      "validators": [
+        "bundle.required_fields",
+        "bundle.duplicate_id",
+        "bundle.dependency_resolution",
+        "bundle.runtime_target_known"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact"
+      ],
+      "validation_focus": [
+        "Do all selected bundles have known ids?",
+        "Are required artifact contracts registered?",
+        "Are required runtime targets known?"
+      ],
+      "recommended_with": [
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "notes": "This bundle should be active for almost every project."
+    },
+    {
+      "id": "feature_bundle/game_profile_negotiation/v1",
+      "title": "Game Profile Negotiation",
+      "domain": "profile",
+      "category": "bundle_category/core_planning/v1",
+      "purpose": "Turns user discussion into compact profile variants that can drive capability selection and generator planning.",
+      "requires": [
+        "game_profile_negotiation_map/v1",
+        "reference_profiles",
+        "content_overlay_selection_v1"
+      ],
+      "provides": [
+        "game_profile_v1",
+        "runtime_target_selection_v1",
+        "content_overlay_selection_v1"
+      ],
+      "artifact_contracts": [
+        "game_profile_v1",
+        "content_overlay_pack_v1"
+      ],
+      "validators": [
+        "profile.runtime_targets_required",
+        "profile.world_scale_declared",
+        "profile.content_overlays_explicit",
+        "profile.no_hidden_rating_assumptions"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "design_discussion"
+      ],
+      "validation_focus": [
+        "Does the profile declare required runtime targets?",
+        "Are optional overlays explicit instead of implied?",
+        "Are undecided choices represented as variants or unknowns?"
+      ]
+    },
+    {
+      "id": "feature_bundle/semantic_property_channels/v1",
+      "title": "Semantic Property Channels",
+      "domain": "semantic",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Defines semantic channels for physical, material, equipment, combat, magic, social, memory, dialogue, economy, crafting, technical, location, faction, narrative, morphology and text surface data.",
+      "requires": [
+        "semantic.property_channels/v1",
+        "artifact_contracts/v1"
+      ],
+      "provides": [
+        "semantic_pack_v1",
+        "semantic_trait_index_v1",
+        "property_channel_rules_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1"
+      ],
+      "validators": [
+        "semantic.channel_known",
+        "semantic.no_unapproved_new_facts",
+        "semantic.trait_reference_valid",
+        "semantic.content_tags_consistent"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "city_builder",
+        "visual_novel",
+        "automation"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "batch_generation_round_robin",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Do semantic facts use known channels?",
+        "Are generated facts traceable to profile/source knowledge?",
+        "Can text/runtime layers consume semantic traits without LLM at runtime?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/semantic/v1",
+        "runtime_db_group/rules/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/text_templates_and_morphology/v1",
+      "title": "Text Templates and Morphology",
+      "domain": "text_surface",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports reusable text templates, Russian morphology lexicon output, phrase variants and deterministic runtime text assembly.",
+      "requires": [
+        "semantic_pack_v1",
+        "text_pack_v1",
+        "morphology_pack_v1"
+      ],
+      "provides": [
+        "text_pack_v1",
+        "morphology_pack_v1",
+        "text_surface_rules_v1"
+      ],
+      "artifact_contracts": [
+        "text_pack_v1",
+        "morphology_pack_v1"
+      ],
+      "validators": [
+        "text.template_placeholders_valid",
+        "text.no_raw_unescaped_quotes_for_json",
+        "morphology.forms_complete_for_required_locale",
+        "text.semantic_descriptor_allowed"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "visual_novel"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "targeted_repair",
+        "quality_sample_review"
+      ],
+      "validation_focus": [
+        "Can generated text be assembled without runtime LLM?",
+        "Do morphology forms match known nouns/adjectives?",
+        "Do descriptions avoid physically impossible descriptors unless explicitly stylized?"
+      ],
+      "recommended_with": [
+        "feature_bundle/semantic_property_channels/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/text/v1",
+        "runtime_db_group/morphology/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/world_region_chunk_generation/v1",
+      "title": "World Region and Chunk Generation",
+      "domain": "world",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports region, location, biome, chunk seed and map-area data for finite or expandable worlds.",
+      "requires": [
+        "world.region/v1",
+        "world.chunk/v1",
+        "semantic_pack_v1"
+      ],
+      "provides": [
+        "world_region_pack_v1",
+        "location_pack_v1",
+        "chunk_seed_record_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "game_package_patch_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "world.location_id_unique",
+        "world.region_refs_valid",
+        "world.chunk_bounds_valid",
+        "world.no_unbounded_tile_dump"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "first_person_grid",
+        "isometric",
+        "city_builder"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "batch_generation_round_robin"
+      ],
+      "validation_focus": [
+        "Are chunks compact seeds/records instead of huge raw tile dumps?",
+        "Are locations traceable to regions/biomes?",
+        "Can runtime DB index locations efficiently?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/world/v1",
+        "runtime_db_group/location/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/might_and_magic_like_party_rpg/v1",
+      "title": "Might-and-Magic-like Party RPG",
+      "domain": "party_rpg",
+      "category": "bundle_category/genre_systems/v1",
+      "purpose": "Combines pseudo-3D/first-person exploration, party roster, paper-doll equipment, skills/spells, quests, factions and hybrid combat.",
+      "requires": [
+        "feature_bundle/world_region_chunk_generation/v1",
+        "feature_bundle/party_roster_and_progression/v1",
+        "feature_bundle/inventory_paper_doll_grid/v1",
+        "feature_bundle/combat_realtime_turn_hybrid/v1",
+        "feature_bundle/dialogue_choice_graph/v1",
+        "feature_bundle/faction_reputation/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "provides": [
+        "party_rpg_profile_support_v1",
+        "pseudo3d_party_runtime_plan_v1"
+      ],
+      "artifact_contracts": [
+        "game_profile_v1",
+        "semantic_pack_v1",
+        "dialogue_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1",
+        "unity_ir_v1"
+      ],
+      "validators": [
+        "party.roster_valid",
+        "inventory.equipment_slot_compatible",
+        "combat.formula_bounds",
+        "quest.reachability",
+        "unity_ir.pseudo3d_bindings_valid"
+      ],
+      "runtime_targets": [
+        "pseudo3d",
+        "first_person_grid",
+        "unity3d",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "batch_generation_round_robin"
+      ],
+      "validation_focus": [
+        "Can the profile run as a party RPG without runtime LLM state mutation?",
+        "Are party/inventory/combat/quest/faction refs consistent?",
+        "Can Unity adapter dry-run pseudo-3D bindings?"
+      ],
+      "content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1",
+        "content_overlay/horror_gore_optional/v1"
+      ],
+      "unity_ir_groups": [
+        "unity_ir_group/runtime_shell/v1",
+        "unity_ir_group/pseudo3d_view/v1",
+        "unity_ir_group/ui_party_inventory/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/world/v1",
+        "runtime_db_group/entity/v1",
+        "runtime_db_group/items/v1",
+        "runtime_db_group/dialogue/v1",
+        "runtime_db_group/combat/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/party_roster_and_progression/v1",
+      "title": "Party Roster and Progression",
+      "domain": "party",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Defines party members, portraits, stats, classes, skills, progression and party-level state.",
+      "requires": [
+        "stats.progression/v1",
+        "entity.prototype/v1",
+        "semantic_pack_v1"
+      ],
+      "provides": [
+        "party_roster_pack_v1",
+        "progression_pack_v1",
+        "stat_rules_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1",
+        "game_package_patch_v1"
+      ],
+      "validators": [
+        "party.member_id_unique",
+        "stats.bounds_valid",
+        "progression.curves_valid",
+        "portrait_asset_refs_optional_or_valid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "first_person_grid"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Are stats and progression bounded?",
+        "Are party members valid entity refs?",
+        "Can save.db separate current state from compiled character definitions?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/entities/v1",
+        "runtime_db_group/progression/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/inventory_paper_doll_grid/v1",
+      "title": "Inventory Paper-Doll Grid",
+      "domain": "inventory",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports grid inventory, item sizes, equipment slots, paper-doll overlay, containers and equip/unequip actions.",
+      "requires": [
+        "item.size_2d/v1",
+        "equipment.slot_layout/v1",
+        "inventory.container/v1",
+        "ui.drag_drop/v1"
+      ],
+      "provides": [
+        "inventory_schema_v1",
+        "equipment_layout_v1",
+        "inventory_ui_ir_v1",
+        "equipment_overlay_ir_v1"
+      ],
+      "artifact_contracts": [
+        "game_package_patch_v1",
+        "unity_ir_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "inventory.item_shape_valid",
+        "inventory.no_overlap",
+        "equipment.slot_compatible",
+        "ui.inventory_binding_valid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Are item shapes and slots compatible?",
+        "Can UI IR represent grid/paper-doll layout?",
+        "Are runtime actions deterministic?"
+      ],
+      "unity_ir_groups": [
+        "unity_ir_group/ui_inventory/v1",
+        "unity_ir_group/ui_equipment/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/items/v1",
+        "runtime_db_group/inventory/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/combat_realtime_turn_hybrid/v1",
+      "title": "Realtime / Turn-Based Hybrid Combat",
+      "domain": "combat",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports combat profiles that can switch or mix realtime and turn-based rules through deterministic combat state and bounded formulas.",
+      "requires": [
+        "combat.mode/v1",
+        "formula.safe_dsl/v1",
+        "status_effects/v1",
+        "ability.rules/v1"
+      ],
+      "provides": [
+        "combat_rules_pack_v1",
+        "ability_pack_v1",
+        "status_effect_pack_v1"
+      ],
+      "artifact_contracts": [
+        "rule_pack_v1",
+        "formula_pack_v1",
+        "semantic_pack_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "combat.mode_supported",
+        "formula.safe_dsl_only",
+        "combat.damage_bounds",
+        "status_effect.refs_valid",
+        "ability.costs_valid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "first_person_grid",
+        "isometric"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "targeted_repair",
+        "quality_sample_review"
+      ],
+      "validation_focus": [
+        "Are formulas bounded and safe?",
+        "Can headless simulator smoke-test encounters?",
+        "Are statuses and abilities valid refs?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/combat/v1",
+        "runtime_db_group/formulas/v1",
+        "runtime_db_group/status_effects/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/dialogue_choice_graph/v1",
+      "title": "Dialogue Choice Graph",
+      "domain": "dialogue",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports deterministic dialogue nodes, choices, conditions, effects, routes and relationship/canon-safe state changes.",
+      "requires": [
+        "dialogue.graph/v1",
+        "interaction.conditions/v1",
+        "effect.safe_actions/v1",
+        "text_pack_v1"
+      ],
+      "provides": [
+        "dialogue_pack_v1",
+        "interaction_pack_v1",
+        "relationship_route_pack_v1"
+      ],
+      "artifact_contracts": [
+        "dialogue_pack_v1",
+        "text_pack_v1",
+        "rule_pack_v1",
+        "game_package_patch_v1"
+      ],
+      "validators": [
+        "dialogue.node_reachability",
+        "dialogue.choice_refs_valid",
+        "dialogue.conditions_safe",
+        "effect.allowed_actions_only"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "visual_novel",
+        "pseudo3d"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Are dialogue graphs reachable?",
+        "Do choices mutate state only through allowed effects?",
+        "Can routes be filtered by content overlays?"
+      ],
+      "content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1",
+        "content_overlay/horror_gore_optional/v1"
+      ],
+      "unity_ir_groups": [
+        "unity_ir_group/ui_dialogue/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/dialogue/v1",
+        "runtime_db_group/text/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/dialogue_free_text_nlu/v1",
+      "title": "Optional Free-Text Dialogue NLU",
+      "domain": "dialogue",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Optional live text interpretation layer that converts player free text into proposed intents, never direct world-state mutations.",
+      "requires": [
+        "dialogue.choice_graph/v1",
+        "intent.extraction/v1",
+        "validation.intent_gate/v1"
+      ],
+      "provides": [
+        "dialogue_intent_proposal_v1",
+        "validated_player_intent_v1"
+      ],
+      "artifact_contracts": [
+        "intent_proposal_v1",
+        "validation_report_v1"
+      ],
+      "validators": [
+        "intent.known_action",
+        "intent.no_unverified_claim_as_fact",
+        "intent.effect_requires_runtime_validation"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "visual_novel",
+        "pseudo3d"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Does free text become a proposed intent instead of trusted fact?",
+        "Are state changes still deterministic runtime actions?",
+        "Can the system reject impossible player claims?"
+      ],
+      "recommended_with": [
+        "feature_bundle/dialogue_choice_graph/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/faction_reputation/v1",
+      "title": "Faction and Reputation",
+      "domain": "faction",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports factions, relationships, reputation, diplomacy states, hostility, allegiance and reputation-gated content.",
+      "requires": [
+        "faction.definitions/v1",
+        "reputation.rules/v1",
+        "effect.safe_actions/v1"
+      ],
+      "provides": [
+        "faction_pack_v1",
+        "reputation_rules_pack_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "faction.id_unique",
+        "faction.relations_symmetric_when_required",
+        "reputation.bounds_valid",
+        "reputation.gates_refs_valid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "city_builder",
+        "visual_novel"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact"
+      ],
+      "validation_focus": [
+        "Are faction refs valid across quests/dialogue/combat?",
+        "Are reputation changes bounded?",
+        "Can diplomacy state live in save.db while faction definitions stay in runtime.db?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/factions/v1",
+        "runtime_db_group/rules/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/quest_multi_stage/v1",
+      "title": "Multi-Stage Quests",
+      "domain": "quest",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports quest graphs, objectives, conditions, rewards, fail states, branching and replayable validation.",
+      "requires": [
+        "quest.graph/v1",
+        "interaction.conditions/v1",
+        "effect.safe_actions/v1",
+        "reward.rules/v1"
+      ],
+      "provides": [
+        "quest_pack_v1",
+        "objective_pack_v1",
+        "reward_pack_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1",
+        "game_package_patch_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "quest.node_reachability",
+        "quest.objective_refs_valid",
+        "quest.reward_refs_valid",
+        "quest.no_unreachable_completion"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "visual_novel",
+        "isometric"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "quality_sample_review"
+      ],
+      "validation_focus": [
+        "Can the quest be completed?",
+        "Are fail/branch states explicit?",
+        "Are rewards and required refs valid?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/quests/v1",
+        "runtime_db_group/rules/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/anno1404_like_city_builder_conquest/v1",
+      "title": "Anno-1404-like City Builder with Conquest",
+      "domain": "city_builder",
+      "category": "bundle_category/genre_systems/v1",
+      "purpose": "Combines settlement economy, population needs, production chains, trade, diplomacy, military pressure and region capture.",
+      "requires": [
+        "feature_bundle/city_builder_production_conquest/v1",
+        "feature_bundle/faction_reputation/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "provides": [
+        "city_builder_profile_support_v1",
+        "production_conquest_runtime_plan_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1",
+        "unity_ir_v1"
+      ],
+      "validators": [
+        "production.graph_valid",
+        "economy.balance_smoke_test",
+        "population.needs_loop_valid",
+        "conquest.region_refs_valid"
+      ],
+      "runtime_targets": [
+        "city_builder",
+        "isometric",
+        "unity2d",
+        "unity3d",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "batch_generation_round_robin"
+      ],
+      "validation_focus": [
+        "Are production chains solvable?",
+        "Can headless simulator test resource loops?",
+        "Are conquest/diplomacy refs valid?"
+      ],
+      "content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1"
+      ],
+      "unity_ir_groups": [
+        "unity_ir_group/city_builder_view/v1",
+        "unity_ir_group/ui_city_management/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/economy/v1",
+        "runtime_db_group/world/v1",
+        "runtime_db_group/factions/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/city_builder_production_conquest/v1",
+      "title": "City Builder Production and Conquest",
+      "domain": "city_builder",
+      "category": "bundle_category/genre_systems/v1",
+      "purpose": "Supports resources, production chains, population tiers, needs, trade routes, military pressure and region capture.",
+      "requires": [
+        "resource.definitions/v1",
+        "recipe.graph/v1",
+        "population.needs/v1",
+        "region.control/v1"
+      ],
+      "provides": [
+        "resource_pack_v1",
+        "production_chain_pack_v1",
+        "population_needs_pack_v1",
+        "region_control_pack_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "resource.id_unique",
+        "recipe.graph_no_invalid_cycles",
+        "population.needs_refs_valid",
+        "region.control_state_valid"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "city_builder",
+        "isometric",
+        "unity2d",
+        "unity3d"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "batch_generation_round_robin",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Can production graph be simulated?",
+        "Are population needs reachable?",
+        "Are trade and capture rules deterministic?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/economy/v1",
+        "runtime_db_group/recipes/v1",
+        "runtime_db_group/regions/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/factorio_like_automation/v1",
+      "title": "Factorio-like Automation",
+      "domain": "automation",
+      "category": "bundle_category/genre_systems/v1",
+      "purpose": "Supports factory resources, machines, recipes, networks, throughput, logistics and automation-focused validation.",
+      "requires": [
+        "resource.definitions/v1",
+        "machine.definitions/v1",
+        "recipe.graph/v1",
+        "logistics.network/v1"
+      ],
+      "provides": [
+        "machine_pack_v1",
+        "automation_recipe_pack_v1",
+        "throughput_rules_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1",
+        "unity_ir_v1"
+      ],
+      "validators": [
+        "automation.recipe_graph_valid",
+        "automation.throughput_bounds",
+        "automation.machine_refs_valid",
+        "automation.network_no_unbounded_dump"
+      ],
+      "runtime_targets": [
+        "automation",
+        "isometric",
+        "unity2d",
+        "unity3d",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "batch_generation_round_robin"
+      ],
+      "validation_focus": [
+        "Can resource flow be simulated headlessly?",
+        "Are recipe and machine refs valid?",
+        "Can UI/export represent networks compactly?"
+      ],
+      "unity_ir_groups": [
+        "unity_ir_group/automation_view/v1",
+        "unity_ir_group/ui_production/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/recipes/v1",
+        "runtime_db_group/resources/v1",
+        "runtime_db_group/automation/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/the_last_sovereign_like_narrative_political_rpg/v1",
+      "title": "The-Last-Sovereign-like Narrative Political RPG",
+      "domain": "narrative_political_rpg",
+      "category": "bundle_category/genre_systems/v1",
+      "purpose": "Combines political choices, relationship routes, economy/investment state, branching quests, mature themes and optional adult content overlays.",
+      "requires": [
+        "feature_bundle/dialogue_choice_graph/v1",
+        "feature_bundle/faction_reputation/v1",
+        "feature_bundle/quest_multi_stage/v1",
+        "feature_bundle/narrative_relationship_routes/v1",
+        "feature_bundle/runtime_db_build_plan/v1"
+      ],
+      "provides": [
+        "narrative_political_profile_support_v1",
+        "route_state_plan_v1"
+      ],
+      "artifact_contracts": [
+        "dialogue_pack_v1",
+        "semantic_pack_v1",
+        "text_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "route.reachability",
+        "canon.state_consistency",
+        "content_overlay.tags_valid",
+        "dialogue.conditions_safe",
+        "investment.state_refs_valid"
+      ],
+      "runtime_targets": [
+        "visual_novel",
+        "unity2d",
+        "unity3d",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "quality_sample_review"
+      ],
+      "validation_focus": [
+        "Are routes and relationship states reachable?",
+        "Are mature/adult overlays explicit and filterable?",
+        "Can political/economic state remain deterministic?"
+      ],
+      "content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1",
+        "content_overlay/horror_gore_optional/v1"
+      ],
+      "unity_ir_groups": [
+        "unity_ir_group/ui_dialogue/v1",
+        "unity_ir_group/ui_route_status/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/dialogue/v1",
+        "runtime_db_group/quests/v1",
+        "runtime_db_group/factions/v1",
+        "runtime_db_group/relationships/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/narrative_relationship_routes/v1",
+      "title": "Narrative Relationship Routes",
+      "domain": "narrative",
+      "category": "bundle_category/gameplay_foundation/v1",
+      "purpose": "Supports relationship arcs, route gates, affection/trust/fear variables, scene availability and route-specific content overlays.",
+      "requires": [
+        "dialogue.choice_graph/v1",
+        "relationship.state/v1",
+        "content_overlay.rules/v1"
+      ],
+      "provides": [
+        "relationship_route_pack_v1",
+        "scene_gate_rules_v1"
+      ],
+      "artifact_contracts": [
+        "dialogue_pack_v1",
+        "semantic_pack_v1",
+        "text_pack_v1",
+        "content_overlay_pack_v1"
+      ],
+      "validators": [
+        "route.state_bounds",
+        "route.scene_gate_refs_valid",
+        "content_overlay.required_tags_present",
+        "route.no_hidden_adult_content"
+      ],
+      "runtime_targets": [
+        "visual_novel",
+        "unity2d",
+        "unity3d",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "quality_sample_review"
+      ],
+      "validation_focus": [
+        "Are relationship variables bounded?",
+        "Can scenes be filtered by overlay/rating?",
+        "Are routes reachable and not contradictory?"
+      ],
+      "content_overlays": [
+        "content_overlay/optional_adult_nsfw/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/content_overlay_optional_adult_nsfw/v1",
+      "title": "Optional Adult/NSFW Content Overlay",
+      "domain": "content_overlay",
+      "category": "bundle_category/content_overlays/v1",
+      "purpose": "Provides explicit tagged adult/NSFW overlay support for text, image requests, dialogue routes, scene metadata, audio cues and future animation requests when enabled by the project/profile.",
+      "requires": [
+        "content.rating_and_filters/v1",
+        "content_overlay_pack_v1",
+        "export.platform_filters/v1"
+      ],
+      "provides": [
+        "adult_content_overlay_rules_v1",
+        "content_filter_tags_v1",
+        "overlay_export_constraints_v1"
+      ],
+      "artifact_contracts": [
+        "content_overlay_pack_v1",
+        "text_pack_v1",
+        "asset_request_pack_v1",
+        "audio_request_pack_v1",
+        "animation_request_pack_v1"
+      ],
+      "validators": [
+        "content_overlay.explicitly_enabled",
+        "content_overlay.tags_present",
+        "content_overlay.platform_filter_known",
+        "content_overlay.no_hidden_enablement",
+        "content_overlay.core_mechanics_not_dependent_on_overlay"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "visual_novel",
+        "pseudo3d",
+        "city_builder"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "quality_sample_review"
+      ],
+      "validation_focus": [
+        "Is the overlay explicitly enabled by profile?",
+        "Are all adult/NSFW artifacts tagged and filterable?",
+        "Can the project disable/export-filter the overlay without breaking core mechanics?"
+      ],
+      "recommended_with": [
+        "feature_bundle/dialogue_choice_graph/v1",
+        "feature_bundle/media_request_generation/v1"
+      ],
+      "notes": "This bundle is optional and can apply across many genres. It is never implied by a model, reference profile or module."
+    },
+    {
+      "id": "feature_bundle/content_overlay_horror_gore/v1",
+      "title": "Optional Horror/Gore Content Overlay",
+      "domain": "content_overlay",
+      "category": "bundle_category/content_overlays/v1",
+      "purpose": "Provides explicit horror, gore, body-horror and dark-tone tags for projects that enable them.",
+      "requires": [
+        "content.rating_and_filters/v1",
+        "content_overlay_pack_v1",
+        "export.platform_filters/v1"
+      ],
+      "provides": [
+        "horror_gore_overlay_rules_v1",
+        "content_filter_tags_v1"
+      ],
+      "artifact_contracts": [
+        "content_overlay_pack_v1",
+        "text_pack_v1",
+        "asset_request_pack_v1",
+        "audio_request_pack_v1"
+      ],
+      "validators": [
+        "content_overlay.explicitly_enabled",
+        "content_overlay.tags_present",
+        "content_overlay.platform_filter_known",
+        "content_overlay.no_hidden_enablement"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "visual_novel",
+        "pseudo3d"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "quality_sample_review"
+      ],
+      "validation_focus": [
+        "Is horror/gore content explicitly enabled?",
+        "Are artifacts tagged and filterable?",
+        "Can export targets disable restricted content?"
+      ]
+    },
+    {
+      "id": "feature_bundle/media_request_generation/v1",
+      "title": "Media Request Generation",
+      "domain": "media",
+      "category": "bundle_category/media_generation/v1",
+      "purpose": "Generates structured requests for portraits, sprites, tilesets, item icons, locations, music, SFX, voice and future animation from approved game data.",
+      "requires": [
+        "asset_request_pack_v1",
+        "audio_request_pack_v1",
+        "content_overlay.rules/v1",
+        "asset_index_v1"
+      ],
+      "provides": [
+        "asset_request_pack_v1",
+        "audio_request_pack_v1",
+        "animation_request_pack_v1",
+        "asset_index_seed_v1"
+      ],
+      "artifact_contracts": [
+        "asset_request_pack_v1",
+        "audio_request_pack_v1",
+        "animation_request_pack_v1",
+        "asset_index_v1"
+      ],
+      "validators": [
+        "media.request_refs_approved_sources",
+        "media.prompt_tags_valid",
+        "media.platform_filters_valid",
+        "media.no_unapproved_overlay_leak"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "visual_novel",
+        "pseudo3d",
+        "city_builder",
+        "isometric"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "batch_generation_round_robin",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Are media requests generated from approved game data?",
+        "Are content/rating tags explicit?",
+        "Can generated/imported assets be indexed before Unity export?"
+      ],
+      "recommended_with": [
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/assets/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/runtime_db_build_plan/v1",
+      "title": "Runtime DB Build Plan",
+      "domain": "runtime_db",
+      "category": "bundle_category/runtime_export/v1",
+      "purpose": "Defines how approved artifacts compile into read-only runtime.db, save schema, asset index, build manifest and related indexes.",
+      "requires": [
+        "runtime_db_and_unity_export_map/v1",
+        "artifact_contracts/v1",
+        "validation_pipeline/v1"
+      ],
+      "provides": [
+        "runtime_db_build_plan_v1",
+        "save_schema_plan_v1",
+        "build_manifest_v1"
+      ],
+      "artifact_contracts": [
+        "runtime_db_build_plan_v1",
+        "asset_index_v1",
+        "validation_report_v1"
+      ],
+      "validators": [
+        "runtime_db.source_artifacts_approved",
+        "runtime_db.table_groups_known",
+        "runtime_db.indexes_declared",
+        "runtime_db.save_state_separated",
+        "runtime_db.traceability_present"
+      ],
+      "runtime_targets": [
+        "debug",
+        "headless",
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "first_person_grid",
+        "city_builder",
+        "visual_novel",
+        "automation",
+        "isometric"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Are immutable runtime data and mutable save data separated?",
+        "Are all compiled rows traceable to approved source artifacts?",
+        "Can the DB plan support headless smoke tests?"
+      ],
+      "runtime_db_groups": [
+        "runtime_db_group/build_plan/v1",
+        "runtime_db_group/save_schema/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/unity_ir_runtime_shell/v1",
+      "title": "Unity IR Runtime Shell",
+      "domain": "unity_ir",
+      "category": "bundle_category/runtime_export/v1",
+      "purpose": "Defines Unity-facing IR for scene, camera, input, UI, prefab, audio, VFX, interaction and runtime-shell binding descriptors.",
+      "requires": [
+        "unity_ir_v1",
+        "asset_index_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "provides": [
+        "unity_ir_v1",
+        "unity_runtime_input_bundle_v1",
+        "unity_adapter_dry_run_plan_v1"
+      ],
+      "artifact_contracts": [
+        "unity_ir_v1",
+        "asset_index_v1",
+        "runtime_db_build_plan_v1"
+      ],
+      "validators": [
+        "unity_ir.group_known",
+        "unity_ir.asset_refs_valid",
+        "unity_ir.runtime_target_supported",
+        "unity_ir.no_custom_code_required_by_default",
+        "unity_ir.export_dry_run_passes"
+      ],
+      "runtime_targets": [
+        "unity2d",
+        "unity3d",
+        "pseudo3d",
+        "first_person_grid",
+        "city_builder",
+        "visual_novel",
+        "automation",
+        "isometric"
+      ],
+      "prompt_context_templates": [
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "validation_focus": [
+        "Can the Unity shell consume the IR without generated per-game C#?",
+        "Are prefab/UI/audio/VFX bindings valid?",
+        "Can export dry-run catch missing assets?"
+      ],
+      "unity_ir_groups": [
+        "unity_ir_group/runtime_shell/v1",
+        "unity_ir_group/ui/v1",
+        "unity_ir_group/scene_binding/v1",
+        "unity_ir_group/audio_vfx/v1"
+      ]
+    },
+    {
+      "id": "feature_bundle/survival_sandbox/v1",
+      "title": "Survival Sandbox",
+      "domain": "survival",
+      "category": "bundle_category/genre_systems/v1",
+      "purpose": "Supports survival needs, crafting, locations, resources, hazards, exploration and optional mature/horror overlays.",
+      "requires": [
+        "feature_bundle/world_region_chunk_generation/v1",
+        "feature_bundle/semantic_property_channels/v1",
+        "feature_bundle/quest_multi_stage/v1",
+        "crafting.recipe_rules/v1",
+        "survival.needs/v1"
+      ],
+      "provides": [
+        "survival_needs_pack_v1",
+        "crafting_pack_v1",
+        "hazard_pack_v1"
+      ],
+      "artifact_contracts": [
+        "semantic_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1",
+        "unity_ir_v1"
+      ],
+      "validators": [
+        "survival.needs_bounds",
+        "crafting.recipe_refs_valid",
+        "hazard.effects_valid",
+        "resource.refs_valid"
+      ],
+      "runtime_targets": [
+        "unity2d",
+        "unity3d",
+        "isometric",
+        "pseudo3d",
+        "headless"
+      ],
+      "prompt_context_templates": [
+        "design_discussion",
+        "strict_single_json_artifact",
+        "batch_generation_round_robin"
+      ],
+      "validation_focus": [
+        "Can survival/crafting loops be simulated?",
+        "Are hazards and resources valid refs?",
+        "Are optional mature/horror overlays explicit?"
+      ],
+      "content_overlays": [
+        "content_overlay/horror_gore_optional/v1",
+        "content_overlay/optional_adult_nsfw/v1"
+      ]
+    }
+  ],
+  "reference_profile_bundle_selections": [
+    {
+      "profile_id": "profile/might_and_magic_like_party_rpg/v1",
+      "required_bundles": [
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/game_profile_negotiation/v1",
+        "feature_bundle/might_and_magic_like_party_rpg/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "optional_bundles": [
+        "feature_bundle/dialogue_free_text_nlu/v1",
+        "feature_bundle/media_request_generation/v1",
+        "feature_bundle/content_overlay_optional_adult_nsfw/v1",
+        "feature_bundle/content_overlay_horror_gore/v1"
+      ]
+    },
+    {
+      "profile_id": "profile/anno1404_like_city_builder_conquest/v1",
+      "required_bundles": [
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/game_profile_negotiation/v1",
+        "feature_bundle/anno1404_like_city_builder_conquest/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "optional_bundles": [
+        "feature_bundle/faction_reputation/v1",
+        "feature_bundle/media_request_generation/v1",
+        "feature_bundle/content_overlay_optional_adult_nsfw/v1"
+      ]
+    },
+    {
+      "profile_id": "profile/the_last_sovereign_like_narrative_political_rpg/v1",
+      "required_bundles": [
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/game_profile_negotiation/v1",
+        "feature_bundle/the_last_sovereign_like_narrative_political_rpg/v1",
+        "feature_bundle/dialogue_choice_graph/v1",
+        "feature_bundle/runtime_db_build_plan/v1"
+      ],
+      "optional_bundles": [
+        "feature_bundle/content_overlay_optional_adult_nsfw/v1",
+        "feature_bundle/media_request_generation/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ]
+    },
+    {
+      "profile_id": "profile/factorio_like_automation/v1",
+      "required_bundles": [
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/factorio_like_automation/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "optional_bundles": [
+        "feature_bundle/media_request_generation/v1"
+      ]
+    },
+    {
+      "profile_id": "profile/survival_sandbox/v1",
+      "required_bundles": [
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/survival_sandbox/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1"
+      ],
+      "optional_bundles": [
+        "feature_bundle/content_overlay_horror_gore/v1",
+        "feature_bundle/content_overlay_optional_adult_nsfw/v1",
+        "feature_bundle/media_request_generation/v1"
+      ]
+    }
+  ],
+  "validation_rules": [
+    {
+      "id": "feature_bundle.validation.required_shape/v1",
+      "level": "validation.level_0_json_shape",
+      "summary": "Every bundle must contain the required fields from bundle_shape.required_fields."
+    },
+    {
+      "id": "feature_bundle.validation.dependency_resolution/v1",
+      "level": "validation.level_1_ids_enums_refs",
+      "summary": "Every required bundle, capability, artifact contract, validator and runtime target must resolve to a known registry entry or produce a capability gap proposal."
+    },
+    {
+      "id": "feature_bundle.validation.overlay_explicit/v1",
+      "level": "validation.level_2_contract_semantics",
+      "summary": "Content overlay bundles must never be enabled implicitly by profile inspiration, model output or module defaults."
+    },
+    {
+      "id": "feature_bundle.validation.runtime_compatibility/v1",
+      "level": "validation.level_3_cross_artifact_consistency",
+      "summary": "Selected bundles must have at least one compatible runtime target path or declare an unresolved runtime adapter gap."
+    },
+    {
+      "id": "feature_bundle.validation.human_review/v1",
+      "level": "validation.level_6_human_approval",
+      "summary": "New bundles, runtime-impacting bundle changes and overlay policy changes require human approval before activation."
+    }
+  ],
+  "future_module_gaps": [
+    {
+      "id": "gap/feature_bundle_schema/v1",
+      "kind": "artifact_contract_or_schema",
+      "summary": "A stricter JSON Schema for feature_bundle_map.json can be added after the seed stabilizes."
+    },
+    {
+      "id": "gap/csharp_feature_bundle_importer/v1",
+      "kind": "csharp_importer",
+      "summary": "Later C# can import feature bundles into Design DB after atlas seeds are stable."
+    },
+    {
+      "id": "gap/feature_bundle_selection_service/v1",
+      "kind": "csharp_planning_service",
+      "summary": "Later planner can resolve profile -> feature bundles -> generator plan seed automatically."
+    },
+    {
+      "id": "gap/headless_bundle_smoke_tests/v1",
+      "kind": "validation_service",
+      "summary": "Later validation can run bundle-specific smoke tests for economy, combat, dialogue and runtime DB planning."
+    }
+  ]
+}
