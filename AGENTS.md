@@ -1,5 +1,14 @@
 # AGENTS.md — LLMGameCreator
 
+## Required orientation order for agents
+
+1. Read this AGENTS.md.
+2. Read docs/CONTEXT_INDEX.md.
+3. Read docs/CURRENT_GENERATOR_STATE.md.
+4. For generator tasks, read docs/ROADMAP_TO_FULL_GENERATOR.md and the docs named by CURRENT_GENERATOR_STATE.
+
+If a task changes generator milestones, roadmap, LLM generation flow, artifact review flow, capability selection, evaluation, Lua integration, package assembly or recommended next steps, it must update docs/CURRENT_GENERATOR_STATE.md and docs/CURRENT_GENERATOR_STATE.json.
+
 ## Главная цель проекта
 
 LLMGameCreator — это WinForms-редактор и генератор GamePackage для data-driven игр.

@@ -4,12 +4,23 @@ Purpose: reduce repeated orientation cost for Codex/LLM agents.
 
 Read this file after `AGENTS.md` when a task touches code. This file is a routing index, not a replacement for detailed docs. If this file conflicts with a more specific doc, the specific doc wins.
 
+## Generator task routing
+
+For any generator/codex task:
+
+1. AGENTS.md
+2. docs/CONTEXT_INDEX.md
+3. docs/CURRENT_GENERATOR_STATE.md
+4. docs/ROADMAP_TO_FULL_GENERATOR.md
+5. only then task-specific docs
+
 ## Full generator source-of-truth docs
 
 Read these before broad generation, capability, prompt, Lua integration, artifact-contract, roadmap or Codex-task-shaping work:
 
 | Document | Use when |
 |---|---|
+| `docs/CURRENT_GENERATOR_STATE.md` | Starting any generator/Codex task; checking the active phase, manual gate, recommended next action and blocked milestones. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Defining what full game generation means, target architecture, lifecycle, milestones and done criteria. |
 | `docs/GAME_GENERATION_CAPABILITY_MATRIX.md` | Choosing or scoping game capability domains, priorities, current status, required contracts, validators and acceptance criteria. |
 | `docs/LLM_LUA_CSHARP_RESPONSIBILITY_CONTRACT.md` | Checking C# / LLM / Lua ownership, forbidden outputs/features, promotion rules and repair boundaries. |
@@ -27,6 +38,11 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/INTERACTION_COMBAT_PROGRESSION_VARIANTS.md` | Planning interaction, combat, progression, inventory and equipment contract families. |
 
 The current one-click package export flow is a narrow vertical MVP. It proves the approved-artifact-set -> GamePackage assembly -> package export path, but it is not the full generator.
+
+## Machine-readable current state
+
+- `docs/CURRENT_GENERATOR_STATE.json` mirrors `docs/CURRENT_GENERATOR_STATE.md` for tests and future tooling.
+- Current state is manually updated by milestone tasks and automatically guarded by docs tests.
 
 Machine-readable atlas seeds for these variant docs live under `generator-library/atlas/`:
 

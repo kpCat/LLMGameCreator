@@ -4,6 +4,8 @@ Status: executable roadmap for Codex
 Scope: milestones from current narrow vertical slice to full game generation without media  
 Non-scope: direct implementation in this document
 
+Before choosing the next milestone, read `docs/CURRENT_GENERATOR_STATE.md`. The roadmap is the full route; current state tells which gate is active now.
+
 Each milestone must be implemented as a bounded task or small task group. A milestone is not complete because docs exist; it is complete when its acceptance gates pass.
 
 ## M0 Current Vertical Slice Baseline

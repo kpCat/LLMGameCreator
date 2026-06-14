@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1",
+  "state_id": "current_generator_state",
+  "updated_at_utc": "2026-06-14T13:39:52Z",
+  "current_phase": "m4_1_real_model_evaluation_gate",
+  "last_completed_milestone": "M4.1",
+  "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
+  "active_manual_gate": "Run and review real strict LLM evaluation before expanding contracts/Lua/assembly.",
+  "current_user_action": "Run real local model through Capability Picker -> LLM Artifacts -> LLM Evaluation and review the report.",
+  "recommended_next_decision": "Analyze pass rate, repair recovery, diagnostic hot spots and quality warnings.",
+  "allowed_next_codex_task_types": [
+    "tighten_prompt_repair_or_validator_based_on_real_evaluation_report",
+    "add_small_evaluation_report_import_or_analyzer_if_report_is_provided",
+    "update_docs_current_state_after_manual_test",
+    "add_one_carefully_selected_artifact_contract_if_evaluation_is_stable",
+    "improve_docs_consistency_guards"
+  ],
+  "blocked_next_milestones_until_gate_passes": [
+    "M5 Lua module executor integration",
+    "M6 rich GamePackage assembly",
+    "broad contract expansion",
+    "runtime preview repair loop"
+  ],
+  "required_reading_order_for_new_agents": [
+    "AGENTS.md",
+    "docs/CONTEXT_INDEX.md",
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/ROADMAP_TO_FULL_GENERATOR.md",
+    "docs/GENERATOR_PLAN_CAPABILITY_SELECTION_PICKER.md",
+    "docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md",
+    "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
+    "docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md"
+  ],
+  "current_workflow": [
+    "Capability Picker",
+    "LLM Artifacts",
+    "LLM Evaluation",
+    "Artifact Review",
+    "later assembly/export"
+  ],
+  "state_update_rule": "Update this file and docs/CURRENT_GENERATOR_STATE.md whenever milestone completion, active manual gate or recommended next Codex task changes."
+}

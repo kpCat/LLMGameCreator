@@ -56,6 +56,19 @@ Runtime должен оставаться headless и command/event driven.
 
 ## GamePackage
 
+## Current generator workflow
+
+Current source-of-truth handoff:
+- docs/CURRENT_GENERATOR_STATE.md
+- docs/CONTEXT_INDEX.md
+- docs/ROADMAP_TO_FULL_GENERATOR.md
+
+Current phase:
+M4.1 real-model evaluation gate.
+
+Next practical step:
+Run a real local model through Capability Picker -> LLM Artifacts -> LLM Evaluation before expanding contracts, Lua integration or package assembly.
+
 `GamePackage` — runtime source of truth для готовой игры.
 
 Он описывает игровые данные и контракты, которые должен уметь загрузить отдельный runtime/player.

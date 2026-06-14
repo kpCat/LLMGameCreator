@@ -50,16 +50,23 @@ Every non-trivial task must state:
 - no broad source scan for docs-only tasks;
 - no broad refactor when a local seam exists.
 
+## Current State Update Rule
+
+Every Codex task that changes milestone completion, active gates, recommended next work, generator workflow or source-of-truth docs must update CURRENT_GENERATOR_STATE.md and CURRENT_GENERATOR_STATE.json.
+
+If Codex is asked for the next task and CURRENT_GENERATOR_STATE says a manual gate is active, Codex must not skip the gate.
+
 ## Source-Of-Truth Priority
 
 For full generator tasks, read in this order:
 
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
-3. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
-4. `docs/GAME_GENERATION_CAPABILITY_MATRIX.md`
-5. `docs/LLM_LUA_CSHARP_RESPONSIBILITY_CONTRACT.md`
-6. task-specific docs such as prompt, GamePackage, validation, Lua, Design DB or export docs.
+3. `docs/CURRENT_GENERATOR_STATE.md`
+4. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
+5. `docs/GAME_GENERATION_CAPABILITY_MATRIX.md`
+6. `docs/LLM_LUA_CSHARP_RESPONSIBILITY_CONTRACT.md`
+7. task-specific docs such as prompt, GamePackage, validation, Lua, Design DB or export docs.
 
 If a task conflicts with the role contract, stop and clarify rather than coding around it.
 
