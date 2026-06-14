@@ -104,11 +104,11 @@ Required docs/code areas: capability atlas, generator-library manifests, Design 
 
 Non-goals: no generator execution, no package mutation.
 
-Expected file scale: 5-10 files if code/UI is included; docs-only seed may be smaller.
+Expected file scale: 5-10 files for a narrow service slice; UI, artifact persistence, presenter tests and docs may be larger when implemented together.
 
-Acceptance tests: dependency closure and missing capability detection.
+Acceptance tests: dependency closure, missing capability detection, unknown id rejection, compatibility diagnostics, latest artifact save/read and presenter mapping.
 
-Done criteria: selected bundle resolves capabilities, artifact contracts and missing prerequisites.
+Done criteria: selected variants and bundles resolve capabilities, artifact contracts, validators, prompt context templates, runtime targets and missing prerequisites into `artifact/generator_plan_capability_selection/latest`.
 
 What Codex must not decide by itself: adding a new genre as default or enabling sensitive overlays.
 

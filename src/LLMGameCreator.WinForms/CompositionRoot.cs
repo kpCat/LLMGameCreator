@@ -64,7 +64,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
-        _container.Register<GeneratorPlanDraftArtifactProductionService>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactApprovalService>(resolver => new GeneratorPlanDraftArtifactApprovalService(
@@ -92,6 +92,10 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratorPlanPackageExportRunArtifactReader>(Reuse.Singleton);
         _container.Register<GeneratorPlanExampleTemplateCatalog>(Reuse.Singleton);
         _container.Register<GeneratorPlanExampleTemplateService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanCapabilitySelectionAtlasReader>(Reuse.Singleton);
+        _container.Register<GeneratorPlanCapabilitySelectionService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanCapabilitySelectionArtifactService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanCapabilitySelectionArtifactReader>(Reuse.Singleton);
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
@@ -181,6 +185,13 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IDesignDatabaseInitializer>(),
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<CapabilityPickerPageControl>(resolver => new CapabilityPickerPageControl(
+            resolver.Resolve<GeneratorPlanCapabilitySelectionService>(),
+            resolver.Resolve<GeneratorPlanCapabilitySelectionArtifactService>(),
+            resolver.Resolve<GeneratorPlanCapabilitySelectionArtifactReader>(),
+            resolver.Resolve<IDesignDatabaseInitializer>(),
+            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -194,6 +205,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<GenerationPageControl>(),
             resolver.Resolve<PackageExportPageControl>(),
             resolver.Resolve<ArtifactReviewPageControl>(),
+            resolver.Resolve<CapabilityPickerPageControl>(),
             resolver.Resolve<ValidationPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),
