@@ -29,7 +29,7 @@ public sealed class GeneratorPlanGamePackageAssemblyPipelineTests
     public void AssemblerCreatesBaselineValidPackageAndMapsKnownArtifacts()
     {
         var artifactSet = ApprovedSet(
-            Artifact("artifact/profile", "game_profile_v1", """{"game":{"title":"Assembly Quest","genre":"cozy_test"}}"""),
+            Artifact("artifact/profile", "game_profile_v1", """{"game":{"title":"Assembly Quest","genre":"cozy_test","description":"A focused assembly package."}}"""),
             Artifact("artifact/scene", "scene_pack_v1", """{"scenes":[{"id":"scene/start","title":"Landing Field"},{"id":"scene/cave","title":"Quiet Cave"}]}"""),
             Artifact("artifact/entities", "entity_pack_v1", """{"entities":[{"id":"npc/guide","kind":"guide","title":"Guide"}]}"""),
             Artifact("artifact/quests", "quest_pack_v1", """{"quests":[{"id":"quest/hello","title":"Say Hello","objectives":["talk_to_guide"]}]}"""),
@@ -39,6 +39,7 @@ public sealed class GeneratorPlanGamePackageAssemblyPipelineTests
         var report = new GamePackageValidator().Validate(assembled.Package);
 
         Assert.Equal("Assembly Quest", assembled.Package.Manifest.Title);
+        Assert.Equal("A focused assembly package.", assembled.Package.Manifest.Description);
         Assert.Equal("map/start", assembled.Package.Manifest.StartMapId);
         Assert.Contains(assembled.Package.Game.TilePrototypes, tile => tile.Id == "tile/grass");
         Assert.Contains(assembled.Package.Game.Maps, map => map.Id == "map/start" && map.Name == "Landing Field");
@@ -49,6 +50,33 @@ public sealed class GeneratorPlanGamePackageAssemblyPipelineTests
         Assert.Contains(assembled.Package.Game.Quests, quest => quest.Title == "Say Hello");
         Assert.Contains(assembled.Package.Game.Abilities, ability => ability.Name == "Look Around");
         Assert.True(report.IsValid, string.Join(Environment.NewLine, report.Issues.Select(issue => issue.ToString())));
+    }
+
+    [Fact]
+    public void AssemblerMapsQuestStepsAndMechanicNameFallback()
+    {
+        var artifactSet = ApprovedSet(
+            Artifact("artifact/profile", "game_profile_v1", """{"game":{"title":"Sky Lantern Outpost","description":"A cozy survival adventure about repairing lantern towers."}}"""),
+            Artifact("artifact/entities", "entity_pack_v1", """{"entities":[{"id":"entity/guide","kind":"npc","title":"Lantern Guide"}]}"""),
+            Artifact("artifact/quests", "quest_pack_v1", """{"quests":[{"id":"quest/intro","title":"Restore the First Lantern","description":"Repair the first tower.","steps":["Inspect the outpost","Find the first lantern part","Return to the guide"]}]}"""),
+            Artifact("artifact/mechanics", "mechanics_pack_v1", """{"mechanics":[{"id":"mechanic/lantern_repair","name":"Lantern Repair","description":"Repair lantern devices."}]}"""));
+
+        var assembled = new GeneratorPlanGamePackageAssembler().Assemble(artifactSet);
+        var quest = Assert.Single(assembled.Package.Game.Quests);
+        var ability = Assert.Single(assembled.Package.Game.Abilities);
+
+        Assert.Equal("game/sky/lantern/outpost", assembled.Package.Manifest.PackageId);
+        Assert.Equal("Sky Lantern Outpost", assembled.Package.Manifest.Title);
+        Assert.Contains("repairing lantern towers", assembled.Package.Manifest.Description);
+        Assert.Contains(assembled.Package.Game.EntityPrototypes, entity => entity.Id == "entity/guide" && entity.Name == "Lantern Guide");
+        Assert.DoesNotContain(assembled.Package.Game.EntityPrototypes, entity => entity.Id.StartsWith("entity/entity/", StringComparison.OrdinalIgnoreCase));
+        Assert.Equal("Restore the First Lantern", quest.Title);
+        Assert.Equal("Repair the first tower.", quest.Description);
+        Assert.Equal(3, quest.Objectives.Count);
+        Assert.Contains(quest.Objectives, objective => objective.Metadata.TryGetValue("text", out var text) && text == "Find the first lantern part");
+        Assert.Equal("Lantern Repair", ability.Name);
+        Assert.Equal("mechanic/lantern_repair", ability.Metadata["source_mechanic_id"]);
+        Assert.Equal("Repair lantern devices.", ability.Metadata["description"]);
     }
 
     [Fact]

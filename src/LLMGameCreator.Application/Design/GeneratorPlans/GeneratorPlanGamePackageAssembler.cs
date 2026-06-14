@@ -59,10 +59,13 @@ public sealed class GeneratorPlanGamePackageAssembler
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.abilities"));
                     break;
                 case "semantic_pack_v1":
+                    var semanticTermCount = CountSemanticTerms(document.RootElement);
                     diagnostics.Add(GeneratorPlanGamePackageAssemblyPolicy.Diagnostic(
                         GeneratorPlanPreviewDiagnosticSeverity.Warning,
                         GeneratorPlanGamePackageAssemblyDiagnosticCodes.UnmappedArtifactKind,
-                        "Semantic artifacts are acknowledged but do not have a GamePackage field in v1.",
+                        semanticTermCount > 0
+                            ? $"Semantic artifacts are acknowledged but do not have a GamePackage field in v1. Terms: {semanticTermCount}."
+                            : "Semantic artifacts are acknowledged but do not have a GamePackage field in v1.",
                         artifact.ArtifactId,
                         artifact.ArtifactKind,
                         "semantic_pack_v1"));
@@ -220,7 +223,12 @@ public sealed class GeneratorPlanGamePackageAssembler
         }
 
         var genre = GetString(game, "genre");
-        if (!string.IsNullOrWhiteSpace(genre))
+        var description = FirstNonEmpty(GetString(game, "description"), GetString(root, "purpose"), GetString(game, "core_idea"));
+        if (!string.IsNullOrWhiteSpace(description))
+        {
+            package.Manifest.Description = description.Trim();
+        }
+        else if (!string.IsNullOrWhiteSpace(genre))
         {
             package.Manifest.Description = genre.Trim();
         }
@@ -345,33 +353,24 @@ public sealed class GeneratorPlanGamePackageAssembler
 
     private static List<QuestObjectiveDefinition> BuildQuestObjectives(JsonElement quest)
     {
-        if (!TryGetProperty(quest, "objectives", out var objectives) || objectives.ValueKind != JsonValueKind.Array)
-        {
-            return
-            [
-                new QuestObjectiveDefinition
-                {
-                    Id = "objective/first",
-                    Kind = "custom_counter",
-                    RequiredAmount = 1
-                }
-            ];
-        }
-
         var result = new List<QuestObjectiveDefinition>();
         var index = 0;
-        foreach (var objective in objectives.EnumerateArray())
+        if (TryGetProperty(quest, "objectives", out var objectives) && objectives.ValueKind == JsonValueKind.Array)
         {
-            var id = objective.ValueKind == JsonValueKind.String
-                ? objective.GetString()
-                : GetString(objective, "id");
-            result.Add(new QuestObjectiveDefinition
+            foreach (var objective in objectives.EnumerateArray())
             {
-                Id = "objective/" + NormalizeIdSegment(string.IsNullOrWhiteSpace(id) ? index.ToString() : id),
-                Kind = "custom_counter",
-                RequiredAmount = 1
-            });
-            index++;
+                result.Add(BuildQuestObjective(objective, index));
+                index++;
+            }
+        }
+
+        if (TryGetProperty(quest, "steps", out var steps) && steps.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var step in steps.EnumerateArray())
+            {
+                result.Add(BuildQuestObjective(step, index));
+                index++;
+            }
         }
 
         return result.Count == 0
@@ -387,6 +386,29 @@ public sealed class GeneratorPlanGamePackageAssembler
             : result;
     }
 
+    private static QuestObjectiveDefinition BuildQuestObjective(JsonElement objective, int index)
+    {
+        var source = objective.ValueKind == JsonValueKind.String
+            ? objective.GetString() ?? string.Empty
+            : FirstNonEmpty(GetString(objective, "id"), GetString(objective, "title"), GetString(objective, "text"));
+        var text = objective.ValueKind == JsonValueKind.String
+            ? objective.GetString() ?? string.Empty
+            : FirstNonEmpty(GetString(objective, "text"), GetString(objective, "title"), GetString(objective, "description"));
+        var result = new QuestObjectiveDefinition
+        {
+            Id = "objective/" + NormalizeIdSegment(string.IsNullOrWhiteSpace(source) ? index.ToString() : source),
+            Kind = "custom_counter",
+            RequiredAmount = 1
+        };
+
+        if (!string.IsNullOrWhiteSpace(text))
+        {
+            result.Metadata["text"] = text.Trim();
+        }
+
+        return result;
+    }
+
     private static void MapMechanicsPack(GamePackageDefinition package, JsonElement root)
     {
         if (!TryGetProperty(root, "mechanics", out var mechanics) || mechanics.ValueKind != JsonValueKind.Array)
@@ -398,7 +420,8 @@ public sealed class GeneratorPlanGamePackageAssembler
         foreach (var mechanic in mechanics.EnumerateArray())
         {
             var sourceId = GetString(mechanic, "id");
-            var title = GetString(mechanic, "title");
+            var title = FirstNonEmpty(GetString(mechanic, "title"), GetString(mechanic, "name"));
+            var description = GetString(mechanic, "description");
             var id = "ability/" + NormalizeIdSegment(string.IsNullOrWhiteSpace(sourceId) ? index.ToString() : sourceId);
             if (package.Game.Abilities.Any(candidate => string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase)))
             {
@@ -413,7 +436,9 @@ public sealed class GeneratorPlanGamePackageAssembler
                 Kind = "active",
                 Metadata =
                 {
-                    ["source"] = "mechanics_pack_v1"
+                    ["source"] = "mechanics_pack_v1",
+                    ["source_mechanic_id"] = sourceId.Trim(),
+                    ["description"] = description.Trim()
                 }
             });
             index++;
@@ -447,7 +472,10 @@ public sealed class GeneratorPlanGamePackageAssembler
             : !string.IsNullOrWhiteSpace(kind)
                 ? kind
                 : index.ToString();
-        return "entity/" + NormalizeIdSegment(value);
+        var normalized = NormalizeIdSegment(value);
+        return normalized.StartsWith("entity/", StringComparison.OrdinalIgnoreCase)
+            ? normalized
+            : "entity/" + normalized;
     }
 
     private static string NormalizeIdSegment(string value)
@@ -466,6 +494,30 @@ public sealed class GeneratorPlanGamePackageAssembler
         return TryGetProperty(element, propertyName, out var property) && property.ValueKind == JsonValueKind.String
             ? property.GetString() ?? string.Empty
             : string.Empty;
+    }
+
+    private static string FirstNonEmpty(params string[] values)
+    {
+        return values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value))?.Trim() ?? string.Empty;
+    }
+
+    private static int CountSemanticTerms(JsonElement root)
+    {
+        if (!TryGetProperty(root, "semantic_groups", out var groups) || groups.ValueKind != JsonValueKind.Array)
+        {
+            return 0;
+        }
+
+        var count = 0;
+        foreach (var group in groups.EnumerateArray())
+        {
+            if (TryGetProperty(group, "terms", out var terms) && terms.ValueKind == JsonValueKind.Array)
+            {
+                count += terms.GetArrayLength();
+            }
+        }
+
+        return count;
     }
 
     private static bool TryGetProperty(JsonElement element, string propertyName, out JsonElement value)

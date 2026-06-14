@@ -54,6 +54,14 @@ public sealed class GeneratorPlanDraftArtifactProductionService
             : request.BatchId.Trim();
         var diagnostics = MapQueueDiagnostics(batchId, queueResult).ToList();
         var produced = new List<GeneratorPlanProducedDraftArtifact>();
+        var sourceContext = HasSourceContext(request.SourceContext)
+            ? request.SourceContext
+            : BuildSourceContext(queueResult);
+        var producerRequest = request with
+        {
+            BatchId = batchId,
+            SourceContext = sourceContext
+        };
 
         if (!queueResult.Ok || queueResult.Status == GeneratorPlanDraftArtifactQueueStatus.Invalid)
         {
@@ -76,11 +84,11 @@ public sealed class GeneratorPlanDraftArtifactProductionService
 
                 if (item.State == GeneratorPlanDraftArtifactQueueItemState.Blocked && !request.ProduceBlockedItems)
                 {
-                    produced.Add(BuildBlockedArtifact(batchId, item, repairRequest?.Id ?? string.Empty, request));
+                    produced.Add(BuildBlockedArtifact(batchId, item, repairRequest?.Id ?? string.Empty, producerRequest));
                     continue;
                 }
 
-                var artifact = await _producer.ProduceAsync(item, request with { BatchId = batchId }, cancellationToken).ConfigureAwait(false);
+                var artifact = await _producer.ProduceAsync(item, producerRequest, cancellationToken).ConfigureAwait(false);
                 if (item.State == GeneratorPlanDraftArtifactQueueItemState.Blocked)
                 {
                     artifact = artifact with
@@ -177,6 +185,7 @@ public sealed class GeneratorPlanDraftArtifactProductionService
                 ["queue_item_id"] = item.Id,
                 ["execution_step_id"] = item.SourceExecutionStepId
             },
+            ["source_context"] = BuildSourceContextJson(request.SourceContext),
             ["draft"] = true,
             ["blocked"] = true,
             ["repair_request_id"] = repairRequestId,
@@ -197,5 +206,71 @@ public sealed class GeneratorPlanDraftArtifactProductionService
             RepairRequestId = repairRequestId,
             RequiresHumanApproval = request.RequireHumanApprovalByDefault || item.RequiresHumanApproval
         };
+    }
+
+    private static bool HasSourceContext(GeneratorPlanDraftArtifactSourceContext sourceContext)
+    {
+        return !string.IsNullOrWhiteSpace(sourceContext.ExampleId)
+            || !string.IsNullOrWhiteSpace(sourceContext.Title)
+            || !string.IsNullOrWhiteSpace(sourceContext.Purpose)
+            || !string.IsNullOrWhiteSpace(sourceContext.SourceProfileId)
+            || sourceContext.SelectedFeatureBundles.Count > 0
+            || sourceContext.TargetArtifacts.Count > 0
+            || sourceContext.StepTitlesByContract.Count > 0
+            || sourceContext.StepTitlesById.Count > 0;
+    }
+
+    private static GeneratorPlanDraftArtifactSourceContext BuildSourceContext(GeneratorPlanDraftArtifactQueueResult queueResult)
+    {
+        var preview = queueResult.DraftExecutionResult.PreviewResult.Preview;
+        var stepTitlesByContract = preview.Steps
+            .Where(step => !string.IsNullOrWhiteSpace(step.ExpectedArtifactContract) && !string.IsNullOrWhiteSpace(step.Title))
+            .GroupBy(step => step.ExpectedArtifactContract.Trim(), StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.First().Title.Trim(), StringComparer.OrdinalIgnoreCase);
+        var stepTitlesById = preview.Steps
+            .Where(step => !string.IsNullOrWhiteSpace(step.Id) && !string.IsNullOrWhiteSpace(step.Title))
+            .GroupBy(step => step.Id.Trim(), StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(group => group.Key, group => group.First().Title.Trim(), StringComparer.OrdinalIgnoreCase);
+
+        return new GeneratorPlanDraftArtifactSourceContext
+        {
+            ExampleId = FirstNonEmpty(preview.ExampleId, queueResult.Queue.SourcePreviewExampleId),
+            Title = preview.Title.Trim(),
+            Purpose = preview.Purpose.Trim(),
+            SourceProfileId = preview.SourceProfileId.Trim(),
+            SelectedFeatureBundles = preview.SelectedFeatureBundles.Select(value => value.Trim()).Where(value => value.Length > 0).ToList(),
+            TargetArtifacts = preview.TargetArtifacts.Select(value => value.Trim()).Where(value => value.Length > 0).ToList(),
+            StepTitlesByContract = stepTitlesByContract,
+            StepTitlesById = stepTitlesById
+        };
+    }
+
+    private static JsonObject BuildSourceContextJson(GeneratorPlanDraftArtifactSourceContext sourceContext)
+    {
+        return new JsonObject
+        {
+            ["example_id"] = sourceContext.ExampleId,
+            ["title"] = sourceContext.Title,
+            ["purpose"] = sourceContext.Purpose,
+            ["source_profile_id"] = sourceContext.SourceProfileId,
+            ["selected_feature_bundles"] = ToJsonArray(sourceContext.SelectedFeatureBundles),
+            ["target_artifacts"] = ToJsonArray(sourceContext.TargetArtifacts)
+        };
+    }
+
+    private static string FirstNonEmpty(params string[] values)
+    {
+        return values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value))?.Trim() ?? string.Empty;
+    }
+
+    private static JsonArray ToJsonArray(IEnumerable<string> values)
+    {
+        var array = new JsonArray();
+        foreach (var value in values)
+        {
+            array.Add(JsonValue.Create(value));
+        }
+
+        return array;
     }
 }

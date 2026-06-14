@@ -6,6 +6,19 @@ public sealed record GeneratorPlanDraftArtifactProductionRequest
     public bool RenderMarkdown { get; init; } = true;
     public bool ProduceBlockedItems { get; init; }
     public bool RequireHumanApprovalByDefault { get; init; } = true;
+    public GeneratorPlanDraftArtifactSourceContext SourceContext { get; init; } = new();
+}
+
+public sealed record GeneratorPlanDraftArtifactSourceContext
+{
+    public string ExampleId { get; init; } = string.Empty;
+    public string Title { get; init; } = string.Empty;
+    public string Purpose { get; init; } = string.Empty;
+    public string SourceProfileId { get; init; } = string.Empty;
+    public IReadOnlyList<string> SelectedFeatureBundles { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> TargetArtifacts { get; init; } = Array.Empty<string>();
+    public IReadOnlyDictionary<string, string> StepTitlesByContract { get; init; } = new Dictionary<string, string>();
+    public IReadOnlyDictionary<string, string> StepTitlesById { get; init; } = new Dictionary<string, string>();
 }
 
 public sealed record GeneratorPlanDraftArtifactProductionResult

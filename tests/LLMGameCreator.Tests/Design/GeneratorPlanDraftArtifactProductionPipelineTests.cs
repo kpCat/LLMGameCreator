@@ -24,6 +24,43 @@ public sealed class GeneratorPlanDraftArtifactProductionPipelineTests
     }
 
     [Fact]
+    public async Task DeterministicProducerUsesSourceContextForKnownArtifactKinds()
+    {
+        var sourceContext = SkyLanternSourceContext();
+        var producer = new DeterministicGeneratorPlanDraftArtifactProducer();
+        var profile = await producer.ProduceAsync(
+            QueueItem("game_profile_v1"),
+            new GeneratorPlanDraftArtifactProductionRequest { BatchId = "batch/test", SourceContext = sourceContext },
+            CancellationToken.None);
+        var quest = await producer.ProduceAsync(
+            QueueItem("quest_pack_v1"),
+            new GeneratorPlanDraftArtifactProductionRequest { BatchId = "batch/test", SourceContext = sourceContext },
+            CancellationToken.None);
+        var mechanics = await producer.ProduceAsync(
+            QueueItem("mechanics_pack_v1"),
+            new GeneratorPlanDraftArtifactProductionRequest { BatchId = "batch/test", SourceContext = sourceContext },
+            CancellationToken.None);
+        var semantic = await producer.ProduceAsync(
+            QueueItem("semantic_pack_v1"),
+            new GeneratorPlanDraftArtifactProductionRequest { BatchId = "batch/test", SourceContext = sourceContext },
+            CancellationToken.None);
+
+        using var profileJson = JsonDocument.Parse(profile.ContentJson);
+        using var questJson = JsonDocument.Parse(quest.ContentJson);
+        using var mechanicsJson = JsonDocument.Parse(mechanics.ContentJson);
+        using var semanticJson = JsonDocument.Parse(semantic.ContentJson);
+
+        Assert.Equal("Sky Lantern Outpost", profileJson.RootElement.GetProperty("game").GetProperty("title").GetString());
+        Assert.Contains("repairing lantern towers", profileJson.RootElement.GetProperty("game").GetProperty("description").GetString());
+        Assert.Equal("Sky Lantern Outpost", profileJson.RootElement.GetProperty("source_context").GetProperty("title").GetString());
+        Assert.Contains(profileJson.RootElement.GetProperty("game").GetProperty("core_loop").EnumerateArray(), item => item.GetString() == "repair");
+        Assert.Equal("Restore the First Lantern", questJson.RootElement.GetProperty("quests")[0].GetProperty("title").GetString());
+        Assert.True(questJson.RootElement.GetProperty("quests")[0].GetProperty("steps").GetArrayLength() >= 3);
+        Assert.Equal("Lantern Repair", mechanicsJson.RootElement.GetProperty("mechanics")[0].GetProperty("name").GetString());
+        Assert.Contains(semanticJson.RootElement.GetProperty("semantic_groups")[0].GetProperty("terms").EnumerateArray(), item => item.GetString() == "lantern");
+    }
+
+    [Fact]
     public async Task ProducerCreatesKnownContractSpecificPayloads()
     {
         var producer = new DeterministicGeneratorPlanDraftArtifactProducer();
@@ -113,6 +150,24 @@ public sealed class GeneratorPlanDraftArtifactProductionPipelineTests
         Assert.True(result.Ok);
         Assert.Equal("example/test/v1", result.Batch.SourcePreviewExampleId);
         Assert.Single(result.Batch.Artifacts);
+    }
+
+    [Fact]
+    public async Task ProductionServicePropagatesSourceContextToProducedArtifacts()
+    {
+        using var temp = new TempDirectory();
+        var path = WriteSkyLanternExample(temp.Path);
+
+        var result = await new GeneratorPlanDraftArtifactProductionService()
+            .ProduceFromExampleAsync(path, new GeneratorPlanDraftArtifactProductionRequest(), CancellationToken.None);
+
+        Assert.True(result.Ok);
+        var profile = Assert.Single(result.Batch.Artifacts, artifact => artifact.ArtifactKind == "game_profile_v1");
+        using var json = JsonDocument.Parse(profile.ContentJson);
+
+        Assert.Equal("example/sky-lantern-outpost/v1", json.RootElement.GetProperty("source_context").GetProperty("example_id").GetString());
+        Assert.Equal("Sky Lantern Outpost", json.RootElement.GetProperty("game").GetProperty("title").GetString());
+        Assert.Contains("repairing lantern towers", json.RootElement.GetProperty("purpose").GetString());
     }
 
     [Fact]
@@ -594,6 +649,76 @@ public sealed class GeneratorPlanDraftArtifactProductionPipelineTests
         }
         """);
         return path;
+    }
+
+    private static string WriteSkyLanternExample(string root)
+    {
+        var path = Path.Combine(root, "sky-lantern.example.json");
+        File.WriteAllText(path, """
+        {
+          "schema_version": "0.1",
+          "example_id": "example/sky-lantern-outpost/v1",
+          "title": "Sky Lantern Outpost",
+          "purpose": "A cozy survival adventure about repairing lantern towers after a storm.",
+          "source_profile": {
+            "id": "profile/sky-lantern/v1"
+          },
+          "selected_feature_bundles": [
+            "feature_bundle/cozy_survival/v1",
+            "feature_bundle/lantern_repair/v1"
+          ],
+          "target_artifacts": [
+            "game_profile_v1",
+            "scene_pack_v1",
+            "entity_pack_v1",
+            "quest_pack_v1",
+            "mechanics_pack_v1",
+            "semantic_pack_v1"
+          ],
+          "steps": [
+            {
+              "id": "step/profile",
+              "order": 1,
+              "title": "Define Sky Lantern Outpost profile",
+              "producer_role": "role/designer_llm/v1",
+              "context_pack_template": "context_template/design_discussion/v1",
+              "expected_artifact_contract": "game_profile_v1",
+              "inputs": ["game_profile_v1"],
+              "validation_gates": ["validation.level_0_json_shape"],
+              "on_success": "stage_profile",
+              "on_failure": "request_profile_clarification"
+            }
+          ]
+        }
+        """);
+        return path;
+    }
+
+    private static GeneratorPlanDraftArtifactSourceContext SkyLanternSourceContext()
+    {
+        return new GeneratorPlanDraftArtifactSourceContext
+        {
+            ExampleId = "example/sky-lantern-outpost/v1",
+            Title = "Sky Lantern Outpost",
+            Purpose = "A cozy survival adventure about repairing lantern towers after a storm.",
+            SourceProfileId = "profile/sky-lantern/v1",
+            SelectedFeatureBundles =
+            [
+                "feature_bundle/cozy_survival/v1",
+                "feature_bundle/lantern_repair/v1"
+            ],
+            TargetArtifacts =
+            [
+                "game_profile_v1",
+                "quest_pack_v1",
+                "mechanics_pack_v1",
+                "semantic_pack_v1"
+            ],
+            StepTitlesByContract = new Dictionary<string, string>
+            {
+                ["game_profile_v1"] = "Define Sky Lantern Outpost profile"
+            }
+        };
     }
 
     private static GeneratorPlanDraftArtifactProductionArtifactService CreateArtifactService(GeneratedArtifactRepository repository)

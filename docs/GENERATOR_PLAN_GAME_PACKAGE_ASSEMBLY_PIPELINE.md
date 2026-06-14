@@ -63,17 +63,17 @@ Approval owns review decisions and approved artifact set persistence. Assembly o
 
 ## Mapping Rules
 
-`game_profile_v1` maps `content_json.game.title` to `Manifest.Title`, derives `Manifest.PackageId`, and maps `content_json.game.genre` to `Manifest.Description`.
+`game_profile_v1` maps `content_json.game.title` to `Manifest.Title`, derives `Manifest.PackageId`, and maps `content_json.game.description` or root `purpose` to `Manifest.Description`. If no description exists, it falls back to `content_json.game.genre`.
 
-`scene_pack_v1` maps `scenes[0].title` to the start map name. Additional scenes become deterministic draft maps under `map/draft/...`.
+`scene_pack_v1` maps `scenes[0].title` to the start map name. Additional scenes become deterministic draft maps under `map/draft/...`. `MapDefinition` has no metadata field in GamePackage v1, so scene descriptions are acknowledged in draft artifacts but are not written into maps.
 
-`entity_pack_v1` maps `entities[]` to `EntityPrototypeDefinition` entries. Player entities normalize to `entity/player`.
+`entity_pack_v1` maps `entities[]` to `EntityPrototypeDefinition` entries. Player entities normalize to `entity/player`. Source ids that already start with `entity/` stay stable instead of becoming `entity/entity/...`.
 
-`quest_pack_v1` maps `quests[]` to `QuestDefinition` entries with safe custom-counter objectives.
+`quest_pack_v1` maps `quests[]` to `QuestDefinition` entries with safe custom-counter objectives. It accepts either `objectives[]` or string `steps[]`; step text is preserved in objective metadata.
 
-`mechanics_pack_v1` maps `mechanics[]` to minimal `AbilityDefinition` entries when the existing package schema can accept them safely.
+`mechanics_pack_v1` maps `mechanics[]` to minimal `AbilityDefinition` entries when the existing package schema can accept them safely. Ability names use `mechanic.title`, then `mechanic.name`, then a deterministic fallback. Source mechanic id and description are preserved in ability metadata.
 
-`semantic_pack_v1` is acknowledged as unmapped because no GamePackage field exists for semantics in v1. Unknown kinds are also unmapped warnings.
+`semantic_pack_v1` is acknowledged as unmapped because no GamePackage field exists for semantics in v1. The warning includes the number of semantic terms when available. Unknown kinds are also unmapped warnings.
 
 ## Baseline Package Defaults
 
@@ -149,6 +149,10 @@ No complex UI.
 ```
 
 This layer also does not call local or remote models, generate Lua, touch WinForms UI, or mutate an existing project unless explicit package export is requested.
+
+## Source Context Notes
+
+When approved artifacts were produced from a `.example.json` source context, assembly does not need to read the example again. It sees the improved fields through the approved artifact set. This keeps assembly deterministic and decoupled from preview while allowing example title/purpose to reach `package.json`.
 
 ## Future Next Step
 

@@ -23,8 +23,39 @@ public sealed class GeneratorPlanPackageExportRunTests
 
         Assert.True(result.Ok, string.Join(Environment.NewLine, result.Diagnostics.Select(diagnostic => diagnostic.Message)));
         Assert.True(File.Exists(Path.Combine(exportFolder, "package.json")));
-        Assert.Contains("\"title\": \"game profile v1\"", await File.ReadAllTextAsync(Path.Combine(exportFolder, "package.json")));
+        Assert.Contains("\"title\": \"Package Export Example\"", await File.ReadAllTextAsync(Path.Combine(exportFolder, "package.json")));
         Assert.Equal(Path.Combine(exportFolder, "package.json"), result.PackageJsonPath);
+    }
+
+    [Fact]
+    public async Task RunAsyncExportsMeaningfulPackageContentFromExampleTitleAndPurpose()
+    {
+        using var temp = new TempDirectory();
+        var service = await CreateServiceAsync(temp.Path);
+        var exportFolder = Path.Combine(temp.Path, "exported");
+
+        var result = await service.RunAsync(new GeneratorPlanPackageExportRunRequest
+        {
+            SourceExamplePath = WriteSkyLanternExample(temp.Path),
+            ExportFolderPath = exportFolder
+        }, CancellationToken.None);
+        using var packageJson = JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(exportFolder, "package.json")));
+        var root = packageJson.RootElement;
+        var manifest = root.GetProperty("manifest");
+        var game = root.GetProperty("game");
+
+        Assert.True(result.Ok, string.Join(Environment.NewLine, result.Diagnostics.Select(diagnostic => diagnostic.Message)));
+        Assert.Equal(GeneratorPlanPackageExportRunStatus.SucceededWithWarnings, result.Status);
+        Assert.Equal("Sky Lantern Outpost", manifest.GetProperty("title").GetString());
+        Assert.Equal("game/sky/lantern/outpost", manifest.GetProperty("packageId").GetString());
+        Assert.Contains("repairing lantern towers", manifest.GetProperty("description").GetString());
+        Assert.Contains(game.GetProperty("maps").EnumerateArray(), map => map.GetProperty("id").GetString() == "map/start" && map.GetProperty("name").GetString() == "Sky Lantern Outpost");
+        Assert.Contains(game.GetProperty("entityPrototypes").EnumerateArray(), entity => entity.GetProperty("id").GetString() != "entity/player" && entity.GetProperty("name").GetString() == "Lantern Guide");
+        Assert.Contains(game.GetProperty("quests").EnumerateArray(), quest => quest.GetProperty("title").GetString() == "Restore the First Lantern");
+        Assert.Contains(game.GetProperty("abilities").EnumerateArray(), ability => ability.GetProperty("name").GetString() == "Lantern Repair");
+        Assert.DoesNotContain("game_profile_v1", manifest.GetProperty("title").GetString());
+        Assert.DoesNotContain("Draft Quest", await File.ReadAllTextAsync(Path.Combine(exportFolder, "package.json")));
+        Assert.DoesNotContain("Draft Ability", await File.ReadAllTextAsync(Path.Combine(exportFolder, "package.json")));
     }
 
     [Fact]
@@ -285,6 +316,111 @@ public sealed class GeneratorPlanPackageExportRunTests
               "on_failure": "repair_{{index}}"
             }
             """))}}
+          ]
+        }
+        """);
+        return path;
+    }
+
+    private static string WriteSkyLanternExample(string root)
+    {
+        var artifacts = new[]
+        {
+            "game_profile_v1",
+            "scene_pack_v1",
+            "entity_pack_v1",
+            "quest_pack_v1",
+            "mechanics_pack_v1",
+            "semantic_pack_v1"
+        };
+        var path = Path.Combine(root, Guid.NewGuid().ToString("N") + ".example.json");
+        File.WriteAllText(path, $$"""
+        {
+          "schema_version": "0.1",
+          "example_id": "example/sky-lantern-outpost/v1",
+          "title": "Sky Lantern Outpost",
+          "purpose": "A cozy survival adventure about repairing lantern towers after a storm.",
+          "source_profile": {
+            "id": "profile/sky-lantern/v1"
+          },
+          "selected_feature_bundles": [
+            "feature_bundle/cozy_survival/v1",
+            "feature_bundle/lantern_repair/v1"
+          ],
+          "target_artifacts": {{JsonSerializer.Serialize(artifacts)}},
+          "steps": [
+            {
+              "id": "step/profile",
+              "order": 1,
+              "title": "Define Sky Lantern Outpost profile",
+              "producer_role": "role/designer_llm/v1",
+              "context_pack_template": "context_template/design_discussion/v1",
+              "expected_artifact_contract": "game_profile_v1",
+              "inputs": ["game_profile_v1"],
+              "validation_gates": ["validation.level_0_json_shape"],
+              "on_success": "stage_profile",
+              "on_failure": "request_profile_clarification"
+            },
+            {
+              "id": "step/scene",
+              "order": 2,
+              "title": "Build the lantern outpost start scene",
+              "producer_role": "role/designer_llm/v1",
+              "context_pack_template": "context_template/design_discussion/v1",
+              "expected_artifact_contract": "scene_pack_v1",
+              "inputs": ["scene_pack_v1"],
+              "validation_gates": ["validation.level_0_json_shape"],
+              "on_success": "stage_scene",
+              "on_failure": "request_scene_clarification"
+            },
+            {
+              "id": "step/entity",
+              "order": 3,
+              "title": "Add the lantern guide",
+              "producer_role": "role/designer_llm/v1",
+              "context_pack_template": "context_template/design_discussion/v1",
+              "expected_artifact_contract": "entity_pack_v1",
+              "inputs": ["entity_pack_v1"],
+              "validation_gates": ["validation.level_0_json_shape"],
+              "on_success": "stage_entity",
+              "on_failure": "request_entity_clarification"
+            },
+            {
+              "id": "step/quest",
+              "order": 4,
+              "title": "Create the first lantern repair quest",
+              "producer_role": "role/designer_llm/v1",
+              "context_pack_template": "context_template/design_discussion/v1",
+              "expected_artifact_contract": "quest_pack_v1",
+              "inputs": ["quest_pack_v1"],
+              "validation_gates": ["validation.level_0_json_shape"],
+              "on_success": "stage_quest",
+              "on_failure": "request_quest_clarification"
+            },
+            {
+              "id": "step/mechanics",
+              "order": 5,
+              "title": "Add lantern repair mechanic",
+              "producer_role": "role/designer_llm/v1",
+              "context_pack_template": "context_template/design_discussion/v1",
+              "expected_artifact_contract": "mechanics_pack_v1",
+              "inputs": ["mechanics_pack_v1"],
+              "validation_gates": ["validation.level_0_json_shape"],
+              "on_success": "stage_mechanics",
+              "on_failure": "request_mechanics_clarification"
+            },
+            {
+              "id": "step/semantic",
+              "order": 6,
+              "title": "Collect sky lantern vocabulary",
+              "producer_role": "role/designer_llm/v1",
+              "context_pack_template": "context_template/design_discussion/v1",
+              "expected_artifact_contract": "semantic_pack_v1",
+              "inputs": ["semantic_pack_v1"],
+              "validation_gates": ["validation.level_0_json_shape"],
+              "on_success": "stage_semantic",
+              "on_failure": "request_semantic_clarification"
+            }
           ]
         }
         """);
