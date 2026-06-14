@@ -22,12 +22,41 @@ The page is a thin UI over the existing `GeneratorPlanPackageExportRunService` a
 
 1. Open the app.
 2. Select the `Package Export` page.
-3. Browse for a `.example.json` generator plan example.
-4. Choose an export folder.
-5. Click `Generate package`.
-6. Review status, diagnostics, and paths.
-7. Open the export folder or `package.json`.
-8. Use `Load latest run` to inspect the latest saved package export run.
+3. Choose a built-in template or browse for a manual `.example.json` generator plan example.
+4. For a built-in template, click `Use template` to create the `.example.json` file and fill the source path.
+5. Choose an export folder, or use `Export selected` to materialize the template and run the export with a default export folder.
+6. Click `Generate package` for the currently selected source example path.
+7. Review status, diagnostics, and paths.
+8. Open the export folder or `package.json`.
+9. Use `Load latest run` to inspect the latest saved package export run.
+
+## Built-in Templates
+
+The page can materialize built-in example templates from the application catalog:
+
+```text
+Sky Lantern Outpost
+Clockwork Orchard
+Storm Glass Lighthouse
+Moss Courier Trail
+Underroot Signal
+```
+
+Template files are written to:
+
+```text
+<CurrentGameFolder>/.llmgc/example-templates
+```
+
+When no current game folder is loaded, the fallback location is:
+
+```text
+%LOCALAPPDATA%/LLMGameCreator/example-templates
+```
+
+`Export selected` also fills a default export folder under `.llmgc/package-exports` for the current game folder, or `%LOCALAPPDATA%/LLMGameCreator/package-exports` when no current game folder is loaded.
+
+The manual `.example.json` browse field remains available and uses the same `Generate package` button.
 
 ## What Is Saved
 

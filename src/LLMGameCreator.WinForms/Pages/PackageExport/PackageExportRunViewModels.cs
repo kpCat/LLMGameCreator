@@ -56,3 +56,10 @@ public sealed record PackageExportDiagnosticRow
         };
     }
 }
+
+public sealed record PackageExportTemplateViewModel
+{
+    public string Id { get; init; } = string.Empty;
+    public string DisplayName { get; init; } = string.Empty;
+    public string Description { get; init; } = string.Empty;
+}

@@ -64,7 +64,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
-        _container.Register<GeneratorPlanDraftArtifactApprovalService>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratorPlanDraftArtifactApprovalService>(_ => new GeneratorPlanDraftArtifactApprovalService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalArtifactService>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalArtifactReader>(Reuse.Singleton);
         _container.Register<GeneratorPlanGamePackageAssembler>(Reuse.Singleton);
@@ -83,6 +83,8 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratorPlanPackageExportRunMarkdownRenderer>(Reuse.Singleton);
         _container.Register<GeneratorPlanPackageExportRunService>(Reuse.Singleton);
         _container.Register<GeneratorPlanPackageExportRunArtifactReader>(Reuse.Singleton);
+        _container.Register<GeneratorPlanExampleTemplateCatalog>(Reuse.Singleton);
+        _container.Register<GeneratorPlanExampleTemplateService>(Reuse.Singleton);
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
@@ -164,7 +166,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<GeneratorPlanPackageExportRunService>(),
             resolver.Resolve<GeneratorPlanPackageExportRunArtifactReader>(),
             resolver.Resolve<IDesignDatabaseInitializer>(),
-            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<GeneratorPlanExampleTemplateService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

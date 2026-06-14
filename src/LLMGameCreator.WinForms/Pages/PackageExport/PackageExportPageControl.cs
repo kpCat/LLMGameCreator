@@ -14,6 +14,7 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
     private readonly GeneratorPlanPackageExportRunArtifactReader? _runReader;
     private readonly IDesignDatabaseInitializer? _databaseInitializer;
     private readonly ICurrentGamePackageService? _currentGamePackageService;
+    private readonly GeneratorPlanExampleTemplateService? _templateService;
     private readonly PackageExportRunPresenter _presenter = new();
 
     private CancellationTokenSource? _currentOperationCts;
@@ -21,6 +22,9 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
 
     private readonly TableLayoutPanel _rootLayout = new();
     private readonly TableLayoutPanel _inputLayout = new();
+    private readonly ComboBox _templateComboBox = new();
+    private readonly Button _useTemplateButton = new();
+    private readonly Button _exportTemplateButton = new();
     private readonly TextBox _sourceExampleTextBox = new();
     private readonly TextBox _exportFolderTextBox = new();
     private readonly Button _browseExampleButton = new();
@@ -55,14 +59,17 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         GeneratorPlanPackageExportRunService runService,
         GeneratorPlanPackageExportRunArtifactReader runReader,
         IDesignDatabaseInitializer databaseInitializer,
-        ICurrentGamePackageService currentGamePackageService)
+        ICurrentGamePackageService currentGamePackageService,
+        GeneratorPlanExampleTemplateService templateService)
     {
         _runService = runService;
         _runReader = runReader;
         _databaseInitializer = databaseInitializer;
         _currentGamePackageService = currentGamePackageService;
+        _templateService = templateService;
         BuildLayout();
         WireEvents();
+        LoadTemplates();
         ApplyViewState(_currentViewState);
     }
 
@@ -98,7 +105,7 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         _rootLayout.Dock = DockStyle.Fill;
         _rootLayout.Padding = new Padding(8);
         _rootLayout.RowCount = 5;
-        _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 118F));
+        _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 158F));
         _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 176F));
         _rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 54F));
         _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
@@ -127,15 +134,17 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         _inputLayout.ColumnCount = 3;
         _inputLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
         _inputLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        _inputLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 118F));
+        _inputLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 246F));
         _inputLayout.Dock = DockStyle.Fill;
-        _inputLayout.RowCount = 3;
+        _inputLayout.RowCount = 4;
+        _inputLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
         _inputLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
         _inputLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
         _inputLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
 
-        AddInputRow(0, "Source example path:", _sourceExampleTextBox, _browseExampleButton, "Browse...");
-        AddInputRow(1, "Export folder:", _exportFolderTextBox, _browseExportFolderButton, "Browse...");
+        AddTemplateRow(0);
+        AddInputRow(1, "Source example path:", _sourceExampleTextBox, _browseExampleButton, "Browse...");
+        AddInputRow(2, "Export folder:", _exportFolderTextBox, _browseExportFolderButton, "Browse...");
 
         var buttonsPanel = new FlowLayoutPanel
         {
@@ -150,7 +159,29 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         buttonsPanel.Controls.Add(_cancelButton);
         buttonsPanel.Controls.Add(_loadLatestButton);
         _inputLayout.SetColumnSpan(buttonsPanel, 3);
-        _inputLayout.Controls.Add(buttonsPanel, 0, 2);
+        _inputLayout.Controls.Add(buttonsPanel, 0, 3);
+    }
+
+    private void AddTemplateRow(int row)
+    {
+        _inputLayout.Controls.Add(BuildLabel("Built-in template:"), 0, row);
+        _templateComboBox.Dock = DockStyle.Fill;
+        _templateComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        _templateComboBox.DisplayMember = nameof(PackageExportTemplateViewModel.DisplayName);
+        _templateComboBox.ValueMember = nameof(PackageExportTemplateViewModel.Id);
+        _inputLayout.Controls.Add(_templateComboBox, 1, row);
+
+        var buttonsPanel = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false
+        };
+        ConfigureButton(_useTemplateButton, "Use template", 106);
+        ConfigureButton(_exportTemplateButton, "Export selected", 126);
+        buttonsPanel.Controls.Add(_useTemplateButton);
+        buttonsPanel.Controls.Add(_exportTemplateButton);
+        _inputLayout.Controls.Add(buttonsPanel, 2, row);
     }
 
     private void AddInputRow(int row, string labelText, TextBox textBox, Button button, string buttonText)
@@ -284,12 +315,40 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         _browseExampleButton.Click += (_, _) => BrowseExample();
         _browseExportFolderButton.Click += (_, _) => BrowseExportFolder();
         _generateButton.Click += async (_, _) => await GeneratePackageAsync().ConfigureAwait(true);
+        _useTemplateButton.Click += async (_, _) => await UseSelectedTemplateAsync().ConfigureAwait(true);
+        _exportTemplateButton.Click += async (_, _) => await ExportSelectedTemplateAsync().ConfigureAwait(true);
         _cancelButton.Click += (_, _) => CancelCurrentOperation();
         _loadLatestButton.Click += async (_, _) => await LoadLatestRunAsync().ConfigureAwait(true);
         _openExportFolderButton.Click += (_, _) => TryOpenPath(_currentViewState.ExportFolderPath);
         _openPackageJsonButton.Click += (_, _) => TryOpenPath(_currentViewState.PackageJsonPath);
         _copyPackagePathButton.Click += (_, _) => TryCopyText(_currentViewState.PackageJsonPath);
         _copyMarkdownReportButton.Click += (_, _) => TryCopyText(_currentViewState.MarkdownReport);
+    }
+
+    private void LoadTemplates()
+    {
+        if (_templateService == null)
+        {
+            SetTemplateControlsEnabled(false);
+            return;
+        }
+
+        var templates = _templateService.ListTemplates()
+            .Select(template => new PackageExportTemplateViewModel
+            {
+                Id = template.Id,
+                DisplayName = $"{template.Title} ({template.Category})",
+                Description = template.Description
+            })
+            .ToList();
+
+        _templateComboBox.DataSource = templates;
+        SetTemplateControlsEnabled(templates.Count > 0);
+
+        if (templates.Count == 0)
+        {
+            SetStatusMessage("No built-in templates found. Manual .example.json export is still available.");
+        }
     }
 
     private void BrowseExample()
@@ -358,6 +417,63 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         }).ConfigureAwait(true);
     }
 
+    private async Task UseSelectedTemplateAsync()
+    {
+        await MaterializeSelectedTemplateAsync(generateAfterMaterialize: false).ConfigureAwait(true);
+    }
+
+    private async Task ExportSelectedTemplateAsync()
+    {
+        await MaterializeSelectedTemplateAsync(generateAfterMaterialize: true).ConfigureAwait(true);
+    }
+
+    private async Task MaterializeSelectedTemplateAsync(bool generateAfterMaterialize)
+    {
+        if (_templateService == null)
+        {
+            SetStatusMessage("Template service is not available.");
+            return;
+        }
+
+        var templateId = GetSelectedTemplateId();
+        if (string.IsNullOrWhiteSpace(templateId))
+        {
+            SetStatusMessage("Select a built-in template first.");
+            return;
+        }
+
+        var materialized = false;
+        await RunBusyAsync(async cancellationToken =>
+        {
+            var result = await _templateService.MaterializeAsync(new GeneratorPlanExampleTemplateMaterializeRequest
+            {
+                TemplateId = templateId,
+                TargetDirectory = ResolveTemplateDirectory(),
+                Overwrite = true
+            }, cancellationToken).ConfigureAwait(true);
+
+            if (!result.Ok)
+            {
+                SetStatusMessage(result.Message);
+                return;
+            }
+
+            _sourceExampleTextBox.Text = result.FilePath;
+            materialized = true;
+            if (string.IsNullOrWhiteSpace(_exportFolderTextBox.Text))
+            {
+                _exportFolderTextBox.Text = ResolveTemplateExportDirectory(templateId);
+            }
+
+            SetStatusMessage($"Template ready: {result.FilePath}");
+        }).ConfigureAwait(true);
+
+        if (generateAfterMaterialize && materialized)
+        {
+            await GeneratePackageAsync().ConfigureAwait(true);
+        }
+    }
+
     private async Task LoadLatestRunAsync()
     {
         if (_runReader == null)
@@ -424,6 +540,36 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         return Path.Combine(appData, "design.db");
     }
 
+    private string ResolveTemplateDirectory()
+    {
+        if (!string.IsNullOrWhiteSpace(_currentGamePackageService?.CurrentFolder))
+        {
+            return Path.Combine(_currentGamePackageService.CurrentFolder, ".llmgc", "example-templates");
+        }
+
+        var appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LLMGameCreator");
+        return Path.Combine(appData, "example-templates");
+    }
+
+    private string ResolveTemplateExportDirectory(string templateId)
+    {
+        var safeTemplateId = string.Join("-", templateId
+            .Trim()
+            .Split(Path.GetInvalidFileNameChars(), StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+        if (string.IsNullOrWhiteSpace(safeTemplateId))
+        {
+            safeTemplateId = "template";
+        }
+
+        if (!string.IsNullOrWhiteSpace(_currentGamePackageService?.CurrentFolder))
+        {
+            return Path.Combine(_currentGamePackageService.CurrentFolder, ".llmgc", "package-exports", safeTemplateId);
+        }
+
+        var appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LLMGameCreator");
+        return Path.Combine(appData, "package-exports", safeTemplateId);
+    }
+
     private void CancelCurrentOperation()
     {
         try
@@ -476,6 +622,7 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         _loadLatestButton.Enabled = !busy;
         _browseExampleButton.Enabled = !busy;
         _browseExportFolderButton.Enabled = !busy;
+        SetTemplateControlsEnabled(!busy && _templateComboBox.Items.Count > 0);
         RefreshActions();
     }
 
@@ -494,10 +641,30 @@ public sealed class PackageExportPageControl : UserControl, IEditorPage
         _exportFolderTextBox.Enabled = false;
         _browseExampleButton.Enabled = false;
         _browseExportFolderButton.Enabled = false;
+        _templateComboBox.Enabled = false;
+        _useTemplateButton.Enabled = false;
+        _exportTemplateButton.Enabled = false;
         _generateButton.Enabled = false;
         _cancelButton.Enabled = false;
         _loadLatestButton.Enabled = false;
         SetStatusMessage("Runtime services are not available.");
+    }
+
+    private string GetSelectedTemplateId()
+    {
+        if (_templateComboBox.SelectedItem is PackageExportTemplateViewModel template)
+        {
+            return template.Id;
+        }
+
+        return _templateComboBox.SelectedValue?.ToString() ?? string.Empty;
+    }
+
+    private void SetTemplateControlsEnabled(bool enabled)
+    {
+        _templateComboBox.Enabled = enabled;
+        _useTemplateButton.Enabled = enabled;
+        _exportTemplateButton.Enabled = enabled;
     }
 
     private void SetStatusMessage(string message)
