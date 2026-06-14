@@ -1,6 +1,7 @@
 using DryIoc;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Design;
+using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
@@ -51,7 +52,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratorPlanValidator>(Reuse.Singleton);
         _container.Register<IGeneratorPlanDraftService, GeneratorPlanDraftService>(Reuse.Singleton);
         _container.Register<IGeneratorPlanReviewService, GeneratorPlanReviewService>(Reuse.Singleton);
-        _container.Register<IGeneratorPlanPreviewService, GeneratorPlanPreviewService>(Reuse.Singleton);
+        _container.Register<IGeneratorPlanPreviewService, LLMGameCreator.Application.Design.GeneratorPlanPreviewService>(Reuse.Singleton);
         _container.Register<IGamePackagePatchService, GamePackagePatchService>(Reuse.Singleton);
         _container.Register<IGeneratorPlanPipelineService, GeneratorPlanPipelineService>(Reuse.Singleton);
         _container.Register<PrototypeLuaStaticAnalyzer>(Reuse.Singleton);
@@ -63,6 +64,25 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
+        _container.Register<GeneratorPlanDraftArtifactApprovalService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanDraftArtifactApprovalArtifactService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanDraftArtifactApprovalArtifactReader>(Reuse.Singleton);
+        _container.Register<GeneratorPlanGamePackageAssembler>(Reuse.Singleton);
+        _container.Register<GeneratorPlanGamePackageAssemblyValidator>(Reuse.Singleton);
+        _container.Register<GeneratorPlanGamePackageAssemblyMarkdownRenderer>(Reuse.Singleton);
+        _container.Register<GeneratorPlanApprovedArtifactSetReader>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratorPlanGamePackageAssemblyService>(resolver => new GeneratorPlanGamePackageAssemblyService(
+            resolver.Resolve<GeneratorPlanGamePackageAssembler>(),
+            resolver.Resolve<IGamePackageValidator>(),
+            resolver.Resolve<GeneratorPlanGamePackageAssemblyValidator>(),
+            resolver.Resolve<GeneratorPlanGamePackageAssemblyMarkdownRenderer>(),
+            resolver.Resolve<IGamePackageRepository>(),
+            resolver.Resolve<GeneratorPlanDraftArtifactApprovalArtifactReader>(),
+            resolver.Resolve<GeneratorPlanApprovedArtifactSetReader>()), Reuse.Singleton);
+        _container.Register<GeneratorPlanGamePackageAssemblyArtifactService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanPackageExportRunMarkdownRenderer>(Reuse.Singleton);
+        _container.Register<GeneratorPlanPackageExportRunService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanPackageExportRunArtifactReader>(Reuse.Singleton);
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
@@ -140,6 +160,12 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IPrototypeLuaExecutor>(),
             resolver.Resolve<IPrototypeLuaPatchArtifactService>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<PackageExportPageControl>(resolver => new PackageExportPageControl(
+            resolver.Resolve<GeneratorPlanPackageExportRunService>(),
+            resolver.Resolve<GeneratorPlanPackageExportRunArtifactReader>(),
+            resolver.Resolve<IDesignDatabaseInitializer>(),
+            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -151,6 +177,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<DashboardPageControl>(),
             resolver.Resolve<ProjectsPageControl>(),
             resolver.Resolve<GenerationPageControl>(),
+            resolver.Resolve<PackageExportPageControl>(),
             resolver.Resolve<ValidationPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),

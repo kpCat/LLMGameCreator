@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <IsPackable>false</IsPackable>
 
     <Nullable>enable</Nullable>
@@ -15,6 +16,7 @@
     <ProjectReference Include="..\..\src\LLMGameCreator.Application\LLMGameCreator.Application.csproj" />
     <ProjectReference Include="..\..\src\LLMGameCreator.Infrastructure\LLMGameCreator.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\LLMGameCreator.Scripting\LLMGameCreator.Scripting.csproj" />
+    <ProjectReference Include="..\..\src\LLMGameCreator.WinForms\LLMGameCreator.WinForms.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.2" />
