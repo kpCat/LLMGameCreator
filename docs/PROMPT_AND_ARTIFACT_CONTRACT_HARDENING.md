@@ -218,3 +218,20 @@ Output: module proposal artifact only, not trusted Lua activation.
 ## Prompt Acceptance Gate
 
 A prompt is acceptable for a Codex task only when it names the source-of-truth docs, strict non-goals, artifact contract, validation path and expected test/smoke evidence.
+
+## M4 Strict LLM Artifact Generation
+
+The M4 implementation applies the `strict_single_json_artifact` and `targeted_repair` prompt families to the first supported contracts:
+
+```text
+game_profile_v1
+scene_pack_v1
+quest_pack_v1
+mechanics_pack_v1
+```
+
+Each generation call produces exactly one contract-bound JSON object. The parser rejects Markdown fences, wrappers, invalid JSON and JSON array roots. The validator checks schema version, artifact kind, required fields, lowercase slash ids, required arrays and forbidden code/script/command fields.
+
+The repair prompt is bounded to the original contract and validation diagnostics. Valid artifacts are staged as pending Artifact Review items, and the approved artifact set remains empty until human approval.
+
+See `docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md` for the workflow, audit artifact ids and UI path.

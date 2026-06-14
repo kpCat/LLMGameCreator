@@ -66,7 +66,7 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
 
     public string Id => "artifact_review";
     public string Title => "Artifact Review";
-    public int SortOrder => 35;
+    public int SortOrder => 38;
     Control IEditorPage.View => this;
 
     public void OnActivated()

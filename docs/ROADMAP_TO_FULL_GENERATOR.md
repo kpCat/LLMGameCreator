@@ -132,6 +132,8 @@ Done criteria: one contract can be generated, validated, repaired and staged.
 
 What Codex must not decide by itself: model/provider selection or network endpoint defaults.
 
+Implementation note: the M4 first slice is documented in `docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md`. It supports `game_profile_v1`, `scene_pack_v1`, `quest_pack_v1` and `mechanics_pack_v1`, reads the latest capability selection artifact, calls `ILlmChatClient` only after an explicit Generate action, validates JSON in C#, optionally performs one bounded repair attempt, saves an audit artifact and stages valid outputs as pending Artifact Review items.
+
 ## M5 Lua Module Registry / Executor Integration
 
 Goal: run approved deterministic Lua generator modules through sandbox, manifests and validation.
