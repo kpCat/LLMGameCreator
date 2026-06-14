@@ -4,6 +4,21 @@ Purpose: reduce repeated orientation cost for Codex/LLM agents.
 
 Read this file after `AGENTS.md` when a task touches code. This file is a routing index, not a replacement for detailed docs. If this file conflicts with a more specific doc, the specific doc wins.
 
+## Full generator source-of-truth docs
+
+Read these before broad generation, capability, prompt, Lua integration, artifact-contract, roadmap or Codex-task-shaping work:
+
+| Document | Use when |
+|---|---|
+| `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Defining what full game generation means, target architecture, lifecycle, milestones and done criteria. |
+| `docs/GAME_GENERATION_CAPABILITY_MATRIX.md` | Choosing or scoping game capability domains, priorities, current status, required contracts, validators and acceptance criteria. |
+| `docs/LLM_LUA_CSHARP_RESPONSIBILITY_CONTRACT.md` | Checking C# / LLM / Lua ownership, forbidden outputs/features, promotion rules and repair boundaries. |
+| `docs/PROMPT_AND_ARTIFACT_CONTRACT_HARDENING.md` | Designing strict prompts, context packs, repair prompts, artifact envelopes and validation gates. |
+| `docs/ROADMAP_TO_FULL_GENERATOR.md` | Planning executable Codex milestones from the current vertical slice to a full generator. |
+| `docs/CODEX_EXECUTION_DOCTRINE.md` | Deciding whether a future Codex task is worth doing and what boundaries/final report it must follow. |
+
+The current one-click package export flow is a narrow vertical MVP. It proves the approved-artifact-set -> GamePackage assembly -> package export path, but it is not the full generator.
+
 ## Project map
 
 | Project / folder | Responsibility | Read when |
