@@ -42,6 +42,7 @@ public sealed record GeneratorPlanDraftArtifactApprovalItem
     public string RepairRequestId { get; init; } = string.Empty;
     public string DecisionReasonCode { get; init; } = string.Empty;
     public string DecisionComment { get; init; } = string.Empty;
+    public DateTimeOffset DecidedAtUtc { get; init; }
     public IReadOnlyList<string> ValidationIssues { get; init; } = Array.Empty<string>();
 }
 

@@ -19,6 +19,10 @@ public static class GeneratorPlanDraftArtifactApprovalDiagnosticCodes
     public const string RepairRequestedMissingReason = "generator_plan_draft_artifact_approval.repair_requested_missing_reason";
     public const string BlockedItemWithoutRepairRequest = "generator_plan_draft_artifact_approval.blocked_item_without_repair_request";
     public const string ProductionDiagnostic = "generator_plan_draft_artifact_approval.production_diagnostic";
+    public const string ReviewStagingArtifactMissing = "generator_plan_draft_artifact_review.staging_artifact_missing";
+    public const string ReviewApproveInvalidArtifact = "generator_plan_draft_artifact_review.approve_invalid_artifact";
+    public const string ReviewBlockedDecisionIgnored = "generator_plan_draft_artifact_review.blocked_decision_ignored";
+    public const string ReviewUnknownArtifactDecision = "generator_plan_draft_artifact_review.unknown_artifact_decision";
 }
 
 public static class GeneratorPlanDraftArtifactApprovalPolicy

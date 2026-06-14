@@ -80,15 +80,15 @@ Why it exists: full generation produces many artifacts and needs human review be
 
 User-visible value: user can inspect, approve, reject or request repair for generated artifacts.
 
-Required docs/code areas: approval pipeline, Design DB artifact storage, WinForms Generator Library/Artifacts pages.
+Required docs/code areas: approval pipeline, Design DB artifact storage, `docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md`, WinForms Artifact Review / Generator Library pages.
 
 Non-goals: no direct package mutation from review UI, no provider calls.
 
-Expected file scale: 4-8 files.
+Expected file scale: 8-14 files when UI, service, tests and docs are included.
 
 Acceptance tests: application service tests for decision state; UI smoke if page wiring changes.
 
-Done criteria: artifact worklist supports approved/rejected/repair states with validation rows.
+Done criteria: Artifact Review page can capture `.example.json` files for pending review, persist approved/rejected/repair decisions, rebuild the approved artifact set from approved items only, and save validation rows.
 
 What Codex must not decide by itself: which content should be auto-approved beyond explicitly valid low-risk artifacts.
 

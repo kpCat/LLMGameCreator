@@ -153,6 +153,7 @@ public sealed class GeneratorPlanDraftArtifactApprovalService
             RepairRequestId = artifact.RepairRequestId,
             DecisionReasonCode = decision?.ReasonCode.Trim() ?? string.Empty,
             DecisionComment = decision?.Comment.Trim() ?? string.Empty,
+            DecidedAtUtc = decision?.DecidedAtUtc ?? default,
             ValidationIssues = validationIssues
         };
     }

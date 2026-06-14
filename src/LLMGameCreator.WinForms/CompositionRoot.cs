@@ -64,9 +64,16 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
-        _container.RegisterDelegate<GeneratorPlanDraftArtifactApprovalService>(_ => new GeneratorPlanDraftArtifactApprovalService(), Reuse.Singleton);
+        _container.Register<GeneratorPlanDraftArtifactProductionService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
+        _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratorPlanDraftArtifactApprovalService>(resolver => new GeneratorPlanDraftArtifactApprovalService(
+            resolver.Resolve<GeneratorPlanDraftArtifactProductionService>(),
+            resolver.Resolve<GeneratorPlanDraftArtifactApprovalValidator>(),
+            resolver.Resolve<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>()), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalArtifactService>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalArtifactReader>(Reuse.Singleton);
+        _container.Register<GeneratorPlanDraftArtifactReviewService>(Reuse.Singleton);
         _container.Register<GeneratorPlanGamePackageAssembler>(Reuse.Singleton);
         _container.Register<GeneratorPlanGamePackageAssemblyValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanGamePackageAssemblyMarkdownRenderer>(Reuse.Singleton);
@@ -169,6 +176,11 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ICurrentGamePackageService>(),
             resolver.Resolve<GeneratorPlanExampleTemplateService>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<ArtifactReviewPageControl>(resolver => new ArtifactReviewPageControl(
+            resolver.Resolve<GeneratorPlanDraftArtifactReviewService>(),
+            resolver.Resolve<IDesignDatabaseInitializer>(),
+            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -181,6 +193,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ProjectsPageControl>(),
             resolver.Resolve<GenerationPageControl>(),
             resolver.Resolve<PackageExportPageControl>(),
+            resolver.Resolve<ArtifactReviewPageControl>(),
             resolver.Resolve<ValidationPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),

@@ -66,7 +66,7 @@ public sealed partial class GeneratorLibraryPageControl : UserControl, IEditorPa
 
     public string Id => "generator-library";
     public string Title => "Generator Library";
-    public int SortOrder => 35;
+    public int SortOrder => 36;
     Control IEditorPage.View => this;
 
     public async void OnActivated()
