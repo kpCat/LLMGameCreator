@@ -16,8 +16,21 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/PROMPT_AND_ARTIFACT_CONTRACT_HARDENING.md` | Designing strict prompts, context packs, repair prompts, artifact envelopes and validation gates. |
 | `docs/ROADMAP_TO_FULL_GENERATOR.md` | Planning executable Codex milestones from the current vertical slice to a full generator. |
 | `docs/CODEX_EXECUTION_DOCTRINE.md` | Deciding whether a future Codex task is worth doing and what boundaries/final report it must follow. |
+| `docs/GAME_FORM_FACTORS_AND_PRESENTATION_MODES.md` | Choosing explicit presentation modes, view models, asset modes and pseudo-3D/first-person-grid targets. |
+| `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md` | Choosing world, actor, inventory, equipment, interaction, combat, progression, pathfinding and NPC behavior ids. |
+| `docs/CHARACTER_CARD_AND_ACTOR_MODEL_CONTRACTS.md` | Planning character card, party roster and actor model profile contracts. |
+| `docs/WORLD_TOPOLOGY_AND_CHUNKING_CONTRACTS.md` | Planning finite maps, regions, first-person grid dungeons, seamless/infinite chunks and runtime chunk deltas. |
+| `docs/INTERACTION_COMBAT_PROGRESSION_VARIANTS.md` | Planning interaction, combat, progression, inventory and equipment contract families. |
 
 The current one-click package export flow is a narrow vertical MVP. It proves the approved-artifact-set -> GamePackage assembly -> package export path, but it is not the full generator.
+
+Machine-readable atlas seeds for these variant docs live under `generator-library/atlas/`:
+
+- `game_form_factor_taxonomy.json`;
+- `game_system_variant_taxonomy.json`;
+- `character_actor_contracts.json`;
+- `world_topology_contracts.json`;
+- `interaction_combat_progression_contracts.json`.
 
 ## Project map
 

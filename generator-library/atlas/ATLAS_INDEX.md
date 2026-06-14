@@ -79,6 +79,47 @@ Examples include:
 
 Optional adult/NSFW and horror/gore overlays live here as profile-selectable layers.
 
+### `game_form_factor_taxonomy.json`
+
+Machine-readable taxonomy for presentation modes, view models and asset modes.
+
+Important ids include:
+
+```text
+presentation_mode/first_person_grid_2d_textures
+presentation_mode/pseudo3d_billboard
+asset_mode/2d_billboards
+asset_mode/2d_wall_textures
+```
+
+Use it when future tasks must choose how a game is presented before generating artifacts.
+
+### `game_system_variant_taxonomy.json`
+
+Machine-readable taxonomy for world topologies, chunk streaming, actor models, inventory/equipment, interactions, combat, progression, pathfinding and NPC behavior.
+
+Use it when replacing vague genre labels with concrete variant ids such as:
+
+```text
+world_topology/seamless_chunks
+actor_model/party_blob
+inventory_model/grid_inventory
+combat_model/blobber_party_turn_based
+pathfinding/first_person_grid_movement
+```
+
+### `character_actor_contracts.json`
+
+Future data-only character card, party roster and actor model profile contracts. These contracts do not generate C# classes.
+
+### `world_topology_contracts.json`
+
+Future data-only contracts for finite maps, region graphs, first-person grid dungeons, seamless/infinite chunks and runtime chunk deltas.
+
+### `interaction_combat_progression_contracts.json`
+
+Future data-only contracts for interactions, requirements, effects, combat, encounters, abilities, statuses, progression, inventory and equipment.
+
 ### `artifact_contracts.json`
 
 Registry of named artifact contracts.
@@ -294,6 +335,11 @@ docs/GAME_PROFILE_NEGOTIATION_MAP.md
 docs/FEATURE_BUNDLE_MAP.md
 docs/GENERATOR_PLAN_MAP.md
 docs/GENERATOR_PLAN_EXAMPLES.md
+docs/GAME_FORM_FACTORS_AND_PRESENTATION_MODES.md
+docs/GAME_SYSTEM_VARIANT_TAXONOMY.md
+docs/CHARACTER_CARD_AND_ACTOR_MODEL_CONTRACTS.md
+docs/WORLD_TOPOLOGY_AND_CHUNKING_CONTRACTS.md
+docs/INTERACTION_COMBAT_PROGRESSION_VARIANTS.md
 ```
 
 ## Reading order

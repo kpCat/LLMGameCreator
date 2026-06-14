@@ -46,6 +46,32 @@ Done criteria: all required docs exist and cross-link from context index.
 
 What Codex must not decide by itself: implementation order after this pack unless asked.
 
+## M1.1 Game Form Factor And System Variant Taxonomy
+
+Goal: freeze explicit game form-factor, presentation, world, actor, inventory, combat, progression, pathfinding and NPC behavior ids before implementation-heavy features.
+
+Why it exists: future generation must not accidentally narrow to only top-down 2D adventures.
+
+User-visible value: future tasks can choose concrete taxonomy ids instead of vague requests like "make RPG".
+
+Required docs/code areas: form-factor docs, system variant taxonomy, character card contracts, world/chunk contracts, interaction/combat/progression contracts, atlas JSON seed files, capability matrix, context index.
+
+Non-goals: no production code, WinForms UI, GamePackage schema, DB schema, runtime preview, Lua execution, provider calls or built-in game templates.
+
+Expected file scale: docs and atlas JSON only.
+
+Acceptance tests: atlas JSON parses; build/test pass or clear reason if skipped; docs pass consistency and mojibake checks.
+
+Done criteria:
+
+- all major game forms have ids;
+- pseudo-3D/2D-texture mode is documented;
+- future contracts are named;
+- capability matrix references variant docs;
+- Codex tasks must choose variant ids instead of vague "make RPG".
+
+What Codex must not decide by itself: implementing runtime/export support for these variants before a separate approved task.
+
 ## M2 Artifact Review / Approval UI
 
 Goal: make artifact review and approval usable for many artifact kinds.

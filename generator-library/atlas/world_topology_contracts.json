@@ -1,0 +1,126 @@
+{
+  "schema_version": "0.1",
+  "id": "atlas/world_topology_contracts/v1",
+  "title": "World Topology And Chunking Contract Atlas",
+  "purpose": "Future data-only contracts for finite maps, region graphs, first-person grid dungeons, sector worlds, chunks and deterministic runtime deltas.",
+  "principles": [
+    "GamePackage stores seed, rules, config, refs and sparse authored overrides, not infinite generated cells.",
+    "Runtime/save state stores discovered, generated and mutated chunk deltas.",
+    "Chunk generation must be deterministic by seed, chunk coordinate and rules version.",
+    "First-person grid dungeons can use 2D wall/floor/ceiling texture refs and sprite billboards."
+  ],
+  "contracts": [
+    {
+      "id": "world_profile_v1",
+      "title": "World Profile",
+      "purpose": "Declares selected world topology, scale, presentation compatibility and generation/storage policy.",
+      "required_sections": ["id", "world_topology", "presentation_modes", "actor_models", "storage_policy"],
+      "required_validators": ["world.topology_known", "world.presentation_compatible", "world.storage_policy_valid"],
+      "promotion_target": "runtime_db_group/world_profile/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "world_scale_config_v1",
+      "title": "World Scale Config",
+      "purpose": "Defines finite, regional, chunked or infinite world scale limits.",
+      "required_sections": ["id", "scale_kind", "bounds_or_limits", "streaming_model"],
+      "required_validators": ["world.scale_valid", "world.streaming_model_known"],
+      "promotion_target": "runtime_db_group/world_profile/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "map_pack_v1",
+      "title": "Map Pack",
+      "purpose": "Finite map, grid or local layout records.",
+      "required_sections": ["id", "maps", "tile_refs", "entity_refs", "start_positions"],
+      "required_validators": ["map.bounds_valid", "map.tile_refs_valid", "map.entity_refs_valid", "map.start_valid"],
+      "promotion_target": "runtime_db_group/maps/v1",
+      "implementation_status": "partial"
+    },
+    {
+      "id": "region_graph_v1",
+      "title": "Region Graph",
+      "purpose": "Region, room or node graph with transitions and gates.",
+      "required_sections": ["id", "nodes", "edges", "transition_rules"],
+      "required_validators": ["region.node_ids_valid", "region.edge_refs_valid", "region.graph_connected"],
+      "promotion_target": "runtime_db_group/regions/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "biome_pack_v1",
+      "title": "Biome Pack",
+      "purpose": "Biome definitions, tags, transition rules and spawn/resource constraints.",
+      "required_sections": ["id", "biomes", "transition_rules", "resource_rules"],
+      "required_validators": ["biome.ids_valid", "biome.transition_valid", "biome.refs_valid"],
+      "promotion_target": "runtime_db_group/biomes/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "chunk_rule_pack_v1",
+      "title": "Chunk Rule Pack",
+      "purpose": "Deterministic chunk rules and boundary compatibility policy.",
+      "required_sections": ["id", "rules_version", "rules", "boundary_policy"],
+      "required_validators": ["chunk.rules_version_present", "chunk.boundary_compatible", "chunk.no_huge_dump"],
+      "promotion_target": "runtime_db_group/chunk_rules/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "world_chunk_config_v1",
+      "title": "World Chunk Config",
+      "purpose": "Seed, chunk size, streaming model and deterministic generator config.",
+      "required_sections": ["id", "seed", "chunk_size", "rules_version", "streaming_model"],
+      "required_validators": ["chunk.seed_valid", "chunk.size_valid", "chunk.streaming_model_known"],
+      "promotion_target": "runtime_db_group/chunk_config/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "landmark_pack_v1",
+      "title": "Landmark Pack",
+      "purpose": "Landmarks, authored anchors and generated placement constraints.",
+      "required_sections": ["id", "landmarks", "placement_rules", "refs"],
+      "required_validators": ["landmark.ids_valid", "landmark.placement_valid", "landmark.refs_valid"],
+      "promotion_target": "runtime_db_group/landmarks/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "path_network_v1",
+      "title": "Path Network",
+      "purpose": "Roads, paths, portals, waypoints and routing constraints.",
+      "required_sections": ["id", "nodes", "edges", "movement_profiles"],
+      "required_validators": ["path.node_refs_valid", "path.edge_refs_valid", "path.profile_refs_valid"],
+      "promotion_target": "runtime_db_group/path_networks/v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "reachability_report_v1",
+      "title": "Reachability Report",
+      "purpose": "Deterministic report proving or diagnosing required reachability.",
+      "required_sections": ["id", "source_artifacts", "checks", "results", "diagnostics"],
+      "required_validators": ["reachability.targets_known", "reachability.diagnostics_valid"],
+      "promotion_target": "validation_report_v1",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "runtime_chunk_delta_v1",
+      "title": "Runtime Chunk Delta",
+      "purpose": "Runtime/save-only discovered or mutated chunk state.",
+      "required_sections": ["id", "world_id", "chunk_coordinate", "rules_version", "deltas"],
+      "required_validators": ["chunk.delta_refs_valid", "chunk.delta_not_source_package"],
+      "promotion_target": "save_overlay_group/chunk_deltas/v1",
+      "implementation_status": "planned"
+    }
+  ],
+  "topology_contract_map": [
+    { "world_topology": "world_topology/single_map", "contracts": ["world_profile_v1", "map_pack_v1", "reachability_report_v1"] },
+    { "world_topology": "world_topology/multi_map", "contracts": ["world_profile_v1", "map_pack_v1", "path_network_v1", "reachability_report_v1"] },
+    { "world_topology": "world_topology/region_graph", "contracts": ["world_profile_v1", "region_graph_v1", "path_network_v1"] },
+    { "world_topology": "world_topology/overworld_plus_instances", "contracts": ["world_profile_v1", "region_graph_v1", "map_pack_v1"] },
+    { "world_topology": "world_topology/grid_dungeon", "contracts": ["world_profile_v1", "map_pack_v1", "reachability_report_v1"] },
+    { "world_topology": "world_topology/first_person_grid_dungeon", "contracts": ["world_profile_v1", "map_pack_v1", "path_network_v1", "reachability_report_v1"] },
+    { "world_topology": "world_topology/seamless_chunks", "contracts": ["world_profile_v1", "world_chunk_config_v1", "chunk_rule_pack_v1", "biome_pack_v1", "path_network_v1"] },
+    { "world_topology": "world_topology/infinite_chunks", "contracts": ["world_profile_v1", "world_chunk_config_v1", "chunk_rule_pack_v1", "runtime_chunk_delta_v1"] },
+    { "world_topology": "world_topology/sector_portal_world", "contracts": ["world_profile_v1", "path_network_v1", "map_pack_v1"] },
+    { "world_topology": "world_topology/room_graph", "contracts": ["world_profile_v1", "region_graph_v1", "map_pack_v1"] },
+    { "world_topology": "world_topology/node_map", "contracts": ["world_profile_v1", "region_graph_v1"] }
+  ]
+}

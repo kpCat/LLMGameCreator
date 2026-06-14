@@ -1,0 +1,139 @@
+{
+  "schema_version": "0.1",
+  "id": "atlas/interaction_combat_progression_contracts/v1",
+  "title": "Interaction Combat Progression Contract Atlas",
+  "purpose": "Future data-only contracts for interactions, requirements, effects, combat, encounters, abilities, statuses, progression, inventory and equipment.",
+  "principles": [
+    "Interaction effects must be data-driven and validated.",
+    "Combat and progression must not be hidden in Lua or LLM prose.",
+    "Runtime preview smoke requirements are selected by explicit variant ids.",
+    "C# owns validation, runtime actions and promotion authority."
+  ],
+  "contracts": [
+    {
+      "id": "interaction_pack_v1",
+      "title": "Interaction Pack",
+      "purpose": "Targeted inspect/talk/use/pickup/harvest/craft/build/repair/trade/trigger/location interactions.",
+      "required_sections": ["id", "interactions", "targets", "requirements", "costs", "outputs"],
+      "required_validators": ["interaction.target_refs_valid", "interaction.requirements_known", "interaction.costs_outputs_known"],
+      "variant_ids": ["interaction_model/inspect", "interaction_model/talk", "interaction_model/use", "interaction_model/pickup", "interaction_model/harvest", "interaction_model/craft", "interaction_model/build", "interaction_model/repair", "interaction_model/trade", "interaction_model/lockpick", "interaction_model/trigger", "interaction_model/enter_location"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "requirement_pack_v1",
+      "title": "Requirement Pack",
+      "purpose": "Reusable requirements for stats, skills, quest states, faction/reputation, inventory/equipment, party checks and environment checks.",
+      "required_sections": ["id", "requirements", "refs", "failure_diagnostics"],
+      "required_validators": ["requirement.refs_valid", "requirement.kind_known", "requirement.bounds_valid"],
+      "variant_ids": ["interaction_model/party_skill_check", "interaction_model/environment_skill_check"],
+      "implementation_status": "planned"
+    },
+    {
+      "id": "effect_pack_v1",
+      "title": "Effect Pack",
+      "purpose": "Data-only outputs and effects for interactions, combat, quests, reputation and progression.",
+      "required_sections": ["id", "effects", "refs", "bounds"],
+      "required_validators": ["effect.kind_known", "effect.refs_valid", "effect.bounds_valid"],
+      "variant_ids": ["interaction_model/use", "interaction_model/trigger", "interaction_model/combat_action"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "combat_pack_v1",
+      "title": "Combat Pack",
+      "purpose": "Combat model definitions, participants, rules and resolution contracts.",
+      "required_sections": ["id", "combat_model", "combat_space", "rules", "participants", "actions"],
+      "required_validators": ["combat.model_supported", "combat.space_compatible", "combat.participants_valid", "combat.no_hidden_lua_logic"],
+      "variant_ids": ["combat_model/none", "combat_model/real_time", "combat_model/turn_based", "combat_model/tactical_grid", "combat_model/active_pause", "combat_model/blobber_party_turn_based", "combat_model/jrpg_party_rows", "combat_model/action_rpg_light", "combat_model/dialogue_combat", "combat_model/auto_battler", "combat_model/encounter_card_based"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "encounter_pack_v1",
+      "title": "Encounter Pack",
+      "purpose": "Encounter definitions and transition/state metadata.",
+      "required_sections": ["id", "encounters", "participants", "space", "rewards"],
+      "required_validators": ["encounter.refs_valid", "encounter.rewards_valid", "encounter.state_valid"],
+      "variant_ids": ["combat_space/same_map", "combat_space/separate_arena", "combat_space/tactical_grid_instance", "combat_space/abstract_encounter", "combat_space/first_person_party_frontline"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "ability_pack_v1",
+      "title": "Ability Pack",
+      "purpose": "Ability definitions, costs, targets, effects and cooldowns.",
+      "required_sections": ["id", "abilities", "requirements", "costs", "outputs", "targeting"],
+      "required_validators": ["ability.refs_valid", "ability.costs_valid", "ability.targets_valid"],
+      "variant_ids": ["interaction_model/ability_use", "interaction_model/combat_action"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "status_pack_v1",
+      "title": "Status Pack",
+      "purpose": "Status effects, durations, stacking and modifiers.",
+      "required_sections": ["id", "statuses", "duration_rules", "modifiers"],
+      "required_validators": ["status.refs_valid", "status.duration_valid", "status.modifiers_valid"],
+      "variant_ids": ["combat_model/turn_based", "combat_model/tactical_grid", "combat_model/action_rpg_light"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "progression_pack_v1",
+      "title": "Progression Pack",
+      "purpose": "Level, skill, class, trainer, equipment, card and colony progression records.",
+      "required_sections": ["id", "progressions", "models", "bounds", "outputs"],
+      "required_validators": ["progression.model_supported", "progression.bounds_valid", "progression.refs_valid"],
+      "variant_ids": ["progression_model/level_xp", "progression_model/skill_use_based", "progression_model/class_tree", "progression_model/trainer_based", "progression_model/equipment_based", "progression_model/card_unlocks", "progression_model/colony_tech_progression"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "skill_tree_pack_v1",
+      "title": "Skill Tree Pack",
+      "purpose": "Perk, class, skill or research tree nodes and dependencies.",
+      "required_sections": ["id", "trees", "nodes", "edges", "unlock_rules"],
+      "required_validators": ["skill_tree.node_refs_valid", "skill_tree.no_cycles", "skill_tree.unlocks_valid"],
+      "variant_ids": ["progression_model/perk_tree", "progression_model/class_tree", "progression_model/research_tree"],
+      "implementation_status": "planned"
+    },
+    {
+      "id": "reputation_pack_v1",
+      "title": "Reputation Pack",
+      "purpose": "Reputation, faction favor and reputation-gated unlocks.",
+      "required_sections": ["id", "tracks", "factions", "thresholds", "effects"],
+      "required_validators": ["reputation.bounds_valid", "faction.refs_valid", "reputation.effects_valid"],
+      "variant_ids": ["progression_model/reputation_tracks", "progression_model/faction_favor"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "relationship_pack_v1",
+      "title": "Relationship Pack",
+      "purpose": "Relationship values, thresholds, routes and consequences.",
+      "required_sections": ["id", "relationships", "actors", "thresholds", "route_hooks"],
+      "required_validators": ["relationship.refs_valid", "relationship.bounds_valid", "relationship.route_hooks_valid"],
+      "variant_ids": ["progression_model/relationship_progression"],
+      "implementation_status": "planned"
+    },
+    {
+      "id": "inventory_pack_v1",
+      "title": "Inventory Pack",
+      "purpose": "Inventory models, owners, stacks, capacities and interaction hooks.",
+      "required_sections": ["id", "inventory_model", "inventories", "owners", "constraints"],
+      "required_validators": ["inventory.model_supported", "inventory.refs_valid", "inventory.constraints_valid"],
+      "variant_ids": ["inventory_model/list_inventory", "inventory_model/slot_inventory", "inventory_model/grid_inventory", "inventory_model/weight_limited_inventory", "inventory_model/volume_limited_inventory", "inventory_model/party_shared_inventory", "inventory_model/per_character_inventory", "inventory_model/equipment_paper_doll", "inventory_model/quickbar_inventory", "inventory_model/container_inventory", "inventory_model/stash_storage"],
+      "implementation_status": "partial"
+    },
+    {
+      "id": "equipment_pack_v1",
+      "title": "Equipment Pack",
+      "purpose": "Equipment slots, paper doll, durability, modifiers and requirements.",
+      "required_sections": ["id", "equipment_model", "slots", "rules", "requirements"],
+      "required_validators": ["equipment.model_supported", "equipment.slot_refs_valid", "equipment.requirements_valid"],
+      "variant_ids": ["equipment_model/simple_slots", "equipment_model/body_slots", "equipment_model/paper_doll", "equipment_model/weapon_sets", "equipment_model/party_equipment", "equipment_model/durability", "equipment_model/modifiers", "equipment_model/requirements"],
+      "implementation_status": "partial"
+    }
+  ],
+  "runtime_preview_smoke_requirements": [
+    { "id": "runtime_smoke/no_combat", "applies_to": ["combat_model/none"], "steps": ["load", "interact", "report_state"] },
+    { "id": "runtime_smoke/turn_based_combat", "applies_to": ["combat_model/turn_based", "combat_model/blobber_party_turn_based"], "steps": ["start_encounter", "player_action", "enemy_turn", "report_state"] },
+    { "id": "runtime_smoke/tactical_grid", "applies_to": ["combat_model/tactical_grid"], "steps": ["load_grid", "compute_reachable_cells", "execute_ability"] },
+    { "id": "runtime_smoke/dialogue_combat", "applies_to": ["combat_model/dialogue_combat"], "steps": ["start_dialogue", "choose_combat_choice", "validate_outputs"] },
+    { "id": "runtime_smoke/progression", "applies_to": ["progression_model/level_xp", "progression_model/skill_use_based", "progression_model/reputation_tracks"], "steps": ["grant_progress", "validate_bounds", "report_state"] },
+    { "id": "runtime_smoke/inventory_equipment", "applies_to": ["inventory_model/grid_inventory", "equipment_model/paper_doll", "equipment_model/durability"], "steps": ["pickup", "equip_or_use", "validate_requirements_or_durability"] }
+  ]
+}

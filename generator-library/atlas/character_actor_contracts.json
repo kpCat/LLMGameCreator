@@ -1,0 +1,169 @@
+{
+  "schema_version": "0.1",
+  "id": "atlas/character_actor_contracts/v1",
+  "title": "Character And Actor Contract Atlas",
+  "purpose": "Future data-only contracts for character cards, party rosters and actor model profiles.",
+  "principles": [
+    "Cards are data contracts, not generated C# classes.",
+    "LLM may draft cards, C# validates ids/refs/bounds, Lua may later expand approved cards into IR/config, and human approval is required for canon/player/companion/boss cards.",
+    "Mutable gameplay state belongs in runtime/save state, not immutable card contracts."
+  ],
+  "shared_fields": [
+    "identity",
+    "display_name",
+    "species",
+    "archetype",
+    "origin",
+    "role",
+    "presentation_refs",
+    "portrait_refs",
+    "sprite_refs",
+    "billboard_refs",
+    "stats",
+    "skills",
+    "traits",
+    "faction",
+    "relationships",
+    "dialogue_style",
+    "combat_role",
+    "progression_hooks",
+    "inventory_equipment",
+    "schedule_behavior",
+    "quest_hooks",
+    "semantic_memory_hooks",
+    "validation_gates",
+    "promotion_target"
+  ],
+  "contracts": [
+    {
+      "id": "character_card_v1",
+      "title": "Character Card",
+      "purpose": "Generic base card for actors, NPCs, enemies and important characters.",
+      "required_fields": ["identity", "display_name", "role", "presentation_refs", "validation_gates"],
+      "optional_fields": ["species", "archetype", "origin", "stats", "skills", "traits", "faction", "relationships", "dialogue_style", "combat_role", "progression_hooks", "inventory_equipment", "schedule_behavior", "quest_hooks", "semantic_memory_hooks"],
+      "required_validators": ["character.id_valid", "character.presentation_refs_valid", "character.no_generated_class"],
+      "promotion_target": "runtime_db_group/characters/v1",
+      "approval_policy": "Review required before canon promotion.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "player_character_card_v1",
+      "title": "Player Character Card",
+      "purpose": "Player avatar or created protagonist.",
+      "required_fields": ["identity", "display_name", "role", "stats", "progression_hooks", "inventory_equipment", "validation_gates"],
+      "optional_fields": ["species", "archetype", "origin", "portrait_refs", "sprite_refs", "billboard_refs", "relationships", "dialogue_style"],
+      "required_validators": ["character.player_card_valid", "stats.bounds_valid", "inventory.refs_valid"],
+      "promotion_target": "runtime_db_group/player_actor/v1",
+      "approval_policy": "Human approval required before player/canon promotion.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "party_member_card_v1",
+      "title": "Party Member Card",
+      "purpose": "Party member with inventory, equipment and progression hooks.",
+      "required_fields": ["identity", "display_name", "role", "stats", "skills", "combat_role", "inventory_equipment", "progression_hooks"],
+      "optional_fields": ["relationships", "dialogue_style", "quest_hooks", "semantic_memory_hooks", "portrait_refs", "sprite_refs", "billboard_refs"],
+      "required_validators": ["party.member_refs_valid", "equipment.slot_refs_valid", "combat.role_valid"],
+      "promotion_target": "runtime_db_group/party/v1",
+      "approval_policy": "Human approval required for party roster membership.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "companion_card_v1",
+      "title": "Companion Card",
+      "purpose": "Companion actor with relationship, dialogue and route hooks.",
+      "required_fields": ["identity", "display_name", "role", "relationships", "dialogue_style", "quest_hooks", "combat_role"],
+      "optional_fields": ["stats", "skills", "inventory_equipment", "schedule_behavior", "semantic_memory_hooks"],
+      "required_validators": ["companion.relationship_refs_valid", "dialogue.refs_valid", "quest.refs_valid"],
+      "promotion_target": "runtime_db_group/companions/v1",
+      "approval_policy": "Human approval required for companion canon.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "npc_card_v1",
+      "title": "NPC Card",
+      "purpose": "Non-player actor card.",
+      "required_fields": ["identity", "display_name", "role", "faction", "dialogue_style", "schedule_behavior"],
+      "optional_fields": ["stats", "skills", "traits", "relationships", "quest_hooks", "inventory_equipment"],
+      "required_validators": ["npc.refs_valid", "faction.refs_valid", "schedule.refs_valid"],
+      "promotion_target": "runtime_db_group/npcs/v1",
+      "approval_policy": "Review required when quest/faction/dialogue refs are canon.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "enemy_card_v1",
+      "title": "Enemy Card",
+      "purpose": "Enemy archetype or encounter participant card.",
+      "required_fields": ["identity", "display_name", "role", "stats", "combat_role", "progression_hooks"],
+      "optional_fields": ["faction", "traits", "sprite_refs", "billboard_refs", "quest_hooks"],
+      "required_validators": ["enemy.stats_bounds_valid", "combat.ability_refs_valid", "reward.refs_valid"],
+      "promotion_target": "runtime_db_group/enemies/v1",
+      "approval_policy": "Combat/stat bounds validation required.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "boss_card_v1",
+      "title": "Boss Card",
+      "purpose": "Important enemy with narrative and combat significance.",
+      "required_fields": ["identity", "display_name", "role", "stats", "combat_role", "quest_hooks", "dialogue_style"],
+      "optional_fields": ["faction", "relationships", "semantic_memory_hooks", "billboard_refs", "portrait_refs"],
+      "required_validators": ["boss.combat_bounds_valid", "boss.quest_refs_valid", "boss.approval_required"],
+      "promotion_target": "runtime_db_group/bosses/v1",
+      "approval_policy": "Human approval required.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "vendor_card_v1",
+      "title": "Vendor Card",
+      "purpose": "Merchant or service NPC.",
+      "required_fields": ["identity", "display_name", "role", "faction", "inventory_equipment", "schedule_behavior"],
+      "optional_fields": ["dialogue_style", "relationships", "quest_hooks"],
+      "required_validators": ["vendor.inventory_refs_valid", "transaction.refs_valid", "faction.refs_valid"],
+      "promotion_target": "runtime_db_group/vendors/v1",
+      "approval_policy": "Inventory, transaction and faction refs validation required.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "faction_leader_card_v1",
+      "title": "Faction Leader Card",
+      "purpose": "Leader tied to faction, politics or reputation state.",
+      "required_fields": ["identity", "display_name", "role", "faction", "relationships", "dialogue_style", "quest_hooks"],
+      "optional_fields": ["stats", "skills", "combat_role", "semantic_memory_hooks"],
+      "required_validators": ["faction.leader_refs_valid", "relationship.refs_valid", "approval.required"],
+      "promotion_target": "runtime_db_group/factions/v1",
+      "approval_policy": "Human approval required.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "party_roster_v1",
+      "title": "Party Roster",
+      "purpose": "Party composition, formation, shared inventory and active members.",
+      "required_fields": ["identity", "actor_model", "members", "formation", "inventory_model"],
+      "optional_fields": ["shared_inventory", "frontline", "backline", "relationship_rules"],
+      "required_validators": ["party.member_ids_valid", "party.formation_valid", "party.inventory_refs_valid"],
+      "promotion_target": "runtime_db_group/party/v1",
+      "approval_policy": "Party compatibility validation required.",
+      "implementation_status": "planned"
+    },
+    {
+      "id": "actor_model_profile_v1",
+      "title": "Actor Model Profile",
+      "purpose": "Declares how actors are controlled and represented.",
+      "required_fields": ["identity", "actor_model_id", "controller_rules", "presentation_mode", "world_topologies", "combat_models"],
+      "optional_fields": ["inventory_models", "equipment_models", "pathfinding_profiles", "npc_behavior_profiles"],
+      "required_validators": ["actor_model.id_known", "actor_model.compatibility_valid", "presentation.refs_valid"],
+      "promotion_target": "runtime_db_group/actor_models/v1",
+      "approval_policy": "Compatibility review required with presentation/world/combat ids.",
+      "implementation_status": "planned"
+    }
+  ],
+  "actor_models": [
+    { "id": "actor_model/single_player_character", "required_contracts": ["player_character_card_v1"], "recommended_contracts": ["npc_card_v1", "companion_card_v1"] },
+    { "id": "actor_model/party_blob", "required_contracts": ["party_roster_v1", "party_member_card_v1"], "recommended_contracts": ["companion_card_v1"] },
+    { "id": "actor_model/party_individuals", "required_contracts": ["party_roster_v1", "party_member_card_v1"], "recommended_contracts": ["companion_card_v1"] },
+    { "id": "actor_model/controllable_squad", "required_contracts": ["actor_model_profile_v1", "character_card_v1"], "recommended_contracts": ["enemy_card_v1"] },
+    { "id": "actor_model/colony_population", "required_contracts": ["actor_model_profile_v1", "npc_card_v1"], "recommended_contracts": ["vendor_card_v1"] },
+    { "id": "actor_model/vehicle_or_ship", "required_contracts": ["actor_model_profile_v1"], "recommended_contracts": ["party_roster_v1"] },
+    { "id": "actor_model/god_controller", "required_contracts": ["actor_model_profile_v1"], "recommended_contracts": [] }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "0.1",
+  "id": "atlas/game_form_factor_taxonomy/v1",
+  "title": "Game Form Factor Taxonomy",
+  "purpose": "Data-only taxonomy for presentation modes, view models and asset modes. It does not execute Lua, mutate GamePackage, call providers or generate runtime code.",
+  "presentation_modes": [
+    {
+      "id": "presentation_mode/top_down_2d",
+      "title": "Top-Down 2D",
+      "purpose": "Orthographic map-centered 2D exploration and interaction.",
+      "allowed_world_topologies": ["world_topology/single_map", "world_topology/multi_map", "world_topology/seamless_chunks", "world_topology/room_graph"],
+      "recommended_actor_models": ["actor_model/single_player_character", "actor_model/party_individuals", "actor_model/controllable_squad"],
+      "recommended_combat_models": ["combat_model/none", "combat_model/real_time", "combat_model/turn_based", "combat_model/action_rpg_light"],
+      "required_artifact_contracts": ["map_pack_v1", "entity_pack_v1", "interaction_pack_v1"],
+      "required_validators": ["map.bounds_valid", "entity.refs_valid", "interaction.target_refs_valid"],
+      "runtime_implications": ["Requires tile/sprite refs, collision data and interaction targets."],
+      "non_goals": ["Does not imply final media generation."]
+    },
+    {
+      "id": "presentation_mode/side_view_2d",
+      "title": "Side-View 2D",
+      "purpose": "Side-view scene or platform-style presentation.",
+      "allowed_world_topologies": ["world_topology/single_map", "world_topology/multi_map", "world_topology/room_graph"],
+      "recommended_actor_models": ["actor_model/single_player_character", "actor_model/party_individuals"],
+      "recommended_combat_models": ["combat_model/real_time", "combat_model/action_rpg_light", "combat_model/turn_based"],
+      "required_artifact_contracts": ["map_pack_v1", "entity_pack_v1", "ability_pack_v1"],
+      "required_validators": ["map.layers_valid", "entity.sprite_refs_valid", "ability.refs_valid"],
+      "runtime_implications": ["Requires side-view layer and interaction-zone export support later."],
+      "non_goals": ["Does not add a side-view runtime in this task."]
+    },
+    {
+      "id": "presentation_mode/isometric_2d",
+      "title": "Isometric 2D",
+      "purpose": "Projected 2D/isometric maps for tactical, RPG, city or colony views.",
+      "allowed_world_topologies": ["world_topology/single_map", "world_topology/region_graph", "world_topology/seamless_chunks"],
+      "recommended_actor_models": ["actor_model/party_individuals", "actor_model/controllable_squad", "actor_model/colony_population"],
+      "recommended_combat_models": ["combat_model/tactical_grid", "combat_model/real_time", "combat_model/active_pause"],
+      "required_artifact_contracts": ["map_pack_v1", "path_network_v1", "combat_pack_v1"],
+      "required_validators": ["map.projection_valid", "pathfinding.refs_valid", "combat.space_compatible"],
+      "runtime_implications": ["Needs projection-aware coordinates and sort-layer metadata."],
+      "non_goals": ["Does not implement an isometric renderer."]
+    },
+    {
+      "id": "presentation_mode/tactical_grid_2d",
+      "title": "Tactical Grid 2D",
+      "purpose": "Grid/board combat or squad tactics.",
+      "allowed_world_topologies": ["world_topology/single_map", "world_topology/room_graph", "world_topology/overworld_plus_instances"],
+      "recommended_actor_models": ["actor_model/controllable_squad", "actor_model/party_individuals"],
+      "recommended_combat_models": ["combat_model/tactical_grid", "combat_model/turn_based"],
+      "required_artifact_contracts": ["combat_pack_v1", "encounter_pack_v1", "ability_pack_v1", "status_pack_v1"],
+      "required_validators": ["combat.grid_valid", "combat.range_valid", "combat.turn_order_valid"],
+      "runtime_implications": ["Requires tactical UI IR and path preview support later."],
+      "non_goals": ["Does not add tactical AI implementation."]
+    },
+    {
+      "id": "presentation_mode/first_person_grid_2d_textures",
+      "title": "First-Person Grid From 2D Textures",
+      "purpose": "Dungeon crawler/blobber style view using grid cells, facing, wall textures and billboard actors.",
+      "allowed_world_topologies": ["world_topology/grid_dungeon", "world_topology/first_person_grid_dungeon", "world_topology/overworld_plus_instances", "world_topology/region_graph"],
+      "recommended_actor_models": ["actor_model/party_blob", "actor_model/single_player_character"],
+      "recommended_combat_models": ["combat_model/blobber_party_turn_based", "combat_model/turn_based", "combat_model/jrpg_party_rows"],
+      "required_artifact_contracts": ["world_profile_v1", "map_pack_v1", "character_card_v1", "party_roster_v1", "combat_pack_v1"],
+      "required_validators": ["world.first_person_grid_refs_valid", "world.grid_reachability", "party.roster_valid", "combat.frontline_valid"],
+      "runtime_implications": ["Future runtime may render a 3D-like view from 2D wall/floor/ceiling texture refs and sprite billboards."],
+      "non_goals": ["Does not require 3D models.", "Does not store Unity scene objects in GamePackage."]
+    },
+    {
+      "id": "presentation_mode/pseudo3d_billboard",
+      "title": "Pseudo-3D Billboard",
+      "purpose": "3D-like presentation built from 2D sprites, billboards and texture refs.",
+      "allowed_world_topologies": ["world_topology/sector_portal_world", "world_topology/seamless_chunks", "world_topology/region_graph"],
+      "recommended_actor_models": ["actor_model/single_player_character", "actor_model/party_blob", "actor_model/party_individuals"],
+      "recommended_combat_models": ["combat_model/real_time", "combat_model/active_pause", "combat_model/blobber_party_turn_based"],
+      "required_artifact_contracts": ["world_profile_v1", "asset_request_pack_v1", "unity_ir_v1", "path_network_v1"],
+      "required_validators": ["asset.billboard_refs_valid", "world.sector_refs_valid", "pathfinding.refs_valid"],
+      "runtime_implications": ["Future export target maps 2D billboards into a pseudo-3D runtime shell."],
+      "non_goals": ["Does not call media providers.", "Does not generate 3D meshes."]
+    },
+    {
+      "id": "presentation_mode/first_person_free_billboard",
+      "title": "First-Person Free Billboard",
+      "purpose": "Free first-person navigation with 2D billboard actors and texture refs.",
+      "allowed_world_topologies": ["world_topology/sector_portal_world", "world_topology/seamless_chunks"],
+      "recommended_actor_models": ["actor_model/single_player_character", "actor_model/party_blob"],
+      "recommended_combat_models": ["combat_model/real_time", "combat_model/active_pause"],
+      "required_artifact_contracts": ["world_chunk_config_v1", "path_network_v1", "interaction_pack_v1"],
+      "required_validators": ["world.sector_reachability", "asset.billboard_refs_valid", "interaction.target_refs_valid"],
+      "runtime_implications": ["Requires future free-navigation adapter and collision data contracts."],
+      "non_goals": ["Does not implement an FPS runtime."]
+    },
+    {
+      "id": "presentation_mode/ui_only_text_rpg",
+      "title": "UI-Only Text RPG",
+      "purpose": "Text, menu, card and dialogue driven game without map rendering requirement.",
+      "allowed_world_topologies": ["world_topology/node_map", "world_topology/region_graph", "world_topology/room_graph"],
+      "recommended_actor_models": ["actor_model/single_player_character", "actor_model/party_blob", "actor_model/god_controller"],
+      "recommended_combat_models": ["combat_model/none", "combat_model/dialogue_combat", "combat_model/encounter_card_based"],
+      "required_artifact_contracts": ["dialogue_pack_v1", "character_card_v1", "interaction_pack_v1", "progression_pack_v1"],
+      "required_validators": ["dialogue.graph_valid", "character.card_refs_valid", "effect.refs_valid"],
+      "runtime_implications": ["Can run with minimal media and strong card/dialogue review surfaces."],
+      "non_goals": ["Does not make LLM a runtime authority."]
+    },
+    {
+      "id": "presentation_mode/map_and_panel_rpg",
+      "title": "Map And Panel RPG",
+      "purpose": "Map navigation combined with character, party, inventory, dialogue and encounter panels.",
+      "allowed_world_topologies": ["world_topology/region_graph", "world_topology/overworld_plus_instances", "world_topology/seamless_chunks"],
+      "recommended_actor_models": ["actor_model/party_blob", "actor_model/party_individuals", "actor_model/vehicle_or_ship"],
+      "recommended_combat_models": ["combat_model/blobber_party_turn_based", "combat_model/jrpg_party_rows", "combat_model/tactical_grid"],
+      "required_artifact_contracts": ["world_profile_v1", "party_roster_v1", "character_card_v1", "inventory_pack_v1", "equipment_pack_v1"],
+      "required_validators": ["region.refs_valid", "party.roster_valid", "inventory.refs_valid", "combat.encounter_refs_valid"],
+      "runtime_implications": ["Requires map navigation plus data-driven panel/card UI IR later."],
+      "non_goals": ["Does not hardcode one party UI."]
+    }
+  ],
+  "asset_modes": [
+    { "id": "asset_mode/no_media_placeholders", "title": "No Media Placeholders", "purpose": "Supports text/data prototypes with fallback labels or ids." },
+    { "id": "asset_mode/2d_tiles", "title": "2D Tiles", "purpose": "Tile/terrain refs for map and chunk layouts." },
+    { "id": "asset_mode/2d_sprites", "title": "2D Sprites", "purpose": "Actor, item and object sprite refs." },
+    { "id": "asset_mode/2d_billboards", "title": "2D Billboards", "purpose": "Sprite refs projected in pseudo-3D/first-person views." },
+    { "id": "asset_mode/2d_wall_textures", "title": "2D Wall Textures", "purpose": "Wall, floor and ceiling texture refs for first-person grid or sector worlds." },
+    { "id": "asset_mode/portrait_cards", "title": "Portrait Cards", "purpose": "Character, NPC, enemy, party and faction portrait/card refs." },
+    { "id": "asset_mode/generated_media_requests_only", "title": "Generated Media Requests Only", "purpose": "Records future media requests without producing media." },
+    { "id": "asset_mode/3d_models_later", "title": "3D Models Later", "purpose": "Allows future 3D model refs without making them required now." }
+  ],
+  "view_models": [
+    { "id": "view_model/map_orthographic", "title": "Map Orthographic", "purpose": "Top-down or map-panel view." },
+    { "id": "view_model/side_view", "title": "Side View", "purpose": "Side-view scene or traversal." },
+    { "id": "view_model/isometric_projection", "title": "Isometric Projection", "purpose": "Projected tile/grid view." },
+    { "id": "view_model/tactical_board", "title": "Tactical Board", "purpose": "Grid-based turn and action planning." },
+    { "id": "view_model/first_person_grid", "title": "First-Person Grid", "purpose": "Step/facing movement on grid cells." },
+    { "id": "view_model/pseudo3d_billboard", "title": "Pseudo-3D Billboard", "purpose": "3D-like view from 2D sprites/textures." },
+    { "id": "view_model/ui_text_panel", "title": "UI Text Panel", "purpose": "Text/menu/card driven presentation." }
+  ],
+  "rules": [
+    "Every game profile must choose explicit presentation, world topology, actor, inventory, combat, progression, pathfinding and NPC behavior ids.",
+    "Pseudo-3D from 2D assets is a first-class future target and must not require generated 3D models.",
+    "GamePackage stores data/contracts/refs, not Unity scene objects.",
+    "Media generation is outside this atlas; media request records and fallback ids are allowed."
+  ]
+}
