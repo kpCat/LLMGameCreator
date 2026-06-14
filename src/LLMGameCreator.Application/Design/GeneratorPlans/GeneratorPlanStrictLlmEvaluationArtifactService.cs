@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace LLMGameCreator.Application.Design.GeneratorPlans;
 
-public sealed class GeneratorPlanStrictLlmArtifactGenerationArtifactService
+public sealed class GeneratorPlanStrictLlmEvaluationArtifactService
 {
     internal static readonly GeneratedArtifactRecord EmptyArtifact = new(
         string.Empty,
@@ -25,74 +25,87 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationArtifactService
 
     private readonly IGeneratedArtifactRepository _artifactRepository;
 
-    public GeneratorPlanStrictLlmArtifactGenerationArtifactService(IGeneratedArtifactRepository artifactRepository)
+    public GeneratorPlanStrictLlmEvaluationArtifactService(IGeneratedArtifactRepository artifactRepository)
     {
         _artifactRepository = artifactRepository;
     }
 
-    public async Task<GeneratorPlanStrictLlmArtifactGenerationArtifactSaveResult> SaveAsync(
-        GeneratorPlanStrictLlmArtifactGenerationResult result,
+    public async Task<GeneratorPlanStrictLlmEvaluationArtifactSaveResult> SaveAsync(
+        GeneratorPlanStrictLlmEvaluationResult result,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(result);
 
-        var artifact = BuildArtifact(result);
-        var validationResults = ToValidationResults(artifact.Id, result.Diagnostics);
+        var evaluationArtifact = BuildEvaluationArtifact(result);
+        var markdownArtifact = BuildMarkdownArtifact(result);
+        var validationResults = ToValidationResults(evaluationArtifact.Id, result.Diagnostics);
 
-        await _artifactRepository.SaveGeneratedArtifactAsync(artifact, cancellationToken).ConfigureAwait(false);
-        await _artifactRepository.SaveValidationResultsAsync(artifact.Id, validationResults, cancellationToken).ConfigureAwait(false);
+        await _artifactRepository.SaveGeneratedArtifactAsync(evaluationArtifact, cancellationToken).ConfigureAwait(false);
+        await _artifactRepository.SaveValidationResultsAsync(evaluationArtifact.Id, validationResults, cancellationToken).ConfigureAwait(false);
 
-        return new GeneratorPlanStrictLlmArtifactGenerationArtifactSaveResult
+        if (markdownArtifact != null)
         {
-            GenerationArtifact = artifact,
+            await _artifactRepository.SaveGeneratedArtifactAsync(markdownArtifact, cancellationToken).ConfigureAwait(false);
+        }
+
+        return new GeneratorPlanStrictLlmEvaluationArtifactSaveResult
+        {
+            EvaluationArtifact = evaluationArtifact,
+            MarkdownArtifact = markdownArtifact,
             ValidationResults = validationResults
         };
     }
 
-    private static GeneratedArtifactRecord BuildArtifact(GeneratorPlanStrictLlmArtifactGenerationResult result)
+    private static GeneratedArtifactRecord BuildEvaluationArtifact(GeneratorPlanStrictLlmEvaluationResult result)
     {
-        var json = JsonSerializer.Serialize(new
-        {
-            generatedAtUtc = result.GeneratedAtUtc,
-            ok = result.Ok,
-            status = result.Status,
-            sourceCapabilitySelectionId = result.SourceCapabilitySelectionId,
-            requestedContractIds = result.RequestedContractIds,
-            generatedArtifacts = result.Artifacts.Select(artifact => new
-            {
-                artifact.ArtifactId,
-                artifact.ArtifactKind,
-                artifact.ExpectedArtifactContract,
-                artifact.ContentJson,
-                artifact.Valid,
-                artifact.Repaired,
-                artifact.RequiresHumanApproval
-            }).ToList(),
-            attempts = result.Attempts,
-            diagnostics = result.Diagnostics
-        }, JsonOptions);
-
+        var json = JsonSerializer.Serialize(result, JsonOptions);
         return new GeneratedArtifactRecord(
-            GeneratorPlanStrictLlmArtifactGenerationArtifactIds.GenerationArtifactId,
-            GeneratorPlanStrictLlmArtifactGenerationArtifactIds.GenerationArtifactKind,
-            GeneratorPlanStrictLlmArtifactGenerationArtifactIds.GenerationArtifactPath,
+            GeneratorPlanStrictLlmEvaluationArtifactIds.EvaluationArtifactId,
+            GeneratorPlanStrictLlmEvaluationArtifactIds.EvaluationArtifactKind,
+            GeneratorPlanStrictLlmEvaluationArtifactIds.EvaluationArtifactPath,
             json,
-            GeneratorPlanStrictLlmArtifactGenerationArtifactIds.GeneratedBy,
+            GeneratorPlanStrictLlmEvaluationArtifactIds.GeneratedBy,
             ToValidationState(result.Diagnostics),
             BuildMetadataJson(result));
     }
 
-    private static string BuildMetadataJson(GeneratorPlanStrictLlmArtifactGenerationResult result)
+    private static GeneratedArtifactRecord? BuildMarkdownArtifact(GeneratorPlanStrictLlmEvaluationResult result)
+    {
+        if (string.IsNullOrWhiteSpace(result.MarkdownReport))
+        {
+            return null;
+        }
+
+        var json = JsonSerializer.Serialize(new
+        {
+            result.EvaluatedAtUtc,
+            Markdown = result.MarkdownReport
+        }, JsonOptions);
+
+        return new GeneratedArtifactRecord(
+            GeneratorPlanStrictLlmEvaluationArtifactIds.MarkdownArtifactId,
+            GeneratorPlanStrictLlmEvaluationArtifactIds.MarkdownArtifactKind,
+            GeneratorPlanStrictLlmEvaluationArtifactIds.MarkdownArtifactPath,
+            json,
+            GeneratorPlanStrictLlmEvaluationArtifactIds.GeneratedBy,
+            ToValidationState(result.Diagnostics),
+            BuildMetadataJson(result));
+    }
+
+    private static string BuildMetadataJson(GeneratorPlanStrictLlmEvaluationResult result)
     {
         return JsonSerializer.Serialize(new
         {
-            result.GeneratedAtUtc,
+            result.EvaluationId,
+            result.EvaluatedAtUtc,
             result.Status,
+            result.Mode,
             result.SourceCapabilitySelectionId,
             RequestedContractCount = result.RequestedContractIds.Count,
-            ArtifactCount = result.Artifacts.Count,
-            ValidArtifactCount = result.Artifacts.Count(artifact => artifact.Valid),
-            RepairedArtifactCount = result.Artifacts.Count(artifact => artifact.Repaired),
+            result.Summary.TotalGenerationRuns,
+            result.Summary.ValidArtifactCount,
+            result.Summary.FailedCount,
+            result.Summary.OverallPassRate,
             ErrorCount = result.Diagnostics.Count(diagnostic => diagnostic.Severity == GeneratorPlanPreviewDiagnosticSeverity.Error),
             WarningCount = result.Diagnostics.Count(diagnostic => diagnostic.Severity == GeneratorPlanPreviewDiagnosticSeverity.Warning)
         }, JsonOptions);
@@ -104,7 +117,7 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationArtifactService
     {
         return diagnostics
             .Where(diagnostic => diagnostic.Severity is GeneratorPlanPreviewDiagnosticSeverity.Error or GeneratorPlanPreviewDiagnosticSeverity.Warning)
-            .OrderBy(diagnostic => SeverityOrder(diagnostic.Severity))
+            .OrderBy(diagnostic => GeneratorPlanStrictLlmEvaluationMarkdownRenderer.SeverityOrder(diagnostic.Severity))
             .ThenBy(diagnostic => diagnostic.Code, StringComparer.OrdinalIgnoreCase)
             .ThenBy(diagnostic => diagnostic.ContractId, StringComparer.OrdinalIgnoreCase)
             .ThenBy(diagnostic => diagnostic.Target, StringComparer.OrdinalIgnoreCase)
@@ -134,17 +147,6 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationArtifactService
         return diagnostics.Any(diagnostic => diagnostic.Severity == GeneratorPlanPreviewDiagnosticSeverity.Warning)
             ? GeneratorPlanDraftArtifactApprovalValidationState.Warnings
             : GeneratorPlanDraftArtifactApprovalValidationState.Valid;
-    }
-
-    private static int SeverityOrder(string severity)
-    {
-        return severity switch
-        {
-            GeneratorPlanPreviewDiagnosticSeverity.Error => 0,
-            GeneratorPlanPreviewDiagnosticSeverity.Warning => 1,
-            GeneratorPlanPreviewDiagnosticSeverity.Info => 2,
-            _ => 3
-        };
     }
 
     private static string StableId(params string[] parts)

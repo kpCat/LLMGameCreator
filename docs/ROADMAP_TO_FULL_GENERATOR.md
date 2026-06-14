@@ -134,6 +134,26 @@ What Codex must not decide by itself: model/provider selection or network endpoi
 
 Implementation note: the M4 first slice is documented in `docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md`. It supports `game_profile_v1`, `scene_pack_v1`, `quest_pack_v1` and `mechanics_pack_v1`, reads the latest capability selection artifact, calls `ILlmChatClient` only after an explicit Generate action, validates JSON in C#, optionally performs one bounded repair attempt, saves an audit artifact and stages valid outputs as pending Artifact Review items.
 
+## M4.1 Strict LLM Generation Evaluation Pack
+
+Goal: measure real strict LLM generation quality before expanding contracts, Lua generation or package assembly coverage.
+
+Why it exists: M4 proves a safe entrypoint, but the product still needs pass rates, repair recovery rates, repeated diagnostic hot spots and content quality warnings before trusting broader generation.
+
+User-visible value: user can evaluate the latest strict generation audit without an LLM call, or run a small explicit batch and inspect metrics, samples and recommendations in `LLM Evaluation`.
+
+Required docs/code areas: `docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md`, strict LLM generation audit reader, generated artifacts, validation results, WinForms `LLM Evaluation` page.
+
+Non-goals: no Lua execution, no GamePackage mutation, no package export, no runtime preview, no provider call outside an explicit batch run, no DB schema change.
+
+Expected file scale: 8-14 files when service, artifact persistence, markdown, UI, tests and docs are included.
+
+Acceptance tests: latest-audit missing/result metrics, diagnostic grouping, quality warnings, fake-LLM batch, no staging by default, explicit staging when requested, artifact readback, markdown recommendations and presenter mapping.
+
+Done criteria: evaluation JSON and markdown report are persisted, expected call count is visible before batch runs, tests use fake `ILlmChatClient`, and evaluation failures remain metrics rather than package mutations.
+
+What Codex must not decide by itself: expanding artifact contracts or enabling Lua based only on one good model sample.
+
 ## M5 Lua Module Registry / Executor Integration
 
 Goal: run approved deterministic Lua generator modules through sandbox, manifests and validation.

@@ -68,6 +68,7 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationArtifactReader
                     ArtifactId = artifact.ArtifactId,
                     ArtifactKind = artifact.ArtifactKind,
                     ExpectedArtifactContract = artifact.ExpectedArtifactContract,
+                    ContentJson = string.IsNullOrWhiteSpace(artifact.ContentJson) ? "{}" : artifact.ContentJson,
                     Valid = artifact.Valid,
                     Repaired = artifact.Repaired,
                     RequiresHumanApproval = artifact.RequiresHumanApproval
@@ -99,6 +100,7 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationArtifactReader
         public string ArtifactId { get; init; } = string.Empty;
         public string ArtifactKind { get; init; } = string.Empty;
         public string ExpectedArtifactContract { get; init; } = string.Empty;
+        public string ContentJson { get; init; } = "{}";
         public bool Valid { get; init; }
         public bool Repaired { get; init; }
         public bool RequiresHumanApproval { get; init; }

@@ -104,6 +104,10 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratorPlanStrictLlmArtifactGenerationArtifactService>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactGenerationArtifactReader>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactGenerationService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanStrictLlmEvaluationMarkdownRenderer>(Reuse.Singleton);
+        _container.Register<GeneratorPlanStrictLlmEvaluationArtifactService>(Reuse.Singleton);
+        _container.Register<GeneratorPlanStrictLlmEvaluationArtifactReader>(Reuse.Singleton);
+        _container.Register<GeneratorPlanStrictLlmEvaluationService>(Reuse.Singleton);
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
@@ -209,6 +213,15 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IDesignDatabaseInitializer>(),
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<StrictLlmEvaluationPageControl>(resolver => new StrictLlmEvaluationPageControl(
+            resolver.Resolve<IAppSettingsRepository>(),
+            resolver.Resolve<GeneratorPlanStrictLlmArtifactContractCatalog>(),
+            resolver.Resolve<GeneratorPlanStrictLlmArtifactGenerationArtifactReader>(),
+            resolver.Resolve<GeneratorPlanStrictLlmEvaluationService>(),
+            resolver.Resolve<GeneratorPlanStrictLlmEvaluationArtifactReader>(),
+            resolver.Resolve<IDesignDatabaseInitializer>(),
+            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -223,6 +236,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<PackageExportPageControl>(),
             resolver.Resolve<CapabilityPickerPageControl>(),
             resolver.Resolve<StrictLlmArtifactsPageControl>(),
+            resolver.Resolve<StrictLlmEvaluationPageControl>(),
             resolver.Resolve<ArtifactReviewPageControl>(),
             resolver.Resolve<ValidationPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),

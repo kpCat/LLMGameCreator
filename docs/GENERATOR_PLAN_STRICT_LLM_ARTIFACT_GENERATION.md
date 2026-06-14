@@ -110,6 +110,8 @@ The audit includes generation time, status, source capability selection id, requ
 
 When `Generation.SaveEveryRequest` is true, prompt and response text are included in attempt metadata. API keys and secrets are not stored in prompts or artifacts.
 
+M4.1 evaluation reads this latest audit artifact to compute pass rates, repair recovery rates, repeated diagnostic codes and deterministic quality warnings. The audit stores generated artifact `content_json` so evaluation can inspect title, description, tags and `source_context` without reading prompts or secrets.
+
 ## Review Staging
 
 Valid artifacts can be staged immediately for the existing Artifact Review UI:
@@ -139,6 +141,8 @@ Typical flow:
 7. Open Artifact Review to approve, reject or request repair.
 
 The page does not call the LLM on startup or activation. Prompt preview does not call the LLM.
+
+The companion `LLM Evaluation` page can evaluate the latest audit without any LLM call or run a small explicit batch through this same strict generation service. Batch evaluation is disabled by default until the user selects batch mode, a profile and contracts.
 
 ## Boundaries
 

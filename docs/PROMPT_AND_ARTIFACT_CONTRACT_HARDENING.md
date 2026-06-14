@@ -235,3 +235,16 @@ Each generation call produces exactly one contract-bound JSON object. The parser
 The repair prompt is bounded to the original contract and validation diagnostics. Valid artifacts are staged as pending Artifact Review items, and the approved artifact set remains empty until human approval.
 
 See `docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md` for the workflow, audit artifact ids and UI path.
+
+## M4.1 Strict LLM Generation Evaluation
+
+M4.1 adds a measurement gate before expanding prompt contracts or Lua generation.
+
+Evaluation supports two modes:
+
+- latest-audit evaluation, which reads the saved strict generation audit and makes no LLM call;
+- explicit batch evaluation, which is user-triggered and calls the existing strict generation service with selected contracts and bounded iterations.
+
+The evaluator reports pass, repair and fail rates, diagnostic hot spots and quality warnings. Quality warnings are deterministic and non-authoritative; they highlight generic text, short descriptions, empty mechanics tags, missing `source_context`, selected-variant mismatch and repeated titles.
+
+Future prompt hardening should use these metrics before changing schemas, adding repair rules or expanding contracts. Tests for this layer must use fake `ILlmChatClient` implementations and must not call a real provider.
