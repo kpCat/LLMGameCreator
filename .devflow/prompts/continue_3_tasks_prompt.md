@@ -14,3 +14,11 @@
 - ты не меняешь schema/dependency/runtime boundary.
 
 Если любое условие не выполнено — остановись.
+
+
+Additional context-budget rule:
+
+- For each task, read only the task's required docs and at most one phase plan file.
+- Do not carry unrelated phase details into the next task.
+- If the next task requires a different phase plan, stop unless explicitly allowed to continue.
+- Every completed task must satisfy `.devflow/DEFINITION_OF_DONE.md`.

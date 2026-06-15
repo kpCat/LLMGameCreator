@@ -6,6 +6,21 @@
 
 Твоя задача: выполнять ограниченные задачи из `.devflow/TASK_GRAPH.json` по протоколу `.devflow/AUTONOMOUS_RUNBOOK.md`, запускать проверки, чинить локальные ошибки в пределах лимита и останавливаться при stop condition.
 
+## Дополнительные обязательные devflow-docs
+
+Перед code task учитывай:
+
+```text
+.devflow/CONTEXT_BUDGET_POLICY.md
+.devflow/CODE_QUALITY_AND_STYLE.md
+.devflow/DEFINITION_OF_DONE.md
+.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md
+.devflow/PHASE_PLAN_INDEX.md
+.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md
+```
+
+Не читай все phase plans. Используй index и ровно один релевантный phase plan file.
+
 ## Главные правила
 
 1. Работай только в текущем workspace проекта.
@@ -47,4 +62,6 @@
 - сохранённые архитектурные границы;
 - build/test/checks пройдены;
 - отчёт содержит изменённые файлы, проверки, риски и следующую задачу;
+- code follows CODE_QUALITY_AND_STYLE;
+- task meets DEFINITION_OF_DONE;
 - при риске агент остановился, а не начал гадать.

@@ -20,6 +20,10 @@ docs/CURRENT_GENERATOR_STATE.md
 .devflow/TASK_GRAPH.json
 .devflow/STOP_CONDITIONS.md
 .devflow/VERIFICATION_MATRIX.md
+.devflow/CONTEXT_BUDGET_POLICY.md
+.devflow/DEFINITION_OF_DONE.md
+.devflow/CODE_QUALITY_AND_STYLE.md
+.devflow/PHASE_PLAN_INDEX.md
 ```
 
 Если чего-то нет — остановись и запиши блокер в `.devflow/BLOCKERS.md`.
@@ -31,6 +35,11 @@ docs/CURRENT_GENERATOR_STATE.md
 ```text
 .devflow/LOCAL_AGENT_ROLE.md
 .devflow/STOP_CONDITIONS.md
+.devflow/CONTEXT_BUDGET_POLICY.md
+.devflow/DEFINITION_OF_DONE.md
+.devflow/CODE_QUALITY_AND_STYLE.md
+.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md
+.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md
 .devflow/TASK_GRAPH.json
 .devflow/NEXT_TASK.md
 AGENTS.md
@@ -60,12 +69,15 @@ docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
 
 Не читай весь `docs/` без необходимости. Используй `docs/CONTEXT_INDEX.md` как роутинг.
 
+Если `.devflow/NEXT_TASK.md` указывает на phase plan или task card, прочитай `.devflow/PHASE_PLAN_INDEX.md`, затем ровно один релевантный файл из `.devflow/phase-plans/`. Не читай все фазовые планы за один запуск.
+
 ## 2. Выбор задачи
 
 1. Открой `.devflow/NEXT_TASK.md`.
 2. Найди id задачи.
 3. Найди этот id в `.devflow/TASK_GRAPH.json`.
-4. Проверь:
+4. Если id не найден в `TASK_GRAPH.json`, но `NEXT_TASK.md` указывает phase plan/task card, работай по `.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md` и прочитай ровно один phase plan file.
+5. Проверь:
    - `status`;
    - `blocked_by`;
    - `requires_approval`;
@@ -112,6 +124,21 @@ max changed files per task: 8
 - Lua executor и package assembly;
 - большой refactor и feature behavior.
 
+## 4.1. Контекстный бюджет
+
+Перед чтением дополнительных файлов проверь `.devflow/CONTEXT_BUDGET_POLICY.md`.
+
+Лимиты по умолчанию:
+
+```text
+max source docs: 6
+max source code files before planning: 12
+max local analog files: 3
+max target files to patch: 8
+```
+
+Если нужно больше — остановись и предложи разбиение.
+
 ## 5. Изменение кода
 
 Делай минимальный patch под задачу.
@@ -124,7 +151,9 @@ max changed files per task: 8
 - не добавляй silent fallback, если ошибка должна быть видна;
 - для новых behavior добавляй validation/test/sample, если это требуется матрицей;
 - не меняй public contracts без явного указания task-а;
-- не добавляй TODO вместо реализации, если task требует завершённый behavior.
+- не добавляй TODO вместо реализации, если task требует завершённый behavior;
+- соблюдай `.devflow/CODE_QUALITY_AND_STYLE.md`;
+- перед финальным отчётом пройди `.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md`.
 
 ## 6. Проверки после изменения
 
@@ -184,6 +213,8 @@ fake client / corpus / fixtures / deterministic simulation
 Если task graph требует смены статуса — предложи изменение, но не выдумывай новый roadmap.
 
 Финальный отчёт должен идти по `.devflow/RUN_REPORT_TEMPLATE.md`.
+
+Задача считается done только если выполнен `.devflow/DEFINITION_OF_DONE.md`.
 
 ## 10. Переход к следующей задаче
 
