@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1",
+  "policy": {
+    "fail_on_unexpected_warnings": true,
+    "note": "check-all accepts only warnings listed here. New warnings fail the run unless -AllowUnexpectedWarnings is used."
+  },
+  "known_warnings": [
+    {
+      "code": "CS0649",
+      "path": "src/LLMGameCreator.WinForms/Pages/Projects/ProjectsPageControl.Designer.cs",
+      "contains": "ProjectsPageControl.components",
+      "reason": "Existing WinForms Designer baseline warning: components field is declared but never assigned."
+    },
+    {
+      "code": "CS0649",
+      "path": "src/LLMGameCreator.WinForms/Pages/Generation/GenerationPageControl.Designer.cs",
+      "contains": "GenerationPageControl.components",
+      "reason": "Existing WinForms Designer baseline warning: components field is declared but never assigned."
+    }
+  ]
+}

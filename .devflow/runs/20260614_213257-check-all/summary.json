@@ -1,0 +1,9 @@
+﻿{
+    "status":  "passed",
+    "timestamp_utc":  "2026-06-14T18:33:15.5365346Z",
+    "repo_root":  "C:\\Users\\endim\\LLMGameCreator",
+    "run_dir":  "C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\20260614_213257-check-all",
+    "configuration":  "Debug",
+    "skip_restore":  false,
+    "skip_tests":  false
+}

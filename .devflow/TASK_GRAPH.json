@@ -1,0 +1,366 @@
+{
+  "schema_version": "0.1",
+  "graph_id": "llmgc_finalization_autonomous_devflow",
+  "created_for_solution_root_hint": "c:\\Users\\endim\\LLMGameCreator",
+  "current_phase_assumption": "m4_1_real_model_evaluation_gate",
+  "default_max_changed_files_per_task": 8,
+  "default_max_repair_attempts": 2,
+  "global_required_reading": [
+    ".devflow/LOCAL_AGENT_ROLE.md",
+    ".devflow/AUTONOMOUS_RUNBOOK.md",
+    ".devflow/STOP_CONDITIONS.md",
+    "AGENTS.md",
+    "docs/CONTEXT_INDEX.md",
+    "docs/CURRENT_GENERATOR_STATE.md"
+  ],
+  "global_forbidden_actions": [
+    "git_commands",
+    "runtime_calls_llm",
+    "ui_direct_json_write",
+    "schema_change_without_approval",
+    "new_dependency_without_approval",
+    "broad_refactor",
+    "real_llm_calls_in_tests"
+  ],
+  "tasks": [
+    {
+      "id": "BASELINE-001",
+      "title": "Run baseline build/test/check-all and record current state",
+      "status": "next",
+      "phase": "devflow_baseline",
+      "priority": 10,
+      "worker": "local_agent",
+      "objective": "Run the baseline verification scripts without changing production code. Record whether the repository currently builds/tests and what failures are baseline.",
+      "source_docs": [
+        ".devflow/AUTONOMOUS_RUNBOOK.md",
+        ".devflow/VERIFICATION_MATRIX.md",
+        "AGENTS.md",
+        "docs/CURRENT_GENERATOR_STATE.md"
+      ],
+      "target_areas": [
+        ".devflow/CURRENT_RUN.md",
+        ".devflow/BLOCKERS.md",
+        ".devflow/runs/"
+      ],
+      "non_goals": [
+        "Do not change production code.",
+        "Do not fix build errors in this task unless explicitly obvious and low-risk.",
+        "Do not run git commands."
+      ],
+      "requires_approval": false,
+      "allowed_before_m4_1_gate_review": true,
+      "blocked_by": [],
+      "max_changed_files": 3,
+      "required_checks": [
+        ".devflow/scripts/check-devflow-state.ps1",
+        ".devflow/scripts/check-all.ps1"
+      ],
+      "stop_on": [
+        "missing_solution",
+        "missing_required_docs",
+        "check_all_failure_after_baseline_recorded"
+      ]
+    },
+    {
+      "id": "DEVFLOW-001",
+      "title": "Harden devflow scripts after first local run",
+      "status": "ready_after_BASELINE-001",
+      "phase": "devflow_baseline",
+      "priority": 20,
+      "worker": "local_agent",
+      "objective": "Adjust only .devflow scripts/docs if the first baseline run reveals path, PowerShell or command compatibility issues.",
+      "source_docs": [
+        ".devflow/AUTONOMOUS_RUNBOOK.md",
+        ".devflow/scripts/check-all.ps1",
+        ".devflow/BLOCKERS.md"
+      ],
+      "target_areas": [
+        ".devflow/scripts/",
+        ".devflow/*.md"
+      ],
+      "non_goals": [
+        "Do not change src/ or tests/.",
+        "Do not change solution or csproj files.",
+        "Do not hide real build/test failures."
+      ],
+      "requires_approval": false,
+      "allowed_before_m4_1_gate_review": true,
+      "blocked_by": [
+        "BASELINE-001"
+      ],
+      "max_changed_files": 6,
+      "required_checks": [
+        ".devflow/scripts/check-devflow-state.ps1"
+      ],
+      "stop_on": [
+        "need_to_change_production_code",
+        "need_to_weaken_checks"
+      ]
+    },
+    {
+      "id": "M4EVAL-001",
+      "title": "Import and analyze a real M4.1 evaluation report if provided",
+      "status": "ready_when_report_exists",
+      "phase": "m4_1_evaluation_hardening",
+      "priority": 30,
+      "worker": "local_agent_or_codex",
+      "objective": "If the user provides .llmgc/generator-plans/generator_plan_strict_llm_evaluation.json or report markdown, add or improve a small analyzer/import path that summarizes pass rate, repair recovery, diagnostic hot spots and quality warnings.",
+      "source_docs": [
+        "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        ".devflow/MODELING_STRATEGY.md"
+      ],
+      "target_areas": [
+        "src/LLMGameCreator.Application/",
+        "src/LLMGameCreator.WinForms/Pages/",
+        "tests/LLMGameCreator.Tests/",
+        ".devflow/CURRENT_RUN.md"
+      ],
+      "non_goals": [
+        "Do not call an LLM.",
+        "Do not mutate GamePackage.",
+        "Do not expand artifact contracts.",
+        "Do not change DB schema unless explicitly approved."
+      ],
+      "requires_approval": false,
+      "allowed_before_m4_1_gate_review": true,
+      "blocked_by": [
+        "BASELINE-001",
+        "real_evaluation_report_missing"
+      ],
+      "max_changed_files": 8,
+      "required_checks": [
+        "dotnet build",
+        "dotnet test",
+        "focused analyzer/import tests"
+      ],
+      "stop_on": [
+        "requires_db_schema_change",
+        "requires_provider_call",
+        "requires_more_than_8_files"
+      ]
+    },
+    {
+      "id": "M4HARDEN-001",
+      "title": "Tighten strict prompt/repair/parser/validator from real evaluation hot spots",
+      "status": "ready_after_M4EVAL-001_or_manual_report_review",
+      "phase": "m4_1_evaluation_hardening",
+      "priority": 40,
+      "worker": "codex_for_complex_patch_or_local_for_small_patch",
+      "objective": "Use real diagnostic hot spots to make one bounded improvement in strict output extraction, JSON parsing diagnostics, repair guidance or contract validation.",
+      "source_docs": [
+        "docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md",
+        "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
+        "docs/PROMPT_AND_ARTIFACT_CONTRACT_HARDENING.md",
+        ".devflow/MODELING_STRATEGY.md"
+      ],
+      "target_areas": [
+        "src/LLMGameCreator.Application/Design/",
+        "src/LLMGameCreator.Generation/",
+        "tests/LLMGameCreator.Tests/"
+      ],
+      "non_goals": [
+        "Do not add broad new contracts.",
+        "Do not move into M5/M6.",
+        "Do not make runtime call LLM.",
+        "Do not run real LLM in tests."
+      ],
+      "requires_approval": false,
+      "allowed_before_m4_1_gate_review": true,
+      "blocked_by": [
+        "BASELINE-001",
+        "diagnostic_hot_spots_missing"
+      ],
+      "max_changed_files": 8,
+      "required_checks": [
+        "dotnet build",
+        "dotnet test",
+        "fake LLM repair/parser tests",
+        "corpus fixture if raw-output issue"
+      ],
+      "stop_on": [
+        "needs_schema_change",
+        "needs_more_than_8_files",
+        "no_repro_fixture"
+      ]
+    },
+    {
+      "id": "SIM-001",
+      "title": "Add raw-output corpus simulation harness design and first fixtures",
+      "status": "proposal_requires_user_start",
+      "phase": "simulation_foundation",
+      "priority": 50,
+      "worker": "local_agent_or_codex",
+      "objective": "Introduce a small fixture-driven raw-output simulation test path for fenced JSON, text before/after JSON, broken JSON, wrong root and id drift without real LLM calls.",
+      "source_docs": [
+        ".devflow/MODELING_STRATEGY.md",
+        "docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md",
+        "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
+        "docs/VALIDATION_STRATEGY.md"
+      ],
+      "target_areas": [
+        "tests/LLMGameCreator.Tests/",
+        "tests/fixtures/llm_raw_outputs/"
+      ],
+      "non_goals": [
+        "Do not change production parser unless a failing fixture proves a bounded issue.",
+        "Do not call real LLM.",
+        "Do not expand contracts."
+      ],
+      "requires_approval": true,
+      "allowed_before_m4_1_gate_review": true,
+      "blocked_by": [
+        "BASELINE-001"
+      ],
+      "max_changed_files": 8,
+      "required_checks": [
+        "dotnet build",
+        "dotnet test",
+        "raw-output fixture tests"
+      ],
+      "stop_on": [
+        "requires_production_refactor",
+        "requires_more_than_8_files"
+      ]
+    },
+    {
+      "id": "OBS-001",
+      "title": "Add generation diagnostics bundle foundation",
+      "status": "proposal_requires_user_start",
+      "phase": "observability_foundation",
+      "priority": 60,
+      "worker": "codex_preferred",
+      "objective": "Add a bounded diagnostics bundle concept for strict generation/evaluation artifacts: session summary, events JSONL, raw/cleaned outputs, validation issues and exportable zip/report.",
+      "source_docs": [
+        "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
+        "docs/VALIDATION_STRATEGY.md",
+        "docs/DEVELOPMENT_RULES.md",
+        ".devflow/MODELING_STRATEGY.md"
+      ],
+      "target_areas": [
+        "src/LLMGameCreator.Application/",
+        "src/LLMGameCreator.Infrastructure/",
+        "src/LLMGameCreator.WinForms/Pages/",
+        "tests/LLMGameCreator.Tests/"
+      ],
+      "non_goals": [
+        "Do not create a new large logging framework.",
+        "Do not add external logging dependency without approval.",
+        "Do not store API keys or secrets.",
+        "Do not mutate GamePackage."
+      ],
+      "requires_approval": true,
+      "allowed_before_m4_1_gate_review": true,
+      "blocked_by": [
+        "BASELINE-001"
+      ],
+      "max_changed_files": 10,
+      "required_checks": [
+        "dotnet build",
+        "dotnet test",
+        "diagnostics bundle creation test",
+        "redaction/no secrets check if settings copied"
+      ],
+      "stop_on": [
+        "needs_new_dependency",
+        "needs_db_schema_change",
+        "requires_more_than_10_files"
+      ]
+    },
+    {
+      "id": "SMOKE-001",
+      "title": "Design scenario-based runtime smoke runner",
+      "status": "future_locked_until_gate_or_user_override",
+      "phase": "runtime_smoke_foundation",
+      "priority": 70,
+      "worker": "codex_preferred",
+      "objective": "Add fixture-based runtime smoke scenarios after M4.1 gate is reviewed or user explicitly allows this infrastructure task.",
+      "source_docs": [
+        "docs/VALIDATION_STRATEGY.md",
+        "docs/CONTEXT_INDEX.md",
+        ".devflow/MODELING_STRATEGY.md"
+      ],
+      "target_areas": [
+        "tests/LLMGameCreator.Tests/",
+        "tests/fixtures/runtime_smoke/",
+        "src/LLMGameCreator.Runtime/",
+        "src/LLMGameCreator.Runtime.Abstractions/"
+      ],
+      "non_goals": [
+        "Do not change gameplay semantics broadly.",
+        "Do not make runtime call LLM.",
+        "Do not auto-repair package state."
+      ],
+      "requires_approval": true,
+      "allowed_before_m4_1_gate_review": false,
+      "blocked_by": [
+        "m4_1_gate_not_reviewed"
+      ],
+      "max_changed_files": 8,
+      "required_checks": [
+        "dotnet build",
+        "dotnet test",
+        "runtime smoke fixture tests"
+      ],
+      "stop_on": [
+        "requires_runtime_architecture_change",
+        "requires_more_than_8_files"
+      ]
+    },
+    {
+      "id": "M5-LOCKED",
+      "title": "Lua executor integration is locked by M4.1 gate",
+      "status": "locked",
+      "phase": "blocked_milestone",
+      "priority": 999,
+      "worker": "none",
+      "objective": "Marker task: do not start M5 until current state explicitly allows it.",
+      "source_docs": [
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md"
+      ],
+      "target_areas": [],
+      "non_goals": [
+        "No Lua executor work before gate."
+      ],
+      "requires_approval": true,
+      "allowed_before_m4_1_gate_review": false,
+      "blocked_by": [
+        "m4_1_gate_not_reviewed"
+      ],
+      "max_changed_files": 0,
+      "required_checks": [],
+      "stop_on": [
+        "always"
+      ]
+    },
+    {
+      "id": "M6-LOCKED",
+      "title": "Rich GamePackage assembly is locked by M4.1 gate",
+      "status": "locked",
+      "phase": "blocked_milestone",
+      "priority": 1000,
+      "worker": "none",
+      "objective": "Marker task: do not start M6 until current state explicitly allows it.",
+      "source_docs": [
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/ROADMAP_TO_FULL_GENERATOR.md"
+      ],
+      "target_areas": [],
+      "non_goals": [
+        "No rich assembly work before gate."
+      ],
+      "requires_approval": true,
+      "allowed_before_m4_1_gate_review": false,
+      "blocked_by": [
+        "m4_1_gate_not_reviewed"
+      ],
+      "max_changed_files": 0,
+      "required_checks": [],
+      "stop_on": [
+        "always"
+      ]
+    }
+  ]
+}

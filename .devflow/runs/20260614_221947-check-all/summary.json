@@ -1,0 +1,15 @@
+﻿{
+    "status":  "passed",
+    "timestamp_utc":  "2026-06-14T19:19:56.2109427Z",
+    "repo_root":  "C:\\Users\\endim\\LLMGameCreator",
+    "run_dir":  "C:\\Users\\endim\\LLMGameCreator\\.devflow\\runs\\20260614_221947-check-all",
+    "configuration":  "Debug",
+    "skip_restore":  false,
+    "skip_tests":  false,
+    "warnings_total":  0,
+    "warnings_known":  0,
+    "warnings_unexpected":  0,
+    "dotnet_cli_ui_language":  "en",
+    "vslang":  "1033",
+    "code_page":  "65001"
+}
