@@ -12,18 +12,6 @@ Generated purpose:
 Add an executable task-spec layer for local agents so future work can be driven by small technical contracts with proof tests and system gates.
 ```
 
-## What this pack added
-
-```text
-docs/agent-tasks/000_INDEX.md
-docs/agent-tasks/001_TASK_PACK_LEDGER.md
-docs/agent-tasks/002_NEXT_PACK_REQUEST.md
-docs/agent-tasks/_TASK_TEMPLATE.md
-docs/agent-tasks/_TASK_READINESS_CHECKLIST.md
-docs/agent-tasks/_GATE_MATRIX.md
-docs/agent-tasks/_SYSTEM_GATES.md
-```
-
 First task spec batch:
 
 ```text
@@ -36,6 +24,48 @@ M5_003_LUA_STATIC_SANDBOX_POLICY
 M6_001_ARTIFACT_TO_PACKAGE_MAPPING_CONTRACTS
 ```
 
+## Pack 002 — M4.1 executable strict-generation specs
+
+Pack id: `agent-task-pack-002-m4-1-executable-specs`
+
+Generated purpose:
+
+```text
+Add additional M4.1 executable task specs based on the current strict generation/evaluation source layout, without unlocking M5/M6.
+```
+
+Repository state observed for this pack:
+
+```text
+Branch reviewed: kilo-night-001
+Compared to main: ahead by 1 commit, docs/devflow-only task pack changes.
+Current phase: M4.1 real-model evaluation gate.
+Strict parser owner: GeneratorPlanStrictJsonResponseParser.
+Strict parser tests: GeneratorPlanStrictJsonResponseParserTests.
+Strict evaluation owner: GeneratorPlanStrictLlmEvaluationService.
+Strict evaluation markdown owner: GeneratorPlanStrictLlmEvaluationMarkdownRenderer.
+Repair prompt owner: GeneratorPlanStrictLlmArtifactRepairPromptBuilder.
+```
+
+Files added by Pack 002:
+
+```text
+docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
+docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
+docs/agent-tasks/M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md
+docs/agent-tasks/M4_1/M4_1_006_STRICT_REPAIR_PROMPT_GUARDRAILS.md
+docs/agent-tasks/M4_1/M4_1_007_M4_GATE_DECISION_REPORT.md
+docs/agent-tasks/M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md
+```
+
+Files updated by Pack 002:
+
+```text
+docs/agent-tasks/000_INDEX.md
+docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+```
+
 ## Current active gate assumption
 
 ```text
@@ -45,9 +75,10 @@ M4.1 real-model evaluation gate
 Allowed now:
 
 ```text
-- M4.1 report import/analyzer if report exists;
-- strict output corpus/fake fixture coverage;
-- prompt/repair/parser/validator hardening based on real evaluation evidence;
+- strict parser corpus/fixture coverage;
+- evaluation report/analyzer improvements if report exists;
+- evaluation markdown/golden output guardrails;
+- repair prompt hardening based on diagnostics/corpus evidence;
 - docs/devflow/task-spec consistency work.
 ```
 
@@ -62,30 +93,33 @@ Locked now:
 
 ## Do not regenerate in next pack
 
-Do not replace the framework files unless repo review finds a concrete problem.
+Do not replace the Pack 001 framework unless repository review finds a concrete problem.
 
 Do not regenerate M5/M6 specs from scratch. Amend them only if repository source changes make the contracts stale.
+
+Do not unlock M5/M6 from task-pack files alone. Only current-state docs may unlock those phases.
 
 ## Next pack should cover
 
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-002-m4-1-executable-specs
+agent-task-pack-003-m4-1-gates-and-automation
 ```
 
 Suggested contents:
 
 ```text
-- refine M4_1 task specs after reading actual current strict generation/evaluation source files;
-- add one or two additional M4_1 proof-test specs if missing;
-- update NEXT_PACK_REQUEST with observed gaps;
-- do not unlock M5/M6 unless current state has changed.
+- optional named gates in .devflow/scripts/check-all.ps1 only if the user wants script changes;
+- docs consistency guard task expansion if M4_1_008 is not enough;
+- agent task specs for importing real local-model evaluation artifacts if a report is present;
+- a task spec for updating CURRENT_GENERATOR_STATE after manual M4.1 gate review;
+- no M5/M6 executable production specs unless current state has changed.
 ```
 
 ## Open questions for next pack
 
 1. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
-2. Which strict output extraction/parser classes currently own fenced/text-before/text-after JSON handling?
-3. Are docs consistency tests already present, or should a future task add them?
-4. Should `check-all.ps1` gain named optional gates for docs/manifests/runtime/snapshots after fixtures exist?
+2. Has Kilo executed any M4_1 task spec successfully?
+3. Should `check-all.ps1` gain named optional gates for docs/manifests/runtime/snapshots now, or wait until fixtures exist?
+4. Should `NEXT_TASK.md` be moved from `BASELINE-001` to `agent_task_spec:M4_1_004` after user approval?

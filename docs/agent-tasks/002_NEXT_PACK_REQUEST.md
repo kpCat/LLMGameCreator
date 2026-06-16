@@ -20,6 +20,7 @@ docs/CURRENT_GENERATOR_STATE.json
 .devflow/PHASE_PLAN_INDEX.md
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
 ```
 
 Then read only phase/source files relevant to the next unlocked pack.
@@ -27,10 +28,10 @@ Then read only phase/source files relevant to the next unlocked pack.
 ## Expected next pack
 
 ```text
-agent-task-pack-002-m4-1-executable-specs
+agent-task-pack-003-m4-1-gates-and-automation
 ```
 
-The next pack should improve executable M4.1 task specs and should not unlock M5/M6 unless repository current state explicitly unlocks them.
+The next pack should improve M4.1 gates/automation and should not unlock M5/M6 unless repository current state explicitly unlocks them.
 
 ## Required output format
 
@@ -62,3 +63,16 @@ Every new executable task spec must contain:
 ```
 
 No task spec is executable if it lacks a proof test.
+
+## Current recommendation
+
+If the repository still has no real M4.1 evaluation report, prefer task specs that improve deterministic coverage:
+
+```text
+- parser corpus coverage;
+- evaluation markdown golden output;
+- repair prompt guardrails;
+- docs/task-spec consistency guard.
+```
+
+If a real M4.1 report exists, prefer task specs that import/analyze it and update current-state docs only after explicit human gate review.

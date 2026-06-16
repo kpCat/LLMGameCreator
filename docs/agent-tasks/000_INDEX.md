@@ -22,6 +22,7 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 4. Do not implement directly from a phase plan when an agent task spec exists.
 5. Do not broaden a task spec. If the implementation needs files/classes/methods not allowed by the spec, stop.
 6. A task is not done until its proof tests and system gates pass or are explicitly blocked with reason.
+7. If a task spec conflicts with current source code, stop and report the conflict instead of inventing a new architecture.
 
 ## Pack state
 
@@ -54,11 +55,22 @@ The repository is currently in the M4.1 real-model evaluation gate. M5/M6/M8 pro
 
 ### M4.1 — real evaluation gate and strict generation hardening
 
+Recommended sequence file:
+
+```text
+M4_1/000_M4_1_SEQUENCE.md
+```
+
 | Task | Status | Spec |
 |---|---|---|
 | M4_1_001 | Ready when a real evaluation report exists | `M4_1/M4_1_001_REAL_EVALUATION_REPORT_IMPORT.md` |
 | M4_1_002 | Proposed, user approval recommended | `M4_1/M4_1_002_STRICT_OUTPUT_CORPUS_FIXTURES.md` |
 | M4_1_003 | Ready only after diagnostic hot spots exist | `M4_1/M4_1_003_REPAIR_POLICY_HARDENING.md` |
+| M4_1_004 | Ready with approval | `M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md` |
+| M4_1_005 | Ready after M4_1_004 or real report | `M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md` |
+| M4_1_006 | Ready after diagnostic hot spots or parser corpus | `M4_1/M4_1_006_STRICT_REPAIR_PROMPT_GUARDRAILS.md` |
+| M4_1_007 | Ready after real evaluation summary exists | `M4_1/M4_1_007_M4_GATE_DECISION_REPORT.md` |
+| M4_1_008 | Ready with approval | `M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md` |
 
 ### M5 — Lua module executor integration
 
@@ -87,9 +99,9 @@ Use this shape in `.devflow/NEXT_TASK.md` when a task spec should be executed:
 
 Mode: single-task
 Task source: agent_task_spec
-Task id: M4_1_002
-Task spec file: docs/agent-tasks/M4_1/M4_1_002_STRICT_OUTPUT_CORPUS_FIXTURES.md
-Reason: Add test-first strict output corpus coverage before further prompt/repair changes.
+Task id: M4_1_004
+Task spec file: docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
+Reason: Add fixture-driven proof coverage for strict JSON parser behavior before further prompt/repair changes.
 User approval: approved | missing | required
 Expected stop after completion: yes
 ```
