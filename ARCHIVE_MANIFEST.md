@@ -1,19 +1,19 @@
-# ARCHIVE_MANIFEST.md — llmgc_agent_task_pack_002
+# ARCHIVE_MANIFEST.md — llmgc_agent_task_pack_003
 
-Archive: `llmgc_agent_task_pack_002.zip`
+Archive: `llmgc_agent_task_pack_003.zip`
 
 Purpose:
 
 ```text
-Add the second agent-task pack: executable M4.1 strict-generation/evaluation task specs based on the current repository state.
+Add the third agent-task pack: M4.1 gate/automation executable task specs and cursor-ready guidance, without changing production source, tests, solution files, project files, or current M5/M6 lock status.
 ```
 
-This archive is docs/devflow guidance only. It does not modify production code, tests, solution files, or project files.
+This archive is docs/task-spec guidance only. It does not modify `src/`, `tests/`, `.sln`, `.csproj`, `.devflow/scripts/`, package schema, runtime behavior, Lua execution, or provider integration.
 
 ## Files included
 
 ```text
-README_APPLY_AGENT_TASK_PACK_002.md
+README_APPLY_AGENT_TASK_PACK_003.md
 ARCHIVE_MANIFEST.md
 
 docs/agent-tasks/000_INDEX.md
@@ -21,22 +21,20 @@ docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 
 docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
-docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
-docs/agent-tasks/M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md
-docs/agent-tasks/M4_1/M4_1_006_STRICT_REPAIR_PROMPT_GUARDRAILS.md
-docs/agent-tasks/M4_1/M4_1_007_M4_GATE_DECISION_REPORT.md
-docs/agent-tasks/M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md
+docs/agent-tasks/M4_1/M4_1_009_DEVFLOW_NAMED_GATES_CHECK_ALL.md
+docs/agent-tasks/M4_1/M4_1_010_REAL_EVALUATION_ARTIFACT_DISCOVERY.md
+docs/agent-tasks/M4_1/M4_1_011_CURRENT_STATE_GATE_REVIEW_UPDATE.md
+docs/agent-tasks/M4_1/M4_1_012_OVERNIGHT_RUN_REPORT_REVIEW_GATE.md
 ```
 
 ## Repository-state assumptions used
 
 ```text
-- Current phase remains M4.1 real-model evaluation gate.
-- M5/M6/M8 production work remains locked until current-state docs explicitly unlock it.
-- Strict JSON parsing is currently owned by GeneratorPlanStrictJsonResponseParser.
-- Strict evaluation summary/hot spots are currently owned by GeneratorPlanStrictLlmEvaluationService.
-- Evaluation markdown output is currently owned by GeneratorPlanStrictLlmEvaluationMarkdownRenderer.
-- Repair prompt text is currently owned by GeneratorPlanStrictLlmArtifactRepairPromptBuilder.
+Branch reviewed: kilo-night-001
+Compared to main: ahead by 2 commits, docs/devflow/task-spec changes only.
+Current phase remains M4.1 real-model evaluation gate.
+M5/M6/M8 production work remains locked until current-state docs explicitly unlock it.
+No GitHub workflow runs were found for the latest pushed commit, so local check-all remains the required verification.
 ```
 
 ## Safety
@@ -46,6 +44,7 @@ docs/agent-tasks/M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md
 - No tests/ changes.
 - No .sln changes.
 - No .csproj changes.
+- No .devflow/scripts changes.
 - No M5/M6 unlock.
-- No NEXT_TASK forced cursor change.
+- No forced NEXT_TASK.md cursor change.
 ```

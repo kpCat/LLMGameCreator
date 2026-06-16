@@ -58,12 +58,42 @@ docs/agent-tasks/M4_1/M4_1_007_M4_GATE_DECISION_REPORT.md
 docs/agent-tasks/M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md
 ```
 
-Files updated by Pack 002:
+## Pack 003 — M4.1 gates and automation specs
+
+Pack id: `agent-task-pack-003-m4-1-gates-and-automation`
+
+Generated purpose:
+
+```text
+Add executable task specs for M4.1 gate automation, local-agent run review, real evaluation artifact discovery, and current-state update discipline.
+```
+
+Repository state observed for this pack:
+
+```text
+Branch reviewed: kilo-night-001
+Compared to main: ahead by 2 commits, docs/devflow/task-spec changes only.
+Latest pushed commit checked for GitHub workflow runs: no workflow runs found.
+M4.1 remains active gate.
+M5/M6/M8 remain locked by current-state docs.
+```
+
+Files added by Pack 003:
+
+```text
+docs/agent-tasks/M4_1/M4_1_009_DEVFLOW_NAMED_GATES_CHECK_ALL.md
+docs/agent-tasks/M4_1/M4_1_010_REAL_EVALUATION_ARTIFACT_DISCOVERY.md
+docs/agent-tasks/M4_1/M4_1_011_CURRENT_STATE_GATE_REVIEW_UPDATE.md
+docs/agent-tasks/M4_1/M4_1_012_OVERNIGHT_RUN_REPORT_REVIEW_GATE.md
+```
+
+Files updated by Pack 003:
 
 ```text
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
 ```
 
 ## Current active gate assumption
@@ -79,7 +109,8 @@ Allowed now:
 - evaluation report/analyzer improvements if report exists;
 - evaluation markdown/golden output guardrails;
 - repair prompt hardening based on diagnostics/corpus evidence;
-- docs/devflow/task-spec consistency work.
+- docs/devflow/task-spec consistency work;
+- optional devflow gate automation, only with user approval.
 ```
 
 Locked now:
@@ -104,22 +135,22 @@ Do not unlock M5/M6 from task-pack files alone. Only current-state docs may unlo
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-003-m4-1-gates-and-automation
+agent-task-pack-004-m4-1-execution-results-or-m5-entry
 ```
 
 Suggested contents:
 
 ```text
-- optional named gates in .devflow/scripts/check-all.ps1 only if the user wants script changes;
-- docs consistency guard task expansion if M4_1_008 is not enough;
-- agent task specs for importing real local-model evaluation artifacts if a report is present;
-- a task spec for updating CURRENT_GENERATOR_STATE after manual M4.1 gate review;
-- no M5/M6 executable production specs unless current state has changed.
+- If Kilo has executed M4_1_004..M4_1_006, review reports/diff and refine task specs based on actual failures.
+- If a real strict LLM evaluation report exists, add/update import/analyzer and gate decision specs.
+- If current-state docs explicitly pass M4.1, generate M5 entry execution specs based on current source.
+- If M4.1 is still not reviewed, do not unlock M5/M6; continue deterministic coverage/gate work.
 ```
 
 ## Open questions for next pack
 
-1. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
-2. Has Kilo executed any M4_1 task spec successfully?
-3. Should `check-all.ps1` gain named optional gates for docs/manifests/runtime/snapshots now, or wait until fixtures exist?
-4. Should `NEXT_TASK.md` be moved from `BASELINE-001` to `agent_task_spec:M4_1_004` after user approval?
+1. Has Kilo executed any M4_1 task spec successfully?
+2. Is `.devflow/OVERNIGHT_RUN_REPORT.md` present and useful?
+3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
+4. Did local `check-all.ps1` pass after Pack 003 apply?
+5. Should M4.1 be marked passed, needs repair, or blocked?

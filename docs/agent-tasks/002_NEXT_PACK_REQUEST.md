@@ -28,10 +28,18 @@ Then read only phase/source files relevant to the next unlocked pack.
 ## Expected next pack
 
 ```text
-agent-task-pack-003-m4-1-gates-and-automation
+agent-task-pack-004-m4-1-execution-results-or-m5-entry
 ```
 
-The next pack should improve M4.1 gates/automation and should not unlock M5/M6 unless repository current state explicitly unlocks them.
+The next pack depends on repository state after Pack 003 and/or after local-agent execution:
+
+```text
+- If no local-agent task was executed yet, do not create more speculative implementation specs; recommend executing M4_1_004 first.
+- If M4_1 tasks were executed, inspect diffs and reports and refine only the failing/next layer.
+- If real M4.1 evaluation artifacts exist, add/update report import and gate decision specs.
+- If current-state docs explicitly pass M4.1, generate M5 entry specs based on current source.
+- If M4.1 is still active, do not unlock M5/M6.
+```
 
 ## Required output format
 
@@ -66,13 +74,10 @@ No task spec is executable if it lacks a proof test.
 
 ## Current recommendation
 
-If the repository still has no real M4.1 evaluation report, prefer task specs that improve deterministic coverage:
+Before requesting Pack 004, prefer to run one bounded local-agent implementation task, starting with:
 
 ```text
-- parser corpus coverage;
-- evaluation markdown golden output;
-- repair prompt guardrails;
-- docs/task-spec consistency guard.
+M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD
 ```
 
-If a real M4.1 report exists, prefer task specs that import/analyze it and update current-state docs only after explicit human gate review.
+Then push the branch and ask for repository review. Pack 004 should be based on the actual diff/report, not on more speculative planning.

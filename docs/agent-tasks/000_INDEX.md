@@ -71,6 +71,10 @@ M4_1/000_M4_1_SEQUENCE.md
 | M4_1_006 | Ready after diagnostic hot spots or parser corpus | `M4_1/M4_1_006_STRICT_REPAIR_PROMPT_GUARDRAILS.md` |
 | M4_1_007 | Ready after real evaluation summary exists | `M4_1/M4_1_007_M4_GATE_DECISION_REPORT.md` |
 | M4_1_008 | Ready with approval | `M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md` |
+| M4_1_009 | Proposed, script-change approval recommended | `M4_1/M4_1_009_DEVFLOW_NAMED_GATES_CHECK_ALL.md` |
+| M4_1_010 | Ready when real evaluation artifacts may exist | `M4_1/M4_1_010_REAL_EVALUATION_ARTIFACT_DISCOVERY.md` |
+| M4_1_011 | Ready after user reviews M4.1 result | `M4_1/M4_1_011_CURRENT_STATE_GATE_REVIEW_UPDATE.md` |
+| M4_1_012 | Ready after overnight/local-agent run exists | `M4_1/M4_1_012_OVERNIGHT_RUN_REPORT_REVIEW_GATE.md` |
 
 ### M5 — Lua module executor integration
 

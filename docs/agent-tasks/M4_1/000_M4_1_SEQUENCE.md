@@ -1,55 +1,74 @@
-# 000_M4_1_SEQUENCE.md — recommended M4.1 agent-task sequence
+# 000_M4_1_SEQUENCE.md — recommended M4.1 executable task order
 
-This file is a small routing aid for the M4.1 real-model evaluation gate. It is not a roadmap and not an implementation spec.
+This file is routing guidance. Do not implement directly from it. Pick exactly one task spec and execute only that spec.
 
 ## Current gate
 
 ```text
-M4.1 real-model evaluation gate
+M4.1 real-model evaluation gate is active.
+M5/M6/M8 remain locked until docs/CURRENT_GENERATOR_STATE.md and .json explicitly unlock them.
 ```
 
-The current state blocks M5/M6/M8 production work until the real strict LLM evaluation has been run, reviewed, and current-state docs explicitly unlock follow-up work.
-
-## Recommended deterministic sequence before using real report evidence
-
-Use this sequence if no real local-model report is available yet:
+## Recommended deterministic sequence before real report review
 
 ```text
-1. M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD
-2. M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS
-3. M4_1_006_STRICT_REPAIR_PROMPT_GUARDRAILS
-4. M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD
+M4_1_004 -> M4_1_005 -> M4_1_006 -> M4_1_008
 ```
 
-## Recommended evidence sequence after real report exists
-
-Use this sequence if `.llmgc/generator-plans/` contains a real strict evaluation report or the user provides it:
+Purpose:
 
 ```text
-1. M4_1_001_REAL_EVALUATION_REPORT_IMPORT
-2. M4_1_003_REPAIR_POLICY_HARDENING
-3. M4_1_007_M4_GATE_DECISION_REPORT
+Improve strict generation/evaluation confidence with deterministic parser, markdown, repair-prompt and task-doc consistency coverage before broadening contracts or moving to Lua/package assembly.
 ```
 
-## Rules
+## Recommended gate automation sequence
 
 ```text
-- Read exactly one task spec at a time.
-- Do not execute M5/M6 from this file.
-- Do not update CURRENT_GENERATOR_STATE to unlock M5/M6 from agent judgment alone.
-- Human gate review is required before phase unlock.
+M4_1_009 -> M4_1_012
 ```
 
-## Suggested NEXT_TASK pointer for first deterministic task
+Use this only when the user approves script/gate automation work or after an overnight/local-agent run exists.
+
+## Recommended real evaluation sequence
+
+If a real strict LLM evaluation report exists:
 
 ```text
-# NEXT_TASK
+M4_1_001 -> M4_1_010 -> M4_1_003 -> M4_1_007 -> M4_1_011
+```
 
-Mode: single-task
-Task source: agent_task_spec
-Task id: M4_1_004
-Task spec file: docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
-Reason: Add fixture-driven proof coverage for strict JSON parser behavior before further prompt/repair changes.
-User approval: approved
-Expected stop after completion: yes
+Meaning:
+
+```text
+import/analyze report -> discover real artifacts -> harden highest-impact issue -> write gate decision report -> update current state only after user review
+```
+
+## Task map
+
+| Task | Use when | Next candidate |
+|---|---|---|
+| M4_1_001 | Real strict LLM report exists and needs import/analyzer | M4_1_003 or M4_1_007 |
+| M4_1_002 | Need broad raw-output corpus foundation | M4_1_004 |
+| M4_1_003 | Real diagnostic hot spots exist | M4_1_007 |
+| M4_1_004 | Need deterministic parser corpus proof tests | M4_1_005 |
+| M4_1_005 | Need stable markdown/golden recommendations | M4_1_006 |
+| M4_1_006 | Need repair prompt guardrails | M4_1_008 or M4_1_007 |
+| M4_1_007 | Need M4.1 decision report | M4_1_011 |
+| M4_1_008 | Need docs/task-spec consistency guard | M4_1_009 or stop |
+| M4_1_009 | User approves named gate script automation | M4_1_012 |
+| M4_1_010 | Real evaluation artifacts may exist but path/schema is unclear | M4_1_001 or M4_1_007 |
+| M4_1_011 | User has explicitly decided M4.1 gate status | stop or M5 entry pack |
+| M4_1_012 | Overnight/local-agent run exists and needs review gate | stop or next spec based on report |
+
+## Stop rules
+
+Stop instead of continuing if:
+
+```text
+- M4.1 decision needs user review;
+- a task requires M5/M6/M8 production work;
+- a task requires schema/dependency/project changes;
+- a real report is missing for report-dependent tasks;
+- check-all fails after repair attempts;
+- local agent changed files outside allowed boundaries.
 ```
