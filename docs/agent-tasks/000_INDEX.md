@@ -7,6 +7,7 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 ```text
 .devflow/NEXT_TASK.md
   -> docs/agent-tasks/000_INDEX.md
+  -> shared quality docs
   -> exactly one task spec file
   -> source docs named by that task spec
   -> target files / local analogs named by that task spec
@@ -17,12 +18,28 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 ## Rules for agents
 
 1. Do not read all task specs.
-2. Read this index, then exactly one task spec referenced by `.devflow/NEXT_TASK.md`.
+2. Read this index, shared quality docs, then exactly one task spec referenced by `.devflow/NEXT_TASK.md`.
 3. If a task spec is locked, blocked, missing proof tests, or requires approval not granted by the user, stop and write `.devflow/BLOCKERS.md`.
 4. Do not implement directly from a phase plan when an agent task spec exists.
 5. Do not broaden a task spec. If the implementation needs files/classes/methods not allowed by the spec, stop.
 6. A task is not done until its proof tests and system gates pass or are explicitly blocked with reason.
 7. If a task spec conflicts with current source code, stop and report the conflict instead of inventing a new architecture.
+8. Shared quality docs are binding for every task unless the task spec explicitly overrides them with user approval.
+
+## Shared templates, gates, and quality docs
+
+| File | Purpose |
+|---|---|
+| `_TASK_TEMPLATE.md` | Canonical task spec template. |
+| `_TASK_READINESS_CHECKLIST.md` | Checks before a task is allowed for autonomous execution. |
+| `_GATE_MATRIX.md` | Required gates by task type. |
+| `_SYSTEM_GATES.md` | Build/test/runtime/docs gate definitions and command expectations. |
+| `_TEST_QUALITY_RULES.md` | Proof-test rules, exact assertions, weak-test rejection. |
+| `_FIXTURE_AND_GOLDEN_RULES.md` | Fixture/golden naming, size, determinism, readability. |
+| `_DIFF_HYGIENE_RULES.md` | Final changed-file cleanliness and generated artifact discipline. |
+| `_AGENT_EXECUTION_QUALITY_RULES.md` | General local-agent execution quality after first real Kilo feedback. |
+
+Agent must not read every task spec, but these shared docs are not task specs; they are common execution rules.
 
 ## Pack state
 
@@ -37,15 +54,6 @@ Request for the next generated pack:
 ```text
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 ```
-
-## Shared templates and gates
-
-| File | Purpose |
-|---|---|
-| `_TASK_TEMPLATE.md` | Canonical task spec template. |
-| `_TASK_READINESS_CHECKLIST.md` | Checks before a task is allowed for autonomous execution. |
-| `_GATE_MATRIX.md` | Required gates by task type. |
-| `_SYSTEM_GATES.md` | Build/test/runtime/docs gate definitions and command expectations. |
 
 ## Current executable area
 

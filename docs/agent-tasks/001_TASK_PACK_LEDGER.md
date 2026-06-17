@@ -34,30 +34,6 @@ Generated purpose:
 Add additional M4.1 executable task specs based on the current strict generation/evaluation source layout, without unlocking M5/M6.
 ```
 
-Repository state observed for this pack:
-
-```text
-Branch reviewed: kilo-night-001
-Compared to main: ahead by 1 commit, docs/devflow-only task pack changes.
-Current phase: M4.1 real-model evaluation gate.
-Strict parser owner: GeneratorPlanStrictJsonResponseParser.
-Strict parser tests: GeneratorPlanStrictJsonResponseParserTests.
-Strict evaluation owner: GeneratorPlanStrictLlmEvaluationService.
-Strict evaluation markdown owner: GeneratorPlanStrictLlmEvaluationMarkdownRenderer.
-Repair prompt owner: GeneratorPlanStrictLlmArtifactRepairPromptBuilder.
-```
-
-Files added by Pack 002:
-
-```text
-docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
-docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
-docs/agent-tasks/M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md
-docs/agent-tasks/M4_1/M4_1_006_STRICT_REPAIR_PROMPT_GUARDRAILS.md
-docs/agent-tasks/M4_1/M4_1_007_M4_GATE_DECISION_REPORT.md
-docs/agent-tasks/M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md
-```
-
 ## Pack 003 — M4.1 gates and automation specs
 
 Pack id: `agent-task-pack-003-m4-1-gates-and-automation`
@@ -66,16 +42,6 @@ Generated purpose:
 
 ```text
 Add executable task specs for M4.1 gate automation, local-agent run review, real evaluation artifact discovery, and current-state update discipline.
-```
-
-Repository state observed for this pack:
-
-```text
-Branch reviewed: kilo-night-001
-Compared to main: ahead by 2 commits, docs/devflow/task-spec changes only.
-Latest pushed commit checked for GitHub workflow runs: no workflow runs found.
-M4.1 remains active gate.
-M5/M6/M8 remain locked by current-state docs.
 ```
 
 Files added by Pack 003:
@@ -87,13 +53,48 @@ docs/agent-tasks/M4_1/M4_1_011_CURRENT_STATE_GATE_REVIEW_UPDATE.md
 docs/agent-tasks/M4_1/M4_1_012_OVERNIGHT_RUN_REPORT_REVIEW_GATE.md
 ```
 
-Files updated by Pack 003:
+## Pack 004 — shared execution quality hardening
+
+Pack id: `agent-task-pack-004-quality-hardening`
+
+Generated purpose:
 
 ```text
+Move repeated quality requirements into shared docs so task prompts can stay small and local agents naturally discover exact test/fixture/diff rules through the normal read chain.
+```
+
+Repository feedback used:
+
+```text
+A real Kilo execution of M4_1_004 was broadly successful, but exposed shared-rule gaps:
+- weak deterministic diagnostic assertion needed tightening;
+- old readable raw string style was mechanically degraded and then restored;
+- generated run artifacts needed explicit diff hygiene discipline;
+- common proof-test quality should be centralized instead of repeated in every task prompt.
+```
+
+Files added by Pack 004:
+
+```text
+docs/agent-tasks/_TEST_QUALITY_RULES.md
+docs/agent-tasks/_FIXTURE_AND_GOLDEN_RULES.md
+docs/agent-tasks/_DIFF_HYGIENE_RULES.md
+docs/agent-tasks/_AGENT_EXECUTION_QUALITY_RULES.md
+```
+
+Files updated by Pack 004:
+
+```text
+.devflow/AUTONOMOUS_RUNBOOK.md
+.devflow/CODE_QUALITY_AND_STYLE.md
+.devflow/DEFINITION_OF_DONE.md
+.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md
+.devflow/prompts/local_agent_start_prompt.md
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
-docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
+docs/agent-tasks/_TASK_TEMPLATE.md
+docs/agent-tasks/_TASK_READINESS_CHECKLIST.md
 ```
 
 ## Current active gate assumption
@@ -130,27 +131,29 @@ Do not regenerate M5/M6 specs from scratch. Amend them only if repository source
 
 Do not unlock M5/M6 from task-pack files alone. Only current-state docs may unlock those phases.
 
+Do not copy shared quality rules into every future task spec. Reference the shared docs and add only task-specific emphasis.
+
 ## Next pack should cover
 
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-004-m4-1-execution-results-or-m5-entry
+agent-task-pack-005-m4-1-completion-and-gate-review
 ```
 
 Suggested contents:
 
 ```text
-- If Kilo has executed M4_1_004..M4_1_006, review reports/diff and refine task specs based on actual failures.
-- If a real strict LLM evaluation report exists, add/update import/analyzer and gate decision specs.
-- If current-state docs explicitly pass M4.1, generate M5 entry execution specs based on current source.
-- If M4.1 is still not reviewed, do not unlock M5/M6; continue deterministic coverage/gate work.
+- M4.1 completion specs for real evaluation run/review;
+- current-state update task after manual gate decision;
+- report import/analyzer task if real evaluation artifact exists;
+- no M5/M6 executable production specs unless current state has changed.
 ```
 
 ## Open questions for next pack
 
-1. Has Kilo executed any M4_1 task spec successfully?
-2. Is `.devflow/OVERNIGHT_RUN_REPORT.md` present and useful?
-3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
-4. Did local `check-all.ps1` pass after Pack 003 apply?
+1. Has Pack 004 been applied on the branch used for local-agent execution?
+2. Did local `check-all.ps1` pass after Pack 004 apply?
+3. Has Kilo executed M4_1_005 or later using the shared quality docs?
+4. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
 5. Should M4.1 be marked passed, needs repair, or blocked?

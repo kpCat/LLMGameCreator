@@ -18,8 +18,13 @@ docs/CURRENT_GENERATOR_STATE.json
 .devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md
 .devflow/CONTEXT_BUDGET_POLICY.md
 .devflow/PHASE_PLAN_INDEX.md
+.devflow/CODE_QUALITY_AND_STYLE.md
+.devflow/DEFINITION_OF_DONE.md
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/_TEST_QUALITY_RULES.md
+docs/agent-tasks/_FIXTURE_AND_GOLDEN_RULES.md
+docs/agent-tasks/_DIFF_HYGIENE_RULES.md
 docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
 ```
 
@@ -28,18 +33,10 @@ Then read only phase/source files relevant to the next unlocked pack.
 ## Expected next pack
 
 ```text
-agent-task-pack-004-m4-1-execution-results-or-m5-entry
+agent-task-pack-005-m4-1-completion-and-gate-review
 ```
 
-The next pack depends on repository state after Pack 003 and/or after local-agent execution:
-
-```text
-- If no local-agent task was executed yet, do not create more speculative implementation specs; recommend executing M4_1_004 first.
-- If M4_1 tasks were executed, inspect diffs and reports and refine only the failing/next layer.
-- If real M4.1 evaluation artifacts exist, add/update report import and gate decision specs.
-- If current-state docs explicitly pass M4.1, generate M5 entry specs based on current source.
-- If M4.1 is still active, do not unlock M5/M6.
-```
+The next pack should focus on M4.1 completion/gate-review tasks and should not unlock M5/M6 unless repository current state explicitly unlocks them.
 
 ## Required output format
 
@@ -65,6 +62,9 @@ Every new executable task spec must contain:
 - exact behavior
 - diagnostic/failure behavior
 - proof tests
+- exact proof assertions
+- fixture/golden policy when applicable
+- diff hygiene risks
 - system gates
 - stop conditions
 - next task pointer
@@ -72,12 +72,19 @@ Every new executable task spec must contain:
 
 No task spec is executable if it lacks a proof test.
 
+No proof test is acceptable if it only checks broad failure/success without pinning the contract.
+
 ## Current recommendation
 
-Before requesting Pack 004, prefer to run one bounded local-agent implementation task, starting with:
+If the repository still has no real M4.1 evaluation report, prefer tasks that enable or document the real manual evaluation/gate decision:
 
 ```text
-M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD
+- real evaluation runbook for the user;
+- real artifact discovery/import;
+- gate pass/fail decision report;
+- current state update after manual review.
 ```
 
-Then push the branch and ask for repository review. Pack 004 should be based on the actual diff/report, not on more speculative planning.
+If a real M4.1 report exists, prefer task specs that import/analyze it and update current-state docs based on evidence.
+
+If M4.1 has explicitly passed in current-state docs, generate M5 entry execution specs. Otherwise keep M5/M6 locked.

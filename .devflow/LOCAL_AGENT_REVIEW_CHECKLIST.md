@@ -10,6 +10,7 @@
 [ ] Я не трогал unrelated files.
 [ ] Changed files не превышают лимит task-а.
 [ ] Нет массового formatting/rename.
+[ ] Я не выполнял следующую задачу без явного разрешения.
 ```
 
 ## 2. Architecture check
@@ -21,6 +22,7 @@
 [ ] LLM output не применяется без validation/review/apply boundary.
 [ ] Schema/public contracts не изменены без explicit approval.
 [ ] Новые зависимости/проекты не добавлены без approval.
+[ ] Layer ownership из CODE_QUALITY_AND_STYLE.md соблюдён.
 ```
 
 ## 3. Code quality check
@@ -33,9 +35,31 @@
 [ ] Нет TODO вместо реализации.
 [ ] Diagnostic codes стабильные.
 [ ] Null/empty/error cases обработаны явно.
+[ ] Existing readable style preserved.
+[ ] Нет unrelated formatting churn.
 ```
 
-## 4. Verification check
+## 4. Test quality check
+
+```text
+[ ] Новые tests являются proof tests, а не weak tests.
+[ ] Tests assert exact diagnostic code when diagnostics are part of behavior.
+[ ] Tests assert exact count/order/state when those are part of behavior.
+[ ] Pass and fail/reject paths covered when applicable.
+[ ] Fixture/golden names describe scenarios.
+[ ] Fixtures/goldens are minimal and deterministic.
+[ ] Tests do not call real LLM/provider/network.
+[ ] Tests were not weakened/deleted to pass.
+```
+
+Перед финальным отчётом сверяйся с:
+
+```text
+docs/agent-tasks/_TEST_QUALITY_RULES.md
+docs/agent-tasks/_FIXTURE_AND_GOLDEN_RULES.md
+```
+
+## 5. Verification check
 
 ```text
 [ ] Запущен .devflow/scripts/check-all.ps1.
@@ -46,7 +70,23 @@
 [ ] Реальный LLM/provider не использован в tests.
 ```
 
-## 5. Documentation/state check
+## 6. Diff hygiene check
+
+```text
+[ ] Final intended changed files match allowed files.
+[ ] Generated run artifacts/logs/TRX/build outputs are not intended source changes.
+[ ] No .sln/.csproj changes unless explicitly allowed.
+[ ] No generated caches/local settings were edited as source.
+[ ] If git commands are forbidden, I reported changed files from my own edits and noted any uncertainty.
+```
+
+Перед финальным отчётом сверяйся с:
+
+```text
+docs/agent-tasks/_DIFF_HYGIENE_RULES.md
+```
+
+## 7. Documentation/state check
 
 ```text
 [ ] CURRENT_RUN.md обновлён.
@@ -54,9 +94,10 @@
 [ ] BLOCKERS.md обновлён, если есть blocker.
 [ ] RUN_REPORT_TEMPLATE.md использован для отчёта.
 [ ] Если milestone/current gate изменился, предложено обновить CURRENT_GENERATOR_STATE.md + .json, но не выдумано самовольно.
+[ ] Common quality rules added to shared docs, not copy-pasted into one-off task specs.
 ```
 
-## 6. Stop condition check
+## 8. Stop condition check
 
 ```text
 [ ] Я проверил STOP_CONDITIONS.md.
@@ -64,7 +105,7 @@
 [ ] Если был stop condition, работа остановлена.
 ```
 
-## 7. Final answer format
+## 9. Final answer format
 
 Финальный отчёт:
 
@@ -73,6 +114,9 @@ Task id:
 Summary:
 Changed files:
 Tests/checks:
+Proof-test quality:
+Fixture/golden quality:
+Diff hygiene:
 Warnings:
 Risks:
 Blocked/needs user decision:

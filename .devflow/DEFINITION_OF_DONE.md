@@ -23,6 +23,7 @@ If `Task source = agent_task_spec`, task is done only if:
 
 ```text
 [ ] Exactly one task spec was read.
+[ ] Shared agent-task quality docs were followed.
 [ ] Task spec gate status allowed execution.
 [ ] Required approval was present if needed.
 [ ] All Allowed files / Forbidden files boundaries were respected.
@@ -45,6 +46,7 @@ Task is not done if the task spec lacks proof tests. In that case the agent must
 [ ] Нет TODO вместо реализации.
 [ ] Diagnostic/error path deterministic.
 [ ] Public contracts/schema/dependencies не изменены без approval.
+[ ] Existing style preserved unless task explicitly asked for style migration.
 ```
 
 ## Test Done
@@ -57,17 +59,32 @@ Task is not done if the task spec lacks proof tests. In that case the agent must
 [ ] Runtime-facing behavior has smoke/scenario coverage when feasible.
 [ ] Tests do not call real LLM/provider/network.
 [ ] Agent task spec proof tests are represented in the diff.
+[ ] Diagnostic behavior asserts exact diagnostic code unless explicitly allowed otherwise.
+[ ] Count/order/state behavior is asserted exactly when it is part of the contract.
+[ ] Tests were not weakened/deleted to make build pass.
 ```
 
-## Docs Done
+## Fixture/Golden Done
 
 ```text
-[ ] Docs changed only when behavior/plan/state changed.
-[ ] Current state docs updated together if milestone/gate changed.
-[ ] No outdated instruction contradicts new docs.
-[ ] New phase/task docs are linked from PHASE_PLAN_INDEX.md or docs/agent-tasks/000_INDEX.md if they are intended for agent routing.
-[ ] Agent task pack ledger updated when adding/changing task specs.
+[ ] Fixtures are small, named by scenario, and deterministic.
+[ ] Golden/snapshot files are human-readable and minimal.
+[ ] Generated logs/run outputs are not used as source fixtures unless explicitly minimized/redacted by the task.
+[ ] Fixture loader follows existing pattern or task explains why a new local helper is needed.
+[ ] Raw JSON/Markdown/Lua strings remain readable; raw string literals are preferred when they improve readability.
 ```
+
+## Diff Hygiene Done
+
+```text
+[ ] Final changed files match task allowed files.
+[ ] No generated run artifacts/logs/TRX/build outputs are part of the final intended diff.
+[ ] No unrelated formatting churn.
+[ ] No .sln/.csproj/dependency changes unless explicitly allowed.
+[ ] No future-phase files were edited unless the task explicitly targeted docs/planning for that phase.
+```
+
+If the agent cannot use git commands, it must still report the files it intentionally changed and any uncertainty about generated/untracked outputs.
 
 ## Not Done
 
@@ -83,5 +100,7 @@ Task is not done if:
 - GamePackage schema changed silently;
 - NEXT_TASK points to impossible/blocked task without explanation;
 - agent_task_spec required proof tests were skipped;
-- implementation touched files outside the task spec allowed files.
+- implementation touched files outside the task spec allowed files;
+- diagnostic tests check only “failed” instead of exact code when exact code is part of the contract;
+- generated run artifacts or logs are part of the final intended diff.
 ```
