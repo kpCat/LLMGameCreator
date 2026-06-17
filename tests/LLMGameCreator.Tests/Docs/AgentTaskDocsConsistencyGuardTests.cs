@@ -249,7 +249,7 @@ x
 
     private static bool TryExtractSingleSpecPath(string line, out string specPath)
     {
-        specPath = null;
+        specPath = string.Empty;
         var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
         foreach (var part in parts)
         {
