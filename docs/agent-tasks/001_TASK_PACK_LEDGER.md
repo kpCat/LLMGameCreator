@@ -82,21 +82,6 @@ docs/agent-tasks/_DIFF_HYGIENE_RULES.md
 docs/agent-tasks/_AGENT_EXECUTION_QUALITY_RULES.md
 ```
 
-Files updated by Pack 004:
-
-```text
-.devflow/AUTONOMOUS_RUNBOOK.md
-.devflow/CODE_QUALITY_AND_STYLE.md
-.devflow/DEFINITION_OF_DONE.md
-.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md
-.devflow/prompts/local_agent_start_prompt.md
-docs/agent-tasks/000_INDEX.md
-docs/agent-tasks/001_TASK_PACK_LEDGER.md
-docs/agent-tasks/002_NEXT_PACK_REQUEST.md
-docs/agent-tasks/_TASK_TEMPLATE.md
-docs/agent-tasks/_TASK_READINESS_CHECKLIST.md
-```
-
 ## Pack 005 — M4.1 completion and roadmap policy
 
 Pack id: `agent-task-pack-005-m4-1-completion-and-roadmap-policy`
@@ -147,6 +132,36 @@ docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 ```
 
+## Pack 007 — locked M5 entry draft specs
+
+Pack id: `agent-task-pack-007-locked-m5-entry-draft-specs`
+
+Generated purpose:
+
+```text
+Add locked draft task specs for M5_004..M5_009 so the next phase has concrete technical task contracts without enabling M5 production work before M4.1 passes.
+```
+
+Files added by Pack 007:
+
+```text
+docs/agent-tasks/M5/M5_004_LUA_EXECUTOR_TEST_HARNESS.md
+docs/agent-tasks/M5/M5_005_LUA_EXECUTION_REQUEST_RESULT_CONTRACTS.md
+docs/agent-tasks/M5/M5_006_LUA_MANIFEST_BINDING_TO_REQUEST.md
+docs/agent-tasks/M5/M5_007_FORBIDDEN_API_GOLDEN_FIXTURES.md
+docs/agent-tasks/M5/M5_008_NO_GAMEPACKAGE_MUTATION_GUARD.md
+docs/agent-tasks/M5/M5_009_ONE_MODULE_FAMILY_ARTIFACT_ENVELOPE_SLICE.md
+```
+
+Files updated by Pack 007:
+
+```text
+docs/agent-tasks/000_INDEX.md
+docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+docs/agent-tasks/M5/000_M5_SEQUENCE.md
+```
+
 ## Current active gate assumption
 
 ```text
@@ -162,7 +177,8 @@ Allowed now:
 - repair prompt hardening based on diagnostics/corpus evidence;
 - docs/devflow/task-spec consistency work;
 - optional devflow gate automation, only with user approval;
-- roadmap/locked skeleton documentation for future phases.
+- roadmap/locked skeleton documentation for future phases;
+- locked M5 draft documentation that cannot be executed until M4.1 passes.
 ```
 
 Locked now:
@@ -184,29 +200,29 @@ Do not regenerate existing M4.1 executable specs from scratch. Amend them only i
 
 Do not unlock M5/M6/M8/M9/M10 from task-pack files alone. Only current-state docs may unlock phases.
 
-Do not convert future sequence skeletons into executable specs until the relevant gate is open.
+Do not treat Pack 007 M5 draft specs as executable until M4.1 is passed and the specs are refreshed from current source.
 
 ## Next pack should cover
 
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-007-next-step-by-gate-state
+agent-task-pack-008-next-step-by-gate-state
 ```
 
 Decision policy:
 
 ```text
-- If M4.1 is still active and no real report exists, prefer running existing M4.1 tasks before generating more executable specs.
-- If user wants documentation-only continuation, generate locked M5 entry draft specs, not executable production tasks.
-- If current-state docs explicitly pass M4.1, generate M5 executable entry specs from current source layout.
+- If user is ready to execute code tasks, use existing M4.1 executable specs rather than generating more future docs.
+- If user wants documentation-only continuation, generate only locked/high-level M6 planning refinements; do not create executable M6 implementation specs while M4.1 is active.
+- If current-state docs explicitly pass M4.1, generate source-refreshed M5 executable entry specs.
 - If local-agent execution finds problems, insert a repair/hardening pack before progressing.
 ```
 
 ## Open questions for next pack
 
-1. Has Pack 006 been applied to main and has `check-all.ps1` passed?
+1. Has Pack 007 been applied to main and has `check-all.ps1` passed?
 2. Has Kilo executed M4_1_005 or later using Pack 004 quality docs?
 3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
 4. Have `docs/CURRENT_GENERATOR_STATE.md` and `.json` marked M4.1 as passed?
-5. Should the next pack be M4.1 execution support, locked M5 draft specs, or executable M5 entry specs?
+5. Should the next pack be M4.1 execution support, locked M6 planning, source-refreshed M5 executable specs, or repair/hardening?

@@ -1,46 +1,51 @@
 # ARCHIVE_MANIFEST.md
 
-Archive: `llmgc_agent_task_pack_006.zip`
+Archive: `llmgc_agent_task_pack_007.zip`
 
-Pack id: `agent-task-pack-006-future-phase-sequence-skeletons`
+Pack id: `agent-task-pack-007-locked-m5-entry-draft-specs`
 
-Generated for repository:
+Generated purpose:
 
 ```text
-kpCat/LLMGameCreator
+Add locked, non-executable M5 entry draft specs for Lua module executor work. These specs make the next-phase roadmap concrete without allowing M5 production work while M4.1 is still active.
 ```
 
-## Files in archive
+## Added files
 
 ```text
-README_APPLY_AGENT_TASK_PACK_006.md
-ARCHIVE_MANIFEST.md
+docs/agent-tasks/M5/M5_004_LUA_EXECUTOR_TEST_HARNESS.md
+docs/agent-tasks/M5/M5_005_LUA_EXECUTION_REQUEST_RESULT_CONTRACTS.md
+docs/agent-tasks/M5/M5_006_LUA_MANIFEST_BINDING_TO_REQUEST.md
+docs/agent-tasks/M5/M5_007_FORBIDDEN_API_GOLDEN_FIXTURES.md
+docs/agent-tasks/M5/M5_008_NO_GAMEPACKAGE_MUTATION_GUARD.md
+docs/agent-tasks/M5/M5_009_ONE_MODULE_FAMILY_ARTIFACT_ENVELOPE_SLICE.md
+```
 
+## Updated files
+
+```text
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
-
 docs/agent-tasks/M5/000_M5_SEQUENCE.md
-docs/agent-tasks/M6/000_M6_SEQUENCE.md
-docs/agent-tasks/M8/000_M8_SEQUENCE.md
-docs/agent-tasks/M9/000_M9_SEQUENCE.md
-docs/agent-tasks/M10/000_M10_SEQUENCE.md
 ```
 
-## Safety boundary
+## Not changed
 
 ```text
-No src/ changes.
-No tests/ changes.
-No .sln/.csproj changes.
-No .devflow/scripts changes.
-No runtime/provider/Lua implementation changes.
-No phase unlock.
+src/**
+tests/**
+LLMGameCreator.sln
+*.csproj
+.devflow/scripts/**
+docs/CURRENT_GENERATOR_STATE.md
+docs/CURRENT_GENERATOR_STATE.json
 ```
 
-## Expected verification
+## Lock status
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1
-powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
+```text
+M4.1 remains active.
+M5 remains locked.
+M6/M8/M9/M10 remain locked.
 ```

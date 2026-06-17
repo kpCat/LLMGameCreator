@@ -15,51 +15,39 @@ AGENTS.md
 docs/CONTEXT_INDEX.md
 docs/CURRENT_GENERATOR_STATE.md
 docs/CURRENT_GENERATOR_STATE.json
-.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md
-.devflow/CONTEXT_BUDGET_POLICY.md
 .devflow/PHASE_PLAN_INDEX.md
+.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md
 .devflow/CODE_QUALITY_AND_STYLE.md
 .devflow/DEFINITION_OF_DONE.md
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 docs/agent-tasks/003_DEVELOPMENT_ROADMAP.md
 docs/agent-tasks/004_PACK_GENERATION_POLICY.md
-docs/agent-tasks/_TEST_QUALITY_RULES.md
-docs/agent-tasks/_FIXTURE_AND_GOLDEN_RULES.md
-docs/agent-tasks/_DIFF_HYGIENE_RULES.md
-docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
-docs/agent-tasks/M5/000_M5_SEQUENCE.md
-docs/agent-tasks/M6/000_M6_SEQUENCE.md
 ```
 
-Then read only phase/source files relevant to the next unlocked or explicitly requested locked pack.
+Then read only phase/source files relevant to the next unlocked or intentionally locked documentation pack.
 
-## Current pack state
-
-Latest generated pack:
+## Expected next pack
 
 ```text
-agent-task-pack-006-future-phase-sequence-skeletons
+agent-task-pack-008-next-step-by-gate-state
 ```
 
-## Expected next pack decision
-
-The next pack depends on current gate state:
+## Current decision tree
 
 ```text
-Case A — M4.1 is still active and no real report exists:
-  Prefer running existing M4.1 tasks instead of generating more executable specs.
-  If a pack is still requested, generate only M4.1 execution-support or repair/hardening docs.
+1. If M4.1 is still active and user is ready to run agents:
+   Prefer executing an existing M4.1 task spec instead of generating more future docs.
 
-Case B — user wants documentation-only roadmap continuation while M4.1 is still active:
-  Generate locked M5 entry draft specs or contract outlines.
-  They must be explicitly non-executable until M4.1 passes.
+2. If M4.1 is still active and user requests documentation-only continuation:
+   Generate only locked/high-level M6 planning refinements. Do not create executable M6 implementation specs.
 
-Case C — docs/CURRENT_GENERATOR_STATE.md and .json say M4.1 passed:
-  Generate Pack 007 M5 executable entry specs from current source layout.
+3. If M4.1 has explicitly passed in docs/CURRENT_GENERATOR_STATE.md and .json:
+   Generate source-refreshed M5 executable entry specs from current source layout.
 
-Case D — local-agent execution exposed quality/process problems:
-  Generate a repair/hardening pack before new feature specs.
+4. If Kilo/local-agent execution produced problems:
+   Generate a focused repair/hardening pack before progressing.
 ```
 
 ## Required output format
@@ -100,12 +88,14 @@ No proof test is acceptable if it only checks broad failure/success without pinn
 
 ## Current recommendation
 
-If the repository still has no real M4.1 evaluation report and M4.1 is not marked passed, do not produce M5/M6 executable implementation tasks.
-
-Prefer one of:
+Pack 007 added locked M5 draft specs. If M4.1 is still active, avoid producing more detailed future implementation specs unless the user explicitly asks for documentation-only planning. The strongest next practical step is to run or prepare execution of M4.1 tasks:
 
 ```text
-- run existing M4.1 executable tasks on an agent branch;
-- generate a locked M5 draft-spec pack for documentation only;
-- generate a repair/hardening pack if execution feedback requires it.
+M4_1_005 -> M4_1_006 -> M4_1_008
+```
+
+or use real-evaluation tasks if a report exists:
+
+```text
+M4_1_013 -> M4_1_014 -> M4_1_015 -> M4_1_016 -> M4_1_017
 ```

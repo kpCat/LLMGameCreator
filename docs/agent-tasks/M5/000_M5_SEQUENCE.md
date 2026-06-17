@@ -1,6 +1,6 @@
 # 000_M5_SEQUENCE.md — M5 Lua module executor integration sequence
 
-This file is a locked sequence skeleton. It is routing and planning guidance, not an executable task spec.
+This file is a locked sequence document. It is routing and planning guidance, not permission to execute M5.
 
 ## Gate status
 
@@ -14,7 +14,8 @@ M5 executable production work is allowed only when:
 ```text
 - docs/CURRENT_GENERATOR_STATE.md says M4.1 passed;
 - docs/CURRENT_GENERATOR_STATE.json says M4.1 passed;
-- the pack author refreshes task assumptions from current source layout.
+- the pack author refreshes task assumptions from current source layout;
+- user approval is present in NEXT_TASK.md for the selected M5 task.
 ```
 
 Task-pack files alone cannot unlock M5.
@@ -32,36 +33,35 @@ Introduce a safe, typed Lua execution path for generator modules without letting
 - typed request/result envelope;
 - diagnostics for capability mismatch;
 - GamePackage is not mutated by Lua execution;
-- runtime remains independent of editor generation providers.
+- runtime remains independent of editor generation providers;
+- generated Lua output is artifact data, not C# code.
 ```
 
-## Existing starting specs
-
-The following locked specs already exist and should be reviewed/refreshed before execution:
-
-```text
-M5_001_LUA_EXECUTOR_CONTRACTS.md
-M5_002_LUA_MANIFEST_VALIDATION.md
-M5_003_LUA_STATIC_SANDBOX_POLICY.md
-```
-
-## Planned sequence
+## M5 sequence
 
 | Order | Task ID | Intent | Status |
 |---:|---|---|---|
 | 1 | M5_001 | Executor contracts only: request/result/diagnostic boundary, no real execution. | Existing locked spec |
 | 2 | M5_002 | Manifest validation for Lua generator modules and capabilities. | Existing locked spec |
 | 3 | M5_003 | Static sandbox policy for forbidden APIs and dangerous language constructs. | Existing locked spec |
-| 4 | M5_004 | Lua executor test harness with fake/minimal scripts and no package mutation. | Skeleton only |
-| 5 | M5_005 | Request/result DTOs aligned with artifact envelope and deterministic seed. | Skeleton only |
-| 6 | M5_006 | Manifest binding from approved module manifest to execution request. | Skeleton only |
-| 7 | M5_007 | Forbidden API golden fixtures and exact diagnostic assertions. | Skeleton only |
-| 8 | M5_008 | No GamePackage mutation guard across executor path. | Skeleton only |
-| 9 | M5_009 | First one-module-family vertical slice producing a typed artifact envelope. | Skeleton only |
+| 4 | M5_004 | Lua executor test harness with fake/minimal scripts and no package mutation. | Locked draft spec |
+| 5 | M5_005 | Request/result DTO alignment with artifact envelope and deterministic seed. | Locked draft spec |
+| 6 | M5_006 | Manifest binding from approved module manifest to execution request. | Locked draft spec |
+| 7 | M5_007 | Forbidden API golden fixtures and exact diagnostic assertions. | Locked draft spec |
+| 8 | M5_008 | No GamePackage mutation guard across executor path. | Locked draft spec |
+| 9 | M5_009 | First one-module-family vertical slice producing a typed artifact envelope. | Locked draft spec |
+
+## Recommended execution after unlock
+
+Use this order unless source review shows a better split:
+
+```text
+M5_001 -> M5_002 -> M5_003 -> M5_004 -> M5_005 -> M5_006 -> M5_007 -> M5_008 -> M5_009
+```
 
 ## Future proof-test categories
 
-When converted to executable specs, M5 tasks must include exact proof tests for:
+When converted/refreshed for execution, M5 tasks must include exact proof tests for:
 
 ```text
 - forbidden API rejection with exact diagnostic code;
@@ -70,7 +70,8 @@ When converted to executable specs, M5 tasks must include exact proof tests for:
 - capability mismatch diagnostic;
 - malformed manifest diagnostic;
 - Lua execution result cannot mutate GamePackage;
-- artifact envelope validation before any package assembly.
+- artifact envelope validation before any package assembly;
+- runtime project remains untouched by generator executor work.
 ```
 
 ## Allowed implementation direction after unlock
@@ -80,6 +81,7 @@ When converted to executable specs, M5 tasks must include exact proof tests for:
 - Prefer one module family before generic module orchestration.
 - Prefer corpus/golden tests over real model/provider calls.
 - Keep execution result as data/envelope; do not apply directly to GamePackage.
+- Keep Lua execution under Scripting/Application ownership; Runtime must not depend on it.
 ```
 
 ## Stop rules
@@ -92,7 +94,8 @@ Stop instead of executing M5 if:
 - Lua needs file/network/provider access;
 - GamePackage mutation is required by the design;
 - runtime would gain dependency on Lua generation/editor services;
-- proof tests cannot pin deterministic behavior.
+- proof tests cannot pin deterministic behavior;
+- selected spec is stale against current source layout.
 ```
 
 ## Candidate next pack when unlocked
@@ -100,3 +103,5 @@ Stop instead of executing M5 if:
 ```text
 agent-task-pack-007-m5-executable-entry-specs
 ```
+
+If this file already contains locked M5 draft specs but M4.1 is still active, the next useful pack is either M4.1 execution support or source-refreshed M5 executable specs after M4.1 passes.
