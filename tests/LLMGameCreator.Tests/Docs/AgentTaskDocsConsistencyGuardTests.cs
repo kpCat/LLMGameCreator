@@ -45,19 +45,15 @@ public sealed class AgentTaskDocsConsistencyGuardTests
         var indexText = File.ReadAllText(Path.Combine(DocsAgentTasksDir, "000_INDEX.md"));
         var executableSpecs = ExtractExecutableTaskSpecPathsFromIndex(indexText);
 
+        Assert.NotEmpty(executableSpecs);
+
         foreach (var relativePath in executableSpecs)
         {
             var fullPath = Path.Combine(RepoRoot, relativePath.Replace('/', Path.DirectorySeparatorChar));
-            if (!File.Exists(fullPath))
-            {
-                continue;
-            }
+            Assert.True(File.Exists(fullPath), $"Executable task spec is missing: {relativePath}");
 
             var text = File.ReadAllText(fullPath);
-
-            Assert.Contains("# Proof tests", text, StringComparison.OrdinalIgnoreCase);
-            Assert.Contains("## System gates", text, StringComparison.OrdinalIgnoreCase);
-            Assert.Contains("## Stop conditions", text, StringComparison.OrdinalIgnoreCase);
+            ValidateExecutableSpec(text, relativePath);
         }
     }
 
@@ -67,19 +63,33 @@ public sealed class AgentTaskDocsConsistencyGuardTests
         var indexText = File.ReadAllText(Path.Combine(DocsAgentTasksDir, "000_INDEX.md"));
         var executableSpecs = ExtractExecutableTaskSpecPathsFromIndex(indexText);
 
+        Assert.NotEmpty(executableSpecs);
+
         foreach (var relativePath in executableSpecs)
         {
             var fullPath = Path.Combine(RepoRoot, relativePath.Replace('/', Path.DirectorySeparatorChar));
-            if (!File.Exists(fullPath))
-            {
-                continue;
-            }
+            Assert.True(File.Exists(fullPath), $"Executable task spec is missing: {relativePath}");
 
             var text = File.ReadAllText(fullPath);
-
-            Assert.Contains("## Expected final report", text, StringComparison.OrdinalIgnoreCase);
-            Assert.Contains("## Next task pointer", text, StringComparison.OrdinalIgnoreCase);
+            ValidateExecutableSpec(text, relativePath, "## Expected final report", "## Next task pointer");
         }
+    }
+
+    [Fact]
+    public void ExtractExecutableTaskSpecPathsFromIndexExtractsTableRowEndingWithPipe()
+    {
+        var indexText = @"### M4.1
+
+| Task | Status | Spec |
+|---|---|---|
+| M4_1_008 | Ready with approval | `M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md` |
+| M4_1_018 | Support doc | `M4_1/018_EXEC_QUEUE.md` |
+";
+
+        var executableSpecs = ExtractExecutableTaskSpecPathsFromIndex(indexText).ToList();
+
+        Assert.Contains("docs/agent-tasks/M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md", executableSpecs);
+        Assert.DoesNotContain("docs/agent-tasks/M4_1/018_EXEC_QUEUE.md", executableSpecs);
     }
 
     [Fact]
@@ -203,21 +213,24 @@ x
         });
     }
 
-    private static void ValidateExecutableSpec(string text, string fileName)
+    private static void ValidateExecutableSpec(string text, string fileName, params string[] requiredSubstrings)
     {
-        if (!text.Contains("# Proof tests", StringComparison.OrdinalIgnoreCase))
+        if (requiredSubstrings.Length == 0)
         {
-            throw new Xunit.Sdk.XunitException($"Proof tests section missing in: {fileName}");
+            requiredSubstrings = new[]
+            {
+                "# Proof tests",
+                "## System gates",
+                "## Stop conditions"
+            };
         }
 
-        if (!text.Contains("## System gates", StringComparison.OrdinalIgnoreCase))
+        foreach (var requiredSubstring in requiredSubstrings)
         {
-            throw new Xunit.Sdk.XunitException($"System gates section missing in: {fileName}");
-        }
-
-        if (!text.Contains("## Stop conditions", StringComparison.OrdinalIgnoreCase))
-        {
-            throw new Xunit.Sdk.XunitException($"Stop conditions section missing in: {fileName}");
+            if (!text.Contains(requiredSubstring, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new Xunit.Sdk.XunitException($"{requiredSubstring} section missing in: {fileName}");
+            }
         }
     }
 
@@ -235,51 +248,42 @@ x
         {
             var line = rawLine.Trim();
 
-            if (line.StartsWith("| Task | Status | Spec |", StringComparison.OrdinalIgnoreCase)
-                || line.StartsWith("| Task| Status| Spec|", StringComparison.OrdinalIgnoreCase))
+            if (IsExecutableTaskTableHeader(line))
             {
                 inExecutableTable = true;
                 continue;
             }
 
-            if (inExecutableTable && line.StartsWith("### ", StringComparison.OrdinalIgnoreCase))
-            {
-                inExecutableTable = false;
-                continue;
-            }
-
-            if (!inExecutableTable || !line.StartsWith("|", StringComparison.OrdinalIgnoreCase) || line.EndsWith("|", StringComparison.OrdinalIgnoreCase))
-            {
-                var clean = line.Trim('|').Trim();
-                if (!clean.Contains("|", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                continue;
-            }
-
-            var segments = line.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            if (segments.Length < 3)
+            if (!inExecutableTable)
             {
                 continue;
             }
 
-            var candidate = segments[2].Trim();
+            if (line.StartsWith("### ", StringComparison.OrdinalIgnoreCase))
+            {
+                yield break;
+            }
+
+            if (!line.StartsWith("|", StringComparison.OrdinalIgnoreCase) || !line.EndsWith("|", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var columns = line.Trim().Trim('|').Split('|').Select(c => c.Trim()).ToList();
+            if (columns.Count < 3 || IsSeparatorRow(columns))
+            {
+                continue;
+            }
+
+            var candidate = columns[2].Trim();
             if (string.IsNullOrWhiteSpace(candidate))
             {
                 continue;
             }
 
-            var normalized = candidate.Trim('`').Trim('"').Trim('\'');
+            var normalized = NormalizeSpecPath(candidate);
 
-            if (!normalized.StartsWith("docs/", StringComparison.OrdinalIgnoreCase))
-            {
-                normalized = "docs/agent-tasks/" + normalized;
-            }
-
-            if (normalized.IndexOf("M4_1/", StringComparison.OrdinalIgnoreCase) < 0
-                && normalized.IndexOf("docs/agent-tasks/M4_1/", StringComparison.OrdinalIgnoreCase) < 0)
+            if (!normalized.StartsWith("docs/agent-tasks/M4_1/", StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
@@ -292,6 +296,42 @@ x
 
             yield return normalized;
         }
+    }
+
+    private static bool IsExecutableTaskTableHeader(string line)
+    {
+        if (!line.StartsWith("|", StringComparison.OrdinalIgnoreCase) || !line.EndsWith("|", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        var columns = line.Trim().Trim('|').Split('|').Select(c => c.Trim()).ToList();
+        return columns.Count >= 3
+               && columns[0].Equals("Task", StringComparison.OrdinalIgnoreCase)
+               && columns[2].Equals("Spec", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool IsSeparatorRow(System.Collections.Generic.IReadOnlyList<string> columns)
+    {
+        return columns.Count >= 3 && columns.Take(3).All(IsSeparatorCell);
+    }
+
+    private static bool IsSeparatorCell(string cell)
+    {
+        var trimmed = cell.Trim();
+        return trimmed.Length > 0 && trimmed.All(ch => ch == '-' || ch == ':' || ch == ' ');
+    }
+
+    private static string NormalizeSpecPath(string candidate)
+    {
+        var normalized = candidate.Trim('`').Trim('"').Trim('\'').Trim();
+
+        if (!normalized.StartsWith("docs/", StringComparison.OrdinalIgnoreCase))
+        {
+            normalized = "docs/agent-tasks/" + normalized;
+        }
+
+        return normalized;
     }
 
     private static string FindRepoRoot()
