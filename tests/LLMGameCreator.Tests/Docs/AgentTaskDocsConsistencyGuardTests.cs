@@ -254,7 +254,7 @@ Stop action: Do not start future work. Review the completed task, check-all outp
 
             try
             {
-                using var process = System.Diagnostics.Process.Start(info);
+                using var process = System.Diagnostics.Process.Start(info)!;
                 Assert.True(process.WaitForExit(120000), "check-devflow-state.ps1 did not exit in time for stop mode test.");
                 Assert.Equal(0, process.ExitCode);
             }
@@ -309,7 +309,7 @@ Expected stop after completion: yes
 
             try
             {
-                using var process = System.Diagnostics.Process.Start(info);
+                using var process = System.Diagnostics.Process.Start(info)!;
                 Assert.True(process.WaitForExit(120000), "check-devflow-state.ps1 did not exit in time for bad stop mode test.");
                 Assert.NotEqual(0, process.ExitCode);
             }
