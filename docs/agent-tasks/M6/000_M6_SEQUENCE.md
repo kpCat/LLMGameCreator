@@ -47,13 +47,27 @@ M6_001_ARTIFACT_TO_PACKAGE_MAPPING_CONTRACTS.md
 | Order | Task ID | Intent | Status |
 |---:|---|---|---|
 | 1 | M6_001 | Artifact-to-package mapping contracts only. | Existing locked spec |
-| 2 | M6_002 | Artifact envelope -> package base mapping. | Skeleton only |
-| 3 | M6_003 | Items/economy mapping. | Skeleton only |
-| 4 | M6_004 | Scene/map mapping. | Skeleton only |
-| 5 | M6_005 | Dialogue/quest mapping. | Skeleton only |
-| 6 | M6_006 | Package validation after assembly. | Skeleton only |
-| 7 | M6_007 | Review/apply boundary for assembled package changes. | Skeleton only |
-| 8 | M6_008 | First rich sample package vertical slice. | Skeleton only |
+| 2 | M6_002 | Artifact envelope -> package base mapping. | Locked draft spec |
+| 3 | M6_003 | Items/economy mapping. | Locked draft spec |
+| 4 | M6_004 | Scene/map mapping. | Locked draft spec |
+| 5 | M6_005 | Dialogue/quest mapping. | Locked draft spec |
+| 6 | M6_006 | Package validation after assembly. | Locked draft spec |
+| 7 | M6_007 | Review/apply boundary for assembled package changes. | Locked draft spec |
+| 8 | M6_008 | First rich sample package vertical slice. | Locked draft spec |
+
+## Locked draft specs
+
+```text
+M6_002_BASE_MAPPING.md
+M6_003_ITEMS_MAPPING.md
+M6_004_SCENE_MAPPING.md
+M6_005_QUEST_MAPPING.md
+M6_006_VALIDATION.md
+M6_007_REVIEW_APPLY.md
+M6_008_SAMPLE_SLICE.md
+```
+
+These files are planning contracts only while M4.1/M5 remain unresolved. Before any of them becomes executable, refresh the allowed files, local source patterns, diagnostics, and proof tests from current source.
 
 ## Future proof-test categories
 

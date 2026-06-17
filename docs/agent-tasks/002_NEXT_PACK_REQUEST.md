@@ -31,7 +31,7 @@ Then read only phase/source files relevant to the next unlocked or intentionally
 ## Expected next pack
 
 ```text
-agent-task-pack-008-next-step-by-gate-state
+agent-task-pack-009-next-step-by-gate-state
 ```
 
 ## Current decision tree
@@ -41,7 +41,7 @@ agent-task-pack-008-next-step-by-gate-state
    Prefer executing an existing M4.1 task spec instead of generating more future docs.
 
 2. If M4.1 is still active and user requests documentation-only continuation:
-   Generate only locked/high-level M6 planning refinements. Do not create executable M6 implementation specs.
+   Generate only locked/high-level far-phase planning refinements. Do not create executable implementation specs.
 
 3. If M4.1 has explicitly passed in docs/CURRENT_GENERATOR_STATE.md and .json:
    Generate source-refreshed M5 executable entry specs from current source layout.
@@ -88,7 +88,7 @@ No proof test is acceptable if it only checks broad failure/success without pinn
 
 ## Current recommendation
 
-Pack 007 added locked M5 draft specs. If M4.1 is still active, avoid producing more detailed future implementation specs unless the user explicitly asks for documentation-only planning. The strongest next practical step is to run or prepare execution of M4.1 tasks:
+Pack 008 added locked M6 draft specs. If M4.1 is still active, avoid producing more detailed future implementation specs unless the user explicitly asks for documentation-only planning. The strongest next practical step is to run or prepare execution of M4.1 tasks:
 
 ```text
 M4_1_005 -> M4_1_006 -> M4_1_008
@@ -99,3 +99,5 @@ or use real-evaluation tasks if a report exists:
 ```text
 M4_1_013 -> M4_1_014 -> M4_1_015 -> M4_1_016 -> M4_1_017
 ```
+
+If the user still wants more documentation before agent execution, generate only locked sequence refinements for M8/M9/M10 or a pack that prepares branch/run instructions for agent execution; do not unlock implementation phases.

@@ -26,7 +26,7 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 7. If a task spec conflicts with current source code, stop and report the conflict instead of inventing a new architecture.
 8. Shared quality docs are binding for every task unless the task spec explicitly overrides them with user approval.
 9. Future phase sequence files are routing docs, not executable specs.
-10. Locked future specs are not executable permission. They must be refreshed against current source when their gate opens.
+10. Locked draft specs are planning contracts only; they must be refreshed from source before execution.
 
 ## Shared templates, gates, and quality docs
 
@@ -111,14 +111,14 @@ Locked until M4.1 gate review passes.
 | Task | Status | Spec |
 |---|---|---|
 | M5_001 | Locked by M4.1 gate | `M5/M5_001_LUA_EXECUTOR_CONTRACTS.md` |
-| M5_002 | Locked by M4.1 gate and M5_001 | `M5/M5_002_LUA_MANIFEST_VALIDATION.md` |
-| M5_003 | Locked by M4.1 gate and M5_001/M5_002 | `M5/M5_003_LUA_STATIC_SANDBOX_POLICY.md` |
-| M5_004 | Locked draft by M4.1 gate | `M5/M5_004_LUA_EXECUTOR_TEST_HARNESS.md` |
-| M5_005 | Locked draft by M4.1 gate and M5_004 | `M5/M5_005_LUA_EXECUTION_REQUEST_RESULT_CONTRACTS.md` |
-| M5_006 | Locked draft by M4.1 gate and M5_005 | `M5/M5_006_LUA_MANIFEST_BINDING_TO_REQUEST.md` |
-| M5_007 | Locked draft by M4.1 gate and M5_003/M5_004 | `M5/M5_007_FORBIDDEN_API_GOLDEN_FIXTURES.md` |
-| M5_008 | Locked draft by M4.1 gate and M5_004/M5_005 | `M5/M5_008_NO_GAMEPACKAGE_MUTATION_GUARD.md` |
-| M5_009 | Locked draft by M4.1 gate and M5_001..M5_008 | `M5/M5_009_ONE_MODULE_FAMILY_ARTIFACT_ENVELOPE_SLICE.md` |
+| M5_002 | Locked by M4.1 gate | `M5/M5_002_LUA_MANIFEST_VALIDATION.md` |
+| M5_003 | Locked by M4.1 gate | `M5/M5_003_LUA_STATIC_SANDBOX_POLICY.md` |
+| M5_004 | Locked draft | `M5/M5_004_LUA_EXECUTOR_TEST_HARNESS.md` |
+| M5_005 | Locked draft | `M5/M5_005_LUA_EXECUTION_REQUEST_RESULT_CONTRACTS.md` |
+| M5_006 | Locked draft | `M5/M5_006_LUA_MANIFEST_BINDING_TO_REQUEST.md` |
+| M5_007 | Locked draft | `M5/M5_007_FORBIDDEN_API_GOLDEN_FIXTURES.md` |
+| M5_008 | Locked draft | `M5/M5_008_NO_GAMEPACKAGE_MUTATION_GUARD.md` |
+| M5_009 | Locked draft | `M5/M5_009_ONE_MODULE_FAMILY_ARTIFACT_ENVELOPE_SLICE.md` |
 
 ### M6 — rich GamePackage assembly
 
@@ -133,7 +133,13 @@ Locked until M4.1 gate review passes and selected artifact families are stable.
 | Task | Status | Spec |
 |---|---|---|
 | M6_001 | Locked by M4.1 gate | `M6/M6_001_ARTIFACT_TO_PACKAGE_MAPPING_CONTRACTS.md` |
-| M6_002..M6_008 | Skeleton only | `M6/000_M6_SEQUENCE.md` |
+| M6_002 | Locked draft | `M6/M6_002_BASE_MAPPING.md` |
+| M6_003 | Locked draft | `M6/M6_003_ITEMS_MAPPING.md` |
+| M6_004 | Locked draft | `M6/M6_004_SCENE_MAPPING.md` |
+| M6_005 | Locked draft | `M6/M6_005_QUEST_MAPPING.md` |
+| M6_006 | Locked draft | `M6/M6_006_VALIDATION.md` |
+| M6_007 | Locked draft | `M6/M6_007_REVIEW_APPLY.md` |
+| M6_008 | Locked draft | `M6/M6_008_SAMPLE_SLICE.md` |
 
 ### M8 — runtime preview validation loop
 
