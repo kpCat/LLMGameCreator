@@ -75,15 +75,17 @@ public sealed class GeneratorPlanStrictLlmArtifactRepairPromptBuilderTests
         var contract = Contract("game_profile_v1");
         var originalPrompt = CreatePrompt(contract.ContractId);
         var diagnostics = Array.Empty<GeneratorPlanStrictLlmArtifactDiagnostic>();
-        var overlongResponse = new string('x', 15000);
+        var overlongResponse = new string('x', 20000);
 
         var prompt = _builder.BuildRepairPrompt(contract, originalPrompt, overlongResponse, diagnostics, 0);
 
         Assert.Contains("Invalid response content:", prompt.UserPrompt);
-        var contentAfterLabel = prompt.UserPrompt.Substring(prompt.UserPrompt.IndexOf("Invalid response content:\n") + "Invalid response content:\n".Length);
-        var linesAfterContent = contentAfterLabel.Split('\n');
-        var contentLine = linesAfterContent[0];
-        Assert.True(contentLine.Length <= 12000, $"Content line length {contentLine.Length} exceeds 12000");
+        Assert.DoesNotContain(overlongResponse, prompt.UserPrompt);
+        var lines = prompt.UserPrompt.Split('\n');
+        var contentLineIdx = Array.FindIndex(lines, l => l.Contains("Invalid response content:")) + 1;
+        Assert.True(contentLineIdx < lines.Length);
+        var excerpt = lines[contentLineIdx].Trim();
+        Assert.True(excerpt.Length <= 12000, $"Excerpt length {excerpt.Length} exceeds 12000");
     }
 
     [Fact]

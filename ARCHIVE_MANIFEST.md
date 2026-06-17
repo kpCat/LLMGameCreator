@@ -1,11 +1,17 @@
-# llmgc_next_task_006
+# ARCHIVE_MANIFEST.md
 
-Files:
+Archive: `llmgc_next_task_008.zip`
+
+## Files
 
 ```text
 .devflow/NEXT_TASK.md
-README_APPLY_NEXT_TASK_006.md
+README_APPLY_NEXT_TASK_008.md
 ARCHIVE_MANIFEST.md
 ```
 
-Purpose: switch the current execution branch to `M4_1_006` after `M4_1_005_REPAIR` review.
+## Intent
+
+Switch NEXT_TASK to `M4_1_008` after M4_1_006 has passed.
+
+No source code, tests, project files, scripts, runtime, provider, schema, or package files are included.
