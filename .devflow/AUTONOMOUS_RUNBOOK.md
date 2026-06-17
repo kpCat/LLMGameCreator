@@ -47,17 +47,13 @@ docs/CONTEXT_INDEX.md
 docs/CURRENT_GENERATOR_STATE.md
 ```
 
-Если задача generator/full-generator — дополнительно прочитай:
+Если задача использует `Task source = agent_task_spec`, прочитай:
 
 ```text
-docs/ROADMAP_TO_FULL_GENERATOR.md
+docs/agent-tasks/000_INDEX.md
 ```
 
-Если задача касается validation — прочитай:
-
-```text
-docs/VALIDATION_STRATEGY.md
-```
+Затем читай ровно один task spec, указанный в `NEXT_TASK.md`. Do not read all task specs.
 
 Если задача касается текущего M4.1 strict LLM evaluation — прочитай:
 
@@ -69,25 +65,16 @@ docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
 
 Не читай весь `docs/` без необходимости. Используй `docs/CONTEXT_INDEX.md` как роутинг.
 
-Если `.devflow/NEXT_TASK.md` указывает на phase plan или task card, прочитай `.devflow/PHASE_PLAN_INDEX.md`, затем ровно один релевантный файл из `.devflow/phase-plans/`. Не читай все фазовые планы за один запуск.
-
 ## 2. Выбор задачи
 
 1. Открой `.devflow/NEXT_TASK.md`.
-2. Найди id задачи.
-3. Найди этот id в `.devflow/TASK_GRAPH.json`.
-4. Если id не найден в `TASK_GRAPH.json`, но `NEXT_TASK.md` указывает phase plan/task card, работай по `.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md` и прочитай ровно один phase plan file.
-5. Проверь:
-   - `status`;
-   - `blocked_by`;
-   - `requires_approval`;
-   - `allowed_before_m4_1_gate_review`;
-   - `max_changed_files`;
-   - `required_checks`.
+2. Найди task source/id.
+3. Если `Task source = task_graph`, найди задачу в `.devflow/TASK_GRAPH.json`.
+4. Если `Task source = phase_plan`, работай по `.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md` и прочитай ровно один phase plan file.
+5. Если `Task source = agent_task_spec`, прочитай `docs/agent-tasks/000_INDEX.md`, shared quality docs listed there, and exactly one task spec file.
+6. Проверь status/approval/allowed files/proof tests/system gates.
 
-Если задача заблокирована, остановись и обнови `.devflow/BLOCKERS.md`.
-
-Если задача требует approval, остановись и явно напиши, какое решение нужно от пользователя.
+Если задача заблокирована или требует approval — остановись и обнови `.devflow/BLOCKERS.md`.
 
 ## 3. Мини-план перед изменениями
 
@@ -97,10 +84,13 @@ docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
 Task id:
 Goal:
 Source docs read:
+Task spec:
 Target files:
 Local analogs found:
+Expected proof assertions:
 Non-goals:
 Expected checks:
+Diff hygiene risks:
 Risk:
 ```
 
@@ -118,26 +108,13 @@ max changed files per task: 8
 
 Не меняй одновременно:
 
-- UI и storage;
-- runtime и LLM generation;
-- schema и validator;
-- Lua executor и package assembly;
-- большой refactor и feature behavior.
-
-## 4.1. Контекстный бюджет
-
-Перед чтением дополнительных файлов проверь `.devflow/CONTEXT_BUDGET_POLICY.md`.
-
-Лимиты по умолчанию:
-
 ```text
-max source docs: 6
-max source code files before planning: 12
-max local analog files: 3
-max target files to patch: 8
+UI и storage
+runtime и LLM generation
+schema и validator
+Lua executor и package assembly
+большой refactor и feature behavior
 ```
-
-Если нужно больше — остановись и предложи разбиение.
 
 ## 5. Изменение кода
 
@@ -145,15 +122,16 @@ max target files to patch: 8
 
 Правила:
 
+```text
 - сохраняй существующий стиль;
-- добавляй стабильные diagnostic codes;
-- не глотай исключения;
+- не переписывай unrelated code/tests механически;
+- тесты должны assert-ить exact diagnostic/state/count/order, если это часть контракта;
 - не добавляй silent fallback, если ошибка должна быть видна;
-- для новых behavior добавляй validation/test/sample, если это требуется матрицей;
 - не меняй public contracts без явного указания task-а;
-- не добавляй TODO вместо реализации, если task требует завершённый behavior;
-- соблюдай `.devflow/CODE_QUALITY_AND_STYLE.md`;
-- перед финальным отчётом пройди `.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md`.
+- не добавляй TODO вместо реализации;
+- соблюдай .devflow/CODE_QUALITY_AND_STYLE.md;
+- соблюдай shared quality docs from docs/agent-tasks/.
+```
 
 ## 6. Проверки после изменения
 
@@ -163,45 +141,61 @@ max target files to patch: 8
 powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
 ```
 
-Если задача требует только быстрый build, можно сначала запустить:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\build.ps1
-```
-
-Но финальная проверка задачи всё равно должна идти через `check-all.ps1`, если она не заблокирована внешней причиной.
+Финальная проверка задачи должна идти через `check-all.ps1`, если она не заблокирована внешней причиной.
 
 ## 7. Repair loop
 
 Если build/test/checks упали:
 
+```text
 1. Прочитай конкретную ошибку.
 2. Определи, это ошибка твоего patch-а или существующая baseline-проблема.
 3. Сделай максимум 2 repair attempts.
 4. После каждой repair attempt снова запускай релевантную проверку.
 5. Если после 2 попыток не исправлено — остановись и запиши блокер.
-
-Запрещено:
-
-- удалять тесты ради прохождения;
-- ослаблять validator без причины;
-- менять production behavior только ради теста;
-- менять schema ради быстрого фикса;
-- делать широкий refactor ради одной ошибки.
-
-## 8. Simulation/modeling gate
-
-Если задача касается LLM pipeline, parser, repair, validator, package assembly или runtime smoke, проверь требования из `.devflow/MODELING_STRATEGY.md`.
-
-Приоритет моделирования:
-
-```text
-fake client / corpus / fixtures / deterministic simulation
 ```
 
-Реальные LLM-вызовы разрешены только вручную или в explicit user-triggered режимах. В автотестах реальные LLM/provider вызовы запрещены.
+Запрещено удалять/ослаблять тесты ради прохождения.
 
-## 9. Завершение задачи
+## 8. Proof-test gate
+
+Перед финальным отчётом убедись:
+
+```text
+- tests are not weak;
+- diagnostic behavior asserts exact codes when applicable;
+- state/count/order assertions are exact when behavior requires them;
+- fixtures/goldens are small and deterministic;
+- existing readable style was preserved.
+```
+
+Use:
+
+```text
+docs/agent-tasks/_TEST_QUALITY_RULES.md
+docs/agent-tasks/_FIXTURE_AND_GOLDEN_RULES.md
+```
+
+## 9. Diff hygiene gate
+
+Перед финальным отчётом убедись:
+
+```text
+- final intended changed files match allowed files;
+- no generated run/log/TRX/build outputs are intended source changes;
+- no unrelated formatting churn;
+- no .sln/.csproj/dependency changes unless explicitly allowed.
+```
+
+If git commands are forbidden, do not run git. Report the files you intentionally edited and any uncertainty.
+
+Use:
+
+```text
+docs/agent-tasks/_DIFF_HYGIENE_RULES.md
+```
+
+## 10. Завершение задачи
 
 После успешных проверок обнови:
 
@@ -210,23 +204,8 @@ fake client / corpus / fixtures / deterministic simulation
 .devflow/NEXT_TASK.md
 ```
 
-Если task graph требует смены статуса — предложи изменение, но не выдумывай новый roadmap.
-
 Финальный отчёт должен идти по `.devflow/RUN_REPORT_TEMPLATE.md`.
 
 Задача считается done только если выполнен `.devflow/DEFINITION_OF_DONE.md`.
 
-## 10. Переход к следующей задаче
-
-По умолчанию остановись после одной задачи.
-
-Продолжать к следующей задаче можно только если:
-
-- текущая задача прошла build/test/check-all;
-- нет блокеров;
-- следующая задача не требует approval;
-- следующая задача не заблокирована M4.1 gate;
-- итоговое число изменённых файлов за весь запуск остаётся разумным;
-- не было признаков “пошло не туда”.
-
-Если сомневаешься — остановись.
+По умолчанию остановись после одной задачи. Если сомневаешься — остановись.

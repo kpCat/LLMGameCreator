@@ -7,7 +7,7 @@
 Не читай всё подряд. Читай только то, что нужно для текущей задачи.
 
 ```text
-context = role + runbook + stop conditions + next task + task source docs + target files + 2-3 local analogs + failing logs
+context = role + runbook + stop conditions + next task + one task source + task source docs + target files + 2-3 local analogs + failing logs
 ```
 
 ## Уровни чтения
@@ -26,11 +26,21 @@ docs/CONTEXT_INDEX.md
 docs/CURRENT_GENERATOR_STATE.md
 ```
 
-### Tier 1 — читать по типу задачи
+### Tier 1 — читать по типу источника задачи
 
-Используй `docs/CONTEXT_INDEX.md` и `.devflow/PHASE_PLAN_INDEX.md`.
+Use `.devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md`.
 
-Примеры:
+```text
+Task source = task_graph       -> read .devflow/TASK_GRAPH.json entry only
+Task source = phase_plan       -> read .devflow/PHASE_PLAN_INDEX.md + exactly one phase plan
+Task source = agent_task_spec  -> read docs/agent-tasks/000_INDEX.md + exactly one task spec
+```
+
+### Tier 2 — читать по типу задачи
+
+Используй `docs/CONTEXT_INDEX.md`, `.devflow/PHASE_PLAN_INDEX.md`, and/or the selected `docs/agent-tasks/**` spec.
+
+Examples:
 
 ```text
 LLM/evaluation task -> docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md
@@ -38,9 +48,10 @@ strict generation task -> docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
 validation task -> docs/VALIDATION_STRATEGY.md
 runtime task -> runtime read set from docs/CONTEXT_INDEX.md
 WinForms task -> docs/WINFORMS_DESIGNER_RULES.md + target page + 1-2 analog pages
+agent_task_spec -> only Source-of-truth docs and Existing patterns listed in the spec
 ```
 
-### Tier 2 — target files
+### Tier 3 — target files
 
 Перед patch-ем найди и прочитай:
 
@@ -51,10 +62,11 @@ WinForms task -> docs/WINFORMS_DESIGNER_RULES.md + target page + 1-2 analog page
 - только нужные fixtures/samples.
 ```
 
-### Tier 3 — запрещённое чтение без причины
+### Tier 4 — запрещённое чтение без причины
 
 ```text
 - весь docs/;
+- все docs/agent-tasks/ specs;
 - весь src/;
 - все Designer-файлы;
 - все tests/;
@@ -69,6 +81,8 @@ WinForms task -> docs/WINFORMS_DESIGNER_RULES.md + target page + 1-2 analog page
 
 ```text
 max source docs: 6
+max agent task specs: 1
+max phase plan files: 1
 max source code files before planning: 12
 max local analog files: 3
 max target files to patch: 8
@@ -81,14 +95,28 @@ max log files: 3 latest/relevant
 
 Не читай все файлы `.devflow/phase-plans/`.
 
-Алгоритм:
+Algorithm:
 
 ```text
-1. Прочитай .devflow/PHASE_PLAN_INDEX.md.
-2. Определи текущую phase по NEXT_TASK.md или CURRENT_GENERATOR_STATE.
-3. Прочитай ровно один phase plan file.
-4. Возьми из него ровно один task card.
-5. Если task card ссылается на docs/code, читай только этот read set.
+1. Read .devflow/PHASE_PLAN_INDEX.md.
+2. Determine current phase from NEXT_TASK.md or CURRENT_GENERATOR_STATE.
+3. Read exactly one phase plan file.
+4. Take exactly one task card.
+5. If task card points to docs/agent-tasks, switch to agent_task_spec mode and read exactly one spec.
+```
+
+## Как читать agent task specs
+
+Не читай все файлы `docs/agent-tasks/`.
+
+Algorithm:
+
+```text
+1. Read docs/agent-tasks/000_INDEX.md.
+2. Read exactly one task spec named by NEXT_TASK.md.
+3. Verify readiness: proof tests, allowed files, gate status, approval, stop conditions.
+4. Read only the task spec's Source-of-truth docs and Existing patterns to inspect.
+5. If implementation needs files outside Allowed files, stop.
 ```
 
 ## Как работать с ошибками

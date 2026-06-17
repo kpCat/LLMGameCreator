@@ -7,6 +7,7 @@
 ```text
 Read this index, then read exactly one phase plan file relevant to NEXT_TASK/current gate.
 Do not read all phase-plans in one run.
+If a phase plan points to docs/agent-tasks, read docs/agent-tasks/000_INDEX.md and exactly one task spec.
 ```
 
 ## Current gate
@@ -14,6 +15,27 @@ Do not read all phase-plans in one run.
 Текущий known gate: M4.1 real-model evaluation gate.
 
 До явного обновления `docs/CURRENT_GENERATOR_STATE.md` и `.json` нельзя выполнять M5/M6/M8 как production work.
+
+## Agent task specs
+
+Executable task specs live under:
+
+```text
+docs/agent-tasks/
+```
+
+Routing index:
+
+```text
+docs/agent-tasks/000_INDEX.md
+```
+
+Rule:
+
+```text
+Do not implement directly from a broad phase plan if a matching agent task spec exists.
+Use the phase plan as a router, then execute the exact task spec.
+```
 
 ## Phase plans
 
@@ -31,9 +53,10 @@ Do not read all phase-plans in one run.
 ## If NEXT_TASK is unclear
 
 1. Check `docs/CURRENT_GENERATOR_STATE.md`.
-2. Prefer the lowest-numbered phase not blocked by current gate.
-3. If no task is safely available, stop and write `.devflow/BLOCKERS.md`.
+2. Check `docs/agent-tasks/000_INDEX.md` for executable specs allowed by the current gate.
+3. Prefer the lowest-numbered phase/task not blocked by current gate.
+4. If no task is safely available, stop and write `.devflow/BLOCKERS.md`.
 
 ## Do not execute future phases early
 
-Future phase files are allowed to exist as planning material. Their existence is not approval to execute them.
+Future phase files and future agent task specs are allowed to exist as planning material. Their existence is not approval to execute them.

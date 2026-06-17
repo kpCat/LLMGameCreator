@@ -28,32 +28,43 @@ docs/CURRENT_GENERATOR_STATE.md
 
 Затем:
 
-1. Возьми task id из `.devflow/NEXT_TASK.md`.
-2. Найди задачу в `.devflow/TASK_GRAPH.json`.
-3. Проверь, не заблокирована ли она.
-4. Если `NEXT_TASK.md` указывает phase plan/task card, прочитай `.devflow/PHASE_PLAN_INDEX.md`, затем ровно один релевантный phase plan file. Не читай все phase-plans.
-5. Выполни только эту задачу.
-6. Не выполняй git-команды.
-7. Не меняй production-код, если задача baseline/devflow-only.
-8. После изменений или baseline-запуска выполни:
+1. Возьми task id/source из `.devflow/NEXT_TASK.md`.
+2. Если `Task source = task_graph`, найди задачу в `.devflow/TASK_GRAPH.json`.
+3. Если `Task source = phase_plan`, прочитай `.devflow/PHASE_PLAN_INDEX.md`, затем ровно один релевантный phase plan file. Не читай все phase-plans.
+4. Если `Task source = agent_task_spec`, прочитай `docs/agent-tasks/000_INDEX.md`, shared quality docs listed there, затем ровно один task spec file из `.devflow/NEXT_TASK.md`. Не читай все specs.
+5. Проверь gate/status/blocked_by/approval/allowed files/proof tests/system gates.
+6. Если задача заблокирована, locked, lacks proof tests, or requires missing approval — остановись и обнови `.devflow/BLOCKERS.md`.
+7. Выполни только эту задачу.
+8. Не выполняй git-команды.
+9. Не меняй production-код, если задача baseline/devflow/docs-only.
+10. Для code task найди 2-3 local analogs before patch.
+11. Для test task соблюдай `_TEST_QUALITY_RULES.md`, `_FIXTURE_AND_GOLDEN_RULES.md`, `_DIFF_HYGIENE_RULES.md`.
+12. После изменений или baseline-запуска выполни:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
 ```
 
-9. Если build/test/checks упали — сделай максимум 2 repair attempts.
-10. Если сработал stop condition — остановись и обнови `.devflow/BLOCKERS.md`.
-11. Перед финалом пройди `.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md` и `.devflow/DEFINITION_OF_DONE.md`.
-12. В конце обнови `.devflow/CURRENT_RUN.md` и дай отчёт по `.devflow/RUN_REPORT_TEMPLATE.md`.
+13. Если build/test/checks упали — сделай максимум 2 repair attempts.
+14. Если сработал stop condition — остановись и обнови `.devflow/BLOCKERS.md`.
+15. Перед финалом пройди `.devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md` и `.devflow/DEFINITION_OF_DONE.md`.
+16. В конце обнови `.devflow/CURRENT_RUN.md`, `.devflow/NEXT_TASK.md` and give report by `.devflow/RUN_REPORT_TEMPLATE.md`.
 
 Запрещено:
 
+```text
 - менять scope;
 - делать широкий рефакторинг;
 - менять GamePackage schema;
 - добавлять зависимости;
 - запускать реальные LLM/provider calls в тестах;
 - разрешать runtime вызывать LLM;
-- продолжать работу после stop condition.
+- читать все phase plans;
+- читать все docs/agent-tasks specs;
+- продолжать работу после stop condition;
+- делать weak tests вместо proof tests;
+- переписывать unrelated tests/style;
+- включать generated logs/run outputs as source changes.
+```
 
 Начни с задачи из `.devflow/NEXT_TASK.md`.
