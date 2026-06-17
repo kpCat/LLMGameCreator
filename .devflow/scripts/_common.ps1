@@ -94,8 +94,8 @@ function ConvertTo-DevflowRelativePath {
         [Parameter(Mandatory=$true)][string]$RepoRoot
     )
 
-    $normalizedPath = $Path.Replace('\\', '/')
-    $normalizedRoot = $RepoRoot.Replace('\\', '/').TrimEnd('/')
+    $normalizedPath = $Path.Replace('\', '/')
+	$normalizedRoot = $RepoRoot.Replace('\', '/').TrimEnd('/')
 
     if ($normalizedPath.StartsWith($normalizedRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
         return $normalizedPath.Substring($normalizedRoot.Length).TrimStart('/')
@@ -151,8 +151,8 @@ function Test-DevflowWarningMatchesBaseline {
         return $false
     }
 
-    $warningPath = ("" + $Warning.path).Replace('\\', '/')
-    $knownPath = ("" + $KnownWarning.path).Replace('\\', '/')
+    $warningPath = ("" + $Warning.path).Replace('\', '/')
+	$knownPath = ("" + $KnownWarning.path).Replace('\', '/')
     if (-not [string]::IsNullOrWhiteSpace($knownPath)) {
         if (-not $warningPath.EndsWith($knownPath, [System.StringComparison]::OrdinalIgnoreCase)) {
             return $false
