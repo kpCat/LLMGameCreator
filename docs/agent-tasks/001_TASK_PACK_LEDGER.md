@@ -215,7 +215,7 @@ Pack id: `agent-task-pack-009-locked-m8-runtime-preview-drafts`
 Generated purpose:
 
 ```text
-Convert M8_001..M8_005 sequence placeholders into locked draft task specs for headless runtime preview validation without enabling runtime implementation while M4.1/M5/M6 remain unresolved.
+Convert M8_001..M8_005 sequence placeholders into locked draft task specs for runtime preview validation planning without enabling M8 implementation before package assembly exists.
 ```
 
 Files added by Pack 009:
@@ -235,6 +235,35 @@ docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 docs/agent-tasks/M8/000_M8_SEQUENCE.md
+```
+
+## Pack 010 — locked M9 template and balancing draft specs
+
+Pack id: `agent-task-pack-010-locked-m9-template-balancing-drafts`
+
+Generated purpose:
+
+```text
+Convert M9_001..M9_005 sequence placeholders into locked draft task specs for template families, numeric constraints, progression fixtures, formula diagnostics, and sample template packs without enabling M9 implementation before package generation/validation paths are stable.
+```
+
+Files added by Pack 010:
+
+```text
+docs/agent-tasks/M9/M9_001_TEMPLATES.md
+docs/agent-tasks/M9/M9_002_RANGES.md
+docs/agent-tasks/M9/M9_003_PROGRESSION.md
+docs/agent-tasks/M9/M9_004_FORMULAS.md
+docs/agent-tasks/M9/M9_005_SAMPLE_PACKS.md
+```
+
+Files updated by Pack 010:
+
+```text
+docs/agent-tasks/000_INDEX.md
+docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+docs/agent-tasks/M9/000_M9_SEQUENCE.md
 ```
 
 ## Current active gate assumption
@@ -281,22 +310,22 @@ Do not convert future locked drafts into executable specs until the relevant gat
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-010-next-step-by-gate-state
+agent-task-pack-011-next-step-by-gate-state
 ```
 
 Decision policy:
 
 ```text
 - If M4.1 is still active and no real report exists, prefer running existing M4.1 tasks before generating more future docs.
-- If user wants documentation-only continuation, generate only far-phase locked planning that is safe to replace.
+- If user wants documentation-only continuation, generate M10 locked draft specs with short paths or far-phase planning refinements.
 - If current-state docs explicitly pass M4.1, generate M5 executable entry specs from current source layout.
 - If local-agent execution finds problems, insert a repair/hardening pack before progressing.
 ```
 
 ## Open questions for next pack
 
-1. Has Pack 009 been applied to main and has `check-all.ps1` passed?
+1. Has Pack 010 been applied to main and has `check-all.ps1` passed?
 2. Has Kilo executed M4_1_005 or later using Pack 004 quality docs?
 3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
 4. Have `docs/CURRENT_GENERATOR_STATE.md` and `.json` marked M4.1 as passed?
-5. Should the next pack be M4.1 execution support, far-phase locked planning, or executable M5 entry specs?
+5. Should the next pack be M4.1 execution support, M10 locked planning, or executable M5 entry specs?

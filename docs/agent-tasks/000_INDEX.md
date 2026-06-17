@@ -169,6 +169,14 @@ M9/000_M9_SEQUENCE.md
 
 Locked until package generation and validation paths are stable.
 
+| Task | Status | Spec |
+|---|---|---|
+| M9_001 | Locked draft | `M9/M9_001_TEMPLATES.md` |
+| M9_002 | Locked draft | `M9/M9_002_RANGES.md` |
+| M9_003 | Locked draft | `M9/M9_003_PROGRESSION.md` |
+| M9_004 | Locked draft | `M9/M9_004_FORMULAS.md` |
+| M9_005 | Locked draft | `M9/M9_005_SAMPLE_PACKS.md` |
+
 ### M10 — export profiles and Unity IR
 
 Sequence file:

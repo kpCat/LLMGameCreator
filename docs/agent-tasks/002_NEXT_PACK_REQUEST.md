@@ -31,7 +31,7 @@ Then read only phase/source files relevant to the next unlocked or intentionally
 ## Expected next pack
 
 ```text
-agent-task-pack-010-next-step-by-gate-state
+agent-task-pack-011-next-step-by-gate-state
 ```
 
 ## Current decision tree
@@ -41,7 +41,8 @@ agent-task-pack-010-next-step-by-gate-state
    Prefer executing an existing M4.1 task spec instead of generating more future docs.
 
 2. If M4.1 is still active and user requests documentation-only continuation:
-   Generate only far-phase locked planning that is safe to replace. Do not create executable future implementation specs.
+   Generate M10 locked draft specs with short file names or far-phase planning refinements.
+   Do not create executable M10 implementation specs.
 
 3. If M4.1 has explicitly passed in docs/CURRENT_GENERATOR_STATE.md and .json:
    Generate source-refreshed M5 executable entry specs from current source layout.
@@ -61,7 +62,19 @@ new/updated docs/agent-tasks files
 only necessary .devflow updates
 ```
 
-Use short filenames for future phase files to avoid Windows zip/path-length friction.
+## Naming policy
+
+Use short filenames for new task specs to avoid Windows path/archive issues.
+
+Good examples:
+
+```text
+M9_001_TEMPLATES.md
+M9_002_RANGES.md
+M10_001_EXPORTS.md
+```
+
+Avoid long descriptive filenames for new locked draft specs.
 
 ## Quality bar
 
@@ -90,7 +103,7 @@ No proof test is acceptable if it only checks broad failure/success without pinn
 
 ## Current recommendation
 
-Pack 009 added locked M8 draft specs. If M4.1 is still active, avoid producing more detailed future implementation specs unless the user explicitly asks for documentation-only planning. The strongest practical step is still to run or prepare execution of M4.1 tasks:
+Pack 010 added locked M9 draft specs. If M4.1 is still active, avoid producing more detailed future implementation specs unless the user explicitly asks for documentation-only planning. The strongest next practical step is to run or prepare execution of M4.1 tasks:
 
 ```text
 M4_1_005 -> M4_1_006 -> M4_1_008
@@ -102,4 +115,4 @@ or use real-evaluation tasks if a report exists:
 M4_1_013 -> M4_1_014 -> M4_1_015 -> M4_1_016 -> M4_1_017
 ```
 
-If the user still wants documentation-only continuation, the next safe pack is locked M9 template/balancing planning.
+If continuing roadmap documentation only, the remaining far-phase documentation pack should be M10 locked draft specs with short paths.
