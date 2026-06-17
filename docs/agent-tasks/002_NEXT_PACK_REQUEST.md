@@ -24,41 +24,35 @@ docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 docs/agent-tasks/003_DEVELOPMENT_ROADMAP.md
 docs/agent-tasks/004_PACK_GENERATION_POLICY.md
+docs/agent-tasks/005_ROADMAP_FREEZE.md
+docs/agent-tasks/006_BRANCH_RUNBOOK.md
 ```
 
-Then read only phase/source files relevant to the next unlocked or intentionally locked documentation pack.
+Then read only phase/source files relevant to the next unlocked work or repair pack.
 
 ## Expected next pack
 
 ```text
-agent-task-pack-012-m4-1-execution-support-or-roadmap-freeze
+agent-task-pack-013-by-execution-feedback
 ```
 
 ## Current decision tree
 
 ```text
-1. If M4.1 is still active and user is ready to run agents:
-   Prefer executing existing M4.1 task specs instead of generating more future docs.
+1. If M4.1 is still active and Kilo has not run M4_1_005:
+   Do not generate more future roadmap packs. Run M4_1_005 on a dedicated execution branch.
 
-2. If M4.1 is still active and user wants one more documentation-only pack:
-   Generate a roadmap freeze/checklist pack that prevents further speculative expansion and points back to M4.1 execution.
+2. If M4_1_005/M4_1_006/M4_1_008 execution produced problems:
+   Generate a focused repair/hardening pack using the branch diff and agent report.
 
-3. If M4.1 has explicitly passed in docs/CURRENT_GENERATOR_STATE.md and .json:
+3. If deterministic M4.1 hardening tasks passed and real evaluation evidence exists:
+   Generate/import support for M4_1_014..M4_1_017 or update the gate decision path.
+
+4. If docs/CURRENT_GENERATOR_STATE.md and .json explicitly pass M4.1:
    Generate source-refreshed M5 executable entry specs from current source layout.
 
-4. If Kilo/local-agent execution produced problems:
-   Generate a focused repair/hardening pack before progressing.
-```
-
-## Required output format
-
-The next pack must be a patch archive with:
-
-```text
-ARCHIVE_MANIFEST.md
-README_APPLY_*.md
-new/updated docs/agent-tasks files
-only necessary .devflow updates
+5. If the user asks for more speculative future roadmap docs while M4.1 is active:
+   Stop and ask for a concrete gap. The roadmap is frozen after M10 locked drafts.
 ```
 
 ## Naming policy
@@ -68,9 +62,9 @@ Use short filenames for new task specs to avoid Windows path/archive issues.
 Good examples:
 
 ```text
+M9_001_TEMPLATES.md
 M10_001_EXPORTS.md
-M10_002_UNITY_IR.md
-M10_005_ASSETS.md
+M4_1/018_EXEC_QUEUE.md
 ```
 
 Avoid long descriptive filenames for new locked draft specs.
@@ -102,16 +96,22 @@ No proof test is acceptable if it only checks broad failure/success without pinn
 
 ## Current recommendation
 
-Pack 011 completes the locked future draft/spec skeleton through M10. If M4.1 is still active, stop producing future implementation specs and run or prepare execution of M4.1 tasks:
+Pack 012 freezes future documentation packs and prepares M4.1 execution on a branch.
+
+Next practical step:
 
 ```text
-M4_1_005 -> M4_1_006 -> M4_1_008
+Create an execution branch from main and run exactly M4_1_005 with Kilo/local agent.
 ```
 
-or use real-evaluation tasks if a report exists:
+Recommended execution sequence after M4_1_005 passes:
+
+```text
+M4_1_006 -> M4_1_008
+```
+
+Recommended real-evaluation closure path when evidence exists:
 
 ```text
 M4_1_013 -> M4_1_014 -> M4_1_015 -> M4_1_016 -> M4_1_017
 ```
-
-If one more documentation pack is requested before running Kilo, make it a roadmap freeze/checklist pack, not another future implementation pack.

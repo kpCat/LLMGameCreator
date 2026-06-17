@@ -273,7 +273,7 @@ Pack id: `agent-task-pack-011-locked-m10-export-unity-ir-drafts`
 Generated purpose:
 
 ```text
-Convert M10_001..M10_005 sequence placeholders into locked draft task specs for export profiles, Unity IR, deterministic export packages, player boundary checks, and asset reference mapping without enabling M10 implementation before runtime/package validation is stable.
+Convert M10_001..M10_005 sequence placeholders into locked draft task specs for export profiles, Unity IR, deterministic export packages, player boundary tests, and asset mapping without enabling M10 implementation before export work is explicitly unlocked.
 ```
 
 Files added by Pack 011:
@@ -295,6 +295,34 @@ docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 docs/agent-tasks/M10/000_M10_SEQUENCE.md
 ```
 
+## Pack 012 — roadmap freeze and M4.1 execution support
+
+Pack id: `agent-task-pack-012-roadmap-freeze-m4-execution-support`
+
+Generated purpose:
+
+```text
+Freeze the documentation-only roadmap after M10 locked drafts and add operator guidance for running M4.1 tasks on a separate Kilo branch without creating more future speculative packs.
+```
+
+Files added by Pack 012:
+
+```text
+docs/agent-tasks/005_ROADMAP_FREEZE.md
+docs/agent-tasks/006_BRANCH_RUNBOOK.md
+docs/agent-tasks/M4_1/018_EXEC_QUEUE.md
+docs/agent-tasks/M4_1/019_KILO_PROMPTS.md
+docs/agent-tasks/M4_1/020_REVIEW_GATE.md
+```
+
+Files updated by Pack 012:
+
+```text
+docs/agent-tasks/000_INDEX.md
+docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+```
+
 ## Current active gate assumption
 
 ```text
@@ -310,7 +338,8 @@ Allowed now:
 - repair prompt hardening based on diagnostics/corpus evidence;
 - docs/devflow/task-spec consistency work;
 - optional devflow gate automation, only with user approval;
-- roadmap/locked skeleton documentation for future phases.
+- roadmap/locked skeleton documentation for future phases;
+- M4.1 execution-branch preparation and post-run review support.
 ```
 
 Locked now:
@@ -334,29 +363,30 @@ Do not unlock M5/M6/M8/M9/M10 from task-pack files alone. Only current-state doc
 
 Do not convert future locked drafts into executable specs until the relevant gate is open and source assumptions are refreshed.
 
-Do not keep generating far-future implementation specs after M10 locked drafts; the roadmap skeleton is now complete enough.
+Do not generate more future speculative documentation packs while M4.1 is still active unless there is a concrete gap in the operator workflow.
 
 ## Next pack should cover
 
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-012-m4-1-execution-support-or-roadmap-freeze
+agent-task-pack-013-by-execution-feedback
 ```
 
 Decision policy:
 
 ```text
-- If M4.1 is still active and no real report exists, prefer running existing M4.1 tasks before generating more future docs.
-- If the user wants one last documentation pack, generate a roadmap freeze/checklist pack that points agents back to M4.1 work.
-- If current-state docs explicitly pass M4.1, generate M5 executable entry specs from current source layout.
-- If local-agent execution finds problems, insert a repair/hardening pack before progressing.
+- If Kilo has not run M4_1_005 yet, do not generate more roadmap packs; run M4_1_005 on an execution branch.
+- If M4_1_005 passes cleanly, continue with M4_1_006 or M4_1_008.
+- If Kilo execution finds problems, generate a focused repair/hardening pack.
+- If real strict evaluation evidence exists, use M4_1_013..M4_1_017 closure path.
+- If current-state docs explicitly pass M4.1, generate source-refreshed executable M5 entry specs.
 ```
 
 ## Open questions for next pack
 
-1. Has Pack 011 been applied to main and has `check-all.ps1` passed?
-2. Has Kilo executed M4_1_005 or later using Pack 004 quality docs?
-3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
-4. Have `docs/CURRENT_GENERATOR_STATE.md` and `.json` marked M4.1 as passed?
-5. Should the next pack be M4.1 execution support, roadmap freeze/checklist, or executable M5 entry specs?
+1. Which branch contains the first Kilo execution after roadmap freeze?
+2. Did Kilo execute M4_1_005 using Pack 004 quality docs?
+3. Did `check-all.ps1` pass after the agent run?
+4. Did the agent change only allowed files?
+5. Is a repair/hardening pack needed before continuing?

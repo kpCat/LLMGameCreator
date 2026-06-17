@@ -1,42 +1,34 @@
 # ARCHIVE_MANIFEST.md
 
-Archive: `llmgc_agent_task_pack_011.zip`
+Archive: `llmgc_agent_task_pack_012.zip`
 
-Pack id: `agent-task-pack-011-locked-m10-export-unity-ir-drafts`
+Pack id: `agent-task-pack-012-roadmap-freeze-m4-execution-support`
 
-## Added files
+## Purpose
 
-```text
-docs/agent-tasks/M10/M10_001_EXPORTS.md
-docs/agent-tasks/M10/M10_002_UNITY_IR.md
-docs/agent-tasks/M10/M10_003_PACKAGE.md
-docs/agent-tasks/M10/M10_004_BOUNDARY.md
-docs/agent-tasks/M10/M10_005_ASSETS.md
-```
+Freeze the documentation-only roadmap and add M4.1 execution branch support.
 
-## Updated files
+## Paths
 
 ```text
+README_APPLY_AGENT_TASK_PACK_012.md
+ARCHIVE_MANIFEST.md
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
-docs/agent-tasks/M10/000_M10_SEQUENCE.md
+docs/agent-tasks/005_ROADMAP_FREEZE.md
+docs/agent-tasks/006_BRANCH_RUNBOOK.md
+docs/agent-tasks/M4_1/018_EXEC_QUEUE.md
+docs/agent-tasks/M4_1/019_KILO_PROMPTS.md
+docs/agent-tasks/M4_1/020_REVIEW_GATE.md
 ```
 
-## Explicitly not included
+## Scope boundaries
 
 ```text
-src/**
-tests/**
-*.sln
-*.csproj
-.devflow/scripts/**
-Unity project files
-```
-
-## Gate state
-
-```text
-M4.1 remains active.
-M5/M6/M8/M9/M10 remain locked.
+No source code.
+No tests.
+No project files.
+No script changes.
+No phase unlock.
 ```
