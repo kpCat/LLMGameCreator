@@ -29,9 +29,21 @@ M4_1_009 -> M4_1_012
 
 Use this only when the user approves script/gate automation work or after an overnight/local-agent run exists.
 
-## Recommended real evaluation sequence
+## Recommended real evaluation closure sequence
 
-If a real strict LLM evaluation report exists:
+If no user-facing real evaluation runbook exists yet:
+
+```text
+M4_1_013
+```
+
+If real/manual evaluation evidence exists:
+
+```text
+M4_1_014 -> M4_1_015 -> M4_1_016 -> M4_1_017
+```
+
+If a real strict LLM evaluation report already exists and older tasks are preferred:
 
 ```text
 M4_1_001 -> M4_1_010 -> M4_1_003 -> M4_1_007 -> M4_1_011
@@ -40,7 +52,7 @@ M4_1_001 -> M4_1_010 -> M4_1_003 -> M4_1_007 -> M4_1_011
 Meaning:
 
 ```text
-import/analyze report -> discover real artifacts -> harden highest-impact issue -> write gate decision report -> update current state only after user review
+prepare runbook -> record evidence manifest -> import/analyze report fixture -> close gate by user decision -> verify M4.1 completion checklist
 ```
 
 ## Task map
@@ -59,6 +71,11 @@ import/analyze report -> discover real artifacts -> harden highest-impact issue 
 | M4_1_010 | Real evaluation artifacts may exist but path/schema is unclear | M4_1_001 or M4_1_007 |
 | M4_1_011 | User has explicitly decided M4.1 gate status | stop or M5 entry pack |
 | M4_1_012 | Overnight/local-agent run exists and needs review gate | stop or next spec based on report |
+| M4_1_013 | Need clear manual runbook for real strict evaluation | M4_1_014 |
+| M4_1_014 | Real/manual evaluation evidence exists and needs manifest | M4_1_015 |
+| M4_1_015 | Evidence manifest exists and report fixture/import guard is needed | M4_1_016 |
+| M4_1_016 | User explicitly decides pass/needs_repair/blocked | M4_1_017 or M5 pack |
+| M4_1_017 | M4.1 needs final completion checklist | stop or M5 pack |
 
 ## Stop rules
 
@@ -70,5 +87,6 @@ Stop instead of continuing if:
 - a task requires schema/dependency/project changes;
 - a real report is missing for report-dependent tasks;
 - check-all fails after repair attempts;
-- local agent changed files outside allowed boundaries.
+- local agent changed files outside allowed boundaries;
+- current-state docs do not explicitly unlock the next phase.
 ```

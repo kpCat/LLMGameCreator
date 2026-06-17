@@ -97,6 +97,47 @@ docs/agent-tasks/_TASK_TEMPLATE.md
 docs/agent-tasks/_TASK_READINESS_CHECKLIST.md
 ```
 
+## Pack 005 — M4.1 completion and roadmap policy
+
+Pack id: `agent-task-pack-005-m4-1-completion-and-roadmap-policy`
+
+Generated purpose:
+
+```text
+Add M4.1 completion/gate-review task specs plus permanent roadmap and pack-generation policy docs so future packs are generated from repository state rather than chat memory.
+```
+
+Repository feedback used:
+
+```text
+- User approved the pack roadmap.
+- Pack 004 was applied and local check-all was reported green after fixing known-warning path normalization.
+- M4.1 remains the active gate until current-state docs explicitly pass it.
+- User wants future packs to be requested one by one, with a stable roadmap guiding generation.
+```
+
+Files added by Pack 005:
+
+```text
+docs/agent-tasks/003_DEVELOPMENT_ROADMAP.md
+docs/agent-tasks/004_PACK_GENERATION_POLICY.md
+
+docs/agent-tasks/M4_1/M4_1_013_STRICT_EVALUATION_RUNBOOK_FOR_USER.md
+docs/agent-tasks/M4_1/M4_1_014_REAL_EVALUATION_EVIDENCE_MANIFEST.md
+docs/agent-tasks/M4_1/M4_1_015_REAL_REPORT_IMPORT_FIXTURE_GUARD.md
+docs/agent-tasks/M4_1/M4_1_016_M4_GATE_CLOSURE_DECISION.md
+docs/agent-tasks/M4_1/M4_1_017_M4_1_COMPLETION_CHECKLIST.md
+```
+
+Files updated by Pack 005:
+
+```text
+docs/agent-tasks/000_INDEX.md
+docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
+```
+
 ## Current active gate assumption
 
 ```text
@@ -111,7 +152,8 @@ Allowed now:
 - evaluation markdown/golden output guardrails;
 - repair prompt hardening based on diagnostics/corpus evidence;
 - docs/devflow/task-spec consistency work;
-- optional devflow gate automation, only with user approval.
+- optional devflow gate automation, only with user approval;
+- M4.1 manual evaluation runbook/evidence/closure documentation.
 ```
 
 Locked now:
@@ -127,33 +169,33 @@ Locked now:
 
 Do not replace the Pack 001 framework unless repository review finds a concrete problem.
 
-Do not regenerate M5/M6 specs from scratch. Amend them only if repository source changes make the contracts stale.
+Do not copy shared quality rules into every future task spec. Reference the shared docs and add only task-specific emphasis.
 
 Do not unlock M5/M6 from task-pack files alone. Only current-state docs may unlock those phases.
 
-Do not copy shared quality rules into every future task spec. Reference the shared docs and add only task-specific emphasis.
+Do not generate many executable future specs at once. Future specs may be skeleton/locked until their gate opens.
 
 ## Next pack should cover
 
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-005-m4-1-completion-and-gate-review
+agent-task-pack-006-full-sequence-skeletons
 ```
 
 Suggested contents:
 
 ```text
-- M4.1 completion specs for real evaluation run/review;
-- current-state update task after manual gate decision;
-- report import/analyzer task if real evaluation artifact exists;
-- no M5/M6 executable production specs unless current state has changed.
+- M5/M6/M8/M9/M10 sequence skeleton docs;
+- permanent route-map from M4.1 closure to M10 export profiles;
+- locked future tasks only, not executable production specs;
+- no M5/M6 unlock unless current state has changed.
 ```
 
 ## Open questions for next pack
 
-1. Has Pack 004 been applied on the branch used for local-agent execution?
-2. Did local `check-all.ps1` pass after Pack 004 apply?
-3. Has Kilo executed M4_1_005 or later using the shared quality docs?
-4. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
-5. Should M4.1 be marked passed, needs repair, or blocked?
+1. Has Pack 005 been applied and pushed?
+2. Did local `check-all.ps1` pass after Pack 005 apply?
+3. Does a real M4.1 strict evaluation report/evidence manifest exist?
+4. Has the user explicitly chosen M4.1 gate status: `passed`, `needs_repair`, or `blocked`?
+5. Should Pack 006 remain locked skeleton-only, or did current-state docs unlock M5?

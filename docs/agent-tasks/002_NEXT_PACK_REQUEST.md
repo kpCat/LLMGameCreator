@@ -22,6 +22,8 @@ docs/CURRENT_GENERATOR_STATE.json
 .devflow/DEFINITION_OF_DONE.md
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/003_DEVELOPMENT_ROADMAP.md
+docs/agent-tasks/004_PACK_GENERATION_POLICY.md
 docs/agent-tasks/_TEST_QUALITY_RULES.md
 docs/agent-tasks/_FIXTURE_AND_GOLDEN_RULES.md
 docs/agent-tasks/_DIFF_HYGIENE_RULES.md
@@ -33,10 +35,10 @@ Then read only phase/source files relevant to the next unlocked pack.
 ## Expected next pack
 
 ```text
-agent-task-pack-005-m4-1-completion-and-gate-review
+agent-task-pack-006-full-sequence-skeletons
 ```
 
-The next pack should focus on M4.1 completion/gate-review tasks and should not unlock M5/M6 unless repository current state explicitly unlocks them.
+The next pack should define phase sequence skeletons for M5/M6/M8/M9/M10 and must keep future production tasks locked unless current-state docs explicitly unlock them.
 
 ## Required output format
 
@@ -70,21 +72,14 @@ Every new executable task spec must contain:
 - next task pointer
 ```
 
-No task spec is executable if it lacks a proof test.
+No task spec is executable if it lacks proof tests.
 
 No proof test is acceptable if it only checks broad failure/success without pinning the contract.
 
 ## Current recommendation
 
-If the repository still has no real M4.1 evaluation report, prefer tasks that enable or document the real manual evaluation/gate decision:
+If M4.1 has not explicitly passed in `docs/CURRENT_GENERATOR_STATE.md` and `.json`, generate only locked future skeletons and M4.1 closure support. Do not generate executable M5/M6 production specs.
 
-```text
-- real evaluation runbook for the user;
-- real artifact discovery/import;
-- gate pass/fail decision report;
-- current state update after manual review.
-```
+If M4.1 has passed, generate M5 entry executable specs using current source code and the shared quality docs.
 
-If a real M4.1 report exists, prefer task specs that import/analyze it and update current-state docs based on evidence.
-
-If M4.1 has explicitly passed in current-state docs, generate M5 entry execution specs. Otherwise keep M5/M6 locked.
+If Kilo/local-agent execution fails or drifts, generate a repair/hardening pack before generating more feature tasks.

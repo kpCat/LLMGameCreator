@@ -25,6 +25,7 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 6. A task is not done until its proof tests and system gates pass or are explicitly blocked with reason.
 7. If a task spec conflicts with current source code, stop and report the conflict instead of inventing a new architecture.
 8. Shared quality docs are binding for every task unless the task spec explicitly overrides them with user approval.
+9. Do not execute locked future specs. Locked specs are roadmap contracts only.
 
 ## Shared templates, gates, and quality docs
 
@@ -38,8 +39,10 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 | `_FIXTURE_AND_GOLDEN_RULES.md` | Fixture/golden naming, size, determinism, readability. |
 | `_DIFF_HYGIENE_RULES.md` | Final changed-file cleanliness and generated artifact discipline. |
 | `_AGENT_EXECUTION_QUALITY_RULES.md` | General local-agent execution quality after first real Kilo feedback. |
+| `003_DEVELOPMENT_ROADMAP.md` | Permanent high-level phase roadmap for future packs. |
+| `004_PACK_GENERATION_POLICY.md` | How ChatGPT should generate future packs from repository state. |
 
-Agent must not read every task spec, but these shared docs are not task specs; they are common execution rules.
+Agent must not read every task spec, but these shared docs are not task specs; they are common execution/routing rules.
 
 ## Pack state
 
@@ -83,6 +86,11 @@ M4_1/000_M4_1_SEQUENCE.md
 | M4_1_010 | Ready when real evaluation artifacts may exist | `M4_1/M4_1_010_REAL_EVALUATION_ARTIFACT_DISCOVERY.md` |
 | M4_1_011 | Ready after user reviews M4.1 result | `M4_1/M4_1_011_CURRENT_STATE_GATE_REVIEW_UPDATE.md` |
 | M4_1_012 | Ready after overnight/local-agent run exists | `M4_1/M4_1_012_OVERNIGHT_RUN_REPORT_REVIEW_GATE.md` |
+| M4_1_013 | Ready with approval, docs-only | `M4_1/M4_1_013_STRICT_EVALUATION_RUNBOOK_FOR_USER.md` |
+| M4_1_014 | Ready when real/manual evaluation evidence exists | `M4_1/M4_1_014_REAL_EVALUATION_EVIDENCE_MANIFEST.md` |
+| M4_1_015 | Ready when evidence manifest exists | `M4_1/M4_1_015_REAL_REPORT_IMPORT_FIXTURE_GUARD.md` |
+| M4_1_016 | Ready after user explicitly chooses gate status | `M4_1/M4_1_016_M4_GATE_CLOSURE_DECISION.md` |
+| M4_1_017 | Ready near end of M4.1 | `M4_1/M4_1_017_M4_1_COMPLETION_CHECKLIST.md` |
 
 ### M5 — Lua module executor integration
 
@@ -111,9 +119,9 @@ Use this shape in `.devflow/NEXT_TASK.md` when a task spec should be executed:
 
 Mode: single-task
 Task source: agent_task_spec
-Task id: M4_1_004
-Task spec file: docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
-Reason: Add fixture-driven proof coverage for strict JSON parser behavior before further prompt/repair changes.
+Task id: M4_1_013
+Task spec file: docs/agent-tasks/M4_1/M4_1_013_STRICT_EVALUATION_RUNBOOK_FOR_USER.md
+Reason: Prepare user-facing manual strict evaluation runbook for M4.1 gate closure.
 User approval: approved | missing | required
 Expected stop after completion: yes
 ```
