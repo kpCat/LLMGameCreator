@@ -5,5 +5,5 @@ Task source: agent_task_spec
 Task id: M4_1_005
 Task spec file: docs/agent-tasks/M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md
 Reason: Add golden coverage for evaluation report recommendations after parser diagnostics are fixture-guarded.
-User approval: required
+User approval: approved to start M4_1_005 on a dedicated execution branch
 Expected stop after completion: yes

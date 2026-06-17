@@ -1,34 +1,42 @@
-# ARCHIVE_MANIFEST.md
+# ARCHIVE_MANIFEST.md — agent task pack 013
 
-Archive: `llmgc_agent_task_pack_012.zip`
-
-Pack id: `agent-task-pack-012-roadmap-freeze-m4-execution-support`
+Pack id: `agent-task-pack-013-start-m4-1-005`
 
 ## Purpose
 
-Freeze the documentation-only roadmap and add M4.1 execution branch support.
+Activate the first post-roadmap-freeze coding-agent run without creating more future speculative roadmap docs.
 
-## Paths
+This pack sets `.devflow/NEXT_TASK.md` to approved for `M4_1_005` and adds short operator/review docs for starting and reviewing that run.
+
+## Files added
 
 ```text
-README_APPLY_AGENT_TASK_PACK_012.md
-ARCHIVE_MANIFEST.md
-docs/agent-tasks/000_INDEX.md
-docs/agent-tasks/001_TASK_PACK_LEDGER.md
-docs/agent-tasks/002_NEXT_PACK_REQUEST.md
-docs/agent-tasks/005_ROADMAP_FREEZE.md
-docs/agent-tasks/006_BRANCH_RUNBOOK.md
-docs/agent-tasks/M4_1/018_EXEC_QUEUE.md
-docs/agent-tasks/M4_1/019_KILO_PROMPTS.md
-docs/agent-tasks/M4_1/020_REVIEW_GATE.md
+docs/agent-tasks/007_START_RUN.md
+docs/agent-tasks/M4_1/021_START_005.md
+docs/agent-tasks/M4_1/022_REPORT.md
 ```
 
-## Scope boundaries
+## Files updated
 
 ```text
-No source code.
-No tests.
-No project files.
-No script changes.
-No phase unlock.
+.devflow/NEXT_TASK.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+```
+
+## Files intentionally not changed
+
+```text
+src/**
+tests/**
+LLMGameCreator.sln
+*.csproj
+.devflow/scripts/**
+docs/CURRENT_GENERATOR_STATE.md
+docs/CURRENT_GENERATOR_STATE.json
+```
+
+## Locked phases
+
+```text
+M5/M6/M8/M9/M10 remain locked.
 ```

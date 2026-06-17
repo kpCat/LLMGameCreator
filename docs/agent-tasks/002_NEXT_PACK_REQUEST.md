@@ -26,92 +26,67 @@ docs/agent-tasks/003_DEVELOPMENT_ROADMAP.md
 docs/agent-tasks/004_PACK_GENERATION_POLICY.md
 docs/agent-tasks/005_ROADMAP_FREEZE.md
 docs/agent-tasks/006_BRANCH_RUNBOOK.md
+docs/agent-tasks/007_START_RUN.md
 ```
 
-Then read only phase/source files relevant to the next unlocked work or repair pack.
+Then read only the branch diff/report if a Kilo/local-agent execution has occurred.
 
 ## Expected next pack
 
 ```text
-agent-task-pack-013-by-execution-feedback
+agent-task-pack-014-by-m4-1-005-result
 ```
 
 ## Current decision tree
 
 ```text
-1. If M4.1 is still active and Kilo has not run M4_1_005:
-   Do not generate more future roadmap packs. Run M4_1_005 on a dedicated execution branch.
+1. If M4_1_005 has not run yet:
+   Do not generate more speculative roadmap packs. Run M4_1_005 on a dedicated execution branch.
 
-2. If M4_1_005/M4_1_006/M4_1_008 execution produced problems:
-   Generate a focused repair/hardening pack using the branch diff and agent report.
+2. If M4_1_005 passed cleanly:
+   Generate an execution-start pack for M4_1_006 or update NEXT_TASK to M4_1_006 with approval.
 
-3. If deterministic M4.1 hardening tasks passed and real evaluation evidence exists:
-   Generate/import support for M4_1_014..M4_1_017 or update the gate decision path.
+3. If M4_1_005 failed or changed files outside scope:
+   Generate a focused repair/hardening pack based on the exact diff and agent report.
 
-4. If docs/CURRENT_GENERATOR_STATE.md and .json explicitly pass M4.1:
+4. If M4_1_005 exposed task-spec ambiguity:
+   Generate a small task-spec amendment pack before rerun.
+
+5. If real strict evaluation evidence appears:
+   Use M4_1_014..M4_1_017 closure path.
+
+6. If docs/CURRENT_GENERATOR_STATE.md and .json explicitly pass M4.1:
    Generate source-refreshed M5 executable entry specs from current source layout.
-
-5. If the user asks for more speculative future roadmap docs while M4.1 is active:
-   Stop and ask for a concrete gap. The roadmap is frozen after M10 locked drafts.
 ```
 
 ## Naming policy
 
-Use short filenames for new task specs to avoid Windows path/archive issues.
-
-Good examples:
-
-```text
-M9_001_TEMPLATES.md
-M10_001_EXPORTS.md
-M4_1/018_EXEC_QUEUE.md
-```
-
-Avoid long descriptive filenames for new locked draft specs.
+Use short filenames for new task docs to avoid Windows path/archive issues.
 
 ## Quality bar
 
-Every new executable task spec must contain:
+Every executable task or repair task must contain:
 
 ```text
-- Task ID
-- dependencies
-- allowed files
-- forbidden files
-- existing patterns to inspect
-- exact behavior
-- diagnostic/failure behavior
-- proof tests
-- exact proof assertions
-- fixture/golden policy when applicable
-- diff hygiene risks
-- system gates
-- stop conditions
-- next task pointer
+- Task ID or repair target;
+- dependencies;
+- allowed files;
+- forbidden files;
+- exact behavior;
+- proof tests with exact assertions;
+- system gates;
+- stop conditions;
+- next task pointer.
 ```
-
-No task spec is executable if it lacks a proof test.
 
 No proof test is acceptable if it only checks broad failure/success without pinning the contract.
 
 ## Current recommendation
 
-Pack 012 freezes future documentation packs and prepares M4.1 execution on a branch.
+Pack 013 activates `M4_1_005` by setting `.devflow/NEXT_TASK.md` approval for an execution branch.
 
 Next practical step:
 
 ```text
-Create an execution branch from main and run exactly M4_1_005 with Kilo/local agent.
-```
-
-Recommended execution sequence after M4_1_005 passes:
-
-```text
-M4_1_006 -> M4_1_008
-```
-
-Recommended real-evaluation closure path when evidence exists:
-
-```text
-M4_1_013 -> M4_1_014 -> M4_1_015 -> M4_1_016 -> M4_1_017
+Create branch from main, run Kilo/local agent for exactly M4_1_005, then review with docs/agent-tasks/M4_1/022_REPORT.md.
 ```
