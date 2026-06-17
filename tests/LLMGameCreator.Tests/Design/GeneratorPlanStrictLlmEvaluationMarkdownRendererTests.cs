@@ -127,6 +127,8 @@ public sealed class GeneratorPlanStrictLlmEvaluationMarkdownRendererTests
         Assert.Contains("## Recommendations", markdown);
         Assert.Contains("Tighten prompt guidance", markdown);
         Assert.Contains("## Quality warnings", markdown);
+        Assert.Contains(GeneratorPlanStrictLlmEvaluationDiagnosticCodes.GenericTextWarning, markdown);
+        Assert.Contains("Generic placeholder text found.", markdown);
     }
 
     [Fact]
@@ -179,9 +181,10 @@ public sealed class GeneratorPlanStrictLlmEvaluationMarkdownRendererTests
         Assert.Contains("## Diagnostic hot spots", markdown);
         Assert.Contains("## Samples", markdown);
         Assert.Contains("## Recommendations", markdown);
-        Assert.Contains("No contract summaries", markdown);
-        Assert.Contains("No diagnostics were reported", markdown);
-        Assert.Contains("No samples were captured", markdown);
+        Assert.Contains("_No contract summaries._", markdown);
+        Assert.Contains("_No diagnostics were reported._", markdown);
+        Assert.Contains("_No samples were captured._", markdown);
+        Assert.Contains("_No quality warnings were reported._", markdown);
     }
 
     [Fact]
