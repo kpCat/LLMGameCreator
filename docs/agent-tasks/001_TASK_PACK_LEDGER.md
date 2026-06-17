@@ -104,16 +104,7 @@ Pack id: `agent-task-pack-005-m4-1-completion-and-roadmap-policy`
 Generated purpose:
 
 ```text
-Add M4.1 completion/gate-review task specs plus permanent roadmap and pack-generation policy docs so future packs are generated from repository state rather than chat memory.
-```
-
-Repository feedback used:
-
-```text
-- User approved the pack roadmap.
-- Pack 004 was applied and local check-all was reported green after fixing known-warning path normalization.
-- M4.1 remains the active gate until current-state docs explicitly pass it.
-- User wants future packs to be requested one by one, with a stable roadmap guiding generation.
+Add M4.1 gate-closure task specs plus durable roadmap/pack-generation policy so future archives are generated consistently from repo state.
 ```
 
 Files added by Pack 005:
@@ -121,7 +112,6 @@ Files added by Pack 005:
 ```text
 docs/agent-tasks/003_DEVELOPMENT_ROADMAP.md
 docs/agent-tasks/004_PACK_GENERATION_POLICY.md
-
 docs/agent-tasks/M4_1/M4_1_013_STRICT_EVALUATION_RUNBOOK_FOR_USER.md
 docs/agent-tasks/M4_1/M4_1_014_REAL_EVALUATION_EVIDENCE_MANIFEST.md
 docs/agent-tasks/M4_1/M4_1_015_REAL_REPORT_IMPORT_FIXTURE_GUARD.md
@@ -129,13 +119,32 @@ docs/agent-tasks/M4_1/M4_1_016_M4_GATE_CLOSURE_DECISION.md
 docs/agent-tasks/M4_1/M4_1_017_M4_1_COMPLETION_CHECKLIST.md
 ```
 
-Files updated by Pack 005:
+## Pack 006 — future phase sequence skeletons
+
+Pack id: `agent-task-pack-006-future-phase-sequence-skeletons`
+
+Generated purpose:
+
+```text
+Add locked sequence skeletons for M5/M6/M8/M9/M10 so the roadmap is visible in repo docs without producing stale executable implementation specs while M4.1 remains active.
+```
+
+Files added by Pack 006:
+
+```text
+docs/agent-tasks/M5/000_M5_SEQUENCE.md
+docs/agent-tasks/M6/000_M6_SEQUENCE.md
+docs/agent-tasks/M8/000_M8_SEQUENCE.md
+docs/agent-tasks/M9/000_M9_SEQUENCE.md
+docs/agent-tasks/M10/000_M10_SEQUENCE.md
+```
+
+Files updated by Pack 006:
 
 ```text
 docs/agent-tasks/000_INDEX.md
 docs/agent-tasks/001_TASK_PACK_LEDGER.md
 docs/agent-tasks/002_NEXT_PACK_REQUEST.md
-docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
 ```
 
 ## Current active gate assumption
@@ -153,7 +162,7 @@ Allowed now:
 - repair prompt hardening based on diagnostics/corpus evidence;
 - docs/devflow/task-spec consistency work;
 - optional devflow gate automation, only with user approval;
-- M4.1 manual evaluation runbook/evidence/closure documentation.
+- roadmap/locked skeleton documentation for future phases.
 ```
 
 Locked now:
@@ -161,41 +170,43 @@ Locked now:
 ```text
 - M5 Lua module executor production integration;
 - M6 rich GamePackage assembly;
-- broad artifact contract expansion;
-- runtime preview repair loop.
+- M8 runtime preview validation loop;
+- M9 template/balancing implementation;
+- M10 export/Unity IR implementation;
+- broad artifact contract expansion.
 ```
 
 ## Do not regenerate in next pack
 
-Do not replace the Pack 001 framework unless repository review finds a concrete problem.
+Do not replace Pack 001 framework unless repository review finds a concrete problem.
 
-Do not copy shared quality rules into every future task spec. Reference the shared docs and add only task-specific emphasis.
+Do not regenerate existing M4.1 executable specs from scratch. Amend them only if execution feedback or source changes expose concrete problems.
 
-Do not unlock M5/M6 from task-pack files alone. Only current-state docs may unlock those phases.
+Do not unlock M5/M6/M8/M9/M10 from task-pack files alone. Only current-state docs may unlock phases.
 
-Do not generate many executable future specs at once. Future specs may be skeleton/locked until their gate opens.
+Do not convert future sequence skeletons into executable specs until the relevant gate is open.
 
 ## Next pack should cover
 
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-006-full-sequence-skeletons
+agent-task-pack-007-next-step-by-gate-state
 ```
 
-Suggested contents:
+Decision policy:
 
 ```text
-- M5/M6/M8/M9/M10 sequence skeleton docs;
-- permanent route-map from M4.1 closure to M10 export profiles;
-- locked future tasks only, not executable production specs;
-- no M5/M6 unlock unless current state has changed.
+- If M4.1 is still active and no real report exists, prefer running existing M4.1 tasks before generating more executable specs.
+- If user wants documentation-only continuation, generate locked M5 entry draft specs, not executable production tasks.
+- If current-state docs explicitly pass M4.1, generate M5 executable entry specs from current source layout.
+- If local-agent execution finds problems, insert a repair/hardening pack before progressing.
 ```
 
 ## Open questions for next pack
 
-1. Has Pack 005 been applied and pushed?
-2. Did local `check-all.ps1` pass after Pack 005 apply?
-3. Does a real M4.1 strict evaluation report/evidence manifest exist?
-4. Has the user explicitly chosen M4.1 gate status: `passed`, `needs_repair`, or `blocked`?
-5. Should Pack 006 remain locked skeleton-only, or did current-state docs unlock M5?
+1. Has Pack 006 been applied to main and has `check-all.ps1` passed?
+2. Has Kilo executed M4_1_005 or later using Pack 004 quality docs?
+3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
+4. Have `docs/CURRENT_GENERATOR_STATE.md` and `.json` marked M4.1 as passed?
+5. Should the next pack be M4.1 execution support, locked M5 draft specs, or executable M5 entry specs?

@@ -28,17 +28,39 @@ docs/agent-tasks/_TEST_QUALITY_RULES.md
 docs/agent-tasks/_FIXTURE_AND_GOLDEN_RULES.md
 docs/agent-tasks/_DIFF_HYGIENE_RULES.md
 docs/agent-tasks/M4_1/000_M4_1_SEQUENCE.md
+docs/agent-tasks/M5/000_M5_SEQUENCE.md
+docs/agent-tasks/M6/000_M6_SEQUENCE.md
 ```
 
-Then read only phase/source files relevant to the next unlocked pack.
+Then read only phase/source files relevant to the next unlocked or explicitly requested locked pack.
 
-## Expected next pack
+## Current pack state
+
+Latest generated pack:
 
 ```text
-agent-task-pack-006-full-sequence-skeletons
+agent-task-pack-006-future-phase-sequence-skeletons
 ```
 
-The next pack should define phase sequence skeletons for M5/M6/M8/M9/M10 and must keep future production tasks locked unless current-state docs explicitly unlock them.
+## Expected next pack decision
+
+The next pack depends on current gate state:
+
+```text
+Case A — M4.1 is still active and no real report exists:
+  Prefer running existing M4.1 tasks instead of generating more executable specs.
+  If a pack is still requested, generate only M4.1 execution-support or repair/hardening docs.
+
+Case B — user wants documentation-only roadmap continuation while M4.1 is still active:
+  Generate locked M5 entry draft specs or contract outlines.
+  They must be explicitly non-executable until M4.1 passes.
+
+Case C — docs/CURRENT_GENERATOR_STATE.md and .json say M4.1 passed:
+  Generate Pack 007 M5 executable entry specs from current source layout.
+
+Case D — local-agent execution exposed quality/process problems:
+  Generate a repair/hardening pack before new feature specs.
+```
 
 ## Required output format
 
@@ -72,14 +94,18 @@ Every new executable task spec must contain:
 - next task pointer
 ```
 
-No task spec is executable if it lacks proof tests.
+No task spec is executable if it lacks a proof test.
 
 No proof test is acceptable if it only checks broad failure/success without pinning the contract.
 
 ## Current recommendation
 
-If M4.1 has not explicitly passed in `docs/CURRENT_GENERATOR_STATE.md` and `.json`, generate only locked future skeletons and M4.1 closure support. Do not generate executable M5/M6 production specs.
+If the repository still has no real M4.1 evaluation report and M4.1 is not marked passed, do not produce M5/M6 executable implementation tasks.
 
-If M4.1 has passed, generate M5 entry executable specs using current source code and the shared quality docs.
+Prefer one of:
 
-If Kilo/local-agent execution fails or drifts, generate a repair/hardening pack before generating more feature tasks.
+```text
+- run existing M4.1 executable tasks on an agent branch;
+- generate a locked M5 draft-spec pack for documentation only;
+- generate a repair/hardening pack if execution feedback requires it.
+```
