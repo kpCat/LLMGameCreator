@@ -31,18 +31,17 @@ Then read only phase/source files relevant to the next unlocked or intentionally
 ## Expected next pack
 
 ```text
-agent-task-pack-011-next-step-by-gate-state
+agent-task-pack-012-m4-1-execution-support-or-roadmap-freeze
 ```
 
 ## Current decision tree
 
 ```text
 1. If M4.1 is still active and user is ready to run agents:
-   Prefer executing an existing M4.1 task spec instead of generating more future docs.
+   Prefer executing existing M4.1 task specs instead of generating more future docs.
 
-2. If M4.1 is still active and user requests documentation-only continuation:
-   Generate M10 locked draft specs with short file names or far-phase planning refinements.
-   Do not create executable M10 implementation specs.
+2. If M4.1 is still active and user wants one more documentation-only pack:
+   Generate a roadmap freeze/checklist pack that prevents further speculative expansion and points back to M4.1 execution.
 
 3. If M4.1 has explicitly passed in docs/CURRENT_GENERATOR_STATE.md and .json:
    Generate source-refreshed M5 executable entry specs from current source layout.
@@ -69,9 +68,9 @@ Use short filenames for new task specs to avoid Windows path/archive issues.
 Good examples:
 
 ```text
-M9_001_TEMPLATES.md
-M9_002_RANGES.md
 M10_001_EXPORTS.md
+M10_002_UNITY_IR.md
+M10_005_ASSETS.md
 ```
 
 Avoid long descriptive filenames for new locked draft specs.
@@ -103,7 +102,7 @@ No proof test is acceptable if it only checks broad failure/success without pinn
 
 ## Current recommendation
 
-Pack 010 added locked M9 draft specs. If M4.1 is still active, avoid producing more detailed future implementation specs unless the user explicitly asks for documentation-only planning. The strongest next practical step is to run or prepare execution of M4.1 tasks:
+Pack 011 completes the locked future draft/spec skeleton through M10. If M4.1 is still active, stop producing future implementation specs and run or prepare execution of M4.1 tasks:
 
 ```text
 M4_1_005 -> M4_1_006 -> M4_1_008
@@ -115,4 +114,4 @@ or use real-evaluation tasks if a report exists:
 M4_1_013 -> M4_1_014 -> M4_1_015 -> M4_1_016 -> M4_1_017
 ```
 
-If continuing roadmap documentation only, the remaining far-phase documentation pack should be M10 locked draft specs with short paths.
+If one more documentation pack is requested before running Kilo, make it a roadmap freeze/checklist pack, not another future implementation pack.

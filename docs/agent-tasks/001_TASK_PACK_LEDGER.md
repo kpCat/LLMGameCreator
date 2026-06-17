@@ -266,6 +266,35 @@ docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 docs/agent-tasks/M9/000_M9_SEQUENCE.md
 ```
 
+## Pack 011 — locked M10 export and Unity IR draft specs
+
+Pack id: `agent-task-pack-011-locked-m10-export-unity-ir-drafts`
+
+Generated purpose:
+
+```text
+Convert M10_001..M10_005 sequence placeholders into locked draft task specs for export profiles, Unity IR, deterministic export packages, player boundary checks, and asset reference mapping without enabling M10 implementation before runtime/package validation is stable.
+```
+
+Files added by Pack 011:
+
+```text
+docs/agent-tasks/M10/M10_001_EXPORTS.md
+docs/agent-tasks/M10/M10_002_UNITY_IR.md
+docs/agent-tasks/M10/M10_003_PACKAGE.md
+docs/agent-tasks/M10/M10_004_BOUNDARY.md
+docs/agent-tasks/M10/M10_005_ASSETS.md
+```
+
+Files updated by Pack 011:
+
+```text
+docs/agent-tasks/000_INDEX.md
+docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+docs/agent-tasks/M10/000_M10_SEQUENCE.md
+```
+
 ## Current active gate assumption
 
 ```text
@@ -305,27 +334,29 @@ Do not unlock M5/M6/M8/M9/M10 from task-pack files alone. Only current-state doc
 
 Do not convert future locked drafts into executable specs until the relevant gate is open and source assumptions are refreshed.
 
+Do not keep generating far-future implementation specs after M10 locked drafts; the roadmap skeleton is now complete enough.
+
 ## Next pack should cover
 
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-011-next-step-by-gate-state
+agent-task-pack-012-m4-1-execution-support-or-roadmap-freeze
 ```
 
 Decision policy:
 
 ```text
 - If M4.1 is still active and no real report exists, prefer running existing M4.1 tasks before generating more future docs.
-- If user wants documentation-only continuation, generate M10 locked draft specs with short paths or far-phase planning refinements.
+- If the user wants one last documentation pack, generate a roadmap freeze/checklist pack that points agents back to M4.1 work.
 - If current-state docs explicitly pass M4.1, generate M5 executable entry specs from current source layout.
 - If local-agent execution finds problems, insert a repair/hardening pack before progressing.
 ```
 
 ## Open questions for next pack
 
-1. Has Pack 010 been applied to main and has `check-all.ps1` passed?
+1. Has Pack 011 been applied to main and has `check-all.ps1` passed?
 2. Has Kilo executed M4_1_005 or later using Pack 004 quality docs?
 3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
 4. Have `docs/CURRENT_GENERATOR_STATE.md` and `.json` marked M4.1 as passed?
-5. Should the next pack be M4.1 execution support, M10 locked planning, or executable M5 entry specs?
+5. Should the next pack be M4.1 execution support, roadmap freeze/checklist, or executable M5 entry specs?

@@ -187,6 +187,14 @@ M10/000_M10_SEQUENCE.md
 
 Locked until export profile work is explicitly unlocked.
 
+| Task | Status | Spec |
+|---|---|---|
+| M10_001 | Locked draft | `M10/M10_001_EXPORTS.md` |
+| M10_002 | Locked draft | `M10/M10_002_UNITY_IR.md` |
+| M10_003 | Locked draft | `M10/M10_003_PACKAGE.md` |
+| M10_004 | Locked draft | `M10/M10_004_BOUNDARY.md` |
+| M10_005 | Locked draft | `M10/M10_005_ASSETS.md` |
+
 ## NEXT_TASK pointer shape for agent task specs
 
 Use this shape in `.devflow/NEXT_TASK.md` when a task spec should be executed:

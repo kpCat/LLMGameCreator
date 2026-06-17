@@ -16,6 +16,8 @@ M10 executable work is allowed only when:
 - Unity/player boundary rules are reviewed against current source layout.
 ```
 
+Task-pack files alone cannot unlock M10.
+
 ## Purpose
 
 Prepare export profiles and a Unity-oriented intermediate representation without moving editor/generator logic into the player.
@@ -33,13 +35,13 @@ Prepare export profiles and a Unity-oriented intermediate representation without
 
 ## Planned sequence
 
-| Order | Task ID | Intent | Status |
-|---:|---|---|---|
-| 1 | M10_001 | Export profile contracts. | Skeleton only |
-| 2 | M10_002 | Unity IR skeleton. | Skeleton only |
-| 3 | M10_003 | Deterministic export package. | Skeleton only |
-| 4 | M10_004 | Player boundary tests. | Skeleton only |
-| 5 | M10_005 | Asset reference mapping. | Skeleton only |
+| Order | Task ID | Intent | Status | Spec |
+|---:|---|---|---|---|
+| 1 | M10_001 | Export profile contracts. | Locked draft | `M10_001_EXPORTS.md` |
+| 2 | M10_002 | Unity IR skeleton. | Locked draft | `M10_002_UNITY_IR.md` |
+| 3 | M10_003 | Deterministic export package. | Locked draft | `M10_003_PACKAGE.md` |
+| 4 | M10_004 | Player boundary tests. | Locked draft | `M10_004_BOUNDARY.md` |
+| 5 | M10_005 | Asset reference mapping. | Locked draft | `M10_005_ASSETS.md` |
 
 ## Future proof-test categories
 
@@ -52,6 +54,16 @@ Prepare export profiles and a Unity-oriented intermediate representation without
 - invalid asset reference produces exact diagnostic.
 ```
 
+## Allowed implementation direction after unlock
+
+```text
+- Start with data-only export profile contracts.
+- Keep Unity IR as a neutral, validated data contract.
+- Do not create Unity project files from LLM output.
+- Keep player/runtime free of editor/generator/provider dependencies.
+- Add one asset mapping category at a time.
+```
+
 ## Stop rules
 
 Stop instead of executing M10 if:
@@ -61,5 +73,12 @@ Stop instead of executing M10 if:
 - export would require LLM-generated C#;
 - player would depend on editor/generator/provider code;
 - asset/provider boundary is unclear;
-- deterministic export cannot be pinned.
+- deterministic export cannot be pinned;
+- current-state docs do not explicitly unlock export profile work.
+```
+
+## Candidate next pack
+
+```text
+agent-task-pack-012-m4-1-execution-support-or-roadmap-freeze
 ```
