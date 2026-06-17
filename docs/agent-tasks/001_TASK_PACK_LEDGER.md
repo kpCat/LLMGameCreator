@@ -208,6 +208,35 @@ docs/agent-tasks/002_NEXT_PACK_REQUEST.md
 docs/agent-tasks/M6/000_M6_SEQUENCE.md
 ```
 
+## Pack 009 — locked M8 runtime preview draft specs
+
+Pack id: `agent-task-pack-009-locked-m8-runtime-preview-drafts`
+
+Generated purpose:
+
+```text
+Convert M8_001..M8_005 sequence placeholders into locked draft task specs for headless runtime preview validation without enabling runtime implementation while M4.1/M5/M6 remain unresolved.
+```
+
+Files added by Pack 009:
+
+```text
+docs/agent-tasks/M8/M8_001_LOAD_SMOKE.md
+docs/agent-tasks/M8/M8_002_COMMAND_SCENARIO.md
+docs/agent-tasks/M8/M8_003_SNAPSHOT_GUARD.md
+docs/agent-tasks/M8/M8_004_NO_MUTATION.md
+docs/agent-tasks/M8/M8_005_DIAGNOSTIC_REPORT.md
+```
+
+Files updated by Pack 009:
+
+```text
+docs/agent-tasks/000_INDEX.md
+docs/agent-tasks/001_TASK_PACK_LEDGER.md
+docs/agent-tasks/002_NEXT_PACK_REQUEST.md
+docs/agent-tasks/M8/000_M8_SEQUENCE.md
+```
+
 ## Current active gate assumption
 
 ```text
@@ -252,21 +281,21 @@ Do not convert future locked drafts into executable specs until the relevant gat
 Preferred next generated pack after this one is applied and pushed:
 
 ```text
-agent-task-pack-009-next-step-by-gate-state
+agent-task-pack-010-next-step-by-gate-state
 ```
 
 Decision policy:
 
 ```text
 - If M4.1 is still active and no real report exists, prefer running existing M4.1 tasks before generating more future docs.
-- If user wants documentation-only continuation, generate only far-phase sequence refinements or locked draft specs that are safe to replace.
+- If user wants documentation-only continuation, generate only far-phase locked planning that is safe to replace.
 - If current-state docs explicitly pass M4.1, generate M5 executable entry specs from current source layout.
 - If local-agent execution finds problems, insert a repair/hardening pack before progressing.
 ```
 
 ## Open questions for next pack
 
-1. Has Pack 008 been applied to main and has `check-all.ps1` passed?
+1. Has Pack 009 been applied to main and has `check-all.ps1` passed?
 2. Has Kilo executed M4_1_005 or later using Pack 004 quality docs?
 3. Is a real strict LLM evaluation report present in `.llmgc/generator-plans/`?
 4. Have `docs/CURRENT_GENERATOR_STATE.md` and `.json` marked M4.1 as passed?

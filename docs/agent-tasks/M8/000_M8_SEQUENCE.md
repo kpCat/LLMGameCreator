@@ -14,8 +14,11 @@ M8 executable work is allowed only when:
 - a small assembled GamePackage exists;
 - package validation is green;
 - runtime boundaries are still clean;
-- current-state docs or a gate decision explicitly selects runtime preview validation as next work.
+- current-state docs or a gate decision explicitly selects runtime preview validation as next work;
+- M8 task assumptions are refreshed from current Runtime/GamePackage source layout.
 ```
+
+Task-pack files alone cannot unlock M8.
 
 ## Purpose
 
@@ -36,11 +39,21 @@ Validate assembled packages in headless runtime scenarios before UI/Unity/export
 
 | Order | Task ID | Intent | Status |
 |---:|---|---|---|
-| 1 | M8_001 | Package load smoke for a validated sample package. | Skeleton only |
-| 2 | M8_002 | Deterministic command scenario. | Skeleton only |
-| 3 | M8_003 | Event/state snapshot guard. | Skeleton only |
-| 4 | M8_004 | Runtime no package mutation guard. | Skeleton only |
-| 5 | M8_005 | Runtime diagnostic report for failed scenarios. | Skeleton only |
+| 1 | M8_001 | Package load smoke for a validated sample package. | Locked draft |
+| 2 | M8_002 | Deterministic command scenario. | Locked draft |
+| 3 | M8_003 | Event/state snapshot guard. | Locked draft |
+| 4 | M8_004 | Runtime no package mutation guard. | Locked draft |
+| 5 | M8_005 | Runtime diagnostic report for failed scenarios. | Locked draft |
+
+## Draft spec files
+
+```text
+M8_001_LOAD_SMOKE.md
+M8_002_COMMAND_SCENARIO.md
+M8_003_SNAPSHOT_GUARD.md
+M8_004_NO_MUTATION.md
+M8_005_DIAGNOSTIC_REPORT.md
+```
 
 ## Future proof-test categories
 
@@ -61,5 +74,13 @@ Stop instead of executing M8 if:
 - no validated sample package exists;
 - runtime would need LLM/provider/UI dependency;
 - task requires package schema change without approval;
-- deterministic scenario cannot be pinned.
+- deterministic scenario cannot be pinned;
+- M6 assembly path is unresolved;
+- implementation needs a broad runtime refactor.
+```
+
+## Candidate next pack after M8 unlock
+
+```text
+agent-task-pack-011-m8-runtime-preview-executable-refresh
 ```

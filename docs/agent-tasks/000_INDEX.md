@@ -26,7 +26,7 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 7. If a task spec conflicts with current source code, stop and report the conflict instead of inventing a new architecture.
 8. Shared quality docs are binding for every task unless the task spec explicitly overrides them with user approval.
 9. Future phase sequence files are routing docs, not executable specs.
-10. Locked draft specs are planning contracts only; they must be refreshed from source before execution.
+10. Locked future draft specs are planning contracts only until current-state docs unlock that phase.
 
 ## Shared templates, gates, and quality docs
 
@@ -150,6 +150,14 @@ M8/000_M8_SEQUENCE.md
 ```
 
 Locked until package assembly path exists.
+
+| Task | Status | Spec |
+|---|---|---|
+| M8_001 | Locked draft | `M8/M8_001_LOAD_SMOKE.md` |
+| M8_002 | Locked draft | `M8/M8_002_COMMAND_SCENARIO.md` |
+| M8_003 | Locked draft | `M8/M8_003_SNAPSHOT_GUARD.md` |
+| M8_004 | Locked draft | `M8/M8_004_NO_MUTATION.md` |
+| M8_005 | Locked draft | `M8/M8_005_DIAGNOSTIC_REPORT.md` |
 
 ### M9 — templates and balancing
 
