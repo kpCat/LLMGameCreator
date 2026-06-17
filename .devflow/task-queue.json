@@ -23,23 +23,6 @@
   },
   "queue": [
     {
-      "id": "M4_1_005_REPAIR",
-      "title": "NEXT_TASK automation repair",
-      "reason": "Add small devflow automation that advances NEXT_TASK.md after one successful task run.",
-      "approval": "approved by user for this run",
-      "next_task_lines": [
-        "# NEXT_TASK",
-        "",
-        "Mode: single-task",
-        "Task source: agent_task_spec",
-        "Task id: M4_1_005_REPAIR",
-        "Task spec file: docs/agent-tasks/M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md",
-        "Reason: Add small devflow automation that advances NEXT_TASK.md after one successful task run.",
-        "User approval: approved by user for this run",
-        "Expected stop after completion: yes"
-      ]
-    },
-    {
       "id": "M4_1_006",
       "title": "Strict repair prompt guardrails",
       "reason": "Add repair prompt guardrails after markdown/golden recommendation checks.",
@@ -82,9 +65,8 @@
         "# NEXT_TASK",
         "",
         "Mode: stop",
-        "Task source: agent_task_spec",
+        "Task source: stop",
         "Task id: STOP_REVIEW",
-        "Task spec file: docs/agent-tasks/M4_1/018_EXEC_QUEUE.md",
         "Reason: M4.1 deterministic hardening queue reached the human review gate.",
         "User approval:",
         "Expected stop after completion: yes",

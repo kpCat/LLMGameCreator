@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Xunit;
 
@@ -211,6 +212,118 @@ x
         {
             ValidateExecutableSpec(badSpec, "temp.md");
         });
+    }
+
+    [Fact]
+    public void StopModeNextTaskRequiresStopReviewAndStopActionAndNoTaskSpecFile()
+    {
+        var stoppedContent = @"# NEXT_TASK
+
+Mode: stop
+Task source: stop
+Task id: STOP_REVIEW
+Reason: M4.1 deterministic hardening queue reached the human review gate.
+User approval:
+Expected stop after completion: yes
+Stop action: Do not start future work. Review the completed task, check-all output, and whether M4.1 gate review should continue.
+";
+
+        var nextTaskDir = Path.Combine(RepoRoot, ".devflow");
+        var tempNextTask = Path.Combine(nextTaskDir, "NEXT_TASK.md.stop-mode-test");
+        File.WriteAllText(tempNextTask, stoppedContent, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+
+        var tempCheckScript = Path.Combine(nextTaskDir, "scripts", "check-devflow-state.stop-mode-test.ps1");
+        var originalScript = File.ReadAllText(Path.Combine(nextTaskDir, "scripts", "check-devflow-state.ps1"));
+        File.WriteAllText(tempCheckScript, originalScript, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+
+        try
+        {
+            var info = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "powershell",
+                Arguments = $"-ExecutionPolicy Bypass -File \"{tempCheckScript}\"",
+                WorkingDirectory = RepoRoot,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false
+            };
+
+            var tempBackup = Path.Combine(nextTaskDir, "NEXT_TASK.md.backup-stop-test");
+            File.Copy(Path.Combine(nextTaskDir, "NEXT_TASK.md"), tempBackup, overwrite: true);
+            File.Copy(tempNextTask, Path.Combine(nextTaskDir, "NEXT_TASK.md"), overwrite: true);
+
+            try
+            {
+                using var process = System.Diagnostics.Process.Start(info);
+                Assert.True(process.WaitForExit(120000), "check-devflow-state.ps1 did not exit in time for stop mode test.");
+                Assert.Equal(0, process.ExitCode);
+            }
+            finally
+            {
+                File.Copy(tempBackup, Path.Combine(nextTaskDir, "NEXT_TASK.md"), overwrite: true);
+                File.Delete(tempBackup);
+            }
+        }
+        finally
+        {
+            File.Delete(tempNextTask);
+            File.Delete(tempCheckScript);
+        }
+    }
+
+    [Fact]
+    public void StopModeNextTaskWithoutStopActionFails()
+    {
+        var badStopContent = @"# NEXT_TASK
+
+Mode: stop
+Task source: stop
+Task id: STOP_REVIEW
+Reason: M4.1 deterministic hardening queue reached the human review gate.
+User approval:
+Expected stop after completion: yes
+";
+
+        var nextTaskDir = Path.Combine(RepoRoot, ".devflow");
+        var tempNextTask = Path.Combine(nextTaskDir, "NEXT_TASK.md.stop-mode-test");
+        var tempCheckScript = Path.Combine(nextTaskDir, "scripts", "check-devflow-state.stop-mode-test.ps1");
+        File.WriteAllText(tempNextTask, badStopContent, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+        var originalScript = File.ReadAllText(Path.Combine(nextTaskDir, "scripts", "check-devflow-state.ps1"));
+        File.WriteAllText(tempCheckScript, originalScript, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+
+        try
+        {
+            var info = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "powershell",
+                Arguments = $"-ExecutionPolicy Bypass -File \"{tempCheckScript}\"",
+                WorkingDirectory = RepoRoot,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false
+            };
+
+            var tempBackup = Path.Combine(nextTaskDir, "NEXT_TASK.md.backup-stop-test");
+            File.Copy(Path.Combine(nextTaskDir, "NEXT_TASK.md"), tempBackup, overwrite: true);
+            File.Copy(tempNextTask, Path.Combine(nextTaskDir, "NEXT_TASK.md"), overwrite: true);
+
+            try
+            {
+                using var process = System.Diagnostics.Process.Start(info);
+                Assert.True(process.WaitForExit(120000), "check-devflow-state.ps1 did not exit in time for bad stop mode test.");
+                Assert.NotEqual(0, process.ExitCode);
+            }
+            finally
+            {
+                File.Copy(tempBackup, Path.Combine(nextTaskDir, "NEXT_TASK.md"), overwrite: true);
+                File.Delete(tempBackup);
+            }
+        }
+        finally
+        {
+            File.Delete(tempNextTask);
+            File.Delete(tempCheckScript);
+        }
     }
 
     private static void ValidateExecutableSpec(string text, string fileName, params string[] requiredSubstrings)

@@ -1,9 +1,8 @@
 # NEXT_TASK
 
 Mode: stop
-Task source: agent_task_spec
+Task source: stop
 Task id: STOP_REVIEW
-Task spec file: docs/agent-tasks/M4_1/018_EXEC_QUEUE.md
 Reason: M4.1 deterministic hardening queue reached the human review gate.
 User approval:
 Expected stop after completion: yes

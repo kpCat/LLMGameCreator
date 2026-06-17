@@ -36,6 +36,8 @@ powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\advance-next-task.ps
 
 only after focused tests and `check-all.ps1` pass. The script only updates `.devflow/NEXT_TASK.md`; it does not run Kilo, tests, git, or the next task. Stop immediately after the pointer advances.
 
+If `.devflow/NEXT_TASK.md` is already `Mode: stop` or `Task id: STOP_REVIEW`, the agent must not run `advance-next-task.ps1` and must not start any task. `STOP_REVIEW` is an explicit human review gate.
+
 ## M4_1_005 prompt
 
 ```text

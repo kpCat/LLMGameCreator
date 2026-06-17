@@ -72,6 +72,25 @@ try {
     }
 
     $nextRaw = Get-Content -Raw -Encoding UTF8 ".devflow\NEXT_TASK.md"
+
+    $nextMode = "single-task"
+    if ($nextRaw -match "(?m)^\s*Mode:\s*(?<mode>\S+)\s*$") {
+        $nextMode = $Matches['mode']
+    }
+
+    if ($nextMode -eq "stop") {
+        if ($nextRaw -notmatch "(?m)^\s*Task id:\s*STOP_REVIEW\s*$") {
+            throw "NEXT_TASK.md Mode is 'stop' but Task id is not STOP_REVIEW."
+        }
+
+        if ($nextRaw -notmatch "(?m)^\s*Stop action:\s*(?<action>.+)\s*$") {
+            throw "NEXT_TASK.md Mode is 'stop' but 'Stop action:' is missing."
+        }
+
+        Write-Host "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: $($taskGraph.tasks.Count). Known warnings: $($knownWarnings.known_warnings.Count)."
+        exit 0
+    }
+
     if ($nextRaw -notmatch "BASELINE-001|[A-Z0-9]+-[0-9]+|STOP_REVIEW") {
         Write-Warning "NEXT_TASK.md does not clearly contain a task id."
     }
