@@ -43,11 +43,7 @@ public sealed class AgentTaskDocsConsistencyGuardTests
     public void AllExecutableMd1TaskSpecsContainRequiredSections()
     {
         var indexText = File.ReadAllText(Path.Combine(DocsAgentTasksDir, "000_INDEX.md"));
-        var executableSpecs = indexText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-            .SelectMany(line => ExtractSpecPaths(line))
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .Where(p => p.StartsWith("docs/agent-tasks/M4_1/", StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        var executableSpecs = ExtractExecutableTaskSpecPathsFromIndex(indexText);
 
         foreach (var relativePath in executableSpecs)
         {
@@ -69,11 +65,7 @@ public sealed class AgentTaskDocsConsistencyGuardTests
     public void ExpectedFinalReportFieldsArePresentInExecutableSpecs()
     {
         var indexText = File.ReadAllText(Path.Combine(DocsAgentTasksDir, "000_INDEX.md"));
-        var executableSpecs = indexText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-            .SelectMany(line => ExtractSpecPaths(line))
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .Where(p => p.StartsWith("docs/agent-tasks/M4_1/", StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        var executableSpecs = ExtractExecutableTaskSpecPathsFromIndex(indexText);
 
         foreach (var relativePath in executableSpecs)
         {
@@ -87,6 +79,23 @@ public sealed class AgentTaskDocsConsistencyGuardTests
 
             Assert.Contains("## Expected final report", text, StringComparison.OrdinalIgnoreCase);
             Assert.Contains("## Next task pointer", text, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
+    [Fact]
+    public void RequiredM41SupportDocsExist()
+    {
+        var expected = new[]
+        {
+            "docs/agent-tasks/M4_1/018_EXEC_QUEUE.md",
+            "docs/agent-tasks/M4_1/019_KILO_PROMPTS.md",
+            "docs/agent-tasks/M4_1/020_REVIEW_GATE.md"
+        };
+
+        foreach (var relativePath in expected)
+        {
+            var fullPath = Path.Combine(RepoRoot, relativePath.Replace('/', Path.DirectorySeparatorChar));
+            Assert.True(File.Exists(fullPath), $"Required M4.1 support doc is missing: {relativePath}");
         }
     }
 
@@ -209,6 +218,79 @@ x
         if (!text.Contains("## Stop conditions", StringComparison.OrdinalIgnoreCase))
         {
             throw new Xunit.Sdk.XunitException($"Stop conditions section missing in: {fileName}");
+        }
+    }
+
+    private static System.Collections.Generic.IEnumerable<string> ExtractExecutableTaskSpecPathsFromIndex(string indexText)
+    {
+        var inExecutableTable = false;
+        var executableSupportFileHints = new[]
+        {
+            "018_EXEC_QUEUE.md",
+            "019_KILO_PROMPTS.md",
+            "020_REVIEW_GATE.md"
+        };
+
+        foreach (var rawLine in indexText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+        {
+            var line = rawLine.Trim();
+
+            if (line.StartsWith("| Task | Status | Spec |", StringComparison.OrdinalIgnoreCase)
+                || line.StartsWith("| Task| Status| Spec|", StringComparison.OrdinalIgnoreCase))
+            {
+                inExecutableTable = true;
+                continue;
+            }
+
+            if (inExecutableTable && line.StartsWith("### ", StringComparison.OrdinalIgnoreCase))
+            {
+                inExecutableTable = false;
+                continue;
+            }
+
+            if (!inExecutableTable || !line.StartsWith("|", StringComparison.OrdinalIgnoreCase) || line.EndsWith("|", StringComparison.OrdinalIgnoreCase))
+            {
+                var clean = line.Trim('|').Trim();
+                if (!clean.Contains("|", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                continue;
+            }
+
+            var segments = line.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            if (segments.Length < 3)
+            {
+                continue;
+            }
+
+            var candidate = segments[2].Trim();
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                continue;
+            }
+
+            var normalized = candidate.Trim('`').Trim('"').Trim('\'');
+
+            if (!normalized.StartsWith("docs/", StringComparison.OrdinalIgnoreCase))
+            {
+                normalized = "docs/agent-tasks/" + normalized;
+            }
+
+            if (normalized.IndexOf("M4_1/", StringComparison.OrdinalIgnoreCase) < 0
+                && normalized.IndexOf("docs/agent-tasks/M4_1/", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                continue;
+            }
+
+            var fileName = Path.GetFileName(normalized.Replace('/', Path.DirectorySeparatorChar));
+            if (executableSupportFileHints.Any(h => fileName.Equals(h, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            yield return normalized;
         }
     }
 
