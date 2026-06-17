@@ -72,7 +72,7 @@ try {
     }
 
     $nextRaw = Get-Content -Raw -Encoding UTF8 ".devflow\NEXT_TASK.md"
-    if ($nextRaw -notmatch "BASELINE-001|[A-Z0-9]+-[0-9]+") {
+    if ($nextRaw -notmatch "BASELINE-001|[A-Z0-9]+-[0-9]+|STOP_REVIEW") {
         Write-Warning "NEXT_TASK.md does not clearly contain a task id."
     }
 
