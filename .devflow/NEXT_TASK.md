@@ -2,8 +2,8 @@
 
 Mode: single-task
 Task source: agent_task_spec
-Task id: M4_1_005
-Task spec file: docs/agent-tasks/M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md
-Reason: Add golden coverage for evaluation report recommendations after parser diagnostics are fixture-guarded.
-User approval: approved to start M4_1_005 on a dedicated execution branch
+Task id: M4_1_005_REPAIR
+Task spec file: docs/agent-tasks/M4_1/023_REPAIR_005.md
+Reason: Strengthen M4_1_005 proof coverage after review found missing required assertions for markdown recommendations, no-unlock wording, deterministic rendering, high-pass warnings, and empty diagnostics/samples.
+User approval: approved
 Expected stop after completion: yes
