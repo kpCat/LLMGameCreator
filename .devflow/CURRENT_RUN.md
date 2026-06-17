@@ -1,35 +1,40 @@
 # CURRENT_RUN.md
 
-Task id: M4_1_004_STABILIZE
-Goal: Stabilize the previous M4_1_004 parser corpus task.
-Task spec: docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
+Task id: M4_1_005_REPAIR
+Goal: Add small devflow automation for advancing .devflow/NEXT_TASK.md after one successful task run.
+Task source: task_queue
+Task queue file: .devflow/task-queue.json
 Source docs read:
-- .devflow/LOCAL_AGENT_ROLE.md
-- .devflow/AUTONOMOUS_RUNBOOK.md
+- AGENTS.md
+- docs/CONTEXT_INDEX.md
+- docs/CURRENT_GENERATOR_STATE.md
+- .devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md
 - .devflow/STOP_CONDITIONS.md
-- .devflow/CONTEXT_BUDGET_POLICY.md
-- .devflow/DEFINITION_OF_DONE.md
-- .devflow/CODE_QUALITY_AND_STYLE.md
-- .devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md
-- docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanStrictJsonResponseParserTests.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictJsonResponseParser.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactGenerationModels.cs
-- .gitignore
+- docs/agent-tasks/M4_1/018_EXEC_QUEUE.md
+- docs/agent-tasks/M4_1/019_KILO_PROMPTS.md
+- docs/agent-tasks/000_INDEX.md
+Existing patterns inspected:
+- .devflow/scripts/check-devflow-state.ps1
+- .devflow/scripts/check-all.ps1
+- .devflow/scripts/_common.ps1
 Target files changed:
-- .gitignore (verified .devflow/runs/ present, no duplicates)
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanStrictJsonResponseParserTests.cs
-Local analogs found:
-- GeneratorPlanStrictJsonResponseParser.cs - strict parsing with diagnostic codes
-- GeneratorPlanStrictLlmArtifactGenerationModels.cs - diagnostic code constants
-- Existing test patterns in same file - Assert.Contains with diagnostic.Code
+- .devflow/task-queue.json
+- .devflow/scripts/advance-next-task.ps1
+- .devflow/NEXT_TASK.md
+- .devflow/CURRENT_RUN.md
+- docs/agent-tasks/M4_1/019_KILO_PROMPTS.md
+- docs/agent-tasks/M4_1/018_EXEC_QUEUE.md
+- docs/agent-tasks/000_INDEX.md
 Non-goals:
-- No production code changes
-- No parser semantic changes
-- No JSON extraction/repair added
-- No M5/M6/runtime/Lua changes
+- Do not unlock M5/M6.
+- Do not start real evaluation import or M4_1_001.
+- Do not run Kilo, tests, git, or the next task from the advance script.
 Expected checks:
-- dotnet test (focused): 15/15 passed
-- check-all.ps1: PASSED (406/406)
-Risk:
-- None -- only test file and .gitignore changed
+- check-devflow-state.ps1
+- check-all.ps1
+Expected pointer behavior:
+- After focused tests and check-all pass, run advance-next-task.ps1 once.
+- The script advances NEXT_TASK.md from M4_1_005_REPAIR to M4_1_006 and stops.
+Check results:
+- check-devflow-state.ps1: passed with warning that M4_1_006 is not recognized by the legacy task-id regex.
+- check-all.ps1: passed, 434/434 tests passed; run directory .devflow\runs\20260617_153402-check-all.

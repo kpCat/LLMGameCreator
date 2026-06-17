@@ -16,7 +16,8 @@ Use this prefix before every task-specific block:
 - repo-wide read;
 - M5/M6/M8/M9/M10 production work;
 - .sln/.csproj changes unless task explicitly allows;
-- committing generated .devflow/runs/** artifacts.
+- committing generated .devflow/runs/** artifacts;
+- running advance-next-task.ps1 unless focused tests and check-all.ps1 passed.
 
 Обязательно:
 - русский финальный отчёт;
@@ -24,8 +25,16 @@ Use this prefix before every task-specific block:
 - перечислить изменённые файлы вручную;
 - proof tests with exact assertions;
 - run required focused tests and check-all;
-- stop after exactly one task.
+- stop after exactly one task, even if advance-next-task.ps1 updates NEXT_TASK.md.
 ```
+
+If the completed task is listed in `.devflow/task-queue.json`, the agent may run:
+
+```text
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\advance-next-task.ps1
+```
+
+only after focused tests and `check-all.ps1` pass. The script only updates `.devflow/NEXT_TASK.md`; it does not run Kilo, tests, git, or the next task. Stop immediately after the pointer advances.
 
 ## M4_1_005 prompt
 
@@ -50,7 +59,7 @@ Read in order:
 - docs/agent-tasks/M4_1/M4_1_005_EVALUATION_MARKDOWN_GOLDEN_RECOMMENDATIONS.md
 
 Before edits, update .devflow/CURRENT_RUN.md with the task plan.
-After completion, update .devflow/NEXT_TASK.md to the next suggested task only.
+After focused tests and check-all pass, if this task is listed in .devflow/task-queue.json, run advance-next-task.ps1 to update .devflow/NEXT_TASK.md only.
 Run the task's focused test command and then:
 powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
 ```
@@ -66,7 +75,7 @@ User approval: approved
 Expected stop after completion: yes
 
 Read the shared quality docs, then exactly this task spec and the source docs it names. Do not execute M4_1_008 or later in the same run.
-Run the task's focused test command and then check-all.
+Run the task's focused test command and then check-all. If this task is listed in `.devflow/task-queue.json`, run `advance-next-task.ps1` only after those checks pass, then stop.
 ```
 
 ## M4_1_008 prompt
@@ -80,7 +89,7 @@ User approval: approved
 Expected stop after completion: yes
 
 Read the shared quality docs, then exactly this task spec and the source docs it names. Do not modify M5/M6/M8/M9/M10 production code. Do not unlock any future phase.
-Run the task's focused test command and then check-all.
+Run the task's focused test command and then check-all. If this task is listed in `.devflow/task-queue.json`, run `advance-next-task.ps1` only after those checks pass, then stop.
 ```
 
 ## Real-evaluation closure prompt starter

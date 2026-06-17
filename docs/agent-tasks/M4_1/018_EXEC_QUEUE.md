@@ -4,19 +4,22 @@ This file defines the practical M4.1 execution queue after the documentation roa
 
 ## Primary deterministic hardening queue
 
-Run these one at a time on a dedicated execution branch:
+Run these one at a time on a dedicated execution branch. The queue is also represented in `.devflow/task-queue.json` for pointer automation:
 
 ```text
-M4_1_005 -> M4_1_006 -> M4_1_008
+M4_1_005_REPAIR -> M4_1_006 -> M4_1_008 -> STOP_REVIEW
 ```
 
 Meaning:
 
 ```text
-M4_1_005: evaluation markdown/golden recommendations
+M4_1_005_REPAIR: NEXT_TASK automation repair
 M4_1_006: strict repair prompt guardrails
 M4_1_008: agent task docs consistency guard
+STOP_REVIEW: stop for human review after M4.1 deterministic hardening
 ```
+
+After `M4_1_008`, `advance-next-task.ps1` must write `STOP_REVIEW` and agents must stop for human review. Do not start `M4_1_001` or any real evaluation import automatically.
 
 ## Real-evaluation closure queue
 
