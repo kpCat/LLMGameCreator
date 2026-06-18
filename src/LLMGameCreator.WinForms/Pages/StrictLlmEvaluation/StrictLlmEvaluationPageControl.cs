@@ -20,6 +20,7 @@ public sealed class StrictLlmEvaluationPageControl : UserControl, IEditorPage
     private StrictLlmEvaluationViewState _currentViewState = new();
     private CancellationTokenSource? _currentOperationCts;
     private bool _applyingState;
+    private bool _suppressContractItemCheck;
 
     private readonly TableLayoutPanel _rootLayout = new();
     private readonly TableLayoutPanel _inputLayout = new();
@@ -303,7 +304,15 @@ public sealed class StrictLlmEvaluationPageControl : UserControl, IEditorPage
         _latestAuditModeButton.CheckedChanged += (_, _) => ApplyModeFromControls();
         _batchModeButton.CheckedChanged += (_, _) => ApplyModeFromControls();
         _profileComboBox.SelectedIndexChanged += (_, _) => ApplyControlChanges();
-        _contractList.ItemCheck += (_, _) => BeginInvoke(new Action(ApplyControlChanges));
+        _contractList.ItemCheck += (_, _) =>
+        {
+            if (_applyingState || _suppressContractItemCheck)
+            {
+                return;
+            }
+
+            BeginInvoke(new Action(ApplyControlChanges));
+        };
         _iterationsInput.ValueChanged += (_, _) => ApplyControlChanges();
         _maxTokensInput.ValueChanged += (_, _) => ApplyControlChanges();
         _temperatureInput.ValueChanged += (_, _) => ApplyControlChanges();
@@ -548,10 +557,18 @@ public sealed class StrictLlmEvaluationPageControl : UserControl, IEditorPage
     private void SetContracts(IReadOnlyList<StrictLlmEvaluationContractOption> contracts, IReadOnlyList<string> selectedIds)
     {
         var selected = selectedIds.ToHashSet(StringComparer.OrdinalIgnoreCase);
-        _contractList.Items.Clear();
-        foreach (var contract in contracts)
+        _suppressContractItemCheck = true;
+        try
         {
-            _contractList.Items.Add(contract, selected.Contains(contract.Id));
+            _contractList.Items.Clear();
+            foreach (var contract in contracts)
+            {
+                _contractList.Items.Add(contract, selected.Contains(contract.Id));
+            }
+        }
+        finally
+        {
+            _suppressContractItemCheck = false;
         }
     }
 

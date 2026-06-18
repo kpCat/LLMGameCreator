@@ -5,7 +5,13 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Pages\ArtifactReview\ArtifactReviewPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Pages\Assets\AssetsPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\CapabilityPicker\CapabilityPickerPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\Dashboard\DashboardPageControl.cs">
@@ -41,6 +47,9 @@
     <Compile Update="Pages\GeneratorLibrary\GeneratorLibraryPrototypeLuaTabControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Pages\PackageExport\PackageExportPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Pages\Projects\CreateGameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +66,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\Settings\SettingsPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\StrictLlmArtifacts\StrictLlmArtifactsPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Pages\StrictLlmEvaluation\StrictLlmEvaluationPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Pages\Validation\ValidationPageControl.cs">
