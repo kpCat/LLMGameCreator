@@ -8,17 +8,17 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 .devflow/NEXT_TASK.md
   -> docs/agent-tasks/000_INDEX.md
   -> shared quality docs
-  -> exactly one task spec file
-  -> source docs named by that task spec
-  -> target files / local analogs named by that task spec
+  -> exactly one task spec file or one .devflow/task-queue.json entry
+  -> source docs named by that task spec or queue entry
+  -> target files / local analogs named by that task spec or queue entry
   -> proof tests and system gates
-  -> .devflow/NEXT_TASK.md update
+  -> optional .devflow/task-queue.json pointer advance
 ```
 
 ## Rules for agents
 
 1. Do not read all task specs.
-2. Read this index, shared quality docs, then exactly one task spec referenced by `.devflow/NEXT_TASK.md`.
+2. Read this index, shared quality docs, then exactly one task spec or queue entry referenced by `.devflow/NEXT_TASK.md`.
 3. If a task spec is locked, blocked, missing proof tests, or requires approval not granted by the user, stop and write `.devflow/BLOCKERS.md`.
 4. Do not implement directly from a phase plan when an agent task spec exists.
 5. Do not broaden a task spec. If the implementation needs files/classes/methods not allowed by the spec, stop.
@@ -28,6 +28,8 @@ This folder is not a general roadmap. It is the layer between broad phase plans 
 9. Future phase sequence files are routing docs, not executable specs.
 10. Locked future draft specs are planning contracts only until current-state docs unlock that phase.
 11. Execution support docs are operator guidance for the human/user, not permission for the coding agent to expand scope.
+12. If `NEXT_TASK.md` uses `Task source: task_queue`, execute exactly that queue entry and do not read all queue entries as task specs.
+13. `advance-next-task.ps1` may be run only after focused tests and `check-all.ps1` pass. It only updates `.devflow/NEXT_TASK.md`; it does not authorize executing the next task in the same run.
 
 ## Shared templates, gates, and quality docs
 

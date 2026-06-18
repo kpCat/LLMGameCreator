@@ -1,35 +1,79 @@
 # CURRENT_RUN.md
 
-Task id: M4_1_004_STABILIZE
-Goal: Stabilize the previous M4_1_004 parser corpus task.
-Task spec: docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
+Task id: DEVFLOW_DOCS_GUARD_TEST_SPLIT_POLISH
+Goal: split docs guard tests and polish stop-mode automation checks
+Task source: user_request
+
 Source docs read:
-- .devflow/LOCAL_AGENT_ROLE.md
-- .devflow/AUTONOMOUS_RUNBOOK.md
-- .devflow/STOP_CONDITIONS.md
-- .devflow/CONTEXT_BUDGET_POLICY.md
-- .devflow/DEFINITION_OF_DONE.md
-- .devflow/CODE_QUALITY_AND_STYLE.md
-- .devflow/LOCAL_AGENT_REVIEW_CHECKLIST.md
-- docs/agent-tasks/M4_1/M4_1_004_STRICT_JSON_PARSER_CORPUS_GUARD.md
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanStrictJsonResponseParserTests.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictJsonResponseParser.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactGenerationModels.cs
-- .gitignore
-Target files changed:
-- .gitignore (verified .devflow/runs/ present, no duplicates)
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanStrictJsonResponseParserTests.cs
-Local analogs found:
-- GeneratorPlanStrictJsonResponseParser.cs - strict parsing with diagnostic codes
-- GeneratorPlanStrictLlmArtifactGenerationModels.cs - diagnostic code constants
-- Existing test patterns in same file - Assert.Contains with diagnostic.Code
+- AGENTS.md
+- README.md
+- docs/CONTEXT_INDEX.md
+- docs/CURRENT_GENERATOR_STATE.md
+- docs/ROADMAP_TO_FULL_GENERATOR.md
+- docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md
+- docs/agent-tasks/000_INDEX.md
+- .devflow/NEXT_TASK.md
+- .devflow/task-queue.json
+- .devflow/scripts/check-devflow-state.ps1
+- .devflow/scripts/advance-next-task.ps1
+- .devflow/scripts/check-all.ps1
+- .devflow/scripts/_common.ps1
+- .devflow/CURRENT_RUN.md
+- tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs
+- tests/LLMGameCreator.Tests/Docs/CurrentGeneratorStateDocsTests.cs
+
+Existing patterns inspected:
+- docs guard tests use xUnit Fact methods and repository root discovery from test base directory.
+- devflow scripts use UTF-8/no-BOM writes and explicit stop-mode handling.
+- stop-mode tests protect real .devflow/NEXT_TASK.md with backup/restore in try/finally.
+
+Planned files changed:
+- .devflow/CURRENT_RUN.md
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsFrameworkGuardTests.cs
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsExecutableSpecGuardTests.cs
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsStopModeGuardTests.cs
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsTestSupport.cs
+
+Planned files deleted:
+- README_APPLY_NEXT_TASK_REPAIR_005.md, if present
+- README_APPLY_NEXT_TASK_006.md, if present
+- README_APPLY_NEXT_TASK_008.md, if present
+
 Non-goals:
-- No production code changes
-- No parser semantic changes
-- No JSON extraction/repair added
-- No M5/M6/runtime/Lua changes
+- Do not modify production code under src/**.
+- Do not modify LLMGameCreator.sln or any *.csproj.
+- Do not modify docs/CURRENT_GENERATOR_STATE.md or docs/CURRENT_GENERATOR_STATE.json.
+- Do not unlock or edit M5/M6/M8/M9/M10 task specs.
+- Do not add dependencies.
+- Do not rewrite the devflow framework or execute the next task.
+- Do not use git commands.
+
 Expected checks:
-- dotnet test (focused): 15/15 passed
-- check-all.ps1: PASSED (406/406)
-Risk:
-- None -- only test file and .gitignore changed
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~AgentTaskDocs"
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
+
+Actual checks:
+- check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
+- focused AgentTaskDocs tests: passed. 17 passed, 0 failed.
+- check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 440 passed. Run directory: .devflow\runs\20260617_191547-check-all.
+- Mojibake marker scan over changed files: passed, no markers found.
+
+Changes applied:
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs: deleted the 507-line monolithic guard file after moving tests.
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsTestSupport.cs: added shared repo root discovery, docs constants, spec path parsing, executable spec validation, safe PowerShell process start, and temporary NEXT_TASK backup/restore helper.
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsFrameworkGuardTests.cs: added focused framework/index/support-doc guards.
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsExecutableSpecGuardTests.cs: added focused executable task spec guards.
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsStopModeGuardTests.cs: added focused stop-mode NEXT_TASK and check-devflow-state guards.
+- .devflow/CURRENT_RUN.md: recorded the current task, sources read, planned files, checks, results, and follow-up.
+
+Deleted files:
+- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs
+- README_APPLY_NEXT_TASK_REPAIR_005.md: not present.
+- README_APPLY_NEXT_TASK_006.md: not present.
+- README_APPLY_NEXT_TASK_008.md: not present.
+
+Follow-up:
+- ARCHIVE_MANIFEST.md exists and describes llmgc_next_task_008.zip. It was left in place because deletion was not required to pass the task and should be reviewed separately if desired.

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "name": "m4-1-deterministic-hardening-queue",
+  "description": "Conservative M4.1 one-task-per-run queue. It advances only the NEXT_TASK.md pointer after checks pass; it never runs the next task.",
+  "source_of_truth": [
+    ".devflow/NEXT_TASK.md",
+    "docs/agent-tasks/M4_1/018_EXEC_QUEUE.md",
+    "docs/agent-tasks/M4_1/019_KILO_PROMPTS.md",
+    "docs/agent-tasks/000_INDEX.md",
+    ".devflow/RECURSIVE_TASK_SELECTION_PROTOCOL.md",
+    ".devflow/STOP_CONDITIONS.md"
+  ],
+  "policy": {
+    "one_task_per_run": true,
+    "advance_after": "focused task tests and .devflow/scripts/check-all.ps1 pass",
+    "advance_script": ".devflow/scripts/advance-next-task.ps1",
+    "forbidden_actions": [
+      "run Kilo",
+      "run tests",
+      "run git",
+      "execute the next task"
+    ]
+  },
+  "queue": [
+    {
+      "id": "M4_1_006",
+      "title": "Strict repair prompt guardrails",
+      "reason": "Add repair prompt guardrails after markdown/golden recommendation checks.",
+      "approval": "approved",
+      "next_task_lines": [
+        "# NEXT_TASK",
+        "",
+        "Mode: single-task",
+        "Task source: agent_task_spec",
+        "Task id: M4_1_006",
+        "Task spec file: docs/agent-tasks/M4_1/M4_1_006_STRICT_REPAIR_PROMPT_GUARDRAILS.md",
+        "Reason: Add repair prompt guardrails after markdown/golden recommendation checks.",
+        "User approval: approved",
+        "Expected stop after completion: yes"
+      ]
+    },
+    {
+      "id": "M4_1_008",
+      "title": "Agent task docs consistency guard",
+      "reason": "Add task-doc consistency guard after parser, markdown, and repair prompt guardrails are covered.",
+      "approval": "approved",
+      "next_task_lines": [
+        "# NEXT_TASK",
+        "",
+        "Mode: single-task",
+        "Task source: agent_task_spec",
+        "Task id: M4_1_008",
+        "Task spec file: docs/agent-tasks/M4_1/M4_1_008_AGENT_TASK_DOCS_CONSISTENCY_GUARD.md",
+        "Reason: Add task-doc consistency guard after parser, markdown, and repair prompt guardrails are covered.",
+        "User approval: approved",
+        "Expected stop after completion: yes"
+      ]
+    },
+    {
+      "id": "STOP_REVIEW",
+      "title": "Human review gate",
+      "reason": "M4.1 deterministic hardening queue reached the human review gate.",
+      "approval": "",
+      "next_task_lines": [
+        "# NEXT_TASK",
+        "",
+        "Mode: stop",
+        "Task source: stop",
+        "Task id: STOP_REVIEW",
+        "Reason: M4.1 deterministic hardening queue reached the human review gate.",
+        "User approval:",
+        "Expected stop after completion: yes",
+        "Stop action: Do not start future work. Review the completed task, check-all output, and whether M4.1 gate review should continue."
+      ]
+    }
+  ]
+}
