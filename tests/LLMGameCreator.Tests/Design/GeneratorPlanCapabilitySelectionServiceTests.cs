@@ -1,3 +1,5 @@
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Infrastructure.Storage;
 using Xunit;
@@ -6,6 +8,14 @@ namespace LLMGameCreator.Tests.Design;
 
 public sealed class GeneratorPlanCapabilitySelectionServiceTests
 {
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+        WriteIndented = true
+    };
+
     [Fact]
     public async Task BuildSelectionAcceptsKnownFirstPersonGridPartyBlobShape()
     {
@@ -122,6 +132,92 @@ public sealed class GeneratorPlanCapabilitySelectionServiceTests
         Assert.True(loaded.Exists);
         Assert.Equal(result.Selection.SelectionId, loaded.Selection.SelectionId);
         Assert.Equal(result.Selection.SelectedVariantIds.PresentationModeId, loaded.Selection.SelectedVariantIds.PresentationModeId);
+    }
+
+    [Fact]
+    public void OldSelectionJsonDeserializesWithEmptyComposableArrays()
+    {
+        var selection = JsonSerializer.Deserialize<GeneratorPlanCapabilitySelection>("""
+        {
+          "schema_version": "0.1",
+          "selection_id": "selection/old",
+          "selected_variant_ids": {
+            "presentation_mode_id": "presentation_mode/map_and_panel_rpg"
+          },
+          "selected_feature_bundle_ids": ["feature_bundle/core_atlas_planning/v1"]
+        }
+        """, JsonOptions);
+
+        Assert.NotNull(selection);
+        Assert.Empty(selection!.SelectedModuleIds);
+        Assert.Empty(selection.SelectedModifierIds);
+        Assert.Empty(selection.SelectedConstraintIds);
+        Assert.Empty(selection.RuntimeRequirementIds);
+    }
+
+    [Fact]
+    public void NewSelectionJsonRoundTripsComposableArrays()
+    {
+        var selection = new GeneratorPlanCapabilitySelection
+        {
+            SelectionId = "selection/new",
+            SelectedModuleIds = ["module/progression/perk_tree"],
+            SelectedModifierIds = ["modifier/combat/hybrid_realtime_turn_toggle"],
+            SelectedConstraintIds = ["constraint/balance/no_player_rubberbanding"],
+            RuntimeRequirementIds = ["runtime_requirement/requires_party_state"]
+        };
+
+        var json = JsonSerializer.Serialize(selection, JsonOptions);
+        var loaded = JsonSerializer.Deserialize<GeneratorPlanCapabilitySelection>(json, JsonOptions);
+
+        Assert.Equal("module/progression/perk_tree", Assert.Single(loaded!.SelectedModuleIds));
+        Assert.Equal("modifier/combat/hybrid_realtime_turn_toggle", Assert.Single(loaded.SelectedModifierIds));
+        Assert.Equal("constraint/balance/no_player_rubberbanding", Assert.Single(loaded.SelectedConstraintIds));
+        Assert.Equal("runtime_requirement/requires_party_state", Assert.Single(loaded.RuntimeRequirementIds));
+    }
+
+    [Fact]
+    public void HelpCatalogReturnsRussianMetadataAndSafeFallback()
+    {
+        var known = GeneratorPlanCapabilityHelpCatalog.Get("presentation_mode/map_and_panel_rpg");
+        var unknown = GeneratorPlanCapabilityHelpCatalog.Get("feature_bundle/unknown/v1");
+
+        Assert.Equal("Карта + панельная RPG", known.DisplayNameRu);
+        Assert.Contains("регион", known.ShortDescriptionRu, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("feature_bundle/unknown/v1", unknown.DisplayNameRu);
+        Assert.Equal("metadata_missing", unknown.ImplementationStatus);
+    }
+
+    [Theory]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCodes.IncompatiblePresentationWorld, GeneratorPlanCapabilitySelectionDiagnosticCategories.Impossible)]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCodes.MissingArtifactContract, GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet)]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCodes.CapabilityGap, GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet)]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCodes.VariantNotRecommended, GeneratorPlanCapabilitySelectionDiagnosticCategories.Risky)]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCodes.Loaded, GeneratorPlanCapabilitySelectionDiagnosticCategories.Info)]
+    public void DiagnosticCategoryMappingUsesUserFacingCategories(string code, string expectedCategory)
+    {
+        Assert.Equal(expectedCategory, GeneratorPlanCapabilityHelpCatalog.MapDiagnosticCategory(code));
+    }
+
+    [Fact]
+    public void StrictPromptIncludesComposableArraysOnlyWhenPresent()
+    {
+        var contract = new GeneratorPlanStrictLlmArtifactContractCatalog().ListContracts().First(contract => contract.ContractId == "game_profile_v1");
+        var builder = new GeneratorPlanStrictLlmArtifactPromptBuilder();
+        var emptyPrompt = builder.Build(contract, new GeneratorPlanCapabilitySelection(), new GeneratorPlanStrictLlmArtifactGenerationRequest());
+        var composedPrompt = builder.Build(contract, new GeneratorPlanCapabilitySelection
+        {
+            SelectedModuleIds = ["module/progression/perk_tree"],
+            SelectedModifierIds = ["modifier/combat/hybrid_realtime_turn_toggle"],
+            SelectedConstraintIds = ["constraint/balance/no_player_rubberbanding"],
+            RuntimeRequirementIds = ["runtime_requirement/requires_party_state"]
+        }, new GeneratorPlanStrictLlmArtifactGenerationRequest());
+
+        Assert.DoesNotContain("selected_module_ids:", emptyPrompt.UserPrompt);
+        Assert.Contains("selected_module_ids:", composedPrompt.UserPrompt);
+        Assert.Contains("selected_modifier_ids:", composedPrompt.UserPrompt);
+        Assert.Contains("selected_constraint_ids:", composedPrompt.UserPrompt);
+        Assert.Contains("runtime_requirement_ids:", composedPrompt.UserPrompt);
     }
 
     [Fact]

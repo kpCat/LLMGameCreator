@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-18T16:43:35Z",
+  "updated_at_utc": "2026-06-18T20:30:00Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts",
-  "gate_status": "passed_sampled_baseline",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 001 foundation completed",
+  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts; broad expansion still requires controlled vertical-slice approval.",
-  "current_user_action": "Review next product vertical slice options before starting M5, M6, M6-lite or runtime preview repair-loop work.",
-  "recommended_next_decision": "Choose one controlled product vertical slice and refresh the next executable task specs from current source.",
+  "active_manual_gate": "Completed for sampled baseline contracts and Product Slice 001 foundation; broad expansion still requires controlled vertical-slice approval.",
+  "current_user_action": "Use Capability Composer v2 foundation in the picker, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.",
+  "recommended_next_decision": "Choose the next controlled product vertical slice and refresh the next executable task specs from current source.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -48,8 +48,26 @@
     "diagnostics": "none",
     "quality_warnings": "none"
   },
+  "last_completed_product_slice": {
+    "slice_id": "product_slice_001_capability_composer_v2_foundation",
+    "title": "Capability Composer v2 Foundation",
+    "completed_at_utc": "2026-06-18T20:30:00Z",
+    "summary": "Added Russian-readable help metadata, diagnostic categories and optional non-breaking composable selection fields to the existing Capability Picker flow.",
+    "non_breaking_fields": [
+      "selected_module_ids",
+      "selected_modifier_ids",
+      "selected_constraint_ids",
+      "runtime_requirement_ids"
+    ],
+    "diagnostic_categories": [
+      "impossible",
+      "unsupported_yet",
+      "risky",
+      "info"
+    ]
+  },
   "allowed_next_codex_task_types": [
-    "plan_one_controlled_product_vertical_slice",
+    "plan_one_controlled_product_vertical_slice_from_composer_v2_foundation",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
     "tighten_prompt_repair_or_validator_if_future_real_evaluations_regress",
@@ -67,7 +85,7 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "controlled_product_vertical_slice_planning_review",
+  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_composer_v2_foundation",
   "recommended_next_work_item_title": "Choose the next controlled product vertical slice before M5/M6/M6-lite work.",
   "candidate_product_vertical_slices": [
     "Lua-backed content slice: one safe generator module family producing validated artifact envelopes.",
@@ -87,6 +105,7 @@
   ],
   "current_workflow": [
     "Capability Picker",
+    "Capability Composer v2 foundation",
     "LLM Artifacts",
     "LLM Evaluation",
     "Artifact Review",

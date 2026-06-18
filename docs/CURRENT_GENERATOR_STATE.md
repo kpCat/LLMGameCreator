@@ -8,9 +8,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 M4.1 gate passed for sampled baseline contracts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, so M5/M6 planning is no longer blocked purely by missing real evaluation evidence.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, and the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker.
 
-This does not unlock broad contract expansion or direct production implementation. The next step should be a controlled product vertical slice chosen by the user before any M5/M6/M6-lite work starts.
+This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
 ## Gate decision
 
@@ -60,17 +60,23 @@ Permanent evidence summary:
 - Evaluation stores JSON and markdown report artifacts with pass, repair, fail, diagnostic hot spot and quality warning metrics.
 - A real local-model batch evaluation passed for the sampled baseline contracts listed above.
 
+## Last completed product slice
+
+- Product Slice 001: Capability Composer v2 Foundation.
+- The Capability Picker now has Russian-readable help metadata, clearer diagnostic categories and optional non-breaking composable fields.
+- Strict LLM prompt context can include selected module/modifier/constraint/runtime requirement ids when present.
+
 ## Active manual gate
 
-Completed for the sampled baseline contracts.
+Completed for the sampled baseline contracts and Product Slice 001 foundation. Broad expansion still requires an explicit next controlled slice.
 
 ## Current user action
 
-Review next product vertical slice options before starting M5, M6, M6-lite or runtime preview repair-loop work.
+Use Capability Composer v2 foundation in the picker, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.
 
 ## Allowed next Codex tasks
 
-- Plan one controlled product vertical slice from the passed sampled baseline evidence.
+- Plan one controlled product vertical slice from the passed sampled baseline evidence and Capability Composer v2 foundation.
 - Generate source-refreshed M5 entry executable specs after the user chooses the next vertical slice.
 - Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
@@ -94,6 +100,7 @@ Still restricted:
 
 ```text
 Capability Picker
+  -> Capability Composer v2 foundation
   -> LLM Artifacts
   -> LLM Evaluation
   -> Artifact Review
@@ -116,14 +123,14 @@ Capability Picker
 ## What not to do next
 
 - Do not treat one sampled baseline pass as broad contract expansion approval.
-- Do not start M5/M6/M6-lite without an explicit chosen product vertical slice and user approval.
+- Do not start M5/M6/M6-lite without an explicit next product vertical slice and user approval.
 - Do not add runtime/provider/package mutation behavior as part of this gate record.
 - Do not make Runtime Preview repair-loop work the immediate next step before the controlled vertical slice is chosen.
 - Do not claim the whole generator is complete.
 
 ## Recommended next step
 
-Choose one controlled product vertical slice and then refresh the next executable task specs from current source.
+Choose the next controlled product vertical slice and then refresh the next executable task specs from current source.
 
 Candidate slices:
 

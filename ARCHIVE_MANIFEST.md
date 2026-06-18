@@ -1,15 +1,16 @@
 # Archive Manifest
 
-Archive: `llmgc_capability_composer_v2_pack.zip`
+Archive: `llmgc_product_slice_001_capability_composer_v2_foundation.zip`
 
 Files:
-- `README_APPLY_CAPABILITY_COMPOSER_V2_PACK.md`
-- `docs/CAPABILITY_COMPOSER_V2_SPEC.md`
-- `docs/CAPABILITY_COMPOSER_V2_RU_GLOSSARY.md`
-- `docs/PRODUCT_VERTICAL_SLICE_DECISION.md`
-- `docs/agent-tasks/NEXT_PRODUCT_SLICE/000_INDEX.md`
-- `docs/agent-tasks/NEXT_PRODUCT_SLICE/001_CAPABILITY_PICKER_HELP_AND_COMPATIBILITY_UI.md`
-- `docs/agent-tasks/NEXT_PRODUCT_SLICE/002_CAPABILITY_COMPOSER_V2_NON_BREAKING_MODEL.md`
-- `docs/agent-tasks/NEXT_PRODUCT_SLICE/003_BASELINE_ARTIFACTS_TO_PACKAGE_ASSEMBLY_SLICE.md`
 
-No generated source code is included.
+```text
+README_APPLY_PRODUCT_SLICE_001.md
+ARCHIVE_MANIFEST.md
+docs/PRODUCT_SLICE_001_CAPABILITY_COMPOSER_V2_FOUNDATION.md
+docs/LLMGAMECREATOR_1_0_ROADMAP.md
+docs/agent-tasks/NEXT_PRODUCT_SLICE/001_CAPABILITY_COMPOSER_V2_FOUNDATION.md
+docs/agent-tasks/NEXT_PRODUCT_SLICE/001_CODEX_PROMPT.md
+```
+
+No source code is included. This pack contains source-of-truth docs and one executable Codex task spec.

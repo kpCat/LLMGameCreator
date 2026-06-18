@@ -45,7 +45,8 @@ public sealed class CapabilityPickerPresenter
                     Domain = bundle.Domain,
                     Category = bundle.Category,
                     Purpose = bundle.Purpose,
-                    ArtifactContractCount = bundle.ArtifactContracts.Count
+                    ArtifactContractCount = bundle.ArtifactContracts.Count,
+                    Help = GeneratorPlanCapabilityHelpCatalog.Get(bundle.Id)
                 })
                 .OrderBy(bundle => bundle.Title, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(bundle => bundle.Id, StringComparer.OrdinalIgnoreCase)
@@ -140,6 +141,7 @@ public sealed class CapabilityPickerPresenter
             {
                 Severity = result.Severity,
                 Code = result.Code,
+                Category = GeneratorPlanCapabilityHelpCatalog.MapDiagnosticCategory(result.Code),
                 Target = result.Target,
                 Message = result.Message
             })
@@ -210,7 +212,8 @@ public sealed class CapabilityPickerPresenter
             {
                 Id = option.Id,
                 Title = option.Title,
-                Purpose = option.Purpose
+                Purpose = option.Purpose,
+                Help = GeneratorPlanCapabilityHelpCatalog.Get(option.Id)
             })
             .OrderBy(option => option.Title, StringComparer.OrdinalIgnoreCase)
             .ThenBy(option => option.Id, StringComparer.OrdinalIgnoreCase)

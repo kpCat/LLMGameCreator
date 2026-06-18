@@ -65,6 +65,10 @@ public sealed class GeneratorPlanStrictLlmArtifactPromptBuilder
         builder.AppendLine(JsonSerializer.Serialize(selection.SelectedVariantIds, JsonOptions));
         builder.AppendLine("selected_feature_bundle_ids:");
         builder.AppendLine(JsonSerializer.Serialize(selection.SelectedFeatureBundleIds, JsonOptions));
+        AppendOptionalArray(builder, "selected_module_ids", selection.SelectedModuleIds);
+        AppendOptionalArray(builder, "selected_modifier_ids", selection.SelectedModifierIds);
+        AppendOptionalArray(builder, "selected_constraint_ids", selection.SelectedConstraintIds);
+        AppendOptionalArray(builder, "runtime_requirement_ids", selection.RuntimeRequirementIds);
         builder.AppendLine("resolved_artifact_contracts:");
         builder.AppendLine(JsonSerializer.Serialize(selection.ResolvedArtifactContracts, JsonOptions));
         builder.AppendLine("resolved_validators:");
@@ -112,5 +116,16 @@ public sealed class GeneratorPlanStrictLlmArtifactPromptBuilder
     private static string EmptyAsDash(string value)
     {
         return string.IsNullOrWhiteSpace(value) ? "-" : value.Trim();
+    }
+
+    private static void AppendOptionalArray(StringBuilder builder, string label, IReadOnlyList<string> values)
+    {
+        if (values.Count == 0)
+        {
+            return;
+        }
+
+        builder.AppendLine(label + ":");
+        builder.AppendLine(JsonSerializer.Serialize(values, JsonOptions));
     }
 }

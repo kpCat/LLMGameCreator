@@ -16,6 +16,8 @@ public sealed class CapabilityPickerPresenterTests
         Assert.Single(state.PresentationModes);
         Assert.Single(state.FeatureBundles);
         Assert.Equal("headless", state.RuntimeTargetId);
+        Assert.Equal("Псевдо-3D сетка от первого лица", state.PresentationModes[0].Help.DisplayNameRu);
+        Assert.Contains("Базовое планирование", state.FeatureBundles[0].Help.DisplayNameRu);
     }
 
     [Fact]
@@ -25,7 +27,8 @@ public sealed class CapabilityPickerPresenterTests
         var state = presenter.FromSelectionResult(new CapabilityPickerViewState(), Result());
 
         Assert.Equal("ready_with_warnings", state.Status);
-        Assert.Contains(state.Diagnostics, diagnostic => diagnostic.Code == "test.warning");
+        Assert.Contains(state.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanCapabilitySelectionDiagnosticCodes.VariantNotRecommended);
+        Assert.Contains(state.Diagnostics, diagnostic => diagnostic.Category == GeneratorPlanCapabilitySelectionDiagnosticCategories.Risky);
         Assert.Contains("warning", state.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -117,7 +120,7 @@ public sealed class CapabilityPickerPresenterTests
                 new GeneratorPlanCapabilitySelectionDiagnostic
                 {
                     Severity = GeneratorPlanPreviewDiagnosticSeverity.Warning,
-                    Code = "test.warning",
+                    Code = GeneratorPlanCapabilitySelectionDiagnosticCodes.VariantNotRecommended,
                     Target = "target",
                     Message = "warning"
                 }

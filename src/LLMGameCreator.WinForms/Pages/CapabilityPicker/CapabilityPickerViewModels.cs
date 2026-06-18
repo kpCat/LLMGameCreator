@@ -36,6 +36,7 @@ public sealed record CapabilityPickerViewState
     public IReadOnlyList<string> ResolvedPromptContextTemplates { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> CapabilityGaps { get; init; } = Array.Empty<string>();
     public IReadOnlyList<CapabilityPickerDiagnosticRow> Diagnostics { get; init; } = Array.Empty<CapabilityPickerDiagnosticRow>();
+    public string HelpText { get; init; } = string.Empty;
     public GeneratorPlanCapabilitySelectionResult? CurrentResult { get; init; }
     public bool CanSave => CurrentResult != null && CurrentResult.Diagnostics.All(diagnostic => diagnostic.Severity != GeneratorPlanPreviewDiagnosticSeverity.Error);
 }
@@ -45,7 +46,10 @@ public sealed record CapabilityPickerOptionViewModel
     public string Id { get; init; } = string.Empty;
     public string Title { get; init; } = string.Empty;
     public string Purpose { get; init; } = string.Empty;
-    public string DisplayName => string.IsNullOrWhiteSpace(Title) ? Id : $"{Title} ({Id})";
+    public GeneratorPlanCapabilityHelpMetadata Help { get; init; } = GeneratorPlanCapabilityHelpMetadata.Fallback(string.Empty);
+    public string DisplayName => string.IsNullOrWhiteSpace(Help.DisplayNameRu) || Help.ImplementationStatus == "metadata_missing"
+        ? (string.IsNullOrWhiteSpace(Title) ? Id : $"{Title} ({Id})")
+        : $"{Help.DisplayNameRu} ({Id})";
 }
 
 public sealed record CapabilityPickerFeatureBundleViewModel
@@ -56,12 +60,16 @@ public sealed record CapabilityPickerFeatureBundleViewModel
     public string Category { get; init; } = string.Empty;
     public string Purpose { get; init; } = string.Empty;
     public int ArtifactContractCount { get; init; }
-    public string DisplayName => $"{Title} | {Id} | {Domain} | {Category} | contracts: {ArtifactContractCount} | {Purpose}";
+    public GeneratorPlanCapabilityHelpMetadata Help { get; init; } = GeneratorPlanCapabilityHelpMetadata.Fallback(string.Empty);
+    public string DisplayName => string.IsNullOrWhiteSpace(Help.DisplayNameRu) || Help.ImplementationStatus == "metadata_missing"
+        ? $"{Title} | {Id} | {Domain} | {Category} | contracts: {ArtifactContractCount} | {Purpose}"
+        : $"{Help.DisplayNameRu} | {Id} | {Domain} | {Category} | contracts: {ArtifactContractCount}";
 }
 
 public sealed record CapabilityPickerDiagnosticRow
 {
     public string Severity { get; init; } = string.Empty;
+    public string Category { get; init; } = string.Empty;
     public string Code { get; init; } = string.Empty;
     public string Target { get; init; } = string.Empty;
     public string Message { get; init; } = string.Empty;
@@ -71,6 +79,9 @@ public sealed record CapabilityPickerDiagnosticRow
         return new CapabilityPickerDiagnosticRow
         {
             Severity = diagnostic.Severity,
+            Category = string.IsNullOrWhiteSpace(diagnostic.Category)
+                ? GeneratorPlanCapabilityHelpCatalog.MapDiagnosticCategory(diagnostic.Code)
+                : diagnostic.Category,
             Code = diagnostic.Code,
             Target = diagnostic.Target,
             Message = diagnostic.Message

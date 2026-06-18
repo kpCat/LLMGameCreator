@@ -38,7 +38,9 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
     private readonly ComboBox _npcComboBox = new();
     private readonly ComboBox _runtimeTargetComboBox = new();
     private readonly SplitContainer _splitContainer = new();
+    private readonly TableLayoutPanel _featurePanel = new();
     private readonly CheckedListBox _featureBundleList = new();
+    private readonly TextBox _helpTextBox = new();
     private readonly TableLayoutPanel _resultLayout = new();
     private readonly FlowLayoutPanel _actionPanel = new();
     private readonly Button _buildButton = new();
@@ -191,9 +193,19 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _featureBundleList.DisplayMember = nameof(CapabilityPickerFeatureBundleViewModel.DisplayName);
         _featureBundleList.Dock = DockStyle.Fill;
         _featureBundleList.HorizontalScrollbar = true;
+        ConfigureReadOnly(_helpTextBox, true);
+
+        _featurePanel.ColumnCount = 1;
+        _featurePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        _featurePanel.Dock = DockStyle.Fill;
+        _featurePanel.RowCount = 2;
+        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 58F));
+        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 42F));
+        _featurePanel.Controls.Add(_featureBundleList, 0, 0);
+        _featurePanel.Controls.Add(_helpTextBox, 0, 1);
 
         BuildResultLayout();
-        _splitContainer.Panel1.Controls.Add(_featureBundleList);
+        _splitContainer.Panel1.Controls.Add(_featurePanel);
         _splitContainer.Panel2.Controls.Add(_resultLayout);
     }
 
@@ -261,6 +273,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _diagnosticsGrid.RowHeadersVisible = false;
         _diagnosticsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         _diagnosticsGrid.Columns.Add("Severity", "Severity");
+        _diagnosticsGrid.Columns.Add("Category", "Category");
         _diagnosticsGrid.Columns.Add("Code", "Code");
         _diagnosticsGrid.Columns.Add("Target", "Target");
         _diagnosticsGrid.Columns.Add("Message", "Message");
@@ -274,6 +287,13 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _saveButton.Click += async (_, _) => await SaveLatestSelectionAsync().ConfigureAwait(true);
         _loadLatestButton.Click += async (_, _) => await LoadLatestSelectionAsync().ConfigureAwait(true);
         _copyJsonButton.Click += (_, _) => TryCopyText(_currentViewState.SelectionJson);
+        _featureBundleList.SelectedIndexChanged += (_, _) => UpdateHelpFromSelection();
+        _featureBundleList.ItemCheck += (_, _) => BeginInvoke(UpdateHelpFromSelection);
+        _diagnosticsGrid.SelectionChanged += (_, _) => UpdateHelpFromDiagnosticSelection();
+        foreach (var comboBox in new[] { _presentationComboBox, _worldComboBox, _actorComboBox, _inventoryComboBox, _combatComboBox, _progressionComboBox, _pathfindingComboBox, _npcComboBox, _runtimeTargetComboBox })
+        {
+            comboBox.SelectedIndexChanged += (_, _) => UpdateHelpFromSelection();
+        }
     }
 
     private void BrowseAtlasRoot()
@@ -465,6 +485,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             _promptContextsTextBox.Text = FormatList("Prompt context templates", state.ResolvedPromptContextTemplates);
             _gapsTextBox.Text = FormatList("Capability gaps / future modules", state.CapabilityGaps);
             SetDiagnostics(state.Diagnostics);
+            _helpTextBox.Text = BuildCurrentHelpText();
         }
         finally
         {
@@ -479,7 +500,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _diagnosticsGrid.Rows.Clear();
         foreach (var diagnostic in diagnostics)
         {
-            _diagnosticsGrid.Rows.Add(diagnostic.Severity, diagnostic.Code, diagnostic.Target, diagnostic.Message);
+            _diagnosticsGrid.Rows.Add(diagnostic.Severity, diagnostic.Category, diagnostic.Code, diagnostic.Target, diagnostic.Message);
         }
     }
 
@@ -523,6 +544,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _saveButton.Enabled = !busy && _currentViewState.CanSave;
         _copyJsonButton.Enabled = !busy && !string.IsNullOrWhiteSpace(_currentViewState.SelectionJson);
         _featureBundleList.Enabled = !busy;
+        _helpTextBox.Enabled = !busy;
         _presentationComboBox.Enabled = !busy;
         _worldComboBox.Enabled = !busy;
         _actorComboBox.Enabled = !busy;
@@ -551,6 +573,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _loadLatestButton.Enabled = false;
         _copyJsonButton.Enabled = false;
         _featureBundleList.Enabled = false;
+        _helpTextBox.Enabled = false;
         SetStatusMessage("Runtime services are not available.");
     }
 
@@ -614,6 +637,84 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         }
 
         return title + ":" + Environment.NewLine + string.Join(Environment.NewLine, values);
+    }
+
+    private void UpdateHelpFromSelection()
+    {
+        if (_applyingState)
+        {
+            return;
+        }
+
+        _helpTextBox.Text = BuildCurrentHelpText();
+    }
+
+    private void UpdateHelpFromDiagnosticSelection()
+    {
+        if (_applyingState || _diagnosticsGrid.CurrentRow == null)
+        {
+            return;
+        }
+
+        var category = _diagnosticsGrid.CurrentRow.Cells["Category"].Value?.ToString() ?? string.Empty;
+        var code = _diagnosticsGrid.CurrentRow.Cells["Code"].Value?.ToString() ?? string.Empty;
+        var target = _diagnosticsGrid.CurrentRow.Cells["Target"].Value?.ToString() ?? string.Empty;
+        var message = _diagnosticsGrid.CurrentRow.Cells["Message"].Value?.ToString() ?? string.Empty;
+        _helpTextBox.Text = string.Join(Environment.NewLine, new[]
+        {
+            "Diagnostic",
+            "category: " + category,
+            "code: " + code,
+            "target: " + target,
+            message,
+            string.Empty,
+            FormatHelp(GeneratorPlanCapabilityHelpCatalog.Get(target))
+        });
+    }
+
+    private string BuildCurrentHelpText()
+    {
+        if (_featureBundleList.SelectedItem is CapabilityPickerFeatureBundleViewModel bundle)
+        {
+            return FormatHelp(bundle.Help);
+        }
+
+        if (ActiveControl is ComboBox comboBox && comboBox.SelectedItem is CapabilityPickerOptionViewModel option)
+        {
+            return FormatHelp(option.Help);
+        }
+
+        foreach (var candidateComboBox in new[] { _presentationComboBox, _worldComboBox, _actorComboBox, _inventoryComboBox, _combatComboBox, _progressionComboBox, _pathfindingComboBox, _npcComboBox, _runtimeTargetComboBox })
+        {
+            if (candidateComboBox.Focused && candidateComboBox.SelectedItem is CapabilityPickerOptionViewModel focusedOption)
+            {
+                return FormatHelp(focusedOption.Help);
+            }
+        }
+
+        return "Select a variant, feature bundle, or diagnostic row to see details.";
+    }
+
+    private static string FormatHelp(GeneratorPlanCapabilityHelpMetadata help)
+    {
+        return string.Join(Environment.NewLine, new[]
+        {
+            help.DisplayNameRu,
+            "id: " + help.Id,
+            "status: " + help.ImplementationStatus,
+            string.Empty,
+            help.ShortDescriptionRu,
+            string.Empty,
+            "Details: " + help.DetailsRu,
+            "Examples: " + EmptyAsDash(help.ExamplesRu),
+            "Best for: " + EmptyAsDash(help.BestForRu),
+            "Warnings: " + EmptyAsDash(help.WarningsRu)
+        });
+    }
+
+    private static string EmptyAsDash(string value)
+    {
+        return string.IsNullOrWhiteSpace(value) ? "-" : value;
     }
 
     private void TryCopyText(string text)

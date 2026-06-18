@@ -16,6 +16,10 @@ public sealed record GeneratorPlanCapabilitySelectionRequest
     public string PathfindingProfileId { get; init; } = string.Empty;
     public string NpcBehaviorModelId { get; init; } = string.Empty;
     public IReadOnlyList<string> SelectedFeatureBundleIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedModuleIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedModifierIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedConstraintIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> RuntimeRequirementIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> SelectedRuntimeTargetIds { get; init; } = Array.Empty<string>();
 }
 
@@ -36,6 +40,10 @@ public sealed record GeneratorPlanCapabilitySelection
     public string Purpose { get; init; } = string.Empty;
     public GeneratorPlanCapabilitySelectedVariantIds SelectedVariantIds { get; init; } = new();
     public IReadOnlyList<string> SelectedFeatureBundleIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedModuleIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedModifierIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedConstraintIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> RuntimeRequirementIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> SelectedRuntimeTargets { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> ResolvedCapabilityIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> ResolvedArtifactContracts { get; init; } = Array.Empty<string>();
@@ -64,8 +72,45 @@ public sealed record GeneratorPlanCapabilitySelectionDiagnostic
 {
     public string Severity { get; init; } = string.Empty;
     public string Code { get; init; } = string.Empty;
+    public string Category { get; init; } = string.Empty;
     public string Message { get; init; } = string.Empty;
     public string Target { get; init; } = string.Empty;
+}
+
+public sealed record GeneratorPlanCapabilityHelpMetadata
+{
+    public string Id { get; init; } = string.Empty;
+    public string DisplayNameRu { get; init; } = string.Empty;
+    public string DisplayNameEn { get; init; } = string.Empty;
+    public string ShortDescriptionRu { get; init; } = string.Empty;
+    public string DetailsRu { get; init; } = string.Empty;
+    public string ExamplesRu { get; init; } = string.Empty;
+    public string BestForRu { get; init; } = string.Empty;
+    public string WarningsRu { get; init; } = string.Empty;
+    public string ImplementationStatus { get; init; } = string.Empty;
+    public string DiagnosticCategoryHint { get; init; } = GeneratorPlanCapabilitySelectionDiagnosticCategories.Info;
+
+    public static GeneratorPlanCapabilityHelpMetadata Fallback(string id)
+    {
+        return new GeneratorPlanCapabilityHelpMetadata
+        {
+            Id = id,
+            DisplayNameRu = string.IsNullOrWhiteSpace(id) ? "Не выбрано" : id,
+            DisplayNameEn = id,
+            ShortDescriptionRu = "Подробная справка для этого идентификатора пока не добавлена.",
+            DetailsRu = "Машинный идентификатор сохранён для технической точности.",
+            ImplementationStatus = "metadata_missing",
+            DiagnosticCategoryHint = GeneratorPlanCapabilitySelectionDiagnosticCategories.Info
+        };
+    }
+}
+
+public sealed record GeneratorPlanCapabilityCompositionSeed
+{
+    public string Id { get; init; } = string.Empty;
+    public string Kind { get; init; } = string.Empty;
+    public string DisplayNameRu { get; init; } = string.Empty;
+    public string ShortDescriptionRu { get; init; } = string.Empty;
 }
 
 public sealed record GeneratorPlanCapabilitySelectionArtifactSaveResult
@@ -175,6 +220,14 @@ public static class GeneratorPlanCapabilitySelectionDiagnosticCodes
     public const string MissingValidator = "capability_selection.missing_validator";
     public const string CapabilityGap = "capability_selection.capability_gap";
     public const string Loaded = "capability_selection.loaded";
+}
+
+public static class GeneratorPlanCapabilitySelectionDiagnosticCategories
+{
+    public const string Impossible = "impossible";
+    public const string UnsupportedYet = "unsupported_yet";
+    public const string Risky = "risky";
+    public const string Info = "info";
 }
 
 public static class GeneratorPlanCapabilitySelectionArtifactIds

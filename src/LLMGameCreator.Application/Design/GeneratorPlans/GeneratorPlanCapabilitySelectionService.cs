@@ -400,6 +400,10 @@ public sealed class GeneratorPlanCapabilitySelectionService
                 NpcBehaviorModelId = Normalize(request.NpcBehaviorModelId)
             },
             SelectedFeatureBundleIds = selectedFeatureBundleIds,
+            SelectedModuleIds = NormalizeMany(request.SelectedModuleIds).ToList(),
+            SelectedModifierIds = NormalizeMany(request.SelectedModifierIds).ToList(),
+            SelectedConstraintIds = NormalizeMany(request.SelectedConstraintIds).ToList(),
+            RuntimeRequirementIds = NormalizeMany(request.RuntimeRequirementIds).ToList(),
             SelectedRuntimeTargets = NormalizeMany(request.SelectedRuntimeTargetIds).ToList(),
             ResolvedCapabilityIds = Sorted(accumulator.CapabilityIds),
             ResolvedArtifactContracts = Sorted(accumulator.ArtifactContracts),
@@ -450,6 +454,10 @@ public sealed class GeneratorPlanCapabilitySelectionService
                 Normalize(request.NpcBehaviorModelId)
             }
             .Concat(NormalizeMany(request.SelectedFeatureBundleIds))
+            .Concat(NormalizeMany(request.SelectedModuleIds))
+            .Concat(NormalizeMany(request.SelectedModifierIds))
+            .Concat(NormalizeMany(request.SelectedConstraintIds))
+            .Concat(NormalizeMany(request.RuntimeRequirementIds))
             .Concat(NormalizeMany(request.SelectedRuntimeTargetIds))
             .Concat(Sorted(accumulator.FeatureBundleIds));
 
@@ -535,6 +543,7 @@ public sealed class GeneratorPlanCapabilitySelectionService
         {
             Severity = severity,
             Code = code,
+            Category = GeneratorPlanCapabilityHelpCatalog.MapDiagnosticCategory(code),
             Message = message,
             Target = target
         };
