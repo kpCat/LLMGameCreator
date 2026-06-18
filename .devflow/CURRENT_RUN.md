@@ -1,7 +1,7 @@
 # CURRENT_RUN.md
 
-Task id: DEVFLOW_DOCS_GUARD_TEST_SPLIT_POLISH
-Goal: split docs guard tests and polish stop-mode automation checks
+Task id: M4_1_RECORD_REAL_EVALUATION_GATE_PASS
+Goal: record the real M4.1 evaluation gate pass and update current generator state
 Task source: user_request
 
 Source docs read:
@@ -9,71 +9,82 @@ Source docs read:
 - README.md
 - docs/CONTEXT_INDEX.md
 - docs/CURRENT_GENERATOR_STATE.md
+- docs/CURRENT_GENERATOR_STATE.json
 - docs/ROADMAP_TO_FULL_GENERATOR.md
+- docs/GENERATOR_PLAN_CAPABILITY_SELECTION_PICKER.md
+- docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
 - docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md
-- docs/agent-tasks/000_INDEX.md
-- .devflow/NEXT_TASK.md
-- .devflow/task-queue.json
-- .devflow/scripts/check-devflow-state.ps1
-- .devflow/scripts/advance-next-task.ps1
-- .devflow/scripts/check-all.ps1
-- .devflow/scripts/_common.ps1
-- .devflow/CURRENT_RUN.md
-- tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs
+- docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
+- docs/agent-tasks/M4_1/M4_1_011_CURRENT_STATE_GATE_REVIEW_UPDATE.md
+- docs/agent-tasks/M4_1/M4_1_016_M4_GATE_CLOSURE_DECISION.md
+- docs/agent-tasks/004_PACK_GENERATION_POLICY.md
+- docs/agent-tasks/M5/000_M5_SEQUENCE.md
 - tests/LLMGameCreator.Tests/Docs/CurrentGeneratorStateDocsTests.cs
+- .devflow/NEXT_TASK.md
+- .devflow/CURRENT_RUN.md
+- .devflow/scripts/check-devflow-state.ps1
 
 Existing patterns inspected:
-- docs guard tests use xUnit Fact methods and repository root discovery from test base directory.
-- devflow scripts use UTF-8/no-BOM writes and explicit stop-mode handling.
-- stop-mode tests protect real .devflow/NEXT_TASK.md with backup/restore in try/finally.
+- Current generator state is maintained as a markdown/json source-of-truth pair.
+- Context index links source-of-truth generator docs and new permanent reports.
+- M4.1 gate closure specs update current state, roadmap and devflow stop cursor without source code changes.
+- Stop mode currently requires `Task id: STOP_REVIEW` in `check-devflow-state.ps1`.
 
-Planned files changed:
+Evidence recorded:
+- Evaluation id: `strict_llm_evaluation/58df49dadbff5598`
+- Evaluated at: `2026-06-18T16:43:35.9475873+00:00`
+- Source capability selection id: `generator_plan_capability_selection/0b0addcd5c019328`
+- Mode: `batch`
+- Requested contracts: `game_profile_v1`, `mechanics_pack_v1`, `quest_pack_v1`, `scene_pack_v1`
+- Iterations: `1`
+- Repair enabled: `True`
+- Stage for review: `True`
+- Expected max LLM calls: `8`
+
+Metrics recorded:
+- `total_contracts_requested`: 4
+- `total_generation_runs`: 4
+- `total_attempts`: 4
+- `initial_pass_count`: 4
+- `repair_pass_count`: 0
+- `failed_count`: 0
+- `valid_artifact_count`: 4
+- `staged_for_review_count`: 4
+- `markdown_fence_error_count`: 0
+- `json_wrapper_error_count`: 0
+- `json_invalid_count`: 0
+- `wrong_artifact_kind_count`: 0
+- `forbidden_field_count`: 0
+- `invalid_id_count`: 0
+- `missing_field_count`: 0
+- `overall_pass_rate`: 1.0
+- diagnostics: none
+- quality warnings: none
+
+Gate decision:
+- M4.1 real-model evaluation gate passed for sampled baseline contracts.
+
+Files changed:
+- docs/CURRENT_GENERATOR_STATE.md
+- docs/CURRENT_GENERATOR_STATE.json
+- docs/M4_1_REAL_EVALUATION_GATE_REPORT.md
+- docs/CONTEXT_INDEX.md
+- docs/ROADMAP_TO_FULL_GENERATOR.md
+- .devflow/NEXT_TASK.md
 - .devflow/CURRENT_RUN.md
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsFrameworkGuardTests.cs
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsExecutableSpecGuardTests.cs
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsStopModeGuardTests.cs
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsTestSupport.cs
 
-Planned files deleted:
-- README_APPLY_NEXT_TASK_REPAIR_005.md, if present
-- README_APPLY_NEXT_TASK_006.md, if present
-- README_APPLY_NEXT_TASK_008.md, if present
+Non-goals preserved:
+- No production code under src/** changed.
+- No tests changed.
+- No solution or project files changed.
+- No devflow scripts changed.
+- No generator-library artifacts changed.
+- No M5/M6/M6-lite implementation started.
 
-Non-goals:
-- Do not modify production code under src/**.
-- Do not modify LLMGameCreator.sln or any *.csproj.
-- Do not modify docs/CURRENT_GENERATOR_STATE.md or docs/CURRENT_GENERATOR_STATE.json.
-- Do not unlock or edit M5/M6/M8/M9/M10 task specs.
-- Do not add dependencies.
-- Do not rewrite the devflow framework or execute the next task.
-- Do not use git commands.
-
-Expected checks:
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~AgentTaskDocs"
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
-
-Actual checks:
-- check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
-- focused AgentTaskDocs tests: passed. 17 passed, 0 failed.
-- check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 440 passed. Run directory: .devflow\runs\20260617_191547-check-all.
+Checks run:
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 440 passed, 0 failed. Run directory: .devflow\runs\20260618_200420-check-all.
 - Mojibake marker scan over changed files: passed, no markers found.
 
-Changes applied:
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs: deleted the 507-line monolithic guard file after moving tests.
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsTestSupport.cs: added shared repo root discovery, docs constants, spec path parsing, executable spec validation, safe PowerShell process start, and temporary NEXT_TASK backup/restore helper.
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsFrameworkGuardTests.cs: added focused framework/index/support-doc guards.
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsExecutableSpecGuardTests.cs: added focused executable task spec guards.
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsStopModeGuardTests.cs: added focused stop-mode NEXT_TASK and check-devflow-state guards.
-- .devflow/CURRENT_RUN.md: recorded the current task, sources read, planned files, checks, results, and follow-up.
-
-Deleted files:
-- tests/LLMGameCreator.Tests/Docs/AgentTaskDocsConsistencyGuardTests.cs
-- README_APPLY_NEXT_TASK_REPAIR_005.md: not present.
-- README_APPLY_NEXT_TASK_006.md: not present.
-- README_APPLY_NEXT_TASK_008.md: not present.
-
 Follow-up:
-- ARCHIVE_MANIFEST.md exists and describes llmgc_next_task_008.zip. It was left in place because deletion was not required to pass the task and should be reviewed separately if desired.
+- User should choose one controlled product vertical slice before starting M5, M6, M6-lite or runtime preview repair-loop work.

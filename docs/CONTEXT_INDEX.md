@@ -21,6 +21,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | Document | Use when |
 |---|---|
 | `docs/CURRENT_GENERATOR_STATE.md` | Starting any generator/Codex task; checking the active phase, manual gate, recommended next action and blocked milestones. |
+| `docs/M4_1_REAL_EVALUATION_GATE_REPORT.md` | Checking the real M4.1 sampled-baseline evaluation evidence, metrics, decision and remaining constraints before planning the next product vertical slice. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Defining what full game generation means, target architecture, lifecycle, milestones and done criteria. |
 | `docs/GAME_GENERATION_CAPABILITY_MATRIX.md` | Choosing or scoping game capability domains, priorities, current status, required contracts, validators and acceptance criteria. |
 | `docs/LLM_LUA_CSHARP_RESPONSIBILITY_CONTRACT.md` | Checking C# / LLM / Lua ownership, forbidden outputs/features, promotion rules and repair boundaries. |

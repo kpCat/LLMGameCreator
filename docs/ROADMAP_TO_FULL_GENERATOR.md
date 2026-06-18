@@ -138,6 +138,14 @@ Implementation note: the M4 first slice is documented in `docs/GENERATOR_PLAN_ST
 
 ## M4.1 Strict LLM Generation Evaluation Pack
 
+Gate status: passed for sampled baseline contracts on `2026-06-18T16:43:35.9475873+00:00`.
+
+Evidence id: `strict_llm_evaluation/58df49dadbff5598`.
+
+Decision: the M4.1 real-model evaluation gate passed for `game_profile_v1`, `mechanics_pack_v1`, `quest_pack_v1` and `scene_pack_v1` with `overall_pass_rate` 1.0, zero failures, zero repair passes needed, no diagnostics and no quality warnings.
+
+Remaining constraint: this sampled pass removes the missing-real-evaluation blocker for controlled next-step planning, but it does not make broad contract expansion safe and does not start M5, M6, M6-lite or runtime preview repair-loop work without a chosen product vertical slice and explicit user approval.
+
 Goal: measure real strict LLM generation quality before expanding contracts, Lua generation or package assembly coverage.
 
 Why it exists: M4 proves a safe entrypoint, but the product still needs pass rates, repair recovery rates, repeated diagnostic hot spots and content quality warnings before trusting broader generation.

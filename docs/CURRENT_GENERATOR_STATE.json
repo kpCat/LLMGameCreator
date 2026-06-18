@@ -1,31 +1,85 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-14T13:39:52Z",
+  "updated_at_utc": "2026-06-18T16:43:35Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts",
+  "gate_status": "passed_sampled_baseline",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Run and review real strict LLM evaluation before expanding contracts/Lua/assembly.",
-  "current_user_action": "Run real local model through Capability Picker -> LLM Artifacts -> LLM Evaluation and review the report.",
-  "recommended_next_decision": "Analyze pass rate, repair recovery, diagnostic hot spots and quality warnings.",
+  "active_manual_gate": "Completed for sampled baseline contracts; broad expansion still requires controlled vertical-slice approval.",
+  "current_user_action": "Review next product vertical slice options before starting M5, M6, M6-lite or runtime preview repair-loop work.",
+  "recommended_next_decision": "Choose one controlled product vertical slice and refresh the next executable task specs from current source.",
+  "gate_evidence": {
+    "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
+    "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
+    "source_capability_selection_id": "generator_plan_capability_selection/0b0addcd5c019328",
+    "mode": "batch",
+    "sampled_contracts": [
+      "game_profile_v1",
+      "mechanics_pack_v1",
+      "quest_pack_v1",
+      "scene_pack_v1"
+    ],
+    "iterations": 1,
+    "repair_enabled": true,
+    "stage_for_review": true,
+    "expected_max_llm_calls": 8,
+    "decision_text": "M4.1 real-model evaluation gate passed for sampled baseline contracts.",
+    "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
+  },
+  "gate_metrics": {
+    "total_contracts_requested": 4,
+    "total_generation_runs": 4,
+    "total_attempts": 4,
+    "initial_pass_count": 4,
+    "repair_pass_count": 0,
+    "failed_count": 0,
+    "valid_artifact_count": 4,
+    "staged_for_review_count": 4,
+    "markdown_fence_error_count": 0,
+    "json_wrapper_error_count": 0,
+    "json_invalid_count": 0,
+    "wrong_artifact_kind_count": 0,
+    "forbidden_field_count": 0,
+    "invalid_id_count": 0,
+    "missing_field_count": 0,
+    "overall_pass_rate": 1.0,
+    "diagnostics": "none",
+    "quality_warnings": "none"
+  },
   "allowed_next_codex_task_types": [
-    "tighten_prompt_repair_or_validator_based_on_real_evaluation_report",
-    "add_small_evaluation_report_import_or_analyzer_if_report_is_provided",
-    "update_docs_current_state_after_manual_test",
-    "add_one_carefully_selected_artifact_contract_if_evaluation_is_stable",
-    "improve_docs_consistency_guards"
+    "plan_one_controlled_product_vertical_slice",
+    "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
+    "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
+    "tighten_prompt_repair_or_validator_if_future_real_evaluations_regress",
+    "add_one_carefully_selected_artifact_contract_inside_controlled_vertical_slice"
   ],
   "blocked_next_milestones_until_gate_passes": [
-    "M5 Lua module executor integration",
-    "M6 rich GamePackage assembly",
-    "broad contract expansion",
-    "runtime preview repair loop"
+    "M5 Lua module executor integration requires controlled product vertical slice selection and explicit user approval, not missing M4.1 evidence.",
+    "M6 rich GamePackage assembly requires controlled product vertical slice selection and explicit user approval, not missing M4.1 evidence.",
+    "broad contract expansion remains restricted beyond sampled baseline evidence.",
+    "runtime preview repair loop remains restricted until a controlled vertical slice exists."
+  ],
+  "restricted_next_work": [
+    "M6-lite package assembly shortcuts",
+    "M8 runtime preview validation loop",
+    "M9 full game template families and balancing",
+    "M10 export profiles or Unity IR production work"
+  ],
+  "recommended_next_work_item": "controlled_product_vertical_slice_planning_review",
+  "recommended_next_work_item_title": "Choose the next controlled product vertical slice before M5/M6/M6-lite work.",
+  "candidate_product_vertical_slices": [
+    "Lua-backed content slice: one safe generator module family producing validated artifact envelopes.",
+    "Package assembly slice: map passed baseline artifacts into a richer but narrow GamePackage assembly path.",
+    "Artifact contract slice: add exactly one contract family needed by the chosen product direction and rerun strict evaluation."
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
     "docs/CONTEXT_INDEX.md",
     "docs/CURRENT_GENERATOR_STATE.md",
     "docs/ROADMAP_TO_FULL_GENERATOR.md",
+    "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md",
     "docs/GENERATOR_PLAN_CAPABILITY_SELECTION_PICKER.md",
     "docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md",
     "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
@@ -36,6 +90,7 @@
     "LLM Artifacts",
     "LLM Evaluation",
     "Artifact Review",
+    "controlled product vertical slice planning",
     "later assembly/export"
   ],
   "state_update_rule": "Update this file and docs/CURRENT_GENERATOR_STATE.md whenever milestone completion, active manual gate or recommended next Codex task changes."

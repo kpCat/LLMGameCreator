@@ -3,7 +3,7 @@
 Mode: stop
 Task source: stop
 Task id: STOP_REVIEW
-Reason: M4.1 deterministic hardening queue reached the human review gate.
+Reason: M4.1 real-model evaluation gate passed for sampled baseline contracts; user should choose the next product vertical slice.
 User approval:
 Expected stop after completion: yes
-Stop action: Do not start future work. Review the completed task, check-all output, and whether M4.1 gate review should continue.
+Stop action: Do not start future work. Review next-step product vertical slice options before starting M5, M6, M6-lite or runtime preview repair-loop work.

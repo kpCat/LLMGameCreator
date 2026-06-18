@@ -6,48 +6,89 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 real-model evaluation gate is active.
+M4.1 gate passed for sampled baseline contracts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path, but broader contract expansion, Lua integration and rich package assembly are blocked until at least one real strict LLM evaluation report is reviewed.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, so M5/M6 planning is no longer blocked purely by missing real evaluation evidence.
+
+This does not unlock broad contract expansion or direct production implementation. The next step should be a controlled product vertical slice chosen by the user before any M5/M6/M6-lite work starts.
+
+## Gate decision
+
+M4.1 real-model evaluation gate passed for sampled baseline contracts.
+
+Evidence:
+
+- Evaluation id: `strict_llm_evaluation/58df49dadbff5598`
+- Evaluated at: `2026-06-18T16:43:35.9475873+00:00`
+- Source capability selection id: `generator_plan_capability_selection/0b0addcd5c019328`
+- Mode: `batch`
+- Requested contracts: `game_profile_v1`, `mechanics_pack_v1`, `quest_pack_v1`, `scene_pack_v1`
+- Iterations: `1`
+- Repair enabled: `True`
+- Stage for review: `True`
+- Expected max LLM calls: `8`
+
+Metrics:
+
+- `total_contracts_requested`: 4
+- `total_generation_runs`: 4
+- `total_attempts`: 4
+- `initial_pass_count`: 4
+- `repair_pass_count`: 0
+- `failed_count`: 0
+- `valid_artifact_count`: 4
+- `staged_for_review_count`: 4
+- `markdown_fence_error_count`: 0
+- `json_wrapper_error_count`: 0
+- `json_invalid_count`: 0
+- `wrong_artifact_kind_count`: 0
+- `forbidden_field_count`: 0
+- `invalid_id_count`: 0
+- `missing_field_count`: 0
+- `overall_pass_rate`: 1.0
+- diagnostics: none
+- quality warnings: none
+
+Permanent evidence summary:
+
+- docs/M4_1_REAL_EVALUATION_GATE_REPORT.md
 
 ## Last completed milestones
 
 - M4.1: Strict LLM Generation Evaluation Pack.
 - The M4.1 layer can evaluate the latest strict LLM generation audit without an LLM call or run a small explicit batch through the existing strict generation service.
 - Evaluation stores JSON and markdown report artifacts with pass, repair, fail, diagnostic hot spot and quality warning metrics.
+- A real local-model batch evaluation passed for the sampled baseline contracts listed above.
 
 ## Active manual gate
 
-Run and review real strict LLM evaluation before expanding contracts, Lua or assembly.
+Completed for the sampled baseline contracts.
 
 ## Current user action
 
-Run a real local model through:
-
-```text
-Capability Picker
-  -> LLM Artifacts
-  -> LLM Evaluation
-```
-
-Then review the evaluation report for pass rate, repair recovery, repeated diagnostics and quality warnings.
+Review next product vertical slice options before starting M5, M6, M6-lite or runtime preview repair-loop work.
 
 ## Allowed next Codex tasks
 
-- Tighten prompt, repair or validator behavior based on a real evaluation report.
-- Add a small evaluation report import/analyzer if the report is provided.
-- Update docs and current state after the manual test.
-- Add one carefully selected artifact contract only if evaluation is stable.
-- Improve docs consistency guards around current-state onboarding.
+- Plan one controlled product vertical slice from the passed sampled baseline evidence.
+- Generate source-refreshed M5 entry executable specs after the user chooses the next vertical slice.
+- Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
+- Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
+- Add one carefully selected artifact contract only inside a controlled vertical slice with explicit scope and proof checks.
 
-## Blocked next Codex tasks
+## Restricted next Codex tasks
 
-Blocked until at least one real strict LLM evaluation report is reviewed:
+No longer blocked purely by missing real evaluation evidence, but still restricted until the user chooses a controlled product vertical slice and approves the specific task:
 
 - M5 Lua module executor integration.
 - M6 rich GamePackage assembly.
+- M6-lite package assembly shortcuts.
+
+Still restricted:
+
 - Broad contract expansion.
 - Runtime preview repair loop.
+- M8/M9/M10 production work.
 
 ## Current generator workflow
 
@@ -56,6 +97,7 @@ Capability Picker
   -> LLM Artifacts
   -> LLM Evaluation
   -> Artifact Review
+  -> controlled product vertical slice planning
   -> later assembly/export
 ```
 
@@ -65,18 +107,29 @@ Capability Picker
 2. docs/CONTEXT_INDEX.md
 3. docs/CURRENT_GENERATOR_STATE.md
 4. docs/ROADMAP_TO_FULL_GENERATOR.md
-5. docs/GENERATOR_PLAN_CAPABILITY_SELECTION_PICKER.md
-6. docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
-7. docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md
-8. docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
+5. docs/M4_1_REAL_EVALUATION_GATE_REPORT.md
+6. docs/GENERATOR_PLAN_CAPABILITY_SELECTION_PICKER.md
+7. docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
+8. docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md
+9. docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
 
 ## What not to do next
 
-- Do not skip the real-model evaluation gate.
-- Do not move into M5 Lua module executor integration yet.
-- Do not move into M6 rich GamePackage assembly yet.
-- Do not expand artifact contracts broadly without evaluation evidence.
-- Do not add runtime/provider/package mutation behavior as part of this gate.
+- Do not treat one sampled baseline pass as broad contract expansion approval.
+- Do not start M5/M6/M6-lite without an explicit chosen product vertical slice and user approval.
+- Do not add runtime/provider/package mutation behavior as part of this gate record.
+- Do not make Runtime Preview repair-loop work the immediate next step before the controlled vertical slice is chosen.
+- Do not claim the whole generator is complete.
+
+## Recommended next step
+
+Choose one controlled product vertical slice and then refresh the next executable task specs from current source.
+
+Candidate slices:
+
+- Lua-backed content slice: one safe generator module family producing validated artifact envelopes.
+- Package assembly slice: map the already passed baseline artifacts into a richer but still narrow GamePackage assembly path.
+- Artifact contract slice: add exactly one contract family needed by the chosen product direction, then rerun strict evaluation for that family.
 
 ## State update rule
 
