@@ -25,6 +25,7 @@ public sealed record GeneratorPlanGamePackageAssemblyRequest
     public bool SerializePackageJson { get; init; } = true;
     public string? ExportFolderPath { get; init; }
     public bool ExportPackageJson { get; init; }
+    public DateTimeOffset? AppliedAtUtc { get; init; }
 }
 
 public sealed record GeneratorPlanGamePackageAssemblyResult
@@ -46,6 +47,8 @@ public sealed record GeneratorPlanGamePackageAssemblyResult
 public sealed record GeneratorPlanGamePackageAssemblySummary
 {
     public int ApprovedArtifactCount { get; init; }
+    public int AppliedArtifactCount { get; init; }
+    public int SkippedArtifactCount { get; init; }
     public int MappedArtifactCount { get; init; }
     public int UnmappedArtifactCount { get; init; }
     public int MapCount { get; init; }

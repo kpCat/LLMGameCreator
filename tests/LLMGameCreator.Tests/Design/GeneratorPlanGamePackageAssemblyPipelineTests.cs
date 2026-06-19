@@ -53,6 +53,148 @@ public sealed class GeneratorPlanGamePackageAssemblyPipelineTests
     }
 
     [Fact]
+    public async Task ServiceMapsStrictBaselineArtifactsToGeneratedContentAndProvenance()
+    {
+        var appliedAt = DateTimeOffset.Parse("2026-06-19T12:00:00Z");
+        var service = new GeneratorPlanGamePackageAssemblyService();
+
+        var result = await service.AssembleFromApprovedArtifactSetAsync(
+            ApprovedSet(
+                Artifact("artifact/profile", "game_profile_v1", """
+                {
+                  "schema_version": "0.1",
+                  "artifact_kind": "game_profile_v1",
+                  "game": {
+                    "title": "Baseline Draft",
+                    "description": "A generated baseline package.",
+                    "genre": "adventure",
+                    "tone": "hopeful",
+                    "presentation_mode": "top_down_2d",
+                    "world_topology": "finite_map",
+                    "actor_model": "single_hero",
+                    "combat_model": "none",
+                    "core_loop": ["explore", "help"]
+                  },
+                  "pillars": ["Readable", "Small"],
+                  "source_context": { "capability_selection_id": "selection/test" }
+                }
+                """),
+                Artifact("artifact/scene", "scene_pack_v1", """
+                {
+                  "schema_version": "0.1",
+                  "artifact_kind": "scene_pack_v1",
+                  "scenes": [{ "id": "scene/start", "title": "Harbor", "description": "A quiet harbor.", "purpose": "Start." }],
+                  "source_context": { "capability_selection_id": "selection/test" }
+                }
+                """),
+                Artifact("artifact/quest", "quest_pack_v1", """
+                {
+                  "schema_version": "0.1",
+                  "artifact_kind": "quest_pack_v1",
+                  "quests": [{ "id": "quest/intro", "title": "Help", "description": "Help someone.", "steps": ["Talk"], "objectives": [] }],
+                  "source_context": { "capability_selection_id": "selection/test" }
+                }
+                """),
+                Artifact("artifact/mechanics", "mechanics_pack_v1", """
+                {
+                  "schema_version": "0.1",
+                  "artifact_kind": "mechanics_pack_v1",
+                  "mechanics": [{ "id": "mechanic/help", "name": "Help Action", "description": "Help an NPC.", "tags": ["social"] }],
+                  "source_context": { "capability_selection_id": "selection/test" }
+                }
+                """)),
+            new GeneratorPlanGamePackageAssemblyRequest { AppliedAtUtc = appliedAt },
+            CancellationToken.None);
+
+        Assert.True(result.Ok, string.Join(Environment.NewLine, result.Diagnostics.Select(diagnostic => diagnostic.Message)));
+        Assert.Equal(4, result.Summary.AppliedArtifactCount);
+        Assert.Equal("Baseline Draft", result.Package.Manifest.Title);
+        Assert.Equal(["explore", "help"], result.Package.GeneratedContent.Profile.CoreLoop);
+        Assert.Equal(["Readable", "Small"], result.Package.GeneratedContent.Profile.Pillars);
+        Assert.Contains(result.Package.GeneratedContent.Scenes, scene => scene.SourceId == "scene/start" && scene.Title == "Harbor");
+        Assert.Contains(result.Package.GeneratedContent.Quests, quest => quest.SourceId == "quest/intro" && quest.Steps.Contains("Talk"));
+        Assert.Contains(result.Package.GeneratedContent.Mechanics, mechanic => mechanic.SourceId == "mechanic/help" && mechanic.Tags.Contains("social"));
+        Assert.All(result.Package.GeneratedContent.AppliedArtifacts, provenance =>
+        {
+            Assert.Equal("selection/test", provenance.CapabilitySelectionId);
+            Assert.Equal(appliedAt.UtcDateTime.ToString("O"), provenance.AppliedAt);
+            Assert.False(string.IsNullOrWhiteSpace(provenance.ContentHash));
+        });
+        Assert.Contains("\"generatedContent\"", result.PackageJson);
+        Assert.Contains("## Provenance", result.MarkdownReport);
+    }
+
+    [Fact]
+    public async Task ServiceReportsDuplicateIdsAndPreservesUnknownContracts()
+    {
+        var service = new GeneratorPlanGamePackageAssemblyService();
+
+        var result = await service.AssembleFromApprovedArtifactSetAsync(
+            ApprovedSet(
+                Artifact("artifact/scenes", "scene_pack_v1", """
+                {
+                  "schema_version": "0.1",
+                  "artifact_kind": "scene_pack_v1",
+                  "scenes": [
+                    { "id": "scene/dup", "title": "A", "description": "A", "purpose": "A" },
+                    { "id": "scene/dup", "title": "B", "description": "B", "purpose": "B" }
+                  ],
+                  "source_context": {}
+                }
+                """),
+                Artifact("artifact/unknown", "unknown_pack_v1", """
+                {
+                  "schema_version": "0.1",
+                  "artifact_kind": "unknown_pack_v1",
+                  "values": [1]
+                }
+                """)),
+            new GeneratorPlanGamePackageAssemblyRequest(),
+            CancellationToken.None);
+
+        Assert.False(result.Ok);
+        Assert.Contains(result.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanGamePackageAssemblyDiagnosticCodes.DuplicateGeneratedSceneId);
+        Assert.Contains(result.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanGamePackageAssemblyDiagnosticCodes.UnmappedArtifactKind && diagnostic.ArtifactId == "artifact/unknown");
+        var preserved = Assert.Single(result.Package.GeneratedContent.PreservedArtifacts);
+        Assert.Equal("artifact/unknown", preserved.ArtifactId);
+        using var _ = JsonDocument.Parse(preserved.RawJson);
+    }
+
+    [Fact]
+    public async Task ServiceIsDeterministicForSameArtifactsAndApplyTimestamp()
+    {
+        var service = new GeneratorPlanGamePackageAssemblyService();
+        var appliedAt = DateTimeOffset.Parse("2026-06-19T12:00:00Z");
+        var request = new GeneratorPlanGamePackageAssemblyRequest { AppliedAtUtc = appliedAt };
+        var artifactSet = ApprovedSet(Artifact("artifact/profile", "game_profile_v1", """
+        {
+          "schema_version": "0.1",
+          "artifact_kind": "game_profile_v1",
+          "game": {
+            "title": "Stable Package",
+            "description": "Stable.",
+            "genre": "test",
+            "tone": "calm",
+            "presentation_mode": "top_down_2d",
+            "world_topology": "finite_map",
+            "actor_model": "single_hero",
+            "combat_model": "none",
+            "core_loop": ["inspect"]
+          },
+          "pillars": ["Stable"],
+          "source_context": { "capability_selection_id": "selection/stable" }
+        }
+        """));
+
+        var first = await service.AssembleFromApprovedArtifactSetAsync(artifactSet, request, CancellationToken.None);
+        var second = await service.AssembleFromApprovedArtifactSetAsync(artifactSet, request, CancellationToken.None);
+
+        Assert.True(first.Ok);
+        Assert.Equal(first.PackageJson, second.PackageJson);
+        Assert.DoesNotContain(first.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanGamePackageAssemblyDiagnosticCodes.GeneratedProvenanceMissing);
+    }
+
+    [Fact]
     public void AssemblerMapsQuestStepsAndMechanicNameFallback()
     {
         var artifactSet = ApprovedSet(

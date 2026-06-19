@@ -10,6 +10,8 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
     private const string ExampleFilter = "Generator plan example (*.example.json)|*.example.json|JSON files (*.json)|*.json|All files (*.*)|*.*";
 
     private readonly GeneratorPlanDraftArtifactReviewService? _reviewService;
+    private readonly GeneratorPlanGamePackageAssemblyService? _assemblyService;
+    private readonly GeneratorPlanGamePackageAssemblyArtifactService? _assemblyArtifactService;
     private readonly IDesignDatabaseInitializer? _databaseInitializer;
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly ArtifactReviewPresenter _presenter = new();
@@ -29,6 +31,9 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
     private readonly Button _rejectSelectedButton = new();
     private readonly Button _repairSelectedButton = new();
     private readonly Button _approveSelectedButton = new();
+    private readonly TextBox _assemblyExportFolderTextBox = new();
+    private readonly Button _browseAssemblyExportFolderButton = new();
+    private readonly Button _applyApprovedToPackageButton = new();
     private readonly ComboBox _filterComboBox = new();
     private readonly TableLayoutPanel _summaryLayout = new();
     private readonly TextBox _snapshotIdTextBox = new();
@@ -53,10 +58,14 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
 
     public ArtifactReviewPageControl(
         GeneratorPlanDraftArtifactReviewService reviewService,
+        GeneratorPlanGamePackageAssemblyService assemblyService,
+        GeneratorPlanGamePackageAssemblyArtifactService assemblyArtifactService,
         IDesignDatabaseInitializer databaseInitializer,
         ICurrentGamePackageService currentGamePackageService)
     {
         _reviewService = reviewService;
+        _assemblyService = assemblyService;
+        _assemblyArtifactService = assemblyArtifactService;
         _databaseInitializer = databaseInitializer;
         _currentGamePackageService = currentGamePackageService;
         BuildLayout();
@@ -145,6 +154,9 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         ConfigureButton(_approveSelectedButton, "Approve selected");
         ConfigureButton(_rejectSelectedButton, "Reject selected");
         ConfigureButton(_repairSelectedButton, "Request repair selected");
+        ConfigureButton(_browseAssemblyExportFolderButton, "Browse...");
+        ConfigureButton(_applyApprovedToPackageButton, "Apply approved to package");
+        ConfigureTextBox(_assemblyExportFolderTextBox, false);
 
         _filterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         _filterComboBox.Dock = DockStyle.Fill;
@@ -170,6 +182,18 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         _actionsLayout.Controls.Add(_rejectSelectedButton, 3, 1);
         _actionsLayout.Controls.Add(_repairSelectedButton, 4, 1);
         _actionsLayout.Controls.Add(_filterComboBox, 5, 1);
+
+        var assemblyExportLabel = new Label
+        {
+            Text = "Assembly export folder:",
+            Dock = DockStyle.Fill,
+            TextAlign = ContentAlignment.MiddleLeft
+        };
+        _actionsLayout.Controls.Add(assemblyExportLabel, 0, 2);
+        _actionsLayout.Controls.Add(_assemblyExportFolderTextBox, 1, 2);
+        _actionsLayout.SetColumnSpan(_assemblyExportFolderTextBox, 3);
+        _actionsLayout.Controls.Add(_browseAssemblyExportFolderButton, 4, 2);
+        _actionsLayout.Controls.Add(_applyApprovedToPackageButton, 5, 2);
     }
 
     private void BuildSummaryLayout()
@@ -302,6 +326,8 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         _approveSelectedButton.Click += (_, _) => ApplyDecisionToSelected(GeneratorPlanDraftArtifactApprovalDecisionKind.Approved);
         _rejectSelectedButton.Click += (_, _) => ApplyDecisionToSelected(GeneratorPlanDraftArtifactApprovalDecisionKind.Rejected);
         _repairSelectedButton.Click += (_, _) => ApplyDecisionToSelected(GeneratorPlanDraftArtifactApprovalDecisionKind.RepairRequested);
+        _browseAssemblyExportFolderButton.Click += (_, _) => BrowseAssemblyExportFolder();
+        _applyApprovedToPackageButton.Click += async (_, _) => await ApplyApprovedToPackageAsync().ConfigureAwait(true);
         _copyJsonButton.Click += (_, _) => TryCopyText(_artifactJsonTextBox.Text);
         _filterComboBox.SelectedIndexChanged += (_, _) => ApplyFilter();
         _artifactGrid.SelectionChanged += (_, _) => SelectCurrentGridRow();
@@ -318,6 +344,19 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         if (dialog.ShowDialog(this) == DialogResult.OK)
         {
             _sourceExampleTextBox.Text = dialog.FileName;
+        }
+    }
+
+    private void BrowseAssemblyExportFolder()
+    {
+        using var dialog = new FolderBrowserDialog
+        {
+            SelectedPath = Directory.Exists(_assemblyExportFolderTextBox.Text) ? _assemblyExportFolderTextBox.Text : ResolveAssemblyExportFolder()
+        };
+
+        if (dialog.ShowDialog(this) == DialogResult.OK)
+        {
+            _assemblyExportFolderTextBox.Text = dialog.SelectedPath;
         }
     }
 
@@ -375,6 +414,55 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
             await InitializeDatabaseAsync(cancellationToken).ConfigureAwait(true);
             var result = await _reviewService.ApplyDecisionsToLatestAsync(request, cancellationToken).ConfigureAwait(true);
             ApplyViewState(_presenter.FromDecisionResult(result, CurrentFilter()));
+        }).ConfigureAwait(true);
+    }
+
+    private async Task ApplyApprovedToPackageAsync()
+    {
+        if (_assemblyService == null || _assemblyArtifactService == null)
+        {
+            SetStatusMessage("Package assembly service is not available.");
+            return;
+        }
+
+        var exportFolder = string.IsNullOrWhiteSpace(_assemblyExportFolderTextBox.Text)
+            ? ResolveAssemblyExportFolder()
+            : _assemblyExportFolderTextBox.Text.Trim();
+        _assemblyExportFolderTextBox.Text = exportFolder;
+
+        await RunBusyAsync(async cancellationToken =>
+        {
+            await InitializeDatabaseAsync(cancellationToken).ConfigureAwait(true);
+            var result = await _assemblyService.AssembleFromLatestApprovedArtifactSetAsync(new GeneratorPlanGamePackageAssemblyRequest
+            {
+                ExportPackageJson = true,
+                ExportFolderPath = exportFolder,
+                SerializePackageJson = true,
+                RenderMarkdown = true
+            }, cancellationToken).ConfigureAwait(true);
+
+            await _assemblyArtifactService.SaveAsync(result, new GeneratorPlanGamePackageAssemblyArtifactSaveRequest
+            {
+                GeneratedBy = "artifact_review_ui"
+            }, cancellationToken).ConfigureAwait(true);
+
+            _currentGamePackageService?.ReplaceCurrent(result.Package);
+            var packageJsonPath = Path.Combine(exportFolder, "package.json");
+            var reportText = string.Join(Environment.NewLine, new[]
+            {
+                $"Package assembly status: {result.Status}",
+                $"Approved artifacts: {result.Summary.ApprovedArtifactCount}",
+                $"Applied artifacts: {result.Summary.AppliedArtifactCount}",
+                $"Skipped artifacts: {result.Summary.SkippedArtifactCount}",
+                $"Export folder: {exportFolder}",
+                $"Package JSON: {packageJsonPath}",
+                $"Diagnostics: {result.Diagnostics.Count}"
+            });
+            _statusTextBox.Text = result.Ok ? "Approved artifacts applied to draft package." : "Package assembly completed with errors.";
+            _countsTextBox.Text = reportText;
+            _validationIssuesTextBox.Text = string.IsNullOrWhiteSpace(result.MarkdownReport)
+                ? reportText
+                : result.MarkdownReport;
         }).ConfigureAwait(true);
     }
 
@@ -493,6 +581,17 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         return Path.Combine(appData, "design.db");
     }
 
+    private string ResolveAssemblyExportFolder()
+    {
+        if (!string.IsNullOrWhiteSpace(_currentGamePackageService?.CurrentFolder))
+        {
+            return Path.Combine(_currentGamePackageService.CurrentFolder, ".llmgc", "package-assembly");
+        }
+
+        var appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LLMGameCreator");
+        return Path.Combine(appData, "package-assembly");
+    }
+
     private void ApplyViewState(ArtifactReviewViewState state)
     {
         _currentViewState = state;
@@ -545,6 +644,8 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         _approveSelectedButton.Enabled = !busy;
         _rejectSelectedButton.Enabled = !busy;
         _repairSelectedButton.Enabled = !busy;
+        _browseAssemblyExportFolderButton.Enabled = !busy;
+        _applyApprovedToPackageButton.Enabled = !busy;
         _filterComboBox.Enabled = !busy;
         RefreshActions();
     }
@@ -559,6 +660,8 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         _approveSelectedButton.Enabled = !busy && hasSelection && hasRows;
         _rejectSelectedButton.Enabled = !busy && hasSelection && hasRows;
         _repairSelectedButton.Enabled = !busy && hasSelection && hasRows;
+        _browseAssemblyExportFolderButton.Enabled = !busy;
+        _applyApprovedToPackageButton.Enabled = !busy && _currentViewState.ApprovedCount > 0;
         _copyJsonButton.Enabled = !busy && !string.IsNullOrWhiteSpace(_artifactJsonTextBox.Text);
     }
 
@@ -573,6 +676,9 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         _approveSelectedButton.Enabled = false;
         _rejectSelectedButton.Enabled = false;
         _repairSelectedButton.Enabled = false;
+        _assemblyExportFolderTextBox.Enabled = false;
+        _browseAssemblyExportFolderButton.Enabled = false;
+        _applyApprovedToPackageButton.Enabled = false;
         _filterComboBox.Enabled = false;
         _copyJsonButton.Enabled = false;
         SetStatusMessage("Runtime services are not available.");

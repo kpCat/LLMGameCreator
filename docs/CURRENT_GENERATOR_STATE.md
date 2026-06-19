@@ -8,7 +8,7 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 M4.1 gate passed for sampled baseline contracts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, and Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path for the sampled baseline strict contracts. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context, and Product Slice 003 lets approved baseline artifacts assemble an inspectable draft GamePackage.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,28 +62,28 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 002: Composable Module Selection UI.
-- The Capability Picker now exposes selectable groups for feature bundles, modules, modifiers, constraints and runtime requirements.
-- The selected arrays round-trip through build/save/load and strict prompt context when non-empty:
-  - `selected_module_ids`;
-  - `selected_modifier_ids`;
-  - `selected_constraint_ids`;
-  - `runtime_requirement_ids`.
-- The UI keeps Russian-readable option labels first, leaves machine ids in help/details, preserves required handling for `feature_bundle/core_atlas_planning/v1`, and keeps unsupported/future composable choices as warnings or info rather than fatal errors unless a true core-axis incompatibility exists.
-- `feature_bundle/core_atlas_planning/v1` is presented as an obligatory technical generation base, not as an optional gameplay feature.
-- Strict LLM prompt context can still include selected module/modifier/constraint/runtime requirement ids when present.
+- Product Slice 003: Artifact Review Apply Package Assembly.
+- Artifact Review can approve/reject/request repair for staged strict artifacts and now exposes a manual `Apply approved to package` action over the persisted approved artifact set.
+- Approved baseline artifacts can assemble a draft GamePackage/package JSON through the existing application assembly/export services without calling an LLM/provider, Lua, runtime preview or generator-library execution.
+- Baseline mapping is intentionally narrow:
+  - `game_profile_v1` maps title/description and preserves profile core loop, pillars, presentation/world/actor/combat metadata in `generatedContent`;
+  - `scene_pack_v1` maps scene seeds to draft maps and preserves scene summaries;
+  - `quest_pack_v1` maps quest seeds to quest definitions and preserves steps/objectives;
+  - `mechanics_pack_v1` maps mechanic seeds to draft abilities and preserves mechanic summaries.
+- Draft packages preserve applied artifact provenance and unknown approved artifacts as generated-content records with content hashes/raw JSON where valid.
+- Assembly diagnostics cover baseline JSON parsing, artifact kind mismatches, duplicate generated scene/quest/mechanic ids, provenance presence and package validation warnings/errors.
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts and Product Slice 002 composable picker wiring. Broad expansion still requires an explicit next controlled slice.
+Completed for the sampled baseline contracts and Product Slice 003 approved-artifact package assembly. Broad expansion still requires an explicit next controlled slice.
 
 ## Current user action
 
-Use the Capability Picker composable groups to build/save a richer readable capability selection, verify the prompt preview includes the selected arrays, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.
+Use the manual flow Capability Picker -> LLM Artifacts -> Artifact Review -> Approve all valid -> Apply approved to package to inspect the draft package assembly output, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.
 
 ## Allowed next Codex tasks
 
-- Plan one controlled product vertical slice from the passed sampled baseline evidence and Capability Composer v2 foundation.
+- Plan one controlled product vertical slice from the passed sampled baseline evidence, Capability Composer v2 foundation and narrow approved-artifact assembly path.
 - Generate source-refreshed M5 entry executable specs after the user chooses the next vertical slice.
 - Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
@@ -94,8 +94,8 @@ Use the Capability Picker composable groups to build/save a richer readable capa
 No longer blocked purely by missing real evaluation evidence, but still restricted until the user chooses a controlled product vertical slice and approves the specific task:
 
 - M5 Lua module executor integration.
-- M6 rich GamePackage assembly.
-- M6-lite package assembly shortcuts.
+- M6 rich GamePackage assembly beyond the current baseline draft assembly.
+- M6-lite package assembly shortcuts beyond the approved-artifact manual gate.
 
 Still restricted:
 
@@ -112,8 +112,9 @@ Capability Picker
   -> LLM Artifacts
   -> LLM Evaluation
   -> Artifact Review
+  -> Apply approved baseline artifacts
+  -> Draft GamePackage assembly/export
   -> controlled product vertical slice planning
-  -> later assembly/export
 ```
 
 ## Where to start reading
@@ -131,8 +132,8 @@ Capability Picker
 ## What not to do next
 
 - Do not treat one sampled baseline pass as broad contract expansion approval.
-- Do not start M5/M6/M6-lite without an explicit next product vertical slice and user approval.
-- Do not add runtime/provider/package mutation behavior as part of this gate record.
+- Do not start M5/broad M6/M6-lite without an explicit next product vertical slice and user approval.
+- Do not add runtime/provider/package mutation behavior beyond the approved-artifact draft assembly path as part of this gate record.
 - Do not make Runtime Preview repair-loop work the immediate next step before the controlled vertical slice is chosen.
 - Do not claim the whole generator is complete.
 
@@ -143,7 +144,7 @@ Choose the next controlled product vertical slice and then refresh the next exec
 Candidate slices:
 
 - Lua-backed content slice: one safe generator module family producing validated artifact envelopes.
-- Package assembly slice: map the already passed baseline artifacts into a richer but still narrow GamePackage assembly path.
+- Richer package assembly slice: expand beyond the current baseline draft assembly only for one chosen contract family or gameplay domain.
 - Artifact contract slice: add exactly one contract family needed by the chosen product direction, then rerun strict evaluation for that family.
 
 ## State update rule

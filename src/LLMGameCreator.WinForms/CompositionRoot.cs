@@ -194,6 +194,8 @@ public sealed class CompositionRoot : IDisposable
 
         _container.RegisterDelegate<ArtifactReviewPageControl>(resolver => new ArtifactReviewPageControl(
             resolver.Resolve<GeneratorPlanDraftArtifactReviewService>(),
+            resolver.Resolve<GeneratorPlanGamePackageAssemblyService>(),
+            resolver.Resolve<GeneratorPlanGamePackageAssemblyArtifactService>(),
             resolver.Resolve<IDesignDatabaseInitializer>(),
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 

@@ -90,7 +90,7 @@ public sealed class GeneratorPlanGamePackageAssemblyService
         cancellationToken.ThrowIfCancellationRequested();
 
         var generatedAtUtc = DateTimeOffset.UtcNow;
-        var assemblerResult = _assembler.Assemble(approvedArtifactSet);
+        var assemblerResult = _assembler.Assemble(approvedArtifactSet, request.AppliedAtUtc ?? generatedAtUtc);
         var validationReport = _packageValidator.Validate(assemblerResult.Package);
         var assemblyDiagnostics = new List<GeneratorPlanGamePackageAssemblyDiagnostic>(assemblerResult.Diagnostics);
         var packageJson = request.SerializePackageJson

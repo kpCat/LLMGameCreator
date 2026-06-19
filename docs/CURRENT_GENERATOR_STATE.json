@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-19T09:43:11Z",
+  "updated_at_utc": "2026-06-19T12:03:17Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 002 composable picker wiring completed",
-  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation_ux_repair_and_slice_002_picker_wiring",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 003 approved-artifact draft assembly completed",
+  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation_ux_repair_slice_002_picker_wiring_and_slice_003_draft_assembly",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts plus Product Slice 002 composable picker wiring; broad expansion still requires controlled vertical-slice approval.",
-  "current_user_action": "Use the Capability Picker composable groups to build/save a richer readable capability selection, verify prompt preview arrays, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.",
-  "recommended_next_decision": "Choose the next controlled product vertical slice and refresh the next executable task specs from current source.",
+  "active_manual_gate": "Completed for sampled baseline contracts plus Product Slice 003 approved-artifact draft package assembly; broad expansion still requires controlled vertical-slice approval.",
+  "current_user_action": "Use the manual flow Capability Picker -> LLM Artifacts -> Artifact Review -> Approve all valid -> Apply approved to package to inspect draft package assembly output, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.",
+  "recommended_next_decision": "Choose the next controlled product vertical slice after inspecting the baseline approved-artifact draft assembly output.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,31 +49,39 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_002_composable_module_selection_ui",
-    "title": "Composable Module Selection UI",
-    "completed_at_utc": "2026-06-19T09:43:11Z",
-    "summary": "Wired selectable modules, modifiers, constraints and runtime requirements into the current Capability Picker build/save/load and strict prompt context flow without changing runtime, package, Lua, solution, project or devflow scripts.",
-    "non_breaking_fields": [
-      "selected_module_ids",
-      "selected_modifier_ids",
-      "selected_constraint_ids",
-      "runtime_requirement_ids"
+    "slice_id": "product_slice_003_artifact_review_apply_package_assembly",
+    "title": "Artifact Review Apply Package Assembly",
+    "completed_at_utc": "2026-06-19T12:03:17Z",
+    "summary": "Wired the persisted Artifact Review approved artifact set into the existing GamePackage assembly/export path so approved sampled-baseline strict artifacts can produce an inspectable draft GamePackage without LLM/provider, Lua, runtime preview, generator-library, solution, project or devflow-script changes.",
+    "supported_baseline_contracts": [
+      "game_profile_v1",
+      "scene_pack_v1",
+      "quest_pack_v1",
+      "mechanics_pack_v1"
     ],
-    "diagnostic_categories": [
-      "impossible",
-      "unsupported_yet",
-      "risky",
-      "info"
+    "draft_package_outputs": [
+      ".llmgc/package-assembly/package.json",
+      "artifact/generator_plan_game_package_assembly/latest",
+      "artifact/generator_plan_game_package_draft/latest",
+      "artifact/generator_plan_game_package_assembly_markdown/latest"
     ],
-    "ui_selection_points": [
-      "Capability Picker exposes tabbed groups for feature bundles, modules, modifiers, constraints and runtime requirements",
-      "module/modifier/constraint/runtime requirement checked ids round-trip into generator_plan_capability_selection/latest",
-      "strict prompt context includes selected arrays when non-empty and stays compact when arrays are empty",
-      "economy, balance and chunk-generation choices are preserved as non-fatal unsupported_yet warnings; hybrid realtime/turn combat is informational"
+    "mapping_strategy": [
+      "game_profile_v1 maps title and description to manifest and preserves profile metadata in generatedContent",
+      "scene_pack_v1 maps scene seeds to draft maps and preserves scene summaries",
+      "quest_pack_v1 maps quest seeds to quest definitions and preserves steps/objectives",
+      "mechanics_pack_v1 maps mechanic seeds to draft abilities and preserves mechanic summaries",
+      "unknown approved artifacts are preserved or skipped with warnings rather than crashing"
+    ],
+    "validation_contracts": [
+      "baseline artifact JSON parse diagnostics",
+      "artifact_kind mismatch diagnostics when strict content declares a different kind",
+      "duplicate generated scene/quest/mechanic id diagnostics",
+      "package title and provenance presence checks",
+      "preserved raw JSON validity checks"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_one_controlled_product_vertical_slice_from_composer_v2_foundation",
+    "plan_one_controlled_product_vertical_slice_from_composer_v2_foundation_and_draft_assembly_path",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
     "tighten_prompt_repair_or_validator_if_future_real_evaluations_regress",
@@ -81,7 +89,7 @@
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration requires controlled product vertical slice selection and explicit user approval, not missing M4.1 evidence.",
-    "M6 rich GamePackage assembly requires controlled product vertical slice selection and explicit user approval, not missing M4.1 evidence.",
+    "M6 rich GamePackage assembly beyond the current baseline draft assembly requires controlled product vertical slice selection and explicit user approval, not missing M4.1 evidence.",
     "broad contract expansion remains restricted beyond sampled baseline evidence.",
     "runtime preview repair loop remains restricted until a controlled vertical slice exists."
   ],
@@ -91,11 +99,11 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_composer_v2_foundation",
-  "recommended_next_work_item_title": "Choose the next controlled product vertical slice before M5/M6/M6-lite work.",
+  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_baseline_draft_assembly",
+  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after inspecting baseline draft assembly output.",
   "candidate_product_vertical_slices": [
     "Lua-backed content slice: one safe generator module family producing validated artifact envelopes.",
-    "Package assembly slice: map passed baseline artifacts into a richer but narrow GamePackage assembly path.",
+    "Richer package assembly slice: expand beyond baseline draft assembly for one chosen contract family or gameplay domain.",
     "Artifact contract slice: add exactly one contract family needed by the chosen product direction and rerun strict evaluation."
   ],
   "required_reading_order_for_new_agents": [
@@ -116,8 +124,10 @@
     "LLM Artifacts",
     "LLM Evaluation",
     "Artifact Review",
+    "Apply approved baseline artifacts",
+    "Draft GamePackage assembly/export",
     "controlled product vertical slice planning",
-    "later assembly/export"
+    "later rich assembly/export"
   ],
   "state_update_rule": "Update this file and docs/CURRENT_GENERATOR_STATE.md whenever milestone completion, active manual gate or recommended next Codex task changes."
 }

@@ -1,4 +1,5 @@
 using System.Text;
+using LLMGameCreator.GamePackage;
 
 namespace LLMGameCreator.Application.Design.GeneratorPlans;
 
@@ -17,6 +18,8 @@ public sealed class GeneratorPlanGamePackageAssemblyMarkdownRenderer
         builder.AppendLine($"- Package ID: {Cell(result.Package.Manifest.PackageId)}");
         builder.AppendLine($"- Title: {Cell(result.Package.Manifest.Title)}");
         builder.AppendLine($"- Approved artifacts: {result.Summary.ApprovedArtifactCount}");
+        builder.AppendLine($"- Applied artifacts: {result.Summary.AppliedArtifactCount}");
+        builder.AppendLine($"- Skipped artifacts: {result.Summary.SkippedArtifactCount}");
         builder.AppendLine($"- Mapped artifacts: {result.Summary.MappedArtifactCount}");
         builder.AppendLine($"- Unmapped artifacts: {result.Summary.UnmappedArtifactCount}");
         builder.AppendLine($"- Maps: {result.Summary.MapCount}");
@@ -28,10 +31,33 @@ public sealed class GeneratorPlanGamePackageAssemblyMarkdownRenderer
         builder.AppendLine();
 
         AppendArtifactMapping(builder, result.Mappings);
+        AppendProvenance(builder, result.Package.GeneratedContent.AppliedArtifacts);
         AppendPackageSummary(builder, result.Summary);
         AppendValidation(builder, result.Diagnostics);
         AppendPackageJsonPreview(builder, result.PackageJson);
         return builder.ToString();
+    }
+
+    private static void AppendProvenance(StringBuilder builder, IReadOnlyList<GeneratedContentArtifactProvenance> provenance)
+    {
+        builder.AppendLine("## Provenance");
+        builder.AppendLine();
+
+        if (provenance.Count == 0)
+        {
+            builder.AppendLine("_No applied artifact provenance was recorded._");
+            builder.AppendLine();
+            return;
+        }
+
+        builder.AppendLine("| Artifact ID | Contract | Capability selection | Applied at | Content hash | Result |");
+        builder.AppendLine("|---|---|---|---|---|---|");
+        foreach (var item in provenance.OrderBy(item => item.ArtifactId, StringComparer.OrdinalIgnoreCase))
+        {
+            builder.AppendLine($"| {Cell(item.ArtifactId)} | {Cell(item.ContractId)} | {Cell(item.CapabilitySelectionId)} | {Cell(item.AppliedAt)} | {Cell(item.ContentHash)} | {Cell(item.MappingResult)} |");
+        }
+
+        builder.AppendLine();
     }
 
     private static void AppendArtifactMapping(StringBuilder builder, IReadOnlyList<GeneratorPlanGamePackageAssemblyMapping> mappings)

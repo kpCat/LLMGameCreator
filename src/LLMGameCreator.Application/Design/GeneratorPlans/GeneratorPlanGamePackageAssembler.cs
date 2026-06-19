@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using LLMGameCreator.Domain.Definitions;
 using LLMGameCreator.GamePackage;
@@ -7,6 +9,11 @@ namespace LLMGameCreator.Application.Design.GeneratorPlans;
 public sealed class GeneratorPlanGamePackageAssembler
 {
     public GeneratorPlanGamePackageAssemblerResult Assemble(GeneratorPlanApprovedArtifactSet artifactSet)
+    {
+        return Assemble(artifactSet, DateTimeOffset.UtcNow);
+    }
+
+    public GeneratorPlanGamePackageAssemblerResult Assemble(GeneratorPlanApprovedArtifactSet artifactSet, DateTimeOffset appliedAtUtc)
     {
         ArgumentNullException.ThrowIfNull(artifactSet);
 
@@ -40,22 +47,27 @@ public sealed class GeneratorPlanGamePackageAssembler
             {
                 case "game_profile_v1":
                     MapGameProfile(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "manifest"));
                     break;
                 case "scene_pack_v1":
                     MapScenePack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.maps"));
                     break;
                 case "entity_pack_v1":
                     MapEntityPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.entity_prototypes"));
                     break;
                 case "quest_pack_v1":
                     MapQuestPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.quests"));
                     break;
                 case "mechanics_pack_v1":
                     MapMechanicsPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.abilities"));
                     break;
                 case "semantic_pack_v1":
@@ -69,6 +81,8 @@ public sealed class GeneratorPlanGamePackageAssembler
                         artifact.ArtifactId,
                         artifact.ArtifactKind,
                         "semantic_pack_v1"));
+                    PreserveArtifact(package, artifact, document.RootElement, "no_game_package_field");
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Unmapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Unmapped, "no_game_package_field"));
                     break;
                 default:
@@ -79,6 +93,8 @@ public sealed class GeneratorPlanGamePackageAssembler
                         artifact.ArtifactId,
                         artifact.ArtifactKind,
                         "artifact_kind"));
+                    PreserveArtifact(package, artifact, document.RootElement, "unknown_kind");
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Unmapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Unmapped, "unknown_kind"));
                     break;
             }
@@ -223,6 +239,21 @@ public sealed class GeneratorPlanGamePackageAssembler
         }
 
         var genre = GetString(game, "genre");
+        package.GeneratedContent.Profile = new GeneratedGameProfileDefinition
+        {
+            Title = title.Trim(),
+            Description = FirstNonEmpty(GetString(game, "description"), GetString(root, "purpose"), GetString(game, "core_idea")),
+            Genre = genre.Trim(),
+            Tone = GetString(game, "tone").Trim(),
+            PresentationMode = GetString(game, "presentation_mode").Trim(),
+            WorldTopology = GetString(game, "world_topology").Trim(),
+            ActorModel = GetString(game, "actor_model").Trim(),
+            CombatModel = GetString(game, "combat_model").Trim(),
+            CoreLoop = ReadStringArray(game, "core_loop"),
+            Pillars = ReadStringArray(root, "pillars"),
+            SourceContextJson = GetRawJsonOrDefault(root, "source_context")
+        };
+
         var description = FirstNonEmpty(GetString(game, "description"), GetString(root, "purpose"), GetString(game, "core_idea"));
         if (!string.IsNullOrWhiteSpace(description))
         {
@@ -246,6 +277,7 @@ public sealed class GeneratorPlanGamePackageAssembler
         {
             var title = GetString(scene, "title");
             var sourceId = GetString(scene, "id");
+            var packageMapId = "map/start";
             if (index == 0)
             {
                 var start = package.Game.Maps.FirstOrDefault(map => map.Id == "map/start");
@@ -257,6 +289,7 @@ public sealed class GeneratorPlanGamePackageAssembler
             else
             {
                 var id = "map/draft/" + NormalizeIdSegment(string.IsNullOrWhiteSpace(sourceId) ? index.ToString() : sourceId);
+                packageMapId = id;
                 if (package.Game.Maps.All(map => !string.Equals(map.Id, id, StringComparison.OrdinalIgnoreCase)))
                 {
                     package.Game.Maps.Add(new MapDefinition
@@ -271,6 +304,14 @@ public sealed class GeneratorPlanGamePackageAssembler
                 }
             }
 
+            UpsertGeneratedScene(package, new GeneratedSceneDefinition
+            {
+                SourceId = sourceId.Trim(),
+                PackageMapId = packageMapId,
+                Title = title.Trim(),
+                Description = GetString(scene, "description").Trim(),
+                Purpose = GetString(scene, "purpose").Trim()
+            });
             index++;
         }
     }
@@ -346,6 +387,15 @@ public sealed class GeneratorPlanGamePackageAssembler
                 {
                     ["source"] = "game_package_assembly"
                 }
+            });
+            UpsertGeneratedQuest(package, new GeneratedQuestSeedDefinition
+            {
+                SourceId = sourceId.Trim(),
+                PackageQuestId = id,
+                Title = string.IsNullOrWhiteSpace(title) ? $"Draft Quest {index + 1}" : title.Trim(),
+                Description = GetString(quest, "description").Trim(),
+                Steps = ReadStringArray(quest, "steps"),
+                Objectives = ReadStringArray(quest, "objectives")
             });
             index++;
         }
@@ -441,8 +491,88 @@ public sealed class GeneratorPlanGamePackageAssembler
                     ["description"] = description.Trim()
                 }
             });
+            UpsertGeneratedMechanic(package, new GeneratedMechanicDefinition
+            {
+                SourceId = sourceId.Trim(),
+                PackageAbilityId = id,
+                Name = string.IsNullOrWhiteSpace(title) ? $"Draft Ability {index + 1}" : title.Trim(),
+                Description = description.Trim(),
+                Tags = ReadStringArray(mechanic, "tags")
+            });
             index++;
         }
+    }
+
+    private static void RecordAppliedArtifact(
+        GamePackageDefinition package,
+        GeneratorPlanApprovedArtifact artifact,
+        JsonElement root,
+        DateTimeOffset appliedAtUtc,
+        string mappingResult)
+    {
+        var contractId = FirstNonEmpty(artifact.ExpectedArtifactContract, artifact.ArtifactKind);
+        var provenance = new GeneratedContentArtifactProvenance
+        {
+            ArtifactId = artifact.ArtifactId,
+            ContractId = contractId,
+            ArtifactKind = artifact.ArtifactKind,
+            CapabilitySelectionId = ReadSourceContextString(root, "capability_selection_id"),
+            GeneratedAt = FirstNonEmpty(GetString(root, "generated_at"), ReadSourceContextString(root, "generated_at")),
+            AuditId = FirstNonEmpty(GetString(root, "audit_id"), ReadSourceContextString(root, "audit_id"), ReadSourceContextString(root, "evaluation_id")),
+            AppliedAt = appliedAtUtc.UtcDateTime.ToString("O"),
+            ContentHash = Sha256(root.GetRawText()),
+            MappingResult = mappingResult
+        };
+
+        package.GeneratedContent.AppliedArtifacts.RemoveAll(candidate =>
+            string.Equals(candidate.ArtifactId, provenance.ArtifactId, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(candidate.ContractId, provenance.ContractId, StringComparison.OrdinalIgnoreCase));
+        package.GeneratedContent.AppliedArtifacts.Add(provenance);
+    }
+
+    private static void PreserveArtifact(
+        GamePackageDefinition package,
+        GeneratorPlanApprovedArtifact artifact,
+        JsonElement root,
+        string reason)
+    {
+        var preserved = new PreservedGeneratedArtifactDefinition
+        {
+            ArtifactId = artifact.ArtifactId,
+            ContractId = FirstNonEmpty(artifact.ExpectedArtifactContract, artifact.ArtifactKind),
+            ArtifactKind = artifact.ArtifactKind,
+            Reason = reason,
+            RawJson = root.GetRawText()
+        };
+
+        package.GeneratedContent.PreservedArtifacts.RemoveAll(candidate =>
+            string.Equals(candidate.ArtifactId, preserved.ArtifactId, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(candidate.ContractId, preserved.ContractId, StringComparison.OrdinalIgnoreCase));
+        package.GeneratedContent.PreservedArtifacts.Add(preserved);
+    }
+
+    private static void UpsertGeneratedScene(GamePackageDefinition package, GeneratedSceneDefinition scene)
+    {
+        package.GeneratedContent.Scenes.RemoveAll(candidate =>
+            string.Equals(candidate.SourceId, scene.SourceId, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(candidate.PackageMapId, scene.PackageMapId, StringComparison.OrdinalIgnoreCase));
+        package.GeneratedContent.Scenes.Add(scene);
+    }
+
+    private static void UpsertGeneratedQuest(GamePackageDefinition package, GeneratedQuestSeedDefinition quest)
+    {
+        package.GeneratedContent.Quests.RemoveAll(candidate =>
+            string.Equals(candidate.SourceId, quest.SourceId, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(candidate.PackageQuestId, quest.PackageQuestId, StringComparison.OrdinalIgnoreCase));
+        package.GeneratedContent.Quests.Add(quest);
+    }
+
+    private static void UpsertGeneratedMechanic(GamePackageDefinition package, GeneratedMechanicDefinition mechanic)
+    {
+        package.GeneratedContent.Mechanics.RemoveAll(candidate =>
+            string.Equals(candidate.SourceId, mechanic.SourceId, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(candidate.PackageAbilityId, mechanic.PackageAbilityId, StringComparison.OrdinalIgnoreCase));
+        package.GeneratedContent.Mechanics.Add(mechanic);
     }
 
     private static GeneratorPlanGamePackageAssemblyMapping Mapping(
@@ -499,6 +629,41 @@ public sealed class GeneratorPlanGamePackageAssembler
     private static string FirstNonEmpty(params string[] values)
     {
         return values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value))?.Trim() ?? string.Empty;
+    }
+
+    private static List<string> ReadStringArray(JsonElement element, string propertyName)
+    {
+        if (!TryGetProperty(element, propertyName, out var array) || array.ValueKind != JsonValueKind.Array)
+        {
+            return new List<string>();
+        }
+
+        return array
+            .EnumerateArray()
+            .Select(item => item.ValueKind == JsonValueKind.String ? item.GetString() ?? string.Empty : string.Empty)
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Select(value => value.Trim())
+            .ToList();
+    }
+
+    private static string GetRawJsonOrDefault(JsonElement element, string propertyName)
+    {
+        return TryGetProperty(element, propertyName, out var property) && property.ValueKind is JsonValueKind.Object or JsonValueKind.Array
+            ? property.GetRawText()
+            : "{}";
+    }
+
+    private static string ReadSourceContextString(JsonElement root, string propertyName)
+    {
+        return TryGetProperty(root, "source_context", out var sourceContext) && sourceContext.ValueKind == JsonValueKind.Object
+            ? GetString(sourceContext, propertyName)
+            : string.Empty;
+    }
+
+    private static string Sha256(string value)
+    {
+        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(value));
+        return Convert.ToHexString(bytes).ToLowerInvariant();
     }
 
     private static int CountSemanticTerms(JsonElement root)

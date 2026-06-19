@@ -14,6 +14,13 @@ public static class GeneratorPlanGamePackageAssemblyDiagnosticCodes
     public const string ApprovedArtifactInvalidJson = "generator_plan_game_package_assembly.approved_artifact_invalid_json";
     public const string ApprovedArtifactMissingKind = "generator_plan_game_package_assembly.approved_artifact_missing_kind";
     public const string UnmappedArtifactKind = "generator_plan_game_package_assembly.unmapped_artifact_kind";
+    public const string ArtifactKindMismatch = "generator_plan_game_package_assembly.artifact_kind_mismatch";
+    public const string DuplicateGeneratedSceneId = "generator_plan_game_package_assembly.duplicate_scene_id";
+    public const string DuplicateGeneratedQuestId = "generator_plan_game_package_assembly.duplicate_quest_id";
+    public const string DuplicateGeneratedMechanicId = "generator_plan_game_package_assembly.duplicate_mechanic_id";
+    public const string GeneratedPackageTitleMissing = "generator_plan_game_package_assembly.generated_package_title_missing";
+    public const string GeneratedProvenanceMissing = "generator_plan_game_package_assembly.generated_provenance_missing";
+    public const string PreservedArtifactJsonInvalid = "generator_plan_game_package_assembly.preserved_artifact_json_invalid";
     public const string PackageValidationError = "generator_plan_game_package_assembly.package_validation_error";
     public const string PackageValidationWarning = "generator_plan_game_package_assembly.package_validation_warning";
     public const string PackageSerializationError = "generator_plan_game_package_assembly.package_serialization_error";
@@ -38,6 +45,8 @@ public static class GeneratorPlanGamePackageAssemblyPolicy
         return new GeneratorPlanGamePackageAssemblySummary
         {
             ApprovedArtifactCount = artifactSet.ApprovedArtifacts.Count,
+            AppliedArtifactCount = package.GeneratedContent.AppliedArtifacts.Count,
+            SkippedArtifactCount = mappings.Count(mapping => mapping.Result == GeneratorPlanGamePackageAssemblyMappingResult.Unmapped),
             MappedArtifactCount = mappings.Count(mapping => mapping.Result == GeneratorPlanGamePackageAssemblyMappingResult.Mapped),
             UnmappedArtifactCount = mappings.Count(mapping => mapping.Result == GeneratorPlanGamePackageAssemblyMappingResult.Unmapped),
             MapCount = package.Game.Maps.Count,

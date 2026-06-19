@@ -1,8 +1,8 @@
 # CURRENT_RUN.md
 
-Task id: PRODUCT_SLICE_002_COMPOSABLE_MODULE_SELECTION_UI
-Goal: wire composable module/modifier/constraint/runtime requirement selection into Capability Picker without starting M5/M6/package assembly work
-Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/002_COMPOSABLE_MODULE_SELECTION_UI.md
+Task id: PRODUCT_SLICE_003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY
+Goal: turn persisted Artifact Review approved baseline artifacts into inspectable draft GamePackage assembly without provider, Lua, runtime or generator-library execution
+Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY.md
 
 Source docs read:
 - AGENTS.md
@@ -10,71 +10,99 @@ Source docs read:
 - docs/CURRENT_GENERATOR_STATE.md
 - docs/CURRENT_GENERATOR_STATE.json
 - docs/ROADMAP_TO_FULL_GENERATOR.md
-- docs/CAPABILITY_COMPOSER_V2_SPEC.md
-- docs/CAPABILITY_COMPOSER_V2_RU_GLOSSARY.md
-- docs/PRODUCT_SLICE_001_CAPABILITY_COMPOSER_V2_FOUNDATION.md
-- docs/PRODUCT_SLICE_002_COMPOSABLE_MODULE_SELECTION_UI.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/002_CODEX_PROMPT.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/002_COMPOSABLE_MODULE_SELECTION_UI.md
+- docs/M4_1_REAL_EVALUATION_GATE_REPORT.md
+- docs/PRODUCT_SLICE_003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/003_CODEX_PROMPT.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY.md
+- docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
+- docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
+- docs/GENERATOR_PLAN_ONE_CLICK_PACKAGE_EXPORT_UI.md
 - src/LLMGameCreator.Application/LLMGameCreator.Application.csproj
 - src/LLMGameCreator.WinForms/LLMGameCreator.WinForms.csproj
 - tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilitySelectionModels.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilitySelectionService.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilitySelectionArtifactService.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactPromptBuilder.cs
-- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerPageControl.cs
-- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerPresenter.cs
-- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerViewModels.cs
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanCapabilitySelectionServiceTests.cs
-- tests/LLMGameCreator.Tests/WinForms/CapabilityPickerPresenterTests.cs
+- src/LLMGameCreator.GamePackage/LLMGameCreator.GamePackage.csproj
+
+Source files read:
+- src/LLMGameCreator.GamePackage/GamePackageDefinition.cs
+- src/LLMGameCreator.Domain/Definitions/GameDefinitions.cs
+- src/LLMGameCreator.Application/Validation/GamePackageValidator.cs
+- src/LLMGameCreator.Application/Validation/GameDefinitionValidator.cs
+- src/LLMGameCreator.Application/Projects/CurrentGamePackageService.cs
+- src/LLMGameCreator.Infrastructure/Storage/JsonGamePackageRepository.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactReviewService.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalModels.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalArtifactModels.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalArtifactService.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalArtifactReader.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanApprovedArtifactSetReader.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactContractCatalog.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactValidator.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyService.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyModels.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyDiagnostics.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyValidator.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyMarkdownRenderer.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyArtifactModels.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyArtifactService.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyArtifactReader.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanPackageExportRunService.cs
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPresenter.cs
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewViewModels.cs
+- src/LLMGameCreator.WinForms/Pages/PackageExport/PackageExportPageControl.cs
+- src/LLMGameCreator.WinForms/Pages/PackageExport/PackageExportRunPresenter.cs
+- src/LLMGameCreator.WinForms/CompositionRoot.cs
+- tests/LLMGameCreator.Tests/Design/GeneratorPlanGamePackageAssemblyPipelineTests.cs
+- tests/LLMGameCreator.Tests/Design/GeneratorPlanPackageExportRunTests.cs
+- tests/LLMGameCreator.Tests/WinForms/ArtifactReviewPresenterTests.cs
 - tests/LLMGameCreator.Tests/Docs/CurrentGeneratorStateDocsTests.cs
-- .devflow/CURRENT_RUN.md
 
 Existing patterns inspected:
-- Capability Picker uses a single WinForms UserControl with in-file TableLayoutPanel/SplitContainer layout and runtime event wiring.
-- CapabilityPickerPresenter is the local mapping seam for atlas/help catalog/view-state/request/load behavior.
-- GeneratorPlanCapabilityHelpCatalog already owns the in-memory composable seed catalog.
-- GeneratorPlanCapabilitySelectionService already preserves selected composable arrays in result JSON and selection ids.
-- GeneratorPlanStrictLlmArtifactPromptBuilder already appends selected arrays only when non-empty.
+- Package Export already runs approval -> assembly -> assembly artifact save -> final run artifact save and exports `package.json` through `JsonGamePackageRepository`.
+- Artifact Review already persists human decisions into `artifact/generator_plan_approved_artifact_set/latest`; package assembly should read that approved set instead of recapturing or auto-approving.
+- GamePackage assembly already maps legacy draft artifacts through `GeneratorPlanGamePackageAssembler`, validates through `GamePackageValidator`, and saves assembly/package draft/markdown artifacts through existing generated artifact storage.
+- WinForms pages in this area use runtime-safe constructors plus in-file TableLayoutPanel layout and event wiring; DI remains in `CompositionRoot`.
 
 Files changed:
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilitySelectionModels.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilitySelectionService.cs
-- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerViewModels.cs
-- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerPresenter.cs
-- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerPageControl.cs
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanCapabilitySelectionServiceTests.cs
-- tests/LLMGameCreator.Tests/WinForms/CapabilityPickerPresenterTests.cs
+- src/LLMGameCreator.GamePackage/GamePackageDefinition.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyModels.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyDiagnostics.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyService.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyValidator.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyMarkdownRenderer.cs
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
+- src/LLMGameCreator.WinForms/CompositionRoot.cs
+- tests/LLMGameCreator.Tests/Design/GeneratorPlanGamePackageAssemblyPipelineTests.cs
 - docs/CURRENT_GENERATOR_STATE.md
 - docs/CURRENT_GENERATOR_STATE.json
 - .devflow/CURRENT_RUN.md
 
 Implemented:
-- Added selectable Capability Picker groups for feature bundles, modules, modifiers, constraints and runtime requirements via a stable tabbed checklist area.
-- Extended CapabilityPickerViewState and presenter request/load mappings for selected_module_ids, selected_modifier_ids, selected_constraint_ids and runtime_requirement_ids.
-- Populated composable UI groups from GeneratorPlanCapabilityHelpCatalog.ListCompositionSeeds().
-- Added initial constraint and runtime requirement seeds to the in-memory catalog.
-- Kept readable Russian labels first in list items and machine ids in help/details.
-- Preserved required core atlas planning feature bundle behavior.
-- Added non-fatal diagnostics for unsupported-yet economy/balance/chunk choices, unknown future composable ids and hybrid realtime/turn combat info.
-- Preserved strict prompt compactness when selected arrays are empty; existing prompt builder includes arrays when non-empty.
-- Updated current generator state handoff to Product Slice 002 while keeping current_phase m4_1_real_model_evaluation_gate and last_completed_milestone M4.1.
+- Added minimal non-breaking `generatedContent` section to draft GamePackage for generated profile summaries, scene summaries, quest summaries, mechanic summaries, applied artifact provenance and preserved unknown artifact JSON.
+- Extended GamePackage assembly so baseline strict artifacts preserve core loop, pillars, source context, scene descriptions/purposes, quest steps/objectives, mechanic descriptions/tags and per-artifact provenance.
+- Added content hash, applied timestamp, contract id, artifact id, capability selection id and mapping result provenance for applied approved artifacts.
+- Preserved unknown/semantic approved artifacts as generated-content preserved artifacts with raw JSON when valid, while reporting warnings instead of crashing.
+- Added assembly diagnostics for artifact kind mismatch, duplicate generated scene/quest/mechanic ids, generated package title presence, provenance presence and preserved raw JSON validity.
+- Added `AppliedArtifactCount` and `SkippedArtifactCount` to assembly summary and markdown report.
+- Added Artifact Review action `Apply approved to package` that reads the persisted latest approved artifact set, assembles/validates/exports a draft package to `.llmgc/package-assembly/package.json` by default, saves assembly/package draft/markdown artifacts, and replaces current in-memory package state with the draft package.
+- Kept approval persistence as the gate: unsaved yellow UI decisions are not assembled until `Apply selected decisions` writes the approved artifact set.
+- Updated current generator state handoff to Product Slice 003 while keeping `current_phase = m4_1_real_model_evaluation_gate` and `last_completed_milestone = M4.1`.
 
 Non-goals preserved:
-- No runtime, scripting, GamePackage, generator-library, solution or project files changed.
-- No devflow scripts, NEXT_TASK or task queue changed.
-- No Strict LLM Artifacts UI or LLM Evaluation UI changed.
-- No package assembly, Lua executor, runtime preview, M5, M6 or M6-lite implementation started.
+- No provider/LLM/LM Studio calls in apply or assembly.
+- No Lua, scripting, runtime, runtime preview, Unity or generator-library implementation changes.
+- No solution, project, NuGet, devflow script, NEXT_TASK or task queue changes.
+- No broad future artifact contract expansion.
+- No destructive package schema rewrite; new GamePackage section is default-empty and non-breaking.
 
 Checks run:
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Capability": passed. 31 passed, 0 failed.
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~CapabilityPicker": passed. 6 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Artifact": passed. 138 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package": passed. 88 passed, 0 failed.
 - powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 457 passed, 0 failed. Run directory: .devflow\runs\20260619_124455-check-all.
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 460 passed, 0 failed. Run directory: .devflow\runs\20260619_150606-check-all.
 - Mojibake marker scan over changed files with rg: passed, no markers found.
 
 Manual verification:
-- Not run interactively in this note. Required manual UI workflow remains: start WinForms, open Capability Picker, load atlas, select several progression/combat/world/economy/balance modules, build selection, save latest selection, open LLM Artifacts, load selection and preview prompt.
+- Not run interactively in this note. Required manual UI workflow remains: start WinForms, open project, produce/stage strict baseline artifacts, Artifact Review -> Load latest -> Approve all valid -> Apply selected decisions -> Apply approved to package -> inspect `.llmgc/package-assembly/package.json` and report/status text.
