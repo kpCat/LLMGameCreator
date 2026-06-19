@@ -188,6 +188,17 @@ public sealed class GeneratorPlanCapabilitySelectionServiceTests
         Assert.Equal("metadata_missing", unknown.ImplementationStatus);
     }
 
+    [Fact]
+    public void CoreAtlasPlanningHelpExplainsRequiredTechnicalGenerationBase()
+    {
+        var help = GeneratorPlanCapabilityHelpCatalog.Get("feature_bundle/core_atlas_planning/v1");
+
+        Assert.Contains("\u041e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0442\u0435\u0445\u043d\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0431\u0430\u0437\u0430", help.DisplayNameRu);
+        Assert.Contains("\u042d\u0442\u043e \u043d\u0435 \u0438\u0433\u0440\u043e\u0432\u0430\u044f \u043c\u0435\u0445\u0430\u043d\u0438\u043a\u0430", help.ShortDescriptionRu);
+        Assert.Contains("\u041e\u0431\u044b\u0447\u043d\u043e \u043e\u0441\u0442\u0430\u0432\u043b\u044f\u0439 \u0432\u043a\u043b\u044e\u0447\u0451\u043d\u043d\u044b\u043c", help.DetailsRu);
+        Assert.DoesNotContain("M4 flow", help.DetailsRu, StringComparison.OrdinalIgnoreCase);
+    }
+
     [Theory]
     [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCodes.IncompatiblePresentationWorld, GeneratorPlanCapabilitySelectionDiagnosticCategories.Impossible)]
     [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCodes.MissingArtifactContract, GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet)]
@@ -197,6 +208,16 @@ public sealed class GeneratorPlanCapabilitySelectionServiceTests
     public void DiagnosticCategoryMappingUsesUserFacingCategories(string code, string expectedCategory)
     {
         Assert.Equal(expectedCategory, GeneratorPlanCapabilityHelpCatalog.MapDiagnosticCategory(code));
+    }
+
+    [Theory]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCategories.Impossible, "\u041d\u0435\u043b\u044c\u0437\u044f \u0441\u043e\u0432\u043c\u0435\u0441\u0442\u0438\u0442\u044c")]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet, "\u0418\u0434\u0435\u044f \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u0430")]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCategories.Risky, "\u0435\u0441\u0442\u044c \u0440\u0438\u0441\u043a")]
+    [InlineData(GeneratorPlanCapabilitySelectionDiagnosticCategories.Info, "\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f")]
+    public void DiagnosticCategoryDisplayNameUsesRussianMeaning(string category, string expectedText)
+    {
+        Assert.Contains(expectedText, GeneratorPlanCapabilityHelpCatalog.MapDiagnosticCategoryDisplayName(category));
     }
 
     [Fact]

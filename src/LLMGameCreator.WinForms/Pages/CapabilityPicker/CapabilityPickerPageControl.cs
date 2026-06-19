@@ -39,6 +39,8 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
     private readonly ComboBox _runtimeTargetComboBox = new();
     private readonly SplitContainer _splitContainer = new();
     private readonly TableLayoutPanel _featurePanel = new();
+    private readonly Label _featureBundleLabel = new();
+    private readonly Label _helpLabel = new();
     private readonly CheckedListBox _featureBundleList = new();
     private readonly TextBox _helpTextBox = new();
     private readonly TableLayoutPanel _resultLayout = new();
@@ -112,8 +114,8 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _rootLayout.Dock = DockStyle.Fill;
         _rootLayout.Padding = new Padding(8);
         _rootLayout.RowCount = 3;
-        _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 112F));
-        _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 148F));
+        _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 116F));
+        _rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 156F));
         _rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
 
         BuildInputLayout();
@@ -172,37 +174,45 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             _variantLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
         }
 
-        AddCombo(0, 0, "Presentation mode", _presentationComboBox);
-        AddCombo(0, 2, "World topology", _worldComboBox);
-        AddCombo(0, 4, "Actor model", _actorComboBox);
-        AddCombo(2, 0, "Inventory model", _inventoryComboBox);
-        AddCombo(2, 2, "Combat model", _combatComboBox);
-        AddCombo(2, 4, "Progression model", _progressionComboBox);
-        AddCombo(4, 0, "Pathfinding profile", _pathfindingComboBox);
-        AddCombo(4, 2, "NPC behavior model", _npcComboBox);
-        AddCombo(4, 4, "Runtime target", _runtimeTargetComboBox);
+        AddCombo(0, 0, "\u0424\u043e\u0440\u043c\u0430 \u0438\u0433\u0440\u044b", _presentationComboBox);
+        AddCombo(0, 2, "\u0421\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0430 \u043c\u0438\u0440\u0430", _worldComboBox);
+        AddCombo(0, 4, "\u041c\u043e\u0434\u0435\u043b\u044c \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u0436\u0435\u0439", _actorComboBox);
+        AddCombo(2, 0, "\u0418\u043d\u0432\u0435\u043d\u0442\u0430\u0440\u044c", _inventoryComboBox);
+        AddCombo(2, 2, "\u0411\u043e\u0439", _combatComboBox);
+        AddCombo(2, 4, "\u041f\u0440\u043e\u0433\u0440\u0435\u0441\u0441\u0438\u044f", _progressionComboBox);
+        AddCombo(4, 0, "\u041d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f", _pathfindingComboBox);
+        AddCombo(4, 2, "\u041f\u043e\u0432\u0435\u0434\u0435\u043d\u0438\u0435 NPC", _npcComboBox);
+        AddCombo(4, 4, "\u0426\u0435\u043b\u044c \u0440\u0430\u043d\u0442\u0430\u0439\u043c\u0430", _runtimeTargetComboBox);
     }
 
     private void BuildSplitLayout()
     {
         _splitContainer.Dock = DockStyle.Fill;
         _splitContainer.Orientation = Orientation.Vertical;
-        _splitContainer.SplitterDistance = 440;
+        _splitContainer.Panel1MinSize = 420;
+        _splitContainer.Panel2MinSize = 520;
+        _splitContainer.SplitterDistance = 500;
 
         _featureBundleList.CheckOnClick = true;
         _featureBundleList.DisplayMember = nameof(CapabilityPickerFeatureBundleViewModel.DisplayName);
         _featureBundleList.Dock = DockStyle.Fill;
         _featureBundleList.HorizontalScrollbar = true;
         ConfigureReadOnly(_helpTextBox, true);
+        ConfigureSectionLabel(_featureBundleLabel, "\u0424\u0438\u0447\u0438 / \u043c\u043e\u0434\u0443\u043b\u0438 / \u0431\u0443\u0434\u0443\u0449\u0438\u0435 \u0438\u0434\u0435\u0438");
+        ConfigureSectionLabel(_helpLabel, "\u0421\u043f\u0440\u0430\u0432\u043a\u0430 / \u0434\u0435\u0442\u0430\u043b\u0438");
 
         _featurePanel.ColumnCount = 1;
         _featurePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         _featurePanel.Dock = DockStyle.Fill;
-        _featurePanel.RowCount = 2;
-        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 58F));
-        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 42F));
-        _featurePanel.Controls.Add(_featureBundleList, 0, 0);
-        _featurePanel.Controls.Add(_helpTextBox, 0, 1);
+        _featurePanel.RowCount = 4;
+        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 52F));
+        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        _featurePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 48F));
+        _featurePanel.Controls.Add(_featureBundleLabel, 0, 0);
+        _featurePanel.Controls.Add(_featureBundleList, 0, 1);
+        _featurePanel.Controls.Add(_helpLabel, 0, 2);
+        _featurePanel.Controls.Add(_helpTextBox, 0, 3);
 
         BuildResultLayout();
         _splitContainer.Panel1.Controls.Add(_featurePanel);
@@ -215,7 +225,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _resultLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         _resultLayout.Dock = DockStyle.Fill;
         _resultLayout.RowCount = 9;
-        _resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
+        _resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
         _resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         _resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 86F));
         _resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
@@ -250,11 +260,11 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
     {
         _actionPanel.Dock = DockStyle.Fill;
         _actionPanel.FlowDirection = FlowDirection.LeftToRight;
-        _actionPanel.WrapContents = false;
-        ConfigureButton(_buildButton, "Build selection", 122);
-        ConfigureButton(_saveButton, "Save latest selection", 150);
-        ConfigureButton(_loadLatestButton, "Load latest selection", 150);
-        ConfigureButton(_copyJsonButton, "Copy selection JSON", 150);
+        _actionPanel.WrapContents = true;
+        ConfigureButton(_buildButton, "\u0421\u043e\u0431\u0440\u0430\u0442\u044c \u0432\u044b\u0431\u043e\u0440", 132);
+        ConfigureButton(_saveButton, "\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u0432\u044b\u0431\u043e\u0440", 146);
+        ConfigureButton(_loadLatestButton, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0432\u044b\u0431\u043e\u0440", 146);
+        ConfigureButton(_copyJsonButton, "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c JSON", 142);
         _actionPanel.Controls.Add(_buildButton);
         _actionPanel.Controls.Add(_saveButton);
         _actionPanel.Controls.Add(_loadLatestButton);
@@ -288,7 +298,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _loadLatestButton.Click += async (_, _) => await LoadLatestSelectionAsync().ConfigureAwait(true);
         _copyJsonButton.Click += (_, _) => TryCopyText(_currentViewState.SelectionJson);
         _featureBundleList.SelectedIndexChanged += (_, _) => UpdateHelpFromSelection();
-        _featureBundleList.ItemCheck += (_, _) => BeginInvoke(UpdateHelpFromSelection);
+        _featureBundleList.ItemCheck += FeatureBundleListItemCheck;
         _diagnosticsGrid.SelectionChanged += (_, _) => UpdateHelpFromDiagnosticSelection();
         foreach (var comboBox in new[] { _presentationComboBox, _worldComboBox, _actorComboBox, _inventoryComboBox, _combatComboBox, _progressionComboBox, _pathfindingComboBox, _npcComboBox, _runtimeTargetComboBox })
         {
@@ -500,7 +510,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _diagnosticsGrid.Rows.Clear();
         foreach (var diagnostic in diagnostics)
         {
-            _diagnosticsGrid.Rows.Add(diagnostic.Severity, diagnostic.Category, diagnostic.Code, diagnostic.Target, diagnostic.Message);
+            _diagnosticsGrid.Rows.Add(diagnostic.Severity, $"{diagnostic.CategoryDisplayName} ({diagnostic.Category})", diagnostic.Code, diagnostic.Target, diagnostic.Message);
         }
     }
 
@@ -510,7 +520,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _featureBundleList.Items.Clear();
         foreach (var bundle in bundles)
         {
-            _featureBundleList.Items.Add(bundle, selected.Contains(bundle.Id));
+            _featureBundleList.Items.Add(bundle, bundle.IsRequiredTechnicalBase || selected.Contains(bundle.Id));
         }
     }
 
@@ -620,6 +630,14 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         button.UseVisualStyleBackColor = true;
     }
 
+    private static void ConfigureSectionLabel(Label label, string text)
+    {
+        label.Dock = DockStyle.Fill;
+        label.Font = new Font(label.Font, FontStyle.Bold);
+        label.Text = text;
+        label.TextAlign = ContentAlignment.MiddleLeft;
+    }
+
     private static void ConfigureReadOnly(TextBox textBox, bool multiline)
     {
         textBox.Dock = DockStyle.Fill;
@@ -649,6 +667,20 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _helpTextBox.Text = BuildCurrentHelpText();
     }
 
+    private void FeatureBundleListItemCheck(object? sender, ItemCheckEventArgs e)
+    {
+        if (!_applyingState &&
+            e.Index >= 0 &&
+            _featureBundleList.Items[e.Index] is CapabilityPickerFeatureBundleViewModel { IsRequiredTechnicalBase: true } &&
+            e.NewValue == CheckState.Unchecked)
+        {
+            e.NewValue = CheckState.Checked;
+            SetStatusMessage("\u041e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0442\u0435\u0445\u043d\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0431\u0430\u0437\u0430 \u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u0438 \u0443\u0436\u0435 \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u0430.");
+        }
+
+        BeginInvoke(UpdateHelpFromSelection);
+    }
+
     private void UpdateHelpFromDiagnosticSelection()
     {
         if (_applyingState || _diagnosticsGrid.CurrentRow == null)
@@ -662,14 +694,48 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         var message = _diagnosticsGrid.CurrentRow.Cells["Message"].Value?.ToString() ?? string.Empty;
         _helpTextBox.Text = string.Join(Environment.NewLine, new[]
         {
-            "Diagnostic",
-            "category: " + category,
-            "code: " + code,
-            "target: " + target,
+            "\u0414\u0438\u0430\u0433\u043d\u043e\u0441\u0442\u0438\u043a\u0430",
+            "\u041a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f: " + category,
+            "\u041a\u043e\u0434: " + code,
+            "\u0426\u0435\u043b\u044c: " + target,
             message,
             string.Empty,
-            FormatHelp(GeneratorPlanCapabilityHelpCatalog.Get(target))
+            FormatHelp(FindHelp(target))
         });
+    }
+
+    private GeneratorPlanCapabilityHelpMetadata FindHelp(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return GeneratorPlanCapabilityHelpCatalog.Get(id);
+        }
+
+        foreach (var option in _currentViewState.PresentationModes
+                     .Concat(_currentViewState.WorldTopologies)
+                     .Concat(_currentViewState.ActorModels)
+                     .Concat(_currentViewState.InventoryModels)
+                     .Concat(_currentViewState.CombatModels)
+                     .Concat(_currentViewState.ProgressionModels)
+                     .Concat(_currentViewState.PathfindingProfiles)
+                     .Concat(_currentViewState.NpcBehaviorModels)
+                     .Concat(_currentViewState.RuntimeTargets))
+        {
+            if (string.Equals(option.Id, id, StringComparison.OrdinalIgnoreCase))
+            {
+                return option.Help;
+            }
+        }
+
+        foreach (var bundle in _currentViewState.FeatureBundles)
+        {
+            if (string.Equals(bundle.Id, id, StringComparison.OrdinalIgnoreCase))
+            {
+                return bundle.Help;
+            }
+        }
+
+        return GeneratorPlanCapabilityHelpCatalog.Get(id);
     }
 
     private string BuildCurrentHelpText()
@@ -692,7 +758,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             }
         }
 
-        return "Select a variant, feature bundle, or diagnostic row to see details.";
+        return "\u0412\u044b\u0431\u0435\u0440\u0438 \u0432\u0430\u0440\u0438\u0430\u043d\u0442, feature bundle \u0438\u043b\u0438 \u0441\u0442\u0440\u043e\u043a\u0443 \u0434\u0438\u0430\u0433\u043d\u043e\u0441\u0442\u0438\u043a\u0438, \u0447\u0442\u043e\u0431\u044b \u0443\u0432\u0438\u0434\u0435\u0442\u044c \u0434\u0435\u0442\u0430\u043b\u0438.";
     }
 
     private static string FormatHelp(GeneratorPlanCapabilityHelpMetadata help)
@@ -705,10 +771,10 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             string.Empty,
             help.ShortDescriptionRu,
             string.Empty,
-            "Details: " + help.DetailsRu,
-            "Examples: " + EmptyAsDash(help.ExamplesRu),
-            "Best for: " + EmptyAsDash(help.BestForRu),
-            "Warnings: " + EmptyAsDash(help.WarningsRu)
+            "\u041a\u043e\u0433\u0434\u0430 \u0432\u044b\u0431\u0438\u0440\u0430\u0442\u044c: " + EmptyAsDash(help.DetailsRu),
+            "\u0427\u0442\u043e \u0434\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u0442 \u0432 \u0438\u0433\u0440\u0443: " + EmptyAsDash(help.ExamplesRu),
+            "\u0421 \u0447\u0435\u043c \u0445\u043e\u0440\u043e\u0448\u043e \u0441\u043e\u0447\u0435\u0442\u0430\u0435\u0442\u0441\u044f: " + EmptyAsDash(help.BestForRu),
+            "\u0427\u0442\u043e \u043f\u043e\u043a\u0430 \u043d\u0435 \u0440\u0435\u0430\u043b\u0438\u0437\u0443\u0435\u0442 / \u0447\u0435\u043c \u043e\u043f\u0430\u0441\u043d\u043e: " + EmptyAsDash(help.WarningsRu)
         });
     }
 

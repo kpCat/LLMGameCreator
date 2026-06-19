@@ -17,7 +17,35 @@ public sealed class CapabilityPickerPresenterTests
         Assert.Single(state.FeatureBundles);
         Assert.Equal("headless", state.RuntimeTargetId);
         Assert.Equal("Псевдо-3D сетка от первого лица", state.PresentationModes[0].Help.DisplayNameRu);
-        Assert.Contains("Базовое планирование", state.FeatureBundles[0].Help.DisplayNameRu);
+        Assert.Contains("\u041e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0442\u0435\u0445\u043d\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0431\u0430\u0437\u0430", state.FeatureBundles[0].Help.DisplayNameRu);
+        Assert.Equal("feature_bundle/core_atlas_planning/v1", Assert.Single(state.SelectedFeatureBundleIds));
+        Assert.True(state.FeatureBundles[0].IsRequiredTechnicalBase);
+    }
+
+    [Fact]
+    public void PresenterBuildsUsefulAtlasFallbackHelpForUnknownVisibleOption()
+    {
+        var state = new CapabilityPickerPresenter().FromAtlas(new CapabilityPickerViewState(), new GeneratorPlanCapabilitySelectionAtlas
+        {
+            AtlasRootPath = "atlas",
+            PresentationModes = [Option("presentation_mode/custom_visible", "Custom Visible", "Atlas purpose for a visible option.")],
+            WorldTopologies = [Option("world_topology/custom", "Custom World")],
+            ActorModels = [Option("actor_model/custom", "Custom Actor")],
+            InventoryModels = [Option("inventory_model/custom", "Custom Inventory")],
+            CombatModels = [Option("combat_model/custom", "Custom Combat")],
+            ProgressionModels = [Option("progression_model/custom", "Custom Progression")],
+            PathfindingProfiles = [Option("pathfinding/custom", "Custom Path")],
+            NpcBehaviorModels = [Option("npc_behavior/custom", "Custom NPC")],
+            RuntimeTargets = [Option("custom_runtime", "Custom Runtime")]
+        });
+
+        var help = state.PresentationModes[0].Help;
+
+        Assert.Equal("atlas_fallback", help.ImplementationStatus);
+        Assert.Contains("Custom Visible", state.PresentationModes[0].DisplayName);
+        Assert.Contains("presentation_mode/custom_visible", state.PresentationModes[0].DisplayName);
+        Assert.Contains("Atlas purpose for a visible option.", help.ShortDescriptionRu);
+        Assert.Contains("\u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0430\u044f \u0440\u0443\u0441\u0441\u043a\u0430\u044f \u0441\u043f\u0440\u0430\u0432\u043a\u0430 \u043f\u043e\u043a\u0430 \u043d\u0435 \u043d\u0430\u043f\u0438\u0441\u0430\u043d\u0430", help.DetailsRu);
     }
 
     [Fact]
@@ -29,6 +57,7 @@ public sealed class CapabilityPickerPresenterTests
         Assert.Equal("ready_with_warnings", state.Status);
         Assert.Contains(state.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanCapabilitySelectionDiagnosticCodes.VariantNotRecommended);
         Assert.Contains(state.Diagnostics, diagnostic => diagnostic.Category == GeneratorPlanCapabilitySelectionDiagnosticCategories.Risky);
+        Assert.Contains("\u0440\u0438\u0441\u043a", state.Diagnostics[0].CategoryDisplayName, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("warning", state.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -170,11 +199,16 @@ public sealed class CapabilityPickerPresenterTests
 
     private static GeneratorPlanCapabilitySelectionAtlasOption Option(string id, string title)
     {
+        return Option(id, title, title);
+    }
+
+    private static GeneratorPlanCapabilitySelectionAtlasOption Option(string id, string title, string purpose)
+    {
         return new GeneratorPlanCapabilitySelectionAtlasOption
         {
             Id = id,
             Title = title,
-            Purpose = title
+            Purpose = purpose
         };
     }
 }

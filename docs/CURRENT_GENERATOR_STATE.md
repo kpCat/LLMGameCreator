@@ -8,7 +8,7 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 M4.1 gate passed for sampled baseline contracts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, and the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, and the follow-up UX repair made the picker readable and usable at normal editor sizes.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,9 +62,10 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 001: Capability Composer v2 Foundation.
-- The Capability Picker now has Russian-readable help metadata, clearer diagnostic categories and optional non-breaking composable fields.
-- Strict LLM prompt context can include selected module/modifier/constraint/runtime requirement ids when present.
+- Product Slice 001 UX Repair: Capability Picker usability after Capability Composer v2 Foundation.
+- The Capability Picker now has a less cramped top/middle/bottom layout, Russian labels for the main axes/actions, atlas-based fallback help for visible options without curated metadata, Russian diagnostic category meanings, and required handling for `feature_bundle/core_atlas_planning/v1`.
+- `feature_bundle/core_atlas_planning/v1` is presented as an obligatory technical generation base, not as an optional gameplay feature.
+- Strict LLM prompt context can still include selected module/modifier/constraint/runtime requirement ids when present.
 
 ## Active manual gate
 
@@ -72,7 +73,7 @@ Completed for the sampled baseline contracts and Product Slice 001 foundation. B
 
 ## Current user action
 
-Use Capability Composer v2 foundation in the picker, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.
+Use the repaired Capability Picker to build/save a readable capability selection, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.
 
 ## Allowed next Codex tasks
 

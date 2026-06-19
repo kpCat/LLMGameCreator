@@ -1,14 +1,14 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-18T20:30:00Z",
+  "updated_at_utc": "2026-06-18T21:15:00Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 001 foundation completed",
-  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 001 foundation and UX repair completed",
+  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation_and_ux_repair",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts and Product Slice 001 foundation; broad expansion still requires controlled vertical-slice approval.",
-  "current_user_action": "Use Capability Composer v2 foundation in the picker, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.",
+  "active_manual_gate": "Completed for sampled baseline contracts plus Product Slice 001 foundation and UX repair; broad expansion still requires controlled vertical-slice approval.",
+  "current_user_action": "Use the repaired Capability Picker to build/save a readable capability selection, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.",
   "recommended_next_decision": "Choose the next controlled product vertical slice and refresh the next executable task specs from current source.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
@@ -49,10 +49,10 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_001_capability_composer_v2_foundation",
-    "title": "Capability Composer v2 Foundation",
-    "completed_at_utc": "2026-06-18T20:30:00Z",
-    "summary": "Added Russian-readable help metadata, diagnostic categories and optional non-breaking composable selection fields to the existing Capability Picker flow.",
+    "slice_id": "product_slice_001_capability_picker_ux_repair",
+    "title": "Capability Picker UX repair after Capability Composer v2 Foundation",
+    "completed_at_utc": "2026-06-18T21:15:00Z",
+    "summary": "Repaired the current Capability Picker layout, Russian labels, atlas-based fallback help, diagnostic category meanings and required core atlas planning presentation without changing selection JSON compatibility.",
     "non_breaking_fields": [
       "selected_module_ids",
       "selected_modifier_ids",
@@ -64,6 +64,11 @@
       "unsupported_yet",
       "risky",
       "info"
+    ],
+    "ux_repair_points": [
+      "normal-size WinForms layout uses top atlas/title/purpose, middle core axes, and bottom feature/help versus build/results/diagnostics split",
+      "visible options without curated help use atlas title, purpose, domain, category and contract counts as fallback help",
+      "feature_bundle/core_atlas_planning/v1 is auto-selected and presented as an obligatory technical generation base"
     ]
   },
   "allowed_next_codex_task_types": [

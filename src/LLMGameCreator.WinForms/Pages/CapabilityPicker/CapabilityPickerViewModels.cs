@@ -61,6 +61,7 @@ public sealed record CapabilityPickerFeatureBundleViewModel
     public string Purpose { get; init; } = string.Empty;
     public int ArtifactContractCount { get; init; }
     public GeneratorPlanCapabilityHelpMetadata Help { get; init; } = GeneratorPlanCapabilityHelpMetadata.Fallback(string.Empty);
+    public bool IsRequiredTechnicalBase { get; init; }
     public string DisplayName => string.IsNullOrWhiteSpace(Help.DisplayNameRu) || Help.ImplementationStatus == "metadata_missing"
         ? $"{Title} | {Id} | {Domain} | {Category} | contracts: {ArtifactContractCount} | {Purpose}"
         : $"{Help.DisplayNameRu} | {Id} | {Domain} | {Category} | contracts: {ArtifactContractCount}";
@@ -70,6 +71,7 @@ public sealed record CapabilityPickerDiagnosticRow
 {
     public string Severity { get; init; } = string.Empty;
     public string Category { get; init; } = string.Empty;
+    public string CategoryDisplayName => GeneratorPlanCapabilityHelpCatalog.MapDiagnosticCategoryDisplayName(Category);
     public string Code { get; init; } = string.Empty;
     public string Target { get; init; } = string.Empty;
     public string Message { get; init; } = string.Empty;
