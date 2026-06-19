@@ -1,3 +1,4 @@
+using System.Drawing;
 using LLMGameCreator.Application.Design;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.WinForms.Pages.CapabilityPicker;
@@ -20,6 +21,17 @@ public sealed class CapabilityPickerPresenterTests
         Assert.Contains("\u041e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0442\u0435\u0445\u043d\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0431\u0430\u0437\u0430", state.FeatureBundles[0].Help.DisplayNameRu);
         Assert.Equal("feature_bundle/core_atlas_planning/v1", Assert.Single(state.SelectedFeatureBundleIds));
         Assert.True(state.FeatureBundles[0].IsRequiredTechnicalBase);
+    }
+
+    [Fact]
+    public void PageControlCanBeConstructedBeforeLayout()
+    {
+        using var control = new LLMGameCreator.WinForms.Pages.CapabilityPickerPageControl();
+
+        control.Size = new Size(900, 600);
+        control.PerformLayout();
+
+        Assert.Equal("capability_picker", control.Id);
     }
 
     [Fact]

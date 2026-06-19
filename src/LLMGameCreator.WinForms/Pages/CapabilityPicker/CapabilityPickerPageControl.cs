@@ -8,6 +8,9 @@ namespace LLMGameCreator.WinForms.Pages;
 
 public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
 {
+    private const int SplitPanel1MinSize = 300;
+    private const int SplitPanel2MinSize = 400;
+
     private readonly GeneratorPlanCapabilitySelectionService? _selectionService;
     private readonly GeneratorPlanCapabilitySelectionArtifactService? _artifactService;
     private readonly GeneratorPlanCapabilitySelectionArtifactReader? _artifactReader;
@@ -19,6 +22,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
     private CancellationTokenSource? _currentOperationCts;
     private bool _applyingState;
     private bool _atlasLoaded;
+    private bool _splitterInitialized;
 
     private readonly TableLayoutPanel _rootLayout = new();
     private readonly TableLayoutPanel _inputLayout = new();
@@ -189,9 +193,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
     {
         _splitContainer.Dock = DockStyle.Fill;
         _splitContainer.Orientation = Orientation.Vertical;
-        _splitContainer.Panel1MinSize = 420;
-        _splitContainer.Panel2MinSize = 520;
-        _splitContainer.SplitterDistance = 500;
+        _splitContainer.SizeChanged += (_, _) => ApplySafeInitialSplitterDistance();
 
         _featureBundleList.CheckOnClick = true;
         _featureBundleList.DisplayMember = nameof(CapabilityPickerFeatureBundleViewModel.DisplayName);
@@ -217,6 +219,38 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         BuildResultLayout();
         _splitContainer.Panel1.Controls.Add(_featurePanel);
         _splitContainer.Panel2.Controls.Add(_resultLayout);
+    }
+
+    private void ApplySafeInitialSplitterDistance()
+    {
+        if (_splitterInitialized)
+        {
+            return;
+        }
+
+        var width = _splitContainer.ClientSize.Width;
+        var min = SplitPanel1MinSize;
+        var max = width - SplitPanel2MinSize;
+
+        if (width <= 0 || max < min)
+        {
+            return;
+        }
+
+        var desired = (int)(width * 0.45);
+        if (desired < min)
+        {
+            desired = min;
+        }
+        else if (desired > max)
+        {
+            desired = max;
+        }
+
+        _splitContainer.SplitterDistance = desired;
+        _splitContainer.Panel1MinSize = SplitPanel1MinSize;
+        _splitContainer.Panel2MinSize = SplitPanel2MinSize;
+        _splitterInitialized = true;
     }
 
     private void BuildResultLayout()
