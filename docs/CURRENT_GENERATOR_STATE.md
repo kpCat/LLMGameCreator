@@ -8,7 +8,7 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 M4.1 gate passed for sampled baseline contracts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, and the follow-up UX repair made the picker readable and usable at normal editor sizes.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation path. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, and Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,18 +62,24 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 001 UX Repair: Capability Picker usability after Capability Composer v2 Foundation.
-- The Capability Picker now has a less cramped top/middle/bottom layout, Russian labels for the main axes/actions, atlas-based fallback help for visible options without curated metadata, Russian diagnostic category meanings, and required handling for `feature_bundle/core_atlas_planning/v1`.
+- Product Slice 002: Composable Module Selection UI.
+- The Capability Picker now exposes selectable groups for feature bundles, modules, modifiers, constraints and runtime requirements.
+- The selected arrays round-trip through build/save/load and strict prompt context when non-empty:
+  - `selected_module_ids`;
+  - `selected_modifier_ids`;
+  - `selected_constraint_ids`;
+  - `runtime_requirement_ids`.
+- The UI keeps Russian-readable option labels first, leaves machine ids in help/details, preserves required handling for `feature_bundle/core_atlas_planning/v1`, and keeps unsupported/future composable choices as warnings or info rather than fatal errors unless a true core-axis incompatibility exists.
 - `feature_bundle/core_atlas_planning/v1` is presented as an obligatory technical generation base, not as an optional gameplay feature.
 - Strict LLM prompt context can still include selected module/modifier/constraint/runtime requirement ids when present.
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts and Product Slice 001 foundation. Broad expansion still requires an explicit next controlled slice.
+Completed for the sampled baseline contracts and Product Slice 002 composable picker wiring. Broad expansion still requires an explicit next controlled slice.
 
 ## Current user action
 
-Use the repaired Capability Picker to build/save a readable capability selection, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.
+Use the Capability Picker composable groups to build/save a richer readable capability selection, verify the prompt preview includes the selected arrays, then choose the next controlled product slice before starting M5, M6, M6-lite or runtime preview repair-loop work.
 
 ## Allowed next Codex tasks
 
@@ -102,6 +108,7 @@ Still restricted:
 ```text
 Capability Picker
   -> Capability Composer v2 foundation
+  -> Composable module selection UI
   -> LLM Artifacts
   -> LLM Evaluation
   -> Artifact Review

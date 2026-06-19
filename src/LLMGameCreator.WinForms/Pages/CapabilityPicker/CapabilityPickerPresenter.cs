@@ -57,6 +57,10 @@ public sealed class CapabilityPickerPresenter
             NpcBehaviorModels = Options(atlas.NpcBehaviorModels),
             RuntimeTargets = Options(atlas.RuntimeTargets),
             FeatureBundles = featureBundles,
+            AvailableModules = CompositionItems("module"),
+            AvailableModifiers = CompositionItems("modifier"),
+            AvailableConstraints = CompositionItems("constraint"),
+            AvailableRuntimeRequirements = CompositionItems("runtime_requirement"),
             SelectedFeatureBundleIds = SelectDefaultFeatureBundles(state.SelectedFeatureBundleIds, featureBundles),
             Diagnostics = diagnostics,
             Status = atlas.Diagnostics.Any(diagnostic => diagnostic.Severity == GeneratorPlanPreviewDiagnosticSeverity.Error)
@@ -97,6 +101,10 @@ public sealed class CapabilityPickerPresenter
             PathfindingProfileId = state.PathfindingProfileId,
             NpcBehaviorModelId = state.NpcBehaviorModelId,
             SelectedFeatureBundleIds = state.SelectedFeatureBundleIds,
+            SelectedModuleIds = state.SelectedModuleIds,
+            SelectedModifierIds = state.SelectedModifierIds,
+            SelectedConstraintIds = state.SelectedConstraintIds,
+            RuntimeRequirementIds = state.RuntimeRequirementIds,
             SelectedRuntimeTargetIds = string.IsNullOrWhiteSpace(state.RuntimeTargetId)
                 ? Array.Empty<string>()
                 : [state.RuntimeTargetId]
@@ -171,6 +179,10 @@ public sealed class CapabilityPickerPresenter
             NpcBehaviorModelId = selection.SelectedVariantIds.NpcBehaviorModelId,
             RuntimeTargetId = selection.SelectedRuntimeTargets.FirstOrDefault() ?? string.Empty,
             SelectedFeatureBundleIds = selection.SelectedFeatureBundleIds,
+            SelectedModuleIds = selection.SelectedModuleIds,
+            SelectedModifierIds = selection.SelectedModifierIds,
+            SelectedConstraintIds = selection.SelectedConstraintIds,
+            RuntimeRequirementIds = selection.RuntimeRequirementIds,
             Status = result.SelectionArtifact.ValidationState,
             Summary = $"Latest selection loaded: {selection.SelectionId}",
             SelectionJson = result.SelectionArtifact.Json,
@@ -203,6 +215,10 @@ public sealed class CapabilityPickerPresenter
             $"Status: {result.Status}",
             $"Selection id: {result.Selection.SelectionId}",
             $"Feature bundles: {result.Selection.SelectedFeatureBundleIds.Count}",
+            $"Modules: {result.Selection.SelectedModuleIds.Count}",
+            $"Modifiers: {result.Selection.SelectedModifierIds.Count}",
+            $"Constraints: {result.Selection.SelectedConstraintIds.Count}",
+            $"Runtime requirements: {result.Selection.RuntimeRequirementIds.Count}",
             $"Capabilities: {result.Selection.ResolvedCapabilityIds.Count}",
             $"Artifact contracts: {result.Selection.ResolvedArtifactContracts.Count}",
             $"Validators: {result.Selection.ResolvedValidators.Count}",
@@ -224,6 +240,45 @@ public sealed class CapabilityPickerPresenter
             })
             .OrderBy(option => option.Title, StringComparer.OrdinalIgnoreCase)
             .ThenBy(option => option.Id, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    private static IReadOnlyList<CapabilityPickerComposableItemViewModel> CompositionItems(string kind)
+    {
+        return GeneratorPlanCapabilityHelpCatalog.ListCompositionSeeds()
+            .Where(seed => string.Equals(seed.Kind, kind, StringComparison.OrdinalIgnoreCase))
+            .Select(seed =>
+            {
+                var help = GeneratorPlanCapabilityHelpCatalog.Get(seed.Id);
+                if (help.ImplementationStatus == "metadata_missing")
+                {
+                    help = new GeneratorPlanCapabilityHelpMetadata
+                    {
+                        Id = seed.Id,
+                        DisplayNameRu = seed.DisplayNameRu,
+                        DisplayNameEn = seed.DisplayNameRu,
+                        ShortDescriptionRu = seed.ShortDescriptionRu,
+                        DetailsRu = seed.ShortDescriptionRu,
+                        ExamplesRu = seed.DisplayNameRu,
+                        BestForRu = DomainFromId(seed.Id),
+                        WarningsRu = "\u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0432 capability selection \u0438 prompt context; \u043f\u043e\u043b\u043d\u0430\u044f \u0441\u0431\u043e\u0440\u043a\u0430 GamePackage \u043d\u0435 \u0432\u0445\u043e\u0434\u0438\u0442 \u0432 \u044d\u0442\u043e\u0442 slice.",
+                        ImplementationStatus = "composer_seed"
+                    };
+                }
+
+                return new CapabilityPickerComposableItemViewModel
+                {
+                    Id = seed.Id,
+                    Kind = seed.Kind,
+                    Domain = DomainFromId(seed.Id),
+                    DisplayNameRu = seed.DisplayNameRu,
+                    ShortDescriptionRu = seed.ShortDescriptionRu,
+                    Help = help
+                };
+            })
+            .OrderBy(item => item.Domain, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.DisplayNameRu, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.Id, StringComparer.OrdinalIgnoreCase)
             .ToList();
     }
 
@@ -313,6 +368,12 @@ public sealed class CapabilityPickerPresenter
     private static bool IsCoreAtlasPlanning(string id)
     {
         return string.Equals(id, CoreAtlasPlanningFeatureBundleId, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string DomainFromId(string id)
+    {
+        var parts = id.Split('/', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        return parts.Length >= 2 ? parts[1] : string.Empty;
     }
 
     private static string FirstExisting(string selectedId, IReadOnlyList<CapabilityPickerOptionViewModel> options)

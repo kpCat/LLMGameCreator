@@ -115,6 +115,39 @@ public sealed class GeneratorPlanCapabilitySelectionServiceTests
     }
 
     [Fact]
+    public async Task BuildSelectionPreservesComposableSelectionsAndKeepsHybridCombatNonFatal()
+    {
+        using var temp = new TempDirectory();
+        WriteMinimalAtlas(temp.Path);
+        var service = CreateService();
+
+        var result = await service.BuildSelectionAsync(KnownBlobRequest(temp.Path) with
+        {
+            SelectedModuleIds =
+            [
+                "module/progression/perk_tree",
+                "module/progression/skill_xp",
+                "module/economy/trading",
+                "module/future/custom"
+            ],
+            SelectedModifierIds = ["modifier/combat/hybrid_realtime_turn_toggle"],
+            SelectedConstraintIds = ["constraint/balance/no_player_rubberbanding"],
+            RuntimeRequirementIds = ["runtime_requirement/requires_party_state"]
+        }, CancellationToken.None);
+
+        Assert.True(result.Ok, string.Join(Environment.NewLine, result.Diagnostics.Select(diagnostic => diagnostic.Message)));
+        Assert.Contains("module/progression/perk_tree", result.Selection.SelectedModuleIds);
+        Assert.Contains("module/progression/skill_xp", result.Selection.SelectedModuleIds);
+        Assert.Contains("modifier/combat/hybrid_realtime_turn_toggle", result.Selection.SelectedModifierIds);
+        Assert.Contains("constraint/balance/no_player_rubberbanding", result.Selection.SelectedConstraintIds);
+        Assert.Contains("runtime_requirement/requires_party_state", result.Selection.RuntimeRequirementIds);
+        Assert.Contains(result.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityInfo && diagnostic.Target == "modifier/combat/hybrid_realtime_turn_toggle");
+        Assert.Contains(result.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityUnsupportedYet && diagnostic.Target == "module/economy/trading");
+        Assert.Contains(result.Diagnostics, diagnostic => diagnostic.Code == GeneratorPlanCapabilitySelectionDiagnosticCodes.UnknownComposableCapabilityId && diagnostic.Target == "module/future/custom");
+        Assert.DoesNotContain(result.Diagnostics, diagnostic => diagnostic.Severity == GeneratorPlanPreviewDiagnosticSeverity.Error && diagnostic.Target.Contains("progression", StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
     public async Task SaveAndReadLatestSelectionArtifact()
     {
         using var temp = new TempDirectory();

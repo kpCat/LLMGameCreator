@@ -45,7 +45,12 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
     private readonly TableLayoutPanel _featurePanel = new();
     private readonly Label _featureBundleLabel = new();
     private readonly Label _helpLabel = new();
+    private readonly TabControl _compositionTabControl = new();
     private readonly CheckedListBox _featureBundleList = new();
+    private readonly CheckedListBox _moduleList = new();
+    private readonly CheckedListBox _modifierList = new();
+    private readonly CheckedListBox _constraintList = new();
+    private readonly CheckedListBox _runtimeRequirementList = new();
     private readonly TextBox _helpTextBox = new();
     private readonly TableLayoutPanel _resultLayout = new();
     private readonly FlowLayoutPanel _actionPanel = new();
@@ -195,12 +200,14 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _splitContainer.Orientation = Orientation.Vertical;
         _splitContainer.SizeChanged += (_, _) => ApplySafeInitialSplitterDistance();
 
-        _featureBundleList.CheckOnClick = true;
-        _featureBundleList.DisplayMember = nameof(CapabilityPickerFeatureBundleViewModel.DisplayName);
-        _featureBundleList.Dock = DockStyle.Fill;
-        _featureBundleList.HorizontalScrollbar = true;
+        ConfigureCheckedList(_featureBundleList, nameof(CapabilityPickerFeatureBundleViewModel.DisplayName));
+        ConfigureCheckedList(_moduleList, nameof(CapabilityPickerComposableItemViewModel.DisplayName));
+        ConfigureCheckedList(_modifierList, nameof(CapabilityPickerComposableItemViewModel.DisplayName));
+        ConfigureCheckedList(_constraintList, nameof(CapabilityPickerComposableItemViewModel.DisplayName));
+        ConfigureCheckedList(_runtimeRequirementList, nameof(CapabilityPickerComposableItemViewModel.DisplayName));
+        BuildCompositionTabs();
         ConfigureReadOnly(_helpTextBox, true);
-        ConfigureSectionLabel(_featureBundleLabel, "\u0424\u0438\u0447\u0438 / \u043c\u043e\u0434\u0443\u043b\u0438 / \u0431\u0443\u0434\u0443\u0449\u0438\u0435 \u0438\u0434\u0435\u0438");
+        ConfigureSectionLabel(_featureBundleLabel, "\u0424\u0438\u0447\u0438 / \u043c\u043e\u0434\u0443\u043b\u0438 / \u043c\u043e\u0434\u0438\u0444\u0438\u043a\u0430\u0442\u043e\u0440\u044b / \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u0438\u044f");
         ConfigureSectionLabel(_helpLabel, "\u0421\u043f\u0440\u0430\u0432\u043a\u0430 / \u0434\u0435\u0442\u0430\u043b\u0438");
 
         _featurePanel.ColumnCount = 1;
@@ -212,7 +219,7 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _featurePanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
         _featurePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 48F));
         _featurePanel.Controls.Add(_featureBundleLabel, 0, 0);
-        _featurePanel.Controls.Add(_featureBundleList, 0, 1);
+        _featurePanel.Controls.Add(_compositionTabControl, 0, 1);
         _featurePanel.Controls.Add(_helpLabel, 0, 2);
         _featurePanel.Controls.Add(_helpTextBox, 0, 3);
 
@@ -333,6 +340,13 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _copyJsonButton.Click += (_, _) => TryCopyText(_currentViewState.SelectionJson);
         _featureBundleList.SelectedIndexChanged += (_, _) => UpdateHelpFromSelection();
         _featureBundleList.ItemCheck += FeatureBundleListItemCheck;
+        foreach (var list in new[] { _moduleList, _modifierList, _constraintList, _runtimeRequirementList })
+        {
+            list.SelectedIndexChanged += (_, _) => UpdateHelpFromSelection();
+            list.ItemCheck += (_, _) => BeginInvoke(UpdateHelpFromSelection);
+        }
+
+        _compositionTabControl.SelectedIndexChanged += (_, _) => UpdateHelpFromSelection();
         _diagnosticsGrid.SelectionChanged += (_, _) => UpdateHelpFromDiagnosticSelection();
         foreach (var comboBox in new[] { _presentationComboBox, _worldComboBox, _actorComboBox, _inventoryComboBox, _combatComboBox, _progressionComboBox, _pathfindingComboBox, _npcComboBox, _runtimeTargetComboBox })
         {
@@ -498,7 +512,11 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             SelectedFeatureBundleIds = _featureBundleList.CheckedItems
                 .OfType<CapabilityPickerFeatureBundleViewModel>()
                 .Select(bundle => bundle.Id)
-                .ToList()
+                .ToList(),
+            SelectedModuleIds = CheckedComposableIds(_moduleList),
+            SelectedModifierIds = CheckedComposableIds(_modifierList),
+            SelectedConstraintIds = CheckedComposableIds(_constraintList),
+            RuntimeRequirementIds = CheckedComposableIds(_runtimeRequirementList)
         };
     }
 
@@ -521,6 +539,10 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             SetCombo(_npcComboBox, state.NpcBehaviorModels, state.NpcBehaviorModelId);
             SetCombo(_runtimeTargetComboBox, state.RuntimeTargets, state.RuntimeTargetId);
             SetFeatureBundles(state.FeatureBundles, state.SelectedFeatureBundleIds);
+            SetComposableItems(_moduleList, state.AvailableModules, state.SelectedModuleIds);
+            SetComposableItems(_modifierList, state.AvailableModifiers, state.SelectedModifierIds);
+            SetComposableItems(_constraintList, state.AvailableConstraints, state.SelectedConstraintIds);
+            SetComposableItems(_runtimeRequirementList, state.AvailableRuntimeRequirements, state.RuntimeRequirementIds);
             _statusTextBox.Text = state.Status;
             _summaryTextBox.Text = state.Summary;
             _artifactContractsTextBox.Text = FormatList("Artifact contracts", state.ResolvedArtifactContracts);
@@ -558,6 +580,19 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         }
     }
 
+    private static void SetComposableItems(
+        CheckedListBox list,
+        IReadOnlyList<CapabilityPickerComposableItemViewModel> items,
+        IReadOnlyList<string> selectedIds)
+    {
+        var selected = selectedIds.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        list.Items.Clear();
+        foreach (var item in items)
+        {
+            list.Items.Add(item, selected.Contains(item.Id));
+        }
+    }
+
     private static void SetCombo(ComboBox comboBox, IReadOnlyList<CapabilityPickerOptionViewModel> options, string selectedId)
     {
         comboBox.DisplayMember = nameof(CapabilityPickerOptionViewModel.DisplayName);
@@ -588,6 +623,10 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _saveButton.Enabled = !busy && _currentViewState.CanSave;
         _copyJsonButton.Enabled = !busy && !string.IsNullOrWhiteSpace(_currentViewState.SelectionJson);
         _featureBundleList.Enabled = !busy;
+        _moduleList.Enabled = !busy;
+        _modifierList.Enabled = !busy;
+        _constraintList.Enabled = !busy;
+        _runtimeRequirementList.Enabled = !busy;
         _helpTextBox.Enabled = !busy;
         _presentationComboBox.Enabled = !busy;
         _worldComboBox.Enabled = !busy;
@@ -617,6 +656,10 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         _loadLatestButton.Enabled = false;
         _copyJsonButton.Enabled = false;
         _featureBundleList.Enabled = false;
+        _moduleList.Enabled = false;
+        _modifierList.Enabled = false;
+        _constraintList.Enabled = false;
+        _runtimeRequirementList.Enabled = false;
         _helpTextBox.Enabled = false;
         SetStatusMessage("Runtime services are not available.");
     }
@@ -670,6 +713,34 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
         label.Font = new Font(label.Font, FontStyle.Bold);
         label.Text = text;
         label.TextAlign = ContentAlignment.MiddleLeft;
+    }
+
+    private static void ConfigureCheckedList(CheckedListBox list, string displayMember)
+    {
+        list.CheckOnClick = true;
+        list.DisplayMember = displayMember;
+        list.Dock = DockStyle.Fill;
+        list.HorizontalScrollbar = true;
+    }
+
+    private void BuildCompositionTabs()
+    {
+        _compositionTabControl.Dock = DockStyle.Fill;
+        AddTab("\u0424\u0438\u0447\u0438", _featureBundleList);
+        AddTab("\u041c\u043e\u0434\u0443\u043b\u0438", _moduleList);
+        AddTab("\u041c\u043e\u0434\u0438\u0444\u0438\u043a\u0430\u0442\u043e\u0440\u044b", _modifierList);
+        AddTab("\u041e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u0438\u044f", _constraintList);
+        AddTab("\u0422\u0440\u0435\u0431\u043e\u0432\u0430\u043d\u0438\u044f \u0440\u0430\u043d\u0442\u0430\u0439\u043c\u0430", _runtimeRequirementList);
+    }
+
+    private void AddTab(string title, Control content)
+    {
+        var page = new TabPage(title)
+        {
+            Padding = new Padding(3)
+        };
+        page.Controls.Add(content);
+        _compositionTabControl.TabPages.Add(page);
     }
 
     private static void ConfigureReadOnly(TextBox textBox, bool multiline)
@@ -769,14 +840,44 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             }
         }
 
+        foreach (var item in _currentViewState.AvailableModules
+                     .Concat(_currentViewState.AvailableModifiers)
+                     .Concat(_currentViewState.AvailableConstraints)
+                     .Concat(_currentViewState.AvailableRuntimeRequirements))
+        {
+            if (string.Equals(item.Id, id, StringComparison.OrdinalIgnoreCase))
+            {
+                return item.Help;
+            }
+        }
+
         return GeneratorPlanCapabilityHelpCatalog.Get(id);
     }
 
     private string BuildCurrentHelpText()
     {
+        var activeList = ActiveCompositionList();
+        if (activeList?.SelectedItem is CapabilityPickerFeatureBundleViewModel activeBundle)
+        {
+            return FormatHelp(activeBundle.Help);
+        }
+
+        if (activeList?.SelectedItem is CapabilityPickerComposableItemViewModel activeItem)
+        {
+            return FormatHelp(activeItem.Help);
+        }
+
         if (_featureBundleList.SelectedItem is CapabilityPickerFeatureBundleViewModel bundle)
         {
             return FormatHelp(bundle.Help);
+        }
+
+        foreach (var list in new[] { _moduleList, _modifierList, _constraintList, _runtimeRequirementList })
+        {
+            if (list.SelectedItem is CapabilityPickerComposableItemViewModel item)
+            {
+                return FormatHelp(item.Help);
+            }
         }
 
         if (ActiveControl is ComboBox comboBox && comboBox.SelectedItem is CapabilityPickerOptionViewModel option)
@@ -792,7 +893,20 @@ public sealed class CapabilityPickerPageControl : UserControl, IEditorPage
             }
         }
 
-        return "\u0412\u044b\u0431\u0435\u0440\u0438 \u0432\u0430\u0440\u0438\u0430\u043d\u0442, feature bundle \u0438\u043b\u0438 \u0441\u0442\u0440\u043e\u043a\u0443 \u0434\u0438\u0430\u0433\u043d\u043e\u0441\u0442\u0438\u043a\u0438, \u0447\u0442\u043e\u0431\u044b \u0443\u0432\u0438\u0434\u0435\u0442\u044c \u0434\u0435\u0442\u0430\u043b\u0438.";
+        return "\u0412\u044b\u0431\u0435\u0440\u0438 \u0432\u0430\u0440\u0438\u0430\u043d\u0442, feature bundle, \u043c\u043e\u0434\u0443\u043b\u044c, \u043c\u043e\u0434\u0438\u0444\u0438\u043a\u0430\u0442\u043e\u0440, \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u0438\u0435, \u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043d\u0438\u0435 \u0440\u0430\u043d\u0442\u0430\u0439\u043c\u0430 \u0438\u043b\u0438 \u0441\u0442\u0440\u043e\u043a\u0443 \u0434\u0438\u0430\u0433\u043d\u043e\u0441\u0442\u0438\u043a\u0438, \u0447\u0442\u043e\u0431\u044b \u0443\u0432\u0438\u0434\u0435\u0442\u044c \u0434\u0435\u0442\u0430\u043b\u0438.";
+    }
+
+    private CheckedListBox? ActiveCompositionList()
+    {
+        return _compositionTabControl.SelectedTab?.Controls.OfType<CheckedListBox>().FirstOrDefault();
+    }
+
+    private static IReadOnlyList<string> CheckedComposableIds(CheckedListBox list)
+    {
+        return list.CheckedItems
+            .OfType<CapabilityPickerComposableItemViewModel>()
+            .Select(item => item.Id)
+            .ToList();
     }
 
     private static string FormatHelp(GeneratorPlanCapabilityHelpMetadata help)

@@ -17,6 +17,10 @@ public sealed record CapabilityPickerViewState
     public string NpcBehaviorModelId { get; init; } = string.Empty;
     public string RuntimeTargetId { get; init; } = string.Empty;
     public IReadOnlyList<string> SelectedFeatureBundleIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedModuleIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedModifierIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedConstraintIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> RuntimeRequirementIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<CapabilityPickerOptionViewModel> PresentationModes { get; init; } = Array.Empty<CapabilityPickerOptionViewModel>();
     public IReadOnlyList<CapabilityPickerOptionViewModel> WorldTopologies { get; init; } = Array.Empty<CapabilityPickerOptionViewModel>();
     public IReadOnlyList<CapabilityPickerOptionViewModel> ActorModels { get; init; } = Array.Empty<CapabilityPickerOptionViewModel>();
@@ -27,6 +31,10 @@ public sealed record CapabilityPickerViewState
     public IReadOnlyList<CapabilityPickerOptionViewModel> NpcBehaviorModels { get; init; } = Array.Empty<CapabilityPickerOptionViewModel>();
     public IReadOnlyList<CapabilityPickerOptionViewModel> RuntimeTargets { get; init; } = Array.Empty<CapabilityPickerOptionViewModel>();
     public IReadOnlyList<CapabilityPickerFeatureBundleViewModel> FeatureBundles { get; init; } = Array.Empty<CapabilityPickerFeatureBundleViewModel>();
+    public IReadOnlyList<CapabilityPickerComposableItemViewModel> AvailableModules { get; init; } = Array.Empty<CapabilityPickerComposableItemViewModel>();
+    public IReadOnlyList<CapabilityPickerComposableItemViewModel> AvailableModifiers { get; init; } = Array.Empty<CapabilityPickerComposableItemViewModel>();
+    public IReadOnlyList<CapabilityPickerComposableItemViewModel> AvailableConstraints { get; init; } = Array.Empty<CapabilityPickerComposableItemViewModel>();
+    public IReadOnlyList<CapabilityPickerComposableItemViewModel> AvailableRuntimeRequirements { get; init; } = Array.Empty<CapabilityPickerComposableItemViewModel>();
     public string Status { get; init; } = string.Empty;
     public string Summary { get; init; } = string.Empty;
     public string SelectionJson { get; init; } = string.Empty;
@@ -65,6 +73,19 @@ public sealed record CapabilityPickerFeatureBundleViewModel
     public string DisplayName => string.IsNullOrWhiteSpace(Help.DisplayNameRu) || Help.ImplementationStatus == "metadata_missing"
         ? $"{Title} | {Id} | {Domain} | {Category} | contracts: {ArtifactContractCount} | {Purpose}"
         : $"{Help.DisplayNameRu} | {Id} | {Domain} | {Category} | contracts: {ArtifactContractCount}";
+}
+
+public sealed record CapabilityPickerComposableItemViewModel
+{
+    public string Id { get; init; } = string.Empty;
+    public string Kind { get; init; } = string.Empty;
+    public string Domain { get; init; } = string.Empty;
+    public string DisplayNameRu { get; init; } = string.Empty;
+    public string ShortDescriptionRu { get; init; } = string.Empty;
+    public GeneratorPlanCapabilityHelpMetadata Help { get; init; } = GeneratorPlanCapabilityHelpMetadata.Fallback(string.Empty);
+    public string DisplayName => string.IsNullOrWhiteSpace(DisplayNameRu)
+        ? Id
+        : $"{DisplayNameRu} ({Domain})";
 }
 
 public sealed record CapabilityPickerDiagnosticRow

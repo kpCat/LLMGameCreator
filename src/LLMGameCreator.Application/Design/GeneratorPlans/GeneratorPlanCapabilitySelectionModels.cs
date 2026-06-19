@@ -219,6 +219,10 @@ public static class GeneratorPlanCapabilitySelectionDiagnosticCodes
     public const string MissingArtifactContract = "capability_selection.missing_artifact_contract";
     public const string MissingValidator = "capability_selection.missing_validator";
     public const string CapabilityGap = "capability_selection.capability_gap";
+    public const string UnknownComposableCapabilityId = "capability_selection.unknown_composable_capability_id";
+    public const string ComposableCapabilityUnsupportedYet = "capability_selection.composable_capability_unsupported_yet";
+    public const string ComposableCapabilityRisky = "capability_selection.composable_capability_risky";
+    public const string ComposableCapabilityInfo = "capability_selection.composable_capability_info";
     public const string Loaded = "capability_selection.loaded";
 }
 

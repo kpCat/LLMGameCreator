@@ -21,6 +21,10 @@ public sealed class CapabilityPickerPresenterTests
         Assert.Contains("\u041e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0442\u0435\u0445\u043d\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0431\u0430\u0437\u0430", state.FeatureBundles[0].Help.DisplayNameRu);
         Assert.Equal("feature_bundle/core_atlas_planning/v1", Assert.Single(state.SelectedFeatureBundleIds));
         Assert.True(state.FeatureBundles[0].IsRequiredTechnicalBase);
+        Assert.Contains(state.AvailableModules, module => module.Id == "module/progression/perk_tree");
+        Assert.Contains(state.AvailableModifiers, modifier => modifier.Id == "modifier/combat/hybrid_realtime_turn_toggle");
+        Assert.Contains(state.AvailableConstraints, constraint => constraint.Id == "constraint/balance/no_player_rubberbanding");
+        Assert.Contains(state.AvailableRuntimeRequirements, requirement => requirement.Id == "runtime_requirement/requires_party_state");
     }
 
     [Fact]
@@ -91,7 +95,11 @@ public sealed class CapabilityPickerPresenterTests
             PathfindingProfileId = "pathfinding/first_person_grid_movement",
             NpcBehaviorModelId = "npc_behavior/static",
             RuntimeTargetId = "headless",
-            SelectedFeatureBundleIds = ["feature_bundle/core_atlas_planning/v1"]
+            SelectedFeatureBundleIds = ["feature_bundle/core_atlas_planning/v1"],
+            SelectedModuleIds = ["module/progression/perk_tree", "module/progression/skill_xp"],
+            SelectedModifierIds = ["modifier/combat/hybrid_realtime_turn_toggle"],
+            SelectedConstraintIds = ["constraint/balance/no_player_rubberbanding"],
+            RuntimeRequirementIds = ["runtime_requirement/requires_party_state"]
         };
 
         var request = presenter.BuildRequest(state);
@@ -99,6 +107,10 @@ public sealed class CapabilityPickerPresenterTests
         Assert.Equal("Test", request.Title);
         Assert.Equal("headless", Assert.Single(request.SelectedRuntimeTargetIds));
         Assert.Equal("feature_bundle/core_atlas_planning/v1", Assert.Single(request.SelectedFeatureBundleIds));
+        Assert.Equal(new[] { "module/progression/perk_tree", "module/progression/skill_xp" }, request.SelectedModuleIds);
+        Assert.Equal("modifier/combat/hybrid_realtime_turn_toggle", Assert.Single(request.SelectedModifierIds));
+        Assert.Equal("constraint/balance/no_player_rubberbanding", Assert.Single(request.SelectedConstraintIds));
+        Assert.Equal("runtime_requirement/requires_party_state", Assert.Single(request.RuntimeRequirementIds));
     }
 
     [Fact]
@@ -110,6 +122,10 @@ public sealed class CapabilityPickerPresenterTests
         Assert.Equal("Loaded", state.Title);
         Assert.Equal("presentation_mode/first_person_grid_2d_textures", state.PresentationModeId);
         Assert.Equal("feature_bundle/core_atlas_planning/v1", Assert.Single(state.SelectedFeatureBundleIds));
+        Assert.Equal("module/progression/perk_tree", Assert.Single(state.SelectedModuleIds));
+        Assert.Equal("modifier/combat/hybrid_realtime_turn_toggle", Assert.Single(state.SelectedModifierIds));
+        Assert.Equal("constraint/balance/no_player_rubberbanding", Assert.Single(state.SelectedConstraintIds));
+        Assert.Equal("runtime_requirement/requires_party_state", Assert.Single(state.RuntimeRequirementIds));
         Assert.Contains("latest", state.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -205,6 +221,10 @@ public sealed class CapabilityPickerPresenterTests
                 NpcBehaviorModelId = "npc_behavior/static"
             },
             SelectedFeatureBundleIds = ["feature_bundle/core_atlas_planning/v1"],
+            SelectedModuleIds = ["module/progression/perk_tree"],
+            SelectedModifierIds = ["modifier/combat/hybrid_realtime_turn_toggle"],
+            SelectedConstraintIds = ["constraint/balance/no_player_rubberbanding"],
+            RuntimeRequirementIds = ["runtime_requirement/requires_party_state"],
             SelectedRuntimeTargets = ["headless"]
         };
     }

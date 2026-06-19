@@ -44,6 +44,7 @@ public sealed class GeneratorPlanCapabilitySelectionService
 
         ResolveRuntimeTargets(request, atlas, diagnostics, accumulator);
         ResolveFeatureBundles(request.SelectedFeatureBundleIds, atlas, diagnostics, accumulator);
+        ValidateComposableSelections(request, diagnostics);
         ResolveCapabilities(atlas, diagnostics, accumulator);
         ValidateKnownArtifactContracts(atlas, diagnostics, accumulator);
         AddMissingValidatorWarnings(atlas, diagnostics, accumulator);
@@ -249,6 +250,85 @@ public sealed class GeneratorPlanCapabilitySelectionService
                     bundle.Id));
             }
         }
+    }
+
+    private static void ValidateComposableSelections(
+        GeneratorPlanCapabilitySelectionRequest request,
+        List<GeneratorPlanCapabilitySelectionDiagnostic> diagnostics)
+    {
+        var seedById = GeneratorPlanCapabilityHelpCatalog.ListCompositionSeeds()
+            .ToDictionary(seed => seed.Id, StringComparer.OrdinalIgnoreCase);
+
+        ValidateComposableGroup(request.SelectedModuleIds, "module", seedById, diagnostics);
+        ValidateComposableGroup(request.SelectedModifierIds, "modifier", seedById, diagnostics);
+        ValidateComposableGroup(request.SelectedConstraintIds, "constraint", seedById, diagnostics);
+        ValidateComposableGroup(request.RuntimeRequirementIds, "runtime_requirement", seedById, diagnostics);
+    }
+
+    private static void ValidateComposableGroup(
+        IReadOnlyList<string> selectedIds,
+        string expectedKind,
+        IReadOnlyDictionary<string, GeneratorPlanCapabilityCompositionSeed> seedById,
+        List<GeneratorPlanCapabilitySelectionDiagnostic> diagnostics)
+    {
+        foreach (var id in NormalizeMany(selectedIds))
+        {
+            if (!seedById.TryGetValue(id, out var seed) ||
+                !string.Equals(seed.Kind, expectedKind, StringComparison.OrdinalIgnoreCase))
+            {
+                diagnostics.Add(Diagnostic(
+                    GeneratorPlanPreviewDiagnosticSeverity.Warning,
+                    GeneratorPlanCapabilitySelectionDiagnosticCodes.UnknownComposableCapabilityId,
+                    $"Composable selection '{id}' is not in the current seed catalog. It is preserved for prompt context but not implemented yet.",
+                    id));
+                continue;
+            }
+
+            if (IsUnsupportedYetComposable(id))
+            {
+                diagnostics.Add(Diagnostic(
+                    GeneratorPlanPreviewDiagnosticSeverity.Warning,
+                    GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityUnsupportedYet,
+                    $"Composable selection '{id}' is valid design intent, but full contracts/runtime/package assembly are not implemented in this slice.",
+                    id));
+            }
+            else if (IsRiskyComposable(id))
+            {
+                diagnostics.Add(Diagnostic(
+                    GeneratorPlanPreviewDiagnosticSeverity.Warning,
+                    GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityRisky,
+                    $"Composable selection '{id}' is allowed, but it needs careful balance or compatibility validation later.",
+                    id));
+            }
+            else if (IsInformationalComposable(id))
+            {
+                diagnostics.Add(Diagnostic(
+                    GeneratorPlanPreviewDiagnosticSeverity.Info,
+                    GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityInfo,
+                    $"Composable selection '{id}' is allowed as a design mode for this capability selection.",
+                    id));
+            }
+        }
+    }
+
+    private static bool IsUnsupportedYetComposable(string id)
+    {
+        return id.StartsWith("module/economy/", StringComparison.OrdinalIgnoreCase) ||
+               id.StartsWith("module/balance/", StringComparison.OrdinalIgnoreCase) ||
+               SameId(id, "module/world/chunk_generation") ||
+               SameId(id, "runtime_requirement/requires_chunk_streaming") ||
+               SameId(id, "runtime_requirement/requires_trade_market_state");
+    }
+
+    private static bool IsRiskyComposable(string id)
+    {
+        return SameId(id, "constraint/balance/no_player_rubberbanding") ||
+               SameId(id, "constraint/economy/no_infinite_money_loops");
+    }
+
+    private static bool IsInformationalComposable(string id)
+    {
+        return SameId(id, "modifier/combat/hybrid_realtime_turn_toggle");
     }
 
     private static void ResolveCapabilities(

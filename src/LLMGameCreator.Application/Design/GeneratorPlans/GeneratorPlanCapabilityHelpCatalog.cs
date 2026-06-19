@@ -31,7 +31,11 @@ public static class GeneratorPlanCapabilityHelpCatalog
             GeneratorPlanCapabilitySelectionDiagnosticCodes.MissingArtifactContract => GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet,
             GeneratorPlanCapabilitySelectionDiagnosticCodes.CapabilityGap => GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet,
             GeneratorPlanCapabilitySelectionDiagnosticCodes.MissingValidator => GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet,
+            GeneratorPlanCapabilitySelectionDiagnosticCodes.UnknownComposableCapabilityId => GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet,
+            GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityUnsupportedYet => GeneratorPlanCapabilitySelectionDiagnosticCategories.UnsupportedYet,
             GeneratorPlanCapabilitySelectionDiagnosticCodes.VariantNotRecommended => GeneratorPlanCapabilitySelectionDiagnosticCategories.Risky,
+            GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityRisky => GeneratorPlanCapabilitySelectionDiagnosticCategories.Risky,
+            GeneratorPlanCapabilitySelectionDiagnosticCodes.ComposableCapabilityInfo => GeneratorPlanCapabilitySelectionDiagnosticCategories.Info,
             GeneratorPlanCapabilitySelectionDiagnosticCodes.Loaded => GeneratorPlanCapabilitySelectionDiagnosticCategories.Info,
             _ => GeneratorPlanCapabilitySelectionDiagnosticCategories.Info
         };
@@ -135,7 +139,18 @@ public static class GeneratorPlanCapabilityHelpCatalog
             Seed("module/economy/price_policy", "module", "Политика цен", "Факторы цены: регион, редкость, фракции, спрос."),
             Seed("module/economy/supply_demand", "module", "Спрос и предложение", "Динамика доступности и стоимости."),
             Seed("module/balance/power_budget", "module", "Power budget", "Бюджеты силы предметов, врагов и наград."),
-            Seed("module/balance/encounter_tiers", "module", "Тиры encounter", "Уровни опасности встреч.")
+            Seed("module/balance/encounter_tiers", "module", "Тиры encounter", "Уровни опасности встреч."),
+            Seed("constraint/balance/no_player_rubberbanding", "constraint", "Без прямой подстройки мира под игрока", "Мир балансируется через зоны, фракции, редкость и прогрессию, а не скрытую подгонку всего под героя."),
+            Seed("constraint/world/safe_start_region_required", "constraint", "Безопасный стартовый регион", "Стартовая область должна давать понятный вход, базовые ресурсы и выходы без смертельной ловушки."),
+            Seed("constraint/economy/no_infinite_money_loops", "constraint", "Без бесконечных денежных циклов", "Экономические правила не должны создавать очевидную бесконечную прибыль без риска или расхода."),
+            Seed("constraint/combat/enemy_counterplay_required", "constraint", "У врагов должна быть контригра", "Каждая опасная угроза должна иметь понятный ответ игрока или подготовку."),
+            Seed("runtime_requirement/requires_region_graph", "runtime_requirement", "Нужен граф регионов", "Runtime должен уметь хранить регионы и переходы между ними."),
+            Seed("runtime_requirement/requires_chunk_streaming", "runtime_requirement", "Нужен chunk streaming", "Runtime должен поддерживать подгрузку или генерацию больших областей частями."),
+            Seed("runtime_requirement/requires_day_night_cycle", "runtime_requirement", "Нужен цикл день/ночь", "Runtime должен хранить и обновлять время суток."),
+            Seed("runtime_requirement/requires_weather_state", "runtime_requirement", "Нужно состояние погоды", "Runtime должен хранить погоду и её влияние на события."),
+            Seed("runtime_requirement/requires_trade_market_state", "runtime_requirement", "Нужно состояние рынков", "Runtime должен хранить цены, доступность товаров и торговые изменения."),
+            Seed("runtime_requirement/requires_turn_toggle", "runtime_requirement", "Нужно переключение realtime/turns", "Runtime должен поддерживать гибридный режим боя."),
+            Seed("runtime_requirement/requires_party_state", "runtime_requirement", "Нужно состояние партии", "Runtime должен хранить состав, роли и развитие героев.")
         ];
     }
 
