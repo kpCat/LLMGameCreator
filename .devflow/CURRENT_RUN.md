@@ -106,3 +106,60 @@ Checks run:
 
 Manual verification:
 - Not run interactively in this note. Required manual UI workflow remains: start WinForms, open project, produce/stage strict baseline artifacts, Artifact Review -> Load latest -> Approve all valid -> Apply selected decisions -> Apply approved to package -> inspect `.llmgc/package-assembly/package.json` and report/status text.
+
+## Repair note: PRODUCT_SLICE_003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY_UI_REPAIR
+
+Goal: stabilize Artifact Review package assembly UI flow after Product Slice 003.
+
+Source docs read:
+- AGENTS.md
+- docs/CONTEXT_INDEX.md
+- docs/CURRENT_GENERATOR_STATE.md
+- docs/ROADMAP_TO_FULL_GENERATOR.md
+- docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
+- docs/WINFORMS_DESIGNER_RULES.md
+- src/LLMGameCreator.WinForms/LLMGameCreator.WinForms.csproj
+- tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj
+
+Source files read:
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPresenter.cs
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewViewModels.cs
+- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerPageControl.cs
+- tests/LLMGameCreator.Tests/WinForms/ArtifactReviewPresenterTests.cs
+- tests/LLMGameCreator.Tests/WinForms/CapabilityPickerPresenterTests.cs
+- tests/LLMGameCreator.Tests/Design/GeneratorPlanDraftArtifactReviewServiceTests.cs
+
+Existing patterns inspected:
+- CapabilityPickerPageControl delays SplitterDistance until SizeChanged, guards max < min and avoids Math.Clamp when bounds are invalid.
+- ArtifactReviewPresenter marks changed decisions in view state and builds the same decision request used by Apply selected decisions.
+- GeneratorPlanDraftArtifactReviewService.ApplyDecisionsToLatestAsync is the persisted approved-artifact-set update path.
+
+Files changed:
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
+- tests/LLMGameCreator.Tests/WinForms/ArtifactReviewPresenterTests.cs
+- .devflow/CURRENT_RUN.md
+
+Implemented:
+- Removed hard early Artifact Review SplitterDistance = 690.
+- Delayed Artifact Review SplitterDistance and SplitContainer min sizes until SizeChanged has a valid width; if max < min, no splitter/min-size mutation is attempted.
+- Renamed the package action button to `Save decisions + apply`.
+- `Save decisions + apply` now persists changed review decisions through the same review-service path before assembling from the latest approved artifact set.
+- If automatic decision persistence returns validation errors, package assembly is blocked until diagnostics are reviewed.
+- Enabled the package action when either persisted approved items exist or unsaved changed decisions exist, so Approve all valid pending -> Save decisions + apply is safe.
+- Added focused tests for Artifact Review control construction at invalid startup width and approve-all decision request generation.
+
+Non-goals preserved:
+- No GamePackage assembly mapping changes.
+- No provider/LLM calls.
+- No Lua, runtime, generator-library, solution, project or devflow script changes.
+
+Checks run so far:
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~ArtifactReview": passed. 14 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Artifact": passed. 140 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package": passed. 88 passed, 0 failed.
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 462 passed, 0 failed. Run directory: .devflow\runs\20260619_154830-check-all.
+
+Manual verification:
+- Not run interactively in this note. Expected manual UI workflow is now: start WinForms -> Artifact Review -> Load latest staging -> Approve all valid pending -> Save decisions + apply -> inspect status/export. A separate Apply selected decisions click is no longer required for this path.

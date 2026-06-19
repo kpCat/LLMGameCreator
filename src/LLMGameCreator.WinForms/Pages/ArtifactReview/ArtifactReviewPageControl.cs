@@ -8,6 +8,8 @@ namespace LLMGameCreator.WinForms.Pages;
 public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
 {
     private const string ExampleFilter = "Generator plan example (*.example.json)|*.example.json|JSON files (*.json)|*.json|All files (*.*)|*.*";
+    private const int SplitPanel1MinSize = 300;
+    private const int SplitPanel2MinSize = 360;
 
     private readonly GeneratorPlanDraftArtifactReviewService? _reviewService;
     private readonly GeneratorPlanGamePackageAssemblyService? _assemblyService;
@@ -19,6 +21,7 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
     private CancellationTokenSource? _currentOperationCts;
     private ArtifactReviewViewState _currentViewState = new() { Exists = false, Message = "No review snapshot loaded." };
     private bool _updatingGrid;
+    private bool _splitterInitialized;
 
     private readonly TableLayoutPanel _rootLayout = new();
     private readonly TableLayoutPanel _actionsLayout = new();
@@ -155,7 +158,7 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         ConfigureButton(_rejectSelectedButton, "Reject selected");
         ConfigureButton(_repairSelectedButton, "Request repair selected");
         ConfigureButton(_browseAssemblyExportFolderButton, "Browse...");
-        ConfigureButton(_applyApprovedToPackageButton, "Apply approved to package");
+        ConfigureButton(_applyApprovedToPackageButton, "Save decisions + apply");
         ConfigureTextBox(_assemblyExportFolderTextBox, false);
 
         _filterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -219,13 +222,45 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
     {
         _splitContainer.Dock = DockStyle.Fill;
         _splitContainer.Orientation = Orientation.Vertical;
-        _splitContainer.SplitterDistance = 690;
+        _splitContainer.SizeChanged += (_, _) => ApplySafeInitialSplitterDistance();
 
         BuildArtifactGrid();
         BuildDetailLayout();
 
         _splitContainer.Panel1.Controls.Add(_artifactGrid);
         _splitContainer.Panel2.Controls.Add(_detailLayout);
+    }
+
+    private void ApplySafeInitialSplitterDistance()
+    {
+        if (_splitterInitialized)
+        {
+            return;
+        }
+
+        var width = _splitContainer.ClientSize.Width;
+        var min = SplitPanel1MinSize;
+        var max = width - SplitPanel2MinSize;
+
+        if (width <= 0 || max < min)
+        {
+            return;
+        }
+
+        var desired = (int)(width * 0.58);
+        if (desired < min)
+        {
+            desired = min;
+        }
+        else if (desired > max)
+        {
+            desired = max;
+        }
+
+        _splitContainer.SplitterDistance = desired;
+        _splitContainer.Panel1MinSize = SplitPanel1MinSize;
+        _splitContainer.Panel2MinSize = SplitPanel2MinSize;
+        _splitterInitialized = true;
     }
 
     private void BuildArtifactGrid()
@@ -425,6 +460,12 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
             return;
         }
 
+        if (_reviewService == null)
+        {
+            SetStatusMessage("Artifact review service is not available.");
+            return;
+        }
+
         var exportFolder = string.IsNullOrWhiteSpace(_assemblyExportFolderTextBox.Text)
             ? ResolveAssemblyExportFolder()
             : _assemblyExportFolderTextBox.Text.Trim();
@@ -433,6 +474,7 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         await RunBusyAsync(async cancellationToken =>
         {
             await InitializeDatabaseAsync(cancellationToken).ConfigureAwait(true);
+            var persistedUnsavedDecisions = await PersistChangedDecisionsIfNeededAsync(cancellationToken).ConfigureAwait(true);
             var result = await _assemblyService.AssembleFromLatestApprovedArtifactSetAsync(new GeneratorPlanGamePackageAssemblyRequest
             {
                 ExportPackageJson = true,
@@ -458,12 +500,42 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
                 $"Package JSON: {packageJsonPath}",
                 $"Diagnostics: {result.Diagnostics.Count}"
             });
-            _statusTextBox.Text = result.Ok ? "Approved artifacts applied to draft package." : "Package assembly completed with errors.";
+            if (result.Ok)
+            {
+                _statusTextBox.Text = persistedUnsavedDecisions
+                    ? "\u0418\u0437\u043c\u0435\u043d\u0435\u043d\u043d\u044b\u0435 \u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u044b; approved artifacts applied to draft package."
+                    : "Approved artifacts applied to draft package.";
+            }
+            else
+            {
+                _statusTextBox.Text = persistedUnsavedDecisions
+                    ? "\u0418\u0437\u043c\u0435\u043d\u0435\u043d\u043d\u044b\u0435 \u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u044b; package assembly completed with errors."
+                    : "Package assembly completed with errors.";
+            }
             _countsTextBox.Text = reportText;
             _validationIssuesTextBox.Text = string.IsNullOrWhiteSpace(result.MarkdownReport)
                 ? reportText
                 : result.MarkdownReport;
         }).ConfigureAwait(true);
+    }
+
+    private async Task<bool> PersistChangedDecisionsIfNeededAsync(CancellationToken cancellationToken)
+    {
+        UpdateSelectedDecisionText();
+        var request = _presenter.BuildDecisionRequest(_currentViewState);
+        if (request.Decisions.Count == 0)
+        {
+            return false;
+        }
+
+        var decisionResult = await _reviewService!.ApplyDecisionsToLatestAsync(request, cancellationToken).ConfigureAwait(true);
+        ApplyViewState(_presenter.FromDecisionResult(decisionResult, CurrentFilter()));
+        if (!decisionResult.Ok)
+        {
+            throw new InvalidOperationException("\u0418\u0437\u043c\u0435\u043d\u0435\u043d\u043d\u044b\u0435 \u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u044b \u0441 \u043e\u0448\u0438\u0431\u043a\u0430\u043c\u0438; \u043f\u0440\u043e\u0432\u0435\u0440\u044c diagnostics \u043f\u0435\u0440\u0435\u0434 package assembly.");
+        }
+
+        return true;
     }
 
     private void ApplyApproveAllValidPending()
@@ -661,7 +733,7 @@ public sealed class ArtifactReviewPageControl : UserControl, IEditorPage
         _rejectSelectedButton.Enabled = !busy && hasSelection && hasRows;
         _repairSelectedButton.Enabled = !busy && hasSelection && hasRows;
         _browseAssemblyExportFolderButton.Enabled = !busy;
-        _applyApprovedToPackageButton.Enabled = !busy && _currentViewState.ApprovedCount > 0;
+        _applyApprovedToPackageButton.Enabled = !busy && (_currentViewState.ApprovedCount > 0 || _currentViewState.Rows.Any(row => row.IsChanged));
         _copyJsonButton.Enabled = !busy && !string.IsNullOrWhiteSpace(_artifactJsonTextBox.Text);
     }
 

@@ -1,5 +1,6 @@
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.WinForms.Pages.ArtifactReview;
+using System.Drawing;
 using Xunit;
 
 namespace LLMGameCreator.Tests.WinForms;
@@ -49,6 +50,34 @@ public sealed class ArtifactReviewPresenterTests
     }
 
     [Fact]
+    public void PageControlCanBeConstructedBeforeValidSplitterWidth()
+    {
+        using var control = new LLMGameCreator.WinForms.Pages.ArtifactReviewPageControl();
+
+        control.Size = new Size(260, 480);
+        control.PerformLayout();
+        control.OnActivated();
+
+        Assert.Equal("artifact_review", control.Id);
+    }
+
+    [Fact]
+    public void PresenterBuildsApproveAllDecisionRequestForPendingRows()
+    {
+        var presenter = new ArtifactReviewPresenter();
+        var state = presenter.FromLoadResult(LoadResultWithValidPending());
+
+        state = presenter.ApproveAllValidPending(state, "bulk_approved", "Valid pending artifacts.");
+        var request = presenter.BuildDecisionRequest(state);
+
+        var decision = Assert.Single(request.Decisions);
+        Assert.Equal("artifact/pending-valid", decision.ArtifactId);
+        Assert.Equal(GeneratorPlanDraftArtifactApprovalDecisionKind.Approved, decision.Decision);
+        Assert.Equal("bulk_approved", decision.ReasonCode);
+        Assert.Equal("Valid pending artifacts.", decision.Comment);
+    }
+
+    [Fact]
     public void PresenterShowsMissingSnapshotMessage()
     {
         var state = new ArtifactReviewPresenter().FromLoadResult(new GeneratorPlanDraftArtifactReviewLoadResult());
@@ -82,6 +111,26 @@ public sealed class ArtifactReviewPresenterTests
                 Item("artifact/approved") with { State = GeneratorPlanDraftArtifactApprovalItemState.Approved },
                 Item("artifact/repair") with { State = GeneratorPlanDraftArtifactApprovalItemState.RepairRequested, DecisionReasonCode = "repair" }
             ]
+        };
+        snapshot = new GeneratorPlanDraftArtifactApprovalValidator().Validate(snapshot);
+
+        return new GeneratorPlanDraftArtifactReviewLoadResult
+        {
+            Exists = true,
+            Message = "loaded",
+            Snapshot = snapshot
+        };
+    }
+
+    private static GeneratorPlanDraftArtifactReviewLoadResult LoadResultWithValidPending()
+    {
+        var snapshot = new GeneratorPlanDraftArtifactStagingSnapshot
+        {
+            Id = "snapshot/valid-pending",
+            SourceProductionBatchId = "batch/test",
+            SourcePreviewExampleId = "example/test/v1",
+            SourcePath = "plan.example.json",
+            Items = [Item("artifact/pending-valid")]
         };
         snapshot = new GeneratorPlanDraftArtifactApprovalValidator().Validate(snapshot);
 
