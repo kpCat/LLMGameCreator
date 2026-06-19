@@ -8,7 +8,7 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 M4.1 gate passed for sampled baseline contracts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path for the sampled baseline strict contracts. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context, Product Slice 003 lets approved baseline artifacts assemble an inspectable draft GamePackage, and Product Slice 004 adds headless smoke automation for baseline artifact package assembly.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path for the sampled baseline strict contracts. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context, Product Slice 003 lets approved baseline artifacts assemble an inspectable draft GamePackage, Product Slice 004 adds headless smoke automation for baseline artifact package assembly, and Product Slice 005 makes assembled generated content visible in Runtime Preview through a read-only projection with headless runtime-preview smoke coverage.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,24 +62,26 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 004: Headless Product Smoke Runner.
-- Headless product smoke now verifies the baseline approved-artifact package assembly/export path without UI clicks.
-- The smoke scenario `baseline-strict-package-assembly` uses deterministic fixture approved artifacts for all four sampled M4.1 baseline contracts:
+- Product Slice 005: Generated Package Runtime Preview.
+- Runtime Preview now shows a generated content summary for assembled packages without changing `DefaultGameRuntime` into a new engine.
+- The read-only projection resolves package title/description, current map, current generated scene, generated profile, quests, mechanics, applied artifact provenance and warnings from `GamePackageDefinition` plus current runtime state.
+- Runtime Preview appends generated scene/quest/mechanic summary messages on start and keeps movement/interact behavior on the existing map runtime path.
+- The smoke scenario `generated-package-runtime-preview` uses deterministic fixture approved artifacts for all four sampled M4.1 baseline contracts:
   - `game_profile_v1`;
   - `scene_pack_v1`;
   - `quest_pack_v1`;
   - `mechanics_pack_v1`.
-- The smoke runner exports `package.json`, asserts populated manifest/generatedContent profile/scenes/quests/mechanics, checks applied artifact provenance/content hashes for all four baseline contracts and writes a small run report under `.devflow/runs/<timestamp>-product-smoke/`.
-- Product Slice 004 adds headless smoke automation for baseline artifact package assembly. Manual checking remains needed only for UI-specific changes and major new runtime gates.
-- The smoke path does not call LLM/provider APIs, LM Studio, Lua, runtime preview, WinForms UI automation or generator-library execution.
+- The smoke runner exports `package.json`, starts `DefaultGameRuntime`, verifies the generated preview projection is populated, checks applied artifact provenance and confirms a simple movement command still succeeds.
+- Product Slice 005 adds headless smoke automation for generated package Runtime Preview. Manual checking remains useful only for UI layout/readability and keyboard focus.
+- The smoke path does not call LLM/provider APIs, LM Studio, Lua, WinForms UI automation or generator-library execution.
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts and Product Slice 004 headless baseline package assembly smoke. Broad expansion still requires an explicit next controlled slice.
+Completed for the sampled baseline contracts, Product Slice 004 headless baseline package assembly smoke and Product Slice 005 generated package Runtime Preview smoke. Broad expansion still requires an explicit next controlled slice.
 
 ## Current user action
 
-Use the headless product smoke for non-UI baseline package assembly checks, keep manual UI checks for UI-specific behavior only, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.
+Use the headless product smoke scenarios for baseline package assembly and generated package Runtime Preview checks, keep manual UI checks for UI-specific behavior only, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.
 
 ## Allowed next Codex tasks
 

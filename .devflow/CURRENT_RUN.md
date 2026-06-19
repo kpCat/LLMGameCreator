@@ -1,8 +1,8 @@
 # CURRENT_RUN.md
 
-Task id: PRODUCT_SLICE_004_HEADLESS_PRODUCT_SMOKE_RUNNER
-Goal: automate the baseline strict approved-artifact package assembly/export flow through a headless product smoke runner
-Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/004_HEADLESS_PRODUCT_SMOKE_RUNNER.md
+Task id: PRODUCT_SLICE_005_GENERATED_PACKAGE_RUNTIME_PREVIEW
+Goal: make assembled generated package content visible in Runtime Preview and cover it with headless runtime-preview smoke
+Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/005_GENERATED_PACKAGE_RUNTIME_PREVIEW.md
 
 Source docs read:
 - AGENTS.md
@@ -10,37 +10,49 @@ Source docs read:
 - docs/CURRENT_GENERATOR_STATE.md
 - docs/CURRENT_GENERATOR_STATE.json
 - docs/ROADMAP_TO_FULL_GENERATOR.md
-- docs/M4_1_REAL_EVALUATION_GATE_REPORT.md
-- docs/PRODUCT_SLICE_003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY.md
-- docs/PRODUCT_SLICE_004_HEADLESS_PRODUCT_SMOKE_RUNNER.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/004_CODEX_PROMPT.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/004_HEADLESS_PRODUCT_SMOKE_RUNNER.md
+- docs/RUNTIME_MODEL.md
+- docs/WINFORMS_DESIGNER_RULES.md
 - docs/PRODUCT_SMOKE_SCENARIOS.md
+- docs/PRODUCT_SLICE_005_GENERATED_PACKAGE_RUNTIME_PREVIEW.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/005_CODEX_PROMPT.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/005_GENERATED_PACKAGE_RUNTIME_PREVIEW.md
+- src/LLMGameCreator.WinForms/LLMGameCreator.WinForms.csproj
+- src/LLMGameCreator.Runtime/LLMGameCreator.Runtime.csproj
 - tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj
 
 Source files read:
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyService.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyValidator.cs
+- src/LLMGameCreator.WinForms/Pages/RuntimePreview/RuntimePreviewPageControl.cs
+- src/LLMGameCreator.WinForms/Pages/RuntimePreview/RuntimePreviewPageControl.Designer.cs
+- src/LLMGameCreator.WinForms/Pages/RuntimePreview/RuntimeMapCanvas.cs
+- src/LLMGameCreator.Runtime/DefaultGameRuntime.cs
+- src/LLMGameCreator.Runtime.Abstractions/RuntimeContracts.cs
 - src/LLMGameCreator.GamePackage/GamePackageDefinition.cs
-- src/LLMGameCreator.Infrastructure/Storage/JsonGamePackageRepository.cs
+- src/LLMGameCreator.WinForms/CompositionRoot.cs
+- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerPageControl.cs
+- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyService.cs
+- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyModels.cs
+- tests/LLMGameCreator.Tests/ProductSmoke/BaselineStrictArtifactsPackageAssemblySmokeTests.cs
 - tests/LLMGameCreator.Tests/Design/GeneratorPlanGamePackageAssemblyPipelineTests.cs
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanPackageExportRunTests.cs
+- tests/LLMGameCreator.Tests/RuntimeUnifiedBridgeTests.cs
 - tests/LLMGameCreator.Tests/Docs/CurrentGeneratorStateDocsTests.cs
-- .devflow/scripts/_common.ps1
-- .devflow/scripts/check-all.ps1
-- .devflow/scripts/check-devflow-state.ps1
-- .devflow/scripts/README.md
+- .devflow/scripts/run-product-smoke.ps1
 
 Existing patterns inspected:
-- `GeneratorPlanGamePackageAssemblyService` is the application seam for approved artifact set -> draft package assembly -> optional package export.
-- `GeneratorPlanGamePackageAssembler` already maps `game_profile_v1`, `scene_pack_v1`, `quest_pack_v1` and `mechanics_pack_v1` into baseline package/generatedContent/provenance.
-- `JsonGamePackageRepository.SaveAsync` is the existing package JSON export convention.
-- `.devflow/scripts/check-all.ps1` and `_common.ps1` provide the run-directory, UTF-8 environment and logged-command script pattern.
-- Existing package assembly/export tests use temporary folders and focused xUnit assertions rather than UI automation or provider calls.
+- `DefaultGameRuntime` remains the existing map runtime path and returns `CommandResult` events without generated-content responsibility.
+- `RuntimePreviewPageControl` is the existing WinForms page seam for start/command/log/canvas behavior.
+- `GamePackageDefinition.GeneratedContent` already stores profile, scenes, quests, mechanics and applied artifact provenance.
+- `BaselineStrictArtifactsPackageAssemblySmokeTests` provides deterministic approved-artifact fixtures for the four sampled strict contracts.
+- `CapabilityPickerPageControl` and `ArtifactReviewPageControl` provide the safe `SplitContainer.SizeChanged` initialization pattern.
+- `CompositionRoot` uses singleton service registration and `RegisterDelegate` page construction.
 
 Files changed:
-- tests/LLMGameCreator.Tests/ProductSmoke/BaselineStrictArtifactsPackageAssemblySmokeTests.cs
+- src/LLMGameCreator.Application/RuntimePreview/GeneratedPackageRuntimePreviewService.cs
+- src/LLMGameCreator.WinForms/Pages/RuntimePreview/RuntimePreviewPageControl.cs
+- src/LLMGameCreator.WinForms/Pages/RuntimePreview/RuntimePreviewPageControl.Designer.cs
+- src/LLMGameCreator.WinForms/CompositionRoot.cs
+- tests/LLMGameCreator.Tests/ProductSmoke/GeneratedPackageRuntimePreviewSmokeTests.cs
 - .devflow/scripts/run-product-smoke.ps1
 - docs/PRODUCT_SMOKE_SCENARIOS.md
 - docs/CURRENT_GENERATOR_STATE.md
@@ -48,34 +60,44 @@ Files changed:
 - .devflow/CURRENT_RUN.md
 
 Implemented:
-- Added deterministic ProductSmoke approved artifact fixture for all four M4.1 baseline contracts: `game_profile_v1`, `scene_pack_v1`, `quest_pack_v1`, `mechanics_pack_v1`.
-- Added focused headless smoke tests that run real package assembly/export through `GeneratorPlanGamePackageAssemblyService` and `JsonGamePackageRepository`.
-- The smoke asserts exported `package.json`, populated manifest/profile/scenes/quests/mechanics, all four applied artifact provenance records, content hashes and no package-blocking diagnostics.
-- Added `.devflow/scripts/run-product-smoke.ps1` for the scenario `baseline-strict-package-assembly`.
-- The script writes `.devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md`, `product-smoke-summary.json`, `test-results/` and `package-output/package.json`.
-- Added `docs/PRODUCT_SMOKE_SCENARIOS.md`.
-- Updated current generator state handoff to Product Slice 004 while keeping `current_phase = m4_1_real_model_evaluation_gate` and `last_completed_milestone = M4.1`.
+- Added `GeneratedPackageRuntimePreviewService`, a read-only projection from `GamePackageDefinition` plus optional `GameState`.
+- Projection exposes package title/description, current map, current generated scene, generated profile, quests, mechanics, applied provenance and warnings.
+- Runtime Preview now has right-side tabs for `Log` and `Generated Content`.
+- Runtime Preview refreshes generated content after Start and player commands.
+- Runtime Preview appends start-summary messages for scene, scene description, quest count and mechanic count.
+- Runtime Preview split initialization now follows the safe SizeChanged pattern and avoids hard startup `SplitterDistance`.
+- Added headless `GeneratedPackageRuntimePreviewSmoke` over fixture approved artifacts, package assembly/export, `DefaultGameRuntime.Start`, projection assertions and movement.
+- Added product-smoke scenario `generated-package-runtime-preview`.
+- Updated product smoke docs and current generator state handoff to Product Slice 005.
 
 Non-goals preserved:
-- No Runtime, Scripting/Lua, WinForms, generator-library, solution or csproj changes.
-- No provider, OpenAI-compatible API, LM Studio, repair prompt, UI automation or runtime preview calls.
-- No broad schema rewrite and no M5/M6/M6-lite unlock.
+- No Unity changes.
+- No Lua/script execution.
+- No generator-library changes.
+- No LLM/provider/LM Studio calls.
+- No solution or csproj edits.
+- No `DefaultGameRuntime` rewrite.
+- No runtime mutation of `GamePackageDefinition`.
 
 Checks planned:
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~RuntimePreview"
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~GeneratedPackageRuntimePreviewSmoke"
 - dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~ProductSmoke"
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package"
 - powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario baseline-strict-package-assembly
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario generated-package-runtime-preview
 - powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1
 - powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
 - mojibake marker scan over changed files
 
 Checks run:
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~ProductSmoke": passed. 2 passed, 0 failed.
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package": passed. 90 passed, 0 failed.
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario baseline-strict-package-assembly: passed. Run directory: .devflow\runs\20260619_164636-product-smoke. Package output: .devflow\runs\20260619_164636-product-smoke\package-output\package.json.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~RuntimePreview": passed. 1 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~GeneratedPackageRuntimePreviewSmoke": passed. 1 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~ProductSmoke": passed. 3 passed, 0 failed.
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario baseline-strict-package-assembly: passed. 2 passed, 0 failed. Run directory: .devflow\runs\20260619_174754-product-smoke.
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario generated-package-runtime-preview: passed. 1 passed, 0 failed. Run directory: .devflow\runs\20260619_174803-product-smoke.
 - powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 464 passed, 0 failed. Run directory: .devflow\runs\20260619_164652-check-all.
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 465 passed, 0 failed. Run directory: .devflow\runs\20260619_174818-check-all.
 - Mojibake marker scan over changed files with rg: passed, no markers found.
 
 Manual verification:
-- Manual UI verification not required for this headless smoke slice.
+- Manual UI verification not run yet. Expected: open Runtime Preview, press Start, confirm map/log/generated-content tab, move once and confirm generated content remains populated.

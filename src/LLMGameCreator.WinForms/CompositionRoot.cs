@@ -5,6 +5,7 @@ using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
+using LLMGameCreator.Application.RuntimePreview;
 using LLMGameCreator.Application.Validation;
 using LLMGameCreator.AssetPipeline;
 using LLMGameCreator.Infrastructure.Generation;
@@ -111,6 +112,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
+        _container.Register<GeneratedPackageRuntimePreviewService>(Reuse.Singleton);
         _container.Register<IGameRuntime, DefaultGameRuntime>(Reuse.Singleton);
         _container.Register<IGameRuntimeStateFactory, GameRuntimeStateFactory>(Reuse.Singleton);
         _container.Register<IRequirementEvaluator, RequirementEvaluator>(Reuse.Singleton);
@@ -160,7 +162,8 @@ public sealed class CompositionRoot : IDisposable
 
         _container.RegisterDelegate<RuntimePreviewPageControl>(resolver => new RuntimePreviewPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
-            resolver.Resolve<IGameRuntime>()), Reuse.Singleton);
+            resolver.Resolve<IGameRuntime>(),
+            resolver.Resolve<GeneratedPackageRuntimePreviewService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<RuntimeSimulatorPageControl>(resolver => new RuntimeSimulatorPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),

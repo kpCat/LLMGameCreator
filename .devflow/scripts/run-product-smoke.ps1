@@ -17,6 +17,8 @@ $MarkdownPath = Join-Path $RunDir "product-smoke-summary.md"
 $LogIndexPath = Join-Path $RunDir "logs.txt"
 $TestResultsDir = Join-Path $RunDir "test-results"
 $PackageOutputDir = Join-Path $RunDir "package-output"
+$TestFilter = "FullyQualifiedName~ProductSmoke"
+$ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
 
 New-Item -ItemType Directory -Force -Path $RunDir | Out-Null
 New-Item -ItemType Directory -Force -Path $TestResultsDir | Out-Null
@@ -39,7 +41,7 @@ function Write-ProductSmokeSummary {
         package_output_dir = "$PackageOutputDir"
         package_json_path = "$packageJsonPath"
         package_json_exists = [bool](Test-Path $packageJsonPath)
-        command = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter FullyQualifiedName~ProductSmoke"
+        command = $ProductSmokeCommand
         no_llm_provider = $true
     }
 
@@ -72,10 +74,17 @@ $PreviousPackageOutput = $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR
 
 Push-Location $RepoRoot
 try {
-    if ($Scenario -ne "baseline-strict-package-assembly") {
+    if ($Scenario -eq "baseline-strict-package-assembly") {
+        $TestFilter = "FullyQualifiedName~BaselineStrictArtifactsPackageAssemblySmokeTests"
+    }
+    elseif ($Scenario -eq "generated-package-runtime-preview") {
+        $TestFilter = "FullyQualifiedName~GeneratedPackageRuntimePreviewSmoke"
+    }
+    else {
         throw "Unknown product smoke scenario: $Scenario"
     }
 
+    $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
     $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR = $PackageOutputDir
 
     Invoke-DevflowLoggedCommand -Name "product-smoke-test" -Exe "dotnet" -ArgsList @(
@@ -84,7 +93,7 @@ try {
         "--configuration",
         "Debug",
         "--filter",
-        "FullyQualifiedName~ProductSmoke",
+        $TestFilter,
         "--results-directory",
         $TestResultsDir,
         "--logger",
