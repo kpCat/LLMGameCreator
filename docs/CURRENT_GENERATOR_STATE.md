@@ -8,7 +8,7 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 M4.1 gate passed for sampled baseline contracts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path for the sampled baseline strict contracts. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context, and Product Slice 003 lets approved baseline artifacts assemble an inspectable draft GamePackage.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path for the sampled baseline strict contracts. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context, Product Slice 003 lets approved baseline artifacts assemble an inspectable draft GamePackage, and Product Slice 004 adds headless smoke automation for baseline artifact package assembly.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,24 +62,24 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 003: Artifact Review Apply Package Assembly.
-- Artifact Review can approve/reject/request repair for staged strict artifacts and now exposes a manual `Apply approved to package` action over the persisted approved artifact set.
-- Approved baseline artifacts can assemble a draft GamePackage/package JSON through the existing application assembly/export services without calling an LLM/provider, Lua, runtime preview or generator-library execution.
-- Baseline mapping is intentionally narrow:
-  - `game_profile_v1` maps title/description and preserves profile core loop, pillars, presentation/world/actor/combat metadata in `generatedContent`;
-  - `scene_pack_v1` maps scene seeds to draft maps and preserves scene summaries;
-  - `quest_pack_v1` maps quest seeds to quest definitions and preserves steps/objectives;
-  - `mechanics_pack_v1` maps mechanic seeds to draft abilities and preserves mechanic summaries.
-- Draft packages preserve applied artifact provenance and unknown approved artifacts as generated-content records with content hashes/raw JSON where valid.
-- Assembly diagnostics cover baseline JSON parsing, artifact kind mismatches, duplicate generated scene/quest/mechanic ids, provenance presence and package validation warnings/errors.
+- Product Slice 004: Headless Product Smoke Runner.
+- Headless product smoke now verifies the baseline approved-artifact package assembly/export path without UI clicks.
+- The smoke scenario `baseline-strict-package-assembly` uses deterministic fixture approved artifacts for all four sampled M4.1 baseline contracts:
+  - `game_profile_v1`;
+  - `scene_pack_v1`;
+  - `quest_pack_v1`;
+  - `mechanics_pack_v1`.
+- The smoke runner exports `package.json`, asserts populated manifest/generatedContent profile/scenes/quests/mechanics, checks applied artifact provenance/content hashes for all four baseline contracts and writes a small run report under `.devflow/runs/<timestamp>-product-smoke/`.
+- Product Slice 004 adds headless smoke automation for baseline artifact package assembly. Manual checking remains needed only for UI-specific changes and major new runtime gates.
+- The smoke path does not call LLM/provider APIs, LM Studio, Lua, runtime preview, WinForms UI automation or generator-library execution.
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts and Product Slice 003 approved-artifact package assembly. Broad expansion still requires an explicit next controlled slice.
+Completed for the sampled baseline contracts and Product Slice 004 headless baseline package assembly smoke. Broad expansion still requires an explicit next controlled slice.
 
 ## Current user action
 
-Use the manual flow Capability Picker -> LLM Artifacts -> Artifact Review -> Approve all valid -> Apply approved to package to inspect the draft package assembly output, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.
+Use the headless product smoke for non-UI baseline package assembly checks, keep manual UI checks for UI-specific behavior only, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.
 
 ## Allowed next Codex tasks
 
@@ -114,6 +114,7 @@ Capability Picker
   -> Artifact Review
   -> Apply approved baseline artifacts
   -> Draft GamePackage assembly/export
+  -> Headless product smoke
   -> controlled product vertical slice planning
 ```
 
@@ -128,6 +129,7 @@ Capability Picker
 7. docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
 8. docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md
 9. docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
+10. docs/PRODUCT_SMOKE_SCENARIOS.md
 
 ## What not to do next
 

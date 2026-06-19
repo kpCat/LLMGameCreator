@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-19T12:03:17Z",
+  "updated_at_utc": "2026-06-19T13:43:00Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 003 approved-artifact draft assembly completed",
-  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation_ux_repair_slice_002_picker_wiring_and_slice_003_draft_assembly",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 004 headless product smoke automation completed",
+  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation_ux_repair_slice_002_picker_wiring_slice_003_draft_assembly_and_slice_004_headless_smoke",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts plus Product Slice 003 approved-artifact draft package assembly; broad expansion still requires controlled vertical-slice approval.",
-  "current_user_action": "Use the manual flow Capability Picker -> LLM Artifacts -> Artifact Review -> Approve all valid -> Apply approved to package to inspect draft package assembly output, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.",
-  "recommended_next_decision": "Choose the next controlled product vertical slice after inspecting the baseline approved-artifact draft assembly output.",
+  "active_manual_gate": "Completed for sampled baseline contracts plus Product Slice 004 headless baseline package assembly smoke; broad expansion still requires controlled vertical-slice approval.",
+  "current_user_action": "Run the headless product smoke for baseline package assembly when checking non-UI package flow, use manual UI checks only for UI-specific changes, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.",
+  "recommended_next_decision": "Choose the next controlled product vertical slice after the baseline approved-artifact draft assembly path is covered by headless smoke automation.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,39 +49,35 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_003_artifact_review_apply_package_assembly",
-    "title": "Artifact Review Apply Package Assembly",
-    "completed_at_utc": "2026-06-19T12:03:17Z",
-    "summary": "Wired the persisted Artifact Review approved artifact set into the existing GamePackage assembly/export path so approved sampled-baseline strict artifacts can produce an inspectable draft GamePackage without LLM/provider, Lua, runtime preview, generator-library, solution, project or devflow-script changes.",
+    "slice_id": "product_slice_004_headless_product_smoke_runner",
+    "title": "Headless Product Smoke Runner",
+    "completed_at_utc": "2026-06-19T13:43:00Z",
+    "summary": "Added headless smoke automation for baseline approved-artifact package assembly so the four sampled strict contracts can be assembled, exported, validated and reported without UI clicks, LLM/provider calls, Lua, runtime preview, generator-library, solution or project changes.",
+    "scenario_id": "baseline-strict-package-assembly",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario baseline-strict-package-assembly",
     "supported_baseline_contracts": [
       "game_profile_v1",
       "scene_pack_v1",
       "quest_pack_v1",
       "mechanics_pack_v1"
     ],
-    "draft_package_outputs": [
-      ".llmgc/package-assembly/package.json",
-      "artifact/generator_plan_game_package_assembly/latest",
-      "artifact/generator_plan_game_package_draft/latest",
-      "artifact/generator_plan_game_package_assembly_markdown/latest"
-    ],
-    "mapping_strategy": [
-      "game_profile_v1 maps title and description to manifest and preserves profile metadata in generatedContent",
-      "scene_pack_v1 maps scene seeds to draft maps and preserves scene summaries",
-      "quest_pack_v1 maps quest seeds to quest definitions and preserves steps/objectives",
-      "mechanics_pack_v1 maps mechanic seeds to draft abilities and preserves mechanic summaries",
-      "unknown approved artifacts are preserved or skipped with warnings rather than crashing"
+    "headless_outputs": [
+      ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md",
+      ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.json",
+      ".devflow/runs/<timestamp>-product-smoke/test-results/",
+      ".devflow/runs/<timestamp>-product-smoke/package-output/package.json"
     ],
     "validation_contracts": [
-      "baseline artifact JSON parse diagnostics",
-      "artifact_kind mismatch diagnostics when strict content declares a different kind",
-      "duplicate generated scene/quest/mechanic id diagnostics",
-      "package title and provenance presence checks",
-      "preserved raw JSON validity checks"
+      "package JSON export exists",
+      "manifest title and description are populated from game_profile_v1",
+      "generatedContent profile, scenes, quests and mechanics are populated",
+      "applied artifact provenance and content hash exist for all four baseline contracts",
+      "assembly diagnostics and package validation have no blocking package errors",
+      "product smoke uses fixtures and requires no LLM/provider dependency"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_one_controlled_product_vertical_slice_from_composer_v2_foundation_and_draft_assembly_path",
+    "plan_one_controlled_product_vertical_slice_from_composer_v2_foundation_draft_assembly_path_and_headless_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
     "tighten_prompt_repair_or_validator_if_future_real_evaluations_regress",
@@ -99,8 +95,8 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_baseline_draft_assembly",
-  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after inspecting baseline draft assembly output.",
+  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_headless_baseline_smoke",
+  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after baseline draft assembly is covered by headless smoke.",
   "candidate_product_vertical_slices": [
     "Lua-backed content slice: one safe generator module family producing validated artifact envelopes.",
     "Richer package assembly slice: expand beyond baseline draft assembly for one chosen contract family or gameplay domain.",
@@ -115,7 +111,8 @@
     "docs/GENERATOR_PLAN_CAPABILITY_SELECTION_PICKER.md",
     "docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md",
     "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
-    "docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md"
+    "docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md",
+    "docs/PRODUCT_SMOKE_SCENARIOS.md"
   ],
   "current_workflow": [
     "Capability Picker",
@@ -126,6 +123,7 @@
     "Artifact Review",
     "Apply approved baseline artifacts",
     "Draft GamePackage assembly/export",
+    "Headless product smoke",
     "controlled product vertical slice planning",
     "later rich assembly/export"
   ],

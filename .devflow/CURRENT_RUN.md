@@ -1,8 +1,8 @@
 # CURRENT_RUN.md
 
-Task id: PRODUCT_SLICE_003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY
-Goal: turn persisted Artifact Review approved baseline artifacts into inspectable draft GamePackage assembly without provider, Lua, runtime or generator-library execution
-Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY.md
+Task id: PRODUCT_SLICE_004_HEADLESS_PRODUCT_SMOKE_RUNNER
+Goal: automate the baseline strict approved-artifact package assembly/export flow through a headless product smoke runner
+Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/004_HEADLESS_PRODUCT_SMOKE_RUNNER.md
 
 Source docs read:
 - AGENTS.md
@@ -12,154 +12,70 @@ Source docs read:
 - docs/ROADMAP_TO_FULL_GENERATOR.md
 - docs/M4_1_REAL_EVALUATION_GATE_REPORT.md
 - docs/PRODUCT_SLICE_003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/003_CODEX_PROMPT.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY.md
-- docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
-- docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
-- docs/GENERATOR_PLAN_ONE_CLICK_PACKAGE_EXPORT_UI.md
-- src/LLMGameCreator.Application/LLMGameCreator.Application.csproj
-- src/LLMGameCreator.WinForms/LLMGameCreator.WinForms.csproj
+- docs/PRODUCT_SLICE_004_HEADLESS_PRODUCT_SMOKE_RUNNER.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/004_CODEX_PROMPT.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/004_HEADLESS_PRODUCT_SMOKE_RUNNER.md
+- docs/PRODUCT_SMOKE_SCENARIOS.md
 - tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj
-- src/LLMGameCreator.GamePackage/LLMGameCreator.GamePackage.csproj
 
 Source files read:
-- src/LLMGameCreator.GamePackage/GamePackageDefinition.cs
-- src/LLMGameCreator.Domain/Definitions/GameDefinitions.cs
-- src/LLMGameCreator.Application/Validation/GamePackageValidator.cs
-- src/LLMGameCreator.Application/Validation/GameDefinitionValidator.cs
-- src/LLMGameCreator.Application/Projects/CurrentGamePackageService.cs
-- src/LLMGameCreator.Infrastructure/Storage/JsonGamePackageRepository.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactReviewService.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalModels.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalArtifactModels.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalArtifactService.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalArtifactReader.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanApprovedArtifactSetReader.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactContractCatalog.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactValidator.cs
 - src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyService.cs
 - src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyModels.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyDiagnostics.cs
 - src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyValidator.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyMarkdownRenderer.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyArtifactModels.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyArtifactService.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyArtifactReader.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanPackageExportRunService.cs
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPresenter.cs
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewViewModels.cs
-- src/LLMGameCreator.WinForms/Pages/PackageExport/PackageExportPageControl.cs
-- src/LLMGameCreator.WinForms/Pages/PackageExport/PackageExportRunPresenter.cs
-- src/LLMGameCreator.WinForms/CompositionRoot.cs
+- src/LLMGameCreator.GamePackage/GamePackageDefinition.cs
+- src/LLMGameCreator.Infrastructure/Storage/JsonGamePackageRepository.cs
 - tests/LLMGameCreator.Tests/Design/GeneratorPlanGamePackageAssemblyPipelineTests.cs
 - tests/LLMGameCreator.Tests/Design/GeneratorPlanPackageExportRunTests.cs
-- tests/LLMGameCreator.Tests/WinForms/ArtifactReviewPresenterTests.cs
 - tests/LLMGameCreator.Tests/Docs/CurrentGeneratorStateDocsTests.cs
+- .devflow/scripts/_common.ps1
+- .devflow/scripts/check-all.ps1
+- .devflow/scripts/check-devflow-state.ps1
+- .devflow/scripts/README.md
 
 Existing patterns inspected:
-- Package Export already runs approval -> assembly -> assembly artifact save -> final run artifact save and exports `package.json` through `JsonGamePackageRepository`.
-- Artifact Review already persists human decisions into `artifact/generator_plan_approved_artifact_set/latest`; package assembly should read that approved set instead of recapturing or auto-approving.
-- GamePackage assembly already maps legacy draft artifacts through `GeneratorPlanGamePackageAssembler`, validates through `GamePackageValidator`, and saves assembly/package draft/markdown artifacts through existing generated artifact storage.
-- WinForms pages in this area use runtime-safe constructors plus in-file TableLayoutPanel layout and event wiring; DI remains in `CompositionRoot`.
+- `GeneratorPlanGamePackageAssemblyService` is the application seam for approved artifact set -> draft package assembly -> optional package export.
+- `GeneratorPlanGamePackageAssembler` already maps `game_profile_v1`, `scene_pack_v1`, `quest_pack_v1` and `mechanics_pack_v1` into baseline package/generatedContent/provenance.
+- `JsonGamePackageRepository.SaveAsync` is the existing package JSON export convention.
+- `.devflow/scripts/check-all.ps1` and `_common.ps1` provide the run-directory, UTF-8 environment and logged-command script pattern.
+- Existing package assembly/export tests use temporary folders and focused xUnit assertions rather than UI automation or provider calls.
 
 Files changed:
-- src/LLMGameCreator.GamePackage/GamePackageDefinition.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyModels.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyDiagnostics.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyService.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyValidator.cs
-- src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyMarkdownRenderer.cs
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
-- src/LLMGameCreator.WinForms/CompositionRoot.cs
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanGamePackageAssemblyPipelineTests.cs
+- tests/LLMGameCreator.Tests/ProductSmoke/BaselineStrictArtifactsPackageAssemblySmokeTests.cs
+- .devflow/scripts/run-product-smoke.ps1
+- docs/PRODUCT_SMOKE_SCENARIOS.md
 - docs/CURRENT_GENERATOR_STATE.md
 - docs/CURRENT_GENERATOR_STATE.json
 - .devflow/CURRENT_RUN.md
 
 Implemented:
-- Added minimal non-breaking `generatedContent` section to draft GamePackage for generated profile summaries, scene summaries, quest summaries, mechanic summaries, applied artifact provenance and preserved unknown artifact JSON.
-- Extended GamePackage assembly so baseline strict artifacts preserve core loop, pillars, source context, scene descriptions/purposes, quest steps/objectives, mechanic descriptions/tags and per-artifact provenance.
-- Added content hash, applied timestamp, contract id, artifact id, capability selection id and mapping result provenance for applied approved artifacts.
-- Preserved unknown/semantic approved artifacts as generated-content preserved artifacts with raw JSON when valid, while reporting warnings instead of crashing.
-- Added assembly diagnostics for artifact kind mismatch, duplicate generated scene/quest/mechanic ids, generated package title presence, provenance presence and preserved raw JSON validity.
-- Added `AppliedArtifactCount` and `SkippedArtifactCount` to assembly summary and markdown report.
-- Added Artifact Review action `Apply approved to package` that reads the persisted latest approved artifact set, assembles/validates/exports a draft package to `.llmgc/package-assembly/package.json` by default, saves assembly/package draft/markdown artifacts, and replaces current in-memory package state with the draft package.
-- Kept approval persistence as the gate: unsaved yellow UI decisions are not assembled until `Apply selected decisions` writes the approved artifact set.
-- Updated current generator state handoff to Product Slice 003 while keeping `current_phase = m4_1_real_model_evaluation_gate` and `last_completed_milestone = M4.1`.
+- Added deterministic ProductSmoke approved artifact fixture for all four M4.1 baseline contracts: `game_profile_v1`, `scene_pack_v1`, `quest_pack_v1`, `mechanics_pack_v1`.
+- Added focused headless smoke tests that run real package assembly/export through `GeneratorPlanGamePackageAssemblyService` and `JsonGamePackageRepository`.
+- The smoke asserts exported `package.json`, populated manifest/profile/scenes/quests/mechanics, all four applied artifact provenance records, content hashes and no package-blocking diagnostics.
+- Added `.devflow/scripts/run-product-smoke.ps1` for the scenario `baseline-strict-package-assembly`.
+- The script writes `.devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md`, `product-smoke-summary.json`, `test-results/` and `package-output/package.json`.
+- Added `docs/PRODUCT_SMOKE_SCENARIOS.md`.
+- Updated current generator state handoff to Product Slice 004 while keeping `current_phase = m4_1_real_model_evaluation_gate` and `last_completed_milestone = M4.1`.
 
 Non-goals preserved:
-- No provider/LLM/LM Studio calls in apply or assembly.
-- No Lua, scripting, runtime, runtime preview, Unity or generator-library implementation changes.
-- No solution, project, NuGet, devflow script, NEXT_TASK or task queue changes.
-- No broad future artifact contract expansion.
-- No destructive package schema rewrite; new GamePackage section is default-empty and non-breaking.
+- No Runtime, Scripting/Lua, WinForms, generator-library, solution or csproj changes.
+- No provider, OpenAI-compatible API, LM Studio, repair prompt, UI automation or runtime preview calls.
+- No broad schema rewrite and no M5/M6/M6-lite unlock.
+
+Checks planned:
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~ProductSmoke"
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package"
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario baseline-strict-package-assembly
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1
+- mojibake marker scan over changed files
 
 Checks run:
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Artifact": passed. 138 passed, 0 failed.
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package": passed. 88 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~ProductSmoke": passed. 2 passed, 0 failed.
+- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package": passed. 90 passed, 0 failed.
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario baseline-strict-package-assembly: passed. Run directory: .devflow\runs\20260619_164636-product-smoke. Package output: .devflow\runs\20260619_164636-product-smoke\package-output\package.json.
 - powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 460 passed, 0 failed. Run directory: .devflow\runs\20260619_150606-check-all.
+- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 464 passed, 0 failed. Run directory: .devflow\runs\20260619_164652-check-all.
 - Mojibake marker scan over changed files with rg: passed, no markers found.
 
 Manual verification:
-- Not run interactively in this note. Required manual UI workflow remains: start WinForms, open project, produce/stage strict baseline artifacts, Artifact Review -> Load latest -> Approve all valid -> Apply selected decisions -> Apply approved to package -> inspect `.llmgc/package-assembly/package.json` and report/status text.
-
-## Repair note: PRODUCT_SLICE_003_ARTIFACT_REVIEW_APPLY_PACKAGE_ASSEMBLY_UI_REPAIR
-
-Goal: stabilize Artifact Review package assembly UI flow after Product Slice 003.
-
-Source docs read:
-- AGENTS.md
-- docs/CONTEXT_INDEX.md
-- docs/CURRENT_GENERATOR_STATE.md
-- docs/ROADMAP_TO_FULL_GENERATOR.md
-- docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md
-- docs/WINFORMS_DESIGNER_RULES.md
-- src/LLMGameCreator.WinForms/LLMGameCreator.WinForms.csproj
-- tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj
-
-Source files read:
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPresenter.cs
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewViewModels.cs
-- src/LLMGameCreator.WinForms/Pages/CapabilityPicker/CapabilityPickerPageControl.cs
-- tests/LLMGameCreator.Tests/WinForms/ArtifactReviewPresenterTests.cs
-- tests/LLMGameCreator.Tests/WinForms/CapabilityPickerPresenterTests.cs
-- tests/LLMGameCreator.Tests/Design/GeneratorPlanDraftArtifactReviewServiceTests.cs
-
-Existing patterns inspected:
-- CapabilityPickerPageControl delays SplitterDistance until SizeChanged, guards max < min and avoids Math.Clamp when bounds are invalid.
-- ArtifactReviewPresenter marks changed decisions in view state and builds the same decision request used by Apply selected decisions.
-- GeneratorPlanDraftArtifactReviewService.ApplyDecisionsToLatestAsync is the persisted approved-artifact-set update path.
-
-Files changed:
-- src/LLMGameCreator.WinForms/Pages/ArtifactReview/ArtifactReviewPageControl.cs
-- tests/LLMGameCreator.Tests/WinForms/ArtifactReviewPresenterTests.cs
-- .devflow/CURRENT_RUN.md
-
-Implemented:
-- Removed hard early Artifact Review SplitterDistance = 690.
-- Delayed Artifact Review SplitterDistance and SplitContainer min sizes until SizeChanged has a valid width; if max < min, no splitter/min-size mutation is attempted.
-- Renamed the package action button to `Save decisions + apply`.
-- `Save decisions + apply` now persists changed review decisions through the same review-service path before assembling from the latest approved artifact set.
-- If automatic decision persistence returns validation errors, package assembly is blocked until diagnostics are reviewed.
-- Enabled the package action when either persisted approved items exist or unsaved changed decisions exist, so Approve all valid pending -> Save decisions + apply is safe.
-- Added focused tests for Artifact Review control construction at invalid startup width and approve-all decision request generation.
-
-Non-goals preserved:
-- No GamePackage assembly mapping changes.
-- No provider/LLM calls.
-- No Lua, runtime, generator-library, solution, project or devflow script changes.
-
-Checks run so far:
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~ArtifactReview": passed. 14 passed, 0 failed.
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Artifact": passed. 140 passed, 0 failed.
-- dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter "FullyQualifiedName~Package": passed. 88 passed, 0 failed.
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-devflow-state.ps1: passed. Output: "Devflow state check passed. Current mode: stop (STOP_REVIEW). Tasks: 9. Known warnings: 2."
-- powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\check-all.ps1: passed. Build: 0 warnings, 0 errors. Tests: 462 passed, 0 failed. Run directory: .devflow\runs\20260619_154830-check-all.
-
-Manual verification:
-- Not run interactively in this note. Expected manual UI workflow is now: start WinForms -> Artifact Review -> Load latest staging -> Approve all valid pending -> Save decisions + apply -> inspect status/export. A separate Apply selected decisions click is no longer required for this path.
+- Manual UI verification not required for this headless smoke slice.
