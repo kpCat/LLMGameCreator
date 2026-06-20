@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 006.1 exposes the controlled batch presets in LLM Artifacts.
+M4.1 gate passed for sampled baseline contracts; Product Slice 007 adds a read-only generated-content interaction browser to Runtime Preview.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-005 established composable selection, baseline strict generation, approved-artifact assembly, headless smoke and generated-content Runtime Preview. Product Slice 006 adds `region_pack_v1`, `npc_pack_v1`, `item_pack_v1`, `dialogue_pack_v1` and `encounter_pack_v1`, five controlled batch presets, non-breaking typed `generatedContent` mapping and expanded headless smoke coverage. Product Slice 006.1 wires those existing presets into LLM Artifacts without changing contract definitions or generation requests.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-006.1 established composable selection, strict generation, approved-artifact assembly, controlled batch presets and generated-content Runtime Preview. Product Slice 007 projects that existing generated content into selectable categories, entry details/references and an append-to-log preview action without changing `DefaultGameRuntime`, package contracts or execution behavior.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,12 +62,13 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 006.1: LLM Artifacts Batch Preset Dropdown.
-- LLM Artifacts loads `manual/custom` plus the five existing catalog presets from `ListBatchPresets()`.
-- Selecting a known preset resolves it through `TryGetBatchPreset()` and updates the existing contract checklist in its current display order.
-- Manual checkbox changes remain supported, and Preview/Generate continue to use the currently checked contract ids.
-- Unknown preset lookup is non-throwing, preserves the current contract selection and reports a status message.
-- No contract, provider, package assembly, runtime, Lua, generator-library, solution or project changes were introduced.
+- Product Slice 007: Generated Content Interaction Preview.
+- Runtime Preview now exposes current scene, regions, NPCs, items, dialogues, quests, mechanics, encounters, applied artifacts and warnings as selectable read-only categories.
+- Selection details include ids, descriptions, references, dialogue lines, quest steps/objectives, mechanic tags and artifact provenance/hash where available.
+- The existing generated summary remains available on a separate `Summary` tab; `Append selected to log` writes a non-destructive message to the existing Runtime Preview log.
+- Catalog refresh preserves a valid category/entry selection after Start and runtime commands when the selected ids still exist.
+- `generated-content-interaction-preview` assembles the expanded fixture package, builds the projection/catalog, verifies detail coverage and confirms movement still works without LLM/provider calls.
+- No runtime engine, package schema, generator contract, Lua/effect, Unity, solution or project changes were introduced.
 
 Parent slice foundation:
 
@@ -81,11 +82,11 @@ Parent slice foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview and Product Slice 006 expanded-contract batch smoke. Further contract or runtime expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slice 007 interaction-preview smoke. Further contract or runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Use the LLM Artifacts batch preset dropdown for controlled contract selection and the three headless product smoke scenarios for baseline assembly, generated Runtime Preview and expanded contract batches. Choose the next controlled slice before M5, broader M6, simulation or repair-loop work.
+Use the Runtime Preview Generated Content browser to inspect assembled entries and provenance, and use the four headless product smoke scenarios for baseline assembly, generated preview, expanded batches and interaction preview. Choose the next controlled slice before M5, broader M6, simulation or repair-loop work.
 
 ## Allowed next Codex tasks
 
@@ -123,6 +124,7 @@ Capability Picker
   -> Draft GamePackage assembly/export
   -> Headless product smoke
   -> Expanded strict contract batch smoke
+  -> Generated content interaction preview
   -> controlled product vertical slice planning
 ```
 

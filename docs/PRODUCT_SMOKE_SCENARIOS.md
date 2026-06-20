@@ -143,3 +143,35 @@ Expected assertions:
 - no generated effects, combat, economy or dialogue execution occurs.
 
 Expected outputs use the same `.devflow/runs/<timestamp>-product-smoke/` structure as the baseline scenarios.
+
+## generated-content-interaction-preview
+
+Validates the read-only interaction browser over an assembled expanded package:
+
+```text
+full_small_rpg_seed fixture artifacts
+-> GamePackage assembly and export
+-> DefaultGameRuntime start
+-> generated package projection
+-> generated interaction catalog
+-> selection details and movement compatibility
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario generated-content-interaction-preview
+```
+
+Expected assertions:
+
+- all catalog categories exist: current scene, regions, NPCs, items, dialogues, quests, mechanics, encounters, applied artifacts and warnings;
+- expanded content entries expose non-empty read-only details and references;
+- dialogue details include lines, quest details include steps/objectives, and applied-artifact details include contract, mapping and content hash;
+- a movement command still succeeds after the catalog is built and the refreshed catalog remains available;
+- fixture artifacts contain no provider or LM Studio dependency;
+- no dialogue, encounter, quest, inventory, Lua or effect execution occurs.
+
+Expected outputs use the shared `.devflow/runs/<timestamp>-product-smoke/` structure and include exported `package-output/package.json`.
+
+Manual UI verification remains required for category selection, details readability, `Append selected to log`, and selection preservation after Start/movement.

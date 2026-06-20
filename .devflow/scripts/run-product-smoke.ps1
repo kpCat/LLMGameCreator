@@ -83,6 +83,9 @@ try {
     elseif ($Scenario -eq "expanded-contract-batch-smoke") {
         $TestFilter = "FullyQualifiedName~ExpandedContractBatchSmoke"
     }
+    elseif ($Scenario -eq "generated-content-interaction-preview") {
+        $TestFilter = "FullyQualifiedName~GeneratedContentInteractionPreviewProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

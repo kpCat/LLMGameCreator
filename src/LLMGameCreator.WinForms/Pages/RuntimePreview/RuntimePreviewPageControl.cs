@@ -14,27 +14,35 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly IGameRuntime? _runtime;
     private readonly GeneratedPackageRuntimePreviewService _previewService;
+    private readonly GeneratedContentInteractionPreviewService _interactionService;
+    private GeneratedContentInteractionCatalog _interactionCatalog = new();
     private GameState? _state;
     private bool _splitterInitialized;
+    private bool _updatingGeneratedSelection;
 
     public RuntimePreviewPageControl()
     {
         _previewService = new GeneratedPackageRuntimePreviewService();
+        _interactionService = new GeneratedContentInteractionPreviewService();
         InitializeComponent();
         ConfigureSplitSafety();
+        WireGeneratedContentEvents();
         RefreshGeneratedPreview(null, null);
     }
 
     public RuntimePreviewPageControl(
         ICurrentGamePackageService currentGamePackageService,
         IGameRuntime runtime,
-        GeneratedPackageRuntimePreviewService previewService)
+        GeneratedPackageRuntimePreviewService previewService,
+        GeneratedContentInteractionPreviewService interactionService)
     {
         _currentGamePackageService = currentGamePackageService;
         _runtime = runtime;
         _previewService = previewService;
+        _interactionService = interactionService;
         InitializeComponent();
         ConfigureSplitSafety();
+        WireGeneratedContentEvents();
         _startButton.Click += (_, _) => StartRuntime();
         _canvas.CommandRequested += command => ExecuteCommand(command);
         RefreshGeneratedPreview(null, null);
@@ -100,6 +108,15 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _rootSplitContainer.SizeChanged += (_, _) => ApplySafeInitialSplitterDistance();
     }
 
+    private void WireGeneratedContentEvents()
+    {
+        _generatedCategoryComboBox.DisplayMember = nameof(GeneratedContentInteractionCategory.Title);
+        _generatedEntriesListBox.DisplayMember = nameof(GeneratedContentInteractionEntry.Title);
+        _generatedCategoryComboBox.SelectedIndexChanged += (_, _) => GeneratedCategoryChanged();
+        _generatedEntriesListBox.SelectedIndexChanged += (_, _) => GeneratedEntryChanged();
+        _appendGeneratedSelectionButton.Click += (_, _) => AppendGeneratedSelectionToLog();
+    }
+
     private void ApplySafeInitialSplitterDistance()
     {
         if (_splitterInitialized)
@@ -134,14 +151,165 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
     private void RefreshGeneratedPreview(GamePackageDefinition? package, GameState? state)
     {
+        var previousCategoryId = (_generatedCategoryComboBox.SelectedItem as GeneratedContentInteractionCategory)?.Id;
+        var previousEntryId = (_generatedEntriesListBox.SelectedItem as GeneratedContentInteractionEntry)?.EntryId;
+
         if (package == null)
         {
             _generatedContentTextBox.Text = "No package is running.";
+            ApplyInteractionCatalog(new GeneratedContentInteractionCatalog(), null, null);
             return;
         }
 
         var model = _previewService.Build(package, state);
         _generatedContentTextBox.Text = FormatGeneratedPreview(model);
+        ApplyInteractionCatalog(_interactionService.Build(model), previousCategoryId, previousEntryId);
+    }
+
+    private void ApplyInteractionCatalog(
+        GeneratedContentInteractionCatalog catalog,
+        string? preferredCategoryId,
+        string? preferredEntryId)
+    {
+        _interactionCatalog = catalog;
+        _updatingGeneratedSelection = true;
+        try
+        {
+            _generatedCategoryComboBox.BeginUpdate();
+            _generatedCategoryComboBox.Items.Clear();
+            foreach (var category in catalog.Categories)
+            {
+                _generatedCategoryComboBox.Items.Add(category);
+            }
+
+            _generatedCategoryComboBox.EndUpdate();
+
+            var categoryIndex = FindCategoryIndex(preferredCategoryId);
+            if (categoryIndex < 0)
+            {
+                categoryIndex = FindFirstPopulatedCategoryIndex();
+            }
+
+            _generatedCategoryComboBox.SelectedIndex = categoryIndex;
+            PopulateGeneratedEntries(_generatedCategoryComboBox.SelectedItem as GeneratedContentInteractionCategory, preferredEntryId);
+        }
+        finally
+        {
+            _updatingGeneratedSelection = false;
+        }
+    }
+
+    private void GeneratedCategoryChanged()
+    {
+        if (_updatingGeneratedSelection)
+        {
+            return;
+        }
+
+        PopulateGeneratedEntries(_generatedCategoryComboBox.SelectedItem as GeneratedContentInteractionCategory, null);
+    }
+
+    private void PopulateGeneratedEntries(GeneratedContentInteractionCategory? category, string? preferredEntryId)
+    {
+        _updatingGeneratedSelection = true;
+        try
+        {
+            _generatedEntriesListBox.BeginUpdate();
+            _generatedEntriesListBox.Items.Clear();
+            if (category != null)
+            {
+                foreach (var entry in category.Entries)
+                {
+                    _generatedEntriesListBox.Items.Add(entry);
+                }
+            }
+
+            _generatedEntriesListBox.EndUpdate();
+            _generatedEntriesListBox.SelectedIndex = FindEntryIndex(preferredEntryId);
+            UpdateGeneratedDetails();
+        }
+        finally
+        {
+            _updatingGeneratedSelection = false;
+        }
+    }
+
+    private void GeneratedEntryChanged()
+    {
+        if (!_updatingGeneratedSelection)
+        {
+            UpdateGeneratedDetails();
+        }
+    }
+
+    private void UpdateGeneratedDetails()
+    {
+        var entry = _generatedEntriesListBox.SelectedItem as GeneratedContentInteractionEntry;
+        _generatedDetailsTextBox.Text = entry?.DetailsText ?? "No generated entry selected.";
+        _appendGeneratedSelectionButton.Enabled = entry != null;
+    }
+
+    private void AppendGeneratedSelectionToLog()
+    {
+        var category = _generatedCategoryComboBox.SelectedItem as GeneratedContentInteractionCategory;
+        var entry = _generatedEntriesListBox.SelectedItem as GeneratedContentInteractionEntry;
+        if (category == null || entry == null)
+        {
+            return;
+        }
+
+        var references = entry.ReferenceIds.Count == 0
+            ? string.Empty
+            : $"; refs: {string.Join(", ", entry.ReferenceIds)}";
+        AppendLog($"Generated content: {category.Title} / {entry.Title}{references}");
+    }
+
+    private int FindCategoryIndex(string? categoryId)
+    {
+        if (string.IsNullOrWhiteSpace(categoryId))
+        {
+            return -1;
+        }
+
+        for (var index = 0; index < _interactionCatalog.Categories.Count; index++)
+        {
+            if (string.Equals(_interactionCatalog.Categories[index].Id, categoryId, StringComparison.Ordinal))
+            {
+                return index;
+            }
+        }
+
+        return -1;
+    }
+
+    private int FindFirstPopulatedCategoryIndex()
+    {
+        for (var index = 0; index < _interactionCatalog.Categories.Count; index++)
+        {
+            if (_interactionCatalog.Categories[index].Entries.Count > 0)
+            {
+                return index;
+            }
+        }
+
+        return _interactionCatalog.Categories.Count == 0 ? -1 : 0;
+    }
+
+    private int FindEntryIndex(string? entryId)
+    {
+        if (!string.IsNullOrWhiteSpace(entryId))
+        {
+            for (var index = 0; index < _generatedEntriesListBox.Items.Count; index++)
+            {
+                if (_generatedEntriesListBox.Items[index] is GeneratedContentInteractionEntry entry
+                    && string.Equals(entry.EntryId, entryId, StringComparison.Ordinal))
+                {
+                    return index;
+                }
+            }
+        }
+
+        return _generatedEntriesListBox.Items.Count == 0 ? -1 : 0;
     }
 
     private void AppendGeneratedStartSummary(GamePackageDefinition package, GameState state)

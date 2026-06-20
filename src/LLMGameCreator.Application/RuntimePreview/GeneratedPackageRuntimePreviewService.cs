@@ -68,7 +68,8 @@ public sealed class GeneratedPackageRuntimePreviewService
                 SourceId = dialogue.SourceId.Trim(),
                 Title = dialogue.Title.Trim(),
                 Description = dialogue.Description.Trim(),
-                References = new[] { dialogue.NpcId, dialogue.SceneId }.Where(NotBlank).Select(Trim).ToList()
+                References = new[] { dialogue.NpcId, dialogue.SceneId }.Where(NotBlank).Select(Trim).ToList(),
+                DetailLines = dialogue.Lines.Where(NotBlank).Select(Trim).ToList()
             }).ToList(),
             Encounters = generatedContent.Encounters.Select(encounter => new GeneratedPackageRuntimePreviewContentItem
             {
@@ -209,6 +210,7 @@ public sealed record GeneratedPackageRuntimePreviewContentItem
     public string Title { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
     public IReadOnlyList<string> References { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> DetailLines { get; init; } = Array.Empty<string>();
 }
 
 public sealed record GeneratedPackageRuntimePreviewProfile
