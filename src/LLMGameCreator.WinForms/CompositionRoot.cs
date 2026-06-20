@@ -62,6 +62,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<PrototypeLuaStaticAnalyzer>()), Reuse.Singleton);
         _container.Register<IPrototypeLuaPatchArtifactService, PrototypeLuaPatchArtifactService>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
+        _container.Register<AssembledGamePackageActivationService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
@@ -114,6 +115,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
         _container.Register<GeneratedPackageRuntimePreviewService>(Reuse.Singleton);
         _container.Register<GeneratedContentInteractionPreviewService>(Reuse.Singleton);
+        _container.Register<GeneratedQuestDialoguePreviewService>(Reuse.Singleton);
         _container.Register<IGameRuntime, DefaultGameRuntime>(Reuse.Singleton);
         _container.Register<IGameRuntimeStateFactory, GameRuntimeStateFactory>(Reuse.Singleton);
         _container.Register<IRequirementEvaluator, RequirementEvaluator>(Reuse.Singleton);
@@ -165,7 +167,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ICurrentGamePackageService>(),
             resolver.Resolve<IGameRuntime>(),
             resolver.Resolve<GeneratedPackageRuntimePreviewService>(),
-            resolver.Resolve<GeneratedContentInteractionPreviewService>()), Reuse.Singleton);
+            resolver.Resolve<GeneratedContentInteractionPreviewService>(),
+            resolver.Resolve<GeneratedQuestDialoguePreviewService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<RuntimeSimulatorPageControl>(resolver => new RuntimeSimulatorPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
@@ -201,6 +204,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<GeneratorPlanDraftArtifactReviewService>(),
             resolver.Resolve<GeneratorPlanGamePackageAssemblyService>(),
             resolver.Resolve<GeneratorPlanGamePackageAssemblyArtifactService>(),
+            resolver.Resolve<AssembledGamePackageActivationService>(),
             resolver.Resolve<IDesignDatabaseInitializer>(),
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 

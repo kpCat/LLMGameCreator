@@ -14,7 +14,7 @@ public sealed class GeneratedContentInteractionPreviewService
             {
                 BuildCurrentScene(preview),
                 BuildContentCategory("regions", "Regions", preview.Regions),
-                BuildContentCategory("npcs", "NPCs", preview.Npcs),
+                BuildNpcCategory(preview.Npcs, preview.Dialogues),
                 BuildContentCategory("items", "Items", preview.Items),
                 BuildContentCategory("dialogues", "Dialogues", preview.Dialogues, "Lines"),
                 BuildQuestCategory(preview.Quests),
@@ -73,6 +73,39 @@ public sealed class GeneratedContentInteractionPreviewService
         }).ToList();
 
         return Category(categoryId, title, entries);
+    }
+
+    private static GeneratedContentInteractionCategory BuildNpcCategory(
+        IReadOnlyList<GeneratedPackageRuntimePreviewContentItem> npcs,
+        IReadOnlyList<GeneratedPackageRuntimePreviewContentItem> dialogues)
+    {
+        var entries = npcs.Select(npc =>
+        {
+            var linkedDialogueIds = dialogues
+                .Where(dialogue => dialogue.References.Any(reference =>
+                    string.Equals(reference, npc.SourceId, StringComparison.OrdinalIgnoreCase)))
+                .Select(dialogue => dialogue.SourceId)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .ToList();
+            var references = npc.References.Concat(linkedDialogueIds).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+
+            return new GeneratedContentInteractionEntry
+            {
+                CategoryId = "npcs",
+                EntryId = npc.SourceId,
+                Title = FirstNonEmpty(npc.Title, npc.SourceId, "(untitled)"),
+                Subtitle = npc.Description,
+                ReferenceIds = references,
+                DetailsText = BuildDetails(
+                    ("Id", npc.SourceId),
+                    ("Title", npc.Title),
+                    ("Description", npc.Description),
+                    ("References", Join(npc.References)),
+                    ("Linked dialogues", Join(linkedDialogueIds)))
+            };
+        }).ToList();
+
+        return Category("npcs", "NPCs", entries);
     }
 
     private static GeneratedContentInteractionCategory BuildQuestCategory(

@@ -1,14 +1,14 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-20T08:53:47Z",
+  "updated_at_utc": "2026-06-20T09:47:58Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 007 generated-content interaction preview completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_007_generated_content_interaction_preview",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 008 active-package quest/dialogue preview completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_008_active_package_quest_dialogue_preview",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts plus baseline assembly, generated Runtime Preview, Product Slice 006 expanded-contract batch smoke and Product Slice 007 interaction-preview smoke; further execution expansion requires controlled vertical-slice approval.",
-  "current_user_action": "Inspect assembled entries in the Runtime Preview Generated Content browser, run the four headless product smoke scenarios, then choose the next controlled slice before M5, broader M6, simulation or runtime-preview repair-loop work.",
+  "active_manual_gate": "Completed for sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke, Product Slice 007 interaction preview and Product Slice 008 active-package quest/dialogue preview; further real execution expansion requires controlled vertical-slice approval.",
+  "current_user_action": "After Artifact Review assembly, activate .llmgc/package-assembly/package.json with Use assembled package as current, then start Runtime Preview and inspect linked dialogues and the preview quest journal without copying the root package file.",
   "recommended_next_decision": "Choose the next controlled product vertical slice from the expanded strict artifact and package-preservation foundation.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
@@ -49,14 +49,14 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_007_generated_content_interaction_preview",
-    "title": "Generated Content Interaction Preview",
-    "completed_at_utc": "2026-06-20T08:53:47Z",
-    "summary": "Added a read-only generated-content catalog over the existing Runtime Preview projection, with selectable categories, entry details/references, preserved summary output and a non-destructive append-to-log action.",
-    "parent_slice_id": "product_slice_006_strict_contract_catalog_batch_generation",
-    "ui_surface": "Runtime Preview / Generated Content",
-    "scenario_id": "generated-content-interaction-preview",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario generated-content-interaction-preview",
+    "slice_id": "product_slice_008_active_generated_package_flow_quest_dialogue_preview",
+    "title": "Active Generated Package Flow + Quest/Dialogue Preview Stubs",
+    "completed_at_utc": "2026-06-20T09:47:58Z",
+    "summary": "Added explicit validated activation of .llmgc/package-assembly/package.json as the current in-memory package, then added linked-dialogue preview and an in-memory quest preview journal without runtime effect execution.",
+    "parent_slice_id": "product_slice_007_generated_content_interaction_preview",
+    "ui_surface": "Artifact Review / Runtime Preview / Generated Content",
+    "scenario_id": "active-package-quest-dialogue-preview",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario active-package-quest-dialogue-preview",
     "supported_contracts": [
       "game_profile_v1",
       "region_pack_v1",
@@ -79,30 +79,17 @@
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md",
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.json",
       ".devflow/runs/<timestamp>-product-smoke/test-results/",
-      ".devflow/runs/<timestamp>-product-smoke/package-output/package.json"
-    ],
-    "interaction_categories": [
-      "current_scene",
-      "regions",
-      "npcs",
-      "items",
-      "dialogues",
-      "quests",
-      "mechanics",
-      "encounters",
-      "applied_artifacts",
-      "warnings"
+      ".devflow/runs/<timestamp>-product-smoke/package-output/.llmgc/package-assembly/package.json"
     ],
     "validation_contracts": [
-      "catalog contains all required generated-content categories",
-      "selection details expose ids, descriptions and reference ids",
-      "dialogue details include lines and quest details include steps/objectives",
-      "applied artifact details include contract, mapping and content hash",
-      "Runtime Preview keeps the existing generated summary and log",
-      "catalog refresh preserves a valid selection when ids still exist",
-      "movement remains functional after catalog construction",
-      "product smoke exports package JSON from fixtures without LLM/provider dependency",
-      "no generated effects, dialogue, combat, inventory or quest execution occurs"
+      "missing or invalid assembled package does not replace the current package",
+      "valid .llmgc/package-assembly/package.json becomes the active in-memory package",
+      "root package.json remains unchanged during activation",
+      "Runtime Preview starts activated generatedContent without manual copy",
+      "NPC entries expose linked dialogue ids and dialogue preview returns lines",
+      "quest start and next-step actions change only the in-memory preview journal",
+      "movement remains functional after preview actions",
+      "no LLM/provider, generated effects, dialogue choices, combat, inventory, Lua or quest rewards execute"
     ]
   },
   "allowed_next_codex_task_types": [
@@ -124,8 +111,8 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_generated_content_interaction_preview",
-  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after expanded strict contracts are covered by assembly, Runtime Preview interaction browsing and headless smoke.",
+  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_active_package_quest_dialogue_preview",
+  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after assembled-package activation and preview-only quest/dialogue interactions are covered by headless smoke.",
   "candidate_product_vertical_slices": [
     "Lua-backed content slice: one safe generator module family producing validated artifact envelopes.",
     "Richer package assembly slice: expand beyond baseline draft assembly for one chosen contract family or gameplay domain.",
@@ -157,6 +144,8 @@
     "Generated package Runtime Preview smoke",
     "Expanded strict contract batch smoke",
     "Generated content interaction preview",
+    "Explicit assembled package activation",
+    "Quest/dialogue preview-only session",
     "controlled product vertical slice planning",
     "later rich assembly/export"
   ],

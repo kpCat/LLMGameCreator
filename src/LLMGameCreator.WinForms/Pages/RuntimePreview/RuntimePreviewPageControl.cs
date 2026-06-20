@@ -15,6 +15,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private readonly IGameRuntime? _runtime;
     private readonly GeneratedPackageRuntimePreviewService _previewService;
     private readonly GeneratedContentInteractionPreviewService _interactionService;
+    private readonly GeneratedQuestDialoguePreviewService _questDialoguePreviewService;
     private GeneratedContentInteractionCatalog _interactionCatalog = new();
     private GameState? _state;
     private bool _splitterInitialized;
@@ -24,6 +25,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     {
         _previewService = new GeneratedPackageRuntimePreviewService();
         _interactionService = new GeneratedContentInteractionPreviewService();
+        _questDialoguePreviewService = new GeneratedQuestDialoguePreviewService();
         InitializeComponent();
         ConfigureSplitSafety();
         WireGeneratedContentEvents();
@@ -34,12 +36,14 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         ICurrentGamePackageService currentGamePackageService,
         IGameRuntime runtime,
         GeneratedPackageRuntimePreviewService previewService,
-        GeneratedContentInteractionPreviewService interactionService)
+        GeneratedContentInteractionPreviewService interactionService,
+        GeneratedQuestDialoguePreviewService questDialoguePreviewService)
     {
         _currentGamePackageService = currentGamePackageService;
         _runtime = runtime;
         _previewService = previewService;
         _interactionService = interactionService;
+        _questDialoguePreviewService = questDialoguePreviewService;
         InitializeComponent();
         ConfigureSplitSafety();
         WireGeneratedContentEvents();
@@ -69,6 +73,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
         var result = _runtime.Start(package);
         _state = result.State;
+        _questDialoguePreviewService.StartSession(package);
         ApplyResult(package, result);
         AppendGeneratedStartSummary(package, result.State);
     }
@@ -115,6 +120,9 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _generatedCategoryComboBox.SelectedIndexChanged += (_, _) => GeneratedCategoryChanged();
         _generatedEntriesListBox.SelectedIndexChanged += (_, _) => GeneratedEntryChanged();
         _appendGeneratedSelectionButton.Click += (_, _) => AppendGeneratedSelectionToLog();
+        _previewDialogueButton.Click += (_, _) => PreviewSelectedDialogue();
+        _startQuestPreviewButton.Click += (_, _) => StartSelectedQuestPreview();
+        _markNextQuestStepButton.Click += (_, _) => MarkNextSelectedQuestStep();
     }
 
     private void ApplySafeInitialSplitterDistance()
@@ -157,12 +165,14 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         if (package == null)
         {
             _generatedContentTextBox.Text = "No package is running.";
+            _questJournalTextBox.Text = "No package is running.";
             ApplyInteractionCatalog(new GeneratedContentInteractionCatalog(), null, null);
             return;
         }
 
         var model = _previewService.Build(package, state);
         _generatedContentTextBox.Text = FormatGeneratedPreview(model);
+        RefreshQuestJournal();
         ApplyInteractionCatalog(_interactionService.Build(model), previousCategoryId, previousEntryId);
     }
 
@@ -247,6 +257,9 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         var entry = _generatedEntriesListBox.SelectedItem as GeneratedContentInteractionEntry;
         _generatedDetailsTextBox.Text = entry?.DetailsText ?? "No generated entry selected.";
         _appendGeneratedSelectionButton.Enabled = entry != null;
+        _previewDialogueButton.Enabled = entry?.CategoryId == "dialogues";
+        _startQuestPreviewButton.Enabled = entry?.CategoryId == "quests";
+        _markNextQuestStepButton.Enabled = entry?.CategoryId == "quests";
     }
 
     private void AppendGeneratedSelectionToLog()
@@ -262,6 +275,82 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
             ? string.Empty
             : $"; refs: {string.Join(", ", entry.ReferenceIds)}";
         AppendLog($"Generated content: {category.Title} / {entry.Title}{references}");
+    }
+
+    private void PreviewSelectedDialogue()
+    {
+        if (_generatedEntriesListBox.SelectedItem is not GeneratedContentInteractionEntry { CategoryId: "dialogues" } entry)
+        {
+            return;
+        }
+
+        var result = _questDialoguePreviewService.PreviewDialogue(entry.EntryId);
+        if (!result.Ok)
+        {
+            AppendLog($"Dialogue preview failed: {result.Status} / {entry.EntryId}");
+            return;
+        }
+
+        AppendLog($"Dialogue preview: {FirstNonEmpty(result.Title, result.DialogueId)}");
+        foreach (var line in result.Lines)
+        {
+            AppendLog(line);
+        }
+    }
+
+    private void StartSelectedQuestPreview()
+    {
+        if (_generatedEntriesListBox.SelectedItem is not GeneratedContentInteractionEntry { CategoryId: "quests" } entry)
+        {
+            return;
+        }
+
+        var result = _questDialoguePreviewService.StartQuest(entry.EntryId);
+        AppendLog(result.Ok
+            ? $"Quest preview started: {entry.Title}"
+            : $"Quest preview failed: {result.Status} / {entry.EntryId}");
+        RefreshQuestJournal();
+    }
+
+    private void MarkNextSelectedQuestStep()
+    {
+        if (_generatedEntriesListBox.SelectedItem is not GeneratedContentInteractionEntry { CategoryId: "quests" } entry)
+        {
+            return;
+        }
+
+        var result = _questDialoguePreviewService.MarkNextStep(entry.EntryId);
+        AppendLog(result.Ok
+            ? $"Quest preview step: {entry.Title} / {result.CompletedStepCount} of {result.StepCount} / {result.QuestStatus}"
+            : $"Quest preview step failed: {result.Status} / {entry.EntryId}");
+        RefreshQuestJournal();
+    }
+
+    private void RefreshQuestJournal()
+    {
+        if (_state == null)
+        {
+            _questJournalTextBox.Text = "No package is running.";
+            return;
+        }
+
+        var journal = _questDialoguePreviewService.BuildJournal();
+        var builder = new StringBuilder();
+        builder.AppendLine($"Available quests: {journal.AvailableCount}");
+        builder.AppendLine($"Active preview quests: {journal.ActiveCount}");
+        builder.AppendLine($"Completed preview quests: {journal.CompletedCount}");
+        foreach (var quest in journal.Entries)
+        {
+            builder.AppendLine();
+            builder.AppendLine($"{FirstNonEmpty(quest.Title, quest.QuestId)} [{quest.Status}]");
+            builder.AppendLine($"Steps: {quest.CompletedStepCount}/{quest.StepCount}");
+            if (!string.IsNullOrWhiteSpace(quest.CurrentStep))
+            {
+                builder.AppendLine($"Current/next step: {quest.CurrentStep}");
+            }
+        }
+
+        _questJournalTextBox.Text = builder.ToString().TrimEnd();
     }
 
     private int FindCategoryIndex(string? categoryId)

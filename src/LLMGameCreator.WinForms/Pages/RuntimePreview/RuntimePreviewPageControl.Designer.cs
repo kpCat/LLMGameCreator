@@ -21,6 +21,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabControl _generatedContentInnerTabControl;
         private TabPage _generatedBrowserTabPage;
         private TabPage _generatedSummaryTabPage;
+        private TabPage _questJournalTabPage;
         private TableLayoutPanel _generatedBrowserLayout;
         private ComboBox _generatedCategoryComboBox;
         private SplitContainer _generatedBrowserSplitContainer;
@@ -28,7 +29,11 @@ namespace LLMGameCreator.WinForms.Pages
         private TextBox _generatedDetailsTextBox;
         private FlowLayoutPanel _generatedActionsPanel;
         private Button _appendGeneratedSelectionButton;
+        private Button _previewDialogueButton;
+        private Button _startQuestPreviewButton;
+        private Button _markNextQuestStepButton;
         private TextBox _generatedContentTextBox;
+        private TextBox _questJournalTextBox;
 
         protected override void Dispose(bool disposing)
         {
@@ -55,6 +60,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._generatedContentInnerTabControl = new TabControl();
             this._generatedBrowserTabPage = new TabPage();
             this._generatedSummaryTabPage = new TabPage();
+            this._questJournalTabPage = new TabPage();
             this._generatedBrowserLayout = new TableLayoutPanel();
             this._generatedCategoryComboBox = new ComboBox();
             this._generatedBrowserSplitContainer = new SplitContainer();
@@ -62,7 +68,11 @@ namespace LLMGameCreator.WinForms.Pages
             this._generatedDetailsTextBox = new TextBox();
             this._generatedActionsPanel = new FlowLayoutPanel();
             this._appendGeneratedSelectionButton = new Button();
+            this._previewDialogueButton = new Button();
+            this._startQuestPreviewButton = new Button();
+            this._markNextQuestStepButton = new Button();
             this._generatedContentTextBox = new TextBox();
+            this._questJournalTextBox = new TextBox();
             ((ISupportInitialize)this._rootSplitContainer).BeginInit();
             this._rootSplitContainer.Panel1.SuspendLayout();
             this._rootSplitContainer.Panel2.SuspendLayout();
@@ -75,6 +85,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._generatedContentInnerTabControl.SuspendLayout();
             this._generatedBrowserTabPage.SuspendLayout();
             this._generatedSummaryTabPage.SuspendLayout();
+            this._questJournalTabPage.SuspendLayout();
             this._generatedBrowserLayout.SuspendLayout();
             ((ISupportInitialize)this._generatedBrowserSplitContainer).BeginInit();
             this._generatedBrowserSplitContainer.Panel1.SuspendLayout();
@@ -180,6 +191,7 @@ namespace LLMGameCreator.WinForms.Pages
             // 
             this._generatedContentInnerTabControl.Controls.Add(this._generatedBrowserTabPage);
             this._generatedContentInnerTabControl.Controls.Add(this._generatedSummaryTabPage);
+            this._generatedContentInnerTabControl.Controls.Add(this._questJournalTabPage);
             this._generatedContentInnerTabControl.Dock = DockStyle.Fill;
             this._generatedContentInnerTabControl.Location = new Point(3, 3);
             this._generatedContentInnerTabControl.Name = "_generatedContentInnerTabControl";
@@ -208,6 +220,17 @@ namespace LLMGameCreator.WinForms.Pages
             this._generatedSummaryTabPage.TabIndex = 1;
             this._generatedSummaryTabPage.Text = "Summary";
             this._generatedSummaryTabPage.UseVisualStyleBackColor = true;
+            // 
+            // _questJournalTabPage
+            // 
+            this._questJournalTabPage.Controls.Add(this._questJournalTextBox);
+            this._questJournalTabPage.Location = new Point(4, 24);
+            this._questJournalTabPage.Name = "_questJournalTabPage";
+            this._questJournalTabPage.Padding = new Padding(3);
+            this._questJournalTabPage.Size = new Size(528, 538);
+            this._questJournalTabPage.TabIndex = 2;
+            this._questJournalTabPage.Text = "Quest Journal";
+            this._questJournalTabPage.UseVisualStyleBackColor = true;
             // 
             // _generatedBrowserLayout
             // 
@@ -271,6 +294,9 @@ namespace LLMGameCreator.WinForms.Pages
             // _generatedActionsPanel
             // 
             this._generatedActionsPanel.Controls.Add(this._appendGeneratedSelectionButton);
+            this._generatedActionsPanel.Controls.Add(this._previewDialogueButton);
+            this._generatedActionsPanel.Controls.Add(this._startQuestPreviewButton);
+            this._generatedActionsPanel.Controls.Add(this._markNextQuestStepButton);
             this._generatedActionsPanel.Dock = DockStyle.Fill;
             this._generatedActionsPanel.Location = new Point(3, 495);
             this._generatedActionsPanel.Name = "_generatedActionsPanel";
@@ -282,10 +308,40 @@ namespace LLMGameCreator.WinForms.Pages
             this._appendGeneratedSelectionButton.Enabled = false;
             this._appendGeneratedSelectionButton.Location = new Point(3, 3);
             this._appendGeneratedSelectionButton.Name = "_appendGeneratedSelectionButton";
-            this._appendGeneratedSelectionButton.Size = new Size(156, 28);
+            this._appendGeneratedSelectionButton.Size = new Size(126, 28);
             this._appendGeneratedSelectionButton.TabIndex = 0;
             this._appendGeneratedSelectionButton.Text = "Append selected to log";
             this._appendGeneratedSelectionButton.UseVisualStyleBackColor = true;
+            // 
+            // _previewDialogueButton
+            // 
+            this._previewDialogueButton.Enabled = false;
+            this._previewDialogueButton.Location = new Point(135, 3);
+            this._previewDialogueButton.Name = "_previewDialogueButton";
+            this._previewDialogueButton.Size = new Size(110, 28);
+            this._previewDialogueButton.TabIndex = 1;
+            this._previewDialogueButton.Text = "Preview dialogue";
+            this._previewDialogueButton.UseVisualStyleBackColor = true;
+            // 
+            // _startQuestPreviewButton
+            // 
+            this._startQuestPreviewButton.Enabled = false;
+            this._startQuestPreviewButton.Location = new Point(251, 3);
+            this._startQuestPreviewButton.Name = "_startQuestPreviewButton";
+            this._startQuestPreviewButton.Size = new Size(110, 28);
+            this._startQuestPreviewButton.TabIndex = 2;
+            this._startQuestPreviewButton.Text = "Start quest preview";
+            this._startQuestPreviewButton.UseVisualStyleBackColor = true;
+            // 
+            // _markNextQuestStepButton
+            // 
+            this._markNextQuestStepButton.Enabled = false;
+            this._markNextQuestStepButton.Location = new Point(367, 3);
+            this._markNextQuestStepButton.Name = "_markNextQuestStepButton";
+            this._markNextQuestStepButton.Size = new Size(120, 28);
+            this._markNextQuestStepButton.TabIndex = 3;
+            this._markNextQuestStepButton.Text = "Mark next quest step";
+            this._markNextQuestStepButton.UseVisualStyleBackColor = true;
             // 
             // _generatedContentTextBox
             // 
@@ -297,6 +353,17 @@ namespace LLMGameCreator.WinForms.Pages
             this._generatedContentTextBox.ScrollBars = ScrollBars.Vertical;
             this._generatedContentTextBox.Size = new Size(522, 532);
             this._generatedContentTextBox.TabIndex = 0;
+            // 
+            // _questJournalTextBox
+            // 
+            this._questJournalTextBox.Dock = DockStyle.Fill;
+            this._questJournalTextBox.Location = new Point(3, 3);
+            this._questJournalTextBox.Multiline = true;
+            this._questJournalTextBox.Name = "_questJournalTextBox";
+            this._questJournalTextBox.ReadOnly = true;
+            this._questJournalTextBox.ScrollBars = ScrollBars.Vertical;
+            this._questJournalTextBox.Size = new Size(522, 532);
+            this._questJournalTextBox.TabIndex = 0;
             // 
             // RuntimePreviewPageControl
             // 
@@ -319,6 +386,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._generatedBrowserTabPage.ResumeLayout(false);
             this._generatedSummaryTabPage.ResumeLayout(false);
             this._generatedSummaryTabPage.PerformLayout();
+            this._questJournalTabPage.ResumeLayout(false);
+            this._questJournalTabPage.PerformLayout();
             this._generatedBrowserLayout.ResumeLayout(false);
             this._generatedBrowserLayout.PerformLayout();
             this._generatedBrowserSplitContainer.Panel1.ResumeLayout(false);

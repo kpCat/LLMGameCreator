@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 007 adds a read-only generated-content interaction browser to Runtime Preview.
+M4.1 gate passed for sampled baseline contracts; Product Slice 008 connects assembled-package activation to Runtime Preview and adds preview-only quest/dialogue state.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-006.1 established composable selection, strict generation, approved-artifact assembly, controlled batch presets and generated-content Runtime Preview. Product Slice 007 projects that existing generated content into selectable categories, entry details/references and an append-to-log preview action without changing `DefaultGameRuntime`, package contracts or execution behavior.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-007 established composable selection, strict generation, approved-artifact assembly, controlled batch presets and a generated-content interaction browser. Product Slice 008 adds an explicit, validated `Use assembled package as current` handoff from `.llmgc/package-assembly/package.json`, then keeps dialogue lines and quest progress in a preview-only in-memory session without changing `DefaultGameRuntime`, package contracts or execution behavior.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,6 +62,17 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 008: Active Generated Package Flow + Quest/Dialogue Preview Stubs.
+- Artifact Review now leaves the root `package.json` untouched and exposes an explicit `Use assembled package as current` action after successful assembly.
+- `AssembledGamePackageActivationService` loads the current project's `.llmgc/package-assembly/package.json` through the existing repository, validates it, and only then replaces the active in-memory package.
+- Runtime Preview starts the activated assembled package without manual copying and keeps the existing Generated Content Browser and Summary.
+- NPC entries expose linked dialogue ids; dialogue preview appends title and lines to the log.
+- Quest preview start/advance lives only in `GeneratedQuestDialoguePreviewService`; the new Quest Journal shows available, active and completed preview quests plus the current/next step.
+- `active-package-quest-dialogue-preview` proves assembly, activation, generated-content startup, NPC/dialogue lookup, quest journal change and movement without LLM/provider calls or generated effect execution.
+- No root package overwrite, runtime engine rewrite, package schema change, real quest/dialogue execution, Lua/effect, Unity, solution or project changes were introduced.
+
+Parent slice foundation:
+
 - Product Slice 007: Generated Content Interaction Preview.
 - Runtime Preview now exposes current scene, regions, NPCs, items, dialogues, quests, mechanics, encounters, applied artifacts and warnings as selectable read-only categories.
 - Selection details include ids, descriptions, references, dialogue lines, quest steps/objectives, mechanic tags and artifact provenance/hash where available.
@@ -70,7 +81,7 @@ Permanent evidence summary:
 - `generated-content-interaction-preview` assembles the expanded fixture package, builds the projection/catalog, verifies detail coverage and confirms movement still works without LLM/provider calls.
 - No runtime engine, package schema, generator contract, Lua/effect, Unity, solution or project changes were introduced.
 
-Parent slice foundation:
+Earlier foundation:
 
 - Product Slice 006: Strict Contract Catalog + Batch Generation.
 - Added strict contracts for regions, NPCs, items, dialogues and encounters with bounded JSON shapes, prompt instructions and contract validation.
@@ -82,11 +93,11 @@ Parent slice foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slice 007 interaction-preview smoke. Further contract or runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke, Product Slice 007 interaction preview and Product Slice 008 active-package quest/dialogue preview. Further contract or real runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Use the Runtime Preview Generated Content browser to inspect assembled entries and provenance, and use the four headless product smoke scenarios for baseline assembly, generated preview, expanded batches and interaction preview. Choose the next controlled slice before M5, broader M6, simulation or repair-loop work.
+After Artifact Review assembly, use `Use assembled package as current`, then start Runtime Preview to inspect linked dialogues and the preview quest journal without copying `package.json`. Use the five headless product smoke scenarios before choosing the next controlled slice.
 
 ## Allowed next Codex tasks
 
@@ -125,6 +136,8 @@ Capability Picker
   -> Headless product smoke
   -> Expanded strict contract batch smoke
   -> Generated content interaction preview
+  -> Explicit assembled package activation
+  -> Quest/dialogue preview-only session
   -> controlled product vertical slice planning
 ```
 

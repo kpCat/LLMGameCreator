@@ -30,7 +30,11 @@ function Write-ProductSmokeSummary {
         [string]$ErrorMessage = ""
     )
 
-    $packageJsonPath = Join-Path $PackageOutputDir "package.json"
+    $packageJsonPath = if ($Scenario -eq "active-package-quest-dialogue-preview") {
+        Join-Path $PackageOutputDir ".llmgc\package-assembly\package.json"
+    } else {
+        Join-Path $PackageOutputDir "package.json"
+    }
     $summary = [ordered]@{
         status = $Status
         scenario = $Scenario
@@ -71,6 +75,7 @@ function Write-ProductSmokeSummary {
 }
 
 $PreviousPackageOutput = $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR
+$PreviousProjectDir = $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR
 
 Push-Location $RepoRoot
 try {
@@ -86,12 +91,16 @@ try {
     elseif ($Scenario -eq "generated-content-interaction-preview") {
         $TestFilter = "FullyQualifiedName~GeneratedContentInteractionPreviewProductSmoke"
     }
+    elseif ($Scenario -eq "active-package-quest-dialogue-preview") {
+        $TestFilter = "FullyQualifiedName~ActivePackageQuestDialoguePreviewProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }
 
     $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
     $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR = $PackageOutputDir
+    $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR = $PackageOutputDir
 
     Invoke-DevflowLoggedCommand -Name "product-smoke-test" -Exe "dotnet" -ArgsList @(
         "test",
@@ -122,5 +131,6 @@ catch {
 }
 finally {
     $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR = $PreviousPackageOutput
+    $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR = $PreviousProjectDir
     Pop-Location
 }

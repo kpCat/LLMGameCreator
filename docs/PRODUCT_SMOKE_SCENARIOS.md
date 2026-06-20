@@ -175,3 +175,38 @@ Expected assertions:
 Expected outputs use the shared `.devflow/runs/<timestamp>-product-smoke/` structure and include exported `package-output/package.json`.
 
 Manual UI verification remains required for category selection, details readability, `Append selected to log`, and selection preservation after Start/movement.
+
+## active-package-quest-dialogue-preview
+
+Validates the non-destructive assembled-package activation flow and preview-only quest/dialogue session:
+
+```text
+full_small_rpg_seed fixture artifacts
+-> .llmgc/package-assembly/package.json export
+-> validate and activate through AssembledGamePackageActivationService
+-> Runtime Preview projection and interaction catalog
+-> linked NPC dialogue preview
+-> in-memory quest preview journal and step advance
+-> movement compatibility
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario active-package-quest-dialogue-preview
+```
+
+Expected assertions:
+
+- activation fails safely if the assembled package is absent or invalid;
+- the valid assembled package becomes `ICurrentGamePackageService.CurrentPackage` without replacing the root `package.json`;
+- Runtime Preview starts with non-empty generated NPC, dialogue and quest content;
+- NPC details include linked dialogue ids and dialogue preview returns read-only lines;
+- starting and advancing a quest changes only the in-memory preview journal;
+- movement remains functional;
+- fixture artifacts contain no provider or LM Studio dependency;
+- no generated effects, dialogue choices, quest rewards, inventory, combat or Lua are executed.
+
+The scenario stores its assembled package at `.devflow/runs/<timestamp>-product-smoke/package-output/.llmgc/package-assembly/package.json`.
+
+Manual UI verification remains required for the Artifact Review activation button, Runtime Preview action buttons, log readability and Quest Journal layout.
