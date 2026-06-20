@@ -55,6 +55,31 @@ public sealed class GeneratorPlanGamePackageAssembler
                     RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
                     mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.maps"));
                     break;
+                case "region_pack_v1":
+                    MapRegionPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "generatedContent.regions"));
+                    break;
+                case "npc_pack_v1":
+                    MapNpcPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "generatedContent.npcs"));
+                    break;
+                case "item_pack_v1":
+                    MapItemPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "generatedContent.items"));
+                    break;
+                case "dialogue_pack_v1":
+                    MapDialoguePack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "generatedContent.dialogues"));
+                    break;
+                case "encounter_pack_v1":
+                    MapEncounterPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "generatedContent.encounters"));
+                    break;
                 case "entity_pack_v1":
                     MapEntityPack(package, document.RootElement);
                     RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
@@ -353,6 +378,115 @@ public sealed class GeneratorPlanGamePackageAssembler
                 ]
             });
             index++;
+        }
+    }
+
+    private static void MapRegionPack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "regions", out var regions) || regions.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var region in regions.EnumerateArray())
+        {
+            var mapped = new GeneratedRegionDefinition
+            {
+                SourceId = GetString(region, "id").Trim(),
+                Title = GetString(region, "title").Trim(),
+                Description = GetString(region, "description").Trim(),
+                SceneIds = ReadStringArray(region, "scene_ids")
+            };
+            package.GeneratedContent.Regions.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
+            package.GeneratedContent.Regions.Add(mapped);
+        }
+    }
+
+    private static void MapNpcPack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "npcs", out var npcs) || npcs.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var npc in npcs.EnumerateArray())
+        {
+            var mapped = new GeneratedNpcDefinition
+            {
+                SourceId = GetString(npc, "id").Trim(),
+                Name = GetString(npc, "name").Trim(),
+                Description = GetString(npc, "description").Trim(),
+                RegionId = GetString(npc, "region_id").Trim(),
+                SceneId = GetString(npc, "scene_id").Trim()
+            };
+            package.GeneratedContent.Npcs.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
+            package.GeneratedContent.Npcs.Add(mapped);
+        }
+    }
+
+    private static void MapItemPack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "items", out var items) || items.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var item in items.EnumerateArray())
+        {
+            var mapped = new GeneratedItemDefinition
+            {
+                SourceId = GetString(item, "id").Trim(),
+                Name = GetString(item, "name").Trim(),
+                Description = GetString(item, "description").Trim()
+            };
+            package.GeneratedContent.Items.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
+            package.GeneratedContent.Items.Add(mapped);
+        }
+    }
+
+    private static void MapDialoguePack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "dialogues", out var dialogues) || dialogues.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var dialogue in dialogues.EnumerateArray())
+        {
+            var mapped = new GeneratedDialogueDefinition
+            {
+                SourceId = GetString(dialogue, "id").Trim(),
+                Title = GetString(dialogue, "title").Trim(),
+                Description = GetString(dialogue, "description").Trim(),
+                NpcId = GetString(dialogue, "npc_id").Trim(),
+                SceneId = GetString(dialogue, "scene_id").Trim(),
+                Lines = ReadStringArray(dialogue, "lines")
+            };
+            package.GeneratedContent.Dialogues.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
+            package.GeneratedContent.Dialogues.Add(mapped);
+        }
+    }
+
+    private static void MapEncounterPack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "encounters", out var encounters) || encounters.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var encounter in encounters.EnumerateArray())
+        {
+            var mapped = new GeneratedEncounterDefinition
+            {
+                SourceId = GetString(encounter, "id").Trim(),
+                Title = GetString(encounter, "title").Trim(),
+                Description = GetString(encounter, "description").Trim(),
+                RegionId = GetString(encounter, "region_id").Trim(),
+                SceneId = GetString(encounter, "scene_id").Trim(),
+                NpcIds = ReadStringArray(encounter, "npc_ids")
+            };
+            package.GeneratedContent.Encounters.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
+            package.GeneratedContent.Encounters.Add(mapped);
         }
     }
 

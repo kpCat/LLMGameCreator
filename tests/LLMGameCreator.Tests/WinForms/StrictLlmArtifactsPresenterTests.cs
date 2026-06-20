@@ -14,6 +14,8 @@ public sealed class StrictLlmArtifactsPresenterTests
 
         Assert.Equal("local", state.SelectedProfileId);
         Assert.Contains(state.Contracts, contract => contract.Id == "game_profile_v1");
+        Assert.Contains(state.Contracts, contract => contract.Id == "region_pack_v1" && contract.Title == "Region pack");
+        Assert.Contains(state.Contracts, contract => contract.Id == "encounter_pack_v1" && contract.Title == "Encounter pack");
     }
 
     [Fact]

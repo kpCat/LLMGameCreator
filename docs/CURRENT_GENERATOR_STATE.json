@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-19T14:44:55Z",
+  "updated_at_utc": "2026-06-19T18:31:54Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 005 generated package runtime preview completed",
-  "gate_status": "passed_sampled_baseline_with_composer_v2_foundation_ux_repair_slice_002_picker_wiring_slice_003_draft_assembly_slice_004_headless_smoke_and_slice_005_runtime_preview",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 006 strict contract catalog and batch generation completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_006_expanded_strict_contract_batch_smoke",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts plus Product Slice 004 headless baseline package assembly smoke and Product Slice 005 generated package runtime preview smoke; broad expansion still requires controlled vertical-slice approval.",
-  "current_user_action": "Run the headless product smoke scenarios for baseline package assembly and generated package runtime preview checks, use manual UI checks only for UI-specific changes, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.",
-  "recommended_next_decision": "Choose the next controlled product vertical slice after the baseline approved-artifact draft assembly path and generated package runtime preview are covered by headless smoke automation.",
+  "active_manual_gate": "Completed for sampled baseline contracts plus baseline assembly, generated Runtime Preview and Product Slice 006 expanded-contract batch smoke; further expansion requires controlled vertical-slice approval.",
+  "current_user_action": "Run the three headless product smoke scenarios, then choose the next controlled slice before M5, broader M6, simulation or runtime-preview repair-loop work.",
+  "recommended_next_decision": "Choose the next controlled product vertical slice from the expanded strict artifact and package-preservation foundation.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,17 +49,29 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_005_generated_package_runtime_preview",
-    "title": "Generated Package Runtime Preview",
-    "completed_at_utc": "2026-06-19T14:44:55Z",
-    "summary": "Added a read-only generated package runtime-preview projection, surfaced it in Runtime Preview, and added headless smoke coverage proving assembled baseline generated content is visible while DefaultGameRuntime start and movement still work without UI automation, LLM/provider calls, Lua, generator-library, solution or project changes.",
-    "scenario_id": "generated-package-runtime-preview",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario generated-package-runtime-preview",
-    "supported_baseline_contracts": [
+    "slice_id": "product_slice_006_strict_contract_catalog_batch_generation",
+    "title": "Strict Contract Catalog + Batch Generation",
+    "completed_at_utc": "2026-06-19T18:31:54Z",
+    "summary": "Added five bounded strict artifact contracts, five batch presets, additive generatedContent mappings, Runtime Preview summaries and fixture-only expanded batch smoke without provider, Lua, runtime-engine, solution or project changes.",
+    "scenario_id": "expanded-contract-batch-smoke",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario expanded-contract-batch-smoke",
+    "supported_contracts": [
       "game_profile_v1",
+      "region_pack_v1",
       "scene_pack_v1",
+      "npc_pack_v1",
       "quest_pack_v1",
-      "mechanics_pack_v1"
+      "dialogue_pack_v1",
+      "mechanics_pack_v1",
+      "encounter_pack_v1",
+      "item_pack_v1"
+    ],
+    "batch_presets": [
+      "baseline_game_seed",
+      "world_content_expansion",
+      "character_content_expansion",
+      "encounter_item_expansion",
+      "full_small_rpg_seed"
     ],
     "headless_outputs": [
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md",
@@ -69,17 +81,14 @@
     ],
     "validation_contracts": [
       "package JSON export exists",
-      "runtime starts the assembled baseline package",
-      "current generated scene resolves from generatedContent.scenes by map id",
-      "generated profile title, description and core loop are visible",
-      "generated quests and mechanics are visible",
-      "applied artifact provenance exists for all four baseline contracts",
-      "simple movement still works after runtime start",
+      "all five expanded generatedContent sections are non-empty",
+      "Runtime Preview projection exposes all five expanded sections",
+      "applied artifact provenance exists for all nine full_small_rpg_seed contracts",
       "product smoke uses fixtures and requires no LLM/provider dependency"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_one_controlled_product_vertical_slice_from_composer_v2_foundation_draft_assembly_path_and_headless_smoke",
+    "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
     "tighten_prompt_repair_or_validator_if_future_real_evaluations_regress",
@@ -97,8 +106,8 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_generated_runtime_preview_smoke",
-  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after baseline draft assembly and generated Runtime Preview are covered by headless smoke.",
+  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_expanded_contract_batch_smoke",
+  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after expanded strict contracts are covered by assembly, Runtime Preview projection and headless smoke.",
   "candidate_product_vertical_slices": [
     "Lua-backed content slice: one safe generator module family producing validated artifact envelopes.",
     "Richer package assembly slice: expand beyond baseline draft assembly for one chosen contract family or gameplay domain.",
@@ -127,6 +136,7 @@
     "Draft GamePackage assembly/export",
     "Headless product smoke",
     "Generated package Runtime Preview smoke",
+    "Expanded strict contract batch smoke",
     "controlled product vertical slice planning",
     "later rich assembly/export"
   ],

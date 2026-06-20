@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts.
+M4.1 gate passed for sampled baseline contracts; Product Slice 006 expanded the strict contract catalog and added controlled batch presets.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path for the sampled baseline strict contracts. A real local-model batch evaluation passed for the sampled baseline strict contracts, the first controlled product slice added a non-breaking Capability Composer v2 foundation on top of the existing picker, the follow-up UX repair made the picker readable and usable at normal editor sizes, Product Slice 002 wired composable module/modifier/constraint/runtime requirement selection into the picker and prompt context, Product Slice 003 lets approved baseline artifacts assemble an inspectable draft GamePackage, Product Slice 004 adds headless smoke automation for baseline artifact package assembly, and Product Slice 005 makes assembled generated content visible in Runtime Preview through a read-only projection with headless runtime-preview smoke coverage.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-005 established composable selection, baseline strict generation, approved-artifact assembly, headless smoke and generated-content Runtime Preview. Product Slice 006 adds `region_pack_v1`, `npc_pack_v1`, `item_pack_v1`, `dialogue_pack_v1` and `encounter_pack_v1`, five controlled batch presets, non-breaking typed `generatedContent` mapping and expanded headless smoke coverage.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,30 +62,25 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 005: Generated Package Runtime Preview.
-- Runtime Preview now shows a generated content summary for assembled packages without changing `DefaultGameRuntime` into a new engine.
-- The read-only projection resolves package title/description, current map, current generated scene, generated profile, quests, mechanics, applied artifact provenance and warnings from `GamePackageDefinition` plus current runtime state.
-- Runtime Preview appends generated scene/quest/mechanic summary messages on start and keeps movement/interact behavior on the existing map runtime path.
-- The smoke scenario `generated-package-runtime-preview` uses deterministic fixture approved artifacts for all four sampled M4.1 baseline contracts:
-  - `game_profile_v1`;
-  - `scene_pack_v1`;
-  - `quest_pack_v1`;
-  - `mechanics_pack_v1`.
-- The smoke runner exports `package.json`, starts `DefaultGameRuntime`, verifies the generated preview projection is populated, checks applied artifact provenance and confirms a simple movement command still succeeds.
-- Product Slice 005 adds headless smoke automation for generated package Runtime Preview. Manual checking remains useful only for UI layout/readability and keyboard focus.
-- The smoke path does not call LLM/provider APIs, LM Studio, Lua, WinForms UI automation or generator-library execution.
+- Product Slice 006: Strict Contract Catalog + Batch Generation.
+- Added strict contracts for regions, NPCs, items, dialogues and encounters with bounded JSON shapes, prompt instructions and contract validation.
+- Added batch presets `baseline_game_seed`, `world_content_expansion`, `character_content_expansion`, `encounter_item_expansion` and `full_small_rpg_seed` through the strict contract catalog API.
+- Approved expanded artifacts map into additive default-empty `generatedContent.regions`, `npcs`, `items`, `dialogues` and `encounters`; no simulation or effect execution was added.
+- Runtime Preview exposes counts and summaries for all five expanded sections while preserving existing profile/scene/quest/mechanics output.
+- The headless scenario `expanded-contract-batch-smoke` assembles all nine `full_small_rpg_seed` fixture contracts, exports `package.json`, verifies provenance and expanded sections, and builds the Runtime Preview projection without LLM/provider calls.
+- A preset dropdown was not added because the existing LLM Artifacts control has no Designer split; the catalog API is the safe foundation for a later Designer-safe UI task.
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts, Product Slice 004 headless baseline package assembly smoke and Product Slice 005 generated package Runtime Preview smoke. Broad expansion still requires an explicit next controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview and Product Slice 006 expanded-contract batch smoke. Further contract or runtime expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Use the headless product smoke scenarios for baseline package assembly and generated package Runtime Preview checks, keep manual UI checks for UI-specific behavior only, then choose the next controlled product slice before starting M5, broad M6, M6-lite shortcuts or runtime preview repair-loop work.
+Use the three headless product smoke scenarios for baseline assembly, generated Runtime Preview and expanded contract batches. Choose the next controlled slice before M5, broader M6, simulation or repair-loop work.
 
 ## Allowed next Codex tasks
 
-- Plan one controlled product vertical slice from the passed sampled baseline evidence, Capability Composer v2 foundation and narrow approved-artifact assembly path.
+- Plan one controlled product vertical slice from the passed sampled baseline evidence, expanded strict catalog, batch presets and approved-artifact assembly path.
 - Generate source-refreshed M5 entry executable specs after the user chooses the next vertical slice.
 - Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
@@ -117,6 +112,7 @@ Capability Picker
   -> Apply approved baseline artifacts
   -> Draft GamePackage assembly/export
   -> Headless product smoke
+  -> Expanded strict contract batch smoke
   -> controlled product vertical slice planning
 ```
 
@@ -143,7 +139,7 @@ Capability Picker
 
 ## Recommended next step
 
-Choose the next controlled product vertical slice and then refresh the next executable task specs from current source.
+Choose the next controlled product vertical slice from the expanded strict artifact and package-preservation foundation, then refresh its executable task spec from current source.
 
 Candidate slices:
 

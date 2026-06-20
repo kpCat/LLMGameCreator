@@ -104,3 +104,42 @@ No-LLM guarantee:
 Relationship to manual UI tests:
 
 This smoke proves the generated content projection and runtime movement compatibility headlessly. Manual UI checks remain useful for confirming the Runtime Preview tab layout, text readability and keyboard focus.
+
+## expanded-contract-batch-smoke
+
+Validates the first expanded strict-contract batch without LLM/provider calls:
+
+```text
+fixture approved artifacts for the full_small_rpg_seed contract set
+-> GamePackage assembly service
+-> package.json export
+-> generatedContent expanded sections
+-> Runtime Preview projection
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario expanded-contract-batch-smoke
+```
+
+The fixture covers the four baseline contracts plus:
+
+```text
+region_pack_v1
+npc_pack_v1
+item_pack_v1
+dialogue_pack_v1
+encounter_pack_v1
+```
+
+Expected assertions:
+
+- assembly succeeds and exports `package.json`;
+- provenance contains all nine `full_small_rpg_seed` contracts;
+- `generatedContent.regions`, `npcs`, `items`, `dialogues` and `encounters` are non-empty;
+- Runtime Preview projection exposes summaries and references for all five expanded sections;
+- fixture artifacts contain no provider or LM Studio dependency;
+- no generated effects, combat, economy or dialogue execution occurs.
+
+Expected outputs use the same `.devflow/runs/<timestamp>-product-smoke/` structure as the baseline scenarios.

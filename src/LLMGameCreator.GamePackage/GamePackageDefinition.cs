@@ -24,6 +24,11 @@ public sealed class GeneratedContentDefinition
 {
     public GeneratedGameProfileDefinition Profile { get; set; } = new GeneratedGameProfileDefinition();
     public List<GeneratedSceneDefinition> Scenes { get; set; } = new List<GeneratedSceneDefinition>();
+    public List<GeneratedRegionDefinition> Regions { get; set; } = new List<GeneratedRegionDefinition>();
+    public List<GeneratedNpcDefinition> Npcs { get; set; } = new List<GeneratedNpcDefinition>();
+    public List<GeneratedItemDefinition> Items { get; set; } = new List<GeneratedItemDefinition>();
+    public List<GeneratedDialogueDefinition> Dialogues { get; set; } = new List<GeneratedDialogueDefinition>();
+    public List<GeneratedEncounterDefinition> Encounters { get; set; } = new List<GeneratedEncounterDefinition>();
     public List<GeneratedQuestSeedDefinition> Quests { get; set; } = new List<GeneratedQuestSeedDefinition>();
     public List<GeneratedMechanicDefinition> Mechanics { get; set; } = new List<GeneratedMechanicDefinition>();
     public List<GeneratedContentArtifactProvenance> AppliedArtifacts { get; set; } = new List<GeneratedContentArtifactProvenance>();
@@ -52,6 +57,50 @@ public sealed class GeneratedSceneDefinition
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Purpose { get; set; } = string.Empty;
+}
+
+public sealed class GeneratedRegionDefinition
+{
+    public string SourceId { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public List<string> SceneIds { get; set; } = new List<string>();
+}
+
+public sealed class GeneratedNpcDefinition
+{
+    public string SourceId { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string RegionId { get; set; } = string.Empty;
+    public string SceneId { get; set; } = string.Empty;
+}
+
+public sealed class GeneratedItemDefinition
+{
+    public string SourceId { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+}
+
+public sealed class GeneratedDialogueDefinition
+{
+    public string SourceId { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string NpcId { get; set; } = string.Empty;
+    public string SceneId { get; set; } = string.Empty;
+    public List<string> Lines { get; set; } = new List<string>();
+}
+
+public sealed class GeneratedEncounterDefinition
+{
+    public string SourceId { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string RegionId { get; set; } = string.Empty;
+    public string SceneId { get; set; } = string.Empty;
+    public List<string> NpcIds { get; set; } = new List<string>();
 }
 
 public sealed class GeneratedQuestSeedDefinition

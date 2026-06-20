@@ -146,6 +146,24 @@ internal static class ProductSmokeBaselineApprovedArtifacts
         };
     }
 
+    public static GeneratorPlanApprovedArtifactSet CreateExpandedApprovedArtifactSet()
+    {
+        var baseline = CreateApprovedArtifactSet();
+        return baseline with
+        {
+            SnapshotId = "snapshot/product-smoke/expanded-contract-batch",
+            SourceProductionBatchId = "batch/product-smoke/expanded-contract-batch",
+            ApprovedArtifacts = baseline.ApprovedArtifacts.Concat(
+            [
+                Artifact("artifact/product-smoke/region-pack", "region_pack_v1", RegionPackJson()),
+                Artifact("artifact/product-smoke/npc-pack", "npc_pack_v1", NpcPackJson()),
+                Artifact("artifact/product-smoke/item-pack", "item_pack_v1", ItemPackJson()),
+                Artifact("artifact/product-smoke/dialogue-pack", "dialogue_pack_v1", DialoguePackJson()),
+                Artifact("artifact/product-smoke/encounter-pack", "encounter_pack_v1", EncounterPackJson())
+            ]).ToList()
+        };
+    }
+
     private static GeneratorPlanApprovedArtifact Artifact(string id, string contractId, string contentJson)
     {
         return new GeneratorPlanApprovedArtifact
@@ -256,6 +274,41 @@ internal static class ProductSmokeBaselineApprovedArtifacts
             "audit_id": "strict_llm_evaluation/product-smoke-fixture"
           }
         }
+        """;
+    }
+
+    private static string RegionPackJson()
+    {
+        return """
+        {"schema_version":"0.1","artifact_kind":"region_pack_v1","regions":[{"id":"region/smoke-harbor","title":"Smoke Harbor","description":"A compact region for expanded smoke.","scene_ids":["scene/smoke-start"]}],"source_context":{"capability_selection_id":"generator_plan_capability_selection/product-smoke-expanded","generated_at":"2026-06-19T13:43:00Z","audit_id":"strict_llm_evaluation/product-smoke-fixture"}}
+        """;
+    }
+
+    private static string NpcPackJson()
+    {
+        return """
+        {"schema_version":"0.1","artifact_kind":"npc_pack_v1","npcs":[{"id":"npc/smoke-guide","name":"Smoke Guide","description":"Guides the expanded smoke route.","region_id":"region/smoke-harbor","scene_id":"scene/smoke-start"}],"source_context":{"capability_selection_id":"generator_plan_capability_selection/product-smoke-expanded","generated_at":"2026-06-19T13:43:00Z","audit_id":"strict_llm_evaluation/product-smoke-fixture"}}
+        """;
+    }
+
+    private static string ItemPackJson()
+    {
+        return """
+        {"schema_version":"0.1","artifact_kind":"item_pack_v1","items":[{"id":"item/smoke-kit","name":"Smoke Kit","description":"A declarative smoke item without executable effects."}],"source_context":{"capability_selection_id":"generator_plan_capability_selection/product-smoke-expanded","generated_at":"2026-06-19T13:43:00Z","audit_id":"strict_llm_evaluation/product-smoke-fixture"}}
+        """;
+    }
+
+    private static string DialoguePackJson()
+    {
+        return """
+        {"schema_version":"0.1","artifact_kind":"dialogue_pack_v1","dialogues":[{"id":"dialogue/smoke-guide-intro","title":"Guide Introduction","description":"Introduces the expanded smoke route.","npc_id":"npc/smoke-guide","scene_id":"scene/smoke-start","lines":["Welcome to Smoke Harbor."]}],"source_context":{"capability_selection_id":"generator_plan_capability_selection/product-smoke-expanded","generated_at":"2026-06-19T13:43:00Z","audit_id":"strict_llm_evaluation/product-smoke-fixture"}}
+        """;
+    }
+
+    private static string EncounterPackJson()
+    {
+        return """
+        {"schema_version":"0.1","artifact_kind":"encounter_pack_v1","encounters":[{"id":"encounter/smoke-road","title":"Smoke Road","description":"A declarative encounter summary without execution.","region_id":"region/smoke-harbor","scene_id":"scene/smoke-start","npc_ids":["npc/smoke-guide"]}],"source_context":{"capability_selection_id":"generator_plan_capability_selection/product-smoke-expanded","generated_at":"2026-06-19T13:43:00Z","audit_id":"strict_llm_evaluation/product-smoke-fixture"}}
         """;
     }
 }

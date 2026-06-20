@@ -161,6 +161,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
         AppendLog($"\u0414\u043e\u0441\u0442\u0443\u043f\u043d\u043e \u043a\u0432\u0435\u0441\u0442\u043e\u0432: {model.Quests.Count}");
         AppendLog($"\u0414\u043e\u0441\u0442\u0443\u043f\u043d\u043e \u043c\u0435\u0445\u0430\u043d\u0438\u043a: {model.Mechanics.Count}");
+        AppendLog($"\u0420\u0435\u0433\u0438\u043e\u043d\u044b: {model.Regions.Count}; NPC: {model.Npcs.Count}; \u043f\u0440\u0435\u0434\u043c\u0435\u0442\u044b: {model.Items.Count}; \u0434\u0438\u0430\u043b\u043e\u0433\u0438: {model.Dialogues.Count}; \u0432\u0441\u0442\u0440\u0435\u0447\u0438: {model.Encounters.Count}");
     }
 
     private static string FormatGeneratedPreview(GeneratedPackageRuntimePreviewModel model)
@@ -200,6 +201,12 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         AppendItems(builder, model.Mechanics.Select(mechanic =>
             $"{FirstNonEmpty(mechanic.Name, mechanic.PackageAbilityId, mechanic.SourceId)}: {mechanic.Description}"));
 
+        AppendGeneratedContentItems(builder, "Regions", model.Regions);
+        AppendGeneratedContentItems(builder, "NPCs", model.Npcs);
+        AppendGeneratedContentItems(builder, "Items", model.Items);
+        AppendGeneratedContentItems(builder, "Dialogues", model.Dialogues);
+        AppendGeneratedContentItems(builder, "Encounters", model.Encounters);
+
         AppendSection(builder, $"Applied artifacts ({model.Provenance.Count})");
         AppendItems(builder, model.Provenance.Select(provenance =>
             $"{FirstNonEmpty(provenance.ContractId, provenance.ArtifactKind)} / {provenance.ArtifactId} / {provenance.MappingResult}"));
@@ -211,6 +218,19 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         }
 
         return builder.ToString();
+    }
+
+    private static void AppendGeneratedContentItems(
+        StringBuilder builder,
+        string title,
+        IReadOnlyList<GeneratedPackageRuntimePreviewContentItem> items)
+    {
+        AppendSection(builder, $"{title} ({items.Count})");
+        AppendItems(builder, items.Select(item =>
+        {
+            var references = item.References.Count == 0 ? string.Empty : $" [{string.Join(", ", item.References)}]";
+            return $"{FirstNonEmpty(item.Title, item.SourceId)}: {item.Description}{references}";
+        }));
     }
 
     private static void AppendSection(StringBuilder builder, string title)

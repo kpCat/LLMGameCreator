@@ -237,6 +237,23 @@ public sealed class GeneratorPlanGamePackageAssemblyPipelineTests
     }
 
     [Fact]
+    public void GamePackageAssemblyMapsAllExpandedStrictContractSections()
+    {
+        var assembled = new GeneratorPlanGamePackageAssembler().Assemble(
+            global::LLMGameCreator.Tests.ProductSmoke.ProductSmokeBaselineApprovedArtifacts.CreateExpandedApprovedArtifactSet(),
+            global::LLMGameCreator.Tests.ProductSmoke.ProductSmokeBaselineApprovedArtifacts.AppliedAtUtc);
+
+        Assert.Single(assembled.Package.GeneratedContent.Regions);
+        Assert.Single(assembled.Package.GeneratedContent.Npcs);
+        Assert.Single(assembled.Package.GeneratedContent.Items);
+        Assert.Single(assembled.Package.GeneratedContent.Dialogues);
+        Assert.Single(assembled.Package.GeneratedContent.Encounters);
+        Assert.DoesNotContain(assembled.Mappings, mapping =>
+            new[] { "region_pack_v1", "npc_pack_v1", "item_pack_v1", "dialogue_pack_v1", "encounter_pack_v1" }.Contains(mapping.ArtifactKind)
+            && mapping.Result != GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+    }
+
+    [Fact]
     public async Task ServiceAssemblesValidatesSerializesExportsAndCanSkipMarkdown()
     {
         using var temp = new TempDirectory();

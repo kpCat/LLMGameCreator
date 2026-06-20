@@ -80,6 +80,9 @@ try {
     elseif ($Scenario -eq "generated-package-runtime-preview") {
         $TestFilter = "FullyQualifiedName~GeneratedPackageRuntimePreviewSmoke"
     }
+    elseif ($Scenario -eq "expanded-contract-batch-smoke") {
+        $TestFilter = "FullyQualifiedName~ExpandedContractBatchSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

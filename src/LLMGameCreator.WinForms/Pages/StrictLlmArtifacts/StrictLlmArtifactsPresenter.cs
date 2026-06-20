@@ -39,7 +39,7 @@ public sealed class StrictLlmArtifactsPresenter
             .Select(contract => new StrictLlmContractOption
             {
                 Id = contract.ContractId,
-                Title = contract.ArtifactKind
+                Title = string.IsNullOrWhiteSpace(contract.Label) ? contract.ArtifactKind : contract.Label
             })
             .ToList();
 

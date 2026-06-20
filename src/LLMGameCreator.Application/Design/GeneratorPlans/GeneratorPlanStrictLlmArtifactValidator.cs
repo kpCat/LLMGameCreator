@@ -76,6 +76,7 @@ public sealed class GeneratorPlanStrictLlmArtifactValidator
             }
 
             ValidateIds(root, diagnostics, contract.ContractId);
+            ValidateReferenceIdTypes(root, diagnostics, contract.ContractId);
             ValidateContractPayload(root, contract, diagnostics);
         }
 
@@ -104,6 +105,50 @@ public sealed class GeneratorPlanStrictLlmArtifactValidator
                     RequireString(item, "title", diagnostics, contract.ContractId);
                     RequireString(item, "description", diagnostics, contract.ContractId);
                     RequireString(item, "purpose", diagnostics, contract.ContractId);
+                });
+                break;
+            case "region_pack_v1":
+                ValidateArrayItems(root, "regions", contract.ContractId, diagnostics, item =>
+                {
+                    RequireString(item, "id", diagnostics, contract.ContractId);
+                    RequireString(item, "title", diagnostics, contract.ContractId);
+                    RequireString(item, "description", diagnostics, contract.ContractId);
+                });
+                break;
+            case "npc_pack_v1":
+                ValidateArrayItems(root, "npcs", contract.ContractId, diagnostics, item =>
+                {
+                    RequireString(item, "id", diagnostics, contract.ContractId);
+                    RequireString(item, "name", diagnostics, contract.ContractId);
+                    RequireString(item, "description", diagnostics, contract.ContractId);
+                });
+                break;
+            case "item_pack_v1":
+                ValidateArrayItems(root, "items", contract.ContractId, diagnostics, item =>
+                {
+                    RequireString(item, "id", diagnostics, contract.ContractId);
+                    RequireString(item, "name", diagnostics, contract.ContractId);
+                    RequireString(item, "description", diagnostics, contract.ContractId);
+                });
+                break;
+            case "dialogue_pack_v1":
+                ValidateArrayItems(root, "dialogues", contract.ContractId, diagnostics, item =>
+                {
+                    RequireString(item, "id", diagnostics, contract.ContractId);
+                    RequireString(item, "title", diagnostics, contract.ContractId);
+                    RequireString(item, "description", diagnostics, contract.ContractId);
+                    if (!HasNonEmptyArray(item, "lines"))
+                    {
+                        diagnostics.Add(Diagnostic(GeneratorPlanPreviewDiagnosticSeverity.Error, GeneratorPlanStrictLlmArtifactDiagnosticCodes.EmptyRequiredArray, "dialogues[].lines must be a non-empty array.", "dialogues.lines", contract.ContractId));
+                    }
+                });
+                break;
+            case "encounter_pack_v1":
+                ValidateArrayItems(root, "encounters", contract.ContractId, diagnostics, item =>
+                {
+                    RequireString(item, "id", diagnostics, contract.ContractId);
+                    RequireString(item, "title", diagnostics, contract.ContractId);
+                    RequireString(item, "description", diagnostics, contract.ContractId);
                 });
                 break;
             case "quest_pack_v1":
@@ -192,6 +237,64 @@ public sealed class GeneratorPlanStrictLlmArtifactValidator
             }
 
             validateItem(item);
+        }
+
+        var seenIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var item in items.Where(item => item.ValueKind == JsonValueKind.Object))
+        {
+            if (item.TryGetProperty("id", out var idProperty)
+                && idProperty.ValueKind == JsonValueKind.String
+                && !string.IsNullOrWhiteSpace(idProperty.GetString())
+                && !seenIds.Add(idProperty.GetString()!.Trim()))
+            {
+                diagnostics.Add(Diagnostic(
+                    GeneratorPlanPreviewDiagnosticSeverity.Error,
+                    GeneratorPlanStrictLlmArtifactDiagnosticCodes.InvalidId,
+                    $"Duplicate id '{idProperty.GetString()}' in {propertyName}.",
+                    propertyName + ".id",
+                    contractId));
+            }
+        }
+    }
+
+    private static void ValidateReferenceIdTypes(
+        JsonElement element,
+        List<GeneratorPlanStrictLlmArtifactDiagnostic> diagnostics,
+        string contractId,
+        string path = "")
+    {
+        if (element.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var property in element.EnumerateObject())
+            {
+                var nextPath = string.IsNullOrWhiteSpace(path) ? property.Name : path + "." + property.Name;
+                if (property.Name is "scene_id" or "region_id" or "npc_id")
+                {
+                    if (property.Value.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(property.Value.GetString()))
+                    {
+                        diagnostics.Add(Diagnostic(GeneratorPlanPreviewDiagnosticSeverity.Error, GeneratorPlanStrictLlmArtifactDiagnosticCodes.InvalidContractContent, $"{property.Name} must be a non-empty string when present.", nextPath, contractId));
+                    }
+                }
+                else if (property.Name is "scene_ids" or "region_ids" or "npc_ids")
+                {
+                    if (property.Value.ValueKind != JsonValueKind.Array
+                        || property.Value.EnumerateArray().Any(item => item.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(item.GetString())))
+                    {
+                        diagnostics.Add(Diagnostic(GeneratorPlanPreviewDiagnosticSeverity.Error, GeneratorPlanStrictLlmArtifactDiagnosticCodes.InvalidArray, $"{property.Name} must be an array of non-empty strings when present.", nextPath, contractId));
+                    }
+                }
+
+                ValidateReferenceIdTypes(property.Value, diagnostics, contractId, nextPath);
+            }
+        }
+        else if (element.ValueKind == JsonValueKind.Array)
+        {
+            var index = 0;
+            foreach (var item in element.EnumerateArray())
+            {
+                ValidateReferenceIdTypes(item, diagnostics, contractId, $"{path}[{index}]");
+                index++;
+            }
         }
     }
 
