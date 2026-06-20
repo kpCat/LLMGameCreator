@@ -10,12 +10,58 @@ public sealed class StrictLlmArtifactsPresenterTests
     [Fact]
     public void PresenterBuildsProfileAndContractOptions()
     {
-        var state = new StrictLlmArtifactsPresenter().FromSettings(new StrictLlmArtifactsViewState(), Settings(), new GeneratorPlanStrictLlmArtifactContractCatalog().ListContracts());
+        var catalog = new GeneratorPlanStrictLlmArtifactContractCatalog();
+        var state = new StrictLlmArtifactsPresenter().FromSettings(
+            new StrictLlmArtifactsViewState(),
+            Settings(),
+            catalog.ListContracts(),
+            catalog.ListBatchPresets());
 
         Assert.Equal("local", state.SelectedProfileId);
         Assert.Contains(state.Contracts, contract => contract.Id == "game_profile_v1");
         Assert.Contains(state.Contracts, contract => contract.Id == "region_pack_v1" && contract.Title == "Region pack");
         Assert.Contains(state.Contracts, contract => contract.Id == "encounter_pack_v1" && contract.Title == "Encounter pack");
+        Assert.Equal(string.Empty, state.SelectedBatchPresetId);
+        Assert.Equal("Manual/custom", state.BatchPresets[0].DisplayName);
+        Assert.Contains(state.BatchPresets, preset => preset.Id == "full_small_rpg_seed");
+    }
+
+    [Fact]
+    public void PresenterAppliesBaselineAndFullBatchPresetsInContractListOrder()
+    {
+        var catalog = new GeneratorPlanStrictLlmArtifactContractCatalog();
+        var presenter = new StrictLlmArtifactsPresenter();
+        var state = presenter.FromSettings(
+            new StrictLlmArtifactsViewState(),
+            Settings(),
+            catalog.ListContracts(),
+            catalog.ListBatchPresets());
+
+        var baseline = presenter.ApplyBatchPreset(state, "baseline_game_seed", catalog);
+        var full = presenter.ApplyBatchPreset(state, "full_small_rpg_seed", catalog);
+
+        Assert.Equal(
+            ["game_profile_v1", "mechanics_pack_v1", "quest_pack_v1", "scene_pack_v1"],
+            baseline.SelectedContractIds);
+        Assert.Equal(state.Contracts.Select(contract => contract.Id), full.SelectedContractIds);
+        Assert.Equal(9, full.SelectedContractIds.Count);
+    }
+
+    [Fact]
+    public void UnknownBatchPresetPreservesCurrentContractSelection()
+    {
+        var catalog = new GeneratorPlanStrictLlmArtifactContractCatalog();
+        var state = new StrictLlmArtifactsViewState
+        {
+            SelectedBatchPresetId = "baseline_game_seed",
+            SelectedContractIds = ["game_profile_v1", "quest_pack_v1"]
+        };
+
+        var result = new StrictLlmArtifactsPresenter().ApplyBatchPreset(state, "missing_preset", catalog);
+
+        Assert.Equal(state.SelectedBatchPresetId, result.SelectedBatchPresetId);
+        Assert.Equal(state.SelectedContractIds, result.SelectedContractIds);
+        Assert.Contains("not found", result.Status);
     }
 
     [Fact]

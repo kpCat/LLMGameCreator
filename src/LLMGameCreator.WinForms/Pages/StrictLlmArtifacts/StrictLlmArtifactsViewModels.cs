@@ -8,6 +8,8 @@ public sealed record StrictLlmArtifactsViewState
     public string SelectedProfileId { get; init; } = string.Empty;
     public IReadOnlyList<StrictLlmContractOption> Contracts { get; init; } = Array.Empty<StrictLlmContractOption>();
     public IReadOnlyList<string> SelectedContractIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<StrictLlmBatchPresetOption> BatchPresets { get; init; } = Array.Empty<StrictLlmBatchPresetOption>();
+    public string SelectedBatchPresetId { get; init; } = string.Empty;
     public int MaxTokens { get; init; } = 4000;
     public double Temperature { get; init; } = 0.2;
     public bool EnableRepairAttempt { get; init; } = true;
@@ -37,6 +39,15 @@ public sealed record StrictLlmContractOption
     public string Id { get; init; } = string.Empty;
     public string Title { get; init; } = string.Empty;
     public string DisplayName => string.IsNullOrWhiteSpace(Title) ? Id : $"{Title} ({Id})";
+}
+
+public sealed record StrictLlmBatchPresetOption
+{
+    public string Id { get; init; } = string.Empty;
+    public string Title { get; init; } = string.Empty;
+    public string DisplayName => string.IsNullOrWhiteSpace(Id)
+        ? Title
+        : string.IsNullOrWhiteSpace(Title) ? Id : $"{Title} ({Id})";
 }
 
 public sealed record StrictLlmArtifactRow

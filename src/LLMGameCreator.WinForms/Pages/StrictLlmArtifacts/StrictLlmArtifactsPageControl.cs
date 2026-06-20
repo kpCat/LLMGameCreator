@@ -24,6 +24,7 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
     private readonly TableLayoutPanel _rootLayout = new();
     private readonly TableLayoutPanel _inputLayout = new();
     private readonly ComboBox _profileComboBox = new();
+    private readonly ComboBox _batchPresetComboBox = new();
     private readonly CheckedListBox _contractList = new();
     private readonly NumericUpDown _maxTokensInput = new();
     private readonly NumericUpDown _temperatureInput = new();
@@ -141,6 +142,8 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
 
         _profileComboBox.Dock = DockStyle.Fill;
         _profileComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        _batchPresetComboBox.Dock = DockStyle.Fill;
+        _batchPresetComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         _contractList.Dock = DockStyle.Fill;
         _contractList.CheckOnClick = true;
         _contractList.DisplayMember = nameof(StrictLlmContractOption.DisplayName);
@@ -191,6 +194,9 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
         _inputLayout.Controls.Add(_loadAuditButton, 7, 0);
         _inputLayout.Controls.Add(_copyPromptButton, 6, 1);
         _inputLayout.Controls.Add(_copyResultButton, 7, 1);
+        AddLabel(2, 4, "Batch preset");
+        _inputLayout.Controls.Add(_batchPresetComboBox, 5, 2);
+        _inputLayout.SetColumnSpan(_batchPresetComboBox, 3);
     }
 
     private void BuildSplitLayout()
@@ -280,6 +286,7 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
         _loadAuditButton.Click += async (_, _) => await LoadAuditAsync().ConfigureAwait(true);
         _copyPromptButton.Click += (_, _) => TryCopyText(_promptTextBox.Text);
         _copyResultButton.Click += (_, _) => TryCopyText(_resultTextBox.Text);
+        _batchPresetComboBox.SelectionChangeCommitted += (_, _) => ApplySelectedBatchPreset();
     }
 
     private async Task LoadSettingsAsync()
@@ -293,8 +300,22 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
         await RunBusyAsync(async cancellationToken =>
         {
             var settings = await _settingsRepository.LoadAsync(cancellationToken).ConfigureAwait(true);
-            ApplyViewState(_presenter.FromSettings(ReadControlsToState(), settings, _contractCatalog.ListContracts()));
+            ApplyViewState(_presenter.FromSettings(
+                ReadControlsToState(),
+                settings,
+                _contractCatalog.ListContracts(),
+                _contractCatalog.ListBatchPresets()));
         }).ConfigureAwait(true);
+    }
+
+    private void ApplySelectedBatchPreset()
+    {
+        if (_applyingState || _contractCatalog == null || _batchPresetComboBox.SelectedItem is not StrictLlmBatchPresetOption preset)
+        {
+            return;
+        }
+
+        ApplyViewState(_presenter.ApplyBatchPreset(ReadControlsToState(), preset.Id, _contractCatalog));
     }
 
     private async Task LoadLatestSelectionAsync()
@@ -428,6 +449,7 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
         return _currentViewState with
         {
             SelectedProfileId = _profileComboBox.SelectedItem is StrictLlmProfileOption profile ? profile.Id : _profileComboBox.SelectedValue?.ToString() ?? string.Empty,
+            SelectedBatchPresetId = _batchPresetComboBox.SelectedItem is StrictLlmBatchPresetOption preset ? preset.Id : string.Empty,
             SelectedContractIds = _contractList.CheckedItems.OfType<StrictLlmContractOption>().Select(contract => contract.Id).ToList(),
             MaxTokens = (int)_maxTokensInput.Value,
             Temperature = (double)_temperatureInput.Value,
@@ -450,6 +472,11 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
             {
                 _profileComboBox.SelectedValue = state.SelectedProfileId;
             }
+
+            _batchPresetComboBox.DisplayMember = nameof(StrictLlmBatchPresetOption.DisplayName);
+            _batchPresetComboBox.ValueMember = nameof(StrictLlmBatchPresetOption.Id);
+            _batchPresetComboBox.DataSource = state.BatchPresets.ToList();
+            _batchPresetComboBox.SelectedValue = state.SelectedBatchPresetId;
 
             SetContracts(state.Contracts, state.SelectedContractIds);
             _maxTokensInput.Value = Math.Clamp(state.MaxTokens, (int)_maxTokensInput.Minimum, (int)_maxTokensInput.Maximum);
@@ -503,6 +530,7 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
     private void SetBusy(bool busy)
     {
         _profileComboBox.Enabled = !busy;
+        _batchPresetComboBox.Enabled = !busy;
         _contractList.Enabled = !busy;
         _maxTokensInput.Enabled = !busy;
         _temperatureInput.Enabled = !busy;
@@ -527,6 +555,7 @@ public sealed class StrictLlmArtifactsPageControl : UserControl, IEditorPage
     private void SetRuntimeUnavailable()
     {
         _profileComboBox.Enabled = false;
+        _batchPresetComboBox.Enabled = false;
         _contractList.Enabled = false;
         _maxTokensInput.Enabled = false;
         _temperatureInput.Enabled = false;

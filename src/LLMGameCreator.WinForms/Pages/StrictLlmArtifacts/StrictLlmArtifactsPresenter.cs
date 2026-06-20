@@ -17,11 +17,13 @@ public sealed class StrictLlmArtifactsPresenter
     public StrictLlmArtifactsViewState FromSettings(
         StrictLlmArtifactsViewState state,
         AppSettings settings,
-        IReadOnlyList<GeneratorPlanStrictLlmArtifactContractDefinition> contracts)
+        IReadOnlyList<GeneratorPlanStrictLlmArtifactContractDefinition> contracts,
+        IReadOnlyList<GeneratorPlanStrictLlmArtifactBatchPresetDefinition> batchPresets)
     {
         ArgumentNullException.ThrowIfNull(state);
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(contracts);
+        ArgumentNullException.ThrowIfNull(batchPresets);
 
         var profiles = settings.LlmProfiles
             .Where(profile => !string.IsNullOrWhiteSpace(profile.Id))
@@ -43,6 +45,17 @@ public sealed class StrictLlmArtifactsPresenter
             })
             .ToList();
 
+        var batchPresetOptions = new[]
+            {
+                new StrictLlmBatchPresetOption { Title = "Manual/custom" }
+            }
+            .Concat(batchPresets.Select(preset => new StrictLlmBatchPresetOption
+            {
+                Id = preset.PresetId,
+                Title = preset.Label
+            }))
+            .ToList();
+
         var selectedProfile = FirstExisting(state.SelectedProfileId, profiles.Select(profile => profile.Id))
             ?? FirstExisting(settings.DefaultLlmProfileId, profiles.Select(profile => profile.Id))
             ?? profiles.FirstOrDefault()?.Id
@@ -53,10 +66,49 @@ public sealed class StrictLlmArtifactsPresenter
             Profiles = profiles,
             SelectedProfileId = selectedProfile,
             Contracts = contractOptions,
+            BatchPresets = batchPresetOptions,
+            SelectedBatchPresetId = FirstExisting(state.SelectedBatchPresetId, batchPresetOptions.Select(preset => preset.Id)) ?? string.Empty,
             SelectedContractIds = state.SelectedContractIds.Count > 0
                 ? state.SelectedContractIds
                 : contractOptions.Select(contract => contract.Id).ToList(),
             Status = profiles.Count == 0 ? "No LLM profile configured." : state.Status
+        };
+    }
+
+    public StrictLlmArtifactsViewState ApplyBatchPreset(
+        StrictLlmArtifactsViewState state,
+        string presetId,
+        GeneratorPlanStrictLlmArtifactContractCatalog contractCatalog)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(contractCatalog);
+
+        if (string.IsNullOrWhiteSpace(presetId))
+        {
+            return state with
+            {
+                SelectedBatchPresetId = string.Empty,
+                Status = "Manual contract selection enabled."
+            };
+        }
+
+        if (!contractCatalog.TryGetBatchPreset(presetId, out var preset))
+        {
+            return state with
+            {
+                Status = $"Batch preset '{presetId}' was not found. Contract selection was not changed."
+            };
+        }
+
+        var presetContractIds = preset.ContractIds.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        return state with
+        {
+            SelectedBatchPresetId = preset.PresetId,
+            SelectedContractIds = state.Contracts
+                .Where(contract => presetContractIds.Contains(contract.Id))
+                .Select(contract => contract.Id)
+                .ToList(),
+            Status = $"Batch preset '{preset.PresetId}' selected."
         };
     }
 

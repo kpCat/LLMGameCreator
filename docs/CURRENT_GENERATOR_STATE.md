@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 006 expanded the strict contract catalog and added controlled batch presets.
+M4.1 gate passed for sampled baseline contracts; Product Slice 006.1 exposes the controlled batch presets in LLM Artifacts.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-005 established composable selection, baseline strict generation, approved-artifact assembly, headless smoke and generated-content Runtime Preview. Product Slice 006 adds `region_pack_v1`, `npc_pack_v1`, `item_pack_v1`, `dialogue_pack_v1` and `encounter_pack_v1`, five controlled batch presets, non-breaking typed `generatedContent` mapping and expanded headless smoke coverage.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-005 established composable selection, baseline strict generation, approved-artifact assembly, headless smoke and generated-content Runtime Preview. Product Slice 006 adds `region_pack_v1`, `npc_pack_v1`, `item_pack_v1`, `dialogue_pack_v1` and `encounter_pack_v1`, five controlled batch presets, non-breaking typed `generatedContent` mapping and expanded headless smoke coverage. Product Slice 006.1 wires those existing presets into LLM Artifacts without changing contract definitions or generation requests.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,6 +62,15 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 006.1: LLM Artifacts Batch Preset Dropdown.
+- LLM Artifacts loads `manual/custom` plus the five existing catalog presets from `ListBatchPresets()`.
+- Selecting a known preset resolves it through `TryGetBatchPreset()` and updates the existing contract checklist in its current display order.
+- Manual checkbox changes remain supported, and Preview/Generate continue to use the currently checked contract ids.
+- Unknown preset lookup is non-throwing, preserves the current contract selection and reports a status message.
+- No contract, provider, package assembly, runtime, Lua, generator-library, solution or project changes were introduced.
+
+Parent slice foundation:
+
 - Product Slice 006: Strict Contract Catalog + Batch Generation.
 - Added strict contracts for regions, NPCs, items, dialogues and encounters with bounded JSON shapes, prompt instructions and contract validation.
 - Added batch presets `baseline_game_seed`, `world_content_expansion`, `character_content_expansion`, `encounter_item_expansion` and `full_small_rpg_seed` through the strict contract catalog API.
@@ -76,7 +85,7 @@ Completed for the sampled baseline contracts plus baseline assembly, generated R
 
 ## Current user action
 
-Use the three headless product smoke scenarios for baseline assembly, generated Runtime Preview and expanded contract batches. Choose the next controlled slice before M5, broader M6, simulation or repair-loop work.
+Use the LLM Artifacts batch preset dropdown for controlled contract selection and the three headless product smoke scenarios for baseline assembly, generated Runtime Preview and expanded contract batches. Choose the next controlled slice before M5, broader M6, simulation or repair-loop work.
 
 ## Allowed next Codex tasks
 
@@ -107,6 +116,7 @@ Capability Picker
   -> Capability Composer v2 foundation
   -> Composable module selection UI
   -> LLM Artifacts
+  -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
   -> Apply approved baseline artifacts

@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-19T18:31:54Z",
+  "updated_at_utc": "2026-06-20T08:37:45Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 006 strict contract catalog and batch generation completed",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 006.1 LLM Artifacts batch preset dropdown completed",
   "gate_status": "passed_sampled_baseline_with_product_slice_006_expanded_strict_contract_batch_smoke",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
@@ -49,10 +49,12 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_006_strict_contract_catalog_batch_generation",
-    "title": "Strict Contract Catalog + Batch Generation",
-    "completed_at_utc": "2026-06-19T18:31:54Z",
-    "summary": "Added five bounded strict artifact contracts, five batch presets, additive generatedContent mappings, Runtime Preview summaries and fixture-only expanded batch smoke without provider, Lua, runtime-engine, solution or project changes.",
+    "slice_id": "product_slice_006_1_llm_artifacts_batch_preset_dropdown",
+    "title": "LLM Artifacts Batch Preset Dropdown",
+    "completed_at_utc": "2026-06-20T08:37:45Z",
+    "summary": "Exposed manual/custom plus the five existing strict artifact batch presets in LLM Artifacts, with presenter-owned non-throwing preset application that preserves contract list order and leaves Preview/Generate driven by the current checkbox selection.",
+    "parent_slice_id": "product_slice_006_strict_contract_catalog_batch_generation",
+    "ui_surface": "LLM Artifacts",
     "scenario_id": "expanded-contract-batch-smoke",
     "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario expanded-contract-batch-smoke",
     "supported_contracts": [
@@ -80,6 +82,10 @@
       ".devflow/runs/<timestamp>-product-smoke/package-output/package.json"
     ],
     "validation_contracts": [
+      "manual/custom remains the default and preserves existing behavior",
+      "known preset selection checks exactly its catalog contract ids in current display order",
+      "unknown preset selection preserves current checkbox state and reports status",
+      "manual checkbox overrides continue to feed Preview and Generate requests",
       "package JSON export exists",
       "all five expanded generatedContent sections are non-empty",
       "Runtime Preview projection exposes all five expanded sections",
@@ -130,6 +136,7 @@
     "Capability Composer v2 foundation",
     "Composable module selection UI",
     "LLM Artifacts",
+    "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",
     "Apply approved baseline artifacts",
