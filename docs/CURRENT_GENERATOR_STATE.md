@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 013 adds consolidated catalog-backed composition diagnostics.
+M4.1 gate passed for sampled baseline contracts; Product Slice 015 adds a read-only Composition Workbench UI over persisted composition diagnostics.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-10 established the product spine and content language policy. Product Slice 011 describes composition intent through immutable blueprint/capability models. Product Slice 012 adds current/planned generator manifests, deterministic catalog validation and a non-executing generator plan resolver. Product Slice 013 now consolidates those layers into one deterministic readiness report with selected/current generators, planned support, missing support and recommended actions without touching runtime or package schema.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-014 established immutable blueprint/capability models, generator catalog planning, consolidated diagnostics and deterministic project-local markdown/index export. Product Slice 015 consumes those contracts through a Designer-safe read-only WinForms page without generator, provider, Runtime or package execution.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -61,6 +61,16 @@ Permanent evidence summary:
 - A real local-model batch evaluation passed for the sampled baseline contracts listed above.
 
 ## Last completed product slice
+
+- Product Slice 015: Read-only Composition Workbench UI.
+- `CompositionWorkbenchPageControl` lists built-in blueprint presets and saved report entries, shows readiness/actions, and renders markdown in a read-only view.
+- `CompositionWorkbenchPresenter` delegates readiness/report construction to the existing composition services, exports through `GameCompositionDiagnosticsExportService`, and refreshes the existing `.llmgc/composition-diagnostics/index.json` contract.
+- When no project is loaded, in-memory preview remains available while export/saved-report actions show a clear read-only status.
+- The page is registered through `CompositionRoot`/`EditorPageRegistry`, keeps its layout in `CompositionWorkbenchPageControl.Designer.cs`, and has a parameterless design-time-safe constructor.
+- `composition-workbench-readonly` proves page/presenter construction, baseline report/markdown, export and saved-report readback without LLM/provider, plugins, generator execution, Runtime, package mutation or Lua.
+- Product Slice 014 is accepted/completed as the deterministic persistence/export parent foundation.
+
+Parent slice foundation:
 
 - Product Slice 014: Headless Composition Report Export.
 - `GameCompositionDiagnosticsExportService` persists the existing deterministic markdown under `.llmgc/composition-diagnostics/<safe-blueprint-id>.composition-report.md`.
@@ -150,11 +160,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-014 through deterministic composition report persistence/export. Further contract or real runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-015 through the read-only Composition Workbench. Further contract or real runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Use the project-local `.llmgc/composition-diagnostics/index.json` and baseline markdown report as the stable read-only composition artifact contract. Existing generation remains behind explicit editor actions. Use all eleven headless product smoke scenarios before choosing the next controlled slice.
+Use Composition Workbench to inspect built-in blueprint readiness, build in-memory markdown previews, export reports and reload the project-local saved-report index. Existing generation remains behind explicit editor actions. Use all twelve headless product smoke scenarios before choosing the next controlled slice.
 
 ## Allowed next Codex tasks
 
@@ -163,7 +173,7 @@ Use the project-local `.llmgc/composition-diagnostics/index.json` and baseline m
 - Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
 - Add one carefully selected artifact contract only inside a controlled vertical slice with explicit scope and proof checks.
-- Plan one controlled read-only consumer of the persisted composition diagnostics index/markdown without enabling plugins or generator execution.
+- Plan one bounded retention/history policy for composition reports without enabling plugins or generator execution.
 
 ## Restricted next Codex tasks
 
@@ -192,6 +202,7 @@ Capability Picker
   -> generator catalog validation and non-executing plan resolution
   -> consolidated composition diagnostics and recommended actions
   -> deterministic project-local composition report export
+  -> read-only Composition Workbench preview/export/saved-report refresh
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -229,12 +240,11 @@ Capability Picker
 
 ## Recommended next step
 
-Choose a bounded read-only consumer of the persisted composition diagnostics index/markdown, then refresh its executable task spec from current source.
+Choose the next controlled slice from current source without unlocking generator execution, Runtime expansion or package schema work.
 
 Candidate slices:
 
-- A read-only Composition Workbench page may consume the persisted index/markdown in a separate WinForms slice.
-- A headless report retention/history policy may be planned separately if multiple versions are needed; Slice 014 intentionally maintains one deterministic report per blueprint id.
+- A headless report retention/history policy may be planned separately if multiple versions are needed; Slices 014-015 intentionally maintain and consume one deterministic report per blueprint id.
 - One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen.
 
 ## State update rule

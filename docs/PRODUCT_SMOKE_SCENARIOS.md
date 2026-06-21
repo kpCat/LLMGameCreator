@@ -393,3 +393,33 @@ Expected assertions:
 - no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation, Lua or WinForms UI is invoked.
 
 This scenario is a pure Application-layer persistence/export check. No manual UI verification is required.
+
+## composition-workbench-readonly
+
+Validates the read-only Composition Workbench consumer over the existing composition diagnostics/export contract:
+
+```text
+built-in blueprint presets
+-> diagnostics report and markdown preview
+-> project-local report export
+-> saved index refresh and markdown readback
+-> Designer-safe WinForms page construction
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario composition-workbench-readonly
+```
+
+Expected assertions:
+
+- the presenter and parameterized `CompositionWorkbenchPageControl` construct headlessly;
+- built-in blueprint presets include `baseline_generated_rpg_preview`;
+- baseline diagnostics report is `BuildableNow` and returns markdown with recommended actions;
+- export writes the existing markdown/index contract under `.llmgc/composition-diagnostics`;
+- saved-report refresh sees the exported entry and loads its markdown;
+- catalog manifests do not run at Runtime and no provider module is selected;
+- no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation or Lua execution is invoked.
+
+Manual UI verification is optional. It remains useful for visual layout, selector behavior and long-markdown readability, while the headless test protects construction, presenter behavior and persistence/readback.

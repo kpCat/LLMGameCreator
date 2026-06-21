@@ -1,5 +1,6 @@
 using DryIoc;
 using LLMGameCreator.Application.Abstractions;
+using LLMGameCreator.Application.Composition;
 using LLMGameCreator.Application.Design;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Editing;
@@ -15,6 +16,7 @@ using LLMGameCreator.Runtime;
 using LLMGameCreator.Runtime.Abstractions;
 using LLMGameCreator.Scripting;
 using LLMGameCreator.WinForms.Pages;
+using LLMGameCreator.WinForms.Pages.CompositionWorkbench;
 using Microsoft.Extensions.Logging;
 
 namespace LLMGameCreator.WinForms;
@@ -67,6 +69,16 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
+        _container.Register<GameBlueprintPresetProvider>(Reuse.Singleton);
+        _container.RegisterDelegate<CapabilityRegistry>(_ => BuiltInCapabilityRegistry.Create(), Reuse.Singleton);
+        _container.RegisterDelegate<GeneratorCatalog>(_ => BuiltInGeneratorCatalog.Create(), Reuse.Singleton);
+        _container.Register<GameBlueprintCompositionValidator>(Reuse.Singleton);
+        _container.Register<GeneratorCatalogValidator>(Reuse.Singleton);
+        _container.Register<GeneratorPlanResolver>(Reuse.Singleton);
+        _container.Register<GameCompositionDiagnosticsService>(Reuse.Singleton);
+        _container.Register<GameCompositionDiagnosticsMarkdownRenderer>(Reuse.Singleton);
+        _container.Register<GameCompositionDiagnosticsExportService>(Reuse.Singleton);
+        _container.Register<CompositionWorkbenchPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -239,6 +251,10 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IDesignDatabaseInitializer>(),
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<CompositionWorkbenchPageControl>(resolver => new CompositionWorkbenchPageControl(
+            resolver.Resolve<CompositionWorkbenchPresenter>(),
+            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -255,6 +271,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<StrictLlmArtifactsPageControl>(),
             resolver.Resolve<StrictLlmEvaluationPageControl>(),
             resolver.Resolve<ArtifactReviewPageControl>(),
+            resolver.Resolve<CompositionWorkbenchPageControl>(),
             resolver.Resolve<ValidationPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),

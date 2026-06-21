@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-21T15:37:28Z",
+  "updated_at_utc": "2026-06-21T16:22:07Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 014 headless composition report export completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_014_composition_report_export",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 015 read-only Composition Workbench completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_015_composition_workbench",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-014 through deterministic composition report persistence/export; further real execution expansion requires controlled vertical-slice approval.",
-  "current_user_action": "Use the project-local composition diagnostics index and baseline markdown as the stable read-only composition artifact contract; generation remains explicit.",
-  "recommended_next_decision": "Choose one bounded read-only consumer of the persisted composition diagnostics index/markdown without plugins or generator execution.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-015 through the read-only Composition Workbench; further real execution expansion requires controlled vertical-slice approval.",
+  "current_user_action": "Use Composition Workbench to preview blueprint readiness, export reports and reload the project-local saved-report index; generation remains explicit.",
+  "recommended_next_decision": "Choose one bounded report retention/history policy or one controlled product vertical slice without plugins, generator execution or Runtime expansion.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,29 +49,29 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_014_headless_composition_report_export",
-    "title": "Headless Composition Report Export",
-    "completed_at_utc": "2026-06-21T15:37:28Z",
-    "summary": "Added safe deterministic project-local UTF-8 markdown and sorted index persistence for composition diagnostics without runtime, package schema, UI, generator execution, plugins or provider changes.",
-    "parent_slice_id": "product_slice_013_catalog_backed_composition_diagnostics",
-    "ui_surface": "none_application_layer_only",
-    "scenario_id": "composition-report-export",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario composition-report-export",
+    "slice_id": "product_slice_015_read_only_composition_workbench_ui",
+    "title": "Read-only Composition Workbench UI",
+    "completed_at_utc": "2026-06-21T16:22:07Z",
+    "summary": "Added a Designer-safe read-only WinForms consumer for blueprint presets, composition diagnostics markdown, existing report export and project-local saved-report refresh without runtime, package schema, generator execution, plugins or provider changes.",
+    "parent_slice_id": "product_slice_014_headless_composition_report_export",
+    "ui_surface": "composition_workbench_read_only_winforms_page",
+    "scenario_id": "composition-workbench-readonly",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario composition-workbench-readonly",
     "headless_outputs": [
-      ".llmgc/composition-diagnostics/<safe-blueprint-id>.composition-report.md",
-      ".llmgc/composition-diagnostics/index.json",
+      "read-only in-memory composition markdown preview",
+      ".llmgc/composition-diagnostics/<safe-blueprint-id>.composition-report.md and index.json",
       ".devflow/runs/<timestamp>-product-smoke/test-results/"
     ],
     "validation_contracts": [
-      "export creates the project-local composition diagnostics directory, markdown and index",
-      "unsafe blueprint ids and traversal segments cannot escape the project root",
-      "repeated unchanged export produces byte-identical markdown and index",
-      "index entries are sorted deterministically by blueprint id and contain no timestamps",
-      "export performs no LLM/provider, plugin, generator execution, runtime, package, Lua or UI calls"
+      "presenter lists built-in blueprint presets and builds the baseline diagnostics report",
+      "markdown preview remains available without a current project",
+      "export uses the existing project-local composition diagnostics contract",
+      "saved-report refresh reads the existing index and selected markdown",
+      "page construction and all workbench actions perform no LLM/provider, plugin, generator execution, runtime, package or Lua calls"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_bounded_read_only_persisted_composition_diagnostics_consumer_without_plugins_or_execution",
+    "plan_bounded_composition_report_retention_history_without_plugins_or_execution",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
@@ -90,11 +90,11 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "persisted_composition_diagnostics_read_only_consumer",
-  "recommended_next_work_item_title": "Choose a bounded read-only consumer of the persisted composition diagnostics index/markdown without plugins or generator execution.",
+  "recommended_next_work_item": "composition_report_retention_or_controlled_vertical_slice",
+  "recommended_next_work_item_title": "Choose a bounded composition report retention/history policy or one controlled product vertical slice without plugins, generator execution or Runtime expansion.",
   "candidate_product_vertical_slices": [
-    "A read-only Composition Workbench page may consume the persisted index/markdown in a separate WinForms slice.",
     "A headless report retention/history policy may be planned separately if multiple versions are needed.",
+    "A small Composition Workbench usability follow-up may be considered only after manual feedback, without adding editing or execution.",
     "One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen."
   ],
   "required_reading_order_for_new_agents": [
@@ -120,6 +120,7 @@
     "Built-in generator catalog validation and non-executing plan resolution",
     "Consolidated composition diagnostics and recommended actions",
     "Deterministic project-local composition report export",
+    "Read-only Composition Workbench preview, export and saved-report refresh",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",

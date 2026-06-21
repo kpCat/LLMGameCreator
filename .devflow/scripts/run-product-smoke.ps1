@@ -112,6 +112,9 @@ try {
     elseif ($Scenario -eq "composition-report-export") {
         $TestFilter = "FullyQualifiedName~CompositionReportExportProductSmoke"
     }
+    elseif ($Scenario -eq "composition-workbench-readonly") {
+        $TestFilter = "FullyQualifiedName~CompositionWorkbenchReadonlyProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }
