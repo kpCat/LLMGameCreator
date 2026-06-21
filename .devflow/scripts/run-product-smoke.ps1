@@ -115,6 +115,9 @@ try {
     elseif ($Scenario -eq "composition-workbench-readonly") {
         $TestFilter = "FullyQualifiedName~CompositionWorkbenchReadonlyProductSmoke"
     }
+    elseif ($Scenario -eq "unity-target-contract") {
+        $TestFilter = "FullyQualifiedName~UnityTargetContractProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

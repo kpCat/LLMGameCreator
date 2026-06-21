@@ -1,46 +1,41 @@
 # CURRENT_RUN.md
 
-Task id: PRODUCT_SLICE_015_READ_ONLY_COMPOSITION_WORKBENCH_UI
-Goal: add a Designer-safe read-only Composition Workbench consumer for blueprint diagnostics and saved reports
-Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/015_READ_ONLY_COMPOSITION_WORKBENCH_UI.md
+Task id: PRODUCT_SLICE_016_UNITY_TARGET_CONTRACT_FOUNDATION
+Goal: add machine-readable Game Design Brief and Unity archive/player target contracts without implementing Unity
+Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/016_UNITY_TARGET_CONTRACT_FOUNDATION.md
 
 Source docs/code read:
 - AGENTS.md, README.md, docs/CONTEXT_INDEX.md, docs/CURRENT_GENERATOR_STATE.md/json and docs/ROADMAP_TO_FULL_GENERATOR.md
-- docs/WINFORMS_DESIGNER_RULES.md, docs/LLMGAMECREATOR_OFFICIAL_PRODUCT_PLAN.md and docs/GAME_ASSEMBLY_WORKBENCH_ARCHITECTURE.md
-- docs/PRODUCT_SLICE_015_READ_ONLY_COMPOSITION_WORKBENCH_UI.md and docs/COMPOSITION_WORKBENCH_UI_SPEC.md
-- target Application/WinForms/test csproj files
-- Application/Composition and current-project services
-- CompositionRoot, IEditorPage, Strict LLM Artifacts/Artifact Review page patterns, composition export smoke and product-smoke runner
+- official product plan, workbench/capability plans and all four Product Slice 016 contract/rationale docs
+- target Application/test csproj files, Application/Composition, nearby application/product-smoke tests and product-smoke runner
 
 Patterns reused:
-- Designer-safe `UserControl` split with parameterless constructor
-- presenter/view-state separation from existing WinForms pages
-- `IEditorPage` plus `EditorPageRegistry` registration through CompositionRoot
-- existing GameCompositionDiagnosticsService/renderer/export service and project-local `.llmgc` index contract
-- deferred safe SplitContainer initialization from Artifact Review
+- immutable Application/Composition records and deterministic built-in preset providers
+- stable diagnostic codes, error/warning results and deterministic sorting
+- named headless xUnit ProductSmoke routing through run-product-smoke.ps1
 
 Implemented:
-- Composition Workbench preset selector, readiness/actions summary, saved-report list and read-only markdown view
-- in-memory preview when no project is loaded, with clear export/saved-report status
-- existing export-service use plus safe refresh/readback of `.llmgc/composition-diagnostics/index.json` and selected markdown
-- DryIoc registration and `Composition Workbench` navigation entry
-- three focused presenter/control tests and `composition-workbench-readonly` product smoke
+- structured GameDesignBrief lore/rules/wishes plus generation, scale and performance policies
+- Unity target profile, archive manifest, 22 runtime module, dynamic UI, asset/audio request and large-world streaming contracts
+- three built-in Unity target profiles, a top-down generated RPG archive preset and metadata-only future provider source kinds
+- validation for blank/duplicate/unknown/unsafe ids, blank bindings, duplicate requests, future modules and inconsistent large-world policy
+- unity-target-contract product smoke and docs/state handoff
 
 Non-goals preserved:
-- no Runtime, GamePackageDefinition/package schema, Scripting, Infrastructure/Generation or generator-library changes
-- no solution/project/package changes, dynamic plugins, semantic world model, imported maps, lazy worlds or procedural quest engine
-- no LLM/provider calls and no generator execution
-- M4.1 and controlled-slice gates remain guarded
+- no Unity project/runtime/build and no Runtime, GamePackageDefinition/package schema, WinForms, Scripting, Infrastructure/Generation or generator-library changes
+- no solution/project/package changes, provider calls, ComfyUI/Suno integration or generator execution
+- no semantic world model, imported-map implementation, lazy-world engine, NPC schedules, police/crime, vehicles or army battles
+- M4.1 and controlled-slice gates remain guarded; Product Slice 015 is accepted as the parent
 
 Checks run before state update:
-- CompositionWorkbench focused tests: passed, 4 tests
-- ProductSmoke filtered tests: passed, 13 tests
-- all twelve named product smoke scenarios: passed
-- composition-workbench-readonly: passed, run 20260621_192043-product-smoke
+- UnityTarget filtered tests: passed, 9 tests
+- GameDesignBrief filtered tests: passed, 1 test
+- ProductSmoke filtered tests: passed, 14 tests
+- all thirteen named product smoke scenarios: passed
+- unity-target-contract: passed, run 20260621_233401-product-smoke
 
 Final guards:
 - check-devflow-state.ps1: passed; STOP_REVIEW preserved, 9 tasks, 2 known warnings
-- check-all.ps1: passed; build 0 warnings/0 errors, tests 527 passed; run 20260621_192335-check-all
-- CURRENT_GENERATOR_STATE.json parse: passed; M4.1 phase/milestone preserved and Product Slice 015 recorded with Product Slice 014 as parent
-- mojibake marker scan over all 12 changed files: passed, no markers found
-- manual UI verification: skipped; task marks it optional and headless construction/presenter/smoke coverage passed
+- check-all.ps1: passed; build 0 warnings/0 errors, tests 537 passed; run 20260621_233624-check-all
+- CURRENT_GENERATOR_STATE.json parse: passed; M4.1 phase/milestone preserved and Product Slice 016 recorded with Product Slice 015 as parent
+- mojibake marker scan over all 13 changed files: passed, no markers found

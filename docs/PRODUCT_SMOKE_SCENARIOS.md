@@ -423,3 +423,32 @@ Expected assertions:
 - no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation or Lua execution is invoked.
 
 Manual UI verification is optional. It remains useful for visual layout, selector behavior and long-markdown readability, while the headless test protects construction, presenter behavior and persistence/readback.
+
+## unity-target-contract
+
+Validates the machine-readable Game Design Brief and future Unity archive/player target contracts without implementing or calling Unity:
+
+```text
+game design brief preset
+-> built-in Unity target profiles and runtime module metadata
+-> top-down generated RPG archive manifest
+-> deterministic contract validation
+-> planned/future module warnings and large-world policy checks
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-target-contract
+```
+
+Expected assertions:
+
+- built-in Unity target profile ids and all 22 runtime module ids are unique;
+- `generic_unity_player_2_5d` validates without diagnostics;
+- the top-down generated RPG archive manifest validates with dynamic UI, asset/audio request metadata and lazy large-world policy;
+- `generic_unity_player_mixed_view_future` reports planned/future module warnings without crashing;
+- large-world metadata stores seed/rules/templates, materializes active chunks only, persists dirty deltas, lazily generates NPCs/quests, caps active NPCs and separates authored important NPCs from generated population;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
+
+This scenario is a pure Application-layer contract check. No manual UI verification is required.

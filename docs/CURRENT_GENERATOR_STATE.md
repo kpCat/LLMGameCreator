@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 015 adds a read-only Composition Workbench UI over persisted composition diagnostics.
+M4.1 gate passed for sampled baseline contracts; Product Slice 016 adds the Game Design Brief and Unity target/archive contract foundation.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-014 established immutable blueprint/capability models, generator catalog planning, consolidated diagnostics and deterministic project-local markdown/index export. Product Slice 015 consumes those contracts through a Designer-safe read-only WinForms page without generator, provider, Runtime or package execution.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-015 established immutable composition models, non-executing catalog/diagnostics/export and a read-only Composition Workbench. Product Slice 016 adds machine-readable design-brief, Unity target, archive, runtime-module, dynamic-UI, asset/audio request and large-world streaming contracts without implementing Unity or changing Runtime/GamePackage.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -61,6 +61,16 @@ Permanent evidence summary:
 - A real local-model batch evaluation passed for the sampled baseline contracts listed above.
 
 ## Last completed product slice
+
+- Product Slice 016: Unity Target Contract + Game Design Brief Foundation.
+- `GameDesignBrief` records title/pitch, content language, realism/lore, lore facts, world rules, gameplay/view/interaction/UI/asset/audio wishes and explicit LLM/program/Lua/asset/hand-authored/lazy generation responsibilities.
+- `UnityTargetProfile`, `UnityGameArchiveManifest`, runtime module, dynamic UI, asset/audio request and world-streaming records define archive-first metadata for a future generic Unity player.
+- `UnityTargetContractPresetProvider` exposes three target profiles and 22 runtime module contracts; the mixed-view/imported-map/social/transport/crime/army branches remain planned future metadata.
+- `UnityTargetContractValidator` reports blank/duplicate/unknown ids, unsafe archive ids, blank UI paths, duplicate asset/audio request ids, future-module warnings and inconsistent large-world streaming contracts deterministically.
+- `unity-target-contract` proves current target/archive validity, future warnings and lazy NPC/quest/delta policy without Unity, provider, generator, Runtime, package schema, Lua or WinForms calls.
+- Product Slice 015 is accepted/completed as the read-only Composition Workbench parent foundation.
+
+Parent slice foundation:
 
 - Product Slice 015: Read-only Composition Workbench UI.
 - `CompositionWorkbenchPageControl` lists built-in blueprint presets and saved report entries, shows readiness/actions, and renders markdown in a read-only view.
@@ -160,11 +170,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-015 through the read-only Composition Workbench. Further contract or real runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-016 through the Unity target contract foundation. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Use Composition Workbench to inspect built-in blueprint readiness, build in-memory markdown previews, export reports and reload the project-local saved-report index. Existing generation remains behind explicit editor actions. Use all twelve headless product smoke scenarios before choosing the next controlled slice.
+Use the Game Design Brief and Unity target presets as contract metadata for the next controlled archive/export planning slice. Existing generation remains behind explicit editor actions. Use all thirteen headless product smoke scenarios before choosing any implementation slice.
 
 ## Allowed next Codex tasks
 
@@ -174,6 +184,7 @@ Use Composition Workbench to inspect built-in blueprint readiness, build in-memo
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
 - Add one carefully selected artifact contract only inside a controlled vertical slice with explicit scope and proof checks.
 - Plan one bounded retention/history policy for composition reports without enabling plugins or generator execution.
+- Plan one bounded Unity archive validation/export dry-run slice without a Unity project, Runtime changes or GamePackage schema changes.
 
 ## Restricted next Codex tasks
 
@@ -203,6 +214,7 @@ Capability Picker
   -> consolidated composition diagnostics and recommended actions
   -> deterministic project-local composition report export
   -> read-only Composition Workbench preview/export/saved-report refresh
+  -> Game Design Brief and Unity target/archive contract validation
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -240,11 +252,12 @@ Capability Picker
 
 ## Recommended next step
 
-Choose the next controlled slice from current source without unlocking generator execution, Runtime expansion or package schema work.
+Choose one bounded Unity archive validation/export dry-run slice from the new contracts without implementing Unity, changing Runtime or changing GamePackage schema.
 
 Candidate slices:
 
 - A headless report retention/history policy may be planned separately if multiple versions are needed; Slices 014-015 intentionally maintain and consume one deterministic report per blueprint id.
+- A deterministic editor-side Unity archive plan/export dry-run may consume Slice 016 contracts without creating a Unity project or modifying package schema.
 - One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen.
 
 ## State update rule
