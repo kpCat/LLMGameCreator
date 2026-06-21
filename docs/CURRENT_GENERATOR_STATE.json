@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-21T12:47:36Z",
+  "updated_at_utc": "2026-06-21T13:02:31Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 011 GameBlueprint and capability compatibility foundation completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_011_blueprint_capability_compatibility",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 012 Generator Catalog contract foundation completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_012_generator_catalog_contract",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-011 through GameBlueprint and capability compatibility; further real execution expansion requires controlled vertical-slice approval.",
-  "current_user_action": "Use baseline_generated_rpg_preview as the compatible composition reference and inspect imported-map future presets for planned and missing capability diagnostics; generation remains explicit and existing artifacts are not rewritten.",
-  "recommended_next_decision": "Choose a bounded generator-catalog contract foundation from the official Game Assembly Workbench plan without plugins or execution.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-012 through Generator Catalog contracts and non-executing planning; further real execution expansion requires controlled vertical-slice approval.",
+  "current_user_action": "Use baseline_generated_rpg_preview as the compatible composition reference and inspect its current generator plan; inspect imported-map future presets for planned modules and missing generator support; generation remains explicit.",
+  "recommended_next_decision": "Choose one bounded catalog-backed composition planning consumer without plugins or generator execution.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,22 +49,17 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_011_game_blueprint_capability_graph",
-    "title": "GameBlueprint + Capability Graph Compatibility Foundation",
-    "completed_at_utc": "2026-06-21T12:47:36Z",
-    "summary": "Added immutable GameBlueprint and capability metadata, a built-in current/planned registry, deterministic compatibility validation, three presets and headless product smoke without runtime, package schema, UI or provider changes.",
-    "parent_slice_id": "product_slice_010_official_plan_content_language_policy",
+    "slice_id": "product_slice_012_generator_catalog_contract_foundation",
+    "title": "Generator Catalog Contract Foundation",
+    "completed_at_utc": "2026-06-21T13:02:31Z",
+    "summary": "Added current/planned generator manifests, a deterministic catalog validator, non-executing generator plan resolution and headless product smoke without runtime, package schema, UI, plugins or provider changes.",
+    "parent_slice_id": "product_slice_011_game_blueprint_capability_graph",
     "ui_surface": "none_application_layer_only",
-    "scenario_id": "game-blueprint-capability-compatibility",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario game-blueprint-capability-compatibility",
-    "preset_ids": [
-      "baseline_generated_rpg_preview",
-      "realistic_city_survival_imported_map_future",
-      "zombie_city_survival_imported_map_future"
-    ],
-    "built_in_capability_count": 22,
-    "current_capability_count": 15,
-    "planned_capability_count": 7,
+    "scenario_id": "generator-catalog-contract",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario generator-catalog-contract",
+    "built_in_generator_count": 20,
+    "current_generator_count": 12,
+    "planned_generator_count": 8,
     "headless_outputs": [
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md",
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.json",
@@ -72,17 +67,18 @@
       ".devflow/runs/<timestamp>-product-smoke/package-output/package.json"
     ],
     "validation_contracts": [
-      "built-in capability ids are unique and case-insensitively resolvable",
-      "baseline generated RPG preview validates compatible",
-      "unknown and missing required capabilities are errors",
-      "optional missing requirements and planned capabilities are warnings",
-      "direct conflicts are errors",
-      "future imported-map presets report planned and missing capabilities without crashing",
-      "validation performs no LLM/provider, runtime, package, Lua or UI calls"
+      "built-in generator ids are unique and current catalog validation has no errors",
+      "all current strict LLM, package assembly and package activation manifests exist",
+      "all eight planned future generator manifests exist",
+      "unknown capability references and generator conflicts are errors",
+      "duplicate current output contracts are warnings",
+      "baseline generated RPG preview resolves current generator modules and input contract closure",
+      "future imported-map preset reports planned modules and missing time.calendar generator support without crashing",
+      "planning performs no LLM/provider, plugin, generator execution, runtime, package, Lua or UI calls"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_bounded_generator_catalog_contract_foundation_without_plugins_or_execution",
+    "plan_bounded_catalog_backed_composition_consumer_without_plugins_or_execution",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
@@ -101,10 +97,10 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "generator_catalog_contract_foundation",
-  "recommended_next_work_item_title": "Choose a bounded generator-catalog contract foundation that consumes capability metadata without plugins or execution.",
+  "recommended_next_work_item": "catalog_backed_composition_planning_consumer",
+  "recommended_next_work_item_title": "Choose a bounded consumer of GameBlueprint and GeneratorPlanningResult without plugins or generator execution.",
   "candidate_product_vertical_slices": [
-    "Generator catalog contract foundation: model generator inputs, outputs, requires, provides, conflicts and supported blueprint dimensions without plugins or execution.",
+    "Catalog-backed composition planning diagnostics: consume GameBlueprint plus GeneratorPlanningResult without plugins, execution or package/runtime changes.",
     "A later composition UI may consume GameBlueprint presets only in a separate WinForms slice.",
     "One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen."
   ],
@@ -128,6 +124,7 @@
     "Project content language selection and language-bound prompts",
     "GameBlueprint presets",
     "Built-in capability registry and deterministic compatibility validation",
+    "Built-in generator catalog validation and non-executing plan resolution",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",

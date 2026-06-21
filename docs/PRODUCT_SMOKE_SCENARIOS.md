@@ -307,3 +307,31 @@ Expected assertions:
 - validation is deterministic and does not call an LLM/provider, runtime, package assembly, Lua or WinForms UI.
 
 This scenario is a pure Application-layer composition check. It does not create or mutate `package.json`, activate a package or execute any gameplay behavior. No manual UI verification is required.
+
+## generator-catalog-contract
+
+Validates the first machine-readable Generator Catalog contract and planning layer without loading plugins or executing generators:
+
+```text
+built-in current/planned generator manifests
+-> catalog validation
+-> baseline generated RPG generator plan
+-> imported-map future planned/missing diagnostics
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario generator-catalog-contract
+```
+
+Expected assertions:
+
+- built-in generator ids are unique and current catalog validation has no errors;
+- all nine current strict LLM contract manifests plus package assembly and activation are present;
+- all eight planned future generator manifests are present;
+- `baseline_generated_rpg_preview` resolves the current strict-contract, assembly, activation and map-marker modules;
+- `realistic_city_survival_imported_map_future` reports related planned modules and missing `time.calendar` generator support without throwing;
+- no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation, Lua or WinForms UI is invoked.
+
+This scenario is a pure Application-layer catalog check. No manual UI verification is required.

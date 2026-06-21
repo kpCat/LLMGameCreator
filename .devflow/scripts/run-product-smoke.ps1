@@ -103,6 +103,9 @@ try {
     elseif ($Scenario -eq "game-blueprint-capability-compatibility") {
         $TestFilter = "FullyQualifiedName~GameBlueprintCapabilityCompatibilityProductSmoke"
     }
+    elseif ($Scenario -eq "generator-catalog-contract") {
+        $TestFilter = "FullyQualifiedName~GeneratorCatalogContractProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

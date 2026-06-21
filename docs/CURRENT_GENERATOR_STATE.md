@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 011 adds the first machine-readable GameBlueprint and capability compatibility foundation.
+M4.1 gate passed for sampled baseline contracts; Product Slice 012 adds the first machine-readable Generator Catalog contract foundation.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-010 established composable selection, strict generation, approved-artifact assembly, controlled batch presets, generated-content preview, explicit activation, preview-only quest/dialogue state, deterministic NPC/encounter placement and project-scoped content language policy. Product Slice 011 now describes composition intent through immutable blueprint/capability models, a built-in registry, deterministic compatibility diagnostics and three presets without touching runtime or package schema.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-010 established composable selection, strict generation, approved-artifact assembly, controlled batch presets, generated-content preview, explicit activation, preview-only quest/dialogue state, deterministic NPC/encounter placement and project-scoped content language policy. Product Slice 011 describes composition intent through immutable blueprint/capability models and is accepted as the parent foundation. Product Slice 012 now adds current/planned generator manifests, deterministic catalog validation and a non-executing generator plan resolver without touching runtime or package schema.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -61,6 +61,17 @@ Permanent evidence summary:
 - A real local-model batch evaluation passed for the sampled baseline contracts listed above.
 
 ## Last completed product slice
+
+- Product Slice 012: Generator Catalog Contract Foundation.
+- `GeneratorModuleManifest` records stable input/output contracts, capability requirements/provisions, compatibility dimensions, maturity, LLM/determinism/offline/runtime flags, cost, validation rules and notes.
+- `BuiltInGeneratorCatalog` exposes 12 current modules: nine strict LLM artifact contracts, package assembly, package activation and deterministic generated-map-marker projection.
+- Eight planned manifests describe semantic seed, procedural quest/dialogue, lazy region cache, offscreen scheduling, imported-map classification, households and daily-life scheduling as contract-only future work.
+- `GeneratorCatalogValidator` deterministically reports blank/duplicate ids, unknown capability references, unknown generator conflicts, current-to-planned capability dependencies and duplicate current output contracts.
+- `GeneratorPlanResolver` selects current capability providers, closes their current input contracts, reports related planned modules and identifies requested planned capabilities with no generator support; it never executes a module.
+- `generator-catalog-contract` proves catalog validity, current/planned manifest coverage, baseline resolution and imported-map future diagnostics without LLM/provider, plugin, Runtime, package, Lua or UI calls.
+- Product Slice 011 remains accepted/completed as the GameBlueprint and capability graph parent foundation.
+
+Parent slice foundation:
 
 - Product Slice 011: GameBlueprint + Capability Graph Compatibility Foundation.
 - `GameBlueprint` records game kind, world sources, presentations, generation modes, requested capabilities, content language and notes without mutating `GamePackage`.
@@ -123,11 +134,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-011 through GameBlueprint/capability compatibility. Further contract or real runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-012 through Generator Catalog contracts and non-executing planning. Further contract or real runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Use `baseline_generated_rpg_preview` as the current compatible composition reference and inspect the two imported-map future presets as explicit planned/missing-capability diagnostics. Existing generation remains behind explicit editor actions. Use all eight headless product smoke scenarios before choosing the next controlled slice.
+Use `baseline_generated_rpg_preview` as the current compatible composition reference and inspect its resolved current generator plan. Inspect the imported-map future preset for planned modules and missing `time.calendar` generator support. Existing generation remains behind explicit editor actions. Use all nine headless product smoke scenarios before choosing the next controlled slice.
 
 ## Allowed next Codex tasks
 
@@ -136,7 +147,7 @@ Use `baseline_generated_rpg_preview` as the current compatible composition refer
 - Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
 - Add one carefully selected artifact contract only inside a controlled vertical slice with explicit scope and proof checks.
-- Plan a bounded generator-catalog contract foundation that consumes capability metadata without plugins, execution or package/runtime changes.
+- Plan one controlled consumer of the Generator Catalog and GameBlueprint planning results without enabling plugins or generator execution.
 
 ## Restricted next Codex tasks
 
@@ -162,6 +173,7 @@ Capability Picker
   -> project content language selection and language-bound prompts
   -> GameBlueprint preset selection model
   -> capability registry and deterministic compatibility validation
+  -> generator catalog validation and non-executing plan resolution
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -199,11 +211,11 @@ Capability Picker
 
 ## Recommended next step
 
-Choose a bounded generator-catalog contract foundation from the official workbench plan, then refresh its executable task spec from current source.
+Choose a bounded catalog-backed composition planning slice from the official workbench plan, then refresh its executable task spec from current source.
 
 Candidate slices:
 
-- Generator catalog contract foundation: model generator metadata and capability compatibility without plugins, execution or `generator-library` changes.
+- Catalog-backed composition planning diagnostics: consume `GameBlueprint` plus `GeneratorPlanningResult` without plugins, execution or package/runtime changes.
 - A later composition UI may consume GameBlueprint presets only in a separate WinForms slice.
 - One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen.
 
