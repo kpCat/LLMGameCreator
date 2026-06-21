@@ -210,3 +210,40 @@ Expected assertions:
 The scenario stores its assembled package at `.devflow/runs/<timestamp>-product-smoke/package-output/.llmgc/package-assembly/package.json`.
 
 Manual UI verification remains required for the Artifact Review activation button, Runtime Preview action buttons, log readability and Quest Journal layout.
+
+## generated-map-placement-preview
+
+Validates deterministic preview-only map placement for generated NPCs and encounters:
+
+```text
+full_small_rpg_seed fixture artifacts
+-> GamePackage assembly and export
+-> DefaultGameRuntime start
+-> generated package projection
+-> deterministic NPC/encounter marker placement
+-> interaction catalog and movement compatibility
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario generated-map-placement-preview
+```
+
+Expected assertions:
+
+- NPC and encounter marker counts match the corresponding `generatedContent` sections;
+- scene ids resolve through generated scenes to package map ids, with region/current-map fallback kept diagnostic and non-throwing;
+- every marker has a map id and an in-bounds position;
+- two builds produce the same marker ids, map ids and positions;
+- placement prefers walkable tiles and avoids the player/start tile and marker overlap when possible;
+- Generated Content Browser NPC/encounter entries remain available;
+- movement still succeeds;
+- fixture artifacts contain no provider or LM Studio dependency;
+- no generated effects, dialogue choices, encounter outcomes, combat, inventory or Lua are executed.
+
+The Runtime Preview canvas renders NPC markers as green circles, encounter markers as orange-red diamonds and the player as the existing blue square. Browser selection remains the interaction source; marker map, position, references and preview details are appended to the existing log.
+
+Expected outputs use the shared `.devflow/runs/<timestamp>-product-smoke/` structure and include exported `package-output/package.json`.
+
+Manual UI verification remains required for visual marker distinction, Browser-to-marker detail comparison and movement redraw behavior.

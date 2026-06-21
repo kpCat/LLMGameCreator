@@ -16,7 +16,9 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private readonly GeneratedPackageRuntimePreviewService _previewService;
     private readonly GeneratedContentInteractionPreviewService _interactionService;
     private readonly GeneratedQuestDialoguePreviewService _questDialoguePreviewService;
+    private readonly GeneratedMapPlacementPreviewService _mapPlacementPreviewService;
     private GeneratedContentInteractionCatalog _interactionCatalog = new();
+    private GeneratedMapPlacementPreviewModel _mapPlacementModel = new();
     private GameState? _state;
     private bool _splitterInitialized;
     private bool _updatingGeneratedSelection;
@@ -26,6 +28,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _previewService = new GeneratedPackageRuntimePreviewService();
         _interactionService = new GeneratedContentInteractionPreviewService();
         _questDialoguePreviewService = new GeneratedQuestDialoguePreviewService();
+        _mapPlacementPreviewService = new GeneratedMapPlacementPreviewService();
         InitializeComponent();
         ConfigureSplitSafety();
         WireGeneratedContentEvents();
@@ -37,13 +40,15 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         IGameRuntime runtime,
         GeneratedPackageRuntimePreviewService previewService,
         GeneratedContentInteractionPreviewService interactionService,
-        GeneratedQuestDialoguePreviewService questDialoguePreviewService)
+        GeneratedQuestDialoguePreviewService questDialoguePreviewService,
+        GeneratedMapPlacementPreviewService mapPlacementPreviewService)
     {
         _currentGamePackageService = currentGamePackageService;
         _runtime = runtime;
         _previewService = previewService;
         _interactionService = interactionService;
         _questDialoguePreviewService = questDialoguePreviewService;
+        _mapPlacementPreviewService = mapPlacementPreviewService;
         InitializeComponent();
         ConfigureSplitSafety();
         WireGeneratedContentEvents();
@@ -164,6 +169,8 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
         if (package == null)
         {
+            _mapPlacementModel = new GeneratedMapPlacementPreviewModel();
+            _canvas.SetGeneratedMarkers(_mapPlacementModel.Markers);
             _generatedContentTextBox.Text = "No package is running.";
             _questJournalTextBox.Text = "No package is running.";
             ApplyInteractionCatalog(new GeneratedContentInteractionCatalog(), null, null);
@@ -171,6 +178,11 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         }
 
         var model = _previewService.Build(package, state);
+        if (state != null)
+        {
+            _mapPlacementModel = _mapPlacementPreviewService.Build(package, state, model);
+            _canvas.SetGeneratedMarkers(_mapPlacementModel.Markers);
+        }
         _generatedContentTextBox.Text = FormatGeneratedPreview(model);
         RefreshQuestJournal();
         ApplyInteractionCatalog(_interactionService.Build(model), previousCategoryId, previousEntryId);
@@ -255,7 +267,12 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private void UpdateGeneratedDetails()
     {
         var entry = _generatedEntriesListBox.SelectedItem as GeneratedContentInteractionEntry;
-        _generatedDetailsTextBox.Text = entry?.DetailsText ?? "No generated entry selected.";
+        var marker = FindMarker(entry);
+        _generatedDetailsTextBox.Text = entry == null
+            ? "No generated entry selected."
+            : marker == null
+                ? entry.DetailsText
+                : entry.DetailsText + Environment.NewLine + Environment.NewLine + "Map marker:" + Environment.NewLine + marker.DetailsText;
         _appendGeneratedSelectionButton.Enabled = entry != null;
         _previewDialogueButton.Enabled = entry?.CategoryId == "dialogues";
         _startQuestPreviewButton.Enabled = entry?.CategoryId == "quests";
@@ -275,6 +292,23 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
             ? string.Empty
             : $"; refs: {string.Join(", ", entry.ReferenceIds)}";
         AppendLog($"Generated content: {category.Title} / {entry.Title}{references}");
+        var marker = FindMarker(entry);
+        if (marker != null)
+        {
+            AppendLog($"Map marker: {marker.Type} / {marker.MapId} / {marker.Position.X}, {marker.Position.Y}");
+            AppendLog(marker.DetailsText.Replace(Environment.NewLine, "; "));
+        }
+    }
+
+    private GeneratedRuntimeMapMarker? FindMarker(GeneratedContentInteractionEntry? entry)
+    {
+        if (entry == null || entry.CategoryId is not ("npcs" or "encounters"))
+        {
+            return null;
+        }
+
+        return _mapPlacementModel.Markers.FirstOrDefault(marker =>
+            string.Equals(marker.SourceId, entry.EntryId, StringComparison.OrdinalIgnoreCase));
     }
 
     private void PreviewSelectedDialogue()

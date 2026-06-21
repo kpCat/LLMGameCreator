@@ -116,6 +116,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratedPackageRuntimePreviewService>(Reuse.Singleton);
         _container.Register<GeneratedContentInteractionPreviewService>(Reuse.Singleton);
         _container.Register<GeneratedQuestDialoguePreviewService>(Reuse.Singleton);
+        _container.Register<GeneratedMapPlacementPreviewService>(Reuse.Singleton);
         _container.Register<IGameRuntime, DefaultGameRuntime>(Reuse.Singleton);
         _container.Register<IGameRuntimeStateFactory, GameRuntimeStateFactory>(Reuse.Singleton);
         _container.Register<IRequirementEvaluator, RequirementEvaluator>(Reuse.Singleton);
@@ -168,7 +169,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IGameRuntime>(),
             resolver.Resolve<GeneratedPackageRuntimePreviewService>(),
             resolver.Resolve<GeneratedContentInteractionPreviewService>(),
-            resolver.Resolve<GeneratedQuestDialoguePreviewService>()), Reuse.Singleton);
+            resolver.Resolve<GeneratedQuestDialoguePreviewService>(),
+            resolver.Resolve<GeneratedMapPlacementPreviewService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<RuntimeSimulatorPageControl>(resolver => new RuntimeSimulatorPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),

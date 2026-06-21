@@ -94,6 +94,9 @@ try {
     elseif ($Scenario -eq "active-package-quest-dialogue-preview") {
         $TestFilter = "FullyQualifiedName~ActivePackageQuestDialoguePreviewProductSmoke"
     }
+    elseif ($Scenario -eq "generated-map-placement-preview") {
+        $TestFilter = "FullyQualifiedName~GeneratedMapPlacementPreviewProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

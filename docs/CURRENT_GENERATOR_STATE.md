@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 008 connects assembled-package activation to Runtime Preview and adds preview-only quest/dialogue state.
+M4.1 gate passed for sampled baseline contracts; Product Slice 009 adds deterministic generated NPC/encounter markers to the Runtime Preview map.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-007 established composable selection, strict generation, approved-artifact assembly, controlled batch presets and a generated-content interaction browser. Product Slice 008 adds an explicit, validated `Use assembled package as current` handoff from `.llmgc/package-assembly/package.json`, then keeps dialogue lines and quest progress in a preview-only in-memory session without changing `DefaultGameRuntime`, package contracts or execution behavior.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-008 established composable selection, strict generation, approved-artifact assembly, controlled batch presets, a generated-content interaction browser, explicit assembled-package activation and preview-only quest/dialogue state. Product Slice 009 projects generated NPCs and encounters onto package maps with stable in-bounds positions and a WinForms canvas overlay without changing `DefaultGameRuntime`, package contracts or execution behavior.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,6 +62,16 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 009: Generated NPC/Encounter Map Placement.
+- `GeneratedMapPlacementPreviewService` resolves generated scene ids to package map ids, falls back through region-linked scenes and then the current/start map, and records fallback diagnostics instead of throwing.
+- Marker positions are stable by marker id, remain inside map bounds, prefer walkable tiles and avoid the player/start tile plus other generated markers when space permits.
+- Runtime Preview rebuilds markers on Start and runtime commands; `RuntimeMapCanvas` distinguishes NPC, encounter and player overlays while preserving movement rendering.
+- Generated Content Browser selection remains the interaction source; NPC/encounter details and `Append selected to log` include marker map, position, references and preview-only details. NPC marker details also list linked dialogue ids/titles.
+- `generated-map-placement-preview` proves expanded assembly, marker counts, map/position validity, deterministic placement, Browser catalog preservation and movement without LLM/provider calls.
+- No runtime engine rewrite, package schema change, combat/dialogue/effect execution, Lua, Unity, solution or project changes were introduced.
+
+Parent slice foundation:
+
 - Product Slice 008: Active Generated Package Flow + Quest/Dialogue Preview Stubs.
 - Artifact Review now leaves the root `package.json` untouched and exposes an explicit `Use assembled package as current` action after successful assembly.
 - `AssembledGamePackageActivationService` loads the current project's `.llmgc/package-assembly/package.json` through the existing repository, validates it, and only then replaces the active in-memory package.
@@ -71,7 +81,7 @@ Permanent evidence summary:
 - `active-package-quest-dialogue-preview` proves assembly, activation, generated-content startup, NPC/dialogue lookup, quest journal change and movement without LLM/provider calls or generated effect execution.
 - No root package overwrite, runtime engine rewrite, package schema change, real quest/dialogue execution, Lua/effect, Unity, solution or project changes were introduced.
 
-Parent slice foundation:
+Earlier foundation:
 
 - Product Slice 007: Generated Content Interaction Preview.
 - Runtime Preview now exposes current scene, regions, NPCs, items, dialogues, quests, mechanics, encounters, applied artifacts and warnings as selectable read-only categories.
@@ -81,7 +91,7 @@ Parent slice foundation:
 - `generated-content-interaction-preview` assembles the expanded fixture package, builds the projection/catalog, verifies detail coverage and confirms movement still works without LLM/provider calls.
 - No runtime engine, package schema, generator contract, Lua/effect, Unity, solution or project changes were introduced.
 
-Earlier foundation:
+Earlier contract foundation:
 
 - Product Slice 006: Strict Contract Catalog + Batch Generation.
 - Added strict contracts for regions, NPCs, items, dialogues and encounters with bounded JSON shapes, prompt instructions and contract validation.
@@ -93,11 +103,11 @@ Earlier foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke, Product Slice 007 interaction preview and Product Slice 008 active-package quest/dialogue preview. Further contract or real runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke, Product Slice 007 interaction preview, Product Slice 008 active-package quest/dialogue preview and Product Slice 009 generated map placement preview. Further contract or real runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-After Artifact Review assembly, use `Use assembled package as current`, then start Runtime Preview to inspect linked dialogues and the preview quest journal without copying `package.json`. Use the five headless product smoke scenarios before choosing the next controlled slice.
+After Artifact Review assembly, use `Use assembled package as current`, then start Runtime Preview to inspect generated NPC/encounter markers, linked dialogues and the preview quest journal without copying `package.json`. Use the six headless product smoke scenarios before choosing the next controlled slice.
 
 ## Allowed next Codex tasks
 
@@ -138,6 +148,7 @@ Capability Picker
   -> Generated content interaction preview
   -> Explicit assembled package activation
   -> Quest/dialogue preview-only session
+  -> Generated NPC/encounter map placement preview
   -> controlled product vertical slice planning
 ```
 
