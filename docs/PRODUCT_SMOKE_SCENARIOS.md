@@ -335,3 +335,32 @@ Expected assertions:
 - no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation, Lua or WinForms UI is invoked.
 
 This scenario is a pure Application-layer catalog check. No manual UI verification is required.
+
+## composition-diagnostics-report
+
+Validates the consolidated, catalog-backed composition report without executing generators:
+
+```text
+GameBlueprint preset
+-> capability compatibility validation
+-> Generator Catalog validation and non-executing plan resolution
+-> deterministic readiness, diagnostics and recommended actions
+-> deterministic markdown report
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario composition-diagnostics-report
+```
+
+Expected assertions:
+
+- `baseline_generated_rpg_preview` is `BuildableNow` or `BuildableWithWarnings` and selects current generators;
+- `realistic_city_survival_imported_map_future` is `PlannedFuture` or `MissingRequirements` and reports planned/missing generator support;
+- an intentionally broken blueprint reports `MissingRequirements`, `Conflict` or `Invalid`;
+- consolidated diagnostics, generator ids, recommended actions and markdown output are deterministic;
+- no timestamps are embedded in the composition markdown;
+- no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation, Lua or WinForms UI is invoked.
+
+This scenario is a pure Application-layer reporting check. No manual UI verification is required.

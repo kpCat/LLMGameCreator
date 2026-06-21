@@ -106,6 +106,9 @@ try {
     elseif ($Scenario -eq "generator-catalog-contract") {
         $TestFilter = "FullyQualifiedName~GeneratorCatalogContractProductSmoke"
     }
+    elseif ($Scenario -eq "composition-diagnostics-report") {
+        $TestFilter = "FullyQualifiedName~CompositionDiagnosticsReportProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }
