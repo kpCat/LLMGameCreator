@@ -118,6 +118,9 @@ try {
     elseif ($Scenario -eq "unity-target-contract") {
         $TestFilter = "FullyQualifiedName~UnityTargetContractProductSmoke"
     }
+    elseif ($Scenario -eq "unity-archive-export-dry-run") {
+        $TestFilter = "FullyQualifiedName~UnityArchiveExportDryRunProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

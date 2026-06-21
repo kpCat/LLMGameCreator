@@ -1,41 +1,39 @@
 # CURRENT_RUN.md
 
-Task id: PRODUCT_SLICE_016_UNITY_TARGET_CONTRACT_FOUNDATION
-Goal: add machine-readable Game Design Brief and Unity archive/player target contracts without implementing Unity
-Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/016_UNITY_TARGET_CONTRACT_FOUNDATION.md
+Task id: PRODUCT_SLICE_017_UNITY_ARCHIVE_EXPORT_DRY_RUN
+Goal: add deterministic editor-side Unity archive validation/export planning without implementing Unity
+Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/017_UNITY_ARCHIVE_EXPORT_DRY_RUN.md
 
 Source docs/code read:
 - AGENTS.md, README.md, docs/CONTEXT_INDEX.md, docs/CURRENT_GENERATOR_STATE.md/json and docs/ROADMAP_TO_FULL_GENERATOR.md
-- official product plan, workbench/capability plans and all four Product Slice 016 contract/rationale docs
-- target Application/test csproj files, Application/Composition, nearby application/product-smoke tests and product-smoke runner
+- Product Slice 016 foundation, Unity target/runtime contract spec and Unity archive export dry-run spec
+- target Application/test csproj files, Application/Composition target contracts/validator/export analogs, nearby tests and product-smoke runner/docs
 
 Patterns reused:
-- immutable Application/Composition records and deterministic built-in preset providers
-- stable diagnostic codes, error/warning results and deterministic sorting
-- named headless xUnit ProductSmoke routing through run-product-smoke.ps1
+- immutable Application/Composition records and deterministic diagnostic ordering
+- project-local UTF-8 export with resolved-path containment checks
+- timestamp-free markdown plus named headless xUnit ProductSmoke routing
 
 Implemented:
-- structured GameDesignBrief lore/rules/wishes plus generation, scale and performance policies
-- Unity target profile, archive manifest, 22 runtime module, dynamic UI, asset/audio request and large-world streaming contracts
-- three built-in Unity target profiles, a top-down generated RPG archive preset and metadata-only future provider source kinds
-- validation for blank/duplicate/unknown/unsafe ids, blank bindings, duplicate requests, future modules and inconsistent large-world policy
-- unity-target-contract product smoke and docs/state handoff
+- Unity archive dry-run request/result, plan, planned-file, diagnostic, readiness and validation-report models
+- validator-backed dry-run service with stable logical archive file planning and safe `.llmgc/unity-export-dry-run/` output
+- deterministic JSON/markdown/manifest/validation files with unsafe-path rejection
+- readiness for current, warning, future-blocked, missing-requirement and invalid states
+- unity-archive-export-dry-run product smoke and docs/state handoff
 
 Non-goals preserved:
 - no Unity project/runtime/build and no Runtime, GamePackageDefinition/package schema, WinForms, Scripting, Infrastructure/Generation or generator-library changes
 - no solution/project/package changes, provider calls, ComfyUI/Suno integration or generator execution
-- no semantic world model, imported-map implementation, lazy-world engine, NPC schedules, police/crime, vehicles or army battles
-- M4.1 and controlled-slice gates remain guarded; Product Slice 015 is accepted as the parent
+- M4.1 and controlled-slice gates remain guarded; Product Slice 016 is accepted as the parent
 
 Checks run before state update:
-- UnityTarget filtered tests: passed, 9 tests
-- GameDesignBrief filtered tests: passed, 1 test
-- ProductSmoke filtered tests: passed, 14 tests
-- all thirteen named product smoke scenarios: passed
-- unity-target-contract: passed, run 20260621_233401-product-smoke
+- UnityArchiveExport filtered tests: passed, 4 tests
+- ProductSmoke filtered tests: passed, 15 tests
+- all fourteen named product smoke scenarios: passed
+- unity-archive-export-dry-run: passed, run 20260622_001814-product-smoke
 
 Final guards:
 - check-devflow-state.ps1: passed; STOP_REVIEW preserved, 9 tasks, 2 known warnings
-- check-all.ps1: passed; build 0 warnings/0 errors, tests 537 passed; run 20260621_233624-check-all
-- CURRENT_GENERATOR_STATE.json parse: passed; M4.1 phase/milestone preserved and Product Slice 016 recorded with Product Slice 015 as parent
-- mojibake marker scan over all 13 changed files: passed, no markers found
+- check-all.ps1: passed; build 0 warnings/0 errors, tests 541 passed; run 20260622_002112-check-all
+- CURRENT_GENERATOR_STATE.json parse/guard inspection: passed; M4.1 phase/milestone preserved and Product Slice 017 records Product Slice 016 as parent
+- mojibake marker scan over all 10 changed files: passed, no markers found

@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-21T20:34:16Z",
+  "updated_at_utc": "2026-06-21T21:18:35Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 016 Unity target contract foundation completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_016_unity_target_contract",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 017 Unity archive export dry run completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_017_unity_archive_export_dry_run",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-016 through the Unity target contract foundation; further Unity, provider, generator or Runtime execution requires controlled vertical-slice approval.",
-  "current_user_action": "Use the Game Design Brief and Unity target presets as metadata for the next controlled archive/export planning slice; generation remains explicit.",
-  "recommended_next_decision": "Choose one bounded Unity archive validation/export dry-run slice without Unity implementation, Runtime expansion or GamePackage schema changes.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-017 through deterministic Unity archive export dry-run planning; further Unity, provider, generator or Runtime execution requires controlled vertical-slice approval.",
+  "current_user_action": "Inspect the deterministic Unity archive dry-run outputs and choose one controlled follow-up slice; generation remains explicit.",
+  "recommended_next_decision": "Choose one bounded read-only Unity archive dry-run review/inspection slice without Unity implementation, Runtime expansion or GamePackage schema changes.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,30 +49,31 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_016_unity_target_contract_foundation",
-    "title": "Unity Target Contract + Game Design Brief Foundation",
-    "completed_at_utc": "2026-06-21T20:34:16Z",
-    "summary": "Added Application-layer Game Design Brief and future Unity target/archive/runtime-module/UI/asset/audio/world-streaming contracts, presets and deterministic validation without implementing Unity or changing Runtime, WinForms or GamePackage schema.",
-    "parent_slice_id": "product_slice_015_read_only_composition_workbench_ui",
-    "ui_surface": "none_application_contracts_only",
-    "scenario_id": "unity-target-contract",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-target-contract",
+    "slice_id": "product_slice_017_unity_archive_export_dry_run",
+    "title": "Unity Archive Validation/Export Dry Run",
+    "completed_at_utc": "2026-06-21T21:18:35Z",
+    "summary": "Added deterministic Application-layer Unity archive export planning, readiness diagnostics and project-local UTF-8 dry-run outputs without implementing Unity or changing Runtime, WinForms or GamePackage schema.",
+    "parent_slice_id": "product_slice_016_unity_target_contract_foundation",
+    "ui_surface": "none_application_export_dry_run_only",
+    "scenario_id": "unity-archive-export-dry-run",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-archive-export-dry-run",
     "headless_outputs": [
-      "Game Design Brief preset metadata",
-      "Unity target/archive/runtime-module/UI/asset/audio/world-streaming contract metadata",
+      ".llmgc/unity-export-dry-run/unity-archive-plan.json",
+      ".llmgc/unity-export-dry-run/unity-archive-plan.md",
+      ".llmgc/unity-export-dry-run/unity-archive-manifest.json",
+      ".llmgc/unity-export-dry-run/validation-report.json",
       ".devflow/runs/<timestamp>-product-smoke/test-results/"
     ],
     "validation_contracts": [
-      "Game Design Brief expresses lore, rules, wishes and responsibility policies",
-      "three target profiles and 22 runtime module ids are unique",
-      "current generic target and top-down archive validate",
-      "mixed-view/imported-map/social future intent reports warnings without crashing",
-      "large-world policy represents lazy NPC/quest generation and dirty-delta persistence",
-      "contracts perform no Unity, LLM/provider, generator execution, Runtime, package schema, Lua or WinForms calls"
+      "current generic top-down target is exportable now or warning-only",
+      "mixed-view future target is blocked by future modules without crashing",
+      "planned files and markdown are deterministic and contain no timestamps",
+      "unsafe planned paths cannot escape the dry-run output directory",
+      "dry run performs no Unity, LLM/provider, generator execution, Runtime, package schema, Lua or WinForms calls"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_bounded_unity_archive_validation_export_dry_run_without_unity_runtime_or_schema_changes",
+    "plan_bounded_read_only_unity_archive_dry_run_review_without_unity_runtime_or_schema_changes",
     "plan_bounded_composition_report_retention_history_without_plugins_or_execution",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
@@ -92,10 +93,10 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "unity_archive_validation_export_dry_run",
-  "recommended_next_work_item_title": "Choose a bounded Unity archive validation/export dry-run without Unity implementation, Runtime expansion or GamePackage schema changes.",
+  "recommended_next_work_item": "unity_archive_dry_run_read_only_review",
+  "recommended_next_work_item_title": "Choose a bounded read-only Unity archive dry-run review/inspection slice without Unity implementation, Runtime expansion or GamePackage schema changes.",
   "candidate_product_vertical_slices": [
-    "A deterministic editor-side Unity archive plan/export dry-run may consume Slice 016 contracts without creating a Unity project or modifying package schema.",
+    "A read-only editor-side view may consume the persisted Unity archive dry-run plan and diagnostics without creating a Unity project or modifying package schema.",
     "A headless report retention/history policy may be planned separately if multiple versions are needed.",
     "One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen."
   ],
@@ -124,6 +125,7 @@
     "Deterministic project-local composition report export",
     "Read-only Composition Workbench preview, export and saved-report refresh",
     "Game Design Brief and Unity target/archive contract validation",
+    "Deterministic Unity archive export dry-run planning",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",

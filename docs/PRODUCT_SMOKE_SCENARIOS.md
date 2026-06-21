@@ -452,3 +452,33 @@ Expected assertions:
 - no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
 
 This scenario is a pure Application-layer contract check. No manual UI verification is required.
+
+## unity-archive-export-dry-run
+
+Validates deterministic project-local planning for a future Unity game archive without creating or calling Unity:
+
+```text
+Game Design Brief and Unity target/archive presets
+-> Unity target contract validation
+-> stable archive file plan and readiness
+-> deterministic UTF-8 JSON/markdown dry-run outputs
+-> future-module and unsafe-path diagnostics
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-export-dry-run
+```
+
+Expected assertions:
+
+- `.llmgc/unity-export-dry-run/` is created under the configured project folder;
+- `unity-archive-plan.json`, `unity-archive-plan.md`, `unity-archive-manifest.json` and `validation-report.json` exist;
+- the generic top-down target is `ExportableNow` or `ExportableWithWarnings`;
+- repeated unchanged export produces byte-identical plan JSON and markdown;
+- logical archive files are stably ordered and unsafe paths cannot escape the output directory;
+- the mixed/future target is `BlockedByFutureModules` and reports its planned modules without throwing;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
+
+This scenario is a pure Application-layer dry run. No manual UI verification is required.
