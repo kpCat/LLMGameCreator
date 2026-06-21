@@ -109,6 +109,9 @@ try {
     elseif ($Scenario -eq "composition-diagnostics-report") {
         $TestFilter = "FullyQualifiedName~CompositionDiagnosticsReportProductSmoke"
     }
+    elseif ($Scenario -eq "composition-report-export") {
+        $TestFilter = "FullyQualifiedName~CompositionReportExportProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-21T15:03:11Z",
+  "updated_at_utc": "2026-06-21T15:37:28Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 013 catalog-backed composition diagnostics completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_013_composition_diagnostics",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 014 headless composition report export completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_014_composition_report_export",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-013 through consolidated composition diagnostics; further real execution expansion requires controlled vertical-slice approval.",
-  "current_user_action": "Use the baseline_generated_rpg_preview diagnostics report as the buildable reference; inspect imported-map future readiness, planned modules and missing generator support; generation remains explicit.",
-  "recommended_next_decision": "Choose one bounded read-only consumer of GameCompositionDiagnosticsReport without plugins or generator execution.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-014 through deterministic composition report persistence/export; further real execution expansion requires controlled vertical-slice approval.",
+  "current_user_action": "Use the project-local composition diagnostics index and baseline markdown as the stable read-only composition artifact contract; generation remains explicit.",
+  "recommended_next_decision": "Choose one bounded read-only consumer of the persisted composition diagnostics index/markdown without plugins or generator execution.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,38 +49,29 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_013_catalog_backed_composition_diagnostics",
-    "title": "Catalog-backed Composition Diagnostics Foundation",
-    "completed_at_utc": "2026-06-21T15:03:11Z",
-    "summary": "Added deterministic composition readiness, consolidated capability/catalog/planning diagnostics, recommended actions, timestamp-free markdown and headless product smoke without runtime, package schema, UI, generator execution, plugins or provider changes.",
-    "parent_slice_id": "product_slice_012_generator_catalog_contract_foundation",
+    "slice_id": "product_slice_014_headless_composition_report_export",
+    "title": "Headless Composition Report Export",
+    "completed_at_utc": "2026-06-21T15:37:28Z",
+    "summary": "Added safe deterministic project-local UTF-8 markdown and sorted index persistence for composition diagnostics without runtime, package schema, UI, generator execution, plugins or provider changes.",
+    "parent_slice_id": "product_slice_013_catalog_backed_composition_diagnostics",
     "ui_surface": "none_application_layer_only",
-    "scenario_id": "composition-diagnostics-report",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario composition-diagnostics-report",
-    "readiness_values": [
-      "BuildableNow",
-      "BuildableWithWarnings",
-      "PlannedFuture",
-      "MissingRequirements",
-      "Conflict",
-      "Invalid"
-    ],
+    "scenario_id": "composition-report-export",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario composition-report-export",
     "headless_outputs": [
-      ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md",
-      ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.json",
+      ".llmgc/composition-diagnostics/<safe-blueprint-id>.composition-report.md",
+      ".llmgc/composition-diagnostics/index.json",
       ".devflow/runs/<timestamp>-product-smoke/test-results/"
     ],
     "validation_contracts": [
-      "baseline generated RPG report is buildable and selects current generators",
-      "future imported-map report contains planned or missing readiness diagnostics",
-      "broken blueprint report has error readiness",
-      "selected generator ids and recommended actions are deterministic",
-      "markdown output is deterministic and contains no timestamps",
-      "reporting performs no LLM/provider, plugin, generator execution, runtime, package, Lua or UI calls"
+      "export creates the project-local composition diagnostics directory, markdown and index",
+      "unsafe blueprint ids and traversal segments cannot escape the project root",
+      "repeated unchanged export produces byte-identical markdown and index",
+      "index entries are sorted deterministically by blueprint id and contain no timestamps",
+      "export performs no LLM/provider, plugin, generator execution, runtime, package, Lua or UI calls"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_bounded_read_only_composition_diagnostics_consumer_without_plugins_or_execution",
+    "plan_bounded_read_only_persisted_composition_diagnostics_consumer_without_plugins_or_execution",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
@@ -99,11 +90,11 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "composition_diagnostics_read_only_consumer",
-  "recommended_next_work_item_title": "Choose a bounded read-only consumer of GameCompositionDiagnosticsReport without plugins or generator execution.",
+  "recommended_next_work_item": "persisted_composition_diagnostics_read_only_consumer",
+  "recommended_next_work_item_title": "Choose a bounded read-only consumer of the persisted composition diagnostics index/markdown without plugins or generator execution.",
   "candidate_product_vertical_slices": [
-    "A read-only Composition Workbench page may consume GameCompositionDiagnosticsReport in a separate WinForms slice.",
-    "A headless report persistence/export slice may store deterministic markdown without changing GamePackage schema.",
+    "A read-only Composition Workbench page may consume the persisted index/markdown in a separate WinForms slice.",
+    "A headless report retention/history policy may be planned separately if multiple versions are needed.",
     "One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen."
   ],
   "required_reading_order_for_new_agents": [
@@ -128,6 +119,7 @@
     "Built-in capability registry and deterministic compatibility validation",
     "Built-in generator catalog validation and non-executing plan resolution",
     "Consolidated composition diagnostics and recommended actions",
+    "Deterministic project-local composition report export",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",

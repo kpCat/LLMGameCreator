@@ -62,6 +62,16 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 014: Headless Composition Report Export.
+- `GameCompositionDiagnosticsExportService` persists the existing deterministic markdown under `.llmgc/composition-diagnostics/<safe-blueprint-id>.composition-report.md`.
+- `.llmgc/composition-diagnostics/index.json` records blueprint id, title, readiness, content language and report file name, with entries sorted deterministically by blueprint id and no timestamps.
+- Blueprint ids are reduced to a filename-safe ASCII allowlist, empty results fall back to `blueprint`, and resolved output paths are checked to remain under the project root/output directory.
+- Markdown and index are written as UTF-8 without BOM; repeated unchanged export is byte-identical.
+- `composition-report-export` proves directory/report/index creation, required markdown sections, deterministic repeated export and traversal containment without LLM/provider, plugin, generator execution, Runtime, package, Lua or UI calls.
+- Product Slice 013 is accepted/completed as the deterministic diagnostics and renderer parent foundation.
+
+Parent slice foundation:
+
 - Product Slice 013: Catalog-backed Composition Diagnostics Foundation.
 - `GameCompositionDiagnosticsService` combines `GameBlueprintCompositionValidator`, `GeneratorCatalogValidator` and `GeneratorPlanResolver` without executing generators.
 - `GameCompositionDiagnosticsReport` records blueprint identity/language, readiness, native validation/planning results, consolidated diagnostics, current/planned generator ids, missing generator support and recommended actions.
@@ -140,11 +150,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-013 through consolidated composition diagnostics. Further contract or real runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-014 through deterministic composition report persistence/export. Further contract or real runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Use the catalog-backed report for `baseline_generated_rpg_preview` as the current buildable composition reference. Use the imported-map future report to inspect planned modules, missing requirements and missing `time.calendar` generator support. Existing generation remains behind explicit editor actions. Use all ten headless product smoke scenarios before choosing the next controlled slice.
+Use the project-local `.llmgc/composition-diagnostics/index.json` and baseline markdown report as the stable read-only composition artifact contract. Existing generation remains behind explicit editor actions. Use all eleven headless product smoke scenarios before choosing the next controlled slice.
 
 ## Allowed next Codex tasks
 
@@ -153,7 +163,7 @@ Use the catalog-backed report for `baseline_generated_rpg_preview` as the curren
 - Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
 - Add one carefully selected artifact contract only inside a controlled vertical slice with explicit scope and proof checks.
-- Plan one controlled read-only consumer of `GameCompositionDiagnosticsReport` without enabling plugins or generator execution.
+- Plan one controlled read-only consumer of the persisted composition diagnostics index/markdown without enabling plugins or generator execution.
 
 ## Restricted next Codex tasks
 
@@ -181,6 +191,7 @@ Capability Picker
   -> capability registry and deterministic compatibility validation
   -> generator catalog validation and non-executing plan resolution
   -> consolidated composition diagnostics and recommended actions
+  -> deterministic project-local composition report export
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -218,12 +229,12 @@ Capability Picker
 
 ## Recommended next step
 
-Choose a bounded read-only consumer of the completed composition diagnostics report, then refresh its executable task spec from current source.
+Choose a bounded read-only consumer of the persisted composition diagnostics index/markdown, then refresh its executable task spec from current source.
 
 Candidate slices:
 
-- A read-only Composition Workbench page may consume `GameCompositionDiagnosticsReport` in a separate WinForms slice.
-- A headless report persistence/export slice may store the deterministic markdown without changing GamePackage schema.
+- A read-only Composition Workbench page may consume the persisted index/markdown in a separate WinForms slice.
+- A headless report retention/history policy may be planned separately if multiple versions are needed; Slice 014 intentionally maintains one deterministic report per blueprint id.
 - One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen.
 
 ## State update rule

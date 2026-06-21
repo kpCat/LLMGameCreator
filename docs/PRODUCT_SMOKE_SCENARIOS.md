@@ -364,3 +364,32 @@ Expected assertions:
 - no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation, Lua or WinForms UI is invoked.
 
 This scenario is a pure Application-layer reporting check. No manual UI verification is required.
+
+## composition-report-export
+
+Validates deterministic project-local persistence of the consolidated composition report:
+
+```text
+baseline_generated_rpg_preview diagnostics
+-> timestamp-free markdown renderer
+-> safe project-local report path
+-> deterministic sorted index
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario composition-report-export
+```
+
+Expected assertions:
+
+- markdown is written to `.llmgc/composition-diagnostics/<safe-blueprint-id>.composition-report.md`;
+- `index.json` is written under the same directory and entries are sorted by blueprint id;
+- markdown contains readiness and selected-current-generator sections;
+- repeated export produces byte-identical markdown and index content;
+- unsafe blueprint-id characters and traversal segments cannot escape the project root;
+- output uses UTF-8 and contains no export timestamps;
+- no LLM/provider call, dynamic plugin loading, generator execution, Runtime, package mutation, Lua or WinForms UI is invoked.
+
+This scenario is a pure Application-layer persistence/export check. No manual UI verification is required.
