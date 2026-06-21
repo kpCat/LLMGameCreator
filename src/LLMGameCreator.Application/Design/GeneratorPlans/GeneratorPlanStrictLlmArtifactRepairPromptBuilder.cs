@@ -6,6 +6,8 @@ namespace LLMGameCreator.Application.Design.GeneratorPlans;
 
 public sealed class GeneratorPlanStrictLlmArtifactRepairPromptBuilder
 {
+    private readonly ContentLanguagePromptInstructionProvider _languageInstructionProvider;
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
@@ -13,12 +15,23 @@ public sealed class GeneratorPlanStrictLlmArtifactRepairPromptBuilder
         WriteIndented = true
     };
 
+    public GeneratorPlanStrictLlmArtifactRepairPromptBuilder()
+        : this(new ContentLanguagePromptInstructionProvider())
+    {
+    }
+
+    public GeneratorPlanStrictLlmArtifactRepairPromptBuilder(ContentLanguagePromptInstructionProvider languageInstructionProvider)
+    {
+        _languageInstructionProvider = languageInstructionProvider ?? throw new ArgumentNullException(nameof(languageInstructionProvider));
+    }
+
     public GeneratorPlanStrictLlmArtifactPrompt BuildRepairPrompt(
         GeneratorPlanStrictLlmArtifactContractDefinition contract,
         GeneratorPlanStrictLlmArtifactPrompt originalPrompt,
         string invalidResponse,
         IReadOnlyList<GeneratorPlanStrictLlmArtifactDiagnostic> diagnostics,
-        int attemptIndex)
+        int attemptIndex,
+        string? contentLanguage = null)
     {
         ArgumentNullException.ThrowIfNull(contract);
         ArgumentNullException.ThrowIfNull(originalPrompt);
@@ -32,6 +45,8 @@ public sealed class GeneratorPlanStrictLlmArtifactRepairPromptBuilder
             "Do not wrap the response in Markdown fences.",
             "Do not include explanations, comments, prose, code, scripts, provider instructions, or package mutation instructions.",
             "Do not redesign selected variants, feature bundles, contract id, artifact_kind, or source context.",
+            "Content language policy:",
+            _languageInstructionProvider.GetInstruction(contentLanguage),
             "C# will validate the repaired output."
         });
 

@@ -1,6 +1,7 @@
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using LLMGameCreator.Application.Design.GeneratorPlans;
+using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.Settings;
 
 namespace LLMGameCreator.WinForms.Pages.StrictLlmArtifacts;
@@ -61,10 +62,15 @@ public sealed class StrictLlmArtifactsPresenter
             ?? profiles.FirstOrDefault()?.Id
             ?? string.Empty;
 
+        var contentLanguages = ContentLanguageOptions();
+
         return state with
         {
             Profiles = profiles,
             SelectedProfileId = selectedProfile,
+            ContentLanguages = contentLanguages,
+            SelectedContentLanguage = FirstExisting(state.SelectedContentLanguage, contentLanguages.Select(language => language.Code))
+                ?? ContentLanguageCodes.Russian,
             Contracts = contractOptions,
             BatchPresets = batchPresetOptions,
             SelectedBatchPresetId = FirstExisting(state.SelectedBatchPresetId, batchPresetOptions.Select(preset => preset.Id)) ?? string.Empty,
@@ -72,6 +78,22 @@ public sealed class StrictLlmArtifactsPresenter
                 ? state.SelectedContractIds
                 : contractOptions.Select(contract => contract.Id).ToList(),
             Status = profiles.Count == 0 ? "No LLM profile configured." : state.Status
+        };
+    }
+
+    public StrictLlmArtifactsViewState FromContentLanguagePolicy(
+        StrictLlmArtifactsViewState state,
+        ContentLanguagePolicyLoadResult result)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        ArgumentNullException.ThrowIfNull(result);
+
+        return state with
+        {
+            ContentLanguages = state.ContentLanguages.Count == 0 ? ContentLanguageOptions() : state.ContentLanguages,
+            SelectedContentLanguage = ContentLanguageCodes.Normalize(result.Policy.ContentLanguage),
+            IsContentLanguageProjectPersisted = result.IsProjectPersisted,
+            Status = result.Status
         };
     }
 
@@ -154,7 +176,8 @@ public sealed class StrictLlmArtifactsPresenter
             MaxRepairAttempts = state.EnableRepairAttempt ? 1 : 0,
             MaxTokens = state.MaxTokens,
             Temperature = state.Temperature,
-            ExtraUserBrief = state.ExtraBrief
+            ExtraUserBrief = state.ExtraBrief,
+            ContentLanguage = ContentLanguageCodes.Normalize(state.SelectedContentLanguage)
         };
     }
 
@@ -265,6 +288,16 @@ public sealed class StrictLlmArtifactsPresenter
     private static string? FirstExisting(string selectedId, IEnumerable<string> ids)
     {
         return ids.FirstOrDefault(id => string.Equals(id, selectedId, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static IReadOnlyList<StrictLlmContentLanguageOption> ContentLanguageOptions()
+    {
+        return
+        [
+            new StrictLlmContentLanguageOption { Code = ContentLanguageCodes.Russian, Title = "\u0420\u0443\u0441\u0441\u043A\u0438\u0439" },
+            new StrictLlmContentLanguageOption { Code = ContentLanguageCodes.Ukrainian, Title = "\u0423\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430" },
+            new StrictLlmContentLanguageOption { Code = ContentLanguageCodes.English, Title = "English" }
+        ];
     }
 
     private static int SeverityOrder(string severity)

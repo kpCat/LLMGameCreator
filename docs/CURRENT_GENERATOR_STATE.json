@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-21T10:38:29Z",
+  "updated_at_utc": "2026-06-21T12:11:22Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 009 generated NPC/encounter map placement preview completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_009_generated_map_placement_preview",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 010 official plan and content language policy foundation completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_010_content_language_policy",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke, Product Slice 007 interaction preview, Product Slice 008 active-package quest/dialogue preview and Product Slice 009 generated map placement preview; further real execution expansion requires controlled vertical-slice approval.",
-  "current_user_action": "After Artifact Review assembly, activate .llmgc/package-assembly/package.json with Use assembled package as current, then start Runtime Preview and inspect generated NPC/encounter markers, linked dialogues and the preview quest journal without copying the root package file.",
-  "recommended_next_decision": "Choose the next controlled product vertical slice from the expanded strict artifact and package-preservation foundation.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-010 through project-scoped content language policy; further real execution expansion requires controlled vertical-slice approval.",
+  "current_user_action": "Open LLM Artifacts, keep Russian or select Ukrainian/English for the current project, preview the language-bound prompt, then generate only through the explicit action; existing artifacts are not rewritten.",
+  "recommended_next_decision": "Choose a bounded GameBlueprint and capability-graph compatibility foundation slice from the official Game Assembly Workbench plan.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,32 +49,21 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_009_generated_npc_encounter_map_placement",
-    "title": "Generated NPC/Encounter Map Placement",
-    "completed_at_utc": "2026-06-21T10:38:29Z",
-    "summary": "Added deterministic read-only map markers for generated NPCs and encounters, rendered them as Runtime Preview overlays and connected Browser selection details to marker references without runtime effect execution.",
-    "parent_slice_id": "product_slice_008_active_generated_package_flow_quest_dialogue_preview",
-    "ui_surface": "Runtime Preview / Generated Content / RuntimeMapCanvas",
-    "scenario_id": "generated-map-placement-preview",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario generated-map-placement-preview",
-    "supported_contracts": [
-      "game_profile_v1",
-      "region_pack_v1",
-      "scene_pack_v1",
-      "npc_pack_v1",
-      "quest_pack_v1",
-      "dialogue_pack_v1",
-      "mechanics_pack_v1",
-      "encounter_pack_v1",
-      "item_pack_v1"
+    "slice_id": "product_slice_010_official_plan_content_language_policy",
+    "title": "Official Product Plan + Content Language Policy Foundation",
+    "completed_at_utc": "2026-06-21T12:11:22Z",
+    "summary": "Recorded the official Game Assembly Workbench direction and added project-scoped ru/uk/en content language selection for strict prompt, repair and non-blocking generated-text diagnostics while preserving ASCII/kebab_case technical ids.",
+    "parent_slice_id": "product_slice_009_generated_npc_encounter_map_placement",
+    "ui_surface": "LLM Artifacts / Content language",
+    "scenario_id": "content-language-policy",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario content-language-policy",
+    "supported_content_languages": [
+      "ru",
+      "uk",
+      "en"
     ],
-    "batch_presets": [
-      "baseline_game_seed",
-      "world_content_expansion",
-      "character_content_expansion",
-      "encounter_item_expansion",
-      "full_small_rpg_seed"
-    ],
+    "policy_path": ".llmgc/settings/content-language-policy.json",
+    "technical_id_policy": "ascii_kebab_case",
     "headless_outputs": [
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md",
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.json",
@@ -82,13 +71,12 @@
       ".devflow/runs/<timestamp>-product-smoke/package-output/package.json"
     ],
     "validation_contracts": [
-      "NPC marker count equals generatedContent.npcs count",
-      "encounter marker count equals generatedContent.encounters count",
-      "scene and region references resolve to package map ids with a safe current/start map fallback",
-      "marker positions are deterministic, in bounds, prefer walkable tiles and avoid player/start plus marker overlap when possible",
-      "RuntimeMapCanvas distinguishes NPC, encounter and player overlays",
-      "Generated Content Browser and movement remain functional",
-      "no LLM/provider, generated effects, dialogue choices, combat, inventory, Lua or quest rewards execute"
+      "new LLM Artifacts UI defaults to Russian unless a project policy is saved",
+      "prompt and bounded repair requests include the selected player-facing language instruction",
+      "technical ids remain ASCII/kebab_case and are not translated",
+      "obvious English player-facing prose under ru or uk emits a non-blocking warning",
+      "technical ids alone do not emit language warnings",
+      "policy saves and loads from the current project without provider calls"
     ]
   },
   "allowed_next_codex_task_types": [
@@ -110,12 +98,12 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "next_controlled_product_vertical_slice_after_generated_map_placement_preview",
-  "recommended_next_work_item_title": "Choose the next controlled product vertical slice after deterministic generated NPC/encounter map placement is covered by headless smoke.",
+  "recommended_next_work_item": "game_blueprint_capability_graph_compatibility_foundation",
+  "recommended_next_work_item_title": "Choose a bounded GameBlueprint and capability-graph compatibility foundation slice from the official workbench plan.",
   "candidate_product_vertical_slices": [
-    "Lua-backed content slice: one safe generator module family producing validated artifact envelopes.",
-    "Richer package assembly slice: expand beyond baseline draft assembly for one chosen contract family or gameplay domain.",
-    "Artifact contract slice: add exactly one contract family needed by the chosen product direction and rerun strict evaluation."
+    "GameBlueprint foundation: select world source, generation mode, presentation target and content language without runtime or package mutation.",
+    "Capability graph compatibility foundation: model requires, provides, conflicts and non-binary compatibility without generator execution.",
+    "One controlled semantic-generation contract only after the blueprint and capability direction is explicitly chosen."
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -134,6 +122,7 @@
     "Capability Composer v2 foundation",
     "Composable module selection UI",
     "LLM Artifacts",
+    "Project content language selection and language-bound prompts",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",

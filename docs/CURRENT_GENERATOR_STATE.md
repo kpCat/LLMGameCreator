@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 009 adds deterministic generated NPC/encounter markers to the Runtime Preview map.
+M4.1 gate passed for sampled baseline contracts; Product Slice 010 adds the official Game Assembly Workbench plan and project-scoped content language policy foundation.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-008 established composable selection, strict generation, approved-artifact assembly, controlled batch presets, a generated-content interaction browser, explicit assembled-package activation and preview-only quest/dialogue state. Product Slice 009 projects generated NPCs and encounters onto package maps with stable in-bounds positions and a WinForms canvas overlay without changing `DefaultGameRuntime`, package contracts or execution behavior.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-009 established composable selection, strict generation, approved-artifact assembly, controlled batch presets, generated-content preview, explicit activation, preview-only quest/dialogue state and deterministic NPC/encounter placement. Product Slice 010 preserves that spine while making Russian the default player-facing generation language, persisting `ru`/`uk`/`en` policy per project and keeping technical ids ASCII/kebab_case.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,6 +62,16 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 010: Official Product Plan + Content Language Policy Foundation.
+- The official plan identifies LLMGameCreator as a modular Game Assembly Workbench and records the capability graph, generator catalog, semantic, lazy-world and presentation-adapter direction without starting those later systems.
+- `ContentLanguagePolicyService` defaults new generation UI to `ru`, supports `ru`/`uk`/`en`, and persists the normalized policy at `.llmgc/settings/content-language-policy.json` when a project folder is available.
+- LLM Artifacts exposes a Designer-safe content language selector. Prompt preview, generation and bounded repair requests include the selected player-facing language instruction while preserving ASCII/kebab_case technical ids.
+- `ContentLanguageDiagnosticService` emits non-blocking warnings for obvious English prose in player-facing title/description/dialogue/objective/step fields under `ru` or `uk`; technical id fields are ignored.
+- `content-language-policy` proves policy save/load, selected-language request construction, Russian prompt instruction, technical-id policy and warning behavior without an LLM/provider call.
+- No translation engine, existing-artifact rewrite, runtime/package schema change, Lua, generator-library, solution or project change was introduced.
+
+Parent slice foundation:
+
 - Product Slice 009: Generated NPC/Encounter Map Placement.
 - `GeneratedMapPlacementPreviewService` resolves generated scene ids to package map ids, falls back through region-linked scenes and then the current/start map, and records fallback diagnostics instead of throwing.
 - Marker positions are stable by marker id, remain inside map bounds, prefer walkable tiles and avoid the player/start tile plus other generated markers when space permits.
@@ -70,7 +80,7 @@ Permanent evidence summary:
 - `generated-map-placement-preview` proves expanded assembly, marker counts, map/position validity, deterministic placement, Browser catalog preservation and movement without LLM/provider calls.
 - No runtime engine rewrite, package schema change, combat/dialogue/effect execution, Lua, Unity, solution or project changes were introduced.
 
-Parent slice foundation:
+Earlier parent slice foundation:
 
 - Product Slice 008: Active Generated Package Flow + Quest/Dialogue Preview Stubs.
 - Artifact Review now leaves the root `package.json` untouched and exposes an explicit `Use assembled package as current` action after successful assembly.
@@ -99,15 +109,15 @@ Earlier contract foundation:
 - Approved expanded artifacts map into additive default-empty `generatedContent.regions`, `npcs`, `items`, `dialogues` and `encounters`; no simulation or effect execution was added.
 - Runtime Preview exposes counts and summaries for all five expanded sections while preserving existing profile/scene/quest/mechanics output.
 - The headless scenario `expanded-contract-batch-smoke` assembles all nine `full_small_rpg_seed` fixture contracts, exports `package.json`, verifies provenance and expanded sections, and builds the Runtime Preview projection without LLM/provider calls.
-- A preset dropdown was not added because the existing LLM Artifacts control has no Designer split; the catalog API is the safe foundation for a later Designer-safe UI task.
+- The later Product Slice 010 moved the LLM Artifacts visual layout into a Designer-safe split while preserving this catalog API.
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke, Product Slice 007 interaction preview, Product Slice 008 active-package quest/dialogue preview and Product Slice 009 generated map placement preview. Further contract or real runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-010 through content language policy. Further contract or real runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-After Artifact Review assembly, use `Use assembled package as current`, then start Runtime Preview to inspect generated NPC/encounter markers, linked dialogues and the preview quest journal without copying `package.json`. Use the six headless product smoke scenarios before choosing the next controlled slice.
+Open LLM Artifacts, choose the project content language (`ru` by default), preview the prompt, then generate only through the explicit action. Existing artifacts are not rewritten. Use the seven headless product smoke scenarios before choosing the next controlled slice.
 
 ## Allowed next Codex tasks
 
@@ -138,6 +148,7 @@ Capability Picker
   -> Capability Composer v2 foundation
   -> Composable module selection UI
   -> LLM Artifacts
+  -> project content language selection and language-bound prompts
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -175,13 +186,13 @@ Capability Picker
 
 ## Recommended next step
 
-Choose the next controlled product vertical slice from the expanded strict artifact and package-preservation foundation, then refresh its executable task spec from current source.
+Choose a bounded GameBlueprint + capability-graph/compatibility foundation slice from the official workbench plan, then refresh its executable task spec from current source.
 
 Candidate slices:
 
-- Lua-backed content slice: one safe generator module family producing validated artifact envelopes.
-- Richer package assembly slice: expand beyond the current baseline draft assembly only for one chosen contract family or gameplay domain.
-- Artifact contract slice: add exactly one contract family needed by the chosen product direction, then rerun strict evaluation for that family.
+- GameBlueprint foundation: select world source, generation mode, presentation target and content language without runtime/package mutation.
+- Capability graph compatibility foundation: model requires/provides/conflicts and non-binary compatibility without touching `generator-library` execution.
+- One controlled semantic-generation contract only after the blueprint/capability direction is explicitly chosen.
 
 ## State update rule
 

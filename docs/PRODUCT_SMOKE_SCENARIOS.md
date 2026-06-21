@@ -247,3 +247,35 @@ The Runtime Preview canvas renders NPC markers as green circles, encounter marke
 Expected outputs use the shared `.devflow/runs/<timestamp>-product-smoke/` structure and include exported `package-output/package.json`.
 
 Manual UI verification remains required for visual marker distinction, Browser-to-marker detail comparison and movement redraw behavior.
+
+## content-language-policy
+
+Validates the project-scoped content language foundation without an LLM/provider call:
+
+```text
+default Russian content language policy
+-> project-local policy save/load
+-> LLM Artifacts presenter request
+-> strict prompt construction
+-> non-blocking player-facing language diagnostics
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario content-language-policy
+```
+
+Expected assertions:
+
+- the policy defaults to `ru` and persists at `.llmgc/settings/content-language-policy.json`;
+- `ru`, `uk` and `en` are supported content language codes;
+- the selected language reaches the strict generation request and prompt;
+- the Russian prompt requires Russian player-facing content and ASCII/kebab_case technical ids;
+- obvious English player-facing prose emits a warning under `ru`;
+- technical ids are not inspected as player-facing prose;
+- no LLM/provider, translation, Lua, runtime or package mutation is invoked.
+
+This scenario intentionally does not create or rewrite `package.json`. Existing English fixture artifacts remain valid because the language heuristic is warning-only and applies to future explicit generation requests.
+
+Manual UI verification remains required for selector layout, project-to-project policy switching and prompt preview readability.

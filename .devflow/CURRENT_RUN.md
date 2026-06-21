@@ -1,8 +1,8 @@
 # CURRENT_RUN.md
 
-Task id: PRODUCT_SLICE_009_GENERATED_NPC_ENCOUNTER_MAP_PLACEMENT
-Goal: place generated NPCs and encounters on the Runtime Preview map as deterministic preview markers
-Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/009_GENERATED_NPC_ENCOUNTER_MAP_PLACEMENT.md
+Task id: PRODUCT_SLICE_010_OFFICIAL_PLAN_CONTENT_LANGUAGE_POLICY
+Goal: preserve the official Game Assembly Workbench plan and add project-scoped content language policy for future strict LLM artifact generation
+Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/010_OFFICIAL_PLAN_CONTENT_LANGUAGE_POLICY.md
 
 Source docs read:
 - AGENTS.md
@@ -12,57 +12,50 @@ Source docs read:
 - docs/CURRENT_GENERATOR_STATE.json
 - docs/ROADMAP_TO_FULL_GENERATOR.md
 - docs/WINFORMS_DESIGNER_RULES.md
+- docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md
 - docs/PRODUCT_SMOKE_SCENARIOS.md
-- docs/PRODUCT_SLICE_009_GENERATED_NPC_ENCOUNTER_MAP_PLACEMENT.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/009_CODEX_PROMPT.md
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/009_GENERATED_NPC_ENCOUNTER_MAP_PLACEMENT.md
-- target source, project, test and smoke-runner files named by the task
+- docs/LLMGAMECREATOR_OFFICIAL_PRODUCT_PLAN.md
+- docs/GAME_ASSEMBLY_WORKBENCH_ARCHITECTURE.md
+- docs/CAPABILITY_GRAPH_AND_GENERATOR_CATALOG_PLAN.md
+- docs/PRODUCT_SLICE_010_OFFICIAL_PLAN_CONTENT_LANGUAGE_POLICY.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/010_CODEX_PROMPT.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/010_OFFICIAL_PLAN_CONTENT_LANGUAGE_POLICY.md
+- target project, strict-generation, project persistence, validation, WinForms presenter/page, ProductSmoke and runner files named by the task
 
 Patterns reused:
-- GeneratedPackageRuntimePreviewService as the read-only package/state projection seam
-- GeneratedContentInteractionPreviewService as the Browser/details/reference seam
-- Runtime Preview Designer split and RuntimeMapCanvas overlay rendering
-- expanded full_small_rpg_seed fixture and named product-smoke scenario routing
-
-Files changed:
-- src/LLMGameCreator.Application/RuntimePreview/GeneratedMapPlacementPreviewService.cs
-- src/LLMGameCreator.WinForms/Pages/RuntimePreview/RuntimeMapCanvas.cs
-- src/LLMGameCreator.WinForms/Pages/RuntimePreview/RuntimePreviewPageControl.cs
-- src/LLMGameCreator.WinForms/CompositionRoot.cs
-- tests/LLMGameCreator.Tests/Runtime/GeneratedMapPlacementPreviewServiceTests.cs
-- tests/LLMGameCreator.Tests/WinForms/RuntimePreviewMapPlacementTests.cs
-- tests/LLMGameCreator.Tests/ProductSmoke/GeneratedMapPlacementPreviewSmokeTests.cs
-- .devflow/scripts/run-product-smoke.ps1
-- docs/PRODUCT_SMOKE_SCENARIOS.md
-- docs/CURRENT_GENERATOR_STATE.md
-- docs/CURRENT_GENERATOR_STATE.json
-- .devflow/CURRENT_RUN.md
+- JsonAppSettingsRepository async camelCase JSON save/load and default-on-missing behavior
+- StrictLlmArtifactsPresenter request construction and prompt-preview seam
+- GeneratorPlanStrictLlmEvaluationService non-blocking generated-text quality diagnostics
+- named ProductSmoke test plus run-product-smoke.ps1 scenario routing
+- mandatory WinForms UserControl / Designer split
 
 Implemented:
-- deterministic NPC and encounter preview markers from generatedContent
-- scene -> PackageMapId resolution, region-linked scene fallback and diagnostic current/start map fallback
-- stable in-bounds placement that prefers walkable tiles and avoids player/start plus marker overlap when possible
-- green NPC circles and orange-red encounter diamonds alongside the existing blue player marker
-- Browser details and Append selected to log marker map, position, refs and linked NPC dialogue information
-- generated-map-placement-preview product smoke scenario
+- official Game Assembly Workbench plan pack retained as repository source material
+- ru/uk/en ContentLanguagePolicy with Russian default and ASCII/kebab_case technical id policy
+- project persistence at .llmgc/settings/content-language-policy.json with in-memory fallback when no project is open
+- Designer-safe LLM Artifacts content language selector
+- selected-language instruction in strict initial and bounded repair prompts
+- warning-only heuristic for obvious English player-facing prose under ru/uk, excluding technical ids
+- content-language-policy unit and product-smoke coverage without an LLM/provider call
 
 Non-goals preserved:
-- no DefaultGameRuntime rewrite or package schema change
-- no combat, dialogue choice, encounter outcome, inventory, quest reward or generated effect execution
-- no LLM/provider/LM Studio, Lua, Unity, generator-library, solution or project changes
-- M4.1 and STOP_REVIEW remain guarded
+- no translation engine or rewrite of existing artifacts
+- no runtime, GamePackageDefinition, package schema, Lua, generator-library, solution or project changes
+- no real LLM/provider calls in tests
+- M4.1 and controlled-slice gates remain guarded
 
 Checks run:
-- MapPlacement focused tests: passed, 4 tests
-- ProductSmoke focused tests: passed, 7 tests
-- baseline-strict-package-assembly: passed, run 20260621_134006-product-smoke
-- generated-package-runtime-preview: passed, run 20260621_134011-product-smoke
-- expanded-contract-batch-smoke: passed, run 20260621_134016-product-smoke
-- generated-content-interaction-preview: passed, run 20260621_134022-product-smoke
-- active-package-quest-dialogue-preview: passed, run 20260621_134027-product-smoke
-- generated-map-placement-preview: passed, run 20260621_134033-product-smoke
+- ContentLanguage focused tests: passed, 5 tests
+- ProductSmoke focused tests: passed, 8 tests
+- baseline-strict-package-assembly: passed, run 20260621_151412-product-smoke
+- generated-package-runtime-preview: passed, run 20260621_151418-product-smoke
+- expanded-contract-batch-smoke: passed, run 20260621_151423-product-smoke
+- generated-content-interaction-preview: passed, run 20260621_151428-product-smoke
+- active-package-quest-dialogue-preview: passed, run 20260621_151433-product-smoke
+- generated-map-placement-preview: passed, run 20260621_151438-product-smoke
+- content-language-policy: passed, run 20260621_151443-product-smoke
 - check-devflow-state.ps1: passed; STOP_REVIEW preserved, 9 tasks, 2 known warnings
-- check-all.ps1: passed; build 0 warnings/0 errors, tests 490 passed; run 20260621_134126-check-all
-- CURRENT_GENERATOR_STATE.json parse: passed; M4.1 phase/milestone preserved and Product Slice 009 recorded
-- mojibake marker scan over all 12 changed files: passed, no markers found
-- manual UI verification: not run; headless canvas rendering, page construction/build and all product smoke coverage passed, but visual layout and click-through confirmation remain required
+- check-all.ps1: passed; build 0 warnings/0 errors, tests 495 passed; run 20260621_151613-check-all
+- CURRENT_GENERATOR_STATE.json parse: passed; M4.1 phase/milestone preserved and Product Slice 010 recorded
+- mojibake marker scan over all 18 changed files: passed, no markers found
+- manual UI verification: not run; headless build, presenter/request tests and product smoke passed, but Visual Studio Designer opening and click-through confirmation remain required

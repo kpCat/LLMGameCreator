@@ -11,6 +11,7 @@ public sealed record GeneratorPlanStrictLlmArtifactGenerationRequest
     public int MaxTokens { get; init; } = 4000;
     public double Temperature { get; init; } = 0.2;
     public string ExtraUserBrief { get; init; } = string.Empty;
+    public string ContentLanguage { get; init; } = string.Empty;
 }
 
 public sealed record GeneratorPlanStrictLlmArtifactGenerationResult
@@ -123,6 +124,7 @@ public static class GeneratorPlanStrictLlmArtifactDiagnosticCodes
     public const string InvalidArray = "strict_llm_artifact_generation.invalid_array";
     public const string EmptyRequiredArray = "strict_llm_artifact_generation.empty_required_array";
     public const string InvalidContractContent = "strict_llm_artifact_generation.invalid_contract_content";
+    public const string ContentLanguageWarning = "strict_llm_artifact_generation.content_language_warning";
 }
 
 public static class GeneratorPlanStrictLlmArtifactGenerationArtifactIds

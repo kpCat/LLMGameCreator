@@ -63,6 +63,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IPrototypeLuaPatchArtifactService, PrototypeLuaPatchArtifactService>(Reuse.Singleton);
         _container.Register<ICurrentGamePackageService, CurrentGamePackageService>(Reuse.Singleton);
         _container.Register<AssembledGamePackageActivationService>(Reuse.Singleton);
+        _container.Register<ContentLanguagePolicyService>(Reuse.Singleton);
         _container.Register<NewGamePackageFactory>(Reuse.Singleton);
         _container.Register<IGameProjectService, GameProjectService>(Reuse.Singleton);
         _container.Register<IGamePackageValidator, GamePackageValidator>(Reuse.Singleton);
@@ -99,6 +100,8 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratorPlanCapabilitySelectionArtifactService>(Reuse.Singleton);
         _container.Register<GeneratorPlanCapabilitySelectionArtifactReader>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactContractCatalog>(Reuse.Singleton);
+        _container.Register<ContentLanguagePromptInstructionProvider>(Reuse.Singleton);
+        _container.Register<ContentLanguageDiagnosticService>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactPromptBuilder>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictJsonResponseParser>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactValidator>(Reuse.Singleton);
@@ -224,7 +227,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<GeneratorPlanStrictLlmArtifactGenerationService>(),
             resolver.Resolve<GeneratorPlanStrictLlmArtifactGenerationArtifactReader>(),
             resolver.Resolve<IDesignDatabaseInitializer>(),
-            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+            resolver.Resolve<ICurrentGamePackageService>(),
+            resolver.Resolve<ContentLanguagePolicyService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<StrictLlmEvaluationPageControl>(resolver => new StrictLlmEvaluationPageControl(
             resolver.Resolve<IAppSettingsRepository>(),

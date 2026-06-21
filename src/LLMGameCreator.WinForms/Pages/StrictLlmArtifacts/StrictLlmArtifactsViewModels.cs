@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.GeneratorPlans;
+using LLMGameCreator.Application.Projects;
 
 namespace LLMGameCreator.WinForms.Pages.StrictLlmArtifacts;
 
@@ -10,6 +11,9 @@ public sealed record StrictLlmArtifactsViewState
     public IReadOnlyList<string> SelectedContractIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<StrictLlmBatchPresetOption> BatchPresets { get; init; } = Array.Empty<StrictLlmBatchPresetOption>();
     public string SelectedBatchPresetId { get; init; } = string.Empty;
+    public IReadOnlyList<StrictLlmContentLanguageOption> ContentLanguages { get; init; } = Array.Empty<StrictLlmContentLanguageOption>();
+    public string SelectedContentLanguage { get; init; } = ContentLanguageCodes.Russian;
+    public bool IsContentLanguageProjectPersisted { get; init; }
     public int MaxTokens { get; init; } = 4000;
     public double Temperature { get; init; } = 0.2;
     public bool EnableRepairAttempt { get; init; } = true;
@@ -24,6 +28,13 @@ public sealed record StrictLlmArtifactsViewState
     public IReadOnlyList<StrictLlmArtifactRow> ArtifactRows { get; init; } = Array.Empty<StrictLlmArtifactRow>();
     public IReadOnlyList<StrictLlmDiagnosticRow> DiagnosticRows { get; init; } = Array.Empty<StrictLlmDiagnosticRow>();
     public bool CanGenerate => Profiles.Count > 0 && HasLatestSelection && SelectedContractIds.Count > 0;
+}
+
+public sealed record StrictLlmContentLanguageOption
+{
+    public string Code { get; init; } = string.Empty;
+    public string Title { get; init; } = string.Empty;
+    public string DisplayName => $"{Title} ({Code})";
 }
 
 public sealed record StrictLlmProfileOption

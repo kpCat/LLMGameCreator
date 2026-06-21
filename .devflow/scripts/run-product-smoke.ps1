@@ -97,6 +97,9 @@ try {
     elseif ($Scenario -eq "generated-map-placement-preview") {
         $TestFilter = "FullyQualifiedName~GeneratedMapPlacementPreviewProductSmoke"
     }
+    elseif ($Scenario -eq "content-language-policy") {
+        $TestFilter = "FullyQualifiedName~ContentLanguagePolicyProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

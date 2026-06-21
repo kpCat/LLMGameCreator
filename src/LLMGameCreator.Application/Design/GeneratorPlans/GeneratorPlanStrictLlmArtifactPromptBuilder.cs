@@ -1,17 +1,30 @@
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using LLMGameCreator.Application.Projects;
 
 namespace LLMGameCreator.Application.Design.GeneratorPlans;
 
 public sealed class GeneratorPlanStrictLlmArtifactPromptBuilder
 {
+    private readonly ContentLanguagePromptInstructionProvider _languageInstructionProvider;
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
         WriteIndented = true
     };
+
+    public GeneratorPlanStrictLlmArtifactPromptBuilder()
+        : this(new ContentLanguagePromptInstructionProvider())
+    {
+    }
+
+    public GeneratorPlanStrictLlmArtifactPromptBuilder(ContentLanguagePromptInstructionProvider languageInstructionProvider)
+    {
+        _languageInstructionProvider = languageInstructionProvider ?? throw new ArgumentNullException(nameof(languageInstructionProvider));
+    }
 
     public GeneratorPlanStrictLlmArtifactPrompt Build(
         GeneratorPlanStrictLlmArtifactContractDefinition contract,
@@ -25,12 +38,14 @@ public sealed class GeneratorPlanStrictLlmArtifactPromptBuilder
         return new GeneratorPlanStrictLlmArtifactPrompt
         {
             ContractId = contract.ContractId,
-            SystemPrompt = BuildSystemPrompt(contract),
+            SystemPrompt = BuildSystemPrompt(contract, request),
             UserPrompt = BuildUserPrompt(contract, selection, request)
         };
     }
 
-    private static string BuildSystemPrompt(GeneratorPlanStrictLlmArtifactContractDefinition contract)
+    private string BuildSystemPrompt(
+        GeneratorPlanStrictLlmArtifactContractDefinition contract,
+        GeneratorPlanStrictLlmArtifactGenerationRequest request)
     {
         var lines = new List<string>
         {
@@ -45,6 +60,9 @@ public sealed class GeneratorPlanStrictLlmArtifactPromptBuilder
             "C# will parse and validate this output. Invalid output will be rejected or sent to a bounded repair prompt."
         };
 
+        lines.Add(string.Empty);
+        lines.Add("Content language policy:");
+        lines.Add(_languageInstructionProvider.GetInstruction(request.ContentLanguage));
         lines.AddRange(contract.SystemPromptAdditions);
         return string.Join(Environment.NewLine, lines);
     }
@@ -127,5 +145,29 @@ public sealed class GeneratorPlanStrictLlmArtifactPromptBuilder
 
         builder.AppendLine(label + ":");
         builder.AppendLine(JsonSerializer.Serialize(values, JsonOptions));
+    }
+}
+
+public sealed class ContentLanguagePromptInstructionProvider
+{
+    public string GetInstruction(string? contentLanguage)
+    {
+        return ContentLanguageCodes.Normalize(contentLanguage) switch
+        {
+            ContentLanguageCodes.Ukrainian => string.Join(Environment.NewLine,
+                "Generate all player-facing game content in Ukrainian.",
+                "Keep technical ids in ASCII/kebab_case.",
+                "Do not translate ids.",
+                "Do not output English prose unless it is a proper noun explicitly required by the setting."),
+            ContentLanguageCodes.English => string.Join(Environment.NewLine,
+                "Generate all player-facing game content in English.",
+                "Keep technical ids in ASCII/kebab_case.",
+                "Do not translate ids."),
+            _ => string.Join(Environment.NewLine,
+                "Generate all player-facing game content in Russian.",
+                "Keep technical ids in ASCII/kebab_case.",
+                "Do not translate ids.",
+                "Do not output English prose unless it is a proper noun explicitly required by the setting.")
+        };
     }
 }

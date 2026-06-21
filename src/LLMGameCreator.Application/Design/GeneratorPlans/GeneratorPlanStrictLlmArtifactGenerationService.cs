@@ -3,6 +3,7 @@ using System.Text;
 using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Settings;
+using LLMGameCreator.Application.Validation;
 
 namespace LLMGameCreator.Application.Design.GeneratorPlans;
 
@@ -19,6 +20,7 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
     private readonly GeneratorPlanDraftArtifactApprovalService _approvalService;
     private readonly GeneratorPlanDraftArtifactApprovalArtifactService _approvalArtifactService;
     private readonly GeneratorPlanStrictLlmArtifactGenerationArtifactService _artifactService;
+    private readonly ContentLanguageDiagnosticService _languageDiagnosticService;
 
     public GeneratorPlanStrictLlmArtifactGenerationService(
         IAppSettingsRepository settingsRepository,
@@ -31,7 +33,8 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
         GeneratorPlanStrictLlmArtifactRepairPromptBuilder repairPromptBuilder,
         GeneratorPlanDraftArtifactApprovalService approvalService,
         GeneratorPlanDraftArtifactApprovalArtifactService approvalArtifactService,
-        GeneratorPlanStrictLlmArtifactGenerationArtifactService artifactService)
+        GeneratorPlanStrictLlmArtifactGenerationArtifactService artifactService,
+        ContentLanguageDiagnosticService? languageDiagnosticService = null)
     {
         _settingsRepository = settingsRepository;
         _llmChatClient = llmChatClient;
@@ -44,6 +47,7 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
         _approvalService = approvalService;
         _approvalArtifactService = approvalArtifactService;
         _artifactService = artifactService;
+        _languageDiagnosticService = languageDiagnosticService ?? new ContentLanguageDiagnosticService();
     }
 
     public async Task<GeneratorPlanStrictLlmArtifactPromptPreviewResult> PreviewPromptAsync(
@@ -125,10 +129,11 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
                 continue;
             }
 
-            var artifact = EvaluateAttempt(contract, prompt, response.Content, 0, false, savePromptText, attempts);
+            var artifact = EvaluateAttempt(contract, prompt, response.Content, request.ContentLanguage, 0, false, savePromptText, attempts);
             if (artifact.Valid)
             {
                 artifacts.Add(artifact);
+                AddLanguageWarnings(diagnostics, attempts, contract.ContractId);
                 continue;
             }
 
@@ -143,17 +148,18 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
             for (var repairIndex = 1; repairIndex <= maxRepairAttempts; repairIndex++)
             {
                 var latestDiagnostics = LatestAttemptDiagnostics(attempts, contract.ContractId);
-                var repairPrompt = _repairPromptBuilder.BuildRepairPrompt(contract, prompt, response.Content, latestDiagnostics, repairIndex);
+                var repairPrompt = _repairPromptBuilder.BuildRepairPrompt(contract, prompt, response.Content, latestDiagnostics, repairIndex, request.ContentLanguage);
                 var repairResponse = await CompleteAsync(profile, repairPrompt, request, diagnostics, cancellationToken).ConfigureAwait(false);
                 if (repairResponse == null)
                 {
                     break;
                 }
 
-                var repairedArtifact = EvaluateAttempt(contract, repairPrompt, repairResponse.Content, repairIndex, true, savePromptText, attempts);
+                var repairedArtifact = EvaluateAttempt(contract, repairPrompt, repairResponse.Content, request.ContentLanguage, repairIndex, true, savePromptText, attempts);
                 if (repairedArtifact.Valid)
                 {
                     artifacts.Add(repairedArtifact);
+                    AddLanguageWarnings(diagnostics, attempts, contract.ContractId);
                     repaired = true;
                     break;
                 }
@@ -229,6 +235,7 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
         GeneratorPlanStrictLlmArtifactContractDefinition contract,
         GeneratorPlanStrictLlmArtifactPrompt prompt,
         string responseContent,
+        string contentLanguage,
         int attemptIndex,
         bool isRepairAttempt,
         bool savePromptText,
@@ -236,7 +243,13 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
     {
         var parse = _parser.Parse(responseContent, contract.ContractId);
         var validationDiagnostics = parse.Ok
-            ? _validator.Validate(parse.Json, contract)
+            ? _validator.Validate(parse.Json, contract).Concat(
+                _languageDiagnosticService.Inspect(parse.Json, contentLanguage).Select(diagnostic => Diagnostic(
+                    GeneratorPlanPreviewDiagnosticSeverity.Warning,
+                    GeneratorPlanStrictLlmArtifactDiagnosticCodes.ContentLanguageWarning,
+                    diagnostic.Message,
+                    diagnostic.Target,
+                    contract.ContractId))).ToList()
             : parse.Diagnostics;
         var validationOk = validationDiagnostics.All(diagnostic => diagnostic.Severity != GeneratorPlanPreviewDiagnosticSeverity.Error);
 
@@ -274,6 +287,15 @@ public sealed class GeneratorPlanStrictLlmArtifactGenerationService
             .LastOrDefault(attempt => string.Equals(attempt.ContractId, contractId, StringComparison.OrdinalIgnoreCase))
             ?.Diagnostics
             ?? Array.Empty<GeneratorPlanStrictLlmArtifactDiagnostic>();
+    }
+
+    private static void AddLanguageWarnings(
+        List<GeneratorPlanStrictLlmArtifactDiagnostic> diagnostics,
+        IReadOnlyList<GeneratorPlanStrictLlmArtifactGenerationAttempt> attempts,
+        string contractId)
+    {
+        diagnostics.AddRange(LatestAttemptDiagnostics(attempts, contractId)
+            .Where(diagnostic => diagnostic.Code == GeneratorPlanStrictLlmArtifactDiagnosticCodes.ContentLanguageWarning));
     }
 
     private async Task<GeneratorPlanDraftArtifactApprovalResult> StageForReviewAsync(
