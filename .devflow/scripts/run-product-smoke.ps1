@@ -100,6 +100,9 @@ try {
     elseif ($Scenario -eq "content-language-policy") {
         $TestFilter = "FullyQualifiedName~ContentLanguagePolicyProductSmoke"
     }
+    elseif ($Scenario -eq "game-blueprint-capability-compatibility") {
+        $TestFilter = "FullyQualifiedName~GameBlueprintCapabilityCompatibilityProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

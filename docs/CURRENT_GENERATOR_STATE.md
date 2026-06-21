@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 010 adds the official Game Assembly Workbench plan and project-scoped content language policy foundation.
+M4.1 gate passed for sampled baseline contracts; Product Slice 011 adds the first machine-readable GameBlueprint and capability compatibility foundation.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-009 established composable selection, strict generation, approved-artifact assembly, controlled batch presets, generated-content preview, explicit activation, preview-only quest/dialogue state and deterministic NPC/encounter placement. Product Slice 010 preserves that spine while making Russian the default player-facing generation language, persisting `ru`/`uk`/`en` policy per project and keeping technical ids ASCII/kebab_case.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 001-010 established composable selection, strict generation, approved-artifact assembly, controlled batch presets, generated-content preview, explicit activation, preview-only quest/dialogue state, deterministic NPC/encounter placement and project-scoped content language policy. Product Slice 011 now describes composition intent through immutable blueprint/capability models, a built-in registry, deterministic compatibility diagnostics and three presets without touching runtime or package schema.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,6 +62,16 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 011: GameBlueprint + Capability Graph Compatibility Foundation.
+- `GameBlueprint` records game kind, world sources, presentations, generation modes, requested capabilities, content language and notes without mutating `GamePackage`.
+- `BuiltInCapabilityRegistry` exposes 15 current product-spine capabilities and 7 planned future capabilities with requires, optional requirements, provides, conflicts, compatibility dimensions, runtime cost and maturity metadata.
+- `GameBlueprintCompositionValidator` reports duplicate/unknown ids, missing and optional requirements, direct conflicts, unsupported blueprint dimensions and planned/unsupported capability maturity through deterministic diagnostics.
+- Presets cover the compatible `baseline_generated_rpg_preview` plus realistic and zombie imported-map future intent; future presets remain diagnostic and non-throwing.
+- `game-blueprint-capability-compatibility` proves registry uniqueness, baseline compatibility, future diagnostics and broken-blueprint missing requirements without LLM/provider, runtime, package, Lua or UI calls.
+- No runtime, WinForms, `GamePackageDefinition`, package schema, generator-library, solution or project change was introduced.
+
+Parent slice foundation:
+
 - Product Slice 010: Official Product Plan + Content Language Policy Foundation.
 - The official plan identifies LLMGameCreator as a modular Game Assembly Workbench and records the capability graph, generator catalog, semantic, lazy-world and presentation-adapter direction without starting those later systems.
 - `ContentLanguagePolicyService` defaults new generation UI to `ru`, supports `ru`/`uk`/`en`, and persists the normalized policy at `.llmgc/settings/content-language-policy.json` when a project folder is available.
@@ -70,7 +80,7 @@ Permanent evidence summary:
 - `content-language-policy` proves policy save/load, selected-language request construction, Russian prompt instruction, technical-id policy and warning behavior without an LLM/provider call.
 - No translation engine, existing-artifact rewrite, runtime/package schema change, Lua, generator-library, solution or project change was introduced.
 
-Parent slice foundation:
+Earlier parent slice foundation:
 
 - Product Slice 009: Generated NPC/Encounter Map Placement.
 - `GeneratedMapPlacementPreviewService` resolves generated scene ids to package map ids, falls back through region-linked scenes and then the current/start map, and records fallback diagnostics instead of throwing.
@@ -113,11 +123,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-010 through content language policy. Further contract or real runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-011 through GameBlueprint/capability compatibility. Further contract or real runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Open LLM Artifacts, choose the project content language (`ru` by default), preview the prompt, then generate only through the explicit action. Existing artifacts are not rewritten. Use the seven headless product smoke scenarios before choosing the next controlled slice.
+Use `baseline_generated_rpg_preview` as the current compatible composition reference and inspect the two imported-map future presets as explicit planned/missing-capability diagnostics. Existing generation remains behind explicit editor actions. Use all eight headless product smoke scenarios before choosing the next controlled slice.
 
 ## Allowed next Codex tasks
 
@@ -126,6 +136,7 @@ Open LLM Artifacts, choose the project content language (`ru` by default), previ
 - Generate source-refreshed M6 entry planning only for the chosen product slice and only after explicit user approval.
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
 - Add one carefully selected artifact contract only inside a controlled vertical slice with explicit scope and proof checks.
+- Plan a bounded generator-catalog contract foundation that consumes capability metadata without plugins, execution or package/runtime changes.
 
 ## Restricted next Codex tasks
 
@@ -149,6 +160,8 @@ Capability Picker
   -> Composable module selection UI
   -> LLM Artifacts
   -> project content language selection and language-bound prompts
+  -> GameBlueprint preset selection model
+  -> capability registry and deterministic compatibility validation
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -186,13 +199,13 @@ Capability Picker
 
 ## Recommended next step
 
-Choose a bounded GameBlueprint + capability-graph/compatibility foundation slice from the official workbench plan, then refresh its executable task spec from current source.
+Choose a bounded generator-catalog contract foundation from the official workbench plan, then refresh its executable task spec from current source.
 
 Candidate slices:
 
-- GameBlueprint foundation: select world source, generation mode, presentation target and content language without runtime/package mutation.
-- Capability graph compatibility foundation: model requires/provides/conflicts and non-binary compatibility without touching `generator-library` execution.
-- One controlled semantic-generation contract only after the blueprint/capability direction is explicitly chosen.
+- Generator catalog contract foundation: model generator metadata and capability compatibility without plugins, execution or `generator-library` changes.
+- A later composition UI may consume GameBlueprint presets only in a separate WinForms slice.
+- One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen.
 
 ## State update rule
 

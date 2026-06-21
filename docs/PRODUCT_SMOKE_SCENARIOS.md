@@ -279,3 +279,31 @@ Expected assertions:
 This scenario intentionally does not create or rewrite `package.json`. Existing English fixture artifacts remain valid because the language heuristic is warning-only and applies to future explicit generation requests.
 
 Manual UI verification remains required for selector layout, project-to-project policy switching and prompt preview readability.
+
+## game-blueprint-capability-compatibility
+
+Validates the first machine-readable GameBlueprint and capability compatibility foundation without runtime, package or provider execution:
+
+```text
+built-in capability registry
+-> baseline generated RPG blueprint
+-> compatibility validation
+-> future imported-map diagnostics
+-> intentionally broken blueprint diagnostics
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario game-blueprint-capability-compatibility
+```
+
+Expected assertions:
+
+- built-in capability ids are unique and resolvable;
+- `baseline_generated_rpg_preview` is compatible with current capabilities;
+- `realistic_city_survival_imported_map_future` reports planned and missing capabilities without throwing;
+- an intentionally broken movement-only blueprint reports its missing requirements;
+- validation is deterministic and does not call an LLM/provider, runtime, package assembly, Lua or WinForms UI.
+
+This scenario is a pure Application-layer composition check. It does not create or mutate `package.json`, activate a package or execute any gameplay behavior. No manual UI verification is required.

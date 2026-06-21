@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-21T12:11:22Z",
+  "updated_at_utc": "2026-06-21T12:47:36Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 010 official plan and content language policy foundation completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_010_content_language_policy",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 011 GameBlueprint and capability compatibility foundation completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_011_blueprint_capability_compatibility",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-010 through project-scoped content language policy; further real execution expansion requires controlled vertical-slice approval.",
-  "current_user_action": "Open LLM Artifacts, keep Russian or select Ukrainian/English for the current project, preview the language-bound prompt, then generate only through the explicit action; existing artifacts are not rewritten.",
-  "recommended_next_decision": "Choose a bounded GameBlueprint and capability-graph compatibility foundation slice from the official Game Assembly Workbench plan.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-011 through GameBlueprint and capability compatibility; further real execution expansion requires controlled vertical-slice approval.",
+  "current_user_action": "Use baseline_generated_rpg_preview as the compatible composition reference and inspect imported-map future presets for planned and missing capability diagnostics; generation remains explicit and existing artifacts are not rewritten.",
+  "recommended_next_decision": "Choose a bounded generator-catalog contract foundation from the official Game Assembly Workbench plan without plugins or execution.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,21 +49,22 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_010_official_plan_content_language_policy",
-    "title": "Official Product Plan + Content Language Policy Foundation",
-    "completed_at_utc": "2026-06-21T12:11:22Z",
-    "summary": "Recorded the official Game Assembly Workbench direction and added project-scoped ru/uk/en content language selection for strict prompt, repair and non-blocking generated-text diagnostics while preserving ASCII/kebab_case technical ids.",
-    "parent_slice_id": "product_slice_009_generated_npc_encounter_map_placement",
-    "ui_surface": "LLM Artifacts / Content language",
-    "scenario_id": "content-language-policy",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario content-language-policy",
-    "supported_content_languages": [
-      "ru",
-      "uk",
-      "en"
+    "slice_id": "product_slice_011_game_blueprint_capability_graph",
+    "title": "GameBlueprint + Capability Graph Compatibility Foundation",
+    "completed_at_utc": "2026-06-21T12:47:36Z",
+    "summary": "Added immutable GameBlueprint and capability metadata, a built-in current/planned registry, deterministic compatibility validation, three presets and headless product smoke without runtime, package schema, UI or provider changes.",
+    "parent_slice_id": "product_slice_010_official_plan_content_language_policy",
+    "ui_surface": "none_application_layer_only",
+    "scenario_id": "game-blueprint-capability-compatibility",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario game-blueprint-capability-compatibility",
+    "preset_ids": [
+      "baseline_generated_rpg_preview",
+      "realistic_city_survival_imported_map_future",
+      "zombie_city_survival_imported_map_future"
     ],
-    "policy_path": ".llmgc/settings/content-language-policy.json",
-    "technical_id_policy": "ascii_kebab_case",
+    "built_in_capability_count": 22,
+    "current_capability_count": 15,
+    "planned_capability_count": 7,
     "headless_outputs": [
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.md",
       ".devflow/runs/<timestamp>-product-smoke/product-smoke-summary.json",
@@ -71,15 +72,17 @@
       ".devflow/runs/<timestamp>-product-smoke/package-output/package.json"
     ],
     "validation_contracts": [
-      "new LLM Artifacts UI defaults to Russian unless a project policy is saved",
-      "prompt and bounded repair requests include the selected player-facing language instruction",
-      "technical ids remain ASCII/kebab_case and are not translated",
-      "obvious English player-facing prose under ru or uk emits a non-blocking warning",
-      "technical ids alone do not emit language warnings",
-      "policy saves and loads from the current project without provider calls"
+      "built-in capability ids are unique and case-insensitively resolvable",
+      "baseline generated RPG preview validates compatible",
+      "unknown and missing required capabilities are errors",
+      "optional missing requirements and planned capabilities are warnings",
+      "direct conflicts are errors",
+      "future imported-map presets report planned and missing capabilities without crashing",
+      "validation performs no LLM/provider, runtime, package, Lua or UI calls"
     ]
   },
   "allowed_next_codex_task_types": [
+    "plan_bounded_generator_catalog_contract_foundation_without_plugins_or_execution",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
@@ -98,12 +101,12 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "game_blueprint_capability_graph_compatibility_foundation",
-  "recommended_next_work_item_title": "Choose a bounded GameBlueprint and capability-graph compatibility foundation slice from the official workbench plan.",
+  "recommended_next_work_item": "generator_catalog_contract_foundation",
+  "recommended_next_work_item_title": "Choose a bounded generator-catalog contract foundation that consumes capability metadata without plugins or execution.",
   "candidate_product_vertical_slices": [
-    "GameBlueprint foundation: select world source, generation mode, presentation target and content language without runtime or package mutation.",
-    "Capability graph compatibility foundation: model requires, provides, conflicts and non-binary compatibility without generator execution.",
-    "One controlled semantic-generation contract only after the blueprint and capability direction is explicitly chosen."
+    "Generator catalog contract foundation: model generator inputs, outputs, requires, provides, conflicts and supported blueprint dimensions without plugins or execution.",
+    "A later composition UI may consume GameBlueprint presets only in a separate WinForms slice.",
+    "One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen."
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -123,6 +126,8 @@
     "Composable module selection UI",
     "LLM Artifacts",
     "Project content language selection and language-bound prompts",
+    "GameBlueprint presets",
+    "Built-in capability registry and deterministic compatibility validation",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",
