@@ -121,6 +121,9 @@ try {
     elseif ($Scenario -eq "unity-archive-export-dry-run") {
         $TestFilter = "FullyQualifiedName~UnityArchiveExportDryRunProductSmoke"
     }
+    elseif ($Scenario -eq "unity-archive-materialization") {
+        $TestFilter = "FullyQualifiedName~UnityArchiveMaterializationProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

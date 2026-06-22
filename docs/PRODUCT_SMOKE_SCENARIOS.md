@@ -482,3 +482,34 @@ Expected assertions:
 - no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
 
 This scenario is a pure Application-layer dry run. No manual UI verification is required.
+
+## unity-archive-materialization
+
+Validates deterministic editor-side materialization of the first concrete Unity archive contract without creating or calling Unity:
+
+```text
+Game Design Brief and Unity target/archive presets
+-> Slice 017 dry-run validation
+-> deterministic .llmgc/unity-archive contract/meta files
+-> current playable-contract readiness or future metadata-only readiness
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-materialization
+```
+
+Expected assertions:
+
+- `.llmgc/unity-archive/` is created under the configured project folder;
+- manifest, design brief, target profile, runtime module, UI layout, asset/audio request, localization and Lua module index files exist;
+- archive manifest JSON is valid and current runtime module ids are present in the module index;
+- asset/audio request files exist even when their request lists are empty;
+- repeated unchanged materialization produces byte-identical output;
+- the mixed/future target materializes metadata only and is never reported as a playable contract;
+- missing or invalid dry-run requirements write validation output only;
+- all materialized paths are safe relative paths under the archive directory;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
+
+Optional zip output is not implemented in materialization v1. No manual UI verification is required.

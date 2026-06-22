@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 017 adds deterministic Unity archive export dry-run planning.
+M4.1 gate passed for sampled baseline contracts; Product Slice 018 adds deterministic Unity archive contract materialization.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-016 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and Unity target/archive contracts. Product Slice 017 consumes those contracts into a deterministic project-local export dry run without implementing Unity or changing Runtime/GamePackage.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-017 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench, Unity target/archive contracts and dry-run planning. Product Slice 018 consumes that dry run into a deterministic project-local archive contract folder without implementing Unity or changing Runtime/GamePackage.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -62,12 +62,22 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 018: Unity Archive Materialization v1.
+- `UnityArchiveMaterializationService` consumes the Slice 017 dry run and writes a deterministic UTF-8 contract/meta archive under `.llmgc/unity-archive/`.
+- The archive contains manifest, design brief, target profile, runtime module, UI layout, asset/audio request, localization and Lua module indexes plus export report and validation JSON.
+- Current targets materialize a playable archive contract; future-module targets materialize metadata only, while missing/invalid inputs write validation output only.
+- All output paths are fixed, sorted and containment-checked; repeated unchanged materialization is byte-identical.
+- `unity-archive-materialization` proves required files, valid archive JSON, current runtime module metadata, future metadata-only behavior and safe relative outputs without Unity, provider, generator, Runtime, package schema, Lua or WinForms calls.
+- Optional zip output is intentionally not implemented in v1.
+- Product Slice 017 is accepted/completed as the dry-run parent foundation.
+
+Parent slice foundation:
+
 - Product Slice 017: Unity Archive Validation/Export Dry Run.
 - `UnityArchiveExportDryRunService` consumes the Slice 016 design brief, target profile, archive manifest and runtime module catalog through the existing Unity target validator.
 - The dry run writes deterministic UTF-8 plan JSON/markdown, archive manifest JSON and validation report JSON under `.llmgc/unity-export-dry-run/`.
 - Planned archive paths are stable, sorted and containment-checked; unsafe/traversal paths are diagnosed and excluded from the plan.
 - Readiness distinguishes `ExportableNow`, `ExportableWithWarnings`, `BlockedByFutureModules`, `MissingRequirements` and `Invalid`.
-- `unity-archive-export-dry-run` proves current exportability, future-module blocking, deterministic repeated output and safe project-local persistence without Unity, provider, generator, Runtime, package schema, Lua or WinForms calls.
 - Product Slice 016 is accepted/completed as the Unity target contract parent foundation.
 
 Parent slice foundation:
@@ -178,11 +188,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-017 through deterministic Unity archive export dry-run planning. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-018 through deterministic Unity archive contract materialization. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Inspect the deterministic Unity archive dry-run outputs and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all fourteen headless product smoke scenarios before choosing any implementation slice.
+Inspect the deterministic `.llmgc/unity-archive/` contract/meta output and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all fifteen headless product smoke scenarios before choosing any implementation slice.
 
 ## Allowed next Codex tasks
 
@@ -192,7 +202,7 @@ Inspect the deterministic Unity archive dry-run outputs and choose one controlle
 - Tighten prompt, repair or validator behavior if future real evaluations reveal regressions.
 - Add one carefully selected artifact contract only inside a controlled vertical slice with explicit scope and proof checks.
 - Plan one bounded retention/history policy for composition reports without enabling plugins or generator execution.
-- Plan one bounded read-only Unity archive dry-run review/inspection slice without a Unity project, Runtime changes or GamePackage schema changes.
+- Plan one bounded read-only Unity archive review/inspection slice without a Unity project, Runtime changes or GamePackage schema changes.
 
 ## Restricted next Codex tasks
 
@@ -224,6 +234,7 @@ Capability Picker
   -> read-only Composition Workbench preview/export/saved-report refresh
   -> Game Design Brief and Unity target/archive contract validation
   -> deterministic Unity archive export dry-run planning
+  -> deterministic Unity archive contract/meta materialization
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -261,12 +272,12 @@ Capability Picker
 
 ## Recommended next step
 
-Choose one bounded read-only Unity archive dry-run review/inspection slice without implementing Unity, changing Runtime or changing GamePackage schema.
+Choose one bounded read-only materialized Unity archive review/inspection slice without implementing Unity, changing Runtime or changing GamePackage schema.
 
 Candidate slices:
 
 - A headless report retention/history policy may be planned separately if multiple versions are needed; Slices 014-015 intentionally maintain and consume one deterministic report per blueprint id.
-- A read-only editor-side view may consume the persisted dry-run plan and diagnostics without creating a Unity project or modifying package schema.
+- A read-only editor-side view may inspect the materialized archive contract and validation report without creating a Unity project or modifying package schema.
 - One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen.
 
 ## State update rule

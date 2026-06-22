@@ -1,0 +1,344 @@
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace LLMGameCreator.Application.Composition;
+
+public sealed class UnityArchiveMaterializationService
+{
+    public const string RelativeOutputDirectory = ".llmgc/unity-archive";
+    public const string OptionalZipRelativePath = ".llmgc/unity-archive.zip";
+    public const string ValidationFilePath = "export-validation.json";
+
+    private static readonly UTF8Encoding Utf8WithoutBom = new(false);
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true,
+        WriteIndented = true,
+        Converters = { new JsonStringEnumConverter() }
+    };
+
+    private readonly UnityArchiveExportDryRunService _dryRunService;
+
+    public UnityArchiveMaterializationService(UnityArchiveExportDryRunService dryRunService)
+    {
+        _dryRunService = dryRunService ?? throw new ArgumentNullException(nameof(dryRunService));
+    }
+
+    public async Task<UnityArchiveMaterializationResult> MaterializeAsync(
+        UnityArchiveMaterializationRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(request.DesignBrief);
+        ArgumentNullException.ThrowIfNull(request.TargetProfile);
+        ArgumentNullException.ThrowIfNull(request.ArchiveManifest);
+        ArgumentNullException.ThrowIfNull(request.RuntimeModules);
+        if (string.IsNullOrWhiteSpace(request.ProjectRootPath))
+        {
+            throw new ArgumentException("Project root path is required.", nameof(request));
+        }
+
+        var projectRoot = Path.GetFullPath(request.ProjectRootPath);
+        var outputDirectory = Path.GetFullPath(Path.Combine(projectRoot, ".llmgc", "unity-archive"));
+        EnsureContained(projectRoot, outputDirectory, "Unity archive output directory");
+
+        var dryRun = await _dryRunService.ExportAsync(new UnityArchiveExportDryRunRequest
+        {
+            ProjectRootPath = projectRoot,
+            DesignBrief = request.DesignBrief,
+            TargetProfile = request.TargetProfile,
+            ArchiveManifest = request.ArchiveManifest,
+            RuntimeModules = request.RuntimeModules
+        }, cancellationToken).ConfigureAwait(false);
+
+        var readiness = MapReadiness(dryRun.Plan.Readiness);
+        var diagnostics = CreateDiagnostics(dryRun, request.CreateZip, readiness);
+
+        ResetOutputDirectory(outputDirectory);
+        var files = new List<UnityArchiveMaterializedFile>();
+        if (dryRun.Plan.Readiness is not (UnityArchiveExportReadiness.Invalid or UnityArchiveExportReadiness.MissingRequirements))
+        {
+            await WriteArchiveFilesAsync(outputDirectory, request, files, cancellationToken).ConfigureAwait(false);
+        }
+
+        var orderedFiles = files
+            .OrderBy(file => file.RelativePath, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(file => file.RelativePath, StringComparer.Ordinal)
+            .ToList();
+        var validationPath = OutputPath(outputDirectory, ValidationFilePath);
+        orderedFiles.Add(MaterializedFile(ValidationFilePath, "validation_report"));
+        orderedFiles = orderedFiles
+            .OrderBy(file => file.RelativePath, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(file => file.RelativePath, StringComparer.Ordinal)
+            .ToList();
+        await WriteJsonAsync(validationPath, new UnityArchiveMaterializationValidationReport
+        {
+            Readiness = readiness,
+            DryRunReadiness = dryRun.Plan.Readiness,
+            Diagnostics = diagnostics,
+            MaterializedFiles = orderedFiles
+        }, cancellationToken).ConfigureAwait(false);
+
+        return new UnityArchiveMaterializationResult
+        {
+            OutputDirectoryPath = outputDirectory,
+            ValidationReportPath = validationPath,
+            ZipFilePath = null,
+            Readiness = readiness,
+            MaterializedFiles = orderedFiles,
+            Diagnostics = diagnostics,
+            DryRunResult = dryRun
+        };
+    }
+
+    private static async Task WriteArchiveFilesAsync(
+        string outputDirectory,
+        UnityArchiveMaterializationRequest request,
+        ICollection<UnityArchiveMaterializedFile> files,
+        CancellationToken cancellationToken)
+    {
+        await WriteJsonFileAsync(outputDirectory, "manifest/unity-game-archive.json", "archive_manifest", request.ArchiveManifest, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "composition/game-design-brief.json", "design_brief", request.DesignBrief, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "composition/unity-target-profile.json", "target_profile", request.TargetProfile, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "composition/runtime-modules-index.json", "runtime_modules", new UnityArchiveRuntimeModulesIndex
+        {
+            Modules = request.RuntimeModules
+                .OrderBy(module => module.ModuleId, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(module => module.ModuleId, StringComparer.Ordinal)
+                .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "ui/layouts-index.json", "ui_layouts", new UnityArchiveUiLayoutsIndex
+        {
+            Layouts = request.ArchiveManifest.UiLayouts
+                .OrderBy(layout => layout.LayoutId, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(layout => layout.LayoutId, StringComparer.Ordinal)
+                .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "assets/asset-requests.json", "asset_requests", new UnityArchiveAssetRequestsIndex
+        {
+            Requests = request.ArchiveManifest.AssetRequests
+                .OrderBy(item => item.RequestId, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.RequestId, StringComparer.Ordinal)
+                .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "audio/audio-requests.json", "audio_requests", new UnityArchiveAudioRequestsIndex
+        {
+            Requests = request.ArchiveManifest.AudioRequests
+                .OrderBy(item => item.RequestId, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.RequestId, StringComparer.Ordinal)
+                .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "localization/index.json", "localization", new UnityArchiveLocalizationIndex
+        {
+            ContentLanguage = request.ArchiveManifest.ContentLanguage.Trim(),
+            Files = Normalize(request.ArchiveManifest.LocalizationFiles)
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "lua/modules-index.json", "lua_modules", new UnityArchiveLuaModulesIndex
+        {
+            ModuleIds = Normalize(request.ArchiveManifest.LuaModuleIds)
+        }, files, cancellationToken).ConfigureAwait(false);
+
+        if (!string.IsNullOrWhiteSpace(request.CompositionReportMarkdown))
+        {
+            await WriteTextFileAsync(outputDirectory, "composition/composition-report.md", "composition_report", request.CompositionReportMarkdown, files, cancellationToken).ConfigureAwait(false);
+        }
+
+        await WriteTextFileAsync(outputDirectory, "export-report.md", "export_report", RenderReport(request, files), files, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static string RenderReport(
+        UnityArchiveMaterializationRequest request,
+        IEnumerable<UnityArchiveMaterializedFile> files)
+    {
+        var lines = new List<string>
+        {
+            "# Unity Archive Materialization v1",
+            string.Empty,
+            $"- Game: `{request.ArchiveManifest.GameId.Trim()}`",
+            $"- Design brief: `{request.DesignBrief.BriefId.Trim()}`",
+            $"- Target profile: `{request.TargetProfile.TargetProfileId.Trim()}`",
+            "- Unity implementation: not included",
+            "- Archive purpose: deterministic contract and metadata for a future Unity player",
+            string.Empty,
+            "## Materialized contract files",
+            string.Empty
+        };
+        lines.AddRange(files
+            .Select(file => file.RelativePath)
+            .Append("export-report.md")
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(path => path, StringComparer.Ordinal)
+            .Select(path => $"- `{path}`"));
+        return string.Join("\n", lines) + "\n";
+    }
+
+    private static IReadOnlyList<UnityArchiveMaterializationDiagnostic> CreateDiagnostics(
+        UnityArchiveExportDryRunResult dryRun,
+        bool createZip,
+        UnityArchiveMaterializationReadiness readiness)
+    {
+        var diagnostics = dryRun.Plan.Diagnostics.Select(diagnostic => new UnityArchiveMaterializationDiagnostic
+        {
+            Severity = diagnostic.Severity,
+            Code = UnityArchiveMaterializationDiagnosticCodes.DryRunDiagnostic,
+            Message = $"[{diagnostic.Code}] {diagnostic.Message}",
+            TargetId = diagnostic.TargetId,
+            RelatedId = diagnostic.RelatedId
+        }).ToList();
+
+        if (readiness == UnityArchiveMaterializationReadiness.MaterializedMetadataOnly)
+        {
+            diagnostics.Add(Diagnostic(
+                UnityArchiveExportDiagnosticSeverity.Warning,
+                UnityArchiveMaterializationDiagnosticCodes.FutureModulesMetadataOnly,
+                "Planned future runtime modules allow metadata-only materialization; the archive is not a playable contract.",
+                dryRun.Plan.ArchiveGameId));
+        }
+
+        if (readiness is UnityArchiveMaterializationReadiness.Blocked or UnityArchiveMaterializationReadiness.Invalid)
+        {
+            diagnostics.Add(Diagnostic(
+                UnityArchiveExportDiagnosticSeverity.Error,
+                UnityArchiveMaterializationDiagnosticCodes.MaterializationBlocked,
+                "Dry-run validation blocked archive contract materialization; only validation output was written.",
+                dryRun.Plan.ArchiveGameId));
+        }
+
+        if (createZip)
+        {
+            diagnostics.Add(Diagnostic(
+                UnityArchiveExportDiagnosticSeverity.Info,
+                UnityArchiveMaterializationDiagnosticCodes.ZipNotImplemented,
+                "Deterministic zip output is optional and is not implemented in materialization v1.",
+                dryRun.Plan.ArchiveGameId));
+        }
+
+        return diagnostics
+            .Distinct()
+            .OrderBy(item => SeverityOrder(item.Severity))
+            .ThenBy(item => item.Code, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.TargetId, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.RelatedId, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.Message, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+    }
+
+    private static UnityArchiveMaterializationReadiness MapReadiness(UnityArchiveExportReadiness readiness)
+    {
+        return readiness switch
+        {
+            UnityArchiveExportReadiness.ExportableNow => UnityArchiveMaterializationReadiness.MaterializedPlayableContract,
+            UnityArchiveExportReadiness.ExportableWithWarnings => UnityArchiveMaterializationReadiness.MaterializedWithWarnings,
+            UnityArchiveExportReadiness.BlockedByFutureModules => UnityArchiveMaterializationReadiness.MaterializedMetadataOnly,
+            UnityArchiveExportReadiness.MissingRequirements => UnityArchiveMaterializationReadiness.Blocked,
+            _ => UnityArchiveMaterializationReadiness.Invalid
+        };
+    }
+
+    private static async Task WriteJsonFileAsync<T>(
+        string outputDirectory,
+        string relativePath,
+        string kind,
+        T value,
+        ICollection<UnityArchiveMaterializedFile> files,
+        CancellationToken cancellationToken)
+    {
+        var path = OutputPath(outputDirectory, relativePath);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        await WriteJsonAsync(path, value, cancellationToken).ConfigureAwait(false);
+        files.Add(MaterializedFile(relativePath, kind));
+    }
+
+    private static async Task WriteTextFileAsync(
+        string outputDirectory,
+        string relativePath,
+        string kind,
+        string content,
+        ICollection<UnityArchiveMaterializedFile> files,
+        CancellationToken cancellationToken)
+    {
+        var path = OutputPath(outputDirectory, relativePath);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        await File.WriteAllTextAsync(path, content, Utf8WithoutBom, cancellationToken).ConfigureAwait(false);
+        files.Add(MaterializedFile(relativePath, kind));
+    }
+
+    private static async Task WriteJsonAsync<T>(string path, T value, CancellationToken cancellationToken)
+    {
+        var json = JsonSerializer.Serialize(value, JsonOptions);
+        await File.WriteAllTextAsync(path, json, Utf8WithoutBom, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static string OutputPath(string outputDirectory, string relativePath)
+    {
+        var normalized = relativePath.Replace('/', Path.DirectorySeparatorChar);
+        var path = Path.GetFullPath(Path.Combine(outputDirectory, normalized));
+        EnsureContained(outputDirectory, path, "Unity archive materialized file");
+        return path;
+    }
+
+    private static void ResetOutputDirectory(string outputDirectory)
+    {
+        if (Directory.Exists(outputDirectory))
+        {
+            Directory.Delete(outputDirectory, true);
+        }
+
+        Directory.CreateDirectory(outputDirectory);
+    }
+
+    private static IReadOnlyList<string> Normalize(IEnumerable<string> values)
+    {
+        return values
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Select(value => value.Trim().Replace('\\', '/'))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(value => value, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(value => value, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    private static UnityArchiveMaterializedFile MaterializedFile(string relativePath, string kind)
+    {
+        return new UnityArchiveMaterializedFile { RelativePath = relativePath, Kind = kind };
+    }
+
+    private static UnityArchiveMaterializationDiagnostic Diagnostic(
+        UnityArchiveExportDiagnosticSeverity severity,
+        string code,
+        string message,
+        string targetId)
+    {
+        return new UnityArchiveMaterializationDiagnostic
+        {
+            Severity = severity,
+            Code = code,
+            Message = message,
+            TargetId = targetId
+        };
+    }
+
+    private static void EnsureContained(string rootPath, string candidatePath, string pathLabel)
+    {
+        var root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(rootPath));
+        var candidate = Path.GetFullPath(candidatePath);
+        if (!string.Equals(root, candidate, StringComparison.OrdinalIgnoreCase) &&
+            !candidate.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new InvalidOperationException($"{pathLabel} must stay under '{root}'.");
+        }
+    }
+
+    private static int SeverityOrder(UnityArchiveExportDiagnosticSeverity severity)
+    {
+        return severity switch
+        {
+            UnityArchiveExportDiagnosticSeverity.Error => 0,
+            UnityArchiveExportDiagnosticSeverity.Warning => 1,
+            _ => 2
+        };
+    }
+}
