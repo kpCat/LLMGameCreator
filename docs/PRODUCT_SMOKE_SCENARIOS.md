@@ -280,6 +280,35 @@ This scenario intentionally does not create or rewrite `package.json`. Existing 
 
 Manual UI verification remains required for selector layout, project-to-project policy switching and prompt preview readability.
 
+## unity-archive-request-pipeline
+
+Validates deterministic editor-side asset/audio/Lua request pipeline inside the existing Unity archive without creating or calling Unity:
+
+```text
+existing GamePackageDefinition instance
+-> request pipeline service generates asset, audio and Lua module request metadata
+-> materialization writes all request pipeline files
+-> deterministic archive request metadata
+-> future provider warnings as non-blocking diagnostics
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-request-pipeline
+```
+
+Expected assertions:
+- `.llmgc/unity-archive/assets/asset-requests.json`, `assets/asset-request-index.json`, `audio/audio-requests.json`, `audio/audio-request-index.json`, `lua/module-requests.json` and `lua/modules-index.json` all exist and are valid JSON with `schemaVersion`;
+- request ids are stable/deterministic across two runs;
+- top-down RPG target with sample package data creates scene illustration, NPC portrait, item icon, ability icon, tile texture, UI widget/theme, UI click, footstep, ability, scene ambience and music request metadata;
+- Lua module requests include inventory, quest journal, dialogue, combat, crafting, stats and world map modules;
+- `generic_unity_player_mixed_view_future` target creates future Lua/audio metadata warnings without crashing;
+- future provider kinds appear as warnings but not errors;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
+
+No manual UI verification is required.
+
 ## game-blueprint-capability-compatibility
 
 Validates the first machine-readable GameBlueprint and capability compatibility foundation without runtime, package or provider execution:

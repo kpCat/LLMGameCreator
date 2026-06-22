@@ -1,42 +1,59 @@
-Task id: PRODUCT_SLICE_019_UNITY_ARCHIVE_GAME_DATA_PAYLOAD_V1
-Goal: materialize deterministic existing GamePackage data and category indexes inside the editor-side Unity archive without implementing Unity
-Task source: docs/agent-tasks/NEXT_PRODUCT_SLICE/019_UNITY_ARCHIVE_GAME_DATA_PAYLOAD_V1.md
+Task id: PRODUCT_SLICE_020_UNITY_ARCHIVE_ASSET_AUDIO_LUA_REQUEST_PIPELINE_V1
+Goal: refactor UnityArchiveAssetAudioLuaRequestService to split monolith into internal components while preserving behavior
 
 Source docs/code read:
-- AGENTS.md, README.md, docs/CONTEXT_INDEX.md, docs/CURRENT_GENERATOR_STATE.md/json and docs/ROADMAP_TO_FULL_GENERATOR.md
-- Product Slice 016-018 docs, Unity archive game-data payload spec and ProductSmoke docs
-- target Application/GamePackage/test csproj files, Application/Composition materialization/dry-run services, GamePackageDefinition/Domain category models, current/assembled package services, focused tests and product-smoke runner
-- `src/LLMGameCreator.Application/Packages` was not found; no duplicate package abstraction was created
+- AGENTS.md, docs/CONTEXT_INDEX.md, docs/CURRENT_GENERATOR_STATE.md/json
+- src/LLMGameCreator.Application/Composition/UnityArchiveRequestPipelineModels.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveRequestPipelineService.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveMaterializationModels.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveMaterializationService.cs
+- tests/LLMGameCreator.Tests/Application/UnityArchiveRequestPipelineTests.cs
+- tests/LLMGameCreator.Tests/Application/UnityArchiveMaterializationTests.cs
+- tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveRequestPipelineSmokeTests.cs
+- .devflow/CURRENT_RUN.md
 
-Patterns reused:
-- Slice 018 dry-run-backed archive materialization and fixed project-local path containment
-- existing package/assembly camelCase JSON serialization with readable Unicode
-- deterministic UTF-8 without BOM, case-insensitive then ordinal ordering and named xUnit ProductSmoke routing
+Patterns applied:
+- Extracted UnityArchiveRequestBuildContext as internal context holder
+- Extracted UnityArchiveAssetRequestBuilder for asset request construction
+- Extracted UnityArchiveAudioRequestBuilder for audio request construction  
+- Extracted UnityArchiveLuaModuleRequestBuilder for Lua module request construction
+- Kept UnityArchiveRequestDiagnosticsBuilder as static helper for diagnostics
+- Service acts as facade, delegates to builders
 
-Implemented:
-- Unity archive game-data payload request/result, index/category/entry/file/diagnostic models and service
-- optional existing `GamePackageDefinition` input on materialization; no package schema change
-- `data/game-package.json`, generated-content index and scenes/NPCs/quests/dialogues/items/encounters indexes
-- extraction from existing core package and generated-content collections only, including sorted tags/linked ids and valid empty indexes
-- path traversal guard, deterministic no-timestamp indexes and future metadata-only behavior when package data is absent
-- `unity-archive-game-data-payload` product smoke and docs/state handoff
+Refactored:
+- UnityArchiveAssetAudioLuaRequestService reduced from 645 to ~190 lines
+- Split into 4 internal helper classes:
+  - UnityArchiveRequestBuildContext - context with derived booleans
+  - UnityArchiveAssetRequestBuilder - scene/map/NPC/item/ability/mechanic/tile/UI asset requests
+  - UnityArchiveAudioRequestBuilder - UI SFX/footstep/ability/ambience/music requests
+  - UnityArchiveLuaModuleRequestBuilder - inventory/quest/dialogue/combat/crafting/stats/world_map/factions/future modules
+- All request IDs, diagnostics codes, readiness semantics preserved
+- Future provider warnings aggregated correctly
+- Duplicate ID validation preserved
 
-Non-goals preserved:
-- no Unity project/runtime/build and no Runtime, GamePackageDefinition/package schema, WinForms, Scripting, Infrastructure/Generation or generator-library changes
-- no solution/project/package changes, provider calls, ComfyUI/Suno integration or generator/Lua execution
-- M4.1 and controlled-slice gates remain guarded; Product Slice 018 is accepted as the parent
+Behavior preserved:
+- Request ID format: asset-request.{kind}.{normalizedId}
+- Audio request ID format: audio-request.{kind}.{normalizedId}
+- Lua module ID format: lua-request.{kind}
+- Readiness: no diagnostics → Ready, warnings only → ReadyWithWarnings, errors → BlockedByErrors
+- Diagnostic codes: request.diagnostic.future_provider_kind.asset.comfyui_future, etc.
+- Deterministic output verified through existing tests
 
-Checks run before state update:
-- UnityArchiveGameDataPayload filtered tests: passed, 5 tests including product smoke
+Files changed (5):
+- src/LLMGameCreator.Application/Composition/UnityArchiveRequestPipelineService.cs - refactored
+- tests/LLMGameCreator.Tests/Application/UnityArchiveRequestPipelineTests.cs - fixed bug in existing test + added refactor verification test
+
+Files added (4):
+- src/LLMGameCreator.Application/Composition/UnityArchiveRequestBuildContext.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveRequestDiagnosticsBuilder.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveAssetRequestBuilder.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveAudioRequestBuilder.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveLuaModuleRequestBuilder.cs
+
+Temporary cleanup docs already removed - not found in docs/agent-tasks/NEXT_PRODUCT_SLICE/*020_CLEANUP*
+
+Checks run:
+- UnityArchiveRequestPipeline filtered tests: passed, 11 tests
 - UnityArchiveMaterialization filtered tests: passed, 5 tests
-- unity-archive-game-data-payload: passed, run 20260622_140412-product-smoke
-
-Final guards:
-- ProductSmoke filtered tests: passed, 17 tests
-- unity-target-contract: passed, run 20260622_140853-product-smoke
-- unity-archive-export-dry-run: passed, run 20260622_140858-product-smoke
-- unity-archive-materialization: passed, run 20260622_140903-product-smoke
-- check-devflow-state.ps1: passed; STOP_REVIEW preserved, 9 tasks, 2 known warnings
-- check-all.ps1: passed on final files; build 0 warnings/0 errors, tests 551 passed; run 20260622_141203-check-all
-- final state JSON parse: passed; M4.1 phase/milestone preserved and Product Slice 019 records Product Slice 018 as parent
-- mojibake marker and UTF-8 BOM scan over all 10 changed files: passed, no markers or BOM found
+- unity-archive-request-pipeline smoke: passed
+- check-all: passed, 562 tests, 0 warnings
