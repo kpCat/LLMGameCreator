@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using LLMGameCreator.GamePackage;
 
 namespace LLMGameCreator.Application.Composition;
 
@@ -20,6 +21,7 @@ public sealed record UnityArchiveMaterializationRequest
     public IReadOnlyList<UnityRuntimeModuleContract> RuntimeModules { get; init; }
         = Array.Empty<UnityRuntimeModuleContract>();
     public string CompositionReportMarkdown { get; init; } = string.Empty;
+    public GamePackageDefinition? GamePackage { get; init; }
     public bool CreateZip { get; init; }
 }
 

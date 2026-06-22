@@ -20,10 +20,14 @@ public sealed class UnityArchiveMaterializationService
     };
 
     private readonly UnityArchiveExportDryRunService _dryRunService;
+    private readonly UnityArchiveGameDataPayloadService _gameDataPayloadService;
 
-    public UnityArchiveMaterializationService(UnityArchiveExportDryRunService dryRunService)
+    public UnityArchiveMaterializationService(
+        UnityArchiveExportDryRunService dryRunService,
+        UnityArchiveGameDataPayloadService? gameDataPayloadService = null)
     {
         _dryRunService = dryRunService ?? throw new ArgumentNullException(nameof(dryRunService));
+        _gameDataPayloadService = gameDataPayloadService ?? new UnityArchiveGameDataPayloadService();
     }
 
     public async Task<UnityArchiveMaterializationResult> MaterializeAsync(
@@ -93,7 +97,7 @@ public sealed class UnityArchiveMaterializationService
         };
     }
 
-    private static async Task WriteArchiveFilesAsync(
+    private async Task WriteArchiveFilesAsync(
         string outputDirectory,
         UnityArchiveMaterializationRequest request,
         ICollection<UnityArchiveMaterializedFile> files,
@@ -139,6 +143,19 @@ public sealed class UnityArchiveMaterializationService
         {
             ModuleIds = Normalize(request.ArchiveManifest.LuaModuleIds)
         }, files, cancellationToken).ConfigureAwait(false);
+
+        if (request.GamePackage != null)
+        {
+            var payload = await _gameDataPayloadService.WriteAsync(new UnityArchiveGameDataPayloadRequest
+            {
+                ProjectRootPath = request.ProjectRootPath,
+                Package = request.GamePackage
+            }, cancellationToken).ConfigureAwait(false);
+            foreach (var payloadFile in payload.WrittenFiles)
+            {
+                files.Add(MaterializedFile(payloadFile.RelativePath, payloadFile.Kind));
+            }
+        }
 
         if (!string.IsNullOrWhiteSpace(request.CompositionReportMarkdown))
         {

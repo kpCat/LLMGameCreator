@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 018 adds deterministic Unity archive contract materialization.
+M4.1 gate passed for sampled baseline contracts; Product Slice 019 adds deterministic Unity archive game-data payload materialization.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-017 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench, Unity target/archive contracts and dry-run planning. Product Slice 018 consumes that dry run into a deterministic project-local archive contract folder without implementing Unity or changing Runtime/GamePackage.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-018 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta materialization. Product Slice 019 optionally adds the existing assembled/current package plus stable category indexes under the archive `data/` folder without implementing Unity or changing Runtime/GamePackage schema.
 
 This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
 
@@ -61,6 +61,16 @@ Permanent evidence summary:
 - A real local-model batch evaluation passed for the sampled baseline contracts listed above.
 
 ## Last completed product slice
+
+- Product Slice 019: Unity Archive Game Data Payload v1.
+- `UnityArchiveGameDataPayloadService` writes the supplied existing `GamePackageDefinition` to `.llmgc/unity-archive/data/game-package.json` and extracts stable indexes for scenes, NPCs, quests, dialogues, items and encounters.
+- Category entries come only from existing core package/generated-content structures; missing categories produce valid empty indexes, while ids, tags and linked ids are sorted deterministically.
+- `UnityArchiveMaterializationService` includes payload files only when package data is explicitly supplied. Future-module materialization without package data remains metadata-only and does not claim playable data.
+- All data paths are containment-checked, JSON is UTF-8 without BOM, indexes contain no timestamps and repeated unchanged materialization is byte-identical.
+- `unity-archive-game-data-payload` proves the required data files, valid package/category JSON, empty categories, deterministic output and future metadata-only behavior without Unity, provider, generator, Runtime, package schema, Lua or WinForms calls.
+- Product Slice 018 is accepted/completed as the archive materialization parent foundation.
+
+Parent slice foundation:
 
 - Product Slice 018: Unity Archive Materialization v1.
 - `UnityArchiveMaterializationService` consumes the Slice 017 dry run and writes a deterministic UTF-8 contract/meta archive under `.llmgc/unity-archive/`.
@@ -188,11 +198,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-018 through deterministic Unity archive contract materialization. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-019 through deterministic Unity archive game-data payload materialization. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Inspect the deterministic `.llmgc/unity-archive/` contract/meta output and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all fifteen headless product smoke scenarios before choosing any implementation slice.
+Inspect the deterministic `.llmgc/unity-archive/` contract/meta/data output and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all sixteen headless product smoke scenarios before choosing any implementation slice.
 
 ## Allowed next Codex tasks
 
@@ -235,6 +245,7 @@ Capability Picker
   -> Game Design Brief and Unity target/archive contract validation
   -> deterministic Unity archive export dry-run planning
   -> deterministic Unity archive contract/meta materialization
+  -> deterministic Unity archive game-data payload materialization when package data is supplied
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -272,12 +283,12 @@ Capability Picker
 
 ## Recommended next step
 
-Choose one bounded read-only materialized Unity archive review/inspection slice without implementing Unity, changing Runtime or changing GamePackage schema.
+Choose one bounded read-only materialized Unity archive review/inspection slice for contract/meta/data output without implementing Unity, changing Runtime or changing GamePackage schema.
 
 Candidate slices:
 
 - A headless report retention/history policy may be planned separately if multiple versions are needed; Slices 014-015 intentionally maintain and consume one deterministic report per blueprint id.
-- A read-only editor-side view may inspect the materialized archive contract and validation report without creating a Unity project or modifying package schema.
+- A read-only editor-side view may inspect the materialized archive contract, validation report and game-data indexes without creating a Unity project or modifying package schema.
 - One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen.
 
 ## State update rule

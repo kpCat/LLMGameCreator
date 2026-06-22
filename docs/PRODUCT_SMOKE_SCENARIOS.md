@@ -513,3 +513,34 @@ Expected assertions:
 - no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
 
 Optional zip output is not implemented in materialization v1. No manual UI verification is required.
+
+## unity-archive-game-data-payload
+
+Validates deterministic editor-side game-data payload materialization inside the existing Unity archive without creating or calling Unity:
+
+```text
+existing GamePackageDefinition instance
+-> stable package JSON and generated/core category extraction
+-> deterministic .llmgc/unity-archive/data files
+-> current archive payload or future metadata-only archive without payload
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-game-data-payload
+```
+
+Expected assertions:
+
+- `data/game-package.json`, `generated-content-index.json` and all six category indexes exist when package data is supplied;
+- package and index files are valid JSON with `schemaVersion`, `category`, `sourcePackageId` and `entries` where applicable;
+- scenes, NPCs, quests, dialogues, items and encounters are extracted only from existing package/generated-content structures;
+- missing categories produce valid empty indexes;
+- entry ids, tags and linked ids are stably ordered, output is UTF-8 without BOM and repeated unchanged materialization is byte-identical;
+- generated data indexes contain no timestamps;
+- the mixed/future target remains metadata-only and contains no `data/` payload when package data is absent;
+- unsafe output paths cannot escape the project root;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
+
+No manual UI verification is required.
