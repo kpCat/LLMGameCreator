@@ -127,16 +127,6 @@ public sealed record UnityArchiveAudioRequestIndex
         = Array.Empty<UnityArchiveAudioRequestIndexEntry>();
 }
 
-public sealed record UnityArchiveLuaModuleRequestEntry
-{
-    public string ModuleId { get; init; } = string.Empty;
-    public UnityArchiveLuaModuleKind ModuleKind { get; init; }
-    public UnityArchiveRequestProviderKind ProviderKind { get; init; } = UnityArchiveRequestProviderKind.none;
-    public UnityArchiveRequestSourceRef SourceRef { get; init; } = new();
-    public string PromptOrInstruction { get; init; } = string.Empty;
-    public IReadOnlyDictionary<string, string> Metadata { get; init; } = new Dictionary<string, string>();
-}
-
 public sealed record UnityArchiveLuaModuleRequests
 {
     public string SchemaVersion { get; init; } = "1";

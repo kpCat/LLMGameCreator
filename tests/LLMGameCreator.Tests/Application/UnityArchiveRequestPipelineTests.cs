@@ -30,15 +30,9 @@ public sealed class UnityArchiveRequestPipelineTests
 
         Assert.NotEmpty(archive.UiLayouts);
         Assert.NotEmpty(brief.AudioStyleWishes);
-        var hasFutureWarnings = result.Diagnostics.Any(d => d.Severity == UnityArchiveExportDiagnosticSeverity.Warning);
-        if (hasFutureWarnings)
-        {
-            Assert.Equal(UnityArchiveRequestReadiness.ReadyWithWarnings, result.Readiness);
-        }
-        else
-        {
-            Assert.Equal(UnityArchiveRequestReadiness.Ready, result.Readiness);
-        }
+        Assert.Equal(UnityArchiveRequestReadiness.ReadyWithWarnings, result.Readiness);
+        Assert.Contains(result.Diagnostics, d => d.Code == "request.diagnostic.future_provider_kind.asset.comfyui_future");
+        Assert.Contains(result.Diagnostics, d => d.Code == "request.diagnostic.future_provider_kind.audio.local_audio_future");
         Assert.NotEmpty(result.LuaModuleRequests);
     }
 
@@ -214,6 +208,118 @@ public sealed class UnityArchiveRequestPipelineTests
         var firstJson = JsonSerializer.Serialize(first, DefaultJsonOptions);
         var secondJson = JsonSerializer.Serialize(second, DefaultJsonOptions);
         Assert.Equal(firstJson, secondJson);
+    }
+
+    [Fact]
+    public void BuildRequestsAggregatesFutureProviderWarningsByProviderKind()
+    {
+        var presets = new UnityTargetContractPresetProvider();
+        var briefPresets = new GameDesignBriefPresetProvider();
+        Assert.True(briefPresets.TryGet(GameDesignBriefPresetProvider.TopDownGeneratedRpg, out var brief));
+        Assert.True(presets.TryGetTargetProfile(UnityTargetContractPresetProvider.GenericUnityPlayerTopDown, out var profile));
+        var service = new UnityArchiveAssetAudioLuaRequestService();
+
+        var result = service.BuildRequests(new UnityArchiveRequestPipelineRequest
+        {
+            ProjectRootPath = ".",
+            DesignBrief = brief,
+            TargetProfile = profile,
+            ArchiveManifest = presets.CreateTopDownGeneratedRpgArchive(),
+            RuntimeModules = presets.ListRuntimeModules(),
+            Package = null
+        });
+
+        Assert.Equal(UnityArchiveRequestReadiness.ReadyWithWarnings, result.Readiness);
+
+        var assetComfyuiWarnings = result.Diagnostics
+            .Where(d => d.Code == "request.diagnostic.future_provider_kind.asset.comfyui_future")
+            .ToList();
+        Assert.Single(assetComfyuiWarnings);
+        Assert.Contains("1 request(s)", assetComfyuiWarnings[0].Message);
+    }
+
+    [Fact]
+    public void BuildRequestsReportsDuplicateAssetRequestIdsAndBlocksByErrors()
+    {
+        var presets = new UnityTargetContractPresetProvider();
+        var briefPresets = new GameDesignBriefPresetProvider();
+        Assert.True(briefPresets.TryGet(GameDesignBriefPresetProvider.TopDownGeneratedRpg, out var brief));
+        Assert.True(presets.TryGetTargetProfile(UnityTargetContractPresetProvider.GenericUnityPlayerTopDown, out var profile));
+        var service = new UnityArchiveAssetAudioLuaRequestService();
+
+        var package = new GamePackageDefinition
+        {
+            Manifest = new LLMGameCreator.Domain.Definitions.GameManifest
+            {
+                PackageId = "game/duplicate-ids",
+                Title = "Duplicate IDs"
+            },
+            Game = new LLMGameCreator.Domain.Definitions.GameDefinition
+            {
+                Items =
+                [
+                    new LLMGameCreator.Domain.Definitions.ItemDefinition { Id = "item/alpha", Name = "Alpha", Kind = "tool" },
+                    new LLMGameCreator.Domain.Definitions.ItemDefinition { Id = "item.alpha", Name = "Alpha Dot", Kind = "tool" }
+                ]
+            },
+            GeneratedContent = new LLMGameCreator.GamePackage.GeneratedContentDefinition()
+        };
+
+        var result = service.BuildRequests(new UnityArchiveRequestPipelineRequest
+        {
+            ProjectRootPath = ".",
+            DesignBrief = brief,
+            TargetProfile = profile,
+            ArchiveManifest = presets.CreateTopDownGeneratedRpgArchive(),
+            RuntimeModules = presets.ListRuntimeModules(),
+            Package = package
+        });
+
+        Assert.Equal(UnityArchiveRequestReadiness.BlockedByErrors, result.Readiness);
+        Assert.Contains(result.Diagnostics, d => d.Code == "request.diagnostic.duplicate_asset_request_id");
+        Assert.Contains(result.Diagnostics, d => d.TargetId.Contains("item-alpha"));
+    }
+
+    [Fact]
+    public void BuildRequestsNormalizesBlankIdsToUnknownAndReportsDuplicates()
+    {
+        var presets = new UnityTargetContractPresetProvider();
+        var briefPresets = new GameDesignBriefPresetProvider();
+        Assert.True(briefPresets.TryGet(GameDesignBriefPresetProvider.TopDownGeneratedRpg, out var brief));
+        Assert.True(presets.TryGetTargetProfile(UnityTargetContractPresetProvider.GenericUnityPlayerTopDown, out var profile));
+        var service = new UnityArchiveAssetAudioLuaRequestService();
+
+        var package = new GamePackageDefinition
+        {
+            Manifest = new LLMGameCreator.Domain.Definitions.GameManifest
+            {
+                PackageId = "game/blank-ids",
+                Title = "Blank IDs"
+            },
+            Game = new LLMGameCreator.Domain.Definitions.GameDefinition
+            {
+                Items =
+                [
+                    new LLMGameCreator.Domain.Definitions.ItemDefinition { Id = "", Name = "Empty", Kind = "tool" },
+                    new LLMGameCreator.Domain.Definitions.ItemDefinition { Id = " ", Name = "Space", Kind = "tool" }
+                ]
+            },
+            GeneratedContent = new LLMGameCreator.GamePackage.GeneratedContentDefinition()
+        };
+
+        var result = service.BuildRequests(new UnityArchiveRequestPipelineRequest
+        {
+            ProjectRootPath = ".",
+            DesignBrief = brief,
+            TargetProfile = profile,
+            ArchiveManifest = presets.CreateTopDownGeneratedRpgArchive(),
+            RuntimeModules = presets.ListRuntimeModules(),
+            Package = package
+        });
+
+        Assert.Equal(UnityArchiveRequestReadiness.BlockedByErrors, result.Readiness);
+        Assert.Contains(result.AssetRequests, r => r.AssetId == "icon.item.unknown");
+        Assert.Contains(result.Diagnostics, d => d.Code == "request.diagnostic.duplicate_asset_request_id");
     }
 
     private static readonly JsonSerializerOptions DefaultJsonOptions = new()

@@ -52,7 +52,7 @@ public enum UnityArchiveRequestReadiness
 {
     Ready,
     ReadyWithWarnings,
-    BlockedByFutureProviders
+    BlockedByErrors
 }
 
 public sealed record UnityArchiveRequestSourceRef

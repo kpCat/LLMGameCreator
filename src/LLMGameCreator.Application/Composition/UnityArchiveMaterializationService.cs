@@ -77,7 +77,7 @@ public sealed class UnityArchiveMaterializationService
         var files = new List<UnityArchiveMaterializedFile>();
         if (dryRun.Plan.Readiness is not (UnityArchiveExportReadiness.Invalid or UnityArchiveExportReadiness.MissingRequirements))
         {
-            await WriteArchiveFilesAsync(outputDirectory, request, files, cancellationToken).ConfigureAwait(false);
+            await WriteArchiveFilesAsync(outputDirectory, request, files, pipelineResult, cancellationToken).ConfigureAwait(false);
         }
 
         var orderedFiles = files
@@ -114,6 +114,7 @@ public sealed class UnityArchiveMaterializationService
         string outputDirectory,
         UnityArchiveMaterializationRequest request,
         ICollection<UnityArchiveMaterializedFile> files,
+        UnityArchiveRequestPipelineResult pipelineResult,
         CancellationToken cancellationToken)
     {
         await WriteJsonFileAsync(outputDirectory, "manifest/unity-game-archive.json", "archive_manifest", request.ArchiveManifest, files, cancellationToken).ConfigureAwait(false);
@@ -133,16 +134,6 @@ public sealed class UnityArchiveMaterializationService
                 .ThenBy(layout => layout.LayoutId, StringComparer.Ordinal)
                 .ToList()
         }, files, cancellationToken).ConfigureAwait(false);
-
-        var pipelineResult = _requestPipelineService.BuildRequests(new UnityArchiveRequestPipelineRequest
-        {
-            ProjectRootPath = request.ProjectRootPath,
-            DesignBrief = request.DesignBrief,
-            TargetProfile = request.TargetProfile,
-            ArchiveManifest = request.ArchiveManifest,
-            RuntimeModules = request.RuntimeModules,
-            Package = request.GamePackage
-        });
 
         await WriteJsonFileAsync(outputDirectory, "assets/asset-requests.json", "asset_requests", new UnityArchiveAssetRequestsIndex
         {

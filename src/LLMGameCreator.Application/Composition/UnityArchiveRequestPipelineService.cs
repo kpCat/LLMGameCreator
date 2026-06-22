@@ -293,12 +293,31 @@ public sealed class UnityArchiveAssetAudioLuaRequestService
 
         ValidateAssetIds();
 
-        foreach (var futureAsset in assetRequests.Where(r => IsFutureProvider(r.ProviderKind)))
+        var assetFutureProviderGroups = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var assetRequest in assetRequests)
+        {
+            if (!IsFutureProvider(assetRequest.ProviderKind))
+            {
+                continue;
+            }
+
+            var provider = assetRequest.ProviderKind.ToString();
+            if (assetFutureProviderGroups.ContainsKey(provider))
+            {
+                assetFutureProviderGroups[provider]++;
+            }
+            else
+            {
+                assetFutureProviderGroups[provider] = 1;
+            }
+        }
+
+        foreach (var provider in assetFutureProviderGroups.Keys.OrderBy(key => key, StringComparer.OrdinalIgnoreCase).ThenBy(key => key, StringComparer.Ordinal))
         {
             diagnostics.Add(Warning(
-                "request.diagnostic.future_provider_kind",
-                $"Asset request '{futureAsset.RequestId}' uses future provider kind '{futureAsset.ProviderKind}'.",
-                futureAsset.RequestId));
+                $"request.diagnostic.future_provider_kind.asset.{provider.ToLowerInvariant()}",
+                $"Asset requests use future provider '{provider}' for {assetFutureProviderGroups[provider]} request(s).",
+                "asset_requests"));
         }
 
         // Audio requests from existing package data
@@ -404,12 +423,31 @@ public sealed class UnityArchiveAssetAudioLuaRequestService
 
         ValidateAudioIds();
 
-        foreach (var futureAudio in audioRequests.Where(r => IsFutureProvider(r.ProviderKind)))
+        var audioFutureProviderGroups = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var audioRequest in audioRequests)
+        {
+            if (!IsFutureProvider(audioRequest.ProviderKind))
+            {
+                continue;
+            }
+
+            var provider = audioRequest.ProviderKind.ToString();
+            if (audioFutureProviderGroups.ContainsKey(provider))
+            {
+                audioFutureProviderGroups[provider]++;
+            }
+            else
+            {
+                audioFutureProviderGroups[provider] = 1;
+            }
+        }
+
+        foreach (var provider in audioFutureProviderGroups.Keys.OrderBy(key => key, StringComparer.OrdinalIgnoreCase).ThenBy(key => key, StringComparer.Ordinal))
         {
             diagnostics.Add(Warning(
-                "request.diagnostic.future_provider_kind",
-                $"Audio request '{futureAudio.RequestId}' uses future provider kind '{futureAudio.ProviderKind}'.",
-                futureAudio.RequestId));
+                $"request.diagnostic.future_provider_kind.audio.{provider.ToLowerInvariant()}",
+                $"Audio requests use future provider '{provider}' for {audioFutureProviderGroups[provider]} request(s).",
+                "audio_requests"));
         }
 
         // Lua module requests from target modules and package data
@@ -483,7 +521,7 @@ public sealed class UnityArchiveAssetAudioLuaRequestService
         var hasWarnings = diagnostics.Any(d => d.Severity == UnityArchiveExportDiagnosticSeverity.Warning);
         var hasErrors = diagnostics.Any(d => d.Severity == UnityArchiveExportDiagnosticSeverity.Error);
         var readiness = hasErrors
-            ? UnityArchiveRequestReadiness.BlockedByFutureProviders
+            ? UnityArchiveRequestReadiness.BlockedByErrors
             : hasWarnings
                 ? UnityArchiveRequestReadiness.ReadyWithWarnings
                 : UnityArchiveRequestReadiness.Ready;
