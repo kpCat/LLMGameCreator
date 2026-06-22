@@ -1,59 +1,48 @@
-Task id: PRODUCT_SLICE_020_UNITY_ARCHIVE_ASSET_AUDIO_LUA_REQUEST_PIPELINE_V1
-Goal: refactor UnityArchiveAssetAudioLuaRequestService to split monolith into internal components while preserving behavior
+Task id: PRODUCT_SLICE_021_UNITY_ARCHIVE_PROVIDER_JOB_PLAN_V1
+Goal: convert Slice 020 request metadata into deterministic fulfillment slots and provider-specific non-executable job plans
 
 Source docs/code read:
 - AGENTS.md, docs/CONTEXT_INDEX.md, docs/CURRENT_GENERATOR_STATE.md/json
-- src/LLMGameCreator.Application/Composition/UnityArchiveRequestPipelineModels.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveRequestPipelineService.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveMaterializationModels.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveMaterializationService.cs
-- tests/LLMGameCreator.Tests/Application/UnityArchiveRequestPipelineTests.cs
-- tests/LLMGameCreator.Tests/Application/UnityArchiveMaterializationTests.cs
-- tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveRequestPipelineSmokeTests.cs
-- .devflow/CURRENT_RUN.md
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/021_PROVIDER_JOB_PLAN.md
+- docs/PRODUCT_SLICE_021_PROVIDER_JOB_PLAN.md and docs/UNITY_ARCHIVE_PROVIDER_JOB_PLAN_SPEC.md
+- target Application/test csproj files
+- existing Unity archive request models/service/builders/diagnostics
+- existing Unity archive materialization models/service and focused tests
+- request-pipeline product smoke, smoke runner and smoke scenario docs
 
 Patterns applied:
-- Extracted UnityArchiveRequestBuildContext as internal context holder
-- Extracted UnityArchiveAssetRequestBuilder for asset request construction
-- Extracted UnityArchiveAudioRequestBuilder for audio request construction  
-- Extracted UnityArchiveLuaModuleRequestBuilder for Lua module request construction
-- Kept UnityArchiveRequestDiagnosticsBuilder as static helper for diagnostics
-- Service acts as facade, delegates to builders
+- Application-only metadata planning over the existing request-pipeline result
+- schemaVersion JSON envelopes, camelCase enum serialization and stable ordinal ordering
+- normalized archive-relative expected output paths with lexical safety validation
+- future providers remain warning-only and every provider job remains planned_not_executed
+- materialization writes metadata files even for empty slot/job arrays
 
-Refactored:
-- UnityArchiveAssetAudioLuaRequestService reduced from 645 to ~190 lines
-- Split into 4 internal helper classes:
-  - UnityArchiveRequestBuildContext - context with derived booleans
-  - UnityArchiveAssetRequestBuilder - scene/map/NPC/item/ability/mechanic/tile/UI asset requests
-  - UnityArchiveAudioRequestBuilder - UI SFX/footstep/ability/ambience/music requests
-  - UnityArchiveLuaModuleRequestBuilder - inventory/quest/dialogue/combat/crafting/stats/world_map/factions/future modules
-- All request IDs, diagnostics codes, readiness semantics preserved
-- Future provider warnings aggregated correctly
-- Duplicate ID validation preserved
+Implemented:
+- UnityArchiveProviderJobPlan models for fulfillment plan, typed slots, provider batches/jobs, diagnostics and readiness
+- UnityArchiveProviderJobPlanService creates one slot per request and no job for provider none
+- provider jobs grouped into manual-import, comfyui, suno, local-audio and procedural batches
+- UnityArchiveMaterializationService writes ten new provider-plan metadata files
+- focused contract/materialization tests and unity-archive-provider-job-plan product smoke
+- existing unity-archive-request-pipeline smoke remains green
 
-Behavior preserved:
-- Request ID format: asset-request.{kind}.{normalizedId}
-- Audio request ID format: audio-request.{kind}.{normalizedId}
-- Lua module ID format: lua-request.{kind}
-- Readiness: no diagnostics → Ready, warnings only → ReadyWithWarnings, errors → BlockedByErrors
-- Diagnostic codes: request.diagnostic.future_provider_kind.asset.comfyui_future, etc.
-- Deterministic output verified through existing tests
+Path safety:
+- expected outputs are relative, slash-normalized metadata paths only
+- rooted paths, backslashes, colon and traversal markers are rejected
+- asset/audio/Lua slots use .png/.wav/.lua extensions respectively
+- no expected output file is physically created
 
-Files changed (5):
-- src/LLMGameCreator.Application/Composition/UnityArchiveRequestPipelineService.cs - refactored
-- tests/LLMGameCreator.Tests/Application/UnityArchiveRequestPipelineTests.cs - fixed bug in existing test + added refactor verification test
-
-Files added (4):
-- src/LLMGameCreator.Application/Composition/UnityArchiveRequestBuildContext.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveRequestDiagnosticsBuilder.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveAssetRequestBuilder.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveAudioRequestBuilder.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveLuaModuleRequestBuilder.cs
-
-Temporary cleanup docs already removed - not found in docs/agent-tasks/NEXT_PRODUCT_SLICE/*020_CLEANUP*
-
-Checks run:
+Checks run before state handoff:
+- UnityArchiveProviderJob filtered tests: passed, 5 tests
 - UnityArchiveRequestPipeline filtered tests: passed, 11 tests
 - UnityArchiveMaterialization filtered tests: passed, 5 tests
-- unity-archive-request-pipeline smoke: passed
-- check-all: passed, 562 tests, 0 warnings
+- unity-archive-request-pipeline product smoke: passed
+- unity-archive-provider-job-plan product smoke: passed
+- ProductSmoke filtered tests: passed, 19 tests
+- check-devflow-state.ps1: passed, STOP_REVIEW preserved
+- check-all.ps1: passed, build 0 warnings/0 errors, 567 tests passed
+
+Forbidden scope preserved:
+- no Unity project or implementation
+- no Runtime, WinForms, GamePackage schema, generator-library, solution or project changes
+- no provider, generator, LLM or Lua execution
+- no git commands

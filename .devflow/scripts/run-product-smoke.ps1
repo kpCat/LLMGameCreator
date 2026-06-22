@@ -130,6 +130,9 @@ try {
     elseif ($Scenario -eq "unity-archive-request-pipeline") {
         $TestFilter = "FullyQualifiedName~UnityArchiveRequestPipelineProductSmoke"
     }
+    elseif ($Scenario -eq "unity-archive-provider-job-plan") {
+        $TestFilter = "FullyQualifiedName~UnityArchiveProviderJobPlanProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

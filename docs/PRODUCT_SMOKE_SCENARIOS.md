@@ -309,6 +309,37 @@ Expected assertions:
 
 No manual UI verification is required.
 
+## unity-archive-provider-job-plan
+
+Validates deterministic metadata-only fulfillment planning over the existing Unity archive request pipeline:
+
+```text
+asset/audio/Lua request metadata
+-> typed fulfillment slots with safe future output paths
+-> provider-specific planned job batches
+-> materialized readiness report without provider execution
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-provider-job-plan
+```
+
+Expected assertions:
+
+- fulfillment/readiness, asset/audio/Lua slot and all five provider job JSON files exist with `schemaVersion`;
+- asset/audio/Lua slot counts match their request counts;
+- expected output paths are deterministic safe archive-relative paths with no traversal;
+- manual-import, ComfyUI, Suno, local-audio and procedural job files exist even when a batch is empty;
+- provider `none` remains slot-only metadata and creates no provider job;
+- all provider jobs remain `planned_not_executed` with execution disabled;
+- no expected `.png`, `.wav` or `.lua` output is physically generated;
+- repeated materialization is byte-identical and the existing request-pipeline smoke remains green;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua execution or WinForms UI is invoked.
+
+No manual UI verification is required.
+
 ## game-blueprint-capability-compatibility
 
 Validates the first machine-readable GameBlueprint and capability compatibility foundation without runtime, package or provider execution:
