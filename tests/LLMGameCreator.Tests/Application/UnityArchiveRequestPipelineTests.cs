@@ -231,11 +231,11 @@ public sealed class UnityArchiveRequestPipelineTests
 
         Assert.Equal(UnityArchiveRequestReadiness.ReadyWithWarnings, result.Readiness);
 
-        var assetComfyuiWarnings = result.Diagnostics
-            .Where(d => d.Code == "request.diagnostic.future_provider_kind.asset.comfyui_future")
-            .ToList();
-        Assert.Single(assetComfyuiWarnings);
-        Assert.Contains("1 request(s)", assetComfyuiWarnings[0].Message);
+var assetComfyuiWarnings = result.Diagnostics
+             .Where(d => d.Code == "request.diagnostic.future_provider_kind.asset.comfyui_future")
+             .ToList();
+         Assert.Single(assetComfyuiWarnings);
+         Assert.Contains("2 request(s)", assetComfyuiWarnings[0].Message);
     }
 
     [Fact]
@@ -462,5 +462,71 @@ public sealed class UnityArchiveRequestPipelineTests
                 ]
             }
         };
+    }
+
+    [Fact]
+    public void BuildRequestsRefactorPreservesDeterministicRequestIdsAndDiagnostics()
+    {
+        var presets = new UnityTargetContractPresetProvider();
+        var briefPresets = new GameDesignBriefPresetProvider();
+        Assert.True(briefPresets.TryGet(GameDesignBriefPresetProvider.TopDownGeneratedRpg, out var brief));
+        Assert.True(presets.TryGetTargetProfile(UnityTargetContractPresetProvider.GenericUnityPlayerTopDown, out var profile));
+        var service = new UnityArchiveAssetAudioLuaRequestService();
+        var package = CreatePackage();
+
+        var result = service.BuildRequests(new UnityArchiveRequestPipelineRequest
+        {
+            ProjectRootPath = ".",
+            DesignBrief = brief,
+            TargetProfile = profile,
+            ArchiveManifest = presets.CreateTopDownGeneratedRpgArchive(),
+            RuntimeModules = presets.ListRuntimeModules(),
+            Package = package
+        });
+
+// Verify asset request ids are stable
+        var assetRequestIds = result.AssetRequests.Select(r => r.RequestId).OrderBy(id => id).ToList();
+        Assert.Contains("asset-request.background.map-town", assetRequestIds);
+        Assert.Contains("asset-request.icon.ability-smash", assetRequestIds);
+        Assert.Contains("asset-request.icon.item-apple", assetRequestIds);
+        Assert.Contains("asset-request.icon.item-gem", assetRequestIds);
+        Assert.Contains("asset-request.icon.item-key", assetRequestIds);
+        Assert.Contains("asset-request.portrait.npc-alpha", assetRequestIds);
+        Assert.Contains("asset-request.portrait.npc-guide", assetRequestIds);
+        Assert.Contains("asset-request.scene_illustration.scene-clearing", assetRequestIds);
+        Assert.Contains("asset-request.scene_illustration.scene-start", assetRequestIds);
+        Assert.Contains("asset-request.tile_texture.tile-grass", assetRequestIds);
+        Assert.Contains("asset-request.ui_theme.generic_unity_player_topdown", assetRequestIds);
+        Assert.Contains("asset-request.ui_widget.widget-health", assetRequestIds);
+
+        // Verify audio request ids are stable
+        var audioRequestIds = result.AudioRequests.Select(r => r.RequestId).OrderBy(id => id).ToList();
+        Assert.Contains("audio-request.ability.ability-smash", audioRequestIds);
+        Assert.Contains("audio-request.scene_ambience.map-town", audioRequestIds);
+        Assert.Contains("audio-request.scene_ambience.scene-clearing", audioRequestIds);
+        Assert.Contains("audio-request.scene_ambience.scene-start", audioRequestIds);
+        Assert.Contains("audio-request.footstep.tile-grass", audioRequestIds);
+        Assert.Contains("audio-request.ui_sfx.ui-cancel", audioRequestIds);
+        Assert.Contains("audio-request.ui_sfx.ui-click", audioRequestIds);
+        Assert.Contains("audio-request.ui_sfx.ui-confirm", audioRequestIds);
+        Assert.Contains("audio-request.music.short_sfx", audioRequestIds);
+
+        // Verify Lua module ids are stable
+        var luaModuleIds = result.LuaModuleRequests.Select(r => r.ModuleId).OrderBy(id => id).ToList();
+        Assert.Contains("lua-request.combat", luaModuleIds);
+        Assert.Contains("lua-request.crafting", luaModuleIds);
+        Assert.Contains("lua-request.dialogue", luaModuleIds);
+        Assert.Contains("lua-request.inventory", luaModuleIds);
+        Assert.Contains("lua-request.quest_journal", luaModuleIds);
+        Assert.Contains("lua-request.stats", luaModuleIds);
+        Assert.Contains("lua-request.world_map", luaModuleIds);
+
+        // Verify diagnostic codes
+        Assert.Contains(result.Diagnostics, d => d.Code == "request.diagnostic.future_provider_kind.asset.comfyui_future");
+        Assert.Contains(result.Diagnostics, d => d.Code == "request.diagnostic.future_provider_kind.audio.local_audio_future");
+        Assert.Contains(result.Diagnostics, d => d.Code == "request.diagnostic.future_provider_kind.audio.suno_future");
+
+        // Verify readiness
+        Assert.Equal(UnityArchiveRequestReadiness.ReadyWithWarnings, result.Readiness);
     }
 }
