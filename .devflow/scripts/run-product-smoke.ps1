@@ -127,6 +127,9 @@ try {
     elseif ($Scenario -eq "unity-archive-game-data-payload") {
         $TestFilter = "FullyQualifiedName~UnityArchiveGameDataPayloadProductSmoke"
     }
+    elseif ($Scenario -eq "unity-archive-request-pipeline") {
+        $TestFilter = "FullyQualifiedName~UnityArchiveRequestPipelineProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

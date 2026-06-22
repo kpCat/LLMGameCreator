@@ -21,13 +21,16 @@ public sealed class UnityArchiveMaterializationService
 
     private readonly UnityArchiveExportDryRunService _dryRunService;
     private readonly UnityArchiveGameDataPayloadService _gameDataPayloadService;
+    private readonly UnityArchiveAssetAudioLuaRequestService _requestPipelineService;
 
     public UnityArchiveMaterializationService(
         UnityArchiveExportDryRunService dryRunService,
-        UnityArchiveGameDataPayloadService? gameDataPayloadService = null)
+        UnityArchiveGameDataPayloadService? gameDataPayloadService = null,
+        UnityArchiveAssetAudioLuaRequestService? requestPipelineService = null)
     {
         _dryRunService = dryRunService ?? throw new ArgumentNullException(nameof(dryRunService));
         _gameDataPayloadService = gameDataPayloadService ?? new UnityArchiveGameDataPayloadService();
+        _requestPipelineService = requestPipelineService ?? new UnityArchiveAssetAudioLuaRequestService();
     }
 
     public async Task<UnityArchiveMaterializationResult> MaterializeAsync(
@@ -57,8 +60,18 @@ public sealed class UnityArchiveMaterializationService
             RuntimeModules = request.RuntimeModules
         }, cancellationToken).ConfigureAwait(false);
 
+        var pipelineResult = _requestPipelineService.BuildRequests(new UnityArchiveRequestPipelineRequest
+        {
+            ProjectRootPath = request.ProjectRootPath,
+            DesignBrief = request.DesignBrief,
+            TargetProfile = request.TargetProfile,
+            ArchiveManifest = request.ArchiveManifest,
+            RuntimeModules = request.RuntimeModules,
+            Package = request.GamePackage
+        });
+
         var readiness = MapReadiness(dryRun.Plan.Readiness);
-        var diagnostics = CreateDiagnostics(dryRun, request.CreateZip, readiness);
+        var diagnostics = CreateDiagnostics(dryRun, request.CreateZip, readiness, pipelineResult);
 
         ResetOutputDirectory(outputDirectory);
         var files = new List<UnityArchiveMaterializedFile>();
@@ -120,28 +133,76 @@ public sealed class UnityArchiveMaterializationService
                 .ThenBy(layout => layout.LayoutId, StringComparer.Ordinal)
                 .ToList()
         }, files, cancellationToken).ConfigureAwait(false);
+
+        var pipelineResult = _requestPipelineService.BuildRequests(new UnityArchiveRequestPipelineRequest
+        {
+            ProjectRootPath = request.ProjectRootPath,
+            DesignBrief = request.DesignBrief,
+            TargetProfile = request.TargetProfile,
+            ArchiveManifest = request.ArchiveManifest,
+            RuntimeModules = request.RuntimeModules,
+            Package = request.GamePackage
+        });
+
         await WriteJsonFileAsync(outputDirectory, "assets/asset-requests.json", "asset_requests", new UnityArchiveAssetRequestsIndex
         {
-            Requests = request.ArchiveManifest.AssetRequests
+            Requests = pipelineResult.AssetRequests
                 .OrderBy(item => item.RequestId, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(item => item.RequestId, StringComparer.Ordinal)
                 .ToList()
         }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "assets/asset-request-index.json", "asset_request_index", new UnityArchiveAssetRequestIndex
+        {
+            Requests = pipelineResult.AssetRequests
+                .OrderBy(item => item.RequestId, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.RequestId, StringComparer.Ordinal)
+                .Select(item => new UnityArchiveAssetRequestIndexEntry
+                {
+                    RequestId = item.RequestId,
+                    AssetId = item.AssetId,
+                    AssetKind = item.AssetKind,
+                    ProviderKind = item.ProviderKind,
+                    SourceRef = item.SourceRef
+                })
+                .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
         await WriteJsonFileAsync(outputDirectory, "audio/audio-requests.json", "audio_requests", new UnityArchiveAudioRequestsIndex
         {
-            Requests = request.ArchiveManifest.AudioRequests
+            Requests = pipelineResult.AudioRequests
                 .OrderBy(item => item.RequestId, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(item => item.RequestId, StringComparer.Ordinal)
                 .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "audio/audio-request-index.json", "audio_request_index", new UnityArchiveAudioRequestIndex
+        {
+            Requests = pipelineResult.AudioRequests
+                .OrderBy(item => item.RequestId, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.RequestId, StringComparer.Ordinal)
+                .Select(item => new UnityArchiveAudioRequestIndexEntry
+                {
+                    RequestId = item.RequestId,
+                    AudioId = item.AudioId,
+                    AudioKind = item.AudioKind,
+                    ProviderKind = item.ProviderKind,
+                    SourceRef = item.SourceRef
+                })
+                .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "lua/module-requests.json", "lua_module_requests", new UnityArchiveLuaModuleRequests
+        {
+            Requests = pipelineResult.LuaModuleRequests
+                .OrderBy(item => item.ModuleId, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.ModuleId, StringComparer.Ordinal)
+                .ToList()
+        }, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "lua/modules-index.json", "lua_modules", new UnityArchiveLuaModulesIndex
+        {
+            ModuleIds = Normalize(pipelineResult.LuaModuleRequests.Select(r => r.ModuleId))
         }, files, cancellationToken).ConfigureAwait(false);
         await WriteJsonFileAsync(outputDirectory, "localization/index.json", "localization", new UnityArchiveLocalizationIndex
         {
             ContentLanguage = request.ArchiveManifest.ContentLanguage.Trim(),
             Files = Normalize(request.ArchiveManifest.LocalizationFiles)
-        }, files, cancellationToken).ConfigureAwait(false);
-        await WriteJsonFileAsync(outputDirectory, "lua/modules-index.json", "lua_modules", new UnityArchiveLuaModulesIndex
-        {
-            ModuleIds = Normalize(request.ArchiveManifest.LuaModuleIds)
         }, files, cancellationToken).ConfigureAwait(false);
 
         if (request.GamePackage != null)
@@ -195,7 +256,8 @@ public sealed class UnityArchiveMaterializationService
     private static IReadOnlyList<UnityArchiveMaterializationDiagnostic> CreateDiagnostics(
         UnityArchiveExportDryRunResult dryRun,
         bool createZip,
-        UnityArchiveMaterializationReadiness readiness)
+        UnityArchiveMaterializationReadiness readiness,
+        UnityArchiveRequestPipelineResult pipelineResult)
     {
         var diagnostics = dryRun.Plan.Diagnostics.Select(diagnostic => new UnityArchiveMaterializationDiagnostic
         {
@@ -205,6 +267,17 @@ public sealed class UnityArchiveMaterializationService
             TargetId = diagnostic.TargetId,
             RelatedId = diagnostic.RelatedId
         }).ToList();
+
+        foreach (var pipelineDiagnostic in pipelineResult.Diagnostics)
+        {
+            diagnostics.Add(new UnityArchiveMaterializationDiagnostic
+            {
+                Severity = pipelineDiagnostic.Severity,
+                Code = $"request.{pipelineDiagnostic.Code}",
+                Message = pipelineDiagnostic.Message,
+                TargetId = pipelineDiagnostic.TargetId
+            });
+        }
 
         if (readiness == UnityArchiveMaterializationReadiness.MaterializedMetadataOnly)
         {

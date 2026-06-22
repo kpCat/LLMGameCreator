@@ -6,11 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 019 adds deterministic Unity archive game-data payload materialization.
+M4.1 gate passed for sampled baseline contracts; Product Slice 020 adds deterministic Unity archive asset/audio/Lua request pipeline.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-018 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta materialization. Product Slice 019 optionally adds the existing assembled/current package plus stable category indexes under the archive `data/` folder without implementing Unity or changing Runtime/GamePackage schema.
-
-This does not unlock broad contract expansion or direct production implementation. The next step should still be chosen as a controlled product vertical slice before any M5/M6/M6-lite work starts.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-019 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta/data materialization. Product Slice 020 adds the first deterministic request pipeline for future Unity archive assets, audio and Lua/data modules as metadata-only requests without generating assets or executing providers.
 
 ## Gate decision
 
@@ -62,13 +60,14 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 019: Unity Archive Game Data Payload v1.
-- `UnityArchiveGameDataPayloadService` writes the supplied existing `GamePackageDefinition` to `.llmgc/unity-archive/data/game-package.json` and extracts stable indexes for scenes, NPCs, quests, dialogues, items and encounters.
-- Category entries come only from existing core package/generated-content structures; missing categories produce valid empty indexes, while ids, tags and linked ids are sorted deterministically.
-- `UnityArchiveMaterializationService` includes payload files only when package data is explicitly supplied. Future-module materialization without package data remains metadata-only and does not claim playable data.
-- All data paths are containment-checked, JSON is UTF-8 without BOM, indexes contain no timestamps and repeated unchanged materialization is byte-identical.
-- `unity-archive-game-data-payload` proves the required data files, valid package/category JSON, empty categories, deterministic output and future metadata-only behavior without Unity, provider, generator, Runtime, package schema, Lua or WinForms calls.
-- Product Slice 018 is accepted/completed as the archive materialization parent foundation.
+- Product Slice 020: Unity Archive Asset/Audio/Lua Request Pipeline v1.
+- `UnityArchiveAssetAudioLuaRequestService` generates deterministic metadata requests for assets, audio and Lua modules from existing package data, design brief, target profile and runtime module contracts.
+- `UnityArchiveMaterializationService` integrates the request pipeline and writes all six required request pipeline files under `.llmgc/unity-archive/`: `assets/asset-requests.json`, `assets/asset-request-index.json`, `audio/audio-requests.json`, `audio/audio-request-index.json`, `lua/module-requests.json` and `lua/modules-index.json`.
+- Asset requests cover scene illustrations, NPC portraits, item/ability/mechanic icons, tile textures and UI theme/widgets; audio requests cover UI SFX, footstep surfaces, ability/combat effects, scene ambience and music themes; Lua requests cover inventory, quest journal, dialogue, combat, crafting, stats, world map, factions and future modules.
+- Future provider kinds (comfyui_future, suno_future, local_audio_future, procedural_future) appear as non-blocking warnings; duplicate/blank ids and future module metadata-only behavior are validated deterministically.
+- `unity-archive-request-pipeline` proves request generation, file materialization, determinism and future-provider warnings without Unity, provider, generator, LLM, Runtime, GamePackage schema, Lua or WinForms calls.
+- Parent slice foundation:
+  - Product Slice 019: Unity Archive Game Data Payload v1.
 
 Parent slice foundation:
 
@@ -198,11 +197,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-019 through deterministic Unity archive game-data payload materialization. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-020 through deterministic Unity archive asset/audio/Lua request pipeline. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Inspect the deterministic `.llmgc/unity-archive/` contract/meta/data output and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all sixteen headless product smoke scenarios before choosing any implementation slice.
+Inspect the deterministic `.llmgc/unity-archive/` contract/meta/data/request-pipeline output and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all seventeen headless product smoke scenarios before choosing any implementation slice.
 
 ## Allowed next Codex tasks
 
@@ -283,9 +282,7 @@ Capability Picker
 
 ## Recommended next step
 
-Choose one bounded read-only materialized Unity archive review/inspection slice for contract/meta/data output without implementing Unity, changing Runtime or changing GamePackage schema.
-
-Candidate slices:
+Choose one controlled follow-up slice from the deterministic archive request pipeline. Existing generation remains behind explicit editor actions. Candidate next slices:
 
 - A headless report retention/history policy may be planned separately if multiple versions are needed; Slices 014-015 intentionally maintain and consume one deterministic report per blueprint id.
 - A read-only editor-side view may inspect the materialized archive contract, validation report and game-data indexes without creating a Unity project or modifying package schema.

@@ -14,9 +14,12 @@ public sealed class UnityArchiveMaterializationTests
         "composition/runtime-modules-index.json",
         "ui/layouts-index.json",
         "assets/asset-requests.json",
+        "assets/asset-request-index.json",
         "audio/audio-requests.json",
-        "localization/index.json",
+        "audio/audio-request-index.json",
+        "lua/module-requests.json",
         "lua/modules-index.json",
+        "localization/index.json",
         "export-report.md",
         "export-validation.json"
     ];

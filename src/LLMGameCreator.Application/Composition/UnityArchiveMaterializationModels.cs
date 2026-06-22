@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using LLMGameCreator.GamePackage;
 
 namespace LLMGameCreator.Application.Composition;
@@ -70,15 +71,15 @@ public sealed record UnityArchiveUiLayoutsIndex
 public sealed record UnityArchiveAssetRequestsIndex
 {
     public string SchemaVersion { get; init; } = "1";
-    public IReadOnlyList<UnityAssetGenerationRequest> Requests { get; init; }
-        = Array.Empty<UnityAssetGenerationRequest>();
+    public IReadOnlyList<UnityArchiveAssetRequest> Requests { get; init; }
+        = Array.Empty<UnityArchiveAssetRequest>();
 }
 
 public sealed record UnityArchiveAudioRequestsIndex
 {
     public string SchemaVersion { get; init; } = "1";
-    public IReadOnlyList<UnityAudioGenerationRequest> Requests { get; init; }
-        = Array.Empty<UnityAudioGenerationRequest>();
+    public IReadOnlyList<UnityArchiveAudioRequest> Requests { get; init; }
+        = Array.Empty<UnityArchiveAudioRequest>();
 }
 
 public sealed record UnityArchiveLocalizationIndex
@@ -92,6 +93,55 @@ public sealed record UnityArchiveLuaModulesIndex
 {
     public string SchemaVersion { get; init; } = "1";
     public IReadOnlyList<string> ModuleIds { get; init; } = Array.Empty<string>();
+}
+
+public sealed record UnityArchiveAssetRequestIndexEntry
+{
+    public string RequestId { get; init; } = string.Empty;
+    public string AssetId { get; init; } = string.Empty;
+    public UnityArchiveAssetKind AssetKind { get; init; }
+    public UnityArchiveRequestProviderKind ProviderKind { get; init; } = UnityArchiveRequestProviderKind.manual_import;
+    public UnityArchiveRequestSourceRef SourceRef { get; init; } = new();
+}
+
+public sealed record UnityArchiveAssetRequestIndex
+{
+    public string SchemaVersion { get; init; } = "1";
+    public IReadOnlyList<UnityArchiveAssetRequestIndexEntry> Requests { get; init; }
+        = Array.Empty<UnityArchiveAssetRequestIndexEntry>();
+}
+
+public sealed record UnityArchiveAudioRequestIndexEntry
+{
+    public string RequestId { get; init; } = string.Empty;
+    public string AudioId { get; init; } = string.Empty;
+    public UnityArchiveAudioKind AudioKind { get; init; }
+    public UnityArchiveRequestProviderKind ProviderKind { get; init; } = UnityArchiveRequestProviderKind.local_audio_future;
+    public UnityArchiveRequestSourceRef SourceRef { get; init; } = new();
+}
+
+public sealed record UnityArchiveAudioRequestIndex
+{
+    public string SchemaVersion { get; init; } = "1";
+    public IReadOnlyList<UnityArchiveAudioRequestIndexEntry> Requests { get; init; }
+        = Array.Empty<UnityArchiveAudioRequestIndexEntry>();
+}
+
+public sealed record UnityArchiveLuaModuleRequestEntry
+{
+    public string ModuleId { get; init; } = string.Empty;
+    public UnityArchiveLuaModuleKind ModuleKind { get; init; }
+    public UnityArchiveRequestProviderKind ProviderKind { get; init; } = UnityArchiveRequestProviderKind.none;
+    public UnityArchiveRequestSourceRef SourceRef { get; init; } = new();
+    public string PromptOrInstruction { get; init; } = string.Empty;
+    public IReadOnlyDictionary<string, string> Metadata { get; init; } = new Dictionary<string, string>();
+}
+
+public sealed record UnityArchiveLuaModuleRequests
+{
+    public string SchemaVersion { get; init; } = "1";
+    public IReadOnlyList<UnityArchiveLuaModuleRequest> Requests { get; init; }
+        = Array.Empty<UnityArchiveLuaModuleRequest>();
 }
 
 public sealed record UnityArchiveMaterializationResult
