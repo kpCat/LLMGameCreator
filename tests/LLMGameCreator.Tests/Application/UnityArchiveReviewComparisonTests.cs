@@ -269,6 +269,156 @@ public sealed class UnityArchiveReviewComparisonTests
         Assert.True(document.RootElement.TryGetProperty("summary", out _));
     }
 
+    [Fact]
+    public async Task ComparisonUsesPreviousSequenceNotHashOrder()
+    {
+        using var temp = new TempDirectory();
+        var materialized = await MaterializeArchiveAsync(temp.Path);
+        var reviewService = new UnityArchiveReviewSnapshotService();
+        var historyService = new UnityArchiveReviewHistoryService();
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var first = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var snapshotIdA = first.Report.SnapshotId;
+
+        CreateFirstFulfilledAsset(materialized.OutputDirectoryPath);
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var second = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var snapshotIdB = second.Report.SnapshotId;
+
+        CreateSecondFulfilledAsset(materialized.OutputDirectoryPath);
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var third = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var snapshotIdC = third.Report.SnapshotId;
+
+        var result = await CreateComparisonService().CompareAsync(new UnityArchiveReviewComparisonRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        Assert.True(result.Report.Readiness is UnityArchiveReviewComparisonReadiness.Ready or UnityArchiveReviewComparisonReadiness.ReadyWithWarnings);
+        Assert.Equal(snapshotIdC, result.Report.CurrentSnapshotId);
+        Assert.Equal(snapshotIdB, result.Report.PreviousSnapshotId);
+    }
+
+    [Fact]
+    public async Task ComparisonReportsCurrentSnapshotNotIndexed()
+    {
+        using var temp = new TempDirectory();
+        var materialized = await MaterializeArchiveAsync(temp.Path);
+        var reviewService = new UnityArchiveReviewSnapshotService();
+        var historyService = new UnityArchiveReviewHistoryService();
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        CreateFirstFulfilledAsset(materialized.OutputDirectoryPath);
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        var indexPath = Path.Combine(materialized.OutputDirectoryPath, "production", "archive-review-history-index.json");
+        var indexJson = await File.ReadAllTextAsync(indexPath);
+        var corruptedJson = indexJson.Replace("\"snapshotId\":", "\"corruptedId\":");
+        await File.WriteAllTextAsync(indexPath, corruptedJson);
+
+        var result = await CreateComparisonService().CompareAsync(new UnityArchiveReviewComparisonRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        Assert.Equal(UnityArchiveReviewComparisonReadiness.NoPreviousSnapshot, result.Report.Readiness);
+        Assert.Equal(string.Empty, result.Report.PreviousSnapshotId);
+    }
+
+    [Fact]
+    public async Task ComparisonMissingSnapshotFileIncludesDiagnostic()
+    {
+        using var temp = new TempDirectory();
+        var materialized = await MaterializeArchiveAsync(temp.Path);
+        var reviewService = new UnityArchiveReviewSnapshotService();
+        var historyService = new UnityArchiveReviewHistoryService();
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        CreateFirstFulfilledAsset(materialized.OutputDirectoryPath);
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var secondStore = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        CreateSecondFulfilledAsset(materialized.OutputDirectoryPath);
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var thirdStore = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        var snapshotDir = Path.Combine(materialized.OutputDirectoryPath, "review-history", secondStore.Report.SnapshotId);
+        if (Directory.Exists(snapshotDir))
+        {
+            Directory.Delete(snapshotDir, true);
+        }
+
+        var result = await CreateComparisonService().CompareAsync(new UnityArchiveReviewComparisonRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+
+        Assert.Equal(UnityArchiveReviewComparisonReadiness.Blocked, result.Report.Readiness);
+        Assert.False(string.IsNullOrWhiteSpace(result.Report.CurrentSnapshotId));
+        Assert.Equal(thirdStore.Report.SnapshotId, result.Report.CurrentSnapshotId);
+        Assert.True(result.Report.DiagnosticChanges.Any(dc => dc.Code.Contains("missing_snapshot_file")));
+    }
+
     private static async Task<UnityArchiveMaterializationResult> MaterializeArchiveAsync(string projectRoot)
     {
         var presets = new UnityTargetContractPresetProvider();
@@ -317,6 +467,40 @@ public sealed class UnityArchiveReviewComparisonTests
         var expectedOutputDir = Path.Combine(archiveRoot, "assets");
         Directory.CreateDirectory(expectedOutputDir);
         File.WriteAllText(Path.Combine(expectedOutputDir, "asset-test.png"), "x");
+    }
+
+    private static void CreateSecondFulfilledAsset(string archiveRoot)
+    {
+        var productionDir = Path.Combine(archiveRoot, "production");
+        Directory.CreateDirectory(productionDir);
+
+        var fulfilledAssetsPath = Path.Combine(productionDir, "fulfilled-assets-index.json");
+        var content = """
+        {
+          "schemaVersion": "1",
+          "assets": [
+            {
+              "slotId": "asset/001",
+              "assetId": "asset/test",
+              "assetKind": "sprite",
+              "expectedOutputRelativePath": "assets/asset-test.png",
+              "fileSizeBytes": 100
+            },
+            {
+              "slotId": "asset/002",
+              "assetId": "asset/test2",
+              "assetKind": "sprite",
+              "expectedOutputRelativePath": "assets/asset-test2.png",
+              "fileSizeBytes": 100
+            }
+          ]
+        }
+        """;
+        File.WriteAllText(fulfilledAssetsPath, content);
+
+        var expectedOutputDir = Path.Combine(archiveRoot, "assets");
+        Directory.CreateDirectory(expectedOutputDir);
+        File.WriteAllText(Path.Combine(expectedOutputDir, "asset-test2.png"), "x");
     }
 
     private sealed class TempDirectory : IDisposable

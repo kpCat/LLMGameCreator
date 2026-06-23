@@ -38,6 +38,7 @@ public sealed record UnityArchiveReviewHistoryReport
 
 public sealed record UnityArchiveReviewHistorySnapshotEntry
 {
+    public int Sequence { get; init; }
     public string SnapshotId { get; init; } = string.Empty;
     public string RelativePath { get; init; } = string.Empty;
 }

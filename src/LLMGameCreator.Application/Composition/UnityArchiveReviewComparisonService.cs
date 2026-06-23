@@ -160,28 +160,7 @@ public sealed class UnityArchiveReviewComparisonService
                 string.Empty,
                 BuildSummary(currentReview, null),
                 Array.Empty<UnityArchiveReviewComparisonDelta>(),
-                BuildDiagnosticChanges(currentReview.Diagnostics, null),
-                BuildSourceFileChanges(currentReview.SourceFiles, null),
-                BuildInvalidReasonChanges(currentReview.Fulfillment.InvalidReasons, null),
-                written,
-                cancellationToken).ConfigureAwait(false);
-        }
-
-        var sortedEntries = historyIndex.Entries
-            .OrderBy(e => e.SnapshotId, StringComparer.OrdinalIgnoreCase)
-            .ThenBy(e => e.SnapshotId, StringComparer.Ordinal)
-            .ToList();
-
-        if (sortedEntries.Count < 1)
-        {
-            return await WriteComparisonAsync(
-                archiveRoot,
-                UnityArchiveReviewComparisonReadiness.NoPreviousSnapshot,
-                string.Empty,
-                string.Empty,
-                BuildSummary(currentReview, null),
-                Array.Empty<UnityArchiveReviewComparisonDelta>(),
-                BuildDiagnosticChanges(currentReview.Diagnostics, null),
+                AddDiagnosticChangeForCode(currentReview.Diagnostics, "added", "unity.archive_review_history.invalid_history_index", "History index is missing or empty"),
                 BuildSourceFileChanges(currentReview.SourceFiles, null),
                 BuildInvalidReasonChanges(currentReview.Fulfillment.InvalidReasons, null),
                 written,
@@ -189,14 +168,35 @@ public sealed class UnityArchiveReviewComparisonService
         }
 
         var currentSnapshotId = ComputeContentHash(currentReview);
-        var currentEntry = sortedEntries.LastOrDefault(e => e.SnapshotId == currentSnapshotId);
-        var previousEntry = sortedEntries
-            .Where(e => e.SnapshotId != currentSnapshotId)
-            .OrderByDescending(e => e.SnapshotId, StringComparer.OrdinalIgnoreCase)
-            .ThenByDescending(e => e.SnapshotId, StringComparer.Ordinal)
-            .FirstOrDefault() ?? currentEntry;
+        var orderedEntries = historyIndex.Entries
+            .OrderBy(e => e.Sequence)
+            .ThenBy(e => e.SnapshotId, StringComparer.Ordinal)
+            .ToList();
 
-        if (previousEntry == null || string.Equals(previousEntry.SnapshotId, currentSnapshotId, StringComparison.OrdinalIgnoreCase))
+        var currentEntry = orderedEntries.LastOrDefault(e => e.SnapshotId == currentSnapshotId);
+
+        if (currentEntry == null)
+        {
+            return await WriteComparisonAsync(
+                archiveRoot,
+                UnityArchiveReviewComparisonReadiness.NoPreviousSnapshot,
+                currentSnapshotId,
+                string.Empty,
+                BuildSummary(currentReview, null),
+                Array.Empty<UnityArchiveReviewComparisonDelta>(),
+                AddDiagnosticChangeForCode(currentReview.Diagnostics, "added", "unity.archive_review_history.current_snapshot_not_indexed", "Current snapshot not present in history index"),
+                BuildSourceFileChanges(currentReview.SourceFiles, null),
+                BuildInvalidReasonChanges(currentReview.Fulfillment.InvalidReasons, null),
+                written,
+                cancellationToken).ConfigureAwait(false);
+        }
+
+        var previousEntry = orderedEntries
+            .Where(e => e.Sequence < currentEntry.Sequence)
+            .OrderByDescending(e => e.Sequence)
+            .FirstOrDefault();
+
+        if (previousEntry == null)
         {
             return await WriteComparisonAsync(
                 archiveRoot,
@@ -214,6 +214,23 @@ public sealed class UnityArchiveReviewComparisonService
 
         UnityArchiveReviewSnapshotReport? previousReview;
         var previousSnapshotPath = GetArchivePath(archiveRoot, previousEntry.RelativePath);
+
+        if (!File.Exists(previousSnapshotPath))
+        {
+            return await WriteComparisonAsync(
+                archiveRoot,
+                UnityArchiveReviewComparisonReadiness.Blocked,
+                currentSnapshotId,
+                previousEntry.SnapshotId,
+                BuildSummary(currentReview, null),
+                Array.Empty<UnityArchiveReviewComparisonDelta>(),
+                AddDiagnosticChangeForCode(currentReview.Diagnostics, "added", "unity.archive_review_history.missing_snapshot_file", $"Snapshot file not found: {previousEntry.RelativePath}"),
+                BuildSourceFileChanges(currentReview.SourceFiles, null),
+                BuildInvalidReasonChanges(currentReview.Fulfillment.InvalidReasons, null),
+                written,
+                cancellationToken).ConfigureAwait(false);
+        }
+
         try
         {
             await using var prevStream = File.OpenRead(previousSnapshotPath);
@@ -221,19 +238,30 @@ public sealed class UnityArchiveReviewComparisonService
         }
         catch (JsonException)
         {
-            previousReview = null;
+            return await WriteComparisonAsync(
+                archiveRoot,
+                UnityArchiveReviewComparisonReadiness.Blocked,
+                currentSnapshotId,
+                previousEntry.SnapshotId,
+                BuildSummary(currentReview, null),
+                Array.Empty<UnityArchiveReviewComparisonDelta>(),
+                AddDiagnosticChangeForCode(currentReview.Diagnostics, "added", "unity.archive_review_history.missing_snapshot_file", $"Snapshot file is invalid JSON: {previousEntry.RelativePath}"),
+                BuildSourceFileChanges(currentReview.SourceFiles, null),
+                BuildInvalidReasonChanges(currentReview.Fulfillment.InvalidReasons, null),
+                written,
+                cancellationToken).ConfigureAwait(false);
         }
 
         if (previousReview == null)
         {
             return await WriteComparisonAsync(
                 archiveRoot,
-                UnityArchiveReviewComparisonReadiness.NoPreviousSnapshot,
+                UnityArchiveReviewComparisonReadiness.Blocked,
                 currentSnapshotId,
-                string.Empty,
+                previousEntry.SnapshotId,
                 BuildSummary(currentReview, null),
                 Array.Empty<UnityArchiveReviewComparisonDelta>(),
-                BuildDiagnosticChanges(currentReview.Diagnostics, null),
+                AddDiagnosticChangeForCode(currentReview.Diagnostics, "added", "unity.archive_review_history.missing_snapshot_file", $"Snapshot file is null: {previousEntry.RelativePath}"),
                 BuildSourceFileChanges(currentReview.SourceFiles, null),
                 BuildInvalidReasonChanges(currentReview.Fulfillment.InvalidReasons, null),
                 written,
@@ -452,6 +480,47 @@ public sealed class UnityArchiveReviewComparisonService
         return changes
             .OrderBy(c => c.Reason, StringComparer.OrdinalIgnoreCase)
             .ThenBy(c => c.Reason, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    private static IReadOnlyList<UnityArchiveReviewComparisonDiagnosticChange> AddDiagnosticChangeForCode(
+        IReadOnlyList<UnityArchiveReviewSnapshotDiagnostic> current,
+        string change,
+        string code,
+        string message)
+    {
+        var changes = new List<UnityArchiveReviewComparisonDiagnosticChange>();
+
+        foreach (var diagnostic in current)
+        {
+            changes.Add(new UnityArchiveReviewComparisonDiagnosticChange
+            {
+                Severity = diagnostic.Severity,
+                Code = diagnostic.Code,
+                Message = diagnostic.Message,
+                TargetId = diagnostic.TargetId,
+                SourceFile = diagnostic.SourceFile,
+                Change = "added"
+            });
+        }
+
+        changes.Add(new UnityArchiveReviewComparisonDiagnosticChange
+        {
+            Severity = UnityArchiveExportDiagnosticSeverity.Error,
+            Code = code,
+            Message = message,
+            TargetId = string.Empty,
+            SourceFile = string.Empty,
+            Change = change
+        });
+
+        return changes
+            .OrderBy(c => c.Change, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(c => c.Change, StringComparer.Ordinal)
+            .ThenBy(c => c.Severity.ToString(), StringComparer.OrdinalIgnoreCase)
+            .ThenBy(c => c.Severity.ToString(), StringComparer.Ordinal)
+            .ThenBy(c => c.Code, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(c => c.Code, StringComparer.Ordinal)
             .ToList();
     }
 

@@ -32,7 +32,6 @@ public sealed class UnityArchiveReviewHistoryService
 
         var archiveRoot = Path.GetFullPath(request.ArchiveDirectoryPath);
         var written = new List<string>();
-        var diagnostics = new List<UnityArchiveReviewSnapshotDiagnostic>();
 
         var reviewPath = GetArchivePath(archiveRoot, ReviewJsonRelativePath);
         if (!Directory.Exists(archiveRoot))
@@ -110,21 +109,35 @@ public sealed class UnityArchiveReviewHistoryService
         await File.WriteAllTextAsync(snapshotPath, normalizedJson, Utf8WithoutBom, cancellationToken).ConfigureAwait(false);
         written.Add(snapshotRelativePath);
 
-        var index = await ReadOrCreateIndexAsync(archiveRoot, cancellationToken).ConfigureAwait(false);
+        var loadedIndex = await ReadOrCreateIndexAsync(archiveRoot, cancellationToken).ConfigureAwait(false);
+        var migratedEntries = MigrateEntriesIfNeeded(loadedIndex.Entries);
+        var indexWasMigrated = !EntriesAreEqual(loadedIndex.Entries, migratedEntries);
+        var index = new UnityArchiveReviewHistoryIndex
+        {
+            SchemaVersion = "1",
+            Entries = migratedEntries
+        };
+
         var existingEntry = index.Entries.FirstOrDefault(e => e.SnapshotId == snapshotId);
         if (existingEntry == null)
         {
+            var maxSequence = index.Entries.Count > 0
+                ? index.Entries.Max(e => e.Sequence)
+                : 0;
+            var newSequence = maxSequence + 1;
+
             var entries = index.Entries
                 .Where(e => e.SnapshotId != snapshotId)
                 .Concat(new[]
                 {
                     new UnityArchiveReviewHistorySnapshotEntry
                     {
+                        Sequence = newSequence,
                         SnapshotId = snapshotId,
                         RelativePath = snapshotRelativePath
                     }
                 })
-                .OrderBy(e => e.SnapshotId, StringComparer.OrdinalIgnoreCase)
+                .OrderBy(e => e.Sequence)
                 .ThenBy(e => e.SnapshotId, StringComparer.Ordinal)
                 .ToList();
 
@@ -140,6 +153,13 @@ public sealed class UnityArchiveReviewHistoryService
             written.Add(HistoryIndexRelativePath);
 
             index = historyIndex;
+        }
+        else if (indexWasMigrated)
+        {
+            var indexPath = GetArchivePath(archiveRoot, HistoryIndexRelativePath);
+            Directory.CreateDirectory(Path.GetDirectoryName(indexPath)!);
+            await WriteJsonFileAsync(archiveRoot, HistoryIndexRelativePath, index, cancellationToken).ConfigureAwait(false);
+            written.Add(HistoryIndexRelativePath);
         }
 
         var readiness = MapReadiness(review.Readiness);
@@ -238,5 +258,54 @@ public sealed class UnityArchiveReviewHistoryService
             UnityArchiveReviewSnapshotReadiness.MissingArchive => UnityArchiveReviewHistoryReadiness.MissingReview,
             _ => UnityArchiveReviewHistoryReadiness.MissingReview
         };
+    }
+
+    private static IReadOnlyList<UnityArchiveReviewHistorySnapshotEntry> MigrateEntriesIfNeeded(
+        IReadOnlyList<UnityArchiveReviewHistorySnapshotEntry> entries)
+    {
+        var hasMissingSequence = entries.Any(e => e.Sequence <= 0);
+        var hasDuplicateSequence = entries
+            .Where(e => e.Sequence > 0)
+            .GroupBy(e => e.Sequence)
+            .Any(g => g.Count() > 1);
+
+        if (!hasMissingSequence && !hasDuplicateSequence)
+        {
+            return entries
+                .OrderBy(e => e.Sequence)
+                .ThenBy(e => e.SnapshotId, StringComparer.Ordinal)
+                .ToList();
+        }
+
+        return entries
+            .Select((e, i) => new UnityArchiveReviewHistorySnapshotEntry
+            {
+                Sequence = i + 1,
+                SnapshotId = e.SnapshotId,
+                RelativePath = e.RelativePath
+            })
+            .OrderBy(e => e.Sequence)
+            .ThenBy(e => e.SnapshotId, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    private static bool EntriesAreEqual(
+        IReadOnlyList<UnityArchiveReviewHistorySnapshotEntry> left,
+        IReadOnlyList<UnityArchiveReviewHistorySnapshotEntry> right)
+    {
+        if (left.Count != right.Count)
+            return false;
+
+        for (int i = 0; i < left.Count; i++)
+        {
+            if (left[i].Sequence != right[i].Sequence ||
+                left[i].SnapshotId != right[i].SnapshotId ||
+                left[i].RelativePath != right[i].RelativePath)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -203,6 +203,81 @@ public sealed class UnityArchiveReviewHistoryTests
         Assert.Equal(firstIndex, secondIndex);
     }
 
+    [Fact]
+    public async Task HistoryAssignsMonotonicSequenceForDistinctSnapshots()
+    {
+        using var temp = new TempDirectory();
+        var materialized = await MaterializeArchiveAsync(temp.Path);
+        var reviewService = new UnityArchiveReviewSnapshotService();
+        var historyService = new UnityArchiveReviewHistoryService();
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var first = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        Assert.Equal(1, first.Report.HistoryEntries[0].Sequence);
+
+        CreateFirstFulfilledAsset(materialized.OutputDirectoryPath);
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var second = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        Assert.Equal(2, second.Report.HistoryEntries[1].Sequence);
+
+        CreateSecondFulfilledAsset(materialized.OutputDirectoryPath);
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var third = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        Assert.Equal(3, third.Report.HistoryEntries[2].Sequence);
+
+        var entries = third.Report.HistoryEntries.OrderBy(e => e.Sequence).ToList();
+        Assert.Equal(1, entries[0].Sequence);
+        Assert.Equal(2, entries[1].Sequence);
+        Assert.Equal(3, entries[2].Sequence);
+    }
+
+    [Fact]
+    public async Task HistoryDoesNotChangeSequenceWhenSameSnapshotStoredAgain()
+    {
+        using var temp = new TempDirectory();
+        var materialized = await MaterializeArchiveAsync(temp.Path);
+        var reviewService = new UnityArchiveReviewSnapshotService();
+        var historyService = new UnityArchiveReviewHistoryService();
+
+        await reviewService.ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        var first = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        Assert.Single(first.Report.HistoryEntries);
+        Assert.Equal(1, first.Report.HistoryEntries[0].Sequence);
+
+        var second = await historyService.StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = materialized.OutputDirectoryPath
+        });
+        Assert.Single(second.Report.HistoryEntries);
+        Assert.Equal(1, second.Report.HistoryEntries[0].Sequence);
+    }
+
     private static async Task<UnityArchiveMaterializationResult> MaterializeArchiveAsync(string projectRoot)
     {
         var presets = new UnityTargetContractPresetProvider();
@@ -225,6 +300,67 @@ public sealed class UnityArchiveReviewHistoryTests
     }
 
     private static UnityArchiveReviewHistoryService CreateHistoryService() => new();
+
+    private static void CreateFirstFulfilledAsset(string archiveRoot)
+    {
+        var productionDir = Path.Combine(archiveRoot, "production");
+        Directory.CreateDirectory(productionDir);
+
+        var fulfilledAssetsPath = Path.Combine(productionDir, "fulfilled-assets-index.json");
+        var content = """
+        {
+          "schemaVersion": "1",
+          "assets": [
+            {
+              "slotId": "asset/001",
+              "assetId": "asset/test1",
+              "assetKind": "sprite",
+              "expectedOutputRelativePath": "assets/asset-test1.png",
+              "fileSizeBytes": 100
+            }
+          ]
+        }
+        """;
+        File.WriteAllText(fulfilledAssetsPath, content);
+
+        var expectedOutputDir = Path.Combine(archiveRoot, "assets");
+        Directory.CreateDirectory(expectedOutputDir);
+        File.WriteAllText(Path.Combine(expectedOutputDir, "asset-test1.png"), "x");
+    }
+
+    private static void CreateSecondFulfilledAsset(string archiveRoot)
+    {
+        var productionDir = Path.Combine(archiveRoot, "production");
+        Directory.CreateDirectory(productionDir);
+
+        var fulfilledAssetsPath = Path.Combine(productionDir, "fulfilled-assets-index.json");
+        var content = """
+        {
+          "schemaVersion": "1",
+          "assets": [
+            {
+              "slotId": "asset/001",
+              "assetId": "asset/test1",
+              "assetKind": "sprite",
+              "expectedOutputRelativePath": "assets/asset-test1.png",
+              "fileSizeBytes": 100
+            },
+            {
+              "slotId": "asset/002",
+              "assetId": "asset/test2",
+              "assetKind": "sprite",
+              "expectedOutputRelativePath": "assets/asset-test2.png",
+              "fileSizeBytes": 100
+            }
+          ]
+        }
+        """;
+        File.WriteAllText(fulfilledAssetsPath, content);
+
+        var expectedOutputDir = Path.Combine(archiveRoot, "assets");
+        Directory.CreateDirectory(expectedOutputDir);
+        File.WriteAllText(Path.Combine(expectedOutputDir, "asset-test2.png"), "x");
+    }
 
     private sealed class TempDirectory : IDisposable
     {

@@ -1,5 +1,5 @@
-Task id: PRODUCT_SLICE_024_UNITY_ARCHIVE_REVIEW_RETENTION_COMPARISON_V1
-Goal: Implement deterministic content-hash snapshot retention and comparison for Unity archive review
+Task id: PRODUCT_SLICE_024_1_UNITY_ARCHIVE_REVIEW_HISTORY_ORDERING_CLEANUP
+Goal: Fix S024 archive review history ordering semantics and diagnostics completeness
 
 Source docs/code read:
 - AGENTS.md
@@ -8,34 +8,26 @@ Source docs/code read:
 - docs/CURRENT_GENERATOR_STATE.json
 - docs/PRODUCT_SMOKE_SCENARIOS.md
 - .devflow/scripts/run-product-smoke.ps1
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewSnapshotModels.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewSnapshotService.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewSnapshotMarkdownRenderer.cs
-- tests/LLMGameCreator.Tests/Application/UnityArchiveReviewSnapshotTests.cs
-- tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewSnapshotSmokeTests.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveMaterializationService.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveFulfillmentStateModels.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryModels.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryService.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonModels.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonService.cs
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonMarkdownRenderer.cs
+- tests/LLMGameCreator.Tests/Application/UnityArchiveReviewHistoryTests.cs
+- tests/LLMGameCreator.Tests/Application/UnityArchiveReviewComparisonTests.cs
+- tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewHistorySmokeTests.cs
 
 Implemented files:
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryModels.cs (new)
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryService.cs (new)
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonModels.cs (new)
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonService.cs (new)
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonMarkdownRenderer.cs (new)
-- tests/LLMGameCreator.Tests/Application/UnityArchiveReviewHistoryTests.cs (new)
-- tests/LLMGameCreator.Tests/Application/UnityArchiveReviewComparisonTests.cs (new)
-- tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewHistorySmokeTests.cs (new)
-- .devflow/scripts/run-product-smoke.ps1 (updated with scenario)
-- docs/PRODUCT_SMOKE_SCENARIOS.md (updated with scenario docs)
-- docs/CURRENT_GENERATOR_STATE.md (updated with S024 state)
-- docs/CURRENT_GENERATOR_STATE.json (updated with S024 state)
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryModels.cs (modified: added Sequence property)
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryService.cs (modified: sequence-based ordering, migration support)
+- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonService.cs (modified: sequence-based previous selection, diagnostics)
 
 Expected checks:
-- UnityArchiveReviewHistory and UnityArchiveReviewComparison filtered tests: 18/18 passed
+- UnityArchiveReviewHistory and UnityArchiveReviewComparison filtered tests: 23/23 passed
 - unity-archive-review-history product smoke: 1/1 passed
 - ProductSmoke filtered tests: 23/23 passed
 - check-devflow-state.ps1: passed
-- check-all.ps1: passed 606/606 tests
+- check-all.ps1: passed 611/611 tests, build 0 warnings
 
 Forbidden scope preserved:
 - no Unity project or implementation
