@@ -130,7 +130,7 @@ try {
     elseif ($Scenario -eq "unity-archive-request-pipeline") {
         $TestFilter = "FullyQualifiedName~UnityArchiveRequestPipelineProductSmoke"
     }
-elseif ($Scenario -eq "unity-archive-provider-job-plan") {
+    elseif ($Scenario -eq "unity-archive-provider-job-plan") {
         $TestFilter = "FullyQualifiedName~UnityArchiveProviderJobPlanProductSmoke"
     }
     elseif ($Scenario -eq "unity-archive-fulfillment-state") {

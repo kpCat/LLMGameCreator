@@ -22,11 +22,28 @@ public sealed class UnityArchiveFulfillmentStateService
         var fulfilledAudio = new List<UnityArchiveFulfilledAudioEntry>();
         var fulfilledLua = new List<UnityArchiveFulfilledLuaEntry>();
         var invalidOutputs = new List<UnityArchiveInvalidOutputEntry>();
-        var diagnostics = Validate(request.ProviderJobPlan);
+        var diagnostics = Validate(request.ProviderJobPlan).ToList();
 
         ProcessAssetSlots(request.ProviderJobPlan.AssetSlots.Slots, request.OutputDirectoryPath, entries, fulfilledAssets, invalidOutputs);
         ProcessAudioSlots(request.ProviderJobPlan.AudioSlots.Slots, request.OutputDirectoryPath, entries, fulfilledAudio, invalidOutputs);
         ProcessLuaSlots(request.ProviderJobPlan.LuaModuleSlots.Slots, request.OutputDirectoryPath, entries, fulfilledLua, invalidOutputs);
+
+        foreach (var invalidOutput in invalidOutputs.Where(item => item.Reason is "is_directory" or "empty_file"))
+        {
+            diagnostics.Add(Error(
+                "fulfillment_state.invalid_existing_output",
+                $"Existing output '{invalidOutput.ExpectedOutputRelativePath}' is invalid: {invalidOutput.Reason}.",
+                invalidOutput.SlotId));
+        }
+
+        var orderedDiagnostics = diagnostics
+            .OrderBy(d => d.Code, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(d => d.Code, StringComparer.Ordinal)
+            .ThenBy(d => d.TargetId, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(d => d.TargetId, StringComparer.Ordinal)
+            .ThenBy(d => d.Message, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(d => d.Message, StringComparer.Ordinal)
+            .ToList();
 
         return new UnityArchiveFulfillmentStateResult
         {
@@ -38,7 +55,8 @@ public sealed class UnityArchiveFulfillmentStateService
                 InvalidCount = entries.Count(e => e.Status == UnityArchiveFulfillmentStatus.invalid),
                 Entries = entries.OrderBy(e => e.SlotId, StringComparer.OrdinalIgnoreCase)
                     .ThenBy(e => e.SlotId, StringComparer.Ordinal)
-                    .ToList()
+                    .ToList(),
+                Diagnostics = orderedDiagnostics
             },
             FulfilledAssets = new UnityArchiveFulfilledAssetsIndex
             {
@@ -64,11 +82,7 @@ public sealed class UnityArchiveFulfillmentStateService
                     .ThenBy(io => io.SlotId, StringComparer.Ordinal)
                     .ToList()
             },
-            Diagnostics = diagnostics.OrderBy(d => d.Code, StringComparer.OrdinalIgnoreCase)
-                .ThenBy(d => d.Code, StringComparer.Ordinal)
-                .ThenBy(d => d.TargetId, StringComparer.OrdinalIgnoreCase)
-                .ThenBy(d => d.TargetId, StringComparer.Ordinal)
-                .ToList()
+            Diagnostics = orderedDiagnostics
         };
     }
 
@@ -81,29 +95,28 @@ public sealed class UnityArchiveFulfillmentStateService
     {
         foreach (var slot in slots)
         {
+            var reportedPath = GetJsonSafeExpectedOutputRelativePath(slot.ExpectedOutputRelativePath);
             var status = CheckFileStatus(slot.ExpectedOutputRelativePath, ExpectedAssetExtension, outputDirectory);
             if (status == UnityArchiveFulfillmentStatus.available)
             {
-                var fullPath = Path.GetFullPath(Path.Combine(outputDirectory, slot.ExpectedOutputRelativePath.Replace('/', Path.DirectorySeparatorChar)));
+                _ = TryGetContainedOutputPath(slot.ExpectedOutputRelativePath, outputDirectory, out var fullPath);
                 var fileInfo = new FileInfo(fullPath);
                 entries.Add(new UnityArchiveFulfillmentStateEntry
                 {
                     SlotId = slot.SlotId,
                     RequestId = slot.RequestId,
                     ProviderKind = slot.ProviderKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                    ExpectedOutputRelativePath = reportedPath,
                     Status = status,
-                    FileSizeBytes = fileInfo.Length,
-                    LastWriteTimeUtc = fileInfo.LastWriteTimeUtc
+                    FileSizeBytes = fileInfo.Length
                 });
                 fulfilled.Add(new UnityArchiveFulfilledAssetEntry
                 {
                     SlotId = slot.SlotId,
                     AssetId = slot.AssetId,
                     AssetKind = slot.AssetKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
-                    FileSizeBytes = fileInfo.Length,
-                    LastWriteTimeUtc = fileInfo.LastWriteTimeUtc
+                    ExpectedOutputRelativePath = reportedPath,
+                    FileSizeBytes = fileInfo.Length
                 });
             }
             else
@@ -113,17 +126,16 @@ public sealed class UnityArchiveFulfillmentStateService
                     SlotId = slot.SlotId,
                     RequestId = slot.RequestId,
                     ProviderKind = slot.ProviderKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                    ExpectedOutputRelativePath = reportedPath,
                     Status = status,
-                    FileSizeBytes = 0,
-                    LastWriteTimeUtc = DateTimeOffset.MinValue
+                    FileSizeBytes = 0
                 });
                 if (status == UnityArchiveFulfillmentStatus.invalid)
                 {
                     invalidOutputs.Add(new UnityArchiveInvalidOutputEntry
                     {
                         SlotId = slot.SlotId,
-                        ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                        ExpectedOutputRelativePath = reportedPath,
                         Reason = GetInvalidReason(slot.ExpectedOutputRelativePath, ExpectedAssetExtension, outputDirectory)
                     });
                 }
@@ -140,29 +152,28 @@ public sealed class UnityArchiveFulfillmentStateService
     {
         foreach (var slot in slots)
         {
+            var reportedPath = GetJsonSafeExpectedOutputRelativePath(slot.ExpectedOutputRelativePath);
             var status = CheckFileStatus(slot.ExpectedOutputRelativePath, ExpectedAudioExtension, outputDirectory);
             if (status == UnityArchiveFulfillmentStatus.available)
             {
-                var fullPath = Path.GetFullPath(Path.Combine(outputDirectory, slot.ExpectedOutputRelativePath.Replace('/', Path.DirectorySeparatorChar)));
+                _ = TryGetContainedOutputPath(slot.ExpectedOutputRelativePath, outputDirectory, out var fullPath);
                 var fileInfo = new FileInfo(fullPath);
                 entries.Add(new UnityArchiveFulfillmentStateEntry
                 {
                     SlotId = slot.SlotId,
                     RequestId = slot.RequestId,
                     ProviderKind = slot.ProviderKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                    ExpectedOutputRelativePath = reportedPath,
                     Status = status,
-                    FileSizeBytes = fileInfo.Length,
-                    LastWriteTimeUtc = fileInfo.LastWriteTimeUtc
+                    FileSizeBytes = fileInfo.Length
                 });
                 fulfilled.Add(new UnityArchiveFulfilledAudioEntry
                 {
                     SlotId = slot.SlotId,
                     AudioId = slot.AudioId,
                     AudioKind = slot.AudioKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
-                    FileSizeBytes = fileInfo.Length,
-                    LastWriteTimeUtc = fileInfo.LastWriteTimeUtc
+                    ExpectedOutputRelativePath = reportedPath,
+                    FileSizeBytes = fileInfo.Length
                 });
             }
             else
@@ -172,17 +183,16 @@ public sealed class UnityArchiveFulfillmentStateService
                     SlotId = slot.SlotId,
                     RequestId = slot.RequestId,
                     ProviderKind = slot.ProviderKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                    ExpectedOutputRelativePath = reportedPath,
                     Status = status,
-                    FileSizeBytes = 0,
-                    LastWriteTimeUtc = DateTimeOffset.MinValue
+                    FileSizeBytes = 0
                 });
                 if (status == UnityArchiveFulfillmentStatus.invalid)
                 {
                     invalidOutputs.Add(new UnityArchiveInvalidOutputEntry
                     {
                         SlotId = slot.SlotId,
-                        ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                        ExpectedOutputRelativePath = reportedPath,
                         Reason = GetInvalidReason(slot.ExpectedOutputRelativePath, ExpectedAudioExtension, outputDirectory)
                     });
                 }
@@ -199,29 +209,28 @@ public sealed class UnityArchiveFulfillmentStateService
     {
         foreach (var slot in slots)
         {
+            var reportedPath = GetJsonSafeExpectedOutputRelativePath(slot.ExpectedOutputRelativePath);
             var status = CheckFileStatus(slot.ExpectedOutputRelativePath, ExpectedLuaExtension, outputDirectory);
             if (status == UnityArchiveFulfillmentStatus.available)
             {
-                var fullPath = Path.GetFullPath(Path.Combine(outputDirectory, slot.ExpectedOutputRelativePath.Replace('/', Path.DirectorySeparatorChar)));
+                _ = TryGetContainedOutputPath(slot.ExpectedOutputRelativePath, outputDirectory, out var fullPath);
                 var fileInfo = new FileInfo(fullPath);
                 entries.Add(new UnityArchiveFulfillmentStateEntry
                 {
                     SlotId = slot.SlotId,
                     RequestId = slot.ModuleId,
                     ProviderKind = slot.ProviderKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                    ExpectedOutputRelativePath = reportedPath,
                     Status = status,
-                    FileSizeBytes = fileInfo.Length,
-                    LastWriteTimeUtc = fileInfo.LastWriteTimeUtc
+                    FileSizeBytes = fileInfo.Length
                 });
                 fulfilled.Add(new UnityArchiveFulfilledLuaEntry
                 {
                     SlotId = slot.SlotId,
                     ModuleId = slot.ModuleId,
                     ModuleKind = slot.ModuleKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
-                    FileSizeBytes = fileInfo.Length,
-                    LastWriteTimeUtc = fileInfo.LastWriteTimeUtc
+                    ExpectedOutputRelativePath = reportedPath,
+                    FileSizeBytes = fileInfo.Length
                 });
             }
             else
@@ -231,17 +240,16 @@ public sealed class UnityArchiveFulfillmentStateService
                     SlotId = slot.SlotId,
                     RequestId = slot.ModuleId,
                     ProviderKind = slot.ProviderKind,
-                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                    ExpectedOutputRelativePath = reportedPath,
                     Status = status,
-                    FileSizeBytes = 0,
-                    LastWriteTimeUtc = DateTimeOffset.MinValue
+                    FileSizeBytes = 0
                 });
                 if (status == UnityArchiveFulfillmentStatus.invalid)
                 {
                     invalidOutputs.Add(new UnityArchiveInvalidOutputEntry
                     {
                         SlotId = slot.SlotId,
-                        ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath,
+                        ExpectedOutputRelativePath = reportedPath,
                         Reason = GetInvalidReason(slot.ExpectedOutputRelativePath, ExpectedLuaExtension, outputDirectory)
                     });
                 }
@@ -251,7 +259,7 @@ public sealed class UnityArchiveFulfillmentStateService
 
     private static UnityArchiveFulfillmentStatus CheckFileStatus(string relativePath, string expectedExt, string outputDirectory)
     {
-        if (!UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath(relativePath))
+        if (!TryGetContainedOutputPath(relativePath, outputDirectory, out var fullPath))
         {
             return UnityArchiveFulfillmentStatus.invalid;
         }
@@ -260,8 +268,6 @@ public sealed class UnityArchiveFulfillmentStateService
         {
             return UnityArchiveFulfillmentStatus.invalid;
         }
-
-        var fullPath = Path.GetFullPath(Path.Combine(outputDirectory, relativePath.Replace('/', Path.DirectorySeparatorChar)));
 
         if (Directory.Exists(fullPath))
         {
@@ -284,7 +290,7 @@ public sealed class UnityArchiveFulfillmentStateService
 
     private static string GetInvalidReason(string relativePath, string expectedExt, string outputDirectory)
     {
-        if (!UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath(relativePath))
+        if (!TryGetContainedOutputPath(relativePath, outputDirectory, out var fullPath))
         {
             return "unsafe_path";
         }
@@ -294,7 +300,6 @@ public sealed class UnityArchiveFulfillmentStateService
             return "wrong_extension";
         }
 
-        var fullPath = Path.GetFullPath(Path.Combine(outputDirectory, relativePath.Replace('/', Path.DirectorySeparatorChar)));
         if (Directory.Exists(fullPath))
         {
             return "is_directory";
@@ -309,6 +314,40 @@ public sealed class UnityArchiveFulfillmentStateService
         return "unknown";
     }
 
+    private static bool TryGetContainedOutputPath(string relativePath, string outputDirectory, out string fullPath)
+    {
+        fullPath = string.Empty;
+        if (!UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath(relativePath))
+        {
+            return false;
+        }
+
+        try
+        {
+            var root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(outputDirectory));
+            var candidate = Path.GetFullPath(Path.Combine(root, relativePath.Replace('/', Path.DirectorySeparatorChar)));
+            if (string.Equals(root, candidate, StringComparison.OrdinalIgnoreCase) ||
+                !candidate.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            fullPath = candidate;
+            return true;
+        }
+        catch (Exception exception) when (exception is ArgumentException or NotSupportedException or PathTooLongException)
+        {
+            return false;
+        }
+    }
+
+    private static string GetJsonSafeExpectedOutputRelativePath(string relativePath)
+    {
+        return UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath(relativePath)
+            ? relativePath
+            : string.Empty;
+    }
+
     private static IReadOnlyList<UnityArchiveFulfillmentStateDiagnostic> Validate(UnityArchiveProviderJobPlanResult plan)
     {
         var diagnostics = new List<UnityArchiveFulfillmentStateDiagnostic>();
@@ -321,7 +360,10 @@ public sealed class UnityArchiveFulfillmentStateService
         var expectedPaths = plan.AssetSlots.Slots.Select(s => s.ExpectedOutputRelativePath)
             .Concat(plan.AudioSlots.Slots.Select(s => s.ExpectedOutputRelativePath))
             .Concat(plan.LuaModuleSlots.Slots.Select(s => s.ExpectedOutputRelativePath));
-        AddDuplicates(expectedPaths, "fulfillment_state.duplicate_expected_output_path", diagnostics);
+        AddDuplicates(
+            expectedPaths.Where(UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath),
+            "fulfillment_state.duplicate_expected_output_path",
+            diagnostics);
 
         foreach (var slot in plan.AssetSlots.Slots.Where(s => !s.ExpectedOutputRelativePath.EndsWith(ExpectedAssetExtension, StringComparison.OrdinalIgnoreCase)))
         {
@@ -340,15 +382,15 @@ public sealed class UnityArchiveFulfillmentStateService
 
         foreach (var slot in plan.AssetSlots.Slots.Where(s => !UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath(s.ExpectedOutputRelativePath)))
         {
-            diagnostics.Add(Error("fulfillment_state.unsafe_expected_output_path", $"Unsafe expected output path '{slot.ExpectedOutputRelativePath}'", slot.SlotId));
+            diagnostics.Add(Error("fulfillment_state.unsafe_expected_output_path", "Unsafe expected output path.", slot.SlotId));
         }
         foreach (var slot in plan.AudioSlots.Slots.Where(s => !UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath(s.ExpectedOutputRelativePath)))
         {
-            diagnostics.Add(Error("fulfillment_state.unsafe_expected_output_path", $"Unsafe expected output path '{slot.ExpectedOutputRelativePath}'", slot.SlotId));
+            diagnostics.Add(Error("fulfillment_state.unsafe_expected_output_path", "Unsafe expected output path.", slot.SlotId));
         }
         foreach (var slot in plan.LuaModuleSlots.Slots.Where(s => !UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath(s.ExpectedOutputRelativePath)))
         {
-            diagnostics.Add(Error("fulfillment_state.unsafe_expected_output_path", $"Unsafe expected output path '{slot.ExpectedOutputRelativePath}'", slot.SlotId));
+            diagnostics.Add(Error("fulfillment_state.unsafe_expected_output_path", "Unsafe expected output path.", slot.SlotId));
         }
 
         return diagnostics;

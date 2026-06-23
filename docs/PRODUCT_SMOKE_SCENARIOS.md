@@ -629,9 +629,11 @@ Expected assertions:
 - all five fulfillment state files exist under `production/` with `schemaVersion`;
 - fulfillment state entries contain stable `missing`, `available`, or `invalid` status;
 - manually created expected `.png`/`.wav`/`.lua` files are detected as `available`;
-- empty files and wrong extensions are marked `invalid`;
+- available entries include `fileSizeBytes`, while fulfillment JSON contains no timestamps;
+- empty files, wrong extensions and directories at expected output paths are marked `invalid` with stable reasons and error diagnostics;
 - unsafe expected output paths produce diagnostic errors;
 - duplicate expected output paths produce diagnostic errors;
+- fulfillment diagnostics are materialized in `fulfillment-state.json` and `export-validation.json`;
 - no expected output files are physically created by materialization;
 - repeated materialization and scan produce byte-identical output;
 - no Unity, LLM/provider, Runtime, GamePackage schema, WinForms or generator-library changes.

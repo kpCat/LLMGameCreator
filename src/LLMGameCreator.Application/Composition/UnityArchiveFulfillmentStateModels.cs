@@ -24,7 +24,6 @@ public sealed record UnityArchiveFulfillmentStateEntry
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public UnityArchiveFulfillmentStatus Status { get; init; }
     public long FileSizeBytes { get; init; }
-    public DateTimeOffset LastWriteTimeUtc { get; init; }
 }
 
 public sealed record UnityArchiveFulfilledAssetEntry
@@ -34,7 +33,6 @@ public sealed record UnityArchiveFulfilledAssetEntry
     public UnityArchiveAssetKind AssetKind { get; init; }
     public string ExpectedOutputRelativePath { get; init; } = string.Empty;
     public long FileSizeBytes { get; init; }
-    public DateTimeOffset LastWriteTimeUtc { get; init; }
 }
 
 public sealed record UnityArchiveFulfilledAudioEntry
@@ -44,7 +42,6 @@ public sealed record UnityArchiveFulfilledAudioEntry
     public UnityArchiveAudioKind AudioKind { get; init; }
     public string ExpectedOutputRelativePath { get; init; } = string.Empty;
     public long FileSizeBytes { get; init; }
-    public DateTimeOffset LastWriteTimeUtc { get; init; }
 }
 
 public sealed record UnityArchiveFulfilledLuaEntry
@@ -54,7 +51,6 @@ public sealed record UnityArchiveFulfilledLuaEntry
     public UnityArchiveLuaModuleKind ModuleKind { get; init; }
     public string ExpectedOutputRelativePath { get; init; } = string.Empty;
     public long FileSizeBytes { get; init; }
-    public DateTimeOffset LastWriteTimeUtc { get; init; }
 }
 
 public sealed record UnityArchiveInvalidOutputEntry
@@ -92,6 +88,8 @@ public sealed record UnityArchiveFulfillmentStateReport
     public int InvalidCount { get; init; }
     public IReadOnlyList<UnityArchiveFulfillmentStateEntry> Entries { get; init; }
         = Array.Empty<UnityArchiveFulfillmentStateEntry>();
+    public IReadOnlyList<UnityArchiveFulfillmentStateDiagnostic> Diagnostics { get; init; }
+        = Array.Empty<UnityArchiveFulfillmentStateDiagnostic>();
 }
 
 public sealed record UnityArchiveFulfilledAssetsIndex

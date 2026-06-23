@@ -123,10 +123,24 @@ public sealed class UnityArchiveFulfillmentStateTests
         var result = CreateService().Scan(CreateRequest(plan, temp.Path));
 
         Assert.Equal(3, result.FulfillmentState.Entries.Count);
-        Assert.Equal(UnityArchiveFulfillmentStatus.available, result.FulfillmentState.Entries[0].Status);
+        Assert.All(result.FulfillmentState.Entries, entry =>
+        {
+            Assert.Equal(UnityArchiveFulfillmentStatus.available, entry.Status);
+            Assert.True(entry.FileSizeBytes > 0);
+        });
         Assert.Single(result.FulfilledAssets.Assets);
         Assert.Single(result.FulfilledAudio.Audio);
         Assert.Single(result.FulfilledLua.Lua);
+        Assert.True(result.FulfilledAssets.Assets[0].FileSizeBytes > 0);
+        Assert.True(result.FulfilledAudio.Audio[0].FileSizeBytes > 0);
+        Assert.True(result.FulfilledLua.Lua[0].FileSizeBytes > 0);
+
+        var json = JsonSerializer.Serialize(result, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+        Assert.DoesNotContain("lastWriteTimeUtc", json, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("timestamp", json, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -165,6 +179,9 @@ public sealed class UnityArchiveFulfillmentStateTests
         Assert.Equal(UnityArchiveFulfillmentStatus.invalid, result.FulfillmentState.Entries[0].Status);
         Assert.Single(result.InvalidOutputs.InvalidOutputs);
         Assert.Equal("empty_file", result.InvalidOutputs.InvalidOutputs[0].Reason);
+        Assert.Contains(result.Diagnostics, diagnostic =>
+            diagnostic.Code == "fulfillment_state.invalid_existing_output" &&
+            diagnostic.Severity == UnityArchiveExportDiagnosticSeverity.Error);
     }
 
     [Fact]
@@ -196,12 +213,53 @@ public sealed class UnityArchiveFulfillmentStateTests
 
         Assert.Single(result.FulfillmentState.Entries);
         Assert.Equal(UnityArchiveFulfillmentStatus.invalid, result.FulfillmentState.Entries[0].Status);
-        Assert.Single(result.Diagnostics);
-        Assert.Contains(result.Diagnostics, d => d.Code == "fulfillment_state.wrong_extension");
+        Assert.Single(result.InvalidOutputs.InvalidOutputs);
+        Assert.Equal("wrong_extension", result.InvalidOutputs.InvalidOutputs[0].Reason);
+        Assert.Contains(result.Diagnostics, d =>
+            d.Code == "fulfillment_state.wrong_extension" &&
+            d.Severity == UnityArchiveExportDiagnosticSeverity.Error);
     }
 
     [Fact]
-    public void UnityArchiveFulfillmentStateUnsafePathIsDiagnosticError()
+    public void UnityArchiveFulfillmentStateDirectoryAtExpectedPathMarkedInvalid()
+    {
+        using var temp = new TempDirectory();
+        Directory.CreateDirectory(Path.Combine(temp.Path, "assets", "generated", "icon", "asset.test.png"));
+        var plan = new UnityArchiveProviderJobPlanResult
+        {
+            AssetSlots = new UnityArchiveAssetSlotIndex
+            {
+                Slots =
+                [
+                    new UnityArchiveAssetSlot
+                    {
+                        SlotId = "asset-slot.test",
+                        RequestId = "request.test",
+                        AssetId = "asset/test",
+                        AssetKind = UnityArchiveAssetKind.icon,
+                        ProviderKind = UnityArchiveRequestProviderKind.manual_import,
+                        ExpectedOutputRelativePath = "assets/generated/icon/asset.test.png",
+                        Required = true
+                    }
+                ]
+            }
+        };
+
+        var result = CreateService().Scan(CreateRequest(plan, temp.Path));
+
+        Assert.Equal(UnityArchiveFulfillmentStatus.invalid, Assert.Single(result.FulfillmentState.Entries).Status);
+        Assert.Equal("is_directory", Assert.Single(result.InvalidOutputs.InvalidOutputs).Reason);
+        Assert.Contains(result.Diagnostics, diagnostic =>
+            diagnostic.Code == "fulfillment_state.invalid_existing_output" &&
+            diagnostic.Severity == UnityArchiveExportDiagnosticSeverity.Error);
+    }
+
+    [Theory]
+    [InlineData("../../escaped.png")]
+    [InlineData("C:/escaped.png")]
+    [InlineData("assets\\escaped.png")]
+    [InlineData("assets/generated/icon:escaped.png")]
+    public void UnityArchiveFulfillmentStateUnsafePathIsDiagnosticError(string unsafePath)
     {
         var plan = new UnityArchiveProviderJobPlanResult
         {
@@ -216,7 +274,7 @@ public sealed class UnityArchiveFulfillmentStateTests
                         AssetId = "asset/test",
                         AssetKind = UnityArchiveAssetKind.icon,
                         ProviderKind = UnityArchiveRequestProviderKind.manual_import,
-                        ExpectedOutputRelativePath = "../../escaped.png",
+                        ExpectedOutputRelativePath = unsafePath,
                         Required = true
                     }
                 ]
@@ -227,7 +285,15 @@ public sealed class UnityArchiveFulfillmentStateTests
 
         var result = CreateService().Scan(CreateRequest(plan));
 
+        Assert.Equal(UnityArchiveFulfillmentStatus.invalid, Assert.Single(result.FulfillmentState.Entries).Status);
+        Assert.Equal(string.Empty, result.FulfillmentState.Entries[0].ExpectedOutputRelativePath);
+        Assert.Equal("unsafe_path", Assert.Single(result.InvalidOutputs.InvalidOutputs).Reason);
         Assert.Contains(result.Diagnostics, d => d.Code == "fulfillment_state.unsafe_expected_output_path");
+        var json = JsonSerializer.Serialize(result, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+        Assert.DoesNotContain(unsafePath, json, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -268,6 +334,12 @@ public sealed class UnityArchiveFulfillmentStateTests
         var result = CreateService().Scan(CreateRequest(plan));
 
         Assert.Contains(result.Diagnostics, d => d.Code == "fulfillment_state.duplicate_expected_output_path");
+        Assert.Contains(result.FulfillmentState.Diagnostics, d => d.Code == "fulfillment_state.duplicate_expected_output_path");
+        var json = JsonSerializer.Serialize(result.FulfillmentState, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        });
+        Assert.Contains("fulfillment_state.duplicate_expected_output_path", json, StringComparison.Ordinal);
     }
 
     private static UnityArchiveFulfillmentStateService CreateService() => new();

@@ -48,6 +48,8 @@ public sealed class UnityArchiveFulfillmentStateProductSmokeTests
         {
             using var document = JsonDocument.Parse(content);
             Assert.True(document.RootElement.TryGetProperty("schemaVersion", out _));
+            Assert.DoesNotContain("lastWriteTimeUtc", content, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("timestamp", content, StringComparison.OrdinalIgnoreCase);
         }
 
         using (var fulfillmentState = JsonDocument.Parse(fulfillmentStateContents["production/fulfillment-state.json"]))
@@ -122,7 +124,8 @@ public sealed class UnityArchiveFulfillmentStateProductSmokeTests
             ProviderJobPlan = providerJobPlan
         });
         
-        Assert.Contains(scanResult.FulfillmentState.Entries, e => e.Status == UnityArchiveFulfillmentStatus.available);
+        var available = Assert.Single(scanResult.FulfillmentState.Entries, e => e.Status == UnityArchiveFulfillmentStatus.available);
+        Assert.True(available.FileSizeBytes > 0);
     }
 
     private static UnityArchiveMaterializationService CreateService()
