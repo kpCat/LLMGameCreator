@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-23T16:05:49Z",
+  "updated_at_utc": "2026-06-23T18:55:00Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 022 Unity archive fulfillment state completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_022_unity_archive_fulfillment_state",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 023 Unity archive read-only review snapshot completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_023_unity_archive_review_snapshot",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-022 through deterministic Unity archive fulfillment-state scanning; further Unity, provider, generator or Runtime execution requires controlled vertical-slice approval.",
-  "current_user_action": "Inspect the deterministic .llmgc/unity-archive contract/meta/data/request/provider-plan/fulfillment-state output and choose one controlled follow-up slice; generation remains explicit.",
-  "recommended_next_decision": "Choose one bounded read-only materialized Unity archive fulfillment-state review slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-023 through deterministic Unity archive read-only review snapshot; further Unity, provider, generator, Runtime, M5 and M6 work remains locked unless explicitly selected by a controlled vertical-slice approval.",
+  "current_user_action": "Inspect the deterministic .llmgc/unity-archive contract/meta/data/request/provider-plan/fulfillment-state/review output and choose one controlled follow-up slice; generation remains explicit.",
+  "recommended_next_decision": "Choose one bounded archive review retention/comparison slice or one controlled product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -48,35 +48,39 @@
     "diagnostics": "none",
     "quality_warnings": "none"
   },
-"last_completed_product_slice": {
-    "slice_id": "product_slice_022_unity_archive_fulfillment_state_v1",
-    "title": "Unity Archive Fulfillment State Scanner v1",
-    "completed_at_utc": "2026-06-23T13:30:00Z",
-    "summary": "Added fulfillment state scanner service that checks expected output file existence, validates paths, and writes five fulfillment state files under production/. Status logic: missing/available/invalid with diagnostics for unsafe paths, duplicates and wrong extensions.",
-    "parent_slice_id": "product_slice_021_unity_archive_provider_job_plan_v1",
-    "ui_surface": "none_application_fulfillment_state_scanner_only",
-    "scenario_id": "unity-archive-fulfillment-state",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-archive-fulfillment-state",
+  "last_completed_product_slice": {
+    "slice_id": "product_slice_023_unity_archive_review_snapshot_v1",
+    "title": "Unity Archive Read-only Review Snapshot v1",
+    "completed_at_utc": "2026-06-23T18:30:00Z",
+    "summary": "Added a read-only archive review snapshot service that inspects an already materialized .llmgc/unity-archive directory, aggregates validation/provider/fulfillment/request/source-file summaries and writes deterministic timestamp-free review JSON and markdown under production/.",
+    "parent_slice_id": "product_slice_022_unity_archive_fulfillment_state_v1",
+    "ui_surface": "none_application_archive_review_snapshot_only",
+    "scenario_id": "unity-archive-review-snapshot",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-archive-review-snapshot",
     "headless_outputs": [
-      ".llmgc/unity-archive/production/fulfillment-state.json",
-      ".llmgc/unity-archive/production/fulfilled-assets-index.json",
-      ".llmgc/unity-archive/production/fulfilled-audio-index.json",
-      ".llmgc/unity-archive/production/fulfilled-lua-index.json",
-      ".llmgc/unity-archive/production/invalid-outputs.json"
+      ".llmgc/unity-archive/production/archive-review.json",
+      ".llmgc/unity-archive/production/archive-review.md"
     ],
     "validation_contracts": [
-      "missing expected outputs return status 'missing'",
-      "manually created .png/.wav/.lua files return status 'available' with file metadata",
-      "empty files, wrong extensions, unsafe paths return status 'invalid' with reason",
-      "all five fulfillment state files exist with schemaVersion even when arrays are empty",
-      "no expected output files are physically created during materialization",
-      "repeated scan/materialization is byte-identical and deterministic",
-      "no Unity, Runtime, WinForms, GamePackage schema, provider or LLM execution"
+      "review reads an existing materialized Unity archive without creating Unity files or expected provider outputs",
+      "missing archive or required core archive files return stable diagnostics and MissingArchive readiness",
+      "review JSON summarizes validation, provider, fulfillment, request and source-file sections",
+      "review JSON contains no timestamps and no absolute archive root paths",
+      "review output excludes its own review files from source-file enumeration so repeated review is byte-identical",
+      "unity-archive-review-snapshot product smoke passes",
+      "no Unity, Runtime, WinForms, GamePackage schema, provider, generator, LLM or Lua execution"
+    ],
+    "checks": [
+      "UnityArchiveReviewSnapshot filtered tests: 6/6 passed",
+      "unity-archive-review-snapshot product smoke: 1/1 passed",
+      "ProductSmoke filtered tests: 22/22 passed",
+      "check-all.ps1: 588/588 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_bounded_read_only_materialized_unity_archive_review_without_unity_runtime_or_schema_changes",
-    "plan_bounded_composition_report_retention_history_without_plugins_or_execution",
+    "plan_bounded_archive_review_retention_history_without_plugins_or_execution",
+    "plan_bounded_archive_review_comparison_without_provider_or_runtime_execution",
+    "plan_bounded_read_only_archive_review_ui_after_headless_retention",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
@@ -84,10 +88,10 @@
     "add_one_carefully_selected_artifact_contract_inside_controlled_vertical_slice"
   ],
   "blocked_next_milestones_until_gate_passes": [
-    "M5 Lua module executor integration requires controlled product vertical slice selection and explicit user approval, not missing M4.1 evidence.",
-    "M6 rich GamePackage assembly beyond the current baseline draft assembly requires controlled product vertical slice selection and explicit user approval, not missing M4.1 evidence.",
-    "broad contract expansion remains restricted beyond sampled baseline evidence.",
-    "runtime preview repair loop remains restricted until a controlled vertical slice exists."
+    "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
+    "M6 rich GamePackage assembly beyond the current baseline draft assembly remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
+    "Broad contract expansion remains restricted beyond sampled baseline evidence.",
+    "Runtime preview repair loop remains restricted until a controlled vertical slice exists."
   ],
   "restricted_next_work": [
     "M6-lite package assembly shortcuts",
@@ -95,12 +99,12 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "materialized_unity_archive_fulfillment_state_read_only_review",
-  "recommended_next_work_item_title": "Choose a bounded read-only materialized Unity archive fulfillment-state review slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
+  "recommended_next_work_item": "archive_review_retention_history",
+  "recommended_next_work_item_title": "Choose a bounded headless archive-review retention/comparison slice that stores and compares review snapshots without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
   "candidate_product_vertical_slices": [
-    "A read-only editor-side view may inspect the materialized Unity archive contract, validation report and game-data indexes without creating a Unity project or modifying package schema.",
-    "A headless report retention/history policy may be planned separately if multiple versions are needed.",
-    "One controlled semantic-generation contract only after the generator catalog direction is explicitly chosen."
+    "A headless archive review retention/history policy may store multiple review snapshots and compare what changed between materialization runs.",
+    "A read-only editor-side view may inspect archive-review.json/archive-review.md after the headless retention contract is stable.",
+    "One controlled semantic-generation contract may be selected only after the generator catalog direction is explicitly chosen."
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -133,20 +137,12 @@
     "Deterministic Unity archive asset/audio/Lua request metadata",
     "Deterministic Unity archive provider job planning without execution",
     "Deterministic Unity archive fulfillment-state scanning",
+    "Deterministic Unity archive read-only review snapshot",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",
     "Apply approved baseline artifacts",
-    "Draft GamePackage assembly/export",
-    "Headless product smoke",
-    "Generated package Runtime Preview smoke",
-    "Expanded strict contract batch smoke",
-    "Generated content interaction preview",
-    "Explicit assembled package activation",
-    "Quest/dialogue preview-only session",
-    "Generated NPC/encounter map placement preview",
-    "controlled product vertical slice planning",
-    "later rich assembly/export"
+    "Draft GamePackage assembly/export"
   ],
-  "state_update_rule": "Update this file and docs/CURRENT_GENERATOR_STATE.md whenever milestone completion, active manual gate or recommended next Codex task changes."
+  "state_update_rule": "Update this file pair after every accepted product slice, preserve M5/M6 Locked semantics until explicitly unlocked by the user, and keep next work bounded to the current approved gate."
 }
