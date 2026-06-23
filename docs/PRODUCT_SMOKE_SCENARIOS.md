@@ -639,3 +639,34 @@ Expected assertions:
 - no Unity, LLM/provider, Runtime, GamePackage schema, WinForms or generator-library changes.
 
 No manual UI verification is required.
+
+## unity-archive-review-history
+
+Validates deterministic content-hash snapshot retention and comparison over the Unity archive review:
+
+```text
+archive materialization and review
+-> history service stores content-hash snapshot
+-> comparison service compares current vs previous
+-> comparison JSON and markdown output
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-review-history
+```
+
+Expected assertions:
+
+- history snapshot is stored under `review-history/<sha256-hash>/archive-review.json`;
+- history index is stored under `production/archive-review-history-index.json`;
+- a second, changed review produces a distinct snapshot hash;
+- comparison output contains readiness, summary deltas, and at least one change dimension;
+- comparison JSON and markdown are UTF-8 without BOM and byte-identical on repeated calls;
+- output contains no timestamps or absolute archive root paths;
+- readiness, validation, provider plan, source file count, diagnostic counts, fulfillment counts and request counts are compared;
+- diagnostic changes include added/resolved with stable fingerprints;
+- source file changes include added/removed;
+- invalid reason changes include count deltas;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.

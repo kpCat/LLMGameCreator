@@ -130,4 +130,12 @@ public sealed record UnityArchiveReviewSnapshotFileReference
 {
     public string RelativePath { get; init; } = string.Empty;
     public string Kind { get; init; } = string.Empty;
+
+    public string Fingerprint() => $"{RelativePath}|{Kind}";
+}
+
+public static class UnityArchiveReviewSnapshotDiagnosticExtensions
+{
+    public static string Fingerprint(this UnityArchiveReviewSnapshotDiagnostic diagnostic)
+        => $"{diagnostic.Severity}|{diagnostic.Code}|{diagnostic.SourceFile}|{diagnostic.TargetId}|{diagnostic.Message}";
 }

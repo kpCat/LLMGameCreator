@@ -69,16 +69,29 @@ Permanent evidence summary:
 - Review file enumeration excludes the review outputs themselves, so repeated review of an unchanged archive remains byte-identical.
 - `unity-archive-review-snapshot` product smoke passed.
 
-Checks recorded from the accepted S023 run:
+- Product Slice 024: Unity Archive Review Retention & Comparison v1.
+- `UnityArchiveReviewHistoryService` stores deterministic SHA-256 content-hash snapshots of `archive-review.json` under `review-history/<hash>/archive-review.json`.
+- `UnityArchiveReviewHistoryIndex` tracks all snapshots in `production/archive-review-history-index.json`.
+- Same content stored twice does not duplicate the index.
+- `UnityArchiveReviewComparisonService` compares current vs previous snapshot and writes `production/archive-review-comparison.json` and `production/archive-review-comparison.md`.
+- Comparison readiness: `Ready`, `ReadyWithWarnings`, `NoPreviousSnapshot`, `MissingReview`, `Invalid`, `Blocked`.
+- Comparison dimensions: readiness, materialization readiness, provider plan readiness, source file count, diagnostic counts, fulfillment counts, provider slot counts, request counts.
+- Diagnostic changes: added/resolved with stable fingerprints (severity|code|sourceFile|targetId|message).
+- Source file changes: added/removed with stable fingerprints (relativePath|kind).
+- Invalid reason changes: count deltas.
+- All outputs are UTF-8 without BOM, deterministic, and contain no timestamps or absolute paths.
+- `unity-archive-review-history` product smoke passed.
 
-- `UnityArchiveReviewSnapshot` filtered tests: 6/6 passed.
-- `unity-archive-review-snapshot` product smoke: 1/1 passed.
-- `ProductSmoke` filtered tests: 22/22 passed.
-- `check-all.ps1`: 588/588 tests passed, build 0 warnings / 0 errors.
+Checks recorded from the accepted S024 run:
+
+- `UnityArchiveReviewHistory` and `UnityArchiveReviewComparison` filtered tests: 18/18 passed.
+- `unity-archive-review-history` product smoke: 1/1 passed.
+- `ProductSmoke` filtered tests: 23/23 passed.
+- `check-all.ps1`: 606/606 tests passed, build 0 warnings / 0 errors.
 
 ## Current M5/M6 lock semantics
 
-M5 and M6 task specs remain **Locked** while the current state only authorizes bounded S023 follow-up work. The lock is intentional: M5 Lua executor integration and M6 rich GamePackage assembly are not opened by S023. They require a separate controlled product vertical-slice decision and explicit user approval.
+M5 and M6 task specs remain **Locked** while the current state only authorizes bounded S024 follow-up work. The lock is intentional: M5 Lua executor integration and M6 rich GamePackage assembly are not opened by S024. They require a separate controlled product vertical-slice decision and explicit user approval.
 
 Currently locked or restricted:
 
@@ -87,7 +100,7 @@ Currently locked or restricted:
 - Broad contract expansion remains restricted beyond sampled baseline evidence.
 - Runtime preview repair loop remains restricted until a controlled vertical slice exists.
 
-Allowed next work remains bounded to archive-review retention/comparison, read-only review inspection, or one explicitly approved controlled product vertical slice. No Unity implementation, provider execution, Runtime expansion, GamePackage schema change, WinForms UI expansion, generator execution, LLM call or Lua execution is unlocked by Product Slice 023.
+Allowed next work remains bounded to read-only archive review/history UI, controlled manual provider output import, or one explicitly approved controlled product vertical slice. No Unity implementation, provider execution, Runtime expansion, GamePackage schema change, WinForms UI expansion, generator execution, LLM call or Lua execution is unlocked by Product Slice 024.
 
 Parent slice foundation:
 
