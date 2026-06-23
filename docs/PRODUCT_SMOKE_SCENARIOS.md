@@ -309,6 +309,37 @@ Expected assertions:
 
 No manual UI verification is required.
 
+## unity-archive-provider-job-plan
+
+Validates deterministic metadata-only fulfillment planning over the existing Unity archive request pipeline:
+
+```text
+asset/audio/Lua request metadata
+-> typed fulfillment slots with safe future output paths
+-> provider-specific planned job batches
+-> materialized readiness report without provider execution
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-provider-job-plan
+```
+
+Expected assertions:
+
+- fulfillment/readiness, asset/audio/Lua slot and all five provider job JSON files exist with `schemaVersion`;
+- asset/audio/Lua slot counts match their request counts;
+- expected output paths are deterministic safe archive-relative paths with no traversal;
+- manual-import, ComfyUI, Suno, local-audio and procedural job files exist even when a batch is empty;
+- provider `none` remains slot-only metadata and creates no provider job;
+- all provider jobs remain `planned_not_executed` with execution disabled;
+- no expected `.png`, `.wav` or `.lua` output is physically generated;
+- repeated materialization is byte-identical and the existing request-pipeline smoke remains green;
+- no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua execution or WinForms UI is invoked.
+
+No manual UI verification is required.
+
 ## game-blueprint-capability-compatibility
 
 Validates the first machine-readable GameBlueprint and capability compatibility foundation without runtime, package or provider execution:
@@ -571,5 +602,40 @@ Expected assertions:
 - the mixed/future target remains metadata-only and contains no `data/` payload when package data is absent;
 - unsafe output paths cannot escape the project root;
 - no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
+
+No manual UI verification is required.
+
+## unity-archive-fulfillment-state
+
+Validates deterministic fulfillment state scanning over the existing Unity archive provider job plan:
+
+```text
+asset/audio/Lua fulfillment slots
+-> fulfillment state scanner checks expected output files
+-> missing/available/invalid status by slot
+-> fulfilled asset/audio/Lua indexes
+-> invalid outputs report
+-> repeated scan is deterministic
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-fulfillment-state
+```
+
+Expected assertions:
+
+- all five fulfillment state files exist under `production/` with `schemaVersion`;
+- fulfillment state entries contain stable `missing`, `available`, or `invalid` status;
+- manually created expected `.png`/`.wav`/`.lua` files are detected as `available`;
+- available entries include `fileSizeBytes`, while fulfillment JSON contains no timestamps;
+- empty files, wrong extensions and directories at expected output paths are marked `invalid` with stable reasons and error diagnostics;
+- unsafe expected output paths produce diagnostic errors;
+- duplicate expected output paths produce diagnostic errors;
+- fulfillment diagnostics are materialized in `fulfillment-state.json` and `export-validation.json`;
+- no expected output files are physically created by materialization;
+- repeated materialization and scan produce byte-identical output;
+- no Unity, LLM/provider, Runtime, GamePackage schema, WinForms or generator-library changes.
 
 No manual UI verification is required.

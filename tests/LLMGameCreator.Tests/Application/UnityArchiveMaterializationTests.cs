@@ -1,5 +1,6 @@
 using System.Text.Json;
 using LLMGameCreator.Application.Composition;
+using LLMGameCreator.GamePackage;
 using Xunit;
 
 namespace LLMGameCreator.Tests.Application;
@@ -15,10 +16,25 @@ public sealed class UnityArchiveMaterializationTests
         "ui/layouts-index.json",
         "assets/asset-requests.json",
         "assets/asset-request-index.json",
+        "assets/asset-slots.json",
         "audio/audio-requests.json",
         "audio/audio-request-index.json",
+        "audio/audio-slots.json",
         "lua/module-requests.json",
         "lua/modules-index.json",
+        "lua/module-slots.json",
+        "production/fulfillment-plan.json",
+        "production/readiness-report.json",
+        "production/fulfillment-state.json",
+        "production/fulfilled-assets-index.json",
+        "production/fulfilled-audio-index.json",
+        "production/fulfilled-lua-index.json",
+        "production/invalid-outputs.json",
+        "providers/manual-import/jobs.json",
+        "providers/comfyui/jobs.json",
+        "providers/suno/jobs.json",
+        "providers/local-audio/jobs.json",
+        "providers/procedural/jobs.json",
         "localization/index.json",
         "export-report.md",
         "export-validation.json"
@@ -36,12 +52,15 @@ public sealed class UnityArchiveMaterializationTests
         var second = await service.MaterializeAsync(request);
         var secondContents = ReadArchiveContents(second.OutputDirectoryPath);
 
-        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedPlayableContract, first.Readiness);
+        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedWithWarnings, first.Readiness);
         Assert.Equal(RequiredFiles.OrderBy(path => path), first.MaterializedFiles.Select(file => file.RelativePath).OrderBy(path => path));
         Assert.Equal(firstContents, secondContents);
         Assert.All(RequiredFiles, relativePath => Assert.True(File.Exists(ArchivePath(first.OutputDirectoryPath, relativePath)), relativePath));
         using var manifest = JsonDocument.Parse(await File.ReadAllTextAsync(ArchivePath(first.OutputDirectoryPath, "manifest/unity-game-archive.json")));
         Assert.Equal("topdown-generated-rpg", manifest.RootElement.GetProperty("gameId").GetString());
+        var fulfillmentJson = await File.ReadAllTextAsync(ArchivePath(first.OutputDirectoryPath, "production/fulfillment-state.json"));
+        Assert.DoesNotContain("lastWriteTimeUtc", fulfillmentJson, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("timestamp", fulfillmentJson, StringComparison.OrdinalIgnoreCase);
         Assert.Null(first.ZipFilePath);
     }
 
@@ -103,6 +122,84 @@ public sealed class UnityArchiveMaterializationTests
         Assert.Equal(UnityArchiveExportReadiness.MissingRequirements, result.DryRunResult.Plan.Readiness);
         Assert.Equal([UnityArchiveMaterializationService.ValidationFilePath], result.MaterializedFiles.Select(file => file.RelativePath));
         Assert.False(File.Exists(ArchivePath(result.OutputDirectoryPath, "manifest/unity-game-archive.json")));
+    }
+
+    [Fact]
+    public async Task UnityArchiveMaterializationProviderJobPlanErrorsBlockPlayableSuccess()
+    {
+        using var temp = new TempDirectory();
+        var presets = new UnityTargetContractPresetProvider();
+        var briefPresets = new GameDesignBriefPresetProvider();
+        Assert.True(briefPresets.TryGet(GameDesignBriefPresetProvider.TopDownGeneratedRpg, out var brief));
+        Assert.True(presets.TryGetTargetProfile(UnityTargetContractPresetProvider.GenericUnityPlayerTopDown, out var profile));
+
+        var dryRunService = new UnityArchiveExportDryRunService(
+            new UnityTargetContractValidator(),
+            new UnityArchiveExportPlanMarkdownRenderer());
+        var pipelineService = new UnityArchiveAssetAudioLuaRequestService();
+        var providerJobPlanService = new UnityArchiveProviderJobPlanService();
+        var materializationService = new UnityArchiveMaterializationService(dryRunService, null, pipelineService, providerJobPlanService);
+
+        var package = new GamePackageDefinition
+        {
+            Manifest = new LLMGameCreator.Domain.Definitions.GameManifest
+            {
+                PackageId = "game/provider-job-plan-error",
+                Title = "Provider Job Plan Error Test"
+            },
+            Game = new LLMGameCreator.Domain.Definitions.GameDefinition
+            {
+                Items =
+                [
+                    new LLMGameCreator.Domain.Definitions.ItemDefinition { Id = "item/duplicate", Name = "First", Kind = "tool" },
+                    new LLMGameCreator.Domain.Definitions.ItemDefinition { Id = "item/duplicate", Name = "Second", Kind = "tool" }
+                ]
+            }
+        };
+
+        var request = new UnityArchiveMaterializationRequest
+        {
+            ProjectRootPath = temp.Path,
+            DesignBrief = brief,
+            TargetProfile = profile,
+            ArchiveManifest = presets.CreateTopDownGeneratedRpgArchive(),
+            RuntimeModules = presets.ListRuntimeModules(),
+            GamePackage = package
+        };
+
+        var result = await materializationService.MaterializeAsync(request);
+
+        Assert.Equal(UnityArchiveMaterializationReadiness.Blocked, result.Readiness);
+        Assert.Contains(result.Diagnostics, d => d.Code == "provider_plan.duplicate_slot_id");
+        Assert.Contains(result.Diagnostics, d => d.Code == "fulfillment_state.duplicate_expected_output_path");
+        Assert.DoesNotContain(result.Diagnostics, d => d.Code.Contains("request.request.", StringComparison.Ordinal));
+
+        using var fulfillmentState = JsonDocument.Parse(await File.ReadAllTextAsync(
+            ArchivePath(result.OutputDirectoryPath, "production/fulfillment-state.json")));
+        Assert.Contains(
+            fulfillmentState.RootElement.GetProperty("diagnostics").EnumerateArray(),
+            diagnostic => diagnostic.GetProperty("code").GetString() == "fulfillment_state.duplicate_expected_output_path");
+
+        using var validation = JsonDocument.Parse(await File.ReadAllTextAsync(result.ValidationReportPath));
+        Assert.Contains(
+            validation.RootElement.GetProperty("diagnostics").EnumerateArray(),
+            diagnostic => diagnostic.GetProperty("code").GetString() == "fulfillment_state.duplicate_expected_output_path");
+    }
+
+    [Fact]
+    public async Task UnityArchiveMaterializationDoesNotDoublePrefixRequestDiagnostics()
+    {
+        using var temp = new TempDirectory();
+        var request = CreateCurrentRequest(temp.Path);
+
+        var dryRunService = new UnityArchiveExportDryRunService(
+            new UnityTargetContractValidator(),
+            new UnityArchiveExportPlanMarkdownRenderer());
+        var materializationService = new UnityArchiveMaterializationService(dryRunService);
+
+        var result = await materializationService.MaterializeAsync(request);
+
+        Assert.DoesNotContain(result.Diagnostics, d => d.Code.Contains("request.request."));
     }
 
     private static UnityArchiveMaterializationRequest CreateCurrentRequest(string projectRoot)

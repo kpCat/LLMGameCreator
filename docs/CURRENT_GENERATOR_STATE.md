@@ -6,9 +6,9 @@ State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 020 adds deterministic Unity archive asset/audio/Lua request pipeline.
+M4.1 gate passed for sampled baseline contracts; Product Slice 022 adds deterministic Unity archive fulfillment-state scanning.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-019 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta/data materialization. Product Slice 020 adds the first deterministic request pipeline for future Unity archive assets, audio and Lua/data modules as metadata-only requests without generating assets or executing providers.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-021 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta/data/request/provider-plan materialization. Product Slice 022 scans expected outputs into deterministic missing/available/invalid fulfillment state without generating outputs or executing providers.
 
 ## Gate decision
 
@@ -60,14 +60,21 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
+- Product Slice 022: Unity Archive Fulfillment State Scanner v1.
+- `UnityArchiveFulfillmentStateService` scans expected output paths from provider job plan slots and checks physical file existence.
+- Status logic: `missing` for absent files, `available` for existing non-empty files with correct extension, `invalid` for unsafe paths, wrong extensions, empty files or directory paths.
+- Materialization writes five fulfillment state files under `production/`: fulfillment-state.json, fulfilled-assets-index.json, fulfilled-audio-index.json, fulfilled-lua-index.json, invalid-outputs.json.
+- Fulfillment JSON contains no timestamps or absolute paths; available entries retain deterministic `fileSizeBytes`.
+- Scanner diagnostics are preserved in `fulfillment-state.json` and `export-validation.json`; invalid existing outputs use stable deterministic reasons.
+- No expected output files are physically created during materialization.
+- `unity-archive-fulfillment-state` proves required files, status detection for missing/available/invalid, timestamp-free byte-identical repeated scan, and no Unity/Runtime/provider execution.
+
+Parent slice foundation:
+
+- Product Slice 021: Unity Archive Provider Job Plan v1.
+- `UnityArchiveProviderJobPlanService` converts Slice 020 asset/audio/Lua request metadata into deterministic missing fulfillment slots, safe future output paths, five provider-specific non-executable job batches and a readiness report.
+- Provider plan errors block materialization readiness; future providers remain warning-only, every job and batch has execution disabled, and provider `none` creates slots but no job.
 - Product Slice 020: Unity Archive Asset/Audio/Lua Request Pipeline v1.
-- `UnityArchiveAssetAudioLuaRequestService` generates deterministic metadata requests for assets, audio and Lua modules from existing package data, design brief, target profile and runtime module contracts.
-- `UnityArchiveMaterializationService` integrates the request pipeline and writes all six required request pipeline files under `.llmgc/unity-archive/`: `assets/asset-requests.json`, `assets/asset-request-index.json`, `audio/audio-requests.json`, `audio/audio-request-index.json`, `lua/module-requests.json` and `lua/modules-index.json`.
-- Asset requests cover scene illustrations, NPC portraits, item/ability/mechanic icons, tile textures and UI theme/widgets; audio requests cover UI SFX, footstep surfaces, ability/combat effects, scene ambience and music themes; Lua requests cover inventory, quest journal, dialogue, combat, crafting, stats, world map, factions and future modules.
-- Future provider kinds (comfyui_future, suno_future, local_audio_future, procedural_future) appear as non-blocking warnings; duplicate/blank ids and future module metadata-only behavior are validated deterministically.
-- `unity-archive-request-pipeline` proves request generation, file materialization, determinism and future-provider warnings without Unity, provider, generator, LLM, Runtime, GamePackage schema, Lua or WinForms calls.
-- Parent slice foundation:
-  - Product Slice 019: Unity Archive Game Data Payload v1.
 
 Parent slice foundation:
 
@@ -197,11 +204,11 @@ Earlier contract foundation:
 
 ## Active manual gate
 
-Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-020 through deterministic Unity archive asset/audio/Lua request pipeline. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
+Completed for the sampled baseline contracts plus baseline assembly, generated Runtime Preview, expanded-contract batch smoke and Product Slices 007-022 through deterministic Unity archive fulfillment-state scanning. Further Unity, provider, generator or Runtime execution expansion still requires an explicit controlled slice.
 
 ## Current user action
 
-Inspect the deterministic `.llmgc/unity-archive/` contract/meta/data/request-pipeline output and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all seventeen headless product smoke scenarios before choosing any implementation slice.
+Inspect the deterministic `.llmgc/unity-archive/` contract/meta/data/request/provider-plan/fulfillment-state output and choose one controlled follow-up slice. Existing generation remains behind explicit editor actions. Use all headless product smoke scenarios before choosing any implementation slice.
 
 ## Allowed next Codex tasks
 
@@ -245,6 +252,8 @@ Capability Picker
   -> deterministic Unity archive export dry-run planning
   -> deterministic Unity archive contract/meta materialization
   -> deterministic Unity archive game-data payload materialization when package data is supplied
+  -> deterministic Unity archive request metadata and provider job planning
+  -> deterministic Unity archive fulfillment-state scanning
   -> controlled batch preset selection
   -> LLM Evaluation
   -> Artifact Review
@@ -282,7 +291,7 @@ Capability Picker
 
 ## Recommended next step
 
-Choose one controlled follow-up slice from the deterministic archive request pipeline. Existing generation remains behind explicit editor actions. Candidate next slices:
+Choose one controlled follow-up slice from the deterministic archive fulfillment state. Existing generation remains behind explicit editor actions. Candidate next slices:
 
 - A headless report retention/history policy may be planned separately if multiple versions are needed; Slices 014-015 intentionally maintain and consume one deterministic report per blueprint id.
 - A read-only editor-side view may inspect the materialized archive contract, validation report and game-data indexes without creating a Unity project or modifying package schema.

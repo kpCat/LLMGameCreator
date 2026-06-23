@@ -28,7 +28,7 @@ public sealed class UnityArchiveMaterializationSmokeTests
         });
 
         Assert.True(Directory.Exists(current.OutputDirectoryPath));
-        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedPlayableContract, current.Readiness);
+        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedWithWarnings, current.Readiness);
         Assert.All(new[]
         {
             "manifest/unity-game-archive.json",
