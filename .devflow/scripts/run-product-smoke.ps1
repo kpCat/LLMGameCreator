@@ -136,6 +136,9 @@ try {
     elseif ($Scenario -eq "unity-archive-fulfillment-state") {
         $TestFilter = "FullyQualifiedName~UnityArchiveFulfillmentStateProductSmoke"
     }
+	elseif ($Scenario -eq "unity-archive-review-snapshot") {
+    $TestFilter = "FullyQualifiedName~UnityArchiveReviewSnapshotProductSmoke"
+	}
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

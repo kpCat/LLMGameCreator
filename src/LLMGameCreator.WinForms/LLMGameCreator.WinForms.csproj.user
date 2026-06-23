@@ -14,6 +14,9 @@
     <Compile Update="Pages\CapabilityPicker\CapabilityPickerPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Pages\CompositionWorkbench\CompositionWorkbenchPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Pages\Dashboard\DashboardPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
