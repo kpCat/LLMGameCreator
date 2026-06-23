@@ -20,7 +20,7 @@ public sealed class UnityArchiveGameDataPayloadSmokeTests
         var second = await service.MaterializeAsync(request);
         var secondData = ReadDataFiles(second.OutputDirectoryPath);
 
-        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedPlayableContract, first.Readiness);
+        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedWithWarnings, first.Readiness);
         Assert.Equal(firstData, secondData);
         Assert.All(new[]
         {

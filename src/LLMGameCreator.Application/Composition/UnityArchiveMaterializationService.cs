@@ -19,21 +19,24 @@ public sealed class UnityArchiveMaterializationService
         Converters = { new JsonStringEnumConverter() }
     };
 
-    private readonly UnityArchiveExportDryRunService _dryRunService;
+private readonly UnityArchiveExportDryRunService _dryRunService;
     private readonly UnityArchiveGameDataPayloadService _gameDataPayloadService;
     private readonly UnityArchiveAssetAudioLuaRequestService _requestPipelineService;
     private readonly UnityArchiveProviderJobPlanService _providerJobPlanService;
+    private readonly UnityArchiveFulfillmentStateService _fulfillmentStateService;
 
     public UnityArchiveMaterializationService(
         UnityArchiveExportDryRunService dryRunService,
         UnityArchiveGameDataPayloadService? gameDataPayloadService = null,
         UnityArchiveAssetAudioLuaRequestService? requestPipelineService = null,
-        UnityArchiveProviderJobPlanService? providerJobPlanService = null)
+        UnityArchiveProviderJobPlanService? providerJobPlanService = null,
+        UnityArchiveFulfillmentStateService? fulfillmentStateService = null)
     {
         _dryRunService = dryRunService ?? throw new ArgumentNullException(nameof(dryRunService));
         _gameDataPayloadService = gameDataPayloadService ?? new UnityArchiveGameDataPayloadService();
         _requestPipelineService = requestPipelineService ?? new UnityArchiveAssetAudioLuaRequestService();
         _providerJobPlanService = providerJobPlanService ?? new UnityArchiveProviderJobPlanService();
+        _fulfillmentStateService = fulfillmentStateService ?? new UnityArchiveFulfillmentStateService();
     }
 
     public async Task<UnityArchiveMaterializationResult> MaterializeAsync(
@@ -77,11 +80,14 @@ public sealed class UnityArchiveMaterializationService
             ProjectRootPath = request.ProjectRootPath,
             RequestPipeline = pipelineResult,
             ArchiveManifest = request.ArchiveManifest,
-            DesignBrief = request.DesignBrief,
+DesignBrief = request.DesignBrief,
             TargetProfile = request.TargetProfile
         });
 
-        var readiness = MapReadiness(dryRun.Plan.Readiness);
+        var readiness = CombineMaterializationReadiness(
+            dryRun.Plan.Readiness,
+            pipelineResult.Readiness,
+            providerJobPlan.Readiness);
         var diagnostics = CreateDiagnostics(dryRun, request.CreateZip, readiness, pipelineResult, providerJobPlan);
 
         ResetOutputDirectory(outputDirectory);
@@ -202,8 +208,19 @@ public sealed class UnityArchiveMaterializationService
         {
             ModuleIds = Normalize(pipelineResult.LuaModuleRequests.Select(r => r.ModuleId))
         }, files, cancellationToken).ConfigureAwait(false);
-        await WriteJsonFileAsync(outputDirectory, "production/fulfillment-plan.json", "fulfillment_plan", providerJobPlan.FulfillmentPlan, files, cancellationToken).ConfigureAwait(false);
+await WriteJsonFileAsync(outputDirectory, "production/fulfillment-plan.json", "fulfillment_plan", providerJobPlan.FulfillmentPlan, files, cancellationToken).ConfigureAwait(false);
         await WriteJsonFileAsync(outputDirectory, "production/readiness-report.json", "provider_readiness_report", providerJobPlan.ReadinessReport, files, cancellationToken).ConfigureAwait(false);
+        
+        var fulfillmentState = _fulfillmentStateService.Scan(new UnityArchiveFulfillmentStateRequest
+        {
+            OutputDirectoryPath = outputDirectory,
+            ProviderJobPlan = providerJobPlan
+        });
+        await WriteJsonFileAsync(outputDirectory, "production/fulfillment-state.json", "fulfillment_state", fulfillmentState.FulfillmentState, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "production/fulfilled-assets-index.json", "fulfilled_assets", fulfillmentState.FulfilledAssets, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "production/fulfilled-audio-index.json", "fulfilled_audio", fulfillmentState.FulfilledAudio, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "production/fulfilled-lua-index.json", "fulfilled_lua", fulfillmentState.FulfilledLua, files, cancellationToken).ConfigureAwait(false);
+        await WriteJsonFileAsync(outputDirectory, "production/invalid-outputs.json", "invalid_outputs", fulfillmentState.InvalidOutputs, files, cancellationToken).ConfigureAwait(false);
         await WriteJsonFileAsync(outputDirectory, "assets/asset-slots.json", "asset_slots", providerJobPlan.AssetSlots, files, cancellationToken).ConfigureAwait(false);
         await WriteJsonFileAsync(outputDirectory, "audio/audio-slots.json", "audio_slots", providerJobPlan.AudioSlots, files, cancellationToken).ConfigureAwait(false);
         await WriteJsonFileAsync(outputDirectory, "lua/module-slots.json", "lua_module_slots", providerJobPlan.LuaModuleSlots, files, cancellationToken).ConfigureAwait(false);
@@ -278,12 +295,14 @@ public sealed class UnityArchiveMaterializationService
             RelatedId = diagnostic.RelatedId
         }).ToList();
 
-        foreach (var pipelineDiagnostic in pipelineResult.Diagnostics)
+foreach (var pipelineDiagnostic in pipelineResult.Diagnostics)
         {
             diagnostics.Add(new UnityArchiveMaterializationDiagnostic
             {
                 Severity = pipelineDiagnostic.Severity,
-                Code = $"request.{pipelineDiagnostic.Code}",
+                Code = pipelineDiagnostic.Code.StartsWith("request.", StringComparison.Ordinal)
+                    ? pipelineDiagnostic.Code
+                    : $"request.{pipelineDiagnostic.Code}",
                 Message = pipelineDiagnostic.Message,
                 TargetId = pipelineDiagnostic.TargetId
             });
@@ -337,7 +356,36 @@ public sealed class UnityArchiveMaterializationService
             .ToList();
     }
 
-    private static UnityArchiveMaterializationReadiness MapReadiness(UnityArchiveExportReadiness readiness)
+    private static UnityArchiveMaterializationReadiness CombineMaterializationReadiness(
+         UnityArchiveExportReadiness dryRunReadiness,
+         UnityArchiveRequestReadiness pipelineReadiness,
+         UnityArchiveProviderPlanReadiness planReadiness)
+     {
+         if (dryRunReadiness is UnityArchiveExportReadiness.Invalid or UnityArchiveExportReadiness.MissingRequirements)
+         {
+             return MapReadiness(dryRunReadiness);
+         }
+
+         if (pipelineReadiness is UnityArchiveRequestReadiness.BlockedByErrors ||
+             planReadiness is UnityArchiveProviderPlanReadiness.BlockedByErrors)
+         {
+             return UnityArchiveMaterializationReadiness.Blocked;
+         }
+
+         if (pipelineReadiness is UnityArchiveRequestReadiness.ReadyWithWarnings ||
+             planReadiness is UnityArchiveProviderPlanReadiness.ReadyWithWarnings)
+         {
+             if (dryRunReadiness is UnityArchiveExportReadiness.BlockedByFutureModules)
+             {
+                 return UnityArchiveMaterializationReadiness.MaterializedMetadataOnly;
+             }
+             return UnityArchiveMaterializationReadiness.MaterializedWithWarnings;
+         }
+
+         return MapReadiness(dryRunReadiness);
+     }
+
+     private static UnityArchiveMaterializationReadiness MapReadiness(UnityArchiveExportReadiness readiness)
     {
         return readiness switch
         {

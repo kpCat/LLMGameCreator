@@ -1,5 +1,6 @@
 using System.Text.Json;
 using LLMGameCreator.Application.Composition;
+using LLMGameCreator.GamePackage;
 using Xunit;
 
 namespace LLMGameCreator.Tests.Application;
@@ -24,6 +25,11 @@ public sealed class UnityArchiveMaterializationTests
         "lua/module-slots.json",
         "production/fulfillment-plan.json",
         "production/readiness-report.json",
+        "production/fulfillment-state.json",
+        "production/fulfilled-assets-index.json",
+        "production/fulfilled-audio-index.json",
+        "production/fulfilled-lua-index.json",
+        "production/invalid-outputs.json",
         "providers/manual-import/jobs.json",
         "providers/comfyui/jobs.json",
         "providers/suno/jobs.json",
@@ -46,7 +52,7 @@ public sealed class UnityArchiveMaterializationTests
         var second = await service.MaterializeAsync(request);
         var secondContents = ReadArchiveContents(second.OutputDirectoryPath);
 
-        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedPlayableContract, first.Readiness);
+        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedWithWarnings, first.Readiness);
         Assert.Equal(RequiredFiles.OrderBy(path => path), first.MaterializedFiles.Select(file => file.RelativePath).OrderBy(path => path));
         Assert.Equal(firstContents, secondContents);
         Assert.All(RequiredFiles, relativePath => Assert.True(File.Exists(ArchivePath(first.OutputDirectoryPath, relativePath)), relativePath));
@@ -113,6 +119,68 @@ public sealed class UnityArchiveMaterializationTests
         Assert.Equal(UnityArchiveExportReadiness.MissingRequirements, result.DryRunResult.Plan.Readiness);
         Assert.Equal([UnityArchiveMaterializationService.ValidationFilePath], result.MaterializedFiles.Select(file => file.RelativePath));
         Assert.False(File.Exists(ArchivePath(result.OutputDirectoryPath, "manifest/unity-game-archive.json")));
+    }
+
+    [Fact]
+    public async Task UnityArchiveMaterializationProviderJobPlanErrorsBlockPlayableSuccess()
+    {
+        using var temp = new TempDirectory();
+        var presets = new UnityTargetContractPresetProvider();
+        var briefPresets = new GameDesignBriefPresetProvider();
+        Assert.True(briefPresets.TryGet(GameDesignBriefPresetProvider.TopDownGeneratedRpg, out var brief));
+        Assert.True(presets.TryGetTargetProfile(UnityTargetContractPresetProvider.GenericUnityPlayerTopDown, out var profile));
+
+        var dryRunService = new UnityArchiveExportDryRunService(
+            new UnityTargetContractValidator(),
+            new UnityArchiveExportPlanMarkdownRenderer());
+        var pipelineService = new UnityArchiveAssetAudioLuaRequestService();
+        var providerJobPlanService = new UnityArchiveProviderJobPlanService();
+        var materializationService = new UnityArchiveMaterializationService(dryRunService, null, pipelineService, providerJobPlanService);
+
+        var package = new GamePackageDefinition
+        {
+            Manifest = new LLMGameCreator.Domain.Definitions.GameManifest
+            {
+                PackageId = "game/provider-job-plan-error",
+                Title = "Provider Job Plan Error Test"
+            },
+            GeneratedContent = new GeneratedContentDefinition
+            {
+                Scenes = [new GeneratedSceneDefinition { SourceId = "scene/test", PackageMapId = "map/test", Title = "Test" }],
+                Npcs = [new GeneratedNpcDefinition { SourceId = "npc/test", Name = "Test", SceneId = "scene/test" }]
+            }
+        };
+
+        var request = new UnityArchiveMaterializationRequest
+        {
+            ProjectRootPath = temp.Path,
+            DesignBrief = brief,
+            TargetProfile = profile,
+            ArchiveManifest = presets.CreateTopDownGeneratedRpgArchive(),
+            RuntimeModules = presets.ListRuntimeModules(),
+            GamePackage = package
+        };
+
+        var result = await materializationService.MaterializeAsync(request);
+
+        Assert.NotEqual(UnityArchiveMaterializationReadiness.MaterializedPlayableContract, result.Readiness);
+        Assert.Contains(result.Diagnostics, d => d.Severity == UnityArchiveExportDiagnosticSeverity.Warning);
+    }
+
+    [Fact]
+    public async Task UnityArchiveMaterializationDoesNotDoublePrefixRequestDiagnostics()
+    {
+        using var temp = new TempDirectory();
+        var request = CreateCurrentRequest(temp.Path);
+
+        var dryRunService = new UnityArchiveExportDryRunService(
+            new UnityTargetContractValidator(),
+            new UnityArchiveExportPlanMarkdownRenderer());
+        var materializationService = new UnityArchiveMaterializationService(dryRunService);
+
+        var result = await materializationService.MaterializeAsync(request);
+
+        Assert.DoesNotContain(result.Diagnostics, d => d.Code.Contains("request.request."));
     }
 
     private static UnityArchiveMaterializationRequest CreateCurrentRequest(string projectRoot)

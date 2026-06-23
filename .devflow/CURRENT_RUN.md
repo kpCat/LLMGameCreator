@@ -1,45 +1,33 @@
-Task id: PRODUCT_SLICE_021_UNITY_ARCHIVE_PROVIDER_JOB_PLAN_V1
-Goal: convert Slice 020 request metadata into deterministic fulfillment slots and provider-specific non-executable job plans
+Task id: PRODUCT_SLICE_022_UNITY_ARCHIVE_FULFILLMENT_STATE_V1
+Goal: add fulfillment state scanner that checks expected output file existence and writes fulfillment state metadata
 
 Source docs/code read:
 - AGENTS.md, docs/CONTEXT_INDEX.md, docs/CURRENT_GENERATOR_STATE.md/json
-- docs/agent-tasks/NEXT_PRODUCT_SLICE/021_PROVIDER_JOB_PLAN.md
-- docs/PRODUCT_SLICE_021_PROVIDER_JOB_PLAN.md and docs/UNITY_ARCHIVE_PROVIDER_JOB_PLAN_SPEC.md
-- target Application/test csproj files
-- existing Unity archive request models/service/builders/diagnostics
-- existing Unity archive materialization models/service and focused tests
-- request-pipeline product smoke, smoke runner and smoke scenario docs
+- docs/agent-tasks/NEXT_PRODUCT_SLICE/022_PROVIDER_OUTPUT_INTAKE.md
+- UnityArchiveProviderJobPlanModels.cs, UnityArchiveMaterializationModels.cs, UnityArchiveMaterializationService.cs
+- existing fulfillment slot and request models/services
 
 Patterns applied:
-- Application-only metadata planning over the existing request-pipeline result
+- Application-only metadata scanning without provider execution
 - schemaVersion JSON envelopes, camelCase enum serialization and stable ordinal ordering
-- normalized archive-relative expected output paths with lexical safety validation
-- future providers remain warning-only and every provider job remains planned_not_executed
-- materialization writes metadata files even for empty slot/job arrays
+- path safety via UnityArchiveProviderJobPlanService.IsSafeExpectedOutputRelativePath
+- status: missing/available/invalid based on file existence and validity
+- materialization writes metadata files even for empty slot arrays
 
 Implemented:
-- UnityArchiveProviderJobPlan models for fulfillment plan, typed slots, provider batches/jobs, diagnostics and readiness
-- UnityArchiveProviderJobPlanService creates one slot per request and no job for provider none
-- provider jobs grouped into manual-import, comfyui, suno, local-audio and procedural batches
-- UnityArchiveMaterializationService writes ten new provider-plan metadata files
-- focused contract/materialization tests and unity-archive-provider-job-plan product smoke
-- existing unity-archive-request-pipeline smoke remains green
-
-Path safety:
-- expected outputs are relative, slash-normalized metadata paths only
-- rooted paths, backslashes, colon and traversal markers are rejected
-- asset/audio/Lua slots use .png/.wav/.lua extensions respectively
-- no expected output file is physically created
+- UnityArchiveFulfillmentState models: FulfillmentStateRequest, FulfillmentStateResult, FulfillmentStateReport, FulfilledAssetEntry, FulfilledAudioEntry, FulfilledLuaEntry, InvalidOutputEntry, FulfillmentStatus enum
+- UnityArchiveFulfillmentStateService scans expected output paths and checks physical file existence
+- Status logic: missing for absent files, available for valid non-empty files with correct extension, invalid for unsafe paths, wrong extensions, empty files or directory paths
+- UnityArchiveMaterializationService integration writes five fulfillment state files under production/
+- UnityArchiveFulfillmentStateTests for empty manifests, missing available invalid status, wrong extension, unsafe path diagnostics
 
 Checks run before state handoff:
-- UnityArchiveProviderJob filtered tests: passed, 5 tests
-- UnityArchiveRequestPipeline filtered tests: passed, 11 tests
-- UnityArchiveMaterialization filtered tests: passed, 5 tests
-- unity-archive-request-pipeline product smoke: passed
+- UnityArchiveFulfillmentState tests: passed, 7 tests
+- UnityArchiveProviderJobPlan tests: passed, 5 tests
+- UnityArchiveMaterialization tests: passed, 7 tests
+- unity-archive-fulfillment-state product smoke: passed
 - unity-archive-provider-job-plan product smoke: passed
-- ProductSmoke filtered tests: passed, 19 tests
-- check-devflow-state.ps1: passed, STOP_REVIEW preserved
-- check-all.ps1: passed, build 0 warnings/0 errors, 567 tests passed
+- ProductSmoke filtered tests: passed (multiple scenarios)
 
 Forbidden scope preserved:
 - no Unity project or implementation

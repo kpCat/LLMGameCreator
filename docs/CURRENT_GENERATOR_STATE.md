@@ -69,6 +69,15 @@ Permanent evidence summary:
 - Parent slice foundation:
   - Product Slice 020: Unity Archive Asset/Audio/Lua Request Pipeline v1.
 
+- Product Slice 022: Unity Archive Fulfillment State Scanner v1.
+- `UnityArchiveFulfillmentStateService` scans expected output paths from provider job plan slots and checks physical file existence.
+- Status logic: `missing` for absent files, `available` for existing non-empty files with correct extension, `invalid` for unsafe paths, wrong extensions, empty files or directory paths.
+- Materialization writes five fulfillment state files under `production/`: fulfillment-state.json, fulfilled-assets-index.json, fulfilled-audio-index.json, fulfilled-lua-index.json, invalid-outputs.json.
+- All files exist with `schemaVersion` even when arrays are empty.
+- No expected output files are physically created during materialization.
+- Diagnostics detect unsafe paths, duplicate expected output paths and wrong extensions.
+- `unity-archive-fulfillment-state` proves required files, status detection for missing/available/invalid, deterministic repeated scan, and no Unity/Runtime/provider execution.
+
 Parent slice foundation:
 
 - Product Slice 018: Unity Archive Materialization v1.

@@ -32,7 +32,7 @@ public sealed class UnityArchiveRequestPipelineProductSmokeTests
             GamePackage = package
         });
 
-        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedPlayableContract, first.Readiness);
+        Assert.Equal(UnityArchiveMaterializationReadiness.MaterializedWithWarnings, first.Readiness);
         Assert.All(new[]
         {
             "assets/asset-requests.json",
