@@ -51,6 +51,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md` | Completed Product Slice 032 task: Generated Package MVP. |
 | `docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md` | Completed Product Slice 033 task: Visible Generated Playable Preview. |
 | `docs/NEXT_PRODUCT_SLICE_034_ONE_CLICK_GENERATED_PREVIEW_WORKFLOW_TASK.md` | Completed Product Slice 034 task: One-Click Generated Preview Workflow. |
+| `docs/NEXT_PRODUCT_SLICE_035_ACTIVE_GOAL_PROGRESS_TASK.md` | Completed Product Slice 035 task: Active Goal + Quest Progress Loop. |
+| `docs/NEXT_PRODUCT_SLICE_036_ENCOUNTER_REWARD_COMPLETION_TASK.md` | Completed Product Slice 036 task: Encounter/Obstacle + Reward/Completion Loop. |
+| `docs/NEXT_PRODUCT_SLICE_037_MICROGAME_ACCEPTANCE_POLISH_TASK.md` | Completed Product Slice 037 task: Microgame Acceptance + Playability Polish. |
 | `docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md` | Manual user verification checklist for the generated playable preview. |
 | `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` | LLM minimization policy and deterministic combiner rules. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Full game generation meaning, ownership boundaries and long-term target architecture. |
@@ -69,12 +72,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-Manual One-Click Preview Verification
+manual_microgame_loop_verification
 ```
 
 Allowed next sequence:
 
-1. Manual One-Click Preview Verification: user launches WinForms, presses Generate Preview on Runtime Preview, verifies the package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.
+1. Manual Microgame Loop Verification.
 
 Kill criterion:
 

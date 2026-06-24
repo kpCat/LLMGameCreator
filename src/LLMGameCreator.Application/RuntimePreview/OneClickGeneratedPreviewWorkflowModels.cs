@@ -53,6 +53,10 @@ public sealed record OneClickGeneratedPreviewWorkflowPaths
     public string VisiblePreviewReportJsonPath { get; init; } = string.Empty;
     public string VisiblePreviewReportMarkdownPath { get; init; } = string.Empty;
     public string ManualVerificationMarkdownPath { get; init; } = string.Empty;
+    public string MicrogameAcceptanceOutputDirectoryPath { get; init; } = string.Empty;
+    public string MicrogameAcceptanceSnapshotJsonPath { get; init; } = string.Empty;
+    public string MicrogameAcceptanceReportMarkdownPath { get; init; } = string.Empty;
+    public string MicrogameManualVerificationMarkdownPath { get; init; } = string.Empty;
 }
 
 public sealed record OneClickGeneratedPreviewWorkflowDiagnostic

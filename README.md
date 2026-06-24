@@ -64,10 +64,10 @@ Current source-of-truth handoff:
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-Product Slice 034 completed the One-Click Generated Preview Workflow: Runtime Preview now exposes `Generate Preview`, which runs the deterministic Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop, Slice 032 Generated Package MVP and Slice 033 Visible Generated Playable Preview path, writes the sidecars, and loads the generated package as the current package.
+Goal 001 reached Product Slice 037: Runtime Preview now exposes a headless-proven generated microgame loop through the existing one-click generated preview path. The deterministic path runs Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop, Slice 032 Generated Package MVP, Slice 033 Visible Generated Playable Preview, Slice 035 active goal/progress projection and Slice 036 challenge/reward/completion projection, then writes the S037 acceptance snapshot under `.llmgc/procedural/generated-microgame-loop/`.
 
 Next practical step:
-Manual One-Click Preview Verification: launch the WinForms app, open Runtime Preview, press `Generate Preview`, then confirm the generated package loads automatically and Runtime Preview starts/works before another Codex feature slice is selected.
+Manual Microgame Loop Verification: launch the WinForms app, open Runtime Preview, press `Generate Preview`, press `Start`, then manually confirm the active goal, objective, interaction/challenge, reward and completion state are readable before another Codex feature slice is selected.
 
 `GamePackage` — runtime source of truth для готовой игры.
 

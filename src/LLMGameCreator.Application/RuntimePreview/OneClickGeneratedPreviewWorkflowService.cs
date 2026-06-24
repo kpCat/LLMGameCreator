@@ -10,6 +10,7 @@ public sealed class OneClickGeneratedPreviewWorkflowService
     private readonly FormulaEffectActionRegistryService _registryService;
     private readonly TinyGeneratedRuntimeLoopService _tinyLoopService;
     private readonly GeneratedPackageMvpService _packageMvpService;
+    private readonly GeneratedMicrogameAcceptanceService _acceptanceService;
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly SemaphoreSlim _runGate = new(1, 1);
 
@@ -19,6 +20,7 @@ public sealed class OneClickGeneratedPreviewWorkflowService
         FormulaEffectActionRegistryService? registryService = null,
         TinyGeneratedRuntimeLoopService? tinyLoopService = null,
         GeneratedPackageMvpService? packageMvpService = null,
+        GeneratedMicrogameAcceptanceService? acceptanceService = null,
         ICurrentGamePackageService? currentGamePackageService = null)
     {
         _visiblePreviewService = visiblePreviewService ?? new VisibleGeneratedPlayablePreviewService();
@@ -26,6 +28,7 @@ public sealed class OneClickGeneratedPreviewWorkflowService
         _registryService = registryService ?? new FormulaEffectActionRegistryService();
         _tinyLoopService = tinyLoopService ?? new TinyGeneratedRuntimeLoopService();
         _packageMvpService = packageMvpService ?? new GeneratedPackageMvpService();
+        _acceptanceService = acceptanceService ?? new GeneratedMicrogameAcceptanceService();
         _currentGamePackageService = currentGamePackageService;
     }
 
@@ -72,6 +75,10 @@ public sealed class OneClickGeneratedPreviewWorkflowService
             var visibleWrite = await _visiblePreviewService
                 .WriteAsync(projectRoot, visibleResult, cancellationToken)
                 .ConfigureAwait(false);
+            var acceptanceResult = _acceptanceService.Build(visibleResult);
+            var acceptanceWrite = await _acceptanceService
+                .WriteAsync(projectRoot, acceptanceResult, cancellationToken)
+                .ConfigureAwait(false);
 
             var currentReplaced = false;
             if (request.ReplaceCurrentPackage && _currentGamePackageService != null)
@@ -107,7 +114,11 @@ public sealed class OneClickGeneratedPreviewWorkflowService
                     VisiblePreviewSnapshotJsonPath = visibleWrite.SnapshotJsonPath,
                     VisiblePreviewReportJsonPath = visibleWrite.ReportJsonPath,
                     VisiblePreviewReportMarkdownPath = visibleWrite.ReportMarkdownPath,
-                    ManualVerificationMarkdownPath = visibleWrite.ManualVerificationMarkdownPath
+                    ManualVerificationMarkdownPath = visibleWrite.ManualVerificationMarkdownPath,
+                    MicrogameAcceptanceOutputDirectoryPath = acceptanceWrite.OutputDirectoryPath,
+                    MicrogameAcceptanceSnapshotJsonPath = acceptanceWrite.SnapshotJsonPath,
+                    MicrogameAcceptanceReportMarkdownPath = acceptanceWrite.ReportMarkdownPath,
+                    MicrogameManualVerificationMarkdownPath = acceptanceWrite.ManualVerificationMarkdownPath
                 },
                 StableSummary = BuildStableSummary(visibleResult),
                 CurrentPackageReplaced = currentReplaced,

@@ -1,12 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 034 Hotfix Generate Preview UI Thread Boundary  
+Updated by: Product Slice 037 Microgame Acceptance + Playability Polish  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -32,7 +32,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Manual One-Click Preview Verification: user launches WinForms, presses Generate Preview on Runtime Preview, verifies generated package loading, Runtime Preview start/behavior, and generated-content readability before Codex receives another feature slice.
+1. Manual Microgame Loop Verification.
 
 Kill criterion:
 
@@ -60,15 +60,101 @@ Observed result:
 - generated interaction/dialogue/item-cache behavior was visible;
 - project status showed a generated MVP package.
 
+## Manual S034 One-Click Verification
+
+Manual one-click preview verification after the S034 hotfix is recorded as passed.
+
+State marker:
+
+```text
+manual_one_click_preview_verification: passed
+```
+
+Evidence source: user-reported manual verification after the S034 hotfix.
+
+Observed result:
+
+- Runtime Preview `Generate Preview` no longer throws cross-thread exception;
+- generated package loads automatically;
+- `Start` runs runtime preview;
+- generated map is visible;
+- player movement works;
+- generated interaction/dialogue/item-cache behavior is visible.
+
 ## Recommended Next Work
 
 Recommended next work item:
 
 ```text
-manual_one_click_preview_verification
+manual_microgame_loop_verification
 ```
 
-Manual One-Click Preview Verification: user launches WinForms, presses the new Runtime Preview `Generate Preview` action, verifies the package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.
+Goal 001 first 5-minute generated microgame loop has reached the Codex headless acceptance boundary. The next step is manual Runtime Preview verification, not another Codex feature slice.
+
+## Product Slice 037 Summary
+
+Product Slice 037: Microgame Acceptance + Playability Polish.
+
+Completed behavior:
+
+- added an Application-layer generated microgame acceptance service;
+- reused the existing one-click generated preview workflow, S035 active goal projection and S036 challenge/reward/completion projection;
+- wrote deterministic `.llmgc/procedural/generated-microgame-loop/generated-microgame-loop-snapshot.json`;
+- wrote deterministic `.llmgc/procedural/generated-microgame-loop/generated-microgame-loop-report.md`;
+- wrote deterministic `.llmgc/procedural/generated-microgame-loop/manual-microgame-loop-verification.md`;
+- added the `generated-microgame-loop` product smoke scenario;
+- updated manual verification guidance so the next state is `manual_microgame_loop_verification`;
+- did not add provider execution, LLM calls, Lua execution, Unity work, media generation, broad GamePackage schema changes or public runtime command/state changes.
+
+Recorded checks from S037:
+
+- `GeneratedMicrogameAcceptance` filtered tests: 2/2 passed.
+- `generated-microgame-loop` product smoke: 1/1 passed.
+- `CurrentGeneratorStateDocsTests` filtered tests after S037 handoff: 10/10 passed.
+- `check-all.ps1`: 691/691 tests passed, build 0 warnings / 0 errors.
+
+## Product Slice 036 Summary
+
+Product Slice 036: Encounter/Obstacle + Reward/Completion Loop.
+
+Completed behavior:
+
+- added an Application-layer generated microgame challenge preview service;
+- reused S035 active-goal projection and existing generated package encounters/items instead of changing GamePackage or runtime command contracts;
+- extended visible generated preview snapshots/reports with challenge, reward and completion evidence;
+- Runtime Preview now shows the generated challenge, reward and completion status after generated interaction events;
+- added the `generated-microgame-challenge-loop` product smoke scenario;
+- documented the limitation through diagnostics: S036 reward/completion evidence is deterministic preview-level projection, not a broad runtime-state redesign;
+- did not add provider execution, LLM calls, Lua execution, Unity work, media generation, broad GamePackage schema changes or public runtime command/state changes.
+
+Recorded checks from S036:
+
+- `GeneratedMicrogameChallenge` filtered tests: 3/3 passed.
+- `generated-microgame-challenge-loop` product smoke: 1/1 passed.
+- `CurrentGeneratorStateDocsTests` filtered tests after S036 handoff: 10/10 passed.
+- `check-all.ps1`: 688/688 tests passed, build 0 warnings / 0 errors.
+
+## Product Slice 035 Summary
+
+Product Slice 035: Active Goal + Quest Progress Loop.
+
+Completed behavior:
+
+- recorded S034 manual one-click preview verification as passed before implementing S035;
+- added an Application-layer generated microgame active-goal preview service;
+- reused `GeneratedQuestDialoguePreviewService` for preview-level quest/progress state instead of changing GamePackage or runtime command contracts;
+- extended visible generated preview snapshots/reports with active goal, related generated NPC/item/encounter and interaction progress evidence;
+- Runtime Preview now starts a visible active generated goal when the runtime starts and advances visible preview progress after generated interaction events;
+- added the `generated-microgame-goal-loop` product smoke scenario;
+- did not add provider execution, LLM calls, Lua execution, Unity work, media generation, broad GamePackage schema changes or public runtime command/state changes.
+
+Recorded checks from S035:
+
+- `CurrentGeneratorStateDocsTests` filtered tests after S034 manual gate: 10/10 passed.
+- `GeneratedMicrogameGoal` filtered tests: 3/3 passed.
+- `generated-microgame-goal-loop` product smoke: 1/1 passed.
+- `CurrentGeneratorStateDocsTests` filtered tests after S035 handoff: 10/10 passed.
+- `check-all.ps1`: 685/685 tests passed, build 0 warnings / 0 errors.
 
 ## Product Slice 034 Summary
 
@@ -324,8 +410,8 @@ Update this file pair after every accepted product slice.
 
 Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 
-After Product Slice 034 completes, this state should recommend:
+After Product Slice 037 completes, this state should recommend:
 
 ```text
-manual_one_click_preview_verification
+manual_microgame_loop_verification
 ```

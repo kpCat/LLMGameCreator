@@ -141,6 +141,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<IGameRuntime>()), Reuse.Singleton);
         _container.RegisterDelegate<VisibleGeneratedPlayablePreviewService>(resolver => new VisibleGeneratedPlayablePreviewService(
             runtimeAdapter: resolver.Resolve<IVisibleGeneratedPlayableRuntimeAdapter>()), Reuse.Singleton);
+        _container.Register<GeneratedMicrogameGoalPreviewService>(Reuse.Singleton);
+        _container.Register<GeneratedMicrogameChallengePreviewService>(Reuse.Singleton);
         _container.RegisterDelegate<OneClickGeneratedPreviewWorkflowService>(resolver => new OneClickGeneratedPreviewWorkflowService(
             visiblePreviewService: resolver.Resolve<VisibleGeneratedPlayablePreviewService>(),
             currentGamePackageService: resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
@@ -202,6 +204,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<GeneratedPackageRuntimePreviewService>(),
             resolver.Resolve<GeneratedContentInteractionPreviewService>(),
             resolver.Resolve<GeneratedQuestDialoguePreviewService>(),
+            resolver.Resolve<GeneratedMicrogameGoalPreviewService>(),
+            resolver.Resolve<GeneratedMicrogameChallengePreviewService>(),
             resolver.Resolve<GeneratedMapPlacementPreviewService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<RuntimeSimulatorPageControl>(resolver => new RuntimeSimulatorPageControl(

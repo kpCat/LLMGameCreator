@@ -46,10 +46,32 @@ public sealed class VisibleGeneratedPlayablePreviewMarkdownRenderer
         lines.AddRange(snapshot.RuntimeAttempt.CommandAttempts.Count == 0
             ? ["- None"]
             : snapshot.RuntimeAttempt.CommandAttempts.Select(command =>
-                $"- `{command.CommandId}` `{command.CommandType}` success=`{command.Succeeded.ToString().ToLowerInvariant()}` map=`{command.CurrentMapId}` pos=`{command.PlayerPosition.X},{command.PlayerPosition.Y}` events=`{(command.EventTypes.Count == 0 ? "none" : string.Join(",", command.EventTypes))}`"));
+                $"- `{command.CommandId}` `{command.CommandType}` success=`{command.Succeeded.ToString().ToLowerInvariant()}` map=`{command.CurrentMapId}` pos=`{command.PlayerPosition.X},{command.PlayerPosition.Y}` events=`{(command.EventTypes.Count == 0 ? "none" : string.Join(",", command.EventTypes))}` targets=`{JoinIds(command.EventTargets)}`"));
 
         lines.AddRange(
         [
+            string.Empty,
+            "## Active Goal",
+            string.Empty,
+            $"- Active goal selected: `{snapshot.MicrogameGoal.ActiveGoalSelected.ToString().ToLowerInvariant()}`",
+            $"- Quest: `{FirstNonEmpty(snapshot.MicrogameGoal.ActiveQuestTitle, snapshot.MicrogameGoal.ActiveQuestId, "none")}`",
+            $"- Current objective: `{FirstNonEmpty(snapshot.MicrogameGoal.CurrentObjectiveText, "none")}`",
+            $"- Progress: `{snapshot.MicrogameGoal.CompletedStepCount}/{snapshot.MicrogameGoal.StepCount}` `{snapshot.MicrogameGoal.ProgressStatus}`",
+            $"- Advanced by interaction: `{snapshot.MicrogameGoal.ProgressAdvancedByInteraction.ToString().ToLowerInvariant()}`",
+            $"- Related NPC: `{FirstNonEmpty(snapshot.MicrogameGoal.Related.NpcTitle, snapshot.MicrogameGoal.Related.NpcId, "none")}`",
+            $"- Related item: `{FirstNonEmpty(snapshot.MicrogameGoal.Related.ItemTitle, snapshot.MicrogameGoal.Related.ItemId, "none")}`",
+            $"- Related encounter: `{FirstNonEmpty(snapshot.MicrogameGoal.Related.EncounterTitle, snapshot.MicrogameGoal.Related.EncounterId, "none")}`",
+            string.Empty,
+            "## Challenge",
+            string.Empty,
+            $"- Challenge selected: `{snapshot.MicrogameChallenge.ChallengeSelected.ToString().ToLowerInvariant()}`",
+            $"- Encounter: `{FirstNonEmpty(snapshot.MicrogameChallenge.EncounterTitle, snapshot.MicrogameChallenge.EncounterId, "none")}`",
+            $"- Resolved: `{snapshot.MicrogameChallenge.Resolved.ToString().ToLowerInvariant()}`",
+            $"- Reward visible: `{snapshot.MicrogameChallenge.RewardVisible.ToString().ToLowerInvariant()}`",
+            $"- Reward: `{FirstNonEmpty(snapshot.MicrogameChallenge.RewardTitle, snapshot.MicrogameChallenge.RewardItemId, "none")}`",
+            $"- Completion visible: `{snapshot.MicrogameChallenge.CompletionVisible.ToString().ToLowerInvariant()}`",
+            $"- Completion status: `{FirstNonEmpty(snapshot.MicrogameChallenge.CompletionStatus, "none")}`",
+            $"- Resolve action: `{FirstNonEmpty(snapshot.MicrogameChallenge.ResolveAction, "none")}`",
             string.Empty,
             "## Projection Counts",
             string.Empty,
@@ -58,6 +80,11 @@ public sealed class VisibleGeneratedPlayablePreviewMarkdownRenderer
             $"- Items: `{snapshot.Counts.Items}`",
             $"- Encounters: `{snapshot.Counts.Encounters}`",
             $"- Quests: `{snapshot.Counts.Quests}`",
+            $"- Active goals: `{snapshot.Counts.ActiveGoals}`",
+            $"- Active goal progress: `{snapshot.Counts.ActiveGoalCompletedSteps}/{snapshot.Counts.ActiveGoalTotalSteps}`",
+            $"- Resolved challenges: `{snapshot.Counts.ResolvedChallenges}`",
+            $"- Visible rewards: `{snapshot.Counts.VisibleRewards}`",
+            $"- Visible completions: `{snapshot.Counts.VisibleCompletions}`",
             $"- Mechanics: `{snapshot.Counts.Mechanics}`",
             $"- Provenance records: `{snapshot.Counts.ProvenanceRecords}`",
             string.Empty,
@@ -116,6 +143,11 @@ public sealed class VisibleGeneratedPlayablePreviewMarkdownRenderer
             $"- Package title: `{snapshot.PackageTitle}`",
             $"- Start map id: `{snapshot.StartMapId}`",
             $"- Current map id: `{snapshot.CurrentMapId}`",
+            $"- Active goal: `{FirstNonEmpty(snapshot.MicrogameGoal.ActiveQuestTitle, snapshot.MicrogameGoal.ActiveQuestId, "none")}`",
+            $"- Current objective: `{FirstNonEmpty(snapshot.MicrogameGoal.CurrentObjectiveText, "none")}`",
+            $"- Goal progress: `{snapshot.MicrogameGoal.CompletedStepCount}/{snapshot.MicrogameGoal.StepCount}`",
+            $"- Challenge: `{FirstNonEmpty(snapshot.MicrogameChallenge.EncounterTitle, snapshot.MicrogameChallenge.EncounterId, "none")}`",
+            $"- Reward/completion: `{snapshot.MicrogameChallenge.RewardVisible.ToString().ToLowerInvariant()}/{snapshot.MicrogameChallenge.CompletionVisible.ToString().ToLowerInvariant()}`",
             $"- Representative region ids: `{JoinIds(snapshot.RepresentativeGeneratedIds.RegionIds)}`",
             $"- Representative quest ids: `{JoinIds(snapshot.RepresentativeGeneratedIds.QuestIds)}`",
             string.Empty,
@@ -126,4 +158,7 @@ public sealed class VisibleGeneratedPlayablePreviewMarkdownRenderer
     }
 
     private static string JoinIds(IReadOnlyList<string> ids) => ids.Count == 0 ? "none" : string.Join(",", ids);
+
+    private static string FirstNonEmpty(params string?[] values) =>
+        values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value))?.Trim() ?? string.Empty;
 }

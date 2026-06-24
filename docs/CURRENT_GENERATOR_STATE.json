@@ -3,21 +3,21 @@
   "state_id": "current_generator_state",
   "updated_at_utc": "2026-06-25T00:00:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Post-S034 one-click generated preview workflow awaiting manual verification",
-  "gate_status": "m4_1_passed_s034_completed_manual_one_click_preview_verification_pending",
+  "current_phase_title": "Goal 001 Product Slice 037 generated microgame acceptance completed",
+  "gate_status": "m4_1_passed_s037_completed_manual_microgame_loop_verification_required",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_034_one_click_generated_preview_workflow",
+  "last_completed_product_slice_id": "product_slice_037_microgame_acceptance_playability_polish",
   "active_manual_gate": "Infrastructure-only next work is frozen unless explicitly approved by the user or directly required to unblock the generated playable/simulatable loop.",
-  "current_user_action": "Run Manual One-Click Preview Verification before selecting another Codex feature slice.",
-  "recommended_next_decision": "Manual One-Click Preview Verification: launch WinForms, press Generate Preview on Runtime Preview, verify the generated package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.",
+  "current_user_action": "Run manual Runtime Preview verification for the generated microgame loop.",
+  "recommended_next_decision": "Goal 001 first 5-minute generated microgame loop reached the Codex headless acceptance boundary. Next work is manual_microgame_loop_verification; do not invent S038.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "manual_one_click_preview_verification"
+      "manual_microgame_loop_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -60,16 +60,16 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_034_one_click_generated_preview_workflow",
-    "title": "One-Click Generated Preview Workflow",
-    "completed_at_utc": "2026-06-24T00:00:00Z",
-    "summary": "Added an Application-layer one-click generated preview workflow that reuses the S029-S033 visible preview pipeline, writes generated plan/rule-pack/tiny-loop/package/visible-preview sidecars, loads the generated MVP package into ICurrentGamePackageService, exposes a Runtime Preview Generate Preview action with visible diagnostics, and improves generated-content readability without adding provider, LLM, Lua, Unity or media execution.",
-    "scenario_id": "one-click-generated-preview-workflow",
+    "slice_id": "product_slice_037_microgame_acceptance_playability_polish",
+    "title": "Microgame Acceptance + Playability Polish",
+    "completed_at_utc": "2026-06-25T00:00:00Z",
+    "summary": "Added deterministic generated microgame acceptance sidecars on top of the existing one-click visible preview path, S035 active goal projection and S036 challenge/reward/completion projection. The slice writes generated-microgame-loop snapshot/report/manual verification docs without changing GamePackage or runtime command contracts.",
+    "scenario_id": "generated-microgame-loop",
     "checks": [
-      "CurrentGeneratorStateDocsTests filtered tests: passed",
-      "OneClickGeneratedPreviewWorkflow filtered tests: 3/3 passed",
-      "one-click-generated-preview-workflow product smoke: 1/1 passed",
-      "check-all.ps1: 681/681 tests passed, build 0 warnings / 0 errors"
+      "GeneratedMicrogameAcceptance filtered tests: 2/2 passed",
+      "generated-microgame-loop product smoke: 1/1 passed",
+      "CurrentGeneratorStateDocsTests filtered tests after S037 handoff: 10/10 passed",
+      "check-all.ps1: 691/691 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "last_completed_hotfix": {
@@ -79,6 +79,19 @@
     "reason": "Manual one-click preview verification caught a WinForms cross-thread exception because service-side current-package replacement could raise CurrentChanged from a background continuation.",
     "summary": "Runtime Preview now calls the one-click workflow with ReplaceCurrentPackage=false, captures project root before background work, then replaces the current package from the WinForms page path after the awaited workflow returns. The Application workflow service still supports service-side replacement for headless callers and reports caller-deferred replacement distinctly.",
     "next_action": "manual_one_click_preview_verification"
+  },
+  "manual_one_click_preview_verification": {
+    "status": "passed",
+    "evidence_source": "user_report_after_s034_hotfix",
+    "observed_result": [
+      "Runtime Preview Generate Preview no longer throws cross-thread exception",
+      "generated package loads automatically",
+      "Start runs runtime preview",
+      "generated map is visible",
+      "player movement works",
+      "generated interaction/dialogue/item-cache behavior is visible"
+    ],
+    "next_action": "first_5_minute_generated_microgame_loop"
   },
   "manual_user_preview_verification": {
     "status": "passed",
@@ -94,7 +107,7 @@
     ]
   },
   "allowed_next_codex_task_types": [
-    "manual_one_click_preview_verification"
+    "manual_microgame_loop_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -115,11 +128,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "manual_one_click_preview_verification",
-  "recommended_next_work_item_title": "Manual One-Click Preview Verification: user launches WinForms, presses the new Runtime Preview Generate Preview action, verifies the package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.",
+  "recommended_next_work_item": "manual_microgame_loop_verification",
+  "recommended_next_work_item_title": "Manual Microgame Loop Verification.",
   "recommended_next_task_file": "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
   "candidate_product_vertical_slices": [
-    "Manual One-Click Preview Verification"
+    "Manual Microgame Loop Verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -131,6 +144,9 @@
     "docs/NEXT_PRODUCT_SLICE_031_TINY_GENERATED_RUNTIME_LOOP_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_035_ACTIVE_GOAL_PROGRESS_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_036_ENCOUNTER_REWARD_COMPLETION_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_037_MICROGAME_ACCEPTANCE_POLISH_TASK.md",
     "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
     "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
     "docs/FULL_GAME_GENERATION_MASTER_PLAN.md",
@@ -162,7 +178,10 @@
     "Tiny Generated Runtime Loop state/report sidecars",
     "Generated Package MVP package/report/runtime-bootstrap sidecars",
     "Visible Generated Playable Preview snapshot/report/manual-verification sidecars",
-    "One-click generated preview workflow in Runtime Preview"
+    "One-click generated preview workflow in Runtime Preview",
+    "Generated microgame active goal and preview-level quest progress loop",
+    "Generated microgame challenge reward and preview-level completion loop",
+    "Generated microgame loop acceptance snapshot/report/manual-verification sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice or accepted S034 hotfix; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 034 and its UI-thread hotfix recommend manual_one_click_preview_verification."
+  "state_update_rule": "Update this file pair after every accepted product slice or accepted S034 hotfix; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 037 recommend manual_microgame_loop_verification and do not invent S038."
 }

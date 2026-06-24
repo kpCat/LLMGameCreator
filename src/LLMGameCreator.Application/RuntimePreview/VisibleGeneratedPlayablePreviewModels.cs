@@ -45,6 +45,8 @@ public sealed record VisibleGeneratedPlayablePreviewSnapshot
     public string CurrentMapId { get; init; } = string.Empty;
     public VisibleGeneratedPlayableRuntimeAttempt RuntimeAttempt { get; init; } = new();
     public GeneratedPackageRuntimePreviewModel Projection { get; init; } = new();
+    public GeneratedMicrogameGoalPreviewModel MicrogameGoal { get; init; } = new();
+    public GeneratedMicrogameChallengePreviewModel MicrogameChallenge { get; init; } = new();
     public VisibleGeneratedPlayablePreviewCounts Counts { get; init; } = new();
     public VisibleGeneratedPlayablePreviewRepresentativeIds RepresentativeGeneratedIds { get; init; } = new();
     public IReadOnlyList<VisibleGeneratedPlayablePreviewDiagnostic> Diagnostics { get; init; } = Array.Empty<VisibleGeneratedPlayablePreviewDiagnostic>();
@@ -58,6 +60,11 @@ public sealed record VisibleGeneratedPlayablePreviewReport
     public bool RuntimeStartSucceeded { get; init; }
     public bool RuntimeCommandAttempted { get; init; }
     public bool RuntimeCommandSucceeded { get; init; }
+    public bool ActiveGoalSelected { get; init; }
+    public bool GoalProgressAdvanced { get; init; }
+    public bool ChallengeResolved { get; init; }
+    public bool RewardVisible { get; init; }
+    public bool CompletionVisible { get; init; }
     public int DiagnosticCount { get; init; }
     public VisibleGeneratedPlayablePreviewSourceHashes SourceHashes { get; init; } = new();
     public IReadOnlyList<VisibleGeneratedPlayablePreviewDiagnostic> Diagnostics { get; init; } = Array.Empty<VisibleGeneratedPlayablePreviewDiagnostic>();
@@ -82,6 +89,12 @@ public sealed record VisibleGeneratedPlayablePreviewCounts
     public int Items { get; init; }
     public int Encounters { get; init; }
     public int Quests { get; init; }
+    public int ActiveGoals { get; init; }
+    public int ActiveGoalCompletedSteps { get; init; }
+    public int ActiveGoalTotalSteps { get; init; }
+    public int ResolvedChallenges { get; init; }
+    public int VisibleRewards { get; init; }
+    public int VisibleCompletions { get; init; }
     public int Mechanics { get; init; }
     public int ProvenanceRecords { get; init; }
 }
@@ -118,6 +131,8 @@ public sealed record VisibleGeneratedPlayableRuntimeCommandAttempt
     public string CurrentMapId { get; init; } = string.Empty;
     public VisibleGeneratedPlayablePosition PlayerPosition { get; init; } = new();
     public IReadOnlyList<string> EventTypes { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> EventTargets { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> EventMessages { get; init; } = Array.Empty<string>();
 }
 
 public sealed record VisibleGeneratedPlayablePosition

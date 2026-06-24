@@ -40,7 +40,9 @@ function Write-ProductSmokeSummary {
         Join-Path $PackageOutputDir ".llmgc\procedural\tiny-runtime-loop-state.json"
     } elseif ($Scenario -eq "generated-package-mvp") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-package-mvp\package.json"
-    } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow") {
+    } elseif ($Scenario -eq "generated-microgame-loop") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-loop\generated-microgame-loop-snapshot.json"
+    } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow" -or $Scenario -eq "generated-microgame-goal-loop" -or $Scenario -eq "generated-microgame-challenge-loop") {
         Join-Path $PackageOutputDir ".llmgc\procedural\visible-generated-playable-preview\visible-generated-playable-preview-snapshot.json"
     } else {
         Join-Path $PackageOutputDir "package.json"
@@ -181,6 +183,15 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "one-click-generated-preview-workflow") {
         $TestFilter = "FullyQualifiedName~OneClickGeneratedPreviewWorkflowProductSmoke"
+    }
+    elseif ($Scenario -eq "generated-microgame-goal-loop") {
+        $TestFilter = "FullyQualifiedName~GeneratedMicrogameGoalLoopProductSmoke"
+    }
+    elseif ($Scenario -eq "generated-microgame-challenge-loop") {
+        $TestFilter = "FullyQualifiedName~GeneratedMicrogameChallengeLoopProductSmoke"
+    }
+    elseif ($Scenario -eq "generated-microgame-loop") {
+        $TestFilter = "FullyQualifiedName~GeneratedMicrogameLoopProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

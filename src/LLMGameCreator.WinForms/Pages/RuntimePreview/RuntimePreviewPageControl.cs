@@ -17,8 +17,11 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private readonly GeneratedPackageRuntimePreviewService _previewService;
     private readonly GeneratedContentInteractionPreviewService _interactionService;
     private readonly GeneratedQuestDialoguePreviewService _questDialoguePreviewService;
+    private readonly GeneratedMicrogameGoalPreviewService _microgameGoalPreviewService;
+    private readonly GeneratedMicrogameChallengePreviewService _microgameChallengePreviewService;
     private readonly GeneratedMapPlacementPreviewService _mapPlacementPreviewService;
     private GeneratedContentInteractionCatalog _interactionCatalog = new();
+    private GeneratedMicrogameChallengePreviewModel _microgameChallengeModel = new();
     private GeneratedMapPlacementPreviewModel _mapPlacementModel = new();
     private GameState? _state;
     private bool _splitterInitialized;
@@ -31,6 +34,8 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _generatePreviewWorkflowService = new OneClickGeneratedPreviewWorkflowService();
         _interactionService = new GeneratedContentInteractionPreviewService();
         _questDialoguePreviewService = new GeneratedQuestDialoguePreviewService();
+        _microgameGoalPreviewService = new GeneratedMicrogameGoalPreviewService();
+        _microgameChallengePreviewService = new GeneratedMicrogameChallengePreviewService();
         _mapPlacementPreviewService = new GeneratedMapPlacementPreviewService();
         InitializeComponent();
         ConfigureSplitSafety();
@@ -45,6 +50,8 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         GeneratedPackageRuntimePreviewService previewService,
         GeneratedContentInteractionPreviewService interactionService,
         GeneratedQuestDialoguePreviewService questDialoguePreviewService,
+        GeneratedMicrogameGoalPreviewService microgameGoalPreviewService,
+        GeneratedMicrogameChallengePreviewService microgameChallengePreviewService,
         GeneratedMapPlacementPreviewService mapPlacementPreviewService)
     {
         _currentGamePackageService = currentGamePackageService;
@@ -53,6 +60,8 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _previewService = previewService;
         _interactionService = interactionService;
         _questDialoguePreviewService = questDialoguePreviewService;
+        _microgameGoalPreviewService = microgameGoalPreviewService;
+        _microgameChallengePreviewService = microgameChallengePreviewService;
         _mapPlacementPreviewService = mapPlacementPreviewService;
         InitializeComponent();
         ConfigureSplitSafety();
@@ -85,6 +94,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         var result = _runtime.Start(package);
         _state = result.State;
         _questDialoguePreviewService.StartSession(package);
+        _microgameChallengeModel = new GeneratedMicrogameChallengePreviewModel();
         ApplyResult(package, result);
         AppendGeneratedStartSummary(package, result.State);
     }
@@ -155,6 +165,20 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
         var result = _runtime.Execute(package, _state, command);
         _state = result.State;
+        if (command.Type == PlayerCommandType.Interact && result.Events.Any(item => item.Type == RuntimeEventType.InteractionTriggered))
+        {
+            var goal = AdvanceGeneratedGoalProgress(package, result);
+            var preview = _previewService.Build(package, result.State);
+            var selectedChallenge = _microgameChallengeModel.ChallengeSelected
+                ? _microgameChallengeModel
+                : _microgameChallengePreviewService.SelectChallenge(package, preview, goal);
+            _microgameChallengeModel = _microgameChallengePreviewService.ResolveAfterInteraction(package, preview, goal, selectedChallenge);
+            if (_microgameChallengeModel.Resolved)
+            {
+                AppendLog($"Challenge resolved: {_microgameChallengeModel.EncounterTitle} / reward: {_microgameChallengeModel.RewardTitle} / completion: {_microgameChallengeModel.CompletionStatus}");
+            }
+        }
+
         ApplyResult(package, result);
     }
 
@@ -180,6 +204,18 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         {
             AppendLog($"{diagnostic.Severity}: {diagnostic.Code} / {diagnostic.Target} / {diagnostic.Message}");
         }
+    }
+
+    private GeneratedMicrogameGoalPreviewModel AdvanceGeneratedGoalProgress(GamePackageDefinition package, CommandResult result)
+    {
+        var preview = _previewService.Build(package, result.State);
+        var goal = _microgameGoalPreviewService.AdvanceAfterInteraction(package, preview, _questDialoguePreviewService, result);
+        if (goal.ProgressAdvancedByInteraction)
+        {
+            AppendLog($"Active goal progress: {goal.ActiveQuestTitle} / {goal.CompletedStepCount} of {goal.StepCount} / {goal.ProgressStatus}");
+        }
+
+        return goal;
     }
 
     private void SetGeneratePreviewRunning(bool running)
@@ -265,13 +301,21 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         }
 
         var model = _previewService.Build(package, state);
+        var goal = state == null
+            ? new GeneratedMicrogameGoalPreviewModel()
+            : _microgameGoalPreviewService.EnsureActiveGoal(package, model, _questDialoguePreviewService);
+        var challenge = state == null
+            ? new GeneratedMicrogameChallengePreviewModel()
+            : _microgameChallengeModel.ChallengeSelected
+                ? _microgameChallengeModel
+                : _microgameChallengePreviewService.SelectChallenge(package, model, goal);
         if (state != null)
         {
             _mapPlacementModel = _mapPlacementPreviewService.Build(package, state, model);
             _canvas.SetGeneratedMarkers(_mapPlacementModel.Markers);
         }
-        _generatedContentTextBox.Text = FormatGeneratedPreview(model);
-        RefreshQuestJournal();
+        _generatedContentTextBox.Text = FormatGeneratedPreview(model, goal, challenge);
+        RefreshQuestJournal(goal, challenge);
         ApplyInteractionCatalog(_interactionService.Build(model), previousCategoryId, previousEntryId);
     }
 
@@ -447,7 +491,9 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         RefreshQuestJournal();
     }
 
-    private void RefreshQuestJournal()
+    private void RefreshQuestJournal(
+        GeneratedMicrogameGoalPreviewModel? goal = null,
+        GeneratedMicrogameChallengePreviewModel? challenge = null)
     {
         if (_state == null)
         {
@@ -457,6 +503,31 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
         var journal = _questDialoguePreviewService.BuildJournal();
         var builder = new StringBuilder();
+        if (goal?.ActiveGoalSelected == true)
+        {
+            builder.AppendLine($"Active goal: {goal.ActiveQuestTitle}");
+            builder.AppendLine($"Current objective: {goal.CurrentObjectiveText}");
+            builder.AppendLine($"Progress: {goal.CompletedStepCount}/{goal.StepCount} [{goal.ProgressStatus}]");
+            if (!string.IsNullOrWhiteSpace(goal.Related.NpcTitle) || !string.IsNullOrWhiteSpace(goal.Related.ItemTitle) || !string.IsNullOrWhiteSpace(goal.Related.EncounterTitle))
+            {
+                builder.AppendLine($"Related: {JoinNonEmpty(goal.Related.NpcTitle, goal.Related.ItemTitle, goal.Related.EncounterTitle)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(goal.LastProgressAction))
+            {
+                builder.AppendLine($"Last progress action: {goal.LastProgressAction}");
+            }
+
+            if (challenge?.ChallengeSelected == true)
+            {
+                builder.AppendLine($"Challenge: {challenge.EncounterTitle}");
+                builder.AppendLine($"Reward: {challenge.RewardTitle}");
+                builder.AppendLine($"Resolved/completion: {challenge.Resolved} / {challenge.CompletionVisible} [{challenge.CompletionStatus}]");
+            }
+
+            builder.AppendLine();
+        }
+
         builder.AppendLine($"Available quests: {journal.AvailableCount}");
         builder.AppendLine($"Active preview quests: {journal.ActiveCount}");
         builder.AppendLine($"Completed preview quests: {journal.CompletedCount}");
@@ -542,7 +613,10 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         AppendLog($"\u0420\u0435\u0433\u0438\u043e\u043d\u044b: {model.Regions.Count}; NPC: {model.Npcs.Count}; \u043f\u0440\u0435\u0434\u043c\u0435\u0442\u044b: {model.Items.Count}; \u0434\u0438\u0430\u043b\u043e\u0433\u0438: {model.Dialogues.Count}; \u0432\u0441\u0442\u0440\u0435\u0447\u0438: {model.Encounters.Count}");
     }
 
-    private static string FormatGeneratedPreview(GeneratedPackageRuntimePreviewModel model)
+    private static string FormatGeneratedPreview(
+        GeneratedPackageRuntimePreviewModel model,
+        GeneratedMicrogameGoalPreviewModel? goal = null,
+        GeneratedMicrogameChallengePreviewModel? challenge = null)
     {
         var builder = new StringBuilder();
         AppendSection(builder, "Package");
@@ -557,8 +631,44 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         AppendLine(builder, "Dialogues", model.Dialogues.Count.ToString());
         AppendLine(builder, "Encounters", model.Encounters.Count.ToString());
         AppendLine(builder, "Quests", model.Quests.Count.ToString());
+        AppendLine(builder, "Active goals", goal?.ActiveGoalSelected == true ? "1" : "0");
+        AppendLine(builder, "Goal progress", goal?.ActiveGoalSelected == true ? $"{goal.CompletedStepCount}/{goal.StepCount}" : "0/0");
+        AppendLine(builder, "Resolved challenges", challenge?.Resolved == true ? "1" : "0");
+        AppendLine(builder, "Visible rewards", challenge?.RewardVisible == true ? "1" : "0");
+        AppendLine(builder, "Visible completions", challenge?.CompletionVisible == true ? "1" : "0");
         AppendLine(builder, "Mechanics", model.Mechanics.Count.ToString());
         AppendLine(builder, "Applied artifacts", model.Provenance.Count.ToString());
+
+        AppendSection(builder, "Active goal");
+        if (goal?.ActiveGoalSelected == true)
+        {
+            AppendLine(builder, "Quest", FirstNonEmpty(goal.ActiveQuestTitle, goal.ActiveQuestId));
+            AppendLine(builder, "Objective", goal.CurrentObjectiveText);
+            AppendLine(builder, "Progress", $"{goal.CompletedStepCount}/{goal.StepCount} [{goal.ProgressStatus}]");
+            AppendLine(builder, "Related NPC", FirstNonEmpty(goal.Related.NpcTitle, goal.Related.NpcId));
+            AppendLine(builder, "Related item", FirstNonEmpty(goal.Related.ItemTitle, goal.Related.ItemId));
+            AppendLine(builder, "Related encounter", FirstNonEmpty(goal.Related.EncounterTitle, goal.Related.EncounterId));
+            AppendLine(builder, "Last action", goal.LastProgressAction);
+        }
+        else
+        {
+            builder.AppendLine("(none)");
+        }
+
+        AppendSection(builder, "Challenge");
+        if (challenge?.ChallengeSelected == true)
+        {
+            AppendLine(builder, "Encounter", FirstNonEmpty(challenge.EncounterTitle, challenge.EncounterId));
+            AppendLine(builder, "Related quest", FirstNonEmpty(challenge.QuestTitle, challenge.QuestId));
+            AppendLine(builder, "Reward", FirstNonEmpty(challenge.RewardTitle, challenge.RewardItemId));
+            AppendLine(builder, "Resolved", challenge.Resolved.ToString());
+            AppendLine(builder, "Completion", $"{challenge.CompletionVisible} [{challenge.CompletionStatus}]");
+            AppendLine(builder, "Resolve action", challenge.ResolveAction);
+        }
+        else
+        {
+            builder.AppendLine("(none)");
+        }
 
         AppendSection(builder, "Current scene");
         if (model.CurrentScene == null)

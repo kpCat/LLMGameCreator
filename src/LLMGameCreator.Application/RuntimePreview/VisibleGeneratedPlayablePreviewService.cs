@@ -30,6 +30,8 @@ public sealed class VisibleGeneratedPlayablePreviewService
     private readonly TinyGeneratedRuntimeLoopService _tinyLoopService;
     private readonly GeneratedPackageMvpService _packageMvpService;
     private readonly GeneratedPackageRuntimePreviewService _previewService;
+    private readonly GeneratedMicrogameGoalPreviewService _microgameGoalPreviewService;
+    private readonly GeneratedMicrogameChallengePreviewService _microgameChallengePreviewService;
     private readonly VisibleGeneratedPlayablePreviewMarkdownRenderer _markdownRenderer;
     private readonly IVisibleGeneratedPlayableRuntimeAdapter _runtimeAdapter;
 
@@ -39,6 +41,8 @@ public sealed class VisibleGeneratedPlayablePreviewService
         TinyGeneratedRuntimeLoopService? tinyLoopService = null,
         GeneratedPackageMvpService? packageMvpService = null,
         GeneratedPackageRuntimePreviewService? previewService = null,
+        GeneratedMicrogameGoalPreviewService? microgameGoalPreviewService = null,
+        GeneratedMicrogameChallengePreviewService? microgameChallengePreviewService = null,
         VisibleGeneratedPlayablePreviewMarkdownRenderer? markdownRenderer = null,
         IVisibleGeneratedPlayableRuntimeAdapter? runtimeAdapter = null)
     {
@@ -47,6 +51,8 @@ public sealed class VisibleGeneratedPlayablePreviewService
         _tinyLoopService = tinyLoopService ?? new TinyGeneratedRuntimeLoopService();
         _packageMvpService = packageMvpService ?? new GeneratedPackageMvpService();
         _previewService = previewService ?? new GeneratedPackageRuntimePreviewService();
+        _microgameGoalPreviewService = microgameGoalPreviewService ?? new GeneratedMicrogameGoalPreviewService();
+        _microgameChallengePreviewService = microgameChallengePreviewService ?? new GeneratedMicrogameChallengePreviewService();
         _markdownRenderer = markdownRenderer ?? new VisibleGeneratedPlayablePreviewMarkdownRenderer();
         _runtimeAdapter = runtimeAdapter ?? new RuntimeAdapterUnavailable();
     }
@@ -81,7 +87,11 @@ public sealed class VisibleGeneratedPlayablePreviewService
         var runtimeAttempt = RunRuntime(packageMvpResult.Package, diagnostics);
         var projectionState = BuildProjectionState(runtimeAttempt);
         var projection = _previewService.Build(packageMvpResult.Package, projectionState);
+        var microgameGoal = _microgameGoalPreviewService.BuildFromRuntimeAttempt(packageMvpResult.Package, projection, runtimeAttempt);
+        var microgameChallenge = _microgameChallengePreviewService.BuildFromRuntimeAttempt(packageMvpResult.Package, projection, microgameGoal, runtimeAttempt);
         diagnostics.AddRange(runtimeAttempt.Diagnostics);
+        diagnostics.AddRange(microgameGoal.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.Target, item.Message)));
+        diagnostics.AddRange(microgameChallenge.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.Target, item.Message)));
         diagnostics.Add(Diagnostic("info", "visible_generated_playable_preview.no_external_execution", "generation", "No LLM, provider, Lua, Unity or media execution was invoked."));
 
         var sourceHashes = new VisibleGeneratedPlayablePreviewSourceHashes
@@ -101,7 +111,9 @@ public sealed class VisibleGeneratedPlayablePreviewService
             CurrentMapId = projection.CurrentMapId,
             RuntimeAttempt = runtimeAttempt,
             Projection = projection,
-            Counts = BuildCounts(packageMvpResult.Package, projection),
+            MicrogameGoal = microgameGoal,
+            MicrogameChallenge = microgameChallenge,
+            Counts = BuildCounts(packageMvpResult.Package, projection, microgameGoal, microgameChallenge),
             RepresentativeGeneratedIds = BuildRepresentativeIds(projection),
             Diagnostics = sortedDiagnostics
         };
@@ -114,6 +126,11 @@ public sealed class VisibleGeneratedPlayablePreviewService
             RuntimeStartSucceeded = runtimeAttempt.RuntimeStartSucceeded,
             RuntimeCommandAttempted = runtimeAttempt.CommandAttempts.Count > 0,
             RuntimeCommandSucceeded = runtimeAttempt.CommandAttempts.Any(item => item.Succeeded),
+            ActiveGoalSelected = microgameGoal.ActiveGoalSelected,
+            GoalProgressAdvanced = microgameGoal.ProgressAdvancedByInteraction,
+            ChallengeResolved = microgameChallenge.Resolved,
+            RewardVisible = microgameChallenge.RewardVisible,
+            CompletionVisible = microgameChallenge.CompletionVisible,
             DiagnosticCount = sortedDiagnostics.Count,
             SourceHashes = sourceHashes,
             Diagnostics = sortedDiagnostics
@@ -216,7 +233,9 @@ public sealed class VisibleGeneratedPlayablePreviewService
 
     private static VisibleGeneratedPlayablePreviewCounts BuildCounts(
         GamePackageDefinition package,
-        GeneratedPackageRuntimePreviewModel projection) => new()
+        GeneratedPackageRuntimePreviewModel projection,
+        GeneratedMicrogameGoalPreviewModel? goal = null,
+        GeneratedMicrogameChallengePreviewModel? challenge = null) => new()
     {
         PackageMaps = package.Game.Maps.Count,
         PackageItems = package.Game.Items.Count,
@@ -227,6 +246,12 @@ public sealed class VisibleGeneratedPlayablePreviewService
         Items = projection.Items.Count,
         Encounters = projection.Encounters.Count,
         Quests = projection.Quests.Count,
+        ActiveGoals = goal?.ActiveGoalSelected == true ? 1 : 0,
+        ActiveGoalCompletedSteps = goal?.CompletedStepCount ?? 0,
+        ActiveGoalTotalSteps = goal?.StepCount ?? 0,
+        ResolvedChallenges = challenge?.Resolved == true ? 1 : 0,
+        VisibleRewards = challenge?.RewardVisible == true ? 1 : 0,
+        VisibleCompletions = challenge?.CompletionVisible == true ? 1 : 0,
         Mechanics = projection.Mechanics.Count,
         ProvenanceRecords = projection.Provenance.Count
     };
@@ -252,6 +277,11 @@ public sealed class VisibleGeneratedPlayablePreviewService
             $"commandAttempts={snapshot.RuntimeAttempt.CommandAttempts.Count}",
             $"regions={snapshot.Counts.Regions}",
             $"quests={snapshot.Counts.Quests}",
+            $"activeGoals={snapshot.Counts.ActiveGoals}",
+            $"goalProgress={snapshot.Counts.ActiveGoalCompletedSteps}/{snapshot.Counts.ActiveGoalTotalSteps}",
+            $"challengeResolved={snapshot.MicrogameChallenge.Resolved.ToString().ToLowerInvariant()}",
+            $"rewardVisible={snapshot.MicrogameChallenge.RewardVisible.ToString().ToLowerInvariant()}",
+            $"completionVisible={snapshot.MicrogameChallenge.CompletionVisible.ToString().ToLowerInvariant()}",
             $"mechanics={snapshot.Counts.Mechanics}"
         });
 

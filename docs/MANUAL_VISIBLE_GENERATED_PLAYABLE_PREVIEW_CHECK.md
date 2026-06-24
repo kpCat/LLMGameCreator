@@ -36,6 +36,23 @@ Expected generated-preview files:
 - `.llmgc/procedural/visible-generated-playable-preview/visible-generated-playable-preview-report.json`
 - `.llmgc/procedural/visible-generated-playable-preview/visible-generated-playable-preview-report.md`
 - `.llmgc/procedural/visible-generated-playable-preview/manual-verification.md`
+- `.llmgc/procedural/generated-microgame-loop/generated-microgame-loop-snapshot.json`
+- `.llmgc/procedural/generated-microgame-loop/generated-microgame-loop-report.md`
+- `.llmgc/procedural/generated-microgame-loop/manual-microgame-loop-verification.md`
+
+## Product Slice 037 Manual Microgame Loop Check
+
+Use this after the `generated-microgame-loop` smoke passes.
+
+1. Start `LLMGameCreator.WinForms`.
+2. Open `Runtime Preview`.
+3. Press `Generate Preview`.
+4. Press `Start`.
+5. Confirm the active generated goal and current objective are readable.
+6. Move to the generated NPC/object/item marker and use the existing interaction command.
+7. Confirm progress, challenge, reward and completion state are visible.
+
+The generated microgame acceptance sidecar also writes `.llmgc/procedural/generated-microgame-loop/manual-microgame-loop-verification.md` with the exact generated labels from the latest headless acceptance run.
 
 ## Optional Headless Smoke
 
@@ -43,6 +60,7 @@ Run:
 
 ```powershell
 .\.devflow\scripts\run-product-smoke.ps1 -Scenario one-click-generated-preview-workflow
+.\.devflow\scripts\run-product-smoke.ps1 -Scenario generated-microgame-loop
 ```
 
 The smoke writes preview artifacts under:
