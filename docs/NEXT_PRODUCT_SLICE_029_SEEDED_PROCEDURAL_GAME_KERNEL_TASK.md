@@ -1,11 +1,11 @@
 # Product Slice 029 Task: Seeded Procedural Game Kernel v1
 
-Status: proposed next Codex task  
+Status: current proposed Codex task  
 Depends on: Product Slice 028 and strategy reset  
 Primary outcome: deterministic runtime-facing generated game structure  
 Non-outcome: UI polish, provider execution, Unity export, Lua execution, broad schema expansion
 
-## Source-of-truth reading order
+## Source-Of-Truth Reading Order
 
 Read only these files before implementation unless a referenced code area requires local context:
 
@@ -18,13 +18,26 @@ Read only these files before implementation unless a referenced code area requir
 7. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
 8. runtime/domain files needed for generated data compatibility
 
+Do not read old root `README_APPLY_*` files, old `*_CODEX_PROMPT.md`, old `*_KILO_PROMPT.md`, old archive manifests, or old apply READMEs as current planning authority.
+
+## First Action
+
+Before implementing code, verify that these files already point to the strategy reset:
+
+- `README.md`
+- `docs/CONTEXT_INDEX.md`
+- `docs/CURRENT_GENERATOR_STATE.md`
+- `docs/CURRENT_GENERATOR_STATE.json`
+
+If they still recommend semantic UI, manual import polish, archive review polish, or M4.1 local-model evaluation as the next step, update them first to the strategy-reset state.
+
 ## Goal
 
 Add the first deterministic procedural game kernel that can produce coherent, runtime-facing game structure from a seed and a small generation profile.
 
 The point of this slice is not to build the final generator. The point is to prove that LLMGameCreator can generate useful game structure without using an LLM as a bulk content printer and without spending another slice on infrastructure-only work.
 
-## Required behavior
+## Required Behavior
 
 Create an Application-layer service that accepts:
 
@@ -53,7 +66,7 @@ Same input must produce byte-stable JSON output.
 
 Different seeds should produce visibly different but structurally valid output.
 
-## Important design constraints
+## Important Design Constraints
 
 - No LLM calls.
 - No provider calls.
@@ -67,7 +80,7 @@ Different seeds should produce visibly different but structurally valid output.
 - No broad template family work.
 - No C# code generation.
 
-## Preferred implementation area
+## Preferred Implementation Area
 
 Prefer a new focused Application area, for example:
 
@@ -79,7 +92,7 @@ or an existing nearby Application/Design generation namespace if the repository 
 
 Keep Domain changes minimal. If new models are needed, prefer Application-side generated-plan models first unless package/runtime contracts must consume them immediately.
 
-## Output artifact suggestion
+## Output Artifact Suggestion
 
 Write generated artifacts under project-local `.llmgc/` when a project folder is supplied:
 
@@ -90,7 +103,7 @@ Write generated artifacts under project-local `.llmgc/` when a project folder is
 
 The artifacts must not contain timestamps, absolute paths, machine names or nondeterministic ordering.
 
-## Runtime-facing requirement
+## Runtime-Facing Requirement
 
 This slice does not need to run the full runtime loop yet, but its output must be shaped so Slice 031 can load or map it into a tiny generated runtime loop.
 
@@ -104,7 +117,7 @@ The generated plan should therefore include stable ids and clear references for:
 - quests/events;
 - formula/effect/action placeholders.
 
-## Validation requirements
+## Validation Requirements
 
 Add focused tests for:
 
@@ -124,7 +137,7 @@ procedural-game-kernel
 
 The smoke should prove the two output artifacts and deterministic repeatability.
 
-## Acceptance criteria
+## Acceptance Criteria
 
 The slice is complete only when:
 
@@ -136,7 +149,7 @@ The slice is complete only when:
 - docs state that this is the first step toward the three-slice generated playable/simulatable loop;
 - `CURRENT_GENERATOR_STATE.md` and `.json` recommend Slice 030: Formula/Effect/Action Registry Foundation.
 
-## Stop conditions
+## Stop Conditions
 
 Stop and report instead of implementing if:
 
@@ -146,7 +159,7 @@ Stop and report instead of implementing if:
 - existing runtime/domain contracts cannot represent the generated concepts even as a plan;
 - the task starts drifting into UI, archive review, manual import, provider, Unity, Lua execution or broad generator-family work.
 
-## Final report requirements
+## Final Report Requirements
 
 The final report must include:
 

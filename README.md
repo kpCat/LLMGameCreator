@@ -61,13 +61,13 @@ Runtime должен оставаться headless и command/event driven.
 Current source-of-truth handoff:
 - docs/CURRENT_GENERATOR_STATE.md
 - docs/CONTEXT_INDEX.md
-- docs/ROADMAP_TO_FULL_GENERATOR.md
+- docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-M4.1 real-model evaluation gate.
+Product Slice 029 completed the first deterministic seeded procedural game kernel.
 
 Next practical step:
-Run a real local model through Capability Picker -> LLM Artifacts -> LLM Evaluation before expanding contracts, Lua integration or package assembly.
+Product Slice 030: Formula/Effect/Action Registry Foundation, so the generated placeholders can become validated runtime-facing rules.
 
 `GamePackage` — runtime source of truth для готовой игры.
 

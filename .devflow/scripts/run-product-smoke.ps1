@@ -32,6 +32,8 @@ function Write-ProductSmokeSummary {
 
     $packageJsonPath = if ($Scenario -eq "active-package-quest-dialogue-preview") {
         Join-Path $PackageOutputDir ".llmgc\package-assembly\package.json"
+    } elseif ($Scenario -eq "procedural-game-kernel") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\generated-game-plan.json"
     } else {
         Join-Path $PackageOutputDir "package.json"
     }
@@ -153,6 +155,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "semantic-catalog-foundation") {
         $TestFilter = "FullyQualifiedName~SemanticCatalogFoundationProductSmoke"
+    }
+    elseif ($Scenario -eq "procedural-game-kernel") {
+        $TestFilter = "FullyQualifiedName~ProceduralGameKernelProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

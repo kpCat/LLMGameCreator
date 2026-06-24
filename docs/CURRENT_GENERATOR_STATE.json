@@ -1,15 +1,27 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-24T15:34:54Z",
-  "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 028 manual import repair and semantic catalog foundation completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_028_semantic_catalog_foundation",
+  "updated_at_utc": "2026-06-24T17:58:36Z",
+  "current_phase": "strategy_reset_playable_procedural_generator",
+  "current_phase_title": "Post-S028 strategy reset toward a playable/simulatable procedural generator kernel",
+  "gate_status": "m4_1_passed_s029_completed_strategy_reset_active",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-028 through manual import repair and the project-local semantic catalog foundation; further Unity, provider, generator, Runtime, M5 and M6 work remains locked unless explicitly selected by a controlled vertical-slice approval.",
-  "current_user_action": "Review the repaired manual import workflow, semantic catalog sidecar, generation-context preview, and LLM minimization policy; no generation or provider execution is implied.",
-  "recommended_next_decision": "Choose bounded manual import polish, semantic catalog review/approval UI, formula registry foundation, or one explicitly approved controlled product vertical slice without unlocking M5/M6.",
+  "last_completed_product_slice_id": "product_slice_029_seeded_procedural_game_kernel_v1",
+  "active_manual_gate": "Infrastructure-only next work is frozen unless explicitly approved by the user or directly required to unblock the generated playable/simulatable loop.",
+  "current_user_action": "Use Product Slice 030: Formula/Effect/Action Registry Foundation as the next Codex task unless explicitly overriding the strategy reset.",
+  "recommended_next_decision": "Start Formula/Effect/Action Registry Foundation so Slice 029 placeholders become validated runtime-facing rules; do not spend further slices on semantic UI, manual import polish, archive review polish or other infrastructure-only work without explicit user approval.",
+  "active_strategy_reset": {
+    "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+    "freeze_infrastructure_only_work": true,
+    "required_outcome_within_large_slices": 3,
+    "required_outcome": "generated_playable_or_simulatable_loop",
+    "next_sequence": [
+      "formula_effect_action_registry_foundation",
+      "tiny_generated_runtime_loop"
+    ],
+    "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
+  },
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,112 +61,79 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_028_manual_import_repair_semantic_catalog_foundation_v1",
-    "title": "Manual Import Repair + Semantic Catalog Foundation v1",
-    "completed_at_utc": "2026-06-24T15:34:54Z",
-    "summary": "Repaired safe manual-import directory creation and no-op history suppression; mapped semantic_pack_v1 into a deterministic project-local semantic catalog sidecar with compact generation-context preview and explicit LLM minimization policy.",
-    "parent_slice_id": "product_slice_027_controlled_manual_import_workspace_ui_v1",
-    "ui_surface": "existing_winforms_unity_archive_review_plus_headless_semantic_sidecar",
-    "scenario_id": "semantic-catalog-foundation",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario semantic-catalog-foundation",
-    "headless_outputs": [
-      ".llmgc/semantic/semantic-catalog.json",
-      ".llmgc/semantic/semantic-catalog-report.md",
-      ".llmgc/semantic/semantic-generation-context-preview.json",
-      ".llmgc/semantic/semantic-generation-context-preview.md",
-      ".llmgc/unity-archive/production/manual-provider-import-report.json",
-      ".llmgc/unity-archive/production/manual-provider-import-report.md"
-    ],
-    "validation_contracts": [
-      "manual-import and nested archive-relative directories use dedicated safe directory validation and remain under the archive root",
-      "manual-import directory creation never creates import-manifest.json or starts import",
-      "TargetOutputsChanged is true only when at least one target output receives imported bytes",
-      "AlreadyImported and conflict-only attempts still write reports but do not refresh review/history/comparison",
-      "semantic_pack_v1 maps into a project-local sidecar while GamePackage v1 mapping remains unchanged",
-      "unknown safe terms become candidates and unsafe ids become diagnostics",
-      "semantic catalog and context preview are deterministic, timestamp-free and compact",
-      "LLM minimization policy keeps deterministic work out of model calls",
-      "no Unity, Runtime gameplay, GamePackage schema, provider, generator, LLM or Lua execution"
-    ],
+    "slice_id": "product_slice_029_seeded_procedural_game_kernel_v1",
+    "title": "Seeded Procedural Game Kernel v1",
+    "completed_at_utc": "2026-06-24T17:58:36Z",
+    "summary": "Added an Application-layer deterministic procedural game kernel that accepts seed, mode, compact semantic/style hints and selected variant ids, then writes byte-stable .llmgc/procedural/generated-game-plan.json and generated-game-plan.md with runtime-facing regions, factions, actor seeds, item/resource seeds, encounters, quest/events and Slice 030 formula/effect/action placeholders.",
+    "scenario_id": "procedural-game-kernel",
     "checks": [
-      "ManualImport and UnityArchiveReview filtered tests: 54/54 passed",
-      "Semantic filtered tests: 9/9 passed",
-      "ProductSmoke filtered tests: 27/27 passed",
-      "semantic-catalog-foundation product smoke: 1/1 passed",
-      "unity-archive-manual-import-workflow-ui product smoke: 1/1 passed",
-      "check-devflow-state.ps1: passed in STOP_REVIEW mode",
-      "check-all.ps1: 655/655 tests passed, build 0 warnings / 0 errors"
+      "ProceduralGameKernel filtered tests: 5/5 passed",
+      "procedural-game-kernel product smoke: 1/1 passed"
     ]
   },
   "allowed_next_codex_task_types": [
-    "manual_import_workflow_polish_after_user_testing",
-    "one_controlled_product_vertical_slice_selection",
-    "semantic_catalog_ui_review_and_approval",
-    "formula_registry_foundation"
+    "formula_effect_action_registry_foundation",
+    "tiny_generated_runtime_loop"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
     "M6 rich GamePackage assembly beyond the current baseline draft assembly remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
     "Broad contract expansion remains restricted beyond sampled baseline evidence.",
-    "Runtime preview repair loop remains restricted until a controlled vertical slice exists."
+    "Runtime preview repair loop remains restricted until the procedural kernel and tiny generated runtime loop are selected and implemented."
   ],
   "restricted_next_work": [
+    "semantic catalog review UI unless explicitly requested",
+    "manual import workflow polish unless explicitly requested",
+    "archive review/history/comparison polish unless explicitly requested",
     "M6-lite package assembly shortcuts",
-    "M8 runtime preview validation loop",
+    "M8 runtime preview validation loop before the selected generated loop",
     "M9 full game template families and balancing",
-    "M10 export profiles or Unity IR production work"
+    "M10 export profiles or Unity IR production work",
+    "provider execution",
+    "media generation",
+    "broad Lua executor unlock",
+    "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "semantic_catalog_ui_review_and_approval",
-  "recommended_next_work_item_title": "Choose bounded semantic catalog review/approval UI, manual import polish, formula registry foundation, or one explicitly approved controlled product vertical slice.",
+  "recommended_next_work_item": "formula_effect_action_registry_foundation",
+  "recommended_next_work_item_title": "Formula/Effect/Action Registry Foundation: turn generated placeholders into validated runtime-facing rules without unlocking Lua, providers, Unity or broad GamePackage assembly.",
+  "recommended_next_task_file": "not_created_yet",
   "candidate_product_vertical_slices": [
-    "Manual import workflow polish may be selected after bounded user testing.",
-    "One controlled semantic-generation contract may be selected only after the generator catalog direction is explicitly chosen."
+    "Product Slice 030: Formula/Effect/Action Registry Foundation",
+    "Product Slice 031: Tiny Generated Runtime Loop"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
     "docs/CONTEXT_INDEX.md",
     "docs/CURRENT_GENERATOR_STATE.md",
-    "docs/ROADMAP_TO_FULL_GENERATOR.md",
-    "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md",
-    "docs/GENERATOR_PLAN_CAPABILITY_SELECTION_PICKER.md",
-    "docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md",
-    "docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md",
-    "docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md",
-    "docs/PRODUCT_SMOKE_SCENARIOS.md"
+    "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+    "docs/NEXT_PRODUCT_SLICE_029_SEEDED_PROCEDURAL_GAME_KERNEL_TASK.md",
+    "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
+    "docs/FULL_GAME_GENERATION_MASTER_PLAN.md",
+    "docs/GAME_SYSTEM_VARIANT_TAXONOMY.md"
+  ],
+  "do_not_use_as_current_authority": [
+    "README_APPLY_AGENT_TASK_PACK_*.md",
+    "README_APPLY_PRODUCT_SLICE_*.md",
+    "README_APPLY_PACK_008.md",
+    "README_APPLY_CAPABILITY_COMPOSER_V2_PACK.md",
+    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md before slice 029",
+    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_KILO_PROMPT.md",
+    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_ARCHIVE_MANIFEST.md",
+    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_README_APPLY_PRODUCT_SLICE.md"
   ],
   "current_workflow": [
     "Capability Picker",
-    "Capability Composer v2 foundation",
-    "Composable module selection UI",
     "LLM Artifacts",
-    "Project content language selection and language-bound prompts",
-    "GameBlueprint presets",
-    "Built-in capability registry and deterministic compatibility validation",
-    "Built-in generator catalog validation and non-executing plan resolution",
-    "Consolidated composition diagnostics and recommended actions",
-    "Deterministic project-local composition report export",
-    "Read-only Composition Workbench preview, export and saved-report refresh",
-    "Game Design Brief and Unity target/archive contract validation",
-    "Deterministic Unity archive export dry-run planning",
-    "Deterministic Unity archive contract/meta materialization",
-    "Deterministic Unity archive game-data payload materialization when package data is supplied",
-    "Deterministic Unity archive asset/audio/Lua request metadata",
-    "Deterministic Unity archive provider job planning without execution",
-    "Deterministic Unity archive fulfillment-state scanning",
-    "Deterministic Unity archive read-only review snapshot",
-    "Deterministic Unity archive review retention/history",
-    "Read-only Unity archive review/history/comparison editor page",
-    "Controlled manual provider output import with deterministic reports and refresh",
-    "Controlled manual import workspace UI with slot dashboard, template generation, explicit import action and report refresh",
-    "Manual import safe-directory repair and target-byte-change-gated review history refresh",
-    "Project-local semantic catalog sidecar and deterministic generation-context preview",
-    "Explicit LLM minimization decision policy",
-    "Selected Unity archive history snapshot and manual import report detail",
-    "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",
     "Apply approved baseline artifacts",
-    "Draft GamePackage assembly/export"
+    "Draft GamePackage assembly/export",
+    "Unity archive materialization and request planning",
+    "Manual provider output import",
+    "Archive review/history/comparison",
+    "Project-local semantic catalog sidecar and deterministic generation-context preview",
+    "Seeded Procedural Game Kernel v1 generated plan sidecars",
+    "Formula/Effect/Action Registry Foundation planned next"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice, preserve M5/M6 Locked semantics until explicitly unlocked by the user, and keep next work bounded to the current approved gate."
+  "state_update_rule": "Update this file pair after every accepted product slice; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 030 recommend tiny_generated_runtime_loop."
 }
