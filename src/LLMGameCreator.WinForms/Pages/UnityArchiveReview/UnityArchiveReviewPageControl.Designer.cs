@@ -30,6 +30,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _comparisonJsonTab;
         private TabPage _historyIndexJsonTab;
         private TabPage _selectedSnapshotJsonTab;
+        private TabPage _manualImportWorkspaceTab;
         private TabPage _manualImportMarkdownTab;
         private TabPage _manualImportJsonTab;
         private TextBox _currentReviewMarkdownTextBox;
@@ -42,6 +43,29 @@ namespace LLMGameCreator.WinForms.Pages
         private TextBox _selectedSnapshotJsonTextBox;
         private TextBox _manualImportMarkdownTextBox;
         private TextBox _manualImportJsonTextBox;
+        private TableLayoutPanel _manualImportWorkspaceLayout;
+        private FlowLayoutPanel _manualImportToolbarPanel;
+        private Label _manualImportFilterLabel;
+        private ComboBox _manualImportFilterComboBox;
+        private Button _createManifestTemplateButton;
+        private Button _openManualImportFolderButton;
+        private Button _runManualImportButton;
+        private CheckBox _allowOverwriteCheckBox;
+        private Button _copySlotIdButton;
+        private Button _copyExpectedPathButton;
+        private DataGridView _manualImportSlotsGrid;
+        private DataGridViewTextBoxColumn _slotIdColumn;
+        private DataGridViewTextBoxColumn _slotKindColumn;
+        private DataGridViewTextBoxColumn _slotProviderColumn;
+        private DataGridViewTextBoxColumn _slotExpectedPathColumn;
+        private DataGridViewTextBoxColumn _slotStatusColumn;
+        private DataGridViewCheckBoxColumn _slotFileExistsColumn;
+        private DataGridViewTextBoxColumn _slotFileSizeColumn;
+        private DataGridViewTextBoxColumn _slotHashColumn;
+        private DataGridViewTextBoxColumn _slotSourceColumn;
+        private TextBox _manualImportSlotDetailTextBox;
+        private Label _manualImportWorkspaceStatusLabel;
+        private Label _manualImportReportStatusLabel;
         private Label _statusLabel;
 
         protected override void Dispose(bool disposing)
@@ -83,6 +107,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._comparisonJsonTab = new TabPage();
             this._historyIndexJsonTab = new TabPage();
             this._selectedSnapshotJsonTab = new TabPage();
+            this._manualImportWorkspaceTab = new TabPage();
             this._manualImportMarkdownTab = new TabPage();
             this._manualImportJsonTab = new TabPage();
             this._currentReviewMarkdownTextBox = new TextBox();
@@ -95,6 +120,29 @@ namespace LLMGameCreator.WinForms.Pages
             this._selectedSnapshotJsonTextBox = new TextBox();
             this._manualImportMarkdownTextBox = new TextBox();
             this._manualImportJsonTextBox = new TextBox();
+            this._manualImportWorkspaceLayout = new TableLayoutPanel();
+            this._manualImportToolbarPanel = new FlowLayoutPanel();
+            this._manualImportFilterLabel = new Label();
+            this._manualImportFilterComboBox = new ComboBox();
+            this._createManifestTemplateButton = new Button();
+            this._openManualImportFolderButton = new Button();
+            this._runManualImportButton = new Button();
+            this._allowOverwriteCheckBox = new CheckBox();
+            this._copySlotIdButton = new Button();
+            this._copyExpectedPathButton = new Button();
+            this._manualImportSlotsGrid = new DataGridView();
+            this._slotIdColumn = new DataGridViewTextBoxColumn();
+            this._slotKindColumn = new DataGridViewTextBoxColumn();
+            this._slotProviderColumn = new DataGridViewTextBoxColumn();
+            this._slotExpectedPathColumn = new DataGridViewTextBoxColumn();
+            this._slotStatusColumn = new DataGridViewTextBoxColumn();
+            this._slotFileExistsColumn = new DataGridViewCheckBoxColumn();
+            this._slotFileSizeColumn = new DataGridViewTextBoxColumn();
+            this._slotHashColumn = new DataGridViewTextBoxColumn();
+            this._slotSourceColumn = new DataGridViewTextBoxColumn();
+            this._manualImportSlotDetailTextBox = new TextBox();
+            this._manualImportWorkspaceStatusLabel = new Label();
+            this._manualImportReportStatusLabel = new Label();
             this._statusLabel = new Label();
             this._rootLayout.SuspendLayout();
             this._toolbarPanel.SuspendLayout();
@@ -110,9 +158,13 @@ namespace LLMGameCreator.WinForms.Pages
             this._comparisonJsonTab.SuspendLayout();
             this._historyIndexJsonTab.SuspendLayout();
             this._selectedSnapshotJsonTab.SuspendLayout();
+            this._manualImportWorkspaceTab.SuspendLayout();
             this._manualImportMarkdownTab.SuspendLayout();
             this._manualImportJsonTab.SuspendLayout();
             this._selectedSnapshotLayout.SuspendLayout();
+            this._manualImportWorkspaceLayout.SuspendLayout();
+            this._manualImportToolbarPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this._manualImportSlotsGrid).BeginInit();
             this.SuspendLayout();
             //
             // _rootLayout
@@ -236,6 +288,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._reportTabs.Controls.Add(this._comparisonJsonTab);
             this._reportTabs.Controls.Add(this._historyIndexJsonTab);
             this._reportTabs.Controls.Add(this._selectedSnapshotJsonTab);
+            this._reportTabs.Controls.Add(this._manualImportWorkspaceTab);
             this._reportTabs.Controls.Add(this._manualImportMarkdownTab);
             this._reportTabs.Controls.Add(this._manualImportJsonTab);
             this._reportTabs.Dock = DockStyle.Fill;
@@ -251,6 +304,8 @@ namespace LLMGameCreator.WinForms.Pages
             this._historyIndexJsonTab.Text = "History Index JSON";
             this._selectedSnapshotJsonTab.Controls.Add(this._selectedSnapshotLayout);
             this._selectedSnapshotJsonTab.Text = "Selected Snapshot JSON";
+            this._manualImportWorkspaceTab.Controls.Add(this._manualImportWorkspaceLayout);
+            this._manualImportWorkspaceTab.Text = "Manual Import Workspace";
             this._manualImportMarkdownTab.Controls.Add(this._manualImportMarkdownTextBox);
             this._manualImportMarkdownTab.Text = "Manual Import";
             this._manualImportJsonTab.Controls.Add(this._manualImportJsonTextBox);
@@ -319,6 +374,125 @@ namespace LLMGameCreator.WinForms.Pages
             this._manualImportJsonTextBox.ScrollBars = ScrollBars.Both;
             this._manualImportJsonTextBox.WordWrap = false;
             //
+            // manual import workspace
+            //
+            this._manualImportWorkspaceLayout.ColumnCount = 1;
+            this._manualImportWorkspaceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._manualImportWorkspaceLayout.Controls.Add(this._manualImportToolbarPanel, 0, 0);
+            this._manualImportWorkspaceLayout.Controls.Add(this._manualImportSlotsGrid, 0, 1);
+            this._manualImportWorkspaceLayout.Controls.Add(this._manualImportSlotDetailTextBox, 0, 2);
+            this._manualImportWorkspaceLayout.Controls.Add(this._manualImportWorkspaceStatusLabel, 0, 3);
+            this._manualImportWorkspaceLayout.Controls.Add(this._manualImportReportStatusLabel, 0, 4);
+            this._manualImportWorkspaceLayout.Dock = DockStyle.Fill;
+            this._manualImportWorkspaceLayout.RowCount = 5;
+            this._manualImportWorkspaceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
+            this._manualImportWorkspaceLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 62F));
+            this._manualImportWorkspaceLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 38F));
+            this._manualImportWorkspaceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
+            this._manualImportWorkspaceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            this._manualImportToolbarPanel.AutoScroll = true;
+            this._manualImportToolbarPanel.Controls.Add(this._manualImportFilterLabel);
+            this._manualImportToolbarPanel.Controls.Add(this._manualImportFilterComboBox);
+            this._manualImportToolbarPanel.Controls.Add(this._createManifestTemplateButton);
+            this._manualImportToolbarPanel.Controls.Add(this._openManualImportFolderButton);
+            this._manualImportToolbarPanel.Controls.Add(this._runManualImportButton);
+            this._manualImportToolbarPanel.Controls.Add(this._allowOverwriteCheckBox);
+            this._manualImportToolbarPanel.Controls.Add(this._copySlotIdButton);
+            this._manualImportToolbarPanel.Controls.Add(this._copyExpectedPathButton);
+            this._manualImportToolbarPanel.Dock = DockStyle.Fill;
+            this._manualImportToolbarPanel.Padding = new Padding(6, 7, 6, 4);
+            this._manualImportFilterLabel.AutoSize = true;
+            this._manualImportFilterLabel.Margin = new Padding(3, 7, 3, 0);
+            this._manualImportFilterLabel.Text = "Filter";
+            this._manualImportFilterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this._manualImportFilterComboBox.Name = "_manualImportFilterComboBox";
+            this._manualImportFilterComboBox.Width = 150;
+            this._createManifestTemplateButton.AutoSize = true;
+            this._createManifestTemplateButton.Name = "_createManifestTemplateButton";
+            this._createManifestTemplateButton.Text = "Create manifest template";
+            this._openManualImportFolderButton.AutoSize = true;
+            this._openManualImportFolderButton.Name = "_openManualImportFolderButton";
+            this._openManualImportFolderButton.Text = "Create/Open manual-import folder";
+            this._runManualImportButton.AutoSize = true;
+            this._runManualImportButton.Name = "_runManualImportButton";
+            this._runManualImportButton.Text = "Run manual import";
+            this._allowOverwriteCheckBox.AutoSize = true;
+            this._allowOverwriteCheckBox.Margin = new Padding(8, 7, 3, 0);
+            this._allowOverwriteCheckBox.Name = "_allowOverwriteCheckBox";
+            this._allowOverwriteCheckBox.Text = "Allow overwrite existing different files (risky)";
+            this._copySlotIdButton.AutoSize = true;
+            this._copySlotIdButton.Name = "_copySlotIdButton";
+            this._copySlotIdButton.Text = "Copy slotId";
+            this._copyExpectedPathButton.AutoSize = true;
+            this._copyExpectedPathButton.Name = "_copyExpectedPathButton";
+            this._copyExpectedPathButton.Text = "Copy expected path";
+            this._manualImportSlotsGrid.AllowUserToAddRows = false;
+            this._manualImportSlotsGrid.AllowUserToDeleteRows = false;
+            this._manualImportSlotsGrid.AllowUserToResizeRows = false;
+            this._manualImportSlotsGrid.AutoGenerateColumns = false;
+            this._manualImportSlotsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this._manualImportSlotsGrid.Columns.AddRange(new DataGridViewColumn[] {
+                this._slotIdColumn,
+                this._slotKindColumn,
+                this._slotProviderColumn,
+                this._slotExpectedPathColumn,
+                this._slotStatusColumn,
+                this._slotFileExistsColumn,
+                this._slotFileSizeColumn,
+                this._slotHashColumn,
+                this._slotSourceColumn });
+            this._manualImportSlotsGrid.Dock = DockStyle.Fill;
+            this._manualImportSlotsGrid.MultiSelect = false;
+            this._manualImportSlotsGrid.Name = "_manualImportSlotsGrid";
+            this._manualImportSlotsGrid.ReadOnly = true;
+            this._manualImportSlotsGrid.RowHeadersVisible = false;
+            this._manualImportSlotsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this._slotIdColumn.DataPropertyName = "SlotId";
+            this._slotIdColumn.HeaderText = "SlotId";
+            this._slotIdColumn.Name = "_slotIdColumn";
+            this._slotKindColumn.DataPropertyName = "Kind";
+            this._slotKindColumn.HeaderText = "Kind";
+            this._slotKindColumn.Name = "_slotKindColumn";
+            this._slotProviderColumn.DataPropertyName = "ProviderKind";
+            this._slotProviderColumn.HeaderText = "ProviderKind";
+            this._slotProviderColumn.Name = "_slotProviderColumn";
+            this._slotExpectedPathColumn.DataPropertyName = "ExpectedOutputRelativePath";
+            this._slotExpectedPathColumn.HeaderText = "ExpectedOutputRelativePath";
+            this._slotExpectedPathColumn.Name = "_slotExpectedPathColumn";
+            this._slotExpectedPathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this._slotStatusColumn.DataPropertyName = "Status";
+            this._slotStatusColumn.HeaderText = "Status";
+            this._slotStatusColumn.Name = "_slotStatusColumn";
+            this._slotFileExistsColumn.DataPropertyName = "FileExists";
+            this._slotFileExistsColumn.HeaderText = "FileExists";
+            this._slotFileExistsColumn.Name = "_slotFileExistsColumn";
+            this._slotFileSizeColumn.DataPropertyName = "FileSizeBytes";
+            this._slotFileSizeColumn.HeaderText = "FileSizeBytes";
+            this._slotFileSizeColumn.Name = "_slotFileSizeColumn";
+            this._slotHashColumn.DataPropertyName = "ContentSha256";
+            this._slotHashColumn.HeaderText = "ContentSha256";
+            this._slotHashColumn.Name = "_slotHashColumn";
+            this._slotSourceColumn.DataPropertyName = "RequestId";
+            this._slotSourceColumn.HeaderText = "RequestId";
+            this._slotSourceColumn.Name = "_slotSourceColumn";
+            this._manualImportSlotDetailTextBox.Dock = DockStyle.Fill;
+            this._manualImportSlotDetailTextBox.Font = new Font("Consolas", 10F);
+            this._manualImportSlotDetailTextBox.Multiline = true;
+            this._manualImportSlotDetailTextBox.Name = "_manualImportSlotDetailTextBox";
+            this._manualImportSlotDetailTextBox.ReadOnly = true;
+            this._manualImportSlotDetailTextBox.ScrollBars = ScrollBars.Both;
+            this._manualImportSlotDetailTextBox.WordWrap = false;
+            this._manualImportWorkspaceStatusLabel.AutoEllipsis = true;
+            this._manualImportWorkspaceStatusLabel.Dock = DockStyle.Fill;
+            this._manualImportWorkspaceStatusLabel.Name = "_manualImportWorkspaceStatusLabel";
+            this._manualImportWorkspaceStatusLabel.Padding = new Padding(6, 6, 6, 0);
+            this._manualImportWorkspaceStatusLabel.Text = "No manual import workspace loaded.";
+            this._manualImportReportStatusLabel.AutoEllipsis = true;
+            this._manualImportReportStatusLabel.Dock = DockStyle.Fill;
+            this._manualImportReportStatusLabel.Name = "_manualImportReportStatusLabel";
+            this._manualImportReportStatusLabel.Padding = new Padding(6, 6, 6, 0);
+            this._manualImportReportStatusLabel.Text = "No manual import report yet.";
+            //
             // _statusLabel
             //
             this._statusLabel.AutoEllipsis = true;
@@ -354,6 +528,12 @@ namespace LLMGameCreator.WinForms.Pages
             this._historyIndexJsonTab.PerformLayout();
             this._selectedSnapshotLayout.ResumeLayout(false);
             this._selectedSnapshotJsonTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this._manualImportSlotsGrid).EndInit();
+            this._manualImportToolbarPanel.ResumeLayout(false);
+            this._manualImportToolbarPanel.PerformLayout();
+            this._manualImportWorkspaceLayout.ResumeLayout(false);
+            this._manualImportWorkspaceLayout.PerformLayout();
+            this._manualImportWorkspaceTab.ResumeLayout(false);
             this._manualImportMarkdownTab.ResumeLayout(false);
             this._manualImportMarkdownTab.PerformLayout();
             this._manualImportJsonTab.ResumeLayout(false);

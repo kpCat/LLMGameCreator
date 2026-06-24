@@ -1,14 +1,14 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 026  
+Updated by: Product Slice 027  
 State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 026 adds controlled manifest-based manual provider output import and selected archive-history snapshot detail.
+M4.1 gate passed for sampled baseline contracts; Product Slice 027 adds the controlled manual import workspace UI over the S026 import authority.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-024.1 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta/data/request/provider-plan/fulfillment/review/history/comparison outputs. Product Slice 025 added their read-only WinForms consumer. Product Slice 026 can copy only explicitly manifested files from `manual-import/` into existing expected fulfillment slots, then refresh the existing fulfillment/review/history/comparison reports without executing providers or generators.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-024.1 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta/data/request/provider-plan/fulfillment/review/history/comparison outputs. Product Slice 025 added their read-only WinForms consumer. Product Slice 026 added safe manifest-based import. Product Slice 027 now exposes that existing authority through a slot dashboard, deterministic template generation, archive-local folder helper, explicit import action, report refresh, and preserved selected-snapshot detail.
 
 ## Gate decision
 
@@ -60,21 +60,25 @@ Permanent evidence summary:
 
 ## Last completed product slice
 
-- Product Slice 026: Controlled Manual Provider Output Import v1.
-- `UnityArchiveManualProviderImportService` reads `manual-import/import-manifest.json`, resolves slot ids only from already materialized fulfillment/asset/audio/Lua slot metadata, and copies non-empty source files only to the exact safe expected output path.
-- Duplicate/unknown slots, unsafe source or target paths, missing/empty sources, expected-output mismatches, extension mismatches, and target conflicts are deterministic diagnostics; identical bytes are idempotent `AlreadyImported` results.
-- Import reports are written to `production/manual-provider-import-report.json` and `.md`, contain no timestamps or absolute paths, and are UTF-8 without BOM.
-- Successful import refreshes the existing fulfillment state, review snapshot, history, and comparison services without provider, generator, LLM, Lua, Unity, or Runtime gameplay execution.
-- The read-only `Unity Archive Review` page now displays selected snapshot status/sequence/path/JSON plus manual import Markdown and JSON reports; it does not expose an import button.
-- `unity-archive-manual-provider-import` proves the materialized-slot -> manifest -> controlled copy -> refresh -> presenter path.
+- Product Slice 027: Controlled Manual Import Workspace UI v1.
+- `Unity Archive Review` now lists expected asset/audio/Lua/unknown slots with provider, target path, status, file existence/size/hash, request/source ids, deterministic suggested source paths, selection detail, and six bounded filters.
+- `UnityArchiveManualImportTemplateService` merges existing plan/index/state files without throwing on missing or malformed JSON and writes only `manual-import/import-manifest.template.json` for missing/invalid slots.
+- Template creation never overwrites `manual-import/import-manifest.json`; suggested paths are relative to `manual-import/` and stay under `put-files-here/`.
+- `Run manual import` calls the existing S026 `UnityArchiveManualProviderImportService` with fulfillment/review/history/comparison refresh enabled and different-byte overwrite disabled unless the risk-labelled checkbox is explicitly selected.
+- Import report Markdown/JSON, fulfillment state, archive review, history, comparison, and selected snapshot detail refresh together; snapshot selection is preserved when it still exists.
+- `unity-archive-manual-import-workflow-ui` proves the slot dashboard -> template -> user file/manifest -> existing import authority -> refreshed UI-state path.
 
-Checks recorded from the S026 run:
+Checks recorded from the S027 run:
 
-- `ManualProviderImport` / `UnityArchiveReview` filtered tests: 48/48 passed.
-- `unity-archive-manual-provider-import` product smoke: 1/1 passed.
-- `ProductSmoke` filtered tests: 25/25 passed.
+- `ManualImport` / `UnityArchiveReview` filtered tests: 51/51 passed.
+- `WinForms` filtered tests: 52/52 passed.
+- `unity-archive-manual-import-workflow-ui` product smoke: 1/1 passed.
+- `ProductSmoke` filtered tests: 26/26 passed.
 - `check-devflow-state.ps1`: passed in `STOP_REVIEW` mode.
-- `check-all.ps1`: 630/630 tests passed, build 0 warnings / 0 errors.
+- `check-all.ps1`: 641/641 tests passed, build 0 warnings / 0 errors.
+
+- Product Slice 026: Controlled Manual Provider Output Import v1.
+- `UnityArchiveManualProviderImportService` remains the manifest/path/copy/report/refresh authority used by S027.
 
 - Product Slice 025: Read-only Archive Review/History UI.
 - Page id/title/sort order: `unity_archive_review` / `Unity Archive Review` / `41`.
@@ -124,7 +128,7 @@ Checks recorded from the accepted S024 run:
 
 ## Current M5/M6 lock semantics
 
-M5 and M6 task specs remain **Locked** after S026. The lock is intentional: M5 Lua executor integration and M6 rich GamePackage assembly are not opened by controlled manual file import or read-only review UX. They require a separate controlled product vertical-slice decision and explicit user approval.
+M5 and M6 task specs remain **Locked** after S027. The lock is intentional: M5 Lua executor integration and M6 rich GamePackage assembly are not opened by controlled manual file import or its workspace UI. They require a separate controlled product vertical-slice decision and explicit user approval.
 
 Currently locked or restricted:
 
@@ -133,7 +137,7 @@ Currently locked or restricted:
 - Broad contract expansion remains restricted beyond sampled baseline evidence.
 - Runtime preview repair loop remains restricted until a controlled vertical slice exists.
 
-Allowed next work remains bounded to a separately approved controlled manual-import UI action or one explicitly approved controlled product vertical slice. No Unity implementation, provider execution, Runtime expansion, GamePackage schema change, generator execution, LLM call or Lua execution is unlocked by Product Slice 026.
+Allowed next work remains bounded to manual import workflow polish after user testing or one explicitly approved controlled product vertical slice. No Unity implementation, provider execution, Runtime expansion, GamePackage schema change, generator execution, LLM call or Lua execution is unlocked by Product Slice 027.
 
 Parent slice foundation:
 

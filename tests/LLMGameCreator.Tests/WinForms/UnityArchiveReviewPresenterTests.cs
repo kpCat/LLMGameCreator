@@ -1,3 +1,7 @@
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using LLMGameCreator.Application.Composition;
 using LLMGameCreator.WinForms;
 using LLMGameCreator.WinForms.Pages;
 using LLMGameCreator.WinForms.Pages.UnityArchiveReview;
@@ -7,6 +11,13 @@ namespace LLMGameCreator.Tests.WinForms;
 
 public sealed class UnityArchiveReviewPresenterTests
 {
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        WriteIndented = true,
+        Converters = { new JsonStringEnumConverter() }
+    };
+
     [Fact]
     public async Task PresenterInitializesWithoutProject()
     {
@@ -134,6 +145,135 @@ public sealed class UnityArchiveReviewPresenterTests
     }
 
     [Fact]
+    public async Task PresenterListsManualImportSlotsFromArchiveMetadata()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+        CreateManualImportMetadata(temp.Path);
+
+        var state = await new UnityArchiveReviewPresenter().RefreshAsync(temp.Path);
+
+        Assert.Equal(3, state.ManualImportSlots.Count);
+        Assert.Contains(state.ManualImportSlots, slot => slot.Kind == UnityArchiveManualImportSlotKind.Asset);
+        Assert.Contains(state.ManualImportSlots, slot => slot.Kind == UnityArchiveManualImportSlotKind.Audio);
+        var available = Assert.Single(state.ManualImportSlots, slot => slot.Status == UnityArchiveFulfillmentStatus.available);
+        Assert.True(available.FileExists);
+        Assert.True(available.FileSizeBytes > 0);
+        Assert.Equal(64, available.ContentSha256.Length);
+        Assert.True(state.CanCreateManualImportTemplate);
+        Assert.True(state.CanRunManualImport);
+    }
+
+    [Fact]
+    public async Task PresenterReportsMissingSlotMetadataWithoutThrowing()
+    {
+        using var temp = new TempDirectory();
+        CreateArchiveRoot(temp.Path);
+
+        var state = await new UnityArchiveReviewPresenter().RefreshAsync(temp.Path);
+
+        Assert.Empty(state.ManualImportSlots);
+        Assert.Contains("slot metadata", state.ManualImportWorkspaceStatus, StringComparison.OrdinalIgnoreCase);
+        Assert.False(state.CanCreateManualImportTemplate);
+    }
+
+    [Fact]
+    public async Task SlotFilterShowsMissingAvailableInvalid()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+        CreateManualImportMetadata(temp.Path);
+        var presenter = new UnityArchiveReviewPresenter();
+        var state = await presenter.RefreshAsync(temp.Path);
+
+        var missing = presenter.ApplyManualImportFilter(state, UnityArchiveManualImportSlotFilter.Missing);
+        var available = presenter.ApplyManualImportFilter(state, UnityArchiveManualImportSlotFilter.Available);
+        var invalid = presenter.ApplyManualImportFilter(state, UnityArchiveManualImportSlotFilter.Invalid);
+        var manual = presenter.ApplyManualImportFilter(state, UnityArchiveManualImportSlotFilter.ManualImportProvider);
+        var future = presenter.ApplyManualImportFilter(state, UnityArchiveManualImportSlotFilter.FutureProviders);
+
+        Assert.All(missing.VisibleManualImportSlots, slot => Assert.Equal(UnityArchiveFulfillmentStatus.missing, slot.Status));
+        Assert.All(available.VisibleManualImportSlots, slot => Assert.Equal(UnityArchiveFulfillmentStatus.available, slot.Status));
+        Assert.All(invalid.VisibleManualImportSlots, slot => Assert.Equal(UnityArchiveFulfillmentStatus.invalid, slot.Status));
+        Assert.Equal(2, manual.VisibleManualImportSlots.Count);
+        Assert.Single(future.VisibleManualImportSlots);
+    }
+
+    [Fact]
+    public async Task RunManualImportUsesExistingServiceAndRefreshesReports()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+        var archiveRoot = CreateManualImportMetadata(temp.Path);
+        WriteText(archiveRoot, "manual-import/put-files-here/asset-slot.missing.png", "import bytes");
+        WriteJson(archiveRoot, "manual-import/import-manifest.json", new UnityArchiveManualProviderImportManifest
+        {
+            Entries =
+            [
+                new UnityArchiveManualProviderImportManifestEntry
+                {
+                    SlotId = "asset-slot.missing",
+                    SourceRelativePath = "put-files-here/asset-slot.missing.png",
+                    ExpectedOutputRelativePath = "assets/generated/icon/missing.png"
+                }
+            ]
+        });
+
+        var state = await new UnityArchiveReviewPresenter().RunManualImportAsync(
+            temp.Path,
+            "snapshot-a",
+            UnityArchiveManualImportSlotFilter.All,
+            "asset-slot.missing",
+            overwriteExisting: false);
+
+        Assert.True(File.Exists(Path.Combine(archiveRoot, "assets", "generated", "icon", "missing.png")));
+        Assert.True(File.Exists(Path.Combine(archiveRoot, "production", "manual-provider-import-report.json")));
+        Assert.True(File.Exists(Path.Combine(archiveRoot, "production", "fulfillment-state.json")));
+        Assert.True(File.Exists(Path.Combine(archiveRoot, "production", "archive-review.json")));
+        Assert.True(File.Exists(Path.Combine(archiveRoot, "production", "archive-review-history-index.json")));
+        Assert.True(File.Exists(Path.Combine(archiveRoot, "production", "archive-review-comparison.json")));
+        Assert.Contains("Manual import finished", state.ManualImportWorkspaceStatus, StringComparison.Ordinal);
+        Assert.Contains("Ready", state.ManualImportReportStatus, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task RunManualImportMissingManifestReportsStatus()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+        CreateManualImportMetadata(temp.Path);
+
+        var state = await new UnityArchiveReviewPresenter().RunManualImportAsync(
+            temp.Path,
+            null,
+            UnityArchiveManualImportSlotFilter.All,
+            null,
+            overwriteExisting: false);
+
+        Assert.Contains("manifest is missing", state.ManualImportWorkspaceStatus, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("MissingManifest", state.ManualImportReportStatus, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task SelectedSnapshotDetailStillUpdatesAfterRefresh()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+        CreateManualImportMetadata(temp.Path);
+
+        var state = await new UnityArchiveReviewPresenter().RefreshAsync(temp.Path, "snapshot-a");
+        var refreshed = await new UnityArchiveReviewPresenter().RefreshAsync(
+            temp.Path,
+            state.SelectedSnapshotId,
+            UnityArchiveManualImportSlotFilter.Missing);
+
+        Assert.Equal("snapshot-a", refreshed.SelectedSnapshotId);
+        Assert.Equal(1, refreshed.SelectedSnapshotSequence);
+        Assert.Equal("Loaded", refreshed.SelectedSnapshotStatus);
+        Assert.Contains("snapshot-a", refreshed.SelectedSnapshotJson, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void UserControlCanBeConstructedWithoutRuntimeServices()
     {
         using var page = new UnityArchiveReviewPageControl();
@@ -141,6 +281,18 @@ public sealed class UnityArchiveReviewPresenterTests
         Assert.Equal("unity_archive_review", page.Id);
         Assert.Equal("Unity Archive Review", page.Title);
         Assert.Equal(41, page.SortOrder);
+    }
+
+    [Fact]
+    public void PageExposesManualImportControls()
+    {
+        using var page = new UnityArchiveReviewPageControl();
+
+        Assert.Single(page.Controls.Find("_manualImportSlotsGrid", true));
+        Assert.Single(page.Controls.Find("_createManifestTemplateButton", true));
+        Assert.Single(page.Controls.Find("_openManualImportFolderButton", true));
+        Assert.Single(page.Controls.Find("_runManualImportButton", true));
+        Assert.Single(page.Controls.Find("_allowOverwriteCheckBox", true));
     }
 
     [Fact]
@@ -210,6 +362,122 @@ public sealed class UnityArchiveReviewPresenterTests
                 Path.Combine(snapshotFolder, "archive-review.json"),
                 $"{{\"schemaVersion\":\"1\",\"readiness\":\"Ready\",\"snapshotMarker\":\"{snapshotId}\"}}");
         }
+    }
+
+    internal static string CreateManualImportMetadata(string projectFolder)
+    {
+        var archiveRoot = CreateArchiveRoot(projectFolder);
+        var assetSlots = new UnityArchiveAssetSlotIndex
+        {
+            Slots =
+            [
+                new UnityArchiveAssetSlot
+                {
+                    SlotId = "asset-slot.missing",
+                    RequestId = "asset-request.missing",
+                    AssetId = "asset/missing",
+                    AssetKind = UnityArchiveAssetKind.icon,
+                    ProviderKind = UnityArchiveRequestProviderKind.manual_import,
+                    ExpectedOutputRelativePath = "assets/generated/icon/missing.png"
+                },
+                new UnityArchiveAssetSlot
+                {
+                    SlotId = "asset-slot.available",
+                    RequestId = "asset-request.available",
+                    AssetId = "asset/available",
+                    AssetKind = UnityArchiveAssetKind.icon,
+                    ProviderKind = UnityArchiveRequestProviderKind.manual_import,
+                    ExpectedOutputRelativePath = "assets/generated/icon/available.png"
+                }
+            ]
+        };
+        var audioSlots = new UnityArchiveAudioSlotIndex
+        {
+            Slots =
+            [
+                new UnityArchiveAudioSlot
+                {
+                    SlotId = "audio-slot.invalid",
+                    RequestId = "audio-request.invalid",
+                    AudioId = "audio/invalid",
+                    AudioKind = UnityArchiveAudioKind.music,
+                    ProviderKind = UnityArchiveRequestProviderKind.suno_future,
+                    ExpectedOutputRelativePath = "audio/generated/music/invalid.wav"
+                }
+            ]
+        };
+        var plan = new UnityArchiveFulfillmentPlan
+        {
+            Slots = assetSlots.Slots.Select(slot => new UnityArchiveFulfillmentSlot
+                {
+                    SlotId = slot.SlotId,
+                    RequestId = slot.RequestId,
+                    ProviderKind = slot.ProviderKind,
+                    ExpectedOutputRelativePath = slot.ExpectedOutputRelativePath
+                })
+                .Append(new UnityArchiveFulfillmentSlot
+                {
+                    SlotId = "audio-slot.invalid",
+                    RequestId = "audio-request.invalid",
+                    ProviderKind = UnityArchiveRequestProviderKind.suno_future,
+                    ExpectedOutputRelativePath = "audio/generated/music/invalid.wav"
+                }).ToList()
+        };
+        WriteJson(archiveRoot, "production/fulfillment-plan.json", plan);
+        WriteJson(archiveRoot, "assets/asset-slots.json", assetSlots);
+        WriteJson(archiveRoot, "audio/audio-slots.json", audioSlots);
+        WriteJson(archiveRoot, "lua/module-slots.json", new UnityArchiveLuaModuleSlotIndex());
+        WriteJson(archiveRoot, "production/fulfillment-state.json", new UnityArchiveFulfillmentStateReport
+        {
+            TotalSlotCount = 3,
+            MissingCount = 1,
+            AvailableCount = 1,
+            InvalidCount = 1,
+            Entries =
+            [
+                State("asset-slot.missing", UnityArchiveRequestProviderKind.manual_import, "assets/generated/icon/missing.png", UnityArchiveFulfillmentStatus.missing),
+                State("asset-slot.available", UnityArchiveRequestProviderKind.manual_import, "assets/generated/icon/available.png", UnityArchiveFulfillmentStatus.available),
+                State("audio-slot.invalid", UnityArchiveRequestProviderKind.suno_future, "audio/generated/music/invalid.wav", UnityArchiveFulfillmentStatus.invalid)
+            ]
+        });
+        WriteJson(archiveRoot, "production/invalid-outputs.json", new UnityArchiveInvalidOutputsReport
+        {
+            InvalidOutputs =
+            [
+                new UnityArchiveInvalidOutputEntry
+                {
+                    SlotId = "audio-slot.invalid",
+                    ExpectedOutputRelativePath = "audio/generated/music/invalid.wav",
+                    Reason = "empty_file"
+                }
+            ]
+        });
+        WriteText(archiveRoot, "assets/generated/icon/available.png", "available bytes");
+        WriteText(archiveRoot, "audio/generated/music/invalid.wav", string.Empty);
+        return archiveRoot;
+    }
+
+    private static UnityArchiveFulfillmentStateEntry State(
+        string slotId,
+        UnityArchiveRequestProviderKind providerKind,
+        string path,
+        UnityArchiveFulfillmentStatus status) => new()
+    {
+        SlotId = slotId,
+        ProviderKind = providerKind,
+        ExpectedOutputRelativePath = path,
+        Status = status
+    };
+
+    internal static void WriteJson<T>(string archiveRoot, string relativePath, T value) =>
+        WriteText(archiveRoot, relativePath, JsonSerializer.Serialize(value, JsonOptions));
+
+    internal static string WriteText(string archiveRoot, string relativePath, string content)
+    {
+        var path = Path.Combine(archiveRoot, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, content, new UTF8Encoding(false));
+        return path;
     }
 
     internal sealed class TempDirectory : IDisposable

@@ -1,4 +1,16 @@
+using LLMGameCreator.Application.Composition;
+
 namespace LLMGameCreator.WinForms.Pages.UnityArchiveReview;
+
+public enum UnityArchiveManualImportSlotFilter
+{
+    All,
+    Missing,
+    Available,
+    Invalid,
+    ManualImportProvider,
+    FutureProviders
+}
 
 public sealed record UnityArchiveReviewViewState
 {
@@ -22,8 +34,20 @@ public sealed record UnityArchiveReviewViewState
     public string HistoryIndexJson { get; init; } = string.Empty;
     public string ManualImportReportMarkdown { get; init; } = string.Empty;
     public string ManualImportReportJson { get; init; } = string.Empty;
+    public string ManualImportReportStatus { get; init; } = "No manual import report yet.";
+    public string ManualImportWorkspaceStatus { get; init; } = "No manual import workspace loaded.";
+    public IReadOnlyList<UnityArchiveManualImportWorkspaceSlot> ManualImportSlots { get; init; }
+        = Array.Empty<UnityArchiveManualImportWorkspaceSlot>();
+    public IReadOnlyList<UnityArchiveManualImportWorkspaceSlot> VisibleManualImportSlots { get; init; }
+        = Array.Empty<UnityArchiveManualImportWorkspaceSlot>();
+    public UnityArchiveManualImportSlotFilter ManualImportSlotFilter { get; init; }
+    public string SelectedManualImportSlotId { get; init; } = string.Empty;
+    public string SelectedManualImportSlotDetail { get; init; } = string.Empty;
     public bool CanRefresh { get; init; }
     public bool CanOpenArchiveFolder { get; init; }
+    public bool CanCreateManualImportTemplate { get; init; }
+    public bool CanRunManualImport { get; init; }
+    public bool CanOpenManualImportFolder { get; init; }
 }
 
 public sealed record UnityArchiveReviewSnapshotOption

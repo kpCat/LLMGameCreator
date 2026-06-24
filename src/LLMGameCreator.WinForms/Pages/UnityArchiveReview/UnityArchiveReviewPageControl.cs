@@ -1,5 +1,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using LLMGameCreator.Application.Composition;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.WinForms.Pages.UnityArchiveReview;
 
@@ -53,6 +55,14 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
     {
         _historySnapshotsList.DisplayMember = nameof(UnityArchiveReviewSnapshotOption.DisplayName);
         _historySnapshotsList.ValueMember = nameof(UnityArchiveReviewSnapshotOption.SnapshotId);
+        _manualImportFilterComboBox.DataSource = Enum.GetValues<UnityArchiveManualImportSlotFilter>();
+        _manualImportFilterComboBox.Format += (_, args) =>
+        {
+            if (args.ListItem is UnityArchiveManualImportSlotFilter filter)
+            {
+                args.Value = FormatFilter(filter);
+            }
+        };
         _splitContainer.SizeChanged += (_, _) => ApplySafeInitialSplitterDistance();
         ApplySafeInitialSplitterDistance();
     }
@@ -83,6 +93,13 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
         _refreshButton.Click += async (_, _) => await RefreshAsync();
         _openArchiveFolderButton.Click += (_, _) => OpenArchiveFolder();
         _historySnapshotsList.SelectedIndexChanged += async (_, _) => await SelectedSnapshotChangedAsync();
+        _manualImportFilterComboBox.SelectedIndexChanged += (_, _) => ManualImportFilterChanged();
+        _manualImportSlotsGrid.SelectionChanged += (_, _) => ManualImportSlotChanged();
+        _createManifestTemplateButton.Click += async (_, _) => await CreateManifestTemplateAsync();
+        _openManualImportFolderButton.Click += (_, _) => OpenManualImportFolder();
+        _runManualImportButton.Click += async (_, _) => await RunManualImportAsync();
+        _copySlotIdButton.Click += (_, _) => CopySelectedSlotValue(copyExpectedPath: false);
+        _copyExpectedPathButton.Click += (_, _) => CopySelectedSlotValue(copyExpectedPath: true);
         _currentGamePackageService!.CurrentChanged += async (_, _) => await CurrentProjectChangedAsync();
     }
 
@@ -108,7 +125,9 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
         {
             var refreshed = await _presenter.RefreshAsync(
                 _currentGamePackageService.CurrentFolder,
-                _state.SelectedSnapshotId);
+                _state.SelectedSnapshotId,
+                _state.ManualImportSlotFilter,
+                _state.SelectedManualImportSlotId);
             ApplyViewState(refreshed);
         });
     }
@@ -137,9 +156,121 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
         {
             var refreshed = await _presenter.RefreshAsync(
                 _currentGamePackageService.CurrentFolder,
-                selected.SnapshotId);
+                selected.SnapshotId,
+                _state.ManualImportSlotFilter,
+                _state.SelectedManualImportSlotId);
             ApplyViewState(refreshed);
         });
+    }
+
+    private void ManualImportFilterChanged()
+    {
+        if (_applyingState || _presenter is null ||
+            _manualImportFilterComboBox.SelectedItem is not UnityArchiveManualImportSlotFilter filter)
+        {
+            return;
+        }
+
+        ApplyViewState(_presenter.ApplyManualImportFilter(_state, filter, _state.SelectedManualImportSlotId));
+    }
+
+    private void ManualImportSlotChanged()
+    {
+        if (_applyingState || _presenter is null ||
+            _manualImportSlotsGrid.CurrentRow?.DataBoundItem is not UnityArchiveManualImportWorkspaceSlot selected)
+        {
+            return;
+        }
+
+        _state = _presenter.ApplyManualImportFilter(_state, _state.ManualImportSlotFilter, selected.SlotId);
+        _manualImportSlotDetailTextBox.Text = _state.SelectedManualImportSlotDetail;
+    }
+
+    private async Task CreateManifestTemplateAsync()
+    {
+        if (_presenter is null || _currentGamePackageService is null)
+        {
+            return;
+        }
+
+        await RunBusyAsync(async () =>
+        {
+            ApplyViewState(await _presenter.CreateManualImportTemplateAsync(
+                _currentGamePackageService.CurrentFolder,
+                _state.SelectedSnapshotId,
+                _state.ManualImportSlotFilter,
+                _state.SelectedManualImportSlotId));
+        });
+    }
+
+    private async Task RunManualImportAsync()
+    {
+        if (_presenter is null || _currentGamePackageService is null)
+        {
+            return;
+        }
+
+        await RunBusyAsync(async () =>
+        {
+            ApplyViewState(await _presenter.RunManualImportAsync(
+                _currentGamePackageService.CurrentFolder,
+                _state.SelectedSnapshotId,
+                _state.ManualImportSlotFilter,
+                _state.SelectedManualImportSlotId,
+                _allowOverwriteCheckBox.Checked));
+        });
+    }
+
+    private void OpenManualImportFolder()
+    {
+        if (_presenter is null || _currentGamePackageService is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var result = _presenter.EnsureManualImportDirectory(_currentGamePackageService.CurrentFolder);
+            _manualImportWorkspaceStatusLabel.Text = result.Status;
+            if (!result.Succeeded)
+            {
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = result.DirectoryPath,
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or Win32Exception)
+        {
+            _manualImportWorkspaceStatusLabel.Text = $"Manual import folder could not be opened: {ex.Message}";
+        }
+    }
+
+    private void CopySelectedSlotValue(bool copyExpectedPath)
+    {
+        var slot = _state.ManualImportSlots.FirstOrDefault(item =>
+            string.Equals(item.SlotId, _state.SelectedManualImportSlotId, StringComparison.OrdinalIgnoreCase));
+        TryCopyText(copyExpectedPath ? slot?.ExpectedOutputRelativePath : slot?.SlotId);
+    }
+
+    private void TryCopyText(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+
+        try
+        {
+            Clipboard.SetText(text);
+        }
+        catch (Exception ex) when (ex is InvalidOperationException or ExternalException)
+        {
+            _manualImportWorkspaceStatusLabel.Text = $"Clipboard copy failed: {ex.Message}";
+        }
     }
 
     private void OpenArchiveFolder()
@@ -207,6 +338,24 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
                 $"Status: {state.SelectedSnapshotStatus} | Sequence: {state.SelectedSnapshotSequence} | Path: {DisplayValue(state.SelectedSnapshotRelativePath)}";
             _manualImportMarkdownTextBox.Text = state.ManualImportReportMarkdown;
             _manualImportJsonTextBox.Text = state.ManualImportReportJson;
+            _manualImportReportStatusLabel.Text = state.ManualImportReportStatus;
+            _manualImportWorkspaceStatusLabel.Text = state.ManualImportWorkspaceStatus;
+            _manualImportFilterComboBox.SelectedItem = state.ManualImportSlotFilter;
+            _manualImportSlotsGrid.DataSource = state.VisibleManualImportSlots.ToList();
+            if (!string.IsNullOrWhiteSpace(state.SelectedManualImportSlotId))
+            {
+                foreach (DataGridViewRow row in _manualImportSlotsGrid.Rows)
+                {
+                    if (row.DataBoundItem is UnityArchiveManualImportWorkspaceSlot slot &&
+                        string.Equals(slot.SlotId, state.SelectedManualImportSlotId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        row.Selected = true;
+                        _manualImportSlotsGrid.CurrentCell = row.Cells[0];
+                        break;
+                    }
+                }
+            }
+            _manualImportSlotDetailTextBox.Text = state.SelectedManualImportSlotDetail;
             _statusSummaryTextBox.Text = state.Status;
             _statusLabel.Text = state.Status;
         }
@@ -217,6 +366,12 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
 
         _refreshButton.Enabled = state.CanRefresh;
         _openArchiveFolderButton.Enabled = state.CanOpenArchiveFolder;
+        _createManifestTemplateButton.Enabled = state.CanCreateManualImportTemplate;
+        _runManualImportButton.Enabled = state.CanRunManualImport;
+        _openManualImportFolderButton.Enabled = state.CanOpenManualImportFolder;
+        var hasSelectedSlot = !string.IsNullOrWhiteSpace(state.SelectedManualImportSlotId);
+        _copySlotIdButton.Enabled = hasSelectedSlot;
+        _copyExpectedPathButton.Enabled = hasSelectedSlot;
     }
 
     private void SetBusy(bool busy)
@@ -224,6 +379,15 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
         _refreshButton.Enabled = !busy && _state.CanRefresh;
         _openArchiveFolderButton.Enabled = !busy && _state.CanOpenArchiveFolder;
         _historySnapshotsList.Enabled = !busy;
+        _manualImportFilterComboBox.Enabled = !busy;
+        _manualImportSlotsGrid.Enabled = !busy;
+        _createManifestTemplateButton.Enabled = !busy && _state.CanCreateManualImportTemplate;
+        _runManualImportButton.Enabled = !busy && _state.CanRunManualImport;
+        _openManualImportFolderButton.Enabled = !busy && _state.CanOpenManualImportFolder;
+        _allowOverwriteCheckBox.Enabled = !busy;
+        var hasSelectedSlot = !string.IsNullOrWhiteSpace(_state.SelectedManualImportSlotId);
+        _copySlotIdButton.Enabled = !busy && hasSelectedSlot;
+        _copyExpectedPathButton.Enabled = !busy && hasSelectedSlot;
     }
 
     private void SetRuntimeUnavailable()
@@ -231,9 +395,25 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
         _refreshButton.Enabled = false;
         _openArchiveFolderButton.Enabled = false;
         _historySnapshotsList.Enabled = false;
+        _manualImportFilterComboBox.Enabled = false;
+        _manualImportSlotsGrid.Enabled = false;
+        _createManifestTemplateButton.Enabled = false;
+        _runManualImportButton.Enabled = false;
+        _openManualImportFolderButton.Enabled = false;
+        _allowOverwriteCheckBox.Enabled = false;
+        _copySlotIdButton.Enabled = false;
+        _copyExpectedPathButton.Enabled = false;
+        _manualImportWorkspaceStatusLabel.Text = "Runtime services are not available in design mode.";
         _statusSummaryTextBox.Text = "Runtime services are not available in design mode.";
         _statusLabel.Text = "Runtime services are not available in design mode.";
     }
 
     private static string DisplayValue(string value) => string.IsNullOrWhiteSpace(value) ? "Not available" : value;
+
+    private static string FormatFilter(UnityArchiveManualImportSlotFilter filter) => filter switch
+    {
+        UnityArchiveManualImportSlotFilter.ManualImportProvider => "Manual import provider",
+        UnityArchiveManualImportSlotFilter.FutureProviders => "Future providers",
+        _ => filter.ToString()
+    };
 }

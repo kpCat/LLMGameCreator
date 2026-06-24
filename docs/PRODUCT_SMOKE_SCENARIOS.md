@@ -727,3 +727,35 @@ Expected assertions:
 - no provider, LLM, generator, Lua, Unity, or Runtime gameplay execution occurs.
 
 The WinForms page remains read-only in S026; it does not expose an import action.
+
+## unity-archive-manual-import-workflow-ui
+
+Validates the complete controlled S027 workspace flow without UI automation or provider execution:
+
+```text
+materialized archive slot metadata
+-> Unity Archive Review presenter slot dashboard
+-> missing/invalid-only manifest template
+-> user file under manual-import/
+-> import-manifest.json
+-> existing S026 import service
+-> fulfillment/review/history/comparison/report refresh
+-> refreshed presenter state
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-manual-import-workflow-ui
+```
+
+Expected assertions:
+
+- the presenter and Designer-safe page construct over the materialized archive;
+- asset plus audio or Lua slots are listed with status and safe suggested source paths;
+- `manual-import/import-manifest.template.json` is created without overwriting the run manifest;
+- the user-supplied file is imported only to the existing expected output slot;
+- manual import JSON/Markdown, fulfillment state, archive review, history, and comparison exist after the run;
+- the refreshed slot is `available`, report text is visible, and the selected history snapshot is preserved;
+- overwrite remains disabled unless explicitly selected;
+- no provider, generator, LLM, Lua, Unity, or Runtime gameplay execution occurs.

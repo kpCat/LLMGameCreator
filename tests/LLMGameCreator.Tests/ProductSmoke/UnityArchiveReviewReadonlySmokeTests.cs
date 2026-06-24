@@ -24,12 +24,11 @@ public sealed class UnityArchiveReviewReadonlySmokeTests
             "# Manual Provider Import\n");
         var before = CaptureFiles(projectFolder);
         var presenter = new UnityArchiveReviewPresenter();
+        var state = await presenter.RefreshAsync(projectFolder);
+        var after = CaptureFiles(projectFolder);
         using var page = new UnityArchiveReviewPageControl(
             presenter,
             new FakeCurrentGamePackageService(projectFolder));
-
-        var state = await presenter.RefreshAsync(projectFolder);
-        var after = CaptureFiles(projectFolder);
 
         Assert.Equal("unity_archive_review", page.Id);
         Assert.Equal("Unity Archive Review", page.Title);

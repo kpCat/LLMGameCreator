@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-24T00:57:40Z",
+  "updated_at_utc": "2026-06-24T09:21:01Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 026 controlled manual provider output import completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_026_controlled_manual_provider_output_import",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 027 controlled manual import workspace UI completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_027_controlled_manual_import_workspace_ui",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-026 through controlled manual provider output import and read-only archive review detail; further Unity, provider, generator, Runtime, M5 and M6 work remains locked unless explicitly selected by a controlled vertical-slice approval.",
-  "current_user_action": "Review controlled manual import reports and selected snapshot detail, then choose whether a separate controlled manual-import UI action is warranted; generation remains explicit.",
-  "recommended_next_decision": "Choose a controlled manual import UI action or one explicitly approved product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-027 through the controlled manual import workspace UI; further Unity, provider, generator, Runtime, M5 and M6 work remains locked unless explicitly selected by a controlled vertical-slice approval.",
+  "current_user_action": "Review and user-test the controlled manual import workspace; generation and provider execution remain explicit and outside this slice.",
+  "recommended_next_decision": "Choose manual import workflow polish after user testing or one explicitly approved product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,15 +49,16 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_026_controlled_manual_provider_output_import_v1",
-    "title": "Controlled Manual Provider Output Import v1",
-    "completed_at_utc": "2026-06-24T00:57:40Z",
-    "summary": "Controlled manifest-based import into existing Unity archive fulfillment slots with deterministic reports, fulfillment/review refresh, and selected snapshot detail.",
-    "parent_slice_id": "product_slice_025_read_only_archive_review_history_ui",
-    "ui_surface": "application_manual_import_and_winforms_read_only_report_detail",
-    "scenario_id": "unity-archive-manual-provider-import",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-archive-manual-provider-import",
+    "slice_id": "product_slice_027_controlled_manual_import_workspace_ui_v1",
+    "title": "Controlled Manual Import Workspace UI v1",
+    "completed_at_utc": "2026-06-24T09:21:01Z",
+    "summary": "Unity Archive Review slot dashboard/checklist, deterministic manifest template generation, explicit existing-service import action, refreshed reports, and preserved selected snapshot detail without provider execution.",
+    "parent_slice_id": "product_slice_026_controlled_manual_provider_output_import_v1",
+    "ui_surface": "winforms_unity_archive_review_manual_import_workspace",
+    "scenario_id": "unity-archive-manual-import-workflow-ui",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-archive-manual-import-workflow-ui",
     "headless_outputs": [
+      ".llmgc/unity-archive/manual-import/import-manifest.template.json",
       ".llmgc/unity-archive/production/manual-provider-import-report.json",
       ".llmgc/unity-archive/production/manual-provider-import-report.md",
       ".llmgc/unity-archive/production/fulfillment-state.json",
@@ -73,26 +74,27 @@
       ".llmgc/unity-archive/review-history/<snapshot-id>/archive-review.json"
     ],
     "validation_contracts": [
-      "manifest source files remain under manual-import and target only existing safe expected output slots",
-      "duplicate or unknown slots, missing or empty sources, mismatched extensions and target conflicts fail closed",
-      "identical target bytes are idempotent and overwrite requires explicit request opt-in",
-      "manual import JSON and markdown reports are deterministic, timestamp-free, UTF-8 without BOM and archive-relative",
-      "existing fulfillment, review, history and comparison services refresh after import",
-      "read-only page displays selected snapshot JSON and manual import markdown/json",
-      "missing selected snapshots and reports do not throw",
-      "designer-safe page construction works without runtime services",
+      "slot dashboard merges fulfillment plan/state and typed indexes while missing or malformed JSON remains non-throwing",
+      "template is deterministic, missing/invalid-only, archive-contained and never overwrites import-manifest.json",
+      "suggested source paths are relative to manual-import and stay under put-files-here without traversal or backslashes",
+      "existing UnityArchiveManualProviderImportService remains the validation, copy, conflict, report and refresh authority",
+      "different-byte overwrite is disabled by default and requires an explicit risk-labelled UI checkbox",
+      "manual import report, fulfillment, review, history, comparison and selected snapshot detail refresh together",
+      "selected snapshots are preserved when present and latest sequence is the fallback",
+      "designer-safe page construction and manual import controls work without runtime services",
       "no Unity, Runtime gameplay, GamePackage schema, provider, generator, LLM or Lua execution"
     ],
     "checks": [
-      "ManualProviderImport and UnityArchiveReview filtered tests: 48/48 passed",
-      "ProductSmoke filtered tests: 25/25 passed",
-      "unity-archive-manual-provider-import product smoke: 1/1 passed",
+      "ManualImport and UnityArchiveReview filtered tests: 51/51 passed",
+      "WinForms filtered tests: 52/52 passed",
+      "ProductSmoke filtered tests: 26/26 passed",
+      "unity-archive-manual-import-workflow-ui product smoke: 1/1 passed",
       "check-devflow-state.ps1: passed in STOP_REVIEW mode",
-      "check-all.ps1: 630/630 tests passed, build 0 warnings / 0 errors"
+      "check-all.ps1: 641/641 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_controlled_manual_import_ui_action",
+    "manual_import_workflow_polish_after_user_testing",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
@@ -111,10 +113,10 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "controlled_manual_import_ui_action",
-  "recommended_next_work_item_title": "Choose a controlled manual import UI action or one explicitly approved product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
+  "recommended_next_work_item": "manual_import_workflow_polish_after_user_testing",
+  "recommended_next_work_item_title": "Choose manual import workflow polish after user testing or one explicitly approved product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
   "candidate_product_vertical_slices": [
-    "A controlled manual import UI action may be selected as a separate bounded slice.",
+    "Manual import workflow polish may be selected after bounded user testing.",
     "One controlled semantic-generation contract may be selected only after the generator catalog direction is explicitly chosen."
   ],
   "required_reading_order_for_new_agents": [
@@ -152,6 +154,7 @@
     "Deterministic Unity archive review retention/history",
     "Read-only Unity archive review/history/comparison editor page",
     "Controlled manual provider output import with deterministic reports and refresh",
+    "Controlled manual import workspace UI with slot dashboard, template generation, explicit import action and report refresh",
     "Selected Unity archive history snapshot and manual import report detail",
     "controlled batch preset selection",
     "LLM Evaluation",

@@ -80,6 +80,9 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GameCompositionDiagnosticsMarkdownRenderer>(Reuse.Singleton);
         _container.Register<GameCompositionDiagnosticsExportService>(Reuse.Singleton);
         _container.Register<CompositionWorkbenchPresenter>(Reuse.Singleton);
+        _container.Register<UnityArchiveManualImportTemplateService>(Reuse.Singleton);
+        _container.Register<UnityArchiveManualProviderImportMarkdownRenderer>(Reuse.Singleton);
+        _container.Register<UnityArchiveManualProviderImportService>(Reuse.Singleton);
         _container.Register<UnityArchiveReviewPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);

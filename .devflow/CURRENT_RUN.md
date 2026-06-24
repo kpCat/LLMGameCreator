@@ -1,33 +1,34 @@
-Task id: PRODUCT_SLICE_026_CONTROLLED_MANUAL_PROVIDER_OUTPUT_IMPORT_V1
-Goal: Controlled manifest-based provider output import plus selected archive-history snapshot detail
+Task id: PRODUCT_SLICE_027_CONTROLLED_MANUAL_IMPORT_WORKSPACE_UI_V1
+Goal: Complete safe manual-import workspace inside Unity Archive Review
 
 Read-first sources:
 - AGENTS.md
 - docs/CONTEXT_INDEX.md
 - docs/CURRENT_GENERATOR_STATE.md and .json
 - docs/PRODUCT_SMOKE_SCENARIOS.md
-- docs/WINFORMS_DESIGNER_RULES.md
-- target Application project and Unity archive materialization/provider-plan/fulfillment/review/history/comparison services/models
-- target WinForms presenter/view/page/Designer
+- docs/PRODUCT_SLICE_026_CONTROLLED_MANUAL_PROVIDER_OUTPUT_IMPORT.md
+- docs/WINFORMS_DESIGNER_RULES.md and target project files
+- S026 import service/models/renderer plus slot/fulfillment models
+- Unity Archive Review presenter/view/page/Designer and local grid/filter/open/busy analogs
 - required Application, WinForms, ProductSmoke tests and smoke runner
 
 Implemented:
-- UnityArchiveManualProviderImportService, models, and markdown renderer
-- safe manifest/source/target containment validation over materialized slot metadata
-- exact extension/path matching, duplicate/unknown slot diagnostics, idempotent same-byte handling, opt-in overwrite, SHA-256 reporting
-- deterministic JSON/Markdown reports under production/
-- existing fulfillment/review/history/comparison refresh chain after import
-- selected snapshot JSON/status/path/sequence in Unity Archive Review
-- manual import Markdown/JSON read-only tabs
-- focused Application/WinForms tests and unity-archive-manual-provider-import ProductSmoke
-- S026 product/smoke/current-state documentation with M5/M6 Locked preserved
+- slot dashboard/checklist over fulfillment plan/state plus typed asset/audio/Lua indexes
+- All/Missing/Available/Invalid/manual-provider/future-provider filters, selection detail, and copy helpers
+- deterministic missing/invalid-only `manual-import/import-manifest.template.json` generation without overwriting the run manifest
+- create/open manual-import folder helper with shell launch isolated in UI
+- Run manual import action through the existing S026 service with overwrite disabled by default and explicit risk opt-in
+- refreshed manual import reports, fulfillment state, review, history, comparison, and preserved selected snapshot
+- focused Application/WinForms tests and `unity-archive-manual-import-workflow-ui` ProductSmoke
+- S027 product/smoke/current-state documentation with M5/M6 Locked preserved
 
 Verification:
-- ManualProviderImport/UnityArchiveReview filtered tests: 48/48 passed
-- unity-archive-manual-provider-import product smoke: 1/1 passed
-- ProductSmoke filtered tests: 25/25 passed
+- ManualImport/UnityArchiveReview filtered tests: 51/51 passed
+- WinForms filtered tests: 52/52 passed
+- unity-archive-manual-import-workflow-ui product smoke: 1/1 passed
+- ProductSmoke filtered tests: 26/26 passed
 - check-devflow-state.ps1: passed in STOP_REVIEW mode
-- check-all.ps1: 630/630 tests passed, build 0 warnings / 0 errors
+- check-all.ps1: 641/641 tests passed, build 0 warnings / 0 errors
 
 Forbidden scope preserved:
 - no Runtime or Runtime.Abstractions edits

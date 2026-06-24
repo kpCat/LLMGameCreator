@@ -22,6 +22,17 @@ public sealed class UnityArchiveReviewPresenter
         Converters = { new JsonStringEnumConverter() }
     };
 
+    private readonly UnityArchiveManualImportTemplateService _templateService;
+    private readonly UnityArchiveManualProviderImportService _importService;
+
+    public UnityArchiveReviewPresenter(
+        UnityArchiveManualImportTemplateService? templateService = null,
+        UnityArchiveManualProviderImportService? importService = null)
+    {
+        _templateService = templateService ?? new UnityArchiveManualImportTemplateService();
+        _importService = importService ?? new UnityArchiveManualProviderImportService();
+    }
+
     public UnityArchiveReviewViewState Initialize(string? projectFolder)
     {
         if (string.IsNullOrWhiteSpace(projectFolder))
@@ -54,6 +65,8 @@ public sealed class UnityArchiveReviewPresenter
     public async Task<UnityArchiveReviewViewState> RefreshAsync(
         string? projectFolder,
         string? selectedSnapshotId = null,
+        UnityArchiveManualImportSlotFilter slotFilter = UnityArchiveManualImportSlotFilter.All,
+        string? selectedManualImportSlotId = null,
         CancellationToken cancellationToken = default)
     {
         var initial = Initialize(projectFolder);
@@ -106,7 +119,7 @@ public sealed class UnityArchiveReviewPresenter
             missingFiles,
             invalidFiles,
             cancellationToken).ConfigureAwait(false);
-        var manualImportReportJson = await ReadTextAsync(
+        var manualImportReportJson = await ReadJsonAsync<UnityArchiveManualProviderImportResult>(
             initial.ArchiveRoot,
             ManualImportReportJsonRelativePath,
             missingFiles,
@@ -120,6 +133,9 @@ public sealed class UnityArchiveReviewPresenter
             invalidFiles,
             cancellationToken,
             required: false).ConfigureAwait(false);
+        var workspace = await _templateService.LoadWorkspaceAsync(
+            initial.ArchiveRoot,
+            cancellationToken).ConfigureAwait(false);
 
         var snapshots = BuildSnapshotOptions(initial.ArchiveRoot, historyIndex.Value);
         var selected = snapshots.FirstOrDefault(snapshot =>
@@ -141,7 +157,13 @@ public sealed class UnityArchiveReviewPresenter
                     ? "Invalid"
                     : "Missing";
 
-        return initial with
+        var manualImportReportStatus = manualImportReportJson.Value is not null
+            ? $"Manual import report: {manualImportReportJson.Value.Readiness}."
+            : manualImportReportJson.Exists
+                ? "Manual import report JSON is invalid. Markdown remains available when readable."
+                : "No manual import report yet.";
+        var workspaceStatus = BuildWorkspaceStatus(workspace);
+        var refreshed = initial with
         {
             Status = BuildStatus(missingFiles, invalidFiles),
             CurrentReviewReadiness = currentReview.Value?.Readiness.ToString()
@@ -161,9 +183,104 @@ public sealed class UnityArchiveReviewPresenter
             ComparisonJson = comparison.Content,
             HistoryIndexJson = historyIndex.Content,
             ManualImportReportMarkdown = manualImportReportMarkdown,
-            ManualImportReportJson = manualImportReportJson,
-            CanOpenArchiveFolder = true
+            ManualImportReportJson = manualImportReportJson.Content,
+            ManualImportReportStatus = manualImportReportStatus,
+            ManualImportWorkspaceStatus = workspaceStatus,
+            ManualImportSlots = workspace.Slots,
+            CanOpenArchiveFolder = true,
+            CanCreateManualImportTemplate = workspace.Slots.Count > 0,
+            CanRunManualImport = true,
+            CanOpenManualImportFolder = true
         };
+
+        return ApplyManualImportFilter(refreshed, slotFilter, selectedManualImportSlotId);
+    }
+
+    public UnityArchiveReviewViewState ApplyManualImportFilter(
+        UnityArchiveReviewViewState state,
+        UnityArchiveManualImportSlotFilter filter,
+        string? selectedSlotId = null)
+    {
+        ArgumentNullException.ThrowIfNull(state);
+        var visible = state.ManualImportSlots
+            .Where(slot => MatchesFilter(slot, filter))
+            .OrderBy(slot => slot.SlotId, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(slot => slot.SlotId, StringComparer.Ordinal)
+            .ToList();
+        var selected = visible.FirstOrDefault(slot =>
+                           string.Equals(slot.SlotId, selectedSlotId, StringComparison.OrdinalIgnoreCase))
+                       ?? visible.FirstOrDefault();
+        return state with
+        {
+            ManualImportSlotFilter = filter,
+            VisibleManualImportSlots = visible,
+            SelectedManualImportSlotId = selected?.SlotId ?? string.Empty,
+            SelectedManualImportSlotDetail = BuildSlotDetail(selected)
+        };
+    }
+
+    public async Task<UnityArchiveReviewViewState> CreateManualImportTemplateAsync(
+        string? projectFolder,
+        string? selectedSnapshotId,
+        UnityArchiveManualImportSlotFilter slotFilter,
+        string? selectedManualImportSlotId,
+        CancellationToken cancellationToken = default)
+    {
+        var initial = Initialize(projectFolder);
+        if (!initial.CanRefresh || !Directory.Exists(initial.ArchiveRoot))
+        {
+            return initial with { ManualImportWorkspaceStatus = "Manifest template cannot be created because the Unity archive folder is missing." };
+        }
+
+        var result = await _templateService.CreateTemplateAsync(initial.ArchiveRoot, cancellationToken).ConfigureAwait(false);
+        var refreshed = await RefreshAsync(
+            projectFolder,
+            selectedSnapshotId,
+            slotFilter,
+            selectedManualImportSlotId,
+            cancellationToken).ConfigureAwait(false);
+        return refreshed with { ManualImportWorkspaceStatus = result.Status };
+    }
+
+    public UnityArchiveManualImportDirectoryResult EnsureManualImportDirectory(string? projectFolder)
+    {
+        var initial = Initialize(projectFolder);
+        return _templateService.EnsureManualImportDirectory(initial.ArchiveRoot);
+    }
+
+    public async Task<UnityArchiveReviewViewState> RunManualImportAsync(
+        string? projectFolder,
+        string? selectedSnapshotId,
+        UnityArchiveManualImportSlotFilter slotFilter,
+        string? selectedManualImportSlotId,
+        bool overwriteExisting,
+        CancellationToken cancellationToken = default)
+    {
+        var initial = Initialize(projectFolder);
+        if (!initial.CanRefresh || !Directory.Exists(initial.ArchiveRoot))
+        {
+            return initial with { ManualImportWorkspaceStatus = "Manual import cannot run because the Unity archive folder is missing." };
+        }
+
+        var result = await _importService.ImportAsync(new UnityArchiveManualProviderImportRequest
+        {
+            ArchiveDirectoryPath = initial.ArchiveRoot,
+            ImportDirectoryRelativePath = "manual-import",
+            ManifestRelativePath = "manual-import/import-manifest.json",
+            RefreshFulfillmentState = true,
+            RefreshReviewHistoryComparison = true,
+            OverwriteExisting = overwriteExisting
+        }, cancellationToken).ConfigureAwait(false);
+        var refreshed = await RefreshAsync(
+            projectFolder,
+            selectedSnapshotId,
+            slotFilter,
+            selectedManualImportSlotId,
+            cancellationToken).ConfigureAwait(false);
+        var status = result.Readiness == UnityArchiveManualProviderImportReadiness.MissingManifest
+            ? "Manual import manifest is missing. Copy/edit import-manifest.template.json as manual-import/import-manifest.json, then run again."
+            : $"Manual import finished: {result.Readiness}; imported={result.ImportedCount}, already imported={result.SkippedCount}, conflicts={result.ConflictCount}, invalid={result.InvalidCount}.";
+        return refreshed with { ManualImportWorkspaceStatus = status };
     }
 
     private static async Task<JsonFileResult<T>> ReadJsonAsync<T>(
@@ -171,12 +288,16 @@ public sealed class UnityArchiveReviewPresenter
         string relativePath,
         ICollection<string> missingFiles,
         ICollection<string> invalidFiles,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        bool required = true)
     {
         var path = GetArchivePath(archiveRoot, relativePath);
         if (!File.Exists(path))
         {
-            missingFiles.Add(relativePath);
+            if (required)
+            {
+                missingFiles.Add(relativePath);
+            }
             return new JsonFileResult<T>();
         }
 
@@ -322,6 +443,53 @@ public sealed class UnityArchiveReviewPresenter
         }
 
         return string.Join(" ", parts);
+    }
+
+    private static bool MatchesFilter(
+        UnityArchiveManualImportWorkspaceSlot slot,
+        UnityArchiveManualImportSlotFilter filter) => filter switch
+    {
+        UnityArchiveManualImportSlotFilter.Missing => slot.Status == UnityArchiveFulfillmentStatus.missing,
+        UnityArchiveManualImportSlotFilter.Available => slot.Status == UnityArchiveFulfillmentStatus.available,
+        UnityArchiveManualImportSlotFilter.Invalid => slot.Status == UnityArchiveFulfillmentStatus.invalid,
+        UnityArchiveManualImportSlotFilter.ManualImportProvider => slot.ProviderKind == UnityArchiveRequestProviderKind.manual_import,
+        UnityArchiveManualImportSlotFilter.FutureProviders => slot.ProviderKind is
+            UnityArchiveRequestProviderKind.comfyui_future or
+            UnityArchiveRequestProviderKind.suno_future or
+            UnityArchiveRequestProviderKind.local_audio_future or
+            UnityArchiveRequestProviderKind.procedural_future,
+        _ => true
+    };
+
+    private static string BuildWorkspaceStatus(UnityArchiveManualImportWorkspaceResult workspace)
+    {
+        var summary = $"Manual import slots: {workspace.Slots.Count}; readiness: {workspace.Readiness}.";
+        return workspace.Diagnostics.Count == 0
+            ? summary
+            : $"{summary} {string.Join(" ", workspace.Diagnostics)}";
+    }
+
+    private static string BuildSlotDetail(UnityArchiveManualImportWorkspaceSlot? slot)
+    {
+        if (slot is null)
+        {
+            return "No manual import slot is selected.";
+        }
+
+        return string.Join(Environment.NewLine,
+        [
+            $"slotId: {slot.SlotId}",
+            $"kind: {slot.Kind}",
+            $"providerKind: {slot.ProviderKind}",
+            $"expectedOutputRelativePath: {slot.ExpectedOutputRelativePath}",
+            $"status: {slot.Status}",
+            $"file exists: {slot.FileExists}",
+            $"file size: {slot.FileSizeBytes}",
+            $"sha256: {(string.IsNullOrWhiteSpace(slot.ContentSha256) ? "Not available" : slot.ContentSha256)}",
+            $"requestId: {slot.RequestId}",
+            $"sourceId: {slot.SourceId}",
+            $"suggested sourceRelativePath: {slot.SuggestedSourceRelativePath}"
+        ]);
     }
 
     private static bool IsSafeSnapshotId(string? snapshotId)
