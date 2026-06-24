@@ -1,19 +1,21 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 030 Formula/Effect/Action Registry Foundation  
+Updated by: Product Slice 031 Tiny Generated Runtime Loop  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop.
 
-The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 should consume both in a tiny generated runtime loop.
+The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation.
 
 Source of truth for the reset:
 
 - `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
 - `docs/NEXT_PRODUCT_SLICE_029_SEEDED_PROCEDURAL_GAME_KERNEL_TASK.md`
+
+Historical strict-evaluation gate context remains discoverable at `docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md`.
 
 ## Active Strategy Reset
 
@@ -32,6 +34,7 @@ Allowed next sequence:
 
 1. Product Slice 030: Formula/Effect/Action Registry Foundation.
 2. Product Slice 031: Tiny Generated Runtime Loop.
+3. Generated Package MVP.
 
 Kill criterion:
 
@@ -45,10 +48,34 @@ product slices, stop and reassess architecture before spending more limit.
 Recommended next work item:
 
 ```text
-tiny_generated_runtime_loop
+generated_package_mvp
 ```
 
-Recommended next task file is not present yet. Draft it from the strategy reset Slice C requirements before implementation if the user asks to execute Slice 031.
+Generated Package MVP: map generated plan/rules/tiny-loop output into the minimal package/runtime path needed for a visible playable prototype.
+
+## Product Slice 031 Summary
+
+Product Slice 031: Tiny Generated Runtime Loop.
+
+Completed behavior:
+
+- repaired stale current-state docs guard expectations without reverting to the old M4.1 next-step recommendation;
+- added an Application-layer deterministic tiny runtime loop service;
+- consumed Slice 029 `ProceduralGeneratedGamePlan` and Slice 030 `FormulaEffectActionRulePack` plus validation output;
+- produced byte-stable `.llmgc/procedural/tiny-runtime-loop-state.json`;
+- produced deterministic `.llmgc/procedural/tiny-runtime-loop-report.json`;
+- produced deterministic `.llmgc/procedural/tiny-runtime-loop-report.md`;
+- selected a starting region, movement/exploration transition, encounter seed and quest/event seed;
+- applied generated action/effect ids into tiny state: flags, inventory item grants, quest/event state and faction reputation deltas;
+- diagnosed missing inputs, missing refs and unsupported action/effect types without normal-operation crashes;
+- added the `tiny-generated-runtime-loop` product smoke scenario;
+- did not add UI, provider execution, LLM calls, Lua execution, Unity work, media generation, GamePackage schema changes or public runtime command/state changes.
+
+Recorded checks from S031:
+
+- `CurrentGeneratorStateDocsTests` filtered tests: 10/10 passed.
+- `TinyGeneratedRuntimeLoop` filtered tests: 4/4 passed.
+- `tiny-generated-runtime-loop` product smoke: 1/1 passed.
 
 ## Product Slice 030 Summary
 
@@ -139,7 +166,7 @@ Currently locked or restricted:
 - M5 Lua module executor integration remains locked until a controlled product vertical slice explicitly selects it and the user approves the unlock.
 - M6 rich GamePackage assembly beyond the current baseline draft assembly remains locked until a controlled product vertical slice explicitly selects it and the user approves the unlock.
 - Broad contract expansion remains restricted beyond sampled baseline evidence.
-- Runtime preview repair loop remains restricted until the procedural kernel and tiny generated runtime loop are selected and implemented.
+- Runtime preview repair loop remains restricted until a controlled generated package/playable MVP slice explicitly maps the generated plan, rules and tiny-loop output into the minimal package/runtime path.
 
 ## Current Workflow Foundation
 
@@ -154,6 +181,9 @@ Existing work remains valuable and should be reused:
 - manual provider output import;
 - review/history/comparison;
 - semantic sidecar and generation-context preview;
+- seeded procedural generated plan sidecars;
+- formula/effect/action rule-pack sidecars;
+- tiny generated runtime loop state/report sidecars;
 - C# validation authority;
 - headless runtime services.
 
@@ -178,8 +208,8 @@ Update this file pair after every accepted product slice.
 
 Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 
-After Product Slice 030 completes, this state should recommend:
+After Product Slice 031 completes, this state should recommend:
 
 ```text
-tiny_generated_runtime_loop
+generated_package_mvp
 ```

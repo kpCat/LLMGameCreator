@@ -34,6 +34,8 @@ function Write-ProductSmokeSummary {
         Join-Path $PackageOutputDir ".llmgc\package-assembly\package.json"
     } elseif ($Scenario -eq "procedural-game-kernel") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-game-plan.json"
+    } elseif ($Scenario -eq "tiny-generated-runtime-loop") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\tiny-runtime-loop-state.json"
     } else {
         Join-Path $PackageOutputDir "package.json"
     }
@@ -158,6 +160,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "procedural-game-kernel") {
         $TestFilter = "FullyQualifiedName~ProceduralGameKernelProductSmoke"
+    }
+    elseif ($Scenario -eq "tiny-generated-runtime-loop") {
+        $TestFilter = "FullyQualifiedName~TinyGeneratedRuntimeLoopProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

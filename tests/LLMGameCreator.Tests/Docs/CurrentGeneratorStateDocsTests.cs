@@ -71,8 +71,10 @@ public sealed class CurrentGeneratorStateDocsTests
         var readme = Read(root, "README.md");
 
         Assert.Contains("docs/CURRENT_GENERATOR_STATE.md", readme);
-        Assert.Contains("M4.1 real-model evaluation gate", readme);
-        Assert.Contains("Capability Picker -> LLM Artifacts -> LLM Evaluation", readme);
+        Assert.Contains("Tiny Generated Runtime Loop", readme);
+        Assert.Contains("Generated Package MVP", readme);
+        Assert.Contains("Formula/Effect/Action Registry Foundation", readme);
+        Assert.DoesNotContain("Next practical step:\r\nM4.1", readme, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -98,18 +100,22 @@ public sealed class CurrentGeneratorStateDocsTests
     }
 
     [Fact]
-    public void CurrentStateJsonBlocksM5UntilRealEvaluationGatePasses()
+    public void CurrentStateJsonKeepsLuaAndRuntimeExpansionLockedDuringStrategyReset()
     {
         using var state = ReadCurrentStateJson();
         var currentPhase = state.RootElement.GetProperty("current_phase").GetString();
+        var recommendedNextWorkItem = state.RootElement.GetProperty("recommended_next_work_item").GetString();
         var blocked = state.RootElement.GetProperty("blocked_next_milestones_until_gate_passes")
             .EnumerateArray()
             .Select(item => item.GetString() ?? string.Empty)
             .ToArray();
 
-        Assert.Equal("m4_1_real_model_evaluation_gate", currentPhase);
+        Assert.Equal("strategy_reset_playable_procedural_generator", currentPhase);
+        Assert.Equal("generated_package_mvp", recommendedNextWorkItem);
         Assert.Contains(blocked, item => item.Contains("M5", StringComparison.OrdinalIgnoreCase));
         Assert.Contains(blocked, item => item.Contains("Lua", StringComparison.OrdinalIgnoreCase));
+        Assert.Contains(blocked, item => item.Contains("M6", StringComparison.OrdinalIgnoreCase));
+        Assert.Contains(blocked, item => item.Contains("Runtime preview repair loop", StringComparison.OrdinalIgnoreCase));
     }
 
     [Fact]

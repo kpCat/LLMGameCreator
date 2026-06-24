@@ -3,21 +3,21 @@
   "state_id": "current_generator_state",
   "updated_at_utc": "2026-06-24T00:00:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Post-S028 strategy reset toward a playable/simulatable procedural generator kernel",
-  "gate_status": "m4_1_passed_s030_completed_strategy_reset_active",
+  "current_phase_title": "Post-S031 strategy reset toward a generated package/playable MVP",
+  "gate_status": "m4_1_passed_s031_completed_strategy_reset_active",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_030_formula_effect_action_registry_foundation",
+  "last_completed_product_slice_id": "product_slice_031_tiny_generated_runtime_loop",
   "active_manual_gate": "Infrastructure-only next work is frozen unless explicitly approved by the user or directly required to unblock the generated playable/simulatable loop.",
-  "current_user_action": "Use Product Slice 031: Tiny Generated Runtime Loop as the next Codex task unless explicitly overriding the strategy reset.",
-  "recommended_next_decision": "Start Tiny Generated Runtime Loop so the Slice 029 generated plan and Slice 030 validated rule pack become a small generated simulatable loop; do not spend further slices on semantic UI, manual import polish, archive review polish or other infrastructure-only work without explicit user approval.",
+  "current_user_action": "Use Generated Package MVP as the next Codex task unless explicitly overriding the strategy reset.",
+  "recommended_next_decision": "Start Generated Package MVP so the Slice 029 generated plan, Slice 030 validated rule pack and Slice 031 tiny-loop output map into the minimal package/runtime path needed for a visible playable prototype; do not spend further slices on semantic UI, manual import polish, archive review polish or other infrastructure-only work without explicit user approval.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "tiny_generated_runtime_loop"
+      "generated_package_mvp"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -60,24 +60,25 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_030_formula_effect_action_registry_foundation",
-    "title": "Formula/Effect/Action Registry Foundation",
+    "slice_id": "product_slice_031_tiny_generated_runtime_loop",
+    "title": "Tiny Generated Runtime Loop",
     "completed_at_utc": "2026-06-24T00:00:00Z",
-    "summary": "Added an Application-layer deterministic formula/effect/action registry foundation that converts Slice 029 generated placeholders into byte-stable .llmgc/procedural/formula-effect-action-rule-pack.json, formula-effect-action-rule-pack.md, formula-effect-action-validation-report.json and formula-effect-action-validation-report.md sidecars with formula, requirement, effect, action, event-rule and validation diagnostics.",
-    "scenario_id": "formula-effect-action-registry",
+    "summary": "Added an Application-layer deterministic tiny generated runtime loop that consumes the Slice 029 generated plan and Slice 030 rule pack, applies generated action/effect ids into visible tiny state transitions, and writes byte-stable .llmgc/procedural/tiny-runtime-loop-state.json, tiny-runtime-loop-report.json and tiny-runtime-loop-report.md sidecars with diagnostics.",
+    "scenario_id": "tiny-generated-runtime-loop",
     "checks": [
-      "FormulaEffectActionRegistry filtered tests: 4/4 passed",
-      "formula-effect-action-registry product smoke: 1/1 passed"
+      "CurrentGeneratorStateDocsTests filtered tests: 10/10 passed",
+      "TinyGeneratedRuntimeLoop filtered tests: 4/4 passed",
+      "tiny-generated-runtime-loop product smoke: 1/1 passed"
     ]
   },
   "allowed_next_codex_task_types": [
-    "tiny_generated_runtime_loop"
+    "generated_package_mvp"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
     "M6 rich GamePackage assembly beyond the current baseline draft assembly remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
     "Broad contract expansion remains restricted beyond sampled baseline evidence.",
-    "Runtime preview repair loop remains restricted until the procedural kernel and tiny generated runtime loop are selected and implemented."
+    "Runtime preview repair loop remains restricted until a controlled generated package/playable MVP slice explicitly maps the generated plan, rules and tiny-loop output into the minimal package/runtime path."
   ],
   "restricted_next_work": [
     "semantic catalog review UI unless explicitly requested",
@@ -92,11 +93,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "tiny_generated_runtime_loop",
-  "recommended_next_work_item_title": "Tiny Generated Runtime Loop: consume the deterministic generated plan and validated formula/effect/action rule pack in a small generated simulatable loop without unlocking Lua, providers, Unity or broad GamePackage assembly.",
+  "recommended_next_work_item": "generated_package_mvp",
+  "recommended_next_work_item_title": "Generated Package MVP: map generated plan/rules/tiny-loop output into the minimal package/runtime path needed for a visible playable prototype.",
   "recommended_next_task_file": "not_created_yet",
   "candidate_product_vertical_slices": [
-    "Product Slice 031: Tiny Generated Runtime Loop"
+    "Generated Package MVP"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -131,7 +132,7 @@
     "Project-local semantic catalog sidecar and deterministic generation-context preview",
     "Seeded Procedural Game Kernel v1 generated plan sidecars",
     "Formula/Effect/Action Registry Foundation rule-pack sidecars",
-    "Tiny Generated Runtime Loop planned next"
+    "Tiny Generated Runtime Loop state/report sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 030 recommend tiny_generated_runtime_loop."
+  "state_update_rule": "Update this file pair after every accepted product slice; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 031 recommend generated_package_mvp."
 }
