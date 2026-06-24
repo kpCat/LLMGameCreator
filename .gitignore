@@ -64,3 +64,5 @@ TestResult.xml
 nunit-*.xml
 
 .devflow/runs/
+
+src/LLMGameCreator.WinForms/LLMGameCreator.WinForms.csproj.user
