@@ -70,6 +70,56 @@ public sealed class UnityArchiveReviewPresenterTests
     }
 
     [Fact]
+    public async Task PresenterLoadsSelectedHistorySnapshotJson()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+
+        var state = await new UnityArchiveReviewPresenter().RefreshAsync(temp.Path, "snapshot-a");
+
+        Assert.Equal("snapshot-a", state.SelectedSnapshotId);
+        Assert.Equal(1, state.SelectedSnapshotSequence);
+        Assert.Equal("review-history/snapshot-a/archive-review.json", state.SelectedSnapshotRelativePath);
+        Assert.Equal("Loaded", state.SelectedSnapshotStatus);
+        Assert.Contains("snapshot-a", state.SelectedSnapshotJson, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task PresenterReportsMissingSelectedHistorySnapshotWithoutThrowing()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+        var archiveRoot = CreateArchiveRoot(temp.Path);
+        File.Delete(Path.Combine(archiveRoot, "review-history", "snapshot-a", "archive-review.json"));
+
+        var state = await new UnityArchiveReviewPresenter().RefreshAsync(temp.Path, "snapshot-a");
+
+        Assert.Equal("snapshot-a", state.SelectedSnapshotId);
+        Assert.Equal("Missing", state.SelectedSnapshotStatus);
+        Assert.Empty(state.SelectedSnapshotJson);
+        Assert.Contains("review-history/snapshot-a/archive-review.json", state.Status, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task PresenterDisplaysManualImportReportsWhenPresent()
+    {
+        using var temp = new TempDirectory();
+        CreateReports(temp.Path);
+        var archiveRoot = CreateArchiveRoot(temp.Path);
+        File.WriteAllText(
+            Path.Combine(archiveRoot, "production", "manual-provider-import-report.json"),
+            "{\"schemaVersion\":\"1\",\"readiness\":\"Ready\"}");
+        File.WriteAllText(
+            Path.Combine(archiveRoot, "production", "manual-provider-import-report.md"),
+            "# Manual Import\n\nReady.");
+
+        var state = await new UnityArchiveReviewPresenter().RefreshAsync(temp.Path);
+
+        Assert.Contains("\"readiness\":\"Ready\"", state.ManualImportReportJson, StringComparison.Ordinal);
+        Assert.Contains("# Manual Import", state.ManualImportReportMarkdown, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task PresenterReportsIndividuallyMissingFiles()
     {
         using var temp = new TempDirectory();
@@ -156,7 +206,9 @@ public sealed class UnityArchiveReviewPresenterTests
         {
             var snapshotFolder = Path.Combine(archiveRoot, "review-history", snapshotId);
             Directory.CreateDirectory(snapshotFolder);
-            File.WriteAllText(Path.Combine(snapshotFolder, "archive-review.json"), "{\"schemaVersion\":\"1\",\"readiness\":\"Ready\"}");
+            File.WriteAllText(
+                Path.Combine(snapshotFolder, "archive-review.json"),
+                $"{{\"schemaVersion\":\"1\",\"readiness\":\"Ready\",\"snapshotMarker\":\"{snapshotId}\"}}");
         }
     }
 

@@ -15,6 +15,13 @@ public sealed class UnityArchiveReviewReadonlySmokeTests
         using var temp = new UnityArchiveReviewPresenterTests.TempDirectory();
         var projectFolder = ResolveProjectFolder(temp.Path);
         UnityArchiveReviewPresenterTests.CreateReports(projectFolder);
+        var archiveRoot = Path.Combine(projectFolder, ".llmgc", "unity-archive");
+        File.WriteAllText(
+            Path.Combine(archiveRoot, "production", "manual-provider-import-report.json"),
+            "{\"schemaVersion\":\"1\",\"readiness\":\"Ready\"}");
+        File.WriteAllText(
+            Path.Combine(archiveRoot, "production", "manual-provider-import-report.md"),
+            "# Manual Provider Import\n");
         var before = CaptureFiles(projectFolder);
         var presenter = new UnityArchiveReviewPresenter();
         using var page = new UnityArchiveReviewPageControl(
@@ -31,6 +38,10 @@ public sealed class UnityArchiveReviewReadonlySmokeTests
         Assert.Equal(2, state.HistorySnapshotCount);
         Assert.Contains("# Current Review", state.CurrentReviewMarkdown);
         Assert.Contains("# Comparison", state.ComparisonMarkdown);
+        Assert.Equal("Loaded", state.SelectedSnapshotStatus);
+        Assert.Contains("snapshot-b", state.SelectedSnapshotJson, StringComparison.Ordinal);
+        Assert.Contains("# Manual Provider Import", state.ManualImportReportMarkdown, StringComparison.Ordinal);
+        Assert.Contains("\"readiness\":\"Ready\"", state.ManualImportReportJson, StringComparison.Ordinal);
         Assert.Equal(before.Keys.Order(), after.Keys.Order());
         foreach (var entry in before)
         {

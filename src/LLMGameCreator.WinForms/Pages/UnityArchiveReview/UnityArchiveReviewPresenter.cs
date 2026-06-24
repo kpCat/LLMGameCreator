@@ -12,6 +12,8 @@ public sealed class UnityArchiveReviewPresenter
     private const string HistoryIndexRelativePath = "production/archive-review-history-index.json";
     private const string ComparisonJsonRelativePath = "production/archive-review-comparison.json";
     private const string ComparisonMarkdownRelativePath = "production/archive-review-comparison.md";
+    private const string ManualImportReportJsonRelativePath = "production/manual-provider-import-report.json";
+    private const string ManualImportReportMarkdownRelativePath = "production/manual-provider-import-report.md";
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -104,11 +106,40 @@ public sealed class UnityArchiveReviewPresenter
             missingFiles,
             invalidFiles,
             cancellationToken).ConfigureAwait(false);
+        var manualImportReportJson = await ReadTextAsync(
+            initial.ArchiveRoot,
+            ManualImportReportJsonRelativePath,
+            missingFiles,
+            invalidFiles,
+            cancellationToken,
+            required: false).ConfigureAwait(false);
+        var manualImportReportMarkdown = await ReadTextAsync(
+            initial.ArchiveRoot,
+            ManualImportReportMarkdownRelativePath,
+            missingFiles,
+            invalidFiles,
+            cancellationToken,
+            required: false).ConfigureAwait(false);
 
         var snapshots = BuildSnapshotOptions(initial.ArchiveRoot, historyIndex.Value);
         var selected = snapshots.FirstOrDefault(snapshot =>
                            string.Equals(snapshot.SnapshotId, selectedSnapshotId, StringComparison.OrdinalIgnoreCase))
                        ?? snapshots.FirstOrDefault();
+        var selectedSnapshot = selected is null
+            ? new JsonFileResult<UnityArchiveReviewSnapshotReport>()
+            : await ReadJsonAsync<UnityArchiveReviewSnapshotReport>(
+                initial.ArchiveRoot,
+                selected.RelativePath,
+                missingFiles,
+                invalidFiles,
+                cancellationToken).ConfigureAwait(false);
+        var selectedSnapshotStatus = selected is null
+            ? "Unavailable"
+            : selectedSnapshot.Value is not null
+                ? "Loaded"
+                : selectedSnapshot.Exists
+                    ? "Invalid"
+                    : "Missing";
 
         return initial with
         {
@@ -119,12 +150,18 @@ public sealed class UnityArchiveReviewPresenter
                                   ?? (comparison.Exists ? "Invalid" : "Missing"),
             HistorySnapshotCount = snapshots.Count,
             SelectedSnapshotId = selected?.SnapshotId ?? string.Empty,
+            SelectedSnapshotJson = selectedSnapshot.Content,
+            SelectedSnapshotStatus = selectedSnapshotStatus,
+            SelectedSnapshotRelativePath = selected?.RelativePath ?? string.Empty,
+            SelectedSnapshotSequence = selected?.Sequence ?? 0,
             HistorySnapshots = snapshots,
             CurrentReviewMarkdown = currentMarkdown,
             ComparisonMarkdown = comparisonMarkdown,
             CurrentReviewJson = currentReview.Content,
             ComparisonJson = comparison.Content,
             HistoryIndexJson = historyIndex.Content,
+            ManualImportReportMarkdown = manualImportReportMarkdown,
+            ManualImportReportJson = manualImportReportJson,
             CanOpenArchiveFolder = true
         };
     }
@@ -185,12 +222,16 @@ public sealed class UnityArchiveReviewPresenter
         string relativePath,
         ICollection<string> missingFiles,
         ICollection<string> invalidFiles,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        bool required = true)
     {
         var path = GetArchivePath(archiveRoot, relativePath);
         if (!File.Exists(path))
         {
-            missingFiles.Add(relativePath);
+            if (required)
+            {
+                missingFiles.Add(relativePath);
+            }
             return string.Empty;
         }
 

@@ -145,6 +145,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     elseif ($Scenario -eq "unity-archive-review-ui-readonly") {
         $TestFilter = "FullyQualifiedName~UnityArchiveReviewReadonlyProductSmoke"
     }
+    elseif ($Scenario -eq "unity-archive-manual-provider-import") {
+        $TestFilter = "FullyQualifiedName~UnityArchiveManualProviderImportProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

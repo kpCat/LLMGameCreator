@@ -697,3 +697,33 @@ Expected assertions:
 - no archive materialization, provider/LLM/generator/Lua execution, Unity, Runtime gameplay, or GamePackage mutation occurs.
 
 Manual UI verification is optional and remains useful only for visual layout and long-report readability.
+
+## unity-archive-manual-provider-import
+
+Validates controlled, manifest-based import into already materialized Unity archive fulfillment slots:
+
+```text
+materialized asset/audio/Lua slot metadata
+-> manual-import/import-manifest.json
+-> safe copy into exact expected output slot
+-> fulfillment/review/history/comparison refresh
+-> read-only Archive Review snapshot/import-report display
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-manual-provider-import
+```
+
+Expected assertions:
+
+- a source file under `manual-import/files/` is copied only to the slot's existing `expectedOutputRelativePath`;
+- `production/manual-provider-import-report.json` and `.md` are deterministic, timestamp-free, UTF-8 without BOM, and archive-relative;
+- fulfillment state marks the imported output available;
+- archive review, history, and comparison reports are refreshed through the existing Application services;
+- the Archive Review presenter displays the selected snapshot JSON and both manual import report formats;
+- provider job metadata remains `executionEnabled: false`;
+- no provider, LLM, generator, Lua, Unity, or Runtime gameplay execution occurs.
+
+The WinForms page remains read-only in S026; it does not expose an import action.

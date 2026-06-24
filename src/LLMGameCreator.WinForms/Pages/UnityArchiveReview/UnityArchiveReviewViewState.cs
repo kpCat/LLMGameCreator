@@ -9,6 +9,10 @@ public sealed record UnityArchiveReviewViewState
     public string ComparisonReadiness { get; init; } = "Unavailable";
     public int HistorySnapshotCount { get; init; }
     public string SelectedSnapshotId { get; init; } = string.Empty;
+    public string SelectedSnapshotJson { get; init; } = string.Empty;
+    public string SelectedSnapshotStatus { get; init; } = "Unavailable";
+    public string SelectedSnapshotRelativePath { get; init; } = string.Empty;
+    public int SelectedSnapshotSequence { get; init; }
     public IReadOnlyList<UnityArchiveReviewSnapshotOption> HistorySnapshots { get; init; }
         = Array.Empty<UnityArchiveReviewSnapshotOption>();
     public string CurrentReviewMarkdown { get; init; } = string.Empty;
@@ -16,6 +20,8 @@ public sealed record UnityArchiveReviewViewState
     public string CurrentReviewJson { get; init; } = string.Empty;
     public string ComparisonJson { get; init; } = string.Empty;
     public string HistoryIndexJson { get; init; } = string.Empty;
+    public string ManualImportReportMarkdown { get; init; } = string.Empty;
+    public string ManualImportReportJson { get; init; } = string.Empty;
     public bool CanRefresh { get; init; }
     public bool CanOpenArchiveFolder { get; init; }
 }

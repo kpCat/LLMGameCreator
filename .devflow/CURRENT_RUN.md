@@ -1,45 +1,37 @@
-Task id: PRODUCT_SLICE_025_READ_ONLY_ARCHIVE_REVIEW_HISTORY_UI
-Goal: Add a bounded read-only WinForms page for existing Unity archive review/history/comparison reports
+Task id: PRODUCT_SLICE_026_CONTROLLED_MANUAL_PROVIDER_OUTPUT_IMPORT_V1
+Goal: Controlled manifest-based provider output import plus selected archive-history snapshot detail
 
-Source docs/code read:
+Read-first sources:
 - AGENTS.md
 - docs/CONTEXT_INDEX.md
-- docs/CURRENT_GENERATOR_STATE.md
-- docs/CURRENT_GENERATOR_STATE.json
+- docs/CURRENT_GENERATOR_STATE.md and .json
 - docs/PRODUCT_SMOKE_SCENARIOS.md
 - docs/WINFORMS_DESIGNER_RULES.md
-- .devflow/scripts/run-product-smoke.ps1
-- src/LLMGameCreator.WinForms/CompositionRoot.cs
-- src/LLMGameCreator.WinForms/Pages/CompositionWorkbench/*
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewSnapshotModels.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryModels.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonModels.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewHistoryService.cs
-- src/LLMGameCreator.Application/Composition/UnityArchiveReviewComparisonService.cs
-- tests/LLMGameCreator.Tests/WinForms/CompositionWorkbenchPresenterTests.cs
-- tests/LLMGameCreator.Tests/ProductSmoke/CompositionWorkbenchReadonlySmokeTests.cs
-- tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewHistorySmokeTests.cs
+- target Application project and Unity archive materialization/provider-plan/fulfillment/review/history/comparison services/models
+- target WinForms presenter/view/page/Designer
+- required Application, WinForms, ProductSmoke tests and smoke runner
 
-Implemented files:
-- src/LLMGameCreator.WinForms/Pages/UnityArchiveReview/* (added: presenter, view state, page and Designer layout)
-- src/LLMGameCreator.WinForms/CompositionRoot.cs (modified: presenter/page/registry registration and explicit existing prompt-builder constructor selection)
-- tests/LLMGameCreator.Tests/WinForms/UnityArchiveReviewPresenterTests.cs (added)
-- tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewReadonlySmokeTests.cs (added)
-- .devflow/scripts/run-product-smoke.ps1 (modified: unity-archive-review-ui-readonly scenario)
-- docs/PRODUCT_SLICE_025_READ_ONLY_ARCHIVE_REVIEW_HISTORY_UI.md (added)
-- docs/PRODUCT_SMOKE_SCENARIOS.md (modified)
-- docs/CURRENT_GENERATOR_STATE.md and .json (modified: S025 handoff, M5/M6 remain Locked)
+Implemented:
+- UnityArchiveManualProviderImportService, models, and markdown renderer
+- safe manifest/source/target containment validation over materialized slot metadata
+- exact extension/path matching, duplicate/unknown slot diagnostics, idempotent same-byte handling, opt-in overwrite, SHA-256 reporting
+- deterministic JSON/Markdown reports under production/
+- existing fulfillment/review/history/comparison refresh chain after import
+- selected snapshot JSON/status/path/sequence in Unity Archive Review
+- manual import Markdown/JSON read-only tabs
+- focused Application/WinForms tests and unity-archive-manual-provider-import ProductSmoke
+- S026 product/smoke/current-state documentation with M5/M6 Locked preserved
 
-Expected checks:
-- ArchiveReview/UnityArchiveReview filtered tests: 37/37 passed
-- WinForms filtered tests: 42/42 passed
-- ProductSmoke filtered tests: 24/24 passed
-- unity-archive-review-ui-readonly product smoke: 1/1 passed
+Verification:
+- ManualProviderImport/UnityArchiveReview filtered tests: 48/48 passed
+- unity-archive-manual-provider-import product smoke: 1/1 passed
+- ProductSmoke filtered tests: 25/25 passed
 - check-devflow-state.ps1: passed in STOP_REVIEW mode
-- check-all.ps1: passed 619/619 tests, build 0 warnings / 0 errors
+- check-all.ps1: 630/630 tests passed, build 0 warnings / 0 errors
 
 Forbidden scope preserved:
-- no Unity project or implementation
-- no Runtime, Application archive service/model, GamePackage schema, generator-library, solution or project changes
-- no provider, generator, LLM or Lua execution
+- no Runtime or Runtime.Abstractions edits
+- no GamePackage schema, Scripting, Infrastructure, generator-library, solution, or project-file edits
+- no Unity implementation
+- no provider, generator, LLM, Lua, Unity, or Runtime gameplay execution
 - no git commands

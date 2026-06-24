@@ -82,7 +82,7 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
         Load += async (_, _) => await EnsureLoadedAsync();
         _refreshButton.Click += async (_, _) => await RefreshAsync();
         _openArchiveFolderButton.Click += (_, _) => OpenArchiveFolder();
-        _historySnapshotsList.SelectedIndexChanged += (_, _) => UpdateSelectedSnapshot();
+        _historySnapshotsList.SelectedIndexChanged += async (_, _) => await SelectedSnapshotChangedAsync();
         _currentGamePackageService!.CurrentChanged += async (_, _) => await CurrentProjectChangedAsync();
     }
 
@@ -124,14 +124,22 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
         await RefreshAsync();
     }
 
-    private void UpdateSelectedSnapshot()
+    private async Task SelectedSnapshotChangedAsync()
     {
-        if (_applyingState || _historySnapshotsList.SelectedItem is not UnityArchiveReviewSnapshotOption selected)
+        if (_applyingState || _presenter is null || _currentGamePackageService is null ||
+            _historySnapshotsList.SelectedItem is not UnityArchiveReviewSnapshotOption selected)
         {
             return;
         }
 
         _state = _state with { SelectedSnapshotId = selected.SnapshotId };
+        await RunBusyAsync(async () =>
+        {
+            var refreshed = await _presenter.RefreshAsync(
+                _currentGamePackageService.CurrentFolder,
+                selected.SnapshotId);
+            ApplyViewState(refreshed);
+        });
     }
 
     private void OpenArchiveFolder()
@@ -194,6 +202,11 @@ public sealed partial class UnityArchiveReviewPageControl : UserControl, IEditor
             _currentReviewJsonTextBox.Text = state.CurrentReviewJson;
             _comparisonJsonTextBox.Text = state.ComparisonJson;
             _historyIndexJsonTextBox.Text = state.HistoryIndexJson;
+            _selectedSnapshotJsonTextBox.Text = state.SelectedSnapshotJson;
+            _selectedSnapshotInfoLabel.Text =
+                $"Status: {state.SelectedSnapshotStatus} | Sequence: {state.SelectedSnapshotSequence} | Path: {DisplayValue(state.SelectedSnapshotRelativePath)}";
+            _manualImportMarkdownTextBox.Text = state.ManualImportReportMarkdown;
+            _manualImportJsonTextBox.Text = state.ManualImportReportJson;
             _statusSummaryTextBox.Text = state.Status;
             _statusLabel.Text = state.Status;
         }

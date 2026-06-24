@@ -29,11 +29,19 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _currentReviewJsonTab;
         private TabPage _comparisonJsonTab;
         private TabPage _historyIndexJsonTab;
+        private TabPage _selectedSnapshotJsonTab;
+        private TabPage _manualImportMarkdownTab;
+        private TabPage _manualImportJsonTab;
         private TextBox _currentReviewMarkdownTextBox;
         private TextBox _comparisonMarkdownTextBox;
         private TextBox _currentReviewJsonTextBox;
         private TextBox _comparisonJsonTextBox;
         private TextBox _historyIndexJsonTextBox;
+        private TableLayoutPanel _selectedSnapshotLayout;
+        private Label _selectedSnapshotInfoLabel;
+        private TextBox _selectedSnapshotJsonTextBox;
+        private TextBox _manualImportMarkdownTextBox;
+        private TextBox _manualImportJsonTextBox;
         private Label _statusLabel;
 
         protected override void Dispose(bool disposing)
@@ -74,11 +82,19 @@ namespace LLMGameCreator.WinForms.Pages
             this._currentReviewJsonTab = new TabPage();
             this._comparisonJsonTab = new TabPage();
             this._historyIndexJsonTab = new TabPage();
+            this._selectedSnapshotJsonTab = new TabPage();
+            this._manualImportMarkdownTab = new TabPage();
+            this._manualImportJsonTab = new TabPage();
             this._currentReviewMarkdownTextBox = new TextBox();
             this._comparisonMarkdownTextBox = new TextBox();
             this._currentReviewJsonTextBox = new TextBox();
             this._comparisonJsonTextBox = new TextBox();
             this._historyIndexJsonTextBox = new TextBox();
+            this._selectedSnapshotLayout = new TableLayoutPanel();
+            this._selectedSnapshotInfoLabel = new Label();
+            this._selectedSnapshotJsonTextBox = new TextBox();
+            this._manualImportMarkdownTextBox = new TextBox();
+            this._manualImportJsonTextBox = new TextBox();
             this._statusLabel = new Label();
             this._rootLayout.SuspendLayout();
             this._toolbarPanel.SuspendLayout();
@@ -93,6 +109,10 @@ namespace LLMGameCreator.WinForms.Pages
             this._currentReviewJsonTab.SuspendLayout();
             this._comparisonJsonTab.SuspendLayout();
             this._historyIndexJsonTab.SuspendLayout();
+            this._selectedSnapshotJsonTab.SuspendLayout();
+            this._manualImportMarkdownTab.SuspendLayout();
+            this._manualImportJsonTab.SuspendLayout();
+            this._selectedSnapshotLayout.SuspendLayout();
             this.SuspendLayout();
             //
             // _rootLayout
@@ -215,6 +235,9 @@ namespace LLMGameCreator.WinForms.Pages
             this._reportTabs.Controls.Add(this._currentReviewJsonTab);
             this._reportTabs.Controls.Add(this._comparisonJsonTab);
             this._reportTabs.Controls.Add(this._historyIndexJsonTab);
+            this._reportTabs.Controls.Add(this._selectedSnapshotJsonTab);
+            this._reportTabs.Controls.Add(this._manualImportMarkdownTab);
+            this._reportTabs.Controls.Add(this._manualImportJsonTab);
             this._reportTabs.Dock = DockStyle.Fill;
             this._currentReviewMarkdownTab.Controls.Add(this._currentReviewMarkdownTextBox);
             this._currentReviewMarkdownTab.Text = "Current Review";
@@ -226,6 +249,12 @@ namespace LLMGameCreator.WinForms.Pages
             this._comparisonJsonTab.Text = "Comparison JSON";
             this._historyIndexJsonTab.Controls.Add(this._historyIndexJsonTextBox);
             this._historyIndexJsonTab.Text = "History Index JSON";
+            this._selectedSnapshotJsonTab.Controls.Add(this._selectedSnapshotLayout);
+            this._selectedSnapshotJsonTab.Text = "Selected Snapshot JSON";
+            this._manualImportMarkdownTab.Controls.Add(this._manualImportMarkdownTextBox);
+            this._manualImportMarkdownTab.Text = "Manual Import";
+            this._manualImportJsonTab.Controls.Add(this._manualImportJsonTextBox);
+            this._manualImportJsonTab.Text = "Manual Import JSON";
             //
             // report text boxes
             //
@@ -259,6 +288,36 @@ namespace LLMGameCreator.WinForms.Pages
             this._historyIndexJsonTextBox.ReadOnly = true;
             this._historyIndexJsonTextBox.ScrollBars = ScrollBars.Both;
             this._historyIndexJsonTextBox.WordWrap = false;
+            this._selectedSnapshotLayout.ColumnCount = 1;
+            this._selectedSnapshotLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._selectedSnapshotLayout.Controls.Add(this._selectedSnapshotInfoLabel, 0, 0);
+            this._selectedSnapshotLayout.Controls.Add(this._selectedSnapshotJsonTextBox, 0, 1);
+            this._selectedSnapshotLayout.Dock = DockStyle.Fill;
+            this._selectedSnapshotLayout.RowCount = 2;
+            this._selectedSnapshotLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            this._selectedSnapshotLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this._selectedSnapshotInfoLabel.AutoEllipsis = true;
+            this._selectedSnapshotInfoLabel.Dock = DockStyle.Fill;
+            this._selectedSnapshotInfoLabel.Padding = new Padding(6, 8, 6, 0);
+            this._selectedSnapshotInfoLabel.Text = "Status: Unavailable";
+            this._selectedSnapshotJsonTextBox.Dock = DockStyle.Fill;
+            this._selectedSnapshotJsonTextBox.Font = new Font("Consolas", 10F);
+            this._selectedSnapshotJsonTextBox.Multiline = true;
+            this._selectedSnapshotJsonTextBox.ReadOnly = true;
+            this._selectedSnapshotJsonTextBox.ScrollBars = ScrollBars.Both;
+            this._selectedSnapshotJsonTextBox.WordWrap = false;
+            this._manualImportMarkdownTextBox.Dock = DockStyle.Fill;
+            this._manualImportMarkdownTextBox.Font = new Font("Consolas", 10F);
+            this._manualImportMarkdownTextBox.Multiline = true;
+            this._manualImportMarkdownTextBox.ReadOnly = true;
+            this._manualImportMarkdownTextBox.ScrollBars = ScrollBars.Both;
+            this._manualImportMarkdownTextBox.WordWrap = false;
+            this._manualImportJsonTextBox.Dock = DockStyle.Fill;
+            this._manualImportJsonTextBox.Font = new Font("Consolas", 10F);
+            this._manualImportJsonTextBox.Multiline = true;
+            this._manualImportJsonTextBox.ReadOnly = true;
+            this._manualImportJsonTextBox.ScrollBars = ScrollBars.Both;
+            this._manualImportJsonTextBox.WordWrap = false;
             //
             // _statusLabel
             //
@@ -293,6 +352,12 @@ namespace LLMGameCreator.WinForms.Pages
             this._comparisonJsonTab.PerformLayout();
             this._historyIndexJsonTab.ResumeLayout(false);
             this._historyIndexJsonTab.PerformLayout();
+            this._selectedSnapshotLayout.ResumeLayout(false);
+            this._selectedSnapshotJsonTab.ResumeLayout(false);
+            this._manualImportMarkdownTab.ResumeLayout(false);
+            this._manualImportMarkdownTab.PerformLayout();
+            this._manualImportJsonTab.ResumeLayout(false);
+            this._manualImportJsonTab.PerformLayout();
             this._reportTabs.ResumeLayout(false);
             this.ResumeLayout(false);
         }
