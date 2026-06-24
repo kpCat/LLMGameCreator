@@ -85,6 +85,47 @@ public sealed class UnityArchiveManualImportTemplateTests
         Assert.Equal(UnityArchiveManualImportWorkspaceReadiness.ReadyWithWarnings, result.Readiness);
     }
 
+    [Fact]
+    public void EnsureManualImportDirectoryAcceptsManualImport()
+    {
+        using var temp = new TempDirectory();
+        var archiveRoot = CreateArchive(temp.Path);
+        var service = new UnityArchiveManualImportTemplateService();
+
+        var result = service.EnsureManualImportDirectory(archiveRoot);
+        var nested = service.EnsureManualImportDirectory(archiveRoot, "manual-import/put-files-here");
+
+        Assert.True(result.Succeeded, result.Status);
+        Assert.True(Directory.Exists(result.DirectoryPath));
+        Assert.True(nested.Succeeded, nested.Status);
+        Assert.True(Directory.Exists(nested.DirectoryPath));
+        Assert.False(File.Exists(Path.Combine(result.DirectoryPath, "import-manifest.json")));
+    }
+
+    [Fact]
+    public void EnsureManualImportDirectoryRejectsTraversal()
+    {
+        using var temp = new TempDirectory();
+        var archiveRoot = CreateArchive(temp.Path);
+        var service = new UnityArchiveManualImportTemplateService();
+        var unsafePaths = new[]
+        {
+            "manual-import/../x",
+            "C:/x",
+            "\\\\server\\share",
+            "/absolute",
+            "manual-import\\bad",
+            string.Empty
+        };
+
+        foreach (var unsafePath in unsafePaths)
+        {
+            var result = service.EnsureManualImportDirectory(archiveRoot, unsafePath);
+            Assert.False(result.Succeeded, unsafePath);
+            Assert.Contains("unsafe", result.Status, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
     private static string CreateArchive(string projectRoot)
     {
         var archiveRoot = Path.Combine(projectRoot, ".llmgc", "unity-archive");

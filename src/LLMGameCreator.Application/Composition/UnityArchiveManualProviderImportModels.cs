@@ -78,6 +78,7 @@ public sealed record UnityArchiveManualProviderImportResult
     public int SkippedCount { get; init; }
     public int ConflictCount { get; init; }
     public int InvalidCount { get; init; }
+    public bool TargetOutputsChanged { get; init; }
     public IReadOnlyList<UnityArchiveManualProviderImportEntryResult> Entries { get; init; }
         = Array.Empty<UnityArchiveManualProviderImportEntryResult>();
     public IReadOnlyList<UnityArchiveManualProviderImportDiagnostic> Diagnostics { get; init; }

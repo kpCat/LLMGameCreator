@@ -183,7 +183,7 @@ public sealed class UnityArchiveManualProviderImportService
         var interim = BuildResult(null, entries, diagnostics, written);
         await WriteReportsAsync(archiveRoot, interim, cancellationToken).ConfigureAwait(false);
 
-        if (request.RefreshReviewHistoryComparison)
+        if (request.RefreshReviewHistoryComparison && interim.TargetOutputsChanged)
         {
             try
             {
@@ -664,6 +664,7 @@ public sealed class UnityArchiveManualProviderImportService
             SkippedCount = orderedEntries.Count(entry => entry.Status == UnityArchiveManualProviderImportEntryStatus.AlreadyImported),
             ConflictCount = orderedEntries.Count(entry => entry.Status == UnityArchiveManualProviderImportEntryStatus.Conflict),
             InvalidCount = orderedEntries.Count(entry => entry.Status is UnityArchiveManualProviderImportEntryStatus.Invalid or UnityArchiveManualProviderImportEntryStatus.Failed),
+            TargetOutputsChanged = orderedEntries.Any(entry => entry.Status == UnityArchiveManualProviderImportEntryStatus.Imported),
             Entries = orderedEntries,
             Diagnostics = orderedDiagnostics,
             WrittenRelativePaths = written

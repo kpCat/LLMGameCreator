@@ -759,3 +759,33 @@ Expected assertions:
 - the refreshed slot is `available`, report text is visible, and the selected history snapshot is preserved;
 - overwrite remains disabled unless explicitly selected;
 - no provider, generator, LLM, Lua, Unity, or Runtime gameplay execution occurs.
+
+## semantic-catalog-foundation
+
+Validates deterministic project-local semantic memory without changing GamePackage schema or calling an LLM:
+
+```text
+approved semantic_pack_v1 fixture
+-> built-in seed merge and flexible semantic term/relation mapping
+-> project-local semantic catalog JSON/Markdown
+-> deterministic compact generation-context preview JSON/Markdown
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario semantic-catalog-foundation
+```
+
+Expected assertions:
+
+- `.llmgc/semantic/semantic-catalog.json` exists and contains `schemaVersion` plus `catalogId`;
+- `.llmgc/semantic/semantic-catalog-report.md` exists;
+- `.llmgc/semantic/semantic-generation-context-preview.json` and `.md` exist;
+- built-in known terms and generated candidate terms are both retained;
+- semantic relations retain source artifact provenance;
+- the preview includes compact semantic sections and the explicit LLM-minimization policy;
+- no LLM/provider/generator/Lua/Unity/Runtime gameplay execution occurs;
+- GamePackage schema and the existing `semantic_pack_v1` unmapped/preserved assembler behavior remain unchanged.
+
+No manual UI verification is required. Semantic UI review/approval is a possible follow-up slice, not part of this foundation.

@@ -1,14 +1,14 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 027  
+Updated by: Product Slice 028  
 State file pair: docs/CURRENT_GENERATOR_STATE.json
 
 ## Current phase
 
-M4.1 gate passed for sampled baseline contracts; Product Slice 027 adds the controlled manual import workspace UI over the S026 import authority.
+M4.1 gate passed for sampled baseline contracts; Product Slice 028 repairs the controlled manual import workspace and adds a deterministic project-local semantic catalog foundation.
 
-The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 011-024.1 established immutable composition models, non-executing catalog/diagnostics/export, a read-only Composition Workbench and deterministic Unity archive contract/meta/data/request/provider-plan/fulfillment/review/history/comparison outputs. Product Slice 025 added their read-only WinForms consumer. Product Slice 026 added safe manifest-based import. Product Slice 027 now exposes that existing authority through a slot dashboard, deterministic template generation, archive-local folder helper, explicit import action, report refresh, and preserved selected-snapshot detail.
+The project has a safe Capability Picker -> LLM Artifacts -> LLM Evaluation -> Artifact Review -> draft package assembly path. Product Slices 025-027 added the read-only archive review and controlled manual import workspace. Product Slice 028 fixes valid `manual-import` directory creation, suppresses no-op review-history snapshots, and maps approved `semantic_pack_v1` artifacts into deterministic `.llmgc/semantic/` sidecars without changing GamePackage v1.
 
 ## Gate decision
 
@@ -59,6 +59,26 @@ Permanent evidence summary:
 - A real local-model batch evaluation passed for the sampled baseline contracts listed above.
 
 ## Last completed product slice
+
+- Product Slice 028: Manual Import Repair + Semantic Catalog Foundation v1.
+- `UnityArchiveManualImportTemplateService` uses a dedicated archive-contained directory validator, so `manual-import` and `manual-import/put-files-here` are valid while traversal, rooted, drive-qualified, UNC-style, backslash and empty-segment paths remain rejected.
+- Creating the directory does not create `import-manifest.json`, run import, or touch target outputs.
+- `UnityArchiveManualProviderImportResult.TargetOutputsChanged` is true only when target bytes are written (`Imported`). Review/history/comparison refresh is skipped for `AlreadyImported`, conflict-only, invalid-only, and failed-only attempts; deterministic import reports are still written every time.
+- Approved `semantic_pack_v1` artifacts map into `.llmgc/semantic/semantic-catalog.json` and Markdown report sidecars. Safe unknown terms remain `candidate`; unknown kinds normalize to `unknown` with warnings; unsafe ids and relations are diagnosed and skipped.
+- The deterministic semantic generation-context preview writes JSON/Markdown with compact themes, tones, candidates, intents, motifs, asset/audio hints, relations, conflicts, and explicit LLM-minimization policy.
+- `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` records the user-facing generation procedure, LLM decision rule/load tiers, and data/formula/system/runtime extensibility tiers.
+- Automatic one-click package-export invocation is intentionally deferred; the sidecar foundation is exercised directly through Application services and product smoke, while the existing GamePackage assembler continues to preserve `semantic_pack_v1` as unmapped.
+- `semantic-catalog-foundation` proves all four semantic sidecar files without LLM/provider/generator/Lua/Unity/Runtime execution.
+
+Checks recorded from the S028 run:
+
+- `ManualImport` / `UnityArchiveReview` filtered tests: 54/54 passed.
+- `Semantic` filtered tests: 9/9 passed.
+- `semantic-catalog-foundation` product smoke: 1/1 passed.
+- `unity-archive-manual-import-workflow-ui` product smoke: 1/1 passed.
+- `ProductSmoke` filtered tests: 27/27 passed.
+- `check-devflow-state.ps1`: passed in `STOP_REVIEW` mode.
+- `check-all.ps1`: 655/655 tests passed, build 0 warnings / 0 errors.
 
 - Product Slice 027: Controlled Manual Import Workspace UI v1.
 - `Unity Archive Review` now lists expected asset/audio/Lua/unknown slots with provider, target path, status, file existence/size/hash, request/source ids, deterministic suggested source paths, selection detail, and six bounded filters.
@@ -128,7 +148,7 @@ Checks recorded from the accepted S024 run:
 
 ## Current M5/M6 lock semantics
 
-M5 and M6 task specs remain **Locked** after S027. The lock is intentional: M5 Lua executor integration and M6 rich GamePackage assembly are not opened by controlled manual file import or its workspace UI. They require a separate controlled product vertical-slice decision and explicit user approval.
+M5 and M6 task specs remain **Locked** after S028. The lock is intentional: manual-import repair, semantic sidecars, and LLM policy documentation do not open Lua executor integration or rich GamePackage assembly. They require a separate controlled product vertical-slice decision and explicit user approval.
 
 Currently locked or restricted:
 
@@ -137,7 +157,7 @@ Currently locked or restricted:
 - Broad contract expansion remains restricted beyond sampled baseline evidence.
 - Runtime preview repair loop remains restricted until a controlled vertical slice exists.
 
-Allowed next work remains bounded to manual import workflow polish after user testing or one explicitly approved controlled product vertical slice. No Unity implementation, provider execution, Runtime expansion, GamePackage schema change, generator execution, LLM call or Lua execution is unlocked by Product Slice 027.
+Allowed next work remains bounded to manual import workflow polish after user testing, one controlled product vertical-slice selection, semantic catalog UI review/approval, or formula registry foundation. No Unity implementation, provider execution, Runtime expansion, GamePackage schema change, generator execution, LLM call or Lua execution is unlocked by Product Slice 028.
 
 Parent slice foundation:
 

@@ -1,38 +1,35 @@
-Task id: PRODUCT_SLICE_027_CONTROLLED_MANUAL_IMPORT_WORKSPACE_UI_V1
-Goal: Complete safe manual-import workspace inside Unity Archive Review
+Task id: PRODUCT_SLICE_028_MANUAL_IMPORT_REPAIR_SEMANTIC_CATALOG_FOUNDATION_V1
+Goal: Repair S027 manual import behavior and add deterministic project-local semantic memory plus LLM minimization policy
 
 Read-first sources:
-- AGENTS.md
-- docs/CONTEXT_INDEX.md
-- docs/CURRENT_GENERATOR_STATE.md and .json
-- docs/PRODUCT_SMOKE_SCENARIOS.md
-- docs/PRODUCT_SLICE_026_CONTROLLED_MANUAL_PROVIDER_OUTPUT_IMPORT.md
-- docs/WINFORMS_DESIGNER_RULES.md and target project files
-- S026 import service/models/renderer plus slot/fulfillment models
-- Unity Archive Review presenter/view/page/Designer and local grid/filter/open/busy analogs
-- required Application, WinForms, ProductSmoke tests and smoke runner
+- AGENTS.md, README.md, docs/CONTEXT_INDEX.md, current-state pair and roadmap
+- Product Smoke scenarios and Product Slice 026/027 docs
+- S026/S027 manual import models, services, renderer, presenter/page and focused tests
+- archive review/history/comparison services
+- approved artifact set, deterministic semantic producer and GamePackage assembler/export seams
+- target Application/WinForms/test project files
 
 Implemented:
-- slot dashboard/checklist over fulfillment plan/state plus typed asset/audio/Lua indexes
-- All/Missing/Available/Invalid/manual-provider/future-provider filters, selection detail, and copy helpers
-- deterministic missing/invalid-only `manual-import/import-manifest.template.json` generation without overwriting the run manifest
-- create/open manual-import folder helper with shell launch isolated in UI
-- Run manual import action through the existing S026 service with overwrite disabled by default and explicit risk opt-in
-- refreshed manual import reports, fulfillment state, review, history, comparison, and preserved selected snapshot
-- focused Application/WinForms tests and `unity-archive-manual-import-workflow-ui` ProductSmoke
-- S027 product/smoke/current-state documentation with M5/M6 Locked preserved
+- dedicated archive-contained directory validation for `manual-import` and nested helper directories
+- no manifest creation or import side effects from the folder helper
+- `TargetOutputsChanged` result contract and review/history/comparison refresh only when target bytes are written
+- deterministic project-local semantic catalog with small known seed set, candidates, relations, provenance and diagnostics
+- flexible `semantic_pack_v1` mapping for terms, nested semantic objects, compact kind arrays and existing semantic groups
+- deterministic semantic generation-context preview with compact sections and explicit LLM-minimization policy
+- `.llmgc/semantic/` JSON/Markdown writers, focused tests and `semantic-catalog-foundation` ProductSmoke
+- generation procedure, LLM policy, extensibility tiers, product-slice and current-state documentation
 
 Verification:
-- ManualImport/UnityArchiveReview filtered tests: 51/51 passed
-- WinForms filtered tests: 52/52 passed
+- ManualImport/UnityArchiveReview filtered tests: 54/54 passed
+- Semantic filtered tests: 9/9 passed
+- semantic-catalog-foundation product smoke: 1/1 passed
 - unity-archive-manual-import-workflow-ui product smoke: 1/1 passed
-- ProductSmoke filtered tests: 26/26 passed
+- ProductSmoke filtered tests: 27/27 passed
 - check-devflow-state.ps1: passed in STOP_REVIEW mode
-- check-all.ps1: 641/641 tests passed, build 0 warnings / 0 errors
+- check-all.ps1: 655/655 tests passed, build 0 warnings / 0 errors
 
 Forbidden scope preserved:
-- no Runtime or Runtime.Abstractions edits
-- no GamePackage schema, Scripting, Infrastructure, generator-library, solution, or project-file edits
-- no Unity implementation
+- M5/M6 remain Locked
+- no Runtime, Runtime.Abstractions, GamePackage schema, Scripting, Infrastructure, generator-library, solution, or project-file edits
 - no provider, generator, LLM, Lua, Unity, or Runtime gameplay execution
 - no git commands

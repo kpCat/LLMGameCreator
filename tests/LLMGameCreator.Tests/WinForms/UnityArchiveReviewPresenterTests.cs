@@ -255,6 +255,21 @@ public sealed class UnityArchiveReviewPresenterTests
     }
 
     [Fact]
+    public void UnityArchiveReviewPresenterOpenManualImportFolderReturnsReadyStatus()
+    {
+        using var temp = new TempDirectory();
+        var archiveRoot = CreateArchiveRoot(temp.Path);
+
+        var result = new UnityArchiveReviewPresenter().EnsureManualImportDirectory(temp.Path);
+
+        Assert.True(result.Succeeded, result.Status);
+        Assert.Equal(Path.Combine(archiveRoot, "manual-import"), result.DirectoryPath);
+        Assert.Contains("ready", result.Status, StringComparison.OrdinalIgnoreCase);
+        Assert.True(Directory.Exists(result.DirectoryPath));
+        Assert.False(File.Exists(Path.Combine(result.DirectoryPath, "import-manifest.json")));
+    }
+
+    [Fact]
     public async Task SelectedSnapshotDetailStillUpdatesAfterRefresh()
     {
         using var temp = new TempDirectory();

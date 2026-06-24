@@ -15,6 +15,7 @@ public sealed class UnityArchiveManualProviderImportMarkdownRenderer
             $"- Already imported: `{result.SkippedCount}`",
             $"- Conflicts: `{result.ConflictCount}`",
             $"- Invalid or failed: `{result.InvalidCount}`",
+            $"- Target outputs changed: `{result.TargetOutputsChanged}`",
             string.Empty,
             "## Entries",
             string.Empty

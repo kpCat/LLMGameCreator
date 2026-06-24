@@ -151,6 +151,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     elseif ($Scenario -eq "unity-archive-manual-import-workflow-ui") {
         $TestFilter = "FullyQualifiedName~UnityArchiveManualImportWorkflowUiProductSmoke"
     }
+    elseif ($Scenario -eq "semantic-catalog-foundation") {
+        $TestFilter = "FullyQualifiedName~SemanticCatalogFoundationProductSmoke"
+    }
     else {
         throw "Unknown product smoke scenario: $Scenario"
     }

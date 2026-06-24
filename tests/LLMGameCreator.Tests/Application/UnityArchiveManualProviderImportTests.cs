@@ -220,7 +220,92 @@ public sealed class UnityArchiveManualProviderImportTests
         Assert.True(File.Exists(Path.Combine(archiveRoot, "production", "archive-review.md")));
     }
 
+    [Fact]
+    public async Task IdempotentAlreadyImportedDoesNotStoreNewHistorySnapshot()
+    {
+        using var temp = new TempDirectory();
+        var archiveRoot = CreateArchive(temp.Path, includeReviewInputs: true);
+        WriteText(archiveRoot, "manual-import/files/hero.png", "same bytes");
+        WriteManifest(archiveRoot, [Entry("asset-slot.hero", "files/hero.png")]);
+        var service = CreateService();
+
+        var first = await service.ImportAsync(new UnityArchiveManualProviderImportRequest { ArchiveDirectoryPath = archiveRoot });
+        var historyCountAfterFirst = ReadHistoryCount(archiveRoot);
+        var second = await service.ImportAsync(new UnityArchiveManualProviderImportRequest { ArchiveDirectoryPath = archiveRoot });
+
+        Assert.True(first.TargetOutputsChanged);
+        Assert.Equal(UnityArchiveManualProviderImportEntryStatus.Imported, Assert.Single(first.Entries).Status);
+        Assert.False(second.TargetOutputsChanged);
+        Assert.Equal(UnityArchiveManualProviderImportEntryStatus.AlreadyImported, Assert.Single(second.Entries).Status);
+        Assert.Equal(historyCountAfterFirst, ReadHistoryCount(archiveRoot));
+        Assert.True(File.Exists(Path.Combine(archiveRoot, "production", "manual-provider-import-report.json")));
+    }
+
+    [Fact]
+    public async Task ConflictOnlyRunDoesNotStoreNewHistorySnapshot()
+    {
+        using var temp = new TempDirectory();
+        var archiveRoot = CreateArchive(temp.Path, includeReviewInputs: true);
+        await InitializeHistoryAsync(archiveRoot);
+        var initialCount = ReadHistoryCount(archiveRoot);
+        WriteText(archiveRoot, "assets/generated/icon/hero.png", "existing bytes");
+        WriteText(archiveRoot, "manual-import/files/hero.png", "different bytes");
+        WriteManifest(archiveRoot, [Entry("asset-slot.hero", "files/hero.png")]);
+
+        var result = await CreateService().ImportAsync(new UnityArchiveManualProviderImportRequest
+        {
+            ArchiveDirectoryPath = archiveRoot
+        });
+
+        Assert.False(result.TargetOutputsChanged);
+        Assert.Equal(UnityArchiveManualProviderImportEntryStatus.Conflict, Assert.Single(result.Entries).Status);
+        Assert.Equal(initialCount, ReadHistoryCount(archiveRoot));
+    }
+
+    [Fact]
+    public async Task OverwriteChangedBytesStoresNewHistorySnapshot()
+    {
+        using var temp = new TempDirectory();
+        var archiveRoot = CreateArchive(temp.Path, includeReviewInputs: true);
+        await InitializeHistoryAsync(archiveRoot);
+        var initialCount = ReadHistoryCount(archiveRoot);
+        WriteText(archiveRoot, "assets/generated/icon/hero.png", "existing bytes");
+        WriteText(archiveRoot, "manual-import/files/hero.png", "replacement bytes");
+        WriteManifest(archiveRoot, [Entry("asset-slot.hero", "files/hero.png")]);
+
+        var result = await CreateService().ImportAsync(new UnityArchiveManualProviderImportRequest
+        {
+            ArchiveDirectoryPath = archiveRoot,
+            OverwriteExisting = true
+        });
+
+        Assert.True(result.TargetOutputsChanged);
+        Assert.Equal(UnityArchiveManualProviderImportEntryStatus.Imported, Assert.Single(result.Entries).Status);
+        Assert.True(ReadHistoryCount(archiveRoot) > initialCount);
+        Assert.Equal("replacement bytes", File.ReadAllText(Path.Combine(archiveRoot, "assets", "generated", "icon", "hero.png")));
+    }
+
     private static UnityArchiveManualProviderImportService CreateService() => new();
+
+    private static async Task InitializeHistoryAsync(string archiveRoot)
+    {
+        await new UnityArchiveReviewSnapshotService().ReviewAsync(new UnityArchiveReviewSnapshotRequest
+        {
+            ArchiveDirectoryPath = archiveRoot
+        });
+        await new UnityArchiveReviewHistoryService().StoreAsync(new UnityArchiveReviewHistoryRequest
+        {
+            ArchiveDirectoryPath = archiveRoot
+        });
+    }
+
+    private static int ReadHistoryCount(string archiveRoot)
+    {
+        var history = JsonSerializer.Deserialize<UnityArchiveReviewHistoryIndex>(
+            File.ReadAllText(Path.Combine(archiveRoot, "production", "archive-review-history-index.json")),
+            JsonOptions)!;
+        return history.Entries.Count;
+    }
 
     private static UnityArchiveManualProviderImportManifestEntry Entry(
         string slotId,

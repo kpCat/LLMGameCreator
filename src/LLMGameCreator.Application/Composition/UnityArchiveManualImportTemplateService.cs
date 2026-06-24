@@ -188,6 +188,13 @@ public sealed class UnityArchiveManualImportTemplateService
 
     public UnityArchiveManualImportDirectoryResult EnsureManualImportDirectory(string archiveDirectoryPath)
     {
+        return EnsureManualImportDirectory(archiveDirectoryPath, ManualImportDirectoryRelativePath);
+    }
+
+    public UnityArchiveManualImportDirectoryResult EnsureManualImportDirectory(
+        string archiveDirectoryPath,
+        string directoryRelativePath)
+    {
         if (!TryGetArchiveRoot(archiveDirectoryPath, out var archiveRoot) || !Directory.Exists(archiveRoot))
         {
             return new UnityArchiveManualImportDirectoryResult
@@ -196,7 +203,14 @@ public sealed class UnityArchiveManualImportTemplateService
             };
         }
 
-        var directoryPath = GetContainedPath(archiveRoot, ManualImportDirectoryRelativePath);
+        if (!TryGetContainedDirectoryPath(archiveRoot, directoryRelativePath, out var directoryPath))
+        {
+            return new UnityArchiveManualImportDirectoryResult
+            {
+                Status = $"Manual import directory relative path is unsafe: {directoryRelativePath}"
+            };
+        }
+
         Directory.CreateDirectory(directoryPath);
         return new UnityArchiveManualImportDirectoryResult
         {
@@ -384,6 +398,49 @@ public sealed class UnityArchiveManualImportTemplateService
         }
 
         return candidate;
+    }
+
+    private static bool TryGetContainedDirectoryPath(
+        string archiveRoot,
+        string relativePath,
+        out string directoryPath)
+    {
+        directoryPath = string.Empty;
+        if (string.IsNullOrWhiteSpace(relativePath) ||
+            Path.IsPathRooted(relativePath) ||
+            relativePath.Contains('\\') ||
+            relativePath.Contains(':'))
+        {
+            return false;
+        }
+
+        var normalized = relativePath.Trim();
+        var segments = normalized.Split('/', StringSplitOptions.None);
+        if (segments.Length == 0 || segments.Any(segment =>
+                string.IsNullOrWhiteSpace(segment) || segment is "." or ".."))
+        {
+            return false;
+        }
+
+        try
+        {
+            var root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(archiveRoot));
+            var candidate = Path.GetFullPath(Path.Combine(
+                root,
+                normalized.Replace('/', Path.DirectorySeparatorChar)));
+            if (string.Equals(root, candidate, StringComparison.OrdinalIgnoreCase) ||
+                !candidate.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            directoryPath = candidate;
+            return true;
+        }
+        catch (Exception exception) when (exception is ArgumentException or NotSupportedException or PathTooLongException)
+        {
+            return false;
+        }
     }
 
     private sealed record JsonReadResult<T>
