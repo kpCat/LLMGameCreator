@@ -34,8 +34,12 @@ function Write-ProductSmokeSummary {
         Join-Path $PackageOutputDir ".llmgc\package-assembly\package.json"
     } elseif ($Scenario -eq "procedural-game-kernel") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-game-plan.json"
+    } elseif ($Scenario -eq "formula-effect-action-registry") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\formula-effect-action-rule-pack.json"
     } elseif ($Scenario -eq "tiny-generated-runtime-loop") {
         Join-Path $PackageOutputDir ".llmgc\procedural\tiny-runtime-loop-state.json"
+    } elseif ($Scenario -eq "generated-package-mvp") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\generated-package-mvp\package.json"
     } else {
         Join-Path $PackageOutputDir "package.json"
     }
@@ -161,8 +165,14 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     elseif ($Scenario -eq "procedural-game-kernel") {
         $TestFilter = "FullyQualifiedName~ProceduralGameKernelProductSmoke"
     }
+    elseif ($Scenario -eq "formula-effect-action-registry") {
+        $TestFilter = "FullyQualifiedName~FormulaEffectActionRegistryProductSmoke"
+    }
     elseif ($Scenario -eq "tiny-generated-runtime-loop") {
         $TestFilter = "FullyQualifiedName~TinyGeneratedRuntimeLoopProductSmoke"
+    }
+    elseif ($Scenario -eq "generated-package-mvp") {
+        $TestFilter = "FullyQualifiedName~GeneratedPackageMvpProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

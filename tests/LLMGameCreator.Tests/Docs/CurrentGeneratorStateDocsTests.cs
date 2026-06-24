@@ -74,6 +74,7 @@ public sealed class CurrentGeneratorStateDocsTests
         Assert.Contains("Tiny Generated Runtime Loop", readme);
         Assert.Contains("Generated Package MVP", readme);
         Assert.Contains("Formula/Effect/Action Registry Foundation", readme);
+        Assert.Contains("Visible Generated Playable Preview", readme);
         Assert.DoesNotContain("Next practical step:\r\nM4.1", readme, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -111,7 +112,7 @@ public sealed class CurrentGeneratorStateDocsTests
             .ToArray();
 
         Assert.Equal("strategy_reset_playable_procedural_generator", currentPhase);
-        Assert.Equal("generated_package_mvp", recommendedNextWorkItem);
+        Assert.Equal("visible_generated_playable_preview", recommendedNextWorkItem);
         Assert.Contains(blocked, item => item.Contains("M5", StringComparison.OrdinalIgnoreCase));
         Assert.Contains(blocked, item => item.Contains("Lua", StringComparison.OrdinalIgnoreCase));
         Assert.Contains(blocked, item => item.Contains("M6", StringComparison.OrdinalIgnoreCase));

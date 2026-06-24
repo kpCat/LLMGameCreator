@@ -64,10 +64,10 @@ Current source-of-truth handoff:
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-Product Slice 031 completed the Tiny Generated Runtime Loop: the deterministic Slice 029 generated plan and Slice 030 Formula/Effect/Action Registry Foundation can now drive a small Application-layer simulatable loop.
+Product Slice 032 completed the Generated Package MVP: the deterministic Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation and Slice 031 Tiny Generated Runtime Loop can now produce a minimal validator-clean generated `GamePackage` artifact with bootstrap evidence.
 
 Next practical step:
-Generated Package MVP: map generated plan/rules/tiny-loop output into the minimal package/runtime path needed for a visible playable prototype.
+Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
 
 `GamePackage` — runtime source of truth для готовой игры.
 

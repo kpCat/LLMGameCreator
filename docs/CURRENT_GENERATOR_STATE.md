@@ -1,14 +1,14 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 031 Tiny Generated Runtime Loop  
+Updated by: Product Slice 032 Generated Package MVP  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact.
 
-The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation.
+The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence.
 
 Source of truth for the reset:
 
@@ -32,9 +32,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Product Slice 030: Formula/Effect/Action Registry Foundation.
-2. Product Slice 031: Tiny Generated Runtime Loop.
-3. Generated Package MVP.
+1. Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
 
 Kill criterion:
 
@@ -48,10 +46,41 @@ product slices, stop and reassess architecture before spending more limit.
 Recommended next work item:
 
 ```text
-generated_package_mvp
+visible_generated_playable_preview
 ```
 
-Generated Package MVP: map generated plan/rules/tiny-loop output into the minimal package/runtime path needed for a visible playable prototype.
+Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
+
+## Product Slice 032 Summary
+
+Product Slice 032: Generated Package MVP.
+
+Completed behavior:
+
+- repaired S031 handoff state so active future work no longer listed completed S030/S031 tasks;
+- added the missing `formula-effect-action-registry` product smoke route and summary path;
+- added an Application-layer deterministic generated package MVP service;
+- consumed Slice 029 `ProceduralGeneratedGamePlan`, Slice 030 `FormulaEffectActionRulePack` plus validation output, and Slice 031 tiny runtime loop result;
+- produced byte-stable `.llmgc/procedural/generated-package-mvp/package.json`;
+- produced deterministic `.llmgc/procedural/generated-package-mvp/generated-package-mvp-report.json`;
+- produced deterministic `.llmgc/procedural/generated-package-mvp/generated-package-mvp-report.md`;
+- produced deterministic `.llmgc/procedural/generated-package-mvp/runtime-bootstrap-report.json`;
+- produced deterministic `.llmgc/procedural/generated-package-mvp/runtime-bootstrap-report.md`;
+- mapped generated regions to existing maps/GeneratedContent regions;
+- mapped generated actors, items/resources, factions, encounters, quests, dialogues, interactions, formulas and rule-pack actions into existing package-supported structures where available;
+- ran existing package validation and included validation issues in reports;
+- recorded bootstrap evidence through an Application-layer package-contract adapter because `LLMGameCreator.Application` does not reference `LLMGameCreator.Runtime` implementations;
+- diagnosed report-only concepts such as region connections and richer rule effects instead of expanding package/runtime schema;
+- added the `generated-package-mvp` product smoke scenario;
+- did not add UI, provider execution, LLM calls, Lua execution, Unity work, media generation, broad GamePackage schema changes or public runtime command/state changes.
+
+Recorded checks from S032:
+
+- `CurrentGeneratorStateDocsTests` filtered tests: 10/10 passed.
+- `formula-effect-action-registry` product smoke: 1/1 passed.
+- `GeneratedPackageMvp` filtered tests: 5/5 passed.
+- `generated-package-mvp` product smoke: 1/1 passed.
+- `check-all.ps1`: 674/674 tests passed, build 0 warnings / 0 errors.
 
 ## Product Slice 031 Summary
 
@@ -184,6 +213,7 @@ Existing work remains valuable and should be reused:
 - seeded procedural generated plan sidecars;
 - formula/effect/action rule-pack sidecars;
 - tiny generated runtime loop state/report sidecars;
+- generated package MVP package/report/runtime-bootstrap sidecars;
 - C# validation authority;
 - headless runtime services.
 
@@ -208,8 +238,8 @@ Update this file pair after every accepted product slice.
 
 Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 
-After Product Slice 031 completes, this state should recommend:
+After Product Slice 032 completes, this state should recommend:
 
 ```text
-generated_package_mvp
+visible_generated_playable_preview
 ```

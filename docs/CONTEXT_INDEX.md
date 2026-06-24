@@ -46,7 +46,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/CURRENT_GENERATOR_STATE.json` | Machine-readable mirror of current state for tooling/tests. |
 | `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md` | Enforcing the post-S028 pivot from infrastructure growth to a generated playable/simulatable procedural kernel. |
 | `docs/NEXT_PRODUCT_SLICE_029_SEEDED_PROCEDURAL_GAME_KERNEL_TASK.md` | Completed Product Slice 029 task: Seeded Procedural Game Kernel v1. |
+| `docs/NEXT_PRODUCT_SLICE_030_FORMULA_EFFECT_ACTION_REGISTRY_TASK.md` | Completed Product Slice 030 task: Formula/Effect/Action Registry Foundation. |
 | `docs/NEXT_PRODUCT_SLICE_031_TINY_GENERATED_RUNTIME_LOOP_TASK.md` | Completed Product Slice 031 task: Tiny Generated Runtime Loop. |
+| `docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md` | Completed Product Slice 032 task: Generated Package MVP. |
 | `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` | LLM minimization policy and deterministic combiner rules. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Full game generation meaning, ownership boundaries and long-term target architecture. |
 | `docs/GAME_GENERATION_CAPABILITY_MATRIX.md` | Capability domains, priorities and acceptance criteria. |
@@ -64,12 +66,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-Generated Package MVP
+Visible Generated Playable Preview
 ```
 
 Allowed next sequence:
 
-1. Generated Package MVP: map generated plan/rules/tiny-loop output into the minimal package/runtime path needed for a visible playable prototype.
+1. Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
 
 Kill criterion:
 
