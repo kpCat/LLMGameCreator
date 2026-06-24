@@ -3,21 +3,21 @@
   "state_id": "current_generator_state",
   "updated_at_utc": "2026-06-24T00:00:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Post-S032 strategy reset toward a visible generated playable preview",
-  "gate_status": "m4_1_passed_s032_completed_strategy_reset_active",
+  "current_phase_title": "Post-S033 strategy reset awaiting manual visible preview verification",
+  "gate_status": "m4_1_passed_s033_completed_manual_preview_verification_pending",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_032_generated_package_mvp",
+  "last_completed_product_slice_id": "product_slice_033_visible_generated_playable_preview",
   "active_manual_gate": "Infrastructure-only next work is frozen unless explicitly approved by the user or directly required to unblock the generated playable/simulatable loop.",
-  "current_user_action": "Use Visible Generated Playable Preview as the next Codex task unless explicitly overriding the strategy reset.",
-  "recommended_next_decision": "Start Visible Generated Playable Preview so the Slice 032 generated package MVP is exposed through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype; do not spend further slices on semantic UI, manual import polish, archive review polish or other infrastructure-only work without explicit user approval.",
+  "current_user_action": "Run Manual User Preview Verification before selecting another Codex feature slice.",
+  "recommended_next_decision": "Manual User Preview Verification: launch the app/preview from Visual Studio and verify the generated package MVP is visible and minimally playable before Codex receives more feature slices.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "visible_generated_playable_preview"
+      "manual_user_preview_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -60,21 +60,20 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_032_generated_package_mvp",
-    "title": "Generated Package MVP",
+    "slice_id": "product_slice_033_visible_generated_playable_preview",
+    "title": "Visible Generated Playable Preview",
     "completed_at_utc": "2026-06-24T00:00:00Z",
-    "summary": "Added an Application-layer deterministic generated package MVP service that consumes the Slice 029 generated plan, Slice 030 rule pack and Slice 031 tiny-loop result, maps them into existing GamePackage contracts, runs package validation, records bootstrap evidence, and writes byte-stable .llmgc/procedural/generated-package-mvp/package.json plus JSON/Markdown reports with diagnostics.",
-    "scenario_id": "generated-package-mvp",
+    "summary": "Added an Application-layer deterministic visible generated playable preview service that runs the S029-S032 pipeline, reuses GeneratedPackageRuntimePreviewService, writes byte-stable visible preview snapshot/report/manual-verification sidecars, and proves DefaultGameRuntime start plus movement/interaction command evidence through product smoke without adding UI, provider, LLM, Lua, Unity or media execution.",
+    "scenario_id": "visible-generated-playable-preview",
     "checks": [
-      "CurrentGeneratorStateDocsTests filtered tests: 10/10 passed",
-      "formula-effect-action-registry product smoke: 1/1 passed",
       "GeneratedPackageMvp filtered tests: 5/5 passed",
-      "generated-package-mvp product smoke: 1/1 passed",
-      "check-all.ps1: 674/674 tests passed, build 0 warnings / 0 errors"
+      "VisibleGeneratedPlayablePreview filtered tests: 4/4 passed",
+      "visible-generated-playable-preview product smoke: 1/1 passed",
+      "check-all.ps1: 678/678 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "allowed_next_codex_task_types": [
-    "visible_generated_playable_preview"
+    "manual_user_preview_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -95,11 +94,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "visible_generated_playable_preview",
-  "recommended_next_work_item_title": "Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.",
-  "recommended_next_task_file": "not_created_yet",
+  "recommended_next_work_item": "manual_user_preview_verification",
+  "recommended_next_work_item_title": "Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.",
+  "recommended_next_task_file": "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
   "candidate_product_vertical_slices": [
-    "Visible Generated Playable Preview"
+    "Manual User Preview Verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -110,6 +109,8 @@
     "docs/NEXT_PRODUCT_SLICE_030_FORMULA_EFFECT_ACTION_REGISTRY_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_031_TINY_GENERATED_RUNTIME_LOOP_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md",
+    "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
     "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
     "docs/FULL_GAME_GENERATION_MASTER_PLAN.md",
     "docs/GAME_SYSTEM_VARIANT_TAXONOMY.md"
@@ -138,7 +139,8 @@
     "Seeded Procedural Game Kernel v1 generated plan sidecars",
     "Formula/Effect/Action Registry Foundation rule-pack sidecars",
     "Tiny Generated Runtime Loop state/report sidecars",
-    "Generated Package MVP package/report/runtime-bootstrap sidecars"
+    "Generated Package MVP package/report/runtime-bootstrap sidecars",
+    "Visible Generated Playable Preview snapshot/report/manual-verification sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 032 recommend visible_generated_playable_preview."
+  "state_update_rule": "Update this file pair after every accepted product slice; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 033 recommend manual_user_preview_verification."
 }

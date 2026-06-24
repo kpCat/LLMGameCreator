@@ -50,26 +50,26 @@ public sealed class GeneratedPackageMvpService
         var mappedRecords = new List<GeneratedPackageMappedRecord>();
         var package = BuildPackage(request, source, mappedRecords, diagnostics);
         var packageJson = JsonSerializer.Serialize(package, JsonOptions);
-        var packageHash = ComputeHash(packageJson);
+        var preProvenancePackageHash = ComputeHash(packageJson);
 
         package.GeneratedContent.AppliedArtifacts.Add(new GeneratedContentArtifactProvenance
         {
-            ArtifactId = "generated_package_mvp/" + ShortHash(packageHash),
+            ArtifactId = "generated_package_mvp/" + ShortHash(preProvenancePackageHash),
             ContractId = "generated_package_mvp_v1",
             ArtifactKind = "generated_package_mvp",
             CapabilitySelectionId = "generated_package_mvp",
             GeneratedAt = string.Empty,
             AuditId = source.PlanId,
             AppliedAt = string.Empty,
-            ContentHash = packageHash,
-            MappingResult = "deterministic_mvp_mapping"
+            ContentHash = preProvenancePackageHash,
+            MappingResult = "deterministic_mvp_mapping_pre_provenance_package_hash"
         });
         package.GeneratedContent.AppliedArtifacts = package.GeneratedContent.AppliedArtifacts
             .OrderBy(item => item.ArtifactId, StringComparer.Ordinal)
             .ToList();
 
         packageJson = JsonSerializer.Serialize(package, JsonOptions);
-        packageHash = ComputeHash(packageJson);
+        var finalPackageHash = ComputeHash(packageJson);
 
         var validationReport = _validator.Validate(package);
         var validationIssues = validationReport.Issues
@@ -97,7 +97,9 @@ public sealed class GeneratedPackageMvpService
             Source = source,
             PackageId = package.Manifest.PackageId,
             PackageTitle = package.Manifest.Title,
-            PackageHash = packageHash,
+            PackageHash = finalPackageHash,
+            PreProvenancePackageHash = preProvenancePackageHash,
+            ProvenanceContentHashMeaning = "GeneratedContent.AppliedArtifacts.ContentHash for generated_package_mvp_v1 is the deterministic package hash before the self-describing provenance record is inserted; PackageHash is the final package.json hash after provenance insertion.",
             StableSummary = BuildStableSummary(package),
             HasErrors = validationIssues.Any(item => item.Severity is nameof(ValidationSeverity.Error) or nameof(ValidationSeverity.Critical))
                         || sortedDiagnostics.Any(item => item.Severity == "error"),

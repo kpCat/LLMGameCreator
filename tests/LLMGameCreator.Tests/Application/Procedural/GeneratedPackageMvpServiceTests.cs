@@ -45,6 +45,12 @@ public sealed class GeneratedPackageMvpServiceTests
         Assert.NotEmpty(result.Package.Game.Quests);
         Assert.NotEmpty(result.Package.Game.Factions);
         Assert.NotEmpty(result.Package.GeneratedContent.AppliedArtifacts);
+        Assert.NotEqual(result.Report.PackageHash, result.Report.PreProvenancePackageHash);
+        Assert.Contains("before the self-describing provenance record", result.Report.ProvenanceContentHashMeaning, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(result.Package.GeneratedContent.AppliedArtifacts, provenance =>
+            provenance.ContractId == "generated_package_mvp_v1" &&
+            provenance.ContentHash == result.Report.PreProvenancePackageHash &&
+            provenance.MappingResult.Contains("pre_provenance_package_hash", StringComparison.Ordinal));
         Assert.Contains(result.Report.MappedRecords, item => item.PackageKind == "map");
         Assert.Contains(result.Report.MappedRecords, item => item.PackageKind == "item");
         Assert.Contains(result.Report.MappedRecords, item => item.PackageKind == "encounter");

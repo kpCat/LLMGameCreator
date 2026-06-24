@@ -64,10 +64,10 @@ Current source-of-truth handoff:
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-Product Slice 032 completed the Generated Package MVP: the deterministic Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation and Slice 031 Tiny Generated Runtime Loop can now produce a minimal validator-clean generated `GamePackage` artifact with bootstrap evidence.
+Product Slice 033 completed the Visible Generated Playable Preview path: the deterministic Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop and Slice 032 Generated Package MVP can now produce preview snapshot/report sidecars through the existing runtime-preview projection path, with headless runtime start and command evidence supplied by product smoke.
 
 Next practical step:
-Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
+Manual User Preview Verification: launch the WinForms app from Visual Studio, open the generated package/preview path, and confirm the generated package MVP is visible and minimally playable before another Codex feature slice is selected.
 
 `GamePackage` — runtime source of truth для готовой игры.
 

@@ -112,7 +112,7 @@ public sealed class CurrentGeneratorStateDocsTests
             .ToArray();
 
         Assert.Equal("strategy_reset_playable_procedural_generator", currentPhase);
-        Assert.Equal("visible_generated_playable_preview", recommendedNextWorkItem);
+        Assert.Equal("manual_user_preview_verification", recommendedNextWorkItem);
         Assert.Contains(blocked, item => item.Contains("M5", StringComparison.OrdinalIgnoreCase));
         Assert.Contains(blocked, item => item.Contains("Lua", StringComparison.OrdinalIgnoreCase));
         Assert.Contains(blocked, item => item.Contains("M6", StringComparison.OrdinalIgnoreCase));

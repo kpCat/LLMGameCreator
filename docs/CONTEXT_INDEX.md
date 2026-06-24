@@ -49,6 +49,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/NEXT_PRODUCT_SLICE_030_FORMULA_EFFECT_ACTION_REGISTRY_TASK.md` | Completed Product Slice 030 task: Formula/Effect/Action Registry Foundation. |
 | `docs/NEXT_PRODUCT_SLICE_031_TINY_GENERATED_RUNTIME_LOOP_TASK.md` | Completed Product Slice 031 task: Tiny Generated Runtime Loop. |
 | `docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md` | Completed Product Slice 032 task: Generated Package MVP. |
+| `docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md` | Completed Product Slice 033 task: Visible Generated Playable Preview. |
+| `docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md` | Manual user verification checklist for the generated playable preview. |
 | `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` | LLM minimization policy and deterministic combiner rules. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Full game generation meaning, ownership boundaries and long-term target architecture. |
 | `docs/GAME_GENERATION_CAPABILITY_MATRIX.md` | Capability domains, priorities and acceptance criteria. |
@@ -66,12 +68,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-Visible Generated Playable Preview
+Manual User Preview Verification
 ```
 
 Allowed next sequence:
 
-1. Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
+1. Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.
 
 Kill criterion:
 

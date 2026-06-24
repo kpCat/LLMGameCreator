@@ -17,6 +17,8 @@ public sealed class GeneratedPackageMvpMarkdownRenderer
             $"- Package id: `{report.PackageId}`",
             $"- Package title: `{report.PackageTitle}`",
             $"- Package hash: `{report.PackageHash}`",
+            $"- Pre-provenance package hash: `{report.PreProvenancePackageHash}`",
+            $"- Provenance content hash meaning: `{report.ProvenanceContentHashMeaning}`",
             $"- Stable summary: `{report.StableSummary}`",
             $"- Plan id: `{report.Source.PlanId}`",
             $"- Plan hash: `{report.Source.PlanHash}`",

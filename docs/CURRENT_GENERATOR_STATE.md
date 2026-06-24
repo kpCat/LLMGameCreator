@@ -1,14 +1,14 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 032 Generated Package MVP  
+Updated by: Product Slice 033 Visible Generated Playable Preview  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars.
 
-The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence.
+The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
 Source of truth for the reset:
 
@@ -32,7 +32,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
+1. Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.
 
 Kill criterion:
 
@@ -46,10 +46,37 @@ product slices, stop and reassess architecture before spending more limit.
 Recommended next work item:
 
 ```text
-visible_generated_playable_preview
+manual_user_preview_verification
 ```
 
-Visible Generated Playable Preview: expose the generated package MVP through the smallest existing preview/simulator path needed for a user-visible 5-minute prototype, without unlocking broad UI or Unity work.
+Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.
+
+## Product Slice 033 Summary
+
+Product Slice 033: Visible Generated Playable Preview.
+
+Completed behavior:
+
+- clarified Generated Package MVP provenance so `GeneratedContent.AppliedArtifacts.ContentHash` is explicitly the pre-provenance package hash while `GeneratedPackageMvpReport.PackageHash` remains the final `package.json` hash;
+- added an Application-layer visible generated playable preview service in `RuntimePreview`;
+- ran the S029 plan, S030 rule pack, S031 tiny loop and S032 generated package MVP pipeline in one deterministic preview path;
+- reused `GeneratedPackageRuntimePreviewService` instead of creating a parallel projection architecture;
+- kept `LLMGameCreator.Application` free of a direct `LLMGameCreator.Runtime` implementation dependency by using a small runtime adapter contract;
+- proved runtime start, movement and interaction in product smoke through `DefaultGameRuntime`;
+- produced deterministic `.llmgc/procedural/visible-generated-playable-preview/visible-generated-playable-preview-snapshot.json`;
+- produced deterministic `.llmgc/procedural/visible-generated-playable-preview/visible-generated-playable-preview-report.json`;
+- produced deterministic `.llmgc/procedural/visible-generated-playable-preview/visible-generated-playable-preview-report.md`;
+- produced deterministic `.llmgc/procedural/visible-generated-playable-preview/manual-verification.md`;
+- added the `visible-generated-playable-preview` product smoke scenario;
+- added `docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md`;
+- did not add UI, provider execution, LLM calls, Lua execution, Unity work, media generation, broad GamePackage schema changes or public runtime command/state changes.
+
+Recorded checks from S033:
+
+- `GeneratedPackageMvp` filtered tests: 5/5 passed.
+- `VisibleGeneratedPlayablePreview` filtered tests: 4/4 passed.
+- `visible-generated-playable-preview` product smoke: 1/1 passed.
+- `check-all.ps1`: 678/678 tests passed, build 0 warnings / 0 errors.
 
 ## Product Slice 032 Summary
 
@@ -238,8 +265,8 @@ Update this file pair after every accepted product slice.
 
 Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 
-After Product Slice 032 completes, this state should recommend:
+After Product Slice 033 completes, this state should recommend:
 
 ```text
-visible_generated_playable_preview
+manual_user_preview_verification
 ```

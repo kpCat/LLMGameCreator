@@ -40,6 +40,8 @@ public sealed record GeneratedPackageMvpReport
     public string PackageId { get; init; } = string.Empty;
     public string PackageTitle { get; init; } = string.Empty;
     public string PackageHash { get; init; } = string.Empty;
+    public string PreProvenancePackageHash { get; init; } = string.Empty;
+    public string ProvenanceContentHashMeaning { get; init; } = string.Empty;
     public string StableSummary { get; init; } = string.Empty;
     public bool HasErrors { get; init; }
     public int DiagnosticCount { get; init; }
