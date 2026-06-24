@@ -64,10 +64,10 @@ Current source-of-truth handoff:
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-Product Slice 029 completed the first deterministic seeded procedural game kernel.
+Product Slice 030 completed the deterministic Formula/Effect/Action Registry Foundation for Slice 029 generated placeholders.
 
 Next practical step:
-Product Slice 030: Formula/Effect/Action Registry Foundation, so the generated placeholders can become validated runtime-facing rules.
+Product Slice 031: Tiny Generated Runtime Loop, so the generated plan and validated rule pack can drive a small simulatable loop.
 
 `GamePackage` — runtime source of truth для готовой игры.
 

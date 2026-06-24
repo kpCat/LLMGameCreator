@@ -63,13 +63,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-Product Slice 030: Formula/Effect/Action Registry Foundation
+Product Slice 031: Tiny Generated Runtime Loop
 ```
 
 Allowed next sequence:
 
-1. Formula/Effect/Action Registry Foundation.
-2. Tiny Generated Runtime Loop.
+1. Tiny Generated Runtime Loop.
 
 Kill criterion:
 

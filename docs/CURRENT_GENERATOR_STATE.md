@@ -1,14 +1,14 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 029 Seeded Procedural Game Kernel v1  
+Updated by: Product Slice 030 Formula/Effect/Action Registry Foundation  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation.
 
-The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 should turn formula/effect/action placeholders into validated rules.
+The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 should consume both in a tiny generated runtime loop.
 
 Source of truth for the reset:
 
@@ -45,10 +45,30 @@ product slices, stop and reassess architecture before spending more limit.
 Recommended next work item:
 
 ```text
-formula_effect_action_registry_foundation
+tiny_generated_runtime_loop
 ```
 
-Recommended next task file is not present yet. Draft it from the strategy reset Slice B requirements before implementation if the user asks to execute Slice 030.
+Recommended next task file is not present yet. Draft it from the strategy reset Slice C requirements before implementation if the user asks to execute Slice 031.
+
+## Product Slice 030 Summary
+
+Product Slice 030: Formula/Effect/Action Registry Foundation.
+
+Completed behavior:
+
+- added an Application-layer deterministic formula/effect/action rule-pack generator;
+- mapped Slice 029 placeholders for route access, faction access, encounter resolution and quest progress;
+- produced byte-stable `.llmgc/procedural/formula-effect-action-rule-pack.json`;
+- produced deterministic `.llmgc/procedural/formula-effect-action-rule-pack.md`;
+- produced deterministic validation-report JSON and Markdown sidecars;
+- validated formula ids, declared variables, safe expressions, rule ids and rule/source refs;
+- added the `formula-effect-action-registry` product smoke scenario;
+- did not add UI, provider execution, LLM calls, Lua execution, Unity work, media generation, C# code generation, GamePackage schema changes or runtime command/state changes.
+
+Recorded checks from S030:
+
+- `FormulaEffectActionRegistry` filtered tests: 4/4 passed.
+- `formula-effect-action-registry` product smoke: 1/1 passed.
 
 ## Product Slice 029 Summary
 
