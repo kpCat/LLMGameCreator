@@ -100,9 +100,11 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         AppendLog("Generate Preview: running deterministic S029-S033 workflow...");
         try
         {
+            var projectRootPath = _currentGamePackageService?.CurrentFolder ?? string.Empty;
             var result = await _generatePreviewWorkflowService.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
             {
-                ProjectRootPath = _currentGamePackageService?.CurrentFolder ?? string.Empty
+                ProjectRootPath = projectRootPath,
+                ReplaceCurrentPackage = false
             });
 
             AppendWorkflowDiagnostics(result.Diagnostics);
@@ -112,17 +114,23 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
                 return;
             }
 
-            _state = null;
-            _questDialoguePreviewService.StartSession(result.GeneratedPackage);
-            RefreshGeneratedPreview(result.GeneratedPackage, null);
-            _rightTabControl.SelectedTab = _generatedContentTabPage;
-            _generatedContentInnerTabControl.SelectedTab = _generatedSummaryTabPage;
+            var currentPackageReplaced = false;
+            RunOnUiThread(() =>
+            {
+                _currentGamePackageService?.ReplaceCurrent(result.GeneratedPackage);
+                currentPackageReplaced = _currentGamePackageService != null;
+                _state = null;
+                _questDialoguePreviewService.StartSession(result.GeneratedPackage);
+                RefreshGeneratedPreview(result.GeneratedPackage, null);
+                _rightTabControl.SelectedTab = _generatedContentTabPage;
+                _generatedContentInnerTabControl.SelectedTab = _generatedSummaryTabPage;
+            });
 
             AppendLog($"Generate Preview ready: {result.PackageTitle} / {result.PackageId}");
             AppendLog($"Output folder: {result.Paths.VisiblePreviewOutputDirectoryPath}");
             AppendLog($"Generated package: {result.Paths.GeneratedPackageJsonPath}");
             AppendLog($"Snapshot: {result.Paths.VisiblePreviewSnapshotJsonPath}");
-            AppendLog(result.CurrentPackageReplaced
+            AppendLog(currentPackageReplaced
                 ? "Generated package loaded as current package. Press Start to run Runtime Preview."
                 : "Generated package was not loaded into current package state; inspect the output folder.");
         }
@@ -179,6 +187,17 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _generatePreviewRunning = running;
         _generatePreviewButton.Enabled = !running;
         _startButton.Enabled = !running;
+    }
+
+    private void RunOnUiThread(Action action)
+    {
+        if (InvokeRequired)
+        {
+            Invoke(action);
+            return;
+        }
+
+        action();
     }
 
     private void ConfigureSplitSafety()

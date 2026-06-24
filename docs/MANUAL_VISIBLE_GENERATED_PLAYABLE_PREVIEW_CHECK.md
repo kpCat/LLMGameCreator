@@ -18,6 +18,7 @@ Success means:
 - the log reports `Generate Preview ready`;
 - the generated package is loaded as the current package;
 - Runtime Preview starts without browsing `.devflow/runs/...`;
+- no cross-thread WinForms exception appears after `Generate Preview`;
 - generated content summary and browser show counts, representative ids and readable details;
 - movement/interaction remains available for the generated package.
 

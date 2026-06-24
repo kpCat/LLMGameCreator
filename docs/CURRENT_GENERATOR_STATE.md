@@ -1,12 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 034 One-Click Generated Preview Workflow  
+Updated by: Product Slice 034 Hotfix Generate Preview UI Thread Boundary  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -92,6 +92,23 @@ Recorded checks from S034:
 - `OneClickGeneratedPreviewWorkflow` filtered tests: 3/3 passed.
 - `one-click-generated-preview-workflow` product smoke: 1/1 passed.
 - `check-all.ps1`: 681/681 tests passed, build 0 warnings / 0 errors.
+
+## Product Slice 034 Hotfix Summary
+
+Product Slice 034 hotfix: Generate Preview UI Thread Boundary.
+
+Reason:
+
+- manual one-click verification caught a WinForms cross-thread exception when `CurrentChanged` UI subscribers were triggered by service-side current-package replacement after background awaits.
+
+Completed behavior:
+
+- Runtime Preview calls the one-click workflow with `ReplaceCurrentPackage = false`;
+- Runtime Preview captures the project root before background work;
+- after successful workflow completion, Runtime Preview replaces the current package on the UI-owned page path;
+- the Application workflow service still supports service-side replacement for headless callers;
+- service diagnostics now distinguish caller-deferred current-package replacement from a missing current-package service;
+- next action remains `manual_one_click_preview_verification`.
 
 ## Product Slice 033 Summary
 

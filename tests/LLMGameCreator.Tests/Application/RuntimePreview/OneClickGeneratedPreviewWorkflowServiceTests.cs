@@ -58,6 +58,28 @@ public sealed class OneClickGeneratedPreviewWorkflowServiceTests
         Assert.Contains(concurrent.Diagnostics, item => item.Code == "one_click_generated_preview.already_running");
     }
 
+    [Fact]
+    public async Task OneClickGeneratedPreviewWorkflowCanDeferCurrentPackageReplacementToCaller()
+    {
+        using var temp = new TempDirectory();
+        var current = new FakeCurrentGamePackageService(temp.Path);
+        var service = CreateService(current);
+
+        var result = await service.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
+        {
+            ProjectRootPath = temp.Path,
+            ReplaceCurrentPackage = false
+        });
+
+        Assert.True(result.Ok);
+        Assert.False(result.CurrentPackageReplaced);
+        Assert.Null(current.CurrentPackage);
+        Assert.False(string.IsNullOrWhiteSpace(result.GeneratedPackage.Manifest.PackageId));
+        Assert.True(File.Exists(result.Paths.GeneratedPackageJsonPath));
+        Assert.Contains(result.Diagnostics, item => item.Code == "one_click_generated_preview.current_package_replacement_deferred");
+        Assert.DoesNotContain(result.Diagnostics, item => item.Code == "one_click_generated_preview.current_package_replaced");
+    }
+
     private static OneClickGeneratedPreviewWorkflowService CreateService(FakeCurrentGamePackageService current) =>
         new(
             visiblePreviewService: new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()),

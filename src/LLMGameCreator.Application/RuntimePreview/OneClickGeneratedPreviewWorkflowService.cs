@@ -85,9 +85,7 @@ public sealed class OneClickGeneratedPreviewWorkflowService
                 .Concat(new[]
                 {
                     Diagnostic("info", "one_click_generated_preview.no_external_execution", "workflow", "No LLM, provider, Lua, Unity or media execution was invoked."),
-                    currentReplaced
-                        ? Diagnostic("info", "one_click_generated_preview.current_package_replaced", package.Manifest.PackageId, "Generated package was loaded as the current package.")
-                        : Diagnostic("warning", "one_click_generated_preview.current_package_not_replaced", package.Manifest.PackageId, "No current-package service was available, so the generated package was not loaded into editor state.")
+                    BuildCurrentPackageDiagnostic(request, currentReplaced, package.Manifest.PackageId)
                 }));
 
             return new OneClickGeneratedPreviewWorkflowResult
@@ -157,6 +155,21 @@ public sealed class OneClickGeneratedPreviewWorkflowService
         Status = status,
         Diagnostics = [diagnostic]
     };
+
+    private static OneClickGeneratedPreviewWorkflowDiagnostic BuildCurrentPackageDiagnostic(
+        OneClickGeneratedPreviewWorkflowRequest request,
+        bool currentReplaced,
+        string packageId)
+    {
+        if (currentReplaced)
+        {
+            return Diagnostic("info", "one_click_generated_preview.current_package_replaced", packageId, "Generated package was loaded as the current package.");
+        }
+
+        return request.ReplaceCurrentPackage
+            ? Diagnostic("warning", "one_click_generated_preview.current_package_not_replaced", packageId, "No current-package service was available, so the generated package was not loaded into editor state.")
+            : Diagnostic("info", "one_click_generated_preview.current_package_replacement_deferred", packageId, "Current-package replacement was deferred to the caller.");
+    }
 
     private static IEnumerable<OneClickGeneratedPreviewWorkflowDiagnostic> ToWorkflowDiagnostics(
         IEnumerable<VisibleGeneratedPlayablePreviewDiagnostic> diagnostics) =>
