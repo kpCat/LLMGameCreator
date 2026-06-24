@@ -50,6 +50,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/NEXT_PRODUCT_SLICE_031_TINY_GENERATED_RUNTIME_LOOP_TASK.md` | Completed Product Slice 031 task: Tiny Generated Runtime Loop. |
 | `docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md` | Completed Product Slice 032 task: Generated Package MVP. |
 | `docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md` | Completed Product Slice 033 task: Visible Generated Playable Preview. |
+| `docs/NEXT_PRODUCT_SLICE_034_ONE_CLICK_GENERATED_PREVIEW_WORKFLOW_TASK.md` | Completed Product Slice 034 task: One-Click Generated Preview Workflow. |
 | `docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md` | Manual user verification checklist for the generated playable preview. |
 | `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` | LLM minimization policy and deterministic combiner rules. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Full game generation meaning, ownership boundaries and long-term target architecture. |
@@ -68,12 +69,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-Manual User Preview Verification
+Manual One-Click Preview Verification
 ```
 
 Allowed next sequence:
 
-1. Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.
+1. Manual One-Click Preview Verification: user launches WinForms, presses Generate Preview on Runtime Preview, verifies the package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.
 
 Kill criterion:
 

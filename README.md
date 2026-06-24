@@ -64,10 +64,10 @@ Current source-of-truth handoff:
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-Product Slice 033 completed the Visible Generated Playable Preview path: the deterministic Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop and Slice 032 Generated Package MVP can now produce preview snapshot/report sidecars through the existing runtime-preview projection path, with headless runtime start and command evidence supplied by product smoke.
+Product Slice 034 completed the One-Click Generated Preview Workflow: Runtime Preview now exposes `Generate Preview`, which runs the deterministic Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop, Slice 032 Generated Package MVP and Slice 033 Visible Generated Playable Preview path, writes the sidecars, and loads the generated package as the current package.
 
 Next practical step:
-Manual User Preview Verification: launch the WinForms app from Visual Studio, open the generated package/preview path, and confirm the generated package MVP is visible and minimally playable before another Codex feature slice is selected.
+Manual One-Click Preview Verification: launch the WinForms app, open Runtime Preview, press `Generate Preview`, then confirm the generated package loads automatically and Runtime Preview starts/works before another Codex feature slice is selected.
 
 `GamePackage` — runtime source of truth для готовой игры.
 
@@ -231,6 +231,8 @@ samples\minimal-map-game
 `Runtime Preview` — отладочная страница для быстрой проверки базового runtime-поведения.
 
 Она не является финальным player-ом.
+
+For the generated preview workflow, use `Generate Preview` on Runtime Preview. It runs the deterministic generated-preview pipeline, writes artifacts under `.llmgc/procedural/`, loads the generated MVP package as the current package, and then the existing `Старт` action can start the preview.
 
 ## Runtime Simulator
 

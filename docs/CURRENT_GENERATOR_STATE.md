@@ -1,12 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 033 Visible Generated Playable Preview  
+Updated by: Product Slice 034 One-Click Generated Preview Workflow  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -32,7 +32,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.
+1. Manual One-Click Preview Verification: user launches WinForms, presses Generate Preview on Runtime Preview, verifies generated package loading, Runtime Preview start/behavior, and generated-content readability before Codex receives another feature slice.
 
 Kill criterion:
 
@@ -41,15 +41,57 @@ If no generated playable or simulatable loop exists after the next three large
 product slices, stop and reassess architecture before spending more limit.
 ```
 
+## Manual S033 Verification
+
+Manual user preview verification for Product Slice 033 is recorded as passed.
+
+Evidence source: user-reported manual verification after running:
+
+```text
+.\.devflow\scripts\run-product-smoke.ps1 -Scenario visible-generated-playable-preview
+```
+
+Observed result:
+
+- generated package opened in WinForms;
+- Runtime Preview started;
+- generated map was visible;
+- player movement worked;
+- generated interaction/dialogue/item-cache behavior was visible;
+- project status showed a generated MVP package.
+
 ## Recommended Next Work
 
 Recommended next work item:
 
 ```text
-manual_user_preview_verification
+manual_one_click_preview_verification
 ```
 
-Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.
+Manual One-Click Preview Verification: user launches WinForms, presses the new Runtime Preview `Generate Preview` action, verifies the package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.
+
+## Product Slice 034 Summary
+
+Product Slice 034: One-Click Generated Preview Workflow.
+
+Completed behavior:
+
+- recorded S033 manual user preview verification as passed before implementing S034;
+- added an Application-layer one-click generated preview workflow service in `RuntimePreview`;
+- reused `VisibleGeneratedPlayablePreviewService` to run the S029-S033 pipeline instead of duplicating generation logic;
+- wrote S029 generated plan, S030 rule pack, S031 tiny loop, S032 generated package MVP and S033 visible preview sidecars under the selected output root;
+- loaded the generated MVP package into `ICurrentGamePackageService` after successful workflow execution;
+- added a Runtime Preview `Generate Preview` action with async execution, disabled double-click behavior and visible status/diagnostics;
+- improved the Runtime Preview generated-content summary with counts and representative generated ids;
+- added the `one-click-generated-preview-workflow` product smoke scenario;
+- did not add provider execution, LLM calls, Lua execution, Unity work, media generation, broad GamePackage schema changes or public runtime command/state changes.
+
+Recorded checks from S034:
+
+- `CurrentGeneratorStateDocsTests` filtered tests: passed.
+- `OneClickGeneratedPreviewWorkflow` filtered tests: 3/3 passed.
+- `one-click-generated-preview-workflow` product smoke: 1/1 passed.
+- `check-all.ps1`: 681/681 tests passed, build 0 warnings / 0 errors.
 
 ## Product Slice 033 Summary
 
@@ -265,8 +307,8 @@ Update this file pair after every accepted product slice.
 
 Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 
-After Product Slice 033 completes, this state should recommend:
+After Product Slice 034 completes, this state should recommend:
 
 ```text
-manual_user_preview_verification
+manual_one_click_preview_verification
 ```

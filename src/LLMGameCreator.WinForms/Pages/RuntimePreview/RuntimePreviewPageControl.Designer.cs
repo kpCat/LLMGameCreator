@@ -12,6 +12,7 @@ namespace LLMGameCreator.WinForms.Pages
         private SplitContainer _rootSplitContainer;
         private Panel _leftPanel;
         private FlowLayoutPanel _toolbarPanel;
+        private Button _generatePreviewButton;
         private Button _startButton;
         private RuntimeMapCanvas _canvas;
         private TabControl _rightTabControl;
@@ -52,6 +53,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._leftPanel = new Panel();
             this._canvas = new RuntimeMapCanvas();
             this._toolbarPanel = new FlowLayoutPanel();
+            this._generatePreviewButton = new Button();
             this._startButton = new Button();
             this._rightTabControl = new TabControl();
             this._logTabPage = new TabPage();
@@ -127,6 +129,7 @@ namespace LLMGameCreator.WinForms.Pages
             // 
             // _toolbarPanel
             // 
+            this._toolbarPanel.Controls.Add(this._generatePreviewButton);
             this._toolbarPanel.Controls.Add(this._startButton);
             this._toolbarPanel.Dock = DockStyle.Top;
             this._toolbarPanel.Location = new Point(12, 12);
@@ -134,12 +137,21 @@ namespace LLMGameCreator.WinForms.Pages
             this._toolbarPanel.Size = new Size(796, 42);
             this._toolbarPanel.TabIndex = 0;
             // 
+            // _generatePreviewButton
+            // 
+            this._generatePreviewButton.Location = new Point(3, 3);
+            this._generatePreviewButton.Name = "_generatePreviewButton";
+            this._generatePreviewButton.Size = new Size(132, 30);
+            this._generatePreviewButton.TabIndex = 0;
+            this._generatePreviewButton.Text = "Generate Preview";
+            this._generatePreviewButton.UseVisualStyleBackColor = true;
+            // 
             // _startButton
             // 
-            this._startButton.Location = new Point(3, 3);
+            this._startButton.Location = new Point(141, 3);
             this._startButton.Name = "_startButton";
             this._startButton.Size = new Size(100, 30);
-            this._startButton.TabIndex = 0;
+            this._startButton.TabIndex = 1;
             this._startButton.Text = "Старт";
             this._startButton.UseVisualStyleBackColor = true;
             // 

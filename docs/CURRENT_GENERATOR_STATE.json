@@ -3,21 +3,21 @@
   "state_id": "current_generator_state",
   "updated_at_utc": "2026-06-24T00:00:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Post-S033 strategy reset awaiting manual visible preview verification",
-  "gate_status": "m4_1_passed_s033_completed_manual_preview_verification_pending",
+  "current_phase_title": "Post-S034 one-click generated preview workflow awaiting manual verification",
+  "gate_status": "m4_1_passed_s034_completed_manual_one_click_preview_verification_pending",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_033_visible_generated_playable_preview",
+  "last_completed_product_slice_id": "product_slice_034_one_click_generated_preview_workflow",
   "active_manual_gate": "Infrastructure-only next work is frozen unless explicitly approved by the user or directly required to unblock the generated playable/simulatable loop.",
-  "current_user_action": "Run Manual User Preview Verification before selecting another Codex feature slice.",
-  "recommended_next_decision": "Manual User Preview Verification: launch the app/preview from Visual Studio and verify the generated package MVP is visible and minimally playable before Codex receives more feature slices.",
+  "current_user_action": "Run Manual One-Click Preview Verification before selecting another Codex feature slice.",
+  "recommended_next_decision": "Manual One-Click Preview Verification: launch WinForms, press Generate Preview on Runtime Preview, verify the generated package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "manual_user_preview_verification"
+      "manual_one_click_preview_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -60,20 +60,33 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_033_visible_generated_playable_preview",
-    "title": "Visible Generated Playable Preview",
+    "slice_id": "product_slice_034_one_click_generated_preview_workflow",
+    "title": "One-Click Generated Preview Workflow",
     "completed_at_utc": "2026-06-24T00:00:00Z",
-    "summary": "Added an Application-layer deterministic visible generated playable preview service that runs the S029-S032 pipeline, reuses GeneratedPackageRuntimePreviewService, writes byte-stable visible preview snapshot/report/manual-verification sidecars, and proves DefaultGameRuntime start plus movement/interaction command evidence through product smoke without adding UI, provider, LLM, Lua, Unity or media execution.",
-    "scenario_id": "visible-generated-playable-preview",
+    "summary": "Added an Application-layer one-click generated preview workflow that reuses the S029-S033 visible preview pipeline, writes generated plan/rule-pack/tiny-loop/package/visible-preview sidecars, loads the generated MVP package into ICurrentGamePackageService, exposes a Runtime Preview Generate Preview action with visible diagnostics, and improves generated-content readability without adding provider, LLM, Lua, Unity or media execution.",
+    "scenario_id": "one-click-generated-preview-workflow",
     "checks": [
-      "GeneratedPackageMvp filtered tests: 5/5 passed",
-      "VisibleGeneratedPlayablePreview filtered tests: 4/4 passed",
-      "visible-generated-playable-preview product smoke: 1/1 passed",
-      "check-all.ps1: 678/678 tests passed, build 0 warnings / 0 errors"
+      "CurrentGeneratorStateDocsTests filtered tests: passed",
+      "OneClickGeneratedPreviewWorkflow filtered tests: 3/3 passed",
+      "one-click-generated-preview-workflow product smoke: 1/1 passed",
+      "check-all.ps1: 681/681 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "manual_user_preview_verification": {
+    "status": "passed",
+    "evidence_source": "user_report_after_s033",
+    "source_scenario": "visible-generated-playable-preview",
+    "observed_result": [
+      "generated package opened in WinForms",
+      "Runtime Preview started",
+      "generated map was visible",
+      "player movement worked",
+      "generated interaction/dialogue/item-cache behavior was visible",
+      "project status showed a generated MVP package"
     ]
   },
   "allowed_next_codex_task_types": [
-    "manual_user_preview_verification"
+    "manual_one_click_preview_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -94,11 +107,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "manual_user_preview_verification",
-  "recommended_next_work_item_title": "Manual User Preview Verification: user launches the app/preview from Visual Studio and verifies the generated package MVP is visible and minimally playable before Codex receives more feature slices.",
+  "recommended_next_work_item": "manual_one_click_preview_verification",
+  "recommended_next_work_item_title": "Manual One-Click Preview Verification: user launches WinForms, presses the new Runtime Preview Generate Preview action, verifies the package loads automatically, Runtime Preview starts/works, and generated content is readable enough before Codex receives another feature slice.",
   "recommended_next_task_file": "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
   "candidate_product_vertical_slices": [
-    "Manual User Preview Verification"
+    "Manual One-Click Preview Verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -140,7 +153,8 @@
     "Formula/Effect/Action Registry Foundation rule-pack sidecars",
     "Tiny Generated Runtime Loop state/report sidecars",
     "Generated Package MVP package/report/runtime-bootstrap sidecars",
-    "Visible Generated Playable Preview snapshot/report/manual-verification sidecars"
+    "Visible Generated Playable Preview snapshot/report/manual-verification sidecars",
+    "One-click generated preview workflow in Runtime Preview"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 033 recommend manual_user_preview_verification."
+  "state_update_rule": "Update this file pair after every accepted product slice; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 034 recommend manual_one_click_preview_verification."
 }

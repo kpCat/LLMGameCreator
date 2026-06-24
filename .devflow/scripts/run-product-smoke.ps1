@@ -40,7 +40,7 @@ function Write-ProductSmokeSummary {
         Join-Path $PackageOutputDir ".llmgc\procedural\tiny-runtime-loop-state.json"
     } elseif ($Scenario -eq "generated-package-mvp") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-package-mvp\package.json"
-    } elseif ($Scenario -eq "visible-generated-playable-preview") {
+    } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow") {
         Join-Path $PackageOutputDir ".llmgc\procedural\visible-generated-playable-preview\visible-generated-playable-preview-snapshot.json"
     } else {
         Join-Path $PackageOutputDir "package.json"
@@ -178,6 +178,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "visible-generated-playable-preview") {
         $TestFilter = "FullyQualifiedName~VisibleGeneratedPlayablePreviewProductSmoke"
+    }
+    elseif ($Scenario -eq "one-click-generated-preview-workflow") {
+        $TestFilter = "FullyQualifiedName~OneClickGeneratedPreviewWorkflowProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

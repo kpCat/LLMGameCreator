@@ -137,6 +137,13 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
+        _container.RegisterDelegate<IVisibleGeneratedPlayableRuntimeAdapter>(resolver => new GeneratedPlayableRuntimePreviewAdapter(
+            resolver.Resolve<IGameRuntime>()), Reuse.Singleton);
+        _container.RegisterDelegate<VisibleGeneratedPlayablePreviewService>(resolver => new VisibleGeneratedPlayablePreviewService(
+            runtimeAdapter: resolver.Resolve<IVisibleGeneratedPlayableRuntimeAdapter>()), Reuse.Singleton);
+        _container.RegisterDelegate<OneClickGeneratedPreviewWorkflowService>(resolver => new OneClickGeneratedPreviewWorkflowService(
+            visiblePreviewService: resolver.Resolve<VisibleGeneratedPlayablePreviewService>(),
+            currentGamePackageService: resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
         _container.Register<GeneratedPackageRuntimePreviewService>(Reuse.Singleton);
         _container.Register<GeneratedContentInteractionPreviewService>(Reuse.Singleton);
         _container.Register<GeneratedQuestDialoguePreviewService>(Reuse.Singleton);
@@ -191,6 +198,7 @@ public sealed class CompositionRoot : IDisposable
         _container.RegisterDelegate<RuntimePreviewPageControl>(resolver => new RuntimePreviewPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),
             resolver.Resolve<IGameRuntime>(),
+            resolver.Resolve<OneClickGeneratedPreviewWorkflowService>(),
             resolver.Resolve<GeneratedPackageRuntimePreviewService>(),
             resolver.Resolve<GeneratedContentInteractionPreviewService>(),
             resolver.Resolve<GeneratedQuestDialoguePreviewService>(),

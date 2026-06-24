@@ -13,6 +13,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
 
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly IGameRuntime? _runtime;
+    private readonly OneClickGeneratedPreviewWorkflowService? _generatePreviewWorkflowService;
     private readonly GeneratedPackageRuntimePreviewService _previewService;
     private readonly GeneratedContentInteractionPreviewService _interactionService;
     private readonly GeneratedQuestDialoguePreviewService _questDialoguePreviewService;
@@ -22,10 +23,12 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private GameState? _state;
     private bool _splitterInitialized;
     private bool _updatingGeneratedSelection;
+    private bool _generatePreviewRunning;
 
     public RuntimePreviewPageControl()
     {
         _previewService = new GeneratedPackageRuntimePreviewService();
+        _generatePreviewWorkflowService = new OneClickGeneratedPreviewWorkflowService();
         _interactionService = new GeneratedContentInteractionPreviewService();
         _questDialoguePreviewService = new GeneratedQuestDialoguePreviewService();
         _mapPlacementPreviewService = new GeneratedMapPlacementPreviewService();
@@ -38,6 +41,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     public RuntimePreviewPageControl(
         ICurrentGamePackageService currentGamePackageService,
         IGameRuntime runtime,
+        OneClickGeneratedPreviewWorkflowService generatePreviewWorkflowService,
         GeneratedPackageRuntimePreviewService previewService,
         GeneratedContentInteractionPreviewService interactionService,
         GeneratedQuestDialoguePreviewService questDialoguePreviewService,
@@ -45,6 +49,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     {
         _currentGamePackageService = currentGamePackageService;
         _runtime = runtime;
+        _generatePreviewWorkflowService = generatePreviewWorkflowService;
         _previewService = previewService;
         _interactionService = interactionService;
         _questDialoguePreviewService = questDialoguePreviewService;
@@ -52,6 +57,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         InitializeComponent();
         ConfigureSplitSafety();
         WireGeneratedContentEvents();
+        _generatePreviewButton.Click += async (_, _) => await GeneratePreviewAsync();
         _startButton.Click += (_, _) => StartRuntime();
         _canvas.CommandRequested += command => ExecuteCommand(command);
         RefreshGeneratedPreview(null, null);
@@ -83,6 +89,53 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         AppendGeneratedStartSummary(package, result.State);
     }
 
+    private async Task GeneratePreviewAsync()
+    {
+        if (_generatePreviewWorkflowService == null || _generatePreviewRunning)
+        {
+            return;
+        }
+
+        SetGeneratePreviewRunning(true);
+        AppendLog("Generate Preview: running deterministic S029-S033 workflow...");
+        try
+        {
+            var result = await _generatePreviewWorkflowService.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
+            {
+                ProjectRootPath = _currentGamePackageService?.CurrentFolder ?? string.Empty
+            });
+
+            AppendWorkflowDiagnostics(result.Diagnostics);
+            if (!result.Ok)
+            {
+                AppendLog($"Generate Preview failed: {result.Status}");
+                return;
+            }
+
+            _state = null;
+            _questDialoguePreviewService.StartSession(result.GeneratedPackage);
+            RefreshGeneratedPreview(result.GeneratedPackage, null);
+            _rightTabControl.SelectedTab = _generatedContentTabPage;
+            _generatedContentInnerTabControl.SelectedTab = _generatedSummaryTabPage;
+
+            AppendLog($"Generate Preview ready: {result.PackageTitle} / {result.PackageId}");
+            AppendLog($"Output folder: {result.Paths.VisiblePreviewOutputDirectoryPath}");
+            AppendLog($"Generated package: {result.Paths.GeneratedPackageJsonPath}");
+            AppendLog($"Snapshot: {result.Paths.VisiblePreviewSnapshotJsonPath}");
+            AppendLog(result.CurrentPackageReplaced
+                ? "Generated package loaded as current package. Press Start to run Runtime Preview."
+                : "Generated package was not loaded into current package state; inspect the output folder.");
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException)
+        {
+            AppendLog($"Generate Preview failed: {ex.GetType().Name}: {ex.Message}");
+        }
+        finally
+        {
+            SetGeneratePreviewRunning(false);
+        }
+    }
+
     private void ExecuteCommand(PlayerCommand command)
     {
         var package = _currentGamePackageService?.CurrentPackage;
@@ -111,6 +164,21 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private void AppendLog(string message)
     {
         _logTextBox.AppendText($"[{DateTime.Now:HH:mm:ss}] {message}{Environment.NewLine}");
+    }
+
+    private void AppendWorkflowDiagnostics(IReadOnlyList<OneClickGeneratedPreviewWorkflowDiagnostic> diagnostics)
+    {
+        foreach (var diagnostic in diagnostics)
+        {
+            AppendLog($"{diagnostic.Severity}: {diagnostic.Code} / {diagnostic.Target} / {diagnostic.Message}");
+        }
+    }
+
+    private void SetGeneratePreviewRunning(bool running)
+    {
+        _generatePreviewRunning = running;
+        _generatePreviewButton.Enabled = !running;
+        _startButton.Enabled = !running;
     }
 
     private void ConfigureSplitSafety()
@@ -463,6 +531,16 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         AppendLine(builder, "Description", model.PackageDescription);
         AppendLine(builder, "Map", JoinNonEmpty(model.CurrentMapId, model.CurrentMapName));
 
+        AppendSection(builder, "Generated counts");
+        AppendLine(builder, "Regions", model.Regions.Count.ToString());
+        AppendLine(builder, "NPCs", model.Npcs.Count.ToString());
+        AppendLine(builder, "Items", model.Items.Count.ToString());
+        AppendLine(builder, "Dialogues", model.Dialogues.Count.ToString());
+        AppendLine(builder, "Encounters", model.Encounters.Count.ToString());
+        AppendLine(builder, "Quests", model.Quests.Count.ToString());
+        AppendLine(builder, "Mechanics", model.Mechanics.Count.ToString());
+        AppendLine(builder, "Applied artifacts", model.Provenance.Count.ToString());
+
         AppendSection(builder, "Current scene");
         if (model.CurrentScene == null)
         {
@@ -497,6 +575,14 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         AppendGeneratedContentItems(builder, "Items", model.Items);
         AppendGeneratedContentItems(builder, "Dialogues", model.Dialogues);
         AppendGeneratedContentItems(builder, "Encounters", model.Encounters);
+
+        AppendSection(builder, "Representative ids");
+        AppendRepresentativeIds(builder, "Regions", model.Regions.Select(item => item.SourceId));
+        AppendRepresentativeIds(builder, "NPCs", model.Npcs.Select(item => item.SourceId));
+        AppendRepresentativeIds(builder, "Items", model.Items.Select(item => item.SourceId));
+        AppendRepresentativeIds(builder, "Encounters", model.Encounters.Select(item => item.SourceId));
+        AppendRepresentativeIds(builder, "Quests", model.Quests.Select(item => item.SourceId));
+        AppendRepresentativeIds(builder, "Mechanics", model.Mechanics.Select(item => item.SourceId));
 
         AppendSection(builder, $"Applied artifacts ({model.Provenance.Count})");
         AppendItems(builder, model.Provenance.Select(provenance =>
@@ -555,6 +641,17 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         {
             builder.AppendLine("(none)");
         }
+    }
+
+    private static void AppendRepresentativeIds(StringBuilder builder, string label, IEnumerable<string> ids)
+    {
+        var values = ids
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Select(value => value.Trim())
+            .OrderBy(value => value, StringComparer.Ordinal)
+            .Take(5)
+            .ToArray();
+        AppendLine(builder, label, values.Length == 0 ? "(none)" : string.Join(", ", values));
     }
 
     private static string JoinNonEmpty(params string[] values)
