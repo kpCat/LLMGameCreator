@@ -17,6 +17,7 @@ using LLMGameCreator.Runtime.Abstractions;
 using LLMGameCreator.Scripting;
 using LLMGameCreator.WinForms.Pages;
 using LLMGameCreator.WinForms.Pages.CompositionWorkbench;
+using LLMGameCreator.WinForms.Pages.UnityArchiveReview;
 using Microsoft.Extensions.Logging;
 
 namespace LLMGameCreator.WinForms;
@@ -79,6 +80,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GameCompositionDiagnosticsMarkdownRenderer>(Reuse.Singleton);
         _container.Register<GameCompositionDiagnosticsExportService>(Reuse.Singleton);
         _container.Register<CompositionWorkbenchPresenter>(Reuse.Singleton);
+        _container.Register<UnityArchiveReviewPresenter>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -114,10 +116,14 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<GeneratorPlanStrictLlmArtifactContractCatalog>(Reuse.Singleton);
         _container.Register<ContentLanguagePromptInstructionProvider>(Reuse.Singleton);
         _container.Register<ContentLanguageDiagnosticService>(Reuse.Singleton);
-        _container.Register<GeneratorPlanStrictLlmArtifactPromptBuilder>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratorPlanStrictLlmArtifactPromptBuilder>(resolver =>
+            new GeneratorPlanStrictLlmArtifactPromptBuilder(
+                resolver.Resolve<ContentLanguagePromptInstructionProvider>()), Reuse.Singleton);
         _container.Register<GeneratorPlanStrictJsonResponseParser>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactValidator>(Reuse.Singleton);
-        _container.Register<GeneratorPlanStrictLlmArtifactRepairPromptBuilder>(Reuse.Singleton);
+        _container.RegisterDelegate<GeneratorPlanStrictLlmArtifactRepairPromptBuilder>(resolver =>
+            new GeneratorPlanStrictLlmArtifactRepairPromptBuilder(
+                resolver.Resolve<ContentLanguagePromptInstructionProvider>()), Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactGenerationArtifactService>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactGenerationArtifactReader>(Reuse.Singleton);
         _container.Register<GeneratorPlanStrictLlmArtifactGenerationService>(Reuse.Singleton);
@@ -255,6 +261,10 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<CompositionWorkbenchPresenter>(),
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<UnityArchiveReviewPageControl>(resolver => new UnityArchiveReviewPageControl(
+            resolver.Resolve<UnityArchiveReviewPresenter>(),
+            resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -273,6 +283,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<ArtifactReviewPageControl>(),
             resolver.Resolve<CompositionWorkbenchPageControl>(),
             resolver.Resolve<ValidationPageControl>(),
+            resolver.Resolve<UnityArchiveReviewPageControl>(),
             resolver.Resolve<GeneratorLibraryPageControl>(),
             resolver.Resolve<RuntimePreviewPageControl>(),
             resolver.Resolve<RuntimeSimulatorPageControl>(),
@@ -287,6 +298,8 @@ public sealed class CompositionRoot : IDisposable
     }
 
     public MainForm ResolveMainForm() => _container.Resolve<MainForm>();
+
+    public IEditorPageRegistry ResolveEditorPageRegistry() => _container.Resolve<IEditorPageRegistry>();
 
     public void Dispose()
     {

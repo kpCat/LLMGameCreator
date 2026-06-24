@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-23T22:45:00Z",
+  "updated_at_utc": "2026-06-24T00:17:42Z",
   "current_phase": "m4_1_real_model_evaluation_gate",
-  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 024 Unity archive review retention/comparison completed",
-  "gate_status": "passed_sampled_baseline_with_product_slice_024_unity_archive_review_retention_comparison",
+  "current_phase_title": "M4.1 gate passed for sampled baseline contracts; Product Slice 025 read-only archive review/history UI completed",
+  "gate_status": "passed_sampled_baseline_with_product_slice_025_read_only_archive_review_history_ui",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-024 through deterministic Unity archive read-only review retention/comparison; further Unity, provider, generator, Runtime, M5 and M6 work remains locked unless explicitly selected by a controlled vertical-slice approval.",
-  "current_user_action": "Inspect the deterministic .llmgc/unity-archive contract/meta/data/request/provider-plan/fulfillment-state/review/history/comparison output and choose one controlled follow-up slice; generation remains explicit.",
-  "recommended_next_decision": "Choose one bounded read-only archive review/history UI or one controlled product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
+  "active_manual_gate": "Completed for sampled baseline contracts, product-smoke spine and Product Slices 007-025 through the read-only Unity archive review/history/comparison UI; further Unity, provider, generator, Runtime, M5 and M6 work remains locked unless explicitly selected by a controlled vertical-slice approval.",
+  "current_user_action": "Inspect existing Unity archive review/history/comparison outputs in the read-only editor page and choose one controlled follow-up slice; generation remains explicit.",
+  "recommended_next_decision": "Choose controlled manual provider output import or one explicitly approved product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
     "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
@@ -49,46 +49,43 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_024_unity_archive_review_retention_comparison_v1",
-    "title": "Unity Archive Review Retention & Comparison v1",
-    "completed_at_utc": "2026-06-23T22:45:00Z",
-    "summary": "Added headless archive review history service with SHA-256 content-hash snapshot storage and comparison service that compares current vs previous snapshot, writing deterministic timestamp-free comparison JSON and markdown.",
-    "parent_slice_id": "product_slice_023_unity_archive_review_snapshot_v1",
-    "ui_surface": "none_application_layer_headless_only",
-    "scenario_id": "unity-archive-review-history",
-    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-archive-review-history",
+    "slice_id": "product_slice_025_read_only_archive_review_history_ui",
+    "title": "Read-only Archive Review/History UI",
+    "completed_at_utc": "2026-06-24T00:17:42Z",
+    "summary": "Read-only WinForms UI for existing Unity archive review/history/comparison outputs.",
+    "parent_slice_id": "product_slice_024_unity_archive_review_retention_comparison_v1",
+    "ui_surface": "winforms_read_only_editor_page",
+    "scenario_id": "unity-archive-review-ui-readonly",
+    "smoke_command": "powershell -ExecutionPolicy Bypass -File .\\.devflow\\scripts\\run-product-smoke.ps1 -Scenario unity-archive-review-ui-readonly",
     "headless_outputs": [
-      ".llmgc/unity-archive/review-history/<sha256>/archive-review.json",
+      ".llmgc/unity-archive/production/archive-review.json",
+      ".llmgc/unity-archive/production/archive-review.md",
       ".llmgc/unity-archive/production/archive-review-history-index.json",
       ".llmgc/unity-archive/production/archive-review-comparison.json",
-      ".llmgc/unity-archive/production/archive-review-comparison.md"
+      ".llmgc/unity-archive/production/archive-review-comparison.md",
+      ".llmgc/unity-archive/review-history/<snapshot-id>/archive-review.json"
     ],
     "validation_contracts": [
-      "history stores deterministic SHA-256 content-hash snapshots of archive-review.json",
-      "history index tracks all snapshots under production/",
-      "same content stored twice does not duplicate the index",
-      "comparison identifies current vs previous distinct snapshot deterministically",
-      "comparison reports readiness, summary deltas, and change dimensions",
-      "comparison reports diagnostic changes (added/resolved) with stable fingerprints",
-      "comparison reports source file changes (added/removed) with stable fingerprints",
-      "comparison reports invalid reason count changes",
-      "comparison returns NoPreviousSnapshot when only one snapshot exists",
-      "comparison returns MissingReview when archive-review.json is absent",
-      "comparison returns Invalid when archive-review.json is malformed",
-      "all outputs are UTF-8 without BOM, deterministic, and contain no timestamps or absolute paths",
-      "unity-archive-review-history product smoke passes",
-      "no Unity, Runtime, WinForms, GamePackage schema, provider, generator, LLM or Lua execution"
+      "read-only page displays current review and comparison markdown/json",
+      "history index and physical snapshot files are listed without mutation",
+      "missing project, archive, and individual report files do not throw",
+      "invalid JSON does not throw and adjacent markdown remains readable",
+      "designer-safe page construction works without runtime services",
+      "CompositionRoot and EditorPageRegistry include unity_archive_review",
+      "archive files remain byte-identical after presenter refresh",
+      "no Unity, Runtime gameplay, GamePackage schema, provider, generator, LLM or Lua execution"
     ],
     "checks": [
-      "UnityArchiveReviewHistory and UnityArchiveReviewComparison filtered tests: 18/18 passed",
-      "unity-archive-review-history product smoke: 1/1 passed",
-      "ProductSmoke filtered tests: 23/23 passed",
-      "check-all.ps1: 606/606 tests passed, build 0 warnings / 0 errors"
+      "ArchiveReview and UnityArchiveReview filtered tests: 37/37 passed",
+      "WinForms filtered tests: 42/42 passed",
+      "ProductSmoke filtered tests: 24/24 passed",
+      "unity-archive-review-ui-readonly product smoke: 1/1 passed",
+      "check-devflow-state.ps1: passed in STOP_REVIEW mode",
+      "check-all.ps1: 619/619 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "allowed_next_codex_task_types": [
-    "plan_bounded_read_only_archive_review_ui_after_headless_retention",
-    "plan_bounded_archive_review_comparison_without_provider_or_runtime_execution",
+    "plan_controlled_manual_provider_output_import",
     "plan_one_controlled_product_vertical_slice_from_expanded_strict_contract_catalog_and_batch_smoke",
     "generate_source_refreshed_m5_entry_specs_after_user_slice_choice",
     "generate_source_refreshed_m6_entry_planning_after_user_slice_choice",
@@ -107,10 +104,10 @@
     "M9 full game template families and balancing",
     "M10 export profiles or Unity IR production work"
   ],
-  "recommended_next_work_item": "read_only_archive_review_history_ui",
-  "recommended_next_work_item_title": "Choose a bounded read-only archive review/history UI that inspects the headless retention/comparison contract without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
+  "recommended_next_work_item": "controlled_manual_provider_output_import",
+  "recommended_next_work_item_title": "Choose controlled manual provider output import or one explicitly approved product vertical slice without Unity implementation, provider execution, Runtime expansion or GamePackage schema changes.",
   "candidate_product_vertical_slices": [
-    "A read-only editor-side view may inspect archive-review.json/archive-review.md after the headless retention contract is stable.",
+    "Controlled manual provider output import may be selected as a separate bounded slice.",
     "One controlled semantic-generation contract may be selected only after the generator catalog direction is explicitly chosen."
   ],
   "required_reading_order_for_new_agents": [
@@ -146,6 +143,7 @@
     "Deterministic Unity archive fulfillment-state scanning",
     "Deterministic Unity archive read-only review snapshot",
     "Deterministic Unity archive review retention/history",
+    "Read-only Unity archive review/history/comparison editor page",
     "controlled batch preset selection",
     "LLM Evaluation",
     "Artifact Review",

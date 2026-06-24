@@ -670,3 +670,30 @@ Expected assertions:
 - source file changes include added/removed;
 - invalid reason changes include count deltas;
 - no Unity implementation, provider call, generator execution, Runtime, GamePackage schema, Lua or WinForms UI is invoked.
+## unity-archive-review-ui-readonly
+
+Validates the read-only WinForms consumer over existing Unity archive review, comparison, and history report files:
+
+```text
+existing S023/S024/S024.1 report files
+-> read-only WinForms presenter/view state
+-> Designer-safe editor page construction
+-> current review, comparison, and snapshot-list display
+```
+
+Command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\.devflow\scripts\run-product-smoke.ps1 -Scenario unity-archive-review-ui-readonly
+```
+
+Expected assertions:
+
+- the presenter and parameterized `UnityArchiveReviewPageControl` construct headlessly;
+- current review and comparison readiness, Markdown, and JSON are available;
+- history index entries and physical snapshot files appear in the snapshot list;
+- the page id is `unity_archive_review` and title is `Unity Archive Review`;
+- all archive file names and bytes remain unchanged after refresh;
+- no archive materialization, provider/LLM/generator/Lua execution, Unity, Runtime gameplay, or GamePackage mutation occurs.
+
+Manual UI verification is optional and remains useful only for visual layout and long-report readability.
