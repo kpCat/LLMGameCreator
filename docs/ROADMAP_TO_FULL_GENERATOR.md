@@ -1,312 +1,296 @@
 # Roadmap To Full Generator
 
-Status: executable roadmap for Codex  
-Scope: milestones from current narrow vertical slice to full game generation without media  
-Non-scope: direct implementation in this document
+Status: proposed strategic roadmap after Goal 003.
 
-Before choosing the next milestone, read `docs/CURRENT_GENERATOR_STATE.md`. The roadmap is the full route; current state tells which gate is active now.
+## Definition Of Full Generator
 
-Each milestone must be implemented as a bounded task or small task group. A milestone is not complete because docs exist; it is complete when its acceptance gates pass.
+The full generator is not a universal magic engine that can generate every possible game without new primitives.
 
-## M0 Current Vertical Slice Baseline
+The target is:
 
-Goal: document and preserve the existing one-click export slice as a baseline, not as the full generator.
+- user defines genre, tone, rules, semantic packs, asset direction, and gameplay families;
+- combiner generates a coherent game package;
+- most game-specific behavior comes from data/rule packs;
+- C# core changes only when a new primitive family is required;
+- runtime/export can play the generated game;
+- Unity or another final runtime can consume the generated package;
+- LLM is optional authoring assistance, not runtime dependency.
 
-Why it exists: prevents future tasks from mistaking deterministic template export for real full game generation.
+## Stage A: Proving Core Generation
 
-User-visible value: user can export a baseline package and see what is missing.
+Status: mostly done by Goals 001-003.
 
-Required docs/code areas: one-click export docs, GamePackage assembly docs, `docs/CONTEXT_INDEX.md`.
+Purpose:
 
-Non-goals: no new generation feature, no Lua execution, no provider call.
+- prove deterministic procedural generation;
+- prove formula/effect/action rules;
+- prove generated package MVP;
+- prove runtime-backed microgame loop;
+- prove configurable seed/preset variation;
+- prove extension through rule packs.
 
-Expected file scale: 0-2 docs, 0-2 focused tests if behavior changes.
+Exit criteria:
 
-Acceptance tests: existing one-click export tests continue to pass.
+- multiple generated variants;
+- runtime-owned progress/reward/completion;
+- extension proof without bespoke gameplay C#;
+- automated scenario harness;
+- one final manual verification per goal.
 
-Done criteria: docs explicitly say one-click export is a narrow vertical MVP.
+## Stage B: Playable Generated Microgame
 
-What Codex must not decide by itself: whether to remove or replace the current export pipeline.
+Purpose:
 
-## M1 Authoritative Planning Pack
+- make generated games understandable and playable for 5-10 minutes;
+- add region travel;
+- add goal HUD;
+- add inventory/reward visibility;
+- add interaction hints;
+- add simple quest journal;
+- keep Runtime Preview as proving ground only.
 
-Goal: create master plan, capability matrix, role contract, prompt hardening, roadmap and Codex doctrine.
+Likely goals:
 
-Why it exists: future tasks need a source of truth and task discipline.
+- regional navigation and variable maps;
+- player-facing HUD and journal;
+- inventory/equipment visibility;
+- simple dialogue interaction;
+- multi-step quest acceptance.
 
-User-visible value: next work is strategic instead of tactical feature drift.
+Exit criteria:
 
-Required docs/code areas: `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`, capability matrix, role contract, prompt hardening, roadmap, doctrine, context index.
+- user can play a generated microgame without reading debug logs;
+- at least 3 seed/preset variants are distinct;
+- automated harness covers core loop;
+- one manual check confirms playability.
 
-Non-goals: no production code, UI, schema, DB, Lua modules or runtime preview.
+## Stage C: Rule-Pack Driven Gameplay Families
 
-Expected file scale: 6-8 docs.
+Purpose:
 
-Acceptance tests: build/test pass or clear reason if skipped; docs pass consistency and mojibake checks.
+- make mechanics extensible through data/rule packs;
+- avoid C# per feature.
 
-Done criteria: all required docs exist and cross-link from context index.
+Gameplay families:
 
-What Codex must not decide by itself: implementation order after this pack unless asked.
+- inventory/equipment;
+- jobs/work actions;
+- crafting;
+- trading/economy;
+- reputation/factions;
+- status effects;
+- combat;
+- stealth/theft;
+- relationship/social interactions;
+- adult content tags and gated scenes;
+- weather/environment effects;
+- simple building/ownership.
 
-## M1.1 Game Form Factor And System Variant Taxonomy
+Exit criteria:
 
-Goal: freeze explicit game form-factor, presentation, world, actor, inventory, combat, progression, pathfinding and NPC behavior ids before implementation-heavy features.
+- each family has primitives in C#;
+- concrete variants are data/rule-pack authored;
+- invalid packs are rejected;
+- headless scenario tests prove behavior;
+- generated package can combine several families.
 
-Why it exists: future generation must not accidentally narrow to only top-down 2D adventures.
+## Stage D: Procedural World Structure
 
-User-visible value: future tasks can choose concrete taxonomy ids instead of vague requests like "make RPG".
+Purpose:
 
-Required docs/code areas: form-factor docs, system variant taxonomy, character card contracts, world/chunk contracts, interaction/combat/progression contracts, atlas JSON seed files, capability matrix, context index.
+- move from small generated maps to larger worlds.
 
-Non-goals: no production code, WinForms UI, GamePackage schema, DB schema, runtime preview, Lua execution, provider calls or built-in game templates.
+Needed systems:
 
-Expected file scale: docs and atlas JSON only.
+- regions;
+- chunks;
+- biome distribution;
+- travel graph;
+- points of interest;
+- spawn tables;
+- faction territories;
+- simulation levels: near detailed, far abstract;
+- save/load snapshots.
 
-Acceptance tests: atlas JSON parses; build/test pass or clear reason if skipped; docs pass consistency and mojibake checks.
+Exit criteria:
 
-Done criteria:
+- world can be larger than loaded play area;
+- generated regions connect;
+- far-world state advances abstractly;
+- no full-world per-frame simulation;
+- deterministic save/load remains stable.
 
-- all major game forms have ids;
-- pseudo-3D/2D-texture mode is documented;
-- future contracts are named;
-- capability matrix references variant docs;
-- Codex tasks must choose variant ids instead of vague "make RPG".
+## Stage E: Content Generation At Scale
 
-What Codex must not decide by itself: implementing runtime/export support for these variants before a separate approved task.
+Purpose:
 
-## M2 Artifact Review / Approval UI
+- produce varied quests, dialogue patterns, NPC archetypes, loot, regions, and events without LLM per instance.
 
-Goal: make artifact review and approval usable for many artifact kinds.
+Needed systems:
 
-Why it exists: full generation produces many artifacts and needs human review before promotion.
+- quest grammar;
+- dialogue intent grammar;
+- event grammar;
+- relationship/reputation-driven reactions;
+- semantic-guided item/biome/location generation;
+- conflict and dependency validation;
+- repetition control.
 
-User-visible value: user can inspect, approve, reject or request repair for generated artifacts.
+Exit criteria:
 
-Required docs/code areas: approval pipeline, Design DB artifact storage, `docs/GENERATOR_PLAN_ARTIFACT_REVIEW_UI.md`, WinForms Artifact Review / Generator Library pages.
+- hundreds of generated instances from compact packs;
+- repetition is controlled;
+- semantic conflicts are caught;
+- LLM authoring remains optional and offline.
 
-Non-goals: no direct package mutation from review UI, no provider calls.
+## Stage F: Asset Pipeline
 
-Expected file scale: 8-14 files when UI, service, tests and docs are included.
+Purpose:
 
-Acceptance tests: application service tests for decision state; UI smoke if page wiring changes.
+- connect generated package to visual/audio assets.
 
-Done criteria: Artifact Review page can capture `.example.json` files for pending review, persist approved/rejected/repair decisions, rebuild the approved artifact set from approved items only, and save validation rows.
+Needed systems:
 
-What Codex must not decide by itself: which content should be auto-approved beyond explicitly valid low-risk artifacts.
+- asset request queue;
+- tile set requests;
+- portrait requests;
+- UI icon requests;
+- sound effect requests;
+- music import/loop metadata;
+- ComfyUI/Fooocus integration;
+- Suno/manual music import path;
+- review/import workflow;
+- deterministic asset mapping.
 
-## M3 Capability + Feature Bundle Picker
+Exit criteria:
 
-Goal: allow selecting game families and feature bundles from a capability matrix/atlas.
+- generated game can request missing assets;
+- user can approve/import assets;
+- assets are mapped to semantic roles;
+- runtime has fallback assets if generation is missing.
 
-Why it exists: generation must start from explicit capabilities, not vague prompts.
+## Stage G: Unity Runtime Export
 
-User-visible value: user chooses "party RPG", "city builder", "automation" or custom bundles and sees required systems.
+Purpose:
 
-Required docs/code areas: capability atlas, generator-library manifests, Design DB registry, profile docs.
+- move from proving ground to real playable runtime.
 
-Non-goals: no generator execution, no package mutation.
+Needed systems:
 
-Expected file scale: 5-10 files for a narrow service slice; UI, artifact persistence, presenter tests and docs may be larger when implemented together.
+- package-to-Unity mapping;
+- tile/chunk renderer;
+- 2D assets unfolded into 2.5D/3D presentation;
+- input/controller;
+- interaction UI;
+- dialogue UI;
+- inventory UI;
+- save/load;
+- streaming/chunk loading;
+- performance budget.
 
-Acceptance tests: dependency closure, missing capability detection, unknown id rejection, compatibility diagnostics, latest artifact save/read and presenter mapping.
+Exit criteria:
 
-Done criteria: selected variants and bundles resolve capabilities, artifact contracts, validators, prompt context templates, runtime targets and missing prerequisites into `artifact/generator_plan_capability_selection/latest`.
+- one generated game exports and runs in Unity;
+- runtime supports at least one complete gameplay family set;
+- performance remains acceptable on target hardware;
+- no Runtime Preview-only dependency.
 
-What Codex must not decide by itself: adding a new genre as default or enabling sensitive overlays.
+## Stage H: Advanced Runtime Primitives
 
-## M4 Strict LLM Artifact Generation + Repair Loop
+Purpose:
 
-Goal: add production-ready prompt execution for one or more strict artifact contracts.
+- support richer game ambitions.
 
-Why it exists: deterministic template production is not enough for full generation.
+Primitive families:
 
-User-visible value: model can generate valid drafts and repair failures within bounds.
+- NPC perception;
+- line of sight;
+- projectile/ranged combat;
+- cover;
+- group AI;
+- siege/destruction;
+- building;
+- economy simulation;
+- political/faction simulation;
+- weather/environment interaction;
+- relationship/NSFW scene gating;
+- procedural settlement/city systems.
 
-Required docs/code areas: prompt hardening, model workflow roles, prompt context pack map, generated artifacts, validators.
+Exit criteria:
 
-Non-goals: no runtime LLM calls, no auto-apply, no arbitrary text generation.
+- new primitive families are C# core;
+- game-specific behavior is still rule-pack/data-driven;
+- simulation has near/far levels;
+- performance budgets are enforced.
 
-Expected file scale: 6-12 files for one artifact family.
+## Stage I: Authoring UX
 
-Acceptance tests: malformed output rejection, enum/id preservation, repair success/failure cases.
+Purpose:
 
-Done criteria: one contract can be generated, validated, repaired and staged.
+- let user control generation without editing raw files.
 
-What Codex must not decide by itself: model/provider selection or network endpoint defaults.
+Needed systems:
 
-Implementation note: the M4 first slice is documented in `docs/GENERATOR_PLAN_STRICT_LLM_ARTIFACT_GENERATION.md`. It supports `game_profile_v1`, `scene_pack_v1`, `quest_pack_v1` and `mechanics_pack_v1`, reads the latest capability selection artifact, calls `ILlmChatClient` only after an explicit Generate action, validates JSON in C#, optionally performs one bounded repair attempt, saves an audit artifact and stages valid outputs as pending Artifact Review items.
+- semantic pack editor;
+- rule pack editor;
+- preset editor;
+- generator profile editor;
+- asset request/review UI;
+- validation dashboard;
+- package comparison;
+- authoring assistant/RAG integration.
 
-## M4.1 Strict LLM Generation Evaluation Pack
+Exit criteria:
 
-Gate status: passed for sampled baseline contracts on `2026-06-18T16:43:35.9475873+00:00`.
+- user can create/modify a project through UI;
+- validation explains issues;
+- generation remains reproducible;
+- raw files still remain source-controlled.
 
-Evidence id: `strict_llm_evaluation/58df49dadbff5598`.
+## Stage J: Alpha Definition
 
-Decision: the M4.1 real-model evaluation gate passed for `game_profile_v1`, `mechanics_pack_v1`, `quest_pack_v1` and `scene_pack_v1` with `overall_pass_rate` 1.0, zero failures, zero repair passes needed, no diagnostics and no quality warnings.
+Alpha is reached when:
 
-Remaining constraint: this sampled pass removes the missing-real-evaluation blocker for controlled next-step planning, but it does not make broad contract expansion safe and does not start M5, M6, M6-lite or runtime preview repair-loop work without a chosen product vertical slice and explicit user approval.
+- generated game can be configured by seed/preset/semantic/rule packs;
+- generated game has a playable loop of 15-30 minutes;
+- at least 3 game styles can be created from different packs;
+- most content is generated deterministically;
+- runtime/export is playable;
+- extension proof exists for several mechanics without C# changes;
+- manual checks are reduced to final acceptance per milestone;
+- LLM is optional and offline.
 
-Goal: measure real strict LLM generation quality before expanding contracts, Lua generation or package assembly coverage.
+## Stage K: Beyond Alpha
 
-Why it exists: M4 proves a safe entrypoint, but the product still needs pass rates, repair recovery rates, repeated diagnostic hot spots and content quality warnings before trusting broader generation.
+Beyond alpha:
 
-User-visible value: user can evaluate the latest strict generation audit without an LLM call, or run a small explicit batch and inspect metrics, samples and recommendations in `LLM Evaluation`.
+- richer AI;
+- larger worlds;
+- more content families;
+- better asset generation;
+- Unity polish;
+- modding tools;
+- more advanced semantic authoring;
+- balancing tools;
+- scenario simulation;
+- performance tuning;
+- multiplayer only if explicitly chosen much later.
 
-Required docs/code areas: `docs/GENERATOR_PLAN_STRICT_LLM_EVALUATION.md`, strict LLM generation audit reader, generated artifacts, validation results, WinForms `LLM Evaluation` page.
+## Main Risk
 
-Non-goals: no Lua execution, no GamePackage mutation, no package export, no runtime preview, no provider call outside an explicit batch run, no DB schema change.
+The project fails if it becomes:
 
-Expected file scale: 8-14 files when service, artifact persistence, markdown, UI, tests and docs are included.
+- C# slice per mechanic;
+- Runtime Preview as the final engine;
+- semantic dump instead of curated meaning;
+- LLM runtime dependency;
+- manual verification after every small step;
+- endless documentation without playable gain.
 
-Acceptance tests: latest-audit missing/result metrics, diagnostic grouping, quality warnings, fake-LLM batch, no staging by default, explicit staging when requested, artifact readback, markdown recommendations and presenter mapping.
+The project succeeds if each stage increases either:
 
-Done criteria: evaluation JSON and markdown report are persisted, expected call count is visible before batch runs, tests use fake `ILlmChatClient`, and evaluation failures remain metrics rather than package mutations.
-
-What Codex must not decide by itself: expanding artifact contracts or enabling Lua based only on one good model sample.
-
-## M5 Lua Module Registry / Executor Integration
-
-Goal: run approved deterministic Lua generator modules through sandbox, manifests and validation.
-
-Why it exists: Lua should generate repeatable IR/config/data instead of asking LLM to print bulk content.
-
-User-visible value: selected modules can produce chunk/world/entity/quest/item configs deterministically.
-
-Required docs/code areas: Lua generation plan, manifest contract, scripting project, generator library registry, validators.
-
-Non-goals: no unrestricted Lua, no filesystem/network access, no GamePackage mutation from Lua.
-
-Expected file scale: 8-15 files for one safe module family.
-
-Acceptance tests: forbidden API rejection, deterministic output, manifest capability check, artifact validation.
-
-Done criteria: one approved module produces a validated artifact without direct package mutation.
-
-What Codex must not decide by itself: activating broad Lua execution for all modules.
-
-## Responsibility Spine: C# Core vs Data/Lua-like Rules vs LLM
-
-Goal 003 freezes the immediate extension responsibility split before broader Lua or full-generator work.
-
-C# core owns:
-
-- declaration parsing and deterministic validation;
-- id/ref/path/formula/API/mutation safety checks;
-- generic runtime-state primitives such as inventory item grants, quest objective progress and flags;
-- scenario harnessing, product smoke routing and deterministic reports;
-- all package/runtime authority.
-
-Data and Lua-like rule packs own:
-
-- triggers, conditions, formulas, actions, rewards and quest objectives that fit supported primitives;
-- small gameplay variations such as alternate rewards or inventory objectives;
-- compact, reviewable declarations that can be validated without executing arbitrary code.
-
-LLM owns drafts only:
-
-- future proposal text or JSON declarations for review;
-- no validation authority;
-- no runtime mutation;
-- no bulk world or gameplay execution.
-
-New gameplay should prefer data/rule-pack declarations when it can be expressed through existing primitives. It requires a new C# primitive only when it needs a new runtime command family, a new state container, new formula evaluator semantics, a new renderer/UI interaction mode, or a new external execution/provider boundary.
-
-## M6 Rich GamePackage Assembly
-
-Goal: expand assembly from narrow profile/scene/entity/quest/mechanics mapping to world, dialogue, items, economy, combat and UI-related data where schema supports it.
-
-Why it exists: full generator requires richer package output.
-
-User-visible value: generated packages contain meaningful systems, not only baseline maps and seed entities.
-
-Required docs/code areas: GamePackage format, validators, assembly pipeline, artifact contracts.
-
-Non-goals: no schema change without explicit migration task, no arbitrary artifact writes.
-
-Expected file scale: 6-12 files per capability family.
-
-Acceptance tests: assembly maps known artifacts, rejects invalid refs, package validation passes.
-
-Done criteria: approved artifacts produce a baseline-valid package with selected gameplay domains.
-
-What Codex must not decide by itself: expanding package schema silently.
-
-## M7 Infinite / Chunked World Generation
-
-Goal: introduce seed/config/rule-based chunked world generation artifacts.
-
-Why it exists: large worlds must not be generated as huge arrays.
-
-User-visible value: user can generate and preview chunk rules for large or infinite worlds.
-
-Required docs/code areas: world/chunk contracts, Lua chunk modules, validation strategy, runtime state/saves.
-
-Non-goals: no massive tile dump, no final Unity world streaming.
-
-Expected file scale: 8-14 files for first slice.
-
-Acceptance tests: deterministic same seed/chunk output, sparse override validation, reachability checks.
-
-Done criteria: chunk config validates and runtime preview can load generated/compiled chunk data path.
-
-What Codex must not decide by itself: world scale default for all game profiles.
-
-## M8 Runtime Preview Validation Loop
-
-Goal: run generated packages through command/smoke validation and feed failures back into repair/review.
-
-Why it exists: package validation alone does not prove playability.
-
-User-visible value: generated game can be smoke-played before export.
-
-Required docs/code areas: runtime services, validation strategy, runtime simulator/preview, artifact diagnostics.
-
-Non-goals: no final player UX, no model calls from runtime.
-
-Expected file scale: 5-10 files.
-
-Acceptance tests: load/wait/move/interact/dialogue/combat smoke for selected profiles.
-
-Done criteria: runtime failures become validation/repair artifacts.
-
-What Codex must not decide by itself: auto-repairing playable package state without user approval.
-
-## M9 Full Game Template Families And Balancing
-
-Goal: define and validate several complete game families through shared capability bundles.
-
-Why it exists: the generator must prove breadth without bespoke rewrites.
-
-User-visible value: user can choose a family and get a coherent generated game structure.
-
-Required docs/code areas: capability matrix, artifact contracts, Lua modules, validators, assembly mappings.
-
-Non-goals: no media production, no hardcoded one-game logic.
-
-Expected file scale: varies; one family per task group.
-
-Acceptance tests: each family validates profile, artifacts, package and runtime smoke.
-
-Done criteria: at least three distinct families share the same lifecycle.
-
-What Codex must not decide by itself: canon, sensitive overlays or platform restrictions.
-
-## M10 Export Profiles / Unity IR Later
-
-Goal: define export profiles and Unity-facing IR after package generation is stable.
-
-Why it exists: final player/export should consume stable data, not arbitrary generated code.
-
-User-visible value: generated package can be prepared for a future Unity runtime shell.
-
-Required docs/code areas: Unity/player contract, Unity IR, export profile docs, validators.
-
-Non-goals: no arbitrary Unity C# generation, no full Unity project rewrite in one task.
-
-Expected file scale: 6-12 files for IR-only slice; larger for actual Unity player later.
-
-Acceptance tests: IR schema validation, asset/prefab binding refs, export dry-run report.
-
-Done criteria: Unity IR is validated data and does not bypass GamePackage or C# authority.
-
-What Codex must not decide by itself: building or changing Unity runtime architecture without user approval.
+- playable generated output;
+- extensibility without C#;
+- validation automation;
+- export/runtime reality;
+- user control over generated games.
