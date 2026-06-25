@@ -6,23 +6,11 @@ namespace LLMGameCreator.Application.RuntimePreview;
 public sealed record OneClickGeneratedPreviewWorkflowRequest
 {
     public string ProjectRootPath { get; init; } = string.Empty;
-    public string Seed { get; init; } = "one-click-generated-preview-workflow";
+    public string Seed { get; init; } = GenerationPresetOptionsService.DefaultSeed;
     public string Mode { get; init; } = ProceduralGameGenerationModes.SemiProceduralRegions;
-    public IReadOnlyList<string> CompactStyleHintIds { get; init; } =
-    [
-        "theme/exploration",
-        "theme/survival",
-        "tone/mysterious",
-        "quest_motif/faction_truce",
-        "item_affordance/quest_item"
-    ];
-    public IReadOnlyList<string> SelectedVariantIds { get; init; } =
-    [
-        "world_topology/region_graph",
-        "actor_model/single_player_character",
-        "combat_model/turn_based",
-        "inventory_model/list_inventory"
-    ];
+    public string PresetId { get; init; } = GenerationPresetOptionsService.DefaultPresetId;
+    public IReadOnlyList<string> CompactStyleHintIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> SelectedVariantIds { get; init; } = Array.Empty<string>();
     public bool ReplaceCurrentPackage { get; init; } = true;
 }
 
@@ -35,6 +23,7 @@ public sealed record OneClickGeneratedPreviewWorkflowResult
     public string PackageTitle { get; init; } = string.Empty;
     public string ProjectRootPath { get; init; } = string.Empty;
     public OneClickGeneratedPreviewWorkflowPaths Paths { get; init; } = new();
+    public GenerationPresetOptions GenerationOptions { get; init; } = new();
     public string StableSummary { get; init; } = string.Empty;
     public bool CurrentPackageReplaced { get; init; }
     public VisibleGeneratedPlayablePreviewResult VisiblePreviewResult { get; init; } = new();
@@ -57,6 +46,10 @@ public sealed record OneClickGeneratedPreviewWorkflowPaths
     public string MicrogameAcceptanceSnapshotJsonPath { get; init; } = string.Empty;
     public string MicrogameAcceptanceReportMarkdownPath { get; init; } = string.Empty;
     public string MicrogameManualVerificationMarkdownPath { get; init; } = string.Empty;
+    public string RuntimeBackedMicrogameStateOutputDirectoryPath { get; init; } = string.Empty;
+    public string RuntimeBackedMicrogameStateSnapshotJsonPath { get; init; } = string.Empty;
+    public string RuntimeBackedMicrogameStateReportMarkdownPath { get; init; } = string.Empty;
+    public string RuntimeBackedMicrogameManualVerificationMarkdownPath { get; init; } = string.Empty;
 }
 
 public sealed record OneClickGeneratedPreviewWorkflowDiagnostic

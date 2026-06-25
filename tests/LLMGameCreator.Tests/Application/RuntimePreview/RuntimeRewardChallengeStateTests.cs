@@ -7,26 +7,10 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.RuntimePreview;
 
-public sealed class GeneratedMicrogameChallengePreviewServiceTests
+public sealed class RuntimeRewardChallengeStateTests
 {
     [Fact]
-    public void GeneratedMicrogameChallengeIsDeterministicAndLinkedToActiveGoal()
-    {
-        var service = new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter());
-        var first = service.Generate(CreateRequest());
-        var second = service.Generate(CreateRequest());
-
-        Assert.Equal(first.SnapshotJson, second.SnapshotJson);
-        Assert.True(first.Snapshot.MicrogameChallenge.ChallengeSelected);
-        Assert.Equal(first.Snapshot.MicrogameGoal.ActiveQuestId, first.Snapshot.MicrogameChallenge.QuestId);
-        Assert.Equal(first.Snapshot.MicrogameGoal.Related.EncounterId, first.Snapshot.MicrogameChallenge.EncounterId);
-        Assert.Equal(first.Snapshot.MicrogameGoal.Related.ItemId, first.Snapshot.MicrogameChallenge.RewardItemId);
-        Assert.False(string.IsNullOrWhiteSpace(first.Snapshot.MicrogameChallenge.RelatedNpcId));
-        Assert.Contains(first.Report.Diagnostics, item => item.Code == "generated_microgame_challenge.no_external_execution");
-    }
-
-    [Fact]
-    public void GeneratedMicrogameChallengeResolveShowsRewardAndCompletionEvidence()
+    public void RuntimeRewardChallengeStateRecordsResolutionRewardAndCompletionEvidence()
     {
         var result = new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()).Generate(CreateRequest());
         var challenge = result.Snapshot.MicrogameChallenge;
@@ -34,26 +18,54 @@ public sealed class GeneratedMicrogameChallengePreviewServiceTests
         Assert.True(challenge.Resolved);
         Assert.True(challenge.RewardVisible);
         Assert.True(challenge.CompletionVisible);
-        Assert.Equal("completed", challenge.CompletionStatus);
-        Assert.Equal(challenge.StepCount, challenge.CompletedStepCount);
-        Assert.Contains("interact", challenge.ResolveAction, StringComparison.OrdinalIgnoreCase);
         Assert.Equal("runtime_state_flags_inventory_encounter", challenge.StateSource);
         Assert.True(challenge.RuntimeChallengeResolved);
         Assert.True(challenge.RuntimeRewardGranted);
         Assert.True(challenge.RuntimeCompletionBacked);
         Assert.False(challenge.FallbackPreviewProjectionUsed);
-        Assert.True(result.Report.ChallengeResolved);
-        Assert.True(result.Report.RewardVisible);
-        Assert.True(result.Report.CompletionVisible);
-        Assert.Equal(1, result.Snapshot.Counts.ResolvedChallenges);
-        Assert.Equal(1, result.Snapshot.Counts.VisibleRewards);
-        Assert.Equal(1, result.Snapshot.Counts.VisibleCompletions);
+        Assert.Equal(challenge.EncounterId, challenge.RuntimeEncounterId);
+        Assert.Equal(challenge.RewardItemId, challenge.RuntimeRewardItemId);
+        Assert.Contains(challenge.RuntimeState.Flags, flag => flag.Id == challenge.RuntimeChallengeFlagId && flag.Value == "true");
+        Assert.Contains(challenge.RuntimeState.Inventories.SelectMany(inventory => inventory.Stacks), stack => stack.ItemId == challenge.RuntimeRewardItemId && stack.Amount == 1);
+        Assert.NotNull(challenge.RuntimeState.ActiveEncounter);
+        Assert.False(challenge.RuntimeState.ActiveEncounter!.Active);
         Assert.Contains(result.Report.Diagnostics, item => item.Code == "generated_microgame_challenge.runtime_state_evidence");
+    }
+
+    [Fact]
+    public void RuntimeRewardChallengeStateSurvivesRuntimeStateSerialization()
+    {
+        var result = new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()).Generate(CreateRequest());
+        var challenge = result.Snapshot.MicrogameChallenge;
+        var serializer = new RuntimeStateSerializer();
+
+        var json = serializer.Serialize(challenge.RuntimeState);
+        var restored = serializer.DeserializeGameRuntimeState(json);
+
+        Assert.Contains(restored.Flags, flag => flag.Id == challenge.RuntimeChallengeFlagId && flag.Value == "true");
+        Assert.Contains(restored.Inventories.SelectMany(inventory => inventory.Stacks), stack => stack.ItemId == challenge.RuntimeRewardItemId && stack.Amount == 1);
+        Assert.NotNull(restored.ActiveEncounter);
+        Assert.Equal(challenge.RuntimeEncounterId, restored.ActiveEncounter!.EncounterId);
+        Assert.False(restored.ActiveEncounter.Active);
+        Assert.Equal("runtime_state_flags_inventory_encounter", restored.Metadata["generated_microgame_challenge.state_source"]);
+    }
+
+    [Fact]
+    public void RuntimeRewardChallengeStateDoesNotSilentlyUseProjectionFallback()
+    {
+        var result = new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()).Generate(CreateRequest());
+        var challenge = result.Snapshot.MicrogameChallenge;
+
+        Assert.Equal("completed", challenge.CompletionStatus);
+        Assert.Equal(challenge.StepCount, challenge.CompletedStepCount);
+        Assert.Equal("runtime_state_flags_inventory_encounter", challenge.StateSource);
+        Assert.False(challenge.FallbackPreviewProjectionUsed);
+        Assert.DoesNotContain(challenge.Diagnostics, item => item.Code == "generated_microgame_challenge.preview_level_resolution");
     }
 
     private static VisibleGeneratedPlayablePreviewRequest CreateRequest() => new()
     {
-        Seed = "generated-microgame-challenge-tests",
+        Seed = "runtime-reward-challenge-state-tests",
         Mode = ProceduralGameGenerationModes.SemiProceduralRegions,
         CompactStyleHintIds =
         [

@@ -51,9 +51,15 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md` | Completed Product Slice 032 task: Generated Package MVP. |
 | `docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md` | Completed Product Slice 033 task: Visible Generated Playable Preview. |
 | `docs/NEXT_PRODUCT_SLICE_034_ONE_CLICK_GENERATED_PREVIEW_WORKFLOW_TASK.md` | Completed Product Slice 034 task: One-Click Generated Preview Workflow. |
-| `docs/NEXT_PRODUCT_SLICE_035_ACTIVE_GOAL_PROGRESS_TASK.md` | Completed Product Slice 035 task: Active Goal + Quest Progress Loop. |
+| `docs/NEXT_PRODUCT_SLICE_035_ACTIVE_GOAL_QUEST_PROGRESS_TASK.md` | Completed Product Slice 035 task: Active Goal + Quest Progress Loop. |
 | `docs/NEXT_PRODUCT_SLICE_036_ENCOUNTER_REWARD_COMPLETION_TASK.md` | Completed Product Slice 036 task: Encounter/Obstacle + Reward/Completion Loop. |
 | `docs/NEXT_PRODUCT_SLICE_037_MICROGAME_ACCEPTANCE_POLISH_TASK.md` | Completed Product Slice 037 task: Microgame Acceptance + Playability Polish. |
+| `docs/NEXT_PRODUCT_SLICE_038_RUNTIME_OWNED_GOAL_PROGRESS_TASK.md` | Completed Product Slice 038 task: Runtime-Owned Generated Goal Progress. |
+| `docs/NEXT_PRODUCT_SLICE_039_RUNTIME_REWARD_CHALLENGE_STATE_TASK.md` | Completed Product Slice 039 task: Runtime-Backed Reward/Challenge/Completion State. |
+| `docs/NEXT_PRODUCT_SLICE_040_RUNTIME_MICROGAME_STATE_ACCEPTANCE_TASK.md` | Completed Product Slice 040 task: Runtime Microgame State Acceptance. |
+| `docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md` | Completed Product Slice 041 task: Generation Presets and Options. |
+| `docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md` | Completed Product Slice 042 task: Microgame Variation Acceptance. |
+| `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md` | Manual user verification checklist for the generated playable preview. |
 | `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` | LLM minimization policy and deterministic combiner rules. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Full game generation meaning, ownership boundaries and long-term target architecture. |
@@ -72,12 +78,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-manual_microgame_loop_verification
+manual_configurable_microgame_verification
 ```
 
 Allowed next sequence:
 
-1. Manual Microgame Loop Verification.
+1. Manual configurable microgame verification in Runtime Preview.
 
 Kill criterion:
 

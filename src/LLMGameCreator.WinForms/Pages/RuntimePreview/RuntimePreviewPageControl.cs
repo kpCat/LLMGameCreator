@@ -1,4 +1,5 @@
 using System.Text;
+using LLMGameCreator.Application.Generation.Procedural;
 using LLMGameCreator.Application.RuntimePreview;
 using LLMGameCreator.Application.Projects;
 using LLMGameCreator.GamePackage;
@@ -14,6 +15,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly IGameRuntime? _runtime;
     private readonly OneClickGeneratedPreviewWorkflowService? _generatePreviewWorkflowService;
+    private readonly GenerationPresetOptionsService _generationOptionsService;
     private readonly GeneratedPackageRuntimePreviewService _previewService;
     private readonly GeneratedContentInteractionPreviewService _interactionService;
     private readonly GeneratedQuestDialoguePreviewService _questDialoguePreviewService;
@@ -32,6 +34,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     {
         _previewService = new GeneratedPackageRuntimePreviewService();
         _generatePreviewWorkflowService = new OneClickGeneratedPreviewWorkflowService();
+        _generationOptionsService = new GenerationPresetOptionsService();
         _interactionService = new GeneratedContentInteractionPreviewService();
         _questDialoguePreviewService = new GeneratedQuestDialoguePreviewService();
         _microgameGoalPreviewService = new GeneratedMicrogameGoalPreviewService();
@@ -39,6 +42,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _mapPlacementPreviewService = new GeneratedMapPlacementPreviewService();
         InitializeComponent();
         ConfigureSplitSafety();
+        ConfigureGenerationOptionsControls();
         WireGeneratedContentEvents();
         RefreshGeneratedPreview(null, null);
     }
@@ -52,11 +56,13 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         GeneratedQuestDialoguePreviewService questDialoguePreviewService,
         GeneratedMicrogameGoalPreviewService microgameGoalPreviewService,
         GeneratedMicrogameChallengePreviewService microgameChallengePreviewService,
-        GeneratedMapPlacementPreviewService mapPlacementPreviewService)
+        GeneratedMapPlacementPreviewService mapPlacementPreviewService,
+        GenerationPresetOptionsService generationOptionsService)
     {
         _currentGamePackageService = currentGamePackageService;
         _runtime = runtime;
         _generatePreviewWorkflowService = generatePreviewWorkflowService;
+        _generationOptionsService = generationOptionsService;
         _previewService = previewService;
         _interactionService = interactionService;
         _questDialoguePreviewService = questDialoguePreviewService;
@@ -65,6 +71,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _mapPlacementPreviewService = mapPlacementPreviewService;
         InitializeComponent();
         ConfigureSplitSafety();
+        ConfigureGenerationOptionsControls();
         WireGeneratedContentEvents();
         _generatePreviewButton.Click += async (_, _) => await GeneratePreviewAsync();
         _startButton.Click += (_, _) => StartRuntime();
@@ -75,7 +82,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
     public string Id => "runtime-preview";
     public string Title => "Runtime Preview";
     public int SortOrder => 50;
-    Control IEditorPage. View => this;
+    Control IEditorPage.View => this;
 
     public void OnActivated()
     {
@@ -87,7 +94,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         var package = _currentGamePackageService?.CurrentPackage;
         if (package == null || _runtime == null)
         {
-            AppendLog("Проект игры не открыт или runtime недоступен.");
+            AppendLog("Game project is not open or runtime is unavailable.");
             return;
         }
 
@@ -111,11 +118,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         try
         {
             var projectRootPath = _currentGamePackageService?.CurrentFolder ?? string.Empty;
-            var result = await _generatePreviewWorkflowService.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
-            {
-                ProjectRootPath = projectRootPath,
-                ReplaceCurrentPackage = false
-            });
+            var result = await _generatePreviewWorkflowService.ExecuteAsync(BuildGeneratePreviewRequest(projectRootPath));
 
             AppendWorkflowDiagnostics(result.Diagnostics);
             if (!result.Ok)
@@ -137,6 +140,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
             });
 
             AppendLog($"Generate Preview ready: {result.PackageTitle} / {result.PackageId}");
+            AppendLog($"Generation options: {result.GenerationOptions.StableSummary}");
             AppendLog($"Output folder: {result.Paths.VisiblePreviewOutputDirectoryPath}");
             AppendLog($"Generated package: {result.Paths.GeneratedPackageJsonPath}");
             AppendLog($"Snapshot: {result.Paths.VisiblePreviewSnapshotJsonPath}");
@@ -159,7 +163,7 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         var package = _currentGamePackageService?.CurrentPackage;
         if (package == null || _state == null || _runtime == null)
         {
-            AppendLog("Сначала запусти runtime.");
+            AppendLog("Start runtime first.");
             return;
         }
 
@@ -251,6 +255,61 @@ public sealed partial class RuntimePreviewPageControl : UserControl, IEditorPage
         _previewDialogueButton.Click += (_, _) => PreviewSelectedDialogue();
         _startQuestPreviewButton.Click += (_, _) => StartSelectedQuestPreview();
         _markNextQuestStepButton.Click += (_, _) => MarkNextSelectedQuestStep();
+    }
+
+    private void ConfigureGenerationOptionsControls()
+    {
+        _generationSeedTextBox.Text = GenerationPresetOptionsService.DefaultSeed;
+
+        _generationModeComboBox.BeginUpdate();
+        _generationModeComboBox.Items.Clear();
+        foreach (var mode in ProceduralGameGenerationModes.Supported)
+        {
+            _generationModeComboBox.Items.Add(mode);
+        }
+        _generationModeComboBox.EndUpdate();
+        _generationModeComboBox.SelectedItem = GenerationPresetOptionsService.DefaultMode;
+        if (_generationModeComboBox.SelectedIndex < 0 && _generationModeComboBox.Items.Count > 0)
+        {
+            _generationModeComboBox.SelectedIndex = 0;
+        }
+
+        _generationPresetComboBox.BeginUpdate();
+        _generationPresetComboBox.Items.Clear();
+        foreach (var preset in _generationOptionsService.GetPresets())
+        {
+            _generationPresetComboBox.Items.Add(preset);
+        }
+        _generationPresetComboBox.EndUpdate();
+        for (var index = 0; index < _generationPresetComboBox.Items.Count; index++)
+        {
+            if (_generationPresetComboBox.Items[index] is GenerationPresetDefinition preset
+                && string.Equals(preset.PresetId, GenerationPresetOptionsService.DefaultPresetId, StringComparison.Ordinal))
+            {
+                _generationPresetComboBox.SelectedIndex = index;
+                break;
+            }
+        }
+
+        if (_generationPresetComboBox.SelectedIndex < 0 && _generationPresetComboBox.Items.Count > 0)
+        {
+            _generationPresetComboBox.SelectedIndex = 0;
+        }
+    }
+
+    private OneClickGeneratedPreviewWorkflowRequest BuildGeneratePreviewRequest(string projectRootPath)
+    {
+        var preset = _generationPresetComboBox.SelectedItem as GenerationPresetDefinition;
+        var mode = _generationModeComboBox.SelectedItem as string;
+
+        return new OneClickGeneratedPreviewWorkflowRequest
+        {
+            ProjectRootPath = projectRootPath,
+            Seed = _generationSeedTextBox.Text,
+            Mode = mode ?? GenerationPresetOptionsService.DefaultMode,
+            PresetId = preset?.PresetId ?? GenerationPresetOptionsService.DefaultPresetId,
+            ReplaceCurrentPackage = false
+        };
     }
 
     private void ApplySafeInitialSplitterDistance()

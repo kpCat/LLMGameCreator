@@ -1,23 +1,23 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T00:00:00Z",
+  "updated_at_utc": "2026-06-25T09:42:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 001 Product Slice 037 generated microgame acceptance completed",
-  "gate_status": "m4_1_passed_s037_completed_manual_microgame_loop_verification_required",
+  "current_phase_title": "Goal 002 Product Slice 042 microgame variation acceptance completed",
+  "gate_status": "m4_1_passed_s042_microgame_variation_acceptance_completed",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_037_microgame_acceptance_playability_polish",
-  "active_manual_gate": "Infrastructure-only next work is frozen unless explicitly approved by the user or directly required to unblock the generated playable/simulatable loop.",
-  "current_user_action": "Run manual Runtime Preview verification for the generated microgame loop.",
-  "recommended_next_decision": "Goal 001 first 5-minute generated microgame loop reached the Codex headless acceptance boundary. Next work is manual_microgame_loop_verification; do not invent S038.",
+  "last_completed_product_slice_id": "product_slice_042_microgame_variation_acceptance",
+  "active_manual_gate": "Manual configurable microgame verification is required before any new Codex feature slice.",
+  "current_user_action": "Manually verify configurable generated microgames in Runtime Preview.",
+  "recommended_next_decision": "Product Slice 042 proved multiple deterministic seed/preset generated microgame variants with runtime-backed evidence. Next work is manual_configurable_microgame_verification; do not proceed to another Codex feature slice until the user confirms it.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "manual_microgame_loop_verification"
+      "manual_configurable_microgame_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -60,16 +60,29 @@
     "quality_warnings": "none"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_037_microgame_acceptance_playability_polish",
-    "title": "Microgame Acceptance + Playability Polish",
-    "completed_at_utc": "2026-06-25T00:00:00Z",
-    "summary": "Added deterministic generated microgame acceptance sidecars on top of the existing one-click visible preview path, S035 active goal projection and S036 challenge/reward/completion projection. The slice writes generated-microgame-loop snapshot/report/manual verification docs without changing GamePackage or runtime command contracts.",
-    "scenario_id": "generated-microgame-loop",
+    "slice_id": "product_slice_042_microgame_variation_acceptance",
+    "title": "Microgame Variation Acceptance",
+    "completed_at_utc": "2026-06-25T09:42:00Z",
+    "summary": "Headless generated microgame variation acceptance now writes deterministic report and manual verification artifacts for a three-seed, three-preset matrix, proving each variant starts runtime, advances runtime-owned goal progress, resolves challenge/reward/completion evidence and differs in generated package evidence.",
+    "scenario_id": "generated-microgame-variation",
     "checks": [
-      "GeneratedMicrogameAcceptance filtered tests: 2/2 passed",
-      "generated-microgame-loop product smoke: 1/1 passed",
-      "CurrentGeneratorStateDocsTests filtered tests after S037 handoff: 10/10 passed",
-      "check-all.ps1: 691/691 tests passed, build 0 warnings / 0 errors"
+      "MicrogameVariationAcceptance filtered tests: 2/2 passed",
+      "generated-microgame-variation product smoke: 1/1 passed",
+      "CurrentGeneratorStateDocsTests filtered tests after S042 handoff: 10/10 passed",
+      "check-all.ps1: 708/708 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "product_slice_041_generation_presets_and_options": {
+    "slice_id": "product_slice_041_generation_presets_and_options",
+    "title": "Generation Presets and Options",
+    "completed_at_utc": "2026-06-25T09:36:00Z",
+    "summary": "One-click generated previews accept deterministic seed, mode and preset options, serialize selected options in reports, preserve the default generated preview behavior, and prove alternate seed/preset evidence changes deterministically.",
+    "scenario_id": "generation-preset-options",
+    "checks": [
+      "GenerationPresetOptions filtered tests: 3/3 passed",
+      "generation-preset-options product smoke: 1/1 passed",
+      "CurrentGeneratorStateDocsTests filtered tests after S041 handoff: 10/10 passed",
+      "check-all.ps1 after S041: 705/705 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "last_completed_hotfix": {
@@ -93,6 +106,40 @@
     ],
     "next_action": "first_5_minute_generated_microgame_loop"
   },
+  "manual_microgame_loop_verification": {
+    "status": "passed",
+    "evidence_source": "user_report_after_s037_before_goal_002",
+    "observed_result": [
+      "active goal visible",
+      "objective/progress visible",
+      "movement and interaction work",
+      "challenge resolved",
+      "reward visible",
+      "completion visible",
+      "generated content panel shows the microgame summary"
+    ],
+    "next_action": "runtime_backed_generated_microgame_state"
+  },
+  "manual_runtime_backed_microgame_verification": {
+    "status": "passed",
+    "evidence_source": "user_report_after_s040_before_s041_s042",
+    "observed_result": [
+      "Generate Preview works",
+      "Runtime Preview starts",
+      "goal progress changes in runtime",
+      "challenge resolves",
+      "reward is visible",
+      "completion becomes completed",
+      "runtime does not crash"
+    ],
+    "next_action": "microgame_variation_acceptance"
+  },
+  "manual_configurable_microgame_verification": {
+    "status": "required",
+    "evidence_source": "pending_user_manual_runtime_preview_check_after_s042",
+    "observed_result": [],
+    "next_action": "do_not_start_codex_feature_slice_until_user_confirms_manual_gate"
+  },
   "manual_user_preview_verification": {
     "status": "passed",
     "evidence_source": "user_report_after_s033",
@@ -107,7 +154,7 @@
     ]
   },
   "allowed_next_codex_task_types": [
-    "manual_microgame_loop_verification"
+    "manual_configurable_microgame_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -128,11 +175,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "manual_microgame_loop_verification",
-  "recommended_next_work_item_title": "Manual Microgame Loop Verification.",
-  "recommended_next_task_file": "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
+  "recommended_next_work_item": "manual_configurable_microgame_verification",
+  "recommended_next_work_item_title": "Manual configurable microgame verification.",
+  "recommended_next_task_file": "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
   "candidate_product_vertical_slices": [
-    "Manual Microgame Loop Verification"
+    "Manual configurable microgame verification in Runtime Preview"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -144,9 +191,15 @@
     "docs/NEXT_PRODUCT_SLICE_031_TINY_GENERATED_RUNTIME_LOOP_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_035_ACTIVE_GOAL_PROGRESS_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_035_ACTIVE_GOAL_QUEST_PROGRESS_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_036_ENCOUNTER_REWARD_COMPLETION_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_037_MICROGAME_ACCEPTANCE_POLISH_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_038_RUNTIME_OWNED_GOAL_PROGRESS_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_039_RUNTIME_REWARD_CHALLENGE_STATE_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_040_RUNTIME_MICROGAME_STATE_ACCEPTANCE_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md",
+    "docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md",
+    "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
     "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
     "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
     "docs/FULL_GAME_GENERATION_MASTER_PLAN.md",
@@ -180,8 +233,13 @@
     "Visible Generated Playable Preview snapshot/report/manual-verification sidecars",
     "One-click generated preview workflow in Runtime Preview",
     "Generated microgame active goal and preview-level quest progress loop",
+    "Runtime-owned generated goal progress through existing GameRuntimeState.Quests",
+    "Runtime-backed generated challenge reward and completion evidence through existing GameRuntimeState fields",
+    "Runtime-backed generated microgame state acceptance snapshot/report/manual-verification sidecars",
+    "Deterministic Runtime Preview generation presets and options",
+    "Generated microgame variation acceptance report/manual-verification sidecars",
     "Generated microgame challenge reward and preview-level completion loop",
     "Generated microgame loop acceptance snapshot/report/manual-verification sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice or accepted S034 hotfix; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Slice 037 recommend manual_microgame_loop_verification and do not invent S038."
+  "state_update_rule": "Update this file pair after every accepted product slice or accepted hotfix; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Product Slice 042 recommend manual_configurable_microgame_verification and do not start another Codex feature slice until the user confirms that manual gate."
 }

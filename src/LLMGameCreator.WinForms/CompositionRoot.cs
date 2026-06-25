@@ -137,14 +137,21 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<IPackageEditorService, PackageEditorService>(Reuse.Singleton);
         _container.RegisterDelegate<ILlmChatClient>(_ => new OpenAiCompatibleLlmChatClient(), Reuse.Singleton);
         _container.Register<IFirstPlayableSliceGenerator, FirstPlayableSliceGenerator>(Reuse.Singleton);
+        _container.Register<GenerationPresetOptionsService>(Reuse.Singleton);
         _container.RegisterDelegate<IVisibleGeneratedPlayableRuntimeAdapter>(resolver => new GeneratedPlayableRuntimePreviewAdapter(
             resolver.Resolve<IGameRuntime>()), Reuse.Singleton);
         _container.RegisterDelegate<VisibleGeneratedPlayablePreviewService>(resolver => new VisibleGeneratedPlayablePreviewService(
+            generationOptionsService: resolver.Resolve<GenerationPresetOptionsService>(),
             runtimeAdapter: resolver.Resolve<IVisibleGeneratedPlayableRuntimeAdapter>()), Reuse.Singleton);
         _container.Register<GeneratedMicrogameGoalPreviewService>(Reuse.Singleton);
         _container.Register<GeneratedMicrogameChallengePreviewService>(Reuse.Singleton);
+        _container.RegisterDelegate<RuntimeBackedMicrogameStateAcceptanceService>(resolver => new RuntimeBackedMicrogameStateAcceptanceService(
+            resolver.Resolve<IRuntimeStateSerializer>(),
+            resolver.Resolve<IRuntimeSnapshotStore>()), Reuse.Singleton);
         _container.RegisterDelegate<OneClickGeneratedPreviewWorkflowService>(resolver => new OneClickGeneratedPreviewWorkflowService(
             visiblePreviewService: resolver.Resolve<VisibleGeneratedPlayablePreviewService>(),
+            runtimeBackedStateAcceptanceService: resolver.Resolve<RuntimeBackedMicrogameStateAcceptanceService>(),
+            generationOptionsService: resolver.Resolve<GenerationPresetOptionsService>(),
             currentGamePackageService: resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
         _container.Register<GeneratedPackageRuntimePreviewService>(Reuse.Singleton);
         _container.Register<GeneratedContentInteractionPreviewService>(Reuse.Singleton);
@@ -206,7 +213,8 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<GeneratedQuestDialoguePreviewService>(),
             resolver.Resolve<GeneratedMicrogameGoalPreviewService>(),
             resolver.Resolve<GeneratedMicrogameChallengePreviewService>(),
-            resolver.Resolve<GeneratedMapPlacementPreviewService>()), Reuse.Singleton);
+            resolver.Resolve<GeneratedMapPlacementPreviewService>(),
+            resolver.Resolve<GenerationPresetOptionsService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<RuntimeSimulatorPageControl>(resolver => new RuntimeSimulatorPageControl(
             resolver.Resolve<ICurrentGamePackageService>(),

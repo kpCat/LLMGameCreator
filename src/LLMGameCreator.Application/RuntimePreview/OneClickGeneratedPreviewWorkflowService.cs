@@ -11,6 +11,8 @@ public sealed class OneClickGeneratedPreviewWorkflowService
     private readonly TinyGeneratedRuntimeLoopService _tinyLoopService;
     private readonly GeneratedPackageMvpService _packageMvpService;
     private readonly GeneratedMicrogameAcceptanceService _acceptanceService;
+    private readonly RuntimeBackedMicrogameStateAcceptanceService _runtimeBackedStateAcceptanceService;
+    private readonly GenerationPresetOptionsService _generationOptionsService;
     private readonly ICurrentGamePackageService? _currentGamePackageService;
     private readonly SemaphoreSlim _runGate = new(1, 1);
 
@@ -21,6 +23,8 @@ public sealed class OneClickGeneratedPreviewWorkflowService
         TinyGeneratedRuntimeLoopService? tinyLoopService = null,
         GeneratedPackageMvpService? packageMvpService = null,
         GeneratedMicrogameAcceptanceService? acceptanceService = null,
+        RuntimeBackedMicrogameStateAcceptanceService? runtimeBackedStateAcceptanceService = null,
+        GenerationPresetOptionsService? generationOptionsService = null,
         ICurrentGamePackageService? currentGamePackageService = null)
     {
         _visiblePreviewService = visiblePreviewService ?? new VisibleGeneratedPlayablePreviewService();
@@ -29,6 +33,8 @@ public sealed class OneClickGeneratedPreviewWorkflowService
         _tinyLoopService = tinyLoopService ?? new TinyGeneratedRuntimeLoopService();
         _packageMvpService = packageMvpService ?? new GeneratedPackageMvpService();
         _acceptanceService = acceptanceService ?? new GeneratedMicrogameAcceptanceService();
+        _runtimeBackedStateAcceptanceService = runtimeBackedStateAcceptanceService ?? new RuntimeBackedMicrogameStateAcceptanceService();
+        _generationOptionsService = generationOptionsService ?? new GenerationPresetOptionsService();
         _currentGamePackageService = currentGamePackageService;
     }
 
@@ -51,13 +57,22 @@ public sealed class OneClickGeneratedPreviewWorkflowService
 
             var projectRoot = ResolveProjectRoot(request);
             Directory.CreateDirectory(projectRoot);
-
-            var visibleResult = _visiblePreviewService.Generate(new VisibleGeneratedPlayablePreviewRequest
+            var generationOptions = _generationOptionsService.Resolve(new GenerationPresetOptionsRequest
             {
                 Seed = request.Seed,
                 Mode = request.Mode,
+                PresetId = request.PresetId,
                 CompactStyleHintIds = request.CompactStyleHintIds,
                 SelectedVariantIds = request.SelectedVariantIds
+            });
+
+            var visibleResult = _visiblePreviewService.Generate(new VisibleGeneratedPlayablePreviewRequest
+            {
+                Seed = generationOptions.Seed,
+                Mode = generationOptions.Mode,
+                PresetId = generationOptions.PresetId,
+                CompactStyleHintIds = generationOptions.CompactStyleHintIds,
+                SelectedVariantIds = generationOptions.SelectedVariantIds
             });
 
             var planWrite = await _kernelService
@@ -79,6 +94,10 @@ public sealed class OneClickGeneratedPreviewWorkflowService
             var acceptanceWrite = await _acceptanceService
                 .WriteAsync(projectRoot, acceptanceResult, cancellationToken)
                 .ConfigureAwait(false);
+            var runtimeBackedStateResult = _runtimeBackedStateAcceptanceService.Build(visibleResult, projectRoot);
+            var runtimeBackedStateWrite = await _runtimeBackedStateAcceptanceService
+                .WriteAsync(projectRoot, runtimeBackedStateResult, cancellationToken)
+                .ConfigureAwait(false);
 
             var currentReplaced = false;
             if (request.ReplaceCurrentPackage && _currentGamePackageService != null)
@@ -91,6 +110,7 @@ public sealed class OneClickGeneratedPreviewWorkflowService
             var diagnostics = SortDiagnostics(ToWorkflowDiagnostics(visibleResult.Report.Diagnostics)
                 .Concat(new[]
                 {
+                    Diagnostic("info", "generation_preset_options.selected", generationOptions.PresetId, generationOptions.StableSummary),
                     Diagnostic("info", "one_click_generated_preview.no_external_execution", "workflow", "No LLM, provider, Lua, Unity or media execution was invoked."),
                     BuildCurrentPackageDiagnostic(request, currentReplaced, package.Manifest.PackageId)
                 }));
@@ -118,8 +138,13 @@ public sealed class OneClickGeneratedPreviewWorkflowService
                     MicrogameAcceptanceOutputDirectoryPath = acceptanceWrite.OutputDirectoryPath,
                     MicrogameAcceptanceSnapshotJsonPath = acceptanceWrite.SnapshotJsonPath,
                     MicrogameAcceptanceReportMarkdownPath = acceptanceWrite.ReportMarkdownPath,
-                    MicrogameManualVerificationMarkdownPath = acceptanceWrite.ManualVerificationMarkdownPath
+                    MicrogameManualVerificationMarkdownPath = acceptanceWrite.ManualVerificationMarkdownPath,
+                    RuntimeBackedMicrogameStateOutputDirectoryPath = runtimeBackedStateWrite.OutputDirectoryPath,
+                    RuntimeBackedMicrogameStateSnapshotJsonPath = runtimeBackedStateWrite.SnapshotJsonPath,
+                    RuntimeBackedMicrogameStateReportMarkdownPath = runtimeBackedStateWrite.ReportMarkdownPath,
+                    RuntimeBackedMicrogameManualVerificationMarkdownPath = runtimeBackedStateWrite.ManualVerificationMarkdownPath
                 },
+                GenerationOptions = generationOptions,
                 StableSummary = BuildStableSummary(visibleResult),
                 CurrentPackageReplaced = currentReplaced,
                 VisiblePreviewResult = visibleResult,
@@ -149,6 +174,8 @@ public sealed class OneClickGeneratedPreviewWorkflowService
         {
             $"package={result.Snapshot.PackageId}",
             $"title={result.Snapshot.PackageTitle}",
+            $"seed={result.Snapshot.GenerationOptions.Seed}",
+            $"preset={result.Snapshot.GenerationOptions.PresetId}",
             $"runtimeStart={result.Report.RuntimeStartSucceeded.ToString().ToLowerInvariant()}",
             $"runtimeCommand={result.Report.RuntimeCommandSucceeded.ToString().ToLowerInvariant()}",
             $"regions={result.Snapshot.Counts.Regions}",

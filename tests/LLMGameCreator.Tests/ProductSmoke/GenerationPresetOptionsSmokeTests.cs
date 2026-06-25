@@ -7,54 +7,49 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.ProductSmoke;
 
-public sealed class GeneratedMicrogameGoalLoopSmokeTests
+public sealed class GenerationPresetOptionsSmokeTests
 {
     [Fact]
-    public async Task GeneratedMicrogameGoalLoopProductSmoke()
+    public async Task GenerationPresetOptionsProductSmoke()
     {
         using var temp = new TempDirectory();
         var projectRoot = ResolveProjectFolder(temp.Path);
         var current = new FakeCurrentGamePackageService(projectRoot);
+        var serializer = new RuntimeStateSerializer();
         var service = new OneClickGeneratedPreviewWorkflowService(
             visiblePreviewService: new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()),
+            runtimeBackedStateAcceptanceService: new RuntimeBackedMicrogameStateAcceptanceService(
+                serializer,
+                new RuntimeSnapshotStore(serializer)),
             currentGamePackageService: current);
 
-        var result = await service.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
+        var defaultResult = await service.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
         {
             ProjectRootPath = projectRoot,
-            Seed = "product-smoke-generated-microgame-goal-loop",
-            Mode = "semi_procedural_regions",
-            CompactStyleHintIds =
-            [
-                "theme/exploration",
-                "theme/survival",
-                "tone/mysterious",
-                "quest_motif/faction_truce",
-                "item_affordance/quest_item"
-            ],
-            SelectedVariantIds =
-            [
-                "world_topology/region_graph",
-                "actor_model/single_player_character",
-                "combat_model/turn_based",
-                "inventory_model/list_inventory"
-            ]
+            Seed = GenerationPresetOptionsService.DefaultSeed,
+            PresetId = GenerationPresetOptionsService.DefaultPresetId
+        });
+        var alternateResult = await service.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
+        {
+            ProjectRootPath = projectRoot,
+            Seed = "generation-preset-options-product-smoke-alternate",
+            PresetId = "recover_resource"
         });
 
-        var goal = result.VisiblePreviewResult.Snapshot.MicrogameGoal;
-        Assert.True(result.Ok);
-        Assert.True(result.VisiblePreviewResult.Report.RuntimeStartSucceeded);
-        Assert.True(result.VisiblePreviewResult.Report.RuntimeCommandSucceeded);
-        Assert.True(goal.ActiveGoalSelected);
-        Assert.True(goal.ProgressAdvancedByInteraction);
-        Assert.Equal(1, goal.CompletedStepCount);
-        Assert.NotEmpty(goal.Related.ObjectiveIds);
-        Assert.False(string.IsNullOrWhiteSpace(goal.Related.ItemId));
-        Assert.False(string.IsNullOrWhiteSpace(goal.Related.EncounterId));
-        Assert.Contains("interact", goal.LastProgressAction, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("visible-generated-playable-preview", result.Paths.VisiblePreviewSnapshotJsonPath, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains(result.Diagnostics, item => item.Code == "generated_microgame_goal.runtime_state_progress");
-        Assert.Same(result.GeneratedPackage, current.CurrentPackage);
+        Assert.True(defaultResult.Ok);
+        Assert.True(alternateResult.Ok);
+        Assert.True(defaultResult.VisiblePreviewResult.Report.RuntimeStartSucceeded);
+        Assert.True(defaultResult.VisiblePreviewResult.Report.GoalProgressAdvanced);
+        Assert.True(defaultResult.VisiblePreviewResult.Report.ChallengeResolved);
+        Assert.True(alternateResult.VisiblePreviewResult.Report.RuntimeStartSucceeded);
+        Assert.True(alternateResult.VisiblePreviewResult.Report.GoalProgressAdvanced);
+        Assert.True(alternateResult.VisiblePreviewResult.Report.ChallengeResolved);
+        Assert.Equal("recover_resource", alternateResult.GenerationOptions.PresetId);
+        Assert.NotEqual(defaultResult.PackageId, alternateResult.PackageId);
+        Assert.NotEqual(defaultResult.VisiblePreviewResult.Snapshot.DeterministicHash, alternateResult.VisiblePreviewResult.Snapshot.DeterministicHash);
+        Assert.True(File.Exists(alternateResult.Paths.RuntimeBackedMicrogameStateSnapshotJsonPath));
+        Assert.Contains(alternateResult.Diagnostics, item => item.Code == "generation_preset_options.selected");
+        Assert.Contains(alternateResult.Diagnostics, item => item.Code == "one_click_generated_preview.no_external_execution");
     }
 
     private static string ResolveProjectFolder(string tempPath)
@@ -71,11 +66,6 @@ public sealed class GeneratedMicrogameGoalLoopSmokeTests
         {
             var runtime = new DefaultGameRuntime();
             var start = runtime.Start(package);
-            var startPosition = new VisibleGeneratedPlayablePosition
-            {
-                X = start.State.PlayerPosition.X,
-                Y = start.State.PlayerPosition.Y
-            };
             var eventTypes = new SortedSet<string>(start.Events.Select(item => item.Type.ToString()), StringComparer.Ordinal);
             var commandAttempts = new List<VisibleGeneratedPlayableRuntimeCommandAttempt>();
             var currentState = start.State;
@@ -105,7 +95,11 @@ public sealed class GeneratedMicrogameGoalLoopSmokeTests
                 RuntimeStartSucceeded = start.Success,
                 StartMapId = package.Manifest.StartMapId,
                 CurrentMapId = currentState.CurrentMapId,
-                PlayerStartPosition = startPosition,
+                PlayerStartPosition = new VisibleGeneratedPlayablePosition
+                {
+                    X = start.State.PlayerPosition.X,
+                    Y = start.State.PlayerPosition.Y
+                },
                 PlayerCurrentPosition = new VisibleGeneratedPlayablePosition
                 {
                     X = currentState.PlayerPosition.X,

@@ -33,6 +33,7 @@ public sealed class VisibleGeneratedPlayablePreviewService
     private readonly GeneratedMicrogameGoalPreviewService _microgameGoalPreviewService;
     private readonly GeneratedMicrogameChallengePreviewService _microgameChallengePreviewService;
     private readonly VisibleGeneratedPlayablePreviewMarkdownRenderer _markdownRenderer;
+    private readonly GenerationPresetOptionsService _generationOptionsService;
     private readonly IVisibleGeneratedPlayableRuntimeAdapter _runtimeAdapter;
 
     public VisibleGeneratedPlayablePreviewService(
@@ -44,6 +45,7 @@ public sealed class VisibleGeneratedPlayablePreviewService
         GeneratedMicrogameGoalPreviewService? microgameGoalPreviewService = null,
         GeneratedMicrogameChallengePreviewService? microgameChallengePreviewService = null,
         VisibleGeneratedPlayablePreviewMarkdownRenderer? markdownRenderer = null,
+        GenerationPresetOptionsService? generationOptionsService = null,
         IVisibleGeneratedPlayableRuntimeAdapter? runtimeAdapter = null)
     {
         _kernelService = kernelService ?? new ProceduralGameKernelService();
@@ -54,6 +56,7 @@ public sealed class VisibleGeneratedPlayablePreviewService
         _microgameGoalPreviewService = microgameGoalPreviewService ?? new GeneratedMicrogameGoalPreviewService();
         _microgameChallengePreviewService = microgameChallengePreviewService ?? new GeneratedMicrogameChallengePreviewService();
         _markdownRenderer = markdownRenderer ?? new VisibleGeneratedPlayablePreviewMarkdownRenderer();
+        _generationOptionsService = generationOptionsService ?? new GenerationPresetOptionsService();
         _runtimeAdapter = runtimeAdapter ?? new RuntimeAdapterUnavailable();
     }
 
@@ -62,12 +65,20 @@ public sealed class VisibleGeneratedPlayablePreviewService
         ArgumentNullException.ThrowIfNull(request);
 
         var diagnostics = new List<VisibleGeneratedPlayablePreviewDiagnostic>();
-        var planResult = _kernelService.Generate(new ProceduralGameKernelRequest
+        var generationOptions = _generationOptionsService.Resolve(new GenerationPresetOptionsRequest
         {
-            Seed = string.IsNullOrWhiteSpace(request.Seed) ? "visible-generated-playable-preview" : request.Seed.Trim(),
-            Mode = string.IsNullOrWhiteSpace(request.Mode) ? ProceduralGameGenerationModes.SemiProceduralRegions : request.Mode.Trim(),
+            Seed = request.Seed,
+            Mode = request.Mode,
+            PresetId = request.PresetId,
             CompactStyleHintIds = request.CompactStyleHintIds,
             SelectedVariantIds = request.SelectedVariantIds
+        });
+        var planResult = _kernelService.Generate(new ProceduralGameKernelRequest
+        {
+            Seed = generationOptions.Seed,
+            Mode = generationOptions.Mode,
+            CompactStyleHintIds = generationOptions.CompactStyleHintIds,
+            SelectedVariantIds = generationOptions.SelectedVariantIds
         });
         var rulePackResult = _registryService.Generate(new FormulaEffectActionRegistryRequest { SourcePlan = planResult.Plan });
         var tinyLoopResult = _tinyLoopService.Run(new TinyGeneratedRuntimeLoopRequest
@@ -93,6 +104,7 @@ public sealed class VisibleGeneratedPlayablePreviewService
         diagnostics.AddRange(microgameGoal.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.Target, item.Message)));
         diagnostics.AddRange(microgameChallenge.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.Target, item.Message)));
         diagnostics.Add(Diagnostic("info", "visible_generated_playable_preview.no_external_execution", "generation", "No LLM, provider, Lua, Unity or media execution was invoked."));
+        diagnostics.Add(Diagnostic("info", "generation_preset_options.selected", generationOptions.PresetId, generationOptions.StableSummary));
 
         var sourceHashes = new VisibleGeneratedPlayablePreviewSourceHashes
         {
@@ -104,6 +116,7 @@ public sealed class VisibleGeneratedPlayablePreviewService
         var sortedDiagnostics = SortDiagnostics(diagnostics);
         var snapshotWithoutHash = new VisibleGeneratedPlayablePreviewSnapshot
         {
+            GenerationOptions = generationOptions,
             SourceHashes = sourceHashes,
             PackageId = packageMvpResult.Package.Manifest.PackageId,
             PackageTitle = packageMvpResult.Package.Manifest.Title,
@@ -122,6 +135,7 @@ public sealed class VisibleGeneratedPlayablePreviewService
         var report = new VisibleGeneratedPlayablePreviewReport
         {
             SnapshotHash = snapshotHash,
+            GenerationOptions = generationOptions,
             StableSummary = BuildStableSummary(snapshot),
             RuntimeStartSucceeded = runtimeAttempt.RuntimeStartSucceeded,
             RuntimeCommandAttempted = runtimeAttempt.CommandAttempts.Count > 0,
@@ -279,7 +293,9 @@ public sealed class VisibleGeneratedPlayablePreviewService
             $"quests={snapshot.Counts.Quests}",
             $"activeGoals={snapshot.Counts.ActiveGoals}",
             $"goalProgress={snapshot.Counts.ActiveGoalCompletedSteps}/{snapshot.Counts.ActiveGoalTotalSteps}",
+            $"goalProgressSource={snapshot.MicrogameGoal.ProgressStateSource}",
             $"challengeResolved={snapshot.MicrogameChallenge.Resolved.ToString().ToLowerInvariant()}",
+            $"challengeStateSource={snapshot.MicrogameChallenge.StateSource}",
             $"rewardVisible={snapshot.MicrogameChallenge.RewardVisible.ToString().ToLowerInvariant()}",
             $"completionVisible={snapshot.MicrogameChallenge.CompletionVisible.ToString().ToLowerInvariant()}",
             $"mechanics={snapshot.Counts.Mechanics}"

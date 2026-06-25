@@ -7,70 +7,52 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.RuntimePreview;
 
-public sealed class GeneratedMicrogameChallengePreviewServiceTests
+public sealed class GenerationPresetOptionsTests
 {
     [Fact]
-    public void GeneratedMicrogameChallengeIsDeterministicAndLinkedToActiveGoal()
+    public void GenerationPresetOptionsDefaultMatchesCurrentWorkflow()
     {
-        var service = new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter());
-        var first = service.Generate(CreateRequest());
-        var second = service.Generate(CreateRequest());
+        var service = new GenerationPresetOptionsService();
 
-        Assert.Equal(first.SnapshotJson, second.SnapshotJson);
-        Assert.True(first.Snapshot.MicrogameChallenge.ChallengeSelected);
-        Assert.Equal(first.Snapshot.MicrogameGoal.ActiveQuestId, first.Snapshot.MicrogameChallenge.QuestId);
-        Assert.Equal(first.Snapshot.MicrogameGoal.Related.EncounterId, first.Snapshot.MicrogameChallenge.EncounterId);
-        Assert.Equal(first.Snapshot.MicrogameGoal.Related.ItemId, first.Snapshot.MicrogameChallenge.RewardItemId);
-        Assert.False(string.IsNullOrWhiteSpace(first.Snapshot.MicrogameChallenge.RelatedNpcId));
-        Assert.Contains(first.Report.Diagnostics, item => item.Code == "generated_microgame_challenge.no_external_execution");
+        var options = service.ResolveDefault();
+
+        Assert.Equal(GenerationPresetOptionsService.DefaultSeed, options.Seed);
+        Assert.Equal(ProceduralGameGenerationModes.SemiProceduralRegions, options.Mode);
+        Assert.Equal(GenerationPresetOptionsService.DefaultPresetId, options.PresetId);
+        Assert.Contains("theme/exploration", options.CompactStyleHintIds);
+        Assert.Contains("theme/survival", options.CompactStyleHintIds);
+        Assert.Contains("quest_motif/faction_truce", options.CompactStyleHintIds);
+        Assert.Contains("world_topology/region_graph", options.SelectedVariantIds);
     }
 
     [Fact]
-    public void GeneratedMicrogameChallengeResolveShowsRewardAndCompletionEvidence()
+    public void GenerationPresetOptionsProducesStableAcceptedPreviewAndVariesBySeedAndPreset()
     {
-        var result = new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()).Generate(CreateRequest());
-        var challenge = result.Snapshot.MicrogameChallenge;
+        var previewService = new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter());
+        var defaultRequest = new VisibleGeneratedPlayablePreviewRequest();
 
-        Assert.True(challenge.Resolved);
-        Assert.True(challenge.RewardVisible);
-        Assert.True(challenge.CompletionVisible);
-        Assert.Equal("completed", challenge.CompletionStatus);
-        Assert.Equal(challenge.StepCount, challenge.CompletedStepCount);
-        Assert.Contains("interact", challenge.ResolveAction, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal("runtime_state_flags_inventory_encounter", challenge.StateSource);
-        Assert.True(challenge.RuntimeChallengeResolved);
-        Assert.True(challenge.RuntimeRewardGranted);
-        Assert.True(challenge.RuntimeCompletionBacked);
-        Assert.False(challenge.FallbackPreviewProjectionUsed);
-        Assert.True(result.Report.ChallengeResolved);
-        Assert.True(result.Report.RewardVisible);
-        Assert.True(result.Report.CompletionVisible);
-        Assert.Equal(1, result.Snapshot.Counts.ResolvedChallenges);
-        Assert.Equal(1, result.Snapshot.Counts.VisibleRewards);
-        Assert.Equal(1, result.Snapshot.Counts.VisibleCompletions);
-        Assert.Contains(result.Report.Diagnostics, item => item.Code == "generated_microgame_challenge.runtime_state_evidence");
+        var first = previewService.Generate(defaultRequest);
+        var second = previewService.Generate(defaultRequest);
+        var alternateSeed = previewService.Generate(defaultRequest with { Seed = "generation-preset-options-alternate-seed" });
+        var alternatePreset = previewService.Generate(defaultRequest with { PresetId = "recover_resource" });
+
+        Assert.Equal(first.SnapshotJson, second.SnapshotJson);
+        Assert.True(first.Report.RuntimeStartSucceeded);
+        Assert.True(first.Report.ActiveGoalSelected);
+        Assert.True(first.Report.GoalProgressAdvanced);
+        Assert.True(first.Report.ChallengeResolved);
+        Assert.True(first.Report.RewardVisible);
+        Assert.True(first.Report.CompletionVisible);
+        Assert.Equal("runtime_state_quests", first.Snapshot.MicrogameGoal.ProgressStateSource);
+        Assert.Equal("runtime_state_flags_inventory_encounter", first.Snapshot.MicrogameChallenge.StateSource);
+        Assert.Contains(first.Report.Diagnostics, item => item.Code == "generation_preset_options.selected");
+        Assert.Contains(first.Report.Diagnostics, item => item.Code == "visible_generated_playable_preview.no_external_execution");
+        Assert.NotEqual(first.Snapshot.PackageId, alternateSeed.Snapshot.PackageId);
+        Assert.NotEqual(first.Snapshot.DeterministicHash, alternateSeed.Snapshot.DeterministicHash);
+        Assert.NotEqual(first.Snapshot.GenerationOptions.StableSummary, alternatePreset.Snapshot.GenerationOptions.StableSummary);
+        Assert.Equal("recover_resource", alternatePreset.Snapshot.GenerationOptions.PresetId);
+        Assert.Contains("quest_motif/recover_lost_resource", alternatePreset.Snapshot.GenerationOptions.CompactStyleHintIds);
     }
-
-    private static VisibleGeneratedPlayablePreviewRequest CreateRequest() => new()
-    {
-        Seed = "generated-microgame-challenge-tests",
-        Mode = ProceduralGameGenerationModes.SemiProceduralRegions,
-        CompactStyleHintIds =
-        [
-            "theme/exploration",
-            "theme/survival",
-            "tone/mysterious",
-            "quest_motif/faction_truce",
-            "item_affordance/quest_item"
-        ],
-        SelectedVariantIds =
-        [
-            "world_topology/region_graph",
-            "actor_model/single_player_character",
-            "combat_model/turn_based",
-            "inventory_model/list_inventory"
-        ]
-    };
 
     private sealed class DefaultRuntimeAdapter : IVisibleGeneratedPlayableRuntimeAdapter
     {
@@ -78,11 +60,6 @@ public sealed class GeneratedMicrogameChallengePreviewServiceTests
         {
             var runtime = new DefaultGameRuntime();
             var start = runtime.Start(package);
-            var startPosition = new VisibleGeneratedPlayablePosition
-            {
-                X = start.State.PlayerPosition.X,
-                Y = start.State.PlayerPosition.Y
-            };
             var eventTypes = new SortedSet<string>(start.Events.Select(item => item.Type.ToString()), StringComparer.Ordinal);
             var commandAttempts = new List<VisibleGeneratedPlayableRuntimeCommandAttempt>();
             var currentState = start.State;
@@ -112,7 +89,11 @@ public sealed class GeneratedMicrogameChallengePreviewServiceTests
                 RuntimeStartSucceeded = start.Success,
                 StartMapId = package.Manifest.StartMapId,
                 CurrentMapId = currentState.CurrentMapId,
-                PlayerStartPosition = startPosition,
+                PlayerStartPosition = new VisibleGeneratedPlayablePosition
+                {
+                    X = start.State.PlayerPosition.X,
+                    Y = start.State.PlayerPosition.Y
+                },
                 PlayerCurrentPosition = new VisibleGeneratedPlayablePosition
                 {
                     X = currentState.PlayerPosition.X,

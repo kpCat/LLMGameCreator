@@ -1,68 +1,75 @@
-using LLMGameCreator.Application.Projects;
 using LLMGameCreator.Application.RuntimePreview;
 using LLMGameCreator.GamePackage;
 using LLMGameCreator.Runtime;
 using LLMGameCreator.Runtime.Abstractions;
 using Xunit;
 
-namespace LLMGameCreator.Tests.ProductSmoke;
+namespace LLMGameCreator.Tests.Application.RuntimePreview;
 
-public sealed class GeneratedMicrogameGoalLoopSmokeTests
+public sealed class MicrogameVariationAcceptanceTests
 {
     [Fact]
-    public async Task GeneratedMicrogameGoalLoopProductSmoke()
+    public void MicrogameVariationAcceptanceBuildsStableAcceptedVariantMatrix()
     {
         using var temp = new TempDirectory();
-        var projectRoot = ResolveProjectFolder(temp.Path);
-        var current = new FakeCurrentGamePackageService(projectRoot);
-        var service = new OneClickGeneratedPreviewWorkflowService(
+        var serializer = new RuntimeStateSerializer();
+        var service = new MicrogameVariationAcceptanceService(
             visiblePreviewService: new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()),
-            currentGamePackageService: current);
+            runtimeBackedStateAcceptanceService: new RuntimeBackedMicrogameStateAcceptanceService(
+                serializer,
+                new RuntimeSnapshotStore(serializer)));
 
-        var result = await service.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
+        var first = service.Build(temp.Path);
+        var second = service.Build(temp.Path);
+
+        Assert.Equal(first.ReportJson, second.ReportJson);
+        Assert.True(first.Report.Accepted);
+        Assert.Equal(3, first.Report.VariantCount);
+        Assert.True(first.Report.DifferenceSummary.UniqueSeedCount >= 3);
+        Assert.True(first.Report.DifferenceSummary.UniquePresetCount >= 2);
+        Assert.True(first.Report.DifferenceSummary.UniquePackageIdCount >= 3);
+        Assert.All(first.Report.Variants, variant =>
         {
-            ProjectRootPath = projectRoot,
-            Seed = "product-smoke-generated-microgame-goal-loop",
-            Mode = "semi_procedural_regions",
-            CompactStyleHintIds =
-            [
-                "theme/exploration",
-                "theme/survival",
-                "tone/mysterious",
-                "quest_motif/faction_truce",
-                "item_affordance/quest_item"
-            ],
-            SelectedVariantIds =
-            [
-                "world_topology/region_graph",
-                "actor_model/single_player_character",
-                "combat_model/turn_based",
-                "inventory_model/list_inventory"
-            ]
+            Assert.True(variant.Accepted);
+            Assert.True(variant.RuntimeStartSucceeded);
+            Assert.True(variant.ProgressAdvanced);
+            Assert.True(variant.ChallengeResolved);
+            Assert.True(variant.RewardVisible);
+            Assert.True(variant.RuntimeRewardGranted);
+            Assert.True(variant.CompletionVisible);
+            Assert.True(variant.RuntimeCompletionBacked);
+            Assert.Equal("runtime_state_quests", variant.GoalProgressStateSource);
+            Assert.Equal("runtime_state_flags_inventory_encounter", variant.ChallengeStateSource);
+            Assert.False(variant.GoalProgressFallbackPreviewJournalUsed);
+            Assert.False(variant.ChallengeFallbackPreviewProjectionUsed);
         });
-
-        var goal = result.VisiblePreviewResult.Snapshot.MicrogameGoal;
-        Assert.True(result.Ok);
-        Assert.True(result.VisiblePreviewResult.Report.RuntimeStartSucceeded);
-        Assert.True(result.VisiblePreviewResult.Report.RuntimeCommandSucceeded);
-        Assert.True(goal.ActiveGoalSelected);
-        Assert.True(goal.ProgressAdvancedByInteraction);
-        Assert.Equal(1, goal.CompletedStepCount);
-        Assert.NotEmpty(goal.Related.ObjectiveIds);
-        Assert.False(string.IsNullOrWhiteSpace(goal.Related.ItemId));
-        Assert.False(string.IsNullOrWhiteSpace(goal.Related.EncounterId));
-        Assert.Contains("interact", goal.LastProgressAction, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("visible-generated-playable-preview", result.Paths.VisiblePreviewSnapshotJsonPath, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains(result.Diagnostics, item => item.Code == "generated_microgame_goal.runtime_state_progress");
-        Assert.Same(result.GeneratedPackage, current.CurrentPackage);
+        Assert.Contains(first.Report.Diagnostics, item => item.Code == "generated_microgame_variation.no_external_execution");
+        Assert.Contains("manual_configurable_microgame_verification", first.ReportJson);
+        Assert.Contains("Manual Configurable Microgame Verification", first.ManualVerificationMarkdown);
     }
 
-    private static string ResolveProjectFolder(string tempPath)
+    [Fact]
+    public async Task MicrogameVariationAcceptanceWriteCreatesExpectedArtifacts()
     {
-        var configured = Environment.GetEnvironmentVariable("LLMGC_PRODUCT_SMOKE_PROJECT_DIR");
-        var projectFolder = string.IsNullOrWhiteSpace(configured) ? tempPath : configured;
-        Directory.CreateDirectory(projectFolder);
-        return projectFolder;
+        using var temp = new TempDirectory();
+        var serializer = new RuntimeStateSerializer();
+        var service = new MicrogameVariationAcceptanceService(
+            visiblePreviewService: new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()),
+            runtimeBackedStateAcceptanceService: new RuntimeBackedMicrogameStateAcceptanceService(
+                serializer,
+                new RuntimeSnapshotStore(serializer)));
+        var result = service.Build(temp.Path);
+
+        var write = await service.WriteAsync(temp.Path, result);
+
+        Assert.True(File.Exists(write.ReportJsonPath));
+        Assert.True(File.Exists(write.ReportMarkdownPath));
+        Assert.True(File.Exists(write.ManualVerificationMarkdownPath));
+        Assert.Contains("generated-microgame-variation", write.OutputDirectoryPath, StringComparison.OrdinalIgnoreCase);
+        var json = File.ReadAllText(write.ReportJsonPath);
+        Assert.Contains("\"accepted\": true", json);
+        Assert.Contains("\"variantCount\": 3", json);
+        Assert.Contains("\"manualGate\": \"manual_configurable_microgame_verification\"", json);
     }
 
     private sealed class DefaultRuntimeAdapter : IVisibleGeneratedPlayableRuntimeAdapter
@@ -71,11 +78,6 @@ public sealed class GeneratedMicrogameGoalLoopSmokeTests
         {
             var runtime = new DefaultGameRuntime();
             var start = runtime.Start(package);
-            var startPosition = new VisibleGeneratedPlayablePosition
-            {
-                X = start.State.PlayerPosition.X,
-                Y = start.State.PlayerPosition.Y
-            };
             var eventTypes = new SortedSet<string>(start.Events.Select(item => item.Type.ToString()), StringComparer.Ordinal);
             var commandAttempts = new List<VisibleGeneratedPlayableRuntimeCommandAttempt>();
             var currentState = start.State;
@@ -105,7 +107,11 @@ public sealed class GeneratedMicrogameGoalLoopSmokeTests
                 RuntimeStartSucceeded = start.Success,
                 StartMapId = package.Manifest.StartMapId,
                 CurrentMapId = currentState.CurrentMapId,
-                PlayerStartPosition = startPosition,
+                PlayerStartPosition = new VisibleGeneratedPlayablePosition
+                {
+                    X = start.State.PlayerPosition.X,
+                    Y = start.State.PlayerPosition.Y
+                },
                 PlayerCurrentPosition = new VisibleGeneratedPlayablePosition
                 {
                     X = currentState.PlayerPosition.X,
@@ -134,26 +140,6 @@ public sealed class GeneratedMicrogameGoalLoopSmokeTests
             EventTargets = result.Events.Select(item => item.TargetId ?? string.Empty).Where(value => !string.IsNullOrWhiteSpace(value)).OrderBy(item => item, StringComparer.Ordinal).ToList(),
             EventMessages = result.Events.Select(item => item.Message).Where(value => !string.IsNullOrWhiteSpace(value)).OrderBy(item => item, StringComparer.Ordinal).ToList()
         };
-    }
-
-    private sealed class FakeCurrentGamePackageService : ICurrentGamePackageService
-    {
-        public FakeCurrentGamePackageService(string currentFolder)
-        {
-            CurrentFolder = currentFolder;
-        }
-
-        public string? CurrentFolder { get; }
-        public GamePackageDefinition? CurrentPackage { get; private set; }
-        public event EventHandler? CurrentChanged;
-        public Task LoadAsync(string projectFolder, CancellationToken cancellationToken) => Task.CompletedTask;
-        public Task SaveAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-
-        public void ReplaceCurrent(GamePackageDefinition package)
-        {
-            CurrentPackage = package;
-            CurrentChanged?.Invoke(this, EventArgs.Empty);
-        }
     }
 
     private sealed class TempDirectory : IDisposable

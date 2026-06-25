@@ -27,7 +27,9 @@ public sealed class GeneratedMicrogameGoalPreviewServiceTests
         Assert.True(result.Report.ActiveGoalSelected);
         Assert.True(result.Report.GoalProgressAdvanced);
         Assert.Equal(1, result.Snapshot.Counts.ActiveGoals);
-        Assert.Contains(result.Report.Diagnostics, item => item.Code == "generated_microgame_goal.preview_level_progress");
+        Assert.Equal("runtime_state_quests", goal.ProgressStateSource);
+        Assert.False(goal.FallbackPreviewJournalUsed);
+        Assert.Contains(result.Report.Diagnostics, item => item.Code == "generated_microgame_goal.runtime_state_progress");
     }
 
     [Fact]
@@ -50,6 +52,8 @@ public sealed class GeneratedMicrogameGoalPreviewServiceTests
         Assert.Equal(1, advanced.CompletedStepCount);
         Assert.Equal(1, journal.ActiveCount);
         Assert.Contains("interact", advanced.LastProgressAction, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("runtime_state_quests", advanced.ProgressStateSource);
+        Assert.Equal(advanced.CompletedStepCount, (int)advanced.RuntimeObjectiveCurrentAmount);
     }
 
     private static VisibleGeneratedPlayablePreviewRequest CreateRequest() => new()

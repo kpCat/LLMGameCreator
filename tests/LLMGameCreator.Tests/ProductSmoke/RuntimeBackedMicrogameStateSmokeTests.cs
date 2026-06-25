@@ -7,22 +7,26 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.ProductSmoke;
 
-public sealed class GeneratedMicrogameGoalLoopSmokeTests
+public sealed class RuntimeBackedMicrogameStateSmokeTests
 {
     [Fact]
-    public async Task GeneratedMicrogameGoalLoopProductSmoke()
+    public async Task RuntimeBackedMicrogameStateProductSmoke()
     {
         using var temp = new TempDirectory();
         var projectRoot = ResolveProjectFolder(temp.Path);
         var current = new FakeCurrentGamePackageService(projectRoot);
+        var serializer = new RuntimeStateSerializer();
         var service = new OneClickGeneratedPreviewWorkflowService(
             visiblePreviewService: new VisibleGeneratedPlayablePreviewService(runtimeAdapter: new DefaultRuntimeAdapter()),
+            runtimeBackedStateAcceptanceService: new RuntimeBackedMicrogameStateAcceptanceService(
+                serializer,
+                new RuntimeSnapshotStore(serializer)),
             currentGamePackageService: current);
 
         var result = await service.ExecuteAsync(new OneClickGeneratedPreviewWorkflowRequest
         {
             ProjectRootPath = projectRoot,
-            Seed = "product-smoke-generated-microgame-goal-loop",
+            Seed = "product-smoke-runtime-backed-microgame-state",
             Mode = "semi_procedural_regions",
             CompactStyleHintIds =
             [
@@ -41,20 +45,21 @@ public sealed class GeneratedMicrogameGoalLoopSmokeTests
             ]
         });
 
-        var goal = result.VisiblePreviewResult.Snapshot.MicrogameGoal;
         Assert.True(result.Ok);
         Assert.True(result.VisiblePreviewResult.Report.RuntimeStartSucceeded);
-        Assert.True(result.VisiblePreviewResult.Report.RuntimeCommandSucceeded);
-        Assert.True(goal.ActiveGoalSelected);
-        Assert.True(goal.ProgressAdvancedByInteraction);
-        Assert.Equal(1, goal.CompletedStepCount);
-        Assert.NotEmpty(goal.Related.ObjectiveIds);
-        Assert.False(string.IsNullOrWhiteSpace(goal.Related.ItemId));
-        Assert.False(string.IsNullOrWhiteSpace(goal.Related.EncounterId));
-        Assert.Contains("interact", goal.LastProgressAction, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("visible-generated-playable-preview", result.Paths.VisiblePreviewSnapshotJsonPath, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains(result.Diagnostics, item => item.Code == "generated_microgame_goal.runtime_state_progress");
-        Assert.Same(result.GeneratedPackage, current.CurrentPackage);
+        Assert.True(File.Exists(result.Paths.RuntimeBackedMicrogameStateSnapshotJsonPath));
+        Assert.True(File.Exists(result.Paths.RuntimeBackedMicrogameStateReportMarkdownPath));
+        Assert.True(File.Exists(result.Paths.RuntimeBackedMicrogameManualVerificationMarkdownPath));
+
+        var json = File.ReadAllText(result.Paths.RuntimeBackedMicrogameStateSnapshotJsonPath);
+        Assert.Contains("\"goalProgressStateSource\": \"runtime_state_quests\"", json);
+        Assert.Contains("\"challengeStateSource\": \"runtime_state_flags_inventory_encounter\"", json);
+        Assert.Contains("\"goalProgressFallbackPreviewJournalUsed\": false", json);
+        Assert.Contains("\"challengeFallbackPreviewProjectionUsed\": false", json);
+        Assert.Contains("\"serializationRoundtripSucceeded\": true", json);
+        Assert.Contains("\"snapshotSaveSucceeded\": true", json);
+        Assert.Contains("\"snapshotLoadSucceeded\": true", json);
+        Assert.Contains("manual_runtime_backed_microgame_verification", json);
     }
 
     private static string ResolveProjectFolder(string tempPath)

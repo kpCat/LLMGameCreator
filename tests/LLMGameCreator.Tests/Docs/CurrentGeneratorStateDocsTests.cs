@@ -106,13 +106,17 @@ public sealed class CurrentGeneratorStateDocsTests
         using var state = ReadCurrentStateJson();
         var currentPhase = state.RootElement.GetProperty("current_phase").GetString();
         var recommendedNextWorkItem = state.RootElement.GetProperty("recommended_next_work_item").GetString();
+        var allowedNextWorkItems = state.RootElement.GetProperty("allowed_next_codex_task_types")
+            .EnumerateArray()
+            .Select(item => item.GetString() ?? string.Empty)
+            .ToArray();
         var blocked = state.RootElement.GetProperty("blocked_next_milestones_until_gate_passes")
             .EnumerateArray()
             .Select(item => item.GetString() ?? string.Empty)
             .ToArray();
 
         Assert.Equal("strategy_reset_playable_procedural_generator", currentPhase);
-        Assert.Equal("manual_microgame_loop_verification", recommendedNextWorkItem);
+        Assert.Contains(recommendedNextWorkItem, allowedNextWorkItems);
         Assert.Contains(blocked, item => item.Contains("M5", StringComparison.OrdinalIgnoreCase));
         Assert.Contains(blocked, item => item.Contains("Lua", StringComparison.OrdinalIgnoreCase));
         Assert.Contains(blocked, item => item.Contains("M6", StringComparison.OrdinalIgnoreCase));

@@ -40,7 +40,11 @@ function Write-ProductSmokeSummary {
         Join-Path $PackageOutputDir ".llmgc\procedural\tiny-runtime-loop-state.json"
     } elseif ($Scenario -eq "generated-package-mvp") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-package-mvp\package.json"
-    } elseif ($Scenario -eq "generated-microgame-loop") {
+    } elseif ($Scenario -eq "runtime-backed-microgame-state" -or $Scenario -eq "generation-preset-options") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\runtime-backed-microgame-state\runtime-backed-microgame-state-snapshot.json"
+    } elseif ($Scenario -eq "generated-microgame-variation") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-variation\generated-microgame-variation-report.json"
+    } elseif ($Scenario -eq "generated-microgame-loop" -or $Scenario -eq "runtime-owned-goal-progress" -or $Scenario -eq "runtime-reward-challenge-state") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-loop\generated-microgame-loop-snapshot.json"
     } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow" -or $Scenario -eq "generated-microgame-goal-loop" -or $Scenario -eq "generated-microgame-challenge-loop") {
         Join-Path $PackageOutputDir ".llmgc\procedural\visible-generated-playable-preview\visible-generated-playable-preview-snapshot.json"
@@ -192,6 +196,21 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "generated-microgame-loop") {
         $TestFilter = "FullyQualifiedName~GeneratedMicrogameLoopProductSmoke"
+    }
+    elseif ($Scenario -eq "runtime-owned-goal-progress") {
+        $TestFilter = "FullyQualifiedName~RuntimeOwnedGoalProgressProductSmoke"
+    }
+    elseif ($Scenario -eq "runtime-reward-challenge-state") {
+        $TestFilter = "FullyQualifiedName~RuntimeRewardChallengeStateProductSmoke"
+    }
+    elseif ($Scenario -eq "runtime-backed-microgame-state") {
+        $TestFilter = "FullyQualifiedName~RuntimeBackedMicrogameStateProductSmoke"
+    }
+    elseif ($Scenario -eq "generation-preset-options") {
+        $TestFilter = "FullyQualifiedName~GenerationPresetOptionsProductSmoke"
+    }
+    elseif ($Scenario -eq "generated-microgame-variation") {
+        $TestFilter = "FullyQualifiedName~GeneratedMicrogameVariationProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

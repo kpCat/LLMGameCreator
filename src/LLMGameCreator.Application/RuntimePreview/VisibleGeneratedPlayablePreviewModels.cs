@@ -5,8 +5,9 @@ namespace LLMGameCreator.Application.RuntimePreview;
 
 public sealed record VisibleGeneratedPlayablePreviewRequest
 {
-    public string Seed { get; init; } = "visible-generated-playable-preview";
+    public string Seed { get; init; } = GenerationPresetOptionsService.DefaultSeed;
     public string Mode { get; init; } = ProceduralGameGenerationModes.SemiProceduralRegions;
+    public string PresetId { get; init; } = GenerationPresetOptionsService.DefaultPresetId;
     public IReadOnlyList<string> CompactStyleHintIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> SelectedVariantIds { get; init; } = Array.Empty<string>();
 }
@@ -38,6 +39,7 @@ public sealed record VisibleGeneratedPlayablePreviewSnapshot
 {
     public string SchemaVersion { get; init; } = "1";
     public string DeterministicHash { get; init; } = string.Empty;
+    public GenerationPresetOptions GenerationOptions { get; init; } = new();
     public VisibleGeneratedPlayablePreviewSourceHashes SourceHashes { get; init; } = new();
     public string PackageId { get; init; } = string.Empty;
     public string PackageTitle { get; init; } = string.Empty;
@@ -56,6 +58,7 @@ public sealed record VisibleGeneratedPlayablePreviewReport
 {
     public string SchemaVersion { get; init; } = "1";
     public string SnapshotHash { get; init; } = string.Empty;
+    public GenerationPresetOptions GenerationOptions { get; init; } = new();
     public string StableSummary { get; init; } = string.Empty;
     public bool RuntimeStartSucceeded { get; init; }
     public bool RuntimeCommandAttempted { get; init; }

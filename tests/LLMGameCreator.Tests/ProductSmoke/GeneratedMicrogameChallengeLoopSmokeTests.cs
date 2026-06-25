@@ -55,7 +55,10 @@ public sealed class GeneratedMicrogameChallengeLoopSmokeTests
         Assert.False(string.IsNullOrWhiteSpace(challenge.EncounterId));
         Assert.False(string.IsNullOrWhiteSpace(challenge.RewardItemId));
         Assert.Contains("interact", challenge.ResolveAction, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains(result.Diagnostics, item => item.Code == "generated_microgame_challenge.preview_level_resolution");
+        Assert.Equal("runtime_state_flags_inventory_encounter", challenge.StateSource);
+        Assert.True(challenge.RuntimeRewardGranted);
+        Assert.True(challenge.RuntimeCompletionBacked);
+        Assert.Contains(result.Diagnostics, item => item.Code == "generated_microgame_challenge.runtime_state_evidence");
         Assert.Same(result.GeneratedPackage, current.CurrentPackage);
     }
 

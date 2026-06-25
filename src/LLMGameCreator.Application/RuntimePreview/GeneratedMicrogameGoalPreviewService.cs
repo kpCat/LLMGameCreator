@@ -39,7 +39,8 @@ public sealed class GeneratedMicrogameGoalPreviewService
 
         var questId = QuestId(quest);
         var started = tracker.StartQuest(questId);
-        return BuildModel(package, preview, tracker, quest, started, progressAction: string.Empty, progressAdvanced: false);
+        var runtimeProgress = CreateRuntimeProgress(package, preview, quest, progressAction: string.Empty, advance: false);
+        return BuildModel(package, preview, tracker, quest, started, runtimeProgress, progressAction: string.Empty, progressAdvanced: false);
     }
 
     public GeneratedMicrogameGoalPreviewModel AdvanceAfterInteraction(
@@ -62,7 +63,8 @@ public sealed class GeneratedMicrogameGoalPreviewService
         tracker.StartQuest(QuestId(quest));
         var advanced = tracker.MarkNextStep(QuestId(quest));
         var action = BuildProgressAction(interactionAttempt);
-        return BuildModel(package, preview, tracker, quest, advanced, action, progressAdvanced: advanced.Ok);
+        var runtimeProgress = CreateRuntimeProgress(package, preview, quest, action, advance: interactionAttempt.Succeeded);
+        return BuildModel(package, preview, tracker, quest, advanced, runtimeProgress, action, progressAdvanced: runtimeProgress.ProgressAdvanced);
     }
 
     public GeneratedMicrogameGoalPreviewModel AdvanceAfterInteraction(
@@ -97,6 +99,7 @@ public sealed class GeneratedMicrogameGoalPreviewService
         GeneratedQuestDialoguePreviewService tracker,
         GeneratedPackageRuntimePreviewQuest quest,
         GeneratedQuestPreviewActionResult actionResult,
+        GeneratedMicrogameRuntimeGoalProgress runtimeProgress,
         string progressAction,
         bool progressAdvanced)
     {
@@ -105,13 +108,28 @@ public sealed class GeneratedMicrogameGoalPreviewService
         var related = BuildRelatedContent(package, preview, quest, progressAction);
         var diagnostics = new List<GeneratedMicrogameGoalDiagnostic>
         {
-            Diagnostic("info", "generated_microgame_goal.preview_level_progress", QuestId(quest), "Quest progress is tracked by the existing Runtime Preview quest journal without changing runtime or package contracts.")
+            Diagnostic("info", "generated_microgame_goal.runtime_state_progress", runtimeProgress.RuntimeQuestId, "Quest progress is stored in existing serializable GameRuntimeState.Quests and Runtime Preview reads that runtime-owned state.")
         };
+
+        if (runtimeProgress.FallbackPreviewJournalUsed)
+        {
+            diagnostics.Add(Diagnostic("warning", "generated_microgame_goal.preview_journal_fallback", QuestId(quest), "Runtime-owned quest progress was unavailable; existing Runtime Preview journal progress was used as compatibility fallback."));
+        }
 
         if (!actionResult.Ok)
         {
             diagnostics.Add(Diagnostic("warning", "generated_microgame_goal.progress_action_not_applied", QuestId(quest), actionResult.Status));
         }
+
+        var completedStepCount = runtimeProgress.ObjectiveCurrentAmount > 0
+            ? (int)Math.Floor(runtimeProgress.ObjectiveCurrentAmount)
+            : entry?.CompletedStepCount ?? actionResult.CompletedStepCount;
+        var stepCount = runtimeProgress.ObjectiveRequiredAmount > 0
+            ? (int)Math.Ceiling(runtimeProgress.ObjectiveRequiredAmount)
+            : entry?.StepCount ?? actionResult.StepCount;
+        var progressStatus = runtimeProgress.ObjectiveCompleted
+            ? "completed"
+            : runtimeProgress.RuntimeQuestState;
 
         return new GeneratedMicrogameGoalPreviewModel
         {
@@ -119,16 +137,125 @@ public sealed class GeneratedMicrogameGoalPreviewService
             ActiveQuestId = QuestId(quest),
             ActiveQuestTitle = FirstNonEmpty(quest.Title, quest.PackageQuestId, quest.SourceId),
             CurrentObjectiveText = FirstNonEmpty(entry?.CurrentStep, quest.Steps.FirstOrDefault(), quest.Objectives.FirstOrDefault()),
-            ProgressStatus = entry?.Status.ToString() ?? actionResult.QuestStatus.ToString(),
-            CompletedStepCount = entry?.CompletedStepCount ?? actionResult.CompletedStepCount,
-            StepCount = entry?.StepCount ?? actionResult.StepCount,
-            ProgressAdvancedByInteraction = progressAdvanced,
+            ProgressStatus = progressStatus,
+            CompletedStepCount = completedStepCount,
+            StepCount = stepCount,
+            ProgressAdvancedByInteraction = progressAdvanced || runtimeProgress.ProgressAdvanced,
             LastProgressAction = progressAction,
             Related = related,
             AvailableQuestCount = journal.AvailableCount,
             ActiveQuestCount = journal.ActiveCount,
             CompletedQuestCount = journal.CompletedCount,
+            ProgressStateSource = runtimeProgress.StateSource,
+            RuntimeQuestId = runtimeProgress.RuntimeQuestId,
+            RuntimeObjectiveId = runtimeProgress.RuntimeObjectiveId,
+            RuntimeObjectiveCurrentAmount = runtimeProgress.ObjectiveCurrentAmount,
+            RuntimeObjectiveRequiredAmount = runtimeProgress.ObjectiveRequiredAmount,
+            RuntimeObjectiveCompleted = runtimeProgress.ObjectiveCompleted,
+            RuntimeState = runtimeProgress.RuntimeState,
+            FallbackPreviewJournalUsed = runtimeProgress.FallbackPreviewJournalUsed,
             Diagnostics = diagnostics
+        };
+    }
+
+    private static GeneratedMicrogameRuntimeGoalProgress CreateRuntimeProgress(
+        GamePackageDefinition package,
+        GeneratedPackageRuntimePreviewModel preview,
+        GeneratedPackageRuntimePreviewQuest quest,
+        string progressAction,
+        bool advance)
+    {
+        var packageQuestId = FirstNonEmpty(quest.PackageQuestId, QuestId(quest));
+        var packageQuest = package.Game.Quests
+            .OrderBy(item => item.Id, StringComparer.Ordinal)
+            .FirstOrDefault(item => string.Equals(item.Id, packageQuestId, StringComparison.OrdinalIgnoreCase))
+            ?? package.Game.Quests.OrderBy(item => item.Id, StringComparer.Ordinal).FirstOrDefault();
+
+        if (packageQuest == null)
+        {
+            return new GeneratedMicrogameRuntimeGoalProgress
+            {
+                StateSource = "preview_journal_fallback",
+                FallbackPreviewJournalUsed = true
+            };
+        }
+
+        var runtimeState = new GameRuntimeState
+        {
+            PackageId = package.Manifest.PackageId,
+            CurrentMapId = preview.CurrentMapId,
+            Metadata = new Dictionary<string, string>
+            {
+                ["generated_microgame_goal.progress_source"] = "runtime_state_quests",
+                ["generated_microgame_goal.source_quest_id"] = QuestId(quest)
+            }
+        };
+        var objective = BuildRuntimeObjective(packageQuest, quest, progressAction);
+        var runtimeQuest = new QuestRuntimeState
+        {
+            QuestId = packageQuest.Id,
+            State = "active",
+            CurrentStageId = packageQuest.Stages.OrderBy(item => item.Id, StringComparer.Ordinal).FirstOrDefault()?.Id,
+            StartedTick = runtimeState.Tick,
+            Metadata = new Dictionary<string, string>(packageQuest.Metadata)
+            {
+                ["generated_microgame_goal.progress_source"] = "runtime_state_quests",
+                ["generated_microgame_goal.source_quest_id"] = QuestId(quest)
+            },
+            Objectives = [objective]
+        };
+
+        runtimeState.Quests.Add(runtimeQuest);
+        runtimeState.QuestStates[runtimeQuest.QuestId] = runtimeQuest.State;
+
+        if (advance)
+        {
+            objective.CurrentAmount = Math.Min(objective.RequiredAmount, objective.CurrentAmount + 1);
+            objective.Completed = objective.CurrentAmount >= objective.RequiredAmount;
+            runtimeState.Metadata["generated_microgame_goal.last_progress_action"] = progressAction;
+            runtimeQuest.Metadata["generated_microgame_goal.last_progress_action"] = progressAction;
+            if (objective.Completed)
+            {
+                runtimeQuest.State = "completed";
+                runtimeQuest.CompletedTick = runtimeState.Tick;
+                runtimeState.QuestStates[runtimeQuest.QuestId] = runtimeQuest.State;
+            }
+        }
+
+        return new GeneratedMicrogameRuntimeGoalProgress
+        {
+            StateSource = "runtime_state_quests",
+            RuntimeQuestId = runtimeQuest.QuestId,
+            RuntimeObjectiveId = objective.ObjectiveId,
+            RuntimeQuestState = runtimeQuest.State,
+            ObjectiveCurrentAmount = objective.CurrentAmount,
+            ObjectiveRequiredAmount = objective.RequiredAmount,
+            ObjectiveCompleted = objective.Completed,
+            RuntimeState = runtimeState,
+            ProgressAdvanced = advance && objective.CurrentAmount > 0
+        };
+    }
+
+    private static QuestObjectiveRuntimeState BuildRuntimeObjective(
+        LLMGameCreator.Domain.Definitions.QuestDefinition packageQuest,
+        GeneratedPackageRuntimePreviewQuest generatedQuest,
+        string progressAction)
+    {
+        var packageObjective = packageQuest.Objectives.OrderBy(item => item.Id, StringComparer.Ordinal).FirstOrDefault()
+                               ?? packageQuest.Stages.SelectMany(item => item.Objectives).OrderBy(item => item.Id, StringComparer.Ordinal).FirstOrDefault();
+        var requiredAmount = Math.Max(1, Math.Max(generatedQuest.Steps.Count, generatedQuest.Objectives.Count));
+        return new QuestObjectiveRuntimeState
+        {
+            ObjectiveId = packageObjective?.Id ?? "objective/generated_microgame_progress",
+            Kind = "generated_microgame_progress",
+            TargetId = FirstNonEmpty(ExtractEventTargets(progressAction).FirstOrDefault(), packageObjective?.TargetId, generatedQuest.Objectives.FirstOrDefault()),
+            CurrentAmount = 0,
+            RequiredAmount = requiredAmount,
+            Completed = false,
+            Metadata = new Dictionary<string, string>
+            {
+                ["generated_microgame_goal.progress_source"] = "runtime_state_quests"
+            }
         };
     }
 
@@ -259,7 +386,29 @@ public sealed record GeneratedMicrogameGoalPreviewModel
     public int AvailableQuestCount { get; init; }
     public int ActiveQuestCount { get; init; }
     public int CompletedQuestCount { get; init; }
+    public string ProgressStateSource { get; init; } = string.Empty;
+    public string RuntimeQuestId { get; init; } = string.Empty;
+    public string RuntimeObjectiveId { get; init; } = string.Empty;
+    public double RuntimeObjectiveCurrentAmount { get; init; }
+    public double RuntimeObjectiveRequiredAmount { get; init; }
+    public bool RuntimeObjectiveCompleted { get; init; }
+    public GameRuntimeState RuntimeState { get; init; } = new();
+    public bool FallbackPreviewJournalUsed { get; init; }
     public IReadOnlyList<GeneratedMicrogameGoalDiagnostic> Diagnostics { get; init; } = Array.Empty<GeneratedMicrogameGoalDiagnostic>();
+}
+
+public sealed record GeneratedMicrogameRuntimeGoalProgress
+{
+    public string StateSource { get; init; } = string.Empty;
+    public string RuntimeQuestId { get; init; } = string.Empty;
+    public string RuntimeObjectiveId { get; init; } = string.Empty;
+    public string RuntimeQuestState { get; init; } = string.Empty;
+    public double ObjectiveCurrentAmount { get; init; }
+    public double ObjectiveRequiredAmount { get; init; }
+    public bool ObjectiveCompleted { get; init; }
+    public bool ProgressAdvanced { get; init; }
+    public bool FallbackPreviewJournalUsed { get; init; }
+    public GameRuntimeState RuntimeState { get; init; } = new();
 }
 
 public sealed record GeneratedMicrogameGoalRelatedContent

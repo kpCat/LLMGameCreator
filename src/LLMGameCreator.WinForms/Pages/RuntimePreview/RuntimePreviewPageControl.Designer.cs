@@ -14,6 +14,12 @@ namespace LLMGameCreator.WinForms.Pages
         private FlowLayoutPanel _toolbarPanel;
         private Button _generatePreviewButton;
         private Button _startButton;
+        private Label _seedLabel;
+        private TextBox _generationSeedTextBox;
+        private Label _modeLabel;
+        private ComboBox _generationModeComboBox;
+        private Label _presetLabel;
+        private ComboBox _generationPresetComboBox;
         private RuntimeMapCanvas _canvas;
         private TabControl _rightTabControl;
         private TabPage _logTabPage;
@@ -55,6 +61,12 @@ namespace LLMGameCreator.WinForms.Pages
             this._toolbarPanel = new FlowLayoutPanel();
             this._generatePreviewButton = new Button();
             this._startButton = new Button();
+            this._seedLabel = new Label();
+            this._generationSeedTextBox = new TextBox();
+            this._modeLabel = new Label();
+            this._generationModeComboBox = new ComboBox();
+            this._presetLabel = new Label();
+            this._generationPresetComboBox = new ComboBox();
             this._rightTabControl = new TabControl();
             this._logTabPage = new TabPage();
             this._generatedContentTabPage = new TabPage();
@@ -121,9 +133,9 @@ namespace LLMGameCreator.WinForms.Pages
             // 
             this._canvas.BackColor = Color.Black;
             this._canvas.Dock = DockStyle.Fill;
-            this._canvas.Location = new Point(12, 54);
+            this._canvas.Location = new Point(12, 88);
             this._canvas.Name = "_canvas";
-            this._canvas.Size = new Size(796, 534);
+            this._canvas.Size = new Size(796, 500);
             this._canvas.TabIndex = 1;
             this._canvas.TabStop = true;
             // 
@@ -131,10 +143,16 @@ namespace LLMGameCreator.WinForms.Pages
             // 
             this._toolbarPanel.Controls.Add(this._generatePreviewButton);
             this._toolbarPanel.Controls.Add(this._startButton);
+            this._toolbarPanel.Controls.Add(this._seedLabel);
+            this._toolbarPanel.Controls.Add(this._generationSeedTextBox);
+            this._toolbarPanel.Controls.Add(this._modeLabel);
+            this._toolbarPanel.Controls.Add(this._generationModeComboBox);
+            this._toolbarPanel.Controls.Add(this._presetLabel);
+            this._toolbarPanel.Controls.Add(this._generationPresetComboBox);
             this._toolbarPanel.Dock = DockStyle.Top;
             this._toolbarPanel.Location = new Point(12, 12);
             this._toolbarPanel.Name = "_toolbarPanel";
-            this._toolbarPanel.Size = new Size(796, 42);
+            this._toolbarPanel.Size = new Size(796, 76);
             this._toolbarPanel.TabIndex = 0;
             // 
             // _generatePreviewButton
@@ -152,8 +170,66 @@ namespace LLMGameCreator.WinForms.Pages
             this._startButton.Name = "_startButton";
             this._startButton.Size = new Size(100, 30);
             this._startButton.TabIndex = 1;
-            this._startButton.Text = "Старт";
+            this._startButton.Text = "Start";
             this._startButton.UseVisualStyleBackColor = true;
+            // 
+            // _seedLabel
+            // 
+            this._seedLabel.AutoSize = true;
+            this._seedLabel.Location = new Point(247, 9);
+            this._seedLabel.Margin = new Padding(3, 9, 3, 0);
+            this._seedLabel.Name = "_seedLabel";
+            this._seedLabel.Size = new Size(32, 15);
+            this._seedLabel.TabIndex = 2;
+            this._seedLabel.Text = "Seed";
+            // 
+            // _generationSeedTextBox
+            // 
+            this._generationSeedTextBox.Location = new Point(285, 5);
+            this._generationSeedTextBox.Margin = new Padding(3, 5, 3, 3);
+            this._generationSeedTextBox.Name = "_generationSeedTextBox";
+            this._generationSeedTextBox.Size = new Size(150, 23);
+            this._generationSeedTextBox.TabIndex = 3;
+            // 
+            // _modeLabel
+            // 
+            this._modeLabel.AutoSize = true;
+            this._modeLabel.Location = new Point(441, 9);
+            this._modeLabel.Margin = new Padding(3, 9, 3, 0);
+            this._modeLabel.Name = "_modeLabel";
+            this._modeLabel.Size = new Size(38, 15);
+            this._modeLabel.TabIndex = 4;
+            this._modeLabel.Text = "Mode";
+            // 
+            // _generationModeComboBox
+            // 
+            this._generationModeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this._generationModeComboBox.FormattingEnabled = true;
+            this._generationModeComboBox.Location = new Point(485, 5);
+            this._generationModeComboBox.Margin = new Padding(3, 5, 3, 3);
+            this._generationModeComboBox.Name = "_generationModeComboBox";
+            this._generationModeComboBox.Size = new Size(150, 23);
+            this._generationModeComboBox.TabIndex = 5;
+            // 
+            // _presetLabel
+            // 
+            this._presetLabel.AutoSize = true;
+            this._presetLabel.Location = new Point(641, 9);
+            this._presetLabel.Margin = new Padding(3, 9, 3, 0);
+            this._presetLabel.Name = "_presetLabel";
+            this._presetLabel.Size = new Size(39, 15);
+            this._presetLabel.TabIndex = 6;
+            this._presetLabel.Text = "Preset";
+            // 
+            // _generationPresetComboBox
+            // 
+            this._generationPresetComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this._generationPresetComboBox.FormattingEnabled = true;
+            this._generationPresetComboBox.Location = new Point(3, 39);
+            this._generationPresetComboBox.Margin = new Padding(3, 5, 3, 3);
+            this._generationPresetComboBox.Name = "_generationPresetComboBox";
+            this._generationPresetComboBox.Size = new Size(180, 23);
+            this._generationPresetComboBox.TabIndex = 7;
             // 
             // _rightTabControl
             // 
@@ -390,6 +466,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._rootSplitContainer.ResumeLayout(false);
             this._leftPanel.ResumeLayout(false);
             this._toolbarPanel.ResumeLayout(false);
+            this._toolbarPanel.PerformLayout();
             this._rightTabControl.ResumeLayout(false);
             this._logTabPage.ResumeLayout(false);
             this._logTabPage.PerformLayout();

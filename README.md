@@ -64,10 +64,10 @@ Current source-of-truth handoff:
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-Goal 001 reached Product Slice 037: Runtime Preview now exposes a headless-proven generated microgame loop through the existing one-click generated preview path. The deterministic path runs Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop, Slice 032 Generated Package MVP, Slice 033 Visible Generated Playable Preview, Slice 035 active goal/progress projection and Slice 036 challenge/reward/completion projection, then writes the S037 acceptance snapshot under `.llmgc/procedural/generated-microgame-loop/`.
+Goal 002 reached Product Slice 042: Runtime Preview one-click generation now supports deterministic seed/mode/preset options and headless acceptance writes deterministic generated microgame variation artifacts under `.llmgc/procedural/generated-microgame-variation/`. The deterministic path still runs Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop, Slice 032 Generated Package MVP, Slice 033 Visible Generated Playable Preview and runtime-backed generated microgame evidence before proving multiple seed/preset variants start runtime, advance runtime-owned goal progress, resolve challenge/reward/completion evidence and preserve runtime snapshot evidence without broad runtime or package redesign.
 
 Next practical step:
-Manual Microgame Loop Verification: launch the WinForms app, open Runtime Preview, press `Generate Preview`, press `Start`, then manually confirm the active goal, objective, interaction/challenge, reward and completion state are readable before another Codex feature slice is selected.
+Manual configurable microgame verification in `Runtime Preview`. Do not proceed to another Codex feature slice until the user confirms configurable generated microgames manually.
 
 `GamePackage` — runtime source of truth для готовой игры.
 
