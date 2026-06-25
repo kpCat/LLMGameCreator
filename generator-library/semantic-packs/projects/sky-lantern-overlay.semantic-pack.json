@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "project/sky_lantern_outpost",
+  "layerKind": "project",
+  "source": "generator-library semantic-packs project sky-lantern-outpost",
+  "terms": [
+    {
+      "termId": "quest_motif/recover_cache",
+      "kind": "quest_motif",
+      "label": "Recover lantern cache",
+      "status": "known",
+      "tags": [ "quest", "project_overlay" ],
+      "generationHints": [ "prefer two-step contact and cache composition" ]
+    },
+    {
+      "termId": "tone/ceremonial",
+      "kind": "tone",
+      "label": "Ceremonial",
+      "status": "known",
+      "tags": [ "tone", "project_overlay" ]
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "relation/project/lantern_cache/prefers/two_step_sequence",
+      "sourceTermId": "quest_motif/recover_cache",
+      "relationKind": "prefers_quest_pattern",
+      "targetTermId": "quest_pattern/two_step_sequence",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/project/ceremonial/prefers/completion_response",
+      "sourceTermId": "tone/ceremonial",
+      "relationKind": "prefers_dialogue_intent",
+      "targetTermId": "dialogue/completion_response/default",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/project/lantern_cache/prefers/use_reward",
+      "sourceTermId": "quest_motif/recover_cache",
+      "relationKind": "prefers_interaction_family",
+      "targetTermId": "interaction/use_reward_on_contact",
+      "status": "known"
+    }
+  ]
+}

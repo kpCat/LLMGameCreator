@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "core/base",
+  "layerKind": "core",
+  "source": "generator-library semantic-packs core",
+  "terms": [
+    {
+      "termId": "tone/tense",
+      "kind": "tone",
+      "label": "Tense",
+      "status": "known",
+      "tags": [ "tone" ],
+      "generationHints": [ "prefer readable pressure without external prose generation" ]
+    },
+    {
+      "termId": "tone/hopeful",
+      "kind": "tone",
+      "label": "Hopeful",
+      "status": "known",
+      "tags": [ "tone" ]
+    },
+    {
+      "termId": "item_affordance/quest_item",
+      "kind": "item_affordance",
+      "label": "Quest item",
+      "status": "known",
+      "tags": [ "item", "objective" ]
+    },
+    {
+      "termId": "entity_role/contact",
+      "kind": "entity_role",
+      "label": "Contact",
+      "status": "known",
+      "tags": [ "npc", "quest" ]
+    },
+    {
+      "termId": "location_mood/dangerous",
+      "kind": "location_mood",
+      "label": "Dangerous",
+      "status": "known",
+      "tags": [ "location", "challenge" ]
+    }
+  ],
+  "relations": [
+    {
+      "sourceTermId": "item_affordance/quest_item",
+      "relationKind": "compatible_with",
+      "targetTermId": "entity_role/contact",
+      "status": "known"
+    }
+  ]
+}

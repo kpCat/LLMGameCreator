@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "llm_candidate/unused_suggestions",
+  "layerKind": "llm_candidate",
+  "source": "generator-library semantic-packs llm candidate example",
+  "terms": [
+    {
+      "termId": "item_affordance/dream_key",
+      "kind": "item_affordance",
+      "label": "Dream key",
+      "status": "candidate",
+      "tags": [ "untrusted", "llm_suggested" ]
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "relation/llm_candidate/dream_key/prefers/use_reward",
+      "sourceTermId": "item_affordance/dream_key",
+      "relationKind": "prefers_interaction_family",
+      "targetTermId": "interaction/use_reward_on_contact",
+      "status": "candidate"
+    }
+  ]
+}

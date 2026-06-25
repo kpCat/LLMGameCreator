@@ -16,6 +16,10 @@ public sealed record SemanticCatalogTerm
     public string Label { get; init; } = string.Empty;
     public string Status { get; init; } = SemanticTermStatuses.Candidate;
     public IReadOnlyList<string> Aliases { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> Tags { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> GenerationHints { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> Constraints { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> LayerIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> SourceArtifactIds { get; init; } = Array.Empty<string>();
     public string Notes { get; init; } = string.Empty;
 }
@@ -27,6 +31,8 @@ public sealed record SemanticCatalogRelation
     public string RelationKind { get; init; } = string.Empty;
     public string TargetTermId { get; init; } = string.Empty;
     public string Status { get; init; } = SemanticTermStatuses.Candidate;
+    public IReadOnlyList<string> Tags { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> LayerIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> SourceArtifactIds { get; init; } = Array.Empty<string>();
 }
 

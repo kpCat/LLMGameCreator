@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "genre/trade_caravan",
+  "layerKind": "genre",
+  "source": "generator-library semantic-packs genre trade-caravan",
+  "terms": [
+    {
+      "termId": "quest_motif/deliver_token",
+      "kind": "quest_motif",
+      "label": "Deliver token",
+      "status": "known",
+      "tags": [ "quest", "trade" ]
+    },
+    {
+      "termId": "tone/pragmatic",
+      "kind": "tone",
+      "label": "Pragmatic",
+      "status": "known",
+      "tags": [ "tone", "trade" ]
+    },
+    {
+      "termId": "entity_role/broker",
+      "kind": "entity_role",
+      "label": "Broker",
+      "status": "known",
+      "tags": [ "npc", "trade" ]
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "relation/trade/deliver_token/prefers/deliver_reward",
+      "sourceTermId": "quest_motif/deliver_token",
+      "relationKind": "prefers_quest_pattern",
+      "targetTermId": "quest_pattern/deliver_reward_token",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/trade/pragmatic/prefers/bargain",
+      "sourceTermId": "tone/pragmatic",
+      "relationKind": "prefers_dialogue_intent",
+      "targetTermId": "dialogue/bargain_reward/default",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/trade/broker/prefers/talk_contact",
+      "sourceTermId": "entity_role/broker",
+      "relationKind": "prefers_interaction_family",
+      "targetTermId": "interaction/talk_contact",
+      "status": "known"
+    }
+  ]
+}

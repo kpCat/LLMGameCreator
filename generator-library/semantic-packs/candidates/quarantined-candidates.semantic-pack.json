@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "imported_candidate/rumor_candidates",
+  "layerKind": "imported_candidate",
+  "source": "generator-library semantic-packs imported candidate",
+  "terms": [
+    {
+      "termId": "quest_motif/whispered_prophecy",
+      "kind": "quest_motif",
+      "label": "Whispered prophecy",
+      "status": "candidate",
+      "tags": [ "untrusted", "candidate" ]
+    },
+    {
+      "termId": "tone/prophetic",
+      "kind": "tone",
+      "label": "Prophetic",
+      "status": "candidate",
+      "tags": [ "untrusted", "candidate" ]
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "relation/candidate/prophecy/prefers/fetch_cache",
+      "sourceTermId": "quest_motif/whispered_prophecy",
+      "relationKind": "prefers_quest_pattern",
+      "targetTermId": "quest_pattern/fetch_item_cache",
+      "status": "candidate"
+    }
+  ]
+}

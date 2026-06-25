@@ -67,6 +67,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/AGENT_CONTEXT_BUDGET_POLICY.md` | Compact read-first policy for current Codex slices and goal handoffs. |
 | `docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md` | Post-Goal-003 architecture boundaries: C# primitives, data/rule packs, Lua-like declarations, LLM role and Runtime Preview limits. |
 | `docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md` | Semantic-pack layering, RAG authoring role and compiled semantic catalog direction. |
+| `docs/SEMANTIC_PACK_CONTRACT_V1.md` | Accepted Goal 005 layered semantic-pack contract, precedence, candidate quarantine and relation allow-list. |
 | `docs/OPEN_DESIGN_QUESTIONS.md` | Open strategic questions to answer through bounded experiments instead of ad hoc slice drift. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Full game generation meaning, ownership boundaries and long-term target architecture. |
 | `docs/GAME_GENERATION_CAPABILITY_MATRIX.md` | Capability domains, priorities and acceptance criteria. |
@@ -84,12 +85,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-manual_quest_dialog_interaction_family_verification
+semantic_guided_composition_artifact_verification
 ```
 
 Allowed next sequence:
 
-1. Manual quest/dialog/interaction family verification after Goal 004 family acceptance.
+1. Semantic-guided composition artifact verification after Goal 005 acceptance.
 
 Kill criterion:
 

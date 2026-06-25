@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "genre/wildland_frontier",
+  "layerKind": "genre",
+  "source": "generator-library semantic-packs genre wildland-frontier",
+  "terms": [
+    {
+      "termId": "quest_motif/recover_cache",
+      "kind": "quest_motif",
+      "label": "Recover cache",
+      "status": "known",
+      "tags": [ "quest", "survival" ]
+    },
+    {
+      "termId": "tone/urgent",
+      "kind": "tone",
+      "label": "Urgent",
+      "status": "known",
+      "tags": [ "tone" ]
+    },
+    {
+      "termId": "location_mood/overgrown_ruins",
+      "kind": "location_mood",
+      "label": "Overgrown ruins",
+      "status": "known",
+      "tags": [ "biome", "ruins" ]
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "relation/wildland/recover_cache/prefers/recover_from_encounter",
+      "sourceTermId": "quest_motif/recover_cache",
+      "relationKind": "prefers_quest_pattern",
+      "targetTermId": "quest_pattern/recover_from_encounter",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/wildland/urgent/prefers/warn",
+      "sourceTermId": "tone/urgent",
+      "relationKind": "prefers_dialogue_intent",
+      "targetTermId": "dialogue/warn_threaten/default",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/wildland/ruins/prefers/resolve_challenge",
+      "sourceTermId": "location_mood/overgrown_ruins",
+      "relationKind": "prefers_interaction_family",
+      "targetTermId": "interaction/resolve_challenge",
+      "status": "known"
+    }
+  ]
+}

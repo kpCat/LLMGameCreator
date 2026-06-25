@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "genre/gothic_mystery",
+  "layerKind": "genre",
+  "source": "generator-library semantic-packs genre gothic-mystery",
+  "terms": [
+    {
+      "termId": "quest_motif/investigate_marker",
+      "kind": "quest_motif",
+      "label": "Investigate marker",
+      "status": "known",
+      "tags": [ "quest", "mystery" ]
+    },
+    {
+      "termId": "tone/bleak",
+      "kind": "tone",
+      "label": "Bleak",
+      "status": "known",
+      "tags": [ "tone" ]
+    },
+    {
+      "termId": "location_mood/haunted_marker",
+      "kind": "location_mood",
+      "label": "Haunted marker",
+      "status": "known",
+      "tags": [ "location", "inspectable" ]
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "relation/gothic/investigate_marker/prefers/interact_object",
+      "sourceTermId": "quest_motif/investigate_marker",
+      "relationKind": "prefers_quest_pattern",
+      "targetTermId": "quest_pattern/interact_with_object",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/gothic/bleak/prefers/ask_about_quest",
+      "sourceTermId": "tone/bleak",
+      "relationKind": "prefers_dialogue_intent",
+      "targetTermId": "dialogue/ask_about_quest/default",
+      "status": "known"
+    },
+    {
+      "relationId": "relation/gothic/haunted_marker/prefers/inspect_marker",
+      "sourceTermId": "location_mood/haunted_marker",
+      "relationKind": "prefers_interaction_family",
+      "targetTermId": "interaction/inspect_marker",
+      "status": "known"
+    }
+  ]
+}

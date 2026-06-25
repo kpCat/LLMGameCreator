@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "semantic_pack_contract_v1",
+  "layerId": "project/conflicting_overlay",
+  "layerKind": "project",
+  "source": "generator-library semantic-packs project conflict example",
+  "terms": [
+    {
+      "termId": "tone/hopeful",
+      "kind": "tone",
+      "label": "Hopeful",
+      "status": "known",
+      "tags": [ "tone", "conflict_fixture" ]
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "relation/conflict/hopeful/excludes/bleak",
+      "sourceTermId": "tone/hopeful",
+      "relationKind": "excludes",
+      "targetTermId": "tone/bleak",
+      "status": "known"
+    }
+  ]
+}

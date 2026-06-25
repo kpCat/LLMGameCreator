@@ -1,12 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 004 Rule-Pack Driven Quest/Dialog/Interaction Families  
+Updated by: Goal 005 Layered Semantic Packs And Semantic-Guided Composition  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants. Goal 002 manual configurable verification is recorded as passed based on the user's report before Goal 003. Goal 003 adds automated scenario acceptance and a declaration-only extension rule pack spine, proves a data-only inventory objective/reward variation, rejects invalid extension declarations, and stops at manual extension spine verification. Product Slice 048 consolidates the post-Goal-003 strategy documents and links them from the current handoff without starting a new feature goal. Goal 004 records the user's manual extension spine verification as passed, adds compact agent context budget policy, and proves quest/dialog/interaction family variation through data/rule-pack declarations and deterministic headless acceptance.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants. Goal 002 manual configurable verification is recorded as passed based on the user's report before Goal 003. Goal 003 adds automated scenario acceptance and a declaration-only extension rule pack spine, proves a data-only inventory objective/reward variation, rejects invalid extension declarations, and stops at manual extension spine verification. Product Slice 048 consolidates the post-Goal-003 strategy documents and links them from the current handoff without starting a new feature goal. Goal 004 records the user's manual extension spine verification as passed, adds compact agent context budget policy, and proves quest/dialog/interaction family variation through data/rule-pack declarations and deterministic headless acceptance. Manual Goal 004 quest/dialog/interaction family verification is recorded as passed based on the user's artifact-review report before Goal 005. Goal 005 completes S054-S058 by defining `semantic_pack_contract_v1`, compiling layered semantic packs with `project > genre > core` precedence, quarantining imported/LLM candidates, adding compact reference packs, and proving semantic-guided quest/dialogue/interaction composition through deterministic headless acceptance artifacts.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -35,7 +35,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Manual quest/dialog/interaction family verification after Goal 004 family acceptance.
+1. Semantic-guided composition artifact verification after Goal 005 acceptance.
 
 Kill criterion:
 
@@ -133,10 +133,55 @@ Observed result:
 Recommended next work item:
 
 ```text
-manual_quest_dialog_interaction_family_verification
+semantic_guided_composition_artifact_verification
 ```
 
-Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The next step is manual quest/dialog/interaction family verification; do not proceed to another Codex feature slice until the user confirms it.
+Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The user confirmed `manual_quest_dialog_interaction_family_verification passed` before Goal 005. Goal 005 proves layered semantic packs and semantic-guided composition through deterministic reports under `.llmgc/procedural/semantic-guided-composition/`. The next step is `semantic_guided_composition_artifact_verification`; do not proceed to S059 or another Codex feature slice until the user confirms it.
+
+## Manual Goal 004 Quest/Dialog/Interaction Family Verification
+
+Manual quest/dialog/interaction family verification after Goal 004 is recorded as passed.
+
+State marker:
+
+```text
+manual_quest_dialog_interaction_family_verification: passed
+```
+
+Evidence source: user-reported artifact review before Goal 005.
+
+Observed result:
+
+- distinct quest pattern variants;
+- contextual non-empty dialogue intent output;
+- inspect and resolve_challenge interaction execution;
+- invalid rule-pack rejection;
+- preserved runtime-backed progress, reward and completion;
+- no external LLM/provider/Lua/Unity/media execution.
+
+## Goal 005 Summary
+
+Goal 005: Layered Semantic Packs And Semantic-Guided Composition.
+
+Completed behavior:
+
+- records manual quest/dialog/interaction family verification as passed based on the user's report;
+- adds `docs/SEMANTIC_PACK_CONTRACT_V1.md`;
+- extends existing semantic catalog records with tags, generation hints, constraints and layer provenance;
+- adds an Application-layer semantic layer compiler that validates `semantic_pack_contract_v1`, applies `project > genre > core` precedence, quarantines candidate/deprecated/conflict/invalid declarations, validates relation endpoints and writes deterministic compiled semantic sidecars;
+- adds compact reference packs under `generator-library/semantic-packs/` for core, three genre examples, a project overlay, imported candidates, LLM candidates and a conflict fixture;
+- adds an Application-layer semantic-guided composition harness that consumes the compiled catalog and existing Goal 004 rule-pack ids to select quest pattern, dialogue intent and interaction pattern choices;
+- writes deterministic `.llmgc/procedural/semantic-guided-composition/semantic-guided-composition-report.json`;
+- writes deterministic `.llmgc/procedural/semantic-guided-composition/semantic-guided-composition-report.md`;
+- writes `.llmgc/procedural/semantic-guided-composition/semantic-guided-composition-verification.md`;
+- adds the `semantic-guided-composition` product smoke scenario;
+- did not create S059, add Runtime Preview features, add a semantic editor UI, add RAG/vector DB, download external datasets, run LLM/provider/Lua/Unity/media execution, redesign GamePackage or public runtime contracts, or expand Goal 004 into a larger monolith.
+
+Recorded checks from Goal 005:
+
+- `SemanticCatalog/SemanticGuided/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests` filtered tests: 23/23 passed.
+- `semantic-guided-composition` product smoke: 1/1 passed.
+- `check-all.ps1`: 721/721 tests passed, build 0 warnings / 0 errors.
 
 ## Goal 004 Summary
 

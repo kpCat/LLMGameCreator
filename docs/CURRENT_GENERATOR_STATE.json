@@ -1,23 +1,23 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T20:30:00Z",
+  "updated_at_utc": "2026-06-25T22:30:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 004 rule-pack driven quest/dialog/interaction families completed",
-  "gate_status": "goal_004_completed_manual_quest_dialog_interaction_family_verification_required",
+  "current_phase_title": "Goal 005 layered semantic packs and semantic-guided composition completed",
+  "gate_status": "goal_005_completed_semantic_guided_composition_artifact_verification_required",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "goal_004_rule_pack_driven_quest_dialog_interaction_families",
-  "active_manual_gate": "Manual quest/dialog/interaction family verification is required before any new Codex feature slice.",
-  "current_user_action": "Manually verify quest/dialog/interaction family acceptance artifacts and optional Runtime Preview comparison.",
-  "recommended_next_decision": "Goal 004 proved rule-pack driven quest, dialogue and interaction families through deterministic headless acceptance. Next work is manual_quest_dialog_interaction_family_verification; do not proceed to another Codex feature slice until the user confirms it.",
+  "last_completed_product_slice_id": "goal_005_layered_semantic_packs_and_guided_composition",
+  "active_manual_gate": "Semantic-guided composition artifact verification is required before any new Codex feature slice.",
+  "current_user_action": "Review semantic-guided composition artifacts or hand the generated .llmgc/procedural/semantic-guided-composition folder to an external reviewer.",
+  "recommended_next_decision": "Goal 005 completed S054-S058 and proved layered semantic packs can guide quest, dialogue and interaction composition headlessly. Next work is semantic_guided_composition_artifact_verification; do not start S059 or another Codex feature slice until the user confirms this gate.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "manual_quest_dialog_interaction_family_verification"
+      "semantic_guided_composition_artifact_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -30,7 +30,8 @@
       "runtime_blocker"
     ],
     "goal_003_manual_gate": "manual_extension_spine_verification",
-    "goal_004_manual_gate": "manual_quest_dialog_interaction_family_verification"
+    "goal_004_manual_gate": "manual_quest_dialog_interaction_family_verification",
+    "goal_005_manual_gate": "semantic_guided_composition_artifact_verification"
   },
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
@@ -51,16 +52,27 @@
     "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
   },
   "last_completed_product_slice": {
-    "slice_id": "goal_004_rule_pack_driven_quest_dialog_interaction_families",
-    "title": "Rule-Pack Driven Quest/Dialog/Interaction Families",
-    "completed_at_utc": "2026-06-25T20:30:00Z",
-    "summary": "Goal 004 records manual extension spine verification as passed, adds compact context budget policy, and proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and deterministic headless acceptance reports under .llmgc/procedural/quest-dialog-interaction-families/.",
-    "scenario_id": "quest-dialog-interaction-families",
+    "slice_id": "goal_005_layered_semantic_packs_and_guided_composition",
+    "title": "Layered Semantic Packs and Semantic-Guided Composition",
+    "completed_at_utc": "2026-06-25T22:30:00Z",
+    "summary": "Goal 005 records manual quest/dialog/interaction family verification as passed, defines semantic_pack_contract_v1, compiles layered semantic packs with project > genre > core precedence, ships compact reference packs, and proves deterministic semantic-guided quest/dialogue/interaction composition reports under .llmgc/procedural/semantic-guided-composition/.",
+    "scenario_id": "semantic-guided-composition",
     "checks": [
-      "QuestDialogInteractionFamilyAcceptance filtered tests: 3/3 passed",
-      "quest-dialog-interaction-families product smoke: 1/1 passed",
-      "CurrentGeneratorStateDocsTests filtered tests: 10/10 passed",
-      "check-all.ps1: 716/716 tests passed, build 0 warnings / 0 errors"
+      "SemanticCatalog/SemanticGuided/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 23/23 passed",
+      "semantic-guided-composition product smoke: 1/1 passed",
+      "check-all.ps1: 721/721 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "goal_005_layered_semantic_packs_and_guided_composition": {
+    "slice_id": "goal_005_layered_semantic_packs_and_guided_composition",
+    "title": "Layered Semantic Packs And Semantic-Guided Composition",
+    "completed_at_utc": "2026-06-25T22:30:00Z",
+    "summary": "Goal 005 completed S054-S058: records the Goal 004 manual artifact review as passed, adds docs/SEMANTIC_PACK_CONTRACT_V1.md, compiles core/genre/project semantic layers into a deterministic active catalog, quarantines imported/LLM candidates, ships compact reference packs, and uses compiled semantics to guide quest pattern, dialogue intent and interaction pattern choices through existing Goal 004 rule-pack ids.",
+    "scenario_id": "semantic-guided-composition",
+    "checks": [
+      "SemanticCatalog/SemanticGuided/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 23/23 passed",
+      "semantic-guided-composition product smoke: 1/1 passed",
+      "check-all.ps1: 721/721 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "goal_004_rule_pack_driven_quest_dialog_interaction_families": {
@@ -158,8 +170,21 @@
     "next_action": "rule_pack_driven_quest_dialog_interaction_families"
   },
   "manual_quest_dialog_interaction_family_verification": {
+    "status": "passed",
+    "evidence_source": "user_report_before_goal_005",
+    "observed_result": [
+      "distinct quest pattern variants",
+      "contextual non-empty dialogue intent output",
+      "inspect and resolve_challenge interaction execution",
+      "invalid rule-pack rejection",
+      "preserved runtime-backed progress, reward and completion",
+      "no external LLM/provider/Lua/Unity/media execution"
+    ],
+    "next_action": "layered_semantic_packs_and_guided_composition"
+  },
+  "semantic_guided_composition_artifact_verification": {
     "status": "required",
-    "evidence_source": "pending_user_manual_quest_dialog_interaction_family_check_after_goal_004",
+    "evidence_source": "pending_external_artifact_review_after_goal_005",
     "observed_result": [],
     "next_action": "do_not_start_codex_feature_slice_until_user_confirms_manual_gate"
   },
@@ -189,7 +214,7 @@
     ]
   },
   "allowed_next_codex_task_types": [
-    "manual_quest_dialog_interaction_family_verification"
+    "semantic_guided_composition_artifact_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -210,11 +235,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "manual_quest_dialog_interaction_family_verification",
-  "recommended_next_work_item_title": "Manual quest/dialog/interaction family verification.",
-  "recommended_next_task_file": ".llmgc/procedural/quest-dialog-interaction-families/manual-quest-dialog-interaction-family-verification.md",
+  "recommended_next_work_item": "semantic_guided_composition_artifact_verification",
+  "recommended_next_work_item_title": "Semantic-guided composition artifact verification.",
+  "recommended_next_task_file": ".llmgc/procedural/semantic-guided-composition/semantic-guided-composition-verification.md",
   "candidate_product_vertical_slices": [
-    "Manual quest/dialog/interaction family verification"
+    "Semantic-guided composition artifact verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -226,6 +251,7 @@
     "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
     "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
     "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
+    "docs/SEMANTIC_PACK_CONTRACT_V1.md",
     "docs/AGENT_CONTEXT_BUDGET_POLICY.md",
     "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
     "docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md",
@@ -269,7 +295,9 @@
     "Generated microgame variation acceptance report/manual-verification sidecars",
     "Extension rule pack contract v1 declaration validation",
     "Extension spine scenario report/manual-verification sidecars",
-    "Quest/dialog/interaction family acceptance report/manual-verification sidecars"
+    "Quest/dialog/interaction family acceptance report/manual-verification sidecars",
+    "Layered semantic pack compiler and compiled semantic catalog sidecars",
+    "Semantic-guided composition report/verification sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 004 recommend manual_quest_dialog_interaction_family_verification and do not start another Codex feature slice until the user confirms that manual gate."
+  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 005 recommend semantic_guided_composition_artifact_verification and do not start S059 or another Codex feature slice until the user confirms that manual gate."
 }
