@@ -40,7 +40,8 @@ public sealed class SemanticGuidedCompositionAcceptanceService
         string? projectRootPath = null,
         string? referencePackRootPath = null)
     {
-        var packs = LoadReferencePacks(referencePackRootPath);
+        var loadResult = LoadReferencePacks(referencePackRootPath);
+        var packs = loadResult.Packs;
         var proofPack = QuestDialogInteractionFamilyAcceptanceService.BuildProofPack();
         var validRulePack = _rulePackValidator.Validate(proofPack);
         var acceptedExternalIds = BuildAcceptedExternalIds(proofPack);
@@ -82,6 +83,11 @@ public sealed class SemanticGuidedCompositionAcceptanceService
         var invalidScenario = scenarios.Single(item => item.ScenarioId == "invalid_conflict_rejection");
         var replayStable = scenarios[0].ScenarioHash == repeatedFirst.ScenarioHash;
         var multiSeedStable = multiSeedChecks.All(item => item.Accepted && item.NoDanglingSemanticReferences);
+        var loadSucceeded = !loadResult.Diagnostics.Any(item => item.Severity == SemanticDiagnosticSeverity.Error);
+        var expectedValidSatisfied = scenarios.Where(item => item.ExpectedValid).All(item => item.Accepted);
+        var expectedInvalidRejected = scenarios
+            .Where(item => !item.ExpectedValid)
+            .All(item => !item.Accepted && item.Diagnostics.Any(diagnostic => diagnostic.Severity == SemanticDiagnosticSeverity.Error));
 
         var diagnostics = new List<SemanticGuidedCompositionDiagnostic>
         {
@@ -93,23 +99,31 @@ public sealed class SemanticGuidedCompositionAcceptanceService
             Diagnostic(invalidScenario.Accepted ? "error" : "info", invalidScenario.Accepted ? "semantic_guided.invalid_not_rejected" : "semantic_guided.invalid_rejected", invalidScenario.ScenarioId, "Invalid/conflicting semantic input must be rejected."),
             Diagnostic(goal004.Report.Accepted ? "info" : "error", goal004.Report.Accepted ? "semantic_guided.goal004_preserved" : "semantic_guided.goal004_regressed", "goal_004", "Goal 004 runtime-backed progress, reward and completion evidence is preserved.")
         };
+        diagnostics.AddRange(loadResult.Diagnostics.Select(item => Diagnostic(
+            item.Severity,
+            item.Code,
+            item.Target,
+            item.Message)));
 
         var reportWithoutHash = new SemanticGuidedCompositionReport
         {
-            Accepted = validRulePack.HasErrors == false
+            Accepted = loadSucceeded
+                       && validRulePack.HasErrors == false
                        && goal004.Report.Accepted
                        && selectedSignatures >= 3
                        && replayStable
                        && multiSeedStable
-                       && candidateScenario.Accepted
-                       && !candidateScenario.CandidateLeakageDetected
-                       && !invalidScenario.Accepted
-                       && scenarios.Where(item => item.ExpectedValid).All(item => item.Accepted),
+                       && expectedValidSatisfied
+                       && expectedInvalidRejected,
             ManualGate = "semantic_guided_composition_artifact_verification",
             ScenarioCount = scenarios.Count,
             MeaningfulValidVariantCount = selectedSignatures,
             Goal004RuntimeEvidencePreserved = goal004.Report.Accepted,
             Goal004ReportHash = goal004.Report.DeterministicHash,
+            SemanticSelectedIdsExecutedInRuntime = false,
+            RuntimeEvidenceSource = "semantic_selection_is_generator_level_goal004_runtime_evidence_is_independent_regression",
+            ExpectedValidScenariosAccepted = expectedValidSatisfied,
+            ExpectedInvalidScenariosRejectedByErrors = expectedInvalidRejected,
             RepeatedRunStable = replayStable,
             MultiSeedNoDanglingReferences = multiSeedStable,
             ExternalExecution = new SemanticGuidedExternalExecutionFlags(),
@@ -121,7 +135,7 @@ public sealed class SemanticGuidedCompositionAcceptanceService
                 "quest pattern selection from prefers_quest_pattern relations",
                 "dialogue intent selection from prefers_dialogue_intent relations",
                 "interaction pattern selection from prefers_interaction_family relations",
-                "tone and motif compatibility from active compiled terms",
+                "source-term trace for selected preference relations",
                 "candidate quarantine from imported_candidate and llm_candidate layers"
             ],
             WhatStillRequiresCSharpPrimitive =
@@ -219,7 +233,16 @@ public sealed class SemanticGuidedCompositionAcceptanceService
             .ToList();
         var missingLayers = layerIds.Except(selectedLayers.Select(item => item.LayerId), StringComparer.Ordinal).ToList();
         var compilerResult = _compiler.Compile(selectedLayers, options);
-        var compositionDiagnostics = BuildCompositionDiagnostics(compilerResult);
+        var compositionDiagnostics = BuildCompositionDiagnostics(compilerResult)
+            .Concat(missingLayers.Select(layerId => new SemanticCatalogDiagnostic
+            {
+                Severity = SemanticDiagnosticSeverity.Error,
+                Code = "semantic_guided.missing_layer",
+                SourceArtifactId = request.ScenarioId,
+                Target = layerId,
+                Message = "Semantic scenario references a layer that was not loaded."
+            }))
+            .ToList();
 
         var selectedQuest = SelectTarget(
             compilerResult.Catalog.Relations,
@@ -250,10 +273,15 @@ public sealed class SemanticGuidedCompositionAcceptanceService
                                compilerResult.QuarantinedTerms.Any(item => trace.Any(traceItem =>
                                    string.Equals(traceItem.SourceTermId, item.TermId, StringComparison.Ordinal) ||
                                    string.Equals(traceItem.TargetId, item.TermId, StringComparison.Ordinal)));
-        var expectedValid = request.ScenarioId != "invalid_conflict_rejection";
-        var accepted = expectedValid
-            ? compilerResult.Accepted && noDangling && !candidateLeakage && !rulePackValidation.HasErrors
-            : false;
+        var expectedValid = request.ExpectedValid;
+        var scenarioDiagnostics = SortScenarioDiagnostics(compilerResult.Catalog.Diagnostics.Concat(compositionDiagnostics));
+        var hasErrorDiagnostics = scenarioDiagnostics.Any(item => item.Severity == SemanticDiagnosticSeverity.Error);
+        var accepted = compilerResult.Accepted &&
+                       missingLayers.Count == 0 &&
+                       noDangling &&
+                       !candidateLeakage &&
+                       !rulePackValidation.HasErrors &&
+                       !hasErrorDiagnostics;
 
         var scenarioWithoutHash = new SemanticGuidedCompositionScenario
         {
@@ -269,13 +297,14 @@ public sealed class SemanticGuidedCompositionAcceptanceService
             DiagnosticCount = compilerResult.Catalog.Diagnostics.Count + compositionDiagnostics.Count,
             CandidateLeakageDetected = candidateLeakage,
             NoDanglingSemanticReferences = noDangling,
+            ExpectationMatched = expectedValid ? accepted : !accepted && hasErrorDiagnostics,
             SelectedQuestPatternId = selectedQuest,
             SelectedDialogueIntentId = selectedDialogue,
             SelectedInteractionPatternId = selectedInteraction,
             SelectedSemanticTermIds = trace.Select(item => item.SourceTermId).Distinct(StringComparer.Ordinal).OrderBy(item => item, StringComparer.Ordinal).ToList(),
             Trace = trace,
             CompilerResult = compilerResult,
-            Diagnostics = SortScenarioDiagnostics(compilerResult.Catalog.Diagnostics.Concat(compositionDiagnostics))
+            Diagnostics = scenarioDiagnostics
         };
 
         return scenarioWithoutHash with
@@ -303,6 +332,20 @@ public sealed class SemanticGuidedCompositionAcceptanceService
                     SourceArtifactId = string.Join(",", relation.LayerIds),
                     Target = relation.RelationId,
                     Message = "Active semantic composition contains mutually incompatible terms."
+                });
+            }
+
+            if (relation.RelationKind == SemanticRelationKinds.Requires &&
+                active.Contains(relation.SourceTermId) &&
+                !active.Contains(relation.TargetTermId))
+            {
+                diagnostics.Add(new SemanticCatalogDiagnostic
+                {
+                    Severity = SemanticDiagnosticSeverity.Error,
+                    Code = "semantic_guided.requires_unsatisfied",
+                    SourceArtifactId = string.Join(",", relation.LayerIds),
+                    Target = relation.RelationId,
+                    Message = "Active semantic composition has an unsatisfied requires relation."
                 });
             }
         }
@@ -373,12 +416,12 @@ public sealed class SemanticGuidedCompositionAcceptanceService
             .ToList();
     }
 
-    private IReadOnlyList<SemanticLayerPack> LoadReferencePacks(string? referencePackRootPath)
+    private SemanticLayerPackLoadResult LoadReferencePacks(string? referencePackRootPath)
     {
         var root = string.IsNullOrWhiteSpace(referencePackRootPath)
             ? Path.Combine(FindRepositoryRoot(), "generator-library", "semantic-packs")
             : referencePackRootPath;
-        return _compiler.ReadPacksFromDirectory(root);
+        return _compiler.LoadPacksFromDirectory(root);
     }
 
     private static IReadOnlySet<string> BuildAcceptedExternalIds(QuestDialogInteractionRulePack proofPack) =>
@@ -394,6 +437,7 @@ public sealed class SemanticGuidedCompositionAcceptanceService
         {
             ScenarioId = scenarioId,
             Seed = seed,
+            ExpectedValid = scenarioId != "invalid_conflict_rejection",
             LayerIds = layerIds
         };
 
@@ -451,6 +495,8 @@ public sealed class SemanticGuidedCompositionAcceptanceService
             $"- Scenarios: `{report.ScenarioCount}`",
             $"- Meaningful valid variants: `{report.MeaningfulValidVariantCount}`",
             $"- Goal 004 preserved: `{report.Goal004RuntimeEvidencePreserved.ToString().ToLowerInvariant()}`",
+            $"- Semantic-selected ids executed in runtime: `{report.SemanticSelectedIdsExecutedInRuntime.ToString().ToLowerInvariant()}`",
+            $"- Runtime evidence source: `{report.RuntimeEvidenceSource}`",
             string.Empty,
             "## Scenarios",
             string.Empty
@@ -543,6 +589,7 @@ public sealed record SemanticGuidedScenarioRequest
 {
     public string ScenarioId { get; init; } = string.Empty;
     public string Seed { get; init; } = string.Empty;
+    public bool ExpectedValid { get; init; } = true;
     public IReadOnlyList<string> LayerIds { get; init; } = Array.Empty<string>();
 }
 
@@ -572,6 +619,10 @@ public sealed record SemanticGuidedCompositionReport
     public int MeaningfulValidVariantCount { get; init; }
     public bool Goal004RuntimeEvidencePreserved { get; init; }
     public string Goal004ReportHash { get; init; } = string.Empty;
+    public bool SemanticSelectedIdsExecutedInRuntime { get; init; }
+    public string RuntimeEvidenceSource { get; init; } = string.Empty;
+    public bool ExpectedValidScenariosAccepted { get; init; }
+    public bool ExpectedInvalidScenariosRejectedByErrors { get; init; }
     public bool RepeatedRunStable { get; init; }
     public bool MultiSeedNoDanglingReferences { get; init; }
     public SemanticGuidedExternalExecutionFlags ExternalExecution { get; init; } = new();
@@ -597,6 +648,7 @@ public sealed record SemanticGuidedCompositionScenario
     public int DiagnosticCount { get; init; }
     public bool CandidateLeakageDetected { get; init; }
     public bool NoDanglingSemanticReferences { get; init; }
+    public bool ExpectationMatched { get; init; }
     public string SelectedQuestPatternId { get; init; } = string.Empty;
     public string SelectedDialogueIntentId { get; init; } = string.Empty;
     public string SelectedInteractionPatternId { get; init; } = string.Empty;

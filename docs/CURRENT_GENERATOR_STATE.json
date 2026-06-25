@@ -1,16 +1,16 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T22:30:00Z",
+  "updated_at_utc": "2026-06-25T22:55:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 005 layered semantic packs and semantic-guided composition completed",
-  "gate_status": "goal_005_completed_semantic_guided_composition_artifact_verification_required",
+  "current_phase_title": "Product Slice 058A semantic-guided acceptance correctness hotfix completed",
+  "gate_status": "product_slice_058a_completed_semantic_guided_composition_artifact_verification_required",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "goal_005_layered_semantic_packs_and_guided_composition",
+  "last_completed_product_slice_id": "product_slice_058a_semantic_guided_acceptance_correctness_hotfix",
   "active_manual_gate": "Semantic-guided composition artifact verification is required before any new Codex feature slice.",
   "current_user_action": "Review semantic-guided composition artifacts or hand the generated .llmgc/procedural/semantic-guided-composition folder to an external reviewer.",
-  "recommended_next_decision": "Goal 005 completed S054-S058 and proved layered semantic packs can guide quest, dialogue and interaction composition headlessly. Next work is semantic_guided_composition_artifact_verification; do not start S059 or another Codex feature slice until the user confirms this gate.",
+  "recommended_next_decision": "Product Slice 058A repaired Goal 005 semantic-guided acceptance correctness. Next work remains semantic_guided_composition_artifact_verification; do not start S059, Goal 006 or another Codex feature slice until the user confirms this gate.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
@@ -52,15 +52,27 @@
     "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
   },
   "last_completed_product_slice": {
-    "slice_id": "goal_005_layered_semantic_packs_and_guided_composition",
-    "title": "Layered Semantic Packs and Semantic-Guided Composition",
-    "completed_at_utc": "2026-06-25T22:30:00Z",
-    "summary": "Goal 005 records manual quest/dialog/interaction family verification as passed, defines semantic_pack_contract_v1, compiles layered semantic packs with project > genre > core precedence, ships compact reference packs, and proves deterministic semantic-guided quest/dialogue/interaction composition reports under .llmgc/procedural/semantic-guided-composition/.",
+    "slice_id": "product_slice_058a_semantic_guided_acceptance_correctness_hotfix",
+    "title": "Semantic-Guided Acceptance Correctness Hotfix",
+    "completed_at_utc": "2026-06-25T22:55:00Z",
+    "summary": "Product Slice 058A repairs Goal 005 false-positive acceptance by deriving actual scenario acceptance from compiler, missing-layer, candidate-leakage, rule-pack and composition diagnostics; validates semantic-pack schema and layer-kind identity; prevents conflicted term/relation ids from re-entering active output; reports malformed pack JSON deterministically; and clarifies that semantic-selected ids are generator-level selections while Goal 004 runtime evidence is an independent regression check.",
     "scenario_id": "semantic-guided-composition",
     "checks": [
-      "SemanticCatalog/SemanticGuided/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 23/23 passed",
+      "SemanticLayerCompiler/SemanticGuidedComposition/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 29/29 passed",
       "semantic-guided-composition product smoke: 1/1 passed",
-      "check-all.ps1: 721/721 tests passed, build 0 warnings / 0 errors"
+      "check-all.ps1: 731/731 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "product_slice_058a_semantic_guided_acceptance_correctness_hotfix": {
+    "slice_id": "product_slice_058a_semantic_guided_acceptance_correctness_hotfix",
+    "title": "Semantic-Guided Acceptance Correctness Hotfix",
+    "completed_at_utc": "2026-06-25T22:55:00Z",
+    "summary": "Bounded correctness hotfix after Goal 005. It keeps semantic_guided_composition_artifact_verification as the active gate, does not create S059 or Goal 006, and fixes acceptance/report correctness gaps found by external artifact review.",
+    "scenario_id": "semantic-guided-composition",
+    "checks": [
+      "SemanticLayerCompiler/SemanticGuidedComposition/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 29/29 passed",
+      "semantic-guided-composition product smoke: 1/1 passed",
+      "check-all.ps1: 731/731 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "goal_005_layered_semantic_packs_and_guided_composition": {
@@ -297,7 +309,8 @@
     "Extension spine scenario report/manual-verification sidecars",
     "Quest/dialog/interaction family acceptance report/manual-verification sidecars",
     "Layered semantic pack compiler and compiled semantic catalog sidecars",
-    "Semantic-guided composition report/verification sidecars"
+    "Semantic-guided composition report/verification sidecars",
+    "Semantic-guided acceptance correctness hotfix diagnostics"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 005 recommend semantic_guided_composition_artifact_verification and do not start S059 or another Codex feature slice until the user confirms that manual gate."
+  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Product Slice 058A keep recommending semantic_guided_composition_artifact_verification and do not start S059, Goal 006 or another Codex feature slice until the user confirms that manual gate."
 }

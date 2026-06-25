@@ -62,6 +62,8 @@ public sealed class SemanticLayerCompilerService
         var quarantinedTerms = new Dictionary<string, SemanticCatalogTerm>(StringComparer.Ordinal);
         var activeRelations = new Dictionary<string, SemanticCatalogRelation>(StringComparer.Ordinal);
         var quarantinedRelations = new Dictionary<string, SemanticCatalogRelation>(StringComparer.Ordinal);
+        var conflictedTermIds = new HashSet<string>(StringComparer.Ordinal);
+        var conflictedRelationIds = new HashSet<string>(StringComparer.Ordinal);
         var layerSummaries = new List<SemanticLayerSummary>();
 
         foreach (var layer in orderedLayers)
@@ -85,6 +87,20 @@ public sealed class SemanticLayerCompilerService
                     quarantinedTerms[term.TermId] = MergeTerm(
                         quarantinedTerms.TryGetValue(term.TermId, out var quarantinedExisting) ? quarantinedExisting : null,
                         term);
+                    continue;
+                }
+
+                if (conflictedTermIds.Contains(term.TermId))
+                {
+                    diagnostics.Add(Diagnostic(
+                        SemanticDiagnosticSeverity.Error,
+                        "semantic_layer.term_previously_conflicted",
+                        layer.LayerId,
+                        term.TermId,
+                        "A term id already marked conflicted cannot re-enter the active compiled catalog."));
+                    quarantinedTerms[term.TermId] = MergeTerm(
+                        quarantinedTerms.TryGetValue(term.TermId, out var existingConflict) ? existingConflict : null,
+                        term with { Status = SemanticTermStatuses.Conflict });
                     continue;
                 }
 
@@ -113,16 +129,16 @@ public sealed class SemanticLayerCompilerService
                     if (Precedence[layer.LayerKind] == activeExisting.Precedence &&
                         !IsIdenticalDeclaration(activeExisting.Term, term))
                     {
-                    diagnostics.Add(Diagnostic(
-                        SemanticDiagnosticSeverity.Error,
-                        "semantic_layer.term_conflict",
-                        layer.LayerId,
-                        term.TermId,
-                        "Two same-precedence active declarations disagree."));
-                    quarantinedTerms[term.TermId] = term with
-                    {
-                        Status = SemanticTermStatuses.Conflict
-                    };
+                        diagnostics.Add(Diagnostic(
+                            SemanticDiagnosticSeverity.Error,
+                            "semantic_layer.term_conflict",
+                            layer.LayerId,
+                            term.TermId,
+                            "Two same-precedence active declarations disagree."));
+                        conflictedTermIds.Add(term.TermId);
+                        quarantinedTerms[term.TermId] = MergeTerm(
+                            activeExisting.Term with { Status = SemanticTermStatuses.Conflict },
+                            term with { Status = SemanticTermStatuses.Conflict });
                         activeTerms.Remove(term.TermId);
                         continue;
                     }
@@ -145,6 +161,18 @@ public sealed class SemanticLayerCompilerService
                 if (!IsActiveLayer(layer) || !ActiveStatuses.Contains(relation.Status))
                 {
                     quarantinedRelations[relation.RelationId] = relation;
+                    continue;
+                }
+
+                if (conflictedRelationIds.Contains(relation.RelationId))
+                {
+                    diagnostics.Add(Diagnostic(
+                        SemanticDiagnosticSeverity.Error,
+                        "semantic_layer.relation_previously_conflicted",
+                        layer.LayerId,
+                        relation.RelationId,
+                        "A relation id already marked conflicted cannot re-enter the active compiled catalog."));
+                    quarantinedRelations[relation.RelationId] = relation with { Status = SemanticTermStatuses.Conflict };
                     continue;
                 }
 
@@ -174,6 +202,9 @@ public sealed class SemanticLayerCompilerService
                             layer.LayerId,
                             relation.RelationId,
                             "Two active semantic relations share an id but disagree."));
+                        conflictedRelationIds.Add(relation.RelationId);
+                        quarantinedRelations[relation.RelationId] = relation with { Status = SemanticTermStatuses.Conflict };
+                        activeRelations.Remove(relation.RelationId);
                     }
 
                     continue;
@@ -258,26 +289,83 @@ public sealed class SemanticLayerCompilerService
         };
     }
 
-    public IReadOnlyList<SemanticLayerPack> ReadPacksFromDirectory(string directoryPath)
+    public SemanticLayerPackLoadResult LoadPacksFromDirectory(string directoryPath)
     {
         if (string.IsNullOrWhiteSpace(directoryPath) || !Directory.Exists(directoryPath))
         {
-            return Array.Empty<SemanticLayerPack>();
+            return new SemanticLayerPackLoadResult();
         }
 
-        return Directory.EnumerateFiles(directoryPath, "*.json", SearchOption.AllDirectories)
+        var packs = new List<SemanticLayerPack>();
+        var diagnostics = new List<SemanticCatalogDiagnostic>();
+        foreach (var filePath in Directory.EnumerateFiles(directoryPath, "*.json", SearchOption.AllDirectories)
             .OrderBy(item => item, StringComparer.OrdinalIgnoreCase)
-            .ThenBy(item => item, StringComparer.Ordinal)
-            .Select(File.ReadAllText)
-            .Select(json => JsonSerializer.Deserialize<SemanticLayerPack>(json, JsonOptions))
-            .Where(item => item != null)
-            .Cast<SemanticLayerPack>()
-            .ToList();
+            .ThenBy(item => item, StringComparer.Ordinal))
+        {
+            var relativePath = Path.GetRelativePath(directoryPath, filePath).Replace('\\', '/');
+            try
+            {
+                var pack = JsonSerializer.Deserialize<SemanticLayerPack>(File.ReadAllText(filePath), JsonOptions);
+                if (pack == null)
+                {
+                    diagnostics.Add(Diagnostic(
+                        SemanticDiagnosticSeverity.Error,
+                        "semantic_layer.pack_json_empty",
+                        relativePath,
+                        relativePath,
+                        "Semantic pack JSON did not contain an object."));
+                    continue;
+                }
+
+                packs.Add(pack);
+            }
+            catch (JsonException)
+            {
+                diagnostics.Add(Diagnostic(
+                    SemanticDiagnosticSeverity.Error,
+                    "semantic_layer.pack_json_malformed",
+                    relativePath,
+                    relativePath,
+                    "Semantic pack JSON is malformed."));
+            }
+        }
+
+        return new SemanticLayerPackLoadResult
+        {
+            Packs = packs,
+            Diagnostics = diagnostics
+                .OrderBy(item => item.Code, StringComparer.Ordinal)
+                .ThenBy(item => item.SourceArtifactId, StringComparer.Ordinal)
+                .ThenBy(item => item.Target, StringComparer.Ordinal)
+                .ToList()
+        };
+    }
+
+    public IReadOnlyList<SemanticLayerPack> ReadPacksFromDirectory(string directoryPath)
+    {
+        var result = LoadPacksFromDirectory(directoryPath);
+        if (result.Diagnostics.Any(item => item.Severity == SemanticDiagnosticSeverity.Error))
+        {
+            throw new InvalidDataException("Semantic pack directory contains malformed pack files.");
+        }
+
+        return result.Packs;
     }
 
     private static bool ValidateLayer(SemanticLayerPack layer, ICollection<SemanticCatalogDiagnostic>? diagnostics)
     {
         var valid = true;
+        if (!string.Equals(layer.SchemaVersion, "semantic_pack_contract_v1", StringComparison.Ordinal))
+        {
+            diagnostics?.Add(Diagnostic(
+                SemanticDiagnosticSeverity.Error,
+                "semantic_layer.invalid_schema_version",
+                layer.LayerId,
+                "schemaVersion",
+                "Layer schemaVersion must be semantic_pack_contract_v1."));
+            valid = false;
+        }
+
         if (!TryNormalizeId(layer.LayerId, out _) || layer.LayerId.Split('/').Length != 2)
         {
             diagnostics?.Add(Diagnostic(
@@ -287,6 +375,20 @@ public sealed class SemanticLayerCompilerService
                 "layerId",
                 "Layer id must be a safe two-segment id such as core/base."));
             valid = false;
+        }
+        else
+        {
+            var expectedKind = layer.LayerId[..layer.LayerId.IndexOf('/')];
+            if (!string.Equals(expectedKind, layer.LayerKind, StringComparison.Ordinal))
+            {
+                diagnostics?.Add(Diagnostic(
+                    SemanticDiagnosticSeverity.Error,
+                    "semantic_layer.layer_kind_prefix_mismatch",
+                    layer.LayerId,
+                    "layerKind",
+                    "Layer id prefix must match layer kind."));
+                valid = false;
+            }
         }
 
         if (!SemanticLayerKinds.Supported.Contains(layer.LayerKind))
@@ -714,6 +816,12 @@ public sealed record SemanticLayerCompilerWriteResult
     public string OutputDirectoryPath { get; init; } = string.Empty;
     public string CompiledJsonPath { get; init; } = string.Empty;
     public string CompiledMarkdownPath { get; init; } = string.Empty;
+}
+
+public sealed record SemanticLayerPackLoadResult
+{
+    public IReadOnlyList<SemanticLayerPack> Packs { get; init; } = Array.Empty<SemanticLayerPack>();
+    public IReadOnlyList<SemanticCatalogDiagnostic> Diagnostics { get; init; } = Array.Empty<SemanticCatalogDiagnostic>();
 }
 
 public sealed record SemanticLayerSummary

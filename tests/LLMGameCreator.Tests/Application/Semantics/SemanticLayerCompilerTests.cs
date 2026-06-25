@@ -68,6 +68,130 @@ public sealed class SemanticLayerCompilerTests
     }
 
     [Fact]
+    public void RejectsWrongSchemaVersionAndLayerKindPrefixMismatch()
+    {
+        var service = new SemanticLayerCompilerService();
+
+        var result = service.Compile(
+        [
+            new SemanticLayerPack
+            {
+                SchemaVersion = "semantic_pack_v0",
+                LayerId = "core/base",
+                LayerKind = SemanticLayerKinds.Core,
+                Source = "unit-test",
+                Terms = [Term("tone/valid", "tone", "Valid")]
+            },
+            new SemanticLayerPack
+            {
+                LayerId = "genre/mismatch",
+                LayerKind = SemanticLayerKinds.Project,
+                Source = "unit-test",
+                Terms = [Term("tone/other", "tone", "Other")]
+            }
+        ]);
+
+        Assert.False(result.Accepted);
+        Assert.Contains(result.Catalog.Diagnostics, item => item.Code == "semantic_layer.invalid_schema_version");
+        Assert.Contains(result.Catalog.Diagnostics, item => item.Code == "semantic_layer.layer_kind_prefix_mismatch");
+    }
+
+    [Fact]
+    public void ThreeSamePrecedenceConflictingTermDeclarationsCannotReactivateTerm()
+    {
+        var service = new SemanticLayerCompilerService();
+
+        var result = service.Compile(
+        [
+            Layer("genre/one", SemanticLayerKinds.Genre, Term("tone/shared", "tone", "Shared one")),
+            Layer("genre/three", SemanticLayerKinds.Genre, Term("tone/shared", "tone", "Shared three")),
+            Layer("genre/two", SemanticLayerKinds.Genre, Term("tone/shared", "tone", "Shared two"))
+        ]);
+
+        Assert.False(result.Accepted);
+        Assert.DoesNotContain(result.Catalog.Terms, item => item.TermId == "tone/shared");
+        Assert.Contains(result.QuarantinedTerms, item => item.TermId == "tone/shared" && item.Status == SemanticTermStatuses.Conflict);
+        Assert.Contains(result.Catalog.Diagnostics, item => item.Code == "semantic_layer.term_conflict");
+        Assert.Contains(result.Catalog.Diagnostics, item => item.Code == "semantic_layer.term_previously_conflicted");
+    }
+
+    [Fact]
+    public void ConflictingRelationIdCannotRemainActive()
+    {
+        var service = new SemanticLayerCompilerService();
+
+        var result = service.Compile(
+        [
+            new SemanticLayerPack
+            {
+                LayerId = "core/base",
+                LayerKind = SemanticLayerKinds.Core,
+                Source = "unit-test",
+                Terms =
+                [
+                    Term("tone/source", "tone", "Source"),
+                    Term("tone/target_a", "tone", "Target A"),
+                    Term("tone/target_b", "tone", "Target B")
+                ]
+            },
+            new SemanticLayerPack
+            {
+                LayerId = "genre/a",
+                LayerKind = SemanticLayerKinds.Genre,
+                Source = "unit-test",
+                Relations =
+                [
+                    Relation("relation/shared", "tone/source", SemanticRelationKinds.CompatibleWith, "tone/target_a")
+                ]
+            },
+            new SemanticLayerPack
+            {
+                LayerId = "genre/b",
+                LayerKind = SemanticLayerKinds.Genre,
+                Source = "unit-test",
+                Relations =
+                [
+                    Relation("relation/shared", "tone/source", SemanticRelationKinds.CompatibleWith, "tone/target_b")
+                ]
+            },
+            new SemanticLayerPack
+            {
+                LayerId = "genre/c",
+                LayerKind = SemanticLayerKinds.Genre,
+                Source = "unit-test",
+                Relations =
+                [
+                    Relation("relation/shared", "tone/source", SemanticRelationKinds.CompatibleWith, "tone/target_a")
+                ]
+            }
+        ]);
+
+        Assert.False(result.Accepted);
+        Assert.DoesNotContain(result.Catalog.Relations, item => item.RelationId == "relation/shared");
+        Assert.Contains(result.QuarantinedRelations, item => item.RelationId == "relation/shared" && item.Status == SemanticTermStatuses.Conflict);
+        Assert.Contains(result.Catalog.Diagnostics, item => item.Code == "semantic_layer.relation_conflict");
+        Assert.Contains(result.Catalog.Diagnostics, item => item.Code == "semantic_layer.relation_previously_conflicted");
+    }
+
+    [Fact]
+    public void MalformedJsonProducesDeterministicDiagnosticsAndKeepsValidNeighbor()
+    {
+        using var temp = new TempDirectory();
+        File.WriteAllText(Path.Combine(temp.Path, "valid.json"), JsonSerializer.Serialize(Layer("core/base", SemanticLayerKinds.Core, Term("tone/valid", "tone", "Valid"))));
+        File.WriteAllText(Path.Combine(temp.Path, "bad.json"), "{ not json");
+        var service = new SemanticLayerCompilerService();
+
+        var result = service.LoadPacksFromDirectory(temp.Path);
+
+        Assert.Single(result.Packs);
+        Assert.Contains(result.Packs, item => item.LayerId == "core/base");
+        var diagnostic = Assert.Single(result.Diagnostics, item => item.Code == "semantic_layer.pack_json_malformed");
+        Assert.Equal("bad.json", diagnostic.Target);
+        Assert.DoesNotContain(temp.Path, diagnostic.Target);
+        Assert.DoesNotContain(temp.Path, diagnostic.SourceArtifactId);
+    }
+
+    [Fact]
     public async Task WriteCreatesCompiledSemanticPackArtifacts()
     {
         using var temp = new TempDirectory();
@@ -102,6 +226,19 @@ public sealed class SemanticLayerCompilerTests
             Label = label,
             Status = status,
             Tags = tags ?? Array.Empty<string>()
+        };
+
+    private static SemanticLayerRelationDeclaration Relation(
+        string id,
+        string source,
+        string kind,
+        string target) => new()
+        {
+            RelationId = id,
+            SourceTermId = source,
+            RelationKind = kind,
+            TargetTermId = target,
+            Status = SemanticTermStatuses.Known
         };
 
     private sealed class TempDirectory : IDisposable
