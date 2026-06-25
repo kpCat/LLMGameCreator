@@ -59,6 +59,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/NEXT_PRODUCT_SLICE_040_RUNTIME_MICROGAME_STATE_ACCEPTANCE_TASK.md` | Completed Product Slice 040 task: Runtime Microgame State Acceptance. |
 | `docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md` | Completed Product Slice 041 task: Generation Presets and Options. |
 | `docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md` | Completed Product Slice 042 task: Microgame Variation Acceptance. |
+| `docs/GOAL_007_CONNECTED_WORLD_TRAVEL_AND_DETERMINISTIC_WORLD_STATE.md` | Completed Goal 007 task: bounded connected regions, deterministic travel, runtime-owned world state and chunk delta evidence. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
@@ -85,12 +86,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-semantic_selected_runtime_composition_artifact_verification
+connected_world_travel_state_artifact_verification
 ```
 
 Allowed next sequence:
 
-1. Semantic-selected runtime composition artifact verification after Goal 006 acceptance.
+1. Connected world travel state artifact verification after Goal 007 artifact review.
 
 Kill criterion:
 

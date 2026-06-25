@@ -1,23 +1,23 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T23:45:00Z",
+  "updated_at_utc": "2026-06-26T00:30:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 006 semantic-selected runtime composition S063A correctness hotfix completed",
-  "gate_status": "goal_006_s063a_correctness_hotfix_completed_semantic_selected_runtime_composition_artifact_verification_required",
+  "current_phase_title": "Goal 007 connected world travel and deterministic state completed",
+  "gate_status": "goal_007_connected_world_travel_state_artifact_verification_required",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_063a_semantic_runtime_composition_correctness_hotfix",
-  "active_manual_gate": "Semantic-selected runtime composition artifact verification is the next stop marker before any S064 or Goal 007 work.",
-  "current_user_action": "Review or hand off the generated .llmgc/procedural/semantic-runtime-composition folder; do not start S064 or Goal 007 in this run.",
-  "recommended_next_decision": "Goal 006 S063A correctness hotfix repaired semantic runtime composition binding/runtime false positives: selected/objective-required interactions are materialized, exact package bindings are audited before runtime, adapter evidence is structurally validated, and cross-variant isolation checks state-specific keys. Stop at semantic_selected_runtime_composition_artifact_verification; do not create S064 or start Goal 007 without a new explicit user request.",
+  "last_completed_product_slice_id": "goal_007_connected_world_travel_and_deterministic_state",
+  "active_manual_gate": "Connected world travel state artifact verification is the next stop marker after Goal 007.",
+  "current_user_action": "Review or hand off the generated .llmgc/procedural/connected-world-travel folder; do not mark connected_world_travel_state_artifact_verification passed until the artifact review accepts it.",
+  "recommended_next_decision": "Goal 007 records semantic_selected_runtime_composition_artifact_verification as passed from the user prompt and proves bounded connected regions, exact region/map bindings, deterministic runtime-owned travel state, save/load restoration, bounded chunk evidence and invalid scenario rejection through headless artifacts. Stop at connected_world_travel_state_artifact_verification; do not start any post-Goal-007 work until this gate is reviewed.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "semantic_selected_runtime_composition_artifact_verification"
+      "connected_world_travel_state_artifact_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -32,7 +32,8 @@
     "goal_003_manual_gate": "manual_extension_spine_verification",
     "goal_004_manual_gate": "manual_quest_dialog_interaction_family_verification",
     "goal_005_manual_gate": "semantic_guided_composition_artifact_verification",
-    "goal_006_manual_gate": "semantic_selected_runtime_composition_artifact_verification"
+    "goal_006_manual_gate": "semantic_selected_runtime_composition_artifact_verification",
+    "goal_007_manual_gate": "connected_world_travel_state_artifact_verification"
   },
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
@@ -53,15 +54,27 @@
     "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_063a_semantic_runtime_composition_correctness_hotfix",
-    "title": "Semantic Runtime Composition Correctness Hotfix",
-    "completed_at_utc": "2026-06-25T23:45:00Z",
-    "summary": "Bounded correctness hotfix for Goal 006 S059-S063. It repairs false-positive semantic runtime composition acceptance by materializing every objective-required interaction, replacing suffixless placeholder bindings with exact package ids, auditing materialized package bindings before runtime, validating structured runtime command/objective/state evidence, requiring reward/completion deltas and save/load evidence, and proving cross-variant isolation beyond distinct hashes. It keeps semantic_selected_runtime_composition_artifact_verification as the only active gate and does not create S064 or start Goal 007.",
-    "scenario_id": "semantic-runtime-composition",
+    "slice_id": "goal_007_connected_world_travel_and_deterministic_state",
+    "title": "Connected World Travel And Deterministic World State",
+    "completed_at_utc": "2026-06-26T00:30:00Z",
+    "summary": "Goal 007 completes S064-S070 by recording semantic_selected_runtime_composition_artifact_verification as passed from the user prompt, adding a deterministic connected-world travel acceptance service, proving four valid connected-world scenarios with exact region-to-map bindings and runtime-owned travel/world/chunk state, rejecting four invalid graph/reference/chunk/source-delta scenarios by validator diagnostics before runtime, and stopping at connected_world_travel_state_artifact_verification. It does not change public GamePackage schema, start post-Goal-007 work, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
+    "scenario_id": "connected-world-travel",
     "checks": [
-      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 36/36 passed",
-      "semantic-runtime-composition product smoke: 1/1 passed",
-      "check-all.ps1: 740/740 tests passed, build 0 warnings / 0 errors"
+      "ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
+      "connected-world-travel product smoke: 1/1 passed",
+      "check-all.ps1: 751/751 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "goal_007_connected_world_travel_and_deterministic_state": {
+    "slice_id": "goal_007_connected_world_travel_and_deterministic_state",
+    "title": "Connected World Travel And Deterministic World State",
+    "completed_at_utc": "2026-06-26T00:30:00Z",
+    "summary": "S064-S070 add headless deterministic connected-world acceptance artifacts under .llmgc/procedural/connected-world-travel. The goal records Goal 006 artifact verification as passed from the user prompt, builds region graph/profile/map-binding/chunk sidecars outside public package schema, executes travel through existing serializable GameRuntimeState ownership, preserves exact state through save/load, persists runtime-only chunk deltas, rejects invalid scenarios by stable diagnostics, and leaves connected_world_travel_state_artifact_verification as the active manual gate.",
+    "scenario_id": "connected-world-travel",
+    "checks": [
+      "ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
+      "connected-world-travel product smoke: 1/1 passed",
+      "check-all.ps1: 751/751 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "product_slice_063a_semantic_runtime_composition_correctness_hotfix": {
@@ -228,10 +241,18 @@
     "next_action": "semantic_selected_runtime_composition"
   },
   "semantic_selected_runtime_composition_artifact_verification": {
+    "status": "passed",
+    "evidence_source": "user_prompt_before_goal_007",
+    "observed_result": [
+      "semantic_selected_runtime_composition_artifact_verification passed"
+    ],
+    "next_action": "goal_007_connected_world_travel_and_deterministic_state"
+  },
+  "connected_world_travel_state_artifact_verification": {
     "status": "required",
-    "evidence_source": "pending_external_artifact_review_after_goal_006",
+    "evidence_source": "pending_external_artifact_review_after_goal_007",
     "observed_result": [],
-    "next_action": "do_not_start_s064_or_goal_007_without_new_explicit_user_request"
+    "next_action": "do_not_start_post_goal_007_work_without_new_explicit_user_request"
   },
   "extension_rule_pack_contract_v1": {
     "document": "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
@@ -259,7 +280,7 @@
     ]
   },
   "allowed_next_codex_task_types": [
-    "semantic_selected_runtime_composition_artifact_verification"
+    "connected_world_travel_state_artifact_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -280,11 +301,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "semantic_selected_runtime_composition_artifact_verification",
-  "recommended_next_work_item_title": "Semantic-selected runtime composition artifact verification.",
-  "recommended_next_task_file": ".llmgc/procedural/semantic-runtime-composition/semantic-runtime-composition-verification.md",
+  "recommended_next_work_item": "connected_world_travel_state_artifact_verification",
+  "recommended_next_work_item_title": "Connected world travel state artifact verification.",
+  "recommended_next_task_file": ".llmgc/procedural/connected-world-travel/connected-world-travel-verification.md",
   "candidate_product_vertical_slices": [
-    "Semantic-selected runtime composition artifact verification"
+    "Connected world travel state artifact verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -345,7 +366,8 @@
     "Semantic-guided composition report/verification sidecars",
     "Semantic-guided acceptance correctness hotfix diagnostics",
     "Semantic-selected runtime composition report/verification sidecars",
-    "Semantic-selected runtime composition correctness hotfix diagnostics"
+    "Semantic-selected runtime composition correctness hotfix diagnostics",
+    "Connected world travel and deterministic runtime world state acceptance sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 006 and S063A stop at semantic_selected_runtime_composition_artifact_verification and do not create S064 or start Goal 007 without a new explicit user request."
+  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 007 stop at connected_world_travel_state_artifact_verification and do not start post-Goal-007 work without a new explicit user request."
 }
