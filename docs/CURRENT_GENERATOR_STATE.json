@@ -1,25 +1,35 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T09:42:00Z",
+  "updated_at_utc": "2026-06-25T12:00:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 002 Product Slice 042 microgame variation acceptance completed",
-  "gate_status": "m4_1_passed_s042_microgame_variation_acceptance_completed",
+  "current_phase_title": "Goal 003 automated verification and extension spine completed",
+  "gate_status": "m4_1_passed_goal_003_extension_spine_completed",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_042_microgame_variation_acceptance",
-  "active_manual_gate": "Manual configurable microgame verification is required before any new Codex feature slice.",
-  "current_user_action": "Manually verify configurable generated microgames in Runtime Preview.",
-  "recommended_next_decision": "Product Slice 042 proved multiple deterministic seed/preset generated microgame variants with runtime-backed evidence. Next work is manual_configurable_microgame_verification; do not proceed to another Codex feature slice until the user confirms it.",
+  "last_completed_product_slice_id": "goal_003_automated_verification_extension_spine",
+  "active_manual_gate": "Manual extension spine verification is required before any new Codex feature slice.",
+  "current_user_action": "Manually verify extension spine acceptance artifacts and optional Runtime Preview comparison.",
+  "recommended_next_decision": "Goal 003 proved automated generated gameplay scenario acceptance and data/rule-pack extension behavior. Next work is manual_extension_spine_verification; do not proceed to another Codex feature slice until the user confirms it.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "manual_configurable_microgame_verification"
+      "manual_extension_spine_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
+  },
+  "process_policy": {
+    "manual_gate_policy": "one_manual_gate_per_goal",
+    "manual_gate_exceptions": [
+      "crash",
+      "threading_blocker",
+      "schema_blocker",
+      "runtime_blocker"
+    ],
+    "goal_003_manual_gate": "manual_extension_spine_verification"
   },
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
@@ -39,59 +49,25 @@
     "decision_text": "M4.1 real-model evaluation gate passed for sampled baseline contracts.",
     "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
   },
-  "gate_metrics": {
-    "total_contracts_requested": 4,
-    "total_generation_runs": 4,
-    "total_attempts": 4,
-    "initial_pass_count": 4,
-    "repair_pass_count": 0,
-    "failed_count": 0,
-    "valid_artifact_count": 4,
-    "staged_for_review_count": 4,
-    "markdown_fence_error_count": 0,
-    "json_wrapper_error_count": 0,
-    "json_invalid_count": 0,
-    "wrong_artifact_kind_count": 0,
-    "forbidden_field_count": 0,
-    "invalid_id_count": 0,
-    "missing_field_count": 0,
-    "overall_pass_rate": 1.0,
-    "diagnostics": "none",
-    "quality_warnings": "none"
-  },
   "last_completed_product_slice": {
+    "slice_id": "goal_003_automated_verification_extension_spine",
+    "title": "Automated Verification and Extension Spine",
+    "completed_at_utc": "2026-06-25T12:00:00Z",
+    "summary": "Goal 003 adds a deterministic generated gameplay scenario harness, declaration-only extension rule pack validation, a data-only inventory objective/reward proof pack, invalid extension rejection, and extension-spine reports under .llmgc/procedural/extension-spine/.",
+    "scenario_id": "extension-spine",
+    "checks": [
+      "ExtensionSpineScenarioHarness filtered tests: 4/4 passed",
+      "extension-spine product smoke: 1/1 passed",
+      "CurrentGeneratorStateDocsTests: 10/10 passed",
+      "check-all.ps1: 712/712 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "product_slice_042_microgame_variation_acceptance": {
     "slice_id": "product_slice_042_microgame_variation_acceptance",
     "title": "Microgame Variation Acceptance",
     "completed_at_utc": "2026-06-25T09:42:00Z",
-    "summary": "Headless generated microgame variation acceptance now writes deterministic report and manual verification artifacts for a three-seed, three-preset matrix, proving each variant starts runtime, advances runtime-owned goal progress, resolves challenge/reward/completion evidence and differs in generated package evidence.",
-    "scenario_id": "generated-microgame-variation",
-    "checks": [
-      "MicrogameVariationAcceptance filtered tests: 2/2 passed",
-      "generated-microgame-variation product smoke: 1/1 passed",
-      "CurrentGeneratorStateDocsTests filtered tests after S042 handoff: 10/10 passed",
-      "check-all.ps1: 708/708 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "product_slice_041_generation_presets_and_options": {
-    "slice_id": "product_slice_041_generation_presets_and_options",
-    "title": "Generation Presets and Options",
-    "completed_at_utc": "2026-06-25T09:36:00Z",
-    "summary": "One-click generated previews accept deterministic seed, mode and preset options, serialize selected options in reports, preserve the default generated preview behavior, and prove alternate seed/preset evidence changes deterministically.",
-    "scenario_id": "generation-preset-options",
-    "checks": [
-      "GenerationPresetOptions filtered tests: 3/3 passed",
-      "generation-preset-options product smoke: 1/1 passed",
-      "CurrentGeneratorStateDocsTests filtered tests after S041 handoff: 10/10 passed",
-      "check-all.ps1 after S041: 705/705 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "last_completed_hotfix": {
-    "hotfix_id": "product_slice_034_hotfix_generate_preview_ui_thread_boundary",
-    "title": "Generate Preview UI Thread Boundary",
-    "completed_at_utc": "2026-06-25T00:00:00Z",
-    "reason": "Manual one-click preview verification caught a WinForms cross-thread exception because service-side current-package replacement could raise CurrentChanged from a background continuation.",
-    "summary": "Runtime Preview now calls the one-click workflow with ReplaceCurrentPackage=false, captures project root before background work, then replaces the current package from the WinForms page path after the awaited workflow returns. The Application workflow service still supports service-side replacement for headless callers and reports caller-deferred replacement distinctly.",
-    "next_action": "manual_one_click_preview_verification"
+    "summary": "Headless generated microgame variation acceptance writes deterministic reports for a three-seed, three-preset matrix with runtime-backed progress, reward and completion evidence.",
+    "scenario_id": "generated-microgame-variation"
   },
   "manual_one_click_preview_verification": {
     "status": "passed",
@@ -135,26 +111,50 @@
     "next_action": "microgame_variation_acceptance"
   },
   "manual_configurable_microgame_verification": {
+    "status": "passed",
+    "evidence_source": "user_report_before_goal_003",
+    "observed_result": [
+      "different seed/preset variants generate different variants",
+      "runtime-backed goal progress works",
+      "challenge resolves",
+      "reward is visible",
+      "completion becomes completed"
+    ],
+    "next_action": "automated_verification_extension_spine"
+  },
+  "manual_extension_spine_verification": {
     "status": "required",
-    "evidence_source": "pending_user_manual_runtime_preview_check_after_s042",
+    "evidence_source": "pending_user_manual_extension_spine_check_after_goal_003",
     "observed_result": [],
     "next_action": "do_not_start_codex_feature_slice_until_user_confirms_manual_gate"
   },
-  "manual_user_preview_verification": {
-    "status": "passed",
-    "evidence_source": "user_report_after_s033",
-    "source_scenario": "visible-generated-playable-preview",
-    "observed_result": [
-      "generated package opened in WinForms",
-      "Runtime Preview started",
-      "generated map was visible",
-      "player movement worked",
-      "generated interaction/dialogue/item-cache behavior was visible",
-      "project status showed a generated MVP package"
+  "extension_rule_pack_contract_v1": {
+    "document": "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
+    "validator": "ExtensionRulePackValidator",
+    "validation_mode": "declaration_only_no_lua_execution",
+    "supported_declarations": [
+      "triggers",
+      "conditions",
+      "formulas",
+      "actions",
+      "rewards",
+      "quest_objectives"
+    ],
+    "supported_runtime_state_primitives": [
+      "runtime.inventory",
+      "runtime.quest_objective",
+      "runtime.flag"
+    ],
+    "still_requires_csharp_primitive": [
+      "new runtime command families",
+      "new mutable runtime state containers",
+      "new formula evaluator semantics",
+      "new rendering or UI interaction modes",
+      "new external providers or Lua execution"
     ]
   },
   "allowed_next_codex_task_types": [
-    "manual_configurable_microgame_verification"
+    "manual_extension_spine_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -175,32 +175,22 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "manual_configurable_microgame_verification",
-  "recommended_next_work_item_title": "Manual configurable microgame verification.",
-  "recommended_next_task_file": "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
+  "recommended_next_work_item": "manual_extension_spine_verification",
+  "recommended_next_work_item_title": "Manual extension spine verification.",
+  "recommended_next_task_file": "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
   "candidate_product_vertical_slices": [
-    "Manual configurable microgame verification in Runtime Preview"
+    "Manual extension spine verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
     "docs/CONTEXT_INDEX.md",
     "docs/CURRENT_GENERATOR_STATE.md",
     "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
-    "docs/NEXT_PRODUCT_SLICE_029_SEEDED_PROCEDURAL_GAME_KERNEL_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_030_FORMULA_EFFECT_ACTION_REGISTRY_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_031_TINY_GENERATED_RUNTIME_LOOP_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_032_GENERATED_PACKAGE_MVP_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_033_VISIBLE_GENERATED_PLAYABLE_PREVIEW_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_035_ACTIVE_GOAL_QUEST_PROGRESS_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_036_ENCOUNTER_REWARD_COMPLETION_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_037_MICROGAME_ACCEPTANCE_POLISH_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_038_RUNTIME_OWNED_GOAL_PROGRESS_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_039_RUNTIME_REWARD_CHALLENGE_STATE_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_040_RUNTIME_MICROGAME_STATE_ACCEPTANCE_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md",
     "docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md",
     "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
-    "docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md",
+    "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
+    "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
     "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
     "docs/FULL_GAME_GENERATION_MASTER_PLAN.md",
     "docs/GAME_SYSTEM_VARIANT_TAXONOMY.md"
@@ -238,8 +228,8 @@
     "Runtime-backed generated microgame state acceptance snapshot/report/manual-verification sidecars",
     "Deterministic Runtime Preview generation presets and options",
     "Generated microgame variation acceptance report/manual-verification sidecars",
-    "Generated microgame challenge reward and preview-level completion loop",
-    "Generated microgame loop acceptance snapshot/report/manual-verification sidecars"
+    "Extension rule pack contract v1 declaration validation",
+    "Extension spine scenario report/manual-verification sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice or accepted hotfix; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Product Slice 042 recommend manual_configurable_microgame_verification and do not start another Codex feature slice until the user confirms that manual gate."
+  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 003 recommend manual_extension_spine_verification and do not start another Codex feature slice until the user confirms that manual gate."
 }

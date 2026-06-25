@@ -184,6 +184,33 @@ Done criteria: one approved module produces a validated artifact without direct 
 
 What Codex must not decide by itself: activating broad Lua execution for all modules.
 
+## Responsibility Spine: C# Core vs Data/Lua-like Rules vs LLM
+
+Goal 003 freezes the immediate extension responsibility split before broader Lua or full-generator work.
+
+C# core owns:
+
+- declaration parsing and deterministic validation;
+- id/ref/path/formula/API/mutation safety checks;
+- generic runtime-state primitives such as inventory item grants, quest objective progress and flags;
+- scenario harnessing, product smoke routing and deterministic reports;
+- all package/runtime authority.
+
+Data and Lua-like rule packs own:
+
+- triggers, conditions, formulas, actions, rewards and quest objectives that fit supported primitives;
+- small gameplay variations such as alternate rewards or inventory objectives;
+- compact, reviewable declarations that can be validated without executing arbitrary code.
+
+LLM owns drafts only:
+
+- future proposal text or JSON declarations for review;
+- no validation authority;
+- no runtime mutation;
+- no bulk world or gameplay execution.
+
+New gameplay should prefer data/rule-pack declarations when it can be expressed through existing primitives. It requires a new C# primitive only when it needs a new runtime command family, a new state container, new formula evaluator semantics, a new renderer/UI interaction mode, or a new external execution/provider boundary.
+
 ## M6 Rich GamePackage Assembly
 
 Goal: expand assembly from narrow profile/scene/entity/quest/mechanics mapping to world, dialogue, items, economy, combat and UI-related data where schema supports it.

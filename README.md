@@ -64,10 +64,10 @@ Current source-of-truth handoff:
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
 
 Current phase:
-Goal 002 reached Product Slice 042: Runtime Preview one-click generation now supports deterministic seed/mode/preset options and headless acceptance writes deterministic generated microgame variation artifacts under `.llmgc/procedural/generated-microgame-variation/`. The deterministic path still runs Slice 029 generated plan, Slice 030 Formula/Effect/Action Registry Foundation, Slice 031 Tiny Generated Runtime Loop, Slice 032 Generated Package MVP, Slice 033 Visible Generated Playable Preview and runtime-backed generated microgame evidence before proving multiple seed/preset variants start runtime, advance runtime-owned goal progress, resolve challenge/reward/completion evidence and preserve runtime snapshot evidence without broad runtime or package redesign.
+Goal 003 completed the automated verification and extension spine after Goal 002 manual configurable verification was reported as passed. Headless acceptance now writes deterministic extension-spine artifacts under `.llmgc/procedural/extension-spine/`, preserving the existing Formula/Effect/Action Registry Foundation, Tiny Generated Runtime Loop, Generated Package MVP and Visible Generated Playable Preview path while proving base and extension generated microgame variants can run Generate -> Package -> Runtime start -> move -> interact -> goal progress -> reward -> completion. One inventory objective/reward variation is added through validated data/rule-pack declarations instead of bespoke C# gameplay logic.
 
 Next practical step:
-Manual configurable microgame verification in `Runtime Preview`. Do not proceed to another Codex feature slice until the user confirms configurable generated microgames manually.
+Manual extension spine verification. Do not proceed to another Codex feature slice until the user confirms `manual_extension_spine_verification`.
 
 `GamePackage` — runtime source of truth для готовой игры.
 

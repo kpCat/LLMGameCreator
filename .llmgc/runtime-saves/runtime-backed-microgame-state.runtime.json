@@ -1,0 +1,115 @@
+{
+  "mapState": {
+    "currentMapId": "map/region_blue_ditch",
+    "playerPosition": {
+      "x": 2,
+      "y": 1
+    },
+    "mode": "map",
+    "flags": {
+      "packageId": "game/generated_mvp_semi_procedural_regions_2b79b6099e26",
+      "goalProgressSource": "runtime_state_quests",
+      "challengeStateSource": "runtime_state_flags_inventory_encounter"
+    }
+  },
+  "gameplayState": {
+    "packageId": "game/generated_mvp_semi_procedural_regions_2b79b6099e26",
+    "currentMapId": "map/region_blue_ditch",
+    "playerEntityId": "player",
+    "tick": 0,
+    "inventories": [
+      {
+        "id": "inventory/player",
+        "ownerKind": "player",
+        "ownerId": "player",
+        "stacks": [
+          {
+            "itemId": "item/item_seed_camp_lantern",
+            "amount": 1,
+            "uniqueInstanceId": null,
+            "questItem": true,
+            "durability": null,
+            "charge": null,
+            "metadata": {
+              "generated_microgame_challenge.reward_source": "encounter/encounter_seed_contested_cache"
+            }
+          }
+        ],
+        "metadata": {}
+      }
+    ],
+    "equipment": [],
+    "resources": [],
+    "progressions": [],
+    "flags": [
+      {
+        "id": "generated_microgame/challenge_resolved/encounter_seed_contested_cache",
+        "value": "true"
+      }
+    ],
+    "statuses": [],
+    "activeEncounter": {
+      "encounterId": "encounter/encounter_seed_contested_cache",
+      "kind": "generated_microgame_challenge",
+      "active": false,
+      "round": 1,
+      "turnIndex": 0,
+      "participants": [],
+      "actionHistory": [
+        "interact: resolve generated challenge and grant generated reward"
+      ],
+      "metadata": {
+        "generated_microgame_challenge.state_source": "runtime_state_flags_inventory_encounter",
+        "resolved": "true"
+      }
+    },
+    "questStates": {
+      "quest/quest_event_seed_broker_truce": "active"
+    },
+    "quests": [
+      {
+        "questId": "quest/quest_event_seed_broker_truce",
+        "state": "active",
+        "currentStageId": "stage/quest_event_seed_broker_truce_start",
+        "objectives": [
+          {
+            "objectiveId": "objective/quest_event_seed_broker_truce_encounter",
+            "kind": "generated_microgame_progress",
+            "targetId": "entity/item_seed_bright_salt",
+            "currentAmount": 1,
+            "requiredAmount": 3,
+            "completed": false,
+            "metadata": {
+              "generated_microgame_goal.progress_source": "runtime_state_quests"
+            }
+          }
+        ],
+        "startedTick": 0,
+        "completedTick": null,
+        "metadata": {
+          "sourceQuestEventSeedId": "quest_event_seed/broker_truce",
+          "sourceRegionId": "region/cinder_road",
+          "generated_microgame_goal.progress_source": "runtime_state_quests",
+          "generated_microgame_goal.source_quest_id": "quest_event_seed/broker_truce",
+          "generated_microgame_goal.last_progress_action": "interact: InteractionTriggered, Message; target=entity/item_seed_bright_salt"
+        }
+      }
+    ],
+    "activeDialogue": null,
+    "factions": [],
+    "metadata": {
+      "generated_microgame_goal.progress_source": "runtime_state_quests",
+      "generated_microgame_goal.source_quest_id": "quest_event_seed/broker_truce",
+      "generated_microgame_goal.last_progress_action": "interact: InteractionTriggered, Message; target=entity/item_seed_bright_salt",
+      "generated_microgame_challenge.state_source": "runtime_state_flags_inventory_encounter",
+      "generated_microgame_challenge.encounter_id": "encounter/encounter_seed_contested_cache",
+      "generated_microgame_challenge.reward_item_id": "item/item_seed_camp_lantern"
+    }
+  },
+  "mapEvents": [],
+  "gameplayEvents": [],
+  "metadata": {
+    "acceptance": "runtime-backed-microgame-state",
+    "packageId": "game/generated_mvp_semi_procedural_regions_2b79b6099e26"
+  }
+}

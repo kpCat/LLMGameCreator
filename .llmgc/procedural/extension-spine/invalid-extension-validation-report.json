@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1",
+  "rulePackId": "rule_pack/invalid_extension_spine_v1",
+  "hasErrors": true,
+  "diagnosticCount": 10,
+  "diagnostics": [
+    {
+      "severity": "error",
+      "code": "extension_formula.expression.unsafe",
+      "target": "formula/invalid",
+      "message": "Formula expression contains unsafe or code-looking text."
+    },
+    {
+      "severity": "error",
+      "code": "extension_rule_pack.unknown_api_call",
+      "target": "../bad",
+      "message": "API call 'runtime.exec_arbitrary_lua' is not allowed in declaration-level rule packs."
+    },
+    {
+      "severity": "error",
+      "code": "extension_rule_pack.unknown_api_call",
+      "target": "formula/invalid",
+      "message": "API call 'runtime.exec_arbitrary_lua' is not allowed in declaration-level rule packs."
+    },
+    {
+      "severity": "error",
+      "code": "extension_rule_pack.unsafe_id",
+      "target": "../bad",
+      "message": "action id is empty, too long or contains unsafe characters."
+    },
+    {
+      "severity": "error",
+      "code": "extension_rule_pack.unsafe_path",
+      "target": "../bad",
+      "message": "action.target_ref contains unsafe path-like text."
+    },
+    {
+      "severity": "error",
+      "code": "extension_rule_pack.unsafe_path",
+      "target": "../bad",
+      "message": "parameter.outputPath contains unsafe path-like text."
+    },
+    {
+      "severity": "error",
+      "code": "extension_rule_pack.unsupported_action.type",
+      "target": "../bad",
+      "message": "Type 'action/run_lua' is not supported by extension rule pack v1."
+    },
+    {
+      "severity": "error",
+      "code": "extension_rule_pack.unsupported_mutation",
+      "target": "../bad",
+      "message": "Mutation target 'runtime.direct_game_state' is not supported by extension rule pack v1."
+    },
+    {
+      "severity": "error",
+      "code": "rule_pack.unknown_formula_ref",
+      "target": "../bad",
+      "message": "Referenced id 'formula/missing' was not found."
+    },
+    {
+      "severity": "error",
+      "code": "rule_pack.unknown_trigger_ref",
+      "target": "rule/invalid",
+      "message": "Referenced id 'trigger/missing' was not found."
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "1",
+  "deterministicHash": "2429bc273b680e8a17583138c145c3bbe7003ca24301f64ead9556ad23e13277",
+  "accepted": true,
+  "manualGate": "manual_extension_spine_verification",
+  "proofRulePackId": "rule_pack/extension_spine_inventory_objective_v1",
+  "invalidRulePackRejected": true,
+  "extensionChangedBehavior": true,
+  "whatIsDataExtensible": [
+    "triggers",
+    "conditions",
+    "formulas",
+    "actions",
+    "rewards",
+    "quest objectives",
+    "inventory-objective reward variation"
+  ],
+  "whatStillRequiresCSharpPrimitive": [
+    "new runtime command families",
+    "new mutable runtime state containers",
+    "new formula evaluator semantics",
+    "new rendering or UI interaction modes",
+    "new external providers or Lua execution"
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "base",
+      "accepted": true,
+      "generationOptions": {
+        "seed": "goal003-base-runtime-backed-loop",
+        "mode": "semi_procedural_regions",
+        "presetId": "survival_exploration",
+        "presetTitle": "Survival exploration",
+        "compactStyleHintIds": [
+          "theme/exploration",
+          "theme/survival",
+          "tone/mysterious",
+          "quest_motif/faction_truce",
+          "item_affordance/quest_item"
+        ],
+        "selectedVariantIds": [
+          "world_topology/region_graph",
+          "actor_model/single_player_character",
+          "combat_model/turn_based",
+          "inventory_model/list_inventory"
+        ],
+        "stableSummary": "seed=goal003-base-runtime-backed-loop; mode=semi_procedural_regions; preset=survival_exploration; styleHints=theme/exploration|theme/survival|tone/mysterious|quest_motif/faction_truce|item_affordance/quest_item; variants=world_topology/region_graph|actor_model/single_player_character|combat_model/turn_based|inventory_model/list_inventory"
+      },
+      "packageId": "game/generated_mvp_semi_procedural_regions_e144f558e3e5",
+      "packageTitle": "Generated MVP semi_procedural_regions e144f558e3e5",
+      "runtimeStartSucceeded": true,
+      "runtimeMoveSucceeded": true,
+      "runtimeInteractSucceeded": true,
+      "goalProgressAdvanced": true,
+      "runtimeRewardGranted": true,
+      "runtimeCompletionBacked": true,
+      "goalProgressStateSource": "runtime_state_quests",
+      "challengeStateSource": "runtime_state_flags_inventory_encounter",
+      "baseRewardItemId": "item/item_seed_iron_seed",
+      "extensionEvidence": {
+        "consumed": false,
+        "rulePackId": "",
+        "stateSource": "none",
+        "appliedActionIds": [],
+        "addedRewardItemId": "",
+        "addedRewardAmount": 0,
+        "addedObjectiveId": "",
+        "addedQuestId": "",
+        "addedFlagId": "",
+        "inventoryObjectiveCompleted": false,
+        "additionalRewardGranted": false,
+        "runtimeStateMetadata": {}
+      },
+      "snapshotHash": "dfb0d83841a0b72877805818441db228b6f9bf443de23b4ebf3890489853730b",
+      "runtimeBackedStateHash": "393e68af2e88e8be840a5ad520afa6be08d3630c0b82243a1e553789da1fead5"
+    },
+    {
+      "scenarioId": "extension_inventory_objective",
+      "accepted": true,
+      "generationOptions": {
+        "seed": "goal003-extension-inventory-objective",
+        "mode": "semi_procedural_regions",
+        "presetId": "recover_resource",
+        "presetTitle": "Recover resource",
+        "compactStyleHintIds": [
+          "theme/survival",
+          "theme/trade",
+          "tone/mysterious",
+          "quest_motif/recover_lost_resource",
+          "item_affordance/consumable",
+          "location_mood/dangerous"
+        ],
+        "selectedVariantIds": [
+          "world_topology/region_graph",
+          "actor_model/single_player_character",
+          "combat_model/turn_based",
+          "inventory_model/list_inventory"
+        ],
+        "stableSummary": "seed=goal003-extension-inventory-objective; mode=semi_procedural_regions; preset=recover_resource; styleHints=theme/survival|theme/trade|tone/mysterious|quest_motif/recover_lost_resource|item_affordance/consumable|location_mood/dangerous; variants=world_topology/region_graph|actor_model/single_player_character|combat_model/turn_based|inventory_model/list_inventory"
+      },
+      "packageId": "game/generated_mvp_semi_procedural_regions_2b79b6099e26",
+      "packageTitle": "Generated MVP semi_procedural_regions 2b79b6099e26",
+      "runtimeStartSucceeded": true,
+      "runtimeMoveSucceeded": true,
+      "runtimeInteractSucceeded": true,
+      "goalProgressAdvanced": true,
+      "runtimeRewardGranted": true,
+      "runtimeCompletionBacked": true,
+      "goalProgressStateSource": "runtime_state_quests",
+      "challengeStateSource": "runtime_state_flags_inventory_encounter",
+      "baseRewardItemId": "item/item_seed_camp_lantern",
+      "extensionEvidence": {
+        "consumed": true,
+        "rulePackId": "rule_pack/extension_spine_inventory_objective_v1",
+        "stateSource": "validated_rule_pack_existing_runtime_state",
+        "appliedActionIds": [
+          "action/complete_inventory_objective",
+          "action/grant_extension_badge",
+          "action/mark_extension_rule_applied"
+        ],
+        "addedRewardItemId": "item/extension_spine_badge",
+        "addedRewardAmount": 1,
+        "addedObjectiveId": "objective/collect_extension_badge",
+        "addedQuestId": "quest/extension_spine_inventory_objective",
+        "addedFlagId": "flag/extension_spine_rule_applied",
+        "inventoryObjectiveCompleted": true,
+        "additionalRewardGranted": true,
+        "runtimeStateMetadata": {
+          "extension_spine.consumed": "true",
+          "extension_spine.rule_pack_id": "rule_pack/extension_spine_inventory_objective_v1",
+          "generated_microgame_challenge.encounter_id": "encounter/encounter_seed_contested_cache",
+          "generated_microgame_challenge.reward_item_id": "item/item_seed_camp_lantern",
+          "generated_microgame_challenge.state_source": "runtime_state_flags_inventory_encounter",
+          "generated_microgame_goal.last_progress_action": "interact: InteractionTriggered, Message; target=entity/item_seed_bright_salt",
+          "generated_microgame_goal.progress_source": "runtime_state_quests",
+          "generated_microgame_goal.source_quest_id": "quest_event_seed/broker_truce"
+        }
+      },
+      "snapshotHash": "c4171e24fa8b3a24c012c67c97d162b4c39922c26f9258d0d482bc346244d381",
+      "runtimeBackedStateHash": "caf0b1761e8ba976443f2d7a3136a7b90a88828d2ab9ccc2e9ffd6b1512b312a"
+    }
+  ],
+  "proofValidation": {
+    "schemaVersion": "1",
+    "rulePackId": "rule_pack/extension_spine_inventory_objective_v1",
+    "hasErrors": false,
+    "diagnosticCount": 0,
+    "diagnostics": []
+  },
+  "invalidValidation": {
+    "schemaVersion": "1",
+    "rulePackId": "rule_pack/invalid_extension_spine_v1",
+    "hasErrors": true,
+    "diagnosticCount": 10,
+    "diagnostics": [
+      {
+        "severity": "error",
+        "code": "extension_formula.expression.unsafe",
+        "target": "formula/invalid",
+        "message": "Formula expression contains unsafe or code-looking text."
+      },
+      {
+        "severity": "error",
+        "code": "extension_rule_pack.unknown_api_call",
+        "target": "../bad",
+        "message": "API call 'runtime.exec_arbitrary_lua' is not allowed in declaration-level rule packs."
+      },
+      {
+        "severity": "error",
+        "code": "extension_rule_pack.unknown_api_call",
+        "target": "formula/invalid",
+        "message": "API call 'runtime.exec_arbitrary_lua' is not allowed in declaration-level rule packs."
+      },
+      {
+        "severity": "error",
+        "code": "extension_rule_pack.unsafe_id",
+        "target": "../bad",
+        "message": "action id is empty, too long or contains unsafe characters."
+      },
+      {
+        "severity": "error",
+        "code": "extension_rule_pack.unsafe_path",
+        "target": "../bad",
+        "message": "action.target_ref contains unsafe path-like text."
+      },
+      {
+        "severity": "error",
+        "code": "extension_rule_pack.unsafe_path",
+        "target": "../bad",
+        "message": "parameter.outputPath contains unsafe path-like text."
+      },
+      {
+        "severity": "error",
+        "code": "extension_rule_pack.unsupported_action.type",
+        "target": "../bad",
+        "message": "Type 'action/run_lua' is not supported by extension rule pack v1."
+      },
+      {
+        "severity": "error",
+        "code": "extension_rule_pack.unsupported_mutation",
+        "target": "../bad",
+        "message": "Mutation target 'runtime.direct_game_state' is not supported by extension rule pack v1."
+      },
+      {
+        "severity": "error",
+        "code": "rule_pack.unknown_formula_ref",
+        "target": "../bad",
+        "message": "Referenced id 'formula/missing' was not found."
+      },
+      {
+        "severity": "error",
+        "code": "rule_pack.unknown_trigger_ref",
+        "target": "rule/invalid",
+        "message": "Referenced id 'trigger/missing' was not found."
+      }
+    ]
+  },
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "extension_spine.csharp_scope",
+      "target": "harness",
+      "message": "C# changes are limited to declaration validation, deterministic harnessing and generic runtime-state action primitives."
+    },
+    {
+      "severity": "info",
+      "code": "extension_spine.extension_changed_behavior",
+      "target": "extension_inventory_objective",
+      "message": "Extension rule pack changed runtime-backed inventory objective and reward evidence."
+    },
+    {
+      "severity": "info",
+      "code": "extension_spine.invalid_extension_rejected",
+      "target": "rule_pack/invalid_extension_spine_v1",
+      "message": "Invalid extension rule pack was rejected by declaration-level validation."
+    },
+    {
+      "severity": "info",
+      "code": "extension_spine.manual_verification_required",
+      "target": "manual_extension_spine_verification",
+      "message": "Codex acceptance is headless; the next and only manual gate for this goal is manual extension spine verification."
+    },
+    {
+      "severity": "info",
+      "code": "extension_spine.no_external_execution",
+      "target": "harness",
+      "message": "No LLM, provider, Lua, Unity or media execution was invoked."
+    }
+  ]
+}

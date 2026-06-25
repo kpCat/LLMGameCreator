@@ -1,12 +1,12 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 042 Microgame Variation Acceptance  
+Updated by: Goal 003 Automated Verification and Extension Spine  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
 
-M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants and stops Goal 002 at manual configurable microgame verification.
+M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants. Goal 002 manual configurable verification is recorded as passed based on the user's report before Goal 003. Goal 003 adds automated scenario acceptance and a declaration-only extension rule pack spine, proves a data-only inventory objective/reward variation, rejects invalid extension declarations, and stops at manual extension spine verification.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -32,7 +32,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Manual configurable microgame verification in Runtime Preview.
+1. Manual extension spine verification after automated scenario acceptance.
 
 Kill criterion:
 
@@ -130,10 +130,59 @@ Observed result:
 Recommended next work item:
 
 ```text
-manual_configurable_microgame_verification
+manual_extension_spine_verification
 ```
 
-Goal 001 first 5-minute generated microgame loop reached the Codex headless acceptance boundary, manual Runtime Preview verification is recorded as passed, Product Slice 038 made active-goal progress runtime-state-backed through existing `GameRuntimeState.Quests`, Product Slice 039 made challenge/reward/completion evidence runtime-state-backed through existing flags, inventory and encounter state, Product Slice 040 proved deterministic runtime-backed acceptance plus existing serializer/snapshot save-load evidence, and the user reported S040 manual runtime-backed verification as passed. Product Slice 041 added deterministic seed/mode/preset options for the Runtime Preview Generate Preview path. Product Slice 042 proved multiple deterministic seed/preset variants are accepted with runtime-backed evidence. The next step is manual configurable microgame verification in Runtime Preview; do not proceed to another Codex feature slice until the user confirms it.
+Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The next step is manual extension spine verification; do not proceed to another Codex feature slice until the user confirms it.
+
+## Goal 003 Summary
+
+Goal 003: Automated Verification and Extension Spine.
+
+Completed behavior:
+
+- records Goal 002 manual configurable verification as passed based on the user's report;
+- records the one-manual-gate-per-goal process policy;
+- adds `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md`;
+- adds an Application-layer extension spine scenario harness;
+- runs base and extension generated microgame variants through Generate -> Package -> Runtime start -> move -> interact -> goal progress -> reward -> completion evidence;
+- writes deterministic `.llmgc/procedural/extension-spine/extension-spine-scenario-report.json`;
+- writes deterministic `.llmgc/procedural/extension-spine/extension-spine-scenario-report.md`;
+- writes `.llmgc/procedural/extension-spine/extension-proof-rule-pack.json`;
+- writes `.llmgc/procedural/extension-spine/extension-proof-validation-report.json`;
+- writes `.llmgc/procedural/extension-spine/invalid-extension-validation-report.json`;
+- writes `.llmgc/procedural/extension-spine/manual-extension-spine-verification.md`;
+- proves an inventory objective and additional reward can be added through validated data/rule-pack declarations;
+- rejects invalid extension declarations for unsafe ids/paths, unknown API calls, invalid formulas and unsupported mutation targets;
+- adds the `extension-spine` product smoke scenario;
+- did not add provider execution, LLM calls, Lua execution, Unity work, media generation, broad runtime preview game work or bespoke C# gameplay logic for the proof objective/reward.
+
+Recorded checks from Goal 003:
+
+- `ExtensionSpineScenarioHarness` filtered tests: 4/4 passed.
+- `extension-spine` product smoke: 1/1 passed.
+- `CurrentGeneratorStateDocsTests` filtered tests: 10/10 passed.
+- `check-all.ps1`: 712/712 tests passed, build 0 warnings / 0 errors.
+
+## Manual Goal 002 Configurable Microgame Verification
+
+Manual configurable generated microgame verification after Product Slice 042 is recorded as passed.
+
+State marker:
+
+```text
+manual_configurable_microgame_verification: passed
+```
+
+Evidence source: user-reported manual verification before Goal 003.
+
+Observed result:
+
+- different seed/preset variants generate different variants;
+- runtime-backed goal progress works;
+- challenge resolves;
+- reward is visible;
+- completion becomes completed.
 
 ## Product Slice 042 Summary
 
@@ -551,9 +600,11 @@ The pivot is not a restart. It changes what future slices are allowed to optimiz
 5. `docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md`
 6. `docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md`
 7. `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md`
-8. `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md`
-9. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
-10. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
+8. `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md`
+9. `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md`
+10. `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md`
+11. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
+12. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
 
 Do not read old root `README_APPLY_*` files or old `docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md` files as current planning authority.
 
@@ -563,8 +614,8 @@ Update this file pair after every accepted product slice.
 
 Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 
-After Product Slice 042 completes, this state should recommend:
+After Goal 003 completes, this state should recommend:
 
 ```text
-manual_configurable_microgame_verification
+manual_extension_spine_verification
 ```

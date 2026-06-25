@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "schemaVersion": "1",
+    "rulePackId": "rule_pack/extension_spine_inventory_objective_v1",
+    "displayName": "Inventory objective proof pack",
+    "authoringMode": "data_rule_pack"
+  },
+  "triggers": [
+    {
+      "triggerId": "trigger/runtime_interact_completed",
+      "triggerType": "trigger/runtime_interact_completed",
+      "apiCalls": []
+    }
+  ],
+  "conditions": [
+    {
+      "conditionId": "condition/reward_item_visible",
+      "conditionType": "condition/has_inventory_item",
+      "targetRef": "reward/runtime_reward_item",
+      "formulaId": "",
+      "parameters": {
+        "minimumAmount": "1"
+      },
+      "apiCalls": []
+    }
+  ],
+  "formulas": [
+    {
+      "formulaId": "formula/extension_bonus_count",
+      "expression": "base_reward_count + extension_bonus",
+      "declaredVariables": [
+        "base_reward_count",
+        "extension_bonus"
+      ],
+      "resultType": "number",
+      "minimumValue": 1,
+      "maximumValue": 3,
+      "apiCalls": []
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action/grant_extension_badge",
+      "actionType": "action/grant_item",
+      "targetRef": "item/extension_spine_badge",
+      "formulaId": "formula/extension_bonus_count",
+      "parameters": {
+        "amount": "1",
+        "questItem": "true"
+      },
+      "apiCalls": [],
+      "mutationTargets": [
+        "runtime.inventory"
+      ]
+    },
+    {
+      "actionId": "action/complete_inventory_objective",
+      "actionType": "action/advance_objective",
+      "targetRef": "objective/collect_extension_badge",
+      "formulaId": "",
+      "parameters": {
+        "amount": "1",
+        "questId": "quest/extension_spine_inventory_objective"
+      },
+      "apiCalls": [],
+      "mutationTargets": [
+        "runtime.quest_objective"
+      ]
+    },
+    {
+      "actionId": "action/mark_extension_rule_applied",
+      "actionType": "action/set_flag",
+      "targetRef": "flag/extension_spine_rule_applied",
+      "formulaId": "",
+      "parameters": {
+        "value": "true"
+      },
+      "apiCalls": [],
+      "mutationTargets": [
+        "runtime.flag"
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "rewardId": "reward/extension_spine_badge",
+      "rewardType": "reward/item",
+      "targetRef": "item/extension_spine_badge",
+      "parameters": {
+        "amount": "1"
+      }
+    }
+  ],
+  "questObjectives": [
+    {
+      "objectiveId": "objective/collect_extension_badge",
+      "objectiveType": "objective/inventory_item",
+      "targetRef": "item/extension_spine_badge",
+      "requiredAmount": 1,
+      "parameters": {
+        "questId": "quest/extension_spine_inventory_objective"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "ruleId": "rule/extension_inventory_objective_on_interact",
+      "triggerId": "trigger/runtime_interact_completed",
+      "conditionIds": [
+        "condition/reward_item_visible"
+      ],
+      "actionIds": [
+        "action/grant_extension_badge",
+        "action/complete_inventory_objective",
+        "action/mark_extension_rule_applied"
+      ],
+      "rewardIds": [
+        "reward/extension_spine_badge"
+      ],
+      "objectiveIds": [
+        "objective/collect_extension_badge"
+      ]
+    }
+  ]
+}
