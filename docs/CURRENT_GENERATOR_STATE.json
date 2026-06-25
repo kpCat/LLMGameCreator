@@ -1,23 +1,23 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T19:11:11Z",
+  "updated_at_utc": "2026-06-25T20:30:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 003 automated verification and extension spine completed",
-  "gate_status": "m4_1_passed_goal_003_extension_spine_completed",
+  "current_phase_title": "Goal 004 rule-pack driven quest/dialog/interaction families completed",
+  "gate_status": "goal_004_completed_manual_quest_dialog_interaction_family_verification_required",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_048_strategy_documentation",
-  "active_manual_gate": "Manual extension spine verification is required before any new Codex feature slice.",
-  "current_user_action": "Manually verify extension spine acceptance artifacts and optional Runtime Preview comparison.",
-  "recommended_next_decision": "Goal 003 proved automated generated gameplay scenario acceptance and data/rule-pack extension behavior. Next work is manual_extension_spine_verification; do not proceed to another Codex feature slice until the user confirms it.",
+  "last_completed_product_slice_id": "goal_004_rule_pack_driven_quest_dialog_interaction_families",
+  "active_manual_gate": "Manual quest/dialog/interaction family verification is required before any new Codex feature slice.",
+  "current_user_action": "Manually verify quest/dialog/interaction family acceptance artifacts and optional Runtime Preview comparison.",
+  "recommended_next_decision": "Goal 004 proved rule-pack driven quest, dialogue and interaction families through deterministic headless acceptance. Next work is manual_quest_dialog_interaction_family_verification; do not proceed to another Codex feature slice until the user confirms it.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "manual_extension_spine_verification"
+      "manual_quest_dialog_interaction_family_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -29,7 +29,8 @@
       "schema_blocker",
       "runtime_blocker"
     ],
-    "goal_003_manual_gate": "manual_extension_spine_verification"
+    "goal_003_manual_gate": "manual_extension_spine_verification",
+    "goal_004_manual_gate": "manual_quest_dialog_interaction_family_verification"
   },
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
@@ -50,14 +51,29 @@
     "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_048_strategy_documentation",
-    "title": "Strategy Documentation Consolidation",
-    "completed_at_utc": "2026-06-25T19:11:11Z",
-    "summary": "Product Slice 048 links the post-Goal-003 strategy documents through CONTEXT_INDEX, README and the current-state handoff while preserving manual_extension_spine_verification as the active gate.",
-    "scenario_id": "documentation-only",
+    "slice_id": "goal_004_rule_pack_driven_quest_dialog_interaction_families",
+    "title": "Rule-Pack Driven Quest/Dialog/Interaction Families",
+    "completed_at_utc": "2026-06-25T20:30:00Z",
+    "summary": "Goal 004 records manual extension spine verification as passed, adds compact context budget policy, and proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and deterministic headless acceptance reports under .llmgc/procedural/quest-dialog-interaction-families/.",
+    "scenario_id": "quest-dialog-interaction-families",
     "checks": [
+      "QuestDialogInteractionFamilyAcceptance filtered tests: 3/3 passed",
+      "quest-dialog-interaction-families product smoke: 1/1 passed",
       "CurrentGeneratorStateDocsTests filtered tests: 10/10 passed",
-      "check-all.ps1: 712/712 tests passed, build 0 warnings / 0 errors"
+      "check-all.ps1: 716/716 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "goal_004_rule_pack_driven_quest_dialog_interaction_families": {
+    "slice_id": "goal_004_rule_pack_driven_quest_dialog_interaction_families",
+    "title": "Rule-Pack Driven Quest, Dialogue, And Interaction Families",
+    "completed_at_utc": "2026-06-25T20:30:00Z",
+    "summary": "Goal 004 adds a declaration-level quest/dialogue/interaction family rule pack, validator rejection for unsafe or unknown ids, deterministic variant acceptance, product smoke routing, and manual verification guidance. It does not add Unity, media, provider, LLM or arbitrary Lua execution and does not create S054.",
+    "scenario_id": "quest-dialog-interaction-families",
+    "checks": [
+      "QuestDialogInteractionFamilyAcceptance filtered tests: 3/3 passed",
+      "quest-dialog-interaction-families product smoke: 1/1 passed",
+      "CurrentGeneratorStateDocsTests filtered tests: 10/10 passed",
+      "check-all.ps1: 716/716 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "goal_003_automated_verification_extension_spine": {
@@ -134,8 +150,16 @@
     "next_action": "automated_verification_extension_spine"
   },
   "manual_extension_spine_verification": {
+    "status": "passed",
+    "evidence_source": "user_report_before_goal_004",
+    "observed_result": [
+      "manual_extension_spine_verification passed"
+    ],
+    "next_action": "rule_pack_driven_quest_dialog_interaction_families"
+  },
+  "manual_quest_dialog_interaction_family_verification": {
     "status": "required",
-    "evidence_source": "pending_user_manual_extension_spine_check_after_goal_003",
+    "evidence_source": "pending_user_manual_quest_dialog_interaction_family_check_after_goal_004",
     "observed_result": [],
     "next_action": "do_not_start_codex_feature_slice_until_user_confirms_manual_gate"
   },
@@ -165,7 +189,7 @@
     ]
   },
   "allowed_next_codex_task_types": [
-    "manual_extension_spine_verification"
+    "manual_quest_dialog_interaction_family_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -186,11 +210,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "manual_extension_spine_verification",
-  "recommended_next_work_item_title": "Manual extension spine verification.",
-  "recommended_next_task_file": "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
+  "recommended_next_work_item": "manual_quest_dialog_interaction_family_verification",
+  "recommended_next_work_item_title": "Manual quest/dialog/interaction family verification.",
+  "recommended_next_task_file": ".llmgc/procedural/quest-dialog-interaction-families/manual-quest-dialog-interaction-family-verification.md",
   "candidate_product_vertical_slices": [
-    "Manual extension spine verification"
+    "Manual quest/dialog/interaction family verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -202,6 +226,7 @@
     "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
     "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
     "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
+    "docs/AGENT_CONTEXT_BUDGET_POLICY.md",
     "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
     "docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md",
     "docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md",
@@ -243,7 +268,8 @@
     "Deterministic Runtime Preview generation presets and options",
     "Generated microgame variation acceptance report/manual-verification sidecars",
     "Extension rule pack contract v1 declaration validation",
-    "Extension spine scenario report/manual-verification sidecars"
+    "Extension spine scenario report/manual-verification sidecars",
+    "Quest/dialog/interaction family acceptance report/manual-verification sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 003 recommend manual_extension_spine_verification and do not start another Codex feature slice until the user confirms that manual gate."
+  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 004 recommend manual_quest_dialog_interaction_family_verification and do not start another Codex feature slice until the user confirms that manual gate."
 }

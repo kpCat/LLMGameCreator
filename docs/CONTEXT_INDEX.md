@@ -64,6 +64,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
 | `docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md` | Manual user verification checklist for the generated playable preview. |
 | `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` | LLM minimization policy and deterministic combiner rules. |
+| `docs/AGENT_CONTEXT_BUDGET_POLICY.md` | Compact read-first policy for current Codex slices and goal handoffs. |
 | `docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md` | Post-Goal-003 architecture boundaries: C# primitives, data/rule packs, Lua-like declarations, LLM role and Runtime Preview limits. |
 | `docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md` | Semantic-pack layering, RAG authoring role and compiled semantic catalog direction. |
 | `docs/OPEN_DESIGN_QUESTIONS.md` | Open strategic questions to answer through bounded experiments instead of ad hoc slice drift. |
@@ -83,12 +84,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-manual_extension_spine_verification
+manual_quest_dialog_interaction_family_verification
 ```
 
 Allowed next sequence:
 
-1. Manual extension spine verification after automated scenario acceptance.
+1. Manual quest/dialog/interaction family verification after Goal 004 family acceptance.
 
 Kill criterion:
 
