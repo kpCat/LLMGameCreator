@@ -64,6 +64,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
 | `docs/MANUAL_VISIBLE_GENERATED_PLAYABLE_PREVIEW_CHECK.md` | Manual user verification checklist for the generated playable preview. |
 | `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md` | LLM minimization policy and deterministic combiner rules. |
+| `docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md` | Post-Goal-003 architecture boundaries: C# primitives, data/rule packs, Lua-like declarations, LLM role and Runtime Preview limits. |
+| `docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md` | Semantic-pack layering, RAG authoring role and compiled semantic catalog direction. |
+| `docs/OPEN_DESIGN_QUESTIONS.md` | Open strategic questions to answer through bounded experiments instead of ad hoc slice drift. |
 | `docs/FULL_GAME_GENERATION_MASTER_PLAN.md` | Full game generation meaning, ownership boundaries and long-term target architecture. |
 | `docs/GAME_GENERATION_CAPABILITY_MATRIX.md` | Capability domains, priorities and acceptance criteria. |
 | `docs/LLM_LUA_CSHARP_RESPONSIBILITY_CONTRACT.md` | C# / LLM / Lua ownership and forbidden boundary crossings. |

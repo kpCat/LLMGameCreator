@@ -2,6 +2,14 @@
 
 Status: proposed strategic roadmap after Goal 003.
 
+## Source Of Truth
+
+Before choosing the next milestone, read `docs/CURRENT_GENERATOR_STATE.md` and `docs/CURRENT_GENERATOR_STATE.json`.
+
+The current state handoff, active manual gate and strategy reset override any older roadmap sequence that suggests starting a feature slice early.
+
+Current locked baseline: `M4.1` remains the last completed milestone until `docs/CURRENT_GENERATOR_STATE.json` explicitly records a later milestone.
+
 ## Definition Of Full Generator
 
 The full generator is not a universal magic engine that can generate every possible game without new primitives.

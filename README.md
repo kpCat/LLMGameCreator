@@ -62,6 +62,9 @@ Current source-of-truth handoff:
 - docs/CURRENT_GENERATOR_STATE.md
 - docs/CONTEXT_INDEX.md
 - docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
+- docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md
+- docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md
+- docs/OPEN_DESIGN_QUESTIONS.md
 
 Current phase:
 Goal 003 completed the automated verification and extension spine after Goal 002 manual configurable verification was reported as passed. Headless acceptance now writes deterministic extension-spine artifacts under `.llmgc/procedural/extension-spine/`, preserving the existing Formula/Effect/Action Registry Foundation, Tiny Generated Runtime Loop, Generated Package MVP and Visible Generated Playable Preview path while proving base and extension generated microgame variants can run Generate -> Package -> Runtime start -> move -> interact -> goal progress -> reward -> completion. One inventory objective/reward variation is added through validated data/rule-pack declarations instead of bespoke C# gameplay logic.
