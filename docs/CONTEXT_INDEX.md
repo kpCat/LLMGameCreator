@@ -85,12 +85,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-semantic_guided_composition_artifact_verification
+semantic_selected_runtime_composition_artifact_verification
 ```
 
 Allowed next sequence:
 
-1. Semantic-guided composition artifact verification after Goal 005 acceptance.
+1. Semantic-selected runtime composition artifact verification after Goal 006 acceptance.
 
 Kill criterion:
 

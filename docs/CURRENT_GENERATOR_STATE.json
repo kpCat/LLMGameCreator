@@ -1,23 +1,23 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T22:55:00Z",
+  "updated_at_utc": "2026-06-25T23:10:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Product Slice 058A semantic-guided acceptance correctness hotfix completed",
-  "gate_status": "product_slice_058a_completed_semantic_guided_composition_artifact_verification_required",
+  "current_phase_title": "Goal 006 semantic-selected runtime composition completed",
+  "gate_status": "goal_006_completed_semantic_selected_runtime_composition_artifact_verification_required",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "product_slice_058a_semantic_guided_acceptance_correctness_hotfix",
-  "active_manual_gate": "Semantic-guided composition artifact verification is required before any new Codex feature slice.",
-  "current_user_action": "Review semantic-guided composition artifacts or hand the generated .llmgc/procedural/semantic-guided-composition folder to an external reviewer.",
-  "recommended_next_decision": "Product Slice 058A repaired Goal 005 semantic-guided acceptance correctness. Next work remains semantic_guided_composition_artifact_verification; do not start S059, Goal 006 or another Codex feature slice until the user confirms this gate.",
+  "last_completed_product_slice_id": "goal_006_semantic_selected_runtime_composition",
+  "active_manual_gate": "Semantic-selected runtime composition artifact verification is the next stop marker before any S064 or Goal 007 work.",
+  "current_user_action": "Review or hand off the generated .llmgc/procedural/semantic-runtime-composition folder; do not start S064 or Goal 007 in this run.",
+  "recommended_next_decision": "Goal 006 completed S059-S063: semantic-selected declarations are materialized into package content and executed headlessly with runtime-owned state evidence. Stop at semantic_selected_runtime_composition_artifact_verification; do not create S064 or start Goal 007 without a new explicit user request.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
     "required_outcome_within_large_slices": 3,
     "required_outcome": "generated_playable_or_simulatable_loop",
     "next_sequence": [
-      "semantic_guided_composition_artifact_verification"
+      "semantic_selected_runtime_composition_artifact_verification"
     ],
     "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
   },
@@ -31,7 +31,8 @@
     ],
     "goal_003_manual_gate": "manual_extension_spine_verification",
     "goal_004_manual_gate": "manual_quest_dialog_interaction_family_verification",
-    "goal_005_manual_gate": "semantic_guided_composition_artifact_verification"
+    "goal_005_manual_gate": "semantic_guided_composition_artifact_verification",
+    "goal_006_manual_gate": "semantic_selected_runtime_composition_artifact_verification"
   },
   "gate_evidence": {
     "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
@@ -52,15 +53,27 @@
     "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
   },
   "last_completed_product_slice": {
-    "slice_id": "product_slice_058a_semantic_guided_acceptance_correctness_hotfix",
-    "title": "Semantic-Guided Acceptance Correctness Hotfix",
-    "completed_at_utc": "2026-06-25T22:55:00Z",
-    "summary": "Product Slice 058A repairs Goal 005 false-positive acceptance by deriving actual scenario acceptance from compiler, missing-layer, candidate-leakage, rule-pack and composition diagnostics; validates semantic-pack schema and layer-kind identity; prevents conflicted term/relation ids from re-entering active output; reports malformed pack JSON deterministically; and clarifies that semantic-selected ids are generator-level selections while Goal 004 runtime evidence is an independent regression check.",
-    "scenario_id": "semantic-guided-composition",
+    "slice_id": "goal_006_semantic_selected_runtime_composition",
+    "title": "Semantic-Selected Generated Package And Runtime Composition",
+    "completed_at_utc": "2026-06-25T23:10:00Z",
+    "summary": "Goal 006 completed S059-S063: records the accepted Goal 005 artifact gate, builds deterministic semantic-selected composition plans, materializes selected quest/dialogue/interaction declarations into validator-clean GamePackage content, executes those selected package ids through the existing headless runtime boundary, proves deterministic replay, save/load roundtrip and cross-variant isolation, and writes semantic-runtime-composition artifacts. It does not add Runtime Preview UI, RAG, LLM/provider execution, arbitrary Lua execution, Unity/media work, genre/project/term-specific C# branches or public GamePackage/runtime contract redesign.",
+    "scenario_id": "semantic-runtime-composition",
     "checks": [
-      "SemanticLayerCompiler/SemanticGuidedComposition/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 29/29 passed",
-      "semantic-guided-composition product smoke: 1/1 passed",
-      "check-all.ps1: 731/731 tests passed, build 0 warnings / 0 errors"
+      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
+      "semantic-runtime-composition product smoke: 1/1 passed",
+      "check-all.ps1: 734/734 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "goal_006_semantic_selected_runtime_composition": {
+    "slice_id": "goal_006_semantic_selected_runtime_composition",
+    "title": "Semantic-Selected Generated Package And Runtime Composition",
+    "completed_at_utc": "2026-06-25T23:10:00Z",
+    "summary": "Goal 006 completes S059-S063 by recording semantic_guided_composition_artifact_verification as passed from the user prompt, carrying selected semantic traces and Goal 004 declarations into deterministic composition plans, mapping those selections to existing package quest/dialogue/interaction/provenance structures, executing the same selected package ids headlessly through runtime-owned state, rejecting invalid/conflicted bindings before runnable package creation, and proving replay, save/load and variant isolation.",
+    "scenario_id": "semantic-runtime-composition",
+    "checks": [
+      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
+      "semantic-runtime-composition product smoke: 1/1 passed",
+      "check-all.ps1: 734/734 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "product_slice_058a_semantic_guided_acceptance_correctness_hotfix": {
@@ -195,10 +208,18 @@
     "next_action": "layered_semantic_packs_and_guided_composition"
   },
   "semantic_guided_composition_artifact_verification": {
+    "status": "passed",
+    "evidence_source": "user_prompt_before_goal_006",
+    "observed_result": [
+      "semantic_guided_composition_artifact_verification passed"
+    ],
+    "next_action": "semantic_selected_runtime_composition"
+  },
+  "semantic_selected_runtime_composition_artifact_verification": {
     "status": "required",
-    "evidence_source": "pending_external_artifact_review_after_goal_005",
+    "evidence_source": "pending_external_artifact_review_after_goal_006",
     "observed_result": [],
-    "next_action": "do_not_start_codex_feature_slice_until_user_confirms_manual_gate"
+    "next_action": "do_not_start_s064_or_goal_007_without_new_explicit_user_request"
   },
   "extension_rule_pack_contract_v1": {
     "document": "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
@@ -226,7 +247,7 @@
     ]
   },
   "allowed_next_codex_task_types": [
-    "semantic_guided_composition_artifact_verification"
+    "semantic_selected_runtime_composition_artifact_verification"
   ],
   "blocked_next_milestones_until_gate_passes": [
     "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -247,11 +268,11 @@
     "broad Lua executor unlock",
     "C# code generation for mechanics"
   ],
-  "recommended_next_work_item": "semantic_guided_composition_artifact_verification",
-  "recommended_next_work_item_title": "Semantic-guided composition artifact verification.",
-  "recommended_next_task_file": ".llmgc/procedural/semantic-guided-composition/semantic-guided-composition-verification.md",
+  "recommended_next_work_item": "semantic_selected_runtime_composition_artifact_verification",
+  "recommended_next_work_item_title": "Semantic-selected runtime composition artifact verification.",
+  "recommended_next_task_file": ".llmgc/procedural/semantic-runtime-composition/semantic-runtime-composition-verification.md",
   "candidate_product_vertical_slices": [
-    "Semantic-guided composition artifact verification"
+    "Semantic-selected runtime composition artifact verification"
   ],
   "required_reading_order_for_new_agents": [
     "AGENTS.md",
@@ -310,7 +331,8 @@
     "Quest/dialog/interaction family acceptance report/manual-verification sidecars",
     "Layered semantic pack compiler and compiled semantic catalog sidecars",
     "Semantic-guided composition report/verification sidecars",
-    "Semantic-guided acceptance correctness hotfix diagnostics"
+    "Semantic-guided acceptance correctness hotfix diagnostics",
+    "Semantic-selected runtime composition report/verification sidecars"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Product Slice 058A keep recommending semantic_guided_composition_artifact_verification and do not start S059, Goal 006 or another Codex feature slice until the user confirms that manual gate."
+  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 006 stop at semantic_selected_runtime_composition_artifact_verification and do not create S064 or start Goal 007 without a new explicit user request."
 }
