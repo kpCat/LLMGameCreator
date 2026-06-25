@@ -1,16 +1,16 @@
 {
   "schema_version": "0.1",
   "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-25T23:10:00Z",
+  "updated_at_utc": "2026-06-25T23:45:00Z",
   "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 006 semantic-selected runtime composition completed",
-  "gate_status": "goal_006_completed_semantic_selected_runtime_composition_artifact_verification_required",
+  "current_phase_title": "Goal 006 semantic-selected runtime composition S063A correctness hotfix completed",
+  "gate_status": "goal_006_s063a_correctness_hotfix_completed_semantic_selected_runtime_composition_artifact_verification_required",
   "last_completed_milestone": "M4.1",
   "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "goal_006_semantic_selected_runtime_composition",
+  "last_completed_product_slice_id": "product_slice_063a_semantic_runtime_composition_correctness_hotfix",
   "active_manual_gate": "Semantic-selected runtime composition artifact verification is the next stop marker before any S064 or Goal 007 work.",
   "current_user_action": "Review or hand off the generated .llmgc/procedural/semantic-runtime-composition folder; do not start S064 or Goal 007 in this run.",
-  "recommended_next_decision": "Goal 006 completed S059-S063: semantic-selected declarations are materialized into package content and executed headlessly with runtime-owned state evidence. Stop at semantic_selected_runtime_composition_artifact_verification; do not create S064 or start Goal 007 without a new explicit user request.",
+  "recommended_next_decision": "Goal 006 S063A correctness hotfix repaired semantic runtime composition binding/runtime false positives: selected/objective-required interactions are materialized, exact package bindings are audited before runtime, adapter evidence is structurally validated, and cross-variant isolation checks state-specific keys. Stop at semantic_selected_runtime_composition_artifact_verification; do not create S064 or start Goal 007 without a new explicit user request.",
   "active_strategy_reset": {
     "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
     "freeze_infrastructure_only_work": true,
@@ -53,15 +53,27 @@
     "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
   },
   "last_completed_product_slice": {
-    "slice_id": "goal_006_semantic_selected_runtime_composition",
-    "title": "Semantic-Selected Generated Package And Runtime Composition",
-    "completed_at_utc": "2026-06-25T23:10:00Z",
-    "summary": "Goal 006 completed S059-S063: records the accepted Goal 005 artifact gate, builds deterministic semantic-selected composition plans, materializes selected quest/dialogue/interaction declarations into validator-clean GamePackage content, executes those selected package ids through the existing headless runtime boundary, proves deterministic replay, save/load roundtrip and cross-variant isolation, and writes semantic-runtime-composition artifacts. It does not add Runtime Preview UI, RAG, LLM/provider execution, arbitrary Lua execution, Unity/media work, genre/project/term-specific C# branches or public GamePackage/runtime contract redesign.",
+    "slice_id": "product_slice_063a_semantic_runtime_composition_correctness_hotfix",
+    "title": "Semantic Runtime Composition Correctness Hotfix",
+    "completed_at_utc": "2026-06-25T23:45:00Z",
+    "summary": "Bounded correctness hotfix for Goal 006 S059-S063. It repairs false-positive semantic runtime composition acceptance by materializing every objective-required interaction, replacing suffixless placeholder bindings with exact package ids, auditing materialized package bindings before runtime, validating structured runtime command/objective/state evidence, requiring reward/completion deltas and save/load evidence, and proving cross-variant isolation beyond distinct hashes. It keeps semantic_selected_runtime_composition_artifact_verification as the only active gate and does not create S064 or start Goal 007.",
     "scenario_id": "semantic-runtime-composition",
     "checks": [
-      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
+      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 36/36 passed",
       "semantic-runtime-composition product smoke: 1/1 passed",
-      "check-all.ps1: 734/734 tests passed, build 0 warnings / 0 errors"
+      "check-all.ps1: 740/740 tests passed, build 0 warnings / 0 errors"
+    ]
+  },
+  "product_slice_063a_semantic_runtime_composition_correctness_hotfix": {
+    "slice_id": "product_slice_063a_semantic_runtime_composition_correctness_hotfix",
+    "title": "Semantic Runtime Composition Correctness Hotfix",
+    "completed_at_utc": "2026-06-25T23:45:00Z",
+    "summary": "Repairs Goal 006 S063 acceptance correctness after external review: selected and objective-required interactions are all materialized; source refs resolve to exact scenario package ids; package bindings are audited before runtime; runtime evidence must contain successful command/objective correlations, reward/completion deltas and exact save/load evidence; injected previous-variant state fails isolation; invalid conflict rejection remains caused by semantic_guided.excludes_conflict and does not run runtime.",
+    "scenario_id": "semantic-runtime-composition",
+    "checks": [
+      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 36/36 passed",
+      "semantic-runtime-composition product smoke: 1/1 passed",
+      "check-all.ps1: 740/740 tests passed, build 0 warnings / 0 errors"
     ]
   },
   "goal_006_semantic_selected_runtime_composition": {
@@ -332,7 +344,8 @@
     "Layered semantic pack compiler and compiled semantic catalog sidecars",
     "Semantic-guided composition report/verification sidecars",
     "Semantic-guided acceptance correctness hotfix diagnostics",
-    "Semantic-selected runtime composition report/verification sidecars"
+    "Semantic-selected runtime composition report/verification sidecars",
+    "Semantic-selected runtime composition correctness hotfix diagnostics"
   ],
-  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 006 stop at semantic_selected_runtime_composition_artifact_verification and do not create S064 or start Goal 007 without a new explicit user request."
+  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 006 and S063A stop at semantic_selected_runtime_composition_artifact_verification and do not create S064 or start Goal 007 without a new explicit user request."
 }

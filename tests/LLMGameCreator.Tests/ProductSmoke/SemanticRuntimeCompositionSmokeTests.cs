@@ -1,3 +1,5 @@
+using System.Text.Json;
+using LLMGameCreator.Application.Design.Semantics;
 using LLMGameCreator.Tests.Application.Semantics;
 using Xunit;
 
@@ -18,16 +20,42 @@ public sealed class SemanticRuntimeCompositionSmokeTests
         Assert.True(File.Exists(write.ReportMarkdownPath));
         Assert.True(File.Exists(write.VerificationMarkdownPath));
         var json = await File.ReadAllTextAsync(write.ReportJsonPath);
-        Assert.Contains("\"accepted\": true", json);
-        Assert.Contains("\"manualGate\": \"semantic_selected_runtime_composition_artifact_verification\"", json);
-        Assert.Contains("\"semanticSelectedIdsExecutedInRuntime\": true", json);
-        Assert.Contains("\"invalidScenarioRejected\": true", json);
-        Assert.Contains("\"llmExecuted\": false", json);
-        Assert.Contains("\"ragExecuted\": false", json);
-        Assert.Contains("\"providerExecuted\": false", json);
-        Assert.Contains("\"luaExecuted\": false", json);
-        Assert.Contains("\"unityExecuted\": false", json);
-        Assert.Contains("\"mediaExecuted\": false", json);
+        var report = JsonSerializer.Deserialize<SemanticSelectedRuntimeCompositionReport>(
+            json,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        Assert.True(report.Accepted);
+        Assert.Equal("semantic_selected_runtime_composition_artifact_verification", report.ManualGate);
+        Assert.True(report.SemanticSelectedIdsExecutedInRuntime);
+        Assert.True(report.InvalidScenarioRejected);
+        Assert.True(report.CrossVariantIsolationPassed);
+        Assert.False(report.ExternalExecution.LlmExecuted);
+        Assert.False(report.ExternalExecution.RagExecuted);
+        Assert.False(report.ExternalExecution.ProviderExecuted);
+        Assert.False(report.ExternalExecution.LuaExecuted);
+        Assert.False(report.ExternalExecution.UnityExecuted);
+        Assert.False(report.ExternalExecution.MediaExecuted);
+
+        var overlay = report.Scenarios.Single(item => item.ScenarioId == "core_genre_project_overlay");
+        Assert.Equal(
+            ["interaction/take_cache_item", "interaction/talk_contact", "interaction/use_reward_on_contact"],
+            overlay.CompositionPlan.MaterializedInteractions.Select(item => item.InteractionPatternId).OrderBy(item => item, StringComparer.Ordinal).ToList());
+        Assert.All(report.Scenarios.Where(item => item.ExpectedValid), scenario =>
+        {
+            Assert.True(scenario.SemanticSelectedIdsExecutedInRuntime);
+            Assert.All(scenario.CompositionPlan.SelectedQuestObjectives, objective =>
+                Assert.Contains(scenario.RuntimeEvidence.ObjectiveInteractionCorrelations, correlation =>
+                    correlation.PackageObjectiveId == objective.PackageObjectiveId &&
+                    objective.RequiredInteractionPatternIds.Contains(correlation.InteractionPatternId) &&
+                    correlation.InteractionSucceeded &&
+                    correlation.ObjectiveAdvanceSucceeded));
+            Assert.True(scenario.RuntimeEvidence.StateDelta.RewardAmountAfter > scenario.RuntimeEvidence.StateDelta.RewardAmountBefore);
+            Assert.Equal(scenario.RuntimeEvidence.StateEvidence, scenario.RuntimeEvidence.RestoredStateEvidence);
+        });
+
+        var invalid = report.Scenarios.Single(item => item.ScenarioId == "invalid_conflict_rejection");
+        Assert.False(invalid.ActualValid);
+        Assert.False(invalid.RuntimeEvidence.RuntimeAttempted);
+        Assert.Contains(invalid.Diagnostics, item => item.Code == "semantic_guided.excludes_conflict");
     }
 
     private static string ResolveProjectFolder(string tempPath)

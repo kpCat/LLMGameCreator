@@ -31,17 +31,20 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
     private readonly QuestDialogInteractionRulePackValidator _rulePackValidator;
     private readonly IGamePackageValidator _packageValidator;
     private readonly ISemanticSelectedRuntimeCompositionRuntimeAdapter _runtimeAdapter;
+    private readonly Func<GamePackageDefinition, SemanticSelectedCompositionPlan, GamePackageDefinition> _packageMutator;
 
     public SemanticSelectedRuntimeCompositionAcceptanceService(
         SemanticGuidedCompositionAcceptanceService? semanticGuidedService = null,
         QuestDialogInteractionRulePackValidator? rulePackValidator = null,
         IGamePackageValidator? packageValidator = null,
-        ISemanticSelectedRuntimeCompositionRuntimeAdapter? runtimeAdapter = null)
+        ISemanticSelectedRuntimeCompositionRuntimeAdapter? runtimeAdapter = null,
+        Func<GamePackageDefinition, SemanticSelectedCompositionPlan, GamePackageDefinition>? packageMutator = null)
     {
         _semanticGuidedService = semanticGuidedService ?? new SemanticGuidedCompositionAcceptanceService();
         _rulePackValidator = rulePackValidator ?? new QuestDialogInteractionRulePackValidator();
         _packageValidator = packageValidator ?? new GamePackageValidator();
         _runtimeAdapter = runtimeAdapter ?? new RuntimeAdapterUnavailable();
+        _packageMutator = packageMutator ?? ((package, _) => package);
     }
 
     public SemanticSelectedRuntimeCompositionAcceptanceResult Build(
@@ -58,6 +61,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
             proofValidation);
 
         var validScenarios = scenarios.Where(item => item.ExpectedValid).ToList();
+        var isolationDiagnostics = ValidateCrossVariantIsolation(validScenarios);
         var invalidScenario = scenarios.Single(item => item.ScenarioId == "invalid_conflict_rejection");
         var deterministicReplayPassed =
             validScenarios.Count > 0 &&
@@ -68,12 +72,15 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         var validRuntimeExecuted = validScenarios.All(item => item.SemanticSelectedIdsExecutedInRuntime);
         var invalidRejected = !invalidScenario.ActualValid &&
                               invalidScenario.Diagnostics.Any(item => item.Severity == "error") &&
+                              invalidScenario.Diagnostics.Any(item => item.Code == "semantic_guided.excludes_conflict") &&
+                              !invalidScenario.RuntimeEvidence.RuntimeAttempted &&
                               string.IsNullOrWhiteSpace(invalidScenario.GeneratedPackageHash);
         var saveLoadPassed = validScenarios.All(item => item.RuntimeEvidence.SaveLoadRoundtripPassed);
         var noLeakage = validScenarios.All(item => !item.CandidateOrConflictLeakageDetected);
         var variantIsolationPassed = HasDistinctValues(validScenarios.Select(item => item.CompositionPlanHash)) &&
                                      HasDistinctValues(validScenarios.Select(item => item.GeneratedPackageHash)) &&
-                                     HasDistinctValues(validScenarios.Select(item => item.RuntimeEvidence.RuntimeStateHash));
+                                     HasDistinctValues(validScenarios.Select(item => item.RuntimeEvidence.RuntimeStateHash)) &&
+                                     isolationDiagnostics.All(item => item.Severity != "error");
         var multiSeedPassed = semanticGuided.Report.MultiSeedChecks.All(item => item.NoDanglingSemanticReferences);
         var goal004Goal005RegressionsPassed =
             semanticGuided.Report.Goal004RuntimeEvidencePreserved &&
@@ -94,6 +101,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
             Diagnostic(goal004Goal005RegressionsPassed ? "info" : "error", goal004Goal005RegressionsPassed ? "semantic_runtime.goal004_goal005_regressions_preserved" : "semantic_runtime.goal004_goal005_regression", "regression", "Goal 004 and Goal 005 semantic-guided regression evidence remains preserved.")
         };
         diagnostics.AddRange(scenarios.SelectMany(item => item.Diagnostics));
+        diagnostics.AddRange(isolationDiagnostics);
 
         var accepted = semanticGuided.Report.Accepted &&
                        !proofValidation.HasErrors &&
@@ -256,23 +264,25 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
 
         var plan = selectedQuest == null || selectedDialogue == null || selectedInteraction == null
             ? new SemanticSelectedCompositionPlan()
-            : BuildPlan(source, selectedQuest, selectedDialogue, selectedInteraction, diagnostics);
+            : BuildPlan(source, selectedQuest, selectedDialogue, selectedInteraction, proofPack, diagnostics);
         var candidateOrConflictLeakage = source.CandidateLeakageDetected ||
                                          source.Diagnostics.Any(item => item.Severity == SemanticDiagnosticSeverity.Error);
-        var actualValid = source.Accepted &&
-                          source.ExpectedValid &&
-                          !candidateOrConflictLeakage &&
-                          diagnostics.All(item => item.Severity != "error");
+        var semanticValid = source.Accepted &&
+                            source.ExpectedValid &&
+                            !candidateOrConflictLeakage &&
+                            diagnostics.All(item => item.Severity != "error");
+        var actualValid = semanticValid;
         GamePackageDefinition? package = null;
         string packageJson = string.Empty;
         string packageHash = string.Empty;
         var packageValidationPassed = false;
         var validationIssues = new List<SemanticSelectedPackageValidationIssue>();
+        var packageAuditPassed = false;
         SemanticSelectedRuntimeCompositionRuntimeEvidence runtimeEvidence;
 
-        if (actualValid)
+        if (semanticValid)
         {
-            package = BuildPackage(plan);
+            package = _packageMutator(BuildPackage(plan), plan);
             packageJson = JsonSerializer.Serialize(package, JsonOptions);
             packageHash = ComputeHash(packageJson);
             var validation = _packageValidator.Validate(package);
@@ -288,22 +298,44 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
                 diagnostics.Add(Diagnostic("error", "semantic_runtime.package_validation_failed", issue.TargetId, issue.Code + ": " + issue.Message));
             }
 
-            runtimeEvidence = packageValidationPassed
-                ? _runtimeAdapter.Run(new SemanticSelectedRuntimeCompositionRuntimeRequest
+            var packageAuditDiagnostics = AuditMaterializedPackage(package, plan);
+            packageAuditPassed = packageAuditDiagnostics.All(item => item.Severity != "error");
+            diagnostics.AddRange(packageAuditDiagnostics);
+            actualValid = semanticValid && packageValidationPassed && packageAuditPassed;
+
+            if (packageValidationPassed && packageAuditPassed)
+            {
+                runtimeEvidence = _runtimeAdapter.Run(new SemanticSelectedRuntimeCompositionRuntimeRequest
                 {
                     ScenarioId = source.ScenarioId,
                     Plan = plan,
                     Package = package,
                     PackageHash = packageHash,
                     PackageJson = packageJson
-                })
-                : new SemanticSelectedRuntimeCompositionRuntimeEvidence
+                });
+                var runtimeDiagnostics = ValidateRuntimeEvidence(source.ScenarioId, plan, package, packageHash, runtimeEvidence);
+                diagnostics.AddRange(runtimeDiagnostics);
+                if (runtimeDiagnostics.Any(item => item.Severity == "error"))
                 {
+                    runtimeEvidence = runtimeEvidence with
+                    {
+                        SemanticSelectedIdsExecutedInRuntime = false,
+                        Diagnostics = SortDiagnostics(runtimeEvidence.Diagnostics.Concat(runtimeDiagnostics))
+                    };
+                }
+            }
+            else
+            {
+                runtimeEvidence = new SemanticSelectedRuntimeCompositionRuntimeEvidence
+                {
+                    RuntimeAttempted = false,
+                    PackageHash = packageHash,
                     Diagnostics =
                     [
-                        Diagnostic("error", "semantic_runtime.runtime_blocked_by_validation", source.ScenarioId, "Package validation failed before runtime execution.")
+                        Diagnostic("error", "semantic_runtime.runtime_blocked_by_materialized_audit", source.ScenarioId, "Package validation or materialized-binding audit failed before runtime execution.")
                     ]
                 };
+            }
             diagnostics.AddRange(runtimeEvidence.Diagnostics);
         }
         else
@@ -321,6 +353,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
 
         var selectedIdsExecuted = actualValid &&
                                   packageValidationPassed &&
+                                  packageAuditPassed &&
                                   runtimeEvidence.SemanticSelectedIdsExecutedInRuntime &&
                                   runtimeEvidence.ExecutedQuestPatternId == plan.SelectedQuestPatternId &&
                                   runtimeEvidence.ExecutedDialogueIntentId == plan.SelectedDialogueIntentId &&
@@ -367,18 +400,60 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         QuestPatternDefinition quest,
         DialogueIntentPatternDefinition dialogue,
         InteractionPatternDefinition interaction,
+        QuestDialogInteractionRulePack proofPack,
         ICollection<SemanticSelectedRuntimeCompositionDiagnostic> diagnostics)
     {
-        var contentRefs = BuildContentRefs();
         foreach (var targetRef in quest.Objectives.Select(item => item.TargetRef)
-                     .Concat([interaction.TargetRef])
-                     .Concat(string.IsNullOrWhiteSpace(interaction.RequiredItemRef) ? Array.Empty<string>() : [interaction.RequiredItemRef])
+                     .Concat(proofPack.InteractionPatterns.Select(item => item.TargetRef))
+                     .Concat(proofPack.InteractionPatterns
+                         .Where(item => !string.IsNullOrWhiteSpace(item.RequiredItemRef))
+                         .Select(item => item.RequiredItemRef))
                      .OrderBy(item => item, StringComparer.Ordinal))
         {
-            if (!contentRefs.ContainsKey(targetRef))
+            if (!CanResolvePackageTargetId(targetRef))
             {
                 diagnostics.Add(Diagnostic("error", "semantic_runtime.content_binding_missing", targetRef, "Selected declaration target ref cannot be represented by generated package content."));
             }
+        }
+
+        var packageQuestId = PackageQuestId(source.ScenarioId);
+        var packageDialogueId = PackageDialogueId(source.ScenarioId);
+        var packageNpcId = "entity/generated_contact";
+        var packageEncounterId = "encounter/generated_challenge";
+        var requiredInteractionIds = quest.Objectives
+            .SelectMany(item => item.RequiredInteractionPatternIds)
+            .Append(interaction.InteractionId)
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(item => item, StringComparer.Ordinal)
+            .ToList();
+        var interactionBindings = new List<SemanticSelectedInteractionBindingPlan>();
+        foreach (var interactionId in requiredInteractionIds)
+        {
+            var declaration = proofPack.InteractionPatterns.FirstOrDefault(item => item.InteractionId == interactionId);
+            if (declaration == null)
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.required_interaction_declaration_missing", interactionId, "Selected quest objective references an interaction declaration that is absent from the validated rule pack."));
+                continue;
+            }
+
+            interactionBindings.Add(new SemanticSelectedInteractionBindingPlan
+            {
+                InteractionPatternId = declaration.InteractionId,
+                Family = declaration.Family,
+                TargetRef = declaration.TargetRef,
+                ResultActionId = declaration.ResultActionId,
+                RequiredItemRef = declaration.RequiredItemRef,
+                PackageInteractionId = declaration.InteractionId,
+                PackageTargetId = ResolvePackageTargetId(declaration.TargetRef, packageQuestId, packageDialogueId, packageNpcId, packageEncounterId),
+                PackageRequiredItemId = string.IsNullOrWhiteSpace(declaration.RequiredItemRef)
+                    ? string.Empty
+                    : ResolvePackageTargetId(declaration.RequiredItemRef, packageQuestId, packageDialogueId, packageNpcId, packageEncounterId),
+                CorrelatedObjectiveIds = quest.Objectives
+                    .Where(objective => objective.RequiredInteractionPatternIds.Contains(declaration.InteractionId, StringComparer.Ordinal))
+                    .Select(objective => PackageObjectiveId(objective.ObjectiveId))
+                    .OrderBy(item => item, StringComparer.Ordinal)
+                    .ToList()
+            });
         }
 
         var planWithoutHash = new SemanticSelectedCompositionPlan
@@ -405,7 +480,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
                 ObjectiveKind = item.ObjectiveKind,
                 TargetRef = item.TargetRef,
                 PackageObjectiveId = PackageObjectiveId(item.ObjectiveId),
-                PackageTargetId = ResolvePackageTargetId(item.TargetRef),
+                PackageTargetId = ResolvePackageTargetId(item.TargetRef, packageQuestId, packageDialogueId, packageNpcId, packageEncounterId),
                 RequiredInteractionPatternIds = item.RequiredInteractionPatternIds
             }).ToList(),
             SelectedDialogueIntentId = dialogue.IntentId,
@@ -417,12 +492,13 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
             SelectedInteractionTargetRef = interaction.TargetRef,
             SelectedInteractionResultActionId = interaction.ResultActionId,
             SelectedInteractionRequiredItemRef = interaction.RequiredItemRef,
-            PackageQuestId = PackageQuestId(source.ScenarioId),
-            PackageDialogueId = PackageDialogueId(source.ScenarioId),
+            MaterializedInteractions = interactionBindings,
+            PackageQuestId = packageQuestId,
+            PackageDialogueId = packageDialogueId,
             PackageInteractionId = interaction.InteractionId,
-            PackageNpcId = "entity/generated_contact",
+            PackageNpcId = packageNpcId,
             PackageItemIds = ["item/generated_cache", "item/generated_reward", "item/generated_recovered_item"],
-            PackageEncounterId = "encounter/generated_challenge",
+            PackageEncounterId = packageEncounterId,
             PackageMapId = "map/semantic_runtime_start",
             Diagnostics = diagnostics.OrderBy(item => item.Code, StringComparer.Ordinal).ThenBy(item => item.Target, StringComparer.Ordinal).ToList(),
             Provenance = new SortedDictionary<string, string>(StringComparer.Ordinal)
@@ -445,7 +521,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
     {
         var quest = BuildQuest(plan);
         var dialogue = BuildDialogue(plan);
-        var interaction = BuildInteraction(plan);
+        var interactions = plan.MaterializedInteractions.Select(item => BuildInteraction(plan, item)).ToList();
         var package = new GamePackageDefinition
         {
             Manifest = new GameManifest
@@ -518,8 +594,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
                         Slots = 8,
                         Stacks =
                         [
-                            new ItemStackDefinition { ItemId = "item/generated_reward", Amount = 1, QuestItem = true },
-                            new ItemStackDefinition { ItemId = "item/generated_cache", Amount = 1, QuestItem = true }
+                            new ItemStackDefinition { ItemId = "item/generated_reward", Amount = 1, QuestItem = true }
                         ],
                         Metadata = Metadata(plan, ("semanticRuntimeRole", "runtime_start_inventory"))
                     }
@@ -555,7 +630,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
                 ],
                 Quests = [quest],
                 Dialogues = [dialogue],
-                Interactions = [interaction],
+                Interactions = interactions,
                 Factions =
                 [
                     new FactionDefinition
@@ -661,17 +736,14 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
                         Objectives = plan.SelectedQuestObjectives.Select(item => item.PackageTargetId).ToList()
                     }
                 ],
-                Mechanics =
-                [
-                    new GeneratedMechanicDefinition
+                Mechanics = plan.MaterializedInteractions.Select(item => new GeneratedMechanicDefinition
                     {
-                        SourceId = plan.SelectedInteractionPatternId,
-                        PackageAbilityId = plan.PackageInteractionId,
-                        Name = TitleFromId(plan.SelectedInteractionPatternId),
-                        Description = "Selected interaction pattern represented by existing runtime primitives.",
-                        Tags = [plan.SelectedInteractionFamily, plan.SelectedInteractionResultActionId]
-                    }
-                ],
+                        SourceId = item.InteractionPatternId,
+                        PackageAbilityId = item.PackageInteractionId,
+                        Name = TitleFromId(item.InteractionPatternId),
+                        Description = "Selected or objective-required interaction pattern represented by existing runtime primitives.",
+                        Tags = [item.Family, item.ResultActionId]
+                    }).ToList(),
                 AppliedArtifacts =
                 [
                     new GeneratedContentArtifactProvenance
@@ -711,7 +783,7 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         Description = "Quest materialized from selected semantic rule declaration.",
         Kind = "semantic_selected_quest",
         AutoStart = false,
-        Objectives = plan.SelectedQuestObjectives.Select(ToPackageObjective).ToList(),
+        Objectives = plan.SelectedQuestObjectives.Select(objective => ToPackageObjective(objective, plan)).ToList(),
         Rewards =
         [
             new OutputDefinition { Kind = "item", Id = "item/generated_reward", Amount = 1 },
@@ -721,14 +793,14 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         Metadata = Metadata(plan, ("selectedRuleQuestPatternId", plan.SelectedQuestPatternId))
     };
 
-    private static QuestObjectiveDefinition ToPackageObjective(SemanticSelectedQuestObjectivePlan objective)
+    private static QuestObjectiveDefinition ToPackageObjective(SemanticSelectedQuestObjectivePlan objective, SemanticSelectedCompositionPlan plan)
     {
         var kind = objective.ObjectiveKind switch
         {
             "objective/fetch_item" => "has_item",
             "objective/deliver_item" => "has_item",
             "objective/recover_item" => "complete_encounter",
-            "objective/interact" when objective.PackageTargetId.StartsWith("dialogue/", StringComparison.Ordinal) => "talk_to",
+            "objective/interact" when objective.TargetRef.StartsWith("npc/", StringComparison.Ordinal) => "talk_to",
             "objective/interact" => "custom_counter",
             _ => "custom_counter"
         };
@@ -743,7 +815,8 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
                 ("selectedRuleObjectiveId", objective.ObjectiveId),
                 ("selectedRuleObjectiveKind", objective.ObjectiveKind),
                 ("selectedRuleTargetRef", objective.TargetRef),
-                ("dialogue_id", objective.PackageTargetId.StartsWith("dialogue/", StringComparison.Ordinal) ? objective.PackageTargetId : string.Empty))
+                ("requiredInteractionPatternIds", string.Join(",", objective.RequiredInteractionPatternIds.OrderBy(item => item, StringComparer.Ordinal))),
+                ("dialogue_id", objective.TargetRef.StartsWith("npc/", StringComparison.Ordinal) ? plan.PackageDialogueId : string.Empty))
         };
     }
 
@@ -771,8 +844,9 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
                         {
                             Id = "advance",
                             Text = "Continue.",
-                            AdvanceQuestId = plan.PackageQuestId,
-                            Metadata = SortedArgs(("objective_id", plan.SelectedQuestObjectives.First().PackageObjectiveId)),
+                            Metadata = SortedArgs(
+                                ("quest_id", plan.PackageQuestId),
+                                ("objective_id", plan.SelectedQuestObjectives.First().PackageObjectiveId)),
                             CloseDialogue = true
                         }
                     ]
@@ -781,9 +855,9 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         };
     }
 
-    private static InteractionDefinition BuildInteraction(SemanticSelectedCompositionPlan plan)
+    private static InteractionDefinition BuildInteraction(SemanticSelectedCompositionPlan plan, SemanticSelectedInteractionBindingPlan binding)
     {
-        var kind = plan.SelectedInteractionFamily switch
+        var kind = binding.Family switch
         {
             "interaction/talk" => "talk",
             "interaction/use_item_on_target" => "use_item_on_target",
@@ -795,9 +869,9 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         {
             effects.Add(new EffectDefinition
             {
-                Type = plan.SelectedInteractionResultActionId == "action/grant_item" ? "add_item" : "set_flag",
+                Type = binding.ResultActionId == "action/grant_item" ? "add_item" : "set_flag",
                 Args = SortedArgs(
-                    ("id", plan.SelectedInteractionResultActionId == "action/grant_item" ? "item/generated_cache" : FlagId(plan)),
+                    ("id", binding.ResultActionId == "action/grant_item" ? binding.PackageTargetId : FlagId(plan)),
                     ("amount", "1"),
                     ("value", "true"))
             });
@@ -805,17 +879,20 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
 
         return new InteractionDefinition
         {
-            Id = plan.PackageInteractionId,
+            Id = binding.PackageInteractionId,
             Kind = kind,
             Effects = effects,
             Metadata = Metadata(
                 plan,
-                ("selectedRuleInteractionPatternId", plan.SelectedInteractionPatternId),
-                ("selectedRuleInteractionFamily", plan.SelectedInteractionFamily),
-                ("selectedRuleInteractionTargetRef", plan.SelectedInteractionTargetRef),
+                ("selectedRuleInteractionPatternId", binding.InteractionPatternId),
+                ("selectedRuleInteractionFamily", binding.Family),
+                ("selectedRuleInteractionTargetRef", binding.TargetRef),
+                ("selectedRuleInteractionResultActionId", binding.ResultActionId),
+                ("target_id", binding.PackageTargetId),
                 ("dialogue_id", kind == "talk" ? plan.PackageDialogueId : string.Empty),
-                ("item_id", kind == "use_item_on_target" ? ResolvePackageTargetId(plan.SelectedInteractionRequiredItemRef) : string.Empty),
+                ("item_id", kind == "use_item_on_target" ? binding.PackageRequiredItemId : string.Empty),
                 ("encounter_id", kind == "fight" ? plan.PackageEncounterId : string.Empty),
+                ("correlatedObjectiveIds", string.Join(",", binding.CorrelatedObjectiveIds)),
                 ("seed", StableInt(plan.PlanHash).ToString(System.Globalization.CultureInfo.InvariantCulture)))
         };
     }
@@ -842,17 +919,14 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
             ]
     };
 
-    private static IReadOnlyDictionary<string, SemanticSelectedContentRef> BuildContentRefs() =>
-        new SortedDictionary<string, SemanticSelectedContentRef>(StringComparer.Ordinal)
-        {
-            ["encounter/generated_challenge"] = new() { SourceRef = "encounter/generated_challenge", PackageKind = "encounter", PackageId = "encounter/generated_challenge" },
-            ["item/generated_cache"] = new() { SourceRef = "item/generated_cache", PackageKind = "item", PackageId = "item/generated_cache" },
-            ["item/generated_recovered_item"] = new() { SourceRef = "item/generated_recovered_item", PackageKind = "item", PackageId = "item/generated_recovered_item" },
-            ["item/generated_reward"] = new() { SourceRef = "item/generated_reward", PackageKind = "item", PackageId = "item/generated_reward" },
-            ["npc/generated_contact"] = new() { SourceRef = "npc/generated_contact", PackageKind = "dialogue", PackageId = "dialogue/semantic_selected" },
-            ["object/generated_marker"] = new() { SourceRef = "object/generated_marker", PackageKind = "map_entity", PackageId = "entity/generated_contact" },
-            ["quest/generated_goal"] = new() { SourceRef = "quest/generated_goal", PackageKind = "quest", PackageId = "quest/semantic_selected" }
-        };
+    private static bool CanResolvePackageTargetId(string targetRef) =>
+        targetRef is "encounter/generated_challenge"
+            or "item/generated_cache"
+            or "item/generated_recovered_item"
+            or "item/generated_reward"
+            or "npc/generated_contact"
+            or "object/generated_marker"
+            or "quest/generated_goal";
 
     private static SortedDictionary<string, string> BuildSlots(SemanticGuidedCompositionScenario source) =>
         new(StringComparer.Ordinal)
@@ -879,16 +953,22 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         return result;
     }
 
-    private static string ResolvePackageTargetId(string targetRef) =>
+    private static string ResolvePackageTargetId(
+        string targetRef,
+        string packageQuestId,
+        string packageDialogueId,
+        string packageNpcId,
+        string packageEncounterId) =>
         targetRef switch
         {
-            "encounter/generated_challenge" => "encounter/generated_challenge",
+            "encounter/generated_challenge" => packageEncounterId,
             "item/generated_cache" => "item/generated_cache",
             "item/generated_recovered_item" => "item/generated_recovered_item",
             "item/generated_reward" => "item/generated_reward",
-            "npc/generated_contact" => "dialogue/semantic_selected",
-            "object/generated_marker" => "entity/generated_contact",
-            "quest/generated_goal" => "quest/semantic_selected",
+            "npc/generated_contact" => packageNpcId,
+            "object/generated_marker" => packageNpcId,
+            "quest/generated_goal" => packageQuestId,
+            "dialogue/generated_contact" => packageDialogueId,
             _ => targetRef
         };
 
@@ -913,6 +993,306 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
             "runtime commands: " + string.Join(",", runtimeEvidence.Commands.Select(item => item.CommandType).OrderBy(item => item, StringComparer.Ordinal)),
             "runtime evidence hash: " + runtimeEvidence.RuntimeEvidenceHash
         ];
+
+    public static IReadOnlyList<SemanticSelectedRuntimeCompositionDiagnostic> AuditMaterializedPackage(
+        GamePackageDefinition package,
+        SemanticSelectedCompositionPlan plan)
+    {
+        var diagnostics = new List<SemanticSelectedRuntimeCompositionDiagnostic>();
+        var quest = package.Game.Quests.FirstOrDefault(item => string.Equals(item.Id, plan.PackageQuestId, StringComparison.Ordinal));
+        var dialogue = package.Game.Dialogues.FirstOrDefault(item => string.Equals(item.Id, plan.PackageDialogueId, StringComparison.Ordinal));
+        var interactions = package.Game.Interactions.ToDictionary(item => item.Id, item => item, StringComparer.Ordinal);
+
+        if (quest == null)
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.quest_missing", plan.PackageQuestId, "Selected package quest is missing."));
+        }
+
+        if (dialogue == null)
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.dialogue_missing", plan.PackageDialogueId, "Selected package dialogue is missing."));
+        }
+
+        if (!interactions.ContainsKey(plan.PackageInteractionId))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.selected_interaction_missing", plan.PackageInteractionId, "Semantic-selected interaction is missing from package interactions."));
+        }
+
+        foreach (var objective in plan.SelectedQuestObjectives)
+        {
+            var packageObjective = quest?.Objectives.FirstOrDefault(item => string.Equals(item.Id, objective.PackageObjectiveId, StringComparison.Ordinal));
+            if (packageObjective == null)
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.objective_missing", objective.PackageObjectiveId, "Selected quest objective is missing from the package quest."));
+                continue;
+            }
+
+            if (!string.Equals(packageObjective.TargetId, objective.PackageTargetId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.objective_target_mismatch", objective.PackageObjectiveId, "Selected quest objective target does not match the composition plan."));
+            }
+
+            if (!PackageTargetExists(package, objective.TargetRef, objective.PackageTargetId))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.objective_target_missing", objective.PackageTargetId, "Selected quest objective target does not resolve to materialized package content."));
+            }
+
+            if (objective.TargetRef.StartsWith("npc/", StringComparison.Ordinal) &&
+                (!packageObjective.Metadata.TryGetValue("dialogue_id", out var dialogueId) || !string.Equals(dialogueId, plan.PackageDialogueId, StringComparison.Ordinal)))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.objective_dialogue_binding_missing", objective.PackageObjectiveId, "NPC objective must bind to the exact scenario dialogue id in metadata."));
+            }
+
+            foreach (var requiredInteractionId in objective.RequiredInteractionPatternIds.OrderBy(item => item, StringComparer.Ordinal))
+            {
+                if (!plan.MaterializedInteractions.Any(item => string.Equals(item.InteractionPatternId, requiredInteractionId, StringComparison.Ordinal)) ||
+                    !interactions.ContainsKey(requiredInteractionId))
+                {
+                    diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.required_interaction_missing", requiredInteractionId, "Objective-required interaction is not materialized in the package."));
+                }
+            }
+        }
+
+        foreach (var binding in plan.MaterializedInteractions)
+        {
+            if (!interactions.TryGetValue(binding.PackageInteractionId, out var interaction))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.materialized_interaction_missing", binding.PackageInteractionId, "Materialized interaction binding is missing from package interactions."));
+                continue;
+            }
+
+            CheckMetadata(diagnostics, interaction.Metadata, "selectedRuleInteractionPatternId", binding.InteractionPatternId, interaction.Id);
+            CheckMetadata(diagnostics, interaction.Metadata, "target_id", binding.PackageTargetId, interaction.Id);
+            if (!PackageTargetExists(package, binding.TargetRef, binding.PackageTargetId))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.interaction_target_missing", binding.PackageTargetId, "Materialized interaction target does not resolve to package content."));
+            }
+
+            if (binding.Family == "interaction/talk")
+            {
+                CheckMetadata(diagnostics, interaction.Metadata, "dialogue_id", plan.PackageDialogueId, interaction.Id);
+            }
+
+            if (binding.Family == "interaction/resolve_challenge")
+            {
+                CheckMetadata(diagnostics, interaction.Metadata, "encounter_id", plan.PackageEncounterId, interaction.Id);
+            }
+
+            if (binding.Family == "interaction/use_item_on_target")
+            {
+                CheckMetadata(diagnostics, interaction.Metadata, "item_id", binding.PackageRequiredItemId, interaction.Id);
+                if (!package.Game.Items.Any(item => string.Equals(item.Id, binding.PackageRequiredItemId, StringComparison.Ordinal)))
+                {
+                    diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.required_item_missing", binding.PackageRequiredItemId, "Interaction required item does not resolve to package content."));
+                }
+            }
+        }
+
+        if (dialogue != null)
+        {
+            CheckMetadata(diagnostics, dialogue.Metadata, "selectedRuleDialogueIntentId", plan.SelectedDialogueIntentId, dialogue.Id);
+            var startNode = dialogue.Nodes.FirstOrDefault(item => string.Equals(item.Id, dialogue.StartNodeId, StringComparison.Ordinal));
+            if (startNode == null)
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.dialogue_start_missing", dialogue.Id, "Selected dialogue start node is missing."));
+            }
+            else
+            {
+                if (!string.Equals(startNode.SpeakerId, plan.PackageNpcId, StringComparison.Ordinal) ||
+                    !PackageTargetExists(package, "npc/generated_contact", startNode.SpeakerId))
+                {
+                    diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.dialogue_speaker_missing", startNode.SpeakerId, "Selected dialogue speaker does not resolve to the package NPC entity."));
+                }
+
+                var advance = startNode.Choices.FirstOrDefault(item => string.Equals(item.Id, "advance", StringComparison.Ordinal));
+                if (advance == null ||
+                    !advance.Metadata.TryGetValue("quest_id", out var questId) ||
+                    !string.Equals(questId, plan.PackageQuestId, StringComparison.Ordinal) ||
+                    !advance.Metadata.TryGetValue("objective_id", out var objectiveId) ||
+                    !plan.SelectedQuestObjectives.Any(item => string.Equals(item.PackageObjectiveId, objectiveId, StringComparison.Ordinal)))
+                {
+                    diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.dialogue_quest_binding_missing", dialogue.Id, "Selected dialogue choice must advance the exact package quest and objective."));
+                }
+            }
+        }
+
+        if (package.GeneratedContent.Profile.SourceContextJson is { Length: > 0 } sourceContextJson)
+        {
+            try
+            {
+                var provenance = JsonSerializer.Deserialize<Dictionary<string, string>>(sourceContextJson, JsonOptions) ?? [];
+                CheckProvenance(diagnostics, provenance, "selectedQuestPatternId", plan.SelectedQuestPatternId);
+                CheckProvenance(diagnostics, provenance, "selectedDialogueIntentId", plan.SelectedDialogueIntentId);
+                CheckProvenance(diagnostics, provenance, "selectedInteractionPatternId", plan.SelectedInteractionPatternId);
+            }
+            catch (JsonException)
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.provenance_unreadable", plan.PlanId, "Generated package provenance SourceContextJson is not deterministic JSON."));
+            }
+        }
+
+        var placeholderValues = package.Game.Quests.SelectMany(questItem => questItem.Objectives.Select(objective => objective.TargetId ?? string.Empty))
+            .Concat(package.Game.Quests.SelectMany(questItem => questItem.Objectives.SelectMany(objective => objective.Metadata.Values)))
+            .Concat(package.Game.Interactions.SelectMany(interaction => interaction.Metadata.Values))
+            .Concat(package.Game.Dialogues.Select(dialogueItem => dialogueItem.Id))
+            .Where(value => string.Equals(value, "dialogue/semantic_selected", StringComparison.Ordinal))
+            .ToList();
+        if (placeholderValues.Count > 0)
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.suffixless_dialogue_placeholder", "dialogue/semantic_selected", "Suffixless placeholder dialogue id is not an exact materialized package id."));
+        }
+
+        return SortDiagnostics(diagnostics.Count == 0
+            ? [Diagnostic("info", "semantic_runtime.audit.materialized_bindings_passed", plan.PlanId, "Selected quest/dialogue/interaction bindings resolve to exact materialized package ids.")]
+            : diagnostics);
+    }
+
+    private static IReadOnlyList<SemanticSelectedRuntimeCompositionDiagnostic> ValidateRuntimeEvidence(
+        string scenarioId,
+        SemanticSelectedCompositionPlan plan,
+        GamePackageDefinition package,
+        string packageHash,
+        SemanticSelectedRuntimeCompositionRuntimeEvidence evidence)
+    {
+        var diagnostics = new List<SemanticSelectedRuntimeCompositionDiagnostic>();
+        if (!evidence.RuntimeAttempted)
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.runtime_not_attempted", scenarioId, "Runtime evidence was not attempted for a valid audited package."));
+        }
+
+        if (!evidence.RuntimeStartSucceeded)
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.runtime_start_failed", scenarioId, "Runtime start did not succeed."));
+        }
+
+        if (!string.Equals(evidence.PackageHash, packageHash, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.package_hash_mismatch", scenarioId, "Runtime evidence package hash does not match the generated package hash."));
+        }
+
+        if (!EvidenceEquals(evidence, "packageId", package.Manifest.PackageId) ||
+            !EvidenceEquals(evidence, "currentMapId", plan.PackageMapId))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.package_identity_missing", scenarioId, "Runtime state evidence must observe the exact package id and map id."));
+        }
+
+        if (evidence.ExecutedQuestPatternId != plan.SelectedQuestPatternId ||
+            evidence.ExecutedDialogueIntentId != plan.SelectedDialogueIntentId ||
+            evidence.ExecutedInteractionPatternId != plan.SelectedInteractionPatternId ||
+            evidence.ExecutedPackageQuestId != plan.PackageQuestId ||
+            evidence.ExecutedPackageDialogueId != plan.PackageDialogueId ||
+            evidence.ExecutedPackageInteractionId != plan.PackageInteractionId)
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.selected_ids_mismatch", scenarioId, "Runtime evidence selected declaration/package ids do not match the composition plan."));
+        }
+
+        foreach (var command in evidence.Commands)
+        {
+            if (!command.Succeeded)
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.required_command_failed", command.CommandId, "Every command required for semantic runtime acceptance must succeed."));
+            }
+        }
+
+        RequireCommand(diagnostics, evidence, "gameplay/start_quest", plan.PackageQuestId);
+        RequireCommand(diagnostics, evidence, "gameplay/open_dialogue", plan.PackageDialogueId);
+        RequireCommand(diagnostics, evidence, "gameplay/choose_dialogue_option", "advance");
+        foreach (var binding in plan.MaterializedInteractions)
+        {
+            RequireCommand(diagnostics, evidence, "gameplay/execute_interaction", binding.PackageInteractionId);
+        }
+
+        foreach (var objective in plan.SelectedQuestObjectives)
+        {
+            var objectiveEvidence = evidence.ObjectiveEvidence.FirstOrDefault(item => string.Equals(item.PackageObjectiveId, objective.PackageObjectiveId, StringComparison.Ordinal));
+            if (objectiveEvidence == null)
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.objective_missing", objective.PackageObjectiveId, "Runtime-owned objective evidence is missing."));
+                continue;
+            }
+
+            if (!objectiveEvidence.Completed ||
+                !objectiveEvidence.RuntimeOwnedProgressEvidence ||
+                objectiveEvidence.AfterAmount < objectiveEvidence.RequiredAmount ||
+                !string.Equals(objectiveEvidence.TargetId, objective.PackageTargetId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.objective_not_completed", objective.PackageObjectiveId, "Runtime-owned objective evidence must prove completion/progress for the exact package target."));
+            }
+
+            foreach (var requiredInteractionId in objective.RequiredInteractionPatternIds)
+            {
+                var correlation = evidence.ObjectiveInteractionCorrelations.FirstOrDefault(item =>
+                    string.Equals(item.PackageObjectiveId, objective.PackageObjectiveId, StringComparison.Ordinal) &&
+                    string.Equals(item.InteractionPatternId, requiredInteractionId, StringComparison.Ordinal));
+                if (correlation == null || !correlation.InteractionSucceeded || !correlation.ObjectiveAdvanceSucceeded)
+                {
+                    diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.objective_interaction_correlation_missing", objective.PackageObjectiveId + "|" + requiredInteractionId, "Objective-required interaction must succeed before correlated objective advancement is counted."));
+                }
+            }
+        }
+
+        if (!evidence.StateDelta.DialogueOpened ||
+            !evidence.StateDelta.DialogueClosedAfterChoice ||
+            !string.Equals(evidence.StateDelta.ActiveDialogueIdAfterOpen, plan.PackageDialogueId, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.dialogue_state_missing", plan.PackageDialogueId, "Selected dialogue must be opened and its relevant option executed successfully."));
+        }
+
+        if (evidence.StateDelta.RewardAmountAfter <= evidence.StateDelta.RewardAmountBefore ||
+            evidence.StateDelta.CompletionFlagBefore == evidence.StateDelta.CompletionFlagAfter ||
+            !string.Equals(evidence.StateDelta.CompletionFlagAfter, "completed", StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.reward_completion_delta_missing", plan.PackageQuestId, "Reward/completion evidence must be an unambiguous runtime-owned delta, not pre-seeded inventory."));
+        }
+
+        if (!evidence.SaveLoadRoundtripPassed ||
+            !string.Equals(evidence.RuntimeStateHash, evidence.RestoredRuntimeStateHash, StringComparison.Ordinal) ||
+            !DictionaryEquals(evidence.StateEvidence, evidence.RestoredStateEvidence))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.save_load_mismatch", scenarioId, "Save/load must restore the exact required runtime evidence."));
+        }
+
+        if (!evidence.SemanticSelectedIdsExecutedInRuntime && diagnostics.Count == 0)
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.selected_execution_flag_false", scenarioId, "Adapter did not claim semantic-selected execution after providing otherwise valid evidence."));
+        }
+
+        return SortDiagnostics(diagnostics);
+    }
+
+    private static IReadOnlyList<SemanticSelectedRuntimeCompositionDiagnostic> ValidateCrossVariantIsolation(
+        IReadOnlyList<SemanticSelectedRuntimeCompositionScenario> scenarios)
+    {
+        var diagnostics = new List<SemanticSelectedRuntimeCompositionDiagnostic>();
+        foreach (var scenario in scenarios)
+        {
+            var ownKeys = ExpectedIsolationKeys(scenario).ToHashSet(StringComparer.Ordinal);
+            if (!scenario.RuntimeEvidence.IsolationKeys.Any() ||
+                !ownKeys.All(key => scenario.RuntimeEvidence.IsolationKeys.Contains(key, StringComparer.Ordinal)))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.isolation.own_keys_missing", scenario.ScenarioId, "Runtime evidence must contain all scenario-specific package, declaration and state isolation keys."));
+            }
+
+            if (!EvidenceEquals(scenario.RuntimeEvidence, "scenarioId", scenario.ScenarioId))
+            {
+                diagnostics.Add(Diagnostic("error", "semantic_runtime.isolation.scenario_id_missing", scenario.ScenarioId, "Runtime evidence scenario id must match the scenario being executed."));
+            }
+
+            foreach (var other in scenarios.Where(item => !string.Equals(item.ScenarioId, scenario.ScenarioId, StringComparison.Ordinal)))
+            {
+                var foreignKeys = ExpectedIsolationKeys(other).Except(ownKeys, StringComparer.Ordinal).ToHashSet(StringComparer.Ordinal);
+                if (scenario.RuntimeEvidence.IsolationKeys.Any(key => foreignKeys.Contains(key)) ||
+                    scenario.RuntimeEvidence.StateEvidence.Values.Any(value => foreignKeys.Contains(value)))
+                {
+                    diagnostics.Add(Diagnostic("error", "semantic_runtime.isolation.foreign_state_leak", scenario.ScenarioId, "Runtime evidence contains package/declaration/state ids from another variant."));
+                }
+            }
+        }
+
+        return SortDiagnostics(diagnostics.Count == 0
+            ? [Diagnostic("info", "semantic_runtime.isolation.variant_state_passed", "variant_matrix", "Sequential scenario evidence contains only its own package, selected declaration and state ids.")]
+            : diagnostics);
+    }
 
     private static string RenderReport(SemanticSelectedRuntimeCompositionReport report)
     {
@@ -983,6 +1363,123 @@ public sealed class SemanticSelectedRuntimeCompositionAcceptanceService
         TargetId = issue.TargetId ?? string.Empty,
         Category = issue.Category ?? string.Empty
     };
+
+    private static bool PackageTargetExists(GamePackageDefinition package, string sourceRef, string packageId)
+    {
+        if (sourceRef.StartsWith("item/", StringComparison.Ordinal))
+        {
+            return package.Game.Items.Any(item => string.Equals(item.Id, packageId, StringComparison.Ordinal));
+        }
+
+        if (sourceRef.StartsWith("encounter/", StringComparison.Ordinal))
+        {
+            return package.Game.Encounters.Any(item => string.Equals(item.Id, packageId, StringComparison.Ordinal));
+        }
+
+        if (sourceRef.StartsWith("quest/", StringComparison.Ordinal))
+        {
+            return package.Game.Quests.Any(item => string.Equals(item.Id, packageId, StringComparison.Ordinal));
+        }
+
+        if (sourceRef.StartsWith("dialogue/", StringComparison.Ordinal))
+        {
+            return package.Game.Dialogues.Any(item => string.Equals(item.Id, packageId, StringComparison.Ordinal));
+        }
+
+        if (sourceRef.StartsWith("npc/", StringComparison.Ordinal) || sourceRef.StartsWith("object/", StringComparison.Ordinal))
+        {
+            return package.Game.Maps.SelectMany(item => item.Entities).Any(item => string.Equals(item.Id, packageId, StringComparison.Ordinal));
+        }
+
+        return false;
+    }
+
+    private static void CheckMetadata(
+        ICollection<SemanticSelectedRuntimeCompositionDiagnostic> diagnostics,
+        IReadOnlyDictionary<string, string> metadata,
+        string key,
+        string expected,
+        string target)
+    {
+        if (!metadata.TryGetValue(key, out var actual) || !string.Equals(actual, expected, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.metadata_mismatch", target + "|" + key, "Materialized package metadata does not match the exact composition plan id."));
+        }
+    }
+
+    private static void CheckProvenance(
+        ICollection<SemanticSelectedRuntimeCompositionDiagnostic> diagnostics,
+        IReadOnlyDictionary<string, string> provenance,
+        string key,
+        string expected)
+    {
+        if (!provenance.TryGetValue(key, out var actual) || !string.Equals(actual, expected, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.audit.provenance_mismatch", key, "Generated package provenance does not match the composition plan id."));
+        }
+    }
+
+    private static bool EvidenceEquals(
+        SemanticSelectedRuntimeCompositionRuntimeEvidence evidence,
+        string key,
+        string expected) =>
+        evidence.StateEvidence.TryGetValue(key, out var actual) && string.Equals(actual, expected, StringComparison.Ordinal);
+
+    private static void RequireCommand(
+        ICollection<SemanticSelectedRuntimeCompositionDiagnostic> diagnostics,
+        SemanticSelectedRuntimeCompositionRuntimeEvidence evidence,
+        string commandType,
+        string targetId)
+    {
+        if (!evidence.Commands.Any(item =>
+                string.Equals(item.CommandType, commandType, StringComparison.Ordinal) &&
+                string.Equals(item.TargetId, targetId, StringComparison.Ordinal) &&
+                item.Succeeded))
+        {
+            diagnostics.Add(Diagnostic("error", "semantic_runtime.evidence.required_command_missing", commandType + "|" + targetId, "Required runtime command success evidence is missing."));
+        }
+    }
+
+    private static bool DictionaryEquals(
+        IReadOnlyDictionary<string, string> left,
+        IReadOnlyDictionary<string, string> right)
+    {
+        if (left.Count != right.Count)
+        {
+            return false;
+        }
+
+        foreach (var pair in left)
+        {
+            if (!right.TryGetValue(pair.Key, out var value) || !string.Equals(value, pair.Value, StringComparison.Ordinal))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static IEnumerable<string> ExpectedIsolationKeys(SemanticSelectedRuntimeCompositionScenario scenario)
+    {
+        yield return "scenario:" + scenario.ScenarioId;
+        yield return "packageId:" + scenario.GeneratedPackageId;
+        yield return "packageHash:" + scenario.GeneratedPackageHash;
+        yield return "quest:" + scenario.CompositionPlan.PackageQuestId;
+        yield return "dialogue:" + scenario.CompositionPlan.PackageDialogueId;
+        yield return "selectedQuest:" + scenario.SelectedQuestPatternId;
+        yield return "selectedDialogue:" + scenario.SelectedDialogueIntentId;
+        yield return "selectedInteraction:" + scenario.SelectedInteractionPatternId;
+        foreach (var objective in scenario.CompositionPlan.SelectedQuestObjectives)
+        {
+            yield return "objective:" + objective.PackageObjectiveId;
+        }
+
+        foreach (var interaction in scenario.CompositionPlan.MaterializedInteractions)
+        {
+            yield return "interaction:" + interaction.PackageInteractionId;
+        }
+    }
 
     private static bool HasDistinctValues(IEnumerable<string> values)
     {
@@ -1204,6 +1701,7 @@ public sealed record SemanticSelectedCompositionPlan
     public string SelectedInteractionTargetRef { get; init; } = string.Empty;
     public string SelectedInteractionResultActionId { get; init; } = string.Empty;
     public string SelectedInteractionRequiredItemRef { get; init; } = string.Empty;
+    public IReadOnlyList<SemanticSelectedInteractionBindingPlan> MaterializedInteractions { get; init; } = Array.Empty<SemanticSelectedInteractionBindingPlan>();
     public string PackageQuestId { get; init; } = string.Empty;
     public string PackageDialogueId { get; init; } = string.Empty;
     public string PackageInteractionId { get; init; } = string.Empty;
@@ -1225,6 +1723,19 @@ public sealed record SemanticSelectedQuestObjectivePlan
     public string PackageObjectiveId { get; init; } = string.Empty;
     public string PackageTargetId { get; init; } = string.Empty;
     public IReadOnlyList<string> RequiredInteractionPatternIds { get; init; } = Array.Empty<string>();
+}
+
+public sealed record SemanticSelectedInteractionBindingPlan
+{
+    public string InteractionPatternId { get; init; } = string.Empty;
+    public string Family { get; init; } = string.Empty;
+    public string TargetRef { get; init; } = string.Empty;
+    public string ResultActionId { get; init; } = string.Empty;
+    public string RequiredItemRef { get; init; } = string.Empty;
+    public string PackageInteractionId { get; init; } = string.Empty;
+    public string PackageTargetId { get; init; } = string.Empty;
+    public string PackageRequiredItemId { get; init; } = string.Empty;
+    public IReadOnlyList<string> CorrelatedObjectiveIds { get; init; } = Array.Empty<string>();
 }
 
 public sealed record SemanticSelectedTraceLink
@@ -1255,6 +1766,11 @@ public sealed record SemanticSelectedRuntimeCompositionRuntimeEvidence
     public bool SaveLoadRoundtripPassed { get; init; }
     public string RuntimeEvidenceHash { get; init; } = string.Empty;
     public IReadOnlyDictionary<string, string> StateEvidence { get; init; } = new Dictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyDictionary<string, string> RestoredStateEvidence { get; init; } = new Dictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyList<SemanticSelectedRuntimeObjectiveEvidence> ObjectiveEvidence { get; init; } = Array.Empty<SemanticSelectedRuntimeObjectiveEvidence>();
+    public IReadOnlyList<SemanticSelectedRuntimeInteractionObjectiveCorrelation> ObjectiveInteractionCorrelations { get; init; } = Array.Empty<SemanticSelectedRuntimeInteractionObjectiveCorrelation>();
+    public SemanticSelectedRuntimeStateDelta StateDelta { get; init; } = new();
+    public IReadOnlyList<string> IsolationKeys { get; init; } = Array.Empty<string>();
     public IReadOnlyList<SemanticSelectedRuntimeCompositionDiagnostic> Diagnostics { get; init; } = Array.Empty<SemanticSelectedRuntimeCompositionDiagnostic>();
 }
 
@@ -1264,7 +1780,54 @@ public sealed record SemanticSelectedRuntimeCommandEvidence
     public string CommandType { get; init; } = string.Empty;
     public string TargetId { get; init; } = string.Empty;
     public bool Succeeded { get; init; }
+    public string RuleInteractionPatternId { get; init; } = string.Empty;
+    public string CorrelatedObjectiveId { get; init; } = string.Empty;
     public IReadOnlyList<string> EventTypes { get; init; } = Array.Empty<string>();
+}
+
+public sealed record SemanticSelectedRuntimeObjectiveEvidence
+{
+    public string PackageObjectiveId { get; init; } = string.Empty;
+    public string TargetId { get; init; } = string.Empty;
+    public double BeforeAmount { get; init; }
+    public double AfterAmount { get; init; }
+    public double RequiredAmount { get; init; }
+    public bool Completed { get; init; }
+    public bool RuntimeOwnedProgressEvidence { get; init; }
+    public IReadOnlyList<string> RequiredInteractionPatternIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> CorrelatedInteractionPatternIds { get; init; } = Array.Empty<string>();
+}
+
+public sealed record SemanticSelectedRuntimeInteractionObjectiveCorrelation
+{
+    public string PackageObjectiveId { get; init; } = string.Empty;
+    public string InteractionPatternId { get; init; } = string.Empty;
+    public string PackageInteractionId { get; init; } = string.Empty;
+    public string InteractionCommandId { get; init; } = string.Empty;
+    public bool InteractionSucceeded { get; init; }
+    public string ObjectiveAdvanceCommandId { get; init; } = string.Empty;
+    public bool ObjectiveAdvanceSucceeded { get; init; }
+}
+
+public sealed record SemanticSelectedRuntimeStateDelta
+{
+    public string PackageId { get; init; } = string.Empty;
+    public string PackageHash { get; init; } = string.Empty;
+    public string MapIdBefore { get; init; } = string.Empty;
+    public string MapIdAfter { get; init; } = string.Empty;
+    public string QuestStateBefore { get; init; } = string.Empty;
+    public string QuestStateAfter { get; init; } = string.Empty;
+    public string RewardItemId { get; init; } = string.Empty;
+    public double RewardAmountBefore { get; init; }
+    public double RewardAmountAfter { get; init; }
+    public string CompletionFlagId { get; init; } = string.Empty;
+    public string CompletionFlagBefore { get; init; } = string.Empty;
+    public string CompletionFlagAfter { get; init; } = string.Empty;
+    public string ActiveDialogueIdAfterOpen { get; init; } = string.Empty;
+    public bool DialogueOpened { get; init; }
+    public bool DialogueClosedAfterChoice { get; init; }
+    public string EncounterIdBefore { get; init; } = string.Empty;
+    public string EncounterIdAfter { get; init; } = string.Empty;
 }
 
 public sealed record SemanticSelectedRuntimeCompositionExternalExecutionFlags
