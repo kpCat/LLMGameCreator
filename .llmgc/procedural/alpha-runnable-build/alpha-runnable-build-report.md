@@ -1,8 +1,8 @@
 # Alpha Runnable Windows Build Report
 
 - Accepted: false
-- Final status: alpha_unity_build_environment_blocker
-- Blocker reached: true
+- Final status: alpha_runnable_windows_build_verification
+- Blocker reached: false
 - Previous gate: unity_runtime_export_vertical_slice_artifact_verification passed
 - Completed slices: S106, S107, S108, S109, S110, S111, S112, S113
 - Product smoke route: alpha-runnable-build
@@ -12,14 +12,14 @@
 - Export manifest hash: cd28d799e3e9b5d96be785eab80b6a5749552172dcbd6dbce6e28f7280a39a81
 - Staging folder: .llmgc/procedural/alpha-runnable-build/staging
 - Build folder: .llmgc/procedural/alpha-runnable-build/build/windows
-- Executable: 
-- Windows executable produced: false
-- Unity Editor executed: false
-- Unity build produced: false
-- Launch verified: false
+- Executable: LLMGameCreatorAlpha.exe
+- Windows executable produced: true
+- Unity Editor executed: true
+- Unity build produced: true
+- Launch verified: true
 - Play loop verified: false
-- Deterministic report hash: 5f5fc39b0dba6977f571345915b77fc61b4bdd090f753ebc834c54e43c1226e4
-- Build manifest hash: 1e6281526db9c17fbafadd72cdb73fb6511089ef8da72127e4fa0c32abf9654a
+- Deterministic report hash: 9f0f8d0283df74ea30c6efdce16614d5b5b0b31477f690cc79abb5055fb93f64
+- Build manifest hash: 6c774e5228b13f49ecc6cd65031edad00705dd9dfee84ce8f99f5f4fe950c57d
 
 ## Style Candidates
 
@@ -52,22 +52,20 @@
 - error: alpha_build.contract.missing_goal012_evidence [frontier_survival] Alpha candidates must reference accepted Goal 012 export evidence.
 - error: alpha_build.contract.package_hash_mismatch [game/content_generation/frontier-survival] Candidate package hash must match selected Goal 012 evidence.
 - error: alpha_build.contract.runtime_preview_dependency [runtime_host] Alpha proof must not depend on WinForms Runtime Preview.
-- error: alpha_build.environment.no_repo_build_script [repo_build_script] No repository-local Unity build script or BuildPipeline.BuildPlayer entrypoint was found.
-- error: alpha_build.environment.no_repo_unity_project [repo_unity_project] No repository-local Unity project/template with ProjectSettings/ProjectVersion.txt was found.
 - error: alpha_build.invalid.expectation_only_report [alpha-runnable-build-report.json] Expectation reports cannot replace physical build files.
-- error: alpha_build.launch.blocked_no_executable [build/windows] Launch verification cannot run because no real Windows executable was produced.
 - error: alpha_build.output.hash_mismatch [build/windows/LLMGameCreatorAlpha.exe] Build manifest hashes must match actual file bytes.
-- error: alpha_build.output.missing_executable [build/windows] A real Windows executable was not produced under the build output folder.
 - error: alpha_build.output.missing_executable [build/windows] Build validation rejects missing Windows executable.
-- error: alpha_build.output.no_supported_repo_build_path [build_path] No supported repository-local Unity build path exists for producing a Windows player.
 - error: alpha_build.output.unity_build_claim_without_artifact [build/windows] Unity build claims require real output files.
 - error: alpha_build.output.unsafe_path [C:/escape.exe] Build output paths must be safe relative paths.
 - error: alpha_build.staging.missing_asset_payload [assets] Staging must contain physical asset payloads.
 - error: alpha_build.staging.missing_game_data [game-data/game-package.json] Staging must contain physical game data.
 - error: alpha_build.staging.unsafe_path [../escape.json] Staging manifest paths must stay inside the staging root.
-- warning: alpha_build.environment.blocker [alpha_unity_build_environment_blocker] A real Windows build is blocked when the repository has no Unity project/template/build script to build.
+- info: alpha_build.environment.not_blocked [alpha_unity_build_environment_blocker] A real Windows build path exists and produced verifiable output; the runnable gate remains required for review.
 - info: alpha_build.environment.unity_found [unity_cli] Unity Editor executable was discovered; local machine path is omitted from deterministic artifacts.
 - info: alpha_build.goal012_gate_recorded [unity_runtime_export_vertical_slice_artifact_verification] User-confirmed Goal 012 artifact verification is recorded as passed.
 - info: alpha_build.invalid_matrix_rejected [invalid_matrix] Invalid/fake/leak scenarios must fail through the Alpha build validation path.
+- info: alpha_build.launch.executed [logs/alpha-player-launch.log] The produced Windows player was launched in batch diagnostic mode.
 - info: alpha_build.no_external_providers [execution_boundary] No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked.
+- info: alpha_build.unity_build.executed [logs/unity-build.log] Unity Editor was invoked through the repository-local Alpha build entrypoint.
+- info: alpha_build.unity_build.exit_success [exit_code:0] Unity build process completed; see logs/unity-build.log for details.
 - info: alpha_build.valid_matrix_passed [valid_matrix] Three style candidates and deterministic staging are required.

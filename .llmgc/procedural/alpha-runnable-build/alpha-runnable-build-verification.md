@@ -3,7 +3,7 @@
 Stopped at:
 
 ```text
-alpha_unity_build_environment_blocker
+alpha_runnable_windows_build_verification
 ```
 
 - Previous accepted gate: unity_runtime_export_vertical_slice_artifact_verification passed
@@ -11,21 +11,24 @@ alpha_unity_build_environment_blocker
 - Unity executable discovered: true
 - Unity executable path: (omitted; local machine path is not part of deterministic evidence)
 - Unity version evidence: 6000.1.10f1
-- Repository Unity project found: false
-- Repository Unity project: (none)
-- Repository Unity build script found: false
-- Repository Unity build script: (none)
-- Unity command executed: false
-- Unity command to run after adding a repo-local project/build script: (none)
+- Repository Unity project found: true
+- Repository Unity project: unity/LLMGameCreatorAlpha
+- Repository Unity build script found: true
+- Repository Unity build script: unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs
+- Unity command executed: true
+- Unity command: & "C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Unity.exe" -batchmode -quit -projectPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\unity-work\LLMGameCreatorAlpha" -executeMethod LLMGameCreatorAlpha.Editor.AlphaBuildEntrypoint.BuildWindows64 -logFile "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\logs\unity-build.log" -alphaStagingPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\staging" -alphaBuildOutputPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\build\windows"
+- Unity build log: .llmgc/procedural/alpha-runnable-build/logs/unity-build.log
 - Build output folder: .llmgc/procedural/alpha-runnable-build/build/windows
-- Executable relative path: (none)
-- Launch verified: false
+- Executable relative path: LLMGameCreatorAlpha.exe
+- Launch command: & "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\build\windows\LLMGameCreatorAlpha.exe" -batchmode -nographics -alphaSmokeExit -alphaLogPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\logs\alpha-player-launch.log"
+- Launch log: .llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log
+- Launch verified: true
 - Play loop verified: false
 - Invalid/fake/leak scenarios rejected: 14/14
 
-User steps to unblock:
+Manual review steps:
 
-1. Add or point the repository to a Unity project/template containing `ProjectSettings/ProjectVersion.txt`, `Assets/` and `Packages/`.
-2. Add a repository-local headless build entrypoint or script that invokes `BuildPipeline.BuildPlayer` for Windows x64.
-3. Run the build to `.llmgc/procedural/alpha-runnable-build/build/windows/` and rerun `run-product-smoke.ps1 -Scenario alpha-runnable-build`.
-4. Launch the produced `.exe`, verify content load and the selected loop, then record play evidence in a later bounded task.
+1. Review the produced Windows player folder and launch log from this run.
+2. Launch the produced `.exe` interactively if a manual graphics/play pass is required.
+3. Verify actual play-loop behavior before marking `alpha_runnable_windows_build_verification` passed.
+4. Keep `playLoopVerified=false` until deterministic automation or explicit manual evidence proves the loop.

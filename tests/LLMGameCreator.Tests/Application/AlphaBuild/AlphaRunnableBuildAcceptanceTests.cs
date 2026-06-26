@@ -231,7 +231,10 @@ public sealed class AlphaRunnableBuildAcceptanceTests
         using var temp = new TempDirectory();
         var sourcePath = Path.Combine(temp.Path, "src", "LLMGameCreator.Application", "Design", "AlphaBuild", "FakeBuildNotes.cs");
         Directory.CreateDirectory(Path.GetDirectoryName(sourcePath)!);
-        File.WriteAllText(sourcePath, "public static class FakeBuildNotes { public const string Command = \"-buildWindows64Player\"; }");
+        File.WriteAllText(sourcePath, "public static class FakeBuildNotes { public const string Command = \"BuildPipeline.BuildPlayer(); -buildWindows64Player\"; }");
+        var prosePath = Path.Combine(temp.Path, "unity", "LLMGameCreatorAlpha", "Assets", "Editor", "FakeBuildNotes.cs");
+        Directory.CreateDirectory(Path.GetDirectoryName(prosePath)!);
+        File.WriteAllText(prosePath, "public static class FakeBuildNotes { public const string Note = \"BuildPipeline.BuildPlayer();\"; }");
         var evidence = BuildPriorEvidence(temp.Path);
 
         var report = new AlphaRunnableBuildAcceptanceService()
@@ -241,6 +244,76 @@ public sealed class AlphaRunnableBuildAcceptanceTests
         Assert.True(report.BlockerReached, string.Join(Environment.NewLine, report.Diagnostics.Select(item => $"{item.Code}:{item.Target}:{item.Message}")));
         Assert.False(report.BuildEnvironment.RepoBuildScriptFound);
         Assert.Contains(report.BuildEnvironment.Diagnostics, item => item.Code == "alpha_build.environment.no_repo_build_script");
+    }
+
+    [Fact]
+    public void DetectsRepositoryUnityProjectAndRealAssetsBuildEntrypoint()
+    {
+        using var temp = new TempDirectory();
+        CreateUnityTemplate(temp.Path);
+        var evidence = BuildPriorEvidence(temp.Path);
+
+        var report = new AlphaRunnableBuildAcceptanceService()
+            .BuildFromAcceptedEvidence(
+                temp.Path,
+                evidence.Content,
+                evidence.Assets,
+                new AlphaRunnableBuildOptions { RepositoryRootPath = temp.Path })
+            .Report;
+
+        Assert.True(report.BuildEnvironment.RepoUnityProjectFound);
+        Assert.Equal("unity/LLMGameCreatorAlpha", report.BuildEnvironment.RepoUnityProjectRelativePath);
+        Assert.True(report.BuildEnvironment.RepoBuildScriptFound);
+        Assert.Equal("unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs", report.BuildEnvironment.RepoBuildScriptRelativePath);
+        Assert.DoesNotContain(report.BuildEnvironment.Diagnostics, item => item.Code == "alpha_build.environment.no_repo_unity_project");
+        Assert.DoesNotContain(report.BuildEnvironment.Diagnostics, item => item.Code == "alpha_build.environment.no_repo_build_script");
+        Assert.DoesNotContain(report.BuildOutput.Diagnostics, item => item.Code == "alpha_build.output.no_supported_repo_build_path");
+        Assert.False(report.WindowsExecutableProduced);
+    }
+
+    [Fact]
+    public async Task BuildOutputValidationAcceptsPhysicalExecutableAndStagedStreamingAssets()
+    {
+        using var temp = new TempDirectory();
+        CreateUnityTemplate(temp.Path);
+        var evidence = BuildPriorEvidence(temp.Path);
+        var service = new AlphaRunnableBuildAcceptanceService();
+        var first = service.BuildFromAcceptedEvidence(
+            temp.Path,
+            evidence.Content,
+            evidence.Assets,
+            new AlphaRunnableBuildOptions { RepositoryRootPath = temp.Path });
+        var write = await service.WriteAsync(temp.Path, first);
+        var executablePath = Path.Combine(write.BuildDirectoryPath, "LLMGameCreatorAlpha.exe");
+        Directory.CreateDirectory(Path.GetDirectoryName(executablePath)!);
+        await File.WriteAllBytesAsync(executablePath, new byte[] { (byte)'M', (byte)'Z', 0, 1, 2, 3 });
+        CopyDirectory(
+            write.StagingDirectoryPath,
+            Path.Combine(write.BuildDirectoryPath, "LLMGameCreatorAlpha_Data", "StreamingAssets", "LLMGameCreatorAlpha"));
+
+        var second = service.BuildFromAcceptedEvidence(
+            temp.Path,
+            evidence.Content,
+            evidence.Assets,
+            new AlphaRunnableBuildOptions
+            {
+                RepositoryRootPath = temp.Path,
+                PreserveExistingBuildOutputForValidation = true
+            });
+
+        Assert.False(second.Report.Accepted);
+        Assert.False(second.Report.BlockerReached);
+        Assert.Equal(AlphaRunnableBuildAcceptanceService.FinalGate, second.Report.FinalStatus);
+        Assert.True(second.Report.BuildOutput.Passed, string.Join(Environment.NewLine, second.Report.BuildOutput.Diagnostics.Select(item => $"{item.Code}:{item.Target}:{item.Message}")));
+        Assert.True(second.Report.WindowsExecutableProduced);
+        Assert.True(second.Report.UnityBuildProduced);
+        Assert.Equal("LLMGameCreatorAlpha.exe", second.Report.BuildOutput.ExecutableRelativePath);
+        var executable = Assert.Single(second.Report.BuildOutput.Files, item => item.RelativePath == "LLMGameCreatorAlpha.exe");
+        Assert.Equal(6, executable.ByteCount);
+        Assert.Equal(ComputeHash(await File.ReadAllBytesAsync(executablePath)), executable.Hash);
+        Assert.Contains(second.Report.BuildOutput.Files, item => item.RelativePath == "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/game-data/game-package.json");
+        Assert.False(second.Report.LaunchVerified);
+        Assert.False(second.Report.PlayLoopVerified);
     }
 
     private static (ContentGenerationScaleAcceptanceResult Content, MinimumAssetPipelineAcceptanceResult Assets) BuildPriorEvidence(string projectRoot)
@@ -282,6 +355,30 @@ public sealed class AlphaRunnableBuildAcceptanceTests
         !path.Split('/', StringSplitOptions.RemoveEmptyEntries).Any(part => part == "..");
 
     private static string ComputeHash(byte[] bytes) => Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
+
+    private static void CreateUnityTemplate(string repoRoot)
+    {
+        var projectRoot = Path.Combine(repoRoot, "unity", "LLMGameCreatorAlpha");
+        Directory.CreateDirectory(Path.Combine(projectRoot, "ProjectSettings"));
+        Directory.CreateDirectory(Path.Combine(projectRoot, "Packages"));
+        Directory.CreateDirectory(Path.Combine(projectRoot, "Assets", "Editor"));
+        File.WriteAllText(Path.Combine(projectRoot, "ProjectSettings", "ProjectVersion.txt"), "m_EditorVersion: 6000.1.10f1");
+        File.WriteAllText(Path.Combine(projectRoot, "Packages", "manifest.json"), "{}");
+        File.WriteAllText(
+            Path.Combine(projectRoot, "Assets", "Editor", "AlphaBuildEntrypoint.cs"),
+            "using UnityEditor; public static class AlphaBuildEntrypoint { public static void BuildWindows64() { BuildPipeline.BuildPlayer(new BuildPlayerOptions()); } }");
+    }
+
+    private static void CopyDirectory(string sourceRoot, string destinationRoot)
+    {
+        foreach (var sourcePath in Directory.EnumerateFiles(sourceRoot, "*", SearchOption.AllDirectories))
+        {
+            var relative = Path.GetRelativePath(sourceRoot, sourcePath);
+            var destinationPath = Path.Combine(destinationRoot, relative);
+            Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
+            File.Copy(sourcePath, destinationPath, overwrite: true);
+        }
+    }
 
     private sealed class TempDirectory : IDisposable
     {

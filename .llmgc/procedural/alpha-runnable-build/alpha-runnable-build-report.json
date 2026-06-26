@@ -1,8 +1,8 @@
 {
   "accepted": false,
-  "finalStatus": "alpha_unity_build_environment_blocker",
-  "blockerReached": true,
-  "manualGate": "alpha_unity_build_environment_blocker",
+  "finalStatus": "alpha_runnable_windows_build_verification",
+  "blockerReached": false,
+  "manualGate": "alpha_runnable_windows_build_verification",
   "previousAcceptedGate": "unity_runtime_export_vertical_slice_artifact_verification passed",
   "completedSlices": [
     "S106",
@@ -583,53 +583,1355 @@
     "diagnostics": []
   },
   "buildOutput": {
-    "passed": false,
+    "passed": true,
     "schemaVersion": "alpha_build_windows_output_manifest_v1",
     "buildFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/build/windows",
-    "executableRelativePath": "",
-    "fileCount": 0,
-    "totalByteCount": 0,
-    "manifestHash": "1e6281526db9c17fbafadd72cdb73fb6511089ef8da72127e4fa0c32abf9654a",
-    "windowsExecutableProduced": false,
-    "unityBuildProduced": false,
-    "files": [],
-    "diagnostics": [
+    "executableRelativePath": "LLMGameCreatorAlpha.exe",
+    "fileCount": 221,
+    "totalByteCount": 138569875,
+    "manifestHash": "6c774e5228b13f49ecc6cd65031edad00705dd9dfee84ce8f99f5f4fe950c57d",
+    "windowsExecutableProduced": true,
+    "unityBuildProduced": true,
+    "files": [
       {
-        "severity": "error",
-        "code": "alpha_build.output.missing_executable",
-        "target": "build/windows",
-        "message": "A real Windows executable was not produced under the build output folder."
+        "relativePath": "D3D12/D3D12Core.dll",
+        "kind": "build_payload",
+        "hash": "31f364f2b3aa1753e7ba9ff912d0721c8f424be5fa14503efddafbb30c635d3b",
+        "byteCount": 5908408
       },
       {
-        "severity": "error",
-        "code": "alpha_build.output.no_supported_repo_build_path",
-        "target": "build_path",
-        "message": "No supported repository-local Unity build path exists for producing a Windows player."
+        "relativePath": "D3D12/d3d12SDKLayers.dll",
+        "kind": "build_payload",
+        "hash": "5dfc320d5ee27190181b1a63e74eb481b07ea727513dbeb38a96db6157969d24",
+        "byteCount": 9525272
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha.exe",
+        "kind": "windows_executable",
+        "hash": "02dfc53b33746300fe83e1af84ff23cecbfde0a91296bd29bf788a48b62ab3a7",
+        "byteCount": 667648
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/Assembly-CSharp.dll",
+        "kind": "build_payload",
+        "hash": "8119c2072d80090fe324809020026242a9697f8e3dff6accd20f48fa42674734",
+        "byteCount": 9728
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/Assembly-CSharp.pdb",
+        "kind": "build_payload",
+        "hash": "3161ac01ec746d1b7b6c6ee226452c5592a13f70d5c92d05faa41537957b6990",
+        "byteCount": 15084
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/Mono.Security.dll",
+        "kind": "build_payload",
+        "hash": "4ee287a8e781cc028a51108ee8a15f0a61b4ee0bef0a02b43da9e8143b306375",
+        "byteCount": 241152
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.ComponentModel.Composition.dll",
+        "kind": "build_payload",
+        "hash": "49d6f9890e7970a74cfc857cd40b6538fa989af23d29f1602fddd39a370b674f",
+        "byteCount": 257024
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Configuration.dll",
+        "kind": "build_payload",
+        "hash": "5f90f0d070a85cfc387792a33294fe4182f9614d3c8b61b7e2a8f6dde1927c7e",
+        "byteCount": 124928
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Core.dll",
+        "kind": "build_payload",
+        "hash": "82a94492cf73534818991950b2f627d85ae8c98a19904f60a91ccad5d59d162e",
+        "byteCount": 1113088
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Data.DataSetExtensions.dll",
+        "kind": "build_payload",
+        "hash": "7b6ad0236d253490afde84efb79598a6d8fef90eac28016f3d6358b1f4b94b7b",
+        "byteCount": 29696
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Data.dll",
+        "kind": "build_payload",
+        "hash": "b9fade64255bf8f3d100675de72d8dc3be1518f374897d649088a0ac7b27d5a2",
+        "byteCount": 2125312
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Drawing.dll",
+        "kind": "build_payload",
+        "hash": "e5ab3c50e47ea155c6e0c415371adbcf52417fe5d812a6d06f9b603db9c5edfd",
+        "byteCount": 489984
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.EnterpriseServices.dll",
+        "kind": "build_payload",
+        "hash": "568f482b4f26e7918a3bc544dd0bcea07570e8530173e85e5c53d4603acd4497",
+        "byteCount": 44544
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.IO.Compression.FileSystem.dll",
+        "kind": "build_payload",
+        "hash": "578f96274327160bcbef552923c36ae10a9433e0a55ae6941e6c39604906f22c",
+        "byteCount": 18432
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.IO.Compression.dll",
+        "kind": "build_payload",
+        "hash": "f94b58a091e92701b66c72ca028606349cdb7285a879ce29316fb1579cbf5e73",
+        "byteCount": 114688
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Net.Http.dll",
+        "kind": "build_payload",
+        "hash": "02469dd417a205b290d66b1c9c04921a44b20e68c0ac87116d44ba21ad73593f",
+        "byteCount": 122880
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Numerics.dll",
+        "kind": "build_payload",
+        "hash": "ebfeea2914aae4c150b8e0cd033e8e1df6ca40ab7afe49093b15073a5b70b3be",
+        "byteCount": 119296
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Runtime.Serialization.dll",
+        "kind": "build_payload",
+        "hash": "39fca19ebad32d429af674c4e168fad44430629470b52e2c2accba7a832b3520",
+        "byteCount": 934400
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Security.dll",
+        "kind": "build_payload",
+        "hash": "de1cd16587b998b158cb5b072aa4c9d66a2097844614db77c5b70611405e9cb7",
+        "byteCount": 320000
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.ServiceModel.Internals.dll",
+        "kind": "build_payload",
+        "hash": "b83fb0942b61a269ded01dc482517d9c35d8bedc091ebda6fcf35273b61e2878",
+        "byteCount": 215040
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Transactions.dll",
+        "kind": "build_payload",
+        "hash": "6a614c3d5d6a4596f52b00a223b39b6e1f80d37848408daac3d34584e6315463",
+        "byteCount": 35328
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Xml.Linq.dll",
+        "kind": "build_payload",
+        "hash": "7388a9847f3b7e5099a15450b37cf1f7922c9e3c09ba8c353edac0dd89a9dc19",
+        "byteCount": 136704
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.Xml.dll",
+        "kind": "build_payload",
+        "hash": "1d5a9f82cc31c5a927f217525e1620c3ef16da052d29b14a5cdff6f95764adea",
+        "byteCount": 3160064
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/System.dll",
+        "kind": "build_payload",
+        "hash": "8337aa16f21dd9cf061eeeade94d57c0de15003ea6fef2ddc4914a0a043f6ffd",
+        "byteCount": 2641920
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AIModule.dll",
+        "kind": "build_payload",
+        "hash": "0c89007f96afe55e07045043dd5838456b839cf92359b101c8e8552085364efa",
+        "byteCount": 74096
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AIModule.pdb",
+        "kind": "build_payload",
+        "hash": "f08a11b80f0e1352a0d5253f6bb5962cc45de9925297c6ff7d8a58ca4efd9bf4",
+        "byteCount": 20400
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AMDModule.dll",
+        "kind": "build_payload",
+        "hash": "ff4cbf2559314ca5bae274d5d95927e1cd7fb1ba275605e2384c265ab7c19863",
+        "byteCount": 21872
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AMDModule.pdb",
+        "kind": "build_payload",
+        "hash": "6b6a16db56432e96e170021bff841faa75ceea0786fbdccd10650da89b551daf",
+        "byteCount": 11776
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ARModule.dll",
+        "kind": "build_payload",
+        "hash": "4cae735c81cc7fdd6a2f2703430676a8a994f4af09ab1a818072ebdbfb644e50",
+        "byteCount": 22896
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ARModule.pdb",
+        "kind": "build_payload",
+        "hash": "b56ef5834a39886019551d001e6655d2da623bc2c1f624dba34bf8fe6f0ede66",
+        "byteCount": 9756
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AccessibilityModule.dll",
+        "kind": "build_payload",
+        "hash": "ae6efe519407f2d48d56cbf28e6a75ecb837494e0f654cbfe9941316f329e43b",
+        "byteCount": 53104
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AccessibilityModule.pdb",
+        "kind": "build_payload",
+        "hash": "560e7f460b2db7c61e0614b15d2666b30859d670a02efd4cae36edaef0bfcfa1",
+        "byteCount": 25072
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+        "kind": "build_payload",
+        "hash": "b734848915da7fa6e88caab6951fdccf6b1f3a9523d5b3ad4285c3a1dfb4d5ba",
+        "byteCount": 118640
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AndroidJNIModule.pdb",
+        "kind": "build_payload",
+        "hash": "ed43f4482842bcf3f149882111d67a3067274baca7c30a91442df380d64c72f6",
+        "byteCount": 50048
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AnimationModule.dll",
+        "kind": "build_payload",
+        "hash": "045159bb685be81c9cd4a516a6db716671b1a19e673298f7f3753a220cdbfea6",
+        "byteCount": 216432
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AnimationModule.pdb",
+        "kind": "build_payload",
+        "hash": "96452902f555fb64b4ab0f549c5cdbcdc0ab982f9d69e269b70930e557d5786d",
+        "byteCount": 58820
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AssetBundleModule.dll",
+        "kind": "build_payload",
+        "hash": "33d5bead9f4b2f5d001ead9a0111d9834ffb9c50f24268121b7dd1392a2c7df5",
+        "byteCount": 39792
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AssetBundleModule.pdb",
+        "kind": "build_payload",
+        "hash": "de396af24ddd41a93ff7f10b96645d1a31eb3ec8dbef9303e53d597881838ed1",
+        "byteCount": 13900
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AudioModule.dll",
+        "kind": "build_payload",
+        "hash": "9f4034608dddc8e363c11ffb601d55d98472c864888b23258a73fe1e6a23b03c",
+        "byteCount": 103792
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.AudioModule.pdb",
+        "kind": "build_payload",
+        "hash": "995a0f8746a7f922ec7a71c7e3a155ab1bd40324831978ea2bd6aa7db56e7e4e",
+        "byteCount": 23656
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ClothModule.dll",
+        "kind": "build_payload",
+        "hash": "4509c6bc359fda4a3b146f5d80acb80c6c5717814484557b7fd6aeb8f31d2a4d",
+        "byteCount": 34160
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ClothModule.pdb",
+        "kind": "build_payload",
+        "hash": "631b7eb3fc9eada5d44b401df8b8d5ecd7269b84e3f72d1f5f13bb4d244697e0",
+        "byteCount": 10348
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ClusterInputModule.dll",
+        "kind": "build_payload",
+        "hash": "691791a7e73eeff50099f1e82fd3ea95646c9b1eb7092dee3cb73d55240a29fa",
+        "byteCount": 25456
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ClusterInputModule.pdb",
+        "kind": "build_payload",
+        "hash": "d25b8d11c35b2f5a41594e68b7320ef1f14cf0db346f28594f1c39a11f7648a6",
+        "byteCount": 9140
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+        "kind": "build_payload",
+        "hash": "cb038f66f65129ad3b908979280307c75d30bdc7ca020065987ba2af48d9b956",
+        "byteCount": 23920
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ClusterRendererModule.pdb",
+        "kind": "build_payload",
+        "hash": "e0845f4a026b4db8168fda222f5cac082ec3d2959d848854afaa55106f58541b",
+        "byteCount": 9748
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ContentLoadModule.dll",
+        "kind": "build_payload",
+        "hash": "d3978d93bd2fdce6003a6ad1982dac058b46c9f7a9f700e881e2d2a05e2ee057",
+        "byteCount": 30064
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ContentLoadModule.pdb",
+        "kind": "build_payload",
+        "hash": "88d26dfc125ed666fd2e12ff8743b3eea8b6a0f519bd1570139645e2e09839d5",
+        "byteCount": 10920
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.CoreModule.dll",
+        "kind": "build_payload",
+        "hash": "54b566f4b321f227b70f319449cb0a9fdeb51e5eec515d08743c762ed12bb67b",
+        "byteCount": 1834864
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.CoreModule.pdb",
+        "kind": "build_payload",
+        "hash": "f2b128d17b1f58781720144444fec140b8990b0660dad6a3396e92c133374b56",
+        "byteCount": 535160
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.CrashReportingModule.dll",
+        "kind": "build_payload",
+        "hash": "47135de31ac247ebd35526436858f50185e914a9039a9cb39fa872c4665ef9b0",
+        "byteCount": 23920
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.CrashReportingModule.pdb",
+        "kind": "build_payload",
+        "hash": "af3494e8a77e5fbfa530b28a1b456075ae62e9ba055c1a46f5acca714dfe5ac4",
+        "byteCount": 9692
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.DSPGraphModule.dll",
+        "kind": "build_payload",
+        "hash": "cee9c19b39765a0c20a6fa45ce0b2d0bc40afa36dbc4a24d5ce4e24e3a36abea",
+        "byteCount": 31088
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.DSPGraphModule.pdb",
+        "kind": "build_payload",
+        "hash": "a81e0fd3c9b8f9236bb494983cebef7cc32ae4e1b3e82d2f632094052d3d4a7e",
+        "byteCount": 10288
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.DirectorModule.dll",
+        "kind": "build_payload",
+        "hash": "0412be6e14ab6d15da11f2ba602be65b251ce222054c97b47ea0443cb03e4119",
+        "byteCount": 39280
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.DirectorModule.pdb",
+        "kind": "build_payload",
+        "hash": "d052580cfed7b2d3887d7ae445f89212b92fc950a69f15630e8a8a0bdf78769f",
+        "byteCount": 13664
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GIModule.dll",
+        "kind": "build_payload",
+        "hash": "ade8c5d023158091e50997cd29a6d7b60e1234d59914fc30ef260706440d9205",
+        "byteCount": 21872
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GIModule.pdb",
+        "kind": "build_payload",
+        "hash": "be606c72e8db9e92016d07961360f842a3c8675f5cda3a6162614b0cd28232fa",
+        "byteCount": 9020
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GameCenterModule.dll",
+        "kind": "build_payload",
+        "hash": "f1fef5358fe82bc6191f7bc5c514bd2f72fa5d074281030e5c78f389074b3501",
+        "byteCount": 43376
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GameCenterModule.pdb",
+        "kind": "build_payload",
+        "hash": "b05db0309a4913d83331e5e7b611aa9565ef811743583bc79f126f09a98edf12",
+        "byteCount": 17232
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+        "kind": "build_payload",
+        "hash": "81e71addc3d248c1bf40534fcc1c69826120d9b007624dec741b559c7553c247",
+        "byteCount": 14192
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.pdb",
+        "kind": "build_payload",
+        "hash": "35515185a6ed95c023b57df4e6ea485d32e6d39f6dc9645efc4d57faf0be0015",
+        "byteCount": 9048
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GridModule.dll",
+        "kind": "build_payload",
+        "hash": "21ce4a8ea0b5a1835b36a9883d49ccc210614f94a7049560687c4c8155548de1",
+        "byteCount": 27504
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.GridModule.pdb",
+        "kind": "build_payload",
+        "hash": "0a31ac01f4e2cb8d13a9dc4cba77ecc8a4bb3a9194bc07b3c9e8c4583b2a37e7",
+        "byteCount": 9772
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+        "kind": "build_payload",
+        "hash": "4f72d0d95407178353ae6e2487c3a22c0a7558be2f9bfec63683d9e8958594da",
+        "byteCount": 91504
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.HierarchyCoreModule.pdb",
+        "kind": "build_payload",
+        "hash": "28580ba215f6f445baf2dff9b7c53b67178882dc1842d2c14e60fdd97281f986",
+        "byteCount": 31452
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.HotReloadModule.dll",
+        "kind": "build_payload",
+        "hash": "4f3c7ea6d9d7da6071c78201cbe11a722afc5ec731f62f7fd332df9da0e47ae7",
+        "byteCount": 21872
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.HotReloadModule.pdb",
+        "kind": "build_payload",
+        "hash": "5dd6c3383ca76f8736f9a0b97623a1c8c2038a817cddbd3efed5e00c1f9634ca",
+        "byteCount": 9020
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.IMGUIModule.dll",
+        "kind": "build_payload",
+        "hash": "333b14365fca1dd80ce8497b8623dd2962f612032ceba91c0e1863af6f76021d",
+        "byteCount": 208240
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.IMGUIModule.pdb",
+        "kind": "build_payload",
+        "hash": "70c66404996596b7b1c60e418e8bea97e283a1493bf2eaae8ca9efb7176fb0d6",
+        "byteCount": 89376
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ImageConversionModule.dll",
+        "kind": "build_payload",
+        "hash": "b54a6f39580928419190d4a2545c968a0ff8fbdb9de37f8e9d367550c1cf58c2",
+        "byteCount": 28528
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ImageConversionModule.pdb",
+        "kind": "build_payload",
+        "hash": "d272d1f0bfcf1f9c4439ca7bced3a021cb15234a221b74741e408dfd41c56fe0",
+        "byteCount": 10360
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.InputForUIModule.dll",
+        "kind": "build_payload",
+        "hash": "702b64bd0f5ddb71df69cea3da3005e005c8822619dfa2373cc31f44d0839e58",
+        "byteCount": 57200
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.InputForUIModule.pdb",
+        "kind": "build_payload",
+        "hash": "3fba6aa6477af13dba944785c954a25a6d52776782bc79db130afb0d9a15ea7d",
+        "byteCount": 25768
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.InputLegacyModule.dll",
+        "kind": "build_payload",
+        "hash": "35e47ba27212bf68a5c34c6c0e74c05dd48596ed601bfaee6aa1714df68901e0",
+        "byteCount": 42864
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.InputLegacyModule.pdb",
+        "kind": "build_payload",
+        "hash": "27192b1042d0e1ac0e2b089917e3ff9057c7c7fb6f9ae9f7fbd9f3f801c7d501",
+        "byteCount": 15128
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.InputModule.dll",
+        "kind": "build_payload",
+        "hash": "0b3a15072a1224b1e9e26680c1c3b27dbacfd6cd77f0658a682efc76a01e4b0b",
+        "byteCount": 25456
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.InputModule.pdb",
+        "kind": "build_payload",
+        "hash": "be4a2ae3d55d493c6ae26c9a2b578b7de53f2e206b823d07fdfd8b50c8c8a841",
+        "byteCount": 10384
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+        "kind": "build_payload",
+        "hash": "7facc7810d31dece221c191ab20ebcc4b553930a504166c14ecc3f42092def53",
+        "byteCount": 24432
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.JSONSerializeModule.pdb",
+        "kind": "build_payload",
+        "hash": "d415e440a3fc679b2732661e7f8dc10fcb74e444f6b97a5776f7eea1ff3a741e",
+        "byteCount": 9644
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.LocalizationModule.dll",
+        "kind": "build_payload",
+        "hash": "9c3fb2256ffacac8363b7d6fad92b1c65db46a71674bcb5a3b595e41da72f797",
+        "byteCount": 24432
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.LocalizationModule.pdb",
+        "kind": "build_payload",
+        "hash": "6ab04624c8084c516c23d11e39a69c0c386e6f206a5e9ccbe27871f3844df770",
+        "byteCount": 9440
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.MarshallingModule.dll",
+        "kind": "build_payload",
+        "hash": "8f90ed73bd45a6d74e90726b955c2293de8382ac265c136619b1eed327229fba",
+        "byteCount": 65392
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.MarshallingModule.pdb",
+        "kind": "build_payload",
+        "hash": "661c5a463ef05f587e6cd18715a0ffd3b1aa637c14f45fb7a258c0a007b37a82",
+        "byteCount": 12472
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.MultiplayerModule.dll",
+        "kind": "build_payload",
+        "hash": "f330f845e345fbe2308f39884907232cf12810323657f4f07127b90d74ba4e2f",
+        "byteCount": 15728
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.MultiplayerModule.pdb",
+        "kind": "build_payload",
+        "hash": "1f819555db90d748cdf788e5866c76cc27f320c3710b4f0d0dc64cea17b94c09",
+        "byteCount": 9044
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.NVIDIAModule.dll",
+        "kind": "build_payload",
+        "hash": "385fbff5e8d2d48af72f0145e069cf605b0996c81c642cee145b400c06aca7d4",
+        "byteCount": 35696
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.NVIDIAModule.pdb",
+        "kind": "build_payload",
+        "hash": "22901586bcbaa9aa7c8a90d18dd6dc8f21607feb9dfb440cbd6d23ea8e58dd81",
+        "byteCount": 15452
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+        "kind": "build_payload",
+        "hash": "546fd720321328121dd43de3ac6068b274be1a231ff0fe46ca413b1c95e99342",
+        "byteCount": 168816
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ParticleSystemModule.pdb",
+        "kind": "build_payload",
+        "hash": "1555e057e39f82cbafba30c6414f53d23dac76319ca3ebe5501a3151d95efbe6",
+        "byteCount": 40192
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+        "kind": "build_payload",
+        "hash": "24442a4aa67eaddfcd25a0b7f231ee0b7870b6eea40af9e0ac6446be9163f219",
+        "byteCount": 22384
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.PerformanceReportingModule.pdb",
+        "kind": "build_payload",
+        "hash": "0c54551bfdba4a310c9a369d0d47034b1c7a92a34b6b18b959e01a8070b43186",
+        "byteCount": 9224
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.Physics2DModule.dll",
+        "kind": "build_payload",
+        "hash": "4eb89f1743ce9398257536495a2e53b74a98cc83b09785cbe335616beb53fdb0",
+        "byteCount": 202608
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.Physics2DModule.pdb",
+        "kind": "build_payload",
+        "hash": "eb3e4d13656374b4dc0e0f113112bbb6fbf56a93199581904cb227437d1bf9d9",
+        "byteCount": 48452
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.PhysicsModule.dll",
+        "kind": "build_payload",
+        "hash": "1ea754365b975c0fd97cc428baa0fc8b6c5e64097cb4252f5c14c6c69f064273",
+        "byteCount": 183152
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.PhysicsModule.pdb",
+        "kind": "build_payload",
+        "hash": "ce690c9e7b534a9e105856e7cfbe887ea6ff81af1e7a17d93762b323b349611f",
+        "byteCount": 47144
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.PropertiesModule.dll",
+        "kind": "build_payload",
+        "hash": "6f16bd8b2ea5dff8517242f84de58cfb9a2cfcd9f6e0ffc4902416f6fe58d75b",
+        "byteCount": 149360
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.PropertiesModule.pdb",
+        "kind": "build_payload",
+        "hash": "cf403c287badcb31a5bbcad82e2acdad3d38c4217269f22a086a214e8a4683a8",
+        "byteCount": 58784
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+        "kind": "build_payload",
+        "hash": "0319cb68807a71a47caf709b2166f644883f8b4974e2f5a0ac7e629b458584eb",
+        "byteCount": 21872
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.pdb",
+        "kind": "build_payload",
+        "hash": "fe4f04af8a4b4880ed27dac01267b985b0a2702f54d589b6428ea638ff8aba8a",
+        "byteCount": 9080
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+        "kind": "build_payload",
+        "hash": "5b07b4534bf4bdfb50d21d69ef263d03102ad58efb1ff667119dace13adf3090",
+        "byteCount": 23408
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ScreenCaptureModule.pdb",
+        "kind": "build_payload",
+        "hash": "7ea215fa99bdfc8ddea0fbc9fe84e4d837c234e6e08e2e8eeec983966bfc34f8",
+        "byteCount": 9624
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+        "kind": "build_payload",
+        "hash": "8c9f40b9cde9b169866d1ff3cdea6d8234eeb43b875d5a1a6466ba2e31cacfc7",
+        "byteCount": 21872
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.pdb",
+        "kind": "build_payload",
+        "hash": "9d4108d5d1f07eb80da2705a1769e3d728a9c7e24d744f35e6ea7d5438da1eaf",
+        "byteCount": 9144
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+        "kind": "build_payload",
+        "hash": "7f7bf30fb685144ab15cd4215108845bd1ef16a2bfcc1ea2f326860d63113501",
+        "byteCount": 33136
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SharedInternalsModule.pdb",
+        "kind": "build_payload",
+        "hash": "9ddf5b0b064ec6179edc3e6b9030e7072fbb6d1e530f3c193d7bcadd3e925cab",
+        "byteCount": 13444
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+        "kind": "build_payload",
+        "hash": "0e66211e559f3d8179e72801880efd37a25b025c17ad63966ceaa428ccb87b0a",
+        "byteCount": 25968
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SpriteMaskModule.pdb",
+        "kind": "build_payload",
+        "hash": "2b5809bf8ce299e505fdc89576a9658cb9ae81eddfd7e0e5a5c46b533353c7ff",
+        "byteCount": 9352
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+        "kind": "build_payload",
+        "hash": "0084589845969178934e64e28055a9a83c1e26852ddc790cc435d7a5307a5204",
+        "byteCount": 29040
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SpriteShapeModule.pdb",
+        "kind": "build_payload",
+        "hash": "8c37fd85e364e42fbf8e110e1833d03609b2130ba2945ed2f7fd3faafa104615",
+        "byteCount": 10580
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.StreamingModule.dll",
+        "kind": "build_payload",
+        "hash": "51d66f16af9dfdbeaf581141439790f848e871835ca7c6f18f5629e32f49eac1",
+        "byteCount": 23408
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.StreamingModule.pdb",
+        "kind": "build_payload",
+        "hash": "e8ec10e1b7df32da53169806e83346df79762c2e1ecd0337e092f0d0b282dcb9",
+        "byteCount": 9096
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SubstanceModule.dll",
+        "kind": "build_payload",
+        "hash": "dfc3ede9821ac0ff22a6bc6e8494b1198d0e6eb44d483a8a6e4fbf97e93c74ec",
+        "byteCount": 26480
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SubstanceModule.pdb",
+        "kind": "build_payload",
+        "hash": "8a6aed5109b5f312e32219a8f5c2e33c436bdb1f842366688bb594f27e1e8d76",
+        "byteCount": 11224
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SubsystemsModule.dll",
+        "kind": "build_payload",
+        "hash": "e68659e23eed835d9d73922ebdb42990487b525e0b418f2bd2262621d06bdee0",
+        "byteCount": 39280
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.SubsystemsModule.pdb",
+        "kind": "build_payload",
+        "hash": "a35bfa841944c4e21f7766b3c0dbd40160490ab9659807271dd63c38aad4b0ce",
+        "byteCount": 15764
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TLSModule.dll",
+        "kind": "build_payload",
+        "hash": "c8fb863df441381e80a1a1581ce6e6d265fedb691d4df87ca9313333ab96b152",
+        "byteCount": 28528
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TLSModule.pdb",
+        "kind": "build_payload",
+        "hash": "20354801180c5576bb2cdcf203d3469f4a1d30d5d66a0cd7759b089713b427d0",
+        "byteCount": 9040
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TerrainModule.dll",
+        "kind": "build_payload",
+        "hash": "db0fbca8e3888443624dded716cfcf8d8a65da2220ec2db993f45bdd694f1dae",
+        "byteCount": 130416
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TerrainModule.pdb",
+        "kind": "build_payload",
+        "hash": "d2ddf5f2b9856aea37774da6cb7c604dc423c37facca224da5affbf7ccfffe25",
+        "byteCount": 33672
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+        "kind": "build_payload",
+        "hash": "6c71987348f6777db33d17c2afd8f0ca0f5649a28467b1615546fe748573352e",
+        "byteCount": 22896
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TerrainPhysicsModule.pdb",
+        "kind": "build_payload",
+        "hash": "b91555b9cf0691555da8d56c2aba5af2132c6dce1c184701085024bbad0d10a5",
+        "byteCount": 9484
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+        "kind": "build_payload",
+        "hash": "7948b67aacdeabdc76ccc4b14bb5f8dfb925264be0900699f33654f8a3d6ea5b",
+        "byteCount": 85360
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TextCoreFontEngineModule.pdb",
+        "kind": "build_payload",
+        "hash": "c0a1e12602321dd1fafb84be4b9f67238bd23251fa727cb6a7970eb749ef80fe",
+        "byteCount": 28068
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+        "kind": "build_payload",
+        "hash": "38be93943cdafc527166414d8e1f0d8a10b89e83d8c4e8e4abcfe04025c1ebe0",
+        "byteCount": 308592
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TextCoreTextEngineModule.pdb",
+        "kind": "build_payload",
+        "hash": "62d1751fe598ca3cec6d7535e0b24ba7a8a8e9e9284f990c0f299b2752b896a5",
+        "byteCount": 135644
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TextRenderingModule.dll",
+        "kind": "build_payload",
+        "hash": "4a34a737c6bda9aacc94c81fb2d197704b7f4b30a7fe2a5706e556d6cf6f5024",
+        "byteCount": 46448
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TextRenderingModule.pdb",
+        "kind": "build_payload",
+        "hash": "99c12847ee3e39b097a6ca47db883c6030a229b5268391a14d169c099947d741",
+        "byteCount": 15160
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TilemapModule.dll",
+        "kind": "build_payload",
+        "hash": "ee0b5713cfea4e01cc986ab3e6be6490cda44ec4b5f0b44db40a5df74f509f98",
+        "byteCount": 55152
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.TilemapModule.pdb",
+        "kind": "build_payload",
+        "hash": "4b5a03c5bc82298660bf56daf18d5933e85fbdef29fcf5f20190c6af241326bb",
+        "byteCount": 18756
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UIElementsModule.dll",
+        "kind": "build_payload",
+        "hash": "2955c7c09b703feed82b48500b882d352a6056d7a82d40c2b0427f2763389630",
+        "byteCount": 2073456
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UIElementsModule.pdb",
+        "kind": "build_payload",
+        "hash": "db25fd44b4bf8266335f28451c9d7ff63378e1120df3a5df68b4f71efb166719",
+        "byteCount": 919028
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UIModule.dll",
+        "kind": "build_payload",
+        "hash": "b29b36a269f01ba1fbaaafcdc6104fa5f99b32ee560a22f0e54462659fd48578",
+        "byteCount": 46960
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UIModule.pdb",
+        "kind": "build_payload",
+        "hash": "fe0ad854d8dd513721ff5747798e6dc8190134f0d6709d3b1a9532a2e2c49b33",
+        "byteCount": 13612
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UmbraModule.dll",
+        "kind": "build_payload",
+        "hash": "8bb1749742c89447aa0fcbb2bed0c4fb63bd25f0bad8c24fa77fdbbf97209daa",
+        "byteCount": 21872
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UmbraModule.pdb",
+        "kind": "build_payload",
+        "hash": "c20278ca2f55e7eb478fd127212d10f888d127e2db0232114bc22c3614c55bec",
+        "byteCount": 9020
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+        "kind": "build_payload",
+        "hash": "1fc21168ea504a1a889c3634a6746db80d5f205dc0ab484d78eeec60120b6ddb",
+        "byteCount": 32624
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.pdb",
+        "kind": "build_payload",
+        "hash": "0e5a101a210089f6b70c8aedddb65907ac2979508b67466e34cb069a197b203d",
+        "byteCount": 13340
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+        "kind": "build_payload",
+        "hash": "aa13e16df950f2078956c0c847de689c9b0d1ba08292beefebd7508a8041f65b",
+        "byteCount": 58224
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityAnalyticsModule.pdb",
+        "kind": "build_payload",
+        "hash": "0581d8a2ffd88f3084b663cfbcafc52e29d83b951bba677f7c502b91a485868a",
+        "byteCount": 17744
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityConnectModule.dll",
+        "kind": "build_payload",
+        "hash": "4c4f2ef6142b0c4b9270e7df603751ff2111e851f6d36ab61480c832a90c2ea5",
+        "byteCount": 24944
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityConnectModule.pdb",
+        "kind": "build_payload",
+        "hash": "3953f4a831ee22ba43ec07c5e79989ab17a20354a814e611c40ad0b077e8feb1",
+        "byteCount": 9616
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityCurlModule.dll",
+        "kind": "build_payload",
+        "hash": "8dd8096cf3bb78103f06792060f9848671747d9dcca09eb4515e962d2aa1f572",
+        "byteCount": 23408
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityCurlModule.pdb",
+        "kind": "build_payload",
+        "hash": "2d874e43610c5dc9a9a11cf2b1e54e31368e390b075f690a7d6add5c939364ea",
+        "byteCount": 9412
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityTestProtocolModule.dll",
+        "kind": "build_payload",
+        "hash": "a5aa60a5b1698a5549475230933f08cc98abe99b23bf2683cf99c1d7351d1550",
+        "byteCount": 21872
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityTestProtocolModule.pdb",
+        "kind": "build_payload",
+        "hash": "b6253bff0e1607737804f2f024b8162e7a9b296661988dccbdeb05216b952571",
+        "byteCount": 9080
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+        "kind": "build_payload",
+        "hash": "4cc1b94247ab176e6d9b4105c993bbaa079a4ae85b131af4ede3a1623e8fb0a9",
+        "byteCount": 25968
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.pdb",
+        "kind": "build_payload",
+        "hash": "d4f7ebbcf59d6323066038adef429e188158c1e8e4cba20427920b49f2f1bd4d",
+        "byteCount": 10592
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+        "kind": "build_payload",
+        "hash": "846cffd17be98a2f3cca86b77b2722a91895e3461c93c4677143e89b2d7d3e27",
+        "byteCount": 25456
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestAudioModule.pdb",
+        "kind": "build_payload",
+        "hash": "97d366a68ba1a79983c7fe74b45a11409e7b0a8be1d845c30c16484fce5f9a88",
+        "byteCount": 10392
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+        "kind": "build_payload",
+        "hash": "7a1eb507dd6e62b8ac64fd22659ae539a7b80f42229cb7f33c08262ffe4241dd",
+        "byteCount": 66928
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestModule.pdb",
+        "kind": "build_payload",
+        "hash": "40c56b181264902841e11bc4318a2e52983584ab2ff502df82b9e3b498593382",
+        "byteCount": 28084
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+        "kind": "build_payload",
+        "hash": "03d92afc61212b2edfff9b6e2bc6afef8a023ada94119f517327066e78b5faf0",
+        "byteCount": 24944
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestTextureModule.pdb",
+        "kind": "build_payload",
+        "hash": "c54a998c00312a07b9ebb441935c1b256050424399b5d792b37b25561724e6ef",
+        "byteCount": 10560
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+        "kind": "build_payload",
+        "hash": "3e28a930406089b11d886c8e4ca6b1d20caa631dd81dc7353bd2a308f53d0199",
+        "byteCount": 33648
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.UnityWebRequestWWWModule.pdb",
+        "kind": "build_payload",
+        "hash": "b31cc91035a961d931b2df3e8d3b49f8b3f12db7befbcd88878d9062accb2cf7",
+        "byteCount": 13460
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VFXModule.dll",
+        "kind": "build_payload",
+        "hash": "c5571c90e3075503d4ec90fb5c772aa36f499de72032d5b250c1dc730bc22893",
+        "byteCount": 75632
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VFXModule.pdb",
+        "kind": "build_payload",
+        "hash": "0a9c3944c9d949b779cd2fda272dbc99945ef59ee30c1b7c9d4ad7bad3033979",
+        "byteCount": 18528
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VRModule.dll",
+        "kind": "build_payload",
+        "hash": "e41d88b61b17e27a11b515668798bb2eca781984dea5b58d614b6186a29ee71e",
+        "byteCount": 29040
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VRModule.pdb",
+        "kind": "build_payload",
+        "hash": "56b33cdb9d69e81213060483526e53bdfd519dbaa17843a82cd839429728d9a1",
+        "byteCount": 10144
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VehiclesModule.dll",
+        "kind": "build_payload",
+        "hash": "434e4c651bf8c4ba69dd246b04b3447761a5e3a02183154bed2c599d7830f8f4",
+        "byteCount": 29040
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VehiclesModule.pdb",
+        "kind": "build_payload",
+        "hash": "d58ea499e5fdd80cf595e806d4db7836e9bd3f691150b51e0b993b7ed12317c7",
+        "byteCount": 10260
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VideoModule.dll",
+        "kind": "build_payload",
+        "hash": "13a1a0d8d609e5a0493732599a24a01ff86d5c4d792da2d72b0a58657a266350",
+        "byteCount": 56176
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VideoModule.pdb",
+        "kind": "build_payload",
+        "hash": "c3be75464f9d8cbf21c88a6958b8006721e0454b836ecad30c6852b92c06e60a",
+        "byteCount": 13936
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+        "kind": "build_payload",
+        "hash": "176c2b2155428a56c1db30b39ad0b9da05823d68cc5ffbaf46318fa8d92bb926",
+        "byteCount": 40304
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.VirtualTexturingModule.pdb",
+        "kind": "build_payload",
+        "hash": "dd9508246ba8e87f2232bae635854e31b36978f6ca8e54ca0c1bd0be04fe1363",
+        "byteCount": 13268
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.WindModule.dll",
+        "kind": "build_payload",
+        "hash": "c605834f22c7681e0f66e6d6bc83c4a54d4f1720845c4095f01c0d5fcb418203",
+        "byteCount": 23920
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.WindModule.pdb",
+        "kind": "build_payload",
+        "hash": "571279ec76ce6a44ea140ae6fc37d2754f824b54a1b6137640ed58dbbcae3f58",
+        "byteCount": 9156
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.XRModule.dll",
+        "kind": "build_payload",
+        "hash": "1033ad9e1c94ba10b0b31b323a1584cc2cbab86ceb913740558fd5a95fa54955",
+        "byteCount": 85360
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.XRModule.pdb",
+        "kind": "build_payload",
+        "hash": "3bf69a8d3026b4733c4bd507392ebfdc4246bfb212a48160a28f9ba3c0ea8ae7",
+        "byteCount": 24024
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.dll",
+        "kind": "build_payload",
+        "hash": "9d2ec454dfa1a6f8cda8286981714a3eace14dd98875639fa52bf4d692a30507",
+        "byteCount": 171376
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/UnityEngine.pdb",
+        "kind": "build_payload",
+        "hash": "5e22cf052e2bf178092afcb241616cf27adbc031a05ba872fef7b978c66890e7",
+        "byteCount": 12120
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/mscorlib.dll",
+        "kind": "build_payload",
+        "hash": "d50e9e1279de604d1fe4205b99238a429d5e8b809876ba5852f2eb8b8487b29b",
+        "byteCount": 4632064
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Managed/netstandard.dll",
+        "kind": "build_payload",
+        "hash": "6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5",
+        "byteCount": 90112
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Resources/unity default resources",
+        "kind": "build_payload",
+        "hash": "e97068af1d02a2d037b75900ba7d809469e9bd0258e5e842886e0ce90380dae4",
+        "byteCount": 5862452
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/Resources/unity_builtin_extra",
+        "kind": "build_payload",
+        "hash": "c1995432b0eed3370c9cffbf369e521be0d2b4a177f03aa1f021a5b59a78ab31",
+        "byteCount": 364852
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/RuntimeInitializeOnLoads.json",
+        "kind": "json_payload",
+        "hash": "6a33c1efd5944feb0cb1e012e26b30c3f43fec918e5643e72ab945a9c504ff13",
+        "byteCount": 13
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/ScriptingAssemblies.json",
+        "kind": "json_payload",
+        "hash": "d0034a03447fb4a9ab442916659f92ead0c53fc10eb6b8073c4a6bb43860c6e7",
+        "byteCount": 2849
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/assets/asset-manifest.json",
+        "kind": "json_payload",
+        "hash": "016df25800626eb05b8c5a6bb7f0dc73a40727cc3b40cb87c77d1374e53e67da",
+        "byteCount": 5016
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        "kind": "build_payload",
+        "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+        "byteCount": 268
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/assets/music-ambience/asset-001-e368b44a.fixture",
+        "kind": "build_payload",
+        "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+        "byteCount": 69
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/assets/npc-portrait/asset-002-b5037955.fixture",
+        "kind": "build_payload",
+        "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+        "byteCount": 266
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/assets/sound-effect/asset-003-b6002d93.fixture",
+        "kind": "build_payload",
+        "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+        "byteCount": 270
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/assets/tile-region-graphic/asset-004-f8e7e136.fixture",
+        "kind": "build_payload",
+        "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+        "byteCount": 247
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/export-manifest.json",
+        "kind": "json_payload",
+        "hash": "2e0b9076b27d0e8c2a493651bf37506630cf9fc3758c283be04fc34169bf149e",
+        "byteCount": 3700
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/game-data/game-package.json",
+        "kind": "json_payload",
+        "hash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+        "byteCount": 420490
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/game-data/generated-content-provenance.json",
+        "kind": "json_payload",
+        "hash": "4293fd31241cd8cb6f8bf886e3c46fcd857989208e3a4bafc17b3a29bfdb14aa",
+        "byteCount": 2532
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/runtime/alpha-launch-metadata.json",
+        "kind": "json_payload",
+        "hash": "0ed179ce242b51ea7bcd34b4ec5d69b7d8a110246f1afbca9db2e61242afdefc",
+        "byteCount": 703
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/runtime/launch-metadata.json",
+        "kind": "json_payload",
+        "hash": "807ffc07ea1cdcbfe5ec002d170512086dc2b7c3e0eb93f20b0a879b6ca16c1f",
+        "byteCount": 591
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/runtime/unity-runtime-config.json",
+        "kind": "json_payload",
+        "hash": "569f440bba0f0aca3cacd5fdb1ff5a856d25b5609302681d3faddb3922195bf2",
+        "byteCount": 7933
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/app.info",
+        "kind": "build_payload",
+        "hash": "a073fad3989a01401eed785dcd39b492b89a697f6bcbee3e75d248d575d349d0",
+        "byteCount": 34
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/boot.config",
+        "kind": "build_payload",
+        "hash": "14bd901ddfbe53a603cdc3f1e046d710e54730a40a94f1619d14aaef03d8a76a",
+        "byteCount": 332
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/globalgamemanagers",
+        "kind": "build_payload",
+        "hash": "d4c3b39e80cfde6ca5442e77c5f3c9e343156f6d715d0ea45063e8e5a45d1ba5",
+        "byteCount": 21060
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/globalgamemanagers.assets",
+        "kind": "build_payload",
+        "hash": "101c3b4af3e038772c0af103c1cd058f88fb7c1032f34dae35bfe8aa172e1a03",
+        "byteCount": 1892
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/globalgamemanagers.assets.resS",
+        "kind": "build_payload",
+        "hash": "ebf0f91664c0aa69e3b92e93d4d4e6feae1a9152529b0efeac047e3c9c3b0fc0",
+        "byteCount": 2798288
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/level0",
+        "kind": "build_payload",
+        "hash": "49b44ddb434be0408f557d7a4080c66c36460f0972429ab299c3e76c6374534b",
+        "byteCount": 1152
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/sharedassets0.assets",
+        "kind": "build_payload",
+        "hash": "c0cc1c127f2113525e52bc6f5e39efcda7088ac635c8fe7ae20f66f96ca1c6d3",
+        "byteCount": 7920
+      },
+      {
+        "relativePath": "LLMGameCreatorAlpha_Data/sharedassets0.assets.resS",
+        "kind": "build_payload",
+        "hash": "87a4847eade1de49f6aac782a74b9929acbdb3c0f8b36d7750474215f1880479",
+        "byteCount": 524288
+      },
+      {
+        "relativePath": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+        "kind": "build_payload",
+        "hash": "b9399f29ca34a32f32e71531b61453300f6440cbdbccea87ae0b7553c08b8259",
+        "byteCount": 611184
+      },
+      {
+        "relativePath": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+        "kind": "build_payload",
+        "hash": "235908b83ac441da56121642f8008cd56794c5c347661c520e033ddc5120795a",
+        "byteCount": 7830384
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+        "kind": "build_payload",
+        "hash": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741",
+        "byteCount": 1605
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+        "kind": "build_payload",
+        "hash": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a",
+        "byteCount": 60575
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/2.0/machine.config",
+        "kind": "build_payload",
+        "hash": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30",
+        "byteCount": 29066
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/2.0/settings.map",
+        "kind": "build_payload",
+        "hash": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2",
+        "byteCount": 2622
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/2.0/web.config",
+        "kind": "build_payload",
+        "hash": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92",
+        "byteCount": 11635
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+        "kind": "build_payload",
+        "hash": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741",
+        "byteCount": 1605
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+        "kind": "build_payload",
+        "hash": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a",
+        "byteCount": 60575
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.0/machine.config",
+        "kind": "build_payload",
+        "hash": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed",
+        "byteCount": 33598
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.0/settings.map",
+        "kind": "build_payload",
+        "hash": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8",
+        "byteCount": 2622
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.0/web.config",
+        "kind": "build_payload",
+        "hash": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492",
+        "byteCount": 18802
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+        "kind": "build_payload",
+        "hash": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741",
+        "byteCount": 1605
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+        "kind": "build_payload",
+        "hash": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a",
+        "byteCount": 60575
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.5/machine.config",
+        "kind": "build_payload",
+        "hash": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c",
+        "byteCount": 34056
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.5/settings.map",
+        "kind": "build_payload",
+        "hash": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8",
+        "byteCount": 2622
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/4.5/web.config",
+        "kind": "build_payload",
+        "hash": "c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824",
+        "byteCount": 18811
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/browscap.ini",
+        "kind": "build_payload",
+        "hash": "4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e",
+        "byteCount": 311984
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/config",
+        "kind": "build_payload",
+        "hash": "5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662",
+        "byteCount": 3815
+      },
+      {
+        "relativePath": "MonoBleedingEdge/etc/mono/mconfig/config.xml",
+        "kind": "build_payload",
+        "hash": "0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d",
+        "byteCount": 25817
+      },
+      {
+        "relativePath": "UnityCrashHandler64.exe",
+        "kind": "windows_executable",
+        "hash": "56744c17540c4829ff27440575a532cd8c5250d23116a8b2a241e39b9f66191c",
+        "byteCount": 1608560
+      },
+      {
+        "relativePath": "UnityPlayer.dll",
+        "kind": "build_payload",
+        "hash": "657463486b205c39852f39c1e84b7e527ec62cd520fbba326772fe349e807c9e",
+        "byteCount": 73730416
+      },
+      {
+        "relativePath": "WinPixEventRuntime.dll",
+        "kind": "build_payload",
+        "hash": "365a63da6a83c91b76bd7f8a9efcc3806b6188a6d29acdbe9d7e43decf3510d8",
+        "byteCount": 55032
       }
-    ]
+    ],
+    "diagnostics": []
   },
   "buildEnvironment": {
     "unityExecutableDiscovered": true,
     "unityExecutablePathForVerification": "",
     "unityVersionForVerification": "",
-    "repoUnityProjectFound": false,
-    "repoUnityProjectRelativePath": "",
-    "repoBuildScriptFound": false,
-    "repoBuildScriptRelativePath": "",
+    "repoUnityProjectFound": true,
+    "repoUnityProjectRelativePath": "unity/LLMGameCreatorAlpha",
+    "repoBuildScriptFound": true,
+    "repoBuildScriptRelativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs",
     "buildCommandForVerification": "",
     "diagnostics": [
-      {
-        "severity": "error",
-        "code": "alpha_build.environment.no_repo_build_script",
-        "target": "repo_build_script",
-        "message": "No repository-local Unity build script or BuildPipeline.BuildPlayer entrypoint was found."
-      },
-      {
-        "severity": "error",
-        "code": "alpha_build.environment.no_repo_unity_project",
-        "target": "repo_unity_project",
-        "message": "No repository-local Unity project/template with ProjectSettings/ProjectVersion.txt was found."
-      },
       {
         "severity": "info",
         "code": "alpha_build.environment.unity_found",
@@ -639,17 +1941,17 @@
     ]
   },
   "launchVerification": {
-    "launchVerified": false,
+    "launchVerified": true,
     "playLoopVerified": false,
-    "processExitCode": null,
-    "durationSeconds": 0,
-    "logRelativePath": "",
+    "processExitCode": 0,
+    "durationSeconds": 1,
+    "logRelativePath": ".llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log",
     "diagnostics": [
       {
-        "severity": "error",
-        "code": "alpha_build.launch.blocked_no_executable",
-        "target": "build/windows",
-        "message": "Launch verification cannot run because no real Windows executable was produced."
+        "severity": "info",
+        "code": "alpha_build.launch.executed",
+        "target": "logs/alpha-player-launch.log",
+        "message": "The produced Windows player was launched in batch diagnostic mode."
       }
     ]
   },
@@ -927,10 +2229,10 @@
       }
     ]
   },
-  "windowsExecutableProduced": false,
-  "unityEditorExecuted": false,
-  "unityBuildProduced": false,
-  "launchVerified": false,
+  "windowsExecutableProduced": true,
+  "unityEditorExecuted": true,
+  "unityBuildProduced": true,
+  "launchVerified": true,
   "playLoopVerified": false,
   "externalExecution": {
     "llmExecuted": false,
@@ -939,17 +2241,17 @@
     "luaExecuted": false,
     "mediaExecuted": false,
     "generatorLibraryExecuted": false,
-    "unityEditorExecuted": false,
-    "unityBuildExecuted": false,
-    "windowsExecutableExecuted": false
+    "unityEditorExecuted": true,
+    "unityBuildExecuted": true,
+    "windowsExecutableExecuted": true
   },
   "runtimePreviewDependency": false,
   "publicGamePackageSchemaChanged": false,
   "projectFilesChanged": false,
   "generatorLibraryChanged": false,
   "deterministicReportRelativePath": ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-report.json",
-  "deterministicHash": "5f5fc39b0dba6977f571345915b77fc61b4bdd090f753ebc834c54e43c1226e4",
-  "buildManifestHash": "1e6281526db9c17fbafadd72cdb73fb6511089ef8da72127e4fa0c32abf9654a",
+  "deterministicHash": "9f0f8d0283df74ea30c6efdce16614d5b5b0b31477f690cc79abb5055fb93f64",
+  "buildManifestHash": "6c774e5228b13f49ecc6cd65031edad00705dd9dfee84ce8f99f5f4fe950c57d",
   "diagnostics": [
     {
       "severity": "error",
@@ -989,27 +2291,9 @@
     },
     {
       "severity": "error",
-      "code": "alpha_build.environment.no_repo_build_script",
-      "target": "repo_build_script",
-      "message": "No repository-local Unity build script or BuildPipeline.BuildPlayer entrypoint was found."
-    },
-    {
-      "severity": "error",
-      "code": "alpha_build.environment.no_repo_unity_project",
-      "target": "repo_unity_project",
-      "message": "No repository-local Unity project/template with ProjectSettings/ProjectVersion.txt was found."
-    },
-    {
-      "severity": "error",
       "code": "alpha_build.invalid.expectation_only_report",
       "target": "alpha-runnable-build-report.json",
       "message": "Expectation reports cannot replace physical build files."
-    },
-    {
-      "severity": "error",
-      "code": "alpha_build.launch.blocked_no_executable",
-      "target": "build/windows",
-      "message": "Launch verification cannot run because no real Windows executable was produced."
     },
     {
       "severity": "error",
@@ -1021,19 +2305,7 @@
       "severity": "error",
       "code": "alpha_build.output.missing_executable",
       "target": "build/windows",
-      "message": "A real Windows executable was not produced under the build output folder."
-    },
-    {
-      "severity": "error",
-      "code": "alpha_build.output.missing_executable",
-      "target": "build/windows",
       "message": "Build validation rejects missing Windows executable."
-    },
-    {
-      "severity": "error",
-      "code": "alpha_build.output.no_supported_repo_build_path",
-      "target": "build_path",
-      "message": "No supported repository-local Unity build path exists for producing a Windows player."
     },
     {
       "severity": "error",
@@ -1066,10 +2338,10 @@
       "message": "Staging manifest paths must stay inside the staging root."
     },
     {
-      "severity": "warning",
-      "code": "alpha_build.environment.blocker",
+      "severity": "info",
+      "code": "alpha_build.environment.not_blocked",
       "target": "alpha_unity_build_environment_blocker",
-      "message": "A real Windows build is blocked when the repository has no Unity project/template/build script to build."
+      "message": "A real Windows build path exists and produced verifiable output; the runnable gate remains required for review."
     },
     {
       "severity": "info",
@@ -1091,9 +2363,27 @@
     },
     {
       "severity": "info",
+      "code": "alpha_build.launch.executed",
+      "target": "logs/alpha-player-launch.log",
+      "message": "The produced Windows player was launched in batch diagnostic mode."
+    },
+    {
+      "severity": "info",
       "code": "alpha_build.no_external_providers",
       "target": "execution_boundary",
       "message": "No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.unity_build.executed",
+      "target": "logs/unity-build.log",
+      "message": "Unity Editor was invoked through the repository-local Alpha build entrypoint."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.unity_build.exit_success",
+      "target": "exit_code:0",
+      "message": "Unity build process completed; see logs/unity-build.log for details."
     },
     {
       "severity": "info",

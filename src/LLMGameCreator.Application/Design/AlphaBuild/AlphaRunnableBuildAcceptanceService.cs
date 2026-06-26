@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -50,6 +51,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
 
         var settings = options ?? new AlphaRunnableBuildOptions();
         var projectRoot = Path.GetFullPath(projectRootPath);
+        var repositoryRoot = ResolveRepositoryRoot(projectRoot, settings);
         var artifactRoot = Path.GetFullPath(Path.Combine(projectRoot, RelativeOutputDirectory.Replace('/', Path.DirectorySeparatorChar)));
         var sourceEvidenceRoot = Path.Combine(artifactRoot, "source-evidence");
         var stagingRoot = Path.Combine(artifactRoot, "staging");
@@ -58,7 +60,15 @@ public sealed class AlphaRunnableBuildAcceptanceService
         EnsureContained(projectRoot, artifactRoot);
         ResetDirectory(sourceEvidenceRoot);
         ResetDirectory(stagingRoot);
-        ResetDirectory(buildRoot);
+        if (settings.PreserveExistingBuildOutputForValidation)
+        {
+            Directory.CreateDirectory(buildRoot);
+        }
+        else
+        {
+            ResetDirectory(buildRoot);
+        }
+
         ResetDirectory(logsRoot);
 
         var diagnostics = new List<AlphaBuildDiagnostic>
@@ -114,24 +124,23 @@ public sealed class AlphaRunnableBuildAcceptanceService
             : MaterializeStaging(projectRoot, stagingRoot, primary);
         diagnostics.AddRange(staging.Diagnostics);
 
-        var environment = ProbeBuildEnvironment(projectRoot);
+        var environment = ProbeBuildEnvironment(repositoryRoot, projectRoot, stagingRoot, buildRoot, logsRoot);
         diagnostics.AddRange(environment.Diagnostics);
+
+        var unityExecution = ExecuteUnityBuildIfRequested(
+            projectRoot,
+            repositoryRoot,
+            artifactRoot,
+            buildRoot,
+            staging,
+            environment,
+            settings);
+        diagnostics.AddRange(unityExecution.Diagnostics);
 
         var buildOutput = ValidateBuildOutput(projectRoot, buildRoot, staging, environment);
         diagnostics.AddRange(buildOutput.Diagnostics);
 
-        var launch = new AlphaBuildLaunchVerificationResult
-        {
-            LaunchVerified = false,
-            PlayLoopVerified = false,
-            ProcessExitCode = null,
-            DurationSeconds = 0,
-            LogRelativePath = string.Empty,
-            Diagnostics =
-            [
-                Diagnostic("error", "alpha_build.launch.blocked_no_executable", "build/windows", "Launch verification cannot run because no real Windows executable was produced.")
-            ]
-        };
+        var launch = VerifyLaunchIfRequested(projectRoot, buildRoot, logsRoot, buildOutput, settings);
         diagnostics.AddRange(launch.Diagnostics);
 
         var invalidMatrix = BuildInvalidMatrix(candidates, primary, staging, buildOutput, settings);
@@ -148,13 +157,21 @@ public sealed class AlphaRunnableBuildAcceptanceService
         var blockerReached =
             validMatrixPassed &&
             invalidMatrix.Passed &&
-            !environment.RepoUnityProjectFound &&
-            !environment.RepoBuildScriptFound &&
-            !buildOutput.WindowsExecutableProduced;
+            !buildOutput.WindowsExecutableProduced &&
+            (!environment.RepoUnityProjectFound ||
+             !environment.RepoBuildScriptFound ||
+             settings.ExecuteUnityBuild ||
+             !unityExecution.Passed);
 
         diagnostics.Add(Diagnostic(validMatrixPassed ? "info" : "error", validMatrixPassed ? "alpha_build.valid_matrix_passed" : "alpha_build.valid_matrix_failed", "valid_matrix", "Three style candidates and deterministic staging are required."));
         diagnostics.Add(Diagnostic(invalidMatrix.Passed ? "info" : "error", invalidMatrix.Passed ? "alpha_build.invalid_matrix_rejected" : "invalid_matrix_failed", "invalid_matrix", "Invalid/fake/leak scenarios must fail through the Alpha build validation path."));
-        diagnostics.Add(Diagnostic(blockerReached ? "warning" : "info", blockerReached ? "alpha_build.environment.blocker" : "alpha_build.environment.not_blocked", BlockerGate, "A real Windows build is blocked when the repository has no Unity project/template/build script to build."));
+        diagnostics.Add(Diagnostic(
+            blockerReached ? "warning" : "info",
+            blockerReached ? "alpha_build.environment.blocker" : "alpha_build.environment.not_blocked",
+            BlockerGate,
+            blockerReached
+                ? "A real Windows build is blocked by the current Unity repository/environment/build output state."
+                : "A real Windows build path exists and produced verifiable output; the runnable gate remains required for review."));
 
         var reportWithoutHash = new AlphaRunnableBuildReport
         {
@@ -173,11 +190,16 @@ public sealed class AlphaRunnableBuildAcceptanceService
             LaunchVerification = launch,
             InvalidMatrix = invalidMatrix,
             WindowsExecutableProduced = buildOutput.WindowsExecutableProduced,
-            UnityEditorExecuted = false,
+            UnityEditorExecuted = unityExecution.UnityEditorExecuted,
             UnityBuildProduced = buildOutput.UnityBuildProduced,
             LaunchVerified = launch.LaunchVerified,
             PlayLoopVerified = launch.PlayLoopVerified,
-            ExternalExecution = new AlphaBuildExternalExecutionFlags(),
+            ExternalExecution = new AlphaBuildExternalExecutionFlags
+            {
+                UnityEditorExecuted = unityExecution.UnityEditorExecuted,
+                UnityBuildExecuted = unityExecution.UnityEditorExecuted,
+                WindowsExecutableExecuted = launch.ProcessExitCode.HasValue
+            },
             RuntimePreviewDependency = staging.RuntimePreviewDependency,
             PublicGamePackageSchemaChanged = false,
             ProjectFilesChanged = false,
@@ -196,7 +218,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
             Report = report,
             ReportJson = JsonSerializer.Serialize(report, JsonOptions),
             ReportMarkdown = RenderReport(report),
-            VerificationMarkdown = RenderVerification(report, environment)
+            VerificationMarkdown = RenderVerification(report, environment, unityExecution)
         };
     }
 
@@ -701,7 +723,34 @@ public sealed class AlphaRunnableBuildAcceptanceService
         return string.IsNullOrWhiteSpace(normalized) ? "item" : normalized;
     }
 
-    private static AlphaBuildEnvironmentProbe ProbeBuildEnvironment(string projectRoot)
+    private static string ResolveRepositoryRoot(string projectRoot, AlphaRunnableBuildOptions settings)
+    {
+        if (!string.IsNullOrWhiteSpace(settings.RepositoryRootPath))
+        {
+            return Path.GetFullPath(settings.RepositoryRootPath);
+        }
+
+        var current = new DirectoryInfo(projectRoot);
+        while (current != null)
+        {
+            if (File.Exists(Path.Combine(current.FullName, "LLMGameCreator.sln")) ||
+                Directory.Exists(Path.Combine(current.FullName, "unity", "LLMGameCreatorAlpha")))
+            {
+                return current.FullName;
+            }
+
+            current = current.Parent;
+        }
+
+        return projectRoot;
+    }
+
+    private static AlphaBuildEnvironmentProbe ProbeBuildEnvironment(
+        string repositoryRoot,
+        string projectRoot,
+        string stagingRoot,
+        string buildRoot,
+        string logsRoot)
     {
         var diagnostics = new List<AlphaBuildDiagnostic>();
         var unityCandidates = FindUnityExecutableCandidates().ToList();
@@ -714,8 +763,8 @@ public sealed class AlphaRunnableBuildAcceptanceService
             diagnostics.Add(Diagnostic("info", "alpha_build.environment.unity_found", "unity_cli", "Unity Editor executable was discovered; local machine path is omitted from deterministic artifacts."));
         }
 
-        var repoUnityProject = FindRepoUnityProject(projectRoot);
-        var repoBuildScript = FindRepoUnityBuildScript(projectRoot);
+        var repoUnityProject = FindRepoUnityProject(repositoryRoot);
+        var repoBuildScript = FindRepoUnityBuildScript(repositoryRoot);
         if (string.IsNullOrWhiteSpace(repoUnityProject))
         {
             diagnostics.Add(Diagnostic("error", "alpha_build.environment.no_repo_unity_project", "repo_unity_project", "No repository-local Unity project/template with ProjectSettings/ProjectVersion.txt was found."));
@@ -726,18 +775,116 @@ public sealed class AlphaRunnableBuildAcceptanceService
             diagnostics.Add(Diagnostic("error", "alpha_build.environment.no_repo_build_script", "repo_build_script", "No repository-local Unity build script or BuildPipeline.BuildPlayer entrypoint was found."));
         }
 
+        var unityExecutable = unityCandidates.FirstOrDefault() ?? string.Empty;
+        var repoUnityProjectPath = string.IsNullOrWhiteSpace(repoUnityProject)
+            ? string.Empty
+            : Path.Combine(repositoryRoot, repoUnityProject.Replace('/', Path.DirectorySeparatorChar));
+        var buildLogPath = Path.Combine(logsRoot, "unity-build.log");
+
         return new AlphaBuildEnvironmentProbe
         {
             UnityExecutableDiscovered = unityCandidates.Count > 0,
-            UnityExecutablePathForVerification = string.Empty,
-            UnityVersionForVerification = ExtractUnityVersion(unityCandidates.FirstOrDefault() ?? string.Empty),
+            UnityExecutablePathForVerification = unityExecutable,
+            UnityVersionForVerification = ExtractUnityVersion(unityExecutable),
             RepoUnityProjectFound = !string.IsNullOrWhiteSpace(repoUnityProject),
             RepoUnityProjectRelativePath = repoUnityProject,
             RepoBuildScriptFound = !string.IsNullOrWhiteSpace(repoBuildScript),
             RepoBuildScriptRelativePath = repoBuildScript,
-            BuildCommandForVerification = string.IsNullOrWhiteSpace(repoUnityProject) || string.IsNullOrWhiteSpace(unityCandidates.FirstOrDefault())
+            BuildCommandForVerification = string.IsNullOrWhiteSpace(repoUnityProjectPath) || string.IsNullOrWhiteSpace(unityExecutable)
                 ? string.Empty
-                : "Unity.exe -batchmode -quit -projectPath <repo-unity-project> -buildWindows64Player .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe",
+                : BuildUnityCommandForDisplay(unityExecutable, repoUnityProjectPath, stagingRoot, buildRoot, buildLogPath),
+            Diagnostics = SortDiagnostics(diagnostics)
+        };
+    }
+
+    private static AlphaBuildUnityExecutionResult ExecuteUnityBuildIfRequested(
+        string projectRoot,
+        string repositoryRoot,
+        string artifactRoot,
+        string buildRoot,
+        AlphaBuildStagingManifest staging,
+        AlphaBuildEnvironmentProbe environment,
+        AlphaRunnableBuildOptions settings)
+    {
+        if (!settings.ExecuteUnityBuild)
+        {
+            return new AlphaBuildUnityExecutionResult
+            {
+                Diagnostics =
+                [
+                    Diagnostic("info", "alpha_build.unity_build.not_requested", "unity_cli", "Unity build execution was not requested for this validation pass.")
+                ]
+            };
+        }
+
+        var diagnostics = new List<AlphaBuildDiagnostic>();
+        if (!staging.Passed)
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.unity_build.staging_not_valid", "staging", "Unity build was not attempted because Alpha staging validation failed."));
+            return new AlphaBuildUnityExecutionResult { Diagnostics = SortDiagnostics(diagnostics) };
+        }
+
+        if (!environment.UnityExecutableDiscovered || string.IsNullOrWhiteSpace(environment.UnityExecutablePathForVerification))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.unity_build.unity_not_found", "unity_cli", "Unity build was not attempted because Unity Editor was not discoverable."));
+            return new AlphaBuildUnityExecutionResult { Diagnostics = SortDiagnostics(diagnostics) };
+        }
+
+        if (!environment.RepoUnityProjectFound || !environment.RepoBuildScriptFound)
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.unity_build.repo_entrypoint_missing", "repo_unity_project", "Unity build was not attempted because the repository Unity project or build entrypoint was missing."));
+            return new AlphaBuildUnityExecutionResult { Diagnostics = SortDiagnostics(diagnostics) };
+        }
+
+        var sourceProjectPath = Path.GetFullPath(Path.Combine(repositoryRoot, environment.RepoUnityProjectRelativePath.Replace('/', Path.DirectorySeparatorChar)));
+        var workProjectPath = Path.Combine(artifactRoot, "unity-work", "LLMGameCreatorAlpha");
+        var buildLogPath = Path.Combine(artifactRoot, "logs", "unity-build.log");
+        Directory.CreateDirectory(Path.GetDirectoryName(buildLogPath)!);
+        ResetDirectory(Path.GetDirectoryName(workProjectPath)!);
+        CopyUnityTemplate(sourceProjectPath, workProjectPath);
+
+        var arguments = new List<string>
+        {
+            "-batchmode",
+            "-quit",
+            "-projectPath",
+            workProjectPath,
+            "-executeMethod",
+            "LLMGameCreatorAlpha.Editor.AlphaBuildEntrypoint.BuildWindows64",
+            "-logFile",
+            buildLogPath,
+            "-alphaStagingPath",
+            Path.Combine(projectRoot, RelativeOutputDirectory.Replace('/', Path.DirectorySeparatorChar), "staging"),
+            "-alphaBuildOutputPath",
+            buildRoot
+        };
+
+        var command = BuildCommandForDisplay(environment.UnityExecutablePathForVerification, arguments);
+        var result = RunProcess(
+            environment.UnityExecutablePathForVerification,
+            arguments,
+            artifactRoot,
+            settings.UnityBuildTimeoutSeconds);
+        diagnostics.Add(Diagnostic("info", "alpha_build.unity_build.executed", "logs/unity-build.log", "Unity Editor was invoked through the repository-local Alpha build entrypoint."));
+        diagnostics.Add(Diagnostic(result.ExitCode == 0 ? "info" : "error", result.ExitCode == 0 ? "alpha_build.unity_build.exit_success" : "alpha_build.unity_build.exit_failure", $"exit_code:{result.ExitCode}", "Unity build process completed; see logs/unity-build.log for details."));
+
+        if (!File.Exists(buildLogPath))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.unity_build.log_missing", "logs/unity-build.log", "Unity build log was not produced."));
+        }
+
+        if (settings.CleanupUnityWorkProject)
+        {
+            SafeDeleteDirectory(Path.Combine(artifactRoot, "unity-work"), artifactRoot);
+        }
+
+        return new AlphaBuildUnityExecutionResult
+        {
+            UnityEditorExecuted = true,
+            Passed = result.ExitCode == 0,
+            ExitCode = result.ExitCode,
+            CommandForVerification = command,
+            LogRelativePath = RelativePath(projectRoot, buildLogPath),
             Diagnostics = SortDiagnostics(diagnostics)
         };
     }
@@ -756,10 +903,18 @@ public sealed class AlphaRunnableBuildAcceptanceService
             .ToList();
         var executable = files.FirstOrDefault(file => file.RelativePath.EndsWith(".exe", StringComparison.OrdinalIgnoreCase));
 
-        if (executable == null)
-        {
-            diagnostics.Add(Diagnostic("error", "alpha_build.output.missing_executable", "build/windows", "A real Windows executable was not produced under the build output folder."));
-        }
+            if (executable == null)
+            {
+                diagnostics.Add(Diagnostic("error", "alpha_build.output.missing_executable", "build/windows", "A real Windows executable was not produced under the build output folder."));
+            }
+            else
+            {
+                var executablePath = Path.Combine(buildRoot, executable.RelativePath.Replace('/', Path.DirectorySeparatorChar));
+                if (!LooksLikeWindowsExecutable(executablePath))
+                {
+                    diagnostics.Add(Diagnostic("error", "alpha_build.output.invalid_executable_header", executable.RelativePath, "Windows executable output must have a PE/MZ header."));
+                }
+            }
 
         if (!staging.Passed)
         {
@@ -771,9 +926,31 @@ public sealed class AlphaRunnableBuildAcceptanceService
             diagnostics.Add(Diagnostic("error", "alpha_build.output.no_supported_repo_build_path", "build_path", "No supported repository-local Unity build path exists for producing a Windows player."));
         }
 
+        if (executable != null)
+        {
+            foreach (var required in RequiredStreamingAssets())
+            {
+                var streamed = files.FirstOrDefault(file => string.Equals(file.RelativePath, required, StringComparison.Ordinal));
+                if (streamed == null)
+                {
+                    diagnostics.Add(Diagnostic("error", "alpha_build.output.missing_streaming_asset", required, "Windows build output must include staged Alpha data under StreamingAssets."));
+                    continue;
+                }
+
+                var stagingRelative = required["LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/".Length..];
+                var staged = staging.Files.FirstOrDefault(file => string.Equals(file.RelativePath, stagingRelative, StringComparison.Ordinal));
+                if (staged == null ||
+                    !string.Equals(staged.Hash, streamed.Hash, StringComparison.Ordinal) ||
+                    staged.ByteCount != streamed.ByteCount)
+                {
+                    diagnostics.Add(Diagnostic("error", "alpha_build.output.streaming_asset_mismatch", required, "StreamingAssets payload hash and byte count must match staged Alpha data."));
+                }
+            }
+        }
+
         var manifestWithoutHash = new AlphaBuildOutputManifest
         {
-            Passed = false,
+            Passed = executable != null && diagnostics.All(diagnostic => diagnostic.Severity != "error"),
             SchemaVersion = "alpha_build_windows_output_manifest_v1",
             BuildFolderRelativePath = RelativePath(projectRoot, buildRoot),
             ExecutableRelativePath = executable?.RelativePath ?? string.Empty,
@@ -894,7 +1071,10 @@ public sealed class AlphaRunnableBuildAcceptanceService
         return string.Join(Environment.NewLine, lines) + Environment.NewLine;
     }
 
-    private static string RenderVerification(AlphaRunnableBuildReport report, AlphaBuildEnvironmentProbe environment)
+    private static string RenderVerification(
+        AlphaRunnableBuildReport report,
+        AlphaBuildEnvironmentProbe environment,
+        AlphaBuildUnityExecutionResult unityExecution)
     {
         var lines = new List<string>
         {
@@ -915,25 +1095,143 @@ public sealed class AlphaRunnableBuildAcceptanceService
             $"- Repository Unity project: {Display(environment.RepoUnityProjectRelativePath)}",
             $"- Repository Unity build script found: {environment.RepoBuildScriptFound.ToString().ToLowerInvariant()}",
             $"- Repository Unity build script: {Display(environment.RepoBuildScriptRelativePath)}",
-            $"- Unity command executed: false",
-            $"- Unity command to run after adding a repo-local project/build script: {Display(environment.BuildCommandForVerification)}",
+            $"- Unity command executed: {unityExecution.UnityEditorExecuted.ToString().ToLowerInvariant()}",
+            $"- Unity command: {Display(unityExecution.UnityEditorExecuted ? unityExecution.CommandForVerification : environment.BuildCommandForVerification)}",
+            $"- Unity build log: {Display(unityExecution.LogRelativePath)}",
             $"- Build output folder: {report.BuildOutput.BuildFolderRelativePath}",
             $"- Executable relative path: {Display(report.BuildOutput.ExecutableRelativePath)}",
+            $"- Launch command: {Display(report.LaunchVerification.LaunchCommandForVerification)}",
+            $"- Launch log: {Display(report.LaunchVerification.LogRelativePath)}",
             $"- Launch verified: {report.LaunchVerified.ToString().ToLowerInvariant()}",
             $"- Play loop verified: {report.PlayLoopVerified.ToString().ToLowerInvariant()}",
             $"- Invalid/fake/leak scenarios rejected: {report.InvalidMatrix.Scenarios.Count(item => !item.ActualValid)}/{report.InvalidMatrix.ScenarioCount}",
             string.Empty,
-            "User steps to unblock:",
+            report.WindowsExecutableProduced
+                ? "Manual review steps:"
+                : "User steps to unblock:",
             string.Empty,
-            "1. Add or point the repository to a Unity project/template containing `ProjectSettings/ProjectVersion.txt`, `Assets/` and `Packages/`.",
-            "2. Add a repository-local headless build entrypoint or script that invokes `BuildPipeline.BuildPlayer` for Windows x64.",
-            "3. Run the build to `.llmgc/procedural/alpha-runnable-build/build/windows/` and rerun `run-product-smoke.ps1 -Scenario alpha-runnable-build`.",
-            "4. Launch the produced `.exe`, verify content load and the selected loop, then record play evidence in a later bounded task."
+            report.WindowsExecutableProduced
+                ? "1. Review the produced Windows player folder and launch log from this run."
+                : "1. Add or point the repository to a Unity project/template containing `ProjectSettings/ProjectVersion.txt`, `Assets/` and `Packages/`.",
+            report.WindowsExecutableProduced
+                ? "2. Launch the produced `.exe` interactively if a manual graphics/play pass is required."
+                : "2. Add a repository-local headless build entrypoint or script that invokes `BuildPipeline.BuildPlayer` for Windows x64.",
+            report.WindowsExecutableProduced
+                ? "3. Verify actual play-loop behavior before marking `alpha_runnable_windows_build_verification` passed."
+                : "3. Run the build to `.llmgc/procedural/alpha-runnable-build/build/windows/` and rerun `run-product-smoke.ps1 -Scenario alpha-runnable-build`.",
+            report.WindowsExecutableProduced
+                ? "4. Keep `playLoopVerified=false` until deterministic automation or explicit manual evidence proves the loop."
+                : "4. Launch the produced `.exe`, verify content load and the selected loop, then record play evidence in a later bounded task."
         };
 
         return string.Join(Environment.NewLine, lines) + Environment.NewLine;
 
         static string Display(string value) => string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+    }
+
+    private static AlphaBuildLaunchVerificationResult VerifyLaunchIfRequested(
+        string projectRoot,
+        string buildRoot,
+        string logsRoot,
+        AlphaBuildOutputManifest buildOutput,
+        AlphaRunnableBuildOptions settings)
+    {
+        if (!buildOutput.WindowsExecutableProduced || string.IsNullOrWhiteSpace(buildOutput.ExecutableRelativePath))
+        {
+            return new AlphaBuildLaunchVerificationResult
+            {
+                LaunchVerified = false,
+                PlayLoopVerified = false,
+                ProcessExitCode = null,
+                DurationSeconds = 0,
+                LogRelativePath = string.Empty,
+                Diagnostics =
+                [
+                    Diagnostic("error", "alpha_build.launch.blocked_no_executable", "build/windows", "Launch verification cannot run because no real Windows executable was produced.")
+                ]
+            };
+        }
+
+        var executablePath = Path.Combine(buildRoot, buildOutput.ExecutableRelativePath.Replace('/', Path.DirectorySeparatorChar));
+        var launchLogPath = Path.Combine(logsRoot, "alpha-player-launch.log");
+        var arguments = new List<string>
+        {
+            "-batchmode",
+            "-nographics",
+            "-alphaSmokeExit",
+            "-alphaLogPath",
+            launchLogPath
+        };
+        var command = BuildCommandForDisplay(executablePath, arguments);
+        if (!settings.LaunchBuiltPlayer)
+        {
+            return new AlphaBuildLaunchVerificationResult
+            {
+                LaunchVerified = false,
+                PlayLoopVerified = false,
+                ProcessExitCode = null,
+                DurationSeconds = 0,
+                LogRelativePath = RelativePath(projectRoot, launchLogPath),
+                LaunchCommandForVerification = command,
+                Diagnostics =
+                [
+                    Diagnostic("warning", "alpha_build.launch.not_requested", buildOutput.ExecutableRelativePath, "A Windows executable was produced, but launch verification was not requested for this validation pass.")
+                ]
+            };
+        }
+
+        Directory.CreateDirectory(logsRoot);
+        var startedAt = DateTime.UtcNow;
+        var result = RunProcess(executablePath, arguments, buildRoot, settings.PlayerLaunchTimeoutSeconds);
+        var duration = Math.Max(0, (int)Math.Ceiling((DateTime.UtcNow - startedAt).TotalSeconds));
+        var diagnostics = new List<AlphaBuildDiagnostic>
+        {
+            Diagnostic("info", "alpha_build.launch.executed", "logs/alpha-player-launch.log", "The produced Windows player was launched in batch diagnostic mode.")
+        };
+
+        var launchLogExists = File.Exists(launchLogPath);
+        if (!launchLogExists)
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.launch.log_missing", "logs/alpha-player-launch.log", "The player launch diagnostic log was not produced."));
+        }
+
+        var launchLog = launchLogExists ? File.ReadAllText(launchLogPath) : string.Empty;
+        var requiredMarkers = new[]
+        {
+            "alpha_runtime.launch_completed=true",
+            "alpha_runtime.config_loaded=true",
+            "alpha_runtime.package_loaded=true",
+            "alpha_runtime.asset_manifest_loaded=true",
+            "alpha_runtime.package_id=",
+            "alpha_runtime.package_hash=",
+            "alpha_runtime.asset_manifest_hash=",
+            "alpha_runtime.start_map_id=",
+            "alpha_runtime.selected_thread_id="
+        };
+        foreach (var marker in requiredMarkers)
+        {
+            if (!launchLog.Contains(marker, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "alpha_build.launch.missing_log_marker", marker, "The player launch log did not prove the required Alpha package/config load marker."));
+            }
+        }
+
+        if (result.ExitCode != 0)
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.launch.exit_failure", $"exit_code:{result.ExitCode}", "The player launch process did not exit successfully."));
+        }
+
+        var launchVerified = diagnostics.All(diagnostic => diagnostic.Severity != "error");
+        return new AlphaBuildLaunchVerificationResult
+        {
+            LaunchVerified = launchVerified,
+            PlayLoopVerified = false,
+            ProcessExitCode = result.ExitCode,
+            DurationSeconds = duration,
+            LogRelativePath = RelativePath(projectRoot, launchLogPath),
+            LaunchCommandForVerification = command,
+            Diagnostics = SortDiagnostics(diagnostics)
+        };
     }
 
     private static void CopyDirectory(string sourceRoot, string destinationRoot)
@@ -950,6 +1248,120 @@ public sealed class AlphaRunnableBuildAcceptanceService
             Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
             File.Copy(sourcePath, destinationPath, overwrite: true);
         }
+    }
+
+    private static void CopyUnityTemplate(string sourceRoot, string destinationRoot)
+    {
+        foreach (var sourcePath in EnumerateFiles(sourceRoot))
+        {
+            var relative = RelativePath(sourceRoot, sourcePath);
+            if (!IsSafeRelativePath(relative) || IsIgnoredUnityGeneratedPath(relative))
+            {
+                continue;
+            }
+
+            var destinationPath = Path.Combine(destinationRoot, relative.Replace('/', Path.DirectorySeparatorChar));
+            Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
+            File.Copy(sourcePath, destinationPath, overwrite: true);
+        }
+    }
+
+    private static bool IsIgnoredUnityGeneratedPath(string relativePath)
+    {
+        var first = relativePath.Split('/', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? string.Empty;
+        return first.Equals("Library", StringComparison.OrdinalIgnoreCase) ||
+               first.Equals("Temp", StringComparison.OrdinalIgnoreCase) ||
+               first.Equals("Logs", StringComparison.OrdinalIgnoreCase) ||
+               first.Equals("UserSettings", StringComparison.OrdinalIgnoreCase) ||
+               first.Equals("obj", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static void SafeDeleteDirectory(string directoryPath, string requiredContainerRoot)
+    {
+        if (!Directory.Exists(directoryPath))
+        {
+            return;
+        }
+
+        EnsureContained(requiredContainerRoot, directoryPath);
+        Directory.Delete(directoryPath, recursive: true);
+    }
+
+    private static AlphaProcessResult RunProcess(
+        string executablePath,
+        IReadOnlyList<string> arguments,
+        string workingDirectory,
+        int timeoutSeconds)
+    {
+        using var process = new Process();
+        process.StartInfo.FileName = executablePath;
+        process.StartInfo.WorkingDirectory = workingDirectory;
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.CreateNoWindow = true;
+        foreach (var argument in arguments)
+        {
+            process.StartInfo.ArgumentList.Add(argument);
+        }
+
+        process.Start();
+        if (!process.WaitForExit(Math.Max(1, timeoutSeconds) * 1000))
+        {
+            process.Kill(entireProcessTree: true);
+            return new AlphaProcessResult { ExitCode = -1 };
+        }
+
+        return new AlphaProcessResult { ExitCode = process.ExitCode };
+    }
+
+    private static string BuildUnityCommandForDisplay(
+        string unityExecutablePath,
+        string unityProjectPath,
+        string stagingRoot,
+        string buildRoot,
+        string buildLogPath) =>
+        BuildCommandForDisplay(
+            unityExecutablePath,
+            [
+                "-batchmode",
+                "-quit",
+                "-projectPath",
+                unityProjectPath,
+                "-executeMethod",
+                "LLMGameCreatorAlpha.Editor.AlphaBuildEntrypoint.BuildWindows64",
+                "-logFile",
+                buildLogPath,
+                "-alphaStagingPath",
+                stagingRoot,
+                "-alphaBuildOutputPath",
+                buildRoot
+            ]);
+
+    private static string BuildCommandForDisplay(string executablePath, IReadOnlyList<string> arguments)
+    {
+        static string Quote(string value) => value.Contains(' ') || value.Contains('\\') || value.Contains(':')
+            ? $"\"{value}\""
+            : value;
+
+        return "& " + Quote(executablePath) + " " + string.Join(" ", arguments.Select(Quote));
+    }
+
+    private static IReadOnlyList<string> RequiredStreamingAssets() =>
+    [
+        "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/game-data/game-package.json",
+        "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/assets/asset-manifest.json",
+        "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/runtime/unity-runtime-config.json"
+    ];
+
+    private static bool LooksLikeWindowsExecutable(string path)
+    {
+        if (!File.Exists(path))
+        {
+            return false;
+        }
+
+        Span<byte> header = stackalloc byte[2];
+        using var stream = File.OpenRead(path);
+        return stream.Read(header) == 2 && header[0] == (byte)'M' && header[1] == (byte)'Z';
     }
 
     private static void WriteJson<T>(string root, string relativePath, T value)
@@ -999,7 +1411,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
 
     private static string FindRepoUnityProject(string projectRoot)
     {
-        foreach (var file in Directory.EnumerateFiles(projectRoot, "ProjectVersion.txt", SearchOption.AllDirectories))
+        foreach (var file in EnumerateRepoFiles(projectRoot, "ProjectVersion.txt"))
         {
             var projectSettings = Path.GetDirectoryName(file);
             if (projectSettings == null || !string.Equals(Path.GetFileName(projectSettings), "ProjectSettings", StringComparison.OrdinalIgnoreCase))
@@ -1019,7 +1431,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
 
     private static string FindRepoUnityBuildScript(string projectRoot)
     {
-        foreach (var file in Directory.EnumerateFiles(projectRoot, "*.*", SearchOption.AllDirectories)
+        foreach (var file in EnumerateRepoFiles(projectRoot, "*.*")
                      .Where(path => path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".ps1", StringComparison.OrdinalIgnoreCase))
                      .OrderBy(path => path, StringComparer.OrdinalIgnoreCase))
         {
@@ -1037,7 +1449,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
                 var text = File.ReadAllText(file);
                 if (relative.EndsWith(".cs", StringComparison.OrdinalIgnoreCase) &&
                     relative.Contains("/Assets/", StringComparison.OrdinalIgnoreCase) &&
-                    text.Contains("BuildPipeline.BuildPlayer", StringComparison.Ordinal))
+                    ContainsUnityBuildPlayerCall(text))
                 {
                     return relative;
                 }
@@ -1051,6 +1463,128 @@ public sealed class AlphaRunnableBuildAcceptanceService
         }
 
         return string.Empty;
+    }
+
+    private static bool ContainsUnityBuildPlayerCall(string text)
+    {
+        var builder = new StringBuilder(text.Length);
+        var inString = false;
+        var inCharacter = false;
+        var inLineComment = false;
+        var inBlockComment = false;
+        for (var index = 0; index < text.Length; index++)
+        {
+            var current = text[index];
+            var next = index + 1 < text.Length ? text[index + 1] : '\0';
+            if (inLineComment)
+            {
+                if (current is '\r' or '\n')
+                {
+                    inLineComment = false;
+                    builder.Append(current);
+                }
+
+                continue;
+            }
+
+            if (inBlockComment)
+            {
+                if (current == '*' && next == '/')
+                {
+                    inBlockComment = false;
+                    index++;
+                }
+
+                continue;
+            }
+
+            if (inString)
+            {
+                if (current == '\\')
+                {
+                    index++;
+                    continue;
+                }
+
+                if (current == '"')
+                {
+                    inString = false;
+                }
+
+                continue;
+            }
+
+            if (inCharacter)
+            {
+                if (current == '\\')
+                {
+                    index++;
+                    continue;
+                }
+
+                if (current == '\'')
+                {
+                    inCharacter = false;
+                }
+
+                continue;
+            }
+
+            if (current == '/' && next == '/')
+            {
+                inLineComment = true;
+                index++;
+                continue;
+            }
+
+            if (current == '/' && next == '*')
+            {
+                inBlockComment = true;
+                index++;
+                continue;
+            }
+
+            if (current == '"')
+            {
+                inString = true;
+                continue;
+            }
+
+            if (current == '\'')
+            {
+                inCharacter = true;
+                continue;
+            }
+
+            builder.Append(current);
+        }
+
+        return builder.ToString().Contains("BuildPipeline.BuildPlayer(", StringComparison.Ordinal);
+    }
+
+    private static IEnumerable<string> EnumerateRepoFiles(string root, string pattern)
+    {
+        var pending = new Stack<string>();
+        pending.Push(root);
+        while (pending.Count > 0)
+        {
+            var current = pending.Pop();
+            foreach (var file in Directory.EnumerateFiles(current, pattern))
+            {
+                yield return file;
+            }
+
+            foreach (var directory in Directory.EnumerateDirectories(current).OrderByDescending(item => item, StringComparer.OrdinalIgnoreCase))
+            {
+                var name = Path.GetFileName(directory);
+                if (name is ".git" or ".vs" or "bin" or "obj" or "Library" or "Temp" or "Logs" or "UserSettings")
+                {
+                    continue;
+                }
+
+                pending.Push(directory);
+            }
+        }
     }
 
     private static string ExtractUnityVersion(string unityExecutablePath)
@@ -1183,6 +1717,13 @@ public sealed class AlphaRunnableBuildAcceptanceService
 public sealed record AlphaRunnableBuildOptions
 {
     public bool IncludeExpectationOnlyInvalidMutation { get; init; } = true;
+    public string RepositoryRootPath { get; init; } = string.Empty;
+    public bool ExecuteUnityBuild { get; init; }
+    public bool LaunchBuiltPlayer { get; init; }
+    public bool PreserveExistingBuildOutputForValidation { get; init; }
+    public bool CleanupUnityWorkProject { get; init; } = true;
+    public int UnityBuildTimeoutSeconds { get; init; } = 900;
+    public int PlayerLaunchTimeoutSeconds { get; init; } = 90;
 }
 
 public sealed record AlphaRunnableBuildAcceptanceResult
@@ -1320,6 +1861,21 @@ public sealed record AlphaBuildOutputManifest
     public IReadOnlyList<AlphaBuildDiagnostic> Diagnostics { get; init; } = [];
 }
 
+public sealed record AlphaBuildUnityExecutionResult
+{
+    public bool UnityEditorExecuted { get; init; }
+    public bool Passed { get; init; }
+    public int? ExitCode { get; init; }
+    public string CommandForVerification { get; init; } = string.Empty;
+    public string LogRelativePath { get; init; } = string.Empty;
+    public IReadOnlyList<AlphaBuildDiagnostic> Diagnostics { get; init; } = [];
+}
+
+internal sealed record AlphaProcessResult
+{
+    public int ExitCode { get; init; }
+}
+
 public sealed record AlphaBuildFileManifestEntry
 {
     public string RelativePath { get; init; } = string.Empty;
@@ -1372,6 +1928,8 @@ public sealed record AlphaBuildLaunchVerificationResult
     public int? ProcessExitCode { get; init; }
     public int DurationSeconds { get; init; }
     public string LogRelativePath { get; init; } = string.Empty;
+    [JsonIgnore]
+    public string LaunchCommandForVerification { get; init; } = string.Empty;
     public IReadOnlyList<AlphaBuildDiagnostic> Diagnostics { get; init; } = [];
 }
 

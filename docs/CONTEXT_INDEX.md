@@ -65,7 +65,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_010_CONTENT_GENERATION_AT_SCALE.md` | Completed Goal 010 task plus S091A correctness hotfix: compact content-pack driven deterministic generation at scale with real package materialization, generated-id runtime threads, objective/event coercion rejection, strict runtime command correlation, repetition metrics, invalid/fake/leak rejection and final stop at `content_generation_at_scale_artifact_verification`. |
 | `docs/GOAL_011_MINIMUM_ASSET_PIPELINE.md` | Completed Goal 011 task plus S098A correctness hotfix: deterministic asset requests from generated/package content ids, local fixture imports, deterministic fallbacks, existing AssetCatalog/package metadata binding, hash-integrity checks, causal invalid/fake/leak rejection, structural validation, product smoke and final stop at `minimum_asset_pipeline_artifact_verification`. |
 | `docs/GOAL_012_UNITY_RUNTIME_EXPORT_VERTICAL_SLICE.md` | Completed Goal 012 task: deterministic Unity runtime export vertical slice outside Runtime Preview with selected Goal 010 package/runtime refs, Goal 011 asset refs, real export files, hash/byte manifest validation, causal invalid/fake/leak rejection, product smoke and final stop at `unity_runtime_export_vertical_slice_artifact_verification`. |
-| `docs/GOAL_013_ALPHA_RUNNABLE_WINDOWS_BUILD.md` | Goal 013 task: Alpha runnable Windows build integration. Current state is blocked at `alpha_unity_build_environment_blocker` because no repository-local Unity project/template or Windows build entrypoint exists; `alpha_runnable_windows_build_verification` remains required. S113A repairs the Alpha source-evidence/staging artifact layout with compact deterministic physical asset names while preserving full ids in JSON evidence. |
+| `docs/GOAL_013_ALPHA_RUNNABLE_WINDOWS_BUILD.md` | Goal 013 task: Alpha runnable Windows build integration. S113B resolved the repository-local Unity project/template and Windows build entrypoint blocker, produced a real Windows player plus diagnostic launch evidence, and leaves `alpha_runnable_windows_build_verification` required, not passed. S113A repaired the Alpha source-evidence/staging artifact layout with compact deterministic physical asset names while preserving full ids in JSON evidence. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
@@ -92,12 +92,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-alpha_unity_build_environment_blocker
+alpha_runnable_windows_build_verification
 ```
 
 Allowed next sequence:
 
-1. Resolve `alpha_unity_build_environment_blocker` by adding or pointing the repository to a Unity project/template and Windows build entrypoint, then rerun the Alpha runnable build proof.
+1. Review `alpha_runnable_windows_build_verification` evidence from the produced Windows player, Unity build log and diagnostic launch log before marking the gate passed.
 
 Kill criterion:
 
