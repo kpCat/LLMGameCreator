@@ -53,8 +53,8 @@
   ],
   "questMotifs": [
     { "id": "trace_letter", "objectiveKind": "choose_dialogue", "titleTemplate": "Trace {item} for {npc}", "rewardItemArchetypeId": "choir_token", "requiredItemArchetypeId": "sealed_letter", "dependsOn": [] },
-    { "id": "unlock_cistern", "objectiveKind": "choose_dialogue", "titleTemplate": "Unlock {region} with {npc}", "rewardItemArchetypeId": "mourning_pin", "requiredItemArchetypeId": "silver_key", "dependsOn": [] },
-    { "id": "quiet_bells", "objectiveKind": "choose_dialogue", "titleTemplate": "Quiet the bells near {region}", "rewardItemArchetypeId": "ward_salt", "requiredItemArchetypeId": "grave_candle", "dependsOn": [] }
+    { "id": "unlock_cistern", "objectiveKind": "collect_item", "titleTemplate": "Unlock {region} with {npc}", "rewardItemArchetypeId": "mourning_pin", "requiredItemArchetypeId": "silver_key", "dependsOn": [] },
+    { "id": "quiet_bells", "objectiveKind": "set_flag", "titleTemplate": "Quiet the bells near {region}", "rewardItemArchetypeId": "ward_salt", "requiredItemArchetypeId": "grave_candle", "dependsOn": [] }
   ],
   "eventMotifs": [
     { "id": "bell_tolls", "trigger": "dialogue_choice", "actions": [ { "kind": "set_flag", "target": "bell_toll_recorded" } ], "dependsOn": [] },

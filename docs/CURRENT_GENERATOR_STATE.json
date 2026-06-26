@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T12:00:00Z",
+    "updated_at_utc":  "2026-06-26T12:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 010 deterministic content generation at scale completed",
+    "current_phase_title":  "Goal 010 content generation at scale S091A correctness hotfix completed",
     "gate_status":  "goal_010_content_generation_at_scale_artifact_verification_required",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_010_content_generation_at_scale",
+    "last_completed_product_slice_id":  "product_slice_091a_content_generation_scale_correctness_hotfix",
     "active_manual_gate":  "Content generation at scale artifact verification is the next stop marker after Goal 010.",
     "current_user_action":  "Review or hand off the generated .llmgc/procedural/content-generation-scale folder; do not mark content_generation_at_scale_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 010 records the user-confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed gate, completes S085-S091, and proves compact content-pack driven generation at scale for frontier/survival, gothic/mystery and trade/caravan styles. It expands each compact JSON pack into 204 deterministic generated instances, materializes validator-clean GamePackage definitions, executes six selected generated runtime threads through an injected real GameRuntimeService adapter, proves full GameRuntimeState save/load with RuntimeStateSerializer and RuntimeSnapshotStore, reports deterministic replay, multi-seed variation, repetition metrics, package/runtime hashes, and rejects eighteen invalid/fake/leak scenarios causally. Stop at content_generation_at_scale_artifact_verification.",
+    "recommended_next_decision":  "Goal 010 records the user-confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed gate, completes S085-S091, and S091A repairs content-generation scale correctness gaps found during artifact review. It proves compact content-pack driven generation at scale for frontier/survival, gothic/mystery and trade/caravan styles, preserves choose_dialogue/collect_item/set_flag objective shapes into package objectives, preserves declared set_flag/add_item/change_reputation event actions into package and runtime evidence, executes nine selected generated runtime threads through an injected real GameRuntimeService adapter, proves full GameRuntimeState save/load with RuntimeStateSerializer and RuntimeSnapshotStore, reports deterministic replay, multi-seed variation, repetition metrics, package/runtime hashes, and rejects twenty-three invalid/fake/leak scenarios causally. Stop at content_generation_at_scale_artifact_verification.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -57,13 +57,13 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_010_content_generation_at_scale",
-                                         "title":  "Deterministic Content Generation At Scale",
-                                         "completed_at_utc":  "2026-06-26T12:00:00Z",
-                                         "summary":  "Goal 010 completes S085-S091 after the user confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed. It adds compact reference content packs under samples/content-generation-packs, a deterministic Application-layer content generation scale acceptance service, focused tests and product smoke, materializes generated catalogs into validator-clean GamePackage definitions, executes selected generated ids through an injected real GameRuntimeService adapter, proves save/load and cross-pack isolation, and writes artifacts under .llmgc/procedural/content-generation-scale. The active manual gate is content_generation_at_scale_artifact_verification.",
+                                         "slice_id":  "product_slice_091a_content_generation_scale_correctness_hotfix",
+                                         "title":  "Content Generation Scale Correctness Hotfix",
+                                         "completed_at_utc":  "2026-06-26T12:30:00Z",
+                                         "summary":  "S091A repairs Goal 010 artifact-review correctness gaps without changing the active gate. It updates the compact reference packs and Application-layer acceptance so the valid matrix preserves choose_dialogue, collect_item and set_flag objective shapes into package objectives, preserves declared set_flag, add_item and change_reputation event actions into package/runtime evidence, structurally audits package objective/event bindings, strengthens runtime command correlation across command id/type/target/secondary/value/inventory/amount/expected deltas, executes nine selected generated ids through an injected real GameRuntimeService adapter, rejects twenty-three invalid/fake/leak scenarios causally, and writes refreshed artifacts under .llmgc/procedural/content-generation-scale. The active manual gate remains content_generation_at_scale_artifact_verification required.",
                                          "scenario_id":  "content-generation-scale",
                                          "checks":  [
-                                                        "ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",
+                                                        "S091A ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",
                                                         "content-generation-scale product smoke: 1/1 passed",
                                                         "check-all.ps1: 775/775 tests passed, build 0 warnings / 0 errors"
                                                     ]
@@ -428,12 +428,12 @@
                                                           },
     "goal_010_content_generation_at_scale":  {
                                                  "slice_id":  "goal_010_content_generation_at_scale",
-                                                 "title":  "Deterministic Content Generation At Scale",
-                                                 "completed_at_utc":  "2026-06-26T12:00:00Z",
-                                                 "summary":  "Goal 010 completes S085-S091 after the user confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed. It adds compact reference content packs under samples/content-generation-packs, a deterministic Application-layer content generation scale acceptance service, focused tests and product smoke, materializes generated catalogs into validator-clean GamePackage definitions, executes selected generated ids through an injected real GameRuntimeService adapter, proves save/load and cross-pack isolation, and writes artifacts under .llmgc/procedural/content-generation-scale. The active manual gate is content_generation_at_scale_artifact_verification.",
+                                                 "title":  "Deterministic Content Generation At Scale plus S091A Correctness Hotfix",
+                                                 "completed_at_utc":  "2026-06-26T12:30:00Z",
+                                                 "summary":  "Goal 010 completes S085-S091 after the user confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed, and S091A repairs artifact-review correctness gaps without changing the active gate. It adds compact reference content packs under samples/content-generation-packs, a deterministic Application-layer content generation scale acceptance service, focused tests and product smoke, materializes generated catalogs into validator-clean GamePackage definitions, preserves choose_dialogue, collect_item and set_flag objective shapes into package objectives, preserves declared set_flag, add_item and change_reputation event actions into package/runtime evidence, executes nine selected generated ids through an injected real GameRuntimeService adapter, proves save/load and cross-pack isolation, rejects twenty-three invalid/fake/leak scenarios causally, and writes artifacts under .llmgc/procedural/content-generation-scale. The active manual gate remains content_generation_at_scale_artifact_verification required.",
                                                  "scenario_id":  "content-generation-scale",
                                                  "checks":  [
-                                                                "ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",
+                                                                "S091A ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",
                                                                 "content-generation-scale product smoke: 1/1 passed",
                                                                 "check-all.ps1: 775/775 tests passed, build 0 warnings / 0 errors"
                                                             ]

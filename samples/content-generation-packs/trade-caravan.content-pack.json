@@ -53,8 +53,8 @@
   ],
   "questMotifs": [
     { "id": "recover_manifest", "objectiveKind": "choose_dialogue", "titleTemplate": "Recover {item} for {npc}", "rewardItemArchetypeId": "guard_scrip", "requiredItemArchetypeId": "sealed_manifest", "dependsOn": [] },
-    { "id": "settle_invoice", "objectiveKind": "choose_dialogue", "titleTemplate": "Settle {item} at {region}", "rewardItemArchetypeId": "road_charm", "requiredItemArchetypeId": "invoice_roll", "dependsOn": [] },
-    { "id": "repair_wagon", "objectiveKind": "choose_dialogue", "titleTemplate": "Repair the wagon with {item}", "rewardItemArchetypeId": "amber_bead", "requiredItemArchetypeId": "wheel_pin", "dependsOn": [] }
+    { "id": "settle_invoice", "objectiveKind": "collect_item", "titleTemplate": "Settle {item} at {region}", "rewardItemArchetypeId": "road_charm", "requiredItemArchetypeId": "invoice_roll", "dependsOn": [] },
+    { "id": "repair_wagon", "objectiveKind": "set_flag", "titleTemplate": "Repair the wagon with {item}", "rewardItemArchetypeId": "amber_bead", "requiredItemArchetypeId": "wheel_pin", "dependsOn": [] }
   ],
   "eventMotifs": [
     { "id": "rate_changed", "trigger": "dialogue_choice", "actions": [ { "kind": "set_flag", "target": "market_rate_changed" } ], "dependsOn": [] },

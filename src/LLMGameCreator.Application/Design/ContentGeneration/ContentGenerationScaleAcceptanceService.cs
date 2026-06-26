@@ -108,11 +108,16 @@ public sealed class ContentGenerationScaleAcceptanceService
         diagnostics.AddRange(packResults.SelectMany(result => result.Diagnostics));
         diagnostics.AddRange(invalidMatrix.Diagnostics);
 
+        var objectiveKindDistribution = Distribution(packResults.SelectMany(result => result.Catalog.Quests.Select(quest => quest.ObjectiveKind)));
+        var eventActionDistribution = Distribution(packResults.SelectMany(result => result.Catalog.Events.Select(evt => evt.ConsequenceKind)));
         var validMatrixPassed =
             packResults.Count == 3 &&
             packResults.All(result => result.Accepted) &&
             packResults.All(result => result.Catalog.TotalInstances >= 200) &&
             packResults.All(result => result.PackageAudit.ValidatorClean) &&
+            packResults.All(result => result.PackageAudit.StructuralAuditPassed) &&
+            objectiveKindDistribution.Count >= 3 &&
+            eventActionDistribution.Count >= 3 &&
             packResults.Sum(result => result.RuntimeThreads.Count(thread => thread.ActualValid)) >= 6 &&
             replay.Passed &&
             variation.Passed &&
@@ -142,7 +147,7 @@ public sealed class ContentGenerationScaleAcceptanceService
             Accepted = validMatrixPassed && invalidMatrixPassed && packageRuntimePassed && repetitionPassed,
             ManualGate = ManualGate,
             Goal009GateRecorded = true,
-            CompletedSlices = ["S085", "S086", "S087", "S088", "S089", "S090", "S091"],
+            CompletedSlices = ["S085", "S086", "S087", "S088", "S089", "S090", "S091", "S091A"],
             PackCount = packResults.Count,
             ValidPackCount = packResults.Count(result => result.Accepted),
             RuntimeThreadCount = packResults.Sum(result => result.RuntimeThreads.Count),
@@ -154,6 +159,8 @@ public sealed class ContentGenerationScaleAcceptanceService
             PublicGamePackageSchemaChanged = false,
             ProjectFilesChanged = false,
             ExternalExecution = new ContentGenerationExternalExecutionFlags(),
+            ObjectiveKindDistribution = objectiveKindDistribution,
+            EventActionDistribution = eventActionDistribution,
             Packs = packResults,
             ReplayEvidence = replay,
             VariationEvidence = variation,
@@ -274,6 +281,7 @@ public sealed class ContentGenerationScaleAcceptanceService
         return new ContentGenerationScalePackResult
         {
             Accepted = packageAudit.ValidatorClean &&
+                       packageAudit.StructuralAuditPassed &&
                        packageAudit.GeneratedContentHashMatchesCatalog &&
                        runtimeThreads.All(thread => thread.ActualValid) &&
                        repetition.MaxSharePassed &&
@@ -356,27 +364,113 @@ public sealed class ContentGenerationScaleAcceptanceService
 
         foreach (var selectedId in thread.SelectedGeneratedIds)
         {
-            if (!ids.Contains(selectedId))
+            if (!ids.Contains(selectedId) && !packageIds.Contains(selectedId))
             {
-                diagnostics.Add(Diagnostic("error", "content_generation.audit.generated_id_missing", selectedId, "Runtime thread selected generated id must exist in the catalog."));
-            }
-
-            if (!packageIds.Contains(selectedId) && !selectedId.StartsWith("event/", StringComparison.Ordinal))
-            {
-                diagnostics.Add(Diagnostic("error", "content_generation.audit.package_id_missing", selectedId, "Runtime thread selected id must bind to a package definition when it is package-backed."));
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.selected_id_missing", selectedId, "Runtime thread selected id must exist in the generated catalog or package-backed runtime state ids."));
             }
         }
 
         foreach (var command in thread.Commands)
         {
-            if (!thread.SelectedGeneratedIds.Contains(command.TargetId, StringComparer.Ordinal) &&
-                !thread.SelectedGeneratedIds.Contains(command.SecondaryTargetId, StringComparer.Ordinal))
+            var commandReferencedIds = new[] { command.TargetId, command.SecondaryTargetId, command.ExpectedChangedQuestId, command.ExpectedChangedItemId, command.ExpectedChangedFlagId, command.ExpectedChangedFactionId }
+                .Where(id => !string.IsNullOrWhiteSpace(id))
+                .Distinct(StringComparer.Ordinal)
+                .ToList();
+            if (commandReferencedIds.Count > 0 && !commandReferencedIds.All(id => thread.SelectedGeneratedIds.Contains(id, StringComparer.Ordinal) || ids.Contains(id) || packageIds.Contains(id)))
             {
                 diagnostics.Add(Diagnostic("error", "content_generation.audit.command_not_covered", command.CommandId, "Runtime command target must be covered by the selected generated declarations."));
             }
+
+            diagnostics.AddRange(ValidateCommandDeclarationBinding(catalog, command));
         }
 
         return diagnostics;
+    }
+
+    private static IReadOnlyList<ContentGenerationScaleDiagnostic> ValidateCommandDeclarationBinding(
+        GeneratedContentCatalog catalog,
+        ContentGenerationRuntimeCommand command)
+    {
+        var diagnostics = new List<ContentGenerationScaleDiagnostic>();
+        switch (command.CommandType)
+        {
+            case "quest/start":
+                Require(catalog.Quests.Any(quest => quest.Id == command.TargetId), diagnostics, "content_generation.audit.command_target_mismatch", command.CommandId, "Quest start command must target a generated quest.");
+                break;
+            case "dialogue/open":
+                Require(catalog.Dialogues.Any(dialogue => dialogue.Id == command.TargetId), diagnostics, "content_generation.audit.command_target_mismatch", command.CommandId, "Dialogue open command must target a generated dialogue.");
+                break;
+            case "dialogue/choose":
+                {
+                    var quest = catalog.Quests.FirstOrDefault(item => item.Id == command.SecondaryTargetId);
+                    Require(quest != null && quest.ObjectiveKind == "choose_dialogue", diagnostics, "content_generation.audit.command_type_mismatch", command.CommandId, "Dialogue choice command must correspond to a choose_dialogue generated objective.");
+                    Require(quest != null && quest.ObjectiveTargetId == command.TargetId, diagnostics, "content_generation.audit.command_target_mismatch", command.CommandId, "Dialogue choice command target must match the generated objective target.");
+                    break;
+                }
+            case "objective/add_item":
+                {
+                    var quest = catalog.Quests.FirstOrDefault(item => item.Id == command.SecondaryTargetId);
+                    Require(quest != null && quest.ObjectiveKind == "collect_item", diagnostics, "content_generation.audit.command_type_mismatch", command.CommandId, "Objective add_item command must correspond to a collect_item generated objective.");
+                    Require(quest != null && quest.ObjectiveTargetId == command.TargetId, diagnostics, "content_generation.audit.command_target_mismatch", command.CommandId, "Objective add_item target must match the generated objective target item.");
+                    Require(command.InventoryId == "inventory/player", diagnostics, "content_generation.audit.command_inventory_mismatch", command.CommandId, "Objective add_item command must target the player inventory.");
+                    break;
+                }
+            case "objective/set_flag":
+                {
+                    var quest = catalog.Quests.FirstOrDefault(item => item.Id == command.SecondaryTargetId);
+                    Require(quest != null && quest.ObjectiveKind == "set_flag", diagnostics, "content_generation.audit.command_type_mismatch", command.CommandId, "Objective set_flag command must correspond to a set_flag generated objective.");
+                    Require(quest != null && quest.ObjectiveTargetId == command.TargetId, diagnostics, "content_generation.audit.command_target_mismatch", command.CommandId, "Objective set_flag target must match the generated objective target flag.");
+                    Require(command.Value == "true", diagnostics, "content_generation.audit.command_value_mismatch", command.CommandId, "Objective set_flag value must match the generated objective value.");
+                    break;
+                }
+            case "event/set_flag":
+            case "event/add_item":
+            case "event/change_reputation":
+            case "event/advance_quest":
+                ValidateEventCommandBinding(catalog, command, diagnostics);
+                break;
+            case "loot/roll":
+                Require(command.InventoryId == "inventory/player", diagnostics, "content_generation.audit.command_inventory_mismatch", command.CommandId, "Loot roll command must target the player inventory.");
+                break;
+            default:
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.command_type_mismatch", command.CommandId, "Unsupported generated runtime command type."));
+                break;
+        }
+
+        return diagnostics;
+    }
+
+    private static void ValidateEventCommandBinding(
+        GeneratedContentCatalog catalog,
+        ContentGenerationRuntimeCommand command,
+        List<ContentGenerationScaleDiagnostic> diagnostics)
+    {
+        var evt = catalog.Events.FirstOrDefault(item => item.Id == command.SecondaryTargetId || item.Id == command.Value);
+        Require(evt != null, diagnostics, "content_generation.audit.command_secondary_target_mismatch", command.CommandId, "Event command must reference the selected generated event.");
+        if (evt == null)
+        {
+            return;
+        }
+
+        Require(command.CommandType == "event/" + evt.ConsequenceKind, diagnostics, "content_generation.audit.command_type_mismatch", command.CommandId, "Event command type must match the generated event action kind.");
+        Require(command.TargetId == evt.ConsequenceTargetId, diagnostics, "content_generation.audit.command_target_mismatch", command.CommandId, "Event command target must match the generated event consequence target.");
+        if (evt.ConsequenceKind == "set_flag")
+        {
+            Require(command.Value == evt.ConsequenceValue, diagnostics, "content_generation.audit.command_value_mismatch", command.CommandId, "Event set_flag command value must match the generated event consequence value.");
+        }
+        else if (evt.ConsequenceKind == "add_item")
+        {
+            Require(command.InventoryId == "inventory/player", diagnostics, "content_generation.audit.command_inventory_mismatch", command.CommandId, "Event add_item command must target the player inventory.");
+            Require(DoubleEquals(command.Amount, evt.ConsequenceAmount), diagnostics, "content_generation.audit.command_amount_mismatch", command.CommandId, "Event add_item amount must match the generated event consequence amount.");
+        }
+        else if (evt.ConsequenceKind == "change_reputation")
+        {
+            Require(DoubleEquals(command.Amount, evt.ConsequenceAmount), diagnostics, "content_generation.audit.command_amount_mismatch", command.CommandId, "Event reputation amount must match the generated event consequence amount.");
+        }
+        else if (evt.ConsequenceKind == "advance_quest")
+        {
+            Require(command.SecondaryTargetId == evt.ConsequenceValue, diagnostics, "content_generation.audit.command_secondary_target_mismatch", command.CommandId, "Event advance_quest secondary target must match the generated objective id.");
+        }
     }
 
     private static IReadOnlyList<ContentGenerationScaleDiagnostic> ValidateRuntimeEvidence(
@@ -414,10 +508,58 @@ public sealed class ContentGenerationScaleAcceptanceService
                 diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_failed", command.CommandId, "Selected runtime command must succeed."));
             }
 
-            if (!string.Equals(actual.TargetId, command.TargetId, StringComparison.Ordinal) ||
-                !string.Equals(actual.SecondaryTargetId, command.SecondaryTargetId, StringComparison.Ordinal))
+            if (!string.Equals(actual.CommandType, command.CommandType, StringComparison.Ordinal))
             {
-                diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_correlation_mismatch", command.CommandId, "Runtime command evidence must keep exact generated targets."));
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_type_mismatch", command.CommandId, "Runtime command evidence must keep the exact generated command type."));
+            }
+
+            if (!string.Equals(actual.TargetId, command.TargetId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_target_mismatch", command.CommandId, "Runtime command evidence must keep the exact generated target."));
+            }
+
+            if (!string.Equals(actual.SecondaryTargetId, command.SecondaryTargetId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_secondary_target_mismatch", command.CommandId, "Runtime command evidence must keep the exact generated secondary target."));
+            }
+
+            if (!string.Equals(actual.Value, command.Value, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_value_mismatch", command.CommandId, "Runtime command evidence must keep the exact generated value."));
+            }
+
+            if (!string.Equals(actual.InventoryId, command.InventoryId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_inventory_mismatch", command.CommandId, "Runtime command evidence must keep the exact generated inventory binding."));
+            }
+
+            if (!DoubleEquals(actual.Amount, command.Amount))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.command_amount_mismatch", command.CommandId, "Runtime command evidence must keep the exact generated amount."));
+            }
+
+            if (!string.IsNullOrWhiteSpace(command.ExpectedChangedQuestId) &&
+                !evidence.StateDelta.ChangedQuestIds.Contains(command.ExpectedChangedQuestId, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.expected_quest_delta_missing", command.CommandId, "Runtime evidence must change the expected generated quest id."));
+            }
+
+            if (!string.IsNullOrWhiteSpace(command.ExpectedChangedItemId) &&
+                !evidence.StateDelta.ChangedItemIds.Contains(command.ExpectedChangedItemId, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.expected_item_delta_missing", command.CommandId, "Runtime evidence must change the expected generated item id."));
+            }
+
+            if (!string.IsNullOrWhiteSpace(command.ExpectedChangedFlagId) &&
+                !evidence.StateDelta.ChangedFlagIds.Contains(command.ExpectedChangedFlagId, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.expected_flag_delta_missing", command.CommandId, "Runtime evidence must change the expected generated flag id."));
+            }
+
+            if (!string.IsNullOrWhiteSpace(command.ExpectedChangedFactionId) &&
+                !evidence.StateDelta.ChangedFactionIds.Contains(command.ExpectedChangedFactionId, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.evidence.expected_faction_delta_missing", command.CommandId, "Runtime evidence must change the expected generated faction id."));
             }
         }
 
@@ -454,10 +596,12 @@ public sealed class ContentGenerationScaleAcceptanceService
             .Where(issue => issue.Severity.ToString().Equals("Error", StringComparison.OrdinalIgnoreCase))
             .Select(issue => Diagnostic("error", issue.Code, issue.TargetId ?? package.Manifest.PackageId, issue.Message))
             .ToList();
+        var structuralDiagnostics = AuditPackageStructure(package, catalog);
         var catalogHash = catalog.CatalogHash;
         var provenanceHash = package.GeneratedContent.AppliedArtifacts.SingleOrDefault()?.ContentHash ?? string.Empty;
         var json = JsonSerializer.Serialize(package, JsonOptions);
         var packageHash = ComputeHash(json);
+        var allDiagnostics = validationDiagnostics.Concat(structuralDiagnostics).ToList();
         return new ContentGenerationPackageAudit
         {
             Package = package,
@@ -466,9 +610,103 @@ public sealed class ContentGenerationScaleAcceptanceService
             CatalogHash = catalogHash,
             GeneratedContentHashMatchesCatalog = string.Equals(catalogHash, provenanceHash, StringComparison.Ordinal),
             ValidatorClean = validationDiagnostics.Count == 0,
+            StructuralAuditPassed = structuralDiagnostics.All(diagnostic => diagnostic.Severity != "error"),
+            QuestObjectiveBindingCount = catalog.Quests.Count,
+            EventActionBindingCount = catalog.Events.Count,
+            ObjectiveKindDistribution = Distribution(catalog.Quests.Select(quest => quest.ObjectiveKind)),
+            EventActionDistribution = Distribution(catalog.Events.Select(evt => evt.ConsequenceKind)),
             ValidationErrorCount = validationDiagnostics.Count,
-            Diagnostics = validationDiagnostics
+            Diagnostics = allDiagnostics
         };
+    }
+
+    private static IReadOnlyList<ContentGenerationScaleDiagnostic> AuditPackageStructure(
+        GamePackageDefinition package,
+        GeneratedContentCatalog catalog)
+    {
+        var diagnostics = new List<ContentGenerationScaleDiagnostic>();
+        foreach (var quest in catalog.Quests)
+        {
+            var packageQuest = package.Game.Quests.SingleOrDefault(item => item.Id == quest.Id);
+            if (packageQuest == null)
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.quest_missing", quest.Id, "Generated quest must exist in the materialized package."));
+                continue;
+            }
+
+            var objective = packageQuest.Objectives.SingleOrDefault(item => item.Id == quest.ObjectiveId);
+            if (objective == null)
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.objective_missing", quest.ObjectiveId, "Generated quest objective must exist in the materialized package."));
+                continue;
+            }
+
+            if (!string.Equals(objective.Kind, quest.ObjectiveKind, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.objective_kind_mismatch", quest.ObjectiveId, "Package objective kind must equal the generated catalog objective kind."));
+            }
+
+            if (!string.Equals(objective.TargetId ?? string.Empty, quest.ObjectiveTargetId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.objective_target_mismatch", quest.ObjectiveId, "Package objective target must equal the generated catalog objective target."));
+            }
+
+            if (!ObjectiveTargetExists(package, catalog, quest))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.objective_target_missing", quest.ObjectiveTargetId, "Package objective target must resolve through existing generated/package primitives."));
+            }
+        }
+
+        foreach (var evt in catalog.Events)
+        {
+            var interaction = package.Game.Interactions.SingleOrDefault(item => item.Id == evt.Id);
+            if (interaction == null)
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.event_interaction_missing", evt.Id, "Generated event must have package-backed interaction/effect data."));
+                continue;
+            }
+
+            var effect = interaction.Effects.SingleOrDefault();
+            if (effect == null)
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.event_effect_missing", evt.Id, "Generated event interaction must contain an effect."));
+                continue;
+            }
+
+            if (!string.Equals(effect.Type, evt.ConsequenceKind, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.event_action_kind_mismatch", evt.Id, "Package event effect kind must equal the generated event action kind."));
+            }
+
+            var target = EventEffectTarget(effect);
+            if (!string.Equals(target, evt.ConsequenceTargetId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "content_generation.audit.event_action_target_mismatch", evt.Id, "Package event effect target must equal the generated event action target."));
+            }
+        }
+
+        return SortDiagnostics(diagnostics);
+    }
+
+    private static bool ObjectiveTargetExists(GamePackageDefinition package, GeneratedContentCatalog catalog, GeneratedQuestInstance quest)
+    {
+        return quest.ObjectiveKind switch
+        {
+            "choose_dialogue" => package.Game.Dialogues.SelectMany(dialogue => dialogue.Nodes).SelectMany(node => node.Choices).Any(choice => choice.Id == quest.ObjectiveTargetId),
+            "collect_item" => package.Game.Items.Any(item => item.Id == quest.ObjectiveTargetId),
+            "set_flag" => catalog.AllGeneratedIds.Contains(quest.ObjectiveTargetId, StringComparer.Ordinal),
+            "complete_encounter" => package.Game.Encounters.Any(encounter => encounter.Id == quest.ObjectiveTargetId),
+            _ => false
+        };
+    }
+
+    private static string EventEffectTarget(EffectDefinition effect)
+    {
+        return effect.Args.GetValueOrDefault("flagId")
+            ?? effect.Args.GetValueOrDefault("itemId")
+            ?? effect.Args.GetValueOrDefault("id")
+            ?? effect.Args.GetValueOrDefault("questId")
+            ?? string.Empty;
     }
 
     private static ContentGenerationReplayEvidence BuildReplayEvidence(
@@ -576,6 +814,23 @@ public sealed class ContentGenerationScaleAcceptanceService
         var validPackage = MaterializePackage(basePack, validCatalog);
         var packageAudit = AuditPackage(Directory.GetCurrentDirectory(), validPackage, validCatalog);
         var validThread = validCatalog.RuntimeThreads[0];
+        var nonDialogueQuest = validCatalog.Quests.First(quest => quest.ObjectiveKind != "choose_dialogue");
+        var coercedObjectivePackage = MaterializePackage(basePack, validCatalog);
+        var coercedObjective = coercedObjectivePackage.Game.Quests.Single(quest => quest.Id == nonDialogueQuest.Id).Objectives.Single(objective => objective.Id == nonDialogueQuest.ObjectiveId);
+        coercedObjective.Kind = "choose_dialogue";
+        var coercedObjectiveDiagnostics = AuditPackageStructure(coercedObjectivePackage, validCatalog);
+        scenarios.Add(InvalidScenario("package_objective_kind_coerced_to_choose_dialogue", coercedObjectiveDiagnostics.Any(item => item.Code == "content_generation.audit.objective_kind_mismatch"), coercedObjectiveDiagnostics));
+
+        var nonFlagEvent = validCatalog.Events.First(evt => evt.ConsequenceKind != "set_flag");
+        var coercedEventPackage = MaterializePackage(basePack, validCatalog);
+        var coercedEffect = coercedEventPackage.Game.Interactions.Single(interaction => interaction.Id == nonFlagEvent.Id).Effects.Single();
+        coercedEffect.Type = "set_flag";
+        coercedEffect.Args.Clear();
+        coercedEffect.Args["flagId"] = "flag/coerced";
+        coercedEffect.Args["value"] = "true";
+        var coercedEventDiagnostics = AuditPackageStructure(coercedEventPackage, validCatalog);
+        scenarios.Add(InvalidScenario("event_action_kind_coerced_to_set_flag", coercedEventDiagnostics.Any(item => item.Code == "content_generation.audit.event_action_kind_mismatch" || item.Code == "content_generation.audit.event_action_target_mismatch"), coercedEventDiagnostics));
+
         var uncovered = validThread with
         {
             Commands =
@@ -590,6 +845,27 @@ public sealed class ContentGenerationScaleAcceptanceService
         };
         var commandDiagnostics = AuditRuntimeThreadBindings(validCatalog, validPackage, uncovered);
         scenarios.Add(InvalidScenario("command_not_covered_by_selected_generated_declaration", commandDiagnostics.Any(item => item.Code == "content_generation.audit.command_not_covered"), commandDiagnostics));
+
+        var typeMismatchEvidence = BuildSyntheticRuntimeEvidence(validThread, packageAudit.PackageHash, command =>
+            command.CommandId == validThread.Commands.First(item => item.CommandType.StartsWith("event/", StringComparison.Ordinal)).CommandId
+                ? command with { CommandType = "event/unsupported" }
+                : command);
+        scenarios.Add(InvalidScenario("runtime_command_type_mismatch", ValidateRuntimeEvidence(validThread, packageAudit.PackageHash, typeMismatchEvidence).Any(item => item.Code == "content_generation.evidence.command_type_mismatch"), ValidateRuntimeEvidence(validThread, packageAudit.PackageHash, typeMismatchEvidence)));
+
+        var valueThread = validCatalog.RuntimeThreads.First(thread => thread.Commands.Any(item => !string.IsNullOrWhiteSpace(item.Value)));
+        var valueCommandId = valueThread.Commands.First(item => !string.IsNullOrWhiteSpace(item.Value)).CommandId;
+        var valueMismatchEvidence = BuildSyntheticRuntimeEvidence(valueThread, packageAudit.PackageHash, command =>
+            command.CommandId == valueCommandId ? command with { Value = command.Value + "_wrong" } : command);
+        scenarios.Add(InvalidScenario("runtime_command_value_mismatch", ValidateRuntimeEvidence(valueThread, packageAudit.PackageHash, valueMismatchEvidence).Any(item => item.Code == "content_generation.evidence.command_value_mismatch"), ValidateRuntimeEvidence(valueThread, packageAudit.PackageHash, valueMismatchEvidence)));
+
+        var inventoryCommandId = validThread.Commands.First(item => item.InventoryId == "inventory/player").CommandId;
+        var inventorySecondaryMismatchEvidence = BuildSyntheticRuntimeEvidence(validThread, packageAudit.PackageHash, command =>
+            command.CommandId == inventoryCommandId ? command with { InventoryId = "inventory/wrong", SecondaryTargetId = command.SecondaryTargetId + "_wrong" } : command);
+        var inventorySecondaryDiagnostics = ValidateRuntimeEvidence(validThread, packageAudit.PackageHash, inventorySecondaryMismatchEvidence);
+        scenarios.Add(InvalidScenario(
+            "runtime_command_inventory_secondary_target_mismatch",
+            inventorySecondaryDiagnostics.Any(item => item.Code == "content_generation.evidence.command_inventory_mismatch" || item.Code == "content_generation.evidence.command_secondary_target_mismatch"),
+            inventorySecondaryDiagnostics));
 
         var fakeEvidence = new ContentGenerationRuntimeEvidence
         {
@@ -637,7 +913,7 @@ public sealed class ContentGenerationScaleAcceptanceService
         {
             ScenarioCount = scenarios.Count,
             RejectedCount = scenarios.Count(item => !item.ActualValid),
-            Passed = scenarios.Count == 18 && scenarios.All(item => !item.ActualValid && item.Diagnostics.Any(diagnostic => diagnostic.Severity == "error")),
+            Passed = scenarios.Count >= 23 && scenarios.All(item => !item.ActualValid && item.Diagnostics.Any(diagnostic => diagnostic.Severity == "error")),
             Scenarios = scenarios,
             Diagnostics = SortDiagnostics(diagnostics)
         };
@@ -671,6 +947,49 @@ public sealed class ContentGenerationScaleAcceptanceService
             ? [Diagnostic("error", "content_generation.invalid.rejected", scenarioId, "Invalid scenario rejected.")]
             : SortDiagnostics(diagnostics)
     };
+
+    private static ContentGenerationRuntimeEvidence BuildSyntheticRuntimeEvidence(
+        GeneratedRuntimeThread thread,
+        string packageHash,
+        Func<ContentGenerationRuntimeCommandEvidence, ContentGenerationRuntimeCommandEvidence> mutateCommand)
+    {
+        var commands = thread.Commands
+            .Select(command => mutateCommand(new ContentGenerationRuntimeCommandEvidence
+            {
+                CommandId = command.CommandId,
+                CommandType = command.CommandType,
+                TargetId = command.TargetId,
+                SecondaryTargetId = command.SecondaryTargetId,
+                Value = command.Value,
+                InventoryId = command.InventoryId,
+                Amount = command.Amount,
+                Succeeded = true,
+                DiagnosticCode = "ok"
+            }))
+            .ToList();
+        return new ContentGenerationRuntimeEvidence
+        {
+            RuntimeAttempted = true,
+            RuntimeStartSucceeded = true,
+            PackageHash = packageHash,
+            RuntimeBoundary = new ContentGenerationRuntimeBoundaryEvidence { AdapterId = "real", UsedGameRuntimeService = true },
+            Commands = commands,
+            StateDelta = new ContentGenerationRuntimeStateDelta
+            {
+                QuestProgressChanged = true,
+                RewardItemChanged = true,
+                FlagChanged = true,
+                ReputationChanged = true,
+                ChangedQuestIds = thread.Commands.Select(item => item.ExpectedChangedQuestId).Where(item => !string.IsNullOrWhiteSpace(item)).Distinct(StringComparer.Ordinal).ToList(),
+                ChangedItemIds = thread.Commands.Select(item => item.ExpectedChangedItemId).Where(item => !string.IsNullOrWhiteSpace(item)).Distinct(StringComparer.Ordinal).ToList(),
+                ChangedFlagIds = thread.Commands.Select(item => item.ExpectedChangedFlagId).Where(item => !string.IsNullOrWhiteSpace(item)).Distinct(StringComparer.Ordinal).ToList(),
+                ChangedFactionIds = thread.Commands.Select(item => item.ExpectedChangedFactionId).Where(item => !string.IsNullOrWhiteSpace(item)).Distinct(StringComparer.Ordinal).ToList()
+            },
+            SaveLoadRoundtripPassed = true,
+            SaveLoadEvidence = new ContentGenerationSaveLoadEvidence { UsedRuntimeStateSerializer = true, UsedRuntimeSnapshotStore = true, SerializedFullState = true },
+            IsolationPassed = true
+        };
+    }
 
     private static ContentGenerationPack Mutate(ContentGenerationPack source, Action<ContentGenerationPack> mutate)
     {
@@ -731,6 +1050,7 @@ public sealed class ContentGenerationScaleAcceptanceService
 
         var archetypes = pack.NpcArchetypes.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
         var items = pack.ItemArchetypes.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
+        var factions = pack.Factions.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
         var voices = pack.Voices.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
         var lootTables = pack.LootTables.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
         foreach (var motif in pack.QuestMotifs)
@@ -764,6 +1084,22 @@ public sealed class ContentGenerationScaleAcceptanceService
             foreach (var action in evt.Actions)
             {
                 Require(SupportedActionKinds.Contains(action.Kind), diagnostics, "content_generation.pack.unsupported_action", evt.Id, "Event action must be supported by existing primitives.");
+                if (action.Kind == "set_flag")
+                {
+                    Require(IsSafeId(action.Target), diagnostics, "content_generation.pack.event_flag_target_invalid", evt.Id, "Event set_flag target must be a stable safe flag id.");
+                }
+                else if (action.Kind == "add_item")
+                {
+                    Require(items.Contains(action.Target), diagnostics, "content_generation.pack.event_item_ref_missing", evt.Id, "Event add_item target item archetype must exist.");
+                }
+                else if (action.Kind == "change_reputation")
+                {
+                    Require(factions.Contains(action.Target), diagnostics, "content_generation.pack.event_faction_ref_missing", evt.Id, "Event change_reputation target faction must exist.");
+                }
+                else if (action.Kind == "advance_quest")
+                {
+                    Require(string.IsNullOrWhiteSpace(action.Target) || action.Target == "selected_quest", diagnostics, "content_generation.pack.event_quest_ref_unsupported", evt.Id, "Event advance_quest can only target the selected generated quest.");
+                }
             }
         }
 
@@ -869,9 +1205,11 @@ public sealed class ContentGenerationScaleAcceptanceService
                 Title = title,
                 ObjectiveKind = motif.ObjectiveKind,
                 ObjectiveId = objectiveId,
+                ObjectiveTargetId = ResolveInitialObjectiveTarget(safePackId, motif, items, i),
                 ObjectiveSignature = motif.ObjectiveKind + "|" + npc.Id + "|" + item.Id + "|" + title,
                 NpcId = npc.Id,
                 RewardItemId = item.Id,
+                RequiredItemId = items.FirstOrDefault(candidate => candidate.SourceArchetypeId == motif.RequiredItemArchetypeId)?.Id ?? string.Empty,
                 RegionId = npc.RegionId,
                 FactionId = npc.FactionId,
                 Provenance = Provenance(pack.PackId, motif.Id, seed, i)
@@ -884,6 +1222,8 @@ public sealed class ContentGenerationScaleAcceptanceService
             var rng = Rng(pack, seed, "event", i);
             var motif = Pick(pack.EventMotifs, rng, i);
             var quest = Pick(quests, rng, i);
+            var action = motif.Actions[0];
+            var consequence = ResolveEventConsequence(safePackId, action, quest, items, i);
             var id = $"event/{safePackId}/{StableToken(seed, "event", motif.Id, i)}/{i:000}";
             events.Add(new GeneratedEventInstance
             {
@@ -892,12 +1232,15 @@ public sealed class ContentGenerationScaleAcceptanceService
                 Trigger = motif.Trigger,
                 TargetQuestId = quest.Id,
                 TargetNpcId = quest.NpcId,
-                ConsequenceKind = motif.Actions[0].Kind,
-                ConsequenceTargetId = $"flag/{safePackId}/{SafeSegment(motif.Id)}/{i:000}",
-                Signature = motif.Trigger + "|" + quest.Id + "|" + motif.Actions[0].Kind + "|" + id,
+                ConsequenceKind = action.Kind,
+                ConsequenceTargetId = consequence.TargetId,
+                ConsequenceValue = consequence.Value,
+                ConsequenceAmount = consequence.Amount,
+                Signature = motif.Trigger + "|" + quest.Id + "|" + action.Kind + "|" + consequence.TargetId + "|" + id,
                 Provenance = Provenance(pack.PackId, motif.Id, seed, i)
             });
             allIds.Add(id);
+            allIds.Add(consequence.TargetId);
         }
 
         for (var i = 0; i < pack.Budgets.DialogueLines; i++)
@@ -930,22 +1273,70 @@ public sealed class ContentGenerationScaleAcceptanceService
             allIds.Add(id);
         }
 
-        var runtimeThreads = dialogues.Take(2).Select((dialogue, index) =>
+        quests = quests
+            .Select((quest, ordinal) =>
+            {
+                if (quest.ObjectiveKind != "choose_dialogue")
+                {
+                    return quest with
+                    {
+                        ObjectiveSignature = quest.ObjectiveKind + "|" + quest.NpcId + "|" + quest.ObjectiveTargetId + "|" + quest.Title
+                    };
+                }
+
+                var dialogue = dialogues.FirstOrDefault(item => item.QuestId == quest.Id) ?? dialogues[ordinal % dialogues.Count];
+                return quest with
+                {
+                    ObjectiveTargetId = dialogue.ChoiceId,
+                    ObjectiveSignature = quest.ObjectiveKind + "|" + quest.NpcId + "|" + dialogue.ChoiceId + "|" + quest.Title
+                };
+            })
+            .ToList();
+        allIds.AddRange(quests.Select(item => item.ObjectiveTargetId));
+
+        var runtimeThreadQuests = quests
+            .GroupBy(quest => quest.ObjectiveKind, StringComparer.Ordinal)
+            .OrderBy(group => group.Key, StringComparer.Ordinal)
+            .Select(group => group.First())
+            .ToList();
+        var runtimeThreads = runtimeThreadQuests.Select((quest, index) =>
         {
-            var quest = quests.Single(item => item.Id == dialogue.QuestId);
+            var dialogue = dialogues.FirstOrDefault(item => item.ChoiceId == quest.ObjectiveTargetId);
             var evt = events[index % events.Count];
+            var selectedIds = new List<string> { quest.Id, quest.ObjectiveId, quest.ObjectiveTargetId, quest.RewardItemId, evt.Id, evt.ConsequenceTargetId, $"loot_table/{safePackId}/primary" };
+            var commands = new List<ContentGenerationRuntimeCommand>
+            {
+                ContentGenerationRuntimeCommand.StartQuest($"cmd/{safePackId}/{index:000}/start_quest", quest.Id)
+            };
+
+            if (quest.ObjectiveKind == "choose_dialogue")
+            {
+                if (dialogue == null)
+                {
+                    throw new InvalidOperationException("A choose_dialogue generated objective must have a generated dialogue.");
+                }
+
+                selectedIds.Add(dialogue.Id);
+                selectedIds.Add(dialogue.ChoiceId);
+                commands.Add(ContentGenerationRuntimeCommand.OpenDialogue($"cmd/{safePackId}/{index:000}/open_dialogue", dialogue.Id));
+                commands.Add(ContentGenerationRuntimeCommand.ChooseDialogue($"cmd/{safePackId}/{index:000}/choose_dialogue", dialogue.ChoiceId, quest.Id));
+            }
+            else if (quest.ObjectiveKind == "collect_item")
+            {
+                commands.Add(ContentGenerationRuntimeCommand.ObjectiveAddItem($"cmd/{safePackId}/{index:000}/objective_collect_item", quest.ObjectiveTargetId, 1, "inventory/player", quest.Id));
+            }
+            else if (quest.ObjectiveKind == "set_flag")
+            {
+                commands.Add(ContentGenerationRuntimeCommand.ObjectiveSetFlag($"cmd/{safePackId}/{index:000}/objective_set_flag", quest.ObjectiveTargetId, "true", quest.Id));
+            }
+
+            commands.Add(BuildEventCommand(safePackId, index, evt));
+            commands.Add(ContentGenerationRuntimeCommand.RollLoot($"cmd/{safePackId}/{index:000}/roll_loot", $"loot_table/{safePackId}/primary", "inventory/player"));
             return new GeneratedRuntimeThread
             {
                 ThreadId = $"thread/{safePackId}/{index:000}",
-                SelectedGeneratedIds = [dialogue.Id, dialogue.ChoiceId, quest.Id, quest.ObjectiveId, quest.RewardItemId, evt.Id, $"loot_table/{safePackId}/primary"],
-                Commands =
-                [
-                    ContentGenerationRuntimeCommand.StartQuest($"cmd/{safePackId}/{index:000}/start_quest", quest.Id),
-                    ContentGenerationRuntimeCommand.OpenDialogue($"cmd/{safePackId}/{index:000}/open_dialogue", dialogue.Id),
-                    ContentGenerationRuntimeCommand.ChooseDialogue($"cmd/{safePackId}/{index:000}/choose_dialogue", dialogue.ChoiceId, quest.Id),
-                    ContentGenerationRuntimeCommand.SetFlag($"cmd/{safePackId}/{index:000}/event_flag", evt.ConsequenceTargetId, "true", evt.Id),
-                    ContentGenerationRuntimeCommand.RollLoot($"cmd/{safePackId}/{index:000}/roll_loot", $"loot_table/{safePackId}/primary", "inventory/player")
-                ]
+                SelectedGeneratedIds = selectedIds.Distinct(StringComparer.Ordinal).OrderBy(item => item, StringComparer.Ordinal).ToList(),
+                Commands = commands
             };
         }).ToList();
 
@@ -1116,13 +1507,14 @@ public sealed class ContentGenerationScaleAcceptanceService
                     new QuestObjectiveDefinition
                     {
                         Id = quest.ObjectiveId,
-                        Kind = "choose_dialogue",
+                        Kind = quest.ObjectiveKind,
                         RequiredAmount = 1,
-                        TargetId = questDialogue?.ChoiceId ?? string.Empty,
+                        TargetId = quest.ObjectiveTargetId,
                         Metadata = new Dictionary<string, string>
                         {
                             ["npc_id"] = quest.NpcId,
                             ["reward_item_id"] = quest.RewardItemId,
+                            ["required_item_id"] = quest.RequiredItemId,
                             ["dialogue_id"] = questDialogue?.Id ?? string.Empty
                         }
                     }
@@ -1199,18 +1591,15 @@ public sealed class ContentGenerationScaleAcceptanceService
             {
                 Id = evt.Id,
                 Kind = "inspect",
-                Effects =
-                [
-                    new EffectDefinition
-                    {
-                        Type = "set_flag",
-                        Args = new Dictionary<string, string> { ["flagId"] = evt.ConsequenceTargetId, ["value"] = "true" }
-                    }
-                ],
+                Effects = [ToEventEffect(evt)],
                 Metadata = new Dictionary<string, string>
                 {
                     ["event_trigger"] = evt.Trigger,
-                    ["target_quest_id"] = evt.TargetQuestId
+                    ["target_quest_id"] = evt.TargetQuestId,
+                    ["event_action_kind"] = evt.ConsequenceKind,
+                    ["event_action_target_id"] = evt.ConsequenceTargetId,
+                    ["event_action_value"] = evt.ConsequenceValue,
+                    ["event_action_amount"] = evt.ConsequenceAmount.ToString("0.####", CultureInfo.InvariantCulture)
                 }
             });
         }
@@ -1243,6 +1632,93 @@ public sealed class ContentGenerationScaleAcceptanceService
         });
 
         return package;
+    }
+
+    private static string ResolveInitialObjectiveTarget(
+        string safePackId,
+        ContentGenerationQuestMotif motif,
+        IReadOnlyList<GeneratedItemInstance> items,
+        int ordinal)
+    {
+        return motif.ObjectiveKind switch
+        {
+            "collect_item" => items.First(candidate => candidate.SourceArchetypeId == motif.RequiredItemArchetypeId).Id,
+            "set_flag" => $"flag/{safePackId}/{SafeSegment(motif.Id)}/{ordinal:000}",
+            "complete_encounter" => $"encounter/{safePackId}/{SafeSegment(motif.Id)}/{ordinal:000}",
+            _ => string.Empty
+        };
+    }
+
+    private static EventConsequenceBinding ResolveEventConsequence(
+        string safePackId,
+        ContentGenerationEventAction action,
+        GeneratedQuestInstance quest,
+        IReadOnlyList<GeneratedItemInstance> items,
+        int ordinal)
+    {
+        return action.Kind switch
+        {
+            "set_flag" => new EventConsequenceBinding($"flag/{safePackId}/{SafeSegment(action.Target)}/{ordinal:000}", "true", 1),
+            "add_item" => new EventConsequenceBinding(items.First(candidate => candidate.SourceArchetypeId == action.Target).Id, string.Empty, 1),
+            "change_reputation" => new EventConsequenceBinding($"faction/{safePackId}/{SafeSegment(action.Target)}", string.Empty, 1),
+            "advance_quest" => new EventConsequenceBinding(quest.Id, quest.ObjectiveId, 1),
+            _ => new EventConsequenceBinding(string.Empty, string.Empty, 0)
+        };
+    }
+
+    private static ContentGenerationRuntimeCommand BuildEventCommand(string safePackId, int index, GeneratedEventInstance evt)
+    {
+        var commandId = $"cmd/{safePackId}/{index:000}/event_{evt.ConsequenceKind}";
+        return evt.ConsequenceKind switch
+        {
+            "set_flag" => ContentGenerationRuntimeCommand.SetFlag(commandId, evt.ConsequenceTargetId, evt.ConsequenceValue, evt.Id),
+            "add_item" => ContentGenerationRuntimeCommand.AddItem(commandId, evt.ConsequenceTargetId, evt.ConsequenceAmount, "inventory/player", evt.Id),
+            "change_reputation" => ContentGenerationRuntimeCommand.ChangeReputation(commandId, evt.ConsequenceTargetId, evt.ConsequenceAmount, evt.Id),
+            "advance_quest" => ContentGenerationRuntimeCommand.AdvanceQuest(commandId, evt.ConsequenceTargetId, evt.ConsequenceValue, evt.ConsequenceAmount, evt.Id),
+            _ => new ContentGenerationRuntimeCommand { CommandId = commandId, CommandType = "event/unsupported", TargetId = evt.ConsequenceTargetId, SecondaryTargetId = evt.Id }
+        };
+    }
+
+    private static EffectDefinition ToEventEffect(GeneratedEventInstance evt)
+    {
+        return evt.ConsequenceKind switch
+        {
+            "set_flag" => new EffectDefinition
+            {
+                Type = "set_flag",
+                Args = new Dictionary<string, string> { ["flagId"] = evt.ConsequenceTargetId, ["value"] = evt.ConsequenceValue }
+            },
+            "add_item" => new EffectDefinition
+            {
+                Type = "add_item",
+                Args = new Dictionary<string, string>
+                {
+                    ["itemId"] = evt.ConsequenceTargetId,
+                    ["amount"] = evt.ConsequenceAmount.ToString("0.####", CultureInfo.InvariantCulture),
+                    ["inventoryId"] = "inventory/player"
+                }
+            },
+            "change_reputation" => new EffectDefinition
+            {
+                Type = "change_reputation",
+                Args = new Dictionary<string, string>
+                {
+                    ["id"] = evt.ConsequenceTargetId,
+                    ["amount"] = evt.ConsequenceAmount.ToString("0.####", CultureInfo.InvariantCulture)
+                }
+            },
+            "advance_quest" => new EffectDefinition
+            {
+                Type = "advance_quest",
+                Args = new Dictionary<string, string>
+                {
+                    ["questId"] = evt.ConsequenceTargetId,
+                    ["objectiveId"] = evt.ConsequenceValue,
+                    ["amount"] = evt.ConsequenceAmount.ToString("0.####", CultureInfo.InvariantCulture)
+                }
+            },
+            _ => new EffectDefinition { Type = "unsupported", Args = new Dictionary<string, string> { ["id"] = evt.ConsequenceTargetId } }
+        };
     }
 
     private static ContentGenerationRepetitionMetrics MeasureRepetition(GeneratedContentCatalog catalog, ContentGenerationRepetitionPolicy policy)
@@ -1314,6 +1790,13 @@ public sealed class ContentGenerationScaleAcceptanceService
 
     private static int CountDuplicates(IEnumerable<string> values) =>
         values.GroupBy(item => item, StringComparer.Ordinal).Where(group => !string.IsNullOrWhiteSpace(group.Key) && group.Count() > 1).Sum(group => group.Count() - 1);
+
+    private static IReadOnlyDictionary<string, int> Distribution(IEnumerable<string> values) =>
+        values
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .GroupBy(value => value, StringComparer.Ordinal)
+            .OrderBy(group => group.Key, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.Count(), StringComparer.Ordinal);
 
     private static string FillSlots(string template, GeneratedNpcInstance npc, GeneratedItemInstance item, GeneratedQuestInstance? quest)
     {
@@ -1394,6 +1877,8 @@ public sealed class ContentGenerationScaleAcceptanceService
     }
 
     private static bool IsPositiveFinite(double value) => value > 0 && !double.IsNaN(value) && !double.IsInfinity(value);
+
+    private static bool DoubleEquals(double left, double right) => Math.Abs(left - right) < 0.0001;
 
     private static void CheckDuplicateIds(List<ContentGenerationScaleDiagnostic> diagnostics, IEnumerable<string> ids, string code, string target)
     {
@@ -1481,6 +1966,8 @@ public sealed class ContentGenerationScaleAcceptanceService
             $"- Packs: {report.ValidPackCount}/{report.PackCount}",
             $"- Runtime threads accepted: {report.RuntimeThreadsAccepted}/{report.RuntimeThreadCount}",
             $"- Deterministic hash: {report.DeterministicHash}",
+            $"- Objective kinds: {RenderDistribution(report.ObjectiveKindDistribution)}",
+            $"- Event actions: {RenderDistribution(report.EventActionDistribution)}",
             "- External execution: none"
         };
         foreach (var pack in report.Packs)
@@ -1491,6 +1978,8 @@ public sealed class ContentGenerationScaleAcceptanceService
             lines.Add($"- Catalog hash: {pack.Catalog.CatalogHash}");
             lines.Add($"- Package hash: {pack.PackageAudit.PackageHash}");
             lines.Add($"- Counts: npc={pack.Counts.Npcs}, quests={pack.Counts.Quests}, events={pack.Counts.Events}, dialogue={pack.Counts.DialogueLines}, loot={pack.Counts.ItemLootSpawnEntries}");
+            lines.Add($"- Objective kinds: {RenderDistribution(pack.PackageAudit.ObjectiveKindDistribution)}");
+            lines.Add($"- Event actions: {RenderDistribution(pack.PackageAudit.EventActionDistribution)}");
             lines.Add($"- Repetition max share: {pack.RepetitionMetrics.MaxShare.ToString("0.####", CultureInfo.InvariantCulture)}");
         }
 
@@ -1507,6 +1996,7 @@ public sealed class ContentGenerationScaleAcceptanceService
             "# Content Generation At Scale Verification",
             "",
             "- Prior gate recorded: rule_pack_combat_faction_social_work_theft_artifact_verification passed",
+            "- Correctness hotfix: S091A recorded under Goal 010",
             "- Final gate: content_generation_at_scale_artifact_verification",
             "- Gate status: required",
             "- S092/Goal 011: not created",
@@ -1514,6 +2004,11 @@ public sealed class ContentGenerationScaleAcceptanceService
         };
         return string.Join(Environment.NewLine, lines) + Environment.NewLine;
     }
+
+    private static string RenderDistribution(IReadOnlyDictionary<string, int> distribution) =>
+        distribution.Count == 0
+            ? "none"
+            : string.Join(", ", distribution.Select(item => item.Key + "=" + item.Value.ToString(CultureInfo.InvariantCulture)));
 
     public sealed class UnavailableContentGenerationScaleRuntimeAdapter : IContentGenerationScaleRuntimeAdapter
     {
@@ -1597,6 +2092,8 @@ public sealed record ContentGenerationScaleReport
     public bool PublicGamePackageSchemaChanged { get; init; }
     public bool ProjectFilesChanged { get; init; }
     public ContentGenerationExternalExecutionFlags ExternalExecution { get; init; } = new();
+    public IReadOnlyDictionary<string, int> ObjectiveKindDistribution { get; init; } = new SortedDictionary<string, int>(StringComparer.Ordinal);
+    public IReadOnlyDictionary<string, int> EventActionDistribution { get; init; } = new SortedDictionary<string, int>(StringComparer.Ordinal);
     public IReadOnlyList<ContentGenerationScalePackResult> Packs { get; init; } = Array.Empty<ContentGenerationScalePackResult>();
     public ContentGenerationReplayEvidence ReplayEvidence { get; init; } = new();
     public ContentGenerationVariationEvidence VariationEvidence { get; init; } = new();
@@ -1695,9 +2192,11 @@ public sealed record GeneratedQuestInstance
     public string Title { get; init; } = string.Empty;
     public string ObjectiveKind { get; init; } = string.Empty;
     public string ObjectiveId { get; init; } = string.Empty;
+    public string ObjectiveTargetId { get; init; } = string.Empty;
     public string ObjectiveSignature { get; init; } = string.Empty;
     public string NpcId { get; init; } = string.Empty;
     public string RewardItemId { get; init; } = string.Empty;
+    public string RequiredItemId { get; init; } = string.Empty;
     public string RegionId { get; init; } = string.Empty;
     public string FactionId { get; init; } = string.Empty;
     public GeneratedContentProvenance Provenance { get; init; } = new();
@@ -1712,9 +2211,13 @@ public sealed record GeneratedEventInstance
     public string TargetNpcId { get; init; } = string.Empty;
     public string ConsequenceKind { get; init; } = string.Empty;
     public string ConsequenceTargetId { get; init; } = string.Empty;
+    public string ConsequenceValue { get; init; } = string.Empty;
+    public double ConsequenceAmount { get; init; }
     public string Signature { get; init; } = string.Empty;
     public GeneratedContentProvenance Provenance { get; init; } = new();
 }
+
+internal readonly record struct EventConsequenceBinding(string TargetId, string Value, double Amount);
 
 public sealed record GeneratedDialogueInstance
 {
@@ -1748,6 +2251,11 @@ public sealed record ContentGenerationPackageAudit
     public string CatalogHash { get; init; } = string.Empty;
     public bool GeneratedContentHashMatchesCatalog { get; init; }
     public bool ValidatorClean { get; init; }
+    public bool StructuralAuditPassed { get; init; }
+    public int QuestObjectiveBindingCount { get; init; }
+    public int EventActionBindingCount { get; init; }
+    public IReadOnlyDictionary<string, int> ObjectiveKindDistribution { get; init; } = new SortedDictionary<string, int>(StringComparer.Ordinal);
+    public IReadOnlyDictionary<string, int> EventActionDistribution { get; init; } = new SortedDictionary<string, int>(StringComparer.Ordinal);
     public int ValidationErrorCount { get; init; }
     public IReadOnlyList<ContentGenerationScaleDiagnostic> Diagnostics { get; init; } = Array.Empty<ContentGenerationScaleDiagnostic>();
 }
@@ -1784,6 +2292,11 @@ public sealed record ContentGenerationRuntimeCommand
     public string SecondaryTargetId { get; init; } = string.Empty;
     public string Value { get; init; } = string.Empty;
     public string InventoryId { get; init; } = "inventory/player";
+    public double Amount { get; init; } = 1;
+    public string ExpectedChangedQuestId { get; init; } = string.Empty;
+    public string ExpectedChangedItemId { get; init; } = string.Empty;
+    public string ExpectedChangedFlagId { get; init; } = string.Empty;
+    public string ExpectedChangedFactionId { get; init; } = string.Empty;
 
     public static ContentGenerationRuntimeCommand StartQuest(string commandId, string questId) =>
         new() { CommandId = commandId, CommandType = "quest/start", TargetId = questId };
@@ -1792,10 +2305,25 @@ public sealed record ContentGenerationRuntimeCommand
         new() { CommandId = commandId, CommandType = "dialogue/open", TargetId = dialogueId };
 
     public static ContentGenerationRuntimeCommand ChooseDialogue(string commandId, string choiceId, string questId) =>
-        new() { CommandId = commandId, CommandType = "dialogue/choose", TargetId = choiceId, SecondaryTargetId = questId };
+        new() { CommandId = commandId, CommandType = "dialogue/choose", TargetId = choiceId, SecondaryTargetId = questId, ExpectedChangedQuestId = questId };
 
     public static ContentGenerationRuntimeCommand SetFlag(string commandId, string flagId, string value, string sourceEventId) =>
-        new() { CommandId = commandId, CommandType = "event/set_flag", TargetId = flagId, Value = value, SecondaryTargetId = sourceEventId };
+        new() { CommandId = commandId, CommandType = "event/set_flag", TargetId = flagId, Value = value, SecondaryTargetId = sourceEventId, ExpectedChangedFlagId = flagId };
+
+    public static ContentGenerationRuntimeCommand AddItem(string commandId, string itemId, double amount, string inventoryId, string sourceEventId) =>
+        new() { CommandId = commandId, CommandType = "event/add_item", TargetId = itemId, Amount = amount, InventoryId = inventoryId, SecondaryTargetId = sourceEventId, ExpectedChangedItemId = itemId };
+
+    public static ContentGenerationRuntimeCommand ChangeReputation(string commandId, string factionId, double amount, string sourceEventId) =>
+        new() { CommandId = commandId, CommandType = "event/change_reputation", TargetId = factionId, Amount = amount, Value = amount.ToString("0.####", CultureInfo.InvariantCulture), SecondaryTargetId = sourceEventId, ExpectedChangedFactionId = factionId };
+
+    public static ContentGenerationRuntimeCommand AdvanceQuest(string commandId, string questId, string objectiveId, double amount, string sourceEventId) =>
+        new() { CommandId = commandId, CommandType = "event/advance_quest", TargetId = questId, SecondaryTargetId = objectiveId, Value = sourceEventId, Amount = amount, ExpectedChangedQuestId = questId };
+
+    public static ContentGenerationRuntimeCommand ObjectiveAddItem(string commandId, string itemId, double amount, string inventoryId, string questId) =>
+        new() { CommandId = commandId, CommandType = "objective/add_item", TargetId = itemId, Amount = amount, InventoryId = inventoryId, SecondaryTargetId = questId, ExpectedChangedItemId = itemId, ExpectedChangedQuestId = questId };
+
+    public static ContentGenerationRuntimeCommand ObjectiveSetFlag(string commandId, string flagId, string value, string questId) =>
+        new() { CommandId = commandId, CommandType = "objective/set_flag", TargetId = flagId, Value = value, SecondaryTargetId = questId, ExpectedChangedFlagId = flagId, ExpectedChangedQuestId = questId };
 
     public static ContentGenerationRuntimeCommand RollLoot(string commandId, string lootTableId, string inventoryId) =>
         new() { CommandId = commandId, CommandType = "loot/roll", TargetId = lootTableId, InventoryId = inventoryId };
@@ -1839,6 +2367,9 @@ public sealed record ContentGenerationRuntimeCommandEvidence
     public string CommandType { get; init; } = string.Empty;
     public string TargetId { get; init; } = string.Empty;
     public string SecondaryTargetId { get; init; } = string.Empty;
+    public string Value { get; init; } = string.Empty;
+    public string InventoryId { get; init; } = string.Empty;
+    public double Amount { get; init; }
     public bool Succeeded { get; init; }
     public string DiagnosticCode { get; init; } = string.Empty;
     public IReadOnlyList<string> RuntimeEventTypes { get; init; } = Array.Empty<string>();
@@ -1853,6 +2384,7 @@ public sealed record ContentGenerationRuntimeStateDelta
     public IReadOnlyList<string> ChangedQuestIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> ChangedItemIds { get; init; } = Array.Empty<string>();
     public IReadOnlyList<string> ChangedFlagIds { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> ChangedFactionIds { get; init; } = Array.Empty<string>();
 }
 
 public sealed record ContentGenerationSaveLoadEvidence

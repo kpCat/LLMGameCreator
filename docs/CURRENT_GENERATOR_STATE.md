@@ -1,7 +1,7 @@
 ﻿# Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 010 Deterministic Content Generation At Scale  
+Updated by: Product Slice 091A Content Generation Scale Correctness Hotfix  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -12,7 +12,7 @@ The user then confirmed `connected_world_travel_state_artifact_verification pass
 
 The user then confirmed `rule_pack_gameplay_family_artifact_verification passed`, allowing Goal 009. Goal 009 completes S078-S084 by proving combat, faction reputation, social dialogue consequence, work contract reward, theft container transfer plus explicit flag/reputation consequence and a combined loop through exact package/runtime bindings and injected real `GameRuntimeService` evidence. S084A repairs artifact-review false positives by auditing exact command shapes, package bindings, declaration-specific runtime outcomes, real clamped reputation evidence, sequential valid-scenario isolation and concrete injected-leak rejection. The Application default runtime adapter remains unavailable, full `GameRuntimeState` save/load uses `RuntimeStateSerializer` and `RuntimeSnapshotStore`, invalid/fake/leak scenarios are rejected causally, and Goal 009 stops at `rule_pack_combat_faction_social_work_theft_artifact_verification`.
 
-The user then confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed`, allowing Goal 010. Goal 010 completes S085-S091 by defining compact `content_generation_pack_v1` JSON packs, expanding three compact reference packs into deterministic generated NPC, item/loot, quest, event and dialogue catalogs at scale, materializing the generated ids into validator-clean `GamePackage` definitions, executing six selected generated runtime threads through an injected real `GameRuntimeService` adapter, proving full `GameRuntimeState` save/load through `RuntimeStateSerializer` and `RuntimeSnapshotStore`, enforcing measurable repetition caps, and rejecting eighteen invalid/fake/leak scenarios causally. Goal 010 stops at `content_generation_at_scale_artifact_verification`.
+The user then confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed`, allowing Goal 010. Goal 010 completes S085-S091 by defining compact `content_generation_pack_v1` JSON packs, expanding three compact reference packs into deterministic generated NPC, item/loot, quest, event and dialogue catalogs at scale, materializing the generated ids into validator-clean `GamePackage` definitions, executing selected generated runtime threads through an injected real `GameRuntimeService` adapter, proving full `GameRuntimeState` save/load through `RuntimeStateSerializer` and `RuntimeSnapshotStore`, enforcing measurable repetition caps, and rejecting invalid/fake/leak scenarios causally. Product Slice 091A repairs Goal 010 artifact-review correctness gaps: the valid matrix now proves `choose_dialogue`, `collect_item` and `set_flag` objective shapes, package objectives preserve generated objective kinds and targets, event actions preserve and execute declared `set_flag`, `add_item` and `change_reputation` consequences, and runtime evidence correlates command type, target, secondary target, value, inventory, amount and expected state deltas. Goal 010 still stops at `content_generation_at_scale_artifact_verification`.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -146,7 +146,7 @@ Goal 002 manual configurable verification is recorded as passed based on the use
 
 ## Goal 010 Summary
 
-Goal 010: Deterministic Content Generation At Scale.
+Goal 010: Deterministic Content Generation At Scale plus S091A correctness hotfix.
 
 Completed behavior:
 
@@ -155,16 +155,18 @@ Completed behavior:
 - adds an Application-layer deterministic content generation scale acceptance service under `Design/ContentGeneration`;
 - expands each compact pack into 204 concrete generated instances with stable safe ids, source hashes, provenance, catalog hashes and repetition metrics;
 - materializes generated NPCs, items, loot, quests, events and dialogue into real existing `GamePackage` definitions without public schema changes;
-- executes six deterministic generated runtime threads through an injected real `GameRuntimeService` adapter from tests/smoke;
+- executes nine deterministic generated runtime threads through an injected real `GameRuntimeService` adapter from tests/smoke;
 - proves full `GameRuntimeState` save/load through `RuntimeStateSerializer` and `RuntimeSnapshotStore`;
-- rejects eighteen invalid/fake/leak scenarios causally, including malformed JSON, dependency cycles, repetition breaches, fake runtime success, save/load mismatch, cross-pack leakage and expectation-only invalid metadata;
+- preserves three generated quest objective shapes through package materialization and runtime evidence: `choose_dialogue`, `collect_item` and `set_flag`;
+- preserves declared event action kinds and targets for `set_flag`, `add_item` and `change_reputation` instead of coercing events into flag-only evidence;
+- rejects twenty-three invalid/fake/leak scenarios causally, including malformed JSON, dependency cycles, repetition breaches, objective/action coercion, command type/value/inventory/secondary mismatch, fake runtime success, save/load mismatch, cross-pack leakage and expectation-only invalid metadata;
 - writes deterministic `.llmgc/procedural/content-generation-scale/content-generation-scale-report.json`;
 - writes deterministic `.llmgc/procedural/content-generation-scale/content-generation-scale-report.md`;
 - writes `.llmgc/procedural/content-generation-scale/content-generation-scale-verification.md`;
 - adds the `content-generation-scale` product smoke scenario;
 - did not add WinForms/UI, Unity, Lua, provider/media execution, generator-library changes, `.sln`/`.csproj` changes, post-Goal-010 work or public GamePackage/runtime schema changes.
 
-Recorded checks from Goal 010:
+Recorded checks from Goal 010 S091A:
 
 - `ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests` filtered tests: 45/45 passed.
 - `content-generation-scale` product smoke: 1/1 passed.

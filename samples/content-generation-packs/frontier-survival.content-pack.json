@@ -64,8 +64,8 @@
   ],
   "questMotifs": [
     { "id": "restore_supply", "objectiveKind": "choose_dialogue", "titleTemplate": "Restore {item} for {npc}", "rewardItemArchetypeId": "ridge_token", "requiredItemArchetypeId": "dried_rations", "dependsOn": [] },
-    { "id": "secure_route", "objectiveKind": "choose_dialogue", "titleTemplate": "Secure {region} with {npc}", "rewardItemArchetypeId": "field_medicine", "requiredItemArchetypeId": "map_scrap", "dependsOn": [] },
-    { "id": "recover_tool", "objectiveKind": "choose_dialogue", "titleTemplate": "Recover {item} near {region}", "rewardItemArchetypeId": "storm_lantern", "requiredItemArchetypeId": "iron_snare", "dependsOn": [] }
+    { "id": "secure_route", "objectiveKind": "collect_item", "titleTemplate": "Secure {region} with {npc}", "rewardItemArchetypeId": "field_medicine", "requiredItemArchetypeId": "map_scrap", "dependsOn": [] },
+    { "id": "recover_tool", "objectiveKind": "set_flag", "titleTemplate": "Recover {item} near {region}", "rewardItemArchetypeId": "storm_lantern", "requiredItemArchetypeId": "iron_snare", "dependsOn": [] }
   ],
   "eventMotifs": [
     { "id": "cold_front", "trigger": "dialogue_choice", "actions": [ { "kind": "set_flag", "target": "frontier_weather_shift" } ], "dependsOn": [] },

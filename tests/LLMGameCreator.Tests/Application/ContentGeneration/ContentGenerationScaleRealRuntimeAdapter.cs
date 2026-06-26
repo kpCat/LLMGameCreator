@@ -65,6 +65,9 @@ public sealed class RealContentGenerationScaleRuntimeAdapter : IContentGeneratio
                 CommandType = command.CommandType,
                 TargetId = command.TargetId,
                 SecondaryTargetId = command.SecondaryTargetId,
+                Value = command.Value,
+                InventoryId = command.InventoryId,
+                Amount = command.Amount,
                 Succeeded = result.Success,
                 DiagnosticCode = result.Success ? "ok" : result.Diagnostics.FirstOrDefault()?.Code ?? "runtime.command_failed",
                 RuntimeEventTypes = result.Events.Select(item => item.Type.ToString()).OrderBy(item => item, StringComparer.Ordinal).ToList()
@@ -153,7 +156,8 @@ public sealed class RealContentGenerationScaleRuntimeAdapter : IContentGeneratio
                 ReputationChanged = !DictionaryEquals(beforeFactions, afterFactions),
                 ChangedQuestIds = ChangedKeys(beforeQuestIds, afterQuestIds),
                 ChangedItemIds = ChangedKeys(beforeItems, afterItems),
-                ChangedFlagIds = ChangedKeys(beforeFlags, afterFlags)
+                ChangedFlagIds = ChangedKeys(beforeFlags, afterFlags),
+                ChangedFactionIds = ChangedKeys(beforeFactions, afterFactions)
             },
             RuntimeStateHash = ComputeHash(serialized),
             RestoredRuntimeStateHash = ComputeHash(restoredSerialized),
@@ -236,7 +240,12 @@ public sealed class RealContentGenerationScaleRuntimeAdapter : IContentGeneratio
             "quest/start" => GameRuntimeCommand.StartQuest(command.TargetId),
             "dialogue/open" => GameRuntimeCommand.OpenDialogue(command.TargetId),
             "dialogue/choose" => GameRuntimeCommand.ChooseDialogueOption(command.TargetId),
+            "objective/add_item" => new GameRuntimeCommand { Type = GameRuntimeCommandType.AddItem, Id = command.TargetId, Amount = command.Amount, InventoryId = command.InventoryId },
+            "objective/set_flag" => new GameRuntimeCommand { Type = GameRuntimeCommandType.SetFlag, Id = command.TargetId, Value = command.Value },
             "event/set_flag" => new GameRuntimeCommand { Type = GameRuntimeCommandType.SetFlag, Id = command.TargetId, Value = command.Value },
+            "event/add_item" => new GameRuntimeCommand { Type = GameRuntimeCommandType.AddItem, Id = command.TargetId, Amount = command.Amount, InventoryId = command.InventoryId },
+            "event/change_reputation" => GameRuntimeCommand.ChangeReputation(command.TargetId, command.Amount),
+            "event/advance_quest" => GameRuntimeCommand.AdvanceQuestObjective(command.TargetId, command.SecondaryTargetId, command.Amount),
             "loot/roll" => GameRuntimeCommand.RollLootTable(command.TargetId, command.InventoryId, StableSeed(command.CommandId)),
             _ => new GameRuntimeCommand { Type = (GameRuntimeCommandType)999, Id = command.TargetId }
         };

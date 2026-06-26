@@ -21,11 +21,13 @@ public sealed class ContentGenerationScaleAcceptanceTests
         Assert.True(first.Report.Accepted);
         Assert.Equal("content_generation_at_scale_artifact_verification", first.Report.ManualGate);
         Assert.True(first.Report.Goal009GateRecorded);
-        Assert.Equal(["S085", "S086", "S087", "S088", "S089", "S090", "S091"], first.Report.CompletedSlices);
+        Assert.Equal(["S085", "S086", "S087", "S088", "S089", "S090", "S091", "S091A"], first.Report.CompletedSlices);
         Assert.Equal(3, first.Report.PackCount);
         Assert.Equal(3, first.Report.ValidPackCount);
-        Assert.Equal(6, first.Report.RuntimeThreadCount);
-        Assert.Equal(6, first.Report.RuntimeThreadsAccepted);
+        Assert.True(first.Report.RuntimeThreadCount >= 6);
+        Assert.Equal(first.Report.RuntimeThreadCount, first.Report.RuntimeThreadsAccepted);
+        Assert.True(first.Report.ObjectiveKindDistribution.Count >= 3);
+        Assert.True(first.Report.EventActionDistribution.Count >= 3);
         Assert.True(first.Report.ValidMatrixPassed);
         Assert.True(first.Report.InvalidMatrixPassed);
         Assert.True(first.Report.PackageRuntimePassed);
@@ -97,8 +99,11 @@ public sealed class ContentGenerationScaleAcceptanceTests
         Assert.All(report.Packs, pack =>
         {
             Assert.True(pack.PackageAudit.ValidatorClean);
+            Assert.True(pack.PackageAudit.StructuralAuditPassed);
             Assert.True(pack.PackageAudit.GeneratedContentHashMatchesCatalog);
             Assert.NotEmpty(pack.PackageAudit.PackageHash);
+            Assert.True(pack.PackageAudit.ObjectiveKindDistribution.Count >= 3);
+            Assert.True(pack.PackageAudit.EventActionDistribution.Count >= 3);
             Assert.All(pack.RuntimeThreads, thread =>
             {
                 Assert.True(thread.ActualValid);
@@ -112,8 +117,14 @@ public sealed class ContentGenerationScaleAcceptanceTests
                 Assert.EndsWith("RuntimeSnapshotStore", thread.RuntimeEvidence.RuntimeBoundary.SnapshotStoreType, StringComparison.Ordinal);
                 Assert.True(thread.RuntimeEvidence.StateDelta.QuestProgressChanged);
                 Assert.True(thread.RuntimeEvidence.StateDelta.RewardItemChanged);
-                Assert.True(thread.RuntimeEvidence.StateDelta.FlagChanged);
-                Assert.True(thread.RuntimeEvidence.StateDelta.ReputationChanged);
+                Assert.All(thread.Commands.Where(command => !string.IsNullOrWhiteSpace(command.ExpectedChangedQuestId)), command =>
+                    Assert.Contains(command.ExpectedChangedQuestId, thread.RuntimeEvidence.StateDelta.ChangedQuestIds));
+                Assert.All(thread.Commands.Where(command => !string.IsNullOrWhiteSpace(command.ExpectedChangedItemId)), command =>
+                    Assert.Contains(command.ExpectedChangedItemId, thread.RuntimeEvidence.StateDelta.ChangedItemIds));
+                Assert.All(thread.Commands.Where(command => !string.IsNullOrWhiteSpace(command.ExpectedChangedFlagId)), command =>
+                    Assert.Contains(command.ExpectedChangedFlagId, thread.RuntimeEvidence.StateDelta.ChangedFlagIds));
+                Assert.All(thread.Commands.Where(command => !string.IsNullOrWhiteSpace(command.ExpectedChangedFactionId)), command =>
+                    Assert.Contains(command.ExpectedChangedFactionId, thread.RuntimeEvidence.StateDelta.ChangedFactionIds));
                 Assert.True(thread.RuntimeEvidence.SaveLoadRoundtripPassed);
                 Assert.True(thread.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeStateSerializer);
                 Assert.True(thread.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeSnapshotStore);
@@ -121,7 +132,15 @@ public sealed class ContentGenerationScaleAcceptanceTests
                 Assert.True(thread.RuntimeEvidence.SaveLoadEvidence.TempSnapshotCleanupSucceeded);
                 Assert.Equal(thread.RuntimeEvidence.SaveLoadEvidence.SerializedStateHash, thread.RuntimeEvidence.SaveLoadEvidence.RestoredSerializedStateHash);
                 Assert.Equal(thread.RuntimeEvidence.StateEvidence, thread.RuntimeEvidence.RestoredStateEvidence);
-                Assert.All(thread.Commands, command => Assert.Contains(thread.RuntimeEvidence.Commands, evidence => evidence.CommandId == command.CommandId && evidence.Succeeded));
+                Assert.All(thread.Commands, command => Assert.Contains(thread.RuntimeEvidence.Commands, evidence =>
+                    evidence.CommandId == command.CommandId &&
+                    evidence.CommandType == command.CommandType &&
+                    evidence.TargetId == command.TargetId &&
+                    evidence.SecondaryTargetId == command.SecondaryTargetId &&
+                    evidence.Value == command.Value &&
+                    evidence.InventoryId == command.InventoryId &&
+                    Math.Abs(evidence.Amount - command.Amount) < 0.0001 &&
+                    evidence.Succeeded));
             });
         });
     }
@@ -134,7 +153,7 @@ public sealed class ContentGenerationScaleAcceptanceTests
             .Report;
         var invalid = report.InvalidMatrix.Scenarios.ToDictionary(item => item.ScenarioId, StringComparer.Ordinal);
 
-        Assert.Equal(18, report.InvalidMatrix.ScenarioCount);
+        Assert.True(report.InvalidMatrix.ScenarioCount >= 23);
         Assert.True(report.InvalidMatrix.Passed);
         Assert.Contains(invalid["wrong_schema_version"].Diagnostics, item => item.Code == "content_generation.pack.schema_version");
         Assert.Contains(invalid["malformed_json"].Diagnostics, item => item.Code == "content_generation.pack.malformed_json");
@@ -150,6 +169,11 @@ public sealed class ContentGenerationScaleAcceptanceTests
         Assert.Contains(invalid["exhausted_combination_pool_without_fallback"].Diagnostics, item => item.Code == "content_generation.repetition.duplicate_names");
         Assert.Contains(invalid["repetition_limit_breach"].Diagnostics, item => item.Code == "content_generation.repetition.share_cap_breached");
         Assert.Contains(invalid["command_not_covered_by_selected_generated_declaration"].Diagnostics, item => item.Code == "content_generation.audit.command_not_covered");
+        Assert.Contains(invalid["package_objective_kind_coerced_to_choose_dialogue"].Diagnostics, item => item.Code == "content_generation.audit.objective_kind_mismatch");
+        Assert.Contains(invalid["event_action_kind_coerced_to_set_flag"].Diagnostics, item => item.Code == "content_generation.audit.event_action_kind_mismatch" || item.Code == "content_generation.audit.event_action_target_mismatch");
+        Assert.Contains(invalid["runtime_command_type_mismatch"].Diagnostics, item => item.Code == "content_generation.evidence.command_type_mismatch");
+        Assert.Contains(invalid["runtime_command_value_mismatch"].Diagnostics, item => item.Code == "content_generation.evidence.command_value_mismatch");
+        Assert.Contains(invalid["runtime_command_inventory_secondary_target_mismatch"].Diagnostics, item => item.Code == "content_generation.evidence.command_inventory_mismatch" || item.Code == "content_generation.evidence.command_secondary_target_mismatch");
         Assert.Contains(invalid["fake_runtime_success"].Diagnostics, item => item.Code == "content_generation.evidence.runtime_boundary_missing");
         Assert.Contains(invalid["save_load_mismatch"].Diagnostics, item => item.Code == "content_generation.evidence.save_load_mismatch");
         Assert.Contains(invalid["cross_pack_catalog_runtime_leakage"].Diagnostics, item => item.Code == "content_generation.evidence.cross_pack_runtime_leakage");

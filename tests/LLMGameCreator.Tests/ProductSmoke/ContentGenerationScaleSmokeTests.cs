@@ -28,7 +28,10 @@ public sealed class ContentGenerationScaleSmokeTests
         Assert.True(report.Accepted);
         Assert.Equal("content_generation_at_scale_artifact_verification", report.ManualGate);
         Assert.Equal(3, report.ValidPackCount);
-        Assert.Equal(6, report.RuntimeThreadsAccepted);
+        Assert.True(report.RuntimeThreadsAccepted >= 6);
+        Assert.Equal(report.RuntimeThreadCount, report.RuntimeThreadsAccepted);
+        Assert.True(report.ObjectiveKindDistribution.Count >= 3);
+        Assert.True(report.EventActionDistribution.Count >= 3);
         Assert.True(report.ReplayEvidence.Passed);
         Assert.True(report.VariationEvidence.Passed);
         Assert.True(report.IsolationEvidence.Passed);
@@ -37,6 +40,7 @@ public sealed class ContentGenerationScaleSmokeTests
         {
             Assert.True(pack.Counts.TotalInstances >= 200);
             Assert.True(pack.PackageAudit.ValidatorClean);
+            Assert.True(pack.PackageAudit.StructuralAuditPassed);
             Assert.True(pack.PackageAudit.GeneratedContentHashMatchesCatalog);
             Assert.True(pack.RepetitionMetrics.MaxSharePassed);
             Assert.Equal(0, pack.RepetitionMetrics.DuplicateDialogueLines);
@@ -45,6 +49,10 @@ public sealed class ContentGenerationScaleSmokeTests
                 Assert.True(thread.RuntimeEvidence.RuntimeBoundary.UsedGameRuntimeService);
                 Assert.True(thread.RuntimeEvidence.StateDelta.QuestProgressChanged);
                 Assert.True(thread.RuntimeEvidence.StateDelta.RewardItemChanged);
+                Assert.All(thread.Commands.Where(command => !string.IsNullOrWhiteSpace(command.ExpectedChangedFlagId)), command =>
+                    Assert.Contains(command.ExpectedChangedFlagId, thread.RuntimeEvidence.StateDelta.ChangedFlagIds));
+                Assert.All(thread.Commands.Where(command => !string.IsNullOrWhiteSpace(command.ExpectedChangedFactionId)), command =>
+                    Assert.Contains(command.ExpectedChangedFactionId, thread.RuntimeEvidence.StateDelta.ChangedFactionIds));
                 Assert.True(thread.RuntimeEvidence.SaveLoadRoundtripPassed);
                 Assert.True(thread.RuntimeEvidence.IsolationPassed);
             });
