@@ -39,8 +39,9 @@ namespace LLMGameCreatorAlpha.Editor
                     scenes = new[] { BootstrapScenePath },
                     locationPathName = executablePath,
                     target = BuildTarget.StandaloneWindows64,
-                    options = BuildOptions.Development
+                    options = BuildOptions.None
                 };
+                WriteBuildMetadata(outputRoot, buildOptions);
                 var report = BuildPipeline.BuildPlayer(buildOptions);
                 if (report.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded)
                 {
@@ -56,6 +57,25 @@ namespace LLMGameCreatorAlpha.Editor
             {
                 EditorApplication.Exit(exitCode);
             }
+        }
+
+        private static void WriteBuildMetadata(string outputRoot, BuildPlayerOptions buildOptions)
+        {
+            var lines = new[]
+            {
+                "{",
+                "  \"schemaVersion\": \"alpha_build_metadata_v1\",",
+                "  \"target\": \"" + buildOptions.target + "\",",
+                "  \"options\": \"" + buildOptions.options + "\",",
+                "  \"development\": false,",
+                "  \"connectWithProfiler\": false,",
+                "  \"allowDebugging\": false,",
+                "  \"debugScripts\": false,",
+                "  \"profilerNetwork\": false",
+                "}"
+            };
+            Directory.CreateDirectory(outputRoot);
+            File.WriteAllLines(Path.Combine(outputRoot, "alpha-build-metadata.json"), lines);
         }
 
         private static void CreateBootstrapScene()

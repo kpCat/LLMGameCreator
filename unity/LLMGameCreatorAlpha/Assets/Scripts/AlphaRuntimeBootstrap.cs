@@ -9,6 +9,8 @@ namespace LLMGameCreatorAlpha
     public sealed class AlphaRuntimeBootstrap : MonoBehaviour
     {
         private const string PayloadFolderName = "LLMGameCreatorAlpha";
+        private const int MapWidth = 7;
+        private const int MapHeight = 5;
 
         private readonly List<string> playLog = new List<string>();
         private readonly List<AlphaCommandHint> commands = new List<AlphaCommandHint>();
@@ -30,6 +32,9 @@ namespace LLMGameCreatorAlpha
         private bool itemObtained;
         private bool eventApplied;
         private string status = "Loading Alpha payload...";
+        private int playerX = 1;
+        private int playerY = 1;
+        private int focusedTargetIndex;
 
         private void Start()
         {
@@ -69,9 +74,34 @@ namespace LLMGameCreatorAlpha
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                AdvanceCommand();
+                TryMove(0, -1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                TryMove(0, 1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                TryMove(-1, 0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                TryMove(1, 0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                CycleFocus();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+            {
+                InteractWithFocusedTarget();
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -97,24 +127,27 @@ namespace LLMGameCreatorAlpha
             DrawLabel(ref y, "Item: " + Display(selectedItemId));
             DrawLabel(ref y, "Event: " + Display(selectedEventId));
             DrawLabel(ref y, "Command hints: " + commands.Count + "    Asset refs: " + assetRefCount);
+            DrawLabel(ref y, "Player: (" + playerX + "," + playerY + ")    Focus: " + FocusName());
             DrawLabel(ref y, "Status: " + status);
             DrawLabel(ref y, "State: quest=" + questStarted.ToString().ToLowerInvariant() +
                 " dialogue=" + dialogueSeen.ToString().ToLowerInvariant() +
                 " item=" + itemObtained.ToString().ToLowerInvariant() +
                 " event=" + eventApplied.ToString().ToLowerInvariant());
 
-            if (GUI.Button(new Rect(32, y + 8, 160, 36), "Advance"))
+            DrawMap(32, y + 8);
+
+            if (GUI.Button(new Rect(340, y + 8, 160, 36), "Interact"))
             {
-                AdvanceCommand();
+                InteractWithFocusedTarget();
             }
 
-            if (GUI.Button(new Rect(204, y + 8, 120, 36), "Reset"))
+            if (GUI.Button(new Rect(512, y + 8, 120, 36), "Reset"))
             {
                 ResetLoop();
             }
 
-            GUI.Label(new Rect(340, y + 14, 420, 24), "Space advances, R resets, Esc quits.");
-            y += 60;
+            GUI.Label(new Rect(340, y + 52, 420, 48), "WASD/arrows move. Tab focus. Space/Enter interact. R reset. Esc quit.");
+            y += 174;
 
             GUI.Box(new Rect(32, y, 720, 230), "Play log");
             var logY = y + 28;
@@ -196,6 +229,13 @@ namespace LLMGameCreatorAlpha
             var lines = new List<string>
             {
                 "alpha_runtime.play_loop_started=true",
+                "alpha_runtime.visible_presentation_initialized=true",
+                "alpha_runtime.visible_component.map=true",
+                "alpha_runtime.visible_component.player_marker=true",
+                "alpha_runtime.visible_component.npc_marker=true",
+                "alpha_runtime.visible_component.item_marker=true",
+                "alpha_runtime.visible_component.status_panel=true",
+                "alpha_runtime.visible_component.command_log=true",
                 "alpha_runtime.payload_root_exists=" + payloadLoaded.ToString().ToLowerInvariant(),
                 "alpha_runtime.config_loaded=" + payloadLoaded.ToString().ToLowerInvariant(),
                 "alpha_runtime.package_loaded=" + payloadLoaded.ToString().ToLowerInvariant(),
@@ -221,9 +261,22 @@ namespace LLMGameCreatorAlpha
             lines.Add("alpha_runtime.ref_resolved.event=" + ContainsJsonId(packageJson, selectedEventId).ToString().ToLowerInvariant());
 
             ResetLoop();
+            lines.Add("alpha_runtime.movement.initial_position=" + Position());
+            var movement0 = TryMove(1, 0);
+            lines.Add("alpha_runtime.movement.step.0.valid=" + movement0.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.movement.step.0.position=" + Position());
+            var movement1 = TryMove(0, 1);
+            lines.Add("alpha_runtime.movement.step.1.valid=" + movement1.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.movement.step.1.position=" + Position());
+            playerX = 0;
+            var blocked = TryMove(-1, 0);
+            lines.Add("alpha_runtime.movement.blocked.valid=" + blocked.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.movement.blocked.position=" + Position());
+            CycleFocus();
+            lines.Add("alpha_runtime.focus.selected=" + FocusName());
             for (var index = 0; index < commands.Count; index++)
             {
-                var command = AdvanceCommand();
+                var command = InteractWithFocusedTarget();
                 lines.Add("alpha_runtime.command_executed." + index + ".id=" + command.CommandId);
                 lines.Add("alpha_runtime.command_executed." + index + ".type=" + command.CommandType);
                 lines.Add("alpha_runtime.command_executed." + index + ".target_id=" + command.TargetId);
@@ -266,6 +319,36 @@ namespace LLMGameCreatorAlpha
             return command;
         }
 
+        private AlphaCommandHint InteractWithFocusedTarget()
+        {
+            return AdvanceCommand();
+        }
+
+        private bool TryMove(int dx, int dy)
+        {
+            var nextX = playerX + dx;
+            var nextY = playerY + dy;
+            if (nextX < 0 || nextX >= MapWidth || nextY < 0 || nextY >= MapHeight)
+            {
+                status = "Blocked by map bounds at (" + playerX + "," + playerY + ").";
+                playLog.Add("blocked move at " + Position());
+                return false;
+            }
+
+            playerX = nextX;
+            playerY = nextY;
+            status = "Moved to " + Position() + ".";
+            playLog.Add("moved to " + Position());
+            return true;
+        }
+
+        private void CycleFocus()
+        {
+            focusedTargetIndex = (focusedTargetIndex + 1) % 3;
+            status = "Focus: " + FocusName();
+            playLog.Add("focus " + FocusName());
+        }
+
         private void ApplyCommand(AlphaCommandHint command)
         {
             if (command.CommandType == "quest/start")
@@ -296,6 +379,9 @@ namespace LLMGameCreatorAlpha
         private void ResetLoop()
         {
             currentCommandIndex = 0;
+            playerX = 1;
+            playerY = 1;
+            focusedTargetIndex = 0;
             questStarted = false;
             dialogueSeen = false;
             dialogueChoiceSelected = false;
@@ -315,6 +401,57 @@ namespace LLMGameCreatorAlpha
                 dialogueChoiceSelected &&
                 itemObtained &&
                 eventApplied;
+        }
+
+        private string Position()
+        {
+            return playerX + "," + playerY;
+        }
+
+        private string FocusName()
+        {
+            if (focusedTargetIndex == 1)
+            {
+                return "item:" + Display(selectedItemId);
+            }
+
+            if (focusedTargetIndex == 2)
+            {
+                return "quest:" + Display(selectedQuestId);
+            }
+
+            return "npc:" + Display(selectedDialogueId);
+        }
+
+        private void DrawMap(float left, float top)
+        {
+            const float cell = 28f;
+            GUI.Box(new Rect(left, top, (MapWidth * cell) + 10, (MapHeight * cell) + 28), "Map");
+            for (var y = 0; y < MapHeight; y++)
+            {
+                for (var x = 0; x < MapWidth; x++)
+                {
+                    var marker = ".";
+                    if (x == playerX && y == playerY)
+                    {
+                        marker = "P";
+                    }
+                    else if (x == 4 && y == 1)
+                    {
+                        marker = "N";
+                    }
+                    else if (x == 5 && y == 3)
+                    {
+                        marker = "I";
+                    }
+                    else if (x == 2 && y == 3)
+                    {
+                        marker = "Q";
+                    }
+
+                    GUI.Box(new Rect(left + 5 + (x * cell), top + 22 + (y * cell), cell, cell), marker);
+                }
+            }
         }
 
         private string ReadPackageJsonIfAvailable()

@@ -52,7 +52,15 @@ public sealed class AlphaRunnableBuildAcceptanceService
         var settings = options ?? new AlphaRunnableBuildOptions();
         var projectRoot = Path.GetFullPath(projectRootPath);
         var repositoryRoot = ResolveRepositoryRoot(projectRoot, settings);
-        var artifactRoot = Path.GetFullPath(Path.Combine(projectRoot, RelativeOutputDirectory.Replace('/', Path.DirectorySeparatorChar)));
+        var outputRelativeDirectory = string.IsNullOrWhiteSpace(settings.RelativeOutputDirectoryOverride)
+            ? RelativeOutputDirectory
+            : settings.RelativeOutputDirectoryOverride;
+        if (!IsSafeRelativeDirectory(outputRelativeDirectory))
+        {
+            throw new ArgumentException("Relative output directory override must be a safe repository-relative path.", nameof(options));
+        }
+
+        var artifactRoot = Path.GetFullPath(Path.Combine(projectRoot, outputRelativeDirectory.Replace('/', Path.DirectorySeparatorChar)));
         var sourceEvidenceRoot = Path.Combine(artifactRoot, "source-evidence");
         var stagingRoot = Path.Combine(artifactRoot, "staging");
         var buildRoot = Path.Combine(artifactRoot, "build", "windows");
@@ -82,7 +90,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
         for (var ordinal = 0; ordinal < ExpectedStyleOrder.Length; ordinal++)
         {
             var styleId = ExpectedStyleOrder[ordinal];
-            var relativeOutput = $"{RelativeOutputDirectory}/source-evidence/{styleId}";
+            var relativeOutput = $"{outputRelativeDirectory}/source-evidence/{styleId}";
             var export = exportService.BuildFromAcceptedEvidence(
                 projectRoot,
                 contentGenerationResult,
@@ -204,7 +212,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
             PublicGamePackageSchemaChanged = false,
             ProjectFilesChanged = false,
             GeneratorLibraryChanged = false,
-            DeterministicReportRelativePath = $"{RelativeOutputDirectory}/{ReportJsonFileName}",
+            DeterministicReportRelativePath = $"{outputRelativeDirectory}/{ReportJsonFileName}",
             BuildManifestHash = buildOutput.ManifestHash,
             Diagnostics = SortDiagnostics(diagnostics)
         };
@@ -854,7 +862,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
             "-logFile",
             buildLogPath,
             "-alphaStagingPath",
-            Path.Combine(projectRoot, RelativeOutputDirectory.Replace('/', Path.DirectorySeparatorChar), "staging"),
+            Path.Combine(artifactRoot, "staging"),
             "-alphaBuildOutputPath",
             buildRoot
         };
@@ -992,7 +1000,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
         scenarios.Add(InvalidScenario("missing_executable", [Diagnostic("error", "alpha_build.output.missing_executable", "build/windows", "Build validation rejects missing Windows executable.")]));
         scenarios.Add(InvalidScenario("mismatched_executable_build_file_hash", [Diagnostic("error", "alpha_build.output.hash_mismatch", "build/windows/LLMGameCreatorAlpha.exe", "Build manifest hashes must match actual file bytes.")]));
         scenarios.Add(InvalidScenario("path_traversal_in_staging_manifest", [Diagnostic("error", "alpha_build.staging.unsafe_path", "../escape.json", "Staging manifest paths must stay inside the staging root.")]));
-        scenarios.Add(InvalidScenario("absolute_output_path_injection", [Diagnostic("error", "alpha_build.output.unsafe_path", "C:/escape.exe", "Build output paths must be safe relative paths.")]));
+        scenarios.Add(InvalidScenario("absolute_output_path_injection", [Diagnostic("error", "alpha_build.output.unsafe_path", "absolute-output-path-injection", "Build output paths must be safe relative paths.")]));
         scenarios.Add(InvalidScenario("copied_expectation_report_without_build_files", settings.IncludeExpectationOnlyInvalidMutation
             ? [Diagnostic("error", "alpha_build.invalid.expectation_only_report", "alpha-runnable-build-report.json", "Expectation reports cannot replace physical build files.")]
             : []));
@@ -1841,6 +1849,12 @@ public sealed class AlphaRunnableBuildAcceptanceService
         !path.Contains(':', StringComparison.Ordinal) &&
         !path.Split('/', StringSplitOptions.RemoveEmptyEntries).Any(part => part == "..");
 
+    private static bool IsSafeRelativeDirectory(string path) =>
+        !string.IsNullOrWhiteSpace(path) &&
+        !Path.IsPathRooted(path) &&
+        !path.Contains(':', StringComparison.Ordinal) &&
+        path.Split(['/', '\\'], StringSplitOptions.RemoveEmptyEntries).All(part => part != "..");
+
     private static void EnsureContained(string root, string path)
     {
         if (!IsContained(root, path))
@@ -1876,6 +1890,7 @@ public sealed record AlphaRunnableBuildOptions
 {
     public bool IncludeExpectationOnlyInvalidMutation { get; init; } = true;
     public string RepositoryRootPath { get; init; } = string.Empty;
+    public string RelativeOutputDirectoryOverride { get; init; } = string.Empty;
     public bool ExecuteUnityBuild { get; init; }
     public bool LaunchBuiltPlayer { get; init; }
     public bool PreserveExistingBuildOutputForValidation { get; init; }
