@@ -17,7 +17,7 @@ $MarkdownPath = Join-Path $RunDir "product-smoke-summary.md"
 $LogIndexPath = Join-Path $RunDir "logs.txt"
 $TestResultsDir = Join-Path $RunDir "test-results"
 $PackageOutputDir = Join-Path $RunDir "package-output"
-$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario") { $RepoRoot } else { $PackageOutputDir }
+$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario" -or $Scenario -eq "unity-alpha-readable-presentation") { $RepoRoot } else { $PackageOutputDir }
 $TestFilter = "FullyQualifiedName~ProductSmoke"
 $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
 
@@ -77,6 +77,8 @@ function Write-ProductSmokeSummary {
         Join-Path $ScenarioArtifactRoot ".llmgc\procedural\unity-quest-completion-loop\unity-quest-completion-loop-report.json"
     } elseif ($Scenario -eq "unity-multi-variant-playable-scenario") {
         Join-Path $ScenarioArtifactRoot ".llmgc\procedural\unity-multi-variant-playable-scenario\unity-multi-variant-playable-scenario-report.json"
+    } elseif ($Scenario -eq "unity-alpha-readable-presentation") {
+        Join-Path $ScenarioArtifactRoot ".llmgc\procedural\unity-alpha-readable-presentation\unity-alpha-readable-presentation-report.json"
     } elseif ($Scenario -eq "generated-microgame-loop" -or $Scenario -eq "runtime-owned-goal-progress" -or $Scenario -eq "runtime-reward-challenge-state") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-loop\generated-microgame-loop-snapshot.json"
     } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow" -or $Scenario -eq "generated-microgame-goal-loop" -or $Scenario -eq "generated-microgame-challenge-loop") {
@@ -292,6 +294,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "unity-multi-variant-playable-scenario") {
         $TestFilter = "FullyQualifiedName~UnityMultiVariantPlayableScenarioProductSmoke"
+    }
+    elseif ($Scenario -eq "unity-alpha-readable-presentation") {
+        $TestFilter = "FullyQualifiedName~UnityReadablePresentationProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

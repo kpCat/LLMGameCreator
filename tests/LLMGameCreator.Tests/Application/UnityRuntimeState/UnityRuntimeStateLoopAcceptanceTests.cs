@@ -7,6 +7,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.UnityRuntimeState;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class UnityRuntimeStateLoopAcceptanceTests
 {
     [Fact]

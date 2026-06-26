@@ -131,57 +131,64 @@ namespace LLMGameCreatorAlpha
 
         private void OnGUI()
         {
-            GUI.Box(new Rect(16, 16, 760, 560), "LLMGameCreator Alpha");
-            var y = 48f;
-            DrawLabel(ref y, "Package: " + Display(packageId));
-            DrawLabel(ref y, "Style: " + Display(selectedStyleId));
-            DrawLabel(ref y, "Thread: " + Display(selectedThreadId));
-            DrawLabel(ref y, "Start map: " + Display(startMapId));
-            DrawLabel(ref y, "Quest: " + Display(selectedQuestId));
-            DrawLabel(ref y, "Dialogue: " + Display(selectedDialogueId));
-            DrawLabel(ref y, "Item: " + Display(selectedItemId));
-            DrawLabel(ref y, "Event: " + Display(selectedEventId));
-            DrawLabel(ref y, "Command hints: " + commands.Count + "    Asset refs: " + assetRefCount);
-            DrawLabel(ref y, "Player: (" + playerX + "," + playerY + ")    Focus: " + FocusName());
-            DrawLabel(ref y, "Status: " + status);
-            DrawLabel(ref y, "Quest phase: " + CurrentQuestPhase() + "    Reward: " + rewardGranted.ToString().ToLowerInvariant());
-            DrawLabel(ref y, "Objectives: start=" + questStarted.ToString().ToLowerInvariant() +
-                " dialogue=" + dialogueSeen.ToString().ToLowerInvariant() +
-                " choice=" + dialogueChoiceSelected.ToString().ToLowerInvariant() +
-                " item=" + itemObtained.ToString().ToLowerInvariant() +
-                " event=" + eventApplied.ToString().ToLowerInvariant() +
-                " complete=" + questCompletedCandidate.ToString().ToLowerInvariant());
-            DrawLabel(ref y, "State: quest=" + questStarted.ToString().ToLowerInvariant() +
-                " completeCandidate=" + questCompletedCandidate.ToString().ToLowerInvariant() +
-                " dialogue=" + dialogueSeen.ToString().ToLowerInvariant() +
-                " choice=" + dialogueChoiceSelected.ToString().ToLowerInvariant() +
-                " item=" + itemObtained.ToString().ToLowerInvariant() +
-                " inventory=" + inventoryItemCount +
-                " event=" + eventApplied.ToString().ToLowerInvariant());
-            DrawLabel(ref y, "Last command: " + Display(lastCommandId) + " / " + Display(lastCommandType) + " / " + Display(lastCommandTargetId));
+            GUI.Box(new Rect(16, 16, 960, 620), "LLMGameCreator Alpha - " + StyleLabel());
+            GUI.Label(new Rect(32, 42, 900, 24), QuestLabel() + "    " + PhaseLabel() + "    " + RewardLabel());
+            GUI.Label(new Rect(32, 66, 900, 22), "Package: " + Display(packageId) + "    Thread: " + Display(selectedThreadId));
 
-            DrawMap(32, y + 8);
+            GUI.Box(new Rect(32, 98, 290, 168), "Quest");
+            GUI.Label(new Rect(48, 124, 250, 22), "Style: " + StyleLabel());
+            GUI.Label(new Rect(48, 148, 250, 22), "Quest: " + QuestLabel());
+            GUI.Label(new Rect(48, 172, 250, 22), "Phase: " + PhaseLabel());
+            GUI.Label(new Rect(48, 196, 250, 22), "Reward: " + RewardLabel());
+            GUI.Label(new Rect(48, 220, 250, 22), "Status: " + status);
 
-            if (GUI.Button(new Rect(340, y + 8, 160, 36), "Interact"))
+            GUI.Box(new Rect(338, 98, 300, 168), "Objectives");
+            var objectiveY = 124f;
+            foreach (var objective in ObjectiveDisplayRows())
+            {
+                GUI.Label(new Rect(354, objectiveY, 268, 20), objective);
+                objectiveY += 22;
+            }
+
+            GUI.Box(new Rect(654, 98, 290, 168), "Selected Target");
+            GUI.Label(new Rect(670, 124, 250, 22), "Focus: " + FocusName());
+            GUI.Label(new Rect(670, 148, 250, 22), "Target: " + TargetLabel());
+            GUI.Label(new Rect(670, 172, 250, 22), "Position: " + TargetPositionLabel());
+            GUI.Label(new Rect(670, 196, 250, 22), "Hint: Open generated dialogue");
+            GUI.Label(new Rect(670, 220, 250, 22), "Last: " + CommandLabel(lastCommandId));
+
+            DrawMap(32, 290);
+
+            GUI.Box(new Rect(338, 290, 300, 144), "Inventory / Reward");
+            GUI.Label(new Rect(354, 316, 250, 22), "Inventory: " + inventoryItemCount + " generated item");
+            GUI.Label(new Rect(354, 340, 250, 22), RewardLabel());
+            GUI.Label(new Rect(354, 364, 250, 22), "Reward granted: " + rewardGranted.ToString().ToLowerInvariant());
+            GUI.Label(new Rect(354, 388, 250, 22), "Item: " + ItemLabel());
+
+            GUI.Box(new Rect(654, 290, 290, 144), "Controls");
+            GUI.Label(new Rect(670, 316, 250, 22), "Move: WASD/arrows");
+            GUI.Label(new Rect(670, 340, 250, 22), "Focus: Tab");
+            GUI.Label(new Rect(670, 364, 250, 22), "Interact: Space/Enter");
+            GUI.Label(new Rect(670, 388, 250, 22), "Reset: R");
+            GUI.Label(new Rect(670, 412, 250, 22), "Quit: Esc");
+
+            if (GUI.Button(new Rect(338, 446, 160, 36), "Interact"))
             {
                 InteractWithFocusedTarget();
             }
 
-            if (GUI.Button(new Rect(512, y + 8, 120, 36), "Reset"))
+            if (GUI.Button(new Rect(512, 446, 120, 36), "Reset"))
             {
                 ResetLoop();
             }
 
-            GUI.Label(new Rect(340, y + 52, 420, 48), "WASD/arrows move. Tab focus. Space/Enter interact. R reset. Esc quit.");
-            y += 174;
-
-            GUI.Box(new Rect(32, y, 720, 230), "Play log");
-            var logY = y + 28;
+            GUI.Box(new Rect(32, 454, 290, 144), "Event / Status Log");
+            var logY = 480f;
             var start = Math.Max(0, playLog.Count - 8);
             for (var index = start; index < playLog.Count; index++)
             {
-                GUI.Label(new Rect(48, logY, 688, 22), playLog[index]);
-                logY += 24;
+                GUI.Label(new Rect(48, logY, 258, 18), playLog[index]);
+                logY += 18;
             }
         }
 
@@ -397,6 +404,7 @@ namespace LLMGameCreatorAlpha
             lines.Add("alpha_runtime.event_applied=" + eventApplied.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.commands_executed=" + currentCommandIndex);
             AppendQuestCompletionLines(lines, initialState, finalState);
+            AppendPresentationLines(lines);
             lines.Add("alpha_runtime.play_loop_completed=" + IsCurrentLoopComplete().ToString().ToLowerInvariant());
             return lines;
         }
@@ -566,6 +574,33 @@ namespace LLMGameCreatorAlpha
             lines.Add("alpha_runtime.quest_loop_completed=" + (finalState.QuestCompletedCandidate && rewardGranted).ToString().ToLowerInvariant());
         }
 
+        private void AppendPresentationLines(ICollection<string> lines)
+        {
+            lines.Add("alpha_runtime.presentation_started=true");
+            lines.Add("alpha_runtime.presentation_model_loaded=true");
+            lines.Add("alpha_runtime.presentation.panel.scenario_header=true");
+            lines.Add("alpha_runtime.presentation.panel.variant_identity=true");
+            lines.Add("alpha_runtime.presentation.panel.quest=true");
+            lines.Add("alpha_runtime.presentation.panel.objectives=true");
+            lines.Add("alpha_runtime.presentation.panel.selected_target=true");
+            lines.Add("alpha_runtime.presentation.panel.inventory=true");
+            lines.Add("alpha_runtime.presentation.panel.reward=true");
+            lines.Add("alpha_runtime.presentation.panel.event_log=true");
+            lines.Add("alpha_runtime.presentation.panel.controls=true");
+            lines.Add("alpha_runtime.presentation.primary_style_label=" + StyleLabel());
+            lines.Add("alpha_runtime.presentation.primary_quest_label=" + QuestLabel());
+            lines.Add("alpha_runtime.presentation.primary_phase_label=" + PhaseLabel());
+            lines.Add("alpha_runtime.presentation.reward_label=" + RewardLabel());
+            lines.Add("alpha_runtime.presentation.objective_count=6");
+            lines.Add("alpha_runtime.presentation.completed_objective_count=" + CompletedObjectiveCount());
+            lines.Add("alpha_runtime.presentation.control_hint.move=true");
+            lines.Add("alpha_runtime.presentation.control_hint.focus=true");
+            lines.Add("alpha_runtime.presentation.control_hint.interact=true");
+            lines.Add("alpha_runtime.presentation.control_hint.reset=true");
+            lines.Add("alpha_runtime.presentation.control_hint.quit=true");
+            lines.Add("alpha_runtime.presentation_readable=true");
+        }
+
         private static void AppendQuestObjective(
             ICollection<string> lines,
             int index,
@@ -640,6 +675,121 @@ namespace LLMGameCreatorAlpha
             return questStarted ? "started" : "not_started";
         }
 
+        private string StyleLabel()
+        {
+            if (string.IsNullOrWhiteSpace(selectedStyleId))
+            {
+                return "Generated Scenario";
+            }
+
+            var parts = selectedStyleId.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            for (var index = 0; index < parts.Length; index++)
+            {
+                parts[index] = parts[index].Length == 0 ? parts[index] : char.ToUpperInvariant(parts[index][0]) + parts[index].Substring(1);
+            }
+
+            return string.Join(" ", parts);
+        }
+
+        private string QuestLabel()
+        {
+            return "Quest " + DisplayId(selectedQuestId);
+        }
+
+        private string RewardLabel()
+        {
+            return "Reward: item " + DisplayId(selectedItemId);
+        }
+
+        private string PhaseLabel()
+        {
+            var phase = CurrentQuestPhase();
+            if (phase == "reward_granted")
+            {
+                return "Reward granted";
+            }
+
+            if (phase == "completed")
+            {
+                return "Quest complete";
+            }
+
+            return phase.Replace('_', ' ');
+        }
+
+        private string ItemLabel()
+        {
+            return "Generated item " + DisplayId(selectedItemId);
+        }
+
+        private string TargetLabel()
+        {
+            var node = FocusNode();
+            return node == null ? "Generated target" : node.Label;
+        }
+
+        private string TargetPositionLabel()
+        {
+            var node = FocusNode();
+            return node == null ? "Generated scene focus" : "Grid " + node.X + "," + node.Y;
+        }
+
+        private static string CommandLabel(string commandId)
+        {
+            return string.IsNullOrWhiteSpace(commandId) ? "No command yet" : "Command " + DisplayId(commandId).Replace('_', ' ');
+        }
+
+        private IEnumerable<string> ObjectiveDisplayRows()
+        {
+            yield return ObjectiveDisplay("Start generated quest", questStarted);
+            yield return ObjectiveDisplay("Open generated dialogue", dialogueSeen);
+            yield return ObjectiveDisplay("Select generated choice", dialogueChoiceSelected);
+            yield return ObjectiveDisplay("Obtain generated item", itemObtained);
+            yield return ObjectiveDisplay("Apply generated event", eventApplied);
+            yield return ObjectiveDisplay("Complete quest reward", questCompletedCandidate && rewardGranted);
+        }
+
+        private static string ObjectiveDisplay(string label, bool completed)
+        {
+            return (completed ? "[x] " : "[ ] ") + label;
+        }
+
+        private int CompletedObjectiveCount()
+        {
+            var count = 0;
+            if (questStarted)
+            {
+                count++;
+            }
+
+            if (dialogueSeen)
+            {
+                count++;
+            }
+
+            if (dialogueChoiceSelected)
+            {
+                count++;
+            }
+
+            if (itemObtained)
+            {
+                count++;
+            }
+
+            if (eventApplied)
+            {
+                count++;
+            }
+
+            if (questCompletedCandidate && rewardGranted)
+            {
+                count++;
+            }
+
+            return count;
+        }
+
         private string Position()
         {
             return playerX + "," + playerY;
@@ -664,6 +814,16 @@ namespace LLMGameCreatorAlpha
             }
 
             return focusableSceneNodes[focusedTargetIndex % focusableSceneNodes.Count].NodeId;
+        }
+
+        private AlphaSceneNode FocusNode()
+        {
+            if (focusableSceneNodes.Count == 0)
+            {
+                return null;
+            }
+
+            return focusableSceneNodes[focusedTargetIndex % focusableSceneNodes.Count];
         }
 
         private string PlayerNodePosition()

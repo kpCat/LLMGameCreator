@@ -7,6 +7,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.UnityPlayableAlpha;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class UnityPlayableAlphaAcceptanceTests
 {
     [Fact]

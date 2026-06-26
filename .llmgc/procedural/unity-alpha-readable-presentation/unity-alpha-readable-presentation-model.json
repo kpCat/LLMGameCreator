@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "unity_alpha_readable_presentation_model_v1",
+  "selectedVariantCount": 3,
+  "selectedStyleIds": [
+    "frontier_survival",
+    "gothic_mystery",
+    "trade_caravan"
+  ],
+  "primaryStyleId": "frontier_survival",
+  "primaryPackageId": "game/content_generation/frontier-survival",
+  "primaryThreadId": "thread/frontier-survival/000",
+  "scenarioCards": [
+    {
+      "styleId": "frontier_survival",
+      "displayName": "Frontier Survival",
+      "packageId": "game/content_generation/frontier-survival",
+      "questTitle": "Quest 000",
+      "questId": "quest/frontier-survival/c2ed6dc235/000",
+      "rewardLabel": "Reward: item 004",
+      "objectiveSummary": "6 generated objectives",
+      "sceneSummary": "6 generated scene nodes"
+    },
+    {
+      "styleId": "gothic_mystery",
+      "displayName": "Gothic Mystery",
+      "packageId": "game/content_generation/gothic-mystery",
+      "questTitle": "Quest 001",
+      "questId": "quest/gothic-mystery/3629ab93b2/001",
+      "rewardLabel": "Reward: item 001",
+      "objectiveSummary": "6 generated objectives",
+      "sceneSummary": "6 generated scene nodes"
+    },
+    {
+      "styleId": "trade_caravan",
+      "displayName": "Trade Caravan",
+      "packageId": "game/content_generation/trade-caravan",
+      "questTitle": "Quest 002",
+      "questId": "quest/trade-caravan/80137887dd/002",
+      "rewardLabel": "Reward: item 011",
+      "objectiveSummary": "6 generated objectives",
+      "sceneSummary": "6 generated scene nodes"
+    }
+  ],
+  "primaryQuestPanel": {
+    "title": "Quest 000",
+    "styleName": "Frontier Survival",
+    "questId": "quest/frontier-survival/c2ed6dc235/000",
+    "phaseLabel": "Reward granted",
+    "completionLabel": "Quest complete",
+    "rewardLabel": "Reward: item 004"
+  },
+  "objectiveChecklist": [
+    {
+      "objectiveId": "objective/0/quest_start",
+      "label": "Start generated quest",
+      "state": "completed",
+      "sourceGeneratedId": "quest/frontier-survival/c2ed6dc235/000",
+      "requiredCommandId": "cmd/frontier-survival/000/start_quest"
+    },
+    {
+      "objectiveId": "objective/1/dialogue_open",
+      "label": "Open generated dialogue",
+      "state": "completed",
+      "sourceGeneratedId": "dialogue/frontier-survival/51924b073c/028",
+      "requiredCommandId": "cmd/frontier-survival/000/open_dialogue"
+    },
+    {
+      "objectiveId": "objective/2/dialogue_choice",
+      "label": "Select generated dialogue choice",
+      "state": "completed",
+      "sourceGeneratedId": "choice/frontier-survival/8cb7a7d288/028",
+      "requiredCommandId": "cmd/frontier-survival/000/choose_dialogue"
+    },
+    {
+      "objectiveId": "objective/3/item_obtained",
+      "label": "Obtain generated item",
+      "state": "completed",
+      "sourceGeneratedId": "item/frontier-survival/7f81222990/004",
+      "requiredCommandId": "cmd/frontier-survival/000/event_add_item"
+    },
+    {
+      "objectiveId": "objective/4/event_applied",
+      "label": "Apply generated event",
+      "state": "completed",
+      "sourceGeneratedId": "event/frontier-survival/4f2d855a33/000",
+      "requiredCommandId": "cmd/frontier-survival/000/event_add_item"
+    },
+    {
+      "objectiveId": "objective/5/quest_completed_reward",
+      "label": "Complete quest and grant reward",
+      "state": "completed",
+      "sourceGeneratedId": "quest/frontier-survival/c2ed6dc235/000",
+      "requiredCommandId": "cmd/frontier-survival/000/event_add_item"
+    }
+  ],
+  "selectedTargetPanel": {
+    "targetKind": "npc",
+    "targetLabel": "Generated target 028",
+    "sourceGeneratedId": "dialogue/frontier-survival/51924b073c/028",
+    "positionLabel": "Generated scene focus",
+    "interactionHint": "Open generated dialogue"
+  },
+  "inventoryPanel": {
+    "inventoryLabel": "Inventory: 1 generated item",
+    "lastCommandLabel": "Command start quest",
+    "statusLabel": "Quest loop complete"
+  },
+  "rewardPanel": {
+    "rewardLabel": "Reward: item 004",
+    "statusLabel": "Reward granted"
+  },
+  "eventLogPanel": {
+    "eventLogEntries": [
+      "Quest started",
+      "Dialogue opened",
+      "Choice selected",
+      "Item obtained",
+      "Event applied",
+      "Reward granted"
+    ],
+    "lastCommandLabel": "Command start quest",
+    "statusLabel": "Ready for manual play review"
+  },
+  "controlsPanel": {
+    "move": "Move: WASD/arrows",
+    "focus": "Focus: Tab",
+    "interact": "Interact: Space/Enter",
+    "reset": "Reset: R",
+    "quit": "Quit: Esc",
+    "hints": [
+      "Move: WASD/arrows",
+      "Focus: Tab",
+      "Interact: Space/Enter",
+      "Reset: R",
+      "Quit: Esc"
+    ]
+  },
+  "readabilityMetrics": {
+    "visiblePanelCount": 9,
+    "requiredPanelCount": 9,
+    "readableLabelCount": 47,
+    "rawIdOnlyLabelCount": 0,
+    "objectiveLabelCount": 6,
+    "completedObjectiveCount": 6,
+    "controlHintCount": 5,
+    "variantCardCount": 3
+  },
+  "modelHash": "8307318ed8ba0f3bd3059bd57786825eda5c53425d5bbbe0a5b495c7807f2be7"
+}

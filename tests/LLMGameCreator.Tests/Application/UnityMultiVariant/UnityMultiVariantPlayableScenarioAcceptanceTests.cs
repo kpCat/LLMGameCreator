@@ -9,6 +9,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.UnityMultiVariant;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class UnityMultiVariantPlayableScenarioAcceptanceTests
 {
     private static readonly string[] ExpectedStyles = ["frontier_survival", "gothic_mystery", "trade_caravan"];

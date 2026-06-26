@@ -1,0 +1,908 @@
+{
+  "accepted": false,
+  "finalStatus": "unity_alpha_readable_presentation_verification",
+  "manualGate": "unity_alpha_readable_presentation_verification",
+  "previousAcceptedGate": "unity_generated_multi_variant_playable_scenario_verification passed",
+  "completedSlices": [
+    "S154",
+    "S155",
+    "S156",
+    "S157",
+    "S158",
+    "S159",
+    "S160",
+    "S161"
+  ],
+  "productSmokeRoute": "unity-alpha-readable-presentation",
+  "selectedStyleIds": [
+    "frontier_survival",
+    "gothic_mystery",
+    "trade_caravan"
+  ],
+  "primaryStyleId": "frontier_survival",
+  "primaryPackageId": "game/content_generation/frontier-survival",
+  "primaryThreadId": "thread/frontier-survival/000",
+  "presentationModel": {
+    "schemaVersion": "unity_alpha_readable_presentation_model_v1",
+    "selectedVariantCount": 3,
+    "selectedStyleIds": [
+      "frontier_survival",
+      "gothic_mystery",
+      "trade_caravan"
+    ],
+    "primaryStyleId": "frontier_survival",
+    "primaryPackageId": "game/content_generation/frontier-survival",
+    "primaryThreadId": "thread/frontier-survival/000",
+    "scenarioCards": [
+      {
+        "styleId": "frontier_survival",
+        "displayName": "Frontier Survival",
+        "packageId": "game/content_generation/frontier-survival",
+        "questTitle": "Quest 000",
+        "questId": "quest/frontier-survival/c2ed6dc235/000",
+        "rewardLabel": "Reward: item 004",
+        "objectiveSummary": "6 generated objectives",
+        "sceneSummary": "6 generated scene nodes"
+      },
+      {
+        "styleId": "gothic_mystery",
+        "displayName": "Gothic Mystery",
+        "packageId": "game/content_generation/gothic-mystery",
+        "questTitle": "Quest 001",
+        "questId": "quest/gothic-mystery/3629ab93b2/001",
+        "rewardLabel": "Reward: item 001",
+        "objectiveSummary": "6 generated objectives",
+        "sceneSummary": "6 generated scene nodes"
+      },
+      {
+        "styleId": "trade_caravan",
+        "displayName": "Trade Caravan",
+        "packageId": "game/content_generation/trade-caravan",
+        "questTitle": "Quest 002",
+        "questId": "quest/trade-caravan/80137887dd/002",
+        "rewardLabel": "Reward: item 011",
+        "objectiveSummary": "6 generated objectives",
+        "sceneSummary": "6 generated scene nodes"
+      }
+    ],
+    "primaryQuestPanel": {
+      "title": "Quest 000",
+      "styleName": "Frontier Survival",
+      "questId": "quest/frontier-survival/c2ed6dc235/000",
+      "phaseLabel": "Reward granted",
+      "completionLabel": "Quest complete",
+      "rewardLabel": "Reward: item 004"
+    },
+    "objectiveChecklist": [
+      {
+        "objectiveId": "objective/0/quest_start",
+        "label": "Start generated quest",
+        "state": "completed",
+        "sourceGeneratedId": "quest/frontier-survival/c2ed6dc235/000",
+        "requiredCommandId": "cmd/frontier-survival/000/start_quest"
+      },
+      {
+        "objectiveId": "objective/1/dialogue_open",
+        "label": "Open generated dialogue",
+        "state": "completed",
+        "sourceGeneratedId": "dialogue/frontier-survival/51924b073c/028",
+        "requiredCommandId": "cmd/frontier-survival/000/open_dialogue"
+      },
+      {
+        "objectiveId": "objective/2/dialogue_choice",
+        "label": "Select generated dialogue choice",
+        "state": "completed",
+        "sourceGeneratedId": "choice/frontier-survival/8cb7a7d288/028",
+        "requiredCommandId": "cmd/frontier-survival/000/choose_dialogue"
+      },
+      {
+        "objectiveId": "objective/3/item_obtained",
+        "label": "Obtain generated item",
+        "state": "completed",
+        "sourceGeneratedId": "item/frontier-survival/7f81222990/004",
+        "requiredCommandId": "cmd/frontier-survival/000/event_add_item"
+      },
+      {
+        "objectiveId": "objective/4/event_applied",
+        "label": "Apply generated event",
+        "state": "completed",
+        "sourceGeneratedId": "event/frontier-survival/4f2d855a33/000",
+        "requiredCommandId": "cmd/frontier-survival/000/event_add_item"
+      },
+      {
+        "objectiveId": "objective/5/quest_completed_reward",
+        "label": "Complete quest and grant reward",
+        "state": "completed",
+        "sourceGeneratedId": "quest/frontier-survival/c2ed6dc235/000",
+        "requiredCommandId": "cmd/frontier-survival/000/event_add_item"
+      }
+    ],
+    "selectedTargetPanel": {
+      "targetKind": "npc",
+      "targetLabel": "Generated target 028",
+      "sourceGeneratedId": "dialogue/frontier-survival/51924b073c/028",
+      "positionLabel": "Generated scene focus",
+      "interactionHint": "Open generated dialogue"
+    },
+    "inventoryPanel": {
+      "inventoryLabel": "Inventory: 1 generated item",
+      "lastCommandLabel": "Command start quest",
+      "statusLabel": "Quest loop complete"
+    },
+    "rewardPanel": {
+      "rewardLabel": "Reward: item 004",
+      "statusLabel": "Reward granted"
+    },
+    "eventLogPanel": {
+      "eventLogEntries": [
+        "Quest started",
+        "Dialogue opened",
+        "Choice selected",
+        "Item obtained",
+        "Event applied",
+        "Reward granted"
+      ],
+      "lastCommandLabel": "Command start quest",
+      "statusLabel": "Ready for manual play review"
+    },
+    "controlsPanel": {
+      "move": "Move: WASD/arrows",
+      "focus": "Focus: Tab",
+      "interact": "Interact: Space/Enter",
+      "reset": "Reset: R",
+      "quit": "Quit: Esc",
+      "hints": [
+        "Move: WASD/arrows",
+        "Focus: Tab",
+        "Interact: Space/Enter",
+        "Reset: R",
+        "Quit: Esc"
+      ]
+    },
+    "readabilityMetrics": {
+      "visiblePanelCount": 9,
+      "requiredPanelCount": 9,
+      "readableLabelCount": 47,
+      "rawIdOnlyLabelCount": 0,
+      "objectiveLabelCount": 6,
+      "completedObjectiveCount": 6,
+      "controlHintCount": 5,
+      "variantCardCount": 3
+    },
+    "modelHash": "8307318ed8ba0f3bd3059bd57786825eda5c53425d5bbbe0a5b495c7807f2be7"
+  },
+  "visiblePanelCount": 9,
+  "requiredPanelCount": 9,
+  "readableLabelCount": 47,
+  "rawIdOnlyLabelCount": 0,
+  "objectiveLabelCount": 6,
+  "completedObjectiveCount": 6,
+  "controlHintCount": 5,
+  "variantCardCount": 3,
+  "readablePresentationVerified": true,
+  "presentationModelVerified": true,
+  "presentationPlayerEvidenceVerified": true,
+  "questCompletionStillVerified": true,
+  "multiVariantEvidenceVerified": true,
+  "firewallSafeBuildVerified": true,
+  "invalidMatrix": {
+    "passed": true,
+    "scenarioCount": 24,
+    "rejectedCount": 24,
+    "scenarios": [
+      {
+        "scenarioId": "completed_objective_count_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "completed_objective_count_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.completed_objective_count_mismatch",
+            "target": "alpha_runtime.presentation.completed_objective_count",
+            "message": "Expected alpha_runtime.presentation.completed_objective_count=6."
+          }
+        ]
+      },
+      {
+        "scenarioId": "controls_claim_without_required_key_hints",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "controls_claim_without_required_key_hints",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.focus",
+            "message": "Expected alpha_runtime.presentation.control_hint.focus=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.interact",
+            "message": "Expected alpha_runtime.presentation.control_hint.interact=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.move",
+            "message": "Expected alpha_runtime.presentation.control_hint.move=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.quit",
+            "message": "Expected alpha_runtime.presentation.control_hint.quit=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.reset",
+            "message": "Expected alpha_runtime.presentation.control_hint.reset=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "copied_readable_presentation_report_without_player_log",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "copied_readable_presentation_report_without_player_log",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.completed_objective_count_mismatch",
+            "target": "alpha_runtime.presentation.completed_objective_count",
+            "message": "Expected alpha_runtime.presentation.completed_objective_count=6."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.focus",
+            "message": "Expected alpha_runtime.presentation.control_hint.focus=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.interact",
+            "message": "Expected alpha_runtime.presentation.control_hint.interact=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.move",
+            "message": "Expected alpha_runtime.presentation.control_hint.move=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.quit",
+            "message": "Expected alpha_runtime.presentation.control_hint.quit=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.reset",
+            "message": "Expected alpha_runtime.presentation.control_hint.reset=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.model_loaded_missing",
+            "target": "alpha_runtime.presentation_model_loaded",
+            "message": "Expected alpha_runtime.presentation_model_loaded=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.objective_count_mismatch",
+            "target": "alpha_runtime.presentation.objective_count",
+            "message": "Expected alpha_runtime.presentation.objective_count=6."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.controls",
+            "message": "Expected alpha_runtime.presentation.panel.controls=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.event_log",
+            "message": "Expected alpha_runtime.presentation.panel.event_log=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.inventory",
+            "message": "Expected alpha_runtime.presentation.panel.inventory=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.objectives",
+            "message": "Expected alpha_runtime.presentation.panel.objectives=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.quest",
+            "message": "Expected alpha_runtime.presentation.panel.quest=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.reward",
+            "message": "Expected alpha_runtime.presentation.panel.reward=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.scenario_header",
+            "message": "Expected alpha_runtime.presentation.panel.scenario_header=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.selected_target",
+            "message": "Expected alpha_runtime.presentation.panel.selected_target=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.variant_identity",
+            "message": "Expected alpha_runtime.presentation.panel.variant_identity=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.phase_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_phase_label",
+            "message": "Expected alpha_runtime.presentation.primary_phase_label=Reward granted."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.presentation_started_missing",
+            "target": "alpha_runtime.presentation_started",
+            "message": "Expected alpha_runtime.presentation_started=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.quest_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_quest_label",
+            "message": "Expected alpha_runtime.presentation.primary_quest_label=Quest 000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.readable_flag_missing",
+            "target": "alpha_runtime.presentation_readable",
+            "message": "Expected alpha_runtime.presentation_readable=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.reward_label_mismatch",
+            "target": "alpha_runtime.presentation.reward_label",
+            "message": "Expected alpha_runtime.presentation.reward_label=Reward: item 004."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.style_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_style_label",
+            "message": "Expected alpha_runtime.presentation.primary_style_label=Frontier Survival."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_style_readable_label_leakage",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "cross_style_readable_label_leakage",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.display_label_leakage",
+            "target": "displayName",
+            "message": "Readable style labels must not be copied across styles."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.hash_mismatch",
+            "target": "modelHash",
+            "message": "Readable presentation model hash must match the model bytes."
+          }
+        ]
+      },
+      {
+        "scenarioId": "development_profiler_debug_build_option_reintroduced",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "development_profiler_debug_build_option_reintroduced",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_playable_alpha.firewall.debug_build_flag",
+            "target": "BuildOptions.AllowDebugging",
+            "message": "Alpha Windows build entrypoint must not enable development/profiler/debug networking flags."
+          },
+          {
+            "severity": "error",
+            "code": "unity_playable_alpha.firewall.development_build_flag",
+            "target": "BuildOptions.Development",
+            "message": "Alpha Windows build entrypoint must not enable development/profiler/debug networking flags."
+          },
+          {
+            "severity": "error",
+            "code": "unity_playable_alpha.firewall.profiler_build_flag",
+            "target": "BuildOptions.ConnectWithProfiler",
+            "message": "Alpha Windows build entrypoint must not enable development/profiler/debug networking flags."
+          }
+        ]
+      },
+      {
+        "scenarioId": "empty_primary_quest_label",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "empty_primary_quest_label",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.quest_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_quest_label",
+            "message": "Expected alpha_runtime.presentation.primary_quest_label=Quest 000."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal018_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal018_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.previous.goal018_missing",
+            "target": "unity-multi-variant-playable-scenario-report.json",
+            "message": "Goal 018 multi-variant evidence is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_controls_panel",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_controls_panel",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.controls",
+            "message": "Expected alpha_runtime.presentation.panel.controls=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_event_log_panel",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_event_log_panel",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.event_log",
+            "message": "Expected alpha_runtime.presentation.panel.event_log=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_inventory_panel",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_inventory_panel",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.inventory",
+            "message": "Expected alpha_runtime.presentation.panel.inventory=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_multi_variant_report_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_multi_variant_report_artifact",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.previous.report_missing",
+            "target": "unity-multi-variant-playable-scenario-report.json",
+            "message": "Goal 018 report artifact is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_multi_variant_variants_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_multi_variant_variants_artifact",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.previous.variants_missing",
+            "target": "unity-multi-variant-playable-scenario-variants.json",
+            "message": "Goal 018 variants artifact is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_objective_checklist_panel",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_objective_checklist_panel",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.objectives",
+            "message": "Expected alpha_runtime.presentation.panel.objectives=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_quest_panel",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_quest_panel",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.quest",
+            "message": "Expected alpha_runtime.presentation.panel.quest=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_reward_panel",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_reward_panel",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.reward",
+            "message": "Expected alpha_runtime.presentation.panel.reward=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_selected_target_panel",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_selected_target_panel",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.selected_target",
+            "message": "Expected alpha_runtime.presentation.panel.selected_target=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "objective_labels_not_tied_to_goal017_objective_ids",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "objective_labels_not_tied_to_goal017_objective_ids",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.hash_mismatch",
+            "target": "modelHash",
+            "message": "Readable presentation model hash must match the model bytes."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.objective_source_missing",
+            "target": "objective/0/quest_start",
+            "message": "Objective labels must stay tied to generated objective source ids."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.objective_sources_missing",
+            "target": "sourceGeneratedId",
+            "message": "Objective labels must stay tied to Goal 017 objective ids."
+          }
+        ]
+      },
+      {
+        "scenarioId": "presentation_readable_true_without_required_panels",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "presentation_readable_true_without_required_panels",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.completed_objective_count_mismatch",
+            "target": "alpha_runtime.presentation.completed_objective_count",
+            "message": "Expected alpha_runtime.presentation.completed_objective_count=6."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.focus",
+            "message": "Expected alpha_runtime.presentation.control_hint.focus=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.interact",
+            "message": "Expected alpha_runtime.presentation.control_hint.interact=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.move",
+            "message": "Expected alpha_runtime.presentation.control_hint.move=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.quit",
+            "message": "Expected alpha_runtime.presentation.control_hint.quit=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.control_hint_missing",
+            "target": "alpha_runtime.presentation.control_hint.reset",
+            "message": "Expected alpha_runtime.presentation.control_hint.reset=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.model_loaded_missing",
+            "target": "alpha_runtime.presentation_model_loaded",
+            "message": "Expected alpha_runtime.presentation_model_loaded=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.objective_count_mismatch",
+            "target": "alpha_runtime.presentation.objective_count",
+            "message": "Expected alpha_runtime.presentation.objective_count=6."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.controls",
+            "message": "Expected alpha_runtime.presentation.panel.controls=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.event_log",
+            "message": "Expected alpha_runtime.presentation.panel.event_log=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.inventory",
+            "message": "Expected alpha_runtime.presentation.panel.inventory=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.objectives",
+            "message": "Expected alpha_runtime.presentation.panel.objectives=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.quest",
+            "message": "Expected alpha_runtime.presentation.panel.quest=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.reward",
+            "message": "Expected alpha_runtime.presentation.panel.reward=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.scenario_header",
+            "message": "Expected alpha_runtime.presentation.panel.scenario_header=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.selected_target",
+            "message": "Expected alpha_runtime.presentation.panel.selected_target=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.panel_missing",
+            "target": "alpha_runtime.presentation.panel.variant_identity",
+            "message": "Expected alpha_runtime.presentation.panel.variant_identity=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.phase_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_phase_label",
+            "message": "Expected alpha_runtime.presentation.primary_phase_label=Reward granted."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.presentation_started_missing",
+            "target": "alpha_runtime.presentation_started",
+            "message": "Expected alpha_runtime.presentation_started=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.quest_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_quest_label",
+            "message": "Expected alpha_runtime.presentation.primary_quest_label=Quest 000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.reward_label_mismatch",
+            "target": "alpha_runtime.presentation.reward_label",
+            "message": "Expected alpha_runtime.presentation.reward_label=Reward: item 004."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.style_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_style_label",
+            "message": "Expected alpha_runtime.presentation.primary_style_label=Frontier Survival."
+          }
+        ]
+      },
+      {
+        "scenarioId": "raw_id_only_primary_quest_label",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "raw_id_only_primary_quest_label",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.quest_label_mismatch",
+            "target": "alpha_runtime.presentation.primary_quest_label",
+            "message": "Expected alpha_runtime.presentation.primary_quest_label=Quest 000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.raw_id_label",
+            "target": "alpha_runtime.presentation.primary_quest_label",
+            "message": "Primary presentation labels must not be raw generated ids only."
+          }
+        ]
+      },
+      {
+        "scenarioId": "raw_id_only_reward_label",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "raw_id_only_reward_label",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.raw_id_label",
+            "target": "alpha_runtime.presentation.reward_label",
+            "message": "Primary presentation labels must not be raw generated ids only."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.reward_label_mismatch",
+            "target": "alpha_runtime.presentation.reward_label",
+            "message": "Expected alpha_runtime.presentation.reward_label=Reward: item 004."
+          }
+        ]
+      },
+      {
+        "scenarioId": "readable_model_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "readable_model_hash_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.hash_mismatch",
+            "target": "modelHash",
+            "message": "Readable presentation model hash must match the model bytes."
+          }
+        ]
+      },
+      {
+        "scenarioId": "runtime_preview_dependency_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "runtime_preview_dependency_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.contract.runtime_preview_dependency",
+            "target": "runtime_host",
+            "message": "Unity readable presentation must not claim Runtime Preview dependency."
+          }
+        ]
+      },
+      {
+        "scenarioId": "too_few_objective_labels",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "too_few_objective_labels",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.player.objective_count_mismatch",
+            "target": "alpha_runtime.presentation.objective_count",
+            "message": "Expected alpha_runtime.presentation.objective_count=6."
+          }
+        ]
+      },
+      {
+        "scenarioId": "variant_card_copied_across_styles",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "variant_card_copied_across_styles",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.hash_mismatch",
+            "target": "modelHash",
+            "message": "Readable presentation model hash must match the model bytes."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.package_card_copied",
+            "target": "packageId",
+            "message": "Scenario cards must keep distinct generated packages."
+          },
+          {
+            "severity": "error",
+            "code": "unity_readable_presentation.model.quest_card_copied",
+            "target": "questId",
+            "message": "Scenario cards must keep distinct generated quests."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "info",
+        "code": "unity_readable_presentation.invalid_matrix_rejected",
+        "target": "invalid_matrix",
+        "message": "Invalid/fake/leak readable presentation scenarios must reject through presentation model, player log, previous-evidence, quest-loop, multi-variant or firewall validation paths."
+      }
+    ]
+  },
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "noExternalProviderLlmRagLuaMedia": true,
+  "runtimePreviewDependency": false,
+  "modelHash": "8307318ed8ba0f3bd3059bd57786825eda5c53425d5bbbe0a5b495c7807f2be7",
+  "deterministicHash": "75ab51991fc023c27982ab54cf58fcc2e8100c8da11d7345ef78dc1ea2ce9f54",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "unity_readable_presentation.goal018_gate_recorded",
+      "target": "unity_generated_multi_variant_playable_scenario_verification",
+      "message": "User-confirmed Goal 018 multi-variant verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "unity_readable_presentation.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak readable presentation scenarios must reject through presentation model, player log, previous-evidence, quest-loop, multi-variant or firewall validation paths."
+    },
+    {
+      "severity": "info",
+      "code": "unity_readable_presentation.no_external_providers",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "unity_readable_presentation.previous.goal018_evidence_present",
+      "target": "unity-multi-variant-playable-scenario-report.json",
+      "message": "Accepted Goal 018 compact evidence is present and matching."
+    }
+  ]
+}

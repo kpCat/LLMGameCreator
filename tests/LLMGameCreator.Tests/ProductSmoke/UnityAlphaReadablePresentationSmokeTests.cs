@@ -1,5 +1,5 @@
 using System.Text.Json;
-using LLMGameCreator.Application.Design.UnityMultiVariant;
+using LLMGameCreator.Application.Design.UnityReadablePresentation;
 using LLMGameCreator.Tests.Application.Assets;
 using LLMGameCreator.Tests.Application.ContentGeneration;
 using Xunit;
@@ -7,10 +7,10 @@ using Xunit;
 namespace LLMGameCreator.Tests.ProductSmoke;
 
 [Collection("UnityAlphaProductSmoke")]
-public sealed class UnityMultiVariantPlayableScenarioSmokeTests
+public sealed class UnityReadablePresentationSmokeTests
 {
     [Fact]
-    public async Task UnityMultiVariantPlayableScenarioProductSmoke()
+    public async Task UnityReadablePresentationProductSmoke()
     {
         var repoRoot = FindRepoRoot();
         var projectRoot = ResolveProjectFolder(repoRoot);
@@ -18,13 +18,13 @@ public sealed class UnityMultiVariantPlayableScenarioSmokeTests
             .BuildFromReferencePackDirectory(Path.Combine(repoRoot, "samples", "content-generation-packs"), projectRoot);
         var assets = MinimumAssetPipelineAcceptanceTestFactory.CreateService()
             .BuildFromContentGeneration(projectRoot, Path.Combine(repoRoot, "samples", "minimum-asset-pipeline"), content);
-        var service = new UnityMultiVariantPlayableScenarioAcceptanceService();
+        var service = new UnityAlphaReadablePresentationAcceptanceService();
 
         var result = service.BuildFromAcceptedEvidence(
             projectRoot,
             content,
             assets,
-            new UnityMultiVariantPlayableScenarioOptions
+            new UnityAlphaReadablePresentationOptions
             {
                 RepositoryRootPath = repoRoot,
                 ExecuteUnityBuild = true,
@@ -32,46 +32,40 @@ public sealed class UnityMultiVariantPlayableScenarioSmokeTests
             });
         var write = await service.WriteAsync(projectRoot, result);
 
-        Assert.True(File.Exists(write.VariantsJsonPath));
+        Assert.True(File.Exists(write.ModelJsonPath));
         Assert.True(File.Exists(write.ReportJsonPath));
         Assert.True(File.Exists(write.ReportMarkdownPath));
         Assert.True(File.Exists(write.VerificationMarkdownPath));
 
-        var report = JsonSerializer.Deserialize<UnityMultiVariantPlayableScenarioReport>(
+        var report = JsonSerializer.Deserialize<UnityAlphaReadablePresentationReport>(
             await File.ReadAllTextAsync(write.ReportJsonPath),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
 
         Assert.False(report.Accepted);
-        Assert.Equal(UnityMultiVariantPlayableScenarioAcceptanceService.FinalGate, report.FinalStatus);
-        Assert.Equal(UnityMultiVariantPlayableScenarioAcceptanceService.FinalGate, report.ManualGate);
-        Assert.Equal("unity_generated_quest_completion_loop_verification passed", report.PreviousAcceptedGate);
-        Assert.Equal("unity-multi-variant-playable-scenario", report.ProductSmokeRoute);
-        Assert.True(report.VariantCount >= 3);
-        Assert.True(report.AcceptedVariantCount >= 3, string.Join(Environment.NewLine, report.Diagnostics.Select(item => $"{item.Code}:{item.Target}")));
-        Assert.True(report.AllVariantsQuestComplete);
-        Assert.True(report.AllVariantsRewardGranted);
-        Assert.True(report.AllVariantsUseSamePipeline);
-        Assert.True(report.MultiVariantPlayableScenarioVerified, string.Join(Environment.NewLine, report.Diagnostics.Select(item => $"{item.Code}:{item.Target}")));
-        Assert.Equal(3, report.DistinctStyleCount);
-        Assert.Equal(3, report.DistinctPackageCount);
-        Assert.Equal(3, report.DistinctQuestCount);
-        Assert.Equal(3, report.DistinctSceneSignatureCount);
-        Assert.Equal(3, report.DistinctObjectiveSignatureCount);
+        Assert.Equal(UnityAlphaReadablePresentationAcceptanceService.FinalGate, report.FinalStatus);
+        Assert.Equal(UnityAlphaReadablePresentationAcceptanceService.FinalGate, report.ManualGate);
+        Assert.Equal("unity_generated_multi_variant_playable_scenario_verification passed", report.PreviousAcceptedGate);
+        Assert.Equal("unity-alpha-readable-presentation", report.ProductSmokeRoute);
+        Assert.True(report.ReadablePresentationVerified, string.Join(Environment.NewLine, report.Diagnostics.Select(item => $"{item.Code}:{item.Target}")));
+        Assert.True(report.PresentationModelVerified);
+        Assert.True(report.PresentationPlayerEvidenceVerified, string.Join(Environment.NewLine, report.Diagnostics.Select(item => $"{item.Code}:{item.Target}")));
+        Assert.True(report.QuestCompletionStillVerified);
+        Assert.True(report.MultiVariantEvidenceVerified);
+        Assert.True(report.FirewallSafeBuildVerified);
+        Assert.True(report.VisiblePanelCount >= 8);
+        Assert.True(report.RequiredPanelCount >= 8);
+        Assert.True(report.ReadableLabelCount >= 12);
+        Assert.Equal(0, report.RawIdOnlyLabelCount);
+        Assert.True(report.ObjectiveLabelCount >= 6);
+        Assert.True(report.CompletedObjectiveCount >= 6);
+        Assert.True(report.ControlHintCount >= 5);
+        Assert.True(report.VariantCardCount >= 3);
         Assert.True(report.InvalidMatrix.Passed, string.Join(Environment.NewLine, report.InvalidMatrix.Diagnostics.Select(item => $"{item.Code}:{item.Target}")));
         Assert.False(report.RuntimePreviewDependency);
         Assert.False(report.PublicGamePackageSchemaChanged);
         Assert.False(report.ProjectFilesChanged);
         Assert.False(report.GeneratorLibraryChanged);
         Assert.True(report.NoExternalProviderLlmRagLuaMedia);
-        Assert.All(report.VariantSummaries, variant =>
-        {
-            Assert.True(variant.Accepted, string.Join(Environment.NewLine, variant.Diagnostics.Select(item => $"{item.Code}:{item.Target}")));
-            Assert.True(variant.QuestCompletionLoopVerified);
-            Assert.True(variant.QuestCompletedVerified);
-            Assert.True(variant.RewardGrantedVerified);
-            Assert.Equal(6, variant.ObjectiveIds.Count);
-            Assert.False(string.IsNullOrWhiteSpace(variant.PlayerLogRelativePath));
-        });
     }
 
     private static string ResolveProjectFolder(string tempPath)

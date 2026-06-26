@@ -11,13 +11,13 @@ This document is not a replacement for `docs/FULL_GAME_GENERATION_MASTER_PLAN.md
 Accepted through:
 
 ```text
-unity_generated_quest_completion_loop_verification passed
+unity_generated_multi_variant_playable_scenario_verification passed
 ```
 
 Produced for review:
 
 ```text
-unity_generated_multi_variant_playable_scenario_verification required
+unity_alpha_readable_presentation_verification required
 ```
 
 Current capabilities:
@@ -32,12 +32,13 @@ Current capabilities:
 - generated Unity runtime state loop evidence with quest/dialogue/item/inventory/event before-after transitions;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
+- readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
 - compact review artifacts under `.llmgc/procedural/...`;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The Unity Alpha now proves three generated style variants can produce distinct playable quest loops through the same pipeline, but the primitive IMGUI presentation still needs human-readable polish before broader manual play review.
+The Unity Alpha now has readable presentation panels for manual review, but the next accepted step still needs a minimum playable generated game gate proving the executable can be reviewed as one short generated scenario from start to completion without inspecting JSON.
 
 ## Queue Rules
 
@@ -137,7 +138,7 @@ Frontier/gothic/caravan scenarios are visibly different in ids, labels, nodes, o
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start S154 or Goal 019 until it is accepted.
+Accepted by user prompt before Goal 019.
 
 ### Goal 019: Unity Alpha Human-Readable Presentation
 
@@ -154,6 +155,10 @@ Improve the primitive IMGUI presentation enough for manual play review: readable
 Expected user-visible result:
 
 The Alpha stops feeling like only a diagnostic log and becomes a primitive playable UI.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start S162 or Goal 020 until it is accepted.
 
 ### Goal 020: Minimum Playable Generated Game Gate
 
@@ -372,7 +377,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-unity_generated_multi_variant_playable_scenario_verification
+unity_alpha_readable_presentation_verification
 ```
 
 Status:

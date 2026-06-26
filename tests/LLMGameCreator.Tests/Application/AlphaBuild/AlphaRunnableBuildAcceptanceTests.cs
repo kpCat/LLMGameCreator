@@ -10,6 +10,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.AlphaBuild;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class AlphaRunnableBuildAcceptanceTests
 {
     [Fact]

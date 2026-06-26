@@ -8,6 +8,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.UnityQuestLoop;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class UnityQuestCompletionLoopAcceptanceTests
 {
     [Fact]

@@ -6,6 +6,7 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.UnityGeneratedScene;
 
+[Collection("UnityAlphaProductSmoke")]
 public sealed class UnityGeneratedSceneProjectionAcceptanceTests
 {
     [Fact]

@@ -70,7 +70,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_015_UNITY_GENERATED_SCENE_CONTENT_PROJECTION.md` | Completed Goal 015 task: Unity generated scene content projection, with Application-layer generated scene projection artifacts, Unity Alpha map/player/NPC/item/quest-event/command-status presentation derived from selected package/config/asset evidence, generated-node movement/interaction logs, invalid/fake/leak rejection, product smoke route `unity-generated-scene-projection` and final stop at `unity_generated_scene_content_projection_verification`. The user confirmed the gate passed before Goal 016. |
 | `docs/GOAL_016_UNITY_GENERATED_RUNTIME_STATE_LOOP.md` | Completed Goal 016 task: Unity generated runtime state loop, with Application-layer runtime state loop artifacts, Unity Alpha quest/dialogue/item/inventory/event/focus/status before-after state changes derived from generated command hints, command/state transition logs, invalid/fake/leak rejection, product smoke route `unity-runtime-state-loop` and final stop at `unity_generated_runtime_state_loop_verification`. The user confirmed the gate passed before Goal 017. |
 | `docs/GOAL_017_UNITY_GENERATED_QUEST_COMPLETION_LOOP.md` | Completed Goal 017 task: Unity generated quest completion loop, with Application-layer quest plan/state/report artifacts, Unity Alpha ordered quest phases, objective checklist, generated dialogue/item/event command correlation, completion/reward proof, invalid/fake/leak rejection, product smoke route `unity-quest-completion-loop` and final stop at `unity_generated_quest_completion_loop_verification`. The user confirmed the gate passed before Goal 018. |
-| `docs/GOAL_018_UNITY_MULTI_VARIANT_PLAYABLE_SCENARIO.md` | Goal 018 task: Unity multi-variant playable scenario, with Application-layer multi-variant acceptance artifacts for `frontier_survival`, `gothic_mystery` and `trade_caravan`, per-variant Unity Alpha quest completion proof, cross-variant distinctness validation, invalid/fake/leak rejection, product smoke route `unity-multi-variant-playable-scenario` and final stop at `unity_generated_multi_variant_playable_scenario_verification`. |
+| `docs/GOAL_018_UNITY_MULTI_VARIANT_PLAYABLE_SCENARIO.md` | Completed Goal 018 task: Unity multi-variant playable scenario, with Application-layer multi-variant acceptance artifacts for `frontier_survival`, `gothic_mystery` and `trade_caravan`, per-variant Unity Alpha quest completion proof, cross-variant distinctness validation, invalid/fake/leak rejection, product smoke route `unity-multi-variant-playable-scenario` and final stop at `unity_generated_multi_variant_playable_scenario_verification`. The user confirmed the gate passed before Goal 019. |
+| `docs/GOAL_019_UNITY_ALPHA_READABLE_PRESENTATION.md` | Goal 019 task: Unity Alpha readable presentation, with Application-layer readable presentation model/report artifacts, Unity Alpha IMGUI scenario/variant/quest/objective/target/inventory/reward/event-log/control panels, readable player proof lines, invalid/fake/leak rejection, product smoke route `unity-alpha-readable-presentation` and final stop at `unity_alpha_readable_presentation_verification`. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
@@ -97,13 +98,13 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-unity_generated_multi_variant_playable_scenario_verification
+unity_alpha_readable_presentation_verification
 ```
 
 Allowed next sequence:
 
-1. Review `unity_generated_multi_variant_playable_scenario_verification` evidence from the produced Unity multi-variant playable scenario variants JSON, report, Windows players, Unity build logs, per-variant launch/play-loop logs, distinct scene/objective/command identities and reward proof before marking the gate passed.
-2. Goal 018 regenerates compact repo-local root review artifacts under `.llmgc/procedural/unity-multi-variant-playable-scenario/` through the existing `unity-multi-variant-playable-scenario` product smoke route.
+1. Review `unity_alpha_readable_presentation_verification` evidence from the produced Unity Alpha readable presentation model JSON, report, Windows player logs, required panel proof, readable labels, objective checklist, selected target, inventory/reward/event log, controls proof, retained multi-variant evidence and invalid/fake/leak matrix before marking the gate passed.
+2. Goal 019 regenerates compact repo-local root review artifacts under `.llmgc/procedural/unity-alpha-readable-presentation/` through the existing `unity-alpha-readable-presentation` product smoke route.
 3. Generated Unity build outputs under `.llmgc/procedural/**/build/`, `.llmgc/procedural/**/logs/`, `.llmgc/procedural/**/unity-work/` and Unity-generated project folders are ignored by `.gitignore`; compact `.json` / `.md` report and verification artifacts remain eligible for review when a task requires them.
 
 Kill criterion:
