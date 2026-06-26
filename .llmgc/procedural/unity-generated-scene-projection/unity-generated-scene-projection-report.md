@@ -1,0 +1,56 @@
+# Unity Generated Scene Content Projection Report
+
+- Accepted: false
+- Final status: unity_generated_scene_content_projection_verification
+- Previous gate: unity_playable_presentation_firewall_safe_build_verification passed
+- Completed slices: S122, S123, S124, S125, S126, S127, S128, S129
+- Product smoke route: unity-generated-scene-projection
+- Selected package: game/content_generation/frontier-survival
+- Selected style: frontier_survival
+- Selected thread: thread/frontier-survival/000
+- Package hash: 3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53
+- Asset manifest hash: 3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595
+- Runtime config hash: 569f440bba0f0aca3cacd5fdb1ff5a856d25b5609302681d3faddb3922195bf2
+- Projection hash: 1f99588ffd7d8c0e89c33e0482d804517e6a448843fcbdac533b4a5cd41f9c21
+- Scene node count: 6
+- Scene node kinds: command_status, item, map, npc, player, quest_event
+- Scene projection verified: true
+- Scene nodes resolved: true
+- Generated id binding verified: true
+- Asset binding verified: true
+- Movement verified: true
+- Interaction verified: true
+- Play loop verified: true
+- Firewall-safe build verified: true
+- Invalid/fake/leak scenarios rejected: 20/20
+- Deterministic report hash: 05c1a7cf4b361608871ccac7fa587540a3664552c5c4b96017f6d0bcbfa5adc6
+- Build manifest hash: 6aaf1c34b437330f1ed9cf4fdc1b09b3f5c72c125381691fa4a9a07150002948
+
+## Diagnostics
+
+- error: alpha_build.contract.asset_manifest_hash_mismatch [frontier_survival] Candidate asset manifest hash must match selected Goal 012 evidence.
+- error: alpha_build.contract.cross_style_leakage [frontier_survival] Package, export and asset evidence must come from the same style candidate.
+- error: alpha_build.contract.export_manifest_hash_mismatch [frontier_survival] Candidate export manifest hash must match selected Goal 012 evidence.
+- error: alpha_build.contract.missing_goal012_evidence [frontier_survival] Alpha candidates must reference accepted Goal 012 export evidence.
+- error: alpha_build.contract.package_hash_mismatch [game/content_generation/frontier-survival] Candidate package hash must match selected Goal 012 evidence.
+- error: alpha_build.contract.runtime_preview_dependency [runtime_host] Alpha proof must not depend on WinForms Runtime Preview.
+- error: alpha_build.invalid.expectation_only_report [alpha-runnable-build-report.json] Expectation reports cannot replace physical build files.
+- error: alpha_build.output.hash_mismatch [build/windows/LLMGameCreatorAlpha.exe] Build manifest hashes must match actual file bytes.
+- error: alpha_build.output.missing_executable [build/windows] Build validation rejects missing Windows executable.
+- error: alpha_build.output.unity_build_claim_without_artifact [build/windows] Unity build claims require real output files.
+- error: alpha_build.output.unsafe_path [absolute-output-path-injection] Build output paths must be safe relative paths.
+- error: alpha_build.staging.missing_asset_payload [assets] Staging must contain physical asset payloads.
+- error: alpha_build.staging.missing_game_data [game-data/game-package.json] Staging must contain physical game data.
+- error: alpha_build.staging.unsafe_path [../escape.json] Staging manifest paths must stay inside the staging root.
+- info: alpha_build.environment.not_blocked [alpha_unity_build_environment_blocker] A real Windows build path exists and produced verifiable output; the runnable gate remains required for review.
+- info: alpha_build.environment.unity_found [unity_cli] Unity Editor executable was discovered; local machine path is omitted from deterministic artifacts.
+- info: alpha_build.goal012_gate_recorded [unity_runtime_export_vertical_slice_artifact_verification] User-confirmed Goal 012 artifact verification is recorded as passed.
+- info: alpha_build.invalid_matrix_rejected [invalid_matrix] Invalid/fake/leak scenarios must fail through the Alpha build validation path.
+- info: alpha_build.launch.executed [logs/alpha-player-launch.log] The produced Windows player was launched in batch diagnostic mode.
+- info: alpha_build.no_external_providers [execution_boundary] No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked.
+- info: alpha_build.unity_build.executed [logs/unity-build.log] Unity Editor was invoked through the repository-local Alpha build entrypoint.
+- info: alpha_build.unity_build.exit_success [exit_code:0] Unity build process completed; see logs/unity-build.log for details.
+- info: alpha_build.valid_matrix_passed [valid_matrix] Three style candidates and deterministic staging are required.
+- info: unity_generated_scene.goal014_gate_recorded [unity_playable_presentation_firewall_safe_build_verification] User-confirmed Goal 014 verification is recorded as passed.
+- info: unity_generated_scene.invalid_matrix_rejected [invalid_matrix] Invalid/fake/leak scene projection scenarios must reject through projection, log and firewall validation paths.
+- info: unity_generated_scene.no_external_providers [execution_boundary] No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked.

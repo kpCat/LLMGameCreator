@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -9,16 +12,18 @@ namespace LLMGameCreatorAlpha
     public sealed class AlphaRuntimeBootstrap : MonoBehaviour
     {
         private const string PayloadFolderName = "LLMGameCreatorAlpha";
-        private const int MapWidth = 7;
-        private const int MapHeight = 5;
 
         private readonly List<string> playLog = new List<string>();
         private readonly List<AlphaCommandHint> commands = new List<AlphaCommandHint>();
+        private readonly List<AlphaSceneNode> sceneNodes = new List<AlphaSceneNode>();
+        private readonly List<AlphaSceneNode> focusableSceneNodes = new List<AlphaSceneNode>();
         private string packageId = string.Empty;
         private string packageHash = string.Empty;
         private string assetManifestHash = string.Empty;
+        private string runtimeConfigHash = string.Empty;
         private string startMapId = string.Empty;
         private string selectedThreadId = string.Empty;
+        private string selectedNpcId = string.Empty;
         private string selectedQuestId = string.Empty;
         private string selectedDialogueId = string.Empty;
         private string selectedItemId = string.Empty;
@@ -34,6 +39,8 @@ namespace LLMGameCreatorAlpha
         private string status = "Loading Alpha payload...";
         private int playerX = 1;
         private int playerY = 1;
+        private int mapWidth = 7;
+        private int mapHeight = 5;
         private int focusedTargetIndex;
 
         private void Start()
@@ -181,8 +188,15 @@ namespace LLMGameCreatorAlpha
                 packageId = ExtractJsonString(configJson, "packageId");
                 packageHash = ExtractJsonString(configJson, "packageHash");
                 assetManifestHash = ExtractJsonString(configJson, "assetManifestHash");
+                runtimeConfigHash = ExtractJsonString(configJson, "configHash");
                 startMapId = ExtractJsonString(configJson, "startMapId");
                 selectedThreadId = ExtractJsonString(configJson, "selectedThreadId");
+                selectedNpcId = FirstValueWithPrefix(configJson, "selectedGeneratedIds", "npc/");
+                if (string.IsNullOrWhiteSpace(selectedNpcId))
+                {
+                    selectedNpcId = FirstPropertyValueWithPrefix(configJson, "contentId", "npc/");
+                }
+
                 selectedQuestId = FirstValueWithPrefix(configJson, "selectedGeneratedIds", "quest/");
                 selectedDialogueId = FirstValueWithPrefix(configJson, "selectedGeneratedIds", "dialogue/");
                 selectedItemId = FirstValueWithPrefix(configJson, "selectedGeneratedIds", "item/");
@@ -190,6 +204,8 @@ namespace LLMGameCreatorAlpha
                 assetRefCount = CountJsonObjectsInArray(configJson, "assetRefs");
                 commands.Clear();
                 commands.AddRange(ExtractCommandHints(configJson));
+                commands.Sort((left, right) => string.CompareOrdinal(left.CommandId, right.CommandId));
+                BuildSceneProjection();
                 payloadLoaded = payloadRootExists && commands.Count > 0;
                 ResetLoop();
 
@@ -200,14 +216,18 @@ namespace LLMGameCreatorAlpha
                 lines.Add("alpha_runtime.package_id=" + packageId);
                 lines.Add("alpha_runtime.package_hash=" + packageHash);
                 lines.Add("alpha_runtime.asset_manifest_hash=" + assetManifestHash);
+                lines.Add("alpha_runtime.runtime_config_hash=" + runtimeConfigHash);
                 lines.Add("alpha_runtime.start_map_id=" + startMapId);
                 lines.Add("alpha_runtime.selected_thread_id=" + selectedThreadId);
+                lines.Add("alpha_runtime.selected_npc_id=" + selectedNpcId);
                 lines.Add("alpha_runtime.selected_quest_id=" + selectedQuestId);
                 lines.Add("alpha_runtime.selected_dialogue_id=" + selectedDialogueId);
                 lines.Add("alpha_runtime.selected_item_id=" + selectedItemId);
                 lines.Add("alpha_runtime.selected_event_id=" + selectedEventId);
                 lines.Add("alpha_runtime.command_hint_count=" + commands.Count);
                 lines.Add("alpha_runtime.asset_ref_count=" + assetRefCount);
+                lines.Add("alpha_runtime.scene_projection_loaded=" + (sceneNodes.Count > 0).ToString().ToLowerInvariant());
+                lines.Add("alpha_runtime.scene_node_count=" + sceneNodes.Count);
                 lines.Add("alpha_runtime.package_bytes=" + packageJson.Length);
                 lines.Add("alpha_runtime.asset_manifest_bytes=" + assetManifestJson.Length);
                 lines.Add("alpha_runtime.launch_completed=true");
@@ -243,18 +263,36 @@ namespace LLMGameCreatorAlpha
                 "alpha_runtime.package_id=" + packageId,
                 "alpha_runtime.package_hash=" + packageHash,
                 "alpha_runtime.asset_manifest_hash=" + assetManifestHash,
+                "alpha_runtime.runtime_config_hash=" + runtimeConfigHash,
                 "alpha_runtime.start_map_id=" + startMapId,
                 "alpha_runtime.selected_thread_id=" + selectedThreadId,
+                "alpha_runtime.selected_npc_id=" + selectedNpcId,
                 "alpha_runtime.selected_quest_id=" + selectedQuestId,
                 "alpha_runtime.selected_dialogue_id=" + selectedDialogueId,
                 "alpha_runtime.selected_item_id=" + selectedItemId,
                 "alpha_runtime.selected_event_id=" + selectedEventId,
                 "alpha_runtime.command_hint_count=" + commands.Count,
-                "alpha_runtime.asset_ref_count=" + assetRefCount
+                "alpha_runtime.asset_ref_count=" + assetRefCount,
+                "alpha_runtime.scene_projection_loaded=" + (sceneNodes.Count > 0).ToString().ToLowerInvariant(),
+                "alpha_runtime.scene_node_count=" + sceneNodes.Count
             };
+
+            foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
+            {
+                var node = SceneNode(kind);
+                lines.Add("alpha_runtime.scene_node_resolved." + kind + "=" + (node != null).ToString().ToLowerInvariant());
+                if (node != null)
+                {
+                    lines.Add("alpha_runtime.scene_node." + kind + ".id=" + node.NodeId);
+                    lines.Add("alpha_runtime.scene_node." + kind + ".source_id=" + node.SourceId);
+                    lines.Add("alpha_runtime.scene_node." + kind + ".position=" + node.X + "," + node.Y);
+                    lines.Add("alpha_runtime.scene_node." + kind + ".label=" + node.Label);
+                }
+            }
 
             var packageJson = ReadPackageJsonIfAvailable();
             lines.Add("alpha_runtime.ref_resolved.map=" + ContainsJsonId(packageJson, startMapId).ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.ref_resolved.npc=" + ContainsJsonId(packageJson, selectedNpcId).ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.ref_resolved.quest=" + ContainsJsonId(packageJson, selectedQuestId).ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.ref_resolved.dialogue=" + ContainsJsonId(packageJson, selectedDialogueId).ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.ref_resolved.item=" + ContainsJsonId(packageJson, selectedItemId).ToString().ToLowerInvariant());
@@ -274,6 +312,7 @@ namespace LLMGameCreatorAlpha
             lines.Add("alpha_runtime.movement.blocked.position=" + Position());
             CycleFocus();
             lines.Add("alpha_runtime.focus.selected=" + FocusName());
+            lines.Add("alpha_runtime.focus.selected_node_id=" + FocusNodeId());
             for (var index = 0; index < commands.Count; index++)
             {
                 var command = InteractWithFocusedTarget();
@@ -328,7 +367,7 @@ namespace LLMGameCreatorAlpha
         {
             var nextX = playerX + dx;
             var nextY = playerY + dy;
-            if (nextX < 0 || nextX >= MapWidth || nextY < 0 || nextY >= MapHeight)
+            if (nextX < 0 || nextX >= mapWidth || nextY < 0 || nextY >= mapHeight)
             {
                 status = "Blocked by map bounds at (" + playerX + "," + playerY + ").";
                 playLog.Add("blocked move at " + Position());
@@ -381,6 +420,13 @@ namespace LLMGameCreatorAlpha
             currentCommandIndex = 0;
             playerX = 1;
             playerY = 1;
+            var playerNode = SceneNode("player");
+            if (playerNode != null)
+            {
+                playerX = playerNode.X;
+                playerY = playerNode.Y;
+            }
+
             focusedTargetIndex = 0;
             questStarted = false;
             dialogueSeen = false;
@@ -410,48 +456,160 @@ namespace LLMGameCreatorAlpha
 
         private string FocusName()
         {
-            if (focusedTargetIndex == 1)
+            if (focusableSceneNodes.Count == 0)
             {
-                return "item:" + Display(selectedItemId);
+                return "(none)";
             }
 
-            if (focusedTargetIndex == 2)
+            var node = focusableSceneNodes[focusedTargetIndex % focusableSceneNodes.Count];
+            return node.Kind + ":" + Display(node.SourceId);
+        }
+
+        private string FocusNodeId()
+        {
+            if (focusableSceneNodes.Count == 0)
             {
-                return "quest:" + Display(selectedQuestId);
+                return string.Empty;
             }
 
-            return "npc:" + Display(selectedDialogueId);
+            return focusableSceneNodes[focusedTargetIndex % focusableSceneNodes.Count].NodeId;
         }
 
         private void DrawMap(float left, float top)
         {
             const float cell = 28f;
-            GUI.Box(new Rect(left, top, (MapWidth * cell) + 10, (MapHeight * cell) + 28), "Map");
-            for (var y = 0; y < MapHeight; y++)
+            GUI.Box(new Rect(left, top, (mapWidth * cell) + 10, (mapHeight * cell) + 28), "Map");
+            for (var y = 0; y < mapHeight; y++)
             {
-                for (var x = 0; x < MapWidth; x++)
+                for (var x = 0; x < mapWidth; x++)
                 {
                     var marker = ".";
                     if (x == playerX && y == playerY)
                     {
                         marker = "P";
                     }
-                    else if (x == 4 && y == 1)
+                    else
                     {
-                        marker = "N";
-                    }
-                    else if (x == 5 && y == 3)
-                    {
-                        marker = "I";
-                    }
-                    else if (x == 2 && y == 3)
-                    {
-                        marker = "Q";
+                        var node = sceneNodes.FirstOrDefault(item => item.X == x && item.Y == y && item.Kind != "map" && item.Kind != "player" && item.Kind != "command_status");
+                        if (node != null)
+                        {
+                            marker = MarkerFor(node.Kind);
+                        }
                     }
 
                     GUI.Box(new Rect(left + 5 + (x * cell), top + 22 + (y * cell), cell, cell), marker);
                 }
             }
+        }
+
+        private void BuildSceneProjection()
+        {
+            mapWidth = 7;
+            mapHeight = 5;
+            sceneNodes.Clear();
+            focusableSceneNodes.Clear();
+            var occupied = new HashSet<string>();
+
+            sceneNodes.Add(BuildNode("map", startMapId, "Map " + DisplayId(startMapId), occupied));
+            sceneNodes.Add(BuildPlayerNode(occupied));
+            sceneNodes.Add(BuildNode("npc", selectedNpcId, "NPC " + DisplayId(selectedNpcId), occupied));
+            sceneNodes.Add(BuildNode("item", selectedItemId, "Item " + DisplayId(selectedItemId), occupied));
+            sceneNodes.Add(BuildNode("quest_event", string.IsNullOrWhiteSpace(selectedEventId) ? selectedQuestId : selectedEventId, "Quest/Event " + DisplayId(string.IsNullOrWhiteSpace(selectedEventId) ? selectedQuestId : selectedEventId), occupied));
+            sceneNodes.Add(BuildNode("command_status", commands.Count == 0 ? string.Empty : commands[0].CommandId, "Commands " + commands.Count, occupied));
+            focusableSceneNodes.AddRange(sceneNodes.Where(node => node.Kind == "npc" || node.Kind == "item" || node.Kind == "quest_event").OrderBy(node => node.Kind, StringComparer.Ordinal));
+
+        }
+
+        private AlphaSceneNode BuildPlayerNode(ISet<string> occupied)
+        {
+            var hash = StableInt(packageId + "|" + selectedThreadId + "|" + runtimeConfigHash);
+            var x = 1 + (hash % 3);
+            var y = 1 + ((hash / 7) % 2);
+            if (x == 1 && y == 1)
+            {
+                x = 2;
+            }
+
+            occupied.Add(x + "," + y);
+            return new AlphaSceneNode
+            {
+                NodeId = "scene_node/player/" + ShortHash(selectedThreadId),
+                Kind = "player",
+                SourceId = "player/runtime",
+                Label = "Player",
+                X = x,
+                Y = y
+            };
+        }
+
+        private AlphaSceneNode BuildNode(string kind, string sourceId, string label, ISet<string> occupied)
+        {
+            var hash = StableInt(kind + "|" + sourceId + "|" + packageHash);
+            for (var attempt = 0; attempt < 64; attempt++)
+            {
+                var x = (hash + attempt) % mapWidth;
+                var y = ((hash / 11) + attempt) % mapHeight;
+                if (IsGoal014Placeholder(kind, x, y))
+                {
+                    continue;
+                }
+
+                var key = x + "," + y;
+                if (occupied.Add(key))
+                {
+                    return new AlphaSceneNode
+                    {
+                        NodeId = "scene_node/" + kind + "/" + ShortHash(sourceId),
+                        Kind = kind,
+                        SourceId = sourceId,
+                        Label = label,
+                        X = x,
+                        Y = y
+                    };
+                }
+            }
+
+            return new AlphaSceneNode
+            {
+                NodeId = "scene_node/" + kind + "/" + ShortHash(sourceId),
+                Kind = kind,
+                SourceId = sourceId,
+                Label = label,
+                X = 0,
+                Y = 0
+            };
+        }
+
+        private AlphaSceneNode SceneNode(string kind)
+        {
+            return sceneNodes.FirstOrDefault(node => node.Kind == kind);
+        }
+
+        private static string MarkerFor(string kind)
+        {
+            if (kind == "npc")
+            {
+                return "N";
+            }
+
+            if (kind == "item")
+            {
+                return "I";
+            }
+
+            if (kind == "quest_event")
+            {
+                return "Q";
+            }
+
+            return ".";
+        }
+
+        private static bool IsGoal014Placeholder(string kind, int x, int y)
+        {
+            return (kind == "npc" && x == 4 && y == 1) ||
+                (kind == "item" && x == 5 && y == 3) ||
+                (kind == "quest_event" && x == 2 && y == 3);
         }
 
         private string ReadPackageJsonIfAvailable()
@@ -499,6 +657,20 @@ namespace LLMGameCreatorAlpha
         {
             foreach (var value in ExtractStringArray(json, propertyName))
             {
+                if (value.StartsWith(prefix, StringComparison.Ordinal))
+                {
+                    return value;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        private static string FirstPropertyValueWithPrefix(string json, string propertyName, string prefix)
+        {
+            foreach (Match match in Regex.Matches(json, "\"" + Regex.Escape(propertyName) + "\"\\s*:\\s*\"(?<value>(?:\\\\.|[^\"])*)\""))
+            {
+                var value = Regex.Unescape(match.Groups["value"].Value);
                 if (value.StartsWith(prefix, StringComparison.Ordinal))
                 {
                     return value;
@@ -636,6 +808,35 @@ namespace LLMGameCreatorAlpha
             return string.IsNullOrWhiteSpace(value) ? "(none)" : value;
         }
 
+        private static string DisplayId(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return "(none)";
+            }
+
+            var parts = value.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            return parts.Length == 0 ? value : parts[parts.Length - 1];
+        }
+
+        private static int StableInt(string value)
+        {
+            var hash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(value ?? string.Empty));
+            return Math.Abs(BitConverter.ToInt32(hash, 0));
+        }
+
+        private static string ShortHash(string value)
+        {
+            var hash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(value ?? string.Empty));
+            var builder = new StringBuilder();
+            for (var index = 0; index < 6; index++)
+            {
+                builder.Append(hash[index].ToString("x2"));
+            }
+
+            return builder.ToString();
+        }
+
         private sealed class AlphaCommandHint
         {
             public static readonly AlphaCommandHint Empty = new AlphaCommandHint();
@@ -643,6 +844,16 @@ namespace LLMGameCreatorAlpha
             public string CommandType = string.Empty;
             public string TargetId = string.Empty;
             public string SecondaryTargetId = string.Empty;
+        }
+
+        private sealed class AlphaSceneNode
+        {
+            public string NodeId = string.Empty;
+            public string Kind = string.Empty;
+            public string SourceId = string.Empty;
+            public string Label = string.Empty;
+            public int X;
+            public int Y;
         }
     }
 }

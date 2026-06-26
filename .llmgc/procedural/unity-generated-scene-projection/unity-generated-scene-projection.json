@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "unity_generated_scene_projection_v1",
+  "selectedPackageId": "game/content_generation/frontier-survival",
+  "selectedStyleId": "frontier_survival",
+  "selectedThreadId": "thread/frontier-survival/000",
+  "selectedMapId": "map/frontier-survival/start",
+  "selectedNpcId": "npc/frontier-survival/11ffe0aa42/018",
+  "selectedQuestId": "quest/frontier-survival/c2ed6dc235/000",
+  "selectedDialogueId": "dialogue/frontier-survival/51924b073c/028",
+  "selectedItemId": "item/frontier-survival/7f81222990/004",
+  "selectedEventId": "event/frontier-survival/4f2d855a33/000",
+  "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+  "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+  "exportManifestHash": "cd28d799e3e9b5d96be785eab80b6a5749552172dcbd6dbce6e28f7280a39a81",
+  "runtimeConfigHash": "569f440bba0f0aca3cacd5fdb1ff5a856d25b5609302681d3faddb3922195bf2",
+  "mapWidth": 7,
+  "mapHeight": 5,
+  "nodes": [
+    {
+      "nodeId": "scene_node/command_status/2d67e0734896",
+      "sourceGeneratedId": "cmd/frontier-survival/000/choose_dialogue",
+      "nodeKind": "command_status",
+      "x": 3,
+      "y": 3,
+      "displayLabel": "Commands 5",
+      "asset": null,
+      "packageId": "game/content_generation/frontier-survival",
+      "styleId": "frontier_survival",
+      "threadId": "thread/frontier-survival/000"
+    },
+    {
+      "nodeId": "scene_node/item/991ba3f168f2",
+      "sourceGeneratedId": "item/frontier-survival/7f81222990/004",
+      "nodeKind": "item",
+      "x": 2,
+      "y": 4,
+      "displayLabel": "Item 004",
+      "asset": {
+        "category": "item_icon_ui_graphic",
+        "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "contentId": "item/frontier-survival/032bdc46ab/062",
+        "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+        "byteCount": 268
+      },
+      "packageId": "game/content_generation/frontier-survival",
+      "styleId": "frontier_survival",
+      "threadId": "thread/frontier-survival/000"
+    },
+    {
+      "nodeId": "scene_node/map/1586660da190",
+      "sourceGeneratedId": "map/frontier-survival/start",
+      "nodeKind": "map",
+      "x": 2,
+      "y": 2,
+      "displayLabel": "Map start",
+      "asset": {
+        "category": "tile_region_graphic",
+        "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+        "contentId": "map/frontier-survival/start",
+        "exportRelativePath": "assets/tile-region-graphic/asset-004-f8e7e136.fixture",
+        "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+        "byteCount": 247
+      },
+      "packageId": "game/content_generation/frontier-survival",
+      "styleId": "frontier_survival",
+      "threadId": "thread/frontier-survival/000"
+    },
+    {
+      "nodeId": "scene_node/npc/f9222da8a8a6",
+      "sourceGeneratedId": "npc/frontier-survival/11ffe0aa42/018",
+      "nodeKind": "npc",
+      "x": 6,
+      "y": 1,
+      "displayLabel": "NPC 018",
+      "asset": {
+        "category": "npc_portrait",
+        "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+        "contentId": "npc/frontier-survival/11ffe0aa42/018",
+        "exportRelativePath": "assets/npc-portrait/asset-002-b5037955.fixture",
+        "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+        "byteCount": 266
+      },
+      "packageId": "game/content_generation/frontier-survival",
+      "styleId": "frontier_survival",
+      "threadId": "thread/frontier-survival/000"
+    },
+    {
+      "nodeId": "scene_node/player/021ecac437d9",
+      "sourceGeneratedId": "player/runtime",
+      "nodeKind": "player",
+      "x": 2,
+      "y": 1,
+      "displayLabel": "Player",
+      "asset": null,
+      "packageId": "game/content_generation/frontier-survival",
+      "styleId": "frontier_survival",
+      "threadId": "thread/frontier-survival/000"
+    },
+    {
+      "nodeId": "scene_node/quest_event/6f594224d6d7",
+      "sourceGeneratedId": "event/frontier-survival/4f2d855a33/000",
+      "nodeKind": "quest_event",
+      "x": 3,
+      "y": 2,
+      "displayLabel": "Quest/Event 000",
+      "asset": {
+        "category": "music_ambience",
+        "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+        "contentId": "event/frontier-survival/00ba2e87c9/005",
+        "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+        "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+        "byteCount": 69
+      },
+      "packageId": "game/content_generation/frontier-survival",
+      "styleId": "frontier_survival",
+      "threadId": "thread/frontier-survival/000"
+    }
+  ],
+  "commandHints": [
+    {
+      "commandId": "cmd/frontier-survival/000/choose_dialogue",
+      "commandType": "dialogue/choose",
+      "targetId": "choice/frontier-survival/8cb7a7d288/028",
+      "secondaryTargetId": "quest/frontier-survival/c2ed6dc235/000"
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/frontier-survival/7f81222990/004",
+      "secondaryTargetId": "event/frontier-survival/4f2d855a33/000"
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/open_dialogue",
+      "commandType": "dialogue/open",
+      "targetId": "dialogue/frontier-survival/51924b073c/028",
+      "secondaryTargetId": ""
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/roll_loot",
+      "commandType": "loot/roll",
+      "targetId": "loot_table/frontier-survival/primary",
+      "secondaryTargetId": ""
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/start_quest",
+      "commandType": "quest/start",
+      "targetId": "quest/frontier-survival/c2ed6dc235/000",
+      "secondaryTargetId": ""
+    }
+  ],
+  "assetRefs": [
+    {
+      "category": "item_icon_ui_graphic",
+      "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "contentId": "item/frontier-survival/032bdc46ab/062",
+      "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+      "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+      "byteCount": 268
+    },
+    {
+      "category": "music_ambience",
+      "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+      "contentId": "event/frontier-survival/00ba2e87c9/005",
+      "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69
+    },
+    {
+      "category": "npc_portrait",
+      "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+      "contentId": "npc/frontier-survival/11ffe0aa42/018",
+      "exportRelativePath": "assets/npc-portrait/asset-002-b5037955.fixture",
+      "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+      "byteCount": 266
+    },
+    {
+      "category": "sound_effect",
+      "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+      "contentId": "dialogue/frontier-survival/0490f2f50e/013",
+      "exportRelativePath": "assets/sound-effect/asset-003-b6002d93.fixture",
+      "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+      "byteCount": 270
+    },
+    {
+      "category": "tile_region_graphic",
+      "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+      "contentId": "map/frontier-survival/start",
+      "exportRelativePath": "assets/tile-region-graphic/asset-004-f8e7e136.fixture",
+      "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+      "byteCount": 247
+    }
+  ],
+  "projectionHash": "1f99588ffd7d8c0e89c33e0482d804517e6a448843fcbdac533b4a5cd41f9c21"
+}

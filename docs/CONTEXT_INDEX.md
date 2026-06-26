@@ -66,7 +66,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_011_MINIMUM_ASSET_PIPELINE.md` | Completed Goal 011 task plus S098A correctness hotfix: deterministic asset requests from generated/package content ids, local fixture imports, deterministic fallbacks, existing AssetCatalog/package metadata binding, hash-integrity checks, causal invalid/fake/leak rejection, structural validation, product smoke and final stop at `minimum_asset_pipeline_artifact_verification`. |
 | `docs/GOAL_012_UNITY_RUNTIME_EXPORT_VERTICAL_SLICE.md` | Completed Goal 012 task: deterministic Unity runtime export vertical slice outside Runtime Preview with selected Goal 010 package/runtime refs, Goal 011 asset refs, real export files, hash/byte manifest validation, causal invalid/fake/leak rejection, product smoke and final stop at `unity_runtime_export_vertical_slice_artifact_verification`. |
 | `docs/GOAL_013_ALPHA_RUNNABLE_WINDOWS_BUILD.md` | Completed Goal 013 task: Alpha runnable Windows build integration. S113B resolved the repository-local Unity project/template and Windows build entrypoint blocker, produced a real Windows player plus diagnostic launch evidence; S113C added a visible Unity mini-loop plus automated play-loop diagnostic evidence. The user confirmed `alpha_runnable_windows_build_verification passed` before Goal 014. |
-| `docs/GOAL_014_UNITY_PLAYABLE_PRESENTATION_AND_FIREWALL_SAFE_BUILD.md` | Goal 014 task: Unity playable Alpha presentation and firewall-safe build discipline, with visible map/player/NPC/item/status presentation, automated movement/interaction evidence, release-style BuildOptions.None build entrypoint checks and final stop at `unity_playable_presentation_firewall_safe_build_verification`. S121B repairs root artifact regeneration for the same Goal 014 gate without starting S122 or Goal 015. |
+| `docs/GOAL_014_UNITY_PLAYABLE_PRESENTATION_AND_FIREWALL_SAFE_BUILD.md` | Completed Goal 014 task: Unity playable Alpha presentation and firewall-safe build discipline, with visible map/player/NPC/item/status presentation, automated movement/interaction evidence, release-style BuildOptions.None build entrypoint checks and final stop at `unity_playable_presentation_firewall_safe_build_verification`. S121B repaired root artifact regeneration for the same Goal 014 gate; the user confirmed the gate passed before Goal 015. |
+| `docs/GOAL_015_UNITY_GENERATED_SCENE_CONTENT_PROJECTION.md` | Goal 015 task: Unity generated scene content projection, with Application-layer generated scene projection artifacts, Unity Alpha map/player/NPC/item/quest-event/command-status presentation derived from selected package/config/asset evidence, generated-node movement/interaction logs, invalid/fake/leak rejection, product smoke route `unity-generated-scene-projection` and final stop at `unity_generated_scene_content_projection_verification`. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
@@ -93,13 +94,13 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-unity_playable_presentation_firewall_safe_build_verification
+unity_generated_scene_content_projection_verification
 ```
 
 Allowed next sequence:
 
-1. Review `unity_playable_presentation_firewall_safe_build_verification` evidence from the produced Unity playable Alpha report, Windows player, Unity build log, launch/play-loop logs and firewall-safe build flags before marking the gate passed.
-2. S121B regenerates compact repo-local root review artifacts under `.llmgc/procedural/unity-playable-alpha/` through the existing `unity-playable-alpha` product smoke route.
+1. Review `unity_generated_scene_content_projection_verification` evidence from the produced Unity generated scene projection report, projection JSON, Windows player, Unity build log, launch/play-loop logs and generated node binding proof before marking the gate passed.
+2. Goal 015 regenerates compact repo-local root review artifacts under `.llmgc/procedural/unity-generated-scene-projection/` through the existing `unity-generated-scene-projection` product smoke route.
 3. Generated Unity build outputs under `.llmgc/procedural/**/build/`, `.llmgc/procedural/**/logs/`, `.llmgc/procedural/**/unity-work/` and Unity-generated project folders are ignored by `.gitignore`; compact `.json` / `.md` report and verification artifacts remain eligible for review when a task requires them.
 
 Kill criterion:
