@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "unity_runtime_export_manifest_v1",
+  "packageId": "game/content_generation/frontier-survival",
+  "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+  "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+  "fileCount": 10,
+  "totalByteCount": 438774,
+  "manifestHash": "9ad928a4855237b703945fb8db3b230496cce41723dce96001ec2d2ecfeb7e27",
+  "files": [
+    {
+      "relativePath": "assets/asset-manifest.json",
+      "kind": "json_payload",
+      "logicalId": "assets/asset-manifest.json",
+      "hash": "d18dfcf6244457e290477857a874f0a91178c22a4fb7c7535b92538528b6afe7",
+      "byteCount": 5562
+    },
+    {
+      "relativePath": "assets/item-icon-ui-graphic/asset-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+      "byteCount": 268
+    },
+    {
+      "relativePath": "assets/music-ambience/asset-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-00ba2e87c9-005-caravan-music-fixture-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "assets/npc-portrait/asset-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-11ffe0aa42-018-caravan-portrait-fallback-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+      "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+      "byteCount": 266
+    },
+    {
+      "relativePath": "assets/sound-effect/asset-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-0490f2f50e-013-caravan-sound-fallback-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+      "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+      "byteCount": 270
+    },
+    {
+      "relativePath": "assets/tile-region-graphic/asset-game-content-generation-frontier-survival-tile-region-graphic-map-frontier-survival-start-caravan-tile-fallback-002.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+      "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+      "byteCount": 247
+    },
+    {
+      "relativePath": "game-data/game-package.json",
+      "kind": "json_payload",
+      "logicalId": "game-data/game-package.json",
+      "hash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+      "byteCount": 420490
+    },
+    {
+      "relativePath": "game-data/generated-content-provenance.json",
+      "kind": "json_payload",
+      "logicalId": "game-data/generated-content-provenance.json",
+      "hash": "4293fd31241cd8cb6f8bf886e3c46fcd857989208e3a4bafc17b3a29bfdb14aa",
+      "byteCount": 2532
+    },
+    {
+      "relativePath": "runtime/launch-metadata.json",
+      "kind": "json_payload",
+      "logicalId": "runtime/launch-metadata.json",
+      "hash": "807ffc07ea1cdcbfe5ec002d170512086dc2b7c3e0eb93f20b0a879b6ca16c1f",
+      "byteCount": 591
+    },
+    {
+      "relativePath": "runtime/unity-runtime-config.json",
+      "kind": "json_payload",
+      "logicalId": "runtime/unity-runtime-config.json",
+      "hash": "5d9393fae7306e18d9bd8a1d6c10754b04d36166ace0f37c20f8c5fb4c328beb",
+      "byteCount": 8479
+    }
+  ]
+}

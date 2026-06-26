@@ -1,7 +1,7 @@
 ﻿# Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Product Slice 098A Minimum Asset Pipeline Correctness Hotfix  
+Updated by: Goal 012 Unity Runtime Export Vertical Slice  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -14,7 +14,9 @@ The user then confirmed `rule_pack_gameplay_family_artifact_verification passed`
 
 The user then confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed`, allowing Goal 010. Goal 010 completes S085-S091 by defining compact `content_generation_pack_v1` JSON packs, expanding three compact reference packs into deterministic generated NPC, item/loot, quest, event and dialogue catalogs at scale, materializing the generated ids into validator-clean `GamePackage` definitions, executing selected generated runtime threads through an injected real `GameRuntimeService` adapter, proving full `GameRuntimeState` save/load through `RuntimeStateSerializer` and `RuntimeSnapshotStore`, enforcing measurable repetition caps, and rejecting invalid/fake/leak scenarios causally. Product Slice 091A repairs Goal 010 artifact-review correctness gaps: the valid matrix now proves `choose_dialogue`, `collect_item` and `set_flag` objective shapes, package objectives preserve generated objective kinds and targets, event actions preserve and execute declared `set_flag`, `add_item` and `change_reputation` consequences, and runtime evidence correlates command type, target, secondary target, value, inventory, amount and expected state deltas. The user then confirmed `content_generation_at_scale_artifact_verification passed`, allowing Goal 011.
 
-Goal 011 completes S092-S098 by defining a minimum deterministic asset pipeline around generated/package content ids. Product Slice 098A repairs Goal 011 artifact-review correctness gaps in the same artifact family: invalid/fake/leak scenarios now flow through shared request, binding, resolver and validation paths; package/content/source hashes are checked against the package/content/source bytes used by the run; cross-pack leakage is rejected structurally; and category-specific binding evidence is recorded for the existing `AssetCatalog`, package fields and metadata seams. Goal 011 still stops at `minimum_asset_pipeline_artifact_verification`.
+Goal 011 completes S092-S098 by defining a minimum deterministic asset pipeline around generated/package content ids. Product Slice 098A repairs Goal 011 artifact-review correctness gaps in the same artifact family: invalid/fake/leak scenarios now flow through shared request, binding, resolver and validation paths; package/content/source hashes are checked against the package/content/source bytes used by the run; cross-pack leakage is rejected structurally; and category-specific binding evidence is recorded for the existing `AssetCatalog`, package fields and metadata seams. The user then confirmed `minimum_asset_pipeline_artifact_verification passed`, allowing Goal 012.
+
+Goal 012 completes S099-S105 by defining a narrow Application-layer Unity runtime export contract outside Runtime Preview, selecting one accepted Goal 010 generated package/runtime loop and matching Goal 011 asset manifest, materializing deterministic real export files under `.llmgc/procedural/unity-runtime-export/export/`, validating package, selected loop refs, asset refs, file hashes and byte counts headlessly, rejecting invalid/fake/leak scenarios causally, and adding the `unity-runtime-export` product smoke route. Goal 012 stops at `unity_runtime_export_vertical_slice_artifact_verification` required and does not start post-Goal-012 work.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -43,7 +45,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Minimum asset pipeline artifact verification after Goal 011 artifact review.
+1. Unity runtime export vertical slice artifact verification after Goal 012 artifact review.
 
 Kill criterion:
 
@@ -141,10 +143,35 @@ Observed result:
 Recommended next work item:
 
 ```text
-minimum_asset_pipeline_artifact_verification
+unity_runtime_export_vertical_slice_artifact_verification
 ```
 
-Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The user confirmed `manual_quest_dialog_interaction_family_verification passed` before Goal 005. Goal 005 proves layered semantic packs and semantic-guided composition through deterministic reports under `.llmgc/procedural/semantic-guided-composition/`. Product Slice 058A repairs false-positive acceptance and contract-validation gaps in that same artifact path. The user confirmed `semantic_guided_composition_artifact_verification passed` before Goal 006. Goal 006 proves semantic-selected package/runtime composition through deterministic reports under `.llmgc/procedural/semantic-runtime-composition/`. Product Slice 063A repairs binding/runtime false positives in that same artifact path. The user confirmed `semantic_selected_runtime_composition_artifact_verification passed` before Goal 007. Goal 007 proves connected world travel and deterministic runtime world state through reports under `.llmgc/procedural/connected-world-travel/`. The user confirmed `connected_world_travel_state_artifact_verification passed` before Goal 008. Goal 008 proves rule-pack gameplay family foundations through reports under `.llmgc/procedural/rule-pack-gameplay-family-foundations/`. Product Slice 077A repairs the same Goal 008 artifact family without changing the gate. The user confirmed `rule_pack_gameplay_family_artifact_verification passed` before Goal 009. Goal 009 proves rule-pack combat/faction/social/work/theft foundations through reports under `.llmgc/procedural/rule-pack-combat-faction-social-work-theft/`, and S084A repairs the artifact-review correctness gaps in that same folder. The user confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed` before Goal 010. Goal 010 proves deterministic content generation at scale through reports under `.llmgc/procedural/content-generation-scale/`. The user confirmed `content_generation_at_scale_artifact_verification passed` before Goal 011. Goal 011 proves the minimum deterministic asset pipeline through reports under `.llmgc/procedural/minimum-asset-pipeline/`; S098A repairs the Goal 011 artifact family without changing the gate. The next step is `minimum_asset_pipeline_artifact_verification`; do not start post-Goal-011 work without a new explicit user request.
+Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The user confirmed `manual_quest_dialog_interaction_family_verification passed` before Goal 005. Goal 005 proves layered semantic packs and semantic-guided composition through deterministic reports under `.llmgc/procedural/semantic-guided-composition/`. Product Slice 058A repairs false-positive acceptance and contract-validation gaps in that same artifact path. The user confirmed `semantic_guided_composition_artifact_verification passed` before Goal 006. Goal 006 proves semantic-selected package/runtime composition through deterministic reports under `.llmgc/procedural/semantic-runtime-composition/`. Product Slice 063A repairs binding/runtime false positives in that same artifact path. The user confirmed `semantic_selected_runtime_composition_artifact_verification passed` before Goal 007. Goal 007 proves connected world travel and deterministic runtime world state through reports under `.llmgc/procedural/connected-world-travel/`. The user confirmed `connected_world_travel_state_artifact_verification passed` before Goal 008. Goal 008 proves rule-pack gameplay family foundations through reports under `.llmgc/procedural/rule-pack-gameplay-family-foundations/`. Product Slice 077A repairs the same Goal 008 artifact family without changing the gate. The user confirmed `rule_pack_gameplay_family_artifact_verification passed` before Goal 009. Goal 009 proves rule-pack combat/faction/social/work/theft foundations through reports under `.llmgc/procedural/rule-pack-combat-faction-social-work-theft/`, and S084A repairs the artifact-review correctness gaps in that same folder. The user confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed` before Goal 010. Goal 010 proves deterministic content generation at scale through reports under `.llmgc/procedural/content-generation-scale/`. The user confirmed `content_generation_at_scale_artifact_verification passed` before Goal 011. Goal 011 proves the minimum deterministic asset pipeline through reports under `.llmgc/procedural/minimum-asset-pipeline/`; S098A repairs the Goal 011 artifact family without changing the gate. The user confirmed `minimum_asset_pipeline_artifact_verification passed` before Goal 012. Goal 012 proves the Unity runtime export vertical slice through reports and real export files under `.llmgc/procedural/unity-runtime-export/`. The next step is `unity_runtime_export_vertical_slice_artifact_verification`; do not start post-Goal-012 work without a new explicit user request.
+
+## Goal 012 Summary
+
+Goal 012: Unity Runtime Export Vertical Slice.
+
+Completed behavior:
+
+- records `minimum_asset_pipeline_artifact_verification passed` from the user prompt;
+- adds an Application-layer deterministic Unity runtime export acceptance service under `Design/UnityRuntimeExport`;
+- selects one accepted Goal 010 generated package/runtime thread and matching Goal 011 resolved asset manifest without branching on style ids;
+- materializes real deterministic export files under `.llmgc/procedural/unity-runtime-export/export/`;
+- writes canonical `game-package.json`, generated-content payload, asset payload index, runtime config, launch metadata and export manifest with relative paths, hashes and byte counts;
+- validates package refs, selected loop ids, command hints, asset refs, export file hashes and byte counts headlessly;
+- proves same-input replay and a second valid input hash difference;
+- rejects missing package evidence, missing asset evidence, package hash mismatch, asset manifest hash mismatch, unresolved package/asset ids, missing files, hash mismatch, unsafe paths, executable payload injection, expectation-only report evidence, Runtime Preview dependency, Unity build claims and cross-pack/cross-asset leakage causally;
+- adds the `unity-runtime-export` product smoke scenario;
+- leaves `windowsExecutableProduced=false` and `unityEditorExecuted=false`;
+- did not add WinForms/UI, Runtime Preview dependency, Unity Editor/build execution, Windows executable claims, external providers/media/LLM/RAG/Lua, generator-library edits, `.sln`/`.csproj` changes, public GamePackage/runtime schema changes or post-Goal-012 work.
+
+Recorded checks from Goal 012:
+
+- `UnityRuntimeExport` focused tests: 5/5 passed.
+- Goal 012 filtered tests (`UnityRuntimeExport` / `MinimumAssetPipeline` / `ContentGenerationScale` / `CurrentGeneratorStateDocsTests`): 28/28 passed.
+- `unity-runtime-export` product smoke: 1/1 passed.
+- `check-all.ps1`: 786/786 tests passed, build 0 warnings / 0 errors.
 
 ## Goal 011 Summary
 

@@ -1,0 +1,645 @@
+{
+  "accepted": true,
+  "manualGate": "unity_runtime_export_vertical_slice_artifact_verification",
+  "goal011GateRecorded": true,
+  "completedSlices": [
+    "S099",
+    "S100",
+    "S101",
+    "S102",
+    "S103",
+    "S104",
+    "S105"
+  ],
+  "productSmokeRoute": "unity-runtime-export",
+  "selectedInput": {
+    "accepted": true,
+    "selectionPolicy": "first_matching_accepted_pack_by_pack_id",
+    "packageId": "game/content_generation/frontier-survival",
+    "packId": "frontier_survival",
+    "sourcePackageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+    "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+    "assetManifestPackageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+    "assetManifestContentHash": "fdc60f480af410f20befd24f47603adfcb2a8804c38ac0b2668697a11e8849ca",
+    "contentCatalogHash": "fdc60f480af410f20befd24f47603adfcb2a8804c38ac0b2668697a11e8849ca",
+    "startMapId": "map/frontier-survival/start",
+    "selectedThreadId": "thread/frontier-survival/000",
+    "selectedGeneratedIds": [
+      "choice/frontier-survival/8cb7a7d288/028",
+      "dialogue/frontier-survival/51924b073c/028",
+      "event/frontier-survival/4f2d855a33/000",
+      "item/frontier-survival/7f81222990/004",
+      "item/frontier-survival/921dffbe2c/007",
+      "loot_table/frontier-survival/primary",
+      "objective/frontier-survival/67ba57beeb/000",
+      "quest/frontier-survival/c2ed6dc235/000"
+    ],
+    "selectedRuntimeCommands": [
+      {
+        "commandId": "cmd/frontier-survival/000/choose_dialogue",
+        "commandType": "dialogue/choose",
+        "targetId": "choice/frontier-survival/8cb7a7d288/028",
+        "secondaryTargetId": "quest/frontier-survival/c2ed6dc235/000",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/event_add_item",
+        "commandType": "event/add_item",
+        "targetId": "item/frontier-survival/7f81222990/004",
+        "secondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/open_dialogue",
+        "commandType": "dialogue/open",
+        "targetId": "dialogue/frontier-survival/51924b073c/028",
+        "secondaryTargetId": "",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/roll_loot",
+        "commandType": "loot/roll",
+        "targetId": "loot_table/frontier-survival/primary",
+        "secondaryTargetId": "",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/start_quest",
+        "commandType": "quest/start",
+        "targetId": "quest/frontier-survival/c2ed6dc235/000",
+        "secondaryTargetId": "",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      }
+    ],
+    "selectedAssetRefs": [
+      {
+        "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "slotId": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "category": "item_icon_ui_graphic",
+        "mediaType": "image/png",
+        "contentId": "item/frontier-survival/032bdc46ab/062",
+        "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+        "exportRelativePath": "assets/item-icon-ui-graphic/asset-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+        "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+        "byteCount": 268,
+        "resolutionKind": "fallback"
+      },
+      {
+        "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+        "slotId": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+        "category": "music_ambience",
+        "mediaType": "audio/ogg",
+        "contentId": "event/frontier-survival/00ba2e87c9/005",
+        "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-00ba2e87c9-005-caravan-music-fixture-000.fixture",
+        "exportRelativePath": "assets/music-ambience/asset-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-00ba2e87c9-005-caravan-music-fixture-000.fixture",
+        "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+        "byteCount": 69,
+        "resolutionKind": "import"
+      },
+      {
+        "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+        "slotId": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+        "category": "npc_portrait",
+        "mediaType": "image/png",
+        "contentId": "npc/frontier-survival/11ffe0aa42/018",
+        "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-11ffe0aa42-018-caravan-portrait-fallback-000.fixture",
+        "exportRelativePath": "assets/npc-portrait/asset-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-11ffe0aa42-018-caravan-portrait-fallback-000.fixture",
+        "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+        "byteCount": 266,
+        "resolutionKind": "fallback"
+      },
+      {
+        "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+        "slotId": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+        "category": "sound_effect",
+        "mediaType": "audio/wav",
+        "contentId": "dialogue/frontier-survival/0490f2f50e/013",
+        "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-0490f2f50e-013-caravan-sound-fallback-000.fixture",
+        "exportRelativePath": "assets/sound-effect/asset-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-0490f2f50e-013-caravan-sound-fallback-000.fixture",
+        "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+        "byteCount": 270,
+        "resolutionKind": "fallback"
+      },
+      {
+        "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+        "slotId": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+        "category": "tile_region_graphic",
+        "mediaType": "image/png",
+        "contentId": "map/frontier-survival/start",
+        "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-tile-region-graphic-map-frontier-survival-start-caravan-tile-fallback-002.fixture",
+        "exportRelativePath": "assets/tile-region-graphic/asset-game-content-generation-frontier-survival-tile-region-graphic-map-frontier-survival-start-caravan-tile-fallback-002.fixture",
+        "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+        "byteCount": 247,
+        "resolutionKind": "fallback"
+      }
+    ],
+    "runtimeStateHash": "72a5e3f7bf144925e85968a247ded51adaa34b8e9b25712da90f1e410e436c47",
+    "restoredRuntimeStateHash": "72a5e3f7bf144925e85968a247ded51adaa34b8e9b25712da90f1e410e436c47",
+    "saveLoadRoundtripPassed": true,
+    "packageValidatorClean": true,
+    "diagnostics": []
+  },
+  "exportFolderRelativePath": ".llmgc/procedural/unity-runtime-export/export",
+  "exportFileCount": 10,
+  "exportByteCount": 438774,
+  "exportManifestHash": "9ad928a4855237b703945fb8db3b230496cce41723dce96001ec2d2ecfeb7e27",
+  "runtimeConfigHash": "5d9393fae7306e18d9bd8a1d6c10754b04d36166ace0f37c20f8c5fb4c328beb",
+  "deterministicHash": "0523bc43949460a8bd7e9fd6b6bf0ece6c01d24a194516de300c007ef0deb6b7",
+  "validMatrixPassed": true,
+  "invalidMatrixPassed": true,
+  "packageValidationPassed": true,
+  "assetManifestValidationPassed": true,
+  "exportManifestValidationPassed": true,
+  "selectedLoopResolutionPassed": true,
+  "replayEvidence": {
+    "passed": true,
+    "firstExportManifestHash": "9ad928a4855237b703945fb8db3b230496cce41723dce96001ec2d2ecfeb7e27",
+    "replayedExportManifestHash": "9ad928a4855237b703945fb8db3b230496cce41723dce96001ec2d2ecfeb7e27",
+    "firstRuntimeConfigHash": "5d9393fae7306e18d9bd8a1d6c10754b04d36166ace0f37c20f8c5fb4c328beb",
+    "replayedRuntimeConfigHash": "5d9393fae7306e18d9bd8a1d6c10754b04d36166ace0f37c20f8c5fb4c328beb"
+  },
+  "variationEvidence": {
+    "passed": true,
+    "primaryPackId": "frontier_survival",
+    "variationPackId": "gothic_mystery",
+    "primaryExportManifestHash": "9ad928a4855237b703945fb8db3b230496cce41723dce96001ec2d2ecfeb7e27",
+    "variationExportManifestHash": "57f35df242eb528f3b7af56d5574175324841c4556f4fe6aadadc2c508473d38"
+  },
+  "contractValidation": {
+    "passed": true,
+    "packageValidatorClean": true,
+    "assetManifestValid": true,
+    "exportManifestValid": true,
+    "selectedLoopResolutionPassed": true,
+    "runtimePreviewDependencyFree": true,
+    "externalExecutionFlagsFalse": true,
+    "windowsExecutableProduced": false,
+    "unityEditorExecuted": false,
+    "diagnostics": []
+  },
+  "invalidMatrix": {
+    "passed": true,
+    "scenarioCount": 15,
+    "scenarios": [
+      {
+        "scenarioId": "absolute_export_path",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.unsafe_export_path",
+            "target": "C:/escape.fixture",
+            "message": "Export asset path must be relative and contained under the export root."
+          }
+        ]
+      },
+      {
+        "scenarioId": "asset_manifest_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.asset_manifest_hash_mismatch",
+            "target": "sha256/not-the-asset-manifest",
+            "message": "Runtime config asset manifest hash must match the selected Goal 011 manifest."
+          }
+        ]
+      },
+      {
+        "scenarioId": "copied_expectation_report_without_files",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.exported_asset_file_missing",
+            "target": "assets/copied-report-only.fixture",
+            "message": "Runtime asset ref must resolve to a real exported file."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_pack_or_cross_asset_leakage",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.asset_ref_unresolved",
+            "target": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+            "message": "Runtime asset ref must be a strict subset of the selected Goal 011 asset manifest."
+          }
+        ]
+      },
+      {
+        "scenarioId": "executable_script_provider_payload_injection",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.executable_payload_injection",
+            "target": "assets/payload.exe",
+            "message": "Executable, script or provider payloads are not valid Unity runtime export assets."
+          },
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.exported_asset_file_missing",
+            "target": "assets/payload.exe",
+            "message": "Runtime asset ref must resolve to a real exported file."
+          }
+        ]
+      },
+      {
+        "scenarioId": "mismatched_exported_file_hash",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.exported_asset_hash_mismatch",
+            "target": "assets/item-icon-ui-graphic/asset-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+            "message": "Runtime asset ref hash must match the exported file bytes."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_exported_file",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.exported_asset_file_missing",
+            "target": "assets/missing.fixture",
+            "message": "Runtime asset ref must resolve to a real exported file."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_prior_asset_manifest_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.asset_manifest_hash_mismatch",
+            "target": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+            "message": "Runtime config asset manifest hash must match the selected Goal 011 manifest."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_prior_package_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.package_hash_mismatch",
+            "target": "game/content_generation/frontier-survival",
+            "message": "Runtime config package id/hash must match the selected package evidence."
+          }
+        ]
+      },
+      {
+        "scenarioId": "package_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.package_hash_mismatch",
+            "target": "game/content_generation/frontier-survival",
+            "message": "Runtime config package id/hash must match the selected package evidence."
+          }
+        ]
+      },
+      {
+        "scenarioId": "path_traversal_export_path",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.unsafe_export_path",
+            "target": "../escape.fixture",
+            "message": "Export asset path must be relative and contained under the export root."
+          }
+        ]
+      },
+      {
+        "scenarioId": "runtime_preview_only_dependency",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.runtime_preview_dependency",
+            "target": "runtime_config",
+            "message": "Unity runtime export must not depend on WinForms Runtime Preview."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unity_editor_build_claim_without_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.unity_editor_claim_without_artifact",
+            "target": "launch_metadata",
+            "message": "Unity Editor/build execution is not accepted without a real reported artifact."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unresolved_asset_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.asset_ref_unresolved",
+            "target": "asset/missing",
+            "message": "Runtime asset ref must be a strict subset of the selected Goal 011 asset manifest."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unresolved_package_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_runtime_export.contract.start_map_unresolved",
+            "target": "map/missing",
+            "message": "Start map must resolve in selected package data."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.asset_manifest_hash_mismatch",
+        "target": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+        "message": "Runtime config asset manifest hash must match the selected Goal 011 manifest."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.asset_manifest_hash_mismatch",
+        "target": "sha256/not-the-asset-manifest",
+        "message": "Runtime config asset manifest hash must match the selected Goal 011 manifest."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.asset_ref_unresolved",
+        "target": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "message": "Runtime asset ref must be a strict subset of the selected Goal 011 asset manifest."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.asset_ref_unresolved",
+        "target": "asset/missing",
+        "message": "Runtime asset ref must be a strict subset of the selected Goal 011 asset manifest."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.executable_payload_injection",
+        "target": "assets/payload.exe",
+        "message": "Executable, script or provider payloads are not valid Unity runtime export assets."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.exported_asset_file_missing",
+        "target": "assets/copied-report-only.fixture",
+        "message": "Runtime asset ref must resolve to a real exported file."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.exported_asset_file_missing",
+        "target": "assets/missing.fixture",
+        "message": "Runtime asset ref must resolve to a real exported file."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.exported_asset_file_missing",
+        "target": "assets/payload.exe",
+        "message": "Runtime asset ref must resolve to a real exported file."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.exported_asset_hash_mismatch",
+        "target": "assets/item-icon-ui-graphic/asset-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+        "message": "Runtime asset ref hash must match the exported file bytes."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.package_hash_mismatch",
+        "target": "game/content_generation/frontier-survival",
+        "message": "Runtime config package id/hash must match the selected package evidence."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.package_hash_mismatch",
+        "target": "game/content_generation/frontier-survival",
+        "message": "Runtime config package id/hash must match the selected package evidence."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.runtime_preview_dependency",
+        "target": "runtime_config",
+        "message": "Unity runtime export must not depend on WinForms Runtime Preview."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.start_map_unresolved",
+        "target": "map/missing",
+        "message": "Start map must resolve in selected package data."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.unity_editor_claim_without_artifact",
+        "target": "launch_metadata",
+        "message": "Unity Editor/build execution is not accepted without a real reported artifact."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.unsafe_export_path",
+        "target": "../escape.fixture",
+        "message": "Export asset path must be relative and contained under the export root."
+      },
+      {
+        "severity": "error",
+        "code": "unity_runtime_export.contract.unsafe_export_path",
+        "target": "C:/escape.fixture",
+        "message": "Export asset path must be relative and contained under the export root."
+      }
+    ]
+  },
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "luaExecuted": false,
+    "mediaExecuted": false,
+    "unityEditorExecuted": false,
+    "unityBuildExecuted": false,
+    "windowsExecutableExecuted": false
+  },
+  "windowsExecutableProduced": false,
+  "unityEditorExecuted": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "runtimePreviewDependency": false,
+  "generatorLibraryChanged": false,
+  "diagnostics": [
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.asset_manifest_hash_mismatch",
+      "target": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+      "message": "Runtime config asset manifest hash must match the selected Goal 011 manifest."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.asset_manifest_hash_mismatch",
+      "target": "sha256/not-the-asset-manifest",
+      "message": "Runtime config asset manifest hash must match the selected Goal 011 manifest."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.asset_ref_unresolved",
+      "target": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "message": "Runtime asset ref must be a strict subset of the selected Goal 011 asset manifest."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.asset_ref_unresolved",
+      "target": "asset/missing",
+      "message": "Runtime asset ref must be a strict subset of the selected Goal 011 asset manifest."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.executable_payload_injection",
+      "target": "assets/payload.exe",
+      "message": "Executable, script or provider payloads are not valid Unity runtime export assets."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.exported_asset_file_missing",
+      "target": "assets/copied-report-only.fixture",
+      "message": "Runtime asset ref must resolve to a real exported file."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.exported_asset_file_missing",
+      "target": "assets/missing.fixture",
+      "message": "Runtime asset ref must resolve to a real exported file."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.exported_asset_file_missing",
+      "target": "assets/payload.exe",
+      "message": "Runtime asset ref must resolve to a real exported file."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.exported_asset_hash_mismatch",
+      "target": "assets/item-icon-ui-graphic/asset-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+      "message": "Runtime asset ref hash must match the exported file bytes."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.package_hash_mismatch",
+      "target": "game/content_generation/frontier-survival",
+      "message": "Runtime config package id/hash must match the selected package evidence."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.package_hash_mismatch",
+      "target": "game/content_generation/frontier-survival",
+      "message": "Runtime config package id/hash must match the selected package evidence."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.runtime_preview_dependency",
+      "target": "runtime_config",
+      "message": "Unity runtime export must not depend on WinForms Runtime Preview."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.start_map_unresolved",
+      "target": "map/missing",
+      "message": "Start map must resolve in selected package data."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.unity_editor_claim_without_artifact",
+      "target": "launch_metadata",
+      "message": "Unity Editor/build execution is not accepted without a real reported artifact."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.unsafe_export_path",
+      "target": "../escape.fixture",
+      "message": "Export asset path must be relative and contained under the export root."
+    },
+    {
+      "severity": "error",
+      "code": "unity_runtime_export.contract.unsafe_export_path",
+      "target": "C:/escape.fixture",
+      "message": "Export asset path must be relative and contained under the export root."
+    },
+    {
+      "severity": "info",
+      "code": "unity_runtime_export.asset_manifest_validation_passed",
+      "target": "asset_manifest",
+      "message": "Selected asset refs must resolve to exported files with matching hashes."
+    },
+    {
+      "severity": "info",
+      "code": "unity_runtime_export.goal011_gate_recorded",
+      "target": "minimum_asset_pipeline_artifact_verification",
+      "message": "User-confirmed Goal 011 artifact verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "unity_runtime_export.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios must fail through the export validation path."
+    },
+    {
+      "severity": "info",
+      "code": "unity_runtime_export.no_external_execution",
+      "target": "harness",
+      "message": "No Unity Editor, Unity build, Windows executable, LLM, RAG, provider, Lua or media execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "unity_runtime_export.package_validation_passed",
+      "target": "package",
+      "message": "The selected package must remain validator-clean."
+    },
+    {
+      "severity": "info",
+      "code": "unity_runtime_export.valid_matrix_passed",
+      "target": "valid_matrix",
+      "message": "A deterministic export, replay and second valid input hash difference are required."
+    }
+  ]
+}

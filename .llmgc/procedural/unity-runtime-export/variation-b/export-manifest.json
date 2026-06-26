@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "unity_runtime_export_manifest_v1",
+  "packageId": "game/content_generation/gothic-mystery",
+  "packageHash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+  "assetManifestHash": "09dc29d8c7d41df403e20122d035be088b3746d32151df7e892e895c7bbcf195",
+  "fileCount": 10,
+  "totalByteCount": 431638,
+  "manifestHash": "57f35df242eb528f3b7af56d5574175324841c4556f4fe6aadadc2c508473d38",
+  "files": [
+    {
+      "relativePath": "assets/asset-manifest.json",
+      "kind": "json_payload",
+      "logicalId": "assets/asset-manifest.json",
+      "hash": "8420c0cc833e4df1855d1592db170b4e7b04da62b8263932a574e506414356b7",
+      "byteCount": 5428
+    },
+    {
+      "relativePath": "assets/item-icon-ui-graphic/asset-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-0018fb2e6f-068-frontier-icon-fixture-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "assets/music-ambience/asset-game-content-generation-gothic-mystery-music-ambience-event-gothic-mystery-020e1a3098-011-frontier-music-fixture-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-020e1a3098-011/frontier-music-fixture/000",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "assets/npc-portrait/asset-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-0a7aa5762f-022-frontier-portrait-fixture-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-0a7aa5762f-022/frontier-portrait-fixture/000",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "assets/sound-effect/asset-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-208fbe915b-037-frontier-sound-fallback-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-208fbe915b-037/frontier-sound-fallback/000",
+      "hash": "d2ae52126f66bee797f07d3407b0d75514913406ecdb2d9e77cd40927c216fbb",
+      "byteCount": 263
+    },
+    {
+      "relativePath": "assets/tile-region-graphic/asset-game-content-generation-gothic-mystery-tile-region-graphic-map-gothic-mystery-start-frontier-tile-fixture-000.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/000",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "game-data/game-package.json",
+      "kind": "json_payload",
+      "logicalId": "game-data/game-package.json",
+      "hash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+      "byteCount": 414344
+    },
+    {
+      "relativePath": "game-data/generated-content-provenance.json",
+      "kind": "json_payload",
+      "logicalId": "game-data/generated-content-provenance.json",
+      "hash": "89fa2d0004087006aa10e5fc64fb1d65fa18d2c109c36ab4cc52c18ccf68549d",
+      "byteCount": 2463
+    },
+    {
+      "relativePath": "runtime/launch-metadata.json",
+      "kind": "json_payload",
+      "logicalId": "runtime/launch-metadata.json",
+      "hash": "807ffc07ea1cdcbfe5ec002d170512086dc2b7c3e0eb93f20b0a879b6ca16c1f",
+      "byteCount": 591
+    },
+    {
+      "relativePath": "runtime/unity-runtime-config.json",
+      "kind": "json_payload",
+      "logicalId": "runtime/unity-runtime-config.json",
+      "hash": "c6eae5e6a462fce07d45f2156c9cf3e8481ed34d3af4aaaf941c25c3f34c82e1",
+      "byteCount": 8273
+    }
+  ]
+}

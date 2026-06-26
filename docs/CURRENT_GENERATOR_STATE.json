@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T14:30:00Z",
+    "updated_at_utc":  "2026-06-26T15:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 011 minimum deterministic asset pipeline corrected by S098A",
-    "gate_status":  "goal_011_minimum_asset_pipeline_artifact_verification_required",
+    "current_phase_title":  "Goal 012 Unity runtime export vertical slice",
+    "gate_status":  "goal_012_unity_runtime_export_vertical_slice_artifact_verification_required",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "product_slice_098a_minimum_asset_pipeline_correctness_hotfix",
-    "active_manual_gate":  "Minimum asset pipeline artifact verification is the next stop marker after Goal 011.",
-    "current_user_action":  "Review or hand off the generated .llmgc/procedural/minimum-asset-pipeline folder; do not mark minimum_asset_pipeline_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 011 records the user-confirmed content_generation_at_scale_artifact_verification passed gate and completes S092-S098. S098A repairs the same Goal 011 artifact family after external review: invalid/fake/leak scenarios now flow through shared request, binding, resolver and validation paths; source/package/content hashes are checked against the source bytes and package/content used by the run; cross-pack leakage is rejected structurally; and category-specific binding evidence is recorded through existing AssetCatalog/package seams. It writes deterministic artifacts under .llmgc/procedural/minimum-asset-pipeline and still stops at minimum_asset_pipeline_artifact_verification required.",
+    "last_completed_product_slice_id":  "goal_012_unity_runtime_export_vertical_slice",
+    "active_manual_gate":  "Unity runtime export vertical slice artifact verification is the next stop marker after Goal 012.",
+    "current_user_action":  "Review or hand off the generated .llmgc/procedural/unity-runtime-export folder; do not mark unity_runtime_export_vertical_slice_artifact_verification passed until the artifact review accepts it.",
+    "recommended_next_decision":  "Goal 012 records the user-confirmed minimum_asset_pipeline_artifact_verification passed gate and completes S099-S105. It adds a narrow Application-layer Unity runtime export acceptance service, selects accepted Goal 010 package/runtime-loop evidence and matching Goal 011 asset evidence, materializes deterministic real export files under .llmgc/procedural/unity-runtime-export/export, validates package refs, selected loop refs, asset refs, export file hashes and byte counts headlessly, rejects invalid/fake/leak scenarios causally, and adds the unity-runtime-export product smoke route. It stops at unity_runtime_export_vertical_slice_artifact_verification required and does not start post-Goal-012 work.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "minimum_asset_pipeline_artifact_verification"
+                                                        "unity_runtime_export_vertical_slice_artifact_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -37,7 +37,8 @@
                            "goal_008_manual_gate":  "rule_pack_gameplay_family_artifact_verification",
                            "goal_009_manual_gate":  "rule_pack_combat_faction_social_work_theft_artifact_verification",
                            "goal_010_manual_gate":  "content_generation_at_scale_artifact_verification",
-                           "goal_011_manual_gate":  "minimum_asset_pipeline_artifact_verification"
+                           "goal_011_manual_gate":  "minimum_asset_pipeline_artifact_verification",
+                           "goal_012_manual_gate":  "unity_runtime_export_vertical_slice_artifact_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -58,15 +59,16 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "product_slice_098a_minimum_asset_pipeline_correctness_hotfix",
-                                         "title":  "Minimum Asset Pipeline Correctness Hotfix",
-                                         "completed_at_utc":  "2026-06-26T14:30:00Z",
-                                         "summary":  "S098A repairs the Goal 011 minimum asset pipeline artifact family without changing the gate. It keeps the Application-layer acceptance seam, turns duplicate slot, tampered hash, over-budget, cross-pack leakage and default resolver scenarios into causal mutations through shared request/binding/resolver/validation paths, adds source/package/content hash-integrity checks, records category-specific binding evidence through existing AssetCatalog/package seams, strengthens product smoke selected-ref checks, and rewrites artifacts under .llmgc/procedural/minimum-asset-pipeline. The active manual gate remains minimum_asset_pipeline_artifact_verification required.",
-                                         "scenario_id":  "minimum-asset-pipeline",
+                                         "slice_id":  "goal_012_unity_runtime_export_vertical_slice",
+                                         "title":  "Unity Runtime Export Vertical Slice",
+                                         "completed_at_utc":  "2026-06-26T15:30:00Z",
+                                         "summary":  "Goal 012 completes S099-S105 after the user confirmed minimum_asset_pipeline_artifact_verification passed. It keeps export outside Runtime Preview, adds a narrow Application-layer Unity runtime export contract, selects one accepted generated package/runtime thread and matching resolved asset manifest, materializes real deterministic export files with hashes and byte counts, validates the package payload, runtime config, selected loop refs and asset payload headlessly, rejects invalid/fake/leak scenarios causally, and adds the unity-runtime-export product smoke route. The active manual gate is unity_runtime_export_vertical_slice_artifact_verification required.",
+                                         "scenario_id":  "unity-runtime-export",
                                          "checks":  [
-                                                        "MinimumAssetPipeline focused tests: 6/6 passed",
-                                                        "minimum-asset-pipeline product smoke: 1/1 passed",
-                                                        "check-all.ps1: 781/781 tests passed, build 0 warnings / 0 errors"
+                                                        "UnityRuntimeExport focused tests: 5/5 passed",
+                                                        "Goal 012 filtered tests (UnityRuntimeExport/MinimumAssetPipeline/ContentGenerationScale/CurrentGeneratorStateDocsTests): 28/28 passed",
+                                                        "unity-runtime-export product smoke: 1/1 passed",
+                                                        "check-all.ps1: 786/786 tests passed, build 0 warnings / 0 errors"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -326,7 +328,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "minimum_asset_pipeline_artifact_verification"
+                                          "unity_runtime_export_vertical_slice_artifact_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -347,11 +349,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "minimum_asset_pipeline_artifact_verification",
-    "recommended_next_work_item_title":  "Minimum asset pipeline artifact verification.",
-    "recommended_next_task_file":  ".llmgc/procedural/minimum-asset-pipeline/minimum-asset-pipeline-verification.md",
+    "recommended_next_work_item":  "unity_runtime_export_vertical_slice_artifact_verification",
+    "recommended_next_work_item_title":  "Unity runtime export vertical slice artifact verification.",
+    "recommended_next_task_file":  ".llmgc/procedural/unity-runtime-export/unity-runtime-export-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Minimum asset pipeline artifact verification"
+                                              "Unity runtime export vertical slice artifact verification"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -417,9 +419,10 @@
                              "Rule-pack gameplay family foundations acceptance sidecars",
                              "Rule-pack combat/faction/social/work/theft acceptance sidecars",
                              "Content generation at scale acceptance sidecars",
-                             "Minimum deterministic asset pipeline acceptance sidecars"
+                             "Minimum deterministic asset pipeline acceptance sidecars",
+                             "Unity runtime export vertical slice acceptance sidecars"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 011 and S098A stop at minimum_asset_pipeline_artifact_verification and do not start post-Goal-011 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 012 stop at unity_runtime_export_vertical_slice_artifact_verification and do not start post-Goal-012 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -429,12 +432,33 @@
                                                               "next_action":  "goal_011_minimum_asset_pipeline"
                                                           },
     "minimum_asset_pipeline_artifact_verification":  {
-                                                         "status":  "required",
-                                                         "evidence_source":  "pending_external_artifact_review_after_goal_011",
+                                                         "status":  "passed",
+                                                         "evidence_source":  "user_prompt_before_goal_012",
                                                          "observed_result":  [
-
+                                                             "minimum_asset_pipeline_artifact_verification passed"
                                                                              ],
-                                                         "next_action":  "do_not_start_post_goal_011_work_without_new_explicit_user_request"
+                                                         "next_action":  "goal_012_unity_runtime_export_vertical_slice"
+                                                     },
+    "unity_runtime_export_vertical_slice_artifact_verification":  {
+                                                                      "status":  "required",
+                                                                      "evidence_source":  "pending_external_artifact_review_after_goal_012",
+                                                                      "observed_result":  [
+
+                                                                                          ],
+                                                                      "next_action":  "do_not_start_post_goal_012_work_without_new_explicit_user_request"
+                                                                  },
+    "goal_012_unity_runtime_export_vertical_slice":  {
+                                                         "slice_id":  "goal_012_unity_runtime_export_vertical_slice",
+                                                         "title":  "Unity Runtime Export Vertical Slice",
+                                                         "completed_at_utc":  "2026-06-26T15:30:00Z",
+                                                         "summary":  "Goal 012 completes S099-S105 after the user confirmed minimum_asset_pipeline_artifact_verification passed. It adds a narrow Application-layer Unity runtime export acceptance service under Design/UnityRuntimeExport, selects one accepted Goal 010 generated package/runtime thread and matching Goal 011 asset manifest, materializes real deterministic export files under .llmgc/procedural/unity-runtime-export/export, writes canonical game package, generated-content payload, asset payload index, runtime config, launch metadata and export manifest with relative paths, hashes and byte counts, validates package refs, selected loop ids, command hints, asset refs and export file bytes headlessly, proves replay and variation hash difference, rejects invalid/fake/leak scenarios causally, and adds the unity-runtime-export product smoke route. It leaves windowsExecutableProduced=false and unityEditorExecuted=false. The active manual gate is unity_runtime_export_vertical_slice_artifact_verification required.",
+                                                         "scenario_id":  "unity-runtime-export",
+                                                         "checks":  [
+                                                                        "UnityRuntimeExport focused tests: 5/5 passed",
+                                                                        "Goal 012 filtered tests (UnityRuntimeExport/MinimumAssetPipeline/ContentGenerationScale/CurrentGeneratorStateDocsTests): 28/28 passed",
+                                                                        "unity-runtime-export product smoke: 1/1 passed",
+                                                                        "check-all.ps1: 786/786 tests passed, build 0 warnings / 0 errors"
+                                                                    ]
                                                      },
     "goal_011_minimum_asset_pipeline":  {
                                             "slice_id":  "goal_011_minimum_asset_pipeline",

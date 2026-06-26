@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "unity_runtime_asset_payload_v1",
+  "packageId": "game/content_generation/frontier-survival",
+  "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+  "assetManifestPackageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+  "assetManifestContentHash": "fdc60f480af410f20befd24f47603adfcb2a8804c38ac0b2668697a11e8849ca",
+  "assets": [
+    {
+      "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "slotId": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "category": "item_icon_ui_graphic",
+      "mediaType": "image/png",
+      "contentId": "item/frontier-survival/032bdc46ab/062",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+      "exportRelativePath": "assets/item-icon-ui-graphic/asset-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+      "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+      "byteCount": 268,
+      "resolutionKind": "fallback"
+    },
+    {
+      "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+      "slotId": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+      "category": "music_ambience",
+      "mediaType": "audio/ogg",
+      "contentId": "event/frontier-survival/00ba2e87c9/005",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-00ba2e87c9-005-caravan-music-fixture-000.fixture",
+      "exportRelativePath": "assets/music-ambience/asset-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-00ba2e87c9-005-caravan-music-fixture-000.fixture",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+      "slotId": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+      "category": "npc_portrait",
+      "mediaType": "image/png",
+      "contentId": "npc/frontier-survival/11ffe0aa42/018",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-11ffe0aa42-018-caravan-portrait-fallback-000.fixture",
+      "exportRelativePath": "assets/npc-portrait/asset-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-11ffe0aa42-018-caravan-portrait-fallback-000.fixture",
+      "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+      "byteCount": 266,
+      "resolutionKind": "fallback"
+    },
+    {
+      "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+      "slotId": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+      "category": "sound_effect",
+      "mediaType": "audio/wav",
+      "contentId": "dialogue/frontier-survival/0490f2f50e/013",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-0490f2f50e-013-caravan-sound-fallback-000.fixture",
+      "exportRelativePath": "assets/sound-effect/asset-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-0490f2f50e-013-caravan-sound-fallback-000.fixture",
+      "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+      "byteCount": 270,
+      "resolutionKind": "fallback"
+    },
+    {
+      "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+      "slotId": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+      "category": "tile_region_graphic",
+      "mediaType": "image/png",
+      "contentId": "map/frontier-survival/start",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-tile-region-graphic-map-frontier-survival-start-caravan-tile-fallback-002.fixture",
+      "exportRelativePath": "assets/tile-region-graphic/asset-game-content-generation-frontier-survival-tile-region-graphic-map-frontier-survival-start-caravan-tile-fallback-002.fixture",
+      "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+      "byteCount": 247,
+      "resolutionKind": "fallback"
+    }
+  ]
+}
