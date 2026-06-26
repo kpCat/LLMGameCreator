@@ -1,0 +1,486 @@
+{
+  "accepted": false,
+  "finalStatus": "minimum_playable_generated_game_verification",
+  "manualGate": "minimum_playable_generated_game_verification",
+  "previousAcceptedGate": "unity_alpha_readable_presentation_verification passed",
+  "completedSlices": [
+    "S162",
+    "S163",
+    "S164",
+    "S165",
+    "S166",
+    "S167",
+    "S168",
+    "S169"
+  ],
+  "productSmokeRoute": "minimum-playable-generated-game",
+  "selectedStyleId": "frontier_survival",
+  "selectedPackageId": "game/content_generation/frontier-survival",
+  "selectedThreadId": "thread/frontier-survival/000",
+  "selectedQuestId": "quest/frontier-survival/c2ed6dc235/000",
+  "selectedRewardId": "item/frontier-survival/7f81222990/004",
+  "reviewPackageCreated": true,
+  "reviewPackageVerified": true,
+  "executablePresent": true,
+  "dataFolderPresent": true,
+  "streamingAssetsPayloadVerified": true,
+  "automatedLaunchVerified": true,
+  "automatedQuestCompletionVerified": true,
+  "readablePresentationVerified": true,
+  "manualChecklistWritten": true,
+  "manualReviewRequired": true,
+  "minimumPlayableGeneratedGameVerified": true,
+  "invalidMatrix": {
+    "passed": true,
+    "scenarioCount": 25,
+    "rejectedCount": 25,
+    "scenarios": [
+      {
+        "scenarioId": "asset_manifest_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "asset_manifest_hash_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.asset_manifest_hash_mismatch",
+            "target": "assetManifestHash",
+            "message": "Asset manifest hash must match physical payload bytes."
+          }
+        ]
+      },
+      {
+        "scenarioId": "automated_launch_claim_without_launch_log",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "automated_launch_claim_without_launch_log",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.review_smoke.launch_log_missing",
+            "target": ".llmgc/procedural/minimum-playable-generated-game/review-package/logs/manual-alpha-player-launch.log",
+            "message": "Automated launch claim requires launch log."
+          }
+        ]
+      },
+      {
+        "scenarioId": "automated_quest_completion_claim_without_play_loop_log",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "automated_quest_completion_claim_without_play_loop_log",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.review_smoke.play_loop_log_missing",
+            "target": ".llmgc/procedural/minimum-playable-generated-game/review-package/logs/manual-alpha-player-play-loop.log",
+            "message": "Automated quest completion claim requires play-loop log."
+          }
+        ]
+      },
+      {
+        "scenarioId": "automated_smoke_script_uses_absolute_path",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "automated_smoke_script_uses_absolute_path",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.review_text.absolute_path",
+            "target": "RUN_AUTOMATED_SMOKE.ps1",
+            "message": "Automated smoke script must use package-relative path."
+          }
+        ]
+      },
+      {
+        "scenarioId": "build_manifest_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "build_manifest_hash_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.build_manifest_hash_mismatch",
+            "target": "b0bbed3c2c24b8c19f6547ef569af86bb5e3c75e9ae72ae49129e63e5074d49b",
+            "message": "Build manifest hash must match selected accepted build evidence."
+          }
+        ]
+      },
+      {
+        "scenarioId": "checklist_pre_marked_passed",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "checklist_pre_marked_passed",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.checklist.pre_marked_passed",
+            "target": "MANUAL_PLAY_REVIEW_CHECKLIST.md",
+            "message": "Checklist must not be pre-marked passed."
+          }
+        ]
+      },
+      {
+        "scenarioId": "copied_minimum_playable_report_without_review_package_files",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "copied_minimum_playable_report_without_review_package_files",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.review_package.files_missing",
+            "target": "review-package",
+            "message": "A copied report cannot replace physical review package files."
+          }
+        ]
+      },
+      {
+        "scenarioId": "development_profiler_debug_build_option_reintroduced",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "development_profiler_debug_build_option_reintroduced",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_playable_alpha.firewall.development_build_flag",
+            "target": "BuildOptions.Development",
+            "message": "Review package build must remain firewall-safe."
+          }
+        ]
+      },
+      {
+        "scenarioId": "executable_copied_from_another_scenario",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "executable_copied_from_another_scenario",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.executable_scenario_mismatch",
+            "target": "LLMGameCreatorAlpha.exe",
+            "message": "Executable and StreamingAssets payload must belong to the selected scenario."
+          }
+        ]
+      },
+      {
+        "scenarioId": "manual_run_script_uses_absolute_path",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "manual_run_script_uses_absolute_path",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.review_text.absolute_path",
+            "target": "RUN_MANUAL_PLAY.ps1",
+            "message": "Manual run script must use package-relative path."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal019_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal019_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.previous.goal019_missing",
+            "target": "unity-alpha-readable-presentation-report.json",
+            "message": "Accepted Goal 019 readable presentation evidence is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_data_folder",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_data_folder",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.data_folder_missing",
+            "target": "LLMGameCreatorAlpha_Data",
+            "message": "Review package Data folder must exist."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_executable",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_executable",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.executable_missing",
+            "target": "LLMGameCreatorAlpha.exe",
+            "message": "Review package executable must exist."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_game_package_payload",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_game_package_payload",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.package_missing",
+            "target": "game-package.json",
+            "message": "Game package payload must exist."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_readable_presentation_model_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_readable_presentation_model_artifact",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.previous.model_missing",
+            "target": "unity-alpha-readable-presentation-model.json",
+            "message": "Goal 019 readable model artifact is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_readable_presentation_report_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_readable_presentation_report_artifact",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.previous.report_missing",
+            "target": "unity-alpha-readable-presentation-report.json",
+            "message": "Goal 019 readable report artifact is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_streaming_assets_payload",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_streaming_assets_payload",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.config_missing",
+            "target": "StreamingAssets",
+            "message": "StreamingAssets payload must exist."
+          }
+        ]
+      },
+      {
+        "scenarioId": "package_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "package_hash_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.package_hash_mismatch",
+            "target": "packageHash",
+            "message": "Package hash must match physical payload bytes."
+          }
+        ]
+      },
+      {
+        "scenarioId": "readable_presentation_claim_without_goal019_proof",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "readable_presentation_claim_without_goal019_proof",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.previous.readable_not_verified",
+            "target": "unity-alpha-readable-presentation-report.json",
+            "message": "Readable presentation claim requires Goal 019 proof."
+          }
+        ]
+      },
+      {
+        "scenarioId": "readme_missing_completion_expectation",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "readme_missing_completion_expectation",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.review_text.readme_completion_missing",
+            "target": "README_PLAY.md",
+            "message": "README must include expected completion signs."
+          }
+        ]
+      },
+      {
+        "scenarioId": "readme_missing_controls",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "readme_missing_controls",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.review_text.readme_controls_missing",
+            "target": "README_PLAY.md",
+            "message": "README must include controls."
+          }
+        ]
+      },
+      {
+        "scenarioId": "review_package_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "review_package_hash_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.review_package_hash_mismatch",
+            "target": "reviewPackageHash",
+            "message": "Review package hash must match physical files."
+          }
+        ]
+      },
+      {
+        "scenarioId": "runtime_preview_dependency_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "runtime_preview_dependency_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.contract.runtime_preview_dependency",
+            "target": "runtime_host",
+            "message": "Minimum playable game must not depend on Runtime Preview."
+          }
+        ]
+      },
+      {
+        "scenarioId": "scenario_summary_package_id_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "scenario_summary_package_id_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.summary_package_mismatch",
+            "target": "generated-scenario-summary.json",
+            "message": "Scenario summary package id must match selected package."
+          }
+        ]
+      },
+      {
+        "scenarioId": "scenario_summary_quest_id_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "scenario_summary_quest_id_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "minimum_playable_game.validation.summary_quest_mismatch",
+            "target": "generated-scenario-summary.json",
+            "message": "Scenario summary quest id must match selected quest."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "info",
+        "code": "minimum_playable_game.invalid_matrix_rejected",
+        "target": "invalid_matrix",
+        "message": "Invalid/fake/leak scenarios reject through file, hash, script, log, presentation or firewall validation paths."
+      }
+    ]
+  },
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "noExternalProviderLlmRagLuaMedia": true,
+  "runtimePreviewDependency": false,
+  "manifestHash": "5ac27f1c37bc03f5cd0b99a625f825ad0a6155b0055b349c45c049df9973500c",
+  "reviewPackageHash": "15b70d515abb882557dba22f538fb7f83af57ffa4bf01fdb6c2b55332cb5b2de",
+  "deterministicHash": "b842834d73134dbbef2bb78fc241aeae0122d30bc19e4aae4f65ef41e97de5e0",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "alpha_build.environment.not_blocked",
+      "target": "alpha_unity_build_environment_blocker",
+      "message": "A real Windows build path exists and produced verifiable output; the runnable gate remains required for review."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.environment.unity_found",
+      "target": "unity_cli",
+      "message": "Unity Editor executable was discovered; local machine path is omitted from deterministic artifacts."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.goal012_gate_recorded",
+      "target": "unity_runtime_export_vertical_slice_artifact_verification",
+      "message": "User-confirmed Goal 012 artifact verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios must fail through the Alpha build validation path."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.launch.executed",
+      "target": "logs/alpha-player-launch.log",
+      "message": "The produced Windows player was launched in batch diagnostic mode."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.no_external_providers",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.unity_build.executed",
+      "target": "logs/unity-build.log",
+      "message": "Unity Editor was invoked through the repository-local Alpha build entrypoint."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.unity_build.exit_success",
+      "target": "exit_code:0",
+      "message": "Unity build process completed; see logs/unity-build.log for details."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.valid_matrix_passed",
+      "target": "valid_matrix",
+      "message": "Three style candidates and deterministic staging are required."
+    },
+    {
+      "severity": "info",
+      "code": "minimum_playable_game.goal019_gate_recorded",
+      "target": "unity_alpha_readable_presentation_verification",
+      "message": "User-confirmed Goal 019 readable presentation verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "minimum_playable_game.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios reject through file, hash, script, log, presentation or firewall validation paths."
+    },
+    {
+      "severity": "info",
+      "code": "minimum_playable_game.no_external_providers",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "minimum_playable_game.previous.goal019_evidence_present",
+      "target": "unity-alpha-readable-presentation-report.json",
+      "message": "Accepted Goal 019 compact evidence is present and matching."
+    }
+  ]
+}

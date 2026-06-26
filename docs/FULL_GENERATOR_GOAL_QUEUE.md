@@ -11,13 +11,13 @@ This document is not a replacement for `docs/FULL_GAME_GENERATION_MASTER_PLAN.md
 Accepted through:
 
 ```text
-unity_generated_multi_variant_playable_scenario_verification passed
+unity_alpha_readable_presentation_verification passed
 ```
 
 Produced for review:
 
 ```text
-unity_alpha_readable_presentation_verification required
+minimum_playable_generated_game_verification required
 ```
 
 Current capabilities:
@@ -33,12 +33,13 @@ Current capabilities:
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
+- minimum playable generated game review package with runnable Windows player folder, README, manual/automated scripts, scenario summary, automated launch proof and quest completion proof;
 - compact review artifacts under `.llmgc/procedural/...`;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The Unity Alpha now has readable presentation panels for manual review, but the next accepted step still needs a minimum playable generated game gate proving the executable can be reviewed as one short generated scenario from start to completion without inspecting JSON.
+The Unity Alpha now has a minimum playable generated game review package, but the user still needs to manually accept whether the packaged scenario is playable enough for the gate.
 
 ## Queue Rules
 
@@ -158,7 +159,7 @@ The Alpha stops feeling like only a diagnostic log and becomes a primitive playa
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start S162 or Goal 020 until it is accepted.
+Accepted by user prompt before Goal 020.
 
 ### Goal 020: Minimum Playable Generated Game Gate
 
@@ -176,7 +177,9 @@ Expected user-visible result:
 
 The user can launch the exe and play a short generated scenario from start to completion without inspecting JSON.
 
-Manual review likely required.
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start S170 or Goal 021 until it is accepted.
 
 ## Generator Generalization Track
 
@@ -377,7 +380,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-unity_alpha_readable_presentation_verification
+minimum_playable_generated_game_verification
 ```
 
 Status:

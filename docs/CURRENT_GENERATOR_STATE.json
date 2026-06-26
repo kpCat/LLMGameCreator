@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T18:18:16Z",
+    "updated_at_utc":  "2026-06-26T21:42:28Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 019 Unity Alpha readable presentation verification required",
-    "gate_status":  "unity_alpha_readable_presentation_verification",
+    "current_phase_title":  "Goal 020 minimum playable generated game verification required",
+    "gate_status":  "minimum_playable_generated_game_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_019_unity_alpha_readable_presentation",
-    "active_manual_gate":  "Goal 019 makes the Unity Alpha human-readable enough for manual play review; unity_alpha_readable_presentation_verification remains required and not passed until the readable presentation evidence is accepted.",
-    "current_user_action":  "Review the produced Unity Alpha readable presentation model, report, Windows player logs, required panel proof, readable labels, objective checklist, inventory/reward/event log, controls proof, multi-variant continuity and invalid/fake/leak matrix; do not mark unity_alpha_readable_presentation_verification passed until the evidence is accepted.",
-    "recommended_next_decision":  "The user confirmed unity_generated_multi_variant_playable_scenario_verification passed before Goal 019. Goal 019 completes S154-S161 by adding a narrow Application-layer UnityReadablePresentation acceptance service, deriving deterministic readable presentation models from the accepted multi-variant evidence, extending the existing Unity Alpha IMGUI with scenario, variant, quest, objectives, selected target, inventory, reward, event log and controls panels, validating required presentation player log lines, rejecting fake readability evidence causally and adding the unity-alpha-readable-presentation product smoke route. Compact review artifacts are written under .llmgc/procedural/unity-alpha-readable-presentation while heavy Unity build/log/unity-work outputs remain ignored. Goal 019 stops at unity_alpha_readable_presentation_verification required; do not mark it passed and do not start S162 or Goal 020.",
+    "last_completed_product_slice_id":  "goal_020_minimum_playable_generated_game",
+    "active_manual_gate":  "Goal 020 packages the selected readable Unity Alpha scenario into a review-ready minimum playable generated game folder; minimum_playable_generated_game_verification remains required and not passed until the review package is manually accepted.",
+    "current_user_action":  "Review the produced minimum playable generated game manifest, report, review package folder, README, manual/automated scripts, scenario summary, automated launch/play-loop logs, checklist and invalid/fake/leak matrix; do not mark minimum_playable_generated_game_verification passed until the playable review package is accepted.",
+    "recommended_next_decision":  "The user confirmed unity_alpha_readable_presentation_verification passed before Goal 020. Goal 020 completes S162-S169 by adding a narrow Application-layer MinimumPlayableGame acceptance service, selecting the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, copying a minimal runnable Windows player folder into .llmgc/procedural/minimum-playable-generated-game/review-package, writing README/manual-run/automated-smoke/checklist/scenario-summary files, validating executable/data/StreamingAssets/package/asset/build/review hashes, proving automated launch and quest completion from player logs, rejecting fake review-package evidence causally and adding the minimum-playable-generated-game product smoke route. Compact review artifacts are written under .llmgc/procedural/minimum-playable-generated-game while heavy Unity build/log/unity-work outputs remain ignored. Goal 020 stops at minimum_playable_generated_game_verification required; do not mark it passed and do not start S170 or Goal 021.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "unity_alpha_readable_presentation_verification"
+                                                        "minimum_playable_generated_game_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -45,7 +45,8 @@
                            "goal_016_manual_gate":  "unity_generated_runtime_state_loop_verification",
                            "goal_017_manual_gate":  "unity_generated_quest_completion_loop_verification",
                            "goal_018_manual_gate":  "unity_generated_multi_variant_playable_scenario_verification",
-                           "goal_019_manual_gate":  "unity_alpha_readable_presentation_verification"
+                           "goal_019_manual_gate":  "unity_alpha_readable_presentation_verification",
+                           "goal_020_manual_gate":  "minimum_playable_generated_game_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -66,16 +67,16 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_019_unity_alpha_readable_presentation",
-                                         "title":  "Unity Alpha Human-Readable Presentation",
-                                         "completed_at_utc":  "2026-06-26T18:18:16Z",
-                                         "summary":  "Goal 019 records the user-confirmed unity_generated_multi_variant_playable_scenario_verification passed gate, adds a narrow Application-layer UnityReadablePresentation acceptance service, writes compact model/report/verification artifacts under .llmgc/procedural/unity-alpha-readable-presentation, extends the existing Unity Alpha IMGUI into readable scenario, variant, quest, objective, selected target, inventory, reward, event log and controls panels, validates presentation proof lines from real player play-loop logs, keeps Goal 018 multi-variant quest completion evidence verified, rejects invalid/fake/leak readability evidence causally and adds the unity-alpha-readable-presentation product smoke route. The active manual gate is unity_alpha_readable_presentation_verification required.",
-                                         "scenario_id":  "unity-alpha-readable-presentation",
+                                         "slice_id":  "goal_020_minimum_playable_generated_game",
+                                         "title":  "Minimum Playable Generated Game Gate",
+                                         "completed_at_utc":  "2026-06-26T21:42:28Z",
+                                         "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, adds a narrow Application-layer MinimumPlayableGame acceptance service, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a review-ready runnable Windows player folder under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, keeps readable presentation and multi-variant evidence verified, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. The active manual gate is minimum_playable_generated_game_verification required.",
+                                         "scenario_id":  "minimum-playable-generated-game",
                                          "checks":  [
-                                                        "UnityReadablePresentation/UnityMultiVariant/CurrentGeneratorStateDocsTests filtered tests: 26/26 passed",
-                                                        "unity-alpha-readable-presentation product smoke: 1/1 passed",
-                                                        "check-all.ps1: 833/833 tests passed; build succeeded with 4 existing xUnit analyzer warnings and 0 unexpected devflow warnings",
-                                                        "Goal 019 model hash 8307318ed8ba0f3bd3059bd57786825eda5c53425d5bbbe0a5b495c7807f2be7, report hash 75ab51991fc023c27982ab54cf58fcc2e8100c8da11d7345ef78dc1ea2ce9f54, panels 9/9, readable labels 47, raw-id labels 0, objectives 6/6, invalid scenarios 24"
+                                                        "MinimumPlayableGame focused tests: 8/8 passed",
+                                                        "minimum-playable-generated-game product smoke: 1/1 passed",
+                                                        "check-all.ps1: 842/842 tests passed, build 0 warnings / 0 errors",
+                                                        "Goal 020 manifest hash 5ac27f1c37bc03f5cd0b99a625f825ad0a6155b0055b349c45c049df9973500c, review package hash 15b70d515abb882557dba22f538fb7f83af57ffa4bf01fdb6c2b55332cb5b2de, deterministic report hash b842834d73134dbbef2bb78fc241aeae0122d30bc19e4aae4f65ef41e97de5e0, selected frontier_survival package game/content_generation/frontier-survival, quest quest/frontier-survival/c2ed6dc235/000, reward item/frontier-survival/7f81222990/004, invalid scenarios 25"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -335,7 +336,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "unity_alpha_readable_presentation_verification"
+                                          "minimum_playable_generated_game_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -356,11 +357,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "unity_alpha_readable_presentation_verification",
-    "recommended_next_work_item_title":  "Goal 019 Unity Alpha readable presentation verification review.",
-    "recommended_next_task_file":  ".llmgc/procedural/unity-alpha-readable-presentation/unity-alpha-readable-presentation-verification.md",
+    "recommended_next_work_item":  "minimum_playable_generated_game_verification",
+    "recommended_next_work_item_title":  "Goal 020 minimum playable generated game verification review.",
+    "recommended_next_task_file":  ".llmgc/procedural/minimum-playable-generated-game/minimum-playable-generated-game-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Unity Alpha readable presentation verification review"
+                                              "Minimum playable generated game verification review"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -436,7 +437,7 @@
                               "Unity multi-variant playable scenario variants/report sidecars and per-variant quest completion player evidence",
                               "Unity Alpha readable presentation model/report sidecars and required panel/readable-label player evidence"
                           ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 019 stop at unity_alpha_readable_presentation_verification required and do not start S162, Goal 020 or post-Goal-019 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 020 stop at minimum_playable_generated_game_verification required and do not start S170, Goal 021 or post-Goal-020 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -550,7 +551,7 @@
                                                                         "next_action":  "goal_019_unity_alpha_readable_presentation"
                                                               },
     "unity_alpha_readable_presentation_verification":  {
-                                                          "status":  "required",
+                                                          "status":  "passed_by_user_prompt_before_goal_020",
                                                           "evidence_source":  "goal_019_unity_alpha_readable_presentation",
                                                           "observed_result":  [
                                                               "Unity Alpha readable presentation artifacts are written under .llmgc/procedural/unity-alpha-readable-presentation",
@@ -561,9 +562,26 @@
                                                               "Invalid/fake/leak readable-presentation matrix rejects missing panels, raw labels, copied labels, fake readable flags and debug build options",
                                                               "Product smoke route is unity-alpha-readable-presentation",
                                                               "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                              "user confirmed unity_alpha_readable_presentation_verification passed before Goal 020"
+                                                          ],
+                                                          "next_action":  "goal_020_minimum_playable_generated_game"
+                                                              },
+    "minimum_playable_generated_game_verification":  {
+                                                          "status":  "required",
+                                                          "evidence_source":  "goal_020_minimum_playable_generated_game",
+                                                          "observed_result":  [
+                                                              "Minimum playable generated game compact artifacts are written under .llmgc/procedural/minimum-playable-generated-game",
+                                                              "Review package folder exists under .llmgc/procedural/minimum-playable-generated-game/review-package",
+                                                              "Review package contains LLMGameCreatorAlpha.exe, Data folder, README_PLAY.md, RUN_MANUAL_PLAY.ps1, RUN_AUTOMATED_SMOKE.ps1, MANUAL_PLAY_REVIEW_CHECKLIST.md and generated-scenario-summary.json",
+                                                              "Selected scenario is frontier_survival with package game/content_generation/frontier-survival, thread thread/frontier-survival/000, quest quest/frontier-survival/c2ed6dc235/000 and reward item/frontier-survival/7f81222990/004",
+                                                              "Automated review package launch and quest completion proof are true",
+                                                              "Readable presentation evidence remains verified",
+                                                              "Invalid/fake/leak review-package matrix rejects 25 scenarios",
+                                                              "Product smoke route is minimum-playable-generated-game",
+                                                              "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
                                                               "Gate remains required and is not marked passed"
                                                           ],
-                                                          "next_action":  "review_unity_alpha_readable_presentation_evidence_before_marking_gate_passed"
+                                                          "next_action":  "review_minimum_playable_generated_game_before_marking_gate_passed"
                                                               },
     "alpha_unity_build_environment_blocker":  {
                                                  "status":  "resolved_by_s113b",
@@ -681,9 +699,9 @@
     "goal_019_unity_alpha_readable_presentation":  {
                                                        "slice_id":  "goal_019_unity_alpha_readable_presentation",
                                                        "title":  "Unity Alpha Human-Readable Presentation",
-                                                       "status":  "verification_required",
+                                                       "status":  "passed_by_user_prompt_before_goal_020",
                                                        "blocked_at_utc":  "",
-                                                       "summary":  "Goal 019 records the user-confirmed unity_generated_multi_variant_playable_scenario_verification passed gate, completes S154-S161, adds a narrow Application-layer UnityReadablePresentation acceptance service, writes compact model/report/verification artifacts under .llmgc/procedural/unity-alpha-readable-presentation, derives readable labels and panels from accepted generated package/quest/objective/item/event/variant evidence, extends the existing Unity Alpha IMGUI with scenario header, variant identity, quest panel, objective checklist, selected target details, inventory/reward, event log and controls help, validates required presentation proof lines from player play-loop logs, rejects invalid/fake/leak readability evidence causally and adds the unity-alpha-readable-presentation product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S162/Goal 020 are not started.",
+                                                       "summary":  "Goal 019 records the user-confirmed unity_generated_multi_variant_playable_scenario_verification passed gate, completes S154-S161, adds a narrow Application-layer UnityReadablePresentation acceptance service, writes compact model/report/verification artifacts under .llmgc/procedural/unity-alpha-readable-presentation, derives readable labels and panels from accepted generated package/quest/objective/item/event/variant evidence, extends the existing Unity Alpha IMGUI with scenario header, variant identity, quest panel, objective checklist, selected target details, inventory/reward, event log and controls help, validates required presentation proof lines from player play-loop logs, rejects invalid/fake/leak readability evidence causally and adds the unity-alpha-readable-presentation product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed unity_alpha_readable_presentation_verification passed before Goal 020.",
                                                        "scenario_id":  "unity-alpha-readable-presentation",
                                                        "checks":  [
                                                                       "UnityReadablePresentation/UnityMultiVariant/CurrentGeneratorStateDocsTests filtered tests: 26/26 passed",
@@ -692,6 +710,20 @@
                                                                       "Goal 019 model hash 8307318ed8ba0f3bd3059bd57786825eda5c53425d5bbbe0a5b495c7807f2be7, report hash 75ab51991fc023c27982ab54cf58fcc2e8100c8da11d7345ef78dc1ea2ce9f54, panels 9/9, readable labels 47, raw-id labels 0, objectives 6/6, invalid scenarios 24"
                                                                   ]
                                                     },
+    "goal_020_minimum_playable_generated_game":  {
+                                                    "slice_id":  "goal_020_minimum_playable_generated_game",
+                                                    "title":  "Minimum Playable Generated Game Gate",
+                                                    "status":  "verification_required",
+                                                    "blocked_at_utc":  "",
+                                                    "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, completes S162-S169, adds a narrow Application-layer MinimumPlayableGame acceptance service, selects the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a runnable review package under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S170/Goal 021 are not started.",
+                                                    "scenario_id":  "minimum-playable-generated-game",
+                                                    "checks":  [
+                                                                   "MinimumPlayableGame focused tests: 8/8 passed",
+                                                                   "minimum-playable-generated-game product smoke: 1/1 passed",
+                                                                   "check-all.ps1: 842/842 tests passed, build 0 warnings / 0 errors",
+                                                                   "Goal 020 manifest hash 5ac27f1c37bc03f5cd0b99a625f825ad0a6155b0055b349c45c049df9973500c, review package hash 15b70d515abb882557dba22f538fb7f83af57ffa4bf01fdb6c2b55332cb5b2de, deterministic report hash b842834d73134dbbef2bb78fc241aeae0122d30bc19e4aae4f65ef41e97de5e0, invalid scenarios 25"
+                                                               ]
+                                                },
     "goal_012_unity_runtime_export_vertical_slice":  {
                                                          "slice_id":  "goal_012_unity_runtime_export_vertical_slice",
                                                          "title":  "Unity Runtime Export Vertical Slice",

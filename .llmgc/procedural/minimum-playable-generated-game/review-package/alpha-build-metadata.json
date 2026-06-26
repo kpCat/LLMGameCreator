@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "alpha_build_metadata_v1",
+  "target": "StandaloneWindows64",
+  "options": "None",
+  "development": false,
+  "connectWithProfiler": false,
+  "allowDebugging": false,
+  "debugScripts": false,
+  "profilerNetwork": false
+}

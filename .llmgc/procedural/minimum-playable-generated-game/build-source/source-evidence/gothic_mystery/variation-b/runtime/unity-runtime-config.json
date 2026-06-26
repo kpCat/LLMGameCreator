@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "unity_runtime_export_contract_v1",
+  "runtimeHostKind": "generic_unity_runtime",
+  "packageId": "game/content_generation/gothic-mystery",
+  "packageVersion": "0.1.0",
+  "packageHash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+  "assetManifestHash": "09dc29d8c7d41df403e20122d035be088b3746d32151df7e892e895c7bbcf195",
+  "startMapId": "map/gothic-mystery/start",
+  "startSceneId": "map/gothic-mystery/start",
+  "playerSpawn": {
+    "stateRef": "runtime_state/bootstrap/player",
+    "mapId": "map/gothic-mystery/start",
+    "x": 1,
+    "y": 1
+  },
+  "selectedThreadId": "thread/gothic-mystery/000",
+  "selectedGeneratedIds": [
+    "choice/gothic-mystery/8298a30e5a/006",
+    "dialogue/gothic-mystery/91a942bcf7/006",
+    "event/gothic-mystery/aa4f467660/000",
+    "item/gothic-mystery/395c95994d/000",
+    "item/gothic-mystery/412a858b32/001",
+    "loot_table/gothic-mystery/primary",
+    "objective/gothic-mystery/b5620597a1/001",
+    "quest/gothic-mystery/3629ab93b2/001"
+  ],
+  "commandHints": [
+    {
+      "commandId": "cmd/gothic-mystery/000/choose_dialogue",
+      "commandType": "dialogue/choose",
+      "targetId": "choice/gothic-mystery/8298a30e5a/006",
+      "secondaryTargetId": "quest/gothic-mystery/3629ab93b2/001",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/gothic-mystery/412a858b32/001",
+      "secondaryTargetId": "event/gothic-mystery/aa4f467660/000",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/open_dialogue",
+      "commandType": "dialogue/open",
+      "targetId": "dialogue/gothic-mystery/91a942bcf7/006",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/roll_loot",
+      "commandType": "loot/roll",
+      "targetId": "loot_table/gothic-mystery/primary",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/start_quest",
+      "commandType": "quest/start",
+      "targetId": "quest/gothic-mystery/3629ab93b2/001",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    }
+  ],
+  "assetRefs": [
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
+      "category": "item_icon_ui_graphic",
+      "mediaType": "image/png",
+      "contentId": "item/gothic-mystery/0018fb2e6f/068",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-0018fb2e6f-068-frontier-icon-fixture-000.fixture",
+      "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-020e1a3098-011/frontier-music-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-020e1a3098-011/frontier-music-fixture/000",
+      "category": "music_ambience",
+      "mediaType": "audio/ogg",
+      "contentId": "event/gothic-mystery/020e1a3098/011",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-music-ambience-event-gothic-mystery-020e1a3098-011-frontier-music-fixture-000.fixture",
+      "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-0a7aa5762f-022/frontier-portrait-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-0a7aa5762f-022/frontier-portrait-fixture/000",
+      "category": "npc_portrait",
+      "mediaType": "image/png",
+      "contentId": "npc/gothic-mystery/0a7aa5762f/022",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-0a7aa5762f-022-frontier-portrait-fixture-000.fixture",
+      "exportRelativePath": "assets/npc-portrait/asset-002-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-208fbe915b-037/frontier-sound-fallback/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-208fbe915b-037/frontier-sound-fallback/000",
+      "category": "sound_effect",
+      "mediaType": "audio/wav",
+      "contentId": "dialogue/gothic-mystery/208fbe915b/037",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-208fbe915b-037-frontier-sound-fallback-000.fixture",
+      "exportRelativePath": "assets/sound-effect/asset-003-d2ae5212.fixture",
+      "hash": "d2ae52126f66bee797f07d3407b0d75514913406ecdb2d9e77cd40927c216fbb",
+      "byteCount": 263,
+      "resolutionKind": "fallback"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/000",
+      "category": "tile_region_graphic",
+      "mediaType": "image/png",
+      "contentId": "map/gothic-mystery/start",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-tile-region-graphic-map-gothic-mystery-start-frontier-tile-fixture-000.fixture",
+      "exportRelativePath": "assets/tile-region-graphic/asset-004-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    }
+  ],
+  "saveLoad": {
+    "runtimeStateOwner": "GameRuntimeState",
+    "runtimeStateHash": "5d8f5235190eff748602ba49548793585fda16cea413b619c6c78e48b5b4e8e9",
+    "restoredRuntimeStateHash": "5d8f5235190eff748602ba49548793585fda16cea413b619c6c78e48b5b4e8e9",
+    "saveLoadRoundtripPassed": true,
+    "bootstrapMetadataPath": "game-data/generated-content-provenance.json"
+  },
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "luaExecuted": false,
+    "mediaExecuted": false,
+    "unityEditorExecuted": false,
+    "unityBuildExecuted": false,
+    "windowsExecutableExecuted": false
+  },
+  "configHash": ""
+}
