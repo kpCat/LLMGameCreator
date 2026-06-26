@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "unity_quest_completion_loop_state_v1",
+  "selectedPackageId": "game/content_generation/frontier-survival",
+  "selectedStyleId": "frontier_survival",
+  "selectedThreadId": "thread/frontier-survival/000",
+  "selectedQuestId": "quest/frontier-survival/c2ed6dc235/000",
+  "selectedDialogueId": "dialogue/frontier-survival/51924b073c/028",
+  "selectedDialogueChoiceId": "choice/frontier-survival/8cb7a7d288/028",
+  "selectedItemId": "item/frontier-survival/7f81222990/004",
+  "selectedEventId": "event/frontier-survival/4f2d855a33/000",
+  "selectedRewardId": "item/frontier-survival/7f81222990/004",
+  "phaseTrace": [
+    "not_started",
+    "started",
+    "dialogue_opened",
+    "choice_selected",
+    "item_obtained",
+    "event_applied",
+    "completed",
+    "reward_granted"
+  ],
+  "objectiveStepIds": [
+    "objective/0/quest_start",
+    "objective/1/dialogue_open",
+    "objective/2/dialogue_choice",
+    "objective/3/item_obtained",
+    "objective/4/event_applied",
+    "objective/5/quest_completed_reward"
+  ],
+  "objectiveCount": 6,
+  "questCompletedBefore": false,
+  "questCompletedAfter": true,
+  "rewardGrantedBefore": false,
+  "rewardGrantedAfter": true,
+  "runtimeStateLoopVerified": true,
+  "commandStateTransitionCount": 7,
+  "stateHash": "1e5ad0b13a44078ebc6c5aa53e7e54c21d43a8c779a7b6937a2398eb9ad62b83"
+}

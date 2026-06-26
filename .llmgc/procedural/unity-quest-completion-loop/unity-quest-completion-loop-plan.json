@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "unity_quest_completion_loop_plan_v1",
+  "selectedPackageId": "game/content_generation/frontier-survival",
+  "selectedStyleId": "frontier_survival",
+  "selectedThreadId": "thread/frontier-survival/000",
+  "selectedQuestId": "quest/frontier-survival/c2ed6dc235/000",
+  "selectedQuestTitle": "Quest 000",
+  "selectedQuestSourceId": "quest/frontier-survival/c2ed6dc235/000",
+  "selectedDialogueId": "dialogue/frontier-survival/51924b073c/028",
+  "selectedDialogueChoiceId": "choice/frontier-survival/8cb7a7d288/028",
+  "selectedItemId": "item/frontier-survival/7f81222990/004",
+  "selectedEventId": "event/frontier-survival/4f2d855a33/000",
+  "selectedRewardId": "item/frontier-survival/7f81222990/004",
+  "selectedRewardKind": "item",
+  "startMapId": "map/frontier-survival/start",
+  "questPhaseOrder": [
+    "not_started",
+    "started",
+    "dialogue_opened",
+    "choice_selected",
+    "item_obtained",
+    "event_applied",
+    "completed",
+    "reward_granted"
+  ],
+  "objectiveSteps": [
+    {
+      "objectiveId": "objective/0/quest_start",
+      "objectiveKind": "quest_start",
+      "sourceGeneratedId": "quest/frontier-survival/c2ed6dc235/000",
+      "requiredCommandId": "cmd/frontier-survival/000/start_quest",
+      "requiredCommandType": "quest/start",
+      "requiredTargetId": "quest/frontier-survival/c2ed6dc235/000",
+      "requiredSecondaryTargetId": "",
+      "before": false,
+      "after": true,
+      "visibleLabel": "Start generated quest"
+    },
+    {
+      "objectiveId": "objective/1/dialogue_open",
+      "objectiveKind": "dialogue_open",
+      "sourceGeneratedId": "dialogue/frontier-survival/51924b073c/028",
+      "requiredCommandId": "cmd/frontier-survival/000/open_dialogue",
+      "requiredCommandType": "dialogue/open",
+      "requiredTargetId": "dialogue/frontier-survival/51924b073c/028",
+      "requiredSecondaryTargetId": "",
+      "before": false,
+      "after": true,
+      "visibleLabel": "Open generated dialogue"
+    },
+    {
+      "objectiveId": "objective/2/dialogue_choice",
+      "objectiveKind": "dialogue_choice",
+      "sourceGeneratedId": "choice/frontier-survival/8cb7a7d288/028",
+      "requiredCommandId": "cmd/frontier-survival/000/choose_dialogue",
+      "requiredCommandType": "dialogue/choose",
+      "requiredTargetId": "choice/frontier-survival/8cb7a7d288/028",
+      "requiredSecondaryTargetId": "quest/frontier-survival/c2ed6dc235/000",
+      "before": false,
+      "after": true,
+      "visibleLabel": "Select generated dialogue choice"
+    },
+    {
+      "objectiveId": "objective/3/item_obtained",
+      "objectiveKind": "item_obtained",
+      "sourceGeneratedId": "item/frontier-survival/7f81222990/004",
+      "requiredCommandId": "cmd/frontier-survival/000/event_add_item",
+      "requiredCommandType": "event/add_item",
+      "requiredTargetId": "item/frontier-survival/7f81222990/004",
+      "requiredSecondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+      "before": false,
+      "after": true,
+      "visibleLabel": "Obtain generated item"
+    },
+    {
+      "objectiveId": "objective/4/event_applied",
+      "objectiveKind": "event_applied",
+      "sourceGeneratedId": "event/frontier-survival/4f2d855a33/000",
+      "requiredCommandId": "cmd/frontier-survival/000/event_add_item",
+      "requiredCommandType": "event/add_item",
+      "requiredTargetId": "item/frontier-survival/7f81222990/004",
+      "requiredSecondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+      "before": false,
+      "after": true,
+      "visibleLabel": "Apply generated event"
+    },
+    {
+      "objectiveId": "objective/5/quest_completed_reward",
+      "objectiveKind": "quest_completed_reward",
+      "sourceGeneratedId": "quest/frontier-survival/c2ed6dc235/000",
+      "requiredCommandId": "cmd/frontier-survival/000/event_add_item",
+      "requiredCommandType": "event/add_item",
+      "requiredTargetId": "item/frontier-survival/7f81222990/004",
+      "requiredSecondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+      "before": false,
+      "after": true,
+      "visibleLabel": "Complete quest and grant reward"
+    }
+  ],
+  "commandSequence": [
+    "cmd/frontier-survival/000/start_quest",
+    "cmd/frontier-survival/000/open_dialogue",
+    "cmd/frontier-survival/000/choose_dialogue",
+    "cmd/frontier-survival/000/event_add_item"
+  ],
+  "completionCriteria": [
+    "quest_started",
+    "dialogue_opened",
+    "choice_selected",
+    "item_obtained",
+    "event_applied",
+    "quest_completed",
+    "reward_granted"
+  ],
+  "expectedFinalState": {
+    "questCompleted": true,
+    "rewardGranted": true,
+    "rewardId": "item/frontier-survival/7f81222990/004",
+    "rewardKind": "item",
+    "inventoryItemCount": 1
+  },
+  "planHash": "9fe5ddc1abe483ca75f508da7aa3a85f709272f039d9bf734f3dc0c2f0fb7085"
+}

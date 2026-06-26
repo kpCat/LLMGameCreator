@@ -68,7 +68,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_013_ALPHA_RUNNABLE_WINDOWS_BUILD.md` | Completed Goal 013 task: Alpha runnable Windows build integration. S113B resolved the repository-local Unity project/template and Windows build entrypoint blocker, produced a real Windows player plus diagnostic launch evidence; S113C added a visible Unity mini-loop plus automated play-loop diagnostic evidence. The user confirmed `alpha_runnable_windows_build_verification passed` before Goal 014. |
 | `docs/GOAL_014_UNITY_PLAYABLE_PRESENTATION_AND_FIREWALL_SAFE_BUILD.md` | Completed Goal 014 task: Unity playable Alpha presentation and firewall-safe build discipline, with visible map/player/NPC/item/status presentation, automated movement/interaction evidence, release-style BuildOptions.None build entrypoint checks and final stop at `unity_playable_presentation_firewall_safe_build_verification`. S121B repaired root artifact regeneration for the same Goal 014 gate; the user confirmed the gate passed before Goal 015. |
 | `docs/GOAL_015_UNITY_GENERATED_SCENE_CONTENT_PROJECTION.md` | Completed Goal 015 task: Unity generated scene content projection, with Application-layer generated scene projection artifacts, Unity Alpha map/player/NPC/item/quest-event/command-status presentation derived from selected package/config/asset evidence, generated-node movement/interaction logs, invalid/fake/leak rejection, product smoke route `unity-generated-scene-projection` and final stop at `unity_generated_scene_content_projection_verification`. The user confirmed the gate passed before Goal 016. |
-| `docs/GOAL_016_UNITY_GENERATED_RUNTIME_STATE_LOOP.md` | Goal 016 task: Unity generated runtime state loop, with Application-layer runtime state loop artifacts, Unity Alpha quest/dialogue/item/inventory/event/focus/status before-after state changes derived from generated command hints, command/state transition logs, invalid/fake/leak rejection, product smoke route `unity-runtime-state-loop` and final stop at `unity_generated_runtime_state_loop_verification`. |
+| `docs/GOAL_016_UNITY_GENERATED_RUNTIME_STATE_LOOP.md` | Completed Goal 016 task: Unity generated runtime state loop, with Application-layer runtime state loop artifacts, Unity Alpha quest/dialogue/item/inventory/event/focus/status before-after state changes derived from generated command hints, command/state transition logs, invalid/fake/leak rejection, product smoke route `unity-runtime-state-loop` and final stop at `unity_generated_runtime_state_loop_verification`. The user confirmed the gate passed before Goal 017. |
+| `docs/GOAL_017_UNITY_GENERATED_QUEST_COMPLETION_LOOP.md` | Goal 017 task: Unity generated quest completion loop, with Application-layer quest plan/state/report artifacts, Unity Alpha ordered quest phases, objective checklist, generated dialogue/item/event command correlation, completion/reward proof, invalid/fake/leak rejection, product smoke route `unity-quest-completion-loop` and final stop at `unity_generated_quest_completion_loop_verification`. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
@@ -95,13 +96,13 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-unity_generated_runtime_state_loop_verification
+unity_generated_quest_completion_loop_verification
 ```
 
 Allowed next sequence:
 
-1. Review `unity_generated_runtime_state_loop_verification` evidence from the produced Unity runtime state loop report, state JSON, Windows player, Unity build log, launch/play-loop logs and command/state transition proof before marking the gate passed.
-2. Goal 016 regenerates compact repo-local root review artifacts under `.llmgc/procedural/unity-runtime-state-loop/` through the existing `unity-runtime-state-loop` product smoke route.
+1. Review `unity_generated_quest_completion_loop_verification` evidence from the produced Unity quest completion loop plan, state JSON, report, Windows player, Unity build log, launch/play-loop logs, ordered phase trace, objective checklist and reward proof before marking the gate passed.
+2. Goal 017 regenerates compact repo-local root review artifacts under `.llmgc/procedural/unity-quest-completion-loop/` through the existing `unity-quest-completion-loop` product smoke route.
 3. Generated Unity build outputs under `.llmgc/procedural/**/build/`, `.llmgc/procedural/**/logs/`, `.llmgc/procedural/**/unity-work/` and Unity-generated project folders are ignored by `.gitignore`; compact `.json` / `.md` report and verification artifacts remain eligible for review when a task requires them.
 
 Kill criterion:

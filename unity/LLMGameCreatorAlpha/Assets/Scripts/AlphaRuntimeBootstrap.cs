@@ -37,6 +37,7 @@ namespace LLMGameCreatorAlpha
         private bool dialogueChoiceSelected;
         private bool itemObtained;
         private bool questCompletedCandidate;
+        private bool rewardGranted;
         private bool eventApplied;
         private int inventoryItemCount;
         private string lastCommandId = string.Empty;
@@ -143,6 +144,13 @@ namespace LLMGameCreatorAlpha
             DrawLabel(ref y, "Command hints: " + commands.Count + "    Asset refs: " + assetRefCount);
             DrawLabel(ref y, "Player: (" + playerX + "," + playerY + ")    Focus: " + FocusName());
             DrawLabel(ref y, "Status: " + status);
+            DrawLabel(ref y, "Quest phase: " + CurrentQuestPhase() + "    Reward: " + rewardGranted.ToString().ToLowerInvariant());
+            DrawLabel(ref y, "Objectives: start=" + questStarted.ToString().ToLowerInvariant() +
+                " dialogue=" + dialogueSeen.ToString().ToLowerInvariant() +
+                " choice=" + dialogueChoiceSelected.ToString().ToLowerInvariant() +
+                " item=" + itemObtained.ToString().ToLowerInvariant() +
+                " event=" + eventApplied.ToString().ToLowerInvariant() +
+                " complete=" + questCompletedCandidate.ToString().ToLowerInvariant());
             DrawLabel(ref y, "State: quest=" + questStarted.ToString().ToLowerInvariant() +
                 " completeCandidate=" + questCompletedCandidate.ToString().ToLowerInvariant() +
                 " dialogue=" + dialogueSeen.ToString().ToLowerInvariant() +
@@ -295,7 +303,18 @@ namespace LLMGameCreatorAlpha
                 "alpha_runtime.command_hint_count=" + commands.Count,
                 "alpha_runtime.asset_ref_count=" + assetRefCount,
                 "alpha_runtime.scene_projection_loaded=" + (sceneNodes.Count > 0).ToString().ToLowerInvariant(),
-                "alpha_runtime.scene_node_count=" + sceneNodes.Count
+                "alpha_runtime.scene_node_count=" + sceneNodes.Count,
+                "alpha_runtime.quest_loop_started=true",
+                "alpha_runtime.quest_loop_plan_loaded=true",
+                "alpha_runtime.quest_loop.package_id=" + packageId,
+                "alpha_runtime.quest_loop.style_id=" + selectedStyleId,
+                "alpha_runtime.quest_loop.thread_id=" + selectedThreadId,
+                "alpha_runtime.quest_loop.quest_id=" + selectedQuestId,
+                "alpha_runtime.quest_loop.dialogue_id=" + selectedDialogueId,
+                "alpha_runtime.quest_loop.choice_id=" + DialogueChoiceId(),
+                "alpha_runtime.quest_loop.item_id=" + selectedItemId,
+                "alpha_runtime.quest_loop.event_id=" + selectedEventId,
+                "alpha_runtime.quest_loop.reward_id=" + selectedItemId
             };
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
@@ -375,6 +394,7 @@ namespace LLMGameCreatorAlpha
             lines.Add("alpha_runtime.inventory_item_count=" + inventoryItemCount);
             lines.Add("alpha_runtime.event_applied=" + eventApplied.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.commands_executed=" + currentCommandIndex);
+            AppendQuestCompletionLines(lines, initialState, finalState);
             lines.Add("alpha_runtime.play_loop_completed=" + IsCurrentLoopComplete().ToString().ToLowerInvariant());
             return lines;
         }
@@ -461,6 +481,7 @@ namespace LLMGameCreatorAlpha
             }
 
             questCompletedCandidate = questStarted && dialogueSeen && dialogueChoiceSelected && itemObtained && eventApplied;
+            rewardGranted = questCompletedCandidate;
         }
 
         private void ResetLoop()
@@ -481,6 +502,7 @@ namespace LLMGameCreatorAlpha
             dialogueChoiceSelected = false;
             itemObtained = false;
             questCompletedCandidate = false;
+            rewardGranted = false;
             eventApplied = false;
             inventoryItemCount = 0;
             lastCommandId = string.Empty;
@@ -500,7 +522,120 @@ namespace LLMGameCreatorAlpha
                 dialogueChoiceSelected &&
                 itemObtained &&
                 inventoryItemCount > 0 &&
-                eventApplied;
+                eventApplied &&
+                rewardGranted;
+        }
+
+        private void AppendQuestCompletionLines(ICollection<string> lines, AlphaRuntimeStateSnapshot initialState, AlphaRuntimeStateSnapshot finalState)
+        {
+            lines.Add("alpha_runtime.quest_phase.before=not_started");
+            lines.Add("alpha_runtime.quest_phase.after.started=started");
+            lines.Add("alpha_runtime.quest_phase.after.dialogue_opened=dialogue_opened");
+            lines.Add("alpha_runtime.quest_phase.after.choice_selected=choice_selected");
+            lines.Add("alpha_runtime.quest_phase.after.item_obtained=item_obtained");
+            lines.Add("alpha_runtime.quest_phase.after.event_applied=event_applied");
+            lines.Add("alpha_runtime.quest_phase.after.completed=completed");
+            lines.Add("alpha_runtime.quest_phase.after.reward_granted=reward_granted");
+
+            var start = Command("quest/start", selectedQuestId);
+            var dialogue = Command("dialogue/open", selectedDialogueId);
+            var choice = Command("dialogue/choose", string.Empty);
+            var item = Command("event/add_item", selectedItemId);
+            if (string.IsNullOrWhiteSpace(item.CommandId))
+            {
+                item = Command("loot/roll", string.Empty);
+            }
+
+            var eventCommand = CommandWithSecondary("event/", selectedEventId);
+            var completion = string.IsNullOrWhiteSpace(eventCommand.CommandId) ? item : eventCommand;
+            AppendQuestObjective(lines, 0, "quest_start", selectedQuestId, start, initialState.QuestStarted.ToString().ToLowerInvariant(), finalState.QuestStarted.ToString().ToLowerInvariant());
+            AppendQuestObjective(lines, 1, "dialogue_open", selectedDialogueId, dialogue, initialState.DialogueOpened.ToString().ToLowerInvariant(), finalState.DialogueOpened.ToString().ToLowerInvariant());
+            AppendQuestObjective(lines, 2, "dialogue_choice", DialogueChoiceId(), choice, initialState.DialogueChoiceSelected.ToString().ToLowerInvariant(), finalState.DialogueChoiceSelected.ToString().ToLowerInvariant());
+            AppendQuestObjective(lines, 3, "item_obtained", selectedItemId, item, initialState.ItemObtained.ToString().ToLowerInvariant(), finalState.ItemObtained.ToString().ToLowerInvariant());
+            AppendQuestObjective(lines, 4, "event_applied", selectedEventId, eventCommand, initialState.EventApplied.ToString().ToLowerInvariant(), finalState.EventApplied.ToString().ToLowerInvariant());
+            AppendQuestObjective(lines, 5, "quest_completed_reward", selectedQuestId, completion, initialState.QuestCompletedCandidate.ToString().ToLowerInvariant(), finalState.QuestCompletedCandidate.ToString().ToLowerInvariant());
+
+            lines.Add("alpha_runtime.quest_completed.before=" + initialState.QuestCompletedCandidate.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.quest_completed.after=" + finalState.QuestCompletedCandidate.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.reward_granted.before=false");
+            lines.Add("alpha_runtime.reward_granted.after=" + rewardGranted.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.reward.kind=item");
+            lines.Add("alpha_runtime.reward.id=" + selectedItemId);
+            lines.Add("alpha_runtime.quest_loop_completed=" + (finalState.QuestCompletedCandidate && rewardGranted).ToString().ToLowerInvariant());
+        }
+
+        private static void AppendQuestObjective(
+            ICollection<string> lines,
+            int index,
+            string kind,
+            string sourceId,
+            AlphaCommandHint command,
+            string before,
+            string after)
+        {
+            lines.Add("alpha_runtime.quest_objective." + index + ".objective_id=objective/" + index + "/" + kind);
+            lines.Add("alpha_runtime.quest_objective." + index + ".objective_kind=" + kind);
+            lines.Add("alpha_runtime.quest_objective." + index + ".source_id=" + sourceId);
+            lines.Add("alpha_runtime.quest_objective." + index + ".required_command_id=" + command.CommandId);
+            lines.Add("alpha_runtime.quest_objective." + index + ".required_command_type=" + command.CommandType);
+            lines.Add("alpha_runtime.quest_objective." + index + ".required_target_id=" + command.TargetId);
+            lines.Add("alpha_runtime.quest_objective." + index + ".required_secondary_target_id=" + command.SecondaryTargetId);
+            lines.Add("alpha_runtime.quest_objective." + index + ".before=" + before);
+            lines.Add("alpha_runtime.quest_objective." + index + ".after=" + after);
+        }
+
+        private AlphaCommandHint Command(string commandType, string targetId)
+        {
+            return commands.FirstOrDefault(command =>
+                command.CommandType == commandType &&
+                (string.IsNullOrWhiteSpace(targetId) || command.TargetId == targetId)) ?? AlphaCommandHint.Empty;
+        }
+
+        private AlphaCommandHint CommandWithSecondary(string commandTypePrefix, string secondaryTargetId)
+        {
+            return commands.FirstOrDefault(command =>
+                command.CommandType.StartsWith(commandTypePrefix, StringComparison.Ordinal) &&
+                (string.IsNullOrWhiteSpace(secondaryTargetId) || command.SecondaryTargetId == secondaryTargetId)) ?? AlphaCommandHint.Empty;
+        }
+
+        private string DialogueChoiceId()
+        {
+            return commands.FirstOrDefault(command => command.CommandType == "dialogue/choose")?.TargetId ?? string.Empty;
+        }
+
+        private string CurrentQuestPhase()
+        {
+            if (rewardGranted)
+            {
+                return "reward_granted";
+            }
+
+            if (questCompletedCandidate)
+            {
+                return "completed";
+            }
+
+            if (eventApplied)
+            {
+                return "event_applied";
+            }
+
+            if (itemObtained)
+            {
+                return "item_obtained";
+            }
+
+            if (dialogueChoiceSelected)
+            {
+                return "choice_selected";
+            }
+
+            if (dialogueSeen)
+            {
+                return "dialogue_opened";
+            }
+
+            return questStarted ? "started" : "not_started";
         }
 
         private string Position()
@@ -546,6 +681,7 @@ namespace LLMGameCreatorAlpha
                 ItemObtained = itemObtained,
                 InventoryItemCount = inventoryItemCount,
                 EventApplied = eventApplied,
+                RewardGranted = rewardGranted,
                 LastCommandId = lastCommandId,
                 LastCommandType = lastCommandType,
                 LastCommandTargetId = lastCommandTargetId,
@@ -1019,6 +1155,7 @@ namespace LLMGameCreatorAlpha
             public bool ItemObtained;
             public int InventoryItemCount;
             public bool EventApplied;
+            public bool RewardGranted;
             public string LastCommandId = string.Empty;
             public string LastCommandType = string.Empty;
             public string LastCommandTargetId = string.Empty;

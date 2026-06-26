@@ -11,13 +11,13 @@ This document is not a replacement for `docs/FULL_GAME_GENERATION_MASTER_PLAN.md
 Accepted through:
 
 ```text
-unity_generated_scene_content_projection_verification passed
+unity_generated_runtime_state_loop_verification passed
 ```
 
 Produced for review:
 
 ```text
-unity_generated_runtime_state_loop_verification required
+unity_generated_quest_completion_loop_verification required
 ```
 
 Current capabilities:
@@ -30,12 +30,13 @@ Current capabilities:
 - visible Unity Alpha presentation;
 - generated scene projection derived from package/config/asset refs;
 - generated Unity runtime state loop evidence with quest/dialogue/item/inventory/event before-after transitions;
+- generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - compact review artifacts under `.llmgc/procedural/...`;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The Unity Alpha now proves a primitive generated runtime state loop, but it does not yet provide an end-to-end generated quest completion loop that feels like a coherent mini-game.
+The Unity Alpha now proves one generated micro-quest completion loop, but it does not yet prove multiple generated styles/seeds can produce distinct playable quest loops through the same pipeline.
 
 ## Queue Rules
 
@@ -95,7 +96,7 @@ The Alpha shows generated scene nodes plus visible state changes: quest started/
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start S138 or Goal 017 until it is accepted.
+Accepted by user prompt before Goal 017.
 
 ### Goal 017: Unity Generated Quest Completion Loop
 
@@ -112,6 +113,10 @@ Make one generated micro-quest playable end-to-end in Unity Alpha: start, intera
 Expected user-visible result:
 
 The user can run the player and complete one generated micro-quest in a primitive but coherent loop.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start S146 or Goal 018 until it is accepted.
 
 ### Goal 018: Unity Multi-Variant Playable Scenario
 
@@ -362,7 +367,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-unity_generated_runtime_state_loop_verification
+unity_generated_quest_completion_loop_verification
 ```
 
 Status:
