@@ -588,8 +588,8 @@
     "buildFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/build/windows",
     "executableRelativePath": "LLMGameCreatorAlpha.exe",
     "fileCount": 221,
-    "totalByteCount": 138569875,
-    "manifestHash": "6c774e5228b13f49ecc6cd65031edad00705dd9dfee84ce8f99f5f4fe950c57d",
+    "totalByteCount": 138585766,
+    "manifestHash": "62b7045be108a5f35c72c6587f01bcfb47d447458f865c7e2cced66a226b4e7c",
     "windowsExecutableProduced": true,
     "unityBuildProduced": true,
     "files": [
@@ -614,14 +614,14 @@
       {
         "relativePath": "LLMGameCreatorAlpha_Data/Managed/Assembly-CSharp.dll",
         "kind": "build_payload",
-        "hash": "8119c2072d80090fe324809020026242a9697f8e3dff6accd20f48fa42674734",
-        "byteCount": 9728
+        "hash": "3a47a4ea76d5c7452c44cac8f519e3633d6c70b62950264489ad4692ec96c574",
+        "byteCount": 22528
       },
       {
         "relativePath": "LLMGameCreatorAlpha_Data/Managed/Assembly-CSharp.pdb",
         "kind": "build_payload",
-        "hash": "3161ac01ec746d1b7b6c6ee226452c5592a13f70d5c92d05faa41537957b6990",
-        "byteCount": 15084
+        "hash": "edfecb24cb37767ec234bb5c9dfcb8f0a38a94b4a8a819e52ec0d7c167ab5b65",
+        "byteCount": 18176
       },
       {
         "relativePath": "LLMGameCreatorAlpha_Data/Managed/Mono.Security.dll",
@@ -1742,13 +1742,13 @@
       {
         "relativePath": "LLMGameCreatorAlpha_Data/boot.config",
         "kind": "build_payload",
-        "hash": "14bd901ddfbe53a603cdc3f1e046d710e54730a40a94f1619d14aaef03d8a76a",
-        "byteCount": 332
+        "hash": "65ea1cac43b8d31be32116a8c442d8acba1802bfd6371c89f50509e3b62f1cef",
+        "byteCount": 331
       },
       {
         "relativePath": "LLMGameCreatorAlpha_Data/globalgamemanagers",
         "kind": "build_payload",
-        "hash": "d4c3b39e80cfde6ca5442e77c5f3c9e343156f6d715d0ea45063e8e5a45d1ba5",
+        "hash": "c648e5303ffd353dbff90b99ab52059491f01232e498a6c6b46047ce60cbaa07",
         "byteCount": 21060
       },
       {
@@ -1942,10 +1942,11 @@
   },
   "launchVerification": {
     "launchVerified": true,
-    "playLoopVerified": false,
+    "playLoopVerified": true,
     "processExitCode": 0,
-    "durationSeconds": 1,
+    "durationSeconds": 2,
     "logRelativePath": ".llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log",
+    "playLoopLogRelativePath": ".llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log",
     "diagnostics": [
       {
         "severity": "info",
@@ -2233,7 +2234,7 @@
   "unityEditorExecuted": true,
   "unityBuildProduced": true,
   "launchVerified": true,
-  "playLoopVerified": false,
+  "playLoopVerified": true,
   "externalExecution": {
     "llmExecuted": false,
     "ragExecuted": false,
@@ -2250,8 +2251,8 @@
   "projectFilesChanged": false,
   "generatorLibraryChanged": false,
   "deterministicReportRelativePath": ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-report.json",
-  "deterministicHash": "9f0f8d0283df74ea30c6efdce16614d5b5b0b31477f690cc79abb5055fb93f64",
-  "buildManifestHash": "6c774e5228b13f49ecc6cd65031edad00705dd9dfee84ce8f99f5f4fe950c57d",
+  "deterministicHash": "5546ff9ed181267dda0a6e743c00a6f0ac8af2d9eddc7d074c26ce5b759a73c1",
+  "buildManifestHash": "62b7045be108a5f35c72c6587f01bcfb47d447458f865c7e2cced66a226b4e7c",
   "diagnostics": [
     {
       "severity": "error",

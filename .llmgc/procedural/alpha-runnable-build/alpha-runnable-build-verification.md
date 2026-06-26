@@ -20,10 +20,12 @@ alpha_runnable_windows_build_verification
 - Unity build log: .llmgc/procedural/alpha-runnable-build/logs/unity-build.log
 - Build output folder: .llmgc/procedural/alpha-runnable-build/build/windows
 - Executable relative path: LLMGameCreatorAlpha.exe
-- Launch command: & "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\build\windows\LLMGameCreatorAlpha.exe" -batchmode -nographics -alphaSmokeExit -alphaLogPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\logs\alpha-player-launch.log"
+- Launch command: & "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\build\windows\LLMGameCreatorAlpha.exe" -batchmode -nographics -alphaSmokeExit -alphaPlayLoopSmokeExit -alphaLogPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\logs\alpha-player-launch.log" -alphaPlayLoopLogPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\logs\alpha-player-play-loop.log"
 - Launch log: .llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log
+- Play-loop command: & "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\build\windows\LLMGameCreatorAlpha.exe" -batchmode -nographics -alphaSmokeExit -alphaPlayLoopSmokeExit -alphaLogPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\logs\alpha-player-launch.log" -alphaPlayLoopLogPath "C:\Users\endim\LLMGameCreator\.llmgc\procedural\alpha-runnable-build\logs\alpha-player-play-loop.log"
+- Play-loop log: .llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log
 - Launch verified: true
-- Play loop verified: false
+- Play loop verified: true
 - Invalid/fake/leak scenarios rejected: 14/14
 
 Manual review steps:
@@ -31,4 +33,4 @@ Manual review steps:
 1. Review the produced Windows player folder and launch log from this run.
 2. Launch the produced `.exe` interactively if a manual graphics/play pass is required.
 3. Verify actual play-loop behavior before marking `alpha_runnable_windows_build_verification` passed.
-4. Keep `playLoopVerified=false` until deterministic automation or explicit manual evidence proves the loop.
+4. Keep `alpha_runnable_windows_build_verification` required until the deterministic play-loop evidence is reviewed.

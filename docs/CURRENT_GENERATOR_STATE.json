@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T10:55:00Z",
+    "updated_at_utc":  "2026-06-26T11:35:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 013 Alpha runnable Windows build verification required after S113B Unity entrypoint blocker resolution",
+    "current_phase_title":  "Goal 013 Alpha runnable Windows build verification required after S113C Unity minimal play-loop verification",
     "gate_status":  "alpha_runnable_windows_build_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "product_slice_113b_alpha_unity_build_entrypoint_blocker_resolution",
-    "active_manual_gate":  "S113B resolved the repository-local Unity project/build-entrypoint blocker and produced a real Windows player plus diagnostic launch evidence; alpha_runnable_windows_build_verification remains required and not passed until review/play evidence is accepted.",
-    "current_user_action":  "Review the produced Alpha Windows player folder, Unity build log and launch diagnostic log; do not mark alpha_runnable_windows_build_verification passed until the real player evidence and play-loop proof are accepted.",
-    "recommended_next_decision":  "The user confirmed unity_runtime_export_vertical_slice_artifact_verification passed before Goal 013. Goal 013 adds a narrow Application-layer Alpha runnable build acceptance service under Design/AlphaBuild, selects three deterministic style candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging, validates physical files/hashes/refs and invalid/fake/leak scenarios, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by replacing long physical source-evidence asset file names with compact deterministic asset-000-<sha8>.fixture names, preserving full original ids inside JSON/report evidence. Product Slice 113B adds a repository-local Unity Alpha template at unity/LLMGameCreatorAlpha, a BuildPipeline.BuildPlayer Windows x64 entrypoint, a minimal data-loader runtime bootstrap, real Unity CLI build execution, build-output byte/hash validation, staged StreamingAssets validation and diagnostic player launch verification. Repo-local Alpha artifacts now show windowsExecutableProduced=true, unityEditorExecuted=true, unityBuildProduced=true, launchVerified=true and playLoopVerified=false. Goal 013 stops at alpha_runnable_windows_build_verification required; do not mark it passed until the produced player evidence and play-loop proof are accepted.",
+    "active_manual_gate":  "S113C produced a visible Unity Alpha mini-loop plus automated play-loop diagnostic evidence from the real Windows player; alpha_runnable_windows_build_verification remains required and not passed until review/play evidence is accepted.",
+    "current_user_action":  "Review the produced Alpha Windows player folder, Unity build log, launch diagnostic log and play-loop diagnostic log; do not mark alpha_runnable_windows_build_verification passed until the real player evidence and play-loop proof are accepted.",
+    "recommended_next_decision":  "The user confirmed unity_runtime_export_vertical_slice_artifact_verification passed before Goal 013. Goal 013 adds a narrow Application-layer Alpha runnable build acceptance service under Design/AlphaBuild, selects three deterministic style candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging, validates physical files/hashes/refs and invalid/fake/leak scenarios, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by replacing long physical source-evidence asset file names with compact deterministic asset-000-<sha8>.fixture names, preserving full original ids inside JSON/report evidence. Product Slice 113B adds a repository-local Unity Alpha template at unity/LLMGameCreatorAlpha, a BuildPipeline.BuildPlayer Windows x64 entrypoint, a minimal data-loader runtime bootstrap, real Unity CLI build execution, build-output byte/hash validation, staged StreamingAssets validation and diagnostic player launch verification. Product Slice 113C adds a visible IMGUI Alpha loop and automated player play-loop diagnostic mode derived from staged unity-runtime-config.json and game-package.json. Repo-local Alpha artifacts now show windowsExecutableProduced=true, unityEditorExecuted=true, unityBuildProduced=true, launchVerified=true and playLoopVerified=true. Goal 013 stops at alpha_runnable_windows_build_verification required; do not mark it passed until the produced player evidence and play-loop proof are accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -422,9 +422,9 @@
                              "Content generation at scale acceptance sidecars",
                              "Minimum deterministic asset pipeline acceptance sidecars",
                              "Unity runtime export vertical slice acceptance sidecars",
-                             "Alpha runnable Windows build staging, compact artifact paths, Unity project/template, Windows player build and diagnostic launch evidence"
+                             "Alpha runnable Windows build staging, compact artifact paths, Unity project/template, Windows player build, diagnostic launch evidence and automated minimal play-loop evidence"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after S113B stop at alpha_runnable_windows_build_verification required and do not start Goal 014 or post-Goal-013 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after S113C stop at alpha_runnable_windows_build_verification required and do not start Goal 014 or post-Goal-013 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -451,14 +451,15 @@
                                                                   },
     "alpha_runnable_windows_build_verification":  {
                                                      "status":  "required",
-                                                     "evidence_source":  "product_slice_113b_alpha_unity_build_entrypoint_blocker_resolution",
+                                                     "evidence_source":  "product_slice_113c_alpha_unity_minimal_play_loop_verification",
                                                      "observed_result":  [
                                                          "Repository-local Unity project/template found at unity/LLMGameCreatorAlpha",
                                                          "Repository-local BuildPipeline.BuildPlayer entrypoint found at unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs",
                                                          "Unity 6000.1.10f1 executed in batch mode and produced .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe",
-                                                         "Windows build manifest validated 221 files and 138569875 bytes from actual build output",
+                                                         "Windows build manifest validated 221 files and 138585766 bytes from actual build output",
                                                          "Diagnostic player launch exited 0 and loaded package/config/asset manifest",
-                                                         "playLoopVerified remains false pending deterministic automation or explicit manual play evidence"
+                                                         "Automated play-loop diagnostic executed 5 generated command hints in order and recorded quest/dialogue/item/event state flags",
+                                                         "playLoopVerified=true from .llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log; gate remains required"
                                                                          ],
                                                      "next_action":  "review_alpha_windows_player_evidence_before_marking_gate_passed"
                                                  },
@@ -478,17 +479,17 @@
                                                  "title":  "Alpha Runnable Windows Build",
                                                  "status":  "verification_required",
                                                 "blocked_at_utc":  "",
-                                                "summary":  "Goal 013 records the user-confirmed unity_runtime_export_vertical_slice_artifact_verification passed gate, adds a narrow Application-layer Alpha runnable build contract under Design/AlphaBuild, selects deterministic frontier_survival, gothic_mystery and trade_caravan candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging with hashes and byte counts, validates selected loop refs and asset refs, rejects invalid/fake/leak scenarios causally, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by compacting source-evidence and staging physical asset names to deterministic asset-000-<sha8>.fixture paths, preserving full original ids in JSON/report fields, removing stale long-name files during regeneration, and proving compact source/staging paths. Product Slice 113B adds the repository-local Unity Alpha template and Windows BuildPipeline entrypoint, executes Unity 6000.1.10f1 in batch mode, produces .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe, validates the 221-file build output from actual bytes, launches the player in diagnostic batch mode, proves package/config/asset-manifest load in logs, and keeps playLoopVerified=false. It stops at alpha_runnable_windows_build_verification required, not passed.",
+                                                "summary":  "Goal 013 records the user-confirmed unity_runtime_export_vertical_slice_artifact_verification passed gate, adds a narrow Application-layer Alpha runnable build contract under Design/AlphaBuild, selects deterministic frontier_survival, gothic_mystery and trade_caravan candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging with hashes and byte counts, validates selected loop refs and asset refs, rejects invalid/fake/leak scenarios causally, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by compacting source-evidence and staging physical asset names to deterministic asset-000-<sha8>.fixture paths, preserving full original ids in JSON/report fields, removing stale long-name files during regeneration, and proving compact source/staging paths. Product Slice 113B adds the repository-local Unity Alpha template and Windows BuildPipeline entrypoint, executes Unity 6000.1.10f1 in batch mode, produces .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe, validates build output from actual bytes and proves package/config/asset-manifest load in logs. Product Slice 113C adds a visible IMGUI mini-loop and automated player play-loop diagnostic mode, executes five generated command hints from staged config/package evidence, records quest/dialogue/item/event state flags, and sets launchVerified=true plus playLoopVerified=true while keeping alpha_runnable_windows_build_verification required, not passed.",
                                                  "scenario_id":  "alpha-runnable-build",
                                                  "checks":  [
-                                                               "AlphaRunnableBuild focused tests after S113B: 7/7 passed",
-                                                               "S113B filtered tests (AlphaRunnableBuild/UnityRuntimeExport/CurrentGeneratorStateDocsTests): 23/23 passed",
-                                                               "S113B repo-local AlphaRunnableBuildProductSmoke regeneration: 1/1 passed",
+                                                               "AlphaRunnableBuild focused tests after S113C: 13/13 passed",
+                                                               "S113C filtered tests (AlphaRunnableBuild/UnityRuntimeExport/CurrentGeneratorStateDocsTests): 28/28 passed",
+                                                               "S113C repo-local AlphaRunnableBuildProductSmoke regeneration: 1/1 passed",
                                                                "alpha-runnable-build product smoke: 1/1 passed",
                                                                "repo-local .llmgc/procedural/alpha-runnable-build artifacts regenerated via AlphaRunnableBuildProductSmoke",
-                                                               "S113B report hash 9f0f8d0283df74ea30c6efdce16614d5b5b0b31477f690cc79abb5055fb93f64, build manifest hash 6c774e5228b13f49ecc6cd65031edad00705dd9dfee84ce8f99f5f4fe950c57d, build output 221 files / 138569875 bytes",
-                                                               "launch verification exited 0 and wrote .llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log; playLoopVerified remains false",
-                                                               "check-all.ps1: 794/794 tests passed, build 0 warnings / 0 errors"
+                                                               "S113C report hash 5546ff9ed181267dda0a6e743c00a6f0ac8af2d9eddc7d074c26ce5b759a73c1, build manifest hash 62b7045be108a5f35c72c6587f01bcfb47d447458f865c7e2cced66a226b4e7c, build output 221 files / 138585766 bytes",
+                                                               "launch/play-loop verification exited 0 and wrote .llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log plus .llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log; playLoopVerified=true",
+                                                               "check-all.ps1: 799/799 tests passed, build 0 warnings / 0 errors"
                                                             ]
                                              },
     "goal_012_unity_runtime_export_vertical_slice":  {

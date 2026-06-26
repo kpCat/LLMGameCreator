@@ -316,6 +316,102 @@ public sealed class AlphaRunnableBuildAcceptanceTests
         Assert.False(second.Report.PlayLoopVerified);
     }
 
+    [Fact]
+    public void PlayLoopLogParserRejectsMissingLog()
+    {
+        using var temp = new TempDirectory();
+        var report = BuildAlphaReport(temp.Path);
+        var launchLogPath = Path.Combine(temp.Path, "alpha-player-launch.log");
+        File.WriteAllLines(launchLogPath, ["alpha_runtime.launch_completed=true"]);
+
+        var validation = AlphaRunnableBuildAcceptanceService.ValidatePlayLoopLog(
+            launchLogPath,
+            Path.Combine(temp.Path, "missing-play-loop.log"),
+            report.PrimaryBuildCandidate);
+
+        Assert.False(validation.PlayLoopVerified);
+        Assert.Contains(validation.Diagnostics, item => item.Code == "alpha_build.play_loop.log_missing");
+    }
+
+    [Fact]
+    public void PlayLoopLogParserRejectsWrongPackageAndHashes()
+    {
+        using var temp = new TempDirectory();
+        var report = BuildAlphaReport(temp.Path);
+        var logs = WritePlayLoopLogs(temp.Path, report.PrimaryBuildCandidate, lines =>
+        {
+            ReplaceLine(lines, "alpha_runtime.package_id=", "alpha_runtime.package_id=wrong/package");
+            ReplaceLine(lines, "alpha_runtime.package_hash=", "alpha_runtime.package_hash=wrong-package-hash");
+            ReplaceLine(lines, "alpha_runtime.asset_manifest_hash=", "alpha_runtime.asset_manifest_hash=wrong-asset-hash");
+        });
+
+        var validation = AlphaRunnableBuildAcceptanceService.ValidatePlayLoopLog(
+            logs.LaunchLogPath,
+            logs.PlayLoopLogPath,
+            report.PrimaryBuildCandidate);
+
+        Assert.False(validation.PlayLoopVerified);
+        Assert.Contains(validation.Diagnostics, item => item.Code == "alpha_build.play_loop.package_id_mismatch");
+        Assert.Contains(validation.Diagnostics, item => item.Code == "alpha_build.play_loop.package_hash_mismatch");
+        Assert.Contains(validation.Diagnostics, item => item.Code == "alpha_build.play_loop.asset_manifest_hash_mismatch");
+    }
+
+    [Fact]
+    public void PlayLoopLogParserRejectsMissingCommandExecutionAndStateFlags()
+    {
+        using var temp = new TempDirectory();
+        var report = BuildAlphaReport(temp.Path);
+        var logs = WritePlayLoopLogs(temp.Path, report.PrimaryBuildCandidate, lines =>
+        {
+            lines.RemoveAll(line => line.StartsWith("alpha_runtime.command_executed.2.id=", StringComparison.Ordinal));
+            ReplaceLine(lines, "alpha_runtime.commands_executed=", "alpha_runtime.commands_executed=2");
+            ReplaceLine(lines, "alpha_runtime.quest_started=", "alpha_runtime.quest_started=false");
+            ReplaceLine(lines, "alpha_runtime.state_transition.dialogue_choice=", "alpha_runtime.state_transition.dialogue_choice=false");
+        });
+
+        var validation = AlphaRunnableBuildAcceptanceService.ValidatePlayLoopLog(
+            logs.LaunchLogPath,
+            logs.PlayLoopLogPath,
+            report.PrimaryBuildCandidate);
+
+        Assert.False(validation.PlayLoopVerified);
+        Assert.Contains(validation.Diagnostics, item => item.Code == "alpha_build.play_loop.commands_executed_too_low");
+        Assert.Contains(validation.Diagnostics, item => item.Code == "alpha_build.play_loop.command_id_mismatch");
+        Assert.Contains(validation.Diagnostics, item => item.Code == "alpha_build.play_loop.state_flag_missing");
+    }
+
+    [Fact]
+    public void PlayLoopLogParserAcceptsValidLogTiedToSelectedReportEvidence()
+    {
+        using var temp = new TempDirectory();
+        var report = BuildAlphaReport(temp.Path);
+        var logs = WritePlayLoopLogs(temp.Path, report.PrimaryBuildCandidate);
+
+        var validation = AlphaRunnableBuildAcceptanceService.ValidatePlayLoopLog(
+            logs.LaunchLogPath,
+            logs.PlayLoopLogPath,
+            report.PrimaryBuildCandidate);
+
+        Assert.True(validation.PlayLoopVerified, string.Join(Environment.NewLine, validation.Diagnostics.Select(item => $"{item.Code}:{item.Target}:{item.Message}")));
+        Assert.Equal(report.PrimaryBuildCandidate.CommandHints.Count, validation.CommandHintsExpected);
+        Assert.Equal(report.PrimaryBuildCandidate.CommandHints.Count, validation.CommandsExecuted);
+    }
+
+    [Fact]
+    public void AlphaStateRemainsInsideGoal013WithoutStartingGoal014()
+    {
+        using var temp = new TempDirectory();
+        var report = BuildAlphaReport(temp.Path);
+        var text = JsonSerializer.Serialize(report, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+        Assert.Contains(report.FinalStatus, new[] { AlphaRunnableBuildAcceptanceService.BlockerGate, AlphaRunnableBuildAcceptanceService.FinalGate });
+        Assert.False(report.Accepted);
+        Assert.Contains("S113", report.CompletedSlices);
+        Assert.DoesNotContain("S114", text, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("Goal 014", text, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("goal_014", text, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static (ContentGenerationScaleAcceptanceResult Content, MinimumAssetPipelineAcceptanceResult Assets) BuildPriorEvidence(string projectRoot)
     {
         var content = ContentGenerationScaleAcceptanceTestFactory.CreateService()
@@ -323,6 +419,89 @@ public sealed class AlphaRunnableBuildAcceptanceTests
         var assets = MinimumAssetPipelineAcceptanceTestFactory.CreateService()
             .BuildFromContentGeneration(projectRoot, ResolveAssetPackDirectory(), content);
         return (content, assets);
+    }
+
+    private static AlphaRunnableBuildReport BuildAlphaReport(string projectRoot)
+    {
+        var evidence = BuildPriorEvidence(projectRoot);
+        return new AlphaRunnableBuildAcceptanceService()
+            .BuildFromAcceptedEvidence(projectRoot, evidence.Content, evidence.Assets)
+            .Report;
+    }
+
+    private static (string LaunchLogPath, string PlayLoopLogPath) WritePlayLoopLogs(
+        string root,
+        AlphaBuildCandidate candidate,
+        Action<List<string>>? mutate = null)
+    {
+        var launchLogPath = Path.Combine(root, "alpha-player-launch.log");
+        var playLoopLogPath = Path.Combine(root, "alpha-player-play-loop.log");
+        File.WriteAllLines(
+            launchLogPath,
+            [
+                "alpha_runtime.launch_completed=true",
+                "alpha_runtime.package_id=" + candidate.PackageId,
+                "alpha_runtime.package_hash=" + candidate.PackageHash,
+                "alpha_runtime.asset_manifest_hash=" + candidate.AssetManifestHash
+            ]);
+
+        var lines = new List<string>
+        {
+            "alpha_runtime.play_loop_started=true",
+            "alpha_runtime.payload_root_exists=true",
+            "alpha_runtime.config_loaded=true",
+            "alpha_runtime.package_loaded=true",
+            "alpha_runtime.asset_manifest_loaded=true",
+            "alpha_runtime.package_id=" + candidate.PackageId,
+            "alpha_runtime.package_hash=" + candidate.PackageHash,
+            "alpha_runtime.asset_manifest_hash=" + candidate.AssetManifestHash,
+            "alpha_runtime.start_map_id=" + candidate.LoopRefs.MapId,
+            "alpha_runtime.selected_thread_id=" + candidate.SelectedThreadId,
+            "alpha_runtime.selected_quest_id=" + candidate.LoopRefs.QuestId,
+            "alpha_runtime.selected_dialogue_id=" + candidate.LoopRefs.DialogueId,
+            "alpha_runtime.selected_item_id=" + candidate.LoopRefs.ItemId,
+            "alpha_runtime.selected_event_id=" + candidate.LoopRefs.EventId,
+            "alpha_runtime.command_hint_count=" + candidate.CommandHints.Count,
+            "alpha_runtime.asset_ref_count=" + candidate.AssetRefs.Count,
+            "alpha_runtime.ref_resolved.map=true",
+            "alpha_runtime.ref_resolved.quest=true",
+            "alpha_runtime.ref_resolved.dialogue=true",
+            "alpha_runtime.ref_resolved.item=true",
+            "alpha_runtime.ref_resolved.event=true"
+        };
+
+        for (var index = 0; index < candidate.CommandHints.Count; index++)
+        {
+            var command = candidate.CommandHints[index];
+            lines.Add("alpha_runtime.command_executed." + index + ".id=" + command.CommandId);
+            lines.Add("alpha_runtime.command_executed." + index + ".type=" + command.CommandType);
+        }
+
+        lines.AddRange(
+        [
+            "alpha_runtime.state_transition.quest_start=true",
+            "alpha_runtime.state_transition.dialogue_open=true",
+            "alpha_runtime.state_transition.dialogue_choice=true",
+            "alpha_runtime.state_transition.item_or_loot=true",
+            "alpha_runtime.state_transition.event_application=true",
+            "alpha_runtime.quest_started=true",
+            "alpha_runtime.dialogue_seen=true",
+            "alpha_runtime.item_obtained=true",
+            "alpha_runtime.event_applied=true",
+            "alpha_runtime.commands_executed=" + candidate.CommandHints.Count,
+            "alpha_runtime.play_loop_completed=true"
+        ]);
+
+        mutate?.Invoke(lines);
+        File.WriteAllLines(playLoopLogPath, lines);
+        return (launchLogPath, playLoopLogPath);
+    }
+
+    private static void ReplaceLine(List<string> lines, string prefix, string replacement)
+    {
+        var index = lines.FindIndex(line => line.StartsWith(prefix, StringComparison.Ordinal));
+        Assert.True(index >= 0, prefix);
+        lines[index] = replacement;
     }
 
     private static string ResolveContentPackDirectory() =>

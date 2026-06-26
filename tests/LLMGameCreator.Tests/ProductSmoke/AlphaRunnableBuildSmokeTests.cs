@@ -51,7 +51,6 @@ public sealed class AlphaRunnableBuildSmokeTests
         Assert.True(report.InvalidMatrix.Passed);
         Assert.True(report.BuildEnvironment.RepoUnityProjectFound);
         Assert.True(report.BuildEnvironment.RepoBuildScriptFound);
-        Assert.False(report.PlayLoopVerified);
         Assert.False(report.RuntimePreviewDependency);
         Assert.False(report.PublicGamePackageSchemaChanged);
         Assert.False(report.ProjectFilesChanged);
@@ -67,6 +66,10 @@ public sealed class AlphaRunnableBuildSmokeTests
             Assert.NotEmpty(report.BuildOutput.ExecutableRelativePath);
             Assert.Contains(report.BuildOutput.Files, item => item.Kind == "windows_executable");
             Assert.Contains(report.BuildOutput.Files, item => item.RelativePath == "LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/game-data/game-package.json");
+            Assert.True(report.LaunchVerified, string.Join(Environment.NewLine, report.LaunchVerification.Diagnostics.Select(item => $"{item.Code}:{item.Target}:{item.Message}")));
+            Assert.True(report.PlayLoopVerified, string.Join(Environment.NewLine, report.LaunchVerification.Diagnostics.Select(item => $"{item.Code}:{item.Target}:{item.Message}")));
+            Assert.False(string.IsNullOrWhiteSpace(report.LaunchVerification.LogRelativePath));
+            Assert.False(string.IsNullOrWhiteSpace(report.LaunchVerification.PlayLoopLogRelativePath));
         }
         else
         {
@@ -79,7 +82,6 @@ public sealed class AlphaRunnableBuildSmokeTests
         if (report.LaunchVerified)
         {
             Assert.Contains(report.LaunchVerification.Diagnostics, item => item.Code == "alpha_build.launch.executed");
-            Assert.False(string.IsNullOrWhiteSpace(report.LaunchVerification.LogRelativePath));
         }
     }
 

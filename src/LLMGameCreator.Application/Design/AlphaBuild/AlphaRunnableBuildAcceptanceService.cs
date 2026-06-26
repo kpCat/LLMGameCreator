@@ -140,7 +140,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
         var buildOutput = ValidateBuildOutput(projectRoot, buildRoot, staging, environment);
         diagnostics.AddRange(buildOutput.Diagnostics);
 
-        var launch = VerifyLaunchIfRequested(projectRoot, buildRoot, logsRoot, buildOutput, settings);
+        var launch = VerifyLaunchIfRequested(projectRoot, buildRoot, logsRoot, buildOutput, primary, settings);
         diagnostics.AddRange(launch.Diagnostics);
 
         var invalidMatrix = BuildInvalidMatrix(candidates, primary, staging, buildOutput, settings);
@@ -1102,6 +1102,8 @@ public sealed class AlphaRunnableBuildAcceptanceService
             $"- Executable relative path: {Display(report.BuildOutput.ExecutableRelativePath)}",
             $"- Launch command: {Display(report.LaunchVerification.LaunchCommandForVerification)}",
             $"- Launch log: {Display(report.LaunchVerification.LogRelativePath)}",
+            $"- Play-loop command: {Display(report.LaunchVerification.PlayLoopCommandForVerification)}",
+            $"- Play-loop log: {Display(report.LaunchVerification.PlayLoopLogRelativePath)}",
             $"- Launch verified: {report.LaunchVerified.ToString().ToLowerInvariant()}",
             $"- Play loop verified: {report.PlayLoopVerified.ToString().ToLowerInvariant()}",
             $"- Invalid/fake/leak scenarios rejected: {report.InvalidMatrix.Scenarios.Count(item => !item.ActualValid)}/{report.InvalidMatrix.ScenarioCount}",
@@ -1120,7 +1122,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
                 ? "3. Verify actual play-loop behavior before marking `alpha_runnable_windows_build_verification` passed."
                 : "3. Run the build to `.llmgc/procedural/alpha-runnable-build/build/windows/` and rerun `run-product-smoke.ps1 -Scenario alpha-runnable-build`.",
             report.WindowsExecutableProduced
-                ? "4. Keep `playLoopVerified=false` until deterministic automation or explicit manual evidence proves the loop."
+                ? "4. Keep `alpha_runnable_windows_build_verification` required until the deterministic play-loop evidence is reviewed."
                 : "4. Launch the produced `.exe`, verify content load and the selected loop, then record play evidence in a later bounded task."
         };
 
@@ -1134,6 +1136,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
         string buildRoot,
         string logsRoot,
         AlphaBuildOutputManifest buildOutput,
+        AlphaBuildCandidate? primary,
         AlphaRunnableBuildOptions settings)
     {
         if (!buildOutput.WindowsExecutableProduced || string.IsNullOrWhiteSpace(buildOutput.ExecutableRelativePath))
@@ -1154,13 +1157,17 @@ public sealed class AlphaRunnableBuildAcceptanceService
 
         var executablePath = Path.Combine(buildRoot, buildOutput.ExecutableRelativePath.Replace('/', Path.DirectorySeparatorChar));
         var launchLogPath = Path.Combine(logsRoot, "alpha-player-launch.log");
+        var playLoopLogPath = Path.Combine(logsRoot, "alpha-player-play-loop.log");
         var arguments = new List<string>
         {
             "-batchmode",
             "-nographics",
             "-alphaSmokeExit",
+            "-alphaPlayLoopSmokeExit",
             "-alphaLogPath",
-            launchLogPath
+            launchLogPath,
+            "-alphaPlayLoopLogPath",
+            playLoopLogPath
         };
         var command = BuildCommandForDisplay(executablePath, arguments);
         if (!settings.LaunchBuiltPlayer)
@@ -1172,7 +1179,9 @@ public sealed class AlphaRunnableBuildAcceptanceService
                 ProcessExitCode = null,
                 DurationSeconds = 0,
                 LogRelativePath = RelativePath(projectRoot, launchLogPath),
+                PlayLoopLogRelativePath = RelativePath(projectRoot, playLoopLogPath),
                 LaunchCommandForVerification = command,
+                PlayLoopCommandForVerification = command,
                 Diagnostics =
                 [
                     Diagnostic("warning", "alpha_build.launch.not_requested", buildOutput.ExecutableRelativePath, "A Windows executable was produced, but launch verification was not requested for this validation pass.")
@@ -1222,16 +1231,165 @@ public sealed class AlphaRunnableBuildAcceptanceService
         }
 
         var launchVerified = diagnostics.All(diagnostic => diagnostic.Severity != "error");
+        var playLoopValidation = ValidatePlayLoopLog(
+            launchLogPath,
+            playLoopLogPath,
+            primary,
+            expectedLaunchCompleted: true);
+        diagnostics.AddRange(playLoopValidation.Diagnostics);
+
         return new AlphaBuildLaunchVerificationResult
         {
             LaunchVerified = launchVerified,
-            PlayLoopVerified = false,
+            PlayLoopVerified = playLoopValidation.PlayLoopVerified,
             ProcessExitCode = result.ExitCode,
             DurationSeconds = duration,
             LogRelativePath = RelativePath(projectRoot, launchLogPath),
+            PlayLoopLogRelativePath = RelativePath(projectRoot, playLoopLogPath),
             LaunchCommandForVerification = command,
+            PlayLoopCommandForVerification = command,
             Diagnostics = SortDiagnostics(diagnostics)
         };
+    }
+
+    public static AlphaBuildPlayLoopValidationResult ValidatePlayLoopLog(
+        string launchLogPath,
+        string playLoopLogPath,
+        AlphaBuildCandidate? primary,
+        bool expectedLaunchCompleted = true)
+    {
+        var diagnostics = new List<AlphaBuildDiagnostic>();
+        if (primary == null)
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.play_loop.no_primary_candidate", "primary_candidate", "Play-loop verification requires the selected Alpha report candidate."));
+            return new AlphaBuildPlayLoopValidationResult { Diagnostics = SortDiagnostics(diagnostics) };
+        }
+
+        if (string.IsNullOrWhiteSpace(launchLogPath) || !File.Exists(launchLogPath))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.play_loop.launch_log_missing", "logs/alpha-player-launch.log", "Play-loop verification requires the launch log."));
+        }
+
+        if (string.IsNullOrWhiteSpace(playLoopLogPath) || !File.Exists(playLoopLogPath))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.play_loop.log_missing", "logs/alpha-player-play-loop.log", "The player play-loop diagnostic log was not produced."));
+            return new AlphaBuildPlayLoopValidationResult { Diagnostics = SortDiagnostics(diagnostics) };
+        }
+
+        var launchValues = File.Exists(launchLogPath) ? ParseKeyValueLog(File.ReadAllLines(launchLogPath)) : new Dictionary<string, string>(StringComparer.Ordinal);
+        var playValues = ParseKeyValueLog(File.ReadAllLines(playLoopLogPath));
+        if (expectedLaunchCompleted && !HasBoolean(launchValues, "alpha_runtime.launch_completed"))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.play_loop.launch_not_completed", "logs/alpha-player-launch.log", "Launch log must contain alpha_runtime.launch_completed=true."));
+        }
+
+        Require(playValues, "alpha_runtime.play_loop_completed", "true", diagnostics, "alpha_build.play_loop.not_completed");
+        Require(playValues, "alpha_runtime.payload_root_exists", "true", diagnostics, "alpha_build.play_loop.payload_missing");
+        Require(playValues, "alpha_runtime.config_loaded", "true", diagnostics, "alpha_build.play_loop.config_missing");
+        Require(playValues, "alpha_runtime.package_loaded", "true", diagnostics, "alpha_build.play_loop.package_missing");
+        Require(playValues, "alpha_runtime.asset_manifest_loaded", "true", diagnostics, "alpha_build.play_loop.asset_manifest_missing");
+        Require(playValues, "alpha_runtime.package_id", primary.PackageId, diagnostics, "alpha_build.play_loop.package_id_mismatch");
+        Require(playValues, "alpha_runtime.package_hash", primary.PackageHash, diagnostics, "alpha_build.play_loop.package_hash_mismatch");
+        Require(playValues, "alpha_runtime.asset_manifest_hash", primary.AssetManifestHash, diagnostics, "alpha_build.play_loop.asset_manifest_hash_mismatch");
+        Require(playValues, "alpha_runtime.start_map_id", primary.LoopRefs.MapId, diagnostics, "alpha_build.play_loop.map_id_mismatch");
+        Require(playValues, "alpha_runtime.selected_thread_id", primary.SelectedThreadId, diagnostics, "alpha_build.play_loop.thread_id_mismatch");
+        Require(playValues, "alpha_runtime.selected_quest_id", primary.LoopRefs.QuestId, diagnostics, "alpha_build.play_loop.quest_id_mismatch");
+        Require(playValues, "alpha_runtime.selected_dialogue_id", primary.LoopRefs.DialogueId, diagnostics, "alpha_build.play_loop.dialogue_id_mismatch");
+        Require(playValues, "alpha_runtime.selected_item_id", primary.LoopRefs.ItemId, diagnostics, "alpha_build.play_loop.item_id_mismatch");
+        Require(playValues, "alpha_runtime.selected_event_id", primary.LoopRefs.EventId, diagnostics, "alpha_build.play_loop.event_id_mismatch");
+
+        foreach (var key in new[]
+        {
+            "alpha_runtime.ref_resolved.map",
+            "alpha_runtime.ref_resolved.quest",
+            "alpha_runtime.ref_resolved.dialogue",
+            "alpha_runtime.ref_resolved.item",
+            "alpha_runtime.ref_resolved.event"
+        })
+        {
+            Require(playValues, key, "true", diagnostics, "alpha_build.play_loop.ref_not_resolved");
+        }
+
+        var expectedCommandCount = primary.CommandHints.Count;
+        var commandHintCount = ParseInt(playValues, "alpha_runtime.command_hint_count");
+        if (commandHintCount < Math.Max(5, expectedCommandCount))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.play_loop.command_hint_count_too_low", commandHintCount.ToString(), "Play-loop log command hint count must match or exceed selected config evidence and be at least five."));
+        }
+
+        var commandsExecuted = ParseInt(playValues, "alpha_runtime.commands_executed");
+        if (commandsExecuted < Math.Max(5, expectedCommandCount))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.play_loop.commands_executed_too_low", commandsExecuted.ToString(), "Play-loop log must execute each selected command hint in order."));
+        }
+
+        for (var index = 0; index < expectedCommandCount; index++)
+        {
+            var expected = primary.CommandHints[index];
+            Require(playValues, $"alpha_runtime.command_executed.{index}.id", expected.CommandId, diagnostics, "alpha_build.play_loop.command_id_mismatch");
+            Require(playValues, $"alpha_runtime.command_executed.{index}.type", expected.CommandType, diagnostics, "alpha_build.play_loop.command_type_mismatch");
+        }
+
+        foreach (var key in new[]
+        {
+            "alpha_runtime.state_transition.quest_start",
+            "alpha_runtime.state_transition.dialogue_open",
+            "alpha_runtime.state_transition.dialogue_choice",
+            "alpha_runtime.state_transition.item_or_loot",
+            "alpha_runtime.state_transition.event_application",
+            "alpha_runtime.quest_started",
+            "alpha_runtime.dialogue_seen",
+            "alpha_runtime.item_obtained",
+            "alpha_runtime.event_applied"
+        })
+        {
+            Require(playValues, key, "true", diagnostics, "alpha_build.play_loop.state_flag_missing");
+        }
+
+        return new AlphaBuildPlayLoopValidationResult
+        {
+            PlayLoopVerified = diagnostics.All(diagnostic => diagnostic.Severity != "error"),
+            CommandHintsExpected = expectedCommandCount,
+            CommandsExecuted = Math.Max(0, commandsExecuted),
+            Diagnostics = SortDiagnostics(diagnostics)
+        };
+
+        static void Require(
+            IReadOnlyDictionary<string, string> values,
+            string key,
+            string expected,
+            ICollection<AlphaBuildDiagnostic> diagnostics,
+            string code)
+        {
+            if (!values.TryGetValue(key, out var actual) || !string.Equals(actual, expected, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", code, key, $"Expected {key}={expected}."));
+            }
+        }
+
+        static int ParseInt(IReadOnlyDictionary<string, string> values, string key) =>
+            values.TryGetValue(key, out var value) && int.TryParse(value, out var parsed) ? parsed : -1;
+
+        static bool HasBoolean(IReadOnlyDictionary<string, string> values, string key) =>
+            values.TryGetValue(key, out var value) && string.Equals(value, "true", StringComparison.Ordinal);
+    }
+
+    private static Dictionary<string, string> ParseKeyValueLog(IEnumerable<string> lines)
+    {
+        var values = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var rawLine in lines)
+        {
+            var line = rawLine.Trim();
+            var separator = line.IndexOf('=');
+            if (separator <= 0)
+            {
+                continue;
+            }
+
+            values[line[..separator]] = line[(separator + 1)..];
+        }
+
+        return values;
     }
 
     private static void CopyDirectory(string sourceRoot, string destinationRoot)
@@ -1928,8 +2086,19 @@ public sealed record AlphaBuildLaunchVerificationResult
     public int? ProcessExitCode { get; init; }
     public int DurationSeconds { get; init; }
     public string LogRelativePath { get; init; } = string.Empty;
+    public string PlayLoopLogRelativePath { get; init; } = string.Empty;
     [JsonIgnore]
     public string LaunchCommandForVerification { get; init; } = string.Empty;
+    [JsonIgnore]
+    public string PlayLoopCommandForVerification { get; init; } = string.Empty;
+    public IReadOnlyList<AlphaBuildDiagnostic> Diagnostics { get; init; } = [];
+}
+
+public sealed record AlphaBuildPlayLoopValidationResult
+{
+    public bool PlayLoopVerified { get; init; }
+    public int CommandHintsExpected { get; init; }
+    public int CommandsExecuted { get; init; }
     public IReadOnlyList<AlphaBuildDiagnostic> Diagnostics { get; init; } = [];
 }
 

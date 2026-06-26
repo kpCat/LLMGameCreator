@@ -17,9 +17,9 @@
 - Unity Editor executed: true
 - Unity build produced: true
 - Launch verified: true
-- Play loop verified: false
-- Deterministic report hash: 9f0f8d0283df74ea30c6efdce16614d5b5b0b31477f690cc79abb5055fb93f64
-- Build manifest hash: 6c774e5228b13f49ecc6cd65031edad00705dd9dfee84ce8f99f5f4fe950c57d
+- Play loop verified: true
+- Deterministic report hash: 5546ff9ed181267dda0a6e743c00a6f0ac8af2d9eddc7d074c26ce5b759a73c1
+- Build manifest hash: 62b7045be108a5f35c72c6587f01bcfb47d447458f865c7e2cced66a226b4e7c
 
 ## Style Candidates
 
