@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "deterministicHash": "9727edfae7ffb83b497804e7036f032d40d9e8b221c5dcc63093f528611fab27",
+  "deterministicHash": "5517fa0639225197b8cf8debc22d54c517020048f5c7c401a8b67025a9905915",
   "accepted": true,
   "manualGate": "rule_pack_combat_faction_social_work_theft_artifact_verification",
   "goal008GateRecorded": true,
@@ -11,11 +11,12 @@
     "S081",
     "S082",
     "S083",
-    "S084"
+    "S084",
+    "S084A"
   ],
-  "scenarioCount": 19,
+  "scenarioCount": 26,
   "validScenarioCount": 7,
-  "invalidScenarioCount": 12,
+  "invalidScenarioCount": 19,
   "validScenariosAccepted": true,
   "invalidScenariosRejected": true,
   "packageRuleBindingAuditPassed": true,
@@ -67,14 +68,20 @@
         "declarationId": "decl/faction/watch_reputation_gain",
         "familyId": "faction",
         "packageFactionId": "faction/settlement_watch",
-        "amount": 12,
-        "expectedAfter": 12
+        "expectedBefore": 0,
+        "amount": 112,
+        "expectedMin": -100,
+        "expectedMax": 100,
+        "expectedAfter": 100
       },
       {
         "declarationId": "decl/faction/theft_penalty",
         "familyId": "faction",
         "packageFactionId": "faction/settlement_watch",
+        "expectedBefore": 0,
         "amount": -20,
+        "expectedMin": -100,
+        "expectedMax": 100,
         "expectedAfter": -20
       }
     ],
@@ -86,7 +93,11 @@
         "packageNodeId": "node/start",
         "packageChoiceId": "choice/accept_contract",
         "factionId": "faction/settlement_watch",
-        "flagId": "flag/work_contract_accepted"
+        "reputationAmount": 5,
+        "flagId": "flag/work_contract_accepted",
+        "flagValue": "accepted",
+        "rewardItemId": "item/contract_note",
+        "rewardItemAmount": 1
       }
     ],
     "workContracts": [
@@ -97,7 +108,9 @@
         "packageTransactionId": "transaction/work_contract_reward",
         "requiredItemId": "item/work_permit",
         "rewardItemId": "item/wage_scrip",
+        "rewardAmount": 3,
         "completionFlagId": "flag/work_contract_completed",
+        "completionFlagValue": "completed",
         "factionId": "faction/settlement_watch"
       }
     ],
@@ -109,6 +122,7 @@
         "itemId": "item/stolen_gem",
         "amount": 1,
         "theftFlagId": "flag/theft_reported",
+        "theftFlagValue": "true",
         "factionId": "faction/settlement_watch",
         "reputationPenalty": -20
       }
@@ -118,7 +132,7 @@
     {
       "scenarioId": "combat_resolution_reward",
       "seed": "s079-combat-resolution",
-      "deterministicHash": "1de5fcc7ceaa514f23102d0e3c219032e558acec76f37ebf237e10429616afdc",
+      "deterministicHash": "fb7ca5c646f2fe0a6b018568bda1816f6ddcf88593cccde1ba47ca9370cf4ed0",
       "expectedValid": true,
       "actualValid": true,
       "invalidKind": "",
@@ -173,7 +187,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "c7a8924384ffb9150522da1c721a50ee181f783b8315d9d3411431201b943926",
+        "runtimeEvidenceHash": "8ab1597cbc88abd2cb113ab8b6fa196b2d84db8197d1236ba86819d961e1cbc6",
         "commands": [
           {
             "commandId": "cmd/start_quick_resolution",
@@ -181,6 +195,9 @@
             "commandType": "combat/start_encounter",
             "targetId": "encounter/quick_resolution",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -216,9 +233,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -285,6 +304,9 @@
             "commandType": "combat/use_ability",
             "targetId": "ability/finisher",
             "secondaryTargetId": "participant/raider",
+            "actorId": "participant/player_guard",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -332,9 +354,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -421,9 +445,11 @@
           ]
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "dialogueBefore": {
@@ -455,27 +481,40 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "0|neutral"
         },
-        "runtimeStateHash": "03089a8ff797040be420088271db208fc86e71c9cc3f1570941ab9adfadc4134",
-        "restoredRuntimeStateHash": "03089a8ff797040be420088271db208fc86e71c9cc3f1570941ab9adfadc4134",
+        "factionClampEvidence": [],
+        "runtimeStateHash": "0ac2b1a4e4113a247ab31c11da67c7d7719c881603ac2cb6ba320924fdeed278",
+        "restoredRuntimeStateHash": "0ac2b1a4e4113a247ab31c11da67c7d7719c881603ac2cb6ba320924fdeed278",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "03089a8ff797040be420088271db208fc86e71c9cc3f1570941ab9adfadc4134",
-          "restoredSerializedStateHash": "03089a8ff797040be420088271db208fc86e71c9cc3f1570941ab9adfadc4134",
+          "serializedStateHash": "0ac2b1a4e4113a247ab31c11da67c7d7719c881603ac2cb6ba320924fdeed278",
+          "restoredSerializedStateHash": "0ac2b1a4e4113a247ab31c11da67c7d7719c881603ac2cb6ba320924fdeed278",
           "snapshotSlotName": "goal009_combat_resolution_reward",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "combat_turn_based_encounter",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/start_roadside_raider:true|cmd/player_guard_strike:true|cmd/raider_ai_turn:true",
+            "encounter": "encounter/roadside_raider|true|participant/player_guard:ability/guard_strike:participant/raider,participant/raider:ability/raider_cut:participant/player_guard",
+            "scenarioMarker": "combat_turn_based_encounter"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/start_quick_resolution:true|cmd/player_finisher:true",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/victory_token=1,item/work_permit=1",
@@ -488,7 +527,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/victory_token=1,item/work_permit=1",
@@ -502,7 +541,7 @@
     {
       "scenarioId": "combat_turn_based_encounter",
       "seed": "s079-combat-turn",
-      "deterministicHash": "7dcddc26d3016fa97f76257a6e70e444606df3714c78466c896cffe05cb2dccb",
+      "deterministicHash": "5aa69c109231e875ba6e84039c2c31c679a784a6c6365f284d02f6270968554d",
       "expectedValid": true,
       "actualValid": true,
       "invalidKind": "",
@@ -559,7 +598,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "0ce5c0566087c3cb72512288628fe2b75d6cfefe6634f1f801690bbd282614e9",
+        "runtimeEvidenceHash": "64c67fe86e291802538adb1a0cc9c5e8e73dde8d78c27c6ac051e75baa271d57",
         "commands": [
           {
             "commandId": "cmd/start_roadside_raider",
@@ -567,6 +606,9 @@
             "commandType": "combat/start_encounter",
             "targetId": "encounter/roadside_raider",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -602,9 +644,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -671,6 +715,9 @@
             "commandType": "combat/use_ability",
             "targetId": "ability/guard_strike",
             "secondaryTargetId": "participant/raider",
+            "actorId": "participant/player_guard",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -713,9 +760,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -782,6 +831,9 @@
             "commandType": "combat/run_ai",
             "targetId": "",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -827,9 +879,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -916,9 +970,11 @@
           ]
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "dialogueBefore": {
@@ -950,27 +1006,36 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "0|neutral"
         },
-        "runtimeStateHash": "7e67e8520708b318016ea30cad2db021e4bf7e953a6c1f5e1ad7a30dc596fea4",
-        "restoredRuntimeStateHash": "7e67e8520708b318016ea30cad2db021e4bf7e953a6c1f5e1ad7a30dc596fea4",
+        "factionClampEvidence": [],
+        "runtimeStateHash": "c2def8aa9b565c6cd320d492053d81ec2b9252f8ceaf9c9f6c586323723354b6",
+        "restoredRuntimeStateHash": "c2def8aa9b565c6cd320d492053d81ec2b9252f8ceaf9c9f6c586323723354b6",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "7e67e8520708b318016ea30cad2db021e4bf7e953a6c1f5e1ad7a30dc596fea4",
-          "restoredSerializedStateHash": "7e67e8520708b318016ea30cad2db021e4bf7e953a6c1f5e1ad7a30dc596fea4",
+          "serializedStateHash": "c2def8aa9b565c6cd320d492053d81ec2b9252f8ceaf9c9f6c586323723354b6",
+          "restoredSerializedStateHash": "c2def8aa9b565c6cd320d492053d81ec2b9252f8ceaf9c9f6c586323723354b6",
           "snapshotSlotName": "goal009_combat_turn_based_encounter",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/start_roadside_raider:true|cmd/player_guard_strike:true|cmd/raider_ai_turn:true",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "encounter/roadside_raider|true|participant/player_guard=alive|player|resource/focus:4;resource/health:12,participant/raider=alive|enemy|resource/focus:3;resource/health:4|participant/player_guard:ability/guard_strike:participant/raider,participant/raider:ability/raider_cut:participant/player_guard",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/work_permit=1",
@@ -983,7 +1048,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "encounter/roadside_raider|true|participant/player_guard=alive|player|resource/focus:4;resource/health:12,participant/raider=alive|enemy|resource/focus:3;resource/health:4|participant/player_guard:ability/guard_strike:participant/raider,participant/raider:ability/raider_cut:participant/player_guard",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/work_permit=1",
@@ -997,7 +1062,7 @@
     {
       "scenarioId": "combined_combat_social_work_theft_loop",
       "seed": "s082-combined",
-      "deterministicHash": "de6b879a63f6b5fe4e248ae7d9f3963b8af07ee41baac3b27385f0d8502dba25",
+      "deterministicHash": "1e227805e5f7950d813be7403e65c80518c33560e07964e7ead71a71fcc59907",
       "expectedValid": true,
       "actualValid": true,
       "invalidKind": "",
@@ -1083,7 +1148,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "182fef8916e641bb2d9673933c2a2c3c6f325b10f111f945acdae56c9b3ed99e",
+        "runtimeEvidenceHash": "ca846ec0b048ef4a8f0f0c24abac4f42fd7fe3dbceecfac1d897423a0974f754",
         "commands": [
           {
             "commandId": "cmd/combined_open_dialogue",
@@ -1091,6 +1156,9 @@
             "commandType": "social/open_dialogue",
             "targetId": "dialogue/watch_captain",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1122,9 +1190,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -1193,6 +1263,9 @@
             "commandType": "social/choose_dialogue",
             "targetId": "choice/accept_contract",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1231,9 +1304,11 @@
             "factionDelta": {
               "changed": true,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -1308,6 +1383,9 @@
             "commandType": "work/execute_contract",
             "targetId": "interaction/work_contract_reward",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1341,9 +1419,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -1423,6 +1503,9 @@
             "commandType": "combat/start_encounter",
             "targetId": "encounter/quick_resolution",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1458,9 +1541,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -1541,6 +1626,9 @@
             "commandType": "combat/use_ability",
             "targetId": "ability/finisher",
             "secondaryTargetId": "participant/raider",
+            "actorId": "participant/player_guard",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1588,9 +1676,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -1672,6 +1762,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/work_contract_completed",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "completed",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1713,9 +1806,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -1799,6 +1894,9 @@
             "commandType": "theft/open_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1840,9 +1938,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -1927,6 +2027,9 @@
             "commandType": "theft/take_from_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "item/stolen_gem",
+            "actorId": "",
+            "amount": 1,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -1970,9 +2073,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -2058,6 +2163,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/theft_reported",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "true",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -2099,9 +2207,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -2185,10 +2295,13 @@
           },
           {
             "commandId": "cmd/combined_theft_penalty",
-            "sourceDeclarationId": "decl/faction/theft_penalty",
+            "sourceDeclarationId": "decl/theft/cache_gem_penalty",
             "commandType": "faction/change_reputation",
             "targetId": "faction/settlement_watch",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": -20,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -2230,9 +2343,11 @@
             "factionDelta": {
               "changed": true,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "-15|neutral"
               }
             },
@@ -2340,9 +2455,11 @@
           ]
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "-15|neutral"
         },
         "dialogueBefore": {
@@ -2377,27 +2494,57 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "-15|neutral"
         },
-        "runtimeStateHash": "ed83b3282e723a0e081d24b3489fbf97f8d4a23f21e644b530ee6a14107ded18",
-        "restoredRuntimeStateHash": "ed83b3282e723a0e081d24b3489fbf97f8d4a23f21e644b530ee6a14107ded18",
+        "factionClampEvidence": [
+          {
+            "commandId": "cmd/combined_theft_penalty",
+            "sourceDeclarationId": "decl/theft/cache_gem_penalty",
+            "factionId": "faction/settlement_watch",
+            "before": 5,
+            "requestedAmount": -20,
+            "unclampedCandidate": -15,
+            "min": -100,
+            "max": 100,
+            "expectedAfter": -15,
+            "actualAfter": -15,
+            "clamped": false
+          }
+        ],
+        "runtimeStateHash": "70982ce21af33d68576e6a46bd056489c0795d63c20482fffc64d1035e313696",
+        "restoredRuntimeStateHash": "70982ce21af33d68576e6a46bd056489c0795d63c20482fffc64d1035e313696",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "ed83b3282e723a0e081d24b3489fbf97f8d4a23f21e644b530ee6a14107ded18",
-          "restoredSerializedStateHash": "ed83b3282e723a0e081d24b3489fbf97f8d4a23f21e644b530ee6a14107ded18",
+          "serializedStateHash": "70982ce21af33d68576e6a46bd056489c0795d63c20482fffc64d1035e313696",
+          "restoredSerializedStateHash": "70982ce21af33d68576e6a46bd056489c0795d63c20482fffc64d1035e313696",
           "snapshotSlotName": "goal009_combined_combat_social_work_theft_loop",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "theft_container_reputation_consequence",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/open_cache:true|cmd/take_stolen_gem:true|cmd/theft_reported:true|cmd/theft_reputation_penalty:true",
+            "containerItems": "item/stolen_gem=1",
+            "factions": "faction/settlement_watch=-20|neutral",
+            "flags": "flag/theft_reported=true",
+            "playerItems": "item/stolen_gem=1",
+            "scenarioMarker": "theft_container_reputation_consequence"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/combined_open_dialogue:true|cmd/combined_accept_contract:true|cmd/combined_work_reward:true|cmd/combined_start_encounter:true|cmd/combined_finisher:true|cmd/combined_work_complete:true|cmd/combined_open_cache:true|cmd/combined_take_gem:true|cmd/combined_theft_flag:true|cmd/combined_theft_penalty:true",
           "containerItems": "item/stolen_gem=1",
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=-15|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=-15|neutral",
           "flags": "flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/stolen_gem=1,item/victory_token=1,item/wage_scrip=3,item/work_permit=1",
@@ -2410,7 +2557,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=-15|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=-15|neutral",
           "flags": "flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/stolen_gem=1,item/victory_token=1,item/wage_scrip=3,item/work_permit=1",
@@ -2424,7 +2571,7 @@
     {
       "scenarioId": "faction_reputation_change",
       "seed": "s080-faction",
-      "deterministicHash": "7e2b25d7a45c5dcf125a57b81fc1df68ebe0e0b0b440401bb72d190da73a1173",
+      "deterministicHash": "d0441404442767637f14b38677d7ff563a8de3256228db0a9f01e50342928358",
       "expectedValid": true,
       "actualValid": true,
       "invalidKind": "",
@@ -2468,7 +2615,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "21bbe63b475ac479a7c1d1329dd7e59d134fd56f2b28f2f7c6b2d82b8c909206",
+        "runtimeEvidenceHash": "8acf310f0bc364059e108e99db4b7764563e3a8ba08bfeff0d14fd33d818b7a7",
         "commands": [
           {
             "commandId": "cmd/watch_reputation_gain",
@@ -2476,6 +2623,9 @@
             "commandType": "faction/change_reputation",
             "targetId": "faction/settlement_watch",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 112,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -2507,10 +2657,12 @@
             "factionDelta": {
               "changed": true,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
-                "faction/settlement_watch": "12|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "100|neutral"
               }
             },
             "dialogueDelta": {
@@ -2590,10 +2742,12 @@
           "actionHistory": []
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
-          "faction/settlement_watch": "12|neutral"
+          "faction/merchant_guild": "0|neutral",
+          "faction/settlement_watch": "100|neutral"
         },
         "dialogueBefore": {
           "dialogueId": "",
@@ -2622,29 +2776,57 @@
           "theftFlagId": "flag/theft_reported",
           "theftFlagAfter": "",
           "factionId": "faction/settlement_watch",
-          "reputationAfter": "12|neutral"
+          "reputationAfter": "100|neutral"
         },
-        "runtimeStateHash": "bdcb00eb7a65d2a9ae9c7fa86f0a54b58646ec814809f839b6e07bc925d2f0e4",
-        "restoredRuntimeStateHash": "bdcb00eb7a65d2a9ae9c7fa86f0a54b58646ec814809f839b6e07bc925d2f0e4",
+        "factionClampEvidence": [
+          {
+            "commandId": "cmd/watch_reputation_gain",
+            "sourceDeclarationId": "decl/faction/watch_reputation_gain",
+            "factionId": "faction/settlement_watch",
+            "before": 0,
+            "requestedAmount": 112,
+            "unclampedCandidate": 112,
+            "min": -100,
+            "max": 100,
+            "expectedAfter": 100,
+            "actualAfter": 100,
+            "clamped": true
+          }
+        ],
+        "runtimeStateHash": "2aeeaf4e40d0a04a37810f0d4536246208487ffce45895334bda1951c2b39e6b",
+        "restoredRuntimeStateHash": "2aeeaf4e40d0a04a37810f0d4536246208487ffce45895334bda1951c2b39e6b",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "bdcb00eb7a65d2a9ae9c7fa86f0a54b58646ec814809f839b6e07bc925d2f0e4",
-          "restoredSerializedStateHash": "bdcb00eb7a65d2a9ae9c7fa86f0a54b58646ec814809f839b6e07bc925d2f0e4",
+          "serializedStateHash": "2aeeaf4e40d0a04a37810f0d4536246208487ffce45895334bda1951c2b39e6b",
+          "restoredSerializedStateHash": "2aeeaf4e40d0a04a37810f0d4536246208487ffce45895334bda1951c2b39e6b",
           "snapshotSlotName": "goal009_faction_reputation_change",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "combat_resolution_reward",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/start_quick_resolution:true|cmd/player_finisher:true",
+            "encounter": "encounter/quick_resolution|false|participant/player_guard:ability/finisher:participant/raider",
+            "playerItems": "item/victory_token=1",
+            "scenarioMarker": "combat_resolution_reward"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/watch_reputation_gain:true",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=12|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=100|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/work_permit=1",
@@ -2657,7 +2839,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=12|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=100|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/work_permit=1",
@@ -2671,7 +2853,7 @@
     {
       "scenarioId": "invalid_combat_wrong_turn_or_target",
       "seed": "s083-invalid_combat_wrong_turn_or_target",
-      "deterministicHash": "f1de9320c5334d5752a1b83a052c4ea294edc5e63d9a21bef63c3965231890b1",
+      "deterministicHash": "5186e95160f23c16fb10cdf9e5ad40a502d6eeebffa24fa0f0445d9249629c3a",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "combat_wrong_turn_or_target",
@@ -2728,7 +2910,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "bfe5f07e03b09ad1ac6ad7d1d2e8fbdb50a9e21d2403223311dd514698f607a0",
+        "runtimeEvidenceHash": "90a6857d6818a9e74a9bf5925705e9954e8b7cdc49e561a11ba12300f83f960e",
         "commands": [
           {
             "commandId": "cmd/start_roadside_raider",
@@ -2736,6 +2918,9 @@
             "commandType": "combat/start_encounter",
             "targetId": "encounter/roadside_raider",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -2771,9 +2956,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -2835,20 +3022,24 @@
             }
           },
           {
-            "commandId": "cmd/enemy_acts_on_player_turn",
+            "commandId": "cmd/player_guard_strike",
             "sourceDeclarationId": "decl/combat/turn_based_encounter",
             "commandType": "combat/use_ability",
-            "targetId": "ability/raider_cut",
-            "secondaryTargetId": "participant/player_guard",
-            "succeeded": false,
-            "diagnosticCode": "encounter.turn.invalid",
-            "diagnosticMessage": "It is not participant/raider's turn.",
+            "targetId": "ability/guard_strike",
+            "secondaryTargetId": "participant/raider",
+            "actorId": "participant/player_guard",
+            "amount": 0,
+            "value": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
             "runtimeEventTypes": [
-              "ValidationFailed"
+              "AbilityUsed",
+              "CostConsumed",
+              "DamageApplied",
+              "TurnStarted"
             ],
-            "runtimeDiagnosticCodes": [
-              "encounter.turn.invalid"
-            ],
+            "runtimeDiagnosticCodes": [],
             "encounterDelta": {
               "changed": true,
               "before": {
@@ -2868,20 +3059,141 @@
                 "active": true,
                 "resolved": false,
                 "round": 1,
-                "turnIndex": 0,
+                "turnIndex": 1,
                 "participants": {
-                  "participant/player_guard": "alive|player|resource/focus:5;resource/health:14",
-                  "participant/raider": "alive|enemy|resource/focus:3;resource/health:9"
+                  "participant/player_guard": "alive|player|resource/focus:4;resource/health:14",
+                  "participant/raider": "alive|enemy|resource/focus:3;resource/health:4"
                 },
-                "actionHistory": []
+                "actionHistory": [
+                  "participant/player_guard:ability/guard_strike:participant/raider"
+                ]
               }
             },
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "0|neutral"
+              }
+            },
+            "dialogueDelta": {
+              "changed": false,
+              "before": {
+                "dialogueId": "",
+                "currentNodeId": "",
+                "open": false,
+                "history": []
+              },
+              "after": {
+                "dialogueId": "",
+                "currentNodeId": "",
+                "open": false,
+                "history": []
+              }
+            },
+            "workDelta": {
+              "changed": false,
+              "before": {
+                "contractInteractionId": "interaction/work_contract_reward",
+                "rewardItemId": "item/wage_scrip",
+                "rewardAmountAfter": 0,
+                "completionFlagId": "flag/work_contract_completed",
+                "completionFlagAfter": ""
+              },
+              "after": {
+                "contractInteractionId": "interaction/work_contract_reward",
+                "rewardItemId": "item/wage_scrip",
+                "rewardAmountAfter": 0,
+                "completionFlagId": "flag/work_contract_completed",
+                "completionFlagAfter": ""
+              }
+            },
+            "containerDelta": {
+              "opened": false,
+              "changed": false,
+              "before": {
+                "item/stolen_gem": "2"
+              },
+              "after": {
+                "item/stolen_gem": "2"
+              }
+            },
+            "inventoryDelta": {
+              "changed": false,
+              "before": {
+                "item/work_permit": "1"
+              },
+              "after": {
+                "item/work_permit": "1"
+              }
+            },
+            "flagDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          },
+          {
+            "commandId": "cmd/player_acts_on_enemy_turn",
+            "sourceDeclarationId": "decl/combat/turn_based_encounter",
+            "commandType": "combat/use_ability",
+            "targetId": "ability/guard_strike",
+            "secondaryTargetId": "participant/raider",
+            "actorId": "participant/player_guard",
+            "amount": 0,
+            "value": "",
+            "succeeded": false,
+            "diagnosticCode": "encounter.turn.invalid",
+            "diagnosticMessage": "It is not participant/player_guard's turn.",
+            "runtimeEventTypes": [
+              "ValidationFailed"
+            ],
+            "runtimeDiagnosticCodes": [
+              "encounter.turn.invalid"
+            ],
+            "encounterDelta": {
+              "changed": true,
+              "before": {
+                "encounterId": "encounter/roadside_raider",
+                "active": true,
+                "resolved": false,
+                "round": 1,
+                "turnIndex": 1,
+                "participants": {
+                  "participant/player_guard": "alive|player|resource/focus:4;resource/health:14",
+                  "participant/raider": "alive|enemy|resource/focus:3;resource/health:4"
+                },
+                "actionHistory": [
+                  "participant/player_guard:ability/guard_strike:participant/raider"
+                ]
+              },
+              "after": {
+                "encounterId": "encounter/roadside_raider",
+                "active": true,
+                "resolved": false,
+                "round": 1,
+                "turnIndex": 1,
+                "participants": {
+                  "participant/player_guard": "alive|player|resource/focus:4;resource/health:14",
+                  "participant/raider": "alive|enemy|resource/focus:3;resource/health:4"
+                },
+                "actionHistory": [
+                  "participant/player_guard:ability/guard_strike:participant/raider"
+                ]
+              }
+            },
+            "factionDelta": {
+              "changed": false,
+              "before": {
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "0|neutral"
+              },
+              "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -2957,17 +3269,21 @@
           "active": true,
           "resolved": false,
           "round": 1,
-          "turnIndex": 0,
+          "turnIndex": 1,
           "participants": {
-            "participant/player_guard": "alive|player|resource/focus:5;resource/health:14",
-            "participant/raider": "alive|enemy|resource/focus:3;resource/health:9"
+            "participant/player_guard": "alive|player|resource/focus:4;resource/health:14",
+            "participant/raider": "alive|enemy|resource/focus:3;resource/health:4"
           },
-          "actionHistory": []
+          "actionHistory": [
+            "participant/player_guard:ability/guard_strike:participant/raider"
+          ]
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "dialogueBefore": {
@@ -2999,27 +3315,43 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "0|neutral"
         },
-        "runtimeStateHash": "c890c73371d17cab1f0d61a75bbb7a5780b345b503dc7e56220fc04cfe6c5a1d",
-        "restoredRuntimeStateHash": "c890c73371d17cab1f0d61a75bbb7a5780b345b503dc7e56220fc04cfe6c5a1d",
+        "factionClampEvidence": [],
+        "runtimeStateHash": "cdabc9d337195ec90c4716055e12e16a3a85eda5a4c8fdbdb1c9254b1fe55a09",
+        "restoredRuntimeStateHash": "cdabc9d337195ec90c4716055e12e16a3a85eda5a4c8fdbdb1c9254b1fe55a09",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "c890c73371d17cab1f0d61a75bbb7a5780b345b503dc7e56220fc04cfe6c5a1d",
-          "restoredSerializedStateHash": "c890c73371d17cab1f0d61a75bbb7a5780b345b503dc7e56220fc04cfe6c5a1d",
+          "serializedStateHash": "cdabc9d337195ec90c4716055e12e16a3a85eda5a4c8fdbdb1c9254b1fe55a09",
+          "restoredSerializedStateHash": "cdabc9d337195ec90c4716055e12e16a3a85eda5a4c8fdbdb1c9254b1fe55a09",
           "snapshotSlotName": "goal009_invalid_combat_wrong_turn_or_target",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "theft_container_reputation_consequence",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/open_cache:true|cmd/take_stolen_gem:true|cmd/theft_reported:true|cmd/theft_reputation_penalty:true",
+            "containerItems": "item/stolen_gem=1",
+            "factions": "faction/settlement_watch=-20|neutral",
+            "flags": "flag/theft_reported=true",
+            "playerItems": "item/stolen_gem=1",
+            "scenarioMarker": "theft_container_reputation_consequence"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
-          "commandLog": "cmd/start_roadside_raider:true|cmd/enemy_acts_on_player_turn:false",
+          "commandLog": "cmd/start_roadside_raider:true|cmd/player_guard_strike:true|cmd/player_acts_on_enemy_turn:false",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
-          "encounter": "encounter/roadside_raider|true|participant/player_guard=alive|player|resource/focus:5;resource/health:14,participant/raider=alive|enemy|resource/focus:3;resource/health:9|",
-          "factions": "faction/settlement_watch=0|neutral",
+          "encounter": "encounter/roadside_raider|true|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=alive|enemy|resource/focus:3;resource/health:4|participant/player_guard:ability/guard_strike:participant/raider",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/work_permit=1",
@@ -3027,12 +3359,12 @@
           "scenarioMarker": "invalid_combat_wrong_turn_or_target"
         },
         "restoredStateEvidence": {
-          "commandLog": "cmd/start_roadside_raider:true|cmd/enemy_acts_on_player_turn:false",
+          "commandLog": "cmd/start_roadside_raider:true|cmd/player_guard_strike:true|cmd/player_acts_on_enemy_turn:false",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
-          "encounter": "encounter/roadside_raider|true|participant/player_guard=alive|player|resource/focus:5;resource/health:14,participant/raider=alive|enemy|resource/focus:3;resource/health:9|",
-          "factions": "faction/settlement_watch=0|neutral",
+          "encounter": "encounter/roadside_raider|true|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=alive|enemy|resource/focus:3;resource/health:4|participant/player_guard:ability/guard_strike:participant/raider",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/work_permit=1",
@@ -3045,13 +3377,13 @@
         {
           "severity": "error",
           "code": "combat_family.evidence.command_delta_missing",
-          "target": "cmd/enemy_acts_on_player_turn",
+          "target": "cmd/player_acts_on_enemy_turn",
           "message": "Command evidence is missing command-specific state delta."
         },
         {
           "severity": "error",
           "code": "combat_family.evidence.command_failed",
-          "target": "cmd/enemy_acts_on_player_turn",
+          "target": "cmd/player_acts_on_enemy_turn",
           "message": "Required runtime command failed."
         }
       ]
@@ -3059,7 +3391,7 @@
     {
       "scenarioId": "invalid_command_not_covered_by_declaration",
       "seed": "s083-invalid_command_not_covered_by_declaration",
-      "deterministicHash": "fd60ea37807fbaa02e1f33aea2aeb221d6fbe5c6e37e241cfe79cf4a441fdf86",
+      "deterministicHash": "c10d0973cd1d1b97555e5810715f33e463a452e23848e785ad21cdc7fee0cb90",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "command_not_covered_by_declaration",
@@ -3161,6 +3493,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "",
         "restoredRuntimeStateHash": "",
         "saveLoadRoundtripPassed": false,
@@ -3172,9 +3505,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {},
         "restoredStateEvidence": {},
         "diagnostics": []
@@ -3221,7 +3562,7 @@
     {
       "scenarioId": "invalid_cross_scenario_state_leakage",
       "seed": "s083-invalid_cross_scenario_state_leakage",
-      "deterministicHash": "576e54f0df867ef1f2092c189640f3c226853e546622f7b72b4ddcfca3f8af8a",
+      "deterministicHash": "a1d05eca572948c7326cc388fe1ed34d1fc3d3d93dab645e75680a0473f6955d",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "cross_scenario_state_leakage",
@@ -3307,7 +3648,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "913b82e72bd9fde85f5d3f0467a6225fb9193623eeb0162573496254cc4b91f1",
+        "runtimeEvidenceHash": "185e646eae3c100c270e75b1f726e7155e3cb46991210cca14856d2284307824",
         "commands": [
           {
             "commandId": "cmd/combined_open_dialogue",
@@ -3315,6 +3656,9 @@
             "commandType": "social/open_dialogue",
             "targetId": "dialogue/watch_captain",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -3346,10 +3690,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "0|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "42|neutral"
               },
               "after": {
-                "faction/settlement_watch": "0|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "42|neutral"
               }
             },
             "dialogueDelta": {
@@ -3407,8 +3753,12 @@
             },
             "flagDelta": {
               "changed": false,
-              "before": {},
-              "after": {}
+              "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch"
+              },
+              "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch"
+              }
             }
           },
           {
@@ -3417,6 +3767,9 @@
             "commandType": "social/choose_dialogue",
             "targetId": "choice/accept_contract",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -3455,10 +3808,12 @@
             "factionDelta": {
               "changed": true,
               "before": {
-                "faction/settlement_watch": "0|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "42|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -3520,8 +3875,11 @@
             },
             "flagDelta": {
               "changed": true,
-              "before": {},
+              "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch"
+              },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               }
             }
@@ -3532,6 +3890,9 @@
             "commandType": "work/execute_contract",
             "targetId": "interaction/work_contract_reward",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -3565,10 +3926,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -3634,9 +3997,11 @@
             "flagDelta": {
               "changed": false,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               }
             }
@@ -3647,6 +4012,9 @@
             "commandType": "combat/start_encounter",
             "targetId": "encounter/quick_resolution",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -3682,10 +4050,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -3752,9 +4122,11 @@
             "flagDelta": {
               "changed": false,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               }
             }
@@ -3765,6 +4137,9 @@
             "commandType": "combat/use_ability",
             "targetId": "ability/finisher",
             "secondaryTargetId": "participant/raider",
+            "actorId": "participant/player_guard",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -3812,10 +4187,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -3883,9 +4260,11 @@
             "flagDelta": {
               "changed": false,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               }
             }
@@ -3896,6 +4275,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/work_contract_completed",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "completed",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -3937,10 +4319,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -4009,9 +4393,11 @@
             "flagDelta": {
               "changed": true,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
               }
@@ -4023,6 +4409,9 @@
             "commandType": "theft/open_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -4064,10 +4453,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -4136,10 +4527,12 @@
             "flagDelta": {
               "changed": false,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
               }
@@ -4151,6 +4544,9 @@
             "commandType": "theft/take_from_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "item/stolen_gem",
+            "actorId": "",
+            "amount": 1,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -4194,10 +4590,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -4267,10 +4665,12 @@
             "flagDelta": {
               "changed": false,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
               }
@@ -4282,6 +4682,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/theft_reported",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "true",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -4323,10 +4726,12 @@
             "factionDelta": {
               "changed": false,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               }
             },
             "dialogueDelta": {
@@ -4397,10 +4802,12 @@
             "flagDelta": {
               "changed": true,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/theft_reported": "true",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
@@ -4409,10 +4816,13 @@
           },
           {
             "commandId": "cmd/combined_theft_penalty",
-            "sourceDeclarationId": "decl/faction/theft_penalty",
+            "sourceDeclarationId": "decl/theft/cache_gem_penalty",
             "commandType": "faction/change_reputation",
             "targetId": "faction/settlement_watch",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": -20,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -4454,10 +4864,12 @@
             "factionDelta": {
               "changed": true,
               "before": {
-                "faction/settlement_watch": "5|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "47|neutral"
               },
               "after": {
-                "faction/settlement_watch": "-15|neutral"
+                "faction/merchant_guild": "0|neutral",
+                "faction/settlement_watch": "27|neutral"
               }
             },
             "dialogueDelta": {
@@ -4528,11 +4940,13 @@
             "flagDelta": {
               "changed": false,
               "before": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/theft_reported": "true",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
               },
               "after": {
+                "flag/leaked_previous_scenario": "invalid_save_load_mismatch",
                 "flag/theft_reported": "true",
                 "flag/work_contract_accepted": "accepted",
                 "flag/work_contract_completed": "completed"
@@ -4564,10 +4978,12 @@
           ]
         },
         "factionReputationBefore": {
-          "faction/settlement_watch": "0|neutral"
+          "faction/merchant_guild": "0|neutral",
+          "faction/settlement_watch": "42|neutral"
         },
         "factionReputationAfter": {
-          "faction/settlement_watch": "-15|neutral"
+          "faction/merchant_guild": "0|neutral",
+          "faction/settlement_watch": "27|neutral"
         },
         "dialogueBefore": {
           "dialogueId": "",
@@ -4599,34 +5015,75 @@
           "theftFlagId": "flag/theft_reported",
           "theftFlagAfter": "true",
           "factionId": "faction/settlement_watch",
-          "reputationAfter": "-15|neutral"
+          "reputationAfter": "27|neutral"
         },
-        "runtimeStateHash": "e6909f935f472677de292b207f172d4e088e3b347c3f34101c107a904e86470b",
-        "restoredRuntimeStateHash": "e6909f935f472677de292b207f172d4e088e3b347c3f34101c107a904e86470b",
+        "factionClampEvidence": [
+          {
+            "commandId": "cmd/combined_theft_penalty",
+            "sourceDeclarationId": "decl/theft/cache_gem_penalty",
+            "factionId": "faction/settlement_watch",
+            "before": 47,
+            "requestedAmount": -20,
+            "unclampedCandidate": 27,
+            "min": -100,
+            "max": 100,
+            "expectedAfter": 27,
+            "actualAfter": 27,
+            "clamped": false
+          }
+        ],
+        "runtimeStateHash": "5189f28d4621831101040fd31de8fd1a590ba96d9fe4c95e7efcedc8c7df9bf5",
+        "restoredRuntimeStateHash": "5189f28d4621831101040fd31de8fd1a590ba96d9fe4c95e7efcedc8c7df9bf5",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "e6909f935f472677de292b207f172d4e088e3b347c3f34101c107a904e86470b",
-          "restoredSerializedStateHash": "e6909f935f472677de292b207f172d4e088e3b347c3f34101c107a904e86470b",
+          "serializedStateHash": "5189f28d4621831101040fd31de8fd1a590ba96d9fe4c95e7efcedc8c7df9bf5",
+          "restoredSerializedStateHash": "5189f28d4621831101040fd31de8fd1a590ba96d9fe4c95e7efcedc8c7df9bf5",
           "snapshotSlotName": "goal009_invalid_cross_scenario_state_leakage",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "invalid_save_load_mismatch",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/combined_open_dialogue:true|cmd/combined_accept_contract:true|cmd/combined_work_reward:true|cmd/combined_start_encounter:true|cmd/combined_finisher:true|cmd/combined_work_complete:true|cmd/combined_open_cache:true|cmd/combined_take_gem:true|cmd/combined_theft_flag:true|cmd/combined_theft_penalty:true",
+            "containerItems": "item/stolen_gem=1",
+            "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
+            "encounter": "encounter/quick_resolution|false|participant/player_guard:ability/finisher:participant/raider",
+            "factions": "faction/settlement_watch=-15|neutral",
+            "flags": "flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
+            "playerItems": "item/contract_note=1,item/stolen_gem=1,item/victory_token=1,item/wage_scrip=3",
+            "scenarioMarker": "invalid_save_load_mismatch"
+          },
+          "currentInitialStateSignature": {
+            "commandLog": "cmd/combined_open_dialogue:true|cmd/combined_accept_contract:true|cmd/combined_work_reward:true|cmd/combined_start_encounter:true|cmd/combined_finisher:true|cmd/combined_work_complete:true|cmd/combined_open_cache:true|cmd/combined_take_gem:true|cmd/combined_theft_flag:true|cmd/combined_theft_penalty:true",
+            "factions": "faction/settlement_watch=42|neutral",
+            "flags": "flag/leaked_previous_scenario=invalid_save_load_mismatch",
+            "previousScenario": "invalid_save_load_mismatch"
+          },
+          "unexpectedRetainedKeys": [
+            "commandLog",
+            "factions",
+            "flags"
+          ],
+          "injectedLeak": true
+        },
         "stateEvidence": {
           "commandLog": "cmd/combined_open_dialogue:true|cmd/combined_accept_contract:true|cmd/combined_work_reward:true|cmd/combined_start_encounter:true|cmd/combined_finisher:true|cmd/combined_work_complete:true|cmd/combined_open_cache:true|cmd/combined_take_gem:true|cmd/combined_theft_flag:true|cmd/combined_theft_penalty:true",
           "containerItems": "item/stolen_gem=1",
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=-15|neutral",
-          "flags": "flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=27|neutral",
+          "flags": "flag/leaked_previous_scenario=invalid_save_load_mismatch,flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/stolen_gem=1,item/victory_token=1,item/wage_scrip=3,item/work_permit=1",
           "scenarioId": "invalid_cross_scenario_state_leakage",
-          "scenarioMarker": "leak:previous_scenario"
+          "scenarioMarker": "inject_previous_scenario_state"
         },
         "restoredStateEvidence": {
           "commandLog": "cmd/combined_open_dialogue:true|cmd/combined_accept_contract:true|cmd/combined_work_reward:true|cmd/combined_start_encounter:true|cmd/combined_finisher:true|cmd/combined_work_complete:true|cmd/combined_open_cache:true|cmd/combined_take_gem:true|cmd/combined_theft_flag:true|cmd/combined_theft_penalty:true",
@@ -4634,16 +5091,22 @@
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=-15|neutral",
-          "flags": "flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=27|neutral",
+          "flags": "flag/leaked_previous_scenario=invalid_save_load_mismatch,flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/stolen_gem=1,item/victory_token=1,item/wage_scrip=3,item/work_permit=1",
           "scenarioId": "invalid_cross_scenario_state_leakage",
-          "scenarioMarker": "leak:previous_scenario"
+          "scenarioMarker": "inject_previous_scenario_state"
         },
         "diagnostics": []
       },
       "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.command_delta_missing",
+          "target": "cmd/combined_accept_contract",
+          "message": "Command evidence is missing command-specific state delta."
+        },
         {
           "severity": "error",
           "code": "combat_family.evidence.cross_scenario_state_leakage",
@@ -4655,7 +5118,7 @@
     {
       "scenarioId": "invalid_dialogue_or_choice_ref",
       "seed": "s083-invalid_dialogue_or_choice_ref",
-      "deterministicHash": "893c90e1f816da09e92491c31e65560e544874c3c12ba388cd6924abb57fc4d6",
+      "deterministicHash": "f1b419c56bf67c01c8fa5974bee9456e50c7bfbfeb9c47e653a6784491c35042",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "dialogue_or_choice_ref",
@@ -4692,7 +5155,7 @@
             "severity": "error",
             "code": "combat_family.audit.missing_dialogue_choice_ref",
             "target": "choice/accept_contract",
-            "message": "Selected dialogue choice must exist exactly."
+            "message": "Selected dialogue choice must exist in the declared node."
           }
         ]
       },
@@ -4767,6 +5230,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "",
         "restoredRuntimeStateHash": "",
         "saveLoadRoundtripPassed": false,
@@ -4778,9 +5242,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {},
         "restoredStateEvidence": {},
         "diagnostics": []
@@ -4790,7 +5262,7 @@
           "severity": "error",
           "code": "combat_family.audit.missing_dialogue_choice_ref",
           "target": "choice/accept_contract",
-          "message": "Selected dialogue choice must exist exactly."
+          "message": "Selected dialogue choice must exist in the declared node."
         },
         {
           "severity": "error",
@@ -4831,9 +5303,196 @@
       ]
     },
     {
+      "scenarioId": "invalid_dialogue_wrong_node_or_output_mismatch",
+      "seed": "s083-invalid_dialogue_wrong_node_or_output_mismatch",
+      "deterministicHash": "75b0372ddcc43270180cf70d5612310202d3d7ca11c12372d13f67ddb80ec88f",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "dialogue_wrong_node_or_output_mismatch",
+      "selectedFamilyIds": [
+        "social"
+      ],
+      "sourceDeclarationIds": [
+        "decl/social/accept_watch_contract"
+      ],
+      "packageRuntimeIds": [
+        "dialogue/watch_captain",
+        "node/start",
+        "choice/accept_contract",
+        "faction/settlement_watch",
+        "flag/work_contract_accepted",
+        "item/contract_note"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/rule_pack_combat_family",
+        "auditedDeclarationIds": [
+          "decl/social/accept_watch_contract"
+        ],
+        "auditedPackageRuntimeIds": [
+          "choice/accept_contract",
+          "dialogue/watch_captain",
+          "faction/settlement_watch",
+          "flag/work_contract_accepted",
+          "item/contract_note",
+          "node/start"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "combat_family.audit.dialogue_choice_node_mismatch",
+            "target": "choice/accept_contract",
+            "message": "Selected dialogue choice must exist in the declared node."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeBoundary": {
+          "adapterId": "",
+          "runtimeServiceType": "",
+          "stateFactoryType": "",
+          "serializerType": "",
+          "snapshotStoreType": "",
+          "usedGameRuntimeService": false,
+          "usedRuntimeStateFactory": false,
+          "usedEncounterRuntimeService": false,
+          "usedEncounterAiService": false,
+          "usedFactionRuntimeService": false,
+          "usedDialogueRuntimeService": false,
+          "usedInteractionRuntimeService": false,
+          "usedContainerRuntimeService": false
+        },
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "encounterBefore": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "encounterAfter": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "factionReputationBefore": {},
+        "factionReputationAfter": {},
+        "dialogueBefore": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "dialogueAfter": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "workEvidence": {
+          "contractInteractionId": "",
+          "rewardItemId": "",
+          "rewardAmountAfter": 0,
+          "completionFlagId": "",
+          "completionFlagAfter": ""
+        },
+        "theftEvidence": {
+          "containerInventoryId": "",
+          "itemId": "",
+          "containerAmountAfter": 0,
+          "playerAmountAfter": 0,
+          "theftFlagId": "",
+          "theftFlagAfter": "",
+          "factionId": "",
+          "reputationAfter": ""
+        },
+        "factionClampEvidence": [],
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "saveLoadEvidence": {
+          "usedRuntimeStateSerializer": false,
+          "usedRuntimeSnapshotStore": false,
+          "serializedFullState": false,
+          "serializedStateHash": "",
+          "restoredSerializedStateHash": "",
+          "snapshotSlotName": "",
+          "snapshotSaveSucceeded": false,
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
+        },
+        "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
+        "stateEvidence": {},
+        "restoredStateEvidence": {},
+        "diagnostics": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.audit.dialogue_choice_node_mismatch",
+          "target": "choice/accept_contract",
+          "message": "Selected dialogue choice must exist in the declared node."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.cross_scenario_state_leakage",
+          "target": "invalid_dialogue_wrong_node_or_output_mismatch",
+          "message": "Runtime evidence contains prior-scenario leakage."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/accept_watch_contract",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/open_watch_dialogue",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_boundary_missing",
+          "target": "invalid_dialogue_wrong_node_or_output_mismatch",
+          "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_not_attempted",
+          "target": "invalid_dialogue_wrong_node_or_output_mismatch",
+          "message": "Runtime must be attempted through an injected real adapter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.save_load_mismatch",
+          "target": "invalid_dialogue_wrong_node_or_output_mismatch",
+          "message": "Full runtime state save/load evidence must match exactly."
+        }
+      ]
+    },
+    {
       "scenarioId": "invalid_fake_runtime_success",
       "seed": "s083-invalid_fake_runtime_success",
-      "deterministicHash": "cc0b02700cad00d41af625c293ced04cf99e4dfe840fb5cc523b7209ee77da30",
+      "deterministicHash": "882a34df42871cbd7f1c03757010237cc8f255e2c8002e828a5235c1e95820c5",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "fake_runtime_success",
@@ -4970,6 +5629,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "copied",
         "restoredRuntimeStateHash": "copied",
         "saveLoadRoundtripPassed": true,
@@ -4981,9 +5641,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "scenarioId": "invalid_fake_runtime_success"
         },
@@ -5077,7 +5745,7 @@
     {
       "scenarioId": "invalid_missing_ability_or_resource_ref",
       "seed": "s083-invalid_missing_ability_or_resource_ref",
-      "deterministicHash": "acaf2798f0668cf8acfe53e9d51c0a9e84b5fc404883d9d257ea88a1cd4eb46a",
+      "deterministicHash": "906161def309bfda92047fcb61354301f5223bafbfab415fac167909c4107792",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "missing_ability_or_resource_ref",
@@ -5192,6 +5860,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "",
         "restoredRuntimeStateHash": "",
         "saveLoadRoundtripPassed": false,
@@ -5203,9 +5872,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {},
         "restoredStateEvidence": {},
         "diagnostics": []
@@ -5264,7 +5941,7 @@
     {
       "scenarioId": "invalid_missing_encounter_or_participant_ref",
       "seed": "s083-invalid_missing_encounter_or_participant_ref",
-      "deterministicHash": "c36cb65b7791837582feda859e3448f7f5c2af197eb1405140eb53d64fd670b8",
+      "deterministicHash": "9a721db2eb6847c4b6b97ea61b1e6fc76be11eafaa166f976fbb0529be9a48b5",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "missing_encounter_or_participant_ref",
@@ -5379,6 +6056,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "",
         "restoredRuntimeStateHash": "",
         "saveLoadRoundtripPassed": false,
@@ -5390,9 +6068,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {},
         "restoredStateEvidence": {},
         "diagnostics": []
@@ -5451,7 +6137,7 @@
     {
       "scenarioId": "invalid_missing_faction_ref",
       "seed": "s083-invalid_missing_faction_ref",
-      "deterministicHash": "befbf13da2a18677fa3329714e6a01eb25c69783e7ed5366a753e58cd27eeb95",
+      "deterministicHash": "2ebd10785b5d2bda39bd538c85b357e48907caf8e186509cad5af48c63a1ac0c",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "missing_faction_ref",
@@ -5553,6 +6239,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "",
         "restoredRuntimeStateHash": "",
         "saveLoadRoundtripPassed": false,
@@ -5564,9 +6251,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {},
         "restoredStateEvidence": {},
         "diagnostics": []
@@ -5611,9 +6306,838 @@
       ]
     },
     {
+      "scenarioId": "invalid_missing_participant_ability_resource_cost_reward_binding",
+      "seed": "s083-invalid_missing_participant_ability_resource_cost_reward_binding",
+      "deterministicHash": "e32b02e7924bf719e51c0fd1c33b77f583f313b9cc15bf28bba5aa671884c18b",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "missing_participant_ability_resource_cost_reward_binding",
+      "selectedFamilyIds": [
+        "combat"
+      ],
+      "sourceDeclarationIds": [
+        "decl/combat/resolution_reward"
+      ],
+      "packageRuntimeIds": [
+        "encounter/quick_resolution",
+        "participant/player_guard",
+        "participant/raider",
+        "ability/finisher",
+        "item/victory_token"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/rule_pack_combat_family",
+        "auditedDeclarationIds": [
+          "decl/combat/resolution_reward"
+        ],
+        "auditedPackageRuntimeIds": [
+          "ability/finisher",
+          "ability/raider_cut",
+          "encounter/quick_resolution",
+          "item/victory_token",
+          "participant/player_guard",
+          "participant/raider",
+          "resource/focus",
+          "resource/health"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "combat_family.audit.ability_cost_resource_mismatch",
+            "target": "ability/finisher",
+            "message": "Declared ability costs must resolve to the declared focus resource."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.encounter_reward_missing",
+            "target": "item/missing_victory_token",
+            "message": "Encounter reward item/output must resolve."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.participant_ability_mismatch",
+            "target": "participant/player_guard",
+            "message": "Player participant must expose the declared ability."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeBoundary": {
+          "adapterId": "",
+          "runtimeServiceType": "",
+          "stateFactoryType": "",
+          "serializerType": "",
+          "snapshotStoreType": "",
+          "usedGameRuntimeService": false,
+          "usedRuntimeStateFactory": false,
+          "usedEncounterRuntimeService": false,
+          "usedEncounterAiService": false,
+          "usedFactionRuntimeService": false,
+          "usedDialogueRuntimeService": false,
+          "usedInteractionRuntimeService": false,
+          "usedContainerRuntimeService": false
+        },
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "encounterBefore": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "encounterAfter": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "factionReputationBefore": {},
+        "factionReputationAfter": {},
+        "dialogueBefore": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "dialogueAfter": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "workEvidence": {
+          "contractInteractionId": "",
+          "rewardItemId": "",
+          "rewardAmountAfter": 0,
+          "completionFlagId": "",
+          "completionFlagAfter": ""
+        },
+        "theftEvidence": {
+          "containerInventoryId": "",
+          "itemId": "",
+          "containerAmountAfter": 0,
+          "playerAmountAfter": 0,
+          "theftFlagId": "",
+          "theftFlagAfter": "",
+          "factionId": "",
+          "reputationAfter": ""
+        },
+        "factionClampEvidence": [],
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "saveLoadEvidence": {
+          "usedRuntimeStateSerializer": false,
+          "usedRuntimeSnapshotStore": false,
+          "serializedFullState": false,
+          "serializedStateHash": "",
+          "restoredSerializedStateHash": "",
+          "snapshotSlotName": "",
+          "snapshotSaveSucceeded": false,
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
+        },
+        "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
+        "stateEvidence": {},
+        "restoredStateEvidence": {},
+        "diagnostics": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.audit.ability_cost_resource_mismatch",
+          "target": "ability/finisher",
+          "message": "Declared ability costs must resolve to the declared focus resource."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.encounter_reward_missing",
+          "target": "item/missing_victory_token",
+          "message": "Encounter reward item/output must resolve."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.participant_ability_mismatch",
+          "target": "participant/player_guard",
+          "message": "Player participant must expose the declared ability."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.cross_scenario_state_leakage",
+          "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+          "message": "Runtime evidence contains prior-scenario leakage."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/player_finisher",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/start_quick_resolution",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_boundary_missing",
+          "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+          "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_not_attempted",
+          "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+          "message": "Runtime must be attempted through an injected real adapter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.save_load_mismatch",
+          "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+          "message": "Full runtime state save/load evidence must match exactly."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_same_declaration_wrong_ability_actor_target",
+      "seed": "s083-invalid_same_declaration_wrong_ability_actor_target",
+      "deterministicHash": "0855234815eabf3fd4572c7d5a6f8fee15d464eb7a7abcd71307209ee6eba50d",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "same_declaration_wrong_ability_actor_target",
+      "selectedFamilyIds": [
+        "combat"
+      ],
+      "sourceDeclarationIds": [
+        "decl/combat/turn_based_encounter"
+      ],
+      "packageRuntimeIds": [
+        "encounter/roadside_raider",
+        "participant/player_guard",
+        "participant/raider",
+        "ability/guard_strike",
+        "ability/raider_cut",
+        "resource/health",
+        "resource/focus"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/rule_pack_combat_family",
+        "auditedDeclarationIds": [
+          "decl/combat/turn_based_encounter"
+        ],
+        "auditedPackageRuntimeIds": [
+          "ability/guard_strike",
+          "ability/raider_cut",
+          "encounter/roadside_raider",
+          "item/victory_token",
+          "participant/player_guard",
+          "participant/raider",
+          "resource/focus",
+          "resource/health"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_actor_mismatch",
+            "target": "cmd/wrong_existing_actor_target",
+            "message": "Combat ability actor must be the declared source participant."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_secondary_target_mismatch",
+            "target": "cmd/wrong_existing_actor_target",
+            "message": "Combat ability target must be the declared target participant."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_target_mismatch",
+            "target": "cmd/wrong_existing_actor_target",
+            "message": "Combat ability must use the declared player ability."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeBoundary": {
+          "adapterId": "",
+          "runtimeServiceType": "",
+          "stateFactoryType": "",
+          "serializerType": "",
+          "snapshotStoreType": "",
+          "usedGameRuntimeService": false,
+          "usedRuntimeStateFactory": false,
+          "usedEncounterRuntimeService": false,
+          "usedEncounterAiService": false,
+          "usedFactionRuntimeService": false,
+          "usedDialogueRuntimeService": false,
+          "usedInteractionRuntimeService": false,
+          "usedContainerRuntimeService": false
+        },
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "encounterBefore": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "encounterAfter": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "factionReputationBefore": {},
+        "factionReputationAfter": {},
+        "dialogueBefore": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "dialogueAfter": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "workEvidence": {
+          "contractInteractionId": "",
+          "rewardItemId": "",
+          "rewardAmountAfter": 0,
+          "completionFlagId": "",
+          "completionFlagAfter": ""
+        },
+        "theftEvidence": {
+          "containerInventoryId": "",
+          "itemId": "",
+          "containerAmountAfter": 0,
+          "playerAmountAfter": 0,
+          "theftFlagId": "",
+          "theftFlagAfter": "",
+          "factionId": "",
+          "reputationAfter": ""
+        },
+        "factionClampEvidence": [],
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "saveLoadEvidence": {
+          "usedRuntimeStateSerializer": false,
+          "usedRuntimeSnapshotStore": false,
+          "serializedFullState": false,
+          "serializedStateHash": "",
+          "restoredSerializedStateHash": "",
+          "snapshotSlotName": "",
+          "snapshotSaveSucceeded": false,
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
+        },
+        "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
+        "stateEvidence": {},
+        "restoredStateEvidence": {},
+        "diagnostics": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_actor_mismatch",
+          "target": "cmd/wrong_existing_actor_target",
+          "message": "Combat ability actor must be the declared source participant."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_secondary_target_mismatch",
+          "target": "cmd/wrong_existing_actor_target",
+          "message": "Combat ability target must be the declared target participant."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_target_mismatch",
+          "target": "cmd/wrong_existing_actor_target",
+          "message": "Combat ability must use the declared player ability."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.cross_scenario_state_leakage",
+          "target": "invalid_same_declaration_wrong_ability_actor_target",
+          "message": "Runtime evidence contains prior-scenario leakage."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/start_roadside_raider",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/wrong_existing_actor_target",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_boundary_missing",
+          "target": "invalid_same_declaration_wrong_ability_actor_target",
+          "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_not_attempted",
+          "target": "invalid_same_declaration_wrong_ability_actor_target",
+          "message": "Runtime must be attempted through an injected real adapter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.save_load_mismatch",
+          "target": "invalid_same_declaration_wrong_ability_actor_target",
+          "message": "Full runtime state save/load evidence must match exactly."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_same_declaration_wrong_amount_flag_value",
+      "seed": "s083-invalid_same_declaration_wrong_amount_flag_value",
+      "deterministicHash": "4c12dd9fc503130e8534bcb572e338e8a7075d73eed3c6967d06d05a18812d0b",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "same_declaration_wrong_amount_flag_value",
+      "selectedFamilyIds": [
+        "theft"
+      ],
+      "sourceDeclarationIds": [
+        "decl/theft/cache_gem_penalty"
+      ],
+      "packageRuntimeIds": [
+        "inventory/merchant_cache",
+        "item/stolen_gem",
+        "flag/theft_reported",
+        "faction/settlement_watch"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/rule_pack_combat_family",
+        "auditedDeclarationIds": [
+          "decl/theft/cache_gem_penalty"
+        ],
+        "auditedPackageRuntimeIds": [
+          "faction/settlement_watch",
+          "flag/theft_reported",
+          "inventory/merchant_cache",
+          "item/stolen_gem"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_amount_mismatch",
+            "target": "cmd/take_wrong_amount_gem",
+            "message": "Theft transfer amount must match the declaration."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_amount_mismatch",
+            "target": "cmd/theft_wrong_penalty",
+            "message": "Theft reputation penalty must match the declaration."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_value_mismatch",
+            "target": "cmd/theft_wrong_flag_value",
+            "message": "Theft flag value must match the declaration."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeBoundary": {
+          "adapterId": "",
+          "runtimeServiceType": "",
+          "stateFactoryType": "",
+          "serializerType": "",
+          "snapshotStoreType": "",
+          "usedGameRuntimeService": false,
+          "usedRuntimeStateFactory": false,
+          "usedEncounterRuntimeService": false,
+          "usedEncounterAiService": false,
+          "usedFactionRuntimeService": false,
+          "usedDialogueRuntimeService": false,
+          "usedInteractionRuntimeService": false,
+          "usedContainerRuntimeService": false
+        },
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "encounterBefore": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "encounterAfter": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "factionReputationBefore": {},
+        "factionReputationAfter": {},
+        "dialogueBefore": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "dialogueAfter": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "workEvidence": {
+          "contractInteractionId": "",
+          "rewardItemId": "",
+          "rewardAmountAfter": 0,
+          "completionFlagId": "",
+          "completionFlagAfter": ""
+        },
+        "theftEvidence": {
+          "containerInventoryId": "",
+          "itemId": "",
+          "containerAmountAfter": 0,
+          "playerAmountAfter": 0,
+          "theftFlagId": "",
+          "theftFlagAfter": "",
+          "factionId": "",
+          "reputationAfter": ""
+        },
+        "factionClampEvidence": [],
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "saveLoadEvidence": {
+          "usedRuntimeStateSerializer": false,
+          "usedRuntimeSnapshotStore": false,
+          "serializedFullState": false,
+          "serializedStateHash": "",
+          "restoredSerializedStateHash": "",
+          "snapshotSlotName": "",
+          "snapshotSaveSucceeded": false,
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
+        },
+        "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
+        "stateEvidence": {},
+        "restoredStateEvidence": {},
+        "diagnostics": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_amount_mismatch",
+          "target": "cmd/take_wrong_amount_gem",
+          "message": "Theft transfer amount must match the declaration."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_amount_mismatch",
+          "target": "cmd/theft_wrong_penalty",
+          "message": "Theft reputation penalty must match the declaration."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_value_mismatch",
+          "target": "cmd/theft_wrong_flag_value",
+          "message": "Theft flag value must match the declaration."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.cross_scenario_state_leakage",
+          "target": "invalid_same_declaration_wrong_amount_flag_value",
+          "message": "Runtime evidence contains prior-scenario leakage."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/open_cache",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/take_wrong_amount_gem",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/theft_wrong_flag_value",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/theft_wrong_penalty",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_boundary_missing",
+          "target": "invalid_same_declaration_wrong_amount_flag_value",
+          "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_not_attempted",
+          "target": "invalid_same_declaration_wrong_amount_flag_value",
+          "message": "Runtime must be attempted through an injected real adapter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.save_load_mismatch",
+          "target": "invalid_same_declaration_wrong_amount_flag_value",
+          "message": "Full runtime state save/load evidence must match exactly."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_same_declaration_wrong_existing_target",
+      "seed": "s083-invalid_same_declaration_wrong_existing_target",
+      "deterministicHash": "0db11d1b968b3add75fc46308699ea24f805506d58ba5c3d90731f9858a4310e",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "same_declaration_wrong_existing_target",
+      "selectedFamilyIds": [
+        "combat"
+      ],
+      "sourceDeclarationIds": [
+        "decl/combat/turn_based_encounter"
+      ],
+      "packageRuntimeIds": [
+        "encounter/roadside_raider",
+        "participant/player_guard",
+        "participant/raider",
+        "ability/guard_strike",
+        "ability/raider_cut",
+        "resource/health",
+        "resource/focus"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/rule_pack_combat_family",
+        "auditedDeclarationIds": [
+          "decl/combat/turn_based_encounter"
+        ],
+        "auditedPackageRuntimeIds": [
+          "ability/guard_strike",
+          "ability/raider_cut",
+          "encounter/roadside_raider",
+          "item/victory_token",
+          "participant/player_guard",
+          "participant/raider",
+          "resource/focus",
+          "resource/health"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_target_mismatch",
+            "target": "cmd/start_wrong_existing_encounter",
+            "message": "Combat start must target the declared encounter."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeBoundary": {
+          "adapterId": "",
+          "runtimeServiceType": "",
+          "stateFactoryType": "",
+          "serializerType": "",
+          "snapshotStoreType": "",
+          "usedGameRuntimeService": false,
+          "usedRuntimeStateFactory": false,
+          "usedEncounterRuntimeService": false,
+          "usedEncounterAiService": false,
+          "usedFactionRuntimeService": false,
+          "usedDialogueRuntimeService": false,
+          "usedInteractionRuntimeService": false,
+          "usedContainerRuntimeService": false
+        },
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "encounterBefore": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "encounterAfter": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "factionReputationBefore": {},
+        "factionReputationAfter": {},
+        "dialogueBefore": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "dialogueAfter": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "workEvidence": {
+          "contractInteractionId": "",
+          "rewardItemId": "",
+          "rewardAmountAfter": 0,
+          "completionFlagId": "",
+          "completionFlagAfter": ""
+        },
+        "theftEvidence": {
+          "containerInventoryId": "",
+          "itemId": "",
+          "containerAmountAfter": 0,
+          "playerAmountAfter": 0,
+          "theftFlagId": "",
+          "theftFlagAfter": "",
+          "factionId": "",
+          "reputationAfter": ""
+        },
+        "factionClampEvidence": [],
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "saveLoadEvidence": {
+          "usedRuntimeStateSerializer": false,
+          "usedRuntimeSnapshotStore": false,
+          "serializedFullState": false,
+          "serializedStateHash": "",
+          "restoredSerializedStateHash": "",
+          "snapshotSlotName": "",
+          "snapshotSaveSucceeded": false,
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
+        },
+        "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
+        "stateEvidence": {},
+        "restoredStateEvidence": {},
+        "diagnostics": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_target_mismatch",
+          "target": "cmd/start_wrong_existing_encounter",
+          "message": "Combat start must target the declared encounter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.cross_scenario_state_leakage",
+          "target": "invalid_same_declaration_wrong_existing_target",
+          "message": "Runtime evidence contains prior-scenario leakage."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/start_wrong_existing_encounter",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_boundary_missing",
+          "target": "invalid_same_declaration_wrong_existing_target",
+          "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_not_attempted",
+          "target": "invalid_same_declaration_wrong_existing_target",
+          "message": "Runtime must be attempted through an injected real adapter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.save_load_mismatch",
+          "target": "invalid_same_declaration_wrong_existing_target",
+          "message": "Full runtime state save/load evidence must match exactly."
+        }
+      ]
+    },
+    {
       "scenarioId": "invalid_save_load_mismatch",
       "seed": "s083-invalid_save_load_mismatch",
-      "deterministicHash": "3da0c3c1e614e764aaff42f5d9b8c81fca54b1a74c06d8fdf355a15c7c23b734",
+      "deterministicHash": "41e7b9b25b52c0bb75c792d67e984245b03d3526cc5f8ff17c6bb75aa0a661aa",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "save_load_mismatch",
@@ -5699,7 +7223,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "a77987997f5e85a77a15bb6d1eec7ac4b3d37018d6ad53a7b29a9bbf929ddd8f",
+        "runtimeEvidenceHash": "e292c8e5f7f77d46f47df6ddee92fb7b5916b4a36ea3a637ed08915d002093cb",
         "commands": [
           {
             "commandId": "cmd/combined_open_dialogue",
@@ -5707,6 +7231,9 @@
             "commandType": "social/open_dialogue",
             "targetId": "dialogue/watch_captain",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -5738,9 +7265,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -5809,6 +7338,9 @@
             "commandType": "social/choose_dialogue",
             "targetId": "choice/accept_contract",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -5847,9 +7379,11 @@
             "factionDelta": {
               "changed": true,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -5924,6 +7458,9 @@
             "commandType": "work/execute_contract",
             "targetId": "interaction/work_contract_reward",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -5957,9 +7494,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -6039,6 +7578,9 @@
             "commandType": "combat/start_encounter",
             "targetId": "encounter/quick_resolution",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -6074,9 +7616,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -6157,6 +7701,9 @@
             "commandType": "combat/use_ability",
             "targetId": "ability/finisher",
             "secondaryTargetId": "participant/raider",
+            "actorId": "participant/player_guard",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -6204,9 +7751,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -6288,6 +7837,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/work_contract_completed",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "completed",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -6329,9 +7881,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -6415,6 +7969,9 @@
             "commandType": "theft/open_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -6456,9 +8013,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -6543,6 +8102,9 @@
             "commandType": "theft/take_from_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "item/stolen_gem",
+            "actorId": "",
+            "amount": 1,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -6586,9 +8148,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -6674,6 +8238,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/theft_reported",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "true",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -6715,9 +8282,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -6801,10 +8370,13 @@
           },
           {
             "commandId": "cmd/combined_theft_penalty",
-            "sourceDeclarationId": "decl/faction/theft_penalty",
+            "sourceDeclarationId": "decl/theft/cache_gem_penalty",
             "commandType": "faction/change_reputation",
             "targetId": "faction/settlement_watch",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": -20,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -6846,9 +8418,11 @@
             "factionDelta": {
               "changed": true,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "-15|neutral"
               }
             },
@@ -6956,9 +8530,11 @@
           ]
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "-15|neutral"
         },
         "dialogueBefore": {
@@ -6993,27 +8569,53 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "-15|neutral"
         },
-        "runtimeStateHash": "c19093f55faf8edac15abf3ac220c7d665145109236a9a69d377190c81cbae7e",
-        "restoredRuntimeStateHash": "921a5d7efeb1f1bad14ba4fc197086c161d1d3e6c6e50e8b3bea4b01fbf0aad4",
+        "factionClampEvidence": [
+          {
+            "commandId": "cmd/combined_theft_penalty",
+            "sourceDeclarationId": "decl/theft/cache_gem_penalty",
+            "factionId": "faction/settlement_watch",
+            "before": 5,
+            "requestedAmount": -20,
+            "unclampedCandidate": -15,
+            "min": -100,
+            "max": 100,
+            "expectedAfter": -15,
+            "actualAfter": -15,
+            "clamped": false
+          }
+        ],
+        "runtimeStateHash": "1cd0549c162abdba6ce036abcdbd71a05e2a41b1dfc1a515e5aa14f3e6103425",
+        "restoredRuntimeStateHash": "ec1b079233baf37f33aa9f4613946074d65a42f60ab53e616c3e96fc09564616",
         "saveLoadRoundtripPassed": false,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "c19093f55faf8edac15abf3ac220c7d665145109236a9a69d377190c81cbae7e",
-          "restoredSerializedStateHash": "921a5d7efeb1f1bad14ba4fc197086c161d1d3e6c6e50e8b3bea4b01fbf0aad4",
+          "serializedStateHash": "1cd0549c162abdba6ce036abcdbd71a05e2a41b1dfc1a515e5aa14f3e6103425",
+          "restoredSerializedStateHash": "ec1b079233baf37f33aa9f4613946074d65a42f60ab53e616c3e96fc09564616",
           "snapshotSlotName": "goal009_invalid_save_load_mismatch",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "invalid_work_requirement_unmet",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/work_contract_reward:false",
+            "scenarioMarker": "invalid_work_requirement_unmet"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/combined_open_dialogue:true|cmd/combined_accept_contract:true|cmd/combined_work_reward:true|cmd/combined_start_encounter:true|cmd/combined_finisher:true|cmd/combined_work_complete:true|cmd/combined_open_cache:true|cmd/combined_take_gem:true|cmd/combined_theft_flag:true|cmd/combined_theft_penalty:true",
           "containerItems": "item/stolen_gem=1",
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=-15|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=-15|neutral",
           "flags": "flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/stolen_gem=1,item/victory_token=1,item/wage_scrip=3,item/work_permit=1",
@@ -7026,7 +8628,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "encounter/quick_resolution|false|participant/player_guard=alive|player|resource/focus:4;resource/health:14,participant/raider=defeated|enemy|resource/focus:3;resource/health:0|participant/player_guard:ability/finisher:participant/raider",
-          "factions": "faction/settlement_watch=-15|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=-15|neutral",
           "flags": "flag/save_load_mismatch=corrupted,flag/theft_reported=true,flag/work_contract_accepted=accepted,flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/stolen_gem=1,item/victory_token=1,item/wage_scrip=3,item/work_permit=1",
@@ -7045,9 +8647,228 @@
       ]
     },
     {
+      "scenarioId": "invalid_theft_amount_flag_reputation_mismatch",
+      "seed": "s083-invalid_theft_amount_flag_reputation_mismatch",
+      "deterministicHash": "0cb43cf54577a8b23f63509f3da1dfe51485a46f2bee483e8da1456364ed1e4b",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "theft_amount_flag_reputation_mismatch",
+      "selectedFamilyIds": [
+        "theft"
+      ],
+      "sourceDeclarationIds": [
+        "decl/theft/cache_gem_penalty"
+      ],
+      "packageRuntimeIds": [
+        "inventory/merchant_cache",
+        "item/stolen_gem",
+        "flag/theft_reported",
+        "faction/settlement_watch"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/rule_pack_combat_family",
+        "auditedDeclarationIds": [
+          "decl/theft/cache_gem_penalty"
+        ],
+        "auditedPackageRuntimeIds": [
+          "faction/settlement_watch",
+          "flag/theft_reported",
+          "inventory/merchant_cache",
+          "item/stolen_gem"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_amount_mismatch",
+            "target": "cmd/take_wrong_amount_gem",
+            "message": "Theft transfer amount must match the declaration."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_amount_mismatch",
+            "target": "cmd/theft_wrong_penalty",
+            "message": "Theft reputation penalty must match the declaration."
+          },
+          {
+            "severity": "error",
+            "code": "combat_family.audit.command_value_mismatch",
+            "target": "cmd/theft_wrong_flag_value",
+            "message": "Theft flag value must match the declaration."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeBoundary": {
+          "adapterId": "",
+          "runtimeServiceType": "",
+          "stateFactoryType": "",
+          "serializerType": "",
+          "snapshotStoreType": "",
+          "usedGameRuntimeService": false,
+          "usedRuntimeStateFactory": false,
+          "usedEncounterRuntimeService": false,
+          "usedEncounterAiService": false,
+          "usedFactionRuntimeService": false,
+          "usedDialogueRuntimeService": false,
+          "usedInteractionRuntimeService": false,
+          "usedContainerRuntimeService": false
+        },
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "encounterBefore": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "encounterAfter": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "factionReputationBefore": {},
+        "factionReputationAfter": {},
+        "dialogueBefore": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "dialogueAfter": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "workEvidence": {
+          "contractInteractionId": "",
+          "rewardItemId": "",
+          "rewardAmountAfter": 0,
+          "completionFlagId": "",
+          "completionFlagAfter": ""
+        },
+        "theftEvidence": {
+          "containerInventoryId": "",
+          "itemId": "",
+          "containerAmountAfter": 0,
+          "playerAmountAfter": 0,
+          "theftFlagId": "",
+          "theftFlagAfter": "",
+          "factionId": "",
+          "reputationAfter": ""
+        },
+        "factionClampEvidence": [],
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "saveLoadEvidence": {
+          "usedRuntimeStateSerializer": false,
+          "usedRuntimeSnapshotStore": false,
+          "serializedFullState": false,
+          "serializedStateHash": "",
+          "restoredSerializedStateHash": "",
+          "snapshotSlotName": "",
+          "snapshotSaveSucceeded": false,
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
+        },
+        "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
+        "stateEvidence": {},
+        "restoredStateEvidence": {},
+        "diagnostics": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_amount_mismatch",
+          "target": "cmd/take_wrong_amount_gem",
+          "message": "Theft transfer amount must match the declaration."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_amount_mismatch",
+          "target": "cmd/theft_wrong_penalty",
+          "message": "Theft reputation penalty must match the declaration."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.audit.command_value_mismatch",
+          "target": "cmd/theft_wrong_flag_value",
+          "message": "Theft flag value must match the declaration."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.cross_scenario_state_leakage",
+          "target": "invalid_theft_amount_flag_reputation_mismatch",
+          "message": "Runtime evidence contains prior-scenario leakage."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/open_cache",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/take_wrong_amount_gem",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/theft_wrong_flag_value",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/theft_wrong_penalty",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_boundary_missing",
+          "target": "invalid_theft_amount_flag_reputation_mismatch",
+          "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_not_attempted",
+          "target": "invalid_theft_amount_flag_reputation_mismatch",
+          "message": "Runtime must be attempted through an injected real adapter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.save_load_mismatch",
+          "target": "invalid_theft_amount_flag_reputation_mismatch",
+          "message": "Full runtime state save/load evidence must match exactly."
+        }
+      ]
+    },
+    {
       "scenarioId": "invalid_theft_container_or_item_ref",
       "seed": "s083-invalid_theft_container_or_item_ref",
-      "deterministicHash": "44f5700397b087d41364d923c8642ba7f2b2ef07b555650bdcc8073b3ccc1113",
+      "deterministicHash": "1ba997aaeb76a0f9b2df106e977174f5431377ab108e01b8862dc0576108f343",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "theft_container_or_item_ref",
@@ -7155,6 +8976,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "",
         "restoredRuntimeStateHash": "",
         "saveLoadRoundtripPassed": false,
@@ -7166,9 +8988,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {},
         "restoredStateEvidence": {},
         "diagnostics": []
@@ -7233,7 +9063,7 @@
     {
       "scenarioId": "invalid_theft_nonpositive_amount",
       "seed": "s083-invalid_theft_nonpositive_amount",
-      "deterministicHash": "32f2e6de3fd5c4fbe0abd666d9860a177e6f92ef3026cb9012f472ccb536c161",
+      "deterministicHash": "e970dac02726c69b3a037c23380d498c73b4a18e71b23200787b1aa215a9c5a7",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "theft_nonpositive_amount",
@@ -7341,6 +9171,7 @@
           "factionId": "",
           "reputationAfter": ""
         },
+        "factionClampEvidence": [],
         "runtimeStateHash": "",
         "restoredRuntimeStateHash": "",
         "saveLoadRoundtripPassed": false,
@@ -7352,9 +9183,17 @@
           "restoredSerializedStateHash": "",
           "snapshotSlotName": "",
           "snapshotSaveSucceeded": false,
-          "snapshotLoadSucceeded": false
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
         },
         "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {},
         "restoredStateEvidence": {},
         "diagnostics": []
@@ -7407,7 +9246,7 @@
     {
       "scenarioId": "invalid_work_requirement_unmet",
       "seed": "s083-invalid_work_requirement_unmet",
-      "deterministicHash": "aa974df1b0224386405878b521e89f13e33e2c08dfd51f43e0d2331a9943b079",
+      "deterministicHash": "e73c45423e1da7d4d5fe2e9833c02e1dad1b8a790574899821980ce3ad3e60ed",
       "expectedValid": false,
       "actualValid": false,
       "invalidKind": "work_requirement_unmet",
@@ -7460,7 +9299,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "17f7272e8fca97d4d76a7eec5d09761cccd751de6c9df9b892c496c3b3d6dd3e",
+        "runtimeEvidenceHash": "5c2b4e34846829a934994eab0e938c90437c5ea2a604635fb505e9e06f161ecb",
         "commands": [
           {
             "commandId": "cmd/work_contract_reward",
@@ -7468,6 +9307,9 @@
             "commandType": "work/execute_contract",
             "targetId": "interaction/work_contract_reward",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": false,
             "diagnosticCode": "requirement.item_missing",
             "diagnosticMessage": "Missing item item/work_permit x1",
@@ -7501,9 +9343,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -7580,9 +9424,11 @@
           "actionHistory": []
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "dialogueBefore": {
@@ -7614,27 +9460,40 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "0|neutral"
         },
-        "runtimeStateHash": "94115bef7cab2de64a372eaf5e4160c96899310d1debfb2c8946a826f43f7cfe",
-        "restoredRuntimeStateHash": "94115bef7cab2de64a372eaf5e4160c96899310d1debfb2c8946a826f43f7cfe",
+        "factionClampEvidence": [],
+        "runtimeStateHash": "09ee6d819514b08e06685d0dc56a8b4de590b5c4a805e993febc15cc700ccf20",
+        "restoredRuntimeStateHash": "09ee6d819514b08e06685d0dc56a8b4de590b5c4a805e993febc15cc700ccf20",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "94115bef7cab2de64a372eaf5e4160c96899310d1debfb2c8946a826f43f7cfe",
-          "restoredSerializedStateHash": "94115bef7cab2de64a372eaf5e4160c96899310d1debfb2c8946a826f43f7cfe",
+          "serializedStateHash": "09ee6d819514b08e06685d0dc56a8b4de590b5c4a805e993febc15cc700ccf20",
+          "restoredSerializedStateHash": "09ee6d819514b08e06685d0dc56a8b4de590b5c4a805e993febc15cc700ccf20",
           "snapshotSlotName": "goal009_invalid_work_requirement_unmet",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "invalid_combat_wrong_turn_or_target",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/start_roadside_raider:true|cmd/player_guard_strike:true|cmd/player_acts_on_enemy_turn:false",
+            "encounter": "encounter/roadside_raider|true|participant/player_guard:ability/guard_strike:participant/raider",
+            "scenarioMarker": "invalid_combat_wrong_turn_or_target"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/work_contract_reward:false",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "",
@@ -7647,7 +9506,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "",
@@ -7678,9 +9537,195 @@
       ]
     },
     {
+      "scenarioId": "invalid_work_wrong_existing_transaction",
+      "seed": "s083-invalid_work_wrong_existing_transaction",
+      "deterministicHash": "055ddf59a5209d768da98f03594036f07bc83a40b130e35ee757812a3691a8c0",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "work_wrong_existing_transaction",
+      "selectedFamilyIds": [
+        "work"
+      ],
+      "sourceDeclarationIds": [
+        "decl/work/contract_reward"
+      ],
+      "packageRuntimeIds": [
+        "interaction/work_contract_reward",
+        "transaction/work_contract_reward",
+        "item/work_permit",
+        "item/wage_scrip",
+        "flag/work_contract_completed"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/rule_pack_combat_family",
+        "auditedDeclarationIds": [
+          "decl/work/contract_reward"
+        ],
+        "auditedPackageRuntimeIds": [
+          "faction/settlement_watch",
+          "flag/work_contract_completed",
+          "interaction/work_contract_reward",
+          "item/wage_scrip",
+          "item/work_permit",
+          "transaction/work_contract_reward"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "combat_family.audit.work_transaction_mismatch",
+            "target": "interaction/work_contract_reward",
+            "message": "Work interaction metadata must point to the declared transaction."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeBoundary": {
+          "adapterId": "",
+          "runtimeServiceType": "",
+          "stateFactoryType": "",
+          "serializerType": "",
+          "snapshotStoreType": "",
+          "usedGameRuntimeService": false,
+          "usedRuntimeStateFactory": false,
+          "usedEncounterRuntimeService": false,
+          "usedEncounterAiService": false,
+          "usedFactionRuntimeService": false,
+          "usedDialogueRuntimeService": false,
+          "usedInteractionRuntimeService": false,
+          "usedContainerRuntimeService": false
+        },
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "encounterBefore": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "encounterAfter": {
+          "encounterId": "",
+          "active": false,
+          "resolved": false,
+          "round": 0,
+          "turnIndex": 0,
+          "participants": {},
+          "actionHistory": []
+        },
+        "factionReputationBefore": {},
+        "factionReputationAfter": {},
+        "dialogueBefore": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "dialogueAfter": {
+          "dialogueId": "",
+          "currentNodeId": "",
+          "open": false,
+          "history": []
+        },
+        "workEvidence": {
+          "contractInteractionId": "",
+          "rewardItemId": "",
+          "rewardAmountAfter": 0,
+          "completionFlagId": "",
+          "completionFlagAfter": ""
+        },
+        "theftEvidence": {
+          "containerInventoryId": "",
+          "itemId": "",
+          "containerAmountAfter": 0,
+          "playerAmountAfter": 0,
+          "theftFlagId": "",
+          "theftFlagAfter": "",
+          "factionId": "",
+          "reputationAfter": ""
+        },
+        "factionClampEvidence": [],
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "saveLoadEvidence": {
+          "usedRuntimeStateSerializer": false,
+          "usedRuntimeSnapshotStore": false,
+          "serializedFullState": false,
+          "serializedStateHash": "",
+          "restoredSerializedStateHash": "",
+          "snapshotSlotName": "",
+          "snapshotSaveSucceeded": false,
+          "snapshotLoadSucceeded": false,
+          "tempSnapshotCleanupSucceeded": false
+        },
+        "scenarioIsolationPassed": false,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "",
+          "previousDynamicSignature": {},
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
+        "stateEvidence": {},
+        "restoredStateEvidence": {},
+        "diagnostics": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "combat_family.audit.work_transaction_mismatch",
+          "target": "interaction/work_contract_reward",
+          "message": "Work interaction metadata must point to the declared transaction."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.cross_scenario_state_leakage",
+          "target": "invalid_work_wrong_existing_transaction",
+          "message": "Runtime evidence contains prior-scenario leakage."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/work_contract_completed",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.required_command_missing",
+          "target": "cmd/work_contract_reward",
+          "message": "Every declared command must have runtime command evidence."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_boundary_missing",
+          "target": "invalid_work_wrong_existing_transaction",
+          "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.runtime_not_attempted",
+          "target": "invalid_work_wrong_existing_transaction",
+          "message": "Runtime must be attempted through an injected real adapter."
+        },
+        {
+          "severity": "error",
+          "code": "combat_family.evidence.save_load_mismatch",
+          "target": "invalid_work_wrong_existing_transaction",
+          "message": "Full runtime state save/load evidence must match exactly."
+        }
+      ]
+    },
+    {
       "scenarioId": "social_dialogue_reputation_consequence",
       "seed": "s080-social",
-      "deterministicHash": "2a99b45e41f497318fab069589000ea50258f1579218318a7a61437575d21b39",
+      "deterministicHash": "9601b3d515e2c2c372f831f08175cc1d295d5deb51824d38c1647d53ffd1a687",
       "expectedValid": true,
       "actualValid": true,
       "invalidKind": "",
@@ -7734,7 +9779,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "56333da5ff0d1d96172fa72d660b7f7416a92503fcd5a6a8683f51be517cc4d1",
+        "runtimeEvidenceHash": "fc9442c5a86fa50e5a770c03e9adbf65e4438c4eea5b433ec5e9e6f343dba751",
         "commands": [
           {
             "commandId": "cmd/open_watch_dialogue",
@@ -7742,6 +9787,9 @@
             "commandType": "social/open_dialogue",
             "targetId": "dialogue/watch_captain",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -7773,9 +9821,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -7844,6 +9894,9 @@
             "commandType": "social/choose_dialogue",
             "targetId": "choice/accept_contract",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -7882,9 +9935,11 @@
             "factionDelta": {
               "changed": true,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "5|neutral"
               }
             },
@@ -7973,9 +10028,11 @@
           "actionHistory": []
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "5|neutral"
         },
         "dialogueBefore": {
@@ -8010,27 +10067,40 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "5|neutral"
         },
-        "runtimeStateHash": "6c5e06873fae9720ea0cb8aafb9e2eb208d6ff08376c2f54aa7754e75994d262",
-        "restoredRuntimeStateHash": "6c5e06873fae9720ea0cb8aafb9e2eb208d6ff08376c2f54aa7754e75994d262",
+        "factionClampEvidence": [],
+        "runtimeStateHash": "83e3dac77380106f2d19fc0253baf610b16fb24fc77cbedd569fd92aa0906500",
+        "restoredRuntimeStateHash": "83e3dac77380106f2d19fc0253baf610b16fb24fc77cbedd569fd92aa0906500",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "6c5e06873fae9720ea0cb8aafb9e2eb208d6ff08376c2f54aa7754e75994d262",
-          "restoredSerializedStateHash": "6c5e06873fae9720ea0cb8aafb9e2eb208d6ff08376c2f54aa7754e75994d262",
+          "serializedStateHash": "83e3dac77380106f2d19fc0253baf610b16fb24fc77cbedd569fd92aa0906500",
+          "restoredSerializedStateHash": "83e3dac77380106f2d19fc0253baf610b16fb24fc77cbedd569fd92aa0906500",
           "snapshotSlotName": "goal009_social_dialogue_reputation_consequence",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "faction_reputation_change",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/watch_reputation_gain:true",
+            "factions": "faction/settlement_watch=100|neutral",
+            "scenarioMarker": "faction_reputation_change"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/open_watch_dialogue:true|cmd/accept_watch_contract:true",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=5|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=5|neutral",
           "flags": "flag/work_contract_accepted=accepted",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/work_permit=1",
@@ -8043,7 +10113,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=5|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=5|neutral",
           "flags": "flag/work_contract_accepted=accepted",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/contract_note=1,item/work_permit=1",
@@ -8057,7 +10127,7 @@
     {
       "scenarioId": "theft_container_reputation_consequence",
       "seed": "s081-theft",
-      "deterministicHash": "64fefbcf8b2552ccfd1c01ca4f392cda5556c2bfdf9b1cc5f6acd780ff2fda4c",
+      "deterministicHash": "32f663e9fc83199dd742102902a9250f16a8303b121a1c71531d308c47a2a475",
       "expectedValid": true,
       "actualValid": true,
       "invalidKind": "",
@@ -8107,7 +10177,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "db323e1e64a7ae227febbcd4b42a29ccc7d2395ff10eef0362107cb5a85df3ae",
+        "runtimeEvidenceHash": "1bcf3bc75ffb813bb09e3bb30e07b58a99d9da7633239cb7b3b2d6e571530e34",
         "commands": [
           {
             "commandId": "cmd/open_cache",
@@ -8115,6 +10185,9 @@
             "commandType": "theft/open_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -8146,9 +10219,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -8215,6 +10290,9 @@
             "commandType": "theft/take_from_container",
             "targetId": "inventory/merchant_cache",
             "secondaryTargetId": "item/stolen_gem",
+            "actorId": "",
+            "amount": 1,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -8248,9 +10326,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -8318,6 +10398,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/theft_reported",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "true",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -8349,9 +10432,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -8422,6 +10507,9 @@
             "commandType": "faction/change_reputation",
             "targetId": "faction/settlement_watch",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": -20,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -8453,9 +10541,11 @@
             "factionDelta": {
               "changed": true,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "-20|neutral"
               }
             },
@@ -8542,9 +10632,11 @@
           "actionHistory": []
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "-20|neutral"
         },
         "dialogueBefore": {
@@ -8576,27 +10668,55 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "-20|neutral"
         },
-        "runtimeStateHash": "787b71eafed6fdd2f7aa3518f601f7387fe26db69e1db7ac43eddc90b21cda8c",
-        "restoredRuntimeStateHash": "787b71eafed6fdd2f7aa3518f601f7387fe26db69e1db7ac43eddc90b21cda8c",
+        "factionClampEvidence": [
+          {
+            "commandId": "cmd/theft_reputation_penalty",
+            "sourceDeclarationId": "decl/theft/cache_gem_penalty",
+            "factionId": "faction/settlement_watch",
+            "before": 0,
+            "requestedAmount": -20,
+            "unclampedCandidate": -20,
+            "min": -100,
+            "max": 100,
+            "expectedAfter": -20,
+            "actualAfter": -20,
+            "clamped": false
+          }
+        ],
+        "runtimeStateHash": "4aec6cba14bf132ace84985712347bf144ca6bec01e600fca0d76053951502b0",
+        "restoredRuntimeStateHash": "4aec6cba14bf132ace84985712347bf144ca6bec01e600fca0d76053951502b0",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "787b71eafed6fdd2f7aa3518f601f7387fe26db69e1db7ac43eddc90b21cda8c",
-          "restoredSerializedStateHash": "787b71eafed6fdd2f7aa3518f601f7387fe26db69e1db7ac43eddc90b21cda8c",
+          "serializedStateHash": "4aec6cba14bf132ace84985712347bf144ca6bec01e600fca0d76053951502b0",
+          "restoredSerializedStateHash": "4aec6cba14bf132ace84985712347bf144ca6bec01e600fca0d76053951502b0",
           "snapshotSlotName": "goal009_theft_container_reputation_consequence",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "work_contract_reward",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/work_contract_reward:true|cmd/work_contract_completed:true",
+            "flags": "flag/work_contract_completed=completed",
+            "playerItems": "item/wage_scrip=3",
+            "scenarioMarker": "work_contract_reward"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/open_cache:true|cmd/take_stolen_gem:true|cmd/theft_reported:true|cmd/theft_reputation_penalty:true",
           "containerItems": "item/stolen_gem=1",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=-20|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=-20|neutral",
           "flags": "flag/theft_reported=true",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/stolen_gem=1,item/work_permit=1",
@@ -8609,7 +10729,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=-20|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=-20|neutral",
           "flags": "flag/theft_reported=true",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/stolen_gem=1,item/work_permit=1",
@@ -8623,7 +10743,7 @@
     {
       "scenarioId": "work_contract_reward",
       "seed": "s081-work",
-      "deterministicHash": "12f29453fd1231ccd96a23aa1ce7d18eee6c97df72b2d574419d4db4a4527e82",
+      "deterministicHash": "6451bd129166e090e330bbaafe53122bf0274b56e479944795b7e5fc74710b8f",
       "expectedValid": true,
       "actualValid": true,
       "invalidKind": "",
@@ -8676,7 +10796,7 @@
           "usedInteractionRuntimeService": true,
           "usedContainerRuntimeService": true
         },
-        "runtimeEvidenceHash": "c73082c73ac0d59a1cd414e99250f38cdd2b328f4efba710bc99895b1cd34c65",
+        "runtimeEvidenceHash": "ab463397ee7d3f8c81f6bc7643e7007b4dde808b028667f97d725e1bab130a65",
         "commands": [
           {
             "commandId": "cmd/work_contract_reward",
@@ -8684,6 +10804,9 @@
             "commandType": "work/execute_contract",
             "targetId": "interaction/work_contract_reward",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -8717,9 +10840,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -8787,6 +10912,9 @@
             "commandType": "gameplay/set_flag",
             "targetId": "flag/work_contract_completed",
             "secondaryTargetId": "",
+            "actorId": "",
+            "amount": 0,
+            "value": "completed",
             "succeeded": true,
             "diagnosticCode": "ok",
             "diagnosticMessage": "",
@@ -8818,9 +10946,11 @@
             "factionDelta": {
               "changed": false,
               "before": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               },
               "after": {
+                "faction/merchant_guild": "0|neutral",
                 "faction/settlement_watch": "0|neutral"
               }
             },
@@ -8905,9 +11035,11 @@
           "actionHistory": []
         },
         "factionReputationBefore": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "factionReputationAfter": {
+          "faction/merchant_guild": "0|neutral",
           "faction/settlement_watch": "0|neutral"
         },
         "dialogueBefore": {
@@ -8939,27 +11071,43 @@
           "factionId": "faction/settlement_watch",
           "reputationAfter": "0|neutral"
         },
-        "runtimeStateHash": "3145b4c72f592f6d201637b10c01d48d29717a20c32745ad8eabd4e93aefe1a4",
-        "restoredRuntimeStateHash": "3145b4c72f592f6d201637b10c01d48d29717a20c32745ad8eabd4e93aefe1a4",
+        "factionClampEvidence": [],
+        "runtimeStateHash": "7c29cc4fb26941d839baca51821d08bba14fbe3b70ee1dfaab0701a93677e928",
+        "restoredRuntimeStateHash": "7c29cc4fb26941d839baca51821d08bba14fbe3b70ee1dfaab0701a93677e928",
         "saveLoadRoundtripPassed": true,
         "saveLoadEvidence": {
           "usedRuntimeStateSerializer": true,
           "usedRuntimeSnapshotStore": true,
           "serializedFullState": true,
-          "serializedStateHash": "3145b4c72f592f6d201637b10c01d48d29717a20c32745ad8eabd4e93aefe1a4",
-          "restoredSerializedStateHash": "3145b4c72f592f6d201637b10c01d48d29717a20c32745ad8eabd4e93aefe1a4",
+          "serializedStateHash": "7c29cc4fb26941d839baca51821d08bba14fbe3b70ee1dfaab0701a93677e928",
+          "restoredSerializedStateHash": "7c29cc4fb26941d839baca51821d08bba14fbe3b70ee1dfaab0701a93677e928",
           "snapshotSlotName": "goal009_work_contract_reward",
           "snapshotSaveSucceeded": true,
-          "snapshotLoadSucceeded": true
+          "snapshotLoadSucceeded": true,
+          "tempSnapshotCleanupSucceeded": true
         },
         "scenarioIsolationPassed": true,
+        "scenarioIsolationEvidence": {
+          "previousScenarioId": "social_dialogue_reputation_consequence",
+          "previousDynamicSignature": {
+            "commandLog": "cmd/open_watch_dialogue:true|cmd/accept_watch_contract:true",
+            "dialogue": "dialogue/watch_captain|node/start|false|node/start,choice/accept_contract",
+            "factions": "faction/settlement_watch=5|neutral",
+            "flags": "flag/work_contract_accepted=accepted",
+            "playerItems": "item/contract_note=1",
+            "scenarioMarker": "social_dialogue_reputation_consequence"
+          },
+          "currentInitialStateSignature": {},
+          "unexpectedRetainedKeys": [],
+          "injectedLeak": false
+        },
         "stateEvidence": {
           "commandLog": "cmd/work_contract_reward:true|cmd/work_contract_completed:true",
           "containerItems": "item/stolen_gem=2",
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/wage_scrip=3,item/work_permit=1",
@@ -8972,7 +11120,7 @@
           "currentMapId": "map/test_arena",
           "dialogue": "||false|",
           "encounter": "|false||",
-          "factions": "faction/settlement_watch=0|neutral",
+          "factions": "faction/merchant_guild=0|neutral,faction/settlement_watch=0|neutral",
           "flags": "flag/work_contract_completed=completed",
           "packageId": "game/rule_pack_combat_family",
           "playerItems": "item/wage_scrip=3,item/work_permit=1",
@@ -8987,9 +11135,87 @@
   "diagnostics": [
     {
       "severity": "error",
+      "code": "combat_family.audit.ability_cost_resource_mismatch",
+      "target": "ability/finisher",
+      "message": "Declared ability costs must resolve to the declared focus resource."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_actor_mismatch",
+      "target": "cmd/wrong_existing_actor_target",
+      "message": "Combat ability actor must be the declared source participant."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_amount_mismatch",
+      "target": "cmd/take_wrong_amount_gem",
+      "message": "Theft transfer amount must match the declaration."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_amount_mismatch",
+      "target": "cmd/take_wrong_amount_gem",
+      "message": "Theft transfer amount must match the declaration."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_amount_mismatch",
+      "target": "cmd/theft_wrong_penalty",
+      "message": "Theft reputation penalty must match the declaration."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_amount_mismatch",
+      "target": "cmd/theft_wrong_penalty",
+      "message": "Theft reputation penalty must match the declaration."
+    },
+    {
+      "severity": "error",
       "code": "combat_family.audit.command_not_covered_by_declaration",
       "target": "cmd/undeclared_flag",
       "message": "Every command must be covered by an exact selected declaration."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_secondary_target_mismatch",
+      "target": "cmd/wrong_existing_actor_target",
+      "message": "Combat ability target must be the declared target participant."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_target_mismatch",
+      "target": "cmd/start_wrong_existing_encounter",
+      "message": "Combat start must target the declared encounter."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_target_mismatch",
+      "target": "cmd/wrong_existing_actor_target",
+      "message": "Combat ability must use the declared player ability."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_value_mismatch",
+      "target": "cmd/theft_wrong_flag_value",
+      "message": "Theft flag value must match the declaration."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.command_value_mismatch",
+      "target": "cmd/theft_wrong_flag_value",
+      "message": "Theft flag value must match the declaration."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.dialogue_choice_node_mismatch",
+      "target": "choice/accept_contract",
+      "message": "Selected dialogue choice must exist in the declared node."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.audit.encounter_reward_missing",
+      "target": "item/missing_victory_token",
+      "message": "Encounter reward item/output must resolve."
     },
     {
       "severity": "error",
@@ -9001,7 +11227,7 @@
       "severity": "error",
       "code": "combat_family.audit.missing_dialogue_choice_ref",
       "target": "choice/accept_contract",
-      "message": "Selected dialogue choice must exist exactly."
+      "message": "Selected dialogue choice must exist in the declared node."
     },
     {
       "severity": "error",
@@ -9023,14 +11249,32 @@
     },
     {
       "severity": "error",
+      "code": "combat_family.audit.participant_ability_mismatch",
+      "target": "participant/player_guard",
+      "message": "Player participant must expose the declared ability."
+    },
+    {
+      "severity": "error",
       "code": "combat_family.audit.theft_amount_invalid",
       "target": "decl/theft/cache_gem_penalty",
       "message": "Theft transfer amount must be positive."
     },
     {
       "severity": "error",
+      "code": "combat_family.audit.work_transaction_mismatch",
+      "target": "interaction/work_contract_reward",
+      "message": "Work interaction metadata must point to the declared transaction."
+    },
+    {
+      "severity": "error",
       "code": "combat_family.evidence.command_delta_missing",
-      "target": "cmd/enemy_acts_on_player_turn",
+      "target": "cmd/combined_accept_contract",
+      "message": "Command evidence is missing command-specific state delta."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.command_delta_missing",
+      "target": "cmd/player_acts_on_enemy_turn",
       "message": "Command evidence is missing command-specific state delta."
     },
     {
@@ -9042,7 +11286,7 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.command_failed",
-      "target": "cmd/enemy_acts_on_player_turn",
+      "target": "cmd/player_acts_on_enemy_turn",
       "message": "Required runtime command failed."
     },
     {
@@ -9072,6 +11316,12 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.cross_scenario_state_leakage",
+      "target": "invalid_dialogue_wrong_node_or_output_mismatch",
+      "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.cross_scenario_state_leakage",
       "target": "invalid_missing_ability_or_resource_ref",
       "message": "Runtime evidence contains prior-scenario leakage."
     },
@@ -9090,6 +11340,36 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.cross_scenario_state_leakage",
+      "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+      "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.cross_scenario_state_leakage",
+      "target": "invalid_same_declaration_wrong_ability_actor_target",
+      "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.cross_scenario_state_leakage",
+      "target": "invalid_same_declaration_wrong_amount_flag_value",
+      "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.cross_scenario_state_leakage",
+      "target": "invalid_same_declaration_wrong_existing_target",
+      "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.cross_scenario_state_leakage",
+      "target": "invalid_theft_amount_flag_reputation_mismatch",
+      "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.cross_scenario_state_leakage",
       "target": "invalid_theft_container_or_item_ref",
       "message": "Runtime evidence contains prior-scenario leakage."
     },
@@ -9098,6 +11378,18 @@
       "code": "combat_family.evidence.cross_scenario_state_leakage",
       "target": "invalid_theft_nonpositive_amount",
       "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.cross_scenario_state_leakage",
+      "target": "invalid_work_wrong_existing_transaction",
+      "message": "Runtime evidence contains prior-scenario leakage."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/accept_watch_contract",
+      "message": "Every declared command must have runtime command evidence."
     },
     {
       "severity": "error",
@@ -9180,12 +11472,36 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/open_cache",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/open_cache",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
       "target": "cmd/open_watch_dialogue",
       "message": "Every declared command must have runtime command evidence."
     },
     {
       "severity": "error",
       "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/open_watch_dialogue",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/player_finisher",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
       "target": "cmd/player_guard_strike",
       "message": "Every declared command must have runtime command evidence."
     },
@@ -9210,6 +11526,12 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/start_quick_resolution",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
       "target": "cmd/start_roadside_raider",
       "message": "Every declared command must have runtime command evidence."
     },
@@ -9217,12 +11539,36 @@
       "severity": "error",
       "code": "combat_family.evidence.required_command_missing",
       "target": "cmd/start_roadside_raider",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/start_roadside_raider",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/start_wrong_existing_encounter",
       "message": "Every declared command must have runtime command evidence."
     },
     {
       "severity": "error",
       "code": "combat_family.evidence.required_command_missing",
       "target": "cmd/take_stolen_gem",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/take_wrong_amount_gem",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/take_wrong_amount_gem",
       "message": "Every declared command must have runtime command evidence."
     },
     {
@@ -9246,6 +11592,30 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/theft_wrong_flag_value",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/theft_wrong_flag_value",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/theft_wrong_penalty",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/theft_wrong_penalty",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
       "target": "cmd/undeclared_flag",
       "message": "Every declared command must have runtime command evidence."
     },
@@ -9263,6 +11633,24 @@
     },
     {
       "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/work_contract_completed",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/work_contract_reward",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.required_command_missing",
+      "target": "cmd/wrong_existing_actor_target",
+      "message": "Every declared command must have runtime command evidence."
+    },
+    {
+      "severity": "error",
       "code": "combat_family.evidence.runtime_boundary_missing",
       "target": "invalid_command_not_covered_by_declaration",
       "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
@@ -9271,6 +11659,12 @@
       "severity": "error",
       "code": "combat_family.evidence.runtime_boundary_missing",
       "target": "invalid_dialogue_or_choice_ref",
+      "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_boundary_missing",
+      "target": "invalid_dialogue_wrong_node_or_output_mismatch",
       "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
     },
     {
@@ -9300,6 +11694,36 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.runtime_boundary_missing",
+      "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+      "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_boundary_missing",
+      "target": "invalid_same_declaration_wrong_ability_actor_target",
+      "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_boundary_missing",
+      "target": "invalid_same_declaration_wrong_amount_flag_value",
+      "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_boundary_missing",
+      "target": "invalid_same_declaration_wrong_existing_target",
+      "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_boundary_missing",
+      "target": "invalid_theft_amount_flag_reputation_mismatch",
+      "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_boundary_missing",
       "target": "invalid_theft_container_or_item_ref",
       "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
     },
@@ -9311,6 +11735,12 @@
     },
     {
       "severity": "error",
+      "code": "combat_family.evidence.runtime_boundary_missing",
+      "target": "invalid_work_wrong_existing_transaction",
+      "message": "Evidence must come from GameRuntimeService and GameRuntimeStateFactory."
+    },
+    {
+      "severity": "error",
       "code": "combat_family.evidence.runtime_not_attempted",
       "target": "invalid_command_not_covered_by_declaration",
       "message": "Runtime must be attempted through an injected real adapter."
@@ -9319,6 +11749,12 @@
       "severity": "error",
       "code": "combat_family.evidence.runtime_not_attempted",
       "target": "invalid_dialogue_or_choice_ref",
+      "message": "Runtime must be attempted through an injected real adapter."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_not_attempted",
+      "target": "invalid_dialogue_wrong_node_or_output_mismatch",
       "message": "Runtime must be attempted through an injected real adapter."
     },
     {
@@ -9337,6 +11773,36 @@
       "severity": "error",
       "code": "combat_family.evidence.runtime_not_attempted",
       "target": "invalid_missing_faction_ref",
+      "message": "Runtime must be attempted through an injected real adapter."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_not_attempted",
+      "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+      "message": "Runtime must be attempted through an injected real adapter."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_not_attempted",
+      "target": "invalid_same_declaration_wrong_ability_actor_target",
+      "message": "Runtime must be attempted through an injected real adapter."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_not_attempted",
+      "target": "invalid_same_declaration_wrong_amount_flag_value",
+      "message": "Runtime must be attempted through an injected real adapter."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_not_attempted",
+      "target": "invalid_same_declaration_wrong_existing_target",
+      "message": "Runtime must be attempted through an injected real adapter."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.runtime_not_attempted",
+      "target": "invalid_theft_amount_flag_reputation_mismatch",
       "message": "Runtime must be attempted through an injected real adapter."
     },
     {
@@ -9353,6 +11819,12 @@
     },
     {
       "severity": "error",
+      "code": "combat_family.evidence.runtime_not_attempted",
+      "target": "invalid_work_wrong_existing_transaction",
+      "message": "Runtime must be attempted through an injected real adapter."
+    },
+    {
+      "severity": "error",
       "code": "combat_family.evidence.save_load_mismatch",
       "target": "invalid_command_not_covered_by_declaration",
       "message": "Full runtime state save/load evidence must match exactly."
@@ -9361,6 +11833,12 @@
       "severity": "error",
       "code": "combat_family.evidence.save_load_mismatch",
       "target": "invalid_dialogue_or_choice_ref",
+      "message": "Full runtime state save/load evidence must match exactly."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.save_load_mismatch",
+      "target": "invalid_dialogue_wrong_node_or_output_mismatch",
       "message": "Full runtime state save/load evidence must match exactly."
     },
     {
@@ -9379,6 +11857,30 @@
       "severity": "error",
       "code": "combat_family.evidence.save_load_mismatch",
       "target": "invalid_missing_faction_ref",
+      "message": "Full runtime state save/load evidence must match exactly."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.save_load_mismatch",
+      "target": "invalid_missing_participant_ability_resource_cost_reward_binding",
+      "message": "Full runtime state save/load evidence must match exactly."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.save_load_mismatch",
+      "target": "invalid_same_declaration_wrong_ability_actor_target",
+      "message": "Full runtime state save/load evidence must match exactly."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.save_load_mismatch",
+      "target": "invalid_same_declaration_wrong_amount_flag_value",
+      "message": "Full runtime state save/load evidence must match exactly."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.save_load_mismatch",
+      "target": "invalid_same_declaration_wrong_existing_target",
       "message": "Full runtime state save/load evidence must match exactly."
     },
     {
@@ -9390,6 +11892,12 @@
     {
       "severity": "error",
       "code": "combat_family.evidence.save_load_mismatch",
+      "target": "invalid_theft_amount_flag_reputation_mismatch",
+      "message": "Full runtime state save/load evidence must match exactly."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.save_load_mismatch",
       "target": "invalid_theft_container_or_item_ref",
       "message": "Full runtime state save/load evidence must match exactly."
     },
@@ -9397,6 +11905,12 @@
       "severity": "error",
       "code": "combat_family.evidence.save_load_mismatch",
       "target": "invalid_theft_nonpositive_amount",
+      "message": "Full runtime state save/load evidence must match exactly."
+    },
+    {
+      "severity": "error",
+      "code": "combat_family.evidence.save_load_mismatch",
+      "target": "invalid_work_wrong_existing_transaction",
       "message": "Full runtime state save/load evidence must match exactly."
     },
     {

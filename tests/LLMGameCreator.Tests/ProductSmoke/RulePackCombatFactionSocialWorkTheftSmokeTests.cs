@@ -28,7 +28,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftSmokeTests
         Assert.Equal("rule_pack_combat_faction_social_work_theft_artifact_verification", report.ManualGate);
         Assert.True(report.Goal008GateRecorded);
         Assert.Equal(7, report.ValidScenarioCount);
-        Assert.Equal(12, report.InvalidScenarioCount);
+        Assert.Equal(19, report.InvalidScenarioCount);
         Assert.True(report.PackageRuleBindingAuditPassed);
         Assert.True(report.CombatFactionSocialWorkTheftRuntimeExecutionPassed);
         Assert.True(report.SaveLoadRoundtripPassed);
@@ -52,6 +52,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftSmokeTests
         Assert.True(combined.RuntimeEvidence.RuntimeBoundary.UsedContainerRuntimeService);
         Assert.True(combined.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeStateSerializer);
         Assert.True(combined.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeSnapshotStore);
+        Assert.True(combined.RuntimeEvidence.SaveLoadEvidence.TempSnapshotCleanupSucceeded);
         Assert.Equal(combined.RuntimeEvidence.SaveLoadEvidence.SerializedStateHash, combined.RuntimeEvidence.SaveLoadEvidence.RestoredSerializedStateHash);
         Assert.False(combined.RuntimeEvidence.EncounterAfter.Active);
         Assert.Equal("completed", combined.RuntimeEvidence.WorkEvidence.CompletionFlagAfter);
@@ -62,6 +63,15 @@ public sealed class RulePackCombatFactionSocialWorkTheftSmokeTests
         Assert.Contains(combined.RuntimeEvidence.Commands, command => command.CommandType == "theft/take_from_container" && command.ContainerDelta.Changed && command.InventoryDelta.Changed);
         Assert.Contains(combined.RuntimeEvidence.Commands, command => command.CommandType == "faction/change_reputation" && command.FactionDelta.Changed);
 
+        var faction = report.Scenarios.Single(item => item.ScenarioId == "faction_reputation_change");
+        var clamp = faction.RuntimeEvidence.FactionClampEvidence.Single(item => item.CommandId == "cmd/watch_reputation_gain");
+        Assert.Equal(0, clamp.Before);
+        Assert.Equal(112, clamp.RequestedAmount);
+        Assert.Equal(112, clamp.UnclampedCandidate);
+        Assert.Equal(100, clamp.ExpectedAfter);
+        Assert.Equal(100, clamp.ActualAfter);
+        Assert.True(clamp.Clamped);
+
         var invalid = report.Scenarios.Where(item => !item.ExpectedValid).ToList();
         Assert.All(invalid, scenario =>
         {
@@ -70,7 +80,10 @@ public sealed class RulePackCombatFactionSocialWorkTheftSmokeTests
         });
         Assert.Contains(invalid.Single(item => item.ScenarioId == "invalid_fake_runtime_success").Diagnostics, item => item.Code == "combat_family.evidence.required_command_missing");
         Assert.Contains(invalid.Single(item => item.ScenarioId == "invalid_save_load_mismatch").Diagnostics, item => item.Code == "combat_family.evidence.save_load_mismatch");
-        Assert.Contains(invalid.Single(item => item.ScenarioId == "invalid_cross_scenario_state_leakage").Diagnostics, item => item.Code == "combat_family.evidence.cross_scenario_state_leakage");
+        var leakage = invalid.Single(item => item.ScenarioId == "invalid_cross_scenario_state_leakage");
+        Assert.True(leakage.RuntimeEvidence.ScenarioIsolationEvidence.InjectedLeak);
+        Assert.NotEmpty(leakage.RuntimeEvidence.ScenarioIsolationEvidence.UnexpectedRetainedKeys);
+        Assert.Contains(leakage.Diagnostics, item => item.Code == "combat_family.evidence.cross_scenario_state_leakage");
     }
 
     private static string ResolveProjectFolder(string tempPath)

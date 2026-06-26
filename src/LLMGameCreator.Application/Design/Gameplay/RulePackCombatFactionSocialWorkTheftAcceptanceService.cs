@@ -46,12 +46,12 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
         var invalidSpecs = BuildInvalidSpecs();
 
         var validScenarios = validSpecs.Select(spec => BuildScenario(package, declarations, spec, expectedValid: true)).ToList();
-        var invalidScenarios = invalidSpecs.Select(spec => BuildInvalidScenario(package, declarations, spec)).ToList();
         var repeated = BuildScenario(package, declarations, validSpecs.Single(item => item.ScenarioId == "combined_combat_social_work_theft_loop"), expectedValid: true);
+        var invalidScenarios = invalidSpecs.Select(spec => BuildInvalidScenario(package, declarations, spec)).ToList();
         var scenarios = validScenarios.Concat(invalidScenarios).OrderBy(item => item.ScenarioId, StringComparer.Ordinal).ToList();
 
         var validAccepted = validScenarios.All(item => item.ExpectedValid && item.ActualValid);
-        var invalidRejected = invalidScenarios.All(item => !item.ExpectedValid && !item.ActualValid && item.Diagnostics.Any(diagnostic => diagnostic.Severity == "error"));
+        var invalidRejected = invalidScenarios.All(item => !item.ExpectedValid && !item.ActualValid && HasExpectedInvalidDiagnostic(item));
         var bindingPassed = validScenarios.All(item => item.PackageBindingAudit.Passed);
         var runtimePassed = validScenarios.All(ScenarioRuntimePassed);
         var saveLoadPassed = validScenarios.All(item =>
@@ -91,7 +91,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             Accepted = validAccepted && invalidRejected && bindingPassed && runtimePassed && saveLoadPassed && deterministicReplayPassed && isolationPassed && fakeSuccessRejected,
             ManualGate = ManualGate,
             Goal008GateRecorded = true,
-            CompletedSlices = ["S078", "S079", "S080", "S081", "S082", "S083", "S084"],
+            CompletedSlices = ["S078", "S079", "S080", "S081", "S082", "S083", "S084", "S084A"],
             ScenarioCount = scenarios.Count,
             ValidScenarioCount = validScenarios.Count,
             InvalidScenarioCount = invalidScenarios.Count,
@@ -197,7 +197,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             : new RulePackCombatFactionSocialWorkTheftRuntimeEvidence();
 
         diagnostics.AddRange(runtimeEvidence.Diagnostics);
-        var evidenceDiagnostics = ValidateRuntimeEvidence(spec, runtimeEvidence);
+        var evidenceDiagnostics = ValidateRuntimeEvidence(spec, declarations, runtimeEvidence);
         diagnostics.AddRange(evidenceDiagnostics);
         var actualValid = IsScenarioAccepted(bindingAudit, runtimeEvidence, evidenceDiagnostics);
 
@@ -238,7 +238,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             var runtimeEvidence = FakeRuntimeSuccess(invalidSpec);
             var diagnostics = new List<RulePackCombatFactionSocialWorkTheftDiagnostic>(bindingAudit.Diagnostics);
             diagnostics.AddRange(runtimeEvidence.Diagnostics);
-            var evidenceDiagnostics = ValidateRuntimeEvidence(invalidSpec, runtimeEvidence);
+            var evidenceDiagnostics = ValidateRuntimeEvidence(invalidSpec, invalidDeclarations, runtimeEvidence);
             diagnostics.AddRange(evidenceDiagnostics);
             var actualValid = IsScenarioAccepted(bindingAudit, runtimeEvidence, evidenceDiagnostics);
             return BuildInvalidScenarioRecord(invalidSpec, bindingAudit, runtimeEvidence, diagnostics, actualValid);
@@ -314,6 +314,8 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             }
         }
 
+        AuditCommandAuthorization(selected, spec.Commands, diagnostics);
+
         foreach (var encounter in selected.Where(item => item.Kind == "encounter").Select(item => (CombatEncounterDeclaration)item.Source))
         {
             var packageEncounter = package.Game.Encounters.SingleOrDefault(item => item.Id == encounter.PackageEncounterId);
@@ -323,12 +325,16 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 continue;
             }
 
-            if (packageEncounter.Participants.Count(item => item.Id == encounter.PlayerParticipantId || item.Id == encounter.EnemyParticipantId) != 2)
+            var player = packageEncounter.Participants.SingleOrDefault(item => item.Id == encounter.PlayerParticipantId);
+            var enemy = packageEncounter.Participants.SingleOrDefault(item => item.Id == encounter.EnemyParticipantId);
+            if (player == null || enemy == null)
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_participant_ref", encounter.PackageEncounterId, "Selected encounter participants must exist exactly."));
             }
 
-            if (!package.Game.Abilities.Any(item => item.Id == encounter.PlayerAbilityId) || !package.Game.Abilities.Any(item => item.Id == encounter.EnemyAbilityId))
+            var playerAbility = package.Game.Abilities.SingleOrDefault(item => item.Id == encounter.PlayerAbilityId);
+            var enemyAbility = package.Game.Abilities.SingleOrDefault(item => item.Id == encounter.EnemyAbilityId);
+            if (playerAbility == null || enemyAbility == null)
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_ability_ref", encounter.PackageEncounterId, "Selected encounter abilities must exist exactly."));
             }
@@ -336,6 +342,47 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             if (!package.Game.Resources.Any(item => item.Id == encounter.HealthResourceId) || !package.Game.Resources.Any(item => item.Id == encounter.FocusResourceId))
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_resource_ref", encounter.PackageEncounterId, "Selected encounter resources must exist exactly."));
+            }
+
+            if (player != null && !player.Abilities.Contains(encounter.PlayerAbilityId, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.participant_ability_mismatch", encounter.PlayerParticipantId, "Player participant must expose the declared ability."));
+            }
+
+            if (enemy != null && !enemy.Abilities.Contains(encounter.EnemyAbilityId, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.participant_ability_mismatch", encounter.EnemyParticipantId, "Enemy participant must expose the declared ability."));
+            }
+
+            if (player != null && !ParticipantHasResource(player, encounter.HealthResourceId, encounter.FocusResourceId) ||
+                enemy != null && !ParticipantHasResource(enemy, encounter.HealthResourceId, encounter.FocusResourceId))
+            {
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.participant_resource_mismatch", encounter.PackageEncounterId, "Declared participants must expose declared health and focus resources."));
+            }
+
+            foreach (var ability in new[] { playerAbility, enemyAbility }.Where(item => item != null).Cast<AbilityDefinition>())
+            {
+                if (!string.Equals(ability.ResourceId, encounter.HealthResourceId, StringComparison.Ordinal))
+                {
+                    diagnostics.Add(Diagnostic("error", "combat_family.audit.ability_resource_mismatch", ability.Id, "Declared ability must target the declared health resource."));
+                }
+
+                foreach (var cost in ability.Costs)
+                {
+                    if (!string.Equals(cost.Id, encounter.FocusResourceId, StringComparison.Ordinal) ||
+                        !package.Game.Resources.Any(item => item.Id == cost.Id))
+                    {
+                        diagnostics.Add(Diagnostic("error", "combat_family.audit.ability_cost_resource_mismatch", ability.Id, "Declared ability costs must resolve to the declared focus resource."));
+                    }
+                }
+            }
+
+            foreach (var reward in packageEncounter.Rewards)
+            {
+                if (IsItemOutput(reward) && !package.Game.Items.Any(item => item.Id == reward.Id))
+                {
+                    diagnostics.Add(Diagnostic("error", "combat_family.audit.encounter_reward_missing", reward.Id, "Encounter reward item/output must resolve."));
+                }
             }
         }
 
@@ -348,7 +395,15 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 continue;
             }
 
-            if (faction.Amount == 0 || faction.ExpectedAfter < packageFaction.MinReputation || faction.ExpectedAfter > packageFaction.MaxReputation)
+            var before = packageFaction.DefaultReputation.GetValueOrDefault();
+            var min = packageFaction.MinReputation;
+            var max = packageFaction.MaxReputation;
+            var expectedAfter = Clamp(before + faction.Amount, min, max);
+            if (faction.Amount == 0 ||
+                !DoubleEquals(faction.ExpectedBefore, before) ||
+                !DoubleEquals(faction.ExpectedAfter, expectedAfter) ||
+                min.HasValue && !DoubleEquals(faction.ExpectedMin, min.Value) ||
+                max.HasValue && !DoubleEquals(faction.ExpectedMax, max.Value))
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.invalid_reputation_amount", faction.DeclarationId, "Reputation amount and clamped expected value must be valid."));
             }
@@ -363,17 +418,40 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 continue;
             }
 
-            if (!packageDialogue.Nodes.SelectMany(item => item.Choices).Any(item => item.Id == dialogue.PackageChoiceId))
+            var node = packageDialogue.Nodes.SingleOrDefault(item => item.Id == dialogue.PackageNodeId);
+            if (node == null)
             {
-                diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_dialogue_choice_ref", dialogue.PackageChoiceId, "Selected dialogue choice must exist exactly."));
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_dialogue_node_ref", dialogue.PackageNodeId, "Selected dialogue node must exist exactly."));
+                continue;
+            }
+
+            var choice = node.Choices.SingleOrDefault(item => item.Id == dialogue.PackageChoiceId);
+            if (choice == null)
+            {
+                var choiceExistsElsewhere = packageDialogue.Nodes.SelectMany(item => item.Choices).Any(item => item.Id == dialogue.PackageChoiceId);
+                diagnostics.Add(Diagnostic("error", choiceExistsElsewhere ? "combat_family.audit.dialogue_choice_node_mismatch" : "combat_family.audit.missing_dialogue_choice_ref", dialogue.PackageChoiceId, "Selected dialogue choice must exist in the declared node."));
+                continue;
+            }
+
+            if (!choice.Rewards.Any(item => IsFlagOutput(item, dialogue.FlagId, dialogue.FlagValue)) ||
+                !choice.Rewards.Any(item => IsReputationOutput(item, dialogue.FactionId, dialogue.ReputationAmount)) ||
+                !choice.Rewards.Any(item => IsItemOutput(item, dialogue.RewardItemId, dialogue.RewardItemAmount)))
+            {
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.dialogue_choice_output_mismatch", dialogue.PackageChoiceId, "Declared social flag, item and reputation outputs must match the dialogue choice."));
             }
         }
 
         foreach (var work in selected.Where(item => item.Kind == "work").Select(item => (WorkContractDeclaration)item.Source))
         {
-            if (!package.Game.Interactions.Any(item => item.Id == work.PackageInteractionId))
+            var interaction = package.Game.Interactions.SingleOrDefault(item => item.Id == work.PackageInteractionId);
+            if (interaction == null)
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_work_interaction_ref", work.PackageInteractionId, "Selected work interaction must exist in the package."));
+            }
+            else if (!interaction.Metadata.TryGetValue("transaction_id", out var transactionId) ||
+                     !string.Equals(transactionId, work.PackageTransactionId, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.work_transaction_mismatch", work.PackageInteractionId, "Work interaction metadata must point to the declared transaction."));
             }
 
             var transaction = package.Game.Transactions.SingleOrDefault(item => item.Id == work.PackageTransactionId);
@@ -381,7 +459,10 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_work_transaction_ref", work.PackageTransactionId, "Selected work transaction must exist in the package."));
             }
-            else if (!transaction.Requirements.Any(item => item.Id == work.RequiredItemId) || !transaction.Outputs.Any(item => item.Id == work.RewardItemId))
+            else if (!transaction.Requirements.Any(item => IsItemRequirement(item, work.RequiredItemId)) ||
+                     !transaction.Outputs.Any(item => IsItemOutput(item, work.RewardItemId, work.RewardAmount)) ||
+                     !package.Game.Items.Any(item => item.Id == work.RequiredItemId) ||
+                     !package.Game.Items.Any(item => item.Id == work.RewardItemId))
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.invalid_work_outputs", work.PackageTransactionId, "Work requirement and reward ids must resolve."));
             }
@@ -407,6 +488,11 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             if (!package.Game.Factions.Any(item => item.Id == theft.FactionId))
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_theft_faction_ref", theft.FactionId, "Theft consequence faction must exist."));
+            }
+
+            if (!package.Game.Items.Any(item => item.Id == theft.ItemId))
+            {
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.missing_theft_item_definition_ref", theft.ItemId, "Theft item definition must exist."));
             }
         }
 
@@ -434,6 +520,147 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             AuditedPackageRuntimeIds = auditedRuntimeIds,
             Diagnostics = SortDiagnostics(diagnostics)
         };
+    }
+
+    private static void AuditCommandAuthorization(
+        IReadOnlyList<DeclarationIndex> selected,
+        IReadOnlyList<CombatCommandSpec> commands,
+        List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        var byId = selected.ToDictionary(item => item.DeclarationId, StringComparer.Ordinal);
+        foreach (var command in commands)
+        {
+            if (!byId.TryGetValue(command.SourceDeclarationId, out var declaration))
+            {
+                continue;
+            }
+
+            switch (declaration.Source)
+            {
+                case CombatEncounterDeclaration encounter:
+                    AuditEncounterCommand(encounter, command, diagnostics);
+                    break;
+                case FactionReputationDeclaration faction:
+                    AuditFactionCommand(faction, command, diagnostics);
+                    break;
+                case SocialDialogueDeclaration dialogue:
+                    AuditDialogueCommand(dialogue, command, diagnostics);
+                    break;
+                case WorkContractDeclaration work:
+                    AuditWorkCommand(work, command, diagnostics);
+                    break;
+                case TheftConsequenceDeclaration theft:
+                    AuditTheftCommand(theft, command, diagnostics);
+                    break;
+            }
+        }
+    }
+
+    private static void AuditEncounterCommand(CombatEncounterDeclaration declaration, CombatCommandSpec command, List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        switch (command.CommandType)
+        {
+            case "combat/start_encounter":
+                RequireEqual(command.TargetId, declaration.PackageEncounterId, "combat_family.audit.command_target_mismatch", command.CommandId, "Combat start must target the declared encounter.", diagnostics);
+                break;
+            case "combat/use_ability":
+                RequireEqual(command.TargetId, declaration.PlayerAbilityId, "combat_family.audit.command_target_mismatch", command.CommandId, "Combat ability must use the declared player ability.", diagnostics);
+                RequireEqual(command.ActorId, declaration.PlayerParticipantId, "combat_family.audit.command_actor_mismatch", command.CommandId, "Combat ability actor must be the declared source participant.", diagnostics);
+                RequireEqual(command.SecondaryTargetId, declaration.EnemyParticipantId, "combat_family.audit.command_secondary_target_mismatch", command.CommandId, "Combat ability target must be the declared target participant.", diagnostics);
+                break;
+            case "combat/run_ai":
+                break;
+            default:
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.command_type_not_declared", command.CommandId, "Command type is not declared by the selected combat declaration."));
+                break;
+        }
+    }
+
+    private static void AuditFactionCommand(FactionReputationDeclaration declaration, CombatCommandSpec command, List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        if (command.CommandType != "faction/change_reputation")
+        {
+            diagnostics.Add(Diagnostic("error", "combat_family.audit.command_type_not_declared", command.CommandId, "Command type is not declared by the selected faction declaration."));
+            return;
+        }
+
+        RequireEqual(command.TargetId, declaration.PackageFactionId, "combat_family.audit.command_target_mismatch", command.CommandId, "Faction command must target the declared faction.", diagnostics);
+        RequireDouble(command.Amount, declaration.Amount, "combat_family.audit.command_amount_mismatch", command.CommandId, "Faction command amount must match the declared reputation amount.", diagnostics);
+    }
+
+    private static void AuditDialogueCommand(SocialDialogueDeclaration declaration, CombatCommandSpec command, List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        switch (command.CommandType)
+        {
+            case "social/open_dialogue":
+                RequireEqual(command.TargetId, declaration.PackageDialogueId, "combat_family.audit.command_target_mismatch", command.CommandId, "Social open must target the declared dialogue.", diagnostics);
+                break;
+            case "social/choose_dialogue":
+                RequireEqual(command.TargetId, declaration.PackageChoiceId, "combat_family.audit.command_target_mismatch", command.CommandId, "Social choice must target the declared choice.", diagnostics);
+                break;
+            default:
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.command_type_not_declared", command.CommandId, "Command type is not declared by the selected social declaration."));
+                break;
+        }
+    }
+
+    private static void AuditWorkCommand(WorkContractDeclaration declaration, CombatCommandSpec command, List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        switch (command.CommandType)
+        {
+            case "work/execute_contract":
+                RequireEqual(command.TargetId, declaration.PackageInteractionId, "combat_family.audit.command_target_mismatch", command.CommandId, "Work execution must target the declared interaction.", diagnostics);
+                break;
+            case "gameplay/set_flag":
+                RequireEqual(command.TargetId, declaration.CompletionFlagId, "combat_family.audit.command_target_mismatch", command.CommandId, "Work completion flag command must target the declared flag.", diagnostics);
+                RequireEqual(command.Value, declaration.CompletionFlagValue, "combat_family.audit.command_value_mismatch", command.CommandId, "Work completion flag value must match the declaration.", diagnostics);
+                break;
+            default:
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.command_type_not_declared", command.CommandId, "Command type is not declared by the selected work declaration."));
+                break;
+        }
+    }
+
+    private static void AuditTheftCommand(TheftConsequenceDeclaration declaration, CombatCommandSpec command, List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        switch (command.CommandType)
+        {
+            case "theft/open_container":
+                RequireEqual(command.TargetId, declaration.ContainerInventoryId, "combat_family.audit.command_target_mismatch", command.CommandId, "Theft open must target the declared container.", diagnostics);
+                break;
+            case "theft/take_from_container":
+                RequireEqual(command.TargetId, declaration.ContainerInventoryId, "combat_family.audit.command_target_mismatch", command.CommandId, "Theft transfer must target the declared container.", diagnostics);
+                RequireEqual(command.SecondaryTargetId, declaration.ItemId, "combat_family.audit.command_secondary_target_mismatch", command.CommandId, "Theft transfer item must match the declaration.", diagnostics);
+                RequireDouble(command.Amount, declaration.Amount, "combat_family.audit.command_amount_mismatch", command.CommandId, "Theft transfer amount must match the declaration.", diagnostics);
+                break;
+            case "gameplay/set_flag":
+                RequireEqual(command.TargetId, declaration.TheftFlagId, "combat_family.audit.command_target_mismatch", command.CommandId, "Theft flag command must target the declared flag.", diagnostics);
+                RequireEqual(command.Value, declaration.TheftFlagValue, "combat_family.audit.command_value_mismatch", command.CommandId, "Theft flag value must match the declaration.", diagnostics);
+                break;
+            case "faction/change_reputation":
+                RequireEqual(command.TargetId, declaration.FactionId, "combat_family.audit.command_target_mismatch", command.CommandId, "Theft reputation command must target the declared faction.", diagnostics);
+                RequireDouble(command.Amount, declaration.ReputationPenalty, "combat_family.audit.command_amount_mismatch", command.CommandId, "Theft reputation penalty must match the declaration.", diagnostics);
+                break;
+            default:
+                diagnostics.Add(Diagnostic("error", "combat_family.audit.command_type_not_declared", command.CommandId, "Command type is not declared by the selected theft declaration."));
+                break;
+        }
+    }
+
+    private static void RequireEqual(string actual, string expected, string code, string target, string message, List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        if (!string.Equals(actual, expected, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", code, target, message));
+        }
+    }
+
+    private static void RequireDouble(double actual, double expected, string code, string target, string message, List<RulePackCombatFactionSocialWorkTheftDiagnostic> diagnostics)
+    {
+        if (!DoubleEquals(actual, expected))
+        {
+            diagnostics.Add(Diagnostic("error", code, target, message));
+        }
     }
 
     private static IEnumerable<string> DeclarationRuntimeIds(DeclarationIndex item)
@@ -469,6 +696,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
 
     private static IReadOnlyList<RulePackCombatFactionSocialWorkTheftDiagnostic> ValidateRuntimeEvidence(
         CombatFamilyScenarioSpec spec,
+        CombatFamilyDeclarations declarations,
         RulePackCombatFactionSocialWorkTheftRuntimeEvidence evidence)
     {
         var diagnostics = new List<RulePackCombatFactionSocialWorkTheftDiagnostic>();
@@ -496,12 +724,18 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 diagnostics.Add(Diagnostic("error", "combat_family.evidence.command_failed", command.CommandId, "Required runtime command failed."));
             }
 
-            if (evidenceCommand.SourceDeclarationId != command.SourceDeclarationId || evidenceCommand.TargetId != command.TargetId)
+            if (evidenceCommand.SourceDeclarationId != command.SourceDeclarationId ||
+                evidenceCommand.CommandType != command.CommandType ||
+                evidenceCommand.TargetId != command.TargetId ||
+                evidenceCommand.SecondaryTargetId != command.SecondaryTargetId ||
+                evidenceCommand.ActorId != command.ActorId ||
+                !DoubleEquals(evidenceCommand.Amount, command.Amount) ||
+                evidenceCommand.Value != command.Value)
             {
-                diagnostics.Add(Diagnostic("error", "combat_family.evidence.command_correlation_mismatch", command.CommandId, "Command evidence must correlate to the exact declaration and target."));
+                diagnostics.Add(Diagnostic("error", "combat_family.evidence.command_correlation_mismatch", command.CommandId, "Command evidence must correlate to the exact declaration, type, actor, target, amount and value."));
             }
 
-            if (!CommandHasExpectedDelta(command, evidenceCommand))
+            if (!CommandHasExpectedDelta(command, declarations, evidenceCommand, evidence))
             {
                 diagnostics.Add(Diagnostic("error", "combat_family.evidence.command_delta_missing", command.CommandId, "Command evidence is missing command-specific state delta."));
             }
@@ -520,20 +754,147 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
         return SortDiagnostics(diagnostics);
     }
 
-    private static bool CommandHasExpectedDelta(CombatCommandSpec spec, CombatRuntimeCommandEvidence command) =>
-        spec.CommandType switch
+    private static bool CommandHasExpectedDelta(
+        CombatCommandSpec spec,
+        CombatFamilyDeclarations declarations,
+        CombatRuntimeCommandEvidence command,
+        RulePackCombatFactionSocialWorkTheftRuntimeEvidence evidence)
+    {
+        var declaration = FindDeclaration(declarations, spec.SourceDeclarationId);
+        return declaration switch
         {
-            "combat/start_encounter" => command.EncounterDelta.Changed && command.RuntimeEventTypes.Contains("EncounterStarted"),
-            "combat/use_ability" or "combat/basic_attack" or "combat/run_ai" => command.EncounterDelta.Changed && command.RuntimeEventTypes.Any(item => item is "AbilityUsed" or "DamageApplied" or "AiActionChosen" or "EncounterWon"),
-            "faction/change_reputation" => command.FactionDelta.Changed && command.RuntimeEventTypes.Contains("FactionReputationChanged"),
-            "social/open_dialogue" => command.DialogueDelta.Changed && command.RuntimeEventTypes.Contains("DialogueOpened"),
-            "social/choose_dialogue" => command.DialogueDelta.Changed && command.RuntimeEventTypes.Contains("DialogueChoiceSelected") && (command.FactionDelta.Changed || command.FlagDelta.Changed || command.InventoryDelta.Changed),
-            "work/execute_contract" => command.WorkDelta.Changed && command.InventoryDelta.Changed,
-            "gameplay/set_flag" => command.FlagDelta.Changed,
-            "theft/open_container" => command.ContainerDelta.Opened && command.RuntimeEventTypes.Contains("ContainerOpened"),
-            "theft/take_from_container" => command.ContainerDelta.Changed && command.InventoryDelta.Changed && command.RuntimeEventTypes.Contains("ItemTransferred"),
+            CombatEncounterDeclaration encounter => EncounterCommandHasExpectedDelta(spec, command, encounter),
+            FactionReputationDeclaration faction => FactionCommandHasExpectedDelta(spec, command, faction, evidence),
+            SocialDialogueDeclaration dialogue => DialogueCommandHasExpectedDelta(spec, command, dialogue),
+            WorkContractDeclaration work => WorkCommandHasExpectedDelta(spec, command, work),
+            TheftConsequenceDeclaration theft => TheftCommandHasExpectedDelta(spec, command, theft),
             _ => false
         };
+    }
+
+    private static bool EncounterCommandHasExpectedDelta(CombatCommandSpec spec, CombatRuntimeCommandEvidence command, CombatEncounterDeclaration declaration)
+    {
+        return spec.CommandType switch
+        {
+            "combat/start_encounter" =>
+                command.EncounterDelta.Changed &&
+                command.RuntimeEventTypes.Contains("EncounterStarted") &&
+                command.EncounterDelta.After.EncounterId == declaration.PackageEncounterId &&
+                command.EncounterDelta.After.Active &&
+                command.EncounterDelta.After.Participants.ContainsKey(declaration.PlayerParticipantId) &&
+                command.EncounterDelta.After.Participants.ContainsKey(declaration.EnemyParticipantId),
+            "combat/use_ability" =>
+                command.EncounterDelta.Changed &&
+                command.RuntimeEventTypes.Contains("AbilityUsed") &&
+                command.RuntimeEventTypes.Contains("DamageApplied") &&
+                command.EncounterDelta.After.ActionHistory.Any(item => item == $"{declaration.PlayerParticipantId}:{declaration.PlayerAbilityId}:{declaration.EnemyParticipantId}"),
+            "combat/run_ai" =>
+                command.EncounterDelta.Changed &&
+                command.RuntimeEventTypes.Contains("AiActionChosen") &&
+                command.EncounterDelta.After.ActionHistory.Any(item => item == $"{declaration.EnemyParticipantId}:{declaration.EnemyAbilityId}:{declaration.PlayerParticipantId}"),
+            _ => false
+        };
+    }
+
+    private static bool FactionCommandHasExpectedDelta(
+        CombatCommandSpec spec,
+        CombatRuntimeCommandEvidence command,
+        FactionReputationDeclaration declaration,
+        RulePackCombatFactionSocialWorkTheftRuntimeEvidence evidence)
+    {
+        var clamp = evidence.FactionClampEvidence.FirstOrDefault(item =>
+            item.CommandId == spec.CommandId &&
+            item.SourceDeclarationId == declaration.DeclarationId &&
+            item.FactionId == declaration.PackageFactionId);
+        return spec.CommandType == "faction/change_reputation" &&
+               command.FactionDelta.Changed &&
+               command.RuntimeEventTypes.Contains("FactionReputationChanged") &&
+               command.FactionDelta.After.TryGetValue(declaration.PackageFactionId, out var after) &&
+               ReputationValueEquals(after, declaration.ExpectedAfter) &&
+               clamp != null &&
+               DoubleEquals(clamp.Before, declaration.ExpectedBefore) &&
+               DoubleEquals(clamp.RequestedAmount, declaration.Amount) &&
+               DoubleEquals(clamp.UnclampedCandidate, declaration.ExpectedBefore + declaration.Amount) &&
+               DoubleEquals(clamp.ActualAfter, declaration.ExpectedAfter) &&
+               DoubleEquals(clamp.ExpectedAfter, declaration.ExpectedAfter);
+    }
+
+    private static bool DialogueCommandHasExpectedDelta(CombatCommandSpec spec, CombatRuntimeCommandEvidence command, SocialDialogueDeclaration declaration)
+    {
+        return spec.CommandType switch
+        {
+            "social/open_dialogue" =>
+                command.DialogueDelta.Changed &&
+                command.RuntimeEventTypes.Contains("DialogueOpened") &&
+                command.DialogueDelta.After.DialogueId == declaration.PackageDialogueId &&
+                command.DialogueDelta.After.CurrentNodeId == declaration.PackageNodeId &&
+                command.DialogueDelta.After.History.Contains(declaration.PackageNodeId),
+            "social/choose_dialogue" =>
+                command.DialogueDelta.Changed &&
+                command.RuntimeEventTypes.Contains("DialogueChoiceSelected") &&
+                command.DialogueDelta.After.DialogueId == declaration.PackageDialogueId &&
+                command.DialogueDelta.After.History.Contains(declaration.PackageChoiceId) &&
+                command.FlagDelta.After.TryGetValue(declaration.FlagId, out var flagValue) &&
+                flagValue == declaration.FlagValue &&
+                command.InventoryDelta.After.TryGetValue(declaration.RewardItemId, out var itemAmount) &&
+                ReputationValueEquals(itemAmount, declaration.RewardItemAmount) &&
+                command.FactionDelta.After.TryGetValue(declaration.FactionId, out var reputation) &&
+                ReputationValueEquals(reputation, declaration.ReputationAmount),
+            _ => false
+        };
+    }
+
+    private static bool WorkCommandHasExpectedDelta(CombatCommandSpec spec, CombatRuntimeCommandEvidence command, WorkContractDeclaration declaration)
+    {
+        return spec.CommandType switch
+        {
+            "work/execute_contract" =>
+                command.WorkDelta.Changed &&
+                command.InventoryDelta.Changed &&
+                command.RuntimeEventTypes.Contains("TransactionExecuted") &&
+                command.WorkDelta.After.ContractInteractionId == declaration.PackageInteractionId &&
+                command.InventoryDelta.After.TryGetValue(declaration.RequiredItemId, out var requiredAfter) &&
+                ReputationValueEquals(requiredAfter, 1) &&
+                command.InventoryDelta.After.TryGetValue(declaration.RewardItemId, out var rewardAfter) &&
+                ReputationValueEquals(rewardAfter, declaration.RewardAmount),
+            "gameplay/set_flag" =>
+                command.FlagDelta.Changed &&
+                command.FlagDelta.After.TryGetValue(declaration.CompletionFlagId, out var flagValue) &&
+                flagValue == declaration.CompletionFlagValue,
+            _ => false
+        };
+    }
+
+    private static bool TheftCommandHasExpectedDelta(CombatCommandSpec spec, CombatRuntimeCommandEvidence command, TheftConsequenceDeclaration declaration)
+    {
+        return spec.CommandType switch
+        {
+            "theft/open_container" =>
+                command.ContainerDelta.Opened &&
+                command.RuntimeEventTypes.Contains("ContainerOpened") &&
+                command.TargetId == declaration.ContainerInventoryId,
+            "theft/take_from_container" =>
+                command.ContainerDelta.Changed &&
+                command.InventoryDelta.Changed &&
+                command.RuntimeEventTypes.Contains("ItemTransferred") &&
+                command.ContainerDelta.After.TryGetValue(declaration.ItemId, out var containerAfter) &&
+                ReputationValueEquals(containerAfter, 1) &&
+                command.InventoryDelta.After.TryGetValue(declaration.ItemId, out var playerAfter) &&
+                ReputationValueEquals(playerAfter, declaration.Amount),
+            "gameplay/set_flag" =>
+                command.FlagDelta.Changed &&
+                command.FlagDelta.After.TryGetValue(declaration.TheftFlagId, out var flagValue) &&
+                flagValue == declaration.TheftFlagValue,
+            "faction/change_reputation" =>
+                command.FactionDelta.Changed &&
+                command.RuntimeEventTypes.Contains("FactionReputationChanged") &&
+                command.FactionDelta.After.TryGetValue(declaration.FactionId, out var after) &&
+                command.FactionDelta.Before.TryGetValue(declaration.FactionId, out var before) &&
+                TryReadNumber(before, out var beforeValue) &&
+                ReputationValueEquals(after, beforeValue + declaration.ReputationPenalty),
+            _ => false
+        };
+    }
 
     private static bool IsScenarioAccepted(
         RulePackCombatFactionSocialWorkTheftBindingAudit bindingAudit,
@@ -666,7 +1027,8 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 ],
                 Factions =
                 [
-                    new FactionDefinition { Id = "faction/settlement_watch", Name = "Settlement Watch", DefaultReputation = 0, MinReputation = -100, MaxReputation = 100 }
+                    new FactionDefinition { Id = "faction/settlement_watch", Name = "Settlement Watch", DefaultReputation = 0, MinReputation = -100, MaxReputation = 100 },
+                    new FactionDefinition { Id = "faction/merchant_guild", Name = "Merchant Guild", DefaultReputation = 0, MinReputation = -50, MaxReputation = 50 }
                 ],
                 Dialogues =
                 [
@@ -697,6 +1059,12 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                                         ]
                                     }
                                 ]
+                            },
+                            new DialogueNodeDefinition
+                            {
+                                Id = "node/after_contract",
+                                SpeakerId = "npc/watch_captain",
+                                Text = "Report back after patrol."
                             }
                         ]
                     }
@@ -710,6 +1078,14 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                         Kind = "work_contract",
                         Requirements = [new RequirementDefinition { Kind = "has_item", Id = "item/work_permit", Amount = 1 }],
                         Outputs = [new OutputDefinition { Kind = "item", Id = "item/wage_scrip", Amount = 3 }]
+                    },
+                    new TransactionDefinition
+                    {
+                        Id = "transaction/merchant_bonus",
+                        Name = "Merchant Bonus",
+                        Kind = "work_contract",
+                        Requirements = [new RequirementDefinition { Kind = "has_item", Id = "item/work_permit", Amount = 1 }],
+                        Outputs = [new OutputDefinition { Kind = "item", Id = "item/guard_badge", Amount = 1 }]
                     }
                 ],
                 Interactions =
@@ -788,8 +1164,8 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
         ],
         Factions =
         [
-            new FactionReputationDeclaration { DeclarationId = "decl/faction/watch_reputation_gain", FamilyId = "faction", PackageFactionId = "faction/settlement_watch", Amount = 12, ExpectedAfter = 12 },
-            new FactionReputationDeclaration { DeclarationId = "decl/faction/theft_penalty", FamilyId = "faction", PackageFactionId = "faction/settlement_watch", Amount = -20, ExpectedAfter = -20 }
+            new FactionReputationDeclaration { DeclarationId = "decl/faction/watch_reputation_gain", FamilyId = "faction", PackageFactionId = "faction/settlement_watch", ExpectedBefore = 0, Amount = 112, ExpectedMin = -100, ExpectedMax = 100, ExpectedAfter = 100 },
+            new FactionReputationDeclaration { DeclarationId = "decl/faction/theft_penalty", FamilyId = "faction", PackageFactionId = "faction/settlement_watch", ExpectedBefore = 0, Amount = -20, ExpectedMin = -100, ExpectedMax = 100, ExpectedAfter = -20 }
         ],
         Dialogues =
         [
@@ -801,7 +1177,11 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 PackageNodeId = "node/start",
                 PackageChoiceId = "choice/accept_contract",
                 FactionId = "faction/settlement_watch",
-                FlagId = "flag/work_contract_accepted"
+                ReputationAmount = 5,
+                FlagId = "flag/work_contract_accepted",
+                FlagValue = "accepted",
+                RewardItemId = "item/contract_note",
+                RewardItemAmount = 1
             }
         ],
         WorkContracts =
@@ -814,7 +1194,9 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 PackageTransactionId = "transaction/work_contract_reward",
                 RequiredItemId = "item/work_permit",
                 RewardItemId = "item/wage_scrip",
+                RewardAmount = 3,
                 CompletionFlagId = "flag/work_contract_completed",
+                CompletionFlagValue = "completed",
                 FactionId = "faction/settlement_watch"
             }
         ],
@@ -828,6 +1210,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 ItemId = "item/stolen_gem",
                 Amount = 1,
                 TheftFlagId = "flag/theft_reported",
+                TheftFlagValue = "true",
                 FactionId = "faction/settlement_watch",
                 ReputationPenalty = -20
             }
@@ -873,7 +1256,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             SourceDeclarationIds = ["decl/faction/watch_reputation_gain"],
             PackageRuntimeIds = ["faction/settlement_watch"],
             ScenarioStateMarker = "faction_reputation_change",
-            Commands = [CombatCommandSpec.ChangeReputation("cmd/watch_reputation_gain", "decl/faction/watch_reputation_gain", "faction/settlement_watch", 12)]
+            Commands = [CombatCommandSpec.ChangeReputation("cmd/watch_reputation_gain", "decl/faction/watch_reputation_gain", "faction/settlement_watch", 112)]
         },
         new()
         {
@@ -938,7 +1321,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 CombatCommandSpec.OpenContainer("cmd/combined_open_cache", "decl/theft/cache_gem_penalty", "inventory/merchant_cache"),
                 CombatCommandSpec.TakeFromContainer("cmd/combined_take_gem", "decl/theft/cache_gem_penalty", "inventory/merchant_cache", "item/stolen_gem", 1),
                 CombatCommandSpec.SetFlag("cmd/combined_theft_flag", "decl/theft/cache_gem_penalty", "flag/theft_reported", "true"),
-                CombatCommandSpec.ChangeReputation("cmd/combined_theft_penalty", "decl/faction/theft_penalty", "faction/settlement_watch", -20)
+                CombatCommandSpec.ChangeReputation("cmd/combined_theft_penalty", "decl/theft/cache_gem_penalty", "faction/settlement_watch", -20)
             ]
         }
     ];
@@ -948,10 +1331,17 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
         Invalid("invalid_missing_encounter_or_participant_ref", "missing_encounter_or_participant_ref", BuildValidSpecs()[0]),
         Invalid("invalid_missing_ability_or_resource_ref", "missing_ability_or_resource_ref", BuildValidSpecs()[0]),
         Invalid("invalid_combat_wrong_turn_or_target", "combat_wrong_turn_or_target", BuildValidSpecs()[0]),
+        Invalid("invalid_same_declaration_wrong_existing_target", "same_declaration_wrong_existing_target", BuildValidSpecs()[0]),
+        Invalid("invalid_same_declaration_wrong_ability_actor_target", "same_declaration_wrong_ability_actor_target", BuildValidSpecs()[0]),
+        Invalid("invalid_same_declaration_wrong_amount_flag_value", "same_declaration_wrong_amount_flag_value", BuildValidSpecs()[5]),
+        Invalid("invalid_missing_participant_ability_resource_cost_reward_binding", "missing_participant_ability_resource_cost_reward_binding", BuildValidSpecs()[1]),
         Invalid("invalid_missing_faction_ref", "missing_faction_ref", BuildValidSpecs()[2]),
         Invalid("invalid_dialogue_or_choice_ref", "dialogue_or_choice_ref", BuildValidSpecs()[3]),
+        Invalid("invalid_dialogue_wrong_node_or_output_mismatch", "dialogue_wrong_node_or_output_mismatch", BuildValidSpecs()[3]),
         Invalid("invalid_work_requirement_unmet", "work_requirement_unmet", BuildValidSpecs()[4]),
+        Invalid("invalid_work_wrong_existing_transaction", "work_wrong_existing_transaction", BuildValidSpecs()[4]),
         Invalid("invalid_theft_container_or_item_ref", "theft_container_or_item_ref", BuildValidSpecs()[5]),
+        Invalid("invalid_theft_amount_flag_reputation_mismatch", "theft_amount_flag_reputation_mismatch", BuildValidSpecs()[5]),
         Invalid("invalid_theft_nonpositive_amount", "theft_nonpositive_amount", BuildValidSpecs()[5]),
         Invalid("invalid_command_not_covered_by_declaration", "command_not_covered_by_declaration", BuildValidSpecs()[2]),
         Invalid("invalid_fake_runtime_success", "fake_runtime_success", BuildValidSpecs()[6]),
@@ -983,9 +1373,43 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                     Commands =
                     [
                         CombatCommandSpec.StartEncounter("cmd/start_roadside_raider", "decl/combat/turn_based_encounter", "encounter/roadside_raider"),
-                        CombatCommandSpec.UseAbility("cmd/enemy_acts_on_player_turn", "decl/combat/turn_based_encounter", "ability/raider_cut", "participant/raider", "participant/player_guard")
+                        CombatCommandSpec.UseAbility("cmd/player_guard_strike", "decl/combat/turn_based_encounter", "ability/guard_strike", "participant/player_guard", "participant/raider"),
+                        CombatCommandSpec.UseAbility("cmd/player_acts_on_enemy_turn", "decl/combat/turn_based_encounter", "ability/guard_strike", "participant/player_guard", "participant/raider")
                     ]
                 };
+                break;
+            case "same_declaration_wrong_existing_target":
+                spec = spec with
+                {
+                    Commands = [CombatCommandSpec.StartEncounter("cmd/start_wrong_existing_encounter", "decl/combat/turn_based_encounter", "encounter/quick_resolution")]
+                };
+                break;
+            case "same_declaration_wrong_ability_actor_target":
+                spec = spec with
+                {
+                    Commands =
+                    [
+                        CombatCommandSpec.StartEncounter("cmd/start_roadside_raider", "decl/combat/turn_based_encounter", "encounter/roadside_raider"),
+                        CombatCommandSpec.UseAbility("cmd/wrong_existing_actor_target", "decl/combat/turn_based_encounter", "ability/raider_cut", "participant/raider", "participant/player_guard")
+                    ]
+                };
+                break;
+            case "same_declaration_wrong_amount_flag_value":
+                spec = spec with
+                {
+                    Commands =
+                    [
+                        CombatCommandSpec.OpenContainer("cmd/open_cache", "decl/theft/cache_gem_penalty", "inventory/merchant_cache"),
+                        CombatCommandSpec.TakeFromContainer("cmd/take_wrong_amount_gem", "decl/theft/cache_gem_penalty", "inventory/merchant_cache", "item/stolen_gem", 2),
+                        CombatCommandSpec.SetFlag("cmd/theft_wrong_flag_value", "decl/theft/cache_gem_penalty", "flag/theft_reported", "false"),
+                        CombatCommandSpec.ChangeReputation("cmd/theft_wrong_penalty", "decl/theft/cache_gem_penalty", "faction/settlement_watch", -10)
+                    ]
+                };
+                break;
+            case "missing_participant_ability_resource_cost_reward_binding":
+                package.Game.Encounters.Single(item => item.Id == "encounter/quick_resolution").Participants.Single(item => item.Id == "participant/player_guard").Abilities.Clear();
+                package.Game.Abilities.Single(item => item.Id == "ability/finisher").Costs[0].Id = "resource/missing_focus";
+                package.Game.Encounters.Single(item => item.Id == "encounter/quick_resolution").Rewards[0].Id = "item/missing_victory_token";
                 break;
             case "missing_faction_ref":
                 package.Game.Factions.RemoveAll(item => item.Id == "faction/settlement_watch");
@@ -993,11 +1417,33 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
             case "dialogue_or_choice_ref":
                 package.Game.Dialogues.Single(item => item.Id == "dialogue/watch_captain").Nodes[0].Choices.Clear();
                 break;
+            case "dialogue_wrong_node_or_output_mismatch":
+                var dialogue = package.Game.Dialogues.Single(item => item.Id == "dialogue/watch_captain");
+                var choice = dialogue.Nodes.Single(item => item.Id == "node/start").Choices.Single(item => item.Id == "choice/accept_contract");
+                choice.Rewards.RemoveAll(item => item.Id == "item/contract_note");
+                dialogue.Nodes.Single(item => item.Id == "node/start").Choices.Clear();
+                dialogue.Nodes.Single(item => item.Id == "node/after_contract").Choices.Add(choice);
+                break;
             case "work_requirement_unmet":
                 package.Game.Inventories.Single(item => item.Id == "inventory/player").Stacks.Clear();
                 break;
+            case "work_wrong_existing_transaction":
+                package.Game.Interactions.Single(item => item.Id == "interaction/work_contract_reward").Metadata["transaction_id"] = "transaction/merchant_bonus";
+                break;
             case "theft_container_or_item_ref":
                 package.Game.Inventories.Single(item => item.Id == "inventory/merchant_cache").Stacks.Clear();
+                break;
+            case "theft_amount_flag_reputation_mismatch":
+                spec = spec with
+                {
+                    Commands =
+                    [
+                        CombatCommandSpec.OpenContainer("cmd/open_cache", "decl/theft/cache_gem_penalty", "inventory/merchant_cache"),
+                        CombatCommandSpec.TakeFromContainer("cmd/take_wrong_amount_gem", "decl/theft/cache_gem_penalty", "inventory/merchant_cache", "item/stolen_gem", 2),
+                        CombatCommandSpec.SetFlag("cmd/theft_wrong_flag_value", "decl/theft/cache_gem_penalty", "flag/theft_reported", "false"),
+                        CombatCommandSpec.ChangeReputation("cmd/theft_wrong_penalty", "decl/theft/cache_gem_penalty", "faction/settlement_watch", -10)
+                    ]
+                };
                 break;
             case "theft_nonpositive_amount":
                 declarations.TheftConsequences = declarations.TheftConsequences.Select(item => item with { Amount = 0 }).ToList();
@@ -1020,7 +1466,7 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
                 spec = spec with { ScenarioStateMarker = "invalid_save_load_mismatch" };
                 break;
             case "cross_scenario_state_leakage":
-                spec = spec with { ScenarioStateMarker = "leak:previous_scenario" };
+                spec = spec with { ScenarioStateMarker = "inject_previous_scenario_state" };
                 break;
         }
     }
@@ -1109,6 +1555,108 @@ public sealed class RulePackCombatFactionSocialWorkTheftAcceptanceService
         Target = target,
         Message = message
     };
+
+    private static bool HasExpectedInvalidDiagnostic(RulePackCombatFactionSocialWorkTheftScenario scenario)
+    {
+        var expectedCodes = scenario.InvalidKind switch
+        {
+            "missing_encounter_or_participant_ref" => ["combat_family.audit.missing_encounter_ref", "combat_family.audit.missing_participant_ref"],
+            "missing_ability_or_resource_ref" => ["combat_family.audit.missing_ability_ref", "combat_family.audit.missing_resource_ref"],
+            "combat_wrong_turn_or_target" => ["combat_family.evidence.command_failed"],
+            "same_declaration_wrong_existing_target" => ["combat_family.audit.command_target_mismatch"],
+            "same_declaration_wrong_ability_actor_target" => ["combat_family.audit.command_actor_mismatch", "combat_family.audit.command_secondary_target_mismatch"],
+            "same_declaration_wrong_amount_flag_value" => ["combat_family.audit.command_amount_mismatch", "combat_family.audit.command_value_mismatch"],
+            "missing_participant_ability_resource_cost_reward_binding" => ["combat_family.audit.participant_ability_mismatch", "combat_family.audit.ability_cost_resource_mismatch", "combat_family.audit.encounter_reward_missing"],
+            "missing_faction_ref" => ["combat_family.audit.missing_faction_ref"],
+            "dialogue_or_choice_ref" => ["combat_family.audit.missing_dialogue_choice_ref"],
+            "dialogue_wrong_node_or_output_mismatch" => ["combat_family.audit.dialogue_choice_node_mismatch", "combat_family.audit.dialogue_choice_output_mismatch"],
+            "work_requirement_unmet" => ["combat_family.evidence.command_failed"],
+            "work_wrong_existing_transaction" => ["combat_family.audit.work_transaction_mismatch"],
+            "theft_container_or_item_ref" => ["combat_family.audit.missing_theft_item_ref"],
+            "theft_amount_flag_reputation_mismatch" => ["combat_family.audit.command_amount_mismatch", "combat_family.audit.command_value_mismatch"],
+            "theft_nonpositive_amount" => ["combat_family.audit.theft_amount_invalid"],
+            "command_not_covered_by_declaration" => ["combat_family.audit.command_not_covered_by_declaration"],
+            "fake_runtime_success" => ["combat_family.evidence.required_command_missing", "combat_family.evidence.runtime_boundary_missing"],
+            "save_load_mismatch" => ["combat_family.evidence.save_load_mismatch"],
+            "cross_scenario_state_leakage" => ["combat_family.evidence.cross_scenario_state_leakage"],
+            _ => Array.Empty<string>()
+        };
+
+        return expectedCodes.Length > 0 &&
+               scenario.Diagnostics.Any(diagnostic => diagnostic.Severity == "error" && expectedCodes.Contains(diagnostic.Code, StringComparer.Ordinal));
+    }
+
+    private static object? FindDeclaration(CombatFamilyDeclarations declarations, string declarationId)
+    {
+        return declarations.Encounters.Cast<object>()
+            .Concat(declarations.Factions)
+            .Concat(declarations.Dialogues)
+            .Concat(declarations.WorkContracts)
+            .Concat(declarations.TheftConsequences)
+            .FirstOrDefault(item => item switch
+            {
+                CombatEncounterDeclaration declaration => declaration.DeclarationId == declarationId,
+                FactionReputationDeclaration declaration => declaration.DeclarationId == declarationId,
+                SocialDialogueDeclaration declaration => declaration.DeclarationId == declarationId,
+                WorkContractDeclaration declaration => declaration.DeclarationId == declarationId,
+                TheftConsequenceDeclaration declaration => declaration.DeclarationId == declarationId,
+                _ => false
+            });
+    }
+
+    private static bool ParticipantHasResource(EncounterParticipantDefinition participant, params string[] resourceIds) =>
+        resourceIds.All(resourceId => participant.Resources.Any(resource => resource.Id == resourceId));
+
+    private static bool IsItemRequirement(RequirementDefinition requirement, string itemId) =>
+        string.Equals(requirement.Id, itemId, StringComparison.Ordinal) &&
+        (string.Equals(requirement.Kind, "has_item", StringComparison.OrdinalIgnoreCase) ||
+         string.Equals(requirement.Kind, "item", StringComparison.OrdinalIgnoreCase));
+
+    private static bool IsItemOutput(OutputDefinition output) =>
+        string.Equals(output.Kind, "item", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsItemOutput(OutputDefinition output, string itemId, double amount) =>
+        IsItemOutput(output) && output.Id == itemId && DoubleEquals(output.Amount, amount);
+
+    private static bool IsFlagOutput(OutputDefinition output, string flagId, string value) =>
+        string.Equals(output.Kind, "flag", StringComparison.OrdinalIgnoreCase) &&
+        output.Id == flagId &&
+        string.Equals(output.Mode, value, StringComparison.Ordinal);
+
+    private static bool IsReputationOutput(OutputDefinition output, string factionId, double amount) =>
+        string.Equals(output.Kind, "reputation", StringComparison.OrdinalIgnoreCase) &&
+        output.Id == factionId &&
+        DoubleEquals(output.Amount, amount);
+
+    private static double Clamp(double value, double? min, double? max)
+    {
+        if (min.HasValue)
+        {
+            value = Math.Max(min.Value, value);
+        }
+
+        if (max.HasValue)
+        {
+            value = Math.Min(max.Value, value);
+        }
+
+        return value;
+    }
+
+    private static bool ReputationValueEquals(string value, double expected)
+    {
+        return TryReadNumber(value, out var parsed) &&
+               DoubleEquals(parsed, expected);
+    }
+
+    private static bool TryReadNumber(string value, out double parsed)
+    {
+        var numeric = value.Split('|')[0];
+        return double.TryParse(numeric, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out parsed);
+    }
+
+    private static bool DoubleEquals(double actual, double expected) =>
+        Math.Abs(actual - expected) < 0.0001;
 
     private static bool IsContainer(InventoryDefinition inventory) =>
         string.Equals(inventory.OwnerKind, "container", StringComparison.OrdinalIgnoreCase) ||
@@ -1259,7 +1807,10 @@ public sealed record FactionReputationDeclaration
     public string DeclarationId { get; init; } = string.Empty;
     public string FamilyId { get; init; } = string.Empty;
     public string PackageFactionId { get; init; } = string.Empty;
+    public double ExpectedBefore { get; init; }
     public double Amount { get; init; }
+    public double ExpectedMin { get; init; }
+    public double ExpectedMax { get; init; }
     public double ExpectedAfter { get; init; }
 }
 
@@ -1271,7 +1822,11 @@ public sealed record SocialDialogueDeclaration
     public string PackageNodeId { get; init; } = string.Empty;
     public string PackageChoiceId { get; init; } = string.Empty;
     public string FactionId { get; init; } = string.Empty;
+    public double ReputationAmount { get; init; }
     public string FlagId { get; init; } = string.Empty;
+    public string FlagValue { get; init; } = string.Empty;
+    public string RewardItemId { get; init; } = string.Empty;
+    public double RewardItemAmount { get; init; }
 }
 
 public sealed record WorkContractDeclaration
@@ -1282,7 +1837,9 @@ public sealed record WorkContractDeclaration
     public string PackageTransactionId { get; init; } = string.Empty;
     public string RequiredItemId { get; init; } = string.Empty;
     public string RewardItemId { get; init; } = string.Empty;
+    public double RewardAmount { get; init; }
     public string CompletionFlagId { get; init; } = string.Empty;
+    public string CompletionFlagValue { get; init; } = string.Empty;
     public string FactionId { get; init; } = string.Empty;
 }
 
@@ -1294,6 +1851,7 @@ public sealed record TheftConsequenceDeclaration
     public string ItemId { get; init; } = string.Empty;
     public double Amount { get; init; }
     public string TheftFlagId { get; init; } = string.Empty;
+    public string TheftFlagValue { get; init; } = string.Empty;
     public string FactionId { get; init; } = string.Empty;
     public double ReputationPenalty { get; init; }
 }
@@ -1393,11 +1951,13 @@ public sealed record RulePackCombatFactionSocialWorkTheftRuntimeEvidence
     public CombatDialogueEvidence DialogueAfter { get; init; } = new();
     public CombatWorkEvidence WorkEvidence { get; init; } = new();
     public CombatTheftEvidence TheftEvidence { get; init; } = new();
+    public IReadOnlyList<CombatFactionClampEvidence> FactionClampEvidence { get; init; } = Array.Empty<CombatFactionClampEvidence>();
     public string RuntimeStateHash { get; init; } = string.Empty;
     public string RestoredRuntimeStateHash { get; init; } = string.Empty;
     public bool SaveLoadRoundtripPassed { get; init; }
     public CombatSaveLoadEvidence SaveLoadEvidence { get; init; } = new();
     public bool ScenarioIsolationPassed { get; init; }
+    public CombatScenarioIsolationEvidence ScenarioIsolationEvidence { get; init; } = new();
     public IReadOnlyDictionary<string, string> StateEvidence { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
     public IReadOnlyDictionary<string, string> RestoredStateEvidence { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
     public IReadOnlyList<RulePackCombatFactionSocialWorkTheftDiagnostic> Diagnostics { get; init; } = Array.Empty<RulePackCombatFactionSocialWorkTheftDiagnostic>();
@@ -1410,6 +1970,9 @@ public sealed record CombatRuntimeCommandEvidence
     public string CommandType { get; init; } = string.Empty;
     public string TargetId { get; init; } = string.Empty;
     public string SecondaryTargetId { get; init; } = string.Empty;
+    public string ActorId { get; init; } = string.Empty;
+    public double Amount { get; init; }
+    public string Value { get; init; } = string.Empty;
     public bool Succeeded { get; init; }
     public string DiagnosticCode { get; init; } = string.Empty;
     public string DiagnosticMessage { get; init; } = string.Empty;
@@ -1451,6 +2014,31 @@ public sealed record CombatSaveLoadEvidence
     public string SnapshotSlotName { get; init; } = string.Empty;
     public bool SnapshotSaveSucceeded { get; init; }
     public bool SnapshotLoadSucceeded { get; init; }
+    public bool TempSnapshotCleanupSucceeded { get; init; }
+}
+
+public sealed record CombatFactionClampEvidence
+{
+    public string CommandId { get; init; } = string.Empty;
+    public string SourceDeclarationId { get; init; } = string.Empty;
+    public string FactionId { get; init; } = string.Empty;
+    public double Before { get; init; }
+    public double RequestedAmount { get; init; }
+    public double UnclampedCandidate { get; init; }
+    public double? Min { get; init; }
+    public double? Max { get; init; }
+    public double ExpectedAfter { get; init; }
+    public double ActualAfter { get; init; }
+    public bool Clamped { get; init; }
+}
+
+public sealed record CombatScenarioIsolationEvidence
+{
+    public string PreviousScenarioId { get; init; } = string.Empty;
+    public IReadOnlyDictionary<string, string> PreviousDynamicSignature { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyDictionary<string, string> CurrentInitialStateSignature { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyList<string> UnexpectedRetainedKeys { get; init; } = Array.Empty<string>();
+    public bool InjectedLeak { get; init; }
 }
 
 public sealed record CombatEncounterEvidence

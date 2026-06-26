@@ -20,6 +20,8 @@ public static class RulePackCombatFactionSocialWorkTheftAcceptanceTestFactory
 
 public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRulePackCombatFactionSocialWorkTheftRuntimeAdapter
 {
+    private PreviousScenarioDynamicEvidence? _previousDynamicEvidence;
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -35,6 +37,11 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
 
     public RulePackCombatFactionSocialWorkTheftRuntimeEvidence Run(RulePackCombatFactionSocialWorkTheftRuntimeRequest request)
     {
+        if (request.ScenarioId == "combat_turn_based_encounter")
+        {
+            _previousDynamicEvidence = null;
+        }
+
         var services = CreateRuntimeServices();
         var serializer = new RuntimeStateSerializer();
         var snapshotStore = new RuntimeSnapshotStore(serializer);
@@ -43,6 +50,20 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
         var diagnostics = start.Diagnostics
             .Select(item => Diagnostic(item.Severity, item.Code, item.TargetId ?? request.ScenarioId, item.Message))
             .ToList();
+
+        var previous = _previousDynamicEvidence;
+        var injectedLeak = request.ExpectedScenarioStateMarker == "inject_previous_scenario_state" && previous != null;
+        if (injectedLeak)
+        {
+            InjectPreviousDynamicEvidence(state, previous!);
+        }
+
+        var initialSnapshot = RuntimeSnapshot.FromState(state);
+        var initialDynamic = initialSnapshot.ToDynamicSignature();
+        var unexpectedRetainedKeys = previous == null
+            ? new List<string>()
+            : initialDynamic.Keys.Where(key => previous.DynamicSignature.ContainsKey(key)).OrderBy(key => key, StringComparer.Ordinal).ToList();
+        var scenarioIsolationPassed = unexpectedRetainedKeys.Count == 0;
 
         state.Metadata["combatFamily.scenario"] = request.ExpectedScenarioStateMarker;
         var commands = new List<CombatRuntimeCommandEvidence>();
@@ -59,85 +80,119 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
             }
         }
 
-        var snapshot = RuntimeSnapshot.FromState(state);
-        var stateEvidence = snapshot.ToEvidence(request.ScenarioId);
-        var serialized = serializer.Serialize(state);
-        var restoredState = serializer.DeserializeGameRuntimeState(serialized);
         var snapshotProjectRoot = Path.Combine(Path.GetTempPath(), "LLMGameCreator.Tests", "RulePackCombatFamily", Guid.NewGuid().ToString("N"));
-        var slotName = "goal009_" + request.ScenarioId.Replace('/', '_');
-        var save = snapshotStore.SaveSnapshot(snapshotProjectRoot, slotName, new UnifiedRuntimeSession { GameplayState = state });
-        var load = snapshotStore.LoadSnapshot(snapshotProjectRoot, slotName);
-
-        diagnostics.AddRange(save.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.TargetId ?? slotName, item.Message)));
-        diagnostics.AddRange(load.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.TargetId ?? slotName, item.Message)));
-
-        var restoredFromSnapshot = load.Session?.GameplayState ?? restoredState;
-        if (request.ExpectedScenarioStateMarker == "invalid_save_load_mismatch")
+        var cleanupSucceeded = false;
+        try
         {
-            restoredFromSnapshot.Flags.Add(new RuntimeFlagState { Id = "flag/save_load_mismatch", Value = "corrupted" });
+            var snapshot = RuntimeSnapshot.FromState(state);
+            var stateEvidence = snapshot.ToEvidence(request.ScenarioId);
+            var serialized = serializer.Serialize(state);
+            var restoredState = serializer.DeserializeGameRuntimeState(serialized);
+            var slotName = "goal009_" + request.ScenarioId.Replace('/', '_');
+            var save = snapshotStore.SaveSnapshot(snapshotProjectRoot, slotName, new UnifiedRuntimeSession { GameplayState = state });
+            var load = snapshotStore.LoadSnapshot(snapshotProjectRoot, slotName);
+
+            diagnostics.AddRange(save.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.TargetId ?? slotName, item.Message)));
+            diagnostics.AddRange(load.Diagnostics.Select(item => Diagnostic(item.Severity, item.Code, item.TargetId ?? slotName, item.Message)));
+
+            if (Directory.Exists(snapshotProjectRoot))
+            {
+                Directory.Delete(snapshotProjectRoot, recursive: true);
+            }
+
+            cleanupSucceeded = !Directory.Exists(snapshotProjectRoot);
+
+            var restoredFromSnapshot = load.Session?.GameplayState ?? restoredState;
+            if (request.ExpectedScenarioStateMarker == "invalid_save_load_mismatch")
+            {
+                restoredFromSnapshot.Flags.Add(new RuntimeFlagState { Id = "flag/save_load_mismatch", Value = "corrupted" });
+            }
+
+            var restoredEvidence = RuntimeSnapshot.FromState(restoredFromSnapshot).ToEvidence(request.ScenarioId);
+            var stateHash = ComputeHash(serialized);
+            var restoredHash = ComputeHash(serializer.Serialize(restoredFromSnapshot));
+            var factionClampEvidence = BuildFactionClampEvidence(request, commands);
+            var dynamicSignature = snapshot.ToDynamicSignature();
+
+            if (request.ExpectedScenarioStateMarker != "inject_previous_scenario_state" &&
+                request.ScenarioId != "combined_combat_social_work_theft_loop")
+            {
+                _previousDynamicEvidence = new PreviousScenarioDynamicEvidence(request.ScenarioId, dynamicSignature);
+            }
+
+            var evidenceWithoutHash = new RulePackCombatFactionSocialWorkTheftRuntimeEvidence
+            {
+                RuntimeAttempted = true,
+                RuntimeStartSucceeded = start.Success,
+                RuntimeStateOwner = "GameRuntimeState",
+                PackageId = state.PackageId,
+                RuntimeBoundary = new CombatRuntimeBoundaryEvidence
+                {
+                    AdapterId = "real_combat_family_game_runtime_service_adapter",
+                    RuntimeServiceType = typeof(GameRuntimeService).FullName ?? nameof(GameRuntimeService),
+                    StateFactoryType = typeof(GameRuntimeStateFactory).FullName ?? nameof(GameRuntimeStateFactory),
+                    SerializerType = typeof(RuntimeStateSerializer).FullName ?? nameof(RuntimeStateSerializer),
+                    SnapshotStoreType = typeof(RuntimeSnapshotStore).FullName ?? nameof(RuntimeSnapshotStore),
+                    UsedGameRuntimeService = true,
+                    UsedRuntimeStateFactory = true,
+                    UsedEncounterRuntimeService = true,
+                    UsedEncounterAiService = true,
+                    UsedFactionRuntimeService = true,
+                    UsedDialogueRuntimeService = true,
+                    UsedInteractionRuntimeService = true,
+                    UsedContainerRuntimeService = true
+                },
+                Commands = commands,
+                EncounterBefore = commands.FirstOrDefault()?.EncounterDelta.Before ?? new CombatEncounterEvidence(),
+                EncounterAfter = snapshot.Encounter,
+                FactionReputationBefore = commands.FirstOrDefault()?.FactionDelta.Before ?? new SortedDictionary<string, string>(StringComparer.Ordinal),
+                FactionReputationAfter = snapshot.Factions,
+                DialogueBefore = commands.FirstOrDefault()?.DialogueDelta.Before ?? new CombatDialogueEvidence(),
+                DialogueAfter = snapshot.Dialogue,
+                WorkEvidence = BuildWorkEvidence(snapshot),
+                TheftEvidence = BuildTheftEvidence(snapshot),
+                FactionClampEvidence = factionClampEvidence,
+                RuntimeStateHash = stateHash,
+                RestoredRuntimeStateHash = restoredHash,
+                SaveLoadRoundtripPassed = stateHash == restoredHash && DictionaryEquals(stateEvidence, restoredEvidence),
+                SaveLoadEvidence = new CombatSaveLoadEvidence
+                {
+                    UsedRuntimeStateSerializer = true,
+                    UsedRuntimeSnapshotStore = true,
+                    SerializedFullState = true,
+                    SerializedStateHash = stateHash,
+                    RestoredSerializedStateHash = restoredHash,
+                    SnapshotSlotName = slotName,
+                    SnapshotSaveSucceeded = save.Success,
+                    SnapshotLoadSucceeded = load.Success,
+                    TempSnapshotCleanupSucceeded = cleanupSucceeded
+                },
+                ScenarioIsolationPassed = scenarioIsolationPassed,
+                ScenarioIsolationEvidence = new CombatScenarioIsolationEvidence
+                {
+                    PreviousScenarioId = previous?.ScenarioId ?? string.Empty,
+                    PreviousDynamicSignature = previous?.DynamicSignature ?? new SortedDictionary<string, string>(StringComparer.Ordinal),
+                    CurrentInitialStateSignature = initialDynamic,
+                    UnexpectedRetainedKeys = unexpectedRetainedKeys,
+                    InjectedLeak = injectedLeak
+                },
+                StateEvidence = stateEvidence,
+                RestoredStateEvidence = restoredEvidence,
+                Diagnostics = diagnostics
+            };
+
+            return evidenceWithoutHash with
+            {
+                RuntimeEvidenceHash = ComputeHash(JsonSerializer.Serialize(evidenceWithoutHash, JsonOptions))
+            };
         }
-
-        var restoredEvidence = RuntimeSnapshot.FromState(restoredFromSnapshot).ToEvidence(request.ScenarioId);
-        var stateHash = ComputeHash(serialized);
-        var restoredHash = ComputeHash(serializer.Serialize(restoredFromSnapshot));
-        var scenarioIsolationPassed = !request.ExpectedScenarioStateMarker.StartsWith("leak:", StringComparison.Ordinal) &&
-                                      !state.Metadata.ContainsKey("combatFamily.previousScenario");
-
-        var evidenceWithoutHash = new RulePackCombatFactionSocialWorkTheftRuntimeEvidence
+        finally
         {
-            RuntimeAttempted = true,
-            RuntimeStartSucceeded = start.Success,
-            RuntimeStateOwner = "GameRuntimeState",
-            PackageId = state.PackageId,
-            RuntimeBoundary = new CombatRuntimeBoundaryEvidence
+            if (Directory.Exists(snapshotProjectRoot))
             {
-                AdapterId = "real_combat_family_game_runtime_service_adapter",
-                RuntimeServiceType = typeof(GameRuntimeService).FullName ?? nameof(GameRuntimeService),
-                StateFactoryType = typeof(GameRuntimeStateFactory).FullName ?? nameof(GameRuntimeStateFactory),
-                SerializerType = typeof(RuntimeStateSerializer).FullName ?? nameof(RuntimeStateSerializer),
-                SnapshotStoreType = typeof(RuntimeSnapshotStore).FullName ?? nameof(RuntimeSnapshotStore),
-                UsedGameRuntimeService = true,
-                UsedRuntimeStateFactory = true,
-                UsedEncounterRuntimeService = true,
-                UsedEncounterAiService = true,
-                UsedFactionRuntimeService = true,
-                UsedDialogueRuntimeService = true,
-                UsedInteractionRuntimeService = true,
-                UsedContainerRuntimeService = true
-            },
-            Commands = commands,
-            EncounterBefore = commands.FirstOrDefault()?.EncounterDelta.Before ?? new CombatEncounterEvidence(),
-            EncounterAfter = snapshot.Encounter,
-            FactionReputationBefore = commands.FirstOrDefault()?.FactionDelta.Before ?? new SortedDictionary<string, string>(StringComparer.Ordinal),
-            FactionReputationAfter = snapshot.Factions,
-            DialogueBefore = commands.FirstOrDefault()?.DialogueDelta.Before ?? new CombatDialogueEvidence(),
-            DialogueAfter = snapshot.Dialogue,
-            WorkEvidence = BuildWorkEvidence(snapshot),
-            TheftEvidence = BuildTheftEvidence(snapshot),
-            RuntimeStateHash = stateHash,
-            RestoredRuntimeStateHash = restoredHash,
-            SaveLoadRoundtripPassed = stateHash == restoredHash && DictionaryEquals(stateEvidence, restoredEvidence),
-            SaveLoadEvidence = new CombatSaveLoadEvidence
-            {
-                UsedRuntimeStateSerializer = true,
-                UsedRuntimeSnapshotStore = true,
-                SerializedFullState = true,
-                SerializedStateHash = stateHash,
-                RestoredSerializedStateHash = restoredHash,
-                SnapshotSlotName = slotName,
-                SnapshotSaveSucceeded = save.Success,
-                SnapshotLoadSucceeded = load.Success
-            },
-            ScenarioIsolationPassed = scenarioIsolationPassed,
-            StateEvidence = stateEvidence,
-            RestoredStateEvidence = restoredEvidence,
-            Diagnostics = diagnostics
-        };
-
-        return evidenceWithoutHash with
-        {
-            RuntimeEvidenceHash = ComputeHash(JsonSerializer.Serialize(evidenceWithoutHash, JsonOptions))
-        };
+                Directory.Delete(snapshotProjectRoot, recursive: true);
+            }
+        }
     }
 
     private static RuntimeServices CreateRuntimeServices()
@@ -219,6 +274,9 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
             CommandType = command.CommandType,
             TargetId = command.TargetId,
             SecondaryTargetId = command.SecondaryTargetId,
+            ActorId = command.ActorId,
+            Amount = command.Amount,
+            Value = command.Value,
             Succeeded = result.Success,
             DiagnosticCode = result.Success ? "ok" : diagnostic?.Code ?? "runtime.command_failed",
             DiagnosticMessage = result.Success ? string.Empty : diagnostic?.Message ?? result.Message,
@@ -232,6 +290,64 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
             InventoryDelta = new CombatInventoryDelta { Changed = !DictionaryEquals(before.PlayerItems, after.PlayerItems), Before = before.PlayerItems, After = after.PlayerItems },
             FlagDelta = new CombatFlagDelta { Changed = !DictionaryEquals(before.Flags, after.Flags), Before = before.Flags, After = after.Flags }
         };
+    }
+
+    private static void InjectPreviousDynamicEvidence(GameRuntimeState state, PreviousScenarioDynamicEvidence previous)
+    {
+        state.Metadata["combatFamily.previousScenario"] = previous.ScenarioId;
+        state.Metadata["combatFamily.commandLog"] = previous.DynamicSignature.GetValueOrDefault("commandLog", previous.ScenarioId);
+        state.Flags.Add(new RuntimeFlagState { Id = "flag/leaked_previous_scenario", Value = previous.ScenarioId });
+        var faction = state.Factions.FirstOrDefault(item => item.FactionId == "faction/settlement_watch");
+        if (faction != null)
+        {
+            faction.Reputation = 42;
+        }
+    }
+
+    private static IReadOnlyList<CombatFactionClampEvidence> BuildFactionClampEvidence(
+        RulePackCombatFactionSocialWorkTheftRuntimeRequest request,
+        IReadOnlyList<CombatRuntimeCommandEvidence> commands)
+    {
+        var evidence = new List<CombatFactionClampEvidence>();
+        foreach (var command in commands.Where(item => item.CommandType == "faction/change_reputation" && item.Succeeded))
+        {
+            var before = ReadNumeric(command.FactionDelta.Before.GetValueOrDefault(command.TargetId));
+            var after = ReadNumeric(command.FactionDelta.After.GetValueOrDefault(command.TargetId));
+            var faction = request.Package.Game.Factions.FirstOrDefault(item => item.Id == command.TargetId);
+            var expectedAfter = after;
+            var factionDeclaration = request.Declarations.Factions.FirstOrDefault(item => item.DeclarationId == command.SourceDeclarationId);
+            if (factionDeclaration != null)
+            {
+                expectedAfter = factionDeclaration.ExpectedAfter;
+            }
+            else
+            {
+                var theft = request.Declarations.TheftConsequences.FirstOrDefault(item => item.DeclarationId == command.SourceDeclarationId);
+                if (theft != null)
+                {
+                    expectedAfter = Clamp(before + theft.ReputationPenalty, faction?.MinReputation, faction?.MaxReputation);
+                }
+            }
+
+            var candidate = before + command.Amount;
+            var clamped = Clamp(candidate, faction?.MinReputation, faction?.MaxReputation);
+            evidence.Add(new CombatFactionClampEvidence
+            {
+                CommandId = command.CommandId,
+                SourceDeclarationId = command.SourceDeclarationId,
+                FactionId = command.TargetId,
+                Before = before,
+                RequestedAmount = command.Amount,
+                UnclampedCandidate = candidate,
+                Min = faction?.MinReputation,
+                Max = faction?.MaxReputation,
+                ExpectedAfter = expectedAfter,
+                ActualAfter = after,
+                Clamped = !DoubleEquals(candidate, clamped)
+            });
+        }
+
+        return evidence.OrderBy(item => item.CommandId, StringComparer.Ordinal).ToList();
     }
 
     private static CombatWorkEvidence BuildWorkEvidence(RuntimeSnapshot snapshot) => new()
@@ -262,6 +378,35 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
     private static double? ParseDouble(string? value) =>
         double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var parsed) ? parsed : null;
 
+    private static double ReadNumeric(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return 0;
+        }
+
+        var numeric = value.Split('|')[0];
+        return double.TryParse(numeric, NumberStyles.Float, CultureInfo.InvariantCulture, out var parsed) ? parsed : 0;
+    }
+
+    private static double Clamp(double value, double? min, double? max)
+    {
+        if (min.HasValue)
+        {
+            value = Math.Max(min.Value, value);
+        }
+
+        if (max.HasValue)
+        {
+            value = Math.Min(max.Value, value);
+        }
+
+        return value;
+    }
+
+    private static bool DoubleEquals(double left, double right) =>
+        Math.Abs(left - right) < 0.0001;
+
     private static string Format(double value) => value.ToString("0.####", CultureInfo.InvariantCulture);
 
     private static string ComputeHash(string value)
@@ -279,6 +424,8 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
     };
 
     private sealed record RuntimeServices(IGameRuntimeService Runtime);
+
+    private sealed record PreviousScenarioDynamicEvidence(string ScenarioId, IReadOnlyDictionary<string, string> DynamicSignature);
 
     private sealed record RuntimeSnapshot
     {
@@ -342,6 +489,71 @@ public sealed class RealRulePackCombatFactionSocialWorkTheftRuntimeAdapter : IRu
             ["commandLog"] = Metadata.GetValueOrDefault("combatFamily.commandLog", string.Empty),
             ["scenarioMarker"] = Metadata.GetValueOrDefault("combatFamily.scenario", string.Empty)
         };
+
+        public IReadOnlyDictionary<string, string> ToDynamicSignature()
+        {
+            var signature = new SortedDictionary<string, string>(StringComparer.Ordinal);
+            if (!string.IsNullOrWhiteSpace(Encounter.EncounterId) ||
+                Encounter.ActionHistory.Count > 0)
+            {
+                signature["encounter"] = Encounter.EncounterId + "|" + Encounter.Active.ToString().ToLowerInvariant() + "|" + string.Join(",", Encounter.ActionHistory);
+            }
+
+            if (!string.IsNullOrWhiteSpace(Dialogue.DialogueId) ||
+                Dialogue.History.Count > 0)
+            {
+                signature["dialogue"] = Dialogue.DialogueId + "|" + Dialogue.CurrentNodeId + "|" + Dialogue.Open.ToString().ToLowerInvariant() + "|" + string.Join(",", Dialogue.History);
+            }
+
+            var changedFactions = Factions
+                .Where(item => !string.Equals(item.Value, "0|neutral", StringComparison.Ordinal))
+                .Select(item => item.Key + "=" + item.Value)
+                .ToList();
+            if (changedFactions.Count > 0)
+            {
+                signature["factions"] = string.Join(",", changedFactions);
+            }
+
+            var changedPlayerItems = PlayerItems
+                .Where(item => !(item.Key == "item/work_permit" && item.Value == "1"))
+                .Select(item => item.Key + "=" + item.Value)
+                .ToList();
+            if (changedPlayerItems.Count > 0)
+            {
+                signature["playerItems"] = string.Join(",", changedPlayerItems);
+            }
+
+            var changedContainerItems = ContainerItems
+                .Where(item => !(item.Key == "item/stolen_gem" && item.Value == "2"))
+                .Select(item => item.Key + "=" + item.Value)
+                .ToList();
+            if (changedContainerItems.Count > 0)
+            {
+                signature["containerItems"] = string.Join(",", changedContainerItems);
+            }
+
+            if (Flags.Count > 0)
+            {
+                signature["flags"] = string.Join(",", Flags.Select(item => item.Key + "=" + item.Value));
+            }
+
+            if (Metadata.TryGetValue("combatFamily.commandLog", out var commandLog) && !string.IsNullOrWhiteSpace(commandLog))
+            {
+                signature["commandLog"] = commandLog;
+            }
+
+            if (Metadata.TryGetValue("combatFamily.previousScenario", out var previousScenario) && !string.IsNullOrWhiteSpace(previousScenario))
+            {
+                signature["previousScenario"] = previousScenario;
+            }
+
+            if (Metadata.TryGetValue("combatFamily.scenario", out var scenario) && !string.IsNullOrWhiteSpace(scenario))
+            {
+                signature["scenarioMarker"] = scenario;
+            }
+
+            return signature;
+        }
 
         private static CombatEncounterEvidence ToEncounter(EncounterRuntimeState? encounter)
         {

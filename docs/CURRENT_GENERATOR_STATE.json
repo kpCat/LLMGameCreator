@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T04:05:00Z",
+    "updated_at_utc":  "2026-06-26T01:17:08Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 009 rule-pack combat faction social work theft foundations completed",
+    "current_phase_title":  "Goal 009 rule-pack combat faction social work theft foundations completed with S084A correctness hotfix",
     "gate_status":  "goal_009_rule_pack_combat_faction_social_work_theft_artifact_verification_required",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
     "active_manual_gate":  "Rule-pack combat/faction/social/work/theft artifact verification is the next stop marker after Goal 009.",
     "current_user_action":  "Review or hand off the generated .llmgc/procedural/rule-pack-combat-faction-social-work-theft folder; do not mark rule_pack_combat_faction_social_work_theft_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 009 records the user-confirmed rule_pack_gameplay_family_artifact_verification passed gate, completes S078-S084, and proves combat, faction reputation, social dialogue consequence, work contract reward, theft container transfer plus explicit consequence sequence and a combined loop through injected real GameRuntimeService-backed runtime evidence. Application default runtime adapter remains unavailable, save/load uses RuntimeStateSerializer and RuntimeSnapshotStore on full GameRuntimeState, binding audit is scenario-exact, and invalid/runtime/fake-success/isolation causality is honest. Stop at rule_pack_combat_faction_social_work_theft_artifact_verification.",
+    "recommended_next_decision":  "Goal 009 records the user-confirmed rule_pack_gameplay_family_artifact_verification passed gate, completes S078-S084 plus S084A correctness hotfix, and proves combat, faction reputation, social dialogue consequence, work contract reward, theft container transfer plus explicit consequence sequence and a combined loop through injected real GameRuntimeService-backed runtime evidence. S084A repairs exact command authorization, package binding audit depth, declaration-specific runtime result checks, real reputation clamping evidence, sequential valid-scenario isolation proof and injected-leak rejection. Application default runtime adapter remains unavailable, save/load uses RuntimeStateSerializer and RuntimeSnapshotStore on full GameRuntimeState, binding audit is scenario-exact, and invalid/runtime/fake-success/isolation causality is honest. Stop at rule_pack_combat_faction_social_work_theft_artifact_verification.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -57,26 +57,26 @@
                       },
     "last_completed_product_slice":  {
                                          "slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
-                                         "title":  "Rule-Pack Combat, Faction, Social, Work And Theft Foundations",
-                                         "completed_at_utc":  "2026-06-26T04:05:00Z",
-                                         "summary":  "Goal 009 completes S078-S084 after the user confirmed rule_pack_gameplay_family_artifact_verification passed. It adds deterministic headless acceptance artifacts under .llmgc/procedural/rule-pack-combat-faction-social-work-theft, keeps the Application default runtime adapter unavailable, injects a real GameRuntimeService adapter from tests/smoke, executes combat encounter/ability/AI, faction reputation, dialogue choice consequence, work interaction/transaction reward, container theft transfer plus explicit flag/reputation consequence and the combined loop through existing runtime services, preserves full GameRuntimeState through RuntimeStateSerializer and RuntimeSnapshotStore, rejects twelve invalid/fake/leak scenarios causally, and stops at rule_pack_combat_faction_social_work_theft_artifact_verification. It does not change public GamePackage/runtime schema, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
+                                         "title":  "Rule-Pack Combat, Faction, Social, Work And Theft Foundations + S084A Correctness Hotfix",
+                                         "completed_at_utc":  "2026-06-26T01:17:08Z",
+                                         "summary":  "Goal 009 completes S078-S084 after the user confirmed rule_pack_gameplay_family_artifact_verification passed, and S084A repairs acceptance false positives found during artifact review. It writes deterministic headless acceptance artifacts under .llmgc/procedural/rule-pack-combat-faction-social-work-theft, keeps the Application default runtime adapter unavailable, injects a real GameRuntimeService adapter from tests/smoke, executes combat encounter/ability/AI, clamped faction reputation, dialogue choice consequence, work interaction/transaction reward, container theft transfer plus explicit flag/reputation consequence and the combined loop through existing runtime services, preserves full GameRuntimeState through RuntimeStateSerializer and RuntimeSnapshotStore, rejects nineteen invalid/fake/leak scenarios causally, and stops at rule_pack_combat_faction_social_work_theft_artifact_verification. It does not change public GamePackage/runtime schema, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
                                          "scenario_id":  "rule-pack-combat-faction-social-work-theft",
                                          "checks":  [
-                                                        "RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 35/35 passed",
+                                                        "RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 38/38 passed",
                                                         "rule-pack-combat-faction-social-work-theft product smoke: 1/1 passed",
-                                                        "check-all.ps1: 765/765 tests passed, build 0 warnings / 0 errors"
+                                                        "check-all.ps1: 768/768 tests passed, build 0 warnings / 0 errors"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
                                                                             "slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
-                                                                            "title":  "Rule-Pack Combat, Faction, Social, Work And Theft Foundations",
-                                                                            "completed_at_utc":  "2026-06-26T04:05:00Z",
-                                                                            "summary":  "S078-S084 add headless deterministic combat/faction/social/work/theft acceptance artifacts under .llmgc/procedural/rule-pack-combat-faction-social-work-theft. The service records the Goal 008 gate as user-confirmed passed, keeps the Application default runtime adapter unavailable, proves valid scenarios only through an injected real GameRuntimeService adapter, runs existing encounter, AI, faction, dialogue, interaction, transaction, container and flag commands, preserves full GameRuntimeState through RuntimeStateSerializer and RuntimeSnapshotStore, and rejects twelve invalid scenarios including fake runtime success, save/load mismatch and cross-scenario leakage. The active manual gate is rule_pack_combat_faction_social_work_theft_artifact_verification.",
+                                                                            "title":  "Rule-Pack Combat, Faction, Social, Work And Theft Foundations + S084A Correctness Hotfix",
+                                                                            "completed_at_utc":  "2026-06-26T01:17:08Z",
+                                                                            "summary":  "S078-S084 add headless deterministic combat/faction/social/work/theft acceptance artifacts under .llmgc/procedural/rule-pack-combat-faction-social-work-theft, and S084A repairs review-found correctness gaps without starting post-Goal-009 work. The service records the Goal 008 gate as user-confirmed passed, keeps the Application default runtime adapter unavailable, proves valid scenarios only through an injected real GameRuntimeService adapter, runs existing encounter, AI, faction, dialogue, interaction, transaction, container and flag commands, audits exact command shapes and package bindings, proves clamped reputation, validates declaration-specific runtime outcomes, preserves full GameRuntimeState through RuntimeStateSerializer and RuntimeSnapshotStore, and rejects nineteen invalid scenarios including fake runtime success, save/load mismatch and concrete injected cross-scenario leakage. The active manual gate is rule_pack_combat_faction_social_work_theft_artifact_verification.",
                                                                             "scenario_id":  "rule-pack-combat-faction-social-work-theft",
                                                                             "checks":  [
-                                                                                           "RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 35/35 passed",
+                                                                                           "RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 38/38 passed",
                                                                                            "rule-pack-combat-faction-social-work-theft product smoke: 1/1 passed",
-                                                                                           "check-all.ps1: 765/765 tests passed, build 0 warnings / 0 errors"
+                                                                                           "check-all.ps1: 768/768 tests passed, build 0 warnings / 0 errors"
                                                                                        ]
                                                                         },
     "goal_008_rule_pack_gameplay_family_foundations":  {
