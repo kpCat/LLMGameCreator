@@ -54,6 +54,8 @@ function Write-ProductSmokeSummary {
         Join-Path $PackageOutputDir ".llmgc\procedural\semantic-runtime-composition\semantic-runtime-composition-report.json"
     } elseif ($Scenario -eq "connected-world-travel") {
         Join-Path $PackageOutputDir ".llmgc\procedural\connected-world-travel\connected-world-travel-report.json"
+    } elseif ($Scenario -eq "rule-pack-gameplay-family-foundations") {
+        Join-Path $PackageOutputDir ".llmgc\procedural\rule-pack-gameplay-family-foundations\rule-pack-gameplay-family-report.json"
     } elseif ($Scenario -eq "generated-microgame-loop" -or $Scenario -eq "runtime-owned-goal-progress" -or $Scenario -eq "runtime-reward-challenge-state") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-loop\generated-microgame-loop-snapshot.json"
     } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow" -or $Scenario -eq "generated-microgame-goal-loop" -or $Scenario -eq "generated-microgame-challenge-loop") {
@@ -236,6 +238,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "connected-world-travel") {
         $TestFilter = "FullyQualifiedName~ConnectedWorldTravelProductSmoke"
+    }
+    elseif ($Scenario -eq "rule-pack-gameplay-family-foundations") {
+        $TestFilter = "FullyQualifiedName~RulePackGameplayFamilyFoundationsProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

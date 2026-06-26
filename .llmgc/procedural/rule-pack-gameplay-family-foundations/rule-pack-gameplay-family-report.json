@@ -1,0 +1,2281 @@
+{
+  "schemaVersion": "1",
+  "deterministicHash": "e259ed73e11ccff8ae4add788fd1d764275610cd1d87439355b68f7c05d2da4c",
+  "accepted": true,
+  "manualGate": "rule_pack_gameplay_family_artifact_verification",
+  "goal007GateRecorded": true,
+  "completedSlices": [
+    "S071",
+    "S072",
+    "S073",
+    "S074",
+    "S075",
+    "S076",
+    "S077"
+  ],
+  "scenarioCount": 12,
+  "validScenarioCount": 6,
+  "invalidScenarioCount": 6,
+  "validScenariosAccepted": true,
+  "invalidScenariosRejected": true,
+  "packageRuleBindingAuditPassed": true,
+  "gameplayRuntimeExecutionPassed": true,
+  "saveLoadRoundtripPassed": true,
+  "deterministicReplayPassed": true,
+  "fakeRuntimeSuccessRejected": true,
+  "publicGamePackageSchemaChanged": false,
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "luaExecuted": false,
+    "unityExecuted": false,
+    "mediaExecuted": false
+  },
+  "declarations": {
+    "rulePackId": "rule_pack/gameplay_family_foundations_v1",
+    "rulesVersion": "goal008_v1",
+    "items": [
+      {
+        "declarationId": "decl/item/field_ration",
+        "packageItemId": "item/field_ration",
+        "familyId": "family/item_use"
+      },
+      {
+        "declarationId": "decl/item/focus_tonic",
+        "packageItemId": "item/focus_tonic",
+        "familyId": "family/status_effects"
+      }
+    ],
+    "equipment": [
+      {
+        "declarationId": "decl/equipment/scavenger_tool",
+        "packageItemId": "item/scavenger_tool",
+        "packageSlotId": "slot/tool",
+        "familyId": "family/equipment"
+      }
+    ],
+    "recipes": [
+      {
+        "declarationId": "decl/recipe/repair_wrap",
+        "packageRecipeId": "recipe/repair_wrap",
+        "familyId": "family/crafting",
+        "inputItemIds": [
+          "item/scrap",
+          "item/thread"
+        ],
+        "outputItemIds": [
+          "item/repair_wrap"
+        ]
+      }
+    ],
+    "transactions": [
+      {
+        "declarationId": "decl/transaction/buy_signal_charm",
+        "packageTransactionId": "transaction/buy_signal_charm",
+        "familyId": "family/trading",
+        "costItemIds": [
+          "item/trade_token"
+        ],
+        "outputItemIds": [
+          "item/signal_charm"
+        ]
+      }
+    ],
+    "statuses": [
+      {
+        "declarationId": "decl/status/focused",
+        "packageStatusId": "status/focused",
+        "familyId": "family/status_effects",
+        "durationTicks": 3
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "scenarioId": "gameplay_combined_loop",
+      "seed": "goal008-combined-loop-seed",
+      "deterministicHash": "f85adee6a1bb9861156298cdf2523e4797f2ed6c1dff2f3e46eedcd2cb78a304",
+      "expectedValid": true,
+      "actualValid": true,
+      "invalidKind": "",
+      "selectedGameplayFamilyIds": [
+        "family/items",
+        "family/inventory",
+        "family/equipment",
+        "family/crafting",
+        "family/trading",
+        "family/status_effects"
+      ],
+      "sourceDeclarationIds": [
+        "decl/equipment/scavenger_tool",
+        "decl/recipe/repair_wrap",
+        "decl/transaction/buy_signal_charm",
+        "decl/item/focus_tonic",
+        "decl/status/focused"
+      ],
+      "packageRuntimeIds": [
+        "item/scavenger_tool",
+        "slot/tool",
+        "recipe/repair_wrap",
+        "item/scrap",
+        "item/thread",
+        "item/repair_wrap",
+        "transaction/buy_signal_charm",
+        "item/trade_token",
+        "item/signal_charm",
+        "item/focus_tonic",
+        "status/focused",
+        "flag/goal008_complete"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "flag/goal008_complete",
+          "item/focus_tonic",
+          "item/repair_wrap",
+          "item/scavenger_tool",
+          "item/scrap",
+          "item/signal_charm",
+          "item/thread",
+          "item/trade_token",
+          "recipe/repair_wrap",
+          "slot/tool",
+          "status/focused",
+          "transaction/buy_signal_charm"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "439d88b17d028852d965be5f29de63199846f12431f8e3921d74da68f779c358",
+        "commands": [
+          {
+            "commandId": "01_equip_tool",
+            "commandType": "gameplay/equip_item",
+            "targetId": "item/scavenger_tool",
+            "secondaryTargetId": "slot/tool",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/focus_tonic": "1",
+                "item/scavenger_tool": "1",
+                "item/scrap": "2",
+                "item/thread": "1",
+                "item/trade_token": "3"
+              },
+              "after": {
+                "item/focus_tonic": "1",
+                "item/scrap": "2",
+                "item/thread": "1",
+                "item/trade_token": "3"
+              }
+            },
+            "equipmentDelta": {
+              "changed": true,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [
+                {
+                  "itemId": "item/scavenger_tool",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [
+                {
+                  "itemId": "item/scavenger_tool",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          },
+          {
+            "commandId": "02_craft_repair_wrap",
+            "commandType": "gameplay/craft_recipe",
+            "targetId": "recipe/repair_wrap",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/focus_tonic": "1",
+                "item/scrap": "2",
+                "item/thread": "1",
+                "item/trade_token": "3"
+              },
+              "after": {
+                "item/focus_tonic": "1",
+                "item/repair_wrap": "1",
+                "item/trade_token": "3"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              }
+            },
+            "craftingDelta": {
+              "changed": true,
+              "inputs": [
+                {
+                  "itemId": "item/scrap",
+                  "amountBefore": 2,
+                  "amountAfter": 0
+                },
+                {
+                  "itemId": "item/thread",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/repair_wrap",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [
+                {
+                  "itemId": "item/scrap",
+                  "amountBefore": 2,
+                  "amountAfter": 0
+                },
+                {
+                  "itemId": "item/thread",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/repair_wrap",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          },
+          {
+            "commandId": "03_buy_signal_charm",
+            "commandType": "gameplay/execute_transaction",
+            "targetId": "transaction/buy_signal_charm",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/focus_tonic": "1",
+                "item/repair_wrap": "1",
+                "item/trade_token": "3"
+              },
+              "after": {
+                "item/focus_tonic": "1",
+                "item/repair_wrap": "1",
+                "item/signal_charm": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [
+                {
+                  "itemId": "item/trade_token",
+                  "amountBefore": 3,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/signal_charm",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "tradeDelta": {
+              "changed": true,
+              "costs": [
+                {
+                  "itemId": "item/trade_token",
+                  "amountBefore": 3,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/signal_charm",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          },
+          {
+            "commandId": "04_use_focus_tonic",
+            "commandType": "gameplay/use_item",
+            "targetId": "item/focus_tonic",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/focus_tonic": "1",
+                "item/repair_wrap": "1",
+                "item/signal_charm": "1"
+              },
+              "after": {
+                "item/repair_wrap": "1",
+                "item/signal_charm": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [
+                {
+                  "itemId": "item/focus_tonic",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [
+                {
+                  "itemId": "item/focus_tonic",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": true,
+              "before": {},
+              "after": {
+                "status/focused@player": "3|04_use_focus_tonic"
+              }
+            },
+            "completionDelta": {
+              "changed": true,
+              "before": {},
+              "after": {
+                "flag/status_chain": "completed"
+              }
+            }
+          },
+          {
+            "commandId": "05_complete_loop",
+            "commandType": "gameplay/set_flag",
+            "targetId": "flag/goal008_complete",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": false,
+              "before": {
+                "item/repair_wrap": "1",
+                "item/signal_charm": "1"
+              },
+              "after": {
+                "item/repair_wrap": "1",
+                "item/signal_charm": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {
+                "status/focused@player": "3|04_use_focus_tonic"
+              },
+              "after": {
+                "status/focused@player": "3|04_use_focus_tonic"
+              }
+            },
+            "completionDelta": {
+              "changed": true,
+              "before": {
+                "flag/status_chain": "completed"
+              },
+              "after": {
+                "flag/goal008_complete": "completed",
+                "flag/status_chain": "completed"
+              }
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/focus_tonic": "1",
+          "item/scavenger_tool": "1",
+          "item/scrap": "2",
+          "item/thread": "1",
+          "item/trade_token": "3"
+        },
+        "inventoryAfter": {
+          "item/repair_wrap": "1",
+          "item/signal_charm": "1"
+        },
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": "item/scavenger_tool"
+        },
+        "statusBefore": {},
+        "statusAfter": {
+          "status/focused@player": "3|04_use_focus_tonic"
+        },
+        "completionRewardEvidence": {
+          "completionFlagId": "flag/goal008_complete",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "completed",
+          "rewardItemIds": [
+            "item/repair_wrap",
+            "item/signal_charm"
+          ]
+        },
+        "runtimeStateHash": "f6d013728e0f0b510d8ec8b058834847d7310ee8d1f2c2bd4271178d7ab6c728",
+        "restoredRuntimeStateHash": "f6d013728e0f0b510d8ec8b058834847d7310ee8d1f2c2bd4271178d7ab6c728",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_equip_tool:true|02_craft_repair_wrap:true|03_buy_signal_charm:true|04_use_focus_tonic:true|05_complete_loop:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=item/scavenger_tool",
+          "flags": "flag/goal008_complete=completed,flag/status_chain=completed",
+          "inventory": "item/repair_wrap=1,item/signal_charm=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_combined_loop",
+          "statuses": "status/focused@player=3|04_use_focus_tonic"
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_equip_tool:true|02_craft_repair_wrap:true|03_buy_signal_charm:true|04_use_focus_tonic:true|05_complete_loop:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=item/scavenger_tool",
+          "flags": "flag/goal008_complete=completed,flag/status_chain=completed",
+          "inventory": "item/repair_wrap=1,item/signal_charm=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_combined_loop",
+          "statuses": "status/focused@player=3|04_use_focus_tonic"
+        }
+      },
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "gameplay_crafting_recipe",
+      "seed": "goal008-crafting-recipe-seed",
+      "deterministicHash": "d2ebacf7ce8f7084683f5f15571f67fa48a2c308d398cca2f72e3d2934810600",
+      "expectedValid": true,
+      "actualValid": true,
+      "invalidKind": "",
+      "selectedGameplayFamilyIds": [
+        "family/crafting",
+        "family/resource_conversion"
+      ],
+      "sourceDeclarationIds": [
+        "decl/recipe/repair_wrap"
+      ],
+      "packageRuntimeIds": [
+        "recipe/repair_wrap",
+        "item/scrap",
+        "item/thread",
+        "item/repair_wrap"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/repair_wrap",
+          "item/scrap",
+          "item/thread",
+          "recipe/repair_wrap"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "411a25bf7b7ed8ba62a199f3a698908357d76dfc19c1876661519ed3e37d0a6e",
+        "commands": [
+          {
+            "commandId": "01_craft_repair_wrap",
+            "commandType": "gameplay/craft_recipe",
+            "targetId": "recipe/repair_wrap",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/scrap": "2",
+                "item/thread": "1"
+              },
+              "after": {
+                "item/repair_wrap": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": ""
+              }
+            },
+            "craftingDelta": {
+              "changed": true,
+              "inputs": [
+                {
+                  "itemId": "item/scrap",
+                  "amountBefore": 2,
+                  "amountAfter": 0
+                },
+                {
+                  "itemId": "item/thread",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/repair_wrap",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [
+                {
+                  "itemId": "item/scrap",
+                  "amountBefore": 2,
+                  "amountAfter": 0
+                },
+                {
+                  "itemId": "item/thread",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/repair_wrap",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/scrap": "2",
+          "item/thread": "1"
+        },
+        "inventoryAfter": {
+          "item/repair_wrap": "1"
+        },
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": [
+            "item/repair_wrap"
+          ]
+        },
+        "runtimeStateHash": "4913aa2ecfa67341db175e762449a62b99312daaa1f42731731b0462ad0d786c",
+        "restoredRuntimeStateHash": "4913aa2ecfa67341db175e762449a62b99312daaa1f42731731b0462ad0d786c",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_craft_repair_wrap:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/repair_wrap=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_crafting_recipe",
+          "statuses": ""
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_craft_repair_wrap:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/repair_wrap=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_crafting_recipe",
+          "statuses": ""
+        }
+      },
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "gameplay_equipment_loadout",
+      "seed": "goal008-equipment-loadout-seed",
+      "deterministicHash": "65207bf02cc04c60194a62c2a2c3cd3a344326bf0cdd70560cf610635ca275a8",
+      "expectedValid": true,
+      "actualValid": true,
+      "invalidKind": "",
+      "selectedGameplayFamilyIds": [
+        "family/equipment",
+        "family/loadout"
+      ],
+      "sourceDeclarationIds": [
+        "decl/equipment/scavenger_tool"
+      ],
+      "packageRuntimeIds": [
+        "item/scavenger_tool",
+        "slot/tool"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/scavenger_tool",
+          "slot/tool"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "d14c5ab412695411319131fdf8bb9b8659b7f935f68635d79b9f5d0ff678aac4",
+        "commands": [
+          {
+            "commandId": "01_equip_scavenger_tool",
+            "commandType": "gameplay/equip_item",
+            "targetId": "item/scavenger_tool",
+            "secondaryTargetId": "slot/tool",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/scavenger_tool": "1"
+              },
+              "after": {}
+            },
+            "equipmentDelta": {
+              "changed": true,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": "item/scavenger_tool"
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [
+                {
+                  "itemId": "item/scavenger_tool",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [
+                {
+                  "itemId": "item/scavenger_tool",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/scavenger_tool": "1"
+        },
+        "inventoryAfter": {},
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": "item/scavenger_tool"
+        },
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "b531fae6970b5094f94b9fe14de211442321c6a6e88b941fea3a803d581a45c6",
+        "restoredRuntimeStateHash": "b531fae6970b5094f94b9fe14de211442321c6a6e88b941fea3a803d581a45c6",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_equip_scavenger_tool:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=item/scavenger_tool",
+          "flags": "",
+          "inventory": "",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_equipment_loadout",
+          "statuses": ""
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_equip_scavenger_tool:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=item/scavenger_tool",
+          "flags": "",
+          "inventory": "",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_equipment_loadout",
+          "statuses": ""
+        }
+      },
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "gameplay_inventory_item_use",
+      "seed": "goal008-inventory-item-use-seed",
+      "deterministicHash": "2ea030751b8d2095385dc60fb5b3c9b648cdef3f7dcf9a4d72c454b770d65d96",
+      "expectedValid": true,
+      "actualValid": true,
+      "invalidKind": "",
+      "selectedGameplayFamilyIds": [
+        "family/items",
+        "family/inventory",
+        "family/item_use",
+        "family/status_effects"
+      ],
+      "sourceDeclarationIds": [
+        "decl/item/field_ration",
+        "decl/status/focused"
+      ],
+      "packageRuntimeIds": [
+        "item/field_ration",
+        "status/focused",
+        "flag/item_used"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "flag/item_used",
+          "item/field_ration",
+          "status/focused"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "b514a3fb22dd1e754f9fc4caa84d7dac1f2d5c7c03a230b21e42fbbd75c93a19",
+        "commands": [
+          {
+            "commandId": "01_use_field_ration",
+            "commandType": "gameplay/use_item",
+            "targetId": "item/field_ration",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/field_ration": "2"
+              },
+              "after": {
+                "item/field_ration": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": ""
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [
+                {
+                  "itemId": "item/field_ration",
+                  "amountBefore": 2,
+                  "amountAfter": 1
+                }
+              ],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [
+                {
+                  "itemId": "item/field_ration",
+                  "amountBefore": 2,
+                  "amountAfter": 1
+                }
+              ],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": true,
+              "before": {},
+              "after": {
+                "status/focused@player": "2|01_use_field_ration"
+              }
+            },
+            "completionDelta": {
+              "changed": true,
+              "before": {},
+              "after": {
+                "flag/item_used": "completed"
+              }
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/field_ration": "2"
+        },
+        "inventoryAfter": {
+          "item/field_ration": "1"
+        },
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "statusBefore": {},
+        "statusAfter": {
+          "status/focused@player": "2|01_use_field_ration"
+        },
+        "completionRewardEvidence": {
+          "completionFlagId": "flag/item_used",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "completed",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "0b87bc750f93e0568d8e93fae28af333d257477c536832321a2ff962a7955319",
+        "restoredRuntimeStateHash": "0b87bc750f93e0568d8e93fae28af333d257477c536832321a2ff962a7955319",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_use_field_ration:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "flag/item_used=completed",
+          "inventory": "item/field_ration=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_inventory_item_use",
+          "statuses": "status/focused@player=2|01_use_field_ration"
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_use_field_ration:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "flag/item_used=completed",
+          "inventory": "item/field_ration=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_inventory_item_use",
+          "statuses": "status/focused@player=2|01_use_field_ration"
+        }
+      },
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "gameplay_status_effect_chain",
+      "seed": "goal008-status-effect-chain-seed",
+      "deterministicHash": "c9133ca89b0d0de84cce1424bc6c38b758785635d86397aa63210525b176f102",
+      "expectedValid": true,
+      "actualValid": true,
+      "invalidKind": "",
+      "selectedGameplayFamilyIds": [
+        "family/status_effects",
+        "family/item_use"
+      ],
+      "sourceDeclarationIds": [
+        "decl/item/focus_tonic",
+        "decl/status/focused"
+      ],
+      "packageRuntimeIds": [
+        "item/focus_tonic",
+        "status/focused",
+        "flag/status_chain"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "flag/status_chain",
+          "item/focus_tonic",
+          "status/focused"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "b898d2fb27013b99b8e6a601ecf6a5dead9418d16b99101365546880cc018760",
+        "commands": [
+          {
+            "commandId": "01_use_focus_tonic",
+            "commandType": "gameplay/use_item",
+            "targetId": "item/focus_tonic",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/focus_tonic": "1"
+              },
+              "after": {}
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": ""
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [
+                {
+                  "itemId": "item/focus_tonic",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [
+                {
+                  "itemId": "item/focus_tonic",
+                  "amountBefore": 1,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": true,
+              "before": {},
+              "after": {
+                "status/focused@player": "3|01_use_focus_tonic"
+              }
+            },
+            "completionDelta": {
+              "changed": true,
+              "before": {},
+              "after": {
+                "flag/status_chain": "completed"
+              }
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/focus_tonic": "1"
+        },
+        "inventoryAfter": {},
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "statusBefore": {},
+        "statusAfter": {
+          "status/focused@player": "3|01_use_focus_tonic"
+        },
+        "completionRewardEvidence": {
+          "completionFlagId": "flag/status_chain",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "completed",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "e06976916d0c7a4b95b7f0709b85d444c5992f20c8a9b29a7f19919e5bba196e",
+        "restoredRuntimeStateHash": "e06976916d0c7a4b95b7f0709b85d444c5992f20c8a9b29a7f19919e5bba196e",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_use_focus_tonic:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "flag/status_chain=completed",
+          "inventory": "",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_status_effect_chain",
+          "statuses": "status/focused@player=3|01_use_focus_tonic"
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_use_focus_tonic:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "flag/status_chain=completed",
+          "inventory": "",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_status_effect_chain",
+          "statuses": "status/focused@player=3|01_use_focus_tonic"
+        }
+      },
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "gameplay_trading_transaction",
+      "seed": "goal008-trading-transaction-seed",
+      "deterministicHash": "2be676b98b915c23582080cef838db6d8d1200e6b2251cca653b0f97b323d937",
+      "expectedValid": true,
+      "actualValid": true,
+      "invalidKind": "",
+      "selectedGameplayFamilyIds": [
+        "family/trading",
+        "family/transaction"
+      ],
+      "sourceDeclarationIds": [
+        "decl/transaction/buy_signal_charm"
+      ],
+      "packageRuntimeIds": [
+        "transaction/buy_signal_charm",
+        "item/trade_token",
+        "item/signal_charm"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/signal_charm",
+          "item/trade_token",
+          "transaction/buy_signal_charm"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "3495077813ba7607be64aa91476c3180e43e1b11e9e8b62ce1c44690dea53af2",
+        "commands": [
+          {
+            "commandId": "01_buy_signal_charm",
+            "commandType": "gameplay/execute_transaction",
+            "targetId": "transaction/buy_signal_charm",
+            "secondaryTargetId": "",
+            "succeeded": true,
+            "diagnosticCode": "ok",
+            "diagnosticMessage": "",
+            "inventoryDelta": {
+              "changed": true,
+              "before": {
+                "item/trade_token": "3"
+              },
+              "after": {
+                "item/signal_charm": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": ""
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [
+                {
+                  "itemId": "item/trade_token",
+                  "amountBefore": 3,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/signal_charm",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "tradeDelta": {
+              "changed": true,
+              "costs": [
+                {
+                  "itemId": "item/trade_token",
+                  "amountBefore": 3,
+                  "amountAfter": 0
+                }
+              ],
+              "outputs": [
+                {
+                  "itemId": "item/signal_charm",
+                  "amountBefore": 0,
+                  "amountAfter": 1
+                }
+              ]
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/trade_token": "3"
+        },
+        "inventoryAfter": {
+          "item/signal_charm": "1"
+        },
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": [
+            "item/signal_charm"
+          ]
+        },
+        "runtimeStateHash": "3bd45ba37425d8307fb0c5db30e47bae0b782c7e0e090e5edb4e2ff6faf16541",
+        "restoredRuntimeStateHash": "3bd45ba37425d8307fb0c5db30e47bae0b782c7e0e090e5edb4e2ff6faf16541",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_buy_signal_charm:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/signal_charm=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_trading_transaction",
+          "statuses": ""
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_buy_signal_charm:true",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/signal_charm=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "gameplay_trading_transaction",
+          "statuses": ""
+        }
+      },
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "invalid_crafting_missing_inputs",
+      "seed": "goal008-invalid-crafting-inputs",
+      "deterministicHash": "b14603cbd04400edd9c35aceb5a6b9545171c8c6ae7a55d3fa889f6acb938f44",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "crafting_missing_inputs",
+      "selectedGameplayFamilyIds": [
+        "family/crafting"
+      ],
+      "sourceDeclarationIds": [
+        "decl/recipe/repair_wrap"
+      ],
+      "packageRuntimeIds": [
+        "recipe/repair_wrap",
+        "item/scrap",
+        "item/thread"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/scrap",
+          "item/thread",
+          "recipe/repair_wrap"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "2c55683fd36859e0bfeec795a369cfd45a7a1d99b61db2f98420c480b18cccf1",
+        "commands": [
+          {
+            "commandId": "01_craft_without_inputs",
+            "commandType": "gameplay/craft_recipe",
+            "targetId": "recipe/repair_wrap",
+            "secondaryTargetId": "",
+            "succeeded": false,
+            "diagnosticCode": "crafting.missing_inputs",
+            "diagnosticMessage": "Recipe lacks required input item amounts.",
+            "inventoryDelta": {
+              "changed": false,
+              "before": {
+                "item/scrap": "1"
+              },
+              "after": {
+                "item/scrap": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": ""
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/scrap": "1"
+        },
+        "inventoryAfter": {
+          "item/scrap": "1"
+        },
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "5197eb50cbf7c06be88e95330614294ba1ba1224b2f8f382843902d260de7fa8",
+        "restoredRuntimeStateHash": "5197eb50cbf7c06be88e95330614294ba1ba1224b2f8f382843902d260de7fa8",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_craft_without_inputs:false",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/scrap=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "invalid_crafting_missing_inputs",
+          "statuses": ""
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_craft_without_inputs:false",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/scrap=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "invalid_crafting_missing_inputs",
+          "statuses": ""
+        }
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "gameplay_family.evidence.required_command_failed",
+          "target": "01_craft_without_inputs",
+          "message": "Required runtime command did not succeed."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.evidence.state_delta_missing",
+          "target": "01_craft_without_inputs",
+          "message": "Runtime command did not prove an attributable state delta."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.runtime_command_failed",
+          "target": "invalid_crafting_missing_inputs",
+          "message": "Invalid runtime scenario failed during command execution."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_equipment_slot_mismatch",
+      "seed": "goal008-invalid-slot-mismatch",
+      "deterministicHash": "2919200d0ff43b8087c956d899ded47b2fd8d91c95e669fdfd0b3c192f24c091",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "equipment_slot_mismatch",
+      "selectedGameplayFamilyIds": [
+        "family/equipment"
+      ],
+      "sourceDeclarationIds": [
+        "decl/equipment/scavenger_tool"
+      ],
+      "packageRuntimeIds": [
+        "item/scavenger_tool",
+        "slot/charm"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/scavenger_tool",
+          "slot/charm"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "00a3c70aa16980b7567ead12d7973e174a4a4464a8e2307e661a8424df706eed",
+        "commands": [
+          {
+            "commandId": "01_equip_wrong_slot",
+            "commandType": "gameplay/equip_item",
+            "targetId": "item/scavenger_tool",
+            "secondaryTargetId": "slot/charm",
+            "succeeded": false,
+            "diagnosticCode": "equipment.slot_mismatch",
+            "diagnosticMessage": "Equipment item cannot be equipped into this slot.",
+            "inventoryDelta": {
+              "changed": false,
+              "before": {
+                "item/scavenger_tool": "1"
+              },
+              "after": {
+                "item/scavenger_tool": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": ""
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/scavenger_tool": "1"
+        },
+        "inventoryAfter": {
+          "item/scavenger_tool": "1"
+        },
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "7815e2a087621bf4246388dbb7b60b74b6e9f14202361efa757f217792222b48",
+        "restoredRuntimeStateHash": "7815e2a087621bf4246388dbb7b60b74b6e9f14202361efa757f217792222b48",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_equip_wrong_slot:false",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/scavenger_tool=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "invalid_equipment_slot_mismatch",
+          "statuses": ""
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_equip_wrong_slot:false",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/scavenger_tool=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "invalid_equipment_slot_mismatch",
+          "statuses": ""
+        }
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "gameplay_family.evidence.required_command_failed",
+          "target": "01_equip_wrong_slot",
+          "message": "Required runtime command did not succeed."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.evidence.state_delta_missing",
+          "target": "01_equip_wrong_slot",
+          "message": "Runtime command did not prove an attributable state delta."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.runtime_command_failed",
+          "target": "invalid_equipment_slot_mismatch",
+          "message": "Invalid runtime scenario failed during command execution."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_fake_runtime_success",
+      "seed": "goal008-invalid-fake-success",
+      "deterministicHash": "03f4d1dd3e2fd3489a397f8c857ee057c8feaaa2562eabcba7158b3af47a340a",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "fake_runtime_success",
+      "selectedGameplayFamilyIds": [
+        "family/items",
+        "family/equipment",
+        "family/crafting",
+        "family/trading",
+        "family/status_effects"
+      ],
+      "sourceDeclarationIds": [
+        "decl/item/focus_tonic",
+        "decl/status/focused"
+      ],
+      "packageRuntimeIds": [
+        "item/focus_tonic",
+        "status/focused"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/focus_tonic",
+          "status/focused"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "e8e83e0088a3cb09e3111aa8cd30565878d72ae819a7b7b259faf66191cefecb",
+        "commands": [],
+        "inventoryBefore": {},
+        "inventoryAfter": {},
+        "equipmentBefore": {},
+        "equipmentAfter": {},
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "1bd841b642dcd19da91296408baae3c007bcec8eb92dca8aa0bd63d833dbedb7",
+        "restoredRuntimeStateHash": "1bd841b642dcd19da91296408baae3c007bcec8eb92dca8aa0bd63d833dbedb7",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "copiedIds": "item/focus_tonic|status/focused",
+          "scenarioId": "invalid_fake_runtime_success"
+        },
+        "restoredStateEvidence": {
+          "copiedIds": "item/focus_tonic|status/focused",
+          "scenarioId": "invalid_fake_runtime_success"
+        }
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "gameplay_family.evidence.required_command_missing",
+          "target": "01_use_fake_tonic",
+          "message": "Required runtime command evidence is missing."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_missing_item_or_recipe_ref",
+      "seed": "goal008-invalid-missing-ref",
+      "deterministicHash": "dc06f8bf3937143efd02becdd65186cd4fc843a6de53ee1932f21de08d631834",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "missing_item_or_recipe_ref",
+      "selectedGameplayFamilyIds": [
+        "family/crafting"
+      ],
+      "sourceDeclarationIds": [
+        "decl/recipe/repair_wrap"
+      ],
+      "packageRuntimeIds": [
+        "recipe/repair_wrap",
+        "item/missing_scrap"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/missing_scrap",
+          "recipe/repair_wrap"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "gameplay_family.audit.missing_item_ref",
+            "target": "decl/recipe/repair_wrap",
+            "message": "Gameplay recipe declaration references a missing package item."
+          },
+          {
+            "severity": "error",
+            "code": "gameplay_family.audit.missing_item_ref",
+            "target": "item/missing_scrap",
+            "message": "Scenario references a missing package item."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "inventoryBefore": {},
+        "inventoryAfter": {},
+        "equipmentBefore": {},
+        "equipmentAfter": {},
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "stateEvidence": {},
+        "restoredStateEvidence": {}
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "gameplay_family.audit.missing_item_ref",
+          "target": "decl/recipe/repair_wrap",
+          "message": "Gameplay recipe declaration references a missing package item."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.audit.missing_item_ref",
+          "target": "item/missing_scrap",
+          "message": "Scenario references a missing package item."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_status_or_effect_binding",
+      "seed": "goal008-invalid-status-binding",
+      "deterministicHash": "2d0d5fc9ce4000298c29d18af46f665261ea50c84d98eb9b185fe2fcbd627033",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "status_or_effect_binding",
+      "selectedGameplayFamilyIds": [
+        "family/status_effects"
+      ],
+      "sourceDeclarationIds": [
+        "decl/status/focused"
+      ],
+      "packageRuntimeIds": [
+        "item/focus_tonic",
+        "status/missing_focus"
+      ],
+      "packageBindingAudit": {
+        "passed": false,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/focus_tonic",
+          "status/missing_focus"
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "gameplay_family.audit.invalid_status_effect_binding",
+            "target": "decl/status/focused",
+            "message": "Gameplay status declaration is not bound to a package status."
+          },
+          {
+            "severity": "error",
+            "code": "gameplay_family.audit.invalid_status_effect_binding",
+            "target": "status/missing_focus",
+            "message": "Scenario references a missing package status."
+          }
+        ]
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": false,
+        "runtimeStartSucceeded": false,
+        "runtimeStateOwner": "",
+        "packageId": "",
+        "runtimeEvidenceHash": "",
+        "commands": [],
+        "inventoryBefore": {},
+        "inventoryAfter": {},
+        "equipmentBefore": {},
+        "equipmentAfter": {},
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "",
+        "restoredRuntimeStateHash": "",
+        "saveLoadRoundtripPassed": false,
+        "stateEvidence": {},
+        "restoredStateEvidence": {}
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "gameplay_family.audit.invalid_status_effect_binding",
+          "target": "decl/status/focused",
+          "message": "Gameplay status declaration is not bound to a package status."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.audit.invalid_status_effect_binding",
+          "target": "status/missing_focus",
+          "message": "Scenario references a missing package status."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_trade_insufficient_cost",
+      "seed": "goal008-invalid-trade-cost",
+      "deterministicHash": "35e09376189bb7a93685d04ed5f2754f23909821725e0665a8e2cdc5e4066015",
+      "expectedValid": false,
+      "actualValid": false,
+      "invalidKind": "trade_insufficient_cost",
+      "selectedGameplayFamilyIds": [
+        "family/trading"
+      ],
+      "sourceDeclarationIds": [
+        "decl/transaction/buy_signal_charm"
+      ],
+      "packageRuntimeIds": [
+        "transaction/buy_signal_charm",
+        "item/trade_token",
+        "item/signal_charm"
+      ],
+      "packageBindingAudit": {
+        "passed": true,
+        "packageId": "game/goal008-gameplay-family",
+        "auditedDeclarationIds": [
+          "decl/equipment/scavenger_tool",
+          "decl/item/field_ration",
+          "decl/item/focus_tonic",
+          "decl/recipe/repair_wrap",
+          "decl/status/focused",
+          "decl/transaction/buy_signal_charm"
+        ],
+        "auditedPackageRuntimeIds": [
+          "item/signal_charm",
+          "item/trade_token",
+          "transaction/buy_signal_charm"
+        ],
+        "diagnostics": []
+      },
+      "runtimeEvidence": {
+        "runtimeAttempted": true,
+        "runtimeStartSucceeded": true,
+        "runtimeStateOwner": "GameRuntimeState",
+        "packageId": "game/goal008-gameplay-family",
+        "runtimeEvidenceHash": "3e99ccf1a2b99f4566c0ea5c50a89440dc7b9e153b797d10cee9788f03ee2340",
+        "commands": [
+          {
+            "commandId": "01_buy_without_cost",
+            "commandType": "gameplay/execute_transaction",
+            "targetId": "transaction/buy_signal_charm",
+            "secondaryTargetId": "",
+            "succeeded": false,
+            "diagnosticCode": "trade.insufficient_cost",
+            "diagnosticMessage": "Transaction lacks required cost item amounts.",
+            "inventoryDelta": {
+              "changed": false,
+              "before": {
+                "item/trade_token": "1"
+              },
+              "after": {
+                "item/trade_token": "1"
+              }
+            },
+            "equipmentDelta": {
+              "changed": false,
+              "before": {
+                "slot/charm": "",
+                "slot/tool": ""
+              },
+              "after": {
+                "slot/charm": "",
+                "slot/tool": ""
+              }
+            },
+            "craftingDelta": {
+              "changed": false,
+              "inputs": [],
+              "outputs": []
+            },
+            "tradeDelta": {
+              "changed": false,
+              "costs": [],
+              "outputs": []
+            },
+            "statusDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            },
+            "completionDelta": {
+              "changed": false,
+              "before": {},
+              "after": {}
+            }
+          }
+        ],
+        "inventoryBefore": {
+          "item/trade_token": "1"
+        },
+        "inventoryAfter": {
+          "item/trade_token": "1"
+        },
+        "equipmentBefore": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "equipmentAfter": {
+          "slot/charm": "",
+          "slot/tool": ""
+        },
+        "statusBefore": {},
+        "statusAfter": {},
+        "completionRewardEvidence": {
+          "completionFlagId": "",
+          "completionFlagBefore": "",
+          "completionFlagAfter": "",
+          "rewardItemIds": []
+        },
+        "runtimeStateHash": "062a368622e291b5f8a2e14d2a447be395739e86a73b303c04ec4079c2d2171f",
+        "restoredRuntimeStateHash": "062a368622e291b5f8a2e14d2a447be395739e86a73b303c04ec4079c2d2171f",
+        "saveLoadRoundtripPassed": true,
+        "stateEvidence": {
+          "commandLog": "01_buy_without_cost:false",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/trade_token=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "invalid_trade_insufficient_cost",
+          "statuses": ""
+        },
+        "restoredStateEvidence": {
+          "commandLog": "01_buy_without_cost:false",
+          "currentMapId": "map/goal008-start",
+          "equipment": "slot/charm=,slot/tool=",
+          "flags": "",
+          "inventory": "item/trade_token=1",
+          "packageId": "game/goal008-gameplay-family",
+          "scenarioId": "invalid_trade_insufficient_cost",
+          "statuses": ""
+        }
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "gameplay_family.evidence.required_command_failed",
+          "target": "01_buy_without_cost",
+          "message": "Required runtime command did not succeed."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.evidence.state_delta_missing",
+          "target": "01_buy_without_cost",
+          "message": "Runtime command did not prove an attributable state delta."
+        },
+        {
+          "severity": "error",
+          "code": "gameplay_family.runtime_command_failed",
+          "target": "invalid_trade_insufficient_cost",
+          "message": "Invalid runtime scenario failed during command execution."
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "error",
+      "code": "gameplay_family.audit.invalid_status_effect_binding",
+      "target": "decl/status/focused",
+      "message": "Gameplay status declaration is not bound to a package status."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.audit.invalid_status_effect_binding",
+      "target": "status/missing_focus",
+      "message": "Scenario references a missing package status."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.audit.missing_item_ref",
+      "target": "decl/recipe/repair_wrap",
+      "message": "Gameplay recipe declaration references a missing package item."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.audit.missing_item_ref",
+      "target": "item/missing_scrap",
+      "message": "Scenario references a missing package item."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.evidence.required_command_failed",
+      "target": "01_buy_without_cost",
+      "message": "Required runtime command did not succeed."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.evidence.required_command_failed",
+      "target": "01_craft_without_inputs",
+      "message": "Required runtime command did not succeed."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.evidence.required_command_failed",
+      "target": "01_equip_wrong_slot",
+      "message": "Required runtime command did not succeed."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.evidence.required_command_missing",
+      "target": "01_use_fake_tonic",
+      "message": "Required runtime command evidence is missing."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.evidence.state_delta_missing",
+      "target": "01_buy_without_cost",
+      "message": "Runtime command did not prove an attributable state delta."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.evidence.state_delta_missing",
+      "target": "01_craft_without_inputs",
+      "message": "Runtime command did not prove an attributable state delta."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.evidence.state_delta_missing",
+      "target": "01_equip_wrong_slot",
+      "message": "Runtime command did not prove an attributable state delta."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.runtime_command_failed",
+      "target": "invalid_crafting_missing_inputs",
+      "message": "Invalid runtime scenario failed during command execution."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.runtime_command_failed",
+      "target": "invalid_equipment_slot_mismatch",
+      "message": "Invalid runtime scenario failed during command execution."
+    },
+    {
+      "severity": "error",
+      "code": "gameplay_family.runtime_command_failed",
+      "target": "invalid_trade_insufficient_cost",
+      "message": "Invalid runtime scenario failed during command execution."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.fake_success_rejected",
+      "target": "invalid_fake_runtime_success",
+      "message": "Copied ids plus a success boolean must not satisfy acceptance."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.goal007_gate_recorded",
+      "target": "connected_world_travel_state_artifact_verification",
+      "message": "User-confirmed Goal 007 connected-world artifact verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.invalid_scenarios_rejected",
+      "target": "invalid_scenarios",
+      "message": "All required invalid gameplay-family scenarios must fail by real diagnostics or runtime evidence."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.no_external_execution",
+      "target": "harness",
+      "message": "No LLM, RAG, provider, Lua, Unity or media execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.package_bindings_verified",
+      "target": "package_bindings",
+      "message": "Every selected declaration id must bind to exact package/runtime ids before runtime execution."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.replay_stable",
+      "target": "gameplay_combined_loop",
+      "message": "Repeated command execution must produce stable scenario and runtime hashes."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.runtime_commands_executed",
+      "target": "runtime_commands",
+      "message": "Runtime command evidence must contain successful commands and state deltas."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.save_load_roundtrip_passed",
+      "target": "runtime_state",
+      "message": "Save/load must restore exact gameplay-family state evidence."
+    },
+    {
+      "severity": "info",
+      "code": "gameplay_family.valid_scenarios_accepted",
+      "target": "valid_scenarios",
+      "message": "All required valid gameplay-family scenarios must be accepted."
+    }
+  ],
+  "remainingPrimitiveLimits": [
+    "combat, factions, reputation, social, work and theft families remain for later goals",
+    "prices, markets and vendor restocking remain deterministic declaration/runtime primitives only",
+    "Unity presentation and Runtime Preview UI are not implemented in this goal",
+    "Lua/provider/media execution remains locked"
+  ]
+}
