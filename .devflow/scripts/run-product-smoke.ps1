@@ -17,6 +17,7 @@ $MarkdownPath = Join-Path $RunDir "product-smoke-summary.md"
 $LogIndexPath = Join-Path $RunDir "logs.txt"
 $TestResultsDir = Join-Path $RunDir "test-results"
 $PackageOutputDir = Join-Path $RunDir "package-output"
+$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha") { $RepoRoot } else { $PackageOutputDir }
 $TestFilter = "FullyQualifiedName~ProductSmoke"
 $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
 
@@ -67,7 +68,7 @@ function Write-ProductSmokeSummary {
     } elseif ($Scenario -eq "alpha-runnable-build") {
         Join-Path $PackageOutputDir ".llmgc\procedural\alpha-runnable-build\alpha-runnable-build-report.json"
     } elseif ($Scenario -eq "unity-playable-alpha") {
-        Join-Path $PackageOutputDir ".llmgc\procedural\unity-playable-alpha\unity-playable-alpha-report.json"
+        Join-Path $ScenarioArtifactRoot ".llmgc\procedural\unity-playable-alpha\unity-playable-alpha-report.json"
     } elseif ($Scenario -eq "generated-microgame-loop" -or $Scenario -eq "runtime-owned-goal-progress" -or $Scenario -eq "runtime-reward-challenge-state") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-loop\generated-microgame-loop-snapshot.json"
     } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow" -or $Scenario -eq "generated-microgame-goal-loop" -or $Scenario -eq "generated-microgame-challenge-loop") {
@@ -278,7 +279,7 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
 
     $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
     $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR = $PackageOutputDir
-    $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR = $PackageOutputDir
+    $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR = $ScenarioArtifactRoot
 
     Invoke-DevflowLoggedCommand -Name "product-smoke-test" -Exe "dotnet" -ArgsList @(
         "test",

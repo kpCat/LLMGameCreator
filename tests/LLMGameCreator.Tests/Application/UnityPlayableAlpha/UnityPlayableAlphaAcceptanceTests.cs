@@ -51,6 +51,10 @@ public sealed class UnityPlayableAlphaAcceptanceTests
         Assert.True(File.Exists(write.VerificationMarkdownPath));
         Assert.True(Directory.Exists(write.StagingDirectoryPath));
         Assert.True(Directory.Exists(write.BuildDirectoryPath));
+        Assert.DoesNotContain(@"C:\", result.VerificationMarkdown, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("C:/", result.VerificationMarkdown, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain(@"Users\", result.VerificationMarkdown, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("- Unity command: (omitted; local machine paths are not part of compact deterministic root artifacts)", result.VerificationMarkdown);
 
         var roundTrip = JsonSerializer.Deserialize<UnityPlayableAlphaReport>(
             await File.ReadAllTextAsync(write.ReportJsonPath),

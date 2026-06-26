@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T18:15:00Z",
+    "updated_at_utc":  "2026-06-26T18:45:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 014 Unity playable presentation and firewall-safe build verification required",
+    "current_phase_title":  "Goal 014 Unity playable presentation and firewall-safe build verification required after S121B root artifact hotfix",
     "gate_status":  "unity_playable_presentation_firewall_safe_build_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_014_unity_playable_presentation_firewall_safe_build",
+    "last_completed_product_slice_id":  "product_slice_121b_unity_playable_alpha_root_artifacts_hotfix",
     "active_manual_gate":  "Goal 014 produced a visible Unity playable Alpha presentation, automated movement/interaction logs and release-style Windows build discipline evidence; unity_playable_presentation_firewall_safe_build_verification remains required and not passed until review/play evidence is accepted.",
     "current_user_action":  "Review the produced Unity playable Alpha report, Unity build log, launch/play-loop logs, movement/interaction proof and firewall-safe build flags; do not mark unity_playable_presentation_firewall_safe_build_verification passed until the real player evidence is accepted.",
-    "recommended_next_decision":  "The user confirmed alpha_runnable_windows_build_verification passed before Goal 014. Goal 014 adds a narrow Application-layer Unity playable Alpha acceptance service under Design/UnityPlayableAlpha, reuses the accepted Goal 013 Alpha build/staging evidence, renders a simple Unity IMGUI map/player/NPC/item/status presentation, proves keyboard-style movement, bounds blocking, focus/select and generated command interaction through automated player logs, removes Development build mode from the repo-local Alpha build entrypoint, records firewall-safe build flags and adds the unity-playable-alpha product smoke route. Goal 014 stops at unity_playable_presentation_firewall_safe_build_verification required; do not mark it passed until the produced player evidence and firewall-safe build proof are accepted.",
+    "recommended_next_decision":  "The user confirmed alpha_runnable_windows_build_verification passed before Goal 014. Goal 014 adds a narrow Application-layer Unity playable Alpha acceptance service under Design/UnityPlayableAlpha, reuses the accepted Goal 013 Alpha build/staging evidence, renders a simple Unity IMGUI map/player/NPC/item/status presentation, proves keyboard-style movement, bounds blocking, focus/select and generated command interaction through automated player logs, removes Development build mode from the repo-local Alpha build entrypoint, records firewall-safe build flags and adds the unity-playable-alpha product smoke route. S121B repairs the same Goal 014 artifact family by routing the unity-playable-alpha product smoke regeneration to the repository root so compact review artifacts are present under .llmgc/procedural/unity-playable-alpha while heavy build/log/unity-work outputs stay covered by .gitignore. Goal 014 stops at unity_playable_presentation_firewall_safe_build_verification required; do not mark it passed until the produced player evidence and firewall-safe build proof are accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -474,6 +474,7 @@
                                                                             "Automated play-loop diagnostic logs two valid movement steps, one blocked bounds movement, focus/select and generated command interactions",
                                                                             "Alpha build entrypoint uses BuildOptions.None and static checks reject Development/Profiler/Debug flags",
                                                                             "Product smoke route is unity-playable-alpha",
+                                                                            "S121B regenerates compact repo-local root review artifacts while .gitignore keeps generated Unity build/log/unity-work outputs ignored",
                                                                             "Gate remains required and is not marked passed"
                                                                                         ],
                                                                         "next_action":  "review_unity_playable_alpha_evidence_before_marking_gate_passed"
@@ -507,12 +508,26 @@
                                                                "check-all.ps1: 799/799 tests passed, build 0 warnings / 0 errors"
                                                             ]
                                              },
+    "product_slice_121b_unity_playable_alpha_root_artifacts_hotfix":  {
+                                                                         "slice_id":  "product_slice_121b_unity_playable_alpha_root_artifacts_hotfix",
+                                                                         "title":  "Unity Playable Alpha Root Artifacts Hotfix",
+                                                                         "status":  "verification_required",
+                                                                         "blocked_at_utc":  "",
+                                                                         "summary":  "S121B repairs the Goal 014 artifact family without starting S122 or Goal 015. The unity-playable-alpha product smoke route regenerates compact review artifacts under .llmgc/procedural/unity-playable-alpha in the repository root through the existing UnityPlayableAlphaAcceptanceService path. Heavy generated build, logs and unity-work outputs remain outside the intended review artifact set and are still covered by .gitignore. The unity_playable_presentation_firewall_safe_build_verification gate remains required, not passed.",
+                                                                         "scenario_id":  "unity-playable-alpha",
+                                                                         "checks":  [
+                                                                                        "S121B filtered tests (UnityPlayableAlpha/AlphaRunnableBuild/CurrentGeneratorStateDocsTests): 27/27 passed",
+                                                                                        "S121B unity-playable-alpha product smoke: 1/1 passed and regenerated repo-local root artifacts",
+                                                                                        "S121B report hash ae71aa9ad5fbf64a2c53e6d19dcc0777d80020ad0ded0420f7ccaef75b63389c, build manifest hash 3206cf8df96775f7affcf8c904a18afb28bb404c757fc401a2146441a6cf5d24",
+                                                                                        "S121B check-all.ps1: 803/803 tests passed, build 0 warnings / 0 errors"
+                                                                                    ]
+                                                                     },
     "goal_014_unity_playable_presentation_firewall_safe_build":  {
                                                                      "slice_id":  "goal_014_unity_playable_presentation_firewall_safe_build",
                                                                      "title":  "Unity Playable Presentation And Firewall-Safe Build",
                                                                      "status":  "verification_required",
                                                                      "blocked_at_utc":  "",
-                                                                     "summary":  "Goal 014 records the user-confirmed alpha_runnable_windows_build_verification passed gate, adds a narrow Application-layer Unity playable Alpha acceptance service under Design/UnityPlayableAlpha, reuses the accepted Goal 013 Alpha build/staging path, writes deterministic artifacts under .llmgc/procedural/unity-playable-alpha, extends the repo-local Unity Alpha runtime with a visible IMGUI map/player/NPC/item/status presentation, logs automated movement, blocked bounds validation, focus/select and generated command interactions, removes Development build mode from the Alpha BuildPipeline entrypoint, records firewall-safe build metadata/static checks and adds the unity-playable-alpha product smoke route while keeping the final gate required. Generated Unity build outputs are ignored by .gitignore; compact report and verification artifacts remain eligible for review.",
+                                                                     "summary":  "Goal 014 records the user-confirmed alpha_runnable_windows_build_verification passed gate, adds a narrow Application-layer Unity playable Alpha acceptance service under Design/UnityPlayableAlpha, reuses the accepted Goal 013 Alpha build/staging path, writes deterministic artifacts under .llmgc/procedural/unity-playable-alpha, extends the repo-local Unity Alpha runtime with a visible IMGUI map/player/NPC/item/status presentation, logs automated movement, blocked bounds validation, focus/select and generated command interactions, removes Development build mode from the Alpha BuildPipeline entrypoint, records firewall-safe build metadata/static checks and adds the unity-playable-alpha product smoke route while keeping the final gate required. S121B routes the unity-playable-alpha product smoke regeneration to the repository root so compact report and verification artifacts are present for review. Generated Unity build outputs are ignored by .gitignore; compact report and verification artifacts remain eligible for review.",
                                                                      "scenario_id":  "unity-playable-alpha",
                                                                      "checks":  [
                                                                                     "UnityPlayableAlpha/AlphaRunnableBuild/CurrentGeneratorStateDocsTests filtered tests: 27/27 passed",

@@ -448,12 +448,29 @@ public sealed class UnityPlayableAlphaAcceptanceService
             string.Empty,
             "## Underlying Alpha Build Verification",
             string.Empty,
-            alphaVerificationMarkdown.TrimEnd()
+            SanitizeEmbeddedAlphaVerification(alphaVerificationMarkdown).TrimEnd()
         };
 
         return string.Join(Environment.NewLine, lines) + Environment.NewLine;
 
         static string Display(string value) => string.IsNullOrWhiteSpace(value) ? "(none)" : value;
+
+        static string SanitizeEmbeddedAlphaVerification(string markdown)
+        {
+            var lines = markdown.Replace("\r\n", "\n", StringComparison.Ordinal).Split('\n');
+            for (var index = 0; index < lines.Length; index++)
+            {
+                var line = lines[index];
+                if (line.StartsWith("- Unity command:", StringComparison.Ordinal) ||
+                    line.StartsWith("- Launch command:", StringComparison.Ordinal) ||
+                    line.StartsWith("- Play-loop command:", StringComparison.Ordinal))
+                {
+                    lines[index] = line[..line.IndexOf(':')] + ": (omitted; local machine paths are not part of compact deterministic root artifacts)";
+                }
+            }
+
+            return string.Join(Environment.NewLine, lines);
+        }
     }
 
     private static Dictionary<string, string> ParseKeyValueLog(IEnumerable<string> lines)
