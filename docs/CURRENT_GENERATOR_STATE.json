@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T03:30:00Z",
+    "updated_at_utc":  "2026-06-26T04:05:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 008 rule-pack gameplay family foundations S077A hotfix completed",
-    "gate_status":  "goal_008_rule_pack_gameplay_family_artifact_verification_required",
+    "current_phase_title":  "Goal 009 rule-pack combat faction social work theft foundations completed",
+    "gate_status":  "goal_009_rule_pack_combat_faction_social_work_theft_artifact_verification_required",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "product_slice_077a_rule_pack_gameplay_runtime_integration_correctness_hotfix",
-    "active_manual_gate":  "Rule-pack gameplay family artifact verification is the next stop marker after Goal 008.",
-    "current_user_action":  "Review or hand off the generated .llmgc/procedural/rule-pack-gameplay-family-foundations folder; do not mark rule_pack_gameplay_family_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 008 now includes the S077A correctness hotfix: valid gameplay-family runtime evidence is produced only through an injected real GameRuntimeService adapter from tests/smoke, the default Application adapter is unavailable, save/load uses RuntimeStateSerializer and RuntimeSnapshotStore, binding audit is scenario-exact, and invalid/runtime causality is honest. Stop at rule_pack_gameplay_family_artifact_verification; do not start post-Goal-008 work until this gate is reviewed.",
+    "last_completed_product_slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
+    "active_manual_gate":  "Rule-pack combat/faction/social/work/theft artifact verification is the next stop marker after Goal 009.",
+    "current_user_action":  "Review or hand off the generated .llmgc/procedural/rule-pack-combat-faction-social-work-theft folder; do not mark rule_pack_combat_faction_social_work_theft_artifact_verification passed until the artifact review accepts it.",
+    "recommended_next_decision":  "Goal 009 records the user-confirmed rule_pack_gameplay_family_artifact_verification passed gate, completes S078-S084, and proves combat, faction reputation, social dialogue consequence, work contract reward, theft container transfer plus explicit consequence sequence and a combined loop through injected real GameRuntimeService-backed runtime evidence. Application default runtime adapter remains unavailable, save/load uses RuntimeStateSerializer and RuntimeSnapshotStore on full GameRuntimeState, binding audit is scenario-exact, and invalid/runtime/fake-success/isolation causality is honest. Stop at rule_pack_combat_faction_social_work_theft_artifact_verification.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "rule_pack_gameplay_family_artifact_verification"
+                                                        "rule_pack_combat_faction_social_work_theft_artifact_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -34,7 +34,8 @@
                            "goal_005_manual_gate":  "semantic_guided_composition_artifact_verification",
                            "goal_006_manual_gate":  "semantic_selected_runtime_composition_artifact_verification",
                            "goal_007_manual_gate":  "connected_world_travel_state_artifact_verification",
-                           "goal_008_manual_gate":  "rule_pack_gameplay_family_artifact_verification"
+                           "goal_008_manual_gate":  "rule_pack_gameplay_family_artifact_verification",
+                           "goal_009_manual_gate":  "rule_pack_combat_faction_social_work_theft_artifact_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -55,17 +56,29 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "product_slice_077a_rule_pack_gameplay_runtime_integration_correctness_hotfix",
-                                         "title":  "Rule-Pack Gameplay Runtime Integration Correctness Hotfix",
-                                         "completed_at_utc":  "2026-06-26T03:30:00Z",
-                                         "summary":  "Product Slice 077A repairs Goal 008 artifact correctness without changing the final gate: Application no longer supplies a fake gameplay-family runtime executor by default, valid acceptance and product smoke inject a real GameRuntimeService adapter from the test assembly, commands execute through GameRuntimeService.Execute after GameRuntimeStateFactory startup, save/load evidence uses RuntimeStateSerializer and RuntimeSnapshotStore on full GameRuntimeState, binding audit is scenario-exact, status duration evidence is aligned, and ten invalid scenarios reject dishonest or mismatched runtime evidence. It does not change public GamePackage schema, start post-Goal-008 work, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
-                                         "scenario_id":  "rule-pack-gameplay-family-foundations",
+                                         "slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
+                                         "title":  "Rule-Pack Combat, Faction, Social, Work And Theft Foundations",
+                                         "completed_at_utc":  "2026-06-26T04:05:00Z",
+                                         "summary":  "Goal 009 completes S078-S084 after the user confirmed rule_pack_gameplay_family_artifact_verification passed. It adds deterministic headless acceptance artifacts under .llmgc/procedural/rule-pack-combat-faction-social-work-theft, keeps the Application default runtime adapter unavailable, injects a real GameRuntimeService adapter from tests/smoke, executes combat encounter/ability/AI, faction reputation, dialogue choice consequence, work interaction/transaction reward, container theft transfer plus explicit flag/reputation consequence and the combined loop through existing runtime services, preserves full GameRuntimeState through RuntimeStateSerializer and RuntimeSnapshotStore, rejects twelve invalid/fake/leak scenarios causally, and stops at rule_pack_combat_faction_social_work_theft_artifact_verification. It does not change public GamePackage/runtime schema, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
+                                         "scenario_id":  "rule-pack-combat-faction-social-work-theft",
                                          "checks":  [
-                                                        "RulePackGameplayFamily/ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 37/37 passed",
-                                                        "rule-pack-gameplay-family-foundations product smoke: 1/1 passed",
-                                                        "check-all.ps1: 758/758 tests passed, build 0 warnings / 0 errors"
+                                                        "RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 35/35 passed",
+                                                        "rule-pack-combat-faction-social-work-theft product smoke: 1/1 passed",
+                                                        "check-all.ps1: 765/765 tests passed, build 0 warnings / 0 errors"
                                                     ]
                                      },
+    "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
+                                                                            "slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
+                                                                            "title":  "Rule-Pack Combat, Faction, Social, Work And Theft Foundations",
+                                                                            "completed_at_utc":  "2026-06-26T04:05:00Z",
+                                                                            "summary":  "S078-S084 add headless deterministic combat/faction/social/work/theft acceptance artifacts under .llmgc/procedural/rule-pack-combat-faction-social-work-theft. The service records the Goal 008 gate as user-confirmed passed, keeps the Application default runtime adapter unavailable, proves valid scenarios only through an injected real GameRuntimeService adapter, runs existing encounter, AI, faction, dialogue, interaction, transaction, container and flag commands, preserves full GameRuntimeState through RuntimeStateSerializer and RuntimeSnapshotStore, and rejects twelve invalid scenarios including fake runtime success, save/load mismatch and cross-scenario leakage. The active manual gate is rule_pack_combat_faction_social_work_theft_artifact_verification.",
+                                                                            "scenario_id":  "rule-pack-combat-faction-social-work-theft",
+                                                                            "checks":  [
+                                                                                           "RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 35/35 passed",
+                                                                                           "rule-pack-combat-faction-social-work-theft product smoke: 1/1 passed",
+                                                                                           "check-all.ps1: 765/765 tests passed, build 0 warnings / 0 errors"
+                                                                                       ]
+                                                                        },
     "goal_008_rule_pack_gameplay_family_foundations":  {
                                                            "slice_id":  "goal_008_rule_pack_gameplay_family_foundations",
                                                            "title":  "Rule-Pack Gameplay Family Foundations",
@@ -270,13 +283,21 @@
                                                                "next_action":  "goal_008_rule_pack_gameplay_family_foundations"
                                                            },
     "rule_pack_gameplay_family_artifact_verification":  {
-                                                            "status":  "required",
-                                                            "evidence_source":  "pending_external_artifact_review_after_goal_008",
+                                                            "status":  "passed",
+                                                            "evidence_source":  "user_prompt_before_goal_009",
                                                             "observed_result":  [
-
+                                                                                    "rule_pack_gameplay_family_artifact_verification passed"
                                                                                 ],
-                                                            "next_action":  "do_not_start_post_goal_008_work_without_new_explicit_user_request"
+                                                            "next_action":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations"
                                                         },
+    "rule_pack_combat_faction_social_work_theft_artifact_verification":  {
+                                                                            "status":  "required",
+                                                                            "evidence_source":  "pending_external_artifact_review_after_goal_009",
+                                                                            "observed_result":  [
+
+                                                                                                ],
+                                                                            "next_action":  "do_not_start_post_goal_009_work_without_new_explicit_user_request"
+                                                                        },
     "extension_rule_pack_contract_v1":  {
                                             "document":  "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
                                             "validator":  "ExtensionRulePackValidator",
@@ -303,7 +324,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "rule_pack_gameplay_family_artifact_verification"
+                                          "rule_pack_combat_faction_social_work_theft_artifact_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -324,11 +345,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "rule_pack_gameplay_family_artifact_verification",
-    "recommended_next_work_item_title":  "Rule-pack gameplay family artifact verification.",
-    "recommended_next_task_file":  ".llmgc/procedural/rule-pack-gameplay-family-foundations/rule-pack-gameplay-family-verification.md",
+    "recommended_next_work_item":  "rule_pack_combat_faction_social_work_theft_artifact_verification",
+    "recommended_next_work_item_title":  "Rule-pack combat/faction/social/work/theft artifact verification.",
+    "recommended_next_task_file":  ".llmgc/procedural/rule-pack-combat-faction-social-work-theft/rule-pack-combat-faction-social-work-theft-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Rule-pack gameplay family artifact verification"
+                                              "Rule-pack combat/faction/social/work/theft artifact verification"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -391,7 +412,8 @@
                              "Semantic-selected runtime composition report/verification sidecars",
                              "Semantic-selected runtime composition correctness hotfix diagnostics",
                              "Connected world travel and deterministic runtime world state acceptance sidecars",
-                             "Rule-pack gameplay family foundations acceptance sidecars"
+                             "Rule-pack gameplay family foundations acceptance sidecars",
+                             "Rule-pack combat/faction/social/work/theft acceptance sidecars"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 008 stop at rule_pack_gameplay_family_artifact_verification and do not start post-Goal-008 work without a new explicit user request."
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 009 stop at rule_pack_combat_faction_social_work_theft_artifact_verification and do not start post-Goal-009 work without a new explicit user request."
 }
