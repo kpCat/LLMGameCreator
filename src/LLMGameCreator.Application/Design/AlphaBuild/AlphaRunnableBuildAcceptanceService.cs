@@ -118,10 +118,47 @@ public sealed class AlphaRunnableBuildAcceptanceService
             diagnostics.Add(Diagnostic("error", "alpha_build.selection.duplicate_pack_id", packId, "Three Alpha style candidates must resolve to distinct accepted packs."));
         }
 
-        var primary = candidates
+        var eligibleCandidates = candidates
             .Where(candidate => candidate.Accepted && !duplicatePackIds.Contains(candidate.PackId, StringComparer.Ordinal))
             .OrderBy(candidate => candidate.Ordinal)
-            .FirstOrDefault();
+            .ToList();
+        var selectedStyleId = settings.SelectedStyleId.Trim();
+        var selectedOrdinal = settings.CandidateOrdinal;
+        if (!string.IsNullOrWhiteSpace(selectedStyleId) &&
+            !ExpectedStyleOrder.Contains(selectedStyleId, StringComparer.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.selection.unknown_style_id", selectedStyleId, "Selected Alpha style id must be one of the deterministic style candidates."));
+        }
+
+        if (selectedOrdinal.HasValue && (selectedOrdinal.Value < 0 || selectedOrdinal.Value >= ExpectedStyleOrder.Length))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.selection.unknown_candidate_ordinal", selectedOrdinal.Value.ToString(), "Selected Alpha candidate ordinal must resolve to a deterministic style candidate."));
+        }
+
+        if (!string.IsNullOrWhiteSpace(selectedStyleId) &&
+            selectedOrdinal.HasValue &&
+            selectedOrdinal.Value >= 0 &&
+            selectedOrdinal.Value < ExpectedStyleOrder.Length &&
+            !string.Equals(ExpectedStyleOrder[selectedOrdinal.Value], selectedStyleId, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.selection.style_ordinal_mismatch", selectedStyleId, "Selected Alpha style id and candidate ordinal must refer to the same candidate."));
+        }
+
+        var primary = !string.IsNullOrWhiteSpace(selectedStyleId)
+            ? eligibleCandidates.FirstOrDefault(candidate => string.Equals(candidate.StyleId, selectedStyleId, StringComparison.Ordinal))
+            : selectedOrdinal.HasValue && selectedOrdinal.Value >= 0 && selectedOrdinal.Value < ExpectedStyleOrder.Length
+                ? eligibleCandidates.FirstOrDefault(candidate => candidate.Ordinal == selectedOrdinal.Value)
+                : eligibleCandidates.FirstOrDefault();
+        if (!string.IsNullOrWhiteSpace(selectedStyleId) && primary == null)
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.selection.selected_style_unavailable", selectedStyleId, "Selected Alpha style candidate must have accepted package/assets/export evidence."));
+        }
+
+        if (selectedOrdinal.HasValue && primary == null)
+        {
+            diagnostics.Add(Diagnostic("error", "alpha_build.selection.selected_ordinal_unavailable", selectedOrdinal.Value.ToString(), "Selected Alpha candidate ordinal must have accepted package/assets/export evidence."));
+        }
+
         if (primary == null)
         {
             diagnostics.Add(Diagnostic("error", "alpha_build.selection.no_primary_candidate", "selection", "A deterministic primary Alpha build candidate is required."));
@@ -358,6 +395,16 @@ public sealed class AlphaRunnableBuildAcceptanceService
     {
         var generatedIds = input.SelectedGeneratedIds.OrderBy(item => item, StringComparer.Ordinal).ToList();
         string FirstGenerated(string prefix) => generatedIds.FirstOrDefault(item => item.StartsWith(prefix, StringComparison.Ordinal)) ?? string.Empty;
+        string FirstCommandTarget(string commandType, string prefix) => input.SelectedRuntimeCommands
+            .Where(command => command.CommandType == commandType && command.TargetId.StartsWith(prefix, StringComparison.Ordinal))
+            .Select(command => command.TargetId)
+            .OrderBy(item => item, StringComparer.Ordinal)
+            .FirstOrDefault() ?? string.Empty;
+        string FirstCommandSecondaryTarget(string commandTypePrefix, string prefix) => input.SelectedRuntimeCommands
+            .Where(command => command.CommandType.StartsWith(commandTypePrefix, StringComparison.Ordinal) && command.SecondaryTargetId.StartsWith(prefix, StringComparison.Ordinal))
+            .Select(command => command.SecondaryTargetId)
+            .OrderBy(item => item, StringComparer.Ordinal)
+            .FirstOrDefault() ?? string.Empty;
         string FirstAssetContent(string prefix) => input.SelectedAssetRefs
             .Select(item => item.ContentId)
             .Where(item => item.StartsWith(prefix, StringComparison.Ordinal))
@@ -370,8 +417,8 @@ public sealed class AlphaRunnableBuildAcceptanceService
             NpcId = FirstAssetContent("npc/"),
             QuestId = FirstGenerated("quest/"),
             DialogueId = FirstGenerated("dialogue/"),
-            ItemId = FirstGenerated("item/"),
-            EventId = FirstGenerated("event/"),
+            ItemId = FirstCommandTarget("event/add_item", "item/") is { Length: > 0 } commandItem ? commandItem : FirstGenerated("item/"),
+            EventId = FirstCommandSecondaryTarget("event/", "event/") is { Length: > 0 } commandEvent ? commandEvent : FirstGenerated("event/"),
             RuntimeCommandHintIds = input.SelectedRuntimeCommands.Select(command => command.CommandId).OrderBy(item => item, StringComparer.Ordinal).ToList()
         };
     }
@@ -1891,6 +1938,8 @@ public sealed record AlphaRunnableBuildOptions
     public bool IncludeExpectationOnlyInvalidMutation { get; init; } = true;
     public string RepositoryRootPath { get; init; } = string.Empty;
     public string RelativeOutputDirectoryOverride { get; init; } = string.Empty;
+    public string SelectedStyleId { get; init; } = string.Empty;
+    public int? CandidateOrdinal { get; init; }
     public bool ExecuteUnityBuild { get; init; }
     public bool LaunchBuiltPlayer { get; init; }
     public bool PreserveExistingBuildOutputForValidation { get; init; }

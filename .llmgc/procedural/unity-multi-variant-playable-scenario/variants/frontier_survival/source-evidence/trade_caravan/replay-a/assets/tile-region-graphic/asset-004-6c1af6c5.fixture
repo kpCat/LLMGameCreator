@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:image/png
+resolution:fallback
+slot:asset-slot/game-content-generation-trade-caravan/tile-region-graphic/map-trade-caravan-start/gothic-tile-fallback/002
+content:map/trade-caravan/start
+source:gothic_tile_fallback

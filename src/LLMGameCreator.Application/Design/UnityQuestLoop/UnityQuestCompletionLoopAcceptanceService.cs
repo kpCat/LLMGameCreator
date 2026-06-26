@@ -64,6 +64,9 @@ public sealed class UnityQuestCompletionLoopAcceptanceService
         var settings = options ?? new UnityQuestCompletionLoopOptions();
         var projectRoot = Path.GetFullPath(projectRootPath);
         var repositoryRoot = ResolveRepositoryRoot(projectRoot, settings.RepositoryRootPath);
+        var outputRelativeDirectory = string.IsNullOrWhiteSpace(settings.RelativeOutputDirectoryOverride)
+            ? RelativeOutputDirectory
+            : settings.RelativeOutputDirectoryOverride;
         var alphaService = new AlphaRunnableBuildAcceptanceService();
         var alphaResult = alphaService.BuildFromAcceptedEvidence(
             projectRoot,
@@ -72,7 +75,9 @@ public sealed class UnityQuestCompletionLoopAcceptanceService
             new AlphaRunnableBuildOptions
             {
                 RepositoryRootPath = repositoryRoot,
-                RelativeOutputDirectoryOverride = RelativeOutputDirectory,
+                RelativeOutputDirectoryOverride = outputRelativeDirectory,
+                SelectedStyleId = settings.SelectedStyleId,
+                CandidateOrdinal = settings.CandidateOrdinal,
                 ExecuteUnityBuild = settings.ExecuteUnityBuild,
                 LaunchBuiltPlayer = settings.LaunchBuiltPlayer,
                 PreserveExistingBuildOutputForValidation = settings.PreserveExistingBuildOutputForValidation,
@@ -926,6 +931,9 @@ public sealed class UnityQuestCompletionLoopAcceptanceService
 public sealed record UnityQuestCompletionLoopOptions
 {
     public string RepositoryRootPath { get; init; } = string.Empty;
+    public string RelativeOutputDirectoryOverride { get; init; } = string.Empty;
+    public string SelectedStyleId { get; init; } = string.Empty;
+    public int? CandidateOrdinal { get; init; }
     public bool ExecuteUnityBuild { get; init; }
     public bool LaunchBuiltPlayer { get; init; }
     public bool PreserveExistingBuildOutputForValidation { get; init; }

@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T23:00:00Z",
+    "updated_at_utc":  "2026-06-26T23:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 017 Unity generated quest completion loop verification required",
-    "gate_status":  "unity_generated_quest_completion_loop_verification",
+    "current_phase_title":  "Goal 018 Unity multi-variant playable scenario verification required",
+    "gate_status":  "unity_generated_multi_variant_playable_scenario_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_017_unity_generated_quest_completion_loop",
-    "active_manual_gate":  "Goal 017 turns the generated Unity runtime state loop into a coherent generated micro-quest completion loop with ordered quest phases, objective checklist, completion and reward evidence; unity_generated_quest_completion_loop_verification remains required and not passed until the quest completion loop evidence is accepted.",
-    "current_user_action":  "Review the produced Unity quest completion loop plan, state JSON, report, Unity build log, launch/play-loop logs, ordered phase trace, objective checklist, command correlation proof, reward proof and invalid/fake/leak matrix; do not mark unity_generated_quest_completion_loop_verification passed until the real player evidence is accepted.",
-    "recommended_next_decision":  "The user confirmed unity_generated_runtime_state_loop_verification passed before Goal 017. Goal 017 completes S138-S145 by adding a narrow Application-layer Unity quest completion loop acceptance service under Design/UnityQuestLoop, extending the repo-local Unity Alpha runtime script so the generated micro-quest shows phase/objective/completion/reward state, proving ordered quest phases and objective checklist transitions from real player play-loop logs, rejecting invalid/fake/leak quest-completion evidence causally and adding the unity-quest-completion-loop product smoke route. Compact review artifacts are written under .llmgc/procedural/unity-quest-completion-loop while heavy Unity build/log/unity-work outputs remain ignored. Goal 017 stops at unity_generated_quest_completion_loop_verification required; do not mark it passed and do not start S146 or Goal 018.",
+    "last_completed_product_slice_id":  "goal_018_unity_multi_variant_playable_scenario",
+    "active_manual_gate":  "Goal 018 proves three generated Unity Alpha playable quest-loop variants through the same pipeline; unity_generated_multi_variant_playable_scenario_verification remains required and not passed until the multi-variant evidence is accepted.",
+    "current_user_action":  "Review the produced Unity multi-variant playable scenario variants JSON, report, Unity build logs, launch/play-loop logs, distinct style/package/thread/quest/scene/objective/command identities, reward proof and invalid/fake/leak matrix; do not mark unity_generated_multi_variant_playable_scenario_verification passed until the real player evidence is accepted.",
+    "recommended_next_decision":  "The user confirmed unity_generated_quest_completion_loop_verification passed before Goal 018. Goal 018 completes S146-S153 by adding a narrow Application-layer Unity multi-variant playable scenario acceptance service under Design/UnityMultiVariant, selecting frontier_survival, gothic_mystery and trade_caravan through the existing Alpha/Quest loop pipeline, fixing selected item/event identity to bind to generated command evidence, producing per-variant Unity Alpha quest completion proof, validating cross-variant distinctness, rejecting invalid/fake/leak multi-variant evidence causally and adding the unity-multi-variant-playable-scenario product smoke route. Compact review artifacts are written under .llmgc/procedural/unity-multi-variant-playable-scenario while heavy Unity build/log/unity-work outputs remain ignored. Goal 018 stops at unity_generated_multi_variant_playable_scenario_verification required; do not mark it passed and do not start S154 or Goal 019.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "unity_generated_quest_completion_loop_verification"
+                                                        "unity_generated_multi_variant_playable_scenario_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -43,7 +43,8 @@
                            "goal_014_manual_gate":  "unity_playable_presentation_firewall_safe_build_verification",
                            "goal_015_manual_gate":  "unity_generated_scene_content_projection_verification",
                            "goal_016_manual_gate":  "unity_generated_runtime_state_loop_verification",
-                           "goal_017_manual_gate":  "unity_generated_quest_completion_loop_verification"
+                           "goal_017_manual_gate":  "unity_generated_quest_completion_loop_verification",
+                           "goal_018_manual_gate":  "unity_generated_multi_variant_playable_scenario_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -64,16 +65,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_017_unity_generated_quest_completion_loop",
-                                         "title":  "Unity Generated Quest Completion Loop",
-                                         "completed_at_utc":  "2026-06-26T23:00:00Z",
-                                         "summary":  "Goal 017 records the user-confirmed unity_generated_runtime_state_loop_verification passed gate, adds a narrow Application-layer Unity quest completion loop acceptance service under Design/UnityQuestLoop, reuses accepted content, asset, Alpha build, generated scene and runtime state evidence, writes compact plan/state/report/verification artifacts under .llmgc/procedural/unity-quest-completion-loop, extends the repo-local Unity Alpha runtime script so the generated micro-quest shows phase, objective checklist, completion and reward status, validates ordered quest phases plus objective command id/type/target/secondary-target correlations from real player play-loop logs, rejects invalid/fake/leak quest-completion evidence causally and adds the unity-quest-completion-loop product smoke route. The active manual gate is unity_generated_quest_completion_loop_verification required.",
-                                         "scenario_id":  "unity-quest-completion-loop",
+                                         "slice_id":  "goal_018_unity_multi_variant_playable_scenario",
+                                         "title":  "Unity Multi-Variant Playable Scenario",
+                                         "completed_at_utc":  "2026-06-26T23:30:00Z",
+                                         "summary":  "Goal 018 records the user-confirmed unity_generated_quest_completion_loop_verification passed gate, adds a narrow Application-layer UnityMultiVariant acceptance service, reuses the existing Alpha build, generated scene, runtime state and quest completion loop pipeline for frontier_survival, gothic_mystery and trade_caravan, writes compact variants/report/verification artifacts under .llmgc/procedural/unity-multi-variant-playable-scenario, validates distinct package/thread/quest/scene/objective/command identities, proves all three variants complete their generated quest and reward path from real player play-loop logs, rejects invalid/fake/leak multi-variant evidence causally and adds the unity-multi-variant-playable-scenario product smoke route. The active manual gate is unity_generated_multi_variant_playable_scenario_verification required.",
+                                         "scenario_id":  "unity-multi-variant-playable-scenario",
                                          "checks":  [
-                                                        "UnityQuestLoop focused tests: 6/6 passed",
-                                                        "unity-quest-completion-loop product smoke: 1/1 passed",
-                                                        "Goal 017 quest-loop hash 1e5ad0b13a44078ebc6c5aa53e7e54c21d43a8c779a7b6937a2398eb9ad62b83, plan hash 9fe5ddc1abe483ca75f508da7aa3a85f709272f039d9bf734f3dc0c2f0fb7085, report hash c2cec57aead38f85c46b2281a53d75b0779360a7f5e32b94c7aa0879d353534c, build manifest hash 0b4859331314dc86505e2e14fec2b50856040274c97c3e5bf7e5dfb09e543771, objectives 6, invalid scenarios 24",
-                                                        "check-all.ps1: 817/817 tests passed, build 0 warnings / 0 errors"
+                                                        "UnityMultiVariant focused tests: 7/7 passed",
+                                                        "unity-multi-variant-playable-scenario product smoke: 1/1 passed",
+                                                        "Goal 018 variants hash 863fb35b089f88a8aea0478348b809e25108e0466e66a572bb8be6e7bfe590b1, report hash bc1546c5330a5f91dfa2574f0da5a65e7e76cd59e2f933b84a021647889407f0, accepted variants 3/3, distinct styles/packages/quests/scenes/objectives 3/3/3/3/3, invalid scenarios 26"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -333,7 +333,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "unity_generated_quest_completion_loop_verification"
+                                          "unity_generated_multi_variant_playable_scenario_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -354,8 +354,8 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "unity_generated_quest_completion_loop_verification",
-    "recommended_next_work_item_title":  "Goal 017 Unity generated quest completion loop verification review.",
+    "recommended_next_work_item":  "unity_generated_multi_variant_playable_scenario_verification",
+    "recommended_next_work_item_title":  "Goal 018 Unity multi-variant playable scenario verification review.",
     "recommended_next_task_file":  ".llmgc/procedural/unity-quest-completion-loop/unity-quest-completion-loop-verification.md",
     "candidate_product_vertical_slices":  [
                                               "Unity generated quest completion loop verification review"
@@ -432,7 +432,7 @@
                               "Unity generated runtime state loop acceptance sidecars and command/state transition evidence",
                               "Unity generated quest completion loop plan/state/report sidecars and ordered objective/reward player evidence"
                           ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 017 stop at unity_generated_quest_completion_loop_verification required and do not start S146, Goal 018 or post-Goal-017 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 018 stop at unity_generated_multi_variant_playable_scenario_verification required and do not start S154, Goal 019 or post-Goal-018 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -515,7 +515,7 @@
                                                             "next_action":  "goal_017_unity_generated_quest_completion_loop"
                                                               },
     "unity_generated_quest_completion_loop_verification":  {
-                                                               "status":  "required",
+                                                               "status":  "passed",
                                                                "evidence_source":  "goal_017_unity_generated_quest_completion_loop",
                                                                "observed_result":  [
                                                                    "Unity quest completion loop artifacts are written under .llmgc/procedural/unity-quest-completion-loop",
@@ -526,9 +526,24 @@
                                                                    "Invalid/fake/leak quest-completion matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
                                                                    "Product smoke route is unity-quest-completion-loop",
                                                                    "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                                   "Gate remains required and is not marked passed"
+                                                                   "user confirmed unity_generated_quest_completion_loop_verification passed before Goal 018"
                                                                                ],
-                                                               "next_action":  "review_unity_generated_quest_completion_loop_evidence_before_marking_gate_passed"
+                                                               "next_action":  "goal_018_unity_multi_variant_playable_scenario"
+                                                              },
+    "unity_generated_multi_variant_playable_scenario_verification":  {
+                                                                        "status":  "required",
+                                                                        "evidence_source":  "goal_018_unity_multi_variant_playable_scenario",
+                                                                        "observed_result":  [
+                                                                            "Unity multi-variant playable scenario artifacts are written under .llmgc/procedural/unity-multi-variant-playable-scenario",
+                                                                            "Application multi-variant acceptance runs frontier_survival, gothic_mystery and trade_caravan through the same Alpha/quest-loop pipeline",
+                                                                            "Each variant has distinct package, thread, quest, scene, objective and command identities",
+                                                                            "Each variant completes its generated quest and grants its generated reward from real player play-loop logs",
+                                                                            "Invalid/fake/leak multi-variant matrix rejects copied, mismatched, cross-style and fake evidence",
+                                                                            "Product smoke route is unity-multi-variant-playable-scenario",
+                                                                            "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                            "Gate remains required and is not marked passed"
+                                                                                        ],
+                                                                        "next_action":  "review_unity_generated_multi_variant_playable_scenario_evidence_before_marking_gate_passed"
                                                               },
     "alpha_unity_build_environment_blocker":  {
                                                  "status":  "resolved_by_s113b",
@@ -619,15 +634,28 @@
     "goal_017_unity_generated_quest_completion_loop":  {
                                                            "slice_id":  "goal_017_unity_generated_quest_completion_loop",
                                                            "title":  "Unity Generated Quest Completion Loop",
-                                                           "status":  "verification_required",
+                                                           "status":  "passed_by_user_prompt_before_goal_018",
                                                            "blocked_at_utc":  "",
-                                                           "summary":  "Goal 017 records the user-confirmed unity_generated_runtime_state_loop_verification passed gate, completes S138-S145, adds a narrow Application-layer UnityQuestLoop acceptance service, writes compact plan/state/report/verification artifacts under .llmgc/procedural/unity-quest-completion-loop, extends the existing Unity Alpha runtime script so the generated micro-quest exposes phase, objective checklist, completion and reward status, validates ordered quest phases and objective command id/type/target/secondary-target correlations from real player play-loop logs, rejects invalid/fake/leak quest-completion evidence causally and adds the unity-quest-completion-loop product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S146/Goal 018 are not started.",
+                                                           "summary":  "Goal 017 records the user-confirmed unity_generated_runtime_state_loop_verification passed gate, completes S138-S145, adds a narrow Application-layer UnityQuestLoop acceptance service, writes compact plan/state/report/verification artifacts under .llmgc/procedural/unity-quest-completion-loop, extends the existing Unity Alpha runtime script so the generated micro-quest exposes phase, objective checklist, completion and reward status, validates ordered quest phases plus objective command id/type/target/secondary-target correlations from real player play-loop logs, rejects invalid/fake/leak quest-completion evidence causally and adds the unity-quest-completion-loop product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed unity_generated_quest_completion_loop_verification passed before Goal 018.",
                                                            "scenario_id":  "unity-quest-completion-loop",
                                                            "checks":  [
                                                                           "UnityQuestLoop focused tests: 6/6 passed",
                                                                           "unity-quest-completion-loop product smoke: 1/1 passed",
                                                                           "Goal 017 quest-loop hash 1e5ad0b13a44078ebc6c5aa53e7e54c21d43a8c779a7b6937a2398eb9ad62b83, plan hash 9fe5ddc1abe483ca75f508da7aa3a85f709272f039d9bf734f3dc0c2f0fb7085, report hash c2cec57aead38f85c46b2281a53d75b0779360a7f5e32b94c7aa0879d353534c, build manifest hash 0b4859331314dc86505e2e14fec2b50856040274c97c3e5bf7e5dfb09e543771, objectives 6, invalid scenarios 24",
                                                                           "check-all.ps1: 817/817 tests passed, build 0 warnings / 0 errors"
+                                                                      ]
+                                                    },
+    "goal_018_unity_multi_variant_playable_scenario":  {
+                                                           "slice_id":  "goal_018_unity_multi_variant_playable_scenario",
+                                                           "title":  "Unity Multi-Variant Playable Scenario",
+                                                           "status":  "verification_required",
+                                                           "blocked_at_utc":  "",
+                                                           "summary":  "Goal 018 records the user-confirmed unity_generated_quest_completion_loop_verification passed gate, completes S146-S153, adds a narrow Application-layer UnityMultiVariant acceptance service, writes compact variants/report/verification artifacts under .llmgc/procedural/unity-multi-variant-playable-scenario, selects frontier_survival, gothic_mystery and trade_caravan through the existing Alpha and quest completion loop pipeline, validates distinct package/thread/quest/scene/objective/command identities, proves all three variants complete their generated quest and reward path from real player play-loop logs, rejects invalid/fake/leak multi-variant evidence causally and adds the unity-multi-variant-playable-scenario product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S154/Goal 019 are not started.",
+                                                           "scenario_id":  "unity-multi-variant-playable-scenario",
+                                                           "checks":  [
+                                                                          "UnityMultiVariant focused tests: 7/7 passed",
+                                                                          "unity-multi-variant-playable-scenario product smoke: 1/1 passed",
+                                                                          "Goal 018 variants hash 863fb35b089f88a8aea0478348b809e25108e0466e66a572bb8be6e7bfe590b1, report hash bc1546c5330a5f91dfa2574f0da5a65e7e76cd59e2f933b84a021647889407f0, accepted variants 3/3, invalid scenarios 26"
                                                                       ]
                                                     },
     "goal_012_unity_runtime_export_vertical_slice":  {

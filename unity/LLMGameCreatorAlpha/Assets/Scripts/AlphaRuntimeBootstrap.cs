@@ -232,6 +232,8 @@ namespace LLMGameCreatorAlpha
                 commands.Clear();
                 commands.AddRange(ExtractCommandHints(configJson));
                 commands.Sort((left, right) => string.CompareOrdinal(left.CommandId, right.CommandId));
+                selectedItemId = FirstCommandTarget("event/add_item", "item/", selectedItemId);
+                selectedEventId = FirstCommandSecondaryTarget("event/", "event/", selectedEventId);
                 BuildSceneProjection();
                 payloadLoaded = payloadRootExists && commands.Count > 0;
                 ResetLoop();
@@ -911,6 +913,24 @@ namespace LLMGameCreatorAlpha
                     SecondaryTargetId = ExtractJsonString(value, "secondaryTargetId")
                 };
             }
+        }
+
+        private string FirstCommandTarget(string commandType, string targetPrefix, string fallback)
+        {
+            var match = commands
+                .Where(command => command.CommandType == commandType && command.TargetId.StartsWith(targetPrefix, StringComparison.Ordinal))
+                .OrderBy(command => command.TargetId, StringComparer.Ordinal)
+                .FirstOrDefault();
+            return match == null ? fallback : match.TargetId;
+        }
+
+        private string FirstCommandSecondaryTarget(string commandTypePrefix, string targetPrefix, string fallback)
+        {
+            var match = commands
+                .Where(command => command.CommandType.StartsWith(commandTypePrefix, StringComparison.Ordinal) && command.SecondaryTargetId.StartsWith(targetPrefix, StringComparison.Ordinal))
+                .OrderBy(command => command.SecondaryTargetId, StringComparer.Ordinal)
+                .FirstOrDefault();
+            return match == null ? fallback : match.SecondaryTargetId;
         }
 
         private static string FirstValueWithPrefix(string json, string propertyName, string prefix)

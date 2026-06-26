@@ -1,0 +1,1159 @@
+{
+  "accepted": false,
+  "finalStatus": "unity_generated_multi_variant_playable_scenario_verification",
+  "manualGate": "unity_generated_multi_variant_playable_scenario_verification",
+  "previousAcceptedGate": "unity_generated_quest_completion_loop_verification passed",
+  "completedSlices": [
+    "S146",
+    "S147",
+    "S148",
+    "S149",
+    "S150",
+    "S151",
+    "S152",
+    "S153"
+  ],
+  "productSmokeRoute": "unity-multi-variant-playable-scenario",
+  "variantCount": 3,
+  "acceptedVariantCount": 3,
+  "selectedStyleIds": [
+    "frontier_survival",
+    "gothic_mystery",
+    "trade_caravan"
+  ],
+  "selectedPackageIds": [
+    "game/content_generation/frontier-survival",
+    "game/content_generation/gothic-mystery",
+    "game/content_generation/trade-caravan"
+  ],
+  "selectedThreadIds": [
+    "thread/frontier-survival/000",
+    "thread/gothic-mystery/000",
+    "thread/trade-caravan/000"
+  ],
+  "distinctStyleCount": 3,
+  "distinctPackageCount": 3,
+  "distinctQuestCount": 3,
+  "distinctSceneSignatureCount": 3,
+  "distinctObjectiveSignatureCount": 3,
+  "allVariantsQuestComplete": true,
+  "allVariantsRewardGranted": true,
+  "allVariantsUseSamePipeline": true,
+  "multiVariantPlayableScenarioVerified": true,
+  "variantSummaries": [
+    {
+      "styleId": "frontier_survival",
+      "packageId": "game/content_generation/frontier-survival",
+      "threadId": "thread/frontier-survival/000",
+      "questId": "quest/frontier-survival/c2ed6dc235/000",
+      "dialogueId": "dialogue/frontier-survival/51924b073c/028",
+      "dialogueChoiceId": "choice/frontier-survival/8cb7a7d288/028",
+      "itemId": "item/frontier-survival/7f81222990/004",
+      "eventId": "event/frontier-survival/4f2d855a33/000",
+      "rewardId": "item/frontier-survival/7f81222990/004",
+      "sceneNodeIds": [
+        "scene_node/command_status/2d67e0734896",
+        "scene_node/item/991ba3f168f2",
+        "scene_node/map/1586660da190",
+        "scene_node/npc/f9222da8a8a6",
+        "scene_node/player/021ecac437d9",
+        "scene_node/quest_event/6f594224d6d7"
+      ],
+      "objectiveIds": [
+        "objective/0/quest_start|quest/frontier-survival/c2ed6dc235/000",
+        "objective/1/dialogue_open|dialogue/frontier-survival/51924b073c/028",
+        "objective/2/dialogue_choice|choice/frontier-survival/8cb7a7d288/028",
+        "objective/3/item_obtained|item/frontier-survival/7f81222990/004",
+        "objective/4/event_applied|event/frontier-survival/4f2d855a33/000",
+        "objective/5/quest_completed_reward|quest/frontier-survival/c2ed6dc235/000"
+      ],
+      "commandIds": [
+        "cmd/frontier-survival/000/choose_dialogue",
+        "cmd/frontier-survival/000/event_add_item",
+        "cmd/frontier-survival/000/open_dialogue",
+        "cmd/frontier-survival/000/start_quest"
+      ],
+      "phaseTrace": [
+        "not_started",
+        "started",
+        "dialogue_opened",
+        "choice_selected",
+        "item_obtained",
+        "event_applied",
+        "completed",
+        "reward_granted"
+      ],
+      "questLoopHash": "1e5ad0b13a44078ebc6c5aa53e7e54c21d43a8c779a7b6937a2398eb9ad62b83",
+      "planHash": "9fe5ddc1abe483ca75f508da7aa3a85f709272f039d9bf734f3dc0c2f0fb7085",
+      "stateHash": "1e5ad0b13a44078ebc6c5aa53e7e54c21d43a8c779a7b6937a2398eb9ad62b83",
+      "buildManifestHash": "cef876486fa66940c31b1f3dbfc7d116778bb7abd93f8dcc79f1951d68766965",
+      "playerLogRelativePath": ".llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/logs/alpha-player-play-loop.log",
+      "questCompletionLoopVerified": true,
+      "questPlanVerified": true,
+      "questPhaseTraceVerified": true,
+      "objectiveChecklistVerified": true,
+      "objectiveCommandCorrelationVerified": true,
+      "questCompletedVerified": true,
+      "rewardGrantedVerified": true,
+      "movementVerified": true,
+      "focusVerified": true,
+      "interactionVerified": true,
+      "playLoopVerified": true,
+      "runtimeStateLoopEvidenceVerified": true,
+      "firewallSafeBuildVerified": true,
+      "productSmokeRoute": "unity-quest-completion-loop",
+      "accepted": true,
+      "diagnostics": []
+    },
+    {
+      "styleId": "gothic_mystery",
+      "packageId": "game/content_generation/gothic-mystery",
+      "threadId": "thread/gothic-mystery/000",
+      "questId": "quest/gothic-mystery/3629ab93b2/001",
+      "dialogueId": "dialogue/gothic-mystery/91a942bcf7/006",
+      "dialogueChoiceId": "choice/gothic-mystery/8298a30e5a/006",
+      "itemId": "item/gothic-mystery/412a858b32/001",
+      "eventId": "event/gothic-mystery/aa4f467660/000",
+      "rewardId": "item/gothic-mystery/412a858b32/001",
+      "sceneNodeIds": [
+        "scene_node/command_status/2c08b3875c08",
+        "scene_node/item/718d4b890836",
+        "scene_node/map/b7f4b51540a0",
+        "scene_node/npc/d9ae6bfbf723",
+        "scene_node/player/d0515368fbc9",
+        "scene_node/quest_event/c31278fe4c99"
+      ],
+      "objectiveIds": [
+        "objective/0/quest_start|quest/gothic-mystery/3629ab93b2/001",
+        "objective/1/dialogue_open|dialogue/gothic-mystery/91a942bcf7/006",
+        "objective/2/dialogue_choice|choice/gothic-mystery/8298a30e5a/006",
+        "objective/3/item_obtained|item/gothic-mystery/412a858b32/001",
+        "objective/4/event_applied|event/gothic-mystery/aa4f467660/000",
+        "objective/5/quest_completed_reward|quest/gothic-mystery/3629ab93b2/001"
+      ],
+      "commandIds": [
+        "cmd/gothic-mystery/000/choose_dialogue",
+        "cmd/gothic-mystery/000/event_add_item",
+        "cmd/gothic-mystery/000/open_dialogue",
+        "cmd/gothic-mystery/000/start_quest"
+      ],
+      "phaseTrace": [
+        "not_started",
+        "started",
+        "dialogue_opened",
+        "choice_selected",
+        "item_obtained",
+        "event_applied",
+        "completed",
+        "reward_granted"
+      ],
+      "questLoopHash": "02e429b06b1f31ba3c6f554fa842cf556809e43077751c24d95a955eddadf940",
+      "planHash": "71ae57d29c8255dd14a50d55d2914ae2131e958b1835bee21e41113016dd6a57",
+      "stateHash": "02e429b06b1f31ba3c6f554fa842cf556809e43077751c24d95a955eddadf940",
+      "buildManifestHash": "383e685b4aff90f07e1d6888826309023b31d9f42ff3b4b8718e9f5511ea348d",
+      "playerLogRelativePath": ".llmgc/procedural/unity-multi-variant-playable-scenario/variants/gothic_mystery/logs/alpha-player-play-loop.log",
+      "questCompletionLoopVerified": true,
+      "questPlanVerified": true,
+      "questPhaseTraceVerified": true,
+      "objectiveChecklistVerified": true,
+      "objectiveCommandCorrelationVerified": true,
+      "questCompletedVerified": true,
+      "rewardGrantedVerified": true,
+      "movementVerified": true,
+      "focusVerified": true,
+      "interactionVerified": true,
+      "playLoopVerified": true,
+      "runtimeStateLoopEvidenceVerified": true,
+      "firewallSafeBuildVerified": true,
+      "productSmokeRoute": "unity-quest-completion-loop",
+      "accepted": true,
+      "diagnostics": []
+    },
+    {
+      "styleId": "trade_caravan",
+      "packageId": "game/content_generation/trade-caravan",
+      "threadId": "thread/trade-caravan/000",
+      "questId": "quest/trade-caravan/80137887dd/002",
+      "dialogueId": "dialogue/trade-caravan/88908c06dd/018",
+      "dialogueChoiceId": "choice/trade-caravan/3059e36f18/018",
+      "itemId": "item/trade-caravan/7bbca01309/011",
+      "eventId": "event/trade-caravan/e1b2955ba9/000",
+      "rewardId": "item/trade-caravan/7bbca01309/011",
+      "sceneNodeIds": [
+        "scene_node/command_status/79bc7d14d651",
+        "scene_node/item/e1562240918f",
+        "scene_node/map/816f7242ddb5",
+        "scene_node/npc/d3f719dae298",
+        "scene_node/player/1fac08ba66b1",
+        "scene_node/quest_event/4345201fc552"
+      ],
+      "objectiveIds": [
+        "objective/0/quest_start|quest/trade-caravan/80137887dd/002",
+        "objective/1/dialogue_open|dialogue/trade-caravan/88908c06dd/018",
+        "objective/2/dialogue_choice|choice/trade-caravan/3059e36f18/018",
+        "objective/3/item_obtained|item/trade-caravan/7bbca01309/011",
+        "objective/4/event_applied|event/trade-caravan/e1b2955ba9/000",
+        "objective/5/quest_completed_reward|quest/trade-caravan/80137887dd/002"
+      ],
+      "commandIds": [
+        "cmd/trade-caravan/000/choose_dialogue",
+        "cmd/trade-caravan/000/event_add_item",
+        "cmd/trade-caravan/000/open_dialogue",
+        "cmd/trade-caravan/000/start_quest"
+      ],
+      "phaseTrace": [
+        "not_started",
+        "started",
+        "dialogue_opened",
+        "choice_selected",
+        "item_obtained",
+        "event_applied",
+        "completed",
+        "reward_granted"
+      ],
+      "questLoopHash": "a515806d3b805cafac2b431d342446c2e8734f38ad033ae0459b0981a8948ff5",
+      "planHash": "099876f604f18e55b244407f71f3531485bfd41618963c8270fd41a12a54fa04",
+      "stateHash": "a515806d3b805cafac2b431d342446c2e8734f38ad033ae0459b0981a8948ff5",
+      "buildManifestHash": "1e48dccb876bf772e5e98d377f507ea1bb21553e456247ede843c18f2bc222eb",
+      "playerLogRelativePath": ".llmgc/procedural/unity-multi-variant-playable-scenario/variants/trade_caravan/logs/alpha-player-play-loop.log",
+      "questCompletionLoopVerified": true,
+      "questPlanVerified": true,
+      "questPhaseTraceVerified": true,
+      "objectiveChecklistVerified": true,
+      "objectiveCommandCorrelationVerified": true,
+      "questCompletedVerified": true,
+      "rewardGrantedVerified": true,
+      "movementVerified": true,
+      "focusVerified": true,
+      "interactionVerified": true,
+      "playLoopVerified": true,
+      "runtimeStateLoopEvidenceVerified": true,
+      "firewallSafeBuildVerified": true,
+      "productSmokeRoute": "unity-quest-completion-loop",
+      "accepted": true,
+      "diagnostics": []
+    }
+  ],
+  "invalidMatrix": {
+    "passed": true,
+    "scenarioCount": 26,
+    "rejectedCount": 26,
+    "scenarios": [
+      {
+        "scenarioId": "build_manifest_copied_from_another_variant",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "build_manifest_copied_from_another_variant",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.build_manifest_hash_copied",
+            "target": "buildManifestHash",
+            "message": "Per-variant build manifest hashes must not be copied across variants."
+          }
+        ]
+      },
+      {
+        "scenarioId": "copied_multi_variant_report_without_per_variant_player_logs",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "copied_multi_variant_report_without_per_variant_player_logs",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.accepted_count_too_low",
+            "target": "0",
+            "message": "At least three variants must pass quest-loop evidence checks."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_style_asset_leakage",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "cross_style_asset_leakage",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.contract.cross_style_leakage",
+            "target": "frontier_survival",
+            "message": "Package, export and asset evidence must come from the same style candidate."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_style_command_leakage",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "cross_style_command_leakage",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.command_signature_count_too_low",
+            "target": "commandIds",
+            "message": "Variants must have distinct command signatures."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.command_style_binding_mismatch",
+            "target": "commandIds",
+            "message": "Variant command ids must bind to the selected style."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_style_reward_leakage",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "cross_style_reward_leakage",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "rewardId",
+            "message": "Variant summary ids must bind to the selected style."
+          }
+        ]
+      },
+      {
+        "scenarioId": "development_profiler_debug_build_option_reintroduced",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "development_profiler_debug_build_option_reintroduced",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_playable_alpha.firewall.debug_build_flag",
+            "target": "BuildOptions.AllowDebugging",
+            "message": "Alpha Windows build entrypoint must not enable development/profiler/debug networking flags."
+          },
+          {
+            "severity": "error",
+            "code": "unity_playable_alpha.firewall.development_build_flag",
+            "target": "BuildOptions.Development",
+            "message": "Alpha Windows build entrypoint must not enable development/profiler/debug networking flags."
+          },
+          {
+            "severity": "error",
+            "code": "unity_playable_alpha.firewall.profiler_build_flag",
+            "target": "BuildOptions.ConnectWithProfiler",
+            "message": "Alpha Windows build entrypoint must not enable development/profiler/debug networking flags."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal017_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal017_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.previous.goal017_missing",
+            "target": "unity-quest-completion-loop-report.json",
+            "message": "Goal 017 quest completion evidence is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_goal017_plan_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_goal017_plan_artifact",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.previous.plan_missing",
+            "target": "unity-quest-completion-loop-plan.json",
+            "message": "Goal 017 plan artifact is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_goal017_report_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_goal017_report_artifact",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.previous.report_missing",
+            "target": "unity-quest-completion-loop-report.json",
+            "message": "Goal 017 report artifact is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_goal017_state_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_goal017_state_artifact",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.previous.state_missing",
+            "target": "unity-quest-completion-loop-state.json",
+            "message": "Goal 017 state artifact is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "objective_command_id_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "objective_command_id_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_id_mismatch",
+            "target": "alpha_runtime.quest_objective.0.required_command_id",
+            "message": "Expected alpha_runtime.quest_objective.0.required_command_id=cmd/frontier-survival/000/start_quest."
+          }
+        ]
+      },
+      {
+        "scenarioId": "objective_command_type_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "objective_command_type_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_type_mismatch",
+            "target": "alpha_runtime.quest_objective.0.required_command_type",
+            "message": "Expected alpha_runtime.quest_objective.0.required_command_type=quest/start."
+          }
+        ]
+      },
+      {
+        "scenarioId": "objective_target_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "objective_target_mismatch",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.target_mismatch",
+            "target": "alpha_runtime.quest_objective.0.required_target_id",
+            "message": "Expected alpha_runtime.quest_objective.0.required_target_id=quest/frontier-survival/c2ed6dc235/000."
+          }
+        ]
+      },
+      {
+        "scenarioId": "only_one_variant_repeated_three_times",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "only_one_variant_repeated_three_times",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.build_manifest_hash_copied",
+            "target": "buildManifestHash",
+            "message": "Per-variant build manifest hashes must not be copied across variants."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.command_signature_count_too_low",
+            "target": "commandIds",
+            "message": "Variants must have distinct command signatures."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.objective_signature_count_too_low",
+            "target": "objectiveIds",
+            "message": "Variants must have distinct objective signatures."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.package_count_too_low",
+            "target": "packageId",
+            "message": "Variants must have distinct package ids."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.player_log_copied",
+            "target": "playerLogRelativePath",
+            "message": "Per-variant player log paths must not be copied across variants."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.quest_count_too_low",
+            "target": "questId",
+            "message": "Variants must have distinct quest ids."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.scene_signature_count_too_low",
+            "target": "sceneNodeIds",
+            "message": "Variants must have distinct scene signatures."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_count_too_low",
+            "target": "styleId",
+            "message": "Variants must have distinct style ids."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.thread_count_too_low",
+            "target": "threadId",
+            "message": "Variants must have distinct thread ids."
+          }
+        ]
+      },
+      {
+        "scenarioId": "package_id_changed_without_matching_staged_payload",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "package_id_changed_without_matching_staged_payload",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "packageId",
+            "message": "Variant summary ids must bind to the selected style."
+          }
+        ]
+      },
+      {
+        "scenarioId": "player_log_copied_from_another_variant",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "player_log_copied_from_another_variant",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.player_log_copied",
+            "target": "playerLogRelativePath",
+            "message": "Per-variant player log paths must not be copied across variants."
+          }
+        ]
+      },
+      {
+        "scenarioId": "quest_completion_claimed_without_objective_checklist",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "quest_completion_claimed_without_objective_checklist",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.0.after",
+            "message": "Expected alpha_runtime.quest_objective.0.after=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.0.before",
+            "message": "Expected alpha_runtime.quest_objective.0.before=false."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.1.after",
+            "message": "Expected alpha_runtime.quest_objective.1.after=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.1.before",
+            "message": "Expected alpha_runtime.quest_objective.1.before=false."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.2.after",
+            "message": "Expected alpha_runtime.quest_objective.2.after=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.2.before",
+            "message": "Expected alpha_runtime.quest_objective.2.before=false."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.3.after",
+            "message": "Expected alpha_runtime.quest_objective.3.after=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.3.before",
+            "message": "Expected alpha_runtime.quest_objective.3.before=false."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.4.after",
+            "message": "Expected alpha_runtime.quest_objective.4.after=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.4.before",
+            "message": "Expected alpha_runtime.quest_objective.4.before=false."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.5.after",
+            "message": "Expected alpha_runtime.quest_objective.5.after=true."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.before_after_missing",
+            "target": "alpha_runtime.quest_objective.5.before",
+            "message": "Expected alpha_runtime.quest_objective.5.before=false."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_id_mismatch",
+            "target": "alpha_runtime.quest_objective.0.required_command_id",
+            "message": "Expected alpha_runtime.quest_objective.0.required_command_id=cmd/frontier-survival/000/start_quest."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_id_mismatch",
+            "target": "alpha_runtime.quest_objective.1.required_command_id",
+            "message": "Expected alpha_runtime.quest_objective.1.required_command_id=cmd/frontier-survival/000/open_dialogue."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_id_mismatch",
+            "target": "alpha_runtime.quest_objective.2.required_command_id",
+            "message": "Expected alpha_runtime.quest_objective.2.required_command_id=cmd/frontier-survival/000/choose_dialogue."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_id_mismatch",
+            "target": "alpha_runtime.quest_objective.3.required_command_id",
+            "message": "Expected alpha_runtime.quest_objective.3.required_command_id=cmd/frontier-survival/000/event_add_item."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_id_mismatch",
+            "target": "alpha_runtime.quest_objective.4.required_command_id",
+            "message": "Expected alpha_runtime.quest_objective.4.required_command_id=cmd/frontier-survival/000/event_add_item."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_id_mismatch",
+            "target": "alpha_runtime.quest_objective.5.required_command_id",
+            "message": "Expected alpha_runtime.quest_objective.5.required_command_id=cmd/frontier-survival/000/event_add_item."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_type_mismatch",
+            "target": "alpha_runtime.quest_objective.0.required_command_type",
+            "message": "Expected alpha_runtime.quest_objective.0.required_command_type=quest/start."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_type_mismatch",
+            "target": "alpha_runtime.quest_objective.1.required_command_type",
+            "message": "Expected alpha_runtime.quest_objective.1.required_command_type=dialogue/open."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_type_mismatch",
+            "target": "alpha_runtime.quest_objective.2.required_command_type",
+            "message": "Expected alpha_runtime.quest_objective.2.required_command_type=dialogue/choose."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_type_mismatch",
+            "target": "alpha_runtime.quest_objective.3.required_command_type",
+            "message": "Expected alpha_runtime.quest_objective.3.required_command_type=event/add_item."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_type_mismatch",
+            "target": "alpha_runtime.quest_objective.4.required_command_type",
+            "message": "Expected alpha_runtime.quest_objective.4.required_command_type=event/add_item."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.command_type_mismatch",
+            "target": "alpha_runtime.quest_objective.5.required_command_type",
+            "message": "Expected alpha_runtime.quest_objective.5.required_command_type=event/add_item."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.id_mismatch",
+            "target": "alpha_runtime.quest_objective.0.objective_id",
+            "message": "Expected alpha_runtime.quest_objective.0.objective_id=objective/0/quest_start."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.id_mismatch",
+            "target": "alpha_runtime.quest_objective.1.objective_id",
+            "message": "Expected alpha_runtime.quest_objective.1.objective_id=objective/1/dialogue_open."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.id_mismatch",
+            "target": "alpha_runtime.quest_objective.2.objective_id",
+            "message": "Expected alpha_runtime.quest_objective.2.objective_id=objective/2/dialogue_choice."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.id_mismatch",
+            "target": "alpha_runtime.quest_objective.3.objective_id",
+            "message": "Expected alpha_runtime.quest_objective.3.objective_id=objective/3/item_obtained."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.id_mismatch",
+            "target": "alpha_runtime.quest_objective.4.objective_id",
+            "message": "Expected alpha_runtime.quest_objective.4.objective_id=objective/4/event_applied."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.id_mismatch",
+            "target": "alpha_runtime.quest_objective.5.objective_id",
+            "message": "Expected alpha_runtime.quest_objective.5.objective_id=objective/5/quest_completed_reward."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.kind_mismatch",
+            "target": "alpha_runtime.quest_objective.0.objective_kind",
+            "message": "Expected alpha_runtime.quest_objective.0.objective_kind=quest_start."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.kind_mismatch",
+            "target": "alpha_runtime.quest_objective.1.objective_kind",
+            "message": "Expected alpha_runtime.quest_objective.1.objective_kind=dialogue_open."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.kind_mismatch",
+            "target": "alpha_runtime.quest_objective.2.objective_kind",
+            "message": "Expected alpha_runtime.quest_objective.2.objective_kind=dialogue_choice."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.kind_mismatch",
+            "target": "alpha_runtime.quest_objective.3.objective_kind",
+            "message": "Expected alpha_runtime.quest_objective.3.objective_kind=item_obtained."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.kind_mismatch",
+            "target": "alpha_runtime.quest_objective.4.objective_kind",
+            "message": "Expected alpha_runtime.quest_objective.4.objective_kind=event_applied."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.kind_mismatch",
+            "target": "alpha_runtime.quest_objective.5.objective_kind",
+            "message": "Expected alpha_runtime.quest_objective.5.objective_kind=quest_completed_reward."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.secondary_target_mismatch",
+            "target": "alpha_runtime.quest_objective.0.required_secondary_target_id",
+            "message": "Expected alpha_runtime.quest_objective.0.required_secondary_target_id=."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.secondary_target_mismatch",
+            "target": "alpha_runtime.quest_objective.1.required_secondary_target_id",
+            "message": "Expected alpha_runtime.quest_objective.1.required_secondary_target_id=."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.secondary_target_mismatch",
+            "target": "alpha_runtime.quest_objective.2.required_secondary_target_id",
+            "message": "Expected alpha_runtime.quest_objective.2.required_secondary_target_id=quest/frontier-survival/c2ed6dc235/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.secondary_target_mismatch",
+            "target": "alpha_runtime.quest_objective.3.required_secondary_target_id",
+            "message": "Expected alpha_runtime.quest_objective.3.required_secondary_target_id=event/frontier-survival/4f2d855a33/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.secondary_target_mismatch",
+            "target": "alpha_runtime.quest_objective.4.required_secondary_target_id",
+            "message": "Expected alpha_runtime.quest_objective.4.required_secondary_target_id=event/frontier-survival/4f2d855a33/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.secondary_target_mismatch",
+            "target": "alpha_runtime.quest_objective.5.required_secondary_target_id",
+            "message": "Expected alpha_runtime.quest_objective.5.required_secondary_target_id=event/frontier-survival/4f2d855a33/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.source_mismatch",
+            "target": "alpha_runtime.quest_objective.0.source_id",
+            "message": "Expected alpha_runtime.quest_objective.0.source_id=quest/frontier-survival/c2ed6dc235/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.source_mismatch",
+            "target": "alpha_runtime.quest_objective.1.source_id",
+            "message": "Expected alpha_runtime.quest_objective.1.source_id=dialogue/frontier-survival/51924b073c/028."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.source_mismatch",
+            "target": "alpha_runtime.quest_objective.2.source_id",
+            "message": "Expected alpha_runtime.quest_objective.2.source_id=choice/frontier-survival/8cb7a7d288/028."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.source_mismatch",
+            "target": "alpha_runtime.quest_objective.3.source_id",
+            "message": "Expected alpha_runtime.quest_objective.3.source_id=item/frontier-survival/7f81222990/004."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.source_mismatch",
+            "target": "alpha_runtime.quest_objective.4.source_id",
+            "message": "Expected alpha_runtime.quest_objective.4.source_id=event/frontier-survival/4f2d855a33/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.source_mismatch",
+            "target": "alpha_runtime.quest_objective.5.source_id",
+            "message": "Expected alpha_runtime.quest_objective.5.source_id=quest/frontier-survival/c2ed6dc235/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.target_mismatch",
+            "target": "alpha_runtime.quest_objective.0.required_target_id",
+            "message": "Expected alpha_runtime.quest_objective.0.required_target_id=quest/frontier-survival/c2ed6dc235/000."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.target_mismatch",
+            "target": "alpha_runtime.quest_objective.1.required_target_id",
+            "message": "Expected alpha_runtime.quest_objective.1.required_target_id=dialogue/frontier-survival/51924b073c/028."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.target_mismatch",
+            "target": "alpha_runtime.quest_objective.2.required_target_id",
+            "message": "Expected alpha_runtime.quest_objective.2.required_target_id=choice/frontier-survival/8cb7a7d288/028."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.target_mismatch",
+            "target": "alpha_runtime.quest_objective.3.required_target_id",
+            "message": "Expected alpha_runtime.quest_objective.3.required_target_id=item/frontier-survival/7f81222990/004."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.target_mismatch",
+            "target": "alpha_runtime.quest_objective.4.required_target_id",
+            "message": "Expected alpha_runtime.quest_objective.4.required_target_id=item/frontier-survival/7f81222990/004."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.objective.target_mismatch",
+            "target": "alpha_runtime.quest_objective.5.required_target_id",
+            "message": "Expected alpha_runtime.quest_objective.5.required_target_id=item/frontier-survival/7f81222990/004."
+          }
+        ]
+      },
+      {
+        "scenarioId": "quest_completion_claimed_without_phase_trace",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "quest_completion_claimed_without_phase_trace",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.after.choice_selected",
+            "message": "Expected alpha_runtime.quest_phase.after.choice_selected=choice_selected."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.after.completed",
+            "message": "Expected alpha_runtime.quest_phase.after.completed=completed."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.after.dialogue_opened",
+            "message": "Expected alpha_runtime.quest_phase.after.dialogue_opened=dialogue_opened."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.after.event_applied",
+            "message": "Expected alpha_runtime.quest_phase.after.event_applied=event_applied."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.after.item_obtained",
+            "message": "Expected alpha_runtime.quest_phase.after.item_obtained=item_obtained."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.after.reward_granted",
+            "message": "Expected alpha_runtime.quest_phase.after.reward_granted=reward_granted."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.after.started",
+            "message": "Expected alpha_runtime.quest_phase.after.started=started."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.missing_or_mismatch",
+            "target": "alpha_runtime.quest_phase.before",
+            "message": "Expected alpha_runtime.quest_phase.before=not_started."
+          },
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.phase.order_mismatch",
+            "target": "alpha_runtime.quest_phase",
+            "message": "Quest phase trace must appear in required order."
+          }
+        ]
+      },
+      {
+        "scenarioId": "reward_claimed_without_completion",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "reward_claimed_without_completion",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_quest_loop.completion.before_after_missing",
+            "target": "alpha_runtime.quest_completed.after",
+            "message": "Expected alpha_runtime.quest_completed.after=true."
+          }
+        ]
+      },
+      {
+        "scenarioId": "runtime_preview_dependency_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "runtime_preview_dependency_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.contract.runtime_preview_dependency",
+            "target": "runtime_host",
+            "message": "Unity multi-variant acceptance must not claim Runtime Preview dependency."
+          }
+        ]
+      },
+      {
+        "scenarioId": "style_id_changed_without_matching_package_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "style_id_changed_without_matching_package_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.command_style_binding_mismatch",
+            "target": "commandIds",
+            "message": "Variant command ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "dialogueChoiceId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "dialogueId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "eventId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "itemId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "packageId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "questId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "rewardId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "threadId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_count_too_low",
+            "target": "styleId",
+            "message": "Variants must have distinct style ids."
+          }
+        ]
+      },
+      {
+        "scenarioId": "thread_id_changed_without_matching_command_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "thread_id_changed_without_matching_command_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "threadId",
+            "message": "Variant summary ids must bind to the selected style."
+          }
+        ]
+      },
+      {
+        "scenarioId": "three_variants_with_same_objective_signature",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "three_variants_with_same_objective_signature",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.objective_signature_count_too_low",
+            "target": "objectiveIds",
+            "message": "Variants must have distinct objective signatures."
+          }
+        ]
+      },
+      {
+        "scenarioId": "three_variants_with_same_package_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "three_variants_with_same_package_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.package_count_too_low",
+            "target": "packageId",
+            "message": "Variants must have distinct package ids."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "packageId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "packageId",
+            "message": "Variant summary ids must bind to the selected style."
+          }
+        ]
+      },
+      {
+        "scenarioId": "three_variants_with_same_quest_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "three_variants_with_same_quest_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.quest_count_too_low",
+            "target": "questId",
+            "message": "Variants must have distinct quest ids."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "questId",
+            "message": "Variant summary ids must bind to the selected style."
+          },
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.style_binding_mismatch",
+            "target": "questId",
+            "message": "Variant summary ids must bind to the selected style."
+          }
+        ]
+      },
+      {
+        "scenarioId": "three_variants_with_same_scene_signature",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "three_variants_with_same_scene_signature",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "unity_multi_variant.distinct.scene_signature_count_too_low",
+            "target": "sceneNodeIds",
+            "message": "Variants must have distinct scene signatures."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "info",
+        "code": "unity_multi_variant.invalid_matrix_rejected",
+        "target": "invalid_matrix",
+        "message": "Invalid/fake/leak multi-variant scenarios must reject through multi-variant, quest-loop, previous-evidence, artifact or firewall validation paths."
+      }
+    ]
+  },
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "noExternalProviderLlmRagLuaMedia": true,
+  "runtimePreviewDependency": false,
+  "variantsHash": "863fb35b089f88a8aea0478348b809e25108e0466e66a572bb8be6e7bfe590b1",
+  "deterministicHash": "bc1546c5330a5f91dfa2574f0da5a65e7e76cd59e2f933b84a021647889407f0",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "unity_multi_variant.goal017_gate_recorded",
+      "target": "unity_generated_multi_variant_playable_scenario_verification",
+      "message": "User-confirmed Goal 017 quest completion verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "unity_multi_variant.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak multi-variant scenarios must reject through multi-variant, quest-loop, previous-evidence, artifact or firewall validation paths."
+    },
+    {
+      "severity": "info",
+      "code": "unity_multi_variant.no_external_providers",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "unity_multi_variant.previous.goal017_evidence_present",
+      "target": "unity-quest-completion-loop-report.json",
+      "message": "Accepted Goal 017 compact evidence is present and matching."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "unity_runtime_asset_payload_v1",
+  "packageId": "game/content_generation/trade-caravan",
+  "assetManifestHash": "5aa6d73963072647eb32be772c4c0564f74651054bed512ec909486b975fd81b",
+  "assetManifestPackageHash": "02f2f2d207e4d32184682be5b42b02539be12f7da5bd34142f0e1e011b634706",
+  "assetManifestContentHash": "00c4d2c20b81a6e0692bb25370a1f394efdef7558c643c9cf42414592b8bcb9a",
+  "assets": [
+    {
+      "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0150c8583d-018/gothic-icon-fixture/000",
+      "slotId": "asset-slot/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0150c8583d-018/gothic-icon-fixture/000",
+      "category": "item_icon_ui_graphic",
+      "mediaType": "image/png",
+      "contentId": "item/trade-caravan/0150c8583d/018",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-0150c8583d-018-gothic-icon-fixture-000.fixture",
+      "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-trade-caravan/music-ambience/event-trade-caravan-12d2a93d26-015/gothic-music-fixture/000",
+      "slotId": "asset-slot/game-content-generation-trade-caravan/music-ambience/event-trade-caravan-12d2a93d26-015/gothic-music-fixture/000",
+      "category": "music_ambience",
+      "mediaType": "audio/ogg",
+      "contentId": "event/trade-caravan/12d2a93d26/015",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-music-ambience-event-trade-caravan-12d2a93d26-015-gothic-music-fixture-000.fixture",
+      "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-012cf2fdd0-012/gothic-portrait-fixture/000",
+      "slotId": "asset-slot/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-012cf2fdd0-012/gothic-portrait-fixture/000",
+      "category": "npc_portrait",
+      "mediaType": "image/png",
+      "contentId": "npc/trade-caravan/012cf2fdd0/012",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-012cf2fdd0-012-gothic-portrait-fixture-000.fixture",
+      "exportRelativePath": "assets/npc-portrait/asset-002-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-00642153fb-048/gothic-sound-fallback/000",
+      "slotId": "asset-slot/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-00642153fb-048/gothic-sound-fallback/000",
+      "category": "sound_effect",
+      "mediaType": "audio/wav",
+      "contentId": "dialogue/trade-caravan/00642153fb/048",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-00642153fb-048-gothic-sound-fallback-000.fixture",
+      "exportRelativePath": "assets/sound-effect/asset-003-3b6934b5.fixture",
+      "hash": "3b6934b536e6c0fd4643d163a027ff850c8581670ec8818267745d1614a8568d",
+      "byteCount": 256,
+      "resolutionKind": "fallback"
+    },
+    {
+      "assetId": "asset/game-content-generation-trade-caravan/tile-region-graphic/map-trade-caravan-start/gothic-tile-fallback/002",
+      "slotId": "asset-slot/game-content-generation-trade-caravan/tile-region-graphic/map-trade-caravan-start/gothic-tile-fallback/002",
+      "category": "tile_region_graphic",
+      "mediaType": "image/png",
+      "contentId": "map/trade-caravan/start",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-tile-region-graphic-map-trade-caravan-start-gothic-tile-fallback-002.fixture",
+      "exportRelativePath": "assets/tile-region-graphic/asset-004-6c1af6c5.fixture",
+      "hash": "6c1af6c5705cc53f3cf5800152ef24228ce5a4cd6479396a402b9d6162c35285",
+      "byteCount": 233,
+      "resolutionKind": "fallback"
+    }
+  ]
+}

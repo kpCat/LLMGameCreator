@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "unity_runtime_asset_payload_v1",
+  "packageId": "game/content_generation/gothic-mystery",
+  "assetManifestHash": "09dc29d8c7d41df403e20122d035be088b3746d32151df7e892e895c7bbcf195",
+  "assetManifestPackageHash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+  "assetManifestContentHash": "d606d1a8a019680fa85f94bc185556d306a2978a01bfef97c59d85bcb5ad7967",
+  "assets": [
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
+      "category": "item_icon_ui_graphic",
+      "mediaType": "image/png",
+      "contentId": "item/gothic-mystery/0018fb2e6f/068",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-0018fb2e6f-068-frontier-icon-fixture-000.fixture",
+      "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-020e1a3098-011/frontier-music-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-020e1a3098-011/frontier-music-fixture/000",
+      "category": "music_ambience",
+      "mediaType": "audio/ogg",
+      "contentId": "event/gothic-mystery/020e1a3098/011",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-music-ambience-event-gothic-mystery-020e1a3098-011-frontier-music-fixture-000.fixture",
+      "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-0a7aa5762f-022/frontier-portrait-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-0a7aa5762f-022/frontier-portrait-fixture/000",
+      "category": "npc_portrait",
+      "mediaType": "image/png",
+      "contentId": "npc/gothic-mystery/0a7aa5762f/022",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-0a7aa5762f-022-frontier-portrait-fixture-000.fixture",
+      "exportRelativePath": "assets/npc-portrait/asset-002-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-208fbe915b-037/frontier-sound-fallback/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-208fbe915b-037/frontier-sound-fallback/000",
+      "category": "sound_effect",
+      "mediaType": "audio/wav",
+      "contentId": "dialogue/gothic-mystery/208fbe915b/037",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-208fbe915b-037-frontier-sound-fallback-000.fixture",
+      "exportRelativePath": "assets/sound-effect/asset-003-d2ae5212.fixture",
+      "hash": "d2ae52126f66bee797f07d3407b0d75514913406ecdb2d9e77cd40927c216fbb",
+      "byteCount": 263,
+      "resolutionKind": "fallback"
+    },
+    {
+      "assetId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/000",
+      "slotId": "asset-slot/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/000",
+      "category": "tile_region_graphic",
+      "mediaType": "image/png",
+      "contentId": "map/gothic-mystery/start",
+      "sourceRelativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-tile-region-graphic-map-gothic-mystery-start-frontier-tile-fixture-000.fixture",
+      "exportRelativePath": "assets/tile-region-graphic/asset-004-34527045.fixture",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69,
+      "resolutionKind": "import"
+    }
+  ]
+}

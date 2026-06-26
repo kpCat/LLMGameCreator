@@ -11,13 +11,13 @@ This document is not a replacement for `docs/FULL_GAME_GENERATION_MASTER_PLAN.md
 Accepted through:
 
 ```text
-unity_generated_runtime_state_loop_verification passed
+unity_generated_quest_completion_loop_verification passed
 ```
 
 Produced for review:
 
 ```text
-unity_generated_quest_completion_loop_verification required
+unity_generated_multi_variant_playable_scenario_verification required
 ```
 
 Current capabilities:
@@ -31,12 +31,13 @@ Current capabilities:
 - generated scene projection derived from package/config/asset refs;
 - generated Unity runtime state loop evidence with quest/dialogue/item/inventory/event before-after transitions;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
+- generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - compact review artifacts under `.llmgc/procedural/...`;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The Unity Alpha now proves one generated micro-quest completion loop, but it does not yet prove multiple generated styles/seeds can produce distinct playable quest loops through the same pipeline.
+The Unity Alpha now proves three generated style variants can produce distinct playable quest loops through the same pipeline, but the primitive IMGUI presentation still needs human-readable polish before broader manual play review.
 
 ## Queue Rules
 
@@ -116,7 +117,7 @@ The user can run the player and complete one generated micro-quest in a primitiv
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start S146 or Goal 018 until it is accepted.
+Accepted by user prompt before Goal 018.
 
 ### Goal 018: Unity Multi-Variant Playable Scenario
 
@@ -133,6 +134,10 @@ Prove at least three generated styles/seeds produce distinct Unity Alpha scenes 
 Expected user-visible result:
 
 Frontier/gothic/caravan scenarios are visibly different in ids, labels, nodes, objective text and command/state flow.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start S154 or Goal 019 until it is accepted.
 
 ### Goal 019: Unity Alpha Human-Readable Presentation
 
@@ -367,7 +372,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-unity_generated_quest_completion_loop_verification
+unity_generated_multi_variant_playable_scenario_verification
 ```
 
 Status:
