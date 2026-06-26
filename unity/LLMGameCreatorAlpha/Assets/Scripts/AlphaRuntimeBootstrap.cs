@@ -18,6 +18,7 @@ namespace LLMGameCreatorAlpha
         private readonly List<AlphaSceneNode> sceneNodes = new List<AlphaSceneNode>();
         private readonly List<AlphaSceneNode> focusableSceneNodes = new List<AlphaSceneNode>();
         private string packageId = string.Empty;
+        private string selectedStyleId = string.Empty;
         private string packageHash = string.Empty;
         private string assetManifestHash = string.Empty;
         private string runtimeConfigHash = string.Empty;
@@ -35,7 +36,12 @@ namespace LLMGameCreatorAlpha
         private bool dialogueSeen;
         private bool dialogueChoiceSelected;
         private bool itemObtained;
+        private bool questCompletedCandidate;
         private bool eventApplied;
+        private int inventoryItemCount;
+        private string lastCommandId = string.Empty;
+        private string lastCommandType = string.Empty;
+        private string lastCommandTargetId = string.Empty;
         private string status = "Loading Alpha payload...";
         private int playerX = 1;
         private int playerY = 1;
@@ -127,6 +133,7 @@ namespace LLMGameCreatorAlpha
             GUI.Box(new Rect(16, 16, 760, 560), "LLMGameCreator Alpha");
             var y = 48f;
             DrawLabel(ref y, "Package: " + Display(packageId));
+            DrawLabel(ref y, "Style: " + Display(selectedStyleId));
             DrawLabel(ref y, "Thread: " + Display(selectedThreadId));
             DrawLabel(ref y, "Start map: " + Display(startMapId));
             DrawLabel(ref y, "Quest: " + Display(selectedQuestId));
@@ -137,9 +144,13 @@ namespace LLMGameCreatorAlpha
             DrawLabel(ref y, "Player: (" + playerX + "," + playerY + ")    Focus: " + FocusName());
             DrawLabel(ref y, "Status: " + status);
             DrawLabel(ref y, "State: quest=" + questStarted.ToString().ToLowerInvariant() +
+                " completeCandidate=" + questCompletedCandidate.ToString().ToLowerInvariant() +
                 " dialogue=" + dialogueSeen.ToString().ToLowerInvariant() +
+                " choice=" + dialogueChoiceSelected.ToString().ToLowerInvariant() +
                 " item=" + itemObtained.ToString().ToLowerInvariant() +
+                " inventory=" + inventoryItemCount +
                 " event=" + eventApplied.ToString().ToLowerInvariant());
+            DrawLabel(ref y, "Last command: " + Display(lastCommandId) + " / " + Display(lastCommandType) + " / " + Display(lastCommandTargetId));
 
             DrawMap(32, y + 8);
 
@@ -180,15 +191,23 @@ namespace LLMGameCreatorAlpha
                 var configPath = Path.Combine(payloadRoot, "runtime", "unity-runtime-config.json");
                 var packagePath = Path.Combine(payloadRoot, "game-data", "game-package.json");
                 var assetManifestPath = Path.Combine(payloadRoot, "assets", "asset-manifest.json");
+                var exportManifestPath = Path.Combine(payloadRoot, "export-manifest.json");
                 var payloadRootExists = Directory.Exists(payloadRoot);
                 var configJson = File.ReadAllText(configPath);
                 var packageJson = File.ReadAllText(packagePath);
                 var assetManifestJson = File.ReadAllText(assetManifestPath);
+                var exportManifestJson = File.Exists(exportManifestPath) ? File.ReadAllText(exportManifestPath) : string.Empty;
 
                 packageId = ExtractJsonString(configJson, "packageId");
+                selectedStyleId = StyleIdFromPackageId(packageId);
                 packageHash = ExtractJsonString(configJson, "packageHash");
                 assetManifestHash = ExtractJsonString(configJson, "assetManifestHash");
                 runtimeConfigHash = ExtractJsonString(configJson, "configHash");
+                if (string.IsNullOrWhiteSpace(runtimeConfigHash))
+                {
+                    runtimeConfigHash = ExtractManifestFileHash(exportManifestJson, "runtime/unity-runtime-config.json");
+                }
+
                 startMapId = ExtractJsonString(configJson, "startMapId");
                 selectedThreadId = ExtractJsonString(configJson, "selectedThreadId");
                 selectedNpcId = FirstValueWithPrefix(configJson, "selectedGeneratedIds", "npc/");
@@ -214,6 +233,7 @@ namespace LLMGameCreatorAlpha
                 lines.Add("alpha_runtime.package_loaded=true");
                 lines.Add("alpha_runtime.asset_manifest_loaded=true");
                 lines.Add("alpha_runtime.package_id=" + packageId);
+                lines.Add("alpha_runtime.selected_style_id=" + selectedStyleId);
                 lines.Add("alpha_runtime.package_hash=" + packageHash);
                 lines.Add("alpha_runtime.asset_manifest_hash=" + assetManifestHash);
                 lines.Add("alpha_runtime.runtime_config_hash=" + runtimeConfigHash);
@@ -261,6 +281,7 @@ namespace LLMGameCreatorAlpha
                 "alpha_runtime.package_loaded=" + payloadLoaded.ToString().ToLowerInvariant(),
                 "alpha_runtime.asset_manifest_loaded=" + payloadLoaded.ToString().ToLowerInvariant(),
                 "alpha_runtime.package_id=" + packageId,
+                "alpha_runtime.selected_style_id=" + selectedStyleId,
                 "alpha_runtime.package_hash=" + packageHash,
                 "alpha_runtime.asset_manifest_hash=" + assetManifestHash,
                 "alpha_runtime.runtime_config_hash=" + runtimeConfigHash,
@@ -299,6 +320,9 @@ namespace LLMGameCreatorAlpha
             lines.Add("alpha_runtime.ref_resolved.event=" + ContainsJsonId(packageJson, selectedEventId).ToString().ToLowerInvariant());
 
             ResetLoop();
+            var initialState = CaptureState();
+            lines.Add("alpha_runtime.map_bounds=" + mapWidth + "x" + mapHeight);
+            lines.Add("alpha_runtime.projected_player_node_position=" + PlayerNodePosition());
             lines.Add("alpha_runtime.movement.initial_position=" + Position());
             var movement0 = TryMove(1, 0);
             lines.Add("alpha_runtime.movement.step.0.valid=" + movement0.ToString().ToLowerInvariant());
@@ -313,15 +337,32 @@ namespace LLMGameCreatorAlpha
             CycleFocus();
             lines.Add("alpha_runtime.focus.selected=" + FocusName());
             lines.Add("alpha_runtime.focus.selected_node_id=" + FocusNodeId());
+            var transitionIndex = 0;
             for (var index = 0; index < commands.Count; index++)
             {
+                var before = CaptureState();
                 var command = InteractWithFocusedTarget();
+                var after = CaptureState();
                 lines.Add("alpha_runtime.command_executed." + index + ".id=" + command.CommandId);
                 lines.Add("alpha_runtime.command_executed." + index + ".type=" + command.CommandType);
                 lines.Add("alpha_runtime.command_executed." + index + ".target_id=" + command.TargetId);
                 lines.Add("alpha_runtime.command_executed." + index + ".secondary_target_id=" + command.SecondaryTargetId);
+                transitionIndex = AppendStateTransitionLines(lines, transitionIndex, command, before, after);
             }
 
+            var finalState = CaptureState();
+            lines.Add("alpha_runtime.command_state_transition_count=" + transitionIndex);
+            AppendStateBeforeAfterLines(lines, "quest_started", initialState.QuestStarted.ToString().ToLowerInvariant(), finalState.QuestStarted.ToString().ToLowerInvariant());
+            AppendStateBeforeAfterLines(lines, "quest_completed_candidate", initialState.QuestCompletedCandidate.ToString().ToLowerInvariant(), finalState.QuestCompletedCandidate.ToString().ToLowerInvariant());
+            AppendStateBeforeAfterLines(lines, "dialogue_opened", initialState.DialogueOpened.ToString().ToLowerInvariant(), finalState.DialogueOpened.ToString().ToLowerInvariant());
+            AppendStateBeforeAfterLines(lines, "dialogue_choice_selected", initialState.DialogueChoiceSelected.ToString().ToLowerInvariant(), finalState.DialogueChoiceSelected.ToString().ToLowerInvariant());
+            AppendStateBeforeAfterLines(lines, "item_obtained", initialState.ItemObtained.ToString().ToLowerInvariant(), finalState.ItemObtained.ToString().ToLowerInvariant());
+            AppendStateBeforeAfterLines(lines, "inventory_item_count", initialState.InventoryItemCount.ToString(), finalState.InventoryItemCount.ToString());
+            AppendStateBeforeAfterLines(lines, "event_applied", initialState.EventApplied.ToString().ToLowerInvariant(), finalState.EventApplied.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.state.after.last_command_id=" + lastCommandId);
+            lines.Add("alpha_runtime.state.after.last_command_type=" + lastCommandType);
+            lines.Add("alpha_runtime.state.after.last_command_target_id=" + lastCommandTargetId);
+            lines.Add("alpha_runtime.state.after.status_text=" + status);
             lines.Add("alpha_runtime.state_transition.quest_start=" + questStarted.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.state_transition.dialogue_open=" + dialogueSeen.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.state_transition.dialogue_choice=" + dialogueChoiceSelected.ToString().ToLowerInvariant());
@@ -329,7 +370,9 @@ namespace LLMGameCreatorAlpha
             lines.Add("alpha_runtime.state_transition.event_application=" + eventApplied.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.quest_started=" + questStarted.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.dialogue_seen=" + dialogueSeen.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.dialogue_choice_selected=" + dialogueChoiceSelected.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.item_obtained=" + itemObtained.ToString().ToLowerInvariant());
+            lines.Add("alpha_runtime.inventory_item_count=" + inventoryItemCount);
             lines.Add("alpha_runtime.event_applied=" + eventApplied.ToString().ToLowerInvariant());
             lines.Add("alpha_runtime.commands_executed=" + currentCommandIndex);
             lines.Add("alpha_runtime.play_loop_completed=" + IsCurrentLoopComplete().ToString().ToLowerInvariant());
@@ -353,6 +396,9 @@ namespace LLMGameCreatorAlpha
             var command = commands[currentCommandIndex];
             currentCommandIndex++;
             ApplyCommand(command);
+            lastCommandId = command.CommandId;
+            lastCommandType = command.CommandType;
+            lastCommandTargetId = command.TargetId;
             status = "Executed " + command.CommandType + " -> " + Display(command.TargetId);
             playLog.Add(currentCommandIndex + ". " + command.CommandType + " -> " + Display(command.TargetId));
             return command;
@@ -401,18 +447,20 @@ namespace LLMGameCreatorAlpha
             else if (command.CommandType == "dialogue/choose")
             {
                 dialogueChoiceSelected = !string.IsNullOrWhiteSpace(command.TargetId);
-                dialogueSeen = dialogueChoiceSelected || dialogueSeen;
-                questStarted = !string.IsNullOrWhiteSpace(command.SecondaryTargetId) || questStarted;
             }
             else if (command.CommandType == "loot/roll")
             {
                 itemObtained = !string.IsNullOrWhiteSpace(selectedItemId);
+                inventoryItemCount = itemObtained ? Math.Max(1, inventoryItemCount) : inventoryItemCount;
             }
             else if (command.CommandType.StartsWith("event/", StringComparison.Ordinal))
             {
                 eventApplied = !string.IsNullOrWhiteSpace(command.SecondaryTargetId) || !string.IsNullOrWhiteSpace(selectedEventId);
                 itemObtained = command.CommandType == "event/add_item" || itemObtained;
+                inventoryItemCount = command.CommandType == "event/add_item" ? Math.Max(1, inventoryItemCount) : inventoryItemCount;
             }
+
+            questCompletedCandidate = questStarted && dialogueSeen && dialogueChoiceSelected && itemObtained && eventApplied;
         }
 
         private void ResetLoop()
@@ -432,7 +480,12 @@ namespace LLMGameCreatorAlpha
             dialogueSeen = false;
             dialogueChoiceSelected = false;
             itemObtained = false;
+            questCompletedCandidate = false;
             eventApplied = false;
+            inventoryItemCount = 0;
+            lastCommandId = string.Empty;
+            lastCommandType = string.Empty;
+            lastCommandTargetId = string.Empty;
             playLog.Clear();
             status = payloadLoaded ? "Ready. Press Space or Advance." : "Payload not loaded.";
         }
@@ -446,6 +499,7 @@ namespace LLMGameCreatorAlpha
                 dialogueSeen &&
                 dialogueChoiceSelected &&
                 itemObtained &&
+                inventoryItemCount > 0 &&
                 eventApplied;
         }
 
@@ -473,6 +527,76 @@ namespace LLMGameCreatorAlpha
             }
 
             return focusableSceneNodes[focusedTargetIndex % focusableSceneNodes.Count].NodeId;
+        }
+
+        private string PlayerNodePosition()
+        {
+            var playerNode = SceneNode("player");
+            return playerNode == null ? string.Empty : playerNode.X + "," + playerNode.Y;
+        }
+
+        private AlphaRuntimeStateSnapshot CaptureState()
+        {
+            return new AlphaRuntimeStateSnapshot
+            {
+                QuestStarted = questStarted,
+                QuestCompletedCandidate = questCompletedCandidate,
+                DialogueOpened = dialogueSeen,
+                DialogueChoiceSelected = dialogueChoiceSelected,
+                ItemObtained = itemObtained,
+                InventoryItemCount = inventoryItemCount,
+                EventApplied = eventApplied,
+                LastCommandId = lastCommandId,
+                LastCommandType = lastCommandType,
+                LastCommandTargetId = lastCommandTargetId,
+                StatusText = status
+            };
+        }
+
+        private static void AppendStateBeforeAfterLines(ICollection<string> lines, string key, string before, string after)
+        {
+            lines.Add("alpha_runtime.state.before." + key + "=" + before);
+            lines.Add("alpha_runtime.state.after." + key + "=" + after);
+        }
+
+        private static int AppendStateTransitionLines(
+            ICollection<string> lines,
+            int transitionIndex,
+            AlphaCommandHint command,
+            AlphaRuntimeStateSnapshot before,
+            AlphaRuntimeStateSnapshot after)
+        {
+            transitionIndex = AppendChanged(lines, transitionIndex, command, "questStarted", before.QuestStarted.ToString().ToLowerInvariant(), after.QuestStarted.ToString().ToLowerInvariant());
+            transitionIndex = AppendChanged(lines, transitionIndex, command, "questCompletedCandidate", before.QuestCompletedCandidate.ToString().ToLowerInvariant(), after.QuestCompletedCandidate.ToString().ToLowerInvariant());
+            transitionIndex = AppendChanged(lines, transitionIndex, command, "dialogueOpened", before.DialogueOpened.ToString().ToLowerInvariant(), after.DialogueOpened.ToString().ToLowerInvariant());
+            transitionIndex = AppendChanged(lines, transitionIndex, command, "dialogueChoiceSelected", before.DialogueChoiceSelected.ToString().ToLowerInvariant(), after.DialogueChoiceSelected.ToString().ToLowerInvariant());
+            transitionIndex = AppendChanged(lines, transitionIndex, command, "itemObtained", before.ItemObtained.ToString().ToLowerInvariant(), after.ItemObtained.ToString().ToLowerInvariant());
+            transitionIndex = AppendChanged(lines, transitionIndex, command, "inventoryItemCount", before.InventoryItemCount.ToString(), after.InventoryItemCount.ToString());
+            transitionIndex = AppendChanged(lines, transitionIndex, command, "eventApplied", before.EventApplied.ToString().ToLowerInvariant(), after.EventApplied.ToString().ToLowerInvariant());
+            return transitionIndex;
+        }
+
+        private static int AppendChanged(
+            ICollection<string> lines,
+            int transitionIndex,
+            AlphaCommandHint command,
+            string stateKey,
+            string before,
+            string after)
+        {
+            if (before == after)
+            {
+                return transitionIndex;
+            }
+
+            lines.Add("alpha_runtime.command_state_transition." + transitionIndex + ".command_id=" + command.CommandId);
+            lines.Add("alpha_runtime.command_state_transition." + transitionIndex + ".command_type=" + command.CommandType);
+            lines.Add("alpha_runtime.command_state_transition." + transitionIndex + ".target_id=" + command.TargetId);
+            lines.Add("alpha_runtime.command_state_transition." + transitionIndex + ".secondary_target_id=" + command.SecondaryTargetId);
+            lines.Add("alpha_runtime.command_state_transition." + transitionIndex + ".state_key=" + stateKey);
+            lines.Add("alpha_runtime.command_state_transition." + transitionIndex + ".before=" + before);
+            lines.Add("alpha_runtime.command_state_transition." + transitionIndex + ".after=" + after);
+            return transitionIndex + 1;
         }
 
         private void DrawMap(float left, float top)
@@ -739,6 +863,25 @@ namespace LLMGameCreatorAlpha
             return count;
         }
 
+        private static string ExtractManifestFileHash(string json, string relativePath)
+        {
+            if (string.IsNullOrWhiteSpace(json) || string.IsNullOrWhiteSpace(relativePath))
+            {
+                return string.Empty;
+            }
+
+            foreach (Match match in Regex.Matches(json, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                if (ExtractJsonString(value, "relativePath") == relativePath)
+                {
+                    return ExtractJsonString(value, "hash");
+                }
+            }
+
+            return string.Empty;
+        }
+
         private static bool IsLaunchSuccessful(IEnumerable<string> lines)
         {
             foreach (var line in lines)
@@ -819,6 +962,17 @@ namespace LLMGameCreatorAlpha
             return parts.Length == 0 ? value : parts[parts.Length - 1];
         }
 
+        private static string StyleIdFromPackageId(string value)
+        {
+            const string prefix = "game/content_generation/";
+            if (!value.StartsWith(prefix, StringComparison.Ordinal))
+            {
+                return string.Empty;
+            }
+
+            return value.Substring(prefix.Length).Replace('-', '_');
+        }
+
         private static int StableInt(string value)
         {
             var hash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(value ?? string.Empty));
@@ -854,6 +1008,21 @@ namespace LLMGameCreatorAlpha
             public string Label = string.Empty;
             public int X;
             public int Y;
+        }
+
+        private sealed class AlphaRuntimeStateSnapshot
+        {
+            public bool QuestStarted;
+            public bool QuestCompletedCandidate;
+            public bool DialogueOpened;
+            public bool DialogueChoiceSelected;
+            public bool ItemObtained;
+            public int InventoryItemCount;
+            public bool EventApplied;
+            public string LastCommandId = string.Empty;
+            public string LastCommandType = string.Empty;
+            public string LastCommandTargetId = string.Empty;
+            public string StatusText = string.Empty;
         }
     }
 }

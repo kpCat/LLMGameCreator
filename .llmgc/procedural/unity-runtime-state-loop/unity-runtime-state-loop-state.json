@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "unity_runtime_state_loop_v1",
+  "selectedPackageId": "game/content_generation/frontier-survival",
+  "selectedStyleId": "frontier_survival",
+  "selectedThreadId": "thread/frontier-survival/000",
+  "selectedMapId": "map/frontier-survival/start",
+  "selectedSceneNodeIds": [
+    "scene_node/command_status/2d67e0734896",
+    "scene_node/item/991ba3f168f2",
+    "scene_node/map/1586660da190",
+    "scene_node/npc/f9222da8a8a6",
+    "scene_node/player/021ecac437d9",
+    "scene_node/quest_event/6f594224d6d7"
+  ],
+  "selectedCommandHints": [
+    {
+      "commandId": "cmd/frontier-survival/000/choose_dialogue",
+      "commandType": "dialogue/choose",
+      "targetId": "choice/frontier-survival/8cb7a7d288/028",
+      "secondaryTargetId": "quest/frontier-survival/c2ed6dc235/000"
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/frontier-survival/7f81222990/004",
+      "secondaryTargetId": "event/frontier-survival/4f2d855a33/000"
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/open_dialogue",
+      "commandType": "dialogue/open",
+      "targetId": "dialogue/frontier-survival/51924b073c/028",
+      "secondaryTargetId": ""
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/roll_loot",
+      "commandType": "loot/roll",
+      "targetId": "loot_table/frontier-survival/primary",
+      "secondaryTargetId": ""
+    },
+    {
+      "commandId": "cmd/frontier-survival/000/start_quest",
+      "commandType": "quest/start",
+      "targetId": "quest/frontier-survival/c2ed6dc235/000",
+      "secondaryTargetId": ""
+    }
+  ],
+  "playerPositionBefore": "2,1",
+  "playerPositionAfter": "3,2",
+  "blockedMovementPosition": "0,2",
+  "focusedNodeId": "scene_node/npc/f9222da8a8a6",
+  "focusedSourceId": "npc/frontier-survival/11ffe0aa42/018",
+  "questStateBefore": false,
+  "questStateAfter": true,
+  "questCompletedCandidate": true,
+  "dialogueOpenedBefore": false,
+  "dialogueOpenedAfter": true,
+  "dialogueChoiceSelectedBefore": false,
+  "dialogueChoiceSelectedAfter": true,
+  "itemObtainedBefore": false,
+  "itemObtainedAfter": true,
+  "inventoryItemCountBefore": 0,
+  "inventoryItemCountAfter": 1,
+  "eventAppliedBefore": false,
+  "eventAppliedAfter": true,
+  "lastCommandId": "cmd/frontier-survival/000/start_quest",
+  "lastCommandType": "quest/start",
+  "lastCommandTargetId": "quest/frontier-survival/c2ed6dc235/000",
+  "statusText": "Executed quest/start -> quest/frontier-survival/c2ed6dc235/000",
+  "commandExecutionTrace": [
+    {
+      "index": 0,
+      "commandId": "cmd/frontier-survival/000/choose_dialogue",
+      "commandType": "dialogue/choose",
+      "targetId": "choice/frontier-survival/8cb7a7d288/028",
+      "secondaryTargetId": "quest/frontier-survival/c2ed6dc235/000",
+      "stateKey": "dialogueChoiceSelected",
+      "before": "false",
+      "after": "true"
+    },
+    {
+      "index": 1,
+      "commandId": "cmd/frontier-survival/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/frontier-survival/7f81222990/004",
+      "secondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+      "stateKey": "itemObtained",
+      "before": "false",
+      "after": "true"
+    },
+    {
+      "index": 2,
+      "commandId": "cmd/frontier-survival/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/frontier-survival/7f81222990/004",
+      "secondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+      "stateKey": "inventoryItemCount",
+      "before": "0",
+      "after": "1"
+    },
+    {
+      "index": 3,
+      "commandId": "cmd/frontier-survival/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/frontier-survival/7f81222990/004",
+      "secondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+      "stateKey": "eventApplied",
+      "before": "false",
+      "after": "true"
+    },
+    {
+      "index": 4,
+      "commandId": "cmd/frontier-survival/000/open_dialogue",
+      "commandType": "dialogue/open",
+      "targetId": "dialogue/frontier-survival/51924b073c/028",
+      "secondaryTargetId": "",
+      "stateKey": "dialogueOpened",
+      "before": "false",
+      "after": "true"
+    },
+    {
+      "index": 5,
+      "commandId": "cmd/frontier-survival/000/start_quest",
+      "commandType": "quest/start",
+      "targetId": "quest/frontier-survival/c2ed6dc235/000",
+      "secondaryTargetId": "",
+      "stateKey": "questStarted",
+      "before": "false",
+      "after": "true"
+    },
+    {
+      "index": 6,
+      "commandId": "cmd/frontier-survival/000/start_quest",
+      "commandType": "quest/start",
+      "targetId": "quest/frontier-survival/c2ed6dc235/000",
+      "secondaryTargetId": "",
+      "stateKey": "questCompletedCandidate",
+      "before": "false",
+      "after": "true"
+    }
+  ],
+  "stateHash": "5d73bd5d27c171ffb2a0235d09fdd0d5cbe961c486608561ac97c5ee96eeb5ec"
+}

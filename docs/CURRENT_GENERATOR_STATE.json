@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T20:30:00Z",
+    "updated_at_utc":  "2026-06-26T22:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 015 Unity generated scene content projection verification required",
-    "gate_status":  "unity_generated_scene_content_projection_verification",
+    "current_phase_title":  "Goal 016 Unity generated runtime state loop verification required",
+    "gate_status":  "unity_generated_runtime_state_loop_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_015_unity_generated_scene_content_projection",
-    "active_manual_gate":  "Goal 015 projects Unity Alpha scene content from selected generated package, runtime config, command hints and asset refs; unity_generated_scene_content_projection_verification remains required and not passed until the generated scene projection evidence is accepted.",
-    "current_user_action":  "Review the produced Unity generated scene projection report, projection JSON, Unity build log, launch/play-loop logs, generated node binding proof and firewall-safe build flags; do not mark unity_generated_scene_content_projection_verification passed until the real player evidence is accepted.",
-    "recommended_next_decision":  "The user confirmed unity_playable_presentation_firewall_safe_build_verification passed before Goal 015. Goal 015 completes S122-S129 by adding a narrow Application-layer Unity generated scene projection acceptance service under Design/UnityGeneratedScene, extending the repo-local Unity Alpha runtime script so map/player/NPC/item/quest-event/command-status markers and logs derive from selected generated package/config evidence, proving deterministic scene nodes, generated-id bindings, asset bindings, movement/focus/interaction logs, rejecting invalid/fake/leak scene evidence causally and adding the unity-generated-scene-projection product smoke route. Compact review artifacts are written under .llmgc/procedural/unity-generated-scene-projection while heavy Unity build/log/unity-work outputs remain ignored. Goal 015 stops at unity_generated_scene_content_projection_verification required; do not mark it passed and do not start S130 or Goal 016.",
+    "last_completed_product_slice_id":  "goal_016_unity_generated_runtime_state_loop",
+    "active_manual_gate":  "Goal 016 turns Unity generated scene projection into a visible runtime state loop with quest/dialogue/item/inventory/event before-after evidence; unity_generated_runtime_state_loop_verification remains required and not passed until the generated runtime state loop evidence is accepted.",
+    "current_user_action":  "Review the produced Unity runtime state loop report, state JSON, Unity build log, launch/play-loop logs, command/state transition proof and invalid/fake/leak matrix; do not mark unity_generated_runtime_state_loop_verification passed until the real player evidence is accepted.",
+    "recommended_next_decision":  "The user confirmed unity_generated_scene_content_projection_verification passed before Goal 016. Goal 016 completes S130-S137 by adding a narrow Application-layer Unity runtime state loop acceptance service under Design/UnityRuntimeState, extending the repo-local Unity Alpha runtime script so generated command hints update visible quest/dialogue/item/inventory/event/status state, proving before-after state transitions from real player play-loop logs, rejecting invalid/fake/leak state evidence causally and adding the unity-runtime-state-loop product smoke route. Compact review artifacts are written under .llmgc/procedural/unity-runtime-state-loop while heavy Unity build/log/unity-work outputs remain ignored. Goal 016 stops at unity_generated_runtime_state_loop_verification required; do not mark it passed and do not start S138 or Goal 017.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "unity_generated_scene_content_projection_verification"
+                                                        "unity_generated_runtime_state_loop_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -41,7 +41,8 @@
                            "goal_012_manual_gate":  "unity_runtime_export_vertical_slice_artifact_verification",
                            "goal_013_manual_gate":  "alpha_runnable_windows_build_verification",
                            "goal_014_manual_gate":  "unity_playable_presentation_firewall_safe_build_verification",
-                           "goal_015_manual_gate":  "unity_generated_scene_content_projection_verification"
+                           "goal_015_manual_gate":  "unity_generated_scene_content_projection_verification",
+                           "goal_016_manual_gate":  "unity_generated_runtime_state_loop_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -62,17 +63,17 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_015_unity_generated_scene_content_projection",
-                                         "title":  "Unity Generated Scene Content Projection",
-                                         "completed_at_utc":  "2026-06-26T20:30:00Z",
-                                         "summary":  "Goal 015 records the user-confirmed unity_playable_presentation_firewall_safe_build_verification passed gate, adds a narrow Application-layer Unity generated scene projection acceptance service under Design/UnityGeneratedScene, reuses accepted content, asset, Unity export and Alpha build evidence, projects map/player/NPC/item/quest-event/command-status nodes from selected package/config/asset refs, extends the repo-local Unity Alpha runtime script to render/log generated scene nodes instead of fixed placeholders, validates movement/focus/interaction against generated command hints, rejects invalid/fake/leak projection evidence causally and adds the unity-generated-scene-projection product smoke route. The active manual gate is unity_generated_scene_content_projection_verification required.",
-                                         "scenario_id":  "unity-generated-scene-projection",
+                                         "slice_id":  "goal_016_unity_generated_runtime_state_loop",
+                                         "title":  "Unity Generated Runtime State Loop",
+                                         "completed_at_utc":  "2026-06-26T22:00:00Z",
+                                         "summary":  "Goal 016 records the user-confirmed unity_generated_scene_content_projection_verification passed gate, adds a narrow Application-layer Unity runtime state loop acceptance service under Design/UnityRuntimeState, reuses accepted content, asset, Alpha build and Goal 015 scene projection evidence, writes compact state/report/verification artifacts under .llmgc/procedural/unity-runtime-state-loop, extends the repo-local Unity Alpha runtime script so visible generated interactions update quest, dialogue, item, inventory, event, focus and status state, validates before-after command/state transitions from real player play-loop logs, rejects invalid/fake/leak runtime-state evidence causally and adds the unity-runtime-state-loop product smoke route. The active manual gate is unity_generated_runtime_state_loop_verification required.",
+                                         "scenario_id":  "unity-runtime-state-loop",
                                          "checks":  [
-                                                        "UnityGeneratedScene focused tests: 4/4 passed",
-                                                        "Goal 015 filtered tests (UnityGeneratedScene/UnityPlayableAlpha/CurrentGeneratorStateDocsTests): 18/18 passed",
-                                                        "unity-generated-scene-projection product smoke: 1/1 passed",
-                                                        "Goal 015 report hash 05c1a7cf4b361608871ccac7fa587540a3664552c5c4b96017f6d0bcbfa5adc6, projection hash 1f99588ffd7d8c0e89c33e0482d804517e6a448843fcbdac533b4a5cd41f9c21, build manifest hash 6aaf1c34b437330f1ed9cf4fdc1b09b3f5c72c125381691fa4a9a07150002948",
-                                                        "check-all.ps1: 807/807 tests passed, build 0 warnings / 0 errors"
+                                                        "UnityRuntimeState focused tests: 2/2 passed",
+                                                        "Goal 016 filtered tests (UnityRuntimeState/UnityGeneratedScene/CurrentGeneratorStateDocsTests): 17/17 passed",
+                                                        "unity-runtime-state-loop product smoke: 1/1 passed",
+                                                        "Goal 016 state-loop hash 5d73bd5d27c171ffb2a0235d09fdd0d5cbe961c486608561ac97c5ee96eeb5ec, report hash 23cd50c8e1bf1bf2fb3a8d281eb646d00fe87b395fc40b457ef6d76ae9a7abd2, build manifest hash 3ee38b49cd4fd0f96333b4f2f73f6c72ed2a467bc740496442b7c381ac03cfbe, command/state transitions 7, invalid scenarios 20",
+                                                        "check-all.ps1: 810/810 tests passed, build 0 warnings / 0 errors"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -332,7 +333,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "unity_generated_scene_content_projection_verification"
+                                          "unity_generated_runtime_state_loop_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -353,11 +354,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "unity_generated_scene_content_projection_verification",
-    "recommended_next_work_item_title":  "Goal 015 Unity generated scene content projection verification review.",
-    "recommended_next_task_file":  ".llmgc/procedural/unity-generated-scene-projection/unity-generated-scene-projection-verification.md",
+    "recommended_next_work_item":  "unity_generated_runtime_state_loop_verification",
+    "recommended_next_work_item_title":  "Goal 016 Unity generated runtime state loop verification review.",
+    "recommended_next_task_file":  ".llmgc/procedural/unity-runtime-state-loop/unity-runtime-state-loop-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Unity generated scene content projection verification review"
+                                              "Unity generated runtime state loop verification review"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -429,7 +430,7 @@
                               "Unity playable Alpha presentation, movement/interaction logs and firewall-safe release-style build evidence",
                               "Unity generated scene content projection acceptance sidecars and generated-node play-loop evidence"
                           ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 015 stop at unity_generated_scene_content_projection_verification required and do not start S130, Goal 016 or post-Goal-015 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 016 stop at unity_generated_runtime_state_loop_verification required and do not start S138, Goal 017 or post-Goal-016 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -483,7 +484,7 @@
                                                                         "next_action":  "goal_015_unity_generated_scene_content_projection"
                                                                     },
     "unity_generated_scene_content_projection_verification":  {
-                                                                  "status":  "required",
+                                                                  "status":  "passed",
                                                                   "evidence_source":  "goal_015_unity_generated_scene_content_projection",
                                                                   "observed_result":  [
                                                                       "Unity generated scene projection artifacts are written under .llmgc/procedural/unity-generated-scene-projection",
@@ -492,9 +493,24 @@
                                                                       "Invalid/fake/leak scene projection matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
                                                                       "Product smoke route is unity-generated-scene-projection",
                                                                       "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                                      "Gate remains required and is not marked passed"
+                                                                      "user confirmed unity_generated_scene_content_projection_verification passed before Goal 016"
                                                                                   ],
-                                                                  "next_action":  "review_unity_generated_scene_content_projection_evidence_before_marking_gate_passed"
+                                                                  "next_action":  "goal_016_unity_generated_runtime_state_loop"
+                                                              },
+    "unity_generated_runtime_state_loop_verification":  {
+                                                            "status":  "required",
+                                                            "evidence_source":  "goal_016_unity_generated_runtime_state_loop",
+                                                            "observed_result":  [
+                                                                "Unity runtime state loop artifacts are written under .llmgc/procedural/unity-runtime-state-loop",
+                                                                "Application state-loop acceptance derives selected package/style/thread/map/nodes/commands from accepted generated scene projection and Alpha evidence",
+                                                                "Unity Alpha runtime logs quest/dialogue/item/inventory/event before-after state transitions",
+                                                                "Command/state transitions are correlated to generated command id/type/target evidence",
+                                                                "Invalid/fake/leak runtime-state matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
+                                                                "Product smoke route is unity-runtime-state-loop",
+                                                                "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                "Gate remains required and is not marked passed"
+                                                                            ],
+                                                            "next_action":  "review_unity_generated_runtime_state_loop_evidence_before_marking_gate_passed"
                                                               },
     "alpha_unity_build_environment_blocker":  {
                                                  "status":  "resolved_by_s113b",
@@ -555,9 +571,9 @@
     "goal_015_unity_generated_scene_content_projection":  {
                                                              "slice_id":  "goal_015_unity_generated_scene_content_projection",
                                                              "title":  "Unity Generated Scene Content Projection",
-                                                             "status":  "verification_required",
+                                                             "status":  "passed_by_user_prompt_before_goal_016",
                                                              "blocked_at_utc":  "",
-                                                             "summary":  "Goal 015 records the user-confirmed unity_playable_presentation_firewall_safe_build_verification passed gate, completes S122-S129, adds a narrow Application-layer UnityGeneratedScene acceptance service, writes compact projection/report/verification artifacts under .llmgc/procedural/unity-generated-scene-projection, derives map/player/NPC/item/quest-event/command-status nodes from selected generated package/config/asset evidence, updates the existing Unity Alpha runtime script so visible map markers and automated logs are generated-content-driven, validates movement/focus/interaction against generated command hints and rejects invalid/fake/leak projection evidence causally. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S130/Goal 016 are not started.",
+                                                             "summary":  "Goal 015 records the user-confirmed unity_playable_presentation_firewall_safe_build_verification passed gate, completes S122-S129, adds a narrow Application-layer UnityGeneratedScene acceptance service, writes compact projection/report/verification artifacts under .llmgc/procedural/unity-generated-scene-projection, derives map/player/NPC/item/quest-event/command-status nodes from selected generated package/config/asset evidence, updates the existing Unity Alpha runtime script so visible map markers and automated logs are generated-content-driven, validates movement/focus/interaction against generated command hints and rejects invalid/fake/leak projection evidence causally. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed unity_generated_scene_content_projection_verification passed before Goal 016.",
                                                              "scenario_id":  "unity-generated-scene-projection",
                                                              "checks":  [
                                                                             "UnityGeneratedScene focused tests: 4/4 passed",
@@ -567,6 +583,21 @@
                                                                             "check-all.ps1: 807/807 tests passed, build 0 warnings / 0 errors"
                                                                         ]
                                                          },
+    "goal_016_unity_generated_runtime_state_loop":  {
+                                                        "slice_id":  "goal_016_unity_generated_runtime_state_loop",
+                                                        "title":  "Unity Generated Runtime State Loop",
+                                                        "status":  "verification_required",
+                                                        "blocked_at_utc":  "",
+                                                        "summary":  "Goal 016 records the user-confirmed unity_generated_scene_content_projection_verification passed gate, completes S130-S137, adds a narrow Application-layer UnityRuntimeState acceptance service, writes compact state/report/verification artifacts under .llmgc/procedural/unity-runtime-state-loop, extends the existing Unity Alpha runtime script so generated command hints update visible quest/dialogue/item/inventory/event/focus/status state, validates before-after state transitions and command id/type/target correlations from real player play-loop logs, rejects invalid/fake/leak runtime-state evidence causally and adds the unity-runtime-state-loop product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S138/Goal 017 are not started.",
+                                                        "scenario_id":  "unity-runtime-state-loop",
+                                                        "checks":  [
+                                                                       "UnityRuntimeState focused tests: 2/2 passed",
+                                                                       "Goal 016 filtered tests (UnityRuntimeState/UnityGeneratedScene/CurrentGeneratorStateDocsTests): 17/17 passed",
+                                                                       "unity-runtime-state-loop product smoke: 1/1 passed",
+                                                                       "Goal 016 state-loop hash 5d73bd5d27c171ffb2a0235d09fdd0d5cbe961c486608561ac97c5ee96eeb5ec, report hash 23cd50c8e1bf1bf2fb3a8d281eb646d00fe87b395fc40b457ef6d76ae9a7abd2, build manifest hash 3ee38b49cd4fd0f96333b4f2f73f6c72ed2a467bc740496442b7c381ac03cfbe, command/state transitions 7, invalid scenarios 20",
+                                                                       "check-all.ps1: 810/810 tests passed, build 0 warnings / 0 errors"
+                                                                   ]
+                                                    },
     "goal_012_unity_runtime_export_vertical_slice":  {
                                                          "slice_id":  "goal_012_unity_runtime_export_vertical_slice",
                                                          "title":  "Unity Runtime Export Vertical Slice",
