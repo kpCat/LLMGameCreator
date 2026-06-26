@@ -67,7 +67,15 @@ public sealed class UnityRuntimeExportAcceptanceService
 
         var settings = options ?? new UnityRuntimeExportOptions();
         var projectRoot = Path.GetFullPath(projectRootPath);
-        var artifactRoot = Path.GetFullPath(Path.Combine(projectRoot, ".llmgc", "procedural", "unity-runtime-export"));
+        var relativeOutputDirectory = string.IsNullOrWhiteSpace(settings.RelativeOutputDirectoryOverride)
+            ? RelativeOutputDirectory
+            : settings.RelativeOutputDirectoryOverride;
+        if (!IsSafeRelativePath(relativeOutputDirectory))
+        {
+            throw new ArgumentException("Relative output directory override must be a safe relative path.", nameof(options));
+        }
+
+        var artifactRoot = Path.GetFullPath(Path.Combine(projectRoot, relativeOutputDirectory.Replace('/', Path.DirectorySeparatorChar)));
         var exportRoot = Path.GetFullPath(Path.Combine(artifactRoot, ExportDirectoryName));
         EnsureContained(projectRoot, artifactRoot);
         EnsureContained(artifactRoot, exportRoot);
@@ -1079,6 +1087,7 @@ public sealed record UnityRuntimeExportOptions
 {
     public int SelectionOrdinal { get; init; }
     public bool IncludeExpectationOnlyInvalidMutation { get; init; } = true;
+    public string RelativeOutputDirectoryOverride { get; init; } = string.Empty;
 }
 
 public sealed record UnityRuntimeExportAcceptanceResult

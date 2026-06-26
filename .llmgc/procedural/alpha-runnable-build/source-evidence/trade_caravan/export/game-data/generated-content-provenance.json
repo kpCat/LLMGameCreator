@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "unity_runtime_generated_content_payload_v1",
+  "packageId": "game/content_generation/trade-caravan",
+  "packId": "trade_caravan",
+  "contentCatalogHash": "00c4d2c20b81a6e0692bb25370a1f394efdef7558c643c9cf42414592b8bcb9a",
+  "selectedThreadId": "thread/trade-caravan/000",
+  "selectedGeneratedIds": [
+    "choice/trade-caravan/3059e36f18/018",
+    "dialogue/trade-caravan/88908c06dd/018",
+    "event/trade-caravan/e1b2955ba9/000",
+    "item/trade-caravan/7bbca01309/011",
+    "item/trade-caravan/b477d29727/012",
+    "loot_table/trade-caravan/primary",
+    "objective/trade-caravan/eb9e72fee0/002",
+    "quest/trade-caravan/80137887dd/002"
+  ],
+  "commandHints": [
+    {
+      "commandId": "cmd/trade-caravan/000/choose_dialogue",
+      "commandType": "dialogue/choose",
+      "targetId": "choice/trade-caravan/3059e36f18/018",
+      "secondaryTargetId": "quest/trade-caravan/80137887dd/002",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/trade-caravan/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/trade-caravan/7bbca01309/011",
+      "secondaryTargetId": "event/trade-caravan/e1b2955ba9/000",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/trade-caravan/000/open_dialogue",
+      "commandType": "dialogue/open",
+      "targetId": "dialogue/trade-caravan/88908c06dd/018",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/trade-caravan/000/roll_loot",
+      "commandType": "loot/roll",
+      "targetId": "loot_table/trade-caravan/primary",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/trade-caravan/000/start_quest",
+      "commandType": "quest/start",
+      "targetId": "quest/trade-caravan/80137887dd/002",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    }
+  ],
+  "saveLoad": {
+    "runtimeStateHash": "a7b017bb6862307702dc6ef4793e4c0aef46a07a7497005e5b46bef46a83966b",
+    "restoredRuntimeStateHash": "a7b017bb6862307702dc6ef4793e4c0aef46a07a7497005e5b46bef46a83966b",
+    "saveLoadRoundtripPassed": true
+  }
+}

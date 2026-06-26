@@ -1,0 +1,1105 @@
+{
+  "accepted": false,
+  "finalStatus": "alpha_unity_build_environment_blocker",
+  "blockerReached": true,
+  "manualGate": "alpha_unity_build_environment_blocker",
+  "previousAcceptedGate": "unity_runtime_export_vertical_slice_artifact_verification passed",
+  "completedSlices": [
+    "S106",
+    "S107",
+    "S108",
+    "S109",
+    "S110",
+    "S111",
+    "S112",
+    "S113"
+  ],
+  "productSmokeRoute": "alpha-runnable-build",
+  "styleCandidates": [
+    {
+      "accepted": true,
+      "ordinal": 0,
+      "styleId": "frontier_survival",
+      "styleName": "frontier survival",
+      "packageId": "game/content_generation/frontier-survival",
+      "packId": "frontier_survival",
+      "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+      "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+      "exportManifestHash": "cd28d799e3e9b5d96be785eab80b6a5749552172dcbd6dbce6e28f7280a39a81",
+      "exportFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/source-evidence/frontier_survival/export",
+      "runtimeConfigHash": "569f440bba0f0aca3cacd5fdb1ff5a856d25b5609302681d3faddb3922195bf2",
+      "selectedThreadId": "thread/frontier-survival/000",
+      "loopRefs": {
+        "mapId": "map/frontier-survival/start",
+        "npcId": "npc/frontier-survival/11ffe0aa42/018",
+        "questId": "quest/frontier-survival/c2ed6dc235/000",
+        "dialogueId": "dialogue/frontier-survival/51924b073c/028",
+        "itemId": "item/frontier-survival/7f81222990/004",
+        "eventId": "event/frontier-survival/4f2d855a33/000",
+        "runtimeCommandHintIds": [
+          "cmd/frontier-survival/000/choose_dialogue",
+          "cmd/frontier-survival/000/event_add_item",
+          "cmd/frontier-survival/000/open_dialogue",
+          "cmd/frontier-survival/000/roll_loot",
+          "cmd/frontier-survival/000/start_quest"
+        ]
+      },
+      "assetRefs": [
+        {
+          "category": "item_icon_ui_graphic",
+          "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+          "contentId": "item/frontier-survival/032bdc46ab/062",
+          "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+          "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+          "byteCount": 268
+        },
+        {
+          "category": "music_ambience",
+          "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+          "contentId": "event/frontier-survival/00ba2e87c9/005",
+          "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+          "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+          "byteCount": 69
+        },
+        {
+          "category": "npc_portrait",
+          "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+          "contentId": "npc/frontier-survival/11ffe0aa42/018",
+          "exportRelativePath": "assets/npc-portrait/asset-002-b5037955.fixture",
+          "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+          "byteCount": 266
+        },
+        {
+          "category": "sound_effect",
+          "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+          "contentId": "dialogue/frontier-survival/0490f2f50e/013",
+          "exportRelativePath": "assets/sound-effect/asset-003-b6002d93.fixture",
+          "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+          "byteCount": 270
+        },
+        {
+          "category": "tile_region_graphic",
+          "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+          "contentId": "map/frontier-survival/start",
+          "exportRelativePath": "assets/tile-region-graphic/asset-004-f8e7e136.fixture",
+          "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+          "byteCount": 247
+        }
+      ],
+      "commandHints": [
+        {
+          "commandId": "cmd/frontier-survival/000/choose_dialogue",
+          "commandType": "dialogue/choose",
+          "targetId": "choice/frontier-survival/8cb7a7d288/028",
+          "secondaryTargetId": "quest/frontier-survival/c2ed6dc235/000",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/frontier-survival/000/event_add_item",
+          "commandType": "event/add_item",
+          "targetId": "item/frontier-survival/7f81222990/004",
+          "secondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/frontier-survival/000/open_dialogue",
+          "commandType": "dialogue/open",
+          "targetId": "dialogue/frontier-survival/51924b073c/028",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/frontier-survival/000/roll_loot",
+          "commandType": "loot/roll",
+          "targetId": "loot_table/frontier-survival/primary",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/frontier-survival/000/start_quest",
+          "commandType": "quest/start",
+          "targetId": "quest/frontier-survival/c2ed6dc235/000",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "accepted": true,
+      "ordinal": 1,
+      "styleId": "gothic_mystery",
+      "styleName": "gothic mystery",
+      "packageId": "game/content_generation/gothic-mystery",
+      "packId": "gothic_mystery",
+      "packageHash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+      "assetManifestHash": "09dc29d8c7d41df403e20122d035be088b3746d32151df7e892e895c7bbcf195",
+      "exportManifestHash": "cc802ab8cec3455c1e1331f8db85042ae42e4e51be3860adb0a719dcb6231da6",
+      "exportFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/source-evidence/gothic_mystery/export",
+      "runtimeConfigHash": "d04ae4779cb326c01046d9b4a59d6af0b1d39c43da3d495e9b8a68a737ebb6a5",
+      "selectedThreadId": "thread/gothic-mystery/000",
+      "loopRefs": {
+        "mapId": "map/gothic-mystery/start",
+        "npcId": "npc/gothic-mystery/0a7aa5762f/022",
+        "questId": "quest/gothic-mystery/3629ab93b2/001",
+        "dialogueId": "dialogue/gothic-mystery/91a942bcf7/006",
+        "itemId": "item/gothic-mystery/395c95994d/000",
+        "eventId": "event/gothic-mystery/aa4f467660/000",
+        "runtimeCommandHintIds": [
+          "cmd/gothic-mystery/000/choose_dialogue",
+          "cmd/gothic-mystery/000/event_add_item",
+          "cmd/gothic-mystery/000/open_dialogue",
+          "cmd/gothic-mystery/000/roll_loot",
+          "cmd/gothic-mystery/000/start_quest"
+        ]
+      },
+      "assetRefs": [
+        {
+          "category": "item_icon_ui_graphic",
+          "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
+          "contentId": "item/gothic-mystery/0018fb2e6f/068",
+          "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-34527045.fixture",
+          "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+          "byteCount": 69
+        },
+        {
+          "category": "music_ambience",
+          "assetId": "asset/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-020e1a3098-011/frontier-music-fixture/000",
+          "contentId": "event/gothic-mystery/020e1a3098/011",
+          "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+          "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+          "byteCount": 69
+        },
+        {
+          "category": "npc_portrait",
+          "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-0a7aa5762f-022/frontier-portrait-fixture/000",
+          "contentId": "npc/gothic-mystery/0a7aa5762f/022",
+          "exportRelativePath": "assets/npc-portrait/asset-002-34527045.fixture",
+          "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+          "byteCount": 69
+        },
+        {
+          "category": "sound_effect",
+          "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-208fbe915b-037/frontier-sound-fallback/000",
+          "contentId": "dialogue/gothic-mystery/208fbe915b/037",
+          "exportRelativePath": "assets/sound-effect/asset-003-d2ae5212.fixture",
+          "hash": "d2ae52126f66bee797f07d3407b0d75514913406ecdb2d9e77cd40927c216fbb",
+          "byteCount": 263
+        },
+        {
+          "category": "tile_region_graphic",
+          "assetId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/000",
+          "contentId": "map/gothic-mystery/start",
+          "exportRelativePath": "assets/tile-region-graphic/asset-004-34527045.fixture",
+          "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+          "byteCount": 69
+        }
+      ],
+      "commandHints": [
+        {
+          "commandId": "cmd/gothic-mystery/000/choose_dialogue",
+          "commandType": "dialogue/choose",
+          "targetId": "choice/gothic-mystery/8298a30e5a/006",
+          "secondaryTargetId": "quest/gothic-mystery/3629ab93b2/001",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/gothic-mystery/000/event_add_item",
+          "commandType": "event/add_item",
+          "targetId": "item/gothic-mystery/412a858b32/001",
+          "secondaryTargetId": "event/gothic-mystery/aa4f467660/000",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/gothic-mystery/000/open_dialogue",
+          "commandType": "dialogue/open",
+          "targetId": "dialogue/gothic-mystery/91a942bcf7/006",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/gothic-mystery/000/roll_loot",
+          "commandType": "loot/roll",
+          "targetId": "loot_table/gothic-mystery/primary",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/gothic-mystery/000/start_quest",
+          "commandType": "quest/start",
+          "targetId": "quest/gothic-mystery/3629ab93b2/001",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "accepted": true,
+      "ordinal": 2,
+      "styleId": "trade_caravan",
+      "styleName": "trade caravan",
+      "packageId": "game/content_generation/trade-caravan",
+      "packId": "trade_caravan",
+      "packageHash": "02f2f2d207e4d32184682be5b42b02539be12f7da5bd34142f0e1e011b634706",
+      "assetManifestHash": "5aa6d73963072647eb32be772c4c0564f74651054bed512ec909486b975fd81b",
+      "exportManifestHash": "442e0fb472e47b4207b2635d8d1be152042ffe4fd00769323120058444c8d58c",
+      "exportFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/source-evidence/trade_caravan/export",
+      "runtimeConfigHash": "65b9cebaf826c34cae586fc86e1d6bea260c2e1cd7be729def868ea1999d59b1",
+      "selectedThreadId": "thread/trade-caravan/000",
+      "loopRefs": {
+        "mapId": "map/trade-caravan/start",
+        "npcId": "npc/trade-caravan/012cf2fdd0/012",
+        "questId": "quest/trade-caravan/80137887dd/002",
+        "dialogueId": "dialogue/trade-caravan/88908c06dd/018",
+        "itemId": "item/trade-caravan/7bbca01309/011",
+        "eventId": "event/trade-caravan/e1b2955ba9/000",
+        "runtimeCommandHintIds": [
+          "cmd/trade-caravan/000/choose_dialogue",
+          "cmd/trade-caravan/000/event_add_item",
+          "cmd/trade-caravan/000/open_dialogue",
+          "cmd/trade-caravan/000/roll_loot",
+          "cmd/trade-caravan/000/start_quest"
+        ]
+      },
+      "assetRefs": [
+        {
+          "category": "item_icon_ui_graphic",
+          "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0150c8583d-018/gothic-icon-fixture/000",
+          "contentId": "item/trade-caravan/0150c8583d/018",
+          "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-34527045.fixture",
+          "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+          "byteCount": 69
+        },
+        {
+          "category": "music_ambience",
+          "assetId": "asset/game-content-generation-trade-caravan/music-ambience/event-trade-caravan-12d2a93d26-015/gothic-music-fixture/000",
+          "contentId": "event/trade-caravan/12d2a93d26/015",
+          "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+          "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+          "byteCount": 69
+        },
+        {
+          "category": "npc_portrait",
+          "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-012cf2fdd0-012/gothic-portrait-fixture/000",
+          "contentId": "npc/trade-caravan/012cf2fdd0/012",
+          "exportRelativePath": "assets/npc-portrait/asset-002-34527045.fixture",
+          "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+          "byteCount": 69
+        },
+        {
+          "category": "sound_effect",
+          "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-00642153fb-048/gothic-sound-fallback/000",
+          "contentId": "dialogue/trade-caravan/00642153fb/048",
+          "exportRelativePath": "assets/sound-effect/asset-003-3b6934b5.fixture",
+          "hash": "3b6934b536e6c0fd4643d163a027ff850c8581670ec8818267745d1614a8568d",
+          "byteCount": 256
+        },
+        {
+          "category": "tile_region_graphic",
+          "assetId": "asset/game-content-generation-trade-caravan/tile-region-graphic/map-trade-caravan-start/gothic-tile-fallback/002",
+          "contentId": "map/trade-caravan/start",
+          "exportRelativePath": "assets/tile-region-graphic/asset-004-6c1af6c5.fixture",
+          "hash": "6c1af6c5705cc53f3cf5800152ef24228ce5a4cd6479396a402b9d6162c35285",
+          "byteCount": 233
+        }
+      ],
+      "commandHints": [
+        {
+          "commandId": "cmd/trade-caravan/000/choose_dialogue",
+          "commandType": "dialogue/choose",
+          "targetId": "choice/trade-caravan/3059e36f18/018",
+          "secondaryTargetId": "quest/trade-caravan/80137887dd/002",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/trade-caravan/000/event_add_item",
+          "commandType": "event/add_item",
+          "targetId": "item/trade-caravan/7bbca01309/011",
+          "secondaryTargetId": "event/trade-caravan/e1b2955ba9/000",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/trade-caravan/000/open_dialogue",
+          "commandType": "dialogue/open",
+          "targetId": "dialogue/trade-caravan/88908c06dd/018",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/trade-caravan/000/roll_loot",
+          "commandType": "loot/roll",
+          "targetId": "loot_table/trade-caravan/primary",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        },
+        {
+          "commandId": "cmd/trade-caravan/000/start_quest",
+          "commandType": "quest/start",
+          "targetId": "quest/trade-caravan/80137887dd/002",
+          "secondaryTargetId": "",
+          "value": "",
+          "inventoryId": "inventory/player",
+          "amount": 1
+        }
+      ],
+      "diagnostics": []
+    }
+  ],
+  "primaryBuildCandidate": {
+    "accepted": true,
+    "ordinal": 0,
+    "styleId": "frontier_survival",
+    "styleName": "frontier survival",
+    "packageId": "game/content_generation/frontier-survival",
+    "packId": "frontier_survival",
+    "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+    "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+    "exportManifestHash": "cd28d799e3e9b5d96be785eab80b6a5749552172dcbd6dbce6e28f7280a39a81",
+    "exportFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/source-evidence/frontier_survival/export",
+    "runtimeConfigHash": "569f440bba0f0aca3cacd5fdb1ff5a856d25b5609302681d3faddb3922195bf2",
+    "selectedThreadId": "thread/frontier-survival/000",
+    "loopRefs": {
+      "mapId": "map/frontier-survival/start",
+      "npcId": "npc/frontier-survival/11ffe0aa42/018",
+      "questId": "quest/frontier-survival/c2ed6dc235/000",
+      "dialogueId": "dialogue/frontier-survival/51924b073c/028",
+      "itemId": "item/frontier-survival/7f81222990/004",
+      "eventId": "event/frontier-survival/4f2d855a33/000",
+      "runtimeCommandHintIds": [
+        "cmd/frontier-survival/000/choose_dialogue",
+        "cmd/frontier-survival/000/event_add_item",
+        "cmd/frontier-survival/000/open_dialogue",
+        "cmd/frontier-survival/000/roll_loot",
+        "cmd/frontier-survival/000/start_quest"
+      ]
+    },
+    "assetRefs": [
+      {
+        "category": "item_icon_ui_graphic",
+        "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "contentId": "item/frontier-survival/032bdc46ab/062",
+        "exportRelativePath": "assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+        "byteCount": 268
+      },
+      {
+        "category": "music_ambience",
+        "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+        "contentId": "event/frontier-survival/00ba2e87c9/005",
+        "exportRelativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+        "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+        "byteCount": 69
+      },
+      {
+        "category": "npc_portrait",
+        "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+        "contentId": "npc/frontier-survival/11ffe0aa42/018",
+        "exportRelativePath": "assets/npc-portrait/asset-002-b5037955.fixture",
+        "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+        "byteCount": 266
+      },
+      {
+        "category": "sound_effect",
+        "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+        "contentId": "dialogue/frontier-survival/0490f2f50e/013",
+        "exportRelativePath": "assets/sound-effect/asset-003-b6002d93.fixture",
+        "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+        "byteCount": 270
+      },
+      {
+        "category": "tile_region_graphic",
+        "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+        "contentId": "map/frontier-survival/start",
+        "exportRelativePath": "assets/tile-region-graphic/asset-004-f8e7e136.fixture",
+        "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+        "byteCount": 247
+      }
+    ],
+    "commandHints": [
+      {
+        "commandId": "cmd/frontier-survival/000/choose_dialogue",
+        "commandType": "dialogue/choose",
+        "targetId": "choice/frontier-survival/8cb7a7d288/028",
+        "secondaryTargetId": "quest/frontier-survival/c2ed6dc235/000",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/event_add_item",
+        "commandType": "event/add_item",
+        "targetId": "item/frontier-survival/7f81222990/004",
+        "secondaryTargetId": "event/frontier-survival/4f2d855a33/000",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/open_dialogue",
+        "commandType": "dialogue/open",
+        "targetId": "dialogue/frontier-survival/51924b073c/028",
+        "secondaryTargetId": "",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/roll_loot",
+        "commandType": "loot/roll",
+        "targetId": "loot_table/frontier-survival/primary",
+        "secondaryTargetId": "",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      },
+      {
+        "commandId": "cmd/frontier-survival/000/start_quest",
+        "commandType": "quest/start",
+        "targetId": "quest/frontier-survival/c2ed6dc235/000",
+        "secondaryTargetId": "",
+        "value": "",
+        "inventoryId": "inventory/player",
+        "amount": 1
+      }
+    ],
+    "diagnostics": []
+  },
+  "staging": {
+    "passed": true,
+    "schemaVersion": "alpha_build_staging_manifest_v1",
+    "stagingFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/staging",
+    "sourceExportFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/source-evidence/frontier_survival/export",
+    "packageId": "game/content_generation/frontier-survival",
+    "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+    "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+    "exportManifestHash": "cd28d799e3e9b5d96be785eab80b6a5749552172dcbd6dbce6e28f7280a39a81",
+    "fileCount": 12,
+    "totalByteCount": 442085,
+    "manifestHash": "1bdff5b5b23c01c8dcd7aee2a03e13238367df0a27f55a98a7c8dcd8490f32e5",
+    "runtimePreviewDependency": false,
+    "files": [
+      {
+        "relativePath": "assets/asset-manifest.json",
+        "kind": "json_payload",
+        "hash": "016df25800626eb05b8c5a6bb7f0dc73a40727cc3b40cb87c77d1374e53e67da",
+        "byteCount": 5016
+      },
+      {
+        "relativePath": "assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        "kind": "asset_payload",
+        "hash": "d7a98c2e90185f12f5862ff4b2562a5610811bd8abaa78a648f352079eca3a0f",
+        "byteCount": 268
+      },
+      {
+        "relativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+        "kind": "asset_payload",
+        "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+        "byteCount": 69
+      },
+      {
+        "relativePath": "assets/npc-portrait/asset-002-b5037955.fixture",
+        "kind": "asset_payload",
+        "hash": "b5037955e65fe852ba62678955037fe923f0d97553ce23bd5790338330047ec2",
+        "byteCount": 266
+      },
+      {
+        "relativePath": "assets/sound-effect/asset-003-b6002d93.fixture",
+        "kind": "asset_payload",
+        "hash": "b6002d937c53e329d87614999bd338d401a38b83a1989edb451fed0cf7044430",
+        "byteCount": 270
+      },
+      {
+        "relativePath": "assets/tile-region-graphic/asset-004-f8e7e136.fixture",
+        "kind": "asset_payload",
+        "hash": "f8e7e13651b26590cc86443f21eefe3f56fee809823bd2fb058e92427c3aae06",
+        "byteCount": 247
+      },
+      {
+        "relativePath": "export-manifest.json",
+        "kind": "json_payload",
+        "hash": "2e0b9076b27d0e8c2a493651bf37506630cf9fc3758c283be04fc34169bf149e",
+        "byteCount": 3700
+      },
+      {
+        "relativePath": "game-data/game-package.json",
+        "kind": "json_payload",
+        "hash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+        "byteCount": 420490
+      },
+      {
+        "relativePath": "game-data/generated-content-provenance.json",
+        "kind": "json_payload",
+        "hash": "4293fd31241cd8cb6f8bf886e3c46fcd857989208e3a4bafc17b3a29bfdb14aa",
+        "byteCount": 2532
+      },
+      {
+        "relativePath": "runtime/alpha-launch-metadata.json",
+        "kind": "json_payload",
+        "hash": "0ed179ce242b51ea7bcd34b4ec5d69b7d8a110246f1afbca9db2e61242afdefc",
+        "byteCount": 703
+      },
+      {
+        "relativePath": "runtime/launch-metadata.json",
+        "kind": "json_payload",
+        "hash": "807ffc07ea1cdcbfe5ec002d170512086dc2b7c3e0eb93f20b0a879b6ca16c1f",
+        "byteCount": 591
+      },
+      {
+        "relativePath": "runtime/unity-runtime-config.json",
+        "kind": "json_payload",
+        "hash": "569f440bba0f0aca3cacd5fdb1ff5a856d25b5609302681d3faddb3922195bf2",
+        "byteCount": 7933
+      }
+    ],
+    "diagnostics": []
+  },
+  "buildOutput": {
+    "passed": false,
+    "schemaVersion": "alpha_build_windows_output_manifest_v1",
+    "buildFolderRelativePath": ".llmgc/procedural/alpha-runnable-build/build/windows",
+    "executableRelativePath": "",
+    "fileCount": 0,
+    "totalByteCount": 0,
+    "manifestHash": "1e6281526db9c17fbafadd72cdb73fb6511089ef8da72127e4fa0c32abf9654a",
+    "windowsExecutableProduced": false,
+    "unityBuildProduced": false,
+    "files": [],
+    "diagnostics": [
+      {
+        "severity": "error",
+        "code": "alpha_build.output.missing_executable",
+        "target": "build/windows",
+        "message": "A real Windows executable was not produced under the build output folder."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.output.no_supported_repo_build_path",
+        "target": "build_path",
+        "message": "No supported repository-local Unity build path exists for producing a Windows player."
+      }
+    ]
+  },
+  "buildEnvironment": {
+    "unityExecutableDiscovered": true,
+    "unityExecutablePathForVerification": "",
+    "unityVersionForVerification": "",
+    "repoUnityProjectFound": false,
+    "repoUnityProjectRelativePath": "",
+    "repoBuildScriptFound": false,
+    "repoBuildScriptRelativePath": "",
+    "buildCommandForVerification": "",
+    "diagnostics": [
+      {
+        "severity": "error",
+        "code": "alpha_build.environment.no_repo_build_script",
+        "target": "repo_build_script",
+        "message": "No repository-local Unity build script or BuildPipeline.BuildPlayer entrypoint was found."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.environment.no_repo_unity_project",
+        "target": "repo_unity_project",
+        "message": "No repository-local Unity project/template with ProjectSettings/ProjectVersion.txt was found."
+      },
+      {
+        "severity": "info",
+        "code": "alpha_build.environment.unity_found",
+        "target": "unity_cli",
+        "message": "Unity Editor executable was discovered; local machine path is omitted from deterministic artifacts."
+      }
+    ]
+  },
+  "launchVerification": {
+    "launchVerified": false,
+    "playLoopVerified": false,
+    "processExitCode": null,
+    "durationSeconds": 0,
+    "logRelativePath": "",
+    "diagnostics": [
+      {
+        "severity": "error",
+        "code": "alpha_build.launch.blocked_no_executable",
+        "target": "build/windows",
+        "message": "Launch verification cannot run because no real Windows executable was produced."
+      }
+    ]
+  },
+  "invalidMatrix": {
+    "passed": true,
+    "scenarioCount": 14,
+    "scenarios": [
+      {
+        "scenarioId": "absolute_output_path_injection",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.output.unsafe_path",
+            "target": "C:/escape.exe",
+            "message": "Build output paths must be safe relative paths."
+          }
+        ]
+      },
+      {
+        "scenarioId": "asset_manifest_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.contract.asset_manifest_hash_mismatch",
+            "target": "frontier_survival",
+            "message": "Candidate asset manifest hash must match selected Goal 012 evidence."
+          }
+        ]
+      },
+      {
+        "scenarioId": "copied_expectation_report_without_build_files",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.invalid.expectation_only_report",
+            "target": "alpha-runnable-build-report.json",
+            "message": "Expectation reports cannot replace physical build files."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_style_package_export_asset_leakage",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.contract.cross_style_leakage",
+            "target": "frontier_survival",
+            "message": "Package, export and asset evidence must come from the same style candidate."
+          }
+        ]
+      },
+      {
+        "scenarioId": "export_manifest_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.contract.export_manifest_hash_mismatch",
+            "target": "frontier_survival",
+            "message": "Candidate export manifest hash must match selected Goal 012 evidence."
+          }
+        ]
+      },
+      {
+        "scenarioId": "mismatched_executable_build_file_hash",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.output.hash_mismatch",
+            "target": "build/windows/LLMGameCreatorAlpha.exe",
+            "message": "Build manifest hashes must match actual file bytes."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal012_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.contract.missing_goal012_evidence",
+            "target": "frontier_survival",
+            "message": "Alpha candidates must reference accepted Goal 012 export evidence."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_executable",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.output.missing_executable",
+            "target": "build/windows",
+            "message": "Build validation rejects missing Windows executable."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_staged_asset_payload",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.staging.missing_asset_payload",
+            "target": "assets",
+            "message": "Staging must contain physical asset payloads."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_staged_game_data",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.staging.missing_game_data",
+            "target": "game-data/game-package.json",
+            "message": "Staging must contain physical game data."
+          }
+        ]
+      },
+      {
+        "scenarioId": "package_hash_mismatch",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.contract.package_hash_mismatch",
+            "target": "game/content_generation/frontier-survival",
+            "message": "Candidate package hash must match selected Goal 012 evidence."
+          }
+        ]
+      },
+      {
+        "scenarioId": "path_traversal_in_staging_manifest",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.staging.unsafe_path",
+            "target": "../escape.json",
+            "message": "Staging manifest paths must stay inside the staging root."
+          }
+        ]
+      },
+      {
+        "scenarioId": "runtime_preview_dependency_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.contract.runtime_preview_dependency",
+            "target": "runtime_host",
+            "message": "Alpha proof must not depend on WinForms Runtime Preview."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unity_build_claim_without_artifact",
+        "expectedValid": false,
+        "actualValid": false,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "alpha_build.output.unity_build_claim_without_artifact",
+            "target": "build/windows",
+            "message": "Unity build claims require real output files."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "error",
+        "code": "alpha_build.contract.asset_manifest_hash_mismatch",
+        "target": "frontier_survival",
+        "message": "Candidate asset manifest hash must match selected Goal 012 evidence."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.contract.cross_style_leakage",
+        "target": "frontier_survival",
+        "message": "Package, export and asset evidence must come from the same style candidate."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.contract.export_manifest_hash_mismatch",
+        "target": "frontier_survival",
+        "message": "Candidate export manifest hash must match selected Goal 012 evidence."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.contract.missing_goal012_evidence",
+        "target": "frontier_survival",
+        "message": "Alpha candidates must reference accepted Goal 012 export evidence."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.contract.package_hash_mismatch",
+        "target": "game/content_generation/frontier-survival",
+        "message": "Candidate package hash must match selected Goal 012 evidence."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.contract.runtime_preview_dependency",
+        "target": "runtime_host",
+        "message": "Alpha proof must not depend on WinForms Runtime Preview."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.invalid.expectation_only_report",
+        "target": "alpha-runnable-build-report.json",
+        "message": "Expectation reports cannot replace physical build files."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.output.hash_mismatch",
+        "target": "build/windows/LLMGameCreatorAlpha.exe",
+        "message": "Build manifest hashes must match actual file bytes."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.output.missing_executable",
+        "target": "build/windows",
+        "message": "Build validation rejects missing Windows executable."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.output.unity_build_claim_without_artifact",
+        "target": "build/windows",
+        "message": "Unity build claims require real output files."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.output.unsafe_path",
+        "target": "C:/escape.exe",
+        "message": "Build output paths must be safe relative paths."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.staging.missing_asset_payload",
+        "target": "assets",
+        "message": "Staging must contain physical asset payloads."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.staging.missing_game_data",
+        "target": "game-data/game-package.json",
+        "message": "Staging must contain physical game data."
+      },
+      {
+        "severity": "error",
+        "code": "alpha_build.staging.unsafe_path",
+        "target": "../escape.json",
+        "message": "Staging manifest paths must stay inside the staging root."
+      }
+    ]
+  },
+  "windowsExecutableProduced": false,
+  "unityEditorExecuted": false,
+  "unityBuildProduced": false,
+  "launchVerified": false,
+  "playLoopVerified": false,
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "luaExecuted": false,
+    "mediaExecuted": false,
+    "generatorLibraryExecuted": false,
+    "unityEditorExecuted": false,
+    "unityBuildExecuted": false,
+    "windowsExecutableExecuted": false
+  },
+  "runtimePreviewDependency": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "deterministicReportRelativePath": ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-report.json",
+  "deterministicHash": "5f5fc39b0dba6977f571345915b77fc61b4bdd090f753ebc834c54e43c1226e4",
+  "buildManifestHash": "1e6281526db9c17fbafadd72cdb73fb6511089ef8da72127e4fa0c32abf9654a",
+  "diagnostics": [
+    {
+      "severity": "error",
+      "code": "alpha_build.contract.asset_manifest_hash_mismatch",
+      "target": "frontier_survival",
+      "message": "Candidate asset manifest hash must match selected Goal 012 evidence."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.contract.cross_style_leakage",
+      "target": "frontier_survival",
+      "message": "Package, export and asset evidence must come from the same style candidate."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.contract.export_manifest_hash_mismatch",
+      "target": "frontier_survival",
+      "message": "Candidate export manifest hash must match selected Goal 012 evidence."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.contract.missing_goal012_evidence",
+      "target": "frontier_survival",
+      "message": "Alpha candidates must reference accepted Goal 012 export evidence."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.contract.package_hash_mismatch",
+      "target": "game/content_generation/frontier-survival",
+      "message": "Candidate package hash must match selected Goal 012 evidence."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.contract.runtime_preview_dependency",
+      "target": "runtime_host",
+      "message": "Alpha proof must not depend on WinForms Runtime Preview."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.environment.no_repo_build_script",
+      "target": "repo_build_script",
+      "message": "No repository-local Unity build script or BuildPipeline.BuildPlayer entrypoint was found."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.environment.no_repo_unity_project",
+      "target": "repo_unity_project",
+      "message": "No repository-local Unity project/template with ProjectSettings/ProjectVersion.txt was found."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.invalid.expectation_only_report",
+      "target": "alpha-runnable-build-report.json",
+      "message": "Expectation reports cannot replace physical build files."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.launch.blocked_no_executable",
+      "target": "build/windows",
+      "message": "Launch verification cannot run because no real Windows executable was produced."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.output.hash_mismatch",
+      "target": "build/windows/LLMGameCreatorAlpha.exe",
+      "message": "Build manifest hashes must match actual file bytes."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.output.missing_executable",
+      "target": "build/windows",
+      "message": "A real Windows executable was not produced under the build output folder."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.output.missing_executable",
+      "target": "build/windows",
+      "message": "Build validation rejects missing Windows executable."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.output.no_supported_repo_build_path",
+      "target": "build_path",
+      "message": "No supported repository-local Unity build path exists for producing a Windows player."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.output.unity_build_claim_without_artifact",
+      "target": "build/windows",
+      "message": "Unity build claims require real output files."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.output.unsafe_path",
+      "target": "C:/escape.exe",
+      "message": "Build output paths must be safe relative paths."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.staging.missing_asset_payload",
+      "target": "assets",
+      "message": "Staging must contain physical asset payloads."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.staging.missing_game_data",
+      "target": "game-data/game-package.json",
+      "message": "Staging must contain physical game data."
+    },
+    {
+      "severity": "error",
+      "code": "alpha_build.staging.unsafe_path",
+      "target": "../escape.json",
+      "message": "Staging manifest paths must stay inside the staging root."
+    },
+    {
+      "severity": "warning",
+      "code": "alpha_build.environment.blocker",
+      "target": "alpha_unity_build_environment_blocker",
+      "message": "A real Windows build is blocked when the repository has no Unity project/template/build script to build."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.environment.unity_found",
+      "target": "unity_cli",
+      "message": "Unity Editor executable was discovered; local machine path is omitted from deterministic artifacts."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.goal012_gate_recorded",
+      "target": "unity_runtime_export_vertical_slice_artifact_verification",
+      "message": "User-confirmed Goal 012 artifact verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios must fail through the Alpha build validation path."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.no_external_providers",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua or generator-library execution was invoked."
+    },
+    {
+      "severity": "info",
+      "code": "alpha_build.valid_matrix_passed",
+      "target": "valid_matrix",
+      "message": "Three style candidates and deterministic staging are required."
+    }
+  ]
+}

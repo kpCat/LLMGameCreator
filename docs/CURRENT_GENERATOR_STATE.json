@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T15:30:00Z",
+    "updated_at_utc":  "2026-06-26T09:09:32Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 012 Unity runtime export vertical slice",
-    "gate_status":  "goal_012_unity_runtime_export_vertical_slice_artifact_verification_required",
+    "current_phase_title":  "Goal 013 Alpha runnable Windows build environment blocker plus S113A artifact path hotfix",
+    "gate_status":  "alpha_unity_build_environment_blocker",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_012_unity_runtime_export_vertical_slice",
-    "active_manual_gate":  "Unity runtime export vertical slice artifact verification is the next stop marker after Goal 012.",
-    "current_user_action":  "Review or hand off the generated .llmgc/procedural/unity-runtime-export folder; do not mark unity_runtime_export_vertical_slice_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 012 records the user-confirmed minimum_asset_pipeline_artifact_verification passed gate and completes S099-S105. It adds a narrow Application-layer Unity runtime export acceptance service, selects accepted Goal 010 package/runtime-loop evidence and matching Goal 011 asset evidence, materializes deterministic real export files under .llmgc/procedural/unity-runtime-export/export, validates package refs, selected loop refs, asset refs, export file hashes and byte counts headlessly, rejects invalid/fake/leak scenarios causally, and adds the unity-runtime-export product smoke route. It stops at unity_runtime_export_vertical_slice_artifact_verification required and does not start post-Goal-012 work.",
+    "active_manual_gate":  "Goal 013 stopped at alpha_unity_build_environment_blocker; alpha_runnable_windows_build_verification remains required and not passed.",
+    "current_user_action":  "Add or point the repository to a Unity project/template plus a repository-local Windows build entrypoint, then rerun the alpha-runnable-build product smoke; do not mark alpha_runnable_windows_build_verification passed until a real player folder/executable and launch/play evidence exist.",
+    "recommended_next_decision":  "The user confirmed unity_runtime_export_vertical_slice_artifact_verification passed before Goal 013. Goal 013 adds a narrow Application-layer Alpha runnable build acceptance service under Design/AlphaBuild, selects three deterministic style candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging, validates physical files/hashes/refs and invalid/fake/leak scenarios, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by replacing long physical source-evidence asset file names with compact deterministic asset-000-<sha8>.fixture names, preserving full original ids inside JSON/report evidence, and regenerating repo-local Alpha artifacts with max relative path length 100 and max file name length 36. A local Unity Editor executable was discoverable during the run, but no repository-local Unity project/template or BuildPipeline/Windows build entrypoint exists, so no Windows player executable was produced or launched. Goal 013 stops at alpha_unity_build_environment_blocker; alpha_runnable_windows_build_verification remains required.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "unity_runtime_export_vertical_slice_artifact_verification"
+                                                        "alpha_unity_build_environment_blocker"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -38,7 +38,8 @@
                            "goal_009_manual_gate":  "rule_pack_combat_faction_social_work_theft_artifact_verification",
                            "goal_010_manual_gate":  "content_generation_at_scale_artifact_verification",
                            "goal_011_manual_gate":  "minimum_asset_pipeline_artifact_verification",
-                           "goal_012_manual_gate":  "unity_runtime_export_vertical_slice_artifact_verification"
+                           "goal_012_manual_gate":  "unity_runtime_export_vertical_slice_artifact_verification",
+                           "goal_013_manual_gate":  "alpha_runnable_windows_build_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -328,7 +329,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "unity_runtime_export_vertical_slice_artifact_verification"
+                                          "alpha_unity_build_environment_blocker"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -349,11 +350,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "unity_runtime_export_vertical_slice_artifact_verification",
-    "recommended_next_work_item_title":  "Unity runtime export vertical slice artifact verification.",
-    "recommended_next_task_file":  ".llmgc/procedural/unity-runtime-export/unity-runtime-export-verification.md",
+    "recommended_next_work_item":  "alpha_unity_build_environment_blocker",
+    "recommended_next_work_item_title":  "Goal 013 Alpha runnable Windows build environment blocker.",
+    "recommended_next_task_file":  ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Unity runtime export vertical slice artifact verification"
+                                              "Alpha runnable Windows build environment blocker"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -420,9 +421,10 @@
                              "Rule-pack combat/faction/social/work/theft acceptance sidecars",
                              "Content generation at scale acceptance sidecars",
                              "Minimum deterministic asset pipeline acceptance sidecars",
-                             "Unity runtime export vertical slice acceptance sidecars"
+                             "Unity runtime export vertical slice acceptance sidecars",
+                             "Alpha runnable Windows build staging, compact artifact paths and environment blocker evidence"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 012 stop at unity_runtime_export_vertical_slice_artifact_verification and do not start post-Goal-012 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 013 blocker stop at alpha_unity_build_environment_blocker and do not start Goal 014 or post-Goal-013 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -440,13 +442,48 @@
                                                          "next_action":  "goal_012_unity_runtime_export_vertical_slice"
                                                      },
     "unity_runtime_export_vertical_slice_artifact_verification":  {
-                                                                      "status":  "required",
-                                                                      "evidence_source":  "pending_external_artifact_review_after_goal_012",
+                                                                      "status":  "passed",
+                                                                      "evidence_source":  "user_prompt_before_goal_013",
                                                                       "observed_result":  [
-
+                                                                          "unity_runtime_export_vertical_slice_artifact_verification passed"
                                                                                           ],
-                                                                      "next_action":  "do_not_start_post_goal_012_work_without_new_explicit_user_request"
+                                                                      "next_action":  "goal_013_alpha_runnable_windows_build"
                                                                   },
+    "alpha_runnable_windows_build_verification":  {
+                                                     "status":  "required",
+                                                     "evidence_source":  "blocked_by_goal_013_environment",
+                                                     "observed_result":  [
+
+                                                                         ],
+                                                     "next_action":  "resolve_alpha_unity_build_environment_blocker_before_claiming_runnable_alpha"
+                                                 },
+    "alpha_unity_build_environment_blocker":  {
+                                                 "status":  "active",
+                                                 "evidence_source":  "goal_013_alpha_runnable_windows_build",
+                                                 "observed_result":  [
+                                                     "Unity executable discoverable locally",
+                                                     "No repository-local Unity project/template with ProjectSettings/ProjectVersion.txt found",
+                                                     "No repository-local BuildPipeline.BuildPlayer or Windows build entrypoint found",
+                                                     "No Windows player executable produced or launched"
+                                                                         ],
+                                                 "next_action":  "add_repo_local_unity_project_template_and_windows_build_entrypoint_then_rerun_alpha_runnable_build"
+                                             },
+    "goal_013_alpha_runnable_windows_build":  {
+                                                 "slice_id":  "goal_013_alpha_runnable_windows_build",
+                                                 "title":  "Alpha Runnable Windows Build",
+                                                 "status":  "blocked",
+                                                "blocked_at_utc":  "2026-06-26T09:09:32Z",
+                                                "summary":  "Goal 013 records the user-confirmed unity_runtime_export_vertical_slice_artifact_verification passed gate, adds a narrow Application-layer Alpha runnable build contract under Design/AlphaBuild, selects deterministic frontier_survival, gothic_mystery and trade_caravan candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging with hashes and byte counts, validates selected loop refs and asset refs, rejects invalid/fake/leak scenarios causally, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by compacting source-evidence and staging physical asset names to deterministic asset-000-<sha8>.fixture paths, preserving full original ids in JSON/report fields, removing stale long-name files during regeneration, and proving max Alpha-relative path length 100 plus max file name length 36. It does not claim a Windows executable, Unity build, launch or 15-30 minute play proof because the repository has no local Unity project/template or Windows BuildPipeline entrypoint. It stops at alpha_unity_build_environment_blocker; alpha_runnable_windows_build_verification remains required.",
+                                                 "scenario_id":  "alpha-runnable-build",
+                                                 "checks":  [
+                                                               "AlphaRunnableBuild focused tests after S113A: 6/6 passed",
+                                                               "S113A filtered tests (AlphaRunnableBuild/UnityRuntimeExport/CurrentGeneratorStateDocsTests): 21/21 passed",
+                                                               "alpha-runnable-build product smoke: 1/1 passed",
+                                                               "repo-local .llmgc/procedural/alpha-runnable-build artifacts regenerated via AlphaRunnableBuildProductSmoke",
+                                                               "S113A artifact path scan: 180 files, max Alpha-relative path length 100, max file name length 36, no stale long physical game-content-generation-* asset file names, deterministic report hash 5f5fc39b0dba6977f571345915b77fc61b4bdd090f753ebc834c54e43c1226e4, build manifest hash 1e6281526db9c17fbafadd72cdb73fb6511089ef8da72127e4fa0c32abf9654a",
+                                                               "check-all.ps1: 792/792 tests passed, build 0 warnings / 0 errors"
+                                                            ]
+                                             },
     "goal_012_unity_runtime_export_vertical_slice":  {
                                                          "slice_id":  "goal_012_unity_runtime_export_vertical_slice",
                                                          "title":  "Unity Runtime Export Vertical Slice",
