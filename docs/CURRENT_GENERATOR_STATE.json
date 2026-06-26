@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T12:30:00Z",
+    "updated_at_utc":  "2026-06-26T13:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 010 content generation at scale S091A correctness hotfix completed",
-    "gate_status":  "goal_010_content_generation_at_scale_artifact_verification_required",
+    "current_phase_title":  "Goal 011 minimum deterministic asset pipeline completed",
+    "gate_status":  "goal_011_minimum_asset_pipeline_artifact_verification_required",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "product_slice_091a_content_generation_scale_correctness_hotfix",
-    "active_manual_gate":  "Content generation at scale artifact verification is the next stop marker after Goal 010.",
-    "current_user_action":  "Review or hand off the generated .llmgc/procedural/content-generation-scale folder; do not mark content_generation_at_scale_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 010 records the user-confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed gate, completes S085-S091, and S091A repairs content-generation scale correctness gaps found during artifact review. It proves compact content-pack driven generation at scale for frontier/survival, gothic/mystery and trade/caravan styles, preserves choose_dialogue/collect_item/set_flag objective shapes into package objectives, preserves declared set_flag/add_item/change_reputation event actions into package and runtime evidence, executes nine selected generated runtime threads through an injected real GameRuntimeService adapter, proves full GameRuntimeState save/load with RuntimeStateSerializer and RuntimeSnapshotStore, reports deterministic replay, multi-seed variation, repetition metrics, package/runtime hashes, and rejects twenty-three invalid/fake/leak scenarios causally. Stop at content_generation_at_scale_artifact_verification.",
+    "last_completed_product_slice_id":  "goal_011_minimum_asset_pipeline",
+    "active_manual_gate":  "Minimum asset pipeline artifact verification is the next stop marker after Goal 011.",
+    "current_user_action":  "Review or hand off the generated .llmgc/procedural/minimum-asset-pipeline folder; do not mark minimum_asset_pipeline_artifact_verification passed until the artifact review accepts it.",
+    "recommended_next_decision":  "Goal 011 records the user-confirmed content_generation_at_scale_artifact_verification passed gate and completes S092-S098. It proves deterministic asset slot requests derived from Goal 010 generated/package content ids, local fixture import plus deterministic fallback materialization, existing AssetCatalog/package metadata binding, structural file/hash/media/reference validation, product smoke route minimum-asset-pipeline, and causal invalid/fake/leak rejection. It writes deterministic artifacts under .llmgc/procedural/minimum-asset-pipeline and stops at minimum_asset_pipeline_artifact_verification.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "content_generation_at_scale_artifact_verification"
+                                                        "minimum_asset_pipeline_artifact_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -36,7 +36,8 @@
                            "goal_007_manual_gate":  "connected_world_travel_state_artifact_verification",
                            "goal_008_manual_gate":  "rule_pack_gameplay_family_artifact_verification",
                            "goal_009_manual_gate":  "rule_pack_combat_faction_social_work_theft_artifact_verification",
-                           "goal_010_manual_gate":  "content_generation_at_scale_artifact_verification"
+                           "goal_010_manual_gate":  "content_generation_at_scale_artifact_verification",
+                           "goal_011_manual_gate":  "minimum_asset_pipeline_artifact_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -57,15 +58,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "product_slice_091a_content_generation_scale_correctness_hotfix",
-                                         "title":  "Content Generation Scale Correctness Hotfix",
-                                         "completed_at_utc":  "2026-06-26T12:30:00Z",
-                                         "summary":  "S091A repairs Goal 010 artifact-review correctness gaps without changing the active gate. It updates the compact reference packs and Application-layer acceptance so the valid matrix preserves choose_dialogue, collect_item and set_flag objective shapes into package objectives, preserves declared set_flag, add_item and change_reputation event actions into package/runtime evidence, structurally audits package objective/event bindings, strengthens runtime command correlation across command id/type/target/secondary/value/inventory/amount/expected deltas, executes nine selected generated ids through an injected real GameRuntimeService adapter, rejects twenty-three invalid/fake/leak scenarios causally, and writes refreshed artifacts under .llmgc/procedural/content-generation-scale. The active manual gate remains content_generation_at_scale_artifact_verification required.",
-                                         "scenario_id":  "content-generation-scale",
+                                         "slice_id":  "goal_011_minimum_asset_pipeline",
+                                         "title":  "Minimum Deterministic Asset Pipeline",
+                                         "completed_at_utc":  "2026-06-26T13:30:00Z",
+                                         "summary":  "Goal 011 records content_generation_at_scale_artifact_verification passed from the user prompt and completes S092-S098. It adds a narrow Application-layer minimum asset pipeline acceptance service, compact source packs and fixture files under samples/minimum-asset-pipeline, expands deterministic asset requests from real Goal 010 generated/package content ids, materializes local fixture imports and deterministic fallbacks, binds resolved refs through existing AssetCatalog/package metadata fields, validates paths, hashes, byte counts, media types, content refs and reproducibility, rejects invalid/fake/leak scenarios causally, adds the minimum-asset-pipeline product smoke route, and writes artifacts under .llmgc/procedural/minimum-asset-pipeline. The active manual gate is minimum_asset_pipeline_artifact_verification required.",
+                                         "scenario_id":  "minimum-asset-pipeline",
                                          "checks":  [
-                                                        "S091A ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",
-                                                        "content-generation-scale product smoke: 1/1 passed",
-                                                        "check-all.ps1: 775/775 tests passed, build 0 warnings / 0 errors"
+                                                        "MinimumAssetPipeline focused tests: 6/6 passed",
+                                                        "minimum-asset-pipeline product smoke: 1/1 passed",
+                                                        "check-all.ps1: 781/781 tests passed, build 0 warnings / 0 errors"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -325,7 +326,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "content_generation_at_scale_artifact_verification"
+                                          "minimum_asset_pipeline_artifact_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -346,11 +347,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "content_generation_at_scale_artifact_verification",
-    "recommended_next_work_item_title":  "Content generation at scale artifact verification.",
-    "recommended_next_task_file":  ".llmgc/procedural/content-generation-scale/content-generation-scale-verification.md",
+    "recommended_next_work_item":  "minimum_asset_pipeline_artifact_verification",
+    "recommended_next_work_item_title":  "Minimum asset pipeline artifact verification.",
+    "recommended_next_task_file":  ".llmgc/procedural/minimum-asset-pipeline/minimum-asset-pipeline-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Content generation at scale artifact verification"
+                                              "Minimum asset pipeline artifact verification"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -415,22 +416,43 @@
                              "Connected world travel and deterministic runtime world state acceptance sidecars",
                              "Rule-pack gameplay family foundations acceptance sidecars",
                              "Rule-pack combat/faction/social/work/theft acceptance sidecars",
-                             "Content generation at scale acceptance sidecars"
+                             "Content generation at scale acceptance sidecars",
+                             "Minimum deterministic asset pipeline acceptance sidecars"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 010 stop at content_generation_at_scale_artifact_verification and do not start Goal 011 without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 011 stop at minimum_asset_pipeline_artifact_verification and do not start post-Goal-011 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
-                                                              "status":  "required",
-                                                              "evidence_source":  "pending_external_artifact_review_after_goal_010",
+                                                              "status":  "passed",
+                                                              "evidence_source":  "user_prompt_before_goal_011",
                                                               "observed_result":  [
-
+                                                                                      "content_generation_at_scale_artifact_verification passed"
                                                                                   ],
-                                                              "next_action":  "do_not_start_goal_011_without_new_explicit_user_request"
+                                                              "next_action":  "goal_011_minimum_asset_pipeline"
                                                           },
+    "minimum_asset_pipeline_artifact_verification":  {
+                                                         "status":  "required",
+                                                         "evidence_source":  "pending_external_artifact_review_after_goal_011",
+                                                         "observed_result":  [
+
+                                                                             ],
+                                                         "next_action":  "do_not_start_post_goal_011_work_without_new_explicit_user_request"
+                                                     },
+    "goal_011_minimum_asset_pipeline":  {
+                                            "slice_id":  "goal_011_minimum_asset_pipeline",
+                                            "title":  "Minimum Deterministic Asset Pipeline",
+                                            "completed_at_utc":  "2026-06-26T13:30:00Z",
+                                            "summary":  "Goal 011 completes S092-S098 after the user confirmed content_generation_at_scale_artifact_verification passed. It adds narrow Application asset-pipeline contracts, deterministic source packs and tiny fixtures, expands 90 asset slots from real generated/package content ids across tile/region graphics, portraits, item/UI icons, sound effects and music/ambience, materializes local fixture imports and deterministic fallbacks, binds resolved refs through existing AssetCatalog/package metadata seams, validates hashes, byte counts, media types, paths, refs, budgets and reproducibility, rejects invalid/fake/leak scenarios causally, writes artifacts under .llmgc/procedural/minimum-asset-pipeline, and adds the minimum-asset-pipeline product smoke route. The active manual gate is minimum_asset_pipeline_artifact_verification required.",
+                                            "scenario_id":  "minimum-asset-pipeline",
+                                            "checks":  [
+                                                           "MinimumAssetPipeline focused tests: 6/6 passed",
+                                                           "minimum-asset-pipeline product smoke: 1/1 passed",
+                                                           "check-all.ps1: 781/781 tests passed, build 0 warnings / 0 errors"
+                                                       ]
+                                        },
     "goal_010_content_generation_at_scale":  {
                                                  "slice_id":  "goal_010_content_generation_at_scale",
                                                  "title":  "Deterministic Content Generation At Scale plus S091A Correctness Hotfix",
                                                  "completed_at_utc":  "2026-06-26T12:30:00Z",
-                                                 "summary":  "Goal 010 completes S085-S091 after the user confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed, and S091A repairs artifact-review correctness gaps without changing the active gate. It adds compact reference content packs under samples/content-generation-packs, a deterministic Application-layer content generation scale acceptance service, focused tests and product smoke, materializes generated catalogs into validator-clean GamePackage definitions, preserves choose_dialogue, collect_item and set_flag objective shapes into package objectives, preserves declared set_flag, add_item and change_reputation event actions into package/runtime evidence, executes nine selected generated ids through an injected real GameRuntimeService adapter, proves save/load and cross-pack isolation, rejects twenty-three invalid/fake/leak scenarios causally, and writes artifacts under .llmgc/procedural/content-generation-scale. The active manual gate remains content_generation_at_scale_artifact_verification required.",
+                                                 "summary":  "Goal 010 completes S085-S091 after the user confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed, and S091A repairs artifact-review correctness gaps without changing the Goal 010 gate. It adds compact reference content packs under samples/content-generation-packs, a deterministic Application-layer content generation scale acceptance service, focused tests and product smoke, materializes generated catalogs into validator-clean GamePackage definitions, preserves choose_dialogue, collect_item and set_flag objective shapes into package objectives, preserves declared set_flag, add_item and change_reputation event actions into package/runtime evidence, executes nine selected generated ids through an injected real GameRuntimeService adapter, proves save/load and cross-pack isolation, rejects twenty-three invalid/fake/leak scenarios causally, and writes artifacts under .llmgc/procedural/content-generation-scale. The Goal 010 manual gate was content_generation_at_scale_artifact_verification.",
                                                  "scenario_id":  "content-generation-scale",
                                                  "checks":  [
                                                                 "S091A ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",

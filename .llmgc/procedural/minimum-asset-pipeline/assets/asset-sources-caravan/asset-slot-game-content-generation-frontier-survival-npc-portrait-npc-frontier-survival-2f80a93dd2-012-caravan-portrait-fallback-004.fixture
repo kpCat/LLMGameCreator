@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:image/png
+resolution:fallback
+slot:asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-2f80a93dd2-012/caravan-portrait-fallback/004
+content:npc/frontier-survival/2f80a93dd2/012
+source:caravan_portrait_fallback

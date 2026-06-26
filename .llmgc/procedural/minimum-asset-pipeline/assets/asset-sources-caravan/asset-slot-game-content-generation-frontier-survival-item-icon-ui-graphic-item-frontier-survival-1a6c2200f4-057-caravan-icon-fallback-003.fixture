@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:image/png
+resolution:fallback
+slot:asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1a6c2200f4-057/caravan-icon-fallback/003
+content:item/frontier-survival/1a6c2200f4/057
+source:caravan_icon_fallback

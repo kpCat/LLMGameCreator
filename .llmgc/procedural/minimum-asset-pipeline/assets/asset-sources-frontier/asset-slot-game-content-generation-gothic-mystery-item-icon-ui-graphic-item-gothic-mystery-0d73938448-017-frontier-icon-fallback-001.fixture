@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:image/png
+resolution:fallback
+slot:asset-slot/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0d73938448-017/frontier-icon-fallback/001
+content:item/gothic-mystery/0d73938448/017
+source:frontier_icon_fallback

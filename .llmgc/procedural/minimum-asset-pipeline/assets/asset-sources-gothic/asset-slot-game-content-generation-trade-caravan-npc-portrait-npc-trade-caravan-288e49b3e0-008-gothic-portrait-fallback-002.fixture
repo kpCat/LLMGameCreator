@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:image/png
+resolution:fallback
+slot:asset-slot/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-288e49b3e0-008/gothic-portrait-fallback/002
+content:npc/trade-caravan/288e49b3e0/008
+source:gothic_portrait_fallback

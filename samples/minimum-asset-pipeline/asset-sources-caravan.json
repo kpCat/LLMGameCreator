@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "minimum_asset_source_pack_v1",
+  "packId": "asset_sources_caravan",
+  "maxTotalSlots": 40,
+  "categoryPolicies": {
+    "tile_region_graphic": { "allowFallback": true, "maxSlots": 12 },
+    "npc_portrait": { "allowFallback": true, "maxSlots": 12 },
+    "item_icon_ui_graphic": { "allowFallback": true, "maxSlots": 12 },
+    "sound_effect": { "allowFallback": true, "maxSlots": 12 },
+    "music_ambience": { "allowFallback": true, "maxSlots": 6 }
+  },
+  "sources": [
+    { "sourceId": "caravan_tile_fixture", "kind": "local_fixture", "category": "tile_region_graphic", "mediaType": "image/png", "relativePath": "fixtures/tiny-image.fixture" },
+    { "sourceId": "caravan_tile_fallback", "kind": "deterministic_fallback", "category": "tile_region_graphic", "mediaType": "image/png" },
+    { "sourceId": "caravan_portrait_fixture", "kind": "local_fixture", "category": "npc_portrait", "mediaType": "image/png", "relativePath": "fixtures/tiny-image.fixture" },
+    { "sourceId": "caravan_portrait_fallback", "kind": "deterministic_fallback", "category": "npc_portrait", "mediaType": "image/png" },
+    { "sourceId": "caravan_icon_fixture", "kind": "local_fixture", "category": "item_icon_ui_graphic", "mediaType": "image/png", "relativePath": "fixtures/tiny-image.fixture" },
+    { "sourceId": "caravan_icon_fallback", "kind": "deterministic_fallback", "category": "item_icon_ui_graphic", "mediaType": "image/png" },
+    { "sourceId": "caravan_sound_fixture", "kind": "local_fixture", "category": "sound_effect", "mediaType": "audio/wav", "relativePath": "fixtures/tiny-sound.fixture" },
+    { "sourceId": "caravan_sound_fallback", "kind": "deterministic_fallback", "category": "sound_effect", "mediaType": "audio/wav" },
+    { "sourceId": "caravan_music_fixture", "kind": "local_fixture", "category": "music_ambience", "mediaType": "audio/ogg", "relativePath": "fixtures/tiny-music.fixture" },
+    { "sourceId": "caravan_music_fallback", "kind": "deterministic_fallback", "category": "music_ambience", "mediaType": "audio/ogg" }
+  ]
+}

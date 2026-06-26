@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:image/png
+resolution:fallback
+slot:asset-slot/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fallback/003
+content:tile/frontier-survival/ground
+source:caravan_tile_fallback

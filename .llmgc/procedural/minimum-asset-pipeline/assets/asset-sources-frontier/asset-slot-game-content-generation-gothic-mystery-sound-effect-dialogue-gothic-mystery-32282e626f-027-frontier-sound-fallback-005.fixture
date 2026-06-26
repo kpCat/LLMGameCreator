@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:audio/wav
+resolution:fallback
+slot:asset-slot/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-32282e626f-027/frontier-sound-fallback/005
+content:dialogue/gothic-mystery/32282e626f/027
+source:frontier_sound_fallback

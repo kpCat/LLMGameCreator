@@ -63,6 +63,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_008_RULE_PACK_GAMEPLAY_FAMILY_FOUNDATIONS.md` | Completed Goal 008 task: rule-pack gameplay family foundations for inventory, equipment, crafting, trading and status/effect evidence; S077A repaired the runtime-integration correctness evidence while keeping `rule_pack_gameplay_family_artifact_verification` as the stop gate. |
 | `docs/GOAL_009_RULE_PACK_COMBAT_FACTION_SOCIAL_WORK_THEFT.md` | Completed Goal 009 task: rule-pack combat/faction/social/work/theft foundations with real runtime encounter, reputation, dialogue, work-contract and theft-consequence evidence; stops at `rule_pack_combat_faction_social_work_theft_artifact_verification`. |
 | `docs/GOAL_010_CONTENT_GENERATION_AT_SCALE.md` | Completed Goal 010 task plus S091A correctness hotfix: compact content-pack driven deterministic generation at scale with real package materialization, generated-id runtime threads, objective/event coercion rejection, strict runtime command correlation, repetition metrics, invalid/fake/leak rejection and final stop at `content_generation_at_scale_artifact_verification`. |
+| `docs/GOAL_011_MINIMUM_ASSET_PIPELINE.md` | Completed Goal 011 task: deterministic asset requests from generated/package content ids, local fixture imports, deterministic fallbacks, existing AssetCatalog/package metadata binding, structural validation, product smoke and final stop at `minimum_asset_pipeline_artifact_verification`. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |
@@ -89,12 +90,12 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-content_generation_at_scale_artifact_verification
+minimum_asset_pipeline_artifact_verification
 ```
 
 Allowed next sequence:
 
-1. Content generation at scale artifact verification after Goal 010 artifact review.
+1. Minimum asset pipeline artifact verification after Goal 011 artifact review.
 
 Kill criterion:
 

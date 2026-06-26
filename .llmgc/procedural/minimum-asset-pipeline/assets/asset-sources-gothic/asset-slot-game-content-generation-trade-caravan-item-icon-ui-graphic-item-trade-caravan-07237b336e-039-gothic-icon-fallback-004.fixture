@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:image/png
+resolution:fallback
+slot:asset-slot/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-07237b336e-039/gothic-icon-fallback/004
+content:item/trade-caravan/07237b336e/039
+source:gothic_icon_fallback

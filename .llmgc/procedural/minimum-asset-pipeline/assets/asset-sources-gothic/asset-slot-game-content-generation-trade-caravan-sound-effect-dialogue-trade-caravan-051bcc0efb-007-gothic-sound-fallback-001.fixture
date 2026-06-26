@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:audio/wav
+resolution:fallback
+slot:asset-slot/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-051bcc0efb-007/gothic-sound-fallback/001
+content:dialogue/trade-caravan/051bcc0efb/007
+source:gothic_sound_fallback
