@@ -65,4 +65,31 @@ nunit-*.xml
 
 .devflow/runs/
 
+# Generated Unity and LLMGameCreator build artifacts
+.llmgc/procedural/**/build/
+.llmgc/procedural/**/logs/
+.llmgc/procedural/**/unity-work/
+.llmgc/procedural/**/[Ll]ibrary/
+.llmgc/procedural/**/[Tt]emp/
+.llmgc/procedural/**/[Oo]bj/
+.llmgc/procedural/**/[Uu]ser[Ss]ettings/
+
+unity/**/[Ll]ibrary/
+unity/**/[Tt]emp/
+unity/**/[Oo]bj/
+unity/**/[Bb]uild/
+unity/**/[Bb]uilds/
+unity/**/[Ll]ogs/
+unity/**/[Uu]ser[Ss]ettings/
+unity/**/*.csproj
+unity/**/*.sln
+unity/**/*.user
+unity/**/*.pidb
+unity/**/*.booproj
+unity/**/*.svd
+unity/**/*.pdb
+unity/**/*.mdb
+unity/**/*.opendb
+unity/**/*.VC.db
+
 src/LLMGameCreator.WinForms/LLMGameCreator.WinForms.csproj.user

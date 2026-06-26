@@ -99,6 +99,7 @@ unity_playable_presentation_firewall_safe_build_verification
 Allowed next sequence:
 
 1. Review `unity_playable_presentation_firewall_safe_build_verification` evidence from the produced Unity playable Alpha report, Windows player, Unity build log, launch/play-loop logs and firewall-safe build flags before marking the gate passed.
+2. Generated Unity build outputs under `.llmgc/procedural/**/build/`, `.llmgc/procedural/**/logs/`, `.llmgc/procedural/**/unity-work/` and Unity-generated project folders are ignored by `.gitignore`; compact `.json` / `.md` report and verification artifacts remain eligible for review when a task requires them.
 
 Kill criterion:
 
