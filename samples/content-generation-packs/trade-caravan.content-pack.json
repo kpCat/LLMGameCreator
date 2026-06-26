@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "content_generation_pack_v1",
+  "packId": "trade_caravan",
+  "styleId": "trade_caravan_oriented",
+  "title": "Trade Caravan Scale Pack",
+  "requiredTags": [ "trade", "caravan" ],
+  "excludedTags": [ "frontier", "gothic" ],
+  "styleTags": [ "trade", "caravan", "road" ],
+  "semanticTags": [ "npc", "quest", "dialogue", "loot", "event" ],
+  "declaredSlots": [ "npc", "role", "trait", "item", "quest", "region", "faction" ],
+  "budgets": { "totalInstances": 204, "npcs": 24, "quests": 24, "events": 24, "dialogueLines": 60, "lootEntries": 72 },
+  "repetition": { "allowDuplicateNames": false, "maxSharePerArchetype": 0.5, "fallbackPolicy": "fail" },
+  "nameBank": {
+    "prefixes": [ "Saffron", "Ledger", "Copper", "Dune", "Market", "Tally" ],
+    "suffixes": [ "Broker", "Driver", "Quartermaster", "Factor", "Guard", "Runner" ]
+  },
+  "regions": [
+    { "id": "glass_road", "name": "Glass Road" },
+    { "id": "amber_yard", "name": "Amber Yard" },
+    { "id": "river_gate", "name": "River Gate" }
+  ],
+  "factions": [
+    { "id": "caravan_league", "name": "Caravan League", "description": "Road captains and bonded merchants." },
+    { "id": "river_brokers", "name": "River Brokers", "description": "Dock negotiators with long memories." },
+    { "id": "yard_guards", "name": "Yard Guards", "description": "Contract guards paid by crate and risk." }
+  ],
+  "npcArchetypes": [
+    { "id": "route_factor", "role": "factor", "traits": [ "calculating", "polite", "restless" ] },
+    { "id": "wagon_driver", "role": "driver", "traits": [ "patient", "blunt", "steady" ] },
+    { "id": "dock_broker", "role": "broker", "traits": [ "smooth", "watchful", "generous" ] },
+    { "id": "yard_guard", "role": "guard", "traits": [ "alert", "strict", "loyal" ] }
+  ],
+  "itemArchetypes": [
+    { "id": "spice_crate", "name": "Spice Crate", "description": "A sealed crate of road spice.", "tier": "common", "baseValue": 8, "tags": [ "trade", "cargo" ] },
+    { "id": "invoice_roll", "name": "Invoice Roll", "description": "A bound stack of cargo invoices.", "tier": "common", "baseValue": 4, "tags": [ "paper", "trade" ] },
+    { "id": "wheel_pin", "name": "Wheel Pin", "description": "A hardened pin for wagon repairs.", "tier": "common", "baseValue": 5, "tags": [ "repair", "metal" ] },
+    { "id": "amber_bead", "name": "Amber Bead", "description": "A bead used in broker tallies.", "tier": "uncommon", "baseValue": 12, "tags": [ "currency", "social" ] },
+    { "id": "road_charm", "name": "Road Charm", "description": "A charm tied above a wagon bench.", "tier": "uncommon", "baseValue": 10, "tags": [ "reward", "road" ] },
+    { "id": "salt_ticket", "name": "Salt Ticket", "description": "A stamped ticket for warehouse salt.", "tier": "common", "baseValue": 6, "tags": [ "trade", "claim" ] },
+    { "id": "guard_scrip", "name": "Guard Scrip", "description": "Payment script accepted at caravan yards.", "tier": "common", "baseValue": 7, "tags": [ "reward", "currency" ] },
+    { "id": "sealed_manifest", "name": "Sealed Manifest", "description": "A manifest carrying official seals.", "tier": "rare", "baseValue": 24, "tags": [ "quest", "trade" ] }
+  ],
+  "lootTables": [
+    {
+      "id": "caravan_cache",
+      "entries": [
+        { "id": "spice", "itemArchetypeId": "spice_crate", "weight": 3, "amount": 1 },
+        { "id": "invoice", "itemArchetypeId": "invoice_roll", "weight": 4, "amount": 1 },
+        { "id": "pin", "itemArchetypeId": "wheel_pin", "weight": 3, "amount": 2 },
+        { "id": "bead", "itemArchetypeId": "amber_bead", "weight": 2, "amount": 1 }
+      ]
+    }
+  ],
+  "questMotifs": [
+    { "id": "recover_manifest", "objectiveKind": "choose_dialogue", "titleTemplate": "Recover {item} for {npc}", "rewardItemArchetypeId": "guard_scrip", "requiredItemArchetypeId": "sealed_manifest", "dependsOn": [] },
+    { "id": "settle_invoice", "objectiveKind": "choose_dialogue", "titleTemplate": "Settle {item} at {region}", "rewardItemArchetypeId": "road_charm", "requiredItemArchetypeId": "invoice_roll", "dependsOn": [] },
+    { "id": "repair_wagon", "objectiveKind": "choose_dialogue", "titleTemplate": "Repair the wagon with {item}", "rewardItemArchetypeId": "amber_bead", "requiredItemArchetypeId": "wheel_pin", "dependsOn": [] }
+  ],
+  "eventMotifs": [
+    { "id": "rate_changed", "trigger": "dialogue_choice", "actions": [ { "kind": "set_flag", "target": "market_rate_changed" } ], "dependsOn": [] },
+    { "id": "broker_vouched", "trigger": "quest_started", "actions": [ { "kind": "change_reputation", "target": "river_brokers" } ], "dependsOn": [] },
+    { "id": "cargo_released", "trigger": "encounter_completed", "actions": [ { "kind": "add_item", "target": "spice_crate" } ], "dependsOn": [] }
+  ],
+  "dialogueIntents": [
+    { "id": "offer_route", "requiredSlots": [ "npc", "item", "region" ], "allowedVoiceIds": [ "brisk", "courteous", "sharp" ], "phraseTemplates": [ "{npc} can move {item} through {region}", "{region} opens once {item} reaches {npc}" ] },
+    { "id": "warn_delay", "requiredSlots": [ "npc", "trait", "faction" ], "allowedVoiceIds": [ "brisk", "sharp" ], "phraseTemplates": [ "{npc} grows {trait} when {faction} delays the road", "{faction} made {npc} {trait} about the convoy" ] },
+    { "id": "offer_payment", "requiredSlots": [ "quest", "item" ], "allowedVoiceIds": [ "courteous", "sharp" ], "phraseTemplates": [ "{quest} clears the ledger for {item}", "Complete {quest}; {item} is the payment" ] }
+  ],
+  "voices": [
+    { "id": "brisk", "prefix": "Terms first:" },
+    { "id": "courteous", "prefix": "With respect:" },
+    { "id": "sharp", "prefix": "No delay:" }
+  ]
+}

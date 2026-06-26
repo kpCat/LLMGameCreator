@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T01:17:08Z",
+    "updated_at_utc":  "2026-06-26T12:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 009 rule-pack combat faction social work theft foundations completed with S084A correctness hotfix",
-    "gate_status":  "goal_009_rule_pack_combat_faction_social_work_theft_artifact_verification_required",
+    "current_phase_title":  "Goal 010 deterministic content generation at scale completed",
+    "gate_status":  "goal_010_content_generation_at_scale_artifact_verification_required",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
-    "active_manual_gate":  "Rule-pack combat/faction/social/work/theft artifact verification is the next stop marker after Goal 009.",
-    "current_user_action":  "Review or hand off the generated .llmgc/procedural/rule-pack-combat-faction-social-work-theft folder; do not mark rule_pack_combat_faction_social_work_theft_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 009 records the user-confirmed rule_pack_gameplay_family_artifact_verification passed gate, completes S078-S084 plus S084A correctness hotfix, and proves combat, faction reputation, social dialogue consequence, work contract reward, theft container transfer plus explicit consequence sequence and a combined loop through injected real GameRuntimeService-backed runtime evidence. S084A repairs exact command authorization, package binding audit depth, declaration-specific runtime result checks, real reputation clamping evidence, sequential valid-scenario isolation proof and injected-leak rejection. Application default runtime adapter remains unavailable, save/load uses RuntimeStateSerializer and RuntimeSnapshotStore on full GameRuntimeState, binding audit is scenario-exact, and invalid/runtime/fake-success/isolation causality is honest. Stop at rule_pack_combat_faction_social_work_theft_artifact_verification.",
+    "last_completed_product_slice_id":  "goal_010_content_generation_at_scale",
+    "active_manual_gate":  "Content generation at scale artifact verification is the next stop marker after Goal 010.",
+    "current_user_action":  "Review or hand off the generated .llmgc/procedural/content-generation-scale folder; do not mark content_generation_at_scale_artifact_verification passed until the artifact review accepts it.",
+    "recommended_next_decision":  "Goal 010 records the user-confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed gate, completes S085-S091, and proves compact content-pack driven generation at scale for frontier/survival, gothic/mystery and trade/caravan styles. It expands each compact JSON pack into 204 deterministic generated instances, materializes validator-clean GamePackage definitions, executes six selected generated runtime threads through an injected real GameRuntimeService adapter, proves full GameRuntimeState save/load with RuntimeStateSerializer and RuntimeSnapshotStore, reports deterministic replay, multi-seed variation, repetition metrics, package/runtime hashes, and rejects eighteen invalid/fake/leak scenarios causally. Stop at content_generation_at_scale_artifact_verification.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "rule_pack_combat_faction_social_work_theft_artifact_verification"
+                                                        "content_generation_at_scale_artifact_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -35,7 +35,8 @@
                            "goal_006_manual_gate":  "semantic_selected_runtime_composition_artifact_verification",
                            "goal_007_manual_gate":  "connected_world_travel_state_artifact_verification",
                            "goal_008_manual_gate":  "rule_pack_gameplay_family_artifact_verification",
-                           "goal_009_manual_gate":  "rule_pack_combat_faction_social_work_theft_artifact_verification"
+                           "goal_009_manual_gate":  "rule_pack_combat_faction_social_work_theft_artifact_verification",
+                           "goal_010_manual_gate":  "content_generation_at_scale_artifact_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -56,15 +57,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations",
-                                         "title":  "Rule-Pack Combat, Faction, Social, Work And Theft Foundations + S084A Correctness Hotfix",
-                                         "completed_at_utc":  "2026-06-26T01:17:08Z",
-                                         "summary":  "Goal 009 completes S078-S084 after the user confirmed rule_pack_gameplay_family_artifact_verification passed, and S084A repairs acceptance false positives found during artifact review. It writes deterministic headless acceptance artifacts under .llmgc/procedural/rule-pack-combat-faction-social-work-theft, keeps the Application default runtime adapter unavailable, injects a real GameRuntimeService adapter from tests/smoke, executes combat encounter/ability/AI, clamped faction reputation, dialogue choice consequence, work interaction/transaction reward, container theft transfer plus explicit flag/reputation consequence and the combined loop through existing runtime services, preserves full GameRuntimeState through RuntimeStateSerializer and RuntimeSnapshotStore, rejects nineteen invalid/fake/leak scenarios causally, and stops at rule_pack_combat_faction_social_work_theft_artifact_verification. It does not change public GamePackage/runtime schema, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
-                                         "scenario_id":  "rule-pack-combat-faction-social-work-theft",
+                                         "slice_id":  "goal_010_content_generation_at_scale",
+                                         "title":  "Deterministic Content Generation At Scale",
+                                         "completed_at_utc":  "2026-06-26T12:00:00Z",
+                                         "summary":  "Goal 010 completes S085-S091 after the user confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed. It adds compact reference content packs under samples/content-generation-packs, a deterministic Application-layer content generation scale acceptance service, focused tests and product smoke, materializes generated catalogs into validator-clean GamePackage definitions, executes selected generated ids through an injected real GameRuntimeService adapter, proves save/load and cross-pack isolation, and writes artifacts under .llmgc/procedural/content-generation-scale. The active manual gate is content_generation_at_scale_artifact_verification.",
+                                         "scenario_id":  "content-generation-scale",
                                          "checks":  [
-                                                        "RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 38/38 passed",
-                                                        "rule-pack-combat-faction-social-work-theft product smoke: 1/1 passed",
-                                                        "check-all.ps1: 768/768 tests passed, build 0 warnings / 0 errors"
+                                                        "ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",
+                                                        "content-generation-scale product smoke: 1/1 passed",
+                                                        "check-all.ps1: 775/775 tests passed, build 0 warnings / 0 errors"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -291,13 +292,13 @@
                                                             "next_action":  "goal_009_rule_pack_combat_faction_social_work_theft_foundations"
                                                         },
     "rule_pack_combat_faction_social_work_theft_artifact_verification":  {
-                                                                            "status":  "required",
-                                                                            "evidence_source":  "pending_external_artifact_review_after_goal_009",
-                                                                            "observed_result":  [
-
-                                                                                                ],
-                                                                            "next_action":  "do_not_start_post_goal_009_work_without_new_explicit_user_request"
-                                                                        },
+                                                                             "status":  "passed",
+                                                                             "evidence_source":  "user_prompt_before_goal_010",
+                                                                             "observed_result":  [
+                                                                                                     "rule_pack_combat_faction_social_work_theft_artifact_verification passed"
+                                                                                                 ],
+                                                                             "next_action":  "goal_010_content_generation_at_scale"
+                                                                         },
     "extension_rule_pack_contract_v1":  {
                                             "document":  "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
                                             "validator":  "ExtensionRulePackValidator",
@@ -324,7 +325,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "rule_pack_combat_faction_social_work_theft_artifact_verification"
+                                          "content_generation_at_scale_artifact_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -345,11 +346,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "rule_pack_combat_faction_social_work_theft_artifact_verification",
-    "recommended_next_work_item_title":  "Rule-pack combat/faction/social/work/theft artifact verification.",
-    "recommended_next_task_file":  ".llmgc/procedural/rule-pack-combat-faction-social-work-theft/rule-pack-combat-faction-social-work-theft-verification.md",
+    "recommended_next_work_item":  "content_generation_at_scale_artifact_verification",
+    "recommended_next_work_item_title":  "Content generation at scale artifact verification.",
+    "recommended_next_task_file":  ".llmgc/procedural/content-generation-scale/content-generation-scale-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Rule-pack combat/faction/social/work/theft artifact verification"
+                                              "Content generation at scale artifact verification"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -413,7 +414,28 @@
                              "Semantic-selected runtime composition correctness hotfix diagnostics",
                              "Connected world travel and deterministic runtime world state acceptance sidecars",
                              "Rule-pack gameplay family foundations acceptance sidecars",
-                             "Rule-pack combat/faction/social/work/theft acceptance sidecars"
+                             "Rule-pack combat/faction/social/work/theft acceptance sidecars",
+                             "Content generation at scale acceptance sidecars"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 009 stop at rule_pack_combat_faction_social_work_theft_artifact_verification and do not start post-Goal-009 work without a new explicit user request."
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 010 stop at content_generation_at_scale_artifact_verification and do not start Goal 011 without a new explicit user request.",
+    "content_generation_at_scale_artifact_verification":  {
+                                                              "status":  "required",
+                                                              "evidence_source":  "pending_external_artifact_review_after_goal_010",
+                                                              "observed_result":  [
+
+                                                                                  ],
+                                                              "next_action":  "do_not_start_goal_011_without_new_explicit_user_request"
+                                                          },
+    "goal_010_content_generation_at_scale":  {
+                                                 "slice_id":  "goal_010_content_generation_at_scale",
+                                                 "title":  "Deterministic Content Generation At Scale",
+                                                 "completed_at_utc":  "2026-06-26T12:00:00Z",
+                                                 "summary":  "Goal 010 completes S085-S091 after the user confirmed rule_pack_combat_faction_social_work_theft_artifact_verification passed. It adds compact reference content packs under samples/content-generation-packs, a deterministic Application-layer content generation scale acceptance service, focused tests and product smoke, materializes generated catalogs into validator-clean GamePackage definitions, executes selected generated ids through an injected real GameRuntimeService adapter, proves save/load and cross-pack isolation, and writes artifacts under .llmgc/procedural/content-generation-scale. The active manual gate is content_generation_at_scale_artifact_verification.",
+                                                 "scenario_id":  "content-generation-scale",
+                                                 "checks":  [
+                                                                "ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests filtered tests: 45/45 passed",
+                                                                "content-generation-scale product smoke: 1/1 passed",
+                                                                "check-all.ps1: 775/775 tests passed, build 0 warnings / 0 errors"
+                                                            ]
+                                             }
 }

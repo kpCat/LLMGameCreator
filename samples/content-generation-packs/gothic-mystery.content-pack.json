@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "content_generation_pack_v1",
+  "packId": "gothic_mystery",
+  "styleId": "gothic_mystery_oriented",
+  "title": "Gothic Mystery Scale Pack",
+  "requiredTags": [ "gothic", "mystery" ],
+  "excludedTags": [ "frontier", "caravan" ],
+  "styleTags": [ "gothic", "mystery", "rain" ],
+  "semanticTags": [ "npc", "quest", "dialogue", "loot", "event" ],
+  "declaredSlots": [ "npc", "role", "trait", "item", "quest", "region", "faction" ],
+  "budgets": { "totalInstances": 204, "npcs": 24, "quests": 24, "events": 24, "dialogueLines": 60, "lootEntries": 72 },
+  "repetition": { "allowDuplicateNames": false, "maxSharePerArchetype": 0.5, "fallbackPolicy": "fail" },
+  "nameBank": {
+    "prefixes": [ "Grey", "Vesper", "Marl", "Cinder", "Hollow", "Noct" ],
+    "suffixes": [ "Archivist", "Bellkeeper", "Witness", "Curator", "Porter", "Acolyte" ]
+  },
+  "regions": [
+    { "id": "black_abbey", "name": "Black Abbey" },
+    { "id": "mirror_lane", "name": "Mirror Lane" },
+    { "id": "old_cistern", "name": "Old Cistern" }
+  ],
+  "factions": [
+    { "id": "abbey_order", "name": "Abbey Order", "description": "Keepers of sealed histories." },
+    { "id": "night_watch", "name": "Night Watch", "description": "Tired guards chasing impossible rumors." },
+    { "id": "lampwrights", "name": "Lampwrights", "description": "Craft workers who know every alley shadow." }
+  ],
+  "npcArchetypes": [
+    { "id": "crypt_scholar", "role": "scholar", "traits": [ "secretive", "precise", "haunted" ] },
+    { "id": "rain_bailiff", "role": "bailiff", "traits": [ "stern", "suspicious", "methodical" ] },
+    { "id": "bell_novice", "role": "novice", "traits": [ "nervous", "observant", "loyal" ] },
+    { "id": "lantern_keeper", "role": "keeper", "traits": [ "patient", "somber", "watchful" ] }
+  ],
+  "itemArchetypes": [
+    { "id": "sealed_letter", "name": "Sealed Letter", "description": "A letter closed with black wax.", "tier": "common", "baseValue": 5, "tags": [ "clue", "paper" ] },
+    { "id": "silver_key", "name": "Silver Key", "description": "A cold key with no maker mark.", "tier": "uncommon", "baseValue": 18, "tags": [ "key", "mystery" ] },
+    { "id": "grave_candle", "name": "Grave Candle", "description": "A candle that gutters in still air.", "tier": "common", "baseValue": 4, "tags": [ "ritual", "light" ] },
+    { "id": "ledger_page", "name": "Ledger Page", "description": "A torn account of hidden payments.", "tier": "common", "baseValue": 7, "tags": [ "clue", "faction" ] },
+    { "id": "mourning_pin", "name": "Mourning Pin", "description": "A small pin of tarnished jet.", "tier": "uncommon", "baseValue": 13, "tags": [ "reward", "social" ] },
+    { "id": "ward_salt", "name": "Ward Salt", "description": "Salt wrapped in blue paper.", "tier": "common", "baseValue": 6, "tags": [ "protection", "ritual" ] },
+    { "id": "ink_vial", "name": "Ink Vial", "description": "Ink that dries into a deep violet.", "tier": "common", "baseValue": 3, "tags": [ "craft", "paper" ] },
+    { "id": "choir_token", "name": "Choir Token", "description": "A brass token from the closed gallery.", "tier": "rare", "baseValue": 22, "tags": [ "reward", "abbey" ] }
+  ],
+  "lootTables": [
+    {
+      "id": "abbey_cache",
+      "entries": [
+        { "id": "letter", "itemArchetypeId": "sealed_letter", "weight": 3, "amount": 1 },
+        { "id": "key", "itemArchetypeId": "silver_key", "weight": 1, "amount": 1 },
+        { "id": "candle", "itemArchetypeId": "grave_candle", "weight": 4, "amount": 2 },
+        { "id": "salt", "itemArchetypeId": "ward_salt", "weight": 2, "amount": 1 }
+      ]
+    }
+  ],
+  "questMotifs": [
+    { "id": "trace_letter", "objectiveKind": "choose_dialogue", "titleTemplate": "Trace {item} for {npc}", "rewardItemArchetypeId": "choir_token", "requiredItemArchetypeId": "sealed_letter", "dependsOn": [] },
+    { "id": "unlock_cistern", "objectiveKind": "choose_dialogue", "titleTemplate": "Unlock {region} with {npc}", "rewardItemArchetypeId": "mourning_pin", "requiredItemArchetypeId": "silver_key", "dependsOn": [] },
+    { "id": "quiet_bells", "objectiveKind": "choose_dialogue", "titleTemplate": "Quiet the bells near {region}", "rewardItemArchetypeId": "ward_salt", "requiredItemArchetypeId": "grave_candle", "dependsOn": [] }
+  ],
+  "eventMotifs": [
+    { "id": "bell_tolls", "trigger": "dialogue_choice", "actions": [ { "kind": "set_flag", "target": "bell_toll_recorded" } ], "dependsOn": [] },
+    { "id": "ledger_revealed", "trigger": "quest_started", "actions": [ { "kind": "change_reputation", "target": "abbey_order" } ], "dependsOn": [] },
+    { "id": "door_unsealed", "trigger": "encounter_completed", "actions": [ { "kind": "add_item", "target": "silver_key" } ], "dependsOn": [] }
+  ],
+  "dialogueIntents": [
+    { "id": "hint_secret", "requiredSlots": [ "npc", "item", "region" ], "allowedVoiceIds": [ "hushed", "formal", "weary" ], "phraseTemplates": [ "{npc} saw {item} beneath {region}", "{region} remembers {item} better than {npc}" ] },
+    { "id": "warn_omen", "requiredSlots": [ "npc", "trait", "faction" ], "allowedVoiceIds": [ "hushed", "weary" ], "phraseTemplates": [ "{npc} is {trait} whenever {faction} is named", "{faction} left {npc} {trait}" ] },
+    { "id": "offer_clue", "requiredSlots": [ "quest", "item" ], "allowedVoiceIds": [ "formal", "weary" ], "phraseTemplates": [ "{quest} ends with {item}", "Take {item} when {quest} is finished" ] }
+  ],
+  "voices": [
+    { "id": "hushed", "prefix": "Softly:" },
+    { "id": "formal", "prefix": "For the record:" },
+    { "id": "weary", "prefix": "At this hour:" }
+  ]
+}

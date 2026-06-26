@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "content_generation_pack_v1",
+  "packId": "frontier_survival",
+  "styleId": "frontier_survival_oriented",
+  "title": "Frontier Survival Scale Pack",
+  "requiredTags": [ "frontier", "survival" ],
+  "excludedTags": [ "gothic", "caravan" ],
+  "styleTags": [ "frontier", "survival", "weathered" ],
+  "semanticTags": [ "npc", "quest", "dialogue", "loot", "event" ],
+  "declaredSlots": [ "npc", "role", "trait", "item", "quest", "region", "faction" ],
+  "budgets": {
+    "totalInstances": 204,
+    "npcs": 24,
+    "quests": 24,
+    "events": 24,
+    "dialogueLines": 60,
+    "lootEntries": 72
+  },
+  "repetition": {
+    "allowDuplicateNames": false,
+    "maxSharePerArchetype": 0.5,
+    "fallbackPolicy": "fail"
+  },
+  "nameBank": {
+    "prefixes": [ "Ash", "Ridge", "Hale", "Moss", "Flint", "Vale" ],
+    "suffixes": [ "Warden", "Caller", "Keeper", "Runner", "Binder", "Scout" ]
+  },
+  "regions": [
+    { "id": "pine_basin", "name": "Pine Basin" },
+    { "id": "salt_mire", "name": "Salt Mire" },
+    { "id": "red_pass", "name": "Red Pass" }
+  ],
+  "factions": [
+    { "id": "settlers", "name": "Settlers", "description": "Homestead families holding the line." },
+    { "id": "rangers", "name": "Rangers", "description": "Trail scouts and boundary watchers." },
+    { "id": "trappers", "name": "Trappers", "description": "Independent hunters trading hard-won supplies." }
+  ],
+  "npcArchetypes": [
+    { "id": "trail_guard", "role": "guard", "traits": [ "watchful", "wary", "resourceful" ] },
+    { "id": "forager", "role": "forager", "traits": [ "patient", "practical", "quiet" ] },
+    { "id": "settler_medic", "role": "medic", "traits": [ "stern", "careful", "tired" ] },
+    { "id": "bridgewright", "role": "builder", "traits": [ "stubborn", "precise", "generous" ] }
+  ],
+  "itemArchetypes": [
+    { "id": "dried_rations", "name": "Dried Rations", "description": "Packed field food.", "tier": "common", "baseValue": 3, "tags": [ "food", "survival" ] },
+    { "id": "storm_lantern", "name": "Storm Lantern", "description": "A covered lamp for bad nights.", "tier": "uncommon", "baseValue": 12, "tags": [ "tool", "light" ] },
+    { "id": "map_scrap", "name": "Map Scrap", "description": "A route note torn from a survey book.", "tier": "common", "baseValue": 5, "tags": [ "quest", "route" ] },
+    { "id": "water_filter", "name": "Water Filter", "description": "A field filter patched with wire.", "tier": "uncommon", "baseValue": 14, "tags": [ "tool", "survival" ] },
+    { "id": "iron_snare", "name": "Iron Snare", "description": "A compact trap for lean days.", "tier": "common", "baseValue": 4, "tags": [ "tool", "hunt" ] },
+    { "id": "ridge_token", "name": "Ridge Token", "description": "A mark of trust from the basin watch.", "tier": "rare", "baseValue": 21, "tags": [ "reward", "faction" ] },
+    { "id": "salvaged_coil", "name": "Salvaged Coil", "description": "Useful wire from a broken pump.", "tier": "common", "baseValue": 6, "tags": [ "craft", "metal" ] },
+    { "id": "field_medicine", "name": "Field Medicine", "description": "Bitter medicine in a sealed tin.", "tier": "uncommon", "baseValue": 16, "tags": [ "medical", "reward" ] }
+  ],
+  "lootTables": [
+    {
+      "id": "frontier_cache",
+      "entries": [
+        { "id": "ration", "itemArchetypeId": "dried_rations", "weight": 4, "amount": 2 },
+        { "id": "lantern", "itemArchetypeId": "storm_lantern", "weight": 1, "amount": 1 },
+        { "id": "scrap", "itemArchetypeId": "map_scrap", "weight": 3, "amount": 1 },
+        { "id": "coil", "itemArchetypeId": "salvaged_coil", "weight": 2, "amount": 1 }
+      ]
+    }
+  ],
+  "questMotifs": [
+    { "id": "restore_supply", "objectiveKind": "choose_dialogue", "titleTemplate": "Restore {item} for {npc}", "rewardItemArchetypeId": "ridge_token", "requiredItemArchetypeId": "dried_rations", "dependsOn": [] },
+    { "id": "secure_route", "objectiveKind": "choose_dialogue", "titleTemplate": "Secure {region} with {npc}", "rewardItemArchetypeId": "field_medicine", "requiredItemArchetypeId": "map_scrap", "dependsOn": [] },
+    { "id": "recover_tool", "objectiveKind": "choose_dialogue", "titleTemplate": "Recover {item} near {region}", "rewardItemArchetypeId": "storm_lantern", "requiredItemArchetypeId": "iron_snare", "dependsOn": [] }
+  ],
+  "eventMotifs": [
+    { "id": "cold_front", "trigger": "dialogue_choice", "actions": [ { "kind": "set_flag", "target": "frontier_weather_shift" } ], "dependsOn": [] },
+    { "id": "watch_signal", "trigger": "quest_started", "actions": [ { "kind": "change_reputation", "target": "rangers" } ], "dependsOn": [] },
+    { "id": "cache_found", "trigger": "encounter_completed", "actions": [ { "kind": "add_item", "target": "dried_rations" } ], "dependsOn": [] }
+  ],
+  "dialogueIntents": [
+    { "id": "request_help", "requiredSlots": [ "npc", "item", "region" ], "allowedVoiceIds": [ "plain", "urgent", "dry" ], "phraseTemplates": [ "{npc} needs {item} before crossing {region}", "{region} will not hold unless {item} reaches {npc}" ] },
+    { "id": "warn_danger", "requiredSlots": [ "npc", "trait", "faction" ], "allowedVoiceIds": [ "urgent", "dry" ], "phraseTemplates": [ "{npc} sounds {trait} about {faction}", "The {faction} trail has made {npc} {trait}" ] },
+    { "id": "offer_reward", "requiredSlots": [ "quest", "item" ], "allowedVoiceIds": [ "plain", "dry" ], "phraseTemplates": [ "{quest} pays with {item}", "Finish {quest} and take {item}" ] }
+  ],
+  "voices": [
+    { "id": "plain", "prefix": "Listen:" },
+    { "id": "urgent", "prefix": "Quickly:" },
+    { "id": "dry", "prefix": "Plain truth:" }
+  ]
+}

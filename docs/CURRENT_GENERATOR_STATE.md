@@ -1,7 +1,7 @@
 ﻿# Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 009 S084A Rule-Pack Combat, Faction, Social, Work And Theft Correctness Hotfix  
+Updated by: Goal 010 Deterministic Content Generation At Scale  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -11,6 +11,8 @@ M4.1 passed for sampled baseline contracts. Product Slice 029 completed the firs
 The user then confirmed `connected_world_travel_state_artifact_verification passed`, allowing Goal 008. Goal 008 completes S071-S077 by proving rule-pack gameplay family foundations for inventory/item-use, equipment/loadout, crafting/resource conversion, trading/transaction and status/effect evidence through exact package/runtime bindings, ordered runtime-owned state deltas, invalid rejection, deterministic replay and save/load artifacts. Product Slice 077A repairs the Goal 008 acceptance artifact so valid runtime evidence is produced only by an injected real `GameRuntimeService` adapter from the test/smoke assembly, the default Application adapter is unavailable, save/load evidence uses `RuntimeStateSerializer` and `RuntimeSnapshotStore`, binding audit is scenario-exact, and invalid/runtime causality remains honest.
 
 The user then confirmed `rule_pack_gameplay_family_artifact_verification passed`, allowing Goal 009. Goal 009 completes S078-S084 by proving combat, faction reputation, social dialogue consequence, work contract reward, theft container transfer plus explicit flag/reputation consequence and a combined loop through exact package/runtime bindings and injected real `GameRuntimeService` evidence. S084A repairs artifact-review false positives by auditing exact command shapes, package bindings, declaration-specific runtime outcomes, real clamped reputation evidence, sequential valid-scenario isolation and concrete injected-leak rejection. The Application default runtime adapter remains unavailable, full `GameRuntimeState` save/load uses `RuntimeStateSerializer` and `RuntimeSnapshotStore`, invalid/fake/leak scenarios are rejected causally, and Goal 009 stops at `rule_pack_combat_faction_social_work_theft_artifact_verification`.
+
+The user then confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed`, allowing Goal 010. Goal 010 completes S085-S091 by defining compact `content_generation_pack_v1` JSON packs, expanding three compact reference packs into deterministic generated NPC, item/loot, quest, event and dialogue catalogs at scale, materializing the generated ids into validator-clean `GamePackage` definitions, executing six selected generated runtime threads through an injected real `GameRuntimeService` adapter, proving full `GameRuntimeState` save/load through `RuntimeStateSerializer` and `RuntimeSnapshotStore`, enforcing measurable repetition caps, and rejecting eighteen invalid/fake/leak scenarios causally. Goal 010 stops at `content_generation_at_scale_artifact_verification`.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -39,7 +41,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Rule-pack combat/faction/social/work/theft artifact verification after Goal 009 artifact review.
+1. Content generation at scale artifact verification after Goal 010 artifact review.
 
 Kill criterion:
 
@@ -137,10 +139,36 @@ Observed result:
 Recommended next work item:
 
 ```text
-rule_pack_combat_faction_social_work_theft_artifact_verification
+content_generation_at_scale_artifact_verification
 ```
 
-Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The user confirmed `manual_quest_dialog_interaction_family_verification passed` before Goal 005. Goal 005 proves layered semantic packs and semantic-guided composition through deterministic reports under `.llmgc/procedural/semantic-guided-composition/`. Product Slice 058A repairs false-positive acceptance and contract-validation gaps in that same artifact path. The user confirmed `semantic_guided_composition_artifact_verification passed` before Goal 006. Goal 006 proves semantic-selected package/runtime composition through deterministic reports under `.llmgc/procedural/semantic-runtime-composition/`. Product Slice 063A repairs binding/runtime false positives in that same artifact path. The user confirmed `semantic_selected_runtime_composition_artifact_verification passed` before Goal 007. Goal 007 proves connected world travel and deterministic runtime world state through reports under `.llmgc/procedural/connected-world-travel/`. The user confirmed `connected_world_travel_state_artifact_verification passed` before Goal 008. Goal 008 proves rule-pack gameplay family foundations through reports under `.llmgc/procedural/rule-pack-gameplay-family-foundations/`. Product Slice 077A repairs the same Goal 008 artifact family without changing the gate. The user confirmed `rule_pack_gameplay_family_artifact_verification passed` before Goal 009. Goal 009 proves rule-pack combat/faction/social/work/theft foundations through reports under `.llmgc/procedural/rule-pack-combat-faction-social-work-theft/`, and S084A repairs the artifact-review correctness gaps in that same folder. The next step is `rule_pack_combat_faction_social_work_theft_artifact_verification`; do not start post-Goal-009 work without a new explicit user request.
+Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The user confirmed `manual_quest_dialog_interaction_family_verification passed` before Goal 005. Goal 005 proves layered semantic packs and semantic-guided composition through deterministic reports under `.llmgc/procedural/semantic-guided-composition/`. Product Slice 058A repairs false-positive acceptance and contract-validation gaps in that same artifact path. The user confirmed `semantic_guided_composition_artifact_verification passed` before Goal 006. Goal 006 proves semantic-selected package/runtime composition through deterministic reports under `.llmgc/procedural/semantic-runtime-composition/`. Product Slice 063A repairs binding/runtime false positives in that same artifact path. The user confirmed `semantic_selected_runtime_composition_artifact_verification passed` before Goal 007. Goal 007 proves connected world travel and deterministic runtime world state through reports under `.llmgc/procedural/connected-world-travel/`. The user confirmed `connected_world_travel_state_artifact_verification passed` before Goal 008. Goal 008 proves rule-pack gameplay family foundations through reports under `.llmgc/procedural/rule-pack-gameplay-family-foundations/`. Product Slice 077A repairs the same Goal 008 artifact family without changing the gate. The user confirmed `rule_pack_gameplay_family_artifact_verification passed` before Goal 009. Goal 009 proves rule-pack combat/faction/social/work/theft foundations through reports under `.llmgc/procedural/rule-pack-combat-faction-social-work-theft/`, and S084A repairs the artifact-review correctness gaps in that same folder. The user confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed` before Goal 010. Goal 010 proves deterministic content generation at scale through reports under `.llmgc/procedural/content-generation-scale/`. The next step is `content_generation_at_scale_artifact_verification`; do not start Goal 011 without a new explicit user request.
+
+## Goal 010 Summary
+
+Goal 010: Deterministic Content Generation At Scale.
+
+Completed behavior:
+
+- records `rule_pack_combat_faction_social_work_theft_artifact_verification passed` from the user prompt;
+- adds compact `content_generation_pack_v1` reference packs for frontier/survival, gothic/mystery and trade/caravan styles under `samples/content-generation-packs/`;
+- adds an Application-layer deterministic content generation scale acceptance service under `Design/ContentGeneration`;
+- expands each compact pack into 204 concrete generated instances with stable safe ids, source hashes, provenance, catalog hashes and repetition metrics;
+- materializes generated NPCs, items, loot, quests, events and dialogue into real existing `GamePackage` definitions without public schema changes;
+- executes six deterministic generated runtime threads through an injected real `GameRuntimeService` adapter from tests/smoke;
+- proves full `GameRuntimeState` save/load through `RuntimeStateSerializer` and `RuntimeSnapshotStore`;
+- rejects eighteen invalid/fake/leak scenarios causally, including malformed JSON, dependency cycles, repetition breaches, fake runtime success, save/load mismatch, cross-pack leakage and expectation-only invalid metadata;
+- writes deterministic `.llmgc/procedural/content-generation-scale/content-generation-scale-report.json`;
+- writes deterministic `.llmgc/procedural/content-generation-scale/content-generation-scale-report.md`;
+- writes `.llmgc/procedural/content-generation-scale/content-generation-scale-verification.md`;
+- adds the `content-generation-scale` product smoke scenario;
+- did not add WinForms/UI, Unity, Lua, provider/media execution, generator-library changes, `.sln`/`.csproj` changes, post-Goal-010 work or public GamePackage/runtime schema changes.
+
+Recorded checks from Goal 010:
+
+- `ContentGenerationScale/RulePackCombatFactionSocialWorkTheft/RulePackGameplayFamily/ConnectedWorldTravel/CurrentGeneratorStateDocsTests` filtered tests: 45/45 passed.
+- `content-generation-scale` product smoke: 1/1 passed.
+- `check-all.ps1`: 775/775 tests passed, build 0 warnings / 0 errors.
 
 ## Goal 009 Summary
 
