@@ -1,395 +1,397 @@
-{
-  "schema_version": "0.1",
-  "state_id": "current_generator_state",
-  "updated_at_utc": "2026-06-26T02:10:00Z",
-  "current_phase": "strategy_reset_playable_procedural_generator",
-  "current_phase_title": "Goal 008 rule-pack gameplay family foundations completed",
-  "gate_status": "goal_008_rule_pack_gameplay_family_artifact_verification_required",
-  "last_completed_milestone": "M4.1",
-  "last_completed_milestone_title": "Strict LLM Generation Evaluation Pack",
-  "last_completed_product_slice_id": "goal_008_rule_pack_gameplay_family_foundations",
-  "active_manual_gate": "Rule-pack gameplay family artifact verification is the next stop marker after Goal 008.",
-  "current_user_action": "Review or hand off the generated .llmgc/procedural/rule-pack-gameplay-family-foundations folder; do not mark rule_pack_gameplay_family_artifact_verification passed until the artifact review accepts it.",
-  "recommended_next_decision": "Goal 008 records connected_world_travel_state_artifact_verification as passed from the user prompt and proves inventory/item-use, equipment/loadout, crafting/resource conversion, trading/transaction and status/effect foundations through exact package/runtime bindings, ordered runtime-owned state deltas, invalid rejection, deterministic replay and save/load artifacts. Stop at rule_pack_gameplay_family_artifact_verification; do not start post-Goal-008 work until this gate is reviewed.",
-  "active_strategy_reset": {
-    "document": "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
-    "freeze_infrastructure_only_work": true,
-    "required_outcome_within_large_slices": 3,
-    "required_outcome": "generated_playable_or_simulatable_loop",
-    "next_sequence": [
-      "rule_pack_gameplay_family_artifact_verification"
-    ],
-    "kill_criterion": "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
-  },
-  "process_policy": {
-    "manual_gate_policy": "one_manual_gate_per_goal",
-    "manual_gate_exceptions": [
-      "crash",
-      "threading_blocker",
-      "schema_blocker",
-      "runtime_blocker"
-    ],
-    "goal_003_manual_gate": "manual_extension_spine_verification",
-    "goal_004_manual_gate": "manual_quest_dialog_interaction_family_verification",
-    "goal_005_manual_gate": "semantic_guided_composition_artifact_verification",
-    "goal_006_manual_gate": "semantic_selected_runtime_composition_artifact_verification",
-    "goal_007_manual_gate": "connected_world_travel_state_artifact_verification",
-    "goal_008_manual_gate": "rule_pack_gameplay_family_artifact_verification"
-  },
-  "gate_evidence": {
-    "evaluation_id": "strict_llm_evaluation/58df49dadbff5598",
-    "evaluated_at": "2026-06-18T16:43:35.9475873+00:00",
-    "source_capability_selection_id": "generator_plan_capability_selection/0b0addcd5c019328",
-    "mode": "batch",
-    "sampled_contracts": [
-      "game_profile_v1",
-      "mechanics_pack_v1",
-      "quest_pack_v1",
-      "scene_pack_v1"
-    ],
-    "iterations": 1,
-    "repair_enabled": true,
-    "stage_for_review": true,
-    "expected_max_llm_calls": 8,
-    "decision_text": "M4.1 real-model evaluation gate passed for sampled baseline contracts.",
-    "report_path": "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
-  },
-  "last_completed_product_slice": {
-    "slice_id": "goal_008_rule_pack_gameplay_family_foundations",
-    "title": "Rule-Pack Gameplay Family Foundations",
-    "completed_at_utc": "2026-06-26T02:10:00Z",
-    "summary": "Goal 008 completes S071-S077 by recording connected_world_travel_state_artifact_verification as passed from the user prompt, adding a deterministic rule-pack gameplay family acceptance service, proving valid inventory/item-use, equipment/loadout, crafting/resource conversion, trading/transaction, status/effect and combined-loop scenarios with exact package/runtime bindings and runtime-owned state deltas, rejecting missing refs, slot mismatch, missing inputs, insufficient cost, invalid status binding and fake runtime success, and stopping at rule_pack_gameplay_family_artifact_verification. It does not change public GamePackage schema, start post-Goal-008 work, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
-    "scenario_id": "rule-pack-gameplay-family-foundations",
-    "checks": [
-      "RulePackGameplayFamily/ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 36/36 passed",
-      "rule-pack-gameplay-family-foundations product smoke: 1/1 passed",
-      "check-all.ps1: 757/757 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "goal_008_rule_pack_gameplay_family_foundations": {
-    "slice_id": "goal_008_rule_pack_gameplay_family_foundations",
-    "title": "Rule-Pack Gameplay Family Foundations",
-    "completed_at_utc": "2026-06-26T02:10:00Z",
-    "summary": "S071-S077 add headless deterministic gameplay-family acceptance artifacts under .llmgc/procedural/rule-pack-gameplay-family-foundations. The goal records Goal 007 artifact verification as passed from the user prompt, builds compact rule-pack declarations for items/inventory/item-use, equipment/loadout, crafting/resource conversion, trading/transaction and status/effect evidence, audits exact package/runtime ids before runtime, executes ordered command-shaped runtime-owned state transitions, preserves exact evidence through save/load, rejects invalid scenarios by stable diagnostics or failed runtime evidence, and leaves rule_pack_gameplay_family_artifact_verification as the active manual gate.",
-    "scenario_id": "rule-pack-gameplay-family-foundations",
-    "checks": [
-      "RulePackGameplayFamily/ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 36/36 passed",
-      "rule-pack-gameplay-family-foundations product smoke: 1/1 passed",
-      "check-all.ps1: 757/757 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "goal_007_connected_world_travel_and_deterministic_state": {
-    "slice_id": "goal_007_connected_world_travel_and_deterministic_state",
-    "title": "Connected World Travel And Deterministic World State",
-    "completed_at_utc": "2026-06-26T00:30:00Z",
-    "summary": "S064-S070 add headless deterministic connected-world acceptance artifacts under .llmgc/procedural/connected-world-travel. The goal records Goal 006 artifact verification as passed from the user prompt, builds region graph/profile/map-binding/chunk sidecars outside public package schema, executes travel through existing serializable GameRuntimeState ownership, preserves exact state through save/load, persists runtime-only chunk deltas, rejects invalid scenarios by stable diagnostics, and leaves connected_world_travel_state_artifact_verification as the active manual gate.",
-    "scenario_id": "connected-world-travel",
-    "checks": [
-      "ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
-      "connected-world-travel product smoke: 1/1 passed",
-      "check-all.ps1: 751/751 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "product_slice_063a_semantic_runtime_composition_correctness_hotfix": {
-    "slice_id": "product_slice_063a_semantic_runtime_composition_correctness_hotfix",
-    "title": "Semantic Runtime Composition Correctness Hotfix",
-    "completed_at_utc": "2026-06-25T23:45:00Z",
-    "summary": "Repairs Goal 006 S063 acceptance correctness after external review: selected and objective-required interactions are all materialized; source refs resolve to exact scenario package ids; package bindings are audited before runtime; runtime evidence must contain successful command/objective correlations, reward/completion deltas and exact save/load evidence; injected previous-variant state fails isolation; invalid conflict rejection remains caused by semantic_guided.excludes_conflict and does not run runtime.",
-    "scenario_id": "semantic-runtime-composition",
-    "checks": [
-      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 36/36 passed",
-      "semantic-runtime-composition product smoke: 1/1 passed",
-      "check-all.ps1: 740/740 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "goal_006_semantic_selected_runtime_composition": {
-    "slice_id": "goal_006_semantic_selected_runtime_composition",
-    "title": "Semantic-Selected Generated Package And Runtime Composition",
-    "completed_at_utc": "2026-06-25T23:10:00Z",
-    "summary": "Goal 006 completes S059-S063 by recording semantic_guided_composition_artifact_verification as passed from the user prompt, carrying selected semantic traces and Goal 004 declarations into deterministic composition plans, mapping those selections to existing package quest/dialogue/interaction/provenance structures, executing the same selected package ids headlessly through runtime-owned state, rejecting invalid/conflicted bindings before runnable package creation, and proving replay, save/load and variant isolation.",
-    "scenario_id": "semantic-runtime-composition",
-    "checks": [
-      "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
-      "semantic-runtime-composition product smoke: 1/1 passed",
-      "check-all.ps1: 734/734 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "product_slice_058a_semantic_guided_acceptance_correctness_hotfix": {
-    "slice_id": "product_slice_058a_semantic_guided_acceptance_correctness_hotfix",
-    "title": "Semantic-Guided Acceptance Correctness Hotfix",
-    "completed_at_utc": "2026-06-25T22:55:00Z",
-    "summary": "Bounded correctness hotfix after Goal 005. It keeps semantic_guided_composition_artifact_verification as the active gate, does not create S059 or Goal 006, and fixes acceptance/report correctness gaps found by external artifact review.",
-    "scenario_id": "semantic-guided-composition",
-    "checks": [
-      "SemanticLayerCompiler/SemanticGuidedComposition/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 29/29 passed",
-      "semantic-guided-composition product smoke: 1/1 passed",
-      "check-all.ps1: 731/731 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "goal_005_layered_semantic_packs_and_guided_composition": {
-    "slice_id": "goal_005_layered_semantic_packs_and_guided_composition",
-    "title": "Layered Semantic Packs And Semantic-Guided Composition",
-    "completed_at_utc": "2026-06-25T22:30:00Z",
-    "summary": "Goal 005 completed S054-S058: records the Goal 004 manual artifact review as passed, adds docs/SEMANTIC_PACK_CONTRACT_V1.md, compiles core/genre/project semantic layers into a deterministic active catalog, quarantines imported/LLM candidates, ships compact reference packs, and uses compiled semantics to guide quest pattern, dialogue intent and interaction pattern choices through existing Goal 004 rule-pack ids.",
-    "scenario_id": "semantic-guided-composition",
-    "checks": [
-      "SemanticCatalog/SemanticGuided/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 23/23 passed",
-      "semantic-guided-composition product smoke: 1/1 passed",
-      "check-all.ps1: 721/721 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "goal_004_rule_pack_driven_quest_dialog_interaction_families": {
-    "slice_id": "goal_004_rule_pack_driven_quest_dialog_interaction_families",
-    "title": "Rule-Pack Driven Quest, Dialogue, And Interaction Families",
-    "completed_at_utc": "2026-06-25T20:30:00Z",
-    "summary": "Goal 004 adds a declaration-level quest/dialogue/interaction family rule pack, validator rejection for unsafe or unknown ids, deterministic variant acceptance, product smoke routing, and manual verification guidance. It does not add Unity, media, provider, LLM or arbitrary Lua execution and does not create S054.",
-    "scenario_id": "quest-dialog-interaction-families",
-    "checks": [
-      "QuestDialogInteractionFamilyAcceptance filtered tests: 3/3 passed",
-      "quest-dialog-interaction-families product smoke: 1/1 passed",
-      "CurrentGeneratorStateDocsTests filtered tests: 10/10 passed",
-      "check-all.ps1: 716/716 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "goal_003_automated_verification_extension_spine": {
-    "slice_id": "goal_003_automated_verification_extension_spine",
-    "title": "Automated Verification and Extension Spine",
-    "completed_at_utc": "2026-06-25T12:00:00Z",
-    "summary": "Goal 003 adds a deterministic generated gameplay scenario harness, declaration-only extension rule pack validation, a data-only inventory objective/reward proof pack, invalid extension rejection, and extension-spine reports under .llmgc/procedural/extension-spine/.",
-    "scenario_id": "extension-spine",
-    "checks": [
-      "ExtensionSpineScenarioHarness filtered tests: 4/4 passed",
-      "extension-spine product smoke: 1/1 passed",
-      "CurrentGeneratorStateDocsTests: 10/10 passed",
-      "check-all.ps1: 712/712 tests passed, build 0 warnings / 0 errors"
-    ]
-  },
-  "product_slice_042_microgame_variation_acceptance": {
-    "slice_id": "product_slice_042_microgame_variation_acceptance",
-    "title": "Microgame Variation Acceptance",
-    "completed_at_utc": "2026-06-25T09:42:00Z",
-    "summary": "Headless generated microgame variation acceptance writes deterministic reports for a three-seed, three-preset matrix with runtime-backed progress, reward and completion evidence.",
-    "scenario_id": "generated-microgame-variation"
-  },
-  "manual_one_click_preview_verification": {
-    "status": "passed",
-    "evidence_source": "user_report_after_s034_hotfix",
-    "observed_result": [
-      "Runtime Preview Generate Preview no longer throws cross-thread exception",
-      "generated package loads automatically",
-      "Start runs runtime preview",
-      "generated map is visible",
-      "player movement works",
-      "generated interaction/dialogue/item-cache behavior is visible"
-    ],
-    "next_action": "first_5_minute_generated_microgame_loop"
-  },
-  "manual_microgame_loop_verification": {
-    "status": "passed",
-    "evidence_source": "user_report_after_s037_before_goal_002",
-    "observed_result": [
-      "active goal visible",
-      "objective/progress visible",
-      "movement and interaction work",
-      "challenge resolved",
-      "reward visible",
-      "completion visible",
-      "generated content panel shows the microgame summary"
-    ],
-    "next_action": "runtime_backed_generated_microgame_state"
-  },
-  "manual_runtime_backed_microgame_verification": {
-    "status": "passed",
-    "evidence_source": "user_report_after_s040_before_s041_s042",
-    "observed_result": [
-      "Generate Preview works",
-      "Runtime Preview starts",
-      "goal progress changes in runtime",
-      "challenge resolves",
-      "reward is visible",
-      "completion becomes completed",
-      "runtime does not crash"
-    ],
-    "next_action": "microgame_variation_acceptance"
-  },
-  "manual_configurable_microgame_verification": {
-    "status": "passed",
-    "evidence_source": "user_report_before_goal_003",
-    "observed_result": [
-      "different seed/preset variants generate different variants",
-      "runtime-backed goal progress works",
-      "challenge resolves",
-      "reward is visible",
-      "completion becomes completed"
-    ],
-    "next_action": "automated_verification_extension_spine"
-  },
-  "manual_extension_spine_verification": {
-    "status": "passed",
-    "evidence_source": "user_report_before_goal_004",
-    "observed_result": [
-      "manual_extension_spine_verification passed"
-    ],
-    "next_action": "rule_pack_driven_quest_dialog_interaction_families"
-  },
-  "manual_quest_dialog_interaction_family_verification": {
-    "status": "passed",
-    "evidence_source": "user_report_before_goal_005",
-    "observed_result": [
-      "distinct quest pattern variants",
-      "contextual non-empty dialogue intent output",
-      "inspect and resolve_challenge interaction execution",
-      "invalid rule-pack rejection",
-      "preserved runtime-backed progress, reward and completion",
-      "no external LLM/provider/Lua/Unity/media execution"
-    ],
-    "next_action": "layered_semantic_packs_and_guided_composition"
-  },
-  "semantic_guided_composition_artifact_verification": {
-    "status": "passed",
-    "evidence_source": "user_prompt_before_goal_006",
-    "observed_result": [
-      "semantic_guided_composition_artifact_verification passed"
-    ],
-    "next_action": "semantic_selected_runtime_composition"
-  },
-  "semantic_selected_runtime_composition_artifact_verification": {
-    "status": "passed",
-    "evidence_source": "user_prompt_before_goal_007",
-    "observed_result": [
-      "semantic_selected_runtime_composition_artifact_verification passed"
-    ],
-    "next_action": "goal_007_connected_world_travel_and_deterministic_state"
-  },
-  "connected_world_travel_state_artifact_verification": {
-    "status": "passed",
-    "evidence_source": "user_prompt_before_goal_008",
-    "observed_result": [
-      "connected_world_travel_state_artifact_verification passed"
-    ],
-    "next_action": "goal_008_rule_pack_gameplay_family_foundations"
-  },
-  "rule_pack_gameplay_family_artifact_verification": {
-    "status": "required",
-    "evidence_source": "pending_external_artifact_review_after_goal_008",
-    "observed_result": [],
-    "next_action": "do_not_start_post_goal_008_work_without_new_explicit_user_request"
-  },
-  "extension_rule_pack_contract_v1": {
-    "document": "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
-    "validator": "ExtensionRulePackValidator",
-    "validation_mode": "declaration_only_no_lua_execution",
-    "supported_declarations": [
-      "triggers",
-      "conditions",
-      "formulas",
-      "actions",
-      "rewards",
-      "quest_objectives"
-    ],
-    "supported_runtime_state_primitives": [
-      "runtime.inventory",
-      "runtime.quest_objective",
-      "runtime.flag"
-    ],
-    "still_requires_csharp_primitive": [
-      "new runtime command families",
-      "new mutable runtime state containers",
-      "new formula evaluator semantics",
-      "new rendering or UI interaction modes",
-      "new external providers or Lua execution"
-    ]
-  },
-  "allowed_next_codex_task_types": [
-    "rule_pack_gameplay_family_artifact_verification"
-  ],
-  "blocked_next_milestones_until_gate_passes": [
-    "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
-    "M6 rich GamePackage assembly beyond the current baseline draft assembly remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
-    "Broad contract expansion remains restricted beyond sampled baseline evidence.",
-    "Runtime preview repair loop remains restricted until a controlled generated package/playable MVP slice explicitly maps the generated plan, rules and tiny-loop output into the minimal package/runtime path."
-  ],
-  "restricted_next_work": [
-    "semantic catalog review UI unless explicitly requested",
-    "manual import workflow polish unless explicitly requested",
-    "archive review/history/comparison polish unless explicitly requested",
-    "M6-lite package assembly shortcuts",
-    "M8 runtime preview validation loop before the selected generated loop",
-    "M9 full game template families and balancing",
-    "M10 export profiles or Unity IR production work",
-    "provider execution",
-    "media generation",
-    "broad Lua executor unlock",
-    "C# code generation for mechanics"
-  ],
-  "recommended_next_work_item": "rule_pack_gameplay_family_artifact_verification",
-  "recommended_next_work_item_title": "Rule-pack gameplay family artifact verification.",
-  "recommended_next_task_file": ".llmgc/procedural/rule-pack-gameplay-family-foundations/rule-pack-gameplay-family-verification.md",
-  "candidate_product_vertical_slices": [
-    "Rule-pack gameplay family artifact verification"
-  ],
-  "required_reading_order_for_new_agents": [
-    "AGENTS.md",
-    "docs/CONTEXT_INDEX.md",
-    "docs/CURRENT_GENERATOR_STATE.md",
-    "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
-    "docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md",
-    "docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md",
-    "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
-    "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
-    "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
-    "docs/SEMANTIC_PACK_CONTRACT_V1.md",
-    "docs/AGENT_CONTEXT_BUDGET_POLICY.md",
-    "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
-    "docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md",
-    "docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md",
-    "docs/OPEN_DESIGN_QUESTIONS.md",
-    "docs/FULL_GAME_GENERATION_MASTER_PLAN.md",
-    "docs/GAME_SYSTEM_VARIANT_TAXONOMY.md"
-  ],
-  "do_not_use_as_current_authority": [
-    "README_APPLY_AGENT_TASK_PACK_*.md",
-    "README_APPLY_PRODUCT_SLICE_*.md",
-    "README_APPLY_PACK_008.md",
-    "README_APPLY_CAPABILITY_COMPOSER_V2_PACK.md",
-    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md before slice 029",
-    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_KILO_PROMPT.md",
-    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_ARCHIVE_MANIFEST.md",
-    "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_README_APPLY_PRODUCT_SLICE.md"
-  ],
-  "current_workflow": [
-    "Capability Picker",
-    "LLM Artifacts",
-    "LLM Evaluation",
-    "Artifact Review",
-    "Apply approved baseline artifacts",
-    "Draft GamePackage assembly/export",
-    "Unity archive materialization and request planning",
-    "Manual provider output import",
-    "Archive review/history/comparison",
-    "Project-local semantic catalog sidecar and deterministic generation-context preview",
-    "Seeded Procedural Game Kernel v1 generated plan sidecars",
-    "Formula/Effect/Action Registry Foundation rule-pack sidecars",
-    "Tiny Generated Runtime Loop state/report sidecars",
-    "Generated Package MVP package/report/runtime-bootstrap sidecars",
-    "Visible Generated Playable Preview snapshot/report/manual-verification sidecars",
-    "One-click generated preview workflow in Runtime Preview",
-    "Generated microgame active goal and preview-level quest progress loop",
-    "Runtime-owned generated goal progress through existing GameRuntimeState.Quests",
-    "Runtime-backed generated challenge reward and completion evidence through existing GameRuntimeState fields",
-    "Runtime-backed generated microgame state acceptance snapshot/report/manual-verification sidecars",
-    "Deterministic Runtime Preview generation presets and options",
-    "Generated microgame variation acceptance report/manual-verification sidecars",
-    "Extension rule pack contract v1 declaration validation",
-    "Extension spine scenario report/manual-verification sidecars",
-    "Quest/dialog/interaction family acceptance report/manual-verification sidecars",
-    "Layered semantic pack compiler and compiled semantic catalog sidecars",
-    "Semantic-guided composition report/verification sidecars",
-    "Semantic-guided acceptance correctness hotfix diagnostics",
-    "Semantic-selected runtime composition report/verification sidecars",
-    "Semantic-selected runtime composition correctness hotfix diagnostics",
-    "Connected world travel and deterministic runtime world state acceptance sidecars",
-    "Rule-pack gameplay family foundations acceptance sidecars"
-  ],
-  "state_update_rule": "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 008 stop at rule_pack_gameplay_family_artifact_verification and do not start post-Goal-008 work without a new explicit user request."
+﻿{
+    "schema_version":  "0.1",
+    "state_id":  "current_generator_state",
+    "updated_at_utc":  "2026-06-26T03:30:00Z",
+    "current_phase":  "strategy_reset_playable_procedural_generator",
+    "current_phase_title":  "Goal 008 rule-pack gameplay family foundations S077A hotfix completed",
+    "gate_status":  "goal_008_rule_pack_gameplay_family_artifact_verification_required",
+    "last_completed_milestone":  "M4.1",
+    "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
+    "last_completed_product_slice_id":  "product_slice_077a_rule_pack_gameplay_runtime_integration_correctness_hotfix",
+    "active_manual_gate":  "Rule-pack gameplay family artifact verification is the next stop marker after Goal 008.",
+    "current_user_action":  "Review or hand off the generated .llmgc/procedural/rule-pack-gameplay-family-foundations folder; do not mark rule_pack_gameplay_family_artifact_verification passed until the artifact review accepts it.",
+    "recommended_next_decision":  "Goal 008 now includes the S077A correctness hotfix: valid gameplay-family runtime evidence is produced only through an injected real GameRuntimeService adapter from tests/smoke, the default Application adapter is unavailable, save/load uses RuntimeStateSerializer and RuntimeSnapshotStore, binding audit is scenario-exact, and invalid/runtime causality is honest. Stop at rule_pack_gameplay_family_artifact_verification; do not start post-Goal-008 work until this gate is reviewed.",
+    "active_strategy_reset":  {
+                                  "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+                                  "freeze_infrastructure_only_work":  true,
+                                  "required_outcome_within_large_slices":  3,
+                                  "required_outcome":  "generated_playable_or_simulatable_loop",
+                                  "next_sequence":  [
+                                                        "rule_pack_gameplay_family_artifact_verification"
+                                                    ],
+                                  "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
+                              },
+    "process_policy":  {
+                           "manual_gate_policy":  "one_manual_gate_per_goal",
+                           "manual_gate_exceptions":  [
+                                                          "crash",
+                                                          "threading_blocker",
+                                                          "schema_blocker",
+                                                          "runtime_blocker"
+                                                      ],
+                           "goal_003_manual_gate":  "manual_extension_spine_verification",
+                           "goal_004_manual_gate":  "manual_quest_dialog_interaction_family_verification",
+                           "goal_005_manual_gate":  "semantic_guided_composition_artifact_verification",
+                           "goal_006_manual_gate":  "semantic_selected_runtime_composition_artifact_verification",
+                           "goal_007_manual_gate":  "connected_world_travel_state_artifact_verification",
+                           "goal_008_manual_gate":  "rule_pack_gameplay_family_artifact_verification"
+                       },
+    "gate_evidence":  {
+                          "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
+                          "evaluated_at":  "2026-06-18T16:43:35.9475873+00:00",
+                          "source_capability_selection_id":  "generator_plan_capability_selection/0b0addcd5c019328",
+                          "mode":  "batch",
+                          "sampled_contracts":  [
+                                                    "game_profile_v1",
+                                                    "mechanics_pack_v1",
+                                                    "quest_pack_v1",
+                                                    "scene_pack_v1"
+                                                ],
+                          "iterations":  1,
+                          "repair_enabled":  true,
+                          "stage_for_review":  true,
+                          "expected_max_llm_calls":  8,
+                          "decision_text":  "M4.1 real-model evaluation gate passed for sampled baseline contracts.",
+                          "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
+                      },
+    "last_completed_product_slice":  {
+                                         "slice_id":  "product_slice_077a_rule_pack_gameplay_runtime_integration_correctness_hotfix",
+                                         "title":  "Rule-Pack Gameplay Runtime Integration Correctness Hotfix",
+                                         "completed_at_utc":  "2026-06-26T03:30:00Z",
+                                         "summary":  "Product Slice 077A repairs Goal 008 artifact correctness without changing the final gate: Application no longer supplies a fake gameplay-family runtime executor by default, valid acceptance and product smoke inject a real GameRuntimeService adapter from the test assembly, commands execute through GameRuntimeService.Execute after GameRuntimeStateFactory startup, save/load evidence uses RuntimeStateSerializer and RuntimeSnapshotStore on full GameRuntimeState, binding audit is scenario-exact, status duration evidence is aligned, and ten invalid scenarios reject dishonest or mismatched runtime evidence. It does not change public GamePackage schema, start post-Goal-008 work, add UI, Unity, Lua, provider/media execution, generator-library changes or project-file changes.",
+                                         "scenario_id":  "rule-pack-gameplay-family-foundations",
+                                         "checks":  [
+                                                        "RulePackGameplayFamily/ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 37/37 passed",
+                                                        "rule-pack-gameplay-family-foundations product smoke: 1/1 passed",
+                                                        "check-all.ps1: 758/758 tests passed, build 0 warnings / 0 errors"
+                                                    ]
+                                     },
+    "goal_008_rule_pack_gameplay_family_foundations":  {
+                                                           "slice_id":  "goal_008_rule_pack_gameplay_family_foundations",
+                                                           "title":  "Rule-Pack Gameplay Family Foundations",
+                                                           "completed_at_utc":  "2026-06-26T03:30:00Z",
+                                                           "summary":  "S071-S077 add headless deterministic gameplay-family acceptance artifacts under .llmgc/procedural/rule-pack-gameplay-family-foundations. S077A repairs correctness gaps in that same Goal 008 artifact family: the Application default runtime adapter is unavailable, test/smoke acceptance injects a real GameRuntimeService adapter, use/equip/craft/transaction/set-flag commands execute through runtime services, full GameRuntimeState save/load uses RuntimeStateSerializer and RuntimeSnapshotStore, binding audit is scenario-exact, ten invalid scenarios reject dishonest or mismatched evidence, and rule_pack_gameplay_family_artifact_verification remains the active manual gate.",
+                                                           "scenario_id":  "rule-pack-gameplay-family-foundations",
+                                                           "checks":  [
+                                                                          "RulePackGameplayFamily/ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 37/37 passed",
+                                                                          "rule-pack-gameplay-family-foundations product smoke: 1/1 passed",
+                                                                          "check-all.ps1: 758/758 tests passed, build 0 warnings / 0 errors"
+                                                                      ]
+                                                       },
+    "goal_007_connected_world_travel_and_deterministic_state":  {
+                                                                    "slice_id":  "goal_007_connected_world_travel_and_deterministic_state",
+                                                                    "title":  "Connected World Travel And Deterministic World State",
+                                                                    "completed_at_utc":  "2026-06-26T00:30:00Z",
+                                                                    "summary":  "S064-S070 add headless deterministic connected-world acceptance artifacts under .llmgc/procedural/connected-world-travel. The goal records Goal 006 artifact verification as passed from the user prompt, builds region graph/profile/map-binding/chunk sidecars outside public package schema, executes travel through existing serializable GameRuntimeState ownership, preserves exact state through save/load, persists runtime-only chunk deltas, rejects invalid scenarios by stable diagnostics, and leaves connected_world_travel_state_artifact_verification as the active manual gate.",
+                                                                    "scenario_id":  "connected-world-travel",
+                                                                    "checks":  [
+                                                                                   "ConnectedWorldTravel/SemanticRuntimeComposition/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
+                                                                                   "connected-world-travel product smoke: 1/1 passed",
+                                                                                   "check-all.ps1: 751/751 tests passed, build 0 warnings / 0 errors"
+                                                                               ]
+                                                                },
+    "product_slice_063a_semantic_runtime_composition_correctness_hotfix":  {
+                                                                               "slice_id":  "product_slice_063a_semantic_runtime_composition_correctness_hotfix",
+                                                                               "title":  "Semantic Runtime Composition Correctness Hotfix",
+                                                                               "completed_at_utc":  "2026-06-25T23:45:00Z",
+                                                                               "summary":  "Repairs Goal 006 S063 acceptance correctness after external review: selected and objective-required interactions are all materialized; source refs resolve to exact scenario package ids; package bindings are audited before runtime; runtime evidence must contain successful command/objective correlations, reward/completion deltas and exact save/load evidence; injected previous-variant state fails isolation; invalid conflict rejection remains caused by semantic_guided.excludes_conflict and does not run runtime.",
+                                                                               "scenario_id":  "semantic-runtime-composition",
+                                                                               "checks":  [
+                                                                                              "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 36/36 passed",
+                                                                                              "semantic-runtime-composition product smoke: 1/1 passed",
+                                                                                              "check-all.ps1: 740/740 tests passed, build 0 warnings / 0 errors"
+                                                                                          ]
+                                                                           },
+    "goal_006_semantic_selected_runtime_composition":  {
+                                                           "slice_id":  "goal_006_semantic_selected_runtime_composition",
+                                                           "title":  "Semantic-Selected Generated Package And Runtime Composition",
+                                                           "completed_at_utc":  "2026-06-25T23:10:00Z",
+                                                           "summary":  "Goal 006 completes S059-S063 by recording semantic_guided_composition_artifact_verification as passed from the user prompt, carrying selected semantic traces and Goal 004 declarations into deterministic composition plans, mapping those selections to existing package quest/dialogue/interaction/provenance structures, executing the same selected package ids headlessly through runtime-owned state, rejecting invalid/conflicted bindings before runnable package creation, and proving replay, save/load and variant isolation.",
+                                                           "scenario_id":  "semantic-runtime-composition",
+                                                           "checks":  [
+                                                                          "SemanticRuntimeComposition/SemanticGuidedComposition/QuestDialogInteractionFamily/GeneratedPackageMvp/CurrentGeneratorStateDocsTests filtered tests: 30/30 passed",
+                                                                          "semantic-runtime-composition product smoke: 1/1 passed",
+                                                                          "check-all.ps1: 734/734 tests passed, build 0 warnings / 0 errors"
+                                                                      ]
+                                                       },
+    "product_slice_058a_semantic_guided_acceptance_correctness_hotfix":  {
+                                                                             "slice_id":  "product_slice_058a_semantic_guided_acceptance_correctness_hotfix",
+                                                                             "title":  "Semantic-Guided Acceptance Correctness Hotfix",
+                                                                             "completed_at_utc":  "2026-06-25T22:55:00Z",
+                                                                             "summary":  "Bounded correctness hotfix after Goal 005. It keeps semantic_guided_composition_artifact_verification as the active gate, does not create S059 or Goal 006, and fixes acceptance/report correctness gaps found by external artifact review.",
+                                                                             "scenario_id":  "semantic-guided-composition",
+                                                                             "checks":  [
+                                                                                            "SemanticLayerCompiler/SemanticGuidedComposition/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 29/29 passed",
+                                                                                            "semantic-guided-composition product smoke: 1/1 passed",
+                                                                                            "check-all.ps1: 731/731 tests passed, build 0 warnings / 0 errors"
+                                                                                        ]
+                                                                         },
+    "goal_005_layered_semantic_packs_and_guided_composition":  {
+                                                                   "slice_id":  "goal_005_layered_semantic_packs_and_guided_composition",
+                                                                   "title":  "Layered Semantic Packs And Semantic-Guided Composition",
+                                                                   "completed_at_utc":  "2026-06-25T22:30:00Z",
+                                                                   "summary":  "Goal 005 completed S054-S058: records the Goal 004 manual artifact review as passed, adds docs/SEMANTIC_PACK_CONTRACT_V1.md, compiles core/genre/project semantic layers into a deterministic active catalog, quarantines imported/LLM candidates, ships compact reference packs, and uses compiled semantics to guide quest pattern, dialogue intent and interaction pattern choices through existing Goal 004 rule-pack ids.",
+                                                                   "scenario_id":  "semantic-guided-composition",
+                                                                   "checks":  [
+                                                                                  "SemanticCatalog/SemanticGuided/QuestDialogInteractionFamily/CurrentGeneratorStateDocsTests filtered tests: 23/23 passed",
+                                                                                  "semantic-guided-composition product smoke: 1/1 passed",
+                                                                                  "check-all.ps1: 721/721 tests passed, build 0 warnings / 0 errors"
+                                                                              ]
+                                                               },
+    "goal_004_rule_pack_driven_quest_dialog_interaction_families":  {
+                                                                        "slice_id":  "goal_004_rule_pack_driven_quest_dialog_interaction_families",
+                                                                        "title":  "Rule-Pack Driven Quest, Dialogue, And Interaction Families",
+                                                                        "completed_at_utc":  "2026-06-25T20:30:00Z",
+                                                                        "summary":  "Goal 004 adds a declaration-level quest/dialogue/interaction family rule pack, validator rejection for unsafe or unknown ids, deterministic variant acceptance, product smoke routing, and manual verification guidance. It does not add Unity, media, provider, LLM or arbitrary Lua execution and does not create S054.",
+                                                                        "scenario_id":  "quest-dialog-interaction-families",
+                                                                        "checks":  [
+                                                                                       "QuestDialogInteractionFamilyAcceptance filtered tests: 3/3 passed",
+                                                                                       "quest-dialog-interaction-families product smoke: 1/1 passed",
+                                                                                       "CurrentGeneratorStateDocsTests filtered tests: 10/10 passed",
+                                                                                       "check-all.ps1: 716/716 tests passed, build 0 warnings / 0 errors"
+                                                                                   ]
+                                                                    },
+    "goal_003_automated_verification_extension_spine":  {
+                                                            "slice_id":  "goal_003_automated_verification_extension_spine",
+                                                            "title":  "Automated Verification and Extension Spine",
+                                                            "completed_at_utc":  "2026-06-25T12:00:00Z",
+                                                            "summary":  "Goal 003 adds a deterministic generated gameplay scenario harness, declaration-only extension rule pack validation, a data-only inventory objective/reward proof pack, invalid extension rejection, and extension-spine reports under .llmgc/procedural/extension-spine/.",
+                                                            "scenario_id":  "extension-spine",
+                                                            "checks":  [
+                                                                           "ExtensionSpineScenarioHarness filtered tests: 4/4 passed",
+                                                                           "extension-spine product smoke: 1/1 passed",
+                                                                           "CurrentGeneratorStateDocsTests: 10/10 passed",
+                                                                           "check-all.ps1: 712/712 tests passed, build 0 warnings / 0 errors"
+                                                                       ]
+                                                        },
+    "product_slice_042_microgame_variation_acceptance":  {
+                                                             "slice_id":  "product_slice_042_microgame_variation_acceptance",
+                                                             "title":  "Microgame Variation Acceptance",
+                                                             "completed_at_utc":  "2026-06-25T09:42:00Z",
+                                                             "summary":  "Headless generated microgame variation acceptance writes deterministic reports for a three-seed, three-preset matrix with runtime-backed progress, reward and completion evidence.",
+                                                             "scenario_id":  "generated-microgame-variation"
+                                                         },
+    "manual_one_click_preview_verification":  {
+                                                  "status":  "passed",
+                                                  "evidence_source":  "user_report_after_s034_hotfix",
+                                                  "observed_result":  [
+                                                                          "Runtime Preview Generate Preview no longer throws cross-thread exception",
+                                                                          "generated package loads automatically",
+                                                                          "Start runs runtime preview",
+                                                                          "generated map is visible",
+                                                                          "player movement works",
+                                                                          "generated interaction/dialogue/item-cache behavior is visible"
+                                                                      ],
+                                                  "next_action":  "first_5_minute_generated_microgame_loop"
+                                              },
+    "manual_microgame_loop_verification":  {
+                                               "status":  "passed",
+                                               "evidence_source":  "user_report_after_s037_before_goal_002",
+                                               "observed_result":  [
+                                                                       "active goal visible",
+                                                                       "objective/progress visible",
+                                                                       "movement and interaction work",
+                                                                       "challenge resolved",
+                                                                       "reward visible",
+                                                                       "completion visible",
+                                                                       "generated content panel shows the microgame summary"
+                                                                   ],
+                                               "next_action":  "runtime_backed_generated_microgame_state"
+                                           },
+    "manual_runtime_backed_microgame_verification":  {
+                                                         "status":  "passed",
+                                                         "evidence_source":  "user_report_after_s040_before_s041_s042",
+                                                         "observed_result":  [
+                                                                                 "Generate Preview works",
+                                                                                 "Runtime Preview starts",
+                                                                                 "goal progress changes in runtime",
+                                                                                 "challenge resolves",
+                                                                                 "reward is visible",
+                                                                                 "completion becomes completed",
+                                                                                 "runtime does not crash"
+                                                                             ],
+                                                         "next_action":  "microgame_variation_acceptance"
+                                                     },
+    "manual_configurable_microgame_verification":  {
+                                                       "status":  "passed",
+                                                       "evidence_source":  "user_report_before_goal_003",
+                                                       "observed_result":  [
+                                                                               "different seed/preset variants generate different variants",
+                                                                               "runtime-backed goal progress works",
+                                                                               "challenge resolves",
+                                                                               "reward is visible",
+                                                                               "completion becomes completed"
+                                                                           ],
+                                                       "next_action":  "automated_verification_extension_spine"
+                                                   },
+    "manual_extension_spine_verification":  {
+                                                "status":  "passed",
+                                                "evidence_source":  "user_report_before_goal_004",
+                                                "observed_result":  [
+                                                                        "manual_extension_spine_verification passed"
+                                                                    ],
+                                                "next_action":  "rule_pack_driven_quest_dialog_interaction_families"
+                                            },
+    "manual_quest_dialog_interaction_family_verification":  {
+                                                                "status":  "passed",
+                                                                "evidence_source":  "user_report_before_goal_005",
+                                                                "observed_result":  [
+                                                                                        "distinct quest pattern variants",
+                                                                                        "contextual non-empty dialogue intent output",
+                                                                                        "inspect and resolve_challenge interaction execution",
+                                                                                        "invalid rule-pack rejection",
+                                                                                        "preserved runtime-backed progress, reward and completion",
+                                                                                        "no external LLM/provider/Lua/Unity/media execution"
+                                                                                    ],
+                                                                "next_action":  "layered_semantic_packs_and_guided_composition"
+                                                            },
+    "semantic_guided_composition_artifact_verification":  {
+                                                              "status":  "passed",
+                                                              "evidence_source":  "user_prompt_before_goal_006",
+                                                              "observed_result":  [
+                                                                                      "semantic_guided_composition_artifact_verification passed"
+                                                                                  ],
+                                                              "next_action":  "semantic_selected_runtime_composition"
+                                                          },
+    "semantic_selected_runtime_composition_artifact_verification":  {
+                                                                        "status":  "passed",
+                                                                        "evidence_source":  "user_prompt_before_goal_007",
+                                                                        "observed_result":  [
+                                                                                                "semantic_selected_runtime_composition_artifact_verification passed"
+                                                                                            ],
+                                                                        "next_action":  "goal_007_connected_world_travel_and_deterministic_state"
+                                                                    },
+    "connected_world_travel_state_artifact_verification":  {
+                                                               "status":  "passed",
+                                                               "evidence_source":  "user_prompt_before_goal_008",
+                                                               "observed_result":  [
+                                                                                       "connected_world_travel_state_artifact_verification passed"
+                                                                                   ],
+                                                               "next_action":  "goal_008_rule_pack_gameplay_family_foundations"
+                                                           },
+    "rule_pack_gameplay_family_artifact_verification":  {
+                                                            "status":  "required",
+                                                            "evidence_source":  "pending_external_artifact_review_after_goal_008",
+                                                            "observed_result":  [
+
+                                                                                ],
+                                                            "next_action":  "do_not_start_post_goal_008_work_without_new_explicit_user_request"
+                                                        },
+    "extension_rule_pack_contract_v1":  {
+                                            "document":  "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
+                                            "validator":  "ExtensionRulePackValidator",
+                                            "validation_mode":  "declaration_only_no_lua_execution",
+                                            "supported_declarations":  [
+                                                                           "triggers",
+                                                                           "conditions",
+                                                                           "formulas",
+                                                                           "actions",
+                                                                           "rewards",
+                                                                           "quest_objectives"
+                                                                       ],
+                                            "supported_runtime_state_primitives":  [
+                                                                                       "runtime.inventory",
+                                                                                       "runtime.quest_objective",
+                                                                                       "runtime.flag"
+                                                                                   ],
+                                            "still_requires_csharp_primitive":  [
+                                                                                    "new runtime command families",
+                                                                                    "new mutable runtime state containers",
+                                                                                    "new formula evaluator semantics",
+                                                                                    "new rendering or UI interaction modes",
+                                                                                    "new external providers or Lua execution"
+                                                                                ]
+                                        },
+    "allowed_next_codex_task_types":  [
+                                          "rule_pack_gameplay_family_artifact_verification"
+                                      ],
+    "blocked_next_milestones_until_gate_passes":  [
+                                                      "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
+                                                      "M6 rich GamePackage assembly beyond the current baseline draft assembly remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
+                                                      "Broad contract expansion remains restricted beyond sampled baseline evidence.",
+                                                      "Runtime preview repair loop remains restricted until a controlled generated package/playable MVP slice explicitly maps the generated plan, rules and tiny-loop output into the minimal package/runtime path."
+                                                  ],
+    "restricted_next_work":  [
+                                 "semantic catalog review UI unless explicitly requested",
+                                 "manual import workflow polish unless explicitly requested",
+                                 "archive review/history/comparison polish unless explicitly requested",
+                                 "M6-lite package assembly shortcuts",
+                                 "M8 runtime preview validation loop before the selected generated loop",
+                                 "M9 full game template families and balancing",
+                                 "M10 export profiles or Unity IR production work",
+                                 "provider execution",
+                                 "media generation",
+                                 "broad Lua executor unlock",
+                                 "C# code generation for mechanics"
+                             ],
+    "recommended_next_work_item":  "rule_pack_gameplay_family_artifact_verification",
+    "recommended_next_work_item_title":  "Rule-pack gameplay family artifact verification.",
+    "recommended_next_task_file":  ".llmgc/procedural/rule-pack-gameplay-family-foundations/rule-pack-gameplay-family-verification.md",
+    "candidate_product_vertical_slices":  [
+                                              "Rule-pack gameplay family artifact verification"
+                                          ],
+    "required_reading_order_for_new_agents":  [
+                                                  "AGENTS.md",
+                                                  "docs/CONTEXT_INDEX.md",
+                                                  "docs/CURRENT_GENERATOR_STATE.md",
+                                                  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
+                                                  "docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md",
+                                                  "docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md",
+                                                  "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
+                                                  "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
+                                                  "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
+                                                  "docs/SEMANTIC_PACK_CONTRACT_V1.md",
+                                                  "docs/AGENT_CONTEXT_BUDGET_POLICY.md",
+                                                  "docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md",
+                                                  "docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md",
+                                                  "docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md",
+                                                  "docs/OPEN_DESIGN_QUESTIONS.md",
+                                                  "docs/FULL_GAME_GENERATION_MASTER_PLAN.md",
+                                                  "docs/GAME_SYSTEM_VARIANT_TAXONOMY.md"
+                                              ],
+    "do_not_use_as_current_authority":  [
+                                            "README_APPLY_AGENT_TASK_PACK_*.md",
+                                            "README_APPLY_PRODUCT_SLICE_*.md",
+                                            "README_APPLY_PACK_008.md",
+                                            "README_APPLY_CAPABILITY_COMPOSER_V2_PACK.md",
+                                            "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md before slice 029",
+                                            "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_KILO_PROMPT.md",
+                                            "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_ARCHIVE_MANIFEST.md",
+                                            "docs/agent-tasks/NEXT_PRODUCT_SLICE/*_README_APPLY_PRODUCT_SLICE.md"
+                                        ],
+    "current_workflow":  [
+                             "Capability Picker",
+                             "LLM Artifacts",
+                             "LLM Evaluation",
+                             "Artifact Review",
+                             "Apply approved baseline artifacts",
+                             "Draft GamePackage assembly/export",
+                             "Unity archive materialization and request planning",
+                             "Manual provider output import",
+                             "Archive review/history/comparison",
+                             "Project-local semantic catalog sidecar and deterministic generation-context preview",
+                             "Seeded Procedural Game Kernel v1 generated plan sidecars",
+                             "Formula/Effect/Action Registry Foundation rule-pack sidecars",
+                             "Tiny Generated Runtime Loop state/report sidecars",
+                             "Generated Package MVP package/report/runtime-bootstrap sidecars",
+                             "Visible Generated Playable Preview snapshot/report/manual-verification sidecars",
+                             "One-click generated preview workflow in Runtime Preview",
+                             "Generated microgame active goal and preview-level quest progress loop",
+                             "Runtime-owned generated goal progress through existing GameRuntimeState.Quests",
+                             "Runtime-backed generated challenge reward and completion evidence through existing GameRuntimeState fields",
+                             "Runtime-backed generated microgame state acceptance snapshot/report/manual-verification sidecars",
+                             "Deterministic Runtime Preview generation presets and options",
+                             "Generated microgame variation acceptance report/manual-verification sidecars",
+                             "Extension rule pack contract v1 declaration validation",
+                             "Extension spine scenario report/manual-verification sidecars",
+                             "Quest/dialog/interaction family acceptance report/manual-verification sidecars",
+                             "Layered semantic pack compiler and compiled semantic catalog sidecars",
+                             "Semantic-guided composition report/verification sidecars",
+                             "Semantic-guided acceptance correctness hotfix diagnostics",
+                             "Semantic-selected runtime composition report/verification sidecars",
+                             "Semantic-selected runtime composition correctness hotfix diagnostics",
+                             "Connected world travel and deterministic runtime world state acceptance sidecars",
+                             "Rule-pack gameplay family foundations acceptance sidecars"
+                         ],
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 008 stop at rule_pack_gameplay_family_artifact_verification and do not start post-Goal-008 work without a new explicit user request."
 }

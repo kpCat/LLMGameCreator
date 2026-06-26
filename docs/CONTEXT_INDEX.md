@@ -60,7 +60,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md` | Completed Product Slice 041 task: Generation Presets and Options. |
 | `docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md` | Completed Product Slice 042 task: Microgame Variation Acceptance. |
 | `docs/GOAL_007_CONNECTED_WORLD_TRAVEL_AND_DETERMINISTIC_WORLD_STATE.md` | Completed Goal 007 task: bounded connected regions, deterministic travel, runtime-owned world state and chunk delta evidence. |
-| `docs/GOAL_008_RULE_PACK_GAMEPLAY_FAMILY_FOUNDATIONS.md` | Completed Goal 008 task: rule-pack gameplay family foundations for inventory, equipment, crafting, trading and status/effect evidence. |
+| `docs/GOAL_008_RULE_PACK_GAMEPLAY_FAMILY_FOUNDATIONS.md` | Completed Goal 008 task: rule-pack gameplay family foundations for inventory, equipment, crafting, trading and status/effect evidence; S077A repaired the runtime-integration correctness evidence while keeping `rule_pack_gameplay_family_artifact_verification` as the stop gate. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
 | `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md` | Manual user verification checklist for the Goal 003 extension spine after automated acceptance. |

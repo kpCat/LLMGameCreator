@@ -1,4 +1,4 @@
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -35,7 +35,7 @@ public sealed class RulePackGameplayFamilyAcceptanceService
 
     public RulePackGameplayFamilyAcceptanceService(IRulePackGameplayFamilyRuntimeAdapter? runtimeAdapter = null)
     {
-        _runtimeAdapter = runtimeAdapter ?? new DefaultRulePackGameplayFamilyRuntimeAdapter();
+        _runtimeAdapter = runtimeAdapter ?? new UnavailableRulePackGameplayFamilyRuntimeAdapter();
     }
 
     public RulePackGameplayFamilyAcceptanceResult Build(string? projectRootPath = null)
@@ -59,10 +59,13 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         var runtimeExecutionPassed = validScenarios.All(item =>
             item.RuntimeEvidence.RuntimeAttempted &&
             item.RuntimeEvidence.RuntimeStartSucceeded &&
+            item.RuntimeEvidence.RuntimeBoundary.UsedGameRuntimeService &&
             item.RuntimeEvidence.Commands.All(command => command.Succeeded) &&
             item.RuntimeEvidence.Commands.All(CommandHasStateDelta));
         var saveLoadPassed = validScenarios.All(item =>
             item.RuntimeEvidence.SaveLoadRoundtripPassed &&
+            item.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeStateSerializer &&
+            item.RuntimeEvidence.SaveLoadEvidence.SerializedFullState &&
             DictionaryEquals(item.RuntimeEvidence.StateEvidence, item.RuntimeEvidence.RestoredStateEvidence));
         var deterministicReplayPassed =
             validScenarios.Single(item => item.ScenarioId == "gameplay_combined_loop").DeterministicHash == repeated.DeterministicHash &&
@@ -98,7 +101,7 @@ public sealed class RulePackGameplayFamilyAcceptanceService
                        fakeSuccessRejected,
             ManualGate = ManualGate,
             Goal007GateRecorded = true,
-            CompletedSlices = ["S071", "S072", "S073", "S074", "S075", "S076", "S077"],
+            CompletedSlices = ["S071", "S072", "S073", "S074", "S075", "S076", "S077", "S077A"],
             ScenarioCount = scenarios.Count,
             ValidScenarioCount = validScenarios.Count,
             InvalidScenarioCount = invalidScenarios.Count,
@@ -200,20 +203,17 @@ public sealed class RulePackGameplayFamilyAcceptanceService
             })
             : new RulePackGameplayFamilyRuntimeEvidence();
 
+        diagnostics.AddRange(runtimeEvidence.Diagnostics);
         var evidenceDiagnostics = ValidateRuntimeEvidence(spec, runtimeEvidence);
         diagnostics.AddRange(evidenceDiagnostics);
+        var actualValid = IsScenarioAccepted(bindingAudit, runtimeEvidence, evidenceDiagnostics);
 
         var scenarioWithoutHash = new RulePackGameplayFamilyScenario
         {
             ScenarioId = spec.ScenarioId,
             Seed = spec.Seed,
             ExpectedValid = true,
-            ActualValid = bindingAudit.Passed &&
-                          runtimeEvidence.RuntimeAttempted &&
-                          runtimeEvidence.RuntimeStartSucceeded &&
-                          runtimeEvidence.Commands.All(item => item.Succeeded) &&
-                          runtimeEvidence.SaveLoadRoundtripPassed &&
-                          evidenceDiagnostics.All(item => item.Severity != "error"),
+            ActualValid = actualValid,
             SelectedGameplayFamilyIds = spec.FamilyIds,
             SourceDeclarationIds = spec.SourceDeclarationIds,
             PackageRuntimeIds = spec.PackageRuntimeIds,
@@ -243,9 +243,9 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         if (spec.InvalidKind == "fake_runtime_success")
         {
             runtimeEvidence = FakeRuntimeSuccess(spec);
-            diagnostics.AddRange(ValidateRuntimeEvidence(spec, runtimeEvidence));
+            diagnostics.AddRange(runtimeEvidence.Diagnostics);
         }
-        else if (!bindingAudit.Passed)
+        else if (!bindingAudit.Passed && !ShouldRunRuntimeForInvalidScenario(spec.InvalidKind))
         {
             runtimeEvidence = new RulePackGameplayFamilyRuntimeEvidence();
         }
@@ -261,19 +261,23 @@ public sealed class RulePackGameplayFamilyAcceptanceService
                 InitialInventoryAmounts = spec.InitialInventoryAmounts,
                 CompletionFlagId = spec.CompletionFlagId
             });
-            diagnostics.AddRange(ValidateRuntimeEvidence(spec, runtimeEvidence));
+            diagnostics.AddRange(runtimeEvidence.Diagnostics);
             if (runtimeEvidence.Commands.Any(command => !command.Succeeded))
             {
                 diagnostics.Add(Diagnostic("error", "gameplay_family.runtime_command_failed", spec.ScenarioId, "Invalid runtime scenario failed during command execution."));
             }
         }
 
+        var evidenceDiagnostics = ValidateRuntimeEvidence(spec, runtimeEvidence);
+        diagnostics.AddRange(evidenceDiagnostics);
+        var actualValid = IsScenarioAccepted(bindingAudit, runtimeEvidence, evidenceDiagnostics);
+
         var scenarioWithoutHash = new RulePackGameplayFamilyScenario
         {
             ScenarioId = spec.ScenarioId,
             Seed = spec.Seed,
             ExpectedValid = false,
-            ActualValid = false,
+            ActualValid = actualValid,
             InvalidKind = spec.InvalidKind,
             SelectedGameplayFamilyIds = spec.FamilyIds,
             SourceDeclarationIds = spec.SourceDeclarationIds,
@@ -289,6 +293,13 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         };
     }
 
+    private static bool ShouldRunRuntimeForInvalidScenario(string invalidKind) =>
+        invalidKind is "equipment_slot_mismatch"
+            or "crafting_missing_inputs"
+            or "trade_insufficient_cost"
+            or "status_duration_mismatch"
+            or "save_load_mismatch";
+
     private static RulePackGameplayFamilyBindingAudit AuditBindings(
         GamePackageDefinition package,
         RulePackGameplayFamilyDeclarations declarations,
@@ -301,19 +312,86 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         var slotIds = package.Game.EquipmentSlots.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
         var statusIds = package.Game.Statuses.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
 
-        foreach (var item in declarations.Items)
+        var allDeclarations = declarations.Items.Select(item => new DeclarationIndex(item.DeclarationId, item.FamilyId, "item", item.PackageItemId, "", "", "", "", item))
+            .Concat(declarations.Equipment.Select(item => new DeclarationIndex(item.DeclarationId, item.FamilyId, "equipment", item.PackageItemId, item.PackageSlotId, "", "", "", item)))
+            .Concat(declarations.Recipes.Select(item => new DeclarationIndex(item.DeclarationId, item.FamilyId, "recipe", "", "", item.PackageRecipeId, "", "", item)))
+            .Concat(declarations.Transactions.Select(item => new DeclarationIndex(item.DeclarationId, item.FamilyId, "transaction", "", "", "", item.PackageTransactionId, "", item)))
+            .Concat(declarations.Statuses.Select(item => new DeclarationIndex(item.DeclarationId, item.FamilyId, "status", "", "", "", "", item.PackageStatusId, item)))
+            .ToList();
+        var selectedDeclarations = new List<DeclarationIndex>();
+
+        foreach (var sourceId in spec.SourceDeclarationIds)
         {
-            if (!packageItemIds.Contains(item.PackageItemId))
+            var matches = allDeclarations.Where(item => item.DeclarationId == sourceId).ToList();
+            if (matches.Count != 1)
             {
-                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.missing_item_ref", item.DeclarationId, "Gameplay item declaration references a missing package item."));
+                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.unknown_source_declaration", sourceId, "Scenario selected declaration id must exist exactly once."));
+                continue;
+            }
+
+            var selected = matches[0];
+            selectedDeclarations.Add(selected);
+            if (!spec.FamilyIds.Contains(selected.FamilyId, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.family_mismatch", sourceId, "Selected declaration family is not part of the scenario family set."));
             }
         }
 
-        foreach (var recipe in declarations.Recipes)
+        var selectedItems = selectedDeclarations.Where(item => item.Kind == "item").Select(item => (GameplayItemDeclaration)item.Source).ToList();
+        var selectedEquipment = selectedDeclarations.Where(item => item.Kind == "equipment").Select(item => (GameplayEquipmentDeclaration)item.Source).ToList();
+        var selectedRecipes = selectedDeclarations.Where(item => item.Kind == "recipe").Select(item => (GameplayRecipeDeclaration)item.Source).ToList();
+        var selectedTransactions = selectedDeclarations.Where(item => item.Kind == "transaction").Select(item => (GameplayTransactionDeclaration)item.Source).ToList();
+        var selectedStatuses = selectedDeclarations.Where(item => item.Kind == "status").Select(item => (GameplayStatusDeclaration)item.Source).ToList();
+
+        foreach (var item in selectedItems)
         {
-            if (!recipeIds.Contains(recipe.PackageRecipeId))
+            var packageItem = package.Game.Items.FirstOrDefault(candidate => candidate.Id == item.PackageItemId);
+            if (packageItem == null)
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.missing_item_ref", item.DeclarationId, "Gameplay item declaration references a missing package item."));
+                continue;
+            }
+
+            foreach (var effect in packageItem.UseEffects)
+            {
+                var effectId = EffectId(effect);
+                if (EffectKind(effect, "status"))
+                {
+                    var status = selectedStatuses.FirstOrDefault(candidate => candidate.PackageStatusId == effectId);
+                    if (status == null || !statusIds.Contains(effectId))
+                    {
+                        diagnostics.Add(Diagnostic("error", "gameplay_family.audit.invalid_status_effect_binding", item.DeclarationId, "Item effect must reference a selected package status declaration."));
+                    }
+                    else if (ParseInt(effect.Args.GetValueOrDefault("amount")) != status.DurationTicks)
+                    {
+                        diagnostics.Add(Diagnostic("error", "gameplay_family.audit.status_duration_mismatch", item.DeclarationId, "Item effect duration must match the selected status declaration."));
+                    }
+                }
+                else if (EffectKind(effect, "flag"))
+                {
+                    if (!spec.PackageRuntimeIds.Contains(effectId, StringComparer.Ordinal))
+                    {
+                        diagnostics.Add(Diagnostic("error", "gameplay_family.audit.command_target_not_declared", item.DeclarationId, "Item flag effect must be listed in the scenario package/runtime ids."));
+                    }
+                }
+            }
+        }
+
+        foreach (var recipe in selectedRecipes)
+        {
+            var packageRecipe = package.Game.Recipes.FirstOrDefault(candidate => candidate.Id == recipe.PackageRecipeId);
+            if (packageRecipe == null)
             {
                 diagnostics.Add(Diagnostic("error", "gameplay_family.audit.missing_recipe_ref", recipe.DeclarationId, "Gameplay recipe declaration references a missing package recipe."));
+                continue;
+            }
+
+            var packageInputIds = packageRecipe.Inputs.Select(item => item.Id).OrderBy(item => item, StringComparer.Ordinal).ToList();
+            var packageOutputIds = packageRecipe.Outputs.Where(item => item.Kind is "item" or "add_item").Select(item => item.Id).OrderBy(item => item, StringComparer.Ordinal).ToList();
+            if (!recipe.InputItemIds.OrderBy(item => item, StringComparer.Ordinal).SequenceEqual(packageInputIds, StringComparer.Ordinal) ||
+                !recipe.OutputItemIds.OrderBy(item => item, StringComparer.Ordinal).SequenceEqual(packageOutputIds, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.recipe_io_mismatch", recipe.DeclarationId, "Package recipe inputs/outputs must equal the selected recipe declaration."));
             }
 
             foreach (var itemId in recipe.InputItemIds.Concat(recipe.OutputItemIds))
@@ -325,11 +403,21 @@ public sealed class RulePackGameplayFamilyAcceptanceService
             }
         }
 
-        foreach (var transaction in declarations.Transactions)
+        foreach (var transaction in selectedTransactions)
         {
-            if (!transactionIds.Contains(transaction.PackageTransactionId))
+            var packageTransaction = package.Game.Transactions.FirstOrDefault(candidate => candidate.Id == transaction.PackageTransactionId);
+            if (packageTransaction == null)
             {
                 diagnostics.Add(Diagnostic("error", "gameplay_family.audit.missing_transaction_ref", transaction.DeclarationId, "Gameplay transaction declaration references a missing package transaction."));
+                continue;
+            }
+
+            var packageCostIds = packageTransaction.Costs.Select(item => item.Id).OrderBy(item => item, StringComparer.Ordinal).ToList();
+            var packageOutputIds = packageTransaction.Outputs.Where(item => item.Kind is "item" or "add_item").Select(item => item.Id).OrderBy(item => item, StringComparer.Ordinal).ToList();
+            if (!transaction.CostItemIds.OrderBy(item => item, StringComparer.Ordinal).SequenceEqual(packageCostIds, StringComparer.Ordinal) ||
+                !transaction.OutputItemIds.OrderBy(item => item, StringComparer.Ordinal).SequenceEqual(packageOutputIds, StringComparer.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.transaction_io_mismatch", transaction.DeclarationId, "Package transaction costs/outputs must equal the selected transaction declaration."));
             }
 
             foreach (var itemId in transaction.CostItemIds.Concat(transaction.OutputItemIds))
@@ -341,24 +429,39 @@ public sealed class RulePackGameplayFamilyAcceptanceService
             }
         }
 
-        foreach (var equipment in declarations.Equipment)
+        foreach (var equipment in selectedEquipment)
         {
-            if (!packageItemIds.Contains(equipment.PackageItemId))
+            var item = package.Game.Items.FirstOrDefault(candidate => candidate.Id == equipment.PackageItemId);
+            var slot = package.Game.EquipmentSlots.FirstOrDefault(candidate => candidate.Id == equipment.PackageSlotId);
+            if (item == null)
             {
                 diagnostics.Add(Diagnostic("error", "gameplay_family.audit.missing_item_ref", equipment.DeclarationId, "Gameplay equipment declaration references a missing package item."));
             }
 
-            if (!slotIds.Contains(equipment.PackageSlotId))
+            if (slot == null)
             {
                 diagnostics.Add(Diagnostic("error", "gameplay_family.audit.missing_equipment_slot_ref", equipment.DeclarationId, "Gameplay equipment declaration references a missing package slot."));
             }
+
+            if (item != null && slot != null && !ItemMatchesSlot(item, slot))
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.equipment_slot_mismatch", equipment.DeclarationId, "Equipment declaration item and slot must match package compatibility rules."));
+            }
         }
 
-        foreach (var status in declarations.Statuses)
+        foreach (var status in selectedStatuses)
         {
             if (!statusIds.Contains(status.PackageStatusId))
             {
                 diagnostics.Add(Diagnostic("error", "gameplay_family.audit.invalid_status_effect_binding", status.DeclarationId, "Gameplay status declaration is not bound to a package status."));
+            }
+        }
+
+        foreach (var command in spec.Commands)
+        {
+            if (!CommandCoveredBySelectedDeclarations(command, selectedItems, selectedEquipment, selectedRecipes, selectedTransactions, selectedStatuses, spec))
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.audit.command_target_not_declared", command.CommandId, "Runtime command target must be covered by the scenario's selected declarations and exact package ids."));
             }
         }
 
@@ -390,17 +493,63 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         {
             Passed = diagnostics.All(item => item.Severity != "error"),
             PackageId = package.Manifest.PackageId,
-            AuditedDeclarationIds = declarations.Items.Select(item => item.DeclarationId)
-                .Concat(declarations.Equipment.Select(item => item.DeclarationId))
-                .Concat(declarations.Recipes.Select(item => item.DeclarationId))
-                .Concat(declarations.Transactions.Select(item => item.DeclarationId))
-                .Concat(declarations.Statuses.Select(item => item.DeclarationId))
+            AuditedDeclarationIds = selectedDeclarations.Select(item => item.DeclarationId)
                 .OrderBy(item => item, StringComparer.Ordinal)
                 .ToList(),
             AuditedPackageRuntimeIds = spec.PackageRuntimeIds.OrderBy(item => item, StringComparer.Ordinal).ToList(),
             Diagnostics = SortDiagnostics(diagnostics)
         };
     }
+
+    private static bool CommandCoveredBySelectedDeclarations(
+        GameplayCommandSpec command,
+        IReadOnlyList<GameplayItemDeclaration> selectedItems,
+        IReadOnlyList<GameplayEquipmentDeclaration> selectedEquipment,
+        IReadOnlyList<GameplayRecipeDeclaration> selectedRecipes,
+        IReadOnlyList<GameplayTransactionDeclaration> selectedTransactions,
+        IReadOnlyList<GameplayStatusDeclaration> selectedStatuses,
+        GameplayFamilyScenarioSpec spec)
+    {
+        return command.CommandType switch
+        {
+            "gameplay/use_item" => selectedItems.Any(item => item.PackageItemId == command.TargetId) &&
+                                   selectedStatuses.Count > 0,
+            "gameplay/equip_item" => selectedEquipment.Any(item =>
+                item.PackageItemId == command.TargetId &&
+                item.PackageSlotId == command.SecondaryTargetId),
+            "gameplay/craft_recipe" => selectedRecipes.Any(item => item.PackageRecipeId == command.TargetId),
+            "gameplay/execute_transaction" => selectedTransactions.Any(item => item.PackageTransactionId == command.TargetId),
+            "gameplay/set_flag" => !string.IsNullOrWhiteSpace(spec.CompletionFlagId) &&
+                                   command.TargetId == spec.CompletionFlagId &&
+                                   spec.PackageRuntimeIds.Contains(command.TargetId, StringComparer.Ordinal),
+            _ => false
+        };
+    }
+
+    private static bool ItemMatchesSlot(ItemDefinition item, EquipmentSlotDefinition slot)
+    {
+        var kindAllowed = slot.AllowedKinds.Count == 0 ||
+                          slot.AllowedKinds.Any(kind => string.Equals(kind, item.Kind, StringComparison.OrdinalIgnoreCase));
+        var tagAllowed = slot.AllowedTags.Count == 0 ||
+                         slot.AllowedTags.Any(tag => item.Tags.Any(itemTag => string.Equals(itemTag, tag, StringComparison.OrdinalIgnoreCase)));
+        return kindAllowed && tagAllowed;
+    }
+
+    private static bool EffectKind(EffectDefinition effect, string kind) =>
+        string.Equals(effect.Type, kind, StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(effect.Type, "add_" + kind, StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(effect.Type, "set_" + kind, StringComparison.OrdinalIgnoreCase);
+
+    private static string EffectId(EffectDefinition effect) =>
+        effect.Args.GetValueOrDefault("id") ??
+        effect.Args.GetValueOrDefault("itemId") ??
+        effect.Args.GetValueOrDefault("resourceId") ??
+        effect.Args.GetValueOrDefault("flagId") ??
+        effect.Args.GetValueOrDefault("statusId") ??
+        string.Empty;
+
+    private static int? ParseInt(string? value) =>
+        int.TryParse(value, out var parsed) ? parsed : null;
 
     private static IReadOnlyList<RulePackGameplayFamilyDiagnostic> ValidateRuntimeEvidence(
         GameplayFamilyScenarioSpec spec,
@@ -416,6 +565,13 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         if (!evidence.RuntimeStartSucceeded)
         {
             diagnostics.Add(Diagnostic("error", "gameplay_family.evidence.runtime_start_failed", spec.ScenarioId, "Runtime evidence did not start successfully."));
+        }
+
+        if (!evidence.RuntimeBoundary.UsedGameRuntimeService ||
+            string.IsNullOrWhiteSpace(evidence.RuntimeBoundary.RuntimeServiceType) ||
+            string.IsNullOrWhiteSpace(evidence.RuntimeBoundary.StateFactoryType))
+        {
+            diagnostics.Add(Diagnostic("error", "gameplay_family.evidence.real_runtime_boundary_missing", spec.ScenarioId, "Runtime evidence did not prove execution through GameRuntimeService and the runtime state factory."));
         }
 
         foreach (var expected in spec.Commands)
@@ -436,6 +592,23 @@ public sealed class RulePackGameplayFamilyAcceptanceService
             {
                 diagnostics.Add(Diagnostic("error", "gameplay_family.evidence.state_delta_missing", expected.CommandId, "Runtime command did not prove an attributable state delta."));
             }
+
+            if (command.RuntimeEventTypes.Count == 0 && command.RuntimeDiagnosticCodes.Count == 0)
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.evidence.runtime_events_missing", expected.CommandId, "Runtime command did not preserve real runtime events or diagnostics."));
+            }
+
+            if (!CategoryMatchesCommand(expected.CommandType, command))
+            {
+                diagnostics.Add(Diagnostic("error", "gameplay_family.evidence.category_mismatch", expected.CommandId, "Runtime evidence populated unrelated command-family delta categories."));
+            }
+        }
+
+        if (!evidence.SaveLoadEvidence.UsedRuntimeStateSerializer ||
+            !evidence.SaveLoadEvidence.SerializedFullState ||
+            string.IsNullOrWhiteSpace(evidence.SaveLoadEvidence.SerializedStateHash))
+        {
+            diagnostics.Add(Diagnostic("error", "gameplay_family.evidence.serializer_not_used", spec.ScenarioId, "Save/load evidence did not use the runtime state serializer on the full GameRuntimeState."));
         }
 
         if (!DictionaryEquals(evidence.StateEvidence, evidence.RestoredStateEvidence) || !evidence.SaveLoadRoundtripPassed)
@@ -457,6 +630,22 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         return diagnostics;
     }
 
+    private static bool IsScenarioAccepted(
+        RulePackGameplayFamilyBindingAudit bindingAudit,
+        RulePackGameplayFamilyRuntimeEvidence runtimeEvidence,
+        IReadOnlyList<RulePackGameplayFamilyDiagnostic> evidenceDiagnostics) =>
+        bindingAudit.Passed &&
+        runtimeEvidence.RuntimeAttempted &&
+        runtimeEvidence.RuntimeStartSucceeded &&
+        runtimeEvidence.RuntimeBoundary.UsedGameRuntimeService &&
+        runtimeEvidence.RuntimeBoundary.UsedRuntimeStateFactory &&
+        runtimeEvidence.Commands.All(item => item.Succeeded) &&
+        runtimeEvidence.Commands.All(CommandHasStateDelta) &&
+        runtimeEvidence.SaveLoadRoundtripPassed &&
+        runtimeEvidence.SaveLoadEvidence.UsedRuntimeStateSerializer &&
+        runtimeEvidence.SaveLoadEvidence.SerializedFullState &&
+        evidenceDiagnostics.All(item => item.Severity != "error");
+
     private static bool CommandHasStateDelta(RulePackGameplayFamilyRuntimeCommandEvidence command) =>
         command.InventoryDelta.Changed ||
         command.EquipmentDelta.Changed ||
@@ -464,6 +653,25 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         command.TradeDelta.Changed ||
         command.StatusDelta.Changed ||
         command.CompletionDelta.Changed;
+
+    private static bool CategoryMatchesCommand(string expectedCommandType, RulePackGameplayFamilyRuntimeCommandEvidence command)
+    {
+        var craftAllowed = expectedCommandType == "gameplay/craft_recipe";
+        var tradeAllowed = expectedCommandType == "gameplay/execute_transaction";
+        var equipmentAllowed = expectedCommandType is "gameplay/equip_item" or "gameplay/unequip_item";
+        var statusAllowed = expectedCommandType == "gameplay/use_item";
+        var completionAllowed = expectedCommandType is "gameplay/use_item" or "gameplay/set_flag";
+
+        return (!command.CraftingDelta.Changed || craftAllowed) &&
+               (!command.CraftingDelta.Inputs.Any() || craftAllowed) &&
+               (!command.CraftingDelta.Outputs.Any() || craftAllowed) &&
+               (!command.TradeDelta.Changed || tradeAllowed) &&
+               (!command.TradeDelta.Costs.Any() || tradeAllowed) &&
+               (!command.TradeDelta.Outputs.Any() || tradeAllowed) &&
+               (!command.EquipmentDelta.Changed || equipmentAllowed) &&
+               (!command.StatusDelta.Changed || statusAllowed) &&
+               (!command.CompletionDelta.Changed || completionAllowed);
+    }
 
     private static IReadOnlyList<GameplayFamilyScenarioSpec> BuildValidSpecs() =>
     [
@@ -544,7 +752,7 @@ public sealed class RulePackGameplayFamilyAcceptanceService
             Seed = "goal008-combined-loop-seed",
             FamilyIds = ["family/items", "family/inventory", "family/equipment", "family/crafting", "family/trading", "family/status_effects"],
             SourceDeclarationIds = ["decl/equipment/scavenger_tool", "decl/recipe/repair_wrap", "decl/transaction/buy_signal_charm", "decl/item/focus_tonic", "decl/status/focused"],
-            PackageRuntimeIds = ["item/scavenger_tool", "slot/tool", "recipe/repair_wrap", "item/scrap", "item/thread", "item/repair_wrap", "transaction/buy_signal_charm", "item/trade_token", "item/signal_charm", "item/focus_tonic", "status/focused", "flag/goal008_complete"],
+            PackageRuntimeIds = ["item/scavenger_tool", "slot/tool", "recipe/repair_wrap", "item/scrap", "item/thread", "item/repair_wrap", "transaction/buy_signal_charm", "item/trade_token", "item/signal_charm", "item/focus_tonic", "status/focused", "flag/status_chain", "flag/goal008_complete"],
             InitialInventoryAmounts = new SortedDictionary<string, double>(StringComparer.Ordinal)
             {
                 ["item/scavenger_tool"] = 1,
@@ -632,6 +840,50 @@ public sealed class RulePackGameplayFamilyAcceptanceService
             PackageRuntimeIds = ["item/focus_tonic", "status/focused"],
             InitialInventoryAmounts = new SortedDictionary<string, double>(StringComparer.Ordinal) { ["item/focus_tonic"] = 1 },
             Commands = [GameplayCommandSpec.UseItem("01_use_fake_tonic", "item/focus_tonic", "inventory/player")]
+        },
+        new GameplayFamilyScenarioSpec
+        {
+            ScenarioId = "invalid_unknown_source_declaration",
+            Seed = "goal008-invalid-unknown-source",
+            InvalidKind = "unknown_source_declaration",
+            FamilyIds = ["family/item_use", "family/status_effects"],
+            SourceDeclarationIds = ["decl/item/focus_tonic", "decl/status/focused", "decl/missing/unknown"],
+            PackageRuntimeIds = ["item/focus_tonic", "status/focused", "flag/status_chain"],
+            InitialInventoryAmounts = new SortedDictionary<string, double>(StringComparer.Ordinal) { ["item/focus_tonic"] = 1 },
+            Commands = [GameplayCommandSpec.UseItem("01_use_unknown_source_tonic", "item/focus_tonic", "inventory/player")]
+        },
+        new GameplayFamilyScenarioSpec
+        {
+            ScenarioId = "invalid_command_target_not_declared",
+            Seed = "goal008-invalid-command-target",
+            InvalidKind = "command_target_not_declared",
+            FamilyIds = ["family/item_use", "family/status_effects"],
+            SourceDeclarationIds = ["decl/item/focus_tonic", "decl/status/focused"],
+            PackageRuntimeIds = ["item/field_ration", "item/focus_tonic", "status/focused", "flag/item_used"],
+            InitialInventoryAmounts = new SortedDictionary<string, double>(StringComparer.Ordinal) { ["item/field_ration"] = 1 },
+            Commands = [GameplayCommandSpec.UseItem("01_use_unselected_ration", "item/field_ration", "inventory/player")]
+        },
+        new GameplayFamilyScenarioSpec
+        {
+            ScenarioId = "invalid_status_duration_mismatch",
+            Seed = "goal008-invalid-status-duration",
+            InvalidKind = "status_duration_mismatch",
+            FamilyIds = ["family/status_effects", "family/item_use"],
+            SourceDeclarationIds = ["decl/item/focus_tonic", "decl/status/focused"],
+            PackageRuntimeIds = ["item/focus_tonic", "status/focused", "flag/status_chain"],
+            InitialInventoryAmounts = new SortedDictionary<string, double>(StringComparer.Ordinal) { ["item/focus_tonic"] = 1 },
+            Commands = [GameplayCommandSpec.UseItem("01_use_duration_mismatch_tonic", "item/focus_tonic", "inventory/player")]
+        },
+        new GameplayFamilyScenarioSpec
+        {
+            ScenarioId = "invalid_save_load_mismatch",
+            Seed = "goal008-invalid-save-load",
+            InvalidKind = "save_load_mismatch",
+            FamilyIds = ["family/status_effects", "family/item_use"],
+            SourceDeclarationIds = ["decl/item/focus_tonic", "decl/status/focused"],
+            PackageRuntimeIds = ["item/focus_tonic", "status/focused", "flag/status_chain"],
+            InitialInventoryAmounts = new SortedDictionary<string, double>(StringComparer.Ordinal) { ["item/focus_tonic"] = 1 },
+            Commands = [GameplayCommandSpec.UseItem("01_use_save_load_mismatch_tonic", "item/focus_tonic", "inventory/player")]
         }
     ];
 
@@ -653,6 +905,9 @@ public sealed class RulePackGameplayFamilyAcceptanceService
                     ? item with { PackageStatusId = "status/missing_focus" }
                     : item).ToList();
                 package.Game.Items.Single(item => item.Id == "item/focus_tonic").UseEffects[0].Args["statusId"] = "status/missing_focus";
+                break;
+            case "status_duration_mismatch":
+                package.Game.Items.Single(item => item.Id == "item/focus_tonic").UseEffects[0].Args["amount"] = "2";
                 break;
         }
     }
@@ -710,7 +965,7 @@ public sealed class RulePackGameplayFamilyAcceptanceService
                     Metadata = new Dictionary<string, string> { ["consumeOnUse"] = "true" },
                     UseEffects =
                     [
-                        new EffectDefinition { Type = "status", Args = new Dictionary<string, string> { ["statusId"] = "status/focused", ["amount"] = "2" } },
+                        new EffectDefinition { Type = "status", Args = new Dictionary<string, string> { ["statusId"] = "status/focused", ["amount"] = "3" } },
                         new EffectDefinition { Type = "flag", Args = new Dictionary<string, string> { ["flagId"] = "flag/item_used", ["value"] = "completed" } }
                     ]
                 },
@@ -844,6 +1099,7 @@ public sealed class RulePackGameplayFamilyAcceptanceService
             builder.AppendLine("- Expected valid: " + scenario.ExpectedValid.ToString().ToLowerInvariant());
             builder.AppendLine("- Actual valid: " + scenario.ActualValid.ToString().ToLowerInvariant());
             builder.AppendLine("- Families: " + string.Join(", ", scenario.SelectedGameplayFamilyIds));
+            builder.AppendLine("- Runtime boundary: " + scenario.RuntimeEvidence.RuntimeBoundary.AdapterId + " / " + scenario.RuntimeEvidence.RuntimeBoundary.RuntimeServiceType);
             builder.AppendLine("- Commands: " + string.Join(" -> ", scenario.RuntimeEvidence.Commands.Select(item => item.CommandType + ":" + item.TargetId)));
             builder.AppendLine("- Diagnostics: " + string.Join(", ", scenario.Diagnostics.Select(item => item.Code).Distinct().OrderBy(item => item, StringComparer.Ordinal)));
             builder.AppendLine();
@@ -901,6 +1157,17 @@ public sealed class RulePackGameplayFamilyAcceptanceService
     private static bool DictionaryEquals(IReadOnlyDictionary<string, string> left, IReadOnlyDictionary<string, string> right) =>
         left.Count == right.Count && left.All(pair => right.TryGetValue(pair.Key, out var value) && value == pair.Value);
 
+    private sealed record DeclarationIndex(
+        string DeclarationId,
+        string FamilyId,
+        string Kind,
+        string PackageItemId,
+        string PackageSlotId,
+        string PackageRecipeId,
+        string PackageTransactionId,
+        string PackageStatusId,
+        object Source);
+
     private static string ComputeHash(string value)
     {
         var hash = SHA256.HashData(Encoding.UTF8.GetBytes(value));
@@ -931,529 +1198,29 @@ public sealed class RulePackGameplayFamilyAcceptanceService
         public IReadOnlyList<GameplayCommandSpec> Commands { get; init; } = Array.Empty<GameplayCommandSpec>();
     }
 
-    public sealed class DefaultRulePackGameplayFamilyRuntimeAdapter : IRulePackGameplayFamilyRuntimeAdapter
+    public sealed class UnavailableRulePackGameplayFamilyRuntimeAdapter : IRulePackGameplayFamilyRuntimeAdapter
     {
-        public RulePackGameplayFamilyRuntimeEvidence Run(RulePackGameplayFamilyRuntimeRequest request)
+        public RulePackGameplayFamilyRuntimeEvidence Run(RulePackGameplayFamilyRuntimeRequest request) => new()
         {
-            var state = CreateInitialState(request.Package, request.InitialInventoryAmounts);
-            var commands = new List<RulePackGameplayFamilyRuntimeCommandEvidence>();
-            foreach (var command in request.Commands)
+            RuntimeAttempted = false,
+            RuntimeStartSucceeded = false,
+            RuntimeStateOwner = "GameRuntimeState",
+            PackageId = request.Package.Manifest.PackageId,
+            RuntimeBoundary = new GameplayRuntimeBoundaryEvidence
             {
-                var before = RuntimeStateSnapshot.FromState(state);
-                var commandEvidence = ExecuteCommand(request.Package, state, command, before);
-                commands.Add(commandEvidence);
-                state.Metadata["gameplayFamily.commandLog"] = string.Join("|", commands.Select(item => item.CommandId + ":" + item.Succeeded.ToString().ToLowerInvariant()));
-                if (!commandEvidence.Succeeded)
-                {
-                    break;
-                }
-            }
-
-            var snapshot = RuntimeStateSnapshot.FromState(state);
-            var stateEvidence = snapshot.ToEvidence(request.ScenarioId);
-            var stateJson = JsonSerializer.Serialize(snapshot, JsonOptions);
-            var restored = JsonSerializer.Deserialize<RuntimeStateSnapshot>(stateJson, JsonOptions) ?? new RuntimeStateSnapshot();
-            var restoredEvidence = restored.ToEvidence(request.ScenarioId);
-            var stateHash = ComputeHash(stateJson);
-            var restoredHash = ComputeHash(JsonSerializer.Serialize(restored, JsonOptions));
-            var completionFlagBefore = string.Empty;
-            var completionFlagAfter = string.IsNullOrWhiteSpace(request.CompletionFlagId)
-                ? string.Empty
-                : state.Flags.FirstOrDefault(item => item.Id == request.CompletionFlagId)?.Value ?? string.Empty;
-
-            var evidenceWithoutHash = new RulePackGameplayFamilyRuntimeEvidence
-            {
-                RuntimeAttempted = true,
-                RuntimeStartSucceeded = true,
-                RuntimeStateOwner = "GameRuntimeState",
-                PackageId = state.PackageId,
-                Commands = commands,
-                InventoryBefore = commands.FirstOrDefault()?.InventoryDelta.Before ?? new SortedDictionary<string, string>(StringComparer.Ordinal),
-                InventoryAfter = snapshot.InventoryAmounts,
-                EquipmentBefore = commands.FirstOrDefault()?.EquipmentDelta.Before ?? new SortedDictionary<string, string>(StringComparer.Ordinal),
-                EquipmentAfter = snapshot.EquipmentSlots,
-                StatusBefore = commands.FirstOrDefault()?.StatusDelta.Before ?? new SortedDictionary<string, string>(StringComparer.Ordinal),
-                StatusAfter = snapshot.StatusEvidence,
-                CompletionRewardEvidence = new GameplayCompletionRewardEvidence
-                {
-                    CompletionFlagId = request.CompletionFlagId,
-                    CompletionFlagBefore = completionFlagBefore,
-                    CompletionFlagAfter = completionFlagAfter,
-                    RewardItemIds = commands
-                        .SelectMany(item => item.CraftingDelta.Outputs.Concat(item.TradeDelta.Outputs))
-                        .Select(item => item.ItemId)
-                        .Distinct(StringComparer.Ordinal)
-                        .OrderBy(item => item, StringComparer.Ordinal)
-                        .ToList()
-                },
-                RuntimeStateHash = stateHash,
-                RestoredRuntimeStateHash = restoredHash,
-                SaveLoadRoundtripPassed = stateHash == restoredHash && DictionaryEquals(stateEvidence, restoredEvidence),
-                StateEvidence = stateEvidence,
-                RestoredStateEvidence = restoredEvidence
-            };
-
-            return evidenceWithoutHash with
-            {
-                RuntimeEvidenceHash = ComputeHash(JsonSerializer.Serialize(evidenceWithoutHash, JsonOptions))
-            };
-        }
-
-        private static GameRuntimeState CreateInitialState(GamePackageDefinition package, IReadOnlyDictionary<string, double> initialInventoryAmounts)
-        {
-            var state = new GameRuntimeState
-            {
-                PackageId = package.Manifest.PackageId,
-                CurrentMapId = package.Manifest.StartMapId,
-                PlayerEntityId = "player"
-            };
-            state.Inventories.Add(new InventoryState
-            {
-                Id = "inventory/player",
-                OwnerKind = "player",
-                OwnerId = "player",
-                Stacks = initialInventoryAmounts
-                    .OrderBy(item => item.Key, StringComparer.Ordinal)
-                    .Select(item => new ItemStackState { ItemId = item.Key, Amount = item.Value })
-                    .ToList()
-            });
-            state.Equipment.Add(new EquipmentState
-            {
-                OwnerKind = "player",
-                OwnerId = "player",
-                Slots = package.Game.EquipmentSlots
-                    .Select(item => new EquipmentSlotState { SlotId = item.Id })
-                    .OrderBy(item => item.SlotId, StringComparer.Ordinal)
-                    .ToList()
-            });
-            return state;
-        }
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence ExecuteCommand(
-            GamePackageDefinition package,
-            GameRuntimeState state,
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before)
-        {
-            return command.CommandType switch
-            {
-                "gameplay/use_item" => ExecuteUseItem(package, state, command, before),
-                "gameplay/equip_item" => ExecuteEquipItem(package, state, command, before),
-                "gameplay/craft_recipe" => ExecuteCraftRecipe(package, state, command, before),
-                "gameplay/execute_transaction" => ExecuteTransaction(package, state, command, before),
-                "gameplay/set_flag" => ExecuteSetFlag(state, command, before),
-                _ => Failure(command, before, "gameplay_family.command.unknown", "Unknown gameplay command.")
-            };
-        }
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence ExecuteUseItem(
-            GamePackageDefinition package,
-            GameRuntimeState state,
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before)
-        {
-            var item = package.Game.Items.FirstOrDefault(candidate => candidate.Id == command.TargetId);
-            if (item == null)
-            {
-                return Failure(command, before, "item.missing", "Item not found.");
-            }
-
-            var inventory = FindInventory(state, command.InventoryId);
-            if (inventory == null || ItemAmount(inventory, item.Id) < 1)
-            {
-                return Failure(command, before, "runtime.item_missing", "Usable item is missing.");
-            }
-
-            RemoveItem(inventory, item.Id, 1);
-            foreach (var effect in item.UseEffects)
-            {
-                var id = GetEffectId(effect);
-                if (EffectKind(effect, "status"))
-                {
-                    if (!package.Game.Statuses.Any(status => status.Id == id))
-                    {
-                        return Failure(command, before, "gameplay_family.runtime.invalid_status_effect_binding", "Item effect references a missing status.");
-                    }
-
-                    state.Statuses.Add(new StatusState
-                    {
-                        StatusId = id,
-                        TargetId = "player",
-                        RemainingTicks = ParseLong(effect.Args.GetValueOrDefault("amount")) ?? 1,
-                        Metadata = new Dictionary<string, string> { ["sourceCommandId"] = command.CommandId, ["sourceItemId"] = item.Id }
-                    });
-                }
-                else if (EffectKind(effect, "flag"))
-                {
-                    SetFlag(state, id, effect.Args.GetValueOrDefault("value") ?? "true");
-                }
-            }
-
-            var after = RuntimeStateSnapshot.FromState(state);
-            return Success(command, before, after);
-        }
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence ExecuteEquipItem(
-            GamePackageDefinition package,
-            GameRuntimeState state,
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before)
-        {
-            var item = package.Game.Items.FirstOrDefault(candidate => candidate.Id == command.TargetId);
-            var slot = package.Game.EquipmentSlots.FirstOrDefault(candidate => candidate.Id == command.SecondaryTargetId);
-            if (item == null)
-            {
-                return Failure(command, before, "equipment.item_missing", "Equipment item not found.");
-            }
-
-            if (slot == null)
-            {
-                return Failure(command, before, "equipment.slot_missing", "Equipment slot not found.");
-            }
-
-            var kindAllowed = slot.AllowedKinds.Count == 0 || slot.AllowedKinds.Any(kind => string.Equals(kind, item.Kind, StringComparison.OrdinalIgnoreCase));
-            var tagAllowed = slot.AllowedTags.Count == 0 || slot.AllowedTags.Any(tag => item.Tags.Any(itemTag => string.Equals(itemTag, tag, StringComparison.OrdinalIgnoreCase)));
-            if (!kindAllowed || !tagAllowed)
-            {
-                return Failure(command, before, "equipment.slot_mismatch", "Equipment item cannot be equipped into this slot.");
-            }
-
-            var inventory = FindInventory(state, command.InventoryId);
-            if (inventory == null || ItemAmount(inventory, item.Id) < 1)
-            {
-                return Failure(command, before, "equipment.item_not_in_inventory", "Equipment item is missing from inventory.");
-            }
-
-            RemoveItem(inventory, item.Id, 1);
-            var equipment = state.Equipment.First(item => item.OwnerKind == "player");
-            var slotState = equipment.Slots.First(item => item.SlotId == slot.Id);
-            if (!string.IsNullOrWhiteSpace(slotState.ItemId))
-            {
-                AddItem(inventory, slotState.ItemId!, 1);
-            }
-
-            slotState.ItemId = item.Id;
-            slotState.Metadata["sourceCommandId"] = command.CommandId;
-            var after = RuntimeStateSnapshot.FromState(state);
-            return Success(command, before, after);
-        }
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence ExecuteCraftRecipe(
-            GamePackageDefinition package,
-            GameRuntimeState state,
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before)
-        {
-            var recipe = package.Game.Recipes.FirstOrDefault(candidate => candidate.Id == command.TargetId);
-            if (recipe == null)
-            {
-                return Failure(command, before, "recipe.missing", "Recipe not found.");
-            }
-
-            var inventory = FindInventory(state, command.InventoryId);
-            if (inventory == null)
-            {
-                return Failure(command, before, "inventory.missing", "Inventory not found.");
-            }
-
-            foreach (var input in recipe.Inputs)
-            {
-                if (!package.Game.Items.Any(item => item.Id == input.Id))
-                {
-                    return Failure(command, before, "gameplay_family.runtime.missing_item_ref", "Recipe input references a missing item.");
-                }
-
-                if (ItemAmount(inventory, input.Id) < input.Amount)
-                {
-                    return Failure(command, before, "crafting.missing_inputs", "Recipe lacks required input item amounts.");
-                }
-            }
-
-            foreach (var input in recipe.Inputs)
-            {
-                RemoveItem(inventory, input.Id, input.Amount);
-            }
-
-            foreach (var output in recipe.Outputs.Where(item => item.Kind == "item" || item.Kind == "add_item"))
-            {
-                AddItem(inventory, output.Id, output.Amount);
-            }
-
-            var after = RuntimeStateSnapshot.FromState(state);
-            return Success(command, before, after);
-        }
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence ExecuteTransaction(
-            GamePackageDefinition package,
-            GameRuntimeState state,
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before)
-        {
-            var transaction = package.Game.Transactions.FirstOrDefault(candidate => candidate.Id == command.TargetId);
-            if (transaction == null)
-            {
-                return Failure(command, before, "transaction.missing", "Transaction not found.");
-            }
-
-            var inventory = FindInventory(state, command.InventoryId);
-            if (inventory == null)
-            {
-                return Failure(command, before, "inventory.missing", "Inventory not found.");
-            }
-
-            foreach (var cost in transaction.Costs)
-            {
-                if (!package.Game.Items.Any(item => item.Id == cost.Id))
-                {
-                    return Failure(command, before, "gameplay_family.runtime.missing_item_ref", "Transaction cost references a missing item.");
-                }
-
-                if (ItemAmount(inventory, cost.Id) < cost.Amount)
-                {
-                    return Failure(command, before, "trade.insufficient_cost", "Transaction lacks required cost item amounts.");
-                }
-            }
-
-            foreach (var cost in transaction.Costs)
-            {
-                RemoveItem(inventory, cost.Id, cost.Amount);
-            }
-
-            foreach (var output in transaction.Outputs.Where(item => item.Kind == "item" || item.Kind == "add_item"))
-            {
-                AddItem(inventory, output.Id, output.Amount);
-            }
-
-            var after = RuntimeStateSnapshot.FromState(state);
-            return Success(command, before, after);
-        }
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence ExecuteSetFlag(
-            GameRuntimeState state,
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before)
-        {
-            SetFlag(state, command.TargetId, command.Value);
-            var after = RuntimeStateSnapshot.FromState(state);
-            return Success(command, before, after);
-        }
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence Success(
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before,
-            RuntimeStateSnapshot after) => new()
-            {
-                CommandId = command.CommandId,
-                CommandType = command.CommandType,
-                TargetId = command.TargetId,
-                SecondaryTargetId = command.SecondaryTargetId,
-                Succeeded = true,
-                DiagnosticCode = "ok",
-                InventoryDelta = InventoryDelta(before, after),
-                EquipmentDelta = EquipmentDelta(before, after),
-                CraftingDelta = CraftingDelta(command, before, after),
-                TradeDelta = TradeDelta(command, before, after),
-                StatusDelta = StatusDelta(before, after),
-                CompletionDelta = CompletionDelta(before, after)
-            };
-
-        private static RulePackGameplayFamilyRuntimeCommandEvidence Failure(
-            GameplayCommandSpec command,
-            RuntimeStateSnapshot before,
-            string diagnosticCode,
-            string diagnosticMessage) => new()
-            {
-                CommandId = command.CommandId,
-                CommandType = command.CommandType,
-                TargetId = command.TargetId,
-                SecondaryTargetId = command.SecondaryTargetId,
-                Succeeded = false,
-                DiagnosticCode = diagnosticCode,
-                DiagnosticMessage = diagnosticMessage,
-                InventoryDelta = new GameplayInventoryDelta { Before = before.InventoryAmounts, After = before.InventoryAmounts },
-                EquipmentDelta = new GameplayEquipmentDelta { Before = before.EquipmentSlots, After = before.EquipmentSlots },
-                StatusDelta = new GameplayStatusDelta { Before = before.StatusEvidence, After = before.StatusEvidence },
-                CompletionDelta = new GameplayCompletionDelta { Before = before.FlagEvidence, After = before.FlagEvidence }
-            };
-
-        private static GameplayInventoryDelta InventoryDelta(RuntimeStateSnapshot before, RuntimeStateSnapshot after) => new()
-        {
-            Before = before.InventoryAmounts,
-            After = after.InventoryAmounts,
-            Changed = !DictionaryEquals(before.InventoryAmounts, after.InventoryAmounts)
+                AdapterId = nameof(UnavailableRulePackGameplayFamilyRuntimeAdapter),
+                RuntimeServiceType = string.Empty,
+                StateFactoryType = string.Empty,
+                SerializerType = string.Empty,
+                SnapshotStoreType = string.Empty,
+                UsedGameRuntimeService = false,
+                UsedRuntimeStateFactory = false
+            },
+            Diagnostics =
+            [
+                Diagnostic("error", "gameplay_family.runtime_adapter_unavailable", request.ScenarioId, "Rule-pack gameplay-family acceptance requires an injected real runtime adapter.")
+            ]
         };
-
-        private static GameplayEquipmentDelta EquipmentDelta(RuntimeStateSnapshot before, RuntimeStateSnapshot after) => new()
-        {
-            Before = before.EquipmentSlots,
-            After = after.EquipmentSlots,
-            Changed = !DictionaryEquals(before.EquipmentSlots, after.EquipmentSlots)
-        };
-
-        private static GameplayCraftingDelta CraftingDelta(GameplayCommandSpec command, RuntimeStateSnapshot before, RuntimeStateSnapshot after) => new()
-        {
-            Changed = command.CommandType == "gameplay/craft_recipe" && !DictionaryEquals(before.InventoryAmounts, after.InventoryAmounts),
-            Inputs = ItemChanges(before.InventoryAmounts, after.InventoryAmounts).Where(item => item.AmountBefore > item.AmountAfter).ToList(),
-            Outputs = ItemChanges(before.InventoryAmounts, after.InventoryAmounts).Where(item => item.AmountAfter > item.AmountBefore).ToList()
-        };
-
-        private static GameplayTradeDelta TradeDelta(GameplayCommandSpec command, RuntimeStateSnapshot before, RuntimeStateSnapshot after) => new()
-        {
-            Changed = command.CommandType == "gameplay/execute_transaction" && !DictionaryEquals(before.InventoryAmounts, after.InventoryAmounts),
-            Costs = ItemChanges(before.InventoryAmounts, after.InventoryAmounts).Where(item => item.AmountBefore > item.AmountAfter).ToList(),
-            Outputs = ItemChanges(before.InventoryAmounts, after.InventoryAmounts).Where(item => item.AmountAfter > item.AmountBefore).ToList()
-        };
-
-        private static GameplayStatusDelta StatusDelta(RuntimeStateSnapshot before, RuntimeStateSnapshot after) => new()
-        {
-            Before = before.StatusEvidence,
-            After = after.StatusEvidence,
-            Changed = !DictionaryEquals(before.StatusEvidence, after.StatusEvidence)
-        };
-
-        private static GameplayCompletionDelta CompletionDelta(RuntimeStateSnapshot before, RuntimeStateSnapshot after) => new()
-        {
-            Before = before.FlagEvidence,
-            After = after.FlagEvidence,
-            Changed = !DictionaryEquals(before.FlagEvidence, after.FlagEvidence)
-        };
-
-        private static IReadOnlyList<GameplayItemAmountChange> ItemChanges(
-            IReadOnlyDictionary<string, string> before,
-            IReadOnlyDictionary<string, string> after)
-        {
-            var ids = before.Keys.Concat(after.Keys).Distinct(StringComparer.Ordinal).OrderBy(item => item, StringComparer.Ordinal);
-            return ids.Select(id => new GameplayItemAmountChange
-                {
-                    ItemId = id,
-                    AmountBefore = ParseDouble(before.GetValueOrDefault(id)) ?? 0,
-                    AmountAfter = ParseDouble(after.GetValueOrDefault(id)) ?? 0
-                })
-                .Where(item => Math.Abs(item.AmountBefore - item.AmountAfter) > double.Epsilon)
-                .ToList();
-        }
-
-        private static InventoryState? FindInventory(GameRuntimeState state, string inventoryId) =>
-            state.Inventories.FirstOrDefault(item => item.Id == inventoryId) ??
-            state.Inventories.FirstOrDefault(item => item.OwnerKind == "player");
-
-        private static double ItemAmount(InventoryState inventory, string itemId) =>
-            inventory.Stacks.Where(item => item.ItemId == itemId).Sum(item => item.Amount);
-
-        private static void AddItem(InventoryState inventory, string itemId, double amount)
-        {
-            var stack = inventory.Stacks.FirstOrDefault(item => item.ItemId == itemId);
-            if (stack == null)
-            {
-                inventory.Stacks.Add(new ItemStackState { ItemId = itemId, Amount = amount });
-                return;
-            }
-
-            stack.Amount += amount;
-        }
-
-        private static void RemoveItem(InventoryState inventory, string itemId, double amount)
-        {
-            var remaining = amount;
-            foreach (var stack in inventory.Stacks.Where(item => item.ItemId == itemId).ToList())
-            {
-                var consumed = Math.Min(stack.Amount, remaining);
-                stack.Amount -= consumed;
-                remaining -= consumed;
-                if (stack.Amount <= 0)
-                {
-                    inventory.Stacks.Remove(stack);
-                }
-
-                if (remaining <= 0)
-                {
-                    break;
-                }
-            }
-        }
-
-        private static void SetFlag(GameRuntimeState state, string flagId, string value)
-        {
-            var flag = state.Flags.FirstOrDefault(item => item.Id == flagId);
-            if (flag == null)
-            {
-                state.Flags.Add(new RuntimeFlagState { Id = flagId, Value = value });
-                return;
-            }
-
-            flag.Value = value;
-        }
-
-        private static string GetEffectId(EffectDefinition effect) =>
-            effect.Args.GetValueOrDefault("id") ??
-            effect.Args.GetValueOrDefault("itemId") ??
-            effect.Args.GetValueOrDefault("resourceId") ??
-            effect.Args.GetValueOrDefault("flagId") ??
-            effect.Args.GetValueOrDefault("statusId") ??
-            string.Empty;
-
-        private static bool EffectKind(EffectDefinition effect, string kind) =>
-            string.Equals(effect.Type, kind, StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(effect.Type, "add_" + kind, StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(effect.Type, "set_" + kind, StringComparison.OrdinalIgnoreCase);
-
-        private static double? ParseDouble(string? value) =>
-            double.TryParse(value, out var parsed) ? parsed : null;
-
-        private static long? ParseLong(string? value) =>
-            long.TryParse(value, out var parsed) ? parsed : null;
-    }
-
-    private sealed record RuntimeStateSnapshot
-    {
-        public string PackageId { get; init; } = string.Empty;
-        public string CurrentMapId { get; init; } = string.Empty;
-        public IReadOnlyDictionary<string, string> InventoryAmounts { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
-        public IReadOnlyDictionary<string, string> EquipmentSlots { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
-        public IReadOnlyDictionary<string, string> StatusEvidence { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
-        public IReadOnlyDictionary<string, string> FlagEvidence { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
-        public IReadOnlyDictionary<string, string> Metadata { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
-
-        public static RuntimeStateSnapshot FromState(GameRuntimeState state) => new()
-        {
-            PackageId = state.PackageId,
-            CurrentMapId = state.CurrentMapId,
-            InventoryAmounts = state.Inventories
-                .SelectMany(item => item.Stacks)
-                .GroupBy(item => item.ItemId, StringComparer.Ordinal)
-                .OrderBy(item => item.Key, StringComparer.Ordinal)
-                .ToDictionary(item => item.Key, item => item.Sum(stack => stack.Amount).ToString("0.####"), StringComparer.Ordinal),
-            EquipmentSlots = state.Equipment
-                .SelectMany(item => item.Slots)
-                .OrderBy(item => item.SlotId, StringComparer.Ordinal)
-                .ToDictionary(item => item.SlotId, item => item.ItemId ?? string.Empty, StringComparer.Ordinal),
-            StatusEvidence = state.Statuses
-                .OrderBy(item => item.StatusId, StringComparer.Ordinal)
-                .ThenBy(item => item.TargetId, StringComparer.Ordinal)
-                .ToDictionary(item => item.StatusId + "@" + item.TargetId, item => (item.RemainingTicks?.ToString() ?? "") + "|" + item.Metadata.GetValueOrDefault("sourceCommandId", string.Empty), StringComparer.Ordinal),
-            FlagEvidence = state.Flags
-                .OrderBy(item => item.Id, StringComparer.Ordinal)
-                .ToDictionary(item => item.Id, item => item.Value, StringComparer.Ordinal),
-            Metadata = state.Metadata
-                .OrderBy(item => item.Key, StringComparer.Ordinal)
-                .ToDictionary(item => item.Key, item => item.Value, StringComparer.Ordinal)
-        };
-
-        public IReadOnlyDictionary<string, string> ToEvidence(string scenarioId)
-        {
-            var evidence = new SortedDictionary<string, string>(StringComparer.Ordinal)
-            {
-                ["scenarioId"] = scenarioId,
-                ["packageId"] = PackageId,
-                ["currentMapId"] = CurrentMapId,
-                ["inventory"] = string.Join(",", InventoryAmounts.Select(item => item.Key + "=" + item.Value)),
-                ["equipment"] = string.Join(",", EquipmentSlots.Select(item => item.Key + "=" + item.Value)),
-                ["statuses"] = string.Join(",", StatusEvidence.Select(item => item.Key + "=" + item.Value)),
-                ["flags"] = string.Join(",", FlagEvidence.Select(item => item.Key + "=" + item.Value)),
-                ["commandLog"] = Metadata.GetValueOrDefault("gameplayFamily.commandLog", string.Empty)
-            };
-            return evidence;
-        }
     }
 }
 
@@ -1623,6 +1390,7 @@ public sealed record RulePackGameplayFamilyRuntimeEvidence
     public bool RuntimeStartSucceeded { get; init; }
     public string RuntimeStateOwner { get; init; } = string.Empty;
     public string PackageId { get; init; } = string.Empty;
+    public GameplayRuntimeBoundaryEvidence RuntimeBoundary { get; init; } = new();
     public string RuntimeEvidenceHash { get; init; } = string.Empty;
     public IReadOnlyList<RulePackGameplayFamilyRuntimeCommandEvidence> Commands { get; init; } = Array.Empty<RulePackGameplayFamilyRuntimeCommandEvidence>();
     public IReadOnlyDictionary<string, string> InventoryBefore { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -1635,8 +1403,10 @@ public sealed record RulePackGameplayFamilyRuntimeEvidence
     public string RuntimeStateHash { get; init; } = string.Empty;
     public string RestoredRuntimeStateHash { get; init; } = string.Empty;
     public bool SaveLoadRoundtripPassed { get; init; }
+    public GameplaySaveLoadEvidence SaveLoadEvidence { get; init; } = new();
     public IReadOnlyDictionary<string, string> StateEvidence { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
     public IReadOnlyDictionary<string, string> RestoredStateEvidence { get; init; } = new SortedDictionary<string, string>(StringComparer.Ordinal);
+    public IReadOnlyList<RulePackGameplayFamilyDiagnostic> Diagnostics { get; init; } = Array.Empty<RulePackGameplayFamilyDiagnostic>();
 }
 
 public sealed record RulePackGameplayFamilyRuntimeCommandEvidence
@@ -1648,12 +1418,37 @@ public sealed record RulePackGameplayFamilyRuntimeCommandEvidence
     public bool Succeeded { get; init; }
     public string DiagnosticCode { get; init; } = string.Empty;
     public string DiagnosticMessage { get; init; } = string.Empty;
+    public IReadOnlyList<string> RuntimeEventTypes { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> RuntimeDiagnosticCodes { get; init; } = Array.Empty<string>();
     public GameplayInventoryDelta InventoryDelta { get; init; } = new();
     public GameplayEquipmentDelta EquipmentDelta { get; init; } = new();
     public GameplayCraftingDelta CraftingDelta { get; init; } = new();
     public GameplayTradeDelta TradeDelta { get; init; } = new();
     public GameplayStatusDelta StatusDelta { get; init; } = new();
     public GameplayCompletionDelta CompletionDelta { get; init; } = new();
+}
+
+public sealed record GameplayRuntimeBoundaryEvidence
+{
+    public string AdapterId { get; init; } = string.Empty;
+    public string RuntimeServiceType { get; init; } = string.Empty;
+    public string StateFactoryType { get; init; } = string.Empty;
+    public string SerializerType { get; init; } = string.Empty;
+    public string SnapshotStoreType { get; init; } = string.Empty;
+    public bool UsedGameRuntimeService { get; init; }
+    public bool UsedRuntimeStateFactory { get; init; }
+}
+
+public sealed record GameplaySaveLoadEvidence
+{
+    public bool UsedRuntimeStateSerializer { get; init; }
+    public bool UsedRuntimeSnapshotStore { get; init; }
+    public bool SerializedFullState { get; init; }
+    public string SerializedStateHash { get; init; } = string.Empty;
+    public string RestoredSerializedStateHash { get; init; } = string.Empty;
+    public string SnapshotSlotName { get; init; } = string.Empty;
+    public bool SnapshotSaveSucceeded { get; init; }
+    public bool SnapshotLoadSucceeded { get; init; }
 }
 
 public sealed record GameplayInventoryDelta

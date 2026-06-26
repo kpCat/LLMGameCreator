@@ -29,7 +29,7 @@ Stop at exactly one final gate:
 rule_pack_gameplay_family_artifact_verification
 ```
 
-Do not create Goal 009 or any post-Goal-008 work in this run.
+Do not create the next goal or any post-Goal-008 work in this run.
 
 ## Product Slices Inside This Goal
 
@@ -42,6 +42,7 @@ Use these slice ids in docs/report evidence. Class names may vary, but the behav
 - S075: trading/transaction and status/effect family materialization/runtime evidence.
 - S076: invalid declaration/runtime/bypass rejection, determinism and save/load regressions.
 - S077: product smoke route, state docs and final verification artifacts.
+- S077A: bounded correctness hotfix for the same Goal 008 artifact family; Application default runtime evidence is unavailable, test/smoke inject a real `GameRuntimeService` adapter, save/load uses runtime serializer/snapshot seams, binding audit is scenario-exact, and the final gate remains `rule_pack_gameplay_family_artifact_verification`.
 
 ## Required Outcome
 
@@ -233,7 +234,7 @@ Goal 008 is accepted only when:
 - Repeated identical builds are byte/hash stable.
 - Product smoke deserializes JSON and asserts critical structured fields.
 - `check-all.ps1` passes.
-- No S078 or Goal 009 work is created.
+- No next-slice or next-goal work is created.
 
 ## Expected Final State Update
 
@@ -255,7 +256,7 @@ The active gate must become:
 rule_pack_gameplay_family_artifact_verification
 ```
 
-Do not mark that gate passed. Do not recommend Goal 009 until the user/assistant accepts the Goal 008 gate after reviewing the pushed code.
+Do not mark that gate passed. Do not recommend the next goal until the user/assistant accepts the Goal 008 gate after reviewing the pushed code.
 
 ## Stop Conditions
 

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using LLMGameCreator.Application.Design.Gameplay;
+using LLMGameCreator.Tests.Application.Gameplay;
 using Xunit;
 
 namespace LLMGameCreator.Tests.ProductSmoke;
@@ -11,7 +12,7 @@ public sealed class RulePackGameplayFamilySmokeTests
     {
         using var temp = new TempDirectory();
         var projectRoot = ResolveProjectFolder(temp.Path);
-        var service = new RulePackGameplayFamilyAcceptanceService();
+        var service = RulePackGameplayFamilyAcceptanceTestFactory.CreateService();
 
         var write = await service.BuildAndWriteAsync(projectRoot);
 
@@ -27,7 +28,7 @@ public sealed class RulePackGameplayFamilySmokeTests
         Assert.Equal("rule_pack_gameplay_family_artifact_verification", report.ManualGate);
         Assert.True(report.Goal007GateRecorded);
         Assert.Equal(6, report.ValidScenarioCount);
-        Assert.Equal(6, report.InvalidScenarioCount);
+        Assert.Equal(10, report.InvalidScenarioCount);
         Assert.True(report.PackageRuleBindingAuditPassed);
         Assert.True(report.GameplayRuntimeExecutionPassed);
         Assert.True(report.SaveLoadRoundtripPassed);
@@ -41,13 +42,19 @@ public sealed class RulePackGameplayFamilySmokeTests
         Assert.False(report.ExternalExecution.MediaExecuted);
 
         var combined = report.Scenarios.Single(item => item.ScenarioId == "gameplay_combined_loop");
+        Assert.True(combined.RuntimeEvidence.RuntimeBoundary.UsedGameRuntimeService);
+        Assert.True(combined.RuntimeEvidence.RuntimeBoundary.UsedRuntimeStateFactory);
+        Assert.EndsWith("GameRuntimeService", combined.RuntimeEvidence.RuntimeBoundary.RuntimeServiceType, StringComparison.Ordinal);
+        Assert.True(combined.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeStateSerializer);
+        Assert.True(combined.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeSnapshotStore);
+        Assert.Equal(combined.RuntimeEvidence.SaveLoadEvidence.SerializedStateHash, combined.RuntimeEvidence.SaveLoadEvidence.RestoredSerializedStateHash);
         Assert.Equal(
             ["gameplay/equip_item", "gameplay/craft_recipe", "gameplay/execute_transaction", "gameplay/use_item", "gameplay/set_flag"],
             combined.RuntimeEvidence.Commands.Select(item => item.CommandType).ToList());
         Assert.Equal("completed", combined.RuntimeEvidence.CompletionRewardEvidence.CompletionFlagAfter);
-        Assert.Contains(combined.RuntimeEvidence.Commands, command => command.EquipmentDelta.After["slot/tool"] == "item/scavenger_tool");
-        Assert.Contains(combined.RuntimeEvidence.Commands, command => command.CraftingDelta.Outputs.Any(output => output.ItemId == "item/repair_wrap"));
-        Assert.Contains(combined.RuntimeEvidence.Commands, command => command.TradeDelta.Outputs.Any(output => output.ItemId == "item/signal_charm"));
+        Assert.Contains(combined.RuntimeEvidence.Commands, command => command.EquipmentDelta.After["slot/tool"] == "item/scavenger_tool" && command.RuntimeEventTypes.Contains("EquipmentChanged"));
+        Assert.Contains(combined.RuntimeEvidence.Commands, command => command.CraftingDelta.Outputs.Any(output => output.ItemId == "item/repair_wrap") && command.RuntimeEventTypes.Contains("RecipeCrafted"));
+        Assert.Contains(combined.RuntimeEvidence.Commands, command => command.TradeDelta.Outputs.Any(output => output.ItemId == "item/signal_charm") && command.RuntimeEventTypes.Contains("TransactionExecuted"));
         Assert.Contains(combined.RuntimeEvidence.StatusAfter, item => item.Key == "status/focused@player");
 
         var invalid = report.Scenarios.Where(item => !item.ExpectedValid).ToList();
@@ -57,6 +64,7 @@ public sealed class RulePackGameplayFamilySmokeTests
             Assert.Contains(scenario.Diagnostics, item => item.Severity == "error");
         });
         Assert.Contains(invalid.Single(item => item.ScenarioId == "invalid_fake_runtime_success").Diagnostics, item => item.Code == "gameplay_family.evidence.required_command_missing");
+        Assert.Contains(invalid.Single(item => item.ScenarioId == "invalid_save_load_mismatch").Diagnostics, item => item.Code == "gameplay_family.evidence.save_load_mismatch");
     }
 
     private static string ResolveProjectFolder(string tempPath)

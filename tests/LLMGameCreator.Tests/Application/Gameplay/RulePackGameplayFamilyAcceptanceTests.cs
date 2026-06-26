@@ -9,7 +9,7 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
     public async Task BuildsStableAcceptedRulePackGameplayFamilyArtifacts()
     {
         using var temp = new TempDirectory();
-        var service = new RulePackGameplayFamilyAcceptanceService();
+        var service = RulePackGameplayFamilyAcceptanceTestFactory.CreateService();
 
         var first = service.Build(temp.Path);
         var second = service.Build(temp.Path);
@@ -19,9 +19,9 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
         Assert.True(first.Report.Accepted);
         Assert.Equal("rule_pack_gameplay_family_artifact_verification", first.Report.ManualGate);
         Assert.True(first.Report.Goal007GateRecorded);
-        Assert.Equal(["S071", "S072", "S073", "S074", "S075", "S076", "S077"], first.Report.CompletedSlices);
+        Assert.Equal(["S071", "S072", "S073", "S074", "S075", "S076", "S077", "S077A"], first.Report.CompletedSlices);
         Assert.Equal(6, first.Report.ValidScenarioCount);
-        Assert.Equal(6, first.Report.InvalidScenarioCount);
+        Assert.Equal(10, first.Report.InvalidScenarioCount);
         Assert.True(first.Report.ValidScenariosAccepted);
         Assert.True(first.Report.InvalidScenariosRejected);
         Assert.True(first.Report.PackageRuleBindingAuditPassed);
@@ -45,7 +45,7 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
     [Fact]
     public void ValidScenariosProveExactBindingsCommandsAndStateDeltas()
     {
-        var report = new RulePackGameplayFamilyAcceptanceService().Build().Report;
+        var report = RulePackGameplayFamilyAcceptanceTestFactory.CreateService().Build().Report;
         var valid = report.Scenarios.Where(item => item.ExpectedValid).ToList();
 
         Assert.All(valid, scenario =>
@@ -56,10 +56,17 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
             Assert.All(scenario.PackageRuntimeIds, id => Assert.Contains(id, scenario.PackageBindingAudit.AuditedPackageRuntimeIds));
             Assert.True(scenario.RuntimeEvidence.RuntimeAttempted);
             Assert.Equal("GameRuntimeState", scenario.RuntimeEvidence.RuntimeStateOwner);
+            Assert.True(scenario.RuntimeEvidence.RuntimeBoundary.UsedGameRuntimeService);
+            Assert.True(scenario.RuntimeEvidence.RuntimeBoundary.UsedRuntimeStateFactory);
+            Assert.EndsWith("GameRuntimeService", scenario.RuntimeEvidence.RuntimeBoundary.RuntimeServiceType, StringComparison.Ordinal);
+            Assert.EndsWith("GameRuntimeStateFactory", scenario.RuntimeEvidence.RuntimeBoundary.StateFactoryType, StringComparison.Ordinal);
+            Assert.EndsWith("RuntimeStateSerializer", scenario.RuntimeEvidence.RuntimeBoundary.SerializerType, StringComparison.Ordinal);
+            Assert.EndsWith("RuntimeSnapshotStore", scenario.RuntimeEvidence.RuntimeBoundary.SnapshotStoreType, StringComparison.Ordinal);
             Assert.NotEmpty(scenario.RuntimeEvidence.Commands);
             Assert.All(scenario.RuntimeEvidence.Commands, command =>
             {
                 Assert.True(command.Succeeded);
+                Assert.NotEmpty(command.RuntimeEventTypes);
                 Assert.True(
                     command.InventoryDelta.Changed ||
                     command.EquipmentDelta.Changed ||
@@ -68,6 +75,10 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
                     command.StatusDelta.Changed ||
                     command.CompletionDelta.Changed);
             });
+            Assert.True(scenario.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeStateSerializer);
+            Assert.True(scenario.RuntimeEvidence.SaveLoadEvidence.UsedRuntimeSnapshotStore);
+            Assert.True(scenario.RuntimeEvidence.SaveLoadEvidence.SerializedFullState);
+            Assert.Equal(scenario.RuntimeEvidence.SaveLoadEvidence.SerializedStateHash, scenario.RuntimeEvidence.SaveLoadEvidence.RestoredSerializedStateHash);
             Assert.Equal(scenario.RuntimeEvidence.StateEvidence, scenario.RuntimeEvidence.RestoredStateEvidence);
         });
     }
@@ -75,7 +86,7 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
     [Fact]
     public void ValidScenarioFamiliesCoverInventoryEquipmentCraftingTradingStatusAndCombinedLoop()
     {
-        var report = new RulePackGameplayFamilyAcceptanceService().Build().Report;
+        var report = RulePackGameplayFamilyAcceptanceTestFactory.CreateService().Build().Report;
         var inventory = report.Scenarios.Single(item => item.ScenarioId == "gameplay_inventory_item_use");
         var equipment = report.Scenarios.Single(item => item.ScenarioId == "gameplay_equipment_loadout");
         var crafting = report.Scenarios.Single(item => item.ScenarioId == "gameplay_crafting_recipe");
@@ -84,13 +95,30 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
         var combined = report.Scenarios.Single(item => item.ScenarioId == "gameplay_combined_loop");
 
         Assert.Contains(inventory.RuntimeEvidence.Commands, command => command.CommandType == "gameplay/use_item" && command.InventoryDelta.Changed && command.StatusDelta.Changed);
+        Assert.Contains(inventory.RuntimeEvidence.Commands, command =>
+            command.CommandType == "gameplay/use_item" &&
+            command.RuntimeEventTypes.Contains("StatusAdded") &&
+            command.RuntimeEventTypes.Contains("OutputApplied") &&
+            !command.CraftingDelta.Changed &&
+            !command.TradeDelta.Changed &&
+            command.CraftingDelta.Inputs.Count == 0 &&
+            command.TradeDelta.Outputs.Count == 0);
         Assert.Contains(equipment.RuntimeEvidence.Commands, command => command.CommandType == "gameplay/equip_item" && command.EquipmentDelta.After["slot/tool"] == "item/scavenger_tool");
+        Assert.Contains(equipment.RuntimeEvidence.Commands, command =>
+            command.CommandType == "gameplay/equip_item" &&
+            command.RuntimeEventTypes.Contains("EquipmentChanged") &&
+            !command.CraftingDelta.Changed &&
+            !command.TradeDelta.Changed &&
+            command.CraftingDelta.Outputs.Count == 0 &&
+            command.TradeDelta.Costs.Count == 0);
         Assert.Contains(crafting.RuntimeEvidence.Commands, command =>
             command.CommandType == "gameplay/craft_recipe" &&
+            command.RuntimeEventTypes.Contains("RecipeCrafted") &&
             command.CraftingDelta.Inputs.Any(delta => delta.ItemId == "item/scrap") &&
             command.CraftingDelta.Outputs.Any(delta => delta.ItemId == "item/repair_wrap"));
         Assert.Contains(trading.RuntimeEvidence.Commands, command =>
             command.CommandType == "gameplay/execute_transaction" &&
+            command.RuntimeEventTypes.Contains("TransactionExecuted") &&
             command.TradeDelta.Costs.Any(delta => delta.ItemId == "item/trade_token") &&
             command.TradeDelta.Outputs.Any(delta => delta.ItemId == "item/signal_charm"));
         Assert.Contains(status.RuntimeEvidence.StatusAfter, item => item.Key == "status/focused@player" && item.Value.StartsWith("3|", StringComparison.Ordinal));
@@ -103,20 +131,36 @@ public sealed class RulePackGameplayFamilyAcceptanceTests
     [Fact]
     public void InvalidScenariosAreRejectedByStableDiagnosticsOrFailedRuntimeEvidence()
     {
-        var report = new RulePackGameplayFamilyAcceptanceService().Build().Report;
+        var report = RulePackGameplayFamilyAcceptanceTestFactory.CreateService().Build().Report;
         var invalid = report.Scenarios.Where(item => !item.ExpectedValid).ToDictionary(item => item.ScenarioId, StringComparer.Ordinal);
 
         Assert.Contains(invalid["invalid_missing_item_or_recipe_ref"].Diagnostics, item => item.Code == "gameplay_family.audit.missing_item_ref");
         Assert.Contains(invalid["invalid_equipment_slot_mismatch"].RuntimeEvidence.Commands, item => !item.Succeeded && item.DiagnosticCode == "equipment.slot_mismatch");
-        Assert.Contains(invalid["invalid_crafting_missing_inputs"].RuntimeEvidence.Commands, item => !item.Succeeded && item.DiagnosticCode == "crafting.missing_inputs");
-        Assert.Contains(invalid["invalid_trade_insufficient_cost"].RuntimeEvidence.Commands, item => !item.Succeeded && item.DiagnosticCode == "trade.insufficient_cost");
+        Assert.Contains(invalid["invalid_crafting_missing_inputs"].RuntimeEvidence.Commands, item => !item.Succeeded && item.DiagnosticCode == "cost.item_missing");
+        Assert.Contains(invalid["invalid_trade_insufficient_cost"].RuntimeEvidence.Commands, item => !item.Succeeded && item.DiagnosticCode == "cost.item_missing");
         Assert.Contains(invalid["invalid_status_or_effect_binding"].Diagnostics, item => item.Code == "gameplay_family.audit.invalid_status_effect_binding");
         Assert.Contains(invalid["invalid_fake_runtime_success"].Diagnostics, item => item.Code == "gameplay_family.evidence.required_command_missing");
+        Assert.Contains(invalid["invalid_unknown_source_declaration"].Diagnostics, item => item.Code == "gameplay_family.audit.unknown_source_declaration");
+        Assert.Contains(invalid["invalid_command_target_not_declared"].Diagnostics, item => item.Code == "gameplay_family.audit.command_target_not_declared");
+        Assert.Contains(invalid["invalid_status_duration_mismatch"].Diagnostics, item => item.Code == "gameplay_family.audit.status_duration_mismatch");
+        Assert.Contains(invalid["invalid_save_load_mismatch"].Diagnostics, item => item.Code == "gameplay_family.evidence.save_load_mismatch");
+        Assert.Contains(invalid["invalid_crafting_missing_inputs"].RuntimeEvidence.Commands, item => item.RuntimeDiagnosticCodes.Contains("cost.item_missing"));
+        Assert.Contains(invalid["invalid_trade_insufficient_cost"].RuntimeEvidence.Commands, item => item.RuntimeDiagnosticCodes.Contains("cost.item_missing"));
         Assert.All(invalid.Values, scenario =>
         {
             Assert.False(scenario.ActualValid);
             Assert.Contains(scenario.Diagnostics, item => item.Severity == "error");
         });
+    }
+
+    [Fact]
+    public void DefaultUnavailableAdapterCannotSatisfyAcceptance()
+    {
+        var result = new RulePackGameplayFamilyAcceptanceService().Build();
+
+        Assert.False(result.Report.Accepted);
+        Assert.False(result.Report.ValidScenariosAccepted);
+        Assert.Contains(result.Report.Diagnostics, item => item.Code == "gameplay_family.runtime_adapter_unavailable");
     }
 
     [Fact]
