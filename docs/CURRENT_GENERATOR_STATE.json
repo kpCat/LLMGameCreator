@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T13:30:00Z",
+    "updated_at_utc":  "2026-06-26T14:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 011 minimum deterministic asset pipeline completed",
+    "current_phase_title":  "Goal 011 minimum deterministic asset pipeline corrected by S098A",
     "gate_status":  "goal_011_minimum_asset_pipeline_artifact_verification_required",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_011_minimum_asset_pipeline",
+    "last_completed_product_slice_id":  "product_slice_098a_minimum_asset_pipeline_correctness_hotfix",
     "active_manual_gate":  "Minimum asset pipeline artifact verification is the next stop marker after Goal 011.",
     "current_user_action":  "Review or hand off the generated .llmgc/procedural/minimum-asset-pipeline folder; do not mark minimum_asset_pipeline_artifact_verification passed until the artifact review accepts it.",
-    "recommended_next_decision":  "Goal 011 records the user-confirmed content_generation_at_scale_artifact_verification passed gate and completes S092-S098. It proves deterministic asset slot requests derived from Goal 010 generated/package content ids, local fixture import plus deterministic fallback materialization, existing AssetCatalog/package metadata binding, structural file/hash/media/reference validation, product smoke route minimum-asset-pipeline, and causal invalid/fake/leak rejection. It writes deterministic artifacts under .llmgc/procedural/minimum-asset-pipeline and stops at minimum_asset_pipeline_artifact_verification.",
+    "recommended_next_decision":  "Goal 011 records the user-confirmed content_generation_at_scale_artifact_verification passed gate and completes S092-S098. S098A repairs the same Goal 011 artifact family after external review: invalid/fake/leak scenarios now flow through shared request, binding, resolver and validation paths; source/package/content hashes are checked against the source bytes and package/content used by the run; cross-pack leakage is rejected structurally; and category-specific binding evidence is recorded through existing AssetCatalog/package seams. It writes deterministic artifacts under .llmgc/procedural/minimum-asset-pipeline and still stops at minimum_asset_pipeline_artifact_verification required.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -58,10 +58,10 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_011_minimum_asset_pipeline",
-                                         "title":  "Minimum Deterministic Asset Pipeline",
-                                         "completed_at_utc":  "2026-06-26T13:30:00Z",
-                                         "summary":  "Goal 011 records content_generation_at_scale_artifact_verification passed from the user prompt and completes S092-S098. It adds a narrow Application-layer minimum asset pipeline acceptance service, compact source packs and fixture files under samples/minimum-asset-pipeline, expands deterministic asset requests from real Goal 010 generated/package content ids, materializes local fixture imports and deterministic fallbacks, binds resolved refs through existing AssetCatalog/package metadata fields, validates paths, hashes, byte counts, media types, content refs and reproducibility, rejects invalid/fake/leak scenarios causally, adds the minimum-asset-pipeline product smoke route, and writes artifacts under .llmgc/procedural/minimum-asset-pipeline. The active manual gate is minimum_asset_pipeline_artifact_verification required.",
+                                         "slice_id":  "product_slice_098a_minimum_asset_pipeline_correctness_hotfix",
+                                         "title":  "Minimum Asset Pipeline Correctness Hotfix",
+                                         "completed_at_utc":  "2026-06-26T14:30:00Z",
+                                         "summary":  "S098A repairs the Goal 011 minimum asset pipeline artifact family without changing the gate. It keeps the Application-layer acceptance seam, turns duplicate slot, tampered hash, over-budget, cross-pack leakage and default resolver scenarios into causal mutations through shared request/binding/resolver/validation paths, adds source/package/content hash-integrity checks, records category-specific binding evidence through existing AssetCatalog/package seams, strengthens product smoke selected-ref checks, and rewrites artifacts under .llmgc/procedural/minimum-asset-pipeline. The active manual gate remains minimum_asset_pipeline_artifact_verification required.",
                                          "scenario_id":  "minimum-asset-pipeline",
                                          "checks":  [
                                                         "MinimumAssetPipeline focused tests: 6/6 passed",
@@ -419,7 +419,7 @@
                              "Content generation at scale acceptance sidecars",
                              "Minimum deterministic asset pipeline acceptance sidecars"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 011 stop at minimum_asset_pipeline_artifact_verification and do not start post-Goal-011 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix or accepted goal; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 011 and S098A stop at minimum_asset_pipeline_artifact_verification and do not start post-Goal-011 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -440,7 +440,7 @@
                                             "slice_id":  "goal_011_minimum_asset_pipeline",
                                             "title":  "Minimum Deterministic Asset Pipeline",
                                             "completed_at_utc":  "2026-06-26T13:30:00Z",
-                                            "summary":  "Goal 011 completes S092-S098 after the user confirmed content_generation_at_scale_artifact_verification passed. It adds narrow Application asset-pipeline contracts, deterministic source packs and tiny fixtures, expands 90 asset slots from real generated/package content ids across tile/region graphics, portraits, item/UI icons, sound effects and music/ambience, materializes local fixture imports and deterministic fallbacks, binds resolved refs through existing AssetCatalog/package metadata seams, validates hashes, byte counts, media types, paths, refs, budgets and reproducibility, rejects invalid/fake/leak scenarios causally, writes artifacts under .llmgc/procedural/minimum-asset-pipeline, and adds the minimum-asset-pipeline product smoke route. The active manual gate is minimum_asset_pipeline_artifact_verification required.",
+                                            "summary":  "Goal 011 completes S092-S098 after the user confirmed content_generation_at_scale_artifact_verification passed, and S098A repairs the artifact-review correctness gaps in the same Goal 011 family. It keeps the narrow Application asset-pipeline contracts, deterministic source packs and tiny fixtures, expands 90 asset slots from real generated/package content ids across tile/region graphics, portraits, item/UI icons, sound effects and music/ambience, materializes local fixture imports and deterministic fallbacks, binds resolved refs through existing AssetCatalog/package metadata seams, validates source/package/content hashes, file hashes, byte counts, media types, paths, refs, budgets and reproducibility, rejects invalid/fake/leak scenarios through causal mutation paths, writes artifacts under .llmgc/procedural/minimum-asset-pipeline, and strengthens the minimum-asset-pipeline product smoke route. The active manual gate is minimum_asset_pipeline_artifact_verification required.",
                                             "scenario_id":  "minimum-asset-pipeline",
                                             "checks":  [
                                                            "MinimumAssetPipeline focused tests: 6/6 passed",

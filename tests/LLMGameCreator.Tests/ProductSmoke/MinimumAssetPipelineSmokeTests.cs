@@ -41,6 +41,19 @@ public sealed class MinimumAssetPipelineSmokeTests
         {
             Assert.True(run.PackageBindingAudit.Passed);
             Assert.True(run.AssetValidation.Passed);
+            Assert.Equal(run.ResolvedAssetCount, run.PackageBindingAudit.CategorySpecificBindingEvidence.Count);
+            foreach (var category in new[] { "tile_region_graphic", "npc_portrait", "item_icon_ui_graphic", "sound_effect", "music_ambience" })
+            {
+                var evidence = run.PackageBindingAudit.CategorySpecificBindingEvidence.First(item => item.Category == category);
+                Assert.True(evidence.CatalogLinked);
+                Assert.NotEmpty(evidence.PackageSeam);
+                Assert.Contains(run.ResolvedAssets, asset =>
+                    asset.AssetId == evidence.AssetId &&
+                    asset.ContentId == evidence.ContentId &&
+                    asset.MediaType == evidence.MediaType &&
+                    asset.RelativePath == evidence.RelativePath);
+            }
+
             Assert.All(run.ResolvedAssets, asset =>
             {
                 Assert.False(Path.IsPathRooted(asset.RelativePath));

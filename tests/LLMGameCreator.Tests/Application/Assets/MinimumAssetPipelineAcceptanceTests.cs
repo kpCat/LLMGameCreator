@@ -23,7 +23,7 @@ public sealed class MinimumAssetPipelineAcceptanceTests
         Assert.True(first.Report.Accepted);
         Assert.Equal("minimum_asset_pipeline_artifact_verification", first.Report.ManualGate);
         Assert.True(first.Report.Goal010GateRecorded);
-        Assert.Equal(["S092", "S093", "S094", "S095", "S096", "S097", "S098"], first.Report.CompletedSlices);
+        Assert.Equal(["S092", "S093", "S094", "S095", "S096", "S097", "S098", "S098A"], first.Report.CompletedSlices);
         Assert.Equal(3, first.Report.GeneratedInputCount);
         Assert.Equal(3, first.Report.SourcePackCount);
         Assert.True(first.Report.TotalResolvedAssetSlots >= 90);
@@ -70,12 +70,28 @@ public sealed class MinimumAssetPipelineAcceptanceTests
         Assert.NotEmpty(report.ManifestHash);
         Assert.All(report.Runs, run =>
         {
-            Assert.True(run.Accepted);
+            Assert.True(run.Accepted, string.Join(Environment.NewLine, run.Diagnostics.Select(item => $"{item.Code}:{item.Target}:{item.Message}")));
             Assert.Equal(30, run.RequestCount);
             Assert.Equal(run.RequestCount, run.ResolvedAssetCount);
             Assert.True(run.PackageBindingAudit.Passed);
             Assert.True(run.PackageBindingAudit.PackageValidatorClean);
             Assert.Equal(run.ResolvedAssetCount, run.PackageBindingAudit.BoundAssetCount);
+            Assert.Equal(run.PackageHash, run.PackageBindingAudit.PreAssetPackageHash);
+            Assert.NotEqual(run.PackageBindingAudit.PreAssetPackageHash, run.PackageBindingAudit.PackageHashWithAssets);
+            Assert.Equal(run.PackageContentHash, run.PackageBindingAudit.GeneratedContentHash);
+            Assert.Equal(run.ResolvedAssetCount, run.PackageBindingAudit.CategorySpecificBindingCounts.Values.Sum());
+            Assert.Equal(run.ResolvedAssetCount, run.PackageBindingAudit.CategorySpecificBindingEvidence.Count);
+            Assert.All(run.PackageBindingAudit.CategorySpecificBindingEvidence, evidence =>
+            {
+                Assert.True(evidence.CatalogLinked);
+                Assert.NotEmpty(evidence.PackageSeam);
+                Assert.Contains(run.ResolvedAssets, asset =>
+                    asset.AssetId == evidence.AssetId &&
+                    asset.ContentId == evidence.ContentId &&
+                    asset.Category == evidence.Category &&
+                    asset.MediaType == evidence.MediaType &&
+                    asset.RelativePath == evidence.RelativePath);
+            });
             Assert.True(run.AssetValidation.Passed);
             Assert.Equal(run.ResolvedAssetCount, run.AssetValidation.FilesChecked);
             Assert.True(run.ResolverEvidence.ResolverAvailable);

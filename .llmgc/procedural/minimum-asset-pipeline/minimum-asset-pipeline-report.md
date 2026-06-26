@@ -2,10 +2,10 @@
 
 - Accepted: true
 - Manual gate: minimum_asset_pipeline_artifact_verification
-- Completed slices: S092, S093, S094, S095, S096, S097, S098
+- Completed slices: S092, S093, S094, S095, S096, S097, S098, S098A
 - Total resolved asset slots: 90
-- Manifest hash: bb56efc3d4a5256b2f378c3dce720c1eefc72a506f219d12358fc74a68c2857f
-- Deterministic hash: 4eb011388cf8b9ada32901d2a8c70c8da5239ed6366484d07d40cac24215f7d9
+- Manifest hash: 45d01a85a07c3bf1def7ba88b671cfa05b82319581c3a317e5b0c28d61e111c7
+- Deterministic hash: adb98a59bcd45f4e461be1d6f7882b95d7c13aeee0102148b56081835d154d71
 - Product smoke route: minimum-asset-pipeline
 - Public schema changed: false
 - Project files changed: false
@@ -40,12 +40,17 @@
 - missing_fixture_without_fallback_permission: actualValid=false diagnostics=asset_pipeline.fixture.missing
 - over_budget_request: actualValid=false diagnostics=asset_pipeline.request.over_budget
 - path_traversal_source: actualValid=false diagnostics=asset_pipeline.source.path_traversal
-- tampered_package_content_hash: actualValid=false diagnostics=asset_pipeline.validation.package_content_hash_mismatch
+- tampered_package_content_hash: actualValid=false diagnostics=asset_pipeline.validation.package_content_hash_mismatch,asset_pipeline.validation.package_hash_mismatch
 - unavailable_default_resolver: actualValid=false diagnostics=asset_pipeline.resolver_unavailable
 - unknown_source_kind: actualValid=false diagnostics=asset_pipeline.source.kind
 - unresolved_content_id: actualValid=false diagnostics=asset_pipeline.binding.unresolved_content_id
 - unsupported_media_type: actualValid=false diagnostics=asset_pipeline.source.media_type
 - wrong_media_type_or_corrupt_fixture: actualValid=false diagnostics=asset_pipeline.fixture.media_type_mismatch
+
+## Category Binding Audit
+- frontier_survival: item_icon_ui_graphic=8, music_ambience=2, npc_portrait=8, sound_effect=8, tile_region_graphic=4
+- gothic_mystery: item_icon_ui_graphic=8, music_ambience=2, npc_portrait=8, sound_effect=8, tile_region_graphic=4
+- trade_caravan: item_icon_ui_graphic=8, music_ambience=2, npc_portrait=8, sound_effect=8, tile_region_graphic=4
 
 ## External Execution
 - LLM: false

@@ -9,7 +9,8 @@
     "S095",
     "S096",
     "S097",
-    "S098"
+    "S098",
+    "S098A"
   ],
   "sourcePackCount": 3,
   "generatedInputCount": 3,
@@ -35,8 +36,8 @@
     "tile_region_graphic": 4
   },
   "totalByteCount": 11883,
-  "manifestHash": "bb56efc3d4a5256b2f378c3dce720c1eefc72a506f219d12358fc74a68c2857f",
-  "deterministicHash": "4eb011388cf8b9ada32901d2a8c70c8da5239ed6366484d07d40cac24215f7d9",
+  "manifestHash": "45d01a85a07c3bf1def7ba88b671cfa05b82319581c3a317e5b0c28d61e111c7",
+  "deterministicHash": "adb98a59bcd45f4e461be1d6f7882b95d7c13aeee0102148b56081835d154d71",
   "sourcePackHashes": {
     "asset_sources_caravan": "cc340457499db716a04975f5d1e6a4dc6aed88904e985eae0bceb9a33bbe4280",
     "asset_sources_frontier": "db1956769db751df155b7cbb58a205200e1e013f9aad1f4c1f3a7fa3b2c6e46b",
@@ -771,10 +772,11 @@
         "sourcePackId": "asset_sources_caravan",
         "seed": "goal011-primary-seed",
         "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+        "packageContentHash": "fdc60f480af410f20befd24f47603adfcb2a8804c38ac0b2668697a11e8849ca",
         "sourcePackHash": "cc340457499db716a04975f5d1e6a4dc6aed88904e985eae0bceb9a33bbe4280",
         "requestCount": 30,
         "resolvedAssetCount": 30,
-        "manifestHash": "eb69bf57494f5a489730f881db776d7fee177ce1892c0ee8e1616b38199beaf0",
+        "manifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
         "requests": [
           {
             "slotId": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
@@ -1473,10 +1475,290 @@
       "packageBindingAudit": {
         "passed": true,
         "packageValidatorClean": true,
-        "packageHashWithAssets": "e84a66ef4cee0161ad2696ad46caff7cad16343bebe0132a77ee523722aa80d4",
+        "preAssetPackageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
+        "packageHashWithAssets": "fee962a11aec32b5cbed7bcee90eb418d6ffdc3f953608521d68e92cf387b769",
         "generatedContentHash": "fdc60f480af410f20befd24f47603adfcb2a8804c38ac0b2668697a11e8849ca",
         "assetCatalogCount": 30,
         "boundAssetCount": 30,
+        "categorySpecificBindingCounts": {
+          "item_icon_ui_graphic": 8,
+          "music_ambience": 2,
+          "npc_portrait": 8,
+          "sound_effect": 8,
+          "tile_region_graphic": 4
+        },
+        "categorySpecificBindingEvidence": [
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/032bdc46ab/062",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/0cf9369971/002",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0cf9369971-002/caravan-icon-fixture/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-0cf9369971-002-caravan-icon-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/0eadd63330/047",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0eadd63330-047/caravan-icon-fixture/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-0eadd63330-047-caravan-icon-fixture-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/1a6c2200f4/057",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1a6c2200f4-057/caravan-icon-fallback/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-1a6c2200f4-057-caravan-icon-fallback-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/1b9d8fc1f7/065",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1b9d8fc1f7-065/caravan-icon-fixture/004",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-1b9d8fc1f7-065-caravan-icon-fixture-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/1c63a6c999/024",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1c63a6c999-024/caravan-icon-fallback/005",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-1c63a6c999-024-caravan-icon-fallback-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/1d7c90f4b2/000",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1d7c90f4b2-000/caravan-icon-fallback/006",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-1d7c90f4b2-000-caravan-icon-fallback-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/frontier-survival/1df1c9bc20/042",
+            "assetId": "asset/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1df1c9bc20-042/caravan-icon-fixture/007",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-1df1c9bc20-042-caravan-icon-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "music_ambience",
+            "contentId": "event/frontier-survival/00ba2e87c9/005",
+            "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+            "mediaType": "audio/ogg",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-00ba2e87c9-005-caravan-music-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "interaction.metadata.asset_music_ambience_id"
+          },
+          {
+            "category": "music_ambience",
+            "contentId": "event/frontier-survival/086fbec037/012",
+            "assetId": "asset/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-086fbec037-012/caravan-music-fixture/001",
+            "mediaType": "audio/ogg",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-086fbec037-012-caravan-music-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "interaction.metadata.asset_music_ambience_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/11ffe0aa42/018",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-11ffe0aa42-018-caravan-portrait-fallback-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/133683d020/003",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-133683d020-003/caravan-portrait-fixture/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-133683d020-003-caravan-portrait-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/1f42f88bee/013",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-1f42f88bee-013/caravan-portrait-fallback/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-1f42f88bee-013-caravan-portrait-fallback-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/266a97cbac/005",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-266a97cbac-005/caravan-portrait-fixture/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-266a97cbac-005-caravan-portrait-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/2f80a93dd2/012",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-2f80a93dd2-012/caravan-portrait-fallback/004",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-2f80a93dd2-012-caravan-portrait-fallback-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/3841b64f99/010",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-3841b64f99-010/caravan-portrait-fixture/005",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-3841b64f99-010-caravan-portrait-fixture-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/4444fdb18a/009",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4444fdb18a-009/caravan-portrait-fixture/006",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-4444fdb18a-009-caravan-portrait-fixture-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/frontier-survival/4a0fc3a7d1/011",
+            "assetId": "asset/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4a0fc3a7d1-011/caravan-portrait-fixture/007",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-4a0fc3a7d1-011-caravan-portrait-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/0490f2f50e/013",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-0490f2f50e-013-caravan-sound-fallback-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/07a3193839/047",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-07a3193839-047/caravan-sound-fallback/001",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-07a3193839-047-caravan-sound-fallback-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/12ae66b2a3/002",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-12ae66b2a3-002/caravan-sound-fixture/002",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-12ae66b2a3-002-caravan-sound-fixture-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/14b2b54406/055",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-14b2b54406-055/caravan-sound-fixture/003",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-14b2b54406-055-caravan-sound-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/156dab0fc5/040",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-156dab0fc5-040/caravan-sound-fixture/004",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-156dab0fc5-040-caravan-sound-fixture-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/15dd98139a/021",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-15dd98139a-021/caravan-sound-fallback/005",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-15dd98139a-021-caravan-sound-fallback-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/166c952991/012",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-166c952991-012/caravan-sound-fixture/006",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-166c952991-012-caravan-sound-fixture-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/frontier-survival/17c30dadd0/030",
+            "assetId": "asset/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-17c30dadd0-030/caravan-sound-fixture/007",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-17c30dadd0-030-caravan-sound-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "map/frontier-survival/start",
+            "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-tile-region-graphic-map-frontier-survival-start-caravan-tile-fallback-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "asset_catalog.map_link"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "map/frontier-survival/start",
+            "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fixture/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-tile-region-graphic-map-frontier-survival-start-caravan-tile-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "asset_catalog.map_link"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "tile/frontier-survival/ground",
+            "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fallback/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-tile-region-graphic-tile-frontier-survival-ground-caravan-tile-fallback-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "tile_prototype.asset_id"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "tile/frontier-survival/ground",
+            "assetId": "asset/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fixture/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-tile-region-graphic-tile-frontier-survival-ground-caravan-tile-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "tile_prototype.asset_id"
+          }
+        ],
         "diagnostics": []
       },
       "assetValidation": {
@@ -2200,10 +2482,11 @@
         "sourcePackId": "asset_sources_frontier",
         "seed": "goal011-primary-seed",
         "packageHash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+        "packageContentHash": "d606d1a8a019680fa85f94bc185556d306a2978a01bfef97c59d85bcb5ad7967",
         "sourcePackHash": "db1956769db751df155b7cbb58a205200e1e013f9aad1f4c1f3a7fa3b2c6e46b",
         "requestCount": 30,
         "resolvedAssetCount": 30,
-        "manifestHash": "1f213d8d14750c1ca196300e865e49a5392f1ace757fbe836631bb9db1f1e064",
+        "manifestHash": "09dc29d8c7d41df403e20122d035be088b3746d32151df7e892e895c7bbcf195",
         "requests": [
           {
             "slotId": "asset-slot/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
@@ -2902,10 +3185,290 @@
       "packageBindingAudit": {
         "passed": true,
         "packageValidatorClean": true,
-        "packageHashWithAssets": "74edb408e811017e7e4c63b12e4cfea177e80dec55447712839f871d971a8280",
+        "preAssetPackageHash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+        "packageHashWithAssets": "2a844910a7a95d47fdd99aba658b71544847979a1587d8ed61107c6e5d82e646",
         "generatedContentHash": "d606d1a8a019680fa85f94bc185556d306a2978a01bfef97c59d85bcb5ad7967",
         "assetCatalogCount": 30,
         "boundAssetCount": 30,
+        "categorySpecificBindingCounts": {
+          "item_icon_ui_graphic": 8,
+          "music_ambience": 2,
+          "npc_portrait": 8,
+          "sound_effect": 8,
+          "tile_region_graphic": 4
+        },
+        "categorySpecificBindingEvidence": [
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/0018fb2e6f/068",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0018fb2e6f-068/frontier-icon-fixture/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-0018fb2e6f-068-frontier-icon-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/0d73938448/017",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-0d73938448-017/frontier-icon-fallback/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-0d73938448-017-frontier-icon-fallback-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/14408eb610/062",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-14408eb610-062/frontier-icon-fixture/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-14408eb610-062-frontier-icon-fixture-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/15e58eda9c/016",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-15e58eda9c-016/frontier-icon-fixture/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-15e58eda9c-016-frontier-icon-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/18e789cd36/049",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-18e789cd36-049/frontier-icon-fixture/004",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-18e789cd36-049-frontier-icon-fixture-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/20c4804d22/039",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-20c4804d22-039/frontier-icon-fixture/005",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-20c4804d22-039-frontier-icon-fixture-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/20d7507f71/025",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-20d7507f71-025/frontier-icon-fixture/006",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-20d7507f71-025-frontier-icon-fixture-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/gothic-mystery/258e249d56/066",
+            "assetId": "asset/game-content-generation-gothic-mystery/item-icon-ui-graphic/item-gothic-mystery-258e249d56-066/frontier-icon-fixture/007",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-item-icon-ui-graphic-item-gothic-mystery-258e249d56-066-frontier-icon-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "music_ambience",
+            "contentId": "event/gothic-mystery/020e1a3098/011",
+            "assetId": "asset/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-020e1a3098-011/frontier-music-fixture/000",
+            "mediaType": "audio/ogg",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-music-ambience-event-gothic-mystery-020e1a3098-011-frontier-music-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "interaction.metadata.asset_music_ambience_id"
+          },
+          {
+            "category": "music_ambience",
+            "contentId": "event/gothic-mystery/025e9d7421/006",
+            "assetId": "asset/game-content-generation-gothic-mystery/music-ambience/event-gothic-mystery-025e9d7421-006/frontier-music-fixture/001",
+            "mediaType": "audio/ogg",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-music-ambience-event-gothic-mystery-025e9d7421-006-frontier-music-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "interaction.metadata.asset_music_ambience_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/0a7aa5762f/022",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-0a7aa5762f-022/frontier-portrait-fixture/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-0a7aa5762f-022-frontier-portrait-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/19dce42539/014",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-19dce42539-014/frontier-portrait-fixture/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-19dce42539-014-frontier-portrait-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/1bc7058de9/015",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-1bc7058de9-015/frontier-portrait-fixture/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-1bc7058de9-015-frontier-portrait-fixture-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/3ac0ab26a2/020",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-3ac0ab26a2-020/frontier-portrait-fixture/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-3ac0ab26a2-020-frontier-portrait-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/455ae13136/000",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-455ae13136-000/frontier-portrait-fixture/004",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-455ae13136-000-frontier-portrait-fixture-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/47a35f21e6/010",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-47a35f21e6-010/frontier-portrait-fixture/005",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-47a35f21e6-010-frontier-portrait-fixture-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/49cdcaad47/005",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-49cdcaad47-005/frontier-portrait-fixture/006",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-49cdcaad47-005-frontier-portrait-fixture-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/gothic-mystery/6ce1004d11/009",
+            "assetId": "asset/game-content-generation-gothic-mystery/npc-portrait/npc-gothic-mystery-6ce1004d11-009/frontier-portrait-fixture/007",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-npc-portrait-npc-gothic-mystery-6ce1004d11-009-frontier-portrait-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/208fbe915b/037",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-208fbe915b-037/frontier-sound-fallback/000",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-208fbe915b-037-frontier-sound-fallback-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/272c05fb4c/026",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-272c05fb4c-026/frontier-sound-fixture/001",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-272c05fb4c-026-frontier-sound-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/291959d937/007",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-291959d937-007/frontier-sound-fixture/002",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-291959d937-007-frontier-sound-fixture-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/2b6f2b6278/040",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-2b6f2b6278-040/frontier-sound-fixture/003",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-2b6f2b6278-040-frontier-sound-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/2d920073e4/043",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-2d920073e4-043/frontier-sound-fixture/004",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-2d920073e4-043-frontier-sound-fixture-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/32282e626f/027",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-32282e626f-027/frontier-sound-fallback/005",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-32282e626f-027-frontier-sound-fallback-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/32a8a3ba89/014",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-32a8a3ba89-014/frontier-sound-fixture/006",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-32a8a3ba89-014-frontier-sound-fixture-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/gothic-mystery/4d405e45df/031",
+            "assetId": "asset/game-content-generation-gothic-mystery/sound-effect/dialogue-gothic-mystery-4d405e45df-031/frontier-sound-fixture/007",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-sound-effect-dialogue-gothic-mystery-4d405e45df-031-frontier-sound-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "map/gothic-mystery/start",
+            "assetId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-tile-region-graphic-map-gothic-mystery-start-frontier-tile-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "asset_catalog.map_link"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "map/gothic-mystery/start",
+            "assetId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/map-gothic-mystery-start/frontier-tile-fixture/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-tile-region-graphic-map-gothic-mystery-start-frontier-tile-fixture-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "asset_catalog.map_link"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "tile/gothic-mystery/ground",
+            "assetId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/tile-gothic-mystery-ground/frontier-tile-fixture/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-tile-region-graphic-tile-gothic-mystery-ground-frontier-tile-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "tile_prototype.asset_id"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "tile/gothic-mystery/ground",
+            "assetId": "asset/game-content-generation-gothic-mystery/tile-region-graphic/tile-gothic-mystery-ground/frontier-tile-fixture/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-frontier/asset-slot-game-content-generation-gothic-mystery-tile-region-graphic-tile-gothic-mystery-ground-frontier-tile-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "tile_prototype.asset_id"
+          }
+        ],
         "diagnostics": []
       },
       "assetValidation": {
@@ -3629,10 +4192,11 @@
         "sourcePackId": "asset_sources_gothic",
         "seed": "goal011-primary-seed",
         "packageHash": "02f2f2d207e4d32184682be5b42b02539be12f7da5bd34142f0e1e011b634706",
+        "packageContentHash": "00c4d2c20b81a6e0692bb25370a1f394efdef7558c643c9cf42414592b8bcb9a",
         "sourcePackHash": "da585e0e83768da41d01f58b37a5ddabd2b63966e38af611f54b0d740a463405",
         "requestCount": 30,
         "resolvedAssetCount": 30,
-        "manifestHash": "1a3bcb3befe7d6842124f75080a61ab81dafcc7e1511691e7bfa0910a8a39426",
+        "manifestHash": "5aa6d73963072647eb32be772c4c0564f74651054bed512ec909486b975fd81b",
         "requests": [
           {
             "slotId": "asset-slot/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0150c8583d-018/gothic-icon-fixture/000",
@@ -4331,10 +4895,290 @@
       "packageBindingAudit": {
         "passed": true,
         "packageValidatorClean": true,
-        "packageHashWithAssets": "f72af58fdb5cdb370bea5acfb42a0a72c4b05d2d6d45ebbba7aaddf5a780ee9d",
+        "preAssetPackageHash": "02f2f2d207e4d32184682be5b42b02539be12f7da5bd34142f0e1e011b634706",
+        "packageHashWithAssets": "63a5b7218e120788e1f78c49f30306266aa7be2ddc9704f9049056dc14391e9c",
         "generatedContentHash": "00c4d2c20b81a6e0692bb25370a1f394efdef7558c643c9cf42414592b8bcb9a",
         "assetCatalogCount": 30,
         "boundAssetCount": 30,
+        "categorySpecificBindingCounts": {
+          "item_icon_ui_graphic": 8,
+          "music_ambience": 2,
+          "npc_portrait": 8,
+          "sound_effect": 8,
+          "tile_region_graphic": 4
+        },
+        "categorySpecificBindingEvidence": [
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/0150c8583d/018",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0150c8583d-018/gothic-icon-fixture/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-0150c8583d-018-gothic-icon-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/01c8d3664f/028",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-01c8d3664f-028/gothic-icon-fixture/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-01c8d3664f-028-gothic-icon-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/026f2f30b7/022",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-026f2f30b7-022/gothic-icon-fallback/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-026f2f30b7-022-gothic-icon-fallback-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/067e48e969/017",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-067e48e969-017/gothic-icon-fixture/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-067e48e969-017-gothic-icon-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/07237b336e/039",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-07237b336e-039/gothic-icon-fallback/004",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-07237b336e-039-gothic-icon-fallback-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/091506b860/007",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-091506b860-007/gothic-icon-fallback/005",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-091506b860-007-gothic-icon-fallback-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/0ae8e18c79/049",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0ae8e18c79-049/gothic-icon-fallback/006",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-0ae8e18c79-049-gothic-icon-fallback-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "item_icon_ui_graphic",
+            "contentId": "item/trade-caravan/0c5f768baf/020",
+            "assetId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0c5f768baf-020/gothic-icon-fixture/007",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-item-icon-ui-graphic-item-trade-caravan-0c5f768baf-020-gothic-icon-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "item.icon_asset_id"
+          },
+          {
+            "category": "music_ambience",
+            "contentId": "event/trade-caravan/12d2a93d26/015",
+            "assetId": "asset/game-content-generation-trade-caravan/music-ambience/event-trade-caravan-12d2a93d26-015/gothic-music-fixture/000",
+            "mediaType": "audio/ogg",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-music-ambience-event-trade-caravan-12d2a93d26-015-gothic-music-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "interaction.metadata.asset_music_ambience_id"
+          },
+          {
+            "category": "music_ambience",
+            "contentId": "event/trade-caravan/175c5cdbbe/009",
+            "assetId": "asset/game-content-generation-trade-caravan/music-ambience/event-trade-caravan-175c5cdbbe-009/gothic-music-fixture/001",
+            "mediaType": "audio/ogg",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-music-ambience-event-trade-caravan-175c5cdbbe-009-gothic-music-fixture-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "interaction.metadata.asset_music_ambience_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/012cf2fdd0/012",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-012cf2fdd0-012/gothic-portrait-fixture/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-012cf2fdd0-012-gothic-portrait-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/0e104cf77a/021",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-0e104cf77a-021/gothic-portrait-fallback/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-0e104cf77a-021-gothic-portrait-fallback-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/288e49b3e0/008",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-288e49b3e0-008/gothic-portrait-fallback/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-288e49b3e0-008-gothic-portrait-fallback-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/29815b8012/009",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-29815b8012-009/gothic-portrait-fixture/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-29815b8012-009-gothic-portrait-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/2e51555150/006",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-2e51555150-006/gothic-portrait-fixture/004",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-2e51555150-006-gothic-portrait-fixture-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/3b29122b17/016",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-3b29122b17-016/gothic-portrait-fallback/005",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-3b29122b17-016-gothic-portrait-fallback-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/630a4d8e0c/005",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-630a4d8e0c-005/gothic-portrait-fixture/006",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-630a4d8e0c-005-gothic-portrait-fixture-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "npc_portrait",
+            "contentId": "npc/trade-caravan/63d48aa0f5/004",
+            "assetId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-63d48aa0f5-004/gothic-portrait-fixture/007",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-npc-portrait-npc-trade-caravan-63d48aa0f5-004-gothic-portrait-fixture-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "entity_prototype.asset_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/00642153fb/048",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-00642153fb-048/gothic-sound-fallback/000",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-00642153fb-048-gothic-sound-fallback-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/051bcc0efb/007",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-051bcc0efb-007/gothic-sound-fallback/001",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-051bcc0efb-007-gothic-sound-fallback-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/0a51d10f15/049",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-0a51d10f15-049/gothic-sound-fallback/002",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-0a51d10f15-049-gothic-sound-fallback-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/0e9e0bca0e/039",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-0e9e0bca0e-039/gothic-sound-fallback/003",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-0e9e0bca0e-039-gothic-sound-fallback-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/104fcbfee6/000",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-104fcbfee6-000/gothic-sound-fixture/004",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-104fcbfee6-000-gothic-sound-fixture-004.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/12525c4201/056",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-12525c4201-056/gothic-sound-fixture/005",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-12525c4201-056-gothic-sound-fixture-005.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/13e952f1d3/032",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-13e952f1d3-032/gothic-sound-fallback/006",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-13e952f1d3-032-gothic-sound-fallback-006.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "sound_effect",
+            "contentId": "dialogue/trade-caravan/145e333780/010",
+            "assetId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-145e333780-010/gothic-sound-fallback/007",
+            "mediaType": "audio/wav",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-sound-effect-dialogue-trade-caravan-145e333780-010-gothic-sound-fallback-007.fixture",
+            "catalogLinked": true,
+            "packageSeam": "dialogue.metadata.asset_sound_effect_id"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "map/trade-caravan/start",
+            "assetId": "asset/game-content-generation-trade-caravan/tile-region-graphic/map-trade-caravan-start/gothic-tile-fallback/002",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-tile-region-graphic-map-trade-caravan-start-gothic-tile-fallback-002.fixture",
+            "catalogLinked": true,
+            "packageSeam": "asset_catalog.map_link"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "map/trade-caravan/start",
+            "assetId": "asset/game-content-generation-trade-caravan/tile-region-graphic/map-trade-caravan-start/gothic-tile-fixture/000",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-tile-region-graphic-map-trade-caravan-start-gothic-tile-fixture-000.fixture",
+            "catalogLinked": true,
+            "packageSeam": "asset_catalog.map_link"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "tile/trade-caravan/ground",
+            "assetId": "asset/game-content-generation-trade-caravan/tile-region-graphic/tile-trade-caravan-ground/gothic-tile-fallback/001",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-tile-region-graphic-tile-trade-caravan-ground-gothic-tile-fallback-001.fixture",
+            "catalogLinked": true,
+            "packageSeam": "tile_prototype.asset_id"
+          },
+          {
+            "category": "tile_region_graphic",
+            "contentId": "tile/trade-caravan/ground",
+            "assetId": "asset/game-content-generation-trade-caravan/tile-region-graphic/tile-trade-caravan-ground/gothic-tile-fixture/003",
+            "mediaType": "image/png",
+            "relativePath": ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-gothic/asset-slot-game-content-generation-trade-caravan-tile-region-graphic-tile-trade-caravan-ground-gothic-tile-fixture-003.fixture",
+            "catalogLinked": true,
+            "packageSeam": "tile_prototype.asset_id"
+          }
+        ],
         "diagnostics": []
       },
       "assetValidation": {
@@ -4353,10 +5197,10 @@
   ],
   "replayEvidence": {
     "passed": true,
-    "firstManifestHash": "eb69bf57494f5a489730f881db776d7fee177ce1892c0ee8e1616b38199beaf0",
-    "replayedManifestHash": "eb69bf57494f5a489730f881db776d7fee177ce1892c0ee8e1616b38199beaf0",
-    "firstPackageHash": "e84a66ef4cee0161ad2696ad46caff7cad16343bebe0132a77ee523722aa80d4",
-    "replayedPackageHash": "e84a66ef4cee0161ad2696ad46caff7cad16343bebe0132a77ee523722aa80d4"
+    "firstManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+    "replayedManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
+    "firstPackageHash": "fee962a11aec32b5cbed7bcee90eb418d6ffdc3f953608521d68e92cf387b769",
+    "replayedPackageHash": "fee962a11aec32b5cbed7bcee90eb418d6ffdc3f953608521d68e92cf387b769"
   },
   "variationEvidence": {
     "passed": true,
@@ -4403,8 +5247,14 @@
           {
             "severity": "error",
             "code": "asset_pipeline.validation.cross_pack_asset_leakage",
-            "target": "frontier_survival",
-            "message": "Asset paths and content ids from one generated pack must not satisfy another pack."
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+            "message": "Resolved asset content id must belong to the current generated/package content graph."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.validation.cross_pack_asset_leakage",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+            "message": "Resolved asset slot does not belong to the current generated package request set."
           }
         ]
       },
@@ -4416,8 +5266,8 @@
           {
             "severity": "error",
             "code": "asset_pipeline.request.duplicate_slot_id",
-            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
-            "message": "Duplicate slot ids are rejected."
+            "target": "asset_sources_caravan",
+            "message": "Expanded asset slot ids must be unique."
           }
         ]
       },
@@ -4474,8 +5324,26 @@
           {
             "severity": "error",
             "code": "asset_pipeline.request.over_budget",
-            "target": "asset_sources_caravan",
-            "message": "Request expansion above configured caps rejects instead of allocating unboundedly."
+            "target": "item_icon_ui_graphic",
+            "message": "Requested slots exceed the configured safe category budget."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.request.over_budget",
+            "target": "npc_portrait",
+            "message": "Requested slots exceed the configured safe category budget."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.request.over_budget",
+            "target": "sound_effect",
+            "message": "Requested slots exceed the configured safe category budget."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.request.over_budget",
+            "target": "tile_region_graphic",
+            "message": "Requested slots exceed the configured safe category budget."
           }
         ]
       },
@@ -4500,8 +5368,14 @@
           {
             "severity": "error",
             "code": "asset_pipeline.validation.package_content_hash_mismatch",
-            "target": "frontier_survival",
-            "message": "Asset manifest package/content hash must match the package used for binding."
+            "target": "game/content_generation/frontier-survival",
+            "message": "Generated package content hash must match the package content used for requests."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.validation.package_hash_mismatch",
+            "target": "game/content_generation/frontier-survival",
+            "message": "Package hash in the manifest must match the pre-asset package used for binding."
           }
         ]
       },
@@ -4513,8 +5387,182 @@
           {
             "severity": "error",
             "code": "asset_pipeline.resolver_unavailable",
-            "target": "resolver",
-            "message": "A missing concrete resolver rejects acceptance."
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0cf9369971-002/caravan-icon-fixture/001",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0eadd63330-047/caravan-icon-fixture/002",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1a6c2200f4-057/caravan-icon-fallback/003",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1b9d8fc1f7-065/caravan-icon-fixture/004",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1c63a6c999-024/caravan-icon-fallback/005",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1d7c90f4b2-000/caravan-icon-fallback/006",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1df1c9bc20-042/caravan-icon-fixture/007",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-086fbec037-012/caravan-music-fixture/001",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-133683d020-003/caravan-portrait-fixture/001",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-1f42f88bee-013/caravan-portrait-fallback/002",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-266a97cbac-005/caravan-portrait-fixture/003",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-2f80a93dd2-012/caravan-portrait-fallback/004",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-3841b64f99-010/caravan-portrait-fixture/005",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4444fdb18a-009/caravan-portrait-fixture/006",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4a0fc3a7d1-011/caravan-portrait-fixture/007",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-07a3193839-047/caravan-sound-fallback/001",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-12ae66b2a3-002/caravan-sound-fixture/002",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-14b2b54406-055/caravan-sound-fixture/003",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-156dab0fc5-040/caravan-sound-fixture/004",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-15dd98139a-021/caravan-sound-fallback/005",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-166c952991-012/caravan-sound-fixture/006",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-17c30dadd0-030/caravan-sound-fixture/007",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fixture/000",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fallback/003",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
+          },
+          {
+            "severity": "error",
+            "code": "asset_pipeline.resolver_unavailable",
+            "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fixture/001",
+            "message": "A concrete asset resolver is required for import/fallback materialization."
           }
         ]
       },
@@ -4623,8 +5671,8 @@
       {
         "severity": "error",
         "code": "asset_pipeline.request.duplicate_slot_id",
-        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
-        "message": "Duplicate slot ids are rejected."
+        "target": "asset_sources_caravan",
+        "message": "Expanded asset slot ids must be unique."
       },
       {
         "severity": "error",
@@ -4641,20 +5689,50 @@
       {
         "severity": "error",
         "code": "asset_pipeline.validation.package_content_hash_mismatch",
-        "target": "frontier_survival",
-        "message": "Asset manifest package/content hash must match the package used for binding."
+        "target": "game/content_generation/frontier-survival",
+        "message": "Generated package content hash must match the package content used for requests."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.validation.package_hash_mismatch",
+        "target": "game/content_generation/frontier-survival",
+        "message": "Package hash in the manifest must match the pre-asset package used for binding."
       },
       {
         "severity": "error",
         "code": "asset_pipeline.request.over_budget",
-        "target": "asset_sources_caravan",
-        "message": "Request expansion above configured caps rejects instead of allocating unboundedly."
+        "target": "item_icon_ui_graphic",
+        "message": "Requested slots exceed the configured safe category budget."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.request.over_budget",
+        "target": "npc_portrait",
+        "message": "Requested slots exceed the configured safe category budget."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.request.over_budget",
+        "target": "sound_effect",
+        "message": "Requested slots exceed the configured safe category budget."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.request.over_budget",
+        "target": "tile_region_graphic",
+        "message": "Requested slots exceed the configured safe category budget."
       },
       {
         "severity": "error",
         "code": "asset_pipeline.validation.cross_pack_asset_leakage",
-        "target": "frontier_survival",
-        "message": "Asset paths and content ids from one generated pack must not satisfy another pack."
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "message": "Resolved asset content id must belong to the current generated/package content graph."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.validation.cross_pack_asset_leakage",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "message": "Resolved asset slot does not belong to the current generated package request set."
       },
       {
         "severity": "error",
@@ -4665,8 +5743,182 @@
       {
         "severity": "error",
         "code": "asset_pipeline.resolver_unavailable",
-        "target": "resolver",
-        "message": "A missing concrete resolver rejects acceptance."
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0cf9369971-002/caravan-icon-fixture/001",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0eadd63330-047/caravan-icon-fixture/002",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1a6c2200f4-057/caravan-icon-fallback/003",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1b9d8fc1f7-065/caravan-icon-fixture/004",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1c63a6c999-024/caravan-icon-fallback/005",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1d7c90f4b2-000/caravan-icon-fallback/006",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1df1c9bc20-042/caravan-icon-fixture/007",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-086fbec037-012/caravan-music-fixture/001",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-133683d020-003/caravan-portrait-fixture/001",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-1f42f88bee-013/caravan-portrait-fallback/002",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-266a97cbac-005/caravan-portrait-fixture/003",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-2f80a93dd2-012/caravan-portrait-fallback/004",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-3841b64f99-010/caravan-portrait-fixture/005",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4444fdb18a-009/caravan-portrait-fixture/006",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4a0fc3a7d1-011/caravan-portrait-fixture/007",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-07a3193839-047/caravan-sound-fallback/001",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-12ae66b2a3-002/caravan-sound-fixture/002",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-14b2b54406-055/caravan-sound-fixture/003",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-156dab0fc5-040/caravan-sound-fixture/004",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-15dd98139a-021/caravan-sound-fallback/005",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-166c952991-012/caravan-sound-fixture/006",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-17c30dadd0-030/caravan-sound-fixture/007",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fixture/000",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fallback/003",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
+      },
+      {
+        "severity": "error",
+        "code": "asset_pipeline.resolver_unavailable",
+        "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fixture/001",
+        "message": "A concrete asset resolver is required for import/fallback materialization."
       }
     ]
   },
@@ -4698,20 +5950,212 @@
     {
       "severity": "error",
       "code": "asset_pipeline.request.duplicate_slot_id",
-      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
-      "message": "Duplicate slot ids are rejected."
+      "target": "asset_sources_caravan",
+      "message": "Expanded asset slot ids must be unique."
     },
     {
       "severity": "error",
       "code": "asset_pipeline.request.over_budget",
-      "target": "asset_sources_caravan",
-      "message": "Request expansion above configured caps rejects instead of allocating unboundedly."
+      "target": "item_icon_ui_graphic",
+      "message": "Requested slots exceed the configured safe category budget."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.request.over_budget",
+      "target": "npc_portrait",
+      "message": "Requested slots exceed the configured safe category budget."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.request.over_budget",
+      "target": "sound_effect",
+      "message": "Requested slots exceed the configured safe category budget."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.request.over_budget",
+      "target": "tile_region_graphic",
+      "message": "Requested slots exceed the configured safe category budget."
     },
     {
       "severity": "error",
       "code": "asset_pipeline.resolver_unavailable",
-      "target": "resolver",
-      "message": "A missing concrete resolver rejects acceptance."
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0cf9369971-002/caravan-icon-fixture/001",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-0eadd63330-047/caravan-icon-fixture/002",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1a6c2200f4-057/caravan-icon-fallback/003",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1b9d8fc1f7-065/caravan-icon-fixture/004",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1c63a6c999-024/caravan-icon-fallback/005",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1d7c90f4b2-000/caravan-icon-fallback/006",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-1df1c9bc20-042/caravan-icon-fixture/007",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-00ba2e87c9-005/caravan-music-fixture/000",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/music-ambience/event-frontier-survival-086fbec037-012/caravan-music-fixture/001",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-11ffe0aa42-018/caravan-portrait-fallback/000",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-133683d020-003/caravan-portrait-fixture/001",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-1f42f88bee-013/caravan-portrait-fallback/002",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-266a97cbac-005/caravan-portrait-fixture/003",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-2f80a93dd2-012/caravan-portrait-fallback/004",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-3841b64f99-010/caravan-portrait-fixture/005",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4444fdb18a-009/caravan-portrait-fixture/006",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/npc-portrait/npc-frontier-survival-4a0fc3a7d1-011/caravan-portrait-fixture/007",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-07a3193839-047/caravan-sound-fallback/001",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-12ae66b2a3-002/caravan-sound-fixture/002",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-14b2b54406-055/caravan-sound-fixture/003",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-156dab0fc5-040/caravan-sound-fixture/004",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-15dd98139a-021/caravan-sound-fallback/005",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-166c952991-012/caravan-sound-fixture/006",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-17c30dadd0-030/caravan-sound-fixture/007",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fallback/002",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/map-frontier-survival-start/caravan-tile-fixture/000",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fallback/003",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.resolver_unavailable",
+      "target": "asset-slot/game-content-generation-frontier-survival/tile-region-graphic/tile-frontier-survival-ground/caravan-tile-fixture/001",
+      "message": "A concrete asset resolver is required for import/fallback materialization."
     },
     {
       "severity": "error",
@@ -4752,8 +6196,14 @@
     {
       "severity": "error",
       "code": "asset_pipeline.validation.cross_pack_asset_leakage",
-      "target": "frontier_survival",
-      "message": "Asset paths and content ids from one generated pack must not satisfy another pack."
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "message": "Resolved asset content id must belong to the current generated/package content graph."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.validation.cross_pack_asset_leakage",
+      "target": "asset-slot/game-content-generation-frontier-survival/item-icon-ui-graphic/item-frontier-survival-032bdc46ab-062/caravan-icon-fallback/000",
+      "message": "Resolved asset slot does not belong to the current generated package request set."
     },
     {
       "severity": "error",
@@ -4764,8 +6214,14 @@
     {
       "severity": "error",
       "code": "asset_pipeline.validation.package_content_hash_mismatch",
-      "target": "frontier_survival",
-      "message": "Asset manifest package/content hash must match the package used for binding."
+      "target": "game/content_generation/frontier-survival",
+      "message": "Generated package content hash must match the package content used for requests."
+    },
+    {
+      "severity": "error",
+      "code": "asset_pipeline.validation.package_hash_mismatch",
+      "target": "game/content_generation/frontier-survival",
+      "message": "Package hash in the manifest must match the pre-asset package used for binding."
     },
     {
       "severity": "info",

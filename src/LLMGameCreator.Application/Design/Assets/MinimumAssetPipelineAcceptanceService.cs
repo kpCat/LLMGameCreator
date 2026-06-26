@@ -123,7 +123,7 @@ public sealed class MinimumAssetPipelineAcceptanceService
         var variation = validRuns.Count == 0
             ? new MinimumAssetVariationEvidence()
             : BuildVariationEvidence(contentPacks[0], sourcePacks.First(pack => pack.Pack != null), settings);
-        var invalidMatrix = BuildInvalidMatrix(projectRoot, artifactRoot, contentPacks.FirstOrDefault(), sourcePacks.FirstOrDefault(pack => pack.Pack != null), settings);
+        var invalidMatrix = BuildInvalidMatrix(projectRoot, artifactRoot, contentPacks, sourcePacks.Where(pack => pack.Pack != null).ToList(), settings);
 
         diagnostics.AddRange(validRuns.SelectMany(run => run.Diagnostics));
         diagnostics.AddRange(invalidMatrix.Diagnostics);
@@ -162,7 +162,7 @@ public sealed class MinimumAssetPipelineAcceptanceService
             Accepted = validMatrixPassed && invalidMatrixPassed && bindingPassed && validationPassed && resolverPassed,
             ManualGate = ManualGate,
             Goal010GateRecorded = true,
-            CompletedSlices = ["S092", "S093", "S094", "S095", "S096", "S097", "S098"],
+            CompletedSlices = ["S092", "S093", "S094", "S095", "S096", "S097", "S098", "S098A"],
             SourcePackCount = sourcePacks.Count(pack => pack.Pack != null),
             GeneratedInputCount = validRuns.Count,
             TotalResolvedAssetSlots = totalSlots,
@@ -279,9 +279,9 @@ public sealed class MinimumAssetPipelineAcceptanceService
 
         diagnostics.AddRange(resolutionDiagnostics);
         var package = ClonePackage(contentPack.PackageAudit.Package);
-        var bindingAudit = BindAssetsToPackage(package, resolved, contentPack.PackageAudit.CatalogHash);
+        var bindingAudit = BindAssetsToPackage(package, resolved, contentPack.PackageAudit.PackageHash, contentPack.PackageAudit.CatalogHash);
         diagnostics.AddRange(bindingAudit.Diagnostics);
-        var validation = ValidateAssets(projectRoot, artifactRoot, package, sourcePack.Pack!, contentPack.PackageAudit.PackageHash, resolved, requests, bindingAudit);
+        var validation = ValidateAssets(projectRoot, artifactRoot, package, sourcePack, contentPack.PackageAudit.PackageHash, contentPack.PackageAudit.CatalogHash, resolved, requests, bindingAudit);
         diagnostics.AddRange(validation.Diagnostics);
         var manifestWithoutHash = new MinimumAssetManifest
         {
@@ -289,6 +289,7 @@ public sealed class MinimumAssetPipelineAcceptanceService
             SourcePackId = sourcePack.Pack!.PackId,
             Seed = seed,
             PackageHash = contentPack.PackageAudit.PackageHash,
+            PackageContentHash = contentPack.PackageAudit.CatalogHash,
             SourcePackHash = sourcePack.SourceHash,
             RequestCount = requests.Count,
             ResolvedAssetCount = resolved.Count,
@@ -398,9 +399,31 @@ public sealed class MinimumAssetPipelineAcceptanceService
             }
         }
 
+        diagnostics.AddRange(ValidateExpandedRequests(sourcePack, requests));
+        return diagnostics;
+    }
+
+    private static IReadOnlyList<MinimumAssetPipelineDiagnostic> ValidateExpandedRequests(
+        MinimumAssetSourcePack sourcePack,
+        IReadOnlyList<MinimumAssetRequest> requests)
+    {
+        var diagnostics = new List<MinimumAssetPipelineDiagnostic>();
         if (requests.Select(item => item.SlotId).Distinct(StringComparer.Ordinal).Count() != requests.Count)
         {
             diagnostics.Add(Diagnostic("error", "asset_pipeline.request.duplicate_slot_id", sourcePack.PackId, "Expanded asset slot ids must be unique."));
+        }
+
+        foreach (var group in requests.GroupBy(item => item.Category, StringComparer.Ordinal))
+        {
+            if (sourcePack.CategoryPolicies.TryGetValue(group.Key, out var policy) && group.Count() > policy.MaxSlots)
+            {
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.request.over_budget", group.Key, "Expanded category request count exceeds the configured safe category budget."));
+            }
+        }
+
+        if (requests.Count > sourcePack.MaxTotalSlots)
+        {
+            diagnostics.Add(Diagnostic("error", "asset_pipeline.request.over_budget", sourcePack.PackId, "Expanded request count exceeds the configured safe source pack budget."));
         }
 
         return diagnostics;
@@ -474,9 +497,11 @@ public sealed class MinimumAssetPipelineAcceptanceService
     private MinimumAssetBindingAudit BindAssetsToPackage(
         GamePackageDefinition package,
         IReadOnlyList<ResolvedMinimumAsset> resolvedAssets,
+        string expectedPackageHash,
         string generatedContentHash)
     {
         var diagnostics = new List<MinimumAssetPipelineDiagnostic>();
+        var preAssetPackageHash = ComputeHash(JsonSerializer.Serialize(package, JsonOptions));
         package.AssetCatalog.Contracts.Clear();
         package.AssetCatalog.Assets.Clear();
         foreach (var category in KnownCategories.OrderBy(item => item, StringComparer.Ordinal))
@@ -539,9 +564,9 @@ public sealed class MinimumAssetPipelineAcceptanceService
             }
             else if (asset.Category == "music_ambience")
             {
-                foreach (var map in package.Game.Maps.Where(item => item.Id == asset.ContentId))
+                foreach (var interaction in package.Game.Interactions.Where(item => item.Id == asset.ContentId))
                 {
-                    map.Name = map.Name;
+                    interaction.Metadata["asset_music_ambience_id"] = asset.AssetId;
                 }
             }
         }
@@ -555,6 +580,14 @@ public sealed class MinimumAssetPipelineAcceptanceService
             }
         }
 
+        if (!string.Equals(preAssetPackageHash, expectedPackageHash, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "asset_pipeline.binding.package_hash_mismatch", package.Manifest.PackageId, "Pre-asset package hash must match the package used for binding."));
+        }
+
+        var bindingEvidence = new List<MinimumAssetBindingEvidence>();
+        var categoryBindings = AuditCategoryBindings(package, resolvedAssets, diagnostics, bindingEvidence);
+
         var validation = _packageValidator.Validate(package);
         var validationErrors = validation.Issues
             .Where(issue => issue.Severity.ToString().Equals("Error", StringComparison.OrdinalIgnoreCase))
@@ -565,34 +598,245 @@ public sealed class MinimumAssetPipelineAcceptanceService
         var attachedCount = package.AssetCatalog.Assets.Count(asset => asset.LinkedEntityIds.Count > 0);
         return new MinimumAssetBindingAudit
         {
-            Passed = diagnostics.All(item => item.Severity != "error") && attachedCount == resolvedAssets.Count,
+            Passed = diagnostics.All(item => item.Severity != "error") &&
+                     attachedCount == resolvedAssets.Count &&
+                     categoryBindings.Values.Sum() == resolvedAssets.Count &&
+                     !string.Equals(preAssetPackageHash, packageWithAssetsHash, StringComparison.Ordinal),
             PackageValidatorClean = validationErrors.Count == 0,
+            PreAssetPackageHash = preAssetPackageHash,
             PackageHashWithAssets = packageWithAssetsHash,
             GeneratedContentHash = generatedContentHash,
             AssetCatalogCount = package.AssetCatalog.Assets.Count,
             BoundAssetCount = attachedCount,
+            CategorySpecificBindingCounts = categoryBindings,
+            CategorySpecificBindingEvidence = bindingEvidence.OrderBy(item => item.AssetId, StringComparer.Ordinal).ToList(),
             Diagnostics = SortDiagnostics(diagnostics)
         };
+    }
+
+    private static IReadOnlyDictionary<string, int> AuditCategoryBindings(
+        GamePackageDefinition package,
+        IReadOnlyList<ResolvedMinimumAsset> resolvedAssets,
+        List<MinimumAssetPipelineDiagnostic> diagnostics,
+        List<MinimumAssetBindingEvidence> bindingEvidence)
+    {
+        var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (var asset in resolvedAssets.OrderBy(item => item.SlotId, StringComparer.Ordinal))
+        {
+            if (!TryGetExactCatalogAsset(package, asset))
+            {
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.binding.catalog_mismatch", asset.SlotId, "AssetCatalog must contain the exact asset id, media type/category, relative path and linked content id."));
+                continue;
+            }
+
+            var bound = asset.Category switch
+            {
+                "tile_region_graphic" => TileOrRegionBindingMatches(package, asset),
+                "npc_portrait" => NpcBindingMatches(package, asset),
+                "item_icon_ui_graphic" => ItemBindingMatches(package, asset),
+                "sound_effect" => SoundBindingMatches(package, asset),
+                "music_ambience" => MusicBindingMatches(package, asset),
+                _ => false
+            };
+
+            if (!bound)
+            {
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.binding.category_specific_missing", asset.SlotId, "Resolved asset must bind through the strongest existing category-specific package/content seam."));
+                continue;
+            }
+
+            bindingEvidence.Add(new MinimumAssetBindingEvidence
+            {
+                Category = asset.Category,
+                ContentId = asset.ContentId,
+                AssetId = asset.AssetId,
+                MediaType = asset.MediaType,
+                RelativePath = asset.RelativePath,
+                CatalogLinked = true,
+                PackageSeam = DescribePackageSeam(package, asset)
+            });
+            counts[asset.Category] = counts.GetValueOrDefault(asset.Category) + 1;
+        }
+
+        return counts.OrderBy(item => item.Key, StringComparer.Ordinal)
+            .ToDictionary(item => item.Key, item => item.Value, StringComparer.Ordinal);
+    }
+
+    private static bool TryGetExactCatalogAsset(GamePackageDefinition package, ResolvedMinimumAsset asset) =>
+        package.AssetCatalog.Assets.Any(catalogAsset =>
+            string.Equals(catalogAsset.Id, asset.AssetId, StringComparison.Ordinal) &&
+            string.Equals(catalogAsset.Type, asset.MediaType, StringComparison.Ordinal) &&
+            string.Equals(catalogAsset.Role, asset.Category, StringComparison.Ordinal) &&
+            string.Equals(catalogAsset.Path, asset.RelativePath, StringComparison.Ordinal) &&
+            catalogAsset.LinkedEntityIds.Contains(asset.ContentId, StringComparer.Ordinal));
+
+    private static bool TileOrRegionBindingMatches(GamePackageDefinition package, ResolvedMinimumAsset asset)
+    {
+        var tile = package.Game.TilePrototypes.SingleOrDefault(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+        if (tile != null)
+        {
+            return !string.IsNullOrWhiteSpace(tile.AssetId);
+        }
+
+        return package.Game.Maps.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal)) ||
+               package.GeneratedContent.Regions.Any(item => string.Equals(item.SourceId, asset.ContentId, StringComparison.Ordinal));
+    }
+
+    private static bool NpcBindingMatches(GamePackageDefinition package, ResolvedMinimumAsset asset)
+    {
+        var entity = package.Game.Maps.SelectMany(map => map.Entities)
+            .SingleOrDefault(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+        if (entity != null)
+        {
+            var prototype = package.Game.EntityPrototypes.SingleOrDefault(item => string.Equals(item.Id, entity.PrototypeId, StringComparison.Ordinal));
+            return !string.IsNullOrWhiteSpace(prototype?.AssetId);
+        }
+
+        var prototypeById = package.Game.EntityPrototypes.SingleOrDefault(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+        if (prototypeById != null)
+        {
+            return !string.IsNullOrWhiteSpace(prototypeById.AssetId);
+        }
+
+        return package.GeneratedContent.Npcs.Any(item => string.Equals(item.SourceId, asset.ContentId, StringComparison.Ordinal));
+    }
+
+    private static bool ItemBindingMatches(GamePackageDefinition package, ResolvedMinimumAsset asset)
+    {
+        var item = package.Game.Items.SingleOrDefault(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+        if (item != null)
+        {
+            return !string.IsNullOrWhiteSpace(item.IconAssetId);
+        }
+
+        return package.GeneratedContent.Items.Any(item => string.Equals(item.SourceId, asset.ContentId, StringComparison.Ordinal));
+    }
+
+    private static bool SoundBindingMatches(GamePackageDefinition package, ResolvedMinimumAsset asset)
+    {
+        var dialogue = package.Game.Dialogues.SingleOrDefault(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+        if (dialogue != null)
+        {
+            return MetadataAssetPresent(dialogue.Metadata, "asset_sound_effect_id");
+        }
+
+        var interaction = package.Game.Interactions.SingleOrDefault(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+        if (interaction != null)
+        {
+            return MetadataAssetPresent(interaction.Metadata, "asset_sound_effect_id");
+        }
+
+        return package.Game.Quests.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+    }
+
+    private static bool MusicBindingMatches(GamePackageDefinition package, ResolvedMinimumAsset asset)
+    {
+        var interaction = package.Game.Interactions.SingleOrDefault(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+        if (interaction != null)
+        {
+            return MetadataAssetPresent(interaction.Metadata, "asset_music_ambience_id");
+        }
+
+        return package.Game.Maps.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal));
+    }
+
+    private static bool MetadataAssetPresent(IReadOnlyDictionary<string, string> metadata, string key) =>
+        metadata.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value);
+
+    private static string DescribePackageSeam(GamePackageDefinition package, ResolvedMinimumAsset asset)
+    {
+        if (asset.Category == "tile_region_graphic")
+        {
+            if (package.Game.TilePrototypes.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal)))
+            {
+                return "tile_prototype.asset_id";
+            }
+
+            if (package.Game.Maps.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal)))
+            {
+                return "asset_catalog.map_link";
+            }
+
+            return "asset_catalog.generated_region_link";
+        }
+
+        if (asset.Category == "npc_portrait")
+        {
+            if (package.Game.Maps.SelectMany(map => map.Entities).Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal)) ||
+                package.Game.EntityPrototypes.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal)))
+            {
+                return "entity_prototype.asset_id";
+            }
+
+            return "asset_catalog.generated_npc_link";
+        }
+
+        if (asset.Category == "item_icon_ui_graphic")
+        {
+            return package.Game.Items.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal))
+                ? "item.icon_asset_id"
+                : "asset_catalog.generated_item_link";
+        }
+
+        if (asset.Category == "sound_effect")
+        {
+            if (package.Game.Dialogues.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal)))
+            {
+                return "dialogue.metadata.asset_sound_effect_id";
+            }
+
+            if (package.Game.Interactions.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal)))
+            {
+                return "interaction.metadata.asset_sound_effect_id";
+            }
+
+            return "asset_catalog.quest_link";
+        }
+
+        if (asset.Category == "music_ambience")
+        {
+            return package.Game.Interactions.Any(item => string.Equals(item.Id, asset.ContentId, StringComparison.Ordinal))
+                ? "interaction.metadata.asset_music_ambience_id"
+                : "asset_catalog.map_link";
+        }
+
+        return "asset_catalog.link";
     }
 
     private MinimumAssetValidationEvidence ValidateAssets(
         string projectRoot,
         string artifactRoot,
         GamePackageDefinition package,
-        MinimumAssetSourcePack sourcePack,
+        MinimumAssetSourcePackLoadResult sourcePack,
         string packageHash,
+        string packageContentHash,
         IReadOnlyList<ResolvedMinimumAsset> resolvedAssets,
         IReadOnlyList<MinimumAssetRequest> requests,
         MinimumAssetBindingAudit bindingAudit)
     {
         var diagnostics = new List<MinimumAssetPipelineDiagnostic>();
-        var requestIds = requests.Select(request => request.SlotId).ToHashSet(StringComparer.Ordinal);
+        var currentSourcePack = sourcePack.Pack ?? new MinimumAssetSourcePack();
+        var requestBySlot = requests.ToDictionary(request => request.SlotId, StringComparer.Ordinal);
         var assetIds = new HashSet<string>(StringComparer.Ordinal);
+        var contentIds = AllPackageContentIds(package);
+        var expectedAssetPrefix = $"{RelativeOutputDirectory}/assets/{SafeSegment(currentSourcePack.PackId)}/";
         foreach (var asset in resolvedAssets)
         {
-            if (!requestIds.Contains(asset.SlotId))
+            if (!requestBySlot.TryGetValue(asset.SlotId, out var request))
             {
                 diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.unrequested_asset", asset.SlotId, "Resolved asset must correspond to an expanded request."));
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.cross_pack_asset_leakage", asset.SlotId, "Resolved asset slot does not belong to the current generated package request set."));
+            }
+            else
+            {
+                if (!string.Equals(asset.Category, request.Category, StringComparison.Ordinal) ||
+                    !string.Equals(asset.MediaType, request.MediaType, StringComparison.Ordinal) ||
+                    !string.Equals(asset.ContentId, request.ContentId, StringComparison.Ordinal) ||
+                    !string.Equals(asset.SourceId, request.SourceId, StringComparison.Ordinal) ||
+                    !string.Equals(asset.SourceKind, request.SourceKind, StringComparison.Ordinal))
+                {
+                    diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.request_asset_mismatch", asset.SlotId, "Resolved asset fields must match the expanded request."));
+                }
             }
 
             if (!assetIds.Add(asset.AssetId))
@@ -604,6 +848,28 @@ public sealed class MinimumAssetPipelineAcceptanceService
             {
                 diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.unsafe_path", asset.SlotId, "Resolved artifact path must be repository-relative and contained."));
                 continue;
+            }
+
+            if (!asset.RelativePath.StartsWith(expectedAssetPrefix, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.cross_pack_asset_leakage", asset.SlotId, "Resolved asset path must stay under the current source pack artifact folder."));
+            }
+
+            var source = currentSourcePack.Sources.SingleOrDefault(item => string.Equals(item.SourceId, asset.SourceId, StringComparison.Ordinal));
+            if (source == null)
+            {
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.cross_pack_asset_leakage", asset.SlotId, "Resolved asset source id must exist in the current source pack."));
+            }
+            else if (!string.Equals(source.Kind, asset.SourceKind, StringComparison.Ordinal) ||
+                     !string.Equals(source.Category, asset.Category, StringComparison.Ordinal) ||
+                     !string.Equals(source.MediaType, asset.MediaType, StringComparison.Ordinal))
+            {
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.cross_pack_asset_leakage", asset.SlotId, "Resolved asset source kind, category and media type must match the current source declaration."));
+            }
+
+            if (!contentIds.Contains(asset.ContentId))
+            {
+                diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.cross_pack_asset_leakage", asset.SlotId, "Resolved asset content id must belong to the current generated/package content graph."));
             }
 
             var fullPath = Path.GetFullPath(Path.Combine(projectRoot, asset.RelativePath.Replace('/', Path.DirectorySeparatorChar)));
@@ -637,14 +903,34 @@ public sealed class MinimumAssetPipelineAcceptanceService
             }
         }
 
-        if (!string.Equals(packageHash, package.Manifest.PackageId.Length > 0 ? packageHash : string.Empty, StringComparison.Ordinal))
+        var sourceHash = string.IsNullOrWhiteSpace(sourcePack.SourceRelativePath)
+            ? string.Empty
+            : ComputeHash(File.ReadAllText(Path.Combine(sourcePack.DirectoryPath, sourcePack.SourceRelativePath), Utf8WithoutBom));
+        if (!string.Equals(sourceHash, sourcePack.SourceHash, StringComparison.Ordinal))
         {
-            diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.package_hash_missing", package.Manifest.PackageId, "Package hash must be present in asset validation."));
+            diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.source_pack_hash_mismatch", currentSourcePack.PackId, "Source pack hash in the manifest must match the loaded source pack bytes."));
         }
 
-        if (sourcePack.MaxTotalSlots < resolvedAssets.Count)
+        var currentPackageContentHash = ExtractPackageContentHash(package);
+        if (!string.Equals(packageContentHash, currentPackageContentHash, StringComparison.Ordinal) ||
+            !string.Equals(packageContentHash, bindingAudit.GeneratedContentHash, StringComparison.Ordinal))
         {
-            diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.over_budget", sourcePack.PackId, "Resolved asset count exceeds the safe source pack budget."));
+            diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.package_content_hash_mismatch", package.Manifest.PackageId, "Generated package content hash must match the package content used for requests."));
+        }
+
+        if (!string.Equals(packageHash, bindingAudit.PreAssetPackageHash, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.package_hash_mismatch", package.Manifest.PackageId, "Package hash in the manifest must match the pre-asset package used for binding."));
+        }
+
+        if (string.Equals(bindingAudit.PackageHashWithAssets, bindingAudit.PreAssetPackageHash, StringComparison.Ordinal))
+        {
+            diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.package_hash_with_assets_unchanged", package.Manifest.PackageId, "Package hash with assets must change after asset bindings are applied."));
+        }
+
+        if (currentSourcePack.MaxTotalSlots < resolvedAssets.Count)
+        {
+            diagnostics.Add(Diagnostic("error", "asset_pipeline.validation.over_budget", currentSourcePack.PackId, "Resolved asset count exceeds the safe source pack budget."));
         }
 
         return new MinimumAssetValidationEvidence
@@ -700,11 +986,13 @@ public sealed class MinimumAssetPipelineAcceptanceService
     private MinimumAssetInvalidMatrix BuildInvalidMatrix(
         string projectRoot,
         string artifactRoot,
-        ContentGenerationScalePackResult? contentPack,
-        MinimumAssetSourcePackLoadResult? sourcePack,
+        IReadOnlyList<ContentGenerationScalePackResult> contentPacks,
+        IReadOnlyList<MinimumAssetSourcePackLoadResult> sourcePacks,
         MinimumAssetPipelineAcceptanceOptions options)
     {
         var scenarios = new List<MinimumAssetInvalidScenario>();
+        var contentPack = contentPacks.FirstOrDefault();
+        var sourcePack = sourcePacks.FirstOrDefault();
         if (contentPack == null || sourcePack?.Pack == null)
         {
             scenarios.Add(InvalidScenario("missing_valid_fixture", [Diagnostic("error", "asset_pipeline.invalid.no_valid_baseline", "invalid_matrix", "Invalid matrix requires one valid generated/package baseline.")]));
@@ -739,31 +1027,47 @@ public sealed class MinimumAssetPipelineAcceptanceService
             scenarios.Add(InvalidScenario("executable_script_provider_payload_injection", ValidateSourcePack(payload, "invalid/payload.json").Where(item => item.Code == "asset_pipeline.source.executable_payload" || item.Code == "asset_pipeline.source.command_payload").ToList()));
 
             ExpandRequests(contentPack.PackageAudit.Package, validSource, options.PrimarySeed, out var requests);
-            var duplicateDiagnostics = new List<MinimumAssetPipelineDiagnostic> { Diagnostic("error", "asset_pipeline.request.duplicate_slot_id", requests[0].SlotId, "Duplicate slot ids are rejected.") };
+            var duplicateRequests = requests.Select(item => item).ToList();
+            duplicateRequests[1] = duplicateRequests[1] with { SlotId = duplicateRequests[0].SlotId };
+            var duplicateDiagnostics = ValidateExpandedRequests(validSource, duplicateRequests);
             scenarios.Add(InvalidScenario("duplicate_slot_ids", duplicateDiagnostics));
 
             var unresolvedAsset = new ResolvedMinimumAsset { SlotId = requests[0].SlotId, AssetId = "asset/unresolved", Category = requests[0].Category, MediaType = requests[0].MediaType, ContentId = "missing/content/id", RelativePath = ".llmgc/procedural/minimum-asset-pipeline/assets/missing.fixture", Hash = "0", ByteCount = 1, ResolutionKind = "fallback", SourceId = requests[0].SourceId, SourceKind = requests[0].SourceKind };
-            var unresolvedAudit = BindAssetsToPackage(ClonePackage(contentPack.PackageAudit.Package), [unresolvedAsset], contentPack.PackageAudit.CatalogHash);
+            var unresolvedAudit = BindAssetsToPackage(ClonePackage(contentPack.PackageAudit.Package), [unresolvedAsset], contentPack.PackageAudit.PackageHash, contentPack.PackageAudit.CatalogHash);
             scenarios.Add(InvalidScenario("unresolved_content_id", unresolvedAudit.Diagnostics.Where(item => item.Code == "asset_pipeline.binding.unresolved_content_id").ToList()));
 
             var validRun = BuildRun(projectRoot, artifactRoot, contentPack, sourcePack, options.PrimarySeed, options);
             var hashDiagnostics = validRun.ResolvedAssets.Count == 0
                 ? [Diagnostic("error", "asset_pipeline.resolver_unavailable", contentPack.PackId, "Hash mismatch validation requires concrete resolved files.")]
-                : ValidateAssets(projectRoot, artifactRoot, ClonePackage(contentPack.PackageAudit.Package), validSource, contentPack.PackageAudit.PackageHash, [validRun.ResolvedAssets[0] with { Hash = "0000" + validRun.ResolvedAssets[0].Hash }], [requests[0]], validRun.PackageBindingAudit)
+                : ValidateAssets(projectRoot, artifactRoot, ClonePackage(contentPack.PackageAudit.Package), sourcePack, contentPack.PackageAudit.PackageHash, contentPack.PackageAudit.CatalogHash, [validRun.ResolvedAssets[0] with { Hash = "0000" + validRun.ResolvedAssets[0].Hash }], [requests[0]], validRun.PackageBindingAudit)
                     .Diagnostics
                     .Where(item => item.Code == "asset_pipeline.validation.hash_mismatch")
                     .ToList();
             scenarios.Add(InvalidScenario("mismatched_file_hash", hashDiagnostics));
 
-            scenarios.Add(InvalidScenario("tampered_package_content_hash", [Diagnostic("error", "asset_pipeline.validation.package_content_hash_mismatch", contentPack.PackId, "Asset manifest package/content hash must match the package used for binding.")]));
+            var tamperedDiagnostics = validRun.ResolvedAssets.Count == 0
+                ? [Diagnostic("error", "asset_pipeline.resolver_unavailable", contentPack.PackId, "Tampered package/content hash validation requires concrete resolved files.")]
+                : ValidateAssets(projectRoot, artifactRoot, ClonePackage(contentPack.PackageAudit.Package), sourcePack, "tampered-" + contentPack.PackageAudit.PackageHash, "tampered-" + contentPack.PackageAudit.CatalogHash, validRun.ResolvedAssets.Take(1).ToList(), requests.Take(1).ToList(), validRun.PackageBindingAudit)
+                    .Diagnostics
+                    .Where(item => item.Code is "asset_pipeline.validation.package_content_hash_mismatch" or "asset_pipeline.validation.package_hash_mismatch")
+                    .ToList();
+            scenarios.Add(InvalidScenario("tampered_package_content_hash", tamperedDiagnostics));
 
             var overBudget = validSource with { MaxTotalSlots = 2 };
-            ExpandRequests(contentPack.PackageAudit.Package, overBudget, options.PrimarySeed, out _);
-            scenarios.Add(InvalidScenario("over_budget_request", [Diagnostic("error", "asset_pipeline.request.over_budget", overBudget.PackId, "Request expansion above configured caps rejects instead of allocating unboundedly.")]));
+            var overBudgetDiagnostics = ExpandRequests(contentPack.PackageAudit.Package, overBudget, options.PrimarySeed, out _)
+                .Where(item => item.Code == "asset_pipeline.request.over_budget")
+                .ToList();
+            scenarios.Add(InvalidScenario("over_budget_request", overBudgetDiagnostics));
 
-            scenarios.Add(InvalidScenario("cross_pack_asset_leakage", [Diagnostic("error", "asset_pipeline.validation.cross_pack_asset_leakage", contentPack.PackId, "Asset paths and content ids from one generated pack must not satisfy another pack.")]));
+            var otherContentPack = contentPacks.Skip(1).FirstOrDefault();
+            var crossPackDiagnostics = otherContentPack == null || validRun.ResolvedAssets.Count == 0
+                ? [Diagnostic("error", "asset_pipeline.invalid.no_cross_pack_baseline", contentPack.PackId, "Cross-pack leakage validation requires two generated/package baselines.")]
+                : BuildCrossPackLeakageDiagnostics(projectRoot, artifactRoot, otherContentPack, sourcePack, validRun.ResolvedAssets[0], options);
+            scenarios.Add(InvalidScenario("cross_pack_asset_leakage", crossPackDiagnostics));
             scenarios.Add(InvalidScenario("copied_expectation_report_without_files", options.IncludeExpectationOnlyInvalidMutation ? [Diagnostic("error", "asset_pipeline.invalid.expectation_only_mutation_present", "expectation_only", "Copied report evidence without actual files is rejected.")] : []));
-            scenarios.Add(InvalidScenario("unavailable_default_resolver", _resolver.IsAvailable ? [Diagnostic("error", "asset_pipeline.resolver_unavailable", "resolver", "A missing concrete resolver rejects acceptance.")] : []));
+            var unavailableRun = new MinimumAssetPipelineAcceptanceService(packageValidator: _packageValidator)
+                .BuildRun(projectRoot, artifactRoot, contentPack, sourcePack, options.PrimarySeed, options);
+            scenarios.Add(InvalidScenario("unavailable_default_resolver", unavailableRun.Diagnostics.Where(item => item.Code == "asset_pipeline.resolver_unavailable").ToList()));
         }
 
         var passed = scenarios.Count >= 14 && scenarios.All(item => !item.ActualValid && item.Diagnostics.Any(diagnostic => diagnostic.Severity == "error"));
@@ -774,6 +1078,24 @@ public sealed class MinimumAssetPipelineAcceptanceService
             Scenarios = scenarios.OrderBy(item => item.ScenarioId, StringComparer.Ordinal).ToList(),
             Diagnostics = scenarios.SelectMany(item => item.Diagnostics).ToList()
         };
+    }
+
+    private IReadOnlyList<MinimumAssetPipelineDiagnostic> BuildCrossPackLeakageDiagnostics(
+        string projectRoot,
+        string artifactRoot,
+        ContentGenerationScalePackResult contentPack,
+        MinimumAssetSourcePackLoadResult sourcePack,
+        ResolvedMinimumAsset foreignAsset,
+        MinimumAssetPipelineAcceptanceOptions options)
+    {
+        ExpandRequests(contentPack.PackageAudit.Package, sourcePack.Pack!, options.PrimarySeed, out var requests);
+        var package = ClonePackage(contentPack.PackageAudit.Package);
+        var bindingAudit = BindAssetsToPackage(package, [foreignAsset], contentPack.PackageAudit.PackageHash, contentPack.PackageAudit.CatalogHash);
+        return ValidateAssets(projectRoot, artifactRoot, package, sourcePack, contentPack.PackageAudit.PackageHash, contentPack.PackageAudit.CatalogHash, [foreignAsset], requests, bindingAudit)
+            .Diagnostics
+            .Concat(bindingAudit.Diagnostics)
+            .Where(item => item.Code == "asset_pipeline.validation.cross_pack_asset_leakage")
+            .ToList();
     }
 
     private static MinimumAssetInvalidScenario InvalidScenario(string scenarioId, IReadOnlyList<MinimumAssetPipelineDiagnostic> diagnostics) => new()
@@ -935,6 +1257,9 @@ public sealed class MinimumAssetPipelineAcceptanceService
             .ToHashSet(StringComparer.Ordinal);
     }
 
+    private static string ExtractPackageContentHash(GamePackageDefinition package) =>
+        package.GeneratedContent.AppliedArtifacts.SingleOrDefault()?.ContentHash ?? string.Empty;
+
     private static GamePackageDefinition ClonePackage(GamePackageDefinition package) =>
         JsonSerializer.Deserialize<GamePackageDefinition>(JsonSerializer.Serialize(package, JsonOptions), JsonOptions) ?? new GamePackageDefinition();
 
@@ -967,6 +1292,13 @@ public sealed class MinimumAssetPipelineAcceptanceService
         lines.Add("## Invalid Matrix");
         lines.AddRange(report.InvalidMatrix.Scenarios.Select(item => $"- {item.ScenarioId}: actualValid={item.ActualValid.ToString().ToLowerInvariant()} diagnostics={string.Join(",", item.Diagnostics.Select(diagnostic => diagnostic.Code).Distinct(StringComparer.Ordinal))}"));
         lines.Add("");
+        lines.Add("## Category Binding Audit");
+        foreach (var run in report.Runs.OrderBy(item => item.PackId, StringComparer.Ordinal))
+        {
+            lines.Add($"- {run.PackId}: {string.Join(", ", run.PackageBindingAudit.CategorySpecificBindingCounts.OrderBy(item => item.Key, StringComparer.Ordinal).Select(item => item.Key + "=" + item.Value))}");
+        }
+
+        lines.Add("");
         lines.Add("## External Execution");
         lines.Add("- LLM: false");
         lines.Add("- RAG: false");
@@ -990,7 +1322,7 @@ public sealed class MinimumAssetPipelineAcceptanceService
             "Do not mark this gate passed until external artifact review accepts the report.",
             "",
             $"Accepted by automated harness: {report.Accepted.ToString().ToLowerInvariant()}",
-            $"S098 complete through final verification artifact: {report.CompletedSlices.Contains("S098").ToString().ToLowerInvariant()}",
+            $"S098A correctness hotfix complete through final verification artifact: {report.CompletedSlices.Contains("S098A").ToString().ToLowerInvariant()}",
             "",
             "Next work: stop at this gate. Do not start post-goal work."
         };
@@ -1278,6 +1610,7 @@ public sealed record MinimumAssetManifest
     public string SourcePackId { get; init; } = string.Empty;
     public string Seed { get; init; } = string.Empty;
     public string PackageHash { get; init; } = string.Empty;
+    public string PackageContentHash { get; init; } = string.Empty;
     public string SourcePackHash { get; init; } = string.Empty;
     public int RequestCount { get; init; }
     public int ResolvedAssetCount { get; init; }
@@ -1290,11 +1623,25 @@ public sealed record MinimumAssetBindingAudit
 {
     public bool Passed { get; init; }
     public bool PackageValidatorClean { get; init; }
+    public string PreAssetPackageHash { get; init; } = string.Empty;
     public string PackageHashWithAssets { get; init; } = string.Empty;
     public string GeneratedContentHash { get; init; } = string.Empty;
     public int AssetCatalogCount { get; init; }
     public int BoundAssetCount { get; init; }
+    public IReadOnlyDictionary<string, int> CategorySpecificBindingCounts { get; init; } = new Dictionary<string, int>(StringComparer.Ordinal);
+    public IReadOnlyList<MinimumAssetBindingEvidence> CategorySpecificBindingEvidence { get; init; } = [];
     public IReadOnlyList<MinimumAssetPipelineDiagnostic> Diagnostics { get; init; } = [];
+}
+
+public sealed record MinimumAssetBindingEvidence
+{
+    public string Category { get; init; } = string.Empty;
+    public string ContentId { get; init; } = string.Empty;
+    public string AssetId { get; init; } = string.Empty;
+    public string MediaType { get; init; } = string.Empty;
+    public string RelativePath { get; init; } = string.Empty;
+    public bool CatalogLinked { get; init; }
+    public string PackageSeam { get; init; } = string.Empty;
 }
 
 public sealed record MinimumAssetValidationEvidence
