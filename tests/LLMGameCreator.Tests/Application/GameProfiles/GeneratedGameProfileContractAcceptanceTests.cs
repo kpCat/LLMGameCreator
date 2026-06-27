@@ -238,7 +238,8 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
                 "goal_021_generated_game_profile_contract_refresh",
                 "goal_022_development_complexity_stabilization",
                 "goal_023_capability_bundle_pipeline_inputs",
-                "goal_024_rich_package_assembly_coverage_audit"
+                "goal_024_rich_package_assembly_coverage_audit",
+                "goal_025_package_assembly_expansion_1_world_and_entities"
             });
     }
 

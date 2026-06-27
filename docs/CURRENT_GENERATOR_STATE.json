@@ -81,7 +81,7 @@
                                          "checks":  [
                                                         "PackageAssemblyWorldEntities/CurrentGeneratorStateDocs focused filter: 18/18 passed",
                                                         "package-assembly-world-entities product smoke: 1/1 passed",
-                                                        "check-all.ps1: build phase reached 0 warnings / 0 errors, but ordinary test phase did not complete before two tool timeouts; no pass is claimed",
+                                                        "check-all.ps1: 827/827 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
                                                         "goal-025-final artifact scope guard: 12/12 changed paths allowed, 0 violations",
                                                         "Goal 025 mapping contract proof hash 0981280c5c4301713c09f75cec160593ee98a24fbc838411236369f124f47ec9, input fixtures hash 8079c5a8218849624edd02969b0b4afd8efc0478b9e7625ff2b95224d8845ba4, assembly report hash b0313363f90e21509fea707fd6ac40ec4aa8d0fd5fca55be386b7c4e4f0aa261, package summary hash f7eef6a85be0672b74af4bb8ed54ac0b165b1f646e490646e4ab68178fb56613, anti-overfit hash 02111e6ca9a773c921c128a398975fc5e7769fcac35b2f67465021915b6fb10a, invalid matrix hash b2affba691f2fa0f27c75903d4973e3b6e74f9f3547d255c596b0d6750e3b47f, deterministic report hash 55f103af63f4dae735b11ca131684477f1e50b1d77e7dcca92879697dcbdef9b, invalid scenarios 15, real and synthetic consumers passed"
                                                     ]

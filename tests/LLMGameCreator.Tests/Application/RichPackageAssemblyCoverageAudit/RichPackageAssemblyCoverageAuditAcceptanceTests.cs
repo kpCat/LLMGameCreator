@@ -149,15 +149,18 @@ public sealed class RichPackageAssemblyCoverageAuditAcceptanceTests
     }
 
     [Fact]
-    public void CurrentStateRecordsGoal023AcceptedBeforeGoal024()
+    public void CurrentStateKeepsGoal024RecordAfterLaterGoalHandoff()
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_024_rich_package_assembly_coverage_audit", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(RichPackageAssemblyCoverageAuditAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
-        Assert.Contains("capability_bundle_pipeline_inputs_verification passed", root.GetProperty("recommended_next_decision").GetString());
+        Assert.Equal("goal_025_package_assembly_expansion_1_world_and_entities", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("package_assembly_world_entities_expansion_verification", root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_024_rich_package_assembly_coverage_audit", root.GetProperty("goal_024_rich_package_assembly_coverage_audit").GetProperty("slice_id").GetString());
+        Assert.Contains(
+            "capability_bundle_pipeline_inputs_verification passed",
+            root.GetProperty("goal_024_rich_package_assembly_coverage_audit").GetProperty("summary").GetString());
     }
 
     private static void CopyGoal023Artifacts(string sourceRepoRoot, string targetRoot)
