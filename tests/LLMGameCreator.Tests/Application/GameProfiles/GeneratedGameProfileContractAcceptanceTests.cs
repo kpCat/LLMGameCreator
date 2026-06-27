@@ -13,9 +13,10 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
         var repoRoot = FindRepoRoot();
         var profileDirectory = Path.Combine(repoRoot, "samples", "game-profiles");
         var service = new GeneratedGameProfileContractAcceptanceService();
+        var options = OptionsWithGoal020Evidence(repoRoot);
 
-        var first = service.BuildFromProfileDirectory(profileDirectory, temp.Path);
-        var second = service.BuildFromProfileDirectory(profileDirectory, temp.Path);
+        var first = service.BuildFromProfileDirectory(profileDirectory, temp.Path, options);
+        var second = service.BuildFromProfileDirectory(profileDirectory, temp.Path, options);
         var write = await service.WriteAsync(temp.Path, first);
 
         Assert.False(first.Report.Accepted);
@@ -34,6 +35,21 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
         Assert.True(File.Exists(write.ReportJsonPath));
         Assert.True(File.Exists(write.ReportMarkdownPath));
         Assert.True(File.Exists(write.VerificationMarkdownPath));
+    }
+
+    [Fact]
+    public void ValidReportHasNoErrorDiagnosticsAndDependsOnGoal020Evidence()
+    {
+        var repoRoot = FindRepoRoot();
+        var result = new GeneratedGameProfileContractAcceptanceService()
+            .BuildFromProfileDirectory(
+                Path.Combine(repoRoot, "samples", "game-profiles"),
+                repoRoot,
+                OptionsWithGoal020Evidence(repoRoot));
+
+        Assert.True(result.Report.ContractProofPassed, string.Join(Environment.NewLine, result.Report.Diagnostics.Select(item => $"{item.Severity}:{item.Code}:{item.Target}")));
+        Assert.DoesNotContain(result.Report.Diagnostics, item => item.Severity == "error");
+        Assert.Contains(result.Report.Diagnostics, item => item.Code == "game_profile.goal020_evidence.present");
     }
 
     [Fact]
@@ -139,6 +155,76 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
         Assert.True(report.NoExternalProviderLlmRagLuaMedia);
     }
 
+    [Fact]
+    public void MissingGoal020CompactEvidenceRejectsCausally()
+    {
+        using var temp = new TempDirectory();
+        var repoRoot = FindRepoRoot();
+        var result = new GeneratedGameProfileContractAcceptanceService()
+            .BuildFromProfileDirectory(
+                Path.Combine(repoRoot, "samples", "game-profiles"),
+                repoRoot,
+                new GeneratedGameProfileContractOptions
+                {
+                    Goal020EvidenceDirectoryPath = Path.Combine(temp.Path, "missing-goal020-evidence")
+                });
+
+        Assert.False(result.Report.ContractProofPassed);
+        Assert.Contains(result.Report.Diagnostics, item => item.Code == "game_profile.goal020_evidence.report_missing");
+        Assert.Contains(result.Report.InvalidMatrix.Scenarios, item =>
+            item.ScenarioId == "missing_accepted_goal020_evidence" &&
+            item.Diagnostics.Any(diagnostic => diagnostic.Code == "game_profile.goal020_evidence.report_missing"));
+    }
+
+    [Fact]
+    public void EmptyRequiredProfileFieldsRejectThroughValidation()
+    {
+        using var missingTarget = CreateProfileDirectoryWithMutation(profile => profile with { TargetExperience = string.Empty });
+        using var missingProgression = CreateProfileDirectoryWithMutation(profile => profile with { ProgressionScope = string.Empty });
+        var repoRoot = FindRepoRoot();
+        var service = new GeneratedGameProfileContractAcceptanceService();
+
+        var targetResult = service.BuildFromProfileDirectory(missingTarget.Path, repoRoot, OptionsWithGoal020Evidence(repoRoot));
+        var progressionResult = service.BuildFromProfileDirectory(missingProgression.Path, repoRoot, OptionsWithGoal020Evidence(repoRoot));
+
+        Assert.False(targetResult.Report.ContractProofPassed);
+        Assert.Contains(targetResult.Report.Diagnostics, item => item.Code == "game_profile.target_experience.missing");
+        Assert.False(progressionResult.Report.ContractProofPassed);
+        Assert.Contains(progressionResult.Report.Diagnostics, item => item.Code == "game_profile.progression_scope.missing");
+    }
+
+    [Fact]
+    public void InvalidMatrixUsesSharedValidatorsForDuplicateAndFutureTopology()
+    {
+        var repoRoot = FindRepoRoot();
+        var result = new GeneratedGameProfileContractAcceptanceService()
+            .BuildFromProfileDirectory(
+                Path.Combine(repoRoot, "samples", "game-profiles"),
+                repoRoot,
+                OptionsWithGoal020Evidence(repoRoot));
+
+        Assert.Contains(result.Report.InvalidMatrix.Scenarios, item =>
+            item.ScenarioId == "duplicate_profile_ids" &&
+            item.Diagnostics.Any(diagnostic => diagnostic.Code == "game_profile.profile_id.duplicate"));
+        Assert.Contains(result.Report.InvalidMatrix.Scenarios, item =>
+            item.ScenarioId == "unsupported_topology_accepted_as_complete" &&
+            item.Diagnostics.Any(diagnostic => diagnostic.Code == "game_profile.topology.future_required_not_explicit"));
+    }
+
+    [Fact]
+    public void CurrentStateLastCompletedProductSliceMatchesGoal021()
+    {
+        var repoRoot = FindRepoRoot();
+        using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
+
+        Assert.Equal(
+            "goal_021_generated_game_profile_contract_refresh",
+            state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal(
+            "goal_021_generated_game_profile_contract_refresh",
+            state.RootElement.GetProperty("last_completed_product_slice").GetProperty("slice_id").GetString());
+    }
+
     private static string FindRepoRoot()
     {
         var current = new DirectoryInfo(Directory.GetCurrentDirectory());
@@ -153,6 +239,28 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
         }
 
         return current.FullName;
+    }
+
+    private static GeneratedGameProfileContractOptions OptionsWithGoal020Evidence(string repoRoot) =>
+        new()
+        {
+            Goal020EvidenceDirectoryPath = Path.Combine(repoRoot, ".llmgc", "procedural", "minimum-playable-generated-game")
+        };
+
+    private static TempDirectory CreateProfileDirectoryWithMutation(Func<GeneratedGameProfile, GeneratedGameProfile> mutate)
+    {
+        var repoRoot = FindRepoRoot();
+        var sourcePath = Path.Combine(repoRoot, "samples", "game-profiles", "frontier-survival-minimum-alpha.game-profile.json");
+        var source = JsonSerializer.Deserialize<GeneratedGameProfile>(
+            File.ReadAllText(sourcePath),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        var temp = new TempDirectory();
+        var mutated = mutate(source);
+        var json = JsonSerializer.Serialize(
+            mutated,
+            new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true });
+        File.WriteAllText(Path.Combine(temp.Path, "mutated.game-profile.json"), json);
+        return temp;
     }
 
     private sealed class TempDirectory : IDisposable

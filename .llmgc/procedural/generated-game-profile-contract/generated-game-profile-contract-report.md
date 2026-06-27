@@ -5,10 +5,10 @@
 - Previous accepted gate: minimum_playable_generated_game_verification passed
 - Valid profiles: 3/3
 - Pipeline plans: 3
-- Profile artifact hash: 90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e
+- Profile artifact hash: 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6
 - Pipeline plan hash: 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8
-- Deterministic report hash: 4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe
-- Invalid/fake/leak scenarios rejected: 18/18
+- Deterministic report hash: 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9
+- Invalid/fake/leak scenarios rejected: 20/20
 - External execution: none
 
 ## Profiles
@@ -19,6 +19,7 @@
 
 ## Diagnostics
 
+- info: game_profile.goal020_evidence.present [.llmgc/procedural/minimum-playable-generated-game] Accepted Goal 020 compact report and manifest are present and matching.
 - info: game_profile.goal020_gate_recorded [minimum_playable_generated_game_verification passed] User-confirmed Goal 020 minimum playable generated game verification is recorded as passed.
 - info: game_profile.invalid_matrix_rejected [invalid_matrix] Invalid/fake/leak scenarios must reject through validation diagnostics.
 - info: game_profile.no_external_execution [execution_boundary] No LLM, RAG, provider, media, arbitrary Lua, Unity build or generator-library execution was invoked.

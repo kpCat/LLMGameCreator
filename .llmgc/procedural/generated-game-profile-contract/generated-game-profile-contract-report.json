@@ -22,14 +22,14 @@
     "game_profile/gothic-mystery-investigation-alpha",
     "game_profile/trade-caravan-social-economy-alpha"
   ],
-  "profileArtifactHash": "90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e",
+  "profileArtifactHash": "498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6",
   "pipelinePlanHash": "4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8",
   "contractProofPassed": true,
   "allPlansHaveExactStageIds": true,
   "futureRequiredCapabilitiesExplicit": true,
   "invalidMatrix": {
-    "scenarioCount": 18,
-    "rejectedCount": 18,
+    "scenarioCount": 20,
+    "rejectedCount": 20,
     "passed": true,
     "scenarios": [
       {
@@ -113,6 +113,34 @@
             "code": "game_profile.loop.quest_dialogue_missing",
             "target": "game_profile/frontier-survival-minimum-alpha",
             "message": "Quest/dialogue/interaction loop family is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_target_experience",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_target_experience",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.target_experience.missing",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Target experience is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_progression_scope",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_progression_scope",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.progression_scope.missing",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Progression scope is required."
           }
         ]
       },
@@ -208,9 +236,15 @@
         "diagnostics": [
           {
             "severity": "error",
-            "code": "game_profile.previous_gate.missing",
-            "target": "minimum_playable_generated_game_verification",
-            "message": "Previous accepted gate evidence is required."
+            "code": "game_profile.goal020_evidence.manifest_missing",
+            "target": ".llmgc/procedural/generated-game-profile-contract/missing-goal020-evidence/minimum-playable-generated-game-manifest.json",
+            "message": "Accepted Goal 020 compact manifest is required."
+          },
+          {
+            "severity": "error",
+            "code": "game_profile.goal020_evidence.report_missing",
+            "target": ".llmgc/procedural/generated-game-profile-contract/missing-goal020-evidence/minimum-playable-generated-game-report.json",
+            "message": "Accepted Goal 020 compact report is required."
           }
         ]
       },
@@ -305,8 +339,14 @@
   "generatorLibraryChanged": false,
   "unityBuildExecuted": false,
   "noExternalProviderLlmRagLuaMedia": true,
-  "deterministicHash": "4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe",
+  "deterministicHash": "192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9",
   "diagnostics": [
+    {
+      "severity": "info",
+      "code": "game_profile.goal020_evidence.present",
+      "target": ".llmgc/procedural/minimum-playable-generated-game",
+      "message": "Accepted Goal 020 compact report and manifest are present and matching."
+    },
     {
       "severity": "info",
       "code": "game_profile.goal020_gate_recorded",

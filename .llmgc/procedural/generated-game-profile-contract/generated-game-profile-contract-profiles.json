@@ -73,6 +73,12 @@
   "diagnostics": [
     {
       "severity": "info",
+      "code": "game_profile.goal020_evidence.present",
+      "target": ".llmgc/procedural/minimum-playable-generated-game",
+      "message": "Accepted Goal 020 compact report and manifest are present and matching."
+    },
+    {
+      "severity": "info",
       "code": "game_profile.goal020_gate_recorded",
       "target": "minimum_playable_generated_game_verification passed",
       "message": "User-confirmed Goal 020 minimum playable generated game verification is recorded as passed."

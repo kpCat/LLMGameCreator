@@ -15,6 +15,10 @@ public sealed class GeneratedGameProfileContractAcceptanceService
     public const string VerificationMarkdownFileName = "generated-game-profile-contract-verification.md";
     public const string FinalGate = "generated_game_profile_contract_verification";
     public const string PreviousAcceptedGate = "minimum_playable_generated_game_verification passed";
+    private const string Goal020RelativeOutputDirectory = ".llmgc/procedural/minimum-playable-generated-game";
+    private const string Goal020ReportJsonFileName = "minimum-playable-generated-game-report.json";
+    private const string Goal020ManifestJsonFileName = "minimum-playable-generated-game-manifest.json";
+    private const string Goal020Gate = "minimum_playable_generated_game_verification";
     private const string SchemaVersion = "game_profile_v1";
     private const string ProductSmokeRoute = "generated-game-profile-contract";
     private static readonly UTF8Encoding Utf8WithoutBom = new(false);
@@ -128,10 +132,13 @@ public sealed class GeneratedGameProfileContractAcceptanceService
 
         var validation = ValidateLoadedProfiles(loadedProfiles, settings);
         diagnostics.AddRange(validation.Diagnostics);
+        var previousEvidenceDiagnostics = ValidateAcceptedGoal020Evidence(root, settings);
+        diagnostics.AddRange(previousEvidenceDiagnostics);
         var plans = validation.ValidProfiles
             .Select(profile => BuildPipelinePlan(profile, settings))
             .ToList();
-        var invalidMatrix = BuildInvalidMatrix(validation.ValidProfiles);
+        diagnostics.AddRange(plans.SelectMany(plan => plan.Diagnostics));
+        var invalidMatrix = BuildInvalidMatrix(validation.ValidProfiles, root, settings);
         diagnostics.AddRange(invalidMatrix.Diagnostics);
 
         var validProfileCount = validation.ValidProfiles.Count;
@@ -144,6 +151,7 @@ public sealed class GeneratedGameProfileContractAcceptanceService
         var contractProofPassed =
             settings.PreviousAcceptedGate == PreviousAcceptedGate &&
             !settings.CopiedReportWithoutProfileFiles &&
+            previousEvidenceDiagnostics.All(item => item.Severity != "error") &&
             validProfileCount == 3 &&
             plans.Count == 3 &&
             allPlansHaveExactStages &&
@@ -348,14 +356,19 @@ public sealed class GeneratedGameProfileContractAcceptanceService
         Require(profile.SchemaVersion == SchemaVersion, diagnostics, "game_profile.schema_version.invalid", target, "Profile schemaVersion must be game_profile_v1.");
         Require(!string.IsNullOrWhiteSpace(profile.ProfileId), diagnostics, "game_profile.profile_id.missing", target, "Profile id is required.");
         Require(!string.IsNullOrWhiteSpace(profile.DisplayName), diagnostics, "game_profile.display_name.missing", profile.ProfileId, "Display name is required.");
+        Require(!string.IsNullOrWhiteSpace(profile.TargetExperience), diagnostics, "game_profile.target_experience.missing", profile.ProfileId, "Target experience is required.");
         Require(FamilyContentPacks.ContainsKey(profile.GameFamilyId), diagnostics, "game_profile.family.unknown", profile.GameFamilyId, "Game family id must be known before pipeline planning.");
         Require(KnownPresentationModes.Contains(profile.PresentationMode), diagnostics, "game_profile.presentation.unknown", profile.PresentationMode, "Presentation mode must be a known taxonomy id.");
         Require(KnownTopologies.Contains(profile.WorldTopology), diagnostics, "game_profile.topology.unknown", profile.WorldTopology, "World topology must be a known taxonomy id.");
         Require(KnownActorModels.Contains(profile.ActorModel), diagnostics, "game_profile.actor_model.unknown", profile.ActorModel, "Actor model must be a known taxonomy id.");
         Require(profile.QuestDialogueInteractionLoopFamily == "loop_family/quest_dialogue_interaction", diagnostics, "game_profile.loop.quest_dialogue_missing", profile.ProfileId, "Quest/dialogue/interaction loop family is required.");
         Require(profile.InventoryItemEconomyLoopFamily == "loop_family/inventory_item_economy", diagnostics, "game_profile.loop.inventory_economy_missing", profile.ProfileId, "Inventory/item/economy loop family is required.");
+        Require(!string.IsNullOrWhiteSpace(profile.ProgressionScope), diagnostics, "game_profile.progression_scope.missing", profile.ProfileId, "Progression scope is required.");
+        Require(!string.IsNullOrWhiteSpace(profile.ContentScale.Target), diagnostics, "game_profile.content_scale.target_missing", profile.ProfileId, "Content scale target is required.");
         Require(profile.ContentScale.Budget > 0, diagnostics, "game_profile.content_scale.budget_missing", profile.ProfileId, "Content scale must have a bounded positive budget.");
         Require(!profile.ContentScale.Unbounded, diagnostics, "game_profile.content_scale.unbounded", profile.ProfileId, "Unbounded content scale requires a future contract and cannot be accepted as complete.");
+        Require(!string.IsNullOrWhiteSpace(profile.AssetPolicy.Mode), diagnostics, "game_profile.asset_policy.mode_missing", profile.ProfileId, "Asset policy mode is required.");
+        Require(!string.IsNullOrWhiteSpace(profile.AssetPolicy.FallbackPolicy), diagnostics, "game_profile.asset_policy.fallback_missing", profile.ProfileId, "Asset fallback policy is required.");
         Require(!profile.AssetPolicy.RuntimeProviderDependency, diagnostics, "game_profile.asset_policy.runtime_provider_dependency", profile.ProfileId, "Runtime must not depend on an asset/media provider.");
         Require(profile.RuntimeExportTarget == "runtime_export/unity_alpha_windows", diagnostics, "game_profile.runtime_export.unknown", profile.RuntimeExportTarget, "Runtime/export target must map to an existing proof target.");
         Require(!profile.Claims.PublicGamePackageSchemaMutation, diagnostics, "game_profile.claims.public_schema_mutation", profile.ProfileId, "Goal 021 must not claim public GamePackage schema mutation.");
@@ -370,7 +383,9 @@ public sealed class GeneratedGameProfileContractAcceptanceService
             "game_profile.forbidden_runtime_dependencies.incomplete",
             profile.ProfileId,
             "Forbidden runtime dependencies must include LLM, RAG, provider, media generation and arbitrary Lua.");
+        Require(profile.ExpectedDownstreamPipelineSlices.Count > 0, diagnostics, "game_profile.pipeline.required_stages_empty", profile.ProfileId, "Expected downstream pipeline slices are required.");
         Require(RequiredStages.All(stage => profile.ExpectedDownstreamPipelineSlices.Contains(stage, StringComparer.Ordinal)), diagnostics, "game_profile.pipeline.required_stage_missing", profile.ProfileId, "Profile must name the Goal 010-020 downstream proof stages.");
+        Require(profile.SelectedCapabilityIds.Count > 0, diagnostics, "game_profile.capability.selected_missing", profile.ProfileId, "At least one selected capability id is required.");
         foreach (var capabilityId in profile.SelectedCapabilityIds)
         {
             Require(KnownCapabilityIds.Contains(capabilityId), diagnostics, "game_profile.capability.unknown", capabilityId, "Selected capability id must be known or explicitly future-required.");
@@ -416,15 +431,24 @@ public sealed class GeneratedGameProfileContractAcceptanceService
             .Where(item => item.Status == "future_required")
             .Select(item => item.CapabilityId)
             .ToList();
-        if (profile.WorldTopology == "world_topology/infinite_chunks" && !future.Contains("capability/world_chunk_config_future", StringComparer.Ordinal))
+        var unsupportedCapabilitiesTreatedAsComplete = settings.TreatUnsupportedTopologyAsCompleteProfileId == profile.ProfileId;
+        if (profile.WorldTopology == "world_topology/infinite_chunks" &&
+            !unsupportedCapabilitiesTreatedAsComplete &&
+            !future.Contains("capability/world_chunk_config_future", StringComparer.Ordinal))
         {
             future.Add("capability/world_chunk_config_future");
         }
 
-        var leakageDiagnostics = new List<GameProfileDiagnostic>();
+        var planDiagnostics = new List<GameProfileDiagnostic>();
         if (profile.GameFamilyId == "game_family/gothic_mystery" && contentPackId.Contains("frontier", StringComparison.Ordinal))
         {
-            leakageDiagnostics.Add(Diagnostic("error", "game_profile.pipeline.cross_family_leak", profile.ProfileId, "Gothic profile must not map to frontier package/content ids."));
+            planDiagnostics.Add(Diagnostic("error", "game_profile.pipeline.cross_family_leak", profile.ProfileId, "Gothic profile must not map to frontier package/content ids."));
+        }
+
+        if (profile.WorldTopology == "world_topology/infinite_chunks" &&
+            (unsupportedCapabilitiesTreatedAsComplete || !future.Contains("capability/world_chunk_config_future", StringComparer.Ordinal)))
+        {
+            planDiagnostics.Add(Diagnostic("error", "game_profile.topology.future_required_not_explicit", profile.WorldTopology, "Unsupported topology must be marked future_required instead of complete."));
         }
 
         return new GeneratedGameProfilePipelinePlan
@@ -445,8 +469,8 @@ public sealed class GeneratedGameProfileContractAcceptanceService
             CapabilityStatuses = capabilityStatuses,
             SupportedCapabilityIds = capabilityStatuses.Where(item => item.Status == "supported_now").Select(item => item.CapabilityId).ToList(),
             FutureRequiredCapabilities = future.Order(StringComparer.Ordinal).ToList(),
-            UnsupportedCapabilitiesTreatedAsComplete = false,
-            Diagnostics = SortDiagnostics(leakageDiagnostics)
+            UnsupportedCapabilitiesTreatedAsComplete = unsupportedCapabilitiesTreatedAsComplete,
+            Diagnostics = SortDiagnostics(planDiagnostics)
         };
     }
 
@@ -466,7 +490,10 @@ public sealed class GeneratedGameProfileContractAcceptanceService
             SelectedCapabilityIds = profile.SelectedCapabilityIds.Order(StringComparer.Ordinal).ToList()
         };
 
-    private static GameProfileInvalidMatrix BuildInvalidMatrix(IReadOnlyList<GeneratedGameProfile> validProfiles)
+    private static GameProfileInvalidMatrix BuildInvalidMatrix(
+        IReadOnlyList<GeneratedGameProfile> validProfiles,
+        string projectRoot,
+        GeneratedGameProfileContractOptions settings)
     {
         var baseline = validProfiles.FirstOrDefault();
         var diagnostics = new List<GameProfileDiagnostic>();
@@ -477,26 +504,52 @@ public sealed class GeneratedGameProfileContractAcceptanceService
         }
 
         var gothic = validProfiles.FirstOrDefault(profile => profile.GameFamilyId == "game_family/gothic_mystery") ?? baseline;
+        var duplicateProfileSet = ValidateLoadedProfiles(
+            [
+                new LoadedGameProfile { Profile = baseline, SourceRelativePath = "invalid/duplicate_profile_ids_a" },
+                new LoadedGameProfile { Profile = Clone(baseline), SourceRelativePath = "invalid/duplicate_profile_ids_b" }
+            ],
+            settings);
+        var staleGateProfileSet = ValidateLoadedProfiles(
+            [new LoadedGameProfile { Profile = baseline, SourceRelativePath = "invalid/stale_previous_gate" }],
+            settings with { PreviousAcceptedGate = "minimum_playable_generated_game_verification required" });
+        var missingGoal020Evidence = ValidateAcceptedGoal020Evidence(
+            projectRoot,
+            settings with
+            {
+                Goal020EvidenceDirectoryPath = Path.Combine(
+                    projectRoot,
+                    ".llmgc",
+                    "procedural",
+                    "generated-game-profile-contract",
+                    "missing-goal020-evidence")
+            });
+        var unsupportedTopologyProfile = Clone(baseline) with { WorldTopology = "world_topology/infinite_chunks" };
+        var unsupportedTopologyPlan = BuildPipelinePlan(
+            unsupportedTopologyProfile,
+            settings with { TreatUnsupportedTopologyAsCompleteProfileId = unsupportedTopologyProfile.ProfileId });
         var scenarios = new List<GameProfileInvalidScenario>
         {
             InvalidScenario("missing_profile_id", [.. ValidateProfile(Clone(baseline) with { ProfileId = string.Empty }, "invalid/missing_profile_id")]),
-            InvalidScenario("duplicate_profile_ids", [Diagnostic("error", "game_profile.profile_id.duplicate", baseline.ProfileId, "Profile ids must be present and unique.")]),
+            InvalidScenario("duplicate_profile_ids", duplicateProfileSet.Diagnostics),
             InvalidScenario("unknown_game_family", [.. ValidateProfile(Clone(baseline) with { GameFamilyId = "game_family/unknown" }, "invalid/unknown_game_family")]),
             InvalidScenario("unknown_presentation_mode", [.. ValidateProfile(Clone(baseline) with { PresentationMode = "presentation_mode/unknown" }, "invalid/unknown_presentation")]),
             InvalidScenario("incompatible_presentation_and_topology", [.. ValidateProfile(Clone(baseline) with { PresentationMode = "presentation_mode/top_down_2d", WorldTopology = "world_topology/node_map" }, "invalid/incompatible")]),
             InvalidScenario("missing_required_loop_family", [.. ValidateProfile(Clone(baseline) with { QuestDialogueInteractionLoopFamily = string.Empty }, "invalid/missing_loop")]),
+            InvalidScenario("missing_target_experience", [.. ValidateProfile(Clone(baseline) with { TargetExperience = string.Empty }, "invalid/missing_target_experience")]),
+            InvalidScenario("missing_progression_scope", [.. ValidateProfile(Clone(baseline) with { ProgressionScope = string.Empty }, "invalid/missing_progression_scope")]),
             InvalidScenario("unknown_capability_id", [.. ValidateProfile(Clone(baseline) with { SelectedCapabilityIds = [.. baseline.SelectedCapabilityIds, "capability/unknown"] }, "invalid/unknown_capability")]),
             InvalidScenario("combat_required_without_combat_mapping", [.. ValidateProfile(Clone(baseline) with { CapabilityFlags = baseline.CapabilityFlags with { Combat = true }, SelectedCapabilityIds = baseline.SelectedCapabilityIds.Where(id => !id.Contains("combat", StringComparison.Ordinal)).ToList() }, "invalid/combat_mapping")]),
             InvalidScenario("provider_media_llm_runtime_dependency_requested", [.. ValidateProfile(Clone(baseline) with { AssetPolicy = baseline.AssetPolicy with { RuntimeProviderDependency = true } }, "invalid/provider_runtime")]),
             InvalidScenario("arbitrary_lua_runtime_authority_requested", [.. ValidateProfile(Clone(baseline) with { Claims = baseline.Claims with { ArbitraryLuaRuntimeAuthority = true } }, "invalid/lua_runtime")]),
             InvalidScenario("public_game_package_schema_mutation_claim", [.. ValidateProfile(Clone(baseline) with { Claims = baseline.Claims with { PublicGamePackageSchemaMutation = true } }, "invalid/schema_claim")]),
             InvalidScenario("unity_build_claim_in_non_unity_goal", [.. ValidateProfile(Clone(baseline) with { Claims = baseline.Claims with { UnityBuildProducedByGoal021 = true } }, "invalid/unity_claim")]),
-            InvalidScenario("missing_accepted_goal020_evidence", [Diagnostic("error", "game_profile.previous_gate.missing", "minimum_playable_generated_game_verification", "Previous accepted gate evidence is required.")]),
-            InvalidScenario("stale_or_mismatched_previous_gate", [Diagnostic("error", "game_profile.previous_gate.mismatch", "minimum_playable_generated_game_verification required", "Goal 021 requires minimum_playable_generated_game_verification passed.")]),
+            InvalidScenario("missing_accepted_goal020_evidence", missingGoal020Evidence),
+            InvalidScenario("stale_or_mismatched_previous_gate", staleGateProfileSet.Diagnostics),
             InvalidScenario("copied_profile_report_without_profile_files", [Diagnostic("error", "game_profile.profile_files.missing", "samples/game-profiles", "Profile contract proof requires profile files, not only a copied report.")]),
             InvalidScenario("cross_family_leakage_gothic_to_frontier_package_ids", BuildPipelinePlan(gothic, new GeneratedGameProfileContractOptions { CrossFamilyLeakProfileId = gothic.ProfileId }).Diagnostics),
             InvalidScenario("unbounded_content_scale_without_budget", [.. ValidateProfile(Clone(baseline) with { ContentScale = baseline.ContentScale with { Budget = 0, Unbounded = true } }, "invalid/unbounded_scale")]),
-            InvalidScenario("unsupported_topology_accepted_as_complete", [Diagnostic("error", "game_profile.topology.future_required_not_explicit", "world_topology/infinite_chunks", "Unsupported topology must be marked future_required instead of complete.")])
+            InvalidScenario("unsupported_topology_accepted_as_complete", unsupportedTopologyPlan.Diagnostics)
         };
         var rejected = scenarios.Count(item => !item.ActualValid);
         var matrixDiagnostics = new List<GameProfileDiagnostic>
@@ -516,6 +569,108 @@ public sealed class GeneratedGameProfileContractAcceptanceService
 
     private static GeneratedGameProfile Clone(GeneratedGameProfile profile) =>
         JsonSerializer.Deserialize<GeneratedGameProfile>(JsonSerializer.Serialize(profile, JsonOptions), JsonOptions) ?? new GeneratedGameProfile();
+
+    private static IReadOnlyList<GameProfileDiagnostic> ValidateAcceptedGoal020Evidence(
+        string projectRoot,
+        GeneratedGameProfileContractOptions settings)
+    {
+        var diagnostics = new List<GameProfileDiagnostic>();
+        var evidenceDirectory = ResolveGoal020EvidenceDirectory(projectRoot, settings);
+        var reportPath = Path.Combine(evidenceDirectory, Goal020ReportJsonFileName);
+        var manifestPath = Path.Combine(evidenceDirectory, Goal020ManifestJsonFileName);
+
+        if (!File.Exists(reportPath))
+        {
+            diagnostics.Add(Diagnostic("error", "game_profile.goal020_evidence.report_missing", DiagnosticTargetForPath(projectRoot, reportPath), "Accepted Goal 020 compact report is required."));
+        }
+
+        if (!File.Exists(manifestPath))
+        {
+            diagnostics.Add(Diagnostic("error", "game_profile.goal020_evidence.manifest_missing", DiagnosticTargetForPath(projectRoot, manifestPath), "Accepted Goal 020 compact manifest is required."));
+        }
+
+        JsonDocument? report = null;
+        JsonDocument? manifest = null;
+        try
+        {
+            if (File.Exists(reportPath))
+            {
+                report = JsonDocument.Parse(File.ReadAllText(reportPath));
+                var root = report.RootElement;
+                Require(JsonString(root, "finalStatus") == Goal020Gate, diagnostics, "game_profile.goal020_evidence.final_status_mismatch", Goal020ReportJsonFileName, "Goal 020 report finalStatus must match the accepted gate.");
+                Require(JsonString(root, "manualGate") == Goal020Gate, diagnostics, "game_profile.goal020_evidence.manual_gate_mismatch", Goal020ReportJsonFileName, "Goal 020 report manualGate must match the accepted gate.");
+                Require(JsonBool(root, "minimumPlayableGeneratedGameVerified") == true, diagnostics, "game_profile.goal020_evidence.not_verified", Goal020ReportJsonFileName, "Goal 020 report must physically verify the minimum playable generated game.");
+
+                if (root.TryGetProperty("diagnostics", out var reportDiagnostics) &&
+                    reportDiagnostics.ValueKind == JsonValueKind.Array &&
+                    reportDiagnostics.EnumerateArray().Any(item => JsonString(item, "severity") == "error"))
+                {
+                    diagnostics.Add(Diagnostic("error", "game_profile.goal020_evidence.report_error_diagnostic", Goal020ReportJsonFileName, "Accepted Goal 020 report top-level diagnostics must not contain errors."));
+                }
+            }
+
+            if (File.Exists(manifestPath))
+            {
+                manifest = JsonDocument.Parse(File.ReadAllText(manifestPath));
+            }
+
+            if (report != null && manifest != null)
+            {
+                var reportManifestHash = JsonString(report.RootElement, "manifestHash");
+                var manifestHash = JsonString(manifest.RootElement, "manifestHash");
+                if (!string.IsNullOrWhiteSpace(reportManifestHash) && !string.IsNullOrWhiteSpace(manifestHash))
+                {
+                    Require(reportManifestHash == manifestHash, diagnostics, "game_profile.goal020_evidence.manifest_hash_mismatch", Goal020ManifestJsonFileName, "Goal 020 manifestHash must match the report manifestHash.");
+                }
+            }
+        }
+        catch (JsonException exception)
+        {
+            diagnostics.Add(Diagnostic("error", "game_profile.goal020_evidence.invalid_json", Goal020RelativeOutputDirectory, exception.Message));
+        }
+        finally
+        {
+            report?.Dispose();
+            manifest?.Dispose();
+        }
+
+        if (diagnostics.All(item => item.Severity != "error"))
+        {
+            diagnostics.Add(Diagnostic("info", "game_profile.goal020_evidence.present", Goal020RelativeOutputDirectory, "Accepted Goal 020 compact report and manifest are present and matching."));
+        }
+
+        return SortDiagnostics(diagnostics);
+    }
+
+    private static string ResolveGoal020EvidenceDirectory(string projectRoot, GeneratedGameProfileContractOptions settings)
+    {
+        if (!string.IsNullOrWhiteSpace(settings.Goal020EvidenceDirectoryPath))
+        {
+            return Path.GetFullPath(settings.Goal020EvidenceDirectoryPath);
+        }
+
+        return Path.GetFullPath(Path.Combine(projectRoot, Goal020RelativeOutputDirectory.Replace('/', Path.DirectorySeparatorChar)));
+    }
+
+    private static string DiagnosticTargetForPath(string projectRoot, string path)
+    {
+        if (IsContained(projectRoot, path))
+        {
+            return RelativePath(projectRoot, path);
+        }
+
+        return Path.GetFileName(path);
+    }
+
+    private static string JsonString(JsonElement element, string propertyName) =>
+        element.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.String
+            ? property.GetString() ?? string.Empty
+            : string.Empty;
+
+    private static bool? JsonBool(JsonElement element, string propertyName) =>
+        element.TryGetProperty(propertyName, out var property) && (property.ValueKind == JsonValueKind.True || property.ValueKind == JsonValueKind.False)
+            ? property.GetBoolean()
+            : null;
 
     private static GameProfileInvalidScenario InvalidScenario(string id, IReadOnlyList<GameProfileDiagnostic> diagnostics) =>
         new()
@@ -657,6 +812,8 @@ public sealed record GeneratedGameProfileContractOptions
     public string PreviousAcceptedGate { get; init; } = GeneratedGameProfileContractAcceptanceService.PreviousAcceptedGate;
     public bool CopiedReportWithoutProfileFiles { get; init; }
     public string CrossFamilyLeakProfileId { get; init; } = string.Empty;
+    public string Goal020EvidenceDirectoryPath { get; init; } = string.Empty;
+    public string TreatUnsupportedTopologyAsCompleteProfileId { get; init; } = string.Empty;
 }
 
 public sealed record GeneratedGameProfileContractAcceptanceResult

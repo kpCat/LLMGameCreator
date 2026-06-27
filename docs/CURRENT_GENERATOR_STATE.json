@@ -1,7 +1,7 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-27T05:12:27Z",
+    "updated_at_utc":  "2026-06-27T05:43:57Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
     "current_phase_title":  "Goal 021 generated game profile contract verification required",
     "gate_status":  "generated_game_profile_contract_verification",
@@ -10,7 +10,7 @@
     "last_completed_product_slice_id":  "goal_021_generated_game_profile_contract_refresh",
     "active_manual_gate":  "Goal 021 records minimum_playable_generated_game_verification passed and produces a deterministic generated-game profile contract plus profile-to-pipeline artifacts; generated_game_profile_contract_verification remains required and not passed until the profile contract is manually accepted.",
     "current_user_action":  "Review the generated game profile contract document, three sample profiles, profile artifact, pipeline plan, report, verification artifact and invalid/fake/leak matrix; do not mark generated_game_profile_contract_verification passed until the profile contract is accepted.",
-    "recommended_next_decision":  "The user confirmed minimum_playable_generated_game_verification passed before Goal 021. Goal 021 completes S170-S177 by defining game_profile_v1, adding three deterministic sample profiles, introducing a narrow Application-layer GameProfiles acceptance service, mapping each profile to exact Goal 010-020 capability and pipeline stage ids, separating future-required capabilities from supported-now stages, rejecting 18 invalid/fake/leak scenarios causally and adding the generated-game-profile-contract product smoke route. Compact review artifacts are written under .llmgc/procedural/generated-game-profile-contract. Goal 021 stops at generated_game_profile_contract_verification required; do not mark it passed and do not start S178 or Goal 022.",
+    "recommended_next_decision":  "The user confirmed minimum_playable_generated_game_verification passed before Goal 021. Goal 021 completes S170-S177 by defining game_profile_v1, adding three deterministic sample profiles, introducing a narrow Application-layer GameProfiles acceptance service, physically validating accepted Goal 020 compact report/manifest evidence, mapping each profile to exact Goal 010-020 capability and pipeline stage ids, separating future-required capabilities from supported-now stages, rejecting 20 invalid/fake/leak scenarios causally and adding the generated-game-profile-contract product smoke route. Compact review artifacts are written under .llmgc/procedural/generated-game-profile-contract. Goal 021 stops at generated_game_profile_contract_verification required; do not mark it passed and do not start S178 or Goal 022.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -68,16 +68,16 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_020_minimum_playable_generated_game",
-                                         "title":  "Minimum Playable Generated Game Gate",
-                                         "completed_at_utc":  "2026-06-26T21:42:28Z",
-                                         "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, adds a narrow Application-layer MinimumPlayableGame acceptance service, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a review-ready runnable Windows player folder under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, keeps readable presentation and multi-variant evidence verified, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. The active manual gate is minimum_playable_generated_game_verification required.",
-                                         "scenario_id":  "minimum-playable-generated-game",
+                                         "slice_id":  "goal_021_generated_game_profile_contract_refresh",
+                                         "title":  "Generated Game Profile Contract Refresh",
+                                         "completed_at_utc":  "2026-06-27T05:43:57Z",
+                                         "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It physically validates accepted Goal 020 compact report/manifest evidence, writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects 20 invalid/fake/leak profile evidence scenarios causally and leaves generated_game_profile_contract_verification required.",
+                                         "scenario_id":  "generated-game-profile-contract",
                                          "checks":  [
-                                                        "MinimumPlayableGame focused tests: 10/10 passed",
-                                                        "minimum-playable-generated-game product smoke: 1/1 passed",
-                                                        "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
-                                                        "Goal 020 manifest hash 973fe09f17697a0075dc684c15c5f97fbae7f6f7b1595725a7d08c9586b4ecba, review package hash 166aa7805e05db7e922b0f486edd426c0ed82085dfcf1a2837d24b5bd61b14a8, deterministic report hash a4b0c84755c17b52c74464934737589d900a5b09d4d60cd302d48b831d34dad7, selected frontier_survival package game/content_generation/frontier-survival, quest quest/frontier-survival/c2ed6dc235/000, reward item/frontier-survival/7f81222990/004, invalid scenarios 25"
+                                                        "GameProfile focused tests: 15/15 passed",
+                                                        "generated-game-profile-contract product smoke: 1/1 passed",
+                                                        "check-all.ps1: 856/856 tests passed, build 0 warnings / 0 errors",
+                                                        "Goal 021 profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9, valid profiles 3, invalid scenarios 20"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -438,7 +438,7 @@
                               "Unity multi-variant playable scenario variants/report sidecars and per-variant quest completion player evidence",
                               "Unity Alpha readable presentation model/report sidecars and required panel/readable-label player evidence"
                           ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 020 stop at minimum_playable_generated_game_verification required and do not start S170, Goal 021 or post-Goal-020 work without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 021 stop at generated_game_profile_contract_verification required and do not start S178, Goal 022 or post-Goal-021 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -592,10 +592,11 @@
                                                               "Three deterministic sample profiles are written under samples/game-profiles",
                                                               "Application GameProfiles acceptance service writes compact artifacts under .llmgc/procedural/generated-game-profile-contract",
                                                               "Valid profiles are frontier-survival-minimum-alpha, gothic-mystery-investigation-alpha and trade-caravan-social-economy-alpha",
-                                                              "Profile artifact hash 90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e",
+                                                              "Profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6",
                                                               "Pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8",
-                                                              "Deterministic report hash 4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe",
-                                                              "Invalid/fake/leak matrix rejects 18 scenarios",
+                                                              "Deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9",
+                                                              "Accepted Goal 020 compact report/manifest evidence is physically verified",
+                                                              "Invalid/fake/leak matrix rejects 20 scenarios",
                                                               "Product smoke route is generated-game-profile-contract",
                                                               "Final report accepted=false and manualGate=generated_game_profile_contract_verification",
                                                               "Gate remains required and is not marked passed"
@@ -748,13 +749,13 @@
                                                     "title":  "Generated Game Profile Contract Refresh",
                                                     "status":  "verification_required",
                                                     "blocked_at_utc":  "",
-                                                    "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects invalid/fake/leak profile evidence causally and leaves generated_game_profile_contract_verification required.",
+                                                    "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It physically validates accepted Goal 020 compact report/manifest evidence, writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects invalid/fake/leak profile evidence causally and leaves generated_game_profile_contract_verification required.",
                                                     "scenario_id":  "generated-game-profile-contract",
                                                     "checks":  [
-                                                                   "GameProfile focused tests: 10/10 passed",
+                                                                   "GameProfile focused tests: 15/15 passed",
                                                                    "generated-game-profile-contract product smoke: 1/1 passed",
-                                                                   "check-all.ps1: 851/851 tests passed, build 0 warnings / 0 errors",
-                                                                   "Goal 021 profile artifact hash 90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe, valid profiles 3, invalid scenarios 18"
+                                                                   "check-all.ps1: 856/856 tests passed, build 0 warnings / 0 errors",
+                                                                   "Goal 021 profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9, valid profiles 3, invalid scenarios 20"
                                                                ]
                                                 },
     "goal_012_unity_runtime_export_vertical_slice":  {

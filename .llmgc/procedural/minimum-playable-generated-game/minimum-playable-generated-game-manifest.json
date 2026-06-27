@@ -17,11 +17,11 @@
   "totalByteCount": 85896041,
   "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
   "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
-  "buildManifestHash": "e54cc643c1708498bf9313e3cd383e0574d32fa7089138f87348c1c71d43ed38",
-  "reviewPackageHash": "e1004a15075d738955f84d35399aafde54974e2c76f6b8aa67dd2a66bf1e80cd",
+  "buildManifestHash": "c6f616971cf547107a3534e3960d36217a9c9ef0155a33770a5a2b82f96984b7",
+  "reviewPackageHash": "ba44d75c77990140824f629940797ac9e6b71a59155a9b1f8940b7329b3c5fde",
   "automatedLaunchVerified": true,
   "automatedQuestCompletionVerified": true,
   "readablePresentationVerified": true,
   "manualReviewRequired": true,
-  "manifestHash": "65e0316b88f1432f64d0f1692d9d4692ed338b505f12e5db74f859eb2cf4a5c0"
+  "manifestHash": "18c3b99ec04ebe1ba4693519a2f00629a470bc1fe6a994d9c35c414bc5810ad9"
 }
