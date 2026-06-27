@@ -1,0 +1,9 @@
+{
+  "realConsumerId": "goal025_real_consumer_trade_caravan",
+  "syntheticConsumerId": "npc_city_walk",
+  "syntheticConsumerPresent": true,
+  "distinctConsumerIds": true,
+  "distinctPackageMapIds": true,
+  "distinctPrototypeIds": true,
+  "passed": true
+}

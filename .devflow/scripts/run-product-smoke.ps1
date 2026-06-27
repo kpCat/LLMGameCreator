@@ -17,7 +17,7 @@ $MarkdownPath = Join-Path $RunDir "product-smoke-summary.md"
 $LogIndexPath = Join-Path $RunDir "logs.txt"
 $TestResultsDir = Join-Path $RunDir "test-results"
 $PackageOutputDir = Join-Path $RunDir "package-output"
-$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario" -or $Scenario -eq "unity-alpha-readable-presentation" -or $Scenario -eq "minimum-playable-generated-game" -or $Scenario -eq "generated-game-profile-contract" -or $Scenario -eq "development-complexity-stabilization" -or $Scenario -eq "capability-bundle-pipeline-inputs" -or $Scenario -eq "rich-package-assembly-coverage-audit") { $RepoRoot } else { $PackageOutputDir }
+$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario" -or $Scenario -eq "unity-alpha-readable-presentation" -or $Scenario -eq "minimum-playable-generated-game" -or $Scenario -eq "generated-game-profile-contract" -or $Scenario -eq "development-complexity-stabilization" -or $Scenario -eq "capability-bundle-pipeline-inputs" -or $Scenario -eq "rich-package-assembly-coverage-audit" -or $Scenario -eq "package-assembly-world-entities") { $RepoRoot } else { $PackageOutputDir }
 $TestFilter = "FullyQualifiedName~ProductSmoke"
 $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
 
@@ -89,6 +89,8 @@ function Write-ProductSmokeSummary {
         Join-Path $ScenarioArtifactRoot ".llmgc\procedural\capability-bundle-pipeline-inputs\capability-bundle-pipeline-inputs-report.json"
     } elseif ($Scenario -eq "rich-package-assembly-coverage-audit") {
         Join-Path $ScenarioArtifactRoot ".llmgc\procedural\rich-package-assembly-coverage-audit\rich-package-assembly-coverage-audit-report.json"
+    } elseif ($Scenario -eq "package-assembly-world-entities") {
+        Join-Path $ScenarioArtifactRoot ".llmgc\procedural\package-assembly-world-entities\package-assembly-world-entities-report.json"
     } elseif ($Scenario -eq "generated-microgame-loop" -or $Scenario -eq "runtime-owned-goal-progress" -or $Scenario -eq "runtime-reward-challenge-state") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-loop\generated-microgame-loop-snapshot.json"
     } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow" -or $Scenario -eq "generated-microgame-goal-loop" -or $Scenario -eq "generated-microgame-challenge-loop") {
@@ -322,6 +324,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "rich-package-assembly-coverage-audit") {
         $TestFilter = "FullyQualifiedName~RichPackageAssemblyCoverageAuditProductSmoke"
+    }
+    elseif ($Scenario -eq "package-assembly-world-entities") {
+        $TestFilter = "FullyQualifiedName~PackageAssemblyWorldEntitiesProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

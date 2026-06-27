@@ -21,7 +21,7 @@ rich_package_assembly_coverage_audit_verification passed
 Produced for review:
 
 ```text
-modular_contract_goal_policy_adoption_verification required
+package_assembly_world_entities_expansion_verification required
 ```
 
 Current capabilities:
@@ -43,11 +43,12 @@ Current capabilities:
 - capability bundle pipeline input records for the three accepted game profiles, with explicit blocked/future-required gaps;
 - rich package assembly coverage audit matrix and next package-expansion candidate plan;
 - modular contract goal policy, feature backlog audit and package assembly campaign pack;
+- package assembly world/entities mapping contract, real/synthetic consumer proof and compact Goal 025 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024 has been accepted by user prompt. The current process gate adopts modular contract goal policy and a plan-only package assembly campaign pack before any Goal 025 or S199 implementation starts.
+Goal 024 and the modular contract goal policy adoption gate have been accepted by user prompt. Goal 025 produced the first bounded package assembly expansion for world/entities and now waits at its manual verification gate.
 
 ## Queue Rules
 
@@ -259,13 +260,17 @@ Adopt modular contracts, bounded composite goals, rare product vertical gates an
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; Goal 025 and S199 are not started.
+Accepted by user prompt before Goal 025.
 
 ### Goal 025: Package Assembly Expansion 1 - World And Entities
 
 Purpose:
 
-Plan-only next unless explicitly promoted by a later task. Generate and assemble richer world/entity data for at least one selected game family through a bounded composite goal with Level 2/3 proof before any rare product vertical gate.
+Generate and assemble richer world/entity data for at least one selected game family through a bounded composite goal with Level 2/3 proof before any rare product vertical gate.
+
+Status:
+
+Produced for review. The gate remains `package_assembly_world_entities_expansion_verification required`, not passed. Goal 026 and S206 are not started.
 
 ### Goal 026: Package Assembly Expansion 2 - Dialogue And Quests
 
@@ -438,7 +443,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-modular_contract_goal_policy_adoption_verification
+package_assembly_world_entities_expansion_verification
 ```
 
 Status:

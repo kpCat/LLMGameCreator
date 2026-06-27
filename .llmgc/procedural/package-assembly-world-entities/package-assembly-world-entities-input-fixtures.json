@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "package_assembly_world_entities_input_fixtures_v1",
+  "realConsumer": {
+    "consumerId": "goal025_real_consumer_trade_caravan",
+    "sourceProfileId": "game_profile/trade-caravan-social-economy-alpha",
+    "gameFamilyId": "game_family/trade_caravan",
+    "selectionId": "generator_plan_capability_selection/533fea9ea62f723f",
+    "artifacts": [
+      {
+        "artifactId": "goal025/real/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"Goal 025 Trade Caravan\",\r\n    \"description\": \"Bounded world/entity assembly proof derived from accepted planning inputs.\",\r\n    \"genre\": \"trade_caravan\",\r\n    \"presentation_mode\": \"map_and_panel_rpg\",\r\n    \"world_topology\": \"region_graph\",\r\n    \"actor_model\": \"vehicle_or_ship\",\r\n    \"combat_model\": \"none\",\r\n    \"core_loop\": [\r\n      \"travel\",\r\n      \"trade\",\r\n      \"meet_npcs\"\r\n    ]\r\n  },\r\n  \"pillars\": [\r\n    \"world_entities\",\r\n    \"bounded_package_assembly\"\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal025/real/02-scenes",
+        "artifactKind": "scene_pack_v1",
+        "contentJson": "{\r\n  \"scenes\": [\r\n    {\r\n      \"id\": \"scene/caravan_start\",\r\n      \"title\": \"Caravan Start\",\r\n      \"description\": \"A trade camp.\",\r\n      \"purpose\": \"Start.\"\r\n    },\r\n    {\r\n      \"id\": \"scene/market_gate\",\r\n      \"title\": \"Market Gate\",\r\n      \"description\": \"A gate into a small market.\",\r\n      \"purpose\": \"Entity placement.\"\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal025/real/03-regions",
+        "artifactKind": "region_pack_v1",
+        "contentJson": "{\r\n  \"regions\": [\r\n    {\r\n      \"id\": \"region/caravan_route\",\r\n      \"title\": \"Caravan Route\",\r\n      \"description\": \"A bounded route sidecar.\",\r\n      \"scene_ids\": [\r\n        \"scene/caravan_start\",\r\n        \"scene/market_gate\"\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal025/real/04-entities",
+        "artifactKind": "entity_pack_v1",
+        "contentJson": "{\r\n  \"entities\": [\r\n    {\r\n      \"id\": \"entity/caravan_master\",\r\n      \"kind\": \"npc\",\r\n      \"title\": \"Caravan Master\",\r\n      \"scene_id\": \"scene/market_gate\",\r\n      \"position\": {\r\n        \"x\": 2,\r\n        \"y\": 2\r\n      },\r\n      \"instance_id\": \"entity/instance/caravan_master\"\r\n    },\r\n    {\r\n      \"id\": \"entity/market_stall\",\r\n      \"kind\": \"prop\",\r\n      \"title\": \"Market Stall\",\r\n      \"package_map_id\": \"map/draft/scene/market/gate\",\r\n      \"position\": {\r\n        \"x\": 3,\r\n        \"y\": 2\r\n      },\r\n      \"instance_id\": \"entity/instance/market_stall\"\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal025/real/05-npcs",
+        "artifactKind": "npc_pack_v1",
+        "contentJson": "{\r\n  \"npcs\": [\r\n    {\r\n      \"id\": \"npc/caravan_scout\",\r\n      \"name\": \"Caravan Scout\",\r\n      \"description\": \"Scouts the road.\",\r\n      \"region_id\": \"region/caravan_route\",\r\n      \"scene_id\": \"scene/market_gate\",\r\n      \"position\": {\r\n        \"x\": 4,\r\n        \"y\": 2\r\n      },\r\n      \"instance_id\": \"entity/instance/caravan_scout\"\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      }
+    ]
+  },
+  "syntheticConsumer": {
+    "consumerId": "npc_city_walk",
+    "sourceProfileId": "synthetic/npc_city_walk",
+    "gameFamilyId": "game_family/synthetic_city_walk",
+    "selectionId": "generator_plan_capability_selection/synthetic_npc_city_walk",
+    "artifacts": [
+      {
+        "artifactId": "goal025/synthetic/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"NPC City Walk\",\r\n    \"description\": \"Synthetic future-consumer fixture for settlement movement anchors.\",\r\n    \"genre\": \"city_walk\",\r\n    \"presentation_mode\": \"map_and_panel_rpg\",\r\n    \"world_topology\": \"finite_settlement\",\r\n    \"actor_model\": \"single_player_character\",\r\n    \"combat_model\": \"none\",\r\n    \"core_loop\": [\r\n      \"walk\",\r\n      \"observe\",\r\n      \"talk\"\r\n    ]\r\n  },\r\n  \"pillars\": [\r\n    \"anti_overfit\",\r\n    \"settlement_entities\"\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/synthetic_npc_city_walk\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal025/synthetic/02-scenes",
+        "artifactKind": "scene_pack_v1",
+        "contentJson": "{\r\n  \"scenes\": [\r\n    {\r\n      \"id\": \"scene/city_square\",\r\n      \"title\": \"City Square\",\r\n      \"description\": \"A square.\",\r\n      \"purpose\": \"Start.\"\r\n    },\r\n    {\r\n      \"id\": \"scene/arcade_walk\",\r\n      \"title\": \"Arcade Walk\",\r\n      \"description\": \"A covered walkway.\",\r\n      \"purpose\": \"Synthetic placement.\"\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/synthetic_npc_city_walk\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal025/synthetic/03-regions",
+        "artifactKind": "region_pack_v1",
+        "contentJson": "{\r\n  \"regions\": [\r\n    {\r\n      \"id\": \"region/city_center\",\r\n      \"title\": \"City Center\",\r\n      \"description\": \"A compact settlement sidecar.\",\r\n      \"scene_ids\": [\r\n        \"scene/city_square\",\r\n        \"scene/arcade_walk\"\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal025/synthetic/04-entities",
+        "artifactKind": "entity_pack_v1",
+        "contentJson": "{\r\n  \"entities\": [\r\n    {\r\n      \"id\": \"entity/city_walker\",\r\n      \"kind\": \"npc\",\r\n      \"title\": \"City Walker\",\r\n      \"scene_id\": \"scene/arcade_walk\",\r\n      \"position\": {\r\n        \"x\": 2,\r\n        \"y\": 3\r\n      },\r\n      \"instance_id\": \"entity/instance/city_walker\"\r\n    },\r\n    {\r\n      \"id\": \"entity/notice_board\",\r\n      \"kind\": \"prop\",\r\n      \"title\": \"Notice Board\",\r\n      \"package_map_id\": \"map/draft/scene/arcade/walk\",\r\n      \"position\": {\r\n        \"x\": 1,\r\n        \"y\": 3\r\n      },\r\n      \"instance_id\": \"entity/instance/notice_board\"\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal025/synthetic/05-npcs",
+        "artifactKind": "npc_pack_v1",
+        "contentJson": "{\r\n  \"npcs\": [\r\n    {\r\n      \"id\": \"npc/courier\",\r\n      \"name\": \"Courier\",\r\n      \"description\": \"Carries messages through the arcade.\",\r\n      \"region_id\": \"region/city_center\",\r\n      \"scene_id\": \"scene/arcade_walk\",\r\n      \"position\": {\r\n        \"x\": 5,\r\n        \"y\": 3\r\n      },\r\n      \"instance_id\": \"entity/instance/courier\"\r\n    }\r\n  ]\r\n}"
+      }
+    ]
+  }
+}

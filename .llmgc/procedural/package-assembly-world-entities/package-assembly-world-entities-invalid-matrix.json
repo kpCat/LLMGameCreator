@@ -1,0 +1,225 @@
+{
+  "scenarioCount": 15,
+  "rejectedCount": 15,
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "blocked_topology_gap_treated_package_supported",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "blocked_topology_gap_treated_package_supported",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.blocked_gap.marked_supported",
+          "target": "world_topology/node_map,world_topology/region_graph",
+          "message": "Blocked topology gaps must remain blocked gaps."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_entity_prototype_id",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "duplicate_entity_prototype_id",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.entity_prototype.duplicate",
+          "target": "entity/duplicate",
+          "message": "Duplicate entity prototype id is rejected by Goal 025 preflight validation."
+        }
+      ]
+    },
+    {
+      "scenarioId": "entity_placement_unknown_map",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "entity_placement_unknown_map",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.placement.map_missing",
+          "target": "map/unknown",
+          "message": "Entity placement references an unknown package map id."
+        }
+      ]
+    },
+    {
+      "scenarioId": "entity_placement_unknown_prototype",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "entity_placement_unknown_prototype",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.placement.prototype_missing",
+          "target": "entity/unknown",
+          "message": "Entity placement references an unknown prototype id."
+        }
+      ]
+    },
+    {
+      "scenarioId": "future_required_region_graph_chunk_gap_treated_implemented",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "future_required_region_graph_chunk_gap_treated_implemented",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.future_required.marked_supported",
+          "target": "region_graph_v1/world.chunk/v1",
+          "message": "Future-required region graph or chunk gaps must not be marked implemented."
+        }
+      ]
+    },
+    {
+      "scenarioId": "goal026_or_s206_started_marker",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "goal026_or_s206_started_marker",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.next_goal.started",
+          "target": "Goal026/S206",
+          "message": "Goal 026 and S206 must not be started."
+        }
+      ]
+    },
+    {
+      "scenarioId": "historical_goal020_024_artifact_mutation",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "historical_goal020_024_artifact_mutation",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.legacy_artifact.forbidden",
+          "target": ".llmgc/procedural/rich-package-assembly-coverage-audit",
+          "message": "Historical Goal 020-024 compact artifacts are read-only for Goal 025."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_accepted_modular_policy_gate",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_accepted_modular_policy_gate",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.previous_gate.missing",
+          "target": "modular_contract_goal_policy_adoption_verification required",
+          "message": "Goal 025 requires the accepted modular policy gate."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal023_generator_input_evidence",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_goal023_generator_input_evidence",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.goal023_generator_inputs.missing",
+          "target": ".llmgc/procedural/capability-bundle-pipeline-inputs",
+          "message": "Goal 023 generator input evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal024_coverage_audit_evidence",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_goal024_coverage_audit_evidence",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.goal024_evidence.missing",
+          "target": ".llmgc/procedural/rich-package-assembly-coverage-audit",
+          "message": "Goal 024 coverage evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "out_of_bounds_map_placement",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "out_of_bounds_map_placement",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.placement.out_of_bounds",
+          "target": "entity/bad_position",
+          "message": "Entity placement must stay inside the 8x8 generated package map bounds."
+        }
+      ]
+    },
+    {
+      "scenarioId": "output_hardcoded_only_to_frontier_caravan",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "output_hardcoded_only_to_frontier_caravan",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.anti_overfit.hardcoded_single_consumer",
+          "target": "frontier/caravan",
+          "message": "Output must not be hardcoded to one consumer shape."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_gamepackage_schema_mutation_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "public_gamepackage_schema_mutation_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.claims.public_schema_mutation",
+          "target": "publicGamePackageSchemaChanged",
+          "message": "Goal 025 must not mutate public GamePackage schema."
+        }
+      ]
+    },
+    {
+      "scenarioId": "synthetic_anti_overfit_fixture_missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "synthetic_anti_overfit_fixture_missing",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.anti_overfit.synthetic_missing",
+          "target": "npc_city_walk",
+          "message": "A second synthetic consumer fixture is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_llm_rag_provider_media_lua_execution_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "unity_llm_rag_provider_media_lua_execution_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_world_entities.claims.external_execution",
+          "target": "llmRagProviderMediaLuaExecuted",
+          "message": "Goal 025 must not claim Unity, LLM, RAG, provider, media or Lua execution."
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "package_world_entities.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios reject through Goal 023/024 evidence, placement validation, anti-overfit checks or scope guard diagnostics."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "goal_025_final_artifact_scope_report_v1",
+  "scenarioId": "goal-025-final",
+  "passed": true,
+  "allowedPathCount": 15,
+  "violationCount": 0,
+  "notes": [
+    "Current compact artifacts are confined to .llmgc/procedural/package-assembly-world-entities/.",
+    "Historical Goal 020-024 artifact families remain read-only.",
+    "Public GamePackage schema, project files, Unity, WinForms UI and generator-library are outside the Goal 025 scope."
+  ]
+}

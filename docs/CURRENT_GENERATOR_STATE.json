@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-28T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Modular contract goal policy adoption verification required",
-    "gate_status":  "modular_contract_goal_policy_adoption_verification",
+    "current_phase_title":  "Package assembly world and entities expansion verification required",
+    "gate_status":  "package_assembly_world_entities_expansion_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_024_rich_package_assembly_coverage_audit",
-    "active_manual_gate":  "Goal 024 rich_package_assembly_coverage_audit_verification was accepted by user prompt. The current bounded process task adopts modular contract goal policy; modular_contract_goal_policy_adoption_verification remains required and not passed until reviewed.",
-    "current_user_action":  "Review README routing cleanup, docs/MODULAR_CONTRACT_GOAL_POLICY.md, docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md, docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md, and the state/queue docs before marking modular_contract_goal_policy_adoption_verification passed. Goal 025 and S199 are not started.",
-    "recommended_next_decision":  "The user confirmed rich_package_assembly_coverage_audit_verification passed before this process task. The task adopts modular contracts, bounded composite goals, rare product vertical gates, feature backlog preservation and a plan-only package assembly campaign pack. Contract / Module / Integration / Proof are internal phases by default, live runtime LLM/RAG is a non-goal, and Goal 025/S199 remain not started. Stop at modular_contract_goal_policy_adoption_verification required; after this gate is accepted, use the campaign pack to prepare Goal 025 plan-only work, not package assembly implementation.",
+    "last_completed_product_slice_id":  "goal_025_package_assembly_expansion_1_world_and_entities",
+    "active_manual_gate":  "The user confirmed modular_contract_goal_policy_adoption_verification passed before Goal 025. Goal 025 package assembly world/entities expansion is produced for review; package_assembly_world_entities_expansion_verification remains required and not passed.",
+    "current_user_action":  "Review Goal 025 world/entity package assembly artifacts, focused tests, product smoke, check-all and artifact scope evidence before marking package_assembly_world_entities_expansion_verification passed. Goal 026 and S206 are not started.",
+    "recommended_next_decision":  "The user confirmed modular_contract_goal_policy_adoption_verification passed before Goal 025. Goal 025 defines docs/PACKAGE_ASSEMBLY_WORLD_ENTITIES_CONTRACT_V1.md, expands bounded world/entity package assembly through the existing GeneratorPlanGamePackageAssembler seam, writes real and synthetic package summaries under .llmgc/procedural/package-assembly-world-entities, preserves future-required and blocked Goal 023/024 gaps, rejects invalid/fake/leak cases, and leaves package_assembly_world_entities_expansion_verification required. Do not start Goal 026 or S206 until this gate is accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "modular_contract_goal_policy_adoption_verification"
+                                                        "package_assembly_world_entities_expansion_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -51,7 +51,8 @@
                            "goal_022_manual_gate":  "development_complexity_stabilization_verification",
                            "goal_023_manual_gate":  "capability_bundle_pipeline_inputs_verification",
                            "goal_024_manual_gate":  "rich_package_assembly_coverage_audit_verification",
-                           "modular_contract_goal_policy_adoption_gate":  "modular_contract_goal_policy_adoption_verification"
+                           "modular_contract_goal_policy_adoption_gate":  "modular_contract_goal_policy_adoption_verification",
+                           "goal_025_manual_gate":  "package_assembly_world_entities_expansion_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -72,17 +73,17 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_024_rich_package_assembly_coverage_audit",
-                                         "title":  "Rich Package Assembly Coverage Audit",
-                                         "status":  "passed_by_user_prompt_before_modular_contract_policy_adoption",
-                                         "summary":  "Goal 024 records the user-confirmed capability_bundle_pipeline_inputs_verification passed gate, completes S192-S198, adds docs/RICH_PACKAGE_ASSEMBLY_COVERAGE_AUDIT_V1.md, a narrow Application-layer rich package assembly coverage audit service under Design/RichPackageAssemblyCoverageAudit, focused tests and the rich-package-assembly-coverage-audit product smoke route. It physically validates Goal 023 compact evidence, audits eight package assembly coverage domains, preserves Goal 023 future-required and blocked gaps instead of marking them package-supported, writes compact coverage matrix, gap report, next-slice plan, invalid matrix, report and verification artifacts under .llmgc/procedural/rich-package-assembly-coverage-audit, rejects invalid/fake/leak audit evidence causally and left rich_package_assembly_coverage_audit_verification required. The user confirmed rich_package_assembly_coverage_audit_verification passed before modular contract policy adoption.",
-                                         "scenario_id":  "rich-package-assembly-coverage-audit",
+                                         "slice_id":  "goal_025_package_assembly_expansion_1_world_and_entities",
+                                         "title":  "Package Assembly Expansion 1 - World And Entities",
+                                         "status":  "required_manual_gate",
+                                         "summary":  "Goal 025 records the user-confirmed modular_contract_goal_policy_adoption_verification passed gate, defines docs/PACKAGE_ASSEMBLY_WORLD_ENTITIES_CONTRACT_V1.md, adds a narrow Application-layer package assembly world/entities acceptance service under Design/PackageAssemblyWorldEntities, minimally expands GeneratorPlanGamePackageAssembler so explicit entity/npc records can create package-safe map placements, writes compact mapping proof, input fixtures, assembly report, package summary, anti-overfit fixture proof, invalid matrix, report and verification artifacts under .llmgc/procedural/package-assembly-world-entities, proves one real consumer and the synthetic npc_city_walk consumer, rejects invalid/fake/leak scenarios causally, adds the package-assembly-world-entities product smoke route, and leaves package_assembly_world_entities_expansion_verification required. Goal 026 and S206 are not started.",
+                                         "scenario_id":  "package-assembly-world-entities",
                                          "checks":  [
-                                                        "RichPackageAssemblyCoverageAudit/CurrentGeneratorStateDocs focused filter: 22/22 passed",
-                                                        "rich-package-assembly-coverage-audit product smoke: 1/1 passed",
-                                                        "check-all.ps1: 820/820 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
-                                                        "goal-024-final artifact scope guard: 15/15 changed paths allowed, 0 violations",
-                                                        "Goal 024 coverage matrix hash 5dd1beaf62f8bbfaa46f68cbf65971e0331562ce9c30efcfaeb806444c877d8f, gap report hash 57091cac2ebaf801546a66c48f483f44e0e1071700446ec093b16b165b9bd99b, next-slice plan hash 08fe38f98af82af7518c93ed516a9093515afd6aae742c1e87fa130969cf461c, invalid matrix hash 0d40ff9547107d7ff90ef797ad22d5f93ae5e51fdfe4ed31f344ef322c997d04, deterministic report hash 165cfe779881593b77812bc7d8542c6894bd7f75cb206f0900e0600140566253, coverage domains 8, gaps 48, future-required gaps 45, blocked gaps 2, unsupported gaps 1, invalid scenarios 16"
+                                                        "PackageAssemblyWorldEntities/CurrentGeneratorStateDocs focused filter: 18/18 passed",
+                                                        "package-assembly-world-entities product smoke: 1/1 passed",
+                                                        "check-all.ps1: build phase reached 0 warnings / 0 errors, but ordinary test phase did not complete before two tool timeouts; no pass is claimed",
+                                                        "goal-025-final artifact scope guard: 12/12 changed paths allowed, 0 violations",
+                                                        "Goal 025 mapping contract proof hash 0981280c5c4301713c09f75cec160593ee98a24fbc838411236369f124f47ec9, input fixtures hash 8079c5a8218849624edd02969b0b4afd8efc0478b9e7625ff2b95224d8845ba4, assembly report hash b0313363f90e21509fea707fd6ac40ec4aa8d0fd5fca55be386b7c4e4f0aa261, package summary hash f7eef6a85be0672b74af4bb8ed54ac0b165b1f646e490646e4ab68178fb56613, anti-overfit hash 02111e6ca9a773c921c128a398975fc5e7769fcac35b2f67465021915b6fb10a, invalid matrix hash b2affba691f2fa0f27c75903d4973e3b6e74f9f3547d255c596b0d6750e3b47f, deterministic report hash 55f103af63f4dae735b11ca131684477f1e50b1d77e7dcca92879697dcbdef9b, invalid scenarios 15, real and synthetic consumers passed"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -342,7 +343,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "modular_contract_goal_policy_adoption_verification"
+                                          "package_assembly_world_entities_expansion_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -363,19 +364,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "modular_contract_goal_policy_adoption_verification",
-    "recommended_next_work_item_title":  "Modular contract goal policy adoption verification review.",
-    "recommended_next_task_file":  "docs/PROCESS_TASK_MODULAR_CONTRACT_GOAL_POLICY_ADOPTION.md",
+    "recommended_next_work_item":  "package_assembly_world_entities_expansion_verification",
+    "recommended_next_work_item_title":  "Package assembly world/entities expansion verification review.",
+    "recommended_next_task_file":  "docs/GOAL_025_PACKAGE_ASSEMBLY_EXPANSION_1_WORLD_AND_ENTITIES.md",
     "candidate_product_vertical_slices":  [
-                                               "Package Assembly Campaign Pack / Goal 025 plan-only after modular policy adoption acceptance",
-                                               "Package Assembly Expansion 1 - World And Entities only after a later explicit implementation task"
+                                               "Goal 025 package assembly world/entities expansion review",
+                                               "Goal 026 package assembly dialogue/quests only after Goal 025 gate acceptance"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_025_PACKAGE_ASSEMBLY_EXPANSION_1_WORLD_AND_ENTITIES.md",
+                                                   "docs/PACKAGE_ASSEMBLY_WORLD_ENTITIES_CONTRACT_V1.md",
                                                    "docs/MODULAR_CONTRACT_GOAL_POLICY.md",
-                                                   "docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md",
                                                    "docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md",
                                                    "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                                   "docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md",
@@ -445,9 +447,10 @@
                              "Unity generated runtime state loop acceptance sidecars and command/state transition evidence",
                              "Unity generated quest completion loop plan/state/report sidecars and ordered objective/reward player evidence",
                              "Unity multi-variant playable scenario variants/report sidecars and per-variant quest completion player evidence",
-                             "Unity Alpha readable presentation model/report sidecars and required panel/readable-label player evidence"
+                             "Unity Alpha readable presentation model/report sidecars and required panel/readable-label player evidence",
+                             "Package assembly world/entities mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after modular contract goal policy adoption stop at modular_contract_goal_policy_adoption_verification required and do not start Goal 025, S199 or package assembly expansion without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 025 stop at package_assembly_world_entities_expansion_verification required and do not start Goal 026 or S206 without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -884,7 +887,7 @@
                                                               "next_action":  "modular_contract_goal_policy_adoption"
                                                           },
     "modular_contract_goal_policy_adoption_verification":  {
-                                                              "status":  "required",
+                                                              "status":  "passed_by_user_prompt_before_goal_025",
                                                               "evidence_source":  "process_task_modular_contract_goal_policy_adoption",
                                                               "observed_result":  [
                                                                                       "README is a stable overview and routes current state to AGENTS.md, CONTEXT_INDEX, CURRENT_GENERATOR_STATE.*, and FULL_GENERATOR_GOAL_QUEUE",
@@ -892,10 +895,27 @@
                                                                                       "Live runtime LLM/RAG is recorded as a non-goal; runtime consumes compiled validated data, semantic catalogs, rules, seeds and grammars",
                                                                                       "docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md preserves wanted capabilities without making them active implementation work",
                                                                                       "docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md plans the next 3-5 package assembly goals as bounded composite goals",
-                                                                                      "Goal 025 and S199 are not started",
+                                                                                      "The user confirmed modular_contract_goal_policy_adoption_verification passed before Goal 025",
                                                                                       "No production code, public GamePackage schema, runtime, Unity, WinForms UI, provider/media/RAG/LLM/Lua integration or historical accepted artifacts are changed"
                                                                                   ],
-                                                              "next_action":  "review_modular_contract_goal_policy_adoption_before_marking_gate_passed"
+                                                              "next_action":  "goal_025_package_assembly_expansion_1_world_and_entities"
+                                                          },
+    "package_assembly_world_entities_expansion_verification":  {
+                                                                  "status":  "required",
+                                                                  "evidence_source":  "goal_025_package_assembly_expansion_1_world_and_entities",
+                                                                  "observed_result":  [
+                                                                                          "docs/PACKAGE_ASSEMBLY_WORLD_ENTITIES_CONTRACT_V1.md defines the Goal 025 world/entity mapping contract",
+                                                                                          "Goal 023 generator inputs and Goal 024 coverage evidence are physically validated",
+                                                                                          "entity_pack_v1 maps package-safe prototypes and placements through existing GamePackage schema",
+                                                                                          "npc_pack_v1 preserves generated NPC sidecars and maps package-safe placements when explicit fields exist",
+                                                                                          "Real consumer and synthetic npc_city_walk consumer both produce deterministic package summaries",
+                                                                                          "Future-required and blocked region graph/chunk/topology gaps remain explicit gaps",
+                                                                                          "Invalid/fake/leak matrix rejects 15 scenarios",
+                                                                                          "Product smoke route is package-assembly-world-entities",
+                                                                                          "Final report accepted=false and manualGate=package_assembly_world_entities_expansion_verification",
+                                                                                          "Goal 026 and S206 are not started"
+                                                                                      ],
+                                                                  "next_action":  "review_package_assembly_world_entities_expansion_before_marking_gate_passed"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

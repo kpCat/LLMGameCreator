@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "package_assembly_world_entities_assembly_report_v1",
+  "productSmokeRoute": "package-assembly-world-entities",
+  "consumers": [
+    {
+      "consumerId": "goal025_real_consumer_trade_caravan",
+      "sourceProfileId": "game_profile/trade-caravan-social-economy-alpha",
+      "gameFamilyId": "game_family/trade_caravan",
+      "selectionId": "generator_plan_capability_selection/533fea9ea62f723f",
+      "passed": true,
+      "primaryMapId": "map/draft/scene/market/gate",
+      "primaryEntityPrototypeId": "entity/caravan/master",
+      "mapCount": 2,
+      "entityPrototypeCount": 4,
+      "mapPlacementCount": 3,
+      "generatedRegionCount": 1,
+      "generatedNpcCount": 1,
+      "appliedArtifactCount": 5,
+      "preservedArtifactCount": 0,
+      "validationIssueCount": 0,
+      "packageHash": "415886db473d267eac2cee478441b1cf7ef7d3fc3aa19ccea3aa0cbcb639ebfb",
+      "mappingTargets": [
+        "game.entity_prototypes",
+        "game.maps",
+        "generatedContent.npcs",
+        "generatedContent.regions",
+        "manifest"
+      ],
+      "diagnostics": []
+    },
+    {
+      "consumerId": "npc_city_walk",
+      "sourceProfileId": "synthetic/npc_city_walk",
+      "gameFamilyId": "game_family/synthetic_city_walk",
+      "selectionId": "generator_plan_capability_selection/synthetic_npc_city_walk",
+      "passed": true,
+      "primaryMapId": "map/draft/scene/arcade/walk",
+      "primaryEntityPrototypeId": "entity/city/walker",
+      "mapCount": 2,
+      "entityPrototypeCount": 4,
+      "mapPlacementCount": 3,
+      "generatedRegionCount": 1,
+      "generatedNpcCount": 1,
+      "appliedArtifactCount": 5,
+      "preservedArtifactCount": 0,
+      "validationIssueCount": 0,
+      "packageHash": "aceaf625e33d6ddcfb034596dd0c621a0528f888b1c7078e33e3c9da498379d3",
+      "mappingTargets": [
+        "game.entity_prototypes",
+        "game.maps",
+        "generatedContent.npcs",
+        "generatedContent.regions",
+        "manifest"
+      ],
+      "diagnostics": []
+    }
+  ],
+  "diagnostics": []
+}

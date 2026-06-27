@@ -377,6 +377,8 @@ public sealed class GeneratorPlanGamePackageAssembler
                     }
                 ]
             });
+
+            TryMapEntityPlacement(package, entity, id, sourceId, "entity");
             index++;
         }
     }
@@ -421,6 +423,24 @@ public sealed class GeneratorPlanGamePackageAssembler
             };
             package.GeneratedContent.Npcs.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
             package.GeneratedContent.Npcs.Add(mapped);
+
+            var kind = FirstNonEmpty(GetString(npc, "kind"), "npc");
+            var title = FirstNonEmpty(GetString(npc, "title"), mapped.Name);
+            var prototypeId = NormalizeEntityPrototypeId(FirstNonEmpty(GetString(npc, "entity_id"), mapped.SourceId), kind, package.Game.EntityPrototypes.Count);
+            if (HasPlacementFields(npc) && package.Game.EntityPrototypes.All(candidate => !string.Equals(candidate.Id, prototypeId, StringComparison.OrdinalIgnoreCase)))
+            {
+                package.Game.EntityPrototypes.Add(new EntityPrototypeDefinition
+                {
+                    Id = prototypeId,
+                    Name = string.IsNullOrWhiteSpace(title) ? ToTitle(kind) : title.Trim(),
+                    Components =
+                    [
+                        new ComponentDefinition { Type = NormalizeIdSegment(kind) }
+                    ]
+                });
+            }
+
+            TryMapEntityPlacement(package, npc, prototypeId, mapped.SourceId, "npc");
         }
     }
 
@@ -722,6 +742,132 @@ public sealed class GeneratorPlanGamePackageAssembler
             Result = result,
             Target = target
         };
+    }
+
+    private static void TryMapEntityPlacement(
+        GamePackageDefinition package,
+        JsonElement record,
+        string defaultPrototypeId,
+        string sourceId,
+        string fallbackKind)
+    {
+        if (!HasPlacementFields(record))
+        {
+            return;
+        }
+
+        var mapId = ResolvePackageMapId(package, record);
+        if (string.IsNullOrWhiteSpace(mapId))
+        {
+            return;
+        }
+
+        var map = package.Game.Maps.FirstOrDefault(candidate => string.Equals(candidate.Id, mapId, StringComparison.OrdinalIgnoreCase));
+        if (map == null)
+        {
+            return;
+        }
+
+        if (!TryReadPosition(record, out var x, out var y))
+        {
+            return;
+        }
+
+        if (x < 0 || y < 0 || x >= map.Width || y >= map.Height)
+        {
+            return;
+        }
+
+        var prototypeId = FirstNonEmpty(GetString(record, "prototype_id"), GetString(record, "prototypeId"), defaultPrototypeId);
+        if (package.Game.EntityPrototypes.All(candidate => !string.Equals(candidate.Id, prototypeId, StringComparison.OrdinalIgnoreCase)))
+        {
+            return;
+        }
+
+        var instanceId = FirstNonEmpty(GetString(record, "instance_id"), GetString(record, "instanceId"));
+        if (string.IsNullOrWhiteSpace(instanceId))
+        {
+            instanceId = "entity/instance/" + NormalizeIdSegment(FirstNonEmpty(sourceId, fallbackKind, map.Entities.Count.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+        }
+
+        if (map.Entities.Any(candidate => string.Equals(candidate.Id, instanceId, StringComparison.OrdinalIgnoreCase)))
+        {
+            return;
+        }
+
+        map.Entities.Add(new EntityInstanceDefinition
+        {
+            Id = instanceId,
+            PrototypeId = prototypeId,
+            Position = new Position2D(x, y)
+        });
+    }
+
+    private static bool HasPlacementFields(JsonElement record) =>
+        TryGetProperty(record, "position", out _)
+        || TryGetProperty(record, "map_position", out _)
+        || TryGetProperty(record, "x", out _)
+        || TryGetProperty(record, "map_id", out _)
+        || TryGetProperty(record, "package_map_id", out _)
+        || TryGetProperty(record, "packageMapId", out _)
+        || TryGetProperty(record, "scene_id", out _);
+
+    private static string ResolvePackageMapId(GamePackageDefinition package, JsonElement record)
+    {
+        var mapId = FirstNonEmpty(GetString(record, "package_map_id"), GetString(record, "packageMapId"), GetString(record, "map_id"), GetString(record, "mapId"));
+        if (!string.IsNullOrWhiteSpace(mapId))
+        {
+            return mapId.Trim();
+        }
+
+        var sceneId = FirstNonEmpty(GetString(record, "scene_id"), GetString(record, "sceneId"));
+        if (string.IsNullOrWhiteSpace(sceneId))
+        {
+            return string.Empty;
+        }
+
+        return package.GeneratedContent.Scenes
+            .FirstOrDefault(scene => string.Equals(scene.SourceId, sceneId, StringComparison.OrdinalIgnoreCase))
+            ?.PackageMapId ?? string.Empty;
+    }
+
+    private static bool TryReadPosition(JsonElement record, out int x, out int y)
+    {
+        if (TryGetProperty(record, "position", out var position) && TryReadPositionObject(position, out x, out y))
+        {
+            return true;
+        }
+
+        if (TryGetProperty(record, "map_position", out var mapPosition) && TryReadPositionObject(mapPosition, out x, out y))
+        {
+            return true;
+        }
+
+        x = TryGetProperty(record, "x", out var xElement) && xElement.ValueKind == JsonValueKind.Number ? xElement.GetInt32() : -1;
+        y = TryGetProperty(record, "y", out var yElement) && yElement.ValueKind == JsonValueKind.Number ? yElement.GetInt32() : -1;
+        return x >= 0 && y >= 0;
+    }
+
+    private static bool TryReadPositionObject(JsonElement position, out int x, out int y)
+    {
+        if (position.ValueKind == JsonValueKind.Object)
+        {
+            x = TryGetProperty(position, "x", out var xElement) && xElement.ValueKind == JsonValueKind.Number ? xElement.GetInt32() : -1;
+            y = TryGetProperty(position, "y", out var yElement) && yElement.ValueKind == JsonValueKind.Number ? yElement.GetInt32() : -1;
+            return x >= 0 && y >= 0;
+        }
+
+        if (position.ValueKind == JsonValueKind.Array && position.GetArrayLength() >= 2)
+        {
+            var values = position.EnumerateArray().Take(2).ToArray();
+            x = values[0].ValueKind == JsonValueKind.Number ? values[0].GetInt32() : -1;
+            y = values[1].ValueKind == JsonValueKind.Number ? values[1].GetInt32() : -1;
+            return x >= 0 && y >= 0;
+        }
+
+        x = -1;
+        y = -1;
+        return false;
     }
 
     private static string NormalizeEntityPrototypeId(string sourceId, string kind, int index)

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "package_assembly_world_entities_mapping_contract_proof_v1",
+  "previousAcceptedGate": "modular_contract_goal_policy_adoption_verification passed",
+  "acceptedInputs": [
+    "Goal 023 generator pipeline inputs",
+    "Goal 024 coverage matrix",
+    "Goal 024 gap report",
+    "Goal 024 next-slice plan",
+    "scene_pack_v1",
+    "region_pack_v1",
+    "entity_pack_v1",
+    "npc_pack_v1"
+  ],
+  "existingPackageTargets": [
+    "GamePackageDefinition.Game.Maps",
+    "MapDefinition.Entities",
+    "GamePackageDefinition.Game.EntityPrototypes",
+    "GamePackageDefinition.GeneratedContent.Scenes",
+    "GamePackageDefinition.GeneratedContent.Regions",
+    "GamePackageDefinition.GeneratedContent.Npcs",
+    "GeneratedContent.AppliedArtifacts",
+    "GeneratedContent.PreservedArtifacts"
+  ],
+  "outputStatuses": [
+    "mapped_package_field",
+    "mapped_generated_content",
+    "preserved_sidecar",
+    "future_required",
+    "blocked_gap",
+    "rejected_invalid"
+  ],
+  "mappingResults": [
+    {
+      "sourceContractId": "scene_pack_v1",
+      "status": "mapped_package_field",
+      "target": "GamePackageDefinition.Game.Maps and GeneratedContent.Scenes"
+    },
+    {
+      "sourceContractId": "entity_pack_v1",
+      "status": "mapped_package_field",
+      "target": "GameDefinition.EntityPrototypes and MapDefinition.Entities"
+    },
+    {
+      "sourceContractId": "npc_pack_v1",
+      "status": "mapped_generated_content",
+      "target": "GeneratedContent.Npcs plus package-safe entity prototype/placement when explicit fields are present"
+    },
+    {
+      "sourceContractId": "region_pack_v1",
+      "status": "mapped_generated_content",
+      "target": "GeneratedContent.Regions"
+    },
+    {
+      "sourceContractId": "region_graph_v1",
+      "status": "future_required",
+      "target": "region_graph_v1,world.region/v1,world_topology/region_graph"
+    },
+    {
+      "sourceContractId": "world_topology/region_graph",
+      "status": "blocked_gap",
+      "target": "world_topology/node_map,world_topology/region_graph"
+    }
+  ],
+  "realConsumerId": "goal025_real_consumer_trade_caravan",
+  "syntheticConsumerId": "npc_city_walk",
+  "realConsumerPassed": true,
+  "syntheticConsumerPassed": true,
+  "nonGoals": [
+    "no public GamePackage schema changes",
+    "no Unity runtime proof",
+    "no dialogue/item/combat expansion",
+    "no live runtime LLM/RAG/provider/media/Lua"
+  ]
+}
