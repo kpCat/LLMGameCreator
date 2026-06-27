@@ -168,7 +168,7 @@ Goal 021 stops at `generated_game_profile_contract_verification` required, not p
 
 Recorded checks from Goal 021 implementation:
 
-- `GameProfile` focused tests: 15/15 passed.
+- `GameProfile` / `CurrentGeneratorStateDocs` focused filter: 25/25 passed.
 - `generated-game-profile-contract` product smoke: 1/1 passed.
 - `check-all.ps1`: 856/856 tests passed, build 0 warnings / 0 errors.
 - Goal 021 physically validates accepted Goal 020 compact report/manifest evidence.

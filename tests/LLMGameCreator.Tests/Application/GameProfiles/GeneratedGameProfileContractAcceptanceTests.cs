@@ -179,18 +179,28 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
     [Fact]
     public void EmptyRequiredProfileFieldsRejectThroughValidation()
     {
-        using var missingTarget = CreateProfileDirectoryWithMutation(profile => profile with { TargetExperience = string.Empty });
-        using var missingProgression = CreateProfileDirectoryWithMutation(profile => profile with { ProgressionScope = string.Empty });
         var repoRoot = FindRepoRoot();
         var service = new GeneratedGameProfileContractAcceptanceService();
+        var cases = new (Func<GeneratedGameProfile, GeneratedGameProfile> Mutate, string ExpectedCode)[]
+        {
+            (profile => profile with { TargetExperience = string.Empty }, "game_profile.target_experience.missing"),
+            (profile => profile with { ProgressionScope = string.Empty }, "game_profile.progression_scope.missing"),
+            (profile => profile with { ContentScale = profile.ContentScale with { Target = string.Empty } }, "game_profile.content_scale.target_missing"),
+            (profile => profile with { AssetPolicy = profile.AssetPolicy with { Mode = string.Empty } }, "game_profile.asset_policy.mode_missing"),
+            (profile => profile with { AssetPolicy = profile.AssetPolicy with { FallbackPolicy = string.Empty } }, "game_profile.asset_policy.fallback_missing"),
+            (profile => profile with { SelectedCapabilityIds = [] }, "game_profile.capability.selected_missing"),
+            (profile => profile with { ExpectedDownstreamPipelineSlices = [] }, "game_profile.pipeline.required_stages_empty"),
+            (profile => profile with { ExpectedDownstreamPipelineSlices = profile.ExpectedDownstreamPipelineSlices.Where(stage => stage != "stage/minimum_playable_generated_game_goal_020").ToList() }, "game_profile.pipeline.required_stage_missing")
+        };
 
-        var targetResult = service.BuildFromProfileDirectory(missingTarget.Path, repoRoot, OptionsWithGoal020Evidence(repoRoot));
-        var progressionResult = service.BuildFromProfileDirectory(missingProgression.Path, repoRoot, OptionsWithGoal020Evidence(repoRoot));
+        foreach (var testCase in cases)
+        {
+            using var profileDirectory = CreateProfileDirectoryWithMutation(testCase.Mutate);
+            var result = service.BuildFromProfileDirectory(profileDirectory.Path, repoRoot, OptionsWithGoal020Evidence(repoRoot));
 
-        Assert.False(targetResult.Report.ContractProofPassed);
-        Assert.Contains(targetResult.Report.Diagnostics, item => item.Code == "game_profile.target_experience.missing");
-        Assert.False(progressionResult.Report.ContractProofPassed);
-        Assert.Contains(progressionResult.Report.Diagnostics, item => item.Code == "game_profile.progression_scope.missing");
+            Assert.False(result.Report.ContractProofPassed);
+            Assert.Contains(result.Report.Diagnostics, item => item.Code == testCase.ExpectedCode);
+        }
     }
 
     [Fact]
