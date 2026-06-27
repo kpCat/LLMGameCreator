@@ -79,23 +79,7 @@ public sealed class MinimumPlayableGeneratedGameAcceptanceService
         var previousEvidence = ValidateGoal019Evidence(repositoryRoot);
         diagnostics.AddRange(previousEvidence.Diagnostics);
 
-        var readableService = new UnityAlphaReadablePresentationAcceptanceService();
-        var readableResult = readableService.BuildFromAcceptedEvidence(
-            projectRoot,
-            contentGenerationResult,
-            minimumAssetResult,
-            new UnityAlphaReadablePresentationOptions
-            {
-                RepositoryRootPath = repositoryRoot,
-                ExecuteUnityBuild = false,
-                LaunchBuiltPlayer = false,
-                PreserveExistingBuildOutputForValidation = settings.PreserveExistingBuildOutputForValidation,
-                CleanupUnityWorkProject = settings.CleanupUnityWorkProject,
-                UnityBuildTimeoutSeconds = settings.UnityBuildTimeoutSeconds,
-                PlayerLaunchTimeoutSeconds = settings.PlayerLaunchTimeoutSeconds
-            });
-
-        var selected = BuildSelectedScenario(readableResult.Report, previousEvidence);
+        var selected = BuildSelectedScenario(previousEvidence.ReadableReport, previousEvidence);
         diagnostics.AddRange(selected.Diagnostics);
 
         var alphaBuild = ResolveAlphaBuild(projectRoot, repositoryRoot, contentGenerationResult, minimumAssetResult, selected, settings);
@@ -155,7 +139,7 @@ public sealed class MinimumPlayableGeneratedGameAcceptanceService
             ManifestHash = ComputeHash(JsonSerializer.Serialize(manifestWithoutHash, JsonOptions))
         };
 
-        var invalidMatrix = BuildInvalidMatrix(selected, alphaBuild, copy, textFiles, reviewSmoke, readableResult.Report);
+        var invalidMatrix = BuildInvalidMatrix(selected, alphaBuild, copy, textFiles, reviewSmoke);
         diagnostics.AddRange(invalidMatrix.Diagnostics);
 
         var minimumPlayableVerified =
@@ -672,8 +656,7 @@ public sealed class MinimumPlayableGeneratedGameAcceptanceService
         MinimumPlayableAlphaBuildProof alphaBuild,
         MinimumPlayableCopyProof copy,
         MinimumPlayableTextFileProof textFiles,
-        MinimumPlayableReviewSmokeProof smoke,
-        UnityAlphaReadablePresentationReport readableReport)
+        MinimumPlayableReviewSmokeProof smoke)
     {
         var scenarios = new List<MinimumPlayableInvalidScenario>
         {

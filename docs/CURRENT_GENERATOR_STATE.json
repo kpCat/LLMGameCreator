@@ -73,10 +73,10 @@
                                          "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, adds a narrow Application-layer MinimumPlayableGame acceptance service, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a review-ready runnable Windows player folder under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, keeps readable presentation and multi-variant evidence verified, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. The active manual gate is minimum_playable_generated_game_verification required.",
                                          "scenario_id":  "minimum-playable-generated-game",
                                          "checks":  [
-                                                        "MinimumPlayableGame focused tests: 9/9 passed",
+                                                        "MinimumPlayableGame focused tests: 10/10 passed",
                                                         "minimum-playable-generated-game product smoke: 1/1 passed",
-                                                        "check-all.ps1: 843/843 tests passed, build 0 warnings / 0 errors",
-                                                        "Goal 020 manifest hash de81cb001184078d0ce06bd1d29b925576b48f063ba10881b4593942df5e6551, review package hash ba4cd31e805476ef67c53b044b7cb1f2487fdf690eec2cde30fc28da6c724be7, deterministic report hash eab5487cb13073bba82e7c55ecb4ea7e11016821e89e88dc6b33ec50c77fee28, selected frontier_survival package game/content_generation/frontier-survival, quest quest/frontier-survival/c2ed6dc235/000, reward item/frontier-survival/7f81222990/004, invalid scenarios 25"
+                                                        "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
+                                                        "Goal 020 manifest hash e77c782c1ab3355e249e986c61eab11a8ebfdf64d39e511d654af666b7068d38, review package hash d94ab05371be0a389c836a85202fc5a9bff7f326674cce44cb0a3af8919c5c8f, deterministic report hash c774671bcfd394982d8a34b95695d6efe436761c46fe5bb72ee79ad67ba23693, selected frontier_survival package game/content_generation/frontier-survival, quest quest/frontier-survival/c2ed6dc235/000, reward item/frontier-survival/7f81222990/004, invalid scenarios 25"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -718,10 +718,10 @@
                                                     "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, completes S162-S169, adds a narrow Application-layer MinimumPlayableGame acceptance service, selects the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a runnable review package under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S170/Goal 021 are not started.",
                                                     "scenario_id":  "minimum-playable-generated-game",
                                                     "checks":  [
-                                                                   "MinimumPlayableGame focused tests: 9/9 passed",
+                                                                   "MinimumPlayableGame focused tests: 10/10 passed",
                                                                    "minimum-playable-generated-game product smoke: 1/1 passed",
-                                                                   "check-all.ps1: 843/843 tests passed, build 0 warnings / 0 errors",
-                                                                   "Goal 020 manifest hash de81cb001184078d0ce06bd1d29b925576b48f063ba10881b4593942df5e6551, review package hash ba4cd31e805476ef67c53b044b7cb1f2487fdf690eec2cde30fc28da6c724be7, deterministic report hash eab5487cb13073bba82e7c55ecb4ea7e11016821e89e88dc6b33ec50c77fee28, invalid scenarios 25"
+                                                                   "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
+                                                                   "Goal 020 manifest hash e77c782c1ab3355e249e986c61eab11a8ebfdf64d39e511d654af666b7068d38, review package hash d94ab05371be0a389c836a85202fc5a9bff7f326674cce44cb0a3af8919c5c8f, deterministic report hash c774671bcfd394982d8a34b95695d6efe436761c46fe5bb72ee79ad67ba23693, invalid scenarios 25"
                                                                ]
                                                 },
     "goal_012_unity_runtime_export_vertical_slice":  {

@@ -137,6 +137,33 @@ public sealed class MinimumPlayableGeneratedGameAcceptanceTests
     }
 
     [Fact]
+    public void ValidGeneratedReviewPackageHasNoTopLevelErrorDiagnostics()
+    {
+        using var temp = new TempDirectory();
+        var repoRoot = FindRepoRoot();
+        var (content, assets) = BuildInputs(repoRoot, temp.Path);
+
+        var result = new MinimumPlayableGeneratedGameAcceptanceService()
+            .BuildFromAcceptedEvidence(temp.Path, content, assets, new MinimumPlayableGeneratedGameOptions { RepositoryRootPath = repoRoot });
+
+        Assert.True(result.Report.ReviewPackageVerified, string.Join(Environment.NewLine, result.Report.Diagnostics.Select(item => $"{item.Severity}:{item.Code}")));
+        Assert.True(result.Report.AutomatedLaunchVerified);
+        Assert.True(result.Report.AutomatedQuestCompletionVerified);
+        Assert.True(result.Report.ReadablePresentationVerified);
+        Assert.True(result.Report.MinimumPlayableGeneratedGameVerified, string.Join(Environment.NewLine, result.Report.Diagnostics.Select(item => $"{item.Severity}:{item.Code}")));
+        Assert.DoesNotContain(result.Report.Diagnostics, item => item.Severity == "error");
+        Assert.DoesNotContain(result.Report.Diagnostics, item => item.Code == "minimum_playable_game.readable.not_verified");
+        Assert.DoesNotContain(result.Report.Diagnostics, item => item.Code == "minimum_playable_game.previous.report_missing");
+
+        Assert.Contains(result.Report.InvalidMatrix.Scenarios, item =>
+            item.ScenarioId == "missing_readable_presentation_report_artifact" &&
+            item.Diagnostics.Any(diagnostic => diagnostic.Code == "minimum_playable_game.previous.report_missing"));
+        Assert.Contains(result.Report.InvalidMatrix.Scenarios, item =>
+            item.ScenarioId == "readable_presentation_claim_without_goal019_proof" &&
+            item.Diagnostics.Any(diagnostic => diagnostic.Code == "minimum_playable_game.previous.readable_not_verified"));
+    }
+
+    [Fact]
     public void ManualChecklistIsNotPreMarkedPassed()
     {
         using var temp = new TempDirectory();
