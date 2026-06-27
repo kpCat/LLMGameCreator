@@ -2,116 +2,128 @@
 
 `LLMGameCreator` — WinForms-редактор и генератор `GamePackage` для data-driven игр.
 
-Проект предназначен не для генерации готовой игры одним prompt-ом, а для поэтапного создания, проверки и исполнения структурированного игрового пакета.
+Проект предназначен не для генерации готовой игры одним prompt-ом, а для поэтапного создания, проверки, сборки и исполнения структурированного игрового пакета.
 
-Главная идея:
+## Главная идея
 
-* LLM используется только в editor/generation pipeline;
-* готовая игра описывается через `GamePackage`;
-* runtime/player исполняет `GamePackage` без LLM;
-* игровая логика должна быть data-driven и проверяемой;
-* генерация больших игр должна дробиться на отдельные jobs/context packs, а не зависеть от размера LLM context.
+- LLM используется только в editor/generation pipeline.
+- Готовая игра описывается через `GamePackage`.
+- Runtime/player исполняет `GamePackage` без LLM.
+- Игровая логика должна быть data-driven и проверяемой.
+- Генерация больших игр должна дробиться на отдельные generation jobs/context packs, а не зависеть от размера LLM context.
+- Большой мир должен строиться через seed/rules/chunks/semantic packs/rule packs, а не через огромный prompt или огромный JSON-dump.
 
-## Текущий статус
+## Что является source of truth
 
-Проект находится на ранней стадии, но уже содержит рабочий вертикальный срез редактора, пакета, runtime, validation и тестов.
+`GamePackage` — runtime source of truth для готовой игры.
 
-Включено:
+Он описывает игровые данные и контракты, которые должен загрузить runtime/player:
 
-* WinForms editor shell;
-* отдельные `UserControl`-страницы;
-* DryIoc composition root;
-* GamePackage contract;
-* Domain-модели для карты, сущностей, ассетов, Lua-скриптов, диалогов, способностей, квестов, систем и runtime-состояний;
-* JSON storage для `package.json` и настроек;
-* application services для текущего проекта, пакета и validation;
-* editor-side OpenAI-compatible / LM Studio chat client;
-* asset pipeline abstractions;
-* generation pipeline models;
-* headless runtime services;
-* runtime commands для movement, interaction, inventory, resources, crafting, loot, transactions, equipment, containers, harvesting, encounters, quests, dialogues and factions;
-* WinForms Runtime Preview для быстрой отладки;
-* WinForms Runtime Simulator для расширенной проверки runtime-команд;
-* Runtime snapshot serialization/store для debug/simulator сценариев;
-* Lua scripting abstractions;
-* prototype Lua executor/sandbox;
-* generator library registry metadata/import workflow;
-* sample `samples/minimal-map-game`;
-* smoke/contract/validator/runtime tests.
+- JSON definitions;
+- maps/chunks;
+- entities/components;
+- systems;
+- dialogues;
+- quests;
+- abilities;
+- interactions;
+- items/resources;
+- asset catalog;
+- Lua script metadata;
+- validation reports;
+- generation history.
 
-## Что принципиально не делает runtime
+Документация, workflow profiles, context indexes и generation notes являются authoring references. Они помогают редактору и агентам, но не должны становиться runtime source of truth.
+
+## Актуальное состояние проекта
+
+README является обзором проекта, а не handoff-документом активного goal-а.
+
+Актуальные active gate, recommended next work и source-of-truth routing находятся в:
+
+- `AGENTS.md`
+- `docs/CONTEXT_INDEX.md`
+- `docs/CURRENT_GENERATOR_STATE.md`
+- `docs/CURRENT_GENERATOR_STATE.json`
+- `docs/FULL_GENERATOR_GOAL_QUEUE.md`
+
+Перед любой generator/Codex задачей нужно читать:
+
+1. `AGENTS.md`
+2. `docs/CONTEXT_INDEX.md`
+3. `docs/CURRENT_GENERATOR_STATE.md` или `docs/CURRENT_GENERATOR_STATE.json`
+4. task-specific документы, названные в текущем state/context routing
+
+README не должен дублировать active goal, manual gate или next practical step, потому что эти данные меняются после каждого принятого goal.
+
+## Архитектурные границы
 
 Runtime не должен:
 
-* вызывать LLM;
-* вызывать ComfyUI/Fooocus;
-* генерировать ассеты;
-* зависеть от WinForms UI;
-* быть editor pipeline;
-* исполнять произвольный LLM-generated код без validation/apply workflow.
+- вызывать LLM;
+- вызывать RAG;
+- вызывать ComfyUI/Fooocus или другие media providers;
+- генерировать ассеты;
+- зависеть от WinForms UI;
+- быть editor pipeline;
+- исполнять произвольный LLM-generated код без validation/apply workflow.
 
 Runtime должен оставаться headless и command/event driven.
 
 `Runtime Preview` и `Runtime Simulator` являются debug/editor frontend-ами. Они могут использовать runtime abstractions для проверки поведения, но не являются финальным player-ом готовой игры.
 
-## GamePackage
+## Слои решения
 
-## Current generator workflow
+```text
+Domain
+  Чистые модели и value objects.
 
-Current source-of-truth handoff:
-- docs/CURRENT_GENERATOR_STATE.md
-- docs/CONTEXT_INDEX.md
-- docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md
-- docs/ARCHITECTURE_STRATEGY_AND_BOUNDARIES.md
-- docs/SEMANTIC_PACK_AND_RAG_STRATEGY.md
-- docs/OPEN_DESIGN_QUESTIONS.md
+GamePackage
+  DTO/контракты пакета игры, совместимые с будущим player/export layer.
 
-Current phase:
-Goal 003 completed the automated verification and extension spine after Goal 002 manual configurable verification was reported as passed. Headless acceptance now writes deterministic extension-spine artifacts under `.llmgc/procedural/extension-spine/`, preserving the existing Formula/Effect/Action Registry Foundation, Tiny Generated Runtime Loop, Generated Package MVP and Visible Generated Playable Preview path while proving base and extension generated microgame variants can run Generate -> Package -> Runtime start -> move -> interact -> goal progress -> reward -> completion. One inventory objective/reward variation is added through validated data/rule-pack declarations instead of bespoke C# gameplay logic.
+Runtime.Abstractions
+  Команды, события, состояния и контракты исполнения.
 
-Next practical step:
-Manual extension spine verification. Do not proceed to another Codex feature slice until the user confirms `manual_extension_spine_verification`.
+Runtime
+  Headless runtime без UI и без LLM.
 
-`GamePackage` — runtime source of truth для готовой игры.
+Scripting
+  Контракты typed Lua, script manifests, script diagnostics.
 
-Он описывает игровые данные и контракты, которые должен уметь загрузить отдельный runtime/player.
+Generation
+  LLM sessions, jobs, context packs, draft workflow.
 
-Типичные части пакета:
+AssetPipeline
+  Asset catalog, asset contracts, generation requests, providers.
 
-* JSON definitions;
-* maps/chunks;
-* entities/components;
-* systems;
-* dialogues;
-* quests;
-* abilities;
-* interactions;
-* items/resources;
-* asset catalog;
-* Lua script metadata;
-* validation reports;
-* generation history.
+Application
+  Use-cases: открыть проект, сохранить, валидировать, запускать preview, применять draft.
 
-Документация, workflow profiles, context indexes и generation notes являются authoring references. Они помогают редактору и агентам, но не должны становиться runtime source of truth.
+Infrastructure
+  JSON storage, settings storage, logging, future SQLite/cache providers.
+
+WinForms
+  Editor shell, pages, presenters, composition root.
+```
 
 ## Lua
 
 Lua в проекте разделяется по назначению:
 
-* `prototype`;
-* `generator`;
-* `behavior`;
-* `interaction`;
-* `formula`;
-* `event`;
-* `migration`.
+- `prototype`;
+- `generator`;
+- `behavior`;
+- `interaction`;
+- `formula`;
+- `event`;
+- `migration`.
 
 LLM-generated Lua не должен напрямую мутировать C# `GameState`.
 
 Ожидаемый workflow:
 
 1. LLM создаёт draft/proposal/script.
-2. Validator проверяет тип, manifest, capabilities, path, imports and contracts.
+2. Validator проверяет тип, manifest, capabilities, path, imports и contracts.
 3. Application pipeline принимает или отклоняет результат.
 4. Runtime получает только проверенные effects/actions/data.
 
@@ -138,195 +150,61 @@ src/
     Root GamePackage model and package path conventions.
 
   LLMGameCreator.Runtime.Abstractions/
-    Runtime command/state/event interfaces.
+    Runtime commands, events and state contracts.
 
   LLMGameCreator.Runtime/
-    Headless runtime implementation.
+    Headless command/event runtime.
 
   LLMGameCreator.Scripting/
-    Script engine abstractions and prototype Lua executor.
+    Typed Lua/script manifest abstractions and prototype sandbox.
 
   LLMGameCreator.Generation/
-    LLM authoring/generation models.
+    Generation jobs, context packs and LLM-facing editor models.
 
   LLMGameCreator.AssetPipeline/
-    Asset generation provider abstractions and jobs.
+    Asset request/provider abstractions.
 
   LLMGameCreator.Application/
-    Application services, validation and use-cases.
+    Application services, validators, generation workflows and use-cases.
 
   LLMGameCreator.Infrastructure/
-    JSON storage, settings persistence, logging and external editor-side integrations.
+    Storage, settings and infrastructure adapters.
 
   LLMGameCreator.WinForms/
-    WinForms editor shell and pages.
+    Editor UI shell and pages.
+
+tests/
+  LLMGameCreator.Tests/
+    Smoke, contract, validator and runtime tests.
 ```
 
-## Важные папки
+## Development rules for agents
 
-```text
-docs/
-  Architecture, development rules, package format, validation strategy and agent guidance.
+For current generator/product-slice work, agents must not use README as current planning authority.
 
-samples/minimal-map-game/
-  Minimal GamePackage sample.
+Use:
 
-tests/LLMGameCreator.Tests/
-  Smoke, contract, validator and runtime tests.
+1. `AGENTS.md`
+2. `docs/CONTEXT_INDEX.md`
+3. `docs/CURRENT_GENERATOR_STATE.*`
+4. current task/goal document
+5. only then relevant architecture/contract docs
 
-generator-library/
-  Lua generator/capability library assets and manifests.
+Do not start the next goal while the current manual gate is still required.
 
-templates/
-  Lua stdlib and blueprint templates.
-```
+Do not use git commands unless the user explicitly asks.
 
-## Первый запуск
+Do not change `GamePackage` schema, public runtime contracts, Unity/player code, provider execution, Lua execution or UI unless the task explicitly allows it.
 
-Требования:
+## Validation
 
-* .NET SDK, совместимый с проектом;
-* Windows для WinForms editor;
-* Visual Studio / VS Code / Rider по желанию.
+Typical validation commands are task-specific.
 
-Восстановить зависимости и собрать решение:
+Common scripts:
 
 ```powershell
-dotnet restore .\LLMGameCreator.sln
-dotnet build .\LLMGameCreator.sln --no-restore
+.\.devflow\scripts\check-all.ps1
+.\.devflow\scripts\run-product-smoke.ps1 -Scenario <scenario-id>
 ```
 
-Запустить тесты:
-
-```powershell
-dotnet test .\tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --no-build --no-restore
-```
-
-После сборки можно открыть:
-
-```text
-LLMGameCreator.sln
-```
-
-и запустить проект:
-
-```text
-LLMGameCreator.WinForms
-```
-
-## Минимальный sample
-
-В редакторе открыть папку:
-
-```text
-samples\minimal-map-game
-```
-
-После открытия sample можно использовать:
-
-* validation;
-* Runtime Preview;
-* Runtime Simulator;
-* package/editor workflows.
-
-## Runtime Preview
-
-`Runtime Preview` — отладочная страница для быстрой проверки базового runtime-поведения.
-
-Она не является финальным player-ом.
-
-For the generated preview workflow, use `Generate Preview` on Runtime Preview. It runs the deterministic generated-preview pipeline, writes artifacts under `.llmgc/procedural/`, loads the generated MVP package as the current package, and then the existing `Старт` action can start the preview.
-
-## Runtime Simulator
-
-`Runtime Simulator` — расширенная отладочная страница для проверки runtime-команд, unified runtime session, сериализации состояния и snapshot-сценариев.
-
-Он предназначен для разработки и диагностики runtime-систем.
-
-## LLM / LM Studio / OpenAI-compatible API
-
-Проект содержит editor-side OpenAI-compatible chat client.
-
-Он предназначен для использования в generation pipeline и не должен вызываться runtime-ом.
-
-Runtime должен оставаться полностью работоспособным без LLM endpoint.
-
-## Правила разработки
-
-Перед крупными изменениями читать:
-
-```text
-AGENTS.md
-docs/CONTEXT_INDEX.md
-docs/PROJECT_VISION.md
-docs/ARCHITECTURE.md
-docs/DEVELOPMENT_RULES.md
-docs/CODEX_PATCH_RULES.md
-```
-
-Для конкретных задач читать только релевантные документы из `docs/`, чтобы не раздувать контекст.
-
-Основные правила:
-
-* не делать широкий рефакторинг без отдельной задачи;
-* не смешивать UI, runtime, generation, storage and validation в одном большом патче;
-* не добавлять Unity, ComfyUI, Lua engine, SQLite или combat одним патчем;
-* не добавлять новую зависимость без причины;
-* не менять public contracts/package format без обновления документации;
-* не править `*.Designer.cs` хаотично;
-* тесты должны быть минимальными и полезными.
-
-## Definition of Done для code changes
-
-Изменение считается завершённым, если:
-
-1. код компилируется;
-2. релевантные тесты проходят;
-3. если менялся контракт — обновлена документация;
-4. если менялся WinForms UI — Designer не сломан;
-5. нет новой ненужной зависимости;
-6. нет God Service/God Form;
-7. есть краткий отчёт по изменённым файлам и проверкам.
-
-Рекомендуемые команды проверки:
-
-```powershell
-dotnet restore .\LLMGameCreator.sln
-dotnet build .\LLMGameCreator.sln --no-restore
-dotnet test .\tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --no-build --no-restore
-```
-
-## Агентная разработка
-
-Репозиторий рассчитан на работу с AI coding agents, но агент должен работать ограниченными патчами.
-
-Базовый workflow для агента:
-
-1. Прочитать `AGENTS.md`.
-2. Прочитать `docs/CONTEXT_INDEX.md`.
-3. Прочитать только релевантные docs.
-4. Найти 2-3 локальных аналога.
-5. Составить краткий план.
-6. Внести минимальный patch.
-7. Запустить build/tests.
-8. Если build/tests упали — исправить и повторить.
-9. В финальном отчёте перечислить изменённые файлы и команды проверки.
-
-Агент не должен читать весь репозиторий без необходимости и не должен выполнять git-команды без прямого запроса пользователя.
-
-## Текущие ограничения
-
-Пока не является завершённым production game engine:
-
-* Unity Player не реализован как полноценный frontend/player;
-* ComfyUI/Fooocus не являются runtime-подсистемами;
-* Lua execution pipeline не является финальным runtime-механизмом;
-* editor UI покрывает только часть будущих сущностей;
-* runtime systems развиваются поэтапно;
-* GamePackage format может расширяться, но должен оставаться документированным и валидируемым.
-
-## Лицензия
-
-Copyright © 2026 Рауль Ендимион. All rights reserved.
-
-No license is granted to use, copy, modify, distribute, sublicense, or sell this software without explicit written permission.
+A task is not complete merely because code compiles. It must satisfy the active acceptance criteria, final gate status, artifact evidence and forbidden-scope checks named by the active goal.
