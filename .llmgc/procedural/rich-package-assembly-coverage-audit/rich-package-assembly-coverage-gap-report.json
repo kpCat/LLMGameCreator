@@ -1,0 +1,346 @@
+{
+  "schemaVersion": "rich_package_assembly_coverage_gap_report_v1",
+  "gapCount": 48,
+  "futureRequiredCount": 45,
+  "blockedGapCount": 2,
+  "unsupportedCount": 1,
+  "gaps": [
+    {
+      "domainId": "assets_runtime_export",
+      "gapId": "asset_index_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+    },
+    {
+      "domainId": "assets_runtime_export",
+      "gapId": "asset_request_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_request_pack_v1"
+    },
+    {
+      "domainId": "assets_runtime_export",
+      "gapId": "audio_request_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: audio_request_pack_v1"
+    },
+    {
+      "domainId": "assets_runtime_export",
+      "gapId": "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "The current atlas has broad unity2d/unity3d/headless targets but no exact runtime_export/unity_alpha_windows target id."
+    },
+    {
+      "domainId": "assets_runtime_export",
+      "gapId": "unity_ir_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+    },
+    {
+      "domainId": "combat_progression",
+      "gapId": "ability.rules/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: ability.rules/v1"
+    },
+    {
+      "domainId": "combat_progression",
+      "gapId": "combat.mode/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: combat.mode/v1"
+    },
+    {
+      "domainId": "combat_progression",
+      "gapId": "combat_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'combat_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "combat_progression",
+      "gapId": "encounter_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'encounter_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "combat_progression",
+      "gapId": "progression_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'progression_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "combat_progression",
+      "gapId": "status_effects/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: status_effects/v1"
+    },
+    {
+      "domainId": "dialogue_interactions",
+      "gapId": "dialogue.graph/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: dialogue.graph/v1"
+    },
+    {
+      "domainId": "dialogue_interactions",
+      "gapId": "interaction.conditions/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+    },
+    {
+      "domainId": "dialogue_interactions",
+      "gapId": "interaction_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'interaction_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "dialogue_interactions",
+      "gapId": "phrase_plan_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'phrase_plan_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "entities",
+      "gapId": "actor_model_profile_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'actor_model_profile_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "entities",
+      "gapId": "character_card_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'character_card_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "entities",
+      "gapId": "entity_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'entity_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "entities",
+      "gapId": "npc_card_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "entities",
+      "gapId": "party_roster_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'party_roster_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "entities",
+      "gapId": "player_character_card_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "character_card_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'character_card_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "faction.definitions/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: faction.definitions/v1"
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "npc_card_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "party_roster_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'party_roster_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "player_character_card_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "reputation.rules/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reputation.rules/v1"
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "reputation_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'reputation_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "factions_social_work_theft_schedules",
+      "gapId": "schedule_pack_v1",
+      "status": "unsupported",
+      "source": "coverage_audit",
+      "message": "No current package assembly evidence for schedule_pack_v1."
+    },
+    {
+      "domainId": "items_inventory_economy",
+      "gapId": "asset_request_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_request_pack_v1"
+    },
+    {
+      "domainId": "items_inventory_economy",
+      "gapId": "audio_request_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: audio_request_pack_v1"
+    },
+    {
+      "domainId": "items_inventory_economy",
+      "gapId": "crafting.recipe_rules/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: crafting.recipe_rules/v1"
+    },
+    {
+      "domainId": "items_inventory_economy",
+      "gapId": "equipment_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'equipment_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "items_inventory_economy",
+      "gapId": "inventory_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "items_inventory_economy",
+      "gapId": "vendor_card_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'vendor_card_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "items_inventory_economy",
+      "gapId": "vendor_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'vendor_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "quests",
+      "gapId": "asset_request_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_request_pack_v1"
+    },
+    {
+      "domainId": "quests",
+      "gapId": "audio_request_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: audio_request_pack_v1"
+    },
+    {
+      "domainId": "quests",
+      "gapId": "quest.graph/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+    },
+    {
+      "domainId": "quests",
+      "gapId": "reward.rules/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+    },
+    {
+      "domainId": "world",
+      "gapId": "world_topology/node_map",
+      "status": "blocked_gap",
+      "source": "goal_023_gap_report",
+      "message": "Presentation mode 'presentation_mode/map_and_panel_rpg' does not allow world topology 'world_topology/node_map'."
+    },
+    {
+      "domainId": "world",
+      "gapId": "world_topology/region_graph",
+      "status": "blocked_gap",
+      "source": "goal_023_gap_report",
+      "message": "Presentation mode 'presentation_mode/top_down_2d' does not allow world topology 'world_topology/region_graph'."
+    },
+    {
+      "domainId": "world",
+      "gapId": "map_pack_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'map_pack_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "world",
+      "gapId": "path_network_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'path_network_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "world",
+      "gapId": "region_graph_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+    },
+    {
+      "domainId": "world",
+      "gapId": "world.chunk/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+    },
+    {
+      "domainId": "world",
+      "gapId": "world.region/v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+    },
+    {
+      "domainId": "world",
+      "gapId": "world_profile_v1",
+      "status": "future_required",
+      "source": "goal_023_gap_report",
+      "message": "Artifact contract 'world_profile_v1' is selected but is not present in artifact_contracts atlas."
+    }
+  ],
+  "diagnostics": []
+}

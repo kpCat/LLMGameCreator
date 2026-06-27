@@ -186,9 +186,12 @@ public sealed class CapabilityBundlePipelineInputsAcceptanceTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_023_capability_bundle_pipeline_inputs", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(CapabilityBundlePipelineInputsAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
-        Assert.Contains("development_complexity_stabilization_verification passed", root.GetProperty("recommended_next_decision").GetString());
+        Assert.Equal("goal_024_rich_package_assembly_coverage_audit", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("rich_package_assembly_coverage_audit_verification", root.GetProperty("gate_status").GetString());
+        Assert.Contains(
+            "development_complexity_stabilization_verification passed",
+            root.GetProperty("goal_023_capability_bundle_pipeline_inputs").GetProperty("summary").GetString());
+        Assert.Contains("capability_bundle_pipeline_inputs_verification passed", root.GetProperty("recommended_next_decision").GetString());
     }
 
     private static string FindRepoRoot()

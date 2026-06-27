@@ -14,12 +14,13 @@ Accepted through:
 minimum_playable_generated_game_verification passed
 generated_game_profile_contract_verification passed
 development_complexity_stabilization_verification passed
+capability_bundle_pipeline_inputs_verification passed
 ```
 
 Produced for review:
 
 ```text
-capability_bundle_pipeline_inputs_verification required
+rich_package_assembly_coverage_audit_verification required
 ```
 
 Current capabilities:
@@ -39,11 +40,12 @@ Current capabilities:
 - generated game profile contract with three deterministic sample profiles, exact Goal 010-020 profile-to-pipeline mapping and explicit future-required capability separation;
 - compact review artifacts under `.llmgc/procedural/...`;
 - capability bundle pipeline input records for the three accepted game profiles, with explicit blocked/future-required gaps;
+- rich package assembly coverage audit matrix and next package-expansion candidate plan;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The development complexity stabilization gate has been accepted by user prompt. Goal 023 produced capability bundle pipeline input artifacts, but the user still needs to accept whether the Goal 023 selection/input evidence is sufficient before Goal 024 or S192 starts.
+The capability bundle pipeline inputs gate has been accepted by user prompt. Goal 024 produced rich package assembly coverage audit artifacts, but the user still needs to accept whether the Goal 024 coverage/gap/plan evidence is sufficient before Goal 025 or S199 starts.
 
 ## Queue Rules
 
@@ -229,13 +231,17 @@ Map profile choices to capability bundles and concrete generation pipeline input
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start Goal 024 or S192 until it is accepted.
+Accepted by user prompt before Goal 024.
 
 ### Goal 024: Rich Package Assembly Coverage Audit
 
 Purpose:
 
 Audit existing package assembly against full generator needs: world, entities, quests, dialogue, items/economy, combat, progression, factions and schedules.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start Goal 025 or S199 until it is accepted.
 
 ### Goal 025: Package Assembly Expansion 1 - World And Entities
 
@@ -414,7 +420,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-capability_bundle_pipeline_inputs_verification
+rich_package_assembly_coverage_audit_verification
 ```
 
 Status:

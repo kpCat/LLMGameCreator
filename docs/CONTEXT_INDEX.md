@@ -78,6 +78,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md` | Goal 022 policy for artifact mutability classes, check-all artifact isolation, product-smoke root write declarations and final scope guard verification. |
 | `docs/GOAL_023_CAPABILITY_BUNDLE_SELECTION_TO_PIPELINE_INPUTS.md` | Goal 023 task: Capability bundle selection to pipeline inputs, with `docs/CAPABILITY_BUNDLE_PIPELINE_INPUTS_CONTRACT_V1.md`, Application-layer profile-to-selector-request mapping under `Design/CapabilityBundlePipelineInputs`, generator pipeline input artifacts, explicit blocked/future-required gaps, invalid/fake/leak matrix, product smoke route `capability-bundle-pipeline-inputs` and final stop at `capability_bundle_pipeline_inputs_verification`. |
 | `docs/CAPABILITY_BUNDLE_PIPELINE_INPUTS_CONTRACT_V1.md` | Goal 023 planning artifact contract for deterministic profile requests, capability selection evidence, generator pipeline input records, gap reports and final manual review. |
+| `docs/GOAL_024_RICH_PACKAGE_ASSEMBLY_COVERAGE_AUDIT.md` | Goal 024 task: Rich package assembly coverage audit, with `docs/RICH_PACKAGE_ASSEMBLY_COVERAGE_AUDIT_V1.md`, Application-layer coverage audit under `Design/RichPackageAssemblyCoverageAudit`, coverage matrix, gap report, next-slice plan, invalid/fake/leak matrix, product smoke route `rich-package-assembly-coverage-audit` and final stop at `rich_package_assembly_coverage_audit_verification`. |
+| `docs/RICH_PACKAGE_ASSEMBLY_COVERAGE_AUDIT_V1.md` | Goal 024 audit contract for evidence-backed package assembly coverage classification and next package-expansion planning without starting Goal 025/S199. |
 | `docs/GAME_PROFILE_CONTRACT_V1.md` | Goal 021 profile contract doc for deterministic game-family, presentation, topology, actor model, loop, scale, asset policy and runtime/export target selection. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
@@ -105,14 +107,14 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-capability_bundle_pipeline_inputs_verification
+rich_package_assembly_coverage_audit_verification
 ```
 
 Allowed next sequence:
 
-1. Review `capability_bundle_pipeline_inputs_verification` evidence from `docs/CAPABILITY_BUNDLE_PIPELINE_INPUTS_CONTRACT_V1.md`, selector request artifact, generator input artifact, gap report, invalid/fake/leak matrix, report and verification artifact before marking the gate passed.
-2. Goal 023 regenerates compact repo-local root review artifacts under `.llmgc/procedural/capability-bundle-pipeline-inputs/` through the `capability-bundle-pipeline-inputs` product smoke route.
-3. Goal 024 and S192 remain blocked until this Goal 023 gate is accepted.
+1. Review `rich_package_assembly_coverage_audit_verification` evidence from `docs/RICH_PACKAGE_ASSEMBLY_COVERAGE_AUDIT_V1.md`, coverage matrix, gap report, next-slice plan, invalid/fake/leak matrix, report and verification artifact before marking the gate passed.
+2. Goal 024 regenerates compact repo-local root review artifacts under `.llmgc/procedural/rich-package-assembly-coverage-audit/` through the `rich-package-assembly-coverage-audit` product smoke route.
+3. Goal 025 and S199 remain blocked until this Goal 024 gate is accepted.
 
 Kill criterion:
 

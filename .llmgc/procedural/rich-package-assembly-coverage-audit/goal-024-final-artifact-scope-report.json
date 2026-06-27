@@ -1,0 +1,167 @@
+{
+    "schemaVersion":  "artifact_scope_report_v1",
+    "scenario":  "goal-024-final",
+    "accepted":  true,
+    "policyPath":  ".devflow/artifact-scope/artifact-scope-policy.json",
+    "baselineRef":  "",
+    "failOnTrackedIgnored":  false,
+    "changedPathCount":  15,
+    "allowedCount":  15,
+    "warningCount":  0,
+    "violationCount":  0,
+    "diagnostics":  [
+
+                    ],
+    "changedPaths":  [
+                         {
+                             "path":  ".devflow/scripts/run-product-smoke.ps1",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CONTEXT_INDEX.md",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.json",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.md",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Application/CapabilityBundlePipelineInputs/CapabilityBundlePipelineInputsAcceptanceTests.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Application/GameProfiles/GeneratedGameProfileContractAcceptanceTests.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Devflow/DevelopmentComplexityStabilizationTests.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/rich-package-assembly-coverage-audit/",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/GOAL_024_RICH_PACKAGE_ASSEMBLY_COVERAGE_AUDIT.md",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/RICH_PACKAGE_ASSEMBLY_COVERAGE_AUDIT_V1.md",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/NEXT_PRODUCT_SLICE/goal-024-rich-package-assembly-coverage-audit-CODEX_GOAL.md",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_task_doc",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/RichPackageAssemblyCoverageAudit/",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Application/RichPackageAssemblyCoverageAudit/",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/ProductSmoke/RichPackageAssemblyCoverageAuditSmokeTests.cs",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         }
+                     ]
+}

@@ -1,0 +1,239 @@
+{
+  "scenarioCount": 16,
+  "rejectedCount": 16,
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "blocked_gap_treated_ready_for_package_assembly",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "blocked_gap_treated_ready_for_package_assembly",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.blocked_gap.marked_ready",
+          "target": "world",
+          "message": "Blocked gap must not be treated as ready for package assembly."
+        }
+      ]
+    },
+    {
+      "scenarioId": "copied_coverage_report_without_goal023_generator_inputs",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "copied_coverage_report_without_goal023_generator_inputs",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.goal023_generator_inputs.missing",
+          "target": "capability-bundle-pipeline-inputs-generator-inputs.json",
+          "message": "Coverage audit requires the physical Goal 023 generator inputs artifact."
+        }
+      ]
+    },
+    {
+      "scenarioId": "docs_only_gamepackage_mention_treated_as_support",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "docs_only_gamepackage_mention_treated_as_support",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.docs_only_support_claim",
+          "target": "docs/GAME_PACKAGE_FORMAT.md",
+          "message": "Docs-only mentions do not prove package support."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_coverage_domain_id",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "duplicate_coverage_domain_id",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.coverage_domain.duplicate",
+          "target": "assets_runtime_export",
+          "message": "Coverage domain ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fewer_than_three_goal023_pipeline_inputs",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "fewer_than_three_goal023_pipeline_inputs",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.goal023_generator_input_count.invalid",
+          "target": "2",
+          "message": "Generator inputs artifact must contain three pipeline inputs."
+        }
+      ]
+    },
+    {
+      "scenarioId": "future_required_capability_marked_package_supported",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "future_required_capability_marked_package_supported",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.future_required.marked_supported",
+          "target": "dialogue_interactions",
+          "message": "Future-required capability must not be marked package-supported."
+        }
+      ]
+    },
+    {
+      "scenarioId": "generator_library_mutation_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "generator_library_mutation_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.claims.generator_library_mutation",
+          "target": "generatorLibraryChanged",
+          "message": "Goal 024 must not mutate generator-library."
+        }
+      ]
+    },
+    {
+      "scenarioId": "goal023_top_level_error_diagnostics",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "goal023_top_level_error_diagnostics",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.goal023_report_errors.present",
+          "target": "capability-bundle-pipeline-inputs-report.json",
+          "message": "Goal 023 report must not contain top-level error diagnostics."
+        }
+      ]
+    },
+    {
+      "scenarioId": "goal025_or_s199_started_marker",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "goal025_or_s199_started_marker",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.next_goal.started",
+          "target": "Goal025/S199",
+          "message": "Goal 024 may recommend but must not start Goal 025 or S199."
+        }
+      ]
+    },
+    {
+      "scenarioId": "historical_goal020_021_022_023_artifact_mutation",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "historical_goal020_021_022_023_artifact_mutation",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.legacy_artifact.forbidden",
+          "target": ".llmgc/procedural/capability-bundle-pipeline-inputs",
+          "message": "Historical compact artifacts are read-only for Goal 024."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_accepted_goal023_report",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_accepted_goal023_report",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.goal023_report.missing",
+          "target": ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-report.json",
+          "message": "Accepted Goal 023 report must exist."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_required_coverage_domain",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_required_coverage_domain",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.coverage_domain.missing",
+          "target": "world",
+          "message": "Required coverage domain is missing."
+        }
+      ]
+    },
+    {
+      "scenarioId": "package_assembly_execution_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "package_assembly_execution_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.claims.package_assembly_executed",
+          "target": "packageAssemblyExecuted",
+          "message": "Goal 024 must not claim package assembly execution."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_gamepackage_schema_mutation_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "public_gamepackage_schema_mutation_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.claims.public_schema_mutation",
+          "target": "publicGamePackageSchemaChanged",
+          "message": "Goal 024 must not claim public GamePackage schema mutation."
+        }
+      ]
+    },
+    {
+      "scenarioId": "stale_or_mismatched_previous_gate",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "stale_or_mismatched_previous_gate",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.previous_gate.missing",
+          "target": "capability_bundle_pipeline_inputs_verification required",
+          "message": "Goal 024 requires capability_bundle_pipeline_inputs_verification passed."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_llm_rag_provider_media_lua_execution_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "unity_llm_rag_provider_media_lua_execution_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "rich_package_audit.claims.external_execution",
+          "target": "llmRagProviderMediaLuaExecuted",
+          "message": "Goal 024 must not claim Unity, LLM, RAG, provider, media or Lua execution."
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "rich_package_audit.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios reject through Goal 023 evidence, coverage, report or scope guard diagnostics."
+    }
+  ]
+}
