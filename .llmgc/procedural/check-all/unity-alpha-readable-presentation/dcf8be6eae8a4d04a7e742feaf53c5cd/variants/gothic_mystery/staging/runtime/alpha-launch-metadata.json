@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "alpha_build_launch_metadata_v1",
+  "runtimeHostKind": "generic_unity_runtime",
+  "launchMode": "blocked_until_repo_unity_project_exists",
+  "packageId": "game/content_generation/gothic-mystery",
+  "packageHash": "b960642adb592af8949ce5d99b3e2a6eb88c79d2c9870116ec6459e47d85191f",
+  "assetManifestHash": "09dc29d8c7d41df403e20122d035be088b3746d32151df7e892e895c7bbcf195",
+  "exportManifestHash": "cc802ab8cec3455c1e1331f8db85042ae42e4e51be3860adb0a719dcb6231da6",
+  "startMapId": "map/gothic-mystery/start",
+  "selectedThreadId": "thread/gothic-mystery/000",
+  "windowsExecutableProduced": false,
+  "unityEditorExecuted": false,
+  "unityBuildProduced": false
+}

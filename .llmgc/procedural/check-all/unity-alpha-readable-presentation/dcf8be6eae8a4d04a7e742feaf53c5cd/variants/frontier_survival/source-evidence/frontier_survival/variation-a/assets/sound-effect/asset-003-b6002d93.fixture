@@ -1,0 +1,5 @@
+LLMGC_FIXTURE_MEDIA:audio/wav
+resolution:fallback
+slot:asset-slot/game-content-generation-frontier-survival/sound-effect/dialogue-frontier-survival-0490f2f50e-013/caravan-sound-fallback/000
+content:dialogue/frontier-survival/0490f2f50e/013
+source:caravan_sound_fallback

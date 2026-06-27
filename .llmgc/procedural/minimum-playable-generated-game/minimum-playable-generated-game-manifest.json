@@ -14,14 +14,14 @@
   "manualChecklistRelativePath": ".llmgc/procedural/minimum-playable-generated-game/review-package/MANUAL_PLAY_REVIEW_CHECKLIST.md",
   "scenarioSummaryRelativePath": ".llmgc/procedural/minimum-playable-generated-game/review-package/generated-scenario-summary.json",
   "fileCount": 150,
-  "totalByteCount": 85894929,
+  "totalByteCount": 85896041,
   "packageHash": "3e8a42663e1a2fdabd98cdd8c30ab6188810bd4d0f4d36aa4e3089a71b952d53",
   "assetManifestHash": "3dd392bae4cbac24db34b1810a52c83cf64791521df8849c75ac61e8fdcfa595",
-  "buildManifestHash": "b0bbed3c2c24b8c19f6547ef569af86bb5e3c75e9ae72ae49129e63e5074d49b",
-  "reviewPackageHash": "15b70d515abb882557dba22f538fb7f83af57ffa4bf01fdb6c2b55332cb5b2de",
+  "buildManifestHash": "ab0fd144c60f6c3b8ca86b37653053767ddcb28b3055fc3899fc9670132159cf",
+  "reviewPackageHash": "ba4cd31e805476ef67c53b044b7cb1f2487fdf690eec2cde30fc28da6c724be7",
   "automatedLaunchVerified": true,
   "automatedQuestCompletionVerified": true,
   "readablePresentationVerified": true,
   "manualReviewRequired": true,
-  "manifestHash": "5ac27f1c37bc03f5cd0b99a625f825ad0a6155b0055b349c45c049df9973500c"
+  "manifestHash": "de81cb001184078d0ce06bd1d29b925576b48f063ba10881b4593942df5e6551"
 }

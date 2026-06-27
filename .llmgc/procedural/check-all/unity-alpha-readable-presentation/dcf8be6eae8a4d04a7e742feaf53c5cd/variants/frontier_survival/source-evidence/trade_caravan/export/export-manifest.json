@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "unity_runtime_export_manifest_v1",
+  "packageId": "game/content_generation/trade-caravan",
+  "packageHash": "02f2f2d207e4d32184682be5b42b02539be12f7da5bd34142f0e1e011b634706",
+  "assetManifestHash": "5aa6d73963072647eb32be772c4c0564f74651054bed512ec909486b975fd81b",
+  "fileCount": 10,
+  "totalByteCount": 431448,
+  "manifestHash": "442e0fb472e47b4207b2635d8d1be152042ffe4fd00769323120058444c8d58c",
+  "files": [
+    {
+      "relativePath": "assets/asset-manifest.json",
+      "kind": "json_payload",
+      "logicalId": "assets/asset-manifest.json",
+      "hash": "d463acb62e912d9fed29fea39bcd0958270d9cd31cca4dae177ed87b2b162017",
+      "byteCount": 4840
+    },
+    {
+      "relativePath": "assets/item-icon-ui-graphic/asset-000-34527045.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-trade-caravan/item-icon-ui-graphic/item-trade-caravan-0150c8583d-018/gothic-icon-fixture/000",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "assets/music-ambience/asset-001-e368b44a.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-trade-caravan/music-ambience/event-trade-caravan-12d2a93d26-015/gothic-music-fixture/000",
+      "hash": "e368b44a3d976aa20d4f38576c38c2846f31b404d940df84df9d61622a4331f0",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "assets/npc-portrait/asset-002-34527045.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-trade-caravan/npc-portrait/npc-trade-caravan-012cf2fdd0-012/gothic-portrait-fixture/000",
+      "hash": "34527045f06e65266431500f53c71f8c92cf8907102c6e94f592f94b0db8a07b",
+      "byteCount": 69
+    },
+    {
+      "relativePath": "assets/sound-effect/asset-003-3b6934b5.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-trade-caravan/sound-effect/dialogue-trade-caravan-00642153fb-048/gothic-sound-fallback/000",
+      "hash": "3b6934b536e6c0fd4643d163a027ff850c8581670ec8818267745d1614a8568d",
+      "byteCount": 256
+    },
+    {
+      "relativePath": "assets/tile-region-graphic/asset-004-6c1af6c5.fixture",
+      "kind": "asset_payload",
+      "logicalId": "asset/game-content-generation-trade-caravan/tile-region-graphic/map-trade-caravan-start/gothic-tile-fallback/002",
+      "hash": "6c1af6c5705cc53f3cf5800152ef24228ce5a4cd6479396a402b9d6162c35285",
+      "byteCount": 233
+    },
+    {
+      "relativePath": "game-data/game-package.json",
+      "kind": "json_payload",
+      "logicalId": "game-data/game-package.json",
+      "hash": "02f2f2d207e4d32184682be5b42b02539be12f7da5bd34142f0e1e011b634706",
+      "byteCount": 415220
+    },
+    {
+      "relativePath": "game-data/generated-content-provenance.json",
+      "kind": "json_payload",
+      "logicalId": "game-data/generated-content-provenance.json",
+      "hash": "571ec0e497239ce990b141ad97216ac8e3596de0aa92c982406686122b4f9bfd",
+      "byteCount": 2440
+    },
+    {
+      "relativePath": "runtime/launch-metadata.json",
+      "kind": "json_payload",
+      "logicalId": "runtime/launch-metadata.json",
+      "hash": "807ffc07ea1cdcbfe5ec002d170512086dc2b7c3e0eb93f20b0a879b6ca16c1f",
+      "byteCount": 591
+    },
+    {
+      "relativePath": "runtime/unity-runtime-config.json",
+      "kind": "json_payload",
+      "logicalId": "runtime/unity-runtime-config.json",
+      "hash": "65b9cebaf826c34cae586fc86e1d6bea260c2e1cd7be729def868ea1999d59b1",
+      "byteCount": 7661
+    }
+  ]
+}

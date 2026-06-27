@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "unity_runtime_launch_metadata_v1",
+  "runtimeHostKind": "generic_unity_runtime",
+  "launchMode": "headless_contract_validation_only",
+  "windowsExecutableProduced": false,
+  "unityEditorExecuted": false,
+  "unityBuildProduced": false,
+  "requiresUnityEditorLaunch": false,
+  "externalExecutionFlags": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "luaExecuted": false,
+    "mediaExecuted": false,
+    "unityEditorExecuted": false,
+    "unityBuildExecuted": false,
+    "windowsExecutableExecuted": false
+  }
+}

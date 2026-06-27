@@ -98,6 +98,30 @@ public sealed class MinimumPlayableGeneratedGameAcceptanceTests
     }
 
     [Fact]
+    public void AutomatedSmokeScriptUsesStartProcessExitCodeAndLogMarkerChecks()
+    {
+        using var temp = new TempDirectory();
+        var repoRoot = FindRepoRoot();
+        var (content, assets) = BuildInputs(repoRoot, temp.Path);
+
+        new MinimumPlayableGeneratedGameAcceptanceService()
+            .BuildFromAcceptedEvidence(temp.Path, content, assets, new MinimumPlayableGeneratedGameOptions { RepositoryRootPath = repoRoot });
+        var scriptPath = Path.Combine(temp.Path, ".llmgc", "procedural", "minimum-playable-generated-game", "review-package", "RUN_AUTOMATED_SMOKE.ps1");
+        var automated = File.ReadAllText(scriptPath);
+
+        Assert.Contains("Start-Process -FilePath \".\\LLMGameCreatorAlpha.exe\" -ArgumentList $arguments -Wait -PassThru", automated, StringComparison.Ordinal);
+        Assert.Contains("$process.ExitCode", automated, StringComparison.Ordinal);
+        Assert.DoesNotContain("$LASTEXITCODE", automated, StringComparison.Ordinal);
+        Assert.Contains("Test-Path -LiteralPath $launchLog", automated, StringComparison.Ordinal);
+        Assert.Contains("Test-Path -LiteralPath $playLoopLog", automated, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.launch_completed=true", automated, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.play_loop_completed=true", automated, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.quest_loop_completed=true", automated, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.quest_completed.after=true", automated, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.reward_granted.after=true", automated, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void AutomatedSmokeProofVerifiesLaunchAndQuestCompletion()
     {
         using var temp = new TempDirectory();

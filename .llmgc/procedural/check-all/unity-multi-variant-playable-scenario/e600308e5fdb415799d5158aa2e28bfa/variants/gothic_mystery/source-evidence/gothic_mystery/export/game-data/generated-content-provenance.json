@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "unity_runtime_generated_content_payload_v1",
+  "packageId": "game/content_generation/gothic-mystery",
+  "packId": "gothic_mystery",
+  "contentCatalogHash": "d606d1a8a019680fa85f94bc185556d306a2978a01bfef97c59d85bcb5ad7967",
+  "selectedThreadId": "thread/gothic-mystery/000",
+  "selectedGeneratedIds": [
+    "choice/gothic-mystery/8298a30e5a/006",
+    "dialogue/gothic-mystery/91a942bcf7/006",
+    "event/gothic-mystery/aa4f467660/000",
+    "item/gothic-mystery/395c95994d/000",
+    "item/gothic-mystery/412a858b32/001",
+    "loot_table/gothic-mystery/primary",
+    "objective/gothic-mystery/b5620597a1/001",
+    "quest/gothic-mystery/3629ab93b2/001"
+  ],
+  "commandHints": [
+    {
+      "commandId": "cmd/gothic-mystery/000/choose_dialogue",
+      "commandType": "dialogue/choose",
+      "targetId": "choice/gothic-mystery/8298a30e5a/006",
+      "secondaryTargetId": "quest/gothic-mystery/3629ab93b2/001",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/event_add_item",
+      "commandType": "event/add_item",
+      "targetId": "item/gothic-mystery/412a858b32/001",
+      "secondaryTargetId": "event/gothic-mystery/aa4f467660/000",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/open_dialogue",
+      "commandType": "dialogue/open",
+      "targetId": "dialogue/gothic-mystery/91a942bcf7/006",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/roll_loot",
+      "commandType": "loot/roll",
+      "targetId": "loot_table/gothic-mystery/primary",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    },
+    {
+      "commandId": "cmd/gothic-mystery/000/start_quest",
+      "commandType": "quest/start",
+      "targetId": "quest/gothic-mystery/3629ab93b2/001",
+      "secondaryTargetId": "",
+      "value": "",
+      "inventoryId": "inventory/player",
+      "amount": 1
+    }
+  ],
+  "saveLoad": {
+    "runtimeStateHash": "5d8f5235190eff748602ba49548793585fda16cea413b619c6c78e48b5b4e8e9",
+    "restoredRuntimeStateHash": "5d8f5235190eff748602ba49548793585fda16cea413b619c6c78e48b5b4e8e9",
+    "saveLoadRoundtripPassed": true
+  }
+}

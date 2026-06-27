@@ -29,7 +29,7 @@
   "readablePresentationVerified": true,
   "manualChecklistWritten": true,
   "manualReviewRequired": true,
-  "minimumPlayableGeneratedGameVerified": true,
+  "minimumPlayableGeneratedGameVerified": false,
   "invalidMatrix": {
     "passed": true,
     "scenarioCount": 25,
@@ -100,7 +100,7 @@
           {
             "severity": "error",
             "code": "minimum_playable_game.validation.build_manifest_hash_mismatch",
-            "target": "b0bbed3c2c24b8c19f6547ef569af86bb5e3c75e9ae72ae49129e63e5074d49b",
+            "target": "ab0fd144c60f6c3b8ca86b37653053767ddcb28b3055fc3899fc9670132159cf",
             "message": "Build manifest hash must match selected accepted build evidence."
           }
         ]
@@ -400,10 +400,16 @@
   "generatorLibraryChanged": false,
   "noExternalProviderLlmRagLuaMedia": true,
   "runtimePreviewDependency": false,
-  "manifestHash": "5ac27f1c37bc03f5cd0b99a625f825ad0a6155b0055b349c45c049df9973500c",
-  "reviewPackageHash": "15b70d515abb882557dba22f538fb7f83af57ffa4bf01fdb6c2b55332cb5b2de",
-  "deterministicHash": "b842834d73134dbbef2bb78fc241aeae0122d30bc19e4aae4f65ef41e97de5e0",
+  "manifestHash": "de81cb001184078d0ce06bd1d29b925576b48f063ba10881b4593942df5e6551",
+  "reviewPackageHash": "ba4cd31e805476ef67c53b044b7cb1f2487fdf690eec2cde30fc28da6c724be7",
+  "deterministicHash": "eab5487cb13073bba82e7c55ecb4ea7e11016821e89e88dc6b33ec50c77fee28",
   "diagnostics": [
+    {
+      "severity": "error",
+      "code": "minimum_playable_game.readable.not_verified",
+      "target": "unity-alpha-readable-presentation-report.json",
+      "message": "Goal 019 readable presentation must be verified before package review."
+    },
     {
       "severity": "info",
       "code": "alpha_build.environment.not_blocked",

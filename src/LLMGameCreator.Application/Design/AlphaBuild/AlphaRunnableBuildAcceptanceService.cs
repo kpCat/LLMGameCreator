@@ -892,10 +892,18 @@ public sealed class AlphaRunnableBuildAcceptanceService
         }
 
         var sourceProjectPath = Path.GetFullPath(Path.Combine(repositoryRoot, environment.RepoUnityProjectRelativePath.Replace('/', Path.DirectorySeparatorChar)));
-        var workProjectPath = Path.Combine(artifactRoot, "unity-work", "LLMGameCreatorAlpha");
+        var workRoot = Path.Combine(artifactRoot, "unity-work");
+        if (!TryResetDirectory(workRoot, maxAttempts: 5, out var resetException))
+        {
+            var fallbackWorkRoot = Path.Combine(artifactRoot, $"unity-work-{Guid.NewGuid():N}");
+            diagnostics.Add(Diagnostic("warning", "alpha_build.unity_work.locked_fallback", "unity-work", $"Existing Unity work directory could not be reset ({resetException!.GetType().Name}); using an isolated work directory for this build."));
+            ResetDirectory(fallbackWorkRoot);
+            workRoot = fallbackWorkRoot;
+        }
+
+        var workProjectPath = Path.Combine(workRoot, "LLMGameCreatorAlpha");
         var buildLogPath = Path.Combine(artifactRoot, "logs", "unity-build.log");
         Directory.CreateDirectory(Path.GetDirectoryName(buildLogPath)!);
-        ResetDirectory(Path.GetDirectoryName(workProjectPath)!);
         CopyUnityTemplate(sourceProjectPath, workProjectPath);
 
         var arguments = new List<string>
@@ -930,7 +938,7 @@ public sealed class AlphaRunnableBuildAcceptanceService
 
         if (settings.CleanupUnityWorkProject)
         {
-            SafeDeleteDirectory(Path.Combine(artifactRoot, "unity-work"), artifactRoot);
+            SafeDeleteDirectory(workRoot, artifactRoot);
         }
 
         return new AlphaBuildUnityExecutionResult
@@ -1881,12 +1889,38 @@ public sealed class AlphaRunnableBuildAcceptanceService
 
     private static void ResetDirectory(string path)
     {
-        if (Directory.Exists(path))
+        if (!TryResetDirectory(path, maxAttempts: 120, out var exception))
         {
-            Directory.Delete(path, recursive: true);
+            throw new IOException($"Directory could not be reset: {path}", exception);
+        }
+    }
+
+    private static bool TryResetDirectory(string path, int maxAttempts, out Exception? lastException)
+    {
+        lastException = null;
+        for (var attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            try
+            {
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, recursive: true);
+                }
+
+                Directory.CreateDirectory(path);
+                return true;
+            }
+            catch (Exception exception) when (exception is IOException || exception is UnauthorizedAccessException)
+            {
+                lastException = exception;
+                if (attempt < maxAttempts)
+                {
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
         }
 
-        Directory.CreateDirectory(path);
+        return false;
     }
 
     private static bool IsSafeRelativePath(string path) =>

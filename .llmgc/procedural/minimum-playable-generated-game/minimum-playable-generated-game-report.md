@@ -12,13 +12,14 @@
 - Automated launch/quest completion: true / true
 - Readable presentation verified: true
 - Manual review required: true
-- Manifest hash: 5ac27f1c37bc03f5cd0b99a625f825ad0a6155b0055b349c45c049df9973500c
-- Review package hash: 15b70d515abb882557dba22f538fb7f83af57ffa4bf01fdb6c2b55332cb5b2de
-- Deterministic report hash: b842834d73134dbbef2bb78fc241aeae0122d30bc19e4aae4f65ef41e97de5e0
+- Manifest hash: de81cb001184078d0ce06bd1d29b925576b48f063ba10881b4593942df5e6551
+- Review package hash: ba4cd31e805476ef67c53b044b7cb1f2487fdf690eec2cde30fc28da6c724be7
+- Deterministic report hash: eab5487cb13073bba82e7c55ecb4ea7e11016821e89e88dc6b33ec50c77fee28
 - Invalid/fake/leak scenarios rejected: 25/25
 
 ## Diagnostics
 
+- error: minimum_playable_game.readable.not_verified [unity-alpha-readable-presentation-report.json] Goal 019 readable presentation must be verified before package review.
 - info: alpha_build.environment.not_blocked [alpha_unity_build_environment_blocker] A real Windows build path exists and produced verifiable output; the runnable gate remains required for review.
 - info: alpha_build.environment.unity_found [unity_cli] Unity Editor executable was discovered; local machine path is omitted from deterministic artifacts.
 - info: alpha_build.goal012_gate_recorded [unity_runtime_export_vertical_slice_artifact_verification] User-confirmed Goal 012 artifact verification is recorded as passed.

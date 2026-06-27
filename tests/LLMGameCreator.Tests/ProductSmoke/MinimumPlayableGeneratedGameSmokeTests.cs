@@ -67,9 +67,18 @@ public sealed class MinimumPlayableGeneratedGameSmokeTests
         Assert.True(Directory.Exists(Path.Combine(reviewPackage, "LLMGameCreatorAlpha_Data")));
         Assert.True(File.Exists(Path.Combine(reviewPackage, "README_PLAY.md")));
         Assert.True(File.Exists(Path.Combine(reviewPackage, "RUN_MANUAL_PLAY.ps1")));
-        Assert.True(File.Exists(Path.Combine(reviewPackage, "RUN_AUTOMATED_SMOKE.ps1")));
+        var automatedSmokeScriptPath = Path.Combine(reviewPackage, "RUN_AUTOMATED_SMOKE.ps1");
+        Assert.True(File.Exists(automatedSmokeScriptPath));
         Assert.True(File.Exists(Path.Combine(reviewPackage, "MANUAL_PLAY_REVIEW_CHECKLIST.md")));
         Assert.True(File.Exists(Path.Combine(reviewPackage, "generated-scenario-summary.json")));
+
+        var automatedSmokeScript = await File.ReadAllTextAsync(automatedSmokeScriptPath);
+        Assert.Contains("Start-Process -FilePath \".\\LLMGameCreatorAlpha.exe\" -ArgumentList $arguments -Wait -PassThru", automatedSmokeScript, StringComparison.Ordinal);
+        Assert.Contains("$process.ExitCode", automatedSmokeScript, StringComparison.Ordinal);
+        Assert.DoesNotContain("$LASTEXITCODE", automatedSmokeScript, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.launch_completed=true", automatedSmokeScript, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.quest_loop_completed=true", automatedSmokeScript, StringComparison.Ordinal);
+        Assert.Contains("alpha_runtime.reward_granted.after=true", automatedSmokeScript, StringComparison.Ordinal);
     }
 
     private static string ResolveProjectFolder(string tempPath)

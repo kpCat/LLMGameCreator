@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "alpha_build_launch_metadata_v1",
+  "runtimeHostKind": "generic_unity_runtime",
+  "launchMode": "blocked_until_repo_unity_project_exists",
+  "packageId": "game/content_generation/trade-caravan",
+  "packageHash": "02f2f2d207e4d32184682be5b42b02539be12f7da5bd34142f0e1e011b634706",
+  "assetManifestHash": "5aa6d73963072647eb32be772c4c0564f74651054bed512ec909486b975fd81b",
+  "exportManifestHash": "442e0fb472e47b4207b2635d8d1be152042ffe4fd00769323120058444c8d58c",
+  "startMapId": "map/trade-caravan/start",
+  "selectedThreadId": "thread/trade-caravan/000",
+  "windowsExecutableProduced": false,
+  "unityEditorExecuted": false,
+  "unityBuildProduced": false
+}
