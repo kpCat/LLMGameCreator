@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "capability_bundle_pipeline_inputs_profile_requests_v1",
+  "previousAcceptedGate": "development_complexity_stabilization_verification passed",
+  "requestCount": 3,
+  "requests": [
+    {
+      "profileId": "game_profile/frontier-survival-minimum-alpha",
+      "sourceProfilePath": "frontier-survival-minimum-alpha.game-profile.json",
+      "sourceProfileHash": "61df83758c2e69d8da3551424b4d1828d33bd6f544c193d57bc16e026423611c",
+      "gameFamilyId": "game_family/frontier_survival",
+      "requestedRuntimeExportTarget": "runtime_export/unity_alpha_windows",
+      "selectorRequest": {
+        "presentationModeId": "presentation_mode/top_down_2d",
+        "worldTopologyId": "world_topology/region_graph",
+        "actorModelId": "actor_model/single_player_character",
+        "inventoryModelId": "inventory_model/list_inventory",
+        "combatModelId": "combat_model/turn_based",
+        "progressionModelId": "progression_model/level_xp",
+        "pathfindingProfileId": "pathfinding/region_graph",
+        "npcBehaviorModelId": "npc_behavior/dialogue_state_driven",
+        "selectedFeatureBundleIds": [
+          "feature_bundle/combat_realtime_turn_hybrid/v1",
+          "feature_bundle/core_atlas_planning/v1",
+          "feature_bundle/game_profile_negotiation/v1",
+          "feature_bundle/quest_multi_stage/v1",
+          "feature_bundle/runtime_db_build_plan/v1",
+          "feature_bundle/survival_sandbox/v1",
+          "feature_bundle/unity_ir_runtime_shell/v1",
+          "feature_bundle/world_region_chunk_generation/v1"
+        ],
+        "selectedRuntimeTargetIds": [
+          "headless",
+          "unity2d",
+          "unity3d"
+        ]
+      }
+    },
+    {
+      "profileId": "game_profile/gothic-mystery-investigation-alpha",
+      "sourceProfilePath": "gothic-mystery-investigation-alpha.game-profile.json",
+      "sourceProfileHash": "17fca2bcd3859b5134b5fdbef165dbf4f82c8903e02855fc4ef5328bbc8d23da",
+      "gameFamilyId": "game_family/gothic_mystery",
+      "requestedRuntimeExportTarget": "runtime_export/unity_alpha_windows",
+      "selectorRequest": {
+        "presentationModeId": "presentation_mode/map_and_panel_rpg",
+        "worldTopologyId": "world_topology/node_map",
+        "actorModelId": "actor_model/single_player_character",
+        "inventoryModelId": "inventory_model/list_inventory",
+        "combatModelId": "combat_model/none",
+        "progressionModelId": "progression_model/reputation_tracks",
+        "pathfindingProfileId": "pathfinding/waypoint_graph",
+        "npcBehaviorModelId": "npc_behavior/dialogue_state_driven",
+        "selectedFeatureBundleIds": [
+          "feature_bundle/core_atlas_planning/v1",
+          "feature_bundle/dialogue_choice_graph/v1",
+          "feature_bundle/faction_reputation/v1",
+          "feature_bundle/game_profile_negotiation/v1",
+          "feature_bundle/quest_multi_stage/v1",
+          "feature_bundle/runtime_db_build_plan/v1",
+          "feature_bundle/text_templates_and_morphology/v1",
+          "feature_bundle/unity_ir_runtime_shell/v1",
+          "feature_bundle/world_region_chunk_generation/v1"
+        ],
+        "selectedRuntimeTargetIds": [
+          "headless",
+          "unity2d",
+          "unity3d"
+        ]
+      }
+    },
+    {
+      "profileId": "game_profile/trade-caravan-social-economy-alpha",
+      "sourceProfilePath": "trade-caravan-social-economy-alpha.game-profile.json",
+      "sourceProfileHash": "01f960add73878b16c973a472d730d394156c37b7a9570905ab130e405b39981",
+      "gameFamilyId": "game_family/trade_caravan",
+      "requestedRuntimeExportTarget": "runtime_export/unity_alpha_windows",
+      "selectorRequest": {
+        "presentationModeId": "presentation_mode/map_and_panel_rpg",
+        "worldTopologyId": "world_topology/region_graph",
+        "actorModelId": "actor_model/vehicle_or_ship",
+        "inventoryModelId": "inventory_model/container_inventory",
+        "combatModelId": "combat_model/none",
+        "progressionModelId": "progression_model/reputation_tracks",
+        "pathfindingProfileId": "pathfinding/region_graph",
+        "npcBehaviorModelId": "npc_behavior/vendor_ai",
+        "selectedFeatureBundleIds": [
+          "feature_bundle/core_atlas_planning/v1",
+          "feature_bundle/dialogue_choice_graph/v1",
+          "feature_bundle/faction_reputation/v1",
+          "feature_bundle/game_profile_negotiation/v1",
+          "feature_bundle/media_request_generation/v1",
+          "feature_bundle/quest_multi_stage/v1",
+          "feature_bundle/runtime_db_build_plan/v1",
+          "feature_bundle/unity_ir_runtime_shell/v1",
+          "feature_bundle/world_region_chunk_generation/v1"
+        ],
+        "selectedRuntimeTargetIds": [
+          "headless",
+          "unity2d",
+          "unity3d"
+        ]
+      }
+    }
+  ]
+}

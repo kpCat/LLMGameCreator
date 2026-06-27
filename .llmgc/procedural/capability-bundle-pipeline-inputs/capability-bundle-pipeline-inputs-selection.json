@@ -1,0 +1,1238 @@
+{
+  "schemaVersion": "capability_bundle_pipeline_inputs_selection_v1",
+  "previousAcceptedGate": "development_complexity_stabilization_verification passed",
+  "selectionCount": 3,
+  "selections": [
+    {
+      "profileId": "game_profile/frontier-survival-minimum-alpha",
+      "gameFamilyId": "game_family/frontier_survival",
+      "selectionId": "generator_plan_capability_selection/f8183ba4e5dc704e",
+      "status": "invalid",
+      "selectedVariantIds": {
+        "presentationModeId": "presentation_mode/top_down_2d",
+        "worldTopologyId": "world_topology/region_graph",
+        "actorModelId": "actor_model/single_player_character",
+        "inventoryModelId": "inventory_model/list_inventory",
+        "combatModelId": "combat_model/turn_based",
+        "progressionModelId": "progression_model/level_xp",
+        "pathfindingProfileId": "pathfinding/region_graph",
+        "npcBehaviorModelId": "npc_behavior/dialogue_state_driven"
+      },
+      "selectedFeatureBundleIds": [
+        "feature_bundle/combat_realtime_turn_hybrid/v1",
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/game_profile_negotiation/v1",
+        "feature_bundle/quest_multi_stage/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/survival_sandbox/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1",
+        "feature_bundle/world_region_chunk_generation/v1"
+      ],
+      "selectedRuntimeTargetIds": [
+        "headless",
+        "unity2d",
+        "unity3d"
+      ],
+      "resolvedCapabilityIds": [
+        "core.diagnostics/v1",
+        "core.ids/v1",
+        "runtime_db.build_plan/v1",
+        "semantic.property_channels/v1"
+      ],
+      "resolvedArtifactContractIds": [
+        "asset_index_v1",
+        "combat_pack_v1",
+        "content_overlay_pack_v1",
+        "diagnostics_v1",
+        "dialogue_pack_v1",
+        "encounter_pack_v1",
+        "entity_pack_v1",
+        "feature_bundle_v1",
+        "formula_pack_v1",
+        "game_package_patch_v1",
+        "game_profile_v1",
+        "generator_plan_v1",
+        "interaction_pack_v1",
+        "inventory_pack_v1",
+        "map_pack_v1",
+        "npc_card_v1",
+        "player_character_card_v1",
+        "progression_pack_v1",
+        "region_graph_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1",
+        "semantic_pack_v1",
+        "unity_ir_v1",
+        "validation_report_v1"
+      ],
+      "resolvedValidatorIds": [
+        "ability.costs_valid",
+        "bundle.dependency_resolution",
+        "bundle.duplicate_id",
+        "bundle.required_fields",
+        "bundle.runtime_target_known",
+        "channel_applies_to",
+        "character.card_refs_valid",
+        "combat.damage_bounds",
+        "combat.mode_supported",
+        "combat.turn_order_valid",
+        "crafting.recipe_refs_valid",
+        "diagnostics_shape",
+        "dialogue.behavior_refs_valid",
+        "duplicate_id",
+        "entity.refs_valid",
+        "formula.safe_dsl_only",
+        "hazard.effects_valid",
+        "id_format",
+        "index_plan_valid",
+        "interaction.target_refs_valid",
+        "inventory.stack_refs_valid",
+        "map.bounds_valid",
+        "no_unknown_channel",
+        "path.region_refs_valid",
+        "profile.content_overlays_explicit",
+        "profile.no_hidden_rating_assumptions",
+        "profile.runtime_targets_required",
+        "profile.world_scale_declared",
+        "progression.level_bounds_valid",
+        "quest.node_reachability",
+        "quest.no_unreachable_completion",
+        "quest.objective_refs_valid",
+        "quest.reward_refs_valid",
+        "region.graph_connected",
+        "resource.refs_valid",
+        "runtime_db.indexes_declared",
+        "runtime_db.save_state_separated",
+        "runtime_db.source_artifacts_approved",
+        "runtime_db.table_groups_known",
+        "runtime_db.traceability_present",
+        "schema_valid",
+        "semantic.channel_known",
+        "semantic.content_tags_consistent",
+        "semantic.no_unapproved_new_facts",
+        "semantic.trait_reference_valid",
+        "source_artifact_exists",
+        "status_effect.refs_valid",
+        "survival.needs_bounds",
+        "table_plan_valid",
+        "unity_ir.asset_refs_valid",
+        "unity_ir.export_dry_run_passes",
+        "unity_ir.group_known",
+        "unity_ir.no_custom_code_required_by_default",
+        "unity_ir.runtime_target_supported",
+        "world.chunk_bounds_valid",
+        "world.location_id_unique",
+        "world.no_unbounded_tile_dump",
+        "world.region_refs_valid"
+      ],
+      "resolvedPromptContextTemplateIds": [
+        "batch_generation_round_robin",
+        "design_discussion",
+        "quality_sample_review",
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "resolvedRuntimeTargetIds": [
+        "automation",
+        "city_builder",
+        "debug",
+        "first_person_grid",
+        "headless",
+        "isometric",
+        "pseudo3d",
+        "unity2d",
+        "unity3d",
+        "visual_novel"
+      ],
+      "supportedNowCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/rule_pack_combat_faction_social_work_theft",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ],
+      "futureRequiredCapabilityIds": [
+        "ability.rules/v1",
+        "artifact_contracts/v1",
+        "asset_index_v1",
+        "capability_atlas/v1",
+        "combat.mode/v1",
+        "combat_pack_v1",
+        "content_overlay_selection_v1",
+        "crafting.recipe_rules/v1",
+        "diagnostics_v1",
+        "effect.safe_actions/v1",
+        "encounter_pack_v1",
+        "entity_pack_v1",
+        "formula.safe_dsl/v1",
+        "game_profile_negotiation_map/v1",
+        "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+        "interaction.conditions/v1",
+        "interaction_pack_v1",
+        "inventory_pack_v1",
+        "map_pack_v1",
+        "npc_card_v1",
+        "player_character_card_v1",
+        "progression_pack_v1",
+        "prompt_context_pack_map/v1",
+        "quest.graph/v1",
+        "reference_profiles",
+        "region_graph_v1",
+        "reward.rules/v1",
+        "runtime_db_and_unity_export_map/v1",
+        "status_effects/v1",
+        "survival.needs/v1",
+        "unity_ir_v1",
+        "validation_pipeline/v1",
+        "world.chunk/v1",
+        "world.region/v1"
+      ],
+      "blockedGapIds": [
+        "world_topology/region_graph"
+      ],
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "capability_selection.incompatible_presentation_world",
+          "target": "world_topology/region_graph",
+          "message": "Presentation mode 'presentation_mode/top_down_2d' does not allow world topology 'world_topology/region_graph'."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "ability.rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: ability.rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "artifact_contracts/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "asset_index_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "capability_atlas/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "combat.mode/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: combat.mode/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "content_overlay_selection_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "crafting.recipe_rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: crafting.recipe_rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "effect.safe_actions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "formula.safe_dsl/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: formula.safe_dsl/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "game_profile_negotiation_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "interaction.conditions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "prompt_context_pack_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "quest.graph/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reference_profiles",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reward.rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "runtime_db_and_unity_export_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "status_effects/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: status_effects/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "survival.needs/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: survival.needs/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "unity_ir_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "validation_pipeline/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "world.chunk/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "world.region/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "combat_pack_v1",
+          "message": "Artifact contract 'combat_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "diagnostics_v1",
+          "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "encounter_pack_v1",
+          "message": "Artifact contract 'encounter_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "entity_pack_v1",
+          "message": "Artifact contract 'entity_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "interaction_pack_v1",
+          "message": "Artifact contract 'interaction_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "inventory_pack_v1",
+          "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "map_pack_v1",
+          "message": "Artifact contract 'map_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "npc_card_v1",
+          "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "player_character_card_v1",
+          "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "progression_pack_v1",
+          "message": "Artifact contract 'progression_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "region_graph_v1",
+          "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "info",
+          "code": "capability_selection.loaded",
+          "target": "generator-library/atlas",
+          "message": "Capability selection atlas files were loaded."
+        }
+      ]
+    },
+    {
+      "profileId": "game_profile/gothic-mystery-investigation-alpha",
+      "gameFamilyId": "game_family/gothic_mystery",
+      "selectionId": "generator_plan_capability_selection/64aa7f054a697e50",
+      "status": "invalid",
+      "selectedVariantIds": {
+        "presentationModeId": "presentation_mode/map_and_panel_rpg",
+        "worldTopologyId": "world_topology/node_map",
+        "actorModelId": "actor_model/single_player_character",
+        "inventoryModelId": "inventory_model/list_inventory",
+        "combatModelId": "combat_model/none",
+        "progressionModelId": "progression_model/reputation_tracks",
+        "pathfindingProfileId": "pathfinding/waypoint_graph",
+        "npcBehaviorModelId": "npc_behavior/dialogue_state_driven"
+      },
+      "selectedFeatureBundleIds": [
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/dialogue_choice_graph/v1",
+        "feature_bundle/faction_reputation/v1",
+        "feature_bundle/game_profile_negotiation/v1",
+        "feature_bundle/quest_multi_stage/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/text_templates_and_morphology/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1",
+        "feature_bundle/world_region_chunk_generation/v1"
+      ],
+      "selectedRuntimeTargetIds": [
+        "headless",
+        "unity2d",
+        "unity3d"
+      ],
+      "resolvedCapabilityIds": [
+        "core.diagnostics/v1",
+        "core.ids/v1",
+        "runtime_db.build_plan/v1",
+        "semantic.property_channels/v1",
+        "semantic.traits/v1",
+        "text.intent_templates/v1",
+        "text.morphology_ir_ru/v1"
+      ],
+      "resolvedArtifactContractIds": [
+        "asset_index_v1",
+        "character_card_v1",
+        "content_overlay_pack_v1",
+        "diagnostics_v1",
+        "dialogue_pack_v1",
+        "equipment_pack_v1",
+        "feature_bundle_v1",
+        "game_package_patch_v1",
+        "game_profile_v1",
+        "generator_plan_v1",
+        "inventory_pack_v1",
+        "morphology_pack_v1",
+        "npc_card_v1",
+        "party_roster_v1",
+        "path_network_v1",
+        "phrase_plan_v1",
+        "player_character_card_v1",
+        "region_graph_v1",
+        "reputation_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1",
+        "semantic_pack_v1",
+        "text_pack_v1",
+        "unity_ir_v1",
+        "validation_report_v1",
+        "world_profile_v1"
+      ],
+      "resolvedValidatorIds": [
+        "agreement_target_exists",
+        "bundle.dependency_resolution",
+        "bundle.duplicate_id",
+        "bundle.required_fields",
+        "bundle.runtime_target_known",
+        "case_valid",
+        "channel_applies_to",
+        "character.card_refs_valid",
+        "combat.absent_or_disabled",
+        "combat.encounter_refs_valid",
+        "diagnostics_shape",
+        "dialogue.behavior_refs_valid",
+        "dialogue.choice_refs_valid",
+        "dialogue.conditions_safe",
+        "dialogue.node_reachability",
+        "duplicate_id",
+        "effect.allowed_actions_only",
+        "faction.id_unique",
+        "faction.relations_symmetric_when_required",
+        "id_format",
+        "index_plan_valid",
+        "inventory.refs_valid",
+        "inventory.stack_refs_valid",
+        "lexeme_exists",
+        "morphology.forms_complete_for_required_locale",
+        "node.refs_valid",
+        "no_unapproved_new_fact",
+        "no_unknown_channel",
+        "no_unknown_signal",
+        "party.roster_valid",
+        "path.waypoint_refs_valid",
+        "persistent_flag_valid",
+        "profile.content_overlays_explicit",
+        "profile.no_hidden_rating_assumptions",
+        "profile.runtime_targets_required",
+        "profile.world_scale_declared",
+        "quest.node_reachability",
+        "quest.no_unreachable_completion",
+        "quest.objective_refs_valid",
+        "quest.reward_refs_valid",
+        "region.refs_valid",
+        "reputation.bounds_valid",
+        "reputation.gates_refs_valid",
+        "runtime_db.indexes_declared",
+        "runtime_db.save_state_separated",
+        "runtime_db.source_artifacts_approved",
+        "runtime_db.table_groups_known",
+        "runtime_db.traceability_present",
+        "schema_valid",
+        "source_artifact_exists",
+        "state_type_valid",
+        "table_plan_valid",
+        "template_slots_valid",
+        "text.no_raw_unescaped_quotes_for_json",
+        "text.semantic_descriptor_allowed",
+        "text.template_placeholders_valid",
+        "trait_id_valid",
+        "unity_ir.asset_refs_valid",
+        "unity_ir.export_dry_run_passes",
+        "unity_ir.group_known",
+        "unity_ir.no_custom_code_required_by_default",
+        "unity_ir.runtime_target_supported",
+        "world.chunk_bounds_valid",
+        "world.location_id_unique",
+        "world.no_unbounded_tile_dump",
+        "world.region_refs_valid"
+      ],
+      "resolvedPromptContextTemplateIds": [
+        "batch_generation_round_robin",
+        "design_discussion",
+        "quality_sample_review",
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "resolvedRuntimeTargetIds": [
+        "automation",
+        "city_builder",
+        "debug",
+        "first_person_grid",
+        "headless",
+        "isometric",
+        "pseudo3d",
+        "unity2d",
+        "unity3d",
+        "visual_novel"
+      ],
+      "supportedNowCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ],
+      "futureRequiredCapabilityIds": [
+        "artifact_contracts/v1",
+        "asset_index_v1",
+        "capability/dialogue_clue_graph_future",
+        "capability_atlas/v1",
+        "character_card_v1",
+        "content_overlay_selection_v1",
+        "diagnostics_v1",
+        "dialogue.graph/v1",
+        "effect.safe_actions/v1",
+        "equipment_pack_v1",
+        "faction.definitions/v1",
+        "game_profile_negotiation_map/v1",
+        "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+        "interaction.conditions/v1",
+        "inventory_pack_v1",
+        "npc_card_v1",
+        "party_roster_v1",
+        "path_network_v1",
+        "phrase_plan_v1",
+        "player_character_card_v1",
+        "prompt_context_pack_map/v1",
+        "quest.graph/v1",
+        "reference_profiles",
+        "region_graph_v1",
+        "reputation.rules/v1",
+        "reputation_pack_v1",
+        "reward.rules/v1",
+        "runtime_db_and_unity_export_map/v1",
+        "unity_ir_v1",
+        "validation_pipeline/v1",
+        "world.chunk/v1",
+        "world.region/v1",
+        "world_profile_v1"
+      ],
+      "blockedGapIds": [
+        "world_topology/node_map"
+      ],
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "capability_selection.incompatible_presentation_world",
+          "target": "world_topology/node_map",
+          "message": "Presentation mode 'presentation_mode/map_and_panel_rpg' does not allow world topology 'world_topology/node_map'."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "artifact_contracts/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "asset_index_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "capability_atlas/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "content_overlay_selection_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "dialogue.graph/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: dialogue.graph/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "effect.safe_actions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "faction.definitions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: faction.definitions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "game_profile_negotiation_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "interaction.conditions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "prompt_context_pack_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "quest.graph/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reference_profiles",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reputation.rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reputation.rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reward.rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "runtime_db_and_unity_export_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "unity_ir_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "validation_pipeline/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "world.chunk/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "world.region/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "character_card_v1",
+          "message": "Artifact contract 'character_card_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "diagnostics_v1",
+          "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "equipment_pack_v1",
+          "message": "Artifact contract 'equipment_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "inventory_pack_v1",
+          "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "npc_card_v1",
+          "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "party_roster_v1",
+          "message": "Artifact contract 'party_roster_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "path_network_v1",
+          "message": "Artifact contract 'path_network_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "phrase_plan_v1",
+          "message": "Artifact contract 'phrase_plan_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "player_character_card_v1",
+          "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "region_graph_v1",
+          "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "reputation_pack_v1",
+          "message": "Artifact contract 'reputation_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "world_profile_v1",
+          "message": "Artifact contract 'world_profile_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.variant_not_recommended",
+          "target": "actor_model/single_player_character",
+          "message": "Actor model 'actor_model/single_player_character' is not recommended for presentation mode 'presentation_mode/map_and_panel_rpg'."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.variant_not_recommended",
+          "target": "combat_model/none",
+          "message": "Combat model 'combat_model/none' is not recommended for presentation mode 'presentation_mode/map_and_panel_rpg'."
+        },
+        {
+          "severity": "info",
+          "code": "capability_selection.loaded",
+          "target": "generator-library/atlas",
+          "message": "Capability selection atlas files were loaded."
+        }
+      ]
+    },
+    {
+      "profileId": "game_profile/trade-caravan-social-economy-alpha",
+      "gameFamilyId": "game_family/trade_caravan",
+      "selectionId": "generator_plan_capability_selection/533fea9ea62f723f",
+      "status": "ready_with_warnings",
+      "selectedVariantIds": {
+        "presentationModeId": "presentation_mode/map_and_panel_rpg",
+        "worldTopologyId": "world_topology/region_graph",
+        "actorModelId": "actor_model/vehicle_or_ship",
+        "inventoryModelId": "inventory_model/container_inventory",
+        "combatModelId": "combat_model/none",
+        "progressionModelId": "progression_model/reputation_tracks",
+        "pathfindingProfileId": "pathfinding/region_graph",
+        "npcBehaviorModelId": "npc_behavior/vendor_ai"
+      },
+      "selectedFeatureBundleIds": [
+        "feature_bundle/core_atlas_planning/v1",
+        "feature_bundle/dialogue_choice_graph/v1",
+        "feature_bundle/faction_reputation/v1",
+        "feature_bundle/game_profile_negotiation/v1",
+        "feature_bundle/media_request_generation/v1",
+        "feature_bundle/quest_multi_stage/v1",
+        "feature_bundle/runtime_db_build_plan/v1",
+        "feature_bundle/unity_ir_runtime_shell/v1",
+        "feature_bundle/world_region_chunk_generation/v1"
+      ],
+      "selectedRuntimeTargetIds": [
+        "headless",
+        "unity2d",
+        "unity3d"
+      ],
+      "resolvedCapabilityIds": [
+        "core.diagnostics/v1",
+        "core.ids/v1",
+        "runtime_db.build_plan/v1",
+        "semantic.property_channels/v1",
+        "semantic.traits/v1",
+        "text.intent_templates/v1"
+      ],
+      "resolvedArtifactContractIds": [
+        "actor_model_profile_v1",
+        "animation_request_pack_v1",
+        "asset_index_v1",
+        "asset_request_pack_v1",
+        "audio_request_pack_v1",
+        "character_card_v1",
+        "content_overlay_pack_v1",
+        "diagnostics_v1",
+        "dialogue_pack_v1",
+        "equipment_pack_v1",
+        "feature_bundle_v1",
+        "game_package_patch_v1",
+        "game_profile_v1",
+        "generator_plan_v1",
+        "inventory_pack_v1",
+        "party_roster_v1",
+        "region_graph_v1",
+        "reputation_pack_v1",
+        "rule_pack_v1",
+        "runtime_db_build_plan_v1",
+        "semantic_pack_v1",
+        "text_pack_v1",
+        "unity_ir_v1",
+        "validation_report_v1",
+        "vendor_card_v1",
+        "vendor_pack_v1",
+        "world_profile_v1"
+      ],
+      "resolvedValidatorIds": [
+        "bundle.dependency_resolution",
+        "bundle.duplicate_id",
+        "bundle.required_fields",
+        "bundle.runtime_target_known",
+        "channel_applies_to",
+        "combat.absent_or_disabled",
+        "combat.encounter_refs_valid",
+        "diagnostics_shape",
+        "dialogue.choice_refs_valid",
+        "dialogue.conditions_safe",
+        "dialogue.node_reachability",
+        "duplicate_id",
+        "effect.allowed_actions_only",
+        "faction.id_unique",
+        "faction.relations_symmetric_when_required",
+        "id_format",
+        "index_plan_valid",
+        "inventory.container_refs_valid",
+        "inventory.refs_valid",
+        "media.no_unapproved_overlay_leak",
+        "media.platform_filters_valid",
+        "media.prompt_tags_valid",
+        "media.request_refs_approved_sources",
+        "no_unapproved_new_fact",
+        "no_unknown_channel",
+        "no_unknown_signal",
+        "party.roster_valid",
+        "path.region_refs_valid",
+        "persistent_flag_valid",
+        "profile.content_overlays_explicit",
+        "profile.no_hidden_rating_assumptions",
+        "profile.runtime_targets_required",
+        "profile.world_scale_declared",
+        "quest.node_reachability",
+        "quest.no_unreachable_completion",
+        "quest.objective_refs_valid",
+        "quest.reward_refs_valid",
+        "region.graph_connected",
+        "region.refs_valid",
+        "reputation.bounds_valid",
+        "reputation.gates_refs_valid",
+        "runtime_db.indexes_declared",
+        "runtime_db.save_state_separated",
+        "runtime_db.source_artifacts_approved",
+        "runtime_db.table_groups_known",
+        "runtime_db.traceability_present",
+        "schema_valid",
+        "source_artifact_exists",
+        "state_type_valid",
+        "table_plan_valid",
+        "template_slots_valid",
+        "trait_id_valid",
+        "unity_ir.asset_refs_valid",
+        "unity_ir.export_dry_run_passes",
+        "unity_ir.group_known",
+        "unity_ir.no_custom_code_required_by_default",
+        "unity_ir.runtime_target_supported",
+        "vehicle.storage_refs_valid",
+        "vendor.refs_valid",
+        "world.chunk_bounds_valid",
+        "world.location_id_unique",
+        "world.no_unbounded_tile_dump",
+        "world.region_refs_valid"
+      ],
+      "resolvedPromptContextTemplateIds": [
+        "batch_generation_round_robin",
+        "design_discussion",
+        "quality_sample_review",
+        "strict_single_json_artifact",
+        "targeted_repair"
+      ],
+      "resolvedRuntimeTargetIds": [
+        "automation",
+        "city_builder",
+        "debug",
+        "first_person_grid",
+        "headless",
+        "isometric",
+        "pseudo3d",
+        "unity2d",
+        "unity3d",
+        "visual_novel"
+      ],
+      "supportedNowCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/rule_pack_combat_faction_social_work_theft",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ],
+      "futureRequiredCapabilityIds": [
+        "actor_model_profile_v1",
+        "artifact_contracts/v1",
+        "asset_index_v1",
+        "asset_request_pack_v1",
+        "audio_request_pack_v1",
+        "capability/vendor_economy_future",
+        "capability_atlas/v1",
+        "character_card_v1",
+        "content_overlay.rules/v1",
+        "content_overlay_selection_v1",
+        "diagnostics_v1",
+        "dialogue.graph/v1",
+        "effect.safe_actions/v1",
+        "equipment_pack_v1",
+        "faction.definitions/v1",
+        "game_profile_negotiation_map/v1",
+        "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+        "interaction.conditions/v1",
+        "inventory_pack_v1",
+        "party_roster_v1",
+        "prompt_context_pack_map/v1",
+        "quest.graph/v1",
+        "reference_profiles",
+        "region_graph_v1",
+        "reputation.rules/v1",
+        "reputation_pack_v1",
+        "reward.rules/v1",
+        "runtime_db_and_unity_export_map/v1",
+        "unity_ir_v1",
+        "validation_pipeline/v1",
+        "vendor_card_v1",
+        "vendor_pack_v1",
+        "world.chunk/v1",
+        "world.region/v1",
+        "world_profile_v1"
+      ],
+      "blockedGapIds": [],
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "artifact_contracts/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "asset_index_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "asset_request_pack_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_request_pack_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "audio_request_pack_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: audio_request_pack_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "capability_atlas/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "content_overlay.rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay.rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "content_overlay_selection_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "dialogue.graph/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: dialogue.graph/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "effect.safe_actions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "faction.definitions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: faction.definitions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "game_profile_negotiation_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "interaction.conditions/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "prompt_context_pack_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "quest.graph/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reference_profiles",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reputation.rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reputation.rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "reward.rules/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "runtime_db_and_unity_export_map/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "unity_ir_v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "validation_pipeline/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "world.chunk/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.capability_gap",
+          "target": "world.region/v1",
+          "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "actor_model_profile_v1",
+          "message": "Artifact contract 'actor_model_profile_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "character_card_v1",
+          "message": "Artifact contract 'character_card_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "diagnostics_v1",
+          "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "equipment_pack_v1",
+          "message": "Artifact contract 'equipment_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "inventory_pack_v1",
+          "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "party_roster_v1",
+          "message": "Artifact contract 'party_roster_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "region_graph_v1",
+          "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "reputation_pack_v1",
+          "message": "Artifact contract 'reputation_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "vendor_card_v1",
+          "message": "Artifact contract 'vendor_card_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "vendor_pack_v1",
+          "message": "Artifact contract 'vendor_pack_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.missing_artifact_contract",
+          "target": "world_profile_v1",
+          "message": "Artifact contract 'world_profile_v1' is selected but is not present in artifact_contracts atlas."
+        },
+        {
+          "severity": "warning",
+          "code": "capability_selection.variant_not_recommended",
+          "target": "combat_model/none",
+          "message": "Combat model 'combat_model/none' is not recommended for presentation mode 'presentation_mode/map_and_panel_rpg'."
+        },
+        {
+          "severity": "info",
+          "code": "capability_selection.loaded",
+          "target": "generator-library/atlas",
+          "message": "Capability selection atlas files were loaded."
+        }
+      ]
+    }
+  ]
+}

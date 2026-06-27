@@ -13,12 +13,13 @@ Accepted through:
 ```text
 minimum_playable_generated_game_verification passed
 generated_game_profile_contract_verification passed
+development_complexity_stabilization_verification passed
 ```
 
 Produced for review:
 
 ```text
-development_complexity_stabilization_verification required
+capability_bundle_pipeline_inputs_verification required
 ```
 
 Current capabilities:
@@ -37,11 +38,12 @@ Current capabilities:
 - minimum playable generated game review package with runnable Windows player folder, README, manual/automated scripts, scenario summary, automated launch proof and quest completion proof;
 - generated game profile contract with three deterministic sample profiles, exact Goal 010-020 profile-to-pipeline mapping and explicit future-required capability separation;
 - compact review artifacts under `.llmgc/procedural/...`;
+- capability bundle pipeline input records for the three accepted game profiles, with explicit blocked/future-required gaps;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The generated game profile contract gate has been accepted by user prompt. Goal 022 produced artifact-scope governance and check-all isolation, but the user still needs to accept whether the stabilization evidence is sufficient before capability bundle selection starts.
+The development complexity stabilization gate has been accepted by user prompt. Goal 023 produced capability bundle pipeline input artifacts, but the user still needs to accept whether the Goal 023 selection/input evidence is sufficient before Goal 024 or S192 starts.
 
 ## Queue Rules
 
@@ -211,13 +213,23 @@ Prevent future goals from silently mutating unrelated tracked generated artifact
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start Capability Bundle Selection, Goal 023 or S185 until it is accepted.
+Accepted by user prompt before Goal 023.
 
 ### Goal 023: Capability Bundle Selection To Pipeline Inputs
+
+Gate:
+
+```text
+capability_bundle_pipeline_inputs_verification
+```
 
 Purpose:
 
 Map profile choices to capability bundles and concrete generation pipeline inputs without hardcoding one scenario.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start Goal 024 or S192 until it is accepted.
 
 ### Goal 024: Rich Package Assembly Coverage Audit
 
@@ -402,7 +414,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-development_complexity_stabilization_verification
+capability_bundle_pipeline_inputs_verification
 ```
 
 Status:

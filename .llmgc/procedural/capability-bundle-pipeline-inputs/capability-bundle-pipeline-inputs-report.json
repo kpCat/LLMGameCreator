@@ -1,0 +1,1547 @@
+{
+  "accepted": false,
+  "finalStatus": "capability_bundle_pipeline_inputs_verification",
+  "manualGate": "capability_bundle_pipeline_inputs_verification",
+  "previousAcceptedGate": "development_complexity_stabilization_verification passed",
+  "previousProfileGate": "generated_game_profile_contract_verification passed",
+  "completedSlices": [
+    "S185",
+    "S186",
+    "S187",
+    "S188",
+    "S189",
+    "S190",
+    "S191"
+  ],
+  "productSmokeRoute": "capability-bundle-pipeline-inputs",
+  "profileCount": 3,
+  "validProfileCount": 3,
+  "pipelineInputCount": 3,
+  "capabilitySelectionStarted": true,
+  "contractProofPassed": true,
+  "futureRequiredCapabilitiesPreserved": true,
+  "profileRequestArtifactHash": "4174054b656b5ada88e3501227e62e0f1ad31b7f7b1de125289845ce703749a0",
+  "selectionArtifactHash": "2d2813325fcc82f9ddfe21cee9fc4448b1e42810d0c6a93e556044758c94d5ca",
+  "generatorInputsArtifactHash": "d77a779db0c3dc5b48b04de7bad9308079e1bd132011072bfafd348648ae4e27",
+  "gapReportHash": "f1720cc9ea8811818b782254bd4ba3f4341ea4fd60714626ccc360002b907446",
+  "invalidMatrixHash": "c4ca4fcea77055fc4912f027b3517c01903fa85f24d33fe8f88947bad6f9a909",
+  "deterministicHash": "7d680f708c7808b26abc6b54dcd4d640e913fa775100c54c757cd066ce85869f",
+  "selectedProfileIds": [
+    "game_profile/frontier-survival-minimum-alpha",
+    "game_profile/gothic-mystery-investigation-alpha",
+    "game_profile/trade-caravan-social-economy-alpha"
+  ],
+  "gapSummary": {
+    "schemaVersion": "capability_bundle_pipeline_inputs_gap_report_v1",
+    "gapCount": 104,
+    "blockedGapCount": 2,
+    "futureRequiredCount": 102,
+    "gaps": [
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "world_topology/region_graph",
+        "status": "blocked_gap",
+        "code": "capability_selection.incompatible_presentation_world",
+        "message": "Presentation mode 'presentation_mode/top_down_2d' does not allow world topology 'world_topology/region_graph'."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "ability.rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: ability.rules/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "artifact_contracts/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "asset_index_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "capability_atlas/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "combat.mode/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: combat.mode/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "combat_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'combat_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "content_overlay_selection_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "crafting.recipe_rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: crafting.recipe_rules/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "diagnostics_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "effect.safe_actions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "encounter_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'encounter_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "entity_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'entity_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "formula.safe_dsl/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: formula.safe_dsl/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "game_profile_negotiation_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+        "status": "future_required",
+        "code": "atlas.runtime_target.exact_profile_target_missing",
+        "message": "The current atlas has broad unity2d/unity3d/headless targets but no exact runtime_export/unity_alpha_windows target id."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "interaction.conditions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "interaction_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'interaction_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "inventory_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "map_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'map_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "npc_card_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "player_character_card_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "progression_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'progression_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "prompt_context_pack_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "quest.graph/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "reference_profiles",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "region_graph_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "reward.rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "runtime_db_and_unity_export_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "status_effects/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: status_effects/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "survival.needs/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: survival.needs/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "unity_ir_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "validation_pipeline/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "world.chunk/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+      },
+      {
+        "profileId": "game_profile/frontier-survival-minimum-alpha",
+        "gapId": "world.region/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "world_topology/node_map",
+        "status": "blocked_gap",
+        "code": "capability_selection.incompatible_presentation_world",
+        "message": "Presentation mode 'presentation_mode/map_and_panel_rpg' does not allow world topology 'world_topology/node_map'."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "artifact_contracts/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "asset_index_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "capability/dialogue_clue_graph_future",
+        "status": "future_required",
+        "code": "profile.future_required_capability",
+        "message": "Accepted Goal 021 future-required capability is preserved and not marked supported-now."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "capability_atlas/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "character_card_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'character_card_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "content_overlay_selection_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "diagnostics_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "dialogue.graph/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: dialogue.graph/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "effect.safe_actions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "equipment_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'equipment_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "faction.definitions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: faction.definitions/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "game_profile_negotiation_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+        "status": "future_required",
+        "code": "atlas.runtime_target.exact_profile_target_missing",
+        "message": "The current atlas has broad unity2d/unity3d/headless targets but no exact runtime_export/unity_alpha_windows target id."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "interaction.conditions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "inventory_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "npc_card_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "party_roster_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'party_roster_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "path_network_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'path_network_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "phrase_plan_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'phrase_plan_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "player_character_card_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "prompt_context_pack_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "quest.graph/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "reference_profiles",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "region_graph_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "reputation.rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reputation.rules/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "reputation_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'reputation_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "reward.rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "runtime_db_and_unity_export_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "unity_ir_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "validation_pipeline/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "world.chunk/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "world.region/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+      },
+      {
+        "profileId": "game_profile/gothic-mystery-investigation-alpha",
+        "gapId": "world_profile_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'world_profile_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "actor_model_profile_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'actor_model_profile_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "artifact_contracts/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "asset_index_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "asset_request_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_request_pack_v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "audio_request_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: audio_request_pack_v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "capability/vendor_economy_future",
+        "status": "future_required",
+        "code": "profile.future_required_capability",
+        "message": "Accepted Goal 021 future-required capability is preserved and not marked supported-now."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "capability_atlas/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "character_card_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'character_card_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "content_overlay.rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay.rules/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "content_overlay_selection_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "diagnostics_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "dialogue.graph/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: dialogue.graph/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "effect.safe_actions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "equipment_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'equipment_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "faction.definitions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: faction.definitions/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "game_profile_negotiation_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+        "status": "future_required",
+        "code": "atlas.runtime_target.exact_profile_target_missing",
+        "message": "The current atlas has broad unity2d/unity3d/headless targets but no exact runtime_export/unity_alpha_windows target id."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "interaction.conditions/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "inventory_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "party_roster_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'party_roster_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "prompt_context_pack_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "quest.graph/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "reference_profiles",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "region_graph_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "reputation.rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reputation.rules/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "reputation_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'reputation_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "reward.rules/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "runtime_db_and_unity_export_map/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "unity_ir_v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "validation_pipeline/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "vendor_card_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'vendor_card_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "vendor_pack_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'vendor_pack_v1' is selected but is not present in artifact_contracts atlas."
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "world.chunk/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "world.region/v1",
+        "status": "future_required",
+        "code": "capability_selection.capability_gap",
+        "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+      },
+      {
+        "profileId": "game_profile/trade-caravan-social-economy-alpha",
+        "gapId": "world_profile_v1",
+        "status": "future_required",
+        "code": "capability_selection.missing_artifact_contract",
+        "message": "Artifact contract 'world_profile_v1' is selected but is not present in artifact_contracts atlas."
+      }
+    ],
+    "diagnostics": []
+  },
+  "invalidMatrix": {
+    "scenarioCount": 16,
+    "rejectedCount": 16,
+    "passed": true,
+    "scenarios": [
+      {
+        "scenarioId": "missing_accepted_goal022_gate",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal022_gate",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.goal022_gate.missing",
+            "target": "development_complexity_stabilization_verification required",
+            "message": "Goal 023 requires development_complexity_stabilization_verification passed."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal021_profile_artifacts",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal021_profile_artifacts",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.goal021_evidence.pipeline_plan_missing",
+            "target": ".llmgc/procedural/generated-game-profile-contract/missing-pipeline-plan.json",
+            "message": "Accepted Goal 021 pipeline plan artifact is required."
+          },
+          {
+            "severity": "error",
+            "code": "capability_bundle.goal021_evidence.report_missing",
+            "target": ".llmgc/procedural/generated-game-profile-contract/missing-report.json",
+            "message": "Accepted Goal 021 profile contract report is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "copied_capability_selection_report_without_profile_files",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "copied_capability_selection_report_without_profile_files",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.profile_files.missing",
+            "target": "samples/game-profiles",
+            "message": "Capability bundle proof requires accepted profile files, not only a copied selection report."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_profile_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_profile_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.profile_id.unknown",
+            "target": "game_profile/unknown",
+            "message": "Profile id must come from the accepted Goal 021 profile set."
+          }
+        ]
+      },
+      {
+        "scenarioId": "duplicate_profile_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "duplicate_profile_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.profile_id.duplicate",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Profile ids must be present and unique before capability selection."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_feature_bundle_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_feature_bundle_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_selection.incompatible_presentation_world",
+            "target": "world_topology/region_graph",
+            "message": "Presentation mode 'presentation_mode/top_down_2d' does not allow world topology 'world_topology/region_graph'."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.unknown_feature_bundle_id",
+            "target": "feature_bundle/unknown/v1",
+            "message": "Unknown feature bundle id: feature_bundle/unknown/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "combat_pack_v1",
+            "message": "Artifact contract 'combat_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "encounter_pack_v1",
+            "message": "Artifact contract 'encounter_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "entity_pack_v1",
+            "message": "Artifact contract 'entity_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "interaction_pack_v1",
+            "message": "Artifact contract 'interaction_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "inventory_pack_v1",
+            "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "map_pack_v1",
+            "message": "Artifact contract 'map_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "npc_card_v1",
+            "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "player_character_card_v1",
+            "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "progression_pack_v1",
+            "message": "Artifact contract 'progression_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "region_graph_v1",
+            "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "info",
+            "code": "capability_selection.loaded",
+            "target": "generator-library/atlas",
+            "message": "Capability selection atlas files were loaded."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_runtime_target_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_runtime_target_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_selection.incompatible_presentation_world",
+            "target": "world_topology/region_graph",
+            "message": "Presentation mode 'presentation_mode/top_down_2d' does not allow world topology 'world_topology/region_graph'."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.unknown_runtime_target_id",
+            "target": "runtime_target/unknown",
+            "message": "Unknown runtime target id: runtime_target/unknown"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "ability.rules/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: ability.rules/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "artifact_contracts/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "asset_index_v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "capability_atlas/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "combat.mode/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: combat.mode/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "content_overlay_selection_v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "crafting.recipe_rules/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: crafting.recipe_rules/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "effect.safe_actions/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "formula.safe_dsl/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: formula.safe_dsl/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "game_profile_negotiation_map/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "interaction.conditions/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "prompt_context_pack_map/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "quest.graph/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "reference_profiles",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "reward.rules/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "runtime_db_and_unity_export_map/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "status_effects/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: status_effects/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "survival.needs/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: survival.needs/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "unity_ir_v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "validation_pipeline/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "world.chunk/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.capability_gap",
+            "target": "world.region/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "combat_pack_v1",
+            "message": "Artifact contract 'combat_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "diagnostics_v1",
+            "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "encounter_pack_v1",
+            "message": "Artifact contract 'encounter_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "entity_pack_v1",
+            "message": "Artifact contract 'entity_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "interaction_pack_v1",
+            "message": "Artifact contract 'interaction_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "inventory_pack_v1",
+            "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "map_pack_v1",
+            "message": "Artifact contract 'map_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "npc_card_v1",
+            "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "player_character_card_v1",
+            "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "progression_pack_v1",
+            "message": "Artifact contract 'progression_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "warning",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "region_graph_v1",
+            "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "info",
+            "code": "capability_selection.loaded",
+            "target": "generator-library/atlas",
+            "message": "Capability selection atlas files were loaded."
+          }
+        ]
+      },
+      {
+        "scenarioId": "presentation_topology_incompatibility_not_complete",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "presentation_topology_incompatibility_not_complete",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "atlas.runtime_target.exact_profile_target_missing",
+            "target": "gap/runtime_export/unity_alpha_windows_exact_atlas_target",
+            "message": "The current atlas has broad unity2d/unity3d/headless targets but no exact runtime_export/unity_alpha_windows target id."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "ability.rules/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: ability.rules/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "artifact_contracts/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: artifact_contracts/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "asset_index_v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: asset_index_v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "capability_atlas/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: capability_atlas/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "combat.mode/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: combat.mode/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "content_overlay_selection_v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: content_overlay_selection_v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "crafting.recipe_rules/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: crafting.recipe_rules/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "effect.safe_actions/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: effect.safe_actions/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "formula.safe_dsl/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: formula.safe_dsl/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "game_profile_negotiation_map/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: game_profile_negotiation_map/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "interaction.conditions/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: interaction.conditions/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "prompt_context_pack_map/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: prompt_context_pack_map/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "quest.graph/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: quest.graph/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "reference_profiles",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reference_profiles"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "reward.rules/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: reward.rules/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "runtime_db_and_unity_export_map/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: runtime_db_and_unity_export_map/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "status_effects/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: status_effects/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "survival.needs/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: survival.needs/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "unity_ir_v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: unity_ir_v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "validation_pipeline/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: validation_pipeline/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "world.chunk/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.chunk/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.capability_gap",
+            "target": "world.region/v1",
+            "message": "Capability, contract, module or future requirement is not resolved by the current atlas reader: world.region/v1"
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.incompatible_presentation_world",
+            "target": "world_topology/node_map",
+            "message": "Presentation mode 'presentation_mode/top_down_2d' does not allow world topology 'world_topology/node_map'."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "combat_pack_v1",
+            "message": "Artifact contract 'combat_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "diagnostics_v1",
+            "message": "Artifact contract 'diagnostics_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "encounter_pack_v1",
+            "message": "Artifact contract 'encounter_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "entity_pack_v1",
+            "message": "Artifact contract 'entity_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "interaction_pack_v1",
+            "message": "Artifact contract 'interaction_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "inventory_pack_v1",
+            "message": "Artifact contract 'inventory_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "map_pack_v1",
+            "message": "Artifact contract 'map_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "npc_card_v1",
+            "message": "Artifact contract 'npc_card_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "path_network_v1",
+            "message": "Artifact contract 'path_network_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "player_character_card_v1",
+            "message": "Artifact contract 'player_character_card_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "progression_pack_v1",
+            "message": "Artifact contract 'progression_pack_v1' is selected but is not present in artifact_contracts atlas."
+          },
+          {
+            "severity": "error",
+            "code": "capability_selection.missing_artifact_contract",
+            "target": "region_graph_v1",
+            "message": "Artifact contract 'region_graph_v1' is selected but is not present in artifact_contracts atlas."
+          }
+        ]
+      },
+      {
+        "scenarioId": "future_capability_marked_supported_now",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "future_capability_marked_supported_now",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.future_required.marked_supported_now",
+            "target": "capability/dialogue_clue_graph_future",
+            "message": "Future-required capability must not be marked supported_now."
+          }
+        ]
+      },
+      {
+        "scenarioId": "pipeline_input_claims_package_assembly_ran",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "pipeline_input_claims_package_assembly_ran",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.claims.package_assembly_executed",
+            "target": "packageAssemblyExecuted",
+            "message": "Pipeline input records are planning records and must not claim package assembly execution."
+          }
+        ]
+      },
+      {
+        "scenarioId": "pipeline_input_claims_unity_build_ran",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "pipeline_input_claims_unity_build_ran",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.claims.unity_build_executed",
+            "target": "unityBuildExecuted",
+            "message": "Goal 023 must not claim Unity build execution."
+          }
+        ]
+      },
+      {
+        "scenarioId": "pipeline_input_claims_external_execution",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "pipeline_input_claims_external_execution",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.claims.external_execution",
+            "target": "llmRagProviderMediaLuaExecuted",
+            "message": "Goal 023 must not claim LLM/RAG/provider/media/Lua execution."
+          }
+        ]
+      },
+      {
+        "scenarioId": "public_gamepackage_schema_mutation_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "public_gamepackage_schema_mutation_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.claims.public_schema_mutation",
+            "target": "publicGamePackageSchemaChanged",
+            "message": "Goal 023 must not claim public GamePackage schema mutation."
+          }
+        ]
+      },
+      {
+        "scenarioId": "generator_library_mutation_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "generator_library_mutation_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.claims.generator_library_mutation",
+            "target": "generatorLibraryChanged",
+            "message": "Goal 023 must not mutate generator-library."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_family_leakage_gothic_to_frontier_bundle",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "cross_family_leakage_gothic_to_frontier_bundle",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "capability_bundle.pipeline.cross_family_leak",
+            "target": "game_profile/gothic-mystery-investigation-alpha",
+            "message": "Gothic/trade profiles must not map to frontier-only package or bundle ids as complete support."
+          }
+        ]
+      },
+      {
+        "scenarioId": "historical_goal021_or_goal020_artifact_mutation",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "historical_goal021_or_goal020_artifact_mutation",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "artifact_scope.legacy_artifact.forbidden",
+            "target": ".llmgc/procedural/generated-game-profile-contract",
+            "message": "Historical Goal 021/020 compact artifacts are read-only for Goal 023."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "info",
+        "code": "capability_bundle.invalid_matrix_rejected",
+        "target": "invalid_matrix",
+        "message": "Invalid/fake/leak scenarios reject through profile, atlas, selector, gap or scope guard diagnostics."
+      }
+    ]
+  },
+  "packageAssemblyExecuted": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "unityBuildExecuted": false,
+  "llmRagProviderMediaLuaExecuted": false,
+  "scopeGuardPassed": true,
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "capability_bundle.goal021_evidence.present",
+      "target": ".llmgc/procedural/generated-game-profile-contract",
+      "message": "Accepted Goal 021 compact report and pipeline plan are present."
+    },
+    {
+      "severity": "info",
+      "code": "capability_bundle.goal021_profile_gate_recorded",
+      "target": "generated_game_profile_contract_verification passed",
+      "message": "User-confirmed Goal 021 generated game profile contract verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "capability_bundle.goal022_gate_recorded",
+      "target": "development_complexity_stabilization_verification passed",
+      "message": "User-confirmed Goal 022 development complexity stabilization verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "capability_bundle.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios reject through profile, atlas, selector, gap or scope guard diagnostics."
+    },
+    {
+      "severity": "info",
+      "code": "capability_bundle.no_external_execution",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua, Unity build, package assembly or generator-library execution was invoked."
+    }
+  ]
+}

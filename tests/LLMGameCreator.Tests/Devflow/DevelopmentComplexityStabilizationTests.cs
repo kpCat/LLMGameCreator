@@ -131,18 +131,19 @@ public sealed class DevelopmentComplexityStabilizationTests
     }
 
     [Fact]
-    public void StateDocsRecordGoal021AcceptedBeforeGoal022()
+    public void StateDocsRecordGoal022AcceptedBeforeGoal023()
     {
         var repoRoot = DevelopmentComplexityStabilizationArtifacts.FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var markdown = File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.md"));
         var contextIndex = File.ReadAllText(Path.Combine(repoRoot, "docs", "CONTEXT_INDEX.md"));
 
-        Assert.Equal("development_complexity_stabilization_verification", state.RootElement.GetProperty("gate_status").GetString());
-        Assert.Equal("goal_022_development_complexity_stabilization", state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("capability_bundle_pipeline_inputs_verification", state.RootElement.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_023_capability_bundle_pipeline_inputs", state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
         Assert.Contains("generated_game_profile_contract_verification passed", markdown);
+        Assert.Contains("development_complexity_stabilization_verification passed", markdown);
         Assert.Contains("development_complexity_stabilization_verification", markdown);
-        Assert.Contains("development_complexity_stabilization_verification", contextIndex);
+        Assert.Contains("capability_bundle_pipeline_inputs_verification", contextIndex);
     }
 
     [Fact]
@@ -157,9 +158,8 @@ public sealed class DevelopmentComplexityStabilizationTests
         Assert.True(stabilizationIndex >= 0, "Goal 022 stabilization entry is missing.");
         Assert.True(capabilityIndex > stabilizationIndex, "Capability Bundle Selection must stay after stabilization.");
         Assert.Contains("development_complexity_stabilization_verification", queue);
-        Assert.Contains(
-            "Status:\n\nProduced for review. The gate remains `required`, not `passed`",
-            queue.Replace("\r\n", "\n", StringComparison.Ordinal));
+        Assert.Contains("Status:\n\nAccepted by user prompt before Goal 023.", queue.Replace("\r\n", "\n", StringComparison.Ordinal));
+        Assert.Contains("capability_bundle_pipeline_inputs_verification", queue);
     }
 
     private sealed class TempDirectory : IDisposable

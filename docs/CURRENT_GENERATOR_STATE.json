@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-27T08:30:00Z",
+    "updated_at_utc":  "2026-06-27T14:40:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 022 development complexity stabilization verification required",
-    "gate_status":  "development_complexity_stabilization_verification",
+    "current_phase_title":  "Goal 023 capability bundle pipeline inputs verification required",
+    "gate_status":  "capability_bundle_pipeline_inputs_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_022_development_complexity_stabilization",
-    "active_manual_gate":  "Goal 022 records generated_game_profile_contract_verification passed and produces artifact-scope governance policy, machine-readable policy config, scope guard automation, check-all artifact isolation and compact stabilization evidence; development_complexity_stabilization_verification remains required and not passed until reviewed.",
-    "current_user_action":  "Review the development complexity stabilization policy, artifact-scope policy JSON, check-artifact-scope guard, check-all isolation proof, tracked generated artifact inventory, invalid/fake/leak matrix and verification artifact; do not mark development_complexity_stabilization_verification passed until the stabilization evidence is accepted.",
-    "recommended_next_decision":  "The user confirmed generated_game_profile_contract_verification passed before Goal 022. Goal 022 completes S178-S184 by inserting a stabilization goal before capability-selection work, defining docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md, adding .devflow/artifact-scope/artifact-scope-policy.json, adding .devflow/scripts/check-artifact-scope.ps1, isolating check-all product-smoke/test artifact writes under the check-all run directory, inventorying tracked generated artifacts without cleanup, adding the development-complexity-stabilization product smoke route and writing compact stabilization artifacts under .llmgc/procedural/development-complexity-stabilization. Goal 022 stops at development_complexity_stabilization_verification required; do not mark it passed and do not start Capability Bundle Selection, Goal 023 or S185.",
+    "last_completed_product_slice_id":  "goal_023_capability_bundle_pipeline_inputs",
+    "active_manual_gate":  "Goal 023 records development_complexity_stabilization_verification passed and maps the accepted Goal 021 game profiles into capability bundle selection requests plus concrete generation pipeline input records; capability_bundle_pipeline_inputs_verification remains required and not passed until reviewed.",
+    "current_user_action":  "Review the Goal 023 capability bundle pipeline input artifacts, selector requests, generator input records, gap report, invalid/fake/leak matrix, report and verification artifact; do not mark capability_bundle_pipeline_inputs_verification passed until the evidence is accepted, and do not start Goal 024 or S192.",
+    "recommended_next_decision":  "The user confirmed development_complexity_stabilization_verification passed before Goal 023. Goal 023 completes S185-S191 by defining docs/CAPABILITY_BUNDLE_PIPELINE_INPUTS_CONTRACT_V1.md, adding a narrow Application-layer capability bundle pipeline input acceptance service, mapping the three accepted game_profile_v1 profiles to selector requests and generator pipeline input records, preserving atlas mismatches and future-required capabilities as explicit gaps, adding the capability-bundle-pipeline-inputs product smoke route and writing compact artifacts under .llmgc/procedural/capability-bundle-pipeline-inputs. Goal 023 stops at capability_bundle_pipeline_inputs_verification required; do not mark it passed and do not start Goal 024 or S192.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "development_complexity_stabilization_verification"
+                                                        "capability_bundle_pipeline_inputs_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -48,7 +48,8 @@
                            "goal_019_manual_gate":  "unity_alpha_readable_presentation_verification",
                            "goal_020_manual_gate":  "minimum_playable_generated_game_verification",
                            "goal_021_manual_gate":  "generated_game_profile_contract_verification",
-                           "goal_022_manual_gate":  "development_complexity_stabilization_verification"
+                           "goal_022_manual_gate":  "development_complexity_stabilization_verification",
+                           "goal_023_manual_gate":  "capability_bundle_pipeline_inputs_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -69,17 +70,18 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_022_development_complexity_stabilization",
-                                         "title":  "Development Complexity Stabilization And Artifact Scope Governance",
-                                         "completed_at_utc":  "2026-06-27T08:30:00Z",
-                                         "summary":  "Goal 022 records the user-confirmed generated_game_profile_contract_verification passed gate, completes S178-S184, adds docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md, a machine-readable artifact-scope policy, a scope guard script, check-all product-smoke artifact isolation, focused Devflow tests, a development-complexity-stabilization product smoke route and compact stabilization artifacts under .llmgc/procedural/development-complexity-stabilization. It inventories tracked generated artifacts without broad cleanup, rejects legacy artifact/project/schema/generator-library/Unity entrypoint/heavy-output mutations through the guard matrix and leaves development_complexity_stabilization_verification required.",
-                                         "scenario_id":  "development-complexity-stabilization",
+                                         "slice_id":  "goal_023_capability_bundle_pipeline_inputs",
+                                         "title":  "Capability Bundle Selection To Pipeline Inputs",
+                                         "status":  "verification_required",
+                                         "summary":  "Goal 023 records the user-confirmed development_complexity_stabilization_verification passed gate, completes S185-S191, adds docs/CAPABILITY_BUNDLE_PIPELINE_INPUTS_CONTRACT_V1.md, a narrow Application-layer capability bundle pipeline input acceptance service under Design/CapabilityBundlePipelineInputs, focused tests and the capability-bundle-pipeline-inputs product smoke route. It maps the three accepted Goal 021 game profiles to concrete capability selector requests and generator pipeline input records, preserves atlas incompatibilities and future-required capabilities as explicit gaps, writes compact artifacts under .llmgc/procedural/capability-bundle-pipeline-inputs, rejects invalid/fake/leak selection evidence causally and leaves capability_bundle_pipeline_inputs_verification required.",
+                                         "scenario_id":  "capability-bundle-pipeline-inputs",
                                          "checks":  [
-                                                        "DevelopmentComplexityStabilization/ArtifactScope/CurrentGeneratorStateDocs focused filter: 20/20 passed",
-                                                        "development-complexity-stabilization product smoke: 1/1 passed",
-                                                        "check-all.ps1: 803/803 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
-                                                        "goal-022-final artifact scope guard: 15/15 changed paths allowed, 0 violations",
-                                                        "Goal 022 report hash ff5c92e850bc00c40e2dcfa50c9a6e136cfe5ce35c0828b59070d2493fee995f, policy proof hash 02bb8b88f67d0114e75d4b74902b2a659bed7d3d2a9f607f815b1e14ee32b150, check-all isolation proof hash c0710c2199fc8fb793921399ac278d8e1a26671fa32f1c23f4e8303e0f2199c9, inventory hash c1b50626aaeeb108aa61f08b6c07fb078489974f189eea1abf95fa64a9597abb, invalid matrix hash 276490719322c737ff307d1dd337a54650756bcb812d59a3f35568349f8cbd8a, tracked generated artifact files 3008, families 16, invalid scenarios 12"
+                                                        "CapabilityBundlePipelineInputs/CurrentGeneratorStateDocs/DevelopmentComplexityStabilization focused filter: 27/27 passed",
+                                                        "GeneratedGameProfileContract handoff regression focused test: 1/1 passed",
+                                                        "capability-bundle-pipeline-inputs product smoke: 1/1 passed",
+                                                        "check-all.ps1: 812/812 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
+                                                        "goal-023-final artifact scope guard: 14/14 changed paths allowed, 0 violations; bounded extension allowed two stale handoff regression test updates required by check-all",
+                                                        "Goal 023 profile request hash 4174054b656b5ada88e3501227e62e0f1ad31b7f7b1de125289845ce703749a0, selection hash 2d2813325fcc82f9ddfe21cee9fc4448b1e42810d0c6a93e556044758c94d5ca, generator input hash d77a779db0c3dc5b48b04de7bad9308079e1bd132011072bfafd348648ae4e27, gap report hash f1720cc9ea8811818b782254bd4ba3f4341ea4fd60714626ccc360002b907446, invalid matrix hash c4ca4fcea77055fc4912f027b3517c01903fa85f24d33fe8f88947bad6f9a909, deterministic report hash 7d680f708c7808b26abc6b54dcd4d640e913fa775100c54c757cd066ce85869f, profiles 3, pipeline inputs 3, blocked gaps 2, future-required gaps 102, invalid scenarios 16"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -339,7 +341,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "development_complexity_stabilization_verification"
+                                          "capability_bundle_pipeline_inputs_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -360,9 +362,9 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "development_complexity_stabilization_verification",
-    "recommended_next_work_item_title":  "Goal 022 development complexity stabilization verification review.",
-    "recommended_next_task_file":  ".llmgc/procedural/development-complexity-stabilization/development-complexity-stabilization-verification.md",
+    "recommended_next_work_item":  "capability_bundle_pipeline_inputs_verification",
+    "recommended_next_work_item_title":  "Goal 023 capability bundle pipeline inputs verification review.",
+    "recommended_next_task_file":  ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-verification.md",
     "candidate_product_vertical_slices":  [
                                               "Development complexity stabilization verification review",
                                               "Capability Bundle Selection To Pipeline Inputs after stabilization acceptance"
@@ -434,14 +436,14 @@
                              "Minimum deterministic asset pipeline acceptance sidecars",
                              "Unity runtime export vertical slice acceptance sidecars",
                              "Alpha runnable Windows build staging, compact artifact paths, Unity project/template, Windows player build, diagnostic launch evidence and automated minimal play-loop evidence",
-                              "Unity playable Alpha presentation, movement/interaction logs and firewall-safe release-style build evidence",
-                              "Unity generated scene content projection acceptance sidecars and generated-node play-loop evidence",
-                              "Unity generated runtime state loop acceptance sidecars and command/state transition evidence",
-                              "Unity generated quest completion loop plan/state/report sidecars and ordered objective/reward player evidence",
-                              "Unity multi-variant playable scenario variants/report sidecars and per-variant quest completion player evidence",
-                              "Unity Alpha readable presentation model/report sidecars and required panel/readable-label player evidence"
-                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 021 stop at generated_game_profile_contract_verification required and do not start S178, Goal 022 or post-Goal-021 work without a new explicit user request.",
+                             "Unity playable Alpha presentation, movement/interaction logs and firewall-safe release-style build evidence",
+                             "Unity generated scene content projection acceptance sidecars and generated-node play-loop evidence",
+                             "Unity generated runtime state loop acceptance sidecars and command/state transition evidence",
+                             "Unity generated quest completion loop plan/state/report sidecars and ordered objective/reward player evidence",
+                             "Unity multi-variant playable scenario variants/report sidecars and per-variant quest completion player evidence",
+                             "Unity Alpha readable presentation model/report sidecars and required panel/readable-label player evidence"
+                         ],
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 023 stop at capability_bundle_pipeline_inputs_verification required and do not start Goal 024, S192 or post-Goal-023 work without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -454,7 +456,7 @@
                                                          "status":  "passed",
                                                          "evidence_source":  "user_prompt_before_goal_012",
                                                          "observed_result":  [
-                                                             "minimum_asset_pipeline_artifact_verification passed"
+                                                                                 "minimum_asset_pipeline_artifact_verification passed"
                                                                              ],
                                                          "next_action":  "goal_012_unity_runtime_export_vertical_slice"
                                                      },
@@ -462,210 +464,210 @@
                                                                       "status":  "passed",
                                                                       "evidence_source":  "user_prompt_before_goal_013",
                                                                       "observed_result":  [
-                                                                          "unity_runtime_export_vertical_slice_artifact_verification passed"
+                                                                                              "unity_runtime_export_vertical_slice_artifact_verification passed"
                                                                                           ],
                                                                       "next_action":  "goal_013_alpha_runnable_windows_build"
                                                                   },
     "alpha_runnable_windows_build_verification":  {
-                                                     "status":  "passed",
-                                                     "evidence_source":  "user_prompt_before_goal_014",
-                                                     "observed_result":  [
-                                                         "Repository-local Unity project/template found at unity/LLMGameCreatorAlpha",
-                                                         "Repository-local BuildPipeline.BuildPlayer entrypoint found at unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs",
-                                                         "Unity 6000.1.10f1 executed in batch mode and produced .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe",
-                                                         "Windows build manifest validated 221 files and 138585766 bytes from actual build output",
-                                                         "Diagnostic player launch exited 0 and loaded package/config/asset manifest",
-                                                         "Automated play-loop diagnostic executed 5 generated command hints in order and recorded quest/dialogue/item/event state flags",
-                                                         "playLoopVerified=true from .llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log; user confirmed alpha_runnable_windows_build_verification passed"
-                                                                         ],
-                                                     "next_action":  "goal_014_unity_playable_presentation_firewall_safe_build"
-                                                 },
+                                                      "status":  "passed",
+                                                      "evidence_source":  "user_prompt_before_goal_014",
+                                                      "observed_result":  [
+                                                                              "Repository-local Unity project/template found at unity/LLMGameCreatorAlpha",
+                                                                              "Repository-local BuildPipeline.BuildPlayer entrypoint found at unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs",
+                                                                              "Unity 6000.1.10f1 executed in batch mode and produced .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe",
+                                                                              "Windows build manifest validated 221 files and 138585766 bytes from actual build output",
+                                                                              "Diagnostic player launch exited 0 and loaded package/config/asset manifest",
+                                                                              "Automated play-loop diagnostic executed 5 generated command hints in order and recorded quest/dialogue/item/event state flags",
+                                                                              "playLoopVerified=true from .llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log; user confirmed alpha_runnable_windows_build_verification passed"
+                                                                          ],
+                                                      "next_action":  "goal_014_unity_playable_presentation_firewall_safe_build"
+                                                  },
     "unity_playable_presentation_firewall_safe_build_verification":  {
-                                                                        "status":  "passed",
-                                                                        "evidence_source":  "user_prompt_before_goal_015",
-                                                                        "observed_result":  [
-                                                                            "Unity playable Alpha artifacts are written under .llmgc/procedural/unity-playable-alpha",
-                                                                            "Visible Unity IMGUI map/player/NPC/item/status presentation is logged by the real player",
-                                                                            "Automated play-loop diagnostic logs two valid movement steps, one blocked bounds movement, focus/select and generated command interactions",
-                                                                            "Alpha build entrypoint uses BuildOptions.None and static checks reject Development/Profiler/Debug flags",
-                                                                            "Product smoke route is unity-playable-alpha",
-                                                                            "S121B regenerates compact repo-local root review artifacts while .gitignore keeps generated Unity build/log/unity-work outputs ignored",
-                                                                            "user confirmed unity_playable_presentation_firewall_safe_build_verification passed"
-                                                                                        ],
-                                                                        "next_action":  "goal_015_unity_generated_scene_content_projection"
-                                                                    },
+                                                                         "status":  "passed",
+                                                                         "evidence_source":  "user_prompt_before_goal_015",
+                                                                         "observed_result":  [
+                                                                                                 "Unity playable Alpha artifacts are written under .llmgc/procedural/unity-playable-alpha",
+                                                                                                 "Visible Unity IMGUI map/player/NPC/item/status presentation is logged by the real player",
+                                                                                                 "Automated play-loop diagnostic logs two valid movement steps, one blocked bounds movement, focus/select and generated command interactions",
+                                                                                                 "Alpha build entrypoint uses BuildOptions.None and static checks reject Development/Profiler/Debug flags",
+                                                                                                 "Product smoke route is unity-playable-alpha",
+                                                                                                 "S121B regenerates compact repo-local root review artifacts while .gitignore keeps generated Unity build/log/unity-work outputs ignored",
+                                                                                                 "user confirmed unity_playable_presentation_firewall_safe_build_verification passed"
+                                                                                             ],
+                                                                         "next_action":  "goal_015_unity_generated_scene_content_projection"
+                                                                     },
     "unity_generated_scene_content_projection_verification":  {
                                                                   "status":  "passed",
                                                                   "evidence_source":  "goal_015_unity_generated_scene_content_projection",
                                                                   "observed_result":  [
-                                                                      "Unity generated scene projection artifacts are written under .llmgc/procedural/unity-generated-scene-projection",
-                                                                      "Application projection derives map/player/NPC/item/quest-event/command-status nodes from selected generated package/config/asset evidence",
-                                                                      "Unity Alpha runtime logs projection load, generated scene node resolution, movement, focus and generated command interactions",
-                                                                      "Invalid/fake/leak scene projection matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
-                                                                      "Product smoke route is unity-generated-scene-projection",
-                                                                      "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                                      "user confirmed unity_generated_scene_content_projection_verification passed before Goal 016"
-                                                                                  ],
+                                                                                          "Unity generated scene projection artifacts are written under .llmgc/procedural/unity-generated-scene-projection",
+                                                                                          "Application projection derives map/player/NPC/item/quest-event/command-status nodes from selected generated package/config/asset evidence",
+                                                                                          "Unity Alpha runtime logs projection load, generated scene node resolution, movement, focus and generated command interactions",
+                                                                                          "Invalid/fake/leak scene projection matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
+                                                                                          "Product smoke route is unity-generated-scene-projection",
+                                                                                          "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                                          "user confirmed unity_generated_scene_content_projection_verification passed before Goal 016"
+                                                                                      ],
                                                                   "next_action":  "goal_016_unity_generated_runtime_state_loop"
                                                               },
     "unity_generated_runtime_state_loop_verification":  {
                                                             "status":  "passed",
                                                             "evidence_source":  "goal_016_unity_generated_runtime_state_loop",
                                                             "observed_result":  [
-                                                                "Unity runtime state loop artifacts are written under .llmgc/procedural/unity-runtime-state-loop",
-                                                                "Application state-loop acceptance derives selected package/style/thread/map/nodes/commands from accepted generated scene projection and Alpha evidence",
-                                                                "Unity Alpha runtime logs quest/dialogue/item/inventory/event before-after state transitions",
-                                                                "Command/state transitions are correlated to generated command id/type/target evidence",
-                                                                "Invalid/fake/leak runtime-state matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
-                                                                "Product smoke route is unity-runtime-state-loop",
-                                                                "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                                "user confirmed unity_generated_runtime_state_loop_verification passed before Goal 017"
-                                                                            ],
+                                                                                    "Unity runtime state loop artifacts are written under .llmgc/procedural/unity-runtime-state-loop",
+                                                                                    "Application state-loop acceptance derives selected package/style/thread/map/nodes/commands from accepted generated scene projection and Alpha evidence",
+                                                                                    "Unity Alpha runtime logs quest/dialogue/item/inventory/event before-after state transitions",
+                                                                                    "Command/state transitions are correlated to generated command id/type/target evidence",
+                                                                                    "Invalid/fake/leak runtime-state matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
+                                                                                    "Product smoke route is unity-runtime-state-loop",
+                                                                                    "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                                    "user confirmed unity_generated_runtime_state_loop_verification passed before Goal 017"
+                                                                                ],
                                                             "next_action":  "goal_017_unity_generated_quest_completion_loop"
-                                                              },
+                                                        },
     "unity_generated_quest_completion_loop_verification":  {
                                                                "status":  "passed",
                                                                "evidence_source":  "goal_017_unity_generated_quest_completion_loop",
                                                                "observed_result":  [
-                                                                   "Unity quest completion loop artifacts are written under .llmgc/procedural/unity-quest-completion-loop",
-                                                                   "Application quest-loop acceptance derives selected package/style/thread/quest/dialogue/choice/item/event/reward ids from generated Alpha evidence",
-                                                                   "Unity Alpha runtime logs ordered quest phases from not_started through reward_granted",
-                                                                   "Objective checklist entries are correlated to generated command id/type/target/secondary-target evidence",
-                                                                   "Quest completion and reward evidence are rejected without phase, objective and before-after proof",
-                                                                   "Invalid/fake/leak quest-completion matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
-                                                                   "Product smoke route is unity-quest-completion-loop",
-                                                                   "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                                   "user confirmed unity_generated_quest_completion_loop_verification passed before Goal 018"
-                                                                               ],
+                                                                                       "Unity quest completion loop artifacts are written under .llmgc/procedural/unity-quest-completion-loop",
+                                                                                       "Application quest-loop acceptance derives selected package/style/thread/quest/dialogue/choice/item/event/reward ids from generated Alpha evidence",
+                                                                                       "Unity Alpha runtime logs ordered quest phases from not_started through reward_granted",
+                                                                                       "Objective checklist entries are correlated to generated command id/type/target/secondary-target evidence",
+                                                                                       "Quest completion and reward evidence are rejected without phase, objective and before-after proof",
+                                                                                       "Invalid/fake/leak quest-completion matrix rejects missing, mismatched, copied, cross-style and fake-log evidence",
+                                                                                       "Product smoke route is unity-quest-completion-loop",
+                                                                                       "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                                       "user confirmed unity_generated_quest_completion_loop_verification passed before Goal 018"
+                                                                                   ],
                                                                "next_action":  "goal_018_unity_multi_variant_playable_scenario"
-                                                              },
+                                                           },
     "unity_generated_multi_variant_playable_scenario_verification":  {
-                                                                        "status":  "passed_by_user_prompt_before_goal_019",
-                                                                        "evidence_source":  "goal_018_unity_multi_variant_playable_scenario",
-                                                                        "observed_result":  [
-                                                                            "Unity multi-variant playable scenario artifacts are written under .llmgc/procedural/unity-multi-variant-playable-scenario",
-                                                                            "Application multi-variant acceptance runs frontier_survival, gothic_mystery and trade_caravan through the same Alpha/quest-loop pipeline",
-                                                                            "Each variant has distinct package, thread, quest, scene, objective and command identities",
-                                                                            "Each variant completes its generated quest and grants its generated reward from real player play-loop logs",
-                                                                            "Invalid/fake/leak multi-variant matrix rejects copied, mismatched, cross-style and fake evidence",
-                                                                            "Product smoke route is unity-multi-variant-playable-scenario",
-                                                                            "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                                            "user confirmed unity_generated_multi_variant_playable_scenario_verification passed before Goal 019"
-                                                                                        ],
-                                                                        "next_action":  "goal_019_unity_alpha_readable_presentation"
-                                                              },
-    "unity_alpha_readable_presentation_verification":  {
-                                                          "status":  "passed_by_user_prompt_before_goal_020",
-                                                          "evidence_source":  "goal_019_unity_alpha_readable_presentation",
-                                                          "observed_result":  [
-                                                              "Unity Alpha readable presentation artifacts are written under .llmgc/procedural/unity-alpha-readable-presentation",
-                                                              "Application readable-presentation acceptance derives scenario cards, quest panel, objective checklist, target panel, inventory/reward/event log and controls from accepted multi-variant evidence",
-                                                              "Unity Alpha runtime shows readable IMGUI panels and logs required presentation proof lines",
-                                                              "Primary labels are readable and not raw ids only",
-                                                              "Quest completion and multi-variant evidence remain verified",
-                                                              "Invalid/fake/leak readable-presentation matrix rejects missing panels, raw labels, copied labels, fake readable flags and debug build options",
-                                                              "Product smoke route is unity-alpha-readable-presentation",
-                                                              "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                              "user confirmed unity_alpha_readable_presentation_verification passed before Goal 020"
-                                                          ],
-                                                          "next_action":  "goal_020_minimum_playable_generated_game"
-                                                              },
-    "minimum_playable_generated_game_verification":  {
-                                                          "status":  "passed_by_user_prompt_before_goal_021",
-                                                          "evidence_source":  "goal_020_minimum_playable_generated_game",
-                                                          "observed_result":  [
-                                                              "Minimum playable generated game compact artifacts are written under .llmgc/procedural/minimum-playable-generated-game",
-                                                              "Review package folder exists under .llmgc/procedural/minimum-playable-generated-game/review-package",
-                                                              "Review package contains LLMGameCreatorAlpha.exe, Data folder, README_PLAY.md, RUN_MANUAL_PLAY.ps1, RUN_AUTOMATED_SMOKE.ps1, MANUAL_PLAY_REVIEW_CHECKLIST.md and generated-scenario-summary.json",
-                                                              "Selected scenario is frontier_survival with package game/content_generation/frontier-survival, thread thread/frontier-survival/000, quest quest/frontier-survival/c2ed6dc235/000 and reward item/frontier-survival/7f81222990/004",
-                                                              "Automated review package launch and quest completion proof are true",
-                                                              "Readable presentation evidence remains verified",
-                                                              "Invalid/fake/leak review-package matrix rejects 25 scenarios",
-                                                              "Product smoke route is minimum-playable-generated-game",
-                                                              "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
-                                                              "user confirmed minimum_playable_generated_game_verification passed before Goal 021"
-                                                          ],
-                                                          "next_action":  "goal_021_generated_game_profile_contract_refresh"
-                                                              },
-    "generated_game_profile_contract_verification":  {
-                                                          "status":  "passed_by_user_prompt_before_goal_022",
-                                                          "evidence_source":  "goal_021_generated_game_profile_contract_refresh",
-                                                          "observed_result":  [
-                                                              "Game profile contract document is written at docs/GAME_PROFILE_CONTRACT_V1.md",
-                                                              "Three deterministic sample profiles are written under samples/game-profiles",
-                                                              "Application GameProfiles acceptance service writes compact artifacts under .llmgc/procedural/generated-game-profile-contract",
-                                                              "Valid profiles are frontier-survival-minimum-alpha, gothic-mystery-investigation-alpha and trade-caravan-social-economy-alpha",
-                                                              "Profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6",
-                                                              "Pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8",
-                                                              "Deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9",
-                                                              "Accepted Goal 020 compact report/manifest evidence is physically verified",
-                                                              "Invalid/fake/leak matrix rejects 20 scenarios",
-                                                              "Product smoke route is generated-game-profile-contract",
-                                                              "Final report accepted=false and manualGate=generated_game_profile_contract_verification",
-                                                              "user confirmed generated_game_profile_contract_verification passed before Goal 022"
-                                                          ],
-                                                          "next_action":  "goal_022_development_complexity_stabilization"
-                                                              },
-    "development_complexity_stabilization_verification":  {
-                                                          "status":  "required",
-                                                          "evidence_source":  "goal_022_development_complexity_stabilization",
-                                                          "observed_result":  [
-                                                              "Development complexity stabilization policy is written at docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md",
-                                                              "Machine-readable artifact scope policy is written at .devflow/artifact-scope/artifact-scope-policy.json",
-                                                              "Scope guard script is written at .devflow/scripts/check-artifact-scope.ps1",
-                                                              "check-all.ps1 isolates product-smoke/test artifact output environment variables under the check-all run directory",
-                                                              "Compact stabilization artifacts are written under .llmgc/procedural/development-complexity-stabilization",
-                                                              "Tracked generated artifact inventory is written without broad cleanup or untracking",
-                                                              "Invalid/fake/leak matrix rejects legacy artifact, project/schema, generator-library, Unity entrypoint, undeclared root write and heavy-output mutations",
-                                                              "Product smoke route is development-complexity-stabilization",
-                                                              "Final report accepted=false and manualGate=development_complexity_stabilization_verification",
-                                                              "Capability Bundle Selection, Goal 023 and S185 are not started"
-                                                          ],
-                                                          "next_action":  "review_development_complexity_stabilization_before_marking_gate_passed"
-                                                              },
-    "alpha_unity_build_environment_blocker":  {
-                                                 "status":  "resolved_by_s113b",
-                                                 "evidence_source":  "product_slice_113b_alpha_unity_build_entrypoint_blocker_resolution",
-                                                 "observed_result":  [
-                                                     "Unity executable discoverable locally",
-                                                     "Repository-local Unity project/template with ProjectSettings/ProjectVersion.txt found",
-                                                     "Repository-local BuildPipeline.BuildPlayer Windows build entrypoint found",
-                                                     "Windows player executable produced and launched in diagnostic batch mode"
-                                                                         ],
-                                                 "next_action":  "review_alpha_runnable_windows_build_verification"
-                                             },
-    "goal_013_alpha_runnable_windows_build":  {
-                                                 "slice_id":  "goal_013_alpha_runnable_windows_build",
-                                                 "title":  "Alpha Runnable Windows Build",
-                                                 "status":  "passed_by_user_prompt_before_goal_014",
-                                                "blocked_at_utc":  "",
-                                                "summary":  "Goal 013 records the user-confirmed unity_runtime_export_vertical_slice_artifact_verification passed gate, adds a narrow Application-layer Alpha runnable build contract under Design/AlphaBuild, selects deterministic frontier_survival, gothic_mystery and trade_caravan candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging with hashes and byte counts, validates selected loop refs and asset refs, rejects invalid/fake/leak scenarios causally, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by compacting source-evidence and staging physical asset names to deterministic asset-000-<sha8>.fixture paths, preserving full original ids in JSON/report fields, removing stale long-name files during regeneration, and proving compact source/staging paths. Product Slice 113B adds the repository-local Unity Alpha template and Windows BuildPipeline entrypoint, executes Unity 6000.1.10f1 in batch mode, produces .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe, validates build output from actual bytes and proves package/config/asset-manifest load in logs. Product Slice 113C adds a visible IMGUI mini-loop and automated player play-loop diagnostic mode, executes five generated command hints from staged config/package evidence, records quest/dialogue/item/event state flags, and sets launchVerified=true plus playLoopVerified=true. The user later confirmed alpha_runnable_windows_build_verification passed before Goal 014.",
-                                                 "scenario_id":  "alpha-runnable-build",
-                                                 "checks":  [
-                                                               "AlphaRunnableBuild focused tests after S113C: 13/13 passed",
-                                                               "S113C filtered tests (AlphaRunnableBuild/UnityRuntimeExport/CurrentGeneratorStateDocsTests): 28/28 passed",
-                                                               "S113C repo-local AlphaRunnableBuildProductSmoke regeneration: 1/1 passed",
-                                                               "alpha-runnable-build product smoke: 1/1 passed",
-                                                               "repo-local .llmgc/procedural/alpha-runnable-build artifacts regenerated via AlphaRunnableBuildProductSmoke",
-                                                               "S113C report hash 5546ff9ed181267dda0a6e743c00a6f0ac8af2d9eddc7d074c26ce5b759a73c1, build manifest hash 62b7045be108a5f35c72c6587f01bcfb47d447458f865c7e2cced66a226b4e7c, build output 221 files / 138585766 bytes",
-                                                               "launch/play-loop verification exited 0 and wrote .llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log plus .llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log; playLoopVerified=true",
-                                                               "check-all.ps1: 799/799 tests passed, build 0 warnings / 0 errors"
-                                                            ]
-                                             },
-    "product_slice_121b_unity_playable_alpha_root_artifacts_hotfix":  {
-                                                                         "slice_id":  "product_slice_121b_unity_playable_alpha_root_artifacts_hotfix",
-                                                                         "title":  "Unity Playable Alpha Root Artifacts Hotfix",
-                                                                         "status":  "verification_required",
-                                                                         "blocked_at_utc":  "",
-                                                                         "summary":  "S121B repairs the Goal 014 artifact family without starting S122 or Goal 015. The unity-playable-alpha product smoke route regenerates compact review artifacts under .llmgc/procedural/unity-playable-alpha in the repository root through the existing UnityPlayableAlphaAcceptanceService path. Heavy generated build, logs and unity-work outputs remain outside the intended review artifact set and are still covered by .gitignore. The unity_playable_presentation_firewall_safe_build_verification gate remains required, not passed.",
-                                                                         "scenario_id":  "unity-playable-alpha",
-                                                                         "checks":  [
-                                                                                        "S121B filtered tests (UnityPlayableAlpha/AlphaRunnableBuild/CurrentGeneratorStateDocsTests): 27/27 passed",
-                                                                                        "S121B unity-playable-alpha product smoke: 1/1 passed and regenerated repo-local root artifacts",
-                                                                                        "S121B report hash ae71aa9ad5fbf64a2c53e6d19dcc0777d80020ad0ded0420f7ccaef75b63389c, build manifest hash 3206cf8df96775f7affcf8c904a18afb28bb404c757fc401a2146441a6cf5d24",
-                                                                                        "S121B check-all.ps1: 803/803 tests passed, build 0 warnings / 0 errors"
-                                                                                    ]
+                                                                         "status":  "passed_by_user_prompt_before_goal_019",
+                                                                         "evidence_source":  "goal_018_unity_multi_variant_playable_scenario",
+                                                                         "observed_result":  [
+                                                                                                 "Unity multi-variant playable scenario artifacts are written under .llmgc/procedural/unity-multi-variant-playable-scenario",
+                                                                                                 "Application multi-variant acceptance runs frontier_survival, gothic_mystery and trade_caravan through the same Alpha/quest-loop pipeline",
+                                                                                                 "Each variant has distinct package, thread, quest, scene, objective and command identities",
+                                                                                                 "Each variant completes its generated quest and grants its generated reward from real player play-loop logs",
+                                                                                                 "Invalid/fake/leak multi-variant matrix rejects copied, mismatched, cross-style and fake evidence",
+                                                                                                 "Product smoke route is unity-multi-variant-playable-scenario",
+                                                                                                 "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                                                 "user confirmed unity_generated_multi_variant_playable_scenario_verification passed before Goal 019"
+                                                                                             ],
+                                                                         "next_action":  "goal_019_unity_alpha_readable_presentation"
                                                                      },
+    "unity_alpha_readable_presentation_verification":  {
+                                                           "status":  "passed_by_user_prompt_before_goal_020",
+                                                           "evidence_source":  "goal_019_unity_alpha_readable_presentation",
+                                                           "observed_result":  [
+                                                                                   "Unity Alpha readable presentation artifacts are written under .llmgc/procedural/unity-alpha-readable-presentation",
+                                                                                   "Application readable-presentation acceptance derives scenario cards, quest panel, objective checklist, target panel, inventory/reward/event log and controls from accepted multi-variant evidence",
+                                                                                   "Unity Alpha runtime shows readable IMGUI panels and logs required presentation proof lines",
+                                                                                   "Primary labels are readable and not raw ids only",
+                                                                                   "Quest completion and multi-variant evidence remain verified",
+                                                                                   "Invalid/fake/leak readable-presentation matrix rejects missing panels, raw labels, copied labels, fake readable flags and debug build options",
+                                                                                   "Product smoke route is unity-alpha-readable-presentation",
+                                                                                   "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                                   "user confirmed unity_alpha_readable_presentation_verification passed before Goal 020"
+                                                                               ],
+                                                           "next_action":  "goal_020_minimum_playable_generated_game"
+                                                       },
+    "minimum_playable_generated_game_verification":  {
+                                                         "status":  "passed_by_user_prompt_before_goal_021",
+                                                         "evidence_source":  "goal_020_minimum_playable_generated_game",
+                                                         "observed_result":  [
+                                                                                 "Minimum playable generated game compact artifacts are written under .llmgc/procedural/minimum-playable-generated-game",
+                                                                                 "Review package folder exists under .llmgc/procedural/minimum-playable-generated-game/review-package",
+                                                                                 "Review package contains LLMGameCreatorAlpha.exe, Data folder, README_PLAY.md, RUN_MANUAL_PLAY.ps1, RUN_AUTOMATED_SMOKE.ps1, MANUAL_PLAY_REVIEW_CHECKLIST.md and generated-scenario-summary.json",
+                                                                                 "Selected scenario is frontier_survival with package game/content_generation/frontier-survival, thread thread/frontier-survival/000, quest quest/frontier-survival/c2ed6dc235/000 and reward item/frontier-survival/7f81222990/004",
+                                                                                 "Automated review package launch and quest completion proof are true",
+                                                                                 "Readable presentation evidence remains verified",
+                                                                                 "Invalid/fake/leak review-package matrix rejects 25 scenarios",
+                                                                                 "Product smoke route is minimum-playable-generated-game",
+                                                                                 "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                                                 "user confirmed minimum_playable_generated_game_verification passed before Goal 021"
+                                                                             ],
+                                                         "next_action":  "goal_021_generated_game_profile_contract_refresh"
+                                                     },
+    "generated_game_profile_contract_verification":  {
+                                                         "status":  "passed_by_user_prompt_before_goal_022",
+                                                         "evidence_source":  "goal_021_generated_game_profile_contract_refresh",
+                                                         "observed_result":  [
+                                                                                 "Game profile contract document is written at docs/GAME_PROFILE_CONTRACT_V1.md",
+                                                                                 "Three deterministic sample profiles are written under samples/game-profiles",
+                                                                                 "Application GameProfiles acceptance service writes compact artifacts under .llmgc/procedural/generated-game-profile-contract",
+                                                                                 "Valid profiles are frontier-survival-minimum-alpha, gothic-mystery-investigation-alpha and trade-caravan-social-economy-alpha",
+                                                                                 "Profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6",
+                                                                                 "Pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8",
+                                                                                 "Deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9",
+                                                                                 "Accepted Goal 020 compact report/manifest evidence is physically verified",
+                                                                                 "Invalid/fake/leak matrix rejects 20 scenarios",
+                                                                                 "Product smoke route is generated-game-profile-contract",
+                                                                                 "Final report accepted=false and manualGate=generated_game_profile_contract_verification",
+                                                                                 "user confirmed generated_game_profile_contract_verification passed before Goal 022"
+                                                                             ],
+                                                         "next_action":  "goal_022_development_complexity_stabilization"
+                                                     },
+    "development_complexity_stabilization_verification":  {
+                                                              "status":  "passed_by_user_prompt_before_goal_023",
+                                                              "evidence_source":  "goal_022_development_complexity_stabilization",
+                                                              "observed_result":  [
+                                                                                      "Development complexity stabilization policy is written at docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md",
+                                                                                      "Machine-readable artifact scope policy is written at .devflow/artifact-scope/artifact-scope-policy.json",
+                                                                                      "Scope guard script is written at .devflow/scripts/check-artifact-scope.ps1",
+                                                                                      "check-all.ps1 isolates product-smoke/test artifact output environment variables under the check-all run directory",
+                                                                                      "Compact stabilization artifacts are written under .llmgc/procedural/development-complexity-stabilization",
+                                                                                      "Tracked generated artifact inventory is written without broad cleanup or untracking",
+                                                                                      "Invalid/fake/leak matrix rejects legacy artifact, project/schema, generator-library, Unity entrypoint, undeclared root write and heavy-output mutations",
+                                                                                      "Product smoke route is development-complexity-stabilization",
+                                                                                      "Final report accepted=false and manualGate=development_complexity_stabilization_verification",
+                                                                                      "user confirmed development_complexity_stabilization_verification passed before Goal 023"
+                                                                                  ],
+                                                              "next_action":  "goal_023_capability_bundle_pipeline_inputs"
+                                                          },
+    "alpha_unity_build_environment_blocker":  {
+                                                  "status":  "resolved_by_s113b",
+                                                  "evidence_source":  "product_slice_113b_alpha_unity_build_entrypoint_blocker_resolution",
+                                                  "observed_result":  [
+                                                                          "Unity executable discoverable locally",
+                                                                          "Repository-local Unity project/template with ProjectSettings/ProjectVersion.txt found",
+                                                                          "Repository-local BuildPipeline.BuildPlayer Windows build entrypoint found",
+                                                                          "Windows player executable produced and launched in diagnostic batch mode"
+                                                                      ],
+                                                  "next_action":  "review_alpha_runnable_windows_build_verification"
+                                              },
+    "goal_013_alpha_runnable_windows_build":  {
+                                                  "slice_id":  "goal_013_alpha_runnable_windows_build",
+                                                  "title":  "Alpha Runnable Windows Build",
+                                                  "status":  "passed_by_user_prompt_before_goal_014",
+                                                  "blocked_at_utc":  "",
+                                                  "summary":  "Goal 013 records the user-confirmed unity_runtime_export_vertical_slice_artifact_verification passed gate, adds a narrow Application-layer Alpha runnable build contract under Design/AlphaBuild, selects deterministic frontier_survival, gothic_mystery and trade_caravan candidates from accepted Goal 010/011/012 evidence, materializes real Goal 012 export payloads into Alpha staging with hashes and byte counts, validates selected loop refs and asset refs, rejects invalid/fake/leak scenarios causally, and adds the alpha-runnable-build product smoke route. Product Slice 113A repairs the same Alpha artifact family by compacting source-evidence and staging physical asset names to deterministic asset-000-\u003csha8\u003e.fixture paths, preserving full original ids in JSON/report fields, removing stale long-name files during regeneration, and proving compact source/staging paths. Product Slice 113B adds the repository-local Unity Alpha template and Windows BuildPipeline entrypoint, executes Unity 6000.1.10f1 in batch mode, produces .llmgc/procedural/alpha-runnable-build/build/windows/LLMGameCreatorAlpha.exe, validates build output from actual bytes and proves package/config/asset-manifest load in logs. Product Slice 113C adds a visible IMGUI mini-loop and automated player play-loop diagnostic mode, executes five generated command hints from staged config/package evidence, records quest/dialogue/item/event state flags, and sets launchVerified=true plus playLoopVerified=true. The user later confirmed alpha_runnable_windows_build_verification passed before Goal 014.",
+                                                  "scenario_id":  "alpha-runnable-build",
+                                                  "checks":  [
+                                                                 "AlphaRunnableBuild focused tests after S113C: 13/13 passed",
+                                                                 "S113C filtered tests (AlphaRunnableBuild/UnityRuntimeExport/CurrentGeneratorStateDocsTests): 28/28 passed",
+                                                                 "S113C repo-local AlphaRunnableBuildProductSmoke regeneration: 1/1 passed",
+                                                                 "alpha-runnable-build product smoke: 1/1 passed",
+                                                                 "repo-local .llmgc/procedural/alpha-runnable-build artifacts regenerated via AlphaRunnableBuildProductSmoke",
+                                                                 "S113C report hash 5546ff9ed181267dda0a6e743c00a6f0ac8af2d9eddc7d074c26ce5b759a73c1, build manifest hash 62b7045be108a5f35c72c6587f01bcfb47d447458f865c7e2cced66a226b4e7c, build output 221 files / 138585766 bytes",
+                                                                 "launch/play-loop verification exited 0 and wrote .llmgc/procedural/alpha-runnable-build/logs/alpha-player-launch.log plus .llmgc/procedural/alpha-runnable-build/logs/alpha-player-play-loop.log; playLoopVerified=true",
+                                                                 "check-all.ps1: 799/799 tests passed, build 0 warnings / 0 errors"
+                                                             ]
+                                              },
+    "product_slice_121b_unity_playable_alpha_root_artifacts_hotfix":  {
+                                                                          "slice_id":  "product_slice_121b_unity_playable_alpha_root_artifacts_hotfix",
+                                                                          "title":  "Unity Playable Alpha Root Artifacts Hotfix",
+                                                                          "status":  "verification_required",
+                                                                          "blocked_at_utc":  "",
+                                                                          "summary":  "S121B repairs the Goal 014 artifact family without starting S122 or Goal 015. The unity-playable-alpha product smoke route regenerates compact review artifacts under .llmgc/procedural/unity-playable-alpha in the repository root through the existing UnityPlayableAlphaAcceptanceService path. Heavy generated build, logs and unity-work outputs remain outside the intended review artifact set and are still covered by .gitignore. The unity_playable_presentation_firewall_safe_build_verification gate remains required, not passed.",
+                                                                          "scenario_id":  "unity-playable-alpha",
+                                                                          "checks":  [
+                                                                                         "S121B filtered tests (UnityPlayableAlpha/AlphaRunnableBuild/CurrentGeneratorStateDocsTests): 27/27 passed",
+                                                                                         "S121B unity-playable-alpha product smoke: 1/1 passed and regenerated repo-local root artifacts",
+                                                                                         "S121B report hash ae71aa9ad5fbf64a2c53e6d19dcc0777d80020ad0ded0420f7ccaef75b63389c, build manifest hash 3206cf8df96775f7affcf8c904a18afb28bb404c757fc401a2146441a6cf5d24",
+                                                                                         "S121B check-all.ps1: 803/803 tests passed, build 0 warnings / 0 errors"
+                                                                                     ]
+                                                                      },
     "goal_014_unity_playable_presentation_firewall_safe_build":  {
                                                                      "slice_id":  "goal_014_unity_playable_presentation_firewall_safe_build",
                                                                      "title":  "Unity Playable Presentation And Firewall-Safe Build",
@@ -680,20 +682,20 @@
                                                                                 ]
                                                                  },
     "goal_015_unity_generated_scene_content_projection":  {
-                                                             "slice_id":  "goal_015_unity_generated_scene_content_projection",
-                                                             "title":  "Unity Generated Scene Content Projection",
-                                                             "status":  "passed_by_user_prompt_before_goal_016",
-                                                             "blocked_at_utc":  "",
-                                                             "summary":  "Goal 015 records the user-confirmed unity_playable_presentation_firewall_safe_build_verification passed gate, completes S122-S129, adds a narrow Application-layer UnityGeneratedScene acceptance service, writes compact projection/report/verification artifacts under .llmgc/procedural/unity-generated-scene-projection, derives map/player/NPC/item/quest-event/command-status nodes from selected generated package/config/asset evidence, updates the existing Unity Alpha runtime script so visible map markers and automated logs are generated-content-driven, validates movement/focus/interaction against generated command hints and rejects invalid/fake/leak projection evidence causally. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed unity_generated_scene_content_projection_verification passed before Goal 016.",
-                                                             "scenario_id":  "unity-generated-scene-projection",
-                                                             "checks":  [
-                                                                            "UnityGeneratedScene focused tests: 4/4 passed",
-                                                                            "Goal 015 filtered tests (UnityGeneratedScene/UnityPlayableAlpha/CurrentGeneratorStateDocsTests): 18/18 passed",
-                                                                            "unity-generated-scene-projection product smoke: 1/1 passed",
-                                                                            "Goal 015 report hash 05c1a7cf4b361608871ccac7fa587540a3664552c5c4b96017f6d0bcbfa5adc6, projection hash 1f99588ffd7d8c0e89c33e0482d804517e6a448843fcbdac533b4a5cd41f9c21, build manifest hash 6aaf1c34b437330f1ed9cf4fdc1b09b3f5c72c125381691fa4a9a07150002948",
-                                                                            "check-all.ps1: 807/807 tests passed, build 0 warnings / 0 errors"
-                                                                        ]
-                                                         },
+                                                              "slice_id":  "goal_015_unity_generated_scene_content_projection",
+                                                              "title":  "Unity Generated Scene Content Projection",
+                                                              "status":  "passed_by_user_prompt_before_goal_016",
+                                                              "blocked_at_utc":  "",
+                                                              "summary":  "Goal 015 records the user-confirmed unity_playable_presentation_firewall_safe_build_verification passed gate, completes S122-S129, adds a narrow Application-layer UnityGeneratedScene acceptance service, writes compact projection/report/verification artifacts under .llmgc/procedural/unity-generated-scene-projection, derives map/player/NPC/item/quest-event/command-status nodes from selected generated package/config/asset evidence, updates the existing Unity Alpha runtime script so visible map markers and automated logs are generated-content-driven, validates movement/focus/interaction against generated command hints and rejects invalid/fake/leak projection evidence causally. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed unity_generated_scene_content_projection_verification passed before Goal 016.",
+                                                              "scenario_id":  "unity-generated-scene-projection",
+                                                              "checks":  [
+                                                                             "UnityGeneratedScene focused tests: 4/4 passed",
+                                                                             "Goal 015 filtered tests (UnityGeneratedScene/UnityPlayableAlpha/CurrentGeneratorStateDocsTests): 18/18 passed",
+                                                                             "unity-generated-scene-projection product smoke: 1/1 passed",
+                                                                             "Goal 015 report hash 05c1a7cf4b361608871ccac7fa587540a3664552c5c4b96017f6d0bcbfa5adc6, projection hash 1f99588ffd7d8c0e89c33e0482d804517e6a448843fcbdac533b4a5cd41f9c21, build manifest hash 6aaf1c34b437330f1ed9cf4fdc1b09b3f5c72c125381691fa4a9a07150002948",
+                                                                             "check-all.ps1: 807/807 tests passed, build 0 warnings / 0 errors"
+                                                                         ]
+                                                          },
     "goal_016_unity_generated_runtime_state_loop":  {
                                                         "slice_id":  "goal_016_unity_generated_runtime_state_loop",
                                                         "title":  "Unity Generated Runtime State Loop",
@@ -722,7 +724,7 @@
                                                                           "Goal 017 quest-loop hash 1e5ad0b13a44078ebc6c5aa53e7e54c21d43a8c779a7b6937a2398eb9ad62b83, plan hash 9fe5ddc1abe483ca75f508da7aa3a85f709272f039d9bf734f3dc0c2f0fb7085, report hash c2cec57aead38f85c46b2281a53d75b0779360a7f5e32b94c7aa0879d353534c, build manifest hash 0b4859331314dc86505e2e14fec2b50856040274c97c3e5bf7e5dfb09e543771, objectives 6, invalid scenarios 24",
                                                                           "check-all.ps1: 817/817 tests passed, build 0 warnings / 0 errors"
                                                                       ]
-                                                    },
+                                                       },
     "goal_018_unity_multi_variant_playable_scenario":  {
                                                            "slice_id":  "goal_018_unity_multi_variant_playable_scenario",
                                                            "title":  "Unity Multi-Variant Playable Scenario",
@@ -735,7 +737,7 @@
                                                                           "unity-multi-variant-playable-scenario product smoke: 1/1 passed",
                                                                           "Goal 018 variants hash 863fb35b089f88a8aea0478348b809e25108e0466e66a572bb8be6e7bfe590b1, report hash bc1546c5330a5f91dfa2574f0da5a65e7e76cd59e2f933b84a021647889407f0, accepted variants 3/3, invalid scenarios 26"
                                                                       ]
-                                                    },
+                                                       },
     "goal_019_unity_alpha_readable_presentation":  {
                                                        "slice_id":  "goal_019_unity_alpha_readable_presentation",
                                                        "title":  "Unity Alpha Human-Readable Presentation",
@@ -749,50 +751,50 @@
                                                                       "check-all.ps1: 833/833 tests passed; build succeeded with 4 existing xUnit analyzer warnings and 0 unexpected devflow warnings",
                                                                       "Goal 019 model hash 8307318ed8ba0f3bd3059bd57786825eda5c53425d5bbbe0a5b495c7807f2be7, report hash 75ab51991fc023c27982ab54cf58fcc2e8100c8da11d7345ef78dc1ea2ce9f54, panels 9/9, readable labels 47, raw-id labels 0, objectives 6/6, invalid scenarios 24"
                                                                   ]
-                                                    },
+                                                   },
     "goal_020_minimum_playable_generated_game":  {
-                                                    "slice_id":  "goal_020_minimum_playable_generated_game",
-                                                    "title":  "Minimum Playable Generated Game Gate",
-                                                    "status":  "passed_by_user_prompt_before_goal_021",
-                                                    "blocked_at_utc":  "",
-                                                    "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, completes S162-S169, adds a narrow Application-layer MinimumPlayableGame acceptance service, selects the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a runnable review package under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed minimum_playable_generated_game_verification passed before Goal 021.",
-                                                    "scenario_id":  "minimum-playable-generated-game",
-                                                    "checks":  [
-                                                                   "MinimumPlayableGame focused tests: 10/10 passed",
-                                                                   "minimum-playable-generated-game product smoke: 1/1 passed",
-                                                                   "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
-                                                                   "Goal 020 manifest hash 973fe09f17697a0075dc684c15c5f97fbae7f6f7b1595725a7d08c9586b4ecba, review package hash 166aa7805e05db7e922b0f486edd426c0ed82085dfcf1a2837d24b5bd61b14a8, deterministic report hash a4b0c84755c17b52c74464934737589d900a5b09d4d60cd302d48b831d34dad7, invalid scenarios 25"
-                                                               ]
-                                                },
+                                                     "slice_id":  "goal_020_minimum_playable_generated_game",
+                                                     "title":  "Minimum Playable Generated Game Gate",
+                                                     "status":  "passed_by_user_prompt_before_goal_021",
+                                                     "blocked_at_utc":  "",
+                                                     "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, completes S162-S169, adds a narrow Application-layer MinimumPlayableGame acceptance service, selects the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a runnable review package under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed minimum_playable_generated_game_verification passed before Goal 021.",
+                                                     "scenario_id":  "minimum-playable-generated-game",
+                                                     "checks":  [
+                                                                    "MinimumPlayableGame focused tests: 10/10 passed",
+                                                                    "minimum-playable-generated-game product smoke: 1/1 passed",
+                                                                    "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
+                                                                    "Goal 020 manifest hash 973fe09f17697a0075dc684c15c5f97fbae7f6f7b1595725a7d08c9586b4ecba, review package hash 166aa7805e05db7e922b0f486edd426c0ed82085dfcf1a2837d24b5bd61b14a8, deterministic report hash a4b0c84755c17b52c74464934737589d900a5b09d4d60cd302d48b831d34dad7, invalid scenarios 25"
+                                                                ]
+                                                 },
     "goal_021_generated_game_profile_contract_refresh":  {
-                                                    "slice_id":  "goal_021_generated_game_profile_contract_refresh",
-                                                    "title":  "Generated Game Profile Contract Refresh",
-                                                    "status":  "passed_by_user_prompt_before_goal_022",
-                                                    "blocked_at_utc":  "",
-                                                    "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It physically validates accepted Goal 020 compact report/manifest evidence, writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects invalid/fake/leak profile evidence causally and leaves generated_game_profile_contract_verification required.",
-                                                    "scenario_id":  "generated-game-profile-contract",
-                                                    "checks":  [
-                                                                   "GameProfile/CurrentGeneratorStateDocs focused filter: 25/25 passed",
-                                                                   "generated-game-profile-contract product smoke: 1/1 passed",
-                                                                   "check-all.ps1: 856/856 tests passed, build 0 warnings / 0 errors",
-                                                                   "Goal 021 profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9, valid profiles 3, invalid scenarios 20"
-                                                               ]
-                                                },
+                                                             "slice_id":  "goal_021_generated_game_profile_contract_refresh",
+                                                             "title":  "Generated Game Profile Contract Refresh",
+                                                             "status":  "passed_by_user_prompt_before_goal_022",
+                                                             "blocked_at_utc":  "",
+                                                             "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It physically validates accepted Goal 020 compact report/manifest evidence, writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects invalid/fake/leak profile evidence causally and leaves generated_game_profile_contract_verification required.",
+                                                             "scenario_id":  "generated-game-profile-contract",
+                                                             "checks":  [
+                                                                            "GameProfile/CurrentGeneratorStateDocs focused filter: 25/25 passed",
+                                                                            "generated-game-profile-contract product smoke: 1/1 passed",
+                                                                            "check-all.ps1: 856/856 tests passed, build 0 warnings / 0 errors",
+                                                                            "Goal 021 profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9, valid profiles 3, invalid scenarios 20"
+                                                                        ]
+                                                         },
     "goal_022_development_complexity_stabilization":  {
-                                                    "slice_id":  "goal_022_development_complexity_stabilization",
-                                                    "title":  "Development Complexity Stabilization And Artifact Scope Governance",
-                                                    "status":  "verification_required",
-                                                    "blocked_at_utc":  "",
-                                                    "summary":  "Goal 022 records the user-confirmed generated_game_profile_contract_verification passed gate, completes S178-S184, adds docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md, .devflow/artifact-scope/artifact-scope-policy.json, .devflow/scripts/check-artifact-scope.ps1, check-all product-smoke artifact isolation, focused Devflow tests and the development-complexity-stabilization product smoke route. It writes compact policy proof, check-all isolation proof, tracked generated artifact inventory, scope guard invalid matrix, report and verification artifacts under .llmgc/procedural/development-complexity-stabilization, rejects unrelated artifact mutations through the guard matrix, defers broad cleanup/untracking and leaves development_complexity_stabilization_verification required.",
-                                                    "scenario_id":  "development-complexity-stabilization",
-                                                    "checks":  [
-                                                                   "DevelopmentComplexityStabilization/ArtifactScope/CurrentGeneratorStateDocs focused filter: 20/20 passed",
-                                                                   "development-complexity-stabilization product smoke: 1/1 passed",
-                                                                   "check-all.ps1: 803/803 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
-                                                                   "goal-022-final artifact scope guard: 15/15 changed paths allowed, 0 violations",
-                                                                   "Goal 022 report hash ff5c92e850bc00c40e2dcfa50c9a6e136cfe5ce35c0828b59070d2493fee995f, policy proof hash 02bb8b88f67d0114e75d4b74902b2a659bed7d3d2a9f607f815b1e14ee32b150, check-all isolation proof hash c0710c2199fc8fb793921399ac278d8e1a26671fa32f1c23f4e8303e0f2199c9, inventory hash c1b50626aaeeb108aa61f08b6c07fb078489974f189eea1abf95fa64a9597abb, invalid matrix hash 276490719322c737ff307d1dd337a54650756bcb812d59a3f35568349f8cbd8a, tracked generated artifact files 3008, families 16, invalid scenarios 12"
-                                                               ]
-                                                },
+                                                          "slice_id":  "goal_022_development_complexity_stabilization",
+                                                          "title":  "Development Complexity Stabilization And Artifact Scope Governance",
+                                                          "status":  "passed_by_user_prompt_before_goal_023",
+                                                          "blocked_at_utc":  "",
+                                                          "summary":  "Goal 022 records the user-confirmed generated_game_profile_contract_verification passed gate, completes S178-S184, adds docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md, .devflow/artifact-scope/artifact-scope-policy.json, .devflow/scripts/check-artifact-scope.ps1, check-all product-smoke artifact isolation, focused Devflow tests and the development-complexity-stabilization product smoke route. It writes compact policy proof, check-all isolation proof, tracked generated artifact inventory, scope guard invalid matrix, report and verification artifacts under .llmgc/procedural/development-complexity-stabilization, rejects unrelated artifact mutations through the guard matrix, defers broad cleanup/untracking and left development_complexity_stabilization_verification required for review. The user confirmed development_complexity_stabilization_verification passed before Goal 023.",
+                                                          "scenario_id":  "development-complexity-stabilization",
+                                                          "checks":  [
+                                                                         "DevelopmentComplexityStabilization/ArtifactScope/CurrentGeneratorStateDocs focused filter: 20/20 passed",
+                                                                         "development-complexity-stabilization product smoke: 1/1 passed",
+                                                                         "check-all.ps1: 803/803 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
+                                                                         "goal-022-final artifact scope guard: 15/15 changed paths allowed, 0 violations",
+                                                                         "Goal 022 report hash ff5c92e850bc00c40e2dcfa50c9a6e136cfe5ce35c0828b59070d2493fee995f, policy proof hash 02bb8b88f67d0114e75d4b74902b2a659bed7d3d2a9f607f815b1e14ee32b150, check-all isolation proof hash c0710c2199fc8fb793921399ac278d8e1a26671fa32f1c23f4e8303e0f2199c9, inventory hash c1b50626aaeeb108aa61f08b6c07fb078489974f189eea1abf95fa64a9597abb, invalid matrix hash 276490719322c737ff307d1dd337a54650756bcb812d59a3f35568349f8cbd8a, tracked generated artifact files 3008, families 16, invalid scenarios 12"
+                                                                     ]
+                                                      },
     "goal_012_unity_runtime_export_vertical_slice":  {
                                                          "slice_id":  "goal_012_unity_runtime_export_vertical_slice",
                                                          "title":  "Unity Runtime Export Vertical Slice",
@@ -829,5 +831,37 @@
                                                                 "content-generation-scale product smoke: 1/1 passed",
                                                                 "check-all.ps1: 775/775 tests passed, build 0 warnings / 0 errors"
                                                             ]
-                                             }
+                                             },
+    "capability_bundle_pipeline_inputs_verification":  {
+                                                           "status":  "required",
+                                                           "evidence_source":  "goal_023_capability_bundle_pipeline_inputs",
+                                                           "observed_result":  [
+                                                                                   "docs/CAPABILITY_BUNDLE_PIPELINE_INPUTS_CONTRACT_V1.md defines the Goal 023 planning artifact contract",
+                                                                                   "Accepted Goal 021 game_profile_v1 profiles are mapped to capability selector requests",
+                                                                                   "Generator pipeline input records are written for three accepted profiles",
+                                                                                   "Atlas incompatibilities remain explicit blocked_gap records instead of being treated as complete support",
+                                                                                   "Future-required profile capabilities remain future_required and are not marked supported_now",
+                                                                                   "Invalid/fake/leak matrix rejects 16 scenarios",
+                                                                                   "Product smoke route is capability-bundle-pipeline-inputs",
+                                                                                   "Final report accepted=false and manualGate=capability_bundle_pipeline_inputs_verification",
+                                                                                   "Goal 024 and S192 are not started"
+                                                                               ],
+                                                           "next_action":  "review_capability_bundle_pipeline_inputs_before_marking_gate_passed"
+                                                       },
+    "goal_023_capability_bundle_pipeline_inputs":  {
+                                                       "slice_id":  "goal_023_capability_bundle_pipeline_inputs",
+                                                       "title":  "Capability Bundle Selection To Pipeline Inputs",
+                                                       "status":  "verification_required",
+                                                       "blocked_at_utc":  "",
+                                                       "summary":  "Goal 023 records the user-confirmed development_complexity_stabilization_verification passed gate, completes S185-S191, adds docs/CAPABILITY_BUNDLE_PIPELINE_INPUTS_CONTRACT_V1.md, a narrow Application-layer capability bundle pipeline input acceptance service under Design/CapabilityBundlePipelineInputs, focused tests and the capability-bundle-pipeline-inputs product smoke route. It maps the three accepted Goal 021 game profiles to concrete capability selector requests and generator pipeline input records, preserves atlas incompatibilities and future-required capabilities as explicit gaps, writes compact artifacts under .llmgc/procedural/capability-bundle-pipeline-inputs, rejects invalid/fake/leak selection evidence causally and leaves capability_bundle_pipeline_inputs_verification required.",
+                                                       "scenario_id":  "capability-bundle-pipeline-inputs",
+                                                       "checks":  [
+                                                                      "CapabilityBundlePipelineInputs/CurrentGeneratorStateDocs/DevelopmentComplexityStabilization focused filter: 27/27 passed",
+                                                                      "GeneratedGameProfileContract handoff regression focused test: 1/1 passed",
+                                                                      "capability-bundle-pipeline-inputs product smoke: 1/1 passed",
+                                                                      "check-all.ps1: 812/812 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
+                                                                      "goal-023-final artifact scope guard: 14/14 changed paths allowed, 0 violations; bounded extension allowed two stale handoff regression test updates required by check-all",
+                                                                      "Goal 023 profile request hash 4174054b656b5ada88e3501227e62e0f1ad31b7f7b1de125289845ce703749a0, selection hash 2d2813325fcc82f9ddfe21cee9fc4448b1e42810d0c6a93e556044758c94d5ca, generator input hash d77a779db0c3dc5b48b04de7bad9308079e1bd132011072bfafd348648ae4e27, gap report hash f1720cc9ea8811818b782254bd4ba3f4341ea4fd60714626ccc360002b907446, invalid matrix hash c4ca4fcea77055fc4912f027b3517c01903fa85f24d33fe8f88947bad6f9a909, deterministic report hash 7d680f708c7808b26abc6b54dcd4d640e913fa775100c54c757cd066ce85869f, profiles 3, pipeline inputs 3, blocked gaps 2, future-required gaps 102, invalid scenarios 16"
+                                                                  ]
+                                                   }
 }

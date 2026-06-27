@@ -233,7 +233,12 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
             state.RootElement.GetProperty("goal_021_generated_game_profile_contract_refresh").GetProperty("slice_id").GetString());
         Assert.Contains(
             lastCompleted,
-            new[] { "goal_021_generated_game_profile_contract_refresh", "goal_022_development_complexity_stabilization" });
+            new[]
+            {
+                "goal_021_generated_game_profile_contract_refresh",
+                "goal_022_development_complexity_stabilization",
+                "goal_023_capability_bundle_pipeline_inputs"
+            });
     }
 
     private static string FindRepoRoot()
