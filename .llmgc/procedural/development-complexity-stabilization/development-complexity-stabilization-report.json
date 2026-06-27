@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "development_complexity_stabilization_report_v1",
+  "accepted": false,
+  "finalStatus": "development_complexity_stabilization_verification",
+  "manualGate": "development_complexity_stabilization_verification",
+  "previousAcceptedGate": "generated_game_profile_contract_verification passed",
+  "productSmokeRoute": "development-complexity-stabilization",
+  "completedSlices": [
+    "S178",
+    "S179",
+    "S180",
+    "S181",
+    "S182",
+    "S183",
+    "S184"
+  ],
+  "policyDocExists": true,
+  "policyJsonExists": true,
+  "scopeGuardImplemented": true,
+  "checkAllArtifactIsolationImplemented": true,
+  "legacyArtifactMutationGuarded": true,
+  "trackedGeneratedArtifactInventoryWritten": true,
+  "capabilitySelectionStarted": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "unityBuildExecuted": false,
+  "noExternalProviderLlmRagLuaMedia": true,
+  "invalidMatrix": {
+    "passed": true,
+    "scenarioCount": 12,
+    "rejectedCount": 12
+  },
+  "artifactHashes": {
+    "policyProofHash": "02bb8b88f67d0114e75d4b74902b2a659bed7d3d2a9f607f815b1e14ee32b150",
+    "checkAllIsolationProofHash": "c0710c2199fc8fb793921399ac278d8e1a26671fa32f1c23f4e8303e0f2199c9",
+    "trackedGeneratedArtifactInventoryHash": "c1b50626aaeeb108aa61f08b6c07fb078489974f189eea1abf95fa64a9597abb",
+    "scopeGuardInvalidMatrixHash": "276490719322c737ff307d1dd337a54650756bcb812d59a3f35568349f8cbd8a"
+  },
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "development_complexity.goal021_gate.accepted",
+      "target": "generated_game_profile_contract_verification",
+      "message": "generated_game_profile_contract_verification passed"
+    },
+    {
+      "severity": "info",
+      "code": "development_complexity.final_gate.required",
+      "target": "development_complexity_stabilization_verification",
+      "message": "Goal 022 stops with the stabilization verification gate required."
+    }
+  ]
+}

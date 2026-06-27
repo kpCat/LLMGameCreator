@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "artifact_scope_policy_proof_v1",
+  "policySchemaVersion": "artifact_scope_policy_v1",
+  "requiredClassesPresent": true,
+  "requiredClasses": [
+    "source_code_docs",
+    "state_handoff_docs",
+    "current_goal_compact_review_artifacts",
+    "historical_compact_artifacts",
+    "heavy_generated_build_runtime_outputs",
+    "task_pack_docs"
+  ],
+  "defaultAllowedStateDocs": [
+    "docs/CURRENT_GENERATOR_STATE.json",
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/CONTEXT_INDEX.md",
+    "docs/FULL_GENERATOR_GOAL_QUEUE.md"
+  ],
+  "currentGoalArtifactRoots": [
+    ".llmgc/procedural/development-complexity-stabilization/"
+  ],
+  "historicalArtifactRootCount": 12,
+  "heavyOutputPatternCount": 7,
+  "scenarioAllowlistPresent": true
+}

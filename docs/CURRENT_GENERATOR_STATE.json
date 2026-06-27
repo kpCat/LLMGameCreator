@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-27T05:43:57Z",
+    "updated_at_utc":  "2026-06-27T08:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 021 generated game profile contract verification required",
-    "gate_status":  "generated_game_profile_contract_verification",
+    "current_phase_title":  "Goal 022 development complexity stabilization verification required",
+    "gate_status":  "development_complexity_stabilization_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_021_generated_game_profile_contract_refresh",
-    "active_manual_gate":  "Goal 021 records minimum_playable_generated_game_verification passed and produces a deterministic generated-game profile contract plus profile-to-pipeline artifacts; generated_game_profile_contract_verification remains required and not passed until the profile contract is manually accepted.",
-    "current_user_action":  "Review the generated game profile contract document, three sample profiles, profile artifact, pipeline plan, report, verification artifact and invalid/fake/leak matrix; do not mark generated_game_profile_contract_verification passed until the profile contract is accepted.",
-    "recommended_next_decision":  "The user confirmed minimum_playable_generated_game_verification passed before Goal 021. Goal 021 completes S170-S177 by defining game_profile_v1, adding three deterministic sample profiles, introducing a narrow Application-layer GameProfiles acceptance service, physically validating accepted Goal 020 compact report/manifest evidence, mapping each profile to exact Goal 010-020 capability and pipeline stage ids, separating future-required capabilities from supported-now stages, rejecting 20 invalid/fake/leak scenarios causally and adding the generated-game-profile-contract product smoke route. Compact review artifacts are written under .llmgc/procedural/generated-game-profile-contract. Goal 021 stops at generated_game_profile_contract_verification required; do not mark it passed and do not start S178 or Goal 022.",
+    "last_completed_product_slice_id":  "goal_022_development_complexity_stabilization",
+    "active_manual_gate":  "Goal 022 records generated_game_profile_contract_verification passed and produces artifact-scope governance policy, machine-readable policy config, scope guard automation, check-all artifact isolation and compact stabilization evidence; development_complexity_stabilization_verification remains required and not passed until reviewed.",
+    "current_user_action":  "Review the development complexity stabilization policy, artifact-scope policy JSON, check-artifact-scope guard, check-all isolation proof, tracked generated artifact inventory, invalid/fake/leak matrix and verification artifact; do not mark development_complexity_stabilization_verification passed until the stabilization evidence is accepted.",
+    "recommended_next_decision":  "The user confirmed generated_game_profile_contract_verification passed before Goal 022. Goal 022 completes S178-S184 by inserting a stabilization goal before capability-selection work, defining docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md, adding .devflow/artifact-scope/artifact-scope-policy.json, adding .devflow/scripts/check-artifact-scope.ps1, isolating check-all product-smoke/test artifact writes under the check-all run directory, inventorying tracked generated artifacts without cleanup, adding the development-complexity-stabilization product smoke route and writing compact stabilization artifacts under .llmgc/procedural/development-complexity-stabilization. Goal 022 stops at development_complexity_stabilization_verification required; do not mark it passed and do not start Capability Bundle Selection, Goal 023 or S185.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "generated_game_profile_contract_verification"
+                                                        "development_complexity_stabilization_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -47,7 +47,8 @@
                            "goal_018_manual_gate":  "unity_generated_multi_variant_playable_scenario_verification",
                            "goal_019_manual_gate":  "unity_alpha_readable_presentation_verification",
                            "goal_020_manual_gate":  "minimum_playable_generated_game_verification",
-                           "goal_021_manual_gate":  "generated_game_profile_contract_verification"
+                           "goal_021_manual_gate":  "generated_game_profile_contract_verification",
+                           "goal_022_manual_gate":  "development_complexity_stabilization_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -68,16 +69,17 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_021_generated_game_profile_contract_refresh",
-                                         "title":  "Generated Game Profile Contract Refresh",
-                                         "completed_at_utc":  "2026-06-27T05:43:57Z",
-                                         "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It physically validates accepted Goal 020 compact report/manifest evidence, writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects 20 invalid/fake/leak profile evidence scenarios causally and leaves generated_game_profile_contract_verification required.",
-                                         "scenario_id":  "generated-game-profile-contract",
+                                         "slice_id":  "goal_022_development_complexity_stabilization",
+                                         "title":  "Development Complexity Stabilization And Artifact Scope Governance",
+                                         "completed_at_utc":  "2026-06-27T08:30:00Z",
+                                         "summary":  "Goal 022 records the user-confirmed generated_game_profile_contract_verification passed gate, completes S178-S184, adds docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md, a machine-readable artifact-scope policy, a scope guard script, check-all product-smoke artifact isolation, focused Devflow tests, a development-complexity-stabilization product smoke route and compact stabilization artifacts under .llmgc/procedural/development-complexity-stabilization. It inventories tracked generated artifacts without broad cleanup, rejects legacy artifact/project/schema/generator-library/Unity entrypoint/heavy-output mutations through the guard matrix and leaves development_complexity_stabilization_verification required.",
+                                         "scenario_id":  "development-complexity-stabilization",
                                          "checks":  [
-                                                        "GameProfile/CurrentGeneratorStateDocs focused filter: 25/25 passed",
-                                                        "generated-game-profile-contract product smoke: 1/1 passed",
-                                                        "check-all.ps1: 856/856 tests passed, build 0 warnings / 0 errors",
-                                                        "Goal 021 profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9, valid profiles 3, invalid scenarios 20"
+                                                        "DevelopmentComplexityStabilization/ArtifactScope/CurrentGeneratorStateDocs focused filter: 20/20 passed",
+                                                        "development-complexity-stabilization product smoke: 1/1 passed",
+                                                        "check-all.ps1: 803/803 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
+                                                        "goal-022-final artifact scope guard: 15/15 changed paths allowed, 0 violations",
+                                                        "Goal 022 report hash ff5c92e850bc00c40e2dcfa50c9a6e136cfe5ce35c0828b59070d2493fee995f, policy proof hash 02bb8b88f67d0114e75d4b74902b2a659bed7d3d2a9f607f815b1e14ee32b150, check-all isolation proof hash c0710c2199fc8fb793921399ac278d8e1a26671fa32f1c23f4e8303e0f2199c9, inventory hash c1b50626aaeeb108aa61f08b6c07fb078489974f189eea1abf95fa64a9597abb, invalid matrix hash 276490719322c737ff307d1dd337a54650756bcb812d59a3f35568349f8cbd8a, tracked generated artifact files 3008, families 16, invalid scenarios 12"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -337,7 +339,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "generated_game_profile_contract_verification"
+                                          "development_complexity_stabilization_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -358,11 +360,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "generated_game_profile_contract_verification",
-    "recommended_next_work_item_title":  "Goal 021 generated game profile contract verification review.",
-    "recommended_next_task_file":  ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-verification.md",
+    "recommended_next_work_item":  "development_complexity_stabilization_verification",
+    "recommended_next_work_item_title":  "Goal 022 development complexity stabilization verification review.",
+    "recommended_next_task_file":  ".llmgc/procedural/development-complexity-stabilization/development-complexity-stabilization-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Generated game profile contract verification review"
+                                              "Development complexity stabilization verification review",
+                                              "Capability Bundle Selection To Pipeline Inputs after stabilization acceptance"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -585,7 +588,7 @@
                                                           "next_action":  "goal_021_generated_game_profile_contract_refresh"
                                                               },
     "generated_game_profile_contract_verification":  {
-                                                          "status":  "required",
+                                                          "status":  "passed_by_user_prompt_before_goal_022",
                                                           "evidence_source":  "goal_021_generated_game_profile_contract_refresh",
                                                           "observed_result":  [
                                                               "Game profile contract document is written at docs/GAME_PROFILE_CONTRACT_V1.md",
@@ -599,9 +602,26 @@
                                                               "Invalid/fake/leak matrix rejects 20 scenarios",
                                                               "Product smoke route is generated-game-profile-contract",
                                                               "Final report accepted=false and manualGate=generated_game_profile_contract_verification",
-                                                              "Gate remains required and is not marked passed"
+                                                              "user confirmed generated_game_profile_contract_verification passed before Goal 022"
                                                           ],
-                                                          "next_action":  "review_generated_game_profile_contract_before_marking_gate_passed"
+                                                          "next_action":  "goal_022_development_complexity_stabilization"
+                                                              },
+    "development_complexity_stabilization_verification":  {
+                                                          "status":  "required",
+                                                          "evidence_source":  "goal_022_development_complexity_stabilization",
+                                                          "observed_result":  [
+                                                              "Development complexity stabilization policy is written at docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md",
+                                                              "Machine-readable artifact scope policy is written at .devflow/artifact-scope/artifact-scope-policy.json",
+                                                              "Scope guard script is written at .devflow/scripts/check-artifact-scope.ps1",
+                                                              "check-all.ps1 isolates product-smoke/test artifact output environment variables under the check-all run directory",
+                                                              "Compact stabilization artifacts are written under .llmgc/procedural/development-complexity-stabilization",
+                                                              "Tracked generated artifact inventory is written without broad cleanup or untracking",
+                                                              "Invalid/fake/leak matrix rejects legacy artifact, project/schema, generator-library, Unity entrypoint, undeclared root write and heavy-output mutations",
+                                                              "Product smoke route is development-complexity-stabilization",
+                                                              "Final report accepted=false and manualGate=development_complexity_stabilization_verification",
+                                                              "Capability Bundle Selection, Goal 023 and S185 are not started"
+                                                          ],
+                                                          "next_action":  "review_development_complexity_stabilization_before_marking_gate_passed"
                                                               },
     "alpha_unity_build_environment_blocker":  {
                                                  "status":  "resolved_by_s113b",
@@ -747,7 +767,7 @@
     "goal_021_generated_game_profile_contract_refresh":  {
                                                     "slice_id":  "goal_021_generated_game_profile_contract_refresh",
                                                     "title":  "Generated Game Profile Contract Refresh",
-                                                    "status":  "verification_required",
+                                                    "status":  "passed_by_user_prompt_before_goal_022",
                                                     "blocked_at_utc":  "",
                                                     "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It physically validates accepted Goal 020 compact report/manifest evidence, writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects invalid/fake/leak profile evidence causally and leaves generated_game_profile_contract_verification required.",
                                                     "scenario_id":  "generated-game-profile-contract",
@@ -756,6 +776,21 @@
                                                                    "generated-game-profile-contract product smoke: 1/1 passed",
                                                                    "check-all.ps1: 856/856 tests passed, build 0 warnings / 0 errors",
                                                                    "Goal 021 profile artifact hash 498cd01ecd0826ca832d5255c41444445106dbc476a0b369086acd60ebb763e6, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 192365fc21c0bdec0d48f879f0e7089825f86c61b22b46aa4076d02a54a026d9, valid profiles 3, invalid scenarios 20"
+                                                               ]
+                                                },
+    "goal_022_development_complexity_stabilization":  {
+                                                    "slice_id":  "goal_022_development_complexity_stabilization",
+                                                    "title":  "Development Complexity Stabilization And Artifact Scope Governance",
+                                                    "status":  "verification_required",
+                                                    "blocked_at_utc":  "",
+                                                    "summary":  "Goal 022 records the user-confirmed generated_game_profile_contract_verification passed gate, completes S178-S184, adds docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md, .devflow/artifact-scope/artifact-scope-policy.json, .devflow/scripts/check-artifact-scope.ps1, check-all product-smoke artifact isolation, focused Devflow tests and the development-complexity-stabilization product smoke route. It writes compact policy proof, check-all isolation proof, tracked generated artifact inventory, scope guard invalid matrix, report and verification artifacts under .llmgc/procedural/development-complexity-stabilization, rejects unrelated artifact mutations through the guard matrix, defers broad cleanup/untracking and leaves development_complexity_stabilization_verification required.",
+                                                    "scenario_id":  "development-complexity-stabilization",
+                                                    "checks":  [
+                                                                   "DevelopmentComplexityStabilization/ArtifactScope/CurrentGeneratorStateDocs focused filter: 20/20 passed",
+                                                                   "development-complexity-stabilization product smoke: 1/1 passed",
+                                                                   "check-all.ps1: 803/803 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
+                                                                   "goal-022-final artifact scope guard: 15/15 changed paths allowed, 0 violations",
+                                                                   "Goal 022 report hash ff5c92e850bc00c40e2dcfa50c9a6e136cfe5ce35c0828b59070d2493fee995f, policy proof hash 02bb8b88f67d0114e75d4b74902b2a659bed7d3d2a9f607f815b1e14ee32b150, check-all isolation proof hash c0710c2199fc8fb793921399ac278d8e1a26671fa32f1c23f4e8303e0f2199c9, inventory hash c1b50626aaeeb108aa61f08b6c07fb078489974f189eea1abf95fa64a9597abb, invalid matrix hash 276490719322c737ff307d1dd337a54650756bcb812d59a3f35568349f8cbd8a, tracked generated artifact files 3008, families 16, invalid scenarios 12"
                                                                ]
                                                 },
     "goal_012_unity_runtime_export_vertical_slice":  {

@@ -17,7 +17,7 @@ $MarkdownPath = Join-Path $RunDir "product-smoke-summary.md"
 $LogIndexPath = Join-Path $RunDir "logs.txt"
 $TestResultsDir = Join-Path $RunDir "test-results"
 $PackageOutputDir = Join-Path $RunDir "package-output"
-$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario" -or $Scenario -eq "unity-alpha-readable-presentation" -or $Scenario -eq "minimum-playable-generated-game" -or $Scenario -eq "generated-game-profile-contract") { $RepoRoot } else { $PackageOutputDir }
+$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario" -or $Scenario -eq "unity-alpha-readable-presentation" -or $Scenario -eq "minimum-playable-generated-game" -or $Scenario -eq "generated-game-profile-contract" -or $Scenario -eq "development-complexity-stabilization") { $RepoRoot } else { $PackageOutputDir }
 $TestFilter = "FullyQualifiedName~ProductSmoke"
 $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
 
@@ -83,6 +83,8 @@ function Write-ProductSmokeSummary {
         Join-Path $ScenarioArtifactRoot ".llmgc\procedural\minimum-playable-generated-game\minimum-playable-generated-game-report.json"
     } elseif ($Scenario -eq "generated-game-profile-contract") {
         Join-Path $ScenarioArtifactRoot ".llmgc\procedural\generated-game-profile-contract\generated-game-profile-contract-report.json"
+    } elseif ($Scenario -eq "development-complexity-stabilization") {
+        Join-Path $ScenarioArtifactRoot ".llmgc\procedural\development-complexity-stabilization\development-complexity-stabilization-report.json"
     } elseif ($Scenario -eq "generated-microgame-loop" -or $Scenario -eq "runtime-owned-goal-progress" -or $Scenario -eq "runtime-reward-challenge-state") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-microgame-loop\generated-microgame-loop-snapshot.json"
     } elseif ($Scenario -eq "visible-generated-playable-preview" -or $Scenario -eq "one-click-generated-preview-workflow" -or $Scenario -eq "generated-microgame-goal-loop" -or $Scenario -eq "generated-microgame-challenge-loop") {
@@ -307,6 +309,9 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
     }
     elseif ($Scenario -eq "generated-game-profile-contract") {
         $TestFilter = "FullyQualifiedName~GeneratedGameProfileContractProductSmoke"
+    }
+    elseif ($Scenario -eq "development-complexity-stabilization") {
+        $TestFilter = "FullyQualifiedName~DevelopmentComplexityStabilizationProductSmoke"
     }
     else {
         throw "Unknown product smoke scenario: $Scenario"

@@ -12,12 +12,13 @@ Accepted through:
 
 ```text
 minimum_playable_generated_game_verification passed
+generated_game_profile_contract_verification passed
 ```
 
 Produced for review:
 
 ```text
-generated_game_profile_contract_verification required
+development_complexity_stabilization_verification required
 ```
 
 Current capabilities:
@@ -40,7 +41,7 @@ Current capabilities:
 
 Current limitation:
 
-The Unity Alpha minimum playable generated game gate has been accepted by user prompt. Goal 021 produced a generated game profile contract, but the user still needs to manually accept whether the profile/capability contract is the right basis for future generalization.
+The generated game profile contract gate has been accepted by user prompt. Goal 022 produced artifact-scope governance and check-all isolation, but the user still needs to accept whether the stabilization evidence is sufficient before capability bundle selection starts.
 
 ## Queue Rules
 
@@ -194,45 +195,61 @@ Manual review likely required for profile/capability approval.
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start S178 or Goal 022 until it is accepted.
+Accepted by user prompt before Goal 022.
 
-### Goal 022: Capability Bundle Selection To Pipeline Inputs
+### Goal 022: Development Complexity Stabilization And Artifact Scope Governance
+
+Gate:
+
+```text
+development_complexity_stabilization_verification
+```
+
+Purpose:
+
+Prevent future goals from silently mutating unrelated tracked generated artifacts by adding artifact-scope policy, guard automation, check-all artifact isolation, tracked generated artifact inventory and compact stabilization evidence.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start Capability Bundle Selection, Goal 023 or S185 until it is accepted.
+
+### Goal 023: Capability Bundle Selection To Pipeline Inputs
 
 Purpose:
 
 Map profile choices to capability bundles and concrete generation pipeline inputs without hardcoding one scenario.
 
-### Goal 023: Rich Package Assembly Coverage Audit
+### Goal 024: Rich Package Assembly Coverage Audit
 
 Purpose:
 
 Audit existing package assembly against full generator needs: world, entities, quests, dialogue, items/economy, combat, progression, factions and schedules.
 
-### Goal 024: Package Assembly Expansion 1 - World And Entities
+### Goal 025: Package Assembly Expansion 1 - World And Entities
 
 Purpose:
 
 Generate and assemble richer world/entity data for at least one selected game family.
 
-### Goal 025: Package Assembly Expansion 2 - Dialogue And Quests
+### Goal 026: Package Assembly Expansion 2 - Dialogue And Quests
 
 Purpose:
 
 Generate and assemble richer dialogue/quest stages/objectives with validation and runtime smoke.
 
-### Goal 026: Package Assembly Expansion 3 - Items, Economy And Crafting
+### Goal 027: Package Assembly Expansion 3 - Items, Economy And Crafting
 
 Purpose:
 
 Generate and assemble item/economy/crafting loops with validators and runtime smoke.
 
-### Goal 027: Package Assembly Expansion 4 - Combat And Progression
+### Goal 028: Package Assembly Expansion 4 - Combat And Progression
 
 Purpose:
 
 Generate and assemble combat/progression definitions with validators and runtime smoke.
 
-### Goal 028: Full Package Assembly Vertical
+### Goal 029: Full Package Assembly Vertical
 
 Purpose:
 
@@ -242,13 +259,13 @@ Manual review likely required.
 
 ## LLM And Lua Controlled Generation Track
 
-### Goal 029: Artifact Contract Registry For Full Generator
+### Goal 030: Artifact Contract Registry For Full Generator
 
 Purpose:
 
 Stabilize artifact contract registry for profile, world, entity, quest, dialogue, item/economy, combat and UI/export IR artifacts.
 
-### Goal 030: Strict LLM Draft Artifact Loop
+### Goal 031: Strict LLM Draft Artifact Loop
 
 Purpose:
 
@@ -256,13 +273,13 @@ Use LLM only for contract-bound JSON drafts with validation and repair. No runti
 
 Manual review likely required before enabling broad LLM usage.
 
-### Goal 031: Lua Module Manifest Registry
+### Goal 032: Lua Module Manifest Registry
 
 Purpose:
 
 Introduce Lua module registry/manifest validation as deterministic generator IR, still without arbitrary runtime authority.
 
-### Goal 032: Lua Sandbox Execution Gate
+### Goal 033: Lua Sandbox Execution Gate
 
 Purpose:
 
@@ -270,7 +287,7 @@ Execute a bounded Lua module family through sandbox and manifest-declared output
 
 Manual review likely required because this opens execution of generator modules.
 
-### Goal 033: Hybrid LLM Draft Plus Lua Deterministic Expansion
+### Goal 034: Hybrid LLM Draft Plus Lua Deterministic Expansion
 
 Purpose:
 
@@ -278,31 +295,31 @@ LLM drafts bounded high-level artifacts; Lua expands deterministic configs/IR; C
 
 ## World Scale Track
 
-### Goal 034: Region Graph And Reachability Generalization
+### Goal 035: Region Graph And Reachability Generalization
 
 Purpose:
 
 Move beyond single start maps to generated region graphs with reachability validation.
 
-### Goal 035: Finite Map Pack Generation
+### Goal 036: Finite Map Pack Generation
 
 Purpose:
 
 Generate finite maps with tile/entity placements, landmarks and paths.
 
-### Goal 036: Chunked World Config Contract
+### Goal 037: Chunked World Config Contract
 
 Purpose:
 
 Represent chunk rules/seeds/configs without dumping huge tile arrays.
 
-### Goal 037: Runtime Chunk Delta Validation
+### Goal 038: Runtime Chunk Delta Validation
 
 Purpose:
 
 Persist discovered/mutated chunk state in runtime/save state, not package definitions.
 
-### Goal 038: Infinite/Chunked World Smoke
+### Goal 039: Infinite/Chunked World Smoke
 
 Purpose:
 
@@ -310,25 +327,25 @@ Smoke a generated chunked world path through runtime preview/export.
 
 ## Multi-Family Track
 
-### Goal 039: Family 1 - Map And Panel RPG Template
+### Goal 040: Family 1 - Map And Panel RPG Template
 
 Purpose:
 
 Generate a richer map-and-panel RPG through the full lifecycle.
 
-### Goal 040: Family 2 - Survival Sandbox Template
+### Goal 041: Family 2 - Survival Sandbox Template
 
 Purpose:
 
 Generate survival sandbox data loops: resources, crafting, hazards, NPCs/events.
 
-### Goal 041: Family 3 - First-Person Grid Dungeon Template
+### Goal 042: Family 3 - First-Person Grid Dungeon Template
 
 Purpose:
 
 Generate first-person grid/blobber data with party/blob movement and combat profile.
 
-### Goal 042: Multi-Family Capability Regression
+### Goal 043: Multi-Family Capability Regression
 
 Purpose:
 
@@ -338,37 +355,37 @@ Manual review likely required.
 
 ## Full Generator Stabilization Track
 
-### Goal 043: Review And Approval Workflow Hardening
+### Goal 044: Review And Approval Workflow Hardening
 
 Purpose:
 
 Make generated artifact review/promotion auditable and scalable.
 
-### Goal 044: Repair Diagnostics Hardening
+### Goal 045: Repair Diagnostics Hardening
 
 Purpose:
 
 Ensure validation failures produce repairable diagnostics and bounded repair attempts.
 
-### Goal 045: Runtime Preview Validation Across Generated Systems
+### Goal 046: Runtime Preview Validation Across Generated Systems
 
 Purpose:
 
 Runtime preview smokes generated world/entity/quest/dialogue/item/economy/combat systems.
 
-### Goal 046: Unity Export Profile Generalization
+### Goal 047: Unity Export Profile Generalization
 
 Purpose:
 
 Export generated packages through profile-selected Unity presentation modes without hardcoded Alpha-only assumptions.
 
-### Goal 047: One-Click Full Generator Dry Run
+### Goal 048: One-Click Full Generator Dry Run
 
 Purpose:
 
 Run from approved profile/capabilities to generated package, validation, preview and export artifacts.
 
-### Goal 048: Full Generator Without Media Verification
+### Goal 049: Full Generator Without Media Verification
 
 Gate:
 
@@ -385,7 +402,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-generated_game_profile_contract_verification
+development_complexity_stabilization_verification
 ```
 
 Status:

@@ -19,6 +19,10 @@ New-Item -ItemType Directory -Force -Path $RunDir | Out-Null
 
 $SummaryPath = Join-Path $RunDir "summary.json"
 $LogIndexPath = Join-Path $RunDir "logs.txt"
+$PreviousProductSmokeProjectDir = $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR
+$PreviousProductSmokePackageOutputDir = $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR
+$CheckAllProductSmokeProjectDir = Join-Path $RunDir "test-artifacts\project-root"
+$CheckAllProductSmokePackageOutputDir = Join-Path $RunDir "test-artifacts\package-output"
 
 Push-Location $RepoRoot
 try {
@@ -65,6 +69,17 @@ try {
     if (-not $SkipTests) {
         $TestResultsDir = Join-Path $RunDir "test-results"
         New-Item -ItemType Directory -Force -Path $TestResultsDir | Out-Null
+        New-Item -ItemType Directory -Force -Path $CheckAllProductSmokeProjectDir | Out-Null
+        New-Item -ItemType Directory -Force -Path $CheckAllProductSmokePackageOutputDir | Out-Null
+
+        $RepoProceduralRoot = Join-Path $RepoRoot ".llmgc\procedural"
+        if (Test-Path $RepoProceduralRoot) {
+            New-Item -ItemType Directory -Force -Path (Join-Path $CheckAllProductSmokeProjectDir ".llmgc") | Out-Null
+            Copy-Item -LiteralPath $RepoProceduralRoot -Destination (Join-Path $CheckAllProductSmokeProjectDir ".llmgc") -Recurse -Force
+        }
+
+        $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR = $CheckAllProductSmokeProjectDir
+        $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR = $CheckAllProductSmokePackageOutputDir
 
         Invoke-DevflowLoggedCommand -Name "test" -Exe "dotnet" -ArgsList @(
             "test",
@@ -72,6 +87,8 @@ try {
             "--configuration",
             $Configuration,
             "--no-build",
+            "--filter",
+            "FullyQualifiedName!~ProductSmoke",
             "--results-directory",
             $TestResultsDir,
             "--logger",
@@ -94,6 +111,9 @@ try {
         dotnet_cli_ui_language = $env:DOTNET_CLI_UI_LANGUAGE
         vslang = $env:VSLANG
         code_page = "65001"
+        product_smoke_project_dir = "$CheckAllProductSmokeProjectDir"
+        product_smoke_package_output_dir = "$CheckAllProductSmokePackageOutputDir"
+        product_smoke_seeded_procedural_baseline = [bool](Test-Path (Join-Path $CheckAllProductSmokeProjectDir ".llmgc\procedural"))
     }
 
     $summary | ConvertTo-Json -Depth 8 | Set-Content -Encoding UTF8 -Path $SummaryPath
@@ -121,5 +141,17 @@ catch {
     exit 1
 }
 finally {
+    if ($null -eq $PreviousProductSmokeProjectDir) {
+        Remove-Item Env:\LLMGC_PRODUCT_SMOKE_PROJECT_DIR -ErrorAction SilentlyContinue
+    } else {
+        $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR = $PreviousProductSmokeProjectDir
+    }
+
+    if ($null -eq $PreviousProductSmokePackageOutputDir) {
+        Remove-Item Env:\LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR -ErrorAction SilentlyContinue
+    } else {
+        $env:LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR = $PreviousProductSmokePackageOutputDir
+    }
+
     Pop-Location
 }

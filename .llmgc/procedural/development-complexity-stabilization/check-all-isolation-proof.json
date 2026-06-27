@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "check_all_isolation_proof_v1",
+  "setsProjectDir": true,
+  "setsPackageOutputDir": true,
+  "restoresProjectDir": true,
+  "restoresPackageOutputDir": true,
+  "seedsRunLocalProceduralBaseline": true,
+  "excludesProductSmokeFromOrdinarySuite": true,
+  "isolationImplemented": true,
+  "isolatedEnvironmentVariables": [
+    "LLMGC_PRODUCT_SMOKE_PROJECT_DIR",
+    "LLMGC_PRODUCT_SMOKE_PACKAGE_OUTPUT_DIR"
+  ]
+}

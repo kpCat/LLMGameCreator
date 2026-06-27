@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "scope_guard_invalid_matrix_v1",
+  "scenarioCount": 12,
+  "rejectedCount": 12,
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "legacy_goal020_artifact_mutation_rejected",
+      "mutation": ".llmgc/procedural/minimum-playable-generated-game/minimum-playable-generated-game-report.json",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.legacy_artifact.forbidden",
+          "path": ".llmgc/procedural/minimum-playable-generated-game/minimum-playable-generated-game-report.json",
+          "message": "Historical compact artifact mutation is forbidden for this scenario."
+        }
+      ]
+    },
+    {
+      "scenarioId": "legacy_unity_multi_variant_artifact_mutation_rejected",
+      "mutation": ".llmgc/procedural/unity-multi-variant-playable-scenario/unity-multi-variant-playable-scenario-report.json",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.legacy_artifact.forbidden",
+          "path": ".llmgc/procedural/unity-multi-variant-playable-scenario/unity-multi-variant-playable-scenario-report.json",
+          "message": "Historical compact artifact mutation is forbidden for this scenario."
+        }
+      ]
+    },
+    {
+      "scenarioId": "solution_or_project_mutation_rejected",
+      "mutation": "LLMGameCreator.sln",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.project_file.forbidden",
+          "path": "LLMGameCreator.sln",
+          "message": "Project/solution file mutation is forbidden unless explicitly allowed."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_gamepackage_schema_mutation_rejected",
+      "mutation": "docs/GAME_PACKAGE_FORMAT.md",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.gamepackage_schema.forbidden",
+          "path": "docs/GAME_PACKAGE_FORMAT.md",
+          "message": "Public GamePackage schema mutation is forbidden unless explicitly allowed."
+        }
+      ]
+    },
+    {
+      "scenarioId": "generator_library_mutation_rejected",
+      "mutation": "generator-library/catalog.json",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.forbidden_path",
+          "path": "generator-library/catalog.json",
+          "message": "Path is forbidden unless explicitly allowed."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_build_entrypoint_mutation_rejected",
+      "mutation": "unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.unity_entrypoint.forbidden",
+          "path": "unity/LLMGameCreatorAlpha/Assets/Editor/AlphaBuildEntrypoint.cs",
+          "message": "Unity build/player entrypoint mutation is forbidden unless explicitly allowed."
+        }
+      ]
+    },
+    {
+      "scenarioId": "copied_scope_report_without_policy_json_rejected",
+      "mutation": "missing policy json",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.policy.missing",
+          "path": "missing policy json",
+          "message": "Artifact scope policy JSON is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_report_with_violations_accepted_true_rejected",
+      "mutation": ".llmgc/procedural/minimum-playable-generated-game/fake-accepted-scope-report.json",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.legacy_artifact.forbidden",
+          "path": ".llmgc/procedural/minimum-playable-generated-game/fake-accepted-scope-report.json",
+          "message": "Historical compact artifact mutation is forbidden for this scenario."
+        }
+      ]
+    },
+    {
+      "scenarioId": "undeclared_product_smoke_root_write_rejected",
+      "mutation": ".llmgc/procedural/undeclared-product-smoke/report.json",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.unlisted_change",
+          "path": ".llmgc/procedural/undeclared-product-smoke/report.json",
+          "message": "Path is not in the declared allowed scope."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_check_all_artifact_isolation_rejected",
+      "mutation": ".devflow/scripts/check-all.ps1",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "development_complexity.check_all_isolation.required",
+          "path": ".devflow/scripts/check-all.ps1",
+          "message": "check-all must isolate product-smoke artifact output variables during tests."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tracked_ignored_heavy_output_rejected_with_fail_on_tracked_ignored",
+      "mutation": ".llmgc/procedural/minimum-playable-generated-game/review-package/LLMGameCreatorAlpha.exe",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.heavy_output",
+          "path": ".llmgc/procedural/minimum-playable-generated-game/review-package/LLMGameCreatorAlpha.exe",
+          "message": "Path matches a heavy generated output pattern."
+        }
+      ]
+    },
+    {
+      "scenarioId": "multiple_final_gates_in_state_policy_rejected",
+      "mutation": "docs/CURRENT_GENERATOR_STATE.json",
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "development_complexity.manual_gate.single_required",
+          "path": "docs/CURRENT_GENERATOR_STATE.json",
+          "message": "A goal may leave exactly one final manual gate required."
+        }
+      ]
+    }
+  ]
+}

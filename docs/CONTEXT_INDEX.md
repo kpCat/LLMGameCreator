@@ -73,7 +73,9 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_018_UNITY_MULTI_VARIANT_PLAYABLE_SCENARIO.md` | Completed Goal 018 task: Unity multi-variant playable scenario, with Application-layer multi-variant acceptance artifacts for `frontier_survival`, `gothic_mystery` and `trade_caravan`, per-variant Unity Alpha quest completion proof, cross-variant distinctness validation, invalid/fake/leak rejection, product smoke route `unity-multi-variant-playable-scenario` and final stop at `unity_generated_multi_variant_playable_scenario_verification`. The user confirmed the gate passed before Goal 019. |
 | `docs/GOAL_019_UNITY_ALPHA_READABLE_PRESENTATION.md` | Completed Goal 019 task: Unity Alpha readable presentation, with Application-layer readable presentation model/report artifacts, Unity Alpha IMGUI scenario/variant/quest/objective/target/inventory/reward/event-log/control panels, readable player proof lines, invalid/fake/leak rejection, product smoke route `unity-alpha-readable-presentation` and final stop at `unity_alpha_readable_presentation_verification`. The user confirmed the gate passed before Goal 020. |
 | `docs/GOAL_020_MINIMUM_PLAYABLE_GENERATED_GAME_GATE.md` | Completed Goal 020 task: Minimum playable generated game gate, with Application-layer minimum playable acceptance artifacts, a runnable review package under `.llmgc/procedural/minimum-playable-generated-game/review-package/`, README/manual/automated scripts, generated scenario summary, automated launch and quest completion proof, invalid/fake/leak rejection, product smoke route `minimum-playable-generated-game` and final stop at `minimum_playable_generated_game_verification`. The user confirmed the gate passed before Goal 021. |
-| `docs/GOAL_021_GENERATED_GAME_PROFILE_CONTRACT_REFRESH.md` | Goal 021 task: Generated game profile contract refresh, with `game_profile_v1`, sample profiles under `samples/game-profiles/`, Application-layer profile contract artifacts under `.llmgc/procedural/generated-game-profile-contract/`, physical accepted Goal 020 compact evidence validation, exact profile-to-pipeline mapping for Goal 010-020 stages, future-required capability separation, invalid/fake/leak rejection, product smoke route `generated-game-profile-contract` and final stop at `generated_game_profile_contract_verification`. |
+| `docs/GOAL_021_GENERATED_GAME_PROFILE_CONTRACT_REFRESH.md` | Completed Goal 021 task: Generated game profile contract refresh, with `game_profile_v1`, sample profiles under `samples/game-profiles/`, Application-layer profile contract artifacts under `.llmgc/procedural/generated-game-profile-contract/`, physical accepted Goal 020 compact evidence validation, exact profile-to-pipeline mapping for Goal 010-020 stages, future-required capability separation, invalid/fake/leak rejection, product smoke route `generated-game-profile-contract` and final stop at `generated_game_profile_contract_verification`. The user confirmed the gate passed before Goal 022. |
+| `docs/GOAL_022_DEVELOPMENT_COMPLEXITY_STABILIZATION_AND_ARTIFACT_SCOPE_GOVERNANCE.md` | Goal 022 task: Development complexity stabilization and artifact scope governance, with `docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md`, `.devflow/artifact-scope/artifact-scope-policy.json`, `.devflow/scripts/check-artifact-scope.ps1`, check-all artifact isolation, tracked generated artifact inventory, invalid/fake/leak scope matrix, product smoke route `development-complexity-stabilization` and final stop at `development_complexity_stabilization_verification`. |
+| `docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md` | Goal 022 policy for artifact mutability classes, check-all artifact isolation, product-smoke root write declarations and final scope guard verification. |
 | `docs/GAME_PROFILE_CONTRACT_V1.md` | Goal 021 profile contract doc for deterministic game-family, presentation, topology, actor model, loop, scale, asset policy and runtime/export target selection. |
 | `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md` | Manual user verification checklist for configurable generated microgames after S042. |
 | `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md` | Accepted Goal 003 declaration-only extension rule pack contract. |
@@ -101,14 +103,14 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-generated_game_profile_contract_verification
+development_complexity_stabilization_verification
 ```
 
 Allowed next sequence:
 
-1. Review `generated_game_profile_contract_verification` evidence from `docs/GAME_PROFILE_CONTRACT_V1.md`, the three sample profiles, profile artifact, pipeline plan, report, verification artifact and invalid/fake/leak matrix before marking the gate passed.
-2. Goal 021 regenerates compact repo-local root review artifacts under `.llmgc/procedural/generated-game-profile-contract/` through the existing `generated-game-profile-contract` product smoke route.
-3. Unsupported/future-required capabilities remain explicit and must not be treated as complete until a later approved goal selects them.
+1. Review `development_complexity_stabilization_verification` evidence from `docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md`, `.devflow/artifact-scope/artifact-scope-policy.json`, `.devflow/scripts/check-artifact-scope.ps1`, check-all isolation proof, tracked generated artifact inventory, scope invalid/fake/leak matrix, report and verification artifact before marking the gate passed.
+2. Goal 022 regenerates compact repo-local root review artifacts under `.llmgc/procedural/development-complexity-stabilization/` through the `development-complexity-stabilization` product smoke route.
+3. Capability Bundle Selection To Pipeline Inputs remains the next candidate only after this stabilization gate is accepted; Goal 023 and S185 are not started by Goal 022.
 
 Kill criterion:
 

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "artifact_scope_policy_v1",
+  "artifactMutabilityClasses": [
+    "source_code_docs",
+    "state_handoff_docs",
+    "current_goal_compact_review_artifacts",
+    "historical_compact_artifacts",
+    "heavy_generated_build_runtime_outputs",
+    "task_pack_docs"
+  ],
+  "defaultMutableRoots": [
+    ".devflow/runs/"
+  ],
+  "defaultAllowedStateDocs": [
+    "docs/CURRENT_GENERATOR_STATE.json",
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/CONTEXT_INDEX.md",
+    "docs/FULL_GENERATOR_GOAL_QUEUE.md"
+  ],
+  "allowedCurrentGoalArtifactRoots": [
+    ".llmgc/procedural/development-complexity-stabilization/"
+  ],
+  "historicalArtifactRoots": [
+    ".llmgc/procedural/generated-game-profile-contract/",
+    ".llmgc/procedural/minimum-playable-generated-game/",
+    ".llmgc/procedural/unity-multi-variant-playable-scenario/",
+    ".llmgc/procedural/unity-alpha-readable-presentation/",
+    ".llmgc/procedural/unity-quest-completion-loop/",
+    ".llmgc/procedural/unity-runtime-state-loop/",
+    ".llmgc/procedural/unity-generated-scene-projection/",
+    ".llmgc/procedural/unity-playable-alpha/",
+    ".llmgc/procedural/alpha-runnable-build/",
+    ".llmgc/procedural/unity-runtime-export/",
+    ".llmgc/procedural/minimum-asset-pipeline/",
+    ".llmgc/procedural/content-generation-scale/"
+  ],
+  "trackedHeavyOutputPatterns": [
+    ".llmgc/procedural/**/build/**",
+    ".llmgc/procedural/**/logs/**",
+    ".llmgc/procedural/**/unity-work/**",
+    ".llmgc/procedural/**/review-package/**",
+    "unity/LLMGameCreatorAlpha/Library/**",
+    "unity/LLMGameCreatorAlpha/Temp/**",
+    "unity/LLMGameCreatorAlpha/Builds/**"
+  ],
+  "standardForbiddenExactPaths": [
+    "LLMGameCreator.sln"
+  ],
+  "standardForbiddenExtensions": [
+    ".csproj"
+  ],
+  "standardForbiddenPathPrefixes": [
+    "generator-library/",
+    "src/LLMGameCreator.WinForms/"
+  ],
+  "publicGamePackageSchemaPathPrefixes": [
+    "src/LLMGameCreator.GamePackage/",
+    "docs/GAME_PACKAGE_FORMAT.md"
+  ],
+  "unityBuildEntrypointPathPrefixes": [
+    "unity/LLMGameCreatorAlpha/Assets/Editor/",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+  ],
+  "scenarioAllowlists": [
+    {
+      "scenario": "development-complexity-stabilization",
+      "allowedPaths": [
+        "docs/DEVELOPMENT_COMPLEXITY_STABILIZATION_POLICY.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/check-artifact-scope.ps1",
+        ".devflow/scripts/check-all.ps1",
+        ".devflow/scripts/run-product-smoke.ps1",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/GOAL_022_DEVELOPMENT_COMPLEXITY_STABILIZATION_AND_ARTIFACT_SCOPE_GOVERNANCE.md",
+        "docs/agent-tasks/NEXT_PRODUCT_SLICE/goal-022-development-complexity-stabilization-and-artifact-scope-governance-CODEX_GOAL.md"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/development-complexity-stabilization/",
+        "tests/LLMGameCreator.Tests/Devflow/",
+        "tests/LLMGameCreator.Tests/ProductSmoke/"
+      ]
+    }
+  ]
+}

@@ -222,17 +222,18 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
     }
 
     [Fact]
-    public void CurrentStateLastCompletedProductSliceMatchesGoal021()
+    public void CurrentStateKeepsGoal021RecordAfterLaterGoalHandoff()
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
+        var lastCompleted = state.RootElement.GetProperty("last_completed_product_slice_id").GetString();
 
         Assert.Equal(
             "goal_021_generated_game_profile_contract_refresh",
-            state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(
-            "goal_021_generated_game_profile_contract_refresh",
-            state.RootElement.GetProperty("last_completed_product_slice").GetProperty("slice_id").GetString());
+            state.RootElement.GetProperty("goal_021_generated_game_profile_contract_refresh").GetProperty("slice_id").GetString());
+        Assert.Contains(
+            lastCompleted,
+            new[] { "goal_021_generated_game_profile_contract_refresh", "goal_022_development_complexity_stabilization" });
     }
 
     private static string FindRepoRoot()

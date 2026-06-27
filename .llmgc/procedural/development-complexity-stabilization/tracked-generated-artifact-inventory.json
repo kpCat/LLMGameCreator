@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "tracked_generated_artifact_inventory_v1",
+  "root": ".llmgc/procedural",
+  "trackedFileCount": 3008,
+  "families": [
+    {
+      "family": "alpha-runnable-build",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 180,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-report.json",
+        ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-report.md",
+        ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-verification.md",
+        ".llmgc/procedural/alpha-runnable-build/source-evidence/frontier_survival/export/assets/asset-manifest.json",
+        ".llmgc/procedural/alpha-runnable-build/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture"
+      ]
+    },
+    {
+      "family": "check-all",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 1062,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/check-all/unity-alpha-readable-presentation/dcf8be6eae8a4d04a7e742feaf53c5cd/variants/frontier_survival/source-evidence/frontier_survival/export/assets/asset-manifest.json",
+        ".llmgc/procedural/check-all/unity-alpha-readable-presentation/dcf8be6eae8a4d04a7e742feaf53c5cd/variants/frontier_survival/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        ".llmgc/procedural/check-all/unity-alpha-readable-presentation/dcf8be6eae8a4d04a7e742feaf53c5cd/variants/frontier_survival/source-evidence/frontier_survival/export/assets/music-ambience/asset-001-e368b44a.fixture",
+        ".llmgc/procedural/check-all/unity-alpha-readable-presentation/dcf8be6eae8a4d04a7e742feaf53c5cd/variants/frontier_survival/source-evidence/frontier_survival/export/assets/npc-portrait/asset-002-b5037955.fixture",
+        ".llmgc/procedural/check-all/unity-alpha-readable-presentation/dcf8be6eae8a4d04a7e742feaf53c5cd/variants/frontier_survival/source-evidence/frontier_survival/export/assets/sound-effect/asset-003-b6002d93.fixture"
+      ]
+    },
+    {
+      "family": "content-generation-scale",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 3,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/content-generation-scale/content-generation-scale-report.json",
+        ".llmgc/procedural/content-generation-scale/content-generation-scale-report.md",
+        ".llmgc/procedural/content-generation-scale/content-generation-scale-verification.md"
+      ]
+    },
+    {
+      "family": "extension-spine",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 6,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/extension-spine/extension-proof-rule-pack.json",
+        ".llmgc/procedural/extension-spine/extension-proof-validation-report.json",
+        ".llmgc/procedural/extension-spine/extension-spine-scenario-report.json",
+        ".llmgc/procedural/extension-spine/extension-spine-scenario-report.md",
+        ".llmgc/procedural/extension-spine/invalid-extension-validation-report.json"
+      ]
+    },
+    {
+      "family": "generated-game-profile-contract",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 5,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-pipeline-plan.json",
+        ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-profiles.json",
+        ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-report.json",
+        ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-report.md",
+        ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-verification.md"
+      ]
+    },
+    {
+      "family": "minimum-asset-pipeline",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 93,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+        ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-0cf9369971-002-caravan-icon-fixture-001.fixture",
+        ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-0eadd63330-047-caravan-icon-fixture-002.fixture",
+        ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-1a6c2200f4-057-caravan-icon-fallback-003.fixture",
+        ".llmgc/procedural/minimum-asset-pipeline/assets/asset-sources-caravan/asset-slot-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-1b9d8fc1f7-065-caravan-icon-fixture-004.fixture"
+      ]
+    },
+    {
+      "family": "minimum-playable-generated-game",
+      "classification": "historical_with_tracked_heavy_output_warning",
+      "trackedFileCount": 332,
+      "trackedHeavyOutputWarningCount": 150,
+      "samplePaths": [
+        ".llmgc/procedural/minimum-playable-generated-game/MANUAL_PLAY_REVIEW_CHECKLIST.md",
+        ".llmgc/procedural/minimum-playable-generated-game/build-source/source-evidence/frontier_survival/export/assets/asset-manifest.json",
+        ".llmgc/procedural/minimum-playable-generated-game/build-source/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        ".llmgc/procedural/minimum-playable-generated-game/build-source/source-evidence/frontier_survival/export/assets/music-ambience/asset-001-e368b44a.fixture",
+        ".llmgc/procedural/minimum-playable-generated-game/build-source/source-evidence/frontier_survival/export/assets/npc-portrait/asset-002-b5037955.fixture"
+      ]
+    },
+    {
+      "family": "rule-pack-combat-faction-social-work-theft",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 3,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/rule-pack-combat-faction-social-work-theft/rule-pack-combat-faction-social-work-theft-report.json",
+        ".llmgc/procedural/rule-pack-combat-faction-social-work-theft/rule-pack-combat-faction-social-work-theft-report.md",
+        ".llmgc/procedural/rule-pack-combat-faction-social-work-theft/rule-pack-combat-faction-social-work-theft-verification.md"
+      ]
+    },
+    {
+      "family": "rule-pack-gameplay-family-foundations",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 3,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/rule-pack-gameplay-family-foundations/rule-pack-gameplay-family-report.json",
+        ".llmgc/procedural/rule-pack-gameplay-family-foundations/rule-pack-gameplay-family-report.md",
+        ".llmgc/procedural/rule-pack-gameplay-family-foundations/rule-pack-gameplay-family-verification.md"
+      ]
+    },
+    {
+      "family": "unity-alpha-readable-presentation",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 4,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/unity-alpha-readable-presentation/unity-alpha-readable-presentation-model.json",
+        ".llmgc/procedural/unity-alpha-readable-presentation/unity-alpha-readable-presentation-report.json",
+        ".llmgc/procedural/unity-alpha-readable-presentation/unity-alpha-readable-presentation-report.md",
+        ".llmgc/procedural/unity-alpha-readable-presentation/unity-alpha-readable-presentation-verification.md"
+      ]
+    },
+    {
+      "family": "unity-generated-scene-projection",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 181,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/unity-generated-scene-projection/source-evidence/frontier_survival/export/assets/asset-manifest.json",
+        ".llmgc/procedural/unity-generated-scene-projection/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        ".llmgc/procedural/unity-generated-scene-projection/source-evidence/frontier_survival/export/assets/music-ambience/asset-001-e368b44a.fixture",
+        ".llmgc/procedural/unity-generated-scene-projection/source-evidence/frontier_survival/export/assets/npc-portrait/asset-002-b5037955.fixture",
+        ".llmgc/procedural/unity-generated-scene-projection/source-evidence/frontier_survival/export/assets/sound-effect/asset-003-b6002d93.fixture"
+      ]
+    },
+    {
+      "family": "unity-multi-variant-playable-scenario",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 535,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/unity-multi-variant-playable-scenario/unity-multi-variant-playable-scenario-report.json",
+        ".llmgc/procedural/unity-multi-variant-playable-scenario/unity-multi-variant-playable-scenario-report.md",
+        ".llmgc/procedural/unity-multi-variant-playable-scenario/unity-multi-variant-playable-scenario-variants.json",
+        ".llmgc/procedural/unity-multi-variant-playable-scenario/unity-multi-variant-playable-scenario-verification.md",
+        ".llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/source-evidence/frontier_survival/export/assets/asset-manifest.json"
+      ]
+    },
+    {
+      "family": "unity-playable-alpha",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 180,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/unity-playable-alpha/source-evidence/frontier_survival/export/assets/asset-manifest.json",
+        ".llmgc/procedural/unity-playable-alpha/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        ".llmgc/procedural/unity-playable-alpha/source-evidence/frontier_survival/export/assets/music-ambience/asset-001-e368b44a.fixture",
+        ".llmgc/procedural/unity-playable-alpha/source-evidence/frontier_survival/export/assets/npc-portrait/asset-002-b5037955.fixture",
+        ".llmgc/procedural/unity-playable-alpha/source-evidence/frontier_survival/export/assets/sound-effect/asset-003-b6002d93.fixture"
+      ]
+    },
+    {
+      "family": "unity-quest-completion-loop",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 182,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/unity-quest-completion-loop/source-evidence/frontier_survival/export/assets/asset-manifest.json",
+        ".llmgc/procedural/unity-quest-completion-loop/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        ".llmgc/procedural/unity-quest-completion-loop/source-evidence/frontier_survival/export/assets/music-ambience/asset-001-e368b44a.fixture",
+        ".llmgc/procedural/unity-quest-completion-loop/source-evidence/frontier_survival/export/assets/npc-portrait/asset-002-b5037955.fixture",
+        ".llmgc/procedural/unity-quest-completion-loop/source-evidence/frontier_survival/export/assets/sound-effect/asset-003-b6002d93.fixture"
+      ]
+    },
+    {
+      "family": "unity-runtime-export",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 58,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/unity-runtime-export/export/assets/asset-manifest.json",
+        ".llmgc/procedural/unity-runtime-export/export/assets/item-icon-ui-graphic/asset-game-content-generation-frontier-survival-item-icon-ui-graphic-item-frontier-survival-032bdc46ab-062-caravan-icon-fallback-000.fixture",
+        ".llmgc/procedural/unity-runtime-export/export/assets/music-ambience/asset-game-content-generation-frontier-survival-music-ambience-event-frontier-survival-00ba2e87c9-005-caravan-music-fixture-000.fixture",
+        ".llmgc/procedural/unity-runtime-export/export/assets/npc-portrait/asset-game-content-generation-frontier-survival-npc-portrait-npc-frontier-survival-11ffe0aa42-018-caravan-portrait-fallback-000.fixture",
+        ".llmgc/procedural/unity-runtime-export/export/assets/sound-effect/asset-game-content-generation-frontier-survival-sound-effect-dialogue-frontier-survival-0490f2f50e-013-caravan-sound-fallback-000.fixture"
+      ]
+    },
+    {
+      "family": "unity-runtime-state-loop",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 181,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/unity-runtime-state-loop/source-evidence/frontier_survival/export/assets/asset-manifest.json",
+        ".llmgc/procedural/unity-runtime-state-loop/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+        ".llmgc/procedural/unity-runtime-state-loop/source-evidence/frontier_survival/export/assets/music-ambience/asset-001-e368b44a.fixture",
+        ".llmgc/procedural/unity-runtime-state-loop/source-evidence/frontier_survival/export/assets/npc-portrait/asset-002-b5037955.fixture",
+        ".llmgc/procedural/unity-runtime-state-loop/source-evidence/frontier_survival/export/assets/sound-effect/asset-003-b6002d93.fixture"
+      ]
+    }
+  ],
+  "cleanupDeferredNote": "Broad cleanup and untracking are deferred unless separately requested."
+}
