@@ -15,12 +15,13 @@ minimum_playable_generated_game_verification passed
 generated_game_profile_contract_verification passed
 development_complexity_stabilization_verification passed
 capability_bundle_pipeline_inputs_verification passed
+rich_package_assembly_coverage_audit_verification passed
 ```
 
 Produced for review:
 
 ```text
-rich_package_assembly_coverage_audit_verification required
+modular_contract_goal_policy_adoption_verification required
 ```
 
 Current capabilities:
@@ -41,11 +42,12 @@ Current capabilities:
 - compact review artifacts under `.llmgc/procedural/...`;
 - capability bundle pipeline input records for the three accepted game profiles, with explicit blocked/future-required gaps;
 - rich package assembly coverage audit matrix and next package-expansion candidate plan;
+- modular contract goal policy, feature backlog audit and package assembly campaign pack;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The capability bundle pipeline inputs gate has been accepted by user prompt. Goal 024 produced rich package assembly coverage audit artifacts, but the user still needs to accept whether the Goal 024 coverage/gap/plan evidence is sufficient before Goal 025 or S199 starts.
+Goal 024 has been accepted by user prompt. The current process gate adopts modular contract goal policy and a plan-only package assembly campaign pack before any Goal 025 or S199 implementation starts.
 
 ## Queue Rules
 
@@ -241,13 +243,29 @@ Audit existing package assembly against full generator needs: world, entities, q
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start Goal 025 or S199 until it is accepted.
+Accepted by user prompt before modular contract goal policy adoption.
+
+### Process Gate: Modular Contract Goal Policy Adoption
+
+Gate:
+
+```text
+modular_contract_goal_policy_adoption_verification
+```
+
+Purpose:
+
+Adopt modular contracts, bounded composite goals, rare product vertical gates and a plan-only package assembly campaign pack so Contract / Module / Integration / Proof phases reduce manual goal cycles instead of becoming separate default goals.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; Goal 025 and S199 are not started.
 
 ### Goal 025: Package Assembly Expansion 1 - World And Entities
 
 Purpose:
 
-Generate and assemble richer world/entity data for at least one selected game family.
+Plan-only next unless explicitly promoted by a later task. Generate and assemble richer world/entity data for at least one selected game family through a bounded composite goal with Level 2/3 proof before any rare product vertical gate.
 
 ### Goal 026: Package Assembly Expansion 2 - Dialogue And Quests
 
@@ -420,7 +438,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-rich_package_assembly_coverage_audit_verification
+modular_contract_goal_policy_adoption_verification
 ```
 
 Status:
