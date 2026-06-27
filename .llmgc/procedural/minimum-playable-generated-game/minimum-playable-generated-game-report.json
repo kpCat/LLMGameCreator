@@ -100,7 +100,7 @@
           {
             "severity": "error",
             "code": "minimum_playable_game.validation.build_manifest_hash_mismatch",
-            "target": "81de071214fd2128a37ed89e17f0281d0831223ec12ae871edb015eaddad49a9",
+            "target": "e54cc643c1708498bf9313e3cd383e0574d32fa7089138f87348c1c71d43ed38",
             "message": "Build manifest hash must match selected accepted build evidence."
           }
         ]
@@ -400,9 +400,9 @@
   "generatorLibraryChanged": false,
   "noExternalProviderLlmRagLuaMedia": true,
   "runtimePreviewDependency": false,
-  "manifestHash": "059eca9efa4476f981715c08a1b41f021537668a9fe77c04438a2bf7d6c2612a",
-  "reviewPackageHash": "a8279407ade6ba96497b0ed97d1071f461563e8c26ee06838b56799aaed710a2",
-  "deterministicHash": "10fd69188aa6182ef83fea112647247e2203220c4e3d114de079687df82667c3",
+  "manifestHash": "65e0316b88f1432f64d0f1692d9d4692ed338b505f12e5db74f859eb2cf4a5c0",
+  "reviewPackageHash": "e1004a15075d738955f84d35399aafde54974e2c76f6b8aa67dd2a66bf1e80cd",
+  "deterministicHash": "ac60a4a8cf7492fd89eaada8d80df00a46be0fed5d1c504f4883dab0d9df9484",
   "diagnostics": [
     {
       "severity": "info",
