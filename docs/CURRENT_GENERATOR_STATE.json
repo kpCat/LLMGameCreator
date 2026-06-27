@@ -76,7 +76,7 @@
                                                         "MinimumPlayableGame focused tests: 10/10 passed",
                                                         "minimum-playable-generated-game product smoke: 1/1 passed",
                                                         "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
-                                                        "Goal 020 manifest hash e77c782c1ab3355e249e986c61eab11a8ebfdf64d39e511d654af666b7068d38, review package hash d94ab05371be0a389c836a85202fc5a9bff7f326674cce44cb0a3af8919c5c8f, deterministic report hash c774671bcfd394982d8a34b95695d6efe436761c46fe5bb72ee79ad67ba23693, selected frontier_survival package game/content_generation/frontier-survival, quest quest/frontier-survival/c2ed6dc235/000, reward item/frontier-survival/7f81222990/004, invalid scenarios 25"
+                                                        "Goal 020 manifest hash 973fe09f17697a0075dc684c15c5f97fbae7f6f7b1595725a7d08c9586b4ecba, review package hash 166aa7805e05db7e922b0f486edd426c0ed82085dfcf1a2837d24b5bd61b14a8, deterministic report hash a4b0c84755c17b52c74464934737589d900a5b09d4d60cd302d48b831d34dad7, selected frontier_survival package game/content_generation/frontier-survival, quest quest/frontier-survival/c2ed6dc235/000, reward item/frontier-survival/7f81222990/004, invalid scenarios 25"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -721,7 +721,7 @@
                                                                    "MinimumPlayableGame focused tests: 10/10 passed",
                                                                    "minimum-playable-generated-game product smoke: 1/1 passed",
                                                                    "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
-                                                                   "Goal 020 manifest hash e77c782c1ab3355e249e986c61eab11a8ebfdf64d39e511d654af666b7068d38, review package hash d94ab05371be0a389c836a85202fc5a9bff7f326674cce44cb0a3af8919c5c8f, deterministic report hash c774671bcfd394982d8a34b95695d6efe436761c46fe5bb72ee79ad67ba23693, invalid scenarios 25"
+                                                                   "Goal 020 manifest hash 973fe09f17697a0075dc684c15c5f97fbae7f6f7b1595725a7d08c9586b4ecba, review package hash 166aa7805e05db7e922b0f486edd426c0ed82085dfcf1a2837d24b5bd61b14a8, deterministic report hash a4b0c84755c17b52c74464934737589d900a5b09d4d60cd302d48b831d34dad7, invalid scenarios 25"
                                                                ]
                                                 },
     "goal_012_unity_runtime_export_vertical_slice":  {
