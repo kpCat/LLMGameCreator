@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "generated_game_profile_contract_pipeline_plan_v1",
+  "previousAcceptedGate": "minimum_playable_generated_game_verification passed",
+  "planCount": 3,
+  "plans": [
+    {
+      "profileId": "game_profile/frontier-survival-minimum-alpha",
+      "gameFamilyId": "game_family/frontier_survival",
+      "presentationMode": "presentation_mode/top_down_2d",
+      "worldTopology": "world_topology/region_graph",
+      "actorModel": "actor_model/single_player_character",
+      "contentGenerationPackId": "content_pack/frontier_survival",
+      "assetPolicyId": "asset_mode/2d_tiles|asset_fallback/deterministic_fixture",
+      "unityExportTargetId": "runtime_export/unity_alpha_windows",
+      "runtimeLoopRequirementStageId": "stage/unity_generated_runtime_state_loop_goal_016",
+      "questCompletionRequirementStageId": "stage/unity_generated_quest_completion_loop_goal_017",
+      "readablePresentationRequirementStageId": "stage/unity_alpha_readable_presentation_goal_019",
+      "minimumPlayableReviewRequirementStageId": "stage/minimum_playable_generated_game_goal_020",
+      "requiredStageIds": [
+        "stage/content_generation_scale_goal_010",
+        "stage/minimum_asset_pipeline_goal_011",
+        "stage/minimum_playable_generated_game_goal_020",
+        "stage/unity_alpha_readable_presentation_goal_019",
+        "stage/unity_generated_quest_completion_loop_goal_017",
+        "stage/unity_generated_runtime_state_loop_goal_016",
+        "stage/unity_multi_variant_playable_scenario_goal_018",
+        "stage/unity_runtime_export_goal_012"
+      ],
+      "capabilityStatuses": [
+        {
+          "capabilityId": "capability/content_generation_scale",
+          "status": "supported_now",
+          "evidenceGate": "content_generation_at_scale_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/minimum_asset_pipeline",
+          "status": "supported_now",
+          "evidenceGate": "minimum_asset_pipeline_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/minimum_playable_generated_game",
+          "status": "supported_now",
+          "evidenceGate": "minimum_playable_generated_game_verification passed"
+        },
+        {
+          "capabilityId": "capability/rule_pack_combat_faction_social_work_theft",
+          "status": "supported_now",
+          "evidenceGate": "rule_pack_combat_faction_social_work_theft_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_alpha_readable_presentation",
+          "status": "supported_now",
+          "evidenceGate": "unity_alpha_readable_presentation_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_multi_variant_playable_scenario",
+          "status": "supported_now",
+          "evidenceGate": "unity_generated_multi_variant_playable_scenario_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_quest_completion_loop",
+          "status": "supported_now",
+          "evidenceGate": "unity_generated_quest_completion_loop_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_runtime_export",
+          "status": "supported_now",
+          "evidenceGate": "unity_runtime_export_vertical_slice_artifact_verification passed"
+        }
+      ],
+      "supportedCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/rule_pack_combat_faction_social_work_theft",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ],
+      "futureRequiredCapabilities": [],
+      "unsupportedCapabilitiesTreatedAsComplete": false,
+      "diagnostics": []
+    },
+    {
+      "profileId": "game_profile/gothic-mystery-investigation-alpha",
+      "gameFamilyId": "game_family/gothic_mystery",
+      "presentationMode": "presentation_mode/map_and_panel_rpg",
+      "worldTopology": "world_topology/node_map",
+      "actorModel": "actor_model/single_player_character",
+      "contentGenerationPackId": "content_pack/gothic_mystery",
+      "assetPolicyId": "asset_mode/portrait_cards|asset_fallback/deterministic_fixture",
+      "unityExportTargetId": "runtime_export/unity_alpha_windows",
+      "runtimeLoopRequirementStageId": "stage/unity_generated_runtime_state_loop_goal_016",
+      "questCompletionRequirementStageId": "stage/unity_generated_quest_completion_loop_goal_017",
+      "readablePresentationRequirementStageId": "stage/unity_alpha_readable_presentation_goal_019",
+      "minimumPlayableReviewRequirementStageId": "stage/minimum_playable_generated_game_goal_020",
+      "requiredStageIds": [
+        "stage/content_generation_scale_goal_010",
+        "stage/minimum_asset_pipeline_goal_011",
+        "stage/minimum_playable_generated_game_goal_020",
+        "stage/unity_alpha_readable_presentation_goal_019",
+        "stage/unity_generated_quest_completion_loop_goal_017",
+        "stage/unity_generated_runtime_state_loop_goal_016",
+        "stage/unity_multi_variant_playable_scenario_goal_018",
+        "stage/unity_runtime_export_goal_012"
+      ],
+      "capabilityStatuses": [
+        {
+          "capabilityId": "capability/content_generation_scale",
+          "status": "supported_now",
+          "evidenceGate": "content_generation_at_scale_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/dialogue_clue_graph_future",
+          "status": "future_required",
+          "evidenceGate": "future_goal_required"
+        },
+        {
+          "capabilityId": "capability/minimum_asset_pipeline",
+          "status": "supported_now",
+          "evidenceGate": "minimum_asset_pipeline_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/minimum_playable_generated_game",
+          "status": "supported_now",
+          "evidenceGate": "minimum_playable_generated_game_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_alpha_readable_presentation",
+          "status": "supported_now",
+          "evidenceGate": "unity_alpha_readable_presentation_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_multi_variant_playable_scenario",
+          "status": "supported_now",
+          "evidenceGate": "unity_generated_multi_variant_playable_scenario_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_quest_completion_loop",
+          "status": "supported_now",
+          "evidenceGate": "unity_generated_quest_completion_loop_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_runtime_export",
+          "status": "supported_now",
+          "evidenceGate": "unity_runtime_export_vertical_slice_artifact_verification passed"
+        }
+      ],
+      "supportedCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ],
+      "futureRequiredCapabilities": [
+        "capability/dialogue_clue_graph_future"
+      ],
+      "unsupportedCapabilitiesTreatedAsComplete": false,
+      "diagnostics": []
+    },
+    {
+      "profileId": "game_profile/trade-caravan-social-economy-alpha",
+      "gameFamilyId": "game_family/trade_caravan",
+      "presentationMode": "presentation_mode/map_and_panel_rpg",
+      "worldTopology": "world_topology/region_graph",
+      "actorModel": "actor_model/vehicle_or_ship",
+      "contentGenerationPackId": "content_pack/trade_caravan",
+      "assetPolicyId": "asset_mode/generated_media_requests_only|asset_fallback/deterministic_fixture",
+      "unityExportTargetId": "runtime_export/unity_alpha_windows",
+      "runtimeLoopRequirementStageId": "stage/unity_generated_runtime_state_loop_goal_016",
+      "questCompletionRequirementStageId": "stage/unity_generated_quest_completion_loop_goal_017",
+      "readablePresentationRequirementStageId": "stage/unity_alpha_readable_presentation_goal_019",
+      "minimumPlayableReviewRequirementStageId": "stage/minimum_playable_generated_game_goal_020",
+      "requiredStageIds": [
+        "stage/content_generation_scale_goal_010",
+        "stage/minimum_asset_pipeline_goal_011",
+        "stage/minimum_playable_generated_game_goal_020",
+        "stage/unity_alpha_readable_presentation_goal_019",
+        "stage/unity_generated_quest_completion_loop_goal_017",
+        "stage/unity_generated_runtime_state_loop_goal_016",
+        "stage/unity_multi_variant_playable_scenario_goal_018",
+        "stage/unity_runtime_export_goal_012"
+      ],
+      "capabilityStatuses": [
+        {
+          "capabilityId": "capability/content_generation_scale",
+          "status": "supported_now",
+          "evidenceGate": "content_generation_at_scale_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/minimum_asset_pipeline",
+          "status": "supported_now",
+          "evidenceGate": "minimum_asset_pipeline_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/minimum_playable_generated_game",
+          "status": "supported_now",
+          "evidenceGate": "minimum_playable_generated_game_verification passed"
+        },
+        {
+          "capabilityId": "capability/rule_pack_combat_faction_social_work_theft",
+          "status": "supported_now",
+          "evidenceGate": "rule_pack_combat_faction_social_work_theft_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_alpha_readable_presentation",
+          "status": "supported_now",
+          "evidenceGate": "unity_alpha_readable_presentation_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_multi_variant_playable_scenario",
+          "status": "supported_now",
+          "evidenceGate": "unity_generated_multi_variant_playable_scenario_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_quest_completion_loop",
+          "status": "supported_now",
+          "evidenceGate": "unity_generated_quest_completion_loop_verification passed"
+        },
+        {
+          "capabilityId": "capability/unity_runtime_export",
+          "status": "supported_now",
+          "evidenceGate": "unity_runtime_export_vertical_slice_artifact_verification passed"
+        },
+        {
+          "capabilityId": "capability/vendor_economy_future",
+          "status": "future_required",
+          "evidenceGate": "future_goal_required"
+        }
+      ],
+      "supportedCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/rule_pack_combat_faction_social_work_theft",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ],
+      "futureRequiredCapabilities": [
+        "capability/vendor_economy_future"
+      ],
+      "unsupportedCapabilitiesTreatedAsComplete": false,
+      "diagnostics": []
+    }
+  ]
+}

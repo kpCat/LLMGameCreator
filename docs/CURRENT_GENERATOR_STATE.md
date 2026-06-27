@@ -1,7 +1,7 @@
 ﻿# Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 020 minimum playable generated game gate  
+Updated by: Goal 021 generated game profile contract refresh  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -32,7 +32,9 @@ Goal 018 records the accepted Goal 017 gate, adds a narrow Application-layer Uni
 
 Goal 019 records the accepted Goal 018 gate, adds a narrow Application-layer Unity readable presentation acceptance service under `Design/UnityReadablePresentation`, derives deterministic readable presentation models from generated package/quest/objective/item/event/variant evidence, and writes compact model/report/verification artifacts under `.llmgc/procedural/unity-alpha-readable-presentation/`. The existing Unity Alpha IMGUI now exposes scenario header, variant identity, quest panel, objective checklist, selected target details, inventory/reward, event/status log and controls help. The automated play-loop log records required presentation proof lines for panels, readable labels, objective counts and control hints while preserving quest completion and multi-variant evidence. Goal 019 rejects invalid/fake/leak readable-presentation evidence causally, adds the `unity-alpha-readable-presentation` product smoke route and keeps heavy Unity build/log/unity-work outputs ignored by `.gitignore`. The user then confirmed `unity_alpha_readable_presentation_verification passed`, allowing Goal 020.
 
-Goal 020 records the accepted Goal 019 gate, adds a narrow Application-layer minimum playable generated game acceptance service under `Design/MinimumPlayableGame`, selects the primary `frontier_survival` generated scenario from accepted readable-presentation and multi-variant evidence, and writes compact manifest/report/verification/checklist artifacts under `.llmgc/procedural/minimum-playable-generated-game/`. It creates a runnable review package under `.llmgc/procedural/minimum-playable-generated-game/review-package/` with `LLMGameCreatorAlpha.exe`, the Unity Data folder, README, manual run script, automated smoke script, manual checklist and generated scenario summary. The packaged player smoke proves launch plus generated quest completion/reward from player logs. Goal 020 rejects invalid/fake/leak review-package evidence causally, adds the `minimum-playable-generated-game` product smoke route, keeps heavy Unity build/log/unity-work outputs ignored by `.gitignore`, and stops at `minimum_playable_generated_game_verification` required, not passed. S170 and Goal 021 are not started.
+Goal 020 records the accepted Goal 019 gate, adds a narrow Application-layer minimum playable generated game acceptance service under `Design/MinimumPlayableGame`, selects the primary `frontier_survival` generated scenario from accepted readable-presentation and multi-variant evidence, and writes compact manifest/report/verification/checklist artifacts under `.llmgc/procedural/minimum-playable-generated-game/`. It creates a runnable review package under `.llmgc/procedural/minimum-playable-generated-game/review-package/` with `LLMGameCreatorAlpha.exe`, the Unity Data folder, README, manual run script, automated smoke script, manual checklist and generated scenario summary. The packaged player smoke proves launch plus generated quest completion/reward from player logs. Goal 020 rejects invalid/fake/leak review-package evidence causally, adds the `minimum-playable-generated-game` product smoke route and keeps heavy Unity build/log/unity-work outputs ignored by `.gitignore`. The user confirmed `minimum_playable_generated_game_verification passed` before Goal 021.
+
+Goal 021 records the accepted Goal 020 gate, defines `game_profile_v1` in `docs/GAME_PROFILE_CONTRACT_V1.md`, adds three deterministic sample profiles under `samples/game-profiles/`, adds a narrow Application-layer profile contract acceptance service under `Design/GameProfiles`, and writes compact profile/pipeline/report/verification artifacts under `.llmgc/procedural/generated-game-profile-contract/`. It maps frontier survival, gothic mystery and trade caravan profiles to exact Goal 010-020 stage ids, keeps future-required capabilities explicit instead of treating them as complete, rejects invalid/fake/leak profile evidence causally, adds the `generated-game-profile-contract` product smoke route, and stops at `generated_game_profile_contract_verification` required, not passed. S178 and Goal 022 are not started.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -61,7 +63,7 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Review `minimum_playable_generated_game_verification` evidence from the produced minimum playable generated game manifest, report, review package folder, README, manual/automated scripts, scenario summary, automated launch/play-loop logs, manual checklist and invalid/fake/leak matrix before marking the gate passed.
+1. Review `generated_game_profile_contract_verification` evidence from the contract document, sample profiles, profile artifact, pipeline plan, report, verification artifact and invalid/fake/leak matrix before marking the gate passed.
 
 Kill criterion:
 
@@ -159,17 +161,17 @@ Observed result:
 Recommended next work item:
 
 ```text
-minimum_playable_generated_game_verification
+generated_game_profile_contract_verification
 ```
 
-Goal 020 stops at `minimum_playable_generated_game_verification` required, not passed. S170 and Goal 021 are not started.
+Goal 021 stops at `generated_game_profile_contract_verification` required, not passed. S178 and Goal 022 are not started.
 
-Recorded checks from Goal 020 implementation:
+Recorded checks from Goal 021 implementation:
 
-- `MinimumPlayableGame` focused tests: 10/10 passed.
-- `minimum-playable-generated-game` product smoke: 1/1 passed.
-- `check-all.ps1`: 844/844 tests passed, build 0 warnings / 0 errors.
-- Goal 020 manifest hash `973fe09f17697a0075dc684c15c5f97fbae7f6f7b1595725a7d08c9586b4ecba`; review package hash `166aa7805e05db7e922b0f486edd426c0ed82085dfcf1a2837d24b5bd61b14a8`; deterministic report hash `a4b0c84755c17b52c74464934737589d900a5b09d4d60cd302d48b831d34dad7`; selected style/package/thread `frontier_survival` / `game/content_generation/frontier-survival` / `thread/frontier-survival/000`; selected quest/reward `quest/frontier-survival/c2ed6dc235/000` / `item/frontier-survival/7f81222990/004`; invalid scenarios 25.
+- `GameProfile` focused tests: 10/10 passed.
+- `generated-game-profile-contract` product smoke: 1/1 passed.
+- `check-all.ps1`: 851/851 tests passed, build 0 warnings / 0 errors.
+- Goal 021 profile artifact hash `90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e`; pipeline plan hash `4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8`; deterministic report hash `4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe`; valid profiles 3; invalid scenarios 18.
 
 Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The user confirmed `manual_quest_dialog_interaction_family_verification passed` before Goal 005. Goal 005 proves layered semantic packs and semantic-guided composition through deterministic reports under `.llmgc/procedural/semantic-guided-composition/`. Product Slice 058A repairs false-positive acceptance and contract-validation gaps in that same artifact path. The user confirmed `semantic_guided_composition_artifact_verification passed` before Goal 006. Goal 006 proves semantic-selected package/runtime composition through deterministic reports under `.llmgc/procedural/semantic-runtime-composition/`. Product Slice 063A repairs binding/runtime false positives in that same artifact path. The user confirmed `semantic_selected_runtime_composition_artifact_verification passed` before Goal 007. Goal 007 proves connected world travel and deterministic runtime world state through reports under `.llmgc/procedural/connected-world-travel/`. The user confirmed `connected_world_travel_state_artifact_verification passed` before Goal 008. Goal 008 proves rule-pack gameplay family foundations through reports under `.llmgc/procedural/rule-pack-gameplay-family-foundations/`. Product Slice 077A repairs the same Goal 008 artifact family without changing the gate. The user confirmed `rule_pack_gameplay_family_artifact_verification passed` before Goal 009. Goal 009 proves rule-pack combat/faction/social/work/theft foundations through reports under `.llmgc/procedural/rule-pack-combat-faction-social-work-theft/`, and S084A repairs the artifact-review correctness gaps in that same folder. The user confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed` before Goal 010. Goal 010 proves deterministic content generation at scale through reports under `.llmgc/procedural/content-generation-scale/`. The user confirmed `content_generation_at_scale_artifact_verification passed` before Goal 011. Goal 011 proves the minimum deterministic asset pipeline through reports under `.llmgc/procedural/minimum-asset-pipeline/`; S098A repairs the Goal 011 artifact family without changing the gate. The user confirmed `minimum_asset_pipeline_artifact_verification passed` before Goal 012. Goal 012 proves the Unity runtime export vertical slice through reports and real export files under `.llmgc/procedural/unity-runtime-export/`. The user confirmed `unity_runtime_export_vertical_slice_artifact_verification passed` before Goal 013. Goal 013 now has Alpha candidate selection, staging, repo-local Unity template/build entrypoint, real Windows build output, diagnostic launch evidence and automated minimal play-loop evidence. The user confirmed `alpha_runnable_windows_build_verification passed` before Goal 014. Goal 014 now has Unity playable Alpha presentation, movement/interaction evidence and firewall-safe build discipline evidence; the user confirmed `unity_playable_presentation_firewall_safe_build_verification passed` before Goal 015. Goal 015 projects generated scene content into Unity Alpha presentation from selected package/config/asset evidence; the user confirmed `unity_generated_scene_content_projection_verification passed` before Goal 016. Goal 016 proves a generated Unity runtime state loop with quest/dialogue/item/inventory/event before-after transitions; the user confirmed `unity_generated_runtime_state_loop_verification passed` before Goal 017. Goal 017 proves a generated Unity quest completion loop with ordered phases, objective checklist, completion and reward evidence; the user confirmed `unity_generated_quest_completion_loop_verification passed` before Goal 018. Goal 018 proves three distinct generated Unity Alpha playable quest-loop variants; the user confirmed `unity_generated_multi_variant_playable_scenario_verification passed` before Goal 019. Goal 019 proves readable Unity Alpha presentation panels; the user confirmed `unity_alpha_readable_presentation_verification passed` before Goal 020. Goal 020 now packages the first minimum playable generated game review folder and stops at `minimum_playable_generated_game_verification` required, not passed.
 
@@ -215,7 +217,7 @@ Goal 013 accepted gate:
 alpha_runnable_windows_build_verification passed before Goal 014
 ```
 
-The active gate is now `minimum_playable_generated_game_verification` and remains required, not passed.
+The active gate is now `generated_game_profile_contract_verification` and remains required, not passed.
 
 ## Goal 012 Summary
 
@@ -1015,10 +1017,10 @@ Update this file pair after every accepted product slice, accepted hotfix, accep
 
 Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 
-After Goal 020, this state should recommend:
+After Goal 021, this state should recommend:
 
 ```text
-minimum_playable_generated_game_verification
+generated_game_profile_contract_verification
 ```
 
 

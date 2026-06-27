@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "generated_game_profile_contract_profiles_v1",
+  "previousAcceptedGate": "minimum_playable_generated_game_verification passed",
+  "profiles": [
+    {
+      "profileId": "game_profile/frontier-survival-minimum-alpha",
+      "displayName": "Frontier Survival Minimum Alpha",
+      "gameFamilyId": "game_family/frontier_survival",
+      "presentationMode": "presentation_mode/top_down_2d",
+      "worldTopology": "world_topology/region_graph",
+      "actorModel": "actor_model/single_player_character",
+      "contentScaleTarget": "content_scale/alpha_microgame",
+      "contentScaleBudget": 120,
+      "assetMode": "asset_mode/2d_tiles",
+      "runtimeExportTarget": "runtime_export/unity_alpha_windows",
+      "selectedCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/rule_pack_combat_faction_social_work_theft",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ]
+    },
+    {
+      "profileId": "game_profile/gothic-mystery-investigation-alpha",
+      "displayName": "Gothic Mystery Investigation Alpha",
+      "gameFamilyId": "game_family/gothic_mystery",
+      "presentationMode": "presentation_mode/map_and_panel_rpg",
+      "worldTopology": "world_topology/node_map",
+      "actorModel": "actor_model/single_player_character",
+      "contentScaleTarget": "content_scale/alpha_microgame",
+      "contentScaleBudget": 90,
+      "assetMode": "asset_mode/portrait_cards",
+      "runtimeExportTarget": "runtime_export/unity_alpha_windows",
+      "selectedCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/dialogue_clue_graph_future",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export"
+      ]
+    },
+    {
+      "profileId": "game_profile/trade-caravan-social-economy-alpha",
+      "displayName": "Trade Caravan Social Economy Alpha",
+      "gameFamilyId": "game_family/trade_caravan",
+      "presentationMode": "presentation_mode/map_and_panel_rpg",
+      "worldTopology": "world_topology/region_graph",
+      "actorModel": "actor_model/vehicle_or_ship",
+      "contentScaleTarget": "content_scale/alpha_microgame",
+      "contentScaleBudget": 110,
+      "assetMode": "asset_mode/generated_media_requests_only",
+      "runtimeExportTarget": "runtime_export/unity_alpha_windows",
+      "selectedCapabilityIds": [
+        "capability/content_generation_scale",
+        "capability/minimum_asset_pipeline",
+        "capability/minimum_playable_generated_game",
+        "capability/rule_pack_combat_faction_social_work_theft",
+        "capability/unity_alpha_readable_presentation",
+        "capability/unity_multi_variant_playable_scenario",
+        "capability/unity_quest_completion_loop",
+        "capability/unity_runtime_export",
+        "capability/vendor_economy_future"
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "game_profile.goal020_gate_recorded",
+      "target": "minimum_playable_generated_game_verification passed",
+      "message": "User-confirmed Goal 020 minimum playable generated game verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "game_profile.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios must reject through validation diagnostics."
+    },
+    {
+      "severity": "info",
+      "code": "game_profile.no_external_execution",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua, Unity build or generator-library execution was invoked."
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "accepted": false,
+  "finalStatus": "generated_game_profile_contract_verification",
+  "manualGate": "generated_game_profile_contract_verification",
+  "previousAcceptedGate": "minimum_playable_generated_game_verification passed",
+  "completedSlices": [
+    "S170",
+    "S171",
+    "S172",
+    "S173",
+    "S174",
+    "S175",
+    "S176",
+    "S177"
+  ],
+  "productSmokeRoute": "generated-game-profile-contract",
+  "profileCount": 3,
+  "validProfileCount": 3,
+  "pipelinePlanCount": 3,
+  "validProfileIds": [
+    "game_profile/frontier-survival-minimum-alpha",
+    "game_profile/gothic-mystery-investigation-alpha",
+    "game_profile/trade-caravan-social-economy-alpha"
+  ],
+  "profileArtifactHash": "90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e",
+  "pipelinePlanHash": "4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8",
+  "contractProofPassed": true,
+  "allPlansHaveExactStageIds": true,
+  "futureRequiredCapabilitiesExplicit": true,
+  "invalidMatrix": {
+    "scenarioCount": 18,
+    "rejectedCount": 18,
+    "passed": true,
+    "scenarios": [
+      {
+        "scenarioId": "missing_profile_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_profile_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.profile_id.missing",
+            "target": "invalid/missing_profile_id",
+            "message": "Profile id is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "duplicate_profile_ids",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "duplicate_profile_ids",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.profile_id.duplicate",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Profile ids must be present and unique."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_game_family",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_game_family",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.family.unknown",
+            "target": "game_family/unknown",
+            "message": "Game family id must be known before pipeline planning."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_presentation_mode",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_presentation_mode",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.presentation.unknown",
+            "target": "presentation_mode/unknown",
+            "message": "Presentation mode must be a known taxonomy id."
+          }
+        ]
+      },
+      {
+        "scenarioId": "incompatible_presentation_and_topology",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "incompatible_presentation_and_topology",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.compatibility.presentation_topology",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Top-down 2D profiles require map or region topology, not node_map."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_required_loop_family",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_required_loop_family",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.loop.quest_dialogue_missing",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Quest/dialogue/interaction loop family is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_capability_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_capability_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.capability.unknown",
+            "target": "capability/unknown",
+            "message": "Selected capability id must be known or explicitly future-required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "combat_required_without_combat_mapping",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "combat_required_without_combat_mapping",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.capability.combat_mapping_missing",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Combat-requesting profiles must include a combat/progression capability mapping."
+          }
+        ]
+      },
+      {
+        "scenarioId": "provider_media_llm_runtime_dependency_requested",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "provider_media_llm_runtime_dependency_requested",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.asset_policy.runtime_provider_dependency",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Runtime must not depend on an asset/media provider."
+          }
+        ]
+      },
+      {
+        "scenarioId": "arbitrary_lua_runtime_authority_requested",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "arbitrary_lua_runtime_authority_requested",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.claims.arbitrary_lua_runtime",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Profiles must not grant arbitrary Lua runtime authority."
+          }
+        ]
+      },
+      {
+        "scenarioId": "public_game_package_schema_mutation_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "public_game_package_schema_mutation_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.claims.public_schema_mutation",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Goal 021 must not claim public GamePackage schema mutation."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unity_build_claim_in_non_unity_goal",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unity_build_claim_in_non_unity_goal",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.claims.unity_build",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Goal 021 does not run or claim a Unity build."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal020_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal020_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.previous_gate.missing",
+            "target": "minimum_playable_generated_game_verification",
+            "message": "Previous accepted gate evidence is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "stale_or_mismatched_previous_gate",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "stale_or_mismatched_previous_gate",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.previous_gate.mismatch",
+            "target": "minimum_playable_generated_game_verification required",
+            "message": "Goal 021 requires minimum_playable_generated_game_verification passed."
+          }
+        ]
+      },
+      {
+        "scenarioId": "copied_profile_report_without_profile_files",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "copied_profile_report_without_profile_files",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.profile_files.missing",
+            "target": "samples/game-profiles",
+            "message": "Profile contract proof requires profile files, not only a copied report."
+          }
+        ]
+      },
+      {
+        "scenarioId": "cross_family_leakage_gothic_to_frontier_package_ids",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "cross_family_leakage_gothic_to_frontier_package_ids",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.pipeline.cross_family_leak",
+            "target": "game_profile/gothic-mystery-investigation-alpha",
+            "message": "Gothic profile must not map to frontier package/content ids."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unbounded_content_scale_without_budget",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unbounded_content_scale_without_budget",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.content_scale.budget_missing",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Content scale must have a bounded positive budget."
+          },
+          {
+            "severity": "error",
+            "code": "game_profile.content_scale.unbounded",
+            "target": "game_profile/frontier-survival-minimum-alpha",
+            "message": "Unbounded content scale requires a future contract and cannot be accepted as complete."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unsupported_topology_accepted_as_complete",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unsupported_topology_accepted_as_complete",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "game_profile.topology.future_required_not_explicit",
+            "target": "world_topology/infinite_chunks",
+            "message": "Unsupported topology must be marked future_required instead of complete."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "info",
+        "code": "game_profile.invalid_matrix_rejected",
+        "target": "invalid_matrix",
+        "message": "Invalid/fake/leak scenarios must reject through validation diagnostics."
+      }
+    ]
+  },
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "unityBuildExecuted": false,
+  "noExternalProviderLlmRagLuaMedia": true,
+  "deterministicHash": "4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "game_profile.goal020_gate_recorded",
+      "target": "minimum_playable_generated_game_verification passed",
+      "message": "User-confirmed Goal 020 minimum playable generated game verification is recorded as passed."
+    },
+    {
+      "severity": "info",
+      "code": "game_profile.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios must reject through validation diagnostics."
+    },
+    {
+      "severity": "info",
+      "code": "game_profile.no_external_execution",
+      "target": "execution_boundary",
+      "message": "No LLM, RAG, provider, media, arbitrary Lua, Unity build or generator-library execution was invoked."
+    }
+  ]
+}

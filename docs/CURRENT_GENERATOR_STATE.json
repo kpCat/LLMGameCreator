@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-26T21:42:28Z",
+    "updated_at_utc":  "2026-06-27T05:12:27Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 020 minimum playable generated game verification required",
-    "gate_status":  "minimum_playable_generated_game_verification",
+    "current_phase_title":  "Goal 021 generated game profile contract verification required",
+    "gate_status":  "generated_game_profile_contract_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_020_minimum_playable_generated_game",
-    "active_manual_gate":  "Goal 020 packages the selected readable Unity Alpha scenario into a review-ready minimum playable generated game folder; minimum_playable_generated_game_verification remains required and not passed until the review package is manually accepted.",
-    "current_user_action":  "Review the produced minimum playable generated game manifest, report, review package folder, README, manual/automated scripts, scenario summary, automated launch/play-loop logs, checklist and invalid/fake/leak matrix; do not mark minimum_playable_generated_game_verification passed until the playable review package is accepted.",
-    "recommended_next_decision":  "The user confirmed unity_alpha_readable_presentation_verification passed before Goal 020. Goal 020 completes S162-S169 by adding a narrow Application-layer MinimumPlayableGame acceptance service, selecting the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, copying a minimal runnable Windows player folder into .llmgc/procedural/minimum-playable-generated-game/review-package, writing README/manual-run/automated-smoke/checklist/scenario-summary files, validating executable/data/StreamingAssets/package/asset/build/review hashes, proving automated launch and quest completion from player logs, rejecting fake review-package evidence causally and adding the minimum-playable-generated-game product smoke route. Compact review artifacts are written under .llmgc/procedural/minimum-playable-generated-game while heavy Unity build/log/unity-work outputs remain ignored. Goal 020 stops at minimum_playable_generated_game_verification required; do not mark it passed and do not start S170 or Goal 021.",
+    "last_completed_product_slice_id":  "goal_021_generated_game_profile_contract_refresh",
+    "active_manual_gate":  "Goal 021 records minimum_playable_generated_game_verification passed and produces a deterministic generated-game profile contract plus profile-to-pipeline artifacts; generated_game_profile_contract_verification remains required and not passed until the profile contract is manually accepted.",
+    "current_user_action":  "Review the generated game profile contract document, three sample profiles, profile artifact, pipeline plan, report, verification artifact and invalid/fake/leak matrix; do not mark generated_game_profile_contract_verification passed until the profile contract is accepted.",
+    "recommended_next_decision":  "The user confirmed minimum_playable_generated_game_verification passed before Goal 021. Goal 021 completes S170-S177 by defining game_profile_v1, adding three deterministic sample profiles, introducing a narrow Application-layer GameProfiles acceptance service, mapping each profile to exact Goal 010-020 capability and pipeline stage ids, separating future-required capabilities from supported-now stages, rejecting 18 invalid/fake/leak scenarios causally and adding the generated-game-profile-contract product smoke route. Compact review artifacts are written under .llmgc/procedural/generated-game-profile-contract. Goal 021 stops at generated_game_profile_contract_verification required; do not mark it passed and do not start S178 or Goal 022.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "minimum_playable_generated_game_verification"
+                                                        "generated_game_profile_contract_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -46,7 +46,8 @@
                            "goal_017_manual_gate":  "unity_generated_quest_completion_loop_verification",
                            "goal_018_manual_gate":  "unity_generated_multi_variant_playable_scenario_verification",
                            "goal_019_manual_gate":  "unity_alpha_readable_presentation_verification",
-                           "goal_020_manual_gate":  "minimum_playable_generated_game_verification"
+                           "goal_020_manual_gate":  "minimum_playable_generated_game_verification",
+                           "goal_021_manual_gate":  "generated_game_profile_contract_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -336,7 +337,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "minimum_playable_generated_game_verification"
+                                          "generated_game_profile_contract_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -357,11 +358,11 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "minimum_playable_generated_game_verification",
-    "recommended_next_work_item_title":  "Goal 020 minimum playable generated game verification review.",
-    "recommended_next_task_file":  ".llmgc/procedural/minimum-playable-generated-game/minimum-playable-generated-game-verification.md",
+    "recommended_next_work_item":  "generated_game_profile_contract_verification",
+    "recommended_next_work_item_title":  "Goal 021 generated game profile contract verification review.",
+    "recommended_next_task_file":  ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-verification.md",
     "candidate_product_vertical_slices":  [
-                                              "Minimum playable generated game verification review"
+                                              "Generated game profile contract verification review"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -567,7 +568,7 @@
                                                           "next_action":  "goal_020_minimum_playable_generated_game"
                                                               },
     "minimum_playable_generated_game_verification":  {
-                                                          "status":  "required",
+                                                          "status":  "passed_by_user_prompt_before_goal_021",
                                                           "evidence_source":  "goal_020_minimum_playable_generated_game",
                                                           "observed_result":  [
                                                               "Minimum playable generated game compact artifacts are written under .llmgc/procedural/minimum-playable-generated-game",
@@ -579,9 +580,27 @@
                                                               "Invalid/fake/leak review-package matrix rejects 25 scenarios",
                                                               "Product smoke route is minimum-playable-generated-game",
                                                               "Heavy generated Unity build/log/unity-work outputs remain ignored by .gitignore",
+                                                              "user confirmed minimum_playable_generated_game_verification passed before Goal 021"
+                                                          ],
+                                                          "next_action":  "goal_021_generated_game_profile_contract_refresh"
+                                                              },
+    "generated_game_profile_contract_verification":  {
+                                                          "status":  "required",
+                                                          "evidence_source":  "goal_021_generated_game_profile_contract_refresh",
+                                                          "observed_result":  [
+                                                              "Game profile contract document is written at docs/GAME_PROFILE_CONTRACT_V1.md",
+                                                              "Three deterministic sample profiles are written under samples/game-profiles",
+                                                              "Application GameProfiles acceptance service writes compact artifacts under .llmgc/procedural/generated-game-profile-contract",
+                                                              "Valid profiles are frontier-survival-minimum-alpha, gothic-mystery-investigation-alpha and trade-caravan-social-economy-alpha",
+                                                              "Profile artifact hash 90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e",
+                                                              "Pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8",
+                                                              "Deterministic report hash 4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe",
+                                                              "Invalid/fake/leak matrix rejects 18 scenarios",
+                                                              "Product smoke route is generated-game-profile-contract",
+                                                              "Final report accepted=false and manualGate=generated_game_profile_contract_verification",
                                                               "Gate remains required and is not marked passed"
                                                           ],
-                                                          "next_action":  "review_minimum_playable_generated_game_before_marking_gate_passed"
+                                                          "next_action":  "review_generated_game_profile_contract_before_marking_gate_passed"
                                                               },
     "alpha_unity_build_environment_blocker":  {
                                                  "status":  "resolved_by_s113b",
@@ -713,15 +732,29 @@
     "goal_020_minimum_playable_generated_game":  {
                                                     "slice_id":  "goal_020_minimum_playable_generated_game",
                                                     "title":  "Minimum Playable Generated Game Gate",
-                                                    "status":  "verification_required",
+                                                    "status":  "passed_by_user_prompt_before_goal_021",
                                                     "blocked_at_utc":  "",
-                                                    "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, completes S162-S169, adds a narrow Application-layer MinimumPlayableGame acceptance service, selects the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a runnable review package under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore, and S170/Goal 021 are not started.",
+                                                    "summary":  "Goal 020 records the user-confirmed unity_alpha_readable_presentation_verification passed gate, completes S162-S169, adds a narrow Application-layer MinimumPlayableGame acceptance service, selects the primary frontier_survival generated scenario from accepted readable-presentation and multi-variant evidence, writes compact manifest/report/verification/checklist artifacts under .llmgc/procedural/minimum-playable-generated-game, creates a runnable review package under .llmgc/procedural/minimum-playable-generated-game/review-package, validates physical executable/data/StreamingAssets payloads and hashes, proves automated launch plus quest completion from player logs, rejects invalid/fake/leak review-package evidence causally and adds the minimum-playable-generated-game product smoke route. Heavy Unity build/log/unity-work outputs remain ignored by .gitignore. The user confirmed minimum_playable_generated_game_verification passed before Goal 021.",
                                                     "scenario_id":  "minimum-playable-generated-game",
                                                     "checks":  [
                                                                    "MinimumPlayableGame focused tests: 10/10 passed",
                                                                    "minimum-playable-generated-game product smoke: 1/1 passed",
                                                                    "check-all.ps1: 844/844 tests passed, build 0 warnings / 0 errors",
                                                                    "Goal 020 manifest hash 973fe09f17697a0075dc684c15c5f97fbae7f6f7b1595725a7d08c9586b4ecba, review package hash 166aa7805e05db7e922b0f486edd426c0ed82085dfcf1a2837d24b5bd61b14a8, deterministic report hash a4b0c84755c17b52c74464934737589d900a5b09d4d60cd302d48b831d34dad7, invalid scenarios 25"
+                                                               ]
+                                                },
+    "goal_021_generated_game_profile_contract_refresh":  {
+                                                    "slice_id":  "goal_021_generated_game_profile_contract_refresh",
+                                                    "title":  "Generated Game Profile Contract Refresh",
+                                                    "status":  "verification_required",
+                                                    "blocked_at_utc":  "",
+                                                    "summary":  "Goal 021 records the user-confirmed minimum_playable_generated_game_verification passed gate, completes S170-S177, adds docs/GAME_PROFILE_CONTRACT_V1.md, three sample game_profile_v1 profiles under samples/game-profiles, a narrow Application-layer GameProfiles acceptance service, focused tests and the generated-game-profile-contract product smoke route. It writes compact profile, pipeline-plan, report and verification artifacts under .llmgc/procedural/generated-game-profile-contract, maps each valid profile to exact Goal 010-020 pipeline stage ids, records supported-now versus future-required capabilities, rejects invalid/fake/leak profile evidence causally and leaves generated_game_profile_contract_verification required.",
+                                                    "scenario_id":  "generated-game-profile-contract",
+                                                    "checks":  [
+                                                                   "GameProfile focused tests: 10/10 passed",
+                                                                   "generated-game-profile-contract product smoke: 1/1 passed",
+                                                                   "check-all.ps1: 851/851 tests passed, build 0 warnings / 0 errors",
+                                                                   "Goal 021 profile artifact hash 90f2ce0f20e3dcbad710a0a563c05b174bb9ad0cbb81d21736f037a725396d8e, pipeline plan hash 4e5afdfe5248a8411a8f4055d2b3919b6a75c425e50815c92ffcf8f363cc41f8, deterministic report hash 4254a461863081992e99a974a71e4a0b54f50358f3e8ac4a936bba536bd83efe, valid profiles 3, invalid scenarios 18"
                                                                ]
                                                 },
     "goal_012_unity_runtime_export_vertical_slice":  {

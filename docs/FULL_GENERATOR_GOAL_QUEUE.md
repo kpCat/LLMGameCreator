@@ -11,13 +11,13 @@ This document is not a replacement for `docs/FULL_GAME_GENERATION_MASTER_PLAN.md
 Accepted through:
 
 ```text
-unity_alpha_readable_presentation_verification passed
+minimum_playable_generated_game_verification passed
 ```
 
 Produced for review:
 
 ```text
-minimum_playable_generated_game_verification required
+generated_game_profile_contract_verification required
 ```
 
 Current capabilities:
@@ -34,12 +34,13 @@ Current capabilities:
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
 - minimum playable generated game review package with runnable Windows player folder, README, manual/automated scripts, scenario summary, automated launch proof and quest completion proof;
+- generated game profile contract with three deterministic sample profiles, exact Goal 010-020 profile-to-pipeline mapping and explicit future-required capability separation;
 - compact review artifacts under `.llmgc/procedural/...`;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-The Unity Alpha now has a minimum playable generated game review package, but the user still needs to manually accept whether the packaged scenario is playable enough for the gate.
+The Unity Alpha minimum playable generated game gate has been accepted by user prompt. Goal 021 produced a generated game profile contract, but the user still needs to manually accept whether the profile/capability contract is the right basis for future generalization.
 
 ## Queue Rules
 
@@ -179,7 +180,7 @@ The user can launch the exe and play a short generated scenario from start to co
 
 Status:
 
-Produced for review. The gate remains `required`, not `passed`; do not start S170 or Goal 021 until it is accepted.
+Accepted by user prompt before Goal 021.
 
 ## Generator Generalization Track
 
@@ -190,6 +191,10 @@ Purpose:
 Define or refresh the profile/capability contract used to choose game family, presentation mode, world topology, actor model, inventory/combat/progression models and generation scope.
 
 Manual review likely required for profile/capability approval.
+
+Status:
+
+Produced for review. The gate remains `required`, not `passed`; do not start S178 or Goal 022 until it is accepted.
 
 ### Goal 022: Capability Bundle Selection To Pipeline Inputs
 
@@ -380,7 +385,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-minimum_playable_generated_game_verification
+generated_game_profile_contract_verification
 ```
 
 Status:

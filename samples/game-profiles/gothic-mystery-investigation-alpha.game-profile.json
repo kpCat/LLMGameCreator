@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "game_profile_v1",
+  "profileId": "game_profile/gothic-mystery-investigation-alpha",
+  "displayName": "Gothic Mystery Investigation Alpha",
+  "targetExperience": "A readable investigation loop with dialogue clues, social suspicion and a Unity Alpha review path.",
+  "gameFamilyId": "game_family/gothic_mystery",
+  "presentationMode": "presentation_mode/map_and_panel_rpg",
+  "worldTopology": "world_topology/node_map",
+  "actorModel": "actor_model/single_player_character",
+  "questDialogueInteractionLoopFamily": "loop_family/quest_dialogue_interaction",
+  "inventoryItemEconomyLoopFamily": "loop_family/inventory_item_economy",
+  "capabilityFlags": {
+    "combat": false,
+    "faction": true,
+    "social": true,
+    "work": false,
+    "theft": false
+  },
+  "progressionScope": "progression_scope/reputation_tracks",
+  "contentScale": {
+    "target": "content_scale/alpha_microgame",
+    "budget": 90,
+    "unbounded": false
+  },
+  "assetPolicy": {
+    "mode": "asset_mode/portrait_cards",
+    "fallbackPolicy": "asset_fallback/deterministic_fixture",
+    "runtimeProviderDependency": false
+  },
+  "runtimeExportTarget": "runtime_export/unity_alpha_windows",
+  "forbiddenRuntimeDependencies": [
+    "llm",
+    "rag",
+    "provider",
+    "media_generation",
+    "arbitrary_lua"
+  ],
+  "expectedDownstreamPipelineSlices": [
+    "stage/content_generation_scale_goal_010",
+    "stage/minimum_asset_pipeline_goal_011",
+    "stage/unity_runtime_export_goal_012",
+    "stage/unity_generated_runtime_state_loop_goal_016",
+    "stage/unity_generated_quest_completion_loop_goal_017",
+    "stage/unity_multi_variant_playable_scenario_goal_018",
+    "stage/unity_alpha_readable_presentation_goal_019",
+    "stage/minimum_playable_generated_game_goal_020"
+  ],
+  "selectedCapabilityIds": [
+    "capability/content_generation_scale",
+    "capability/minimum_asset_pipeline",
+    "capability/unity_runtime_export",
+    "capability/unity_quest_completion_loop",
+    "capability/unity_multi_variant_playable_scenario",
+    "capability/unity_alpha_readable_presentation",
+    "capability/minimum_playable_generated_game",
+    "capability/dialogue_clue_graph_future"
+  ],
+  "claims": {
+    "publicGamePackageSchemaMutation": false,
+    "unityBuildProducedByGoal021": false,
+    "arbitraryLuaRuntimeAuthority": false
+  }
+}

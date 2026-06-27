@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "game_profile_v1",
+  "profileId": "game_profile/frontier-survival-minimum-alpha",
+  "displayName": "Frontier Survival Minimum Alpha",
+  "targetExperience": "A compact survival frontier scenario with readable quest, inventory reward and launchable Unity Alpha review package.",
+  "gameFamilyId": "game_family/frontier_survival",
+  "presentationMode": "presentation_mode/top_down_2d",
+  "worldTopology": "world_topology/region_graph",
+  "actorModel": "actor_model/single_player_character",
+  "questDialogueInteractionLoopFamily": "loop_family/quest_dialogue_interaction",
+  "inventoryItemEconomyLoopFamily": "loop_family/inventory_item_economy",
+  "capabilityFlags": {
+    "combat": true,
+    "faction": true,
+    "social": true,
+    "work": false,
+    "theft": false
+  },
+  "progressionScope": "progression_scope/minimum_alpha",
+  "contentScale": {
+    "target": "content_scale/alpha_microgame",
+    "budget": 120,
+    "unbounded": false
+  },
+  "assetPolicy": {
+    "mode": "asset_mode/2d_tiles",
+    "fallbackPolicy": "asset_fallback/deterministic_fixture",
+    "runtimeProviderDependency": false
+  },
+  "runtimeExportTarget": "runtime_export/unity_alpha_windows",
+  "forbiddenRuntimeDependencies": [
+    "llm",
+    "rag",
+    "provider",
+    "media_generation",
+    "arbitrary_lua"
+  ],
+  "expectedDownstreamPipelineSlices": [
+    "stage/content_generation_scale_goal_010",
+    "stage/minimum_asset_pipeline_goal_011",
+    "stage/unity_runtime_export_goal_012",
+    "stage/unity_generated_runtime_state_loop_goal_016",
+    "stage/unity_generated_quest_completion_loop_goal_017",
+    "stage/unity_multi_variant_playable_scenario_goal_018",
+    "stage/unity_alpha_readable_presentation_goal_019",
+    "stage/minimum_playable_generated_game_goal_020"
+  ],
+  "selectedCapabilityIds": [
+    "capability/content_generation_scale",
+    "capability/minimum_asset_pipeline",
+    "capability/rule_pack_combat_faction_social_work_theft",
+    "capability/unity_runtime_export",
+    "capability/unity_quest_completion_loop",
+    "capability/unity_multi_variant_playable_scenario",
+    "capability/unity_alpha_readable_presentation",
+    "capability/minimum_playable_generated_game"
+  ],
+  "claims": {
+    "publicGamePackageSchemaMutation": false,
+    "unityBuildProducedByGoal021": false,
+    "arbitraryLuaRuntimeAuthority": false
+  }
+}

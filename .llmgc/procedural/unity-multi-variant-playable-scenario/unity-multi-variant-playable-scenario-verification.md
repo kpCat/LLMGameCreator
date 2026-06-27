@@ -14,7 +14,7 @@ unity_generated_multi_variant_playable_scenario_verification
 - Selected packages: game/content_generation/frontier-survival, game/content_generation/gothic-mystery, game/content_generation/trade-caravan
 - Selected threads: thread/frontier-survival/000, thread/gothic-mystery/000, thread/trade-caravan/000
 - Accepted variants: 3/3
-- Variants hash: 2a8b63e76b0706efe17db32ebda88c79d10a4453c1d42edc8747fa587987b711
-- Deterministic report hash: 28578be4f6c7136ab27b52a422555c9df77ac65569f9718ca6e062c435524cde
+- Variants hash: 39d8149424f1265f5a83323eaf081f7cc9653058e3dd880b7add83683f340b13
+- Deterministic report hash: 45b9455e99c3cb7fbb2e9d7b6ebf9b7b51d7a47f421fdecbb4f084ed0a55f401
 - Final gate status: required, not passed
 - Future post-goal work started: false
