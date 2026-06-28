@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "package_assembly_combat_progression_input_fixtures_v1",
+  "realConsumer": {
+    "consumerId": "goal028_real_consumer_frontier_survival",
+    "sourceProfileId": "game_profile/frontier-survival-minimum-alpha",
+    "gameFamilyId": "game_family/frontier_survival",
+    "selectionId": "generator_plan_capability_selection/f8183ba4e5dc704e",
+    "artifacts": [
+      {
+        "artifactId": "goal028/real/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"Goal 028 Frontier Combat\",\r\n    \"genre\": \"frontier_survival\",\r\n    \"description\": \"Bounded combat and progression assembly proof.\",\r\n    \"core_loop\": [\r\n      \"scout\",\r\n      \"fight\",\r\n      \"recover\"\r\n    ]\r\n  },\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/f8183ba4e5dc704e\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/02-entity",
+        "artifactKind": "entity_pack_v1",
+        "contentJson": "{\r\n  \"entities\": [\r\n    {\r\n      \"id\": \"wolf_raider\",\r\n      \"title\": \"Wolf Raider\",\r\n      \"kind\": \"enemy\"\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/03-resource",
+        "artifactKind": "resource_pack_v1",
+        "contentJson": "{\r\n  \"resources\": [\r\n    {\r\n      \"id\": \"stamina\",\r\n      \"name\": \"Stamina\",\r\n      \"kind\": \"combat\",\r\n      \"min_value\": 0,\r\n      \"max_value\": 10\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/04-loot",
+        "artifactKind": "loot_pack_v1",
+        "contentJson": "{\r\n  \"loot_tables\": [\r\n    {\r\n      \"id\": \"frontier_encounter_reward\",\r\n      \"name\": \"Frontier Encounter Reward\",\r\n      \"entries\": [\r\n        {\r\n          \"id\": \"stamina_reward\",\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"resource\",\r\n              \"id\": \"resource/stamina\",\r\n              \"amount\": 1\r\n            }\r\n          ],\r\n          \"weight\": 1\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/05-stats",
+        "artifactKind": "stat_pack_v1",
+        "contentJson": "{\r\n  \"stats\": [\r\n    {\r\n      \"id\": \"strength\",\r\n      \"name\": \"Strength\",\r\n      \"kind\": \"attribute\",\r\n      \"default_value\": 1,\r\n      \"min_value\": 0,\r\n      \"max_value\": 10\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/06-status",
+        "artifactKind": "status_pack_v1",
+        "contentJson": "{\r\n  \"statuses\": [\r\n    {\r\n      \"id\": \"bleeding\",\r\n      \"name\": \"Bleeding\",\r\n      \"kind\": \"wound\",\r\n      \"duration_mode\": \"turns\"\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/07-ability",
+        "artifactKind": "ability_pack_v1",
+        "contentJson": "{\r\n  \"abilities\": [\r\n    {\r\n      \"id\": \"quick_strike\",\r\n      \"name\": \"Quick Strike\",\r\n      \"kind\": \"active\",\r\n      \"resource_id\": \"resource/stamina\",\r\n      \"costs\": [\r\n        {\r\n          \"kind\": \"resource\",\r\n          \"id\": \"resource/stamina\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"effects\": [\r\n        {\r\n          \"type\": \"add_status\",\r\n          \"status_id\": \"status/bleeding\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"tags\": [\r\n        \"combat\"\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/08-progression",
+        "artifactKind": "progression_pack_v1",
+        "contentJson": "{\r\n  \"progressions\": [\r\n    {\r\n      \"id\": \"combat_training\",\r\n      \"name\": \"Combat Training\",\r\n      \"kind\": \"skill_rank\",\r\n      \"stages\": [\r\n        {\r\n          \"id\": \"novice\",\r\n          \"name\": \"Novice\",\r\n          \"required_amount\": 0,\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"resource\",\r\n              \"id\": \"resource/stamina\",\r\n              \"amount\": 1\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/real/09-encounter",
+        "artifactKind": "encounter_pack_v1",
+        "contentJson": "{\r\n  \"encounters\": [\r\n    {\r\n      \"id\": \"wolf_raider_ambush\",\r\n      \"title\": \"Wolf Raider Ambush\",\r\n      \"kind\": \"combat\",\r\n      \"loot_table_id\": \"loot/frontier/encounter/reward\",\r\n      \"participants\": [\r\n        {\r\n          \"id\": \"enemy/wolf_raider\",\r\n          \"name\": \"Wolf Raider\",\r\n          \"kind\": \"enemy\",\r\n          \"entity_prototype_id\": \"entity/wolf/raider\",\r\n          \"team\": \"enemy\",\r\n          \"stats\": [\r\n            {\r\n              \"kind\": \"stat\",\r\n              \"id\": \"stat/strength\",\r\n              \"amount\": 2\r\n            }\r\n          ],\r\n          \"resources\": [\r\n            {\r\n              \"kind\": \"resource\",\r\n              \"id\": \"resource/stamina\",\r\n              \"amount\": 5\r\n            }\r\n          ],\r\n          \"abilities\": [\r\n            \"ability/quick/strike\"\r\n          ]\r\n        }\r\n      ],\r\n      \"actions\": [\r\n        {\r\n          \"id\": \"action/quick_strike\",\r\n          \"name\": \"Quick Strike\",\r\n          \"ability_id\": \"ability/quick/strike\",\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"status\",\r\n              \"id\": \"status/bleeding\",\r\n              \"amount\": 1\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      }
+    ]
+  },
+  "syntheticConsumer": {
+    "consumerId": "alternate_encounter_status_progression",
+    "sourceProfileId": "synthetic/alternate_encounter_status_progression",
+    "gameFamilyId": "game_family/synthetic_combat_progression",
+    "selectionId": "generator_plan_capability_selection/synthetic_alternate_encounter_status_progression",
+    "artifacts": [
+      {
+        "artifactId": "goal028/synthetic/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"Alternate Encounter Status Progression\",\r\n    \"genre\": \"tactical_training\",\r\n    \"description\": \"Synthetic combat/progression fixture.\",\r\n    \"core_loop\": [\r\n      \"train\",\r\n      \"status\",\r\n      \"advance\"\r\n    ]\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/02-entity",
+        "artifactKind": "entity_pack_v1",
+        "contentJson": "{\r\n  \"entities\": [\r\n    {\r\n      \"id\": \"training_dummy\",\r\n      \"title\": \"Training Dummy\",\r\n      \"kind\": \"target\"\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/03-resource",
+        "artifactKind": "resource_pack_v1",
+        "contentJson": "{\r\n  \"resources\": [\r\n    {\r\n      \"id\": \"focus\",\r\n      \"name\": \"Focus\",\r\n      \"kind\": \"combat\",\r\n      \"min_value\": 0,\r\n      \"max_value\": 8\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/04-loot",
+        "artifactKind": "loot_pack_v1",
+        "contentJson": "{\r\n  \"loot_tables\": [\r\n    {\r\n      \"id\": \"training_reward\",\r\n      \"name\": \"Training Reward\",\r\n      \"entries\": [\r\n        {\r\n          \"id\": \"focus_reward\",\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"resource\",\r\n              \"id\": \"resource/focus\",\r\n              \"amount\": 1\r\n            }\r\n          ],\r\n          \"weight\": 1\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/05-stats",
+        "artifactKind": "stat_pack_v1",
+        "contentJson": "{\r\n  \"stats\": [\r\n    {\r\n      \"id\": \"precision\",\r\n      \"name\": \"Precision\",\r\n      \"kind\": \"attribute\",\r\n      \"default_value\": 1,\r\n      \"min_value\": 0,\r\n      \"max_value\": 10\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/06-status",
+        "artifactKind": "status_pack_v1",
+        "contentJson": "{\r\n  \"statuses\": [\r\n    {\r\n      \"id\": \"guarded\",\r\n      \"name\": \"Guarded\",\r\n      \"kind\": \"stance\",\r\n      \"duration_mode\": \"encounter\"\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/07-ability",
+        "artifactKind": "ability_pack_v1",
+        "contentJson": "{\r\n  \"abilities\": [\r\n    {\r\n      \"id\": \"focus_shot\",\r\n      \"name\": \"Focus Shot\",\r\n      \"kind\": \"active\",\r\n      \"resource_id\": \"resource/focus\",\r\n      \"costs\": [\r\n        {\r\n          \"kind\": \"resource\",\r\n          \"id\": \"resource/focus\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"effects\": [\r\n        {\r\n          \"type\": \"add_status\",\r\n          \"status_id\": \"status/guarded\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"tags\": [\r\n        \"training\"\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/08-progression",
+        "artifactKind": "progression_pack_v1",
+        "contentJson": "{\r\n  \"progressions\": [\r\n    {\r\n      \"id\": \"precision_drill\",\r\n      \"name\": \"Precision Drill\",\r\n      \"kind\": \"skill_rank\",\r\n      \"stages\": [\r\n        {\r\n          \"id\": \"steady\",\r\n          \"name\": \"Steady\",\r\n          \"required_amount\": 1,\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"status\",\r\n              \"id\": \"status/guarded\",\r\n              \"amount\": 1\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal028/synthetic/09-encounter",
+        "artifactKind": "encounter_pack_v1",
+        "contentJson": "{\r\n  \"encounters\": [\r\n    {\r\n      \"id\": \"precision_drill_test\",\r\n      \"title\": \"Precision Drill Test\",\r\n      \"kind\": \"training\",\r\n      \"loot_table_id\": \"loot/training/reward\",\r\n      \"participants\": [\r\n        {\r\n          \"id\": \"target/training_dummy\",\r\n          \"name\": \"Training Dummy\",\r\n          \"kind\": \"target\",\r\n          \"entity_prototype_id\": \"entity/training/dummy\",\r\n          \"team\": \"neutral\",\r\n          \"stats\": [\r\n            {\r\n              \"kind\": \"stat\",\r\n              \"id\": \"stat/precision\",\r\n              \"amount\": 1\r\n            }\r\n          ],\r\n          \"resources\": [\r\n            {\r\n              \"kind\": \"resource\",\r\n              \"id\": \"resource/focus\",\r\n              \"amount\": 3\r\n            }\r\n          ],\r\n          \"abilities\": [\r\n            \"ability/focus/shot\"\r\n          ]\r\n        }\r\n      ],\r\n      \"actions\": [\r\n        {\r\n          \"id\": \"action/focus_shot\",\r\n          \"name\": \"Focus Shot\",\r\n          \"ability_id\": \"ability/focus/shot\",\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"status\",\r\n              \"id\": \"status/guarded\",\r\n              \"amount\": 1\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      }
+    ]
+  }
+}

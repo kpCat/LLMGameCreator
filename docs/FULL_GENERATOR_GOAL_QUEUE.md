@@ -18,12 +18,13 @@ capability_bundle_pipeline_inputs_verification passed
 rich_package_assembly_coverage_audit_verification passed
 package_assembly_world_entities_expansion_verification passed
 package_assembly_dialogue_quests_expansion_verification passed
+package_assembly_items_economy_crafting_expansion_verification passed
 ```
 
 Produced for review:
 
 ```text
-package_assembly_items_economy_crafting_expansion_verification required
+package_assembly_combat_progression_expansion_verification required
 ```
 
 Current capabilities:
@@ -48,11 +49,12 @@ Current capabilities:
 - package assembly world/entities mapping contract, real/synthetic consumer proof and compact Goal 025 artifacts;
 - package assembly dialogue/quests mapping contract, real/synthetic consumer proof and compact Goal 026 artifacts;
 - package assembly items/economy/crafting mapping contract, real/synthetic consumer proof and compact Goal 027 artifacts;
+- package assembly combat/progression mapping contract, real/synthetic consumer proof and compact Goal 028 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025 and Goal 026 have been accepted by user prompt. Goal 027 produced the third bounded package assembly expansion for items/economy/crafting and now waits at its manual verification gate.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026 and Goal 027 have been accepted by user prompt. Goal 028 produced the fourth bounded package assembly expansion for combat/progression and now waits at its manual verification gate.
 
 ## Queue Rules
 
@@ -294,13 +296,17 @@ Generate and assemble item/economy/crafting loops with validators and runtime sm
 
 Status:
 
-Produced for review. The gate remains `package_assembly_items_economy_crafting_expansion_verification required`, not passed. Goal 028 and S220 are not started.
+Accepted by user prompt before Goal 028.
 
 ### Goal 028: Package Assembly Expansion 4 - Combat And Progression
 
 Purpose:
 
 Generate and assemble combat/progression definitions with validators and runtime smoke.
+
+Status:
+
+Produced for review. The gate remains `package_assembly_combat_progression_expansion_verification required`, not passed. Goal 029 and S227 are not started.
 
 ### Goal 029: Full Package Assembly Vertical
 
@@ -455,7 +461,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-package_assembly_items_economy_crafting_expansion_verification
+package_assembly_combat_progression_expansion_verification
 ```
 
 Status:

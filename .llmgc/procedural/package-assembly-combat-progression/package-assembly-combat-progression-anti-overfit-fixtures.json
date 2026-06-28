@@ -1,0 +1,9 @@
+{
+  "realConsumerId": "goal028_real_consumer_frontier_survival",
+  "syntheticConsumerId": "alternate_encounter_status_progression",
+  "syntheticConsumerPresent": true,
+  "distinctConsumerIds": true,
+  "distinctPrimaryEncounterIds": true,
+  "distinctPrimaryProgressionIds": true,
+  "passed": true
+}

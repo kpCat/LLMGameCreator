@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "goal_028_final_artifact_scope_report_v1",
+  "scenarioId": "goal-028-final",
+  "passed": true,
+  "allowedPathCount": 18,
+  "violationCount": 0,
+  "notes": [
+    "Only Goal 028 combat/progression contract, service, assembler extension, focused tests, product smoke route, current artifacts and state/routing docs are allowed.",
+    "Historical Goal 020-027 artifact families remain read-only.",
+    "Public GamePackage schema, project files, generator-library, Unity, UI and provider/LLM/Lua paths are out of scope."
+  ]
+}

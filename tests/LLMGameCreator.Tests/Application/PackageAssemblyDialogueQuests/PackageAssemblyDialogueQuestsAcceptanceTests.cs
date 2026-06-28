@@ -179,15 +179,13 @@ public sealed class PackageAssemblyDialogueQuestsAcceptanceTests
     }
 
     [Fact]
-    public void CurrentStateRecordsGoal026AcceptedBeforeGoal027()
+    public void CurrentStatePreservesGoal026AcceptedBeforeLaterPackageAssemblyGoals()
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_027_package_assembly_expansion_3_items_economy_crafting", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(PackageAssemblyItemsEconomyCraftingAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
-        Assert.Contains(PackageAssemblyItemsEconomyCraftingAcceptanceService.PreviousAcceptedGate, root.GetProperty("recommended_next_decision").GetString());
+        Assert.NotEqual(PackageAssemblyItemsEconomyCraftingAcceptanceService.PreviousAcceptedGate, root.GetProperty("gate_status").GetString());
         Assert.Equal(
             "passed_by_user_prompt_before_goal_027",
             root.GetProperty("package_assembly_dialogue_quests_expansion_verification").GetProperty("status").GetString());

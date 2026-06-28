@@ -1,5 +1,4 @@
 using System.Text.Json;
-using LLMGameCreator.Application.Design.PackageAssemblyItemsEconomyCrafting;
 using LLMGameCreator.Application.Design.RichPackageAssemblyCoverageAudit;
 using Xunit;
 
@@ -156,8 +155,8 @@ public sealed class RichPackageAssemblyCoverageAuditAcceptanceTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_027_package_assembly_expansion_3_items_economy_crafting", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(PackageAssemblyItemsEconomyCraftingAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_028_package_assembly_expansion_4_combat_progression", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("package_assembly_combat_progression_expansion_verification", root.GetProperty("gate_status").GetString());
         Assert.Equal("goal_024_rich_package_assembly_coverage_audit", root.GetProperty("goal_024_rich_package_assembly_coverage_audit").GetProperty("slice_id").GetString());
         Assert.Contains(
             "capability_bundle_pipeline_inputs_verification passed",

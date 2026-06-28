@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "package_assembly_combat_progression_mapping_contract_proof_v1",
+  "previousAcceptedGate": "package_assembly_items_economy_crafting_expansion_verification passed",
+  "acceptedInputs": [
+    ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-generator-inputs.json",
+    ".llmgc/procedural/rich-package-assembly-coverage-audit/rich-package-assembly-coverage-audit-report.json",
+    ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-report.json",
+    ".llmgc/procedural/package-assembly-dialogue-quests/package-assembly-dialogue-quests-report.json",
+    ".llmgc/procedural/package-assembly-items-economy-crafting/package-assembly-items-economy-crafting-report.json",
+    "stat_pack_v1",
+    "ability_pack_v1",
+    "status_pack_v1",
+    "progression_pack_v1",
+    "encounter_pack_v1",
+    "combat_pack_v1"
+  ],
+  "existingPackageTargets": [
+    "game.stats",
+    "game.abilities",
+    "game.statuses",
+    "game.progressions",
+    "game.progressions.stages",
+    "game.encounters",
+    "game.encounters.participants",
+    "game.encounters.actions",
+    "generatedContent.encounters",
+    "generatedContent.mechanics",
+    "generatedContent.appliedArtifacts",
+    "generatedContent.preservedArtifacts"
+  ],
+  "outputStatuses": [
+    "mapped_package_field",
+    "mapped_generated_content",
+    "preserved_sidecar",
+    "future_required",
+    "blocked_gap",
+    "rejected_invalid"
+  ],
+  "mappingResults": [
+    {
+      "sourceContractId": "stat_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.stats"
+    },
+    {
+      "sourceContractId": "ability_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.abilities"
+    },
+    {
+      "sourceContractId": "status_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.statuses"
+    },
+    {
+      "sourceContractId": "progression_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.progressions"
+    },
+    {
+      "sourceContractId": "encounter_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.encounters"
+    },
+    {
+      "sourceContractId": "combat_pack_v1",
+      "status": "mapped_generated_content",
+      "target": "generatedContent.mechanics"
+    },
+    {
+      "sourceContractId": "goal023_024_future_required",
+      "status": "future_required",
+      "target": "preserved gaps/sidecars"
+    }
+  ],
+  "realConsumerId": "goal028_real_consumer_frontier_survival",
+  "syntheticConsumerId": "alternate_encounter_status_progression",
+  "realConsumerPassed": true,
+  "syntheticConsumerPassed": true,
+  "nonGoals": [
+    "public GamePackage schema changes",
+    "Unity runtime proof",
+    "full package vertical",
+    "live runtime LLM/RAG/provider/media/Lua",
+    "Goal 029/S227"
+  ]
+}

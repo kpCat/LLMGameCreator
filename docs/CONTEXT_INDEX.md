@@ -87,6 +87,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/PACKAGE_ASSEMBLY_DIALOGUE_QUESTS_CONTRACT_V1.md` | Goal 026 mapping contract for accepted Goal 023/024/025 inputs, `dialogue_pack_v1`, `quest_pack_v1`, existing quest/dialogue/generated-content targets and non-goals. |
 | `docs/GOAL_027_PACKAGE_ASSEMBLY_EXPANSION_3_ITEMS_ECONOMY_CRAFTING.md` | Goal 027 task: package assembly expansion 3 for items/economy/crafting through existing GamePackage schema and Application seams, with real and synthetic consumer proof, invalid/fake/leak matrix, product smoke route `package-assembly-items-economy-crafting` and final stop at `package_assembly_items_economy_crafting_expansion_verification`. |
 | `docs/PACKAGE_ASSEMBLY_ITEMS_ECONOMY_CRAFTING_CONTRACT_V1.md` | Goal 027 mapping contract for accepted Goal 023/024/025/026 inputs, `item_pack_v1`, `resource_pack_v1`, `recipe_pack_v1`, `loot_pack_v1`, `transaction_pack_v1`, `inventory_pack_v1`, `equipment_pack_v1`, existing item/economy/crafting targets and non-goals. |
+| `docs/GOAL_028_PACKAGE_ASSEMBLY_EXPANSION_4_COMBAT_PROGRESSION.md` | Goal 028 task: package assembly expansion 4 for combat/progression through existing GamePackage schema and Application seams, with real and synthetic consumer proof, invalid/fake/leak matrix, product smoke route `package-assembly-combat-progression` and final stop at `package_assembly_combat_progression_expansion_verification`. |
+| `docs/PACKAGE_ASSEMBLY_COMBAT_PROGRESSION_CONTRACT_V1.md` | Goal 028 mapping contract for accepted Goal 023/024/025/026/027 inputs, `stat_pack_v1`, `ability_pack_v1`, `status_pack_v1`, `progression_pack_v1`, `encounter_pack_v1`, `combat_pack_v1`, existing combat/progression targets and non-goals. |
 | `docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md` | Backlog/audit reference for wanted capabilities; not current gate authority and not an implementation plan. |
 | `docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md` | Plan-only package assembly campaign pack for the next 3-5 bounded composite goals; does not start Goal 025 or S199. |
 | `docs/GAME_PROFILE_CONTRACT_V1.md` | Goal 021 profile contract doc for deterministic game-family, presentation, topology, actor model, loop, scale, asset policy and runtime/export target selection. |
@@ -116,13 +118,13 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-package_assembly_items_economy_crafting_expansion_verification
+package_assembly_combat_progression_expansion_verification
 ```
 
 Allowed next sequence:
 
-1. Review Goal 027 evidence in `docs/PACKAGE_ASSEMBLY_ITEMS_ECONOMY_CRAFTING_CONTRACT_V1.md`, `.llmgc/procedural/package-assembly-items-economy-crafting/`, the focused tests, product smoke, check-all and scope guard before marking the gate passed.
-2. Goal 028 and S220 remain not started until `package_assembly_items_economy_crafting_expansion_verification` is accepted.
+1. Review Goal 028 evidence in `docs/PACKAGE_ASSEMBLY_COMBAT_PROGRESSION_CONTRACT_V1.md`, `.llmgc/procedural/package-assembly-combat-progression/`, the focused tests, product smoke, check-all and scope guard before marking the gate passed.
+2. Goal 029 and S227 remain not started until `package_assembly_combat_progression_expansion_verification` is accepted.
 
 Kill criterion:
 
