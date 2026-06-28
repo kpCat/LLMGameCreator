@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "package_assembly_dialogue_quests_mapping_contract_proof_v1",
+  "previousAcceptedGate": "package_assembly_world_entities_expansion_verification passed",
+  "acceptedInputs": [
+    "Goal 023 generator pipeline inputs",
+    "Goal 024 coverage matrix",
+    "Goal 024 gap report",
+    "Goal 024 next-slice plan",
+    "Goal 025 world/entities package assembly artifacts",
+    "dialogue_pack_v1",
+    "quest_pack_v1"
+  ],
+  "existingPackageTargets": [
+    "GamePackageDefinition.Game.Dialogues",
+    "DialogueDefinition.Nodes",
+    "DialogueNodeDefinition.Choices",
+    "DialogueChoiceDefinition.StartQuestId",
+    "DialogueChoiceDefinition.AdvanceQuestId",
+    "GamePackageDefinition.Game.Quests",
+    "QuestDefinition.Objectives",
+    "QuestDefinition.Stages",
+    "GeneratedContent.Dialogues",
+    "GeneratedContent.Quests",
+    "GeneratedContent.AppliedArtifacts",
+    "GeneratedContent.PreservedArtifacts"
+  ],
+  "outputStatuses": [
+    "mapped_package_field",
+    "mapped_generated_content",
+    "preserved_sidecar",
+    "future_required",
+    "blocked_gap",
+    "rejected_invalid"
+  ],
+  "mappingResults": [
+    {
+      "sourceContractId": "quest_pack_v1",
+      "status": "mapped_package_field",
+      "target": "GameDefinition.Quests, QuestDefinition.Objectives and QuestDefinition.Stages"
+    },
+    {
+      "sourceContractId": "dialogue_pack_v1",
+      "status": "mapped_package_field",
+      "target": "GameDefinition.Dialogues, DialogueDefinition.Nodes and DialogueNodeDefinition.Choices"
+    },
+    {
+      "sourceContractId": "dialogue_pack_v1",
+      "status": "mapped_generated_content",
+      "target": "GeneratedContent.Dialogues"
+    },
+    {
+      "sourceContractId": "quest_pack_v1",
+      "status": "mapped_generated_content",
+      "target": "GeneratedContent.Quests"
+    },
+    {
+      "sourceContractId": "quest.graph/v1",
+      "status": "future_required",
+      "target": "quest.graph/v1"
+    },
+    {
+      "sourceContractId": "dialogue.graph/v1",
+      "status": "future_required",
+      "target": "dialogue.graph/v1"
+    },
+    {
+      "sourceContractId": "interaction.conditions/v1",
+      "status": "future_required",
+      "target": "interaction.conditions/v1"
+    }
+  ],
+  "realConsumerId": "goal026_real_consumer_gothic_mystery",
+  "syntheticConsumerId": "rumor_board_tutorial",
+  "realConsumerPassed": true,
+  "syntheticConsumerPassed": true,
+  "nonGoals": [
+    "no public GamePackage schema changes",
+    "no Unity runtime proof",
+    "no item/economy/combat expansion",
+    "no live runtime LLM/RAG/provider/media/Lua"
+  ]
+}

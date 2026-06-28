@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "package_assembly_dialogue_quests_input_fixtures_v1",
+  "realConsumer": {
+    "consumerId": "goal026_real_consumer_gothic_mystery",
+    "sourceProfileId": "game_profile/gothic-mystery-investigation-alpha",
+    "gameFamilyId": "game_family/gothic_mystery",
+    "selectionId": "generator_plan_capability_selection/64aa7f054a697e50",
+    "artifacts": [
+      {
+        "artifactId": "goal026/real/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"Goal 026 Gothic Clue Flow\",\r\n    \"description\": \"Bounded dialogue and quest assembly proof derived from accepted planning inputs.\",\r\n    \"genre\": \"gothic_mystery\",\r\n    \"presentation_mode\": \"map_and_panel_rpg\",\r\n    \"world_topology\": \"region_graph\",\r\n    \"actor_model\": \"single_player_character\",\r\n    \"combat_model\": \"none\",\r\n    \"core_loop\": [\r\n      \"investigate\",\r\n      \"talk\",\r\n      \"follow_clues\"\r\n    ]\r\n  },\r\n  \"pillars\": [\r\n    \"dialogue_quests\",\r\n    \"bounded_package_assembly\"\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/64aa7f054a697e50\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal026/real/02-quests",
+        "artifactKind": "quest_pack_v1",
+        "contentJson": "{\r\n  \"quests\": [\r\n    {\r\n      \"id\": \"gothic_clue_thread\",\r\n      \"title\": \"Trace the Silver Key\",\r\n      \"description\": \"Question the witness and advance the clue thread.\",\r\n      \"objectives\": [\r\n        {\r\n          \"id\": \"speak_witness\",\r\n          \"kind\": \"choose_dialogue\",\r\n          \"target_id\": \"dialogue/gothic/witness\",\r\n          \"required_amount\": 1,\r\n          \"text\": \"Ask the witness about the silver key.\"\r\n        }\r\n      ],\r\n      \"stages\": [\r\n        {\r\n          \"id\": \"opening\",\r\n          \"text\": \"Find a witness.\",\r\n          \"next_stage_id\": \"interrogate\",\r\n          \"objectives\": [\r\n            {\r\n              \"id\": \"start_talk\",\r\n              \"kind\": \"choose_dialogue\",\r\n              \"target_id\": \"dialogue/gothic/witness\",\r\n              \"required_amount\": 1,\r\n              \"text\": \"Start the witness dialogue.\"\r\n            }\r\n          ]\r\n        },\r\n        {\r\n          \"id\": \"interrogate\",\r\n          \"text\": \"Press for the clue.\",\r\n          \"objectives\": [\r\n            {\r\n              \"id\": \"record_clue\",\r\n              \"kind\": \"custom_counter\",\r\n              \"required_amount\": 1,\r\n              \"text\": \"Record the silver-key clue.\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/64aa7f054a697e50\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal026/real/03-dialogues",
+        "artifactKind": "dialogue_pack_v1",
+        "contentJson": "{\r\n  \"dialogues\": [\r\n    {\r\n      \"id\": \"gothic_witness\",\r\n      \"title\": \"Witness at the Gate\",\r\n      \"description\": \"A short clue dialogue.\",\r\n      \"npc_id\": \"npc/gate_witness\",\r\n      \"scene_id\": \"scene/market_gate\",\r\n      \"lines\": [\r\n        \"I saw the silver key vanish by the old gate.\"\r\n      ],\r\n      \"start_node_id\": \"start\",\r\n      \"nodes\": [\r\n        {\r\n          \"id\": \"start\",\r\n          \"speaker_id\": \"npc/gate_witness\",\r\n          \"text\": \"You are asking about the key?\",\r\n          \"choices\": [\r\n            {\r\n              \"id\": \"ask_key\",\r\n              \"text\": \"Tell me what you saw.\",\r\n              \"target_node_id\": \"clue\",\r\n              \"start_quest_id\": \"quest/gothic/clue/thread\"\r\n            }\r\n          ]\r\n        },\r\n        {\r\n          \"id\": \"clue\",\r\n          \"speaker_id\": \"npc/gate_witness\",\r\n          \"text\": \"A courier carried it toward the chapel.\",\r\n          \"choices\": [\r\n            {\r\n              \"id\": \"accept_clue\",\r\n              \"text\": \"I will follow the trail.\",\r\n              \"close_dialogue\": true,\r\n              \"advance_quest_id\": \"quest/gothic/clue/thread\",\r\n              \"set_quest_stage_id\": \"interrogate\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/64aa7f054a697e50\"\r\n  }\r\n}"
+      }
+    ]
+  },
+  "syntheticConsumer": {
+    "consumerId": "rumor_board_tutorial",
+    "sourceProfileId": "synthetic/rumor_board_tutorial",
+    "gameFamilyId": "game_family/synthetic_tutorial",
+    "selectionId": "generator_plan_capability_selection/synthetic_rumor_board_tutorial",
+    "artifacts": [
+      {
+        "artifactId": "goal026/synthetic/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"Rumor Board Tutorial\",\r\n    \"description\": \"Synthetic future-consumer fixture for tutorial quest and rumor-board dialogue anchors.\",\r\n    \"genre\": \"tutorial\",\r\n    \"presentation_mode\": \"map_and_panel_rpg\",\r\n    \"world_topology\": \"finite_settlement\",\r\n    \"actor_model\": \"single_player_character\",\r\n    \"combat_model\": \"none\",\r\n    \"core_loop\": [\r\n      \"read\",\r\n      \"choose\",\r\n      \"learn\"\r\n    ]\r\n  },\r\n  \"pillars\": [\r\n    \"anti_overfit\",\r\n    \"tutorial_dialogue\"\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/synthetic_rumor_board_tutorial\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal026/synthetic/02-quests",
+        "artifactKind": "quest_pack_v1",
+        "contentJson": "{\r\n  \"quests\": [\r\n    {\r\n      \"id\": \"rumor_tutorial\",\r\n      \"title\": \"Read the First Rumor\",\r\n      \"description\": \"Learn how a rumor-board objective can be represented as package quest data.\",\r\n      \"objectives\": [\r\n        {\r\n          \"id\": \"read_board\",\r\n          \"kind\": \"choose_dialogue\",\r\n          \"target_id\": \"dialogue/rumor/board\",\r\n          \"required_amount\": 1,\r\n          \"text\": \"Read the board.\"\r\n        }\r\n      ],\r\n      \"stages\": [\r\n        {\r\n          \"id\": \"read\",\r\n          \"text\": \"Read the first rumor.\",\r\n          \"objectives\": [\r\n            {\r\n              \"id\": \"choose_rumor\",\r\n              \"kind\": \"choose_dialogue\",\r\n              \"target_id\": \"dialogue/rumor/board\",\r\n              \"required_amount\": 1,\r\n              \"text\": \"Choose a rumor.\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/synthetic_rumor_board_tutorial\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal026/synthetic/03-dialogues",
+        "artifactKind": "dialogue_pack_v1",
+        "contentJson": "{\r\n  \"dialogues\": [\r\n    {\r\n      \"id\": \"rumor_board\",\r\n      \"title\": \"Town Rumor Board\",\r\n      \"description\": \"Synthetic tutorial dialogue.\",\r\n      \"npc_id\": \"npc/rumor_board\",\r\n      \"scene_id\": \"scene/city_square\",\r\n      \"lines\": [\r\n        \"A notice points to the old well.\"\r\n      ],\r\n      \"start_node_id\": \"board\",\r\n      \"nodes\": [\r\n        {\r\n          \"id\": \"board\",\r\n          \"speaker_id\": \"npc/rumor_board\",\r\n          \"text\": \"Pinned rumors cover the board.\",\r\n          \"choices\": [\r\n            {\r\n              \"id\": \"read_first\",\r\n              \"text\": \"Read the first rumor.\",\r\n              \"close_dialogue\": true,\r\n              \"start_quest_id\": \"quest/rumor/tutorial\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/synthetic_rumor_board_tutorial\"\r\n  }\r\n}"
+      }
+    ]
+  }
+}

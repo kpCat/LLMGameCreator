@@ -1,0 +1,312 @@
+{
+  "accepted": false,
+  "finalStatus": "package_assembly_dialogue_quests_expansion_verification",
+  "manualGate": "package_assembly_dialogue_quests_expansion_verification",
+  "previousAcceptedGate": "package_assembly_world_entities_expansion_verification passed",
+  "completedSlices": [
+    "S206",
+    "S207",
+    "S208",
+    "S209",
+    "S210",
+    "S211",
+    "S212"
+  ],
+  "productSmokeRoute": "package-assembly-dialogue-quests",
+  "contractProofPassed": true,
+  "goal025EvidenceVerified": true,
+  "goal024EvidenceVerified": true,
+  "goal023EvidenceVerified": true,
+  "realConsumerPassed": true,
+  "syntheticConsumerPassed": true,
+  "antiOverfitProofPassed": true,
+  "dialogueQuestMappingWritten": true,
+  "packageSummaryWritten": true,
+  "packageAssemblyExecuted": true,
+  "productVerticalGate": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "unityBuildExecuted": false,
+  "llmRagProviderMediaLuaExecuted": false,
+  "scopeGuardPassed": true,
+  "mappingContractProofHash": "e5269f675249921bc2145e79a5f77bfe0e803e9867632c34363eb90c0609a20a",
+  "inputFixturesHash": "eb956208e039a37b0f7e9d64ce09b531c7ae24f815852f59e0dd5918ac412216",
+  "assemblyReportHash": "984889d7cb5a576182ed0239a813a08a9dde64553f03b045c34dbce5021263b6",
+  "packageSummaryHash": "b8c8b5098496eb3e12dd7ac301454870ed5f107e55d3a1ef25a3a5eb2508e17c",
+  "antiOverfitFixturesHash": "47b5d0373180be12200019858d325cab572ed7ca676a08126c3070f41984f768",
+  "invalidMatrixHash": "a952319fa0ffeeecd8269e5f4aab4ee3f6f680a72e3a41725930e4ba1c3cd6e7",
+  "scopeReportHash": "73833218a76af53f19c28daba74a4c0bee6ad04420184a50f40764dbf62c088e",
+  "deterministicHash": "b6bba3826b1577d5840bd356e6f23bc044fb1c45b16598fa408fdab4e05d8940",
+  "invalidMatrix": {
+    "scenarioCount": 16,
+    "rejectedCount": 16,
+    "passed": true,
+    "scenarios": [
+      {
+        "scenarioId": "dialogue_choice_references_unknown_quest_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "dialogue_choice_references_unknown_quest_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "dialogue.choice.quest_missing",
+            "target": "quest/missing",
+            "message": "Dialogue choice references a missing quest."
+          }
+        ]
+      },
+      {
+        "scenarioId": "dialogue_choice_references_unknown_target_node",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "dialogue_choice_references_unknown_target_node",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "dialogue.choice.target_missing",
+            "target": "missing",
+            "message": "Dialogue choice target_node_id references a missing node."
+          }
+        ]
+      },
+      {
+        "scenarioId": "dialogue_references_unknown_start_node",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "dialogue_references_unknown_start_node",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "dialogue.start_node_missing",
+            "target": "missing",
+            "message": "Dialogue start_node_id references a missing node."
+          }
+        ]
+      },
+      {
+        "scenarioId": "duplicate_dialogue_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "duplicate_dialogue_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.dialogue.duplicate",
+            "target": "dialogue/duplicate",
+            "message": "Duplicate dialogue id is rejected by Goal 026 preflight validation."
+          }
+        ]
+      },
+      {
+        "scenarioId": "duplicate_quest_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "duplicate_quest_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "dialogue.choice.quest_missing",
+            "target": "quest/gothic/clue/thread",
+            "message": "Dialogue choice references a missing quest."
+          },
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.quest.duplicate",
+            "target": "quest/duplicate",
+            "message": "Duplicate quest id is rejected by Goal 026 preflight validation."
+          }
+        ]
+      },
+      {
+        "scenarioId": "future_required_dialogue_graph_condition_gap_treated_implemented",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "future_required_dialogue_graph_condition_gap_treated_implemented",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.future_required.marked_supported",
+            "target": "dialogue.graph/v1,interaction.conditions/v1,quest.graph/v1",
+            "message": "Future-required dialogue graph, quest graph and condition gaps must not be marked implemented."
+          }
+        ]
+      },
+      {
+        "scenarioId": "goal027_or_s213_started_marker",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "goal027_or_s213_started_marker",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.next_goal.started",
+            "target": "Goal027/S213",
+            "message": "Goal 027 and S213 must not be started."
+          }
+        ]
+      },
+      {
+        "scenarioId": "historical_goal020_025_artifact_mutation",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "historical_goal020_025_artifact_mutation",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "artifact_scope.legacy_artifact.forbidden",
+            "target": ".llmgc/procedural/package-assembly-world-entities",
+            "message": "Historical Goal 020-025 compact artifacts are read-only for Goal 026."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal025_gate",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal025_gate",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.previous_gate.missing",
+            "target": "package_assembly_world_entities_expansion_verification required",
+            "message": "Goal 026 requires the accepted Goal 025 gate."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_goal023_generator_input_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_goal023_generator_input_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.goal023_generator_inputs.missing",
+            "target": ".llmgc/procedural/capability-bundle-pipeline-inputs",
+            "message": "Goal 023 generator input evidence is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_goal025_world_entities_evidence",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_goal025_world_entities_evidence",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.goal025_evidence.missing",
+            "target": ".llmgc/procedural/package-assembly-world-entities",
+            "message": "Goal 025 world/entity evidence is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "output_hardcoded_only_to_gothic_trade_frontier",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "output_hardcoded_only_to_gothic_trade_frontier",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.anti_overfit.hardcoded_single_consumer",
+            "target": "gothic/trade/frontier",
+            "message": "Output must not be hardcoded to one consumer shape."
+          }
+        ]
+      },
+      {
+        "scenarioId": "public_gamepackage_schema_mutation_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "public_gamepackage_schema_mutation_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.claims.public_schema_mutation",
+            "target": "publicGamePackageSchemaChanged",
+            "message": "Goal 026 must not mutate public GamePackage schema."
+          }
+        ]
+      },
+      {
+        "scenarioId": "quest_stage_references_unknown_next_stage",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "quest_stage_references_unknown_next_stage",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "dialogue.choice.quest_missing",
+            "target": "quest/gothic/clue/thread",
+            "message": "Dialogue choice references a missing quest."
+          },
+          {
+            "severity": "error",
+            "code": "quest.stage.next_missing",
+            "target": "stage/missing",
+            "message": "Quest stage next_stage_id references a missing stage."
+          }
+        ]
+      },
+      {
+        "scenarioId": "synthetic_anti_overfit_fixture_missing",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "synthetic_anti_overfit_fixture_missing",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.anti_overfit.synthetic_missing",
+            "target": "rumor_board_tutorial",
+            "message": "A second synthetic consumer fixture is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unity_llm_rag_provider_media_lua_execution_claim",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unity_llm_rag_provider_media_lua_execution_claim",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "package_dialogue_quests.claims.external_execution",
+            "target": "llmRagProviderMediaLuaExecuted",
+            "message": "Goal 026 must not claim Unity, LLM, RAG, provider, media or Lua execution."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "info",
+        "code": "package_dialogue_quests.invalid_matrix_rejected",
+        "target": "invalid_matrix",
+        "message": "Invalid/fake/leak scenarios reject through Goal 023/024/025 evidence, narrative validation, anti-overfit checks or scope guard diagnostics."
+      }
+    ]
+  },
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "package_dialogue_quests.boundary",
+      "target": "execution_boundary",
+      "message": "Goal 026 executes bounded in-memory package assembly only; no Unity, LLM, RAG, provider, media or Lua execution is invoked."
+    },
+    {
+      "severity": "info",
+      "code": "package_dialogue_quests.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios reject through Goal 023/024/025 evidence, narrative validation, anti-overfit checks or scope guard diagnostics."
+    },
+    {
+      "severity": "info",
+      "code": "package_dialogue_quests.previous_gate_recorded",
+      "target": "package_assembly_world_entities_expansion_verification passed",
+      "message": "User-confirmed Goal 025 package assembly world/entities verification is recorded as passed."
+    }
+  ]
+}

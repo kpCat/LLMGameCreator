@@ -471,12 +471,45 @@ public sealed class GeneratorPlanGamePackageAssembler
             return;
         }
 
+        var index = 0;
         foreach (var dialogue in dialogues.EnumerateArray())
         {
+            var sourceId = GetString(dialogue, "id");
+            var title = GetString(dialogue, "title");
+            var dialogueId = NormalizeDialogueId(sourceId, index);
+            var nodes = BuildDialogueNodes(dialogue);
+            var startNodeId = FirstNonEmpty(GetString(dialogue, "start_node_id"), GetString(dialogue, "startNodeId"), nodes.FirstOrDefault()?.Id ?? string.Empty);
+            if (nodes.Count == 0)
+            {
+                nodes.Add(new DialogueNodeDefinition
+                {
+                    Id = "start",
+                    Text = FirstNonEmpty(GetString(dialogue, "description"), title, $"Dialogue {index + 1}"),
+                    Choices = [new DialogueChoiceDefinition { Id = "close", Text = "Continue.", CloseDialogue = true }]
+                });
+                startNodeId = "start";
+            }
+
+            if (package.Game.Dialogues.All(candidate => !string.Equals(candidate.Id, dialogueId, StringComparison.OrdinalIgnoreCase)))
+            {
+                package.Game.Dialogues.Add(new DialogueDefinition
+                {
+                    Id = dialogueId,
+                    Title = string.IsNullOrWhiteSpace(title) ? $"Draft Dialogue {index + 1}" : title.Trim(),
+                    StartNodeId = string.IsNullOrWhiteSpace(startNodeId) ? nodes[0].Id : startNodeId.Trim(),
+                    Nodes = nodes,
+                    Metadata =
+                    {
+                        ["source"] = "game_package_assembly",
+                        ["source_dialogue_id"] = sourceId.Trim()
+                    }
+                });
+            }
+
             var mapped = new GeneratedDialogueDefinition
             {
-                SourceId = GetString(dialogue, "id").Trim(),
-                Title = GetString(dialogue, "title").Trim(),
+                SourceId = sourceId.Trim(),
+                Title = title.Trim(),
                 Description = GetString(dialogue, "description").Trim(),
                 NpcId = GetString(dialogue, "npc_id").Trim(),
                 SceneId = GetString(dialogue, "scene_id").Trim(),
@@ -484,6 +517,7 @@ public sealed class GeneratorPlanGamePackageAssembler
             };
             package.GeneratedContent.Dialogues.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
             package.GeneratedContent.Dialogues.Add(mapped);
+            index++;
         }
     }
 
@@ -537,6 +571,7 @@ public sealed class GeneratorPlanGamePackageAssembler
                 Kind = "quest",
                 AutoStart = index == 0,
                 Objectives = BuildQuestObjectives(quest),
+                Stages = BuildQuestStages(quest),
                 Metadata =
                 {
                     ["source"] = "game_package_assembly"
@@ -601,13 +636,103 @@ public sealed class GeneratorPlanGamePackageAssembler
         var result = new QuestObjectiveDefinition
         {
             Id = "objective/" + NormalizeIdSegment(string.IsNullOrWhiteSpace(source) ? index.ToString() : source),
-            Kind = "custom_counter",
-            RequiredAmount = 1
+            Kind = objective.ValueKind == JsonValueKind.Object ? FirstNonEmpty(GetString(objective, "kind"), "custom_counter") : "custom_counter",
+            TargetId = objective.ValueKind == JsonValueKind.Object ? FirstNonEmpty(GetString(objective, "target_id"), GetString(objective, "targetId")) : string.Empty,
+            RequiredAmount = objective.ValueKind == JsonValueKind.Object ? Math.Max(1, GetInt(objective, "required_amount", GetInt(objective, "requiredAmount", 1))) : 1
         };
 
         if (!string.IsNullOrWhiteSpace(text))
         {
             result.Metadata["text"] = text.Trim();
+        }
+
+        return result;
+    }
+
+    private static List<QuestStageDefinition> BuildQuestStages(JsonElement quest)
+    {
+        var result = new List<QuestStageDefinition>();
+        if (!TryGetProperty(quest, "stages", out var stages) || stages.ValueKind != JsonValueKind.Array)
+        {
+            return result;
+        }
+
+        var index = 0;
+        foreach (var stage in stages.EnumerateArray())
+        {
+            var source = FirstNonEmpty(GetString(stage, "id"), GetString(stage, "title"), index.ToString());
+            var stageObjectives = new List<QuestObjectiveDefinition>();
+            if (TryGetProperty(stage, "objectives", out var objectives) && objectives.ValueKind == JsonValueKind.Array)
+            {
+                var objectiveIndex = 0;
+                foreach (var objective in objectives.EnumerateArray())
+                {
+                    stageObjectives.Add(BuildQuestObjective(objective, objectiveIndex));
+                    objectiveIndex++;
+                }
+            }
+
+            result.Add(new QuestStageDefinition
+            {
+                Id = "stage/" + NormalizeIdSegment(source),
+                Text = FirstNonEmpty(GetString(stage, "text"), GetString(stage, "title"), $"Stage {index + 1}"),
+                NextStageId = NormalizeNullableStageId(FirstNonEmpty(GetString(stage, "next_stage_id"), GetString(stage, "nextStageId"))),
+                Objectives = stageObjectives
+            });
+            index++;
+        }
+
+        return result;
+    }
+
+    private static List<DialogueNodeDefinition> BuildDialogueNodes(JsonElement dialogue)
+    {
+        var result = new List<DialogueNodeDefinition>();
+        if (!TryGetProperty(dialogue, "nodes", out var nodes) || nodes.ValueKind != JsonValueKind.Array)
+        {
+            return result;
+        }
+
+        var index = 0;
+        foreach (var node in nodes.EnumerateArray())
+        {
+            var nodeId = FirstNonEmpty(GetString(node, "id"), index == 0 ? "start" : $"node/{index}");
+            result.Add(new DialogueNodeDefinition
+            {
+                Id = nodeId.Trim(),
+                SpeakerId = FirstNonEmpty(GetString(node, "speaker_id"), GetString(node, "speakerId")),
+                Expression = FirstNonEmpty(GetString(node, "expression"), "neutral"),
+                Text = FirstNonEmpty(GetString(node, "text"), $"Dialogue node {index + 1}"),
+                Choices = BuildDialogueChoices(node)
+            });
+            index++;
+        }
+
+        return result;
+    }
+
+    private static List<DialogueChoiceDefinition> BuildDialogueChoices(JsonElement node)
+    {
+        var result = new List<DialogueChoiceDefinition>();
+        if (!TryGetProperty(node, "choices", out var choices) || choices.ValueKind != JsonValueKind.Array)
+        {
+            return result;
+        }
+
+        var index = 0;
+        foreach (var choice in choices.EnumerateArray())
+        {
+            result.Add(new DialogueChoiceDefinition
+            {
+                Id = FirstNonEmpty(GetString(choice, "id"), $"choice/{index}"),
+                Text = FirstNonEmpty(GetString(choice, "text"), "Continue."),
+                TargetNodeId = NormalizeNullable(FirstNonEmpty(GetString(choice, "target_node_id"), GetString(choice, "targetNodeId"))),
+                CloseDialogue = GetBool(choice, "close_dialogue", GetBool(choice, "closeDialogue", false)),
+                StartQuestId = NormalizeNullable(FirstNonEmpty(GetString(choice, "start_quest_id"), GetString(choice, "startQuestId"))),
+                AdvanceQuestId = NormalizeNullable(FirstNonEmpty(GetString(choice, "advance_quest_id"), GetString(choice, "advanceQuestId"))),
+                SetQuestStageId = NormalizeNullableStageId(FirstNonEmpty(GetString(choice, "set_quest_stage_id"), GetString(choice, "setQuestStageId")))
+            });
+            index++;
         }
 
         return result;
@@ -888,6 +1013,30 @@ public sealed class GeneratorPlanGamePackageAssembler
             : "entity/" + normalized;
     }
 
+    private static string NormalizeDialogueId(string sourceId, int index)
+    {
+        var normalized = NormalizeIdSegment(string.IsNullOrWhiteSpace(sourceId) ? index.ToString() : sourceId);
+        return normalized.StartsWith("dialogue/", StringComparison.OrdinalIgnoreCase)
+            ? normalized
+            : "dialogue/" + normalized;
+    }
+
+    private static string? NormalizeNullable(string value) =>
+        string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+
+    private static string? NormalizeNullableStageId(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return null;
+        }
+
+        var normalized = NormalizeIdSegment(value);
+        return normalized.StartsWith("stage/", StringComparison.OrdinalIgnoreCase)
+            ? normalized
+            : "stage/" + normalized;
+    }
+
     private static string NormalizeIdSegment(string value)
     {
         var normalized = GeneratorPlanGamePackageAssemblyPolicy.NormalizeSegment(value).Replace('_', '/');
@@ -904,6 +1053,20 @@ public sealed class GeneratorPlanGamePackageAssembler
         return TryGetProperty(element, propertyName, out var property) && property.ValueKind == JsonValueKind.String
             ? property.GetString() ?? string.Empty
             : string.Empty;
+    }
+
+    private static int GetInt(JsonElement element, string propertyName, int fallback)
+    {
+        return TryGetProperty(element, propertyName, out var property) && property.ValueKind == JsonValueKind.Number
+            ? property.GetInt32()
+            : fallback;
+    }
+
+    private static bool GetBool(JsonElement element, string propertyName, bool fallback)
+    {
+        return TryGetProperty(element, propertyName, out var property) && property.ValueKind is JsonValueKind.True or JsonValueKind.False
+            ? property.GetBoolean()
+            : fallback;
     }
 
     private static string FirstNonEmpty(params string[] values)

@@ -1,0 +1,9 @@
+{
+  "realConsumerId": "goal026_real_consumer_gothic_mystery",
+  "syntheticConsumerId": "rumor_board_tutorial",
+  "syntheticConsumerPresent": true,
+  "distinctConsumerIds": true,
+  "distinctQuestIds": true,
+  "distinctDialogueIds": true,
+  "passed": true
+}

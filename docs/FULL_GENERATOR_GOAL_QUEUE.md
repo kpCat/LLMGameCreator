@@ -16,12 +16,13 @@ generated_game_profile_contract_verification passed
 development_complexity_stabilization_verification passed
 capability_bundle_pipeline_inputs_verification passed
 rich_package_assembly_coverage_audit_verification passed
+package_assembly_world_entities_expansion_verification passed
 ```
 
 Produced for review:
 
 ```text
-package_assembly_world_entities_expansion_verification required
+package_assembly_dialogue_quests_expansion_verification required
 ```
 
 Current capabilities:
@@ -44,11 +45,12 @@ Current capabilities:
 - rich package assembly coverage audit matrix and next package-expansion candidate plan;
 - modular contract goal policy, feature backlog audit and package assembly campaign pack;
 - package assembly world/entities mapping contract, real/synthetic consumer proof and compact Goal 025 artifacts;
+- package assembly dialogue/quests mapping contract, real/synthetic consumer proof and compact Goal 026 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024 and the modular contract goal policy adoption gate have been accepted by user prompt. Goal 025 produced the first bounded package assembly expansion for world/entities and now waits at its manual verification gate.
+Goal 024, the modular contract goal policy adoption gate and Goal 025 have been accepted by user prompt. Goal 026 produced the second bounded package assembly expansion for dialogue/quests and now waits at its manual verification gate.
 
 ## Queue Rules
 
@@ -270,13 +272,17 @@ Generate and assemble richer world/entity data for at least one selected game fa
 
 Status:
 
-Produced for review. The gate remains `package_assembly_world_entities_expansion_verification required`, not passed. Goal 026 and S206 are not started.
+Accepted by user prompt before Goal 026.
 
 ### Goal 026: Package Assembly Expansion 2 - Dialogue And Quests
 
 Purpose:
 
 Generate and assemble richer dialogue/quest stages/objectives with validation and runtime smoke.
+
+Status:
+
+Produced for review. The gate remains `package_assembly_dialogue_quests_expansion_verification required`, not passed. Goal 027 and S213 are not started.
 
 ### Goal 027: Package Assembly Expansion 3 - Items, Economy And Crafting
 
@@ -443,7 +449,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-package_assembly_world_entities_expansion_verification
+package_assembly_dialogue_quests_expansion_verification
 ```
 
 Status:

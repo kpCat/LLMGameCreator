@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "package_assembly_dialogue_quests_assembly_report_v1",
+  "productSmokeRoute": "package-assembly-dialogue-quests",
+  "consumers": [
+    {
+      "consumerId": "goal026_real_consumer_gothic_mystery",
+      "sourceProfileId": "game_profile/gothic-mystery-investigation-alpha",
+      "gameFamilyId": "game_family/gothic_mystery",
+      "selectionId": "generator_plan_capability_selection/64aa7f054a697e50",
+      "passed": true,
+      "primaryQuestId": "quest/gothic/clue/thread",
+      "primaryDialogueId": "dialogue/gothic/witness",
+      "questCount": 1,
+      "questStageCount": 2,
+      "questObjectiveCount": 3,
+      "dialogueCount": 1,
+      "dialogueNodeCount": 2,
+      "dialogueChoiceCount": 2,
+      "questLinkedChoiceCount": 2,
+      "generatedQuestCount": 1,
+      "generatedDialogueCount": 1,
+      "appliedArtifactCount": 3,
+      "preservedArtifactCount": 0,
+      "validationIssueCount": 0,
+      "packageHash": "a21c33840906291bc0883fe23bfad2be9edd5b98a7bc1ef81c92bff92b404dda",
+      "mappingTargets": [
+        "game.quests",
+        "generatedContent.dialogues",
+        "manifest"
+      ],
+      "diagnostics": []
+    },
+    {
+      "consumerId": "rumor_board_tutorial",
+      "sourceProfileId": "synthetic/rumor_board_tutorial",
+      "gameFamilyId": "game_family/synthetic_tutorial",
+      "selectionId": "generator_plan_capability_selection/synthetic_rumor_board_tutorial",
+      "passed": true,
+      "primaryQuestId": "quest/rumor/tutorial",
+      "primaryDialogueId": "dialogue/rumor/board",
+      "questCount": 1,
+      "questStageCount": 1,
+      "questObjectiveCount": 2,
+      "dialogueCount": 1,
+      "dialogueNodeCount": 1,
+      "dialogueChoiceCount": 1,
+      "questLinkedChoiceCount": 1,
+      "generatedQuestCount": 1,
+      "generatedDialogueCount": 1,
+      "appliedArtifactCount": 3,
+      "preservedArtifactCount": 0,
+      "validationIssueCount": 0,
+      "packageHash": "28814f5cd81eae8be8c2c90182163c43fece10aaa08a33fd65e78581398d1d4e",
+      "mappingTargets": [
+        "game.quests",
+        "generatedContent.dialogues",
+        "manifest"
+      ],
+      "diagnostics": []
+    }
+  ],
+  "diagnostics": []
+}

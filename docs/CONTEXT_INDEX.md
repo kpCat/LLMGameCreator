@@ -83,6 +83,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/MODULAR_CONTRACT_GOAL_POLICY.md` | Active process policy: Contract / Module / Integration / Proof are internal phases of bounded composite goals by default; product vertical gates are rare and intentional. |
 | `docs/GOAL_025_PACKAGE_ASSEMBLY_EXPANSION_1_WORLD_AND_ENTITIES.md` | Goal 025 task: package assembly expansion 1 for world/entities through existing GamePackage schema and Application seams, with real and synthetic consumer proof, invalid/fake/leak matrix, product smoke route `package-assembly-world-entities` and final stop at `package_assembly_world_entities_expansion_verification`. |
 | `docs/PACKAGE_ASSEMBLY_WORLD_ENTITIES_CONTRACT_V1.md` | Goal 025 mapping contract for accepted Goal 023/024 planning inputs, `scene_pack_v1`, `region_pack_v1`, `entity_pack_v1`, `npc_pack_v1`, existing map/entity/generated-content targets and non-goals. |
+| `docs/GOAL_026_PACKAGE_ASSEMBLY_EXPANSION_2_DIALOGUE_AND_QUESTS.md` | Goal 026 task: package assembly expansion 2 for dialogue/quests through existing GamePackage schema and Application seams, with real and synthetic consumer proof, invalid/fake/leak matrix, product smoke route `package-assembly-dialogue-quests` and final stop at `package_assembly_dialogue_quests_expansion_verification`. |
+| `docs/PACKAGE_ASSEMBLY_DIALOGUE_QUESTS_CONTRACT_V1.md` | Goal 026 mapping contract for accepted Goal 023/024/025 inputs, `dialogue_pack_v1`, `quest_pack_v1`, existing quest/dialogue/generated-content targets and non-goals. |
 | `docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md` | Backlog/audit reference for wanted capabilities; not current gate authority and not an implementation plan. |
 | `docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md` | Plan-only package assembly campaign pack for the next 3-5 bounded composite goals; does not start Goal 025 or S199. |
 | `docs/GAME_PROFILE_CONTRACT_V1.md` | Goal 021 profile contract doc for deterministic game-family, presentation, topology, actor model, loop, scale, asset policy and runtime/export target selection. |
@@ -112,13 +114,13 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-package_assembly_world_entities_expansion_verification
+package_assembly_dialogue_quests_expansion_verification
 ```
 
 Allowed next sequence:
 
-1. Review Goal 025 evidence in `docs/PACKAGE_ASSEMBLY_WORLD_ENTITIES_CONTRACT_V1.md`, `.llmgc/procedural/package-assembly-world-entities/`, the focused tests, product smoke, check-all and scope guard before marking the gate passed.
-2. Goal 026 and S206 remain not started until `package_assembly_world_entities_expansion_verification` is accepted.
+1. Review Goal 026 evidence in `docs/PACKAGE_ASSEMBLY_DIALOGUE_QUESTS_CONTRACT_V1.md`, `.llmgc/procedural/package-assembly-dialogue-quests/`, the focused tests, product smoke, check-all and scope guard before marking the gate passed.
+2. Goal 027 and S213 remain not started until `package_assembly_dialogue_quests_expansion_verification` is accepted.
 
 Kill criterion:
 

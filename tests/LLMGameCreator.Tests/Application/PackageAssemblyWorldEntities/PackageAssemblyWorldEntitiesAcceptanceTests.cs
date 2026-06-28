@@ -141,15 +141,16 @@ public sealed class PackageAssemblyWorldEntitiesAcceptanceTests
     }
 
     [Fact]
-    public void CurrentStateRecordsModularGateAcceptedBeforeGoal025()
+    public void CurrentStateKeepsGoal025RecordAfterLaterGoalHandoff()
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_025_package_assembly_expansion_1_world_and_entities", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(PackageAssemblyWorldEntitiesAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
-        Assert.Contains(PackageAssemblyWorldEntitiesAcceptanceService.PreviousAcceptedGate, root.GetProperty("recommended_next_decision").GetString());
+        Assert.Equal("goal_026_package_assembly_expansion_2_dialogue_and_quests", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("package_assembly_dialogue_quests_expansion_verification", root.GetProperty("gate_status").GetString());
+        Assert.Equal("passed_by_user_prompt_before_goal_026", root.GetProperty(PackageAssemblyWorldEntitiesAcceptanceService.FinalGate).GetProperty("status").GetString());
+        Assert.Contains(PackageAssemblyWorldEntitiesAcceptanceService.FinalGate + " passed", root.GetProperty("recommended_next_decision").GetString());
     }
 
     private static GeneratorPlanApprovedArtifact Artifact(string id, string kind, string contentJson) =>
