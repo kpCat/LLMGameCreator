@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "package_assembly_items_economy_crafting_mapping_contract_proof_v1",
+  "previousAcceptedGate": "package_assembly_dialogue_quests_expansion_verification passed",
+  "acceptedInputs": [
+    ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-generator-inputs.json",
+    ".llmgc/procedural/rich-package-assembly-coverage-audit/rich-package-assembly-coverage-audit-report.json",
+    ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-report.json",
+    ".llmgc/procedural/package-assembly-dialogue-quests/package-assembly-dialogue-quests-report.json",
+    "item_pack_v1",
+    "resource_pack_v1",
+    "recipe_pack_v1",
+    "loot_pack_v1",
+    "transaction_pack_v1",
+    "inventory_pack_v1",
+    "equipment_pack_v1"
+  ],
+  "existingPackageTargets": [
+    "game.items",
+    "game.resources",
+    "game.recipes",
+    "game.lootTables",
+    "game.transactions",
+    "game.inventories",
+    "game.equipmentSlots",
+    "generatedContent.items",
+    "generatedContent.appliedArtifacts",
+    "generatedContent.preservedArtifacts"
+  ],
+  "outputStatuses": [
+    "mapped_package_field",
+    "mapped_generated_content",
+    "preserved_sidecar",
+    "future_required",
+    "blocked_gap",
+    "rejected_invalid"
+  ],
+  "mappingResults": [
+    {
+      "sourceContractId": "item_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.items"
+    },
+    {
+      "sourceContractId": "resource_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.resources"
+    },
+    {
+      "sourceContractId": "recipe_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.recipes"
+    },
+    {
+      "sourceContractId": "loot_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.lootTables"
+    },
+    {
+      "sourceContractId": "transaction_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.transactions"
+    },
+    {
+      "sourceContractId": "inventory_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.inventories"
+    },
+    {
+      "sourceContractId": "equipment_pack_v1",
+      "status": "mapped_package_field",
+      "target": "game.equipmentSlots"
+    },
+    {
+      "sourceContractId": "future_vendor_ai_and_economy_simulation",
+      "status": "future_required",
+      "target": "generatedContent.preservedArtifacts"
+    }
+  ],
+  "realConsumerId": "goal027_real_consumer_trade_caravan",
+  "syntheticConsumerId": "vendor_crafting_transaction",
+  "realConsumerPassed": true,
+  "syntheticConsumerPassed": true,
+  "nonGoals": [
+    "public GamePackage schema changes",
+    "Unity runtime proof",
+    "combat/progression expansion",
+    "live runtime LLM/RAG/provider/media/Lua",
+    "Goal 028 or S220"
+  ]
+}

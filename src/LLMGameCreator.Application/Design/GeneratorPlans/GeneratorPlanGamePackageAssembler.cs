@@ -68,7 +68,38 @@ public sealed class GeneratorPlanGamePackageAssembler
                 case "item_pack_v1":
                     MapItemPack(package, document.RootElement);
                     RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
-                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "generatedContent.items"));
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.items"));
+                    break;
+                case "resource_pack_v1":
+                    MapResourcePack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.resources"));
+                    break;
+                case "recipe_pack_v1":
+                    MapRecipePack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.recipes"));
+                    break;
+                case "loot_pack_v1":
+                    MapLootPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.lootTables"));
+                    break;
+                case "transaction_pack_v1":
+                case "vendor_pack_v1":
+                    MapTransactionPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.transactions"));
+                    break;
+                case "inventory_pack_v1":
+                    MapInventoryPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.inventories"));
+                    break;
+                case "equipment_pack_v1":
+                    MapEquipmentPack(package, document.RootElement);
+                    RecordAppliedArtifact(package, artifact, document.RootElement, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+                    mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, "game.equipmentSlots"));
                     break;
                 case "dialogue_pack_v1":
                     MapDialoguePack(package, document.RootElement);
@@ -461,6 +492,219 @@ public sealed class GeneratorPlanGamePackageAssembler
             };
             package.GeneratedContent.Items.RemoveAll(candidate => string.Equals(candidate.SourceId, mapped.SourceId, StringComparison.OrdinalIgnoreCase));
             package.GeneratedContent.Items.Add(mapped);
+
+            var packageItemId = NormalizeItemId(FirstNonEmpty(GetString(item, "package_item_id"), GetString(item, "packageItemId"), mapped.SourceId));
+            if (package.Game.Items.All(candidate => !string.Equals(candidate.Id, packageItemId, StringComparison.OrdinalIgnoreCase)))
+            {
+                package.Game.Items.Add(new ItemDefinition
+                {
+                    Id = packageItemId,
+                    Name = FirstNonEmpty(mapped.Name, ToTitle(packageItemId)),
+                    Description = mapped.Description,
+                    Kind = FirstNonEmpty(GetString(item, "kind"), "generic"),
+                    Rarity = NormalizeNullable(GetString(item, "rarity")),
+                    MaxStack = GetNullableInt(item, "max_stack", "maxStack"),
+                    Value = GetNullableDouble(item, "value"),
+                    Weight = GetNullableDouble(item, "weight"),
+                    QuestItem = GetNullableBool(item, "quest_item", "questItem"),
+                    Unique = GetNullableBool(item, "unique"),
+                    Tags = ReadStringArray(item, "tags"),
+                    Metadata =
+                    {
+                        ["source"] = "item_pack_v1",
+                        ["source_item_id"] = mapped.SourceId
+                    }
+                });
+            }
+        }
+    }
+
+    private static void MapResourcePack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "resources", out var resources) || resources.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var resource in resources.EnumerateArray())
+        {
+            var id = NormalizeResourceId(GetString(resource, "id"));
+            if (package.Game.Resources.Any(candidate => string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            package.Game.Resources.Add(new ResourceDefinition
+            {
+                Id = id,
+                Name = FirstNonEmpty(GetString(resource, "name"), ToTitle(id)),
+                Kind = FirstNonEmpty(GetString(resource, "kind"), "abstract"),
+                Description = GetString(resource, "description").Trim(),
+                DefaultValue = GetNullableDouble(resource, "default_value", "defaultValue"),
+                MinValue = GetNullableDouble(resource, "min_value", "minValue"),
+                MaxValue = GetNullableDouble(resource, "max_value", "maxValue"),
+                RegenPerTick = GetNullableDouble(resource, "regen_per_tick", "regenPerTick"),
+                Tags = ReadStringArray(resource, "tags"),
+                Metadata = { ["source"] = "resource_pack_v1" }
+            });
+        }
+    }
+
+    private static void MapRecipePack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "recipes", out var recipes) || recipes.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var recipe in recipes.EnumerateArray())
+        {
+            var id = NormalizeRecipeId(GetString(recipe, "id"));
+            if (package.Game.Recipes.Any(candidate => string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            package.Game.Recipes.Add(new RecipeDefinition
+            {
+                Id = id,
+                Name = FirstNonEmpty(GetString(recipe, "name"), GetString(recipe, "title"), ToTitle(id)),
+                Category = FirstNonEmpty(GetString(recipe, "category"), "crafting"),
+                StationId = NormalizeNullable(FirstNonEmpty(GetString(recipe, "station_id"), GetString(recipe, "stationId"))),
+                Inputs = ReadCosts(recipe, "inputs"),
+                Costs = ReadCosts(recipe, "costs"),
+                Outputs = ReadOutputs(recipe, "outputs"),
+                FailureOutputs = ReadOutputs(recipe, "failure_outputs", "failureOutputs"),
+                Duration = GetNullableDouble(recipe, "duration"),
+                Cooldown = GetNullableDouble(recipe, "cooldown"),
+                SuccessChance = GetNullableDouble(recipe, "success_chance", "successChance"),
+                Tags = ReadStringArray(recipe, "tags"),
+                Metadata = { ["source"] = "recipe_pack_v1" }
+            });
+        }
+    }
+
+    private static void MapLootPack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "loot_tables", out var lootTables) && !TryGetProperty(root, "lootTables", out lootTables))
+        {
+            return;
+        }
+
+        if (lootTables.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var loot in lootTables.EnumerateArray())
+        {
+            var id = NormalizeLootTableId(GetString(loot, "id"));
+            if (package.Game.LootTables.Any(candidate => string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            package.Game.LootTables.Add(new LootTableDefinition
+            {
+                Id = id,
+                Name = FirstNonEmpty(GetString(loot, "name"), ToTitle(id)),
+                Kind = FirstNonEmpty(GetString(loot, "kind"), "common"),
+                Entries = ReadLootEntries(loot),
+                Tags = ReadStringArray(loot, "tags"),
+                Metadata = { ["source"] = "loot_pack_v1" }
+            });
+        }
+    }
+
+    private static void MapTransactionPack(GamePackageDefinition package, JsonElement root)
+    {
+        var property = TryGetProperty(root, "transactions", out var transactions) ? transactions :
+            TryGetProperty(root, "vendors", out var vendors) ? vendors : default;
+        if (property.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var transaction in property.EnumerateArray())
+        {
+            var id = NormalizeTransactionId(GetString(transaction, "id"));
+            if (package.Game.Transactions.Any(candidate => string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            package.Game.Transactions.Add(new TransactionDefinition
+            {
+                Id = id,
+                Name = FirstNonEmpty(GetString(transaction, "name"), GetString(transaction, "title"), ToTitle(id)),
+                Kind = FirstNonEmpty(GetString(transaction, "kind"), "shop"),
+                VendorId = NormalizeNullable(FirstNonEmpty(GetString(transaction, "vendor_id"), GetString(transaction, "vendorId"))),
+                Costs = ReadCosts(transaction, "costs"),
+                Outputs = ReadOutputs(transaction, "outputs"),
+                StockLootTableId = NormalizeNullable(FirstNonEmpty(GetString(transaction, "stock_loot_table_id"), GetString(transaction, "stockLootTableId"))),
+                RestockRule = NormalizeNullable(FirstNonEmpty(GetString(transaction, "restock_rule"), GetString(transaction, "restockRule"))),
+                Tags = ReadStringArray(transaction, "tags"),
+                Metadata = { ["source"] = "transaction_pack_v1" }
+            });
+        }
+    }
+
+    private static void MapInventoryPack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "inventories", out var inventories) || inventories.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var inventory in inventories.EnumerateArray())
+        {
+            var id = NormalizeInventoryId(GetString(inventory, "id"));
+            if (package.Game.Inventories.Any(candidate => string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            package.Game.Inventories.Add(new InventoryDefinition
+            {
+                Id = id,
+                OwnerKind = FirstNonEmpty(GetString(inventory, "owner_kind"), GetString(inventory, "ownerKind"), "container"),
+                OwnerId = NormalizeNullable(FirstNonEmpty(GetString(inventory, "owner_id"), GetString(inventory, "ownerId"))),
+                Slots = Math.Max(0, GetInt(inventory, "slots", 0)),
+                Stacks = ReadItemStacks(inventory),
+                Tags = ReadStringArray(inventory, "tags"),
+                Metadata = { ["source"] = "inventory_pack_v1" }
+            });
+        }
+    }
+
+    private static void MapEquipmentPack(GamePackageDefinition package, JsonElement root)
+    {
+        if (!TryGetProperty(root, "equipment_slots", out var equipmentSlots) && !TryGetProperty(root, "equipmentSlots", out equipmentSlots))
+        {
+            return;
+        }
+
+        if (equipmentSlots.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var slot in equipmentSlots.EnumerateArray())
+        {
+            var id = NormalizeEquipmentSlotId(GetString(slot, "id"));
+            if (package.Game.EquipmentSlots.Any(candidate => string.Equals(candidate.Id, id, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            package.Game.EquipmentSlots.Add(new EquipmentSlotDefinition
+            {
+                Id = id,
+                Name = FirstNonEmpty(GetString(slot, "name"), ToTitle(id)),
+                AllowedTags = ReadStringArray(slot, "allowed_tags").Count > 0 ? ReadStringArray(slot, "allowed_tags") : ReadStringArray(slot, "allowedTags"),
+                AllowedKinds = ReadStringArray(slot, "allowed_kinds").Count > 0 ? ReadStringArray(slot, "allowed_kinds") : ReadStringArray(slot, "allowedKinds"),
+                Metadata = { ["source"] = "equipment_pack_v1" }
+            });
         }
     }
 
@@ -733,6 +977,100 @@ public sealed class GeneratorPlanGamePackageAssembler
                 SetQuestStageId = NormalizeNullableStageId(FirstNonEmpty(GetString(choice, "set_quest_stage_id"), GetString(choice, "setQuestStageId")))
             });
             index++;
+        }
+
+        return result;
+    }
+
+    private static List<CostDefinition> ReadCosts(JsonElement element, params string[] propertyNames)
+    {
+        var result = new List<CostDefinition>();
+        if (!TryGetFirstArray(element, propertyNames, out var costs))
+        {
+            return result;
+        }
+
+        foreach (var cost in costs.EnumerateArray())
+        {
+            result.Add(new CostDefinition
+            {
+                Kind = FirstNonEmpty(GetString(cost, "kind"), "item"),
+                Id = FirstNonEmpty(GetString(cost, "id"), GetString(cost, "item_id"), GetString(cost, "resource_id")),
+                Amount = GetDouble(cost, "amount", 1)
+            });
+        }
+
+        return result;
+    }
+
+    private static List<OutputDefinition> ReadOutputs(JsonElement element, params string[] propertyNames)
+    {
+        var result = new List<OutputDefinition>();
+        if (!TryGetFirstArray(element, propertyNames, out var outputs))
+        {
+            return result;
+        }
+
+        foreach (var output in outputs.EnumerateArray())
+        {
+            result.Add(new OutputDefinition
+            {
+                Kind = FirstNonEmpty(GetString(output, "kind"), "item"),
+                Id = FirstNonEmpty(GetString(output, "id"), GetString(output, "item_id"), GetString(output, "resource_id"), GetString(output, "loot_table_id")),
+                Amount = GetDouble(output, "amount", 1)
+            });
+        }
+
+        return result;
+    }
+
+    private static List<LootEntryDefinition> ReadLootEntries(JsonElement loot)
+    {
+        var result = new List<LootEntryDefinition>();
+        if (!TryGetProperty(loot, "entries", out var entries) || entries.ValueKind != JsonValueKind.Array)
+        {
+            return result;
+        }
+
+        var index = 0;
+        foreach (var entry in entries.EnumerateArray())
+        {
+            var outputs = ReadOutputs(entry, "outputs", "output");
+            result.Add(new LootEntryDefinition
+            {
+                Id = FirstNonEmpty(GetString(entry, "id"), $"entry/{index}"),
+                Output = outputs.Count > 0 ? outputs[0] : new OutputDefinition(),
+                Weight = GetNullableDouble(entry, "weight"),
+                MinCount = GetNullableInt(entry, "min_count", "minCount"),
+                MaxCount = GetNullableInt(entry, "max_count", "maxCount"),
+                Rarity = NormalizeNullable(GetString(entry, "rarity")),
+                Tags = ReadStringArray(entry, "tags")
+            });
+            index++;
+        }
+
+        return result;
+    }
+
+    private static List<ItemStackDefinition> ReadItemStacks(JsonElement inventory)
+    {
+        var result = new List<ItemStackDefinition>();
+        if (!TryGetProperty(inventory, "stacks", out var stacks) || stacks.ValueKind != JsonValueKind.Array)
+        {
+            return result;
+        }
+
+        foreach (var stack in stacks.EnumerateArray())
+        {
+            result.Add(new ItemStackDefinition
+            {
+                ItemId = FirstNonEmpty(GetString(stack, "item_id"), GetString(stack, "itemId")),
+                Amount = GetDouble(stack, "amount", 1),
+                UniqueInstanceId = NormalizeNullable(FirstNonEmpty(GetString(stack, "unique_instance_id"), GetString(stack, "uniqueInstanceId"))),
+                QuestItem = GetNullableBool(stack, "quest_item", "questItem"),
+                Durability = GetNullableDouble(stack, "durability"),
+                Charge = GetNullableDouble(stack, "charge")
+            });
         }
 
         return result;
@@ -1021,6 +1359,48 @@ public sealed class GeneratorPlanGamePackageAssembler
             : "dialogue/" + normalized;
     }
 
+    private static string NormalizeItemId(string sourceId)
+    {
+        var normalized = NormalizeIdSegment(sourceId);
+        return normalized.StartsWith("item/", StringComparison.OrdinalIgnoreCase) ? normalized : "item/" + normalized;
+    }
+
+    private static string NormalizeResourceId(string sourceId)
+    {
+        var normalized = NormalizeIdSegment(sourceId);
+        return normalized.StartsWith("resource/", StringComparison.OrdinalIgnoreCase) ? normalized : "resource/" + normalized;
+    }
+
+    private static string NormalizeRecipeId(string sourceId)
+    {
+        var normalized = NormalizeIdSegment(sourceId);
+        return normalized.StartsWith("recipe/", StringComparison.OrdinalIgnoreCase) ? normalized : "recipe/" + normalized;
+    }
+
+    private static string NormalizeLootTableId(string sourceId)
+    {
+        var normalized = NormalizeIdSegment(sourceId);
+        return normalized.StartsWith("loot/", StringComparison.OrdinalIgnoreCase) ? normalized : "loot/" + normalized;
+    }
+
+    private static string NormalizeTransactionId(string sourceId)
+    {
+        var normalized = NormalizeIdSegment(sourceId);
+        return normalized.StartsWith("transaction/", StringComparison.OrdinalIgnoreCase) ? normalized : "transaction/" + normalized;
+    }
+
+    private static string NormalizeInventoryId(string sourceId)
+    {
+        var normalized = NormalizeIdSegment(sourceId);
+        return normalized.StartsWith("inventory/", StringComparison.OrdinalIgnoreCase) ? normalized : "inventory/" + normalized;
+    }
+
+    private static string NormalizeEquipmentSlotId(string sourceId)
+    {
+        var normalized = NormalizeIdSegment(sourceId);
+        return normalized.StartsWith("equipment/", StringComparison.OrdinalIgnoreCase) ? normalized : "equipment/" + normalized;
+    }
+
     private static string? NormalizeNullable(string value) =>
         string.IsNullOrWhiteSpace(value) ? null : value.Trim();
 
@@ -1062,11 +1442,55 @@ public sealed class GeneratorPlanGamePackageAssembler
             : fallback;
     }
 
+    private static int? GetNullableInt(JsonElement element, params string[] propertyNames)
+    {
+        foreach (var propertyName in propertyNames)
+        {
+            if (TryGetProperty(element, propertyName, out var property) && property.ValueKind == JsonValueKind.Number)
+            {
+                return property.GetInt32();
+            }
+        }
+
+        return null;
+    }
+
+    private static double GetDouble(JsonElement element, string propertyName, double fallback) =>
+        TryGetProperty(element, propertyName, out var property) && property.ValueKind == JsonValueKind.Number
+            ? property.GetDouble()
+            : fallback;
+
+    private static double? GetNullableDouble(JsonElement element, params string[] propertyNames)
+    {
+        foreach (var propertyName in propertyNames)
+        {
+            if (TryGetProperty(element, propertyName, out var property) && property.ValueKind == JsonValueKind.Number)
+            {
+                return property.GetDouble();
+            }
+        }
+
+        return null;
+    }
+
     private static bool GetBool(JsonElement element, string propertyName, bool fallback)
     {
         return TryGetProperty(element, propertyName, out var property) && property.ValueKind is JsonValueKind.True or JsonValueKind.False
             ? property.GetBoolean()
             : fallback;
+    }
+
+    private static bool? GetNullableBool(JsonElement element, params string[] propertyNames)
+    {
+        foreach (var propertyName in propertyNames)
+        {
+            if (TryGetProperty(element, propertyName, out var property) && property.ValueKind is JsonValueKind.True or JsonValueKind.False)
+            {
+                return property.GetBoolean();
+            }
+        }
+
+        return null;
     }
 
     private static string FirstNonEmpty(params string[] values)
@@ -1087,6 +1511,20 @@ public sealed class GeneratorPlanGamePackageAssembler
             .Where(value => !string.IsNullOrWhiteSpace(value))
             .Select(value => value.Trim())
             .ToList();
+    }
+
+    private static bool TryGetFirstArray(JsonElement element, IEnumerable<string> propertyNames, out JsonElement array)
+    {
+        foreach (var propertyName in propertyNames)
+        {
+            if (TryGetProperty(element, propertyName, out array) && array.ValueKind == JsonValueKind.Array)
+            {
+                return true;
+            }
+        }
+
+        array = default;
+        return false;
     }
 
     private static string GetRawJsonOrDefault(JsonElement element, string propertyName)

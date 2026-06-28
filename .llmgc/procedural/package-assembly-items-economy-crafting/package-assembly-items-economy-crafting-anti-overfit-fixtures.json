@@ -1,0 +1,9 @@
+{
+  "realConsumerId": "goal027_real_consumer_trade_caravan",
+  "syntheticConsumerId": "vendor_crafting_transaction",
+  "syntheticConsumerPresent": true,
+  "distinctConsumerIds": true,
+  "distinctPrimaryItemIds": true,
+  "distinctPrimaryRecipeIds": true,
+  "passed": true
+}

@@ -240,7 +240,8 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
                 "goal_023_capability_bundle_pipeline_inputs",
                 "goal_024_rich_package_assembly_coverage_audit",
                 "goal_025_package_assembly_expansion_1_world_and_entities",
-                "goal_026_package_assembly_expansion_2_dialogue_and_quests"
+                "goal_026_package_assembly_expansion_2_dialogue_and_quests",
+                "goal_027_package_assembly_expansion_3_items_economy_crafting"
             });
     }
 

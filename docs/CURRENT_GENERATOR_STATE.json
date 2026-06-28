@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-28T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Package assembly dialogue and quests expansion verification required",
-    "gate_status":  "package_assembly_dialogue_quests_expansion_verification",
+    "current_phase_title":  "Package assembly items, economy and crafting expansion verification required",
+    "gate_status":  "package_assembly_items_economy_crafting_expansion_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_026_package_assembly_expansion_2_dialogue_and_quests",
-    "active_manual_gate":  "The user confirmed package_assembly_world_entities_expansion_verification passed before Goal 026. Goal 026 package assembly dialogue/quests expansion is produced for review; package_assembly_dialogue_quests_expansion_verification remains required and not passed.",
-    "current_user_action":  "Review Goal 026 dialogue/quest package assembly artifacts, focused tests, product smoke, check-all and artifact scope evidence before marking package_assembly_dialogue_quests_expansion_verification passed. Goal 027 and S213 are not started.",
-    "recommended_next_decision":  "The user confirmed package_assembly_world_entities_expansion_verification passed before Goal 026. Goal 026 defines docs/PACKAGE_ASSEMBLY_DIALOGUE_QUESTS_CONTRACT_V1.md, expands bounded dialogue/quest package assembly through the existing GeneratorPlanGamePackageAssembler seam, writes real and synthetic package summaries under .llmgc/procedural/package-assembly-dialogue-quests, preserves future-required Goal 023/024 graph/condition gaps, rejects invalid/fake/leak cases, and leaves package_assembly_dialogue_quests_expansion_verification required. Do not start Goal 027 or S213 until this gate is accepted.",
+    "last_completed_product_slice_id":  "goal_027_package_assembly_expansion_3_items_economy_crafting",
+    "active_manual_gate":  "The user confirmed package_assembly_dialogue_quests_expansion_verification passed before Goal 027. Goal 027 package assembly items/economy/crafting expansion is produced for review; package_assembly_items_economy_crafting_expansion_verification remains required and not passed.",
+    "current_user_action":  "Review Goal 027 items/economy/crafting package assembly artifacts, focused tests, product smoke, check-all and artifact scope evidence before marking package_assembly_items_economy_crafting_expansion_verification passed. Goal 028 and S220 are not started.",
+    "recommended_next_decision":  "The user confirmed package_assembly_dialogue_quests_expansion_verification passed before Goal 027. Goal 027 defines docs/PACKAGE_ASSEMBLY_ITEMS_ECONOMY_CRAFTING_CONTRACT_V1.md, expands bounded items/economy/crafting package assembly through the existing GeneratorPlanGamePackageAssembler seam, writes real and synthetic package summaries under .llmgc/procedural/package-assembly-items-economy-crafting, preserves future-required Goal 023/024 vendor/economy/crafting gaps, rejects invalid/fake/leak cases, and leaves package_assembly_items_economy_crafting_expansion_verification required. Do not start Goal 028 or S220 until this gate is accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "package_assembly_dialogue_quests_expansion_verification"
+                                                        "package_assembly_items_economy_crafting_expansion_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -53,7 +53,8 @@
                            "goal_024_manual_gate":  "rich_package_assembly_coverage_audit_verification",
                            "modular_contract_goal_policy_adoption_gate":  "modular_contract_goal_policy_adoption_verification",
                            "goal_025_manual_gate":  "package_assembly_world_entities_expansion_verification",
-                           "goal_026_manual_gate":  "package_assembly_dialogue_quests_expansion_verification"
+                           "goal_026_manual_gate":  "package_assembly_dialogue_quests_expansion_verification",
+                           "goal_027_manual_gate":  "package_assembly_items_economy_crafting_expansion_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -74,17 +75,17 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_026_package_assembly_expansion_2_dialogue_and_quests",
-                                         "title":  "Package Assembly Expansion 2 - Dialogue And Quests",
+                                         "slice_id":  "goal_027_package_assembly_expansion_3_items_economy_crafting",
+                                         "title":  "Package Assembly Expansion 3 - Items, Economy And Crafting",
                                          "status":  "required_manual_gate",
-                                         "summary":  "Goal 026 records the user-confirmed package_assembly_world_entities_expansion_verification passed gate, defines docs/PACKAGE_ASSEMBLY_DIALOGUE_QUESTS_CONTRACT_V1.md, adds a narrow Application-layer package assembly dialogue/quests acceptance service under Design/PackageAssemblyDialogueQuests, minimally expands GeneratorPlanGamePackageAssembler so quest_pack_v1 and dialogue_pack_v1 records can create package-safe quests, stages, objectives, dialogues, nodes and quest-linked choices through existing schema, writes compact mapping proof, input fixtures, assembly report, package summary, anti-overfit fixture proof, invalid matrix, report, verification and scope artifacts under .llmgc/procedural/package-assembly-dialogue-quests, proves one real gothic mystery consumer and the synthetic rumor_board_tutorial consumer, rejects invalid/fake/leak scenarios causally, adds the package-assembly-dialogue-quests product smoke route, and leaves package_assembly_dialogue_quests_expansion_verification required. Goal 027 and S213 are not started.",
-                                         "scenario_id":  "package-assembly-dialogue-quests",
+                                         "summary":  "Goal 027 records the user-confirmed package_assembly_dialogue_quests_expansion_verification passed gate, defines docs/PACKAGE_ASSEMBLY_ITEMS_ECONOMY_CRAFTING_CONTRACT_V1.md, adds a narrow Application-layer package assembly items/economy/crafting acceptance service under Design/PackageAssemblyItemsEconomyCrafting, minimally expands GeneratorPlanGamePackageAssembler so item/resource/recipe/loot/transaction/inventory/equipment pack records can create package-safe economy records through existing schema, writes compact mapping proof, input fixtures, assembly report, package summary, anti-overfit fixture proof, invalid matrix, report, verification and scope artifacts under .llmgc/procedural/package-assembly-items-economy-crafting, proves one real trade caravan consumer and the synthetic vendor_crafting_transaction consumer, rejects invalid/fake/leak scenarios causally, adds the package-assembly-items-economy-crafting product smoke route, and leaves package_assembly_items_economy_crafting_expansion_verification required. Goal 028 and S220 are not started.",
+                                         "scenario_id":  "package-assembly-items-economy-crafting",
                                          "checks":  [
-                                                        "PackageAssemblyDialogueQuests/CurrentGeneratorStateDocs focused filter: 18/18 passed",
-                                                        "package-assembly-dialogue-quests product smoke: 1/1 passed",
-                                                        "check-all.ps1: 834/834 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
-                                                        "goal-026-final artifact scope guard: 16/16 changed paths allowed, 0 violations; bounded extension allowed the stale Goal 021 handoff regression test update required by check-all",
-                                                        "Goal 026 mapping contract proof hash e5269f675249921bc2145e79a5f77bfe0e803e9867632c34363eb90c0609a20a, input fixtures hash eb956208e039a37b0f7e9d64ce09b531c7ae24f815852f59e0dd5918ac412216, assembly report hash 984889d7cb5a576182ed0239a813a08a9dde64553f03b045c34dbce5021263b6, package summary hash b8c8b5098496eb3e12dd7ac301454870ed5f107e55d3a1ef25a3a5eb2508e17c, anti-overfit hash 47b5d0373180be12200019858d325cab572ed7ca676a08126c3070f41984f768, invalid matrix hash a952319fa0ffeeecd8269e5f4aab4ee3f6f680a72e3a41725930e4ba1c3cd6e7, deterministic report hash b6bba3826b1577d5840bd356e6f23bc044fb1c45b16598fa408fdab4e05d8940, invalid scenarios 16, real and synthetic consumers passed"
+                                                        "Goal 027 current-state focused filter (GeneratedGameProfileContract/CapabilityBundlePipelineInputs/RichPackageAssemblyCoverageAudit/PackageAssemblyWorldEntities/PackageAssemblyDialogueQuests/PackageAssemblyItemsEconomyCrafting/DevelopmentComplexityStabilization/CurrentGeneratorStateDocs): 71/71 passed",
+                                                        "package-assembly-items-economy-crafting product smoke: 1/1 passed",
+                                                        "check-all.ps1: 841/841 ordinary tests passed, build 0 warnings / 0 errors; ProductSmoke routes are excluded from full-suite churn and run explicitly",
+                                                        "goal-027-final artifact scope guard: 19/19 changed paths allowed, 0 violations; bounded extension allowed stale handoff regression test updates required by check-all",
+                                                        "Goal 027 mapping contract proof hash 91eb99e4954bf4efd5e0b6af853722fbe371239da6a04fe5a310963030aaa391, input fixtures hash 60e762cf1774befbc1da73753c8fddfac9a7e8b78e1348034cf566e4a617ea66, assembly report hash 2a1f117937dc626f1c2f74877282fbb4139e9620e4f729a6a1edc5bff8b127b9, package summary hash f73bb4f76ace915519a27e8e040318c42afa8423935da80e567b77055cbc3269, anti-overfit hash 2efe87b6839bb8c353804c8266c0b7df967bc6a74eb6a0fc75f8a8846cb6f24a, invalid matrix hash 8ac02d3b04985fd7bcae50b3e468acf90d54b5afc8dc8fb408ee9fb93b4f6083, deterministic report hash a4c6c3a61895786d4cfdf4ace802d52df6c0ceb2bb86e5b9b0f26f9d54aaee00, report JSON file hash 743735be144ef8d0415cd43706d701c83458c6d20a70d322550f415591c4ff1d, scope report hash 1190e6b4c97821550327247574ce5c92fe0b5fba3f619d6bab13283d16a583bb, invalid scenarios 18, real and synthetic consumers passed"
                                                     ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -344,7 +345,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "package_assembly_dialogue_quests_expansion_verification"
+                                          "package_assembly_items_economy_crafting_expansion_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -365,12 +366,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "package_assembly_dialogue_quests_expansion_verification",
-    "recommended_next_work_item_title":  "Package assembly dialogue/quests expansion verification review.",
-    "recommended_next_task_file":  "docs/GOAL_026_PACKAGE_ASSEMBLY_EXPANSION_2_DIALOGUE_AND_QUESTS.md",
+    "recommended_next_work_item":  "package_assembly_items_economy_crafting_expansion_verification",
+    "recommended_next_work_item_title":  "Package assembly items/economy/crafting expansion verification review.",
+    "recommended_next_task_file":  "docs/GOAL_027_PACKAGE_ASSEMBLY_EXPANSION_3_ITEMS_ECONOMY_CRAFTING.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 026 package assembly dialogue/quests expansion review",
-                                               "Goal 027 package assembly items/economy/crafting only after Goal 026 gate acceptance"
+                                               "Goal 027 package assembly items/economy/crafting expansion review",
+                                               "Goal 028 package assembly combat/progression only after Goal 027 gate acceptance"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -450,9 +451,10 @@
                              "Unity multi-variant playable scenario variants/report sidecars and per-variant quest completion player evidence",
                              "Unity Alpha readable presentation model/report sidecars and required panel/readable-label player evidence",
                              "Package assembly world/entities mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars",
-                             "Package assembly dialogue/quests mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars"
+                              "Package assembly dialogue/quests mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars",
+                              "Package assembly items/economy/crafting mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars"
                          ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 026 stop at package_assembly_dialogue_quests_expansion_verification required and do not start Goal 027 or S213 without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 027 stop at package_assembly_items_economy_crafting_expansion_verification required and do not start Goal 028 or S220 without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -920,7 +922,7 @@
                                                                   "next_action":  "goal_026_package_assembly_expansion_2_dialogue_and_quests"
                                                           },
     "package_assembly_dialogue_quests_expansion_verification":  {
-                                                                   "status":  "required",
+                                                                   "status":  "passed_by_user_prompt_before_goal_027",
                                                                    "evidence_source":  "goal_026_package_assembly_expansion_2_dialogue_and_quests",
                                                                    "observed_result":  [
                                                                                            "docs/PACKAGE_ASSEMBLY_DIALOGUE_QUESTS_CONTRACT_V1.md defines the Goal 026 dialogue/quest mapping contract",
@@ -931,10 +933,27 @@
                                                                                            "Future-required dialogue graph, quest graph and condition gaps remain explicit gaps",
                                                                                            "Invalid/fake/leak matrix rejects 16 scenarios",
                                                                                            "Product smoke route is package-assembly-dialogue-quests",
-                                                                                           "Final report accepted=false and manualGate=package_assembly_dialogue_quests_expansion_verification",
-                                                                                           "Goal 027 and S213 are not started"
-                                                                                       ],
-                                                                   "next_action":  "review_package_assembly_dialogue_quests_expansion_before_marking_gate_passed"
+                                                                                            "Final report accepted=false and manualGate=package_assembly_dialogue_quests_expansion_verification",
+                                                                                            "The user confirmed package_assembly_dialogue_quests_expansion_verification passed before Goal 027"
+                                                                                        ],
+                                                                   "next_action":  "goal_027_package_assembly_expansion_3_items_economy_crafting"
+                                                          },
+    "package_assembly_items_economy_crafting_expansion_verification":  {
+                                                                          "status":  "required",
+                                                                          "evidence_source":  "goal_027_package_assembly_expansion_3_items_economy_crafting",
+                                                                          "observed_result":  [
+                                                                                                  "docs/PACKAGE_ASSEMBLY_ITEMS_ECONOMY_CRAFTING_CONTRACT_V1.md defines the Goal 027 items/economy/crafting mapping contract",
+                                                                                                  "Goal 023 generator inputs, Goal 024 coverage evidence, Goal 025 world/entities evidence and Goal 026 dialogue/quests evidence are physically validated",
+                                                                                                  "item_pack_v1 maps package-safe items through existing GamePackage schema and preserves GeneratedContent.Items sidecars",
+                                                                                                  "resource_pack_v1, recipe_pack_v1, loot_pack_v1, transaction_pack_v1, inventory_pack_v1 and equipment_pack_v1 map through existing GamePackage schema",
+                                                                                                  "Real consumer and synthetic vendor_crafting_transaction consumer both produce deterministic package summaries",
+                                                                                                  "Future-required vendor/economy/crafting gaps remain explicit gaps",
+                                                                                                  "Invalid/fake/leak matrix rejects 18 scenarios",
+                                                                                                  "Product smoke route is package-assembly-items-economy-crafting",
+                                                                                                  "Final report accepted=false and manualGate=package_assembly_items_economy_crafting_expansion_verification",
+                                                                                                  "Goal 028 and S220 are not started"
+                                                                                              ],
+                                                                          "next_action":  "review_package_assembly_items_economy_crafting_expansion_before_marking_gate_passed"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

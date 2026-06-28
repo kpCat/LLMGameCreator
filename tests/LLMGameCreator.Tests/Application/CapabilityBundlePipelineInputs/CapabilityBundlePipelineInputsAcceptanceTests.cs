@@ -1,5 +1,6 @@
 using System.Text.Json;
 using LLMGameCreator.Application.Design.CapabilityBundlePipelineInputs;
+using LLMGameCreator.Application.Design.PackageAssemblyItemsEconomyCrafting;
 using Xunit;
 
 namespace LLMGameCreator.Tests.Application.CapabilityBundlePipelineInputs;
@@ -186,8 +187,8 @@ public sealed class CapabilityBundlePipelineInputsAcceptanceTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_026_package_assembly_expansion_2_dialogue_and_quests", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal("package_assembly_dialogue_quests_expansion_verification", root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_027_package_assembly_expansion_3_items_economy_crafting", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal(PackageAssemblyItemsEconomyCraftingAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
         Assert.Equal("goal_023_capability_bundle_pipeline_inputs", root.GetProperty("goal_023_capability_bundle_pipeline_inputs").GetProperty("slice_id").GetString());
         Assert.Contains(
             "development_complexity_stabilization_verification passed",

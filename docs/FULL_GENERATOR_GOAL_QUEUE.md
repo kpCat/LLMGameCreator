@@ -17,12 +17,13 @@ development_complexity_stabilization_verification passed
 capability_bundle_pipeline_inputs_verification passed
 rich_package_assembly_coverage_audit_verification passed
 package_assembly_world_entities_expansion_verification passed
+package_assembly_dialogue_quests_expansion_verification passed
 ```
 
 Produced for review:
 
 ```text
-package_assembly_dialogue_quests_expansion_verification required
+package_assembly_items_economy_crafting_expansion_verification required
 ```
 
 Current capabilities:
@@ -46,11 +47,12 @@ Current capabilities:
 - modular contract goal policy, feature backlog audit and package assembly campaign pack;
 - package assembly world/entities mapping contract, real/synthetic consumer proof and compact Goal 025 artifacts;
 - package assembly dialogue/quests mapping contract, real/synthetic consumer proof and compact Goal 026 artifacts;
+- package assembly items/economy/crafting mapping contract, real/synthetic consumer proof and compact Goal 027 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate and Goal 025 have been accepted by user prompt. Goal 026 produced the second bounded package assembly expansion for dialogue/quests and now waits at its manual verification gate.
+Goal 024, the modular contract goal policy adoption gate, Goal 025 and Goal 026 have been accepted by user prompt. Goal 027 produced the third bounded package assembly expansion for items/economy/crafting and now waits at its manual verification gate.
 
 ## Queue Rules
 
@@ -282,13 +284,17 @@ Generate and assemble richer dialogue/quest stages/objectives with validation an
 
 Status:
 
-Produced for review. The gate remains `package_assembly_dialogue_quests_expansion_verification required`, not passed. Goal 027 and S213 are not started.
+Accepted by user prompt before Goal 027.
 
 ### Goal 027: Package Assembly Expansion 3 - Items, Economy And Crafting
 
 Purpose:
 
 Generate and assemble item/economy/crafting loops with validators and runtime smoke.
+
+Status:
+
+Produced for review. The gate remains `package_assembly_items_economy_crafting_expansion_verification required`, not passed. Goal 028 and S220 are not started.
 
 ### Goal 028: Package Assembly Expansion 4 - Combat And Progression
 
@@ -449,7 +455,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-package_assembly_dialogue_quests_expansion_verification
+package_assembly_items_economy_crafting_expansion_verification
 ```
 
 Status:

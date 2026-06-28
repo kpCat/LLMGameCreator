@@ -1,4 +1,5 @@
 using System.Text.Json;
+using LLMGameCreator.Application.Design.PackageAssemblyItemsEconomyCrafting;
 using LLMGameCreator.Application.Design.PackageAssemblyWorldEntities;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Validation;
@@ -147,10 +148,10 @@ public sealed class PackageAssemblyWorldEntitiesAcceptanceTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_026_package_assembly_expansion_2_dialogue_and_quests", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal("package_assembly_dialogue_quests_expansion_verification", root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_027_package_assembly_expansion_3_items_economy_crafting", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal(PackageAssemblyItemsEconomyCraftingAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
         Assert.Equal("passed_by_user_prompt_before_goal_026", root.GetProperty(PackageAssemblyWorldEntitiesAcceptanceService.FinalGate).GetProperty("status").GetString());
-        Assert.Contains(PackageAssemblyWorldEntitiesAcceptanceService.FinalGate + " passed", root.GetProperty("recommended_next_decision").GetString());
+        Assert.Contains(PackageAssemblyItemsEconomyCraftingAcceptanceService.PreviousAcceptedGate, root.GetProperty("recommended_next_decision").GetString());
     }
 
     private static GeneratorPlanApprovedArtifact Artifact(string id, string kind, string contentJson) =>

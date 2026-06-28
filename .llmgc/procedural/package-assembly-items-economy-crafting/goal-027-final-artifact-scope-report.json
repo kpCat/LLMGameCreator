@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "goal_027_artifact_scope_report_v1",
+  "scenarioId": "goal-027-final",
+  "passed": true,
+  "allowedPathCount": 15,
+  "violationCount": 0,
+  "notes": [
+    "Goal 027 compact artifacts are limited to .llmgc/procedural/package-assembly-items-economy-crafting/.",
+    "Historical Goal 020-026 artifact families remain read-only.",
+    "Public GamePackage schema, domain definitions, project files, generator-library, Unity, WinForms UI and provider/LLM/Lua execution are out of scope."
+  ]
+}

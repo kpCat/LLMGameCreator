@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "package_assembly_items_economy_crafting_input_fixtures_v1",
+  "realConsumer": {
+    "consumerId": "goal027_real_consumer_trade_caravan",
+    "sourceProfileId": "game_profile/trade-caravan-social-economy-alpha",
+    "gameFamilyId": "game_family/trade_caravan",
+    "selectionId": "generator_plan_capability_selection/533fea9ea62f723f",
+    "artifacts": [
+      {
+        "artifactId": "goal027/real/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"Goal 027 Caravan Economy\",\r\n    \"genre\": \"trade_caravan\",\r\n    \"description\": \"Bounded item, economy and crafting assembly proof.\",\r\n    \"core_loop\": [\r\n      \"trade\",\r\n      \"craft\",\r\n      \"carry_goods\"\r\n    ]\r\n  },\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/real/02-items",
+        "artifactKind": "item_pack_v1",
+        "contentJson": "{\r\n  \"items\": [\r\n    {\r\n      \"id\": \"caravan_toolkit\",\r\n      \"name\": \"Caravan Toolkit\",\r\n      \"description\": \"Repair and crafting tools.\",\r\n      \"kind\": \"tool\",\r\n      \"max_stack\": 1,\r\n      \"value\": 18,\r\n      \"tags\": [\r\n        \"tool\",\r\n        \"crafting\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"spice_crate\",\r\n      \"name\": \"Spice Crate\",\r\n      \"description\": \"Trade cargo.\",\r\n      \"kind\": \"trade_good\",\r\n      \"max_stack\": 6,\r\n      \"value\": 25,\r\n      \"tags\": [\r\n        \"cargo\"\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/real/03-resources",
+        "artifactKind": "resource_pack_v1",
+        "contentJson": "{\r\n  \"resources\": [\r\n    {\r\n      \"id\": \"caravan_fiber\",\r\n      \"name\": \"Caravan Fiber\",\r\n      \"kind\": \"material\",\r\n      \"default_value\": 0,\r\n      \"min_value\": 0,\r\n      \"max_value\": 50,\r\n      \"tags\": [\r\n        \"crafting\"\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/real/04-recipes",
+        "artifactKind": "recipe_pack_v1",
+        "contentJson": "{\r\n  \"recipes\": [\r\n    {\r\n      \"id\": \"repair_trade_crate\",\r\n      \"name\": \"Repair Trade Crate\",\r\n      \"inputs\": [\r\n        {\r\n          \"kind\": \"item\",\r\n          \"id\": \"item/caravan/toolkit\",\r\n          \"amount\": 1\r\n        },\r\n        {\r\n          \"kind\": \"resource\",\r\n          \"id\": \"resource/caravan/fiber\",\r\n          \"amount\": 2\r\n        }\r\n      ],\r\n      \"outputs\": [\r\n        {\r\n          \"kind\": \"item\",\r\n          \"id\": \"item/spice/crate\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"duration\": 2,\r\n      \"success_chance\": 1\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/real/05-loot",
+        "artifactKind": "loot_pack_v1",
+        "contentJson": "{\r\n  \"loot_tables\": [\r\n    {\r\n      \"id\": \"caravan_vendor_stock\",\r\n      \"name\": \"Caravan Vendor Stock\",\r\n      \"entries\": [\r\n        {\r\n          \"id\": \"toolkit_stock\",\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"item\",\r\n              \"id\": \"item/caravan/toolkit\",\r\n              \"amount\": 1\r\n            }\r\n          ],\r\n          \"weight\": 1,\r\n          \"min_count\": 1,\r\n          \"max_count\": 1\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/real/06-transactions",
+        "artifactKind": "transaction_pack_v1",
+        "contentJson": "{\r\n  \"transactions\": [\r\n    {\r\n      \"id\": \"buy_caravan_toolkit\",\r\n      \"name\": \"Buy Caravan Toolkit\",\r\n      \"vendor_id\": \"npc/caravan_vendor\",\r\n      \"stock_loot_table_id\": \"loot/caravan/vendor/stock\",\r\n      \"costs\": [\r\n        {\r\n          \"kind\": \"resource\",\r\n          \"id\": \"resource/caravan/fiber\",\r\n          \"amount\": 3\r\n        }\r\n      ],\r\n      \"outputs\": [\r\n        {\r\n          \"kind\": \"item\",\r\n          \"id\": \"item/caravan/toolkit\",\r\n          \"amount\": 1\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/real/07-inventory",
+        "artifactKind": "inventory_pack_v1",
+        "contentJson": "{\r\n  \"inventories\": [\r\n    {\r\n      \"id\": \"caravan_vendor_inventory\",\r\n      \"owner_kind\": \"npc\",\r\n      \"owner_id\": \"npc/caravan_vendor\",\r\n      \"slots\": 8,\r\n      \"stacks\": [\r\n        {\r\n          \"item_id\": \"item/spice/crate\",\r\n          \"amount\": 2\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/real/08-equipment",
+        "artifactKind": "equipment_pack_v1",
+        "contentJson": "{\r\n  \"equipment_slots\": [\r\n    {\r\n      \"id\": \"tool_hand\",\r\n      \"name\": \"Tool Hand\",\r\n      \"allowed_tags\": [\r\n        \"tool\"\r\n      ],\r\n      \"allowed_kinds\": [\r\n        \"tool\"\r\n      ]\r\n    }\r\n  ],\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/533fea9ea62f723f\"\r\n  }\r\n}"
+      }
+    ]
+  },
+  "syntheticConsumer": {
+    "consumerId": "vendor_crafting_transaction",
+    "sourceProfileId": "synthetic/vendor_crafting_transaction",
+    "gameFamilyId": "game_family/synthetic_workshop",
+    "selectionId": "generator_plan_capability_selection/synthetic_vendor_crafting_transaction",
+    "artifacts": [
+      {
+        "artifactId": "goal027/synthetic/01-profile",
+        "artifactKind": "game_profile_v1",
+        "contentJson": "{\r\n  \"game\": {\r\n    \"title\": \"Vendor Crafting Transaction\",\r\n    \"genre\": \"workshop_tutorial\",\r\n    \"description\": \"Synthetic economy fixture.\",\r\n    \"core_loop\": [\r\n      \"gather\",\r\n      \"craft\",\r\n      \"trade\"\r\n    ]\r\n  },\r\n  \"source_context\": {\r\n    \"capability_selection_id\": \"generator_plan_capability_selection/synthetic_vendor_crafting_transaction\"\r\n  }\r\n}"
+      },
+      {
+        "artifactId": "goal027/synthetic/02-items",
+        "artifactKind": "item_pack_v1",
+        "contentJson": "{\r\n  \"items\": [\r\n    {\r\n      \"id\": \"workshop_plank\",\r\n      \"name\": \"Workshop Plank\",\r\n      \"kind\": \"material\",\r\n      \"max_stack\": 10,\r\n      \"value\": 4,\r\n      \"tags\": [\r\n        \"wood\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"finished_charm\",\r\n      \"name\": \"Finished Charm\",\r\n      \"kind\": \"trade_good\",\r\n      \"max_stack\": 3,\r\n      \"value\": 14,\r\n      \"tags\": [\r\n        \"crafted\"\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal027/synthetic/03-resources",
+        "artifactKind": "resource_pack_v1",
+        "contentJson": "{\r\n  \"resources\": [\r\n    {\r\n      \"id\": \"workshop_time\",\r\n      \"name\": \"Workshop Time\",\r\n      \"kind\": \"abstract\",\r\n      \"default_value\": 0,\r\n      \"min_value\": 0,\r\n      \"max_value\": 20\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal027/synthetic/04-recipes",
+        "artifactKind": "recipe_pack_v1",
+        "contentJson": "{\r\n  \"recipes\": [\r\n    {\r\n      \"id\": \"craft_finished_charm\",\r\n      \"name\": \"Craft Finished Charm\",\r\n      \"inputs\": [\r\n        {\r\n          \"kind\": \"item\",\r\n          \"id\": \"item/workshop/plank\",\r\n          \"amount\": 2\r\n        },\r\n        {\r\n          \"kind\": \"resource\",\r\n          \"id\": \"resource/workshop/time\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"outputs\": [\r\n        {\r\n          \"kind\": \"item\",\r\n          \"id\": \"item/finished/charm\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"success_chance\": 1\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal027/synthetic/05-loot",
+        "artifactKind": "loot_pack_v1",
+        "contentJson": "{\r\n  \"loot_tables\": [\r\n    {\r\n      \"id\": \"workshop_vendor_stock\",\r\n      \"name\": \"Workshop Vendor Stock\",\r\n      \"entries\": [\r\n        {\r\n          \"id\": \"plank_stock\",\r\n          \"outputs\": [\r\n            {\r\n              \"kind\": \"item\",\r\n              \"id\": \"item/workshop/plank\",\r\n              \"amount\": 2\r\n            }\r\n          ],\r\n          \"weight\": 1,\r\n          \"min_count\": 1,\r\n          \"max_count\": 2\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal027/synthetic/06-transactions",
+        "artifactKind": "transaction_pack_v1",
+        "contentJson": "{\r\n  \"transactions\": [\r\n    {\r\n      \"id\": \"sell_finished_charm\",\r\n      \"name\": \"Sell Finished Charm\",\r\n      \"vendor_id\": \"npc/workshop_vendor\",\r\n      \"stock_loot_table_id\": \"loot/workshop/vendor/stock\",\r\n      \"costs\": [\r\n        {\r\n          \"kind\": \"item\",\r\n          \"id\": \"item/finished/charm\",\r\n          \"amount\": 1\r\n        }\r\n      ],\r\n      \"outputs\": [\r\n        {\r\n          \"kind\": \"resource\",\r\n          \"id\": \"resource/workshop/time\",\r\n          \"amount\": 2\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal027/synthetic/07-inventory",
+        "artifactKind": "inventory_pack_v1",
+        "contentJson": "{\r\n  \"inventories\": [\r\n    {\r\n      \"id\": \"workshop_inventory\",\r\n      \"owner_kind\": \"workshop\",\r\n      \"owner_id\": \"workshop/tutorial\",\r\n      \"slots\": 6,\r\n      \"stacks\": [\r\n        {\r\n          \"item_id\": \"item/workshop/plank\",\r\n          \"amount\": 4\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}"
+      },
+      {
+        "artifactId": "goal027/synthetic/08-equipment",
+        "artifactKind": "equipment_pack_v1",
+        "contentJson": "{\r\n  \"equipment_slots\": [\r\n    {\r\n      \"id\": \"workbench_tool\",\r\n      \"name\": \"Workbench Tool\",\r\n      \"allowed_tags\": [\r\n        \"crafted\"\r\n      ],\r\n      \"allowed_kinds\": [\r\n        \"trade_good\"\r\n      ]\r\n    }\r\n  ]\r\n}"
+      }
+    ]
+  }
+}

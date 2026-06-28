@@ -138,14 +138,14 @@ public sealed class DevelopmentComplexityStabilizationTests
         var markdown = File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.md"));
         var contextIndex = File.ReadAllText(Path.Combine(repoRoot, "docs", "CONTEXT_INDEX.md"));
 
-        Assert.Equal("package_assembly_dialogue_quests_expansion_verification", state.RootElement.GetProperty("gate_status").GetString());
-        Assert.Equal("goal_026_package_assembly_expansion_2_dialogue_and_quests", state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("package_assembly_items_economy_crafting_expansion_verification", state.RootElement.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_027_package_assembly_expansion_3_items_economy_crafting", state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
         Assert.Contains("generated_game_profile_contract_verification passed", markdown);
         Assert.Contains("development_complexity_stabilization_verification passed", markdown);
         Assert.Contains("capability_bundle_pipeline_inputs_verification passed", markdown);
         Assert.Contains("rich_package_assembly_coverage_audit_verification passed", markdown);
         Assert.Contains("development_complexity_stabilization_verification", markdown);
-        Assert.Contains("package_assembly_dialogue_quests_expansion_verification", contextIndex);
+        Assert.Contains("package_assembly_items_economy_crafting_expansion_verification", contextIndex);
     }
 
     [Fact]

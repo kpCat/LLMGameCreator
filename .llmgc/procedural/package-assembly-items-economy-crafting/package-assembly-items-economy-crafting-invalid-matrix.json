@@ -1,0 +1,267 @@
+{
+  "scenarioCount": 18,
+  "rejectedCount": 18,
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "duplicate_item_resource_recipe_transaction_id",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "duplicate_item_resource_recipe_transaction_id",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.id.duplicate",
+          "target": "item/resource/recipe/transaction",
+          "message": "Duplicate item/resource/recipe/transaction id is rejected by Goal 027 preflight or economy validation."
+        }
+      ]
+    },
+    {
+      "scenarioId": "future_required_vendor_economy_crafting_gap_treated_implemented",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "future_required_vendor_economy_crafting_gap_treated_implemented",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.future_required.marked_supported",
+          "target": "vendor/economy/crafting",
+          "message": "Future-required vendor, economy and crafting gaps must not be marked implemented."
+        }
+      ]
+    },
+    {
+      "scenarioId": "goal028_or_s220_started_marker",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "goal028_or_s220_started_marker",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.next_goal.started",
+          "target": "Goal028/S220",
+          "message": "Goal 028 and S220 must not be started."
+        }
+      ]
+    },
+    {
+      "scenarioId": "historical_goal020_026_artifact_mutation",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "historical_goal020_026_artifact_mutation",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "artifact_scope.legacy_artifact.forbidden",
+          "target": ".llmgc/procedural/package-assembly-dialogue-quests",
+          "message": "Historical Goal 020-026 compact artifacts are read-only for Goal 027."
+        }
+      ]
+    },
+    {
+      "scenarioId": "inventory_stack_references_unknown_item_id",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "inventory_stack_references_unknown_item_id",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "inventory.item_missing",
+          "target": "inventory/bad",
+          "message": "Inventory stack references a missing item: item/missing"
+        }
+      ]
+    },
+    {
+      "scenarioId": "item_missing_id_or_name",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "item_missing_id_or_name",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "item.id.empty",
+          "target": "",
+          "message": "Item id is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "loot_entry_references_unknown_item_or_resource",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "loot_entry_references_unknown_item_or_resource",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "loot.output.item_missing",
+          "target": "loot/bad",
+          "message": "Output references a missing item: item/missing"
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_accepted_goal026_gate",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_accepted_goal026_gate",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.previous_gate.missing",
+          "target": "package_assembly_dialogue_quests_expansion_verification required",
+          "message": "Goal 027 requires the accepted Goal 026 gate."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal023_generator_input_evidence",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_goal023_generator_input_evidence",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.goal023_generator_inputs.missing",
+          "target": ".llmgc/procedural/capability-bundle-pipeline-inputs",
+          "message": "Goal 023 generator input evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal025_world_entities_evidence",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_goal025_world_entities_evidence",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.goal025_evidence.missing",
+          "target": ".llmgc/procedural/package-assembly-world-entities",
+          "message": "Goal 025 world/entity evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal026_dialogue_quest_evidence",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "missing_goal026_dialogue_quest_evidence",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.goal026_evidence.missing",
+          "target": ".llmgc/procedural/package-assembly-dialogue-quests",
+          "message": "Goal 026 dialogue/quest evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "output_hardcoded_only_to_trade_frontier_gothic",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "output_hardcoded_only_to_trade_frontier_gothic",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.anti_overfit.hardcoded_single_consumer",
+          "target": "trade/frontier/gothic",
+          "message": "Output must not be hardcoded to one consumer shape."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_gamepackage_schema_mutation_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "public_gamepackage_schema_mutation_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.claims.public_schema_mutation",
+          "target": "publicGamePackageSchemaChanged",
+          "message": "Goal 027 must not mutate public GamePackage schema."
+        }
+      ]
+    },
+    {
+      "scenarioId": "recipe_input_or_cost_invalid_amount",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "recipe_input_or_cost_invalid_amount",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "recipe.input.amount.invalid",
+          "target": "recipe/bad_amount",
+          "message": "Cost amount must be positive."
+        }
+      ]
+    },
+    {
+      "scenarioId": "recipe_output_references_unknown_item_or_resource",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "recipe_output_references_unknown_item_or_resource",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "recipe.output.item_missing",
+          "target": "recipe/bad",
+          "message": "Output references a missing item: item/missing"
+        }
+      ]
+    },
+    {
+      "scenarioId": "synthetic_anti_overfit_fixture_missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "synthetic_anti_overfit_fixture_missing",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.anti_overfit.synthetic_missing",
+          "target": "vendor_crafting_transaction",
+          "message": "A second synthetic consumer fixture is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "transaction_stock_loot_table_references_unknown_loot_table",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "transaction_stock_loot_table_references_unknown_loot_table",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "transaction.stock_loot_table.missing",
+          "target": "transaction/bad",
+          "message": "Transaction stock_loot_table_id references a missing loot table."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_llm_rag_provider_media_lua_execution_claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "unity_llm_rag_provider_media_lua_execution_claim",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "package_items_economy_crafting.claims.external_execution",
+          "target": "llmRagProviderMediaLuaExecuted",
+          "message": "Goal 027 must not claim Unity, LLM, RAG, provider, media or Lua execution."
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "package_items_economy_crafting.invalid_matrix_rejected",
+      "target": "invalid_matrix",
+      "message": "Invalid/fake/leak scenarios reject through Goal 023/024/025/026 evidence, economy validation, anti-overfit checks or scope guard diagnostics."
+    }
+  ]
+}
