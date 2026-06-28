@@ -1,0 +1,135 @@
+{
+  "candidateId": "candidate_world_biome_noise_v1",
+  "contractId": "world_biome_noise_contract_v1",
+  "finalStatus": "candidate_ready_for_serial_adoption",
+  "contractProofPassed": true,
+  "acceptedGateClaimed": false,
+  "fastNoiseLiteDependencyAdopted": false,
+  "fastNoiseLiteDecision": "reference_only",
+  "fallbackDecision": "adapt_behind_adapter",
+  "adapterRecommendation": "ISeededNoiseSampler",
+  "seed": "candidate/world-biome-noise/default-seed",
+  "rulesVersion": "world_biome_noise_rules_v1",
+  "coordinateSpace": "world_cell",
+  "normalizationVersion": "hash_score_0_10000_v1",
+  "sampleCount": 5,
+  "samples": [
+    {
+      "x": -9,
+      "y": 11,
+      "elevationScore0To10000": 5134,
+      "moistureScore0To10000": 5543,
+      "temperatureScore0To10000": 8614,
+      "biomeId": "biome/plains"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "elevationScore0To10000": 6595,
+      "moistureScore0To10000": 6051,
+      "temperatureScore0To10000": 1947,
+      "biomeId": "biome/plains"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "elevationScore0To10000": 12,
+      "moistureScore0To10000": 2932,
+      "temperatureScore0To10000": 3805,
+      "biomeId": "biome/water"
+    },
+    {
+      "x": 16,
+      "y": -4,
+      "elevationScore0To10000": 7534,
+      "moistureScore0To10000": 6953,
+      "temperatureScore0To10000": 6761,
+      "biomeId": "biome/alpine"
+    },
+    {
+      "x": 32,
+      "y": 32,
+      "elevationScore0To10000": 2510,
+      "moistureScore0To10000": 264,
+      "temperatureScore0To10000": 5828,
+      "biomeId": "biome/desert"
+    }
+  ],
+  "classifierBoundaryProof": {
+    "passed": true,
+    "cases": [
+      {
+        "scenarioId": "water_low_boundary",
+        "elevationScore0To10000": 2499,
+        "moistureScore0To10000": 9000,
+        "expectedBiomeId": "biome/water",
+        "actualBiomeId": "biome/water"
+      },
+      {
+        "scenarioId": "alpine_high_boundary",
+        "elevationScore0To10000": 7500,
+        "moistureScore0To10000": 1000,
+        "expectedBiomeId": "biome/alpine",
+        "actualBiomeId": "biome/alpine"
+      },
+      {
+        "scenarioId": "desert_dry_midland",
+        "elevationScore0To10000": 5000,
+        "moistureScore0To10000": 2999,
+        "expectedBiomeId": "biome/desert",
+        "actualBiomeId": "biome/desert"
+      },
+      {
+        "scenarioId": "forest_wet_midland",
+        "elevationScore0To10000": 5000,
+        "moistureScore0To10000": 6500,
+        "expectedBiomeId": "biome/forest",
+        "actualBiomeId": "biome/forest"
+      },
+      {
+        "scenarioId": "plains_midland",
+        "elevationScore0To10000": 5000,
+        "moistureScore0To10000": 3000,
+        "expectedBiomeId": "biome/plains",
+        "actualBiomeId": "biome/plains"
+      }
+    ]
+  },
+  "sameSeedStable": true,
+  "differentSeedVariationVisible": true,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "runtimeProviderNetworkDependency": false,
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "mediaExecuted": false,
+    "networkExecuted": false,
+    "luaExecuted": false,
+    "unityExecuted": false,
+    "allFalse": true
+  },
+  "deterministicHash": "79810b713d797a37e56a50f74cf09b5b44c89d14a5ccaef00933c841a76711bd",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "world_biome_noise.boundary",
+      "target": "candidate_world_biome_noise_v1",
+      "message": "Candidate remains adapter/contract proof only; no production integration or accepted gate is claimed."
+    },
+    {
+      "severity": "info",
+      "code": "world_biome_noise.external_adapter.absent_optional",
+      "target": "FastNoiseLite",
+      "message": "FastNoise Lite was scouted but not adopted as a candidate dependency."
+    },
+    {
+      "severity": "info",
+      "code": "world_biome_noise.seed_variation.visible",
+      "target": "seed",
+      "message": "Different seed should change at least one score or biome while preserving sample shape."
+    }
+  ]
+}

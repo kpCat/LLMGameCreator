@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "product_smoke_scenario_manifest_v1",
+  "scenarioId": "candidate-world-biome-noise-v1",
+  "testFilter": "FullyQualifiedName~CandidateWorldBiomeNoiseProductSmoke",
+  "artifactRoot": ".llmgc/procedural/candidate-world-biome-noise-v1",
+  "ownedModuleId": "candidate_world_biome_noise_v1",
+  "expectedReportPath": ".llmgc/procedural/candidate-world-biome-noise-v1/candidate-world-biome-noise-v1-report.json",
+  "forbiddenPaths": [
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/CURRENT_GENERATOR_STATE.json",
+    "docs/CONTEXT_INDEX.md",
+    "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+    "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs"
+  ],
+  "timeoutPolicy": {
+    "kind": "standard",
+    "seconds": 120
+  },
+  "isProductVerticalGate": false,
+  "allowedForModuleOnlyVerification": true
+}
