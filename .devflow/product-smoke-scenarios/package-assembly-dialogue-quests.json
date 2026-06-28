@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "product_smoke_scenario_manifest_v1",
+  "scenarioId": "package-assembly-dialogue-quests",
+  "testFilter": "FullyQualifiedName~PackageAssemblyDialogueQuestsProductSmoke",
+  "artifactRoot": ".llmgc/procedural/package-assembly-dialogue-quests",
+  "ownedModuleId": "package_assembly_dialogue_quests",
+  "expectedReportPath": ".llmgc/procedural/package-assembly-dialogue-quests/package-assembly-dialogue-quests-report.json",
+  "forbiddenPaths": [],
+  "timeoutPolicy": {
+    "kind": "standard",
+    "seconds": 120
+  },
+  "isProductVerticalGate": false,
+  "allowedForModuleOnlyVerification": true
+}

@@ -152,15 +152,21 @@ public sealed class PackageAssemblyCombatProgressionAcceptanceTests
     }
 
     [Fact]
-    public void CurrentStateRecordsGoal027AcceptedBeforeGoal028()
+    public void CurrentStatePreservesGoal028AcceptedBeforeGoal029()
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_028_package_assembly_expansion_4_combat_progression", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(PackageAssemblyCombatProgressionAcceptanceService.FinalGate, root.GetProperty("gate_status").GetString());
-        Assert.Contains(PackageAssemblyCombatProgressionAcceptanceService.PreviousAcceptedGate, root.GetProperty("recommended_next_decision").GetString());
+        Assert.Equal(
+            "passed_by_user_prompt_before_goal_029",
+            root.GetProperty(PackageAssemblyCombatProgressionAcceptanceService.FinalGate).GetProperty("status").GetString());
+        Assert.Equal(
+            "goal_029_modular_generator_kernel_parallel_readiness",
+            root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Contains(
+            "package_assembly_combat_progression_expansion_verification passed",
+            root.GetProperty("recommended_next_decision").GetString());
     }
 
     private static GeneratorPlanApprovedArtifact Artifact(string id, string kind, string contentJson) =>

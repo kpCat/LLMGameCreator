@@ -242,7 +242,8 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
                 "goal_025_package_assembly_expansion_1_world_and_entities",
                 "goal_026_package_assembly_expansion_2_dialogue_and_quests",
                 "goal_027_package_assembly_expansion_3_items_economy_crafting",
-                "goal_028_package_assembly_expansion_4_combat_progression"
+                "goal_028_package_assembly_expansion_4_combat_progression",
+                "goal_029_modular_generator_kernel_parallel_readiness"
             });
     }
 

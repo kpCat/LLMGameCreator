@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "product_smoke_scenario_manifest_v1",
+  "scenarioId": "modular-generator-kernel-readiness",
+  "testFilter": "FullyQualifiedName~ModularGeneratorKernelReadinessProductSmoke",
+  "artifactRoot": ".llmgc/procedural/modular-generator-kernel-parallel-readiness",
+  "ownedModuleId": "modular_generator_kernel",
+  "expectedReportPath": ".llmgc/procedural/modular-generator-kernel-parallel-readiness/modular-generator-kernel-readiness-report.json",
+  "forbiddenPaths": [],
+  "timeoutPolicy": {
+    "kind": "standard",
+    "seconds": 120
+  },
+  "isProductVerticalGate": false,
+  "allowedForModuleOnlyVerification": true
+}

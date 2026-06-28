@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "package_assembly_module_registry_report_v1",
+  "registryKind": "static_manifested_repo_module_registry",
+  "registeredModuleCount": 2,
+  "registeredModules": [
+    {
+      "moduleId": "package_assembly_dialogue_quests",
+      "moduleKind": "package_assembly",
+      "version": "1.0.0",
+      "ownedSourceRoots": [
+        "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/"
+      ],
+      "ownedArtifactRoot": ".llmgc/procedural/package-assembly-dialogue-quests/",
+      "artifactKinds": [
+        "dialogue_pack_v1",
+        "quest_pack_v1"
+      ],
+      "productSmokeScenario": "package-assembly-dialogue-quests",
+      "registryMatchesAssembler": true,
+      "assemblerMappingTargets": [
+        "generatedContent.dialogues",
+        "game.quests"
+      ]
+    },
+    {
+      "moduleId": "package_assembly_world_entities",
+      "moduleKind": "package_assembly",
+      "version": "1.0.0",
+      "ownedSourceRoots": [
+        "src/LLMGameCreator.Application/Design/PackageAssemblyWorldEntities/"
+      ],
+      "ownedArtifactRoot": ".llmgc/procedural/package-assembly-world-entities/",
+      "artifactKinds": [
+        "scene_pack_v1",
+        "region_pack_v1",
+        "entity_pack_v1",
+        "npc_pack_v1"
+      ],
+      "productSmokeScenario": "package-assembly-world-entities",
+      "registryMatchesAssembler": true,
+      "assemblerMappingTargets": [
+        "game.maps",
+        "generatedContent.regions",
+        "generatedContent.npcs",
+        "game.entity_prototypes"
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "modular_kernel.registry.matches_assembler",
+      "target": "GeneratorPlanGamePackageAssembler",
+      "message": "Registered package assembly module descriptors match the assembler module seam."
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "module_contract_manifest_proof_v1",
+  "contractPath": "docs/MODULE_CONTRACT_MANIFEST_V1.md",
+  "moduleManifestContractWritten": true,
+  "moduleCount": 2,
+  "validModuleCount": 2,
+  "modules": [
+    {
+      "schemaVersion": "module_contract_manifest_v1",
+      "moduleId": "package_assembly_world_entities",
+      "moduleKind": "package_assembly",
+      "version": "1.0.0",
+      "ownedSourceRoots": [
+        "src/LLMGameCreator.Application/Design/PackageAssemblyWorldEntities/"
+      ],
+      "ownedArtifactRoot": ".llmgc/procedural/package-assembly-world-entities/",
+      "inputContracts": [
+        "scene_pack_v1",
+        "region_pack_v1",
+        "entity_pack_v1",
+        "npc_pack_v1"
+      ],
+      "outputContracts": [
+        "game.maps",
+        "generatedContent.regions",
+        "generatedContent.npcs",
+        "game.entity_prototypes"
+      ],
+      "requiredKernelCapabilities": [
+        "static_manifest_registry",
+        "deterministic_json_artifacts",
+        "package_assembly_adapter"
+      ],
+      "requiredDependencies": [],
+      "optionalDependencies": [
+        "package_assembly_dialogue_quests"
+      ],
+      "absenceBehavior": "required_module",
+      "validators": [
+        "GamePackageValidator",
+        "module_manifest_validator"
+      ],
+      "focusedTestFilter": "FullyQualifiedName~PackageAssemblyWorldEntities",
+      "productSmokeScenario": "package-assembly-world-entities",
+      "forbiddenRuntimeDependencies": [
+        "LLM",
+        "RAG",
+        "provider",
+        "media",
+        "Unity",
+        "LuaExecution",
+        "WinFormsUI"
+      ],
+      "deterministicHashRules": [
+        "sort_by_module_id",
+        "sort_by_contract_id",
+        "no_timestamp",
+        "no_absolute_path",
+        "utf8_no_bom"
+      ]
+    },
+    {
+      "schemaVersion": "module_contract_manifest_v1",
+      "moduleId": "package_assembly_dialogue_quests",
+      "moduleKind": "package_assembly",
+      "version": "1.0.0",
+      "ownedSourceRoots": [
+        "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/"
+      ],
+      "ownedArtifactRoot": ".llmgc/procedural/package-assembly-dialogue-quests/",
+      "inputContracts": [
+        "dialogue_pack_v1",
+        "quest_pack_v1"
+      ],
+      "outputContracts": [
+        "generatedContent.dialogues",
+        "game.quests"
+      ],
+      "requiredKernelCapabilities": [
+        "static_manifest_registry",
+        "deterministic_json_artifacts",
+        "package_assembly_adapter"
+      ],
+      "requiredDependencies": [
+        "package_assembly_world_entities"
+      ],
+      "optionalDependencies": [
+        "package_assembly_items_economy_crafting"
+      ],
+      "absenceBehavior": "required_module",
+      "validators": [
+        "GamePackageValidator",
+        "module_manifest_validator"
+      ],
+      "focusedTestFilter": "FullyQualifiedName~PackageAssemblyDialogueQuests",
+      "productSmokeScenario": "package-assembly-dialogue-quests",
+      "forbiddenRuntimeDependencies": [
+        "LLM",
+        "RAG",
+        "provider",
+        "media",
+        "Unity",
+        "LuaExecution",
+        "WinFormsUI"
+      ],
+      "deterministicHashRules": [
+        "sort_by_module_id",
+        "sort_by_contract_id",
+        "no_timestamp",
+        "no_absolute_path",
+        "utf8_no_bom"
+      ]
+    }
+  ],
+  "diagnostics": []
+}

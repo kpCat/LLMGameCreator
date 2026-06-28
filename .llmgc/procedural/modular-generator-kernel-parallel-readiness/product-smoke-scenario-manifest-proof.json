@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "product_smoke_scenario_manifest_proof_v1",
+  "contractPath": "docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md",
+  "scenarioManifestContractWritten": true,
+  "scenarioCount": 3,
+  "manifestScenarioIds": [
+    "modular-generator-kernel-readiness",
+    "package-assembly-dialogue-quests",
+    "package-assembly-world-entities"
+  ],
+  "manifestDefinedScenarioExecuted": true,
+  "runProductSmokeHardcodedRouteNotRequiredForNewManifestScenario": true,
+  "scenarios": [
+    {
+      "schemaVersion": "product_smoke_scenario_manifest_v1",
+      "scenarioId": "modular-generator-kernel-readiness",
+      "testFilter": "FullyQualifiedName~ModularGeneratorKernelReadinessProductSmoke",
+      "artifactRoot": ".llmgc/procedural/modular-generator-kernel-parallel-readiness",
+      "ownedModuleId": "modular_generator_kernel",
+      "expectedReportPath": ".llmgc/procedural/modular-generator-kernel-parallel-readiness/modular-generator-kernel-readiness-report.json",
+      "forbiddenPaths": [],
+      "timeoutPolicy": {
+        "kind": "standard",
+        "seconds": 120
+      },
+      "isProductVerticalGate": false,
+      "allowedForModuleOnlyVerification": true,
+      "manifestPath": ".devflow/product-smoke-scenarios/modular-generator-kernel-readiness.json",
+      "deterministicHash": "530942d0fefab80ea770fdaa85d41cb0a0605b6ad65d95468c57b9b86f7b9e43"
+    },
+    {
+      "schemaVersion": "product_smoke_scenario_manifest_v1",
+      "scenarioId": "package-assembly-dialogue-quests",
+      "testFilter": "FullyQualifiedName~PackageAssemblyDialogueQuestsProductSmoke",
+      "artifactRoot": ".llmgc/procedural/package-assembly-dialogue-quests",
+      "ownedModuleId": "package_assembly_dialogue_quests",
+      "expectedReportPath": ".llmgc/procedural/package-assembly-dialogue-quests/package-assembly-dialogue-quests-report.json",
+      "forbiddenPaths": [],
+      "timeoutPolicy": {
+        "kind": "standard",
+        "seconds": 120
+      },
+      "isProductVerticalGate": false,
+      "allowedForModuleOnlyVerification": true,
+      "manifestPath": ".devflow/product-smoke-scenarios/package-assembly-dialogue-quests.json",
+      "deterministicHash": "eb9ab3d484ad003fec5a4be2b68271c4972d2e31500c5b8023666c878cd802a2"
+    },
+    {
+      "schemaVersion": "product_smoke_scenario_manifest_v1",
+      "scenarioId": "package-assembly-world-entities",
+      "testFilter": "FullyQualifiedName~PackageAssemblyWorldEntitiesProductSmoke",
+      "artifactRoot": ".llmgc/procedural/package-assembly-world-entities",
+      "ownedModuleId": "package_assembly_world_entities",
+      "expectedReportPath": ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-report.json",
+      "forbiddenPaths": [],
+      "timeoutPolicy": {
+        "kind": "standard",
+        "seconds": 120
+      },
+      "isProductVerticalGate": false,
+      "allowedForModuleOnlyVerification": true,
+      "manifestPath": ".devflow/product-smoke-scenarios/package-assembly-world-entities.json",
+      "deterministicHash": "a4aebb5ba40c37376eff4aca7f16be0a145b9987ddcdf73839703972282fa697"
+    }
+  ],
+  "diagnostics": []
+}

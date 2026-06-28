@@ -19,12 +19,13 @@ rich_package_assembly_coverage_audit_verification passed
 package_assembly_world_entities_expansion_verification passed
 package_assembly_dialogue_quests_expansion_verification passed
 package_assembly_items_economy_crafting_expansion_verification passed
+package_assembly_combat_progression_expansion_verification passed
 ```
 
 Produced for review:
 
 ```text
-package_assembly_combat_progression_expansion_verification required
+modular_generator_kernel_parallel_readiness_verification required
 ```
 
 Current capabilities:
@@ -50,11 +51,12 @@ Current capabilities:
 - package assembly dialogue/quests mapping contract, real/synthetic consumer proof and compact Goal 026 artifacts;
 - package assembly items/economy/crafting mapping contract, real/synthetic consumer proof and compact Goal 027 artifacts;
 - package assembly combat/progression mapping contract, real/synthetic consumer proof and compact Goal 028 artifacts;
+- modular generator kernel readiness contracts, static package assembly module registry proof, product-smoke scenario manifests and compact Goal 029 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026 and Goal 027 have been accepted by user prompt. Goal 028 produced the fourth bounded package assembly expansion for combat/progression and now waits at its manual verification gate.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027 and Goal 028 have been accepted by user prompt. Goal 029 produced modular generator kernel and parallel readiness evidence and now waits at its manual verification gate.
 
 ## Queue Rules
 
@@ -306,15 +308,17 @@ Generate and assemble combat/progression definitions with validators and runtime
 
 Status:
 
-Produced for review. The gate remains `package_assembly_combat_progression_expansion_verification required`, not passed. Goal 029 and S227 are not started.
+Accepted by user prompt before Goal 029.
 
-### Goal 029: Full Package Assembly Vertical
+### Goal 029: Modular Generator Kernel And Parallel Development Readiness
 
 Purpose:
 
-Generate a package that combines world, entities, dialogue/quests, items/economy and combat/progression for one family.
+Create real technical readiness for modular and eventually parallel development: module manifests, product-smoke scenario manifests, a static package assembly registry/compatibility seam, module absence behavior proof and fast verification tier rules.
 
-Manual review likely required.
+Status:
+
+Produced for review. The gate remains `modular_generator_kernel_parallel_readiness_verification required`, not passed. Goal 030 and S234 are not started.
 
 ## LLM And Lua Controlled Generation Track
 
@@ -461,7 +465,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-package_assembly_combat_progression_expansion_verification
+modular_generator_kernel_parallel_readiness_verification
 ```
 
 Status:

@@ -15,14 +15,15 @@ For any generator/Codex task:
 5. `docs/ROADMAP_TO_FULL_GENERATOR.md`
 6. only then task-specific docs
 
-For Product Slice 029 specifically, read:
+For Goal 029 specifically, read:
 
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
 3. `docs/CURRENT_GENERATOR_STATE.md`
-4. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
-5. `docs/NEXT_PRODUCT_SLICE_029_SEEDED_PROCEDURAL_GAME_KERNEL_TASK.md`
-6. runtime/domain files needed by the task
+4. `docs/GOAL_029_MODULAR_GENERATOR_KERNEL_PARALLEL_READINESS.md`
+5. `docs/MODULAR_CONTRACT_GOAL_POLICY.md`
+6. `.devflow/scripts/run-product-smoke.ps1`
+7. package assembly services/tests from Goals 025-028
 
 ## Active Strategy Reset
 
@@ -89,6 +90,10 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/PACKAGE_ASSEMBLY_ITEMS_ECONOMY_CRAFTING_CONTRACT_V1.md` | Goal 027 mapping contract for accepted Goal 023/024/025/026 inputs, `item_pack_v1`, `resource_pack_v1`, `recipe_pack_v1`, `loot_pack_v1`, `transaction_pack_v1`, `inventory_pack_v1`, `equipment_pack_v1`, existing item/economy/crafting targets and non-goals. |
 | `docs/GOAL_028_PACKAGE_ASSEMBLY_EXPANSION_4_COMBAT_PROGRESSION.md` | Goal 028 task: package assembly expansion 4 for combat/progression through existing GamePackage schema and Application seams, with real and synthetic consumer proof, invalid/fake/leak matrix, product smoke route `package-assembly-combat-progression` and final stop at `package_assembly_combat_progression_expansion_verification`. |
 | `docs/PACKAGE_ASSEMBLY_COMBAT_PROGRESSION_CONTRACT_V1.md` | Goal 028 mapping contract for accepted Goal 023/024/025/026/027 inputs, `stat_pack_v1`, `ability_pack_v1`, `status_pack_v1`, `progression_pack_v1`, `encounter_pack_v1`, `combat_pack_v1`, existing combat/progression targets and non-goals. |
+| `docs/GOAL_029_MODULAR_GENERATOR_KERNEL_PARALLEL_READINESS.md` | Goal 029 task: modular generator kernel and parallel development readiness with module manifests, product-smoke scenario manifests, static registry/compatibility seam, absence behavior, verification tiers, manifest-driven product smoke route and final stop at `modular_generator_kernel_parallel_readiness_verification`. |
+| `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
+| `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
+| `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
 | `docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md` | Backlog/audit reference for wanted capabilities; not current gate authority and not an implementation plan. |
 | `docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md` | Plan-only package assembly campaign pack for the next 3-5 bounded composite goals; does not start Goal 025 or S199. |
 | `docs/GAME_PROFILE_CONTRACT_V1.md` | Goal 021 profile contract doc for deterministic game-family, presentation, topology, actor model, loop, scale, asset policy and runtime/export target selection. |
@@ -118,13 +123,13 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-package_assembly_combat_progression_expansion_verification
+modular_generator_kernel_parallel_readiness_verification
 ```
 
 Allowed next sequence:
 
-1. Review Goal 028 evidence in `docs/PACKAGE_ASSEMBLY_COMBAT_PROGRESSION_CONTRACT_V1.md`, `.llmgc/procedural/package-assembly-combat-progression/`, the focused tests, product smoke, check-all and scope guard before marking the gate passed.
-2. Goal 029 and S227 remain not started until `package_assembly_combat_progression_expansion_verification` is accepted.
+1. Review Goal 029 evidence in `docs/MODULE_CONTRACT_MANIFEST_V1.md`, `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md`, `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md`, `.llmgc/procedural/modular-generator-kernel-parallel-readiness/`, the focused tests, manifest product smoke, check-all and scope guard before marking the gate passed.
+2. Goal 030 and S234 remain not started until `modular_generator_kernel_parallel_readiness_verification` is accepted.
 
 Kill criterion:
 

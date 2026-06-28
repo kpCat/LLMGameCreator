@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "parallel_candidate_policy_proof_v1",
+  "policyPath": "docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md",
+  "parallelCandidatePolicyWritten": true,
+  "oneActiveStateWriterOnly": true,
+  "candidateStateDocsMutationRejected": true,
+  "serialAdoptionUpdatesStateOnce": true,
+  "conflictResolutionOrder": [
+    "rebase candidate onto accepted main",
+    "rerun module compatibility matrix",
+    "accept/reject candidate in serial adoption",
+    "never auto-merge contradictory module manifests"
+  ],
+  "verificationTiers": [
+    {
+      "tierId": "tier_1_module_proof",
+      "name": "Tier 1: module proof",
+      "requiredEvidence": [
+        "focused module tests",
+        "product smoke scenario manifest test",
+        "module compatibility matrix",
+        "artifact scope guard"
+      ]
+    },
+    {
+      "tierId": "tier_2_kernel_proof",
+      "name": "Tier 2: kernel proof",
+      "requiredEvidence": [
+        "all module/smoke manifests parse",
+        "registry tests",
+        "compatibility matrix",
+        "selected smoke set",
+        "ordinary tests if kernel changed"
+      ]
+    },
+    {
+      "tierId": "tier_3_campaign_proof",
+      "name": "Tier 3: campaign proof",
+      "requiredEvidence": [
+        "check-all",
+        "selected cross-module smokes",
+        "used after several modules or before adoption"
+      ]
+    },
+    {
+      "tierId": "tier_4_product_vertical_proof",
+      "name": "Tier 4: product vertical proof",
+      "requiredEvidence": [
+        "rare playable/simulatable/runtime-facing gate"
+      ]
+    }
+  ],
+  "candidateEvaluations": [
+    {
+      "candidateId": "parallel_candidate_task",
+      "activeStateWriter": false,
+      "changedPaths": [
+        "src/LLMGameCreator.Application/Design/PackageAssemblyFutureCandidate/FutureCandidate.cs"
+      ],
+      "accepted": true,
+      "diagnostics": [
+        {
+          "severity": "info",
+          "code": "parallel_candidate.paths.accepted",
+          "target": "changed_paths",
+          "message": "Candidate path set does not mutate active state docs."
+        }
+      ]
+    },
+    {
+      "candidateId": "parallel_candidate_task",
+      "activeStateWriter": false,
+      "changedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json"
+      ],
+      "accepted": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "parallel_candidate.state_docs.forbidden",
+          "target": "docs/CURRENT_GENERATOR_STATE.json",
+          "message": "Candidate tasks cannot mutate active state docs."
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

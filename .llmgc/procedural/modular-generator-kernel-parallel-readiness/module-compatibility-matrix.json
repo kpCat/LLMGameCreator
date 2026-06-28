@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "module_compatibility_matrix_v1",
+  "moduleCount": 2,
+  "rows": [
+    {
+      "moduleId": "package_assembly_dialogue_quests",
+      "requiredDependencies": [
+        "package_assembly_world_entities"
+      ],
+      "optionalDependencies": [
+        "package_assembly_items_economy_crafting"
+      ],
+      "missingRequiredDependencies": [],
+      "missingOptionalDependencies": [
+        "package_assembly_items_economy_crafting"
+      ],
+      "compatibilityStatus": "compatible"
+    },
+    {
+      "moduleId": "package_assembly_world_entities",
+      "requiredDependencies": [],
+      "optionalDependencies": [
+        "package_assembly_dialogue_quests"
+      ],
+      "missingRequiredDependencies": [],
+      "missingOptionalDependencies": [],
+      "compatibilityStatus": "compatible"
+    }
+  ],
+  "optionalModuleAbsenceHandled": true,
+  "requiredModuleMissingRejected": true,
+  "passed": true,
+  "deterministicOrdering": "module_id_ordinal"
+}

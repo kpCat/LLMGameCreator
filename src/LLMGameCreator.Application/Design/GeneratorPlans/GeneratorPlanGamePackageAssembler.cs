@@ -8,6 +8,29 @@ namespace LLMGameCreator.Application.Design.GeneratorPlans;
 
 public sealed class GeneratorPlanGamePackageAssembler
 {
+    private static readonly IReadOnlyList<GeneratorPlanPackageAssemblyModuleRegistration> PackageAssemblyModuleRegistrations =
+    [
+        new GeneratorPlanPackageAssemblyModuleRegistration
+        {
+            ModuleId = "package_assembly_world_entities",
+            ModuleKind = "package_assembly",
+            Version = "1.0.0",
+            ArtifactKinds = ["scene_pack_v1", "region_pack_v1", "npc_pack_v1", "entity_pack_v1"],
+            MappingTargets = ["game.maps", "generatedContent.regions", "generatedContent.npcs", "game.entity_prototypes"]
+        },
+        new GeneratorPlanPackageAssemblyModuleRegistration
+        {
+            ModuleId = "package_assembly_dialogue_quests",
+            ModuleKind = "package_assembly",
+            Version = "1.0.0",
+            ArtifactKinds = ["dialogue_pack_v1", "quest_pack_v1"],
+            MappingTargets = ["generatedContent.dialogues", "game.quests"]
+        }
+    ];
+
+    public static IReadOnlyList<GeneratorPlanPackageAssemblyModuleRegistration> GetPackageAssemblyModuleRegistrations() =>
+        PackageAssemblyModuleRegistrations;
+
     public GeneratorPlanGamePackageAssemblerResult Assemble(GeneratorPlanApprovedArtifactSet artifactSet)
     {
         return Assemble(artifactSet, DateTimeOffset.UtcNow);
@@ -40,6 +63,11 @@ public sealed class GeneratorPlanGamePackageAssembler
             if (document == null)
             {
                 mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Unmapped, "invalid_json"));
+                continue;
+            }
+
+            if (TryApplyRegisteredPackageAssemblyModule(package, artifact, document.RootElement, appliedAtUtc, mappings))
+            {
                 continue;
             }
 
@@ -188,6 +216,58 @@ public sealed class GeneratorPlanGamePackageAssembler
             Diagnostics = diagnostics,
             Mappings = mappings
         };
+    }
+
+    private static bool TryApplyRegisteredPackageAssemblyModule(
+        GamePackageDefinition package,
+        GeneratorPlanApprovedArtifact artifact,
+        JsonElement root,
+        DateTimeOffset appliedAtUtc,
+        ICollection<GeneratorPlanGamePackageAssemblyMapping> mappings)
+    {
+        var registration = PackageAssemblyModuleRegistrations.FirstOrDefault(module =>
+            module.ArtifactKinds.Contains(artifact.ArtifactKind, StringComparer.OrdinalIgnoreCase));
+        if (registration == null)
+        {
+            return false;
+        }
+
+        var target = ApplyRegisteredPackageAssemblyModule(package, artifact.ArtifactKind, root);
+        if (string.IsNullOrWhiteSpace(target))
+        {
+            return false;
+        }
+
+        RecordAppliedArtifact(package, artifact, root, appliedAtUtc, GeneratorPlanGamePackageAssemblyMappingResult.Mapped);
+        mappings.Add(Mapping(artifact, GeneratorPlanGamePackageAssemblyMappingResult.Mapped, target));
+        return true;
+    }
+
+    private static string ApplyRegisteredPackageAssemblyModule(GamePackageDefinition package, string artifactKind, JsonElement root)
+    {
+        switch (artifactKind)
+        {
+            case "scene_pack_v1":
+                MapScenePack(package, root);
+                return "game.maps";
+            case "region_pack_v1":
+                MapRegionPack(package, root);
+                return "generatedContent.regions";
+            case "npc_pack_v1":
+                MapNpcPack(package, root);
+                return "generatedContent.npcs";
+            case "entity_pack_v1":
+                MapEntityPack(package, root);
+                return "game.entity_prototypes";
+            case "dialogue_pack_v1":
+                MapDialoguePack(package, root);
+                return "generatedContent.dialogues";
+            case "quest_pack_v1":
+                MapQuestPack(package, root);
+                return "game.quests";
+            default:
+                return string.Empty;
+        }
     }
 
     private static GamePackageDefinition CreateBaselinePackage()
@@ -1934,4 +2014,13 @@ public sealed record GeneratorPlanGamePackageAssemblerResult
     public GamePackageDefinition Package { get; init; } = new();
     public IReadOnlyList<GeneratorPlanGamePackageAssemblyDiagnostic> Diagnostics { get; init; } = Array.Empty<GeneratorPlanGamePackageAssemblyDiagnostic>();
     public IReadOnlyList<GeneratorPlanGamePackageAssemblyMapping> Mappings { get; init; } = Array.Empty<GeneratorPlanGamePackageAssemblyMapping>();
+}
+
+public sealed record GeneratorPlanPackageAssemblyModuleRegistration
+{
+    public string ModuleId { get; init; } = string.Empty;
+    public string ModuleKind { get; init; } = string.Empty;
+    public string Version { get; init; } = string.Empty;
+    public IReadOnlyList<string> ArtifactKinds { get; init; } = [];
+    public IReadOnlyList<string> MappingTargets { get; init; } = [];
 }

@@ -1,0 +1,328 @@
+{
+  "accepted": false,
+  "finalStatus": "modular_generator_kernel_parallel_readiness_verification",
+  "manualGate": "modular_generator_kernel_parallel_readiness_verification",
+  "previousAcceptedGate": "package_assembly_combat_progression_expansion_verification passed",
+  "completedSlices": [
+    "S227",
+    "S228",
+    "S229",
+    "S230",
+    "S231",
+    "S232",
+    "S233"
+  ],
+  "productSmokeRoute": "modular-generator-kernel-readiness",
+  "contractProofPassed": true,
+  "goal028EvidenceVerified": true,
+  "moduleManifestContractWritten": true,
+  "smokeScenarioManifestContractWritten": true,
+  "parallelCandidatePolicyWritten": true,
+  "moduleRegistryWritten": true,
+  "moduleCompatibilityMatrixWritten": true,
+  "optionalModuleAbsenceHandled": true,
+  "requiredModuleMissingRejected": true,
+  "manifestSmokeScenarioExecuted": true,
+  "runProductSmokeHardcodedRouteNotRequiredForNewManifestScenario": true,
+  "moduleOnlyVerificationTierDefined": true,
+  "productVerticalGate": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "unityBuildExecuted": false,
+  "llmRagProviderMediaLuaExecuted": false,
+  "scopeGuardPassed": true,
+  "moduleContractManifestProofHash": "57de83ab10676e77bbfd90b11c1e07b6b12b9f41f26fd37b9a0c4a62414a6eff",
+  "productSmokeScenarioManifestProofHash": "03a92507149c054a787473b9fd8dcb316db1b2f2e7ee3c292f766052fbeb5c97",
+  "packageAssemblyModuleRegistryReportHash": "bd2d203b4353744d918f5b7ea93f41e635c7b7852652b08f8bcd3f602687bf50",
+  "moduleCompatibilityMatrixHash": "dc84c2ca4e5119f3f4fe1685b4955a909d0654b438e453ce4f96d3b4360d1a43",
+  "moduleAbsenceBehaviorReportHash": "19dffaa1b275a840bf8b0060ae6dd199e79fc6789a8e377d0c9d504e4407f1a6",
+  "parallelCandidatePolicyProofHash": "61cd3ec0ca2cb213e070176d17f07c19426b88ed5993e7fe96f3eabdf500d973",
+  "invalidMatrixHash": "cc715ba46d5f8bf2464418f955de047eca19511b1412683d5d837758af3fb09f",
+  "scopeReportHash": "bf42c26550e0c361cf50f138ee86f0727f6b88e30276abe34151f102263accf9",
+  "deterministicHash": "97fb724f2f3ce23a9135a6578109d2c459e81311578f837be5e3aae067199c3b",
+  "goal028Evidence": {
+    "reportPath": ".llmgc/procedural/package-assembly-combat-progression/package-assembly-combat-progression-report.json",
+    "reportHash": "ae3a86e7f79243568b71d5d9a1301a6190d36db59178c07a9afc968de8729537",
+    "manualGate": "package_assembly_combat_progression_expansion_verification",
+    "contractProofPassed": true,
+    "scopeGuardPassed": true,
+    "invalidMatrixPassed": true,
+    "noTopLevelErrorDiagnostics": true,
+    "goal028EvidenceVerified": true
+  },
+  "invalidMatrix": {
+    "schemaVersion": "modular_generator_kernel_invalid_matrix_v1",
+    "scenarioCount": 16,
+    "matchedExpectationCount": 16,
+    "rejectedCount": 15,
+    "acceptedWithDiagnosticCount": 1,
+    "passed": true,
+    "scenarios": [
+      {
+        "scenarioId": "candidate_task_attempts_active_state_docs_mutation",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "candidate_task_attempts_active_state_docs_mutation",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "parallel_candidate.state_docs.forbidden",
+            "target": "docs/CURRENT_GENERATOR_STATE.md",
+            "message": "Candidate tasks cannot mutate active state docs."
+          }
+        ]
+      },
+      {
+        "scenarioId": "duplicate_module_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "duplicate_module_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "module_manifest.module_id.duplicate",
+            "target": "package_assembly_world_entities",
+            "message": "Module ids must be unique."
+          }
+        ]
+      },
+      {
+        "scenarioId": "forbidden_runtime_dependency",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "forbidden_runtime_dependency",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "module_manifest.runtime_dependency.forbidden",
+            "target": "LLM",
+            "message": "Module manifest declares a forbidden runtime dependency."
+          }
+        ]
+      },
+      {
+        "scenarioId": "hardcoded_smoke_route_required_for_new_manifest_scenario",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "hardcoded_smoke_route_required_for_new_manifest_scenario",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "product_smoke.manifest_route.hardcode_required",
+            "target": "modular-generator-kernel-readiness",
+            "message": "New manifest scenarios must not require a hardcoded run-product-smoke case."
+          }
+        ]
+      },
+      {
+        "scenarioId": "historical_goal020_028_artifact_mutation",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "historical_goal020_028_artifact_mutation",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "artifact_scope.legacy_artifact.forbidden",
+            "target": ".llmgc/procedural/package-assembly-combat-progression/",
+            "message": "Historical Goal 020-028 artifact mutation is rejected outside the current Goal 029 root."
+          }
+        ]
+      },
+      {
+        "scenarioId": "malformed_module_manifest",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "malformed_module_manifest",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "module_manifest.json.malformed",
+            "target": "module_manifest",
+            "message": "Expected depth to be zero at the end of the JSON payload. There is an open JSON object or array that should be closed. Path: $ | LineNumber: 0 | BytePositionInLine: 20."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_accepted_goal028_gate",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_accepted_goal028_gate",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "modular_kernel.previous_gate.missing",
+            "target": "package_assembly_combat_progression_expansion_verification required",
+            "message": "Goal 029 requires the accepted Goal 028 gate."
+          }
+        ]
+      },
+      {
+        "scenarioId": "missing_goal028_compact_report",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "missing_goal028_compact_report",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "modular_kernel.goal028_report.missing",
+            "target": ".llmgc/procedural/package-assembly-combat-progression/package-assembly-combat-progression-report.json",
+            "message": "Goal 028 compact report is required."
+          }
+        ]
+      },
+      {
+        "scenarioId": "module_artifact_root_outside_owned_root",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "module_artifact_root_outside_owned_root",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "module_manifest.artifact_root.outside_owned_root",
+            "target": "../outside",
+            "message": "Owned artifact root must stay under .llmgc/procedural/."
+          }
+        ]
+      },
+      {
+        "scenarioId": "module_only_verification_claims_product_vertical_gate",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "module_only_verification_claims_product_vertical_gate",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "product_smoke_manifest.forbidden_path.referenced",
+            "target": "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+            "message": "Scenario manifest references a path forbidden for current module-only verification."
+          },
+          {
+            "severity": "error",
+            "code": "product_smoke_manifest.product_vertical.module_only_conflict",
+            "target": "modular-generator-kernel-readiness",
+            "message": "Module-only verification cannot claim a product vertical gate."
+          }
+        ]
+      },
+      {
+        "scenarioId": "optional_dependency_missing",
+        "expectedValid": true,
+        "actualValid": true,
+        "mutatedEvidenceKind": "optional_dependency_missing",
+        "diagnostics": [
+          {
+            "severity": "info",
+            "code": "module.dependency.absent_optional",
+            "target": "missing_optional_module",
+            "message": "Optional module absence is accepted and reported as absent_optional."
+          }
+        ]
+      },
+      {
+        "scenarioId": "product_smoke_manifest_forbidden_path",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "product_smoke_manifest_forbidden_path",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "product_smoke_manifest.forbidden_path.referenced",
+            "target": ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-report.json",
+            "message": "Scenario manifest references a path forbidden for current module-only verification."
+          },
+          {
+            "severity": "error",
+            "code": "product_smoke_manifest.forbidden_path.referenced",
+            "target": "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+            "message": "Scenario manifest references a path forbidden for current module-only verification."
+          }
+        ]
+      },
+      {
+        "scenarioId": "product_smoke_manifest_missing_test_filter",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "product_smoke_manifest_missing_test_filter",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "product_smoke_manifest.forbidden_path.referenced",
+            "target": "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+            "message": "Scenario manifest references a path forbidden for current module-only verification."
+          },
+          {
+            "severity": "error",
+            "code": "product_smoke_manifest.test_filter.missing",
+            "target": "modular-generator-kernel-readiness",
+            "message": "Required string field is missing."
+          }
+        ]
+      },
+      {
+        "scenarioId": "required_dependency_missing",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "required_dependency_missing",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "module.dependency.required_missing",
+            "target": "missing_required_module",
+            "message": "Required module dependency is missing."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_input_contract_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_input_contract_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "module_manifest.input_contract.unknown",
+            "target": "unknown_contract_v1",
+            "message": "Input contract id is not known to the modular kernel contract."
+          }
+        ]
+      },
+      {
+        "scenarioId": "unknown_output_contract_id",
+        "expectedValid": false,
+        "actualValid": false,
+        "mutatedEvidenceKind": "unknown_output_contract_id",
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "module_manifest.output_contract.unknown",
+            "target": "unknown.output",
+            "message": "Output contract id is not known to the modular kernel contract."
+          }
+        ]
+      }
+    ],
+    "diagnostics": [
+      {
+        "severity": "info",
+        "code": "modular_kernel.invalid_matrix.covered",
+        "target": "invalid_matrix",
+        "message": "Invalid/fake/leak scenarios flow through manifest, registry, dependency, policy or scope validation helpers."
+      }
+    ]
+  },
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "modular_kernel.boundary",
+      "target": "execution_boundary",
+      "message": "Goal 029 writes modular generator kernel readiness artifacts only; no product vertical gate, Unity, LLM, RAG, provider, media or Lua execution is invoked."
+    },
+    {
+      "severity": "info",
+      "code": "modular_kernel.previous_gate_recorded",
+      "target": "package_assembly_combat_progression_expansion_verification passed",
+      "message": "User-confirmed Goal 028 combat/progression package assembly verification is recorded as passed."
+    }
+  ]
+}

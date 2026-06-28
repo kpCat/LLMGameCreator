@@ -17,7 +17,30 @@ $MarkdownPath = Join-Path $RunDir "product-smoke-summary.md"
 $LogIndexPath = Join-Path $RunDir "logs.txt"
 $TestResultsDir = Join-Path $RunDir "test-results"
 $PackageOutputDir = Join-Path $RunDir "package-output"
-$ScenarioArtifactRoot = if ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario" -or $Scenario -eq "unity-alpha-readable-presentation" -or $Scenario -eq "minimum-playable-generated-game" -or $Scenario -eq "generated-game-profile-contract" -or $Scenario -eq "development-complexity-stabilization" -or $Scenario -eq "capability-bundle-pipeline-inputs" -or $Scenario -eq "rich-package-assembly-coverage-audit" -or $Scenario -eq "package-assembly-world-entities" -or $Scenario -eq "package-assembly-dialogue-quests" -or $Scenario -eq "package-assembly-items-economy-crafting" -or $Scenario -eq "package-assembly-combat-progression") { $RepoRoot } else { $PackageOutputDir }
+$ScenarioManifestPath = Join-Path $RepoRoot ".devflow\product-smoke-scenarios\$Scenario.json"
+$ScenarioManifest = $null
+$ManifestExpectedReportPath = ""
+$ManifestArtifactRootPath = ""
+if (Test-Path -LiteralPath $ScenarioManifestPath) {
+    $ScenarioManifest = Get-Content -Raw -Encoding UTF8 -LiteralPath $ScenarioManifestPath | ConvertFrom-Json
+    if ([string]::IsNullOrWhiteSpace("$($ScenarioManifest.testFilter)")) {
+        throw "Product smoke scenario manifest '$ScenarioManifestPath' is missing testFilter."
+    }
+
+    if ([string]::IsNullOrWhiteSpace("$($ScenarioManifest.artifactRoot)")) {
+        throw "Product smoke scenario manifest '$ScenarioManifestPath' is missing artifactRoot."
+    }
+
+    if ([string]::IsNullOrWhiteSpace("$($ScenarioManifest.expectedReportPath)")) {
+        throw "Product smoke scenario manifest '$ScenarioManifestPath' is missing expectedReportPath."
+    }
+
+    $relativeArtifactRoot = "$($ScenarioManifest.artifactRoot)"
+    $relativeExpectedReportPath = "$($ScenarioManifest.expectedReportPath)"
+    $ManifestArtifactRootPath = Join-Path $RepoRoot ($relativeArtifactRoot.Replace('/', [System.IO.Path]::DirectorySeparatorChar))
+    $ManifestExpectedReportPath = Join-Path $RepoRoot ($relativeExpectedReportPath.Replace('/', [System.IO.Path]::DirectorySeparatorChar))
+}
+$ScenarioArtifactRoot = if ($null -ne $ScenarioManifest) { $RepoRoot } elseif ($Scenario -eq "unity-playable-alpha" -or $Scenario -eq "unity-generated-scene-projection" -or $Scenario -eq "unity-runtime-state-loop" -or $Scenario -eq "unity-quest-completion-loop" -or $Scenario -eq "unity-multi-variant-playable-scenario" -or $Scenario -eq "unity-alpha-readable-presentation" -or $Scenario -eq "minimum-playable-generated-game" -or $Scenario -eq "generated-game-profile-contract" -or $Scenario -eq "development-complexity-stabilization" -or $Scenario -eq "capability-bundle-pipeline-inputs" -or $Scenario -eq "rich-package-assembly-coverage-audit" -or $Scenario -eq "package-assembly-world-entities" -or $Scenario -eq "package-assembly-dialogue-quests" -or $Scenario -eq "package-assembly-items-economy-crafting" -or $Scenario -eq "package-assembly-combat-progression") { $RepoRoot } else { $PackageOutputDir }
 $TestFilter = "FullyQualifiedName~ProductSmoke"
 $ProductSmokeCommand = "dotnet test tests\LLMGameCreator.Tests\LLMGameCreator.Tests.csproj --configuration Debug --filter $TestFilter"
 
@@ -31,7 +54,9 @@ function Write-ProductSmokeSummary {
         [string]$ErrorMessage = ""
     )
 
-    $packageJsonPath = if ($Scenario -eq "active-package-quest-dialogue-preview") {
+    $packageJsonPath = if ($null -ne $ScenarioManifest -and -not [string]::IsNullOrWhiteSpace($ManifestExpectedReportPath)) {
+        $ManifestExpectedReportPath
+    } elseif ($Scenario -eq "active-package-quest-dialogue-preview") {
         Join-Path $PackageOutputDir ".llmgc\package-assembly\package.json"
     } elseif ($Scenario -eq "procedural-game-kernel") {
         Join-Path $PackageOutputDir ".llmgc\procedural\generated-game-plan.json"
@@ -148,7 +173,10 @@ $PreviousProjectDir = $env:LLMGC_PRODUCT_SMOKE_PROJECT_DIR
 
 Push-Location $RepoRoot
 try {
-    if ($Scenario -eq "baseline-strict-package-assembly") {
+    if ($null -ne $ScenarioManifest) {
+        $TestFilter = "$($ScenarioManifest.testFilter)"
+    }
+    elseif ($Scenario -eq "baseline-strict-package-assembly") {
         $TestFilter = "FullyQualifiedName~BaselineStrictArtifactsPackageAssemblySmokeTests"
     }
     elseif ($Scenario -eq "generated-package-runtime-preview") {
@@ -364,6 +392,16 @@ elseif ($Scenario -eq "unity-archive-review-snapshot") {
         "trx;LogFileName=product-smoke.trx",
         "/p:EnableWindowsTargeting=true"
     ) -RunDir $RunDir -LogIndexPath $LogIndexPath | Out-Null
+
+    if ($null -ne $ScenarioManifest) {
+        if (-not (Test-Path -LiteralPath $ManifestArtifactRootPath)) {
+            throw "Product smoke scenario manifest artifactRoot was not produced: $ManifestArtifactRootPath"
+        }
+
+        if (-not (Test-Path -LiteralPath $ManifestExpectedReportPath)) {
+            throw "Product smoke scenario manifest expectedReportPath was not produced: $ManifestExpectedReportPath"
+        }
+    }
 
     Write-ProductSmokeSummary -Status "passed"
 

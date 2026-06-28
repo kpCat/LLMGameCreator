@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "product_smoke_scenario_manifest_v1",
+  "scenarioId": "package-assembly-world-entities",
+  "testFilter": "FullyQualifiedName~PackageAssemblyWorldEntitiesProductSmoke",
+  "artifactRoot": ".llmgc/procedural/package-assembly-world-entities",
+  "ownedModuleId": "package_assembly_world_entities",
+  "expectedReportPath": ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-report.json",
+  "forbiddenPaths": [],
+  "timeoutPolicy": {
+    "kind": "standard",
+    "seconds": 120
+  },
+  "isProductVerticalGate": false,
+  "allowedForModuleOnlyVerification": true
+}

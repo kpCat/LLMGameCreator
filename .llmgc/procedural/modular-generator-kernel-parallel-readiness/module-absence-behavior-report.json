@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "module_absence_behavior_report_v1",
+  "optionalModuleAbsenceHandled": true,
+  "requiredModuleMissingRejected": true,
+  "evaluations": [
+    {
+      "moduleId": "package_assembly_optional_tactical_ai",
+      "required": false,
+      "status": "absent_optional",
+      "accepted": true,
+      "diagnostic": {
+        "severity": "info",
+        "code": "module.dependency.absent_optional",
+        "target": "package_assembly_optional_tactical_ai",
+        "message": "Optional module dependency is absent and reported without crashing compatibility checking."
+      }
+    },
+    {
+      "moduleId": "package_assembly_required_world_entities",
+      "required": true,
+      "status": "missing_required",
+      "accepted": false,
+      "diagnostic": {
+        "severity": "error",
+        "code": "module.dependency.required_missing",
+        "target": "package_assembly_required_world_entities",
+        "message": "Required module dependency is missing."
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "modular_kernel.optional_absence.handled",
+      "target": "package_assembly_optional_tactical_ai",
+      "message": "Absent optional module is accepted with absent_optional diagnostic."
+    },
+    {
+      "severity": "info",
+      "code": "modular_kernel.required_absence.rejected",
+      "target": "package_assembly_required_world_entities",
+      "message": "Missing required module is rejected before compatibility is accepted."
+    }
+  ]
+}
