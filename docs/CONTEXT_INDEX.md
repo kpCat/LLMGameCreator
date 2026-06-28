@@ -94,6 +94,15 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
+| `docs/candidates/README.md` | Docs-only index for adopted parallel candidate scouting reports; reference material only, not a product gate or dependency adoption. |
+| `docs/candidates/candidate_dialogue_narrative_tooling_v1/CANDIDATE_CONTRACT_NOTE.md` | Candidate-only dialogue/narrative tooling contract boundary for possible future Ink/Yarn Spinner inspired editor-time adapters. |
+| `docs/candidates/candidate_dialogue_narrative_tooling_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for dialogue/narrative tooling candidates; no direct dependency accepted. |
+| `docs/candidates/candidate_world_biome_noise_v1/WORLD_BIOME_NOISE_CONTRACT.md` | Candidate-only world/biome/noise contract boundary for deterministic seeded sampling and fallback behavior. |
+| `docs/candidates/candidate_world_biome_noise_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for world/biome/noise candidates; FastNoise Lite remains a future adapter candidate, not an accepted dependency. |
+| `docs/candidates/candidate_semantic_catalog_v1/CANDIDATE_CONTRACT.md` | Candidate-only semantic catalog boundary for offline/editor-time lexical relations, tags, provenance and reviewed imports. |
+| `docs/candidates/candidate_semantic_catalog_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for semantic catalog sources; live API/RAG/dataset dependency remains rejected/deferred. |
+| `docs/candidates/candidate_navigation_pathfinding_v1/NAVIGATION_PATHFINDING_CONTRACT_NOTE.md` | Candidate-only navigation/pathfinding contract boundary for deterministic graph/grid queries and future navmesh adapters. |
+| `docs/candidates/candidate_navigation_pathfinding_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for pathfinding/navmesh candidates; no native/.NET/Unity navigation dependency accepted. |
 | `docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md` | Backlog/audit reference for wanted capabilities; not current gate authority and not an implementation plan. |
 | `docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md` | Plan-only package assembly campaign pack for the next 3-5 bounded composite goals; does not start Goal 025 or S199. |
 | `docs/GAME_PROFILE_CONTRACT_V1.md` | Goal 021 profile contract doc for deterministic game-family, presentation, topology, actor model, loop, scale, asset policy and runtime/export target selection. |
