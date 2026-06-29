@@ -1,0 +1,388 @@
+{
+  "candidateId": "candidate_region_settlement_road_seeds_v1",
+  "contractId": "region_settlement_road_seeds_contract_v1",
+  "baseCandidateId": "candidate_world_region_climate_v1",
+  "finalStatus": "candidate_ready_for_serial_adoption",
+  "contractProofPassed": true,
+  "acceptedGateClaimed": false,
+  "seed": "candidate/region-settlement-road-seeds/default-seed",
+  "rulesVersion": "region_settlement_road_seeds_rules_v1",
+  "coordinateSpace": "world_cell",
+  "regionSize": 16,
+  "latitudeBandPeriod": 128,
+  "maxSettlementAnchors": 5,
+  "maxRoadHints": 6,
+  "sameSeedStable": true,
+  "differentSeedVariationVisible": true,
+  "orderIndependent": true,
+  "globalMapMaterialized": false,
+  "actualSettlementsGenerated": false,
+  "roadPathsGenerated": false,
+  "navigationPathfindingImplemented": false,
+  "factionGenerationImplemented": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "runtimeProviderNetworkDependency": false,
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "mediaExecuted": false,
+    "networkExecuted": false,
+    "luaExecuted": false,
+    "unityExecuted": false,
+    "allFalse": true
+  },
+  "externalScoutingDecisions": [
+    {
+      "name": "Procedural village generation",
+      "decision": "reference_only",
+      "note": "Interest maps, settlement seeds and road skeletons inform the candidate shape only."
+    },
+    {
+      "name": "Road network research",
+      "decision": "reference_only",
+      "note": "Settlement nuclei, waterways/terrain and neighbourhood context stay conceptual references only."
+    },
+    {
+      "name": "GDMC settlement generation",
+      "decision": "reference_only",
+      "note": "Terrain-adaptive settlement ideas remain reference-only; no implementation is copied."
+    }
+  ],
+  "plan": {
+    "planId": "settlement-road-plan/0_0/7bafa2b1",
+    "regionX": 0,
+    "regionY": 0,
+    "regionId": "region/0_0/403d89ca",
+    "sourceClimateSummary": {
+      "regionX": 0,
+      "regionY": 0,
+      "regionId": "region/0_0/403d89ca",
+      "dominantBiomeId": "biome/water",
+      "averageElevationScore": 0.4249,
+      "averageMoistureScore": 0.3538,
+      "averageTemperatureScore": 0.0841,
+      "averageRuggednessScore": 0.4811,
+      "averageSettlementSuitabilityScore": 0.1293,
+      "averageRoadTravelCostScore": 0.5255,
+      "roadSuitabilityScore": 0.4745,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_water",
+        "future_sparse_settlement_candidate",
+        "future_road_detour_candidate"
+      ]
+    },
+    "settlementAnchors": [
+      {
+        "anchorId": "settlement-anchor/0_0/0_15/8302c020",
+        "regionX": 0,
+        "regionY": 0,
+        "cellX": 0,
+        "cellY": 15,
+        "kind": "VillageCandidate",
+        "suitabilityScore": 0.4538,
+        "elevationScore": 0.3575,
+        "moistureScore": 0.4761,
+        "temperatureScore": 0.0909,
+        "ruggednessScore": 0.1689,
+        "climateBand": "polar",
+        "biomeId": "biome/plains",
+        "sourceClimateRegionId": "region/0_0/403d89ca",
+        "sourceClimateSampleIndex": 2,
+        "reasons": [
+          "cold",
+          "road_friendly"
+        ],
+        "tags": [
+          "biome/plains",
+          "climate/polar",
+          "reason/cold",
+          "reason/road_friendly",
+          "settlement_anchor_secondary"
+        ]
+      },
+      {
+        "anchorId": "settlement-anchor/0_0/0_8/3db33a19",
+        "regionX": 0,
+        "regionY": 0,
+        "cellX": 0,
+        "cellY": 8,
+        "kind": "VillageCandidate",
+        "suitabilityScore": 0.4289,
+        "elevationScore": 0.3007,
+        "moistureScore": 0.3347,
+        "temperatureScore": 0.185,
+        "ruggednessScore": 0.2147,
+        "climateBand": "polar",
+        "biomeId": "biome/plains",
+        "sourceClimateRegionId": "region/0_0/403d89ca",
+        "sourceClimateSampleIndex": 1,
+        "reasons": [
+          "cold",
+          "road_friendly"
+        ],
+        "tags": [
+          "biome/plains",
+          "climate/polar",
+          "reason/cold",
+          "reason/road_friendly",
+          "settlement_anchor_secondary"
+        ]
+      },
+      {
+        "anchorId": "settlement-anchor/0_0/15_8/fe3022be",
+        "regionX": 0,
+        "regionY": 0,
+        "cellX": 15,
+        "cellY": 8,
+        "kind": "OutpostCandidate",
+        "suitabilityScore": 0.225,
+        "elevationScore": 0.4621,
+        "moistureScore": 0.7004,
+        "temperatureScore": 0,
+        "ruggednessScore": 0.8825,
+        "climateBand": "polar",
+        "biomeId": "biome/forest",
+        "sourceClimateRegionId": "region/0_0/403d89ca",
+        "sourceClimateSampleIndex": 5,
+        "reasons": [
+          "cold",
+          "rugged"
+        ],
+        "tags": [
+          "biome/forest",
+          "climate/polar",
+          "reason/cold",
+          "reason/rugged",
+          "settlement_anchor_secondary"
+        ]
+      },
+      {
+        "anchorId": "settlement-anchor/0_0/0_0/2e45773c",
+        "regionX": 0,
+        "regionY": 0,
+        "cellX": 0,
+        "cellY": 0,
+        "kind": "OutpostCandidate",
+        "suitabilityScore": 0.0508,
+        "elevationScore": 0.5293,
+        "moistureScore": 0.0802,
+        "temperatureScore": 0.0466,
+        "ruggednessScore": 0.8393,
+        "climateBand": "polar",
+        "biomeId": "biome/desert",
+        "sourceClimateRegionId": "region/0_0/403d89ca",
+        "sourceClimateSampleIndex": 0,
+        "reasons": [
+          "cold",
+          "dry",
+          "pass_candidate",
+          "rugged"
+        ],
+        "tags": [
+          "biome/desert",
+          "climate/polar",
+          "reason/cold",
+          "reason/dry",
+          "reason/pass_candidate",
+          "reason/rugged",
+          "settlement_anchor_secondary"
+        ]
+      },
+      {
+        "anchorId": "settlement-anchor/0_0/8_8/11b3822d",
+        "regionX": 0,
+        "regionY": 0,
+        "cellX": 8,
+        "cellY": 8,
+        "kind": "OutpostCandidate",
+        "suitabilityScore": 0.0415,
+        "elevationScore": 0.873,
+        "moistureScore": 0.3045,
+        "temperatureScore": 0,
+        "ruggednessScore": 0.4768,
+        "climateBand": "polar",
+        "biomeId": "biome/alpine",
+        "sourceClimateRegionId": "region/0_0/403d89ca",
+        "sourceClimateSampleIndex": 3,
+        "reasons": [
+          "cold"
+        ],
+        "tags": [
+          "biome/alpine",
+          "climate/polar",
+          "reason/cold",
+          "settlement_anchor_secondary"
+        ]
+      }
+    ],
+    "roadHints": [
+      {
+        "roadHintId": "road-hint/897133321d65",
+        "fromId": "settlement-anchor/0_0/0_15/8302c020",
+        "toId": "settlement-anchor/0_0/0_8/3db33a19",
+        "connectionKind": "InternalRegionLink",
+        "estimatedCostScore": 0.2921,
+        "priorityScore": 0.5346,
+        "reasons": [
+          "cold",
+          "road_friendly"
+        ],
+        "tags": [
+          "dominant_biome_water",
+          "from/VillageCandidate",
+          "road_detour_candidate",
+          "to/VillageCandidate"
+        ]
+      },
+      {
+        "roadHintId": "road-hint/fbe6e0bbdf8c",
+        "fromId": "settlement-anchor/0_0/0_15/8302c020",
+        "toId": "settlement-anchor/0_0/15_8/fe3022be",
+        "connectionKind": "InternalRegionLink",
+        "estimatedCostScore": 0.5228,
+        "priorityScore": 0.3971,
+        "reasons": [
+          "cold"
+        ],
+        "tags": [
+          "dominant_biome_water",
+          "from/VillageCandidate",
+          "road_detour_candidate",
+          "to/OutpostCandidate"
+        ]
+      },
+      {
+        "roadHintId": "road-hint/9b7c32631cb4",
+        "fromId": "settlement-anchor/0_0/0_8/3db33a19",
+        "toId": "settlement-anchor/0_0/15_8/fe3022be",
+        "connectionKind": "InternalRegionLink",
+        "estimatedCostScore": 0.5113,
+        "priorityScore": 0.3937,
+        "reasons": [
+          "cold"
+        ],
+        "tags": [
+          "dominant_biome_water",
+          "from/VillageCandidate",
+          "road_detour_candidate",
+          "to/OutpostCandidate"
+        ]
+      },
+      {
+        "roadHintId": "road-hint/a7524f8e7068",
+        "fromId": "settlement-anchor/0_0/0_0/2e45773c",
+        "toId": "settlement-anchor/0_0/0_8/3db33a19",
+        "connectionKind": "InternalRegionLink",
+        "estimatedCostScore": 0.4023,
+        "priorityScore": 0.3803,
+        "reasons": [
+          "cold",
+          "road_friendly"
+        ],
+        "tags": [
+          "dominant_biome_water",
+          "from/OutpostCandidate",
+          "road_detour_candidate",
+          "to/VillageCandidate"
+        ]
+      },
+      {
+        "roadHintId": "road-hint/be80fd172d6e",
+        "fromId": "settlement-anchor/0_0/0_8/3db33a19",
+        "toId": "settlement-anchor/0_0/8_8/11b3822d",
+        "connectionKind": "InternalRegionLink",
+        "estimatedCostScore": 0.4303,
+        "priorityScore": 0.3681,
+        "reasons": [
+          "cold"
+        ],
+        "tags": [
+          "dominant_biome_water",
+          "from/VillageCandidate",
+          "road_detour_candidate",
+          "to/OutpostCandidate"
+        ]
+      },
+      {
+        "roadHintId": "road-hint/0428d4503bc7",
+        "fromId": "settlement-anchor/0_0/0_15/8302c020",
+        "toId": "settlement-anchor/0_0/8_8/11b3822d",
+        "connectionKind": "InternalRegionLink",
+        "estimatedCostScore": 0.4598,
+        "priorityScore": 0.3653,
+        "reasons": [
+          "cold"
+        ],
+        "tags": [
+          "dominant_biome_water",
+          "from/VillageCandidate",
+          "road_detour_candidate",
+          "to/OutpostCandidate"
+        ]
+      }
+    ],
+    "summaryTags": [
+      "anchor_count/5",
+      "dominant_biome_water",
+      "future_road_detour_candidate",
+      "future_sparse_settlement_candidate",
+      "road_hint_count/6"
+    ]
+  },
+  "deterministicHash": "f4ac57a4066d8ee01a61724ab2eeecd4c15b134eb316b47e55ec64cb32397356",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.anchor_ids.unique",
+      "target": "settlementAnchors",
+      "message": "Settlement anchor ids must be stable and unique."
+    },
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.boundary",
+      "target": "candidate_region_settlement_road_seeds_v1",
+      "message": "Candidate produces planning seeds only; no settlements, paths, factions or navigation are generated."
+    },
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.external_scouting.reference_only",
+      "target": "village/road/GDMC",
+      "message": "External scouting remains reference-only; no dependency or copied implementation is adopted."
+    },
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.limits.respected",
+      "target": "options",
+      "message": "Max settlement anchor and road hint options must be respected."
+    },
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.road_hint_ids.unique",
+      "target": "roadHints",
+      "message": "Road hint ids must be stable and unique."
+    },
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.road_refs.valid",
+      "target": "roadHints",
+      "message": "Road hints must reference only existing anchors and must not self-link or duplicate unordered pairs."
+    },
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.scores.bounded",
+      "target": "scores",
+      "message": "All anchor and road scores must stay within 0..1."
+    },
+    {
+      "severity": "info",
+      "code": "region_settlement_road_seeds.seed_variation.visible",
+      "target": "seed",
+      "message": "Different seed should change at least one anchor or road-planning field while preserving bounded output shape."
+    }
+  ]
+}

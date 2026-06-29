@@ -1,0 +1,849 @@
+{
+  "candidateId": "candidate_region_hydrology_waterway_hints_v1",
+  "contractId": "region_hydrology_waterway_hints_contract_v1",
+  "baseCandidateId": "candidate_region_gateway_connectivity_hints_v1",
+  "finalStatus": "candidate_ready_for_serial_adoption",
+  "contractProofPassed": true,
+  "acceptedGateClaimed": false,
+  "seed": "candidate/region-hydrology-waterway-hints/default-seed",
+  "rulesVersion": "region_hydrology_waterway_hints_rules_v1",
+  "coordinateSpace": "world_cell",
+  "regionSize": 16,
+  "latitudeBandPeriod": 128,
+  "includeDiagonals": false,
+  "maxWaterSourceCandidates": 5,
+  "maxWaterbodyCandidates": 4,
+  "maxWaterwayHints": 6,
+  "maxCrossingHints": 6,
+  "basinCodeDepth": 4,
+  "sameSeedStable": true,
+  "differentSeedVariationVisible": true,
+  "orderIndependent": true,
+  "globalMapMaterialized": false,
+  "actualRiversGenerated": false,
+  "actualWaterbodiesGenerated": false,
+  "riverPathsGenerated": false,
+  "waterwayPolylinesGenerated": false,
+  "erosionSimulationImplemented": false,
+  "rainfallSimulationImplemented": false,
+  "floodSimulationImplemented": false,
+  "pathfindingNavigationImplemented": false,
+  "navigationGraphGenerated": false,
+  "actualSettlementsGenerated": false,
+  "factionGenerationImplemented": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "runtimeProviderNetworkDependency": false,
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "mediaExecuted": false,
+    "networkExecuted": false,
+    "luaExecuted": false,
+    "unityExecuted": false,
+    "allFalse": true
+  },
+  "externalScoutingDecisions": [
+    {
+      "name": "Red Blob Mapgen4 rainfall and rivers",
+      "decision": "reference_only",
+      "note": "Rainfall and river relationships inform labels only; no simulation is copied."
+    },
+    {
+      "name": "HydroBASINS nested basin topology",
+      "decision": "reference_only",
+      "note": "Hierarchical basin coding is reference-inspired only; local codes are not real Pfafstetter ids."
+    },
+    {
+      "name": "DEM watershed and flow direction",
+      "decision": "reference_only",
+      "note": "Elevation and outflow concepts remain bounded local hints, not watershed delineation."
+    },
+    {
+      "name": "Fluvial erosion research",
+      "decision": "reference_only",
+      "note": "Terrain/rainfall/erosion relationships stay conceptual; no erosion engine is implemented."
+    }
+  ],
+  "plan": {
+    "planId": "hydrology-waterway-plan/0_0/61df7ee0",
+    "regionX": 0,
+    "regionY": 0,
+    "regionId": "region/0_0/541c6434",
+    "sourceClimateSummary": {
+      "regionX": 0,
+      "regionY": 0,
+      "regionId": "region/0_0/541c6434",
+      "dominantBiomeId": "biome/desert",
+      "averageElevationScore": 0.3453,
+      "averageMoistureScore": 0.3708,
+      "averageTemperatureScore": 0.0959,
+      "averageRuggednessScore": 0.5812,
+      "averageSettlementSuitabilityScore": 0.143,
+      "averageRoadTravelCostScore": 0.5261,
+      "roadSuitabilityScore": 0.4739,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_desert",
+        "future_sparse_settlement_candidate",
+        "future_road_detour_candidate"
+      ]
+    },
+    "sourceSettlementRoadSeedPlanId": "settlement-road-plan/0_0/17f55868",
+    "sourceSettlementAnchorCount": 5,
+    "sourceRoadHintCount": 6,
+    "sourceGatewayConnectivityPlanId": "gateway-connectivity-plan/0_0/103a60df",
+    "sourceGatewayCandidateCount": 8,
+    "sourceCorridorHintCount": 4,
+    "neighborRegionSummaries": [
+      {
+        "regionX": 0,
+        "regionY": -1,
+        "regionId": "region/0_-1/3ce9703a",
+        "direction": "North",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": 0,
+          "regionY": -1,
+          "regionId": "region/0_-1/3ce9703a",
+          "dominantBiomeId": "biome/water",
+          "averageElevationScore": 0.4376,
+          "averageMoistureScore": 0.3224,
+          "averageTemperatureScore": 0.1035,
+          "averageRuggednessScore": 0.4895,
+          "averageSettlementSuitabilityScore": 0.0021,
+          "averageRoadTravelCostScore": 0.6983,
+          "roadSuitabilityScore": 0.3017,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_water",
+            "future_sparse_settlement_candidate",
+            "future_road_detour_candidate"
+          ]
+        }
+      },
+      {
+        "regionX": 1,
+        "regionY": 0,
+        "regionId": "region/1_0/4e0af6d6",
+        "direction": "East",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": 1,
+          "regionY": 0,
+          "regionId": "region/1_0/4e0af6d6",
+          "dominantBiomeId": "biome/water",
+          "averageElevationScore": 0.4017,
+          "averageMoistureScore": 0.4821,
+          "averageTemperatureScore": 0.1396,
+          "averageRuggednessScore": 0.5719,
+          "averageSettlementSuitabilityScore": 0.0502,
+          "averageRoadTravelCostScore": 0.6785,
+          "roadSuitabilityScore": 0.3215,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_water",
+            "future_sparse_settlement_candidate",
+            "future_road_detour_candidate"
+          ]
+        }
+      },
+      {
+        "regionX": 0,
+        "regionY": 1,
+        "regionId": "region/0_1/db58b6c4",
+        "direction": "South",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": 0,
+          "regionY": 1,
+          "regionId": "region/0_1/db58b6c4",
+          "dominantBiomeId": "biome/alpine",
+          "averageElevationScore": 0.6295,
+          "averageMoistureScore": 0.403,
+          "averageTemperatureScore": 0.2324,
+          "averageRuggednessScore": 0.305,
+          "averageSettlementSuitabilityScore": 0.2007,
+          "averageRoadTravelCostScore": 0.3272,
+          "roadSuitabilityScore": 0.6728,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_alpine",
+            "future_sparse_settlement_candidate",
+            "future_road_corridor_candidate"
+          ]
+        }
+      },
+      {
+        "regionX": -1,
+        "regionY": 0,
+        "regionId": "region/-1_0/7bc84a5b",
+        "direction": "West",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": -1,
+          "regionY": 0,
+          "regionId": "region/-1_0/7bc84a5b",
+          "dominantBiomeId": "biome/alpine",
+          "averageElevationScore": 0.572,
+          "averageMoistureScore": 0.4078,
+          "averageTemperatureScore": 0.0639,
+          "averageRuggednessScore": 0.3689,
+          "averageSettlementSuitabilityScore": 0.0795,
+          "averageRoadTravelCostScore": 0.5289,
+          "roadSuitabilityScore": 0.4711,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_alpine",
+            "future_sparse_settlement_candidate",
+            "future_road_detour_candidate"
+          ]
+        }
+      }
+    ],
+    "drainage": {
+      "basinId": "basin/local/0_0/e863025357",
+      "basinCode": "local-basin-code/9376",
+      "outflowDirection": "ClosedBasin",
+      "downstreamNeighborRegionId": "",
+      "downstreamNeighborRegionX": 0,
+      "downstreamNeighborRegionY": 0,
+      "runoffPotentialScore": 0.4243,
+      "accumulationPotentialScore": 0.4541,
+      "floodplainPotentialScore": 0.468,
+      "aridityScore": 0.5401,
+      "reasons": [
+        "closed_basin_selected",
+        "rugged_headwater_context"
+      ],
+      "tags": [
+        "accumulation/bounded",
+        "floodplain_low",
+        "non_arid_basin_context",
+        "outflow/ClosedBasin",
+        "runoff/bounded"
+      ]
+    },
+    "waterSourceCandidates": [
+      {
+        "waterSourceCandidateId": "water-source/0_0/4_0/657a1bcd",
+        "worldCellX": 4,
+        "worldCellY": 0,
+        "localCellX": 4,
+        "localCellY": 0,
+        "kind": "SnowmeltCandidate",
+        "flowPotentialScore": 0.6276,
+        "seasonalReliabilityScore": 0.3947,
+        "climateBand": "polar",
+        "biomeId": "biome/alpine",
+        "elevationScore": 0.8207,
+        "moistureScore": 0.5352,
+        "temperatureScore": 0,
+        "ruggednessScore": 0.9745,
+        "preferredOutflowDirection": "ClosedBasin",
+        "reasons": [
+          "elevated_source_context",
+          "flow_potential"
+        ],
+        "tags": [
+          "biome/alpine",
+          "climate/polar",
+          "flow/high",
+          "kind/SnowmeltCandidate",
+          "seasonal/variable"
+        ]
+      },
+      {
+        "waterSourceCandidateId": "water-source/0_0/15_12/d30d56e5",
+        "worldCellX": 15,
+        "worldCellY": 12,
+        "localCellX": 15,
+        "localCellY": 12,
+        "kind": "SpringCandidate",
+        "flowPotentialScore": 0.5699,
+        "seasonalReliabilityScore": 0.4381,
+        "climateBand": "polar",
+        "biomeId": "biome/plains",
+        "elevationScore": 0.4775,
+        "moistureScore": 0.6383,
+        "temperatureScore": 0.0525,
+        "ruggednessScore": 0.7244,
+        "preferredOutflowDirection": "ClosedBasin",
+        "reasons": [
+          "flow_potential",
+          "moisture_context"
+        ],
+        "tags": [
+          "biome/plains",
+          "climate/polar",
+          "flow/high",
+          "kind/SpringCandidate",
+          "seasonal/variable"
+        ]
+      },
+      {
+        "waterSourceCandidateId": "water-source/0_0/0_12/9f6cb69e",
+        "worldCellX": 0,
+        "worldCellY": 12,
+        "localCellX": 0,
+        "localCellY": 12,
+        "kind": "SnowmeltCandidate",
+        "flowPotentialScore": 0.5696,
+        "seasonalReliabilityScore": 0.3961,
+        "climateBand": "polar",
+        "biomeId": "biome/alpine",
+        "elevationScore": 0.8121,
+        "moistureScore": 0.5471,
+        "temperatureScore": 0,
+        "ruggednessScore": 0.6974,
+        "preferredOutflowDirection": "ClosedBasin",
+        "reasons": [
+          "elevated_source_context",
+          "flow_potential"
+        ],
+        "tags": [
+          "biome/alpine",
+          "climate/polar",
+          "flow/high",
+          "kind/SnowmeltCandidate",
+          "seasonal/variable"
+        ]
+      },
+      {
+        "waterSourceCandidateId": "water-source/0_0/12_12/b0a49222",
+        "worldCellX": 12,
+        "worldCellY": 12,
+        "localCellX": 12,
+        "localCellY": 12,
+        "kind": "SpringCandidate",
+        "flowPotentialScore": 0.5692,
+        "seasonalReliabilityScore": 0.5649,
+        "climateBand": "polar",
+        "biomeId": "biome/forest",
+        "elevationScore": 0.2674,
+        "moistureScore": 0.7797,
+        "temperatureScore": 0.1811,
+        "ruggednessScore": 0.0045,
+        "preferredOutflowDirection": "ClosedBasin",
+        "reasons": [
+          "flow_potential",
+          "moisture_context",
+          "seasonal_reliability"
+        ],
+        "tags": [
+          "biome/forest",
+          "climate/polar",
+          "flow/high",
+          "kind/SpringCandidate",
+          "seasonal/reliable"
+        ]
+      },
+      {
+        "waterSourceCandidateId": "water-source/0_0/8_4/6acf1adc",
+        "worldCellX": 8,
+        "worldCellY": 4,
+        "localCellX": 8,
+        "localCellY": 4,
+        "kind": "SpringCandidate",
+        "flowPotentialScore": 0.5684,
+        "seasonalReliabilityScore": 0.4423,
+        "climateBand": "polar",
+        "biomeId": "biome/water",
+        "elevationScore": 0.0453,
+        "moistureScore": 0.6175,
+        "temperatureScore": 0.1758,
+        "ruggednessScore": 0.9786,
+        "preferredOutflowDirection": "ClosedBasin",
+        "reasons": [
+          "flow_potential"
+        ],
+        "tags": [
+          "biome/water",
+          "climate/polar",
+          "flow/high",
+          "kind/SpringCandidate",
+          "seasonal/variable"
+        ]
+      }
+    ],
+    "waterbodyCandidates": [
+      {
+        "waterbodyCandidateId": "waterbody/0_0/12_12/96b8135b",
+        "worldCellX": 12,
+        "worldCellY": 12,
+        "localCellX": 12,
+        "localCellY": 12,
+        "kind": "WetlandCandidate",
+        "retentionScore": 0.7335,
+        "waterAvailabilityScore": 0.5391,
+        "settlementSupportScore": 0.4487,
+        "roadObstacleScore": 0.73,
+        "climateBand": "polar",
+        "biomeId": "biome/forest",
+        "elevationScore": 0.2674,
+        "moistureScore": 0.7797,
+        "temperatureScore": 0.1811,
+        "ruggednessScore": 0.0045,
+        "reasons": [
+          "retention_potential",
+          "road_obstacle_pressure",
+          "water_availability",
+          "wet_local_context"
+        ],
+        "tags": [
+          "availability/high",
+          "biome/forest",
+          "climate/polar",
+          "kind/WetlandCandidate",
+          "retention/high",
+          "road_obstacle/high"
+        ]
+      },
+      {
+        "waterbodyCandidateId": "waterbody/0_0/4_4/b5d22243",
+        "worldCellX": 4,
+        "worldCellY": 4,
+        "localCellX": 4,
+        "localCellY": 4,
+        "kind": "WetlandCandidate",
+        "retentionScore": 0.6528,
+        "waterAvailabilityScore": 0.5401,
+        "settlementSupportScore": 0.333,
+        "roadObstacleScore": 0.6347,
+        "climateBand": "polar",
+        "biomeId": "biome/water",
+        "elevationScore": 0.0271,
+        "moistureScore": 0.737,
+        "temperatureScore": 0.118,
+        "ruggednessScore": 0.3534,
+        "reasons": [
+          "retention_potential",
+          "road_obstacle_pressure",
+          "water_availability",
+          "wet_local_context"
+        ],
+        "tags": [
+          "availability/high",
+          "biome/water",
+          "climate/polar",
+          "kind/WetlandCandidate",
+          "retention/high",
+          "road_obstacle/high"
+        ]
+      },
+      {
+        "waterbodyCandidateId": "waterbody/0_0/15_15/1c2d8002",
+        "worldCellX": 15,
+        "worldCellY": 15,
+        "localCellX": 15,
+        "localCellY": 15,
+        "kind": "MarshCandidate",
+        "retentionScore": 0.5802,
+        "waterAvailabilityScore": 0.4677,
+        "settlementSupportScore": 0.3881,
+        "roadObstacleScore": 0.6066,
+        "climateBand": "polar",
+        "biomeId": "biome/plains",
+        "elevationScore": 0.3621,
+        "moistureScore": 0.6063,
+        "temperatureScore": 0.1217,
+        "ruggednessScore": 0.1465,
+        "reasons": [
+          "retention_potential",
+          "road_obstacle_pressure"
+        ],
+        "tags": [
+          "availability/bounded",
+          "biome/plains",
+          "climate/polar",
+          "kind/MarshCandidate",
+          "retention/high",
+          "road_obstacle/high"
+        ]
+      },
+      {
+        "waterbodyCandidateId": "waterbody/0_0/12_0/96617a36",
+        "worldCellX": 12,
+        "worldCellY": 0,
+        "localCellX": 12,
+        "localCellY": 0,
+        "kind": "LakeCandidate",
+        "retentionScore": 0.5599,
+        "waterAvailabilityScore": 0.3957,
+        "settlementSupportScore": 0.3537,
+        "roadObstacleScore": 0.57,
+        "climateBand": "polar",
+        "biomeId": "biome/plains",
+        "elevationScore": 0.4388,
+        "moistureScore": 0.4451,
+        "temperatureScore": 0.0237,
+        "ruggednessScore": 0.0493,
+        "reasons": [
+          "retention_potential",
+          "road_obstacle_pressure"
+        ],
+        "tags": [
+          "availability/bounded",
+          "biome/plains",
+          "climate/polar",
+          "kind/LakeCandidate",
+          "retention/high",
+          "road_obstacle/high"
+        ]
+      }
+    ],
+    "waterwayCorridorHints": [
+      {
+        "waterwayHintId": "waterway-hint/30d57c830d65",
+        "fromCandidateId": "water-source/0_0/4_0/657a1bcd",
+        "fromCandidateKind": "source",
+        "toTargetId": "basin/local/0_0/e863025357",
+        "toTargetKind": "Basin",
+        "relatedGatewayId": "",
+        "kind": "MinorRiverHint",
+        "estimatedFlowScore": 0.5163,
+        "persistenceScore": 0.2855,
+        "erosionRiskScore": 0.443,
+        "settlementSupportScore": 0.3394,
+        "roadCrossingPressureScore": 0.4977,
+        "reasons": [
+          "closed_basin_drainage"
+        ],
+        "tags": [
+          "from/source",
+          "geometry_absent",
+          "kind/MinorRiverHint",
+          "outflow/ClosedBasin",
+          "route_solver_absent",
+          "target/Basin"
+        ]
+      },
+      {
+        "waterwayHintId": "waterway-hint/91ab7a3afc53",
+        "fromCandidateId": "water-source/0_0/15_12/d30d56e5",
+        "fromCandidateKind": "source",
+        "toTargetId": "basin/local/0_0/e863025357",
+        "toTargetKind": "Basin",
+        "relatedGatewayId": "",
+        "kind": "MinorRiverHint",
+        "estimatedFlowScore": 0.4875,
+        "persistenceScore": 0.3037,
+        "erosionRiskScore": 0.4355,
+        "settlementSupportScore": 0.3365,
+        "roadCrossingPressureScore": 0.4915,
+        "reasons": [
+          "closed_basin_drainage"
+        ],
+        "tags": [
+          "from/source",
+          "geometry_absent",
+          "kind/MinorRiverHint",
+          "outflow/ClosedBasin",
+          "route_solver_absent",
+          "target/Basin"
+        ]
+      },
+      {
+        "waterwayHintId": "waterway-hint/71822d476261",
+        "fromCandidateId": "water-source/0_0/0_12/9f6cb69e",
+        "fromCandidateKind": "source",
+        "toTargetId": "basin/local/0_0/e863025357",
+        "toTargetKind": "Basin",
+        "relatedGatewayId": "",
+        "kind": "MinorRiverHint",
+        "estimatedFlowScore": 0.4873,
+        "persistenceScore": 0.2861,
+        "erosionRiskScore": 0.4355,
+        "settlementSupportScore": 0.3315,
+        "roadCrossingPressureScore": 0.4879,
+        "reasons": [
+          "closed_basin_drainage"
+        ],
+        "tags": [
+          "from/source",
+          "geometry_absent",
+          "kind/MinorRiverHint",
+          "outflow/ClosedBasin",
+          "route_solver_absent",
+          "target/Basin"
+        ]
+      },
+      {
+        "waterwayHintId": "waterway-hint/1d3a3d7291f8",
+        "fromCandidateId": "water-source/0_0/12_12/b0a49222",
+        "fromCandidateKind": "source",
+        "toTargetId": "basin/local/0_0/e863025357",
+        "toTargetKind": "Basin",
+        "relatedGatewayId": "",
+        "kind": "MinorRiverHint",
+        "estimatedFlowScore": 0.4871,
+        "persistenceScore": 0.357,
+        "erosionRiskScore": 0.4354,
+        "settlementSupportScore": 0.3513,
+        "roadCrossingPressureScore": 0.502,
+        "reasons": [
+          "closed_basin_drainage"
+        ],
+        "tags": [
+          "from/source",
+          "geometry_absent",
+          "kind/MinorRiverHint",
+          "outflow/ClosedBasin",
+          "route_solver_absent",
+          "target/Basin"
+        ]
+      },
+      {
+        "waterwayHintId": "waterway-hint/12bbea78c98f",
+        "fromCandidateId": "water-source/0_0/8_4/6acf1adc",
+        "fromCandidateKind": "source",
+        "toTargetId": "basin/local/0_0/e863025357",
+        "toTargetKind": "Basin",
+        "relatedGatewayId": "",
+        "kind": "MinorRiverHint",
+        "estimatedFlowScore": 0.4867,
+        "persistenceScore": 0.3055,
+        "erosionRiskScore": 0.4353,
+        "settlementSupportScore": 0.3367,
+        "roadCrossingPressureScore": 0.4916,
+        "reasons": [
+          "closed_basin_drainage"
+        ],
+        "tags": [
+          "from/source",
+          "geometry_absent",
+          "kind/MinorRiverHint",
+          "outflow/ClosedBasin",
+          "route_solver_absent",
+          "target/Basin"
+        ]
+      },
+      {
+        "waterwayHintId": "waterway-hint/a1e696895613",
+        "fromCandidateId": "waterbody/0_0/4_4/b5d22243",
+        "fromCandidateKind": "waterbody",
+        "toTargetId": "basin/local/0_0/e863025357",
+        "toTargetKind": "Basin",
+        "relatedGatewayId": "",
+        "kind": "MinorRiverHint",
+        "estimatedFlowScore": 0.4726,
+        "persistenceScore": 0.3939,
+        "erosionRiskScore": 0.4316,
+        "settlementSupportScore": 0.3575,
+        "roadCrossingPressureScore": 0.5045,
+        "reasons": [
+          "closed_basin_drainage"
+        ],
+        "tags": [
+          "from/waterbody",
+          "geometry_absent",
+          "kind/MinorRiverHint",
+          "outflow/ClosedBasin",
+          "route_solver_absent",
+          "target/Basin"
+        ]
+      }
+    ],
+    "crossingPressureHints": [
+      {
+        "crossingHintId": "crossing-hint/f2f8e7557cb1",
+        "relatedWaterwayHintId": "waterway-hint/a1e696895613",
+        "relatedGatewayId": "gateway/0_0/West/0_11/0f61f1b1",
+        "relatedRoadHintId": "road-hint/a0bc5b953a3f",
+        "crossingNeedScore": 0.7524,
+        "bridgePressureScore": 0.5728,
+        "ferryOrFordPressureScore": 0.6383,
+        "reasons": [
+          "bridge_pressure",
+          "crossing_need",
+          "ford_or_ferry_pressure"
+        ],
+        "tags": [
+          "gateway/related",
+          "road_hint/related",
+          "waterway/MinorRiverHint"
+        ]
+      },
+      {
+        "crossingHintId": "crossing-hint/31428f333df7",
+        "relatedWaterwayHintId": "waterway-hint/1d3a3d7291f8",
+        "relatedGatewayId": "gateway/0_0/West/0_11/0f61f1b1",
+        "relatedRoadHintId": "road-hint/a0bc5b953a3f",
+        "crossingNeedScore": 0.7511,
+        "bridgePressureScore": 0.5663,
+        "ferryOrFordPressureScore": 0.6459,
+        "reasons": [
+          "bridge_pressure",
+          "crossing_need",
+          "ford_or_ferry_pressure"
+        ],
+        "tags": [
+          "gateway/related",
+          "road_hint/related",
+          "waterway/MinorRiverHint"
+        ]
+      },
+      {
+        "crossingHintId": "crossing-hint/e300773c1048",
+        "relatedWaterwayHintId": "waterway-hint/30d57c830d65",
+        "relatedGatewayId": "gateway/0_0/West/0_11/0f61f1b1",
+        "relatedRoadHintId": "road-hint/a0bc5b953a3f",
+        "crossingNeedScore": 0.7488,
+        "bridgePressureScore": 0.5542,
+        "ferryOrFordPressureScore": 0.6606,
+        "reasons": [
+          "bridge_pressure",
+          "crossing_need",
+          "ford_or_ferry_pressure"
+        ],
+        "tags": [
+          "gateway/related",
+          "road_hint/related",
+          "waterway/MinorRiverHint"
+        ]
+      },
+      {
+        "crossingHintId": "crossing-hint/f163be0c8af0",
+        "relatedWaterwayHintId": "waterway-hint/12bbea78c98f",
+        "relatedGatewayId": "gateway/0_0/West/0_11/0f61f1b1",
+        "relatedRoadHintId": "road-hint/a0bc5b953a3f",
+        "crossingNeedScore": 0.7455,
+        "bridgePressureScore": 0.5504,
+        "ferryOrFordPressureScore": 0.6579,
+        "reasons": [
+          "bridge_pressure",
+          "crossing_need",
+          "ford_or_ferry_pressure"
+        ],
+        "tags": [
+          "gateway/related",
+          "road_hint/related",
+          "waterway/MinorRiverHint"
+        ]
+      },
+      {
+        "crossingHintId": "crossing-hint/6d23d563aea7",
+        "relatedWaterwayHintId": "waterway-hint/91ab7a3afc53",
+        "relatedGatewayId": "gateway/0_0/West/0_11/0f61f1b1",
+        "relatedRoadHintId": "road-hint/a0bc5b953a3f",
+        "crossingNeedScore": 0.7454,
+        "bridgePressureScore": 0.5501,
+        "ferryOrFordPressureScore": 0.6583,
+        "reasons": [
+          "bridge_pressure",
+          "crossing_need",
+          "ford_or_ferry_pressure"
+        ],
+        "tags": [
+          "gateway/related",
+          "road_hint/related",
+          "waterway/MinorRiverHint"
+        ]
+      },
+      {
+        "crossingHintId": "crossing-hint/316c80bbeecc",
+        "relatedWaterwayHintId": "waterway-hint/71822d476261",
+        "relatedGatewayId": "gateway/0_0/West/0_11/0f61f1b1",
+        "relatedRoadHintId": "road-hint/a0bc5b953a3f",
+        "crossingNeedScore": 0.7435,
+        "bridgePressureScore": 0.5446,
+        "ferryOrFordPressureScore": 0.6624,
+        "reasons": [
+          "bridge_pressure",
+          "crossing_need",
+          "ford_or_ferry_pressure"
+        ],
+        "tags": [
+          "gateway/related",
+          "road_hint/related",
+          "waterway/MinorRiverHint"
+        ]
+      }
+    ],
+    "summaryTags": [
+      "basin_code/local_reference_inspired",
+      "crossing_hint_count/6",
+      "dominant_biome_desert",
+      "future_road_detour_candidate",
+      "future_sparse_settlement_candidate",
+      "neighbor_mode/four",
+      "no_actual_rivers",
+      "no_actual_waterbodies",
+      "no_paths_or_polylines",
+      "outflow/ClosedBasin",
+      "water_source_count/5",
+      "waterbody_count/4",
+      "waterway_hint_count/6"
+    ]
+  },
+  "deterministicHash": "a9f697a392877a5207c49d58802fa7a5c1503077ed32176091b2185c6ae899a8",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.boundary",
+      "target": "candidate_region_hydrology_waterway_hints_v1",
+      "message": "Candidate produces hydrology and waterway planning hints only; no rivers, lakes, paths, erosion, rainfall simulation, navigation, settlements or factions are generated."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.crossing_ids.unique",
+      "target": "crossingPressureHints",
+      "message": "Crossing hint ids must be stable and unique."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.external_scouting.reference_only",
+      "target": "mapgen4/hydrobasins/dem/fluvial",
+      "message": "External hydrology references remain reference-only; no dependency, copied implementation or simulation is adopted."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.limits.respected",
+      "target": "options",
+      "message": "Max water source, waterbody, waterway and crossing options must be respected."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.refs.valid",
+      "target": "hints",
+      "message": "Hints must reference only generated water sources, waterbodies, gateways, road hints, neighbor regions or basin ids from the same plan."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.scores.bounded",
+      "target": "scores",
+      "message": "All hydrology, waterway and crossing scores must stay within 0..1."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.seed_variation.visible",
+      "target": "seed",
+      "message": "Different seed should change at least one hydrology planning field while preserving bounded output shape."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.source_ids.unique",
+      "target": "waterSourceCandidates",
+      "message": "Water source ids must be stable and unique."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.waterbody_ids.unique",
+      "target": "waterbodyCandidates",
+      "message": "Waterbody ids must be stable and unique."
+    },
+    {
+      "severity": "info",
+      "code": "region_hydrology_waterway_hints.waterway_ids.unique",
+      "target": "waterwayCorridorHints",
+      "message": "Waterway hint ids must be stable and unique."
+    }
+  ]
+}

@@ -96,12 +96,15 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
 | `docs/candidates/README.md` | Docs-only index for adopted parallel candidate scouting reports; reference material only, not a product gate or dependency adoption. |
 | `docs/candidates/candidate_dialogue_narrative_tooling_v1/CANDIDATE_CONTRACT_NOTE.md` | Candidate-only dialogue/narrative tooling contract boundary for possible future Ink/Yarn Spinner inspired editor-time adapters. |
+| `docs/candidates/candidate_dialogue_narrative_tooling_v1/DIALOGUE_NARRATIVE_IR_CONTRACT_V1.md` | Candidate-owned dialogue/narrative IR and localization roundtrip proof adopted from lane-a; BCL-only and not an accepted product gate. |
 | `docs/candidates/candidate_dialogue_narrative_tooling_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for dialogue/narrative tooling candidates; no direct dependency accepted. |
 | `docs/candidates/candidate_world_biome_noise_v1/WORLD_BIOME_NOISE_CONTRACT.md` | Candidate-only world/biome/noise contract boundary for deterministic seeded sampling and fallback behavior. |
 | `docs/candidates/candidate_world_biome_noise_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for world/biome/noise candidates; FastNoise Lite remains a future adapter candidate, not an accepted dependency. |
 | `docs/candidates/candidate_semantic_catalog_v1/CANDIDATE_CONTRACT.md` | Candidate-only semantic catalog boundary for offline/editor-time lexical relations, tags, provenance and reviewed imports. |
+| `docs/candidates/semantic-catalog/CANDIDATE_SEMANTIC_CATALOG_QUALITY_ANALYZER_V1.md` | Candidate-owned semantic catalog quality analyzer proof adopted from lane-c; deterministic in-memory analysis only. |
 | `docs/candidates/candidate_semantic_catalog_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for semantic catalog sources; live API/RAG/dataset dependency remains rejected/deferred. |
 | `docs/candidates/candidate_navigation_pathfinding_v1/NAVIGATION_PATHFINDING_CONTRACT_NOTE.md` | Candidate-only navigation/pathfinding contract boundary for deterministic graph/grid queries and future navmesh adapters. |
+| `docs/candidates/lane-d/CANDIDATE_NAVIGATION_ROUTE_GRAPH_V1.md` | Candidate-owned navigation route graph proof adopted from lane-d; deterministic route graph planning only. |
 | `docs/candidates/candidate_navigation_pathfinding_v1/EXTERNAL_TECHNOLOGY_SCOUTING.md` | External technology scouting for pathfinding/navmesh candidates; no native/.NET/Unity navigation dependency accepted. |
 | `docs/LLMGameCreator_FEATURE_BACKLOG_AUDIT.md` | Backlog/audit reference for wanted capabilities; not current gate authority and not an implementation plan. |
 | `docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md` | Plan-only package assembly campaign pack for the next 3-5 bounded composite goals; does not start Goal 025 or S199. |

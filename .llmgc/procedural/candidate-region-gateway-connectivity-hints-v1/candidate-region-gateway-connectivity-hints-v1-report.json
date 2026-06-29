@@ -1,0 +1,645 @@
+{
+  "candidateId": "candidate_region_gateway_connectivity_hints_v1",
+  "contractId": "region_gateway_connectivity_hints_contract_v1",
+  "baseCandidateId": "candidate_region_settlement_road_seeds_v1",
+  "finalStatus": "candidate_ready_for_serial_adoption",
+  "contractProofPassed": true,
+  "acceptedGateClaimed": false,
+  "seed": "candidate/region-gateway-connectivity-hints/default-seed",
+  "rulesVersion": "region_gateway_connectivity_hints_rules_v1",
+  "coordinateSpace": "world_cell",
+  "regionSize": 16,
+  "latitudeBandPeriod": 128,
+  "includeDiagonals": false,
+  "maxGatewaysPerSide": 2,
+  "maxCorridorHints": 6,
+  "maxNeighborRegions": 0,
+  "sameSeedStable": true,
+  "differentSeedVariationVisible": true,
+  "orderIndependent": true,
+  "globalMapMaterialized": false,
+  "actualRoadsGenerated": false,
+  "roadPathsGenerated": false,
+  "navigationPathfindingImplemented": false,
+  "navigationGraphGenerated": false,
+  "actualSettlementsGenerated": false,
+  "factionGenerationImplemented": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "runtimeProviderNetworkDependency": false,
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "mediaExecuted": false,
+    "networkExecuted": false,
+    "luaExecuted": false,
+    "unityExecuted": false,
+    "allFalse": true
+  },
+  "externalScoutingDecisions": [
+    {
+      "name": "Road network neighbourhood context",
+      "decision": "reference_only",
+      "note": "Neighbour and region-pair context informs candidate shape only."
+    },
+    {
+      "name": "Settlement nuclei and terrain corridors",
+      "decision": "reference_only",
+      "note": "Existing candidate settlement/road seeds and climate summaries are reused; no road implementation is copied."
+    },
+    {
+      "name": "Patch/semantic road approaches",
+      "decision": "reference_only",
+      "note": "Kept as future reference only; this candidate remains bounded deterministic hints."
+    }
+  ],
+  "plan": {
+    "planId": "gateway-connectivity-plan/0_0/801c2eed",
+    "regionX": 0,
+    "regionY": 0,
+    "regionId": "region/0_0/ffc2208e",
+    "sourceClimateSummary": {
+      "regionX": 0,
+      "regionY": 0,
+      "regionId": "region/0_0/ffc2208e",
+      "dominantBiomeId": "biome/desert",
+      "averageElevationScore": 0.5064,
+      "averageMoistureScore": 0.2966,
+      "averageTemperatureScore": 0.0712,
+      "averageRuggednessScore": 0.4495,
+      "averageSettlementSuitabilityScore": 0.133,
+      "averageRoadTravelCostScore": 0.4565,
+      "roadSuitabilityScore": 0.5435,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_desert",
+        "future_sparse_settlement_candidate",
+        "future_road_detour_candidate"
+      ]
+    },
+    "sourceSettlementRoadSeedPlanId": "settlement-road-plan/0_0/7a86aeb6",
+    "sourceSettlementAnchorCount": 5,
+    "sourceRoadHintCount": 6,
+    "neighborRegionSummaries": [
+      {
+        "regionX": 0,
+        "regionY": -1,
+        "regionId": "region/0_-1/e80dae55",
+        "direction": "North",
+        "side": "North",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": 0,
+          "regionY": -1,
+          "regionId": "region/0_-1/e80dae55",
+          "dominantBiomeId": "biome/alpine",
+          "averageElevationScore": 0.7117,
+          "averageMoistureScore": 0.3936,
+          "averageTemperatureScore": 0.058,
+          "averageRuggednessScore": 0.5041,
+          "averageSettlementSuitabilityScore": 0.0611,
+          "averageRoadTravelCostScore": 0.6102,
+          "roadSuitabilityScore": 0.3898,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_alpine",
+            "future_sparse_settlement_candidate",
+            "future_road_detour_candidate"
+          ]
+        }
+      },
+      {
+        "regionX": 1,
+        "regionY": 0,
+        "regionId": "region/1_0/f8b433ec",
+        "direction": "East",
+        "side": "East",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": 1,
+          "regionY": 0,
+          "regionId": "region/1_0/f8b433ec",
+          "dominantBiomeId": "biome/water",
+          "averageElevationScore": 0.3662,
+          "averageMoistureScore": 0.3009,
+          "averageTemperatureScore": 0.1254,
+          "averageRuggednessScore": 0.5202,
+          "averageSettlementSuitabilityScore": 0.0516,
+          "averageRoadTravelCostScore": 0.6392,
+          "roadSuitabilityScore": 0.3608,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_water",
+            "future_sparse_settlement_candidate",
+            "future_road_detour_candidate"
+          ]
+        }
+      },
+      {
+        "regionX": 0,
+        "regionY": 1,
+        "regionId": "region/0_1/d21285a1",
+        "direction": "South",
+        "side": "South",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": 0,
+          "regionY": 1,
+          "regionId": "region/0_1/d21285a1",
+          "dominantBiomeId": "biome/alpine",
+          "averageElevationScore": 0.652,
+          "averageMoistureScore": 0.3797,
+          "averageTemperatureScore": 0.2013,
+          "averageRuggednessScore": 0.587,
+          "averageSettlementSuitabilityScore": 0.0944,
+          "averageRoadTravelCostScore": 0.5954,
+          "roadSuitabilityScore": 0.4046,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_alpine",
+            "future_sparse_settlement_candidate",
+            "future_road_detour_candidate"
+          ]
+        }
+      },
+      {
+        "regionX": -1,
+        "regionY": 0,
+        "regionId": "region/-1_0/14dd2ba1",
+        "direction": "West",
+        "side": "West",
+        "isDiagonal": false,
+        "climateSummary": {
+          "regionX": -1,
+          "regionY": 0,
+          "regionId": "region/-1_0/14dd2ba1",
+          "dominantBiomeId": "biome/plains",
+          "averageElevationScore": 0.4248,
+          "averageMoistureScore": 0.4001,
+          "averageTemperatureScore": 0.0958,
+          "averageRuggednessScore": 0.5319,
+          "averageSettlementSuitabilityScore": 0.1673,
+          "averageRoadTravelCostScore": 0.5391,
+          "roadSuitabilityScore": 0.4609,
+          "sampleCount": 9,
+          "usedGlobalMapMaterialization": false,
+          "futureTags": [
+            "dominant_biome_plains",
+            "future_sparse_settlement_candidate",
+            "future_road_detour_candidate"
+          ]
+        }
+      }
+    ],
+    "gatewayCandidates": [
+      {
+        "gatewayId": "gateway/0_0/North/10_0/87040c94",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": 0,
+        "neighborRegionY": -1,
+        "neighborRegionId": "region/0_-1/e80dae55",
+        "side": "North",
+        "direction": "North",
+        "isDiagonal": false,
+        "boundaryCellX": 10,
+        "boundaryCellY": 0,
+        "localCellX": 10,
+        "localCellY": 0,
+        "gatewayKind": "TradePassCandidate",
+        "suitabilityScore": 0.6338,
+        "estimatedCrossingCostScore": 0.4386,
+        "climateBand": "polar",
+        "biomeId": "biome/plains",
+        "elevationScore": 0.6807,
+        "moistureScore": 0.5492,
+        "temperatureScore": 0,
+        "ruggednessScore": 0.5969,
+        "reasons": [
+          "high_connectivity_suitability",
+          "rugged_pass_context"
+        ],
+        "tags": [
+          "biome/plains",
+          "climate/polar",
+          "crossing_cost_bounded",
+          "direction/North",
+          "gateway_primary",
+          "kind/TradePassCandidate",
+          "side/North"
+        ]
+      },
+      {
+        "gatewayId": "gateway/0_0/North/5_0/9d5c7467",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": 0,
+        "neighborRegionY": -1,
+        "neighborRegionId": "region/0_-1/e80dae55",
+        "side": "North",
+        "direction": "North",
+        "isDiagonal": false,
+        "boundaryCellX": 5,
+        "boundaryCellY": 0,
+        "localCellX": 5,
+        "localCellY": 0,
+        "gatewayKind": "WildernessTrailCandidate",
+        "suitabilityScore": 0.4953,
+        "estimatedCrossingCostScore": 0.6832,
+        "climateBand": "polar",
+        "biomeId": "biome/alpine",
+        "elevationScore": 0.965,
+        "moistureScore": 0.0415,
+        "temperatureScore": 0,
+        "ruggednessScore": 0.9737,
+        "reasons": [
+          "rugged_pass_context"
+        ],
+        "tags": [
+          "biome/alpine",
+          "climate/polar",
+          "crossing_cost_bounded",
+          "direction/North",
+          "gateway_secondary",
+          "kind/WildernessTrailCandidate",
+          "side/North"
+        ]
+      },
+      {
+        "gatewayId": "gateway/0_0/East/15_11/54286258",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": 1,
+        "neighborRegionY": 0,
+        "neighborRegionId": "region/1_0/f8b433ec",
+        "side": "East",
+        "direction": "East",
+        "isDiagonal": false,
+        "boundaryCellX": 15,
+        "boundaryCellY": 11,
+        "localCellX": 15,
+        "localCellY": 11,
+        "gatewayKind": "CoastalCrossingCandidate",
+        "suitabilityScore": 0.6029,
+        "estimatedCrossingCostScore": 0.5202,
+        "climateBand": "cold",
+        "biomeId": "biome/water",
+        "elevationScore": 0.0523,
+        "moistureScore": 0.6603,
+        "temperatureScore": 0.2397,
+        "ruggednessScore": 0.0042,
+        "reasons": [
+          "high_connectivity_suitability",
+          "wet_or_coastal_context"
+        ],
+        "tags": [
+          "biome/water",
+          "climate/cold",
+          "crossing_cost_bounded",
+          "direction/East",
+          "gateway_primary",
+          "kind/CoastalCrossingCandidate",
+          "side/East"
+        ]
+      },
+      {
+        "gatewayId": "gateway/0_0/East/15_5/f7b42b4f",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": 1,
+        "neighborRegionY": 0,
+        "neighborRegionId": "region/1_0/f8b433ec",
+        "side": "East",
+        "direction": "East",
+        "isDiagonal": false,
+        "boundaryCellX": 15,
+        "boundaryCellY": 5,
+        "localCellX": 15,
+        "localCellY": 5,
+        "gatewayKind": "CoastalCrossingCandidate",
+        "suitabilityScore": 0.5967,
+        "estimatedCrossingCostScore": 0.5277,
+        "climateBand": "polar",
+        "biomeId": "biome/water",
+        "elevationScore": 0.1454,
+        "moistureScore": 0.2834,
+        "temperatureScore": 0.1194,
+        "ruggednessScore": 0.039,
+        "reasons": [
+          "high_connectivity_suitability"
+        ],
+        "tags": [
+          "biome/water",
+          "climate/polar",
+          "crossing_cost_bounded",
+          "direction/East",
+          "gateway_primary",
+          "kind/CoastalCrossingCandidate",
+          "side/East"
+        ]
+      },
+      {
+        "gatewayId": "gateway/0_0/South/10_15/cc446696",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": 0,
+        "neighborRegionY": 1,
+        "neighborRegionId": "region/0_1/d21285a1",
+        "side": "South",
+        "direction": "South",
+        "isDiagonal": false,
+        "boundaryCellX": 10,
+        "boundaryCellY": 15,
+        "localCellX": 10,
+        "localCellY": 15,
+        "gatewayKind": "TradePassCandidate",
+        "suitabilityScore": 0.6313,
+        "estimatedCrossingCostScore": 0.3645,
+        "climateBand": "polar",
+        "biomeId": "biome/desert",
+        "elevationScore": 0.367,
+        "moistureScore": 0.232,
+        "temperatureScore": 0.1209,
+        "ruggednessScore": 0.3767,
+        "reasons": [
+          "high_connectivity_suitability",
+          "low_crossing_cost"
+        ],
+        "tags": [
+          "biome/desert",
+          "climate/polar",
+          "crossing_cost_low",
+          "direction/South",
+          "gateway_primary",
+          "kind/TradePassCandidate",
+          "side/South"
+        ]
+      },
+      {
+        "gatewayId": "gateway/0_0/South/4_15/41feb970",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": 0,
+        "neighborRegionY": 1,
+        "neighborRegionId": "region/0_1/d21285a1",
+        "side": "South",
+        "direction": "South",
+        "isDiagonal": false,
+        "boundaryCellX": 4,
+        "boundaryCellY": 15,
+        "localCellX": 4,
+        "localCellY": 15,
+        "gatewayKind": "WildernessTrailCandidate",
+        "suitabilityScore": 0.5666,
+        "estimatedCrossingCostScore": 0.5466,
+        "climateBand": "polar",
+        "biomeId": "biome/alpine",
+        "elevationScore": 0.8927,
+        "moistureScore": 0.6839,
+        "temperatureScore": 0,
+        "ruggednessScore": 0.4606,
+        "reasons": [
+          "wet_or_coastal_context"
+        ],
+        "tags": [
+          "biome/alpine",
+          "climate/polar",
+          "crossing_cost_bounded",
+          "direction/South",
+          "gateway_secondary",
+          "kind/WildernessTrailCandidate",
+          "side/South"
+        ]
+      },
+      {
+        "gatewayId": "gateway/0_0/West/0_9/911df6ff",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": -1,
+        "neighborRegionY": 0,
+        "neighborRegionId": "region/-1_0/14dd2ba1",
+        "side": "West",
+        "direction": "West",
+        "isDiagonal": false,
+        "boundaryCellX": 0,
+        "boundaryCellY": 9,
+        "localCellX": 0,
+        "localCellY": 9,
+        "gatewayKind": "MountainPassCandidate",
+        "suitabilityScore": 0.6066,
+        "estimatedCrossingCostScore": 0.4435,
+        "climateBand": "polar",
+        "biomeId": "biome/desert",
+        "elevationScore": 0.4425,
+        "moistureScore": 0.1024,
+        "temperatureScore": 0.0049,
+        "ruggednessScore": 0.8113,
+        "reasons": [
+          "high_connectivity_suitability",
+          "rugged_pass_context"
+        ],
+        "tags": [
+          "biome/desert",
+          "climate/polar",
+          "crossing_cost_bounded",
+          "direction/West",
+          "gateway_primary",
+          "kind/MountainPassCandidate",
+          "side/West"
+        ]
+      },
+      {
+        "gatewayId": "gateway/0_0/West/0_5/d07c9ea2",
+        "centerRegionX": 0,
+        "centerRegionY": 0,
+        "centerRegionId": "region/0_0/ffc2208e",
+        "neighborRegionX": -1,
+        "neighborRegionY": 0,
+        "neighborRegionId": "region/-1_0/14dd2ba1",
+        "side": "West",
+        "direction": "West",
+        "isDiagonal": false,
+        "boundaryCellX": 0,
+        "boundaryCellY": 5,
+        "localCellX": 0,
+        "localCellY": 5,
+        "gatewayKind": "CoastalCrossingCandidate",
+        "suitabilityScore": 0.5966,
+        "estimatedCrossingCostScore": 0.527,
+        "climateBand": "polar",
+        "biomeId": "biome/water",
+        "elevationScore": 0.2077,
+        "moistureScore": 0.3429,
+        "temperatureScore": 0.0219,
+        "ruggednessScore": 0.1688,
+        "reasons": [
+          "high_connectivity_suitability"
+        ],
+        "tags": [
+          "biome/water",
+          "climate/polar",
+          "crossing_cost_bounded",
+          "direction/West",
+          "gateway_primary",
+          "kind/CoastalCrossingCandidate",
+          "side/West"
+        ]
+      }
+    ],
+    "corridorHints": [
+      {
+        "corridorHintId": "corridor-hint/96b065cfe0dd",
+        "canonicalRegionPairId": "region-pair/0_0__0_1/edcbe0bef1",
+        "fromGatewayId": "gateway/0_0/South/10_15/cc446696",
+        "toNeighborRegionId": "region/0_1/d21285a1",
+        "toGatewayId": "",
+        "corridorKind": "RegionalTradeHint",
+        "estimatedCostScore": 0.3995,
+        "priorityScore": 0.5584,
+        "reasons": [
+          "gateway_kind_supports_connector",
+          "low_estimated_cost"
+        ],
+        "tags": [
+          "cardinal_neighbor",
+          "direction/South",
+          "gateway_kind/TradePassCandidate",
+          "kind/RegionalTradeHint"
+        ]
+      },
+      {
+        "corridorHintId": "corridor-hint/683c66aeb8a3",
+        "canonicalRegionPairId": "region-pair/0_-1__0_0/7c127b4b9c",
+        "fromGatewayId": "gateway/0_0/North/10_0/87040c94",
+        "toNeighborRegionId": "region/0_-1/e80dae55",
+        "toGatewayId": "",
+        "corridorKind": "RegionalTradeHint",
+        "estimatedCostScore": 0.4454,
+        "priorityScore": 0.5468,
+        "reasons": [
+          "gateway_kind_supports_connector"
+        ],
+        "tags": [
+          "cardinal_neighbor",
+          "direction/North",
+          "gateway_kind/TradePassCandidate",
+          "kind/RegionalTradeHint"
+        ]
+      },
+      {
+        "corridorHintId": "corridor-hint/0a3373d75d83",
+        "canonicalRegionPairId": "region-pair/-1_0__0_0/24b3ecaafc",
+        "fromGatewayId": "gateway/0_0/West/0_9/911df6ff",
+        "toNeighborRegionId": "region/-1_0/14dd2ba1",
+        "toGatewayId": "",
+        "corridorKind": "WildernessConnectorHint",
+        "estimatedCostScore": 0.4484,
+        "priorityScore": 0.5313,
+        "reasons": [
+          "bounded_neighbor_connector"
+        ],
+        "tags": [
+          "cardinal_neighbor",
+          "direction/West",
+          "gateway_kind/MountainPassCandidate",
+          "kind/WildernessConnectorHint"
+        ]
+      },
+      {
+        "corridorHintId": "corridor-hint/06dd31540f16",
+        "canonicalRegionPairId": "region-pair/0_0__1_0/97411899ed",
+        "fromGatewayId": "gateway/0_0/East/15_11/54286258",
+        "toNeighborRegionId": "region/1_0/f8b433ec",
+        "toGatewayId": "",
+        "corridorKind": "WildernessConnectorHint",
+        "estimatedCostScore": 0.496,
+        "priorityScore": 0.516,
+        "reasons": [
+          "bounded_neighbor_connector"
+        ],
+        "tags": [
+          "cardinal_neighbor",
+          "direction/East",
+          "gateway_kind/CoastalCrossingCandidate",
+          "kind/WildernessConnectorHint"
+        ]
+      }
+    ],
+    "summaryTags": [
+      "canonical_region_pair_ids",
+      "corridor_hint_count/4",
+      "dominant_biome_desert",
+      "future_road_detour_candidate",
+      "future_sparse_settlement_candidate",
+      "gateway_count/8",
+      "neighbor_mode/four",
+      "regional_trade_hint_present",
+      "source_anchor_count/5",
+      "trade_gateway_candidate_present"
+    ]
+  },
+  "deterministicHash": "06a7dceb5bdcb81b90cfd8b91364cfffa3c61035a37d6c4da93bb6e5b80c089c",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.boundary",
+      "target": "candidate_region_gateway_connectivity_hints_v1",
+      "message": "Candidate produces gateway and corridor planning hints only; no roads, paths, navigation, settlements or factions are generated."
+    },
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.corridor_ids.unique",
+      "target": "corridorHints",
+      "message": "Corridor hint ids must be stable and unique."
+    },
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.corridor_refs.valid",
+      "target": "corridorHints",
+      "message": "Corridor hints must reference existing gateways and neighbor regions without duplicate canonical region-pair links."
+    },
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.external_scouting.reference_only",
+      "target": "road-network/neighbourhood/terrain",
+      "message": "External scouting remains reference-only; no dependency or copied implementation is adopted."
+    },
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.gateway_ids.unique",
+      "target": "gatewayCandidates",
+      "message": "Gateway ids must be stable and unique."
+    },
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.limits.respected",
+      "target": "options",
+      "message": "Max gateway, corridor and neighbor options must be respected."
+    },
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.scores.bounded",
+      "target": "scores",
+      "message": "All gateway and corridor scores must stay within 0..1."
+    },
+    {
+      "severity": "info",
+      "code": "region_gateway_connectivity_hints.seed_variation.visible",
+      "target": "seed",
+      "message": "Different seed should change at least one gateway or corridor planning field while preserving bounded output shape."
+    }
+  ]
+}

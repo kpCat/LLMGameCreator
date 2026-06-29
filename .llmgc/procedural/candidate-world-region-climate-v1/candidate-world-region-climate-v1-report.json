@@ -1,0 +1,309 @@
+{
+  "candidateId": "candidate_world_region_climate_v1",
+  "contractId": "world_region_climate_contract_v1",
+  "finalStatus": "candidate_ready_for_serial_adoption",
+  "contractProofPassed": true,
+  "acceptedGateClaimed": false,
+  "seed": "candidate/world-region-climate/default-seed",
+  "rulesVersion": "world_region_climate_rules_v1",
+  "coordinateSpace": "world_cell",
+  "regionSize": 16,
+  "latitudeBandPeriod": 128,
+  "scoreSampler": "sha256_score_0_10000_v1_reused",
+  "biomeClassifier": "world_biome_noise_contract_v1_classifier_reused",
+  "climateLogic": "latitude_like_coordinate_plus_sha256_variation_plus_elevation_cooling",
+  "sampleCount": 6,
+  "samples": [
+    {
+      "x": -9,
+      "y": 11,
+      "elevationScore": 0.849,
+      "moistureScore": 0.2053,
+      "temperatureScore": 0,
+      "ruggednessScore": 0.2145,
+      "climateBand": "polar",
+      "biomeId": "biome/alpine",
+      "regionX": -1,
+      "regionY": 0,
+      "regionId": "region/-1_0/cc8616f2",
+      "settlementSuitabilityScore": 0,
+      "roadTravelCostScore": 0.5409,
+      "tags": [
+        "climate/polar",
+        "biome/alpine"
+      ]
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "elevationScore": 0.0397,
+      "moistureScore": 0.1637,
+      "temperatureScore": 0.0377,
+      "ruggednessScore": 0.0139,
+      "climateBand": "polar",
+      "biomeId": "biome/water",
+      "regionX": 0,
+      "regionY": 0,
+      "regionId": "region/0_0/fc296e11",
+      "settlementSuitabilityScore": 0,
+      "roadTravelCostScore": 0.6328,
+      "tags": [
+        "climate/polar",
+        "biome/water"
+      ]
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "elevationScore": 0.796,
+      "moistureScore": 0.1438,
+      "temperatureScore": 0,
+      "ruggednessScore": 0.1875,
+      "climateBand": "polar",
+      "biomeId": "biome/alpine",
+      "regionX": 0,
+      "regionY": 0,
+      "regionId": "region/0_0/fc296e11",
+      "settlementSuitabilityScore": 0,
+      "roadTravelCostScore": 0.5207,
+      "tags": [
+        "climate/polar",
+        "biome/alpine"
+      ]
+    },
+    {
+      "x": 16,
+      "y": -4,
+      "elevationScore": 0.923,
+      "moistureScore": 0.367,
+      "temperatureScore": 0,
+      "ruggednessScore": 0.7415,
+      "climateBand": "polar",
+      "biomeId": "biome/alpine",
+      "regionX": 1,
+      "regionY": -1,
+      "regionId": "region/1_-1/3088a9dc",
+      "settlementSuitabilityScore": 0,
+      "roadTravelCostScore": 0.7784,
+      "tags": [
+        "climate/polar",
+        "biome/alpine",
+        "future_road_high_cost"
+      ]
+    },
+    {
+      "x": 32,
+      "y": 32,
+      "elevationScore": 0.2174,
+      "moistureScore": 0.4869,
+      "temperatureScore": 0.3724,
+      "ruggednessScore": 0.9939,
+      "climateBand": "cold",
+      "biomeId": "biome/water",
+      "regionX": 2,
+      "regionY": 2,
+      "regionId": "region/2_2/c92d8d2d",
+      "settlementSuitabilityScore": 0,
+      "roadTravelCostScore": 0.9401,
+      "tags": [
+        "climate/cold",
+        "biome/water",
+        "future_road_high_cost"
+      ]
+    },
+    {
+      "x": 128,
+      "y": -96,
+      "elevationScore": 0.6269,
+      "moistureScore": 0.6267,
+      "temperatureScore": 0.2294,
+      "ruggednessScore": 0.8047,
+      "climateBand": "cold",
+      "biomeId": "biome/plains",
+      "regionX": 8,
+      "regionY": -6,
+      "regionId": "region/8_-6/9d14365c",
+      "settlementSuitabilityScore": 0.2553,
+      "roadTravelCostScore": 0.4549,
+      "tags": [
+        "climate/cold",
+        "biome/plains"
+      ]
+    }
+  ],
+  "regionSummaryCount": 5,
+  "regionSummaries": [
+    {
+      "regionX": -1,
+      "regionY": 0,
+      "regionId": "region/-1_0/cc8616f2",
+      "dominantBiomeId": "biome/desert",
+      "averageElevationScore": 0.4745,
+      "averageMoistureScore": 0.2735,
+      "averageTemperatureScore": 0.0787,
+      "averageRuggednessScore": 0.629,
+      "averageSettlementSuitabilityScore": 0.1242,
+      "averageRoadTravelCostScore": 0.5264,
+      "roadSuitabilityScore": 0.4736,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_desert",
+        "future_sparse_settlement_candidate",
+        "future_road_detour_candidate",
+        "future_faction_border_candidate"
+      ]
+    },
+    {
+      "regionX": 0,
+      "regionY": 0,
+      "regionId": "region/0_0/fc296e11",
+      "dominantBiomeId": "biome/alpine",
+      "averageElevationScore": 0.5193,
+      "averageMoistureScore": 0.3279,
+      "averageTemperatureScore": 0.1026,
+      "averageRuggednessScore": 0.5444,
+      "averageSettlementSuitabilityScore": 0.0748,
+      "averageRoadTravelCostScore": 0.6242,
+      "roadSuitabilityScore": 0.3758,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_alpine",
+        "future_sparse_settlement_candidate",
+        "future_road_detour_candidate"
+      ]
+    },
+    {
+      "regionX": 1,
+      "regionY": -1,
+      "regionId": "region/1_-1/3088a9dc",
+      "dominantBiomeId": "biome/alpine",
+      "averageElevationScore": 0.6524,
+      "averageMoistureScore": 0.3261,
+      "averageTemperatureScore": 0.0475,
+      "averageRuggednessScore": 0.5765,
+      "averageSettlementSuitabilityScore": 0.049,
+      "averageRoadTravelCostScore": 0.6034,
+      "roadSuitabilityScore": 0.3966,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_alpine",
+        "future_sparse_settlement_candidate",
+        "future_road_detour_candidate"
+      ]
+    },
+    {
+      "regionX": 2,
+      "regionY": 2,
+      "regionId": "region/2_2/c92d8d2d",
+      "dominantBiomeId": "biome/alpine",
+      "averageElevationScore": 0.6394,
+      "averageMoistureScore": 0.3191,
+      "averageTemperatureScore": 0.4303,
+      "averageRuggednessScore": 0.658,
+      "averageSettlementSuitabilityScore": 0.0911,
+      "averageRoadTravelCostScore": 0.5452,
+      "roadSuitabilityScore": 0.4548,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_alpine",
+        "future_sparse_settlement_candidate",
+        "future_road_detour_candidate",
+        "future_faction_border_candidate"
+      ]
+    },
+    {
+      "regionX": 8,
+      "regionY": -6,
+      "regionId": "region/8_-6/9d14365c",
+      "dominantBiomeId": "biome/plains",
+      "averageElevationScore": 0.5432,
+      "averageMoistureScore": 0.5185,
+      "averageTemperatureScore": 0.4834,
+      "averageRuggednessScore": 0.4792,
+      "averageSettlementSuitabilityScore": 0.2176,
+      "averageRoadTravelCostScore": 0.4289,
+      "roadSuitabilityScore": 0.5711,
+      "sampleCount": 9,
+      "usedGlobalMapMaterialization": false,
+      "futureTags": [
+        "dominant_biome_plains",
+        "future_sparse_settlement_candidate",
+        "future_road_corridor_candidate"
+      ]
+    }
+  ],
+  "sameSeedStable": true,
+  "differentSeedVariationVisible": true,
+  "orderIndependent": true,
+  "globalMapMaterialized": false,
+  "externalScoutingDecisions": [
+    {
+      "name": "H3",
+      "decision": "reference_only",
+      "note": "No dependency; useful future reference for hex indexing."
+    },
+    {
+      "name": "S2",
+      "decision": "reference_only",
+      "note": "No dependency; useful future reference for spherical cell partitioning."
+    },
+    {
+      "name": "AutoBiomes",
+      "decision": "reference_only",
+      "note": "No dependency; useful future reference for authoring biome rules."
+    },
+    {
+      "name": "PCG papers",
+      "decision": "reference_only",
+      "note": "No dependency; used only as conceptual reference."
+    }
+  ],
+  "settlementGenerationImplemented": false,
+  "roadGenerationImplemented": false,
+  "factionGenerationImplemented": false,
+  "publicGamePackageSchemaChanged": false,
+  "projectFilesChanged": false,
+  "generatorLibraryChanged": false,
+  "runtimeProviderNetworkDependency": false,
+  "externalExecution": {
+    "llmExecuted": false,
+    "ragExecuted": false,
+    "providerExecuted": false,
+    "mediaExecuted": false,
+    "networkExecuted": false,
+    "luaExecuted": false,
+    "unityExecuted": false,
+    "allFalse": true
+  },
+  "deterministicHash": "be531d231f26e522ed04ea447da8c72a153161fb481a50fc75a7037659f0fba2",
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "world_region_climate.boundary",
+      "target": "candidate_world_region_climate_v1",
+      "message": "Candidate remains internal module proof only; no production integration or accepted gate is claimed."
+    },
+    {
+      "severity": "info",
+      "code": "world_region_climate.external_scouting.reference_only",
+      "target": "H3/S2/AutoBiomes/PCG",
+      "message": "External scouting remains reference-only; no dependency or external execution is adopted."
+    },
+    {
+      "severity": "info",
+      "code": "world_region_climate.scores.bounded",
+      "target": "scores",
+      "message": "All climate, settlement and road scores must stay within 0..1."
+    },
+    {
+      "severity": "info",
+      "code": "world_region_climate.seed_variation.visible",
+      "target": "seed",
+      "message": "Different seed should change at least one climate score or classification while preserving sample shape."
+    }
+  ]
+}
