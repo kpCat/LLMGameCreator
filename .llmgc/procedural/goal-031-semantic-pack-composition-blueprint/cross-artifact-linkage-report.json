@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "semantic_pack_cross_artifact_linkage_report_v1",
+  "scenarioCount": 3,
+  "linkCount": 12,
+  "links": [
+    {
+      "linkId": "caravan_trade:biome_resource_economy_loot",
+      "factPath": [
+        "caravan.economy.spice_credit",
+        "scarcity.loot.ration_bundle",
+        "scarcity.resource.salt"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "item_resource_recipe_loot_economy_v1"
+      ],
+      "summary": "biome_resource_economy_loot|facts=3|contracts=2"
+    },
+    {
+      "linkId": "caravan_trade:combat_progression_reward_pattern",
+      "factPath": [
+        "border.combat.ambush",
+        "border.progression.favor",
+        "core.quest.recover_or_deliver",
+        "scarcity.loot.ration_bundle"
+      ],
+      "contractIds": [
+        "combat_progression_ability_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "combat_progression_reward_pattern|facts=4|contracts=3"
+    },
+    {
+      "linkId": "caravan_trade:faction_npc_quest_dialogue",
+      "factPath": [
+        "border.faction.militia",
+        "caravan.dialogue.bargain",
+        "caravan.npc.factor",
+        "caravan.quest.delivery_bargain"
+      ],
+      "contractIds": [
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "faction_npc_quest_dialogue|facts=4|contracts=4"
+    },
+    {
+      "linkId": "caravan_trade:settlement_landmark_route_event",
+      "factPath": [
+        "border.event.skirmish",
+        "border.route.checkpoint",
+        "caravan.settlement.trade_outpost",
+        "caravan.world.salt_road"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "settlement_building_landmark_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "summary": "settlement_landmark_route_event|facts=4|contracts=3"
+    },
+    {
+      "linkId": "frontier_survival:biome_resource_economy_loot",
+      "factPath": [
+        "frontier.biome.predator_range",
+        "frontier.loot.survival_cache",
+        "frontier.resource.medicine_herbs",
+        "scarcity.economy.barter_loop"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "item_resource_recipe_loot_economy_v1"
+      ],
+      "summary": "biome_resource_economy_loot|facts=4|contracts=2"
+    },
+    {
+      "linkId": "frontier_survival:combat_progression_reward_pattern",
+      "factPath": [
+        "core.combat.local_threat",
+        "core.progression.reputation_growth",
+        "core.quest.recover_or_deliver",
+        "frontier.loot.survival_cache"
+      ],
+      "contractIds": [
+        "combat_progression_ability_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "combat_progression_reward_pattern|facts=4|contracts=3"
+    },
+    {
+      "linkId": "frontier_survival:faction_npc_quest_dialogue",
+      "factPath": [
+        "core.dialogue.grounded",
+        "core.faction.local_authority",
+        "core.npc.quest_broker",
+        "frontier.quest.secure_medicine"
+      ],
+      "contractIds": [
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "faction_npc_quest_dialogue|facts=4|contracts=4"
+    },
+    {
+      "linkId": "frontier_survival:settlement_landmark_route_event",
+      "factPath": [
+        "core.event.market_disruption",
+        "core.route.contested_passage",
+        "frontier.settlement.stockade_camp",
+        "ruins.landmark.sunken_tower"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "settlement_building_landmark_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "summary": "settlement_landmark_route_event|facts=4|contracts=3"
+    },
+    {
+      "linkId": "gothic_intrigue:biome_resource_economy_loot",
+      "factPath": [
+        "ruins.loot.relic_cache"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "item_resource_recipe_loot_economy_v1"
+      ],
+      "summary": "biome_resource_economy_loot|facts=1|contracts=2"
+    },
+    {
+      "linkId": "gothic_intrigue:combat_progression_reward_pattern",
+      "factPath": [
+        "border.combat.ambush",
+        "border.progression.favor",
+        "core.quest.recover_or_deliver",
+        "ruins.loot.relic_cache"
+      ],
+      "contractIds": [
+        "combat_progression_ability_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "combat_progression_reward_pattern|facts=4|contracts=3"
+    },
+    {
+      "linkId": "gothic_intrigue:faction_npc_quest_dialogue",
+      "factPath": [
+        "border.faction.militia",
+        "core.dialogue.grounded",
+        "core.npc.quest_broker",
+        "folk.quest.break_curse"
+      ],
+      "contractIds": [
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "faction_npc_quest_dialogue|facts=4|contracts=4"
+    },
+    {
+      "linkId": "gothic_intrigue:settlement_landmark_route_event",
+      "factPath": [
+        "border.event.skirmish",
+        "border.route.checkpoint",
+        "gothic.landmark.locked_crypt"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "settlement_building_landmark_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "summary": "settlement_landmark_route_event|facts=3|contracts=3"
+    }
+  ]
+}

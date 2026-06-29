@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "semantic_pack_composition_matrix_v1",
+  "rows": [
+    {
+      "profileId": "caravan_trade",
+      "selectedPackIds": [
+        "semantic_pack/border_conflict",
+        "semantic_pack/caravan_trade",
+        "semantic_pack/core_blueprint_spine",
+        "semantic_pack/merchant_guilds",
+        "semantic_pack/scarcity_economy"
+      ],
+      "factCount": 33,
+      "relationCount": 19,
+      "linkCount": 4,
+      "sectionCount": 11,
+      "coverageContractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "capability_bundle_pipeline_inputs_v1",
+        "combat_progression_ability_v1",
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "game_profile_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1",
+        "semantic_pack_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "stableSummary": "caravan_trade|packs=5|facts=33|relations=19|links=4|contracts=11|gaps=3|rejected=0"
+    },
+    {
+      "profileId": "frontier_survival",
+      "selectedPackIds": [
+        "semantic_pack/core_blueprint_spine",
+        "semantic_pack/frontier_survival",
+        "semantic_pack/ruins_and_relics",
+        "semantic_pack/scarcity_economy",
+        "semantic_pack/winter_hazards"
+      ],
+      "factCount": 32,
+      "relationCount": 18,
+      "linkCount": 4,
+      "sectionCount": 11,
+      "coverageContractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "capability_bundle_pipeline_inputs_v1",
+        "combat_progression_ability_v1",
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "game_profile_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1",
+        "semantic_pack_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "stableSummary": "frontier_survival|packs=5|facts=32|relations=18|links=4|contracts=11|gaps=4|rejected=0"
+    },
+    {
+      "profileId": "gothic_intrigue",
+      "selectedPackIds": [
+        "semantic_pack/border_conflict",
+        "semantic_pack/core_blueprint_spine",
+        "semantic_pack/folk_magic",
+        "semantic_pack/gothic_intrigue",
+        "semantic_pack/ruins_and_relics"
+      ],
+      "factCount": 32,
+      "relationCount": 19,
+      "linkCount": 4,
+      "sectionCount": 11,
+      "coverageContractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "capability_bundle_pipeline_inputs_v1",
+        "combat_progression_ability_v1",
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "game_profile_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1",
+        "semantic_pack_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "stableSummary": "gothic_intrigue|packs=5|facts=32|relations=19|links=4|contracts=11|gaps=3|rejected=0"
+    }
+  ],
+  "composerSharedByAllScenarios": true,
+  "goal030PlannerUsedByAllScenarios": true,
+  "scenariosAreMeaningfullyDifferent": true
+}

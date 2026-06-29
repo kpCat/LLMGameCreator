@@ -21,12 +21,13 @@ package_assembly_dialogue_quests_expansion_verification passed
 package_assembly_items_economy_crafting_expansion_verification passed
 package_assembly_combat_progression_expansion_verification passed
 modular_generator_kernel_parallel_readiness_verification passed
+semantic_artifact_contract_registry_verification passed
 ```
 
 Produced for review:
 
 ```text
-semantic_artifact_contract_registry_verification required
+semantic_pack_composition_blueprint_verification required
 ```
 
 Current capabilities:
@@ -54,13 +55,14 @@ Current capabilities:
 - package assembly combat/progression mapping contract, real/synthetic consumer proof and compact Goal 028 artifacts;
 - modular generator kernel readiness contracts, static package assembly module registry proof, product-smoke scenario manifests and compact Goal 029 artifacts;
 - semantic artifact contract registry, semantic pack compatibility planner, semantic expansion planning seam and compact Goal 030 artifacts;
+- semantic pack composition blueprint, semantic fact/relation merge, cross-artifact linkage plans and compact Goal 031 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028 and Goal 029 have been accepted by user prompt or handoff. Goal 030 produced semantic artifact contract registry evidence and now waits at its manual verification gate.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029 and Goal 030 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and now waits at its manual verification gate.
 
-Goal 030 compact evidence lives under `.llmgc/procedural/goal-030-semantic-artifact-contract-registry/` and keeps `accepted=false` with `semantic_artifact_contract_registry_verification required`. This does not start Goal 031.
+Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`. This does not start Goal 032.
 
 ## Queue Rules
 
@@ -334,9 +336,19 @@ Stabilize artifact contract registry for profile, world, entity, quest, dialogue
 
 Status:
 
-Produced for review. The gate remains `semantic_artifact_contract_registry_verification required`, not passed. Goal 031 is not started.
+Accepted by user handoff before Goal 031.
 
-### Goal 031: Strict LLM Draft Artifact Loop
+### Goal 031: Semantic Pack Composition Blueprint
+
+Purpose:
+
+Compose selected semantic packs into deterministic cross-artifact generation blueprint plans before GamePackage materialization.
+
+Status:
+
+Produced for review. The gate remains `semantic_pack_composition_blueprint_verification required`, not passed. Goal 032 is not started.
+
+### Goal 032: Strict LLM Draft Artifact Loop
 
 Purpose:
 
@@ -344,13 +356,13 @@ Use LLM only for contract-bound JSON drafts with validation and repair. No runti
 
 Manual review likely required before enabling broad LLM usage.
 
-### Goal 032: Lua Module Manifest Registry
+### Goal 033: Lua Module Manifest Registry
 
 Purpose:
 
 Introduce Lua module registry/manifest validation as deterministic generator IR, still without arbitrary runtime authority.
 
-### Goal 033: Lua Sandbox Execution Gate
+### Goal 034: Lua Sandbox Execution Gate
 
 Purpose:
 
@@ -358,7 +370,7 @@ Execute a bounded Lua module family through sandbox and manifest-declared output
 
 Manual review likely required because this opens execution of generator modules.
 
-### Goal 034: Hybrid LLM Draft Plus Lua Deterministic Expansion
+### Goal 035: Hybrid LLM Draft Plus Lua Deterministic Expansion
 
 Purpose:
 
@@ -366,31 +378,31 @@ LLM drafts bounded high-level artifacts; Lua expands deterministic configs/IR; C
 
 ## World Scale Track
 
-### Goal 035: Region Graph And Reachability Generalization
+### Goal 036: Region Graph And Reachability Generalization
 
 Purpose:
 
 Move beyond single start maps to generated region graphs with reachability validation.
 
-### Goal 036: Finite Map Pack Generation
+### Goal 037: Finite Map Pack Generation
 
 Purpose:
 
 Generate finite maps with tile/entity placements, landmarks and paths.
 
-### Goal 037: Chunked World Config Contract
+### Goal 038: Chunked World Config Contract
 
 Purpose:
 
 Represent chunk rules/seeds/configs without dumping huge tile arrays.
 
-### Goal 038: Runtime Chunk Delta Validation
+### Goal 039: Runtime Chunk Delta Validation
 
 Purpose:
 
 Persist discovered/mutated chunk state in runtime/save state, not package definitions.
 
-### Goal 039: Infinite/Chunked World Smoke
+### Goal 040: Infinite/Chunked World Smoke
 
 Purpose:
 
@@ -398,25 +410,25 @@ Smoke a generated chunked world path through runtime preview/export.
 
 ## Multi-Family Track
 
-### Goal 040: Family 1 - Map And Panel RPG Template
+### Goal 041: Family 1 - Map And Panel RPG Template
 
 Purpose:
 
 Generate a richer map-and-panel RPG through the full lifecycle.
 
-### Goal 041: Family 2 - Survival Sandbox Template
+### Goal 042: Family 2 - Survival Sandbox Template
 
 Purpose:
 
 Generate survival sandbox data loops: resources, crafting, hazards, NPCs/events.
 
-### Goal 042: Family 3 - First-Person Grid Dungeon Template
+### Goal 043: Family 3 - First-Person Grid Dungeon Template
 
 Purpose:
 
 Generate first-person grid/blobber data with party/blob movement and combat profile.
 
-### Goal 043: Multi-Family Capability Regression
+### Goal 044: Multi-Family Capability Regression
 
 Purpose:
 
@@ -426,37 +438,37 @@ Manual review likely required.
 
 ## Full Generator Stabilization Track
 
-### Goal 044: Review And Approval Workflow Hardening
+### Goal 045: Review And Approval Workflow Hardening
 
 Purpose:
 
 Make generated artifact review/promotion auditable and scalable.
 
-### Goal 045: Repair Diagnostics Hardening
+### Goal 046: Repair Diagnostics Hardening
 
 Purpose:
 
 Ensure validation failures produce repairable diagnostics and bounded repair attempts.
 
-### Goal 046: Runtime Preview Validation Across Generated Systems
+### Goal 047: Runtime Preview Validation Across Generated Systems
 
 Purpose:
 
 Runtime preview smokes generated world/entity/quest/dialogue/item/economy/combat systems.
 
-### Goal 047: Unity Export Profile Generalization
+### Goal 048: Unity Export Profile Generalization
 
 Purpose:
 
 Export generated packages through profile-selected Unity presentation modes without hardcoded Alpha-only assumptions.
 
-### Goal 048: One-Click Full Generator Dry Run
+### Goal 049: One-Click Full Generator Dry Run
 
 Purpose:
 
 Run from approved profile/capabilities to generated package, validation, preview and export artifacts.
 
-### Goal 049: Full Generator Without Media Verification
+### Goal 050: Full Generator Without Media Verification
 
 Gate:
 
@@ -473,7 +485,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-semantic_artifact_contract_registry_verification
+semantic_pack_composition_blueprint_verification
 ```
 
 Status:

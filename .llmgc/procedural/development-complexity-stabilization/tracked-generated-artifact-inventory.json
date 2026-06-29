@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tracked_generated_artifact_inventory_v1",
   "root": ".llmgc/procedural",
-  "trackedFileCount": 3098,
+  "trackedFileCount": 3104,
   "families": [
     {
       "family": "alpha-runnable-build",
@@ -140,6 +140,19 @@
         ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-report.json",
         ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-report.md",
         ".llmgc/procedural/generated-game-profile-contract/generated-game-profile-contract-verification.md"
+      ]
+    },
+    {
+      "family": "goal-030-semantic-artifact-contract-registry",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 6,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/goal-030-semantic-artifact-contract-registry/compatibility-matrix.json",
+        ".llmgc/procedural/goal-030-semantic-artifact-contract-registry/registry-summary.json",
+        ".llmgc/procedural/goal-030-semantic-artifact-contract-registry/semantic-artifact-contract-registry-report.md",
+        ".llmgc/procedural/goal-030-semantic-artifact-contract-registry/semantic-expansion-plan-caravan.json",
+        ".llmgc/procedural/goal-030-semantic-artifact-contract-registry/semantic-expansion-plan-frontier.json"
       ]
     },
     {

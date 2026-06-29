@@ -1,0 +1,935 @@
+{
+  "schemaVersion": "semantic_blueprint_plan_v1",
+  "profileId": "frontier_survival",
+  "complexityHint": "standard",
+  "selectedPackIds": [
+    "semantic_pack/core_blueprint_spine",
+    "semantic_pack/frontier_survival",
+    "semantic_pack/ruins_and_relics",
+    "semantic_pack/scarcity_economy",
+    "semantic_pack/winter_hazards"
+  ],
+  "rejectedPacks": [],
+  "mergedSemanticFacts": [
+    {
+      "factId": "frontier.biome.predator_range",
+      "domain": "biome_hazard",
+      "value": "predator range hazard",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "biome",
+        "hazard"
+      ]
+    },
+    {
+      "factId": "winter.biome.whiteout",
+      "domain": "biome_hazard",
+      "value": "whiteout hazard",
+      "sourcePackId": "semantic_pack/winter_hazards",
+      "tags": [
+        "biome"
+      ]
+    },
+    {
+      "factId": "core.combat.local_threat",
+      "domain": "combat_pressure",
+      "value": "localized threat pressure",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "combat"
+      ]
+    },
+    {
+      "factId": "winter.combat.exposure",
+      "domain": "combat_pressure",
+      "value": "exposure pressure",
+      "sourcePackId": "semantic_pack/winter_hazards",
+      "tags": [
+        "combat"
+      ]
+    },
+    {
+      "factId": "core.dialogue.grounded",
+      "domain": "dialogue_tone",
+      "value": "grounded practical tone",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "factId": "scarcity.economy.barter_loop",
+      "domain": "economy_chain",
+      "value": "barter loop economy chain",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "economy"
+      ]
+    },
+    {
+      "factId": "core.faction.local_authority",
+      "domain": "faction_role",
+      "value": "local authority faction",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "faction"
+      ]
+    },
+    {
+      "factId": "frontier.faction.ranger_post",
+      "domain": "faction_role",
+      "value": "ranger post faction",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "faction"
+      ]
+    },
+    {
+      "factId": "core.event.market_disruption",
+      "domain": "global_event",
+      "value": "market disruption event",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "event"
+      ]
+    },
+    {
+      "factId": "ruins.event.awakened_ruin",
+      "domain": "global_event",
+      "value": "awakened ruin event",
+      "sourcePackId": "semantic_pack/ruins_and_relics",
+      "tags": [
+        "event"
+      ]
+    },
+    {
+      "factId": "ruins.landmark.sunken_tower",
+      "domain": "landmark_theme",
+      "value": "sunken tower landmark",
+      "sourcePackId": "semantic_pack/ruins_and_relics",
+      "tags": [
+        "landmark"
+      ]
+    },
+    {
+      "factId": "core.localization.key_nouns",
+      "domain": "localization_hint",
+      "value": "stable string table noun hints",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "localization"
+      ]
+    },
+    {
+      "factId": "frontier.loot.survival_cache",
+      "domain": "loot_theme",
+      "value": "survival cache loot",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "loot"
+      ]
+    },
+    {
+      "factId": "ruins.loot.relic_cache",
+      "domain": "loot_theme",
+      "value": "relic cache loot",
+      "sourcePackId": "semantic_pack/ruins_and_relics",
+      "tags": [
+        "loot"
+      ]
+    },
+    {
+      "factId": "scarcity.loot.ration_bundle",
+      "domain": "loot_theme",
+      "value": "ration bundle loot",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "loot"
+      ]
+    },
+    {
+      "factId": "core.npc.quest_broker",
+      "domain": "npc_archetype",
+      "value": "quest broker archetype",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "npc",
+        "quest"
+      ]
+    },
+    {
+      "factId": "frontier.npc.trail_medic",
+      "domain": "npc_archetype",
+      "value": "trail medic archetype",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "npc"
+      ]
+    },
+    {
+      "factId": "core.progression.reputation_growth",
+      "domain": "progression_axis",
+      "value": "reputation growth axis",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "progression"
+      ]
+    },
+    {
+      "factId": "frontier.quest.secure_medicine",
+      "domain": "quest_motive",
+      "value": "secure scarce medicine",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "motive",
+        "quest"
+      ]
+    },
+    {
+      "factId": "scarcity.quest.supply_debt",
+      "domain": "quest_motive",
+      "value": "supply debt motive",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "quest"
+      ]
+    },
+    {
+      "factId": "core.quest.recover_or_deliver",
+      "domain": "quest_objective",
+      "value": "recover or deliver objective",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "quest"
+      ]
+    },
+    {
+      "factId": "ruins.quest.recover_relic",
+      "domain": "quest_objective",
+      "value": "recover relic objective",
+      "sourcePackId": "semantic_pack/ruins_and_relics",
+      "tags": [
+        "quest"
+      ]
+    },
+    {
+      "factId": "scarcity.recipe.preserves",
+      "domain": "recipe_theme",
+      "value": "preserves recipe theme",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "recipe"
+      ]
+    },
+    {
+      "factId": "frontier.resource.medicine_herbs",
+      "domain": "resource_theme",
+      "value": "medicine herbs resource theme",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "resource"
+      ]
+    },
+    {
+      "factId": "scarcity.resource.salt",
+      "domain": "resource_theme",
+      "value": "salt resource theme",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "resource"
+      ]
+    },
+    {
+      "factId": "winter.resource.firewood",
+      "domain": "resource_theme",
+      "value": "firewood scarcity resource",
+      "sourcePackId": "semantic_pack/winter_hazards",
+      "tags": [
+        "resource"
+      ]
+    },
+    {
+      "factId": "core.route.contested_passage",
+      "domain": "route_pressure",
+      "value": "contested passage pressure",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "conflict",
+        "route"
+      ]
+    },
+    {
+      "factId": "frontier.settlement.stockade_camp",
+      "domain": "settlement_pattern",
+      "value": "stockade camp settlement",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "factId": "frontier.weather.cold_snap",
+      "domain": "weather_event",
+      "value": "cold snap weather event",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "factId": "winter.weather.ice_storm",
+      "domain": "weather_event",
+      "value": "ice storm event",
+      "sourcePackId": "semantic_pack/winter_hazards",
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "factId": "core.world.crossroads",
+      "domain": "world_region",
+      "value": "shared crossroads region",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "route",
+        "world"
+      ]
+    },
+    {
+      "factId": "frontier.world.river_ford",
+      "domain": "world_region",
+      "value": "river ford frontier region",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "tags": [
+        "frontier",
+        "world"
+      ]
+    }
+  ],
+  "relationGraph": [
+    {
+      "relationId": "core.link.authority_broker",
+      "sourceFactId": "core.faction.local_authority",
+      "relationKind": "implies",
+      "targetFactId": "core.npc.quest_broker",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.broker_objective",
+      "sourceFactId": "core.npc.quest_broker",
+      "relationKind": "implies",
+      "targetFactId": "core.quest.recover_or_deliver",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.combat_progression",
+      "sourceFactId": "core.combat.local_threat",
+      "relationKind": "implies",
+      "targetFactId": "core.progression.reputation_growth",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.objective_dialogue",
+      "sourceFactId": "core.quest.recover_or_deliver",
+      "relationKind": "implies",
+      "targetFactId": "core.dialogue.grounded",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.route_event",
+      "sourceFactId": "core.route.contested_passage",
+      "relationKind": "implies",
+      "targetFactId": "core.event.market_disruption",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "frontier.link.faction_npc",
+      "sourceFactId": "frontier.faction.ranger_post",
+      "relationKind": "implies",
+      "targetFactId": "frontier.npc.trail_medic",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "frontier.link.hazard_resource",
+      "sourceFactId": "frontier.biome.predator_range",
+      "relationKind": "pressures",
+      "targetFactId": "frontier.resource.medicine_herbs",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "frontier.link.npc_motive",
+      "sourceFactId": "frontier.npc.trail_medic",
+      "relationKind": "implies",
+      "targetFactId": "frontier.quest.secure_medicine",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "frontier.link.resource_loot",
+      "sourceFactId": "frontier.resource.medicine_herbs",
+      "relationKind": "feeds",
+      "targetFactId": "frontier.loot.survival_cache",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "frontier.link.settlement_route",
+      "sourceFactId": "frontier.settlement.stockade_camp",
+      "relationKind": "anchors",
+      "targetFactId": "frontier.world.river_ford",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "ruins.link.landmark_event",
+      "sourceFactId": "ruins.landmark.sunken_tower",
+      "relationKind": "implies",
+      "targetFactId": "ruins.event.awakened_ruin",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "ruins.link.landmark_route",
+      "sourceFactId": "ruins.landmark.sunken_tower",
+      "relationKind": "anchors",
+      "targetFactId": "core.route.contested_passage",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "ruins.link.objective_loot",
+      "sourceFactId": "ruins.quest.recover_relic",
+      "relationKind": "rewards",
+      "targetFactId": "ruins.loot.relic_cache",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "scarcity.link.economy_recipe",
+      "sourceFactId": "scarcity.economy.barter_loop",
+      "relationKind": "unlocks",
+      "targetFactId": "scarcity.recipe.preserves",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "scarcity.link.recipe_loot",
+      "sourceFactId": "scarcity.recipe.preserves",
+      "relationKind": "rewards",
+      "targetFactId": "scarcity.loot.ration_bundle",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "scarcity.link.resource_economy",
+      "sourceFactId": "scarcity.resource.salt",
+      "relationKind": "feeds",
+      "targetFactId": "scarcity.economy.barter_loop",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "winter.link.hazard_resource",
+      "sourceFactId": "winter.biome.whiteout",
+      "relationKind": "pressures",
+      "targetFactId": "winter.resource.firewood",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "winter.link.weather_combat",
+      "sourceFactId": "winter.weather.ice_storm",
+      "relationKind": "pressures",
+      "targetFactId": "winter.combat.exposure",
+      "directed": true,
+      "sourceNote": ""
+    }
+  ],
+  "resolvedExpansionIntents": [
+    {
+      "intentId": "core.intent.world",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.world.crossroads",
+      "targetContractId": "world_topology_region_route_graph_v1",
+      "targetArtifactKind": "world_topology",
+      "status": "ready",
+      "priority": 10,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.actor",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.npc.quest_broker",
+      "targetContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "status": "ready",
+      "priority": 20,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.quest",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.quest.recover_or_deliver",
+      "targetContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "status": "ready",
+      "priority": 30,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.dialogue",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.dialogue.grounded",
+      "targetContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "status": "ready",
+      "priority": 40,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.combat",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.combat.local_threat",
+      "targetContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "status": "ready",
+      "priority": 50,
+      "diagnostics": []
+    },
+    {
+      "intentId": "frontier.intent.biome",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "sourceFactId": "frontier.biome.predator_range",
+      "targetContractId": "biome_weather_hazard_event_hints_v1",
+      "targetArtifactKind": "biome_event_hints",
+      "status": "ready",
+      "priority": 110,
+      "diagnostics": []
+    },
+    {
+      "intentId": "frontier.intent.faction",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "sourceFactId": "frontier.faction.ranger_post",
+      "targetContractId": "faction_reputation_social_relation_v1",
+      "targetArtifactKind": "faction_relation",
+      "status": "ready",
+      "priority": 120,
+      "diagnostics": []
+    },
+    {
+      "intentId": "frontier.intent.item",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "sourceFactId": "frontier.resource.medicine_herbs",
+      "targetContractId": "item_resource_recipe_loot_economy_v1",
+      "targetArtifactKind": "item_economy",
+      "status": "ready",
+      "priority": 130,
+      "diagnostics": []
+    },
+    {
+      "intentId": "frontier.intent.settlement",
+      "sourcePackId": "semantic_pack/frontier_survival",
+      "sourceFactId": "frontier.settlement.stockade_camp",
+      "targetContractId": "settlement_building_landmark_v1",
+      "targetArtifactKind": "settlement_landmark",
+      "status": "future_required",
+      "priority": 140,
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "semantic_pack.expansion_intent.contract.not_ready",
+          "target": "frontier.intent.settlement",
+          "message": "not_ready_for_goal_030"
+        }
+      ]
+    },
+    {
+      "intentId": "ruins.intent.quest",
+      "sourcePackId": "semantic_pack/ruins_and_relics",
+      "sourceFactId": "ruins.quest.recover_relic",
+      "targetContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "status": "ready",
+      "priority": 210,
+      "diagnostics": []
+    },
+    {
+      "intentId": "scarcity.intent.economy",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "sourceFactId": "scarcity.economy.barter_loop",
+      "targetContractId": "item_resource_recipe_loot_economy_v1",
+      "targetArtifactKind": "item_economy",
+      "status": "ready",
+      "priority": 210,
+      "diagnostics": []
+    },
+    {
+      "intentId": "winter.intent.biome",
+      "sourcePackId": "semantic_pack/winter_hazards",
+      "sourceFactId": "winter.biome.whiteout",
+      "targetContractId": "biome_weather_hazard_event_hints_v1",
+      "targetArtifactKind": "biome_event_hints",
+      "status": "ready",
+      "priority": 210,
+      "diagnostics": []
+    },
+    {
+      "intentId": "ruins.intent.landmark",
+      "sourcePackId": "semantic_pack/ruins_and_relics",
+      "sourceFactId": "ruins.landmark.sunken_tower",
+      "targetContractId": "settlement_building_landmark_v1",
+      "targetArtifactKind": "settlement_landmark",
+      "status": "future_required",
+      "priority": 220,
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "semantic_pack.expansion_intent.contract.not_ready",
+          "target": "ruins.intent.landmark",
+          "message": "not_ready_for_goal_030"
+        }
+      ]
+    },
+    {
+      "intentId": "scarcity.intent.quest",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "sourceFactId": "scarcity.quest.supply_debt",
+      "targetContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "status": "ready",
+      "priority": 220,
+      "diagnostics": []
+    },
+    {
+      "intentId": "winter.intent.combat",
+      "sourcePackId": "semantic_pack/winter_hazards",
+      "sourceFactId": "winter.combat.exposure",
+      "targetContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "status": "ready",
+      "priority": 220,
+      "diagnostics": []
+    }
+  ],
+  "goal030CoverageContractIds": [
+    "biome_weather_hazard_event_hints_v1",
+    "capability_bundle_pipeline_inputs_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "faction_reputation_social_relation_v1",
+    "game_profile_v1",
+    "item_resource_recipe_loot_economy_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "semantic_pack_v1",
+    "world_topology_region_route_graph_v1"
+  ],
+  "crossArtifactLinks": [
+    {
+      "linkId": "faction_npc_quest_dialogue",
+      "factPath": [
+        "core.dialogue.grounded",
+        "core.faction.local_authority",
+        "core.npc.quest_broker",
+        "frontier.quest.secure_medicine"
+      ],
+      "contractIds": [
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "faction_npc_quest_dialogue|facts=4|contracts=4"
+    },
+    {
+      "linkId": "biome_resource_economy_loot",
+      "factPath": [
+        "frontier.biome.predator_range",
+        "frontier.loot.survival_cache",
+        "frontier.resource.medicine_herbs",
+        "scarcity.economy.barter_loop"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "item_resource_recipe_loot_economy_v1"
+      ],
+      "summary": "biome_resource_economy_loot|facts=4|contracts=2"
+    },
+    {
+      "linkId": "settlement_landmark_route_event",
+      "factPath": [
+        "core.event.market_disruption",
+        "core.route.contested_passage",
+        "frontier.settlement.stockade_camp",
+        "ruins.landmark.sunken_tower"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "settlement_building_landmark_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "summary": "settlement_landmark_route_event|facts=4|contracts=3"
+    },
+    {
+      "linkId": "combat_progression_reward_pattern",
+      "factPath": [
+        "core.combat.local_threat",
+        "core.progression.reputation_growth",
+        "core.quest.recover_or_deliver",
+        "frontier.loot.survival_cache"
+      ],
+      "contractIds": [
+        "combat_progression_ability_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "combat_progression_reward_pattern|facts=4|contracts=3"
+    }
+  ],
+  "sections": [
+    {
+      "sectionId": "world_route_pressure",
+      "title": "World regions / route pressure",
+      "factIds": [
+        "core.route.contested_passage",
+        "core.world.crossroads",
+        "frontier.world.river_ford"
+      ],
+      "relationIds": [
+        "core.link.route_event",
+        "frontier.link.settlement_route",
+        "ruins.link.landmark_route"
+      ],
+      "expansionIntentIds": [
+        "core.intent.world"
+      ],
+      "summary": "facts=3|relations=3|intents=1"
+    },
+    {
+      "sectionId": "biome_weather_hazard_event_pressure",
+      "title": "Biome/weather/hazard/event pressure",
+      "factIds": [
+        "core.event.market_disruption",
+        "frontier.biome.predator_range",
+        "frontier.weather.cold_snap",
+        "ruins.event.awakened_ruin",
+        "winter.biome.whiteout",
+        "winter.weather.ice_storm"
+      ],
+      "relationIds": [
+        "core.link.route_event",
+        "frontier.link.hazard_resource",
+        "ruins.link.landmark_event",
+        "winter.link.hazard_resource",
+        "winter.link.weather_combat"
+      ],
+      "expansionIntentIds": [
+        "frontier.intent.biome",
+        "winter.intent.biome"
+      ],
+      "summary": "facts=6|relations=5|intents=2"
+    },
+    {
+      "sectionId": "factions_reputation_social_relations",
+      "title": "Factions and reputation/social relation anchors",
+      "factIds": [
+        "core.faction.local_authority",
+        "frontier.faction.ranger_post"
+      ],
+      "relationIds": [
+        "core.link.authority_broker",
+        "frontier.link.faction_npc"
+      ],
+      "expansionIntentIds": [
+        "frontier.intent.faction"
+      ],
+      "summary": "facts=2|relations=2|intents=1"
+    },
+    {
+      "sectionId": "npc_archetype_variation",
+      "title": "NPC archetype variation anchors",
+      "factIds": [
+        "core.npc.quest_broker",
+        "frontier.npc.trail_medic"
+      ],
+      "relationIds": [
+        "core.link.authority_broker",
+        "core.link.broker_objective",
+        "frontier.link.faction_npc",
+        "frontier.link.npc_motive"
+      ],
+      "expansionIntentIds": [
+        "core.intent.actor"
+      ],
+      "summary": "facts=2|relations=4|intents=1"
+    },
+    {
+      "sectionId": "quest_motive_objective_reward_patterns",
+      "title": "Quest motive/objective/reward pattern anchors",
+      "factIds": [
+        "core.quest.recover_or_deliver",
+        "frontier.loot.survival_cache",
+        "frontier.quest.secure_medicine",
+        "ruins.loot.relic_cache",
+        "ruins.quest.recover_relic",
+        "scarcity.loot.ration_bundle",
+        "scarcity.quest.supply_debt"
+      ],
+      "relationIds": [
+        "core.link.broker_objective",
+        "core.link.objective_dialogue",
+        "frontier.link.npc_motive",
+        "frontier.link.resource_loot",
+        "ruins.link.objective_loot",
+        "scarcity.link.recipe_loot"
+      ],
+      "expansionIntentIds": [
+        "core.intent.quest",
+        "ruins.intent.quest",
+        "scarcity.intent.quest"
+      ],
+      "summary": "facts=7|relations=6|intents=3"
+    },
+    {
+      "sectionId": "dialogue_localization_hints",
+      "title": "Dialogue tone/localization/string-table hints",
+      "factIds": [
+        "core.dialogue.grounded",
+        "core.localization.key_nouns"
+      ],
+      "relationIds": [
+        "core.link.objective_dialogue"
+      ],
+      "expansionIntentIds": [
+        "core.intent.dialogue"
+      ],
+      "summary": "facts=2|relations=1|intents=1"
+    },
+    {
+      "sectionId": "economy_resource_recipe_loot_chains",
+      "title": "Economy/resource/recipe/loot chains",
+      "factIds": [
+        "frontier.loot.survival_cache",
+        "frontier.resource.medicine_herbs",
+        "ruins.loot.relic_cache",
+        "scarcity.economy.barter_loop",
+        "scarcity.loot.ration_bundle",
+        "scarcity.recipe.preserves",
+        "scarcity.resource.salt",
+        "winter.resource.firewood"
+      ],
+      "relationIds": [
+        "frontier.link.hazard_resource",
+        "frontier.link.resource_loot",
+        "ruins.link.objective_loot",
+        "scarcity.link.economy_recipe",
+        "scarcity.link.recipe_loot",
+        "scarcity.link.resource_economy",
+        "winter.link.hazard_resource"
+      ],
+      "expansionIntentIds": [
+        "frontier.intent.item",
+        "scarcity.intent.economy"
+      ],
+      "summary": "facts=8|relations=7|intents=2"
+    },
+    {
+      "sectionId": "combat_progression_ability_pressure",
+      "title": "Combat/progression/ability pressures",
+      "factIds": [
+        "core.combat.local_threat",
+        "core.progression.reputation_growth",
+        "winter.combat.exposure"
+      ],
+      "relationIds": [
+        "core.link.combat_progression",
+        "winter.link.weather_combat"
+      ],
+      "expansionIntentIds": [
+        "core.intent.combat",
+        "winter.intent.combat"
+      ],
+      "summary": "facts=3|relations=2|intents=2"
+    },
+    {
+      "sectionId": "settlement_landmark_anchors",
+      "title": "Settlement/building/landmark anchors",
+      "factIds": [
+        "frontier.settlement.stockade_camp",
+        "ruins.landmark.sunken_tower"
+      ],
+      "relationIds": [
+        "frontier.link.settlement_route",
+        "ruins.link.landmark_event",
+        "ruins.link.landmark_route"
+      ],
+      "expansionIntentIds": [
+        "frontier.intent.settlement",
+        "ruins.intent.landmark"
+      ],
+      "summary": "facts=2|relations=3|intents=2"
+    },
+    {
+      "sectionId": "global_events",
+      "title": "Global events",
+      "factIds": [
+        "core.event.market_disruption",
+        "ruins.event.awakened_ruin"
+      ],
+      "relationIds": [
+        "core.link.route_event",
+        "ruins.link.landmark_event"
+      ],
+      "expansionIntentIds": [],
+      "summary": "facts=2|relations=2|intents=0"
+    },
+    {
+      "sectionId": "coverage_gaps_future_required",
+      "title": "Coverage gaps and future-required items",
+      "factIds": [],
+      "relationIds": [],
+      "expansionIntentIds": [
+        "frontier.intent.settlement",
+        "presentation_export_ir_v1",
+        "ruins.intent.landmark",
+        "settlement_building_landmark_v1"
+      ],
+      "summary": "gaps=4"
+    }
+  ],
+  "coverageGapsAndFutureRequiredItems": [
+    {
+      "gapId": "presentation_export_ir_v1",
+      "status": "future_required",
+      "source": "goal_030_compatibility_plan",
+      "reason": "not_ready_for_goal_030"
+    },
+    {
+      "gapId": "settlement_building_landmark_v1",
+      "status": "future_required",
+      "source": "goal_030_compatibility_plan",
+      "reason": "not_ready_for_goal_030"
+    },
+    {
+      "gapId": "frontier.intent.settlement",
+      "status": "future_required",
+      "source": "semantic_pack_expansion_intent",
+      "reason": "settlement_building_landmark_v1"
+    },
+    {
+      "gapId": "ruins.intent.landmark",
+      "status": "future_required",
+      "source": "semantic_pack_expansion_intent",
+      "reason": "settlement_building_landmark_v1"
+    }
+  ],
+  "stableSummary": "frontier_survival|packs=5|facts=32|relations=18|links=4|contracts=11|gaps=4|rejected=0",
+  "diagnostics": []
+}

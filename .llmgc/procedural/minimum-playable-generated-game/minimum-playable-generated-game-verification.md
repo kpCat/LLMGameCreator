@@ -13,9 +13,9 @@ minimum_playable_generated_game_verification
 - Automated smoke command: .\.llmgc\procedural\minimum-playable-generated-game\review-package\RUN_AUTOMATED_SMOKE.ps1
 - Selected package/style/thread: game/content_generation/frontier-survival / frontier_survival / thread/frontier-survival/000
 - Selected quest/reward: Quest 000 / Reward: item 004
-- Manifest hash: 3f7f219cc446c5842e6c6b849533ae66e16a48794ffe9eb2d7d865941f3cbb04
-- Review package hash: 26da704147370cdf34d4de489d993ebd6d35458ca90d400ed8d2822437417bbc
-- Deterministic report hash: 96fedb23f1fe6e0201539cf757fc06a227f33ab5a1051f10aa3c9b96b0f32ff9
+- Manifest hash: 2ad794e32aac56ee93d29ab5c3b2c936de32d8f97bf76e2512b40af2414b43dd
+- Review package hash: 306c7cbc9f0ceee91b8bab57e48d2532f72c07d31cbec4c54dee790dc60f115f
+- Deterministic report hash: 5ca435aa4e66a6c67b0bd95e661418de2a2a1ea0d72a6fb0a7e5da1d96326222
 - Automated launch verified: true
 - Automated quest completion verified: true
 - Manual checklist status: required, not pre-marked passed

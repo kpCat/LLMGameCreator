@@ -93,6 +93,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_029_MODULAR_GENERATOR_KERNEL_PARALLEL_READINESS.md` | Goal 029 task: modular generator kernel and parallel development readiness with module manifests, product-smoke scenario manifests, static registry/compatibility seam, absence behavior, verification tiers, manifest-driven product smoke route and final stop at `modular_generator_kernel_parallel_readiness_verification`. |
 | `docs/GOAL_030_SEMANTIC_ARTIFACT_CONTRACT_REGISTRY_SPEC.md` | Goal 030 task/spec: semantic artifact contract registry, semantic pack compatibility planner, semantic expansion planning seam, compact evidence under `.llmgc/procedural/goal-030-semantic-artifact-contract-registry/` and final stop at `semantic_artifact_contract_registry_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_030_SEMANTIC_ARTIFACT_REGISTRY.md` | Goal 030 scouting: BCL-only registry/planner, no external graph/RDF/WFC/dialogue/ECS dependencies. |
+| `docs/GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT_SPEC.md` | Goal 031 task/spec: semantic pack composition blueprint, deterministic semantic fact/relation merge, cross-artifact blueprint plans, compact evidence under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and final stop at `semantic_pack_composition_blueprint_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT.md` | Goal 031 scouting: BCL-only semantic pack composition, no RDF/graph/LLM/dialogue/runtime/ECS dependency adoption. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -137,16 +139,16 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-semantic_artifact_contract_registry_verification
+semantic_pack_composition_blueprint_verification
 ```
 
-Goal 030 semantic artifact contract registry has been produced for review. It adds the deterministic `Design/SemanticArtifactContracts` registry/validator/planner/evidence seam and compact artifacts under `.llmgc/procedural/goal-030-semantic-artifact-contract-registry/`. The gate remains `semantic_artifact_contract_registry_verification required`.
+Goal 031 semantic pack composition blueprint has been produced for review. It adds the deterministic `Design/SemanticPackComposition` catalog/validator/composer/evidence seam, reuses Goal 030 `Design/SemanticArtifactContracts` registry/planner integration, and writes compact artifacts under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/`. The gate remains `semantic_pack_composition_blueprint_verification required`.
 
 Allowed next sequence:
 
-1. Review Goal 030 evidence in `docs/GOAL_030_SEMANTIC_ARTIFACT_CONTRACT_REGISTRY_SPEC.md`, `docs/EXTERNAL_SCOUTING_GOAL_030_SEMANTIC_ARTIFACT_REGISTRY.md`, `src/LLMGameCreator.Application/Design/SemanticArtifactContracts/`, tests and `.llmgc/procedural/goal-030-semantic-artifact-contract-registry/`.
-2. Confirm the compact report contains `semantic_artifact_contract_registry_verification required` and keeps `accepted=false`.
-3. Goal 031 remains not started until `semantic_artifact_contract_registry_verification` is accepted.
+1. Review Goal 031 evidence in `docs/GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT_SPEC.md`, `docs/EXTERNAL_SCOUTING_GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT.md`, `src/LLMGameCreator.Application/Design/SemanticPackComposition/`, tests and `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/`.
+2. Confirm the compact report contains `semantic_pack_composition_blueprint_verification required` and keeps `accepted=false`.
+3. Goal 032 remains not started until `semantic_pack_composition_blueprint_verification` is accepted.
 
 Kill criterion:
 

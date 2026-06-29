@@ -186,8 +186,8 @@ public sealed class CapabilityBundlePipelineInputsAcceptanceTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_030_semantic_artifact_contract_registry", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal("semantic_artifact_contract_registry_verification", root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_031_semantic_pack_composition_blueprint", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("semantic_pack_composition_blueprint_verification", root.GetProperty("gate_status").GetString());
         Assert.Equal("goal_023_capability_bundle_pipeline_inputs", root.GetProperty("goal_023_capability_bundle_pipeline_inputs").GetProperty("slice_id").GetString());
         Assert.Contains(
             "development_complexity_stabilization_verification passed",

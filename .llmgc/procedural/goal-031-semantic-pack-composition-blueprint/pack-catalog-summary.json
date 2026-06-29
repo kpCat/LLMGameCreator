@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "semantic_pack_catalog_summary_v1",
+  "packCount": 10,
+  "factCount": 63,
+  "packIds": [
+    "semantic_pack/border_conflict",
+    "semantic_pack/caravan_trade",
+    "semantic_pack/core_blueprint_spine",
+    "semantic_pack/folk_magic",
+    "semantic_pack/frontier_survival",
+    "semantic_pack/gothic_intrigue",
+    "semantic_pack/merchant_guilds",
+    "semantic_pack/ruins_and_relics",
+    "semantic_pack/scarcity_economy",
+    "semantic_pack/winter_hazards"
+  ],
+  "factDomainCounts": {
+    "biome_hazard": 2,
+    "combat_pressure": 3,
+    "dialogue_tone": 5,
+    "economy_chain": 3,
+    "faction_role": 6,
+    "global_event": 4,
+    "landmark_theme": 2,
+    "localization_hint": 1,
+    "loot_theme": 3,
+    "npc_archetype": 4,
+    "progression_axis": 3,
+    "quest_motive": 5,
+    "quest_objective": 2,
+    "recipe_theme": 2,
+    "reputation_axis": 2,
+    "resource_theme": 3,
+    "route_pressure": 3,
+    "settlement_pattern": 2,
+    "social_relation": 2,
+    "weather_event": 2,
+    "world_region": 4
+  },
+  "profileIds": [
+    "caravan_trade",
+    "frontier_survival",
+    "gothic_intrigue"
+  ],
+  "diagnostics": []
+}

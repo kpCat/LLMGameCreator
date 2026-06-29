@@ -6,6 +6,6 @@
 - Previous accepted gate: generated_game_profile_contract_verification passed
 - Scope guard implemented: true
 - Check-all artifact isolation implemented: true
-- Tracked generated artifact families: 29
+- Tracked generated artifact families: 30
 - Invalid scenarios rejected: 12/12
-- Report hash: 423febf75b2d8f6aa3441f51023fe37b41a28b76e0df8f3b551585b33b5e7708
+- Report hash: b254684e71abab909b0b9bbecfca9f71f461b0822dcdb0b85c7054a140651eb8

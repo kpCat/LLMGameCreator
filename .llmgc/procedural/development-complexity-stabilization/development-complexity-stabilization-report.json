@@ -34,7 +34,7 @@
   "artifactHashes": {
     "policyProofHash": "02bb8b88f67d0114e75d4b74902b2a659bed7d3d2a9f607f815b1e14ee32b150",
     "checkAllIsolationProofHash": "c0710c2199fc8fb793921399ac278d8e1a26671fa32f1c23f4e8303e0f2199c9",
-    "trackedGeneratedArtifactInventoryHash": "5c1641ac846763594375ce225acf5f0f961b29f8b68ecb81cc7b61345d0784fc",
+    "trackedGeneratedArtifactInventoryHash": "5c5423d7ec4557df910d1a41c71ab3cfbc9aa0ee0f041784f03ef163edaa7cf4",
     "scopeGuardInvalidMatrixHash": "276490719322c737ff307d1dd337a54650756bcb812d59a3f35568349f8cbd8a"
   },
   "diagnostics": [

@@ -1,0 +1,934 @@
+{
+  "schemaVersion": "semantic_blueprint_plan_v1",
+  "profileId": "caravan_trade",
+  "complexityHint": "standard",
+  "selectedPackIds": [
+    "semantic_pack/border_conflict",
+    "semantic_pack/caravan_trade",
+    "semantic_pack/core_blueprint_spine",
+    "semantic_pack/merchant_guilds",
+    "semantic_pack/scarcity_economy"
+  ],
+  "rejectedPacks": [],
+  "mergedSemanticFacts": [
+    {
+      "factId": "border.combat.ambush",
+      "domain": "combat_pressure",
+      "value": "ambush combat pressure",
+      "sourcePackId": "semantic_pack/border_conflict",
+      "tags": [
+        "combat"
+      ]
+    },
+    {
+      "factId": "core.combat.local_threat",
+      "domain": "combat_pressure",
+      "value": "localized threat pressure",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "combat"
+      ]
+    },
+    {
+      "factId": "caravan.dialogue.bargain",
+      "domain": "dialogue_tone",
+      "value": "bargaining dialogue tone",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "factId": "core.dialogue.grounded",
+      "domain": "dialogue_tone",
+      "value": "grounded practical tone",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "factId": "guild.dialogue.contractual",
+      "domain": "dialogue_tone",
+      "value": "contractual dialogue tone",
+      "sourcePackId": "semantic_pack/merchant_guilds",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "factId": "caravan.economy.spice_credit",
+      "domain": "economy_chain",
+      "value": "spice to credit economy chain",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "economy"
+      ]
+    },
+    {
+      "factId": "guild.economy.licensed_trade",
+      "domain": "economy_chain",
+      "value": "licensed trade economy chain",
+      "sourcePackId": "semantic_pack/merchant_guilds",
+      "tags": [
+        "economy"
+      ]
+    },
+    {
+      "factId": "scarcity.economy.barter_loop",
+      "domain": "economy_chain",
+      "value": "barter loop economy chain",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "economy"
+      ]
+    },
+    {
+      "factId": "border.faction.militia",
+      "domain": "faction_role",
+      "value": "border militia faction",
+      "sourcePackId": "semantic_pack/border_conflict",
+      "tags": [
+        "faction"
+      ]
+    },
+    {
+      "factId": "caravan.faction.caravan_master",
+      "domain": "faction_role",
+      "value": "caravan master faction",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "faction"
+      ]
+    },
+    {
+      "factId": "core.faction.local_authority",
+      "domain": "faction_role",
+      "value": "local authority faction",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "faction"
+      ]
+    },
+    {
+      "factId": "guild.faction.merchant_council",
+      "domain": "faction_role",
+      "value": "merchant council faction",
+      "sourcePackId": "semantic_pack/merchant_guilds",
+      "tags": [
+        "faction"
+      ]
+    },
+    {
+      "factId": "border.event.skirmish",
+      "domain": "global_event",
+      "value": "border skirmish event",
+      "sourcePackId": "semantic_pack/border_conflict",
+      "tags": [
+        "event"
+      ]
+    },
+    {
+      "factId": "core.event.market_disruption",
+      "domain": "global_event",
+      "value": "market disruption event",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "event"
+      ]
+    },
+    {
+      "factId": "core.localization.key_nouns",
+      "domain": "localization_hint",
+      "value": "stable string table noun hints",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "localization"
+      ]
+    },
+    {
+      "factId": "scarcity.loot.ration_bundle",
+      "domain": "loot_theme",
+      "value": "ration bundle loot",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "loot"
+      ]
+    },
+    {
+      "factId": "caravan.npc.factor",
+      "domain": "npc_archetype",
+      "value": "trade factor archetype",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "npc"
+      ]
+    },
+    {
+      "factId": "core.npc.quest_broker",
+      "domain": "npc_archetype",
+      "value": "quest broker archetype",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "npc",
+        "quest"
+      ]
+    },
+    {
+      "factId": "border.progression.favor",
+      "domain": "progression_axis",
+      "value": "faction favor progression",
+      "sourcePackId": "semantic_pack/border_conflict",
+      "tags": [
+        "progression"
+      ]
+    },
+    {
+      "factId": "core.progression.reputation_growth",
+      "domain": "progression_axis",
+      "value": "reputation growth axis",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "progression"
+      ]
+    },
+    {
+      "factId": "caravan.quest.delivery_bargain",
+      "domain": "quest_motive",
+      "value": "delivery bargain motive",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "quest"
+      ]
+    },
+    {
+      "factId": "scarcity.quest.supply_debt",
+      "domain": "quest_motive",
+      "value": "supply debt motive",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "quest"
+      ]
+    },
+    {
+      "factId": "core.quest.recover_or_deliver",
+      "domain": "quest_objective",
+      "value": "recover or deliver objective",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "quest"
+      ]
+    },
+    {
+      "factId": "scarcity.recipe.preserves",
+      "domain": "recipe_theme",
+      "value": "preserves recipe theme",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "recipe"
+      ]
+    },
+    {
+      "factId": "caravan.reputation.credit",
+      "domain": "reputation_axis",
+      "value": "credit reputation axis",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "reputation"
+      ]
+    },
+    {
+      "factId": "scarcity.resource.salt",
+      "domain": "resource_theme",
+      "value": "salt resource theme",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "tags": [
+        "resource"
+      ]
+    },
+    {
+      "factId": "border.route.checkpoint",
+      "domain": "route_pressure",
+      "value": "checkpoint route pressure",
+      "sourcePackId": "semantic_pack/border_conflict",
+      "tags": [
+        "route"
+      ]
+    },
+    {
+      "factId": "caravan.route.toll_pressure",
+      "domain": "route_pressure",
+      "value": "toll pressure route",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "economy",
+        "route"
+      ]
+    },
+    {
+      "factId": "core.route.contested_passage",
+      "domain": "route_pressure",
+      "value": "contested passage pressure",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "conflict",
+        "route"
+      ]
+    },
+    {
+      "factId": "caravan.settlement.trade_outpost",
+      "domain": "settlement_pattern",
+      "value": "trade outpost settlement",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "factId": "guild.social.debt_network",
+      "domain": "social_relation",
+      "value": "debt network relation",
+      "sourcePackId": "semantic_pack/merchant_guilds",
+      "tags": [
+        "social"
+      ]
+    },
+    {
+      "factId": "caravan.world.salt_road",
+      "domain": "world_region",
+      "value": "salt road trade region",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "tags": [
+        "route",
+        "world"
+      ]
+    },
+    {
+      "factId": "core.world.crossroads",
+      "domain": "world_region",
+      "value": "shared crossroads region",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "tags": [
+        "route",
+        "world"
+      ]
+    }
+  ],
+  "relationGraph": [
+    {
+      "relationId": "border.link.combat_progression",
+      "sourceFactId": "border.combat.ambush",
+      "relationKind": "implies",
+      "targetFactId": "border.progression.favor",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "border.link.faction_combat",
+      "sourceFactId": "border.faction.militia",
+      "relationKind": "pressures",
+      "targetFactId": "border.combat.ambush",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "border.link.route_event",
+      "sourceFactId": "border.route.checkpoint",
+      "relationKind": "implies",
+      "targetFactId": "border.event.skirmish",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "caravan.link.faction_npc",
+      "sourceFactId": "caravan.faction.caravan_master",
+      "relationKind": "implies",
+      "targetFactId": "caravan.npc.factor",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "caravan.link.motive_dialogue",
+      "sourceFactId": "caravan.quest.delivery_bargain",
+      "relationKind": "implies",
+      "targetFactId": "caravan.dialogue.bargain",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "caravan.link.npc_motive",
+      "sourceFactId": "caravan.npc.factor",
+      "relationKind": "implies",
+      "targetFactId": "caravan.quest.delivery_bargain",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "caravan.link.route_economy",
+      "sourceFactId": "caravan.route.toll_pressure",
+      "relationKind": "pressures",
+      "targetFactId": "caravan.economy.spice_credit",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "caravan.link.settlement_route",
+      "sourceFactId": "caravan.settlement.trade_outpost",
+      "relationKind": "anchors",
+      "targetFactId": "caravan.route.toll_pressure",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.authority_broker",
+      "sourceFactId": "core.faction.local_authority",
+      "relationKind": "implies",
+      "targetFactId": "core.npc.quest_broker",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.broker_objective",
+      "sourceFactId": "core.npc.quest_broker",
+      "relationKind": "implies",
+      "targetFactId": "core.quest.recover_or_deliver",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.combat_progression",
+      "sourceFactId": "core.combat.local_threat",
+      "relationKind": "implies",
+      "targetFactId": "core.progression.reputation_growth",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.objective_dialogue",
+      "sourceFactId": "core.quest.recover_or_deliver",
+      "relationKind": "implies",
+      "targetFactId": "core.dialogue.grounded",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "core.link.route_event",
+      "sourceFactId": "core.route.contested_passage",
+      "relationKind": "implies",
+      "targetFactId": "core.event.market_disruption",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "guild.link.faction_economy",
+      "sourceFactId": "guild.faction.merchant_council",
+      "relationKind": "feeds",
+      "targetFactId": "guild.economy.licensed_trade",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "guild.link.faction_social",
+      "sourceFactId": "guild.faction.merchant_council",
+      "relationKind": "implies",
+      "targetFactId": "guild.social.debt_network",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "guild.link.social_dialogue",
+      "sourceFactId": "guild.social.debt_network",
+      "relationKind": "implies",
+      "targetFactId": "guild.dialogue.contractual",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "scarcity.link.economy_recipe",
+      "sourceFactId": "scarcity.economy.barter_loop",
+      "relationKind": "unlocks",
+      "targetFactId": "scarcity.recipe.preserves",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "scarcity.link.recipe_loot",
+      "sourceFactId": "scarcity.recipe.preserves",
+      "relationKind": "rewards",
+      "targetFactId": "scarcity.loot.ration_bundle",
+      "directed": true,
+      "sourceNote": ""
+    },
+    {
+      "relationId": "scarcity.link.resource_economy",
+      "sourceFactId": "scarcity.resource.salt",
+      "relationKind": "feeds",
+      "targetFactId": "scarcity.economy.barter_loop",
+      "directed": true,
+      "sourceNote": ""
+    }
+  ],
+  "resolvedExpansionIntents": [
+    {
+      "intentId": "core.intent.world",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.world.crossroads",
+      "targetContractId": "world_topology_region_route_graph_v1",
+      "targetArtifactKind": "world_topology",
+      "status": "ready",
+      "priority": 10,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.actor",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.npc.quest_broker",
+      "targetContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "status": "ready",
+      "priority": 20,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.quest",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.quest.recover_or_deliver",
+      "targetContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "status": "ready",
+      "priority": 30,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.dialogue",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.dialogue.grounded",
+      "targetContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "status": "ready",
+      "priority": 40,
+      "diagnostics": []
+    },
+    {
+      "intentId": "core.intent.combat",
+      "sourcePackId": "semantic_pack/core_blueprint_spine",
+      "sourceFactId": "core.combat.local_threat",
+      "targetContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "status": "ready",
+      "priority": 50,
+      "diagnostics": []
+    },
+    {
+      "intentId": "caravan.intent.world",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "sourceFactId": "caravan.world.salt_road",
+      "targetContractId": "world_topology_region_route_graph_v1",
+      "targetArtifactKind": "world_topology",
+      "status": "ready",
+      "priority": 110,
+      "diagnostics": []
+    },
+    {
+      "intentId": "caravan.intent.faction",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "sourceFactId": "caravan.faction.caravan_master",
+      "targetContractId": "faction_reputation_social_relation_v1",
+      "targetArtifactKind": "faction_relation",
+      "status": "ready",
+      "priority": 120,
+      "diagnostics": []
+    },
+    {
+      "intentId": "caravan.intent.economy",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "sourceFactId": "caravan.economy.spice_credit",
+      "targetContractId": "item_resource_recipe_loot_economy_v1",
+      "targetArtifactKind": "item_economy",
+      "status": "ready",
+      "priority": 130,
+      "diagnostics": []
+    },
+    {
+      "intentId": "caravan.intent.settlement",
+      "sourcePackId": "semantic_pack/caravan_trade",
+      "sourceFactId": "caravan.settlement.trade_outpost",
+      "targetContractId": "settlement_building_landmark_v1",
+      "targetArtifactKind": "settlement_landmark",
+      "status": "future_required",
+      "priority": 140,
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "semantic_pack.expansion_intent.contract.not_ready",
+          "target": "caravan.intent.settlement",
+          "message": "not_ready_for_goal_030"
+        }
+      ]
+    },
+    {
+      "intentId": "border.intent.combat",
+      "sourcePackId": "semantic_pack/border_conflict",
+      "sourceFactId": "border.combat.ambush",
+      "targetContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "status": "ready",
+      "priority": 210,
+      "diagnostics": []
+    },
+    {
+      "intentId": "guild.intent.faction",
+      "sourcePackId": "semantic_pack/merchant_guilds",
+      "sourceFactId": "guild.faction.merchant_council",
+      "targetContractId": "faction_reputation_social_relation_v1",
+      "targetArtifactKind": "faction_relation",
+      "status": "ready",
+      "priority": 210,
+      "diagnostics": []
+    },
+    {
+      "intentId": "scarcity.intent.economy",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "sourceFactId": "scarcity.economy.barter_loop",
+      "targetContractId": "item_resource_recipe_loot_economy_v1",
+      "targetArtifactKind": "item_economy",
+      "status": "ready",
+      "priority": 210,
+      "diagnostics": []
+    },
+    {
+      "intentId": "border.intent.faction",
+      "sourcePackId": "semantic_pack/border_conflict",
+      "sourceFactId": "border.faction.militia",
+      "targetContractId": "faction_reputation_social_relation_v1",
+      "targetArtifactKind": "faction_relation",
+      "status": "ready",
+      "priority": 220,
+      "diagnostics": []
+    },
+    {
+      "intentId": "guild.intent.economy",
+      "sourcePackId": "semantic_pack/merchant_guilds",
+      "sourceFactId": "guild.economy.licensed_trade",
+      "targetContractId": "item_resource_recipe_loot_economy_v1",
+      "targetArtifactKind": "item_economy",
+      "status": "ready",
+      "priority": 220,
+      "diagnostics": []
+    },
+    {
+      "intentId": "scarcity.intent.quest",
+      "sourcePackId": "semantic_pack/scarcity_economy",
+      "sourceFactId": "scarcity.quest.supply_debt",
+      "targetContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "status": "ready",
+      "priority": 220,
+      "diagnostics": []
+    }
+  ],
+  "goal030CoverageContractIds": [
+    "biome_weather_hazard_event_hints_v1",
+    "capability_bundle_pipeline_inputs_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "faction_reputation_social_relation_v1",
+    "game_profile_v1",
+    "item_resource_recipe_loot_economy_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "semantic_pack_v1",
+    "world_topology_region_route_graph_v1"
+  ],
+  "crossArtifactLinks": [
+    {
+      "linkId": "faction_npc_quest_dialogue",
+      "factPath": [
+        "border.faction.militia",
+        "caravan.dialogue.bargain",
+        "caravan.npc.factor",
+        "caravan.quest.delivery_bargain"
+      ],
+      "contractIds": [
+        "dialogue_string_table_localization_hint_v1",
+        "entity_archetype_npc_actor_profile_v1",
+        "faction_reputation_social_relation_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "faction_npc_quest_dialogue|facts=4|contracts=4"
+    },
+    {
+      "linkId": "biome_resource_economy_loot",
+      "factPath": [
+        "caravan.economy.spice_credit",
+        "scarcity.loot.ration_bundle",
+        "scarcity.resource.salt"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "item_resource_recipe_loot_economy_v1"
+      ],
+      "summary": "biome_resource_economy_loot|facts=3|contracts=2"
+    },
+    {
+      "linkId": "settlement_landmark_route_event",
+      "factPath": [
+        "border.event.skirmish",
+        "border.route.checkpoint",
+        "caravan.settlement.trade_outpost",
+        "caravan.world.salt_road"
+      ],
+      "contractIds": [
+        "biome_weather_hazard_event_hints_v1",
+        "settlement_building_landmark_v1",
+        "world_topology_region_route_graph_v1"
+      ],
+      "summary": "settlement_landmark_route_event|facts=4|contracts=3"
+    },
+    {
+      "linkId": "combat_progression_reward_pattern",
+      "factPath": [
+        "border.combat.ambush",
+        "border.progression.favor",
+        "core.quest.recover_or_deliver",
+        "scarcity.loot.ration_bundle"
+      ],
+      "contractIds": [
+        "combat_progression_ability_v1",
+        "item_resource_recipe_loot_economy_v1",
+        "quest_graph_objective_reward_pattern_v1"
+      ],
+      "summary": "combat_progression_reward_pattern|facts=4|contracts=3"
+    }
+  ],
+  "sections": [
+    {
+      "sectionId": "world_route_pressure",
+      "title": "World regions / route pressure",
+      "factIds": [
+        "border.route.checkpoint",
+        "caravan.route.toll_pressure",
+        "caravan.world.salt_road",
+        "core.route.contested_passage",
+        "core.world.crossroads"
+      ],
+      "relationIds": [
+        "border.link.route_event",
+        "caravan.link.route_economy",
+        "caravan.link.settlement_route",
+        "core.link.route_event"
+      ],
+      "expansionIntentIds": [
+        "caravan.intent.world",
+        "core.intent.world"
+      ],
+      "summary": "facts=5|relations=4|intents=2"
+    },
+    {
+      "sectionId": "biome_weather_hazard_event_pressure",
+      "title": "Biome/weather/hazard/event pressure",
+      "factIds": [
+        "border.event.skirmish",
+        "core.event.market_disruption"
+      ],
+      "relationIds": [
+        "border.link.route_event",
+        "core.link.route_event"
+      ],
+      "expansionIntentIds": [],
+      "summary": "facts=2|relations=2|intents=0"
+    },
+    {
+      "sectionId": "factions_reputation_social_relations",
+      "title": "Factions and reputation/social relation anchors",
+      "factIds": [
+        "border.faction.militia",
+        "caravan.faction.caravan_master",
+        "caravan.reputation.credit",
+        "core.faction.local_authority",
+        "guild.faction.merchant_council",
+        "guild.social.debt_network"
+      ],
+      "relationIds": [
+        "border.link.faction_combat",
+        "caravan.link.faction_npc",
+        "core.link.authority_broker",
+        "guild.link.faction_economy",
+        "guild.link.faction_social",
+        "guild.link.social_dialogue"
+      ],
+      "expansionIntentIds": [
+        "border.intent.faction",
+        "caravan.intent.faction",
+        "guild.intent.faction"
+      ],
+      "summary": "facts=6|relations=6|intents=3"
+    },
+    {
+      "sectionId": "npc_archetype_variation",
+      "title": "NPC archetype variation anchors",
+      "factIds": [
+        "caravan.npc.factor",
+        "core.npc.quest_broker"
+      ],
+      "relationIds": [
+        "caravan.link.faction_npc",
+        "caravan.link.npc_motive",
+        "core.link.authority_broker",
+        "core.link.broker_objective"
+      ],
+      "expansionIntentIds": [
+        "core.intent.actor"
+      ],
+      "summary": "facts=2|relations=4|intents=1"
+    },
+    {
+      "sectionId": "quest_motive_objective_reward_patterns",
+      "title": "Quest motive/objective/reward pattern anchors",
+      "factIds": [
+        "caravan.quest.delivery_bargain",
+        "core.quest.recover_or_deliver",
+        "scarcity.loot.ration_bundle",
+        "scarcity.quest.supply_debt"
+      ],
+      "relationIds": [
+        "caravan.link.motive_dialogue",
+        "caravan.link.npc_motive",
+        "core.link.broker_objective",
+        "core.link.objective_dialogue",
+        "scarcity.link.recipe_loot"
+      ],
+      "expansionIntentIds": [
+        "core.intent.quest",
+        "scarcity.intent.quest"
+      ],
+      "summary": "facts=4|relations=5|intents=2"
+    },
+    {
+      "sectionId": "dialogue_localization_hints",
+      "title": "Dialogue tone/localization/string-table hints",
+      "factIds": [
+        "caravan.dialogue.bargain",
+        "core.dialogue.grounded",
+        "core.localization.key_nouns",
+        "guild.dialogue.contractual"
+      ],
+      "relationIds": [
+        "caravan.link.motive_dialogue",
+        "core.link.objective_dialogue",
+        "guild.link.social_dialogue"
+      ],
+      "expansionIntentIds": [
+        "core.intent.dialogue"
+      ],
+      "summary": "facts=4|relations=3|intents=1"
+    },
+    {
+      "sectionId": "economy_resource_recipe_loot_chains",
+      "title": "Economy/resource/recipe/loot chains",
+      "factIds": [
+        "caravan.economy.spice_credit",
+        "guild.economy.licensed_trade",
+        "scarcity.economy.barter_loop",
+        "scarcity.loot.ration_bundle",
+        "scarcity.recipe.preserves",
+        "scarcity.resource.salt"
+      ],
+      "relationIds": [
+        "caravan.link.route_economy",
+        "guild.link.faction_economy",
+        "scarcity.link.economy_recipe",
+        "scarcity.link.recipe_loot",
+        "scarcity.link.resource_economy"
+      ],
+      "expansionIntentIds": [
+        "caravan.intent.economy",
+        "guild.intent.economy",
+        "scarcity.intent.economy"
+      ],
+      "summary": "facts=6|relations=5|intents=3"
+    },
+    {
+      "sectionId": "combat_progression_ability_pressure",
+      "title": "Combat/progression/ability pressures",
+      "factIds": [
+        "border.combat.ambush",
+        "border.progression.favor",
+        "core.combat.local_threat",
+        "core.progression.reputation_growth"
+      ],
+      "relationIds": [
+        "border.link.combat_progression",
+        "border.link.faction_combat",
+        "core.link.combat_progression"
+      ],
+      "expansionIntentIds": [
+        "border.intent.combat",
+        "core.intent.combat"
+      ],
+      "summary": "facts=4|relations=3|intents=2"
+    },
+    {
+      "sectionId": "settlement_landmark_anchors",
+      "title": "Settlement/building/landmark anchors",
+      "factIds": [
+        "caravan.settlement.trade_outpost"
+      ],
+      "relationIds": [
+        "caravan.link.settlement_route"
+      ],
+      "expansionIntentIds": [
+        "caravan.intent.settlement"
+      ],
+      "summary": "facts=1|relations=1|intents=1"
+    },
+    {
+      "sectionId": "global_events",
+      "title": "Global events",
+      "factIds": [
+        "border.event.skirmish",
+        "core.event.market_disruption"
+      ],
+      "relationIds": [
+        "border.link.route_event",
+        "core.link.route_event"
+      ],
+      "expansionIntentIds": [],
+      "summary": "facts=2|relations=2|intents=0"
+    },
+    {
+      "sectionId": "coverage_gaps_future_required",
+      "title": "Coverage gaps and future-required items",
+      "factIds": [],
+      "relationIds": [],
+      "expansionIntentIds": [
+        "caravan.intent.settlement",
+        "presentation_export_ir_v1",
+        "settlement_building_landmark_v1"
+      ],
+      "summary": "gaps=3"
+    }
+  ],
+  "coverageGapsAndFutureRequiredItems": [
+    {
+      "gapId": "presentation_export_ir_v1",
+      "status": "future_required",
+      "source": "goal_030_compatibility_plan",
+      "reason": "not_ready_for_goal_030"
+    },
+    {
+      "gapId": "settlement_building_landmark_v1",
+      "status": "future_required",
+      "source": "goal_030_compatibility_plan",
+      "reason": "not_ready_for_goal_030"
+    },
+    {
+      "gapId": "caravan.intent.settlement",
+      "status": "future_required",
+      "source": "semantic_pack_expansion_intent",
+      "reason": "settlement_building_landmark_v1"
+    }
+  ],
+  "stableSummary": "caravan_trade|packs=5|facts=33|relations=19|links=4|contracts=11|gaps=3|rejected=0",
+  "diagnostics": []
+}
