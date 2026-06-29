@@ -1,16 +1,16 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-29T19:34:21Z",
+    "updated_at_utc":  "2026-06-29T19:52:35Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 035 Lua module manifest registry produced for review; Goal 036 recommended next",
+    "current_phase_title":  "Goal 035 Lua module manifest registry accepted; Goal 036 recommended next",
     "gate_status":  "lua_module_manifest_registry_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_035_lua_module_manifest_registry",
-    "active_manual_gate":  "Goal 035 Lua module manifest registry is produced for review and not accepted: lua_module_manifest_registry_verification required. Goal 034 remains accepted as passed by user decision. Goal 031 and Goal 032 remain produced for review and not passed; Goal 036 remains recommended next work and not started.",
-    "current_user_action":  "Review Goal 035 Lua module manifest registry evidence; do not mark the gate passed unless the user explicitly accepts lua_module_manifest_registry_verification. Do not start Goal 036 implementation from this handoff.",
-    "recommended_next_decision":  "Review gate: lua_module_manifest_registry_verification required. After acceptance, start Goal 036 Lua sandbox execution gate from a separate implementation task, while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
+    "active_manual_gate":  "Goal 035 Lua module manifest registry has been accepted by user decision: lua_module_manifest_registry_verification passed. Goal 034 remains accepted as passed by user decision. Goal 031 and Goal 032 remain produced for review and not passed; Goal 036 remains recommended next work and not started.",
+    "current_user_action":  "Start Goal 036 Lua sandbox execution gate only from a separate implementation task. Do not treat this acceptance handoff as Goal 036 implementation.",
+    "recommended_next_decision":  "Goal 035 gate lua_module_manifest_registry_verification passed by user decision. Start Goal 036 Lua sandbox execution gate from a separate implementation task, while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
@@ -85,7 +85,7 @@
     "last_completed_product_slice":  {
                                          "slice_id":  "goal_035_lua_module_manifest_registry",
                                          "title":  "Lua Module Manifest Registry",
-                                         "status":  "produced_for_review",
+                                        "status":  "passed_by_user_decision",
                                          "summary":  "Goal 035 records the accepted Goal 034 gate, then adds a BCL-only Lua module manifest registry under Design/LuaModuleManifestRegistry. It defines manifest families, module declarations, host API surface policy, deterministic validation diagnostics, dependency planning and scenario selection for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It proves 11 manifest families, 21 host API groups with denied dangerous groups, 133 manifests, 112 metamodule species/archetype slot declarations, Goal 034 quarantined-candidate compatibility metadata and invalid/fake/leak rejection without Lua execution/parsing/source generation, provider/LLM/RAG calls, Runtime/UI/Unity/GamePackage schema mutation, generator-library or external dependency changes.",
                                          "scenario_id":  "goal-035-lua-module-manifest-registry",
                                         "checks":  [
@@ -471,7 +471,7 @@
                                "Semantic authoring workspace, lore intake skeleton, provenance matrix and intent resolver sidecars",
                                "Lua module manifest registry, host API policy, selection plans, dependency plan and invalid matrix sidecars"
                            ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, produced-for-review goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 035 production recommend Goal 036 as next work but do not start Goal 036 implementation without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, produced-for-review goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 035 acceptance recommend Goal 036 as next work but do not start Goal 036 implementation without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -1021,7 +1021,7 @@
                                                                     "next_action":  "goal_031_semantic_pack_composition_blueprint"
                                                           },
     "semantic_pack_composition_blueprint_verification":  {
-                                                                    "status":  "passed_by_user_decision",
+                                                                    "status":  "required",
                                                                     "evidence_source":  "goal_031_semantic_pack_composition_blueprint",
                                                                     "observed_result":  [
                                                                                             "Design/SemanticPackComposition defines a deterministic semantic pack composition catalog, validator, composer/planner and evidence writer",
@@ -1030,12 +1030,12 @@
                                                                                             ".llmgc/procedural/goal-031-semantic-pack-composition-blueprint contains pack-catalog-summary.json, composition-matrix.json, three semantic-blueprint plans, cross-artifact-linkage-report.json and semantic-pack-composition-blueprint-report.md",
                                                                                             "Invalid/fake/leak matrix rejects duplicate pack ids, unknown profiles, missing scopes, duplicate facts, unknown fact relations, fake Goal 030 contract/artifact kinds, incompatible pack selection, future-only selection, fake selected pack ids and boundary leakage",
                                                                                             "Final report accepted=false and manualGate=semantic_pack_composition_blueprint_verification",
-                                                                                            "Goal 032 is not started"
+                                                                                            "Goal 032 was started by explicit user handoff after technical completion without marking Goal 031 passed"
                                                                                         ],
                                                                     "next_action":  "goal_032_started_by_user_handoff_after_technical_completion_without_marking_goal031_passed"
                                                           },
     "dynamic_semantic_feature_system_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_decision",
                                                                     "evidence_source":  "goal_032_dynamic_semantic_feature_system",
                                                                     "observed_result":  [
                                                                                             "Design/DynamicSemanticFeatures defines BCL-only feature definitions, typed assignments, applicability, inheritance, typed influence rules, resolver traces, authoring schema records, validator diagnostics and evidence writer",
@@ -1092,6 +1092,7 @@
                                                                                             ".llmgc/procedural/goal-035-lua-module-manifest-registry contains registry summary, host API policy, four selection files, dependency plan, invalid diagnostics matrix and markdown report",
                                                                                             "Invalid/fake/leak matrix rejects duplicate/invalid ids, duplicate family conflicts, unknown dependencies, dependency cycles, unknown/denied host APIs, missing semantic scopes, fake contracts/intents/profile/scenario, provenance mismatches, candidate-ready-without-review, over-budget modules, future-required-as-ready, side-effect mismatch, final prose, Lua source/execution, provider/LLM/RAG leakage, Runtime/UI/Unity/GamePackage leakage and nondeterministic ordering",
                                                                                             "Final report accepted=false and manualGate=lua_module_manifest_registry_verification",
+                                                                                            "The user confirmed lua_module_manifest_registry_verification passed after commit 9e8854c5",
                                                                                             "Goal 036 is not started by this handoff"
                                                                                         ],
                                                                     "next_action":  "goal_036_lua_sandbox_execution_gate_recommended_not_started"

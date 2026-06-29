@@ -150,12 +150,12 @@ Recommended next work:
 goal_036_lua_sandbox_execution_gate
 ```
 
-Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry is produced for review and stops at `lua_module_manifest_registry_verification required`. Goal 036 Lua sandbox execution gate is the recommended next work, but Goal 036 implementation has not been started by this handoff.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate is the recommended next work, but Goal 036 implementation has not been started by this handoff.
 
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
-2. Keep Goal 035 `lua_module_manifest_registry_verification` required until explicit user acceptance.
+2. Keep Goal 035 `lua_module_manifest_registry_verification` recorded as passed by the user.
 3. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
 4. Start Goal 036 Lua sandbox execution gate only from a separate implementation task after Goal 035 review acceptance.
 
