@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "semantic_authoring_intent_resolution_v1",
+  "scenarioId": "metamodule_kingdoms",
+  "profileId": "metamodule_kingdoms",
+  "intents": [
+    {
+      "intentId": "metamodule_kingdoms:combat_pressure:border_raid",
+      "intentFamily": "combat_pressure",
+      "targetId": "combat/border_raid",
+      "targetDomain": "combat",
+      "sourceFeatureIds": [
+        "combat.threat_level",
+        "kingdom.pressure",
+        "region.route_pressure"
+      ],
+      "resolvedFeatureValueSummary": "kingdom.pressure=4",
+      "priority": 700,
+      "weight": 0.7,
+      "templateHint": "intent.template.combat_pressure",
+      "localizationKeyHint": "intent.metamodule_kingdoms.combat_pressure",
+      "blockersOrGaps": [
+        "combat_target_not_resolved_in_goal032_state"
+      ],
+      "provenanceSummary": "programmatic+dynamic_feature_trace",
+      "traceSummary": "scenario_target+goal_032_feature_assignments"
+    },
+    {
+      "intentId": "metamodule_kingdoms:event_intent:affinity_purge",
+      "intentFamily": "event_intent",
+      "targetId": "event/affinity_purge",
+      "targetDomain": "event",
+      "sourceFeatureIds": [
+        "event.intent",
+        "event.is_volatile",
+        "kingdom.pressure",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "event.intent=forbidden_affinity_purge,tax_edict;event.is_volatile=false;kingdom.pressure=8;world.theme=metamodule",
+      "priority": 400,
+      "weight": 1,
+      "templateHint": "intent.template.event_intent",
+      "localizationKeyHint": "intent.metamodule_kingdoms.event_intent",
+      "blockersOrGaps": [],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "absent_optional+default_value+inherited_value+add_intent"
+    },
+    {
+      "intentId": "metamodule_kingdoms:lore_gap:bearer_scout:npc_faction_relation",
+      "intentFamily": "lore_gap",
+      "targetId": "npc/bearer_scout",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.faction_relation"
+      ],
+      "resolvedFeatureValueSummary": "unset",
+      "priority": 900,
+      "weight": 0.1,
+      "templateHint": "intent.template.authoring_gap",
+      "localizationKeyHint": "intent.metamodule_kingdoms.authoring_gap",
+      "blockersOrGaps": [
+        "optional_absent_npc_faction"
+      ],
+      "provenanceSummary": "unset",
+      "traceSummary": "optional_absence_trace"
+    },
+    {
+      "intentId": "metamodule_kingdoms:lore_gap:metamodule_bearer",
+      "intentFamily": "lore_gap",
+      "targetId": "species/metamodule_bearer",
+      "targetDomain": "species",
+      "sourceFeatureIds": [
+        "species.mana_resonance",
+        "species.module_capacity"
+      ],
+      "resolvedFeatureValueSummary": "species.mana_resonance=7;species.module_capacity=5",
+      "priority": 600,
+      "weight": 0.65,
+      "templateHint": "intent.template.species_archetype_gap",
+      "localizationKeyHint": "intent.metamodule_kingdoms.lore_gap",
+      "blockersOrGaps": [
+        "missing_or_unresolved:archetype.forbidden_affinity"
+      ],
+      "provenanceSummary": "programmatic+semantic_pack",
+      "traceSummary": "assigned_value+adjust_number"
+    },
+    {
+      "intentId": "metamodule_kingdoms:lore_gap:module_scout",
+      "intentFamily": "lore_gap",
+      "targetId": "archetype/module_scout",
+      "targetDomain": "archetype",
+      "sourceFeatureIds": [
+        "archetype.forbidden_affinity",
+        "species.mana_resonance",
+        "species.module_capacity"
+      ],
+      "resolvedFeatureValueSummary": "archetype.forbidden_affinity=void;species.mana_resonance=7;species.module_capacity=3",
+      "priority": 600,
+      "weight": 0.9,
+      "templateHint": "intent.template.species_archetype_gap",
+      "localizationKeyHint": "intent.metamodule_kingdoms.lore_gap",
+      "blockersOrGaps": [],
+      "provenanceSummary": "inherited+semantic_pack",
+      "traceSummary": "assigned_value+inherited_value"
+    },
+    {
+      "intentId": "metamodule_kingdoms:npc_role:bearer_scout",
+      "intentFamily": "npc_role",
+      "targetId": "npc/bearer_scout",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.hunger",
+        "npc.trust",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "npc.hunger=0;npc.trust=5;world.theme=metamodule",
+      "priority": 100,
+      "weight": 0.975,
+      "templateHint": "intent.template.npc_role",
+      "localizationKeyHint": "intent.metamodule_kingdoms.npc_role",
+      "blockersOrGaps": [
+        "missing_or_unresolved:npc.mood"
+      ],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "default_value+inherited_value"
+    },
+    {
+      "intentId": "metamodule_kingdoms:quest_motive:module_capacity_trial",
+      "intentFamily": "quest_motive",
+      "targetId": "quest/module_capacity_trial",
+      "targetDomain": "quest",
+      "sourceFeatureIds": [
+        "kingdom.pressure",
+        "quest.motive",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "kingdom.pressure=4;quest.motive=kingdom_pressure;world.theme=metamodule",
+      "priority": 200,
+      "weight": 0.95,
+      "templateHint": "intent.template.quest_motive",
+      "localizationKeyHint": "intent.metamodule_kingdoms.quest_motive",
+      "blockersOrGaps": [
+        "missing_or_unresolved:region.route_pressure"
+      ],
+      "provenanceSummary": "inherited+semantic_pack",
+      "traceSummary": "assigned_value+inherited_value"
+    },
+    {
+      "intentId": "metamodule_kingdoms:relationship_pressure:bearer_scout",
+      "intentFamily": "relationship_pressure",
+      "targetId": "npc/bearer_scout",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.trust"
+      ],
+      "resolvedFeatureValueSummary": "npc.trust=5",
+      "priority": 110,
+      "weight": 0.522,
+      "templateHint": "intent.template.relationship_pressure",
+      "localizationKeyHint": "intent.metamodule_kingdoms.relationship_pressure",
+      "blockersOrGaps": [
+        "missing_or_unresolved:npc.faction_relation",
+        "missing_or_unresolved:relationship.tension"
+      ],
+      "provenanceSummary": "programmatic",
+      "traceSummary": "default_value"
+    }
+  ],
+  "diagnostics": [],
+  "stableSummary": "metamodule_kingdoms|intents=8|families=6|features=13"
+}

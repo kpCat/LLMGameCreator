@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "manual_vs_auto_authoring_matrix_v1",
+  "rows": [
+    {
+      "caseId": "blocked_invalid_value",
+      "provenance": "blocked",
+      "expectedStatus": "blocked",
+      "acceptedAutomatically": false,
+      "diagnosticCode": "semantic_authoring.field.blocked"
+    },
+    {
+      "caseId": "explicit_user_set",
+      "provenance": "user",
+      "expectedStatus": "accepted",
+      "acceptedAutomatically": true,
+      "diagnosticCode": ""
+    },
+    {
+      "caseId": "imported_candidate_review",
+      "provenance": "imported_candidate",
+      "expectedStatus": "review_required",
+      "acceptedAutomatically": false,
+      "diagnosticCode": "semantic_authoring.candidate.not_accepted"
+    },
+    {
+      "caseId": "inherited_value",
+      "provenance": "inherited",
+      "expectedStatus": "accepted_with_trace",
+      "acceptedAutomatically": true,
+      "diagnosticCode": ""
+    },
+    {
+      "caseId": "llm_candidate_review",
+      "provenance": "llm_candidate",
+      "expectedStatus": "review_required",
+      "acceptedAutomatically": false,
+      "diagnosticCode": "semantic_authoring.candidate.not_accepted"
+    },
+    {
+      "caseId": "optional_absent",
+      "provenance": "unset",
+      "expectedStatus": "optional_absent",
+      "acceptedAutomatically": true,
+      "diagnosticCode": ""
+    },
+    {
+      "caseId": "programmatic_default",
+      "provenance": "programmatic",
+      "expectedStatus": "accepted",
+      "acceptedAutomatically": true,
+      "diagnosticCode": ""
+    },
+    {
+      "caseId": "required_missing",
+      "provenance": "unset",
+      "expectedStatus": "blocked",
+      "acceptedAutomatically": false,
+      "diagnosticCode": "semantic_authoring.required_field.missing"
+    },
+    {
+      "caseId": "semantic_pack_derived",
+      "provenance": "semantic_pack",
+      "expectedStatus": "accepted_with_trace",
+      "acceptedAutomatically": true,
+      "diagnosticCode": ""
+    }
+  ],
+  "passed": true
+}

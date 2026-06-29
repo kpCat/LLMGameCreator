@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-29T13:20:00Z",
+    "updated_at_utc":  "2026-06-29T16:20:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Dynamic semantic feature system verification required",
-    "gate_status":  "dynamic_semantic_feature_system_verification",
+    "current_phase_title":  "Semantic authoring intent resolver verification required",
+    "gate_status":  "semantic_authoring_intent_resolver_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_032_dynamic_semantic_feature_system",
-    "active_manual_gate":  "The user handoff started Goal 032 after Goal 031 technical completion without marking semantic_pack_composition_blueprint_verification passed. Goal 031 remains produced for review; Goal 032 dynamic semantic feature system is produced for review; dynamic_semantic_feature_system_verification remains required and not passed.",
-    "current_user_action":  "Review Goal 032 dynamic semantic feature system artifacts, feature catalog summary, influence rule summary, authoring schema matrix, four resolved scenario states, focused tests, product smoke, final checks and invalid/fake/leak evidence before marking dynamic_semantic_feature_system_verification passed. Goal 033 remains future and not started.",
-    "recommended_next_decision":  "Goal 032 adds a deterministic Application-layer dynamic semantic feature system under Design/DynamicSemanticFeatures: feature definitions/assignments, applicability, inheritance, typed influence rules, resolver output traces, authoring schema records and compact evidence for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It leaves dynamic_semantic_feature_system_verification required and does not mark Goal 031 or Goal 032 passed.",
+    "last_completed_product_slice_id":  "goal_033_semantic_authoring_intent_resolver",
+    "active_manual_gate":  "The user handoff started Goal 033 after Goal 032 technical completion without marking semantic_pack_composition_blueprint_verification or dynamic_semantic_feature_system_verification passed. Goal 031 and Goal 032 remain produced for review; Goal 033 semantic authoring intent resolver is produced for review; semantic_authoring_intent_resolver_verification remains required and not passed.",
+    "current_user_action":  "Review Goal 033 semantic authoring intent resolver artifacts: authoring workspace schema summary, metamodule lore intake skeleton, manual-vs-auto authoring matrix, four intent resolution files, focused tests, product smoke, final checks and invalid/fake/leak evidence before marking semantic_authoring_intent_resolver_verification passed.",
+    "recommended_next_decision":  "Goal 033 adds a deterministic Application-layer semantic authoring workspace and feature-driven content intent resolver under Design/SemanticAuthoringIntentResolver. It consumes Goal 030-032 semantic seams, keeps LLM/imported candidates quarantined, writes compact evidence for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms, and leaves semantic_authoring_intent_resolver_verification required without marking Goal 031, Goal 032 or Goal 033 passed.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "dynamic_semantic_feature_system_verification"
+                                                        "semantic_authoring_intent_resolver_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -59,7 +59,8 @@
                            "goal_029_manual_gate":  "modular_generator_kernel_parallel_readiness_verification",
                            "goal_030_manual_gate":  "semantic_artifact_contract_registry_verification",
                            "goal_031_manual_gate":  "semantic_pack_composition_blueprint_verification",
-                           "goal_032_manual_gate":  "dynamic_semantic_feature_system_verification"
+                           "goal_032_manual_gate":  "dynamic_semantic_feature_system_verification",
+                           "goal_033_manual_gate":  "semantic_authoring_intent_resolver_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -80,15 +81,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_032_dynamic_semantic_feature_system",
-                                         "title":  "Dynamic Semantic Feature System And Influence Rule Kernel",
+                                         "slice_id":  "goal_033_semantic_authoring_intent_resolver",
+                                         "title":  "Semantic Authoring Workspace And Feature-Driven Intent Resolver",
                                          "status":  "required_manual_gate",
-                                         "summary":  "Goal 032 records the user handoff as technical completion of Goal 031, not a passed Goal 031 manual gate, then adds a deterministic dynamic semantic feature system under Design/DynamicSemanticFeatures. It models feature definitions, typed assignments, applicability, inheritance, typed influence rules, resolver traces, authoring schema records and compact evidence under .llmgc/procedural/goal-032-dynamic-semantic-feature-system for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It rejects duplicate/invalid/unknown/illegal/required-missing/conflict/inheritance/influence/overconstrained/fake/leak cases causally and leaves dynamic_semantic_feature_system_verification required.",
-                                         "scenario_id":  "goal-032-dynamic-semantic-feature-system",
+                                         "summary":  "Goal 033 records the user handoff as technical completion of Goal 032, not a passed Goal 032 manual gate, then adds a deterministic semantic authoring workspace and feature-driven content intent resolver under Design/SemanticAuthoringIntentResolver. It consumes Goal 030 artifact contracts, Goal 031 semantic pack composition and Goal 032 resolved dynamic feature states to produce authoring workspace fields, a high-complexity metamodule lore intake skeleton, manual-vs-auto provenance separation and intent-level planning for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It rejects duplicate/unknown/illegal/required-missing/candidate-accepted/final-prose/materialization/boundary/fake-target/missing-trace/nondeterministic cases causally and leaves semantic_authoring_intent_resolver_verification required.",
+                                         "scenario_id":  "goal-033-semantic-authoring-intent-resolver",
                                         "checks":  [
-                                                       "Goal 032 focused DynamicSemanticFeature filter: 11/11 passed before state handoff update.",
-                                                       "Goal 032 exact product smoke class filter writes compact artifacts under .llmgc/procedural/goal-032-dynamic-semantic-feature-system.",
-                                                       "Goal 032 compact report records accepted=false, manualGate=dynamic_semantic_feature_system_verification, feature model, applicability, inheritance, influence, resolver, authoring schema and invalid/fake/leak matrix evidence."
+                                                       "Goal 033 focused SemanticAuthoringIntentResolver/SemanticAuthoringWorkspace/FeatureDrivenIntent/LoreIntakeSkeleton/Goal033 filter: 9/9 passed before state handoff update.",
+                                                       "Goal 033 exact product smoke class filter writes compact artifacts under .llmgc/procedural/goal-033-semantic-authoring-intent-resolver.",
+                                                       "Goal 033 compact report records accepted=false, manualGate=semantic_authoring_intent_resolver_verification, workspace, lore skeleton, provenance matrix, intent resolver and invalid/fake/leak matrix evidence."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -348,7 +349,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "dynamic_semantic_feature_system_verification"
+                                          "semantic_authoring_intent_resolver_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -369,12 +370,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "dynamic_semantic_feature_system_verification",
-    "recommended_next_work_item_title":  "Dynamic semantic feature system verification review.",
-    "recommended_next_task_file":  "docs/GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM_SPEC.md",
+    "recommended_next_work_item":  "semantic_authoring_intent_resolver_verification",
+    "recommended_next_work_item_title":  "Semantic authoring intent resolver verification review.",
+    "recommended_next_task_file":  "docs/GOAL_033_SEMANTIC_AUTHORING_INTENT_RESOLVER_SPEC.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 032 dynamic semantic feature system review",
-                                               "Goal 033 remains future work until Goal 032 gate acceptance"
+                                               "Goal 033 semantic authoring intent resolver review",
+                                               "Goal 034 remains future work until Goal 033 gate acceptance"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -464,7 +465,7 @@
                                "Modular generator kernel module manifests, product-smoke scenario manifests, compatibility matrix, absence behavior and verification tier sidecars",
                                "Semantic pack composition catalog summary, composition matrix, blueprint plans and cross-artifact linkage sidecars"
                            ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 032 stop at dynamic_semantic_feature_system_verification required and do not start Goal 033 without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 033 stop at semantic_authoring_intent_resolver_verification required and do not start Goal 034 without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -1038,9 +1039,23 @@
                                                                                             ".llmgc/procedural/goal-032-dynamic-semantic-feature-system contains feature catalog summary, influence rule summary, authoring schema matrix, four resolved state files, invalid matrix and markdown report",
                                                                                             "Invalid/fake/leak matrix rejects duplicate feature ids, invalid ids, unknown feature refs, unknown scopes, bad value shapes, illegal scopes, required missing features, conflicts, unknown/circular inheritance, unknown/circular/self-feeding influence, overconstrained output, fake selected targets and boundary leakage; optional missing is valid and traceable",
                                                                                             "Final report accepted=false and manualGate=dynamic_semantic_feature_system_verification",
-                                                                                            "Goal 033 is not started"
+                                                                                            "Goal 033 was started by explicit user handoff after technical completion without marking Goal 032 passed"
                                                                                         ],
-                                                                    "next_action":  "review_dynamic_semantic_feature_system_before_marking_gate_passed"
+                                                                    "next_action":  "goal_033_started_by_user_handoff_after_technical_completion_without_marking_goal032_passed"
+                                                          },
+    "semantic_authoring_intent_resolver_verification":  {
+                                                                    "status":  "required",
+                                                                    "evidence_source":  "goal_033_semantic_authoring_intent_resolver",
+                                                                    "observed_result":  [
+                                                                                            "Design/SemanticAuthoringIntentResolver defines BCL-only authoring workspace records, lore intake skeletons, provenance matrix records, feature-driven content intent records, validator diagnostics and evidence writer",
+                                                                                            "Goal 033 consumes Goal 030 artifact contracts, Goal 031 semantic pack composition and Goal 032 resolved dynamic feature states instead of duplicating those systems",
+                                                                                            "The workspace model covers world, kingdom, region, species, archetype, faction, NPC, quest, dialogue, economy, combat, settlement and event groups with legal optional absence",
+                                                                                            "Metamodule kingdoms lore intake skeleton has 7 kingdoms, 112 species/archetype slots, quarantined LLM candidate slots and feature families for module carriers, mana resonance, forbidden affinities, kingdom pressure, faction relation, dialogue intent, quest motive, event intent, economy pressure and combat pressure",
+                                                                                            ".llmgc/procedural/goal-033-semantic-authoring-intent-resolver contains authoring workspace schema summary, metamodule lore skeleton, manual-vs-auto matrix, four intent resolution files, invalid matrix and markdown report",
+                                                                                            "Invalid/fake/leak matrix rejects duplicate field ids, unknown feature references, unknown domains, illegal feature/domain applicability, required missing fields, conflicting provenance, accepted LLM/imported candidates, final prose leakage, final GamePackage materialization, boundary leakage, fake targets, missing source traces and nondeterministic ordering; optional absent remains valid and traceable",
+                                                                                            "Final report accepted=false and manualGate=semantic_authoring_intent_resolver_verification"
+                                                                                        ],
+                                                                    "next_action":  "review_semantic_authoring_intent_resolver_before_marking_gate_passed"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

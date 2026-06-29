@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "semantic_authoring_intent_invalid_matrix_v1",
+  "scenarioCount": 15,
+  "matchedExpectationCount": 15,
+  "rejectedCount": 14,
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "conflicting_provenance_for_same_field",
+      "mutatedEvidenceKind": "conflicting provenance for same field",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.provenance.unknown",
+          "target": "frontier_survival:archetype:legal_absence",
+          "message": "Field provenance is unknown or conflicting."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_workspace_field_id",
+      "mutatedEvidenceKind": "duplicate workspace field id",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.field_id.duplicate",
+          "target": "frontier_survival:archetype:legal_absence",
+          "message": "Workspace field ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_intent_target_accepted",
+      "mutatedEvidenceKind": "fake intent target accepted",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.intent_target.unknown",
+          "target": "frontier_survival:dialogue_act:medic_warning",
+          "message": "Intent target must be a known authoring target."
+        }
+      ]
+    },
+    {
+      "scenarioId": "final_dialogue_prose_leakage",
+      "mutatedEvidenceKind": "final dialogue/prose leakage",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.final_prose.leakage",
+          "target": "frontier_survival:dialogue_act:medic_warning",
+          "message": "Intent planning must not contain final dialogue or prose."
+        }
+      ]
+    },
+    {
+      "scenarioId": "final_gamepackage_materialization_leakage",
+      "mutatedEvidenceKind": "final GamePackage materialization leakage",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.boundary.leakage",
+          "target": "frontier_survival:dialogue_act:medic_warning",
+          "message": "Intent planning must not imply Runtime/UI/Unity/provider/LLM/RAG/Lua/media/GamePackage materialization."
+        }
+      ]
+    },
+    {
+      "scenarioId": "illegal_feature_domain_applicability",
+      "mutatedEvidenceKind": "illegal feature/domain applicability",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.feature_domain.illegal",
+          "target": "frontier_survival:archetype:legal_absence",
+          "message": "Feature target scope does not match the authoring domain group."
+        }
+      ]
+    },
+    {
+      "scenarioId": "imported_candidate_treated_as_accepted",
+      "mutatedEvidenceKind": "imported candidate accepted automatically",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.candidate.not_accepted",
+          "target": "bad_imported_candidate",
+          "message": "Candidate values must require review and cannot be accepted automatically."
+        }
+      ]
+    },
+    {
+      "scenarioId": "llm_candidate_treated_as_accepted",
+      "mutatedEvidenceKind": "LLM candidate accepted automatically",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.candidate.not_accepted",
+          "target": "bad_llm_candidate",
+          "message": "Candidate values must require review and cannot be accepted automatically."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_source_feature_trace",
+      "mutatedEvidenceKind": "missing source feature trace",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.intent_trace.missing",
+          "target": "frontier_survival:dialogue_act:medic_warning",
+          "message": "Intent must retain at least one source feature trace."
+        }
+      ]
+    },
+    {
+      "scenarioId": "nondeterministic_ordering_mutation",
+      "mutatedEvidenceKind": "nondeterministic ordering mutation",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.order.nondeterministic",
+          "target": "frontier_survival",
+          "message": "Intent records must be written in stable id order."
+        }
+      ]
+    },
+    {
+      "scenarioId": "optional_absent_field_valid",
+      "mutatedEvidenceKind": "optional absent field valid and traceable",
+      "expectedValid": true,
+      "actualValid": true,
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "required_manual_field_missing",
+      "mutatedEvidenceKind": "required manual field missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.required_field.missing",
+          "target": "frontier_survival:archetype:legal_absence",
+          "message": "Required field is missing."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_ui_unity_provider_llm_rag_lua_media_boundary_leakage",
+      "mutatedEvidenceKind": "runtime/UI/Unity/provider/LLM/RAG/Lua/media boundary leakage",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.boundary.leakage",
+          "target": "frontier_survival:dialogue_act:medic_warning",
+          "message": "Intent planning must not imply Runtime/UI/Unity/provider/LLM/RAG/Lua/media/GamePackage materialization."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_feature_reference",
+      "mutatedEvidenceKind": "unknown feature reference",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.feature_ref.unknown",
+          "target": "frontier_survival:archetype:legal_absence",
+          "message": "Field references an unknown Goal 032 feature."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_target_domain",
+      "mutatedEvidenceKind": "unknown target/domain",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "semantic_authoring.domain.unknown",
+          "target": "frontier_survival:archetype:legal_absence",
+          "message": "Field domain is unknown."
+        }
+      ]
+    }
+  ]
+}

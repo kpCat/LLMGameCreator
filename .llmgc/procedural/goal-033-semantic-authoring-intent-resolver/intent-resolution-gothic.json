@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "semantic_authoring_intent_resolution_v1",
+  "scenarioId": "gothic_intrigue",
+  "profileId": "gothic_intrigue",
+  "intents": [
+    {
+      "intentId": "gothic_intrigue:dialogue_act:veiled_threat",
+      "intentFamily": "dialogue_act",
+      "targetId": "dialogue/veiled_threat",
+      "targetDomain": "dialogue",
+      "sourceFeatureIds": [
+        "dialogue.intent",
+        "faction.reputation_axis",
+        "quest.motive"
+      ],
+      "resolvedFeatureValueSummary": "dialogue.intent=hidden_accusation,polite_threat;faction.reputation_axis=suspicion;quest.motive=secret",
+      "priority": 300,
+      "weight": 0.925,
+      "templateHint": "intent.template.dialogue_act",
+      "localizationKeyHint": "intent.gothic_intrigue.dialogue_act",
+      "blockersOrGaps": [
+        "missing_or_unresolved:dialogue.text_key_hint"
+      ],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "absent_optional+inherited_value+add_intent"
+    },
+    {
+      "intentId": "gothic_intrigue:faction_reaction:old_house",
+      "intentFamily": "faction_reaction",
+      "targetId": "faction/old_house",
+      "targetDomain": "faction",
+      "sourceFeatureIds": [
+        "faction.reputation_axis",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "faction.reputation_axis=suspicion;world.theme=gothic",
+      "priority": 250,
+      "weight": 0.65,
+      "templateHint": "intent.template.faction_reaction",
+      "localizationKeyHint": "intent.gothic_intrigue.faction_reaction",
+      "blockersOrGaps": [],
+      "provenanceSummary": "semantic_pack+dynamic_feature_trace",
+      "traceSummary": "goal_031_pack_hint->goal_032_resolved_feature_state"
+    },
+    {
+      "intentId": "gothic_intrigue:npc_role:disgraced_heir",
+      "intentFamily": "npc_role",
+      "targetId": "npc/disgraced_heir",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.hunger",
+        "npc.trust",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "npc.hunger=0;npc.trust=5;world.theme=gothic",
+      "priority": 100,
+      "weight": 0.975,
+      "templateHint": "intent.template.npc_role",
+      "localizationKeyHint": "intent.gothic_intrigue.npc_role",
+      "blockersOrGaps": [
+        "missing_or_unresolved:npc.mood"
+      ],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "default_value+inherited_value"
+    },
+    {
+      "intentId": "gothic_intrigue:quest_motive:crypt_secret",
+      "intentFamily": "quest_motive",
+      "targetId": "quest/crypt_secret",
+      "targetDomain": "quest",
+      "sourceFeatureIds": [
+        "kingdom.pressure",
+        "quest.motive",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "kingdom.pressure=6;quest.motive=secret;world.theme=gothic",
+      "priority": 200,
+      "weight": 0.95,
+      "templateHint": "intent.template.quest_motive",
+      "localizationKeyHint": "intent.gothic_intrigue.quest_motive",
+      "blockersOrGaps": [
+        "missing_or_unresolved:region.route_pressure"
+      ],
+      "provenanceSummary": "inherited+semantic_pack",
+      "traceSummary": "assigned_value+inherited_value"
+    },
+    {
+      "intentId": "gothic_intrigue:relationship_pressure:disgraced_heir",
+      "intentFamily": "relationship_pressure",
+      "targetId": "npc/disgraced_heir",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.faction_relation",
+        "npc.trust"
+      ],
+      "resolvedFeatureValueSummary": "npc.faction_relation=member_of:faction:faction/old_house:0,9;npc.trust=5",
+      "priority": 110,
+      "weight": 0.772,
+      "templateHint": "intent.template.relationship_pressure",
+      "localizationKeyHint": "intent.gothic_intrigue.relationship_pressure",
+      "blockersOrGaps": [
+        "missing_or_unresolved:relationship.tension"
+      ],
+      "provenanceSummary": "programmatic+user",
+      "traceSummary": "assigned_value+default_value"
+    }
+  ],
+  "diagnostics": [],
+  "stableSummary": "gothic_intrigue|intents=5|families=5|features=8"
+}

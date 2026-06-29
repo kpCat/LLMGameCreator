@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "semantic_authoring_intent_resolution_v1",
+  "scenarioId": "caravan_trade",
+  "profileId": "caravan_trade",
+  "intents": [
+    {
+      "intentId": "caravan_trade:dialogue_act:factor_offer",
+      "intentFamily": "dialogue_act",
+      "targetId": "dialogue/factor_offer",
+      "targetDomain": "dialogue",
+      "sourceFeatureIds": [
+        "quest.motive"
+      ],
+      "resolvedFeatureValueSummary": "quest.motive=contract",
+      "priority": 300,
+      "weight": 0.425,
+      "templateHint": "intent.template.dialogue_act",
+      "localizationKeyHint": "intent.caravan_trade.dialogue_act",
+      "blockersOrGaps": [
+        "missing_or_unresolved:dialogue.intent",
+        "missing_or_unresolved:dialogue.text_key_hint",
+        "missing_or_unresolved:faction.reputation_axis"
+      ],
+      "provenanceSummary": "inherited",
+      "traceSummary": "inherited_value"
+    },
+    {
+      "intentId": "caravan_trade:economy_pressure:trade_outpost",
+      "intentFamily": "economy_pressure",
+      "targetId": "settlement/trade_outpost",
+      "targetDomain": "settlement",
+      "sourceFeatureIds": [
+        "region.route_pressure",
+        "settlement.market_need"
+      ],
+      "resolvedFeatureValueSummary": "region.route_pressure=toll_risk;settlement.market_need=contract_risk:0,35,credit:0,6,spice:0,7",
+      "priority": 500,
+      "weight": 0.675,
+      "templateHint": "intent.template.economy_pressure",
+      "localizationKeyHint": "intent.caravan_trade.economy_pressure",
+      "blockersOrGaps": [
+        "missing_or_unresolved:resource.scarcity"
+      ],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "assigned_value+inherited_value+add_weighted_tag"
+    },
+    {
+      "intentId": "caravan_trade:faction_reaction:merchant_council",
+      "intentFamily": "faction_reaction",
+      "targetId": "faction/merchant_council",
+      "targetDomain": "faction",
+      "sourceFeatureIds": [
+        "faction.reputation_axis",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "world.theme=caravan",
+      "priority": 250,
+      "weight": 0.65,
+      "templateHint": "intent.template.faction_reaction",
+      "localizationKeyHint": "intent.caravan_trade.faction_reaction",
+      "blockersOrGaps": [],
+      "provenanceSummary": "semantic_pack+dynamic_feature_trace",
+      "traceSummary": "goal_031_pack_hint->goal_032_resolved_feature_state"
+    },
+    {
+      "intentId": "caravan_trade:quest_motive:delivery_bargain",
+      "intentFamily": "quest_motive",
+      "targetId": "quest/delivery_bargain",
+      "targetDomain": "quest",
+      "sourceFeatureIds": [
+        "quest.motive",
+        "region.route_pressure",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "quest.motive=contract;region.route_pressure=toll_risk;world.theme=caravan",
+      "priority": 200,
+      "weight": 0.95,
+      "templateHint": "intent.template.quest_motive",
+      "localizationKeyHint": "intent.caravan_trade.quest_motive",
+      "blockersOrGaps": [
+        "missing_or_unresolved:kingdom.pressure"
+      ],
+      "provenanceSummary": "inherited+semantic_pack",
+      "traceSummary": "assigned_value+inherited_value"
+    },
+    {
+      "intentId": "caravan_trade:settlement_need:trade_outpost",
+      "intentFamily": "settlement_need",
+      "targetId": "settlement/trade_outpost",
+      "targetDomain": "settlement",
+      "sourceFeatureIds": [
+        "settlement.market_need",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "settlement.market_need=contract_risk:0,35,credit:0,6,spice:0,7;world.theme=caravan",
+      "priority": 510,
+      "weight": 0.672,
+      "templateHint": "intent.template.settlement_need",
+      "localizationKeyHint": "intent.caravan_trade.settlement_need",
+      "blockersOrGaps": [
+        "missing_or_unresolved:biome.hazard"
+      ],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "assigned_value+inherited_value+add_weighted_tag"
+    }
+  ],
+  "diagnostics": [],
+  "stableSummary": "caravan_trade|intents=5|families=5|features=5"
+}

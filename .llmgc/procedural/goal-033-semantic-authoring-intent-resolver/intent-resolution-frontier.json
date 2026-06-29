@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "semantic_authoring_intent_resolution_v1",
+  "scenarioId": "frontier_survival",
+  "profileId": "frontier_survival",
+  "intents": [
+    {
+      "intentId": "frontier_survival:dialogue_act:medic_warning",
+      "intentFamily": "dialogue_act",
+      "targetId": "dialogue/medic_warning",
+      "targetDomain": "dialogue",
+      "sourceFeatureIds": [
+        "dialogue.intent",
+        "quest.motive"
+      ],
+      "resolvedFeatureValueSummary": "dialogue.intent=intent/find_food;quest.motive=survive",
+      "priority": 300,
+      "weight": 0.675,
+      "templateHint": "intent.template.dialogue_act",
+      "localizationKeyHint": "intent.frontier_survival.dialogue_act",
+      "blockersOrGaps": [
+        "missing_or_unresolved:dialogue.text_key_hint",
+        "missing_or_unresolved:faction.reputation_axis"
+      ],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "absent_optional+inherited_value+add_intent"
+    },
+    {
+      "intentId": "frontier_survival:economy_pressure:stockade",
+      "intentFamily": "economy_pressure",
+      "targetId": "settlement/stockade",
+      "targetDomain": "settlement",
+      "sourceFeatureIds": [
+        "region.route_pressure",
+        "settlement.market_need"
+      ],
+      "resolvedFeatureValueSummary": "region.route_pressure=predators;settlement.market_need=ammo:0,35,contract_risk:0,35,medicine:0,8",
+      "priority": 500,
+      "weight": 0.675,
+      "templateHint": "intent.template.economy_pressure",
+      "localizationKeyHint": "intent.frontier_survival.economy_pressure",
+      "blockersOrGaps": [
+        "missing_or_unresolved:resource.scarcity"
+      ],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "assigned_value+inherited_value+add_weighted_tag"
+    },
+    {
+      "intentId": "frontier_survival:lore_gap:trail_medic:npc_faction_relation",
+      "intentFamily": "lore_gap",
+      "targetId": "npc/trail_medic",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.faction_relation"
+      ],
+      "resolvedFeatureValueSummary": "unset",
+      "priority": 900,
+      "weight": 0.1,
+      "templateHint": "intent.template.authoring_gap",
+      "localizationKeyHint": "intent.frontier_survival.authoring_gap",
+      "blockersOrGaps": [
+        "optional_absent_npc_faction"
+      ],
+      "provenanceSummary": "unset",
+      "traceSummary": "optional_absence_trace"
+    },
+    {
+      "intentId": "frontier_survival:npc_role:trail_medic",
+      "intentFamily": "npc_role",
+      "targetId": "npc/trail_medic",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.hunger",
+        "npc.mood",
+        "npc.trust",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "npc.hunger=8;npc.mood=hungry;npc.trust=5;world.theme=frontier",
+      "priority": 100,
+      "weight": 1,
+      "templateHint": "intent.template.npc_role",
+      "localizationKeyHint": "intent.frontier_survival.npc_role",
+      "blockersOrGaps": [],
+      "provenanceSummary": "inherited+programmatic+user",
+      "traceSummary": "absent_optional+assigned_value+default_value+inherited_value+set_feature"
+    },
+    {
+      "intentId": "frontier_survival:quest_motive:medicine_run",
+      "intentFamily": "quest_motive",
+      "targetId": "quest/medicine_run",
+      "targetDomain": "quest",
+      "sourceFeatureIds": [
+        "quest.motive",
+        "region.route_pressure",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "quest.motive=survive;region.route_pressure=predators;world.theme=frontier",
+      "priority": 200,
+      "weight": 0.95,
+      "templateHint": "intent.template.quest_motive",
+      "localizationKeyHint": "intent.frontier_survival.quest_motive",
+      "blockersOrGaps": [
+        "missing_or_unresolved:kingdom.pressure"
+      ],
+      "provenanceSummary": "inherited+semantic_pack",
+      "traceSummary": "assigned_value+inherited_value"
+    },
+    {
+      "intentId": "frontier_survival:relationship_pressure:trail_medic",
+      "intentFamily": "relationship_pressure",
+      "targetId": "npc/trail_medic",
+      "targetDomain": "npc",
+      "sourceFeatureIds": [
+        "npc.trust"
+      ],
+      "resolvedFeatureValueSummary": "npc.trust=5",
+      "priority": 110,
+      "weight": 0.522,
+      "templateHint": "intent.template.relationship_pressure",
+      "localizationKeyHint": "intent.frontier_survival.relationship_pressure",
+      "blockersOrGaps": [
+        "missing_or_unresolved:npc.faction_relation",
+        "missing_or_unresolved:relationship.tension"
+      ],
+      "provenanceSummary": "programmatic",
+      "traceSummary": "default_value"
+    },
+    {
+      "intentId": "frontier_survival:settlement_need:stockade",
+      "intentFamily": "settlement_need",
+      "targetId": "settlement/stockade",
+      "targetDomain": "settlement",
+      "sourceFeatureIds": [
+        "biome.hazard",
+        "settlement.market_need",
+        "world.theme"
+      ],
+      "resolvedFeatureValueSummary": "biome.hazard=beasts;settlement.market_need=ammo:0,35,contract_risk:0,35,medicine:0,8;world.theme=frontier",
+      "priority": 510,
+      "weight": 0.923,
+      "templateHint": "intent.template.settlement_need",
+      "localizationKeyHint": "intent.frontier_survival.settlement_need",
+      "blockersOrGaps": [],
+      "provenanceSummary": "inherited+programmatic",
+      "traceSummary": "assigned_value+inherited_value+add_weighted_tag"
+    }
+  ],
+  "diagnostics": [],
+  "stableSummary": "frontier_survival|intents=7|families=7|features=10"
+}

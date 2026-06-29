@@ -1,0 +1,2621 @@
+{
+  "schemaVersion": "semantic_authoring_workspace_schema_summary_v1",
+  "workspaceCount": 4,
+  "domainGroupCount": 13,
+  "fieldCount": 122,
+  "fieldsByDomain": {
+    "archetype": 8,
+    "combat": 4,
+    "dialogue": 22,
+    "economy": 4,
+    "event": 7,
+    "faction": 4,
+    "kingdom": 5,
+    "npc": 25,
+    "quest": 17,
+    "region": 6,
+    "settlement": 9,
+    "species": 6,
+    "world": 5
+  },
+  "provenanceKinds": [
+    "blocked",
+    "imported_candidate",
+    "inherited",
+    "llm_candidate",
+    "programmatic",
+    "semantic_pack",
+    "unset",
+    "user"
+  ],
+  "valueKinds": [
+    "enum",
+    "flag",
+    "list",
+    "none",
+    "number",
+    "relation",
+    "text_key",
+    "weighted_tag"
+  ],
+  "sampleWorkspaces": [
+    {
+      "schemaVersion": "semantic_authoring_workspace_v1",
+      "workspaceId": "workspace/caravan_trade",
+      "scenarioId": "caravan_trade",
+      "profileId": "caravan_trade",
+      "domainGroups": [
+        {
+          "domainId": "archetype",
+          "sections": [
+            {
+              "sectionId": "caravan_trade/archetype/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "caravan_trade:archetype:legal_absence",
+                  "domainId": "archetype",
+                  "featureId": "archetype.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "combat",
+          "sections": [
+            {
+              "sectionId": "caravan_trade/combat/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "caravan_trade:combat:legal_absence",
+                  "domainId": "combat",
+                  "featureId": "combat.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "dialogue",
+          "sections": [
+            {
+              "sectionId": "dialogue/factor_offer/authoring",
+              "sourceTargetId": "dialogue/factor_offer",
+              "fields": [
+                {
+                  "fieldId": "dialogue/factor_offer:dialogue.intent:absent",
+                  "domainId": "dialogue",
+                  "featureId": "dialogue.intent",
+                  "valueKind": "list",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "multi_select",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/factor_offer:dialogue.text_key_hint:absent",
+                  "domainId": "dialogue",
+                  "featureId": "dialogue.text_key_hint",
+                  "valueKind": "text_key",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "localization_key",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/factor_offer:quest.motive",
+                  "domainId": "dialogue",
+                  "featureId": "quest.motive",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:quest/delivery_bargain",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "contract",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/factor_offer:region.route_pressure",
+                  "domainId": "dialogue",
+                  "featureId": "region.route_pressure",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:region/toll_pass",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "toll_risk",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/factor_offer:settlement.market_need",
+                  "domainId": "dialogue",
+                  "featureId": "settlement.market_need",
+                  "valueKind": "weighted_tag",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:settlement/trade_outpost",
+                  "controlHint": "weighted_tags",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "credit:0,6,spice:0,7",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/factor_offer:world.theme",
+                  "domainId": "dialogue",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/caravan",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "caravan",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "partial"
+            }
+          ]
+        },
+        {
+          "domainId": "economy",
+          "sections": [
+            {
+              "sectionId": "caravan_trade/economy/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "caravan_trade:economy:legal_absence",
+                  "domainId": "economy",
+                  "featureId": "economy.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "event",
+          "sections": [
+            {
+              "sectionId": "caravan_trade/event/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "caravan_trade:event:legal_absence",
+                  "domainId": "event",
+                  "featureId": "event.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "faction",
+          "sections": [
+            {
+              "sectionId": "faction/merchant_council/context",
+              "sourceTargetId": "faction/merchant_council",
+              "fields": [
+                {
+                  "fieldId": "faction/merchant_council:faction:legal_absence",
+                  "domainId": "faction",
+                  "featureId": "faction.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "kingdom",
+          "sections": [
+            {
+              "sectionId": "kingdom/salt_road/context",
+              "sourceTargetId": "kingdom/salt_road",
+              "fields": [
+                {
+                  "fieldId": "kingdom/salt_road:kingdom:legal_absence",
+                  "domainId": "kingdom",
+                  "featureId": "kingdom.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "npc",
+          "sections": [
+            {
+              "sectionId": "caravan_trade/npc/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "caravan_trade:npc:legal_absence",
+                  "domainId": "npc",
+                  "featureId": "npc.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "quest",
+          "sections": [
+            {
+              "sectionId": "quest/delivery_bargain/authoring",
+              "sourceTargetId": "quest/delivery_bargain",
+              "fields": [
+                {
+                  "fieldId": "quest/delivery_bargain:quest.motive",
+                  "domainId": "quest",
+                  "featureId": "quest.motive",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "contract",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/delivery_bargain:region.route_pressure",
+                  "domainId": "quest",
+                  "featureId": "region.route_pressure",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:region/toll_pass",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "toll_risk",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/delivery_bargain:settlement.market_need",
+                  "domainId": "quest",
+                  "featureId": "settlement.market_need",
+                  "valueKind": "weighted_tag",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:settlement/trade_outpost",
+                  "controlHint": "weighted_tags",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "credit:0,6,spice:0,7",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/delivery_bargain:world.theme",
+                  "domainId": "quest",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/caravan",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "caravan",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "region",
+          "sections": [
+            {
+              "sectionId": "region/toll_pass/context",
+              "sourceTargetId": "region/toll_pass",
+              "fields": [
+                {
+                  "fieldId": "region/toll_pass:region:legal_absence",
+                  "domainId": "region",
+                  "featureId": "region.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "settlement",
+          "sections": [
+            {
+              "sectionId": "settlement/trade_outpost/authoring",
+              "sourceTargetId": "settlement/trade_outpost",
+              "fields": [
+                {
+                  "fieldId": "settlement/trade_outpost:region.route_pressure",
+                  "domainId": "settlement",
+                  "featureId": "region.route_pressure",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:region/toll_pass",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "toll_risk",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "settlement/trade_outpost:settlement.market_need",
+                  "domainId": "settlement",
+                  "featureId": "settlement.market_need",
+                  "valueKind": "weighted_tag",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "weighted_tags",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "contract_risk:0,35,credit:0,6,spice:0,7",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "settlement/trade_outpost:world.theme",
+                  "domainId": "settlement",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/caravan",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "caravan",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "species",
+          "sections": [
+            {
+              "sectionId": "caravan_trade/species/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "caravan_trade:species:legal_absence",
+                  "domainId": "species",
+                  "featureId": "species.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "world",
+          "sections": [
+            {
+              "sectionId": "world/caravan/context",
+              "sourceTargetId": "world/caravan",
+              "fields": [
+                {
+                  "fieldId": "world/caravan:world:legal_absence",
+                  "domainId": "world",
+                  "featureId": "world.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "stableSummary": "caravan_trade|domains=13|fields=23|diagnostics=0"
+    },
+    {
+      "schemaVersion": "semantic_authoring_workspace_v1",
+      "workspaceId": "workspace/frontier_survival",
+      "scenarioId": "frontier_survival",
+      "profileId": "frontier_survival",
+      "domainGroups": [
+        {
+          "domainId": "archetype",
+          "sections": [
+            {
+              "sectionId": "frontier_survival/archetype/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "frontier_survival:archetype:legal_absence",
+                  "domainId": "archetype",
+                  "featureId": "archetype.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "combat",
+          "sections": [
+            {
+              "sectionId": "frontier_survival/combat/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "frontier_survival:combat:legal_absence",
+                  "domainId": "combat",
+                  "featureId": "combat.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "dialogue",
+          "sections": [
+            {
+              "sectionId": "dialogue/medic_warning/authoring",
+              "sourceTargetId": "dialogue/medic_warning",
+              "fields": [
+                {
+                  "fieldId": "dialogue/medic_warning:biome.hazard",
+                  "domainId": "dialogue",
+                  "featureId": "biome.hazard",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:biome/predator_range",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "beasts",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/medic_warning:dialogue.intent",
+                  "domainId": "dialogue",
+                  "featureId": "dialogue.intent",
+                  "valueKind": "list",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "multi_select",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "intent/find_food",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/medic_warning:dialogue.text_key_hint:absent",
+                  "domainId": "dialogue",
+                  "featureId": "dialogue.text_key_hint",
+                  "valueKind": "text_key",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "localization_key",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/medic_warning:npc.hunger",
+                  "domainId": "dialogue",
+                  "featureId": "npc.hunger",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:npc/trail_medic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "8",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/medic_warning:quest.motive",
+                  "domainId": "dialogue",
+                  "featureId": "quest.motive",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:quest/medicine_run",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "survive",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/medic_warning:region.route_pressure",
+                  "domainId": "dialogue",
+                  "featureId": "region.route_pressure",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:region/river_ford",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "predators",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/medic_warning:settlement.market_need",
+                  "domainId": "dialogue",
+                  "featureId": "settlement.market_need",
+                  "valueKind": "weighted_tag",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:settlement/stockade",
+                  "controlHint": "weighted_tags",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "ammo:0,35,medicine:0,8",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/medic_warning:world.theme",
+                  "domainId": "dialogue",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/frontier",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "frontier",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "partial"
+            }
+          ]
+        },
+        {
+          "domainId": "economy",
+          "sections": [
+            {
+              "sectionId": "frontier_survival/economy/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "frontier_survival:economy:legal_absence",
+                  "domainId": "economy",
+                  "featureId": "economy.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "event",
+          "sections": [
+            {
+              "sectionId": "frontier_survival/event/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "frontier_survival:event:legal_absence",
+                  "domainId": "event",
+                  "featureId": "event.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "faction",
+          "sections": [
+            {
+              "sectionId": "frontier_survival/faction/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "frontier_survival:faction:legal_absence",
+                  "domainId": "faction",
+                  "featureId": "faction.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "kingdom",
+          "sections": [
+            {
+              "sectionId": "kingdom/rangers/context",
+              "sourceTargetId": "kingdom/rangers",
+              "fields": [
+                {
+                  "fieldId": "kingdom/rangers:kingdom:legal_absence",
+                  "domainId": "kingdom",
+                  "featureId": "kingdom.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "npc",
+          "sections": [
+            {
+              "sectionId": "npc/trail_medic/authoring",
+              "sourceTargetId": "npc/trail_medic",
+              "fields": [
+                {
+                  "fieldId": "npc/trail_medic:biome.hazard",
+                  "domainId": "npc",
+                  "featureId": "biome.hazard",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:biome/predator_range",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "beasts",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/trail_medic:npc.faction_relation:absent",
+                  "domainId": "npc",
+                  "featureId": "npc.faction_relation",
+                  "valueKind": "relation",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "relation_picker",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/trail_medic:npc.hunger",
+                  "domainId": "npc",
+                  "featureId": "npc.hunger",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "user",
+                  "resolvedValueSummary": "8",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/trail_medic:npc.mood",
+                  "domainId": "npc",
+                  "featureId": "npc.mood",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "hungry",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/trail_medic:npc.trust",
+                  "domainId": "npc",
+                  "featureId": "npc.trust",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "5",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/trail_medic:region.route_pressure",
+                  "domainId": "npc",
+                  "featureId": "region.route_pressure",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:region/river_ford",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "predators",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/trail_medic:settlement.market_need",
+                  "domainId": "npc",
+                  "featureId": "settlement.market_need",
+                  "valueKind": "weighted_tag",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:settlement/stockade",
+                  "controlHint": "weighted_tags",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "ammo:0,35,medicine:0,8",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/trail_medic:world.theme",
+                  "domainId": "npc",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/frontier",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "frontier",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "partial"
+            }
+          ]
+        },
+        {
+          "domainId": "quest",
+          "sections": [
+            {
+              "sectionId": "quest/medicine_run/authoring",
+              "sourceTargetId": "quest/medicine_run",
+              "fields": [
+                {
+                  "fieldId": "quest/medicine_run:quest.motive",
+                  "domainId": "quest",
+                  "featureId": "quest.motive",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "survive",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/medicine_run:region.route_pressure",
+                  "domainId": "quest",
+                  "featureId": "region.route_pressure",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:region/river_ford",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "predators",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/medicine_run:world.theme",
+                  "domainId": "quest",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/frontier",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "frontier",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "region",
+          "sections": [
+            {
+              "sectionId": "biome/predator_range/context",
+              "sourceTargetId": "biome/predator_range",
+              "fields": [
+                {
+                  "fieldId": "biome/predator_range:region:legal_absence",
+                  "domainId": "region",
+                  "featureId": "region.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            },
+            {
+              "sectionId": "region/river_ford/context",
+              "sourceTargetId": "region/river_ford",
+              "fields": [
+                {
+                  "fieldId": "region/river_ford:region:legal_absence",
+                  "domainId": "region",
+                  "featureId": "region.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "settlement",
+          "sections": [
+            {
+              "sectionId": "settlement/stockade/authoring",
+              "sourceTargetId": "settlement/stockade",
+              "fields": [
+                {
+                  "fieldId": "settlement/stockade:biome.hazard",
+                  "domainId": "settlement",
+                  "featureId": "biome.hazard",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:biome/predator_range",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "beasts",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "settlement/stockade:region.route_pressure",
+                  "domainId": "settlement",
+                  "featureId": "region.route_pressure",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:region/river_ford",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "predators",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "settlement/stockade:settlement.market_need",
+                  "domainId": "settlement",
+                  "featureId": "settlement.market_need",
+                  "valueKind": "weighted_tag",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "weighted_tags",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "ammo:0,35,contract_risk:0,35,medicine:0,8",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "settlement/stockade:world.theme",
+                  "domainId": "settlement",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/frontier",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "frontier",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "species",
+          "sections": [
+            {
+              "sectionId": "frontier_survival/species/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "frontier_survival:species:legal_absence",
+                  "domainId": "species",
+                  "featureId": "species.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "world",
+          "sections": [
+            {
+              "sectionId": "world/frontier/context",
+              "sourceTargetId": "world/frontier",
+              "fields": [
+                {
+                  "fieldId": "world/frontier:world:legal_absence",
+                  "domainId": "world",
+                  "featureId": "world.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "stableSummary": "frontier_survival|domains=13|fields=33|diagnostics=0"
+    },
+    {
+      "schemaVersion": "semantic_authoring_workspace_v1",
+      "workspaceId": "workspace/gothic_intrigue",
+      "scenarioId": "gothic_intrigue",
+      "profileId": "gothic_intrigue",
+      "domainGroups": [
+        {
+          "domainId": "archetype",
+          "sections": [
+            {
+              "sectionId": "gothic_intrigue/archetype/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "gothic_intrigue:archetype:legal_absence",
+                  "domainId": "archetype",
+                  "featureId": "archetype.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "combat",
+          "sections": [
+            {
+              "sectionId": "gothic_intrigue/combat/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "gothic_intrigue:combat:legal_absence",
+                  "domainId": "combat",
+                  "featureId": "combat.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "dialogue",
+          "sections": [
+            {
+              "sectionId": "dialogue/veiled_threat/authoring",
+              "sourceTargetId": "dialogue/veiled_threat",
+              "fields": [
+                {
+                  "fieldId": "dialogue/veiled_threat:dialogue.intent",
+                  "domainId": "dialogue",
+                  "featureId": "dialogue.intent",
+                  "valueKind": "list",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "multi_select",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "hidden_accusation,polite_threat",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/veiled_threat:dialogue.text_key_hint:absent",
+                  "domainId": "dialogue",
+                  "featureId": "dialogue.text_key_hint",
+                  "valueKind": "text_key",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "localization_key",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/veiled_threat:faction.reputation_axis",
+                  "domainId": "dialogue",
+                  "featureId": "faction.reputation_axis",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:faction/old_house",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "suspicion",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/veiled_threat:kingdom.pressure",
+                  "domainId": "dialogue",
+                  "featureId": "kingdom.pressure",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:kingdom/old_court",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "6",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/veiled_threat:npc.faction_relation",
+                  "domainId": "dialogue",
+                  "featureId": "npc.faction_relation",
+                  "valueKind": "relation",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:npc/disgraced_heir",
+                  "controlHint": "relation_picker",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "member_of:faction:faction/old_house:0,9",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/veiled_threat:quest.motive",
+                  "domainId": "dialogue",
+                  "featureId": "quest.motive",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:quest/crypt_secret",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "secret",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "dialogue/veiled_threat:world.theme",
+                  "domainId": "dialogue",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/gothic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "gothic",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "partial"
+            }
+          ]
+        },
+        {
+          "domainId": "economy",
+          "sections": [
+            {
+              "sectionId": "gothic_intrigue/economy/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "gothic_intrigue:economy:legal_absence",
+                  "domainId": "economy",
+                  "featureId": "economy.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "event",
+          "sections": [
+            {
+              "sectionId": "gothic_intrigue/event/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "gothic_intrigue:event:legal_absence",
+                  "domainId": "event",
+                  "featureId": "event.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "faction",
+          "sections": [
+            {
+              "sectionId": "faction/old_house/context",
+              "sourceTargetId": "faction/old_house",
+              "fields": [
+                {
+                  "fieldId": "faction/old_house:faction:legal_absence",
+                  "domainId": "faction",
+                  "featureId": "faction.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "kingdom",
+          "sections": [
+            {
+              "sectionId": "kingdom/old_court/context",
+              "sourceTargetId": "kingdom/old_court",
+              "fields": [
+                {
+                  "fieldId": "kingdom/old_court:kingdom:legal_absence",
+                  "domainId": "kingdom",
+                  "featureId": "kingdom.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "npc",
+          "sections": [
+            {
+              "sectionId": "npc/disgraced_heir/authoring",
+              "sourceTargetId": "npc/disgraced_heir",
+              "fields": [
+                {
+                  "fieldId": "npc/disgraced_heir:faction.reputation_axis",
+                  "domainId": "npc",
+                  "featureId": "faction.reputation_axis",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:faction/old_house",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "suspicion",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/disgraced_heir:kingdom.pressure",
+                  "domainId": "npc",
+                  "featureId": "kingdom.pressure",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:kingdom/old_court",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "6",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/disgraced_heir:npc.faction_relation",
+                  "domainId": "npc",
+                  "featureId": "npc.faction_relation",
+                  "valueKind": "relation",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "relation_picker",
+                  "completionStatus": "complete",
+                  "provenance": "user",
+                  "resolvedValueSummary": "member_of:faction:faction/old_house:0,9",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/disgraced_heir:npc.hunger",
+                  "domainId": "npc",
+                  "featureId": "npc.hunger",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "0",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/disgraced_heir:npc.mood:absent",
+                  "domainId": "npc",
+                  "featureId": "npc.mood",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "select",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/disgraced_heir:npc.trust",
+                  "domainId": "npc",
+                  "featureId": "npc.trust",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "5",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/disgraced_heir:world.theme",
+                  "domainId": "npc",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/gothic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "gothic",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "partial"
+            }
+          ]
+        },
+        {
+          "domainId": "quest",
+          "sections": [
+            {
+              "sectionId": "quest/crypt_secret/authoring",
+              "sourceTargetId": "quest/crypt_secret",
+              "fields": [
+                {
+                  "fieldId": "quest/crypt_secret:faction.reputation_axis",
+                  "domainId": "quest",
+                  "featureId": "faction.reputation_axis",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:faction/old_house",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "suspicion",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/crypt_secret:kingdom.pressure",
+                  "domainId": "quest",
+                  "featureId": "kingdom.pressure",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:kingdom/old_court",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "6",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/crypt_secret:quest.motive",
+                  "domainId": "quest",
+                  "featureId": "quest.motive",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "secret",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/crypt_secret:world.theme",
+                  "domainId": "quest",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/gothic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "gothic",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "region",
+          "sections": [
+            {
+              "sectionId": "gothic_intrigue/region/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "gothic_intrigue:region:legal_absence",
+                  "domainId": "region",
+                  "featureId": "region.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "settlement",
+          "sections": [
+            {
+              "sectionId": "gothic_intrigue/settlement/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "gothic_intrigue:settlement:legal_absence",
+                  "domainId": "settlement",
+                  "featureId": "settlement.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "species",
+          "sections": [
+            {
+              "sectionId": "gothic_intrigue/species/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "gothic_intrigue:species:legal_absence",
+                  "domainId": "species",
+                  "featureId": "species.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "world",
+          "sections": [
+            {
+              "sectionId": "world/gothic/context",
+              "sourceTargetId": "world/gothic",
+              "fields": [
+                {
+                  "fieldId": "world/gothic:world:legal_absence",
+                  "domainId": "world",
+                  "featureId": "world.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "stableSummary": "gothic_intrigue|domains=13|fields=28|diagnostics=0"
+    },
+    {
+      "schemaVersion": "semantic_authoring_workspace_v1",
+      "workspaceId": "workspace/metamodule_kingdoms",
+      "scenarioId": "metamodule_kingdoms",
+      "profileId": "metamodule_kingdoms",
+      "domainGroups": [
+        {
+          "domainId": "archetype",
+          "sections": [
+            {
+              "sectionId": "archetype/module_scout/authoring",
+              "sourceTargetId": "archetype/module_scout",
+              "fields": [
+                {
+                  "fieldId": "archetype/module_scout:archetype.forbidden_affinity",
+                  "domainId": "archetype",
+                  "featureId": "archetype.forbidden_affinity",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "semantic_pack",
+                  "resolvedValueSummary": "void",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "archetype/module_scout:kingdom.pressure",
+                  "domainId": "archetype",
+                  "featureId": "kingdom.pressure",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:kingdom/auric",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "4",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "archetype/module_scout:species.mana_resonance",
+                  "domainId": "archetype",
+                  "featureId": "species.mana_resonance",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:species/metamodule_bearer",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "7",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "archetype/module_scout:species.module_capacity",
+                  "domainId": "archetype",
+                  "featureId": "species.module_capacity",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:species/metamodule_bearer",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "3",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "archetype/module_scout:world.theme",
+                  "domainId": "archetype",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/metamodule",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "metamodule",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "combat",
+          "sections": [
+            {
+              "sectionId": "combat/border_raid/context",
+              "sourceTargetId": "combat/border_raid",
+              "fields": [
+                {
+                  "fieldId": "combat/border_raid:combat:legal_absence",
+                  "domainId": "combat",
+                  "featureId": "combat.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "dialogue",
+          "sections": [
+            {
+              "sectionId": "metamodule_kingdoms/dialogue/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "metamodule_kingdoms:dialogue:legal_absence",
+                  "domainId": "dialogue",
+                  "featureId": "dialogue.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "economy",
+          "sections": [
+            {
+              "sectionId": "metamodule_kingdoms/economy/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "metamodule_kingdoms:economy:legal_absence",
+                  "domainId": "economy",
+                  "featureId": "economy.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "event",
+          "sections": [
+            {
+              "sectionId": "event/affinity_purge/authoring",
+              "sourceTargetId": "event/affinity_purge",
+              "fields": [
+                {
+                  "fieldId": "event/affinity_purge:event.intent",
+                  "domainId": "event",
+                  "featureId": "event.intent",
+                  "valueKind": "list",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "multi_select",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "forbidden_affinity_purge,tax_edict",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "event/affinity_purge:event.is_volatile",
+                  "domainId": "event",
+                  "featureId": "event.is_volatile",
+                  "valueKind": "flag",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "checkbox",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "false",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "event/affinity_purge:kingdom.pressure",
+                  "domainId": "event",
+                  "featureId": "kingdom.pressure",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:kingdom/umbra",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "8",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "event/affinity_purge:world.theme",
+                  "domainId": "event",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/metamodule",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "metamodule",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "faction",
+          "sections": [
+            {
+              "sectionId": "metamodule_kingdoms/faction/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "metamodule_kingdoms:faction:legal_absence",
+                  "domainId": "faction",
+                  "featureId": "faction.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "kingdom",
+          "sections": [
+            {
+              "sectionId": "kingdom/auric/context",
+              "sourceTargetId": "kingdom/auric",
+              "fields": [
+                {
+                  "fieldId": "kingdom/auric:kingdom:legal_absence",
+                  "domainId": "kingdom",
+                  "featureId": "kingdom.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            },
+            {
+              "sectionId": "kingdom/umbra/context",
+              "sourceTargetId": "kingdom/umbra",
+              "fields": [
+                {
+                  "fieldId": "kingdom/umbra:kingdom:legal_absence",
+                  "domainId": "kingdom",
+                  "featureId": "kingdom.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "npc",
+          "sections": [
+            {
+              "sectionId": "npc/bearer_scout/authoring",
+              "sourceTargetId": "npc/bearer_scout",
+              "fields": [
+                {
+                  "fieldId": "npc/bearer_scout:archetype.forbidden_affinity",
+                  "domainId": "npc",
+                  "featureId": "archetype.forbidden_affinity",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:archetype/module_scout",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "void",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:kingdom.pressure",
+                  "domainId": "npc",
+                  "featureId": "kingdom.pressure",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:kingdom/auric",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "4",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:npc.faction_relation:absent",
+                  "domainId": "npc",
+                  "featureId": "npc.faction_relation",
+                  "valueKind": "relation",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "relation_picker",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:npc.hunger",
+                  "domainId": "npc",
+                  "featureId": "npc.hunger",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "0",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:npc.mood:absent",
+                  "domainId": "npc",
+                  "featureId": "npc.mood",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "legal_absence_if_optional_or_inapplicable",
+                  "inheritanceHint": "inherit",
+                  "controlHint": "select",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:npc.trust",
+                  "domainId": "npc",
+                  "featureId": "npc.trust",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "5",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:species.mana_resonance",
+                  "domainId": "npc",
+                  "featureId": "species.mana_resonance",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:species/metamodule_bearer",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "7",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:species.module_capacity",
+                  "domainId": "npc",
+                  "featureId": "species.module_capacity",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:species/metamodule_bearer",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "3",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "npc/bearer_scout:world.theme",
+                  "domainId": "npc",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/metamodule",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "metamodule",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "partial"
+            }
+          ]
+        },
+        {
+          "domainId": "quest",
+          "sections": [
+            {
+              "sectionId": "quest/module_capacity_trial/authoring",
+              "sourceTargetId": "quest/module_capacity_trial",
+              "fields": [
+                {
+                  "fieldId": "quest/module_capacity_trial:archetype.forbidden_affinity",
+                  "domainId": "quest",
+                  "featureId": "archetype.forbidden_affinity",
+                  "valueKind": "enum",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:archetype/module_scout",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "void",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/module_capacity_trial:kingdom.pressure",
+                  "domainId": "quest",
+                  "featureId": "kingdom.pressure",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:kingdom/auric",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "4",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/module_capacity_trial:quest.motive",
+                  "domainId": "quest",
+                  "featureId": "quest.motive",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "kingdom_pressure",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/module_capacity_trial:species.mana_resonance",
+                  "domainId": "quest",
+                  "featureId": "species.mana_resonance",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:species/metamodule_bearer",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "7",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/module_capacity_trial:species.module_capacity",
+                  "domainId": "quest",
+                  "featureId": "species.module_capacity",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:species/metamodule_bearer",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "3",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "quest/module_capacity_trial:world.theme",
+                  "domainId": "quest",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/metamodule",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "metamodule",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "region",
+          "sections": [
+            {
+              "sectionId": "region/auric_core/context",
+              "sourceTargetId": "region/auric_core",
+              "fields": [
+                {
+                  "fieldId": "region/auric_core:region:legal_absence",
+                  "domainId": "region",
+                  "featureId": "region.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            },
+            {
+              "sectionId": "region/umbra_border/context",
+              "sourceTargetId": "region/umbra_border",
+              "fields": [
+                {
+                  "fieldId": "region/umbra_border:region:legal_absence",
+                  "domainId": "region",
+                  "featureId": "region.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "settlement",
+          "sections": [
+            {
+              "sectionId": "metamodule_kingdoms/settlement/legal_absence",
+              "sourceTargetId": "",
+              "fields": [
+                {
+                  "fieldId": "metamodule_kingdoms:settlement:legal_absence",
+                  "domainId": "settlement",
+                  "featureId": "settlement.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        },
+        {
+          "domainId": "species",
+          "sections": [
+            {
+              "sectionId": "species/metamodule_bearer/authoring",
+              "sourceTargetId": "species/metamodule_bearer",
+              "fields": [
+                {
+                  "fieldId": "species/metamodule_bearer:species.mana_resonance",
+                  "domainId": "species",
+                  "featureId": "species.mana_resonance",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "semantic_pack",
+                  "resolvedValueSummary": "7",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "species/metamodule_bearer:species.module_capacity",
+                  "domainId": "species",
+                  "featureId": "species.module_capacity",
+                  "valueKind": "number",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "local_or_programmatic",
+                  "controlHint": "numeric",
+                  "completionStatus": "complete",
+                  "provenance": "programmatic",
+                  "resolvedValueSummary": "5",
+                  "diagnostics": []
+                },
+                {
+                  "fieldId": "species/metamodule_bearer:world.theme",
+                  "domainId": "species",
+                  "featureId": "world.theme",
+                  "valueKind": "enum",
+                  "requirementStatus": "required",
+                  "repeatable": false,
+                  "applicabilityHint": "applicable",
+                  "inheritanceHint": "inherited_from:world/metamodule",
+                  "controlHint": "select",
+                  "completionStatus": "complete",
+                  "provenance": "inherited",
+                  "resolvedValueSummary": "metamodule",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "complete"
+            }
+          ]
+        },
+        {
+          "domainId": "world",
+          "sections": [
+            {
+              "sectionId": "magic/resonance_grid/context",
+              "sourceTargetId": "magic/resonance_grid",
+              "fields": [
+                {
+                  "fieldId": "magic/resonance_grid:world:legal_absence",
+                  "domainId": "world",
+                  "featureId": "world.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            },
+            {
+              "sectionId": "world/metamodule/context",
+              "sourceTargetId": "world/metamodule",
+              "fields": [
+                {
+                  "fieldId": "world/metamodule:world:legal_absence",
+                  "domainId": "world",
+                  "featureId": "world.optional_absence",
+                  "valueKind": "none",
+                  "requirementStatus": "optional",
+                  "repeatable": false,
+                  "applicabilityHint": "domain_group_legally_absent_for_this_scenario",
+                  "inheritanceHint": "none",
+                  "controlHint": "none",
+                  "completionStatus": "optional_absent",
+                  "provenance": "unset",
+                  "resolvedValueSummary": "",
+                  "diagnostics": []
+                }
+              ],
+              "completionStatus": "optional_absent"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "stableSummary": "metamodule_kingdoms|domains=13|fields=38|diagnostics=0"
+    }
+  ],
+  "upstreamSeams": {
+    "goal030ContractCount": 13,
+    "goal031PackCount": 10,
+    "goal032FeatureCount": 23,
+    "goal032InfluenceRuleCount": 5,
+    "goal030ReadyContractIds": [
+      "capability_bundle_pipeline_inputs_v1",
+      "combat_progression_ability_v1",
+      "dialogue_string_table_localization_hint_v1",
+      "entity_archetype_npc_actor_profile_v1",
+      "faction_reputation_social_relation_v1",
+      "game_profile_v1",
+      "item_resource_recipe_loot_economy_v1",
+      "quest_graph_objective_reward_pattern_v1",
+      "semantic_pack_v1",
+      "world_topology_region_route_graph_v1"
+    ],
+    "goal031PackIds": [
+      "semantic_pack/border_conflict",
+      "semantic_pack/caravan_trade",
+      "semantic_pack/core_blueprint_spine",
+      "semantic_pack/folk_magic",
+      "semantic_pack/frontier_survival",
+      "semantic_pack/gothic_intrigue",
+      "semantic_pack/merchant_guilds",
+      "semantic_pack/ruins_and_relics",
+      "semantic_pack/scarcity_economy",
+      "semantic_pack/winter_hazards"
+    ],
+    "goal032FeatureIds": [
+      "archetype.forbidden_affinity",
+      "biome.hazard",
+      "combat.threat_level",
+      "dialogue.intent",
+      "dialogue.text_key_hint",
+      "event.intent",
+      "event.is_volatile",
+      "faction.reputation_axis",
+      "item.resource_role",
+      "kingdom.pressure",
+      "magic.mana_pressure",
+      "npc.faction_relation",
+      "npc.hunger",
+      "npc.mood",
+      "npc.trust",
+      "quest.motive",
+      "region.route_pressure",
+      "relationship.tension",
+      "resource.scarcity",
+      "settlement.market_need",
+      "species.mana_resonance",
+      "species.module_capacity",
+      "world.theme"
+    ]
+  },
+  "diagnostics": []
+}

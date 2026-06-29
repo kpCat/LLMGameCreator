@@ -1,0 +1,1030 @@
+{
+  "schemaVersion": "semantic_authoring_lore_intake_skeleton_v1",
+  "loreBriefId": "lore/metamodule_kingdoms/brief_v1",
+  "scenarioId": "metamodule_kingdoms",
+  "styleProfileId": "metamodule_kingdoms",
+  "worldThemes": [
+    "metamodule",
+    "kingdom_pressure",
+    "mana_resonance",
+    "forbidden_affinity"
+  ],
+  "kingdomSlots": [
+    {
+      "kingdomId": "kingdom/auric",
+      "regionFamily": "mana_court_region",
+      "pressureAxis": "forbidden_affinity"
+    },
+    {
+      "kingdomId": "kingdom/umbra",
+      "regionFamily": "border_pressure_region",
+      "pressureAxis": "kingdom_pressure"
+    },
+    {
+      "kingdomId": "kingdom/verdant",
+      "regionFamily": "mana_court_region",
+      "pressureAxis": "faction_relation"
+    },
+    {
+      "kingdomId": "kingdom/cinder",
+      "regionFamily": "border_pressure_region",
+      "pressureAxis": "forbidden_affinity"
+    },
+    {
+      "kingdomId": "kingdom/tideglass",
+      "regionFamily": "mana_court_region",
+      "pressureAxis": "kingdom_pressure"
+    },
+    {
+      "kingdomId": "kingdom/ironroot",
+      "regionFamily": "border_pressure_region",
+      "pressureAxis": "faction_relation"
+    },
+    {
+      "kingdomId": "kingdom/moonveil",
+      "regionFamily": "mana_court_region",
+      "pressureAxis": "forbidden_affinity"
+    }
+  ],
+  "regionSlots": [
+    {
+      "slotId": "kingdom/auric/region_01",
+      "family": "capital"
+    },
+    {
+      "slotId": "kingdom/auric/region_02",
+      "family": "frontier"
+    },
+    {
+      "slotId": "kingdom/auric/region_03",
+      "family": "resource"
+    },
+    {
+      "slotId": "kingdom/cinder/region_01",
+      "family": "capital"
+    },
+    {
+      "slotId": "kingdom/cinder/region_02",
+      "family": "frontier"
+    },
+    {
+      "slotId": "kingdom/cinder/region_03",
+      "family": "resource"
+    },
+    {
+      "slotId": "kingdom/ironroot/region_01",
+      "family": "capital"
+    },
+    {
+      "slotId": "kingdom/ironroot/region_02",
+      "family": "frontier"
+    },
+    {
+      "slotId": "kingdom/ironroot/region_03",
+      "family": "resource"
+    },
+    {
+      "slotId": "kingdom/moonveil/region_01",
+      "family": "capital"
+    },
+    {
+      "slotId": "kingdom/moonveil/region_02",
+      "family": "frontier"
+    },
+    {
+      "slotId": "kingdom/moonveil/region_03",
+      "family": "resource"
+    },
+    {
+      "slotId": "kingdom/tideglass/region_01",
+      "family": "capital"
+    },
+    {
+      "slotId": "kingdom/tideglass/region_02",
+      "family": "frontier"
+    },
+    {
+      "slotId": "kingdom/tideglass/region_03",
+      "family": "resource"
+    },
+    {
+      "slotId": "kingdom/umbra/region_01",
+      "family": "capital"
+    },
+    {
+      "slotId": "kingdom/umbra/region_02",
+      "family": "frontier"
+    },
+    {
+      "slotId": "kingdom/umbra/region_03",
+      "family": "resource"
+    },
+    {
+      "slotId": "kingdom/verdant/region_01",
+      "family": "capital"
+    },
+    {
+      "slotId": "kingdom/verdant/region_02",
+      "family": "frontier"
+    },
+    {
+      "slotId": "kingdom/verdant/region_03",
+      "family": "resource"
+    }
+  ],
+  "speciesArchetypeSlots": [
+    {
+      "slotId": "kingdom/auric/species_archetype_01",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 1
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_02",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 2
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_03",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 3
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_04",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 4
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_05",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "module_scout",
+      "ordinal": 5
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_06",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 6
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_07",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 7
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_08",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 8
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_09",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 9
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_10",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "module_scout",
+      "ordinal": 10
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_11",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 11
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_12",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 12
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_13",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 13
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_14",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 14
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_15",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "module_scout",
+      "ordinal": 15
+    },
+    {
+      "slotId": "kingdom/auric/species_archetype_16",
+      "kingdomId": "kingdom/auric",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 16
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_01",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 49
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_02",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "module_scout",
+      "ordinal": 50
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_03",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 51
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_04",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 52
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_05",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 53
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_06",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 54
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_07",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "module_scout",
+      "ordinal": 55
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_08",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 56
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_09",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 57
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_10",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 58
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_11",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 59
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_12",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "module_scout",
+      "ordinal": 60
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_13",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 61
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_14",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 62
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_15",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 63
+    },
+    {
+      "slotId": "kingdom/cinder/species_archetype_16",
+      "kingdomId": "kingdom/cinder",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 64
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_01",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 81
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_02",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 82
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_03",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 83
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_04",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 84
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_05",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "module_scout",
+      "ordinal": 85
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_06",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 86
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_07",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 87
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_08",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 88
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_09",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 89
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_10",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "module_scout",
+      "ordinal": 90
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_11",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 91
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_12",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 92
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_13",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 93
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_14",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 94
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_15",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "module_scout",
+      "ordinal": 95
+    },
+    {
+      "slotId": "kingdom/ironroot/species_archetype_16",
+      "kingdomId": "kingdom/ironroot",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 96
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_01",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 97
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_02",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 98
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_03",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 99
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_04",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "module_scout",
+      "ordinal": 100
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_05",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 101
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_06",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 102
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_07",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 103
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_08",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 104
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_09",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "module_scout",
+      "ordinal": 105
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_10",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 106
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_11",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 107
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_12",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 108
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_13",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 109
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_14",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "module_scout",
+      "ordinal": 110
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_15",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 111
+    },
+    {
+      "slotId": "kingdom/moonveil/species_archetype_16",
+      "kingdomId": "kingdom/moonveil",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 112
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_01",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "module_scout",
+      "ordinal": 65
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_02",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 66
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_03",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 67
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_04",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 68
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_05",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 69
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_06",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "module_scout",
+      "ordinal": 70
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_07",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 71
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_08",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 72
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_09",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 73
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_10",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 74
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_11",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "module_scout",
+      "ordinal": 75
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_12",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 76
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_13",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 77
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_14",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 78
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_15",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 79
+    },
+    {
+      "slotId": "kingdom/tideglass/species_archetype_16",
+      "kingdomId": "kingdom/tideglass",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "module_scout",
+      "ordinal": 80
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_01",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 17
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_02",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 18
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_03",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 19
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_04",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "module_scout",
+      "ordinal": 20
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_05",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 21
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_06",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 22
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_07",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 23
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_08",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 24
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_09",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "module_scout",
+      "ordinal": 25
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_10",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 26
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_11",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 27
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_12",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 28
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_13",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 29
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_14",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "module_scout",
+      "ordinal": 30
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_15",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 31
+    },
+    {
+      "slotId": "kingdom/umbra/species_archetype_16",
+      "kingdomId": "kingdom/umbra",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 32
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_01",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 33
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_02",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 34
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_03",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "module_scout",
+      "ordinal": 35
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_04",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 36
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_05",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 37
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_06",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 38
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_07",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 39
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_08",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "module_scout",
+      "ordinal": 40
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_09",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 41
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_10",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 42
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_11",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 43
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_12",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "border_survivor",
+      "ordinal": 44
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_13",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "mana_resonant",
+      "archetypeFamily": "module_scout",
+      "ordinal": 45
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_14",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "forbidden_affinity_lineage",
+      "archetypeFamily": "resonance_warden",
+      "ordinal": 46
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_15",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "pressure_adapted",
+      "archetypeFamily": "forbidden_crafter",
+      "ordinal": 47
+    },
+    {
+      "slotId": "kingdom/verdant/species_archetype_16",
+      "kingdomId": "kingdom/verdant",
+      "speciesFamily": "metamodule_bearer",
+      "archetypeFamily": "faction_envoy",
+      "ordinal": 48
+    }
+  ],
+  "magicSystemAxes": [
+    "module_carrier",
+    "mana_resonance",
+    "forbidden_affinity",
+    "resonance_grid"
+  ],
+  "conflictAxes": [
+    "kingdom_pressure",
+    "faction_relation",
+    "combat_pressure",
+    "event_intent"
+  ],
+  "manualFillSlots": [
+    {
+      "slotId": "manual/kingdom_names",
+      "domainId": "kingdom",
+      "fillMode": "manual",
+      "provenance": "user",
+      "reviewStatus": "required"
+    },
+    {
+      "slotId": "manual/founding_myths",
+      "domainId": "world",
+      "fillMode": "manual",
+      "provenance": "user",
+      "reviewStatus": "optional"
+    },
+    {
+      "slotId": "manual/forbidden_affinity_policy",
+      "domainId": "archetype",
+      "fillMode": "manual",
+      "provenance": "user",
+      "reviewStatus": "required"
+    }
+  ],
+  "programmaticallyInferableSlots": [
+    {
+      "slotId": "programmatic/species_slot_ids",
+      "domainId": "species",
+      "fillMode": "programmatic",
+      "provenance": "programmatic",
+      "reviewStatus": "ready"
+    },
+    {
+      "slotId": "programmatic/kingdom_pressure_defaults",
+      "domainId": "kingdom",
+      "fillMode": "programmatic",
+      "provenance": "programmatic",
+      "reviewStatus": "ready"
+    },
+    {
+      "slotId": "programmatic/dialogue_intent_hints",
+      "domainId": "dialogue",
+      "fillMode": "programmatic",
+      "provenance": "programmatic",
+      "reviewStatus": "ready"
+    }
+  ],
+  "llmCandidateSlots": [
+    {
+      "slotId": "llm_candidate/kingdom_epithets",
+      "domainId": "kingdom",
+      "fillMode": "candidate",
+      "provenance": "llm_candidate",
+      "reviewStatus": "review_required"
+    },
+    {
+      "slotId": "llm_candidate/species_names",
+      "domainId": "species",
+      "fillMode": "candidate",
+      "provenance": "llm_candidate",
+      "reviewStatus": "review_required"
+    },
+    {
+      "slotId": "llm_candidate/conflict_hooks",
+      "domainId": "quest",
+      "fillMode": "candidate",
+      "provenance": "llm_candidate",
+      "reviewStatus": "review_required"
+    }
+  ],
+  "featureFamilies": [
+    "module_carriers",
+    "mana_resonance",
+    "forbidden_affinities",
+    "kingdom_pressure",
+    "faction_relation",
+    "dialogue_intent",
+    "quest_motive",
+    "event_intent",
+    "economy_pressure",
+    "combat_pressure"
+  ],
+  "evidenceSummary": {
+    "kingdomCount": 7,
+    "regionSlotCount": 21,
+    "speciesArchetypeSlotCount": 112,
+    "representativeSpeciesArchetypeSlots": [
+      "kingdom/auric/species_archetype_01",
+      "kingdom/auric/species_archetype_02",
+      "kingdom/auric/species_archetype_03",
+      "kingdom/auric/species_archetype_04",
+      "kingdom/auric/species_archetype_05",
+      "kingdom/auric/species_archetype_06",
+      "kingdom/auric/species_archetype_07",
+      "kingdom/auric/species_archetype_08"
+    ],
+    "llmCandidatesQuarantined": true
+  }
+}
