@@ -1,0 +1,591 @@
+{
+  "schemaVersion": "dynamic_semantic_resolved_state_v1",
+  "scenarioId": "gothic_intrigue",
+  "profileId": "gothic_intrigue",
+  "seed": 3202,
+  "targetStates": [
+    {
+      "targetId": "dialogue/veiled_threat",
+      "targetScope": "dialogue",
+      "features": [
+        {
+          "featureId": "dialogue.intent",
+          "valueKind": "list",
+          "value": {
+            "valueKind": "list",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": [
+              "hidden_accusation",
+              "polite_threat"
+            ]
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "dialogue/veiled_threat",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "faction.reputation_axis",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "suspicion",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "faction/old_house",
+          "sourceLayer": "faction",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 6,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "kingdom/old_court",
+          "sourceLayer": "kingdom",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.faction_relation",
+          "valueKind": "relation",
+          "value": {
+            "valueKind": "relation",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": {
+              "relationKind": "member_of",
+              "targetScope": "faction",
+              "targetId": "faction/old_house",
+              "strength": 0.9
+            },
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "npc/disgraced_heir",
+          "sourceLayer": "instance",
+          "inherited": true,
+          "defaulted": false,
+          "manual": true,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "quest.motive",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "secret",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "quest/crypt_secret",
+          "sourceLayer": "quest",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "gothic",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/gothic",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "dialogue.intent",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "dialogue/veiled_threat",
+          "detail": "optional"
+        },
+        {
+          "featureId": "dialogue.text_key_hint",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "dialogue/veiled_threat",
+          "detail": "optional"
+        },
+        {
+          "featureId": "faction.reputation_axis",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "faction/old_house",
+          "detail": "suspicion"
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "kingdom/old_court",
+          "detail": "6"
+        },
+        {
+          "featureId": "npc.faction_relation",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "npc/disgraced_heir",
+          "detail": "member_of:faction:faction/old_house:0,9"
+        },
+        {
+          "featureId": "quest.motive",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "quest/crypt_secret",
+          "detail": "secret"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/gothic",
+          "detail": "gothic"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/gothic_suspicion_dialogue",
+          "effectKind": "add_intent",
+          "featureId": "dialogue.intent",
+          "detail": "hidden_accusation,polite_threat"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "dialogue/veiled_threat|scope=dialogue|features=6|effects=1|diagnostics=0"
+    },
+    {
+      "targetId": "npc/disgraced_heir",
+      "targetScope": "npc",
+      "features": [
+        {
+          "featureId": "dialogue.intent",
+          "valueKind": "list",
+          "value": {
+            "valueKind": "list",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": [
+              "hidden_accusation",
+              "polite_threat"
+            ]
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "npc/disgraced_heir",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "faction.reputation_axis",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "suspicion",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "faction/old_house",
+          "sourceLayer": "faction",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 6,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "kingdom/old_court",
+          "sourceLayer": "kingdom",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.faction_relation",
+          "valueKind": "relation",
+          "value": {
+            "valueKind": "relation",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": {
+              "relationKind": "member_of",
+              "targetScope": "faction",
+              "targetId": "faction/old_house",
+              "strength": 0.9
+            },
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "instance",
+          "sourceTargetId": "npc/disgraced_heir",
+          "sourceLayer": "instance",
+          "inherited": false,
+          "defaulted": false,
+          "manual": true,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.hunger",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 0,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "default",
+          "sourceTargetId": "npc/disgraced_heir",
+          "sourceLayer": "generated_default",
+          "inherited": false,
+          "defaulted": true,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.trust",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 5,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "default",
+          "sourceTargetId": "npc/disgraced_heir",
+          "sourceLayer": "generated_default",
+          "inherited": false,
+          "defaulted": true,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "gothic",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/gothic",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "faction.reputation_axis",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "faction/old_house",
+          "detail": "suspicion"
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "kingdom/old_court",
+          "detail": "6"
+        },
+        {
+          "featureId": "npc.faction_relation",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "npc/disgraced_heir",
+          "detail": "member_of:faction:faction/old_house:0,9"
+        },
+        {
+          "featureId": "npc.hunger",
+          "traceKind": "default_value",
+          "sourceTargetId": "npc/disgraced_heir",
+          "detail": "constant"
+        },
+        {
+          "featureId": "npc.mood",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "npc/disgraced_heir",
+          "detail": "optional"
+        },
+        {
+          "featureId": "npc.trust",
+          "traceKind": "default_value",
+          "sourceTargetId": "npc/disgraced_heir",
+          "detail": "constant"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/gothic",
+          "detail": "gothic"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/gothic_suspicion_dialogue",
+          "effectKind": "add_intent",
+          "featureId": "dialogue.intent",
+          "detail": "hidden_accusation,polite_threat"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "npc/disgraced_heir|scope=npc|features=7|effects=1|diagnostics=0"
+    },
+    {
+      "targetId": "quest/crypt_secret",
+      "targetScope": "quest",
+      "features": [
+        {
+          "featureId": "dialogue.intent",
+          "valueKind": "list",
+          "value": {
+            "valueKind": "list",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": [
+              "hidden_accusation",
+              "polite_threat"
+            ]
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "quest/crypt_secret",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "faction.reputation_axis",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "suspicion",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "faction/old_house",
+          "sourceLayer": "faction",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 6,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "kingdom/old_court",
+          "sourceLayer": "kingdom",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "quest.motive",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "secret",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "quest",
+          "sourceTargetId": "quest/crypt_secret",
+          "sourceLayer": "quest",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "gothic",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/gothic",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "faction.reputation_axis",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "faction/old_house",
+          "detail": "suspicion"
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "kingdom/old_court",
+          "detail": "6"
+        },
+        {
+          "featureId": "quest.motive",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "quest/crypt_secret",
+          "detail": "secret"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/gothic",
+          "detail": "gothic"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/gothic_suspicion_dialogue",
+          "effectKind": "add_intent",
+          "featureId": "dialogue.intent",
+          "detail": "hidden_accusation,polite_threat"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "quest/crypt_secret|scope=quest|features=5|effects=1|diagnostics=0"
+    }
+  ],
+  "diagnostics": [],
+  "authoringSuggestions": [],
+  "stableSummary": "gothic_intrigue|seed=3202|targets=3|features=18|diagnostics=0"
+}

@@ -1,0 +1,405 @@
+{
+  "schemaVersion": "dynamic_semantic_resolved_state_v1",
+  "scenarioId": "caravan_trade",
+  "profileId": "caravan_trade",
+  "seed": 3203,
+  "targetStates": [
+    {
+      "targetId": "dialogue/factor_offer",
+      "targetScope": "dialogue",
+      "features": [
+        {
+          "featureId": "quest.motive",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "contract",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "quest/delivery_bargain",
+          "sourceLayer": "quest",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "region.route_pressure",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "toll_risk",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "region/toll_pass",
+          "sourceLayer": "region",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "settlement.market_need",
+          "valueKind": "weighted_tag",
+          "value": {
+            "valueKind": "weighted_tag",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [
+              {
+                "tag": "credit",
+                "weight": 0.6
+              },
+              {
+                "tag": "spice",
+                "weight": 0.7
+              }
+            ],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "settlement/trade_outpost",
+          "sourceLayer": "settlement",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "caravan",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/caravan",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "dialogue.intent",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "dialogue/factor_offer",
+          "detail": "optional"
+        },
+        {
+          "featureId": "dialogue.text_key_hint",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "dialogue/factor_offer",
+          "detail": "optional"
+        },
+        {
+          "featureId": "quest.motive",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "quest/delivery_bargain",
+          "detail": "contract"
+        },
+        {
+          "featureId": "region.route_pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "region/toll_pass",
+          "detail": "toll_risk"
+        },
+        {
+          "featureId": "settlement.market_need",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "settlement/trade_outpost",
+          "detail": "credit:0,6,spice:0,7"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/caravan",
+          "detail": "caravan"
+        }
+      ],
+      "influenceEffects": [],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "dialogue/factor_offer|scope=dialogue|features=4|effects=0|diagnostics=0"
+    },
+    {
+      "targetId": "quest/delivery_bargain",
+      "targetScope": "quest",
+      "features": [
+        {
+          "featureId": "quest.motive",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "contract",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "quest",
+          "sourceTargetId": "quest/delivery_bargain",
+          "sourceLayer": "quest",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "region.route_pressure",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "toll_risk",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "region/toll_pass",
+          "sourceLayer": "region",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "settlement.market_need",
+          "valueKind": "weighted_tag",
+          "value": {
+            "valueKind": "weighted_tag",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [
+              {
+                "tag": "credit",
+                "weight": 0.6
+              },
+              {
+                "tag": "spice",
+                "weight": 0.7
+              }
+            ],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "settlement/trade_outpost",
+          "sourceLayer": "settlement",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "caravan",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/caravan",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "quest.motive",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "quest/delivery_bargain",
+          "detail": "contract"
+        },
+        {
+          "featureId": "region.route_pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "region/toll_pass",
+          "detail": "toll_risk"
+        },
+        {
+          "featureId": "settlement.market_need",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "settlement/trade_outpost",
+          "detail": "credit:0,6,spice:0,7"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/caravan",
+          "detail": "caravan"
+        }
+      ],
+      "influenceEffects": [],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "quest/delivery_bargain|scope=quest|features=4|effects=0|diagnostics=0"
+    },
+    {
+      "targetId": "settlement/trade_outpost",
+      "targetScope": "settlement",
+      "features": [
+        {
+          "featureId": "region.route_pressure",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "toll_risk",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "region/toll_pass",
+          "sourceLayer": "region",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "settlement.market_need",
+          "valueKind": "weighted_tag",
+          "value": {
+            "valueKind": "weighted_tag",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [
+              {
+                "tag": "contract_risk",
+                "weight": 0.35
+              },
+              {
+                "tag": "credit",
+                "weight": 0.6
+              },
+              {
+                "tag": "spice",
+                "weight": 0.7
+              }
+            ],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "settlement/trade_outpost",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "caravan",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/caravan",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "region.route_pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "region/toll_pass",
+          "detail": "toll_risk"
+        },
+        {
+          "featureId": "settlement.market_need",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "settlement/trade_outpost",
+          "detail": "credit:0,6,spice:0,7"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/caravan",
+          "detail": "caravan"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/caravan_market_need",
+          "effectKind": "add_weighted_tag",
+          "featureId": "settlement.market_need",
+          "detail": "contract_risk:0,35,credit:0,6,spice:0,7"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "settlement/trade_outpost|scope=settlement|features=3|effects=1|diagnostics=0"
+    }
+  ],
+  "diagnostics": [],
+  "authoringSuggestions": [],
+  "stableSummary": "caravan_trade|seed=3203|targets=3|features=11|diagnostics=0"
+}

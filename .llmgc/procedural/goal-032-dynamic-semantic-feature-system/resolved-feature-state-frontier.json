@@ -1,0 +1,771 @@
+{
+  "schemaVersion": "dynamic_semantic_resolved_state_v1",
+  "scenarioId": "frontier_survival",
+  "profileId": "frontier_survival",
+  "seed": 3201,
+  "targetStates": [
+    {
+      "targetId": "dialogue/medic_warning",
+      "targetScope": "dialogue",
+      "features": [
+        {
+          "featureId": "biome.hazard",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "beasts",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "biome/predator_range",
+          "sourceLayer": "biome",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "dialogue.intent",
+          "valueKind": "list",
+          "value": {
+            "valueKind": "list",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": [
+              "intent/find_food"
+            ]
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "dialogue/medic_warning",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.hunger",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 8,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "npc/trail_medic",
+          "sourceLayer": "instance",
+          "inherited": true,
+          "defaulted": false,
+          "manual": true,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.mood",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "hungry",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "dialogue/medic_warning",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "quest.motive",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "survive",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "quest/medicine_run",
+          "sourceLayer": "quest",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "region.route_pressure",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "predators",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "region/river_ford",
+          "sourceLayer": "region",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "settlement.market_need",
+          "valueKind": "weighted_tag",
+          "value": {
+            "valueKind": "weighted_tag",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [
+              {
+                "tag": "ammo",
+                "weight": 0.35
+              },
+              {
+                "tag": "medicine",
+                "weight": 0.8
+              }
+            ],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "settlement/stockade",
+          "sourceLayer": "settlement",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "frontier",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/frontier",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "biome.hazard",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "biome/predator_range",
+          "detail": "beasts"
+        },
+        {
+          "featureId": "dialogue.intent",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "dialogue/medic_warning",
+          "detail": "optional"
+        },
+        {
+          "featureId": "dialogue.text_key_hint",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "dialogue/medic_warning",
+          "detail": "optional"
+        },
+        {
+          "featureId": "npc.hunger",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "npc/trail_medic",
+          "detail": "8"
+        },
+        {
+          "featureId": "quest.motive",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "quest/medicine_run",
+          "detail": "survive"
+        },
+        {
+          "featureId": "region.route_pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "region/river_ford",
+          "detail": "predators"
+        },
+        {
+          "featureId": "settlement.market_need",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "settlement/stockade",
+          "detail": "ammo:0,35,medicine:0,8"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/frontier",
+          "detail": "frontier"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/frontier_hunger_mood",
+          "effectKind": "add_intent",
+          "featureId": "dialogue.intent",
+          "detail": "intent/find_food"
+        },
+        {
+          "ruleId": "rule/frontier_hunger_mood",
+          "effectKind": "set_feature",
+          "featureId": "npc.mood",
+          "detail": "hungry"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "dialogue/medic_warning|scope=dialogue|features=8|effects=2|diagnostics=0"
+    },
+    {
+      "targetId": "npc/trail_medic",
+      "targetScope": "npc",
+      "features": [
+        {
+          "featureId": "biome.hazard",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "beasts",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "biome/predator_range",
+          "sourceLayer": "biome",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.hunger",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 8,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "instance",
+          "sourceTargetId": "npc/trail_medic",
+          "sourceLayer": "instance",
+          "inherited": false,
+          "defaulted": false,
+          "manual": true,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.intent",
+          "valueKind": "list",
+          "value": {
+            "valueKind": "list",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": [
+              "intent/find_food"
+            ]
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "npc/trail_medic",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.mood",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "hungry",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "npc/trail_medic",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.trust",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 5,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "default",
+          "sourceTargetId": "npc/trail_medic",
+          "sourceLayer": "generated_default",
+          "inherited": false,
+          "defaulted": true,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "region.route_pressure",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "predators",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "region/river_ford",
+          "sourceLayer": "region",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "settlement.market_need",
+          "valueKind": "weighted_tag",
+          "value": {
+            "valueKind": "weighted_tag",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [
+              {
+                "tag": "ammo",
+                "weight": 0.35
+              },
+              {
+                "tag": "medicine",
+                "weight": 0.8
+              }
+            ],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "settlement/stockade",
+          "sourceLayer": "settlement",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "frontier",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/frontier",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "biome.hazard",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "biome/predator_range",
+          "detail": "beasts"
+        },
+        {
+          "featureId": "npc.faction_relation",
+          "traceKind": "inapplicable_optional",
+          "sourceTargetId": "npc/trail_medic",
+          "detail": "optional"
+        },
+        {
+          "featureId": "npc.hunger",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "npc/trail_medic",
+          "detail": "8"
+        },
+        {
+          "featureId": "npc.mood",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "npc/trail_medic",
+          "detail": "optional"
+        },
+        {
+          "featureId": "npc.trust",
+          "traceKind": "default_value",
+          "sourceTargetId": "npc/trail_medic",
+          "detail": "constant"
+        },
+        {
+          "featureId": "region.route_pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "region/river_ford",
+          "detail": "predators"
+        },
+        {
+          "featureId": "settlement.market_need",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "settlement/stockade",
+          "detail": "ammo:0,35,medicine:0,8"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/frontier",
+          "detail": "frontier"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/frontier_hunger_mood",
+          "effectKind": "add_intent",
+          "featureId": "npc.intent",
+          "detail": "intent/find_food"
+        },
+        {
+          "ruleId": "rule/frontier_hunger_mood",
+          "effectKind": "set_feature",
+          "featureId": "npc.mood",
+          "detail": "hungry"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "npc/trail_medic|scope=npc|features=8|effects=2|diagnostics=0"
+    },
+    {
+      "targetId": "quest/medicine_run",
+      "targetScope": "quest",
+      "features": [
+        {
+          "featureId": "quest.motive",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "survive",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "quest",
+          "sourceTargetId": "quest/medicine_run",
+          "sourceLayer": "quest",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "region.route_pressure",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "predators",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "region/river_ford",
+          "sourceLayer": "region",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "frontier",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/frontier",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "quest.motive",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "quest/medicine_run",
+          "detail": "survive"
+        },
+        {
+          "featureId": "region.route_pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "region/river_ford",
+          "detail": "predators"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/frontier",
+          "detail": "frontier"
+        }
+      ],
+      "influenceEffects": [],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "quest/medicine_run|scope=quest|features=3|effects=0|diagnostics=0"
+    },
+    {
+      "targetId": "settlement/stockade",
+      "targetScope": "settlement",
+      "features": [
+        {
+          "featureId": "biome.hazard",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "beasts",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "biome/predator_range",
+          "sourceLayer": "biome",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "region.route_pressure",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "predators",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "region/river_ford",
+          "sourceLayer": "region",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "settlement.market_need",
+          "valueKind": "weighted_tag",
+          "value": {
+            "valueKind": "weighted_tag",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [
+              {
+                "tag": "ammo",
+                "weight": 0.35
+              },
+              {
+                "tag": "contract_risk",
+                "weight": 0.35
+              },
+              {
+                "tag": "medicine",
+                "weight": 0.8
+              }
+            ],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "settlement/stockade",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "frontier",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/frontier",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "biome.hazard",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "biome/predator_range",
+          "detail": "beasts"
+        },
+        {
+          "featureId": "region.route_pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "region/river_ford",
+          "detail": "predators"
+        },
+        {
+          "featureId": "settlement.market_need",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "settlement/stockade",
+          "detail": "ammo:0,35,medicine:0,8"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/frontier",
+          "detail": "frontier"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/caravan_market_need",
+          "effectKind": "add_weighted_tag",
+          "featureId": "settlement.market_need",
+          "detail": "ammo:0,35,contract_risk:0,35,medicine:0,8"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "settlement/stockade|scope=settlement|features=4|effects=1|diagnostics=0"
+    }
+  ],
+  "diagnostics": [],
+  "authoringSuggestions": [],
+  "stableSummary": "frontier_survival|seed=3201|targets=4|features=23|diagnostics=0"
+}

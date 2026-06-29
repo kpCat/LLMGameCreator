@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "dynamic_semantic_influence_rule_summary_v1",
+  "ruleCount": 5,
+  "ruleIds": [
+    "rule/caravan_market_need",
+    "rule/frontier_hunger_mood",
+    "rule/gothic_suspicion_dialogue",
+    "rule/kingdom_pressure_event",
+    "rule/metamodule_mana_capacity"
+  ],
+  "conditionOperators": [
+    "enum_equals",
+    "number_at_least",
+    "scope_is",
+    "target_has_tag"
+  ],
+  "effectKinds": [
+    "add_intent",
+    "add_weighted_tag",
+    "adjust_number",
+    "set_feature",
+    "suggest_feature"
+  ],
+  "diagnostics": []
+}

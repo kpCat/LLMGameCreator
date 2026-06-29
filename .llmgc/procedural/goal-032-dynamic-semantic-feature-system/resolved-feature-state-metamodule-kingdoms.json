@@ -1,0 +1,810 @@
+{
+  "schemaVersion": "dynamic_semantic_resolved_state_v1",
+  "scenarioId": "metamodule_kingdoms",
+  "profileId": "metamodule_kingdoms",
+  "seed": 3204,
+  "targetStates": [
+    {
+      "targetId": "archetype/module_scout",
+      "targetScope": "archetype",
+      "features": [
+        {
+          "featureId": "archetype.forbidden_affinity",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "void",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "archetype",
+          "sourceTargetId": "archetype/module_scout",
+          "sourceLayer": "archetype",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 4,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "kingdom/auric",
+          "sourceLayer": "kingdom",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "species.mana_resonance",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 7,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "species",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "species.module_capacity",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 3,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "species",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "metamodule",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/metamodule",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "archetype.forbidden_affinity",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "archetype/module_scout",
+          "detail": "void"
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "kingdom/auric",
+          "detail": "4"
+        },
+        {
+          "featureId": "species.mana_resonance",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "7"
+        },
+        {
+          "featureId": "species.module_capacity",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "3"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/metamodule",
+          "detail": "metamodule"
+        }
+      ],
+      "influenceEffects": [],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "archetype/module_scout|scope=archetype|features=5|effects=0|diagnostics=0"
+    },
+    {
+      "targetId": "event/affinity_purge",
+      "targetScope": "event",
+      "features": [
+        {
+          "featureId": "event.intent",
+          "valueKind": "list",
+          "value": {
+            "valueKind": "list",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": [
+              "forbidden_affinity_purge",
+              "tax_edict"
+            ]
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "event/affinity_purge",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "event.is_volatile",
+          "valueKind": "flag",
+          "value": {
+            "valueKind": "flag",
+            "flagValue": false,
+            "numberValue": null,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "default",
+          "sourceTargetId": "event/affinity_purge",
+          "sourceLayer": "generated_default",
+          "inherited": false,
+          "defaulted": true,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 8,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "kingdom/umbra",
+          "sourceLayer": "kingdom",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "metamodule",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/metamodule",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "event.intent",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "event/affinity_purge",
+          "detail": "optional"
+        },
+        {
+          "featureId": "event.is_volatile",
+          "traceKind": "default_value",
+          "sourceTargetId": "event/affinity_purge",
+          "detail": "constant"
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "kingdom/umbra",
+          "detail": "8"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/metamodule",
+          "detail": "metamodule"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/kingdom_pressure_event",
+          "effectKind": "add_intent",
+          "featureId": "event.intent",
+          "detail": "forbidden_affinity_purge,tax_edict"
+        }
+      ],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "event/affinity_purge|scope=event|features=4|effects=1|diagnostics=0"
+    },
+    {
+      "targetId": "npc/bearer_scout",
+      "targetScope": "npc",
+      "features": [
+        {
+          "featureId": "archetype.forbidden_affinity",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "void",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "archetype/module_scout",
+          "sourceLayer": "archetype",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 4,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "kingdom/auric",
+          "sourceLayer": "kingdom",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.hunger",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 0,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "default",
+          "sourceTargetId": "npc/bearer_scout",
+          "sourceLayer": "generated_default",
+          "inherited": false,
+          "defaulted": true,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "npc.trust",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 5,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "default",
+          "sourceTargetId": "npc/bearer_scout",
+          "sourceLayer": "generated_default",
+          "inherited": false,
+          "defaulted": true,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "species.mana_resonance",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 7,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "species",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "species.module_capacity",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 3,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "species",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "metamodule",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/metamodule",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "archetype.forbidden_affinity",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "archetype/module_scout",
+          "detail": "void"
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "kingdom/auric",
+          "detail": "4"
+        },
+        {
+          "featureId": "npc.faction_relation",
+          "traceKind": "inapplicable_optional",
+          "sourceTargetId": "npc/bearer_scout",
+          "detail": "optional"
+        },
+        {
+          "featureId": "npc.hunger",
+          "traceKind": "default_value",
+          "sourceTargetId": "npc/bearer_scout",
+          "detail": "constant"
+        },
+        {
+          "featureId": "npc.mood",
+          "traceKind": "absent_optional",
+          "sourceTargetId": "npc/bearer_scout",
+          "detail": "optional"
+        },
+        {
+          "featureId": "npc.trust",
+          "traceKind": "default_value",
+          "sourceTargetId": "npc/bearer_scout",
+          "detail": "constant"
+        },
+        {
+          "featureId": "species.mana_resonance",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "7"
+        },
+        {
+          "featureId": "species.module_capacity",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "3"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/metamodule",
+          "detail": "metamodule"
+        }
+      ],
+      "influenceEffects": [],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "npc/bearer_scout|scope=npc|features=7|effects=0|diagnostics=0"
+    },
+    {
+      "targetId": "quest/module_capacity_trial",
+      "targetScope": "quest",
+      "features": [
+        {
+          "featureId": "archetype.forbidden_affinity",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "void",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "archetype/module_scout",
+          "sourceLayer": "archetype",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 4,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "kingdom/auric",
+          "sourceLayer": "kingdom",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "quest.motive",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "kingdom_pressure",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "quest",
+          "sourceTargetId": "quest/module_capacity_trial",
+          "sourceLayer": "quest",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "species.mana_resonance",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 7,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "species",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "species.module_capacity",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 3,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "species",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "metamodule",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/metamodule",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "archetype.forbidden_affinity",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "archetype/module_scout",
+          "detail": "void"
+        },
+        {
+          "featureId": "kingdom.pressure",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "kingdom/auric",
+          "detail": "4"
+        },
+        {
+          "featureId": "quest.motive",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "quest/module_capacity_trial",
+          "detail": "kingdom_pressure"
+        },
+        {
+          "featureId": "species.mana_resonance",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "7"
+        },
+        {
+          "featureId": "species.module_capacity",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "3"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/metamodule",
+          "detail": "metamodule"
+        }
+      ],
+      "influenceEffects": [],
+      "authoringSuggestions": [],
+      "diagnostics": [],
+      "stableSummary": "quest/module_capacity_trial|scope=quest|features=6|effects=0|diagnostics=0"
+    },
+    {
+      "targetId": "species/metamodule_bearer",
+      "targetScope": "species",
+      "features": [
+        {
+          "featureId": "species.mana_resonance",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 7,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "species",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "species",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        },
+        {
+          "featureId": "species.module_capacity",
+          "valueKind": "number",
+          "value": {
+            "valueKind": "number",
+            "flagValue": null,
+            "numberValue": 5,
+            "enumValue": null,
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "influence",
+          "sourceTargetId": "species/metamodule_bearer",
+          "sourceLayer": "influence",
+          "inherited": false,
+          "defaulted": false,
+          "manual": false,
+          "generated": true,
+          "blocked": false
+        },
+        {
+          "featureId": "world.theme",
+          "valueKind": "enum",
+          "value": {
+            "valueKind": "enum",
+            "flagValue": null,
+            "numberValue": null,
+            "enumValue": "metamodule",
+            "weightedTags": [],
+            "relationValue": null,
+            "textKeyValue": null,
+            "listValues": []
+          },
+          "resolutionSource": "inherited",
+          "sourceTargetId": "world/metamodule",
+          "sourceLayer": "world",
+          "inherited": true,
+          "defaulted": false,
+          "manual": false,
+          "generated": false,
+          "blocked": false
+        }
+      ],
+      "traces": [
+        {
+          "featureId": "species.mana_resonance",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "7"
+        },
+        {
+          "featureId": "species.module_capacity",
+          "traceKind": "assigned_value",
+          "sourceTargetId": "species/metamodule_bearer",
+          "detail": "3"
+        },
+        {
+          "featureId": "world.theme",
+          "traceKind": "inherited_value",
+          "sourceTargetId": "world/metamodule",
+          "detail": "metamodule"
+        }
+      ],
+      "influenceEffects": [
+        {
+          "ruleId": "rule/metamodule_mana_capacity",
+          "effectKind": "adjust_number",
+          "featureId": "species.module_capacity",
+          "detail": "3->5"
+        },
+        {
+          "ruleId": "rule/metamodule_mana_capacity",
+          "effectKind": "suggest_feature",
+          "featureId": "archetype.forbidden_affinity",
+          "detail": "Review forbidden affinity when resonance is high."
+        }
+      ],
+      "authoringSuggestions": [
+        "species/metamodule_bearer:archetype.forbidden_affinity:Review forbidden affinity when resonance is high."
+      ],
+      "diagnostics": [],
+      "stableSummary": "species/metamodule_bearer|scope=species|features=3|effects=2|diagnostics=0"
+    }
+  ],
+  "diagnostics": [],
+  "authoringSuggestions": [
+    "species/metamodule_bearer:archetype.forbidden_affinity:Review forbidden affinity when resonance is high."
+  ],
+  "stableSummary": "metamodule_kingdoms|seed=3204|targets=5|features=25|diagnostics=0"
+}

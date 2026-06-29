@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-29T11:45:00Z",
+    "updated_at_utc":  "2026-06-29T13:20:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Semantic pack composition blueprint verification required",
-    "gate_status":  "semantic_pack_composition_blueprint_verification",
+    "current_phase_title":  "Dynamic semantic feature system verification required",
+    "gate_status":  "dynamic_semantic_feature_system_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_031_semantic_pack_composition_blueprint",
-    "active_manual_gate":  "The user handoff accepted semantic_artifact_contract_registry_verification before Goal 031. Goal 031 semantic pack composition blueprint is produced for review; semantic_pack_composition_blueprint_verification remains required and not passed.",
-    "current_user_action":  "Review Goal 031 semantic pack composition blueprint artifacts, pack catalog summary, composition matrix, semantic blueprint plans, cross-artifact linkage report, focused tests, product smoke, final checks and invalid/fake/leak evidence before marking semantic_pack_composition_blueprint_verification passed. Goal 032 remains future and not started.",
-    "recommended_next_decision":  "Goal 031 adds a deterministic Application-layer semantic pack composition blueprint seam under Design/SemanticPackComposition, composes selected semantic packs into cross-artifact plans for frontier_survival, gothic_intrigue and caravan_trade through the Goal 030 registry/planner path, writes compact evidence under .llmgc/procedural/goal-031-semantic-pack-composition-blueprint, rejects duplicate/unknown/missing-scope/duplicate-fact/unknown-relation/fake-contract/incompatible/future-only/fake-pack/leak mutations causally, and leaves semantic_pack_composition_blueprint_verification required. Do not start Goal 032 until this gate is accepted.",
+    "last_completed_product_slice_id":  "goal_032_dynamic_semantic_feature_system",
+    "active_manual_gate":  "The user handoff started Goal 032 after Goal 031 technical completion without marking semantic_pack_composition_blueprint_verification passed. Goal 031 remains produced for review; Goal 032 dynamic semantic feature system is produced for review; dynamic_semantic_feature_system_verification remains required and not passed.",
+    "current_user_action":  "Review Goal 032 dynamic semantic feature system artifacts, feature catalog summary, influence rule summary, authoring schema matrix, four resolved scenario states, focused tests, product smoke, final checks and invalid/fake/leak evidence before marking dynamic_semantic_feature_system_verification passed. Goal 033 remains future and not started.",
+    "recommended_next_decision":  "Goal 032 adds a deterministic Application-layer dynamic semantic feature system under Design/DynamicSemanticFeatures: feature definitions/assignments, applicability, inheritance, typed influence rules, resolver output traces, authoring schema records and compact evidence for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It leaves dynamic_semantic_feature_system_verification required and does not mark Goal 031 or Goal 032 passed.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "semantic_pack_composition_blueprint_verification"
+                                                        "dynamic_semantic_feature_system_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -58,7 +58,8 @@
                            "goal_028_manual_gate":  "package_assembly_combat_progression_expansion_verification",
                            "goal_029_manual_gate":  "modular_generator_kernel_parallel_readiness_verification",
                            "goal_030_manual_gate":  "semantic_artifact_contract_registry_verification",
-                           "goal_031_manual_gate":  "semantic_pack_composition_blueprint_verification"
+                           "goal_031_manual_gate":  "semantic_pack_composition_blueprint_verification",
+                           "goal_032_manual_gate":  "dynamic_semantic_feature_system_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -79,15 +80,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_031_semantic_pack_composition_blueprint",
-                                         "title":  "Semantic Pack Composition Blueprint",
+                                         "slice_id":  "goal_032_dynamic_semantic_feature_system",
+                                         "title":  "Dynamic Semantic Feature System And Influence Rule Kernel",
                                          "status":  "required_manual_gate",
-                                         "summary":  "Goal 031 records the user-handoff accepted Goal 030 gate, adds a deterministic semantic pack composition catalog, validator, planner and evidence writer under Design/SemanticPackComposition, composes frontier_survival, gothic_intrigue and caravan_trade blueprint plans through the same composer and Goal 030 registry/planner integration path, writes pack-catalog-summary.json, composition-matrix.json, three semantic-blueprint plans, cross-artifact-linkage-report.json and semantic-pack-composition-blueprint-report.md under .llmgc/procedural/goal-031-semantic-pack-composition-blueprint, proves cross-artifact links across world/biome/faction/NPC/quest/dialogue/economy/combat/settlement/event intent, rejects invalid/fake/leak cases causally, and leaves semantic_pack_composition_blueprint_verification required. Goal 032 is not started.",
-                                         "scenario_id":  "goal-031-semantic-pack-composition-blueprint",
+                                         "summary":  "Goal 032 records the user handoff as technical completion of Goal 031, not a passed Goal 031 manual gate, then adds a deterministic dynamic semantic feature system under Design/DynamicSemanticFeatures. It models feature definitions, typed assignments, applicability, inheritance, typed influence rules, resolver traces, authoring schema records and compact evidence under .llmgc/procedural/goal-032-dynamic-semantic-feature-system for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It rejects duplicate/invalid/unknown/illegal/required-missing/conflict/inheritance/influence/overconstrained/fake/leak cases causally and leaves dynamic_semantic_feature_system_verification required.",
+                                         "scenario_id":  "goal-032-dynamic-semantic-feature-system",
                                         "checks":  [
-                                                       "Goal 031 focused SemanticPackComposition/Goal031 filter: 10/10 passed before state handoff update.",
-                                                       "Goal 031 focused product smoke class filter writes compact artifacts under .llmgc/procedural/goal-031-semantic-pack-composition-blueprint.",
-                                                       "Goal 031 compact report records accepted=false, manualGate=semantic_pack_composition_blueprint_verification, blueprint proof, cross-artifact linkage and invalid/fake/leak matrix evidence."
+                                                       "Goal 032 focused DynamicSemanticFeature filter: 11/11 passed before state handoff update.",
+                                                       "Goal 032 exact product smoke class filter writes compact artifacts under .llmgc/procedural/goal-032-dynamic-semantic-feature-system.",
+                                                       "Goal 032 compact report records accepted=false, manualGate=dynamic_semantic_feature_system_verification, feature model, applicability, inheritance, influence, resolver, authoring schema and invalid/fake/leak matrix evidence."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -347,7 +348,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "semantic_pack_composition_blueprint_verification"
+                                          "dynamic_semantic_feature_system_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -368,21 +369,21 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "semantic_pack_composition_blueprint_verification",
-    "recommended_next_work_item_title":  "Semantic pack composition blueprint verification review.",
-    "recommended_next_task_file":  "docs/GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT_SPEC.md",
+    "recommended_next_work_item":  "dynamic_semantic_feature_system_verification",
+    "recommended_next_work_item_title":  "Dynamic semantic feature system verification review.",
+    "recommended_next_task_file":  "docs/GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM_SPEC.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 031 semantic pack composition blueprint review",
-                                               "Goal 032 remains future work only after Goal 031 gate acceptance"
+                                               "Goal 032 dynamic semantic feature system review",
+                                               "Goal 033 remains future work until Goal 032 gate acceptance"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM.md",
+                                                   "docs/GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT_SPEC.md",
                                                    "docs/GOAL_030_SEMANTIC_ARTIFACT_CONTRACT_REGISTRY_SPEC.md",
-                                                   "docs/EXTERNAL_SCOUTING_GOAL_030_SEMANTIC_ARTIFACT_REGISTRY.md",
-                                                   "docs/GOAL_029_MODULAR_GENERATOR_KERNEL_PARALLEL_READINESS.md",
-                                                   "docs/MODULE_CONTRACT_MANIFEST_V1.md",
                                                    "docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md",
                                                    "docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md",
                                                    "docs/MODULAR_CONTRACT_GOAL_POLICY.md",
@@ -463,7 +464,7 @@
                                "Modular generator kernel module manifests, product-smoke scenario manifests, compatibility matrix, absence behavior and verification tier sidecars",
                                "Semantic pack composition catalog summary, composition matrix, blueprint plans and cross-artifact linkage sidecars"
                            ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 031 stop at semantic_pack_composition_blueprint_verification required and do not start Goal 032 without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 032 stop at dynamic_semantic_feature_system_verification required and do not start Goal 033 without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -1024,7 +1025,22 @@
                                                                                             "Final report accepted=false and manualGate=semantic_pack_composition_blueprint_verification",
                                                                                             "Goal 032 is not started"
                                                                                         ],
-                                                                    "next_action":  "review_semantic_pack_composition_blueprint_before_marking_gate_passed"
+                                                                    "next_action":  "goal_032_started_by_user_handoff_after_technical_completion_without_marking_goal031_passed"
+                                                          },
+    "dynamic_semantic_feature_system_verification":  {
+                                                                    "status":  "required",
+                                                                    "evidence_source":  "goal_032_dynamic_semantic_feature_system",
+                                                                    "observed_result":  [
+                                                                                            "Design/DynamicSemanticFeatures defines BCL-only feature definitions, typed assignments, applicability, inheritance, typed influence rules, resolver traces, authoring schema records, validator diagnostics and evidence writer",
+                                                                                            "Feature scopes cover world, kingdom, region, biome, settlement, faction, species, archetype, npc, item, resource, quest, dialogue, event, magic, combat and relationship",
+                                                                                            "Value kinds cover flag, number, enum, weighted_tag, relation, text_key and list without arbitrary expression-string evaluation",
+                                                                                            "Seed scenarios cover frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms; metamodule_kingdoms includes multiple kingdoms/regions plus species/archetype-specific feature families",
+                                                                                            ".llmgc/procedural/goal-032-dynamic-semantic-feature-system contains feature catalog summary, influence rule summary, authoring schema matrix, four resolved state files, invalid matrix and markdown report",
+                                                                                            "Invalid/fake/leak matrix rejects duplicate feature ids, invalid ids, unknown feature refs, unknown scopes, bad value shapes, illegal scopes, required missing features, conflicts, unknown/circular inheritance, unknown/circular/self-feeding influence, overconstrained output, fake selected targets and boundary leakage; optional missing is valid and traceable",
+                                                                                            "Final report accepted=false and manualGate=dynamic_semantic_feature_system_verification",
+                                                                                            "Goal 033 is not started"
+                                                                                        ],
+                                                                    "next_action":  "review_dynamic_semantic_feature_system_before_marking_gate_passed"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

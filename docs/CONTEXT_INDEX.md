@@ -95,6 +95,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_030_SEMANTIC_ARTIFACT_REGISTRY.md` | Goal 030 scouting: BCL-only registry/planner, no external graph/RDF/WFC/dialogue/ECS dependencies. |
 | `docs/GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT_SPEC.md` | Goal 031 task/spec: semantic pack composition blueprint, deterministic semantic fact/relation merge, cross-artifact blueprint plans, compact evidence under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and final stop at `semantic_pack_composition_blueprint_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT.md` | Goal 031 scouting: BCL-only semantic pack composition, no RDF/graph/LLM/dialogue/runtime/ECS dependency adoption. |
+| `docs/GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM_SPEC.md` | Goal 032 task/spec: dynamic semantic feature system and influence rule kernel, deterministic applicability/inheritance/resolution, authoring schema records, compact evidence under `.llmgc/procedural/goal-032-dynamic-semantic-feature-system/` and final stop at `dynamic_semantic_feature_system_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM.md` | Goal 032 scouting: BCL-only feature/influence kernel, no external rules/expression engine dependency adoption. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -139,16 +141,16 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-semantic_pack_composition_blueprint_verification
+dynamic_semantic_feature_system_verification
 ```
 
-Goal 031 semantic pack composition blueprint has been produced for review. It adds the deterministic `Design/SemanticPackComposition` catalog/validator/composer/evidence seam, reuses Goal 030 `Design/SemanticArtifactContracts` registry/planner integration, and writes compact artifacts under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/`. The gate remains `semantic_pack_composition_blueprint_verification required`.
+Goal 032 dynamic semantic feature system has been produced for review. It adds the deterministic `Design/DynamicSemanticFeatures` model/catalog/validator/resolver/authoring-schema/evidence seam, keeps Goal 031 produced-for-review without marking it passed, and writes compact artifacts under `.llmgc/procedural/goal-032-dynamic-semantic-feature-system/`. The active gate remains `dynamic_semantic_feature_system_verification required`.
 
 Allowed next sequence:
 
-1. Review Goal 031 evidence in `docs/GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT_SPEC.md`, `docs/EXTERNAL_SCOUTING_GOAL_031_SEMANTIC_PACK_COMPOSITION_BLUEPRINT.md`, `src/LLMGameCreator.Application/Design/SemanticPackComposition/`, tests and `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/`.
-2. Confirm the compact report contains `semantic_pack_composition_blueprint_verification required` and keeps `accepted=false`.
-3. Goal 032 remains not started until `semantic_pack_composition_blueprint_verification` is accepted.
+1. Review Goal 032 evidence in `docs/GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM_SPEC.md`, `docs/EXTERNAL_SCOUTING_GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM.md`, `src/LLMGameCreator.Application/Design/DynamicSemanticFeatures/`, tests and `.llmgc/procedural/goal-032-dynamic-semantic-feature-system/`.
+2. Confirm the compact report contains `dynamic_semantic_feature_system_verification required` and keeps `accepted=false`.
+3. Goal 033 remains not started until `dynamic_semantic_feature_system_verification` is accepted.
 
 Kill criterion:
 

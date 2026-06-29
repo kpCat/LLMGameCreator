@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "dynamic_semantic_invalid_matrix_v1",
+  "scenarioCount": 17,
+  "matchedExpectationCount": 17,
+  "rejectedCount": 16,
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "circular_influence",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "circular influence",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.influence.circular",
+          "target": "rule/cycle_a<->rule/cycle_b",
+          "message": "Influence rule feature dependencies must not form a circular feedback pair."
+        }
+      ]
+    },
+    {
+      "scenarioId": "circular_inheritance",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "circular inheritance",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.inheritance.circular",
+          "target": "world/frontier->npc/trail_medic->world/frontier",
+          "message": "Target inheritance graph must be acyclic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_feature_id",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "duplicate feature id",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.feature_id.duplicate",
+          "target": "world.theme",
+          "message": "Feature ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_selected_feature_id",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "fake selected feature id",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.target.unknown",
+          "target": "target/fake_selected",
+          "message": "Resolve target id is not present in the context."
+        }
+      ]
+    },
+    {
+      "scenarioId": "feature_conflict",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "feature conflict",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.feature.conflict",
+          "target": "npc/trail_medic:npc.trust->npc.hunger",
+          "message": "Resolved features conflict."
+        }
+      ]
+    },
+    {
+      "scenarioId": "forbidden_leakage_terms",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "forbidden Runtime/UI/Unity/provider/LLM/RAG/Lua/GamePackage schema leakage",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.boundary.leakage",
+          "target": "world.theme",
+          "message": "Feature definition must not imply Runtime/UI/Unity/provider/LLM/RAG/Lua/GamePackage schema work."
+        }
+      ]
+    },
+    {
+      "scenarioId": "illegal_assignment_scope",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "illegal assignment for target scope",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.assignment.scope_illegal",
+          "target": "npc/trail_medic:quest.motive",
+          "message": "Feature assignment is illegal for the target scope."
+        },
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.value_shape.invalid",
+          "target": "npc/trail_medic:quest.motive",
+          "message": "Feature value shape is invalid for the declared kind or bounds."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_empty_id",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "invalid/empty id",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.feature_id.invalid",
+          "target": "",
+          "message": "Feature id must be stable and lowercase."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_value_shape",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "invalid value shape",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.value_shape.invalid",
+          "target": "npc/trail_medic:npc.hunger",
+          "message": "Value kind must match the feature definition."
+        }
+      ]
+    },
+    {
+      "scenarioId": "optional_feature_missing_is_traceable",
+      "expectedValid": true,
+      "actualValid": true,
+      "mutatedEvidenceKind": "optional feature missing is not an error",
+      "diagnostics": []
+    },
+    {
+      "scenarioId": "overconstrained_output",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "overconstrained output",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.influence.self_feeding",
+          "target": "rule/block_hunger",
+          "message": "Influence rule must not repeatedly feed the same feature it depends on."
+        },
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.output.overconstrained",
+          "target": "dialogue/medic_warning:npc.hunger",
+          "message": "Influence blocked a feature that already had a value."
+        },
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.output.overconstrained",
+          "target": "npc/trail_medic:npc.hunger",
+          "message": "Influence blocked a feature that already had a value."
+        }
+      ]
+    },
+    {
+      "scenarioId": "required_feature_missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "required feature missing",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.required_feature.missing",
+          "target": "quest/medicine_run:quest.motive",
+          "message": "Required feature is applicable but missing."
+        }
+      ]
+    },
+    {
+      "scenarioId": "self_feeding_influence",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "self feeding influence",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.influence.self_feeding",
+          "target": "rule/self_feed",
+          "message": "Influence rule must not repeatedly feed the same feature it depends on."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_feature_reference",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "unknown feature reference",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.feature_ref.unknown",
+          "target": "fake.feature",
+          "message": "Assignment feature id must reference a known feature definition."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_influence_target",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "unknown influence target",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.influence.target.unknown",
+          "target": "rule/fake_target:fake.feature",
+          "message": "Influence effect feature target must be known."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_inheritance_source",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "unknown inheritance source",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.inheritance.source.unknown",
+          "target": "npc/trail_medic->target/fake_parent",
+          "message": "Hierarchy parent must reference a known target."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_target_scope",
+      "expectedValid": false,
+      "actualValid": false,
+      "mutatedEvidenceKind": "unknown target scope",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.assignment.scope_mismatch",
+          "target": "npc/trail_medic:npc.hunger",
+          "message": "Assignment scope must match the target node scope."
+        },
+        {
+          "severity": "error",
+          "code": "dynamic_semantic.scope.unknown",
+          "target": "npc/trail_medic",
+          "message": "Target scope is not part of the Goal 032 scope vocabulary."
+        }
+      ]
+    }
+  ]
+}

@@ -119,8 +119,8 @@ public sealed class ModularGeneratorKernelReadinessTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_031_semantic_pack_composition_blueprint", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal("semantic_pack_composition_blueprint_verification", root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_032_dynamic_semantic_feature_system", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("dynamic_semantic_feature_system_verification", root.GetProperty("gate_status").GetString());
         Assert.Equal("passed_by_user_prompt_before_goal_029", root.GetProperty("package_assembly_combat_progression_expansion_verification").GetProperty("status").GetString());
         Assert.Equal("passed_by_user_handoff_before_goal_030", root.GetProperty(ModularGeneratorKernelReadinessService.FinalGate).GetProperty("status").GetString());
     }

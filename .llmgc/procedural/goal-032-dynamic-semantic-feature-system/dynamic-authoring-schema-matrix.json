@@ -1,0 +1,2681 @@
+{
+  "schemaVersion": "dynamic_semantic_authoring_schema_matrix_v1",
+  "fields": [
+    {
+      "featureGroup": "archetype",
+      "fieldKind": "enum",
+      "labelKey": "archetype.archetype.forbidden_affinity",
+      "featureId": "archetype.forbidden_affinity",
+      "optionList": [
+        "iron",
+        "none",
+        "sun",
+        "void"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "archetype",
+      "fieldKind": "enum",
+      "labelKey": "npc.archetype.forbidden_affinity",
+      "featureId": "archetype.forbidden_affinity",
+      "optionList": [
+        "iron",
+        "none",
+        "sun",
+        "void"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "void",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "archetype",
+      "fieldKind": "enum",
+      "labelKey": "quest.archetype.forbidden_affinity",
+      "featureId": "archetype.forbidden_affinity",
+      "optionList": [
+        "iron",
+        "none",
+        "sun",
+        "void"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "void",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "dialogue",
+      "fieldKind": "list",
+      "labelKey": "dialogue.dialogue.intent",
+      "featureId": "dialogue.intent",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "dialogue",
+      "fieldKind": "list",
+      "labelKey": "dialogue.dialogue.intent",
+      "featureId": "dialogue.intent",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "dialogue",
+      "fieldKind": "list",
+      "labelKey": "dialogue.dialogue.intent",
+      "featureId": "dialogue.intent",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "dialogue",
+      "fieldKind": "text_key",
+      "labelKey": "dialogue.dialogue.text_key_hint",
+      "featureId": "dialogue.text_key_hint",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "dialogue",
+      "fieldKind": "text_key",
+      "labelKey": "dialogue.dialogue.text_key_hint",
+      "featureId": "dialogue.text_key_hint",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "dialogue",
+      "fieldKind": "text_key",
+      "labelKey": "dialogue.dialogue.text_key_hint",
+      "featureId": "dialogue.text_key_hint",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "economy",
+      "fieldKind": "weighted_tag",
+      "labelKey": "dialogue.settlement.market_need",
+      "featureId": "settlement.market_need",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "weighted_tag",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": null,
+        "weightedTags": [
+          {
+            "tag": "credit",
+            "weight": 0.6
+          },
+          {
+            "tag": "spice",
+            "weight": 0.7
+          }
+        ],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "economy",
+      "fieldKind": "weighted_tag",
+      "labelKey": "dialogue.settlement.market_need",
+      "featureId": "settlement.market_need",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "weighted_tag",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": null,
+        "weightedTags": [
+          {
+            "tag": "ammo",
+            "weight": 0.35
+          },
+          {
+            "tag": "medicine",
+            "weight": 0.8
+          }
+        ],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "economy",
+      "fieldKind": "weighted_tag",
+      "labelKey": "npc.settlement.market_need",
+      "featureId": "settlement.market_need",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "weighted_tag",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": null,
+        "weightedTags": [
+          {
+            "tag": "ammo",
+            "weight": 0.35
+          },
+          {
+            "tag": "medicine",
+            "weight": 0.8
+          }
+        ],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "economy",
+      "fieldKind": "weighted_tag",
+      "labelKey": "quest.settlement.market_need",
+      "featureId": "settlement.market_need",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "weighted_tag",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": null,
+        "weightedTags": [
+          {
+            "tag": "credit",
+            "weight": 0.6
+          },
+          {
+            "tag": "spice",
+            "weight": 0.7
+          }
+        ],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "economy",
+      "fieldKind": "weighted_tag",
+      "labelKey": "settlement.settlement.market_need",
+      "featureId": "settlement.market_need",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "economy",
+      "fieldKind": "weighted_tag",
+      "labelKey": "settlement.settlement.market_need",
+      "featureId": "settlement.market_need",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "event",
+      "fieldKind": "list",
+      "labelKey": "event.event.intent",
+      "featureId": "event.intent",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "event",
+      "fieldKind": "flag",
+      "labelKey": "event.event.is_volatile",
+      "featureId": "event.is_volatile",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "flag",
+        "flagValue": false,
+        "numberValue": null,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "relation",
+      "labelKey": "dialogue.npc.faction_relation",
+      "featureId": "npc.faction_relation",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "relation",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": {
+          "relationKind": "member_of",
+          "targetScope": "faction",
+          "targetId": "faction/old_house",
+          "strength": 0.9
+        },
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "number",
+      "labelKey": "dialogue.npc.hunger",
+      "featureId": "npc.hunger",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 8,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "relation",
+      "labelKey": "npc.npc.faction_relation",
+      "featureId": "npc.faction_relation",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "relation",
+      "labelKey": "npc.npc.faction_relation",
+      "featureId": "npc.faction_relation",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "relation",
+      "labelKey": "npc.npc.faction_relation",
+      "featureId": "npc.faction_relation",
+      "optionList": [],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "number",
+      "labelKey": "npc.npc.hunger",
+      "featureId": "npc.hunger",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "number",
+      "labelKey": "npc.npc.hunger",
+      "featureId": "npc.hunger",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "number",
+      "labelKey": "npc.npc.hunger",
+      "featureId": "npc.hunger",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "enum",
+      "labelKey": "npc.npc.mood",
+      "featureId": "npc.mood",
+      "optionList": [
+        "calm",
+        "hopeful",
+        "hungry",
+        "pressured",
+        "suspicious"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "enum",
+      "labelKey": "npc.npc.mood",
+      "featureId": "npc.mood",
+      "optionList": [
+        "calm",
+        "hopeful",
+        "hungry",
+        "pressured",
+        "suspicious"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "enum",
+      "labelKey": "npc.npc.mood",
+      "featureId": "npc.mood",
+      "optionList": [
+        "calm",
+        "hopeful",
+        "hungry",
+        "pressured",
+        "suspicious"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "number",
+      "labelKey": "npc.npc.trust",
+      "featureId": "npc.trust",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 5,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "number",
+      "labelKey": "npc.npc.trust",
+      "featureId": "npc.trust",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 5,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "npc",
+      "fieldKind": "number",
+      "labelKey": "npc.npc.trust",
+      "featureId": "npc.trust",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 5,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "politics",
+      "fieldKind": "number",
+      "labelKey": "archetype.kingdom.pressure",
+      "featureId": "kingdom.pressure",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 4,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "politics",
+      "fieldKind": "number",
+      "labelKey": "dialogue.kingdom.pressure",
+      "featureId": "kingdom.pressure",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 6,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "politics",
+      "fieldKind": "number",
+      "labelKey": "event.kingdom.pressure",
+      "featureId": "kingdom.pressure",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 8,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "politics",
+      "fieldKind": "number",
+      "labelKey": "npc.kingdom.pressure",
+      "featureId": "kingdom.pressure",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 6,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "politics",
+      "fieldKind": "number",
+      "labelKey": "npc.kingdom.pressure",
+      "featureId": "kingdom.pressure",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 4,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "politics",
+      "fieldKind": "number",
+      "labelKey": "quest.kingdom.pressure",
+      "featureId": "kingdom.pressure",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 6,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "politics",
+      "fieldKind": "number",
+      "labelKey": "quest.kingdom.pressure",
+      "featureId": "kingdom.pressure",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 4,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "quest",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.quest.motive",
+      "featureId": "quest.motive",
+      "optionList": [
+        "contract",
+        "kingdom_pressure",
+        "secret",
+        "survive"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "contract",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "quest",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.quest.motive",
+      "featureId": "quest.motive",
+      "optionList": [
+        "contract",
+        "kingdom_pressure",
+        "secret",
+        "survive"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "survive",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "quest",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.quest.motive",
+      "featureId": "quest.motive",
+      "optionList": [
+        "contract",
+        "kingdom_pressure",
+        "secret",
+        "survive"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "secret",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "quest",
+      "fieldKind": "enum",
+      "labelKey": "quest.quest.motive",
+      "featureId": "quest.motive",
+      "optionList": [
+        "contract",
+        "kingdom_pressure",
+        "secret",
+        "survive"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "quest",
+      "fieldKind": "enum",
+      "labelKey": "quest.quest.motive",
+      "featureId": "quest.motive",
+      "optionList": [
+        "contract",
+        "kingdom_pressure",
+        "secret",
+        "survive"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "quest",
+      "fieldKind": "enum",
+      "labelKey": "quest.quest.motive",
+      "featureId": "quest.motive",
+      "optionList": [
+        "contract",
+        "kingdom_pressure",
+        "secret",
+        "survive"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "quest",
+      "fieldKind": "enum",
+      "labelKey": "quest.quest.motive",
+      "featureId": "quest.motive",
+      "optionList": [
+        "contract",
+        "kingdom_pressure",
+        "secret",
+        "survive"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "social",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.faction.reputation_axis",
+      "featureId": "faction.reputation_axis",
+      "optionList": [
+        "credit",
+        "oath",
+        "suspicion",
+        "trust"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "suspicion",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "social",
+      "fieldKind": "enum",
+      "labelKey": "npc.faction.reputation_axis",
+      "featureId": "faction.reputation_axis",
+      "optionList": [
+        "credit",
+        "oath",
+        "suspicion",
+        "trust"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "suspicion",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "social",
+      "fieldKind": "enum",
+      "labelKey": "quest.faction.reputation_axis",
+      "featureId": "faction.reputation_axis",
+      "optionList": [
+        "credit",
+        "oath",
+        "suspicion",
+        "trust"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "suspicion",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "archetype.species.mana_resonance",
+      "featureId": "species.mana_resonance",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 7,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "archetype.species.module_capacity",
+      "featureId": "species.module_capacity",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 12,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 3,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "npc.species.mana_resonance",
+      "featureId": "species.mana_resonance",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 7,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "npc.species.module_capacity",
+      "featureId": "species.module_capacity",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 12,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 3,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "quest.species.mana_resonance",
+      "featureId": "species.mana_resonance",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 7,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "quest.species.module_capacity",
+      "featureId": "species.module_capacity",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 12,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 3,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "species.species.mana_resonance",
+      "featureId": "species.mana_resonance",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 10,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "species",
+      "fieldKind": "number",
+      "labelKey": "species.species.module_capacity",
+      "featureId": "species.module_capacity",
+      "optionList": [],
+      "minValue": 0,
+      "maxValue": 12,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": null,
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "number",
+        "flagValue": null,
+        "numberValue": 0,
+        "enumValue": null,
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "respect_numeric_bounds",
+        "show_inherited_value_before_override"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "archetype.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "metamodule",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.biome.hazard",
+      "featureId": "biome.hazard",
+      "optionList": [
+        "beasts",
+        "cold",
+        "desert",
+        "fog",
+        "mana_storm"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "beasts",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.region.route_pressure",
+      "featureId": "region.route_pressure",
+      "optionList": [
+        "court_watch",
+        "none",
+        "predators",
+        "siege",
+        "toll_risk"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "toll_risk",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "none",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.region.route_pressure",
+      "featureId": "region.route_pressure",
+      "optionList": [
+        "court_watch",
+        "none",
+        "predators",
+        "siege",
+        "toll_risk"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "predators",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "none",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "caravan",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "frontier",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "dialogue.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "gothic",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "event.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "metamodule",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "npc.biome.hazard",
+      "featureId": "biome.hazard",
+      "optionList": [
+        "beasts",
+        "cold",
+        "desert",
+        "fog",
+        "mana_storm"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "beasts",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "npc.region.route_pressure",
+      "featureId": "region.route_pressure",
+      "optionList": [
+        "court_watch",
+        "none",
+        "predators",
+        "siege",
+        "toll_risk"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "predators",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "none",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "npc.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "frontier",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "npc.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "gothic",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "npc.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "metamodule",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "quest.region.route_pressure",
+      "featureId": "region.route_pressure",
+      "optionList": [
+        "court_watch",
+        "none",
+        "predators",
+        "siege",
+        "toll_risk"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "toll_risk",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "none",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "quest.region.route_pressure",
+      "featureId": "region.route_pressure",
+      "optionList": [
+        "court_watch",
+        "none",
+        "predators",
+        "siege",
+        "toll_risk"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "predators",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "none",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "quest.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "caravan",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "quest.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "frontier",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "quest.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "gothic",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "quest.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "metamodule",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "settlement.biome.hazard",
+      "featureId": "biome.hazard",
+      "optionList": [
+        "beasts",
+        "cold",
+        "desert",
+        "fog",
+        "mana_storm"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "beasts",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "settlement.region.route_pressure",
+      "featureId": "region.route_pressure",
+      "optionList": [
+        "court_watch",
+        "none",
+        "predators",
+        "siege",
+        "toll_risk"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "toll_risk",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "none",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "settlement.region.route_pressure",
+      "featureId": "region.route_pressure",
+      "optionList": [
+        "court_watch",
+        "none",
+        "predators",
+        "siege",
+        "toll_risk"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "optional",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "predators",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "none",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "settlement.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "caravan",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "settlement.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "frontier",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    },
+    {
+      "featureGroup": "world",
+      "fieldKind": "enum",
+      "labelKey": "species.world.theme",
+      "featureId": "world.theme",
+      "optionList": [
+        "caravan",
+        "frontier",
+        "gothic",
+        "metamodule"
+      ],
+      "minValue": null,
+      "maxValue": null,
+      "requirementStatus": "required",
+      "applicable": true,
+      "inheritedValue": {
+        "valueKind": "enum",
+        "flagValue": null,
+        "numberValue": null,
+        "enumValue": "metamodule",
+        "weightedTags": [],
+        "relationValue": null,
+        "textKeyValue": null,
+        "listValues": []
+      },
+      "canOverride": true,
+      "suggestedDefault": null,
+      "diagnosticLinks": [],
+      "safeEditorHints": [
+        "application_layer_contract_only",
+        "no_expression_evaluation",
+        "show_inherited_value_before_override",
+        "use_declared_options"
+      ]
+    }
+  ]
+}

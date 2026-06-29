@@ -245,7 +245,8 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
                 "goal_028_package_assembly_expansion_4_combat_progression",
                 "goal_029_modular_generator_kernel_parallel_readiness",
                 "goal_030_semantic_artifact_contract_registry",
-                "goal_031_semantic_pack_composition_blueprint"
+                "goal_031_semantic_pack_composition_blueprint",
+                "goal_032_dynamic_semantic_feature_system"
             });
     }
 
