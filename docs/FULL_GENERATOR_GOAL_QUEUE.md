@@ -20,12 +20,13 @@ package_assembly_world_entities_expansion_verification passed
 package_assembly_dialogue_quests_expansion_verification passed
 package_assembly_items_economy_crafting_expansion_verification passed
 package_assembly_combat_progression_expansion_verification passed
+modular_generator_kernel_parallel_readiness_verification passed
 ```
 
 Produced for review:
 
 ```text
-modular_generator_kernel_parallel_readiness_verification required
+semantic_artifact_contract_registry_verification required
 ```
 
 Current capabilities:
@@ -52,13 +53,14 @@ Current capabilities:
 - package assembly items/economy/crafting mapping contract, real/synthetic consumer proof and compact Goal 027 artifacts;
 - package assembly combat/progression mapping contract, real/synthetic consumer proof and compact Goal 028 artifacts;
 - modular generator kernel readiness contracts, static package assembly module registry proof, product-smoke scenario manifests and compact Goal 029 artifacts;
+- semantic artifact contract registry, semantic pack compatibility planner, semantic expansion planning seam and compact Goal 030 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027 and Goal 028 have been accepted by user prompt. Goal 029 produced modular generator kernel and parallel readiness evidence and now waits at its manual verification gate.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028 and Goal 029 have been accepted by user prompt or handoff. Goal 030 produced semantic artifact contract registry evidence and now waits at its manual verification gate.
 
-Post-adoption MAIN evidence restoration after the controlled lane-a/lane-b/lane-c/lane-d adoption sweep restored stale accepted evidence only: Goal 011 fixture bytes now satisfy the existing LF-only media marker contract, missing `frontier_survival` build/log evidence was restored from the existing review package and repo-local player smoke, the historical failing acceptance group passed 59/59, candidate focused filters remained green, and `check-all.ps1` passed 915/915 in `.devflow/runs/20260629_041537-check-all`. This does not start Goal 030 or S234 and does not mark the Goal 029 gate passed.
+Goal 030 compact evidence lives under `.llmgc/procedural/goal-030-semantic-artifact-contract-registry/` and keeps `accepted=false` with `semantic_artifact_contract_registry_verification required`. This does not start Goal 031.
 
 ## Queue Rules
 
@@ -320,7 +322,7 @@ Create real technical readiness for modular and eventually parallel development:
 
 Status:
 
-Produced for review. The gate remains `modular_generator_kernel_parallel_readiness_verification required`, not passed. Goal 030 and S234 are not started.
+Accepted by user handoff before Goal 030.
 
 ## LLM And Lua Controlled Generation Track
 
@@ -329,6 +331,10 @@ Produced for review. The gate remains `modular_generator_kernel_parallel_readine
 Purpose:
 
 Stabilize artifact contract registry for profile, world, entity, quest, dialogue, item/economy, combat and UI/export IR artifacts.
+
+Status:
+
+Produced for review. The gate remains `semantic_artifact_contract_registry_verification required`, not passed. Goal 031 is not started.
 
 ### Goal 031: Strict LLM Draft Artifact Loop
 
@@ -467,7 +473,7 @@ Manual review required.
 ## Current Active Gate
 
 ```text
-modular_generator_kernel_parallel_readiness_verification
+semantic_artifact_contract_registry_verification
 ```
 
 Status:

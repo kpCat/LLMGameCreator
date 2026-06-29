@@ -1,0 +1,309 @@
+{
+  "schemaVersion": "semantic_artifact_compatibility_plan_v1",
+  "profileId": "gothic_intrigue",
+  "selectedContractIds": [
+    "capability_bundle_pipeline_inputs_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "faction_reputation_social_relation_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "world_topology_region_route_graph_v1"
+  ],
+  "selectedSemanticPackIds": [
+    "semantic_pack/core_generator_spine",
+    "semantic_pack/gothic_intrigue"
+  ],
+  "dependencyOrder": [
+    "capability_bundle_pipeline_inputs_v1",
+    "world_topology_region_route_graph_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "combat_progression_ability_v1",
+    "faction_reputation_social_relation_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "quest_graph_objective_reward_pattern_v1"
+  ],
+  "missingDependencies": [],
+  "conflicts": [
+    {
+      "contractId": "biome_weather_hazard_event_hints_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "biome,event"
+    },
+    {
+      "contractId": "game_profile_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "style"
+    },
+    {
+      "contractId": "item_resource_recipe_loot_economy_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "economy"
+    },
+    {
+      "contractId": "presentation_export_ir_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "presentation"
+    },
+    {
+      "contractId": "semantic_pack_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "settlement"
+    },
+    {
+      "contractId": "settlement_building_landmark_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "settlement"
+    }
+  ],
+  "blockedOrFutureRequiredItems": [],
+  "semanticExpansionSlots": [
+    {
+      "slotId": "gothic_intrigue:core_generator_spine:combat_progression_ability_v1:combat_progression_ability_hint",
+      "slotFamily": "combat_progression_ability_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor",
+        "combat",
+        "progression"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:core_generator_spine:dialogue_string_table_localization_hint_v1:dialogue_tone_localization_string_table_hint",
+      "slotFamily": "dialogue_tone_localization_string_table_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor",
+        "dialogue",
+        "tone"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:core_generator_spine:entity_archetype_npc_actor_profile_v1:npc_actor_archetype_variation",
+      "slotFamily": "npc_actor_archetype_variation",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor",
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:core_generator_spine:faction_reputation_social_relation_v1:faction_reputation_relation",
+      "slotFamily": "faction_reputation_relation",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "faction_reputation_social_relation_v1",
+      "targetArtifactKind": "faction_relation",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:core_generator_spine:quest_graph_objective_reward_pattern_v1:quest_motive_objective_pattern",
+      "slotFamily": "quest_motive_objective_pattern",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "dialogue",
+        "item",
+        "quest"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:gothic_intrigue:combat_progression_ability_v1:combat_progression_ability_hint",
+      "slotFamily": "combat_progression_ability_hint",
+      "sourceSemanticPackId": "semantic_pack/gothic_intrigue",
+      "targetArtifactContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor"
+      ],
+      "semanticTagsUsed": [
+        "gothic",
+        "intrigue",
+        "reputation",
+        "secrets"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:gothic_intrigue:dialogue_string_table_localization_hint_v1:dialogue_tone_localization_string_table_hint",
+      "slotFamily": "dialogue_tone_localization_string_table_hint",
+      "sourceSemanticPackId": "semantic_pack/gothic_intrigue",
+      "targetArtifactContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor",
+        "dialogue",
+        "tone"
+      ],
+      "semanticTagsUsed": [
+        "gothic",
+        "intrigue",
+        "reputation",
+        "secrets"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:gothic_intrigue:entity_archetype_npc_actor_profile_v1:npc_actor_archetype_variation",
+      "slotFamily": "npc_actor_archetype_variation",
+      "sourceSemanticPackId": "semantic_pack/gothic_intrigue",
+      "targetArtifactContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor"
+      ],
+      "semanticTagsUsed": [
+        "gothic",
+        "intrigue",
+        "reputation",
+        "secrets"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:gothic_intrigue:faction_reputation_social_relation_v1:faction_reputation_relation",
+      "slotFamily": "faction_reputation_relation",
+      "sourceSemanticPackId": "semantic_pack/gothic_intrigue",
+      "targetArtifactContractId": "faction_reputation_social_relation_v1",
+      "targetArtifactKind": "faction_relation",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "actor",
+        "faction",
+        "social"
+      ],
+      "semanticTagsUsed": [
+        "gothic",
+        "intrigue",
+        "reputation",
+        "secrets"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "gothic_intrigue:gothic_intrigue:quest_graph_objective_reward_pattern_v1:quest_motive_objective_pattern",
+      "slotFamily": "quest_motive_objective_pattern",
+      "sourceSemanticPackId": "semantic_pack/gothic_intrigue",
+      "targetArtifactContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "profileId": "gothic_intrigue",
+      "semanticScopesUsed": [
+        "dialogue",
+        "item",
+        "quest"
+      ],
+      "semanticTagsUsed": [
+        "gothic",
+        "intrigue",
+        "reputation",
+        "secrets"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    }
+  ],
+  "stableSummary": "gothic_intrigue|packs=2|contracts=7|slots=10|blocked=0|missing=0",
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "biome_weather_hazard_event_hints_v1",
+      "message": "Missing semantic scopes: biome,event."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "game_profile_v1",
+      "message": "Missing semantic scopes: style."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "item_resource_recipe_loot_economy_v1",
+      "message": "Missing semantic scopes: economy."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "presentation_export_ir_v1",
+      "message": "Missing semantic scopes: presentation."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "semantic_pack_v1",
+      "message": "Missing semantic scopes: settlement."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "settlement_building_landmark_v1",
+      "message": "Missing semantic scopes: settlement."
+    }
+  ]
+}

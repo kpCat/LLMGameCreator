@@ -1,0 +1,327 @@
+{
+  "schemaVersion": "semantic_artifact_compatibility_plan_v1",
+  "profileId": "caravan_trade",
+  "selectedContractIds": [
+    "capability_bundle_pipeline_inputs_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "item_resource_recipe_loot_economy_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "semantic_pack_v1",
+    "world_topology_region_route_graph_v1"
+  ],
+  "selectedSemanticPackIds": [
+    "semantic_pack/caravan_trade",
+    "semantic_pack/core_generator_spine"
+  ],
+  "dependencyOrder": [
+    "semantic_pack_v1",
+    "capability_bundle_pipeline_inputs_v1",
+    "world_topology_region_route_graph_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "item_resource_recipe_loot_economy_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "settlement_building_landmark_v1"
+  ],
+  "missingDependencies": [],
+  "conflicts": [
+    {
+      "contractId": "biome_weather_hazard_event_hints_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "biome,event"
+    },
+    {
+      "contractId": "faction_reputation_social_relation_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "social"
+    },
+    {
+      "contractId": "game_profile_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "style"
+    },
+    {
+      "contractId": "presentation_export_ir_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "presentation"
+    }
+  ],
+  "blockedOrFutureRequiredItems": [
+    {
+      "contractId": "settlement_building_landmark_v1",
+      "status": "future_required",
+      "reason": "not_ready_for_goal_030"
+    }
+  ],
+  "semanticExpansionSlots": [
+    {
+      "slotId": "caravan_trade:core_generator_spine:combat_progression_ability_v1:combat_progression_ability_hint",
+      "slotFamily": "combat_progression_ability_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "actor",
+        "combat",
+        "progression"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:core_generator_spine:dialogue_string_table_localization_hint_v1:dialogue_tone_localization_string_table_hint",
+      "slotFamily": "dialogue_tone_localization_string_table_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "actor",
+        "dialogue",
+        "tone"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:core_generator_spine:entity_archetype_npc_actor_profile_v1:npc_actor_archetype_variation",
+      "slotFamily": "npc_actor_archetype_variation",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "actor",
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:core_generator_spine:item_resource_recipe_loot_economy_v1:item_resource_recipe_loot_hint",
+      "slotFamily": "item_resource_recipe_loot_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "item_resource_recipe_loot_economy_v1",
+      "targetArtifactKind": "item_economy",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "item"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:core_generator_spine:quest_graph_objective_reward_pattern_v1:quest_motive_objective_pattern",
+      "slotFamily": "quest_motive_objective_pattern",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "dialogue",
+        "item",
+        "quest"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:caravan_trade:dialogue_string_table_localization_hint_v1:dialogue_tone_localization_string_table_hint",
+      "slotFamily": "dialogue_tone_localization_string_table_hint",
+      "sourceSemanticPackId": "semantic_pack/caravan_trade",
+      "targetArtifactContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "dialogue"
+      ],
+      "semanticTagsUsed": [
+        "caravan",
+        "market",
+        "route",
+        "trade"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:caravan_trade:entity_archetype_npc_actor_profile_v1:npc_actor_archetype_variation",
+      "slotFamily": "npc_actor_archetype_variation",
+      "sourceSemanticPackId": "semantic_pack/caravan_trade",
+      "targetArtifactContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "caravan",
+        "market",
+        "route",
+        "trade"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:caravan_trade:item_resource_recipe_loot_economy_v1:item_resource_recipe_loot_hint",
+      "slotFamily": "item_resource_recipe_loot_hint",
+      "sourceSemanticPackId": "semantic_pack/caravan_trade",
+      "targetArtifactContractId": "item_resource_recipe_loot_economy_v1",
+      "targetArtifactKind": "item_economy",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "economy",
+        "item"
+      ],
+      "semanticTagsUsed": [
+        "caravan",
+        "market",
+        "route",
+        "trade"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:caravan_trade:quest_graph_objective_reward_pattern_v1:quest_motive_objective_pattern",
+      "slotFamily": "quest_motive_objective_pattern",
+      "sourceSemanticPackId": "semantic_pack/caravan_trade",
+      "targetArtifactContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "dialogue",
+        "item",
+        "quest"
+      ],
+      "semanticTagsUsed": [
+        "caravan",
+        "market",
+        "route",
+        "trade"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "caravan_trade:core_generator_spine:settlement_building_landmark_v1:settlement_region_route_landmark_hint",
+      "slotFamily": "settlement_region_route_landmark_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "settlement_building_landmark_v1",
+      "targetArtifactKind": "settlement_landmark",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 800,
+      "status": "future_required",
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "semantic_slot.status.not_ready",
+          "target": "settlement_building_landmark_v1",
+          "message": "Slot remains future_required."
+        }
+      ]
+    },
+    {
+      "slotId": "caravan_trade:caravan_trade:settlement_building_landmark_v1:settlement_region_route_landmark_hint",
+      "slotFamily": "settlement_region_route_landmark_hint",
+      "sourceSemanticPackId": "semantic_pack/caravan_trade",
+      "targetArtifactContractId": "settlement_building_landmark_v1",
+      "targetArtifactKind": "settlement_landmark",
+      "profileId": "caravan_trade",
+      "semanticScopesUsed": [
+        "settlement",
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "caravan",
+        "market",
+        "route",
+        "trade"
+      ],
+      "priority": 801,
+      "status": "future_required",
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "semantic_slot.status.not_ready",
+          "target": "settlement_building_landmark_v1",
+          "message": "Slot remains future_required."
+        }
+      ]
+    }
+  ],
+  "stableSummary": "caravan_trade|packs=2|contracts=8|slots=11|blocked=1|missing=0",
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "biome_weather_hazard_event_hints_v1",
+      "message": "Missing semantic scopes: biome,event."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "faction_reputation_social_relation_v1",
+      "message": "Missing semantic scopes: social."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "game_profile_v1",
+      "message": "Missing semantic scopes: style."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "presentation_export_ir_v1",
+      "message": "Missing semantic scopes: presentation."
+    }
+  ]
+}

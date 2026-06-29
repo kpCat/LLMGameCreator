@@ -1,0 +1,349 @@
+{
+  "schemaVersion": "semantic_artifact_compatibility_plan_v1",
+  "profileId": "frontier_survival",
+  "selectedContractIds": [
+    "biome_weather_hazard_event_hints_v1",
+    "capability_bundle_pipeline_inputs_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "semantic_pack_v1",
+    "world_topology_region_route_graph_v1"
+  ],
+  "selectedSemanticPackIds": [
+    "semantic_pack/core_generator_spine",
+    "semantic_pack/frontier_survival"
+  ],
+  "dependencyOrder": [
+    "semantic_pack_v1",
+    "capability_bundle_pipeline_inputs_v1",
+    "world_topology_region_route_graph_v1",
+    "biome_weather_hazard_event_hints_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "settlement_building_landmark_v1"
+  ],
+  "missingDependencies": [],
+  "conflicts": [
+    {
+      "contractId": "faction_reputation_social_relation_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "social"
+    },
+    {
+      "contractId": "game_profile_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "style"
+    },
+    {
+      "contractId": "item_resource_recipe_loot_economy_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "economy"
+    },
+    {
+      "contractId": "presentation_export_ir_v1",
+      "conflictId": "missing_semantic_scope",
+      "reason": "presentation"
+    }
+  ],
+  "blockedOrFutureRequiredItems": [
+    {
+      "contractId": "settlement_building_landmark_v1",
+      "status": "future_required",
+      "reason": "not_ready_for_goal_030"
+    }
+  ],
+  "semanticExpansionSlots": [
+    {
+      "slotId": "frontier_survival:core_generator_spine:combat_progression_ability_v1:combat_progression_ability_hint",
+      "slotFamily": "combat_progression_ability_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "actor",
+        "combat",
+        "progression"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:core_generator_spine:dialogue_string_table_localization_hint_v1:dialogue_tone_localization_string_table_hint",
+      "slotFamily": "dialogue_tone_localization_string_table_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "actor",
+        "dialogue",
+        "tone"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:core_generator_spine:entity_archetype_npc_actor_profile_v1:npc_actor_archetype_variation",
+      "slotFamily": "npc_actor_archetype_variation",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "actor",
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:core_generator_spine:quest_graph_objective_reward_pattern_v1:quest_motive_objective_pattern",
+      "slotFamily": "quest_motive_objective_pattern",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "dialogue",
+        "item",
+        "quest"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 100,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:frontier_survival:combat_progression_ability_v1:combat_progression_ability_hint",
+      "slotFamily": "combat_progression_ability_hint",
+      "sourceSemanticPackId": "semantic_pack/frontier_survival",
+      "targetArtifactContractId": "combat_progression_ability_v1",
+      "targetArtifactKind": "combat_progression",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "actor",
+        "combat"
+      ],
+      "semanticTagsUsed": [
+        "frontier",
+        "hazard",
+        "resource_scarcity",
+        "survival"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:frontier_survival:dialogue_string_table_localization_hint_v1:dialogue_tone_localization_string_table_hint",
+      "slotFamily": "dialogue_tone_localization_string_table_hint",
+      "sourceSemanticPackId": "semantic_pack/frontier_survival",
+      "targetArtifactContractId": "dialogue_string_table_localization_hint_v1",
+      "targetArtifactKind": "dialogue_localization",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "actor"
+      ],
+      "semanticTagsUsed": [
+        "frontier",
+        "hazard",
+        "resource_scarcity",
+        "survival"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:frontier_survival:entity_archetype_npc_actor_profile_v1:npc_actor_archetype_variation",
+      "slotFamily": "npc_actor_archetype_variation",
+      "sourceSemanticPackId": "semantic_pack/frontier_survival",
+      "targetArtifactContractId": "entity_archetype_npc_actor_profile_v1",
+      "targetArtifactKind": "actor_profile",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "actor",
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "frontier",
+        "hazard",
+        "resource_scarcity",
+        "survival"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:frontier_survival:quest_graph_objective_reward_pattern_v1:quest_motive_objective_pattern",
+      "slotFamily": "quest_motive_objective_pattern",
+      "sourceSemanticPackId": "semantic_pack/frontier_survival",
+      "targetArtifactContractId": "quest_graph_objective_reward_pattern_v1",
+      "targetArtifactKind": "quest_pattern",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "item",
+        "quest"
+      ],
+      "semanticTagsUsed": [
+        "frontier",
+        "hazard",
+        "resource_scarcity",
+        "survival"
+      ],
+      "priority": 101,
+      "status": "ready",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:core_generator_spine:biome_weather_hazard_event_hints_v1:biome_weather_hazard_event_hint",
+      "slotFamily": "biome_weather_hazard_event_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "biome_weather_hazard_event_hints_v1",
+      "targetArtifactKind": "biome_event_hints",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 200,
+      "status": "optional",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:frontier_survival:biome_weather_hazard_event_hints_v1:biome_weather_hazard_event_hint",
+      "slotFamily": "biome_weather_hazard_event_hint",
+      "sourceSemanticPackId": "semantic_pack/frontier_survival",
+      "targetArtifactContractId": "biome_weather_hazard_event_hints_v1",
+      "targetArtifactKind": "biome_event_hints",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "biome",
+        "event",
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "frontier",
+        "hazard",
+        "resource_scarcity",
+        "survival"
+      ],
+      "priority": 201,
+      "status": "optional",
+      "diagnostics": []
+    },
+    {
+      "slotId": "frontier_survival:core_generator_spine:settlement_building_landmark_v1:settlement_region_route_landmark_hint",
+      "slotFamily": "settlement_region_route_landmark_hint",
+      "sourceSemanticPackId": "semantic_pack/core_generator_spine",
+      "targetArtifactContractId": "settlement_building_landmark_v1",
+      "targetArtifactKind": "settlement_landmark",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "core",
+        "deterministic",
+        "generator_spine"
+      ],
+      "priority": 800,
+      "status": "future_required",
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "semantic_slot.status.not_ready",
+          "target": "settlement_building_landmark_v1",
+          "message": "Slot remains future_required."
+        }
+      ]
+    },
+    {
+      "slotId": "frontier_survival:frontier_survival:settlement_building_landmark_v1:settlement_region_route_landmark_hint",
+      "slotFamily": "settlement_region_route_landmark_hint",
+      "sourceSemanticPackId": "semantic_pack/frontier_survival",
+      "targetArtifactContractId": "settlement_building_landmark_v1",
+      "targetArtifactKind": "settlement_landmark",
+      "profileId": "frontier_survival",
+      "semanticScopesUsed": [
+        "settlement",
+        "world"
+      ],
+      "semanticTagsUsed": [
+        "frontier",
+        "hazard",
+        "resource_scarcity",
+        "survival"
+      ],
+      "priority": 801,
+      "status": "future_required",
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "semantic_slot.status.not_ready",
+          "target": "settlement_building_landmark_v1",
+          "message": "Slot remains future_required."
+        }
+      ]
+    }
+  ],
+  "stableSummary": "frontier_survival|packs=2|contracts=8|slots=12|blocked=1|missing=0",
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "faction_reputation_social_relation_v1",
+      "message": "Missing semantic scopes: social."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "game_profile_v1",
+      "message": "Missing semantic scopes: style."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "item_resource_recipe_loot_economy_v1",
+      "message": "Missing semantic scopes: economy."
+    },
+    {
+      "severity": "warning",
+      "code": "semantic_plan.semantic_scope.missing",
+      "target": "presentation_export_ir_v1",
+      "message": "Missing semantic scopes: presentation."
+    }
+  ]
+}

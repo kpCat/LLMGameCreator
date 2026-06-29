@@ -1,7 +1,7 @@
 {
   "schemaVersion": "tracked_generated_artifact_inventory_v1",
   "root": ".llmgc/procedural",
-  "trackedFileCount": 3008,
+  "trackedFileCount": 3098,
   "families": [
     {
       "family": "alpha-runnable-build",
@@ -14,6 +14,69 @@
         ".llmgc/procedural/alpha-runnable-build/alpha-runnable-build-verification.md",
         ".llmgc/procedural/alpha-runnable-build/source-evidence/frontier_survival/export/assets/asset-manifest.json",
         ".llmgc/procedural/alpha-runnable-build/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture"
+      ]
+    },
+    {
+      "family": "candidate-region-gateway-connectivity-hints-v1",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 2,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/candidate-region-gateway-connectivity-hints-v1/candidate-region-gateway-connectivity-hints-v1-report.json",
+        ".llmgc/procedural/candidate-region-gateway-connectivity-hints-v1/candidate-region-gateway-connectivity-hints-v1-report.md"
+      ]
+    },
+    {
+      "family": "candidate-region-hydrology-waterway-hints-v1",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 2,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/candidate-region-hydrology-waterway-hints-v1/candidate-region-hydrology-waterway-hints-v1-report.json",
+        ".llmgc/procedural/candidate-region-hydrology-waterway-hints-v1/candidate-region-hydrology-waterway-hints-v1-report.md"
+      ]
+    },
+    {
+      "family": "candidate-region-settlement-road-seeds-v1",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 2,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/candidate-region-settlement-road-seeds-v1/candidate-region-settlement-road-seeds-v1-report.json",
+        ".llmgc/procedural/candidate-region-settlement-road-seeds-v1/candidate-region-settlement-road-seeds-v1-report.md"
+      ]
+    },
+    {
+      "family": "candidate-world-biome-noise-v1",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 2,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/candidate-world-biome-noise-v1/candidate-world-biome-noise-v1-report.json",
+        ".llmgc/procedural/candidate-world-biome-noise-v1/candidate-world-biome-noise-v1-report.md"
+      ]
+    },
+    {
+      "family": "candidate-world-region-climate-v1",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 2,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/candidate-world-region-climate-v1/candidate-world-region-climate-v1-report.json",
+        ".llmgc/procedural/candidate-world-region-climate-v1/candidate-world-region-climate-v1-report.md"
+      ]
+    },
+    {
+      "family": "capability-bundle-pipeline-inputs",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 8,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-gap-report.json",
+        ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-generator-inputs.json",
+        ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-invalid-matrix.json",
+        ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-profile-requests.json",
+        ".llmgc/procedural/capability-bundle-pipeline-inputs/capability-bundle-pipeline-inputs-report.json"
       ]
     },
     {
@@ -38,6 +101,19 @@
         ".llmgc/procedural/content-generation-scale/content-generation-scale-report.json",
         ".llmgc/procedural/content-generation-scale/content-generation-scale-report.md",
         ".llmgc/procedural/content-generation-scale/content-generation-scale-verification.md"
+      ]
+    },
+    {
+      "family": "development-complexity-stabilization",
+      "classification": "current_goal_compact_review_artifact",
+      "trackedFileCount": 7,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/development-complexity-stabilization/artifact-scope-policy-proof.json",
+        ".llmgc/procedural/development-complexity-stabilization/check-all-isolation-proof.json",
+        ".llmgc/procedural/development-complexity-stabilization/development-complexity-stabilization-report.json",
+        ".llmgc/procedural/development-complexity-stabilization/development-complexity-stabilization-report.md",
+        ".llmgc/procedural/development-complexity-stabilization/development-complexity-stabilization-verification.md"
       ]
     },
     {
@@ -90,6 +166,84 @@
         ".llmgc/procedural/minimum-playable-generated-game/build-source/source-evidence/frontier_survival/export/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
         ".llmgc/procedural/minimum-playable-generated-game/build-source/source-evidence/frontier_survival/export/assets/music-ambience/asset-001-e368b44a.fixture",
         ".llmgc/procedural/minimum-playable-generated-game/build-source/source-evidence/frontier_survival/export/assets/npc-portrait/asset-002-b5037955.fixture"
+      ]
+    },
+    {
+      "family": "modular-generator-kernel-parallel-readiness",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 12,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/modular-generator-kernel-parallel-readiness/goal-029-final-artifact-scope-report.json",
+        ".llmgc/procedural/modular-generator-kernel-parallel-readiness/goal-029-final-artifact-scope-report.md",
+        ".llmgc/procedural/modular-generator-kernel-parallel-readiness/modular-generator-kernel-invalid-matrix.json",
+        ".llmgc/procedural/modular-generator-kernel-parallel-readiness/modular-generator-kernel-readiness-report.json",
+        ".llmgc/procedural/modular-generator-kernel-parallel-readiness/modular-generator-kernel-readiness-report.md"
+      ]
+    },
+    {
+      "family": "package-assembly-combat-progression",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 11,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/package-assembly-combat-progression/goal-028-final-artifact-scope-report.json",
+        ".llmgc/procedural/package-assembly-combat-progression/goal-028-final-artifact-scope-report.md",
+        ".llmgc/procedural/package-assembly-combat-progression/package-assembly-combat-progression-anti-overfit-fixtures.json",
+        ".llmgc/procedural/package-assembly-combat-progression/package-assembly-combat-progression-assembly-report.json",
+        ".llmgc/procedural/package-assembly-combat-progression/package-assembly-combat-progression-input-fixtures.json"
+      ]
+    },
+    {
+      "family": "package-assembly-dialogue-quests",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 11,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/package-assembly-dialogue-quests/goal-026-final-artifact-scope-report.json",
+        ".llmgc/procedural/package-assembly-dialogue-quests/goal-026-final-artifact-scope-report.md",
+        ".llmgc/procedural/package-assembly-dialogue-quests/package-assembly-dialogue-quests-anti-overfit-fixtures.json",
+        ".llmgc/procedural/package-assembly-dialogue-quests/package-assembly-dialogue-quests-assembly-report.json",
+        ".llmgc/procedural/package-assembly-dialogue-quests/package-assembly-dialogue-quests-input-fixtures.json"
+      ]
+    },
+    {
+      "family": "package-assembly-items-economy-crafting",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 11,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/package-assembly-items-economy-crafting/goal-027-final-artifact-scope-report.json",
+        ".llmgc/procedural/package-assembly-items-economy-crafting/goal-027-final-artifact-scope-report.md",
+        ".llmgc/procedural/package-assembly-items-economy-crafting/package-assembly-items-economy-crafting-anti-overfit-fixtures.json",
+        ".llmgc/procedural/package-assembly-items-economy-crafting/package-assembly-items-economy-crafting-assembly-report.json",
+        ".llmgc/procedural/package-assembly-items-economy-crafting/package-assembly-items-economy-crafting-input-fixtures.json"
+      ]
+    },
+    {
+      "family": "package-assembly-world-entities",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 11,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/package-assembly-world-entities/goal-025-final-artifact-scope-report.json",
+        ".llmgc/procedural/package-assembly-world-entities/goal-025-final-artifact-scope-report.md",
+        ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-anti-overfit-fixtures.json",
+        ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-assembly-report.json",
+        ".llmgc/procedural/package-assembly-world-entities/package-assembly-world-entities-input-fixtures.json"
+      ]
+    },
+    {
+      "family": "rich-package-assembly-coverage-audit",
+      "classification": "historical_compact_review_artifact",
+      "trackedFileCount": 9,
+      "trackedHeavyOutputWarningCount": 0,
+      "samplePaths": [
+        ".llmgc/procedural/rich-package-assembly-coverage-audit/goal-024-final-artifact-scope-report.json",
+        ".llmgc/procedural/rich-package-assembly-coverage-audit/goal-024-final-artifact-scope-report.md",
+        ".llmgc/procedural/rich-package-assembly-coverage-audit/rich-package-assembly-coverage-audit-report.json",
+        ".llmgc/procedural/rich-package-assembly-coverage-audit/rich-package-assembly-coverage-audit-report.md",
+        ".llmgc/procedural/rich-package-assembly-coverage-audit/rich-package-assembly-coverage-audit-verification.md"
       ]
     },
     {

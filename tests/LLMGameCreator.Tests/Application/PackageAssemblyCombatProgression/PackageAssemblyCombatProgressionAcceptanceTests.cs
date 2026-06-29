@@ -162,10 +162,10 @@ public sealed class PackageAssemblyCombatProgressionAcceptanceTests
             "passed_by_user_prompt_before_goal_029",
             root.GetProperty(PackageAssemblyCombatProgressionAcceptanceService.FinalGate).GetProperty("status").GetString());
         Assert.Equal(
-            "goal_029_modular_generator_kernel_parallel_readiness",
+            "goal_030_semantic_artifact_contract_registry",
             root.GetProperty("last_completed_product_slice_id").GetString());
         Assert.Contains(
-            "package_assembly_combat_progression_expansion_verification passed",
+            "semantic_artifact_contract_registry_verification",
             root.GetProperty("recommended_next_decision").GetString());
     }
 

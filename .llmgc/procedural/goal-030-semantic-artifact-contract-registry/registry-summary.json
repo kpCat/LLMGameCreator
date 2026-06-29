@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "semantic_artifact_contract_registry_summary_v1",
+  "contractCount": 13,
+  "contractIds": [
+    "biome_weather_hazard_event_hints_v1",
+    "capability_bundle_pipeline_inputs_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "faction_reputation_social_relation_v1",
+    "game_profile_v1",
+    "item_resource_recipe_loot_economy_v1",
+    "presentation_export_ir_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "semantic_pack_v1",
+    "settlement_building_landmark_v1",
+    "world_topology_region_route_graph_v1"
+  ],
+  "readyContractIds": [
+    "capability_bundle_pipeline_inputs_v1",
+    "combat_progression_ability_v1",
+    "dialogue_string_table_localization_hint_v1",
+    "entity_archetype_npc_actor_profile_v1",
+    "faction_reputation_social_relation_v1",
+    "game_profile_v1",
+    "item_resource_recipe_loot_economy_v1",
+    "quest_graph_objective_reward_pattern_v1",
+    "semantic_pack_v1",
+    "world_topology_region_route_graph_v1"
+  ],
+  "optionalContractIds": [
+    "biome_weather_hazard_event_hints_v1"
+  ],
+  "futureRequiredContractIds": [
+    "presentation_export_ir_v1",
+    "settlement_building_landmark_v1"
+  ],
+  "blockedContractIds": [],
+  "diagnostics": []
+}

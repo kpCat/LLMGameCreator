@@ -10,8 +10,8 @@
 - Distinct package/quest/scene/objective: 3 / 3 / 3 / 3
 - All variants quest complete/reward granted: true / true
 - Multi-variant scenario verified: true
-- Variants hash: 39d8149424f1265f5a83323eaf081f7cc9653058e3dd880b7add83683f340b13
-- Deterministic report hash: 45b9455e99c3cb7fbb2e9d7b6ebf9b7b51d7a47f421fdecbb4f084ed0a55f401
+- Variants hash: 608180ab54090cd5d439014ad0ab10bd7326f745dd6a98df9f99e7ac9323f4db
+- Deterministic report hash: b269be6f08e0de6525a446158c68dcfaf561c492b9a5d3f4cfa0168ecc3c6b63
 - Invalid/fake/leak scenarios rejected: 26/26
 
 ## Variants

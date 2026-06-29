@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-29T01:14:04Z",
+    "updated_at_utc":  "2026-06-29T02:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Modular generator kernel and parallel readiness verification required",
-    "gate_status":  "modular_generator_kernel_parallel_readiness_verification",
+    "current_phase_title":  "Semantic artifact contract registry verification required",
+    "gate_status":  "semantic_artifact_contract_registry_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_029_modular_generator_kernel_parallel_readiness",
-    "active_manual_gate":  "The user confirmed package_assembly_combat_progression_expansion_verification passed before Goal 029. Goal 029 modular generator kernel and parallel readiness is produced for review; modular_generator_kernel_parallel_readiness_verification remains required and not passed.",
-    "current_user_action":  "Review the post-adoption evidence restoration result together with Goal 029 modular generator kernel readiness artifacts, manifests, compatibility matrix, focused tests, product smoke, check-all and artifact scope evidence before marking modular_generator_kernel_parallel_readiness_verification passed. Goal 030 and S234 are not started.",
-    "recommended_next_decision":  "The user confirmed package_assembly_combat_progression_expansion_verification passed before Goal 029. Goal 029 defines docs/MODULE_CONTRACT_MANIFEST_V1.md, docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md and docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md, adds a narrow Application-layer modular generator kernel readiness service under Design/ModularGeneratorKernel, adds product-smoke scenario manifests for modular-generator-kernel-readiness and the first two package assembly modules, adds manifest-first product smoke routing with hardcoded fallback, records module registry compatibility and absence behavior, rejects invalid/fake/leak cases, and leaves modular_generator_kernel_parallel_readiness_verification required. The post-adoption MAIN evidence restoration goal repaired stale accepted evidence after the lane-a/lane-b/lane-c/lane-d adoption sweep: Goal 011 fixture bytes were normalized to the existing LF-only media marker contract, the missing frontier_survival accepted build/log evidence was restored from the existing review package and repo-local player smoke, historical acceptance tests passed 59/59, candidate focused filters passed, and check-all.ps1 passed in .devflow/runs/20260629_041537-check-all. Do not start Goal 030 or S234 until this gate is accepted.",
+    "last_completed_product_slice_id":  "goal_030_semantic_artifact_contract_registry",
+    "active_manual_gate":  "The user handoff accepted modular_generator_kernel_parallel_readiness_verification before Goal 030. Goal 030 semantic artifact contract registry is produced for review; semantic_artifact_contract_registry_verification remains required and not passed.",
+    "current_user_action":  "Review Goal 030 semantic artifact contract registry artifacts, registry summary, compatibility matrix, semantic expansion plans, focused tests, product smoke, check-all and invalid/fake/leak evidence before marking semantic_artifact_contract_registry_verification passed. Goal 031 remains future and not started.",
+    "recommended_next_decision":  "Goal 030 adds a deterministic Application-layer semantic artifact contract registry under Design/SemanticArtifactContracts, validates full-generator artifact contract descriptors, resolves selected profile and semantic-pack compatibility through one planner, stages semantic expansion slots for frontier_survival, gothic_intrigue and caravan_trade, writes compact evidence under .llmgc/procedural/goal-030-semantic-artifact-contract-registry, rejects duplicate/unknown/cycle/missing-scope/incompatible/future-ready/fake/leak/module-absence mutations causally, and leaves semantic_artifact_contract_registry_verification required. Do not start Goal 031 until this gate is accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "modular_generator_kernel_parallel_readiness_verification"
+                                                        "semantic_artifact_contract_registry_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -56,7 +56,8 @@
                            "goal_026_manual_gate":  "package_assembly_dialogue_quests_expansion_verification",
                            "goal_027_manual_gate":  "package_assembly_items_economy_crafting_expansion_verification",
                            "goal_028_manual_gate":  "package_assembly_combat_progression_expansion_verification",
-                           "goal_029_manual_gate":  "modular_generator_kernel_parallel_readiness_verification"
+                           "goal_029_manual_gate":  "modular_generator_kernel_parallel_readiness_verification",
+                           "goal_030_manual_gate":  "semantic_artifact_contract_registry_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -77,18 +78,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_029_modular_generator_kernel_parallel_readiness",
-                                         "title":  "Modular Generator Kernel And Parallel Development Readiness",
+                                         "slice_id":  "goal_030_semantic_artifact_contract_registry",
+                                         "title":  "Semantic Artifact Contract Registry And Semantic Pack Compatibility Kernel",
                                          "status":  "required_manual_gate",
-                                         "summary":  "Goal 029 records the user-confirmed package_assembly_combat_progression_expansion_verification passed gate, defines module and product-smoke scenario manifest contracts plus parallel candidate policy, adds a narrow Application-layer modular generator kernel readiness service under Design/ModularGeneratorKernel, adds static package assembly module registry proof for world/entities and dialogue/quests, adds product-smoke scenario manifests with manifest-first run-product-smoke routing and hardcoded fallback, writes compact module contract proof, scenario manifest proof, registry report, compatibility matrix, absence report, policy proof, invalid matrix, report, verification and scope artifacts under .llmgc/procedural/modular-generator-kernel-parallel-readiness, proves optional module absence and missing required module rejection, rejects invalid/fake/leak scenarios causally, adds the modular-generator-kernel-readiness product smoke route through manifest, and leaves modular_generator_kernel_parallel_readiness_verification required. Goal 030 and S234 are not started.",
-                                         "scenario_id":  "modular-generator-kernel-readiness",
+                                         "summary":  "Goal 030 records the user-handoff accepted Goal 029 gate, adds a deterministic semantic artifact contract registry, validator, semantic pack compatibility planner and semantic expansion planning seam under Design/SemanticArtifactContracts, writes registry-summary.json, compatibility-matrix.json, three scenario expansion plans and semantic-artifact-contract-registry-report.md under .llmgc/procedural/goal-030-semantic-artifact-contract-registry, proves three profile/style scenarios use the same registry and planner, rejects invalid/fake/leak cases causally, and leaves semantic_artifact_contract_registry_verification required. Goal 031 is not started.",
+                                         "scenario_id":  "goal-030-semantic-artifact-contract-registry",
                                         "checks":  [
-                                                       "Goal 029 focused modular kernel, product-smoke manifest and stale handoff guard filter: 23/23 passed after state advancement.",
-                                                       "modular-generator-kernel-readiness product smoke: 1/1 passed via manifest route; run .devflow/runs/20260628_210419-product-smoke.",
-                                                       "check-all.ps1: 854/854 ordinary tests passed, build 0 warnings / 0 errors; run .devflow/runs/20260628_203228-check-all; ProductSmoke routes are excluded from full-suite churn and run explicitly.",
-                                                       "Post-adoption MAIN evidence restoration after lane adoption: MinimumAssetPipelineAcceptanceTests 5/5 passed, historical failing acceptance group 59/59 passed, candidate focused filters 10/10, 19/19, 5/5, 13/13 and 19/19 passed, and check-all.ps1 passed 915/915 ordinary tests in .devflow/runs/20260629_041537-check-all.",
-                                                       "goal-029-final artifact scope guard: 22/22 changed paths allowed, 0 violations; bounded extension allowed stale handoff assertion updates required by check-all, and historical development-complexity artifacts were restored from the pre-diagnostic run snapshot.",
-                                                       "Goal 029 compact report records accepted=false, manualGate=modular_generator_kernel_parallel_readiness_verification, manifest/registry/compatibility/absence proof and scope guard evidence."
+                                                       "Goal 030 focused SemanticArtifactContractRegistry/SemanticArtifactContractValidator/SemanticArtifactCompatibility/SemanticExpansionPlan filter: 10/10 passed before state handoff update.",
+                                                       "Goal 030 product smoke writes compact artifacts under .llmgc/procedural/goal-030-semantic-artifact-contract-registry.",
+                                                       "Full final validation is recorded in the manual Goal 030 run report."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -348,7 +346,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "modular_generator_kernel_parallel_readiness_verification"
+                                          "semantic_artifact_contract_registry_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -369,17 +367,19 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "modular_generator_kernel_parallel_readiness_verification",
-    "recommended_next_work_item_title":  "Modular generator kernel and parallel readiness verification review.",
-    "recommended_next_task_file":  "docs/GOAL_029_MODULAR_GENERATOR_KERNEL_PARALLEL_READINESS.md",
+    "recommended_next_work_item":  "semantic_artifact_contract_registry_verification",
+    "recommended_next_work_item_title":  "Semantic artifact contract registry verification review.",
+    "recommended_next_task_file":  "docs/GOAL_030_SEMANTIC_ARTIFACT_CONTRACT_REGISTRY_SPEC.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 029 modular generator kernel and parallel readiness review",
-                                               "Goal 030 remains future work only after Goal 029 gate acceptance"
+                                               "Goal 030 semantic artifact contract registry review",
+                                               "Goal 031 remains future work only after Goal 030 gate acceptance"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_030_SEMANTIC_ARTIFACT_CONTRACT_REGISTRY_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_030_SEMANTIC_ARTIFACT_REGISTRY.md",
                                                    "docs/GOAL_029_MODULAR_GENERATOR_KERNEL_PARALLEL_READINESS.md",
                                                    "docs/MODULE_CONTRACT_MANIFEST_V1.md",
                                                    "docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md",
@@ -461,7 +461,7 @@
                               "Package assembly combat/progression mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars",
                               "Modular generator kernel module manifests, product-smoke scenario manifests, compatibility matrix, absence behavior and verification tier sidecars"
                           ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 029 stop at modular_generator_kernel_parallel_readiness_verification required and do not start Goal 030 or S234 without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 030 stop at semantic_artifact_contract_registry_verification required and do not start Goal 031 without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -980,7 +980,7 @@
                                                                       "next_action":  "goal_029_modular_generator_kernel_parallel_readiness"
                                                           },
     "modular_generator_kernel_parallel_readiness_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_handoff_before_goal_030",
                                                                     "evidence_source":  "goal_029_modular_generator_kernel_parallel_readiness",
                                                                     "observed_result":  [
                                                                                             "docs/MODULE_CONTRACT_MANIFEST_V1.md defines module contract manifest v1",
@@ -992,9 +992,23 @@
                                                                                             "run-product-smoke checks scenario manifests before hardcoded fallback routes",
                                                                                             "Optional module absence is handled as absent_optional and missing required module is rejected",
                                                                                             "Final report accepted=false and manualGate=modular_generator_kernel_parallel_readiness_verification",
-                                                                                            "Goal 030 and S234 are not started"
+                                                                                            "The user handoff authorized starting Goal 030"
                                                                                         ],
-                                                                    "next_action":  "review_modular_generator_kernel_parallel_readiness_before_marking_gate_passed"
+                                                                    "next_action":  "goal_030_semantic_artifact_contract_registry"
+                                                          },
+    "semantic_artifact_contract_registry_verification":  {
+                                                                    "status":  "required",
+                                                                    "evidence_source":  "goal_030_semantic_artifact_contract_registry",
+                                                                    "observed_result":  [
+                                                                                            "Design/SemanticArtifactContracts defines a deterministic artifact contract registry, validator, semantic pack descriptors, compatibility planner and evidence writer",
+                                                                                            "Registry seed covers profile/capability/semantic/world/biome/entity/faction/dialogue/quest/item/combat/settlement/presentation artifact families",
+                                                                                            "Planner produces profile-specific compatibility plans and semantic expansion slots for frontier_survival, gothic_intrigue and caravan_trade through the same registry",
+                                                                                            ".llmgc/procedural/goal-030-semantic-artifact-contract-registry contains registry-summary.json, compatibility-matrix.json, three semantic expansion plans and semantic-artifact-contract-registry-report.md",
+                                                                                            "Invalid/fake/leak matrix rejects duplicate ids, unknown dependencies, dependency cycles, missing semantic scopes, incompatible tags, module absence, future-required-as-ready, fake contract ids and boundary leakage",
+                                                                                            "Final report accepted=false and manualGate=semantic_artifact_contract_registry_verification",
+                                                                                            "Goal 031 is not started"
+                                                                                        ],
+                                                                    "next_action":  "review_semantic_artifact_contract_registry_before_marking_gate_passed"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

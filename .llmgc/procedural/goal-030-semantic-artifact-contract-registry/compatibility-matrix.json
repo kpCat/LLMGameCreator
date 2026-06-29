@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "semantic_artifact_compatibility_matrix_v1",
+  "rows": [
+    {
+      "profileId": "caravan_trade",
+      "packIds": [
+        "semantic_pack/caravan_trade",
+        "semantic_pack/core_generator_spine"
+      ],
+      "selectedContractCount": 8,
+      "expansionSlotCount": 11,
+      "slotFamilies": [
+        "combat_progression_ability_hint",
+        "dialogue_tone_localization_string_table_hint",
+        "item_resource_recipe_loot_hint",
+        "npc_actor_archetype_variation",
+        "quest_motive_objective_pattern",
+        "settlement_region_route_landmark_hint"
+      ],
+      "blockedOrFutureRequiredContractIds": [
+        "settlement_building_landmark_v1"
+      ],
+      "stableSummary": "caravan_trade|packs=2|contracts=8|slots=11|blocked=1|missing=0"
+    },
+    {
+      "profileId": "frontier_survival",
+      "packIds": [
+        "semantic_pack/core_generator_spine",
+        "semantic_pack/frontier_survival"
+      ],
+      "selectedContractCount": 8,
+      "expansionSlotCount": 12,
+      "slotFamilies": [
+        "biome_weather_hazard_event_hint",
+        "combat_progression_ability_hint",
+        "dialogue_tone_localization_string_table_hint",
+        "npc_actor_archetype_variation",
+        "quest_motive_objective_pattern",
+        "settlement_region_route_landmark_hint"
+      ],
+      "blockedOrFutureRequiredContractIds": [
+        "settlement_building_landmark_v1"
+      ],
+      "stableSummary": "frontier_survival|packs=2|contracts=8|slots=12|blocked=1|missing=0"
+    },
+    {
+      "profileId": "gothic_intrigue",
+      "packIds": [
+        "semantic_pack/core_generator_spine",
+        "semantic_pack/gothic_intrigue"
+      ],
+      "selectedContractCount": 7,
+      "expansionSlotCount": 10,
+      "slotFamilies": [
+        "combat_progression_ability_hint",
+        "dialogue_tone_localization_string_table_hint",
+        "faction_reputation_relation",
+        "npc_actor_archetype_variation",
+        "quest_motive_objective_pattern"
+      ],
+      "blockedOrFutureRequiredContractIds": [],
+      "stableSummary": "gothic_intrigue|packs=2|contracts=7|slots=10|blocked=0|missing=0"
+    }
+  ],
+  "plannerSharedByAllScenarios": true,
+  "scenariosAreMeaningfullyDifferent": true
+}

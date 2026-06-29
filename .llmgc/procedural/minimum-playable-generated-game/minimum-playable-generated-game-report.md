@@ -12,9 +12,9 @@
 - Automated launch/quest completion: true / true
 - Readable presentation verified: true
 - Manual review required: true
-- Manifest hash: 65e0316b88f1432f64d0f1692d9d4692ed338b505f12e5db74f859eb2cf4a5c0
-- Review package hash: e1004a15075d738955f84d35399aafde54974e2c76f6b8aa67dd2a66bf1e80cd
-- Deterministic report hash: ac60a4a8cf7492fd89eaada8d80df00a46be0fed5d1c504f4883dab0d9df9484
+- Manifest hash: 3f7f219cc446c5842e6c6b849533ae66e16a48794ffe9eb2d7d865941f3cbb04
+- Review package hash: 26da704147370cdf34d4de489d993ebd6d35458ca90d400ed8d2822437417bbc
+- Deterministic report hash: 96fedb23f1fe6e0201539cf757fc06a227f33ab5a1051f10aa3c9b96b0f32ff9
 - Invalid/fake/leak scenarios rejected: 25/25
 
 ## Diagnostics

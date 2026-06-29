@@ -138,14 +138,14 @@ public sealed class DevelopmentComplexityStabilizationTests
         var markdown = File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.md"));
         var contextIndex = File.ReadAllText(Path.Combine(repoRoot, "docs", "CONTEXT_INDEX.md"));
 
-        Assert.Equal("modular_generator_kernel_parallel_readiness_verification", state.RootElement.GetProperty("gate_status").GetString());
-        Assert.Equal("goal_029_modular_generator_kernel_parallel_readiness", state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("semantic_artifact_contract_registry_verification", state.RootElement.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_030_semantic_artifact_contract_registry", state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
         Assert.Contains("generated_game_profile_contract_verification passed", markdown);
         Assert.Contains("development_complexity_stabilization_verification passed", markdown);
         Assert.Contains("capability_bundle_pipeline_inputs_verification passed", markdown);
         Assert.Contains("rich_package_assembly_coverage_audit_verification passed", markdown);
         Assert.Contains("development_complexity_stabilization_verification", markdown);
-        Assert.Contains("modular_generator_kernel_parallel_readiness_verification", contextIndex);
+        Assert.Contains("semantic_artifact_contract_registry_verification", contextIndex);
     }
 
     [Fact]

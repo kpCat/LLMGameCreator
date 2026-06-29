@@ -119,9 +119,10 @@ public sealed class ModularGeneratorKernelReadinessTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_029_modular_generator_kernel_parallel_readiness", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal(ModularGeneratorKernelReadinessService.FinalGate, root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_030_semantic_artifact_contract_registry", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("semantic_artifact_contract_registry_verification", root.GetProperty("gate_status").GetString());
         Assert.Equal("passed_by_user_prompt_before_goal_029", root.GetProperty("package_assembly_combat_progression_expansion_verification").GetProperty("status").GetString());
+        Assert.Equal("passed_by_user_handoff_before_goal_030", root.GetProperty(ModularGeneratorKernelReadinessService.FinalGate).GetProperty("status").GetString());
     }
 
     private static ModularGeneratorModuleManifest ValidModuleManifest() =>

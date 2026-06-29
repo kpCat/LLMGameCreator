@@ -155,8 +155,8 @@ public sealed class RichPackageAssemblyCoverageAuditAcceptanceTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var root = state.RootElement;
 
-        Assert.Equal("goal_029_modular_generator_kernel_parallel_readiness", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal("modular_generator_kernel_parallel_readiness_verification", root.GetProperty("gate_status").GetString());
+        Assert.Equal("goal_030_semantic_artifact_contract_registry", root.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.Equal("semantic_artifact_contract_registry_verification", root.GetProperty("gate_status").GetString());
         Assert.Equal("goal_024_rich_package_assembly_coverage_audit", root.GetProperty("goal_024_rich_package_assembly_coverage_audit").GetProperty("slice_id").GetString());
         Assert.Contains(
             "capability_bundle_pipeline_inputs_verification passed",
