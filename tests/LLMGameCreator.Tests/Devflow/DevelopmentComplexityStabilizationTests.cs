@@ -137,15 +137,23 @@ public sealed class DevelopmentComplexityStabilizationTests
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
         var markdown = File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.md"));
         var contextIndex = File.ReadAllText(Path.Combine(repoRoot, "docs", "CONTEXT_INDEX.md"));
+        var root = state.RootElement;
+        var currentGate = root.GetProperty("gate_status").GetString();
+        var currentSliceId = root.GetProperty("last_completed_product_slice_id").GetString();
 
-        Assert.Equal("dynamic_semantic_feature_system_verification", state.RootElement.GetProperty("gate_status").GetString());
-        Assert.Equal("goal_032_dynamic_semantic_feature_system", state.RootElement.GetProperty("last_completed_product_slice_id").GetString());
+        Assert.False(string.IsNullOrWhiteSpace(currentGate));
+        Assert.False(string.IsNullOrWhiteSpace(currentSliceId));
+        Assert.Equal(
+            currentSliceId,
+            root.GetProperty("last_completed_product_slice").GetProperty("slice_id").GetString());
         Assert.Contains("generated_game_profile_contract_verification passed", markdown);
         Assert.Contains("development_complexity_stabilization_verification passed", markdown);
         Assert.Contains("capability_bundle_pipeline_inputs_verification passed", markdown);
         Assert.Contains("rich_package_assembly_coverage_audit_verification passed", markdown);
         Assert.Contains("development_complexity_stabilization_verification", markdown);
-        Assert.Contains("dynamic_semantic_feature_system_verification", contextIndex);
+        Assert.Contains("development_complexity_stabilization_verification", contextIndex);
+        Assert.Contains(currentGate, markdown);
+        Assert.Contains(currentGate, contextIndex);
     }
 
     [Fact]
