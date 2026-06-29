@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 034 strict LLM draft artifact loop manual acceptance  
+Updated by: Goal 035 Lua module manifest registry production  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -66,6 +66,8 @@ Goal 033 records the user handoff as Goal 032 technical completion without marki
 
 Goal 034 records the accepted Goal 033 gate, adds a BCL-only strict LLM draft artifact loop under `Design/StrictLlmDraftArtifactLoop`, and keeps future LLM/manual/import output quarantined as contract-bound draft candidates before deterministic validation, repair planning or promotion. It writes compact evidence under `.llmgc/procedural/goal-034-strict-llm-draft-artifact-loop/`: `draft-loop-contract-summary.json`, `draft-request-matrix.json`, `candidate-quarantine-matrix.json`, `repair-request-matrix.json`, `promotion-decision-matrix.json`, four `strict-draft-plan-*.json` files, `invalid-draft-diagnostics-matrix.json` and `strict-llm-draft-artifact-loop-report.md`. It proves 9 draft families, 143 draft requests, 143 quarantined candidates, 112 metamodule species/archetype slot requests, repair-required and rejected decisions, promotion only through the deterministic engine, and causal invalid/fake/leak rejection. The user accepted `strict_llm_draft_artifact_loop_verification` as passed after Goal 034 production.
 
+Goal 035 records the accepted Goal 034 gate, adds a BCL-only Lua module manifest registry under `Design/LuaModuleManifestRegistry`, and keeps future Lua/manual/import/LLM module output manifest-only before any executor can be selected. It defines module families, manifest records, host API surface policy, deterministic validation diagnostics, scenario planner/selector output, dependency order and compact evidence under `.llmgc/procedural/goal-035-lua-module-manifest-registry/`: `lua-module-registry-summary.json`, `lua-host-api-surface-policy.json`, four `lua-module-selection-*.json` files, `lua-module-dependency-plan.json`, `invalid-lua-manifest-diagnostics-matrix.json` and `lua-module-manifest-registry-report.md`. It proves 11 manifest families, 21 host API groups with explicit denied groups, 133 manifest records, 112 metamodule species/archetype slot manifest declarations, four meaningfully different scenario selections, dependency planning, Goal 034 quarantined-candidate compatibility metadata and causal invalid/fake/leak rejection. Goal 035 stops at `lua_module_manifest_registry_verification` required, not passed.
+
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
 Source of truth for the reset:
@@ -93,9 +95,10 @@ Frozen by default:
 
 Allowed next sequence:
 
-1. Record Goal 034 `strict_llm_draft_artifact_loop_verification` as passed by the user's manual decision.
-2. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
-3. Recommend Goal 035 Lua module manifest registry as the next work, but do not start Goal 035 implementation in this acceptance handoff.
+1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user's manual decision.
+2. Record Goal 035 Lua module manifest registry as produced for review at `lua_module_manifest_registry_verification required`.
+3. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
+4. Recommend Goal 036 Lua sandbox execution gate as the next work, but do not start Goal 036 implementation in this handoff.
 
 Kill criterion:
 
@@ -193,10 +196,23 @@ Observed result:
 Recommended next work item:
 
 ```text
-goal_035_lua_module_manifest_registry
+goal_036_lua_sandbox_execution_gate
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 is the recommended next work, but Goal 035 implementation is not started by this acceptance handoff.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 is produced for review and stops at `lua_module_manifest_registry_verification required`. Goal 036 is the recommended next work, but Goal 036 implementation is not started by this handoff.
+
+Manual gate required for Goal 035:
+
+```text
+lua_module_manifest_registry_verification: required
+```
+
+Recorded checks from Goal 035 implementation:
+
+- `dotnet build .\LLMGameCreator.sln --no-restore`: passed with 0 warnings / 0 errors after Goal 035 changes.
+- Goal 035 focused `LuaModuleManifestRegistry|LuaModuleManifest|Goal035` filter: 9/9 passed before state handoff update.
+- Goal 035 exact product smoke class filter: 1/1 passed and wrote compact artifacts under `.llmgc/procedural/goal-035-lua-module-manifest-registry/`.
+- Goal 035 compact report records `accepted=false`, `manualGate=lua_module_manifest_registry_verification`, 11 families, 21 host API groups, 133 manifests, 112 metamodule species/archetype slot manifests, dependency planning and invalid/fake/leak matrix evidence.
 
 Manual acceptance recorded for Goal 034:
 
@@ -289,7 +305,7 @@ Recorded process policy adoption artifacts:
 
 Goal 002 manual configurable verification is recorded as passed based on the user's report. Goal 003 proved automated generated gameplay scenario acceptance across base and extension variants, added declaration-only extension rule pack validation, consumed a data-only inventory objective/reward proof pack through existing runtime state fields, rejected invalid extension declarations, and wrote deterministic reports under `.llmgc/procedural/extension-spine/`. The user confirmed `manual_extension_spine_verification passed` before Goal 004. Goal 004 proves quest, dialogue and interaction family variation through validated data/rule-pack declarations and writes deterministic reports under `.llmgc/procedural/quest-dialog-interaction-families/`. The user confirmed `manual_quest_dialog_interaction_family_verification passed` before Goal 005. Goal 005 proves layered semantic packs and semantic-guided composition through deterministic reports under `.llmgc/procedural/semantic-guided-composition/`. Product Slice 058A repairs false-positive acceptance and contract-validation gaps in that same artifact path. The user confirmed `semantic_guided_composition_artifact_verification passed` before Goal 006. Goal 006 proves semantic-selected package/runtime composition through deterministic reports under `.llmgc/procedural/semantic-runtime-composition/`. Product Slice 063A repairs binding/runtime false positives in that same artifact path. The user confirmed `semantic_selected_runtime_composition_artifact_verification passed` before Goal 007. Goal 007 proves connected world travel and deterministic runtime world state through reports under `.llmgc/procedural/connected-world-travel/`. The user confirmed `connected_world_travel_state_artifact_verification passed` before Goal 008. Goal 008 proves rule-pack gameplay family foundations through reports under `.llmgc/procedural/rule-pack-gameplay-family-foundations/`. Product Slice 077A repairs the same Goal 008 artifact family without changing the gate. The user confirmed `rule_pack_gameplay_family_artifact_verification passed` before Goal 009. Goal 009 proves rule-pack combat/faction/social/work/theft foundations through reports under `.llmgc/procedural/rule-pack-combat-faction-social-work-theft/`, and S084A repairs the artifact-review correctness gaps in that same folder. The user confirmed `rule_pack_combat_faction_social_work_theft_artifact_verification passed` before Goal 010. Goal 010 proves deterministic content generation at scale through reports under `.llmgc/procedural/content-generation-scale/`. The user confirmed `content_generation_at_scale_artifact_verification passed` before Goal 011. Goal 011 proves the minimum deterministic asset pipeline through reports under `.llmgc/procedural/minimum-asset-pipeline/`; S098A repairs the Goal 011 artifact family without changing the gate. The user confirmed `minimum_asset_pipeline_artifact_verification passed` before Goal 012. Goal 012 proves the Unity runtime export vertical slice through reports and real export files under `.llmgc/procedural/unity-runtime-export/`. The user confirmed `unity_runtime_export_vertical_slice_artifact_verification passed` before Goal 013. Goal 013 now has Alpha candidate selection, staging, repo-local Unity template/build entrypoint, real Windows build output, diagnostic launch evidence and automated minimal play-loop evidence. The user confirmed `alpha_runnable_windows_build_verification passed` before Goal 014. Goal 014 now has Unity playable Alpha presentation, movement/interaction evidence and firewall-safe build discipline evidence; the user confirmed `unity_playable_presentation_firewall_safe_build_verification passed` before Goal 015. Goal 015 projects generated scene content into Unity Alpha presentation from selected package/config/asset evidence; the user confirmed `unity_generated_scene_content_projection_verification passed` before Goal 016. Goal 016 proves a generated Unity runtime state loop with quest/dialogue/item/inventory/event before-after transitions; the user confirmed `unity_generated_runtime_state_loop_verification passed` before Goal 017. Goal 017 proves a generated Unity quest completion loop with ordered phases, objective checklist, completion and reward evidence; the user confirmed `unity_generated_quest_completion_loop_verification passed` before Goal 018. Goal 018 proves three distinct generated Unity Alpha playable quest-loop variants; the user confirmed `unity_generated_multi_variant_playable_scenario_verification passed` before Goal 019. Goal 019 proves readable Unity Alpha presentation panels; the user confirmed `unity_alpha_readable_presentation_verification passed` before Goal 020. The user confirmed `minimum_playable_generated_game_verification passed` before Goal 021. The user confirmed `generated_game_profile_contract_verification passed` before Goal 022. The user confirmed `development_complexity_stabilization_verification passed` before Goal 023. The user confirmed `capability_bundle_pipeline_inputs_verification passed` before Goal 024. The user confirmed `rich_package_assembly_coverage_audit_verification passed` before modular contract goal policy adoption. The user confirmed `modular_contract_goal_policy_adoption_verification passed` before Goal 025. The user confirmed `package_assembly_world_entities_expansion_verification passed` before Goal 026. The user confirmed `package_assembly_dialogue_quests_expansion_verification passed` before Goal 027. The user confirmed `package_assembly_items_economy_crafting_expansion_verification passed` before Goal 028. Goal 028 now stops at `package_assembly_combat_progression_expansion_verification` required, not passed.
 
-Current correction for the active state: the user handoff accepted `semantic_artifact_contract_registry_verification` before Goal 031. Goal 031 stops at `semantic_pack_composition_blueprint_verification` required, not passed; Goal 032 stops at `dynamic_semantic_feature_system_verification` required, not passed; Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by user decision; Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by user decision; Goal 035 is recommended next work and remains not started by this handoff.
+Current correction for the active state: the user handoff accepted `semantic_artifact_contract_registry_verification` before Goal 031. Goal 031 stops at `semantic_pack_composition_blueprint_verification` required, not passed; Goal 032 stops at `dynamic_semantic_feature_system_verification` required, not passed; Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by user decision; Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by user decision; Goal 035 stops at `lua_module_manifest_registry_verification` required, not passed; Goal 036 is recommended next work and remains not started by this handoff.
 
 ## Goal 013 Summary
 

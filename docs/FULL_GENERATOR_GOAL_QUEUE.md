@@ -31,6 +31,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
+lua_module_manifest_registry_verification required
 ```
 
 Current capabilities:
@@ -62,11 +63,12 @@ Current capabilities:
 - dynamic semantic feature system, applicability/inheritance kernel, typed influence rules, authoring schema records, four scenario resolved-state artifacts and compact Goal 032 artifacts;
 - semantic authoring workspace, lore intake skeleton, manual-vs-auto provenance matrix, feature-driven content intent resolver and compact Goal 033 artifacts;
 - strict LLM draft artifact loop with contract-bound requests, quarantined candidate envelopes, deterministic validation, repair request records, promotion decisions and compact Goal 034 artifacts;
+- Lua module manifest registry with manifest families, host API surface policy, deterministic dependency planning, scenario selection, Goal 034 quarantined-candidate compatibility metadata and compact Goal 035 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033 and Goal 034 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033 and Goal 034 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 produced Lua module manifest registry evidence and waits at `lua_module_manifest_registry_verification required`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -74,7 +76,9 @@ Goal 032 compact evidence lives under `.llmgc/procedural/goal-032-dynamic-semant
 
 Goal 033 compact evidence lives under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/` and was accepted by user decision: `semantic_authoring_intent_resolver_verification passed`.
 
-Goal 034 compact evidence lives under `.llmgc/procedural/goal-034-strict-llm-draft-artifact-loop/`; its produced report kept `accepted=false` for manual review, and the user later accepted `strict_llm_draft_artifact_loop_verification passed`. This does not start Goal 035.
+Goal 034 compact evidence lives under `.llmgc/procedural/goal-034-strict-llm-draft-artifact-loop/`; its produced report kept `accepted=false` for manual review, and the user later accepted `strict_llm_draft_artifact_loop_verification passed`.
+
+Goal 035 compact evidence lives under `.llmgc/procedural/goal-035-lua-module-manifest-registry/` and keeps `accepted=false` with `lua_module_manifest_registry_verification required`. This does not start Goal 036.
 
 ## Queue Rules
 
@@ -390,13 +394,17 @@ Manual review likely required before enabling broad LLM usage.
 
 Status:
 
-Accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 is recommended next work and is not started by this acceptance handoff.
+Accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was started later by explicit implementation handoff and is now produced for review.
 
 ### Goal 035: Lua Module Manifest Registry
 
 Purpose:
 
 Introduce Lua module registry/manifest validation as deterministic generator IR, still without arbitrary runtime authority.
+
+Status:
+
+Produced for review. The gate remains `lua_module_manifest_registry_verification required`, not passed. Goal 036 is recommended next work and is not started by this handoff.
 
 ### Goal 036: Lua Sandbox Execution Gate
 
@@ -521,11 +529,11 @@ Manual review required.
 ## Current Recommended Next Work
 
 ```text
-goal_035_lua_module_manifest_registry
+goal_036_lua_sandbox_execution_gate
 ```
 
 Status:
 
 ```text
-goal_035_recommended_not_started
+goal_036_recommended_not_started
 ```
