@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-29T16:20:00Z",
+    "updated_at_utc":  "2026-06-29T16:30:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Semantic authoring intent resolver verification required",
+    "current_phase_title":  "Goal 034 recommended after Goal 033 semantic authoring intent resolver acceptance",
     "gate_status":  "semantic_authoring_intent_resolver_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_033_semantic_authoring_intent_resolver",
-    "active_manual_gate":  "The user handoff started Goal 033 after Goal 032 technical completion without marking semantic_pack_composition_blueprint_verification or dynamic_semantic_feature_system_verification passed. Goal 031 and Goal 032 remain produced for review; Goal 033 semantic authoring intent resolver is produced for review; semantic_authoring_intent_resolver_verification remains required and not passed.",
-    "current_user_action":  "Review Goal 033 semantic authoring intent resolver artifacts: authoring workspace schema summary, metamodule lore intake skeleton, manual-vs-auto authoring matrix, four intent resolution files, focused tests, product smoke, final checks and invalid/fake/leak evidence before marking semantic_authoring_intent_resolver_verification passed.",
-    "recommended_next_decision":  "Goal 033 adds a deterministic Application-layer semantic authoring workspace and feature-driven content intent resolver under Design/SemanticAuthoringIntentResolver. It consumes Goal 030-032 semantic seams, keeps LLM/imported candidates quarantined, writes compact evidence for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms, and leaves semantic_authoring_intent_resolver_verification required without marking Goal 031, Goal 032 or Goal 033 passed.",
+    "active_manual_gate":  "The user accepted semantic_authoring_intent_resolver_verification as passed for Goal 033. Goal 031 and Goal 032 remain produced for review and not passed; Goal 034 is recommended next work but has not been started.",
+    "current_user_action":  "Prepare the next explicit Goal 034 task for a strict LLM draft artifact loop only after this accepted Goal 033 handoff; do not start Goal 034 implementation from this acceptance update.",
+    "recommended_next_decision":  "Goal 033 semantic_authoring_intent_resolver_verification passed by user decision. Recommended next work is Goal 034: strict LLM draft artifact loop planning/implementation in a separate explicit goal, while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "semantic_authoring_intent_resolver_verification"
+                                                        "goal_034_strict_llm_draft_artifact_loop"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -83,8 +83,8 @@
     "last_completed_product_slice":  {
                                          "slice_id":  "goal_033_semantic_authoring_intent_resolver",
                                          "title":  "Semantic Authoring Workspace And Feature-Driven Intent Resolver",
-                                         "status":  "required_manual_gate",
-                                         "summary":  "Goal 033 records the user handoff as technical completion of Goal 032, not a passed Goal 032 manual gate, then adds a deterministic semantic authoring workspace and feature-driven content intent resolver under Design/SemanticAuthoringIntentResolver. It consumes Goal 030 artifact contracts, Goal 031 semantic pack composition and Goal 032 resolved dynamic feature states to produce authoring workspace fields, a high-complexity metamodule lore intake skeleton, manual-vs-auto provenance separation and intent-level planning for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It rejects duplicate/unknown/illegal/required-missing/candidate-accepted/final-prose/materialization/boundary/fake-target/missing-trace/nondeterministic cases causally and leaves semantic_authoring_intent_resolver_verification required.",
+                                         "status":  "passed_by_user_prompt",
+                                         "summary":  "Goal 033 records the user handoff as technical completion of Goal 032, not a passed Goal 032 manual gate, then adds a deterministic semantic authoring workspace and feature-driven content intent resolver under Design/SemanticAuthoringIntentResolver. It consumes Goal 030 artifact contracts, Goal 031 semantic pack composition and Goal 032 resolved dynamic feature states to produce authoring workspace fields, a high-complexity metamodule lore intake skeleton, manual-vs-auto provenance separation and intent-level planning for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It rejects duplicate/unknown/illegal/required-missing/candidate-accepted/final-prose/materialization/boundary/fake-target/missing-trace/nondeterministic cases causally. The user accepted semantic_authoring_intent_resolver_verification as passed before Goal 034.",
                                          "scenario_id":  "goal-033-semantic-authoring-intent-resolver",
                                         "checks":  [
                                                        "Goal 033 focused SemanticAuthoringIntentResolver/SemanticAuthoringWorkspace/FeatureDrivenIntent/LoreIntakeSkeleton/Goal033 filter: 9/9 passed before state handoff update.",
@@ -349,7 +349,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "semantic_authoring_intent_resolver_verification"
+                                          "goal_034_strict_llm_draft_artifact_loop"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -370,12 +370,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "semantic_authoring_intent_resolver_verification",
-    "recommended_next_work_item_title":  "Semantic authoring intent resolver verification review.",
-    "recommended_next_task_file":  "docs/GOAL_033_SEMANTIC_AUTHORING_INTENT_RESOLVER_SPEC.md",
+    "recommended_next_work_item":  "goal_034_strict_llm_draft_artifact_loop",
+    "recommended_next_work_item_title":  "Goal 034 strict LLM draft artifact loop.",
+    "recommended_next_task_file":  "docs/FULL_GENERATOR_GOAL_QUEUE.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 033 semantic authoring intent resolver review",
-                                               "Goal 034 remains future work until Goal 033 gate acceptance"
+                                               "Goal 034 strict LLM draft artifact loop",
+                                               "Goal 035 Lua module manifest registry remains future work until Goal 034 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -463,9 +463,12 @@
                               "Package assembly items/economy/crafting mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars",
                               "Package assembly combat/progression mapping proof, real/synthetic consumer package summaries and invalid matrix sidecars",
                                "Modular generator kernel module manifests, product-smoke scenario manifests, compatibility matrix, absence behavior and verification tier sidecars",
-                               "Semantic pack composition catalog summary, composition matrix, blueprint plans and cross-artifact linkage sidecars"
+                               "Semantic artifact contract registry and semantic expansion planning sidecars",
+                               "Semantic pack composition catalog summary, composition matrix, blueprint plans and cross-artifact linkage sidecars",
+                               "Dynamic semantic feature system resolved-state and authoring schema sidecars",
+                               "Semantic authoring workspace, lore intake skeleton, provenance matrix and intent resolver sidecars"
                            ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 033 stop at semantic_authoring_intent_resolver_verification required and do not start Goal 034 without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 033 acceptance recommend Goal 034 as next work but do not start Goal 034 implementation without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -1044,7 +1047,7 @@
                                                                     "next_action":  "goal_033_started_by_user_handoff_after_technical_completion_without_marking_goal032_passed"
                                                           },
     "semantic_authoring_intent_resolver_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_prompt_before_goal_034",
                                                                     "evidence_source":  "goal_033_semantic_authoring_intent_resolver",
                                                                     "observed_result":  [
                                                                                             "Design/SemanticAuthoringIntentResolver defines BCL-only authoring workspace records, lore intake skeletons, provenance matrix records, feature-driven content intent records, validator diagnostics and evidence writer",
@@ -1053,9 +1056,10 @@
                                                                                             "Metamodule kingdoms lore intake skeleton has 7 kingdoms, 112 species/archetype slots, quarantined LLM candidate slots and feature families for module carriers, mana resonance, forbidden affinities, kingdom pressure, faction relation, dialogue intent, quest motive, event intent, economy pressure and combat pressure",
                                                                                             ".llmgc/procedural/goal-033-semantic-authoring-intent-resolver contains authoring workspace schema summary, metamodule lore skeleton, manual-vs-auto matrix, four intent resolution files, invalid matrix and markdown report",
                                                                                             "Invalid/fake/leak matrix rejects duplicate field ids, unknown feature references, unknown domains, illegal feature/domain applicability, required missing fields, conflicting provenance, accepted LLM/imported candidates, final prose leakage, final GamePackage materialization, boundary leakage, fake targets, missing source traces and nondeterministic ordering; optional absent remains valid and traceable",
-                                                                                            "Final report accepted=false and manualGate=semantic_authoring_intent_resolver_verification"
+                                                                                            "Final report accepted=false and manualGate=semantic_authoring_intent_resolver_verification",
+                                                                                            "The user confirmed semantic_authoring_intent_resolver_verification passed before Goal 034"
                                                                                         ],
-                                                                    "next_action":  "review_semantic_authoring_intent_resolver_before_marking_gate_passed"
+                                                                    "next_action":  "goal_034_strict_llm_draft_artifact_loop_not_started"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

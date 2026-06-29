@@ -22,6 +22,7 @@ package_assembly_items_economy_crafting_expansion_verification passed
 package_assembly_combat_progression_expansion_verification passed
 modular_generator_kernel_parallel_readiness_verification passed
 semantic_artifact_contract_registry_verification passed
+semantic_authoring_intent_resolver_verification passed
 ```
 
 Produced for review:
@@ -29,7 +30,6 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
-semantic_authoring_intent_resolver_verification required
 ```
 
 Current capabilities:
@@ -64,13 +64,13 @@ Current capabilities:
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029 and Goal 030 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed, and now waits at its own manual verification gate.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030 and Goal 033 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
 Goal 032 compact evidence lives under `.llmgc/procedural/goal-032-dynamic-semantic-feature-system/` and keeps `accepted=false` with `dynamic_semantic_feature_system_verification required`.
 
-Goal 033 compact evidence lives under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/` and keeps `accepted=false` with `semantic_authoring_intent_resolver_verification required`. This does not start Goal 034.
+Goal 033 compact evidence lives under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/` and was accepted by user decision: `semantic_authoring_intent_resolver_verification passed`. This does not start Goal 034.
 
 ## Queue Rules
 
@@ -374,7 +374,7 @@ Create a deterministic authoring workspace and feature-driven content intent pla
 
 Status:
 
-Produced for review. The gate remains `semantic_authoring_intent_resolver_verification required`, not passed. Goal 034 is not started.
+Accepted by user decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 is recommended next work and is not started by this acceptance handoff.
 
 ### Goal 034: Strict LLM Draft Artifact Loop
 
@@ -383,6 +383,10 @@ Purpose:
 Use LLM only for contract-bound JSON drafts with validation and repair. No runtime authority, no code generation.
 
 Manual review likely required before enabling broad LLM usage.
+
+Status:
+
+Recommended next work. Not started.
 
 ### Goal 035: Lua Module Manifest Registry
 
@@ -510,14 +514,14 @@ At least three distinct game families can be generated through the same lifecycl
 
 Manual review required.
 
-## Current Active Gate
+## Current Recommended Next Work
 
 ```text
-semantic_authoring_intent_resolver_verification
+goal_034_strict_llm_draft_artifact_loop
 ```
 
 Status:
 
 ```text
-required
+not_started
 ```

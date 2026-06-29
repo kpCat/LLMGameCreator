@@ -143,16 +143,16 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-semantic_authoring_intent_resolver_verification
+goal_034_strict_llm_draft_artifact_loop
 ```
 
-Goal 033 semantic authoring intent resolver has been produced for review. It adds the deterministic `Design/SemanticAuthoringIntentResolver` model/catalog/validator/resolver/evidence seam, consumes Goal 030-032 semantic seams without duplicating them, keeps Goal 031 and Goal 032 produced-for-review without marking them passed, and writes compact artifacts under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/`. The active gate remains `semantic_authoring_intent_resolver_verification required`.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. It added the deterministic `Design/SemanticAuthoringIntentResolver` model/catalog/validator/resolver/evidence seam, consumes Goal 030-032 semantic seams without duplicating them, keeps Goal 031 and Goal 032 produced-for-review without marking them passed, and writes compact artifacts under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/`. Goal 034 is recommended next work, but it is not started by this acceptance handoff.
 
 Allowed next sequence:
 
-1. Review Goal 033 evidence in `docs/GOAL_033_SEMANTIC_AUTHORING_INTENT_RESOLVER_SPEC.md`, `docs/EXTERNAL_SCOUTING_GOAL_033_SEMANTIC_AUTHORING_INTENT_RESOLVER.md`, `src/LLMGameCreator.Application/Design/SemanticAuthoringIntentResolver/`, tests and `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/`.
-2. Confirm the compact report contains `semantic_authoring_intent_resolver_verification required` and keeps `accepted=false`.
-3. Goal 034 remains not started until `semantic_authoring_intent_resolver_verification` is accepted.
+1. Use this handoff as the accepted Goal 033 manual gate record.
+2. Prepare a separate explicit Goal 034 Strict LLM Draft Artifact Loop task before any implementation.
+3. Do not start Goal 034 implementation in this acceptance-only update.
 
 Kill criterion:
 
