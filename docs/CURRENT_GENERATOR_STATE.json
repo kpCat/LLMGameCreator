@@ -1,23 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-29T17:30:00Z",
+    "updated_at_utc":  "2026-06-29T18:47:31Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 034 strict LLM draft artifact loop produced for review",
+    "current_phase_title":  "Goal 034 strict LLM draft artifact loop accepted; Goal 035 recommended next",
     "gate_status":  "strict_llm_draft_artifact_loop_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_034_strict_llm_draft_artifact_loop",
-    "active_manual_gate":  "Goal 034 strict LLM draft artifact loop is produced for review with strict_llm_draft_artifact_loop_verification required. Goal 033 remains accepted as passed by user decision; Goal 031 and Goal 032 remain produced for review and not passed; Goal 035 remains future/not started.",
-    "current_user_action":  "Review Goal 034 strict LLM draft artifact loop evidence and decide whether strict_llm_draft_artifact_loop_verification passes; do not start Goal 035 implementation before that acceptance.",
-    "recommended_next_decision":  "Review strict_llm_draft_artifact_loop_verification for Goal 034. After explicit user acceptance, the next future work is Goal 035: Lua module manifest registry, while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
+    "active_manual_gate":  "Goal 034 strict LLM draft artifact loop was accepted as passed by user decision: strict_llm_draft_artifact_loop_verification passed. Goal 031 and Goal 032 remain produced for review and not passed; Goal 035 remains recommended next work and not started.",
+    "current_user_action":  "Goal 035 Lua module manifest registry is the recommended next work; do not start Goal 035 implementation from this acceptance handoff.",
+    "recommended_next_decision":  "Accepted gate: strict_llm_draft_artifact_loop_verification passed. Start Goal 035 Lua module manifest registry only from a separate implementation task, while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "strict_llm_draft_artifact_loop_verification_review"
+                                                        "goal_035_lua_module_manifest_registry"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -84,7 +84,7 @@
     "last_completed_product_slice":  {
                                          "slice_id":  "goal_034_strict_llm_draft_artifact_loop",
                                          "title":  "Strict LLM Draft Artifact Loop",
-                                         "status":  "produced_for_review",
+                                         "status":  "passed_by_user_decision",
                                          "summary":  "Goal 034 records the accepted Goal 033 gate, then adds a BCL-only strict LLM draft artifact loop under Design/StrictLlmDraftArtifactLoop. It defines contract-bound draft requests, quarantined candidate envelopes, deterministic validation diagnostics, repair request records and promotion decisions for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It proves 9 draft families, 143 draft requests, 143 quarantined candidates, 112 metamodule species/archetype slot requests, repair-required and rejected decisions, promotion only through the deterministic engine, and invalid/fake/leak rejection without provider/LLM/RAG calls, final prose, GamePackage materialization, Runtime/UI/Unity/Lua/generator-library or external dependency changes.",
                                          "scenario_id":  "goal-034-strict-llm-draft-artifact-loop",
                                         "checks":  [
@@ -92,7 +92,8 @@
                                                        "Goal 034 exact product smoke class filter writes compact artifacts under .llmgc/procedural/goal-034-strict-llm-draft-artifact-loop.",
                                                        "check-all.ps1: 962/962 ordinary tests passed, build 0 warnings / 0 errors; run .devflow/runs/20260629_211045-check-all.",
                                                        "goal-034-final artifact scope guard: 12/12 changed paths allowed, 0 violations.",
-                                                       "Goal 034 compact report records accepted=false, manualGate=strict_llm_draft_artifact_loop_verification, 9 families, 143 requests, 143 quarantined candidates, 112 metamodule species/archetype slot requests and invalid/fake/leak matrix evidence."
+                                                       "Goal 034 compact report records accepted=false, manualGate=strict_llm_draft_artifact_loop_verification, 9 families, 143 requests, 143 quarantined candidates, 112 metamodule species/archetype slot requests and invalid/fake/leak matrix evidence.",
+                                                       "User manual decision accepted strict_llm_draft_artifact_loop_verification passed after commit 30396dfc."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -352,7 +353,7 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "strict_llm_draft_artifact_loop_verification_review"
+                                          "goal_035_lua_module_manifest_registry"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -373,12 +374,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "strict_llm_draft_artifact_loop_verification_review",
-    "recommended_next_work_item_title":  "Review Goal 034 strict LLM draft artifact loop verification.",
+    "recommended_next_work_item":  "goal_035_lua_module_manifest_registry",
+    "recommended_next_work_item_title":  "Goal 035 Lua module manifest registry.",
     "recommended_next_task_file":  "docs/FULL_GENERATOR_GOAL_QUEUE.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 034 strict LLM draft artifact loop",
-                                               "Goal 035 Lua module manifest registry remains future work until Goal 034 is accepted"
+                                               "Goal 035 Lua module manifest registry",
+                                               "Goal 036 Lua sandbox execution gate remains future work until Goal 035 is produced and accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -471,7 +472,7 @@
                                "Dynamic semantic feature system resolved-state and authoring schema sidecars",
                                "Semantic authoring workspace, lore intake skeleton, provenance matrix and intent resolver sidecars"
                            ],
-    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 033 acceptance recommend Goal 034 as next work but do not start Goal 034 implementation without a new explicit user request.",
+    "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 034 acceptance recommend Goal 035 as next work but do not start Goal 035 implementation without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
                                                               "status":  "passed",
                                                               "evidence_source":  "user_prompt_before_goal_011",
@@ -1021,7 +1022,7 @@
                                                                     "next_action":  "goal_031_semantic_pack_composition_blueprint"
                                                           },
     "semantic_pack_composition_blueprint_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_decision",
                                                                     "evidence_source":  "goal_031_semantic_pack_composition_blueprint",
                                                                     "observed_result":  [
                                                                                             "Design/SemanticPackComposition defines a deterministic semantic pack composition catalog, validator, composer/planner and evidence writer",
@@ -1062,10 +1063,10 @@
                                                                                             "Final report accepted=false and manualGate=semantic_authoring_intent_resolver_verification",
                                                                                             "The user confirmed semantic_authoring_intent_resolver_verification passed before Goal 034"
                                                                                         ],
-                                                                    "next_action":  "goal_034_strict_llm_draft_artifact_loop_produced_for_review"
+                                                                    "next_action":  "goal_034_strict_llm_draft_artifact_loop_accepted_before_goal_035"
                                                           },
     "strict_llm_draft_artifact_loop_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_decision",
                                                                     "evidence_source":  "goal_034_strict_llm_draft_artifact_loop",
                                                                     "observed_result":  [
                                                                                             "Design/StrictLlmDraftArtifactLoop defines BCL-only draft family, request, candidate envelope, repair request, promotion decision and diagnostic records",
@@ -1075,9 +1076,10 @@
                                                                                             ".llmgc/procedural/goal-034-strict-llm-draft-artifact-loop contains contract summary, request matrix, candidate quarantine matrix, repair request matrix, promotion decision matrix, four strict draft plan files, invalid diagnostics matrix and markdown report",
                                                                                             "Invalid/fake/leak matrix rejects duplicate request ids, duplicate candidate ids, unknown requests, wrong families, missing required fields, forbidden final prose, provider/runtime/UI/Unity/Lua/GamePackage/code leakage, self-promotion, source mismatch, missing traces, fake contracts/scopes, incompatible scenario/profile, over-budget candidates, invalid repair targets, immutable repair mutations and nondeterministic ordering",
                                                                                             "Final report accepted=false and manualGate=strict_llm_draft_artifact_loop_verification",
-                                                                                            "Goal 035 is not started"
+                                                                                            "The user confirmed strict_llm_draft_artifact_loop_verification passed after commit 30396dfc",
+                                                                                            "Goal 035 is not started by this acceptance handoff"
                                                                                         ],
-                                                                    "next_action":  "goal_035_lua_module_manifest_registry_not_started_until_goal034_acceptance"
+                                                                    "next_action":  "goal_035_lua_module_manifest_registry_recommended_not_started"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

@@ -145,16 +145,16 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-strict_llm_draft_artifact_loop_verification_review
+goal_035_lua_module_manifest_registry
 ```
 
-Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop is produced for review under `Design/StrictLlmDraftArtifactLoop` and `.llmgc/procedural/goal-034-strict-llm-draft-artifact-loop/`, with `accepted=false` and `strict_llm_draft_artifact_loop_verification required`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 remains future/not started until Goal 034 is manually accepted.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry is the recommended next work, but Goal 035 implementation has not been started by this acceptance handoff.
 
 Allowed next sequence:
 
-1. Review Goal 034 evidence and keep `strict_llm_draft_artifact_loop_verification` required until accepted by the user.
+1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
 2. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
-3. Do not start Goal 035 Lua module manifest registry until Goal 034 is accepted.
+3. Start Goal 035 Lua module manifest registry only from a separate implementation task.
 
 Kill criterion:
 
