@@ -26,6 +26,7 @@ semantic_authoring_intent_resolver_verification passed
 strict_llm_draft_artifact_loop_verification passed
 lua_module_manifest_registry_verification passed
 lua_sandbox_execution_gate_verification passed
+hybrid_llm_draft_lua_deterministic_expansion_verification passed
 ```
 
 Produced for review:
@@ -33,7 +34,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
-hybrid_llm_draft_lua_deterministic_expansion_verification required
+world_scale_region_map_foundation_verification required
 ```
 
 Current capabilities:
@@ -68,11 +69,12 @@ Current capabilities:
 - Lua module manifest registry with manifest families, host API surface policy, deterministic dependency planning, scenario selection, Goal 034 quarantined-candidate compatibility metadata and compact Goal 035 artifacts;
 - Lua sandbox execution gate with execution request records, sandbox budget policy, host binding matrix, dry-run traces with `luaExecuted=false`, deny-first decisions, repair plans and compact Goal 036 artifacts;
 - hybrid LLM draft plus Lua deterministic expansion with Goal 034 draft ids, Goal 035 manifest ids, Goal 036 sandbox decisions, a bounded LuaCSharp executor adapter, structured IR outputs, C# validation, promotion decisions, invalid/fake/leak matrix and compact Goal 037 artifacts;
+- world-scale region graph, reachability, finite map packs and chunk-config prelude with four scenario graphs, compact map evidence, chunk coverage and compact Goal 038 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035 and Goal 036 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 is produced for review and stops at `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036 and Goal 037 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 is produced for review and stops at `world_scale_region_map_foundation_verification required`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -86,7 +88,9 @@ Goal 035 compact evidence lives under `.llmgc/procedural/goal-035-lua-module-man
 
 Goal 036 compact evidence lives under `.llmgc/procedural/goal-036-lua-sandbox-execution-gate/`; its produced report kept `accepted=false`, `luaExecuted=false` and `lua_sandbox_execution_gate_verification required`. The user later accepted `lua_sandbox_execution_gate_verification passed` in the Goal 037 task handoff.
 
-Goal 037 compact evidence lives under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`; its produced report keeps `accepted=false`, proves a real bounded LuaCSharp executor path for repo-owned deterministic fixtures, and leaves `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
+Goal 037 compact evidence lives under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`; its produced report kept `accepted=false`, proved a real bounded LuaCSharp executor path for repo-owned deterministic fixtures, and the user later accepted `hybrid_llm_draft_lua_deterministic_expansion_verification passed` in the Goal 038 handoff.
+
+Goal 038 compact evidence lives under `.llmgc/procedural/goal-038-world-scale-region-map-foundation/`; its produced report keeps `accepted=false`, proves four world-scale region graphs, reachability, finite map packs, chunk-config prelude, 7 metamodule kingdom groups, 112 species/archetype slot refs and 17 invalid/fake/leak diagnostics, and leaves `world_scale_region_map_foundation_verification required`.
 
 ## Queue Rules
 
@@ -434,7 +438,7 @@ LLM drafts bounded high-level artifacts; Lua expands deterministic configs/IR; C
 
 Status:
 
-Produced for review. The gate remains `hybrid_llm_draft_lua_deterministic_expansion_verification required`, not passed. Goal 038 must not start until this gate is accepted.
+Accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`.
 
 ## World Scale Track
 
@@ -443,6 +447,10 @@ Produced for review. The gate remains `hybrid_llm_draft_lua_deterministic_expans
 Purpose:
 
 Move beyond single start maps to generated region graphs with reachability validation.
+
+Status:
+
+Produced for review as the aggressive composite Goal 038 world-scale region map foundation. The gate remains `world_scale_region_map_foundation_verification required`, not passed. Goal 039/040/041 work must not start until this gate is accepted.
 
 ### Goal 039: Finite Map Pack Generation
 
@@ -545,11 +553,11 @@ Manual review required.
 ## Current Recommended Next Work
 
 ```text
-hybrid_llm_draft_lua_deterministic_expansion_verification
+world_scale_region_map_foundation_verification
 ```
 
 Status:
 
 ```text
-goal_037_produced_for_review_until_hybrid_llm_draft_lua_deterministic_expansion_verification_passes
+goal_038_produced_for_review_until_world_scale_region_map_foundation_verification_passes
 ```

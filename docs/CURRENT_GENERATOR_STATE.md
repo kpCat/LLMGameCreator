@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 037 Hybrid LLM draft plus Lua deterministic expansion production  
+Updated by: Goal 038 World-scale region map foundation production  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -70,7 +70,9 @@ Goal 035 records the accepted Goal 034 gate, adds a BCL-only Lua module manifest
 
 Goal 036 records the accepted Goal 035 gate, adds a BCL-only Lua sandbox execution gate under `Design/LuaSandboxExecutionGate`, and keeps future Lua/manual/import/LLM module output behind deterministic sandbox policy before any executor adapter can be selected. It defines execution requests, sandbox budgets, determinism flags, host binding decisions, dry-run probe traces, deny-first decisions, repair plans and compact evidence under `.llmgc/procedural/goal-036-lua-sandbox-execution-gate/`: `lua-sandbox-policy-summary.json`, `lua-host-binding-matrix.json`, `lua-sandbox-execution-requests.json`, four `lua-sandbox-decision-*.json` files, `lua-sandbox-dry-run-trace-matrix.json`, `lua-sandbox-repair-plan-matrix.json`, `invalid-lua-sandbox-diagnostics-matrix.json` and `lua-sandbox-execution-gate-report.md`. It proves Goal 035 manifest selections for `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, 112 metamodule species/archetype slot selections, denied host API boundary coverage, dry-run traces with `luaExecuted=false`, repair plans that do not mutate accepted manifests and causal invalid/fake/leak rejection. The compact report remains `accepted=false`, and the user accepted `lua_sandbox_execution_gate_verification passed` in the Goal 037 task handoff before Goal 037 implementation.
 
-Goal 037 records the accepted Goal 036 gate, adds a bounded Application-layer hybrid expansion seam under `Design/HybridDraftLuaExpansion`, adopts `LuaCSharp` 0.5.5 as one pinned MIT package behind an executor adapter, and keeps execution restricted to repo-owned declarative deterministic fixtures with no standard libraries or host APIs opened. It maps Goal 034 draft request ids, Goal 035 manifest ids and Goal 036 sandbox decisions into bounded Lua expansion requests, executes eight fixture-backed expansions across `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, validates structured IR through C#, writes compact evidence under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`, and adds the `HybridDraftLuaExpansionProductSmokeTests` route. It proves a real bounded executor path, deterministic output, budget enforcement, four scenario output files, five required artifact families, 112+ metamodule species/archetype slots and causal invalid/fake/leak rejection. Goal 037 stops at `hybrid_llm_draft_lua_deterministic_expansion_verification required`, not passed.
+Goal 037 records the accepted Goal 036 gate, adds a bounded Application-layer hybrid expansion seam under `Design/HybridDraftLuaExpansion`, adopts `LuaCSharp` 0.5.5 as one pinned MIT package behind an executor adapter, and keeps execution restricted to repo-owned declarative deterministic fixtures with no standard libraries or host APIs opened. It maps Goal 034 draft request ids, Goal 035 manifest ids and Goal 036 sandbox decisions into bounded Lua expansion requests, executes eight fixture-backed expansions across `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, validates structured IR through C#, writes compact evidence under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`, and adds the `HybridDraftLuaExpansionProductSmokeTests` route. It proves a real bounded executor path, deterministic output, budget enforcement, four scenario output files, five required artifact families, 112+ metamodule species/archetype slots and causal invalid/fake/leak rejection. The user handoff before Goal 038 accepted `hybrid_llm_draft_lua_deterministic_expansion_verification passed`.
+
+Goal 038 records the accepted Goal 037 gate, adds a BCL-only Application-layer world-scale region map foundation under `Design/WorldScaleRegionMapFoundation`, and consumes Goal 037 scenario output ids as source facts. It builds deterministic region graphs for `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, proves reachability from each start region to required targets through in-house graph algorithms, writes compact finite map packs with square and axial_hex examples, writes a chunked-world config prelude without runtime deltas, and adds the `WorldScaleRegionMapFoundationProductSmokeTests` route. It proves 4 scenario graphs, 32 regions, 32 travel edges, all 8 required route kinds, 4 finite map packs, chunk coverage for every finite-map region binding, 7 metamodule kingdom groups, 112 species/archetype slot refs and 17 causal invalid/fake/leak diagnostics. Goal 038 stops at `world_scale_region_map_foundation_verification required`, not passed.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -103,7 +105,8 @@ Allowed next sequence:
 2. Keep Goal 035 `lua_module_manifest_registry_verification` recorded as passed by the user's manual decision.
 3. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
 4. Record Goal 036 Lua sandbox execution gate as accepted by the user handoff with `lua_sandbox_execution_gate_verification passed`.
-5. Keep Goal 037 hybrid LLM draft plus Lua deterministic expansion produced for review with `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
+5. Record Goal 037 hybrid LLM draft plus Lua deterministic expansion as accepted by the user handoff with `hybrid_llm_draft_lua_deterministic_expansion_verification passed`.
+6. Keep Goal 038 world-scale region map foundation produced for review with `world_scale_region_map_foundation_verification required`.
 
 Kill criterion:
 
@@ -201,15 +204,15 @@ Observed result:
 Recommended next work item:
 
 ```text
-hybrid_llm_draft_lua_deterministic_expansion_verification
+world_scale_region_map_foundation_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 is produced for review and stops at `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 is produced for review and stops at `world_scale_region_map_foundation_verification required`.
 
-Goal 037 produced for review:
+Goal 037 accepted by user handoff:
 
 ```text
-hybrid_llm_draft_lua_deterministic_expansion_verification: required
+hybrid_llm_draft_lua_deterministic_expansion_verification: passed
 ```
 
 Evidence source: Goal 037 implementation artifacts under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`.
@@ -221,6 +224,24 @@ Recorded checks from Goal 037 implementation:
 - `check-all.ps1`: passed with 984/984 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_003836-check-all`.
 - `goal-037-final` artifact scope guard: 13/13 changed paths allowed, 0 violations.
 - Goal 037 compact report records `accepted=false`, `manualGate=hybrid_llm_draft_lua_deterministic_expansion_verification`, `realBoundedExecutorPathProven=true`, 8 expansion requests, 8 outputs, 4 scenario outputs, 112+ metamodule species/archetype slots and invalid/fake/leak matrix evidence.
+
+Goal 038 produced for review:
+
+```text
+world_scale_region_map_foundation_verification: required
+```
+
+Evidence source: Goal 038 implementation artifacts under `.llmgc/procedural/goal-038-world-scale-region-map-foundation/`.
+
+Recorded checks from Goal 038 implementation:
+
+- `dotnet restore .\LLMGameCreator.sln`: passed.
+- `dotnet build .\LLMGameCreator.sln --no-restore`: passed with 0 warnings / 0 errors after incremental rebuild.
+- Goal 038 focused `WorldScaleRegionMapFoundation|WorldScaleRegionGraph|WorldScaleReachability|FiniteMapPack|ChunkedWorldConfig|Goal038` filter: 11/11 passed.
+- Goal 038 exact product smoke class filter: 1/1 passed and wrote compact artifacts under `.llmgc/procedural/goal-038-world-scale-region-map-foundation/`.
+- `.\.devflow\scripts\check-all.ps1`: passed with 994/994 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_012736-check-all`.
+- `goal-038-final` artifact scope guard: 12/12 changed paths allowed, 0 violations.
+- Goal 038 compact report records `accepted=false`, `manualGate=world_scale_region_map_foundation_verification`, `scenarioCount=4`, `totalRegionCount=32`, `finiteMapPackCount=4`, `metamoduleKingdomGroupCount=7`, `metamoduleSpeciesArchetypeSlotRefCount=112` and `invalidScenarioCount=17`.
 
 Manual acceptance recorded for Goal 036:
 
