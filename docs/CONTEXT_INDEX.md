@@ -138,10 +138,13 @@ Recommended next work:
 modular_generator_kernel_parallel_readiness_verification
 ```
 
+Post-adoption MAIN evidence restoration completed after the controlled lane-a/lane-b/lane-c/lane-d adoption sweep: stale accepted Goal 011 fixture evidence and missing frontier_survival build/log evidence were restored without starting Goal 030 or S234. `check-all.ps1` passed in `.devflow/runs/20260629_041537-check-all`.
+
 Allowed next sequence:
 
 1. Review Goal 029 evidence in `docs/MODULE_CONTRACT_MANIFEST_V1.md`, `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md`, `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md`, `.llmgc/procedural/modular-generator-kernel-parallel-readiness/`, the focused tests, manifest product smoke, check-all and scope guard before marking the gate passed.
-2. Goal 030 and S234 remain not started until `modular_generator_kernel_parallel_readiness_verification` is accepted.
+2. Include the post-adoption evidence restoration result in the review: historical acceptance tests passed 59/59, candidate filters remained green, and check-all passed 915/915.
+3. Goal 030 and S234 remain not started until `modular_generator_kernel_parallel_readiness_verification` is accepted.
 
 Kill criterion:
 

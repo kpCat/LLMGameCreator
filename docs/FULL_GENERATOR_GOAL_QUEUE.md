@@ -58,6 +58,8 @@ Current limitation:
 
 Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027 and Goal 028 have been accepted by user prompt. Goal 029 produced modular generator kernel and parallel readiness evidence and now waits at its manual verification gate.
 
+Post-adoption MAIN evidence restoration after the controlled lane-a/lane-b/lane-c/lane-d adoption sweep restored stale accepted evidence only: Goal 011 fixture bytes now satisfy the existing LF-only media marker contract, missing `frontier_survival` build/log evidence was restored from the existing review package and repo-local player smoke, the historical failing acceptance group passed 59/59, candidate focused filters remained green, and `check-all.ps1` passed 915/915 in `.devflow/runs/20260629_041537-check-all`. This does not start Goal 030 or S234 and does not mark the Goal 029 gate passed.
+
 ## Queue Rules
 
 1. Always keep one active goal and the next three candidate goals documented.

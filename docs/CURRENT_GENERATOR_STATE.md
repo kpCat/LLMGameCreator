@@ -54,6 +54,8 @@ Goal 028 records the accepted Goal 027 gate, defines `package_assembly_combat_pr
 
 Goal 029 records the accepted Goal 028 gate, defines `module_contract_manifest_v1` in `docs/MODULE_CONTRACT_MANIFEST_V1.md`, `product_smoke_scenario_manifest_v1` in `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md`, and candidate/serial adoption rules in `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md`. It adds a narrow Application-layer modular generator kernel readiness service under `Design/ModularGeneratorKernel`, exposes a static package assembly module registry seam for world/entities and dialogue/quests in `GeneratorPlanGamePackageAssembler`, adds product-smoke scenario manifests under `.devflow/product-smoke-scenarios/`, and makes `run-product-smoke.ps1` check manifests before hardcoded fallback routes. It writes compact module contract proof, scenario manifest proof, registry report, compatibility matrix, absence behavior, policy proof, invalid-matrix, report, verification and scope artifacts under `.llmgc/procedural/modular-generator-kernel-parallel-readiness/`. It proves optional module absence is reported as `absent_optional`, missing required modules are rejected, future module-only work has Tier 1 verification rules, and stops at `modular_generator_kernel_parallel_readiness_verification` required. Goal 030 and S234 are not started.
 
+Post-adoption MAIN evidence restoration after the controlled lane-a/lane-b/lane-c/lane-d adoption sweep repaired stale accepted evidence only. Goal 011 minimum asset fixture bytes were restored to the existing LF-only `LLMGC_FIXTURE_MEDIA:<mediaType>\n` contract, and the missing `frontier_survival` accepted build/log evidence was restored under `.llmgc/procedural/unity-multi-variant-playable-scenario/variants/frontier_survival/` from the existing review-package artifact plus repo-local player smoke. This was not a new feature, candidate expansion, public schema change, Runtime/UI/Unity implementation change, provider/LLM/RAG/media/Lua change or generator-library change. Verification after repair: `MinimumAssetPipelineAcceptanceTests` 5/5 passed, the historical failing acceptance group passed 59/59, candidate focused filters passed 10/10, 19/19, 5/5, 13/13 and 19/19, and `check-all.ps1` passed 915/915 ordinary tests in `.devflow/runs/20260629_041537-check-all`. Goal 029 still waits at `modular_generator_kernel_parallel_readiness_verification` required; Goal 030 and S234 are not started.
+
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
 Source of truth for the reset:
@@ -82,7 +84,8 @@ Frozen by default:
 Allowed next sequence:
 
 1. Review `modular_generator_kernel_parallel_readiness_verification` evidence from the Goal 029 contracts, compact artifacts, focused tests, product smoke, check-all and scope guard before marking the gate passed.
-2. Do not start Goal 030 or S234 until the Goal 029 gate is accepted by the user.
+2. Review the post-adoption evidence restoration result and restored accepted evidence before marking the Goal 029 gate passed.
+3. Do not start Goal 030 or S234 until the Goal 029 gate is accepted by the user.
 
 Kill criterion:
 
