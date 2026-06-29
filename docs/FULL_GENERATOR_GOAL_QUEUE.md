@@ -30,6 +30,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
+strict_llm_draft_artifact_loop_verification required
 ```
 
 Current capabilities:
@@ -60,17 +61,20 @@ Current capabilities:
 - semantic pack composition blueprint, semantic fact/relation merge, cross-artifact linkage plans and compact Goal 031 artifacts;
 - dynamic semantic feature system, applicability/inheritance kernel, typed influence rules, authoring schema records, four scenario resolved-state artifacts and compact Goal 032 artifacts;
 - semantic authoring workspace, lore intake skeleton, manual-vs-auto provenance matrix, feature-driven content intent resolver and compact Goal 033 artifacts;
+- strict LLM draft artifact loop with contract-bound requests, quarantined candidate envelopes, deterministic validation, repair request records, promotion decisions and compact Goal 034 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030 and Goal 033 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030 and Goal 033 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 is produced for review and waits at its manual verification gate.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
 Goal 032 compact evidence lives under `.llmgc/procedural/goal-032-dynamic-semantic-feature-system/` and keeps `accepted=false` with `dynamic_semantic_feature_system_verification required`.
 
-Goal 033 compact evidence lives under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/` and was accepted by user decision: `semantic_authoring_intent_resolver_verification passed`. This does not start Goal 034.
+Goal 033 compact evidence lives under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/` and was accepted by user decision: `semantic_authoring_intent_resolver_verification passed`.
+
+Goal 034 compact evidence lives under `.llmgc/procedural/goal-034-strict-llm-draft-artifact-loop/` and keeps `accepted=false` with `strict_llm_draft_artifact_loop_verification required`. This does not start Goal 035.
 
 ## Queue Rules
 
@@ -374,7 +378,7 @@ Create a deterministic authoring workspace and feature-driven content intent pla
 
 Status:
 
-Accepted by user decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 is recommended next work and is not started by this acceptance handoff.
+Accepted by user decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 was started by explicit user handoff after this acceptance.
 
 ### Goal 034: Strict LLM Draft Artifact Loop
 
@@ -386,7 +390,7 @@ Manual review likely required before enabling broad LLM usage.
 
 Status:
 
-Recommended next work. Not started.
+Produced for review. The gate remains `strict_llm_draft_artifact_loop_verification required`, not passed. Goal 035 is not started.
 
 ### Goal 035: Lua Module Manifest Registry
 
@@ -517,11 +521,11 @@ Manual review required.
 ## Current Recommended Next Work
 
 ```text
-goal_034_strict_llm_draft_artifact_loop
+strict_llm_draft_artifact_loop_verification_review
 ```
 
 Status:
 
 ```text
-not_started
+goal_034_produced_for_review_required
 ```

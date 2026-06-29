@@ -99,6 +99,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_032_DYNAMIC_SEMANTIC_FEATURE_SYSTEM.md` | Goal 032 scouting: BCL-only feature/influence kernel, no external rules/expression engine dependency adoption. |
 | `docs/GOAL_033_SEMANTIC_AUTHORING_INTENT_RESOLVER_SPEC.md` | Goal 033 task/spec: semantic authoring workspace, lore intake skeleton, manual-vs-auto provenance matrix, feature-driven content intent resolver, compact evidence under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/` and final stop at `semantic_authoring_intent_resolver_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_033_SEMANTIC_AUTHORING_INTENT_RESOLVER.md` | Goal 033 scouting: BCL-only semantic authoring and intent planning, no JSON Schema/validation/template/UI dependency adoption. |
+| `docs/GOAL_034_STRICT_LLM_DRAFT_ARTIFACT_LOOP_SPEC.md` | Goal 034 task/spec: strict draft requests, quarantined candidate envelopes, deterministic validation, repair request records, promotion decisions, compact evidence under `.llmgc/procedural/goal-034-strict-llm-draft-artifact-loop/` and final stop at `strict_llm_draft_artifact_loop_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_034_STRICT_LLM_DRAFT_ARTIFACT_LOOP.md` | Goal 034 scouting: BCL-only strict draft artifact loop, no external schema/validation/template/provider dependency adoption. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -143,16 +145,16 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-goal_034_strict_llm_draft_artifact_loop
+strict_llm_draft_artifact_loop_verification_review
 ```
 
-Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. It added the deterministic `Design/SemanticAuthoringIntentResolver` model/catalog/validator/resolver/evidence seam, consumes Goal 030-032 semantic seams without duplicating them, keeps Goal 031 and Goal 032 produced-for-review without marking them passed, and writes compact artifacts under `.llmgc/procedural/goal-033-semantic-authoring-intent-resolver/`. Goal 034 is recommended next work, but it is not started by this acceptance handoff.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop is produced for review under `Design/StrictLlmDraftArtifactLoop` and `.llmgc/procedural/goal-034-strict-llm-draft-artifact-loop/`, with `accepted=false` and `strict_llm_draft_artifact_loop_verification required`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 remains future/not started until Goal 034 is manually accepted.
 
 Allowed next sequence:
 
-1. Use this handoff as the accepted Goal 033 manual gate record.
-2. Prepare a separate explicit Goal 034 Strict LLM Draft Artifact Loop task before any implementation.
-3. Do not start Goal 034 implementation in this acceptance-only update.
+1. Review Goal 034 evidence and keep `strict_llm_draft_artifact_loop_verification` required until accepted by the user.
+2. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
+3. Do not start Goal 035 Lua module manifest registry until Goal 034 is accepted.
 
 Kill criterion:
 
