@@ -117,12 +117,21 @@ public sealed class ModularGeneratorKernelReadinessTests
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
+        var markdown = File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.md"));
+        var contextIndex = File.ReadAllText(Path.Combine(repoRoot, "docs", "CONTEXT_INDEX.md"));
         var root = state.RootElement;
+        var currentGate = root.GetProperty("gate_status").GetString();
+        var currentSliceId = root.GetProperty("last_completed_product_slice_id").GetString();
 
-        Assert.Equal("goal_032_dynamic_semantic_feature_system", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal("dynamic_semantic_feature_system_verification", root.GetProperty("gate_status").GetString());
         Assert.Equal("passed_by_user_prompt_before_goal_029", root.GetProperty("package_assembly_combat_progression_expansion_verification").GetProperty("status").GetString());
         Assert.Equal("passed_by_user_handoff_before_goal_030", root.GetProperty(ModularGeneratorKernelReadinessService.FinalGate).GetProperty("status").GetString());
+        Assert.False(string.IsNullOrWhiteSpace(currentGate));
+        Assert.False(string.IsNullOrWhiteSpace(currentSliceId));
+        Assert.Equal(
+            currentSliceId,
+            root.GetProperty("last_completed_product_slice").GetProperty("slice_id").GetString());
+        Assert.Contains(currentGate, markdown);
+        Assert.Contains(currentGate, contextIndex);
     }
 
     private static ModularGeneratorModuleManifest ValidModuleManifest() =>

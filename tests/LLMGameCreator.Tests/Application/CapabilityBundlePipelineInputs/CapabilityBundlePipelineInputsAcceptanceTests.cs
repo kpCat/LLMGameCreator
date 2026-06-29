@@ -184,17 +184,28 @@ public sealed class CapabilityBundlePipelineInputsAcceptanceTests
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
+        var markdown = File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.md"));
+        var contextIndex = File.ReadAllText(Path.Combine(repoRoot, "docs", "CONTEXT_INDEX.md"));
         var root = state.RootElement;
+        var currentGate = root.GetProperty("gate_status").GetString();
+        var currentSliceId = root.GetProperty("last_completed_product_slice_id").GetString();
+        var goal023 = root.GetProperty("goal_023_capability_bundle_pipeline_inputs");
 
-        Assert.Equal("goal_032_dynamic_semantic_feature_system", root.GetProperty("last_completed_product_slice_id").GetString());
-        Assert.Equal("dynamic_semantic_feature_system_verification", root.GetProperty("gate_status").GetString());
-        Assert.Equal("goal_023_capability_bundle_pipeline_inputs", root.GetProperty("goal_023_capability_bundle_pipeline_inputs").GetProperty("slice_id").GetString());
+        Assert.Equal("goal_023_capability_bundle_pipeline_inputs", goal023.GetProperty("slice_id").GetString());
+        Assert.Equal("passed_by_user_prompt_before_goal_024", goal023.GetProperty("status").GetString());
         Assert.Contains(
             "development_complexity_stabilization_verification passed",
-            root.GetProperty("goal_023_capability_bundle_pipeline_inputs").GetProperty("summary").GetString());
+            goal023.GetProperty("summary").GetString());
         Assert.Contains(
             "capability_bundle_pipeline_inputs_verification passed",
-            root.GetProperty("goal_023_capability_bundle_pipeline_inputs").GetProperty("summary").GetString());
+            goal023.GetProperty("summary").GetString());
+        Assert.False(string.IsNullOrWhiteSpace(currentGate));
+        Assert.False(string.IsNullOrWhiteSpace(currentSliceId));
+        Assert.Equal(
+            currentSliceId,
+            root.GetProperty("last_completed_product_slice").GetProperty("slice_id").GetString());
+        Assert.Contains(currentGate, markdown);
+        Assert.Contains(currentGate, contextIndex);
     }
 
     private static string FindRepoRoot()

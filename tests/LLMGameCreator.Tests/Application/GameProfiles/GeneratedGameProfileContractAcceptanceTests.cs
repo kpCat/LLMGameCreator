@@ -226,28 +226,25 @@ public sealed class GeneratedGameProfileContractAcceptanceTests
     {
         var repoRoot = FindRepoRoot();
         using var state = JsonDocument.Parse(File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.json")));
-        var lastCompleted = state.RootElement.GetProperty("last_completed_product_slice_id").GetString();
+        var markdown = File.ReadAllText(Path.Combine(repoRoot, "docs", "CURRENT_GENERATOR_STATE.md"));
+        var contextIndex = File.ReadAllText(Path.Combine(repoRoot, "docs", "CONTEXT_INDEX.md"));
+        var root = state.RootElement;
+        var currentGate = root.GetProperty("gate_status").GetString();
+        var currentSliceId = root.GetProperty("last_completed_product_slice_id").GetString();
+        var goal021 = root.GetProperty("goal_021_generated_game_profile_contract_refresh");
 
         Assert.Equal(
             "goal_021_generated_game_profile_contract_refresh",
-            state.RootElement.GetProperty("goal_021_generated_game_profile_contract_refresh").GetProperty("slice_id").GetString());
-        Assert.Contains(
-            lastCompleted,
-            new[]
-            {
-                "goal_021_generated_game_profile_contract_refresh",
-                "goal_022_development_complexity_stabilization",
-                "goal_023_capability_bundle_pipeline_inputs",
-                "goal_024_rich_package_assembly_coverage_audit",
-                "goal_025_package_assembly_expansion_1_world_and_entities",
-                "goal_026_package_assembly_expansion_2_dialogue_and_quests",
-                "goal_027_package_assembly_expansion_3_items_economy_crafting",
-                "goal_028_package_assembly_expansion_4_combat_progression",
-                "goal_029_modular_generator_kernel_parallel_readiness",
-                "goal_030_semantic_artifact_contract_registry",
-                "goal_031_semantic_pack_composition_blueprint",
-                "goal_032_dynamic_semantic_feature_system"
-            });
+            goal021.GetProperty("slice_id").GetString());
+        Assert.Equal("passed_by_user_prompt_before_goal_022", goal021.GetProperty("status").GetString());
+        Assert.Contains("minimum_playable_generated_game_verification passed", goal021.GetProperty("summary").GetString());
+        Assert.False(string.IsNullOrWhiteSpace(currentGate));
+        Assert.False(string.IsNullOrWhiteSpace(currentSliceId));
+        Assert.Equal(
+            currentSliceId,
+            root.GetProperty("last_completed_product_slice").GetProperty("slice_id").GetString());
+        Assert.Contains(currentGate, markdown);
+        Assert.Contains(currentGate, contextIndex);
     }
 
     private static string FindRepoRoot()
