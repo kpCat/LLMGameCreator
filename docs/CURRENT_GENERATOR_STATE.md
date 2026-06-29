@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 038 World-scale region map foundation production  
+Updated by: Goal 039 Runtime chunk delta traversal smoke production  
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -72,7 +72,9 @@ Goal 036 records the accepted Goal 035 gate, adds a BCL-only Lua sandbox executi
 
 Goal 037 records the accepted Goal 036 gate, adds a bounded Application-layer hybrid expansion seam under `Design/HybridDraftLuaExpansion`, adopts `LuaCSharp` 0.5.5 as one pinned MIT package behind an executor adapter, and keeps execution restricted to repo-owned declarative deterministic fixtures with no standard libraries or host APIs opened. It maps Goal 034 draft request ids, Goal 035 manifest ids and Goal 036 sandbox decisions into bounded Lua expansion requests, executes eight fixture-backed expansions across `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, validates structured IR through C#, writes compact evidence under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`, and adds the `HybridDraftLuaExpansionProductSmokeTests` route. It proves a real bounded executor path, deterministic output, budget enforcement, four scenario output files, five required artifact families, 112+ metamodule species/archetype slots and causal invalid/fake/leak rejection. The user handoff before Goal 038 accepted `hybrid_llm_draft_lua_deterministic_expansion_verification passed`.
 
-Goal 038 records the accepted Goal 037 gate, adds a BCL-only Application-layer world-scale region map foundation under `Design/WorldScaleRegionMapFoundation`, and consumes Goal 037 scenario output ids as source facts. It builds deterministic region graphs for `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, proves reachability from each start region to required targets through in-house graph algorithms, writes compact finite map packs with square and axial_hex examples, writes a chunked-world config prelude without runtime deltas, and adds the `WorldScaleRegionMapFoundationProductSmokeTests` route. It proves 4 scenario graphs, 32 regions, 32 travel edges, all 8 required route kinds, 4 finite map packs, chunk coverage for every finite-map region binding, 7 metamodule kingdom groups, 112 species/archetype slot refs and 17 causal invalid/fake/leak diagnostics. Goal 038 stops at `world_scale_region_map_foundation_verification required`, not passed.
+Goal 038 records the accepted Goal 037 gate, adds a BCL-only Application-layer world-scale region map foundation under `Design/WorldScaleRegionMapFoundation`, and consumes Goal 037 scenario output ids as source facts. It builds deterministic region graphs for `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, proves reachability from each start region to required targets through in-house graph algorithms, writes compact finite map packs with square and axial_hex examples, writes a chunked-world config prelude without runtime deltas, and adds the `WorldScaleRegionMapFoundationProductSmokeTests` route. It proves 4 scenario graphs, 32 regions, 32 travel edges, all 8 required route kinds, 4 finite map packs, chunk coverage for every finite-map region binding, 7 metamodule kingdom groups, 112 species/archetype slot refs and 17 causal invalid/fake/leak diagnostics. The user handoff before Goal 039 accepted `world_scale_region_map_foundation_verification passed`.
+
+Goal 039 records the accepted Goal 038 gate, adds a narrow Application-layer runtime chunk delta traversal seam under `Design/RuntimeChunkDeltaTraversal`, and consumes Goal 038 region graph, finite map and chunk config facts as source facts. It builds deterministic traversal plans for `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, projects traversal events into runtime chunk delta commands, stores visited/discovered chunk markers, route checkpoints, landmark discovery, local mutations and replay markers in runtime-owned `GameRuntimeState.Metadata`, and proves full `GameRuntimeState` save/load through a test/smoke injected `RuntimeStateSerializer` + `RuntimeSnapshotStore` adapter. It writes compact evidence under `.llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke/`, preserves the 7 metamodule kingdom groups and 112 species/archetype slot refs as compact source facts, rejects 13 causal invalid/fake/leak cases, and adds the `RuntimeChunkDeltaTraversalProductSmokeTests` route. Goal 039 stops at `runtime_chunk_delta_traversal_smoke_verification required`, not passed.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -106,7 +108,8 @@ Allowed next sequence:
 3. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
 4. Record Goal 036 Lua sandbox execution gate as accepted by the user handoff with `lua_sandbox_execution_gate_verification passed`.
 5. Record Goal 037 hybrid LLM draft plus Lua deterministic expansion as accepted by the user handoff with `hybrid_llm_draft_lua_deterministic_expansion_verification passed`.
-6. Keep Goal 038 world-scale region map foundation produced for review with `world_scale_region_map_foundation_verification required`.
+6. Record Goal 038 world-scale region map foundation as accepted by the user handoff with `world_scale_region_map_foundation_verification passed`.
+7. Keep Goal 039 runtime chunk delta traversal smoke produced for review with `runtime_chunk_delta_traversal_smoke_verification required`.
 
 Kill criterion:
 
@@ -204,10 +207,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-world_scale_region_map_foundation_verification
+runtime_chunk_delta_traversal_smoke_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 is produced for review and stops at `world_scale_region_map_foundation_verification required`.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 is produced for review and stops at `runtime_chunk_delta_traversal_smoke_verification required`.
 
 Goal 037 accepted by user handoff:
 
@@ -225,10 +228,10 @@ Recorded checks from Goal 037 implementation:
 - `goal-037-final` artifact scope guard: 13/13 changed paths allowed, 0 violations.
 - Goal 037 compact report records `accepted=false`, `manualGate=hybrid_llm_draft_lua_deterministic_expansion_verification`, `realBoundedExecutorPathProven=true`, 8 expansion requests, 8 outputs, 4 scenario outputs, 112+ metamodule species/archetype slots and invalid/fake/leak matrix evidence.
 
-Goal 038 produced for review:
+Goal 038 accepted by user handoff:
 
 ```text
-world_scale_region_map_foundation_verification: required
+world_scale_region_map_foundation_verification: passed
 ```
 
 Evidence source: Goal 038 implementation artifacts under `.llmgc/procedural/goal-038-world-scale-region-map-foundation/`.
@@ -242,6 +245,26 @@ Recorded checks from Goal 038 implementation:
 - `.\.devflow\scripts\check-all.ps1`: passed with 994/994 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_012736-check-all`.
 - `goal-038-final` artifact scope guard: 12/12 changed paths allowed, 0 violations.
 - Goal 038 compact report records `accepted=false`, `manualGate=world_scale_region_map_foundation_verification`, `scenarioCount=4`, `totalRegionCount=32`, `finiteMapPackCount=4`, `metamoduleKingdomGroupCount=7`, `metamoduleSpeciesArchetypeSlotRefCount=112` and `invalidScenarioCount=17`.
+- The user handoff for Goal 039 accepted `world_scale_region_map_foundation_verification passed` before Goal 039 implementation.
+
+Goal 039 produced for review:
+
+```text
+runtime_chunk_delta_traversal_smoke_verification: required
+```
+
+Evidence source: Goal 039 implementation artifacts under `.llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke/`.
+
+Recorded checks from Goal 039 implementation:
+
+- `dotnet restore .\LLMGameCreator.sln`: passed.
+- `dotnet build .\LLMGameCreator.sln --no-restore`: passed with 0 warnings / 0 errors.
+- Goal 039 focused `RuntimeChunkDeltaTraversal|RuntimeChunk|Goal039` filter: 10/10 passed.
+- Goal 039 exact product smoke class filter: 1/1 passed and wrote compact artifacts under `.llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke/`.
+- `CurrentState|Goal039|RuntimeChunk` filtered tests: 26/26 passed.
+- `.\.devflow\scripts\check-all.ps1`: passed with 1003/1003 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_022110-check-all`.
+- `goal-039-final` artifact scope guard: 12/12 changed paths allowed, 0 violations.
+- Goal 039 compact report records `accepted=false`, `manualGate=runtime_chunk_delta_traversal_smoke_verification`, `scenarioCount=4`, `runtimeStateChangedAfterTraversal=true`, `saveLoadRoundtripPassed=true`, `replayDeterminismPassed=true`, `metamoduleKingdomGroupCount=7`, `metamoduleSpeciesArchetypeSlotRefCount=112` and `invalidScenarioCount=13`.
 
 Manual acceptance recorded for Goal 036:
 

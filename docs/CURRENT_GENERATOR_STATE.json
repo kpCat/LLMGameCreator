@@ -3,22 +3,22 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 038 World-scale region map foundation produced for review",
-    "gate_status":  "world_scale_region_map_foundation_verification",
+    "current_phase_title":  "Goal 039 Runtime chunk delta traversal smoke produced for review",
+    "gate_status":  "runtime_chunk_delta_traversal_smoke_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_038_world_scale_region_map_foundation",
-    "active_manual_gate":  "Goal 037 hybrid LLM draft plus Lua deterministic expansion is accepted as passed by user handoff. Goal 038 world-scale region graph, reachability, finite map pack and chunk-config foundation is produced for review and requires world_scale_region_map_foundation_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 038 world-scale region map foundation artifacts and decide world_scale_region_map_foundation_verification. Do not mark Goal 038 passed from this production handoff.",
-    "recommended_next_decision":  "If world_scale_region_map_foundation_verification is accepted by user decision, start the next world-scale runtime/export handoff goal for finite/chunk traversal consumption; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start Goal 039+ from this Goal 038 production handoff.",
+    "last_completed_product_slice_id":  "goal_039_runtime_chunk_delta_traversal_smoke",
+    "active_manual_gate":  "Goal 038 world-scale region map foundation is accepted as passed by user handoff. Goal 039 runtime chunk delta traversal smoke is produced for review and requires runtime_chunk_delta_traversal_smoke_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 039 runtime chunk delta traversal smoke artifacts and decide runtime_chunk_delta_traversal_smoke_verification. Do not mark Goal 039 passed from this production handoff.",
+    "recommended_next_decision":  "If runtime_chunk_delta_traversal_smoke_verification is accepted by user decision, start the next bounded world-scale runtime preview/export or multi-family generator handoff goal; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 039 production handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "world_scale_region_map_foundation_verification",
-                                                        "goal_039_040_041_world_scale_runtime_delta_consumption"
+                                                        "runtime_chunk_delta_traversal_smoke_verification",
+                                                        "goal_040_world_scale_runtime_preview_or_export_consumption"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -66,7 +66,8 @@
                            "goal_035_manual_gate":  "lua_module_manifest_registry_verification",
                            "goal_036_manual_gate":  "lua_sandbox_execution_gate_verification",
                            "goal_037_manual_gate":  "hybrid_llm_draft_lua_deterministic_expansion_verification",
-                           "goal_038_manual_gate":  "world_scale_region_map_foundation_verification"
+                           "goal_038_manual_gate":  "world_scale_region_map_foundation_verification",
+                           "goal_039_manual_gate":  "runtime_chunk_delta_traversal_smoke_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -87,19 +88,20 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_038_world_scale_region_map_foundation",
-                                         "title":  "World-scale Region Map Foundation",
+                                         "slice_id":  "goal_039_runtime_chunk_delta_traversal_smoke",
+                                         "title":  "Runtime Chunk Delta And Traversal Smoke",
                                         "status":  "produced_for_review",
-                                         "summary":  "Goal 038 records the user-handoff acceptance of Goal 037, then adds a BCL-only Application-layer WorldScaleRegionMapFoundation seam. It consumes Goal 037 scenario evidence ids, builds deterministic region graphs for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms, proves start-to-required-target reachability with in-house graph algorithms, writes compact finite map packs including square and axial_hex examples, writes a chunked-world config prelude without runtime deltas, and produces compact evidence under .llmgc/procedural/goal-038-world-scale-region-map-foundation. It proves 4 scenario graphs, 32 regions, 32 travel edges, all 8 required route kinds, 4 finite map packs, chunk coverage for all finite-map region bindings, 7 metamodule kingdom groups, 112 species/archetype slot refs and 17 causal invalid/fake/leak diagnostics without Runtime/UI/Unity/GamePackage/provider/LLM/RAG/Lua source/generator-library/external-dependency mutation.",
-                                         "scenario_id":  "goal-038-world-scale-region-map-foundation",
+                                         "summary":  "Goal 039 records the user-handoff acceptance of Goal 038, then adds a narrow Application-layer RuntimeChunkDeltaTraversal seam. It consumes Goal 038 region graph, finite map and chunk config facts for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms, builds traversal plans, projects traversal events into runtime chunk delta commands, stores visited/discovered/checkpoint/landmark/mutation/replay facts in runtime-owned GameRuntimeState metadata, proves RuntimeStateSerializer and RuntimeSnapshotStore save/load roundtrip through a test/smoke adapter, proves same-seed replay determinism, writes compact evidence under .llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke and rejects 13 fake/invalid/leak cases without GamePackage/UI/Unity/provider/LLM/RAG/Lua source/generator-library/external-dependency mutation.",
+                                         "scenario_id":  "goal-039-runtime-chunk-delta-traversal-smoke",
                                         "checks":  [
                                                        "dotnet restore .\\LLMGameCreator.sln passed.",
-                                                       "dotnet build .\\LLMGameCreator.sln --no-restore passed with 0 warnings / 0 errors after incremental rebuild.",
-                                                       "Goal 038 focused WorldScaleRegionMapFoundation/WorldScaleRegionGraph/WorldScaleReachability/FiniteMapPack/ChunkedWorldConfig/Goal038 filter: 11/11 passed before state handoff update.",
-                                                       "Goal 038 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-038-world-scale-region-map-foundation.",
-                                                       "check-all.ps1 passed with 994/994 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_012736-check-all.",
-                                                       "goal-038-final artifact scope guard accepted 12/12 changed paths with 0 violations.",
-                                                       "Goal 038 compact report records accepted=false, manualGate=world_scale_region_map_foundation_verification, scenarioCount=4, totalRegionCount=32, finiteMapPackCount=4, metamoduleKingdomGroupCount=7, metamoduleSpeciesArchetypeSlotRefCount=112 and invalidScenarioCount=17."
+                                                       "dotnet build .\\LLMGameCreator.sln --no-restore passed with 0 warnings / 0 errors.",
+                                                       "Goal 039 focused RuntimeChunkDeltaTraversal/RuntimeChunk/Goal039 filter: 10/10 passed.",
+                                                       "Goal 039 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke.",
+                                                       "CurrentState/Goal039/RuntimeChunk filtered tests: 26/26 passed.",
+                                                       "check-all.ps1 passed with 1003/1003 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_022110-check-all.",
+                                                       "goal-039-final artifact scope guard accepted 12/12 changed paths with 0 violations.",
+                                                       "Goal 039 compact report records accepted=false, manualGate=runtime_chunk_delta_traversal_smoke_verification, scenarioCount=4, runtimeStateChangedAfterTraversal=true, saveLoadRoundtripPassed=true, replayDeterminismPassed=true, metamoduleKingdomGroupCount=7, metamoduleSpeciesArchetypeSlotRefCount=112 and invalidScenarioCount=13."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -359,8 +361,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "world_scale_region_map_foundation_verification",
-                                          "goal_039_040_041_world_scale_runtime_delta_consumption"
+                                          "runtime_chunk_delta_traversal_smoke_verification",
+                                          "goal_040_world_scale_runtime_preview_or_export_consumption"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -381,12 +383,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "world_scale_region_map_foundation_verification",
-    "recommended_next_work_item_title":  "Review Goal 038 world-scale region map foundation.",
-    "recommended_next_task_file":  "docs/GOAL_038_WORLD_SCALE_REGION_MAP_FOUNDATION_SPEC.md",
+    "recommended_next_work_item":  "runtime_chunk_delta_traversal_smoke_verification",
+    "recommended_next_work_item_title":  "Review Goal 039 runtime chunk delta traversal smoke.",
+    "recommended_next_task_file":  "docs/GOAL_039_RUNTIME_CHUNK_DELTA_TRAVERSAL_SMOKE_SPEC.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 038 world-scale region map foundation review at world_scale_region_map_foundation_verification",
-                                               "Goal 039/040/041 runtime-delta and chunk traversal consumption remains future work until Goal 038 is accepted"
+                                               "Goal 039 runtime chunk delta traversal smoke review at runtime_chunk_delta_traversal_smoke_verification",
+                                               "Goal 040 world-scale runtime preview/export consumption remains future work until Goal 039 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -1145,7 +1147,7 @@
                                                                     "next_action":  "goal_038_world_scale_region_map_foundation_produced_for_review"
                                                           },
     "world_scale_region_map_foundation_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_handoff_before_goal_039",
                                                                     "evidence_source":  "goal_038_world_scale_region_map_foundation",
                                                                     "observed_result":  [
                                                                                             "Design/WorldScaleRegionMapFoundation defines BCL-only Application-layer region graph records, reachability planner, finite map pack builder, chunked-world config prelude builder, validator, invalid matrix and evidence writer.",
@@ -1155,9 +1157,25 @@
                                                                                             "Metamodule kingdoms has seven kingdom/region groups and 112 species/archetype slot refs as compact metadata.",
                                                                                             ".llmgc/procedural/goal-038-world-scale-region-map-foundation contains region graph summary, reachability matrix, four finite map packs, chunk config prelude, traversal itinerary matrix, invalid diagnostics matrix and markdown report.",
                                                                                             "Invalid/fake/leak matrix rejects duplicate region ids, duplicate edge ids, unknown endpoints, missing start, unreachable required targets, all routes blocked, contradictory bidirectional declarations, invalid costs, unknown landmark region, invalid map coordinate/size, missing route region binding, missing chunk coverage, fake Goal037 output ids, scenario/profile mismatch, nondeterministic ordering, huge tile-array dumps and forbidden boundary leakage.",
-                                                                                            "Final report accepted=false and manualGate=world_scale_region_map_foundation_verification"
+                                                                                            "Final report accepted=false and manualGate=world_scale_region_map_foundation_verification",
+                                                                                            "The user handoff for Goal 039 accepted world_scale_region_map_foundation_verification passed before Goal 039 implementation."
                                                                                         ],
-                                                                    "next_action":  "review_goal_038_before_goal_039_040_041_runtime_delta_consumption"
+                                                                    "next_action":  "goal_039_runtime_chunk_delta_traversal_smoke_produced_for_review"
+                                                          },
+    "runtime_chunk_delta_traversal_smoke_verification":  {
+                                                                    "status":  "required",
+                                                                    "evidence_source":  "goal_039_runtime_chunk_delta_traversal_smoke",
+                                                                    "observed_result":  [
+                                                                                            "Design/RuntimeChunkDeltaTraversal defines Application-layer traversal plans, runtime delta commands, runtime-owned GameRuntimeState metadata state, validator, invalid matrix, evidence writer and a persistence adapter contract.",
+                                                                                            "Goal 039 consumes Goal 038 scenario graph, finite map and chunk config facts without provider/LLM/RAG calls, without new Lua source/execution, and without mutating Runtime/UI/Unity/GamePackage/generator-library paths.",
+                                                                                            "Traversal plans cover frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms with visited/discovered chunks, route checkpoints, landmark discovery, local mutations and deterministic replay markers.",
+                                                                                            "The test/smoke assembly injects a real RuntimeStateSerializer and RuntimeSnapshotStore adapter, proving runtime chunk deltas survive full GameRuntimeState serializer and snapshot save/load roundtrip.",
+                                                                                            "Metamodule kingdoms preserves seven kingdom/region groups and 112 species/archetype slot refs as compact source facts while traversing a representative route.",
+                                                                                            ".llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke contains four traversal plans, frontier/metamodule runtime chunk delta states, save/load roundtrip proof, replay determinism proof, invalid diagnostics matrix and markdown report.",
+                                                                                            "Invalid/fake/leak matrix rejects fake Goal038 scenario ids, fake region ids, fake chunk ids, route edges not in reachability plans, chunk coordinates outside Goal038 bindings, duplicate delta ids, conflicting mutations, replay seed mismatch, GamePackage mutation attempts, Runtime/UI/Unity/provider/LLM/RAG/Lua source/generator-library leakage, filesystem/network/process/reflection/thread/time/random/native interop leakage, missing save/load proof and nondeterministic ordering.",
+                                                                                            "Final report accepted=false and manualGate=runtime_chunk_delta_traversal_smoke_verification"
+                                                                                        ],
+                                                                    "next_action":  "review_goal_039_before_goal_040_runtime_preview_or_export_consumption"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

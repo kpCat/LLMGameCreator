@@ -109,6 +109,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_037_HYBRID_LLM_DRAFT_LUA_DETERMINISTIC_EXPANSION.md` | Goal 037 scouting: one bounded LuaCSharp adapter may be adopted only if restore/build and sandbox isolation are proven; no arbitrary Lua, provider/LLM/RAG, Runtime/UI/Unity/GamePackage or generator-library changes. |
 | `docs/GOAL_038_WORLD_SCALE_REGION_MAP_FOUNDATION_SPEC.md` | Goal 038 task/spec: world-scale region graph, reachability, finite map pack and chunk-config foundation, compact evidence under `.llmgc/procedural/goal-038-world-scale-region-map-foundation/` and final stop at `world_scale_region_map_foundation_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_038_WORLD_SCALE_REGION_MAP_FOUNDATION.md` | Goal 038 scouting: BCL-only graph/reachability/map/chunk prelude, no QuikGraph/GoRogue/RoyT.AStar dependency adoption. |
+| `docs/GOAL_039_RUNTIME_CHUNK_DELTA_TRAVERSAL_SMOKE_SPEC.md` | Goal 039 task/spec: runtime chunk delta traversal smoke consuming Goal 038 graph/map/chunk facts, runtime-owned `GameRuntimeState` chunk deltas, real serializer/snapshot save-load proof, replay determinism, compact evidence under `.llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke/` and final stop at `runtime_chunk_delta_traversal_smoke_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_039_RUNTIME_CHUNK_DELTA_TRAVERSAL_SMOKE.md` | Goal 039 scouting: BCL/System.Text.Json plus existing runtime serializer/snapshot mechanisms, no graph/pathfinding/serialization dependency adoption. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -153,10 +155,10 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-world_scale_region_map_foundation_verification
+runtime_chunk_delta_traversal_smoke_verification
 ```
 
-Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate has been accepted by the user handoff embedded in Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 hybrid LLM draft plus Lua deterministic expansion has been accepted by the user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 world-scale region map foundation is produced for review and stops at `world_scale_region_map_foundation_verification required`.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate has been accepted by the user handoff embedded in Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 hybrid LLM draft plus Lua deterministic expansion has been accepted by the user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 world-scale region map foundation has been accepted by the user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 runtime chunk delta traversal smoke is produced for review and stops at `runtime_chunk_delta_traversal_smoke_verification required`.
 
 Allowed next sequence:
 
@@ -165,7 +167,8 @@ Allowed next sequence:
 3. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
 4. Keep Goal 036 `lua_sandbox_execution_gate_verification` recorded as passed by the user handoff embedded in Goal 037.
 5. Keep Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` recorded as passed by the user handoff before Goal 038.
-6. Keep Goal 038 world-scale region map foundation produced for review with `world_scale_region_map_foundation_verification required`.
+6. Keep Goal 038 world-scale region map foundation recorded as passed by user handoff.
+7. Keep Goal 039 runtime chunk delta traversal smoke produced for review with `runtime_chunk_delta_traversal_smoke_verification required`.
 
 Kill criterion:
 

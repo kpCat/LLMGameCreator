@@ -27,6 +27,7 @@ strict_llm_draft_artifact_loop_verification passed
 lua_module_manifest_registry_verification passed
 lua_sandbox_execution_gate_verification passed
 hybrid_llm_draft_lua_deterministic_expansion_verification passed
+world_scale_region_map_foundation_verification passed
 ```
 
 Produced for review:
@@ -34,7 +35,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
-world_scale_region_map_foundation_verification required
+runtime_chunk_delta_traversal_smoke_verification required
 ```
 
 Current capabilities:
@@ -70,11 +71,12 @@ Current capabilities:
 - Lua sandbox execution gate with execution request records, sandbox budget policy, host binding matrix, dry-run traces with `luaExecuted=false`, deny-first decisions, repair plans and compact Goal 036 artifacts;
 - hybrid LLM draft plus Lua deterministic expansion with Goal 034 draft ids, Goal 035 manifest ids, Goal 036 sandbox decisions, a bounded LuaCSharp executor adapter, structured IR outputs, C# validation, promotion decisions, invalid/fake/leak matrix and compact Goal 037 artifacts;
 - world-scale region graph, reachability, finite map packs and chunk-config prelude with four scenario graphs, compact map evidence, chunk coverage and compact Goal 038 artifacts;
+- runtime chunk delta traversal smoke with Goal 038 graph/map/chunk facts consumed into runtime-owned `GameRuntimeState` chunk deltas, real serializer/snapshot save-load proof, replay determinism and compact Goal 039 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036 and Goal 037 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 is produced for review and stops at `world_scale_region_map_foundation_verification required`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037 and Goal 038 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 is produced for review and stops at `runtime_chunk_delta_traversal_smoke_verification required`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -90,7 +92,9 @@ Goal 036 compact evidence lives under `.llmgc/procedural/goal-036-lua-sandbox-ex
 
 Goal 037 compact evidence lives under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`; its produced report kept `accepted=false`, proved a real bounded LuaCSharp executor path for repo-owned deterministic fixtures, and the user later accepted `hybrid_llm_draft_lua_deterministic_expansion_verification passed` in the Goal 038 handoff.
 
-Goal 038 compact evidence lives under `.llmgc/procedural/goal-038-world-scale-region-map-foundation/`; its produced report keeps `accepted=false`, proves four world-scale region graphs, reachability, finite map packs, chunk-config prelude, 7 metamodule kingdom groups, 112 species/archetype slot refs and 17 invalid/fake/leak diagnostics, and leaves `world_scale_region_map_foundation_verification required`.
+Goal 038 compact evidence lives under `.llmgc/procedural/goal-038-world-scale-region-map-foundation/`; its produced report keeps `accepted=false`, proves four world-scale region graphs, reachability, finite map packs, chunk-config prelude, 7 metamodule kingdom groups, 112 species/archetype slot refs and 17 invalid/fake/leak diagnostics. The user later accepted `world_scale_region_map_foundation_verification passed` before Goal 039.
+
+Goal 039 compact evidence lives under `.llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke/`; its produced report keeps `accepted=false`, proves four runtime chunk traversal plans, runtime-owned visited/discovered/checkpoint/landmark/mutation/replay deltas, real `RuntimeStateSerializer` and `RuntimeSnapshotStore` save-load proof, same-seed replay determinism, 7 metamodule kingdom groups, 112 species/archetype slot refs and 13 invalid/fake/leak diagnostics, and leaves `runtime_chunk_delta_traversal_smoke_verification required`.
 
 ## Queue Rules
 
@@ -450,25 +454,35 @@ Move beyond single start maps to generated region graphs with reachability valid
 
 Status:
 
-Produced for review as the aggressive composite Goal 038 world-scale region map foundation. The gate remains `world_scale_region_map_foundation_verification required`, not passed. Goal 039/040/041 work must not start until this gate is accepted.
+Accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`.
 
-### Goal 039: Finite Map Pack Generation
+### Goal 039: Runtime Chunk Delta And Traversal Smoke
 
-Purpose:
+Gate:
 
-Generate finite maps with tile/entity placements, landmarks and paths.
-
-### Goal 040: Chunked World Config Contract
-
-Purpose:
-
-Represent chunk rules/seeds/configs without dumping huge tile arrays.
-
-### Goal 041: Runtime Chunk Delta Validation
+```text
+runtime_chunk_delta_traversal_smoke_verification
+```
 
 Purpose:
 
-Persist discovered/mutated chunk state in runtime/save state, not package definitions.
+Consume Goal 038 graph/map/chunk facts into runtime-owned chunk traversal deltas, prove save/load and replay determinism, and keep GamePackage definitions immutable.
+
+Status:
+
+Produced for review as the aggressive composite Goal 039 runtime chunk delta traversal smoke. The gate remains `runtime_chunk_delta_traversal_smoke_verification required`, not passed. Goal 040 work must not start until this gate is accepted.
+
+### Goal 040: Chunked Runtime Preview Or Export Consumption
+
+Purpose:
+
+Carry runtime chunk traversal/delta evidence into the next bounded preview/export or generated-loop consumer without starting broad streaming/runtime refactors.
+
+### Goal 041: Multi-Family World Scale Runtime Regression
+
+Purpose:
+
+Prove multiple generated families can reuse the same graph/map/chunk delta traversal path without forking architecture.
 
 ### Goal 042: Infinite/Chunked World Smoke
 
@@ -553,11 +567,11 @@ Manual review required.
 ## Current Recommended Next Work
 
 ```text
-world_scale_region_map_foundation_verification
+runtime_chunk_delta_traversal_smoke_verification
 ```
 
 Status:
 
 ```text
-goal_038_produced_for_review_until_world_scale_region_map_foundation_verification_passes
+goal_039_produced_for_review_until_runtime_chunk_delta_traversal_smoke_verification_passes
 ```
