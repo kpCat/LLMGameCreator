@@ -1,23 +1,24 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-06-29T20:55:17Z",
+    "updated_at_utc":  "2026-06-29T21:35:19Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 036 Lua sandbox execution gate produced for review; Goal 037 recommended next after acceptance",
-    "gate_status":  "lua_sandbox_execution_gate_verification",
+    "current_phase_title":  "Goal 037 Hybrid LLM draft plus Lua deterministic expansion produced for review",
+    "gate_status":  "hybrid_llm_draft_lua_deterministic_expansion_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_036_lua_sandbox_execution_gate",
-    "active_manual_gate":  "Goal 036 Lua sandbox execution gate is produced for review and requires lua_sandbox_execution_gate_verification. Goal 035 remains accepted as passed by user decision. Goal 034 remains accepted as passed by user decision. Goal 031 and Goal 032 remain produced for review and not passed; Goal 037 is recommended next only after Goal 036 review acceptance.",
-    "current_user_action":  "Review Goal 036 Lua sandbox execution gate artifacts and decide lua_sandbox_execution_gate_verification. Do not treat this production handoff as Goal 036 acceptance and do not start Goal 037 until acceptance.",
-    "recommended_next_decision":  "If lua_sandbox_execution_gate_verification is accepted by user decision, start Goal 037 hybrid LLM draft plus Lua deterministic expansion from a separate implementation task, while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
+    "last_completed_product_slice_id":  "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion",
+    "active_manual_gate":  "Goal 037 Hybrid LLM draft plus Lua deterministic expansion is produced for review and requires hybrid_llm_draft_lua_deterministic_expansion_verification. Goal 036 is accepted as passed by the user handoff embedded in Goal 037. Goal 035 and Goal 034 remain accepted as passed by user decision. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 037 Hybrid LLM draft plus Lua deterministic expansion artifacts and decide hybrid_llm_draft_lua_deterministic_expansion_verification. Do not mark Goal 037 passed from this production handoff.",
+    "recommended_next_decision":  "If hybrid_llm_draft_lua_deterministic_expansion_verification is accepted by user decision, start Goal 038 region graph and reachability generalization from a separate implementation task, while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion"
+                                                        "hybrid_llm_draft_lua_deterministic_expansion_verification",
+                                                        "goal_038_region_graph_and_reachability_generalization"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -63,7 +64,8 @@
                            "goal_033_manual_gate":  "semantic_authoring_intent_resolver_verification",
                            "goal_034_manual_gate":  "strict_llm_draft_artifact_loop_verification",
                            "goal_035_manual_gate":  "lua_module_manifest_registry_verification",
-                           "goal_036_manual_gate":  "lua_sandbox_execution_gate_verification"
+                           "goal_036_manual_gate":  "lua_sandbox_execution_gate_verification",
+                           "goal_037_manual_gate":  "hybrid_llm_draft_lua_deterministic_expansion_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -84,16 +86,17 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_036_lua_sandbox_execution_gate",
-                                         "title":  "Lua Sandbox Execution Gate",
+                                         "slice_id":  "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion",
+                                         "title":  "Hybrid LLM Draft Plus Lua Deterministic Expansion",
                                         "status":  "produced_for_review",
-                                         "summary":  "Goal 036 records the accepted Goal 035 gate, then adds a BCL-only Lua sandbox execution gate under Design/LuaSandboxExecutionGate. It defines execution requests, sandbox budget policy, determinism flags, host binding matrix, dry-run traces, deny-first decisions and repair plans for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms. It proves Goal 035 manifest selections, 112 metamodule species/archetype slot selections, denied host API boundary coverage, luaExecuted=false dry-run traces, repair plans that do not mutate accepted manifests and invalid/fake/leak rejection without Lua execution/parsing/source generation, external dependency changes, provider/LLM/RAG calls, Runtime/UI/Unity/GamePackage schema mutation or generator-library changes.",
-                                         "scenario_id":  "goal-036-lua-sandbox-execution-gate",
+                                         "summary":  "Goal 037 records the user-handoff acceptance of Goal 036, then adds a bounded Application-layer HybridDraftLuaExpansion seam. It maps Goal 034 draft request ids, Goal 035 manifest selections and Goal 036 sandbox decisions into repo-owned deterministic Lua expansion fixture requests, adopts LuaCSharp 0.5.5 as one pinned MIT dependency behind an executor adapter, executes fixtures without standard libraries or host API exposure, validates structured IR through C# and writes compact evidence under .llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion. It proves 4 scenario outputs, 8 expansion requests, all 5 required artifact families, 112+ metamodule species/archetype slots, real bounded executor evidence and causal invalid/fake/leak rejection without live LLM/provider/RAG calls or Runtime/UI/Unity/GamePackage/generator-library mutation.",
+                                         "scenario_id":  "goal-037-hybrid-llm-draft-lua-deterministic-expansion",
                                         "checks":  [
-                                                       "Goal 036 focused LuaSandboxExecutionGate/LuaSandbox/Goal036 filter: 9/9 passed sequentially after a transient parallel file-lock attempt was rerun.",
-                                                       "Goal 036 exact product smoke class filter: 1/1 passed and writes compact artifacts under .llmgc/procedural/goal-036-lua-sandbox-execution-gate.",
-                                                       "check-all.ps1 passed with 978/978 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260629_235932-check-all.",
-                                                       "Goal 036 compact report records accepted=false, manualGate=lua_sandbox_execution_gate_verification, luaExecuted=false, 4 execution requests, 4 decisions, 4 dry-run traces, 25 repair plans, 24 invalid/fake/leak scenarios and 112 metamodule species/archetype slot manifest selections."
+                                                       "Goal 037 focused HybridDraftLuaExpansion/Goal037 filter: 7/7 passed before state handoff update.",
+                                                       "Goal 037 exact product smoke class filter writes compact artifacts under .llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion.",
+                                                       "check-all.ps1 passed with 984/984 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_003836-check-all.",
+                                                       "goal-037-final artifact scope guard accepted 13/13 changed paths with 0 violations.",
+                                                       "Goal 037 compact report records accepted=false, manualGate=hybrid_llm_draft_lua_deterministic_expansion_verification, realBoundedExecutorPathProven=true, 8 expansion requests, 8 outputs, 4 scenario outputs and 112+ metamodule species/archetype slot selections."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -353,7 +356,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion"
+                                          "hybrid_llm_draft_lua_deterministic_expansion_verification",
+                                          "goal_038_region_graph_and_reachability_generalization"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -374,17 +378,19 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion",
-    "recommended_next_work_item_title":  "Goal 037 Hybrid LLM draft plus Lua deterministic expansion.",
+    "recommended_next_work_item":  "hybrid_llm_draft_lua_deterministic_expansion_verification",
+    "recommended_next_work_item_title":  "Review Goal 037 Hybrid LLM draft plus Lua deterministic expansion.",
     "recommended_next_task_file":  "docs/FULL_GENERATOR_GOAL_QUEUE.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 037 hybrid LLM draft plus Lua deterministic expansion after Goal 036 review acceptance",
-                                               "Goal 038 region graph and reachability generalization remains future work until Goal 037 is produced and accepted"
+                                               "Goal 037 hybrid LLM draft plus Lua deterministic expansion review at hybrid_llm_draft_lua_deterministic_expansion_verification",
+                                               "Goal 038 region graph and reachability generalization remains future work until Goal 037 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_037_HYBRID_LLM_DRAFT_LUA_DETERMINISTIC_EXPANSION_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_037_HYBRID_LLM_DRAFT_LUA_DETERMINISTIC_EXPANSION.md",
                                                    "docs/GOAL_036_LUA_SANDBOX_EXECUTION_GATE_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_036_LUA_SANDBOX_EXECUTION_GATE.md",
                                                    "docs/GOAL_035_LUA_MODULE_MANIFEST_REGISTRY_SPEC.md",
@@ -1104,7 +1110,7 @@
                                                                     "next_action":  "goal_036_lua_sandbox_execution_gate_produced_for_review"
                                                           },
     "lua_sandbox_execution_gate_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_prompt_before_goal_037",
                                                                     "evidence_source":  "goal_036_lua_sandbox_execution_gate",
                                                                     "observed_result":  [
                                                                                             "Design/LuaSandboxExecutionGate defines BCL-only execution request, sandbox budget, determinism flag, host binding, decision, dry-run trace, repair plan and diagnostic records",
@@ -1115,9 +1121,23 @@
                                                                                             "Dry-run traces explicitly keep luaExecuted=false; no real Lua execution, parser, source generation, external dependency, Runtime/UI/Unity/GamePackage/provider/LLM/RAG or generator-library change is required",
                                                                                             "Invalid/fake/leak matrix rejects or marks needs_repair for fake manifests, unknown or denied host APIs, missing/over budgets, unstable dependency order, source text, parser claims, Lua execution claims, final prose, self-promotion, missing Goal 034 promotion trace, provider/LLM/RAG leakage, Runtime/UI/Unity/GamePackage leakage, filesystem/network/process/reflection/thread/time/random/native interop leakage, immutable repair mutation and nondeterministic ordering",
                                                                                             "Final report accepted=false and manualGate=lua_sandbox_execution_gate_verification",
-                                                                                            "Goal 037 is not started by this handoff"
+                                                                                            "The user confirmed lua_sandbox_execution_gate_verification passed in the Goal 037 task handoff after check-all 978/978 and artifact scope guard 12/12 allowed."
                                                                                         ],
-                                                                    "next_action":  "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion_recommended_not_started"
+                                                                    "next_action":  "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion_produced_for_review"
+                                                          },
+    "hybrid_llm_draft_lua_deterministic_expansion_verification":  {
+                                                                    "status":  "required",
+                                                                    "evidence_source":  "goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion",
+                                                                    "observed_result":  [
+                                                                                            "Design/HybridDraftLuaExpansion defines Application-layer executor adapter selection, expansion request mapping, sandbox approval matrix, bounded LuaCSharp fixture execution, structured IR output, C# validation, promotion decisions, invalid matrix and evidence writer records.",
+                                                                                            "Goal 037 consumes Goal 034 draft request ids, Goal 035 Lua module manifest selections and Goal 036 sandbox decisions without calling provider/LLM/RAG or mutating Runtime/UI/Unity/GamePackage/generator-library paths.",
+                                                                                            "LuaCSharp 0.5.5 is pinned as one MIT dependency in LLMGameCreator.Application and isolated behind a repo-owned fixture-only adapter; standard libraries and host APIs are not opened.",
+                                                                                            "Scenario outputs cover frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms with all five required artifact families and 112+ metamodule species/archetype slot expansion entries.",
+                                                                                            ".llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion contains adapter selection, pipeline summary, draft/request map, sandbox matrix, four scenario outputs, promotion matrix, invalid diagnostics matrix and markdown report.",
+                                                                                            "Invalid/fake/leak matrix rejects fake Goal034 draft ids, fake Goal035 manifest ids, fake Goal036 sandbox ids, sandbox-denied execution attempts, wrong profiles, final prose, GamePackage mutation claims, Runtime/UI/Unity/provider/LLM/RAG/Lua source leakage, filesystem/network/process/reflection/thread/time/random/native interop, over-budget output, nondeterministic output order, missing trace, self-promotion, unsafe dependency blocker path and malformed executor output.",
+                                                                                            "Final report accepted=false and manualGate=hybrid_llm_draft_lua_deterministic_expansion_verification"
+                                                                                        ],
+                                                                    "next_action":  "review_goal_037_before_goal_038"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

@@ -25,6 +25,7 @@ semantic_artifact_contract_registry_verification passed
 semantic_authoring_intent_resolver_verification passed
 strict_llm_draft_artifact_loop_verification passed
 lua_module_manifest_registry_verification passed
+lua_sandbox_execution_gate_verification passed
 ```
 
 Produced for review:
@@ -32,7 +33,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
-lua_sandbox_execution_gate_verification required
+hybrid_llm_draft_lua_deterministic_expansion_verification required
 ```
 
 Current capabilities:
@@ -66,11 +67,12 @@ Current capabilities:
 - strict LLM draft artifact loop with contract-bound requests, quarantined candidate envelopes, deterministic validation, repair request records, promotion decisions and compact Goal 034 artifacts;
 - Lua module manifest registry with manifest families, host API surface policy, deterministic dependency planning, scenario selection, Goal 034 quarantined-candidate compatibility metadata and compact Goal 035 artifacts;
 - Lua sandbox execution gate with execution request records, sandbox budget policy, host binding matrix, dry-run traces with `luaExecuted=false`, deny-first decisions, repair plans and compact Goal 036 artifacts;
+- hybrid LLM draft plus Lua deterministic expansion with Goal 034 draft ids, Goal 035 manifest ids, Goal 036 sandbox decisions, a bounded LuaCSharp executor adapter, structured IR outputs, C# validation, promotion decisions, invalid/fake/leak matrix and compact Goal 037 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034 and Goal 035 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 is produced for review and stops at `lua_sandbox_execution_gate_verification required`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035 and Goal 036 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 is produced for review and stops at `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -82,7 +84,9 @@ Goal 034 compact evidence lives under `.llmgc/procedural/goal-034-strict-llm-dra
 
 Goal 035 compact evidence lives under `.llmgc/procedural/goal-035-lua-module-manifest-registry/`; its produced report kept `accepted=false` for manual review, and the user later accepted `lua_module_manifest_registry_verification passed`. This does not start Goal 036.
 
-Goal 036 compact evidence lives under `.llmgc/procedural/goal-036-lua-sandbox-execution-gate/`; its produced report keeps `accepted=false`, `luaExecuted=false` and `lua_sandbox_execution_gate_verification required`. This does not start Goal 037.
+Goal 036 compact evidence lives under `.llmgc/procedural/goal-036-lua-sandbox-execution-gate/`; its produced report kept `accepted=false`, `luaExecuted=false` and `lua_sandbox_execution_gate_verification required`. The user later accepted `lua_sandbox_execution_gate_verification passed` in the Goal 037 task handoff.
+
+Goal 037 compact evidence lives under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/`; its produced report keeps `accepted=false`, proves a real bounded LuaCSharp executor path for repo-owned deterministic fixtures, and leaves `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
 
 ## Queue Rules
 
@@ -408,7 +412,7 @@ Introduce Lua module registry/manifest validation as deterministic generator IR,
 
 Status:
 
-Accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 is recommended next work and is not started by this handoff.
+Accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was started later by explicit implementation handoff and is now accepted by user handoff before Goal 037.
 
 ### Goal 036: Lua Sandbox Execution Gate
 
@@ -420,7 +424,7 @@ Manual review likely required because this opens execution of generator modules.
 
 Status:
 
-Produced for review. The gate remains `lua_sandbox_execution_gate_verification required`, not passed. Goal 037 must not start until this gate is accepted.
+Accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`.
 
 ### Goal 037: Hybrid LLM Draft Plus Lua Deterministic Expansion
 
@@ -430,7 +434,7 @@ LLM drafts bounded high-level artifacts; Lua expands deterministic configs/IR; C
 
 Status:
 
-Recommended next only after Goal 036 review acceptance; not started.
+Produced for review. The gate remains `hybrid_llm_draft_lua_deterministic_expansion_verification required`, not passed. Goal 038 must not start until this gate is accepted.
 
 ## World Scale Track
 
@@ -541,11 +545,11 @@ Manual review required.
 ## Current Recommended Next Work
 
 ```text
-goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion
+hybrid_llm_draft_lua_deterministic_expansion_verification
 ```
 
 Status:
 
 ```text
-goal_037_recommended_not_started_until_lua_sandbox_execution_gate_verification_passes
+goal_037_produced_for_review_until_hybrid_llm_draft_lua_deterministic_expansion_verification_passes
 ```

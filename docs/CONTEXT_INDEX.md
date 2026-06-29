@@ -105,6 +105,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_035_LUA_MODULE_MANIFEST_REGISTRY.md` | Goal 035 scouting: manifest-only Lua governance, no interpreter/runtime/parser/provider dependency adoption. |
 | `docs/GOAL_036_LUA_SANDBOX_EXECUTION_GATE_SPEC.md` | Goal 036 task/spec: BCL-only Lua sandbox execution gate, host binding matrix, dry-run traces, deny-first decisions, repair plans, compact evidence under `.llmgc/procedural/goal-036-lua-sandbox-execution-gate/` and final stop at `lua_sandbox_execution_gate_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_036_LUA_SANDBOX_EXECUTION_GATE.md` | Goal 036 scouting: execution gate only, no Lua interpreter/runtime/parser/source/dependency adoption. |
+| `docs/GOAL_037_HYBRID_LLM_DRAFT_LUA_DETERMINISTIC_EXPANSION_SPEC.md` | Goal 037 task/spec: hybrid strict LLM draft plus bounded Lua deterministic expansion through an Application-layer executor adapter, structured IR output, C# validation, compact evidence under `.llmgc/procedural/goal-037-hybrid-llm-draft-lua-deterministic-expansion/` and final stop at `hybrid_llm_draft_lua_deterministic_expansion_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_037_HYBRID_LLM_DRAFT_LUA_DETERMINISTIC_EXPANSION.md` | Goal 037 scouting: one bounded LuaCSharp adapter may be adopted only if restore/build and sandbox isolation are proven; no arbitrary Lua, provider/LLM/RAG, Runtime/UI/Unity/GamePackage or generator-library changes. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -149,18 +151,18 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-goal_037_hybrid_llm_draft_plus_lua_deterministic_expansion
+hybrid_llm_draft_lua_deterministic_expansion_verification
 ```
 
-Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate is produced for review and stops at `lua_sandbox_execution_gate_verification required`. Goal 037 hybrid LLM draft plus Lua deterministic expansion is recommended next only after Goal 036 review acceptance and has not been started by this handoff.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate has been accepted by the user handoff embedded in Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 hybrid LLM draft plus Lua deterministic expansion is produced for review and stops at `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
 
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
 2. Keep Goal 035 `lua_module_manifest_registry_verification` recorded as passed by the user.
 3. Preserve Goal 031 and Goal 032 as produced-for-review/not passed.
-4. Keep Goal 036 Lua sandbox execution gate produced for review with `lua_sandbox_execution_gate_verification required`.
-5. Start Goal 037 hybrid LLM draft plus Lua deterministic expansion only after Goal 036 review acceptance.
+4. Keep Goal 036 `lua_sandbox_execution_gate_verification` recorded as passed by the user handoff embedded in Goal 037.
+5. Keep Goal 037 hybrid LLM draft plus Lua deterministic expansion produced for review with `hybrid_llm_draft_lua_deterministic_expansion_verification required`.
 
 Kill criterion:
 

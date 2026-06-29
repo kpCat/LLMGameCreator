@@ -7,6 +7,9 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="LuaCSharp" Version="0.5.5" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\LLMGameCreator.Domain\LLMGameCreator.Domain.csproj" />
     <ProjectReference Include="..\LLMGameCreator.GamePackage\LLMGameCreator.GamePackage.csproj" />
     <ProjectReference Include="..\LLMGameCreator.Runtime.Abstractions\LLMGameCreator.Runtime.Abstractions.csproj" />
