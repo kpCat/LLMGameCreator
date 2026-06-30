@@ -38,6 +38,7 @@ media_bound_playable_review_package_verification passed
 unity_alpha_media_bound_playable_package_verification passed
 unity_alpha_multifamily_playable_loop_verification passed
 full_media_bound_generator_campaign_verification passed
+full_generator_variability_regression_matrix_verification passed
 ```
 
 Produced for review:
@@ -45,7 +46,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
-full_generator_variability_regression_matrix_verification required
+full_campaign_gamepackage_materialization_matrix_verification required
 ```
 
 Current capabilities:
@@ -93,11 +94,13 @@ Current capabilities:
 - Unity Alpha multi-family playable loop proof consuming Goal 056 media-bound `StreamingAssets` plus Goal 043/047 family loop evidence into three family-mode player marker plans and compact Goal 057 artifacts, with real Unity Editor/player proof GREEN and `unityExitCode=0`, `playerExitCode=0`;
 - Full media-bound generator campaign proof consuming Goal 034-057 source facts into one campaign runner, Goal 058 review package staging, campaign Unity/player command markers and compact Goal 058 artifacts;
 - Full generator variability regression matrix proof consuming Goal 058 campaign evidence into 9 family x seed rows, variance metrics, replay determinism proof, review/preview/export matrix payloads, Unity matrix command markers and compact Goal 059 artifacts;
+- Goal 059 accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`;
+- Full campaign GamePackage materialization matrix proof consuming Goal 059 rows into 9 validator-clean physical GamePackage JSON artifacts, runtime consumption proof for three families, package-bound preview/export payloads, Unity Alpha package markers and compact Goal 060 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 is produced for review and remains at `full_generator_variability_regression_matrix_verification required`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 was accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 is produced for review and remains at `full_campaign_gamepackage_materialization_matrix_verification required`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -721,20 +724,30 @@ Consume Goal 058 full media-bound campaign evidence into a 3 family x 3 seed reg
 
 Status:
 
-Produced for review: `full_generator_variability_regression_matrix_verification required`.
+Accepted by Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`.
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `unityExitCode=0`, `playerExitCode=0`, 9/9 matrix rows, 9 distinct derived campaign hashes, replay determinism passed and all required matrix markers matched.
+
+### Goal 060: Full Campaign GamePackage Materialization Matrix
+
+Purpose:
+
+Consume Goal 059 family x seed variability rows into real validator-clean GamePackage artifacts, runtime consumption proof, preview/export package payloads and Unity Alpha package-consumption markers.
+
+Status:
+
+Produced for review: `full_campaign_gamepackage_materialization_matrix_verification required`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `unityExitCode=0`, `playerExitCode=0`, 9/9 physical packages validator-clean, runtime consumption passed for 3/3 materialized families and all required Unity package markers matched.
 
 ## Current Recommended Next Work
 
 ```text
-full_generator_variability_regression_matrix_verification
+full_campaign_gamepackage_materialization_matrix_verification
 ```
 
 Status:
 
 ```text
-goal_059_full_generator_variability_regression_matrix_produced_for_review_until_full_generator_variability_regression_matrix_verification_passes
+goal_060_full_campaign_gamepackage_materialization_matrix_review_until_full_campaign_gamepackage_materialization_matrix_verification_passes
 ```
-
-Do not start Goal 060 until the user accepts Goal 059.

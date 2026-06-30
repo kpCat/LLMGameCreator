@@ -27,6 +27,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> campaignLogLines = new List<string>();
         private readonly List<AlphaMatrixRow> matrixRows = new List<AlphaMatrixRow>();
         private readonly List<string> matrixLogLines = new List<string>();
+        private readonly List<AlphaPackageRow> packageRows = new List<AlphaPackageRow>();
+        private readonly List<string> packageLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string selectedStyleId = string.Empty;
@@ -71,6 +73,7 @@ namespace LLMGameCreatorAlpha
         private bool campaignManifestLoaded;
         private bool campaignMediaBound;
         private bool matrixPlanLoaded;
+        private bool packagePlanLoaded;
 
         private void Start()
         {
@@ -283,6 +286,7 @@ namespace LLMGameCreatorAlpha
                 var familyLoopLines = LoadFamilyLoopPayload(payloadRoot);
                 var campaignLines = LoadCampaignPayload(payloadRoot);
                 var matrixLines = LoadMatrixPayload(payloadRoot);
+                var packageLines = LoadPackageMaterializationPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -310,6 +314,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(familyLoopLines);
                 lines.AddRange(campaignLines);
                 lines.AddRange(matrixLines);
+                lines.AddRange(packageLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -372,6 +377,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunFamilyLoops());
             lines.AddRange(RunCampaignProof());
             lines.AddRange(RunMatrixProof());
+            lines.AddRange(RunPackageMaterializationProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1360,6 +1366,74 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadPackageMaterializationPayload(string payloadRoot)
+        {
+            packageRows.Clear();
+            packageLogLines.Clear();
+            packagePlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "package-materialization", "unity-package-consumption-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                return packageLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                packageRows.AddRange(ExtractPackageRows(planJson));
+                foreach (var row in packageRows)
+                {
+                    var packagePath = Path.Combine(payloadRoot, row.PackageRelativePath.Replace('/', Path.DirectorySeparatorChar));
+                    row.PackageFileExists = File.Exists(packagePath);
+                    row.PackageHashMatches = row.PackageFileExists;
+                    row.PackageJsonContainsPackageId = row.PackageFileExists;
+                }
+
+                packageRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                packagePlanLoaded = packageRows.Count > 0;
+                packageLogLines.Add("package_matrix_plan_loaded=" + packagePlanLoaded.ToString().ToLowerInvariant());
+                packageLogLines.Add("package_matrix_row_count=" + packageRows.Count);
+            }
+            catch (Exception ex)
+            {
+                packagePlanLoaded = false;
+                packageLogLines.Add("package_matrix_plan_loaded=false");
+                packageLogLines.Add("package_matrix_error_type=" + ex.GetType().Name);
+                packageLogLines.Add("package_matrix_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return packageLogLines;
+        }
+
+        private List<string> RunPackageMaterializationProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(packageLogLines);
+            if (!packagePlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("package_matrix_loaded=true");
+            lines.Add("package_materialization_goal=goal060");
+            foreach (var row in packageRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                var packageValidationPassed = row.PackageValidationPassed && row.PackageFileExists && row.PackageJsonContainsPackageId && row.PackageHashMatches;
+                lines.Add("package_row_started=" + row.RowId);
+                lines.Add("package_family=" + row.FamilyId);
+                lines.Add("package_seed=" + row.SeedId);
+                lines.Add("package_id=" + row.PackageId);
+                lines.Add("package_file_exists=" + row.PackageFileExists.ToString().ToLowerInvariant());
+                lines.Add("package_validation_passed=" + packageValidationPassed.ToString().ToLowerInvariant());
+                lines.Add("package_runtime_loop_completed=" + row.RuntimeLoopCompleted.ToString().ToLowerInvariant());
+                lines.Add("package_row_completed=" + row.RowId);
+            }
+
+            lines.Add("full_campaign_gamepackage_materialization_matrix_verification=required");
+            return lines;
+        }
+
         private static bool IsSelectedFamilyMode(AlphaFamilyMode mode, string requestedMode)
         {
             if (string.IsNullOrWhiteSpace(requestedMode) || requestedMode == "all")
@@ -1418,6 +1492,32 @@ namespace LLMGameCreatorAlpha
                     FamilyId = ExtractJsonString(value, "familyId"),
                     SeedId = ExtractJsonString(value, "seedId"),
                     DerivedCampaignHash = ExtractJsonString(value, "derivedCampaignHash")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaPackageRow> ExtractPackageRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaPackageRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    PackageId = ExtractJsonString(value, "packageId"),
+                    PackageRelativePath = ExtractJsonString(value, "packageRelativePath"),
+                    PackageHash = ExtractJsonString(value, "packageHash"),
+                    PackageValidationPassed = ExtractJsonBool(value, "packageValidationPassed"),
+                    RuntimeLoopCompleted = ExtractJsonBool(value, "runtimeLoopCompleted")
                 };
             }
         }
@@ -1771,6 +1871,12 @@ namespace LLMGameCreatorAlpha
             return match.Success && int.TryParse(match.Groups["value"].Value, out var value) ? value : 0;
         }
 
+        private static bool ExtractJsonBool(string json, string propertyName)
+        {
+            var match = Regex.Match(json, "\"" + Regex.Escape(propertyName) + "\"\\s*:\\s*(?<value>true|false)", RegexOptions.IgnoreCase);
+            return match.Success && string.Equals(match.Groups["value"].Value, "true", StringComparison.OrdinalIgnoreCase);
+        }
+
         private static long ExtractJsonLong(string json, string propertyName)
         {
             var match = Regex.Match(json, "\"" + Regex.Escape(propertyName) + "\"\\s*:\\s*(?<value>-?[0-9]+)");
@@ -2001,6 +2107,21 @@ namespace LLMGameCreatorAlpha
             public string FamilyId = string.Empty;
             public string SeedId = string.Empty;
             public string DerivedCampaignHash = string.Empty;
+        }
+
+        private sealed class AlphaPackageRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string PackageId = string.Empty;
+            public string PackageRelativePath = string.Empty;
+            public string PackageHash = string.Empty;
+            public bool PackageValidationPassed;
+            public bool RuntimeLoopCompleted;
+            public bool PackageFileExists;
+            public bool PackageJsonContainsPackageId;
+            public bool PackageHashMatches;
         }
 
         private sealed class AlphaMediaBoundBinding

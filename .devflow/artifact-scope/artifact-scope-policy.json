@@ -28,7 +28,8 @@
     ".llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package/",
     ".llmgc/procedural/goal-057-unity-alpha-multifamily-playable-loop/",
     ".llmgc/procedural/goal-058-full-media-bound-generator-campaign/",
-    ".llmgc/procedural/goal-059-full-generator-variability-regression-matrix/"
+    ".llmgc/procedural/goal-059-full-generator-variability-regression-matrix/",
+    ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -298,6 +299,27 @@
         ".llmgc/procedural/goal-059-full-generator-variability-regression-matrix/",
         "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/",
         "tests/LLMGameCreator.Tests/Application/FullGeneratorVariabilityRegressionMatrix/"
+      ]
+    },
+    {
+      "scenario": "goal-060-full-campaign-gamepackage-materialization-matrix",
+      "allowedPaths": [
+        "docs/GOAL_060_FULL_CAMPAIGN_GAMEPACKAGE_MATERIALIZATION_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_060_FULL_CAMPAIGN_GAMEPACKAGE_MATERIALIZATION.md",
+        "docs/agent-tasks/GOAL_060_FULL_CAMPAIGN_GAMEPACKAGE_MATERIALIZATION.md",
+        "docs/agent-tasks/GOAL_060_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/FullCampaignGamePackageMaterializationProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/",
+        "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/",
+        "tests/LLMGameCreator.Tests/Application/FullCampaignGamePackageMaterialization/"
       ]
     }
   ]
