@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 053 media asset campaign orchestration produced for review",
-    "gate_status":  "media_asset_campaign_orchestration_verification",
+    "current_phase_title":  "Goal 054 media materialization review package produced for review",
+    "gate_status":  "media_materialization_review_package_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_053_media_asset_campaign_orchestration",
-    "active_manual_gate":  "Goal 047 full generator without media dry run is accepted as passed by user handoff: full_generator_without_media_verification passed. Goal 053 media asset campaign orchestration is produced for review and requires media_asset_campaign_orchestration_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 053 media asset campaign orchestration artifacts and decide media_asset_campaign_orchestration_verification. Do not mark Goal 053 passed from this production handoff.",
-    "recommended_next_decision":  "If media_asset_campaign_orchestration_verification is accepted by user decision, select a bounded media adapter or generated playable-with-fixture-media step; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 053 production handoff.",
+    "last_completed_product_slice_id":  "goal_054_media_materialization_review_package",
+    "active_manual_gate":  "Goal 053 media asset campaign orchestration is accepted as passed by user handoff: media_asset_campaign_orchestration_verification passed. Goal 054 media materialization review package is produced for review and requires media_materialization_review_package_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 054 media materialization review package artifacts and decide media_materialization_review_package_verification. Do not mark Goal 054 passed from this production handoff.",
+    "recommended_next_decision":  "If media_materialization_review_package_verification is accepted by user decision, select a bounded media-bound playable/export review step; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 054 production handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "media_asset_campaign_orchestration_verification"
+                                                        "media_materialization_review_package_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -70,7 +70,8 @@
                            "goal_040_manual_gate":  "chunked_runtime_preview_export_multifamily_smoke_verification",
                            "goal_043_manual_gate":  "multi_family_generated_template_vertical_slice_verification",
                            "goal_047_manual_gate":  "full_generator_without_media_verification",
-                           "goal_053_manual_gate":  "media_asset_campaign_orchestration_verification"
+                           "goal_053_manual_gate":  "media_asset_campaign_orchestration_verification",
+                           "goal_054_manual_gate":  "media_materialization_review_package_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -91,20 +92,20 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_053_media_asset_campaign_orchestration",
-                                         "title":  "Media Asset Campaign Orchestration And Binding Dry Run",
+                                         "slice_id":  "goal_054_media_materialization_review_package",
+                                         "title":  "Media Materialization Review Package",
                                         "status":  "produced_for_review",
-                                         "summary":  "Goal 053 records the user-handoff acceptance of Goal 047, then adds a BCL-only Application-layer MediaAssetCampaignOrchestration seam. It consumes physical Goal 047, Goal 043 and Goal 040 evidence into a deterministic source manifest, media slot catalog, media request queue, license/provenance ledger, candidate quarantine matrix, review/promotion ledger, fixture media inventory, binding manifest, preview/export media payload proof, invalid/fake/leak matrix and compact report. It proves map_panel_rpg, survival_sandbox and first_person_grid_dungeon can plan image, audio, ui and bundle media through governed fixture-only bindings without real provider/media generation, network/import, Runtime/UI/Unity/GamePackage schema, provider/LLM/RAG/Lua or generator-library changes. Goal 053 stops at media_asset_campaign_orchestration_verification required.",
-                                         "scenario_id":  "goal-053-media-asset-campaign-orchestration",
-                                        "checks":  [
+                                         "summary":  "Goal 054 records the user-handoff acceptance of Goal 053, then adds a BCL-only Application-layer MediaMaterializationReviewPackage seam. It consumes physical Goal 053 and Goal 047 evidence into a deterministic source manifest, materialization queue, physical PNG/WAV/bundle fixture media inventory, provenance/license ledger, binding validation matrix, media-bound review package manifest, preview/export payload proof, family smoke files, invalid/fake/leak matrix and compact report. It proves map_panel_rpg, survival_sandbox and first_person_grid_dungeon have repo-local physical media files bound into review and preview/export payloads without provider/network/LLM/RAG/Lua execution and without Runtime/UI/Unity/GamePackage schema/generator-library changes. Goal 054 stops at media_materialization_review_package_verification required.",
+                                         "scenario_id":  "goal-054-media-materialization-review-package",
+                                         "checks":  [
                                                        "dotnet restore .\\LLMGameCreator.sln: passed.",
                                                        "dotnet build .\\LLMGameCreator.sln --no-restore: passed with 0 warnings / 0 errors.",
-                                                       "Goal 053 focused MediaAssetCampaign|Goal053 filter: 9/9 passed and wrote compact artifacts under .llmgc/procedural/goal-053-media-asset-campaign-orchestration.",
-                                                       "Goal 053 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-053-media-asset-campaign-orchestration.",
-                                                       "CurrentState|Goal053|MediaAsset filtered tests: 25/25 passed.",
-                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1027/1027 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_132205-check-all.",
-                                                       "goal-053-media-asset-campaign-orchestration artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash BC6EF7C3E66D8F56D769B47AD119B6E998160E34F05F48DF05506848603C1EAF.",
-                                                       "Direct artifact inspection listed 29 Goal 053 files, parsed all 12 JSON sidecars, counted 15 fixture files, and the compact report records implementationStatus=GREEN, accepted=false, manualGate=media_asset_campaign_orchestration_verification, familyCount=3, requestCount=36, fixtureFileCount=15, bindingCount=15, licenseLedgerPassed=true, invalidMatrixPassed=true, previewExportFamilyCount=3, everyFamilyHasImageAndAudioFixtureBindings=true and report hash 7A97B8449F1A041C80D9413A8942D96CA8339F8DF07C894A21DC02EC7794B7DB."
+                                                       "Goal 054 focused MediaMaterializationReviewPackage|Goal054 filter: 7/7 passed and wrote deterministic compact evidence.",
+                                                       "Goal 054 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-054-media-materialization-review-package.",
+                                                       "CurrentState|Goal054|MediaMaterialization filtered tests: 23/23 passed.",
+                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1033/1033 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_140859-check-all.",
+                                                       "goal-054-media-materialization-review-package artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash F1461CBBCA495BE8F036953AA1613B1165C8F23CD8423787637F3D87E0E0AE3B.",
+                                                       "Direct artifact inspection listed 29 Goal 054 files, counted 15 physical media files (9 PNG, 3 WAV, 3 bundle JSON), and the compact report records implementationStatus=GREEN, accepted=false, manualGate=media_materialization_review_package_verification, physicalMediaProduced=true, pngProofPassed=true, wavProofPassed=true, reviewPackageManifestPassed=true, invalidMatrixPassed=true and report file hash 55D25969558FBE306FD12D9A76C34953956B0BA7331890453AB75661E3F6FAE8."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -364,8 +365,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "media_asset_campaign_orchestration_verification",
-                                          "next_bounded_media_adapter_or_fixture_media_playable_step_after_goal_053_acceptance"
+                                          "media_materialization_review_package_verification",
+                                          "next_bounded_media_bound_playable_or_export_review_step_after_goal_054_acceptance"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -386,17 +387,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "media_asset_campaign_orchestration_verification",
-    "recommended_next_work_item_title":  "Review Goal 053 media asset campaign orchestration artifacts.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
+    "recommended_next_work_item":  "media_materialization_review_package_verification",
+    "recommended_next_work_item_title":  "Review Goal 054 media materialization review package artifacts.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_054_MEDIA_MATERIALIZATION_UNITY_REVIEW.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 053 media asset campaign orchestration review at media_asset_campaign_orchestration_verification",
-                                               "Next bounded media adapter or generated playable-with-fixture-media step remains future work until Goal 053 is accepted"
+                                               "Goal 054 media materialization review package at media_materialization_review_package_verification",
+                                               "Next bounded media-bound playable or export review step remains future work until Goal 054 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_054_MEDIA_MATERIALIZATION_UNITY_REVIEW_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_054_MEDIA_MATERIALIZATION_UNITY_REVIEW.md",
+                                                   "docs/agent-tasks/GOAL_054_MEDIA_MATERIALIZATION_UNITY_REVIEW.md",
                                                    "docs/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
                                                    "docs/agent-tasks/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
@@ -1239,7 +1243,7 @@
                                                                     "next_action":  "goal_053_media_asset_campaign_orchestration_produced_for_review"
                                                           },
     "media_asset_campaign_orchestration_verification":  {
-                                                            "status":  "required",
+                                                            "status":  "passed_by_user_handoff_before_goal_054",
                                                             "evidence_source":  "goal_053_media_asset_campaign_orchestration",
                                                             "observed_result":  [
                                                                                     "Design/MediaAssetCampaignOrchestration defines a BCL-only Application-layer source loader, campaign builder, validator, evidence writer and deterministic hash helper.",
@@ -1252,7 +1256,22 @@
                                                                                     "Invalid/fake/leak matrix rejects duplicate requests, unknown family/target/slot/media kind, missing provenance, unsafe licenses, provider metadata gaps, final-claim leaks, path traversal, absolute paths, network URL claims, provider/LLM/RAG claims, Runtime/UI/Unity/GamePackage mutation claims, nondeterminism, fake source refs and missing review traces.",
                                                                                     "Final report accepted=false and manualGate=media_asset_campaign_orchestration_verification"
                                                                                 ],
-                                                            "next_action":  "review_goal_053_before_media_adapter_or_generated_playable_with_fixture_media_step"
+                                                            "next_action":  "goal_054_media_materialization_review_package_produced_for_review"
+                                                        },
+    "media_materialization_review_package_verification":  {
+                                                            "status":  "required",
+                                                            "evidence_source":  "goal_054_media_materialization_review_package",
+                                                            "observed_result":  [
+                                                                                    "Design/MediaMaterializationReviewPackage defines a BCL-only Application-layer source loader, materialization queue builder, physical media writers, validator, evidence writer and deterministic hash helper.",
+                                                                                    "Goal 054 consumes physical Goal 053 and Goal 047 compact artifacts after recording media_asset_campaign_orchestration_verification passed by user handoff.",
+                                                                                    "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed and keeps Goal 054 accepted=false with media_materialization_review_package_verification required.",
+                                                                                    "The materialization queue covers all 15 promoted Goal 053 fixture media bindings across map_panel_rpg, survival_sandbox and first_person_grid_dungeon.",
+                                                                                    "Physical review-package media files include deterministic BCL-generated PNG, WAV and bundle manifest payloads with byte counts and SHA-256 hashes.",
+                                                                                    "The review package manifest and preview/export payload proof bind materialized media refs into review/export payloads without provider/network/LLM/RAG/Lua execution and without Runtime/UI/Unity/GamePackage schema/generator-library changes.",
+                                                                                    "Invalid/fake/leak matrix rejects missing Goal 053 acceptance, stale Goal 053 report state, missing physical files, PNG/WAV signature failures, hash mismatch, missing review binding, unsafe path, network/provider/LLM/RAG claims, Runtime/UI/Unity/GamePackage mutation claims, license promotion leaks, nondeterministic queue ordering, fake source refs and final-acceptance claims.",
+                                                                                    "Final report accepted=false and manualGate=media_materialization_review_package_verification"
+                                                                                ],
+                                                            "next_action":  "review_goal_054_before_media_bound_playable_or_export_step"
                                                         },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

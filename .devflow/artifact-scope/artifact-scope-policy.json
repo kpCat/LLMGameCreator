@@ -22,7 +22,8 @@
     ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/",
     ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/",
     ".llmgc/procedural/goal-047-full-generator-without-media-dry-run/",
-    ".llmgc/procedural/goal-053-media-asset-campaign-orchestration/"
+    ".llmgc/procedural/goal-053-media-asset-campaign-orchestration/",
+    ".llmgc/procedural/goal-054-media-materialization-review-package/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -165,6 +166,26 @@
         ".llmgc/procedural/goal-053-media-asset-campaign-orchestration/",
         "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/",
         "tests/LLMGameCreator.Tests/Application/MediaAssetCampaignOrchestration/"
+      ]
+    },
+    {
+      "scenario": "goal-054-media-materialization-review-package",
+      "allowedPaths": [
+        "docs/GOAL_054_MEDIA_MATERIALIZATION_UNITY_REVIEW_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_054_MEDIA_MATERIALIZATION_UNITY_REVIEW.md",
+        "docs/agent-tasks/GOAL_054_MEDIA_MATERIALIZATION_UNITY_REVIEW.md",
+        "docs/agent-tasks/GOAL_054_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/MediaMaterializationReviewPackageProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-054-media-materialization-review-package/",
+        "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage/",
+        "tests/LLMGameCreator.Tests/Application/MediaMaterializationReviewPackage/"
       ]
     }
   ]
