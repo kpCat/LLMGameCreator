@@ -31,7 +31,8 @@
     ".llmgc/procedural/goal-059-full-generator-variability-regression-matrix/",
     ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/",
     ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/",
-    ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/"
+    ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/",
+    ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -364,6 +365,27 @@
         ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/",
         "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/",
         "tests/LLMGameCreator.Tests/Application/ConstrainedSpatialDetailGeneration/"
+      ]
+    },
+    {
+      "scenario": "goal-063-gameplay-consequence-depth-matrix",
+      "allowedPaths": [
+        "docs/GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX.md",
+        "docs/agent-tasks/GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX.md",
+        "docs/agent-tasks/GOAL_063_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/GameplayConsequenceDepthMatrixProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/",
+        "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/",
+        "tests/LLMGameCreator.Tests/Application/GameplayConsequenceDepthMatrix/"
       ]
     }
   ]

@@ -1,0 +1,467 @@
+{
+    "schemaVersion":  "artifact_scope_report_v1",
+    "scenario":  "goal-063-gameplay-consequence-depth-matrix",
+    "accepted":  true,
+    "policyPath":  ".devflow/artifact-scope/artifact-scope-policy.json",
+    "baselineRef":  "",
+    "failOnTrackedIgnored":  false,
+    "changedPathCount":  45,
+    "allowedCount":  45,
+    "warningCount":  0,
+    "violationCount":  0,
+    "diagnostics":  [
+
+                    ],
+    "changedPaths":  [
+                         {
+                             "path":  ".devflow/artifact-scope/artifact-scope-policy.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CONTEXT_INDEX.md",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.md",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/artifact-scope-report.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/family-consequence-summary.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-command-plan-matrix.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-consequence-catalog.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-consequence-depth-matrix-report.md",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/invalid-diagnostics-matrix.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/preview-export-gameplay-payload.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/first_person_grid_dungeon-seed_alpha-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/first_person_grid_dungeon-seed_beta-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/first_person_grid_dungeon-seed_gamma-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/map_panel_rpg-seed_alpha-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/map_panel_rpg-seed_beta-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/map_panel_rpg-seed_gamma-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/survival_sandbox-seed_alpha-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/survival_sandbox-seed_beta-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/survival_sandbox-seed_gamma-gameplay-proof.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/runtime-state-delta-matrix.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/save-load-replay-audit.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/source-manifest.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/assets/asset-manifest.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/export-manifest.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/game-data/game-package.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/gameplay-consequence/unity-gameplay-consequence-command-plan.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/runtime/unity-runtime-config.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/unity-command-plan.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/unity-player-proof-summary.json",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/EXTERNAL_SCOUTING_GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX.md",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX_SPEC.md",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX.md",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_task_doc",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/GOAL_063_LAUNCHER.txt",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_task_doc",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixEvidenceService.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixHash.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixModels.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixProjector.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixSourceLoader.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixValidator.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceUnityProofRunner.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Application/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixTests.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/ProductSmoke/GameplayConsequenceDepthMatrixProductSmokeTests.cs",
+                             "git_status":  "test",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         }
+                     ]
+}

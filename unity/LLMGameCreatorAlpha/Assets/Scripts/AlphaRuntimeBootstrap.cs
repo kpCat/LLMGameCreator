@@ -33,6 +33,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> reviewPackageRcLogLines = new List<string>();
         private readonly List<AlphaSpatialDetailRow> spatialDetailRows = new List<AlphaSpatialDetailRow>();
         private readonly List<string> spatialDetailLogLines = new List<string>();
+        private readonly List<AlphaGameplayConsequenceRow> gameplayConsequenceRows = new List<AlphaGameplayConsequenceRow>();
+        private readonly List<string> gameplayConsequenceLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -81,6 +83,7 @@ namespace LLMGameCreatorAlpha
         private bool packagePlanLoaded;
         private bool reviewPackageRcPlanLoaded;
         private bool spatialDetailPlanLoaded;
+        private bool gameplayConsequencePlanLoaded;
 
         private void Start()
         {
@@ -296,6 +299,7 @@ namespace LLMGameCreatorAlpha
                 var packageLines = LoadPackageMaterializationPayload(payloadRoot);
                 var reviewPackageRcLines = LoadReviewPackageRcPayload(payloadRoot);
                 var spatialDetailLines = LoadSpatialDetailPayload(payloadRoot);
+                var gameplayConsequenceLines = LoadGameplayConsequencePayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -326,6 +330,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(packageLines);
                 lines.AddRange(reviewPackageRcLines);
                 lines.AddRange(spatialDetailLines);
+                lines.AddRange(gameplayConsequenceLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -391,6 +396,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunPackageMaterializationProof());
             lines.AddRange(RunReviewPackageRcProof());
             lines.AddRange(RunSpatialDetailProof());
+            lines.AddRange(RunGameplayConsequenceProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1610,6 +1616,71 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadGameplayConsequencePayload(string payloadRoot)
+        {
+            gameplayConsequenceRows.Clear();
+            gameplayConsequenceLogLines.Clear();
+            gameplayConsequencePlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "gameplay-consequence", "unity-gameplay-consequence-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                gameplayConsequenceLogLines.Add("gameplay_consequence_plan_loaded=false");
+                gameplayConsequenceLogLines.Add("gameplay_consequence_plan_missing=true");
+                return gameplayConsequenceLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                gameplayConsequenceRows.AddRange(ExtractGameplayConsequenceRows(planJson));
+                gameplayConsequenceRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                gameplayConsequencePlanLoaded = ExtractJsonBool(planJson, "passed") && gameplayConsequenceRows.Count > 0;
+                gameplayConsequenceLogLines.Add("gameplay_consequence_plan_loaded=" + gameplayConsequencePlanLoaded.ToString().ToLowerInvariant());
+                gameplayConsequenceLogLines.Add("gameplay_consequence_row_count=" + gameplayConsequenceRows.Count);
+            }
+            catch (Exception ex)
+            {
+                gameplayConsequencePlanLoaded = false;
+                gameplayConsequenceLogLines.Add("gameplay_consequence_plan_loaded=false");
+                gameplayConsequenceLogLines.Add("gameplay_consequence_error_type=" + ex.GetType().Name);
+                gameplayConsequenceLogLines.Add("gameplay_consequence_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return gameplayConsequenceLogLines;
+        }
+
+        private List<string> RunGameplayConsequenceProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(gameplayConsequenceLogLines);
+            if (!gameplayConsequencePlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("gameplay_consequence_goal=goal063");
+            foreach (var row in gameplayConsequenceRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("gameplay_consequence_row=" + row.FamilyId + "/" + row.SeedId);
+                foreach (var step in row.StepIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("gameplay_consequence_step=" + step);
+                }
+
+                foreach (var delta in row.DeltaIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("gameplay_consequence_delta=" + delta);
+                }
+
+                lines.Add("gameplay_consequence_completed=" + row.FamilyId + "/" + row.SeedId);
+            }
+
+            lines.Add("gameplay_consequence_matrix_completed=true");
+            lines.Add("gameplay_consequence_depth_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -1780,6 +1851,29 @@ namespace LLMGameCreatorAlpha
                     Reachable = ExtractJsonBool(value, "reachable"),
                     RouteVerified = ExtractJsonBool(value, "routeVerified"),
                     VarianceMarker = ExtractJsonString(value, "varianceMarker")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaGameplayConsequenceRow> ExtractGameplayConsequenceRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaGameplayConsequenceRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    StepIds = ExtractStringArray(value, "stepIds").ToList(),
+                    DeltaIds = ExtractStringArray(value, "deltaIds").ToList()
                 };
             }
         }
@@ -2411,6 +2505,15 @@ namespace LLMGameCreatorAlpha
             public bool Reachable;
             public bool RouteVerified;
             public string VarianceMarker = string.Empty;
+        }
+
+        private sealed class AlphaGameplayConsequenceRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public List<string> StepIds = new List<string>();
+            public List<string> DeltaIds = new List<string>();
         }
 
         private sealed class AlphaMediaBoundBinding

@@ -1,0 +1,54 @@
+# Artifact Scope Report
+
+- Scenario: goal-063-gameplay-consequence-depth-matrix
+- Accepted: True
+- Changed paths: 45
+- Allowed: 45
+- Warnings: 0
+- Violations: 0
+
+- info allowed_current_goal_change: .devflow/artifact-scope/artifact-scope-policy.json
+- info allowed_current_goal_change: docs/CONTEXT_INDEX.md
+- info allowed_current_goal_change: docs/CURRENT_GENERATOR_STATE.json
+- info allowed_current_goal_change: docs/CURRENT_GENERATOR_STATE.md
+- info allowed_current_goal_change: docs/FULL_GENERATOR_GOAL_QUEUE.md
+- info allowed_current_goal_change: unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/artifact-scope-report.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/family-consequence-summary.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-command-plan-matrix.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-consequence-catalog.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-consequence-depth-matrix-report.md
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/invalid-diagnostics-matrix.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/preview-export-gameplay-payload.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/first_person_grid_dungeon-seed_alpha-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/first_person_grid_dungeon-seed_beta-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/first_person_grid_dungeon-seed_gamma-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/map_panel_rpg-seed_alpha-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/map_panel_rpg-seed_beta-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/map_panel_rpg-seed_gamma-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/survival_sandbox-seed_alpha-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/survival_sandbox-seed_beta-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/rows/survival_sandbox-seed_gamma-gameplay-proof.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/runtime-state-delta-matrix.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/save-load-replay-audit.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/source-manifest.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/assets/asset-manifest.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/export-manifest.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/game-data/game-package.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/gameplay-consequence/unity-gameplay-consequence-command-plan.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/staging/runtime/unity-runtime-config.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/unity-command-plan.json
+- info allowed_current_goal_artifact: .llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/unity-player-proof-summary.json
+- info allowed_current_goal_change: docs/EXTERNAL_SCOUTING_GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX.md
+- info allowed_current_goal_change: docs/GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX_SPEC.md
+- info allowed_task_doc: docs/agent-tasks/GOAL_063_GAMEPLAY_CONSEQUENCE_DEPTH_MATRIX.md
+- info allowed_task_doc: docs/agent-tasks/GOAL_063_LAUNCHER.txt
+- info allowed_current_goal_change: src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixEvidenceService.cs
+- info allowed_current_goal_change: src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixHash.cs
+- info allowed_current_goal_change: src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixModels.cs
+- info allowed_current_goal_change: src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixProjector.cs
+- info allowed_current_goal_change: src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixSourceLoader.cs
+- info allowed_current_goal_change: src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixValidator.cs
+- info allowed_current_goal_change: src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceUnityProofRunner.cs
+- info allowed_current_goal_change: tests/LLMGameCreator.Tests/Application/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixTests.cs
+- info allowed_current_goal_change: tests/LLMGameCreator.Tests/ProductSmoke/GameplayConsequenceDepthMatrixProductSmokeTests.cs
