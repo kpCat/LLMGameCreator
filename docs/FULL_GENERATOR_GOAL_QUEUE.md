@@ -30,6 +30,7 @@ hybrid_llm_draft_lua_deterministic_expansion_verification passed
 world_scale_region_map_foundation_verification passed
 runtime_chunk_delta_traversal_smoke_verification passed
 chunked_runtime_preview_export_multifamily_smoke_verification passed
+multi_family_generated_template_vertical_slice_verification passed
 ```
 
 Produced for review:
@@ -37,7 +38,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
-multi_family_generated_template_vertical_slice_verification required
+full_generator_without_media_verification required
 ```
 
 Current capabilities:
@@ -76,11 +77,12 @@ Current capabilities:
 - runtime chunk delta traversal smoke with Goal 038 graph/map/chunk facts consumed into runtime-owned `GameRuntimeState` chunk deltas, real serializer/snapshot save-load proof, replay determinism and compact Goal 039 artifacts;
 - chunked runtime preview/export multi-family smoke with Goal 039 runtime chunk traversal artifacts consumed into four preview/export payloads, a bounded export manifest, three family-lens regression proof, bounded deterministic infinite-window proof, package immutability audit and compact Goal 040 artifacts;
 - multi-family generated template vertical slice with Goal 034-040 source facts consumed into one shared lifecycle and three deterministic family simulatable loop proofs for map/panel RPG, survival sandbox and first-person grid dungeon, plus compact Goal 043 artifacts;
+- full generator without media dry-run with Goal 034-040 and Goal 043 source facts consumed into source manifest, review/promotion ledger, repair diagnostics, three family dry-runs, runtime preview validation, without-media export profile selection, strict package compatibility proof, one-click dry-run summary and compact Goal 047 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039 and Goal 040 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 is produced for review and stops at `multi_family_generated_template_vertical_slice_verification required`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040 and Goal 043 have been accepted by user prompt or handoff. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 is produced for review and stops at `full_generator_without_media_verification required`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -102,7 +104,9 @@ Goal 039 compact evidence lives under `.llmgc/procedural/goal-039-runtime-chunk-
 
 Goal 040 compact evidence lives under `.llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/`; its produced report keeps `accepted=false`, proves four Goal 039 delta-backed preview/export payloads, a stable export manifest, three family lenses over the same core payload schema, bounded deterministic infinite-window chunk proof, package immutability audit and 16 invalid/fake/leak diagnostics, and the user handoff before Goal 043 accepted `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 041 and Goal 042 intent was absorbed into this aggressive Goal 040 proof.
 
-Goal 043 compact evidence lives under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/`; its produced report keeps `accepted=false`, proves one shared generated-template lifecycle across `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`, consumes Goal 040 preview/export payloads without copying source JSON, produces three deterministic simulatable family loops with state-changing commands, validates causal invalid/fake/leak diagnostics and leaves `multi_family_generated_template_vertical_slice_verification required`. Goal 043/044/045/046 intent was absorbed into this aggressive Goal 043 proof.
+Goal 043 compact evidence lives under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/`; its produced report keeps `accepted=false`, proves one shared generated-template lifecycle across `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`, consumes Goal 040 preview/export payloads without copying source JSON, produces three deterministic simulatable family loops with state-changing commands, validates causal invalid/fake/leak diagnostics and was accepted by the Goal 047 user handoff: `multi_family_generated_template_vertical_slice_verification passed`. Goal 043/044/045/046 intent was absorbed into this aggressive Goal 043 proof.
+
+Goal 047 compact evidence lives under `.llmgc/procedural/goal-047-full-generator-without-media-dry-run/`; its produced report keeps `accepted=false`, records Goal 043 as accepted by user handoff, preserves Goal 031 and Goal 032 as produced-for-review/not passed, proves three family dry-runs through one review/promotion and runtime-preview/export path, maps package compatibility through existing package assembly targets instead of inventing a new materializer, validates causal invalid/fake/leak diagnostics and leaves `full_generator_without_media_verification required`. Goal 047/048/049/050/051 intent was absorbed into this aggressive full-generator without-media dry-run proof.
 
 ## Queue Rules
 
@@ -520,7 +524,7 @@ Generate a richer map-and-panel RPG through the full lifecycle.
 
 Status:
 
-Produced for review as part of aggressive Goal 043 with `multi_family_generated_template_vertical_slice_verification required`, not passed.
+Accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`.
 
 ### Goal 044: Family 2 - Survival Sandbox Template
 
@@ -556,11 +560,15 @@ Absorbed into aggressive Goal 043 shared lifecycle and multi-family regression p
 
 ## Full Generator Stabilization Track
 
-### Goal 047: Review And Approval Workflow Hardening
+### Goal 047: Full Generator Without Media Dry Run
 
 Purpose:
 
-Make generated artifact review/promotion auditable and scalable.
+Run the full generator path without media across three families by combining review/promotion hardening, repair diagnostics, runtime preview validation, export profile selection, package compatibility proof and one-click dry-run evidence.
+
+Status:
+
+Produced for review with `full_generator_without_media_verification required`, not passed.
 
 ### Goal 048: Repair Diagnostics Hardening
 
@@ -568,11 +576,19 @@ Purpose:
 
 Ensure validation failures produce repairable diagnostics and bounded repair attempts.
 
+Status:
+
+Absorbed into aggressive Goal 047 repair diagnostics matrix. No separate Goal 048 gate is active.
+
 ### Goal 049: Runtime Preview Validation Across Generated Systems
 
 Purpose:
 
 Runtime preview smokes generated world/entity/quest/dialogue/item/economy/combat systems.
+
+Status:
+
+Absorbed into aggressive Goal 047 runtime preview validation matrix. No separate Goal 049 gate is active.
 
 ### Goal 050: Unity Export Profile Generalization
 
@@ -580,11 +596,19 @@ Purpose:
 
 Export generated packages through profile-selected Unity presentation modes without hardcoded Alpha-only assumptions.
 
+Status:
+
+Absorbed into aggressive Goal 047 without-media export profile selection matrix. No separate Goal 050 gate is active.
+
 ### Goal 051: One-Click Full Generator Dry Run
 
 Purpose:
 
 Run from approved profile/capabilities to generated package, validation, preview and export artifacts.
+
+Status:
+
+Absorbed into aggressive Goal 047 one-click dry-run summary. No separate Goal 051 gate is active.
 
 ### Goal 052: Full Generator Without Media Verification
 
@@ -603,11 +627,11 @@ Manual review required.
 ## Current Recommended Next Work
 
 ```text
-multi_family_generated_template_vertical_slice_verification
+full_generator_without_media_verification
 ```
 
 Status:
 
 ```text
-goal_043_produced_for_review_until_multi_family_generated_template_vertical_slice_verification_passes
+goal_047_produced_for_review_until_full_generator_without_media_verification_passes
 ```

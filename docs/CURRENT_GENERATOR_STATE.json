@@ -3,22 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 043 Multi-family generated template vertical slice produced for review",
-    "gate_status":  "multi_family_generated_template_vertical_slice_verification",
+    "current_phase_title":  "Goal 047 full generator without media dry run produced for review",
+    "gate_status":  "full_generator_without_media_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_043_multi_family_generated_template_vertical_slice",
-    "active_manual_gate":  "Goal 040 chunked runtime preview/export multi-family smoke is accepted as passed by user handoff: chunked_runtime_preview_export_multifamily_smoke_verification passed. Goal 043 multi-family generated template vertical slice is produced for review and requires multi_family_generated_template_vertical_slice_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 043 multi-family generated template vertical slice artifacts and decide multi_family_generated_template_vertical_slice_verification. Do not mark Goal 043 passed from this production handoff.",
-    "recommended_next_decision":  "If multi_family_generated_template_vertical_slice_verification is accepted by user decision, start the next appropriate bounded Goal 047 review/approval or family-runtime integration hardening work; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 043 production handoff.",
+    "last_completed_product_slice_id":  "goal_047_full_generator_without_media_dry_run",
+    "active_manual_gate":  "Goal 043 multi-family generated template vertical slice is accepted as passed by user handoff: multi_family_generated_template_vertical_slice_verification passed. Goal 047 full generator without media dry run is produced for review and requires full_generator_without_media_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 047 full generator without media dry-run artifacts and decide full_generator_without_media_verification. Do not mark Goal 047 passed from this production handoff.",
+    "recommended_next_decision":  "If full_generator_without_media_verification is accepted by user decision, select the next bounded generator integration goal; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 047 production handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "multi_family_generated_template_vertical_slice_verification",
-                                                        "goal_047_review_and_approval_workflow_hardening"
+                                                        "full_generator_without_media_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -69,7 +68,8 @@
                            "goal_038_manual_gate":  "world_scale_region_map_foundation_verification",
                            "goal_039_manual_gate":  "runtime_chunk_delta_traversal_smoke_verification",
                            "goal_040_manual_gate":  "chunked_runtime_preview_export_multifamily_smoke_verification",
-                           "goal_043_manual_gate":  "multi_family_generated_template_vertical_slice_verification"
+                           "goal_043_manual_gate":  "multi_family_generated_template_vertical_slice_verification",
+                           "goal_047_manual_gate":  "full_generator_without_media_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -90,20 +90,20 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_043_multi_family_generated_template_vertical_slice",
-                                         "title":  "Multi-Family Generated Template Vertical Slice",
+                                         "slice_id":  "goal_047_full_generator_without_media_dry_run",
+                                         "title":  "Full Generator Without Media Dry Run",
                                         "status":  "produced_for_review",
-                                         "summary":  "Goal 043 records the user-handoff acceptance of Goal 040, then adds a BCL-only Application-layer MultiFamilyGeneratedTemplateVerticalSlice seam. It consumes physical Goal 037 hybrid expansion, Goal 038 world/map/chunk foundation, Goal 039 runtime chunk traversal and Goal 040 preview/export payload evidence. It produces deterministic lifecycle plans and Application-owned simulatable loop proofs for map_panel_rpg, survival_sandbox and first_person_grid_dungeon, proves a shared lifecycle contract with family-scoped extensions only, writes compact evidence under .llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice and rejects 24 fake/invalid/leak cases. Goal 044/045/046 intent is absorbed into this aggressive Goal 043 proof; Goal 043 stops at multi_family_generated_template_vertical_slice_verification required.",
-                                         "scenario_id":  "goal-043-multi-family-generated-template-vertical-slice",
+                                         "summary":  "Goal 047 records the user-handoff acceptance of Goal 043, then adds a BCL-only Application-layer FullGeneratorWithoutMediaDryRun seam. It consumes physical Goal 034-040 and Goal 043 evidence into a deterministic source manifest, review/promotion ledger, repair diagnostics matrix, three family dry-run records, runtime preview validation matrix, without-media export profile selection matrix, strict package compatibility proof, one-click dry-run summary and invalid/fake/leak matrix. It proves map_panel_rpg, survival_sandbox and first_person_grid_dungeon can move through the same full-generator dry-run lifecycle without media/provider/LLM/RAG/Runtime/UI/Unity/GamePackage schema changes. Goal 047 stops at full_generator_without_media_verification required.",
+                                         "scenario_id":  "goal-047-full-generator-without-media-dry-run",
                                         "checks":  [
                                                        "dotnet restore .\\LLMGameCreator.sln: passed.",
                                                        "dotnet build .\\LLMGameCreator.sln --no-restore: passed with 0 warnings / 0 errors.",
-                                                       "Goal 043 focused MultiFamilyGeneratedTemplate|Goal043 filter: 7/7 passed and wrote compact artifacts under .llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice.",
-                                                       "Goal 043 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice.",
-                                                       "CurrentState|Goal043|MultiFamily filtered tests: 24/24 passed.",
-                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1016/1016 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_040221-check-all.",
-                                                       "goal-043-multi-family-generated-template-vertical-slice artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash 342C532483699A767293587F270FA28AAF412F4707FF50CD3E79A950FDE64535.",
-                                                       "Direct artifact inspection listed 12 required Goal 043 files, parsed all 11 JSON sidecars, and the compact report records implementationStatus=GREEN, accepted=false, manualGate=multi_family_generated_template_vertical_slice_verification, familyCount=3, simulatableLoopProofCount=3, sourceGoal040PreviewExportConsumed=true, sharedLifecycleContractPassed=true, invalidMatrixPassed=true and report hash 7D5E2B42761BB2AABCC22C06840CCAC2AAB5474F0B7F5EA5232AC7552A796685."
+                                                       "Goal 047 focused FullGeneratorWithoutMedia|Goal047 filter: 4/4 passed and wrote compact artifacts under .llmgc/procedural/goal-047-full-generator-without-media-dry-run.",
+                                                       "Goal 047 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-047-full-generator-without-media-dry-run.",
+                                                       "CurrentState|Goal047|FullGenerator filtered tests: 21/21 passed.",
+                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1019/1019 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_105239-check-all.",
+                                                       "goal-047-full-generator-without-media-dry-run artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash EBBB03D903F2C59EC66AF767CA197B39E8F8492D2285A0698F4869C75B3F0DEE.",
+                                                       "Direct artifact inspection listed 12 required Goal 047 files, parsed all 11 JSON sidecars, and the compact report records implementationStatus=GREEN, accepted=false, manualGate=full_generator_without_media_verification, familyCount=3, goal043AcceptedByUserHandoff=true, runtimePreviewValidationPassed=true, exportProfileSelectionPassed=true, packageProofPassed=true, invalidMatrixPassed=true, file hash 530DA73E2FE4B54187DD223E10F5E6D71AFD197BA214962F44B5C14673DBB5F7 and deterministic report hash a774f7e3d4b5907e447f5503244281d40e8dc5d51b9eea7cab8b2f8cb6cf16c1."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -363,8 +363,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "multi_family_generated_template_vertical_slice_verification",
-                                          "goal_047_review_and_approval_workflow_hardening"
+                                          "full_generator_without_media_verification",
+                                          "next_bounded_generator_integration_goal_after_goal_047_acceptance"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -385,17 +385,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "multi_family_generated_template_vertical_slice_verification",
-    "recommended_next_work_item_title":  "Review Goal 043 multi-family generated template vertical slice.",
-    "recommended_next_task_file":  "docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md",
+    "recommended_next_work_item":  "full_generator_without_media_verification",
+    "recommended_next_work_item_title":  "Review Goal 047 full generator without media dry-run artifacts.",
+    "recommended_next_task_file":  "docs/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN_SPEC.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 043 multi-family generated template vertical slice review at multi_family_generated_template_vertical_slice_verification",
-                                               "Goal 047 review and approval workflow hardening remains future work until Goal 043 is accepted"
+                                               "Goal 047 full generator without media dry-run review at full_generator_without_media_verification",
+                                               "Next bounded generator integration goal remains future work until Goal 047 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md",
+                                                   "docs/agent-tasks/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md",
                                                    "docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md",
                                                    "docs/agent-tasks/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md",
@@ -1201,7 +1204,7 @@
                                                                     "next_action":  "goal_043_multi_family_generated_template_vertical_slice_produced_for_review"
                                                           },
     "multi_family_generated_template_vertical_slice_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_handoff_before_goal_047",
                                                                     "evidence_source":  "goal_043_multi_family_generated_template_vertical_slice",
                                                                     "observed_result":  [
                                                                                             "Design/MultiFamilyGeneratedTemplateVerticalSlice defines a BCL-only Application-layer source loader, family template catalog, lifecycle builder, simulatable loop runner, validator, invalid matrix and evidence writer.",
@@ -1211,9 +1214,25 @@
                                                                                             "The shared lifecycle contract proves all three families use the same phases and differ only through family-scoped extension sections.",
                                                                                             ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice contains the catalog, shared lifecycle contract, three family loop plans, three simulatable loop proofs, multi-family regression matrix, preview/export consumption matrix, invalid diagnostics matrix and markdown report.",
                                                                                             "Invalid/fake/leak matrix rejects duplicate/unknown family ids, unknown scenario ids, missing lifecycle/source sections, fake Goal034/035/036/037/038/039/040 refs, unscoped family fields, architecture forks, GamePackage schema mutation claims, Runtime/UI/Unity/provider/LLM/RAG/media/Lua leakage, final prose promotion, nondeterministic ordering, cross-family collisions, profile mismatch, missing state transitions, copied preview/export payloads and missing validation trace.",
-                                                                                            "Final report accepted=false and manualGate=multi_family_generated_template_vertical_slice_verification"
+                                                                                            "Final report accepted=false and manualGate=multi_family_generated_template_vertical_slice_verification",
+                                                                                            "The user handoff for Goal 047 accepted multi_family_generated_template_vertical_slice_verification passed before Goal 047 implementation."
                                                                                         ],
-                                                                    "next_action":  "review_goal_043_before_goal_047_or_family_runtime_integration_hardening"
+                                                                    "next_action":  "goal_047_full_generator_without_media_dry_run_produced_for_review"
+                                                          },
+    "full_generator_without_media_verification":  {
+                                                                    "status":  "required",
+                                                                    "evidence_source":  "goal_047_full_generator_without_media_dry_run",
+                                                                    "observed_result":  [
+                                                                                            "Design/FullGeneratorWithoutMediaDryRun defines a BCL-only Application-layer source loader, review/promotion workflow, repair diagnostics planner, dry-run builder, validator, invalid matrix and evidence writer.",
+                                                                                            "Goal 047 consumes physical Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040 and Goal 043 artifacts without provider/LLM/RAG/media calls, without new Lua source/execution, and without mutating Runtime/UI/Unity/GamePackage/generator-library paths.",
+                                                                                            "The source manifest records Goal 043 as accepted by user handoff while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
+                                                                                            "Family dry-run records cover map_panel_rpg, survival_sandbox and first_person_grid_dungeon with state-changing loop proof, runtime preview payload summary, without-media export profile selection and 10 generated system coverage rows per family.",
+                                                                                            "The package proof uses strict compatibility mapping to existing package assembly targets instead of inventing a new materializer inside Goal 047.",
+                                                                                            ".llmgc/procedural/goal-047-full-generator-without-media-dry-run contains the source manifest, review/promotion ledger, repair diagnostics matrix, three family dry-run records, runtime preview validation matrix, export profile selection matrix, package compatibility summary, one-click dry-run summary, invalid/fake/leak matrix and markdown report.",
+                                                                                            "Invalid/fake/leak matrix rejects missing Goal043 source, wrong accepted gate, fake family ids, duplicate promotion transitions, invalid transition order, missing repair actions, source hash mismatch, cross-family leakage, missing state-changing loop proof, final prose promotion, provider/LLM/RAG/media claims, Runtime/Unity/GamePackage schema mutation claims, unsafe absolute paths and nondeterministic ordering.",
+                                                                                            "Final report accepted=false and manualGate=full_generator_without_media_verification"
+                                                                                        ],
+                                                                    "next_action":  "review_goal_047_before_next_bounded_generator_integration_goal"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

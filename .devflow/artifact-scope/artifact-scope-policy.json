@@ -20,7 +20,8 @@
   "allowedCurrentGoalArtifactRoots": [
     ".llmgc/procedural/development-complexity-stabilization/",
     ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/",
-    ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/"
+    ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/",
+    ".llmgc/procedural/goal-047-full-generator-without-media-dry-run/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -123,6 +124,26 @@
         ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/",
         "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice/",
         "tests/LLMGameCreator.Tests/Application/MultiFamilyGeneratedTemplateVerticalSlice/"
+      ]
+    },
+    {
+      "scenario": "goal-047-full-generator-without-media-dry-run",
+      "allowedPaths": [
+        "docs/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md",
+        "docs/agent-tasks/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md",
+        "docs/agent-tasks/GOAL_047_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/FullGeneratorWithoutMediaDryRunProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-047-full-generator-without-media-dry-run/",
+        "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/",
+        "tests/LLMGameCreator.Tests/Application/FullGeneratorWithoutMediaDryRun/"
       ]
     }
   ]
