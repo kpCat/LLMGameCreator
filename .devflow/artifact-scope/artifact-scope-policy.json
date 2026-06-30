@@ -25,7 +25,8 @@
     ".llmgc/procedural/goal-053-media-asset-campaign-orchestration/",
     ".llmgc/procedural/goal-054-media-materialization-review-package/",
     ".llmgc/procedural/goal-055-media-bound-playable-review-package-smoke/",
-    ".llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package/"
+    ".llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package/",
+    ".llmgc/procedural/goal-057-unity-alpha-multifamily-playable-loop/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -230,6 +231,28 @@
         "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/",
         "tests/LLMGameCreator.Tests/Application/UnityAlphaMediaBoundPlayablePackage/",
         "unity/LLMGameCreatorAlpha/Assets/"
+      ]
+    },
+    {
+      "scenario": "goal-057-unity-alpha-multifamily-playable-loop",
+      "allowedPaths": [
+        "docs/GOAL_057_UNITY_ALPHA_MULTIFAMILY_PLAYABLE_LOOP_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_057_UNITY_ALPHA_MULTIFAMILY_PLAYABLE_LOOP.md",
+        "docs/agent-tasks/GOAL_057_UNITY_ALPHA_MULTIFAMILY_PLAYABLE_LOOP.md",
+        "docs/agent-tasks/GOAL_057_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/UnityAlphaMultiFamilyPlayableLoopProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-057-unity-alpha-multifamily-playable-loop/",
+        "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/",
+        "tests/LLMGameCreator.Tests/Application/UnityAlphaMultiFamilyPlayableLoop/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/"
       ]
     }
   ]

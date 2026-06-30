@@ -20,6 +20,9 @@ namespace LLMGameCreatorAlpha
         private readonly List<AlphaMediaBoundBinding> mediaBoundBindings = new List<AlphaMediaBoundBinding>();
         private readonly List<string> mediaBoundLogLines = new List<string>();
         private readonly List<string> mediaBoundPanelFamilies = new List<string>();
+        private readonly List<AlphaFamilyMode> familyModes = new List<AlphaFamilyMode>();
+        private readonly List<AlphaFamilyLoopCommand> familyLoopCommands = new List<AlphaFamilyLoopCommand>();
+        private readonly List<string> familyLoopLogLines = new List<string>();
         private string packageId = string.Empty;
         private string selectedStyleId = string.Empty;
         private string packageHash = string.Empty;
@@ -48,6 +51,7 @@ namespace LLMGameCreatorAlpha
         private string lastCommandTargetId = string.Empty;
         private string status = "Loading Alpha payload...";
         private string mediaBoundStatus = "Media package: not staged";
+        private string familyModeArgument = "all";
         private int playerX = 1;
         private int playerY = 1;
         private int mapWidth = 7;
@@ -58,11 +62,18 @@ namespace LLMGameCreatorAlpha
         private bool mediaBoundWavLoaded;
         private bool mediaBoundBundleLoaded;
         private bool mediaBoundHashValidation;
+        private bool familyLoopPlanLoaded;
 
         private void Start()
         {
             Application.targetFrameRate = 30;
             var arguments = Environment.GetCommandLineArgs();
+            familyModeArgument = GetArgumentValue(arguments, "-alphaFamilyMode");
+            if (string.IsNullOrWhiteSpace(familyModeArgument))
+            {
+                familyModeArgument = "all";
+            }
+
             var logPath = GetArgumentValue(arguments, "-alphaLogPath");
             if (string.IsNullOrWhiteSpace(logPath))
             {
@@ -261,6 +272,7 @@ namespace LLMGameCreatorAlpha
                 payloadLoaded = payloadRootExists && commands.Count > 0;
                 ResetLoop();
                 var mediaBoundLines = LoadMediaBoundPayload(payloadRoot);
+                var familyLoopLines = LoadFamilyLoopPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -285,6 +297,7 @@ namespace LLMGameCreatorAlpha
                 lines.Add("alpha_runtime.package_bytes=" + packageJson.Length);
                 lines.Add("alpha_runtime.asset_manifest_bytes=" + assetManifestJson.Length);
                 lines.AddRange(mediaBoundLines);
+                lines.AddRange(familyLoopLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -344,6 +357,7 @@ namespace LLMGameCreatorAlpha
                 "alpha_runtime.quest_loop.reward_id=" + selectedItemId
             };
             lines.AddRange(mediaBoundLogLines);
+            lines.AddRange(RunFamilyLoops());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1126,6 +1140,133 @@ namespace LLMGameCreatorAlpha
             return mediaBoundLogLines;
         }
 
+        private List<string> LoadFamilyLoopPayload(string payloadRoot)
+        {
+            familyModes.Clear();
+            familyLoopCommands.Clear();
+            familyLoopLogLines.Clear();
+            familyLoopPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "family-loop", "family-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                familyLoopLogLines.Add("family_mode_manifest_loaded=false");
+                familyLoopLogLines.Add("family_command_plan_loaded=false");
+                return familyLoopLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                familyModes.AddRange(ExtractFamilyModes(planJson));
+                familyLoopCommands.AddRange(ExtractFamilyLoopCommands(planJson));
+                familyModes.Sort((left, right) => string.CompareOrdinal(left.FamilyId, right.FamilyId));
+                familyLoopCommands.Sort((left, right) =>
+                {
+                    var familyCompare = string.CompareOrdinal(left.FamilyId, right.FamilyId);
+                    return familyCompare != 0 ? familyCompare : left.Order.CompareTo(right.Order);
+                });
+
+                familyLoopPlanLoaded = familyModes.Count > 0 && familyLoopCommands.Count > 0;
+                familyLoopLogLines.Add("family_mode_manifest_loaded=" + familyLoopPlanLoaded.ToString().ToLowerInvariant());
+                familyLoopLogLines.Add("family_mode_count=" + familyModes.Count);
+                familyLoopLogLines.Add("family_command_plan_loaded=" + familyLoopPlanLoaded.ToString().ToLowerInvariant());
+                familyLoopLogLines.Add("family_command_count=" + familyLoopCommands.Count);
+            }
+            catch (Exception ex)
+            {
+                familyLoopPlanLoaded = false;
+                familyLoopLogLines.Add("family_mode_manifest_loaded=false");
+                familyLoopLogLines.Add("family_command_plan_loaded=false");
+                familyLoopLogLines.Add("family_loop_error_type=" + ex.GetType().Name);
+                familyLoopLogLines.Add("family_loop_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return familyLoopLogLines;
+        }
+
+        private List<string> RunFamilyLoops()
+        {
+            var lines = new List<string>();
+            lines.AddRange(familyLoopLogLines);
+            lines.Add("family_mode_argument=" + familyModeArgument);
+
+            if (!familyLoopPlanLoaded)
+            {
+                lines.Add("family_loop_completed=false");
+                return lines;
+            }
+
+            var selectedFamilies = familyModes
+                .Where(mode => IsSelectedFamilyMode(mode, familyModeArgument))
+                .OrderBy(mode => mode.FamilyId, StringComparer.Ordinal)
+                .ToList();
+
+            foreach (var family in selectedFamilies)
+            {
+                lines.Add("family_scenario_loaded=" + family.FamilyId);
+                lines.Add("family_mode_selected=" + family.FamilyId);
+                lines.Add("family_loop_started=" + family.FamilyId);
+
+                foreach (var command in familyLoopCommands.Where(command => command.FamilyId == family.FamilyId).OrderBy(command => command.Order))
+                {
+                    lines.Add("family_loop_step=" + command.FamilyId + ":" + command.Order + ":" + command.CommandType + ":" + command.FamilyMarker + ":" + command.ExpectedStatus);
+                    lines.Add("family_loop_step_marker=" + command.FamilyId + ":" + command.FamilyMarker);
+                }
+
+                lines.Add("family_loop_completed=" + family.FamilyId);
+            }
+
+            lines.Add("review_package_proof=goal057");
+            lines.Add("unity_alpha_multifamily_playable_loop_verification=required");
+            return lines;
+        }
+
+        private static bool IsSelectedFamilyMode(AlphaFamilyMode mode, string requestedMode)
+        {
+            if (string.IsNullOrWhiteSpace(requestedMode) || requestedMode == "all")
+            {
+                return true;
+            }
+
+            return string.Equals(mode.FamilyId, requestedMode, StringComparison.Ordinal)
+                || string.Equals(mode.ModeId, requestedMode, StringComparison.Ordinal);
+        }
+
+        private static IEnumerable<AlphaFamilyMode> ExtractFamilyModes(string json)
+        {
+            var array = ExtractArray(json, "familyModes");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                yield return new AlphaFamilyMode
+                {
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    ModeId = ExtractJsonString(value, "modeId"),
+                    ScenarioId = ExtractJsonString(value, "scenarioId"),
+                    ProfileId = ExtractJsonString(value, "profileId")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaFamilyLoopCommand> ExtractFamilyLoopCommands(string json)
+        {
+            var array = ExtractArray(json, "commands");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                yield return new AlphaFamilyLoopCommand
+                {
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    ScenarioId = ExtractJsonString(value, "scenarioId"),
+                    Order = ExtractJsonInt(value, "order"),
+                    CommandType = ExtractJsonString(value, "commandType"),
+                    FamilyMarker = ExtractJsonString(value, "familyMarker"),
+                    ExpectedStatus = ExtractJsonString(value, "expectedStatus")
+                };
+            }
+        }
+
         private static IEnumerable<AlphaMediaBoundBinding> ExtractMediaBoundBindings(string json)
         {
             var array = ExtractArray(json, "bindings");
@@ -1661,6 +1802,24 @@ namespace LLMGameCreatorAlpha
             public string LastCommandType = string.Empty;
             public string LastCommandTargetId = string.Empty;
             public string StatusText = string.Empty;
+        }
+
+        private sealed class AlphaFamilyMode
+        {
+            public string FamilyId = string.Empty;
+            public string ModeId = string.Empty;
+            public string ScenarioId = string.Empty;
+            public string ProfileId = string.Empty;
+        }
+
+        private sealed class AlphaFamilyLoopCommand
+        {
+            public string FamilyId = string.Empty;
+            public string ScenarioId = string.Empty;
+            public int Order;
+            public string CommandType = string.Empty;
+            public string FamilyMarker = string.Empty;
+            public string ExpectedStatus = string.Empty;
         }
 
         private sealed class AlphaMediaBoundBinding
