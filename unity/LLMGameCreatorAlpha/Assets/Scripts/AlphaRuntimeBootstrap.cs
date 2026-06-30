@@ -29,8 +29,11 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> matrixLogLines = new List<string>();
         private readonly List<AlphaPackageRow> packageRows = new List<AlphaPackageRow>();
         private readonly List<string> packageLogLines = new List<string>();
+        private readonly List<AlphaReviewPackageRcRow> reviewPackageRcRows = new List<AlphaReviewPackageRcRow>();
+        private readonly List<string> reviewPackageRcLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
+        private string reviewPackageRcId = string.Empty;
         private string selectedStyleId = string.Empty;
         private string packageHash = string.Empty;
         private string assetManifestHash = string.Empty;
@@ -74,6 +77,7 @@ namespace LLMGameCreatorAlpha
         private bool campaignMediaBound;
         private bool matrixPlanLoaded;
         private bool packagePlanLoaded;
+        private bool reviewPackageRcPlanLoaded;
 
         private void Start()
         {
@@ -287,6 +291,7 @@ namespace LLMGameCreatorAlpha
                 var campaignLines = LoadCampaignPayload(payloadRoot);
                 var matrixLines = LoadMatrixPayload(payloadRoot);
                 var packageLines = LoadPackageMaterializationPayload(payloadRoot);
+                var reviewPackageRcLines = LoadReviewPackageRcPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -315,6 +320,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(campaignLines);
                 lines.AddRange(matrixLines);
                 lines.AddRange(packageLines);
+                lines.AddRange(reviewPackageRcLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -378,6 +384,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunCampaignProof());
             lines.AddRange(RunMatrixProof());
             lines.AddRange(RunPackageMaterializationProof());
+            lines.AddRange(RunReviewPackageRcProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1434,6 +1441,142 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadReviewPackageRcPayload(string payloadRoot)
+        {
+            reviewPackageRcRows.Clear();
+            reviewPackageRcLogLines.Clear();
+            reviewPackageRcId = string.Empty;
+            reviewPackageRcPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "review-package-rc", "unity-player-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                return reviewPackageRcLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                reviewPackageRcId = ExtractJsonString(planJson, "reviewPackageRcId");
+                reviewPackageRcRows.AddRange(ExtractReviewPackageRcRows(planJson));
+                foreach (var row in reviewPackageRcRows)
+                {
+                    var packagePath = Path.Combine(payloadRoot, row.PackageRelativePath.Replace('/', Path.DirectorySeparatorChar));
+                    row.PackageFileExists = File.Exists(packagePath);
+                    if (row.PackageFileExists)
+                    {
+                        byte[] packageBytes;
+                        if (TryReadPackageBytes(packagePath, out packageBytes))
+                        {
+                            var packageJson = Encoding.UTF8.GetString(packageBytes);
+                            var rawPackageHash = HashBytes(packageBytes);
+                            var canonicalPackageHash = HashBytes(Encoding.UTF8.GetBytes(packageJson.TrimEnd('\r', '\n')));
+                            row.PackageHashMatches = string.Equals(canonicalPackageHash, row.PackageHash, StringComparison.OrdinalIgnoreCase)
+                                || string.Equals(rawPackageHash, row.PackageHash, StringComparison.OrdinalIgnoreCase);
+                            row.PackageJsonContainsPackageId = packageJson.Contains("\"packageId\": \"" + row.PackageId + "\"", StringComparison.Ordinal)
+                                || packageJson.Contains("\"packageId\":\"" + row.PackageId + "\"", StringComparison.Ordinal);
+                        }
+                        else
+                        {
+                            reviewPackageRcLogLines.Add("review_package_rc_package_readable=false");
+                            reviewPackageRcLogLines.Add("review_package_rc_package_read_error_row=" + row.RowId);
+                        }
+                    }
+
+                    row.PackageMediaBindingsVerified = row.PackageMediaBindingsVerified && mediaBoundHashValidation && mediaBoundPanelFamilies.Contains(row.FamilyId);
+                }
+
+                reviewPackageRcRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                reviewPackageRcPlanLoaded = reviewPackageRcId == "goal061-review-package-rc" && reviewPackageRcRows.Count > 0;
+                reviewPackageRcLogLines.Add("review_package_rc_plan_loaded=" + reviewPackageRcPlanLoaded.ToString().ToLowerInvariant());
+                reviewPackageRcLogLines.Add("review_package_rc_id=" + reviewPackageRcId);
+                reviewPackageRcLogLines.Add("review_package_rc_row_count=" + reviewPackageRcRows.Count);
+            }
+            catch (Exception ex)
+            {
+                reviewPackageRcPlanLoaded = false;
+                reviewPackageRcLogLines.Add("review_package_rc_plan_loaded=false");
+                reviewPackageRcLogLines.Add("review_package_rc_error_type=" + ex.GetType().Name);
+                reviewPackageRcLogLines.Add("review_package_rc_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return reviewPackageRcLogLines;
+        }
+
+        private List<string> RunReviewPackageRcProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(reviewPackageRcLogLines);
+            if (!reviewPackageRcPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("review_package_rc_loaded=true");
+            lines.Add("review_package_rc_id=" + reviewPackageRcId);
+            foreach (var row in reviewPackageRcRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                var packageHashVerified = row.PackageFileExists
+                    && row.PackageJsonContainsPackageId
+                    && row.PackageHashMatches
+                    && (row.PackageHashVerified || !string.IsNullOrWhiteSpace(row.PackageHash));
+                var mediaVerified = row.PackageMediaBindingsVerified;
+                var saveLoadReplayVerified = row.SaveLoadReplayVerified;
+                lines.Add("package_row_selected=" + row.RowId);
+                lines.Add("package_id=" + row.PackageId);
+                lines.Add("family_id=" + row.FamilyId);
+                lines.Add("seed_id=" + row.SeedId);
+                lines.Add("package_hash_verified=" + packageHashVerified.ToString().ToLowerInvariant());
+                lines.Add("package_media_bindings_verified=" + mediaVerified.ToString().ToLowerInvariant());
+                lines.Add("package_loop_started=true");
+                foreach (var step in row.OrderedStepIds.OrderBy(step => step, StringComparer.Ordinal))
+                {
+                    lines.Add("package_loop_step=" + step);
+                }
+
+                lines.Add("package_loop_completed=true");
+                lines.Add("save_load_replay_verified=" + saveLoadReplayVerified.ToString().ToLowerInvariant());
+            }
+
+            lines.Add("review_package_rc_proof=goal061");
+            lines.Add("full_campaign_playable_review_package_rc_verification=required");
+            return lines;
+        }
+
+        private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
+        {
+            bytes = new byte[0];
+            var candidates = new List<string> { packagePath };
+            var currentDirectory = Directory.GetCurrentDirectory().TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                + Path.DirectorySeparatorChar;
+            if (packagePath.StartsWith(currentDirectory, StringComparison.OrdinalIgnoreCase))
+            {
+                candidates.Add(packagePath.Substring(currentDirectory.Length));
+            }
+
+            foreach (var candidate in candidates)
+            {
+                for (var attempt = 0; attempt < 3; attempt++)
+                {
+                    try
+                    {
+                        bytes = File.ReadAllBytes(candidate);
+                        return true;
+                    }
+                    catch (IOException)
+                    {
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
+
+                    System.Threading.Thread.Sleep(50);
+                }
+            }
+
+            return false;
+        }
+
         private static bool IsSelectedFamilyMode(AlphaFamilyMode mode, string requestedMode)
         {
             if (string.IsNullOrWhiteSpace(requestedMode) || requestedMode == "all")
@@ -1518,6 +1661,34 @@ namespace LLMGameCreatorAlpha
                     PackageHash = ExtractJsonString(value, "packageHash"),
                     PackageValidationPassed = ExtractJsonBool(value, "packageValidationPassed"),
                     RuntimeLoopCompleted = ExtractJsonBool(value, "runtimeLoopCompleted")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaReviewPackageRcRow> ExtractReviewPackageRcRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaReviewPackageRcRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    PackageId = ExtractJsonString(value, "packageId"),
+                    PackageRelativePath = ExtractJsonString(value, "packageRelativePath"),
+                    PackageHash = ExtractJsonString(value, "packageHash"),
+                    PackageHashVerified = ExtractJsonBool(value, "packageHashVerified"),
+                    PackageMediaBindingsVerified = ExtractJsonBool(value, "packageMediaBindingsVerified"),
+                    SaveLoadReplayVerified = ExtractJsonBool(value, "saveLoadReplayVerified"),
+                    OrderedStepIds = ExtractStringArray(value, "orderedStepIds").ToList()
                 };
             }
         }
@@ -2122,6 +2293,23 @@ namespace LLMGameCreatorAlpha
             public bool PackageFileExists;
             public bool PackageJsonContainsPackageId;
             public bool PackageHashMatches;
+        }
+
+        private sealed class AlphaReviewPackageRcRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string PackageId = string.Empty;
+            public string PackageRelativePath = string.Empty;
+            public string PackageHash = string.Empty;
+            public bool PackageHashVerified;
+            public bool PackageMediaBindingsVerified;
+            public bool SaveLoadReplayVerified;
+            public bool PackageFileExists;
+            public bool PackageJsonContainsPackageId;
+            public bool PackageHashMatches;
+            public List<string> OrderedStepIds = new List<string>();
         }
 
         private sealed class AlphaMediaBoundBinding

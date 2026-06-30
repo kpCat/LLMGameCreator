@@ -1,0 +1,567 @@
+{
+  "manifest": {
+    "packageId": "game/goal060/survival-sandbox/seed-gamma",
+    "title": "Goal060 survival sandbox seed gamma",
+    "version": "0.1.0",
+    "formatVersion": "0.1",
+    "startMapId": "map/goal060/survival-sandbox/seed-gamma/start",
+    "description": "Goal 060 materialized package for survival_sandbox / seed_gamma."
+  },
+  "game": {
+    "tilePrototypes": [
+      {
+        "id": "tile/grass",
+        "name": "Grass",
+        "walkable": true,
+        "movementCost": 1,
+        "assetId": null
+      },
+      {
+        "id": "tile/goal060/survival-sandbox/seed-gamma/floor",
+        "name": "Goal060 survival_sandbox Tile",
+        "walkable": true,
+        "movementCost": 1,
+        "assetId": null
+      }
+    ],
+    "entityPrototypes": [
+      {
+        "id": "entity/player",
+        "name": "Player",
+        "assetId": null,
+        "components": [
+          {
+            "type": "player",
+            "args": {}
+          }
+        ]
+      },
+      {
+        "id": "entity/goal060/survival-sandbox/seed-gamma/guide",
+        "name": "Goal060 Guide seed_gamma",
+        "assetId": null,
+        "components": [
+          {
+            "type": "npc",
+            "args": {
+              "family": "survival_sandbox",
+              "seed": "seed_gamma"
+            }
+          }
+        ]
+      }
+    ],
+    "maps": [
+      {
+        "id": "map/start",
+        "name": "Start Map",
+        "width": 8,
+        "height": 8,
+        "defaultTileId": "tile/grass",
+        "startPosition": {
+          "x": 1,
+          "y": 1
+        },
+        "tiles": [],
+        "entities": [
+          {
+            "id": "entity/player/start",
+            "prototypeId": "entity/player",
+            "position": {
+              "x": 1,
+              "y": 1
+            },
+            "components": []
+          }
+        ]
+      },
+      {
+        "id": "map/goal060/survival-sandbox/seed-gamma/start",
+        "name": "Goal060 survival_sandbox seed_gamma",
+        "width": 6,
+        "height": 6,
+        "defaultTileId": "tile/goal060/survival-sandbox/seed-gamma/floor",
+        "startPosition": {
+          "x": 1,
+          "y": 1
+        },
+        "tiles": [],
+        "entities": [
+          {
+            "id": "entity/goal060/survival-sandbox/seed-gamma/guide/start",
+            "prototypeId": "entity/goal060/survival-sandbox/seed-gamma/guide",
+            "position": {
+              "x": 2,
+              "y": 1
+            },
+            "components": []
+          },
+          {
+            "id": "entity/player/survival-sandbox/seed-gamma",
+            "prototypeId": "entity/player",
+            "position": {
+              "x": 1,
+              "y": 1
+            },
+            "components": []
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "item/goal060/survival-sandbox/seed-gamma/relic",
+        "name": "Goal060 Relic seed_gamma",
+        "description": "Traceable package-bound item for matrix-row-survival-sandbox-seed-gamma.",
+        "iconAssetId": null,
+        "kind": "goal060",
+        "rarity": null,
+        "maxStack": 99,
+        "value": null,
+        "weight": null,
+        "questItem": null,
+        "unique": null,
+        "maxDurability": null,
+        "maxCharge": null,
+        "ammoType": null,
+        "fuelType": null,
+        "cannotSell": null,
+        "cannotDrop": null,
+        "requirements": [],
+        "tags": [
+          "goal060",
+          "survival_sandbox",
+          "seed_gamma"
+        ],
+        "metadata": {},
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal060/survival-sandbox/seed-gamma/material",
+        "name": "Goal060 Material seed_gamma",
+        "description": "Crafting input for matrix-row-survival-sandbox-seed-gamma.",
+        "iconAssetId": null,
+        "kind": "material",
+        "rarity": null,
+        "maxStack": 99,
+        "value": null,
+        "weight": null,
+        "questItem": null,
+        "unique": null,
+        "maxDurability": null,
+        "maxCharge": null,
+        "ammoType": null,
+        "fuelType": null,
+        "cannotSell": null,
+        "cannotDrop": null,
+        "requirements": [],
+        "tags": [
+          "goal060",
+          "crafting"
+        ],
+        "metadata": {},
+        "useConditions": [],
+        "useEffects": []
+      }
+    ],
+    "resources": [
+      {
+        "id": "resource/goal060/survival-sandbox/seed-gamma/pressure",
+        "name": "Goal060 Resource seed_gamma",
+        "kind": "survival",
+        "description": "Runtime resource for matrix-row-survival-sandbox-seed-gamma.",
+        "iconAssetId": null,
+        "defaultValue": 25,
+        "minValue": 0,
+        "maxValue": 100,
+        "regenPerTick": null,
+        "tags": [
+          "goal060",
+          "survival_sandbox"
+        ],
+        "metadata": {}
+      }
+    ],
+    "statuses": [],
+    "recipes": [
+      {
+        "id": "recipe/goal060/survival-sandbox/seed-gamma/craft",
+        "name": "Goal060 Craft seed_gamma",
+        "category": "goal060",
+        "stationId": null,
+        "requirements": [],
+        "inputs": [
+          {
+            "kind": "item",
+            "id": "item/goal060/survival-sandbox/seed-gamma/material",
+            "amount": 1,
+            "scope": null,
+            "consumeMode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "costs": [],
+        "outputs": [
+          {
+            "kind": "item",
+            "id": "item/goal060/survival-sandbox/seed-gamma/relic",
+            "amount": 1,
+            "scope": null,
+            "mode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "failureOutputs": [],
+        "duration": null,
+        "cooldown": null,
+        "successChance": 1,
+        "tags": [],
+        "metadata": {}
+      }
+    ],
+    "lootTables": [],
+    "transactions": [],
+    "resourceNetworks": [],
+    "resourceNodes": [],
+    "inventories": [
+      {
+        "id": "inventory/player",
+        "ownerKind": "player",
+        "ownerId": "player",
+        "slots": 12,
+        "stacks": [
+          {
+            "itemId": "item/goal060/survival-sandbox/seed-gamma/material",
+            "amount": 2,
+            "uniqueInstanceId": null,
+            "questItem": null,
+            "durability": null,
+            "charge": null,
+            "metadata": {}
+          }
+        ],
+        "tags": [],
+        "metadata": {
+          "goal060RowId": "matrix-row-survival-sandbox-seed-gamma"
+        }
+      }
+    ],
+    "equipmentSlots": [],
+    "abilities": [
+      {
+        "id": "ability/goal060/survival-sandbox/seed-gamma/strike",
+        "name": "Goal060 Strike seed_gamma",
+        "kind": "attack",
+        "requirements": [],
+        "costs": [],
+        "cooldown": null,
+        "targeting": null,
+        "range": null,
+        "power": 4,
+        "resourceId": "resource/goal060/survival-sandbox/seed-gamma/pressure",
+        "tags": [
+          "goal060",
+          "basic_attack"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {}
+      }
+    ],
+    "stats": [
+      {
+        "id": "stat/goal060/survival-sandbox/seed-gamma/pressure",
+        "name": "Goal060 Pressure",
+        "kind": "attribute",
+        "description": "Dungeon pressure stat for matrix-row-survival-sandbox-seed-gamma.",
+        "defaultValue": 5,
+        "minValue": 0,
+        "maxValue": 10,
+        "iconAssetId": null,
+        "tags": [],
+        "metadata": {}
+      }
+    ],
+    "progressions": [],
+    "encounters": [
+      {
+        "id": "encounter/goal060/survival-sandbox/seed-gamma/pressure",
+        "name": "Goal060 Encounter seed_gamma",
+        "kind": "campaign_pressure",
+        "participants": [
+          {
+            "id": "participant/goal060/survival-sandbox/seed-gamma/player",
+            "name": "Goal060 Explorer",
+            "kind": "enemy",
+            "entityPrototypeId": null,
+            "factionId": null,
+            "team": "player",
+            "stats": [
+              {
+                "kind": "stat",
+                "id": "stat/goal060/survival-sandbox/seed-gamma/pressure",
+                "amount": 5,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "resources": [
+              {
+                "kind": "resource",
+                "id": "resource/goal060/survival-sandbox/seed-gamma/pressure",
+                "amount": 20,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "abilities": [
+              "ability/goal060/survival-sandbox/seed-gamma/strike"
+            ],
+            "inventoryId": null,
+            "equipmentOwnerId": null,
+            "tags": [],
+            "metadata": {}
+          },
+          {
+            "id": "participant/goal060/survival-sandbox/seed-gamma/pressure-node",
+            "name": "Goal060 Pressure Node",
+            "kind": "enemy",
+            "entityPrototypeId": null,
+            "factionId": null,
+            "team": "enemy",
+            "stats": [
+              {
+                "kind": "stat",
+                "id": "stat/goal060/survival-sandbox/seed-gamma/pressure",
+                "amount": 3,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "resources": [
+              {
+                "kind": "resource",
+                "id": "resource/goal060/survival-sandbox/seed-gamma/pressure",
+                "amount": 8,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "abilities": [],
+            "inventoryId": null,
+            "equipmentOwnerId": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [
+          {
+            "kind": "item",
+            "id": "item/goal060/survival-sandbox/seed-gamma/relic",
+            "amount": 1,
+            "scope": null,
+            "mode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "consequences": [],
+        "lootTableId": null,
+        "defaultSeed": null,
+        "tags": [],
+        "metadata": {
+          "default_attack_ability_id": "ability/goal060/survival-sandbox/seed-gamma/strike",
+          "goal060RowId": "matrix-row-survival-sandbox-seed-gamma"
+        }
+      }
+    ],
+    "quests": [
+      {
+        "id": "quest/goal060/survival-sandbox/seed-gamma/progress",
+        "title": "Goal060 survival_sandbox Progress",
+        "description": "Quest trace for matrix-row-survival-sandbox-seed-gamma.",
+        "kind": "goal060",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/goal060/survival-sandbox/seed-gamma/advance",
+            "kind": "craft_recipe",
+            "targetId": "recipe/goal060/survival-sandbox/seed-gamma/craft",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [
+              {
+                "kind": "item",
+                "id": "item/goal060/survival-sandbox/seed-gamma/relic",
+                "amount": 1,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "goal060RowId": "matrix-row-survival-sandbox-seed-gamma",
+              "sourceCampaignHash": "ef0a90c03ed76c0901b0788260aee2747a61d97e5dccd3aa669f3bab829e880f"
+            }
+          }
+        ],
+        "rewards": [
+          {
+            "kind": "item",
+            "id": "item/goal060/survival-sandbox/seed-gamma/relic",
+            "amount": 1,
+            "scope": null,
+            "mode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": false,
+        "tags": [
+          "goal060",
+          "survival_sandbox",
+          "seed_gamma"
+        ],
+        "metadata": {},
+        "stages": []
+      }
+    ],
+    "dialogues": [
+      {
+        "id": "dialogue/goal060/survival-sandbox/seed-gamma/guide",
+        "title": "Goal060 Dialogue seed_gamma",
+        "startNodeId": "node/goal060/survival-sandbox/seed-gamma/start",
+        "backgroundAssetId": null,
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "goal060",
+          "survival_sandbox"
+        ],
+        "metadata": {},
+        "nodes": [
+          {
+            "id": "node/goal060/survival-sandbox/seed-gamma/start",
+            "speakerId": "entity/goal060/survival-sandbox/seed-gamma/guide/start",
+            "expression": "neutral",
+            "text": "Goal060 package row matrix-row-survival-sandbox-seed-gamma",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/goal060/survival-sandbox/seed-gamma/advance",
+                "text": "Advance package proof",
+                "targetNodeId": null,
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [
+                  {
+                    "kind": "item",
+                    "id": "item/goal060/survival-sandbox/seed-gamma/relic",
+                    "amount": 1,
+                    "scope": null,
+                    "mode": null,
+                    "tags": [],
+                    "metadata": {}
+                  }
+                ],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal060/survival-sandbox/seed-gamma/progress",
+                "advanceQuestId": null,
+                "setQuestStageId": null,
+                "openTransactionId": null,
+                "startEncounterId": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "factions": [],
+    "formulas": [],
+    "interactions": []
+  },
+  "assetCatalog": {
+    "assets": [],
+    "contracts": [],
+    "generationRequests": []
+  },
+  "scriptCatalog": {
+    "scripts": [],
+    "generators": []
+  },
+  "generatedContent": {
+    "profile": {
+      "title": "Goal060 survival sandbox seed gamma",
+      "description": "Goal 060 materialized validator-clean package for matrix-row-survival-sandbox-seed-gamma.",
+      "genre": "survival_sandbox",
+      "tone": "",
+      "presentationMode": "survival_sandbox",
+      "worldTopology": "resource_hazard_zones",
+      "actorModel": "runtime_state_owned",
+      "combatModel": "data_driven_progress",
+      "coreLoop": [
+        "inventory/add_item",
+        "resource/change",
+        "recipe/craft",
+        "flag/set"
+      ],
+      "pillars": [],
+      "sourceContextJson": "{\"goalId\":\"goal_060_full_campaign_gamepackage_materialization_matrix\",\"goal059RowId\":\"matrix-row-survival-sandbox-seed-gamma\",\"goal059RowHash\":\"78ccfa8b0b8f0e228d9a17b1e326c21345734f9baecf78d75f053d8bc6f4ef49\",\"sourceCampaignHash\":\"ef0a90c03ed76c0901b0788260aee2747a61d97e5dccd3aa669f3bab829e880f\",\"packageAssemblyDomains\":[\"world_entities\",\"dialogue_quests\",\"items_economy_crafting\",\"combat_progression\"]}"
+    },
+    "scenes": [],
+    "regions": [],
+    "npcs": [],
+    "items": [],
+    "dialogues": [],
+    "encounters": [],
+    "quests": [],
+    "mechanics": [],
+    "appliedArtifacts": [
+      {
+        "artifactId": "goal060/matrix-row-survival-sandbox-seed-gamma/profile",
+        "contractId": "game_profile_v1",
+        "artifactKind": "game_profile_v1",
+        "capabilitySelectionId": "",
+        "generatedAt": "",
+        "auditId": "",
+        "appliedAt": "2026-06-30T00:00:00.0000000Z",
+        "contentHash": "c828fb224f3a506bff6686e0398dd0e057a1c4229c1acd572bd7dd6a8b2b5574",
+        "mappingResult": "mapped"
+      }
+    ],
+    "preservedArtifacts": []
+  }
+}

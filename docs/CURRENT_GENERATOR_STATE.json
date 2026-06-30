@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 060 full campaign GamePackage materialization matrix produced for review",
-    "gate_status":  "full_campaign_gamepackage_materialization_matrix_verification",
+    "current_phase_title":  "Goal 061 full campaign playable review package RC produced for review",
+    "gate_status":  "full_campaign_playable_review_package_rc_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_060_full_campaign_gamepackage_materialization_matrix",
-    "active_manual_gate":  "Goal 059 Full Generator Variability Regression Matrix is accepted by user handoff before Goal 060: full_generator_variability_regression_matrix_verification passed. Goal 060 Full Campaign GamePackage Materialization Matrix is produced for review and remains at full_campaign_gamepackage_materialization_matrix_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 060 Full Campaign GamePackage Materialization Matrix evidence and leave full_campaign_gamepackage_materialization_matrix_verification required until user acceptance.",
-    "recommended_next_decision":  "Review Goal 060 materialization evidence for full_campaign_gamepackage_materialization_matrix_verification without marking the Goal 060 gate passed automatically.",
+    "last_completed_product_slice_id":  "goal_061_full_campaign_playable_review_package_rc",
+    "active_manual_gate":  "Goal 060 Full Campaign GamePackage Materialization Matrix is accepted by user handoff before Goal 061: full_campaign_gamepackage_materialization_matrix_verification passed. Goal 061 Full Campaign Playable Review Package RC is produced for review and remains at full_campaign_playable_review_package_rc_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 061 Full Campaign Playable Review Package RC evidence and leave full_campaign_playable_review_package_rc_verification required until user acceptance.",
+    "recommended_next_decision":  "Review Goal 061 playable review-package RC evidence for full_campaign_playable_review_package_rc_verification without marking the Goal 061 gate passed automatically.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                     "next_sequence":  [
-                                                          "full_campaign_gamepackage_materialization_matrix_verification"
+                                                          "full_campaign_playable_review_package_rc_verification"
                                                       ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -77,7 +77,8 @@
                            "goal_057_manual_gate":  "unity_alpha_multifamily_playable_loop_verification",
                            "goal_058_manual_gate":  "full_media_bound_generator_campaign_verification",
                            "goal_059_manual_gate":  "full_generator_variability_regression_matrix_verification",
-                           "goal_060_manual_gate":  "full_campaign_gamepackage_materialization_matrix_verification"
+                           "goal_060_manual_gate":  "full_campaign_gamepackage_materialization_matrix_verification",
+                           "goal_061_manual_gate":  "full_campaign_playable_review_package_rc_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -98,19 +99,18 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_060_full_campaign_gamepackage_materialization_matrix",
-                                         "title":  "Full Campaign GamePackage Materialization Matrix",
+                                         "slice_id":  "goal_061_full_campaign_playable_review_package_rc",
+                                         "title":  "Full Campaign Playable Review Package RC",
                                          "status":  "produced_for_review",
-                                          "summary":  "Goal 060 records Goal 059 as accepted by user handoff, consumes the Goal 059 family x seed variability matrix into 9 physical validator-clean GamePackage JSON artifacts, proves runtime consumption for map_panel_rpg, survival_sandbox and first_person_grid_dungeon, writes package-bound preview/export payloads and executes Unity Alpha package-consumption markers. Its produced report keeps accepted=false and full_campaign_gamepackage_materialization_matrix_verification required until user review accepts it.",
-                                          "scenario_id":  "goal-060-full-campaign-gamepackage-materialization-matrix",
+                                          "summary":  "Goal 061 records Goal 060 as accepted by user handoff, consumes the Goal 060 materialized package matrix into a full campaign playable review package RC, stages 9 package-row review scripts and package JSON copies, proves save/load replay and media binding audits, and executes Unity Alpha review-package RC markers. Its produced report keeps accepted=false and full_campaign_playable_review_package_rc_verification required until user review accepts it.",
+                                          "scenario_id":  "goal-061-full-campaign-playable-review-package-rc",
                                           "checks":  [
                                                         "dotnet build .\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj --no-restore: passed",
-                                                        "Goal 060 focused FullCampaignGamePackageMaterialization|Goal060 filter: 6/6 passed",
-                                                        "Goal 060 exact product smoke class filter: 1/1 passed and wrote compact artifacts",
-                                                        "Goal 060 materialized packages: 9/9 validator-clean physical GamePackage JSON files",
-                                                        "Goal 060 runtime proof: 3/3 materialized families passed state-changing runtime consumption with save/load roundtrip",
-                                                        "Unity Editor/player proof: unityExitCode=0, playerExitCode=0, all required package-consumption markers matched",
-                                                        "Goal 060 compact report: implementationStatus=GREEN, accepted=false, manualGate=full_campaign_gamepackage_materialization_matrix_verification"
+                                                        "Goal 061 focused FullCampaignPlayableReviewPackageRc|Goal061 filter: 9/9 passed",
+                                                        "Goal 061 exact product smoke class filter: 1/1 passed and wrote compact artifacts",
+                                                        "Goal 061 review package RC: 9/9 package rows staged with hash, media binding and save/load replay audit proof",
+                                                        "Unity Editor/player proof: unityExitCode=0, playerExitCode=0, all required review-package RC markers matched, provenRowCount=9",
+                                                        "Goal 061 compact report: implementationStatus=GREEN, accepted=false, manualGate=full_campaign_playable_review_package_rc_verification"
                                                     ]
                                       },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -370,8 +370,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "full_campaign_gamepackage_materialization_matrix_verification",
-                                          "next_bounded_goal_after_goal_060_acceptance"
+                                          "full_campaign_playable_review_package_rc_verification",
+                                          "next_bounded_goal_after_goal_061_acceptance"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -392,17 +392,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "full_campaign_gamepackage_materialization_matrix_verification",
-    "recommended_next_work_item_title":  "Review Goal 060 Full Campaign GamePackage Materialization Matrix evidence and leave the gate required until accepted.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_060_FULL_CAMPAIGN_GAMEPACKAGE_MATERIALIZATION.md",
+    "recommended_next_work_item":  "full_campaign_playable_review_package_rc_verification",
+    "recommended_next_work_item_title":  "Review Goal 061 Full Campaign Playable Review Package RC evidence and leave the gate required until accepted.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 060 Full Campaign GamePackage Materialization Matrix manual review at full_campaign_gamepackage_materialization_matrix_verification",
-                                               "Next bounded goal remains future work until Goal 060 is accepted"
+                                               "Goal 061 Full Campaign Playable Review Package RC manual review at full_campaign_playable_review_package_rc_verification",
+                                               "Next bounded goal remains future work until Goal 061 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                    "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC.md",
+                                                   "docs/agent-tasks/GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC.md",
                                                    "docs/GOAL_060_FULL_CAMPAIGN_GAMEPACKAGE_MATERIALIZATION_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_060_FULL_CAMPAIGN_GAMEPACKAGE_MATERIALIZATION.md",
                                                    "docs/agent-tasks/GOAL_060_FULL_CAMPAIGN_GAMEPACKAGE_MATERIALIZATION.md",
@@ -1371,21 +1374,35 @@
                                                             "next_action":  "goal_060_full_campaign_gamepackage_materialization_matrix_produced_for_review"
                                                         },
     "full_campaign_gamepackage_materialization_matrix_verification":  {
-                                                            "status":  "produced_for_review",
+                                                            "status":  "passed_by_user_handoff_before_goal_061",
                                                             "evidence_source":  "goal_060_full_campaign_gamepackage_materialization_matrix",
                                                             "observed_result":  [
                                                                                      "Design/FullCampaignGamePackageMaterialization defines a BCL-only Application-layer source loader, deterministic package materialization builder, runtime adapter boundary, Unity proof runner, evidence writer and hash helper.",
                                                                                      "Goal 060 consumes Goal 059 full generator variability matrix evidence after recording full_generator_variability_regression_matrix_verification passed by user handoff.",
-                                                                                     "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 060 report keeps accepted=false and full_campaign_gamepackage_materialization_matrix_verification required until user review accepts it.",
+                                                                                     "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 060 report kept accepted=false and full_campaign_gamepackage_materialization_matrix_verification required until the Goal 061 user handoff accepted it.",
                                                                                      "The package materialization plan builds 9 rows for map_panel_rpg, survival_sandbox and first_person_grid_dungeon across seed_alpha, seed_beta and seed_gamma.",
                                                                                      "The materialized package inventory writes 9 physical packages under .llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages and all 9 pass the existing GamePackageValidator.",
                                                                                      "Runtime consumption proof executes state-changing real GameRuntimeService loops for all three materialized families and records save/load roundtrip evidence through RuntimeStateSerializer and RuntimeSnapshotStore.",
                                                                                      "Preview/export package payloads consume the materialized package inventory and preserve package hashes through an immutability audit.",
                                                                                      "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0 and all required package-consumption markers matched.",
                                                                                      "Goal 060 artifacts under .llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix include source manifest, package plan, package inventory, validation matrix, runtime matrix, preview/export payloads, Unity command plan, Unity proof, invalid matrix, 9 package JSON files and report.",
-                                                                                     "Final report implementationStatus=GREEN, accepted=false and manualGate=full_campaign_gamepackage_materialization_matrix_verification; do not mark Goal 060 passed until user review accepts it."
+                                                                                     "Final report implementationStatus=GREEN, accepted=false and manualGate=full_campaign_gamepackage_materialization_matrix_verification; the Goal 061 task handoff accepted full_campaign_gamepackage_materialization_matrix_verification passed before Goal 061 implementation."
                                                                                  ],
-                                                            "next_action":  "review_full_campaign_gamepackage_materialization_matrix_verification"
+                                                            "next_action":  "goal_061_full_campaign_playable_review_package_rc_produced_for_review"
+                                                        },
+    "full_campaign_playable_review_package_rc_verification":  {
+                                                            "status":  "produced_for_review",
+                                                            "evidence_source":  "goal_061_full_campaign_playable_review_package_rc",
+                                                            "observed_result":  [
+                                                                                     "Design/FullCampaignPlayableReviewPackageRc defines a BCL-only Application-layer source loader, review-package RC builder, Unity proof runner, evidence writer and hash helper.",
+                                                                                     "Goal 061 consumes Goal 060 materialized package matrix evidence after recording full_campaign_gamepackage_materialization_matrix_verification passed by user handoff.",
+                                                                                     "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 061 report keeps accepted=false and full_campaign_playable_review_package_rc_verification required until user review accepts it.",
+                                                                                     "The review package RC stages 9 package rows across map_panel_rpg, survival_sandbox and first_person_grid_dungeon with compact review-package paths, package hashes, media binding audit and save/load replay audit.",
+                                                                                     "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required review-package RC markers matched.",
+                                                                                     "Goal 061 artifacts under .llmgc/procedural/goal-061-full-campaign-playable-review-package-rc include source manifest, review-package RC manifest, file inventory, row selection matrix, media binding audit, save/load replay audit, Unity command plan, Unity proof matrix, invalid matrix, scripts and compact report.",
+                                                                                     "Final report implementationStatus=GREEN, accepted=false and manualGate=full_campaign_playable_review_package_rc_verification; do not mark Goal 061 passed until user review accepts it."
+                                                                                 ],
+                                                            "next_action":  "review_full_campaign_playable_review_package_rc_verification"
                                                         },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

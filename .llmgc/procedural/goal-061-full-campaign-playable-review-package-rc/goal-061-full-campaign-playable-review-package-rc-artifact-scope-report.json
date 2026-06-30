@@ -1,0 +1,1147 @@
+{
+    "schemaVersion":  "artifact_scope_report_v1",
+    "scenario":  "goal-061-full-campaign-playable-review-package-rc",
+    "accepted":  true,
+    "policyPath":  ".devflow/artifact-scope/artifact-scope-policy.json",
+    "baselineRef":  "",
+    "failOnTrackedIgnored":  false,
+    "changedPathCount":  113,
+    "allowedCount":  113,
+    "warningCount":  0,
+    "violationCount":  0,
+    "diagnostics":  [
+
+                    ],
+    "changedPaths":  [
+                         {
+                             "path":  ".devflow/artifact-scope/artifact-scope-policy.json",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/artifact-scope-report.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/automated-smoke-script-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/full-campaign-playable-review-package-rc-report.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/goal-061-full-campaign-playable-review-package-rc-artifact-scope-report.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/goal-061-full-campaign-playable-review-package-rc-artifact-scope-report.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/invalid-review-package-matrix.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/manual-review-checklist.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/package-media-binding-audit.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/package-row-selection-matrix.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package-file-inventory.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package-rc-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/README.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/RUN_AUTOMATED_SMOKE.ps1",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/RUN_MANUAL.ps1",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/unity-player-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/family-seed-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/hashes-and-provenance.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/manual-checklist.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/media/StreamingAssets-payload-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-first-person-grid-dungeon-seed-alpha.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-first-person-grid-dungeon-seed-beta.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-first-person-grid-dungeon-seed-gamma.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-map-panel-rpg-seed-alpha.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-map-panel-rpg-seed-beta.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-map-panel-rpg-seed-gamma.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-survival-sandbox-seed-alpha.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-survival-sandbox-seed-beta.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-survival-sandbox-seed-gamma.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/package-inventory.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/package-selection-matrix.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-first-person-grid-dungeon-seed-alpha.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-first-person-grid-dungeon-seed-beta.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-first-person-grid-dungeon-seed-gamma.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-map-panel-rpg-seed-alpha.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-map-panel-rpg-seed-beta.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-map-panel-rpg-seed-gamma.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-survival-sandbox-seed-alpha.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-survival-sandbox-seed-beta.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/scenario-summaries/matrix-row-survival-sandbox-seed-gamma.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/save-load-replay-package-row-audit.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/source-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/assets/asset-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/assets/item-icon-ui-graphic/asset-000-d7a98c2e.fixture",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/assets/music-ambience/asset-001-e368b44a.fixture",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/assets/npc-portrait/asset-002-b5037955.fixture",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/assets/sound-effect/asset-003-b6002d93.fixture",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/assets/tile-region-graphic/asset-004-f8e7e136.fixture",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/campaign/family-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/campaign/full-media-bound-campaign-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/export-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/family-loop/family-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/game-data/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/game-data/generated-content-provenance.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/matrix/unity-alpha-matrix-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/first-person-grid-dungeon/export-placeholder-bundle-bundle-f46e6dea.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/first-person-grid-dungeon/npc-portrait-image-58b3a57f.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/first-person-grid-dungeon/sfx-interaction-audio-951e0cd6.wav",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/first-person-grid-dungeon/ui-panel-skin-ui-5d8c0a49.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/first-person-grid-dungeon/world-key-art-image-f0edddba.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/map-panel-rpg/export-placeholder-bundle-bundle-c7d669d0.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/map-panel-rpg/npc-portrait-image-591d7cbc.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/map-panel-rpg/sfx-interaction-audio-e48e6156.wav",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/map-panel-rpg/ui-panel-skin-ui-a3cbdcfc.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/map-panel-rpg/world-key-art-image-53ae8d80.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/survival-sandbox/export-placeholder-bundle-bundle-cc5f611d.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/survival-sandbox/npc-portrait-image-b48f62ef.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/survival-sandbox/sfx-interaction-audio-3b5dfd06.wav",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/survival-sandbox/ui-panel-skin-ui-511877ab.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/media/survival-sandbox/world-key-art-image-5d5642b3.png",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/media-bound/unity-alpha-media-bound-manifest.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/unity-package-consumption-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-alpha.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-beta.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-gamma.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-alpha.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-beta.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-gamma.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-alpha.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-beta.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-gamma.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/unity-player-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/runtime/alpha-launch-metadata.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/runtime/launch-metadata.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/runtime/unity-runtime-config.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/unity-player-command-plan.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/unity-player-proof-matrix.json",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CONTEXT_INDEX.md",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.json",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.md",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/EXTERNAL_SCOUTING_GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC_SPEC.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC.md",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_task_doc",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/GOAL_061_LAUNCHER.txt",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_task_doc",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcBuilder.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcEvidenceService.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcHash.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcModels.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcSourceLoader.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcUnityProofRunner.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Application/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcTests.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/ProductSmoke/FullCampaignPlayableReviewPackageRcProductSmokeTests.cs",
+                             "git_status":  "A",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+                             "git_status":  "M",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         }
+                     ]
+}

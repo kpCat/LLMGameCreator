@@ -1,0 +1,566 @@
+{
+  "manifest": {
+    "packageId": "game/goal060/first-person-grid-dungeon/seed-alpha",
+    "title": "Goal060 first person grid dungeon seed alpha",
+    "version": "0.1.0",
+    "formatVersion": "0.1",
+    "startMapId": "map/goal060/first-person-grid-dungeon/seed-alpha/start",
+    "description": "Goal 060 materialized package for first_person_grid_dungeon / seed_alpha."
+  },
+  "game": {
+    "tilePrototypes": [
+      {
+        "id": "tile/grass",
+        "name": "Grass",
+        "walkable": true,
+        "movementCost": 1,
+        "assetId": null
+      },
+      {
+        "id": "tile/goal060/first-person-grid-dungeon/seed-alpha/floor",
+        "name": "Goal060 first_person_grid_dungeon Tile",
+        "walkable": true,
+        "movementCost": 1,
+        "assetId": null
+      }
+    ],
+    "entityPrototypes": [
+      {
+        "id": "entity/player",
+        "name": "Player",
+        "assetId": null,
+        "components": [
+          {
+            "type": "player",
+            "args": {}
+          }
+        ]
+      },
+      {
+        "id": "entity/goal060/first-person-grid-dungeon/seed-alpha/guide",
+        "name": "Goal060 Guide seed_alpha",
+        "assetId": null,
+        "components": [
+          {
+            "type": "npc",
+            "args": {
+              "family": "first_person_grid_dungeon",
+              "seed": "seed_alpha"
+            }
+          }
+        ]
+      }
+    ],
+    "maps": [
+      {
+        "id": "map/start",
+        "name": "Start Map",
+        "width": 8,
+        "height": 8,
+        "defaultTileId": "tile/grass",
+        "startPosition": {
+          "x": 1,
+          "y": 1
+        },
+        "tiles": [],
+        "entities": [
+          {
+            "id": "entity/player/start",
+            "prototypeId": "entity/player",
+            "position": {
+              "x": 1,
+              "y": 1
+            },
+            "components": []
+          }
+        ]
+      },
+      {
+        "id": "map/goal060/first-person-grid-dungeon/seed-alpha/start",
+        "name": "Goal060 first_person_grid_dungeon seed_alpha",
+        "width": 6,
+        "height": 6,
+        "defaultTileId": "tile/goal060/first-person-grid-dungeon/seed-alpha/floor",
+        "startPosition": {
+          "x": 1,
+          "y": 1
+        },
+        "tiles": [],
+        "entities": [
+          {
+            "id": "entity/goal060/first-person-grid-dungeon/seed-alpha/guide/start",
+            "prototypeId": "entity/goal060/first-person-grid-dungeon/seed-alpha/guide",
+            "position": {
+              "x": 2,
+              "y": 1
+            },
+            "components": []
+          },
+          {
+            "id": "entity/player/first-person-grid-dungeon/seed-alpha",
+            "prototypeId": "entity/player",
+            "position": {
+              "x": 1,
+              "y": 1
+            },
+            "components": []
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "item/goal060/first-person-grid-dungeon/seed-alpha/relic",
+        "name": "Goal060 Relic seed_alpha",
+        "description": "Traceable package-bound item for matrix-row-first-person-grid-dungeon-seed-alpha.",
+        "iconAssetId": null,
+        "kind": "goal060",
+        "rarity": null,
+        "maxStack": 99,
+        "value": null,
+        "weight": null,
+        "questItem": null,
+        "unique": null,
+        "maxDurability": null,
+        "maxCharge": null,
+        "ammoType": null,
+        "fuelType": null,
+        "cannotSell": null,
+        "cannotDrop": null,
+        "requirements": [],
+        "tags": [
+          "goal060",
+          "first_person_grid_dungeon",
+          "seed_alpha"
+        ],
+        "metadata": {},
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal060/first-person-grid-dungeon/seed-alpha/material",
+        "name": "Goal060 Material seed_alpha",
+        "description": "Crafting input for matrix-row-first-person-grid-dungeon-seed-alpha.",
+        "iconAssetId": null,
+        "kind": "material",
+        "rarity": null,
+        "maxStack": 99,
+        "value": null,
+        "weight": null,
+        "questItem": null,
+        "unique": null,
+        "maxDurability": null,
+        "maxCharge": null,
+        "ammoType": null,
+        "fuelType": null,
+        "cannotSell": null,
+        "cannotDrop": null,
+        "requirements": [],
+        "tags": [
+          "goal060",
+          "crafting"
+        ],
+        "metadata": {},
+        "useConditions": [],
+        "useEffects": []
+      }
+    ],
+    "resources": [
+      {
+        "id": "resource/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+        "name": "Goal060 Resource seed_alpha",
+        "kind": "health",
+        "description": "Runtime resource for matrix-row-first-person-grid-dungeon-seed-alpha.",
+        "iconAssetId": null,
+        "defaultValue": 25,
+        "minValue": 0,
+        "maxValue": 100,
+        "regenPerTick": null,
+        "tags": [
+          "goal060",
+          "health"
+        ],
+        "metadata": {}
+      }
+    ],
+    "statuses": [],
+    "recipes": [
+      {
+        "id": "recipe/goal060/first-person-grid-dungeon/seed-alpha/craft",
+        "name": "Goal060 Craft seed_alpha",
+        "category": "goal060",
+        "stationId": null,
+        "requirements": [],
+        "inputs": [
+          {
+            "kind": "item",
+            "id": "item/goal060/first-person-grid-dungeon/seed-alpha/material",
+            "amount": 1,
+            "scope": null,
+            "consumeMode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "costs": [],
+        "outputs": [
+          {
+            "kind": "item",
+            "id": "item/goal060/first-person-grid-dungeon/seed-alpha/relic",
+            "amount": 1,
+            "scope": null,
+            "mode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "failureOutputs": [],
+        "duration": null,
+        "cooldown": null,
+        "successChance": 1,
+        "tags": [],
+        "metadata": {}
+      }
+    ],
+    "lootTables": [],
+    "transactions": [],
+    "resourceNetworks": [],
+    "resourceNodes": [],
+    "inventories": [
+      {
+        "id": "inventory/player",
+        "ownerKind": "player",
+        "ownerId": "player",
+        "slots": 12,
+        "stacks": [
+          {
+            "itemId": "item/goal060/first-person-grid-dungeon/seed-alpha/material",
+            "amount": 2,
+            "uniqueInstanceId": null,
+            "questItem": null,
+            "durability": null,
+            "charge": null,
+            "metadata": {}
+          }
+        ],
+        "tags": [],
+        "metadata": {
+          "goal060RowId": "matrix-row-first-person-grid-dungeon-seed-alpha"
+        }
+      }
+    ],
+    "equipmentSlots": [],
+    "abilities": [
+      {
+        "id": "ability/goal060/first-person-grid-dungeon/seed-alpha/strike",
+        "name": "Goal060 Strike seed_alpha",
+        "kind": "attack",
+        "requirements": [],
+        "costs": [],
+        "cooldown": null,
+        "targeting": null,
+        "range": null,
+        "power": 4,
+        "resourceId": "resource/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+        "tags": [
+          "goal060",
+          "basic_attack"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {}
+      }
+    ],
+    "stats": [
+      {
+        "id": "stat/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+        "name": "Goal060 Pressure",
+        "kind": "attribute",
+        "description": "Dungeon pressure stat for matrix-row-first-person-grid-dungeon-seed-alpha.",
+        "defaultValue": 5,
+        "minValue": 0,
+        "maxValue": 10,
+        "iconAssetId": null,
+        "tags": [],
+        "metadata": {}
+      }
+    ],
+    "progressions": [],
+    "encounters": [
+      {
+        "id": "encounter/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+        "name": "Goal060 Encounter seed_alpha",
+        "kind": "grid_dungeon_pressure",
+        "participants": [
+          {
+            "id": "participant/goal060/first-person-grid-dungeon/seed-alpha/player",
+            "name": "Goal060 Explorer",
+            "kind": "enemy",
+            "entityPrototypeId": null,
+            "factionId": null,
+            "team": "player",
+            "stats": [
+              {
+                "kind": "stat",
+                "id": "stat/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+                "amount": 5,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "resources": [
+              {
+                "kind": "resource",
+                "id": "resource/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+                "amount": 20,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "abilities": [
+              "ability/goal060/first-person-grid-dungeon/seed-alpha/strike"
+            ],
+            "inventoryId": null,
+            "equipmentOwnerId": null,
+            "tags": [],
+            "metadata": {}
+          },
+          {
+            "id": "participant/goal060/first-person-grid-dungeon/seed-alpha/pressure-node",
+            "name": "Goal060 Pressure Node",
+            "kind": "enemy",
+            "entityPrototypeId": null,
+            "factionId": null,
+            "team": "enemy",
+            "stats": [
+              {
+                "kind": "stat",
+                "id": "stat/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+                "amount": 3,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "resources": [
+              {
+                "kind": "resource",
+                "id": "resource/goal060/first-person-grid-dungeon/seed-alpha/pressure",
+                "amount": 8,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "abilities": [],
+            "inventoryId": null,
+            "equipmentOwnerId": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [
+          {
+            "kind": "item",
+            "id": "item/goal060/first-person-grid-dungeon/seed-alpha/relic",
+            "amount": 1,
+            "scope": null,
+            "mode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "consequences": [],
+        "lootTableId": null,
+        "defaultSeed": null,
+        "tags": [],
+        "metadata": {
+          "default_attack_ability_id": "ability/goal060/first-person-grid-dungeon/seed-alpha/strike",
+          "goal060RowId": "matrix-row-first-person-grid-dungeon-seed-alpha"
+        }
+      }
+    ],
+    "quests": [
+      {
+        "id": "quest/goal060/first-person-grid-dungeon/seed-alpha/progress",
+        "title": "Goal060 first_person_grid_dungeon Progress",
+        "description": "Quest trace for matrix-row-first-person-grid-dungeon-seed-alpha.",
+        "kind": "goal060",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/goal060/first-person-grid-dungeon/seed-alpha/advance",
+            "kind": "custom_counter",
+            "targetId": null,
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [
+              {
+                "kind": "item",
+                "id": "item/goal060/first-person-grid-dungeon/seed-alpha/relic",
+                "amount": 1,
+                "scope": null,
+                "mode": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "goal060RowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+              "sourceCampaignHash": "ef0a90c03ed76c0901b0788260aee2747a61d97e5dccd3aa669f3bab829e880f"
+            }
+          }
+        ],
+        "rewards": [
+          {
+            "kind": "item",
+            "id": "item/goal060/first-person-grid-dungeon/seed-alpha/relic",
+            "amount": 1,
+            "scope": null,
+            "mode": null,
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": false,
+        "tags": [
+          "goal060",
+          "first_person_grid_dungeon",
+          "seed_alpha"
+        ],
+        "metadata": {},
+        "stages": []
+      }
+    ],
+    "dialogues": [
+      {
+        "id": "dialogue/goal060/first-person-grid-dungeon/seed-alpha/guide",
+        "title": "Goal060 Dialogue seed_alpha",
+        "startNodeId": "node/goal060/first-person-grid-dungeon/seed-alpha/start",
+        "backgroundAssetId": null,
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "goal060",
+          "first_person_grid_dungeon"
+        ],
+        "metadata": {},
+        "nodes": [
+          {
+            "id": "node/goal060/first-person-grid-dungeon/seed-alpha/start",
+            "speakerId": "entity/goal060/first-person-grid-dungeon/seed-alpha/guide/start",
+            "expression": "neutral",
+            "text": "Goal060 package row matrix-row-first-person-grid-dungeon-seed-alpha",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/goal060/first-person-grid-dungeon/seed-alpha/advance",
+                "text": "Advance package proof",
+                "targetNodeId": null,
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [
+                  {
+                    "kind": "item",
+                    "id": "item/goal060/first-person-grid-dungeon/seed-alpha/relic",
+                    "amount": 1,
+                    "scope": null,
+                    "mode": null,
+                    "tags": [],
+                    "metadata": {}
+                  }
+                ],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal060/first-person-grid-dungeon/seed-alpha/progress",
+                "advanceQuestId": null,
+                "setQuestStageId": null,
+                "openTransactionId": null,
+                "startEncounterId": null,
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "factions": [],
+    "formulas": [],
+    "interactions": []
+  },
+  "assetCatalog": {
+    "assets": [],
+    "contracts": [],
+    "generationRequests": []
+  },
+  "scriptCatalog": {
+    "scripts": [],
+    "generators": []
+  },
+  "generatedContent": {
+    "profile": {
+      "title": "Goal060 first person grid dungeon seed alpha",
+      "description": "Goal 060 materialized validator-clean package for matrix-row-first-person-grid-dungeon-seed-alpha.",
+      "genre": "first_person_grid_dungeon",
+      "tone": "",
+      "presentationMode": "first_person_grid",
+      "worldTopology": "grid_dungeon",
+      "actorModel": "runtime_state_owned",
+      "combatModel": "encounter_pressure",
+      "coreLoop": [
+        "encounter/start",
+        "encounter/use_ability",
+        "flag/set"
+      ],
+      "pillars": [],
+      "sourceContextJson": "{\"goalId\":\"goal_060_full_campaign_gamepackage_materialization_matrix\",\"goal059RowId\":\"matrix-row-first-person-grid-dungeon-seed-alpha\",\"goal059RowHash\":\"3f0d2a712eba48d893dabcd6054edc02c16e00f52c2c437c8db325ce38b92591\",\"sourceCampaignHash\":\"ef0a90c03ed76c0901b0788260aee2747a61d97e5dccd3aa669f3bab829e880f\",\"packageAssemblyDomains\":[\"world_entities\",\"dialogue_quests\",\"items_economy_crafting\",\"combat_progression\"]}"
+    },
+    "scenes": [],
+    "regions": [],
+    "npcs": [],
+    "items": [],
+    "dialogues": [],
+    "encounters": [],
+    "quests": [],
+    "mechanics": [],
+    "appliedArtifacts": [
+      {
+        "artifactId": "goal060/matrix-row-first-person-grid-dungeon-seed-alpha/profile",
+        "contractId": "game_profile_v1",
+        "artifactKind": "game_profile_v1",
+        "capabilitySelectionId": "",
+        "generatedAt": "",
+        "auditId": "",
+        "appliedAt": "2026-06-30T00:00:00.0000000Z",
+        "contentHash": "bf1cdf29179f2c54c455d81fb63095713072e6c3b5b873ba743b1622edd67b1d",
+        "mappingResult": "mapped"
+      }
+    ],
+    "preservedArtifacts": []
+  }
+}

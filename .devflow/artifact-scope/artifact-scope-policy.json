@@ -29,7 +29,8 @@
     ".llmgc/procedural/goal-057-unity-alpha-multifamily-playable-loop/",
     ".llmgc/procedural/goal-058-full-media-bound-generator-campaign/",
     ".llmgc/procedural/goal-059-full-generator-variability-regression-matrix/",
-    ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/"
+    ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/",
+    ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -320,6 +321,27 @@
         ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/",
         "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/",
         "tests/LLMGameCreator.Tests/Application/FullCampaignGamePackageMaterialization/"
+      ]
+    },
+    {
+      "scenario": "goal-061-full-campaign-playable-review-package-rc",
+      "allowedPaths": [
+        "docs/GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC.md",
+        "docs/agent-tasks/GOAL_061_FULL_CAMPAIGN_PLAYABLE_REVIEW_PACKAGE_RC.md",
+        "docs/agent-tasks/GOAL_061_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/FullCampaignPlayableReviewPackageRcProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/",
+        "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/",
+        "tests/LLMGameCreator.Tests/Application/FullCampaignPlayableReviewPackageRc/"
       ]
     }
   ]
