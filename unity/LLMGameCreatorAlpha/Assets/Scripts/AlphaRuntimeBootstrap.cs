@@ -31,6 +31,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> packageLogLines = new List<string>();
         private readonly List<AlphaReviewPackageRcRow> reviewPackageRcRows = new List<AlphaReviewPackageRcRow>();
         private readonly List<string> reviewPackageRcLogLines = new List<string>();
+        private readonly List<AlphaSpatialDetailRow> spatialDetailRows = new List<AlphaSpatialDetailRow>();
+        private readonly List<string> spatialDetailLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -78,6 +80,7 @@ namespace LLMGameCreatorAlpha
         private bool matrixPlanLoaded;
         private bool packagePlanLoaded;
         private bool reviewPackageRcPlanLoaded;
+        private bool spatialDetailPlanLoaded;
 
         private void Start()
         {
@@ -292,6 +295,7 @@ namespace LLMGameCreatorAlpha
                 var matrixLines = LoadMatrixPayload(payloadRoot);
                 var packageLines = LoadPackageMaterializationPayload(payloadRoot);
                 var reviewPackageRcLines = LoadReviewPackageRcPayload(payloadRoot);
+                var spatialDetailLines = LoadSpatialDetailPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -321,6 +325,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(matrixLines);
                 lines.AddRange(packageLines);
                 lines.AddRange(reviewPackageRcLines);
+                lines.AddRange(spatialDetailLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -385,6 +390,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunMatrixProof());
             lines.AddRange(RunPackageMaterializationProof());
             lines.AddRange(RunReviewPackageRcProof());
+            lines.AddRange(RunSpatialDetailProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1543,6 +1549,67 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadSpatialDetailPayload(string payloadRoot)
+        {
+            spatialDetailRows.Clear();
+            spatialDetailLogLines.Clear();
+            spatialDetailPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "spatial-detail", "unity-spatial-detail-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                spatialDetailLogLines.Add("spatial_detail_loaded=false");
+                spatialDetailLogLines.Add("spatial_detail_plan_missing=true");
+                return spatialDetailLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                spatialDetailRows.AddRange(ExtractSpatialDetailRows(planJson));
+                spatialDetailRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                spatialDetailPlanLoaded = ExtractJsonBool(planJson, "passed") && spatialDetailRows.Count > 0;
+                spatialDetailLogLines.Add("spatial_detail_plan_loaded=" + spatialDetailPlanLoaded.ToString().ToLowerInvariant());
+                spatialDetailLogLines.Add("spatial_detail_loaded=" + spatialDetailPlanLoaded.ToString().ToLowerInvariant());
+                spatialDetailLogLines.Add("spatial_detail_row_count=" + spatialDetailRows.Count);
+            }
+            catch (Exception ex)
+            {
+                spatialDetailPlanLoaded = false;
+                spatialDetailLogLines.Add("spatial_detail_plan_loaded=false");
+                spatialDetailLogLines.Add("spatial_detail_loaded=false");
+                spatialDetailLogLines.Add("spatial_detail_error_type=" + ex.GetType().Name);
+                spatialDetailLogLines.Add("spatial_detail_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return spatialDetailLogLines;
+        }
+
+        private List<string> RunSpatialDetailProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(spatialDetailLogLines);
+            if (!spatialDetailPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("spatial_detail_loaded=true");
+            lines.Add("review_package_proof=goal062");
+            lines.Add("constrained_spatial_detail_generation_verification=required");
+            foreach (var row in spatialDetailRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("spatial_detail_family=" + row.FamilyId);
+                lines.Add("spatial_detail_seed=" + row.SeedId);
+                lines.Add("spatial_detail_row=" + row.RowId);
+                lines.Add("spatial_detail_reachable=" + row.Reachable.ToString().ToLowerInvariant());
+                lines.Add("spatial_detail_route_verified=" + row.RouteVerified.ToString().ToLowerInvariant());
+                lines.Add("spatial_detail_variance_marker=" + row.VarianceMarker);
+            }
+
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -1689,6 +1756,30 @@ namespace LLMGameCreatorAlpha
                     PackageMediaBindingsVerified = ExtractJsonBool(value, "packageMediaBindingsVerified"),
                     SaveLoadReplayVerified = ExtractJsonBool(value, "saveLoadReplayVerified"),
                     OrderedStepIds = ExtractStringArray(value, "orderedStepIds").ToList()
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaSpatialDetailRow> ExtractSpatialDetailRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaSpatialDetailRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    Reachable = ExtractJsonBool(value, "reachable"),
+                    RouteVerified = ExtractJsonBool(value, "routeVerified"),
+                    VarianceMarker = ExtractJsonString(value, "varianceMarker")
                 };
             }
         }
@@ -2310,6 +2401,16 @@ namespace LLMGameCreatorAlpha
             public bool PackageJsonContainsPackageId;
             public bool PackageHashMatches;
             public List<string> OrderedStepIds = new List<string>();
+        }
+
+        private sealed class AlphaSpatialDetailRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public bool Reachable;
+            public bool RouteVerified;
+            public string VarianceMarker = string.Empty;
         }
 
         private sealed class AlphaMediaBoundBinding
