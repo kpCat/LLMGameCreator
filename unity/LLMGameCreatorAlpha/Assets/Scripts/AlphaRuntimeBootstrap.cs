@@ -23,7 +23,10 @@ namespace LLMGameCreatorAlpha
         private readonly List<AlphaFamilyMode> familyModes = new List<AlphaFamilyMode>();
         private readonly List<AlphaFamilyLoopCommand> familyLoopCommands = new List<AlphaFamilyLoopCommand>();
         private readonly List<string> familyLoopLogLines = new List<string>();
+        private readonly List<string> campaignFamilies = new List<string>();
+        private readonly List<string> campaignLogLines = new List<string>();
         private string packageId = string.Empty;
+        private string campaignId = string.Empty;
         private string selectedStyleId = string.Empty;
         private string packageHash = string.Empty;
         private string assetManifestHash = string.Empty;
@@ -63,6 +66,8 @@ namespace LLMGameCreatorAlpha
         private bool mediaBoundBundleLoaded;
         private bool mediaBoundHashValidation;
         private bool familyLoopPlanLoaded;
+        private bool campaignManifestLoaded;
+        private bool campaignMediaBound;
 
         private void Start()
         {
@@ -273,6 +278,7 @@ namespace LLMGameCreatorAlpha
                 ResetLoop();
                 var mediaBoundLines = LoadMediaBoundPayload(payloadRoot);
                 var familyLoopLines = LoadFamilyLoopPayload(payloadRoot);
+                var campaignLines = LoadCampaignPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -298,6 +304,7 @@ namespace LLMGameCreatorAlpha
                 lines.Add("alpha_runtime.asset_manifest_bytes=" + assetManifestJson.Length);
                 lines.AddRange(mediaBoundLines);
                 lines.AddRange(familyLoopLines);
+                lines.AddRange(campaignLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -358,6 +365,7 @@ namespace LLMGameCreatorAlpha
             };
             lines.AddRange(mediaBoundLogLines);
             lines.AddRange(RunFamilyLoops());
+            lines.AddRange(RunCampaignProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1222,6 +1230,74 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadCampaignPayload(string payloadRoot)
+        {
+            campaignFamilies.Clear();
+            campaignLogLines.Clear();
+            campaignId = string.Empty;
+            campaignManifestLoaded = false;
+            campaignMediaBound = false;
+
+            var manifestPath = Path.Combine(payloadRoot, "campaign", "full-media-bound-campaign-manifest.json");
+            if (!File.Exists(manifestPath))
+            {
+                manifestPath = Path.Combine(payloadRoot, "full-media-bound-campaign-manifest.json");
+            }
+
+            if (!File.Exists(manifestPath))
+            {
+                return campaignLogLines;
+            }
+
+            try
+            {
+                var manifestJson = File.ReadAllText(manifestPath);
+                campaignId = ExtractJsonString(manifestJson, "campaignId");
+                campaignMediaBound = Regex.IsMatch(manifestJson, "\"mediaBound\"\\s*:\\s*true", RegexOptions.Singleline);
+                campaignFamilies.AddRange(ExtractCampaignFamilies(manifestJson).OrderBy(family => family, StringComparer.Ordinal));
+                campaignManifestLoaded = campaignId == "goal058" && campaignFamilies.Count > 0;
+                campaignLogLines.Add("campaign_manifest_loaded=" + campaignManifestLoaded.ToString().ToLowerInvariant());
+                campaignLogLines.Add("campaign_id=" + campaignId);
+                campaignLogLines.Add("campaign_family_count=" + campaignFamilies.Count);
+            }
+            catch (Exception ex)
+            {
+                campaignManifestLoaded = false;
+                campaignLogLines.Add("campaign_manifest_loaded=false");
+                campaignLogLines.Add("campaign_error_type=" + ex.GetType().Name);
+                campaignLogLines.Add("campaign_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return campaignLogLines;
+        }
+
+        private List<string> RunCampaignProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(campaignLogLines);
+            if (!campaignManifestLoaded)
+            {
+                lines.Add("campaign_loaded=false");
+                return lines;
+            }
+
+            lines.Add("campaign_loaded=" + campaignId);
+            foreach (var family in campaignFamilies)
+            {
+                lines.Add("campaign_family=" + family);
+            }
+
+            lines.Add("campaign_media_bound=" + (campaignMediaBound && mediaBoundHashValidation).ToString().ToLowerInvariant());
+            foreach (var family in campaignFamilies)
+            {
+                lines.Add("campaign_family_completed=" + family);
+            }
+
+            lines.Add("campaign_review_package_proof=goal058");
+            lines.Add("full_media_bound_generator_campaign_verification=required");
+            return lines;
+        }
+
         private static bool IsSelectedFamilyMode(AlphaFamilyMode mode, string requestedMode)
         {
             if (string.IsNullOrWhiteSpace(requestedMode) || requestedMode == "all")
@@ -1246,6 +1322,19 @@ namespace LLMGameCreatorAlpha
                     ScenarioId = ExtractJsonString(value, "scenarioId"),
                     ProfileId = ExtractJsonString(value, "profileId")
                 };
+            }
+        }
+
+        private static IEnumerable<string> ExtractCampaignFamilies(string json)
+        {
+            var array = ExtractArray(json, "families");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var familyId = ExtractJsonString(match.Groups["value"].Value, "familyId");
+                if (!string.IsNullOrWhiteSpace(familyId))
+                {
+                    yield return familyId;
+                }
             }
         }
 

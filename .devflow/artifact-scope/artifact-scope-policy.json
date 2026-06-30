@@ -26,7 +26,8 @@
     ".llmgc/procedural/goal-054-media-materialization-review-package/",
     ".llmgc/procedural/goal-055-media-bound-playable-review-package-smoke/",
     ".llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package/",
-    ".llmgc/procedural/goal-057-unity-alpha-multifamily-playable-loop/"
+    ".llmgc/procedural/goal-057-unity-alpha-multifamily-playable-loop/",
+    ".llmgc/procedural/goal-058-full-media-bound-generator-campaign/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -252,6 +253,28 @@
         ".llmgc/procedural/goal-057-unity-alpha-multifamily-playable-loop/",
         "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/",
         "tests/LLMGameCreator.Tests/Application/UnityAlphaMultiFamilyPlayableLoop/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/"
+      ]
+    },
+    {
+      "scenario": "goal-058-full-media-bound-generator-campaign",
+      "allowedPaths": [
+        "docs/GOAL_058_FULL_MEDIA_BOUND_GENERATOR_CAMPAIGN_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_058_FULL_MEDIA_BOUND_GENERATOR_CAMPAIGN.md",
+        "docs/agent-tasks/GOAL_058_FULL_MEDIA_BOUND_GENERATOR_CAMPAIGN.md",
+        "docs/agent-tasks/GOAL_058_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/FullMediaBoundGeneratorCampaignProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-058-full-media-bound-generator-campaign/",
+        "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/",
+        "tests/LLMGameCreator.Tests/Application/FullMediaBoundGeneratorCampaign/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/"
       ]
     }
