@@ -18,7 +18,8 @@
     "docs/FULL_GENERATOR_GOAL_QUEUE.md"
   ],
   "allowedCurrentGoalArtifactRoots": [
-    ".llmgc/procedural/development-complexity-stabilization/"
+    ".llmgc/procedural/development-complexity-stabilization/",
+    ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -81,6 +82,26 @@
         ".llmgc/procedural/development-complexity-stabilization/",
         "tests/LLMGameCreator.Tests/Devflow/",
         "tests/LLMGameCreator.Tests/ProductSmoke/"
+      ]
+    },
+    {
+      "scenario": "goal-040-chunked-runtime-preview-export-multifamily-smoke",
+      "allowedPaths": [
+        "docs/GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE.md",
+        "docs/agent-tasks/GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE.md",
+        "docs/agent-tasks/GOAL_040_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/ChunkedRuntimePreviewExportSmokeProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/",
+        "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke/",
+        "tests/LLMGameCreator.Tests/Application/ChunkedRuntimePreviewExportSmoke/"
       ]
     }
   ]
