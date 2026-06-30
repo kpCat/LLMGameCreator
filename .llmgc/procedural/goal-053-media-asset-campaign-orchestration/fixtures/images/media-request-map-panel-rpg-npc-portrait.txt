@@ -1,0 +1,15 @@
+fixtureSchema=goal053_text_fixture_descriptor_v1
+fixtureOnly=true
+finalMedia=false
+requestId=media-request/map-panel-rpg/npc-portrait
+candidateId=candidate/fixture/media-request-map-panel-rpg-npc-portrait
+familyId=map_panel_rpg
+scenarioId=gothic_intrigue
+styleId=media-style/map-panel-rpg/gothic-intrigue
+mediaKind=image
+mediaSlotId=npc_portrait
+targetGeneratedId=family/map_panel_rpg/scenario/gothic_intrigue/system/entity
+sourceKind=fixture-generated-by-repo
+realProviderCalled=false
+realMediaGenerationCalled=false
+networkOrImportCalled=false

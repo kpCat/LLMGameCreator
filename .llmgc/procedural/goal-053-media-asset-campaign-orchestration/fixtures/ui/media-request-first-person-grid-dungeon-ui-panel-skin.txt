@@ -1,0 +1,15 @@
+fixtureSchema=goal053_text_fixture_descriptor_v1
+fixtureOnly=true
+finalMedia=false
+requestId=media-request/first-person-grid-dungeon/ui-panel-skin
+candidateId=candidate/fixture/media-request-first-person-grid-dungeon-ui-panel-skin
+familyId=first_person_grid_dungeon
+scenarioId=metamodule_kingdoms
+styleId=media-style/first-person-grid-dungeon/metamodule-kingdoms
+mediaKind=ui
+mediaSlotId=ui_panel_skin
+targetGeneratedId=family/first_person_grid_dungeon/scenario/metamodule_kingdoms/system/event
+sourceKind=fixture-generated-by-repo
+realProviderCalled=false
+realMediaGenerationCalled=false
+networkOrImportCalled=false

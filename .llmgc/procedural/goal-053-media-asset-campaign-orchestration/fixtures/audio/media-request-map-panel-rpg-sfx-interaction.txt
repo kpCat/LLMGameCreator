@@ -1,0 +1,15 @@
+fixtureSchema=goal053_text_fixture_descriptor_v1
+fixtureOnly=true
+finalMedia=false
+requestId=media-request/map-panel-rpg/sfx-interaction
+candidateId=candidate/fixture/media-request-map-panel-rpg-sfx-interaction
+familyId=map_panel_rpg
+scenarioId=gothic_intrigue
+styleId=media-style/map-panel-rpg/gothic-intrigue
+mediaKind=audio
+mediaSlotId=sfx_interaction
+targetGeneratedId=family/map_panel_rpg/scenario/gothic_intrigue/system/dialogue
+sourceKind=fixture-generated-by-repo
+realProviderCalled=false
+realMediaGenerationCalled=false
+networkOrImportCalled=false

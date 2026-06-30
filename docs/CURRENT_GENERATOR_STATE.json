@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 047 full generator without media dry run produced for review",
-    "gate_status":  "full_generator_without_media_verification",
+    "current_phase_title":  "Goal 053 media asset campaign orchestration produced for review",
+    "gate_status":  "media_asset_campaign_orchestration_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_047_full_generator_without_media_dry_run",
-    "active_manual_gate":  "Goal 043 multi-family generated template vertical slice is accepted as passed by user handoff: multi_family_generated_template_vertical_slice_verification passed. Goal 047 full generator without media dry run is produced for review and requires full_generator_without_media_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 047 full generator without media dry-run artifacts and decide full_generator_without_media_verification. Do not mark Goal 047 passed from this production handoff.",
-    "recommended_next_decision":  "If full_generator_without_media_verification is accepted by user decision, select the next bounded generator integration goal; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 047 production handoff.",
+    "last_completed_product_slice_id":  "goal_053_media_asset_campaign_orchestration",
+    "active_manual_gate":  "Goal 047 full generator without media dry run is accepted as passed by user handoff: full_generator_without_media_verification passed. Goal 053 media asset campaign orchestration is produced for review and requires media_asset_campaign_orchestration_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 053 media asset campaign orchestration artifacts and decide media_asset_campaign_orchestration_verification. Do not mark Goal 053 passed from this production handoff.",
+    "recommended_next_decision":  "If media_asset_campaign_orchestration_verification is accepted by user decision, select a bounded media adapter or generated playable-with-fixture-media step; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 053 production handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "full_generator_without_media_verification"
+                                                        "media_asset_campaign_orchestration_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -69,7 +69,8 @@
                            "goal_039_manual_gate":  "runtime_chunk_delta_traversal_smoke_verification",
                            "goal_040_manual_gate":  "chunked_runtime_preview_export_multifamily_smoke_verification",
                            "goal_043_manual_gate":  "multi_family_generated_template_vertical_slice_verification",
-                           "goal_047_manual_gate":  "full_generator_without_media_verification"
+                           "goal_047_manual_gate":  "full_generator_without_media_verification",
+                           "goal_053_manual_gate":  "media_asset_campaign_orchestration_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -90,20 +91,20 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_047_full_generator_without_media_dry_run",
-                                         "title":  "Full Generator Without Media Dry Run",
+                                         "slice_id":  "goal_053_media_asset_campaign_orchestration",
+                                         "title":  "Media Asset Campaign Orchestration And Binding Dry Run",
                                         "status":  "produced_for_review",
-                                         "summary":  "Goal 047 records the user-handoff acceptance of Goal 043, then adds a BCL-only Application-layer FullGeneratorWithoutMediaDryRun seam. It consumes physical Goal 034-040 and Goal 043 evidence into a deterministic source manifest, review/promotion ledger, repair diagnostics matrix, three family dry-run records, runtime preview validation matrix, without-media export profile selection matrix, strict package compatibility proof, one-click dry-run summary and invalid/fake/leak matrix. It proves map_panel_rpg, survival_sandbox and first_person_grid_dungeon can move through the same full-generator dry-run lifecycle without media/provider/LLM/RAG/Runtime/UI/Unity/GamePackage schema changes. Goal 047 stops at full_generator_without_media_verification required.",
-                                         "scenario_id":  "goal-047-full-generator-without-media-dry-run",
+                                         "summary":  "Goal 053 records the user-handoff acceptance of Goal 047, then adds a BCL-only Application-layer MediaAssetCampaignOrchestration seam. It consumes physical Goal 047, Goal 043 and Goal 040 evidence into a deterministic source manifest, media slot catalog, media request queue, license/provenance ledger, candidate quarantine matrix, review/promotion ledger, fixture media inventory, binding manifest, preview/export media payload proof, invalid/fake/leak matrix and compact report. It proves map_panel_rpg, survival_sandbox and first_person_grid_dungeon can plan image, audio, ui and bundle media through governed fixture-only bindings without real provider/media generation, network/import, Runtime/UI/Unity/GamePackage schema, provider/LLM/RAG/Lua or generator-library changes. Goal 053 stops at media_asset_campaign_orchestration_verification required.",
+                                         "scenario_id":  "goal-053-media-asset-campaign-orchestration",
                                         "checks":  [
                                                        "dotnet restore .\\LLMGameCreator.sln: passed.",
                                                        "dotnet build .\\LLMGameCreator.sln --no-restore: passed with 0 warnings / 0 errors.",
-                                                       "Goal 047 focused FullGeneratorWithoutMedia|Goal047 filter: 4/4 passed and wrote compact artifacts under .llmgc/procedural/goal-047-full-generator-without-media-dry-run.",
-                                                       "Goal 047 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-047-full-generator-without-media-dry-run.",
-                                                       "CurrentState|Goal047|FullGenerator filtered tests: 21/21 passed.",
-                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1019/1019 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_105239-check-all.",
-                                                       "goal-047-full-generator-without-media-dry-run artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash EBBB03D903F2C59EC66AF767CA197B39E8F8492D2285A0698F4869C75B3F0DEE.",
-                                                       "Direct artifact inspection listed 12 required Goal 047 files, parsed all 11 JSON sidecars, and the compact report records implementationStatus=GREEN, accepted=false, manualGate=full_generator_without_media_verification, familyCount=3, goal043AcceptedByUserHandoff=true, runtimePreviewValidationPassed=true, exportProfileSelectionPassed=true, packageProofPassed=true, invalidMatrixPassed=true, file hash 530DA73E2FE4B54187DD223E10F5E6D71AFD197BA214962F44B5C14673DBB5F7 and deterministic report hash a774f7e3d4b5907e447f5503244281d40e8dc5d51b9eea7cab8b2f8cb6cf16c1."
+                                                       "Goal 053 focused MediaAssetCampaign|Goal053 filter: 9/9 passed and wrote compact artifacts under .llmgc/procedural/goal-053-media-asset-campaign-orchestration.",
+                                                       "Goal 053 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-053-media-asset-campaign-orchestration.",
+                                                       "CurrentState|Goal053|MediaAsset filtered tests: 25/25 passed.",
+                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1027/1027 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_132205-check-all.",
+                                                       "goal-053-media-asset-campaign-orchestration artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash BC6EF7C3E66D8F56D769B47AD119B6E998160E34F05F48DF05506848603C1EAF.",
+                                                       "Direct artifact inspection listed 29 Goal 053 files, parsed all 12 JSON sidecars, counted 15 fixture files, and the compact report records implementationStatus=GREEN, accepted=false, manualGate=media_asset_campaign_orchestration_verification, familyCount=3, requestCount=36, fixtureFileCount=15, bindingCount=15, licenseLedgerPassed=true, invalidMatrixPassed=true, previewExportFamilyCount=3, everyFamilyHasImageAndAudioFixtureBindings=true and report hash 7A97B8449F1A041C80D9413A8942D96CA8339F8DF07C894A21DC02EC7794B7DB."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -363,8 +364,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "full_generator_without_media_verification",
-                                          "next_bounded_generator_integration_goal_after_goal_047_acceptance"
+                                          "media_asset_campaign_orchestration_verification",
+                                          "next_bounded_media_adapter_or_fixture_media_playable_step_after_goal_053_acceptance"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -385,17 +386,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "full_generator_without_media_verification",
-    "recommended_next_work_item_title":  "Review Goal 047 full generator without media dry-run artifacts.",
-    "recommended_next_task_file":  "docs/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN_SPEC.md",
+    "recommended_next_work_item":  "media_asset_campaign_orchestration_verification",
+    "recommended_next_work_item_title":  "Review Goal 053 media asset campaign orchestration artifacts.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 047 full generator without media dry-run review at full_generator_without_media_verification",
-                                               "Next bounded generator integration goal remains future work until Goal 047 is accepted"
+                                               "Goal 053 media asset campaign orchestration review at media_asset_campaign_orchestration_verification",
+                                               "Next bounded media adapter or generated playable-with-fixture-media step remains future work until Goal 053 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
+                                                   "docs/agent-tasks/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
                                                    "docs/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md",
                                                    "docs/agent-tasks/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md",
@@ -1220,7 +1224,7 @@
                                                                     "next_action":  "goal_047_full_generator_without_media_dry_run_produced_for_review"
                                                           },
     "full_generator_without_media_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_handoff_before_goal_053",
                                                                     "evidence_source":  "goal_047_full_generator_without_media_dry_run",
                                                                     "observed_result":  [
                                                                                             "Design/FullGeneratorWithoutMediaDryRun defines a BCL-only Application-layer source loader, review/promotion workflow, repair diagnostics planner, dry-run builder, validator, invalid matrix and evidence writer.",
@@ -1232,8 +1236,24 @@
                                                                                             "Invalid/fake/leak matrix rejects missing Goal043 source, wrong accepted gate, fake family ids, duplicate promotion transitions, invalid transition order, missing repair actions, source hash mismatch, cross-family leakage, missing state-changing loop proof, final prose promotion, provider/LLM/RAG/media claims, Runtime/Unity/GamePackage schema mutation claims, unsafe absolute paths and nondeterministic ordering.",
                                                                                             "Final report accepted=false and manualGate=full_generator_without_media_verification"
                                                                                         ],
-                                                                    "next_action":  "review_goal_047_before_next_bounded_generator_integration_goal"
+                                                                    "next_action":  "goal_053_media_asset_campaign_orchestration_produced_for_review"
                                                           },
+    "media_asset_campaign_orchestration_verification":  {
+                                                            "status":  "required",
+                                                            "evidence_source":  "goal_053_media_asset_campaign_orchestration",
+                                                            "observed_result":  [
+                                                                                    "Design/MediaAssetCampaignOrchestration defines a BCL-only Application-layer source loader, campaign builder, validator, evidence writer and deterministic hash helper.",
+                                                                                    "Goal 053 consumes physical Goal 047, Goal 043 and Goal 040 compact artifacts without real media/provider execution, network downloads, import, LLM/RAG calls, Lua execution, Runtime/UI/Unity/GamePackage schema changes or generator-library changes.",
+                                                                                    "The source manifest records Goal 047 as accepted by user handoff while preserving Goal 031 and Goal 032 as produced-for-review/not passed.",
+                                                                                    "Media slot catalog and request queue cover three families, image/audio/ui/bundle media kinds, visual/audio/style/technical prompts, generated target ids and priority/review metadata.",
+                                                                                    "License/provenance ledger covers fixture-generated-by-repo, manual-placeholder, imported-cc0, imported-cc-by, imported-share-alike-or-gpl-risk, provider-generated-with-model-license and unknown/no-license source kinds with promotion policy.",
+                                                                                    "Candidate quarantine and review/promotion ledger promote only repository-generated fixture candidates as fixture assets, leave manual/import candidates quarantined, and block provider, missing-attribution, share-alike/GPL-risk, unknown/no-license, final-claim and mismatch candidates.",
+                                                                                    "Fixture inventory writes deterministic repo-local text fixture files under .llmgc/procedural/goal-053-media-asset-campaign-orchestration/fixtures/ and binding manifests prove preview/export payloads include media binding refs and fallbacks without source artifact mutation.",
+                                                                                    "Invalid/fake/leak matrix rejects duplicate requests, unknown family/target/slot/media kind, missing provenance, unsafe licenses, provider metadata gaps, final-claim leaks, path traversal, absolute paths, network URL claims, provider/LLM/RAG claims, Runtime/UI/Unity/GamePackage mutation claims, nondeterminism, fake source refs and missing review traces.",
+                                                                                    "Final report accepted=false and manualGate=media_asset_campaign_orchestration_verification"
+                                                                                ],
+                                                            "next_action":  "review_goal_053_before_media_adapter_or_generated_playable_with_fixture_media_step"
+                                                        },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",
                                                           "title":  "Rich Package Assembly Coverage Audit",

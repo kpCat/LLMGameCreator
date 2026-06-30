@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 047 Full generator without media dry-run production
+Updated by: Goal 053 Media asset campaign orchestration production
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -80,7 +80,9 @@ Goal 040 records the accepted Goal 039 gate, adds a BCL-only Application-layer c
 
 Goal 043 records the accepted Goal 040 gate, adds a BCL-only Application-layer multi-family generated template vertical slice seam under `Design/MultiFamilyGeneratedTemplateVerticalSlice`, and consumes Goal 034 strict draft loop, Goal 035/036 Lua governance, Goal 037 hybrid expansion, Goal 038 world-scale graph/map facts, Goal 039 runtime chunk traversal deltas and Goal 040 preview/export payloads as compact source facts. It builds shared lifecycle plans plus family-specific generated loop proofs for `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`, proves each family can run at least two deterministic state-changing commands, blocks causal invalid actions, validates shared lifecycle consistency, writes a preview/export consumption matrix proving transformed Goal 040 use instead of JSON copying, and emits compact evidence under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/`. Goal 043 absorbs Goal 043/044/045/046 intent into one aggressive multi-family generated template proof and stops at `multi_family_generated_template_vertical_slice_verification required`, not passed.
 
-Goal 047 records the accepted Goal 043 gate from the user handoff, adds a BCL-only Application-layer full-generator dry-run seam under `Design/FullGeneratorWithoutMediaDryRun`, and consumes Goal 034-040 plus Goal 043 evidence as compact source facts. It builds a source manifest, review/promotion ledger, repair diagnostics matrix, family dry-run records for `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`, runtime preview validation, without-media export profile selection, strict package compatibility proof, one-click dry-run summary and invalid/fake/leak matrix under `.llmgc/procedural/goal-047-full-generator-without-media-dry-run/`. It records Goal 043 as `multi_family_generated_template_vertical_slice_verification passed`, preserves Goal 031 and Goal 032 as produced-for-review/not passed, avoids media/provider/LLM/RAG/Runtime/UI/Unity/GamePackage schema changes, and stops at `full_generator_without_media_verification required`, not passed.
+Goal 047 records the accepted Goal 043 gate from the user handoff, adds a BCL-only Application-layer full-generator dry-run seam under `Design/FullGeneratorWithoutMediaDryRun`, and consumes Goal 034-040 plus Goal 043 evidence as compact source facts. It builds a source manifest, review/promotion ledger, repair diagnostics matrix, family dry-run records for `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`, runtime preview validation, without-media export profile selection, strict package compatibility proof, one-click dry-run summary and invalid/fake/leak matrix under `.llmgc/procedural/goal-047-full-generator-without-media-dry-run/`. It records Goal 043 as `multi_family_generated_template_vertical_slice_verification passed`, preserves Goal 031 and Goal 032 as produced-for-review/not passed, avoids media/provider/LLM/RAG/Runtime/UI/Unity/GamePackage schema changes, and the Goal 053 user handoff accepts `full_generator_without_media_verification passed`.
+
+Goal 053 records the accepted Goal 047 gate from the user handoff, adds a BCL-only Application-layer media asset campaign orchestration seam under `Design/MediaAssetCampaignOrchestration`, and consumes Goal 047 plus Goal 043/040 evidence as compact source facts. It builds a source manifest, media slot catalog, media request queue, license/provenance ledger, candidate quarantine matrix, review/promotion ledger, deterministic fixture media inventory, media binding manifest, preview/export media payload proof and invalid/fake/leak matrix under `.llmgc/procedural/goal-053-media-asset-campaign-orchestration/`. It promotes only repository-generated fixture candidates as fixture assets, keeps manual/import/provider candidates quarantined or blocked, preserves Goal 031 and Goal 032 as produced-for-review/not passed, avoids real provider/media generation, network/import, Runtime/UI/Unity/GamePackage schema/provider/LLM/RAG/Lua/generator-library changes, and stops at `media_asset_campaign_orchestration_verification required`, not passed.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -118,7 +120,8 @@ Allowed next sequence:
 7. Record Goal 039 runtime chunk delta traversal smoke as accepted by the user handoff with `runtime_chunk_delta_traversal_smoke_verification passed`.
 8. Record Goal 040 chunked runtime preview/export multi-family smoke as accepted by the user handoff with `chunked_runtime_preview_export_multifamily_smoke_verification passed`.
 9. Record Goal 043 multi-family generated template vertical slice as accepted by the user handoff with `multi_family_generated_template_vertical_slice_verification passed`.
-10. Keep Goal 047 full generator without media dry-run produced for review with `full_generator_without_media_verification required`.
+10. Record Goal 047 full generator without media dry-run as accepted by the user handoff with `full_generator_without_media_verification passed`.
+11. Keep Goal 053 media asset campaign orchestration produced for review with `media_asset_campaign_orchestration_verification required`.
 
 Kill criterion:
 
@@ -216,10 +219,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-full_generator_without_media_verification
+media_asset_campaign_orchestration_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 `multi_family_generated_template_vertical_slice_verification` is accepted as passed by the user handoff before Goal 047. Goal 047 is produced for review and stops at `full_generator_without_media_verification required`.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 `multi_family_generated_template_vertical_slice_verification` is accepted as passed by the user handoff before Goal 047. Goal 047 `full_generator_without_media_verification` is accepted as passed by the user handoff before Goal 053. Goal 053 is produced for review and stops at `media_asset_campaign_orchestration_verification required`.
 
 Goal 037 accepted by user handoff:
 
@@ -316,10 +319,10 @@ Recorded checks from Goal 043 implementation:
 - Direct artifact inspection listed 12 required Goal 043 files, parsed all 11 JSON sidecars, and the compact report records `implementationStatus=GREEN`, `accepted=false`, `manualGate=multi_family_generated_template_vertical_slice_verification`, `familyCount=3`, `simulatableLoopProofCount=3`, `sourceGoal040PreviewExportConsumed=true`, `sharedLifecycleContractPassed=true`, `invalidMatrixPassed=true` and report hash `7D5E2B42761BB2AABCC22C06840CCAC2AAB5474F0B7F5EA5232AC7552A796685`.
 - The user handoff for Goal 047 accepted `multi_family_generated_template_vertical_slice_verification passed` before Goal 047 implementation.
 
-Goal 047 produced for review:
+Goal 047 accepted by user handoff before Goal 053:
 
 ```text
-full_generator_without_media_verification: required
+full_generator_without_media_verification: passed
 ```
 
 Evidence source: Goal 047 implementation artifacts under `.llmgc/procedural/goal-047-full-generator-without-media-dry-run/`.
@@ -334,6 +337,26 @@ Recorded checks from Goal 047 implementation:
 - `.\.devflow\scripts\check-all.ps1`: passed with 1019/1019 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_105239-check-all`.
 - `goal-047-full-generator-without-media-dry-run` artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash `EBBB03D903F2C59EC66AF767CA197B39E8F8492D2285A0698F4869C75B3F0DEE`.
 - Direct artifact inspection listed 12 required Goal 047 files, parsed all 11 JSON sidecars, and the compact report records `implementationStatus=GREEN`, `accepted=false`, `manualGate=full_generator_without_media_verification`, `familyCount=3`, `goal043AcceptedByUserHandoff=true`, `runtimePreviewValidationPassed=true`, `exportProfileSelectionPassed=true`, `packageProofPassed=true`, `invalidMatrixPassed=true`, file hash `530DA73E2FE4B54187DD223E10F5E6D71AFD197BA214962F44B5C14673DBB5F7` and deterministic report hash `a774f7e3d4b5907e447f5503244281d40e8dc5d51b9eea7cab8b2f8cb6cf16c1`.
+- The user handoff for Goal 053 accepted `full_generator_without_media_verification passed` before Goal 053 implementation.
+
+Goal 053 produced for review:
+
+```text
+media_asset_campaign_orchestration_verification: required
+```
+
+Evidence source: Goal 053 implementation artifacts under `.llmgc/procedural/goal-053-media-asset-campaign-orchestration/`.
+
+Recorded checks from Goal 053 implementation:
+
+- `dotnet restore .\LLMGameCreator.sln`: passed.
+- `dotnet build .\LLMGameCreator.sln --no-restore`: passed with 0 warnings / 0 errors.
+- Goal 053 focused `MediaAssetCampaign|Goal053` filter: 9/9 passed and wrote compact artifacts under `.llmgc/procedural/goal-053-media-asset-campaign-orchestration/`.
+- Goal 053 exact product smoke class filter: 1/1 passed and wrote compact artifacts under `.llmgc/procedural/goal-053-media-asset-campaign-orchestration/`.
+- `CurrentState|Goal053|MediaAsset` filtered tests: 25/25 passed.
+- `.\.devflow\scripts\check-all.ps1`: passed with 1027/1027 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_132205-check-all`.
+- `goal-053-media-asset-campaign-orchestration` artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash `BC6EF7C3E66D8F56D769B47AD119B6E998160E34F05F48DF05506848603C1EAF`.
+- Direct artifact inspection listed 29 Goal 053 files, parsed all 12 JSON sidecars, counted 15 fixture files, and the compact report records `implementationStatus=GREEN`, `accepted=false`, `manualGate=media_asset_campaign_orchestration_verification`, `familyCount=3`, `requestCount=36`, `fixtureFileCount=15`, `bindingCount=15`, `licenseLedgerPassed=true`, `invalidMatrixPassed=true`, `previewExportFamilyCount=3`, `everyFamilyHasImageAndAudioFixtureBindings=true` and report hash `7A97B8449F1A041C80D9413A8942D96CA8339F8DF07C894A21DC02EC7794B7DB`.
 
 Manual acceptance recorded for Goal 036:
 
@@ -1283,15 +1306,19 @@ The pivot is not a restart. It changes what future slices are allowed to optimiz
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
 3. `docs/CURRENT_GENERATOR_STATE.md`
-4. `docs/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN_SPEC.md`
-5. `docs/EXTERNAL_SCOUTING_GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md`
-6. `docs/agent-tasks/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md`
-7. `docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md`
-8. `docs/EXTERNAL_SCOUTING_GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md`
-9. `docs/agent-tasks/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md`
-10. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
-11. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
-12. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
+4. `docs/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION_SPEC.md`
+5. `docs/EXTERNAL_SCOUTING_GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md`
+6. `docs/agent-tasks/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md`
+7. `docs/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN_SPEC.md`
+8. `docs/EXTERNAL_SCOUTING_GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md`
+9. `docs/agent-tasks/GOAL_047_FULL_GENERATOR_WITHOUT_MEDIA_DRY_RUN.md`
+10. `docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md`
+11. `docs/EXTERNAL_SCOUTING_GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md`
+12. `docs/GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE_SPEC.md`
+13. `docs/EXTERNAL_SCOUTING_GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE.md`
+14. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
+15. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
+16. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
 
 Do not read old root `README_APPLY_*` files or old `docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md` files as current planning authority.
 
@@ -1304,7 +1331,7 @@ Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 After Goal 021, this state should recommend:
 
 ```text
-full_generator_without_media_verification
+media_asset_campaign_orchestration_verification
 ```
 
 

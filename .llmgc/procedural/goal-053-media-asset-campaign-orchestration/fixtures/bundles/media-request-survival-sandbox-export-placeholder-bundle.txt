@@ -1,0 +1,15 @@
+fixtureSchema=goal053_text_fixture_descriptor_v1
+fixtureOnly=true
+finalMedia=false
+requestId=media-request/survival-sandbox/export-placeholder-bundle
+candidateId=candidate/fixture/media-request-survival-sandbox-export-placeholder-bundle
+familyId=survival_sandbox
+scenarioId=frontier_survival
+styleId=media-style/survival-sandbox/frontier-survival
+mediaKind=bundle
+mediaSlotId=export_placeholder_bundle
+targetGeneratedId=export-profile/survival-sandbox/without-media
+sourceKind=fixture-generated-by-repo
+realProviderCalled=false
+realMediaGenerationCalled=false
+networkOrImportCalled=false

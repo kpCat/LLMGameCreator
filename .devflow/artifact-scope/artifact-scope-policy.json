@@ -21,7 +21,8 @@
     ".llmgc/procedural/development-complexity-stabilization/",
     ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/",
     ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/",
-    ".llmgc/procedural/goal-047-full-generator-without-media-dry-run/"
+    ".llmgc/procedural/goal-047-full-generator-without-media-dry-run/",
+    ".llmgc/procedural/goal-053-media-asset-campaign-orchestration/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -144,6 +145,26 @@
         ".llmgc/procedural/goal-047-full-generator-without-media-dry-run/",
         "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/",
         "tests/LLMGameCreator.Tests/Application/FullGeneratorWithoutMediaDryRun/"
+      ]
+    },
+    {
+      "scenario": "goal-053-media-asset-campaign-orchestration",
+      "allowedPaths": [
+        "docs/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
+        "docs/agent-tasks/GOAL_053_MEDIA_ASSET_CAMPAIGN_ORCHESTRATION.md",
+        "docs/agent-tasks/GOAL_053_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/MediaAssetCampaignOrchestrationProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-053-media-asset-campaign-orchestration/",
+        "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/",
+        "tests/LLMGameCreator.Tests/Application/MediaAssetCampaignOrchestration/"
       ]
     }
   ]
