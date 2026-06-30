@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 040 Chunked runtime preview/export multi-family smoke production  
+Updated by: Goal 043 Multi-family generated template vertical slice production
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 ## Current Phase
@@ -76,7 +76,9 @@ Goal 038 records the accepted Goal 037 gate, adds a BCL-only Application-layer w
 
 Goal 039 records the accepted Goal 038 gate, adds a narrow Application-layer runtime chunk delta traversal seam under `Design/RuntimeChunkDeltaTraversal`, and consumes Goal 038 region graph, finite map and chunk config facts as source facts. It builds deterministic traversal plans for `frontier_survival`, `gothic_intrigue`, `caravan_trade` and `metamodule_kingdoms`, projects traversal events into runtime chunk delta commands, stores visited/discovered chunk markers, route checkpoints, landmark discovery, local mutations and replay markers in runtime-owned `GameRuntimeState.Metadata`, and proves full `GameRuntimeState` save/load through a test/smoke injected `RuntimeStateSerializer` + `RuntimeSnapshotStore` adapter. It writes compact evidence under `.llmgc/procedural/goal-039-runtime-chunk-delta-traversal-smoke/`, preserves the 7 metamodule kingdom groups and 112 species/archetype slot refs as compact source facts, rejects 13 causal invalid/fake/leak cases, and adds the `RuntimeChunkDeltaTraversalProductSmokeTests` route. The user handoff for Goal 040 accepted `runtime_chunk_delta_traversal_smoke_verification passed`.
 
-Goal 040 records the accepted Goal 039 gate, adds a BCL-only Application-layer chunked runtime preview/export consumer seam under `Design/ChunkedRuntimePreviewExportSmoke`, and consumes Goal 039 runtime chunk traversal plans, runtime delta markers, save-load proof and replay proof. It writes four transformed preview/export payloads, a consumer catalog, export manifest, multi-family regression matrix, bounded infinite-window smoke proof, runtime preview consumption proof, package immutability audit, invalid diagnostics matrix and markdown report under `.llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/`. It proves `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon` reuse the same `chunk_traversal_consumer_core_v1` payload schema without starting Goals 043-045, and absorbs Goal 041/042 intent into this aggressive Goal 040 proof. Goal 040 stops at `chunked_runtime_preview_export_multifamily_smoke_verification required`, not passed.
+Goal 040 records the accepted Goal 039 gate, adds a BCL-only Application-layer chunked runtime preview/export consumer seam under `Design/ChunkedRuntimePreviewExportSmoke`, and consumes Goal 039 runtime chunk traversal plans, runtime delta markers, save-load proof and replay proof. It writes four transformed preview/export payloads, a consumer catalog, export manifest, multi-family regression matrix, bounded infinite-window smoke proof, runtime preview consumption proof, package immutability audit, invalid diagnostics matrix and markdown report under `.llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/`. It proves `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon` reuse the same `chunk_traversal_consumer_core_v1` payload schema without starting Goals 043-045, and absorbs Goal 041/042 intent into this aggressive Goal 040 proof. The user handoff for Goal 043 accepted `chunked_runtime_preview_export_multifamily_smoke_verification passed`.
+
+Goal 043 records the accepted Goal 040 gate, adds a BCL-only Application-layer multi-family generated template vertical slice seam under `Design/MultiFamilyGeneratedTemplateVerticalSlice`, and consumes Goal 034 strict draft loop, Goal 035/036 Lua governance, Goal 037 hybrid expansion, Goal 038 world-scale graph/map facts, Goal 039 runtime chunk traversal deltas and Goal 040 preview/export payloads as compact source facts. It builds shared lifecycle plans plus family-specific generated loop proofs for `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`, proves each family can run at least two deterministic state-changing commands, blocks causal invalid actions, validates shared lifecycle consistency, writes a preview/export consumption matrix proving transformed Goal 040 use instead of JSON copying, and emits compact evidence under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/`. Goal 043 absorbs Goal 043/044/045/046 intent into one aggressive multi-family generated template proof and stops at `multi_family_generated_template_vertical_slice_verification required`, not passed.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -112,7 +114,8 @@ Allowed next sequence:
 5. Record Goal 037 hybrid LLM draft plus Lua deterministic expansion as accepted by the user handoff with `hybrid_llm_draft_lua_deterministic_expansion_verification passed`.
 6. Record Goal 038 world-scale region map foundation as accepted by the user handoff with `world_scale_region_map_foundation_verification passed`.
 7. Record Goal 039 runtime chunk delta traversal smoke as accepted by the user handoff with `runtime_chunk_delta_traversal_smoke_verification passed`.
-8. Keep Goal 040 chunked runtime preview/export multi-family smoke produced for review with `chunked_runtime_preview_export_multifamily_smoke_verification required`.
+8. Record Goal 040 chunked runtime preview/export multi-family smoke as accepted by the user handoff with `chunked_runtime_preview_export_multifamily_smoke_verification passed`.
+9. Keep Goal 043 multi-family generated template vertical slice produced for review with `multi_family_generated_template_vertical_slice_verification required`.
 
 Kill criterion:
 
@@ -210,10 +213,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-chunked_runtime_preview_export_multifamily_smoke_verification
+multi_family_generated_template_vertical_slice_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 is produced for review and stops at `chunked_runtime_preview_export_multifamily_smoke_verification required`. Goal 043 is not started.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 is produced for review and stops at `multi_family_generated_template_vertical_slice_verification required`.
 
 Goal 037 accepted by user handoff:
 
@@ -270,10 +273,10 @@ Recorded checks from Goal 039 implementation:
 - Goal 039 compact report records `accepted=false`, `manualGate=runtime_chunk_delta_traversal_smoke_verification`, `scenarioCount=4`, `runtimeStateChangedAfterTraversal=true`, `saveLoadRoundtripPassed=true`, `replayDeterminismPassed=true`, `metamoduleKingdomGroupCount=7`, `metamoduleSpeciesArchetypeSlotRefCount=112` and `invalidScenarioCount=13`.
 - The user handoff for Goal 040 accepted `runtime_chunk_delta_traversal_smoke_verification passed` before Goal 040 implementation.
 
-Goal 040 produced for review:
+Goal 040 accepted by user handoff:
 
 ```text
-chunked_runtime_preview_export_multifamily_smoke_verification: required
+chunked_runtime_preview_export_multifamily_smoke_verification: passed
 ```
 
 Evidence source: Goal 040 implementation artifacts under `.llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/`.
@@ -288,6 +291,26 @@ Recorded checks from Goal 040 implementation:
 - `.\.devflow\scripts\check-all.ps1`: passed with 1010/1010 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_025955-check-all`.
 - `goal-040-final` artifact scope guard: 13/13 changed paths allowed, 0 violations.
 - Direct artifact inspection listed 12 required Goal 040 files and the compact report records `implementationStatus=GREEN`, `accepted=false`, `manualGate=chunked_runtime_preview_export_multifamily_smoke_verification`, `scenarioPayloadCount=4`, `familyLensCount=3`, `sourceGoal039RuntimeDeltasConsumed=true`, `payloadsAreNotSourceJsonCopies=true`, `multiFamilyRegressionPassed=true`, `infiniteChunkedSmokeProofPassed=true`, `packageImmutabilityAuditPassed=true` and `invalidMatrixPassed=true`.
+- The user handoff for Goal 043 accepted `chunked_runtime_preview_export_multifamily_smoke_verification passed` before Goal 043 implementation.
+
+Goal 043 produced for review:
+
+```text
+multi_family_generated_template_vertical_slice_verification: required
+```
+
+Evidence source: Goal 043 implementation artifacts under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/`.
+
+Recorded checks from Goal 043 implementation:
+
+- `dotnet restore .\LLMGameCreator.sln`: passed.
+- `dotnet build .\LLMGameCreator.sln --no-restore`: passed with 0 warnings / 0 errors.
+- Goal 043 focused `MultiFamilyGeneratedTemplate|Goal043` filter: 7/7 passed and wrote compact artifacts under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/`.
+- Goal 043 exact product smoke class filter: 1/1 passed and wrote compact artifacts under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/`.
+- `CurrentState|Goal043|MultiFamily` filtered tests: 24/24 passed.
+- `.\.devflow\scripts\check-all.ps1`: passed with 1016/1016 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_040221-check-all`.
+- `goal-043-multi-family-generated-template-vertical-slice` artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash `342C532483699A767293587F270FA28AAF412F4707FF50CD3E79A950FDE64535`.
+- Direct artifact inspection listed 12 required Goal 043 files, parsed all 11 JSON sidecars, and the compact report records `implementationStatus=GREEN`, `accepted=false`, `manualGate=multi_family_generated_template_vertical_slice_verification`, `familyCount=3`, `simulatableLoopProofCount=3`, `sourceGoal040PreviewExportConsumed=true`, `sharedLifecycleContractPassed=true`, `invalidMatrixPassed=true` and report hash `7D5E2B42761BB2AABCC22C06840CCAC2AAB5474F0B7F5EA5232AC7552A796685`.
 
 Manual acceptance recorded for Goal 036:
 
@@ -1237,15 +1260,12 @@ The pivot is not a restart. It changes what future slices are allowed to optimiz
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
 3. `docs/CURRENT_GENERATOR_STATE.md`
-4. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
-5. `docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md`
-6. `docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md`
-7. `docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md`
-8. `docs/EXTENSION_RULE_PACK_CONTRACT_V1.md`
-9. `docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md`
-10. `docs/GENERATION_PROCEDURE_AND_LLM_POLICY.md`
-11. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
-12. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
+4. `docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md`
+5. `docs/EXTERNAL_SCOUTING_GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md`
+6. `docs/agent-tasks/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md`
+7. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
+8. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
+9. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
 
 Do not read old root `README_APPLY_*` files or old `docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md` files as current planning authority.
 
@@ -1258,7 +1278,7 @@ Preserve M5/M6 locked semantics until explicitly unlocked by the user.
 After Goal 021, this state should recommend:
 
 ```text
-generated_game_profile_contract_verification
+multi_family_generated_template_vertical_slice_verification
 ```
 
 

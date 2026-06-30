@@ -19,7 +19,8 @@
   ],
   "allowedCurrentGoalArtifactRoots": [
     ".llmgc/procedural/development-complexity-stabilization/",
-    ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/"
+    ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/",
+    ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -102,6 +103,26 @@
         ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/",
         "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke/",
         "tests/LLMGameCreator.Tests/Application/ChunkedRuntimePreviewExportSmoke/"
+      ]
+    },
+    {
+      "scenario": "goal-043-multi-family-generated-template-vertical-slice",
+      "allowedPaths": [
+        "docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md",
+        "docs/agent-tasks/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md",
+        "docs/agent-tasks/GOAL_043_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/MultiFamilyGeneratedTemplateVerticalSliceProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/",
+        "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice/",
+        "tests/LLMGameCreator.Tests/Application/MultiFamilyGeneratedTemplateVerticalSlice/"
       ]
     }
   ]

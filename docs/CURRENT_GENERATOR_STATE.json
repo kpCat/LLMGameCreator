@@ -3,22 +3,22 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 040 Chunked runtime preview/export multi-family smoke produced for review",
-    "gate_status":  "chunked_runtime_preview_export_multifamily_smoke_verification",
+    "current_phase_title":  "Goal 043 Multi-family generated template vertical slice produced for review",
+    "gate_status":  "multi_family_generated_template_vertical_slice_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_040_chunked_runtime_preview_export_multifamily_smoke",
-    "active_manual_gate":  "Goal 039 runtime chunk delta traversal smoke is accepted as passed by user handoff. Goal 040 chunked runtime preview/export multi-family smoke is produced for review and requires chunked_runtime_preview_export_multifamily_smoke_verification. Goal 031 and Goal 032 remain produced for review and not passed. Goal 043 is not started.",
-    "current_user_action":  "Review Goal 040 chunked runtime preview/export multi-family smoke artifacts and decide chunked_runtime_preview_export_multifamily_smoke_verification. Do not mark Goal 040 passed from this production handoff.",
-    "recommended_next_decision":  "If chunked_runtime_preview_export_multifamily_smoke_verification is accepted by user decision, start the next bounded Goal 043 family template work; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start Goal 043 from this Goal 040 production handoff.",
+    "last_completed_product_slice_id":  "goal_043_multi_family_generated_template_vertical_slice",
+    "active_manual_gate":  "Goal 040 chunked runtime preview/export multi-family smoke is accepted as passed by user handoff: chunked_runtime_preview_export_multifamily_smoke_verification passed. Goal 043 multi-family generated template vertical slice is produced for review and requires multi_family_generated_template_vertical_slice_verification. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 043 multi-family generated template vertical slice artifacts and decide multi_family_generated_template_vertical_slice_verification. Do not mark Goal 043 passed from this production handoff.",
+    "recommended_next_decision":  "If multi_family_generated_template_vertical_slice_verification is accepted by user decision, start the next appropriate bounded Goal 047 review/approval or family-runtime integration hardening work; preserve Goal 031 and Goal 032 as produced-for-review/not passed and do not start the next goal from this Goal 043 production handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "chunked_runtime_preview_export_multifamily_smoke_verification",
-                                                        "goal_043_map_panel_rpg_template"
+                                                        "multi_family_generated_template_vertical_slice_verification",
+                                                        "goal_047_review_and_approval_workflow_hardening"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -68,7 +68,8 @@
                            "goal_037_manual_gate":  "hybrid_llm_draft_lua_deterministic_expansion_verification",
                            "goal_038_manual_gate":  "world_scale_region_map_foundation_verification",
                            "goal_039_manual_gate":  "runtime_chunk_delta_traversal_smoke_verification",
-                           "goal_040_manual_gate":  "chunked_runtime_preview_export_multifamily_smoke_verification"
+                           "goal_040_manual_gate":  "chunked_runtime_preview_export_multifamily_smoke_verification",
+                           "goal_043_manual_gate":  "multi_family_generated_template_vertical_slice_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -89,20 +90,20 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_040_chunked_runtime_preview_export_multifamily_smoke",
-                                         "title":  "Chunked Runtime Preview Export Multi-Family Smoke",
+                                         "slice_id":  "goal_043_multi_family_generated_template_vertical_slice",
+                                         "title":  "Multi-Family Generated Template Vertical Slice",
                                         "status":  "produced_for_review",
-                                         "summary":  "Goal 040 records the user-handoff acceptance of Goal 039, then adds a BCL-only Application-layer ChunkedRuntimePreviewExportSmoke seam. It consumes Goal 039 runtime chunk traversal plans, runtime delta markers, save-load proof and replay proof for frontier_survival, gothic_intrigue, caravan_trade and metamodule_kingdoms, transforms them into preview/export-compatible payloads and a manifest, proves map_panel_rpg, survival_sandbox and first_person_grid_dungeon lenses reuse the same core payload schema, writes a bounded deterministic infinite-window chunk proof, audits package/runtime/UI/Unity immutability, writes compact evidence under .llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke and rejects 16 fake/invalid/leak cases. Goal 041/042 intent is absorbed into this aggressive Goal 040 proof; Goal 043 is not started.",
-                                         "scenario_id":  "goal-040-chunked-runtime-preview-export-multifamily-smoke",
+                                         "summary":  "Goal 043 records the user-handoff acceptance of Goal 040, then adds a BCL-only Application-layer MultiFamilyGeneratedTemplateVerticalSlice seam. It consumes physical Goal 037 hybrid expansion, Goal 038 world/map/chunk foundation, Goal 039 runtime chunk traversal and Goal 040 preview/export payload evidence. It produces deterministic lifecycle plans and Application-owned simulatable loop proofs for map_panel_rpg, survival_sandbox and first_person_grid_dungeon, proves a shared lifecycle contract with family-scoped extensions only, writes compact evidence under .llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice and rejects 24 fake/invalid/leak cases. Goal 044/045/046 intent is absorbed into this aggressive Goal 043 proof; Goal 043 stops at multi_family_generated_template_vertical_slice_verification required.",
+                                         "scenario_id":  "goal-043-multi-family-generated-template-vertical-slice",
                                         "checks":  [
-                                                       "dotnet restore .\\LLMGameCreator.sln passed.",
-                                                       "dotnet build .\\LLMGameCreator.sln --no-restore passed with 0 warnings / 0 errors.",
-                                                       "Goal 040 focused ChunkedRuntimePreviewExport/ChunkedRuntime/Goal040 filter: 8/8 passed.",
-                                                       "Goal 040 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke.",
-                                                       "CurrentState/Goal040/ChunkedRuntime filtered tests: 24/24 passed.",
-                                                       "check-all.ps1 passed with 1010/1010 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_025955-check-all.",
-                                                       "goal-040-final artifact scope guard accepted 13/13 changed paths with 0 violations.",
-                                                       "Direct artifact inspection listed 12 required Goal 040 files and the compact report records implementationStatus=GREEN, accepted=false, manualGate=chunked_runtime_preview_export_multifamily_smoke_verification, scenarioPayloadCount=4, familyLensCount=3, sourceGoal039RuntimeDeltasConsumed=true, payloadsAreNotSourceJsonCopies=true, multiFamilyRegressionPassed=true, infiniteChunkedSmokeProofPassed=true, packageImmutabilityAuditPassed=true and invalidMatrixPassed=true."
+                                                       "dotnet restore .\\LLMGameCreator.sln: passed.",
+                                                       "dotnet build .\\LLMGameCreator.sln --no-restore: passed with 0 warnings / 0 errors.",
+                                                       "Goal 043 focused MultiFamilyGeneratedTemplate|Goal043 filter: 7/7 passed and wrote compact artifacts under .llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice.",
+                                                       "Goal 043 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice.",
+                                                       "CurrentState|Goal043|MultiFamily filtered tests: 24/24 passed.",
+                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1016/1016 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_040221-check-all.",
+                                                       "goal-043-multi-family-generated-template-vertical-slice artifact scope guard: 13/13 changed paths allowed, 0 violations, report hash 342C532483699A767293587F270FA28AAF412F4707FF50CD3E79A950FDE64535.",
+                                                       "Direct artifact inspection listed 12 required Goal 043 files, parsed all 11 JSON sidecars, and the compact report records implementationStatus=GREEN, accepted=false, manualGate=multi_family_generated_template_vertical_slice_verification, familyCount=3, simulatableLoopProofCount=3, sourceGoal040PreviewExportConsumed=true, sharedLifecycleContractPassed=true, invalidMatrixPassed=true and report hash 7D5E2B42761BB2AABCC22C06840CCAC2AAB5474F0B7F5EA5232AC7552A796685."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -362,8 +363,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "chunked_runtime_preview_export_multifamily_smoke_verification",
-                                          "goal_043_map_panel_rpg_template"
+                                          "multi_family_generated_template_vertical_slice_verification",
+                                          "goal_047_review_and_approval_workflow_hardening"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -384,17 +385,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "chunked_runtime_preview_export_multifamily_smoke_verification",
-    "recommended_next_work_item_title":  "Review Goal 040 chunked runtime preview/export multi-family smoke.",
-    "recommended_next_task_file":  "docs/GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE_SPEC.md",
+    "recommended_next_work_item":  "multi_family_generated_template_vertical_slice_verification",
+    "recommended_next_work_item_title":  "Review Goal 043 multi-family generated template vertical slice.",
+    "recommended_next_task_file":  "docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 040 chunked runtime preview/export multi-family smoke review at chunked_runtime_preview_export_multifamily_smoke_verification",
-                                               "Goal 043 map/panel RPG template remains future work until Goal 040 is accepted"
+                                               "Goal 043 multi-family generated template vertical slice review at multi_family_generated_template_vertical_slice_verification",
+                                               "Goal 047 review and approval workflow hardening remains future work until Goal 043 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md",
+                                                   "docs/agent-tasks/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md",
                                                    "docs/GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE.md",
                                                    "docs/GOAL_039_RUNTIME_CHUNK_DELTA_TRAVERSAL_SMOKE_SPEC.md",
@@ -415,9 +419,6 @@
                                                    "docs/MODULAR_CONTRACT_GOAL_POLICY.md",
                                                    "docs/PACKAGE_ASSEMBLY_EXPANSION_CAMPAIGN_PACK.md",
                                                    "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
-                                                  "docs/NEXT_PRODUCT_SLICE_041_GENERATION_PRESETS_AND_OPTIONS_TASK.md",
-                                                  "docs/NEXT_PRODUCT_SLICE_042_MICROGAME_VARIATION_ACCEPTANCE_TASK.md",
-                                                  "docs/MANUAL_CONFIGURABLE_MICROGAME_VERIFICATION.md",
                                                   "docs/EXTENSION_RULE_PACK_CONTRACT_V1.md",
                                                   "docs/MANUAL_EXTENSION_SPINE_VERIFICATION.md",
                                                   "docs/SEMANTIC_PACK_CONTRACT_V1.md",
@@ -1184,7 +1185,7 @@
                                                                     "next_action":  "goal_040_chunked_runtime_preview_export_multifamily_smoke_produced_for_review"
                                                           },
     "chunked_runtime_preview_export_multifamily_smoke_verification":  {
-                                                                    "status":  "required",
+                                                                    "status":  "passed_by_user_handoff_before_goal_043",
                                                                     "evidence_source":  "goal_040_chunked_runtime_preview_export_multifamily_smoke",
                                                                     "observed_result":  [
                                                                                             "Design/ChunkedRuntimePreviewExportSmoke defines a BCL-only Application-layer source loader, consumer payload builder, export manifest builder, multi-family regression planner, bounded infinite-window proof builder, validator, invalid matrix and evidence writer.",
@@ -1194,9 +1195,25 @@
                                                                                             "The infinite/chunked world smoke pre-proof uses a bounded deterministic window with seed id, origin, radius/dimensions, derived chunk ids, boundary handoff placeholders and repeatable hash; real infinite streaming remains unimplemented.",
                                                                                             ".llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke contains the catalog summary, four preview payloads, export manifest, multi-family matrix, infinite proof, runtime preview consumption proof, package immutability audit, invalid diagnostics matrix and markdown report.",
                                                                                             "Invalid/fake/leak matrix rejects missing Goal039 evidence, fake scenario/chunk ids, static-map-without-runtime-delta, family schema forks, missing family needs, nondeterministic infinite seed, invalid window, package mutation, Runtime/UI/Unity/provider/LLM/RAG/Lua/source/generator-library/IO/process/reflection/thread/time/random/native interop leakage, final prose, missing save-load/replay correlation and nondeterministic ordering.",
-                                                                                            "Final report accepted=false and manualGate=chunked_runtime_preview_export_multifamily_smoke_verification"
+                                                                                            "Final report accepted=false and manualGate=chunked_runtime_preview_export_multifamily_smoke_verification",
+                                                                                            "The user handoff for Goal 043 accepted chunked_runtime_preview_export_multifamily_smoke_verification passed before Goal 043 implementation."
                                                                                         ],
-                                                                    "next_action":  "review_goal_040_before_goal_043_family_template_work"
+                                                                    "next_action":  "goal_043_multi_family_generated_template_vertical_slice_produced_for_review"
+                                                          },
+    "multi_family_generated_template_vertical_slice_verification":  {
+                                                                    "status":  "required",
+                                                                    "evidence_source":  "goal_043_multi_family_generated_template_vertical_slice",
+                                                                    "observed_result":  [
+                                                                                            "Design/MultiFamilyGeneratedTemplateVerticalSlice defines a BCL-only Application-layer source loader, family template catalog, lifecycle builder, simulatable loop runner, validator, invalid matrix and evidence writer.",
+                                                                                            "Goal 043 consumes physical Goal 037 hybrid expansion, Goal 038 world/map/chunk, Goal 039 runtime chunk traversal and Goal 040 preview/export payload artifacts without provider/LLM/RAG/media calls, without new Lua source/execution, and without mutating Runtime/UI/Unity/GamePackage/generator-library paths.",
+                                                                                            "Lifecycle plans cover map_panel_rpg, survival_sandbox and first_person_grid_dungeon with family id, scenario/profile id, selected feature/intent refs, region/chunk/traversal refs, preview/export refs, family extension section, loop commands, validation trace and deterministic ordering key.",
+                                                                                            "Application-owned loop proofs cover movement/traversal plus focused target and quest/event progress for map_panel_rpg, hazard/resource plus collect/consume/craft/chunk-context state changes for survival_sandbox, and orientation/corridor-room plus encounter/locked-route pressure and party/blob traversal for first_person_grid_dungeon.",
+                                                                                            "The shared lifecycle contract proves all three families use the same phases and differ only through family-scoped extension sections.",
+                                                                                            ".llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice contains the catalog, shared lifecycle contract, three family loop plans, three simulatable loop proofs, multi-family regression matrix, preview/export consumption matrix, invalid diagnostics matrix and markdown report.",
+                                                                                            "Invalid/fake/leak matrix rejects duplicate/unknown family ids, unknown scenario ids, missing lifecycle/source sections, fake Goal034/035/036/037/038/039/040 refs, unscoped family fields, architecture forks, GamePackage schema mutation claims, Runtime/UI/Unity/provider/LLM/RAG/media/Lua leakage, final prose promotion, nondeterministic ordering, cross-family collisions, profile mismatch, missing state transitions, copied preview/export payloads and missing validation trace.",
+                                                                                            "Final report accepted=false and manualGate=multi_family_generated_template_vertical_slice_verification"
+                                                                                        ],
+                                                                    "next_action":  "review_goal_043_before_goal_047_or_family_runtime_integration_hardening"
                                                           },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

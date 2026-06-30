@@ -113,6 +113,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_039_RUNTIME_CHUNK_DELTA_TRAVERSAL_SMOKE.md` | Goal 039 scouting: BCL/System.Text.Json plus existing runtime serializer/snapshot mechanisms, no graph/pathfinding/serialization dependency adoption. |
 | `docs/GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE_SPEC.md` | Goal 040 task/spec: chunked runtime preview/export multi-family smoke consuming Goal 039 runtime chunk delta traversal artifacts into preview/export payloads, multi-family regression, bounded infinite-window proof, compact evidence under `.llmgc/procedural/goal-040-chunked-runtime-preview-export-multifamily-smoke/` and final stop at `chunked_runtime_preview_export_multifamily_smoke_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_040_CHUNKED_RUNTIME_PREVIEW_EXPORT_MULTIFAMILY_SMOKE.md` | Goal 040 scouting: BCL-only consumer/proof slice over Goal 038/039 evidence; no graph/pathfinding/GIS/serialization dependency adoption and no streaming/runtime/Unity refactor. |
+| `docs/GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE_SPEC.md` | Goal 043 task/spec: multi-family generated template vertical slice consuming Goal 034-040 evidence into shared lifecycle plans and deterministic simulatable loops for map/panel RPG, survival sandbox and first-person grid dungeon families, compact evidence under `.llmgc/procedural/goal-043-multi-family-generated-template-vertical-slice/` and final stop at `multi_family_generated_template_vertical_slice_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_043_MULTI_FAMILY_GENERATED_TEMPLATE_VERTICAL_SLICE.md` | Goal 043 scouting: BCL-only generated template planning and simulatable loop proof; no Runtime/UI/Unity/GamePackage/provider/LLM/RAG/media dependency adoption. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -157,10 +159,10 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-chunked_runtime_preview_export_multifamily_smoke_verification
+multi_family_generated_template_vertical_slice_verification
 ```
 
-Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate has been accepted by the user handoff embedded in Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 hybrid LLM draft plus Lua deterministic expansion has been accepted by the user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 world-scale region map foundation has been accepted by the user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 runtime chunk delta traversal smoke has been accepted by the user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 chunked runtime preview/export multi-family smoke is produced for review and stops at `chunked_runtime_preview_export_multifamily_smoke_verification required`. Goal 043 is not started.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate has been accepted by the user handoff embedded in Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 hybrid LLM draft plus Lua deterministic expansion has been accepted by the user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 world-scale region map foundation has been accepted by the user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 runtime chunk delta traversal smoke has been accepted by the user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 chunked runtime preview/export multi-family smoke has been accepted by the user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 multi-family generated template vertical slice is produced for review and stops at `multi_family_generated_template_vertical_slice_verification required`.
 
 Allowed next sequence:
 
@@ -171,7 +173,8 @@ Allowed next sequence:
 5. Keep Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` recorded as passed by the user handoff before Goal 038.
 6. Keep Goal 038 world-scale region map foundation recorded as passed by user handoff.
 7. Keep Goal 039 runtime chunk delta traversal smoke recorded as passed by the Goal 040 user handoff.
-8. Keep Goal 040 chunked runtime preview/export multi-family smoke produced for review with `chunked_runtime_preview_export_multifamily_smoke_verification required`.
+8. Keep Goal 040 chunked runtime preview/export multi-family smoke recorded as passed by user handoff.
+9. Keep Goal 043 multi-family generated template vertical slice produced for review with `multi_family_generated_template_vertical_slice_verification required`.
 
 Kill criterion:
 
