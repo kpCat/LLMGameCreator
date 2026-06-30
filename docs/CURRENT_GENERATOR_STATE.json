@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 055 media-bound playable review package produced for review",
-    "gate_status":  "media_bound_playable_review_package_verification",
+    "current_phase_title":  "Goal 056 unity alpha media-bound playable package produced for review",
+    "gate_status":  "unity_alpha_media_bound_playable_package_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_055_media_bound_playable_review_package_smoke",
-    "active_manual_gate":  "Goal 055 media-bound playable review package smoke is produced for review and remains at media_bound_playable_review_package_verification required. Goal 054 media materialization review package is accepted as passed by Goal 055 user handoff: media_materialization_review_package_verification passed. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 055 media-bound playable review package smoke evidence before any acceptance decision. Do not mark Goal 055 passed from this production handoff.",
-    "recommended_next_decision":  "Keep media_bound_playable_review_package_verification required until the user accepts Goal 055; after acceptance, consider Goal 056 as the next bounded media-bound playable package step, but do not start Goal 056 until explicitly requested.",
+    "last_completed_product_slice_id":  "goal_056_unity_alpha_media_bound_playable_package",
+    "active_manual_gate":  "Goal 055 media-bound playable review package smoke is accepted by user handoff before Goal 056: media_bound_playable_review_package_verification passed. Goal 056 unity alpha media-bound playable package is produced for review with GREEN implementation evidence, but remains at unity_alpha_media_bound_playable_package_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 056 unity alpha media-bound playable package evidence. Do not mark Goal 056 passed from its production handoff.",
+    "recommended_next_decision":  "Keep unity_alpha_media_bound_playable_package_verification required until the user accepts Goal 056; do not start the next goal from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "media_bound_playable_review_package_verification"
+                                                        "unity_alpha_media_bound_playable_package_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -72,7 +72,8 @@
                            "goal_047_manual_gate":  "full_generator_without_media_verification",
                            "goal_053_manual_gate":  "media_asset_campaign_orchestration_verification",
                            "goal_054_manual_gate":  "media_materialization_review_package_verification",
-                           "goal_055_manual_gate":  "media_bound_playable_review_package_verification"
+                           "goal_055_manual_gate":  "media_bound_playable_review_package_verification",
+                           "goal_056_manual_gate":  "unity_alpha_media_bound_playable_package_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -93,20 +94,21 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_055_media_bound_playable_review_package_smoke",
-                                         "title":  "Media-Bound Playable Review Package Smoke",
+                                         "slice_id":  "goal_056_unity_alpha_media_bound_playable_package",
+                                         "title":  "Unity Alpha Media-Bound Playable Package",
                                          "status":  "produced_for_review",
-                                         "summary":  "Goal 055 records the Goal 054 acceptance by user handoff, then adds a BCL-only Application-layer MediaBoundPlayableReviewPackage seam. It consumes Goal 047 family dry-runs, Goal 053 media bindings and Goal 054 physical PNG/WAV/bundle media into a deterministic source manifest, staged review package, StreamingAssets-compatible media manifest, media-bound preview/export payloads, Unity-compatible media load contract, per-family proof records, family smoke matrix, invalid/fake/leak matrix and compact report. It stages 15 repository-local physical media files (9 PNG, 3 WAV, 3 bundle JSON) for map_panel_rpg, survival_sandbox and first_person_grid_dungeon, validates bytes/hashes/provenance, proves manifest/image/WAV/family-panel proof records without provider/network/LLM/RAG/Lua execution and without Runtime/UI/Unity/GamePackage schema/generator-library changes, and leaves media_bound_playable_review_package_verification required.",
-                                         "scenario_id":  "goal-055-media-bound-playable-review-package-smoke",
+                                         "summary":  "Goal 056 records Goal 055 as accepted by user handoff, then adds a narrow Application-layer UnityAlphaMediaBoundPlayablePackage seam and a bounded Unity Alpha media loader. It consumes Goal 055 staged media, Goal 054 physical PNG/WAV/bundle fixtures and Goal 047 dry-run family refs into a Unity StreamingAssets staging payload, compact manifests, family panel models, Unity load contract/proof, smoke log summary, preview/export payloads, hash inventory, invalid matrix and report. The repo-local Unity Alpha player builds and launches through the existing Alpha build route, loads the media-bound manifest from Application.streamingAssetsPath, validates hashes, proves PNG/WAV/bundle/family panel markers for map_panel_rpg, survival_sandbox and first_person_grid_dungeon, and leaves unity_alpha_media_bound_playable_package_verification required.",
+                                         "scenario_id":  "goal-056-unity-alpha-media-bound-playable-package",
                                          "checks":  [
                                                        "dotnet restore .\\LLMGameCreator.sln: passed.",
                                                        "dotnet build .\\LLMGameCreator.sln --no-restore: passed with 0 warnings / 0 errors.",
-                                                       "Goal 055 focused MediaBoundPlayableReviewPackage|Goal055 filter: 7/7 passed and wrote deterministic compact evidence.",
-                                                       "Goal 055 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-055-media-bound-playable-review-package-smoke.",
-                                                       "CurrentState|Goal055|MediaBound filtered tests: 23/23 passed after a bounded recommended_next_decision consistency wording repair.",
-                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1039/1039 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_151056-check-all.",
-                                                       "goal-055-media-bound-playable-review-package-smoke artifact scope guard: 13/13 changed paths allowed, 0 violations.",
-                                                       "Direct artifact inspection listed 33 Goal 055 files, counted 15 staged media files (9 PNG, 3 WAV, 3 bundle JSON), and the compact report records implementationStatus=GREEN, accepted=false, manualGate=media_bound_playable_review_package_verification, physicalMediaStaged=true, pngProofPassed=true, wavProofPassed=true, bundleProofPassed=true, reviewPackageManifestPassed=true, streamingAssetsManifestPassed=true, previewPayloadsPassed=true, unityMediaLoadContractPassed=true, familySmokeMatrixPassed=true, invalidMatrixPassed=true and report file hash 450ECE061878822F3200CDCD49581302231233AE189279E3E8316FA26002A13E."
+                                                       "Goal 056 focused UnityAlphaMediaBoundPlayablePackage|Goal056 filter: 7/7 passed and wrote deterministic compact evidence.",
+                                                       "Goal 056 exact product smoke class filter: 1/1 passed and wrote compact artifacts under .llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package.",
+                                                       "CurrentState|Goal056|UnityAlphaMediaBound filtered tests: 23/23 passed after state docs update.",
+                                                       "Unity Editor/player proof executed with unityExitCode=0, playerExitCode=0 and all required media_bound markers present.",
+                                                       "Direct artifact inspection confirmed required compact Goal 056 evidence files under .llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package/.",
+                                                       ".\\.devflow\\scripts\\check-all.ps1: passed with 1045/1045 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_164143-check-all.",
+                                                       "goal-056-unity-alpha-media-bound-playable-package artifact scope guard: 14/14 changed paths allowed, 0 violations."
                                                    ]
                                      },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -366,8 +368,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "media_bound_playable_review_package_verification",
-                                          "next_bounded_media_bound_playable_package_step_after_goal_055_acceptance"
+                                          "unity_alpha_media_bound_playable_package_verification",
+                                          "next_bounded_goal_after_goal_056_acceptance"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -388,17 +390,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "media_bound_playable_review_package_verification",
-    "recommended_next_work_item_title":  "Review Goal 055 media-bound playable review package smoke; Goal 056 is recommended only after acceptance.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_055_MEDIA_BOUND_PLAYABLE_REVIEW_PACKAGE.md",
+    "recommended_next_work_item":  "unity_alpha_media_bound_playable_package_verification",
+    "recommended_next_work_item_title":  "Review Goal 056 Unity Alpha media-bound playable package; do not start the next goal until this gate is accepted.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_056_UNITY_ALPHA_MEDIA_BOUND_PLAYABLE_PACKAGE.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 055 media-bound playable review package at media_bound_playable_review_package_verification",
-                                               "Goal 056 bounded media-bound playable package step remains future work until Goal 055 is accepted"
+                                               "Goal 056 Unity Alpha media-bound playable package at unity_alpha_media_bound_playable_package_verification",
+                                               "Next bounded goal remains future work until Goal 056 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                    "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_056_UNITY_ALPHA_MEDIA_BOUND_PLAYABLE_PACKAGE_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_056_UNITY_ALPHA_MEDIA_BOUND_PLAYABLE_PACKAGE.md",
+                                                   "docs/agent-tasks/GOAL_056_UNITY_ALPHA_MEDIA_BOUND_PLAYABLE_PACKAGE.md",
                                                    "docs/GOAL_055_MEDIA_BOUND_PLAYABLE_REVIEW_PACKAGE_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_055_MEDIA_BOUND_PLAYABLE_REVIEW_PACKAGE.md",
                                                    "docs/agent-tasks/GOAL_055_MEDIA_BOUND_PLAYABLE_REVIEW_PACKAGE.md",
@@ -1279,18 +1284,33 @@
                                                             "next_action":  "goal_055_media_bound_playable_review_package_smoke_produced_for_review"
                                                         },
     "media_bound_playable_review_package_verification":  {
-                                                            "status":  "required",
+                                                            "status":  "passed_by_user_handoff_before_goal_056",
                                                             "evidence_source":  "goal_055_media_bound_playable_review_package_smoke",
                                                             "observed_result":  [
                                                                                     "Design/MediaBoundPlayableReviewPackage defines a BCL-only Application-layer source loader, media validators, deterministic builder, validator, evidence writer and hash helper.",
                                                                                     "Goal 055 consumes Goal 047 family dry-runs, Goal 053 media bindings and Goal 054 physical PNG/WAV/bundle media after recording media_materialization_review_package_verification passed by user handoff.",
-                                                                                    "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 055 report keeps accepted=false and media_bound_playable_review_package_verification required.",
+                                                                                    "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 055 report kept accepted=false and media_bound_playable_review_package_verification required until the Goal 056 user handoff accepted it.",
                                                                                     "The review package stages 15 physical Goal 054 files across map_panel_rpg, survival_sandbox and first_person_grid_dungeon: 9 PNG files, 3 WAV files and 3 bundle JSON files.",
                                                                                     "The StreamingAssets-compatible manifest, preview/export payloads and Unity-compatible proof records bind staged media refs to manifest/image/WAV/family-panel proof lines without claiming Unity player execution.",
                                                                                     "Invalid/fake/leak matrix covers 17 causal scenarios including missing Goal 054 source, missing staged files, stale hashes, malformed PNG/WAV, unsafe paths, duplicate bindings, fake family/slot/proof lines, provenance leaks, provider/network/LLM/RAG/Lua claims and Runtime/UI/GamePackage/Unity broad mutation claims.",
-                                                                                    "Final report accepted=false and manualGate=media_bound_playable_review_package_verification"
+                                                                                    "The Goal 056 task handoff accepted media_bound_playable_review_package_verification passed before Goal 056 implementation."
                                                                                 ],
-                                                            "next_action":  "review_goal_055_before_goal_056_media_bound_playable_package_step"
+                                                            "next_action":  "goal_056_unity_alpha_media_bound_playable_package_produced_for_review"
+                                                        },
+    "unity_alpha_media_bound_playable_package_verification":  {
+                                                            "status":  "required",
+                                                            "evidence_source":  "goal_056_unity_alpha_media_bound_playable_package",
+                                                            "observed_result":  [
+                                                                                    "Design/UnityAlphaMediaBoundPlayablePackage defines a BCL-only Application-layer source loader, deterministic builder, validator, Unity proof runner, evidence writer and hash helper.",
+                                                                                    "Goal 056 consumes Goal 055 staged media-bound package files plus Goal 054 physical PNG/WAV/bundle fixtures and Goal 047 family refs after recording media_bound_playable_review_package_verification passed by user handoff.",
+                                                                                    "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 056 report keeps accepted=false and unity_alpha_media_bound_playable_package_verification required.",
+                                                                                    "The Unity StreamingAssets staging payload contains the base Alpha payload plus 15 media-bound files across map_panel_rpg, survival_sandbox and first_person_grid_dungeon.",
+                                                                                    "The repo-local Unity Alpha player was narrowly extended to load the media-bound manifest, validate hashes, prove PNG/WAV/bundle loading paths and emit required family panel markers.",
+                                                                                    "Unity proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0 and all required media_bound markers matched.",
+                                                                                    "Invalid/fake/leak matrix covers missing/stale Goal055 sources, missing/malformed staged PNG/WAV files, unsafe paths, duplicate bindings, fake family/slot ids, missing/stale Unity load traces and forbidden provider/LLM/RAG/Lua/Runtime/UI/GamePackage broad mutation claims.",
+                                                                                    "Final report accepted=false and manualGate=unity_alpha_media_bound_playable_package_verification"
+                                                                                ],
+                                                            "next_action":  "review_goal_056_before_next_goal"
                                                         },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

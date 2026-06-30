@@ -34,6 +34,7 @@ multi_family_generated_template_vertical_slice_verification passed
 full_generator_without_media_verification passed
 media_asset_campaign_orchestration_verification passed
 media_materialization_review_package_verification passed
+media_bound_playable_review_package_verification passed
 ```
 
 Produced for review:
@@ -41,6 +42,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
+unity_alpha_media_bound_playable_package_verification required
 ```
 
 Current capabilities:
@@ -84,11 +86,12 @@ Current capabilities:
 - media materialization review package with Goal 053/047 source facts consumed into a deterministic materialization queue, BCL-generated physical PNG/WAV/bundle fixture media files, binding validation, review package manifest, preview/export media payload proof and compact Goal 054 artifacts;
 - Goal 054 physical media proof accepted by Goal 055 preflight user handoff before media-bound playable review package smoke implementation;
 - media-bound playable review package smoke with Goal 047/053/054 source facts consumed into staged physical media package files, a StreamingAssets-compatible media manifest, Unity-compatible proof records, preview/export payload proof and compact Goal 055 artifacts;
+- Unity Alpha media-bound playable package proof with Goal 055 staged media consumed through the repo-local Unity Alpha player, real build/player execution and required `media_bound_*` markers recorded in compact Goal 056 artifacts;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 is produced for review and remains at `media_bound_playable_review_package_verification required`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 is produced for review and remains at `unity_alpha_media_bound_playable_package_verification required`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -118,7 +121,9 @@ Goal 053 compact evidence lives under `.llmgc/procedural/goal-053-media-asset-ca
 
 Goal 054 compact evidence lives under `.llmgc/procedural/goal-054-media-materialization-review-package/`; its produced report keeps `accepted=false`, records Goal 053 as accepted by user handoff, preserves Goal 031 and Goal 032 as produced-for-review/not passed, proves deterministic physical PNG/WAV/bundle fixture media materialization and media-bound review/export payloads across `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`, blocks unsafe provenance/license/provider paths, validates causal invalid/fake/leak diagnostics, and was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
 
-Goal 055 compact evidence lives under `.llmgc/procedural/goal-055-media-bound-playable-review-package-smoke/`; its produced report keeps `accepted=false`, records Goal 054 as accepted by user handoff, preserves Goal 031 and Goal 032 as produced-for-review/not passed, proves 15 staged physical media files (9 PNG, 3 WAV, 3 bundle JSON) copied from Goal 054 into a media-bound review package, validates PNG/WAV/hash/provenance, writes a StreamingAssets-compatible manifest, preview/export payloads and Unity-compatible proof records, rejects 17 invalid/fake/leak scenarios, avoids provider/network/LLM/RAG/Lua execution and Runtime/UI/Unity/GamePackage schema/generator-library changes, and remains at `media_bound_playable_review_package_verification required`.
+Goal 055 compact evidence lives under `.llmgc/procedural/goal-055-media-bound-playable-review-package-smoke/`; its produced report kept `accepted=false`, records Goal 054 as accepted by user handoff, preserves Goal 031 and Goal 032 as produced-for-review/not passed, proves 15 staged physical media files (9 PNG, 3 WAV, 3 bundle JSON) copied from Goal 054 into a media-bound review package, validates PNG/WAV/hash/provenance, writes a StreamingAssets-compatible manifest, preview/export payloads and Unity-compatible proof records, rejects 17 invalid/fake/leak scenarios, avoids provider/network/LLM/RAG/Lua execution and Runtime/UI/Unity/GamePackage schema/generator-library changes, and was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`.
+
+Goal 056 compact evidence lives under `.llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package/`; its produced report keeps `accepted=false`, records Goal 055 as accepted by user handoff, preserves Goal 031 and Goal 032 as produced-for-review/not passed, stages the Goal 055 media package into a Unity Alpha StreamingAssets-compatible payload, extends the repo-local Unity Alpha player through a bounded manifest/media loader, proves real Unity Editor/player execution with all required media-bound markers, rejects missing/stale/malformed/fake/leak scenarios and remains at `unity_alpha_media_bound_playable_package_verification required`.
 
 ## Queue Rules
 
@@ -664,18 +669,28 @@ Bind Goal 054 physical PNG/WAV/bundle fixture media into a deterministic review 
 
 Status:
 
-Produced for review: `media_bound_playable_review_package_verification required`.
+Accepted by Goal 056 user handoff: `media_bound_playable_review_package_verification passed`.
+
+### Goal 056: Unity Alpha Media-Bound Playable Package
+
+Purpose:
+
+Make the existing repo-local Unity Alpha player consume Goal 055 staged media through `StreamingAssets`, prove manifest/hash/PNG/WAV/bundle/family-panel media markers and keep provider/network/LLM/RAG/Lua/Runtime/UI/GamePackage schema changes out of scope.
+
+Status:
+
+Produced for review: `unity_alpha_media_bound_playable_package_verification required`.
 
 ## Current Recommended Next Work
 
 ```text
-media_bound_playable_review_package_verification
+unity_alpha_media_bound_playable_package_verification
 ```
 
 Status:
 
 ```text
-goal_055_media_bound_playable_review_package_smoke_produced_for_review_until_media_bound_playable_review_package_verification_passes
+goal_056_unity_alpha_media_bound_playable_package_produced_for_review_until_unity_alpha_media_bound_playable_package_verification_passes
 ```
 
-Goal 056 is the recommended next bounded media-bound playable package step after user acceptance of Goal 055, but it is not started by this handoff.
+Do not start the next goal until the user accepts Goal 056.

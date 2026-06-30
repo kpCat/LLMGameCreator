@@ -17,6 +17,9 @@ namespace LLMGameCreatorAlpha
         private readonly List<AlphaCommandHint> commands = new List<AlphaCommandHint>();
         private readonly List<AlphaSceneNode> sceneNodes = new List<AlphaSceneNode>();
         private readonly List<AlphaSceneNode> focusableSceneNodes = new List<AlphaSceneNode>();
+        private readonly List<AlphaMediaBoundBinding> mediaBoundBindings = new List<AlphaMediaBoundBinding>();
+        private readonly List<string> mediaBoundLogLines = new List<string>();
+        private readonly List<string> mediaBoundPanelFamilies = new List<string>();
         private string packageId = string.Empty;
         private string selectedStyleId = string.Empty;
         private string packageHash = string.Empty;
@@ -44,11 +47,17 @@ namespace LLMGameCreatorAlpha
         private string lastCommandType = string.Empty;
         private string lastCommandTargetId = string.Empty;
         private string status = "Loading Alpha payload...";
+        private string mediaBoundStatus = "Media package: not staged";
         private int playerX = 1;
         private int playerY = 1;
         private int mapWidth = 7;
         private int mapHeight = 5;
         private int focusedTargetIndex;
+        private bool mediaBoundManifestLoaded;
+        private bool mediaBoundPngLoaded;
+        private bool mediaBoundWavLoaded;
+        private bool mediaBoundBundleLoaded;
+        private bool mediaBoundHashValidation;
 
         private void Start()
         {
@@ -182,6 +191,13 @@ namespace LLMGameCreatorAlpha
                 ResetLoop();
             }
 
+            GUI.Box(new Rect(654, 446, 290, 152), "Media Bound");
+            GUI.Label(new Rect(670, 472, 250, 20), mediaBoundStatus);
+            GUI.Label(new Rect(670, 494, 250, 20), "Families: " + mediaBoundPanelFamilies.Count + "    Bindings: " + mediaBoundBindings.Count);
+            GUI.Label(new Rect(670, 516, 250, 20), "PNG: " + mediaBoundPngLoaded.ToString().ToLowerInvariant() + "    WAV: " + mediaBoundWavLoaded.ToString().ToLowerInvariant());
+            GUI.Label(new Rect(670, 538, 250, 20), "Bundle: " + mediaBoundBundleLoaded.ToString().ToLowerInvariant() + "    Hash: " + mediaBoundHashValidation.ToString().ToLowerInvariant());
+            GUI.Label(new Rect(670, 560, 250, 20), "Gate: media-bound review required");
+
             GUI.Box(new Rect(32, 454, 290, 144), "Event / Status Log");
             var logY = 480f;
             var start = Math.Max(0, playLog.Count - 8);
@@ -244,6 +260,7 @@ namespace LLMGameCreatorAlpha
                 BuildSceneProjection();
                 payloadLoaded = payloadRootExists && commands.Count > 0;
                 ResetLoop();
+                var mediaBoundLines = LoadMediaBoundPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -267,6 +284,7 @@ namespace LLMGameCreatorAlpha
                 lines.Add("alpha_runtime.scene_node_count=" + sceneNodes.Count);
                 lines.Add("alpha_runtime.package_bytes=" + packageJson.Length);
                 lines.Add("alpha_runtime.asset_manifest_bytes=" + assetManifestJson.Length);
+                lines.AddRange(mediaBoundLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -325,6 +343,7 @@ namespace LLMGameCreatorAlpha
                 "alpha_runtime.quest_loop.event_id=" + selectedEventId,
                 "alpha_runtime.quest_loop.reward_id=" + selectedItemId
             };
+            lines.AddRange(mediaBoundLogLines);
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1007,6 +1026,274 @@ namespace LLMGameCreatorAlpha
             return sceneNodes.FirstOrDefault(node => node.Kind == kind);
         }
 
+        private List<string> LoadMediaBoundPayload(string payloadRoot)
+        {
+            mediaBoundBindings.Clear();
+            mediaBoundLogLines.Clear();
+            mediaBoundPanelFamilies.Clear();
+            mediaBoundManifestLoaded = false;
+            mediaBoundPngLoaded = false;
+            mediaBoundWavLoaded = false;
+            mediaBoundBundleLoaded = false;
+            mediaBoundHashValidation = false;
+            mediaBoundStatus = "Media package: not staged";
+
+            var manifestPath = Path.Combine(payloadRoot, "media-bound", "unity-alpha-media-bound-manifest.json");
+            if (!File.Exists(manifestPath))
+            {
+                return mediaBoundLogLines;
+            }
+
+            try
+            {
+                var manifestJson = File.ReadAllText(manifestPath);
+                mediaBoundBindings.AddRange(ExtractMediaBoundBindings(manifestJson));
+                mediaBoundManifestLoaded = mediaBoundBindings.Count > 0;
+                var expectedFamilies = new[] { "map_panel_rpg", "survival_sandbox", "first_person_grid_dungeon" };
+                mediaBoundHashValidation = mediaBoundBindings.Count > 0;
+
+                var pngFamilies = new HashSet<string>(StringComparer.Ordinal);
+                var wavFamilies = new HashSet<string>(StringComparer.Ordinal);
+                var bundleFamilies = new HashSet<string>(StringComparer.Ordinal);
+                foreach (var binding in mediaBoundBindings.OrderBy(item => item.FamilyId, StringComparer.Ordinal).ThenBy(item => item.SlotId, StringComparer.Ordinal))
+                {
+                    if (!IsSafeMediaRelativePath(binding.RelativePath))
+                    {
+                        mediaBoundHashValidation = false;
+                        continue;
+                    }
+
+                    var mediaPath = Path.Combine(payloadRoot, binding.RelativePath.Replace('/', Path.DirectorySeparatorChar));
+                    if (!File.Exists(mediaPath))
+                    {
+                        mediaBoundHashValidation = false;
+                        continue;
+                    }
+
+                    var bytes = File.ReadAllBytes(mediaPath);
+                    var actualHash = HashBytes(bytes);
+                    if (!string.Equals(actualHash, binding.Sha256, StringComparison.OrdinalIgnoreCase))
+                    {
+                        mediaBoundHashValidation = false;
+                    }
+
+                    if (binding.RelativePath.EndsWith(".png", StringComparison.OrdinalIgnoreCase) && TryLoadPng(bytes, binding))
+                    {
+                        pngFamilies.Add(binding.FamilyId);
+                    }
+                    else if (binding.RelativePath.EndsWith(".wav", StringComparison.OrdinalIgnoreCase) && TryLoadWav(bytes, binding))
+                    {
+                        wavFamilies.Add(binding.FamilyId);
+                    }
+                    else if (binding.RelativePath.EndsWith(".json", StringComparison.OrdinalIgnoreCase) && binding.MediaKind == "bundle" && bytes.Length > 2)
+                    {
+                        bundleFamilies.Add(binding.FamilyId);
+                    }
+                }
+
+                mediaBoundPngLoaded = expectedFamilies.All(family => pngFamilies.Contains(family));
+                mediaBoundWavLoaded = expectedFamilies.All(family => wavFamilies.Contains(family));
+                mediaBoundBundleLoaded = expectedFamilies.All(family => bundleFamilies.Contains(family));
+                mediaBoundPanelFamilies.AddRange(expectedFamilies.Where(family =>
+                    mediaBoundBindings.Any(binding => binding.FamilyId == family && binding.RelativePath.EndsWith(".png", StringComparison.OrdinalIgnoreCase)) &&
+                    mediaBoundBindings.Any(binding => binding.FamilyId == family && binding.RelativePath.EndsWith(".wav", StringComparison.OrdinalIgnoreCase)) &&
+                    mediaBoundBindings.Any(binding => binding.FamilyId == family && binding.MediaKind == "bundle")).OrderBy(family => family, StringComparer.Ordinal));
+                mediaBoundStatus = mediaBoundManifestLoaded
+                    ? "Media package: " + mediaBoundPanelFamilies.Count + " families"
+                    : "Media package: manifest failed";
+                mediaBoundLogLines.Add("media_bound_manifest_loaded=" + mediaBoundManifestLoaded.ToString().ToLowerInvariant());
+                mediaBoundLogLines.Add("media_bound_family_count=" + mediaBoundPanelFamilies.Count);
+                mediaBoundLogLines.Add("media_bound_png_loaded=" + mediaBoundPngLoaded.ToString().ToLowerInvariant());
+                mediaBoundLogLines.Add("media_bound_wav_loaded=" + mediaBoundWavLoaded.ToString().ToLowerInvariant());
+                mediaBoundLogLines.Add("media_bound_bundle_loaded=" + mediaBoundBundleLoaded.ToString().ToLowerInvariant());
+                foreach (var family in mediaBoundPanelFamilies)
+                {
+                    mediaBoundLogLines.Add("media_bound_family_panel_proof=" + family);
+                }
+
+                mediaBoundLogLines.Add("media_bound_hash_validation=" + mediaBoundHashValidation.ToString().ToLowerInvariant());
+                mediaBoundLogLines.Add("media_bound_playable_review_package_verification=required");
+            }
+            catch (Exception ex)
+            {
+                mediaBoundManifestLoaded = false;
+                mediaBoundStatus = "Media package failed: " + ex.GetType().Name;
+                mediaBoundLogLines.Add("media_bound_manifest_loaded=false");
+                mediaBoundLogLines.Add("media_bound_error_type=" + ex.GetType().Name);
+                mediaBoundLogLines.Add("media_bound_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return mediaBoundLogLines;
+        }
+
+        private static IEnumerable<AlphaMediaBoundBinding> ExtractMediaBoundBindings(string json)
+        {
+            var array = ExtractArray(json, "bindings");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                yield return new AlphaMediaBoundBinding
+                {
+                    BindingId = ExtractJsonString(value, "bindingId"),
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SlotId = ExtractJsonString(value, "slotId"),
+                    MediaKind = ExtractJsonString(value, "mediaKind"),
+                    RelativePath = ExtractJsonString(value, "relativePath"),
+                    Sha256 = ExtractJsonString(value, "sha256"),
+                    SizeBytes = ExtractJsonLong(value, "sizeBytes"),
+                    Width = ExtractJsonInt(value, "width"),
+                    Height = ExtractJsonInt(value, "height"),
+                    SampleRate = ExtractJsonInt(value, "sampleRate"),
+                    Channels = ExtractJsonInt(value, "channels"),
+                    SampleCount = ExtractJsonInt(value, "sampleCount")
+                };
+            }
+        }
+
+        private static bool TryLoadPng(byte[] bytes, AlphaMediaBoundBinding binding)
+        {
+            if (!TryReadPngDimensions(bytes, out var width, out var height))
+            {
+                return false;
+            }
+
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            texture.SetPixel(0, 0, Color.white);
+            texture.Apply(false, false);
+
+            return texture.width > 0
+                && texture.height > 0
+                && (binding.Width <= 0 || texture.width == binding.Width)
+                && (binding.Height <= 0 || texture.height == binding.Height);
+        }
+
+        private static bool TryReadPngDimensions(byte[] bytes, out int width, out int height)
+        {
+            width = 0;
+            height = 0;
+            if (bytes.Length < 33 ||
+                bytes[0] != 137 ||
+                bytes[1] != 80 ||
+                bytes[2] != 78 ||
+                bytes[3] != 71 ||
+                bytes[4] != 13 ||
+                bytes[5] != 10 ||
+                bytes[6] != 26 ||
+                bytes[7] != 10)
+            {
+                return false;
+            }
+
+            if (ReadPngInt32(bytes, 8) != 13 ||
+                bytes[12] != 73 ||
+                bytes[13] != 72 ||
+                bytes[14] != 68 ||
+                bytes[15] != 82)
+            {
+                return false;
+            }
+
+            width = ReadPngInt32(bytes, 16);
+            height = ReadPngInt32(bytes, 20);
+            return width > 0 && height > 0;
+        }
+
+        private static int ReadPngInt32(byte[] bytes, int offset)
+        {
+            return (bytes[offset] << 24) |
+                (bytes[offset + 1] << 16) |
+                (bytes[offset + 2] << 8) |
+                bytes[offset + 3];
+        }
+
+        private static bool TryLoadWav(byte[] bytes, AlphaMediaBoundBinding binding)
+        {
+            if (!TryParsePcmWav(bytes, out var channels, out var sampleRate, out var samplesPerChannel, out var samples))
+            {
+                return false;
+            }
+
+            if ((binding.Channels > 0 && binding.Channels != channels) ||
+                (binding.SampleRate > 0 && binding.SampleRate != sampleRate) ||
+                (binding.SampleCount > 0 && binding.SampleCount != samplesPerChannel))
+            {
+                return false;
+            }
+
+            var clip = AudioClip.Create("media-bound-" + binding.FamilyId + "-" + binding.SlotId, samplesPerChannel, channels, sampleRate, false);
+            return clip.SetData(samples, 0);
+        }
+
+        private static bool TryParsePcmWav(byte[] bytes, out int channels, out int sampleRate, out int samplesPerChannel, out float[] samples)
+        {
+            channels = 0;
+            sampleRate = 0;
+            samplesPerChannel = 0;
+            samples = Array.Empty<float>();
+            if (bytes.Length < 44 ||
+                Encoding.ASCII.GetString(bytes, 0, 4) != "RIFF" ||
+                Encoding.ASCII.GetString(bytes, 8, 4) != "WAVE")
+            {
+                return false;
+            }
+
+            var offset = 12;
+            var bitsPerSample = 0;
+            var blockAlign = 0;
+            var dataOffset = -1;
+            var dataSize = 0;
+            while (offset + 8 <= bytes.Length)
+            {
+                var chunkId = Encoding.ASCII.GetString(bytes, offset, 4);
+                var chunkSize = BitConverter.ToInt32(bytes, offset + 4);
+                offset += 8;
+                if (chunkSize < 0 || offset + chunkSize > bytes.Length)
+                {
+                    return false;
+                }
+
+                if (chunkId == "fmt " && chunkSize >= 16)
+                {
+                    var audioFormat = BitConverter.ToUInt16(bytes, offset);
+                    channels = BitConverter.ToUInt16(bytes, offset + 2);
+                    sampleRate = BitConverter.ToInt32(bytes, offset + 4);
+                    blockAlign = BitConverter.ToUInt16(bytes, offset + 12);
+                    bitsPerSample = BitConverter.ToUInt16(bytes, offset + 14);
+                    if (audioFormat != 1)
+                    {
+                        return false;
+                    }
+                }
+                else if (chunkId == "data")
+                {
+                    dataOffset = offset;
+                    dataSize = chunkSize;
+                }
+
+                offset += chunkSize;
+                if ((chunkSize & 1) == 1 && offset < bytes.Length)
+                {
+                    offset++;
+                }
+            }
+
+            if (channels <= 0 || sampleRate <= 0 || bitsPerSample != 16 || blockAlign <= 0 || dataOffset < 0 || dataSize <= 0)
+            {
+                return false;
+            }
+
+            var sampleValues = dataSize / 2;
+            samplesPerChannel = dataSize / blockAlign;
+            samples = new float[sampleValues];
+            for (var index = 0; index < sampleValues; index++)
+            {
+                var value = BitConverter.ToInt16(bytes, dataOffset + (index * 2));
+                samples[index] = value / 32768f;
+            }
+
+            return samplesPerChannel > 0;
+        }
+
         private static string MarkerFor(string kind)
         {
             if (kind == "npc")
@@ -1164,6 +1451,18 @@ namespace LLMGameCreatorAlpha
             return match.Success ? Regex.Unescape(match.Groups["value"].Value) : string.Empty;
         }
 
+        private static int ExtractJsonInt(string json, string propertyName)
+        {
+            var match = Regex.Match(json, "\"" + Regex.Escape(propertyName) + "\"\\s*:\\s*(?<value>-?[0-9]+)");
+            return match.Success && int.TryParse(match.Groups["value"].Value, out var value) ? value : 0;
+        }
+
+        private static long ExtractJsonLong(string json, string propertyName)
+        {
+            var match = Regex.Match(json, "\"" + Regex.Escape(propertyName) + "\"\\s*:\\s*(?<value>-?[0-9]+)");
+            return match.Success && long.TryParse(match.Groups["value"].Value, out var value) ? value : 0;
+        }
+
         private static int CountJsonObjectsInArray(string json, string propertyName)
         {
             var value = ExtractArray(json, propertyName);
@@ -1196,6 +1495,28 @@ namespace LLMGameCreatorAlpha
             }
 
             return string.Empty;
+        }
+
+        private static bool IsSafeMediaRelativePath(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path) || Path.IsPathRooted(path) || path.Contains(":") || path.Contains("://"))
+            {
+                return false;
+            }
+
+            return !path.Replace('\\', '/').Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Contains("..");
+        }
+
+        private static string HashBytes(byte[] bytes)
+        {
+            var hash = SHA256.Create().ComputeHash(bytes);
+            var builder = new StringBuilder();
+            foreach (var value in hash)
+            {
+                builder.Append(value.ToString("x2"));
+            }
+
+            return builder.ToString();
         }
 
         private static bool IsLaunchSuccessful(IEnumerable<string> lines)
@@ -1340,6 +1661,22 @@ namespace LLMGameCreatorAlpha
             public string LastCommandType = string.Empty;
             public string LastCommandTargetId = string.Empty;
             public string StatusText = string.Empty;
+        }
+
+        private sealed class AlphaMediaBoundBinding
+        {
+            public string BindingId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SlotId = string.Empty;
+            public string MediaKind = string.Empty;
+            public string RelativePath = string.Empty;
+            public string Sha256 = string.Empty;
+            public long SizeBytes;
+            public int Width;
+            public int Height;
+            public int SampleRate;
+            public int Channels;
+            public int SampleCount;
         }
     }
 }
