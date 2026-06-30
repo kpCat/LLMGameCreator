@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-06-30T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 058 full media-bound generator campaign produced for review",
-    "gate_status":  "full_media_bound_generator_campaign_verification",
+    "current_phase_title":  "Goal 059 full generator variability regression matrix produced for review",
+    "gate_status":  "full_generator_variability_regression_matrix_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_058_full_media_bound_generator_campaign",
-    "active_manual_gate":  "Goal 057 Unity Alpha multi-family playable loop is accepted by user handoff before Goal 058: unity_alpha_multifamily_playable_loop_verification passed. Goal 058 Full Media-Bound Generator Campaign is produced for review and remains at full_media_bound_generator_campaign_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 058 Full Media-Bound Generator Campaign evidence. Do not mark Goal 058 passed from its production handoff.",
-    "recommended_next_decision":  "Keep full_media_bound_generator_campaign_verification required until the user accepts Goal 058; do not start Goal 059 from this handoff.",
+    "last_completed_product_slice_id":  "goal_059_full_generator_variability_matrix",
+    "active_manual_gate":  "Goal 058 Full Media-Bound Generator Campaign is accepted by user handoff before Goal 059: full_media_bound_generator_campaign_verification passed. Goal 059 Full Generator Variability Regression Matrix is produced for review and remains at full_generator_variability_regression_matrix_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 059 Full Generator Variability Regression Matrix evidence. Do not mark Goal 059 passed from its production handoff.",
+    "recommended_next_decision":  "Keep full_generator_variability_regression_matrix_verification required until the user accepts Goal 059; do not start Goal 060 from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
-                                                        "full_media_bound_generator_campaign_verification"
+                                                        "full_generator_variability_regression_matrix_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -75,7 +75,8 @@
                            "goal_055_manual_gate":  "media_bound_playable_review_package_verification",
                            "goal_056_manual_gate":  "unity_alpha_media_bound_playable_package_verification",
                            "goal_057_manual_gate":  "unity_alpha_multifamily_playable_loop_verification",
-                           "goal_058_manual_gate":  "full_media_bound_generator_campaign_verification"
+                           "goal_058_manual_gate":  "full_media_bound_generator_campaign_verification",
+                           "goal_059_manual_gate":  "full_generator_variability_regression_matrix_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -96,21 +97,21 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_058_full_media_bound_generator_campaign",
-                                         "title":  "Full Media-Bound Generator Campaign",
+                                         "slice_id":  "goal_059_full_generator_variability_matrix",
+                                         "title":  "Full Generator Variability Regression Matrix",
                                          "status":  "produced_for_review",
-                                          "summary":  "Goal 058 records Goal 057 as accepted by user handoff, then consumes the Goal 034-057 proof chain into one media-bound generator campaign runner, review package staging and Unity Alpha campaign player proof. It keeps accepted=false and leaves full_media_bound_generator_campaign_verification required.",
-                                          "scenario_id":  "goal-058-full-media-bound-generator-campaign",
+                                          "summary":  "Goal 059 records Goal 058 as accepted by user handoff, then consumes the Goal 058 full media-bound campaign evidence into a 3 family x 3 seed variability regression matrix with replay determinism, variance metrics, review/preview/export matrix payloads and Unity Alpha matrix player proof. It keeps accepted=false and leaves full_generator_variability_regression_matrix_verification required.",
+                                          "scenario_id":  "goal-059-full-generator-variability-regression-matrix",
                                           "checks":  [
                                                         "dotnet restore .\\LLMGameCreator.sln: passed",
-                                                        "dotnet build .\\LLMGameCreator.sln --no-restore: passed with 6 existing warnings / 0 errors",
-                                                        "Goal 058 focused FullMediaBoundGeneratorCampaign|Goal058 filter: 5/5 passed",
-                                                        "Goal 058 exact product smoke class filter: 1/1 passed and wrote compact artifacts",
-                                                        "CurrentState|Goal058|FullMediaBound filtered tests: 21/21 passed",
-                                                        ".\\.devflow\\scripts\\check-all.ps1: passed with 1053/1053 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_184644-check-all",
-                                                        "goal-058-full-media-bound-generator-campaign artifact scope guard: 14/14 changed paths allowed, 0 violations",
-                                                        "Unity Editor/player proof: unityExitCode=0, playerExitCode=0, all required campaign and media-bound markers matched",
-                                                        "Goal 058 compact report: implementationStatus=GREEN, accepted=false, manualGate=full_media_bound_generator_campaign_verification"
+                                                        "dotnet build .\\LLMGameCreator.sln --no-restore: passed with 0 warnings / 0 errors",
+                                                        "Goal 059 focused FullGeneratorVariabilityRegressionMatrix|Goal059 filter: 6/6 passed",
+                                                        "Goal 059 exact product smoke class filter: 1/1 passed and wrote compact artifacts",
+                                                        "CurrentGeneratorStateDocsTests filter: 10/10 passed after state docs update",
+                                                        ".\\.devflow\\scripts\\check-all.ps1: passed with 1058/1058 ordinary tests, build 0 warnings / 0 errors, run directory .devflow/runs/20260630_194534-check-all",
+                                                        "goal-059-full-generator-variability-regression-matrix artifact scope guard: 14/14 changed paths allowed, 0 violations",
+                                                        "Unity Editor/player proof: unityExitCode=0, playerExitCode=0, all required matrix row markers matched",
+                                                        "Goal 059 compact report: implementationStatus=GREEN, accepted=false, manualGate=full_generator_variability_regression_matrix_verification"
                                                     ]
                                       },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -370,8 +371,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "full_media_bound_generator_campaign_verification",
-                                          "next_bounded_goal_after_goal_058_acceptance"
+                                          "full_generator_variability_regression_matrix_verification",
+                                          "next_bounded_goal_after_goal_059_acceptance"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -392,17 +393,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "full_media_bound_generator_campaign_verification",
-    "recommended_next_work_item_title":  "Review Goal 058 Full Media-Bound Generator Campaign; do not start Goal 059 until this gate is accepted.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_058_FULL_MEDIA_BOUND_GENERATOR_CAMPAIGN.md",
+    "recommended_next_work_item":  "full_generator_variability_regression_matrix_verification",
+    "recommended_next_work_item_title":  "Review Goal 059 Full Generator Variability Regression Matrix; do not start Goal 060 until this gate is accepted.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_059_FULL_GENERATOR_VARIABILITY_MATRIX.md",
     "candidate_product_vertical_slices":  [
-                                               "Goal 058 Full Media-Bound Generator Campaign at full_media_bound_generator_campaign_verification",
-                                               "Next bounded goal remains future work until Goal 058 is accepted"
+                                               "Goal 059 Full Generator Variability Regression Matrix at full_generator_variability_regression_matrix_verification",
+                                               "Next bounded goal remains future work until Goal 059 is accepted"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                    "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_059_FULL_GENERATOR_VARIABILITY_MATRIX_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_059_FULL_GENERATOR_VARIABILITY_MATRIX.md",
+                                                   "docs/agent-tasks/GOAL_059_FULL_GENERATOR_VARIABILITY_MATRIX.md",
                                                     "docs/GOAL_058_FULL_MEDIA_BOUND_GENERATOR_CAMPAIGN_SPEC.md",
                                                     "docs/EXTERNAL_SCOUTING_GOAL_058_FULL_MEDIA_BOUND_GENERATOR_CAMPAIGN.md",
                                                     "docs/agent-tasks/GOAL_058_FULL_MEDIA_BOUND_GENERATOR_CAMPAIGN.md",
@@ -1335,18 +1339,34 @@
                                                             "next_action":  "goal_058_full_media_bound_generator_campaign_produced_for_review"
                                                         },
     "full_media_bound_generator_campaign_verification":  {
-                                                            "status":  "required",
+                                                            "status":  "passed_by_user_handoff_before_goal_059",
                                                             "evidence_source":  "goal_058_full_media_bound_generator_campaign",
                                                             "observed_result":  [
                                                                                      "Design/FullMediaBoundGeneratorCampaign defines a BCL-only Application-layer source loader, deterministic campaign builder, validator, Unity proof runner, evidence writer and hash helper.",
                                                                                      "Goal 058 consumes the Goal 034-057 proof chain after recording unity_alpha_multifamily_playable_loop_verification passed by user handoff.",
-                                                                                     "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 058 report keeps accepted=false and full_media_bound_generator_campaign_verification required.",
+                                                                                     "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 058 report kept accepted=false and full_media_bound_generator_campaign_verification required until the Goal 059 user handoff accepted it.",
                                                                                      "The campaign runner builds one media-bound campaign across map_panel_rpg, survival_sandbox and first_person_grid_dungeon, stages review-package StreamingAssets payloads and records a deterministic command plan.",
                                                                                      "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0 and all required campaign, media-bound and family markers matched.",
                                                                                      "Goal 058 artifacts under .llmgc/procedural/goal-058-full-media-bound-generator-campaign include campaign source manifest, campaign plan, family run proofs, unified review-package manifest, Unity command plan, Unity player proof, package compatibility proof, invalid matrix and report.",
-                                                                                     "Final report implementationStatus=GREEN, accepted=false and manualGate=full_media_bound_generator_campaign_verification"
+                                                                                     "Final report implementationStatus=GREEN, accepted=false and manualGate=full_media_bound_generator_campaign_verification; the Goal 059 task handoff accepted full_media_bound_generator_campaign_verification passed before Goal 059 implementation."
                                                                                  ],
-                                                            "next_action":  "review_goal_058_before_goal_059"
+                                                            "next_action":  "goal_059_full_generator_variability_regression_matrix_produced_for_review"
+                                                        },
+    "full_generator_variability_regression_matrix_verification":  {
+                                                            "status":  "required",
+                                                            "evidence_source":  "goal_059_full_generator_variability_matrix",
+                                                            "observed_result":  [
+                                                                                     "Design/FullGeneratorVariabilityRegressionMatrix defines a BCL-only Application-layer source loader, deterministic matrix builder, validator, Unity proof runner, evidence writer and hash helper.",
+                                                                                     "Goal 059 consumes Goal 058 full media-bound generator campaign evidence after recording full_media_bound_generator_campaign_verification passed by user handoff.",
+                                                                                     "The source manifest preserves Goal 031 and Goal 032 as produced-for-review/not passed; the produced Goal 059 report keeps accepted=false and full_generator_variability_regression_matrix_verification required.",
+                                                                                     "The matrix builds 9 rows for map_panel_rpg, survival_sandbox and first_person_grid_dungeon across seed_alpha, seed_beta and seed_gamma.",
+                                                                                     "Variance metrics prove 9 distinct derived campaign hashes, meaningful family x seed variation dimensions, media binding coverage, family-loop marker coverage and zero overfit warnings.",
+                                                                                     "Replay determinism proof rebuilds every matrix row with byte-stable JSON and hash matches.",
+                                                                                     "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0 and all required matrix row markers matched.",
+                                                                                     "Goal 059 artifacts under .llmgc/procedural/goal-059-full-generator-variability-regression-matrix include source manifest, seed profile matrix, 9 matrix rows, variance metrics, replay proof, review package matrix manifest, preview/export matrix payload, Unity command plan, Unity player proof, invalid matrix and report.",
+                                                                                     "Final report implementationStatus=GREEN, accepted=false and manualGate=full_generator_variability_regression_matrix_verification"
+                                                                                 ],
+                                                            "next_action":  "review_goal_059_before_goal_060"
                                                         },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

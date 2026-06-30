@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 058 full media-bound generator campaign produced for review
+Updated by: Goal 059 full generator variability regression matrix produced for review
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -72,6 +72,27 @@ Goal 058 produced for review:
 
 ```text
 full_media_bound_generator_campaign_verification required
+```
+
+Goal 058 handoff acceptance recorded before Goal 059:
+
+```text
+full_media_bound_generator_campaign_verification passed before Goal 059
+```
+
+Goal 059 produced for review:
+
+```text
+full_generator_variability_regression_matrix_verification required
+```
+
+Goal 059 implementation status:
+
+```text
+implementationStatus=GREEN
+accepted=false
+unityExitCode=0
+playerExitCode=0
 ```
 
 ## Current Phase
@@ -298,10 +319,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-full_media_bound_generator_campaign_verification
+full_generator_variability_regression_matrix_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 `multi_family_generated_template_vertical_slice_verification` is accepted as passed by the user handoff before Goal 047. Goal 047 `full_generator_without_media_verification` is accepted as passed by the user handoff before Goal 053. Goal 053 `media_asset_campaign_orchestration_verification` is accepted as passed by the user handoff before Goal 054. Goal 054 `media_materialization_review_package_verification` is accepted as passed by the Goal 055 preflight user handoff. Goal 055 `media_bound_playable_review_package_verification` is accepted as passed by the Goal 056 user handoff. Goal 056 `unity_alpha_media_bound_playable_package_verification` is accepted as passed by the Goal 057 user handoff. Goal 057 `unity_alpha_multifamily_playable_loop_verification` is accepted as passed by the Goal 058 user handoff. Goal 058 `full_media_bound_generator_campaign_verification` is produced for review and not marked passed.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 `multi_family_generated_template_vertical_slice_verification` is accepted as passed by the user handoff before Goal 047. Goal 047 `full_generator_without_media_verification` is accepted as passed by the user handoff before Goal 053. Goal 053 `media_asset_campaign_orchestration_verification` is accepted as passed by the user handoff before Goal 054. Goal 054 `media_materialization_review_package_verification` is accepted as passed by the Goal 055 preflight user handoff. Goal 055 `media_bound_playable_review_package_verification` is accepted as passed by the Goal 056 user handoff. Goal 056 `unity_alpha_media_bound_playable_package_verification` is accepted as passed by the Goal 057 user handoff. Goal 057 `unity_alpha_multifamily_playable_loop_verification` is accepted as passed by the Goal 058 user handoff. Goal 058 `full_media_bound_generator_campaign_verification` is accepted as passed by the Goal 059 user handoff. Goal 059 `full_generator_variability_regression_matrix_verification` is produced for review and not marked passed.
 
 Goal 037 accepted by user handoff:
 
@@ -547,7 +568,30 @@ Recorded checks from Goal 058 implementation:
 - Direct artifact inspection confirmed required compact Goal 058 evidence files, campaign source manifest, campaign plan, family run proofs, unified review-package manifest, Unity command plan, Unity player proof, package compatibility proof, invalid matrix and compact report under `.llmgc/procedural/goal-058-full-media-bound-generator-campaign/`.
 - The compact report records `implementationStatus=GREEN`, `accepted=false`, `manualGate=full_media_bound_generator_campaign_verification`, `goal057AcceptedByUserHandoff=true`, `sourceFactsConsumed=true`, `allFamiliesIncluded=true`, `campaignRunnerExecuted=true`, `reviewPackageManifestPassed=true`, `unityEditorOrPlayerExecuted=true`, `unityExitCode=0`, `playerExitCode=0`, `allCampaignMarkersMatched=true` and `invalidMatrixPassed=true`.
 
-Goal 058 is produced for review only. It is not marked passed by this production handoff. Do not start Goal 059 until `full_media_bound_generator_campaign_verification` is accepted by the user.
+Goal 058 was marked passed only by the Goal 059 user handoff, not by its own production handoff.
+
+Goal 059 produced for review:
+
+```text
+full_generator_variability_regression_matrix_verification: required
+```
+
+Evidence source: Goal 059 implementation artifacts under `.llmgc/procedural/goal-059-full-generator-variability-regression-matrix/`.
+
+Recorded checks from Goal 059 implementation:
+
+- `dotnet restore .\LLMGameCreator.sln`: passed.
+- `dotnet build .\LLMGameCreator.sln --no-restore`: passed with 0 warnings / 0 errors.
+- Goal 059 focused `FullGeneratorVariabilityRegressionMatrix|Goal059` filter: 6/6 passed.
+- Goal 059 exact product smoke class filter: 1/1 passed and wrote compact artifacts under `.llmgc/procedural/goal-059-full-generator-variability-regression-matrix/`.
+- `CurrentGeneratorStateDocsTests` filter: 10/10 passed after state docs update.
+- `.\.devflow\scripts\check-all.ps1`: passed with 1058/1058 ordinary tests, build 0 warnings / 0 errors, run directory `.devflow/runs/20260630_194534-check-all`.
+- `goal-059-full-generator-variability-regression-matrix` artifact scope guard: 14/14 changed paths allowed, 0 violations.
+- Unity Editor/player proof executed through the existing Alpha build route with `unityExitCode=0`, `playerExitCode=0`, and all required matrix row markers present.
+- Direct artifact inspection confirmed required compact Goal 059 evidence files: source manifest, seed profile matrix, 9 matrix rows, variance metrics, replay determinism proof, review package matrix manifest, preview/export matrix payload, Unity command plan, Unity player proof, invalid matrix and compact report.
+- The compact report records `implementationStatus=GREEN`, `accepted=false`, `manualGate=full_generator_variability_regression_matrix_verification`, `goal058AcceptedByUserHandoff=true`, `sourceFactsConsumed=true`, `matrixRowsPassed=true`, `varianceMetricsPassed=true`, `replayDeterminismPassed=true`, `reviewPackageMatrixManifestPassed=true`, `previewExportMatrixPayloadPassed=true`, `unityEditorOrPlayerExecuted=true`, `unityExitCode=0`, `playerExitCode=0`, `allMatrixMarkersMatched=true` and `invalidMatrixPassed=true`.
+
+Goal 059 is produced for review only. It is not marked passed by this production handoff. Do not start Goal 060 until `full_generator_variability_regression_matrix_verification` is accepted by the user.
 
 Manual acceptance recorded for Goal 036:
 

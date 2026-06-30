@@ -25,6 +25,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> familyLoopLogLines = new List<string>();
         private readonly List<string> campaignFamilies = new List<string>();
         private readonly List<string> campaignLogLines = new List<string>();
+        private readonly List<AlphaMatrixRow> matrixRows = new List<AlphaMatrixRow>();
+        private readonly List<string> matrixLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string selectedStyleId = string.Empty;
@@ -68,6 +70,7 @@ namespace LLMGameCreatorAlpha
         private bool familyLoopPlanLoaded;
         private bool campaignManifestLoaded;
         private bool campaignMediaBound;
+        private bool matrixPlanLoaded;
 
         private void Start()
         {
@@ -279,6 +282,7 @@ namespace LLMGameCreatorAlpha
                 var mediaBoundLines = LoadMediaBoundPayload(payloadRoot);
                 var familyLoopLines = LoadFamilyLoopPayload(payloadRoot);
                 var campaignLines = LoadCampaignPayload(payloadRoot);
+                var matrixLines = LoadMatrixPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -305,6 +309,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(mediaBoundLines);
                 lines.AddRange(familyLoopLines);
                 lines.AddRange(campaignLines);
+                lines.AddRange(matrixLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -366,6 +371,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(mediaBoundLogLines);
             lines.AddRange(RunFamilyLoops());
             lines.AddRange(RunCampaignProof());
+            lines.AddRange(RunMatrixProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1298,6 +1304,62 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadMatrixPayload(string payloadRoot)
+        {
+            matrixRows.Clear();
+            matrixLogLines.Clear();
+            matrixPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "matrix", "unity-alpha-matrix-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                return matrixLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                matrixRows.AddRange(ExtractMatrixRows(planJson));
+                matrixRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                matrixPlanLoaded = matrixRows.Count > 0;
+                matrixLogLines.Add("full_generator_matrix_plan_loaded=" + matrixPlanLoaded.ToString().ToLowerInvariant());
+                matrixLogLines.Add("full_generator_matrix_row_count=" + matrixRows.Count);
+            }
+            catch (Exception ex)
+            {
+                matrixPlanLoaded = false;
+                matrixLogLines.Add("full_generator_matrix_plan_loaded=false");
+                matrixLogLines.Add("full_generator_matrix_error_type=" + ex.GetType().Name);
+                matrixLogLines.Add("full_generator_matrix_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return matrixLogLines;
+        }
+
+        private List<string> RunMatrixProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(matrixLogLines);
+            if (!matrixPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("full_generator_matrix_loaded=true");
+            foreach (var row in matrixRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("matrix_row_started=" + row.RowId);
+                lines.Add("matrix_row_family=" + row.FamilyId);
+                lines.Add("matrix_row_seed=" + row.SeedId);
+                lines.Add("matrix_row_hash=" + row.DerivedCampaignHash);
+                lines.Add("matrix_row_completed=" + row.RowId);
+            }
+
+            lines.Add("full_generator_matrix_completed=true");
+            lines.Add("full_generator_variability_regression_matrix_verification=required");
+            return lines;
+        }
+
         private static bool IsSelectedFamilyMode(AlphaFamilyMode mode, string requestedMode)
         {
             if (string.IsNullOrWhiteSpace(requestedMode) || requestedMode == "all")
@@ -1335,6 +1397,28 @@ namespace LLMGameCreatorAlpha
                 {
                     yield return familyId;
                 }
+            }
+        }
+
+        private static IEnumerable<AlphaMatrixRow> ExtractMatrixRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaMatrixRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    DerivedCampaignHash = ExtractJsonString(value, "derivedCampaignHash")
+                };
             }
         }
 
@@ -1909,6 +1993,14 @@ namespace LLMGameCreatorAlpha
             public string CommandType = string.Empty;
             public string FamilyMarker = string.Empty;
             public string ExpectedStatus = string.Empty;
+        }
+
+        private sealed class AlphaMatrixRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string DerivedCampaignHash = string.Empty;
         }
 
         private sealed class AlphaMediaBoundBinding
