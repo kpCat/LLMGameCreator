@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-01T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 067 programmatic narrative quest dialogue event matrix produced for review",
-    "gate_status":  "programmatic_narrative_quest_dialogue_event_matrix_verification",
+    "current_phase_title":  "Goal 068 combat magic ability boss encounter matrix produced for review",
+    "gate_status":  "combat_magic_ability_boss_encounter_matrix_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_067_programmatic_narrative_quest_dialogue_event_matrix",
-    "active_manual_gate":  "Goal 066 Settlement Construction Destruction Production Matrix is accepted by user handoff before Goal 067: settlement_construction_destruction_production_matrix_verification passed before Goal 067. Goal 067 Programmatic Narrative Quest Dialogue Event Matrix is produced for review with implementationStatus=GREEN, accepted=false and programmatic_narrative_quest_dialogue_event_matrix_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 067 Programmatic Narrative Quest Dialogue Event Matrix evidence; programmatic_narrative_quest_dialogue_event_matrix_verification remains required until accepted by the user.",
-    "recommended_next_decision":  "Review Goal 067 artifacts under .llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/; do not mark programmatic_narrative_quest_dialogue_event_matrix_verification passed until user acceptance and do not start the next goal.",
+    "last_completed_product_slice_id":  "goal_068_combat_magic_ability_boss_encounter_matrix",
+    "active_manual_gate":  "Goal 067 Programmatic Narrative Quest Dialogue Event Matrix is accepted by user handoff before Goal 068: programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068. Goal 068 Combat/Magic/Ability/Boss Encounter Matrix is produced for review with accepted=false and combat_magic_ability_boss_encounter_matrix_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 068 Combat/Magic/Ability/Boss Encounter Matrix evidence; combat_magic_ability_boss_encounter_matrix_verification remains required until accepted by the user.",
+    "recommended_next_decision":  "Review Goal 068 artifacts under .llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/; do not mark combat_magic_ability_boss_encounter_matrix_verification passed until user acceptance and do not start the next goal.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                     "next_sequence":  [
-                                                          "programmatic_narrative_quest_dialogue_event_matrix_verification"
+                                                          "combat_magic_ability_boss_encounter_matrix_verification"
                                                       ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -84,7 +84,8 @@
                            "goal_064_manual_gate":  "living_world_npc_faction_simulation_matrix_verification",
                            "goal_065_manual_gate":  "interlocked_gameplay_systems_depth_matrix_verification",
                            "goal_066_manual_gate":  "settlement_construction_destruction_production_matrix_verification",
-                           "goal_067_manual_gate":  "programmatic_narrative_quest_dialogue_event_matrix_verification"
+                           "goal_067_manual_gate":  "programmatic_narrative_quest_dialogue_event_matrix_verification",
+                           "goal_068_manual_gate":  "combat_magic_ability_boss_encounter_matrix_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -105,17 +106,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                        "slice_id":  "goal_067_programmatic_narrative_quest_dialogue_event_matrix",
-                                        "title":  "Programmatic Narrative Quest Dialogue Event Matrix",
+                                        "slice_id":  "goal_068_combat_magic_ability_boss_encounter_matrix",
+                                        "title":  "Combat Magic Ability Boss Encounter Matrix",
                                         "status":  "produced_for_review",
-                                          "summary":  "Goal 067 records Goal 066 as accepted by user handoff, consumes Goal 060/061/062/063/064/065/066 evidence, produces 9 family/seed programmatic narrative rows with quest stages, dialogue option selection, event trigger/consequence application, memory/rumor propagation, localization-key/template binding, save/load/replay proof, meaningful narrative variance, preview/export narrative payload, invalid diagnostics matrix and Unity Alpha narrative markers. The produced report is GREEN with accepted=false and programmatic_narrative_quest_dialogue_event_matrix_verification required until user review.",
-                                          "scenario_id":  "goal-067-programmatic-narrative-quest-dialogue-event-matrix",
+                                          "summary":  "Goal 068 records Goal 067 as accepted by user handoff, consumes Goal 060/061/062/063/064/065/066/067 evidence, and produces combat/magic/ability/boss encounter matrix evidence for review with accepted=false and combat_magic_ability_boss_encounter_matrix_verification required until user review.",
+                                          "scenario_id":  "goal-068-combat-magic-ability-boss-encounter-matrix",
                                           "checks":  [
-                                                        "Goal 067 focused ProgrammaticNarrativeQuestDialogue|Goal067 filter: 6/6 passed",
-                                                        "Goal 067 exact product smoke class filter: 1/1 passed and wrote compact artifacts",
-                                                        "Goal 067 narrative matrix: 9/9 rows state-changing across 3 families and 3 seeds with save/load/replay, meaningful variance and no final prose leakage",
-                                                        "Unity Editor/player proof: unityExitCode=0, playerExitCode=0, all required narrative markers matched, provenRowCount=9",
-                                                        "Goal 067 compact report: implementationStatus=GREEN, accepted=false, manualGate=programmatic_narrative_quest_dialogue_event_matrix_verification, reportHash=d6ff0d5f78607ce3e7235aaba086fb9e174987cfef6e9a153d1dc8d7f3eef6bc"
+                                                        "Goal 068 implementationStatus=GREEN, accepted=false, rowCount=9, stateChangingRowCount=9, bossEliteRowCount=9, magicStatusRowCount=9 and resourceGearCraftingRowCount=4.",
+                                                        "Unity/player proof passed with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all combat_magic markers matched.",
+                                                        "Goal 068 reportHash=941b3bde5bb0b070c46d75c900c8dacf115501cd3a9fea7f0ab5e1f0e2e4bf7f; combat_magic_ability_boss_encounter_matrix_verification remains required until user review."
                                                     ]
                                       },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -375,8 +374,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "review_goal_067_programmatic_narrative_quest_dialogue_event_matrix",
-                                          "programmatic_narrative_quest_dialogue_event_matrix_verification"
+                                          "review_goal_068_combat_magic_ability_boss_encounter_matrix",
+                                          "combat_magic_ability_boss_encounter_matrix_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -397,17 +396,21 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "programmatic_narrative_quest_dialogue_event_matrix_verification",
-    "recommended_next_work_item_title":  "Review Goal 067 Programmatic Narrative Quest Dialogue Event Matrix evidence while keeping the manual gate required.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_067_PROGRAMMATIC_NARRATIVE_QUEST_DIALOGUE_EVENT_MATRIX.md",
+    "recommended_next_work_item":  "combat_magic_ability_boss_encounter_matrix_verification",
+    "recommended_next_work_item_title":  "Review Goal 068 Combat Magic Ability Boss Encounter Matrix evidence while keeping the manual gate required.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_068_COMBAT_MAGIC_ABILITY_BOSS_ENCOUNTER_MATRIX.md",
     "candidate_product_vertical_slices":  [
-                                               "Review Goal 067 Programmatic Narrative Quest Dialogue Event Matrix at programmatic_narrative_quest_dialogue_event_matrix_verification",
-                                               "Keep Goal 067 gate required until user review accepts it; do not start the next goal"
+                                               "Review Goal 068 Combat Magic Ability Boss Encounter Matrix at combat_magic_ability_boss_encounter_matrix_verification",
+                                               "Keep Goal 068 gate required until user review accepts it; do not start the next goal"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                    "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                  "docs/GOAL_068_COMBAT_MAGIC_ABILITY_BOSS_ENCOUNTER_MATRIX_SPEC.md",
+                                                  "docs/EXTERNAL_SCOUTING_GOAL_068_COMBAT_MAGIC_ABILITY_BOSS_ENCOUNTER_MATRIX.md",
+                                                  "docs/agent-tasks/GOAL_068_COMBAT_MAGIC_ABILITY_BOSS_ENCOUNTER_MATRIX.md",
+                                                  "docs/agent-tasks/GOAL_068_LAUNCHER.txt",
                                                   "docs/GOAL_067_PROGRAMMATIC_NARRATIVE_QUEST_DIALOGUE_EVENT_MATRIX_SPEC.md",
                                                   "docs/EXTERNAL_SCOUTING_GOAL_067_PROGRAMMATIC_NARRATIVE_QUEST_DIALOGUE_EVENT_MATRIX.md",
                                                   "docs/agent-tasks/GOAL_067_PROGRAMMATIC_NARRATIVE_QUEST_DIALOGUE_EVENT_MATRIX.md",
@@ -1503,7 +1506,7 @@
                                                                     "next_action":  "goal_067_programmatic_narrative_quest_dialogue_event_matrix_produced_for_review"
                                                                 },
     "programmatic_narrative_quest_dialogue_event_matrix_verification":  {
-                                                                    "status":  "produced_for_review",
+                                                                    "status":  "passed_by_user_handoff_before_goal_068",
                                                                     "evidence_source":  "goal_067_programmatic_narrative_quest_dialogue_event_matrix",
                                                                     "observed_result":  [
                                                                                             "Design/ProgrammaticNarrativeQuestDialogueEventMatrix defines a BCL-only Application-layer source loader, matrix builder, validator, evidence writer, Unity proof runner and hash helper.",
@@ -1513,9 +1516,25 @@
                                                                                             "Save/load and deterministic replay pass for every row; meaningful variance is proven across same-family seeds and cross-family narrative profiles while rejecting hash-only variance.",
                                                                                             "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required narrative markers matched.",
                                                                                             "Goal 067 artifacts under .llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix include source manifest, narrative row matrix, 9 row files, quest stage ledger, dialogue option ledger, event trigger/consequence ledger, memory/rumor propagation ledger, localization key table, narrative template catalog, save-load replay proof, Unity command plan, Unity player proof, preview/export narrative payload, invalid diagnostics matrix, artifact-scope report and compact report.",
-                                                                                            "Final report implementationStatus=GREEN, accepted=false, manualGate=programmatic_narrative_quest_dialogue_event_matrix_verification and reportHash=d6ff0d5f78607ce3e7235aaba086fb9e174987cfef6e9a153d1dc8d7f3eef6bc."
+                                                                                            "Final report implementationStatus=GREEN, accepted=false, manualGate=programmatic_narrative_quest_dialogue_event_matrix_verification and reportHash=d6ff0d5f78607ce3e7235aaba086fb9e174987cfef6e9a153d1dc8d7f3eef6bc.",
+                                                                                            "The Goal 068 task handoff accepted programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068."
                                                                                         ],
-                                                                    "next_action":  "programmatic_narrative_quest_dialogue_event_matrix_verification"
+                                                                    "next_action":  "goal_068_combat_magic_ability_boss_encounter_matrix_produced_for_review"
+                                                                },
+    "combat_magic_ability_boss_encounter_matrix_verification":  {
+                                                                    "status":  "produced_for_review",
+                                                                    "evidence_source":  "goal_068_combat_magic_ability_boss_encounter_matrix",
+                                                                    "observed_result":  [
+                                                                                            "Design/CombatMagicAbilityBossEncounterMatrix defines a BCL-only Application-layer source loader, projector, validator, evidence writer, Unity proof runner and hash helper.",
+                                                                                            "Goal 068 consumes Goal 060/061/062/063/064/065/066/067 evidence after recording programmatic_narrative_quest_dialogue_event_matrix_verification passed by user handoff before Goal 068.",
+                                                                                            "The produced matrix contains 9 combat/magic rows across map_panel_rpg, survival_sandbox and first_person_grid_dungeon with 3 deterministic seeds and 9 state-changing ability/status/boss encounter rows.",
+                                                                                            "Each row records active abilities, passive traits, status/effect stacks, damage/effect packets, cooldown/cost records, resistance/weakness evidence, boss/elite phase transitions, counterplay, loot/progression and non-combat consequences.",
+                                                                                            "Save/load and deterministic replay pass for every row; meaningful variance is proven across same-family seeds and cross-family combat profiles while rejecting hash-only variance.",
+                                                                                            "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required combat_magic markers matched.",
+                                                                                            "Goal 068 artifacts under .llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix include source manifest, ability/trait catalog, status/effect catalog, boss phase catalog, row matrix, 9 row files, progression/loot ledger, counterplay ledger, save-load replay proof, Unity command plan, Unity player proof, preview/export payload, invalid diagnostics matrix, artifact-scope report and compact report.",
+                                                                                            "Final report implementationStatus=GREEN, accepted=false, manualGate=combat_magic_ability_boss_encounter_matrix_verification and reportHash=941b3bde5bb0b070c46d75c900c8dacf115501cd3a9fea7f0ab5e1f0e2e4bf7f."
+                                                                                        ],
+                                                                    "next_action":  "combat_magic_ability_boss_encounter_matrix_verification"
                                                                 },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

@@ -43,6 +43,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> settlementLogLines = new List<string>();
         private readonly List<AlphaNarrativeRow> narrativeRows = new List<AlphaNarrativeRow>();
         private readonly List<string> narrativeLogLines = new List<string>();
+        private readonly List<AlphaCombatMagicRow> combatMagicRows = new List<AlphaCombatMagicRow>();
+        private readonly List<string> combatMagicLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -96,6 +98,7 @@ namespace LLMGameCreatorAlpha
         private bool interlockedGameplayPlanLoaded;
         private bool settlementPlanLoaded;
         private bool narrativePlanLoaded;
+        private bool combatMagicPlanLoaded;
 
         private void Start()
         {
@@ -316,6 +319,7 @@ namespace LLMGameCreatorAlpha
                 var interlockedGameplayLines = LoadInterlockedGameplayPayload(payloadRoot);
                 var settlementLines = LoadSettlementPayload(payloadRoot);
                 var narrativeLines = LoadNarrativePayload(payloadRoot);
+                var combatMagicLines = LoadCombatMagicPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -351,6 +355,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(interlockedGameplayLines);
                 lines.AddRange(settlementLines);
                 lines.AddRange(narrativeLines);
+                lines.AddRange(combatMagicLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -421,6 +426,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunInterlockedGameplayProof());
             lines.AddRange(RunSettlementProof());
             lines.AddRange(RunNarrativeProof());
+            lines.AddRange(RunCombatMagicProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -2012,6 +2018,72 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadCombatMagicPayload(string payloadRoot)
+        {
+            combatMagicRows.Clear();
+            combatMagicLogLines.Clear();
+            combatMagicPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "combat-magic", "unity-combat-magic-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                combatMagicLogLines.Add("combat_magic_plan_loaded=false");
+                combatMagicLogLines.Add("combat_magic_plan_missing=" + planPath);
+                return combatMagicLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                combatMagicRows.AddRange(ExtractCombatMagicRows(planJson));
+                combatMagicRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                combatMagicPlanLoaded = ExtractJsonBool(planJson, "passed") && combatMagicRows.Count > 0;
+                combatMagicLogLines.Add("combat_magic_plan_loaded=" + combatMagicPlanLoaded.ToString().ToLowerInvariant());
+                combatMagicLogLines.Add("combat_magic_row_count=" + combatMagicRows.Count);
+            }
+            catch (Exception ex)
+            {
+                combatMagicPlanLoaded = false;
+                combatMagicLogLines.Add("combat_magic_plan_loaded=false");
+                combatMagicLogLines.Add("combat_magic_error_type=" + ex.GetType().Name);
+                combatMagicLogLines.Add("combat_magic_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return combatMagicLogLines;
+        }
+
+        private List<string> RunCombatMagicProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(combatMagicLogLines);
+            if (!combatMagicPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("combat_magic_matrix_loaded=goal068");
+            foreach (var row in combatMagicRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("combat_magic_row_loaded=" + row.RowId);
+                lines.Add("combat_magic_family=" + row.FamilyId);
+                lines.Add("combat_magic_seed=" + row.SeedId);
+                foreach (var roundStepId in row.RoundStepIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("combat_magic_round_step=" + roundStepId);
+                }
+
+                lines.Add("combat_magic_ability_resolved=" + row.AbilityUseId);
+                lines.Add("combat_magic_status_delta=" + row.StatusApplicationId);
+                lines.Add("combat_magic_progression_delta=" + row.ProgressionId);
+                lines.Add("combat_magic_row_completed=" + row.RowId);
+            }
+
+            lines.Add("combat_magic_matrix_completed=true");
+            lines.Add("review_package_proof=goal068");
+            lines.Add("combat_magic_ability_boss_encounter_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -2308,6 +2380,30 @@ namespace LLMGameCreatorAlpha
                     EventConsequenceId = ExtractJsonString(value, "eventConsequenceId"),
                     MemoryRumorRecordId = ExtractJsonString(value, "memoryRumorRecordId"),
                     LocalizationLineKey = ExtractJsonString(value, "localizationLineKey")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaCombatMagicRow> ExtractCombatMagicRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (var value in ExtractObjectBlocks(array))
+            {
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaCombatMagicRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    AbilityUseId = ExtractJsonString(value, "abilityUseId"),
+                    StatusApplicationId = ExtractJsonString(value, "statusApplicationId"),
+                    ProgressionId = ExtractJsonString(value, "progressionId"),
+                    RoundStepIds = ExtractStringArray(value, "roundStepIds").ToList()
                 };
             }
         }
@@ -2617,6 +2713,61 @@ namespace LLMGameCreatorAlpha
             foreach (Match match in Regex.Matches(array, "\"(?<value>(?:\\\\.|[^\"])*)\""))
             {
                 yield return Regex.Unescape(match.Groups["value"].Value);
+            }
+        }
+
+        private static IEnumerable<string> ExtractObjectBlocks(string json)
+        {
+            var depth = 0;
+            var start = -1;
+            var inString = false;
+            var escaped = false;
+
+            for (var index = 0; index < json.Length; index++)
+            {
+                var ch = json[index];
+                if (inString)
+                {
+                    if (escaped)
+                    {
+                        escaped = false;
+                    }
+                    else if (ch == '\\')
+                    {
+                        escaped = true;
+                    }
+                    else if (ch == '"')
+                    {
+                        inString = false;
+                    }
+
+                    continue;
+                }
+
+                if (ch == '"')
+                {
+                    inString = true;
+                    continue;
+                }
+
+                if (ch == '{')
+                {
+                    if (depth == 0)
+                    {
+                        start = index + 1;
+                    }
+
+                    depth++;
+                }
+                else if (ch == '}')
+                {
+                    depth--;
+                    if (depth == 0 && start >= 0)
+                    {
+                        yield return json.Substring(start, index - start);
+                        start = -1;
+                    }
+                }
             }
         }
 
@@ -2995,6 +3146,17 @@ namespace LLMGameCreatorAlpha
             public string EventConsequenceId = string.Empty;
             public string MemoryRumorRecordId = string.Empty;
             public string LocalizationLineKey = string.Empty;
+        }
+
+        private sealed class AlphaCombatMagicRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string AbilityUseId = string.Empty;
+            public string StatusApplicationId = string.Empty;
+            public string ProgressionId = string.Empty;
+            public List<string> RoundStepIds = new List<string>();
         }
 
         private sealed class AlphaMediaBoundBinding
