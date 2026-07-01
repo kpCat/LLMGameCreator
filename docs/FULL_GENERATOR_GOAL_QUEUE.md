@@ -42,6 +42,7 @@ full_generator_variability_regression_matrix_verification passed
 full_campaign_gamepackage_materialization_matrix_verification passed
 full_campaign_playable_review_package_rc_verification passed
 constrained_spatial_detail_generation_verification passed
+gameplay_consequence_depth_matrix_verification passed before Goal 064
 ```
 
 Produced for review:
@@ -49,7 +50,7 @@ Produced for review:
 ```text
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
-gameplay_consequence_depth_matrix_verification required
+living_world_npc_faction_simulation_matrix_verification required
 ```
 
 Current capabilities:
@@ -105,11 +106,13 @@ Current capabilities:
 - Constrained spatial detail generation consuming the accepted Goal 061 playable review package RC into 9 validated family/seed spatial-detail rows, reachability/repair/variance proof, preview/export spatial payload and Unity Alpha spatial-detail markers;
 - Goal 062 accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`;
 - Gameplay consequence depth matrix consuming Goal 060/061/062 evidence into 9 family/seed state-changing runtime gameplay rows, save/load/replay audit, meaningful consequence variance, preview/export gameplay payload and Unity Alpha gameplay consequence markers;
+- Goal 063 accepted by the Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`;
+- Living world NPC/faction simulation matrix consuming Goal 060/061/062/063 evidence into 9 family/seed state-changing NPC/faction/world-event rows, save/load/replay proof, meaningful living-world variance, preview/export living-world payload and Unity Alpha living-world markers;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 was accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 was accepted by the Goal 061 user handoff: `full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 was accepted by the Goal 062 user handoff: `full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 was accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 produced gameplay consequence depth matrix evidence and still waits at `gameplay_consequence_depth_matrix_verification required`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 was accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 was accepted by the Goal 061 user handoff: `full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 was accepted by the Goal 062 user handoff: `full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 was accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 was accepted by the Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`. Goal 064 is produced for review with `implementationStatus=GREEN`, `accepted=false`, Unity/player proof passed and `living_world_npc_faction_simulation_matrix_verification required` until user review. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -781,18 +784,30 @@ Consume Goal 060 materialized packages, Goal 061 review package RC and Goal 062 
 
 Status:
 
-Produced for review: `gameplay_consequence_depth_matrix_verification required`.
+Accepted by Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`.
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `unityExitCode=0`, `playerExitCode=0`, 9/9 family/seed rows are state-changing, save/load/replay passed for every row, meaningful variance passed, invalid diagnostics matrix passed and all required Unity gameplay-consequence markers matched.
+
+### Goal 064: Living World NPC/Faction Simulation Matrix
+
+Purpose:
+
+Consume Goal 060 materialized packages, Goal 061 playable review package RC, Goal 062 constrained spatial-detail evidence and Goal 063 gameplay consequence evidence into a 3 family x 3 seed living-world matrix that proves NPC state changes, faction relationship/reputation changes, schedule/availability changes, resolved world events, memory/rumor consequence traces, save/load/replay, meaningful variance and Unity Alpha living-world markers.
+
+Status:
+
+Produced for review. The gate remains `living_world_npc_faction_simulation_matrix_verification required`, not passed.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `unityExitCode=0`, `playerExitCode=0`, 9/9 family/seed rows are state-changing, save/load/replay passed for every row, meaningful living-world variance passed, invalid diagnostics matrix passed and all required Unity living-world markers matched with `provenRowCount=9`.
 
 ## Current Recommended Next Work
 
 ```text
-gameplay_consequence_depth_matrix_verification
+living_world_npc_faction_simulation_matrix_verification
 ```
 
 Status:
 
 ```text
-goal_063_gameplay_consequence_depth_matrix_review_until_gameplay_consequence_depth_matrix_verification_passes
+goal_064_living_world_npc_faction_simulation_matrix_review_until_living_world_npc_faction_simulation_matrix_verification_passes
 ```

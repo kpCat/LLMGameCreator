@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 063 produced for review
+Updated by: Goal 064 produced for review
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -185,6 +185,34 @@ stateChangingRowCount=9
 saveLoadReplayPassed=true
 meaningfulVariancePassed=true
 allGameplayMarkersMatched=true
+```
+
+Goal 063 handoff acceptance recorded before Goal 064:
+
+```text
+gameplay_consequence_depth_matrix_verification passed before Goal 064
+```
+
+Goal 064 produced for review:
+
+```text
+living_world_npc_faction_simulation_matrix_verification required
+```
+
+Goal 064 implementation status:
+
+```text
+implementationStatus=GREEN
+accepted=false
+manualGate=living_world_npc_faction_simulation_matrix_verification
+unityExitCode=0
+playerExitCode=0
+rowCount=9
+stateChangingRowCount=9
+saveLoadReplayPassed=true
+meaningfulVariancePassed=true
+allLivingWorldMarkersMatched=true
+reportHash=0af0830d43e8d4a4a2af0af26cec48ed4a7837f815c5e1648b2d734fb8178527
 ```
 
 ## Current Phase

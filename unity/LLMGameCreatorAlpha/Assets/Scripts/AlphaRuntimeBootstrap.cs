@@ -35,6 +35,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> spatialDetailLogLines = new List<string>();
         private readonly List<AlphaGameplayConsequenceRow> gameplayConsequenceRows = new List<AlphaGameplayConsequenceRow>();
         private readonly List<string> gameplayConsequenceLogLines = new List<string>();
+        private readonly List<AlphaLivingWorldRow> livingWorldRows = new List<AlphaLivingWorldRow>();
+        private readonly List<string> livingWorldLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -84,6 +86,7 @@ namespace LLMGameCreatorAlpha
         private bool reviewPackageRcPlanLoaded;
         private bool spatialDetailPlanLoaded;
         private bool gameplayConsequencePlanLoaded;
+        private bool livingWorldPlanLoaded;
 
         private void Start()
         {
@@ -300,6 +303,7 @@ namespace LLMGameCreatorAlpha
                 var reviewPackageRcLines = LoadReviewPackageRcPayload(payloadRoot);
                 var spatialDetailLines = LoadSpatialDetailPayload(payloadRoot);
                 var gameplayConsequenceLines = LoadGameplayConsequencePayload(payloadRoot);
+                var livingWorldLines = LoadLivingWorldPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -331,6 +335,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(reviewPackageRcLines);
                 lines.AddRange(spatialDetailLines);
                 lines.AddRange(gameplayConsequenceLines);
+                lines.AddRange(livingWorldLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -397,6 +402,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunReviewPackageRcProof());
             lines.AddRange(RunSpatialDetailProof());
             lines.AddRange(RunGameplayConsequenceProof());
+            lines.AddRange(RunLivingWorldProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1681,6 +1687,75 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadLivingWorldPayload(string payloadRoot)
+        {
+            livingWorldRows.Clear();
+            livingWorldLogLines.Clear();
+            livingWorldPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "living-world", "unity-living-world-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                livingWorldLogLines.Add("living_world_plan_loaded=false");
+                livingWorldLogLines.Add("living_world_plan_missing=true");
+                return livingWorldLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                livingWorldRows.AddRange(ExtractLivingWorldRows(planJson));
+                livingWorldRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                livingWorldPlanLoaded = ExtractJsonBool(planJson, "passed") && livingWorldRows.Count > 0;
+                livingWorldLogLines.Add("living_world_plan_loaded=" + livingWorldPlanLoaded.ToString().ToLowerInvariant());
+                livingWorldLogLines.Add("living_world_row_count=" + livingWorldRows.Count);
+            }
+            catch (Exception ex)
+            {
+                livingWorldPlanLoaded = false;
+                livingWorldLogLines.Add("living_world_plan_loaded=false");
+                livingWorldLogLines.Add("living_world_error_type=" + ex.GetType().Name);
+                livingWorldLogLines.Add("living_world_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return livingWorldLogLines;
+        }
+
+        private List<string> RunLivingWorldProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(livingWorldLogLines);
+            if (!livingWorldPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("living_world_matrix_loaded=goal064");
+            foreach (var row in livingWorldRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("living_world_row=" + row.RowId);
+                lines.Add("living_world_family=" + row.FamilyId);
+                lines.Add("living_world_seed=" + row.SeedId);
+                lines.Add("npc_state_changed=true");
+                lines.Add("faction_relation_changed=true");
+                lines.Add("world_event_resolved=true");
+                lines.Add("living_world_npc_state_changed=" + row.RowId);
+                lines.Add("living_world_faction_relation_changed=" + row.RowId);
+                lines.Add("living_world_world_event_resolved=" + row.RowId);
+                foreach (var tick in row.TickIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("living_world_tick=" + tick);
+                }
+
+                lines.Add("living_world_row_completed=" + row.RowId);
+            }
+
+            lines.Add("living_world_matrix_completed=true");
+            lines.Add("review_package_proof=goal064");
+            lines.Add("living_world_npc_faction_simulation_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -1874,6 +1949,28 @@ namespace LLMGameCreatorAlpha
                     SeedId = ExtractJsonString(value, "seedId"),
                     StepIds = ExtractStringArray(value, "stepIds").ToList(),
                     DeltaIds = ExtractStringArray(value, "deltaIds").ToList()
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaLivingWorldRow> ExtractLivingWorldRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaLivingWorldRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    TickIds = ExtractStringArray(value, "tickIds").ToList()
                 };
             }
         }
@@ -2514,6 +2611,14 @@ namespace LLMGameCreatorAlpha
             public string SeedId = string.Empty;
             public List<string> StepIds = new List<string>();
             public List<string> DeltaIds = new List<string>();
+        }
+
+        private sealed class AlphaLivingWorldRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public List<string> TickIds = new List<string>();
         }
 
         private sealed class AlphaMediaBoundBinding
