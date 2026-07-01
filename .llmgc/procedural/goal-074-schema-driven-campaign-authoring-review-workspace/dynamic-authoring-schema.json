@@ -1,0 +1,830 @@
+{
+  "schemaVersion": "schema_driven_campaign_authoring_schema_v1",
+  "passed": true,
+  "groups": [
+    {
+      "groupId": "campaign_rows_selector",
+      "titleKey": "goal074.schema.campaign_rows_selector.title",
+      "order": 1,
+      "sourceGoalRange": "Goal061,Goal071",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.campaign_rows_selector.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.campaign_rows_selector.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.campaign_rows_selector.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.campaign_rows_selector.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.campaign_rows_selector.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.campaign_rows_selector.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.campaign_rows_selector.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.campaign_rows_selector.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.campaign_rows_selector.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.campaign_rows_selector.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.campaign_rows_selector.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.campaign_rows_selector.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.campaign_rows_selector.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.campaign_rows_selector.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/package-row-selection-matrix.json",
+        ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-family-seed-selector.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "package_materialization_summary",
+      "titleKey": "goal074.schema.package_materialization_summary.title",
+      "order": 2,
+      "sourceGoalRange": "Goal060-Goal061",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.package_materialization_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.package_materialization_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.package_materialization_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.package_materialization_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.package_materialization_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.package_materialization_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.package_materialization_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.package_materialization_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.package_materialization_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.package_materialization_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.package_materialization_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.package_materialization_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.package_materialization_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.package_materialization_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/materialized-package-inventory.json",
+        ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/package-validation-matrix.json",
+        ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/preview-export-package-payloads.json",
+        ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/runtime-consumption-matrix.json",
+        ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/package-media-binding-audit.json",
+        ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package-rc-manifest.json",
+        ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/save-load-replay-package-row-audit.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "spatial_detail_summary",
+      "titleKey": "goal074.schema.spatial_detail_summary.title",
+      "order": 3,
+      "sourceGoalRange": "Goal062",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.spatial_detail_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.spatial_detail_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.spatial_detail_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.spatial_detail_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.spatial_detail_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.spatial_detail_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.spatial_detail_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.spatial_detail_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.spatial_detail_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.spatial_detail_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.spatial_detail_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.spatial_detail_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.spatial_detail_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.spatial_detail_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/preview-export-spatial-payload.json",
+        ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/reachability-proof-matrix.json",
+        ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/spatial-detail-matrix.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "gameplay_consequence_summary",
+      "titleKey": "goal074.schema.gameplay_consequence_summary.title",
+      "order": 4,
+      "sourceGoalRange": "Goal063",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.gameplay_consequence_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.gameplay_consequence_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.gameplay_consequence_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.gameplay_consequence_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.gameplay_consequence_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.gameplay_consequence_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.gameplay_consequence_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.gameplay_consequence_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.gameplay_consequence_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.gameplay_consequence_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.gameplay_consequence_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.gameplay_consequence_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.gameplay_consequence_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.gameplay_consequence_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-command-plan-matrix.json",
+        ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/runtime-state-delta-matrix.json",
+        ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/save-load-replay-audit.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "living_world_npc_faction_summary",
+      "titleKey": "goal074.schema.living_world_npc_faction_summary.title",
+      "order": 5,
+      "sourceGoalRange": "Goal064",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.living_world_npc_faction_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.living_world_npc_faction_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.living_world_npc_faction_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.living_world_npc_faction_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.living_world_npc_faction_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.living_world_npc_faction_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.living_world_npc_faction_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.living_world_npc_faction_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.living_world_npc_faction_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.living_world_npc_faction_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.living_world_npc_faction_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.living_world_npc_faction_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.living_world_npc_faction_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.living_world_npc_faction_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/actor-faction-catalog-summary.json",
+        ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/simulation-matrix-plan.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "economy_crafting_combat_progression_status_summary",
+      "titleKey": "goal074.schema.economy_crafting_combat_progression_status_summary.title",
+      "order": 6,
+      "sourceGoalRange": "Goal065",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.economy_crafting_combat_progression_status_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.economy_crafting_combat_progression_status_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.economy_crafting_combat_progression_status_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.economy_crafting_combat_progression_status_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.economy_crafting_combat_progression_status_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.economy_crafting_combat_progression_status_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.economy_crafting_combat_progression_status_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.economy_crafting_combat_progression_status_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.economy_crafting_combat_progression_status_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.economy_crafting_combat_progression_status_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.economy_crafting_combat_progression_status_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.economy_crafting_combat_progression_status_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.economy_crafting_combat_progression_status_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.economy_crafting_combat_progression_status_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/combat-progression-ledger.json",
+        ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/economy-crafting-ledger.json",
+        ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/row-plan-matrix.json",
+        ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/status-effect-ledger.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "settlement_construction_destruction_production_summary",
+      "titleKey": "goal074.schema.settlement_construction_destruction_production_summary.title",
+      "order": 7,
+      "sourceGoalRange": "Goal066",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.settlement_construction_destruction_production_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.settlement_construction_destruction_production_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.settlement_construction_destruction_production_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.settlement_construction_destruction_production_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.settlement_construction_destruction_production_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.settlement_construction_destruction_production_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.settlement_construction_destruction_production_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.settlement_construction_destruction_production_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.settlement_construction_destruction_production_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.settlement_construction_destruction_production_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.settlement_construction_destruction_production_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.settlement_construction_destruction_production_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.settlement_construction_destruction_production_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.settlement_construction_destruction_production_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/settlement-construction-row-matrix.json",
+        ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/settlement-destruction-repair-ledger.json",
+        ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/settlement-production-ledger.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "narrative_quest_dialogue_event_summary",
+      "titleKey": "goal074.schema.narrative_quest_dialogue_event_summary.title",
+      "order": 8,
+      "sourceGoalRange": "Goal067",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.narrative_quest_dialogue_event_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.narrative_quest_dialogue_event_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.narrative_quest_dialogue_event_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.narrative_quest_dialogue_event_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.narrative_quest_dialogue_event_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.narrative_quest_dialogue_event_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.narrative_quest_dialogue_event_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.narrative_quest_dialogue_event_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.narrative_quest_dialogue_event_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.narrative_quest_dialogue_event_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.narrative_quest_dialogue_event_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.narrative_quest_dialogue_event_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.narrative_quest_dialogue_event_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.narrative_quest_dialogue_event_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/dialogue-option-ledger.json",
+        ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/localization-key-table.json",
+        ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/narrative-row-matrix.json",
+        ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/quest-stage-ledger.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "combat_magic_boss_summary",
+      "titleKey": "goal074.schema.combat_magic_boss_summary.title",
+      "order": 9,
+      "sourceGoalRange": "Goal068",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.combat_magic_boss_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.combat_magic_boss_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.combat_magic_boss_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.combat_magic_boss_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.combat_magic_boss_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.combat_magic_boss_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.combat_magic_boss_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.combat_magic_boss_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.combat_magic_boss_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.combat_magic_boss_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.combat_magic_boss_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.combat_magic_boss_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.combat_magic_boss_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.combat_magic_boss_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/ability-trait-catalog.json",
+        ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/boss-encounter-phase-catalog.json",
+        ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/combat-magic-row-matrix.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "weather_daynight_crisis_summary",
+      "titleKey": "goal074.schema.weather_daynight_crisis_summary.title",
+      "order": 10,
+      "sourceGoalRange": "Goal069",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.weather_daynight_crisis_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.weather_daynight_crisis_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.weather_daynight_crisis_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.weather_daynight_crisis_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.weather_daynight_crisis_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.weather_daynight_crisis_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.weather_daynight_crisis_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.weather_daynight_crisis_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.weather_daynight_crisis_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.weather_daynight_crisis_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.weather_daynight_crisis_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.weather_daynight_crisis_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.weather_daynight_crisis_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.weather_daynight_crisis_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/crisis-event-catalog.json",
+        ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/weather-hazard-catalog.json",
+        ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/world-event-weather-daynight-row-matrix.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "integrated_timeline_summary",
+      "titleKey": "goal074.schema.integrated_timeline_summary.title",
+      "order": 11,
+      "sourceGoalRange": "Goal070",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.integrated_timeline_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.integrated_timeline_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.integrated_timeline_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.integrated_timeline_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.integrated_timeline_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.integrated_timeline_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.integrated_timeline_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.integrated_timeline_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.integrated_timeline_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.integrated_timeline_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.integrated_timeline_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.integrated_timeline_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.integrated_timeline_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.integrated_timeline_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/conflict-arbitration-ledger.json",
+        ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/cross-system-cascade-ledger.json",
+        ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/timeline-matrix-summary.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "interactive_campaign_action_script_summary",
+      "titleKey": "goal074.schema.interactive_campaign_action_script_summary.title",
+      "order": 12,
+      "sourceGoalRange": "Goal071",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.interactive_campaign_action_script_summary.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.interactive_campaign_action_script_summary.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.interactive_campaign_action_script_summary.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.interactive_campaign_action_script_summary.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.interactive_campaign_action_script_summary.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.interactive_campaign_action_script_summary.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.interactive_campaign_action_script_summary.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.interactive_campaign_action_script_summary.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.interactive_campaign_action_script_summary.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.interactive_campaign_action_script_summary.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.interactive_campaign_action_script_summary.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.interactive_campaign_action_script_summary.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.interactive_campaign_action_script_summary.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.interactive_campaign_action_script_summary.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-input-script.json",
+        ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-row-matrix.json",
+        ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-state-transition-ledger.json"
+      ],
+      "diagnosticCodes": []
+    },
+    {
+      "groupId": "quality_debt_panel",
+      "titleKey": "goal074.schema.quality_debt_panel.title",
+      "order": 13,
+      "sourceGoalRange": "Goal072-Goal073",
+      "fields": [
+        {
+          "fieldId": "rowId",
+          "labelKey": "goal074.schema.quality_debt_panel.rowId",
+          "valueKind": "text",
+          "sourcePath": "workspace.quality_debt_panel.rowId",
+          "bindable": true
+        },
+        {
+          "fieldId": "familyId",
+          "labelKey": "goal074.schema.quality_debt_panel.familyId",
+          "valueKind": "text",
+          "sourcePath": "workspace.quality_debt_panel.familyId",
+          "bindable": true
+        },
+        {
+          "fieldId": "seedId",
+          "labelKey": "goal074.schema.quality_debt_panel.seedId",
+          "valueKind": "text",
+          "sourcePath": "workspace.quality_debt_panel.seedId",
+          "bindable": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "labelKey": "goal074.schema.quality_debt_panel.sourceStatus",
+          "valueKind": "status",
+          "sourcePath": "workspace.quality_debt_panel.sourceStatus",
+          "bindable": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "labelKey": "goal074.schema.quality_debt_panel.artifactRef",
+          "valueKind": "artifact_ref",
+          "sourcePath": "workspace.quality_debt_panel.artifactRef",
+          "bindable": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "labelKey": "goal074.schema.quality_debt_panel.provenanceCategory",
+          "valueKind": "enum",
+          "sourcePath": "workspace.quality_debt_panel.provenanceCategory",
+          "bindable": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "labelKey": "goal074.schema.quality_debt_panel.diagnosticCount",
+          "valueKind": "number",
+          "sourcePath": "workspace.quality_debt_panel.diagnosticCount",
+          "bindable": true
+        }
+      ],
+      "sourceArtifactRefs": [
+        ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/quality-dashboard.json",
+        ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/technical-debt-register.json",
+        ".llmgc/procedural/goal-073-source-format-p0-readability-repair/source-format-p0-readability-repair-report.md",
+        ".llmgc/procedural/goal-073-source-format-p0-readability-repair/source-format-p0-repair-summary.json"
+      ],
+      "diagnosticCodes": []
+    }
+  ]
+}

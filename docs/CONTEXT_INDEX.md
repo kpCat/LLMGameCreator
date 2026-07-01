@@ -159,6 +159,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md` | Goal 072 scouting: BCL-only repository-local quality scanner/evidence seam; no analyzers, external dashboards, dependencies or broad refactors. |
 | `docs/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR_SPEC.md` | Goal 073 task/spec: bounded source-format-only repair for `GQ-P0-SOURCE-EXTREME-LINE-LENGTH`, with final stop at `source_format_p0_readability_repair_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md` | Goal 073 scouting: manual bounded source formatting only; no dependencies, no broad autoformatter and no feature work. |
+| `docs/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE_SPEC.md` | Goal 074 task/spec: schema-driven campaign authoring/review workspace consuming Goal 060-073 evidence into Application workspace data and bounded WinForms UserControls, with final stop at `schema_driven_campaign_authoring_review_workspace_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md` | Goal 074 scouting: use existing WinForms/UserControl patterns and BCL-only workspace contracts; no external UI stack, provider, LLM/RAG, schema, Runtime, Unity or Lua dependency adoption. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -203,12 +205,86 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-source_format_p0_readability_repair_verification
+schema_driven_campaign_authoring_review_workspace_verification
 ```
 
-Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision: `semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`. Goal 036 Lua sandbox execution gate has been accepted by the user handoff embedded in Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 hybrid LLM draft plus Lua deterministic expansion has been accepted by the user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 world-scale region map foundation has been accepted by the user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 runtime chunk delta traversal smoke has been accepted by the user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 chunked runtime preview/export multi-family smoke has been accepted by the user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 multi-family generated template vertical slice has been accepted by the Goal 047 user handoff: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 full generator without media dry-run has been accepted by the Goal 053 user handoff: `full_generator_without_media_verification passed`. Goal 053 media asset campaign orchestration has been accepted by the Goal 054 user handoff: `media_asset_campaign_orchestration_verification passed`. Goal 054 media materialization review package has been accepted by the Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`. Goal 055 media-bound playable review package has been accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 Unity Alpha media-bound playable package has been accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 Unity Alpha multi-family playable loop has been accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 Full Media-Bound Generator Campaign has been accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 Full Generator Variability Regression Matrix has been accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 Full Campaign GamePackage Materialization Matrix has been accepted by the Goal 061 user handoff: `full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 Full Campaign Playable Review Package RC has been accepted by the Goal 062 user handoff: `full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 Constrained Spatial Detail Generation has been accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 Gameplay Consequence Depth Matrix has been accepted by the Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`. Goal 064 Living World NPC/Faction Simulation Matrix has been accepted by the Goal 065 user handoff: `living_world_npc_faction_simulation_matrix_verification passed before Goal 065`. Goal 065 Interlocked Gameplay Systems Depth Matrix has been accepted by the Goal 066 user handoff: `interlocked_gameplay_systems_depth_matrix_verification passed before Goal 066`. Goal 066 Settlement Construction Destruction Production Matrix has been accepted by the Goal 067 user handoff: `settlement_construction_destruction_production_matrix_verification passed before Goal 067`. Goal 067 Programmatic Narrative Quest Dialogue Event Matrix has been accepted by the Goal 068 user handoff: `programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068`. Goal 068 Combat Magic Ability Boss Encounter Matrix has been accepted by the Goal 069 user handoff: `combat_magic_ability_boss_encounter_matrix_verification passed before Goal 069`. Goal 069 World Event Weather Day/Night Crisis Matrix has been accepted by the Goal 070 user handoff: `world_event_weather_daynight_crisis_matrix_verification passed before Goal 070`. Goal 070 Integrated Campaign Timeline Simulation Matrix has been accepted by the Goal 071 user handoff: `integrated_campaign_timeline_simulation_matrix_verification passed before Goal 071`. Goal 071 Unity Alpha Interactive Campaign Player has been accepted by the Goal 072 user handoff: `unity_alpha_interactive_campaign_player_verification passed before Goal 072`.
+Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
+`semantic_authoring_intent_resolver_verification passed`. Goal 034 strict LLM draft artifact loop
+has been accepted by the user's manual decision: `strict_llm_draft_artifact_loop_verification passed`.
+Goal 031 and Goal 032 remain produced-for-review without being marked passed. Goal 035 Lua module
+manifest registry has been accepted by the user's manual decision: `lua_module_manifest_registry_verification passed`.
+Goal 036 Lua sandbox execution gate has been accepted by the user handoff embedded in Goal 037:
+`lua_sandbox_execution_gate_verification passed`. Goal 037 hybrid LLM draft plus Lua deterministic
+expansion has been accepted by the user handoff before Goal 038:
+`hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 world-scale region map
+foundation has been accepted by the user handoff before Goal 039:
+`world_scale_region_map_foundation_verification passed`. Goal 039 runtime chunk delta traversal smoke
+has been accepted by the user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`.
+Goal 040 chunked runtime preview/export multi-family smoke has been accepted by the user handoff before
+Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 multi-family
+generated template vertical slice has been accepted by the Goal 047 user handoff:
+`multi_family_generated_template_vertical_slice_verification passed`. Goal 047 full generator without media
+dry-run has been accepted by the Goal 053 user handoff: `full_generator_without_media_verification passed`.
+Goal 053 media asset campaign orchestration has been accepted by the Goal 054 user handoff:
+`media_asset_campaign_orchestration_verification passed`. Goal 054 media materialization review package
+has been accepted by the Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
+Goal 055 media-bound playable review package has been accepted by the Goal 056 user handoff:
+`media_bound_playable_review_package_verification passed`. Goal 056 Unity Alpha media-bound playable package
+has been accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`.
+Goal 057 Unity Alpha multi-family playable loop has been accepted by the Goal 058 user handoff:
+`unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 Full Media-Bound Generator Campaign
+has been accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`.
+Goal 059 Full Generator Variability Regression Matrix has been accepted by the Goal 060 user handoff:
+`full_generator_variability_regression_matrix_verification passed`. Goal 060 Full Campaign GamePackage
+Materialization Matrix has been accepted by the Goal 061 user handoff:
+`full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 Full Campaign Playable
+Review Package RC has been accepted by the Goal 062 user handoff:
+`full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 Constrained Spatial
+Detail Generation has been accepted by the Goal 063 user handoff:
+`constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 Gameplay Consequence
+Depth Matrix has been accepted by the Goal 064 user handoff:
+`gameplay_consequence_depth_matrix_verification passed before Goal 064`. Goal 064 Living World NPC/Faction
+Simulation Matrix has been accepted by the Goal 065 user handoff:
+`living_world_npc_faction_simulation_matrix_verification passed before Goal 065`. Goal 065 Interlocked
+Gameplay Systems Depth Matrix has been accepted by the Goal 066 user handoff:
+`interlocked_gameplay_systems_depth_matrix_verification passed before Goal 066`. Goal 066 Settlement
+Construction Destruction Production Matrix has been accepted by the Goal 067 user handoff:
+`settlement_construction_destruction_production_matrix_verification passed before Goal 067`. Goal 067
+Programmatic Narrative Quest Dialogue Event Matrix has been accepted by the Goal 068 user handoff:
+`programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068`. Goal 068 Combat
+Magic Ability Boss Encounter Matrix has been accepted by the Goal 069 user handoff:
+`combat_magic_ability_boss_encounter_matrix_verification passed before Goal 069`. Goal 069 World Event
+Weather Day/Night Crisis Matrix has been accepted by the Goal 070 user handoff:
+`world_event_weather_daynight_crisis_matrix_verification passed before Goal 070`. Goal 070 Integrated
+Campaign Timeline Simulation Matrix has been accepted by the Goal 071 user handoff:
+`integrated_campaign_timeline_simulation_matrix_verification passed before Goal 071`. Goal 071 Unity Alpha
+Interactive Campaign Player has been accepted by the Goal 072 user handoff:
+`unity_alpha_interactive_campaign_player_verification passed before Goal 072`. Goal 073 Source Format P0
+Readability Repair has been accepted by the Goal 074 user handoff:
+`source_format_p0_readability_repair_verification passed before Goal 074`.
 
-Goal 069 implementation status is GREEN with Unity/player proof passed, `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, `rowCount=9`, `stateChangingRowCount=9`, report hash `40db9e42153efda4427f587873cd1cc75af4687fd0775cf429aa88430c59e63e`, all required world_event markers matched and accepted by Goal 070 handoff. Goal 070 implementation status is GREEN with Unity/player proof passed, `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, `rowCount=9`, `stateChangingRowCount=9`, `cascadeCount=27`, `arbitrationCount=9`, report hash `5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89`, all required campaign_timeline markers matched and accepted by Goal 071 handoff. Goal 071 implementation status is GREEN and accepted by Goal 072 user handoff: Unity/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, `rowCount=9`, `stateChangingRowCount=9`, `actionCount=63`, `transitionCount=63`, all required interactive_campaign markers matched and report hash `ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02`. Goal 072 is produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false`, `implementationStatus=BLOCKED`, `p0Count=1`, `p1Count=3`, `p2Count=2`, `p3Count=0`, inventory hash `7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1` and debt register hash `b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33`. Goal 073 is produced for review with `source_format_p0_readability_repair_verification required`, `accepted=false`, `implementationStatus=GREEN`, `p0BeforeCount=8`, `p0AfterCount=0` and `repairedFileCount=8`; it repaired the Goal 072 P0 source-format blocker without marking Goal 072 passed.
+Goal 069 implementation status is GREEN with Unity/player proof passed, `unityExitCode=0`,
+`playerExitCode=0`, `provenRowCount=9`, `rowCount=9`, `stateChangingRowCount=9`,
+report hash `40db9e42153efda4427f587873cd1cc75af4687fd0775cf429aa88430c59e63e`,
+all required world_event markers matched and accepted by Goal 070 handoff. Goal 070 implementation
+status is GREEN with Unity/player proof passed, `unityExitCode=0`, `playerExitCode=0`,
+`provenRowCount=9`, `rowCount=9`, `stateChangingRowCount=9`, `cascadeCount=27`,
+`arbitrationCount=9`, report hash `5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89`,
+all required campaign_timeline markers matched and accepted by Goal 071 handoff. Goal 071 implementation
+status is GREEN and accepted by Goal 072 user handoff: Unity/player proof passed with
+`unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, `rowCount=9`, `stateChangingRowCount=9`,
+`actionCount=63`, `transitionCount=63`, all required interactive_campaign markers matched and
+report hash `ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02`. Goal 072 is produced
+for review with `generator_spine_quality_consolidation_verification required`, `accepted=false`,
+`implementationStatus=BLOCKED`, `p0Count=1`, `p1Count=3`, `p2Count=2`, `p3Count=0`,
+inventory hash `7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1` and
+debt register hash `b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33`.
+Goal 073 is accepted by Goal 074 user handoff:
+`source_format_p0_readability_repair_verification passed before Goal 074`; it repaired the Goal 072
+P0 source-format blocker without marking Goal 072 passed. Goal 074 is produced for review with
+`schema_driven_campaign_authoring_review_workspace_verification required`, `accepted=false`,
+`implementationStatus=GREEN`, `rowCount=9`, `schemaGroupCount=13` and deterministic hash
+`5e45ce2cc0ce6f1f491443a08205cac9bcd307c35090395a9b0a31cdfc37b916`.
 
 Allowed next sequence:
 
@@ -242,7 +318,8 @@ Allowed next sequence:
 28. Keep Goal 070 Integrated Campaign Timeline Simulation Matrix recorded as passed by user handoff before Goal 071.
 29. Keep Goal 071 Unity Alpha Interactive Campaign Player recorded as passed by user handoff before Goal 072.
 30. Keep Goal 072 Generator Spine Quality Consolidation produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker but did not mark Goal 072 passed.
-31. Keep Goal 073 Source Format P0 Readability Repair produced for review with `source_format_p0_readability_repair_verification required`, `accepted=false` and `implementationStatus=GREEN`; do not start a feature goal from this repair handoff.
+31. Keep Goal 073 Source Format P0 Readability Repair recorded as passed by user handoff before Goal 074.
+32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace produced for review at `schema_driven_campaign_authoring_review_workspace_verification required`, `accepted=false`, `implementationStatus=GREEN`.
 
 Kill criterion:
 

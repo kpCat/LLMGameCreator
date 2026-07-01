@@ -614,6 +614,28 @@
       "allowedPathPrefixes": [
         ".llmgc/procedural/goal-073-source-format-p0-readability-repair/"
       ]
+    },
+    {
+      "scenario": "goal-074-schema-driven-campaign-authoring-review-workspace",
+      "allowedPaths": [
+        "docs/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md",
+        "docs/agent-tasks/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md",
+        "docs/agent-tasks/GOAL_074_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/",
+        "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignAuthoringReviewWorkspace/"
+      ]
     }
   ]
 }

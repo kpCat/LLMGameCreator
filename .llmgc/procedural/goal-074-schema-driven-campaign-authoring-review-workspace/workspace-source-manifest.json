@@ -1,0 +1,640 @@
+{
+  "schemaVersion": "schema_driven_campaign_workspace_source_manifest_v1",
+  "goalId": "goal_074_schema_driven_campaign_authoring_review_workspace",
+  "productSmokeRoute": "goal-074-schema-driven-campaign-authoring-review-workspace",
+  "manualGate": "schema_driven_campaign_authoring_review_workspace_verification",
+  "accepted": false,
+  "goal073AcceptedByUserHandoff": true,
+  "goal072RemainsHistoricalBlocked": true,
+  "goal031And032RemainProducedForReview": true,
+  "rowCount": 9,
+  "familyCount": 3,
+  "seedCount": 3,
+  "preflightGates": [
+    {
+      "gateId": "source_format_p0_readability_repair_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "docs/CURRENT_GENERATOR_STATE.*"
+    },
+    {
+      "gateId": "generator_spine_quality_consolidation_verification",
+      "status": "required",
+      "provenanceKind": "historical_blocked",
+      "evidenceRef": "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md"
+    },
+    {
+      "gateId": "semantic_pack_composition_blueprint_verification",
+      "status": "required",
+      "provenanceKind": "produced_for_review",
+      "evidenceRef": "docs/CURRENT_GENERATOR_STATE.*"
+    },
+    {
+      "gateId": "dynamic_semantic_feature_system_verification",
+      "status": "required",
+      "provenanceKind": "produced_for_review",
+      "evidenceRef": "docs/CURRENT_GENERATOR_STATE.*"
+    },
+    {
+      "gateId": "schema_driven_campaign_authoring_review_workspace_verification",
+      "status": "required",
+      "provenanceKind": "manual_gate",
+      "evidenceRef": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/schema-driven-campaign-authoring-review-workspace-report.md"
+    }
+  ],
+  "sourceArtifactRefs": [
+    {
+      "sourceGoal": "Goal060",
+      "artifactFamily": "materialized_package_inventory",
+      "schemaGroupId": "package_materialization_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/materialized-package-inventory.json",
+      "artifactHash": "1f41f895f3b1953cdf61acf9740c5c5f4aa5640a1c733f6373bcb8dd5729c8f7",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "packages"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal060",
+      "artifactFamily": "package_validation_matrix",
+      "schemaGroupId": "package_materialization_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/package-validation-matrix.json",
+      "artifactHash": "68b0be48f1c2d381a9024e462d97826607b03d8de46aa468170744252bb2d52e",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal060",
+      "artifactFamily": "preview_export_package_payloads",
+      "schemaGroupId": "package_materialization_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/preview-export-package-payloads.json",
+      "artifactHash": "ed7c58bcdefee32688aacd8602e74bad0a60180853dc0e81ae9fbc466393a01d",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal060",
+      "artifactFamily": "runtime_consumption_matrix",
+      "schemaGroupId": "package_materialization_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/runtime-consumption-matrix.json",
+      "artifactHash": "d0251c02dae07c623402297a9b3f814d970ac781d76eedf689b2a1d28a9511b8",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal061",
+      "artifactFamily": "package_media_binding_audit",
+      "schemaGroupId": "package_materialization_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/package-media-binding-audit.json",
+      "artifactHash": "db2800cf36b0bedbf2bdeff4b05277fac47c73d32314baf9952dc3d3cfdd7baf",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal061",
+      "artifactFamily": "package_row_selection_matrix",
+      "schemaGroupId": "campaign_rows_selector",
+      "artifactRelativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/package-row-selection-matrix.json",
+      "artifactHash": "fe64ef86201daef85f03d6556f2e3d417241341ccf647559f768d4bbec1a0116",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal061",
+      "artifactFamily": "review_package_manifest",
+      "schemaGroupId": "package_materialization_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package-rc-manifest.json",
+      "artifactHash": "839d3d6b99ac19ce8b2e88ae4d765632f25f3d3a314850076d2d91a7a8fe4c99",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "schemaVersion"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal061",
+      "artifactFamily": "save_load_replay_package_row_audit",
+      "schemaGroupId": "package_materialization_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/save-load-replay-package-row-audit.json",
+      "artifactHash": "77966d44eec14403931e326eae4433d5ae5aa970cd83888d3b6cb822fcfe42dc",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal062",
+      "artifactFamily": "preview_export_spatial_payload",
+      "schemaGroupId": "spatial_detail_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/preview-export-spatial-payload.json",
+      "artifactHash": "ec9f753be2dd2b8c63b923fbf4b9890c715d651f2f5c5d4d7df2c5fee01fecf1",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal062",
+      "artifactFamily": "reachability_proof_matrix",
+      "schemaGroupId": "spatial_detail_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/reachability-proof-matrix.json",
+      "artifactHash": "5735d3893f4cf72e110bb2f5ed0fc9030581868eb937a88cb6a588d0f54fce4d",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal062",
+      "artifactFamily": "spatial_detail_matrix",
+      "schemaGroupId": "spatial_detail_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/spatial-detail-matrix.json",
+      "artifactHash": "26144b46ce35a99936bfc72ab331e53471f2c7d1541adaffc78593d6ada0e3d3",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal063",
+      "artifactFamily": "gameplay_command_plan_matrix",
+      "schemaGroupId": "gameplay_consequence_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/gameplay-command-plan-matrix.json",
+      "artifactHash": "c20f1a5491576fc632ad028607442b3a4befe044213c7da948f58dd2365b5b0b",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal063",
+      "artifactFamily": "runtime_state_delta_matrix",
+      "schemaGroupId": "gameplay_consequence_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/runtime-state-delta-matrix.json",
+      "artifactHash": "1563296c344c7abb936cdcb68863def66c44d6c6eecfe5b5eb4b70b1c374fdc3",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal063",
+      "artifactFamily": "save_load_replay_audit",
+      "schemaGroupId": "gameplay_consequence_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/save-load-replay-audit.json",
+      "artifactHash": "962e3636eb6360ff4f6318b3ec7761768e0a85b11c12484a4a7c7d40f0bf0b49",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal064",
+      "artifactFamily": "actor_faction_catalog_summary",
+      "schemaGroupId": "living_world_npc_faction_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/actor-faction-catalog-summary.json",
+      "artifactHash": "7aed6556a740c35cfd4d05d7864af85a93a8bd92720cff2cbe858f47e6005f0f",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal064",
+      "artifactFamily": "simulation_matrix_plan",
+      "schemaGroupId": "living_world_npc_faction_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/simulation-matrix-plan.json",
+      "artifactHash": "cf35ea76b3634f32c6a397007c5e05ed3f6d260d344bf622794ab68717f7ec95",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal065",
+      "artifactFamily": "combat_progression_ledger",
+      "schemaGroupId": "economy_crafting_combat_progression_status_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/combat-progression-ledger.json",
+      "artifactHash": "f8da25c282927099ee071d13ae8a3d39bb4bfdd827ef6dc02b550337a4a7b37d",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal065",
+      "artifactFamily": "economy_crafting_ledger",
+      "schemaGroupId": "economy_crafting_combat_progression_status_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/economy-crafting-ledger.json",
+      "artifactHash": "fc26faa743783bfe451b1f180f37050047b05d0a24b2840a6013e511cb17bf75",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal065",
+      "artifactFamily": "row_plan_matrix",
+      "schemaGroupId": "economy_crafting_combat_progression_status_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/row-plan-matrix.json",
+      "artifactHash": "f4905ea98fcbf52a224cd8b9e08fe60149cc8746b4a7ff1588d90b736058b0b9",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal065",
+      "artifactFamily": "status_effect_ledger",
+      "schemaGroupId": "economy_crafting_combat_progression_status_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/status-effect-ledger.json",
+      "artifactHash": "18a23ff900d977fc41198c8c4263ccf2946db1cb2365eed5ae680ab18b2756aa",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal066",
+      "artifactFamily": "settlement_row_matrix",
+      "schemaGroupId": "settlement_construction_destruction_production_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/settlement-construction-row-matrix.json",
+      "artifactHash": "a45ef3c6fc9d5306c1c6271e8ae5b91fe9fd6c5f87d96af131466aa623aefb0e",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal066",
+      "artifactFamily": "settlement_destruction_repair_ledger",
+      "schemaGroupId": "settlement_construction_destruction_production_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/settlement-destruction-repair-ledger.json",
+      "artifactHash": "268a7254c3ee8a36904a4f625dc5a743ea922e97166cc55f478f5016faa6cb97",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal066",
+      "artifactFamily": "settlement_production_ledger",
+      "schemaGroupId": "settlement_construction_destruction_production_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/settlement-production-ledger.json",
+      "artifactHash": "a431faa5ef314351426c2494127e36b4fbc58f5d8f22c87b50b79c04f0068cdd",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal067",
+      "artifactFamily": "dialogue_option_ledger",
+      "schemaGroupId": "narrative_quest_dialogue_event_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/dialogue-option-ledger.json",
+      "artifactHash": "04dabc56f99bb09e0071b446ea296d849b9a38a5f6cc69c1b53bcc6143929634",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal067",
+      "artifactFamily": "localization_key_table",
+      "schemaGroupId": "narrative_quest_dialogue_event_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/localization-key-table.json",
+      "artifactHash": "613cd731f015bd57754e0bb675c57f3aea3c243e14f6332f3912fa4a5d4c682d",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal067",
+      "artifactFamily": "narrative_row_matrix",
+      "schemaGroupId": "narrative_quest_dialogue_event_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/narrative-row-matrix.json",
+      "artifactHash": "556cbad9d35846cded002b8706dedf4c4af0a9acf6bcafcf77a7f48bec517a3b",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal067",
+      "artifactFamily": "quest_stage_ledger",
+      "schemaGroupId": "narrative_quest_dialogue_event_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/quest-stage-ledger.json",
+      "artifactHash": "79f7dc07e38af5a3fcb0903fcbc4ef5f4e64dda60e5424c55f759532cc546340",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal068",
+      "artifactFamily": "ability_trait_catalog",
+      "schemaGroupId": "combat_magic_boss_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/ability-trait-catalog.json",
+      "artifactHash": "975535e8671362011c8bccd9cc08813dd43fb595a9f248ebd8558e97a6aaad8a",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal068",
+      "artifactFamily": "boss_phase_catalog",
+      "schemaGroupId": "combat_magic_boss_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/boss-encounter-phase-catalog.json",
+      "artifactHash": "9fa32ec6b6a5ad2561ec07e716cb54ffc92c039fdf2973dda280431bb6314ce0",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal068",
+      "artifactFamily": "combat_magic_row_matrix",
+      "schemaGroupId": "combat_magic_boss_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/combat-magic-row-matrix.json",
+      "artifactHash": "c5f8254502da46fceed27634f49d8ca01792f027d5d0ba6d661b62fb7a71a8ee",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal069",
+      "artifactFamily": "crisis_event_catalog",
+      "schemaGroupId": "weather_daynight_crisis_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/crisis-event-catalog.json",
+      "artifactHash": "8fe43a232203589966e1fd98be8870729d7face1c71a72215895bb558b5060da",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal069",
+      "artifactFamily": "weather_hazard_catalog",
+      "schemaGroupId": "weather_daynight_crisis_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/weather-hazard-catalog.json",
+      "artifactHash": "30c7eed3bf9788c0ccf76603cb69d7093a627bb965f95909c21ba394d0d1dd7b",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal069",
+      "artifactFamily": "world_event_row_matrix",
+      "schemaGroupId": "weather_daynight_crisis_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/world-event-weather-daynight-row-matrix.json",
+      "artifactHash": "dedf86c72b45296e99fe965974af9feba5ae05d1876f7fef22c235bc417aeadf",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "conflict_arbitration_ledger",
+      "schemaGroupId": "integrated_timeline_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/conflict-arbitration-ledger.json",
+      "artifactHash": "bcbd83519e6a1c76df21c1da217fe46d1bd4a05ade42d9a3bda7e41104b5b686",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "cross_system_cascade_ledger",
+      "schemaGroupId": "integrated_timeline_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/cross-system-cascade-ledger.json",
+      "artifactHash": "282d63670625ca1efcc9d9d30d9dbd7f2c5d032bc88dfa9ccb39c9ef5b900692",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "timeline_matrix_summary",
+      "schemaGroupId": "integrated_timeline_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/timeline-matrix-summary.json",
+      "artifactHash": "7c5d3ea012b2a1ea30a043fca7dc6408af89007f5f1db8d91a02f348fd40bdd1",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal071",
+      "artifactFamily": "interactive_campaign_selector",
+      "schemaGroupId": "campaign_rows_selector",
+      "artifactRelativePath": ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-family-seed-selector.json",
+      "artifactHash": "b29e5877f317bd213f6d7e5c97c2222f01e10c55609306b883b0f3d4f930dfcf",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "families"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal071",
+      "artifactFamily": "interactive_campaign_input_script",
+      "schemaGroupId": "interactive_campaign_action_script_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-input-script.json",
+      "artifactHash": "458b6c33d0b80832c2b27e760d45352df3fe595aca6de4a20b96b4d3f3131512",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "actions"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal071",
+      "artifactFamily": "interactive_campaign_row_matrix",
+      "schemaGroupId": "interactive_campaign_action_script_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-row-matrix.json",
+      "artifactHash": "01192e688761e92295338fa08838a2461bed65df718feb31e977836865050110",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal071",
+      "artifactFamily": "interactive_campaign_state_transition_ledger",
+      "schemaGroupId": "interactive_campaign_action_script_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/interactive-campaign-state-transition-ledger.json",
+      "artifactHash": "7388680bb9ef62cdf025e98cf4da76b215f6210cec388903a1df8d4b6bfd5ec6",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal072",
+      "artifactFamily": "quality_dashboard",
+      "schemaGroupId": "quality_debt_panel",
+      "artifactRelativePath": ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/quality-dashboard.json",
+      "artifactHash": "2d5f1f3656797679ba71399a6ee77ebeabba04d98b095c090455c05ee91b4371",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "status",
+        "p0Count"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal072",
+      "artifactFamily": "technical_debt_register",
+      "schemaGroupId": "quality_debt_panel",
+      "artifactRelativePath": ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/technical-debt-register.json",
+      "artifactHash": "b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "findings"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal073",
+      "artifactFamily": "source_format_repair_report",
+      "schemaGroupId": "quality_debt_panel",
+      "artifactRelativePath": ".llmgc/procedural/goal-073-source-format-p0-readability-repair/source-format-p0-readability-repair-report.md",
+      "artifactHash": "a53ff30a8f75f68a97ac5164d8f03c987275871d371658b911626797de623c2a",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "source_format_p0_readability_repair_verification"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal073",
+      "artifactFamily": "source_format_repair_summary",
+      "schemaGroupId": "quality_debt_panel",
+      "artifactRelativePath": ".llmgc/procedural/goal-073-source-format-p0-readability-repair/source-format-p0-repair-summary.json",
+      "artifactHash": "6760a6d4420c6284a717d12abac6757f4c98146b5367b1113fe1c94fbfa5e80d",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "implementationStatus",
+        "p0AfterCount"
+      ],
+      "diagnostics": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "schema_driven_campaign_quality_gate_scan_v1",
+  "passed": true,
+  "scannedFileCount": 25,
+  "maxLineLength": 141,
+  "linesOver500Count": 0,
+  "filesOver900LinesCount": 0,
+  "minifiedSourceFileCount": 0,
+  "newAlphaRuntimeBootstrapRoute": false,
+  "files": [
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceBuilder.cs",
+      "lineCount": 394,
+      "maxLineLength": 134,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceContracts.cs",
+      "lineCount": 158,
+      "maxLineLength": 108,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceEvidenceService.cs",
+      "lineCount": 370,
+      "maxLineLength": 140,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceHash.cs",
+      "lineCount": 51,
+      "maxLineLength": 94,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceModels.cs",
+      "lineCount": 207,
+      "maxLineLength": 111,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceQualityGateScanner.cs",
+      "lineCount": 121,
+      "maxLineLength": 125,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceReports.cs",
+      "lineCount": 85,
+      "maxLineLength": 111,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceSourceLoader.cs",
+      "lineCount": 535,
+      "maxLineLength": 141,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceValidator.cs",
+      "lineCount": 255,
+      "maxLineLength": 126,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignActionPlanControl.Designer.cs",
+      "lineCount": 97,
+      "maxLineLength": 72,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignActionPlanControl.cs",
+      "lineCount": 30,
+      "maxLineLength": 98,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.Designer.cs",
+      "lineCount": 178,
+      "maxLineLength": 76,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
+      "lineCount": 77,
+      "maxLineLength": 108,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignDiagnosticsControl.Designer.cs",
+      "lineCount": 92,
+      "maxLineLength": 78,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignDiagnosticsControl.cs",
+      "lineCount": 32,
+      "maxLineLength": 92,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignProvenanceControl.Designer.cs",
+      "lineCount": 102,
+      "maxLineLength": 77,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignProvenanceControl.cs",
+      "lineCount": 32,
+      "maxLineLength": 102,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignQualityGateControl.Designer.cs",
+      "lineCount": 97,
+      "maxLineLength": 72,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignQualityGateControl.cs",
+      "lineCount": 43,
+      "maxLineLength": 101,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.Designer.cs",
+      "lineCount": 102,
+      "maxLineLength": 71,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.cs",
+      "lineCount": 34,
+      "maxLineLength": 94,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignSchemaGroupControl.Designer.cs",
+      "lineCount": 154,
+      "maxLineLength": 75,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignSchemaGroupControl.cs",
+      "lineCount": 44,
+      "maxLineLength": 87,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignAuthoringReviewWorkspaceTests.cs",
+      "lineCount": 201,
+      "maxLineLength": 125,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTests.cs",
+      "lineCount": 61,
+      "maxLineLength": 114,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    }
+  ],
+  "diagnostics": []
+}

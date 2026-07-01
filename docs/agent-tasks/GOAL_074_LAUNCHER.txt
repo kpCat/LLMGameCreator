@@ -1,0 +1,22 @@
+/goal Execute the aggressive composite goal from:
+docs/agent-tasks/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md
+
+Workspace: C:\Users\endim\LLMGameCreator\
+Branch: main
+Codex reasoning: very high.
+
+Treat the task file as the authoritative source for:
+read-first list, allowed/forbidden scope, exact behavior,
+WinForms/UserControl proof requirements, quality gate, bounded repairs,
+tests, validation commands, final report, and git policy.
+
+This is a large task. First record Goal 073 acceptance by user handoff.
+Then implement Goal 074 as schema-driven campaign authoring/review workspace
+that consumes Goal 060-073 evidence and exposes a bounded WinForms
+UserControl-based review surface.
+
+At the end, always commit and push final state to origin/main even if the result
+is BLOCKED or FAILED. The commit message and final report must reflect the
+honest status.
+
+Do not run branch, merge, rebase, cherry-pick, reset, stash, clean, or force-push.

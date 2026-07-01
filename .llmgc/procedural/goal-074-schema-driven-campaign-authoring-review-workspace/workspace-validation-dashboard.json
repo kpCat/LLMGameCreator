@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "schema_driven_campaign_workspace_validation_dashboard_v1",
+  "passed": true,
+  "sourceManifestPassed": true,
+  "rowSelectorPassed": true,
+  "schemaPassed": true,
+  "uiBindingPassed": true,
+  "provenancePassed": true,
+  "actionPlanPassed": true,
+  "qualityGatePassed": true,
+  "invalidMatrixPassed": true,
+  "errorCount": 0,
+  "warningCount": 0,
+  "diagnostics": []
+}

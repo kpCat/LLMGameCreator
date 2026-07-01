@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "schema_driven_campaign_row_selector_v1",
+  "passed": true,
+  "rowCount": 9,
+  "familyCount": 3,
+  "seedCount": 3,
+  "families": [
+    {
+      "familyId": "map_panel_rpg",
+      "seedIds": [
+        "seed_alpha",
+        "seed_beta",
+        "seed_gamma"
+      ],
+      "rowIds": [
+        "matrix-row-map-panel-rpg-seed-alpha",
+        "matrix-row-map-panel-rpg-seed-beta",
+        "matrix-row-map-panel-rpg-seed-gamma"
+      ]
+    },
+    {
+      "familyId": "survival_sandbox",
+      "seedIds": [
+        "seed_alpha",
+        "seed_beta",
+        "seed_gamma"
+      ],
+      "rowIds": [
+        "matrix-row-survival-sandbox-seed-alpha",
+        "matrix-row-survival-sandbox-seed-beta",
+        "matrix-row-survival-sandbox-seed-gamma"
+      ]
+    },
+    {
+      "familyId": "first_person_grid_dungeon",
+      "seedIds": [
+        "seed_alpha",
+        "seed_beta",
+        "seed_gamma"
+      ],
+      "rowIds": [
+        "matrix-row-first-person-grid-dungeon-seed-alpha",
+        "matrix-row-first-person-grid-dungeon-seed-beta",
+        "matrix-row-first-person-grid-dungeon-seed-gamma"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "displayKey": "goal074.row.map_panel_rpg.seed_alpha",
+      "packageRelativePath": "packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+      "interactiveRowHash": "da698493430503384089a5a8ba9ccdcf6686efd947bc5c2b65e9918c2b6a2610",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "displayKey": "goal074.row.map_panel_rpg.seed_beta",
+      "packageRelativePath": "packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+      "interactiveRowHash": "e8e0dc8ab9c3d665c648be4638b4420fb34b246149d7dfe79e989ab0eeaec9b3",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "displayKey": "goal074.row.map_panel_rpg.seed_gamma",
+      "packageRelativePath": "packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+      "interactiveRowHash": "2f9d0d80a27506f6ddd83c9330d6ad226f36eb794be52864b8f94035481e2876",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "displayKey": "goal074.row.survival_sandbox.seed_alpha",
+      "packageRelativePath": "packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+      "interactiveRowHash": "ffe2cfcfd34e843b678aa97efb95ba61efd572ff9eea8578e285f570adcdfe85",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "displayKey": "goal074.row.survival_sandbox.seed_beta",
+      "packageRelativePath": "packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+      "interactiveRowHash": "dad0ad61c1fd52ecbf41b12fb05f9abcd2c40056f7fecb78495f631dbfd1fc2f",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "displayKey": "goal074.row.survival_sandbox.seed_gamma",
+      "packageRelativePath": "packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+      "interactiveRowHash": "ec75bdee6d6afe47f64e8a4f5459328b9e61c5c49a841a8dcec4e051d742f899",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "displayKey": "goal074.row.first_person_grid_dungeon.seed_alpha",
+      "packageRelativePath": "packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+      "interactiveRowHash": "0b4ed7ac88313b7c891ca30160ae50286b4c434c28850dac3e3e520a3f3597ed",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "displayKey": "goal074.row.first_person_grid_dungeon.seed_beta",
+      "packageRelativePath": "packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+      "interactiveRowHash": "bfeb82b3bd2b073eabaa5e18fa302f9e69f8e2a5e45ef3257d8d075fc73f29bf",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "displayKey": "goal074.row.first_person_grid_dungeon.seed_gamma",
+      "packageRelativePath": "packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+      "interactiveRowHash": "3ec5810527782fba2b5275870a160e94be0336eb5f1a0bdd884b100db52669f2",
+      "stateChanging": true,
+      "saveLoadReplayPassed": true
+    }
+  ]
+}

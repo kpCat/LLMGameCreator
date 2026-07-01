@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "schema_driven_campaign_review_provenance_ledger_v1",
+  "passed": true,
+  "categories": [
+    "manual",
+    "auto",
+    "quarantined",
+    "accepted"
+  ],
+  "entries": [
+    {
+      "entryId": "accepted-goal060",
+      "category": "accepted",
+      "sourceGoal": "Goal060",
+      "evidenceRef": "source-manifest:Goal060",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal061",
+      "category": "accepted",
+      "sourceGoal": "Goal061",
+      "evidenceRef": "source-manifest:Goal061",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal062",
+      "category": "accepted",
+      "sourceGoal": "Goal062",
+      "evidenceRef": "source-manifest:Goal062",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal063",
+      "category": "accepted",
+      "sourceGoal": "Goal063",
+      "evidenceRef": "source-manifest:Goal063",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal064",
+      "category": "accepted",
+      "sourceGoal": "Goal064",
+      "evidenceRef": "source-manifest:Goal064",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal065",
+      "category": "accepted",
+      "sourceGoal": "Goal065",
+      "evidenceRef": "source-manifest:Goal065",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal066",
+      "category": "accepted",
+      "sourceGoal": "Goal066",
+      "evidenceRef": "source-manifest:Goal066",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal067",
+      "category": "accepted",
+      "sourceGoal": "Goal067",
+      "evidenceRef": "source-manifest:Goal067",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal068",
+      "category": "accepted",
+      "sourceGoal": "Goal068",
+      "evidenceRef": "source-manifest:Goal068",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal069",
+      "category": "accepted",
+      "sourceGoal": "Goal069",
+      "evidenceRef": "source-manifest:Goal069",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal070",
+      "category": "accepted",
+      "sourceGoal": "Goal070",
+      "evidenceRef": "source-manifest:Goal070",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal071",
+      "category": "accepted",
+      "sourceGoal": "Goal071",
+      "evidenceRef": "source-manifest:Goal071",
+      "reviewState": "accepted_for_reuse",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "accepted-goal073-handoff",
+      "category": "accepted",
+      "sourceGoal": "Goal073",
+      "evidenceRef": "docs/CURRENT_GENERATOR_STATE.*",
+      "reviewState": "accepted_by_user_handoff",
+      "acceptedByReview": true,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "auto-goal074-schema-rebuild",
+      "category": "auto",
+      "sourceGoal": "Goal074",
+      "evidenceRef": "dynamic-authoring-schema.json",
+      "reviewState": "deterministic_projection",
+      "acceptedByReview": false,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "manual-goal031-goal032-produced",
+      "category": "manual",
+      "sourceGoal": "Goal031-Goal032",
+      "evidenceRef": "docs/CURRENT_GENERATOR_STATE.*",
+      "reviewState": "produced_for_review_not_accepted",
+      "acceptedByReview": false,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "manual-goal074-current-gate",
+      "category": "manual",
+      "sourceGoal": "Goal074",
+      "evidenceRef": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace",
+      "reviewState": "manual_gate_required",
+      "acceptedByReview": false,
+      "hasReviewProvenance": true
+    },
+    {
+      "entryId": "quarantined-goal072",
+      "category": "quarantined",
+      "sourceGoal": "Goal072",
+      "evidenceRef": "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+      "reviewState": "blocked_preserved",
+      "acceptedByReview": false,
+      "hasReviewProvenance": true
+    }
+  ]
+}

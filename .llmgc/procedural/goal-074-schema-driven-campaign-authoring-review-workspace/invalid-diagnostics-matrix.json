@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "schema_driven_campaign_invalid_diagnostics_matrix_v1",
+  "passed": true,
+  "scenarioCount": 16,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal060_source_artifact",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.missing_goal060_source_artifact",
+          "target": "invalid-diagnostics-matrix/missing_goal060_source_artifact",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal061_source_artifact",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.missing_goal061_source_artifact",
+          "target": "invalid-diagnostics-matrix/missing_goal061_source_artifact",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal071_source_artifact",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.missing_goal071_source_artifact",
+          "target": "invalid-diagnostics-matrix/missing_goal071_source_artifact",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal073_source_artifact",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.missing_goal073_source_artifact",
+          "target": "invalid-diagnostics-matrix/missing_goal073_source_artifact",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_family_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.fake_family_id",
+          "target": "invalid-diagnostics-matrix/fake_family_id",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_seed_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.fake_seed_id",
+          "target": "invalid-diagnostics-matrix/fake_seed_id",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_row_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.duplicate_row_id",
+          "target": "invalid-diagnostics-matrix/duplicate_row_id",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_schema_group",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.missing_schema_group",
+          "target": "invalid-diagnostics-matrix/missing_schema_group",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "ui_binding_unknown_field",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.ui_binding_unknown_field",
+          "target": "invalid-diagnostics-matrix/ui_binding_unknown_field",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "candidate_accepted_without_review_provenance",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.candidate_accepted_without_review_provenance",
+          "target": "invalid-diagnostics-matrix/candidate_accepted_without_review_provenance",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "final_prose_leak",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.final_prose_leak",
+          "target": "invalid-diagnostics-matrix/final_prose_leak",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_llm_rag_media_generation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.provider_llm_rag_media_generation_claim",
+          "target": "invalid-diagnostics-matrix/provider_llm_rag_media_generation_claim",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_gamepackage_schema_mutation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.runtime_gamepackage_schema_mutation_claim",
+          "target": "invalid-diagnostics-matrix/runtime_gamepackage_schema_mutation_claim",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_broad_mutation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.unity_broad_mutation_claim",
+          "target": "invalid-diagnostics-matrix/unity_broad_mutation_claim",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "new_p0_line_length",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.new_p0_line_length",
+          "target": "invalid-diagnostics-matrix/new_p0_line_length",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    },
+    {
+      "scenarioId": "nondeterministic_ordering",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal074.invalid.nondeterministic_ordering",
+          "target": "invalid-diagnostics-matrix/nondeterministic_ordering",
+          "message": "Scenario is rejected by the schema-driven workspace validator."
+        }
+      ]
+    }
+  ]
+}

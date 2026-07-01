@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "schema_driven_campaign_winforms_control_inventory_v1",
+  "passed": true,
+  "navigationRegistered": true,
+  "controls": [
+    {
+      "controlName": "CampaignAuthoringReviewWorkspacePageControl",
+      "controlRole": "page-shell",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
+      "separateUserControl": true,
+      "schemaDrivenBinding": true
+    },
+    {
+      "controlName": "CampaignRowSelectorControl",
+      "controlRole": "row-selector",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.cs",
+      "separateUserControl": true,
+      "schemaDrivenBinding": true
+    },
+    {
+      "controlName": "CampaignSchemaGroupControl",
+      "controlRole": "schema-groups",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignSchemaGroupControl.cs",
+      "separateUserControl": true,
+      "schemaDrivenBinding": true
+    },
+    {
+      "controlName": "CampaignDiagnosticsControl",
+      "controlRole": "diagnostics-dashboard",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignDiagnosticsControl.cs",
+      "separateUserControl": true,
+      "schemaDrivenBinding": true
+    },
+    {
+      "controlName": "CampaignProvenanceControl",
+      "controlRole": "review-provenance",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignProvenanceControl.cs",
+      "separateUserControl": true,
+      "schemaDrivenBinding": true
+    },
+    {
+      "controlName": "CampaignActionPlanControl",
+      "controlRole": "authoring-action-plan",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignActionPlanControl.cs",
+      "separateUserControl": true,
+      "schemaDrivenBinding": true
+    },
+    {
+      "controlName": "CampaignQualityGateControl",
+      "controlRole": "quality-gate",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignQualityGateControl.cs",
+      "separateUserControl": true,
+      "schemaDrivenBinding": true
+    }
+  ]
+}

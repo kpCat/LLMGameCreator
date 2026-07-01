@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "goal074_artifact_scope_report_v1",
+  "scenario": "goal-074-schema-driven-campaign-authoring-review-workspace",
+  "gate": "schema_driven_campaign_authoring_review_workspace_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "allowedOutputDirectory": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace",
+  "artifactFileCount": 12,
+  "generatedFiles": [
+    "workspace-source-manifest.json",
+    "campaign-row-selector.json",
+    "dynamic-authoring-schema.json",
+    "ui-binding-contract.json",
+    "workspace-validation-dashboard.json",
+    "review-provenance-ledger.json",
+    "authoring-action-plan.json",
+    "quality-gate-scan.json",
+    "winforms-control-inventory.json",
+    "invalid-diagnostics-matrix.json",
+    "schema-driven-campaign-authoring-review-workspace-report.md",
+    "artifact-scope-report.json"
+  ],
+  "qualityGatePassed": true,
+  "winFormsInventoryPassed": true
+}

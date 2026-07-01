@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "schema_driven_campaign_authoring_action_plan_v1",
+  "passed": true,
+  "planHash": "07c023ba7d076615d7a2960c313e53a6ba1cf7ef286297448da9f6bbe02cab1c",
+  "items": [
+    {
+      "actionId": "goal074.authoring.001.campaign_rows_selector",
+      "order": 1,
+      "category": "auto",
+      "schemaGroupId": "campaign_rows_selector",
+      "targetRef": "uiBinding:campaign_rows_selector",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.002.package_materialization_summary",
+      "order": 2,
+      "category": "auto",
+      "schemaGroupId": "package_materialization_summary",
+      "targetRef": "uiBinding:package_materialization_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.003.spatial_detail_summary",
+      "order": 3,
+      "category": "auto",
+      "schemaGroupId": "spatial_detail_summary",
+      "targetRef": "uiBinding:spatial_detail_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.004.gameplay_consequence_summary",
+      "order": 4,
+      "category": "auto",
+      "schemaGroupId": "gameplay_consequence_summary",
+      "targetRef": "uiBinding:gameplay_consequence_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.005.living_world_npc_faction_summary",
+      "order": 5,
+      "category": "auto",
+      "schemaGroupId": "living_world_npc_faction_summary",
+      "targetRef": "uiBinding:living_world_npc_faction_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.006.economy_crafting_combat_progression_status_summary",
+      "order": 6,
+      "category": "auto",
+      "schemaGroupId": "economy_crafting_combat_progression_status_summary",
+      "targetRef": "uiBinding:economy_crafting_combat_progression_status_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.007.settlement_construction_destruction_production_summary",
+      "order": 7,
+      "category": "auto",
+      "schemaGroupId": "settlement_construction_destruction_production_summary",
+      "targetRef": "uiBinding:settlement_construction_destruction_production_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.008.narrative_quest_dialogue_event_summary",
+      "order": 8,
+      "category": "auto",
+      "schemaGroupId": "narrative_quest_dialogue_event_summary",
+      "targetRef": "uiBinding:narrative_quest_dialogue_event_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.009.combat_magic_boss_summary",
+      "order": 9,
+      "category": "auto",
+      "schemaGroupId": "combat_magic_boss_summary",
+      "targetRef": "uiBinding:combat_magic_boss_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.010.weather_daynight_crisis_summary",
+      "order": 10,
+      "category": "auto",
+      "schemaGroupId": "weather_daynight_crisis_summary",
+      "targetRef": "uiBinding:weather_daynight_crisis_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.011.integrated_timeline_summary",
+      "order": 11,
+      "category": "auto",
+      "schemaGroupId": "integrated_timeline_summary",
+      "targetRef": "uiBinding:integrated_timeline_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.012.interactive_campaign_action_script_summary",
+      "order": 12,
+      "category": "auto",
+      "schemaGroupId": "interactive_campaign_action_script_summary",
+      "targetRef": "uiBinding:interactive_campaign_action_script_summary",
+      "reviewPolicy": "review_workspace_projection_only",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.013.quality_debt_panel",
+      "order": 13,
+      "category": "quarantined",
+      "schemaGroupId": "quality_debt_panel",
+      "targetRef": "uiBinding:quality_debt_panel",
+      "reviewPolicy": "manual_review_required_blocked_input",
+      "deterministic": true
+    },
+    {
+      "actionId": "goal074.authoring.900.manual-gate-review",
+      "order": 900,
+      "category": "manual",
+      "schemaGroupId": "campaign_rows_selector",
+      "targetRef": "schema_driven_campaign_authoring_review_workspace_verification",
+      "reviewPolicy": "manual_gate_required",
+      "deterministic": true
+    }
+  ]
+}

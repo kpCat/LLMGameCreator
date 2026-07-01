@@ -1,0 +1,656 @@
+{
+  "schemaVersion": "schema_driven_campaign_ui_binding_contract_v1",
+  "passed": true,
+  "rowSelector": {
+    "controlKey": "campaign_rows_selector",
+    "dataPath": "rowSelector.rows",
+    "selectedRowPath": "selectedRowId",
+    "requiredColumns": [
+      "familyId",
+      "seedId",
+      "rowId",
+      "stateChanging",
+      "saveLoadReplayPassed"
+    ]
+  },
+  "groupBindings": [
+    {
+      "groupId": "campaign_rows_selector",
+      "controlKey": "goal074.control.campaign_rows_selector",
+      "dataPath": "dynamicSchema.groups.campaign_rows_selector",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.campaign_rows_selector.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.campaign_rows_selector.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.campaign_rows_selector.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.campaign_rows_selector.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.campaign_rows_selector.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.campaign_rows_selector.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.campaign_rows_selector.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "package_materialization_summary",
+      "controlKey": "goal074.control.package_materialization_summary",
+      "dataPath": "dynamicSchema.groups.package_materialization_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.package_materialization_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.package_materialization_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.package_materialization_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.package_materialization_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.package_materialization_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.package_materialization_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.package_materialization_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "spatial_detail_summary",
+      "controlKey": "goal074.control.spatial_detail_summary",
+      "dataPath": "dynamicSchema.groups.spatial_detail_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.spatial_detail_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.spatial_detail_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.spatial_detail_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.spatial_detail_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.spatial_detail_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.spatial_detail_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.spatial_detail_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "gameplay_consequence_summary",
+      "controlKey": "goal074.control.gameplay_consequence_summary",
+      "dataPath": "dynamicSchema.groups.gameplay_consequence_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.gameplay_consequence_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.gameplay_consequence_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.gameplay_consequence_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.gameplay_consequence_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.gameplay_consequence_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.gameplay_consequence_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.gameplay_consequence_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "living_world_npc_faction_summary",
+      "controlKey": "goal074.control.living_world_npc_faction_summary",
+      "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.living_world_npc_faction_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "economy_crafting_combat_progression_status_summary",
+      "controlKey": "goal074.control.economy_crafting_combat_progression_status_summary",
+      "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.economy_crafting_combat_progression_status_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "settlement_construction_destruction_production_summary",
+      "controlKey": "goal074.control.settlement_construction_destruction_production_summary",
+      "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.settlement_construction_destruction_production_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "narrative_quest_dialogue_event_summary",
+      "controlKey": "goal074.control.narrative_quest_dialogue_event_summary",
+      "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.narrative_quest_dialogue_event_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "combat_magic_boss_summary",
+      "controlKey": "goal074.control.combat_magic_boss_summary",
+      "dataPath": "dynamicSchema.groups.combat_magic_boss_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.combat_magic_boss_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.combat_magic_boss_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.combat_magic_boss_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.combat_magic_boss_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.combat_magic_boss_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.combat_magic_boss_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.combat_magic_boss_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "weather_daynight_crisis_summary",
+      "controlKey": "goal074.control.weather_daynight_crisis_summary",
+      "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.weather_daynight_crisis_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "integrated_timeline_summary",
+      "controlKey": "goal074.control.integrated_timeline_summary",
+      "dataPath": "dynamicSchema.groups.integrated_timeline_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.integrated_timeline_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.integrated_timeline_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.integrated_timeline_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.integrated_timeline_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.integrated_timeline_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.integrated_timeline_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.integrated_timeline_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "interactive_campaign_action_script_summary",
+      "controlKey": "goal074.control.interactive_campaign_action_script_summary",
+      "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.interactive_campaign_action_script_summary.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "groupId": "quality_debt_panel",
+      "controlKey": "goal074.control.quality_debt_panel",
+      "dataPath": "dynamicSchema.groups.quality_debt_panel",
+      "fieldBindings": [
+        {
+          "fieldId": "rowId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.quality_debt_panel.fields.rowId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "familyId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.quality_debt_panel.fields.familyId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "seedId",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.quality_debt_panel.fields.seedId",
+          "readOnly": true
+        },
+        {
+          "fieldId": "sourceStatus",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.quality_debt_panel.fields.sourceStatus",
+          "readOnly": true
+        },
+        {
+          "fieldId": "artifactRef",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.quality_debt_panel.fields.artifactRef",
+          "readOnly": true
+        },
+        {
+          "fieldId": "provenanceCategory",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.quality_debt_panel.fields.provenanceCategory",
+          "readOnly": true
+        },
+        {
+          "fieldId": "diagnosticCount",
+          "controlKind": "readonly_text",
+          "dataPath": "dynamicSchema.groups.quality_debt_panel.fields.diagnosticCount",
+          "readOnly": true
+        }
+      ]
+    }
+  ],
+  "diagnostics": []
+}
