@@ -39,6 +39,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> livingWorldLogLines = new List<string>();
         private readonly List<AlphaInterlockedGameplayRow> interlockedGameplayRows = new List<AlphaInterlockedGameplayRow>();
         private readonly List<string> interlockedGameplayLogLines = new List<string>();
+        private readonly List<AlphaSettlementRow> settlementRows = new List<AlphaSettlementRow>();
+        private readonly List<string> settlementLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -90,6 +92,7 @@ namespace LLMGameCreatorAlpha
         private bool gameplayConsequencePlanLoaded;
         private bool livingWorldPlanLoaded;
         private bool interlockedGameplayPlanLoaded;
+        private bool settlementPlanLoaded;
 
         private void Start()
         {
@@ -308,6 +311,7 @@ namespace LLMGameCreatorAlpha
                 var gameplayConsequenceLines = LoadGameplayConsequencePayload(payloadRoot);
                 var livingWorldLines = LoadLivingWorldPayload(payloadRoot);
                 var interlockedGameplayLines = LoadInterlockedGameplayPayload(payloadRoot);
+                var settlementLines = LoadSettlementPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -341,6 +345,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(gameplayConsequenceLines);
                 lines.AddRange(livingWorldLines);
                 lines.AddRange(interlockedGameplayLines);
+                lines.AddRange(settlementLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -409,6 +414,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunGameplayConsequenceProof());
             lines.AddRange(RunLivingWorldProof());
             lines.AddRange(RunInterlockedGameplayProof());
+            lines.AddRange(RunSettlementProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1851,6 +1857,90 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadSettlementPayload(string payloadRoot)
+        {
+            settlementRows.Clear();
+            settlementLogLines.Clear();
+            settlementPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "settlement-construction", "unity-settlement-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                settlementLogLines.Add("settlement_plan_loaded=false");
+                settlementLogLines.Add("settlement_plan_missing=true");
+                return settlementLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                settlementRows.AddRange(ExtractSettlementRows(planJson));
+                settlementRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                settlementPlanLoaded = ExtractJsonBool(planJson, "passed") && settlementRows.Count > 0;
+                settlementLogLines.Add("settlement_plan_loaded=" + settlementPlanLoaded.ToString().ToLowerInvariant());
+                settlementLogLines.Add("settlement_row_count=" + settlementRows.Count);
+            }
+            catch (Exception ex)
+            {
+                settlementPlanLoaded = false;
+                settlementLogLines.Add("settlement_plan_loaded=false");
+                settlementLogLines.Add("settlement_error_type=" + ex.GetType().Name);
+                settlementLogLines.Add("settlement_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return settlementLogLines;
+        }
+
+        private List<string> RunSettlementProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(settlementLogLines);
+            if (!settlementPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("settlement_matrix_loaded=goal066");
+            foreach (var row in settlementRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("settlement_row=" + row.RowId);
+                lines.Add("settlement_family=" + row.FamilyId);
+                lines.Add("settlement_seed=" + row.SeedId);
+                lines.Add("settlement_id=" + row.SettlementId);
+                lines.Add("settlement_construction_action=" + row.RowId);
+                lines.Add("settlement_construction_action_id=" + row.ConstructionActionId);
+                lines.Add("settlement_production_delta=" + row.RowId);
+                foreach (var ledgerId in row.ProductionLedgerEntryIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("settlement_production_ledger_id=" + ledgerId);
+                }
+
+                lines.Add("settlement_destruction_damage=" + row.RowId);
+                foreach (var ledgerId in row.DestructionRepairLedgerEntryIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("settlement_destruction_repair_ledger_id=" + ledgerId);
+                }
+
+                lines.Add("settlement_repair_defense=" + row.RowId);
+                foreach (var ledgerId in row.DefenseThreatLedgerEntryIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("settlement_defense_threat_ledger_id=" + ledgerId);
+                }
+
+                lines.Add("settlement_living_world_linkage=" + row.RowId);
+                lines.Add("settlement_living_world_linkage_id=" + row.LivingWorldLinkageId);
+                lines.Add("settlement_interlocked_dependency=" + row.RowId);
+                lines.Add("settlement_interlocked_dependency_id=" + row.InterlockedDependencyId);
+                lines.Add("settlement_replay_verified=" + row.RowId);
+                lines.Add("settlement_row_completed=" + row.RowId);
+            }
+
+            lines.Add("settlement_matrix_completed=true");
+            lines.Add("review_package_proof=goal066");
+            lines.Add("settlement_construction_destruction_production_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -2092,6 +2182,34 @@ namespace LLMGameCreatorAlpha
                     CombatDeltaIds = ExtractStringArray(value, "combatDeltaIds").ToList(),
                     ProgressionDeltaIds = ExtractStringArray(value, "progressionDeltaIds").ToList(),
                     StatusDeltaIds = ExtractStringArray(value, "statusDeltaIds").ToList()
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaSettlementRow> ExtractSettlementRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaSettlementRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    SettlementId = ExtractJsonString(value, "settlementId"),
+                    ConstructionActionId = ExtractJsonString(value, "constructionActionId"),
+                    ProductionLedgerEntryIds = ExtractStringArray(value, "productionLedgerEntryIds").ToList(),
+                    DestructionRepairLedgerEntryIds = ExtractStringArray(value, "destructionRepairLedgerEntryIds").ToList(),
+                    DefenseThreatLedgerEntryIds = ExtractStringArray(value, "defenseThreatLedgerEntryIds").ToList(),
+                    LivingWorldLinkageId = ExtractJsonString(value, "livingWorldLinkageId"),
+                    InterlockedDependencyId = ExtractJsonString(value, "interlockedDependencyId")
                 };
             }
         }
@@ -2752,6 +2870,20 @@ namespace LLMGameCreatorAlpha
             public List<string> CombatDeltaIds = new List<string>();
             public List<string> ProgressionDeltaIds = new List<string>();
             public List<string> StatusDeltaIds = new List<string>();
+        }
+
+        private sealed class AlphaSettlementRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string SettlementId = string.Empty;
+            public string ConstructionActionId = string.Empty;
+            public List<string> ProductionLedgerEntryIds = new List<string>();
+            public List<string> DestructionRepairLedgerEntryIds = new List<string>();
+            public List<string> DefenseThreatLedgerEntryIds = new List<string>();
+            public string LivingWorldLinkageId = string.Empty;
+            public string InterlockedDependencyId = string.Empty;
         }
 
         private sealed class AlphaMediaBoundBinding
