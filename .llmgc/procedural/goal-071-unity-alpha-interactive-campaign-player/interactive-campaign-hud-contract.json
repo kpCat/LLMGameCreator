@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "unity_alpha_interactive_campaign_hud_contract_v1",
+  "passed": true,
+  "requiredFields": [
+    "familyId",
+    "seedId",
+    "rowId",
+    "actionId",
+    "stepId",
+    "stateBeforeHash",
+    "stateAfterHash",
+    "deltaSummary"
+  ],
+  "rows": [
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "actionId": "action/goal071/first-person-grid-dungeon/seed-alpha/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "d3f3f677d8cec9fd7a604e41c55d7a2bd7f1a198824e724f8993952df2dcbd69",
+      "stateAfterHash": "68d1a9841253585bde58e1843ae347d9ba1611624606af016d11e60f1fee5616",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "actionId": "action/goal071/first-person-grid-dungeon/seed-beta/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "cb4b68c5790de75b01b155df7a9432b2aed60f1d44a2afdc0cf4caf3408cae34",
+      "stateAfterHash": "20e502a8ac171ed4c832106755c2c645361196e9be92e078faaec1c3d4198744",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "actionId": "action/goal071/first-person-grid-dungeon/seed-gamma/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "4bde31fa86d9a06cd94fa233d706fb57456e66151aa40b02b5a83fcb3522bee4",
+      "stateAfterHash": "e183c4747f48bcea2cf387498fec552c2b2937b0242a5678939a3d3073537140",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "actionId": "action/goal071/map-panel-rpg/seed-alpha/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "6b535f97be99aaf02fe982b3f5f163777a8d31af63637ea367eee99a2bf593c6",
+      "stateAfterHash": "b0c60399a0842648a6c2b81e99e1b0645434c17ab1b0fb33f63ef5065d5030ce",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "actionId": "action/goal071/map-panel-rpg/seed-beta/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "364e1ac6ce109b47768db2a5591b660087cb611bdff441683a372b2aab0f260f",
+      "stateAfterHash": "6203a667406b3fc7f8d0fd5caee43d838f6d18e4d801b20348cebfac41173378",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "actionId": "action/goal071/map-panel-rpg/seed-gamma/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "74d6c9bf473d48b42eb17603ead712df151961ea2c9bb271f22eac61afb980b5",
+      "stateAfterHash": "f7413e2e36360c4e6bd3bdbc7be179fdef7ab2567fd89ba0c2055430020fabdc",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "actionId": "action/goal071/survival-sandbox/seed-alpha/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "3f8fdc2c107a6520798825a27ccb51b8c6e2797bb4794845cb80d17bb9c9bded",
+      "stateAfterHash": "ed890adeda518ddd9594e7cc6d17cab973df5cc8bce03da4d0bbf3e0bcbabc01",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "actionId": "action/goal071/survival-sandbox/seed-beta/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "b1fc61acce5eb1d08bd6f374f8b175cbd2152fc313ac70d8b01a60d4b196638a",
+      "stateAfterHash": "04389ebd5396052d5cb1921d0ae892127cca3b0ad4373da60adeda0027a7f845",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "actionId": "action/goal071/survival-sandbox/seed-gamma/step-01",
+      "stepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "stateBeforeHash": "c0e609add8dd05a6056d76e33985e5e4179f0b03f8f4a5ebcb217fab031bf024",
+      "stateAfterHash": "cb07712f38f78ee5fd77de2ff49b034cd5627ac90b9b37d116cb92071504964c",
+      "deltaSummary": "advance_timeline_step:tick-01-dawn-night-weather-crisis-pressure"
+    }
+  ]
+}

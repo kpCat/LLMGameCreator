@@ -49,6 +49,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> worldEventLogLines = new List<string>();
         private readonly List<AlphaCampaignTimelineRow> campaignTimelineRows = new List<AlphaCampaignTimelineRow>();
         private readonly List<string> campaignTimelineLogLines = new List<string>();
+        private readonly List<AlphaInteractiveCampaignRow> interactiveCampaignRows = new List<AlphaInteractiveCampaignRow>();
+        private readonly List<string> interactiveCampaignLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -65,6 +67,8 @@ namespace LLMGameCreatorAlpha
         private string selectedEventId = string.Empty;
         private int assetRefCount;
         private int currentCommandIndex;
+        private int interactiveCampaignSelectedIndex;
+        private int interactiveCampaignSelectedStepIndex;
         private bool payloadLoaded;
         private bool questStarted;
         private bool dialogueSeen;
@@ -105,6 +109,7 @@ namespace LLMGameCreatorAlpha
         private bool combatMagicPlanLoaded;
         private bool worldEventPlanLoaded;
         private bool campaignTimelinePlanLoaded;
+        private bool interactiveCampaignPlanLoaded;
 
         private void Start()
         {
@@ -173,6 +178,21 @@ namespace LLMGameCreatorAlpha
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 CycleFocus();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftBracket))
+            {
+                CycleInteractiveCampaignRow(-1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightBracket))
+            {
+                CycleInteractiveCampaignRow(1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Period))
+            {
+                AdvanceInteractiveCampaignStep();
             }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
@@ -259,6 +279,110 @@ namespace LLMGameCreatorAlpha
                 GUI.Label(new Rect(48, logY, 258, 18), playLog[index]);
                 logY += 18;
             }
+
+            DrawInteractiveCampaignHud();
+        }
+
+        private void DrawInteractiveCampaignHud()
+        {
+            GUI.Box(new Rect(984, 16, 360, 248), "Interactive Campaign");
+            if (!interactiveCampaignPlanLoaded || interactiveCampaignRows.Count == 0)
+            {
+                GUI.Label(new Rect(1000, 44, 320, 22), "Plan: not staged");
+                return;
+            }
+
+            var row = SelectedInteractiveCampaignRow();
+            GUI.Label(new Rect(1000, 44, 320, 20), "Family: " + Display(row.FamilyId));
+            GUI.Label(new Rect(1000, 66, 320, 20), "Seed: " + Display(row.SeedId));
+            GUI.Label(new Rect(1000, 88, 320, 20), "Row: " + Display(row.RowId));
+            GUI.Label(new Rect(1000, 110, 320, 20), "Input: " + Display(SelectedInteractiveInput(row)));
+            GUI.Label(new Rect(1000, 132, 320, 20), "Step: " + Display(SelectedInteractiveStep(row)));
+            GUI.Label(new Rect(1000, 154, 320, 20), "Before: " + ShortDisplay(SelectedInteractiveBefore(row)));
+            GUI.Label(new Rect(1000, 176, 320, 20), "After: " + ShortDisplay(SelectedInteractiveAfter(row)));
+            GUI.Label(new Rect(1000, 198, 320, 20), "Delta: applied    Gate: goal071 required");
+
+            if (GUI.Button(new Rect(1000, 224, 92, 28), "Prev Row"))
+            {
+                CycleInteractiveCampaignRow(-1);
+            }
+
+            if (GUI.Button(new Rect(1100, 224, 92, 28), "Next Row"))
+            {
+                CycleInteractiveCampaignRow(1);
+            }
+
+            if (GUI.Button(new Rect(1200, 224, 92, 28), "Step"))
+            {
+                AdvanceInteractiveCampaignStep();
+            }
+        }
+
+        private void CycleInteractiveCampaignRow(int delta)
+        {
+            if (interactiveCampaignRows.Count == 0)
+            {
+                return;
+            }
+
+            interactiveCampaignSelectedIndex = (interactiveCampaignSelectedIndex + delta + interactiveCampaignRows.Count) % interactiveCampaignRows.Count;
+            interactiveCampaignSelectedStepIndex = 0;
+        }
+
+        private void AdvanceInteractiveCampaignStep()
+        {
+            if (interactiveCampaignRows.Count == 0)
+            {
+                return;
+            }
+
+            var row = SelectedInteractiveCampaignRow();
+            var stepCount = Math.Max(1, row.StepIds.Count);
+            interactiveCampaignSelectedStepIndex = (interactiveCampaignSelectedStepIndex + 1) % stepCount;
+        }
+
+        private AlphaInteractiveCampaignRow SelectedInteractiveCampaignRow()
+        {
+            if (interactiveCampaignRows.Count == 0)
+            {
+                return AlphaInteractiveCampaignRow.Empty;
+            }
+
+            interactiveCampaignSelectedIndex = Math.Max(0, Math.Min(interactiveCampaignSelectedIndex, interactiveCampaignRows.Count - 1));
+            return interactiveCampaignRows[interactiveCampaignSelectedIndex];
+        }
+
+        private string SelectedInteractiveInput(AlphaInteractiveCampaignRow row) =>
+            SelectInteractiveValue(row.InputIds, row.SelectedInputId);
+
+        private string SelectedInteractiveStep(AlphaInteractiveCampaignRow row) =>
+            SelectInteractiveValue(row.StepIds, row.SelectedStepId);
+
+        private string SelectedInteractiveBefore(AlphaInteractiveCampaignRow row) =>
+            SelectInteractiveValue(row.StateBeforeHashes, string.Empty);
+
+        private string SelectedInteractiveAfter(AlphaInteractiveCampaignRow row) =>
+            SelectInteractiveValue(row.StateAfterHashes, string.Empty);
+
+        private string SelectInteractiveValue(IReadOnlyList<string> values, string fallback)
+        {
+            if (values.Count == 0)
+            {
+                return fallback;
+            }
+
+            var index = Math.Max(0, Math.Min(interactiveCampaignSelectedStepIndex, values.Count - 1));
+            return values[index];
+        }
+
+        private static string ShortDisplay(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return "(none)";
+            }
+
+            return value.Length <= 18 ? value : value.Substring(0, 18);
         }
 
         private List<string> LoadPayloadAndBuildLaunchLog()
@@ -328,6 +452,7 @@ namespace LLMGameCreatorAlpha
                 var combatMagicLines = LoadCombatMagicPayload(payloadRoot);
                 var worldEventLines = LoadWorldEventPayload(payloadRoot);
                 var campaignTimelineLines = LoadCampaignTimelinePayload(payloadRoot);
+                var interactiveCampaignLines = LoadInteractiveCampaignPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -366,6 +491,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(combatMagicLines);
                 lines.AddRange(worldEventLines);
                 lines.AddRange(campaignTimelineLines);
+                lines.AddRange(interactiveCampaignLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -439,6 +565,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunCombatMagicProof());
             lines.AddRange(RunWorldEventProof());
             lines.AddRange(RunCampaignTimelineProof());
+            lines.AddRange(RunInteractiveCampaignProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -2234,6 +2361,89 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadInteractiveCampaignPayload(string payloadRoot)
+        {
+            interactiveCampaignRows.Clear();
+            interactiveCampaignLogLines.Clear();
+            interactiveCampaignPlanLoaded = false;
+            interactiveCampaignSelectedIndex = 0;
+            interactiveCampaignSelectedStepIndex = 0;
+
+            var planPath = Path.Combine(payloadRoot, "interactive-campaign", "unity-interactive-campaign-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                interactiveCampaignLogLines.Add("interactive_campaign_plan_loaded=false");
+                interactiveCampaignLogLines.Add("interactive_campaign_plan_missing=" + planPath);
+                return interactiveCampaignLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                interactiveCampaignRows.AddRange(ExtractInteractiveCampaignRows(planJson));
+                interactiveCampaignRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                interactiveCampaignPlanLoaded = ExtractJsonBool(planJson, "passed") && interactiveCampaignRows.Count > 0;
+                interactiveCampaignLogLines.Add("interactive_campaign_plan_loaded=" + interactiveCampaignPlanLoaded.ToString().ToLowerInvariant());
+                interactiveCampaignLogLines.Add("interactive_campaign_row_count=" + interactiveCampaignRows.Count);
+            }
+            catch (Exception ex)
+            {
+                interactiveCampaignPlanLoaded = false;
+                interactiveCampaignLogLines.Add("interactive_campaign_plan_loaded=false");
+                interactiveCampaignLogLines.Add("interactive_campaign_error_type=" + ex.GetType().Name);
+                interactiveCampaignLogLines.Add("interactive_campaign_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return interactiveCampaignLogLines;
+        }
+
+        private List<string> RunInteractiveCampaignProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(interactiveCampaignLogLines);
+            if (!interactiveCampaignPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("interactive_campaign_loaded=true");
+            foreach (var row in interactiveCampaignRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("interactive_campaign_family=" + row.FamilyId);
+                lines.Add("interactive_campaign_seed=" + row.SeedId);
+                lines.Add("interactive_campaign_selected_row=" + row.RowId);
+                var stepCount = Math.Max(row.StepIds.Count, Math.Max(row.StateBeforeHashes.Count, row.StateAfterHashes.Count));
+                stepCount = Math.Max(1, stepCount);
+                for (var index = 0; index < stepCount; index++)
+                {
+                    lines.Add("interactive_campaign_input=" + ValueAt(row.InputIds, index, row.SelectedInputId));
+                    lines.Add("interactive_campaign_action=" + ValueAt(row.ActionIds, index, row.SelectedActionId));
+                    lines.Add("interactive_campaign_step=" + ValueAt(row.StepIds, index, row.SelectedStepId));
+                    lines.Add("interactive_campaign_state_before=" + ValueAt(row.StateBeforeHashes, index, string.Empty));
+                    lines.Add("interactive_campaign_state_after=" + ValueAt(row.StateAfterHashes, index, string.Empty));
+                    lines.Add("interactive_campaign_delta_applied=" + row.DeltaApplied.ToString().ToLowerInvariant());
+                    lines.Add("interactive_campaign_hud_rendered=" + row.HudRendered.ToString().ToLowerInvariant());
+                }
+
+                lines.Add("interactive_campaign_row_completed=true");
+                lines.Add("interactive_campaign_row_completed=" + row.RowId);
+            }
+
+            lines.Add("interactive_campaign_proof=goal071");
+            lines.Add("unity_alpha_interactive_campaign_player_verification=required");
+            return lines;
+        }
+
+        private static string ValueAt(IReadOnlyList<string> values, int index, string fallback)
+        {
+            if (values.Count == 0)
+            {
+                return fallback;
+            }
+
+            return values[Math.Max(0, Math.Min(index, values.Count - 1))];
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -2603,6 +2813,37 @@ namespace LLMGameCreatorAlpha
                     CascadeIds = ExtractStringArray(value, "cascadeIds").ToList(),
                     ArbitrationIds = ExtractStringArray(value, "arbitrationIds").ToList(),
                     StateChanged = ExtractJsonBool(value, "stateChanged"),
+                    SaveLoadReplayPassed = ExtractJsonBool(value, "saveLoadReplayPassed")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaInteractiveCampaignRow> ExtractInteractiveCampaignRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (var value in ExtractObjectBlocks(array))
+            {
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaInteractiveCampaignRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    SelectedInputId = ExtractJsonString(value, "selectedInputId"),
+                    SelectedActionId = ExtractJsonString(value, "selectedActionId"),
+                    SelectedStepId = ExtractJsonString(value, "selectedStepId"),
+                    StepIds = ExtractStringArray(value, "stepIds").ToList(),
+                    InputIds = ExtractStringArray(value, "inputIds").ToList(),
+                    ActionIds = ExtractStringArray(value, "actionIds").ToList(),
+                    StateBeforeHashes = ExtractStringArray(value, "stateBeforeHashes").ToList(),
+                    StateAfterHashes = ExtractStringArray(value, "stateAfterHashes").ToList(),
+                    DeltaApplied = ExtractJsonBool(value, "deltaApplied"),
+                    HudRendered = ExtractJsonBool(value, "hudRendered"),
                     SaveLoadReplayPassed = ExtractJsonBool(value, "saveLoadReplayPassed")
                 };
             }
@@ -3380,6 +3621,25 @@ namespace LLMGameCreatorAlpha
             public List<string> CascadeIds = new List<string>();
             public List<string> ArbitrationIds = new List<string>();
             public bool StateChanged;
+            public bool SaveLoadReplayPassed;
+        }
+
+        private sealed class AlphaInteractiveCampaignRow
+        {
+            public static readonly AlphaInteractiveCampaignRow Empty = new AlphaInteractiveCampaignRow();
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string SelectedInputId = string.Empty;
+            public string SelectedActionId = string.Empty;
+            public string SelectedStepId = string.Empty;
+            public List<string> StepIds = new List<string>();
+            public List<string> InputIds = new List<string>();
+            public List<string> ActionIds = new List<string>();
+            public List<string> StateBeforeHashes = new List<string>();
+            public List<string> StateAfterHashes = new List<string>();
+            public bool DeltaApplied;
+            public bool HudRendered;
             public bool SaveLoadReplayPassed;
         }
 

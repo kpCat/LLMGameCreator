@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "unity_alpha_interactive_campaign_family_seed_selector_v1",
+  "passed": true,
+  "families": [
+    {
+      "familyId": "map_panel_rpg",
+      "seedIds": [
+        "seed_alpha",
+        "seed_beta",
+        "seed_gamma"
+      ],
+      "rowIds": [
+        "matrix-row-map-panel-rpg-seed-alpha",
+        "matrix-row-map-panel-rpg-seed-beta",
+        "matrix-row-map-panel-rpg-seed-gamma"
+      ]
+    },
+    {
+      "familyId": "survival_sandbox",
+      "seedIds": [
+        "seed_alpha",
+        "seed_beta",
+        "seed_gamma"
+      ],
+      "rowIds": [
+        "matrix-row-survival-sandbox-seed-alpha",
+        "matrix-row-survival-sandbox-seed-beta",
+        "matrix-row-survival-sandbox-seed-gamma"
+      ]
+    },
+    {
+      "familyId": "first_person_grid_dungeon",
+      "seedIds": [
+        "seed_alpha",
+        "seed_beta",
+        "seed_gamma"
+      ],
+      "rowIds": [
+        "matrix-row-first-person-grid-dungeon-seed-alpha",
+        "matrix-row-first-person-grid-dungeon-seed-beta",
+        "matrix-row-first-person-grid-dungeon-seed-gamma"
+      ]
+    }
+  ]
+}

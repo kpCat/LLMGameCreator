@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "unity_alpha_interactive_campaign_source_manifest_v1",
+  "goalId": "goal_071_unity_alpha_interactive_campaign_player",
+  "productSmokeRoute": "goal-071-unity-alpha-interactive-campaign-player",
+  "manualGate": "unity_alpha_interactive_campaign_player_verification",
+  "accepted": false,
+  "goal070AcceptedByUserHandoff": true,
+  "goal070TimelineEvidenceConsumed": true,
+  "goal070UnityProofConsumed": true,
+  "rowCount": 9,
+  "familyCount": 3,
+  "seedCount": 3,
+  "familyIds": [
+    "map_panel_rpg",
+    "survival_sandbox",
+    "first_person_grid_dungeon"
+  ],
+  "seedIds": [
+    "seed_alpha",
+    "seed_beta",
+    "seed_gamma"
+  ],
+  "preflightGates": [
+    {
+      "gateId": "integrated_campaign_timeline_simulation_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 071 preflight handoff"
+    },
+    {
+      "gateId": "unity_alpha_interactive_campaign_player_verification",
+      "status": "required",
+      "provenanceKind": "current_goal_manual_gate",
+      "evidenceRef": ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/unity-alpha-interactive-campaign-player-report.md"
+    }
+  ],
+  "sourceArtifactRefs": [
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "report",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/integrated-campaign-timeline-simulation-matrix-report.md",
+      "artifactHash": "46d0edd6c45a67d325608047affa06e0a7834e8340b88727ef3e7aa031667e8f",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "save_load_replay_audit",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/save-load-replay-audit.json",
+      "artifactHash": "b8401741ab14c4c9ab3c10373a5975854096ae58f1edc5ca1402d7aad509b7ad",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "source_manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/source-manifest.json",
+      "artifactHash": "26b4978701cdcfd6cc966319c8f4d2c9deb7c90e3e44eeb2c3fa0a6faa2ddd11",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "accepted",
+        "rowCount",
+        "preflightGates"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "timeline_matrix_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/timeline-matrix-summary.json",
+      "artifactHash": "7c5d3ea012b2a1ea30a043fca7dc6408af89007f5f1db8d91a02f348fd40bdd1",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rowCount",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "unity_command_plan",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/unity-command-plan.json",
+      "artifactHash": "d028a17c195a20e0258f0d0af4beb31ba3357875bdaa5ffdb1acd6799a1e7c4f",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows",
+        "expectedPlayerMarkers"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal070",
+      "artifactFamily": "unity_player_proof_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/unity-player-proof-summary.json",
+      "artifactHash": "6ad58e4e9670c6470b55c6bf38be146113c75ec06a8c4a6560e3a40e8ebc1ad9",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "playerExecuted",
+        "provenRowCount",
+        "matchedMarkers"
+      ],
+      "diagnostics": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "goal071.preflight.goal070_handoff_recorded",
+      "target": "integrated_campaign_timeline_simulation_matrix_verification",
+      "message": "Goal 070 is recorded as accepted by user handoff before Goal 071."
+    },
+    {
+      "severity": "info",
+      "code": "goal071.source.loaded",
+      "target": "Goal070",
+      "message": "Goal 071 source facts were loaded from repository-local Goal 070 compact evidence."
+    }
+  ]
+}

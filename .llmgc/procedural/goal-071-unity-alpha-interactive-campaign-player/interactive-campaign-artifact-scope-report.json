@@ -1,0 +1,7 @@
+{
+  "scenario": "goal-071-unity-alpha-interactive-campaign-player",
+  "status": "produced",
+  "allowedArtifactRoot": ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player",
+  "gate": "unity_alpha_interactive_campaign_player_verification",
+  "accepted": false
+}

@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "unity_alpha_interactive_campaign_invalid_diagnostics_matrix_v1",
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "broad_unity_mutation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.broad_unity_mutation_claim",
+          "target": "broad_unity_mutation_claim",
+          "message": "Broad Unity restructuring is forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "command_plan_skips_required_state_transition",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.command_plan_skips_required_state_transition",
+          "target": "command_plan_skips_required_state_transition",
+          "message": "Each command plan row must expose state-changing timeline steps."
+        }
+      ]
+    },
+    {
+      "scenarioId": "command_plan_unknown_row",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.command_plan_unknown_row",
+          "target": "command_plan_unknown_row",
+          "message": "Unity command plan rows must reference known interactive campaign rows."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_row_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.duplicate_row_id",
+          "target": "duplicate_row_id",
+          "message": "Interactive campaign row ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_family_seed_row_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.fake_family_seed_row_id",
+          "target": "fake_family_seed_row_id",
+          "message": "Family, seed and row ids must come from Goal 070 evidence."
+        }
+      ]
+    },
+    {
+      "scenarioId": "final_prose_leakage",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.final_prose_leakage",
+          "target": "final_prose_leakage",
+          "message": "Final prose generation is forbidden in interactive campaign evidence."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal070_source",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.missing_goal070_source",
+          "target": "missing_goal070_source",
+          "message": "Goal 070 integrated campaign timeline source evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_hud_contract",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.missing_hud_contract",
+          "target": "missing_hud_contract",
+          "message": "Manual review/HUD contract is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "nondeterministic_order",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.nondeterministic_order",
+          "target": "nondeterministic_order",
+          "message": "Interactive output order must be deterministic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_llm_rag_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.provider_llm_rag_claim",
+          "target": "provider_llm_rag_claim",
+          "message": "Provider, LLM and RAG claims are forbidden in Goal 071 proof."
+        }
+      ]
+    },
+    {
+      "scenarioId": "replay_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.replay_mismatch",
+          "target": "replay_mismatch",
+          "message": "Replay hashes must be deterministic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_gamepackage_schema_mutation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.runtime_gamepackage_schema_mutation_claim",
+          "target": "runtime_gamepackage_schema_mutation_claim",
+          "message": "Runtime and public GamePackage schema mutation claims are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "state_hash_unchanged",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.state_hash_unchanged",
+          "target": "state_hash_unchanged",
+          "message": "Interactive action state hashes must change when deltaApplied=true."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_marker_missing",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.unity_marker_missing",
+          "target": "unity_marker_missing",
+          "message": "Unity player proof must match all required interactive markers."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsafe_path",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal071.invalid.unsafe_path",
+          "target": "unsafe_path",
+          "message": "Absolute, rooted, protocol and parent-relative paths are rejected."
+        }
+      ]
+    }
+  ]
+}

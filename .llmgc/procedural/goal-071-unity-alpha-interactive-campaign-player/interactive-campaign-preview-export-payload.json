@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "unity_alpha_interactive_campaign_preview_export_payload_v1",
+  "accepted": false,
+  "passed": true,
+  "rowCount": 9,
+  "rows": [
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "selectedActionId": "action/goal071/first-person-grid-dungeon/seed-alpha/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "52d721d7501a36ca27dd6ede5350cb40d2c3fc9be8b76375f3b9210cf30525ee",
+      "previewMarkers": [
+        "interactive_campaign_family=first_person_grid_dungeon",
+        "interactive_campaign_seed=seed_alpha",
+        "interactive_campaign_selected_row=matrix-row-first-person-grid-dungeon-seed-alpha",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "selectedActionId": "action/goal071/first-person-grid-dungeon/seed-beta/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "02ebe4b184f9ebb65f1a313a8ae44f3ae6a2e2543246da3a48a2ab774f55068a",
+      "previewMarkers": [
+        "interactive_campaign_family=first_person_grid_dungeon",
+        "interactive_campaign_seed=seed_beta",
+        "interactive_campaign_selected_row=matrix-row-first-person-grid-dungeon-seed-beta",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "selectedActionId": "action/goal071/first-person-grid-dungeon/seed-gamma/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "b7d87fcf6ba78e3ecc1f2529229ab044e9a91087b5407cb5f9942d435f99a6ee",
+      "previewMarkers": [
+        "interactive_campaign_family=first_person_grid_dungeon",
+        "interactive_campaign_seed=seed_gamma",
+        "interactive_campaign_selected_row=matrix-row-first-person-grid-dungeon-seed-gamma",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "selectedActionId": "action/goal071/map-panel-rpg/seed-alpha/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "f5477aafd89811443b5be9dd4180428771279524eb8f79d6494b2eb980167707",
+      "previewMarkers": [
+        "interactive_campaign_family=map_panel_rpg",
+        "interactive_campaign_seed=seed_alpha",
+        "interactive_campaign_selected_row=matrix-row-map-panel-rpg-seed-alpha",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "selectedActionId": "action/goal071/map-panel-rpg/seed-beta/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "4f344d54ee2231be02a48d8e0e8bb2772c2e2ae2b32b13ee4179c8bd4fe8babd",
+      "previewMarkers": [
+        "interactive_campaign_family=map_panel_rpg",
+        "interactive_campaign_seed=seed_beta",
+        "interactive_campaign_selected_row=matrix-row-map-panel-rpg-seed-beta",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "selectedActionId": "action/goal071/map-panel-rpg/seed-gamma/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "a7f4d05428ec578dc81ec509389f7d815f9b1ce3d8b2c5e81ac0aaaf9e497315",
+      "previewMarkers": [
+        "interactive_campaign_family=map_panel_rpg",
+        "interactive_campaign_seed=seed_gamma",
+        "interactive_campaign_selected_row=matrix-row-map-panel-rpg-seed-gamma",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "selectedActionId": "action/goal071/survival-sandbox/seed-alpha/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "153e94abcf19c8810a866bd5f413b0d4e6334886552f87c7c446450972143d42",
+      "previewMarkers": [
+        "interactive_campaign_family=survival_sandbox",
+        "interactive_campaign_seed=seed_alpha",
+        "interactive_campaign_selected_row=matrix-row-survival-sandbox-seed-alpha",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "selectedActionId": "action/goal071/survival-sandbox/seed-beta/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "2ec0716f8471873ff0175e449d55dd5f12dc0d9bf863f80be811dcf75bc2e15b",
+      "previewMarkers": [
+        "interactive_campaign_family=survival_sandbox",
+        "interactive_campaign_seed=seed_beta",
+        "interactive_campaign_selected_row=matrix-row-survival-sandbox-seed-beta",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "selectedActionId": "action/goal071/survival-sandbox/seed-gamma/step-01",
+      "selectedStepId": "tick-01-dawn-night-weather-crisis-pressure",
+      "finalStateHash": "700c527977a393e73ce495deafa9ff639170f843a49f416cd63bf56f81c946a1",
+      "previewMarkers": [
+        "interactive_campaign_family=survival_sandbox",
+        "interactive_campaign_seed=seed_gamma",
+        "interactive_campaign_selected_row=matrix-row-survival-sandbox-seed-gamma",
+        "interactive_campaign_step=tick-01-dawn-night-weather-crisis-pressure"
+      ]
+    }
+  ]
+}

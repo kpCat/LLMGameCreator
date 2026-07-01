@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "unity_alpha_interactive_campaign_save_load_replay_proof_v1",
+  "passed": true,
+  "rowCount": 9,
+  "saveLoadPassedRowCount": 9,
+  "replayPassedRowCount": 9,
+  "rows": [
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "saveCheckpointHash": "b0c1e0698e2f109724118f008d197b00c72f473aab9631cbb3fd1af4081e7365",
+      "loadedCheckpointHash": "b0c1e0698e2f109724118f008d197b00c72f473aab9631cbb3fd1af4081e7365",
+      "expectedReplayHash": "597f2c473de6b98bf91444f47377069c030e0767cc9eca9a664ba98830ddce52",
+      "replayHash": "597f2c473de6b98bf91444f47377069c030e0767cc9eca9a664ba98830ddce52",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "saveCheckpointHash": "70544b427161130e6e416550ff636d2f323ea6e2720ab81cb0eaddfa641fc0c3",
+      "loadedCheckpointHash": "70544b427161130e6e416550ff636d2f323ea6e2720ab81cb0eaddfa641fc0c3",
+      "expectedReplayHash": "1964ed7687f98ea734232aa283ebed72f389bb5508192d837e48920b9696ff74",
+      "replayHash": "1964ed7687f98ea734232aa283ebed72f389bb5508192d837e48920b9696ff74",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "saveCheckpointHash": "179c10e05f2dd10b1a25cb3c055ccd2fd352f1d427dd55ca47fce48662e07b2e",
+      "loadedCheckpointHash": "179c10e05f2dd10b1a25cb3c055ccd2fd352f1d427dd55ca47fce48662e07b2e",
+      "expectedReplayHash": "1710438a087fbfbf6b9d1af488c74d205728746287304461386e2990a44136f7",
+      "replayHash": "1710438a087fbfbf6b9d1af488c74d205728746287304461386e2990a44136f7",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "saveCheckpointHash": "6adb4c902491ed6f7cc38ebbfc2c600ca2822877c7f96a74bfca86037fa41625",
+      "loadedCheckpointHash": "6adb4c902491ed6f7cc38ebbfc2c600ca2822877c7f96a74bfca86037fa41625",
+      "expectedReplayHash": "d2e1347bac93c5620d793732e2256f1df5cb52aaa2ec3389782e32302eb999ec",
+      "replayHash": "d2e1347bac93c5620d793732e2256f1df5cb52aaa2ec3389782e32302eb999ec",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "saveCheckpointHash": "41fd88a8a12e615d837ca00b2ba2f06bf6ad1e86e9ec5f0f2dc7912cdd3a61fc",
+      "loadedCheckpointHash": "41fd88a8a12e615d837ca00b2ba2f06bf6ad1e86e9ec5f0f2dc7912cdd3a61fc",
+      "expectedReplayHash": "d1b2316e427996d592b336b7a0aa8a8996885c3e2760f3f357dab58d786636b5",
+      "replayHash": "d1b2316e427996d592b336b7a0aa8a8996885c3e2760f3f357dab58d786636b5",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "saveCheckpointHash": "47ee6fefa8673ab78c24801158f8e3e21b629e1c6a149972b15b5126420c7bf8",
+      "loadedCheckpointHash": "47ee6fefa8673ab78c24801158f8e3e21b629e1c6a149972b15b5126420c7bf8",
+      "expectedReplayHash": "ba1b8f67818d7d1fa8708c0395a2085f09b372b36e66395bf047d6094f03bf22",
+      "replayHash": "ba1b8f67818d7d1fa8708c0395a2085f09b372b36e66395bf047d6094f03bf22",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "saveCheckpointHash": "eed517b8ddd8a60b3b919630950f8516ade9301683b985fd4d69e6fcd4733e73",
+      "loadedCheckpointHash": "eed517b8ddd8a60b3b919630950f8516ade9301683b985fd4d69e6fcd4733e73",
+      "expectedReplayHash": "df8c48eff063bc0c1bfc3023af6d84381d7e53eaebee73ff298745056bd6b78e",
+      "replayHash": "df8c48eff063bc0c1bfc3023af6d84381d7e53eaebee73ff298745056bd6b78e",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "saveCheckpointHash": "6242b9762348dc5dd16747070e9ad3e6333426ef86496ae96461d598bfe14a28",
+      "loadedCheckpointHash": "6242b9762348dc5dd16747070e9ad3e6333426ef86496ae96461d598bfe14a28",
+      "expectedReplayHash": "591d9dc5971bb9eb4ed4930d845c3272a9f17b351dc64f9436ddb60490bf2fc4",
+      "replayHash": "591d9dc5971bb9eb4ed4930d845c3272a9f17b351dc64f9436ddb60490bf2fc4",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "saveCheckpointHash": "d875dac087b871b2711d2390dc93c4e582345fa8b5b836348bf9f3e8ec47967d",
+      "loadedCheckpointHash": "d875dac087b871b2711d2390dc93c4e582345fa8b5b836348bf9f3e8ec47967d",
+      "expectedReplayHash": "701fc3bf16e02d2bc1f4e3155a4af6d51e0d35fee390b36ea168b546281e07e1",
+      "replayHash": "701fc3bf16e02d2bc1f4e3155a4af6d51e0d35fee390b36ea168b546281e07e1",
+      "saveLoadRoundtripPassed": true,
+      "replayDeterminismPassed": true
+    }
+  ]
+}

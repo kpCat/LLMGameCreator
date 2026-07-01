@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-01T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 070 integrated campaign timeline simulation matrix produced for review",
-    "gate_status":  "integrated_campaign_timeline_simulation_matrix_verification",
+    "current_phase_title":  "Goal 071 unity alpha interactive campaign player produced for review",
+    "gate_status":  "unity_alpha_interactive_campaign_player_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_070_integrated_campaign_timeline_simulation_matrix",
-    "active_manual_gate":  "Goal 070 Integrated Campaign Timeline Simulation Matrix is produced for review: integrated_campaign_timeline_simulation_matrix_verification required. Goal 069 is accepted by user handoff before Goal 070. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 070 Integrated Campaign Timeline Simulation Matrix evidence while keeping integrated_campaign_timeline_simulation_matrix_verification required until user acceptance.",
-    "recommended_next_decision":  "Review Goal 070 produced-for-review artifacts and keep integrated_campaign_timeline_simulation_matrix_verification required until user acceptance.",
+    "last_completed_product_slice_id":  "goal_071_unity_alpha_interactive_campaign_player",
+    "active_manual_gate":  "Goal 071 Unity Alpha Interactive Campaign Player is produced for review: unity_alpha_interactive_campaign_player_verification required, accepted=false.",
+    "current_user_action":  "Review Goal 071 Unity Alpha Interactive Campaign Player evidence; do not mark Goal 071 passed until user acceptance.",
+    "recommended_next_decision":  "Review Goal 071 Unity Alpha Interactive Campaign Player evidence at unity_alpha_interactive_campaign_player_verification; do not start Goal 072 before acceptance.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                     "next_sequence":  [
-                                                          "integrated_campaign_timeline_simulation_matrix_verification"
+                                                          "unity_alpha_interactive_campaign_player_verification"
                                                       ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -87,7 +87,8 @@
                            "goal_067_manual_gate":  "programmatic_narrative_quest_dialogue_event_matrix_verification",
                            "goal_068_manual_gate":  "combat_magic_ability_boss_encounter_matrix_verification",
                            "goal_069_manual_gate":  "world_event_weather_daynight_crisis_matrix_verification",
-                           "goal_070_manual_gate":  "integrated_campaign_timeline_simulation_matrix_verification"
+                           "goal_070_manual_gate":  "integrated_campaign_timeline_simulation_matrix_verification",
+                           "goal_071_manual_gate":  "unity_alpha_interactive_campaign_player_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -108,15 +109,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                        "slice_id":  "goal_070_integrated_campaign_timeline_simulation_matrix",
-                                        "title":  "Integrated Campaign Timeline Simulation Matrix",
+                                        "slice_id":  "goal_071_unity_alpha_interactive_campaign_player",
+                                        "title":  "Unity Alpha Interactive Campaign Player",
                                         "status":  "produced_for_review",
-                                          "summary":  "Goal 070 records Goal 069 as accepted by user handoff, consumes Goal 060/061/062/063/064/065/066/067/068/069 evidence, and produces integrated campaign timeline simulation matrix evidence for review with accepted=false and integrated_campaign_timeline_simulation_matrix_verification required until user review.",
-                                          "scenario_id":  "goal-070-integrated-campaign-timeline-simulation-matrix",
+                                          "summary":  "Goal 071 records Goal 070 as accepted by user handoff, consumes Goal 070 integrated campaign timeline evidence, and produced Unity Alpha interactive campaign player evidence while keeping unity_alpha_interactive_campaign_player_verification required and accepted=false.",
+                                          "scenario_id":  "goal-071-unity-alpha-interactive-campaign-player",
                                           "checks":  [
-                                                        "Goal 070 implementationStatus=GREEN, accepted=false, rowCount=9, stateChangingRowCount=9, cascadeCount=27 and arbitrationCount=9.",
-                                                        "Unity/player proof passed with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all campaign_timeline markers matched.",
-                                                        "Goal 070 reportHash=5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89; integrated_campaign_timeline_simulation_matrix_verification remains required until user review."
+                                                        "Goal 071 implementationStatus=GREEN, accepted=false, rowCount=9, stateChangingRowCount=9, actionCount=63 and transitionCount=63.",
+                                                        "Unity/player proof passed with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all interactive_campaign markers matched.",
+                                                        "Goal 071 reportHash=ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02; unity_alpha_interactive_campaign_player_verification remains required until user review."
                                                     ]
                                       },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -376,8 +377,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "review_goal_070_integrated_campaign_timeline_simulation_matrix",
-                                          "integrated_campaign_timeline_simulation_matrix_verification"
+                                          "review_goal_071_unity_alpha_interactive_campaign_player",
+                                          "unity_alpha_interactive_campaign_player_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -398,12 +399,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "integrated_campaign_timeline_simulation_matrix_verification",
-    "recommended_next_work_item_title":  "Review Goal 070 Integrated Campaign Timeline Simulation Matrix evidence while keeping the manual gate required.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md",
+    "recommended_next_work_item":  "unity_alpha_interactive_campaign_player_verification",
+    "recommended_next_work_item_title":  "Review Goal 071 Unity Alpha Interactive Campaign Player evidence while keeping the manual gate required.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md",
     "candidate_product_vertical_slices":  [
-                                               "Review Goal 070 Integrated Campaign Timeline Simulation Matrix at integrated_campaign_timeline_simulation_matrix_verification",
-                                               "Keep Goal 070 gate required until user review accepts it; do not start the next goal"
+                                               "Review Goal 071 Unity Alpha Interactive Campaign Player at unity_alpha_interactive_campaign_player_verification",
+                                               "Keep Goal 071 gate required until user review accepts it; do not mark the gate passed"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                    "AGENTS.md",
@@ -1563,7 +1564,7 @@
                                                                     "next_action":  "goal_070_integrated_campaign_timeline_simulation_matrix_produced_for_review"
                                                                 },
     "integrated_campaign_timeline_simulation_matrix_verification":  {
-                                                                    "status":  "produced_for_review",
+                                                                    "status":  "passed_by_user_handoff_before_goal_071",
                                                                     "evidence_source":  "goal_070_integrated_campaign_timeline_simulation_matrix",
                                                                     "observed_result":  [
                                                                                             "Design/IntegratedCampaignTimelineSimulationMatrix defines a BCL-only Application-layer source loader, projector, validator, evidence writer, Unity proof runner and hash helper.",
@@ -1576,7 +1577,23 @@
                                                                                             "Goal 070 artifacts under .llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix include source manifest, timeline matrix summary, 9 row files, cross-system cascade ledger, conflict arbitration ledger, save-load replay audit, variance metrics, Unity command plan, Unity player proof, preview/export timeline payload, invalid diagnostics matrix, artifact-scope report and compact report.",
                                                                                             "Final report implementationStatus=GREEN, accepted=false, manualGate=integrated_campaign_timeline_simulation_matrix_verification and reportHash=5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89."
                                                                                         ],
-                                                                    "next_action":  "review_goal_070_integrated_campaign_timeline_simulation_matrix_until_integrated_campaign_timeline_simulation_matrix_verification"
+                                                                    "next_action":  "goal_071_unity_alpha_interactive_campaign_player_produced_for_review"
+                                                                },
+    "unity_alpha_interactive_campaign_player_verification":  {
+                                                                    "status":  "required",
+                                                                    "accepted":  false,
+                                                                    "evidence_source":  "goal_071_unity_alpha_interactive_campaign_player",
+                                                                    "observed_result":  [
+                                                                                            "Design/UnityAlphaInteractiveCampaignPlayer defines a BCL-only Application-layer source loader, builder, validator, evidence writer, Unity proof runner and hash helper.",
+                                                                                            "Goal 071 consumes Goal 070 integrated campaign timeline evidence after recording integrated_campaign_timeline_simulation_matrix_verification passed by user handoff before Goal 071.",
+                                                                                            "The produced interactive campaign matrix contains 9 selectable family/seed rows across map_panel_rpg, survival_sandbox and first_person_grid_dungeon with 3 deterministic seeds and 9 state-changing interactive rows.",
+                                                                                            "The command plan records 63 scripted input/action transitions and 63 state-transition ledger entries with changed state hashes.",
+                                                                                            "Save/load and deterministic replay pass for every row; the HUD contract exposes family, seed, row, input/action, step, state-before, state-after, delta and gate fields.",
+                                                                                            "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required interactive_campaign markers matched.",
+                                                                                            "Goal 071 artifacts under .llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player include source manifest, row matrix, family/seed selector, command plan, input script, state-transition ledger, save-load replay proof, HUD contract, Unity player proof, preview/export payload, invalid diagnostics matrix, artifact-scope report and compact report.",
+                                                                                            "Final report implementationStatus=GREEN, accepted=false, manualGate=unity_alpha_interactive_campaign_player_verification and reportHash=ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02."
+                                                                                        ],
+                                                                    "next_action":  "review_goal_071_unity_alpha_interactive_campaign_player"
                                                                 },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",
