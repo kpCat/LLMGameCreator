@@ -336,7 +336,43 @@ public sealed class PackageAssemblyCombatProgressionAcceptanceService
                 Artifact("goal028/real/06-status", "status_pack_v1", new { statuses = new object[] { new { id = "bleeding", name = "Bleeding", kind = "wound", duration_mode = "turns" } } }),
                 Artifact("goal028/real/07-ability", "ability_pack_v1", new { abilities = new object[] { new { id = "quick_strike", name = "Quick Strike", kind = "active", resource_id = "resource/stamina", costs = new object[] { new { kind = "resource", id = "resource/stamina", amount = 1 } }, effects = new object[] { new { type = "add_status", status_id = "status/bleeding", amount = 1 } }, tags = new[] { "combat" } } } }),
                 Artifact("goal028/real/08-progression", "progression_pack_v1", new { progressions = new object[] { new { id = "combat_training", name = "Combat Training", kind = "skill_rank", stages = new object[] { new { id = "novice", name = "Novice", required_amount = 0, outputs = new object[] { new { kind = "resource", id = "resource/stamina", amount = 1 } } } } } } }),
-                Artifact("goal028/real/09-encounter", "encounter_pack_v1", new { encounters = new object[] { new { id = "wolf_raider_ambush", title = "Wolf Raider Ambush", kind = "combat", loot_table_id = "loot/frontier/encounter/reward", participants = new object[] { new { id = "enemy/wolf_raider", name = "Wolf Raider", kind = "enemy", entity_prototype_id = "entity/wolf/raider", team = "enemy", stats = new object[] { new { kind = "stat", id = "stat/strength", amount = 2 } }, resources = new object[] { new { kind = "resource", id = "resource/stamina", amount = 5 } }, abilities = new[] { "ability/quick/strike" } } }, actions = new object[] { new { id = "action/quick_strike", name = "Quick Strike", ability_id = "ability/quick/strike", outputs = new object[] { new { kind = "status", id = "status/bleeding", amount = 1 } } } } } } })
+                Artifact("goal028/real/09-encounter", "encounter_pack_v1", new
+                {
+                    encounters = new object[]
+                    {
+                        new
+                        {
+                            id = "wolf_raider_ambush",
+                            title = "Wolf Raider Ambush",
+                            kind = "combat",
+                            loot_table_id = "loot/frontier/encounter/reward",
+                            participants = new object[]
+                            {
+                                new
+                                {
+                                    id = "enemy/wolf_raider",
+                                    name = "Wolf Raider",
+                                    kind = "enemy",
+                                    entity_prototype_id = "entity/wolf/raider",
+                                    team = "enemy",
+                                    stats = new object[] { new { kind = "stat", id = "stat/strength", amount = 2 } },
+                                    resources = new object[] { new { kind = "resource", id = "resource/stamina", amount = 5 } },
+                                    abilities = new[] { "ability/quick/strike" }
+                                }
+                            },
+                            actions = new object[]
+                            {
+                                new
+                                {
+                                    id = "action/quick_strike",
+                                    name = "Quick Strike",
+                                    ability_id = "ability/quick/strike",
+                                    outputs = new object[] { new { kind = "status", id = "status/bleeding", amount = 1 } }
+                                }
+                            }
+                        }
+                    }
+                })
             ]
         };
 
@@ -357,7 +393,43 @@ public sealed class PackageAssemblyCombatProgressionAcceptanceService
                 Artifact("goal028/synthetic/06-status", "status_pack_v1", new { statuses = new object[] { new { id = "guarded", name = "Guarded", kind = "stance", duration_mode = "encounter" } } }),
                 Artifact("goal028/synthetic/07-ability", "ability_pack_v1", new { abilities = new object[] { new { id = "focus_shot", name = "Focus Shot", kind = "active", resource_id = "resource/focus", costs = new object[] { new { kind = "resource", id = "resource/focus", amount = 1 } }, effects = new object[] { new { type = "add_status", status_id = "status/guarded", amount = 1 } }, tags = new[] { "training" } } } }),
                 Artifact("goal028/synthetic/08-progression", "progression_pack_v1", new { progressions = new object[] { new { id = "precision_drill", name = "Precision Drill", kind = "skill_rank", stages = new object[] { new { id = "steady", name = "Steady", required_amount = 1, outputs = new object[] { new { kind = "status", id = "status/guarded", amount = 1 } } } } } } }),
-                Artifact("goal028/synthetic/09-encounter", "encounter_pack_v1", new { encounters = new object[] { new { id = "precision_drill_test", title = "Precision Drill Test", kind = "training", loot_table_id = "loot/training/reward", participants = new object[] { new { id = "target/training_dummy", name = "Training Dummy", kind = "target", entity_prototype_id = "entity/training/dummy", team = "neutral", stats = new object[] { new { kind = "stat", id = "stat/precision", amount = 1 } }, resources = new object[] { new { kind = "resource", id = "resource/focus", amount = 3 } }, abilities = new[] { "ability/focus/shot" } } }, actions = new object[] { new { id = "action/focus_shot", name = "Focus Shot", ability_id = "ability/focus/shot", outputs = new object[] { new { kind = "status", id = "status/guarded", amount = 1 } } } } } } })
+                Artifact("goal028/synthetic/09-encounter", "encounter_pack_v1", new
+                {
+                    encounters = new object[]
+                    {
+                        new
+                        {
+                            id = "precision_drill_test",
+                            title = "Precision Drill Test",
+                            kind = "training",
+                            loot_table_id = "loot/training/reward",
+                            participants = new object[]
+                            {
+                                new
+                                {
+                                    id = "target/training_dummy",
+                                    name = "Training Dummy",
+                                    kind = "target",
+                                    entity_prototype_id = "entity/training/dummy",
+                                    team = "neutral",
+                                    stats = new object[] { new { kind = "stat", id = "stat/precision", amount = 1 } },
+                                    resources = new object[] { new { kind = "resource", id = "resource/focus", amount = 3 } },
+                                    abilities = new[] { "ability/focus/shot" }
+                                }
+                            },
+                            actions = new object[]
+                            {
+                                new
+                                {
+                                    id = "action/focus_shot",
+                                    name = "Focus Shot",
+                                    ability_id = "ability/focus/shot",
+                                    outputs = new object[] { new { kind = "status", id = "status/guarded", amount = 1 } }
+                                }
+                            }
+                        }
+                    }
+                })
             ]
         };
 

@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 072 produced-for-review handoff
+Updated by: Goal 073 source-format P0 readability repair handoff
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -431,6 +431,19 @@ p3Count=0
 inventoryHash=7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1
 debtRegisterHash=b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33
 ```
+
+Goal 073 produced for review:
+
+```text
+source_format_p0_readability_repair_verification required
+accepted=false
+implementationStatus=GREEN
+p0BeforeCount=8
+p0AfterCount=0
+repairedFileCount=8
+```
+
+Goal 073 repaired the Goal 072 P0 blocker `GQ-P0-SOURCE-EXTREME-LINE-LENGTH` with bounded source-format-only edits. Goal 072 remains historical produced-for-review evidence with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; do not mark Goal 072 passed from this repair handoff.
 
 ## Current Phase
 
@@ -1988,16 +2001,20 @@ The pivot is not a restart. It changes what future slices are allowed to optimiz
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
 3. `docs/CURRENT_GENERATOR_STATE.md`
-4. `docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md`
-5. `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
-6. `docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
-7. `docs/agent-tasks/GOAL_072_LAUNCHER.txt`
-8. `docs/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER_SPEC.md`
-9. `docs/EXTERNAL_SCOUTING_GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
-10. `docs/agent-tasks/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
-11. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
-12. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
-13. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
+4. `docs/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR_SPEC.md`
+5. `docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
+6. `docs/agent-tasks/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
+7. `docs/agent-tasks/GOAL_073_LAUNCHER.txt`
+8. `docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md`
+9. `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+10. `docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+11. `docs/agent-tasks/GOAL_072_LAUNCHER.txt`
+12. `docs/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER_SPEC.md`
+13. `docs/EXTERNAL_SCOUTING_GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
+14. `docs/agent-tasks/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
+15. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
+16. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
+17. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
 
 Do not read old root `README_APPLY_*` files or old `docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md` files as current planning authority.
 

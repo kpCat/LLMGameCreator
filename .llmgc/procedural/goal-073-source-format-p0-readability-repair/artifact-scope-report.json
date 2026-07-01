@@ -1,0 +1,207 @@
+{
+    "schemaVersion":  "artifact_scope_report_v1",
+    "scenario":  "goal-073-source-format-p0-readability-repair",
+    "accepted":  true,
+    "policyPath":  ".devflow/artifact-scope/artifact-scope-policy.json",
+    "baselineRef":  "",
+    "failOnTrackedIgnored":  false,
+    "changedPathCount":  19,
+    "allowedCount":  19,
+    "warningCount":  0,
+    "violationCount":  0,
+    "diagnostics":  [
+
+                    ],
+    "changedPaths":  [
+                         {
+                             "path":  ".devflow/artifact-scope/artifact-scope-policy.json",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CONTEXT_INDEX.md",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.json",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/CURRENT_GENERATOR_STATE.md",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryCatalog.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs",
+                             "git_status":  "modified",
+                             "tracked":  true,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  ".llmgc/procedural/goal-073-source-format-p0-readability-repair/",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_artifact",
+                             "code":  "artifact_scope.allowed.prefix",
+                             "message":  "Path prefix is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR_SPEC.md",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_current_goal_change",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/GOAL_073_LAUNCHER.txt",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_task_doc",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         },
+                         {
+                             "path":  "docs/agent-tasks/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md",
+                             "git_status":  "??",
+                             "tracked":  false,
+                             "accepted":  true,
+                             "severity":  "info",
+                             "category":  "allowed_task_doc",
+                             "code":  "artifact_scope.allowed.exact",
+                             "message":  "Path is explicitly allowed."
+                         }
+                     ]
+}

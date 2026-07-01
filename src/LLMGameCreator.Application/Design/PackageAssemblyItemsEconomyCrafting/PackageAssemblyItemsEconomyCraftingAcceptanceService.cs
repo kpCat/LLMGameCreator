@@ -354,11 +354,53 @@ public sealed class PackageAssemblyItemsEconomyCraftingAcceptanceService
             Artifacts =
             [
                 Artifact("goal027/real/01-profile", "game_profile_v1", new { game = new { title = "Goal 027 Caravan Economy", genre = "trade_caravan", description = "Bounded item, economy and crafting assembly proof.", core_loop = new[] { "trade", "craft", "carry_goods" } }, source_context = new { capability_selection_id = input.SelectionId } }),
-                Artifact("goal027/real/02-items", "item_pack_v1", new { items = new object[] { new { id = "caravan_toolkit", name = "Caravan Toolkit", description = "Repair and crafting tools.", kind = "tool", max_stack = 1, value = 18, tags = new[] { "tool", "crafting" } }, new { id = "spice_crate", name = "Spice Crate", description = "Trade cargo.", kind = "trade_good", max_stack = 6, value = 25, tags = new[] { "cargo" } } }, source_context = new { capability_selection_id = input.SelectionId } }),
+                Artifact("goal027/real/02-items", "item_pack_v1", new
+                {
+                    items = new object[]
+                    {
+                        new { id = "caravan_toolkit", name = "Caravan Toolkit", description = "Repair and crafting tools.", kind = "tool", max_stack = 1, value = 18, tags = new[] { "tool", "crafting" } },
+                        new { id = "spice_crate", name = "Spice Crate", description = "Trade cargo.", kind = "trade_good", max_stack = 6, value = 25, tags = new[] { "cargo" } }
+                    },
+                    source_context = new { capability_selection_id = input.SelectionId }
+                }),
                 Artifact("goal027/real/03-resources", "resource_pack_v1", new { resources = new object[] { new { id = "caravan_fiber", name = "Caravan Fiber", kind = "material", default_value = 0, min_value = 0, max_value = 50, tags = new[] { "crafting" } } }, source_context = new { capability_selection_id = input.SelectionId } }),
-                Artifact("goal027/real/04-recipes", "recipe_pack_v1", new { recipes = new object[] { new { id = "repair_trade_crate", name = "Repair Trade Crate", inputs = new object[] { new { kind = "item", id = "item/caravan/toolkit", amount = 1 }, new { kind = "resource", id = "resource/caravan/fiber", amount = 2 } }, outputs = new object[] { new { kind = "item", id = "item/spice/crate", amount = 1 } }, duration = 2, success_chance = 1 } }, source_context = new { capability_selection_id = input.SelectionId } }),
+                Artifact("goal027/real/04-recipes", "recipe_pack_v1", new
+                {
+                    recipes = new object[]
+                    {
+                        new
+                        {
+                            id = "repair_trade_crate",
+                            name = "Repair Trade Crate",
+                            inputs = new object[]
+                            {
+                                new { kind = "item", id = "item/caravan/toolkit", amount = 1 },
+                                new { kind = "resource", id = "resource/caravan/fiber", amount = 2 }
+                            },
+                            outputs = new object[] { new { kind = "item", id = "item/spice/crate", amount = 1 } },
+                            duration = 2,
+                            success_chance = 1
+                        }
+                    },
+                    source_context = new { capability_selection_id = input.SelectionId }
+                }),
                 Artifact("goal027/real/05-loot", "loot_pack_v1", new { loot_tables = new object[] { new { id = "caravan_vendor_stock", name = "Caravan Vendor Stock", entries = new object[] { new { id = "toolkit_stock", outputs = new object[] { new { kind = "item", id = "item/caravan/toolkit", amount = 1 } }, weight = 1, min_count = 1, max_count = 1 } } } }, source_context = new { capability_selection_id = input.SelectionId } }),
-                Artifact("goal027/real/06-transactions", "transaction_pack_v1", new { transactions = new object[] { new { id = "buy_caravan_toolkit", name = "Buy Caravan Toolkit", vendor_id = "npc/caravan_vendor", stock_loot_table_id = "loot/caravan/vendor/stock", costs = new object[] { new { kind = "resource", id = "resource/caravan/fiber", amount = 3 } }, outputs = new object[] { new { kind = "item", id = "item/caravan/toolkit", amount = 1 } } } }, source_context = new { capability_selection_id = input.SelectionId } }),
+                Artifact("goal027/real/06-transactions", "transaction_pack_v1", new
+                {
+                    transactions = new object[]
+                    {
+                        new
+                        {
+                            id = "buy_caravan_toolkit",
+                            name = "Buy Caravan Toolkit",
+                            vendor_id = "npc/caravan_vendor",
+                            stock_loot_table_id = "loot/caravan/vendor/stock",
+                            costs = new object[] { new { kind = "resource", id = "resource/caravan/fiber", amount = 3 } },
+                            outputs = new object[] { new { kind = "item", id = "item/caravan/toolkit", amount = 1 } }
+                        }
+                    },
+                    source_context = new { capability_selection_id = input.SelectionId }
+                }),
                 Artifact("goal027/real/07-inventory", "inventory_pack_v1", new { inventories = new object[] { new { id = "caravan_vendor_inventory", owner_kind = "npc", owner_id = "npc/caravan_vendor", slots = 8, stacks = new object[] { new { item_id = "item/spice/crate", amount = 2 } } } }, source_context = new { capability_selection_id = input.SelectionId } }),
                 Artifact("goal027/real/08-equipment", "equipment_pack_v1", new { equipment_slots = new object[] { new { id = "tool_hand", name = "Tool Hand", allowed_tags = new[] { "tool" }, allowed_kinds = new[] { "tool" } } }, source_context = new { capability_selection_id = input.SelectionId } })
             ]

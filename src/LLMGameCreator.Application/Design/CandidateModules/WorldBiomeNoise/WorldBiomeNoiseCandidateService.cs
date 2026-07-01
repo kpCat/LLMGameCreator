@@ -2289,7 +2289,23 @@ public sealed class WorldBiomeNoiseCandidateService
             string.Empty,
             "| Region | Dominant biome | Avg temp | Avg moisture | Avg elevation | Avg ruggedness | Settlement | Road suitability |",
             "| --- | --- | --- | --- | --- | --- | --- | --- |",
-            $"| {plan.SourceClimateSummary.RegionId} | {plan.SourceClimateSummary.DominantBiomeId} | {FormatScore(plan.SourceClimateSummary.AverageTemperatureScore)} | {FormatScore(plan.SourceClimateSummary.AverageMoistureScore)} | {FormatScore(plan.SourceClimateSummary.AverageElevationScore)} | {FormatScore(plan.SourceClimateSummary.AverageRuggednessScore)} | {FormatScore(plan.SourceClimateSummary.AverageSettlementSuitabilityScore)} | {FormatScore(plan.SourceClimateSummary.RoadSuitabilityScore)} |",
+            "| "
+                + plan.SourceClimateSummary.RegionId
+                + " | "
+                + plan.SourceClimateSummary.DominantBiomeId
+                + " | "
+                + FormatScore(plan.SourceClimateSummary.AverageTemperatureScore)
+                + " | "
+                + FormatScore(plan.SourceClimateSummary.AverageMoistureScore)
+                + " | "
+                + FormatScore(plan.SourceClimateSummary.AverageElevationScore)
+                + " | "
+                + FormatScore(plan.SourceClimateSummary.AverageRuggednessScore)
+                + " | "
+                + FormatScore(plan.SourceClimateSummary.AverageSettlementSuitabilityScore)
+                + " | "
+                + FormatScore(plan.SourceClimateSummary.RoadSuitabilityScore)
+                + " |",
             string.Empty,
             "## Settlement Anchor Candidates",
             string.Empty,

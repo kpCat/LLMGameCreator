@@ -81,10 +81,38 @@ public static class LuaModuleManifestRegistryCatalog
             Module("lua-module/caravan/quest-objective-reward-rules", "quest_objective_reward_rules", "Caravan delivery quest rules", "Contract, delivery and trade reward pattern hints.", "ready", "caravan_trade", ["quest", "item"], ["quest.plan", "economy.plan"], ["lua-module/caravan/item-resource-economy-rules"], ["quest_graph_objective_reward_pattern_v1"], ["quest_motive"], []),
 
             Module("lua-module/metamodule/world-generation-hints", "world_generation_hints", "Metamodule kingdom world hints", "Kingdom-scale world pressure planning hints.", "ready", "metamodule_kingdoms", ["world", "kingdom"], ["world.plan", "semantic.read"], [], ["world_topology_region_route_graph_v1", "semantic_pack_v1"], ["lore_gap"], []),
-            Module("lua-module/metamodule/species-archetype-expansion-base", "metamodule_species_archetype_expansion_rules", "Metamodule species/archetype expansion base", "Manifest-only base for species/archetype slot expansion planning.", "ready", "metamodule_kingdoms", ["kingdom", "species", "archetype"], ["metamodule.expand", "semantic.read", "feature.read", "intent.read"], ["lua-module/metamodule/world-generation-hints"], ["entity_archetype_npc_actor_profile_v1", "semantic_pack_v1"], ["lore_gap", "combat_pressure", "settlement_need"], []),
+            Module(
+                "lua-module/metamodule/species-archetype-expansion-base",
+                "metamodule_species_archetype_expansion_rules",
+                "Metamodule species/archetype expansion base",
+                "Manifest-only base for species/archetype slot expansion planning.",
+                "ready",
+                "metamodule_kingdoms",
+                ["kingdom", "species", "archetype"],
+                ["metamodule.expand", "semantic.read", "feature.read", "intent.read"],
+                ["lua-module/metamodule/world-generation-hints"],
+                ["entity_archetype_npc_actor_profile_v1", "semantic_pack_v1"],
+                ["lore_gap", "combat_pressure", "settlement_need"],
+                []),
             Module("lua-module/metamodule/faction-social-rules", "faction_reputation_social_relation_rules", "Metamodule faction relation rules", "Kingdom pressure and faction relation planning hints.", "ready", "metamodule_kingdoms", ["faction", "relationship", "kingdom"], ["intent.read", "semantic.read"], ["lua-module/metamodule/world-generation-hints"], ["faction_reputation_social_relation_v1"], ["faction_reaction", "relationship_pressure"], []),
             Module("lua-module/metamodule/combat-stat-ability-status-rules", "combat_stat_ability_status_rules", "Metamodule combat pressure rules", "Mana resonance and forbidden-affinity combat pressure hints.", "optional", "metamodule_kingdoms", ["combat", "archetype", "species"], ["combat.plan", "feature.read"], ["lua-module/metamodule/species-archetype-expansion-base"], ["combat_progression_ability_v1"], ["combat_pressure"], []),
-            Module("lua-module/draft/goal034-quarantined-lua-manifest-candidate", "metamodule_species_archetype_expansion_rules", "Goal 034 quarantined Lua manifest candidate", "Compatibility record for future_lua_module_manifest_request; repair diagnostics required before review.", "quarantined", "metamodule_kingdoms", ["kingdom", "species", "archetype"], ["semantic.read"], [], ["entity_archetype_npc_actor_profile_v1", "semantic_pack_v1"], ["lore_gap"], [], "goal_034_quarantined_candidate", "quarantine/goal034/future_lua_module_manifest_request", "quarantined", selectableAsReady: false)
+            Module(
+                "lua-module/draft/goal034-quarantined-lua-manifest-candidate",
+                "metamodule_species_archetype_expansion_rules",
+                "Goal 034 quarantined Lua manifest candidate",
+                "Compatibility record for future_lua_module_manifest_request; repair diagnostics required before review.",
+                "quarantined",
+                "metamodule_kingdoms",
+                ["kingdom", "species", "archetype"],
+                ["semantic.read"],
+                [],
+                ["entity_archetype_npc_actor_profile_v1", "semantic_pack_v1"],
+                ["lore_gap"],
+                [],
+                "goal_034_quarantined_candidate",
+                "quarantine/goal034/future_lua_module_manifest_request",
+                "quarantined",
+                selectableAsReady: false)
         };
 
         manifests.AddRange(BuildMetamoduleSlotManifests());

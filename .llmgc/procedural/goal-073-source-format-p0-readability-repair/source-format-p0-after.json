@@ -1,0 +1,88 @@
+{
+    "schemaVersion":  "source_format_p0_measurement_v1",
+    "goalId":  "goal-073-source-format-p0-readability-repair",
+    "gate":  "source_format_p0_readability_repair_verification required",
+    "measurement":  "after",
+    "threshold":  {
+                      "requiredMaxLineLength":  500,
+                      "preferredMaxLineLength":  300,
+                      "scannerP0Threshold":  500
+                  },
+    "p0AfterCount":  0,
+    "requiredMaxLineLengthPassed":  true,
+    "preferredMaxLineLengthPassed":  false,
+    "candidateFiles":  [
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs",
+                               "lineCount":  186,
+                               "maxLineLength":  485,
+                               "maxLineNumber":  70,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  27,
+                               "repair":  "wrapped two long capability help Entry calls; preserved ids and string values"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+                               "lineCount":  1059,
+                               "maxLineLength":  490,
+                               "maxLineNumber":  514,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  11,
+                               "repair":  "expanded two encounter pack anonymous object initializers"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+                               "lineCount":  1236,
+                               "maxLineLength":  259,
+                               "maxLineNumber":  45,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  0,
+                               "repair":  "expanded three FamilyProfile argument lists"
+                           },
+                           {
+                               "relativePath":  "tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs",
+                               "lineCount":  254,
+                               "maxLineLength":  298,
+                               "maxLineNumber":  84,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  0,
+                               "repair":  "split long encounter JSON fixture through string concatenation without added whitespace"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryCatalog.cs",
+                               "lineCount":  284,
+                               "maxLineLength":  475,
+                               "maxLineNumber":  73,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  21,
+                               "repair":  "expanded two Lua Module argument lists"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+                               "lineCount":  1417,
+                               "maxLineLength":  351,
+                               "maxLineNumber":  966,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  3,
+                               "repair":  "extracted long future-required gap id expression into a local variable"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+                               "lineCount":  1046,
+                               "maxLineLength":  463,
+                               "maxLineNumber":  423,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  15,
+                               "repair":  "expanded item, recipe and transaction pack anonymous object initializers"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+                               "lineCount":  2937,
+                               "maxLineLength":  428,
+                               "maxLineNumber":  2378,
+                               "p0LineCount":  0,
+                               "overPreferredLineCount":  2,
+                               "repair":  "split long interpolated markdown table row into concatenated segments"
+                           }
+                       ]
+}

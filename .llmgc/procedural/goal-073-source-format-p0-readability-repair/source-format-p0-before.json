@@ -1,0 +1,78 @@
+{
+    "schemaVersion":  "source_format_p0_measurement_v1",
+    "goalId":  "goal-073-source-format-p0-readability-repair",
+    "gate":  "source_format_p0_readability_repair_verification required",
+    "measurement":  "before",
+    "threshold":  {
+                      "requiredMaxLineLength":  500,
+                      "preferredMaxLineLength":  300,
+                      "scannerP0Threshold":  500
+                  },
+    "p0BeforeCount":  8,
+    "candidateFiles":  [
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs",
+                               "lineCount":  167,
+                               "maxLineLength":  1791,
+                               "maxLineNumber":  77,
+                               "p0LineCount":  2,
+                               "category":  "long catalog Entry initializers with Russian/help literals"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+                               "lineCount":  987,
+                               "maxLineLength":  844,
+                               "maxLineNumber":  360,
+                               "p0LineCount":  2,
+                               "category":  "long anonymous object encounter pack fixture initializers"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+                               "lineCount":  1143,
+                               "maxLineLength":  733,
+                               "maxLineNumber":  988,
+                               "p0LineCount":  3,
+                               "category":  "long FamilyProfile argument lists"
+                           },
+                           {
+                               "relativePath":  "tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs",
+                               "lineCount":  241,
+                               "maxLineLength":  629,
+                               "maxLineNumber":  86,
+                               "p0LineCount":  1,
+                               "category":  "long raw JSON assertion fixture literal"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryCatalog.cs",
+                               "lineCount":  256,
+                               "maxLineLength":  594,
+                               "maxLineNumber":  87,
+                               "p0LineCount":  2,
+                               "category":  "long Lua module manifest argument lists"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+                               "lineCount":  1408,
+                               "maxLineLength":  528,
+                               "maxLineNumber":  747,
+                               "p0LineCount":  1,
+                               "category":  "long invalid-scenario diagnostic construction"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+                               "lineCount":  1004,
+                               "maxLineLength":  527,
+                               "maxLineNumber":  361,
+                               "p0LineCount":  3,
+                               "category":  "long anonymous object item/recipe/transaction pack initializers"
+                           },
+                           {
+                               "relativePath":  "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+                               "lineCount":  2921,
+                               "maxLineLength":  505,
+                               "maxLineNumber":  2292,
+                               "p0LineCount":  1,
+                               "category":  "long interpolated markdown table row"
+                           }
+                       ]
+}

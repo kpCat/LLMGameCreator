@@ -1,0 +1,121 @@
+{
+    "schemaVersion":  "source_format_p0_repair_summary_v1",
+    "goalId":  "goal-073-source-format-p0-readability-repair",
+    "gate":  "source_format_p0_readability_repair_verification required",
+    "implementationStatus":  "GREEN",
+    "p0BeforeCount":  8,
+    "p0AfterCount":  0,
+    "repairedFileCount":  8,
+    "requiredMaxLineLengthPassed":  true,
+    "preferredMaxLineLengthPassed":  false,
+    "behaviorPreservationStrategy":  [
+                                         "source-format-only edits in the eight allowed candidate files",
+                                         "preserved deterministic ordering, ids and values",
+                                         "used compile-time string concatenation only to preserve literal values while wrapping lines",
+                                         "did not touch runtime, GamePackage schema, WinForms, Unity, providers, Lua execution, dependencies or project files"
+                                     ],
+    "remainingP0":  [
+
+                    ],
+    "files":  [
+                  {
+                      "relativePath":  "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs",
+                      "lineCount":  186,
+                      "maxLineLength":  485,
+                      "maxLineNumber":  70,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  27,
+                      "repair":  "wrapped two long capability help Entry calls; preserved ids and string values"
+                  },
+                  {
+                      "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+                      "lineCount":  1059,
+                      "maxLineLength":  490,
+                      "maxLineNumber":  514,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  11,
+                      "repair":  "expanded two encounter pack anonymous object initializers"
+                  },
+                  {
+                      "relativePath":  "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+                      "lineCount":  1236,
+                      "maxLineLength":  259,
+                      "maxLineNumber":  45,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  0,
+                      "repair":  "expanded three FamilyProfile argument lists"
+                  },
+                  {
+                      "relativePath":  "tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs",
+                      "lineCount":  254,
+                      "maxLineLength":  298,
+                      "maxLineNumber":  84,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  0,
+                      "repair":  "split long encounter JSON fixture through string concatenation without added whitespace"
+                  },
+                  {
+                      "relativePath":  "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryCatalog.cs",
+                      "lineCount":  284,
+                      "maxLineLength":  475,
+                      "maxLineNumber":  73,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  21,
+                      "repair":  "expanded two Lua Module argument lists"
+                  },
+                  {
+                      "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+                      "lineCount":  1417,
+                      "maxLineLength":  351,
+                      "maxLineNumber":  966,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  3,
+                      "repair":  "extracted long future-required gap id expression into a local variable"
+                  },
+                  {
+                      "relativePath":  "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+                      "lineCount":  1046,
+                      "maxLineLength":  463,
+                      "maxLineNumber":  423,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  15,
+                      "repair":  "expanded item, recipe and transaction pack anonymous object initializers"
+                  },
+                  {
+                      "relativePath":  "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+                      "lineCount":  2937,
+                      "maxLineLength":  428,
+                      "maxLineNumber":  2378,
+                      "p0LineCount":  0,
+                      "overPreferredLineCount":  2,
+                      "repair":  "split long interpolated markdown table row into concatenated segments"
+                  }
+              ],
+    "validationResults":  [
+                              {
+                                  "command":  "dotnet restore .\\LLMGameCreator.sln",
+                                  "result":  "passed"
+                              },
+                              {
+                                  "command":  "dotnet build .\\LLMGameCreator.sln --no-restore",
+                                  "result":  "passed; 4 existing xUnit analyzer warnings; 0 errors"
+                              },
+                              {
+                                  "command":  "dotnet test .\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj --filter \"FullyQualifiedName~GeneratorSpineQuality|FullyQualifiedName~Goal072|FullyQualifiedName~Goal073\"",
+                                  "result":  "passed 9/9; Goal 072 test side-effect artifacts restored from temp backup afterward"
+                              },
+                              {
+                                  "command":  "dotnet test .\\tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj --filter \"FullyQualifiedName~PackageAssemblyCombatProgression|FullyQualifiedName~PackageAssemblyDialogueQuests|FullyQualifiedName~PackageAssemblyItemsEconomyCrafting|FullyQualifiedName~LuaModuleManifestRegistry|FullyQualifiedName~CombatMagicAbilityBossEncounter|FullyQualifiedName~WorldBiomeNoise|FullyQualifiedName~GeneratorPlan\"",
+                                  "result":  "passed 302/302"
+                              },
+                              {
+                                  "command":  ".\\.devflow\\scripts\\check-all.ps1",
+                                  "result":  "first tool attempt timed out; longer rerun passed 1134/1134 ordinary tests, build 0 warnings, 0 errors"
+                              },
+                              {
+                                  "command":  ".\\.devflow\\scripts\\check-artifact-scope.ps1 -Scenario \"goal-073-source-format-p0-readability-repair\"",
+                                  "result":  "passed; changedPathCount=19; violationCount=0"
+                              }
+                          ],
+    "artifactScopeAccepted":  true
+}

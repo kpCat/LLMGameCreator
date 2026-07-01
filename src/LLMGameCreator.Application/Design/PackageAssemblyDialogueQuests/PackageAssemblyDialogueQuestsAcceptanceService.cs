@@ -732,6 +732,15 @@ public sealed class PackageAssemblyDialogueQuestsAcceptanceService
         PackageAssemblyDialogueQuestsEvidence evidence,
         PackageAssemblyDialogueQuestsFixtures fixtures)
     {
+        var futureRequiredDialogueGraphConditionGapIds = string.Join(
+            ",",
+            evidence.Goal024DialogueGapIds
+                .Concat(evidence.Goal024QuestGapIds)
+                .Where(id =>
+                    id.Contains("graph", StringComparison.OrdinalIgnoreCase)
+                    || id.Contains("conditions", StringComparison.OrdinalIgnoreCase))
+                .Order(StringComparer.Ordinal));
+
         var scenarios = new List<PackageAssemblyDialogueQuestsInvalidScenario>
         {
             InvalidScenario("missing_accepted_goal025_gate", [Diagnostic("error", "package_dialogue_quests.previous_gate.missing", "package_assembly_world_entities_expansion_verification required", "Goal 026 requires the accepted Goal 025 gate.")]),
@@ -744,7 +753,7 @@ public sealed class PackageAssemblyDialogueQuestsAcceptanceService
             InvalidScenario("quest_stage_references_unknown_next_stage", ValidateFixture(MutateQuestNextStage(fixtures.RealConsumer))),
             InvalidScenario("duplicate_quest_id", ValidateFixture(DuplicateQuest(fixtures.RealConsumer))),
             InvalidScenario("duplicate_dialogue_id", ValidateFixture(DuplicateDialogue(fixtures.RealConsumer))),
-            InvalidScenario("future_required_dialogue_graph_condition_gap_treated_implemented", [Diagnostic("error", "package_dialogue_quests.future_required.marked_supported", string.Join(",", evidence.Goal024DialogueGapIds.Concat(evidence.Goal024QuestGapIds).Where(id => id.Contains("graph", StringComparison.OrdinalIgnoreCase) || id.Contains("conditions", StringComparison.OrdinalIgnoreCase)).Order(StringComparer.Ordinal)), "Future-required dialogue graph, quest graph and condition gaps must not be marked implemented.")]),
+            InvalidScenario("future_required_dialogue_graph_condition_gap_treated_implemented", [Diagnostic("error", "package_dialogue_quests.future_required.marked_supported", futureRequiredDialogueGraphConditionGapIds, "Future-required dialogue graph, quest graph and condition gaps must not be marked implemented.")]),
             InvalidScenario("synthetic_anti_overfit_fixture_missing", [Diagnostic("error", "package_dialogue_quests.anti_overfit.synthetic_missing", "rumor_board_tutorial", "A second synthetic consumer fixture is required.")]),
             InvalidScenario("output_hardcoded_only_to_gothic_trade_frontier", [Diagnostic("error", "package_dialogue_quests.anti_overfit.hardcoded_single_consumer", "gothic/trade/frontier", "Output must not be hardcoded to one consumer shape.")]),
             InvalidScenario("unity_llm_rag_provider_media_lua_execution_claim", [Diagnostic("error", "package_dialogue_quests.claims.external_execution", "llmRagProviderMediaLuaExecuted", "Goal 026 must not claim Unity, LLM, RAG, provider, media or Lua execution.")]),

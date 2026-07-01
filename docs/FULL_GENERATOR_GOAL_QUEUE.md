@@ -59,6 +59,7 @@ Produced for review:
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
 generator_spine_quality_consolidation_verification required
+source_format_p0_readability_repair_verification required
 ```
 
 Current capabilities:
@@ -132,11 +133,12 @@ Current capabilities:
 - Unity Alpha interactive campaign player consuming Goal 070 integrated campaign timeline evidence into 9 selectable family/seed interactive rows, 63 scripted input/action transitions, state-transition ledger, HUD contract, save/load/replay proof, preview/export payload and Unity Alpha interactive_campaign markers;
 - Goal 071 accepted by the Goal 072 user handoff: `unity_alpha_interactive_campaign_player_verification passed before Goal 072`;
 - Generator spine quality consolidation and risk audit over recent source, tests, Unity Alpha bootstrap, compact artifacts and state docs, with deterministic compact evidence and a concrete technical debt register;
+- Goal 073 bounded source-format P0 readability repair for the Goal 072 `GQ-P0-SOURCE-EXTREME-LINE-LENGTH` blocker, with compact before/after/summary/report artifacts and p0AfterCount=0 for the eight candidate files;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
 
-Goal 069 implementation status is GREEN and accepted by user handoff before Goal 070: Unity/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, all world_event markers matched and report hash `40db9e42153efda4427f587873cd1cc75af4687fd0775cf429aa88430c59e63e`. Goal 070 implementation status is GREEN and accepted by user handoff before Goal 071: Unity/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, 9/9 integrated campaign timeline rows are state-changing, `cascadeCount=27`, `arbitrationCount=9`, save/load/replay passed, all campaign_timeline markers matched and report hash `5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89`. Goal 071 implementation status is GREEN and accepted by user handoff before Goal 072: Unity/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, 9/9 interactive campaign rows are state-changing, `actionCount=63`, `transitionCount=63`, save/load/replay passed, all interactive_campaign markers matched and report hash `ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02`. Goal 072 is produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false`, `implementationStatus=BLOCKED`, `p0Count=1`, `p1Count=3`, `p2Count=2`, `p3Count=0`, inventory hash `7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1` and debt register hash `b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33`.
+Goal 069 implementation status is GREEN and accepted by user handoff before Goal 070: Unity/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, all world_event markers matched and report hash `40db9e42153efda4427f587873cd1cc75af4687fd0775cf429aa88430c59e63e`. Goal 070 implementation status is GREEN and accepted by user handoff before Goal 071: Unity/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, 9/9 integrated campaign timeline rows are state-changing, `cascadeCount=27`, `arbitrationCount=9`, save/load/replay passed, all campaign_timeline markers matched and report hash `5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89`. Goal 071 implementation status is GREEN and accepted by user handoff before Goal 072: Unity/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, 9/9 interactive campaign rows are state-changing, `actionCount=63`, `transitionCount=63`, save/load/replay passed, all interactive_campaign markers matched and report hash `ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02`. Goal 072 is produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false`, `implementationStatus=BLOCKED`, `p0Count=1`, `p1Count=3`, `p2Count=2`, `p3Count=0`, inventory hash `7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1` and debt register hash `b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33`. Goal 073 is produced for review with `source_format_p0_readability_repair_verification required`, `accepted=false`, `implementationStatus=GREEN`, `p0BeforeCount=8`, `p0AfterCount=0` and `repairedFileCount=8`; it repaired the Goal 072 P0 source-format blocker without marking Goal 072 passed.
 
 Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 was accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 was accepted by the Goal 061 user handoff: `full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 was accepted by the Goal 062 user handoff: `full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 was accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 was accepted by the Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`. Goal 064 was accepted by the Goal 065 user handoff: `living_world_npc_faction_simulation_matrix_verification passed before Goal 065`. Goal 065 was accepted by the Goal 066 user handoff: `interlocked_gameplay_systems_depth_matrix_verification passed before Goal 066`. Goal 066 was accepted by the Goal 067 user handoff: `settlement_construction_destruction_production_matrix_verification passed before Goal 067`. Goal 067 was accepted by the Goal 068 user handoff: `programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068`. Goal 068 was accepted by the Goal 069 user handoff: `combat_magic_ability_boss_encounter_matrix_verification passed before Goal 069`. Goal 069 was accepted by the Goal 070 user handoff: `world_event_weather_daynight_crisis_matrix_verification passed before Goal 070`. Goal 070 was accepted by the Goal 071 user handoff: `integrated_campaign_timeline_simulation_matrix_verification passed before Goal 071`. Goal 071 was accepted by the Goal 072 user handoff: `unity_alpha_interactive_campaign_player_verification passed before Goal 072`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
 
@@ -918,18 +920,30 @@ Audit recent generator spine quality after the aggressive Goal 038-071 run: sour
 
 Status:
 
-Produced for review and currently BLOCKED. The gate remains `generator_spine_quality_consolidation_verification required`, `accepted=false`.
+Produced for review and historically BLOCKED. The gate remains `generator_spine_quality_consolidation_verification required`, `accepted=false`; Goal 073 repaired the P0 source-format blocker but did not mark Goal 072 passed.
 
 Implementation evidence: `implementationStatus=BLOCKED`, `p0Count=1`, `p1Count=3`, `p2Count=2`, `p3Count=0`, no minified candidates, no absolute-path compact artifact leaks, Goal 071 proof indicators passed with 9 command-plan rows, 233 matched markers, 0 missing markers, 63 actions and 63 transitions. The blocking P0 is source-format extreme line length in existing checked-in source outside the allowed Goal 072 repair scope.
+
+### Goal 073: Source Format P0 Readability Repair
+
+Purpose:
+
+Repair the Goal 072 `GQ-P0-SOURCE-EXTREME-LINE-LENGTH` blocker in the eight allowed candidate files without feature work, broad refactoring, dependency changes or historical Goal 072 evidence rewrites.
+
+Status:
+
+Produced for review. The gate remains `source_format_p0_readability_repair_verification required`, `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `p0BeforeCount=8`, `p0AfterCount=0`, `repairedFileCount=8`; all eight repaired files are below the required 500-character max-line threshold. Goal 031 and Goal 032 remain produced-for-review/not passed.
 
 ## Current Recommended Next Work
 
 ```text
-generator_spine_quality_consolidation_verification
+source_format_p0_readability_repair_verification
 ```
 
 Status:
 
 ```text
-goal_072_generator_spine_quality_consolidation_produced_for_review
+goal_073_source_format_p0_readability_repair_produced_for_review
 ```

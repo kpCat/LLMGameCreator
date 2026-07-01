@@ -83,7 +83,20 @@ public sealed class PackageAssemblyCombatProgressionAcceptanceTests
                 Artifact("artifact/05-status", "status_pack_v1", """{"statuses":[{"id":"guarded","name":"Guarded","kind":"stance"}]}"""),
                 Artifact("artifact/06-ability", "ability_pack_v1", """{"abilities":[{"id":"focus_shot","name":"Focus Shot","resource_id":"resource/focus","costs":[{"kind":"resource","id":"resource/focus","amount":1}],"effects":[{"type":"add_status","status_id":"status/guarded","amount":1}]}]}"""),
                 Artifact("artifact/07-progression", "progression_pack_v1", """{"progressions":[{"id":"precision_drill","name":"Precision Drill","stages":[{"id":"steady","name":"Steady","required_amount":1,"outputs":[{"kind":"status","id":"status/guarded","amount":1}]}]}]}"""),
-                Artifact("artifact/08-encounter", "encounter_pack_v1", """{"encounters":[{"id":"precision_drill_test","title":"Precision Drill Test","loot_table_id":"loot/training/reward","participants":[{"id":"target/training_dummy","name":"Training Dummy","entity_prototype_id":"entity/training/dummy","stats":[{"kind":"stat","id":"stat/precision","amount":1}],"resources":[{"kind":"resource","id":"resource/focus","amount":3}],"abilities":["ability/focus/shot"]}],"actions":[{"id":"action/focus_shot","name":"Focus Shot","ability_id":"ability/focus/shot","outputs":[{"kind":"status","id":"status/guarded","amount":1}]}]}]}""")
+                Artifact(
+                    "artifact/08-encounter",
+                    "encounter_pack_v1",
+                    "{" +
+                    "\"encounters\":[{" +
+                    "\"id\":\"precision_drill_test\",\"title\":\"Precision Drill Test\",\"loot_table_id\":\"loot/training/reward\"," +
+                    "\"participants\":[{" +
+                    "\"id\":\"target/training_dummy\",\"name\":\"Training Dummy\",\"entity_prototype_id\":\"entity/training/dummy\"," +
+                    "\"stats\":[{\"kind\":\"stat\",\"id\":\"stat/precision\",\"amount\":1}]," +
+                    "\"resources\":[{\"kind\":\"resource\",\"id\":\"resource/focus\",\"amount\":3}]," +
+                    "\"abilities\":[\"ability/focus/shot\"]}]," +
+                    "\"actions\":[{" +
+                    "\"id\":\"action/focus_shot\",\"name\":\"Focus Shot\",\"ability_id\":\"ability/focus/shot\"," +
+                    "\"outputs\":[{\"kind\":\"status\",\"id\":\"status/guarded\",\"amount\":1}]}]}]}")
             ]
         };
 
