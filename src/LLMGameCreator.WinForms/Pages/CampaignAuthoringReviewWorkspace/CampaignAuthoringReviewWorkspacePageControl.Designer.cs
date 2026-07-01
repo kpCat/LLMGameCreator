@@ -17,12 +17,14 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _provenanceTabPage;
         private TabPage _actionPlanTabPage;
         private TabPage _qualityTabPage;
+        private TabPage _editLoopTabPage;
         private CampaignRowSelectorControl _rowSelectorControl;
         private CampaignSchemaGroupControl _schemaGroupControl;
         private CampaignDiagnosticsControl _diagnosticsControl;
         private CampaignProvenanceControl _provenanceControl;
         private CampaignActionPlanControl _actionPlanControl;
         private CampaignQualityGateControl _qualityGateControl;
+        private CampaignEditValidateApplyLoopControl _editLoopControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -45,12 +47,14 @@ namespace LLMGameCreator.WinForms.Pages
             this._provenanceTabPage = new TabPage();
             this._actionPlanTabPage = new TabPage();
             this._qualityTabPage = new TabPage();
+            this._editLoopTabPage = new TabPage();
             this._rowSelectorControl = new CampaignRowSelectorControl();
             this._schemaGroupControl = new CampaignSchemaGroupControl();
             this._diagnosticsControl = new CampaignDiagnosticsControl();
             this._provenanceControl = new CampaignProvenanceControl();
             this._actionPlanControl = new CampaignActionPlanControl();
             this._qualityGateControl = new CampaignQualityGateControl();
+            this._editLoopControl = new CampaignEditValidateApplyLoopControl();
             this._tabs.SuspendLayout();
             this._rowsTabPage.SuspendLayout();
             this._schemaTabPage.SuspendLayout();
@@ -58,6 +62,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._provenanceTabPage.SuspendLayout();
             this._actionPlanTabPage.SuspendLayout();
             this._qualityTabPage.SuspendLayout();
+            this._editLoopTabPage.SuspendLayout();
             this.SuspendLayout();
             //
             // _statusLabel
@@ -78,6 +83,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._provenanceTabPage);
             this._tabs.Controls.Add(this._actionPlanTabPage);
             this._tabs.Controls.Add(this._qualityTabPage);
+            this._tabs.Controls.Add(this._editLoopTabPage);
             this._tabs.Dock = DockStyle.Fill;
             this._tabs.Location = new Point(0, 34);
             this._tabs.Name = "_tabs";
@@ -147,6 +153,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._qualityTabPage.Text = "Quality";
             this._qualityTabPage.UseVisualStyleBackColor = true;
             //
+            // _editLoopTabPage
+            //
+            this._editLoopTabPage.Controls.Add(this._editLoopControl);
+            this._editLoopTabPage.Location = new Point(4, 24);
+            this._editLoopTabPage.Name = "_editLoopTabPage";
+            this._editLoopTabPage.Size = new Size(1092, 658);
+            this._editLoopTabPage.TabIndex = 6;
+            this._editLoopTabPage.Text = "Edit Loop";
+            this._editLoopTabPage.UseVisualStyleBackColor = true;
+            //
             // child controls
             //
             this._rowSelectorControl.Dock = DockStyle.Fill;
@@ -155,6 +171,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._provenanceControl.Dock = DockStyle.Fill;
             this._actionPlanControl.Dock = DockStyle.Fill;
             this._qualityGateControl.Dock = DockStyle.Fill;
+            this._editLoopControl.Dock = DockStyle.Fill;
             //
             // CampaignAuthoringReviewWorkspacePageControl
             //
@@ -171,6 +188,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._provenanceTabPage.ResumeLayout(false);
             this._actionPlanTabPage.ResumeLayout(false);
             this._qualityTabPage.ResumeLayout(false);
+            this._editLoopTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
         }
     }

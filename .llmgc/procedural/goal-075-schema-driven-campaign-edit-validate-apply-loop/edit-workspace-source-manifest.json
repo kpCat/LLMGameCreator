@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "schema_driven_campaign_edit_source_manifest_v1",
+  "goalId": "goal_075_schema_driven_campaign_edit_validate_apply_loop",
+  "productSmokeRoute": "goal-075-schema-driven-campaign-edit-validate-apply-loop",
+  "manualGate": "schema_driven_campaign_edit_validate_apply_loop_verification",
+  "accepted": false,
+  "goal074AcceptedByUserHandoff": true,
+  "goal072RemainsHistoricalBlocked": true,
+  "goal031And032RemainProducedForReview": true,
+  "rowCount": 9,
+  "familyCount": 3,
+  "seedCount": 3,
+  "sourceArtifacts": [
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "authoring-action-plan",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/authoring-action-plan.json",
+      "artifactHash": "3e306c5c94e68a88c59691824c4f0cc7b9998cd9139f9062482d01e53bc12a2d",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "campaign-row-selector",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/campaign-row-selector.json",
+      "artifactHash": "d65d933525a4d26331ecb214069b541036197d250fc39f785ee44af15dc44bbf",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "dynamic-authoring-schema",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/dynamic-authoring-schema.json",
+      "artifactHash": "ee51f2b9452c127a75cb39d2a66611c3e5cc888c0983f88c1e6c3a4182ae62db",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "invalid-diagnostics-matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/invalid-diagnostics-matrix.json",
+      "artifactHash": "d5287af32cd9030942dabfb78afc76fc89da24649b2fcf167a0fb53d803a5df4",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "quality-gate-scan",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/quality-gate-scan.json",
+      "artifactHash": "865947f082f46c92a27a995c1356315ef5f93b85f87b544ff7a15d29c65488cb",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "review-provenance-ledger",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/review-provenance-ledger.json",
+      "artifactHash": "ef7794e65fe6ec4d22dff54f07641c2b953ba507e7f95779410b0d85a3cc8ca0",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "schema-driven-campaign-authoring-review-workspace-report",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/schema-driven-campaign-authoring-review-workspace-report.md",
+      "artifactHash": "070c8b8c1d4c6232b92bf56dfdeaefd5e7554df462094c11f367f9e9ddc2651a",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "ui-binding-contract",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/ui-binding-contract.json",
+      "artifactHash": "1ecb69b9f86c5e25c9c621274444db8648fb650e83a867968ac383b386cbfabd",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "winforms-control-inventory",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/winforms-control-inventory.json",
+      "artifactHash": "be847b363788925fc2a08030547721e70f350a786443871b59745af146b637b1",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "workspace-source-manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/workspace-source-manifest.json",
+      "artifactHash": "52a0a79cd56da851cc4a6d62d8cc844e8e7fec225e657c1ef16b61d44a58617e",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal074",
+      "artifactFamily": "workspace-validation-dashboard",
+      "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/workspace-validation-dashboard.json",
+      "artifactHash": "2213d4b2d0b7cefad4746f45707e24488b37b6086c28935c3aa877b211d2dcd9",
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

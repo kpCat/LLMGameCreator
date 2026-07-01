@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "schema_driven_campaign_preview_export_refresh_payload_v1",
+  "passed": true,
+  "changedRowCount": 9,
+  "changedRowIds": [
+    "matrix-row-map-panel-rpg-seed-alpha",
+    "matrix-row-map-panel-rpg-seed-beta",
+    "matrix-row-map-panel-rpg-seed-gamma",
+    "matrix-row-survival-sandbox-seed-alpha",
+    "matrix-row-survival-sandbox-seed-beta",
+    "matrix-row-survival-sandbox-seed-gamma",
+    "matrix-row-first-person-grid-dungeon-seed-alpha",
+    "matrix-row-first-person-grid-dungeon-seed-beta",
+    "matrix-row-first-person-grid-dungeon-seed-gamma"
+  ],
+  "changedDomains": [
+    "combat_magic_status",
+    "gameplay_consequence",
+    "living_world_faction",
+    "narrative_event_intent",
+    "settlement_production",
+    "weather_crisis_pressure"
+  ],
+  "rows": [
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "refreshKey": "goal075.refresh.map_panel_rpg.seed_alpha",
+      "afterHash": "cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+      "changedFieldIds": [
+        "gameplay_consequence_summary.consequence_intensity",
+        "living_world_npc_faction_summary.faction_pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "refreshKey": "goal075.refresh.map_panel_rpg.seed_beta",
+      "afterHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+      "changedFieldIds": [
+        "narrative_quest_dialogue_event_summary.event_intent",
+        "settlement_construction_destruction_production_summary.production_focus"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "refreshKey": "goal075.refresh.map_panel_rpg.seed_gamma",
+      "afterHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+      "changedFieldIds": [
+        "combat_magic_boss_summary.status_pressure",
+        "weather_daynight_crisis_summary.crisis_pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "refreshKey": "goal075.refresh.survival_sandbox.seed_alpha",
+      "afterHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+      "changedFieldIds": [
+        "gameplay_consequence_summary.consequence_intensity",
+        "living_world_npc_faction_summary.faction_pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "refreshKey": "goal075.refresh.survival_sandbox.seed_beta",
+      "afterHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+      "changedFieldIds": [
+        "narrative_quest_dialogue_event_summary.event_intent",
+        "settlement_construction_destruction_production_summary.production_focus"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "refreshKey": "goal075.refresh.survival_sandbox.seed_gamma",
+      "afterHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+      "changedFieldIds": [
+        "combat_magic_boss_summary.status_pressure",
+        "weather_daynight_crisis_summary.crisis_pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "refreshKey": "goal075.refresh.first_person_grid_dungeon.seed_alpha",
+      "afterHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+      "changedFieldIds": [
+        "gameplay_consequence_summary.consequence_intensity",
+        "living_world_npc_faction_summary.faction_pressure"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "refreshKey": "goal075.refresh.first_person_grid_dungeon.seed_beta",
+      "afterHash": "b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+      "changedFieldIds": [
+        "narrative_quest_dialogue_event_summary.event_intent",
+        "settlement_construction_destruction_production_summary.production_focus"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "refreshKey": "goal075.refresh.first_person_grid_dungeon.seed_gamma",
+      "afterHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+      "changedFieldIds": [
+        "combat_magic_boss_summary.status_pressure",
+        "weather_daynight_crisis_summary.crisis_pressure"
+      ]
+    }
+  ]
+}

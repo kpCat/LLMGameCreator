@@ -42,7 +42,8 @@
     ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/",
     ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/",
     ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/",
-    ".llmgc/procedural/goal-073-source-format-p0-readability-repair/"
+    ".llmgc/procedural/goal-073-source-format-p0-readability-repair/",
+    ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -634,6 +635,31 @@
         ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/",
         "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/",
         "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignAuthoringReviewWorkspace/"
+      ]
+    },
+    {
+      "scenario": "goal-075-schema-driven-campaign-edit-validate-apply-loop",
+      "allowedPaths": [
+        "docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md",
+        "docs/agent-tasks/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md",
+        "docs/agent-tasks/GOAL_075_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/SchemaDrivenCampaignEditValidateApplyLoopProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/",
+        "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignEditValidateApplyLoop/",
+        "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignEditValidateApplyLoop/",
         "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignAuthoringReviewWorkspace/"
       ]
     }

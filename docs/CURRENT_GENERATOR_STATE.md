@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 074 schema-driven campaign authoring/review workspace production
+Updated by: Goal 075 schema-driven campaign edit/validate/apply loop production
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -467,7 +467,32 @@ actionPlanItemCount=14
 deterministicHash=5b7919a92ac6354b47e0fb1f0682cb74619ca48572f5892cfa509add8803d823
 ```
 
-Goal 074 consumes Goal 060-073 evidence into a BCL-only Application workspace and bounded WinForms UserControl review surface. Evidence is produced under `.llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/`; the quality guard now scans 26 Goal 074 C# files including `src/LLMGameCreator.WinForms/CompositionRoot.cs`, records too-few-lines-for-size metrics, and reports `maxLineLength=154`, `linesOver500Count=0`, `minifiedSourceFileCount=0`, `filesWithTooFewLinesForSizeCount=0`. Goal 074 remains `accepted=false` and the manual gate is not marked passed.
+Goal 074 consumes Goal 060-073 evidence into a BCL-only Application workspace and bounded WinForms UserControl review surface. Evidence is produced under `.llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/`; the quality guard now scans 26 Goal 074 C# files including `src/LLMGameCreator.WinForms/CompositionRoot.cs`, records too-few-lines-for-size metrics, and reports `maxLineLength=154`, `linesOver500Count=0`, `minifiedSourceFileCount=0`, `filesWithTooFewLinesForSizeCount=0`. The produced Goal 074 report kept `accepted=false`; the Goal 075 handoff below records user acceptance.
+
+Goal 074 handoff acceptance recorded before Goal 075:
+
+```text
+schema_driven_campaign_authoring_review_workspace_verification passed before Goal 075
+```
+
+Goal 075 produced for review:
+
+```text
+schema_driven_campaign_edit_validate_apply_loop_verification required
+accepted=false
+implementationStatus=GREEN
+rowCount=9
+familyCount=3
+seedCount=3
+editableFieldCount=6
+candidateCount=18
+appliedChangeCount=18
+rollbackCount=9
+invalidScenarioCount=16
+deterministicHash=cc9d833354a73500491b5f4fdaeac4ef1dbb67224d7b74d9587bfef1197218e0
+```
+
+Goal 075 consumes the accepted Goal 074 authoring/review workspace plus Goal 060-073 evidence into a schema-driven edit/validate/apply loop. Evidence is produced under `.llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/`; validation, apply/rollback, row before/after diffs, preview/export refresh payload, WinForms binding inventory, quality gate scan and invalid edit diagnostics all pass in the compact report. Goal 075 remains `accepted=false` and the manual gate is not marked passed.
 
 ## Current Phase
 
@@ -627,7 +652,9 @@ Allowed next sequence:
 29. Keep Goal 071 Unity Alpha Interactive Campaign Player recorded as passed by user handoff before Goal 072.
 30. Keep Goal 072 Generator Spine Quality Consolidation produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker but did not mark Goal 072 passed.
 31. Keep Goal 073 Source Format P0 Readability Repair recorded as passed by user handoff before Goal 074.
-32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace produced for review at `schema_driven_campaign_authoring_review_workspace_verification required`, `accepted=false`, `implementationStatus=GREEN`.
+32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace recorded as accepted by user handoff before Goal 075.
+33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`, `accepted=false` and `implementationStatus=GREEN`.
+34. Do not start Goal 076 while Goal 075 remains at its manual review gate.
 
 Kill criterion:
 
@@ -725,10 +752,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-settlement_construction_destruction_production_matrix_verification
+schema_driven_campaign_edit_validate_apply_loop_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 `multi_family_generated_template_vertical_slice_verification` is accepted as passed by the user handoff before Goal 047. Goal 047 `full_generator_without_media_verification` is accepted as passed by the user handoff before Goal 053. Goal 053 `media_asset_campaign_orchestration_verification` is accepted as passed by the user handoff before Goal 054. Goal 054 `media_materialization_review_package_verification` is accepted as passed by the Goal 055 preflight user handoff. Goal 055 `media_bound_playable_review_package_verification` is accepted as passed by the Goal 056 user handoff. Goal 056 `unity_alpha_media_bound_playable_package_verification` is accepted as passed by the Goal 057 user handoff. Goal 057 `unity_alpha_multifamily_playable_loop_verification` is accepted as passed by the Goal 058 user handoff. Goal 058 `full_media_bound_generator_campaign_verification` is accepted as passed by the Goal 059 user handoff. Goal 059 `full_generator_variability_regression_matrix_verification` is accepted as passed by the user handoff before Goal 060. Goal 060 `full_campaign_gamepackage_materialization_matrix_verification` is accepted as passed by the user handoff before Goal 061. Goal 061 `full_campaign_playable_review_package_rc_verification` is accepted as passed by the Goal 062 user handoff. Goal 062 `constrained_spatial_detail_generation_verification` is accepted as passed by the Goal 063 user handoff. Goal 063 `gameplay_consequence_depth_matrix_verification` is accepted by user handoff before Goal 064. Goal 064 `living_world_npc_faction_simulation_matrix_verification` is accepted by user handoff before Goal 065. Goal 065 `interlocked_gameplay_systems_depth_matrix_verification` is accepted by user handoff before Goal 066. Goal 066 `settlement_construction_destruction_production_matrix_verification` is the active required gate. Goal 031 and Goal 032 remain produced for review and not marked passed.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goals 035-071 are recorded as accepted by their respective user decisions or downstream handoffs. Goal 072 remains historical produced-for-review evidence with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker without marking Goal 072 passed. Goal 073 is accepted by the Goal 074 user handoff, Goal 074 is accepted by the Goal 075 user handoff, and Goal 075 is produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`, `accepted=false` and `implementationStatus=GREEN`.
 
 Goal 037 accepted by user handoff:
 
@@ -2027,21 +2054,25 @@ The pivot is not a restart. It changes what future slices are allowed to optimiz
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
 3. `docs/CURRENT_GENERATOR_STATE.md`
-4. `docs/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE_SPEC.md`
-5. `docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
-6. `docs/agent-tasks/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
-7. `docs/agent-tasks/GOAL_074_LAUNCHER.txt`
-8. `docs/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR_SPEC.md`
-9. `docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
-10. `docs/agent-tasks/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
-11. `docs/agent-tasks/GOAL_073_LAUNCHER.txt`
-12. `docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md`
-13. `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
-14. `docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
-15. `docs/agent-tasks/GOAL_072_LAUNCHER.txt`
-16. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
-17. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
-18. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
+4. `docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md`
+5. `docs/EXTERNAL_SCOUTING_GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md`
+6. `docs/agent-tasks/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md`
+7. `docs/agent-tasks/GOAL_075_LAUNCHER.txt`
+8. `docs/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE_SPEC.md`
+9. `docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
+10. `docs/agent-tasks/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
+11. `docs/agent-tasks/GOAL_074_LAUNCHER.txt`
+12. `docs/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR_SPEC.md`
+13. `docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
+14. `docs/agent-tasks/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
+15. `docs/agent-tasks/GOAL_073_LAUNCHER.txt`
+16. `docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md`
+17. `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+18. `docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+19. `docs/agent-tasks/GOAL_072_LAUNCHER.txt`
+20. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
+21. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
+22. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
 
 Do not read old root `README_APPLY_*` files or old `docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md` files as current planning authority.
 

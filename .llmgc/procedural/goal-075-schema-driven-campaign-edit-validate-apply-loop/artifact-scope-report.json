@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "goal075_artifact_scope_report_v1",
+  "scenario": "goal-075-schema-driven-campaign-edit-validate-apply-loop",
+  "gate": "schema_driven_campaign_edit_validate_apply_loop_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "allowedOutputDirectory": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop",
+  "artifactFileCount": 12,
+  "generatedFiles": [
+    "edit-workspace-source-manifest.json",
+    "editable-schema-field-catalog.json",
+    "change-set-catalog.json",
+    "validation-diagnostics-matrix.json",
+    "apply-rollback-ledger.json",
+    "row-before-after-diff-matrix.json",
+    "preview-export-refresh-payload.json",
+    "winforms-binding-inventory.json",
+    "quality-gate-scan.json",
+    "invalid-edit-diagnostics-matrix.json",
+    "artifact-scope-report.json",
+    "schema-driven-campaign-edit-validate-apply-loop-report.md"
+  ],
+  "rowCount": 9,
+  "editableFieldCount": 6,
+  "appliedChangeCount": 18,
+  "rollbackCount": 9,
+  "invalidScenarioCount": 16,
+  "qualityGatePassed": true,
+  "winFormsBindingPassed": true
+}

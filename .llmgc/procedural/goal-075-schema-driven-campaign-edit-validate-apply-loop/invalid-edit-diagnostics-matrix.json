@@ -1,0 +1,333 @@
+{
+  "schemaVersion": "schema_driven_campaign_invalid_edit_diagnostics_matrix_v1",
+  "passed": true,
+  "scenarioCount": 16,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_path_evidence",
+      "candidateId": "invalid-absolute-path",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.absolute_path_evidence",
+          "target": "invalid-absolute-path",
+          "message": "Evidence references must remain repository-relative."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-absolute-path",
+          "message": "A supposed edit must change the deterministic row hash."
+        }
+      ]
+    },
+    {
+      "scenarioId": "before_after_hash_unchanged_for_edit",
+      "candidateId": "invalid-unchanged-hash",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-unchanged-hash",
+          "message": "A supposed edit must change the deterministic row hash."
+        }
+      ]
+    },
+    {
+      "scenarioId": "candidate_as_applied_without_validation",
+      "candidateId": "invalid-applied-without-validation",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-applied-without-validation",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.candidate_as_applied_without_validation",
+          "target": "invalid-applied-without-validation",
+          "message": "Applied candidates must have validation proof before apply."
+        }
+      ]
+    },
+    {
+      "scenarioId": "cross_family_leakage",
+      "candidateId": "invalid-cross-family",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-cross-family",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.cross_family_leakage",
+          "target": "invalid-cross-family",
+          "message": "A change-set candidate cannot source values from another family row."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_provenance",
+      "candidateId": "invalid-fake-provenance",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-fake-provenance",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.fake_provenance",
+          "target": "invalid-fake-provenance",
+          "message": "Only manual_user and deterministic_auto_suggestion provenance can apply."
+        }
+      ]
+    },
+    {
+      "scenarioId": "illegal_field_domain",
+      "candidateId": "invalid-illegal-domain",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-illegal-domain",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.illegal_field_domain",
+          "target": "invalid-illegal-domain",
+          "message": "Quality/debt fields are review-only and cannot be applied as campaign edits."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_value_shape",
+      "candidateId": "invalid-value-shape",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-value-shape",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.invalid_value_shape",
+          "target": "invalid-value-shape",
+          "message": "The proposed value shape does not match the editable field catalog."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.invalid_value_shape",
+          "target": "invalid-value-shape",
+          "message": "The proposed value is outside the allowed deterministic domain."
+        }
+      ]
+    },
+    {
+      "scenarioId": "llm_provider_rag_media_network_claim",
+      "candidateId": "invalid-llm-provider-claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-llm-provider-claim",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.llm_provider_rag_media_network_claim",
+          "target": "invalid-llm-provider-claim",
+          "message": "Forbidden mutation or provider claim rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "lua_generated_code_claim",
+      "candidateId": "invalid-lua-generated-code",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-lua-generated-code",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.lua_generated_code_claim",
+          "target": "invalid-lua-generated-code",
+          "message": "Forbidden mutation or provider claim rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "nondeterministic_ordering",
+      "candidateId": "invalid-nondeterministic-order",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-nondeterministic-order",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.nondeterministic_ordering",
+          "target": "invalid-nondeterministic-order",
+          "message": "Change-set ordering must be stable and deterministic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rollback_target_missing",
+      "candidateId": "invalid-rollback-missing",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-rollback-missing",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.rollback_target_missing",
+          "target": "invalid-rollback-missing",
+          "message": "Rollback proof needs an explicit target row id."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_gamepackage_ui_broad_mutation_claim",
+      "candidateId": "invalid-runtime-gamepackage-ui-claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-runtime-gamepackage-ui-claim",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.runtime_gamepackage_ui_broad_mutation_claim",
+          "target": "invalid-runtime-gamepackage-ui-claim",
+          "message": "Forbidden mutation or provider claim rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_mutation_claim",
+      "candidateId": "invalid-unity-claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-unity-claim",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.unity_mutation_claim",
+          "target": "invalid-unity-claim",
+          "message": "Forbidden mutation or provider claim rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_field_id",
+      "candidateId": "invalid-unknown-field",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-unknown-field",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.unknown_field_id",
+          "target": "invalid-unknown-field",
+          "message": "Change-set candidate references a field outside the editable catalog."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_row_id",
+      "candidateId": "invalid-unknown-row",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-unknown-row",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.unknown_row_id",
+          "target": "invalid-unknown-row",
+          "message": "Change-set candidate references a row outside the Goal 074 workspace."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsafe_free_form_prose",
+      "candidateId": "invalid-unsafe-prose",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal075.invalid.before_after_hash_unchanged_for_edit",
+          "target": "invalid-unsafe-prose",
+          "message": "A supposed edit must change the deterministic row hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.invalid_value_shape",
+          "target": "invalid-unsafe-prose",
+          "message": "The proposed value is outside the allowed deterministic domain."
+        },
+        {
+          "severity": "error",
+          "code": "goal075.invalid.unsafe_free_form_prose",
+          "target": "invalid-unsafe-prose",
+          "message": "Free-form prose cannot become authoritative campaign content."
+        }
+      ]
+    }
+  ]
+}

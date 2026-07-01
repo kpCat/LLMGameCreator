@@ -4,6 +4,7 @@ using LLMGameCreator.Application.Composition;
 using LLMGameCreator.Application.Design;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
+using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
@@ -86,6 +87,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<UnityArchiveManualProviderImportService>(Reuse.Singleton);
         _container.Register<UnityArchiveReviewPresenter>(Reuse.Singleton);
         _container.Register<SchemaDrivenCampaignWorkspaceEvidenceService>(Reuse.Singleton);
+        _container.Register<SchemaDrivenCampaignEditEvidenceService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -292,7 +294,8 @@ public sealed class CompositionRoot : IDisposable
 
         _container.RegisterDelegate<CampaignAuthoringReviewWorkspacePageControl>(resolver =>
             new CampaignAuthoringReviewWorkspacePageControl(
-                resolver.Resolve<SchemaDrivenCampaignWorkspaceEvidenceService>()), Reuse.Singleton);
+                resolver.Resolve<SchemaDrivenCampaignWorkspaceEvidenceService>(),
+                resolver.Resolve<SchemaDrivenCampaignEditEvidenceService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

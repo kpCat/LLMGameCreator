@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "schema_driven_campaign_edit_winforms_binding_inventory_v1",
+  "passed": true,
+  "navigationRegistered": true,
+  "groups": [
+    {
+      "groupId": "row_selector",
+      "controlName": "CampaignRowSelectorControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.cs",
+      "separateUserControl": true,
+      "bindsGoal075Data": true
+    },
+    {
+      "groupId": "editable_field_summary",
+      "controlName": "CampaignEditFieldSummaryControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditFieldSummaryControl.cs",
+      "separateUserControl": true,
+      "bindsGoal075Data": true
+    },
+    {
+      "groupId": "validation_diagnostics",
+      "controlName": "CampaignEditValidationControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditValidationControl.cs",
+      "separateUserControl": true,
+      "bindsGoal075Data": true
+    },
+    {
+      "groupId": "apply_rollback_summary",
+      "controlName": "CampaignEditApplyRollbackControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditApplyRollbackControl.cs",
+      "separateUserControl": true,
+      "bindsGoal075Data": true
+    }
+  ],
+  "diagnostics": []
+}

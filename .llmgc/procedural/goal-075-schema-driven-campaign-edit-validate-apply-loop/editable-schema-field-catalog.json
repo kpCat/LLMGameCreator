@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "schema_driven_campaign_editable_field_catalog_v1",
+  "passed": true,
+  "fieldCount": 6,
+  "fields": [
+    {
+      "fieldId": "gameplay_consequence_summary.consequence_intensity",
+      "schemaGroupId": "gameplay_consequence_summary",
+      "domainId": "gameplay_consequence",
+      "valueShape": "enum",
+      "allowedValues": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "editable": true,
+      "finalProseAllowed": false,
+      "sourcePath": "goal074.dynamicSchema.groups.gameplay_consequence_summary"
+    },
+    {
+      "fieldId": "living_world_npc_faction_summary.faction_pressure",
+      "schemaGroupId": "living_world_npc_faction_summary",
+      "domainId": "living_world_faction",
+      "valueShape": "enum",
+      "allowedValues": [
+        "neutral",
+        "tense",
+        "allied"
+      ],
+      "editable": true,
+      "finalProseAllowed": false,
+      "sourcePath": "goal074.dynamicSchema.groups.living_world_npc_faction_summary"
+    },
+    {
+      "fieldId": "settlement_construction_destruction_production_summary.production_focus",
+      "schemaGroupId": "settlement_construction_destruction_production_summary",
+      "domainId": "settlement_production",
+      "valueShape": "enum",
+      "allowedValues": [
+        "repair",
+        "defense",
+        "growth"
+      ],
+      "editable": true,
+      "finalProseAllowed": false,
+      "sourcePath": "goal074.dynamicSchema.groups.settlement_construction_destruction_production_summary"
+    },
+    {
+      "fieldId": "narrative_quest_dialogue_event_summary.event_intent",
+      "schemaGroupId": "narrative_quest_dialogue_event_summary",
+      "domainId": "narrative_event_intent",
+      "valueShape": "enum",
+      "allowedValues": [
+        "investigate",
+        "rescue",
+        "trade"
+      ],
+      "editable": true,
+      "finalProseAllowed": false,
+      "sourcePath": "goal074.dynamicSchema.groups.narrative_quest_dialogue_event_summary"
+    },
+    {
+      "fieldId": "combat_magic_boss_summary.status_pressure",
+      "schemaGroupId": "combat_magic_boss_summary",
+      "domainId": "combat_magic_status",
+      "valueShape": "enum",
+      "allowedValues": [
+        "burn",
+        "freeze",
+        "shock"
+      ],
+      "editable": true,
+      "finalProseAllowed": false,
+      "sourcePath": "goal074.dynamicSchema.groups.combat_magic_boss_summary"
+    },
+    {
+      "fieldId": "weather_daynight_crisis_summary.crisis_pressure",
+      "schemaGroupId": "weather_daynight_crisis_summary",
+      "domainId": "weather_crisis_pressure",
+      "valueShape": "enum",
+      "allowedValues": [
+        "calm",
+        "storm",
+        "crisis"
+      ],
+      "editable": true,
+      "finalProseAllowed": false,
+      "sourcePath": "goal074.dynamicSchema.groups.weather_daynight_crisis_summary"
+    }
+  ]
+}

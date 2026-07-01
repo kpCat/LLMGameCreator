@@ -161,6 +161,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md` | Goal 073 scouting: manual bounded source formatting only; no dependencies, no broad autoformatter and no feature work. |
 | `docs/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE_SPEC.md` | Goal 074 task/spec: schema-driven campaign authoring/review workspace consuming Goal 060-073 evidence into Application workspace data and bounded WinForms UserControls, with final stop at `schema_driven_campaign_authoring_review_workspace_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md` | Goal 074 scouting: use existing WinForms/UserControl patterns and BCL-only workspace contracts; no external UI stack, provider, LLM/RAG, schema, Runtime, Unity or Lua dependency adoption. |
+| `docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md` | Goal 075 task/spec: schema-driven campaign edit/validate/apply loop consuming accepted Goal 074 workspace and Goal 060-073 evidence into Application edit/change-set/apply/rollback evidence and bounded WinForms review controls, with final stop at `schema_driven_campaign_edit_validate_apply_loop_verification`. |
+| `docs/EXTERNAL_SCOUTING_GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md` | Goal 075 scouting: reuse existing Goal 074 workspace contracts and WinForms UserControl patterns; no external editor stack, provider, LLM/RAG, schema, Runtime, Unity or Lua dependency adoption. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -205,7 +207,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-schema_driven_campaign_authoring_review_workspace_verification
+schema_driven_campaign_edit_validate_apply_loop_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -281,12 +283,17 @@ inventory hash `7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1
 debt register hash `b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33`.
 Goal 073 is accepted by Goal 074 user handoff:
 `source_format_p0_readability_repair_verification passed before Goal 074`; it repaired the Goal 072
-P0 source-format blocker without marking Goal 072 passed. Goal 074 is produced for review with
+P0 source-format blocker without marking Goal 072 passed. Goal 074 produced review evidence with
 `schema_driven_campaign_authoring_review_workspace_verification required`, `accepted=false`,
 `implementationStatus=GREEN`, `rowCount=9`, `schemaGroupCount=13` and deterministic hash
 `5b7919a92ac6354b47e0fb1f0682cb74619ca48572f5892cfa509add8803d823`; the hotfix quality guard scans
 26 Goal 074 C# files including `CompositionRoot.cs` with `linesOver500Count=0`,
-`minifiedSourceFileCount=0` and `filesWithTooFewLinesForSizeCount=0`.
+`minifiedSourceFileCount=0` and `filesWithTooFewLinesForSizeCount=0`. Goal 074 is accepted by the
+Goal 075 user handoff: `schema_driven_campaign_authoring_review_workspace_verification passed before Goal 075`.
+Goal 075 is produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, `rowCount=9`, `editableFieldCount=6`,
+`candidateCount=18`, `appliedChangeCount=18`, `rollbackCount=9`, `invalidScenarioCount=16` and
+deterministic hash `cc9d833354a73500491b5f4fdaeac4ef1dbb67224d7b74d9587bfef1197218e0`.
 
 Allowed next sequence:
 
@@ -321,7 +328,9 @@ Allowed next sequence:
 29. Keep Goal 071 Unity Alpha Interactive Campaign Player recorded as passed by user handoff before Goal 072.
 30. Keep Goal 072 Generator Spine Quality Consolidation produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker but did not mark Goal 072 passed.
 31. Keep Goal 073 Source Format P0 Readability Repair recorded as passed by user handoff before Goal 074.
-32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace produced for review at `schema_driven_campaign_authoring_review_workspace_verification required`, `accepted=false`, `implementationStatus=GREEN`.
+32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace recorded as accepted by user handoff before Goal 075.
+33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`, `accepted=false` and `implementationStatus=GREEN`.
+34. Do not start Goal 076 while Goal 075 remains at its manual review gate.
 
 Kill criterion:
 
