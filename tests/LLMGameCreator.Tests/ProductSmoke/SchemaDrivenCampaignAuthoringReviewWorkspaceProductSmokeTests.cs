@@ -29,6 +29,23 @@ public sealed class SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTest
         Assert.Equal(9, write.Result.RowSelector.RowCount);
         Assert.Equal(13, write.Result.DynamicSchema.Groups.Count);
         Assert.Equal(write.Result.DynamicSchema.Groups.Count, write.Result.UiBindingContract.GroupBindings.Count);
+        Assert.True(write.Result.QualityGateScan.CompositionRootScanned);
+        Assert.True(write.Result.QualityGateScan.ScannedFileCount >= 26);
+        Assert.True(write.Result.QualityGateScan.MaxLineLength <= 500);
+        Assert.Equal(0, write.Result.QualityGateScan.LinesOver500Count);
+        Assert.Equal(0, write.Result.QualityGateScan.FilesWithTooFewLinesForSizeCount);
+        Assert.Equal(0, write.Result.QualityGateScan.MinifiedSourceFileCount);
+        Assert.Contains(
+            write.Result.QualityGateScan.Files,
+            file => file.RelativePath == "src/LLMGameCreator.WinForms/CompositionRoot.cs"
+                && file.LineCount >= file.MinimumExpectedLineCount
+                && !file.TooFewLinesForSize);
+        Assert.Equal(7, write.Result.WinFormsControlInventory.Controls.Count);
+        Assert.All(write.Result.WinFormsControlInventory.Controls, control =>
+        {
+            Assert.True(control.SeparateUserControl);
+            Assert.True(control.SchemaDrivenBinding);
+        });
         Assert.Contains(
             write.Result.ProvenanceLedger.Entries,
             entry => entry.SourceGoal == "Goal072" && entry.Category == "quarantined");

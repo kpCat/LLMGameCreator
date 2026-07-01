@@ -464,10 +464,10 @@ schemaGroupCount=13
 uiBindingGroupCount=13
 provenanceEntryCount=17
 actionPlanItemCount=14
-deterministicHash=5e45ce2cc0ce6f1f491443a08205cac9bcd307c35090395a9b0a31cdfc37b916
+deterministicHash=5b7919a92ac6354b47e0fb1f0682cb74619ca48572f5892cfa509add8803d823
 ```
 
-Goal 074 consumes Goal 060-073 evidence into a BCL-only Application workspace and bounded WinForms UserControl review surface. Evidence is produced under `.llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/`; Goal 074 remains `accepted=false` and the manual gate is not marked passed.
+Goal 074 consumes Goal 060-073 evidence into a BCL-only Application workspace and bounded WinForms UserControl review surface. Evidence is produced under `.llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/`; the quality guard now scans 26 Goal 074 C# files including `src/LLMGameCreator.WinForms/CompositionRoot.cs`, records too-few-lines-for-size metrics, and reports `maxLineLength=154`, `linesOver500Count=0`, `minifiedSourceFileCount=0`, `filesWithTooFewLinesForSizeCount=0`. Goal 074 remains `accepted=false` and the manual gate is not marked passed.
 
 ## Current Phase
 

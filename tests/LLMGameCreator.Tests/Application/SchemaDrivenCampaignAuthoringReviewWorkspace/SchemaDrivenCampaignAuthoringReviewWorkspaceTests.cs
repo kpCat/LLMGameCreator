@@ -103,6 +103,59 @@ public sealed class SchemaDrivenCampaignAuthoringReviewWorkspaceTests
     }
 
     [Fact]
+    public void QualityGateScansCompositionRootAndReadabilityMetrics()
+    {
+        var result = Build();
+        var compositionRoot = Assert.Single(
+            result.QualityGateScan.Files,
+            file => file.RelativePath == "src/LLMGameCreator.WinForms/CompositionRoot.cs");
+
+        Assert.True(result.QualityGateScan.Passed);
+        Assert.True(result.QualityGateScan.CompositionRootScanned);
+        Assert.Equal(0, result.QualityGateScan.LinesOver500Count);
+        Assert.Equal(0, result.QualityGateScan.FilesWithTooFewLinesForSizeCount);
+        Assert.Equal(0, result.QualityGateScan.MinifiedSourceFileCount);
+        Assert.True(compositionRoot.LineCount >= compositionRoot.MinimumExpectedLineCount);
+        Assert.False(compositionRoot.TooFewLinesForSize);
+    }
+
+    [Fact]
+    public void QualityGateRejectsTooFewLinesForSizeWithoutLongLine()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "llmgc-goal074-quality-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var winFormsRoot = Path.Combine(root, "src", "LLMGameCreator.WinForms");
+            Directory.CreateDirectory(winFormsRoot);
+            var compactLines = Enumerable
+                .Repeat("//" + new string('x', 448), 6)
+                .ToArray();
+            File.WriteAllLines(Path.Combine(winFormsRoot, "CompositionRoot.cs"), compactLines);
+
+            var scan = new SchemaDrivenCampaignWorkspaceQualityGateScanner().Scan(root);
+            var compositionRoot = Assert.Single(scan.Files);
+
+            Assert.False(scan.Passed);
+            Assert.True(scan.CompositionRootScanned);
+            Assert.Equal(0, scan.LinesOver500Count);
+            Assert.Equal(1, scan.FilesWithTooFewLinesForSizeCount);
+            Assert.Equal(1, scan.MinifiedSourceFileCount);
+            Assert.True(compositionRoot.TooFewLinesForSize);
+            Assert.True(compositionRoot.MaxLineLength <= 500);
+            Assert.Contains(
+                scan.Diagnostics,
+                diagnostic => diagnostic.Code == "goal074.quality.too_few_lines_for_size");
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public async Task EvidenceWriterCreatesAllRequiredFiles()
     {
         var service = new SchemaDrivenCampaignWorkspaceEvidenceService();

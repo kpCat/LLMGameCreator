@@ -1,186 +1,273 @@
 {
   "schemaVersion": "schema_driven_campaign_quality_gate_scan_v1",
   "passed": true,
-  "scannedFileCount": 25,
-  "maxLineLength": 141,
+  "scannedFileCount": 26,
+  "maxLineLength": 154,
   "linesOver500Count": 0,
   "filesOver900LinesCount": 0,
   "minifiedSourceFileCount": 0,
+  "filesWithTooFewLinesForSizeCount": 0,
+  "compositionRootScanned": true,
   "newAlphaRuntimeBootstrapRoute": false,
   "files": [
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceBuilder.cs",
       "lineCount": 394,
+      "byteCount": 17655,
+      "minimumExpectedLineCount": 58,
       "maxLineLength": 134,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceContracts.cs",
-      "lineCount": 158,
+      "lineCount": 162,
+      "byteCount": 6793,
+      "minimumExpectedLineCount": 22,
       "maxLineLength": 108,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceEvidenceService.cs",
       "lineCount": 370,
+      "byteCount": 18872,
+      "minimumExpectedLineCount": 62,
       "maxLineLength": 140,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceHash.cs",
-      "lineCount": 51,
+      "lineCount": 50,
+      "byteCount": 1625,
+      "minimumExpectedLineCount": 5,
       "maxLineLength": 94,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceModels.cs",
-      "lineCount": 207,
+      "lineCount": 206,
+      "byteCount": 9057,
+      "minimumExpectedLineCount": 30,
       "maxLineLength": 111,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceQualityGateScanner.cs",
-      "lineCount": 121,
+      "lineCount": 149,
+      "byteCount": 6246,
+      "minimumExpectedLineCount": 20,
       "maxLineLength": 125,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceReports.cs",
-      "lineCount": 85,
+      "lineCount": 84,
+      "byteCount": 4523,
+      "minimumExpectedLineCount": 15,
       "maxLineLength": 111,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceSourceLoader.cs",
-      "lineCount": 535,
+      "lineCount": 534,
+      "byteCount": 26583,
+      "minimumExpectedLineCount": 88,
       "maxLineLength": 141,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceValidator.cs",
       "lineCount": 255,
+      "byteCount": 11610,
+      "minimumExpectedLineCount": 38,
       "maxLineLength": 126,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+      "lineCount": 340,
+      "byteCount": 24102,
+      "minimumExpectedLineCount": 80,
+      "maxLineLength": 154,
+      "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignActionPlanControl.Designer.cs",
       "lineCount": 97,
+      "byteCount": 3588,
+      "minimumExpectedLineCount": 11,
       "maxLineLength": 72,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignActionPlanControl.cs",
       "lineCount": 30,
+      "byteCount": 987,
+      "minimumExpectedLineCount": 3,
       "maxLineLength": 98,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.Designer.cs",
       "lineCount": 178,
+      "byteCount": 8091,
+      "minimumExpectedLineCount": 26,
       "maxLineLength": 76,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
       "lineCount": 77,
+      "byteCount": 2616,
+      "minimumExpectedLineCount": 8,
       "maxLineLength": 108,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignDiagnosticsControl.Designer.cs",
       "lineCount": 92,
+      "byteCount": 3441,
+      "minimumExpectedLineCount": 11,
       "maxLineLength": 78,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignDiagnosticsControl.cs",
       "lineCount": 32,
+      "byteCount": 1116,
+      "minimumExpectedLineCount": 3,
       "maxLineLength": 92,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignProvenanceControl.Designer.cs",
       "lineCount": 102,
+      "byteCount": 3934,
+      "minimumExpectedLineCount": 13,
       "maxLineLength": 77,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignProvenanceControl.cs",
       "lineCount": 32,
+      "byteCount": 1149,
+      "minimumExpectedLineCount": 3,
       "maxLineLength": 102,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignQualityGateControl.Designer.cs",
       "lineCount": 97,
+      "byteCount": 3583,
+      "minimumExpectedLineCount": 11,
       "maxLineLength": 72,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignQualityGateControl.cs",
       "lineCount": 43,
+      "byteCount": 1666,
+      "minimumExpectedLineCount": 5,
       "maxLineLength": 101,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.Designer.cs",
       "lineCount": 102,
+      "byteCount": 3770,
+      "minimumExpectedLineCount": 12,
       "maxLineLength": 71,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.cs",
       "lineCount": 34,
+      "byteCount": 1222,
+      "minimumExpectedLineCount": 4,
       "maxLineLength": 94,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignSchemaGroupControl.Designer.cs",
       "lineCount": 154,
+      "byteCount": 6491,
+      "minimumExpectedLineCount": 21,
       "maxLineLength": 75,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignSchemaGroupControl.cs",
       "lineCount": 44,
+      "byteCount": 1634,
+      "minimumExpectedLineCount": 5,
       "maxLineLength": 87,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignAuthoringReviewWorkspaceTests.cs",
-      "lineCount": 201,
+      "lineCount": 254,
+      "byteCount": 10808,
+      "minimumExpectedLineCount": 36,
       "maxLineLength": 125,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTests.cs",
-      "lineCount": 61,
+      "lineCount": 78,
+      "byteCount": 3734,
+      "minimumExpectedLineCount": 12,
       "maxLineLength": 114,
       "linesOver500Count": 0,
+      "tooFewLinesForSize": false,
       "minifiedSourceCandidate": false
     }
   ],

@@ -124,6 +124,8 @@ public sealed record QualityGateScan
     public int LinesOver500Count { get; init; }
     public int FilesOver900LinesCount { get; init; }
     public int MinifiedSourceFileCount { get; init; }
+    public int FilesWithTooFewLinesForSizeCount { get; init; }
+    public bool CompositionRootScanned { get; init; }
     public bool NewAlphaRuntimeBootstrapRoute { get; init; }
     public IReadOnlyList<QualityGateFileScan> Files { get; init; } = [];
     public IReadOnlyList<CampaignWorkspaceDiagnostic> Diagnostics { get; init; } = [];
@@ -133,8 +135,11 @@ public sealed record QualityGateFileScan
 {
     public string RelativePath { get; init; } = string.Empty;
     public int LineCount { get; init; }
+    public int ByteCount { get; init; }
+    public int MinimumExpectedLineCount { get; init; }
     public int MaxLineLength { get; init; }
     public int LinesOver500Count { get; init; }
+    public bool TooFewLinesForSize { get; init; }
     public bool MinifiedSourceCandidate { get; init; }
 }
 

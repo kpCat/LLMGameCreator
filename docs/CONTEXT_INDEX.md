@@ -284,7 +284,9 @@ Goal 073 is accepted by Goal 074 user handoff:
 P0 source-format blocker without marking Goal 072 passed. Goal 074 is produced for review with
 `schema_driven_campaign_authoring_review_workspace_verification required`, `accepted=false`,
 `implementationStatus=GREEN`, `rowCount=9`, `schemaGroupCount=13` and deterministic hash
-`5e45ce2cc0ce6f1f491443a08205cac9bcd307c35090395a9b0a31cdfc37b916`.
+`5b7919a92ac6354b47e0fb1f0682cb74619ca48572f5892cfa509add8803d823`; the hotfix quality guard scans
+26 Goal 074 C# files including `CompositionRoot.cs` with `linesOver500Count=0`,
+`minifiedSourceFileCount=0` and `filesWithTooFewLinesForSizeCount=0`.
 
 Allowed next sequence:
 

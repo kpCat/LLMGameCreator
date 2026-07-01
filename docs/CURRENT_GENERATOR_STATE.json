@@ -1651,8 +1651,9 @@
                                                                                             "Goal 031 and Goal 032 remain produced-for-review/not passed.",
                                                                                             "Goal 074 produced schema-driven campaign authoring/review workspace evidence under .llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace with accepted=false.",
                                                                                             "implementationStatus=GREEN, rowCount=9, familyCount=3, seedCount=3, schemaGroupCount=13, uiBindingGroupCount=13, provenanceEntryCount=17, actionPlanItemCount=14.",
-                                                                                            "deterministicHash=5e45ce2cc0ce6f1f491443a08205cac9bcd307c35090395a9b0a31cdfc37b916.",
-                                                                                            "Focused Goal074 tests passed, product smoke passed, CurrentState/Goal074/SchemaDriven filter passed, and check-all.ps1 passed with 1142 ordinary tests and 0 warnings."
+                                                                                            "deterministicHash=5b7919a92ac6354b47e0fb1f0682cb74619ca48572f5892cfa509add8803d823.",
+                                                                                            "Quality guard scan covers 26 Goal 074 C# files including src/LLMGameCreator.WinForms/CompositionRoot.cs, records too-few-lines-for-size metrics, and reports maxLineLength=154, linesOver500Count=0, minifiedSourceFileCount=0, filesWithTooFewLinesForSizeCount=0.",
+                                                                                            "Focused Goal074 tests passed, product smoke passed, CurrentState/Goal074/SchemaDriven filter passed, and check-all.ps1 passed with 1144 ordinary tests and 0 warnings."
                                                                                         ],
                                                                     "next_action":  "review_goal_074_schema_driven_campaign_authoring_review_workspace"
                                                                 },

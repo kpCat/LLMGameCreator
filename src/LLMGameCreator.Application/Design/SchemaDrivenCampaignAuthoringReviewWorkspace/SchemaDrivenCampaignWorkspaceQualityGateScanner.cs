@@ -13,6 +13,7 @@ public sealed class SchemaDrivenCampaignWorkspaceQualityGateScanner
 
     private static readonly IReadOnlyList<string> ScanFiles =
     [
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
         "tests/LLMGameCreator.Tests/ProductSmoke/SchemaDrivenCampaignAuthoringReviewWorkspaceProductSmokeTests.cs"
     ];
 
@@ -26,6 +27,9 @@ public sealed class SchemaDrivenCampaignWorkspaceQualityGateScanner
         var linesOver500 = files.Sum(file => file.LinesOver500Count);
         var filesOver900 = files.Count(file => file.LineCount > 900);
         var minified = files.Count(file => file.MinifiedSourceCandidate);
+        var tooFewLinesForSize = files.Count(file => file.TooFewLinesForSize);
+        var compositionRootScanned = files.Any(file =>
+            file.RelativePath == "src/LLMGameCreator.WinForms/CompositionRoot.cs");
         var alphaRoute = files.Any(file => file.RelativePath.Contains("AlphaRuntimeBootstrap.cs", StringComparison.Ordinal));
 
         if (linesOver500 > 0)
@@ -52,6 +56,22 @@ public sealed class SchemaDrivenCampaignWorkspaceQualityGateScanner
                 "Changed source files must not be minified."));
         }
 
+        if (tooFewLinesForSize > 0)
+        {
+            diagnostics.Add(CampaignWorkspaceDiagnostic.Error(
+                "goal074.quality.too_few_lines_for_size",
+                "qualityGateScan.filesWithTooFewLinesForSizeCount",
+                "Changed source files must keep enough line breaks for their byte size."));
+        }
+
+        if (!compositionRootScanned)
+        {
+            diagnostics.Add(CampaignWorkspaceDiagnostic.Error(
+                "goal074.quality.composition_root_missing",
+                "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+                "Goal 074 quality scan must include CompositionRoot.cs."));
+        }
+
         if (alphaRoute)
         {
             diagnostics.Add(CampaignWorkspaceDiagnostic.Error(
@@ -68,6 +88,8 @@ public sealed class SchemaDrivenCampaignWorkspaceQualityGateScanner
             LinesOver500Count = linesOver500,
             FilesOver900LinesCount = filesOver900,
             MinifiedSourceFileCount = minified,
+            FilesWithTooFewLinesForSizeCount = tooFewLinesForSize,
+            CompositionRootScanned = compositionRootScanned,
             NewAlphaRuntimeBootstrapRoute = alphaRoute,
             Files = files,
             Diagnostics = diagnostics
@@ -105,13 +127,19 @@ public sealed class SchemaDrivenCampaignWorkspaceQualityGateScanner
         var text = File.ReadAllText(path, Encoding.UTF8);
         var lines = text.Split(["\r\n", "\n"], StringSplitOptions.None);
         var lineLengths = lines.Select(line => line.Length).ToList();
+        var byteCount = Encoding.UTF8.GetByteCount(text);
+        var minimumExpectedLineCount = Math.Max(2, byteCount / 300);
+        var tooFewLinesForSize = byteCount >= 1_500 && lines.Length < minimumExpectedLineCount;
         return new QualityGateFileScan
         {
             RelativePath = Relative(projectRoot, path),
             LineCount = lines.Length,
+            ByteCount = byteCount,
+            MinimumExpectedLineCount = minimumExpectedLineCount,
             MaxLineLength = lineLengths.Count == 0 ? 0 : lineLengths.Max(),
             LinesOver500Count = lineLengths.Count(length => length > 500),
-            MinifiedSourceCandidate = lines.Length <= 1 || lineLengths.Any(length => length > 500)
+            TooFewLinesForSize = tooFewLinesForSize,
+            MinifiedSourceCandidate = lines.Length <= 1 || lineLengths.Any(length => length > 500) || tooFewLinesForSize
         };
     }
 
