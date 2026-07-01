@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "integrated_campaign_timeline_variance_metrics_v1",
+  "passed": true,
+  "familyCount": 3,
+  "seedCount": 3,
+  "distinctRowHashCount": 9,
+  "distinctPhaseProfileCount": 3,
+  "familyAxes": [
+    {
+      "familyId": "map_panel_rpg",
+      "rowCount": 3,
+      "changedWeatherIds": [
+        "storm-route-pressure/seed-alpha",
+        "storm-route-pressure/seed-beta",
+        "storm-route-pressure/seed-gamma"
+      ],
+      "changedCrisisIds": [
+        "refugee-route-crisis/seed-alpha",
+        "refugee-route-crisis/seed-beta",
+        "refugee-route-crisis/seed-gamma"
+      ],
+      "changedArbitrationDecisions": [
+        "checkpoint diplomacy before travel",
+        "escort priority with repair delay",
+        "settlement repair before convoy"
+      ],
+      "changedPhaseProfiles": [
+        "route_faction_settlement_quest_boss_cascade"
+      ]
+    },
+    {
+      "familyId": "survival_sandbox",
+      "rowCount": 3,
+      "changedWeatherIds": [
+        "survival-hazard-front/seed-alpha",
+        "survival-hazard-front/seed-beta",
+        "survival-hazard-front/seed-gamma"
+      ],
+      "changedCrisisIds": [
+        "shelter-resource-crisis/seed-alpha",
+        "shelter-resource-crisis/seed-beta",
+        "shelter-resource-crisis/seed-gamma"
+      ],
+      "changedArbitrationDecisions": [
+        "perimeter defense before scavenging",
+        "shelter repair before optional rescue",
+        "water ration before crafting"
+      ],
+      "changedPhaseProfiles": [
+        "hazard_need_shelter_resource_recovery_cascade"
+      ]
+    },
+    {
+      "familyId": "first_person_grid_dungeon",
+      "rowCount": 3,
+      "changedWeatherIds": [
+        "dungeon-fog-pressure/seed-alpha",
+        "dungeon-fog-pressure/seed-beta",
+        "dungeon-fog-pressure/seed-gamma"
+      ],
+      "changedCrisisIds": [
+        "sealed-door-crisis/seed-alpha",
+        "sealed-door-crisis/seed-beta",
+        "sealed-door-crisis/seed-gamma"
+      ],
+      "changedArbitrationDecisions": [
+        "anti-hazard charm before boss loot",
+        "clue first then restricted loot",
+        "warden diplomacy before relic extraction"
+      ],
+      "changedPhaseProfiles": [
+        "darkness_route_boss_magic_loot_cascade"
+      ]
+    }
+  ]
+}

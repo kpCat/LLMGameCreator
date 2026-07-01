@@ -1,0 +1,7 @@
+{
+  "scenario": "goal-070-integrated-campaign-timeline-simulation-matrix",
+  "status": "produced",
+  "allowedArtifactRoot": ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix",
+  "gate": "integrated_campaign_timeline_simulation_matrix_verification",
+  "accepted": false
+}

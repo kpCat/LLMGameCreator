@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "integrated_campaign_timeline_conflict_arbitration_ledger_v1",
+  "passed": true,
+  "rowCount": 9,
+  "arbitrationCount": 9,
+  "arbitrations": [
+    {
+      "arbitrationId": "goal070/first-person-grid-dungeon/seed-alpha/arbitration",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "conflict": "boss loot conflicts with faction embargo",
+      "decision": "clue first then restricted loot",
+      "loser": "raw loot grab",
+      "affectedCategories": [
+        "combat_magic_status",
+        "narrative_quest_dialogue",
+        "npc_faction_world_event"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/first-person-grid-dungeon/seed-beta/arbitration",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "conflict": "boss loot conflicts with faction embargo",
+      "decision": "anti-hazard charm before boss loot",
+      "loser": "torch hoarding",
+      "affectedCategories": [
+        "combat_magic_status",
+        "narrative_quest_dialogue",
+        "npc_faction_world_event"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/first-person-grid-dungeon/seed-gamma/arbitration",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "conflict": "boss loot conflicts with faction embargo",
+      "decision": "warden diplomacy before relic extraction",
+      "loser": "ignore warning",
+      "affectedCategories": [
+        "combat_magic_status",
+        "narrative_quest_dialogue",
+        "npc_faction_world_event"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/map-panel-rpg/seed-alpha/arbitration",
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "conflict": "weather reduces travel but quest deadline pressures travel",
+      "decision": "escort priority with repair delay",
+      "loser": "direct travel",
+      "affectedCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "narrative_quest_dialogue"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/map-panel-rpg/seed-beta/arbitration",
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "conflict": "weather reduces travel but quest deadline pressures travel",
+      "decision": "checkpoint diplomacy before travel",
+      "loser": "combat shortcut",
+      "affectedCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "narrative_quest_dialogue"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/map-panel-rpg/seed-gamma/arbitration",
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "conflict": "weather reduces travel but quest deadline pressures travel",
+      "decision": "settlement repair before convoy",
+      "loser": "market hoarding",
+      "affectedCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "narrative_quest_dialogue"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/survival-sandbox/seed-alpha/arbitration",
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "conflict": "resource shortage conflicts with settlement repair",
+      "decision": "shelter repair before optional rescue",
+      "loser": "comfort upgrade",
+      "affectedCategories": [
+        "settlement_production",
+        "economy_crafting_resource",
+        "narrative_quest_dialogue"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/survival-sandbox/seed-beta/arbitration",
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "conflict": "resource shortage conflicts with settlement repair",
+      "decision": "water ration before crafting",
+      "loser": "trade surplus",
+      "affectedCategories": [
+        "settlement_production",
+        "economy_crafting_resource",
+        "narrative_quest_dialogue"
+      ],
+      "passed": true
+    },
+    {
+      "arbitrationId": "goal070/survival-sandbox/seed-gamma/arbitration",
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "conflict": "resource shortage conflicts with settlement repair",
+      "decision": "perimeter defense before scavenging",
+      "loser": "long-range travel",
+      "affectedCategories": [
+        "settlement_production",
+        "economy_crafting_resource",
+        "narrative_quest_dialogue"
+      ],
+      "passed": true
+    }
+  ]
+}

@@ -38,7 +38,8 @@
     ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/",
     ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/",
     ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/",
-    ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/"
+    ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/",
+    ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -518,6 +519,27 @@
         ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/",
         "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/",
         "tests/LLMGameCreator.Tests/Application/WorldEventWeatherDayNightCrisisMatrix/"
+      ]
+    },
+    {
+      "scenario": "goal-070-integrated-campaign-timeline-simulation-matrix",
+      "allowedPaths": [
+        "docs/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md",
+        "docs/agent-tasks/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md",
+        "docs/agent-tasks/GOAL_070_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/IntegratedCampaignTimelineSimulationMatrixProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/",
+        "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/",
+        "tests/LLMGameCreator.Tests/Application/IntegratedCampaignTimelineSimulationMatrix/"
       ]
     }
   ]

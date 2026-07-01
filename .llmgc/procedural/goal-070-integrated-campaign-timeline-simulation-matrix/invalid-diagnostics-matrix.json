@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "integrated_campaign_timeline_invalid_diagnostics_matrix_v1",
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "arbitrary_lua_execution_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.arbitrary_lua_execution_claim",
+          "target": "arbitrary_lua_execution_claim",
+          "message": "Arbitrary Lua execution claims are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "broad_unity_gameplay_mutation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.broad_unity_gameplay_mutation_claim",
+          "target": "broad_unity_gameplay_mutation_claim",
+          "message": "Broad Unity gameplay mutation is forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_row_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.duplicate_row_id",
+          "target": "duplicate_row_id",
+          "message": "Timeline row ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_family",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.fake_family",
+          "target": "fake_family",
+          "message": "Unknown family ids are rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_seed",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.fake_seed",
+          "target": "fake_seed",
+          "message": "Unknown seed ids are rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_source_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.fake_source_id",
+          "target": "fake_source_id",
+          "message": "Source ids must come from Goal 060-069 compact evidence."
+        }
+      ]
+    },
+    {
+      "scenarioId": "final_prose_leakage",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.final_prose_leakage",
+          "target": "final_prose_leakage",
+          "message": "Final prose generation is forbidden in timeline evidence."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_arbitration",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.missing_arbitration",
+          "target": "missing_arbitration",
+          "message": "Each row needs a conflict/arbitration decision."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_cross_system_cascade",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.missing_cross_system_cascade",
+          "target": "missing_cross_system_cascade",
+          "message": "Each row needs at least three cross-system cascades."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_family_row",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.missing_family_row",
+          "target": "missing_family_row",
+          "message": "All 3 family x 3 seed rows are required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal069_source",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.missing_goal069_source",
+          "target": "missing_goal069_source",
+          "message": "Goal 069 world-event source evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "nondeterministic_order",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.nondeterministic_order",
+          "target": "nondeterministic_order",
+          "message": "Timeline output order must be deterministic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_llm_rag_media_generation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.provider_llm_rag_media_generation_claim",
+          "target": "provider_llm_rag_media_generation_claim",
+          "message": "Provider, LLM, RAG and media generation claims are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "replay_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.replay_mismatch",
+          "target": "replay_mismatch",
+          "message": "Replay hashes must be deterministic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_ui_gamepackage_schema_mutation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.runtime_ui_gamepackage_schema_mutation_claim",
+          "target": "runtime_ui_gamepackage_schema_mutation_claim",
+          "message": "Runtime/UI/GamePackage schema mutation claims are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "save_load_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.save_load_mismatch",
+          "target": "save_load_mismatch",
+          "message": "Save/load checkpoint hashes must roundtrip."
+        }
+      ]
+    },
+    {
+      "scenarioId": "stale_goal069_handoff",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.stale_goal069_handoff",
+          "target": "stale_goal069_handoff",
+          "message": "Goal 069 must be accepted by user handoff before Goal 070."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unchanged_final_state",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.unchanged_final_state",
+          "target": "unchanged_final_state",
+          "message": "Final state hash must differ from initial state hash."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsafe_path",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.unsafe_path",
+          "target": "unsafe_path",
+          "message": "Absolute, rooted, protocol and parent-relative paths are rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "variance_only_by_id_hash",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal070.invalid.variance_only_by_id_hash",
+          "target": "variance_only_by_id_hash",
+          "message": "Variance must include category/profile changes, not only ids or hashes."
+        }
+      ]
+    }
+  ]
+}

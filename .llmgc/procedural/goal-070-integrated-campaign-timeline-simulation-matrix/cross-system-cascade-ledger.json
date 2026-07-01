@@ -1,0 +1,527 @@
+{
+  "schemaVersion": "integrated_campaign_timeline_cascade_ledger_v1",
+  "passed": true,
+  "rowCount": 9,
+  "cascadeCount": 27,
+  "cascades": [
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-alpha/cascade-01",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-03-combat-magic-ability-status-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "combat_magic_status"
+      ],
+      "cause": "night fog seals route",
+      "effect": "torch route forces boss hazard and magic light spend/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-alpha/cascade-02",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-03-combat-magic-ability-status-update",
+        "tick-04-settlement-production-damage-repair-defense-update",
+        "tick-06-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "combat_magic_status",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "boss phase hazard",
+      "effect": "outpost defense damage creates repair crafting demand/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-alpha/cascade-03",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-07-npc-faction-world-event-update",
+        "tick-06-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "narrative_quest_dialogue",
+        "npc_faction_world_event",
+        "economy_crafting_resource"
+      ],
+      "cause": "loot clue branch",
+      "effect": "warden embargo changes fuel and charm economy/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-beta/cascade-01",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-03-combat-magic-ability-status-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "combat_magic_status"
+      ],
+      "cause": "night fog seals route",
+      "effect": "torch route forces boss hazard and magic light spend/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-beta/cascade-02",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-03-combat-magic-ability-status-update",
+        "tick-04-settlement-production-damage-repair-defense-update",
+        "tick-06-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "combat_magic_status",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "boss phase hazard",
+      "effect": "outpost defense damage creates repair crafting demand/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-beta/cascade-03",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-07-npc-faction-world-event-update",
+        "tick-06-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "narrative_quest_dialogue",
+        "npc_faction_world_event",
+        "economy_crafting_resource"
+      ],
+      "cause": "loot clue branch",
+      "effect": "warden embargo changes fuel and charm economy/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-gamma/cascade-01",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-03-combat-magic-ability-status-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "combat_magic_status"
+      ],
+      "cause": "night fog seals route",
+      "effect": "torch route forces boss hazard and magic light spend/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-gamma/cascade-02",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-03-combat-magic-ability-status-update",
+        "tick-04-settlement-production-damage-repair-defense-update",
+        "tick-06-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "combat_magic_status",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "boss phase hazard",
+      "effect": "outpost defense damage creates repair crafting demand/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/first-person-grid-dungeon/seed-gamma/cascade-03",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-07-npc-faction-world-event-update",
+        "tick-06-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "narrative_quest_dialogue",
+        "npc_faction_world_event",
+        "economy_crafting_resource"
+      ],
+      "cause": "loot clue branch",
+      "effect": "warden embargo changes fuel and charm economy/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-alpha/cascade-01",
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-03-npc-faction-world-event-update",
+        "tick-05-narrative-quest-dialogue-event-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "npc_faction_world_event",
+        "narrative_quest_dialogue"
+      ],
+      "cause": "storm bridge damage",
+      "effect": "detour delays merchant, faction trust shifts, escort branch opens/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-alpha/cascade-02",
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-04-settlement-production-damage-repair-defense-update",
+        "tick-07-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "spatial_traversal_chunk",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "route closure",
+      "effect": "settlement repair consumes market stock/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-alpha/cascade-03",
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-06-combat-magic-ability-status-update",
+        "tick-03-npc-faction-world-event-update"
+      ],
+      "systemCategories": [
+        "narrative_quest_dialogue",
+        "combat_magic_status",
+        "npc_faction_world_event"
+      ],
+      "cause": "checkpoint quest pressure",
+      "effect": "ambush risk changes patrol reputation/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-beta/cascade-01",
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-03-npc-faction-world-event-update",
+        "tick-05-narrative-quest-dialogue-event-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "npc_faction_world_event",
+        "narrative_quest_dialogue"
+      ],
+      "cause": "storm bridge damage",
+      "effect": "detour delays merchant, faction trust shifts, escort branch opens/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-beta/cascade-02",
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-04-settlement-production-damage-repair-defense-update",
+        "tick-07-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "spatial_traversal_chunk",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "route closure",
+      "effect": "settlement repair consumes market stock/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-beta/cascade-03",
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-06-combat-magic-ability-status-update",
+        "tick-03-npc-faction-world-event-update"
+      ],
+      "systemCategories": [
+        "narrative_quest_dialogue",
+        "combat_magic_status",
+        "npc_faction_world_event"
+      ],
+      "cause": "checkpoint quest pressure",
+      "effect": "ambush risk changes patrol reputation/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-gamma/cascade-01",
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-03-npc-faction-world-event-update",
+        "tick-05-narrative-quest-dialogue-event-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "spatial_traversal_chunk",
+        "npc_faction_world_event",
+        "narrative_quest_dialogue"
+      ],
+      "cause": "storm bridge damage",
+      "effect": "detour delays merchant, faction trust shifts, escort branch opens/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-gamma/cascade-02",
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-02-spatial-traversal-chunk-update",
+        "tick-04-settlement-production-damage-repair-defense-update",
+        "tick-07-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "spatial_traversal_chunk",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "route closure",
+      "effect": "settlement repair consumes market stock/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/map-panel-rpg/seed-gamma/cascade-03",
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-06-combat-magic-ability-status-update",
+        "tick-03-npc-faction-world-event-update"
+      ],
+      "systemCategories": [
+        "narrative_quest_dialogue",
+        "combat_magic_status",
+        "npc_faction_world_event"
+      ],
+      "cause": "checkpoint quest pressure",
+      "effect": "ambush risk changes patrol reputation/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-alpha/cascade-01",
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-03-settlement-production-damage-repair-defense-update",
+        "tick-04-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "blizzard shelter breach",
+      "effect": "repair demand drains water and fuel stock/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-alpha/cascade-02",
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-02-npc-faction-world-event-update",
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-06-combat-magic-ability-status-update"
+      ],
+      "systemCategories": [
+        "npc_faction_world_event",
+        "narrative_quest_dialogue",
+        "combat_magic_status"
+      ],
+      "cause": "NPC crisis duty",
+      "effect": "quest option locks while exposure combat pressure rises/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-alpha/cascade-03",
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "tickIds": [
+        "tick-04-economy-crafting-resource-inventory-progression-update",
+        "tick-07-spatial-traversal-chunk-update",
+        "tick-03-settlement-production-damage-repair-defense-update"
+      ],
+      "systemCategories": [
+        "economy_crafting_resource",
+        "spatial_traversal_chunk",
+        "settlement_production"
+      ],
+      "cause": "resource shortage",
+      "effect": "route perimeter changes repair schedule/seed-alpha",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-beta/cascade-01",
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-03-settlement-production-damage-repair-defense-update",
+        "tick-04-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "blizzard shelter breach",
+      "effect": "repair demand drains water and fuel stock/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-beta/cascade-02",
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-02-npc-faction-world-event-update",
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-06-combat-magic-ability-status-update"
+      ],
+      "systemCategories": [
+        "npc_faction_world_event",
+        "narrative_quest_dialogue",
+        "combat_magic_status"
+      ],
+      "cause": "NPC crisis duty",
+      "effect": "quest option locks while exposure combat pressure rises/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-beta/cascade-03",
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "tickIds": [
+        "tick-04-economy-crafting-resource-inventory-progression-update",
+        "tick-07-spatial-traversal-chunk-update",
+        "tick-03-settlement-production-damage-repair-defense-update"
+      ],
+      "systemCategories": [
+        "economy_crafting_resource",
+        "spatial_traversal_chunk",
+        "settlement_production"
+      ],
+      "cause": "resource shortage",
+      "effect": "route perimeter changes repair schedule/seed-beta",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-gamma/cascade-01",
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-01-dawn-night-weather-crisis-pressure",
+        "tick-03-settlement-production-damage-repair-defense-update",
+        "tick-04-economy-crafting-resource-inventory-progression-update"
+      ],
+      "systemCategories": [
+        "world_event_weather_crisis",
+        "settlement_production",
+        "economy_crafting_resource"
+      ],
+      "cause": "blizzard shelter breach",
+      "effect": "repair demand drains water and fuel stock/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-gamma/cascade-02",
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-02-npc-faction-world-event-update",
+        "tick-05-narrative-quest-dialogue-event-update",
+        "tick-06-combat-magic-ability-status-update"
+      ],
+      "systemCategories": [
+        "npc_faction_world_event",
+        "narrative_quest_dialogue",
+        "combat_magic_status"
+      ],
+      "cause": "NPC crisis duty",
+      "effect": "quest option locks while exposure combat pressure rises/seed-gamma",
+      "passed": true
+    },
+    {
+      "cascadeId": "goal070/survival-sandbox/seed-gamma/cascade-03",
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "tickIds": [
+        "tick-04-economy-crafting-resource-inventory-progression-update",
+        "tick-07-spatial-traversal-chunk-update",
+        "tick-03-settlement-production-damage-repair-defense-update"
+      ],
+      "systemCategories": [
+        "economy_crafting_resource",
+        "spatial_traversal_chunk",
+        "settlement_production"
+      ],
+      "cause": "resource shortage",
+      "effect": "route perimeter changes repair schedule/seed-gamma",
+      "passed": true
+    }
+  ]
+}

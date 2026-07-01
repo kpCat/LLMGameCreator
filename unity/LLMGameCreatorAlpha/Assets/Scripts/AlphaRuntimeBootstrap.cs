@@ -47,6 +47,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> combatMagicLogLines = new List<string>();
         private readonly List<AlphaWorldEventRow> worldEventRows = new List<AlphaWorldEventRow>();
         private readonly List<string> worldEventLogLines = new List<string>();
+        private readonly List<AlphaCampaignTimelineRow> campaignTimelineRows = new List<AlphaCampaignTimelineRow>();
+        private readonly List<string> campaignTimelineLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -102,6 +104,7 @@ namespace LLMGameCreatorAlpha
         private bool narrativePlanLoaded;
         private bool combatMagicPlanLoaded;
         private bool worldEventPlanLoaded;
+        private bool campaignTimelinePlanLoaded;
 
         private void Start()
         {
@@ -324,6 +327,7 @@ namespace LLMGameCreatorAlpha
                 var narrativeLines = LoadNarrativePayload(payloadRoot);
                 var combatMagicLines = LoadCombatMagicPayload(payloadRoot);
                 var worldEventLines = LoadWorldEventPayload(payloadRoot);
+                var campaignTimelineLines = LoadCampaignTimelinePayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -361,6 +365,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(narrativeLines);
                 lines.AddRange(combatMagicLines);
                 lines.AddRange(worldEventLines);
+                lines.AddRange(campaignTimelineLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -433,6 +438,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunNarrativeProof());
             lines.AddRange(RunCombatMagicProof());
             lines.AddRange(RunWorldEventProof());
+            lines.AddRange(RunCampaignTimelineProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -2153,6 +2159,81 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadCampaignTimelinePayload(string payloadRoot)
+        {
+            campaignTimelineRows.Clear();
+            campaignTimelineLogLines.Clear();
+            campaignTimelinePlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "campaign-timeline", "unity-campaign-timeline-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                campaignTimelineLogLines.Add("campaign_timeline_plan_loaded=false");
+                campaignTimelineLogLines.Add("campaign_timeline_plan_missing=" + planPath);
+                return campaignTimelineLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                campaignTimelineRows.AddRange(ExtractCampaignTimelineRows(planJson));
+                campaignTimelineRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                campaignTimelinePlanLoaded = ExtractJsonBool(planJson, "passed") && campaignTimelineRows.Count > 0;
+                campaignTimelineLogLines.Add("campaign_timeline_plan_loaded=" + campaignTimelinePlanLoaded.ToString().ToLowerInvariant());
+                campaignTimelineLogLines.Add("campaign_timeline_row_count=" + campaignTimelineRows.Count);
+            }
+            catch (Exception ex)
+            {
+                campaignTimelinePlanLoaded = false;
+                campaignTimelineLogLines.Add("campaign_timeline_plan_loaded=false");
+                campaignTimelineLogLines.Add("campaign_timeline_error_type=" + ex.GetType().Name);
+                campaignTimelineLogLines.Add("campaign_timeline_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return campaignTimelineLogLines;
+        }
+
+        private List<string> RunCampaignTimelineProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(campaignTimelineLogLines);
+            if (!campaignTimelinePlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("campaign_timeline_loaded=true");
+            foreach (var row in campaignTimelineRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("campaign_timeline_row_started=" + row.RowId);
+                lines.Add("campaign_timeline_family=" + row.FamilyId);
+                lines.Add("campaign_timeline_seed=" + row.SeedId);
+                lines.Add("campaign_timeline_state_changed=" + row.StateChanged.ToString().ToLowerInvariant());
+                lines.Add("campaign_timeline_save_load_replay=" + row.SaveLoadReplayPassed.ToString().ToLowerInvariant());
+                foreach (var tickId in row.TickIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("campaign_timeline_tick=" + row.RowId + ":" + tickId);
+                }
+
+                foreach (var cascadeId in row.CascadeIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("campaign_timeline_cascade=" + cascadeId);
+                }
+
+                foreach (var arbitrationId in row.ArbitrationIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("campaign_timeline_arbitration=" + arbitrationId);
+                }
+
+                lines.Add("campaign_timeline_row_completed=" + row.RowId);
+            }
+
+            lines.Add("campaign_timeline_matrix_completed=true");
+            lines.Add("review_package_proof=goal070");
+            lines.Add("integrated_campaign_timeline_simulation_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -2496,6 +2577,31 @@ namespace LLMGameCreatorAlpha
                     ClockPhase = ExtractJsonString(value, "clockPhase"),
                     WeatherId = ExtractJsonString(value, "weatherId"),
                     CrisisId = ExtractJsonString(value, "crisisId"),
+                    StateChanged = ExtractJsonBool(value, "stateChanged"),
+                    SaveLoadReplayPassed = ExtractJsonBool(value, "saveLoadReplayPassed")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaCampaignTimelineRow> ExtractCampaignTimelineRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (var value in ExtractObjectBlocks(array))
+            {
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaCampaignTimelineRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    TickIds = ExtractStringArray(value, "tickIds").ToList(),
+                    CascadeIds = ExtractStringArray(value, "cascadeIds").ToList(),
+                    ArbitrationIds = ExtractStringArray(value, "arbitrationIds").ToList(),
                     StateChanged = ExtractJsonBool(value, "stateChanged"),
                     SaveLoadReplayPassed = ExtractJsonBool(value, "saveLoadReplayPassed")
                 };
@@ -3261,6 +3367,18 @@ namespace LLMGameCreatorAlpha
             public string ClockPhase = string.Empty;
             public string WeatherId = string.Empty;
             public string CrisisId = string.Empty;
+            public bool StateChanged;
+            public bool SaveLoadReplayPassed;
+        }
+
+        private sealed class AlphaCampaignTimelineRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public List<string> TickIds = new List<string>();
+            public List<string> CascadeIds = new List<string>();
+            public List<string> ArbitrationIds = new List<string>();
             public bool StateChanged;
             public bool SaveLoadReplayPassed;
         }

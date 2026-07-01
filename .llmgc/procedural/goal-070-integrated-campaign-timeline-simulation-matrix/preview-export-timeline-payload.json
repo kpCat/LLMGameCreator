@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "integrated_campaign_timeline_preview_export_payload_v1",
+  "accepted": false,
+  "passed": true,
+  "rowCount": 9,
+  "rows": [
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "finalStateHash": "52d721d7501a36ca27dd6ede5350cb40d2c3fc9be8b76375f3b9210cf30525ee",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-first-person-grid-dungeon-seed-alpha",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/first-person-grid-dungeon/seed-alpha/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "finalStateHash": "02ebe4b184f9ebb65f1a313a8ae44f3ae6a2e2543246da3a48a2ab774f55068a",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-first-person-grid-dungeon-seed-beta",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/first-person-grid-dungeon/seed-beta/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "finalStateHash": "b7d87fcf6ba78e3ecc1f2529229ab044e9a91087b5407cb5f9942d435f99a6ee",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-first-person-grid-dungeon-seed-gamma",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/first-person-grid-dungeon/seed-gamma/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "finalStateHash": "f5477aafd89811443b5be9dd4180428771279524eb8f79d6494b2eb980167707",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-map-panel-rpg-seed-alpha",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/map-panel-rpg/seed-alpha/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "finalStateHash": "4f344d54ee2231be02a48d8e0e8bb2772c2e2ae2b32b13ee4179c8bd4fe8babd",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-map-panel-rpg-seed-beta",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/map-panel-rpg/seed-beta/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "finalStateHash": "a7f4d05428ec578dc81ec509389f7d815f9b1ce3d8b2c5e81ac0aaaf9e497315",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-map-panel-rpg-seed-gamma",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/map-panel-rpg/seed-gamma/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "finalStateHash": "153e94abcf19c8810a866bd5f413b0d4e6334886552f87c7c446450972143d42",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-survival-sandbox-seed-alpha",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/survival-sandbox/seed-alpha/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "finalStateHash": "2ec0716f8471873ff0175e449d55dd5f12dc0d9bf863f80be811dcf75bc2e15b",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-survival-sandbox-seed-beta",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/survival-sandbox/seed-beta/arbitration"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "finalStateHash": "700c527977a393e73ce495deafa9ff639170f843a49f416cd63bf56f81c946a1",
+      "previewMarkers": [
+        "campaign_timeline_row=matrix-row-survival-sandbox-seed-gamma",
+        "campaign_timeline_ticks=7",
+        "campaign_timeline_cascades=3",
+        "campaign_timeline_arbitration=goal070/survival-sandbox/seed-gamma/arbitration"
+      ]
+    }
+  ]
+}

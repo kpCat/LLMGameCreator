@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-01T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 069 world event weather day-night crisis matrix produced for review",
-    "gate_status":  "world_event_weather_daynight_crisis_matrix_verification",
+    "current_phase_title":  "Goal 070 integrated campaign timeline simulation matrix produced for review",
+    "gate_status":  "integrated_campaign_timeline_simulation_matrix_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_069_world_event_weather_daynight_crisis_matrix",
-    "active_manual_gate":  "Goal 068 Combat Magic Ability Boss Encounter Matrix is accepted by user handoff before Goal 069: combat_magic_ability_boss_encounter_matrix_verification passed before Goal 069. Goal 069 World Event Weather Day/Night Crisis Matrix is produced for review with accepted=false and world_event_weather_daynight_crisis_matrix_verification required. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 069 World Event Weather Day/Night Crisis Matrix evidence; world_event_weather_daynight_crisis_matrix_verification remains required until accepted by the user.",
-    "recommended_next_decision":  "Review Goal 069 artifacts under .llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/; do not mark world_event_weather_daynight_crisis_matrix_verification passed until user acceptance and do not start the next goal.",
+    "last_completed_product_slice_id":  "goal_070_integrated_campaign_timeline_simulation_matrix",
+    "active_manual_gate":  "Goal 070 Integrated Campaign Timeline Simulation Matrix is produced for review: integrated_campaign_timeline_simulation_matrix_verification required. Goal 069 is accepted by user handoff before Goal 070. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 070 Integrated Campaign Timeline Simulation Matrix evidence while keeping integrated_campaign_timeline_simulation_matrix_verification required until user acceptance.",
+    "recommended_next_decision":  "Review Goal 070 produced-for-review artifacts and keep integrated_campaign_timeline_simulation_matrix_verification required until user acceptance.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                     "next_sequence":  [
-                                                          "world_event_weather_daynight_crisis_matrix_verification"
+                                                          "integrated_campaign_timeline_simulation_matrix_verification"
                                                       ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -86,7 +86,8 @@
                            "goal_066_manual_gate":  "settlement_construction_destruction_production_matrix_verification",
                            "goal_067_manual_gate":  "programmatic_narrative_quest_dialogue_event_matrix_verification",
                            "goal_068_manual_gate":  "combat_magic_ability_boss_encounter_matrix_verification",
-                           "goal_069_manual_gate":  "world_event_weather_daynight_crisis_matrix_verification"
+                           "goal_069_manual_gate":  "world_event_weather_daynight_crisis_matrix_verification",
+                           "goal_070_manual_gate":  "integrated_campaign_timeline_simulation_matrix_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -107,15 +108,15 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                        "slice_id":  "goal_069_world_event_weather_daynight_crisis_matrix",
-                                        "title":  "World Event Weather Day/Night Crisis Matrix",
+                                        "slice_id":  "goal_070_integrated_campaign_timeline_simulation_matrix",
+                                        "title":  "Integrated Campaign Timeline Simulation Matrix",
                                         "status":  "produced_for_review",
-                                          "summary":  "Goal 069 records Goal 068 as accepted by user handoff, consumes Goal 060/061/062/063/064/065/066/067/068 evidence, and produces world event/weather/day-night/crisis matrix evidence for review with accepted=false and world_event_weather_daynight_crisis_matrix_verification required until user review.",
-                                          "scenario_id":  "goal-069-world-event-weather-daynight-crisis-matrix",
+                                          "summary":  "Goal 070 records Goal 069 as accepted by user handoff, consumes Goal 060/061/062/063/064/065/066/067/068/069 evidence, and produces integrated campaign timeline simulation matrix evidence for review with accepted=false and integrated_campaign_timeline_simulation_matrix_verification required until user review.",
+                                          "scenario_id":  "goal-070-integrated-campaign-timeline-simulation-matrix",
                                           "checks":  [
-                                                        "Goal 069 implementationStatus=GREEN, accepted=false, rowCount=9, stateChangingRowCount=9, dayNightEffectRowCount=9, weatherHazardRowCount=9 and crisisConsequenceRowCount=9.",
-                                                        "Unity/player proof passed with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all world_event markers matched.",
-                                                        "Goal 069 reportHash=40db9e42153efda4427f587873cd1cc75af4687fd0775cf429aa88430c59e63e; world_event_weather_daynight_crisis_matrix_verification remains required until user review."
+                                                        "Goal 070 implementationStatus=GREEN, accepted=false, rowCount=9, stateChangingRowCount=9, cascadeCount=27 and arbitrationCount=9.",
+                                                        "Unity/player proof passed with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all campaign_timeline markers matched.",
+                                                        "Goal 070 reportHash=5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89; integrated_campaign_timeline_simulation_matrix_verification remains required until user review."
                                                     ]
                                       },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -375,8 +376,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "review_goal_069_world_event_weather_daynight_crisis_matrix",
-                                          "world_event_weather_daynight_crisis_matrix_verification"
+                                          "review_goal_070_integrated_campaign_timeline_simulation_matrix",
+                                          "integrated_campaign_timeline_simulation_matrix_verification"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -397,17 +398,21 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "world_event_weather_daynight_crisis_matrix_verification",
-    "recommended_next_work_item_title":  "Review Goal 069 World Event Weather Day/Night Crisis Matrix evidence while keeping the manual gate required.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_069_WORLD_EVENT_WEATHER_DAYNIGHT_CRISIS_MATRIX.md",
+    "recommended_next_work_item":  "integrated_campaign_timeline_simulation_matrix_verification",
+    "recommended_next_work_item_title":  "Review Goal 070 Integrated Campaign Timeline Simulation Matrix evidence while keeping the manual gate required.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md",
     "candidate_product_vertical_slices":  [
-                                               "Review Goal 069 World Event Weather Day/Night Crisis Matrix at world_event_weather_daynight_crisis_matrix_verification",
-                                               "Keep Goal 069 gate required until user review accepts it; do not start the next goal"
+                                               "Review Goal 070 Integrated Campaign Timeline Simulation Matrix at integrated_campaign_timeline_simulation_matrix_verification",
+                                               "Keep Goal 070 gate required until user review accepts it; do not start the next goal"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                    "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                  "docs/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX_SPEC.md",
+                                                  "docs/EXTERNAL_SCOUTING_GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md",
+                                                  "docs/agent-tasks/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md",
+                                                  "docs/agent-tasks/GOAL_070_LAUNCHER.txt",
                                                   "docs/GOAL_069_WORLD_EVENT_WEATHER_DAYNIGHT_CRISIS_MATRIX_SPEC.md",
                                                   "docs/EXTERNAL_SCOUTING_GOAL_069_WORLD_EVENT_WEATHER_DAYNIGHT_CRISIS_MATRIX.md",
                                                   "docs/agent-tasks/GOAL_069_WORLD_EVENT_WEATHER_DAYNIGHT_CRISIS_MATRIX.md",
@@ -562,7 +567,8 @@
                                "Semantic authoring workspace, lore intake skeleton, provenance matrix and intent resolver sidecars",
                                 "Lua module manifest registry, host API policy, selection plans, dependency plan and invalid matrix sidecars",
                                 "Media-bound playable review package staging, StreamingAssets-compatible manifest, Unity-compatible proof records and invalid matrix sidecars",
-                                "Gameplay consequence depth matrix command plans, runtime state delta proof, save/load replay audit and Unity Alpha marker sidecars"
+                                "Gameplay consequence depth matrix command plans, runtime state delta proof, save/load replay audit and Unity Alpha marker sidecars",
+                                "Integrated campaign timeline simulation matrix rows, cascade and arbitration ledgers, save/load replay audit and Unity Alpha campaign_timeline marker sidecars"
                            ],
     "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, produced-for-review goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 035 acceptance recommend Goal 036 as next work but do not start Goal 036 implementation without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
@@ -1541,7 +1547,7 @@
                                                                     "next_action":  "goal_069_world_event_weather_daynight_crisis_matrix_produced_for_review"
                                                                 },
     "world_event_weather_daynight_crisis_matrix_verification":  {
-                                                                    "status":  "produced_for_review",
+                                                                    "status":  "passed_by_user_handoff_before_goal_070",
                                                                     "evidence_source":  "goal_069_world_event_weather_daynight_crisis_matrix",
                                                                     "observed_result":  [
                                                                                             "Design/WorldEventWeatherDayNightCrisisMatrix defines a BCL-only Application-layer source loader, projector, validator, evidence writer, Unity proof runner and hash helper.",
@@ -1551,9 +1557,26 @@
                                                                                             "Save/load and deterministic replay pass for every row; meaningful variance is proven across same-family seeds and cross-family environmental profiles while rejecting hash-only variance.",
                                                                                             "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required world_event markers matched.",
                                                                                             "Goal 069 artifacts under .llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix include source manifest, world-clock policy, weather/hazard catalog, crisis event catalog, row matrix, 9 row files, save-load replay proof, variance metrics, Unity command plan, Unity player proof, preview/export payload, invalid diagnostics matrix, artifact-scope report and compact report.",
-                                                                                            "Final report implementationStatus=GREEN, accepted=false, manualGate=world_event_weather_daynight_crisis_matrix_verification and reportHash=40db9e42153efda4427f587873cd1cc75af4687fd0775cf429aa88430c59e63e."
+                                                                                            "Final report implementationStatus=GREEN, accepted=false, manualGate=world_event_weather_daynight_crisis_matrix_verification and reportHash=40db9e42153efda4427f587873cd1cc75af4687fd0775cf429aa88430c59e63e.",
+                                                                                            "The Goal 070 task handoff accepted world_event_weather_daynight_crisis_matrix_verification passed before Goal 070."
                                                                                         ],
-                                                                    "next_action":  "review_goal_069_world_event_weather_daynight_crisis_matrix_until_world_event_weather_daynight_crisis_matrix_verification"
+                                                                    "next_action":  "goal_070_integrated_campaign_timeline_simulation_matrix_produced_for_review"
+                                                                },
+    "integrated_campaign_timeline_simulation_matrix_verification":  {
+                                                                    "status":  "produced_for_review",
+                                                                    "evidence_source":  "goal_070_integrated_campaign_timeline_simulation_matrix",
+                                                                    "observed_result":  [
+                                                                                            "Design/IntegratedCampaignTimelineSimulationMatrix defines a BCL-only Application-layer source loader, projector, validator, evidence writer, Unity proof runner and hash helper.",
+                                                                                            "Goal 070 consumes Goal 060/061/062/063/064/065/066/067/068/069 evidence after recording world_event_weather_daynight_crisis_matrix_verification passed by user handoff before Goal 070.",
+                                                                                            "The produced matrix contains 9 integrated campaign timeline rows across map_panel_rpg, survival_sandbox and first_person_grid_dungeon with 3 deterministic seeds and 9 state-changing multi-step timeline rows.",
+                                                                                            "Each row records 7 ordered timeline ticks covering environmental pressure, spatial traversal, NPC/faction/world events, settlement production/damage/repair/defense, narrative quest/dialogue/event updates, combat/magic/status updates, and economy/crafting/resource/inventory/progression updates.",
+                                                                                            "Cross-system cascade and conflict arbitration ledgers pass with cascadeCount=27 and arbitrationCount=9.",
+                                                                                            "Save/load and deterministic replay pass for every row; meaningful variance is proven across same-family seeds and cross-family timeline profiles while rejecting hash-only variance.",
+                                                                                            "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required campaign_timeline markers matched.",
+                                                                                            "Goal 070 artifacts under .llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix include source manifest, timeline matrix summary, 9 row files, cross-system cascade ledger, conflict arbitration ledger, save-load replay audit, variance metrics, Unity command plan, Unity player proof, preview/export timeline payload, invalid diagnostics matrix, artifact-scope report and compact report.",
+                                                                                            "Final report implementationStatus=GREEN, accepted=false, manualGate=integrated_campaign_timeline_simulation_matrix_verification and reportHash=5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89."
+                                                                                        ],
+                                                                    "next_action":  "review_goal_070_integrated_campaign_timeline_simulation_matrix_until_integrated_campaign_timeline_simulation_matrix_verification"
                                                                 },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",
