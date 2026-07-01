@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "world_event_preview_export_payload_v1",
+  "accepted": false,
+  "passed": true,
+  "rowCount": 9,
+  "rows": [
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "afterStateHash": "862035b80fb1fb5c4d8c87433293fc4bc219ba36d05396a800151053c77d799d",
+      "previewMarkers": [
+        "world_event_row=matrix-row-first-person-grid-dungeon-seed-alpha",
+        "world_event_clock_phase=night",
+        "world_event_weather=weather/first-person-grid-dungeon/deep-fog",
+        "world_event_crisis=crisis/first-person-grid-dungeon/door-seal"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "afterStateHash": "4fde17c91e45e152344e69dfd731cf340ac5683fed11bf71aefe8565b9eca38d",
+      "previewMarkers": [
+        "world_event_row=matrix-row-first-person-grid-dungeon-seed-beta",
+        "world_event_clock_phase=dusk",
+        "world_event_weather=weather/first-person-grid-dungeon/cold-draft",
+        "world_event_crisis=crisis/first-person-grid-dungeon/warden-hunt"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "afterStateHash": "7de5bc66a344b1e71dd10020d7de227d9b930394e9b0e23fe439aa611df2c4f0",
+      "previewMarkers": [
+        "world_event_row=matrix-row-first-person-grid-dungeon-seed-gamma",
+        "world_event_clock_phase=night",
+        "world_event_weather=weather/first-person-grid-dungeon/spore-haze",
+        "world_event_crisis=crisis/first-person-grid-dungeon/loot-room-flood"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "afterStateHash": "9a5bebdca99eeaeb5c7eddb24ab708e5ded902a822a93bce94cff984261cbee8",
+      "previewMarkers": [
+        "world_event_row=matrix-row-map-panel-rpg-seed-alpha",
+        "world_event_clock_phase=night",
+        "world_event_weather=weather/map-panel-rpg/storm-front",
+        "world_event_crisis=crisis/map-panel-rpg/refugee-convoy"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "afterStateHash": "0bb62bcbd5e9bd60f3a9400c82cd90efd5ba8a9ee3c05aeaff74ba7dc92400cb",
+      "previewMarkers": [
+        "world_event_row=matrix-row-map-panel-rpg-seed-beta",
+        "world_event_clock_phase=dusk",
+        "world_event_weather=weather/map-panel-rpg/flooded-road",
+        "world_event_crisis=crisis/map-panel-rpg/faction-border-lockdown"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "afterStateHash": "e8881178888ae89baa81d03d0c7e0c7ea06ce67e2d06fb2fc216d3874bb70172",
+      "previewMarkers": [
+        "world_event_row=matrix-row-map-panel-rpg-seed-gamma",
+        "world_event_clock_phase=night",
+        "world_event_weather=weather/map-panel-rpg/eclipse-wind",
+        "world_event_crisis=crisis/map-panel-rpg/market-fire"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "afterStateHash": "00ae140015fe90bc67cef19d150fd2d57cc1ff816a98ae5e0e2fa6aba8ad612e",
+      "previewMarkers": [
+        "world_event_row=matrix-row-survival-sandbox-seed-alpha",
+        "world_event_clock_phase=night",
+        "world_event_weather=weather/survival-sandbox/blizzard",
+        "world_event_crisis=crisis/survival-sandbox/shelter-breach"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "afterStateHash": "73ae815748d87910bc420e21a79d7a46f8138230ccee8961980f8c91dca20be0",
+      "previewMarkers": [
+        "world_event_row=matrix-row-survival-sandbox-seed-beta",
+        "world_event_clock_phase=dusk",
+        "world_event_weather=weather/survival-sandbox/heatwave",
+        "world_event_crisis=crisis/survival-sandbox/well-contamination"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "afterStateHash": "b9b6a9f4be5b1e378a70aa91b0f066ac59381124f758ade0896656a82cc5bd76",
+      "previewMarkers": [
+        "world_event_row=matrix-row-survival-sandbox-seed-gamma",
+        "world_event_clock_phase=night",
+        "world_event_weather=weather/survival-sandbox/acid-rain",
+        "world_event_crisis=crisis/survival-sandbox/forage-collapse"
+      ]
+    }
+  ]
+}

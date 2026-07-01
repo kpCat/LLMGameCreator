@@ -37,7 +37,8 @@
     ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/",
     ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/",
     ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/",
-    ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/"
+    ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/",
+    ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -496,6 +497,27 @@
         ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/",
         "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/",
         "tests/LLMGameCreator.Tests/Application/CombatMagicAbilityBossEncounterMatrix/"
+      ]
+    },
+    {
+      "scenario": "goal-069-world-event-weather-daynight-crisis-matrix",
+      "allowedPaths": [
+        "docs/GOAL_069_WORLD_EVENT_WEATHER_DAYNIGHT_CRISIS_MATRIX_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_069_WORLD_EVENT_WEATHER_DAYNIGHT_CRISIS_MATRIX.md",
+        "docs/agent-tasks/GOAL_069_WORLD_EVENT_WEATHER_DAYNIGHT_CRISIS_MATRIX.md",
+        "docs/agent-tasks/GOAL_069_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/WorldEventWeatherDayNightCrisisMatrixProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/",
+        "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/",
+        "tests/LLMGameCreator.Tests/Application/WorldEventWeatherDayNightCrisisMatrix/"
       ]
     }
   ]

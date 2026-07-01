@@ -1,0 +1,7 @@
+{
+  "scenario": "goal-069-world-event-weather-daynight-crisis-matrix",
+  "status": "produced",
+  "allowedArtifactRoot": ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix",
+  "gate": "world_event_weather_daynight_crisis_matrix_verification",
+  "accepted": false
+}

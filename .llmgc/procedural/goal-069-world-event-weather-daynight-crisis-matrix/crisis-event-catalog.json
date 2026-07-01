@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "crisis_event_catalog_v1",
+  "passed": true,
+  "crisisEvents": [
+    {
+      "crisisId": "crisis/first-person-grid-dungeon/door-seal",
+      "familyId": "first_person_grid_dungeon",
+      "crisisKind": "visibility_loss",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "npc_faction"
+      ]
+    },
+    {
+      "crisisId": "crisis/first-person-grid-dungeon/loot-room-flood",
+      "familyId": "first_person_grid_dungeon",
+      "crisisKind": "loot_route_change",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "npc_faction"
+      ]
+    },
+    {
+      "crisisId": "crisis/first-person-grid-dungeon/warden-hunt",
+      "familyId": "first_person_grid_dungeon",
+      "crisisKind": "encounter_escalation",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "npc_faction"
+      ]
+    },
+    {
+      "crisisId": "crisis/map-panel-rpg/faction-border-lockdown",
+      "familyId": "map_panel_rpg",
+      "crisisKind": "faction_lockdown",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "npc_faction",
+        "settlement_production"
+      ]
+    },
+    {
+      "crisisId": "crisis/map-panel-rpg/market-fire",
+      "familyId": "map_panel_rpg",
+      "crisisKind": "settlement_supply",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "npc_faction",
+        "settlement_production"
+      ]
+    },
+    {
+      "crisisId": "crisis/map-panel-rpg/refugee-convoy",
+      "familyId": "map_panel_rpg",
+      "crisisKind": "route_crisis",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "npc_faction",
+        "settlement_production"
+      ]
+    },
+    {
+      "crisisId": "crisis/survival-sandbox/forage-collapse",
+      "familyId": "survival_sandbox",
+      "crisisKind": "recovery_window",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "settlement_production"
+      ]
+    },
+    {
+      "crisisId": "crisis/survival-sandbox/shelter-breach",
+      "familyId": "survival_sandbox",
+      "crisisKind": "shelter_breach",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "settlement_production"
+      ]
+    },
+    {
+      "crisisId": "crisis/survival-sandbox/well-contamination",
+      "familyId": "survival_sandbox",
+      "crisisKind": "resource_shortage",
+      "consequenceCategories": [
+        "combat_magic_status",
+        "economy_resource_inventory",
+        "narrative_quest_dialogue",
+        "settlement_production"
+      ]
+    }
+  ]
+}

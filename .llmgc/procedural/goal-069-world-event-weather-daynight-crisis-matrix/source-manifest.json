@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "world_event_source_manifest_v1",
+  "goalId": "goal_069_world_event_weather_daynight_crisis_matrix",
+  "productSmokeRoute": "goal-069-world-event-weather-daynight-crisis-matrix",
+  "manualGate": "world_event_weather_daynight_crisis_matrix_verification",
+  "accepted": false,
+  "goal068AcceptedByUserHandoff": true,
+  "goal060PackageRowsConsumed": true,
+  "goal061ReviewPackageRcConsumed": true,
+  "goal062SpatialRowsConsumed": true,
+  "goal063GameplayRowsConsumed": true,
+  "goal064LivingWorldRowsConsumed": true,
+  "goal065InterlockedRowsConsumed": true,
+  "goal066SettlementRowsConsumed": true,
+  "goal067NarrativeRowsConsumed": true,
+  "goal068CombatMagicRowsConsumed": true,
+  "goal068UnityProofConsumed": true,
+  "rowCount": 9,
+  "familyCount": 3,
+  "seedCount": 3,
+  "familyIds": [
+    "map_panel_rpg",
+    "survival_sandbox",
+    "first_person_grid_dungeon"
+  ],
+  "seedIds": [
+    "seed_alpha",
+    "seed_beta",
+    "seed_gamma"
+  ],
+  "preflightGates": [
+    {
+      "gateId": "full_campaign_gamepackage_materialization_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 061 handoff before Goal 062"
+    },
+    {
+      "gateId": "full_campaign_playable_review_package_rc_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 062 handoff before Goal 063"
+    },
+    {
+      "gateId": "constrained_spatial_detail_generation_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 063 handoff"
+    },
+    {
+      "gateId": "gameplay_consequence_depth_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 064 handoff"
+    },
+    {
+      "gateId": "living_world_npc_faction_simulation_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 065 handoff"
+    },
+    {
+      "gateId": "interlocked_gameplay_systems_depth_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 066 handoff"
+    },
+    {
+      "gateId": "settlement_construction_destruction_production_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 067 handoff"
+    },
+    {
+      "gateId": "programmatic_narrative_quest_dialogue_event_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 068 handoff"
+    },
+    {
+      "gateId": "combat_magic_ability_boss_encounter_matrix_verification",
+      "status": "passed",
+      "provenanceKind": "user_handoff",
+      "evidenceRef": "Goal 069 preflight handoff"
+    },
+    {
+      "gateId": "world_event_weather_daynight_crisis_matrix_verification",
+      "status": "required",
+      "provenanceKind": "current_goal_manual_gate",
+      "evidenceRef": ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/world-event-weather-daynight-crisis-matrix-report.md"
+    }
+  ],
+  "sourceArtifactRefs": [
+    {
+      "sourceGoal": "Goal060",
+      "artifactFamily": "materialized_package_inventory",
+      "artifactRelativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/materialized-package-inventory.json",
+      "artifactHash": "1f41f895f3b1953cdf61acf9740c5c5f4aa5640a1c733f6373bcb8dd5729c8f7",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "packageCount",
+        "packages"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal061",
+      "artifactFamily": "review_package_rc_manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package-rc-manifest.json",
+      "artifactHash": "839d3d6b99ac19ce8b2e88ae4d765632f25f3d3a314850076d2d91a7a8fe4c99",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "reviewPackageRcId",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal062",
+      "artifactFamily": "spatial_detail_matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/spatial-detail-matrix.json",
+      "artifactHash": "26144b46ce35a99936bfc72ab331e53471f2c7d1541adaffc78593d6ada0e3d3",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal063",
+      "artifactFamily": "runtime_state_delta_matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/runtime-state-delta-matrix.json",
+      "artifactHash": "1563296c344c7abb936cdcb68863def66c44d6c6eecfe5b5eb4b70b1c374fdc3",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal064",
+      "artifactFamily": "living_world_simulation_matrix_plan",
+      "artifactRelativePath": ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/simulation-matrix-plan.json",
+      "artifactHash": "cf35ea76b3634f32c6a397007c5e05ed3f6d260d344bf622794ab68717f7ec95",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal065",
+      "artifactFamily": "interlocked_row_plan_matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/row-plan-matrix.json",
+      "artifactHash": "f4905ea98fcbf52a224cd8b9e08fe60149cc8746b4a7ff1588d90b736058b0b9",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal066",
+      "artifactFamily": "settlement_row_matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/settlement-construction-row-matrix.json",
+      "artifactHash": "a45ef3c6fc9d5306c1c6271e8ae5b91fe9fd6c5f87d96af131466aa623aefb0e",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal067",
+      "artifactFamily": "narrative_row_matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/narrative-row-matrix.json",
+      "artifactHash": "556cbad9d35846cded002b8706dedf4c4af0a9acf6bcafcf77a7f48bec517a3b",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal068",
+      "artifactFamily": "combat_magic_row_matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/combat-magic-row-matrix.json",
+      "artifactHash": "c5f8254502da46fceed27634f49d8ca01792f027d5d0ba6d661b62fb7a71a8ee",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal068",
+      "artifactFamily": "combat_magic_save_load_replay",
+      "artifactRelativePath": ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/combat-magic-save-load-replay-proof.json",
+      "artifactHash": "5bc847c4f2da5790c7f4c9e23f25df5240c44d48d7210f19b368a91634ef62e5",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal068",
+      "artifactFamily": "combat_magic_unity_command_plan",
+      "artifactRelativePath": ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/combat-magic-unity-command-plan.json",
+      "artifactHash": "c6a9d7163cc3d474b4192b7d276a714ffc50dd7b520dae6857ecfa6b802c066f",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "rows"
+      ],
+      "diagnostics": []
+    },
+    {
+      "sourceGoal": "Goal068",
+      "artifactFamily": "combat_magic_unity_proof_summary",
+      "artifactRelativePath": ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/combat-magic-unity-player-proof-summary.json",
+      "artifactHash": "8b8c210b5033a3a55991571059b10e9298c6563c85f5399b7d8f3223724101db",
+      "exists": true,
+      "hashMatches": true,
+      "requiredFields": [
+        "passed",
+        "playerExecuted",
+        "provenRowCount",
+        "matchedMarkers"
+      ],
+      "diagnostics": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "goal069.preflight.goal068_handoff_recorded",
+      "target": "combat_magic_ability_boss_encounter_matrix_verification",
+      "message": "Goal 068 is recorded as accepted by user handoff before Goal 069."
+    },
+    {
+      "severity": "info",
+      "code": "goal069.source.loaded",
+      "target": "Goal060-068",
+      "message": "Goal 069 source facts were loaded from repository-local Goal 060/061/062/063/064/065/066/067/068 compact evidence."
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "world_event_weather_daynight_crisis_row_v1",
+  "goalId": "goal_069_world_event_weather_daynight_crisis_matrix",
+  "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+  "familyId": "first_person_grid_dungeon",
+  "seedId": "seed_gamma",
+  "upstreamRefs": [
+    "Goal060:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal061:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal062:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal063:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal064:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal065:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal066:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal067:matrix-row-first-person-grid-dungeon-seed-gamma",
+    "Goal068:matrix-row-first-person-grid-dungeon-seed-gamma"
+  ],
+  "upstreamHashes": [
+    {
+      "sourceGoal": "Goal060",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "package",
+      "hash": "f25003380954cfb160ee9336772f43ab2d0c9004249ae938f285674e31beb9d5"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "7708b0b0e40a17beee15955e008aa527c8aca3fa6ebb69a7cb2d9166f745aab5"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "fb7881a27425497f45c1ca65a587bffd940c75d35574d02b507e54ec80b1ca1d"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "a05fc7d7373565eb67b3fa6f7e73c58c7abc7f1f9c6e0effa2acb9f368a86161"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "row",
+      "hash": "d8eff313213bf6903aa83158b91169aed1e4773cb112b7948c3932fd49c7f9e6"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "row",
+      "hash": "32f2e7ab9c5eb2acb7c2d573576484db0bdefa2c5e0afa0410d7871e69f5e2a9"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "row",
+      "hash": "877431f998a758b6bc08702e2468796cfb584f530fb6ec1ce2ee9cb281e5edee"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "row",
+      "hash": "b325243a573e608043e70289b093ecb674b0236b854b652f69bda594490a75af"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "0ddfff5e6503d1843eddfdc9e2c325a1350d579e65f29d851ae94eee6b549116"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "row",
+      "hash": "47fc1f3a0687934ee373cce8952546fc67970f9544dcb3ff13481e8cfb8bdee2"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "0d5fefb7ed7438f3fceb830c5f248afb4c6e5e51191bdfa0ed39befa79daabee"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "row",
+      "hash": "e12b8a9620272980f062d94728cd8ccc6601fe1a5ce741a42b4254e712deb4b5"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "03479858fa272ba49a6585d5881018ffca0bf59bb2ea4ad14112f70c16549029"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "hashKind": "row",
+      "hash": "6331883e99d99321f5c9f0c66814836e49998aae647ac8d1f48a6a0fca2034f3"
+    }
+  ],
+  "worldClockBefore": {
+    "dayIndex": 9,
+    "hour": 18,
+    "phase": "dusk",
+    "lightLevel": 35,
+    "calendarTag": "campaign_day_09"
+  },
+  "worldClockAfter": {
+    "dayIndex": 9,
+    "hour": 23,
+    "phase": "night",
+    "lightLevel": 12,
+    "calendarTag": "campaign_day_09"
+  },
+  "dayNightEffect": {
+    "effectId": "day-night/first-person-grid-dungeon/seed-gamma/dusk-to-night",
+    "beforePhase": "dusk",
+    "afterPhase": "night",
+    "beforeLightLevel": 35,
+    "afterLightLevel": 12,
+    "stateDeltaRefs": [
+      "goal069/first-person-grid-dungeon/seed-gamma/01-status-visibility",
+      "goal069/first-person-grid-dungeon/seed-gamma/02-inventory-torch_fuel"
+    ],
+    "passed": true
+  },
+  "weatherHazard": {
+    "weatherId": "weather/first-person-grid-dungeon/spore-haze",
+    "hazardId": "hazard/first-person-grid-dungeon/silence-spores",
+    "severity": 4,
+    "pressureKind": "darkness_fog_torch_magic_light_pressure",
+    "stateDeltaRefs": [
+      "goal069/first-person-grid-dungeon/seed-gamma/02-inventory-torch_fuel",
+      "goal069/first-person-grid-dungeon/seed-gamma/03-magic-light_charge",
+      "goal069/first-person-grid-dungeon/seed-gamma/04-combat-encounter_pressure"
+    ],
+    "passed": true
+  },
+  "crisisEvent": {
+    "crisisId": "crisis/first-person-grid-dungeon/loot-room-flood",
+    "crisisKind": "loot_route_change",
+    "trigger": "clock:night+weather:weather/first-person-grid-dungeon/spore-haze",
+    "consequenceSummary": "Dungeon pressure changes visibility, torch fuel, magic light, encounters and progression.",
+    "stateDeltaRefs": [
+      "goal069/first-person-grid-dungeon/seed-gamma/03-magic-light_charge",
+      "goal069/first-person-grid-dungeon/seed-gamma/04-combat-encounter_pressure",
+      "goal069/first-person-grid-dungeon/seed-gamma/05-progression-door_clue"
+    ],
+    "passed": true
+  },
+  "crossSystemDeltas": [
+    {
+      "deltaId": "goal069/first-person-grid-dungeon/seed-gamma/01-status-visibility",
+      "category": "combat_magic_status",
+      "key": "status.visibility",
+      "beforeValue": "clear",
+      "afterValue": "low-light-threat/seed-gamma",
+      "sourceRef": "Goal068:matrix-row-first-person-grid-dungeon-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/first-person-grid-dungeon/seed-gamma/02-inventory-torch_fuel",
+      "category": "economy_resource_inventory",
+      "key": "inventory.torch_fuel",
+      "beforeValue": "6",
+      "afterValue": "3-spent/seed-gamma",
+      "sourceRef": "Goal065:matrix-row-first-person-grid-dungeon-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/first-person-grid-dungeon/seed-gamma/03-magic-light_charge",
+      "category": "combat_magic_status",
+      "key": "magic.light_charge",
+      "beforeValue": "ready",
+      "afterValue": "consumed-for-scouting/seed-gamma",
+      "sourceRef": "Goal068:matrix-row-first-person-grid-dungeon-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/first-person-grid-dungeon/seed-gamma/04-combat-encounter_pressure",
+      "category": "npc_faction",
+      "key": "combat.encounter_pressure",
+      "beforeValue": "1",
+      "afterValue": "3-warden-alert/seed-gamma",
+      "sourceRef": "Goal064:matrix-row-first-person-grid-dungeon-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/first-person-grid-dungeon/seed-gamma/05-progression-door_clue",
+      "category": "narrative_quest_dialogue",
+      "key": "progression.door_clue",
+      "beforeValue": "hidden",
+      "afterValue": "revealed-by-crisis/seed-gamma",
+      "sourceRef": "Goal067:matrix-row-first-person-grid-dungeon-seed-gamma",
+      "passed": true
+    }
+  ],
+  "beforeState": {
+    "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+    "familyId": "first_person_grid_dungeon",
+    "seedId": "seed_gamma",
+    "stepIndex": 0,
+    "stateHash": "9af2fcd67bd292394728e730ed4fa73213b0a9d9f0f2c8f68551483a60d25aae",
+    "values": {
+      "clock.dayIndex": "009",
+      "clock.hour": "18",
+      "clock.lightLevel": "035",
+      "clock.phase": "dusk",
+      "combat.encounter_pressure": "1",
+      "crisis.id": "crisis/none/first-person-grid-dungeon",
+      "family.id": "first_person_grid_dungeon",
+      "hazard.id": "hazard/none/first-person-grid-dungeon",
+      "inventory.torch_fuel": "6",
+      "magic.light_charge": "ready",
+      "progression.door_clue": "hidden",
+      "row.id": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "seed.id": "seed_gamma",
+      "source.goal066.afterStateHash": "0ddfff5e6503d1843eddfdc9e2c325a1350d579e65f29d851ae94eee6b549116",
+      "source.goal067.afterStateHash": "0d5fefb7ed7438f3fceb830c5f248afb4c6e5e51191bdfa0ed39befa79daabee",
+      "source.goal068.afterStateHash": "03479858fa272ba49a6585d5881018ffca0bf59bb2ea4ad14112f70c16549029",
+      "source.goal068.rowHash": "6331883e99d99321f5c9f0c66814836e49998aae647ac8d1f48a6a0fca2034f3",
+      "status.visibility": "clear",
+      "weather.id": "weather/clear/first-person-grid-dungeon"
+    }
+  },
+  "afterState": {
+    "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+    "familyId": "first_person_grid_dungeon",
+    "seedId": "seed_gamma",
+    "stepIndex": 1,
+    "stateHash": "7de5bc66a344b1e71dd10020d7de227d9b930394e9b0e23fe439aa611df2c4f0",
+    "values": {
+      "clock.dayIndex": "009",
+      "clock.hour": "23",
+      "clock.lightLevel": "012",
+      "clock.phase": "night",
+      "combat.encounter_pressure": "3-warden-alert/seed-gamma",
+      "crisis.id": "crisis/first-person-grid-dungeon/loot-room-flood",
+      "family.id": "first_person_grid_dungeon",
+      "hazard.id": "hazard/first-person-grid-dungeon/silence-spores",
+      "inventory.torch_fuel": "3-spent/seed-gamma",
+      "magic.light_charge": "consumed-for-scouting/seed-gamma",
+      "progression.door_clue": "revealed-by-crisis/seed-gamma",
+      "row.id": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "seed.id": "seed_gamma",
+      "source.goal066.afterStateHash": "0ddfff5e6503d1843eddfdc9e2c325a1350d579e65f29d851ae94eee6b549116",
+      "source.goal067.afterStateHash": "0d5fefb7ed7438f3fceb830c5f248afb4c6e5e51191bdfa0ed39befa79daabee",
+      "source.goal068.afterStateHash": "03479858fa272ba49a6585d5881018ffca0bf59bb2ea4ad14112f70c16549029",
+      "source.goal068.rowHash": "6331883e99d99321f5c9f0c66814836e49998aae647ac8d1f48a6a0fca2034f3",
+      "status.visibility": "low-light-threat/seed-gamma",
+      "weather.id": "weather/first-person-grid-dungeon/spore-haze"
+    }
+  },
+  "saveLoadReplayProof": {
+    "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+    "familyId": "first_person_grid_dungeon",
+    "seedId": "seed_gamma",
+    "beforeStateHash": "9af2fcd67bd292394728e730ed4fa73213b0a9d9f0f2c8f68551483a60d25aae",
+    "afterStateHash": "7de5bc66a344b1e71dd10020d7de227d9b930394e9b0e23fe439aa611df2c4f0",
+    "beforeAfterStateChanged": true,
+    "serializedAfterStateHash": "ee322c206db178d49972d42805ea476575a992ae6901fae0b6d321aaad4b6131",
+    "restoredAfterStateHash": "ee322c206db178d49972d42805ea476575a992ae6901fae0b6d321aaad4b6131",
+    "saveLoadRoundtripPassed": true,
+    "firstReplayHash": "4b77fc140f9ba90cf8b79a4c9820080ae3bb250bab3b9cc68665c16f1204f4bd",
+    "secondReplayHash": "4b77fc140f9ba90cf8b79a4c9820080ae3bb250bab3b9cc68665c16f1204f4bd",
+    "replayDeterminismPassed": true
+  },
+  "changedCategories": [
+    "combat_magic_status",
+    "economy_resource_inventory",
+    "narrative_quest_dialogue",
+    "npc_faction"
+  ],
+  "familyPressureKind": "darkness_fog_torch_magic_light_pressure",
+  "stateChanging": true,
+  "unityMarkerExpectations": [
+    "world_event_row=matrix-row-first-person-grid-dungeon-seed-gamma",
+    "world_event_family=first_person_grid_dungeon",
+    "world_event_seed=seed_gamma",
+    "world_event_clock_phase=night",
+    "world_event_weather=weather/first-person-grid-dungeon/spore-haze",
+    "world_event_crisis=crisis/first-person-grid-dungeon/loot-room-flood",
+    "world_event_state_changed=true",
+    "world_event_save_load_replay=true",
+    "world_event_row_completed=matrix-row-first-person-grid-dungeon-seed-gamma"
+  ],
+  "rowHash": "90c51eabe0ee5e352e995c9e97b2bfbff461a8debc937928f85903604d15488f"
+}

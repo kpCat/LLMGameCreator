@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "world_event_weather_daynight_crisis_row_v1",
+  "goalId": "goal_069_world_event_weather_daynight_crisis_matrix",
+  "rowId": "matrix-row-map-panel-rpg-seed-beta",
+  "familyId": "map_panel_rpg",
+  "seedId": "seed_beta",
+  "upstreamRefs": [
+    "Goal060:matrix-row-map-panel-rpg-seed-beta",
+    "Goal061:matrix-row-map-panel-rpg-seed-beta",
+    "Goal062:matrix-row-map-panel-rpg-seed-beta",
+    "Goal063:matrix-row-map-panel-rpg-seed-beta",
+    "Goal064:matrix-row-map-panel-rpg-seed-beta",
+    "Goal065:matrix-row-map-panel-rpg-seed-beta",
+    "Goal066:matrix-row-map-panel-rpg-seed-beta",
+    "Goal067:matrix-row-map-panel-rpg-seed-beta",
+    "Goal068:matrix-row-map-panel-rpg-seed-beta"
+  ],
+  "upstreamHashes": [
+    {
+      "sourceGoal": "Goal060",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "package",
+      "hash": "438d797f07d0265fc7f23fe9ff5b0c93ee173dff66d312e3a9b74bb9d940856a"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "after_state",
+      "hash": "b08d558f151951c807eb55402f81482e10fb2c105fd7166ffc5e9bdd78e79d7c"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "after_state",
+      "hash": "5d89260214ba9caafbd7b657f7407ce6bcb854cf2544de0e5a44e98b50e29ff5"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "after_state",
+      "hash": "4746e5ad9684217cc3399d8a46a6ac2df740ba0e2d84a8a270a3a32c7a55785c"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "row",
+      "hash": "cfced263bd7b643b8875d16d84f32e55ec4a42080be4266314753fe2556bbfb2"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "row",
+      "hash": "40eff40299a3289286f325d7e6db5be0b1f9b5845ad12a58c5dfcafca0090193"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "row",
+      "hash": "62a5a4c1cffa8593b185b1e428e6240d87e0bf0b791448df9b833720597bfc1d"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "row",
+      "hash": "e4c119b4fffe6b33b72b13ed8a1af479b240275e5299a8af42dfcd547d0d26fc"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "after_state",
+      "hash": "ce0f672700ce3ca3e9bb0b5d4694cdb73b4eda4cf191e5cdf939d7bf072f2df0"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "row",
+      "hash": "526e63175bfe2e2c620b100bae1f7c1751f95ffccad3a6da5c92ef8a23a47844"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "after_state",
+      "hash": "8e6fe0bc74de584b1f918c43c3f9cde73247f63b8aa482079ce44b4d145a233d"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "row",
+      "hash": "55fa4c0bd50b8bc055d34f3841eb872ea1f8f401af4888a0e18095952fbdec7d"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "after_state",
+      "hash": "adcbe4c7b65141a6b8afc2873ec067b1413e1f493789197fd8174ee427b7f2f9"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-beta",
+      "hashKind": "row",
+      "hash": "c0234dfa873be49bc136260b09f33579fdbfea10f0f4b20439cbc602144ebc13"
+    }
+  ],
+  "worldClockBefore": {
+    "dayIndex": 8,
+    "hour": 5,
+    "phase": "dawn",
+    "lightLevel": 40,
+    "calendarTag": "campaign_day_08"
+  },
+  "worldClockAfter": {
+    "dayIndex": 8,
+    "hour": 18,
+    "phase": "dusk",
+    "lightLevel": 35,
+    "calendarTag": "campaign_day_08"
+  },
+  "dayNightEffect": {
+    "effectId": "day-night/map-panel-rpg/seed-beta/dawn-to-dusk",
+    "beforePhase": "dawn",
+    "afterPhase": "dusk",
+    "beforeLightLevel": 40,
+    "afterLightLevel": 35,
+    "stateDeltaRefs": [
+      "goal069/map-panel-rpg/seed-beta/01-faction-patrol_pressure",
+      "goal069/map-panel-rpg/seed-beta/02-settlement-production_delay"
+    ],
+    "passed": true
+  },
+  "weatherHazard": {
+    "weatherId": "weather/map-panel-rpg/flooded-road",
+    "hazardId": "hazard/map-panel-rpg/ambush-fog",
+    "severity": 3,
+    "pressureKind": "route_faction_event_pressure",
+    "stateDeltaRefs": [
+      "goal069/map-panel-rpg/seed-beta/02-settlement-production_delay",
+      "goal069/map-panel-rpg/seed-beta/03-quest-event_pressure",
+      "goal069/map-panel-rpg/seed-beta/04-inventory-supply_cache"
+    ],
+    "passed": true
+  },
+  "crisisEvent": {
+    "crisisId": "crisis/map-panel-rpg/faction-border-lockdown",
+    "crisisKind": "faction_lockdown",
+    "trigger": "clock:dusk+weather:weather/map-panel-rpg/flooded-road",
+    "consequenceSummary": "Route pressure changes faction patrols, settlement production, quest urgency and supplies.",
+    "stateDeltaRefs": [
+      "goal069/map-panel-rpg/seed-beta/03-quest-event_pressure",
+      "goal069/map-panel-rpg/seed-beta/04-inventory-supply_cache",
+      "goal069/map-panel-rpg/seed-beta/05-party-morale_status"
+    ],
+    "passed": true
+  },
+  "crossSystemDeltas": [
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-beta/01-faction-patrol_pressure",
+      "category": "npc_faction",
+      "key": "faction.patrol_pressure",
+      "beforeValue": "normal",
+      "afterValue": "storm-alert/seed-beta",
+      "sourceRef": "Goal064:matrix-row-map-panel-rpg-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-beta/02-settlement-production_delay",
+      "category": "settlement_production",
+      "key": "settlement.production_delay",
+      "beforeValue": "0",
+      "afterValue": "2-shift-delay/seed-beta",
+      "sourceRef": "Goal066:matrix-row-map-panel-rpg-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-beta/03-quest-event_pressure",
+      "category": "narrative_quest_dialogue",
+      "key": "quest.event_pressure",
+      "beforeValue": "optional",
+      "afterValue": "urgent-route-crisis/seed-beta",
+      "sourceRef": "Goal067:matrix-row-map-panel-rpg-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-beta/04-inventory-supply_cache",
+      "category": "economy_resource_inventory",
+      "key": "inventory.supply_cache",
+      "beforeValue": "sealed",
+      "afterValue": "spent-on-detour/seed-beta",
+      "sourceRef": "Goal065:matrix-row-map-panel-rpg-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-beta/05-party-morale_status",
+      "category": "combat_magic_status",
+      "key": "party.morale_status",
+      "beforeValue": "steady",
+      "afterValue": "weather-fatigued/seed-beta",
+      "sourceRef": "Goal068:matrix-row-map-panel-rpg-seed-beta",
+      "passed": true
+    }
+  ],
+  "beforeState": {
+    "rowId": "matrix-row-map-panel-rpg-seed-beta",
+    "familyId": "map_panel_rpg",
+    "seedId": "seed_beta",
+    "stepIndex": 0,
+    "stateHash": "a8dad5d69b2b43d999309c2ba9babfea8922cce69deaee4541a3192485597bfa",
+    "values": {
+      "clock.dayIndex": "008",
+      "clock.hour": "05",
+      "clock.lightLevel": "040",
+      "clock.phase": "dawn",
+      "crisis.id": "crisis/none/map-panel-rpg",
+      "faction.patrol_pressure": "normal",
+      "family.id": "map_panel_rpg",
+      "hazard.id": "hazard/none/map-panel-rpg",
+      "inventory.supply_cache": "sealed",
+      "party.morale_status": "steady",
+      "quest.event_pressure": "optional",
+      "row.id": "matrix-row-map-panel-rpg-seed-beta",
+      "seed.id": "seed_beta",
+      "settlement.production_delay": "0",
+      "source.goal066.afterStateHash": "ce0f672700ce3ca3e9bb0b5d4694cdb73b4eda4cf191e5cdf939d7bf072f2df0",
+      "source.goal067.afterStateHash": "8e6fe0bc74de584b1f918c43c3f9cde73247f63b8aa482079ce44b4d145a233d",
+      "source.goal068.afterStateHash": "adcbe4c7b65141a6b8afc2873ec067b1413e1f493789197fd8174ee427b7f2f9",
+      "source.goal068.rowHash": "c0234dfa873be49bc136260b09f33579fdbfea10f0f4b20439cbc602144ebc13",
+      "weather.id": "weather/clear/map-panel-rpg"
+    }
+  },
+  "afterState": {
+    "rowId": "matrix-row-map-panel-rpg-seed-beta",
+    "familyId": "map_panel_rpg",
+    "seedId": "seed_beta",
+    "stepIndex": 1,
+    "stateHash": "0bb62bcbd5e9bd60f3a9400c82cd90efd5ba8a9ee3c05aeaff74ba7dc92400cb",
+    "values": {
+      "clock.dayIndex": "008",
+      "clock.hour": "18",
+      "clock.lightLevel": "035",
+      "clock.phase": "dusk",
+      "crisis.id": "crisis/map-panel-rpg/faction-border-lockdown",
+      "faction.patrol_pressure": "storm-alert/seed-beta",
+      "family.id": "map_panel_rpg",
+      "hazard.id": "hazard/map-panel-rpg/ambush-fog",
+      "inventory.supply_cache": "spent-on-detour/seed-beta",
+      "party.morale_status": "weather-fatigued/seed-beta",
+      "quest.event_pressure": "urgent-route-crisis/seed-beta",
+      "row.id": "matrix-row-map-panel-rpg-seed-beta",
+      "seed.id": "seed_beta",
+      "settlement.production_delay": "2-shift-delay/seed-beta",
+      "source.goal066.afterStateHash": "ce0f672700ce3ca3e9bb0b5d4694cdb73b4eda4cf191e5cdf939d7bf072f2df0",
+      "source.goal067.afterStateHash": "8e6fe0bc74de584b1f918c43c3f9cde73247f63b8aa482079ce44b4d145a233d",
+      "source.goal068.afterStateHash": "adcbe4c7b65141a6b8afc2873ec067b1413e1f493789197fd8174ee427b7f2f9",
+      "source.goal068.rowHash": "c0234dfa873be49bc136260b09f33579fdbfea10f0f4b20439cbc602144ebc13",
+      "weather.id": "weather/map-panel-rpg/flooded-road"
+    }
+  },
+  "saveLoadReplayProof": {
+    "rowId": "matrix-row-map-panel-rpg-seed-beta",
+    "familyId": "map_panel_rpg",
+    "seedId": "seed_beta",
+    "beforeStateHash": "a8dad5d69b2b43d999309c2ba9babfea8922cce69deaee4541a3192485597bfa",
+    "afterStateHash": "0bb62bcbd5e9bd60f3a9400c82cd90efd5ba8a9ee3c05aeaff74ba7dc92400cb",
+    "beforeAfterStateChanged": true,
+    "serializedAfterStateHash": "805fc55bfe6a2793993683a8a85ea0e0dd53345bbf7825a71b0bce4b172f807e",
+    "restoredAfterStateHash": "805fc55bfe6a2793993683a8a85ea0e0dd53345bbf7825a71b0bce4b172f807e",
+    "saveLoadRoundtripPassed": true,
+    "firstReplayHash": "9c3e61e2ac52132be681705f670cda785357ba1d3ff233051c0e57b436edbdff",
+    "secondReplayHash": "9c3e61e2ac52132be681705f670cda785357ba1d3ff233051c0e57b436edbdff",
+    "replayDeterminismPassed": true
+  },
+  "changedCategories": [
+    "combat_magic_status",
+    "economy_resource_inventory",
+    "narrative_quest_dialogue",
+    "npc_faction",
+    "settlement_production"
+  ],
+  "familyPressureKind": "route_faction_event_pressure",
+  "stateChanging": true,
+  "unityMarkerExpectations": [
+    "world_event_row=matrix-row-map-panel-rpg-seed-beta",
+    "world_event_family=map_panel_rpg",
+    "world_event_seed=seed_beta",
+    "world_event_clock_phase=dusk",
+    "world_event_weather=weather/map-panel-rpg/flooded-road",
+    "world_event_crisis=crisis/map-panel-rpg/faction-border-lockdown",
+    "world_event_state_changed=true",
+    "world_event_save_load_replay=true",
+    "world_event_row_completed=matrix-row-map-panel-rpg-seed-beta"
+  ],
+  "rowHash": "082123e71ff13bc2ae7f7be4bc75b9bac05c2e9cb5112cec54853b9afe822bdf"
+}

@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "world_event_weather_daynight_crisis_row_v1",
+  "goalId": "goal_069_world_event_weather_daynight_crisis_matrix",
+  "rowId": "matrix-row-survival-sandbox-seed-beta",
+  "familyId": "survival_sandbox",
+  "seedId": "seed_beta",
+  "upstreamRefs": [
+    "Goal060:matrix-row-survival-sandbox-seed-beta",
+    "Goal061:matrix-row-survival-sandbox-seed-beta",
+    "Goal062:matrix-row-survival-sandbox-seed-beta",
+    "Goal063:matrix-row-survival-sandbox-seed-beta",
+    "Goal064:matrix-row-survival-sandbox-seed-beta",
+    "Goal065:matrix-row-survival-sandbox-seed-beta",
+    "Goal066:matrix-row-survival-sandbox-seed-beta",
+    "Goal067:matrix-row-survival-sandbox-seed-beta",
+    "Goal068:matrix-row-survival-sandbox-seed-beta"
+  ],
+  "upstreamHashes": [
+    {
+      "sourceGoal": "Goal060",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "package",
+      "hash": "7f33c153f445cdfb4e435400461f56212feea230f8092fe538975c163b7149e1"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "after_state",
+      "hash": "53bc4237f3ff5b492ac2e629cd4f517df52e856ebb68d1a26470d04406a521eb"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "after_state",
+      "hash": "40001de726177e83405c0895d50c1d603a7eb3d46bbd127320c67b79defa39c3"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "after_state",
+      "hash": "5d129dc8da4448667e590e2911ee4c9f41328b7db71dfaa80fea303be84144c1"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "row",
+      "hash": "77eb9c8e9053ea42b5b2c3edfa672b594d98f6649bbc1e358eee6d6de106760e"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "row",
+      "hash": "ae04492c9cd7f466edee06d29e06ed89de659bbd679b5e74fb7ad942f9b3a483"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "row",
+      "hash": "1834697ae4b81a02259a6ba0ac64cafb555957422fe3dae92c116d3dd2af4214"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "row",
+      "hash": "48ec29db5b672f65b05e1983147a0159b747c64d453ebee6bc86ce69da44a225"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "after_state",
+      "hash": "31bdca82e49ca93986449674037abc4f848977e45592d42601c304851a81cca9"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "row",
+      "hash": "24c3a3552b9f864c9ebd0e305d1fe73395fee4e680f798e650d837df701de35d"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "after_state",
+      "hash": "94cee79c3bd249c85e5d60afca3bf1aaab78c19e7718ecc9d7dfa251db6223f6"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "row",
+      "hash": "a1b5a7151b19da3bd7d6c62f8d76619c08853360ec31df4f9b21a0f959879c7f"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "after_state",
+      "hash": "5f5900dc8b4aee3f1a218878eb7db833e1700de652a557c69ed12f06158812ba"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-survival-sandbox-seed-beta",
+      "hashKind": "row",
+      "hash": "040907f4d1505a66f2a75fbd7f62638f5cae55532d1a6adca7706fa433392bab"
+    }
+  ],
+  "worldClockBefore": {
+    "dayIndex": 8,
+    "hour": 5,
+    "phase": "dawn",
+    "lightLevel": 40,
+    "calendarTag": "campaign_day_08"
+  },
+  "worldClockAfter": {
+    "dayIndex": 8,
+    "hour": 18,
+    "phase": "dusk",
+    "lightLevel": 35,
+    "calendarTag": "campaign_day_08"
+  },
+  "dayNightEffect": {
+    "effectId": "day-night/survival-sandbox/seed-beta/dawn-to-dusk",
+    "beforePhase": "dawn",
+    "afterPhase": "dusk",
+    "beforeLightLevel": 40,
+    "afterLightLevel": 35,
+    "stateDeltaRefs": [
+      "goal069/survival-sandbox/seed-beta/01-status-exposure",
+      "goal069/survival-sandbox/seed-beta/02-resource-water"
+    ],
+    "passed": true
+  },
+  "weatherHazard": {
+    "weatherId": "weather/survival-sandbox/heatwave",
+    "hazardId": "hazard/survival-sandbox/dehydration-risk",
+    "severity": 3,
+    "pressureKind": "hazard_need_resource_shelter_pressure",
+    "stateDeltaRefs": [
+      "goal069/survival-sandbox/seed-beta/02-resource-water",
+      "goal069/survival-sandbox/seed-beta/03-settlement-shelter_integrity",
+      "goal069/survival-sandbox/seed-beta/04-inventory-fuel_bundle"
+    ],
+    "passed": true
+  },
+  "crisisEvent": {
+    "crisisId": "crisis/survival-sandbox/well-contamination",
+    "crisisKind": "resource_shortage",
+    "trigger": "clock:dusk+weather:weather/survival-sandbox/heatwave",
+    "consequenceSummary": "Hazard pressure changes needs, shelter, inventory, crafting recovery and camp relations.",
+    "stateDeltaRefs": [
+      "goal069/survival-sandbox/seed-beta/03-settlement-shelter_integrity",
+      "goal069/survival-sandbox/seed-beta/04-inventory-fuel_bundle",
+      "goal069/survival-sandbox/seed-beta/05-crafting-recovery_task"
+    ],
+    "passed": true
+  },
+  "crossSystemDeltas": [
+    {
+      "deltaId": "goal069/survival-sandbox/seed-beta/01-status-exposure",
+      "category": "combat_magic_status",
+      "key": "status.exposure",
+      "beforeValue": "0",
+      "afterValue": "2-weather-exposed/seed-beta",
+      "sourceRef": "Goal068:matrix-row-survival-sandbox-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/survival-sandbox/seed-beta/02-resource-water",
+      "category": "economy_resource_inventory",
+      "key": "resource.water",
+      "beforeValue": "12",
+      "afterValue": "8-reserved/seed-beta",
+      "sourceRef": "Goal065:matrix-row-survival-sandbox-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/survival-sandbox/seed-beta/03-settlement-shelter_integrity",
+      "category": "settlement_production",
+      "key": "settlement.shelter_integrity",
+      "beforeValue": "100",
+      "afterValue": "76-repaired/seed-beta",
+      "sourceRef": "Goal066:matrix-row-survival-sandbox-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/survival-sandbox/seed-beta/04-inventory-fuel_bundle",
+      "category": "economy_resource_inventory",
+      "key": "inventory.fuel_bundle",
+      "beforeValue": "3",
+      "afterValue": "1-consumed/seed-beta",
+      "sourceRef": "Goal065:matrix-row-survival-sandbox-seed-beta",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/survival-sandbox/seed-beta/05-crafting-recovery_task",
+      "category": "narrative_quest_dialogue",
+      "key": "crafting.recovery_task",
+      "beforeValue": "queued",
+      "afterValue": "active-crisis-recover/seed-beta",
+      "sourceRef": "Goal067:matrix-row-survival-sandbox-seed-beta",
+      "passed": true
+    }
+  ],
+  "beforeState": {
+    "rowId": "matrix-row-survival-sandbox-seed-beta",
+    "familyId": "survival_sandbox",
+    "seedId": "seed_beta",
+    "stepIndex": 0,
+    "stateHash": "f80ae2ceba866ad9281d5cd11a420c6741694fe3c6932372ba979c8401ffd983",
+    "values": {
+      "clock.dayIndex": "008",
+      "clock.hour": "05",
+      "clock.lightLevel": "040",
+      "clock.phase": "dawn",
+      "crafting.recovery_task": "queued",
+      "crisis.id": "crisis/none/survival-sandbox",
+      "family.id": "survival_sandbox",
+      "hazard.id": "hazard/none/survival-sandbox",
+      "inventory.fuel_bundle": "3",
+      "resource.water": "12",
+      "row.id": "matrix-row-survival-sandbox-seed-beta",
+      "seed.id": "seed_beta",
+      "settlement.shelter_integrity": "100",
+      "source.goal066.afterStateHash": "31bdca82e49ca93986449674037abc4f848977e45592d42601c304851a81cca9",
+      "source.goal067.afterStateHash": "94cee79c3bd249c85e5d60afca3bf1aaab78c19e7718ecc9d7dfa251db6223f6",
+      "source.goal068.afterStateHash": "5f5900dc8b4aee3f1a218878eb7db833e1700de652a557c69ed12f06158812ba",
+      "source.goal068.rowHash": "040907f4d1505a66f2a75fbd7f62638f5cae55532d1a6adca7706fa433392bab",
+      "status.exposure": "0",
+      "weather.id": "weather/clear/survival-sandbox"
+    }
+  },
+  "afterState": {
+    "rowId": "matrix-row-survival-sandbox-seed-beta",
+    "familyId": "survival_sandbox",
+    "seedId": "seed_beta",
+    "stepIndex": 1,
+    "stateHash": "73ae815748d87910bc420e21a79d7a46f8138230ccee8961980f8c91dca20be0",
+    "values": {
+      "clock.dayIndex": "008",
+      "clock.hour": "18",
+      "clock.lightLevel": "035",
+      "clock.phase": "dusk",
+      "crafting.recovery_task": "active-crisis-recover/seed-beta",
+      "crisis.id": "crisis/survival-sandbox/well-contamination",
+      "family.id": "survival_sandbox",
+      "hazard.id": "hazard/survival-sandbox/dehydration-risk",
+      "inventory.fuel_bundle": "1-consumed/seed-beta",
+      "resource.water": "8-reserved/seed-beta",
+      "row.id": "matrix-row-survival-sandbox-seed-beta",
+      "seed.id": "seed_beta",
+      "settlement.shelter_integrity": "76-repaired/seed-beta",
+      "source.goal066.afterStateHash": "31bdca82e49ca93986449674037abc4f848977e45592d42601c304851a81cca9",
+      "source.goal067.afterStateHash": "94cee79c3bd249c85e5d60afca3bf1aaab78c19e7718ecc9d7dfa251db6223f6",
+      "source.goal068.afterStateHash": "5f5900dc8b4aee3f1a218878eb7db833e1700de652a557c69ed12f06158812ba",
+      "source.goal068.rowHash": "040907f4d1505a66f2a75fbd7f62638f5cae55532d1a6adca7706fa433392bab",
+      "status.exposure": "2-weather-exposed/seed-beta",
+      "weather.id": "weather/survival-sandbox/heatwave"
+    }
+  },
+  "saveLoadReplayProof": {
+    "rowId": "matrix-row-survival-sandbox-seed-beta",
+    "familyId": "survival_sandbox",
+    "seedId": "seed_beta",
+    "beforeStateHash": "f80ae2ceba866ad9281d5cd11a420c6741694fe3c6932372ba979c8401ffd983",
+    "afterStateHash": "73ae815748d87910bc420e21a79d7a46f8138230ccee8961980f8c91dca20be0",
+    "beforeAfterStateChanged": true,
+    "serializedAfterStateHash": "3c5e39268d3e09325c934d2415660b3881d129f3d56f119c3ea5582a4a72c7b9",
+    "restoredAfterStateHash": "3c5e39268d3e09325c934d2415660b3881d129f3d56f119c3ea5582a4a72c7b9",
+    "saveLoadRoundtripPassed": true,
+    "firstReplayHash": "286dec9a2db3bc80633f3da4db5034a0d18c5f13c9f65ea01263d1db8fc71859",
+    "secondReplayHash": "286dec9a2db3bc80633f3da4db5034a0d18c5f13c9f65ea01263d1db8fc71859",
+    "replayDeterminismPassed": true
+  },
+  "changedCategories": [
+    "combat_magic_status",
+    "economy_resource_inventory",
+    "narrative_quest_dialogue",
+    "settlement_production"
+  ],
+  "familyPressureKind": "hazard_need_resource_shelter_pressure",
+  "stateChanging": true,
+  "unityMarkerExpectations": [
+    "world_event_row=matrix-row-survival-sandbox-seed-beta",
+    "world_event_family=survival_sandbox",
+    "world_event_seed=seed_beta",
+    "world_event_clock_phase=dusk",
+    "world_event_weather=weather/survival-sandbox/heatwave",
+    "world_event_crisis=crisis/survival-sandbox/well-contamination",
+    "world_event_state_changed=true",
+    "world_event_save_load_replay=true",
+    "world_event_row_completed=matrix-row-survival-sandbox-seed-beta"
+  ],
+  "rowHash": "94ca06d2e7e725ad7c54d41a6437f4b75a08cb01cea51a212a1e2691327c4c42"
+}

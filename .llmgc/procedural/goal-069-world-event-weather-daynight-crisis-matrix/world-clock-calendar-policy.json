@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "world_clock_calendar_policy_v1",
+  "passed": true,
+  "phases": [
+    {
+      "phaseId": "dawn",
+      "startHourInclusive": 5,
+      "endHourExclusive": 8,
+      "lightLevel": 40,
+      "gameplayPressure": "travel_visibility_recovery"
+    },
+    {
+      "phaseId": "day",
+      "startHourInclusive": 8,
+      "endHourExclusive": 17,
+      "lightLevel": 80,
+      "gameplayPressure": "production_and_route_window"
+    },
+    {
+      "phaseId": "dusk",
+      "startHourInclusive": 17,
+      "endHourExclusive": 20,
+      "lightLevel": 35,
+      "gameplayPressure": "risk_transition"
+    },
+    {
+      "phaseId": "night",
+      "startHourInclusive": 20,
+      "endHourExclusive": 5,
+      "lightLevel": 12,
+      "gameplayPressure": "hazard_and_encounter_escalation"
+    }
+  ],
+  "deterministicOrdering": [
+    "familyId",
+    "seedId",
+    "rowId",
+    "phase",
+    "weatherId",
+    "crisisId"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "world_event_variance_metrics_v1",
+  "passed": true,
+  "familyCount": 3,
+  "seedCount": 3,
+  "distinctWeatherCount": 9,
+  "distinctCrisisCount": 9,
+  "distinctPhaseTransitionCount": 3,
+  "distinctRowHashCount": 9,
+  "familyAxes": [
+    {
+      "familyId": "map_panel_rpg",
+      "rowCount": 3,
+      "weatherIds": [
+        "weather/map-panel-rpg/eclipse-wind",
+        "weather/map-panel-rpg/flooded-road",
+        "weather/map-panel-rpg/storm-front"
+      ],
+      "crisisIds": [
+        "crisis/map-panel-rpg/faction-border-lockdown",
+        "crisis/map-panel-rpg/market-fire",
+        "crisis/map-panel-rpg/refugee-convoy"
+      ],
+      "phaseTransitions": [
+        "dawn->dusk",
+        "day->night",
+        "dusk->night"
+      ]
+    },
+    {
+      "familyId": "survival_sandbox",
+      "rowCount": 3,
+      "weatherIds": [
+        "weather/survival-sandbox/acid-rain",
+        "weather/survival-sandbox/blizzard",
+        "weather/survival-sandbox/heatwave"
+      ],
+      "crisisIds": [
+        "crisis/survival-sandbox/forage-collapse",
+        "crisis/survival-sandbox/shelter-breach",
+        "crisis/survival-sandbox/well-contamination"
+      ],
+      "phaseTransitions": [
+        "dawn->dusk",
+        "day->night",
+        "dusk->night"
+      ]
+    },
+    {
+      "familyId": "first_person_grid_dungeon",
+      "rowCount": 3,
+      "weatherIds": [
+        "weather/first-person-grid-dungeon/cold-draft",
+        "weather/first-person-grid-dungeon/deep-fog",
+        "weather/first-person-grid-dungeon/spore-haze"
+      ],
+      "crisisIds": [
+        "crisis/first-person-grid-dungeon/door-seal",
+        "crisis/first-person-grid-dungeon/loot-room-flood",
+        "crisis/first-person-grid-dungeon/warden-hunt"
+      ],
+      "phaseTransitions": [
+        "dawn->dusk",
+        "day->night",
+        "dusk->night"
+      ]
+    }
+  ]
+}

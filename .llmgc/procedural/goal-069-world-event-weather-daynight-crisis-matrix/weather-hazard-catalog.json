@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "weather_hazard_catalog_v1",
+  "passed": true,
+  "weatherHazards": [
+    {
+      "weatherId": "weather/first-person-grid-dungeon/cold-draft",
+      "hazardId": "hazard/first-person-grid-dungeon/torch-drain",
+      "familyId": "first_person_grid_dungeon",
+      "pressureKind": "darkness_fog_torch_magic_light_pressure",
+      "affectedStateKeys": [
+        "status.visibility",
+        "inventory.torch_fuel",
+        "magic.light_charge",
+        "combat.encounter_pressure",
+        "progression.door_clue"
+      ]
+    },
+    {
+      "weatherId": "weather/first-person-grid-dungeon/deep-fog",
+      "hazardId": "hazard/first-person-grid-dungeon/line-of-sight-loss",
+      "familyId": "first_person_grid_dungeon",
+      "pressureKind": "darkness_fog_torch_magic_light_pressure",
+      "affectedStateKeys": [
+        "status.visibility",
+        "inventory.torch_fuel",
+        "magic.light_charge",
+        "combat.encounter_pressure",
+        "progression.door_clue"
+      ]
+    },
+    {
+      "weatherId": "weather/first-person-grid-dungeon/spore-haze",
+      "hazardId": "hazard/first-person-grid-dungeon/silence-spores",
+      "familyId": "first_person_grid_dungeon",
+      "pressureKind": "darkness_fog_torch_magic_light_pressure",
+      "affectedStateKeys": [
+        "status.visibility",
+        "inventory.torch_fuel",
+        "magic.light_charge",
+        "combat.encounter_pressure",
+        "progression.door_clue"
+      ]
+    },
+    {
+      "weatherId": "weather/map-panel-rpg/eclipse-wind",
+      "hazardId": "hazard/map-panel-rpg/night-patrol",
+      "familyId": "map_panel_rpg",
+      "pressureKind": "route_faction_event_pressure",
+      "affectedStateKeys": [
+        "route.cost",
+        "faction.patrol_pressure",
+        "settlement.production_delay",
+        "quest.event_pressure",
+        "inventory.supply_cache"
+      ]
+    },
+    {
+      "weatherId": "weather/map-panel-rpg/flooded-road",
+      "hazardId": "hazard/map-panel-rpg/ambush-fog",
+      "familyId": "map_panel_rpg",
+      "pressureKind": "route_faction_event_pressure",
+      "affectedStateKeys": [
+        "route.cost",
+        "faction.patrol_pressure",
+        "settlement.production_delay",
+        "quest.event_pressure",
+        "inventory.supply_cache"
+      ]
+    },
+    {
+      "weatherId": "weather/map-panel-rpg/storm-front",
+      "hazardId": "hazard/map-panel-rpg/washed-bridge",
+      "familyId": "map_panel_rpg",
+      "pressureKind": "route_faction_event_pressure",
+      "affectedStateKeys": [
+        "route.cost",
+        "faction.patrol_pressure",
+        "settlement.production_delay",
+        "quest.event_pressure",
+        "inventory.supply_cache"
+      ]
+    },
+    {
+      "weatherId": "weather/survival-sandbox/acid-rain",
+      "hazardId": "hazard/survival-sandbox/shelter-corrosion",
+      "familyId": "survival_sandbox",
+      "pressureKind": "hazard_need_resource_shelter_pressure",
+      "affectedStateKeys": [
+        "status.exposure",
+        "resource.water",
+        "settlement.shelter_integrity",
+        "inventory.fuel_bundle",
+        "crafting.recovery_task"
+      ]
+    },
+    {
+      "weatherId": "weather/survival-sandbox/blizzard",
+      "hazardId": "hazard/survival-sandbox/frostbite-risk",
+      "familyId": "survival_sandbox",
+      "pressureKind": "hazard_need_resource_shelter_pressure",
+      "affectedStateKeys": [
+        "status.exposure",
+        "resource.water",
+        "settlement.shelter_integrity",
+        "inventory.fuel_bundle",
+        "crafting.recovery_task"
+      ]
+    },
+    {
+      "weatherId": "weather/survival-sandbox/heatwave",
+      "hazardId": "hazard/survival-sandbox/dehydration-risk",
+      "familyId": "survival_sandbox",
+      "pressureKind": "hazard_need_resource_shelter_pressure",
+      "affectedStateKeys": [
+        "status.exposure",
+        "resource.water",
+        "settlement.shelter_integrity",
+        "inventory.fuel_bundle",
+        "crafting.recovery_task"
+      ]
+    }
+  ]
+}

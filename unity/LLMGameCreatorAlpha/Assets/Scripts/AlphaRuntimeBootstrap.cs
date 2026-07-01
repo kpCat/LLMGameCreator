@@ -45,6 +45,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> narrativeLogLines = new List<string>();
         private readonly List<AlphaCombatMagicRow> combatMagicRows = new List<AlphaCombatMagicRow>();
         private readonly List<string> combatMagicLogLines = new List<string>();
+        private readonly List<AlphaWorldEventRow> worldEventRows = new List<AlphaWorldEventRow>();
+        private readonly List<string> worldEventLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -99,6 +101,7 @@ namespace LLMGameCreatorAlpha
         private bool settlementPlanLoaded;
         private bool narrativePlanLoaded;
         private bool combatMagicPlanLoaded;
+        private bool worldEventPlanLoaded;
 
         private void Start()
         {
@@ -320,6 +323,7 @@ namespace LLMGameCreatorAlpha
                 var settlementLines = LoadSettlementPayload(payloadRoot);
                 var narrativeLines = LoadNarrativePayload(payloadRoot);
                 var combatMagicLines = LoadCombatMagicPayload(payloadRoot);
+                var worldEventLines = LoadWorldEventPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -356,6 +360,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(settlementLines);
                 lines.AddRange(narrativeLines);
                 lines.AddRange(combatMagicLines);
+                lines.AddRange(worldEventLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -427,6 +432,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunSettlementProof());
             lines.AddRange(RunNarrativeProof());
             lines.AddRange(RunCombatMagicProof());
+            lines.AddRange(RunWorldEventProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -2084,6 +2090,69 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadWorldEventPayload(string payloadRoot)
+        {
+            worldEventRows.Clear();
+            worldEventLogLines.Clear();
+            worldEventPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "world-event-weather-daynight", "unity-world-event-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                worldEventLogLines.Add("world_event_plan_loaded=false");
+                worldEventLogLines.Add("world_event_plan_missing=" + planPath);
+                return worldEventLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                worldEventRows.AddRange(ExtractWorldEventRows(planJson));
+                worldEventRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                worldEventPlanLoaded = ExtractJsonBool(planJson, "passed") && worldEventRows.Count > 0;
+                worldEventLogLines.Add("world_event_plan_loaded=" + worldEventPlanLoaded.ToString().ToLowerInvariant());
+                worldEventLogLines.Add("world_event_row_count=" + worldEventRows.Count);
+            }
+            catch (Exception ex)
+            {
+                worldEventPlanLoaded = false;
+                worldEventLogLines.Add("world_event_plan_loaded=false");
+                worldEventLogLines.Add("world_event_error_type=" + ex.GetType().Name);
+                worldEventLogLines.Add("world_event_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return worldEventLogLines;
+        }
+
+        private List<string> RunWorldEventProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(worldEventLogLines);
+            if (!worldEventPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("world_event_matrix_loaded=true");
+            foreach (var row in worldEventRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("world_event_row=" + row.RowId);
+                lines.Add("world_event_family=" + row.FamilyId);
+                lines.Add("world_event_seed=" + row.SeedId);
+                lines.Add("world_event_clock_phase=" + row.ClockPhase);
+                lines.Add("world_event_weather=" + row.WeatherId);
+                lines.Add("world_event_crisis=" + row.CrisisId);
+                lines.Add("world_event_state_changed=" + row.StateChanged.ToString().ToLowerInvariant());
+                lines.Add("world_event_save_load_replay=" + row.SaveLoadReplayPassed.ToString().ToLowerInvariant());
+                lines.Add("world_event_row_completed=" + row.RowId);
+            }
+
+            lines.Add("world_event_matrix_completed=true");
+            lines.Add("review_package_proof=goal069");
+            lines.Add("world_event_weather_daynight_crisis_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -2404,6 +2473,31 @@ namespace LLMGameCreatorAlpha
                     StatusApplicationId = ExtractJsonString(value, "statusApplicationId"),
                     ProgressionId = ExtractJsonString(value, "progressionId"),
                     RoundStepIds = ExtractStringArray(value, "roundStepIds").ToList()
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaWorldEventRow> ExtractWorldEventRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (var value in ExtractObjectBlocks(array))
+            {
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaWorldEventRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    ClockPhase = ExtractJsonString(value, "clockPhase"),
+                    WeatherId = ExtractJsonString(value, "weatherId"),
+                    CrisisId = ExtractJsonString(value, "crisisId"),
+                    StateChanged = ExtractJsonBool(value, "stateChanged"),
+                    SaveLoadReplayPassed = ExtractJsonBool(value, "saveLoadReplayPassed")
                 };
             }
         }
@@ -3157,6 +3251,18 @@ namespace LLMGameCreatorAlpha
             public string StatusApplicationId = string.Empty;
             public string ProgressionId = string.Empty;
             public List<string> RoundStepIds = new List<string>();
+        }
+
+        private sealed class AlphaWorldEventRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string ClockPhase = string.Empty;
+            public string WeatherId = string.Empty;
+            public string CrisisId = string.Empty;
+            public bool StateChanged;
+            public bool SaveLoadReplayPassed;
         }
 
         private sealed class AlphaMediaBoundBinding

@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "world_event_weather_daynight_crisis_row_v1",
+  "goalId": "goal_069_world_event_weather_daynight_crisis_matrix",
+  "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+  "familyId": "map_panel_rpg",
+  "seedId": "seed_gamma",
+  "upstreamRefs": [
+    "Goal060:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal061:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal062:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal063:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal064:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal065:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal066:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal067:matrix-row-map-panel-rpg-seed-gamma",
+    "Goal068:matrix-row-map-panel-rpg-seed-gamma"
+  ],
+  "upstreamHashes": [
+    {
+      "sourceGoal": "Goal060",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "package",
+      "hash": "2f2412780ed22d060d24098caefa0e887889126abb7f58bba633ed358c9a2823"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "ca4569e7c9fef75124093af65c3734390284c6a1a674cfb37b75b31d453984a4"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "243a786ddc3cbfeafeb67a769c781346bf1d913c8b27177205f335d3062c2026"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "d6b14d48f766601bacb708c33ea2c498a8360513e73054376fb1b2d3538a03c5"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "row",
+      "hash": "9adde2ca91644c8778280e7e6cd44a334ccac318abef8ae44145cd8693e0a721"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "row",
+      "hash": "f1fcc3c1c86298a7f9a46b734d19f0690e1f0544271fe0c3931443159e1effe1"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "row",
+      "hash": "795235957ca7bcdf62435eb4069f4417ea4456ff13f0a40d7ecc5cadcb3ab589"
+    },
+    {
+      "sourceGoal": "Goal062-065",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "row",
+      "hash": "8f931062bf7bab48e29f2bf83fbdb0dd2536dba0793b5f486985dd42272cd151"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "5864a991b2079fd683fa239efe4275d8c78d3473daf5c9bfddda1e5a480bdcc3"
+    },
+    {
+      "sourceGoal": "Goal066",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "row",
+      "hash": "a44e60bbdebe4751c098e27cbf62b2156167b4aeaddbf3567783b2ac9318460f"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "bb606598095530ba86bb39db14c05cc7ce5394de9ec11ecf55c7ab3793a15a10"
+    },
+    {
+      "sourceGoal": "Goal067",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "row",
+      "hash": "485ca8460373fed88f979b8758147351d99cc48d322dec613700b2907b389e51"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "after_state",
+      "hash": "3131f48c08ee666c1d4610dd37d8c55b94657ea009a6b9f0c17e68c61d57729b"
+    },
+    {
+      "sourceGoal": "Goal068",
+      "sourceRef": "matrix-row-map-panel-rpg-seed-gamma",
+      "hashKind": "row",
+      "hash": "e6f7fea891723ce5bccd768a8d17121c20a39633c217019e86d9214398373edd"
+    }
+  ],
+  "worldClockBefore": {
+    "dayIndex": 9,
+    "hour": 18,
+    "phase": "dusk",
+    "lightLevel": 35,
+    "calendarTag": "campaign_day_09"
+  },
+  "worldClockAfter": {
+    "dayIndex": 9,
+    "hour": 23,
+    "phase": "night",
+    "lightLevel": 12,
+    "calendarTag": "campaign_day_09"
+  },
+  "dayNightEffect": {
+    "effectId": "day-night/map-panel-rpg/seed-gamma/dusk-to-night",
+    "beforePhase": "dusk",
+    "afterPhase": "night",
+    "beforeLightLevel": 35,
+    "afterLightLevel": 12,
+    "stateDeltaRefs": [
+      "goal069/map-panel-rpg/seed-gamma/01-faction-patrol_pressure",
+      "goal069/map-panel-rpg/seed-gamma/02-settlement-production_delay"
+    ],
+    "passed": true
+  },
+  "weatherHazard": {
+    "weatherId": "weather/map-panel-rpg/eclipse-wind",
+    "hazardId": "hazard/map-panel-rpg/night-patrol",
+    "severity": 4,
+    "pressureKind": "route_faction_event_pressure",
+    "stateDeltaRefs": [
+      "goal069/map-panel-rpg/seed-gamma/02-settlement-production_delay",
+      "goal069/map-panel-rpg/seed-gamma/03-quest-event_pressure",
+      "goal069/map-panel-rpg/seed-gamma/04-inventory-supply_cache"
+    ],
+    "passed": true
+  },
+  "crisisEvent": {
+    "crisisId": "crisis/map-panel-rpg/market-fire",
+    "crisisKind": "settlement_supply",
+    "trigger": "clock:night+weather:weather/map-panel-rpg/eclipse-wind",
+    "consequenceSummary": "Route pressure changes faction patrols, settlement production, quest urgency and supplies.",
+    "stateDeltaRefs": [
+      "goal069/map-panel-rpg/seed-gamma/03-quest-event_pressure",
+      "goal069/map-panel-rpg/seed-gamma/04-inventory-supply_cache",
+      "goal069/map-panel-rpg/seed-gamma/05-party-morale_status"
+    ],
+    "passed": true
+  },
+  "crossSystemDeltas": [
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-gamma/01-faction-patrol_pressure",
+      "category": "npc_faction",
+      "key": "faction.patrol_pressure",
+      "beforeValue": "normal",
+      "afterValue": "storm-alert/seed-gamma",
+      "sourceRef": "Goal064:matrix-row-map-panel-rpg-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-gamma/02-settlement-production_delay",
+      "category": "settlement_production",
+      "key": "settlement.production_delay",
+      "beforeValue": "0",
+      "afterValue": "2-shift-delay/seed-gamma",
+      "sourceRef": "Goal066:matrix-row-map-panel-rpg-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-gamma/03-quest-event_pressure",
+      "category": "narrative_quest_dialogue",
+      "key": "quest.event_pressure",
+      "beforeValue": "optional",
+      "afterValue": "urgent-route-crisis/seed-gamma",
+      "sourceRef": "Goal067:matrix-row-map-panel-rpg-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-gamma/04-inventory-supply_cache",
+      "category": "economy_resource_inventory",
+      "key": "inventory.supply_cache",
+      "beforeValue": "sealed",
+      "afterValue": "spent-on-detour/seed-gamma",
+      "sourceRef": "Goal065:matrix-row-map-panel-rpg-seed-gamma",
+      "passed": true
+    },
+    {
+      "deltaId": "goal069/map-panel-rpg/seed-gamma/05-party-morale_status",
+      "category": "combat_magic_status",
+      "key": "party.morale_status",
+      "beforeValue": "steady",
+      "afterValue": "weather-fatigued/seed-gamma",
+      "sourceRef": "Goal068:matrix-row-map-panel-rpg-seed-gamma",
+      "passed": true
+    }
+  ],
+  "beforeState": {
+    "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+    "familyId": "map_panel_rpg",
+    "seedId": "seed_gamma",
+    "stepIndex": 0,
+    "stateHash": "b339b238524ce3e9b3498cd371c742b3002a2b49da096d836d6ffeb49e31b237",
+    "values": {
+      "clock.dayIndex": "009",
+      "clock.hour": "18",
+      "clock.lightLevel": "035",
+      "clock.phase": "dusk",
+      "crisis.id": "crisis/none/map-panel-rpg",
+      "faction.patrol_pressure": "normal",
+      "family.id": "map_panel_rpg",
+      "hazard.id": "hazard/none/map-panel-rpg",
+      "inventory.supply_cache": "sealed",
+      "party.morale_status": "steady",
+      "quest.event_pressure": "optional",
+      "row.id": "matrix-row-map-panel-rpg-seed-gamma",
+      "seed.id": "seed_gamma",
+      "settlement.production_delay": "0",
+      "source.goal066.afterStateHash": "5864a991b2079fd683fa239efe4275d8c78d3473daf5c9bfddda1e5a480bdcc3",
+      "source.goal067.afterStateHash": "bb606598095530ba86bb39db14c05cc7ce5394de9ec11ecf55c7ab3793a15a10",
+      "source.goal068.afterStateHash": "3131f48c08ee666c1d4610dd37d8c55b94657ea009a6b9f0c17e68c61d57729b",
+      "source.goal068.rowHash": "e6f7fea891723ce5bccd768a8d17121c20a39633c217019e86d9214398373edd",
+      "weather.id": "weather/clear/map-panel-rpg"
+    }
+  },
+  "afterState": {
+    "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+    "familyId": "map_panel_rpg",
+    "seedId": "seed_gamma",
+    "stepIndex": 1,
+    "stateHash": "e8881178888ae89baa81d03d0c7e0c7ea06ce67e2d06fb2fc216d3874bb70172",
+    "values": {
+      "clock.dayIndex": "009",
+      "clock.hour": "23",
+      "clock.lightLevel": "012",
+      "clock.phase": "night",
+      "crisis.id": "crisis/map-panel-rpg/market-fire",
+      "faction.patrol_pressure": "storm-alert/seed-gamma",
+      "family.id": "map_panel_rpg",
+      "hazard.id": "hazard/map-panel-rpg/night-patrol",
+      "inventory.supply_cache": "spent-on-detour/seed-gamma",
+      "party.morale_status": "weather-fatigued/seed-gamma",
+      "quest.event_pressure": "urgent-route-crisis/seed-gamma",
+      "row.id": "matrix-row-map-panel-rpg-seed-gamma",
+      "seed.id": "seed_gamma",
+      "settlement.production_delay": "2-shift-delay/seed-gamma",
+      "source.goal066.afterStateHash": "5864a991b2079fd683fa239efe4275d8c78d3473daf5c9bfddda1e5a480bdcc3",
+      "source.goal067.afterStateHash": "bb606598095530ba86bb39db14c05cc7ce5394de9ec11ecf55c7ab3793a15a10",
+      "source.goal068.afterStateHash": "3131f48c08ee666c1d4610dd37d8c55b94657ea009a6b9f0c17e68c61d57729b",
+      "source.goal068.rowHash": "e6f7fea891723ce5bccd768a8d17121c20a39633c217019e86d9214398373edd",
+      "weather.id": "weather/map-panel-rpg/eclipse-wind"
+    }
+  },
+  "saveLoadReplayProof": {
+    "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+    "familyId": "map_panel_rpg",
+    "seedId": "seed_gamma",
+    "beforeStateHash": "b339b238524ce3e9b3498cd371c742b3002a2b49da096d836d6ffeb49e31b237",
+    "afterStateHash": "e8881178888ae89baa81d03d0c7e0c7ea06ce67e2d06fb2fc216d3874bb70172",
+    "beforeAfterStateChanged": true,
+    "serializedAfterStateHash": "a146bfdf7f27590c6ebd9e8fc9eb3307958241a46eb2bacc122b9d88ed47a246",
+    "restoredAfterStateHash": "a146bfdf7f27590c6ebd9e8fc9eb3307958241a46eb2bacc122b9d88ed47a246",
+    "saveLoadRoundtripPassed": true,
+    "firstReplayHash": "9244ad39d2a49174255f9c7a558d65bae56eeb1ccf7b213dbd5c8e1d7bbd94dc",
+    "secondReplayHash": "9244ad39d2a49174255f9c7a558d65bae56eeb1ccf7b213dbd5c8e1d7bbd94dc",
+    "replayDeterminismPassed": true
+  },
+  "changedCategories": [
+    "combat_magic_status",
+    "economy_resource_inventory",
+    "narrative_quest_dialogue",
+    "npc_faction",
+    "settlement_production"
+  ],
+  "familyPressureKind": "route_faction_event_pressure",
+  "stateChanging": true,
+  "unityMarkerExpectations": [
+    "world_event_row=matrix-row-map-panel-rpg-seed-gamma",
+    "world_event_family=map_panel_rpg",
+    "world_event_seed=seed_gamma",
+    "world_event_clock_phase=night",
+    "world_event_weather=weather/map-panel-rpg/eclipse-wind",
+    "world_event_crisis=crisis/map-panel-rpg/market-fire",
+    "world_event_state_changed=true",
+    "world_event_save_load_replay=true",
+    "world_event_row_completed=matrix-row-map-panel-rpg-seed-gamma"
+  ],
+  "rowHash": "99c153844aaa7081217437b29e60836245aba5bb76f5fc47b06e957b3fa07413"
+}

@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "world_event_invalid_diagnostics_matrix_v1",
+  "passed": true,
+  "scenarios": [
+    {
+      "scenarioId": "arbitrary_lua_generated_lua_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.arbitrary_lua_generated_lua_claim",
+          "target": "arbitrary_lua_generated_lua_claim",
+          "message": "Arbitrary Lua or generated Lua claims are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "broad_unity_weather_rendering_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.broad_unity_weather_rendering_claim",
+          "target": "broad_unity_weather_rendering_claim",
+          "message": "Broad Unity rendering/gameplay changes are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "crisis_with_no_consequence",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.crisis_with_no_consequence",
+          "target": "crisis_with_no_consequence",
+          "message": "Crisis events must produce cross-system consequences."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_row_id",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.duplicate_row_id",
+          "target": "duplicate_row_id",
+          "message": "Row ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_family",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.fake_family",
+          "target": "fake_family",
+          "message": "Unknown family ids are rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_seed",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.fake_seed",
+          "target": "fake_seed",
+          "message": "Unknown seed ids are rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_cross_system_delta",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.missing_cross_system_delta",
+          "target": "missing_cross_system_delta",
+          "message": "At least two cross-system categories are required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal068_source",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.missing_goal068_source",
+          "target": "missing_goal068_source",
+          "message": "Goal 068 combat/magic source evidence is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "no_day_night_effect",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.no_day_night_effect",
+          "target": "no_day_night_effect",
+          "message": "Clock phase and light level must affect state."
+        }
+      ]
+    },
+    {
+      "scenarioId": "no_weather_hazard_effect",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.no_weather_hazard_effect",
+          "target": "no_weather_hazard_effect",
+          "message": "Weather and hazard ids must cause deltas."
+        }
+      ]
+    },
+    {
+      "scenarioId": "non_state_changing_row",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.non_state_changing_row",
+          "target": "non_state_changing_row",
+          "message": "Before/after state hashes must differ."
+        }
+      ]
+    },
+    {
+      "scenarioId": "nondeterministic_ordering",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.nondeterministic_ordering",
+          "target": "nondeterministic_ordering",
+          "message": "Family/seed ordering must be deterministic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_llm_rag_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.provider_llm_rag_claim",
+          "target": "provider_llm_rag_claim",
+          "message": "LLM/provider/RAG claims are forbidden in runtime proof."
+        }
+      ]
+    },
+    {
+      "scenarioId": "real_weather_network_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.real_weather_network_claim",
+          "target": "real_weather_network_claim",
+          "message": "Real weather or network provider claims are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "replay_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.replay_mismatch",
+          "target": "replay_mismatch",
+          "message": "Replay hashes must be deterministic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_ui_gamepackage_mutation_claim",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.runtime_ui_gamepackage_mutation_claim",
+          "target": "runtime_ui_gamepackage_mutation_claim",
+          "message": "Runtime, UI and public GamePackage mutation claims are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "save_load_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.save_load_mismatch",
+          "target": "save_load_mismatch",
+          "message": "Save/load roundtrip hashes must match."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsafe_path",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal069.invalid.unsafe_path",
+          "target": "unsafe_path",
+          "message": "Absolute, rooted, protocol and parent-relative paths are rejected."
+        }
+      ]
+    }
+  ]
+}
