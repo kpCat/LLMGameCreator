@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "generator_spine_quality_inventory_v1",
+  "goalId": "goal_072_generator_spine_quality_consolidation",
+  "manualGate": "generator_spine_quality_consolidation_verification",
+  "accepted": false,
+  "sourceFileCount": 667,
+  "artifactFileCount": 647,
+  "productSmokeFileCount": 100,
+  "minifiedCandidateCount": 0,
+  "largeFileCandidateCount": 46,
+  "largeMethodCandidateCount": 125,
+  "absolutePathLikeArtifactCount": 0,
+  "timestampLikeArtifactCount": 99,
+  "shallowProductSmokeCandidateCount": 0,
+  "seamRoleFolderCount": 146,
+  "unityBootstrapLineCount": 3672,
+  "unityBootstrapMarkerRouteCount": 16
+}

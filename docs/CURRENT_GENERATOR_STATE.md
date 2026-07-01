@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 071 produced-for-review handoff
+Updated by: Goal 072 produced-for-review handoff
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -412,6 +412,26 @@ allInteractiveMarkersMatched=true
 reportHash=ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02
 ```
 
+Goal 071 handoff acceptance recorded before Goal 072:
+
+```text
+unity_alpha_interactive_campaign_player_verification passed before Goal 072
+```
+
+Goal 072 produced for review:
+
+```text
+generator_spine_quality_consolidation_verification required
+accepted=false
+implementationStatus=BLOCKED
+p0Count=1
+p1Count=3
+p2Count=2
+p3Count=0
+inventoryHash=7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1
+debtRegisterHash=b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33
+```
+
 ## Current Phase
 
 M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants. Goal 002 manual configurable verification is recorded as passed based on the user's report before Goal 003. Goal 003 adds automated scenario acceptance and a declaration-only extension rule pack spine, proves a data-only inventory objective/reward variation, rejects invalid extension declarations, and stops at manual extension spine verification. Product Slice 048 consolidates the post-Goal-003 strategy documents and links them from the current handoff without starting a new feature goal. Goal 004 records the user's manual extension spine verification as passed, adds compact agent context budget policy, and proves quest/dialog/interaction family variation through data/rule-pack declarations and deterministic headless acceptance. Manual Goal 004 quest/dialog/interaction family verification is recorded as passed based on the user's artifact-review report before Goal 005. Goal 005 completes S054-S058 by defining `semantic_pack_contract_v1`, compiling layered semantic packs with `project > genre > core` precedence, quarantining imported/LLM candidates, adding compact reference packs, and proving semantic-guided quest/dialogue/interaction composition through deterministic headless acceptance artifacts. Product Slice 058A repairs semantic-guided acceptance correctness gaps found during external review. The user then confirmed `semantic_guided_composition_artifact_verification passed`, allowing Goal 006. Goal 006 completes S059-S063 by carrying selected semantic declarations into deterministic composition plans, materializing selected quest/dialogue/interaction content into validator-clean packages, executing those selected package ids headlessly through runtime-owned state, proving replay-save-load-isolation, and stopping at `semantic_selected_runtime_composition_artifact_verification`. Product Slice 063A repairs Goal 006 correctness gaps found during external review: suffixless placeholder bindings are rejected, every objective-required interaction is materialized, package bindings are audited before runtime, adapter evidence is structurally validated, reward/completion deltas are required, and isolation checks prove more than distinct hashes. The user then confirmed `semantic_selected_runtime_composition_artifact_verification passed`, allowing Goal 007. Goal 007 completes S064-S070 by proving bounded connected regions, exact region-to-map bindings, deterministic runtime-owned travel state, save/load restoration, bounded chunk evidence and invalid scenario rejection, and stops at `connected_world_travel_state_artifact_verification`.
@@ -508,7 +528,9 @@ Goal 069 records the accepted Goal 068 gate from the user handoff, adds a BCL-on
 
 Goal 070 records the accepted Goal 069 gate from the user handoff, adds a BCL-only Application-layer integrated campaign timeline simulation matrix under `Design/IntegratedCampaignTimelineSimulationMatrix`, and consumes Goal 060/061/062/063/064/065/066/067/068/069 evidence as source facts. It writes compact evidence under `.llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/`, proves 9/9 family/seed multi-step cross-system timeline rows with 7 ordered ticks per row, state-changing final states, 27 cross-system cascades, 9 conflict arbitration records, save/load/replay proof, meaningful variance, preview/export payloads and Unity Alpha campaign_timeline markers. Unity Editor/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, all required campaign_timeline markers matched and report hash `5db771792666d24cc334b9203fc8e5a6f7970f648f339f58d139377a3506aa89`. The Goal 071 handoff accepted `integrated_campaign_timeline_simulation_matrix_verification passed before Goal 071`.
 
-Goal 071 records the accepted Goal 070 gate from the user handoff, adds a BCL-only Application-layer Unity Alpha interactive campaign player seam under `Design/UnityAlphaInteractiveCampaignPlayer`, and consumes Goal 070 integrated campaign timeline evidence as source facts. It writes compact evidence under `.llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/`, proves 9/9 family/seed interactive rows with selectable family/seed state, 63 scripted input/action transitions, 63 state-transition ledger entries, save/load/replay proof, HUD contract, preview/export payloads and Unity Alpha interactive_campaign markers. Unity Editor/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, all required interactive_campaign markers matched and report hash `ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02`. Goal 071 keeps `unity_alpha_interactive_campaign_player_verification required` with `accepted=false` until user review.
+Goal 071 records the accepted Goal 070 gate from the user handoff, adds a BCL-only Application-layer Unity Alpha interactive campaign player seam under `Design/UnityAlphaInteractiveCampaignPlayer`, and consumes Goal 070 integrated campaign timeline evidence as source facts. It writes compact evidence under `.llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/`, proves 9/9 family/seed interactive rows with selectable family/seed state, 63 scripted input/action transitions, 63 state-transition ledger entries, save/load/replay proof, HUD contract, preview/export payloads and Unity Alpha interactive_campaign markers. Unity Editor/player proof passed with `unityExitCode=0`, `playerExitCode=0`, `provenRowCount=9`, all required interactive_campaign markers matched and report hash `ca0828e5da1ff8d08b6b6e0574bfe27568d7acef1447ec30f47ede0581d42d02`. The Goal 072 handoff accepted `unity_alpha_interactive_campaign_player_verification passed before Goal 072`.
+
+Goal 072 records the accepted Goal 071 gate from the user handoff and runs a generator spine quality consolidation/risk audit over recent Application-layer seams, tests, Unity Alpha bootstrap, compact evidence artifacts and current-state docs. It writes compact evidence under `.llmgc/procedural/goal-072-generator-spine-quality-consolidation/`, keeps a concrete technical debt register, and keeps `generator_spine_quality_consolidation_verification required` with `accepted=false` until user review. The implementation status is `BLOCKED`: scanner evidence found one P0 source-format extreme-line-length finding in existing checked-in source outside the allowed Goal 072 repair scope, plus three P1 and two P2 registered debt findings; Goal 071 proof indicators remained green and no compact artifact absolute-path leaks were found.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 
@@ -565,7 +587,8 @@ Allowed next sequence:
 26. Keep Goal 068 Combat Magic Ability Boss Encounter Matrix recorded as passed by user handoff before Goal 069.
 27. Keep Goal 069 World Event Weather Day/Night Crisis Matrix recorded as passed by user handoff before Goal 070.
 28. Keep Goal 070 Integrated Campaign Timeline Simulation Matrix recorded as passed by user handoff before Goal 071.
-29. Keep Goal 071 Unity Alpha Interactive Campaign Player produced for review with `unity_alpha_interactive_campaign_player_verification required` and `accepted=false` until user review.
+29. Keep Goal 071 Unity Alpha Interactive Campaign Player recorded as passed by user handoff before Goal 072.
+30. Keep Goal 072 Generator Spine Quality Consolidation produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED` until user review or a bounded follow-up repairs/accepts the P0 source-format debt.
 
 Kill criterion:
 
@@ -1965,13 +1988,13 @@ The pivot is not a restart. It changes what future slices are allowed to optimiz
 1. `AGENTS.md`
 2. `docs/CONTEXT_INDEX.md`
 3. `docs/CURRENT_GENERATOR_STATE.md`
-4. `docs/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER_SPEC.md`
-5. `docs/EXTERNAL_SCOUTING_GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
-6. `docs/agent-tasks/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
-7. `docs/agent-tasks/GOAL_071_LAUNCHER.txt`
-8. `docs/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX_SPEC.md`
-9. `docs/EXTERNAL_SCOUTING_GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md`
-10. `docs/agent-tasks/GOAL_070_INTEGRATED_CAMPAIGN_TIMELINE_SIMULATION_MATRIX.md`
+4. `docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md`
+5. `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+6. `docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+7. `docs/agent-tasks/GOAL_072_LAUNCHER.txt`
+8. `docs/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER_SPEC.md`
+9. `docs/EXTERNAL_SCOUTING_GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
+10. `docs/agent-tasks/GOAL_071_UNITY_ALPHA_INTERACTIVE_CAMPAIGN_PLAYER.md`
 11. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
 12. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
 13. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "generator_spine_quality_debt_register_v1",
+  "findings": [
+    {
+      "findingId": "GQ-P0-SOURCE-EXTREME-LINE-LENGTH",
+      "severity": "P0",
+      "area": "source-format",
+      "evidence": "Extreme source line length candidates: src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs maxLineLength=505; src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs maxLineLength=733; src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs maxLineLength=1791; src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryCatalog.cs maxLineLength=594; src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs maxLineLength=844; src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs maxLineLength=528; src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs maxLineLength=527; tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs maxLineLength=629",
+      "recommendedFutureGoal": "Immediate bounded readability repair before more generator work.",
+      "fixedInGoal072": false,
+      "whyNotFixed": "Extreme line length requires a local, semantics-preserving edit in the owning seam."
+    },
+    {
+      "findingId": "GQ-P1-LARGE-METHODS",
+      "severity": "P1",
+      "area": "large-methods",
+      "evidence": "Large method candidates: src/LLMGameCreator.Application/Design/GamePackagePatchOperationValidator.cs#GamePackagePatchParseResult lines=727; src/LLMGameCreator.Application/Design/GamePackagePatchOperationValidator.cs#GamePackagePatchOperationsValidationResult lines=723; unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs#CountJsonObjectsInArray lines=394; src/LLMGameCreator.Application/Design/SemanticPackComposition/SemanticPackCompositionCatalog.cs#BuildDefaultPacks lines=314; src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs#ExpandPack lines=266; src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs#BuildPackage lines=258; src/LLMGameCreator.Application/Design/SemanticArtifactContracts/SemanticArtifactContractRegistry.cs#BuildDefaultContracts lines=257; src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs#MaterializePackage lines=253; tests/LLMGameCreator.Tests/Application/Semantics/SemanticRuntimeCompositionAcceptanceTests.cs#Run lines=252; src/LLMGameCreator.Application/Design/Gameplay/RulePackCombatFactionSocialWorkTheftAcceptanceService.cs#AuditBindings lines=246",
+      "recommendedFutureGoal": "Dedicated local extraction goal for the largest methods with tests held fixed.",
+      "fixedInGoal072": false,
+      "whyNotFixed": "Method extraction is not attempted without a concrete behavior defect in this audit goal."
+    },
+    {
+      "findingId": "GQ-P1-LARGE-SOURCE-FILES",
+      "severity": "P1",
+      "area": "large-files",
+      "evidence": "Large source candidates: unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs lines=3672; src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs lines=2922; src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs lines=2632; src/LLMGameCreator.Application/Design/AlphaBuild/AlphaRunnableBuildAcceptanceService.cs lines=2250; src/LLMGameCreator.Application/Design/Gameplay/RulePackCombatFactionSocialWorkTheftAcceptanceService.cs lines=2124; src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs lines=2027; src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs lines=1866; src/LLMGameCreator.Application/Design/Assets/MinimumAssetPipelineAcceptanceService.cs lines=1712; src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/RegionHydrologyWaterwayHintsCandidateService.cs lines=1610; src/LLMGameCreator.Application/Design/Gameplay/RulePackGameplayFamilyAcceptanceService.cs lines=1531",
+      "recommendedFutureGoal": "Dedicated generator spine decomposition goal for very large recent seams.",
+      "fixedInGoal072": false,
+      "whyNotFixed": "Broad decomposition across recent goals would exceed safe bounded Goal 072 scope."
+    },
+    {
+      "findingId": "GQ-P1-UNITY-BOOTSTRAP-GROWTH",
+      "severity": "P1",
+      "area": "unity-alpha-bootstrap",
+      "evidence": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs lines=3672 markerRoutes=16 nestedTypes=19",
+      "recommendedFutureGoal": "Unity Alpha bootstrap decomposition into local private route loaders or data adapters without changing Unity architecture.",
+      "fixedInGoal072": false,
+      "whyNotFixed": "A broad Unity Alpha refactor is explicitly forbidden; current proof route remains validated and should be split in a dedicated follow-up."
+    },
+    {
+      "findingId": "GQ-P2-ARTIFACT-TIMESTAMP-LIKE-VALUES",
+      "severity": "P2",
+      "area": "artifact-reproducibility",
+      "evidence": "Timestamp-like artifact values found in 99 compact artifact files.",
+      "recommendedFutureGoal": "Future reproducibility hardening to remove or normalize volatile timestamp-like values.",
+      "fixedInGoal072": false,
+      "whyNotFixed": "Timestamp-like values are registered as reproducibility debt unless they are current-goal P0 path leaks or break deterministic tests."
+    },
+    {
+      "findingId": "GQ-P2-REPEATED-SEAM-ROLES",
+      "severity": "P2",
+      "area": "seam-patterns",
+      "evidence": "Repeated role folders: Builder=18, EvidenceService=33, Hash=22, SourceLoader=22, UnityProofRunner=16, Validator=29",
+      "recommendedFutureGoal": "Future shared extraction or template goal after proving the risk with focused tests.",
+      "fixedInGoal072": false,
+      "whyNotFixed": "Broad shared loader/evidence/hash/proof-runner extraction is explicitly P2 and out of bounded Goal 072 implementation scope."
+    }
+  ]
+}

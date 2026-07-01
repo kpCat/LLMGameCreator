@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "generator_spine_quality_dashboard_v1",
+  "status": "BLOCKED",
+  "p0Count": 1,
+  "p1Count": 3,
+  "p2Count": 2,
+  "p3Count": 0,
+  "recommendedNextActions": [
+    "Repair or explicitly block on P0 findings before accepting Goal 072.",
+    "Schedule a bounded P1 follow-up for Unity Alpha bootstrap and largest source/test seams.",
+    "Plan a future shared generator spine infrastructure extraction only after current proof routes stay green."
+  ],
+  "inventoryHash": "7873d38c2a4fdc1513ed7b373f1b9d3c21be16427bee22d9c6b6ca91f97de1a1",
+  "debtRegisterHash": "b94738de198d2a479c6cd0038d8911620e1335f285769985a6d301c489095d33"
+}

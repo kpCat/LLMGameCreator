@@ -1,0 +1,2396 @@
+{
+  "schemaVersion": "large_file_and_method_risk_report_v1",
+  "largeFileCandidates": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+      "lineCount": 3672,
+      "maxLineLength": 251,
+      "declarationTokenCount": 536,
+      "semicolonCount": 1630,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+      "lineCount": 2922,
+      "maxLineLength": 505,
+      "declarationTokenCount": 631,
+      "semicolonCount": 1304,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs",
+      "lineCount": 2632,
+      "maxLineLength": 371,
+      "declarationTokenCount": 669,
+      "semicolonCount": 1516,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/AlphaBuild/AlphaRunnableBuildAcceptanceService.cs",
+      "lineCount": 2250,
+      "maxLineLength": 292,
+      "declarationTokenCount": 389,
+      "semicolonCount": 983,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackCombatFactionSocialWorkTheftAcceptanceService.cs",
+      "lineCount": 2124,
+      "maxLineLength": 371,
+      "declarationTokenCount": 525,
+      "semicolonCount": 1087,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs",
+      "lineCount": 2027,
+      "maxLineLength": 266,
+      "declarationTokenCount": 250,
+      "semicolonCount": 521,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "lineCount": 1866,
+      "maxLineLength": 308,
+      "declarationTokenCount": 362,
+      "semicolonCount": 823,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Assets/MinimumAssetPipelineAcceptanceService.cs",
+      "lineCount": 1712,
+      "maxLineLength": 431,
+      "declarationTokenCount": 354,
+      "semicolonCount": 838,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/RegionHydrologyWaterwayHintsCandidateService.cs",
+      "lineCount": 1610,
+      "maxLineLength": 373,
+      "declarationTokenCount": 332,
+      "semicolonCount": 680,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackGameplayFamilyAcceptanceService.cs",
+      "lineCount": 1531,
+      "maxLineLength": 302,
+      "declarationTokenCount": 361,
+      "semicolonCount": 754,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MinimumPlayableGame/MinimumPlayableGeneratedGameAcceptanceService.cs",
+      "lineCount": 1429,
+      "maxLineLength": 284,
+      "declarationTokenCount": 325,
+      "semicolonCount": 725,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+      "lineCount": 1409,
+      "maxLineLength": 528,
+      "declarationTokenCount": 345,
+      "semicolonCount": 689,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityRuntimeExport/UnityRuntimeExportAcceptanceService.cs",
+      "lineCount": 1352,
+      "maxLineLength": 438,
+      "declarationTokenCount": 317,
+      "semicolonCount": 747,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/World/ConnectedWorldTravelAcceptanceService.cs",
+      "lineCount": 1346,
+      "maxLineLength": 304,
+      "declarationTokenCount": 317,
+      "semicolonCount": 648,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ModularGeneratorKernel/ModularGeneratorKernelReadinessService.cs",
+      "lineCount": 1342,
+      "maxLineLength": 326,
+      "declarationTokenCount": 400,
+      "semicolonCount": 780,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GamePackagePatchService.cs",
+      "lineCount": 1288,
+      "maxLineLength": 229,
+      "declarationTokenCount": 122,
+      "semicolonCount": 411,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyWorldEntities/PackageAssemblyWorldEntitiesAcceptanceService.cs",
+      "lineCount": 1224,
+      "maxLineLength": 333,
+      "declarationTokenCount": 337,
+      "semicolonCount": 642,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CapabilityBundlePipelineInputs/CapabilityBundlePipelineInputsAcceptanceService.cs",
+      "lineCount": 1164,
+      "maxLineLength": 470,
+      "declarationTokenCount": 310,
+      "semicolonCount": 653,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityRuntimeState/UnityRuntimeStateLoopAcceptanceService.cs",
+      "lineCount": 1159,
+      "maxLineLength": 339,
+      "declarationTokenCount": 272,
+      "semicolonCount": 662,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+      "lineCount": 1144,
+      "maxLineLength": 733,
+      "declarationTokenCount": 84,
+      "semicolonCount": 133,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityQuestLoop/UnityQuestCompletionLoopAcceptanceService.cs",
+      "lineCount": 1141,
+      "maxLineLength": 310,
+      "declarationTokenCount": 289,
+      "semicolonCount": 666,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityReadablePresentation/UnityAlphaReadablePresentationAcceptanceService.cs",
+      "lineCount": 1085,
+      "maxLineLength": 323,
+      "declarationTokenCount": 285,
+      "semicolonCount": 577,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationBuilder.cs",
+      "lineCount": 1064,
+      "maxLineLength": 274,
+      "declarationTokenCount": 71,
+      "semicolonCount": 142,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeMatrixBuilder.cs",
+      "lineCount": 1051,
+      "maxLineLength": 313,
+      "declarationTokenCount": 91,
+      "semicolonCount": 122,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/RichPackageAssemblyCoverageAudit/RichPackageAssemblyCoverageAuditAcceptanceService.cs",
+      "lineCount": 1042,
+      "maxLineLength": 316,
+      "declarationTokenCount": 262,
+      "semicolonCount": 551,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityGeneratedScene/UnityGeneratedSceneProjectionAcceptanceService.cs",
+      "lineCount": 1026,
+      "maxLineLength": 407,
+      "declarationTokenCount": 265,
+      "semicolonCount": 553,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GameProfiles/GeneratedGameProfileContractAcceptanceService.cs",
+      "lineCount": 1022,
+      "maxLineLength": 337,
+      "declarationTokenCount": 285,
+      "semicolonCount": 580,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+      "lineCount": 1005,
+      "maxLineLength": 527,
+      "declarationTokenCount": 321,
+      "semicolonCount": 622,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+      "lineCount": 988,
+      "maxLineLength": 844,
+      "declarationTokenCount": 333,
+      "semicolonCount": 630,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationBuilder.cs",
+      "lineCount": 950,
+      "maxLineLength": 297,
+      "declarationTokenCount": 82,
+      "semicolonCount": 111,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticLayerCompilerService.cs",
+      "lineCount": 880,
+      "maxLineLength": 218,
+      "declarationTokenCount": 165,
+      "semicolonCount": 319,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixEvidenceService.cs",
+      "lineCount": 878,
+      "maxLineLength": 436,
+      "declarationTokenCount": 79,
+      "semicolonCount": 182,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignBuilder.cs",
+      "lineCount": 877,
+      "maxLineLength": 371,
+      "declarationTokenCount": 75,
+      "semicolonCount": 163,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityMultiVariant/UnityMultiVariantPlayableScenarioAcceptanceService.cs",
+      "lineCount": 872,
+      "maxLineLength": 323,
+      "declarationTokenCount": 213,
+      "semicolonCount": 453,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionDestructionProductionBuilder.cs",
+      "lineCount": 860,
+      "maxLineLength": 322,
+      "declarationTokenCount": 77,
+      "semicolonCount": 116,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/Semantics/SemanticRuntimeCompositionAcceptanceTests.cs",
+      "lineCount": 802,
+      "maxLineLength": 218,
+      "declarationTokenCount": 86,
+      "semicolonCount": 260,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke/ChunkedRuntimePreviewExportBuilders.cs",
+      "lineCount": 788,
+      "maxLineLength": 408,
+      "declarationTokenCount": 76,
+      "semicolonCount": 109,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterModels.cs",
+      "lineCount": 744,
+      "maxLineLength": 140,
+      "declarationTokenCount": 644,
+      "semicolonCount": 1283,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsEvidenceService.cs",
+      "lineCount": 743,
+      "maxLineLength": 418,
+      "declarationTokenCount": 70,
+      "semicolonCount": 182,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GamePackagePatchOperationValidator.cs",
+      "lineCount": 736,
+      "maxLineLength": 247,
+      "declarationTokenCount": 120,
+      "semicolonCount": 200,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateTests.cs",
+      "lineCount": 731,
+      "maxLineLength": 186,
+      "declarationTokenCount": 42,
+      "semicolonCount": 403,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/HybridDraftLuaExpansion/HybridDraftLuaExpansionCatalog.cs",
+      "lineCount": 727,
+      "maxLineLength": 354,
+      "declarationTokenCount": 73,
+      "semicolonCount": 133,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Atlas/AtlasRegistryImportService.cs",
+      "lineCount": 723,
+      "maxLineLength": 145,
+      "declarationTokenCount": 65,
+      "semicolonCount": 134,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageBuilder.cs",
+      "lineCount": 723,
+      "maxLineLength": 282,
+      "declarationTokenCount": 61,
+      "semicolonCount": 92,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticCatalogService.cs",
+      "lineCount": 707,
+      "maxLineLength": 136,
+      "declarationTokenCount": 82,
+      "semicolonCount": 151,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateNavigationPathfinding/CandidateNavigationRouteGraphPlanner.cs",
+      "lineCount": 700,
+      "maxLineLength": 151,
+      "declarationTokenCount": 151,
+      "semicolonCount": 293,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    }
+  ],
+  "largeMethodCandidates": [
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GamePackagePatchOperationValidator.cs",
+      "methodName": "GamePackagePatchParseResult",
+      "startLine": 9,
+      "lineCount": 727
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GamePackagePatchOperationValidator.cs",
+      "methodName": "GamePackagePatchOperationsValidationResult",
+      "startLine": 13,
+      "lineCount": 723
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+      "methodName": "CountJsonObjectsInArray",
+      "startLine": 3277,
+      "lineCount": 394
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SemanticPackComposition/SemanticPackCompositionCatalog.cs",
+      "methodName": "BuildDefaultPacks",
+      "startLine": 35,
+      "lineCount": 314
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs",
+      "methodName": "ExpandPack",
+      "startLine": 1116,
+      "lineCount": 266
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "BuildPackage",
+      "startLine": 520,
+      "lineCount": 258
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SemanticArtifactContracts/SemanticArtifactContractRegistry.cs",
+      "methodName": "BuildDefaultContracts",
+      "startLine": 5,
+      "lineCount": 257
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs",
+      "methodName": "MaterializePackage",
+      "startLine": 1383,
+      "lineCount": 253
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/Semantics/SemanticRuntimeCompositionAcceptanceTests.cs",
+      "methodName": "Run",
+      "startLine": 311,
+      "lineCount": 252
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackCombatFactionSocialWorkTheftAcceptanceService.cs",
+      "methodName": "AuditBindings",
+      "startLine": 278,
+      "lineCount": 246
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/AlphaBuild/AlphaRunnableBuildAcceptanceService.cs",
+      "methodName": "BuildFromAcceptedEvidence",
+      "startLine": 39,
+      "lineCount": 230
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackCombatFactionSocialWorkTheftAcceptanceService.cs",
+      "methodName": "IsScenarioAccepted",
+      "startLine": 899,
+      "lineCount": 220
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+      "methodName": "BuildRow",
+      "startLine": 393,
+      "lineCount": 211
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticLayerCompilerService.cs",
+      "methodName": "Compile",
+      "startLine": 49,
+      "lineCount": 210
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackGameplayFamilyAcceptanceService.cs",
+      "methodName": "ShouldRunRuntimeForInvalidScenario",
+      "startLine": 296,
+      "lineCount": 207
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackCombatFactionSocialWorkTheftAcceptanceService.cs",
+      "methodName": "ScenarioRuntimePassed",
+      "startLine": 914,
+      "lineCount": 205
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackGameplayFamilyAcceptanceService.cs",
+      "methodName": "AuditBindings",
+      "startLine": 303,
+      "lineCount": 200
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/DialogueNarrativeTooling/DialogueNarrativeLocalizationRoundTripReviewer.cs",
+      "methodName": "RowWithOrder",
+      "startLine": 295,
+      "lineCount": 195
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 16,
+      "lineCount": 191
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CapabilityBundlePipelineInputs/CapabilityBundlePipelineInputsAcceptanceService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 36,
+      "lineCount": 190
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Gameplay/RulePackCombatFactionSocialWorkTheftAcceptanceService.cs",
+      "methodName": "BuildPackage",
+      "startLine": 931,
+      "lineCount": 188
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/Gameplay/RulePackCombatFactionSocialWorkTheftRealRuntimeAdapter.cs",
+      "methodName": "RuntimeServices",
+      "startLine": 426,
+      "lineCount": 184
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 17,
+      "lineCount": 183
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 19,
+      "lineCount": 183
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/Gameplay/RulePackCombatFactionSocialWorkTheftRealRuntimeAdapter.cs",
+      "methodName": "PreviousScenarioDynamicEvidence",
+      "startLine": 428,
+      "lineCount": 182
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssembler.cs",
+      "methodName": "Assemble",
+      "startLine": 39,
+      "lineCount": 181
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "PackageQuestId",
+      "startLine": 975,
+      "lineCount": 174
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "PackageDialogueId",
+      "startLine": 976,
+      "lineCount": 173
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryValidator.cs",
+      "methodName": "SortDiagnostics",
+      "startLine": 191,
+      "lineCount": 172
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "PackageObjectiveId",
+      "startLine": 977,
+      "lineCount": 172
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundPlayablePackageSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 16,
+      "lineCount": 172
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "FlagId",
+      "startLine": 978,
+      "lineCount": 171
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "CompletionFlagId",
+      "startLine": 979,
+      "lineCount": 170
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "BuildTraceChain",
+      "startLine": 981,
+      "lineCount": 168
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionDestructionProductionSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 15,
+      "lineCount": 167
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "BuildRequiredScenario",
+      "startLine": 231,
+      "lineCount": 166
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryValidator.cs",
+      "methodName": "ValidateManifest",
+      "startLine": 199,
+      "lineCount": 164
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 18,
+      "lineCount": 162
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+      "methodName": "BuildGatewayConnectivityHints",
+      "startLine": 520,
+      "lineCount": 161
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 14,
+      "lineCount": 161
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 16,
+      "lineCount": 159
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 13,
+      "lineCount": 159
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/Gameplay/RulePackCombatFactionSocialWorkTheftRealRuntimeAdapter.cs",
+      "methodName": "Run",
+      "startLine": 38,
+      "lineCount": 159
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateNavigationPathfinding/CandidateNavigationRouteGraphPlanner.cs",
+      "methodName": "Plan",
+      "startLine": 5,
+      "lineCount": 153
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/FullGeneratorWithoutMediaDryRunEvidenceService.cs",
+      "methodName": "Build",
+      "startLine": 29,
+      "lineCount": 153
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MinimumPlayableGame/MinimumPlayableGeneratedGameAcceptanceService.cs",
+      "methodName": "BuildFromAcceptedEvidence",
+      "startLine": 50,
+      "lineCount": 152
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "AuditMaterializedPackage",
+      "startLine": 997,
+      "lineCount": 152
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 18,
+      "lineCount": 152
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate/LuaSandboxExecutionGateValidator.cs",
+      "methodName": "SortDiagnostics",
+      "startLine": 201,
+      "lineCount": 150
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/ContentGeneration/ContentGenerationScaleRealRuntimeAdapter.cs",
+      "methodName": "Run",
+      "startLine": 38,
+      "lineCount": 150
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ModularGeneratorKernel/ModularGeneratorKernelReadinessService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 39,
+      "lineCount": 149
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/RegionHydrologyWaterwayHintsCandidateService.cs",
+      "methodName": "Build",
+      "startLine": 39,
+      "lineCount": 148
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyPlayableLoopSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 16,
+      "lineCount": 148
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityRuntimeExport/UnityRuntimeExportAcceptanceService.cs",
+      "methodName": "ValidateExport",
+      "startLine": 465,
+      "lineCount": 148
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+      "methodName": "BuildSettlementRoadSeeds",
+      "startLine": 335,
+      "lineCount": 147
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs",
+      "methodName": "BuildInvalidMatrix",
+      "startLine": 776,
+      "lineCount": 145
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage/MediaMaterializationReviewPackageSourceLoader.cs",
+      "methodName": "Load",
+      "startLine": 17,
+      "lineCount": 145
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 48,
+      "lineCount": 145
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 7,
+      "lineCount": 145
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 46,
+      "lineCount": 143
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+      "methodName": "RunAutomatedPlayLoop",
+      "startLine": 509,
+      "lineCount": 143
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate/LuaSandboxExecutionGateValidator.cs",
+      "methodName": "ValidateRequestShape",
+      "startLine": 209,
+      "lineCount": 142
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 44,
+      "lineCount": 141
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 7,
+      "lineCount": 140
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Assets/MinimumAssetPipelineAcceptanceService.cs",
+      "methodName": "ValidateAssets",
+      "startLine": 806,
+      "lineCount": 139
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/World/ConnectedWorldTravelAcceptanceService.cs",
+      "methodName": "Build",
+      "startLine": 34,
+      "lineCount": 139
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyPlayableLoopEvidenceService.cs",
+      "methodName": "RenderReport",
+      "startLine": 243,
+      "lineCount": 138
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Assets/MinimumAssetPipelineAcceptanceService.cs",
+      "methodName": "BuildFromContentGeneration",
+      "startLine": 67,
+      "lineCount": 136
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SemanticArtifactContracts/SemanticArtifactCompatibilityPlanner.cs",
+      "methodName": "BuildPlan",
+      "startLine": 24,
+      "lineCount": 136
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityRuntimeExport/UnityRuntimeExportAcceptanceService.cs",
+      "methodName": "SelectInput",
+      "startLine": 225,
+      "lineCount": 136
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyWorldEntities/PackageAssemblyWorldEntitiesAcceptanceService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 43,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisUnityProofRunner.cs",
+      "methodName": "NotRequested",
+      "startLine": 7,
+      "lineCount": 135
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/UnityArchiveRequestPipelineTests.cs",
+      "methodName": "CreatePackage",
+      "startLine": 332,
+      "lineCount": 134
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveRequestPipelineSmokeTests.cs",
+      "methodName": "CreatePackage",
+      "startLine": 143,
+      "lineCount": 134
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 7,
+      "lineCount": 131
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcSourceLoader.cs",
+      "methodName": "ReadPackageRows",
+      "startLine": 112,
+      "lineCount": 131
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 7,
+      "lineCount": 131
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 7,
+      "lineCount": 131
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 7,
+      "lineCount": 131
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/StrictLlmDraftArtifactLoop/StrictLlmDraftArtifactLoopEvidenceService.cs",
+      "methodName": "Build",
+      "startLine": 34,
+      "lineCount": 131
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundGeneratorCampaignSourceLoader.cs",
+      "methodName": "SourcePlan",
+      "startLine": 8,
+      "lineCount": 130
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke/ChunkedRuntimePreviewExportBuilders.cs",
+      "methodName": "BuildPayload",
+      "startLine": 28,
+      "lineCount": 128
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialDetailEvidenceService.cs",
+      "methodName": "RenderReport",
+      "startLine": 483,
+      "lineCount": 128
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 7,
+      "lineCount": 128
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/DynamicSemanticFeatures/DynamicSemanticFeatureResolver.cs",
+      "methodName": "ResolveTarget",
+      "startLine": 61,
+      "lineCount": 128
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityMultiVariant/UnityMultiVariantPlayableScenarioAcceptanceService.cs",
+      "methodName": "BuildFromAcceptedEvidence",
+      "startLine": 39,
+      "lineCount": 128
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialDetailEvidenceService.cs",
+      "methodName": "BuildCore",
+      "startLine": 143,
+      "lineCount": 127
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageEvidenceService.cs",
+      "methodName": "Build",
+      "startLine": 26,
+      "lineCount": 126
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityRuntimeExport/UnityRuntimeExportAcceptanceService.cs",
+      "methodName": "BuildFromAcceptedEvidence",
+      "startLine": 55,
+      "lineCount": 126
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/RichPackageAssemblyCoverageAudit/RichPackageAssemblyCoverageAuditAcceptanceService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 46,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticGuidedCompositionAcceptanceService.cs",
+      "methodName": "Build",
+      "startLine": 39,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisUnityProofRunner.cs",
+      "methodName": "Run",
+      "startLine": 17,
+      "lineCount": 125
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityMatrixEvidenceService.cs",
+      "methodName": "RenderReport",
+      "startLine": 269,
+      "lineCount": 124
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/HybridDraftLuaExpansion/HybridDraftLuaExpansionEvidenceService.cs",
+      "methodName": "BuildAsync",
+      "startLine": 33,
+      "lineCount": 124
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ContentGeneration/ContentGenerationScaleAcceptanceService.cs",
+      "methodName": "BuildFromReferencePackDirectory",
+      "startLine": 68,
+      "lineCount": 123
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveRequestPipelineSmokeTests.cs",
+      "methodName": "UnityArchiveRequestPipelineProductSmoke",
+      "startLine": 12,
+      "lineCount": 123
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GameProfiles/GeneratedGameProfileContractAcceptanceService.cs",
+      "methodName": "BuildFromProfileDirectory",
+      "startLine": 101,
+      "lineCount": 122
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityQuestLoop/UnityQuestCompletionLoopAcceptanceService.cs",
+      "methodName": "BuildFromAcceptedEvidence",
+      "startLine": 51,
+      "lineCount": 122
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityReadablePresentation/UnityAlphaReadablePresentationAcceptanceService.cs",
+      "methodName": "BuildFromAcceptedEvidence",
+      "startLine": 51,
+      "lineCount": 122
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/Gameplay/RulePackGameplayFamilyRealRuntimeAdapter.cs",
+      "methodName": "Run",
+      "startLine": 36,
+      "lineCount": 122
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/AlphaBuild/AlphaRunnableBuildAcceptanceService.cs",
+      "methodName": "ValidatePlayLoopLog",
+      "startLine": 1318,
+      "lineCount": 121
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignEvidenceService.cs",
+      "methodName": "Build",
+      "startLine": 29,
+      "lineCount": 121
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Semantics/SemanticSelectedRuntimeCompositionAcceptanceService.cs",
+      "methodName": "BuildPlan",
+      "startLine": 398,
+      "lineCount": 121
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/AlphaBuild/AlphaRunnableBuildAcceptanceService.cs",
+      "methodName": "VerifyLaunchIfRequested",
+      "startLine": 1197,
+      "lineCount": 120
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+      "methodName": "FamilyProfile",
+      "startLine": 1013,
+      "lineCount": 120
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcEvidenceService.cs",
+      "methodName": "BuildCore",
+      "startLine": 149,
+      "lineCount": 120
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityRuntimeState/UnityRuntimeStateLoopAcceptanceService.cs",
+      "methodName": "ValidateStateLoopLines",
+      "startLine": 199,
+      "lineCount": 120
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation/FiniteMapPackBuilder.cs",
+      "methodName": "BuildMapPacksByFileName",
+      "startLine": 5,
+      "lineCount": 120
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+      "methodName": "LoadPayloadAndBuildLaunchLog",
+      "startLine": 388,
+      "lineCount": 120
+    }
+  ],
+  "repeatedSeamRolesByFolder": [
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke/ChunkedRuntimePreviewExportEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke/ChunkedRuntimePreviewExportSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix",
+      "roleName": "Projector",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialDetailEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialDetailHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialDetailSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialDetailValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/DynamicSemanticFeatures",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/DynamicSemanticFeatures/DynamicSemanticFeatureEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/DynamicSemanticFeatures",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/DynamicSemanticFeatures/DynamicSemanticFeatureValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullCampaignPlayableReviewPackageRc/FullCampaignPlayableReviewPackageRcUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityMatrixBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityMatrixEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityMatrixHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityMatrixSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorVariabilityRegressionMatrix/FullGeneratorVariabilityMatrixValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/FullGeneratorDryRunBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/FullGeneratorWithoutMediaDryRunEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/FullGeneratorWithoutMediaDryRunHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/FullGeneratorWithoutMediaDryRunSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/FullGeneratorWithoutMediaDryRunValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundGeneratorCampaignBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundGeneratorCampaignEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundGeneratorCampaignHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundGeneratorCampaignSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/FullMediaBoundGeneratorCampaign/FullMediaBoundGeneratorCampaignValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix",
+      "roleName": "Projector",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixProjector.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GeneratorPlans",
+      "roleName": "Builder",
+      "fileCount": 3,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactQueueBuilder.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactPromptBuilder.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactRepairPromptBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GeneratorPlans",
+      "roleName": "Validator",
+      "fileCount": 7,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactApprovalValidator.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactProductionValidator.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftArtifactQueueValidator.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanDraftExecutionValidator.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanGamePackageAssemblyValidator.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanPreviewValidator.cs",
+        "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanStrictLlmArtifactValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GeneratorSpineQualityConsolidation",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GeneratorSpineQualityConsolidation/GeneratorSpineQualityEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/GeneratorSpineQualityConsolidation",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/GeneratorSpineQualityConsolidation/GeneratorSpineQualityHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/HybridDraftLuaExpansion",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/HybridDraftLuaExpansion/HybridDraftLuaExpansionEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix",
+      "roleName": "Projector",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineProjector.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/IntegratedCampaignTimelineSimulationMatrix/IntegratedCampaignTimelineValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix",
+      "roleName": "Projector",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsProjector.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/InterlockedGameplaySystemsValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate/LuaSandboxDryRunTraceBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate/LuaSandboxExecutionGateEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/LuaSandboxExecutionGate/LuaSandboxExecutionGateValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignOrchestrationHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage/MediaMaterializationReviewPackageBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage/MediaMaterializationReviewPackageEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage/MediaMaterializationReviewPackageHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage/MediaMaterializationReviewPackageSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MediaMaterializationReviewPackage/MediaMaterializationReviewPackageValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice/MultiFamilyLifecycleBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice/MultiFamilyGeneratedTemplateEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice/MultiFamilyGeneratedTemplateHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice/MultiFamilyGeneratedTemplateSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/MultiFamilyGeneratedTemplateVerticalSlice/MultiFamilyGeneratedTemplateValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeMatrixBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/RuntimeChunkDeltaTraversal",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/RuntimeChunkDeltaTraversal/RuntimeChunkDeltaEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/RuntimeChunkDeltaTraversal",
+      "roleName": "Projector",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/RuntimeChunkDeltaTraversal/RuntimeChunkDeltaProjector.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/RuntimeChunkDeltaTraversal",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/RuntimeChunkDeltaTraversal/RuntimeChunkDeltaValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SemanticArtifactContracts",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SemanticArtifactContracts/SemanticArtifactContractEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SemanticArtifactContracts",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SemanticArtifactContracts/SemanticArtifactContractValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SemanticAuthoringIntentResolver",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SemanticAuthoringIntentResolver/SemanticAuthoringIntentEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SemanticAuthoringIntentResolver",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SemanticAuthoringIntentResolver/SemanticAuthoringIntentValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SemanticPackComposition",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SemanticPackComposition/SemanticPackCompositionEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SemanticPackComposition",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SemanticPackComposition/SemanticPackCompositionValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionDestructionProductionBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionDestructionProductionEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionDestructionProductionHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionDestructionProductionSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/SettlementConstructionDestructionProductionValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/StrictLlmDraftArtifactLoop",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/StrictLlmDraftArtifactLoop/StrictLlmDraftArtifactLoopEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/StrictLlmDraftArtifactLoop",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/StrictLlmDraftArtifactLoop/StrictLlmDraftArtifactLoopValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/UnityAlphaInteractiveCampaignValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundPlayablePackageBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundPlayablePackageEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundPlayablePackageHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundPlayablePackageSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMediaBoundPlayablePackage/UnityAlphaMediaBoundPlayablePackageValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop",
+      "roleName": "Builder",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyPlayableLoopBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyPlayableLoopEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyPlayableLoopHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyPlayableLoopSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/UnityAlphaMultiFamilyPlayableLoop/UnityAlphaMultiFamilyPlayableLoopValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix",
+      "roleName": "Hash",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisHash.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix",
+      "roleName": "Projector",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisProjector.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix",
+      "roleName": "SourceLoader",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisSourceLoader.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix",
+      "roleName": "UnityProofRunner",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisUnityProofRunner.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldEventWeatherDayNightCrisisMatrix/WorldEventWeatherDayNightCrisisValidator.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation",
+      "roleName": "Builder",
+      "fileCount": 2,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation/ChunkedWorldConfigPreludeBuilder.cs",
+        "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation/FiniteMapPackBuilder.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation",
+      "roleName": "EvidenceService",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation/WorldScaleRegionMapEvidenceService.cs"
+      ]
+    },
+    {
+      "folderRelativePath": "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation",
+      "roleName": "Validator",
+      "fileCount": 1,
+      "files": [
+        "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation/WorldScaleRegionMapValidator.cs"
+      ]
+    }
+  ]
+}

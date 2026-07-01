@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "safe_fix_summary_v1",
+  "fixedItems": [
+    "Recorded Goal 071 user handoff acceptance before Goal 072 in the state docs quartet.",
+    "Added deterministic BCL-only Goal 072 scanner/evidence seam.",
+    "Added concrete technical debt register instead of broad source refactoring."
+  ],
+  "deferredItems": [
+    "Broad shared SourceLoader/EvidenceService/Hash/Validator/UnityProofRunner extraction remains P2 future work.",
+    "Unity Alpha bootstrap decomposition remains a dedicated P1 follow-up because broad Unity architecture changes are forbidden here."
+  ],
+  "forbiddenScopeNotTouched": [
+    "src/LLMGameCreator.GamePackage/**",
+    "src/LLMGameCreator.Runtime/**",
+    "src/LLMGameCreator.Runtime.Abstractions/**",
+    "src/LLMGameCreator.WinForms/**",
+    "src/LLMGameCreator.Infrastructure/**",
+    "src/LLMGameCreator.Scripting/**",
+    "generator-library/**",
+    "samples/**",
+    "templates/**",
+    "*.sln",
+    "*.csproj"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+  "lineCount": 3672,
+  "markerRouteCount": 16,
+  "markerRoutes": [
+    "campaign",
+    "campaign_timeline",
+    "combat_magic",
+    "family_loop",
+    "gameplay_consequence",
+    "interactive_campaign",
+    "interlocked_gameplay",
+    "living_world",
+    "matrix",
+    "media_bound",
+    "narrative",
+    "package",
+    "review_package",
+    "settlement",
+    "spatial_detail",
+    "world_event"
+  ],
+  "privateNestedTypeCount": 19,
+  "monolithicGrowthRisk": true
+}

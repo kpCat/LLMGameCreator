@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "source_format_risk_report_v1",
+  "minifiedCandidates": [],
+  "extremeLineLengthCandidates": [
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs",
+      "lineCount": 168,
+      "maxLineLength": 1791,
+      "declarationTokenCount": 24,
+      "semicolonCount": 12,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+      "lineCount": 988,
+      "maxLineLength": 844,
+      "declarationTokenCount": 333,
+      "semicolonCount": 630,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+      "lineCount": 1144,
+      "maxLineLength": 733,
+      "declarationTokenCount": 84,
+      "semicolonCount": 133,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs",
+      "lineCount": 242,
+      "maxLineLength": 629,
+      "declarationTokenCount": 29,
+      "semicolonCount": 111,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryCatalog.cs",
+      "lineCount": 257,
+      "maxLineLength": 594,
+      "declarationTokenCount": 22,
+      "semicolonCount": 20,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+      "lineCount": 1409,
+      "maxLineLength": 528,
+      "declarationTokenCount": 345,
+      "semicolonCount": 689,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+      "lineCount": 1005,
+      "maxLineLength": 527,
+      "declarationTokenCount": 321,
+      "semicolonCount": 622,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+      "lineCount": 2922,
+      "maxLineLength": 505,
+      "declarationTokenCount": 631,
+      "semicolonCount": 1304,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    }
+  ],
+  "topMaxLineLengthFiles": [
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GeneratorPlans/GeneratorPlanCapabilityHelpCatalog.cs",
+      "lineCount": 168,
+      "maxLineLength": 1791,
+      "declarationTokenCount": 24,
+      "semicolonCount": 12,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceService.cs",
+      "lineCount": 988,
+      "maxLineLength": 844,
+      "declarationTokenCount": 333,
+      "semicolonCount": 630,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterProjector.cs",
+      "lineCount": 1144,
+      "maxLineLength": 733,
+      "declarationTokenCount": 84,
+      "semicolonCount": 133,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/PackageAssemblyCombatProgression/PackageAssemblyCombatProgressionAcceptanceTests.cs",
+      "lineCount": 242,
+      "maxLineLength": 629,
+      "declarationTokenCount": 29,
+      "semicolonCount": 111,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LuaModuleManifestRegistry/LuaModuleManifestRegistryCatalog.cs",
+      "lineCount": 257,
+      "maxLineLength": 594,
+      "declarationTokenCount": 22,
+      "semicolonCount": 20,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyDialogueQuests/PackageAssemblyDialogueQuestsAcceptanceService.cs",
+      "lineCount": 1409,
+      "maxLineLength": 528,
+      "declarationTokenCount": 345,
+      "semicolonCount": 689,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/PackageAssemblyItemsEconomyCrafting/PackageAssemblyItemsEconomyCraftingAcceptanceService.cs",
+      "lineCount": 1005,
+      "maxLineLength": 527,
+      "declarationTokenCount": 321,
+      "semicolonCount": 622,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CandidateModules/WorldBiomeNoise/WorldBiomeNoiseCandidateService.cs",
+      "lineCount": 2922,
+      "maxLineLength": 505,
+      "declarationTokenCount": 631,
+      "semicolonCount": 1304,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": true
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/BaselineStrictArtifactsPackageAssemblySmokeTests.cs",
+      "lineCount": 315,
+      "maxLineLength": 497,
+      "declarationTokenCount": 46,
+      "semicolonCount": 66,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CombatMagicAbilityBossEncounterMatrix/CombatMagicAbilityBossEncounterEvidenceService.cs",
+      "lineCount": 522,
+      "maxLineLength": 486,
+      "declarationTokenCount": 55,
+      "semicolonCount": 165,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/ProgrammaticNarrativeEvidenceService.cs",
+      "lineCount": 534,
+      "maxLineLength": 481,
+      "declarationTokenCount": 56,
+      "semicolonCount": 171,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/FullCampaignGamePackageMaterialization/FullCampaignGamePackageMaterializationTestFactory.cs",
+      "lineCount": 222,
+      "maxLineLength": 472,
+      "declarationTokenCount": 26,
+      "semicolonCount": 70,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/CapabilityBundlePipelineInputs/CapabilityBundlePipelineInputsAcceptanceService.cs",
+      "lineCount": 1164,
+      "maxLineLength": 470,
+      "declarationTokenCount": 310,
+      "semicolonCount": 653,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/FullGeneratorWithoutMediaDryRun/FullGeneratorWithoutMediaDryRunEvidenceService.cs",
+      "lineCount": 363,
+      "maxLineLength": 465,
+      "declarationTokenCount": 38,
+      "semicolonCount": 128,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaBoundPlayableReviewPackage/MediaBoundPlayableReviewPackageEvidenceService.cs",
+      "lineCount": 344,
+      "maxLineLength": 462,
+      "declarationTokenCount": 30,
+      "semicolonCount": 129,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/WorldScaleRegionMapFoundation/WorldScaleRegionMapValidator.cs",
+      "lineCount": 367,
+      "maxLineLength": 461,
+      "declarationTokenCount": 29,
+      "semicolonCount": 84,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/MediaAssetCampaignOrchestration/MediaAssetCampaignEvidenceService.cs",
+      "lineCount": 327,
+      "maxLineLength": 447,
+      "declarationTokenCount": 32,
+      "semicolonCount": 126,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ConstrainedSpatialDetailGeneration/ConstrainedSpatialDetailEvidenceService.cs",
+      "lineCount": 697,
+      "maxLineLength": 442,
+      "declarationTokenCount": 69,
+      "semicolonCount": 185,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/DynamicSemanticFeatures/DynamicSemanticFeatureEvidenceService.cs",
+      "lineCount": 517,
+      "maxLineLength": 439,
+      "declarationTokenCount": 165,
+      "semicolonCount": 323,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/UnityRuntimeExport/UnityRuntimeExportAcceptanceService.cs",
+      "lineCount": 1352,
+      "maxLineLength": 438,
+      "declarationTokenCount": 317,
+      "semicolonCount": 747,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/ChunkedRuntimePreviewExportSmoke/ChunkedRuntimePreviewExportEvidenceService.cs",
+      "lineCount": 413,
+      "maxLineLength": 436,
+      "declarationTokenCount": 41,
+      "semicolonCount": 113,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/GameplayConsequenceDepthMatrix/GameplayConsequenceDepthMatrixEvidenceService.cs",
+      "lineCount": 878,
+      "maxLineLength": 436,
+      "declarationTokenCount": 79,
+      "semicolonCount": 182,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/LivingWorldNpcFactionSimulationEvidenceService.cs",
+      "lineCount": 411,
+      "maxLineLength": 436,
+      "declarationTokenCount": 48,
+      "semicolonCount": 137,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/RuntimeChunkDeltaTraversal/RuntimeChunkDeltaEvidenceService.cs",
+      "lineCount": 316,
+      "maxLineLength": 434,
+      "declarationTokenCount": 36,
+      "semicolonCount": 92,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": false,
+      "hasExtremeLineLength": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/Assets/MinimumAssetPipelineAcceptanceService.cs",
+      "lineCount": 1712,
+      "maxLineLength": 431,
+      "declarationTokenCount": 354,
+      "semicolonCount": 838,
+      "isOneLineOrMinifiedCandidate": false,
+      "isLargeFileCandidate": true,
+      "hasExtremeLineLength": false
+    }
+  ]
+}

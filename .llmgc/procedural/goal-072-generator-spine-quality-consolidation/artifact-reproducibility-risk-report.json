@@ -1,0 +1,501 @@
+{
+  "schemaVersion": "artifact_reproducibility_risk_report_v1",
+  "absolutePathLikeStrings": [],
+  "timestampLikeValues": [
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-060-full-campaign-gamepackage-materialization-matrix/packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-alpha.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-beta.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-gamma.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-map-panel-rpg-seed-alpha.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-map-panel-rpg-seed-beta.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-map-panel-rpg-seed-gamma.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-survival-sandbox-seed-alpha.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-survival-sandbox-seed-beta.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-survival-sandbox-seed-gamma.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-first-person-grid-dungeon-seed-alpha.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-first-person-grid-dungeon-seed-beta.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-first-person-grid-dungeon-seed-gamma.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-map-panel-rpg-seed-alpha.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-map-panel-rpg-seed-beta.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-map-panel-rpg-seed-gamma.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-survival-sandbox-seed-alpha.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-survival-sandbox-seed-beta.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/review-package/p/matrix-row-survival-sandbox-seed-gamma.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-alpha.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-beta.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-gamma.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-alpha.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-beta.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-gamma.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-alpha.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-beta.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-gamma.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-alpha.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-beta.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-gamma.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-map-panel-rpg-seed-alpha.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-map-panel-rpg-seed-beta.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-map-panel-rpg-seed-gamma.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-survival-sandbox-seed-alpha.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-survival-sandbox-seed-beta.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/build/b/LLMGameCreatorAlpha_Data/StreamingAssets/LLMGameCreatorAlpha/review-package-rc/p/matrix-row-survival-sandbox-seed-gamma.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-beta/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/first_person_grid_dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/game-package.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-alpha/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-beta/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/map_panel_rpg/matrix-row-map-panel-rpg-seed-gamma/game-package.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-alpha/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-beta/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/package-materialization/packages/survival_sandbox/matrix-row-survival-sandbox-seed-gamma/game-package.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-alpha.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-beta.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-first-person-grid-dungeon-seed-gamma.json",
+      "lineNumber": 559,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-alpha.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-beta.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-map-panel-rpg-seed-gamma.json",
+      "lineNumber": 561,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-alpha.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-beta.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/staging/review-package-rc/p/matrix-row-survival-sandbox-seed-gamma.json",
+      "lineNumber": 560,
+      "matchKind": "timestamp_like_value"
+    }
+  ]
+}

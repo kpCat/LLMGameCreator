@@ -40,7 +40,8 @@
     ".llmgc/procedural/goal-068-combat-magic-ability-boss-encounter-matrix/",
     ".llmgc/procedural/goal-069-world-event-weather-daynight-crisis-matrix/",
     ".llmgc/procedural/goal-070-integrated-campaign-timeline-simulation-matrix/",
-    ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/"
+    ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/",
+    ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -562,6 +563,29 @@
         ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/",
         "src/LLMGameCreator.Application/Design/UnityAlphaInteractiveCampaignPlayer/",
         "tests/LLMGameCreator.Tests/Application/UnityAlphaInteractiveCampaignPlayer/"
+      ]
+    },
+    {
+      "scenario": "goal-072-generator-spine-quality-consolidation",
+      "allowedPaths": [
+        "docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md",
+        "docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md",
+        "docs/agent-tasks/GOAL_072_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/GeneratorSpineQualityConsolidationProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/",
+        "docs/technical-debt/",
+        "src/LLMGameCreator.Application/Design/GeneratorSpineQualityConsolidation/",
+        "tests/LLMGameCreator.Tests/Application/GeneratorSpineQualityConsolidation/",
+        "tests/LLMGameCreator.Tests/Devflow/"
       ]
     }
   ]

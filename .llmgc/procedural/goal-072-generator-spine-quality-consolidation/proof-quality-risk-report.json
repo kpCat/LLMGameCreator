@@ -1,0 +1,1028 @@
+{
+  "schemaVersion": "proof_quality_risk_report_v1",
+  "productSmokeRecords": [
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ActivePackageQuestDialoguePreviewSmokeTests.cs",
+      "assertCount": 27,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/AlphaRunnableBuildSmokeTests.cs",
+      "assertCount": 35,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Staging"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/BaselineStrictArtifactsPackageAssemblySmokeTests.cs",
+      "assertCount": 25,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/CandidateWorldBiomeNoiseSmokeTests.cs",
+      "assertCount": 134,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/CapabilityBundlePipelineInputsSmokeTests.cs",
+      "assertCount": 26,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ChunkedRuntimePreviewExportSmokeProductSmokeTests.cs",
+      "assertCount": 24,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/CombatMagicAbilityBossEncounterMatrixProductSmokeTests.cs",
+      "assertCount": 35,
+      "strongAssertionSignalCount": 8,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/CompositionDiagnosticsReportSmokeTests.cs",
+      "assertCount": 10,
+      "strongAssertionSignalCount": 0,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": []
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/CompositionReportExportSmokeTests.cs",
+      "assertCount": 14,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Directory.EnumerateFiles",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/CompositionWorkbenchReadonlySmokeTests.cs",
+      "assertCount": 9,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ConnectedWorldTravelSmokeTests.cs",
+      "assertCount": 33,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ConstrainedSpatialDetailGenerationProductSmokeTests.cs",
+      "assertCount": 25,
+      "strongAssertionSignalCount": 8,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "Hash",
+        "MissingMarkers",
+        "RowCount",
+        "Staging"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ContentGenerationScaleSmokeTests.cs",
+      "assertCount": 37,
+      "strongAssertionSignalCount": 3,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ContentLanguagePolicySmokeTests.cs",
+      "assertCount": 7,
+      "strongAssertionSignalCount": 0,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": []
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/DevelopmentComplexityStabilizationSmokeTests.cs",
+      "assertCount": 30,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/DynamicSemanticFeatureSystemProductSmokeTests.cs",
+      "assertCount": 11,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ExpandedContractBatchSmokeTests.cs",
+      "assertCount": 17,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ExtensionSpineScenarioHarnessSmokeTests.cs",
+      "assertCount": 9,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/FormulaEffectActionRegistrySmokeTests.cs",
+      "assertCount": 21,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/FullCampaignGamePackageMaterializationProductSmokeTests.cs",
+      "assertCount": 19,
+      "strongAssertionSignalCount": 4,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/FullCampaignPlayableReviewPackageRcProductSmokeTests.cs",
+      "assertCount": 25,
+      "strongAssertionSignalCount": 6,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/FullGeneratorVariabilityRegressionMatrixProductSmokeTests.cs",
+      "assertCount": 27,
+      "strongAssertionSignalCount": 4,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "ExitCode",
+        "File.Exists",
+        "Staging"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/FullGeneratorWithoutMediaDryRunProductSmokeTests.cs",
+      "assertCount": 23,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/FullMediaBoundGeneratorCampaignProductSmokeTests.cs",
+      "assertCount": 27,
+      "strongAssertionSignalCount": 4,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "ExitCode",
+        "File.Exists",
+        "Staging"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GameBlueprintCapabilityCompatibilitySmokeTests.cs",
+      "assertCount": 12,
+      "strongAssertionSignalCount": 0,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": []
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GameplayConsequenceDepthMatrixProductSmokeTests.cs",
+      "assertCount": 22,
+      "strongAssertionSignalCount": 9,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Delta",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedContentInteractionPreviewSmokeTests.cs",
+      "assertCount": 23,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedGameProfileContractSmokeTests.cs",
+      "assertCount": 19,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedMapPlacementPreviewSmokeTests.cs",
+      "assertCount": 16,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedMicrogameChallengeLoopSmokeTests.cs",
+      "assertCount": 17,
+      "strongAssertionSignalCount": 0,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": []
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedMicrogameGoalLoopSmokeTests.cs",
+      "assertCount": 13,
+      "strongAssertionSignalCount": 0,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": []
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedMicrogameLoopSmokeTests.cs",
+      "assertCount": 18,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedMicrogameVariationSmokeTests.cs",
+      "assertCount": 10,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedPackageMvpSmokeTests.cs",
+      "assertCount": 19,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratedPackageRuntimePreviewSmokeTests.cs",
+      "assertCount": 25,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GenerationPresetOptionsSmokeTests.cs",
+      "assertCount": 14,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratorCatalogContractSmokeTests.cs",
+      "assertCount": 17,
+      "strongAssertionSignalCount": 0,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": []
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/GeneratorSpineQualityConsolidationProductSmokeTests.cs",
+      "assertCount": 12,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/HybridDraftLuaExpansionProductSmokeTests.cs",
+      "assertCount": 22,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/IntegratedCampaignTimelineSimulationMatrixProductSmokeTests.cs",
+      "assertCount": 33,
+      "strongAssertionSignalCount": 8,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/InterlockedGameplaySystemsDepthMatrixProductSmokeTests.cs",
+      "assertCount": 30,
+      "strongAssertionSignalCount": 7,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/LivingWorldNpcFactionSimulationMatrixProductSmokeTests.cs",
+      "assertCount": 22,
+      "strongAssertionSignalCount": 8,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/LuaModuleManifestRegistryProductSmokeTests.cs",
+      "assertCount": 12,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/LuaSandboxExecutionGateProductSmokeTests.cs",
+      "assertCount": 16,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/MediaAssetCampaignOrchestrationProductSmokeTests.cs",
+      "assertCount": 20,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/MediaBoundPlayableReviewPackageProductSmokeTests.cs",
+      "assertCount": 24,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/MediaMaterializationReviewPackageProductSmokeTests.cs",
+      "assertCount": 20,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/MinimumAssetPipelineSmokeTests.cs",
+      "assertCount": 29,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/MinimumPlayableGeneratedGameSmokeTests.cs",
+      "assertCount": 37,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "ExitCode",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ModularGeneratorKernelReadinessSmokeTests.cs",
+      "assertCount": 36,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/MultiFamilyGeneratedTemplateVerticalSliceProductSmokeTests.cs",
+      "assertCount": 20,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/OneClickGeneratedPreviewWorkflowSmokeTests.cs",
+      "assertCount": 11,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/PackageAssemblyCombatProgressionSmokeTests.cs",
+      "assertCount": 35,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/PackageAssemblyDialogueQuestsSmokeTests.cs",
+      "assertCount": 33,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/PackageAssemblyItemsEconomyCraftingSmokeTests.cs",
+      "assertCount": 34,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/PackageAssemblyWorldEntitiesSmokeTests.cs",
+      "assertCount": 32,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ProceduralGameKernelSmokeTests.cs",
+      "assertCount": 11,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/ProgrammaticNarrativeQuestDialogueEventMatrixProductSmokeTests.cs",
+      "assertCount": 35,
+      "strongAssertionSignalCount": 8,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/QuestDialogInteractionFamilySmokeTests.cs",
+      "assertCount": 9,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/RichPackageAssemblyCoverageAuditSmokeTests.cs",
+      "assertCount": 27,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/RulePackCombatFactionSocialWorkTheftSmokeTests.cs",
+      "assertCount": 53,
+      "strongAssertionSignalCount": 3,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/RulePackGameplayFamilySmokeTests.cs",
+      "assertCount": 36,
+      "strongAssertionSignalCount": 3,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/RuntimeBackedMicrogameStateSmokeTests.cs",
+      "assertCount": 13,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/RuntimeChunkDeltaTraversalProductSmokeTests.cs",
+      "assertCount": 22,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/RuntimeOwnedGoalProgressSmokeTests.cs",
+      "assertCount": 13,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/RuntimeRewardChallengeStateSmokeTests.cs",
+      "assertCount": 14,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SemanticAuthoringIntentResolverProductSmokeTests.cs",
+      "assertCount": 11,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SemanticCatalogFoundationSmokeTests.cs",
+      "assertCount": 12,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SemanticExpansionPlanProductSmokeTests.cs",
+      "assertCount": 10,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SemanticGuidedCompositionSmokeTests.cs",
+      "assertCount": 12,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SemanticPackCompositionProductSmokeTests.cs",
+      "assertCount": 11,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SemanticRuntimeCompositionSmokeTests.cs",
+      "assertCount": 24,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SettlementConstructionDestructionProductionMatrixProductSmokeTests.cs",
+      "assertCount": 32,
+      "strongAssertionSignalCount": 8,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/StrictLlmDraftArtifactLoopProductSmokeTests.cs",
+      "assertCount": 13,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/TinyGeneratedRuntimeLoopSmokeTests.cs",
+      "assertCount": 21,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityAlphaInteractiveCampaignPlayerProductSmokeTests.cs",
+      "assertCount": 38,
+      "strongAssertionSignalCount": 11,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "ActionCount",
+        "CommandPlan",
+        "ExitCode",
+        "File.Exists",
+        "Hash",
+        "MatchedMarkers",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount",
+        "TransitionCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityAlphaMediaBoundPlayablePackageProductSmokeTests.cs",
+      "assertCount": 29,
+      "strongAssertionSignalCount": 3,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Hash",
+        "Staging"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityAlphaMultiFamilyPlayableLoopProductSmokeTests.cs",
+      "assertCount": 31,
+      "strongAssertionSignalCount": 4,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "ExitCode",
+        "File.Exists",
+        "Staging"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityAlphaReadablePresentationSmokeTests.cs",
+      "assertCount": 29,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveExportDryRunSmokeTests.cs",
+      "assertCount": 17,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveFulfillmentStateSmokeTests.cs",
+      "assertCount": 15,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveGameDataPayloadSmokeTests.cs",
+      "assertCount": 19,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Directory.EnumerateFiles",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveManualImportWorkflowSmokeTests.cs",
+      "assertCount": 20,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveManualProviderImportSmokeTests.cs",
+      "assertCount": 18,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveMaterializationSmokeTests.cs",
+      "assertCount": 20,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveProviderJobPlanSmokeTests.cs",
+      "assertCount": 20,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveRequestPipelineSmokeTests.cs",
+      "assertCount": 30,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewHistorySmokeTests.cs",
+      "assertCount": 19,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta",
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewReadonlySmokeTests.cs",
+      "assertCount": 14,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Directory.EnumerateFiles"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityArchiveReviewSnapshotSmokeTests.cs",
+      "assertCount": 14,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityGeneratedSceneProjectionSmokeTests.cs",
+      "assertCount": 26,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityMultiVariantPlayableScenarioSmokeTests.cs",
+      "assertCount": 33,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityPlayableAlphaSmokeTests.cs",
+      "assertCount": 30,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Staging"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityQuestCompletionLoopSmokeTests.cs",
+      "assertCount": 34,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityRuntimeExportSmokeTests.cs",
+      "assertCount": 26,
+      "strongAssertionSignalCount": 2,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists",
+        "Hash"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityRuntimeStateLoopSmokeTests.cs",
+      "assertCount": 30,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/UnityTargetContractSmokeTests.cs",
+      "assertCount": 24,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "Delta"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/VisibleGeneratedPlayablePreviewSmokeTests.cs",
+      "assertCount": 16,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/WorldEventWeatherDayNightCrisisMatrixProductSmokeTests.cs",
+      "assertCount": 33,
+      "strongAssertionSignalCount": 8,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "CommandPlan",
+        "Directory.EnumerateFiles",
+        "ExitCode",
+        "File.Exists",
+        "MissingMarkers",
+        "RowCount",
+        "Staging",
+        "StateChangingRowCount"
+      ]
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/WorldScaleRegionMapFoundationProductSmokeTests.cs",
+      "assertCount": 24,
+      "strongAssertionSignalCount": 1,
+      "reportOnlyShallowCandidate": false,
+      "strongSignals": [
+        "File.Exists"
+      ]
+    }
+  ],
+  "shallowProductSmokeCandidates": [],
+  "goal071ProofIndicators": {
+    "reportExists": true,
+    "commandPlanExists": true,
+    "stagedCommandPlanExists": true,
+    "playerProofExists": true,
+    "transitionLedgerExists": true,
+    "inputScriptExists": true,
+    "commandPlanPassed": true,
+    "commandPlanAcceptedFalse": true,
+    "commandPlanRowCount": 9,
+    "expectedMarkerCount": 233,
+    "playerProofPassed": true,
+    "playerExecuted": true,
+    "provenRowCount": 9,
+    "missingMarkerCount": 0,
+    "matchedMarkerCount": 233,
+    "transitionCount": 63,
+    "actionCount": 63,
+    "proofQualityPassed": true
+  }
+}
