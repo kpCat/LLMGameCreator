@@ -1673,7 +1673,7 @@
                                                                                             "Goal 031 and Goal 032 remain produced-for-review/not passed.",
                                                                                             "Goal 075 produced schema-driven campaign edit/validate/apply loop evidence under .llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop with accepted=false.",
                                                                                             "implementationStatus=GREEN, rowCount=9, familyCount=3, seedCount=3, editableFieldCount=6, candidateCount=18, appliedChangeCount=18, rollbackCount=9, invalidScenarioCount=16.",
-                                                                                            "deterministicHash=cc9d833354a73500491b5f4fdaeac4ef1dbb67224d7b74d9587bfef1197218e0.",
+                                                                                            "deterministicHash=13eaa41bda301d240007106b3c8f77b773cf9e7434bcce54fb929f5c5d420938.",
                                                                                             "Validation diagnostics, apply/rollback ledger, row before/after diff matrix, preview/export refresh payload, WinForms binding inventory, quality gate scan and invalid edit diagnostics all pass.",
                                                                                             "Quality gate scan covers 38 Goal 075/Goal 074 C# files including src/LLMGameCreator.WinForms/CompositionRoot.cs, reports maxLineLength=154, linesOver500Count=0, filesOver1000LinesCount=0 and minifiedSourceFileCount=0."
                                                                                         ],

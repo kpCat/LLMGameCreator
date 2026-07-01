@@ -293,7 +293,7 @@ Goal 075 user handoff: `schema_driven_campaign_authoring_review_workspace_verifi
 Goal 075 is produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`,
 `accepted=false`, `implementationStatus=GREEN`, `rowCount=9`, `editableFieldCount=6`,
 `candidateCount=18`, `appliedChangeCount=18`, `rollbackCount=9`, `invalidScenarioCount=16` and
-deterministic hash `cc9d833354a73500491b5f4fdaeac4ef1dbb67224d7b74d9587bfef1197218e0`.
+deterministic hash `13eaa41bda301d240007106b3c8f77b773cf9e7434bcce54fb929f5c5d420938`.
 
 Allowed next sequence:
 
