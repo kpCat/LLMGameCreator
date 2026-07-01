@@ -33,7 +33,8 @@
     ".llmgc/procedural/goal-061-full-campaign-playable-review-package-rc/",
     ".llmgc/procedural/goal-062-constrained-spatial-detail-generation/",
     ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/",
-    ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/"
+    ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/",
+    ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -408,6 +409,27 @@
         ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/",
         "src/LLMGameCreator.Application/Design/LivingWorldNpcFactionSimulationMatrix/",
         "tests/LLMGameCreator.Tests/Application/LivingWorldNpcFactionSimulationMatrix/"
+      ]
+    },
+    {
+      "scenario": "goal-065-interlocked-gameplay-systems-depth-matrix",
+      "allowedPaths": [
+        "docs/GOAL_065_INTERLOCKED_GAMEPLAY_SYSTEMS_DEPTH_MATRIX_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_065_INTERLOCKED_GAMEPLAY_SYSTEMS_DEPTH_MATRIX.md",
+        "docs/agent-tasks/GOAL_065_INTERLOCKED_GAMEPLAY_SYSTEMS_DEPTH_MATRIX.md",
+        "docs/agent-tasks/GOAL_065_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/InterlockedGameplaySystemsDepthMatrixProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/",
+        "src/LLMGameCreator.Application/Design/InterlockedGameplaySystemsDepthMatrix/",
+        "tests/LLMGameCreator.Tests/Application/InterlockedGameplaySystemsDepthMatrix/"
       ]
     }
   ]

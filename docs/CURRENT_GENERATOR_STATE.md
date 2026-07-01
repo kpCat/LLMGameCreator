@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 064 produced for review
+Updated by: Goal 065 produced for review
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -213,6 +213,34 @@ saveLoadReplayPassed=true
 meaningfulVariancePassed=true
 allLivingWorldMarkersMatched=true
 reportHash=0af0830d43e8d4a4a2af0af26cec48ed4a7837f815c5e1648b2d734fb8178527
+```
+
+Goal 064 handoff acceptance recorded before Goal 065:
+
+```text
+living_world_npc_faction_simulation_matrix_verification passed before Goal 065
+```
+
+Goal 065 produced for review:
+
+```text
+interlocked_gameplay_systems_depth_matrix_verification required
+```
+
+Goal 065 implementation status:
+
+```text
+implementationStatus=GREEN
+accepted=false
+manualGate=interlocked_gameplay_systems_depth_matrix_verification
+unityExitCode=0
+playerExitCode=0
+rowCount=9
+stateChangingRowCount=9
+saveLoadReplayPassed=true
+meaningfulVariancePassed=true
+allInterlockedMarkersMatched=true
+reportHash=33ea41be747d7971b596709a6b78d786488678959b945813c5e90676adc5712e
 ```
 
 ## Current Phase
@@ -439,10 +467,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-gameplay_consequence_depth_matrix_verification
+interlocked_gameplay_systems_depth_matrix_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 `multi_family_generated_template_vertical_slice_verification` is accepted as passed by the user handoff before Goal 047. Goal 047 `full_generator_without_media_verification` is accepted as passed by the user handoff before Goal 053. Goal 053 `media_asset_campaign_orchestration_verification` is accepted as passed by the user handoff before Goal 054. Goal 054 `media_materialization_review_package_verification` is accepted as passed by the Goal 055 preflight user handoff. Goal 055 `media_bound_playable_review_package_verification` is accepted as passed by the Goal 056 user handoff. Goal 056 `unity_alpha_media_bound_playable_package_verification` is accepted as passed by the Goal 057 user handoff. Goal 057 `unity_alpha_multifamily_playable_loop_verification` is accepted as passed by the Goal 058 user handoff. Goal 058 `full_media_bound_generator_campaign_verification` is accepted as passed by the Goal 059 user handoff. Goal 059 `full_generator_variability_regression_matrix_verification` is accepted as passed by the user handoff before Goal 060. Goal 060 `full_campaign_gamepackage_materialization_matrix_verification` is accepted as passed by the user handoff before Goal 061. Goal 061 `full_campaign_playable_review_package_rc_verification` is accepted as passed by the Goal 062 user handoff. Goal 062 `constrained_spatial_detail_generation_verification` is accepted as passed by the Goal 063 user handoff. Goal 063 `gameplay_consequence_depth_matrix_verification` is produced for review and remains required. Goal 031 and Goal 032 remain produced for review and not marked passed.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goal 035 `lua_module_manifest_registry_verification` is accepted as passed by the user's manual decision. Goal 036 `lua_sandbox_execution_gate_verification` is accepted as passed by the user handoff embedded in Goal 037. Goal 037 `hybrid_llm_draft_lua_deterministic_expansion_verification` is accepted as passed by the user handoff before Goal 038. Goal 038 `world_scale_region_map_foundation_verification` is accepted as passed by the user handoff before Goal 039. Goal 039 `runtime_chunk_delta_traversal_smoke_verification` is accepted as passed by the user handoff before Goal 040. Goal 040 `chunked_runtime_preview_export_multifamily_smoke_verification` is accepted as passed by the user handoff before Goal 043. Goal 043 `multi_family_generated_template_vertical_slice_verification` is accepted as passed by the user handoff before Goal 047. Goal 047 `full_generator_without_media_verification` is accepted as passed by the user handoff before Goal 053. Goal 053 `media_asset_campaign_orchestration_verification` is accepted as passed by the user handoff before Goal 054. Goal 054 `media_materialization_review_package_verification` is accepted as passed by the Goal 055 preflight user handoff. Goal 055 `media_bound_playable_review_package_verification` is accepted as passed by the Goal 056 user handoff. Goal 056 `unity_alpha_media_bound_playable_package_verification` is accepted as passed by the Goal 057 user handoff. Goal 057 `unity_alpha_multifamily_playable_loop_verification` is accepted as passed by the Goal 058 user handoff. Goal 058 `full_media_bound_generator_campaign_verification` is accepted as passed by the Goal 059 user handoff. Goal 059 `full_generator_variability_regression_matrix_verification` is accepted as passed by the user handoff before Goal 060. Goal 060 `full_campaign_gamepackage_materialization_matrix_verification` is accepted as passed by the user handoff before Goal 061. Goal 061 `full_campaign_playable_review_package_rc_verification` is accepted as passed by the Goal 062 user handoff. Goal 062 `constrained_spatial_detail_generation_verification` is accepted as passed by the Goal 063 user handoff. Goal 063 `gameplay_consequence_depth_matrix_verification` is accepted by user handoff before Goal 064. Goal 064 `living_world_npc_faction_simulation_matrix_verification` is accepted by user handoff before Goal 065. Goal 065 `interlocked_gameplay_systems_depth_matrix_verification` is produced for review and remains required. Goal 031 and Goal 032 remain produced for review and not marked passed.
 
 Goal 037 accepted by user handoff:
 

@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-01T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 064 living world NPC/faction simulation matrix produced for review",
-    "gate_status":  "living_world_npc_faction_simulation_matrix_verification",
+    "current_phase_title":  "Goal 065 interlocked gameplay systems depth matrix produced for review",
+    "gate_status":  "interlocked_gameplay_systems_depth_matrix_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
-    "last_completed_product_slice_id":  "goal_064_living_world_npc_faction_simulation_matrix",
-    "active_manual_gate":  "Goal 064 Living World NPC/Faction Simulation Matrix is produced for review with implementationStatus=GREEN, accepted=false, 9/9 state-changing NPC/faction/world-event rows, Unity/player proof passed and living_world_npc_faction_simulation_matrix_verification required until user acceptance. Goal 063 Gameplay Consequence Depth Matrix is accepted by user handoff before Goal 064: gameplay_consequence_depth_matrix_verification passed before Goal 064. Goal 031 and Goal 032 remain produced for review and not passed.",
-    "current_user_action":  "Review Goal 064 Living World NPC/Faction Simulation Matrix evidence and keep living_world_npc_faction_simulation_matrix_verification required until accepted by the user.",
-    "recommended_next_decision":  "Review Goal 064 artifacts under .llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/; do not mark living_world_npc_faction_simulation_matrix_verification passed until user acceptance.",
+    "last_completed_product_slice_id":  "goal_065_interlocked_gameplay_systems_depth_matrix",
+    "active_manual_gate":  "Goal 065 Interlocked Gameplay Systems Depth Matrix is produced for review with implementationStatus=GREEN, accepted=false, 9/9 state-changing economy/crafting/combat/progression/status rows, Unity/player proof passed and interlocked_gameplay_systems_depth_matrix_verification required until user acceptance. Goal 064 Living World NPC/Faction Simulation Matrix is accepted by user handoff before Goal 065: living_world_npc_faction_simulation_matrix_verification passed before Goal 065. Goal 031 and Goal 032 remain produced for review and not passed.",
+    "current_user_action":  "Review Goal 065 Interlocked Gameplay Systems Depth Matrix evidence and keep interlocked_gameplay_systems_depth_matrix_verification required until accepted by the user.",
+    "recommended_next_decision":  "Review Goal 065 artifacts under .llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/; do not mark interlocked_gameplay_systems_depth_matrix_verification passed until user acceptance.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                     "next_sequence":  [
-                                                          "living_world_npc_faction_simulation_matrix_verification"
+                                                          "interlocked_gameplay_systems_depth_matrix_verification"
                                                       ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -81,7 +81,8 @@
                            "goal_061_manual_gate":  "full_campaign_playable_review_package_rc_verification",
                            "goal_062_manual_gate":  "constrained_spatial_detail_generation_verification",
                            "goal_063_manual_gate":  "gameplay_consequence_depth_matrix_verification",
-                           "goal_064_manual_gate":  "living_world_npc_faction_simulation_matrix_verification"
+                           "goal_064_manual_gate":  "living_world_npc_faction_simulation_matrix_verification",
+                           "goal_065_manual_gate":  "interlocked_gameplay_systems_depth_matrix_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -102,17 +103,17 @@
                           "report_path":  "docs/M4_1_REAL_EVALUATION_GATE_REPORT.md"
                       },
     "last_completed_product_slice":  {
-                                         "slice_id":  "goal_064_living_world_npc_faction_simulation_matrix",
-                                         "title":  "Living World NPC/Faction Simulation Matrix",
+                                         "slice_id":  "goal_065_interlocked_gameplay_systems_depth_matrix",
+                                         "title":  "Interlocked Gameplay Systems Depth Matrix",
                                          "status":  "produced_for_review",
-                                          "summary":  "Goal 064 records Goal 063 as accepted by user handoff, consumes Goal 060/061/062/063 evidence, produces 9 family/seed living-world rows with NPC state changes, faction relationship/reputation changes, schedule/availability changes, resolved world events, memory/rumor consequence traces, save/load/replay proof, meaningful living-world variance, preview/export living-world payload, invalid diagnostics matrix and Unity Alpha living-world markers. Its produced report keeps accepted=false and living_world_npc_faction_simulation_matrix_verification required.",
-                                          "scenario_id":  "goal-064-living-world-npc-faction-simulation-matrix",
+                                          "summary":  "Goal 065 records Goal 064 as accepted by user handoff, consumes Goal 060/061/062/063/064 evidence, produces 9 family/seed interlocked gameplay rows with economy/crafting/combat/progression/status state changes, source-traced cross-system deltas, save/load/replay proof, meaningful interlocked-system variance, preview/export gameplay payload, invalid diagnostics matrix and Unity Alpha interlocked gameplay markers. Its produced report keeps accepted=false and interlocked_gameplay_systems_depth_matrix_verification required.",
+                                          "scenario_id":  "goal-065-interlocked-gameplay-systems-depth-matrix",
                                           "checks":  [
-                                                        "Goal 064 focused LivingWorldNpcFaction|Goal064 filter: 7/7 passed",
-                                                        "Goal 064 exact product smoke class filter: 1/1 passed and wrote compact artifacts",
-                                                        "Goal 064 living world NPC/faction simulation matrix: 9/9 rows state-changing across 3 families and 3 seeds with save/load/replay and meaningful variance passed",
-                                                        "Unity Editor/player proof: unityExitCode=0, playerExitCode=0, all required living-world markers matched, provenRowCount=9",
-                                                        "Goal 064 compact report: implementationStatus=GREEN, accepted=false, manualGate=living_world_npc_faction_simulation_matrix_verification"
+                                                        "Goal 065 focused InterlockedGameplaySystems|Goal065 filter: 7/7 passed",
+                                                        "Goal 065 exact product smoke class filter: 1/1 passed and wrote compact artifacts",
+                                                        "Goal 065 interlocked gameplay systems matrix: 9/9 rows state-changing across 3 families and 3 seeds with save/load/replay and meaningful variance",
+                                                        "Unity Editor/player proof: unityExitCode=0, playerExitCode=0, all required interlocked gameplay markers matched, provenRowCount=9",
+                                                        "Goal 065 compact report: implementationStatus=GREEN, accepted=false, manualGate=interlocked_gameplay_systems_depth_matrix_verification"
                                                     ]
                                       },
     "goal_009_rule_pack_combat_faction_social_work_theft_foundations":  {
@@ -372,8 +373,8 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "living_world_npc_faction_simulation_matrix_verification",
-                                          "goal_064_living_world_npc_faction_simulation_matrix"
+                                          "interlocked_gameplay_systems_depth_matrix_verification",
+                                          "goal_065_interlocked_gameplay_systems_depth_matrix"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -394,17 +395,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "living_world_npc_faction_simulation_matrix_verification",
-    "recommended_next_work_item_title":  "Review Goal 064 Living World NPC/Faction Simulation Matrix evidence while keeping the manual gate required.",
-    "recommended_next_task_file":  "docs/agent-tasks/GOAL_064_LIVING_WORLD_NPC_FACTION_SIMULATION_MATRIX.md",
+    "recommended_next_work_item":  "interlocked_gameplay_systems_depth_matrix_verification",
+    "recommended_next_work_item_title":  "Review Goal 065 Interlocked Gameplay Systems Depth Matrix evidence while keeping the manual gate required.",
+    "recommended_next_task_file":  "docs/agent-tasks/GOAL_065_INTERLOCKED_GAMEPLAY_SYSTEMS_DEPTH_MATRIX.md",
     "candidate_product_vertical_slices":  [
-                                               "Review Goal 064 Living World NPC/Faction Simulation Matrix at living_world_npc_faction_simulation_matrix_verification",
-                                               "Keep Goal 064 gate required until user review accepts it"
+                                               "Review Goal 065 Interlocked Gameplay Systems Depth Matrix at interlocked_gameplay_systems_depth_matrix_verification",
+                                               "Keep Goal 065 gate required until user review accepts it"
                                            ],
     "required_reading_order_for_new_agents":  [
                                                    "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/GOAL_065_INTERLOCKED_GAMEPLAY_SYSTEMS_DEPTH_MATRIX_SPEC.md",
+                                                   "docs/EXTERNAL_SCOUTING_GOAL_065_INTERLOCKED_GAMEPLAY_SYSTEMS_DEPTH_MATRIX.md",
+                                                   "docs/agent-tasks/GOAL_065_INTERLOCKED_GAMEPLAY_SYSTEMS_DEPTH_MATRIX.md",
                                                    "docs/GOAL_064_LIVING_WORLD_NPC_FACTION_SIMULATION_MATRIX_SPEC.md",
                                                    "docs/EXTERNAL_SCOUTING_GOAL_064_LIVING_WORLD_NPC_FACTION_SIMULATION_MATRIX.md",
                                                    "docs/agent-tasks/GOAL_064_LIVING_WORLD_NPC_FACTION_SIMULATION_MATRIX.md",
@@ -1446,7 +1450,7 @@
                                                               "next_action":  "goal_064_living_world_npc_faction_simulation_matrix_produced_for_review"
                                                           },
     "living_world_npc_faction_simulation_matrix_verification":  {
-                                                                    "status":  "produced_for_review",
+                                                                    "status":  "passed_by_user_handoff_before_goal_065",
                                                                     "evidence_source":  "goal_064_living_world_npc_faction_simulation_matrix",
                                                                     "observed_result":  [
                                                                                             "Design/LivingWorldNpcFactionSimulationMatrix defines a BCL-only Application-layer source loader, actor/faction catalog summary, simulation matrix builder, save/load/replay proof, variance metrics, validator, Unity proof runner, evidence writer and hash helper.",
@@ -1456,9 +1460,24 @@
                                                                                             "Save/load and deterministic replay pass for every row; meaningful variance is proven across same-family seeds and cross-family rule profiles while rejecting hash-only variance.",
                                                                                             "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required living-world markers matched.",
                                                                                             "Goal 064 artifacts under .llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix include source manifest, actor/faction catalog summary, simulation matrix plan, 9 row files, save-load replay proof, variance metrics, Unity command plan, Unity proof summary, preview/export living-world payload, invalid diagnostics matrix, artifact-scope report and compact report.",
-                                                                                            "Final report implementationStatus=GREEN, accepted=false and manualGate=living_world_npc_faction_simulation_matrix_verification; the gate remains required until user acceptance."
+                                                                                            "Final report implementationStatus=GREEN, accepted=false and manualGate=living_world_npc_faction_simulation_matrix_verification; the Goal 065 task handoff accepted living_world_npc_faction_simulation_matrix_verification passed before Goal 065."
                                                                                         ],
-                                                                    "next_action":  "review_goal_064_living_world_npc_faction_simulation_matrix"
+                                                                    "next_action":  "goal_065_interlocked_gameplay_systems_depth_matrix_produced_for_review"
+                                                                },
+    "interlocked_gameplay_systems_depth_matrix_verification":  {
+                                                                    "status":  "produced_for_review",
+                                                                    "evidence_source":  "goal_065_interlocked_gameplay_systems_depth_matrix",
+                                                                    "observed_result":  [
+                                                                                            "Design/InterlockedGameplaySystemsDepthMatrix defines a BCL-only Application-layer source loader, rule catalog, row projector, ledger/replay/variance builder, validator, Unity proof runner, evidence writer and hash helper.",
+                                                                                            "Goal 065 consumes Goal 060/061/062/063/064 evidence after recording living_world_npc_faction_simulation_matrix_verification passed by user handoff before Goal 065.",
+                                                                                            "The produced matrix contains 9 interlocked gameplay rows across map_panel_rpg, survival_sandbox and first_person_grid_dungeon with 3 deterministic seeds and 9 state-changing economy/crafting/combat/progression/status rows.",
+                                                                                            "Each row records source-traced economy, crafting, combat, progression, inventory, status and living-world deltas linked to Goal 060/061/062/063/064 source refs.",
+                                                                                            "Save/load and deterministic replay pass for every row; meaningful variance is proven across same-family seeds and cross-family rule profiles while rejecting hash-only variance.",
+                                                                                            "The Unity Alpha player proof executed through the existing Alpha build/player diagnostic route with unityExitCode=0, playerExitCode=0, provenRowCount=9 and all required interlocked gameplay markers matched.",
+                                                                                            "Goal 065 artifacts under .llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix include source manifest, system rule catalog, row plan matrix, 9 row files, economy/crafting ledger, combat/progression ledger, status/effect ledger, save-load replay proof, variance metrics, Unity command plan, Unity player proof, preview/export gameplay payload, invalid diagnostics matrix, artifact-scope report and compact report.",
+                                                                                            "Final report implementationStatus=GREEN, accepted=false and manualGate=interlocked_gameplay_systems_depth_matrix_verification; the gate remains required until user acceptance."
+                                                                                        ],
+                                                                    "next_action":  "review_goal_065_interlocked_gameplay_systems_depth_matrix"
                                                                 },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

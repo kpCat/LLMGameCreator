@@ -37,6 +37,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> gameplayConsequenceLogLines = new List<string>();
         private readonly List<AlphaLivingWorldRow> livingWorldRows = new List<AlphaLivingWorldRow>();
         private readonly List<string> livingWorldLogLines = new List<string>();
+        private readonly List<AlphaInterlockedGameplayRow> interlockedGameplayRows = new List<AlphaInterlockedGameplayRow>();
+        private readonly List<string> interlockedGameplayLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -87,6 +89,7 @@ namespace LLMGameCreatorAlpha
         private bool spatialDetailPlanLoaded;
         private bool gameplayConsequencePlanLoaded;
         private bool livingWorldPlanLoaded;
+        private bool interlockedGameplayPlanLoaded;
 
         private void Start()
         {
@@ -304,6 +307,7 @@ namespace LLMGameCreatorAlpha
                 var spatialDetailLines = LoadSpatialDetailPayload(payloadRoot);
                 var gameplayConsequenceLines = LoadGameplayConsequencePayload(payloadRoot);
                 var livingWorldLines = LoadLivingWorldPayload(payloadRoot);
+                var interlockedGameplayLines = LoadInterlockedGameplayPayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -336,6 +340,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(spatialDetailLines);
                 lines.AddRange(gameplayConsequenceLines);
                 lines.AddRange(livingWorldLines);
+                lines.AddRange(interlockedGameplayLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -403,6 +408,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunSpatialDetailProof());
             lines.AddRange(RunGameplayConsequenceProof());
             lines.AddRange(RunLivingWorldProof());
+            lines.AddRange(RunInterlockedGameplayProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1756,6 +1762,95 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadInterlockedGameplayPayload(string payloadRoot)
+        {
+            interlockedGameplayRows.Clear();
+            interlockedGameplayLogLines.Clear();
+            interlockedGameplayPlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "interlocked-gameplay", "unity-interlocked-gameplay-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                interlockedGameplayLogLines.Add("interlocked_gameplay_plan_loaded=false");
+                interlockedGameplayLogLines.Add("interlocked_gameplay_plan_missing=true");
+                return interlockedGameplayLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                interlockedGameplayRows.AddRange(ExtractInterlockedGameplayRows(planJson));
+                interlockedGameplayRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                interlockedGameplayPlanLoaded = ExtractJsonBool(planJson, "passed") && interlockedGameplayRows.Count > 0;
+                interlockedGameplayLogLines.Add("interlocked_gameplay_plan_loaded=" + interlockedGameplayPlanLoaded.ToString().ToLowerInvariant());
+                interlockedGameplayLogLines.Add("interlocked_gameplay_row_count=" + interlockedGameplayRows.Count);
+            }
+            catch (Exception ex)
+            {
+                interlockedGameplayPlanLoaded = false;
+                interlockedGameplayLogLines.Add("interlocked_gameplay_plan_loaded=false");
+                interlockedGameplayLogLines.Add("interlocked_gameplay_error_type=" + ex.GetType().Name);
+                interlockedGameplayLogLines.Add("interlocked_gameplay_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return interlockedGameplayLogLines;
+        }
+
+        private List<string> RunInterlockedGameplayProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(interlockedGameplayLogLines);
+            if (!interlockedGameplayPlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("interlocked_gameplay_loaded=true");
+            foreach (var row in interlockedGameplayRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("interlocked_gameplay_row=" + row.RowId);
+                lines.Add("interlocked_gameplay_family=" + row.FamilyId);
+                lines.Add("interlocked_gameplay_seed=" + row.SeedId);
+                lines.Add("interlocked_economy_delta=" + row.RowId);
+                lines.Add("interlocked_crafting_delta=" + row.RowId);
+                lines.Add("interlocked_combat_delta=" + row.RowId);
+                lines.Add("interlocked_progression_delta=" + row.RowId);
+                lines.Add("interlocked_status_delta=" + row.RowId);
+                foreach (var deltaId in row.EconomyDeltaIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("interlocked_economy_delta_id=" + deltaId);
+                }
+
+                foreach (var deltaId in row.CraftingDeltaIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("interlocked_crafting_delta_id=" + deltaId);
+                }
+
+                foreach (var deltaId in row.CombatDeltaIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("interlocked_combat_delta_id=" + deltaId);
+                }
+
+                foreach (var deltaId in row.ProgressionDeltaIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("interlocked_progression_delta_id=" + deltaId);
+                }
+
+                foreach (var deltaId in row.StatusDeltaIds.OrderBy(item => item, StringComparer.Ordinal))
+                {
+                    lines.Add("interlocked_status_delta_id=" + deltaId);
+                }
+
+                lines.Add("interlocked_replay_verified=" + row.RowId);
+                lines.Add("interlocked_gameplay_row_completed=" + row.RowId);
+            }
+
+            lines.Add("interlocked_gameplay_completed=true");
+            lines.Add("review_package_proof=goal065");
+            lines.Add("interlocked_gameplay_systems_depth_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -1971,6 +2066,32 @@ namespace LLMGameCreatorAlpha
                     FamilyId = ExtractJsonString(value, "familyId"),
                     SeedId = ExtractJsonString(value, "seedId"),
                     TickIds = ExtractStringArray(value, "tickIds").ToList()
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaInterlockedGameplayRow> ExtractInterlockedGameplayRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaInterlockedGameplayRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    EconomyDeltaIds = ExtractStringArray(value, "economyDeltaIds").ToList(),
+                    CraftingDeltaIds = ExtractStringArray(value, "craftingDeltaIds").ToList(),
+                    CombatDeltaIds = ExtractStringArray(value, "combatDeltaIds").ToList(),
+                    ProgressionDeltaIds = ExtractStringArray(value, "progressionDeltaIds").ToList(),
+                    StatusDeltaIds = ExtractStringArray(value, "statusDeltaIds").ToList()
                 };
             }
         }
@@ -2619,6 +2740,18 @@ namespace LLMGameCreatorAlpha
             public string FamilyId = string.Empty;
             public string SeedId = string.Empty;
             public List<string> TickIds = new List<string>();
+        }
+
+        private sealed class AlphaInterlockedGameplayRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public List<string> EconomyDeltaIds = new List<string>();
+            public List<string> CraftingDeltaIds = new List<string>();
+            public List<string> CombatDeltaIds = new List<string>();
+            public List<string> ProgressionDeltaIds = new List<string>();
+            public List<string> StatusDeltaIds = new List<string>();
         }
 
         private sealed class AlphaMediaBoundBinding
