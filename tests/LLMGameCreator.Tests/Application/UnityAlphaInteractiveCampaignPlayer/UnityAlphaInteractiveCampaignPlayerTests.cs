@@ -41,7 +41,7 @@ public sealed class UnityAlphaInteractiveCampaignBuildTests
         Assert.True(result.Matrix.Passed);
         Assert.Equal(9, result.Matrix.RowCount);
         Assert.Equal(9, result.Matrix.StateChangingRowCount);
-        Assert.True(result.Matrix.ActionCount >= 18);
+        Assert.Equal(63, result.Matrix.ActionCount);
         Assert.True(result.Selector.Passed);
         Assert.Equal(3, result.Selector.Families.Count);
         Assert.All(result.Selector.Families, family =>
@@ -58,6 +58,8 @@ public sealed class UnityAlphaInteractiveCampaignBuildTests
 
         Assert.True(result.InputActionScript.Passed);
         Assert.True(result.StateTransitionLedger.Passed);
+        Assert.Equal(63, result.InputActionScript.ActionCount);
+        Assert.Equal(63, result.StateTransitionLedger.TransitionCount);
         Assert.Equal(result.InputActionScript.ActionCount, result.StateTransitionLedger.TransitionCount);
         Assert.True(result.SaveLoadReplayProof.Passed);
         Assert.Equal(9, result.SaveLoadReplayProof.SaveLoadPassedRowCount);
@@ -79,6 +81,23 @@ public sealed class UnityAlphaInteractiveCampaignBuildTests
             Assert.True(action.DeltaApplied);
             Assert.NotEqual(action.StateBeforeHash, action.StateAfterHash);
         });
+
+        Assert.All(result.StateTransitionLedger.Rows, row =>
+        {
+            Assert.Equal(7, row.Transitions.Count);
+            Assert.All(row.Transitions, transition =>
+            {
+                Assert.True(transition.StateChanged);
+                Assert.True(transition.DeltaApplied);
+                Assert.NotEqual(transition.StateBeforeHash, transition.StateAfterHash);
+            });
+        });
+
+        Assert.All(result.SaveLoadReplayProof.Rows, row =>
+        {
+            Assert.Equal(row.SaveCheckpointHash, row.LoadedCheckpointHash);
+            Assert.Equal(row.ExpectedReplayHash, row.ReplayHash);
+        });
     }
 }
 
@@ -99,10 +118,12 @@ public sealed class UnityAlphaInteractiveCampaignUnityPlanTests
 
         Assert.All(result.UnityCommandPlan.Rows, row =>
         {
-            Assert.True(row.StepIds.Count >= 2);
+            Assert.Equal(7, row.StepIds.Count);
             Assert.Equal(row.StepIds.Count, row.InputIds.Count);
+            Assert.Equal(row.StepIds.Count, row.ActionIds.Count);
             Assert.Equal(row.StepIds.Count, row.StateBeforeHashes.Count);
             Assert.Equal(row.StepIds.Count, row.StateAfterHashes.Count);
+            Assert.All(row.StateBeforeHashes.Zip(row.StateAfterHashes), pair => Assert.NotEqual(pair.First, pair.Second));
             Assert.Contains("interactive_campaign_selected_row=" + row.RowId, row.ExpectedPlayerMarkers);
             Assert.Contains("interactive_campaign_family=" + row.FamilyId, row.ExpectedPlayerMarkers);
             Assert.Contains("interactive_campaign_seed=" + row.SeedId, row.ExpectedPlayerMarkers);

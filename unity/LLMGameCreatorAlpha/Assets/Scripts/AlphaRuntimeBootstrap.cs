@@ -2409,29 +2409,38 @@ namespace LLMGameCreatorAlpha
             lines.Add("interactive_campaign_loaded=true");
             foreach (var row in interactiveCampaignRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
             {
-                lines.Add("interactive_campaign_family=" + row.FamilyId);
-                lines.Add("interactive_campaign_seed=" + row.SeedId);
-                lines.Add("interactive_campaign_selected_row=" + row.RowId);
-                var stepCount = Math.Max(row.StepIds.Count, Math.Max(row.StateBeforeHashes.Count, row.StateAfterHashes.Count));
-                stepCount = Math.Max(1, stepCount);
-                for (var index = 0; index < stepCount; index++)
-                {
-                    lines.Add("interactive_campaign_input=" + ValueAt(row.InputIds, index, row.SelectedInputId));
-                    lines.Add("interactive_campaign_action=" + ValueAt(row.ActionIds, index, row.SelectedActionId));
-                    lines.Add("interactive_campaign_step=" + ValueAt(row.StepIds, index, row.SelectedStepId));
-                    lines.Add("interactive_campaign_state_before=" + ValueAt(row.StateBeforeHashes, index, string.Empty));
-                    lines.Add("interactive_campaign_state_after=" + ValueAt(row.StateAfterHashes, index, string.Empty));
-                    lines.Add("interactive_campaign_delta_applied=" + row.DeltaApplied.ToString().ToLowerInvariant());
-                    lines.Add("interactive_campaign_hud_rendered=" + row.HudRendered.ToString().ToLowerInvariant());
-                }
-
-                lines.Add("interactive_campaign_row_completed=true");
-                lines.Add("interactive_campaign_row_completed=" + row.RowId);
+                AppendInteractiveCampaignRowProof(lines, row);
             }
 
             lines.Add("interactive_campaign_proof=goal071");
             lines.Add("unity_alpha_interactive_campaign_player_verification=required");
             return lines;
+        }
+
+        private static void AppendInteractiveCampaignRowProof(List<string> lines, AlphaInteractiveCampaignRow row)
+        {
+            lines.Add("interactive_campaign_family=" + row.FamilyId);
+            lines.Add("interactive_campaign_seed=" + row.SeedId);
+            lines.Add("interactive_campaign_selected_row=" + row.RowId);
+            for (var index = 0; index < InteractiveCampaignStepCount(row); index++)
+            {
+                lines.Add("interactive_campaign_input=" + ValueAt(row.InputIds, index, row.SelectedInputId));
+                lines.Add("interactive_campaign_action=" + ValueAt(row.ActionIds, index, row.SelectedActionId));
+                lines.Add("interactive_campaign_step=" + ValueAt(row.StepIds, index, row.SelectedStepId));
+                lines.Add("interactive_campaign_state_before=" + ValueAt(row.StateBeforeHashes, index, string.Empty));
+                lines.Add("interactive_campaign_state_after=" + ValueAt(row.StateAfterHashes, index, string.Empty));
+                lines.Add("interactive_campaign_delta_applied=" + row.DeltaApplied.ToString().ToLowerInvariant());
+                lines.Add("interactive_campaign_hud_rendered=" + row.HudRendered.ToString().ToLowerInvariant());
+            }
+
+            lines.Add("interactive_campaign_row_completed=true");
+            lines.Add("interactive_campaign_row_completed=" + row.RowId);
+        }
+
+        private static int InteractiveCampaignStepCount(AlphaInteractiveCampaignRow row)
+        {
+            var stepCount = Math.Max(row.StepIds.Count, Math.Max(row.StateBeforeHashes.Count, row.StateAfterHashes.Count));
+            return Math.Max(1, stepCount);
         }
 
         private static string ValueAt(IReadOnlyList<string> values, int index, string fallback)

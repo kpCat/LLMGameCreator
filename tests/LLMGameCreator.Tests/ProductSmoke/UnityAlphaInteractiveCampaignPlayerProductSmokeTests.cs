@@ -34,7 +34,18 @@ public sealed class UnityAlphaInteractiveCampaignPlayerProductSmokeTests
         Assert.True(write.Result.UnityCommandPlan.Passed);
         Assert.Equal(9, write.Result.Matrix.RowCount);
         Assert.Equal(9, write.Result.Matrix.StateChangingRowCount);
-        Assert.True(write.Result.InputActionScript.ActionCount >= 18);
+        Assert.Equal(63, write.Result.InputActionScript.ActionCount);
+        Assert.Equal(63, write.Result.StateTransitionLedger.TransitionCount);
+        Assert.All(write.Result.UnityCommandPlan.Rows, row =>
+        {
+            Assert.Equal(7, row.InputIds.Count);
+            Assert.Equal(7, row.ActionIds.Count);
+            Assert.Equal(7, row.StepIds.Count);
+            Assert.Equal(7, row.StateBeforeHashes.Count);
+            Assert.Equal(7, row.StateAfterHashes.Count);
+            Assert.All(row.StateBeforeHashes.Zip(row.StateAfterHashes), pair => Assert.NotEqual(pair.First, pair.Second));
+        });
+
         Assert.Contains(write.Result.Report.ImplementationStatus, new[] { "GREEN", "BLOCKED" });
         if (write.Result.Report.ImplementationStatus == "GREEN")
         {
@@ -43,6 +54,10 @@ public sealed class UnityAlphaInteractiveCampaignPlayerProductSmokeTests
             Assert.Equal(0, write.Result.UnityProofSummary.PlayerExitCode);
             Assert.Equal(9, write.Result.UnityProofSummary.ProvenRowCount);
             Assert.Empty(write.Result.UnityProofSummary.MissingMarkers);
+            Assert.NotEmpty(write.Result.UnityProofSummary.MatchedMarkers);
+            Assert.All(
+                write.Result.UnityCommandPlan.ExpectedPlayerMarkers,
+                marker => Assert.Contains(marker, write.Result.UnityProofSummary.MatchedMarkers));
         }
         else
         {
