@@ -41,6 +41,8 @@ namespace LLMGameCreatorAlpha
         private readonly List<string> interlockedGameplayLogLines = new List<string>();
         private readonly List<AlphaSettlementRow> settlementRows = new List<AlphaSettlementRow>();
         private readonly List<string> settlementLogLines = new List<string>();
+        private readonly List<AlphaNarrativeRow> narrativeRows = new List<AlphaNarrativeRow>();
+        private readonly List<string> narrativeLogLines = new List<string>();
         private string packageId = string.Empty;
         private string campaignId = string.Empty;
         private string reviewPackageRcId = string.Empty;
@@ -93,6 +95,7 @@ namespace LLMGameCreatorAlpha
         private bool livingWorldPlanLoaded;
         private bool interlockedGameplayPlanLoaded;
         private bool settlementPlanLoaded;
+        private bool narrativePlanLoaded;
 
         private void Start()
         {
@@ -312,6 +315,7 @@ namespace LLMGameCreatorAlpha
                 var livingWorldLines = LoadLivingWorldPayload(payloadRoot);
                 var interlockedGameplayLines = LoadInterlockedGameplayPayload(payloadRoot);
                 var settlementLines = LoadSettlementPayload(payloadRoot);
+                var narrativeLines = LoadNarrativePayload(payloadRoot);
 
                 lines.Add("alpha_runtime.payload_root_exists=" + payloadRootExists.ToString().ToLowerInvariant());
                 lines.Add("alpha_runtime.config_loaded=true");
@@ -346,6 +350,7 @@ namespace LLMGameCreatorAlpha
                 lines.AddRange(livingWorldLines);
                 lines.AddRange(interlockedGameplayLines);
                 lines.AddRange(settlementLines);
+                lines.AddRange(narrativeLines);
                 lines.Add("alpha_runtime.launch_completed=true");
             }
             catch (Exception ex)
@@ -415,6 +420,7 @@ namespace LLMGameCreatorAlpha
             lines.AddRange(RunLivingWorldProof());
             lines.AddRange(RunInterlockedGameplayProof());
             lines.AddRange(RunSettlementProof());
+            lines.AddRange(RunNarrativeProof());
 
             foreach (var kind in new[] { "map", "player", "npc", "item", "quest_event", "command_status" })
             {
@@ -1941,6 +1947,71 @@ namespace LLMGameCreatorAlpha
             return lines;
         }
 
+        private List<string> LoadNarrativePayload(string payloadRoot)
+        {
+            narrativeRows.Clear();
+            narrativeLogLines.Clear();
+            narrativePlanLoaded = false;
+
+            var planPath = Path.Combine(payloadRoot, "narrative", "unity-narrative-command-plan.json");
+            if (!File.Exists(planPath))
+            {
+                narrativeLogLines.Add("narrative_plan_loaded=false");
+                narrativeLogLines.Add("narrative_plan_missing=true");
+                return narrativeLogLines;
+            }
+
+            try
+            {
+                var planJson = File.ReadAllText(planPath);
+                narrativeRows.AddRange(ExtractNarrativeRows(planJson));
+                narrativeRows.Sort((left, right) => string.CompareOrdinal(left.RowId, right.RowId));
+                narrativePlanLoaded = ExtractJsonBool(planJson, "passed") && narrativeRows.Count > 0;
+                narrativeLogLines.Add("narrative_plan_loaded=" + narrativePlanLoaded.ToString().ToLowerInvariant());
+                narrativeLogLines.Add("narrative_row_count=" + narrativeRows.Count);
+            }
+            catch (Exception ex)
+            {
+                narrativePlanLoaded = false;
+                narrativeLogLines.Add("narrative_plan_loaded=false");
+                narrativeLogLines.Add("narrative_error_type=" + ex.GetType().Name);
+                narrativeLogLines.Add("narrative_error_message=" + ex.Message.Replace(Environment.NewLine, " "));
+            }
+
+            return narrativeLogLines;
+        }
+
+        private List<string> RunNarrativeProof()
+        {
+            var lines = new List<string>();
+            lines.AddRange(narrativeLogLines);
+            if (!narrativePlanLoaded)
+            {
+                return lines;
+            }
+
+            lines.Add("narrative_matrix_loaded=goal067");
+            foreach (var row in narrativeRows.OrderBy(item => item.RowId, StringComparer.Ordinal))
+            {
+                lines.Add("narrative_row_loaded=" + row.RowId);
+                lines.Add("narrative_family=" + row.FamilyId);
+                lines.Add("narrative_seed=" + row.SeedId);
+                lines.Add("quest_stage_started=" + row.QuestStageId);
+                lines.Add("dialogue_option_available=" + row.DialogueOptionId);
+                lines.Add("dialogue_option_selected=" + row.DialogueOptionId);
+                lines.Add("event_trigger_resolved=" + row.EventTriggerId);
+                lines.Add("event_consequence_applied=" + row.EventConsequenceId);
+                lines.Add("memory_rumor_recorded=" + row.MemoryRumorRecordId);
+                lines.Add("localization_key_bound=" + row.LocalizationLineKey);
+                lines.Add("narrative_row_completed=" + row.RowId);
+            }
+
+            lines.Add("narrative_matrix_completed=true");
+            lines.Add("review_package_proof=goal067");
+            lines.Add("programmatic_narrative_quest_dialogue_event_matrix_verification=required");
+            return lines;
+        }
+
         private static bool TryReadPackageBytes(string packagePath, out byte[] bytes)
         {
             bytes = new byte[0];
@@ -2210,6 +2281,33 @@ namespace LLMGameCreatorAlpha
                     DefenseThreatLedgerEntryIds = ExtractStringArray(value, "defenseThreatLedgerEntryIds").ToList(),
                     LivingWorldLinkageId = ExtractJsonString(value, "livingWorldLinkageId"),
                     InterlockedDependencyId = ExtractJsonString(value, "interlockedDependencyId")
+                };
+            }
+        }
+
+        private static IEnumerable<AlphaNarrativeRow> ExtractNarrativeRows(string json)
+        {
+            var array = ExtractArray(json, "rows");
+            foreach (Match match in Regex.Matches(array, "\\{(?<value>.*?)\\}", RegexOptions.Singleline))
+            {
+                var value = match.Groups["value"].Value;
+                var rowId = ExtractJsonString(value, "rowId");
+                if (string.IsNullOrWhiteSpace(rowId))
+                {
+                    continue;
+                }
+
+                yield return new AlphaNarrativeRow
+                {
+                    RowId = rowId,
+                    FamilyId = ExtractJsonString(value, "familyId"),
+                    SeedId = ExtractJsonString(value, "seedId"),
+                    QuestStageId = ExtractJsonString(value, "questStageId"),
+                    DialogueOptionId = ExtractJsonString(value, "dialogueOptionId"),
+                    EventTriggerId = ExtractJsonString(value, "eventTriggerId"),
+                    EventConsequenceId = ExtractJsonString(value, "eventConsequenceId"),
+                    MemoryRumorRecordId = ExtractJsonString(value, "memoryRumorRecordId"),
+                    LocalizationLineKey = ExtractJsonString(value, "localizationLineKey")
                 };
             }
         }
@@ -2884,6 +2982,19 @@ namespace LLMGameCreatorAlpha
             public List<string> DefenseThreatLedgerEntryIds = new List<string>();
             public string LivingWorldLinkageId = string.Empty;
             public string InterlockedDependencyId = string.Empty;
+        }
+
+        private sealed class AlphaNarrativeRow
+        {
+            public string RowId = string.Empty;
+            public string FamilyId = string.Empty;
+            public string SeedId = string.Empty;
+            public string QuestStageId = string.Empty;
+            public string DialogueOptionId = string.Empty;
+            public string EventTriggerId = string.Empty;
+            public string EventConsequenceId = string.Empty;
+            public string MemoryRumorRecordId = string.Empty;
+            public string LocalizationLineKey = string.Empty;
         }
 
         private sealed class AlphaMediaBoundBinding

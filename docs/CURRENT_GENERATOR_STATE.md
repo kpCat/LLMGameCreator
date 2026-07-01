@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 066 produced for review
+Updated by: Goal 067 produced for review
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -271,6 +271,35 @@ allSettlementMarkersMatched=true
 reportHash=0d3c3a2f9c579dae1196a29a1cfb1318ba17149ee9fe3a916dab6ee09f5665a9
 ```
 
+Goal 066 handoff acceptance recorded before Goal 067:
+
+```text
+settlement_construction_destruction_production_matrix_verification passed before Goal 067
+```
+
+Goal 067 produced for review:
+
+```text
+programmatic_narrative_quest_dialogue_event_matrix_verification required
+```
+
+Goal 067 implementation status:
+
+```text
+implementationStatus=GREEN
+accepted=false
+manualGate=programmatic_narrative_quest_dialogue_event_matrix_verification
+unityExitCode=0
+playerExitCode=0
+rowCount=9
+stateChangingRowCount=9
+saveLoadReplayPassed=true
+meaningfulVariancePassed=true
+allNarrativeMarkersMatched=true
+noFinalProseLeakage=true
+reportHash=d6ff0d5f78607ce3e7235aaba086fb9e174987cfef6e9a153d1dc8d7f3eef6bc
+```
+
 ## Current Phase
 
 M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants. Goal 002 manual configurable verification is recorded as passed based on the user's report before Goal 003. Goal 003 adds automated scenario acceptance and a declaration-only extension rule pack spine, proves a data-only inventory objective/reward variation, rejects invalid extension declarations, and stops at manual extension spine verification. Product Slice 048 consolidates the post-Goal-003 strategy documents and links them from the current handoff without starting a new feature goal. Goal 004 records the user's manual extension spine verification as passed, adds compact agent context budget policy, and proves quest/dialog/interaction family variation through data/rule-pack declarations and deterministic headless acceptance. Manual Goal 004 quest/dialog/interaction family verification is recorded as passed based on the user's artifact-review report before Goal 005. Goal 005 completes S054-S058 by defining `semantic_pack_contract_v1`, compiling layered semantic packs with `project > genre > core` precedence, quarantining imported/LLM candidates, adding compact reference packs, and proving semantic-guided quest/dialogue/interaction composition through deterministic headless acceptance artifacts. Product Slice 058A repairs semantic-guided acceptance correctness gaps found during external review. The user then confirmed `semantic_guided_composition_artifact_verification passed`, allowing Goal 006. Goal 006 completes S059-S063 by carrying selected semantic declarations into deterministic composition plans, materializing selected quest/dialogue/interaction content into validator-clean packages, executing those selected package ids headlessly through runtime-owned state, proving replay-save-load-isolation, and stopping at `semantic_selected_runtime_composition_artifact_verification`. Product Slice 063A repairs Goal 006 correctness gaps found during external review: suffixless placeholder bindings are rejected, every objective-required interaction is materialized, package bindings are audited before runtime, adapter evidence is structurally validated, reward/completion deltas are required, and isolation checks prove more than distinct hashes. The user then confirmed `semantic_selected_runtime_composition_artifact_verification passed`, allowing Goal 007. Goal 007 completes S064-S070 by proving bounded connected regions, exact region-to-map bindings, deterministic runtime-owned travel state, save/load restoration, bounded chunk evidence and invalid scenario rejection, and stops at `connected_world_travel_state_artifact_verification`.
@@ -357,7 +386,9 @@ Goal 055 records the accepted Goal 054 gate from the user handoff, adds a BCL-on
 
 Goal 056 records the accepted Goal 055 gate from the user handoff, adds a BCL-only Application-layer Unity Alpha media-bound playable package seam under `Design/UnityAlphaMediaBoundPlayablePackage`, and consumes Goal 055 staged media, Goal 054 physical PNG/WAV/bundle fixtures and Goal 047 family refs as compact source facts. It builds Unity `StreamingAssets` staging, source/staging manifests, family panel models, Unity load contract/proof, smoke-log summary, preview/export payloads, hash inventory, invalid matrix and compact report under `.llmgc/procedural/goal-056-unity-alpha-media-bound-playable-package/`. The repo-local Unity Alpha player is narrowly extended to load the media-bound manifest from `Application.streamingAssetsPath`, validate hashes, prove PNG/WAV/bundle paths and emit family panel markers for `map_panel_rpg`, `survival_sandbox` and `first_person_grid_dungeon`. Goal 056 avoids provider/network/LLM/RAG/Lua execution and Runtime/UI/GamePackage schema/generator-library changes, and stops at `unity_alpha_media_bound_playable_package_verification required`.
 
-Goal 066 records the accepted Goal 065 gate from the user handoff, adds a BCL-only Application-layer settlement construction/destruction/production matrix under `Design/SettlementConstructionDestructionProductionMatrix`, and consumes Goal 060/061/062/063/064/065 evidence as source facts. It writes compact evidence under `.llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/`, proves 9/9 family/seed settlement rows with construction, production, damage/destruction, repair/upgrade/defense, NPC/faction linkage, interlocked dependency, save/load/replay, meaningful variance and Unity Alpha settlement markers, and keeps `settlement_construction_destruction_production_matrix_verification required` with `accepted=false` until user review.
+Goal 066 records the accepted Goal 065 gate from the user handoff, adds a BCL-only Application-layer settlement construction/destruction/production matrix under `Design/SettlementConstructionDestructionProductionMatrix`, and consumes Goal 060/061/062/063/064/065 evidence as source facts. It writes compact evidence under `.llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/`, proves 9/9 family/seed settlement rows with construction, production, damage/destruction, repair/upgrade/defense, NPC/faction linkage, interlocked dependency, save/load/replay, meaningful variance and Unity Alpha settlement markers. The Goal 067 handoff accepted `settlement_construction_destruction_production_matrix_verification passed before Goal 067`.
+
+Goal 067 records the accepted Goal 066 gate from the user handoff, adds a BCL-only Application-layer programmatic narrative quest/dialogue/event matrix under `Design/ProgrammaticNarrativeQuestDialogueEventMatrix`, and consumes Goal 060/061/062/063/064/065/066 evidence as source facts. It writes compact evidence under `.llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/`, proves 9/9 family/seed narrative rows with quest stages, dialogue option selection, event trigger/consequence application, memory/rumor propagation, localization-key/template binding, save/load/replay, meaningful variance and Unity Alpha narrative markers, and keeps `programmatic_narrative_quest_dialogue_event_matrix_verification required` with `accepted=false` until user review.
 
 The active product direction remains the generated playable/simulatable procedural generator loop. Slice 029 proved the first runtime-facing generated plan; Slice 030 produced validated runtime-facing rules for that plan; Slice 031 proved the plan and rules can produce visible state transitions in an Application-layer simulation; Slice 032 proves the generated sidecars can cross into existing `GamePackage` contracts with validation and bootstrap evidence; Slice 033 proves the generated package can be projected for a visible preview and smoke-started through the existing headless runtime path.
 

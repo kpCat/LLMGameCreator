@@ -35,7 +35,8 @@
     ".llmgc/procedural/goal-063-gameplay-consequence-depth-matrix/",
     ".llmgc/procedural/goal-064-living-world-npc-faction-simulation-matrix/",
     ".llmgc/procedural/goal-065-interlocked-gameplay-systems-depth-matrix/",
-    ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/"
+    ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/",
+    ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -452,6 +453,27 @@
         ".llmgc/procedural/goal-066-settlement-construction-destruction-production-matrix/",
         "src/LLMGameCreator.Application/Design/SettlementConstructionDestructionProductionMatrix/",
         "tests/LLMGameCreator.Tests/Application/SettlementConstructionDestructionProductionMatrix/"
+      ]
+    },
+    {
+      "scenario": "goal-067-programmatic-narrative-quest-dialogue-event-matrix",
+      "allowedPaths": [
+        "docs/GOAL_067_PROGRAMMATIC_NARRATIVE_QUEST_DIALOGUE_EVENT_MATRIX_SPEC.md",
+        "docs/EXTERNAL_SCOUTING_GOAL_067_PROGRAMMATIC_NARRATIVE_QUEST_DIALOGUE_EVENT_MATRIX.md",
+        "docs/agent-tasks/GOAL_067_PROGRAMMATIC_NARRATIVE_QUEST_DIALOGUE_EVENT_MATRIX.md",
+        "docs/agent-tasks/GOAL_067_LAUNCHER.txt",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/ProgrammaticNarrativeQuestDialogueEventMatrixProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-067-programmatic-narrative-quest-dialogue-event-matrix/",
+        "src/LLMGameCreator.Application/Design/ProgrammaticNarrativeQuestDialogueEventMatrix/",
+        "tests/LLMGameCreator.Tests/Application/ProgrammaticNarrativeQuestDialogueEventMatrix/"
       ]
     }
   ]
