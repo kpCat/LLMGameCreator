@@ -8,6 +8,7 @@ using LLMGameCreator.Application.Design.EditDrivenReviewPackagePlayableSession;
 using LLMGameCreator.Application.Design.EditDrivenSpineQualityConsolidation;
 using LLMGameCreator.Application.Design.EditDrivenGamePackageRuntimePreviewBridge;
 using LLMGameCreator.Application.Design.EditDrivenGamePackageRuntimePreviewPlaythrough;
+using LLMGameCreator.Application.Design.EditDrivenUnityAlphaStreamingAssetsHandoff;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
@@ -100,6 +101,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<EditDrivenSpineQualityConsolidationEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenGamePackageRuntimePreviewBridgeEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService>(Reuse.Singleton);
+        _container.Register<EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -313,7 +315,8 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<EditDrivenReviewPackagePlayableSessionEvidenceService>(),
                 resolver.Resolve<EditDrivenSpineQualityConsolidationEvidenceService>(),
                 resolver.Resolve<EditDrivenGamePackageRuntimePreviewBridgeEvidenceService>(),
-                resolver.Resolve<EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService>()), Reuse.Singleton);
+                resolver.Resolve<EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService>(),
+                resolver.Resolve<EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "edit_driven_unity_alpha_playthrough_command_index_v1",
+  "goalId": "goal_082_edit_driven_unity_alpha_streamingassets_handoff",
+  "sourceGoal": "Goal081",
+  "commandScriptHash": "74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf",
+  "rowCount": 9,
+  "targetCount": 18,
+  "goal078ActionCount": 57,
+  "commandCount": 124,
+  "commandTypeCounts": [
+    {
+      "commandType": "assert_final_coverage",
+      "count": 1
+    },
+    {
+      "commandType": "collect_projected_target",
+      "count": 18
+    },
+    {
+      "commandType": "complete_scenario",
+      "count": 9
+    },
+    {
+      "commandType": "cover_goal078_actions",
+      "count": 18
+    },
+    {
+      "commandType": "enter_scenario",
+      "count": 9
+    },
+    {
+      "commandType": "inspect_linked_dialogue",
+      "count": 9
+    },
+    {
+      "commandType": "inspect_linked_mechanic",
+      "count": 18
+    },
+    {
+      "commandType": "inspect_linked_npc",
+      "count": 9
+    },
+    {
+      "commandType": "inspect_linked_quest",
+      "count": 9
+    },
+    {
+      "commandType": "inspect_projected_target",
+      "count": 18
+    },
+    {
+      "commandType": "inspect_runtime_preview_map",
+      "count": 1
+    },
+    {
+      "commandType": "inspect_runtime_preview_region",
+      "count": 3
+    },
+    {
+      "commandType": "load_package",
+      "count": 1
+    },
+    {
+      "commandType": "start_at_map",
+      "count": 1
+    }
+  ]
+}

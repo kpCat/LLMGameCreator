@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_unity_alpha_streamingassets_handoff_expected_hashes_v1",
+  "goalId": "goal_082_edit_driven_unity_alpha_streamingassets_handoff",
+  "projectedPackageHash": "d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648",
+  "goal080ReportHash": "a15fc65533512fc49d66e60207fffbd7f2992d322aeb5969b2e5c070635ad4f4",
+  "goal080RuntimePreviewBridgeProofHash": "1287782882f1050a7c622b913e498a45afdb9a9b2190e036deb212b0b9b60d2b",
+  "goal081PackageReadProofHash": "eb18a6bb1f4f4941edab047b47700c662ac3404d5b1e81c9f10c2c4f12d9c2f6",
+  "goal081CommandScriptHash": "74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf",
+  "goal081TranscriptHash": "a4141e577243c51ca81a368626d9592a88cd245407357282603bf44efd380dff",
+  "goal081StateHashChainHash": "fa9676a11612ccde02bb37bc433af75054399c721d8e53e17acaff702feca9bf",
+  "goal081CoverageLedgerHash": "173873e79edceea93efbe7ea8871497ee0caaf0a503cd8586c52a782a7149b5f",
+  "goal081NegativeProofHash": "f5f9c24342617a25d4ded4ae3808dd2093e71e94c430c4ef16463f79fc6c4d26",
+  "projectedPackageIndexPayloadHash": "6b40be43b7a485ffec92f366c681f04b496892178a709b648e515f45c65da0e9",
+  "playthroughCommandIndexPayloadHash": "950a46cd15ea9461b73e052615768e817833044a5073a04a5ff57602b563c71c",
+  "playthroughTranscriptIndexPayloadHash": "a8fc246e2feebdf656f671706c373101fb533429e64ed086853399534165d667",
+  "rowCount": 9,
+  "targetCount": 18,
+  "goal078ActionCount": 57,
+  "commandCount": 124,
+  "finalCoverageStateHash": "173873e79edceea93efbe7ea8871497ee0caaf0a503cd8586c52a782a7149b5f",
+  "replayFinalStateHash": "f24dad3dd589c6b66a458f2d82fd0e375466a4d8aac86f128e819c01107061f6"
+}

@@ -170,6 +170,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-079a-source-format-line-ending-guard/GOAL.md` | Goal 079A hotfix task: strengthen the Goal 079 source-health scanner with raw-byte LF/CR metrics and final stop at `source_format_line_ending_guard_verification`, while keeping Goal 079 accepted=false. |
 | `docs/agent-tasks/goal-080-edit-driven-gamepackage-runtime-preview-bridge/GOAL.md` | Goal 080 task: consume real Goal 077/078/079/079A edit-driven artifacts into a disk-backed projected public GamePackage, runtime-preview bridge proof, negative proof, bounded WinForms Runtime Bridge tab and final stop at `edit_driven_gamepackage_runtime_preview_bridge_verification`. |
 | `docs/agent-tasks/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/GOAL.md` | Goal 081 task: consume real Goal 080 projected GamePackage and bridge artifacts into a deterministic runtime-preview playthrough command script, replay transcript, state-hash chain, negative proof, bounded WinForms Preview Playthrough tab and final stop at `edit_driven_gamepackage_runtime_preview_playthrough_verification`. |
+| `docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/GOAL.md` | Goal 082 task: consume real Goal 080 projected GamePackage and Goal 081 runtime-preview playthrough artifacts into a compact Unity Alpha StreamingAssets handoff, independent Unity probe script, mirrored payload validation, bounded WinForms Unity Handoff tab and final stop at `edit_driven_unity_alpha_streamingassets_handoff_verification`. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -214,7 +215,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-edit_driven_gamepackage_runtime_preview_playthrough_verification
+edit_driven_unity_alpha_streamingassets_handoff_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -369,6 +370,18 @@ solution and project files unchanged. Report hash:
 `1d46aa15e9f22f57df316d5197ad40866e269334201f3508961a8753c2f9c401`; command script hash:
 `74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf`.
 
+Goal 081 is accepted by Goal 082 handoff:
+`edit_driven_gamepackage_runtime_preview_playthrough_verification passed before Goal 082`.
+
+Goal 082 is produced for review with `edit_driven_unity_alpha_streamingassets_handoff_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, 9 rows, 18 targets, 57 actions, 124 commands and 6 mirrored
+StreamingAssets payload files. It consumes the real Goal 080 projected GamePackage and Goal 081 playthrough
+artifacts, mirrors a compact payload into `unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/`,
+validates exact mirrored reads and negative tamper/missing/fake-success cases, adds one independent Unity probe script
+without touching `AlphaRuntimeBootstrap.cs`, and binds a bounded WinForms Unity Handoff tab. Handoff manifest hash:
+`dad4647281bb60a2e95b9095a5764127c27bc290ba4c0d11fdcfa1b2b3a45156`; probe read proof hash:
+`18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16`.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -410,7 +423,8 @@ Allowed next sequence:
 37. Record Goal 079 quality consolidation as accepted for continuation before Goal 080 without rewriting the Goal 079 artifact accepted=false evidence.
 38. Record Goal 079A source-format guard as passed before Goal 080 without rewriting historical Goal 079A artifacts.
 39. Record Goal 080 runtime-preview bridge as passed before Goal 081 without rewriting the Goal 080 artifact accepted=false evidence.
-40. Review Goal 081 `edit_driven_gamepackage_runtime_preview_playthrough_verification`; do not mark it passed until explicit user acceptance and do not start the next goal from this implementation handoff.
+40. Record Goal 081 runtime-preview playthrough as passed before Goal 082 without rewriting the Goal 081 artifact accepted=false evidence.
+41. Review Goal 082 `edit_driven_unity_alpha_streamingassets_handoff_verification`; do not mark it passed until explicit user acceptance and do not start the next goal from this implementation handoff.
 
 Kill criterion:
 

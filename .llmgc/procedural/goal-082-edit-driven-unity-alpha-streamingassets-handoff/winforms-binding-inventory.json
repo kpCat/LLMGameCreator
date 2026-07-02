@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "edit_driven_unity_alpha_streamingassets_handoff_winforms_binding_inventory_v1",
+  "passed": true,
+  "parentPageHandoffTabDeclared": true,
+  "parentPageHandoffServiceLoaded": true,
+  "parentPageHandoffControlBound": true,
+  "parentPageActivationBindsGoal082Data": true,
+  "groups": [
+    {
+      "groupId": "goal082_unity_alpha_streamingassets_handoff_tab",
+      "controlName": "CampaignUnityAlphaStreamingAssetsHandoffControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignUnityAlphaStreamingAssetsHandoffControl.cs",
+      "separateUserControl": true,
+      "bindsGoal082Data": true
+    }
+  ],
+  "diagnostics": []
+}

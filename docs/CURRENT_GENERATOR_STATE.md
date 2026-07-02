@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 081 edit-driven GamePackage runtime preview playthrough production
+Updated by: Goal 082 edit-driven Unity Alpha StreamingAssets handoff production
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -655,6 +655,43 @@ reportHash=1d46aa15e9f22f57df316d5197ad40866e269334201f3508961a8753c2f9c401
 
 Goal 081 consumes the real Goal 080 projected GamePackage, player-readable bridge index, source-targets, bridge proof, negative proof, quality scan and Goal 078 action/replay proof into a deterministic runtime-preview playthrough proof under `.llmgc/procedural/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/`. It reloads `projected-gamepackage/package.json` from disk, validates it through existing package/runtime-preview services, builds a deterministic player command script, replays the script into transcript/state-hash-chain evidence, proves coverage for all 18 Goal 077 targets and 57 Goal 078 actions, rejects missing/tampered/nonexistent-target/replay-order/fake-read/lineage scenarios and binds a separate Goal 081 Preview Playthrough tab in the Campaign Authoring Review Workspace. Goal 081 remains `accepted=false` and the manual gate is not marked passed.
 
+Goal 081 handoff acceptance recorded before Goal 082:
+
+```text
+edit_driven_gamepackage_runtime_preview_playthrough_verification passed before Goal 082
+```
+
+Goal 082 produced for review:
+
+```text
+edit_driven_unity_alpha_streamingassets_handoff_verification required
+```
+
+Goal 082 implementation status:
+
+```text
+implementationStatus=GREEN
+accepted=false
+streamingAssetsRelativeRoot=LLMGameCreator/EditDrivenGoal082
+payloadFileCount=6
+rowCount=9
+targetCount=18
+actionCount=57
+commandCount=124
+projectedPackageHash=d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648
+commandScriptHash=74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf
+transcriptHash=a4141e577243c51ca81a368626d9592a88cd245407357282603bf44efd380dff
+stateHashChainHash=fa9676a11612ccde02bb37bc433af75054399c721d8e53e17acaff702feca9bf
+handoffManifestHash=dad4647281bb60a2e95b9095a5764127c27bc290ba4c0d11fdcfa1b2b3a45156
+fileLedgerHash=a5a4728b92f17f622011230bfa522e50bbe7caaa9befc4120f5ca5f3050498ab
+probeReadProofHash=18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16
+negativeProofHash=cc6597b4368af6afa4548658676fd34525ec8843152c3315606d558910338965
+qualityGateScanHash=03bda9d8ed000af41228178b0345d5cd17380a316fd49ca7b4fddc40a5849c3b
+deterministicHash=e377f009ef814fd440aafe4e28fac54c6d51d7b8def23c62b869da9ced0d3630
+```
+
+Goal 082 consumes the real Goal 080 projected GamePackage and Goal 081 runtime-preview playthrough artifacts into a bounded Unity Alpha StreamingAssets handoff under `.llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/`, mirrors the compact player-facing payload into `unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/`, validates the exact mirrored files through an Application-side Unity probe simulation, rejects missing/tampered/fake-success cases, adds one independent `EditDrivenGamePackageHandoffProbe.cs` script without touching `AlphaRuntimeBootstrap.cs`, and binds a separate Goal 082 Unity Handoff tab in the Campaign Authoring Review Workspace. Goal 082 remains `accepted=false` and the manual gate is not marked passed.
+
 ## Current Phase
 
 M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants. Goal 002 manual configurable verification is recorded as passed based on the user's report before Goal 003. Goal 003 adds automated scenario acceptance and a declaration-only extension rule pack spine, proves a data-only inventory objective/reward variation, rejects invalid extension declarations, and stops at manual extension spine verification. Product Slice 048 consolidates the post-Goal-003 strategy documents and links them from the current handoff without starting a new feature goal. Goal 004 records the user's manual extension spine verification as passed, adds compact agent context budget policy, and proves quest/dialog/interaction family variation through data/rule-pack declarations and deterministic headless acceptance. Manual Goal 004 quest/dialog/interaction family verification is recorded as passed based on the user's artifact-review report before Goal 005. Goal 005 completes S054-S058 by defining `semantic_pack_contract_v1`, compiling layered semantic packs with `project > genre > core` precedence, quarantining imported/LLM candidates, adding compact reference packs, and proving semantic-guided quest/dialogue/interaction composition through deterministic headless acceptance artifacts. Product Slice 058A repairs semantic-guided acceptance correctness gaps found during external review. The user then confirmed `semantic_guided_composition_artifact_verification passed`, allowing Goal 006. Goal 006 completes S059-S063 by carrying selected semantic declarations into deterministic composition plans, materializing selected quest/dialogue/interaction content into validator-clean packages, executing those selected package ids headlessly through runtime-owned state, proving replay-save-load-isolation, and stopping at `semantic_selected_runtime_composition_artifact_verification`. Product Slice 063A repairs Goal 006 correctness gaps found during external review: suffixless placeholder bindings are rejected, every objective-required interaction is materialized, package bindings are audited before runtime, adapter evidence is structurally validated, reward/completion deltas are required, and isolation checks prove more than distinct hashes. The user then confirmed `semantic_selected_runtime_composition_artifact_verification passed`, allowing Goal 007. Goal 007 completes S064-S070 by proving bounded connected regions, exact region-to-map bindings, deterministic runtime-owned travel state, save/load restoration, bounded chunk evidence and invalid scenario rejection, and stops at `connected_world_travel_state_artifact_verification`.
@@ -821,7 +858,8 @@ Allowed next sequence:
 37. Record Goal 079 quality consolidation as accepted for continuation before Goal 080 without rewriting the Goal 079 artifact accepted=false evidence.
 38. Record Goal 079A source-format guard as passed before Goal 080 without rewriting historical Goal 079A artifacts.
 39. Record Goal 080 runtime-preview bridge as passed before Goal 081 without rewriting the Goal 080 artifact accepted=false evidence.
-40. Review Goal 081 `edit_driven_gamepackage_runtime_preview_playthrough_verification`; do not mark it passed until explicit user acceptance and do not start the next goal from this implementation handoff.
+40. Record Goal 081 runtime-preview playthrough as passed before Goal 082 without rewriting the Goal 081 artifact accepted=false evidence.
+41. Review Goal 082 `edit_driven_unity_alpha_streamingassets_handoff_verification`; do not mark it passed until explicit user acceptance and do not start the next goal from this implementation handoff.
 
 Kill criterion:
 
@@ -919,10 +957,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-edit_driven_gamepackage_runtime_preview_playthrough_verification
+edit_driven_unity_alpha_streamingassets_handoff_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goals 035-071 are recorded as accepted by their respective user decisions or downstream handoffs. Goal 072 remains historical produced-for-review evidence with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker without marking Goal 072 passed. Goal 073 is accepted by the Goal 074 user handoff, Goal 074 is accepted by the Goal 075 user handoff, Goal 075 is accepted by the Goal 076 user handoff, Goal 076 is accepted by the Goal 077 user handoff, Goal 077 is accepted by the Goal 078 user handoff, and Goal 078 is accepted by the Goal 079 user handoff. Goal 079 is accepted for continuation before Goal 080 after the Goal 079A source-format hotfix, without rewriting its artifact accepted=false evidence. Goal 079A `source_format_line_ending_guard_verification` is recorded as passed before Goal 080. Goal 080 `edit_driven_gamepackage_runtime_preview_bridge_verification` is recorded as passed before Goal 081 without rewriting Goal 080 artifact accepted=false evidence. Goal 081 is produced for review with `edit_driven_gamepackage_runtime_preview_playthrough_verification required`, `accepted=false`, `implementationStatus=GREEN`, 9 rows, 18 targets, 57 actions and a disk-backed runtime-preview playthrough proof.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goals 035-071 are recorded as accepted by their respective user decisions or downstream handoffs. Goal 072 remains historical produced-for-review evidence with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker without marking Goal 072 passed. Goal 073 is accepted by the Goal 074 user handoff, Goal 074 is accepted by the Goal 075 user handoff, Goal 075 is accepted by the Goal 076 user handoff, Goal 076 is accepted by the Goal 077 user handoff, Goal 077 is accepted by the Goal 078 user handoff, and Goal 078 is accepted by the Goal 079 user handoff. Goal 079 is accepted for continuation before Goal 080 after the Goal 079A source-format hotfix, without rewriting its artifact accepted=false evidence. Goal 079A `source_format_line_ending_guard_verification` is recorded as passed before Goal 080. Goal 080 `edit_driven_gamepackage_runtime_preview_bridge_verification` is recorded as passed before Goal 081 without rewriting Goal 080 artifact accepted=false evidence. Goal 081 `edit_driven_gamepackage_runtime_preview_playthrough_verification` is recorded as passed before Goal 082 without rewriting Goal 081 artifact accepted=false evidence. Goal 082 is produced for review with `edit_driven_unity_alpha_streamingassets_handoff_verification required`, `accepted=false`, `implementationStatus=GREEN`, 9 rows, 18 targets, 57 actions, 124 commands and a disk-backed Unity Alpha StreamingAssets handoff.
 
 Goal 037 accepted by user handoff:
 
@@ -2223,25 +2261,27 @@ The pivot is not a restart. It changes what future slices are allowed to optimiz
 3. `docs/CURRENT_GENERATOR_STATE.md`
 4. `docs/agent-tasks/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/GOAL.md`
 5. `docs/agent-tasks/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/read-first.md`
-6. `docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md`
-7. `docs/EXTERNAL_SCOUTING_GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md`
-8. `docs/agent-tasks/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md`
-9. `docs/agent-tasks/GOAL_075_LAUNCHER.txt`
-10. `docs/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE_SPEC.md`
-11. `docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
-12. `docs/agent-tasks/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
-13. `docs/agent-tasks/GOAL_074_LAUNCHER.txt`
-14. `docs/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR_SPEC.md`
-15. `docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
-16. `docs/agent-tasks/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
-17. `docs/agent-tasks/GOAL_073_LAUNCHER.txt`
-18. `docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md`
-19. `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
-20. `docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
-21. `docs/agent-tasks/GOAL_072_LAUNCHER.txt`
-22. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
-23. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
-24. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
+6. `docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/GOAL.md`
+7. `docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/read-first.md`
+8. `docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md`
+9. `docs/EXTERNAL_SCOUTING_GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md`
+10. `docs/agent-tasks/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md`
+11. `docs/agent-tasks/GOAL_075_LAUNCHER.txt`
+12. `docs/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE_SPEC.md`
+13. `docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
+14. `docs/agent-tasks/GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md`
+15. `docs/agent-tasks/GOAL_074_LAUNCHER.txt`
+16. `docs/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR_SPEC.md`
+17. `docs/EXTERNAL_SCOUTING_GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
+18. `docs/agent-tasks/GOAL_073_SOURCE_FORMAT_P0_READABILITY_REPAIR.md`
+19. `docs/agent-tasks/GOAL_073_LAUNCHER.txt`
+20. `docs/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION_SPEC.md`
+21. `docs/EXTERNAL_SCOUTING_GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+22. `docs/agent-tasks/GOAL_072_GENERATOR_SPINE_QUALITY_CONSOLIDATION.md`
+23. `docs/agent-tasks/GOAL_072_LAUNCHER.txt`
+24. `docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md`
+25. `docs/FULL_GAME_GENERATION_MASTER_PLAN.md`
+26. `docs/GAME_SYSTEM_VARIANT_TAXONOMY.md`
 
 Do not read old root `README_APPLY_*` files or old `docs/agent-tasks/NEXT_PRODUCT_SLICE/*_CODEX_PROMPT.md` files as current planning authority.
 

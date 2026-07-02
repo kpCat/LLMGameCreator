@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "edit_driven_unity_alpha_streamingassets_negative_proof_v1",
+  "passed": true,
+  "scenarioCount": 6,
+  "scenarios": [
+    {
+      "scenarioId": "fake_success_without_payload_read",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_read_required",
+          "target": "StreamingAssets",
+          "message": "Unity handoff proof must read the mirrored StreamingAssets payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_command_index",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal082.probe.command_hash_mismatch",
+          "target": "playthrough-command-index.json",
+          "message": "Command script hash does not match Goal081 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.count_mismatch",
+          "target": "handoff-manifest.json",
+          "message": "Row, target, action, or command counts do not match Goal080/Goal081 evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_file_missing",
+          "target": "playthrough-command-index.json",
+          "message": "Required Unity StreamingAssets payload file was not read."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_hash_mismatch",
+          "target": "expected-hashes.json",
+          "message": "Mirrored payload hashes do not match expected-hashes.json."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_expected_hashes",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal082.probe.command_hash_mismatch",
+          "target": "playthrough-command-index.json",
+          "message": "Command script hash does not match Goal081 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.count_mismatch",
+          "target": "handoff-manifest.json",
+          "message": "Row, target, action, or command counts do not match Goal080/Goal081 evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.package_hash_mismatch",
+          "target": "projected-package-index.json",
+          "message": "Projected package hash does not match Goal080 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_file_missing",
+          "target": "expected-hashes.json",
+          "message": "Required Unity StreamingAssets payload file was not read."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_hash_mismatch",
+          "target": "expected-hashes.json",
+          "message": "Mirrored payload hashes do not match expected-hashes.json."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.state_hash_mismatch",
+          "target": "playthrough-transcript-index.json",
+          "message": "State hash chain values do not match Goal081 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.transcript_hash_mismatch",
+          "target": "playthrough-transcript-index.json",
+          "message": "Transcript hash does not match Goal081 source evidence."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_handoff_manifest",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal082.probe.count_mismatch",
+          "target": "handoff-manifest.json",
+          "message": "Row, target, action, or command counts do not match Goal080/Goal081 evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.package_hash_mismatch",
+          "target": "projected-package-index.json",
+          "message": "Projected package hash does not match Goal080 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_file_missing",
+          "target": "handoff-manifest.json",
+          "message": "Required Unity StreamingAssets payload file was not read."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_hash_mismatch",
+          "target": "expected-hashes.json",
+          "message": "Mirrored payload hashes do not match expected-hashes.json."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_expected_hashes",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal082.probe.command_hash_mismatch",
+          "target": "playthrough-command-index.json",
+          "message": "Command script hash does not match Goal081 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_hash_mismatch",
+          "target": "expected-hashes.json",
+          "message": "Mirrored payload hashes do not match expected-hashes.json."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_projected_package_index",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal082.probe.package_hash_mismatch",
+          "target": "projected-package-index.json",
+          "message": "Projected package hash does not match Goal080 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal082.probe.payload_hash_mismatch",
+          "target": "expected-hashes.json",
+          "message": "Mirrored payload hashes do not match expected-hashes.json."
+        }
+      ]
+    }
+  ]
+}

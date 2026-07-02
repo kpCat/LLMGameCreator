@@ -24,6 +24,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _spineQualityTabPage;
         private TabPage _runtimePreviewBridgeTabPage;
         private TabPage _runtimePreviewPlaythroughTabPage;
+        private TabPage _unityAlphaStreamingAssetsHandoffTabPage;
         private CampaignRowSelectorControl _rowSelectorControl;
         private CampaignSchemaGroupControl _schemaGroupControl;
         private CampaignDiagnosticsControl _diagnosticsControl;
@@ -37,6 +38,7 @@ namespace LLMGameCreator.WinForms.Pages
         private CampaignEditDrivenSpineQualityControl _spineQualityControl;
         private CampaignGamePackageRuntimePreviewBridgeControl _runtimePreviewBridgeControl;
         private CampaignGamePackageRuntimePreviewPlaythroughControl _runtimePreviewPlaythroughControl;
+        private CampaignUnityAlphaStreamingAssetsHandoffControl _unityAlphaStreamingAssetsHandoffControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -66,6 +68,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._spineQualityTabPage = new TabPage();
             this._runtimePreviewBridgeTabPage = new TabPage();
             this._runtimePreviewPlaythroughTabPage = new TabPage();
+            this._unityAlphaStreamingAssetsHandoffTabPage = new TabPage();
             this._rowSelectorControl = new CampaignRowSelectorControl();
             this._schemaGroupControl = new CampaignSchemaGroupControl();
             this._diagnosticsControl = new CampaignDiagnosticsControl();
@@ -79,6 +82,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._spineQualityControl = new CampaignEditDrivenSpineQualityControl();
             this._runtimePreviewBridgeControl = new CampaignGamePackageRuntimePreviewBridgeControl();
             this._runtimePreviewPlaythroughControl = new CampaignGamePackageRuntimePreviewPlaythroughControl();
+            this._unityAlphaStreamingAssetsHandoffControl = new CampaignUnityAlphaStreamingAssetsHandoffControl();
             this._tabs.SuspendLayout();
             this._rowsTabPage.SuspendLayout();
             this._schemaTabPage.SuspendLayout();
@@ -93,6 +97,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._spineQualityTabPage.SuspendLayout();
             this._runtimePreviewBridgeTabPage.SuspendLayout();
             this._runtimePreviewPlaythroughTabPage.SuspendLayout();
+            this._unityAlphaStreamingAssetsHandoffTabPage.SuspendLayout();
             this.SuspendLayout();
             //
             // _statusLabel
@@ -120,6 +125,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._spineQualityTabPage);
             this._tabs.Controls.Add(this._runtimePreviewBridgeTabPage);
             this._tabs.Controls.Add(this._runtimePreviewPlaythroughTabPage);
+            this._tabs.Controls.Add(this._unityAlphaStreamingAssetsHandoffTabPage);
             this._tabs.Dock = DockStyle.Fill;
             this._tabs.Location = new Point(0, 34);
             this._tabs.Name = "_tabs";
@@ -259,6 +265,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._runtimePreviewPlaythroughTabPage.Text = "Preview Playthrough";
             this._runtimePreviewPlaythroughTabPage.UseVisualStyleBackColor = true;
             //
+            // _unityAlphaStreamingAssetsHandoffTabPage
+            //
+            this._unityAlphaStreamingAssetsHandoffTabPage.Controls.Add(this._unityAlphaStreamingAssetsHandoffControl);
+            this._unityAlphaStreamingAssetsHandoffTabPage.Location = new Point(4, 24);
+            this._unityAlphaStreamingAssetsHandoffTabPage.Name = "_unityAlphaStreamingAssetsHandoffTabPage";
+            this._unityAlphaStreamingAssetsHandoffTabPage.Size = new Size(1092, 658);
+            this._unityAlphaStreamingAssetsHandoffTabPage.TabIndex = 13;
+            this._unityAlphaStreamingAssetsHandoffTabPage.Text = "Unity Handoff";
+            this._unityAlphaStreamingAssetsHandoffTabPage.UseVisualStyleBackColor = true;
+            //
             // child controls
             //
             this._rowSelectorControl.Dock = DockStyle.Fill;
@@ -274,6 +290,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._spineQualityControl.Dock = DockStyle.Fill;
             this._runtimePreviewBridgeControl.Dock = DockStyle.Fill;
             this._runtimePreviewPlaythroughControl.Dock = DockStyle.Fill;
+            this._unityAlphaStreamingAssetsHandoffControl.Dock = DockStyle.Fill;
             //
             // CampaignAuthoringReviewWorkspacePageControl
             //
@@ -297,6 +314,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._spineQualityTabPage.ResumeLayout(false);
             this._runtimePreviewBridgeTabPage.ResumeLayout(false);
             this._runtimePreviewPlaythroughTabPage.ResumeLayout(false);
+            this._unityAlphaStreamingAssetsHandoffTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
         }
     }

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "edit_driven_unity_alpha_streamingassets_command_transcript_proof_v1",
+  "passed": true,
+  "commandScriptRead": true,
+  "transcriptRead": true,
+  "stateHashChainRead": true,
+  "coverageLedgerRead": true,
+  "commandCountMatchesTranscript": true,
+  "coverageCountsMatch": true,
+  "rowCount": 9,
+  "targetCount": 18,
+  "goal078ActionCount": 57,
+  "commandCount": 124,
+  "commandScriptHash": "74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf",
+  "transcriptHash": "a4141e577243c51ca81a368626d9592a88cd245407357282603bf44efd380dff",
+  "stateHashChainHash": "fa9676a11612ccde02bb37bc433af75054399c721d8e53e17acaff702feca9bf",
+  "coverageLedgerHash": "173873e79edceea93efbe7ea8871497ee0caaf0a503cd8586c52a782a7149b5f",
+  "finalCoverageStateHash": "173873e79edceea93efbe7ea8871497ee0caaf0a503cd8586c52a782a7149b5f",
+  "replayFinalStateHash": "f24dad3dd589c6b66a458f2d82fd0e375466a4d8aac86f128e819c01107061f6",
+  "diagnostics": []
+}

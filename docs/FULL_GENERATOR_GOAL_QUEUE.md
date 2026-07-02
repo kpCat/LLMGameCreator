@@ -60,6 +60,7 @@ edit_driven_review_package_playable_session_verification passed before Goal 079
 edit_driven_spine_quality_consolidation_verification accepted for continuation before Goal 080
 source_format_line_ending_guard_verification passed before Goal 080
 edit_driven_gamepackage_runtime_preview_bridge_verification passed before Goal 081
+edit_driven_gamepackage_runtime_preview_playthrough_verification passed before Goal 082
 ```
 
 Produced for review:
@@ -68,7 +69,7 @@ Produced for review:
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
 generator_spine_quality_consolidation_verification required
-edit_driven_gamepackage_runtime_preview_playthrough_verification required
+edit_driven_unity_alpha_streamingassets_handoff_verification required
 ```
 
 Current capabilities:
@@ -151,6 +152,7 @@ Current capabilities:
 - Goal 079A source format line ending guard strengthens the Goal 079 source-health scan with raw-byte LF/CR metrics, proves synthetic CR-only and zero-LF one-physical-line source rejection, and keeps Goal 079 accepted=false;
 - Goal 080 edit-driven GamePackage runtime preview bridge consumes Goal 077/078/079/079A artifacts into a disk-backed projected GamePackage, reads it back through existing validation/runtime-preview projection paths, proves 18 target and 57 action coverage, rejects missing/tampered/fake/lineage mismatches and binds a bounded WinForms Runtime Bridge tab;
 - Goal 081 edit-driven GamePackage runtime preview playthrough consumes Goal 080 projected GamePackage and bridge artifacts into a deterministic player command script, transcript, state-hash chain, coverage ledger, negative proof and bounded WinForms Preview Playthrough tab;
+- Goal 082 edit-driven Unity Alpha StreamingAssets handoff consumes Goal 080 projected GamePackage and Goal 081 playthrough artifacts into a compact mirrored StreamingAssets payload, independent Unity probe script, exact payload read/negative proof and bounded WinForms Unity Handoff tab;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
@@ -238,7 +240,19 @@ solution and project files unchanged. Report hash:
 `1d46aa15e9f22f57df316d5197ad40866e269334201f3508961a8753c2f9c401`; command script hash:
 `74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf`.
 
-Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 was accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 was accepted by the Goal 061 user handoff: `full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 was accepted by the Goal 062 user handoff: `full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 was accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 was accepted by the Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`. Goal 064 was accepted by the Goal 065 user handoff: `living_world_npc_faction_simulation_matrix_verification passed before Goal 065`. Goal 065 was accepted by the Goal 066 user handoff: `interlocked_gameplay_systems_depth_matrix_verification passed before Goal 066`. Goal 066 was accepted by the Goal 067 user handoff: `settlement_construction_destruction_production_matrix_verification passed before Goal 067`. Goal 067 was accepted by the Goal 068 user handoff: `programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068`. Goal 068 was accepted by the Goal 069 user handoff: `combat_magic_ability_boss_encounter_matrix_verification passed before Goal 069`. Goal 069 was accepted by the Goal 070 user handoff: `world_event_weather_daynight_crisis_matrix_verification passed before Goal 070`. Goal 070 was accepted by the Goal 071 user handoff: `integrated_campaign_timeline_simulation_matrix_verification passed before Goal 071`. Goal 071 was accepted by the Goal 072 user handoff: `unity_alpha_interactive_campaign_player_verification passed before Goal 072`. Goal 080 was accepted by the Goal 081 user handoff: `edit_driven_gamepackage_runtime_preview_bridge_verification passed before Goal 081`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
+Goal 081 is accepted by Goal 082 handoff:
+`edit_driven_gamepackage_runtime_preview_playthrough_verification passed before Goal 082`.
+
+Goal 082 is produced for review with `edit_driven_unity_alpha_streamingassets_handoff_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, 9 rows, 18 targets, 57 actions, 124 commands and 6 mirrored
+StreamingAssets payload files. It consumes the real Goal 080 projected GamePackage and Goal 081 playthrough artifacts,
+mirrors a compact payload into `unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/`,
+validates exact mirrored reads and negative tamper/missing/fake-success cases, adds one independent Unity probe script
+without touching `AlphaRuntimeBootstrap.cs`, and binds a bounded WinForms Unity Handoff tab. Handoff manifest hash:
+`dad4647281bb60a2e95b9095a5764127c27bc290ba4c0d11fdcfa1b2b3a45156`; probe read proof hash:
+`18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16`.
+
+Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 was accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 was accepted by the Goal 061 user handoff: `full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 was accepted by the Goal 062 user handoff: `full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 was accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 was accepted by the Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`. Goal 064 was accepted by the Goal 065 user handoff: `living_world_npc_faction_simulation_matrix_verification passed before Goal 065`. Goal 065 was accepted by the Goal 066 user handoff: `interlocked_gameplay_systems_depth_matrix_verification passed before Goal 066`. Goal 066 was accepted by the Goal 067 user handoff: `settlement_construction_destruction_production_matrix_verification passed before Goal 067`. Goal 067 was accepted by the Goal 068 user handoff: `programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068`. Goal 068 was accepted by the Goal 069 user handoff: `combat_magic_ability_boss_encounter_matrix_verification passed before Goal 069`. Goal 069 was accepted by the Goal 070 user handoff: `world_event_weather_daynight_crisis_matrix_verification passed before Goal 070`. Goal 070 was accepted by the Goal 071 user handoff: `integrated_campaign_timeline_simulation_matrix_verification passed before Goal 071`. Goal 071 was accepted by the Goal 072 user handoff: `unity_alpha_interactive_campaign_player_verification passed before Goal 072`. Goal 080 was accepted by the Goal 081 user handoff: `edit_driven_gamepackage_runtime_preview_bridge_verification passed before Goal 081`. Goal 081 was accepted by the Goal 082 user handoff: `edit_driven_gamepackage_runtime_preview_playthrough_verification passed before Goal 082`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
 
 Goal 031 compact evidence lives under `.llmgc/procedural/goal-031-semantic-pack-composition-blueprint/` and keeps `accepted=false` with `semantic_pack_composition_blueprint_verification required`.
 
@@ -1142,14 +1156,26 @@ Produced for review. The gate remains `edit_driven_gamepackage_runtime_preview_p
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, 9 rows, 18 targets, 57 Goal 078 actions, 124 commands and report hash `1d46aa15e9f22f57df316d5197ad40866e269334201f3508961a8753c2f9c401`. Artifacts are under `.llmgc/procedural/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/`; Goal 080 remains `accepted=false` in its artifact and accepted only by current-state handoff before Goal 081.
 
+### Goal 082: Edit-Driven Unity Alpha StreamingAssets Handoff
+
+Purpose:
+
+Consume the real Goal 080 projected GamePackage and Goal 081 runtime-preview playthrough artifacts into a compact Unity Alpha StreamingAssets handoff with an independent Unity probe script, exact mirrored payload read proof, negative proof and a bounded WinForms Unity Handoff tab.
+
+Status:
+
+Produced for review. The gate remains `edit_driven_unity_alpha_streamingassets_handoff_verification required`, not passed.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, 9 rows, 18 targets, 57 Goal 078 actions, 124 commands, 6 mirrored StreamingAssets payload files, handoff manifest hash `dad4647281bb60a2e95b9095a5764127c27bc290ba4c0d11fdcfa1b2b3a45156` and probe read proof hash `18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16`. Artifacts are under `.llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/`; Goal 081 remains `accepted=false` in its artifact and accepted only by current-state handoff before Goal 082.
+
 ## Current Recommended Next Work
 
 ```text
-edit_driven_gamepackage_runtime_preview_playthrough_verification
+edit_driven_unity_alpha_streamingassets_handoff_verification
 ```
 
 Status:
 
 ```text
-goal_081_edit_driven_gamepackage_runtime_preview_playthrough_produced_for_review
+goal_082_edit_driven_unity_alpha_streamingassets_handoff_produced_for_review
 ```

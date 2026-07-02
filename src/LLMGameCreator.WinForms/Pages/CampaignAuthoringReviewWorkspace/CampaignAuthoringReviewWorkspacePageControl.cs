@@ -6,6 +6,7 @@ using LLMGameCreator.Application.Design.EditDrivenReviewPackagePlayableSession;
 using LLMGameCreator.Application.Design.EditDrivenSpineQualityConsolidation;
 using LLMGameCreator.Application.Design.EditDrivenGamePackageRuntimePreviewBridge;
 using LLMGameCreator.Application.Design.EditDrivenGamePackageRuntimePreviewPlaythrough;
+using LLMGameCreator.Application.Design.EditDrivenUnityAlphaStreamingAssetsHandoff;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -19,6 +20,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
     private readonly EditDrivenSpineQualityConsolidationEvidenceService _spineQualityService;
     private readonly EditDrivenGamePackageRuntimePreviewBridgeEvidenceService _runtimePreviewBridgeService;
     private readonly EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService _runtimePreviewPlaythroughService;
+    private readonly EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService _unityAlphaStreamingAssetsHandoffService;
 
     public CampaignAuthoringReviewWorkspacePageControl()
         : this(
@@ -29,7 +31,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             new EditDrivenReviewPackagePlayableSessionEvidenceService(),
             new EditDrivenSpineQualityConsolidationEvidenceService(),
             new EditDrivenGamePackageRuntimePreviewBridgeEvidenceService(),
-            new EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService())
+            new EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService(),
+            new EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService())
     {
     }
 
@@ -42,7 +45,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             new EditDrivenReviewPackagePlayableSessionEvidenceService(),
             new EditDrivenSpineQualityConsolidationEvidenceService(),
             new EditDrivenGamePackageRuntimePreviewBridgeEvidenceService(),
-            new EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService())
+            new EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService(),
+            new EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService())
     {
     }
 
@@ -54,7 +58,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         EditDrivenReviewPackagePlayableSessionEvidenceService playSessionService,
         EditDrivenSpineQualityConsolidationEvidenceService spineQualityService,
         EditDrivenGamePackageRuntimePreviewBridgeEvidenceService runtimePreviewBridgeService,
-        EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService runtimePreviewPlaythroughService)
+        EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService runtimePreviewPlaythroughService,
+        EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService unityAlphaStreamingAssetsHandoffService)
     {
         _service = service;
         _editService = editService;
@@ -64,6 +69,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         _spineQualityService = spineQualityService;
         _runtimePreviewBridgeService = runtimePreviewBridgeService;
         _runtimePreviewPlaythroughService = runtimePreviewPlaythroughService;
+        _unityAlphaStreamingAssetsHandoffService = unityAlphaStreamingAssetsHandoffService;
         InitializeComponent();
         _rowSelectorControl.SelectedRowIdChanged += RowSelectorControlSelectedRowIdChanged;
     }
@@ -82,91 +88,25 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             return;
         }
 
-        CampaignWorkspaceBuildResult workspaceResult;
-        try
+        if (!TryLoad("Workspace", () => _service.Build(root), out var workspaceResult)
+            || !TryLoad("Edit loop", () => _editService.Build(root), out var editResult)
+            || !TryLoad("Playable refresh", () => _playableRefreshService.Build(root), out var refreshResult)
+            || !TryLoad("Review package", () => _reviewPackageService.Build(root), out var reviewPackageResult)
+            || !TryLoad("Review package play session", () => _playSessionService.Build(root), out var playSessionResult)
+            || !TryLoad("Spine quality dashboard", () => _spineQualityService.Build(root), out var spineQualityResult)
+            || !TryLoad(
+                "Runtime preview bridge",
+                () => _runtimePreviewBridgeService.BuildAndWriteAsync(root).GetAwaiter().GetResult().Result,
+                out var runtimePreviewBridgeResult)
+            || !TryLoad(
+                "Runtime preview playthrough",
+                () => _runtimePreviewPlaythroughService.BuildAndWriteAsync(root).GetAwaiter().GetResult().Result,
+                out var runtimePreviewPlaythroughResult)
+            || !TryLoad(
+                "Unity Alpha StreamingAssets handoff",
+                () => _unityAlphaStreamingAssetsHandoffService.BuildAndWriteAsync(root).GetAwaiter().GetResult().Result,
+                out var unityAlphaStreamingAssetsHandoffResult))
         {
-            workspaceResult = _service.Build(root);
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Workspace load failed: " + ex.Message;
-            return;
-        }
-
-        SchemaDrivenCampaignEditBuildResult editResult;
-        try
-        {
-            editResult = _editService.Build(root);
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Edit loop load failed: " + ex.Message;
-            return;
-        }
-
-        EditDrivenPlayablePreviewRefreshBuildResult refreshResult;
-        try
-        {
-            refreshResult = _playableRefreshService.Build(root);
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Playable refresh load failed: " + ex.Message;
-            return;
-        }
-
-        EditDrivenPlayableReviewPackageMaterializationBuildResult reviewPackageResult;
-        try
-        {
-            reviewPackageResult = _reviewPackageService.Build(root);
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Review package load failed: " + ex.Message;
-            return;
-        }
-
-        EditDrivenReviewPackagePlayableSessionBuildResult playSessionResult;
-        try
-        {
-            playSessionResult = _playSessionService.Build(root);
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Review package play session load failed: " + ex.Message;
-            return;
-        }
-
-        EditDrivenSpineQualityConsolidationBuildResult spineQualityResult;
-        try
-        {
-            spineQualityResult = _spineQualityService.Build(root);
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Spine quality dashboard load failed: " + ex.Message;
-            return;
-        }
-
-        EditDrivenGamePackageRuntimePreviewBridgeBuildResult runtimePreviewBridgeResult;
-        try
-        {
-            runtimePreviewBridgeResult = _runtimePreviewBridgeService.BuildAndWriteAsync(root).GetAwaiter().GetResult().Result;
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Runtime preview bridge load failed: " + ex.Message;
-            return;
-        }
-
-        EditDrivenGamePackageRuntimePreviewPlaythroughBuildResult runtimePreviewPlaythroughResult;
-        try
-        {
-            runtimePreviewPlaythroughResult = _runtimePreviewPlaythroughService.BuildAndWriteAsync(root).GetAwaiter().GetResult().Result;
-        }
-        catch (Exception ex)
-        {
-            _statusLabel.Text = "Runtime preview playthrough load failed: " + ex.Message;
             return;
         }
 
@@ -178,17 +118,18 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             playSessionResult,
             spineQualityResult,
             runtimePreviewBridgeResult,
-            runtimePreviewPlaythroughResult);
+            runtimePreviewPlaythroughResult,
+            unityAlphaStreamingAssetsHandoffResult);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result)
     {
-        Bind(result, null, null, null, null, null, null, null);
+        Bind(result, null, null, null, null, null, null, null, null);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result, SchemaDrivenCampaignEditBuildResult? editResult)
     {
-        Bind(result, editResult, null, null, null, null, null, null);
+        Bind(result, editResult, null, null, null, null, null, null, null);
     }
 
     public void Bind(
@@ -199,7 +140,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         EditDrivenReviewPackagePlayableSessionBuildResult? playSessionResult,
         EditDrivenSpineQualityConsolidationBuildResult? spineQualityResult,
         EditDrivenGamePackageRuntimePreviewBridgeBuildResult? runtimePreviewBridgeResult,
-        EditDrivenGamePackageRuntimePreviewPlaythroughBuildResult? runtimePreviewPlaythroughResult)
+        EditDrivenGamePackageRuntimePreviewPlaythroughBuildResult? runtimePreviewPlaythroughResult,
+        EditDrivenUnityAlphaStreamingAssetsHandoffBuildResult? unityAlphaStreamingAssetsHandoffResult)
     {
         _statusLabel.Text = "Gate: " + result.Report.ManualGate
             + " required | accepted=false | status=" + result.Report.ImplementationStatus
@@ -246,11 +188,31 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         {
             _runtimePreviewPlaythroughControl.Bind(runtimePreviewPlaythroughResult);
         }
+
+        if (unityAlphaStreamingAssetsHandoffResult is not null)
+        {
+            _unityAlphaStreamingAssetsHandoffControl.Bind(unityAlphaStreamingAssetsHandoffResult);
+        }
     }
 
     private void RowSelectorControlSelectedRowIdChanged(object? sender, EventArgs e)
     {
         _editLoopControl.SelectRow(_rowSelectorControl.SelectedRowId);
+    }
+
+    private bool TryLoad<T>(string label, Func<T> build, out T result)
+    {
+        try
+        {
+            result = build();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _statusLabel.Text = label + " load failed: " + ex.Message;
+            result = default!;
+            return false;
+        }
     }
 
     private static string? FindProjectRoot()

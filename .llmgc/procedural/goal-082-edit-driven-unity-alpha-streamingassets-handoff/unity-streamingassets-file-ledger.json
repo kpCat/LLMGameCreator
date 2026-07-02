@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "edit_driven_unity_alpha_streamingassets_file_ledger_v1",
+  "goalId": "goal_082_edit_driven_unity_alpha_streamingassets_handoff",
+  "passed": true,
+  "streamingAssetsRelativeRoot": "LLMGameCreator/EditDrivenGoal082",
+  "fileCount": 6,
+  "files": [
+    {
+      "relativePath": "README.md",
+      "role": "manual_inspection_note",
+      "sha256": "3997fa35d66c7be58bbba7b7da6ad7da1d0f3d95cf3ea868d00c77b6859b0bab",
+      "byteCount": 606
+    },
+    {
+      "relativePath": "expected-hashes.json",
+      "role": "expected_hashes",
+      "sha256": "c33b21800e9d2ae758b0da07997e016d395ad2096cb1d92354a449dcac2617c3",
+      "byteCount": 1675
+    },
+    {
+      "relativePath": "handoff-manifest.json",
+      "role": "manifest",
+      "sha256": "dad4647281bb60a2e95b9095a5764127c27bc290ba4c0d11fdcfa1b2b3a45156",
+      "byteCount": 990
+    },
+    {
+      "relativePath": "playthrough-command-index.json",
+      "role": "command_index",
+      "sha256": "950a46cd15ea9461b73e052615768e817833044a5073a04a5ff57602b563c71c",
+      "byteCount": 1514
+    },
+    {
+      "relativePath": "playthrough-transcript-index.json",
+      "role": "transcript_index",
+      "sha256": "a8fc246e2feebdf656f671706c373101fb533429e64ed086853399534165d667",
+      "byteCount": 965
+    },
+    {
+      "relativePath": "projected-package-index.json",
+      "role": "projected_package_index",
+      "sha256": "6b40be43b7a485ffec92f366c681f04b496892178a709b648e515f45c65da0e9",
+      "byteCount": 829
+    }
+  ],
+  "diagnostics": []
+}

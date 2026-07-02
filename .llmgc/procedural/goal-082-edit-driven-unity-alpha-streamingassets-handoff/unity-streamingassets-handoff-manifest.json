@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "edit_driven_unity_alpha_streamingassets_handoff_manifest_v1",
+  "goalId": "goal_082_edit_driven_unity_alpha_streamingassets_handoff",
+  "productSmokeRoute": "goal-082-edit-driven-unity-alpha-streamingassets-handoff",
+  "manualGate": "edit_driven_unity_alpha_streamingassets_handoff_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "streamingAssetsRelativeRoot": "LLMGameCreator/EditDrivenGoal082",
+  "payloadFileCount": 6,
+  "rowCount": 9,
+  "targetCount": 18,
+  "goal078ActionCount": 57,
+  "commandCount": 124,
+  "projectedPackageHash": "d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648",
+  "expectedHashesHash": "c33b21800e9d2ae758b0da07997e016d395ad2096cb1d92354a449dcac2617c3",
+  "requiredPayloadFiles": [
+    "handoff-manifest.json",
+    "projected-package-index.json",
+    "playthrough-command-index.json",
+    "playthrough-transcript-index.json",
+    "expected-hashes.json",
+    "README.md"
+  ]
+}
