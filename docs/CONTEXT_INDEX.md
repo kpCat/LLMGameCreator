@@ -379,7 +379,7 @@ StreamingAssets payload files. It consumes the real Goal 080 projected GamePacka
 artifacts, mirrors a compact payload into `unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/`,
 validates exact mirrored reads and negative tamper/missing/fake-success cases, adds one independent Unity probe script
 without touching `AlphaRuntimeBootstrap.cs`, and binds a bounded WinForms Unity Handoff tab. Handoff manifest hash:
-`dad4647281bb60a2e95b9095a5764127c27bc290ba4c0d11fdcfa1b2b3a45156`; probe read proof hash:
+`08104cd28fac6501d8cd9e4c8329e11ef56b82c17a1b99ea55a4b733d8782a54`; probe read proof hash:
 `18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16`.
 
 Allowed next sequence:

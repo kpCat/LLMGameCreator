@@ -14,13 +14,13 @@
     {
       "relativePath": "expected-hashes.json",
       "role": "expected_hashes",
-      "sha256": "c33b21800e9d2ae758b0da07997e016d395ad2096cb1d92354a449dcac2617c3",
+      "sha256": "e8bbf65a599606f1a4f629ffaa478d7b51500b81e95a3026fe94596d7a515f0a",
       "byteCount": 1675
     },
     {
       "relativePath": "handoff-manifest.json",
       "role": "manifest",
-      "sha256": "dad4647281bb60a2e95b9095a5764127c27bc290ba4c0d11fdcfa1b2b3a45156",
+      "sha256": "08104cd28fac6501d8cd9e4c8329e11ef56b82c17a1b99ea55a4b733d8782a54",
       "byteCount": 990
     },
     {
