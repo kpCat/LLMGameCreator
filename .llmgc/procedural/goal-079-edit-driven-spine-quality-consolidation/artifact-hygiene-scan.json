@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "edit_driven_spine_quality_artifact_hygiene_scan_v1",
+  "passed": true,
+  "artifactCount": 5,
+  "containsAbsoluteLocalPaths": false,
+  "containsTimestampLikeValues": false,
+  "containsHeavyLogs": false,
+  "containsScratchTamperFiles": false,
+  "diagnostics": []
+}

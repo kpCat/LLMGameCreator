@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "edit_driven_spine_quality_debt_classification_v1",
+  "p0Count": 0,
+  "p1Count": 0,
+  "p2Count": 8,
+  "p3Count": 2,
+  "debts": [
+    {
+      "findingId": "GQ-P2-ALPHA-RUNTIME-BOOTSTRAP-LARGE-READ-ONLY",
+      "severity": "P2",
+      "area": "unity-alpha-bootstrap",
+      "evidence": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs lines=3672 hash=f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+      "disposition": "Recorded as read-only debt; forbidden to repair in Goal 079."
+    },
+    {
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-534",
+      "severity": "P2",
+      "area": "source-size",
+      "evidence": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignAuthoringReviewWorkspace/SchemaDrivenCampaignWorkspaceSourceLoader.cs lines=534",
+      "disposition": "Below Goal 079 hard limit; classify for future extraction."
+    },
+    {
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-598",
+      "severity": "P2",
+      "area": "source-size",
+      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenReviewPackagePlayableSession/EditDrivenReviewPackagePlayableSessionReplayEngine.cs lines=598",
+      "disposition": "Below Goal 079 hard limit; classify for future extraction."
+    },
+    {
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-606",
+      "severity": "P2",
+      "area": "source-size",
+      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/EditDrivenSpineQualityConsolidationQualityGateScanner.cs lines=606",
+      "disposition": "Below Goal 079 hard limit; classify for future extraction."
+    },
+    {
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-690",
+      "severity": "P2",
+      "area": "source-size",
+      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/EditDrivenSpineQualityConsolidationEvidenceService.cs lines=690",
+      "disposition": "Below Goal 079 hard limit; classify for future extraction."
+    },
+    {
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-812",
+      "severity": "P2",
+      "area": "source-size",
+      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenPlayablePreviewRefresh/EditDrivenPlayablePreviewRefreshEvidenceService.cs lines=812",
+      "disposition": "Below Goal 079 hard limit; classify for future extraction."
+    },
+    {
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-888",
+      "severity": "P2",
+      "area": "source-size",
+      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationEvidenceService.cs lines=888",
+      "disposition": "Below Goal 079 hard limit; classify for future extraction."
+    },
+    {
+      "findingId": "GQ-P2-REPEATED-EDIT-DRIVEN-HELPERS",
+      "severity": "P2",
+      "area": "seam-patterns",
+      "evidence": "Goal 074-079 seams intentionally duplicate narrow hash/read/quality helpers.",
+      "disposition": "Classified for a future extraction goal; not repaired in Goal 079."
+    },
+    {
+      "findingId": "GQ-P3-ADAPTIVE-DOCS-CONTEXT-INDEXING",
+      "severity": "P3",
+      "area": "docs-context",
+      "evidence": "Commit c8343e8 docs adaptive quality remains tracked as P3 context debt.",
+      "disposition": "Preserved as non-blocking docs-context debt."
+    },
+    {
+      "findingId": "GQ-P3-DASHBOARD-DENSITY",
+      "severity": "P3",
+      "area": "winforms-dashboard",
+      "evidence": "Goal 079 dashboard is functional and compact, with limited presentation polish.",
+      "disposition": "Cosmetic dashboard polish is deferred."
+    }
+  ]
+}

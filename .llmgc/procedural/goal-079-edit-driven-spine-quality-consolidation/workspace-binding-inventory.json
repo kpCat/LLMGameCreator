@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "edit_driven_spine_quality_workspace_binding_inventory_v1",
+  "passed": true,
+  "parentPageDashboardTabDeclared": true,
+  "parentPageDashboardEvidenceServiceLoaded": true,
+  "parentPageDashboardControlBound": true,
+  "parentPageActivationBindsGoal079Data": true,
+  "allFiveChildSurfacesBound": true,
+  "allChildSurfacesSeparateUserControls": true,
+  "surfaces": [
+    {
+      "surfaceId": "goal075_edit_loop",
+      "controlName": "CampaignEditValidateApplyLoopControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditValidateApplyLoopControl.cs",
+      "tabDeclared": true,
+      "serviceBuiltDuringActivation": true,
+      "boundByParent": true,
+      "separateUserControl": true
+    },
+    {
+      "surfaceId": "goal076_playable_refresh",
+      "controlName": "CampaignPlayableRefreshControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignPlayableRefreshControl.cs",
+      "tabDeclared": true,
+      "serviceBuiltDuringActivation": true,
+      "boundByParent": true,
+      "separateUserControl": true
+    },
+    {
+      "surfaceId": "goal077_review_package",
+      "controlName": "CampaignReviewPackageControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackageControl.cs",
+      "tabDeclared": true,
+      "serviceBuiltDuringActivation": true,
+      "boundByParent": true,
+      "separateUserControl": true
+    },
+    {
+      "surfaceId": "goal078_play_session",
+      "controlName": "CampaignReviewPackagePlaySessionControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackagePlaySessionControl.cs",
+      "tabDeclared": true,
+      "serviceBuiltDuringActivation": true,
+      "boundByParent": true,
+      "separateUserControl": true
+    },
+    {
+      "surfaceId": "goal079_spine_quality_dashboard",
+      "controlName": "CampaignEditDrivenSpineQualityControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditDrivenSpineQualityControl.cs",
+      "tabDeclared": true,
+      "serviceBuiltDuringActivation": true,
+      "boundByParent": true,
+      "separateUserControl": true
+    }
+  ],
+  "diagnostics": []
+}

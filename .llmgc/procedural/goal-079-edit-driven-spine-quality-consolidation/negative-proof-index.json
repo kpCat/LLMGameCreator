@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "edit_driven_spine_quality_negative_proof_index_v1",
+  "passed": true,
+  "scenarioCount": 5,
+  "scenarios": [
+    {
+      "scenarioId": "fake_success_without_target_payload_read",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnosticCount": 1
+    },
+    {
+      "scenarioId": "illegal_action_target",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnosticCount": 1
+    },
+    {
+      "scenarioId": "missing_target_file",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnosticCount": 2
+    },
+    {
+      "scenarioId": "replay_order_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnosticCount": 1
+    },
+    {
+      "scenarioId": "tampered_target_payload",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnosticCount": 1
+    }
+  ],
+  "diagnostics": []
+}

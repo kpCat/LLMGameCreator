@@ -3,6 +3,7 @@ using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoo
 using LLMGameCreator.Application.Design.EditDrivenPlayablePreviewRefresh;
 using LLMGameCreator.Application.Design.EditDrivenPlayableReviewPackageMaterialization;
 using LLMGameCreator.Application.Design.EditDrivenReviewPackagePlayableSession;
+using LLMGameCreator.Application.Design.EditDrivenSpineQualityConsolidation;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -13,6 +14,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
     private readonly EditDrivenPlayablePreviewRefreshEvidenceService _playableRefreshService;
     private readonly EditDrivenPlayableReviewPackageMaterializationEvidenceService _reviewPackageService;
     private readonly EditDrivenReviewPackagePlayableSessionEvidenceService _playSessionService;
+    private readonly EditDrivenSpineQualityConsolidationEvidenceService _spineQualityService;
 
     public CampaignAuthoringReviewWorkspacePageControl()
         : this(
@@ -20,7 +22,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             new SchemaDrivenCampaignEditEvidenceService(),
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
             new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
-            new EditDrivenReviewPackagePlayableSessionEvidenceService())
+            new EditDrivenReviewPackagePlayableSessionEvidenceService(),
+            new EditDrivenSpineQualityConsolidationEvidenceService())
     {
     }
 
@@ -30,7 +33,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             new SchemaDrivenCampaignEditEvidenceService(),
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
             new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
-            new EditDrivenReviewPackagePlayableSessionEvidenceService())
+            new EditDrivenReviewPackagePlayableSessionEvidenceService(),
+            new EditDrivenSpineQualityConsolidationEvidenceService())
     {
     }
 
@@ -42,7 +46,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             editService,
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
             new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
-            new EditDrivenReviewPackagePlayableSessionEvidenceService())
+            new EditDrivenReviewPackagePlayableSessionEvidenceService(),
+            new EditDrivenSpineQualityConsolidationEvidenceService())
     {
     }
 
@@ -52,12 +57,30 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         EditDrivenPlayablePreviewRefreshEvidenceService playableRefreshService,
         EditDrivenPlayableReviewPackageMaterializationEvidenceService reviewPackageService,
         EditDrivenReviewPackagePlayableSessionEvidenceService playSessionService)
+        : this(
+            service,
+            editService,
+            playableRefreshService,
+            reviewPackageService,
+            playSessionService,
+            new EditDrivenSpineQualityConsolidationEvidenceService())
+    {
+    }
+
+    public CampaignAuthoringReviewWorkspacePageControl(
+        SchemaDrivenCampaignWorkspaceEvidenceService service,
+        SchemaDrivenCampaignEditEvidenceService editService,
+        EditDrivenPlayablePreviewRefreshEvidenceService playableRefreshService,
+        EditDrivenPlayableReviewPackageMaterializationEvidenceService reviewPackageService,
+        EditDrivenReviewPackagePlayableSessionEvidenceService playSessionService,
+        EditDrivenSpineQualityConsolidationEvidenceService spineQualityService)
     {
         _service = service;
         _editService = editService;
         _playableRefreshService = playableRefreshService;
         _reviewPackageService = reviewPackageService;
         _playSessionService = playSessionService;
+        _spineQualityService = spineQualityService;
         InitializeComponent();
         _rowSelectorControl.SelectedRowIdChanged += RowSelectorControlSelectedRowIdChanged;
     }
@@ -131,17 +154,28 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             return;
         }
 
-        Bind(workspaceResult, editResult, refreshResult, reviewPackageResult, playSessionResult);
+        EditDrivenSpineQualityConsolidationBuildResult spineQualityResult;
+        try
+        {
+            spineQualityResult = _spineQualityService.Build(root);
+        }
+        catch (Exception ex)
+        {
+            _statusLabel.Text = "Spine quality dashboard load failed: " + ex.Message;
+            return;
+        }
+
+        Bind(workspaceResult, editResult, refreshResult, reviewPackageResult, playSessionResult, spineQualityResult);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result)
     {
-        Bind(result, null, null, null, null);
+        Bind(result, null, null, null, null, null);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result, SchemaDrivenCampaignEditBuildResult? editResult)
     {
-        Bind(result, editResult, null, null, null);
+        Bind(result, editResult, null, null, null, null);
     }
 
     public void Bind(
@@ -149,7 +183,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         SchemaDrivenCampaignEditBuildResult? editResult,
         EditDrivenPlayablePreviewRefreshBuildResult? refreshResult)
     {
-        Bind(result, editResult, refreshResult, null, null);
+        Bind(result, editResult, refreshResult, null, null, null);
     }
 
     public void Bind(
@@ -158,7 +192,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         EditDrivenPlayablePreviewRefreshBuildResult? refreshResult,
         EditDrivenPlayableReviewPackageMaterializationBuildResult? reviewPackageResult)
     {
-        Bind(result, editResult, refreshResult, reviewPackageResult, null);
+        Bind(result, editResult, refreshResult, reviewPackageResult, null, null);
     }
 
     public void Bind(
@@ -166,7 +200,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         SchemaDrivenCampaignEditBuildResult? editResult,
         EditDrivenPlayablePreviewRefreshBuildResult? refreshResult,
         EditDrivenPlayableReviewPackageMaterializationBuildResult? reviewPackageResult,
-        EditDrivenReviewPackagePlayableSessionBuildResult? playSessionResult)
+        EditDrivenReviewPackagePlayableSessionBuildResult? playSessionResult,
+        EditDrivenSpineQualityConsolidationBuildResult? spineQualityResult)
     {
         _statusLabel.Text = "Gate: " + result.Report.ManualGate
             + " required | accepted=false | status=" + result.Report.ImplementationStatus
@@ -197,6 +232,11 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         if (playSessionResult is not null)
         {
             _playSessionControl.Bind(playSessionResult);
+        }
+
+        if (spineQualityResult is not null)
+        {
+            _spineQualityControl.Bind(spineQualityResult);
         }
     }
 

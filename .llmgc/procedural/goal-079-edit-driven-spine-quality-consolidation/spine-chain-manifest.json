@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "edit_driven_spine_quality_chain_manifest_v1",
+  "goalId": "goal_079_edit_driven_spine_quality_consolidation",
+  "chainItemCount": 5,
+  "chainItems": [
+    {
+      "goalId": "goal_074_schema_driven_campaign_authoring_review_workspace",
+      "goalNumber": 74,
+      "reportHash": "a39e872032da921fbc04dfb0f437a0899ad049c46e6f9762b935c535740157c2",
+      "declaredReportHash": "5b7919a92ac6354b47e0fb1f0682cb74619ca48572f5892cfa509add8803d823",
+      "qualityGateHash": "4a4014a12d873b5ad295ced547ff8cfae422b3f4ab5c120766a4d363b7295cca",
+      "implementationStatus": "GREEN",
+      "accepted": "false"
+    },
+    {
+      "goalId": "goal_075_schema_driven_campaign_edit_validate_apply_loop",
+      "goalNumber": 75,
+      "reportHash": "8144b3adc67fc2035a1cfe5e2984a899dcbf82cd7370615e481e49e6a48cadc0",
+      "declaredReportHash": "3cf1d7c7dd4fadd0d6fc559420592e3e7dd22b9c6f9da090f071bceb52546331",
+      "qualityGateHash": "c93e9fd99f968882f19a4d699505e58468caaa70b4d1399c05ddd4836e56ab51",
+      "implementationStatus": "GREEN",
+      "accepted": "false"
+    },
+    {
+      "goalId": "goal_076_edit_driven_playable_preview_refresh",
+      "goalNumber": 76,
+      "reportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+      "declaredReportHash": "6794b1cd1eb2c9ad3618e055ae430f8b9fc6cc7f52dbdf01955d7022d248e134",
+      "qualityGateHash": "79d68787ad98fe4b13c58044f2febc5aa6cc8074785e66cc509006f4b561d342",
+      "implementationStatus": "GREEN",
+      "accepted": "false"
+    },
+    {
+      "goalId": "goal_077_edit_driven_review_package_materialization",
+      "goalNumber": 77,
+      "reportHash": "921c88f432478b315c84a3c4cd05ddad709d569d06408958d8abc06e35475fa4",
+      "declaredReportHash": "ae839969a04572fc330804f531de90e422025c2f1d0ad037084544e4ba7afbaf",
+      "qualityGateHash": "3d1212a200b1b8374fdbdc34b6c26fd220953b272c9e5edd4301349413e8c4c4",
+      "implementationStatus": "GREEN",
+      "accepted": "false"
+    },
+    {
+      "goalId": "goal_078_edit_driven_review_package_playable_session",
+      "goalNumber": 78,
+      "reportHash": "b706a7fbe7ddb9c85cecbcc806a8c36f79af626df3ea295ee3312d7b11fccb12",
+      "declaredReportHash": "2ce9a56f3a868790d9c9a4ba82debc0cf862ad7b56d9236a50b6537a41e6479f",
+      "qualityGateHash": "beea7c8cd18d6abee65de168dd57c7ea0c69e205bd45e4955248398ca757a848",
+      "implementationStatus": "GREEN",
+      "accepted": "false"
+    }
+  ],
+  "goal078PackageReadProofHash": "ac88b0c81b4521d52edb9be7c4c4024aa1a042af85a5a5286225679afa048f5d",
+  "goal078ReplayProofHash": "9ed2f05f24b0ed9a4cbf8a275693ca17eb9005db17e1eb99ae01ccdf3dad2406",
+  "goal078NegativeProofHash": "e518d074ec5108375cb4f0e25d561a7cb23a79f3ec45eb899b82c2b8ee82a888"
+}

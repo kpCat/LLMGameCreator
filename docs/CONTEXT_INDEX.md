@@ -166,6 +166,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-076-edit-driven-playable-preview-refresh/GOAL.md` | Goal 076 task: consume real Goal 075 applied edit-loop output into an edit-driven playable preview refresh proof, staged player handoff manifest, bounded WinForms playable refresh tab and final stop at `edit_driven_playable_preview_refresh_verification`. |
 | `docs/agent-tasks/goal-077-edit-driven-review-package-materialization/GOAL.md` | Goal 077 task: consume real Goal 076 edit-driven playable preview refresh artifacts from disk into a deterministic review package with concrete target files, package ledger, player-readable index, staged read verification, bounded WinForms review package tab and final stop at `edit_driven_review_package_materialization_verification`. |
 | `docs/agent-tasks/goal-078-edit-driven-review-package-playable-session/GOAL.md` | Goal 078 task: consume real Goal 077 disk-backed review package artifacts into a deterministic headless playable-session proof, package read proof, replay/state-chain proof, player-command index, bounded WinForms play session tab and final stop at `edit_driven_review_package_playable_session_verification`. |
+| `docs/agent-tasks/goal-079-edit-driven-spine-quality-consolidation/GOAL.md` | Goal 079 task: consolidate Goal 074-078 edit-driven spine quality into a BCL-only Application seam, deterministic dashboard artifacts, bounded WinForms dashboard tab and final stop at `edit_driven_spine_quality_consolidation_verification`. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -210,7 +211,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-edit_driven_review_package_playable_session_verification
+edit_driven_spine_quality_consolidation_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -324,6 +325,16 @@ real Goal 077 disk-backed review package, validates the report/ledger/manifest/i
 target payload hashes from disk, proves save/replay determinism with state-chain hashes, rejects missing/tampered/
 illegal/fake replay paths and binds a bounded WinForms play session tab without Unity/schema/runtime/provider changes.
 
+Goal 078 is accepted by the Goal 079 user handoff:
+`edit_driven_review_package_playable_session_verification passed before Goal 079`.
+
+Goal 079 is produced for review with `edit_driven_spine_quality_consolidation_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, 5 chain items, zero P0/P1 blockers, P2/P3 debt counts 8/2
+and report hash `3845b0f699ed44b618638bb3e21871fda083551a6d7ad8bdca8ba0e62bbbb8eb`. It consumes the real
+Goal 074-078 reports, quality gates, Goal 078 package read/replay/negative proof and current workspace bindings
+into a deterministic Application consolidation seam and a bounded WinForms dashboard tab without Unity/schema/runtime/
+provider/Lua changes.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -361,7 +372,8 @@ Allowed next sequence:
 33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop recorded as accepted by user handoff before Goal 076.
 34. Keep Goal 076 Edit-Driven Playable Preview Refresh recorded as accepted by user handoff before Goal 077, without mutating the Goal 076 artifact's `accepted=false` evidence.
 35. Keep Goal 077 Edit-Driven Review Package Materialization recorded as accepted by user handoff before Goal 078, without mutating the Goal 077 artifact's `accepted=false` evidence.
-36. Review Goal 078 `edit_driven_review_package_playable_session_verification`; do not mark it passed until user acceptance.
+36. Keep Goal 078 Edit-Driven Review Package Playable Session recorded as accepted by user handoff before Goal 079, without mutating the Goal 078 artifact's `accepted=false` evidence.
+37. Review Goal 079 `edit_driven_spine_quality_consolidation_verification`; do not mark it passed until user acceptance.
 
 Kill criterion:
 

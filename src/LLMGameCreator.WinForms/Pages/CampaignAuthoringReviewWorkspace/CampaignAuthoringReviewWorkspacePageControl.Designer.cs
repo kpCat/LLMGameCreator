@@ -21,6 +21,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _playableRefreshTabPage;
         private TabPage _reviewPackageTabPage;
         private TabPage _playSessionTabPage;
+        private TabPage _spineQualityTabPage;
         private CampaignRowSelectorControl _rowSelectorControl;
         private CampaignSchemaGroupControl _schemaGroupControl;
         private CampaignDiagnosticsControl _diagnosticsControl;
@@ -31,6 +32,7 @@ namespace LLMGameCreator.WinForms.Pages
         private CampaignPlayableRefreshControl _playableRefreshControl;
         private CampaignReviewPackageControl _reviewPackageControl;
         private CampaignReviewPackagePlaySessionControl _playSessionControl;
+        private CampaignEditDrivenSpineQualityControl _spineQualityControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -57,6 +59,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playableRefreshTabPage = new TabPage();
             this._reviewPackageTabPage = new TabPage();
             this._playSessionTabPage = new TabPage();
+            this._spineQualityTabPage = new TabPage();
             this._rowSelectorControl = new CampaignRowSelectorControl();
             this._schemaGroupControl = new CampaignSchemaGroupControl();
             this._diagnosticsControl = new CampaignDiagnosticsControl();
@@ -67,6 +70,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playableRefreshControl = new CampaignPlayableRefreshControl();
             this._reviewPackageControl = new CampaignReviewPackageControl();
             this._playSessionControl = new CampaignReviewPackagePlaySessionControl();
+            this._spineQualityControl = new CampaignEditDrivenSpineQualityControl();
             this._tabs.SuspendLayout();
             this._rowsTabPage.SuspendLayout();
             this._schemaTabPage.SuspendLayout();
@@ -78,6 +82,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playableRefreshTabPage.SuspendLayout();
             this._reviewPackageTabPage.SuspendLayout();
             this._playSessionTabPage.SuspendLayout();
+            this._spineQualityTabPage.SuspendLayout();
             this.SuspendLayout();
             //
             // _statusLabel
@@ -102,6 +107,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._playableRefreshTabPage);
             this._tabs.Controls.Add(this._reviewPackageTabPage);
             this._tabs.Controls.Add(this._playSessionTabPage);
+            this._tabs.Controls.Add(this._spineQualityTabPage);
             this._tabs.Dock = DockStyle.Fill;
             this._tabs.Location = new Point(0, 34);
             this._tabs.Name = "_tabs";
@@ -211,6 +217,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._playSessionTabPage.Text = "Play Session";
             this._playSessionTabPage.UseVisualStyleBackColor = true;
             //
+            // _spineQualityTabPage
+            //
+            this._spineQualityTabPage.Controls.Add(this._spineQualityControl);
+            this._spineQualityTabPage.Location = new Point(4, 24);
+            this._spineQualityTabPage.Name = "_spineQualityTabPage";
+            this._spineQualityTabPage.Size = new Size(1092, 658);
+            this._spineQualityTabPage.TabIndex = 10;
+            this._spineQualityTabPage.Text = "Spine Quality";
+            this._spineQualityTabPage.UseVisualStyleBackColor = true;
+            //
             // child controls
             //
             this._rowSelectorControl.Dock = DockStyle.Fill;
@@ -223,6 +239,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playableRefreshControl.Dock = DockStyle.Fill;
             this._reviewPackageControl.Dock = DockStyle.Fill;
             this._playSessionControl.Dock = DockStyle.Fill;
+            this._spineQualityControl.Dock = DockStyle.Fill;
             //
             // CampaignAuthoringReviewWorkspacePageControl
             //
@@ -243,6 +260,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playableRefreshTabPage.ResumeLayout(false);
             this._reviewPackageTabPage.ResumeLayout(false);
             this._playSessionTabPage.ResumeLayout(false);
+            this._spineQualityTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
         }
     }
