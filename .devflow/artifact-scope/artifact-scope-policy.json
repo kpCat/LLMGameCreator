@@ -43,7 +43,8 @@
     ".llmgc/procedural/goal-071-unity-alpha-interactive-campaign-player/",
     ".llmgc/procedural/goal-072-generator-spine-quality-consolidation/",
     ".llmgc/procedural/goal-073-source-format-p0-readability-repair/",
-    ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/"
+    ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/",
+    ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -661,6 +662,26 @@
         "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/",
         "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignEditValidateApplyLoop/",
         "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignAuthoringReviewWorkspace/"
+      ]
+    },
+    {
+      "scenario": "goal-076-edit-driven-playable-preview-refresh",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/EditDrivenPlayablePreviewRefreshProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/",
+        "docs/agent-tasks/goal-076-edit-driven-playable-preview-refresh/",
+        "src/LLMGameCreator.Application/Design/EditDrivenPlayablePreviewRefresh/",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenPlayablePreviewRefresh/"
       ]
     }
   ]

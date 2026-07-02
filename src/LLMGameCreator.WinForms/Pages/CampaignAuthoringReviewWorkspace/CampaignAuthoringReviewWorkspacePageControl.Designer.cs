@@ -18,6 +18,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _actionPlanTabPage;
         private TabPage _qualityTabPage;
         private TabPage _editLoopTabPage;
+        private TabPage _playableRefreshTabPage;
         private CampaignRowSelectorControl _rowSelectorControl;
         private CampaignSchemaGroupControl _schemaGroupControl;
         private CampaignDiagnosticsControl _diagnosticsControl;
@@ -25,6 +26,7 @@ namespace LLMGameCreator.WinForms.Pages
         private CampaignActionPlanControl _actionPlanControl;
         private CampaignQualityGateControl _qualityGateControl;
         private CampaignEditValidateApplyLoopControl _editLoopControl;
+        private CampaignPlayableRefreshControl _playableRefreshControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -48,6 +50,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._actionPlanTabPage = new TabPage();
             this._qualityTabPage = new TabPage();
             this._editLoopTabPage = new TabPage();
+            this._playableRefreshTabPage = new TabPage();
             this._rowSelectorControl = new CampaignRowSelectorControl();
             this._schemaGroupControl = new CampaignSchemaGroupControl();
             this._diagnosticsControl = new CampaignDiagnosticsControl();
@@ -55,6 +58,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._actionPlanControl = new CampaignActionPlanControl();
             this._qualityGateControl = new CampaignQualityGateControl();
             this._editLoopControl = new CampaignEditValidateApplyLoopControl();
+            this._playableRefreshControl = new CampaignPlayableRefreshControl();
             this._tabs.SuspendLayout();
             this._rowsTabPage.SuspendLayout();
             this._schemaTabPage.SuspendLayout();
@@ -63,6 +67,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._actionPlanTabPage.SuspendLayout();
             this._qualityTabPage.SuspendLayout();
             this._editLoopTabPage.SuspendLayout();
+            this._playableRefreshTabPage.SuspendLayout();
             this.SuspendLayout();
             //
             // _statusLabel
@@ -84,6 +89,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._actionPlanTabPage);
             this._tabs.Controls.Add(this._qualityTabPage);
             this._tabs.Controls.Add(this._editLoopTabPage);
+            this._tabs.Controls.Add(this._playableRefreshTabPage);
             this._tabs.Dock = DockStyle.Fill;
             this._tabs.Location = new Point(0, 34);
             this._tabs.Name = "_tabs";
@@ -163,6 +169,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._editLoopTabPage.Text = "Edit Loop";
             this._editLoopTabPage.UseVisualStyleBackColor = true;
             //
+            // _playableRefreshTabPage
+            //
+            this._playableRefreshTabPage.Controls.Add(this._playableRefreshControl);
+            this._playableRefreshTabPage.Location = new Point(4, 24);
+            this._playableRefreshTabPage.Name = "_playableRefreshTabPage";
+            this._playableRefreshTabPage.Size = new Size(1092, 658);
+            this._playableRefreshTabPage.TabIndex = 7;
+            this._playableRefreshTabPage.Text = "Playable Refresh";
+            this._playableRefreshTabPage.UseVisualStyleBackColor = true;
+            //
             // child controls
             //
             this._rowSelectorControl.Dock = DockStyle.Fill;
@@ -172,6 +188,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._actionPlanControl.Dock = DockStyle.Fill;
             this._qualityGateControl.Dock = DockStyle.Fill;
             this._editLoopControl.Dock = DockStyle.Fill;
+            this._playableRefreshControl.Dock = DockStyle.Fill;
             //
             // CampaignAuthoringReviewWorkspacePageControl
             //
@@ -189,6 +206,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._actionPlanTabPage.ResumeLayout(false);
             this._qualityTabPage.ResumeLayout(false);
             this._editLoopTabPage.ResumeLayout(false);
+            this._playableRefreshTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
         }
     }

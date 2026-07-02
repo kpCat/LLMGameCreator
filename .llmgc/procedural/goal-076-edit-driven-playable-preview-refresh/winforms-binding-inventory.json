@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "edit_driven_playable_refresh_winforms_binding_inventory_v1",
+  "passed": true,
+  "parentPageRefreshTabDeclared": true,
+  "parentPageRefreshEvidenceServiceLoaded": true,
+  "parentPageRefreshControlBound": true,
+  "parentPageActivationBindsGoal076Data": true,
+  "groups": [
+    {
+      "groupId": "playable_refresh_status",
+      "controlName": "CampaignPlayableRefreshControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignPlayableRefreshControl.cs",
+      "separateUserControl": true,
+      "bindsGoal076Data": true
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_refresh_plan_v1",
+  "passed": true,
+  "publicGamePackageSchemaMutationRequired": false,
+  "fullMaterializationDisposition": "sidecar_refresh_plan_only_because_public_GamePackage_schema_and_Runtime_changes_are_forbidden",
+  "previewExportRefreshPayloadRef": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/preview-export-refresh-payload.json",
+  "previewExportRefreshPayloadHash": "f3250138d464ede3793a5533cf90abb8ef5017ce24aa4a6cae71896ff03dcba5",
+  "rowCount": 9,
+  "targetCount": 18,
+  "rows": [
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "refreshKey": "goal075.refresh.map_panel_rpg.seed_alpha",
+      "sourceAfterHash": "cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+      "targets": [
+        {
+          "fieldId": "gameplay_consequence_summary.consequence_intensity",
+          "domainId": "gameplay_consequence",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha",
+          "beforeValue": "medium",
+          "afterValue": "high",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "living_world_npc_faction_summary.faction_pressure",
+          "domainId": "living_world_faction",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha",
+          "beforeValue": "allied",
+          "afterValue": "tense",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "refreshKey": "goal075.refresh.map_panel_rpg.seed_beta",
+      "sourceAfterHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+      "targets": [
+        {
+          "fieldId": "narrative_quest_dialogue_event_summary.event_intent",
+          "domainId": "narrative_event_intent",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta",
+          "beforeValue": "rescue",
+          "afterValue": "investigate",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "settlement_construction_destruction_production_summary.production_focus",
+          "domainId": "settlement_production",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta",
+          "beforeValue": "growth",
+          "afterValue": "repair",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "refreshKey": "goal075.refresh.map_panel_rpg.seed_gamma",
+      "sourceAfterHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+      "targets": [
+        {
+          "fieldId": "combat_magic_boss_summary.status_pressure",
+          "domainId": "combat_magic_status",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma",
+          "beforeValue": "shock",
+          "afterValue": "burn",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "weather_daynight_crisis_summary.crisis_pressure",
+          "domainId": "weather_crisis_pressure",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma",
+          "beforeValue": "storm",
+          "afterValue": "calm",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "refreshKey": "goal075.refresh.survival_sandbox.seed_alpha",
+      "sourceAfterHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+      "targets": [
+        {
+          "fieldId": "gameplay_consequence_summary.consequence_intensity",
+          "domainId": "gameplay_consequence",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha",
+          "beforeValue": "high",
+          "afterValue": "low",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "living_world_npc_faction_summary.faction_pressure",
+          "domainId": "living_world_faction",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha",
+          "beforeValue": "neutral",
+          "afterValue": "allied",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "refreshKey": "goal075.refresh.survival_sandbox.seed_beta",
+      "sourceAfterHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+      "targets": [
+        {
+          "fieldId": "narrative_quest_dialogue_event_summary.event_intent",
+          "domainId": "narrative_event_intent",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta",
+          "beforeValue": "trade",
+          "afterValue": "rescue",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "settlement_construction_destruction_production_summary.production_focus",
+          "domainId": "settlement_production",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta",
+          "beforeValue": "repair",
+          "afterValue": "defense",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "refreshKey": "goal075.refresh.survival_sandbox.seed_gamma",
+      "sourceAfterHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+      "targets": [
+        {
+          "fieldId": "combat_magic_boss_summary.status_pressure",
+          "domainId": "combat_magic_status",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma",
+          "beforeValue": "burn",
+          "afterValue": "freeze",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "weather_daynight_crisis_summary.crisis_pressure",
+          "domainId": "weather_crisis_pressure",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma",
+          "beforeValue": "crisis",
+          "afterValue": "storm",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "refreshKey": "goal075.refresh.first_person_grid_dungeon.seed_alpha",
+      "sourceAfterHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+      "targets": [
+        {
+          "fieldId": "gameplay_consequence_summary.consequence_intensity",
+          "domainId": "gameplay_consequence",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha",
+          "beforeValue": "low",
+          "afterValue": "medium",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "living_world_npc_faction_summary.faction_pressure",
+          "domainId": "living_world_faction",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha",
+          "beforeValue": "tense",
+          "afterValue": "neutral",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "refreshKey": "goal075.refresh.first_person_grid_dungeon.seed_beta",
+      "sourceAfterHash": "b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+      "targets": [
+        {
+          "fieldId": "narrative_quest_dialogue_event_summary.event_intent",
+          "domainId": "narrative_event_intent",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta",
+          "beforeValue": "investigate",
+          "afterValue": "trade",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "settlement_construction_destruction_production_summary.production_focus",
+          "domainId": "settlement_production",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta",
+          "beforeValue": "defense",
+          "afterValue": "growth",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "refreshKey": "goal075.refresh.first_person_grid_dungeon.seed_gamma",
+      "sourceAfterHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+      "targets": [
+        {
+          "fieldId": "combat_magic_boss_summary.status_pressure",
+          "domainId": "combat_magic_status",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma",
+          "beforeValue": "freeze",
+          "afterValue": "shock",
+          "validationRequirement": "validate-before-preview-apply"
+        },
+        {
+          "fieldId": "weather_daynight_crisis_summary.crisis_pressure",
+          "domainId": "weather_crisis_pressure",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma",
+          "beforeValue": "calm",
+          "afterValue": "crisis",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      ]
+    }
+  ]
+}

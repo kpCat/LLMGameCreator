@@ -1,5 +1,6 @@
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
+using LLMGameCreator.Application.Design.EditDrivenPlayablePreviewRefresh;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -7,23 +8,36 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
 {
     private readonly SchemaDrivenCampaignWorkspaceEvidenceService _service;
     private readonly SchemaDrivenCampaignEditEvidenceService _editService;
+    private readonly EditDrivenPlayablePreviewRefreshEvidenceService _playableRefreshService;
 
     public CampaignAuthoringReviewWorkspacePageControl()
-        : this(new SchemaDrivenCampaignWorkspaceEvidenceService(), new SchemaDrivenCampaignEditEvidenceService())
+        : this(
+            new SchemaDrivenCampaignWorkspaceEvidenceService(),
+            new SchemaDrivenCampaignEditEvidenceService(),
+            new EditDrivenPlayablePreviewRefreshEvidenceService())
     {
     }
 
     public CampaignAuthoringReviewWorkspacePageControl(SchemaDrivenCampaignWorkspaceEvidenceService service)
-        : this(service, new SchemaDrivenCampaignEditEvidenceService())
+        : this(service, new SchemaDrivenCampaignEditEvidenceService(), new EditDrivenPlayablePreviewRefreshEvidenceService())
     {
     }
 
     public CampaignAuthoringReviewWorkspacePageControl(
         SchemaDrivenCampaignWorkspaceEvidenceService service,
         SchemaDrivenCampaignEditEvidenceService editService)
+        : this(service, editService, new EditDrivenPlayablePreviewRefreshEvidenceService())
+    {
+    }
+
+    public CampaignAuthoringReviewWorkspacePageControl(
+        SchemaDrivenCampaignWorkspaceEvidenceService service,
+        SchemaDrivenCampaignEditEvidenceService editService,
+        EditDrivenPlayablePreviewRefreshEvidenceService playableRefreshService)
     {
         _service = service;
         _editService = editService;
+        _playableRefreshService = playableRefreshService;
         InitializeComponent();
         _rowSelectorControl.SelectedRowIdChanged += RowSelectorControlSelectedRowIdChanged;
     }
@@ -64,15 +78,34 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             return;
         }
 
-        Bind(workspaceResult, editResult);
+        EditDrivenPlayablePreviewRefreshBuildResult refreshResult;
+        try
+        {
+            refreshResult = _playableRefreshService.Build(root);
+        }
+        catch (Exception ex)
+        {
+            _statusLabel.Text = "Playable refresh load failed: " + ex.Message;
+            return;
+        }
+
+        Bind(workspaceResult, editResult, refreshResult);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result)
     {
-        Bind(result, null);
+        Bind(result, null, null);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result, SchemaDrivenCampaignEditBuildResult? editResult)
+    {
+        Bind(result, editResult, null);
+    }
+
+    public void Bind(
+        CampaignWorkspaceBuildResult result,
+        SchemaDrivenCampaignEditBuildResult? editResult,
+        EditDrivenPlayablePreviewRefreshBuildResult? refreshResult)
     {
         _statusLabel.Text = "Gate: " + result.Report.ManualGate
             + " required | accepted=false | status=" + result.Report.ImplementationStatus
@@ -88,6 +121,11 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         {
             _editLoopControl.Bind(editResult);
             _editLoopControl.SelectRow(_rowSelectorControl.SelectedRowId);
+        }
+
+        if (refreshResult is not null)
+        {
+            _playableRefreshControl.Bind(refreshResult);
         }
     }
 

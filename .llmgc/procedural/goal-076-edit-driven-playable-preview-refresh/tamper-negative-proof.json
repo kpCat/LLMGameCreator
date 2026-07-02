@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "edit_driven_tamper_negative_proof_v1",
+  "passed": true,
+  "scenarioCount": 2,
+  "scenarios": [
+    {
+      "scenarioId": "missing_staged_handoff_manifest",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal076.handoff.manifest_missing",
+          "target": "unity-player-handoff-manifest.json",
+          "message": "The staged Unity/player handoff manifest must exist before proof can pass."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_staged_handoff_manifest",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal076.handoff.manifest_hash_mismatch",
+          "target": "unity-player-handoff-manifest.json",
+          "message": "The staged handoff manifest hash does not match the expected build hash."
+        },
+        {
+          "severity": "error",
+          "code": "goal076.handoff.source_hash_mismatch",
+          "target": "unity-player-handoff-manifest.json",
+          "message": "The staged handoff manifest no longer matches the consumed Goal 075 report hash."
+        }
+      ]
+    }
+  ]
+}

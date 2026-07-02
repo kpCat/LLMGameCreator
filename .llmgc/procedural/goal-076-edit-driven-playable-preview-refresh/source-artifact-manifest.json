@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "edit_driven_playable_preview_source_artifact_manifest_v1",
+  "goalId": "goal_076_edit_driven_playable_preview_refresh",
+  "productSmokeRoute": "goal-076-edit-driven-playable-preview-refresh",
+  "manualGate": "edit_driven_playable_preview_refresh_verification",
+  "accepted": false,
+  "goal075AcceptedByUserHandoff": true,
+  "goal075ReportWasGreenProducedForReview": true,
+  "goal075ParentActivationBindingPassed": true,
+  "goal075ReportHash": "4569ab956f9318d9219469da8c167af85d85e880787375356f74904422bb9e2d",
+  "sourceArtifactCount": 12,
+  "sourceArtifacts": [
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "apply-rollback-ledger",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/apply-rollback-ledger.json",
+      "artifactHash": "5c91b2b90bca406745c2c1a80832e47f3ab80f6c3efee5ed6480dcf22cc7ae73",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "artifact-scope-report",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/artifact-scope-report.json",
+      "artifactHash": "fc963bc146a98c9d7e9e3f4bbad72bf6eb91a33e1130cff882b8ed2f10378a99",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "change-set-catalog",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/change-set-catalog.json",
+      "artifactHash": "6dec72fea8462d410748947de4de9fa92317ff66f8ce9973c1d094ba4cca45d6",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "edit-workspace-source-manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/edit-workspace-source-manifest.json",
+      "artifactHash": "5889c4404d2e50d4ef5209be0c1aadd1d38a08b657a99205e73bcc0f670c965d",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "editable-schema-field-catalog",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/editable-schema-field-catalog.json",
+      "artifactHash": "1b0c078380bc54ad24eeba3c0332a9096e781d27ca861be2ffa69534b6ea1bc9",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "invalid-edit-diagnostics-matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/invalid-edit-diagnostics-matrix.json",
+      "artifactHash": "2128ea06defd5724722e7b7d0070b65294dc92f4b2b5cca31e3bf5cd1c22f356",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "preview-export-refresh-payload",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/preview-export-refresh-payload.json",
+      "artifactHash": "c3f21daca4ec3978700ac115bd7df809607f51e3ca85d262e9f9b1717a8dcb78",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "quality-gate-scan",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/quality-gate-scan.json",
+      "artifactHash": "34c0ffdc093299a0a77949a9e8d6fd5c10a7328690999908784de87fe80a2b6c",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "row-before-after-diff-matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/row-before-after-diff-matrix.json",
+      "artifactHash": "70986ad54626a7c79160ca6553f27174058873252dabfefb9363e10dae736ca9",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "schema-driven-campaign-edit-validate-apply-loop-report",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/schema-driven-campaign-edit-validate-apply-loop-report.md",
+      "artifactHash": "42bf5509f93bd20ec0800b3c905a44af5137ace450af7787872f5db8f2b8b77d",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "validation-diagnostics-matrix",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/validation-diagnostics-matrix.json",
+      "artifactHash": "9321dbcd98f5d380c29068ac91b7b0b36b5ee71b9bd0dbcebc316766cc9e8557",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal075",
+      "artifactFamily": "winforms-binding-inventory",
+      "artifactRelativePath": ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/winforms-binding-inventory.json",
+      "artifactHash": "898f1fa483e52cdb39e1a032ced9b4d1b91429466ab498f0c7092547fd02c2d1",
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "edit_driven_unity_player_handoff_manifest_v1",
+  "goalId": "goal_076_edit_driven_playable_preview_refresh",
+  "productSmokeRoute": "goal-076-edit-driven-playable-preview-refresh",
+  "manualGate": "edit_driven_playable_preview_refresh_verification",
+  "accepted": false,
+  "manifestRelativePath": ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/unity-player-handoff-manifest.json",
+  "sourceGoal075ReportHash": "4569ab956f9318d9219469da8c167af85d85e880787375356f74904422bb9e2d",
+  "previewRefreshHash": "f3250138d464ede3793a5533cf90abb8ef5017ce24aa4a6cae71896ff03dcba5",
+  "refreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "expectedPackageLogicalTargets": [
+    "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma",
+    "gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma",
+    "gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma",
+    "gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha",
+    "gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha",
+    "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha",
+    "gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta",
+    "gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta",
+    "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta",
+    "gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta",
+    "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta",
+    "gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta",
+    "gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma",
+    "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma",
+    "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma",
+    "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha",
+    "gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha",
+    "gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha"
+  ],
+  "playerFacingScenarioIds": [
+    "first_person_grid_dungeon/seed_alpha",
+    "first_person_grid_dungeon/seed_beta",
+    "first_person_grid_dungeon/seed_gamma",
+    "map_panel_rpg/seed_alpha",
+    "map_panel_rpg/seed_beta",
+    "map_panel_rpg/seed_gamma",
+    "survival_sandbox/seed_alpha",
+    "survival_sandbox/seed_beta",
+    "survival_sandbox/seed_gamma"
+  ],
+  "rows": [
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "previewRefreshKey": "goal075.refresh.map_panel_rpg.seed_alpha",
+      "afterHash": "cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha",
+        "gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-map-panel-rpg-seed-alpha",
+        "edit_driven_playable_preview_refresh_family=map_panel_rpg",
+        "edit_driven_playable_preview_refresh_seed=seed_alpha",
+        "edit_driven_playable_preview_refresh_after_hash=cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "previewRefreshKey": "goal075.refresh.map_panel_rpg.seed_beta",
+      "afterHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta",
+        "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-map-panel-rpg-seed-beta",
+        "edit_driven_playable_preview_refresh_family=map_panel_rpg",
+        "edit_driven_playable_preview_refresh_seed=seed_beta",
+        "edit_driven_playable_preview_refresh_after_hash=751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "previewRefreshKey": "goal075.refresh.map_panel_rpg.seed_gamma",
+      "afterHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma",
+        "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-map-panel-rpg-seed-gamma",
+        "edit_driven_playable_preview_refresh_family=map_panel_rpg",
+        "edit_driven_playable_preview_refresh_seed=seed_gamma",
+        "edit_driven_playable_preview_refresh_after_hash=8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "previewRefreshKey": "goal075.refresh.survival_sandbox.seed_alpha",
+      "afterHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha",
+        "gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-survival-sandbox-seed-alpha",
+        "edit_driven_playable_preview_refresh_family=survival_sandbox",
+        "edit_driven_playable_preview_refresh_seed=seed_alpha",
+        "edit_driven_playable_preview_refresh_after_hash=fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "previewRefreshKey": "goal075.refresh.survival_sandbox.seed_beta",
+      "afterHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta",
+        "gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-survival-sandbox-seed-beta",
+        "edit_driven_playable_preview_refresh_family=survival_sandbox",
+        "edit_driven_playable_preview_refresh_seed=seed_beta",
+        "edit_driven_playable_preview_refresh_after_hash=7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "previewRefreshKey": "goal075.refresh.survival_sandbox.seed_gamma",
+      "afterHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma",
+        "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-survival-sandbox-seed-gamma",
+        "edit_driven_playable_preview_refresh_family=survival_sandbox",
+        "edit_driven_playable_preview_refresh_seed=seed_gamma",
+        "edit_driven_playable_preview_refresh_after_hash=f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "previewRefreshKey": "goal075.refresh.first_person_grid_dungeon.seed_alpha",
+      "afterHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha",
+        "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-first-person-grid-dungeon-seed-alpha",
+        "edit_driven_playable_preview_refresh_family=first_person_grid_dungeon",
+        "edit_driven_playable_preview_refresh_seed=seed_alpha",
+        "edit_driven_playable_preview_refresh_after_hash=32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "previewRefreshKey": "goal075.refresh.first_person_grid_dungeon.seed_beta",
+      "afterHash": "b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta",
+        "gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-first-person-grid-dungeon-seed-beta",
+        "edit_driven_playable_preview_refresh_family=first_person_grid_dungeon",
+        "edit_driven_playable_preview_refresh_seed=seed_beta",
+        "edit_driven_playable_preview_refresh_after_hash=b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "previewRefreshKey": "goal075.refresh.first_person_grid_dungeon.seed_gamma",
+      "afterHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+      "expectedPackageLogicalTargets": [
+        "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma",
+        "gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma"
+      ],
+      "expectedPlayerMarkers": [
+        "edit_driven_playable_preview_refresh_loaded=true",
+        "edit_driven_playable_preview_refresh_row=matrix-row-first-person-grid-dungeon-seed-gamma",
+        "edit_driven_playable_preview_refresh_family=first_person_grid_dungeon",
+        "edit_driven_playable_preview_refresh_seed=seed_gamma",
+        "edit_driven_playable_preview_refresh_after_hash=a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b"
+      ]
+    }
+  ]
+}

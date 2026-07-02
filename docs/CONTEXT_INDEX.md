@@ -163,6 +163,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/EXTERNAL_SCOUTING_GOAL_074_SCHEMA_DRIVEN_CAMPAIGN_AUTHORING_REVIEW_WORKSPACE.md` | Goal 074 scouting: use existing WinForms/UserControl patterns and BCL-only workspace contracts; no external UI stack, provider, LLM/RAG, schema, Runtime, Unity or Lua dependency adoption. |
 | `docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md` | Goal 075 task/spec: schema-driven campaign edit/validate/apply loop consuming accepted Goal 074 workspace and Goal 060-073 evidence into Application edit/change-set/apply/rollback evidence and bounded WinForms review controls, with final stop at `schema_driven_campaign_edit_validate_apply_loop_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md` | Goal 075 scouting: reuse existing Goal 074 workspace contracts and WinForms UserControl patterns; no external editor stack, provider, LLM/RAG, schema, Runtime, Unity or Lua dependency adoption. |
+| `docs/agent-tasks/goal-076-edit-driven-playable-preview-refresh/GOAL.md` | Goal 076 task: consume real Goal 075 applied edit-loop output into an edit-driven playable preview refresh proof, staged player handoff manifest, bounded WinForms playable refresh tab and final stop at `edit_driven_playable_preview_refresh_verification`. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -207,7 +208,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-schema_driven_campaign_edit_validate_apply_loop_verification
+edit_driven_playable_preview_refresh_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -263,7 +264,11 @@ Campaign Timeline Simulation Matrix has been accepted by the Goal 071 user hando
 Interactive Campaign Player has been accepted by the Goal 072 user handoff:
 `unity_alpha_interactive_campaign_player_verification passed before Goal 072`. Goal 073 Source Format P0
 Readability Repair has been accepted by the Goal 074 user handoff:
-`source_format_p0_readability_repair_verification passed before Goal 074`.
+`source_format_p0_readability_repair_verification passed before Goal 074`. Goal 074 Schema-Driven Campaign
+Authoring And Review Workspace has been accepted by the Goal 075 user handoff:
+`schema_driven_campaign_authoring_review_workspace_verification passed before Goal 075`. Goal 075
+Schema-Driven Campaign Edit/Validate/Apply Loop has been accepted by the Goal 076 user handoff:
+`schema_driven_campaign_edit_validate_apply_loop_verification passed before Goal 076`.
 
 Goal 069 implementation status is GREEN with Unity/player proof passed, `unityExitCode=0`,
 `playerExitCode=0`, `provenRowCount=9`, `rowCount=9`, `stateChangingRowCount=9`,
@@ -290,10 +295,13 @@ P0 source-format blocker without marking Goal 072 passed. Goal 074 produced revi
 26 Goal 074 C# files including `CompositionRoot.cs` with `linesOver500Count=0`,
 `minifiedSourceFileCount=0` and `filesWithTooFewLinesForSizeCount=0`. Goal 074 is accepted by the
 Goal 075 user handoff: `schema_driven_campaign_authoring_review_workspace_verification passed before Goal 075`.
-Goal 075 is produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`,
-`accepted=false`, `implementationStatus=GREEN`, `rowCount=9`, `editableFieldCount=6`,
+Goal 075 is accepted by the Goal 076 user handoff:
+`schema_driven_campaign_edit_validate_apply_loop_verification passed before Goal 076`. Goal 075 evidence has
+`implementationStatus=GREEN`, `rowCount=9`, `editableFieldCount=6`,
 `candidateCount=18`, `appliedChangeCount=18`, `rollbackCount=9`, `invalidScenarioCount=16` and
-deterministic hash `9d68591603cbb108cf6b80e47773bfeb6ce44c85f7cf4722936c9aee55a8cada`.
+deterministic hash `9d68591603cbb108cf6b80e47773bfeb6ce44c85f7cf4722936c9aee55a8cada`. Goal 076 is produced
+for review with `edit_driven_playable_preview_refresh_verification required`, `accepted=false`,
+`implementationStatus=GREEN`, `changedRowCount=9`, `appliedChangeCount=18` and `packageTargetCount=18`.
 
 Allowed next sequence:
 
@@ -329,8 +337,9 @@ Allowed next sequence:
 30. Keep Goal 072 Generator Spine Quality Consolidation produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker but did not mark Goal 072 passed.
 31. Keep Goal 073 Source Format P0 Readability Repair recorded as passed by user handoff before Goal 074.
 32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace recorded as accepted by user handoff before Goal 075.
-33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`, `accepted=false` and `implementationStatus=GREEN`.
-34. Do not start Goal 076 while Goal 075 remains at its manual review gate.
+33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop recorded as accepted by user handoff before Goal 076.
+34. Keep Goal 076 Edit-Driven Playable Preview Refresh produced for review with `edit_driven_playable_preview_refresh_verification required`, `accepted=false` and `implementationStatus=GREEN`.
+35. Do not start the next Goal while Goal 076 remains at its manual review gate.
 
 Kill criterion:
 

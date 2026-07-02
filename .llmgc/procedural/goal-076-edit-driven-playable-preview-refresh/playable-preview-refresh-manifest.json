@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "edit_driven_playable_preview_refresh_manifest_v1",
+  "goalId": "goal_076_edit_driven_playable_preview_refresh",
+  "productSmokeRoute": "goal-076-edit-driven-playable-preview-refresh",
+  "manualGate": "edit_driven_playable_preview_refresh_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "sourceGoal075ReportHash": "4569ab956f9318d9219469da8c167af85d85e880787375356f74904422bb9e2d",
+  "previewRefreshHash": "f3250138d464ede3793a5533cf90abb8ef5017ce24aa4a6cae71896ff03dcba5",
+  "refreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "handoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d",
+  "changedRowCount": 9,
+  "packageTargetCount": 18,
+  "stateTransitionProofPassed": true,
+  "gamePackageRefreshPlanPassed": true,
+  "stagedHandoffManifestPassed": true,
+  "tamperNegativeProofPassed": true,
+  "winFormsBindingPassed": true,
+  "qualityGatePassed": true
+}

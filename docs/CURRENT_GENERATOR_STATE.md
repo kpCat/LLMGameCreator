@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 075 schema-driven campaign edit/validate/apply loop production
+Updated by: Goal 076 edit-driven playable preview refresh production
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 053 handoff acceptance recorded before Goal 054:
@@ -494,6 +494,25 @@ deterministicHash=9d68591603cbb108cf6b80e47773bfeb6ce44c85f7cf4722936c9aee55a8ca
 
 Goal 075 consumes the accepted Goal 074 authoring/review workspace plus Goal 060-073 evidence into a schema-driven edit/validate/apply loop. Evidence is produced under `.llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/`; validation, apply/rollback, row before/after diffs, preview/export refresh payload, WinForms binding inventory including parent-page activation binding, quality gate scan and invalid edit diagnostics all pass in the compact report. Goal 075 remains `accepted=false` and the manual gate is not marked passed.
 
+Goal 075 handoff acceptance recorded before Goal 076:
+
+```text
+schema_driven_campaign_edit_validate_apply_loop_verification passed before Goal 076
+```
+
+Goal 076 produced for review:
+
+```text
+edit_driven_playable_preview_refresh_verification required
+accepted=false
+implementationStatus=GREEN
+changedRowCount=9
+appliedChangeCount=18
+packageTargetCount=18
+```
+
+Goal 076 consumes real Goal 075 edit-loop output through `SchemaDrivenCampaignEditEvidenceService` into a BCL-only Application seam. Evidence is produced under `.llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/`; before/after/rollback/replay hashes prove a real edit-driven state transition, the sidecar GamePackage refresh plan maps changed fields to existing logical package/materialization targets without public schema mutation, the staged Unity/player handoff manifest is read by product smoke, and missing/tampered staged handoff manifests are rejected. The Campaign Authoring Review Workspace now has a separate Goal 076 playable refresh UserControl tab bound through parent activation. Goal 076 remains `accepted=false` and the manual gate is not marked passed.
+
 ## Current Phase
 
 M4.1 passed for sampled baseline contracts. Product Slice 029 completed the first deterministic seeded procedural game kernel. Product Slice 030 turned the generated placeholders into a deterministic validated formula/effect/action rule-pack foundation. Product Slice 031 consumed both artifacts in a tiny deterministic generated runtime loop. Product Slice 032 maps the S029-S031 sidecars into a minimal generated package MVP artifact. Product Slice 033 exposes that package MVP through the existing runtime-preview projection path and writes deterministic visible-preview sidecars. Manual user preview verification for S033 is recorded as passed based on the user's post-S033 observation. Product Slice 034 adds a one-click generated preview workflow on the Runtime Preview page, loads the generated package as the current package, and keeps Runtime Preview ready to start without manually browsing `.devflow/runs/...`. The S034 Generate Preview UI-thread hotfix keeps current-package replacement owned by the WinForms page so `CurrentChanged` UI subscribers are not invoked from a background continuation. Manual one-click preview verification after the S034 hotfix is recorded as passed. Product Slice 035 adds a generated active goal/progress projection on top of the existing preview quest journal so Runtime Preview and headless one-click smoke can show an active generated quest, related NPC/item/encounter, interaction-based progress, and readable progress labels. Product Slice 036 adds a deterministic generated challenge projection that links the active goal to an encounter, reward item and completion evidence through a narrow Runtime Preview resolver. Product Slice 037 closes Goal 001 headless Codex scope by writing deterministic generated microgame acceptance sidecars and a manual verification checklist for the next user gate. Manual Goal 001 microgame loop verification after S037 is recorded as passed. Product Slice 038 stores generated active-goal progress in existing serializable `GameRuntimeState.Quests` / `QuestRuntimeState.Objectives` state and keeps the previous preview journal path as explicit fallback/compatibility only. Product Slice 039 stores generated challenge resolution, reward item evidence and completion evidence in existing serializable `GameRuntimeState` fields: flags, inventory stacks and inactive encounter state. Product Slice 040 writes deterministic runtime-backed microgame state acceptance artifacts and proves the selected generated loop state survives existing runtime serializer and snapshot save/load facilities when available. Manual S040 runtime-backed microgame verification is recorded as passed based on the user's report. Product Slice 041 adds deterministic generation presets/options to the one-click Runtime Preview path. Product Slice 042 writes deterministic generated microgame variation acceptance artifacts for three seed/preset variants. Goal 002 manual configurable verification is recorded as passed based on the user's report before Goal 003. Goal 003 adds automated scenario acceptance and a declaration-only extension rule pack spine, proves a data-only inventory objective/reward variation, rejects invalid extension declarations, and stops at manual extension spine verification. Product Slice 048 consolidates the post-Goal-003 strategy documents and links them from the current handoff without starting a new feature goal. Goal 004 records the user's manual extension spine verification as passed, adds compact agent context budget policy, and proves quest/dialog/interaction family variation through data/rule-pack declarations and deterministic headless acceptance. Manual Goal 004 quest/dialog/interaction family verification is recorded as passed based on the user's artifact-review report before Goal 005. Goal 005 completes S054-S058 by defining `semantic_pack_contract_v1`, compiling layered semantic packs with `project > genre > core` precedence, quarantining imported/LLM candidates, adding compact reference packs, and proving semantic-guided quest/dialogue/interaction composition through deterministic headless acceptance artifacts. Product Slice 058A repairs semantic-guided acceptance correctness gaps found during external review. The user then confirmed `semantic_guided_composition_artifact_verification passed`, allowing Goal 006. Goal 006 completes S059-S063 by carrying selected semantic declarations into deterministic composition plans, materializing selected quest/dialogue/interaction content into validator-clean packages, executing those selected package ids headlessly through runtime-owned state, proving replay-save-load-isolation, and stopping at `semantic_selected_runtime_composition_artifact_verification`. Product Slice 063A repairs Goal 006 correctness gaps found during external review: suffixless placeholder bindings are rejected, every objective-required interaction is materialized, package bindings are audited before runtime, adapter evidence is structurally validated, reward/completion deltas are required, and isolation checks prove more than distinct hashes. The user then confirmed `semantic_selected_runtime_composition_artifact_verification passed`, allowing Goal 007. Goal 007 completes S064-S070 by proving bounded connected regions, exact region-to-map bindings, deterministic runtime-owned travel state, save/load restoration, bounded chunk evidence and invalid scenario rejection, and stops at `connected_world_travel_state_artifact_verification`.
@@ -653,8 +672,9 @@ Allowed next sequence:
 30. Keep Goal 072 Generator Spine Quality Consolidation produced for review with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker but did not mark Goal 072 passed.
 31. Keep Goal 073 Source Format P0 Readability Repair recorded as passed by user handoff before Goal 074.
 32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace recorded as accepted by user handoff before Goal 075.
-33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`, `accepted=false` and `implementationStatus=GREEN`.
-34. Do not start Goal 076 while Goal 075 remains at its manual review gate.
+33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop recorded as accepted by user handoff before Goal 076.
+34. Keep Goal 076 Edit-Driven Playable Preview Refresh produced for review with `edit_driven_playable_preview_refresh_verification required`, `accepted=false` and `implementationStatus=GREEN`.
+35. Do not start the next Goal while Goal 076 remains at its manual review gate.
 
 Kill criterion:
 
@@ -752,10 +772,10 @@ Observed result:
 Recommended next work item:
 
 ```text
-schema_driven_campaign_edit_validate_apply_loop_verification
+edit_driven_playable_preview_refresh_verification
 ```
 
-Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goals 035-071 are recorded as accepted by their respective user decisions or downstream handoffs. Goal 072 remains historical produced-for-review evidence with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker without marking Goal 072 passed. Goal 073 is accepted by the Goal 074 user handoff, Goal 074 is accepted by the Goal 075 user handoff, and Goal 075 is produced for review with `schema_driven_campaign_edit_validate_apply_loop_verification required`, `accepted=false` and `implementationStatus=GREEN`.
+Goal 033 `semantic_authoring_intent_resolver_verification` is accepted as passed by the user. Goal 034 `strict_llm_draft_artifact_loop_verification` is accepted as passed by the user's manual decision. Goal 031 and Goal 032 remain produced for review and not marked passed by this handoff. Goals 035-071 are recorded as accepted by their respective user decisions or downstream handoffs. Goal 072 remains historical produced-for-review evidence with `generator_spine_quality_consolidation_verification required`, `accepted=false` and `implementationStatus=BLOCKED`; Goal 073 repaired the P0 source-format blocker without marking Goal 072 passed. Goal 073 is accepted by the Goal 074 user handoff, Goal 074 is accepted by the Goal 075 user handoff, Goal 075 is accepted by the Goal 076 user handoff, and Goal 076 is produced for review with `edit_driven_playable_preview_refresh_verification required`, `accepted=false` and `implementationStatus=GREEN`.
 
 Goal 037 accepted by user handoff:
 
