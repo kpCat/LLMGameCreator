@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "visual_contract_validation_matrix_v1",
+  "goalId": "goal_084_visual_asset_contract_rating_metadata",
+  "passed": true,
+  "fixtureCount": 6,
+  "rows": [
+    {
+      "fixtureId": "creature_bodyplan_safe",
+      "adultEnabled": false,
+      "rating": "safe",
+      "exportPolicy": "publicSafe",
+      "safeFallbackRequired": false,
+      "hasApprovedAssetRef": true,
+      "hasDeterministicSafeFallback": true,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "fixtureId": "fantasy_overworld_tile_safe",
+      "adultEnabled": false,
+      "rating": "safe",
+      "exportPolicy": "publicSafe",
+      "safeFallbackRequired": false,
+      "hasApprovedAssetRef": true,
+      "hasDeterministicSafeFallback": true,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "fixtureId": "humanoid_paperdoll_adult_capable_metadata_only",
+      "adultEnabled": true,
+      "rating": "suggestive",
+      "exportPolicy": "matureOptional",
+      "safeFallbackRequired": true,
+      "hasApprovedAssetRef": false,
+      "hasDeterministicSafeFallback": true,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "fixtureId": "settlement_building_safe",
+      "adultEnabled": false,
+      "rating": "safe",
+      "exportPolicy": "publicSafe",
+      "safeFallbackRequired": false,
+      "hasApprovedAssetRef": true,
+      "hasDeterministicSafeFallback": true,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "fixtureId": "tech_future_ui_panel_safe",
+      "adultEnabled": false,
+      "rating": "safe",
+      "exportPolicy": "publicSafe",
+      "safeFallbackRequired": false,
+      "hasApprovedAssetRef": true,
+      "hasDeterministicSafeFallback": true,
+      "passed": true,
+      "diagnostics": []
+    },
+    {
+      "fixtureId": "water_coast_biome_safe",
+      "adultEnabled": false,
+      "rating": "safe",
+      "exportPolicy": "publicSafe",
+      "safeFallbackRequired": false,
+      "hasApprovedAssetRef": true,
+      "hasDeterministicSafeFallback": true,
+      "passed": true,
+      "diagnostics": []
+    }
+  ]
+}

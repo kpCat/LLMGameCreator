@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "visual_rating_policy_matrix_v1",
+  "goalId": "goal_084_visual_asset_contract_rating_metadata",
+  "rows": [
+    {
+      "rating": "safe",
+      "allowedExportPolicies": [
+        "publicSafe",
+        "matureOptional",
+        "adultBuildOnly"
+      ],
+      "adultEnabledAllowed": false,
+      "publicExportAllowed": true,
+      "safeFallbackRequiredWhenAdultEnabled": false,
+      "boundary": "Safe-rated refs may be public when approved or backed by deterministic fallback."
+    },
+    {
+      "rating": "suggestive",
+      "allowedExportPolicies": [
+        "matureOptional",
+        "adultBuildOnly"
+      ],
+      "adultEnabledAllowed": true,
+      "publicExportAllowed": false,
+      "safeFallbackRequiredWhenAdultEnabled": true,
+      "boundary": "Suggestive metadata is opt-in and requires fallback when adult-enabled."
+    },
+    {
+      "rating": "adultNudeReference",
+      "allowedExportPolicies": [
+        "adultBuildOnly",
+        "privateLocalOnly"
+      ],
+      "adultEnabledAllowed": true,
+      "publicExportAllowed": false,
+      "safeFallbackRequiredWhenAdultEnabled": true,
+      "boundary": "Adult reference metadata is not public export material."
+    },
+    {
+      "rating": "adultEroticScene",
+      "allowedExportPolicies": [
+        "adultBuildOnly",
+        "privateLocalOnly"
+      ],
+      "adultEnabledAllowed": true,
+      "publicExportAllowed": false,
+      "safeFallbackRequiredWhenAdultEnabled": true,
+      "boundary": "Adult scene metadata remains review-gated and fallback-backed."
+    },
+    {
+      "rating": "adultPrivateExplicit",
+      "allowedExportPolicies": [
+        "privateLocalOnly"
+      ],
+      "adultEnabledAllowed": true,
+      "publicExportAllowed": false,
+      "safeFallbackRequiredWhenAdultEnabled": true,
+      "boundary": "Private explicit metadata never ships by default."
+    }
+  ]
+}

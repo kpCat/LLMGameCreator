@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "visual_contract_quality_gate_scan_v1",
+  "goalId": "goal_084_visual_asset_contract_rating_metadata",
+  "manualGate": "visual_asset_contract_rating_metadata_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "goal083LineagePassed": true,
+  "validFixturesPassed": true,
+  "negativeProofPassed": true,
+  "noPublicGamePackageSchemaChanged": true,
+  "noRuntimeChanged": true,
+  "noUnityChanged": true,
+  "noProviderOrLlmOrRagOrMediaExecution": true,
+  "noLuaOrGeneratorLibraryChanged": true,
+  "noProjectFilesChanged": true,
+  "noBinaryMediaAdded": true,
+  "noGeneratedImageAssetsAdded": true,
+  "noRealAdultFixturesAdded": true,
+  "noExplicitPromptDumpAdded": true,
+  "artifactScopeReady": true,
+  "expectedChangedPathPrefixes": [
+    "src/LLMGameCreator.Application/Design/VisualAssetContractRatingMetadata/",
+    "tests/LLMGameCreator.Tests/Application/VisualAssetContractRatingMetadata/",
+    "tests/LLMGameCreator.Tests/ProductSmoke/VisualAssetContractRatingMetadataProductSmokeTests.cs",
+    ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/",
+    "docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/"
+  ],
+  "diagnostics": []
+}

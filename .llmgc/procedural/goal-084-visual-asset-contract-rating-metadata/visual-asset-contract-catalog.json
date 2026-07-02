@@ -1,0 +1,405 @@
+{
+  "schemaVersion": "visual_asset_contract_catalog_v1",
+  "goalId": "goal_084_visual_asset_contract_rating_metadata",
+  "manualGate": "visual_asset_contract_rating_metadata_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "fixtureCount": 6,
+  "fixtureIds": [
+    "creature_bodyplan_safe",
+    "fantasy_overworld_tile_safe",
+    "humanoid_paperdoll_adult_capable_metadata_only",
+    "settlement_building_safe",
+    "tech_future_ui_panel_safe",
+    "water_coast_biome_safe"
+  ],
+  "contract": {
+    "schemaVersion": "visual_asset_contract_rating_metadata_v1",
+    "contractId": "visual_asset_contract_rating_metadata_goal084",
+    "generatorVersion": "goal084-metadata-v1",
+    "strictReferenceValidation": true,
+    "recipeRefs": [
+      {
+        "recipeId": "recipe/fantasy_overworld_tile_safe/v1",
+        "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "recipeId": "recipe/water_coast_biome_safe/v1",
+        "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "recipeId": "recipe/settlement_building_safe/v1",
+        "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "recipeId": "recipe/creature_bodyplan_safe/v1",
+        "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "recipeId": "recipe/humanoid_paperdoll_adult_capable_metadata_only/v1",
+        "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "recipeId": "recipe/tech_future_ui_panel_safe/v1",
+        "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+        "generatorVersion": "goal084-metadata-v1"
+      }
+    ],
+    "partPackRefs": [
+      {
+        "partPackId": "part_pack/fantasy_overworld_tile_safe/v1",
+        "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "partPackId": "part_pack/water_coast_biome_safe/v1",
+        "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "partPackId": "part_pack/settlement_building_safe/v1",
+        "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "partPackId": "part_pack/creature_bodyplan_safe/v1",
+        "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "partPackId": "part_pack/humanoid_paperdoll_adult_capable_metadata_only/v1",
+        "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+        "generatorVersion": "goal084-metadata-v1"
+      },
+      {
+        "partPackId": "part_pack/tech_future_ui_panel_safe/v1",
+        "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+        "generatorVersion": "goal084-metadata-v1"
+      }
+    ],
+    "slots": [
+      {
+        "assetSlot": "fantasy_overworld_tile_safe",
+        "rating": "safe",
+        "adultEnabled": false,
+        "safeFallbackRequired": false,
+        "candidateQuarantine": false,
+        "reviewStatus": "approvedSafe",
+        "exportPolicy": "publicSafe",
+        "approvedAssetRef": {
+          "assetId": "approved/fantasy_overworld_tile_safe",
+          "relativePath": "visual/approved/fantasy_overworld_tile_safe.metadata.json",
+          "sha256": "ed848f739521a24221c22776cf535f18add79f320c7fb1b1b7a661885ff65e90",
+          "provenanceRef": "goal084_fixture_metadata",
+          "rating": "safe",
+          "reviewStatus": "approvedSafe",
+          "exportPolicy": "publicSafe"
+        },
+        "recipeRef": {
+          "recipeId": "recipe/fantasy_overworld_tile_safe/v1",
+          "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "partPackRef": {
+          "partPackId": "part_pack/fantasy_overworld_tile_safe/v1",
+          "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "safeFallbackRef": {
+          "fallbackId": "fallback/fantasy_overworld_tile_safe/safe",
+          "relativePath": "visual/fallbacks/fantasy_overworld_tile_safe.metadata.json",
+          "sha256": "e79675840d8b7dc4ae6477772083026e4f1f2ba97a6e53de71c8f7e56dba6e76",
+          "provenanceRef": "goal084_deterministic_fallback_metadata",
+          "deterministic": true,
+          "rating": "safe"
+        },
+        "provenanceRef": "goal083/terrain_tile",
+        "relativePath": "visual/approved/fantasy_overworld_tile_safe.metadata.json",
+        "sha256": "9394ae2a6900449413d177a0d24dfffcda3f9a9f960b1db40f2c8aed4e44c347",
+        "seed": "goal084-seed-fantasy_overworld_tile_safe",
+        "generatorVersion": "goal084-metadata-v1",
+        "bodyPlanEligibility": "safeOnly",
+        "bodyPlanEligibilityFacts": {
+          "adultCharacter": false,
+          "ageKnownAdult": false,
+          "sapient": false,
+          "humanoidCompatible": false,
+          "ageAmbiguous": false,
+          "nonSapient": false,
+          "feralOrNonHumanoidSafeOnly": false
+        }
+      },
+      {
+        "assetSlot": "water_coast_biome_safe",
+        "rating": "safe",
+        "adultEnabled": false,
+        "safeFallbackRequired": false,
+        "candidateQuarantine": false,
+        "reviewStatus": "approvedSafe",
+        "exportPolicy": "publicSafe",
+        "approvedAssetRef": {
+          "assetId": "approved/water_coast_biome_safe",
+          "relativePath": "visual/approved/water_coast_biome_safe.metadata.json",
+          "sha256": "101d182457979b57023352b6fb109f0c2ddebe8da78da89da5dc7d114c0ad567",
+          "provenanceRef": "goal084_fixture_metadata",
+          "rating": "safe",
+          "reviewStatus": "approvedSafe",
+          "exportPolicy": "publicSafe"
+        },
+        "recipeRef": {
+          "recipeId": "recipe/water_coast_biome_safe/v1",
+          "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "partPackRef": {
+          "partPackId": "part_pack/water_coast_biome_safe/v1",
+          "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "safeFallbackRef": {
+          "fallbackId": "fallback/water_coast_biome_safe/safe",
+          "relativePath": "visual/fallbacks/water_coast_biome_safe.metadata.json",
+          "sha256": "4029efbb84fae14fdc7c094d83a4b6dd4dae9ee75482891bdfd056fa7c00ede3",
+          "provenanceRef": "goal084_deterministic_fallback_metadata",
+          "deterministic": true,
+          "rating": "safe"
+        },
+        "provenanceRef": "goal083/water_coast",
+        "relativePath": "visual/approved/water_coast_biome_safe.metadata.json",
+        "sha256": "56bffd1f8e0f4fb9772f45a81317043c24915eb05c1ab9c791095b798d48ff6b",
+        "seed": "goal084-seed-water_coast_biome_safe",
+        "generatorVersion": "goal084-metadata-v1",
+        "bodyPlanEligibility": "safeOnly",
+        "bodyPlanEligibilityFacts": {
+          "adultCharacter": false,
+          "ageKnownAdult": false,
+          "sapient": false,
+          "humanoidCompatible": false,
+          "ageAmbiguous": false,
+          "nonSapient": false,
+          "feralOrNonHumanoidSafeOnly": false
+        }
+      },
+      {
+        "assetSlot": "settlement_building_safe",
+        "rating": "safe",
+        "adultEnabled": false,
+        "safeFallbackRequired": false,
+        "candidateQuarantine": false,
+        "reviewStatus": "approvedSafe",
+        "exportPolicy": "publicSafe",
+        "approvedAssetRef": {
+          "assetId": "approved/settlement_building_safe",
+          "relativePath": "visual/approved/settlement_building_safe.metadata.json",
+          "sha256": "b53895420a9483e36ad8b73824fab92542847094df13e3f5e4e4ad99289d01cc",
+          "provenanceRef": "goal084_fixture_metadata",
+          "rating": "safe",
+          "reviewStatus": "approvedSafe",
+          "exportPolicy": "publicSafe"
+        },
+        "recipeRef": {
+          "recipeId": "recipe/settlement_building_safe/v1",
+          "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "partPackRef": {
+          "partPackId": "part_pack/settlement_building_safe/v1",
+          "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "safeFallbackRef": {
+          "fallbackId": "fallback/settlement_building_safe/safe",
+          "relativePath": "visual/fallbacks/settlement_building_safe.metadata.json",
+          "sha256": "11847883d6a1f52dbddd9b82402db6ab88b305ab077bfee5168ead9cb7dc013a",
+          "provenanceRef": "goal084_deterministic_fallback_metadata",
+          "deterministic": true,
+          "rating": "safe"
+        },
+        "provenanceRef": "goal083/settlement_building",
+        "relativePath": "visual/approved/settlement_building_safe.metadata.json",
+        "sha256": "d5c613a90ffafdbf74909389d4fda484f0da6e7772dba99c08f36a0462df5b46",
+        "seed": "goal084-seed-settlement_building_safe",
+        "generatorVersion": "goal084-metadata-v1",
+        "bodyPlanEligibility": "safeOnly",
+        "bodyPlanEligibilityFacts": {
+          "adultCharacter": false,
+          "ageKnownAdult": false,
+          "sapient": false,
+          "humanoidCompatible": false,
+          "ageAmbiguous": false,
+          "nonSapient": false,
+          "feralOrNonHumanoidSafeOnly": false
+        }
+      },
+      {
+        "assetSlot": "creature_bodyplan_safe",
+        "rating": "safe",
+        "adultEnabled": false,
+        "safeFallbackRequired": false,
+        "candidateQuarantine": false,
+        "reviewStatus": "approvedSafe",
+        "exportPolicy": "publicSafe",
+        "approvedAssetRef": {
+          "assetId": "approved/creature_bodyplan_safe",
+          "relativePath": "visual/approved/creature_bodyplan_safe.metadata.json",
+          "sha256": "3d790afcb5e82f417e8495fffc6b876b26b0d1352ceb7a3f9cb88b7a796d3a2a",
+          "provenanceRef": "goal084_fixture_metadata",
+          "rating": "safe",
+          "reviewStatus": "approvedSafe",
+          "exportPolicy": "publicSafe"
+        },
+        "recipeRef": {
+          "recipeId": "recipe/creature_bodyplan_safe/v1",
+          "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "partPackRef": {
+          "partPackId": "part_pack/creature_bodyplan_safe/v1",
+          "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "safeFallbackRef": {
+          "fallbackId": "fallback/creature_bodyplan_safe/safe",
+          "relativePath": "visual/fallbacks/creature_bodyplan_safe.metadata.json",
+          "sha256": "b21009e80c4184660a4951a5de66ac09dfb9e5dc0de666f0826e4fa7d0b209a6",
+          "provenanceRef": "goal084_deterministic_fallback_metadata",
+          "deterministic": true,
+          "rating": "safe"
+        },
+        "provenanceRef": "goal083/creature_bodyplan",
+        "relativePath": "visual/approved/creature_bodyplan_safe.metadata.json",
+        "sha256": "57607b93286bcfed23c66f080376f7e9bd863b5a9a0d15bc51d2f098c8be4633",
+        "seed": "goal084-seed-creature_bodyplan_safe",
+        "generatorVersion": "goal084-metadata-v1",
+        "bodyPlanEligibility": "safeOnly",
+        "bodyPlanEligibilityFacts": {
+          "adultCharacter": false,
+          "ageKnownAdult": false,
+          "sapient": false,
+          "humanoidCompatible": false,
+          "ageAmbiguous": false,
+          "nonSapient": false,
+          "feralOrNonHumanoidSafeOnly": false
+        }
+      },
+      {
+        "assetSlot": "humanoid_paperdoll_adult_capable_metadata_only",
+        "rating": "suggestive",
+        "adultEnabled": true,
+        "safeFallbackRequired": true,
+        "candidateQuarantine": true,
+        "reviewStatus": "candidateQuarantined",
+        "exportPolicy": "matureOptional",
+        "approvedAssetRef": null,
+        "recipeRef": {
+          "recipeId": "recipe/humanoid_paperdoll_adult_capable_metadata_only/v1",
+          "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "partPackRef": {
+          "partPackId": "part_pack/humanoid_paperdoll_adult_capable_metadata_only/v1",
+          "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "safeFallbackRef": {
+          "fallbackId": "fallback/humanoid_paperdoll_adult_capable_metadata_only/safe",
+          "relativePath": "visual/fallbacks/humanoid_paperdoll_adult_capable_metadata_only.metadata.json",
+          "sha256": "6cb10e6f9278353617c8c346a104daddb9773c6724997a59472eff700ffe95eb",
+          "provenanceRef": "goal084_deterministic_fallback_metadata",
+          "deterministic": true,
+          "rating": "safe"
+        },
+        "provenanceRef": "docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md",
+        "relativePath": "visual/metadata/humanoid_paperdoll_adult_capable_metadata_only.json",
+        "sha256": "a46d6b5743aaf427e9ae137cdc76b7980571893d7ed91ea67f04122cbf4f41fe",
+        "seed": "goal084-seed-humanoid-paperdoll-adult-capable-metadata-only",
+        "generatorVersion": "goal084-metadata-v1",
+        "bodyPlanEligibility": "adultEligibleHumanoidSapient",
+        "bodyPlanEligibilityFacts": {
+          "adultCharacter": true,
+          "ageKnownAdult": true,
+          "sapient": true,
+          "humanoidCompatible": true,
+          "ageAmbiguous": false,
+          "nonSapient": false,
+          "feralOrNonHumanoidSafeOnly": false
+        }
+      },
+      {
+        "assetSlot": "tech_future_ui_panel_safe",
+        "rating": "safe",
+        "adultEnabled": false,
+        "safeFallbackRequired": false,
+        "candidateQuarantine": false,
+        "reviewStatus": "approvedSafe",
+        "exportPolicy": "publicSafe",
+        "approvedAssetRef": {
+          "assetId": "approved/tech_future_ui_panel_safe",
+          "relativePath": "visual/approved/tech_future_ui_panel_safe.metadata.json",
+          "sha256": "be0cfc72ca9e765bfed056a6aa458fb5be15f0b3768585de11487ad4701edbc0",
+          "provenanceRef": "goal084_fixture_metadata",
+          "rating": "safe",
+          "reviewStatus": "approvedSafe",
+          "exportPolicy": "publicSafe"
+        },
+        "recipeRef": {
+          "recipeId": "recipe/tech_future_ui_panel_safe/v1",
+          "provenanceRef": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "partPackRef": {
+          "partPackId": "part_pack/tech_future_ui_panel_safe/v1",
+          "provenanceRef": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+          "generatorVersion": "goal084-metadata-v1"
+        },
+        "safeFallbackRef": {
+          "fallbackId": "fallback/tech_future_ui_panel_safe/safe",
+          "relativePath": "visual/fallbacks/tech_future_ui_panel_safe.metadata.json",
+          "sha256": "1817a4b46091a9efbac28018ea916ea180e639c899844dccece2eccaed870096",
+          "provenanceRef": "goal084_deterministic_fallback_metadata",
+          "deterministic": true,
+          "rating": "safe"
+        },
+        "provenanceRef": "goal083/ui_panel",
+        "relativePath": "visual/approved/tech_future_ui_panel_safe.metadata.json",
+        "sha256": "f23bf572aff9de4b74c1db941ddc8bce69a8b386c3ddbb6146e97aee53e4b7f9",
+        "seed": "goal084-seed-tech_future_ui_panel_safe",
+        "generatorVersion": "goal084-metadata-v1",
+        "bodyPlanEligibility": "safeOnly",
+        "bodyPlanEligibilityFacts": {
+          "adultCharacter": false,
+          "ageKnownAdult": false,
+          "sapient": false,
+          "humanoidCompatible": false,
+          "ageAmbiguous": false,
+          "nonSapient": false,
+          "feralOrNonHumanoidSafeOnly": false
+        }
+      }
+    ],
+    "candidateRecords": [
+      {
+        "candidateId": "candidate/humanoid_paperdoll_adult_capable_metadata_only/metadata_only",
+        "assetSlot": "humanoid_paperdoll_adult_capable_metadata_only",
+        "providerState": "candidateQuarantine",
+        "candidateQuarantine": true,
+        "reviewStatus": "candidateQuarantined",
+        "promotionRequested": false,
+        "rating": "suggestive",
+        "exportPolicy": "matureOptional",
+        "provenanceRef": "docs/proposals/CREATURE_VISUAL_GENOME_AND_PRESENTATION.md",
+        "relativePath": "visual/candidates/humanoid_paperdoll_adult_capable_metadata_only.metadata.json",
+        "sha256": "e58bf0a56cddf57899ce566062aed81597c414651877f684024d1de9ba6cfca7",
+        "seed": "goal084-seed-humanoid-paperdoll-adult-capable-metadata-only",
+        "generatorVersion": "goal084-metadata-v1",
+        "sourceOfTruthKind": "metadata_contract",
+        "promptTextIsSourceOfTruth": false
+      }
+    ]
+  }
+}

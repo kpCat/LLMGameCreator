@@ -72,6 +72,7 @@ generator_spine_quality_consolidation_verification required
 edit_driven_unity_alpha_streamingassets_handoff_verification required
 source_format_physical_line_repair_verification required
 visual_adult_layer_context_integration_verification required
+visual_asset_contract_rating_metadata_verification required
 ```
 
 Current capabilities:
@@ -84,6 +85,7 @@ Current capabilities:
 - visible Unity Alpha presentation;
 - generated scene projection derived from package/config/asset refs;
 - generated Unity runtime state loop evidence with quest/dialogue/item/inventory/event before-after transitions;
+- BCL-only visual asset contract/rating metadata validator with metadata-only fixtures;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1230,14 +1232,37 @@ Future visual/media candidate gates:
 9. `visual_media_review_workspace_verification`
 10. `unity_approved_visual_asset_consumption_verification`
 
+### Goal 084: Visual Asset Contract Rating Metadata
+
+Purpose:
+
+Implement the first BCL-only Application-side visual asset contract and rating/export metadata validator based on Goal 083 visual/adult context.
+
+Status:
+
+Produced for review. The gate remains `visual_asset_contract_rating_metadata_verification required`, not passed. Goal 083, Goal 082 and Goal 082A remain produced-for-review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `fixtureCount=6`, `validFixturesPassed=true`, `negativeProofPassed=true`, `goal083LineagePassed=true`; Application models and validators live under `src/LLMGameCreator.Application/Design/VisualAssetContractRatingMetadata/`, focused tests under `tests/LLMGameCreator.Tests/Application/VisualAssetContractRatingMetadata/`, product smoke under `tests/LLMGameCreator.Tests/ProductSmoke/VisualAssetContractRatingMetadataProductSmokeTests.cs`, and compact evidence under `.llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/`.
+
+Metadata fixtures:
+
+- `fantasy_overworld_tile_safe`
+- `water_coast_biome_safe`
+- `settlement_building_safe`
+- `creature_bodyplan_safe`
+- `humanoid_paperdoll_adult_capable_metadata_only`
+- `tech_future_ui_panel_safe`
+
+Validator coverage rejects invalid ids, absolute paths, prompt text as source of truth, safe/public export without safe-approved refs or deterministic fallback, adult-enabled metadata without explicit rating/export policy, adult-enabled public export without fallback, provider candidate promotion, unreviewed/rejected promotion, approved refs missing hash/path/provenance, missing required fallback, rating/export contradictions, age-ambiguous/non-sapient/non-eligible adult eligibility flags, duplicate slot ids and unknown strict recipe/part-pack refs. Goal 084 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, binary media, generated image asset, real adult fixture or explicit prompt dump changes.
+
 ## Current Recommended Next Work
 
 ```text
-visual_adult_layer_context_integration_verification
+visual_asset_contract_rating_metadata_verification
 ```
 
 Status:
 
 ```text
-goal_083_visual_adult_layer_context_integration_produced_for_review
+goal_084_visual_asset_contract_rating_metadata_produced_for_review
 ```

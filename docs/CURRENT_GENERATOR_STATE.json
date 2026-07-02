@@ -3,20 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-02T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 083 visual/adult layer context integration produced for review",
-    "gate_status":  "visual_adult_layer_context_integration_verification",
+    "current_phase_title":  "Goal 084 visual asset contract rating metadata produced for review",
+    "gate_status":  "visual_asset_contract_rating_metadata_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 083 Visual Adult Layer Context Integration is produced for review: visual_adult_layer_context_integration_verification required, accepted=false. Goal 082 remains produced for review: edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false. Goal 082A remains produced for review: source_format_physical_line_repair_verification required, accepted=false.",
-    "current_user_action":  "Review Goal 083 visual/adult layer context integration evidence. Goal 082 and Goal 082A remain produced for review and accepted=false; Goal 083 is docs/context/evidence only and does not start provider, media, Runtime, Unity or schema implementation.",
-    "recommended_next_decision":  "Review Goal 083 evidence and only mark visual_adult_layer_context_integration_verification passed after explicit user acceptance; do not mark Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 084 Visual Asset Contract Rating Metadata is produced for review: visual_asset_contract_rating_metadata_verification required, accepted=false. Goal 083 remains produced for review: visual_adult_layer_context_integration_verification required, accepted=false. Goal 082 and Goal 082A remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 084 visual asset contract/rating metadata evidence. Goal 083, Goal 082 and Goal 082A remain produced for review and accepted=false; Goal 084 is Application metadata/validator/evidence only and does not start provider, media, Runtime, Unity or schema implementation.",
+    "recommended_next_decision":  "Review Goal 084 evidence and only mark visual_asset_contract_rating_metadata_verification passed after explicit user acceptance; do not mark Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "visual_asset_contract_rating_metadata_verification",
                                                         "visual_adult_layer_context_integration_verification",
                                                         "source_format_physical_line_repair_verification",
                                                         "edit_driven_unity_alpha_streamingassets_handoff_verification"
@@ -104,7 +105,8 @@
                            "goal_081_manual_gate":  "edit_driven_gamepackage_runtime_preview_playthrough_verification",
                            "goal_082_manual_gate":  "edit_driven_unity_alpha_streamingassets_handoff_verification",
                            "goal_082a_manual_gate":  "source_format_physical_line_repair_verification",
-                           "goal_083_manual_gate":  "visual_adult_layer_context_integration_verification"
+                           "goal_083_manual_gate":  "visual_adult_layer_context_integration_verification",
+                           "goal_084_manual_gate":  "visual_asset_contract_rating_metadata_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -395,6 +397,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "visual_asset_contract_rating_metadata_verification",
+                                          "goal_084_visual_asset_contract_rating_metadata",
+                                          "manual_review_goal_084_visual_asset_contract_rating_metadata",
                                           "visual_adult_layer_context_integration_verification",
                                           "goal_083_visual_adult_layer_context_integration",
                                           "manual_review_goal_083_visual_adult_layer_context_integration",
@@ -424,19 +429,20 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "visual_adult_layer_context_integration_verification",
-    "recommended_next_work_item_title":  "Review Goal 083 visual/adult layer context integration",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-083-visual-adult-layer-context-integration/GOAL.md",
+    "recommended_next_work_item":  "visual_asset_contract_rating_metadata_verification",
+    "recommended_next_work_item_title":  "Review Goal 084 visual asset contract rating metadata",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 083 visual/adult layer context integration evidence",
-                                              "Keep Goal 083 accepted=false until user review accepts it",
-                                              "Keep Goal 082 and Goal 082A accepted=false until their separate manual gates are accepted",
-                                              "Use visual media roadmap entries only as future candidates; do not start provider/media/runtime/schema implementation from this handoff"
+                                              "Review Goal 084 visual asset contract/rating metadata evidence",
+                                              "Keep Goal 084 accepted=false until user review accepts it",
+                                              "Keep Goal 083, Goal 082 and Goal 082A accepted=false until their separate manual gates are accepted",
+                                              "Use visual media roadmap entries only as future candidates beyond the metadata contract; do not start provider/media/runtime/schema implementation from this handoff"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
+                                                  "docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/GOAL.md",
                                                   "docs/agent-tasks/goal-082a-source-format-physical-line-repair/GOAL.md",
                                                   "docs/agent-tasks/goal-082a-source-format-physical-line-repair/read-first.md",
                                                   "docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/GOAL.md",
@@ -1892,5 +1898,20 @@
                                                                                         "Goal082 remains produced for review with edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false; Goal082A remains produced for review with source_format_physical_line_repair_verification required, accepted=false."
                                                                                     ],
                                                                 "next_action":  "review_goal_083_visual_adult_layer_context_integration"
-                                                            }
+                                                            },
+    "visual_asset_contract_rating_metadata_verification":  {
+                                                               "status":  "produced_for_review",
+                                                               "accepted":  false,
+                                                               "evidence_source":  "goal_084_visual_asset_contract_rating_metadata",
+                                                               "observed_result":  [
+                                                                                       "Goal 084 produces visual asset contract/rating metadata evidence under .llmgc/procedural/goal-084-visual-asset-contract-rating-metadata with accepted=false.",
+                                                                                       "implementationStatus=GREEN, fixtureCount=6, validFixturesPassed=true, negativeProofPassed=true, goal083LineagePassed=true.",
+                                                                                       "The BCL-only Application seam defines VisualAssetContract, VisualAssetSlot, recipe/part-pack/approved/fallback/candidate refs, rating/export/review/provider/body-plan metadata and validation/evidence result types.",
+                                                                                       "The validator rejects invalid ids, absolute paths, prompt text as source of truth, unsafe public export, adult metadata without explicit policy/fallback, provider candidate promotion, unreviewed/rejected promotion, missing approved-ref hash/path/provenance, rating/export contradictions, age-ambiguous/non-sapient/non-eligible adult flags, duplicate slots and unknown strict refs.",
+                                                                                       "Fixtures cover fantasy_overworld_tile_safe, water_coast_biome_safe, settlement_building_safe, creature_bodyplan_safe, humanoid_paperdoll_adult_capable_metadata_only and tech_future_ui_panel_safe.",
+                                                                                       "Goal 084 adds no public GamePackage schema change, Runtime change, Unity change, provider/LLM/RAG/media execution, Lua/generator-library change, project file change, binary media, generated image asset, real adult fixture or explicit prompt dump.",
+                                                                                       "Goal083 remains produced for review with visual_adult_layer_context_integration_verification required, accepted=false; Goal082 and Goal082A remain produced for review with accepted=false."
+                                                                                   ],
+                                                               "next_action":  "review_goal_084_visual_asset_contract_rating_metadata"
+                                                           }
 }

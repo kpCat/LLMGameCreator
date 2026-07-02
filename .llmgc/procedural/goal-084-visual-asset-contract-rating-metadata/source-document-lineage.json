@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "visual_contract_source_document_lineage_v1",
+  "goalId": "goal_084_visual_asset_contract_rating_metadata",
+  "passed": true,
+  "goal083ArtifactsGreen": true,
+  "goal083AcceptedFalse": true,
+  "goal083FutureGateRouted": true,
+  "goal082aP0P1SourceFormatEvidenceInactive": true,
+  "records": [
+    {
+      "path": "docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md",
+      "exists": true,
+      "sha256": "84bfd5028ddef465648ee3b9aa5aaa878a38851ee909380d3da906e2cad693b1",
+      "purposeTags": [
+        "policy",
+        "rating_boundary",
+        "safe_fallback",
+        "provider_quarantine"
+      ]
+    },
+    {
+      "path": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+      "exists": true,
+      "sha256": "98e3949f074fbed99558e89df2dedc70645c0d77bc493670b46b0fe48535024f",
+      "purposeTags": [
+        "stage_1_contract",
+        "future_gate_sequence"
+      ]
+    },
+    {
+      "path": "docs/context/ADULT_VISUAL_LAYER_DOCUMENTATION_MANIFEST.md",
+      "exists": true,
+      "sha256": "6a28a98281dd18de479216f8ddb7ad5352091d591f692fa2fbf654f397e6824b",
+      "purposeTags": [
+        "manifest",
+        "read_order"
+      ]
+    },
+    {
+      "path": "docs/context/VISUAL_WORLD_GENERATION_CONTEXT_BRIEF.md",
+      "exists": true,
+      "sha256": "8a675976d5b1d614b51ce21b6fcfdb7451fb17e7039a7b658a9e3bd6ebe46747",
+      "purposeTags": [
+        "visual_world",
+        "runtime_provider_firewall"
+      ]
+    },
+    {
+      "path": "docs/context/METAMODULE_CARRIER_VISUAL_NSFW_CONTEXT_BRIEF.md",
+      "exists": true,
+      "sha256": "01ea8524e9776bf6a93f8d373a2a1f4f1339e995e3c66457ed62957ba99594e3",
+      "purposeTags": [
+        "adult_capable_visuals",
+        "policy_boundary"
+      ]
+    },
+    {
+      "path": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+      "exists": true,
+      "sha256": "aa6515e0740215dce0e314327624046bc0334e6256b81bc0d21d138faa605e16",
+      "purposeTags": [
+        "part_pack",
+        "safe_fallback"
+      ]
+    },
+    {
+      "path": "docs/proposals/CREATURE_VISUAL_GENOME_AND_PRESENTATION.md",
+      "exists": true,
+      "sha256": "fd80d29f4265c9ae17c866e1c08feee9c6d6a2cd1897662dc8edea5b6932046c",
+      "purposeTags": [
+        "body_plan",
+        "eligibility"
+      ]
+    },
+    {
+      "path": "docs/proposals/ADULT_VISUAL_LAYER_STRATEGY.md",
+      "exists": true,
+      "sha256": "7bfab7810298a50ed1ecf02cffb1bcadc4c005dbb8fe288f6e4b120066fbe758",
+      "purposeTags": [
+        "rating",
+        "export_policy",
+        "review"
+      ]
+    },
+    {
+      "path": "docs/proposals/VISUAL_PART_PACK_ADULT_EXTENSION.md",
+      "exists": true,
+      "sha256": "f650a1257a39f652b3c62681c612b79fa27b1fd6e8f8e042aa80fbaac61fd2fa",
+      "purposeTags": [
+        "rating_export_policy",
+        "validation_diagnostics"
+      ]
+    },
+    {
+      "path": ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/visual-adult-layer-context-integration-report.md",
+      "exists": true,
+      "sha256": "9e23a47b2db78892fd8b794706bda976ccda41916f0faca8e6a8fa22c6f97043",
+      "purposeTags": [
+        "goal083_report"
+      ]
+    },
+    {
+      "path": ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/visual-adult-doc-inventory.json",
+      "exists": true,
+      "sha256": "bf7fbe57a1e4f7f3f971b01632b22971376c3c8fd33d7e1f8aa440eedf8afced",
+      "purposeTags": [
+        "goal083_inventory"
+      ]
+    },
+    {
+      "path": ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/visual-adult-policy-routing-matrix.json",
+      "exists": true,
+      "sha256": "75807a59036a8ddfe52841443be4aec91accc4dfbb5f13fbaf7bb9986272f465",
+      "purposeTags": [
+        "goal083_policy_routing"
+      ]
+    },
+    {
+      "path": ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/quality-gate-scan.json",
+      "exists": true,
+      "sha256": "acfc5f345ea99794b27f31bba4efcdc454e6e766c462b6faff32c125818b187c",
+      "purposeTags": [
+        "goal083_quality_gate"
+      ]
+    }
+  ]
+}

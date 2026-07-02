@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "visual_contract_negative_proof_v1",
+  "goalId": "goal_084_visual_asset_contract_rating_metadata",
+  "passed": true,
+  "scenarioCount": 17,
+  "rejectedCount": 17,
+  "matchedExpectationCount": 17,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_path_rejected",
+      "causalMutation": "absolute approved asset path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.approved_ref.path.invalid",
+          "target": "approved/fantasy_overworld_tile_safe",
+          "message": "Approved asset refs require a safe relative path."
+        }
+      ]
+    },
+    {
+      "scenarioId": "adult_enabled_missing_rating_policy",
+      "causalMutation": "adult-enabled slot missing explicit rating/export policy",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.policy_missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult-enabled slots require explicit rating and export policy."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.export_policy.missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Every visual asset slot requires an explicit export policy."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.rating.missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Every visual asset slot requires an explicit rating."
+        }
+      ]
+    },
+    {
+      "scenarioId": "adult_public_export_without_fallback",
+      "causalMutation": "adult-enabled public export without fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.fallback_missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult-enabled slots require a deterministic safe fallback."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.public_export_fallback_missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult-enabled public export must have a deterministic safe fallback."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.fallback.required_missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Slots that require a safe fallback must declare a deterministic safe fallback ref."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.public_export.safe_ref_or_fallback_missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Public-safe export requires a safe approved asset ref or deterministic safe fallback."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.rating_export.contradiction",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Public-safe export can only carry safe-rated refs."
+        }
+      ]
+    },
+    {
+      "scenarioId": "age_ambiguous_adult_metadata",
+      "causalMutation": "age-ambiguous adult eligibility",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.age_ambiguous_or_not_adult",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult metadata rejects age-ambiguous or non-adult eligibility facts."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.body_plan.ineligible",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult metadata requires adult, sapient and humanoid-compatible eligibility."
+        }
+      ]
+    },
+    {
+      "scenarioId": "approved_ref_missing_hash_path_provenance",
+      "causalMutation": "approved ref missing path/hash/provenance",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.approved_ref.path.invalid",
+          "target": "approved/fantasy_overworld_tile_safe",
+          "message": "Approved asset refs require a safe relative path."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.approved_ref.provenance.missing",
+          "target": "approved/fantasy_overworld_tile_safe",
+          "message": "Approved asset refs require provenance."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.approved_ref.sha256.missing",
+          "target": "approved/fantasy_overworld_tile_safe",
+          "message": "Approved asset refs require a 64-character sha256 hash."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_slot_ids",
+      "causalMutation": "duplicate asset slot ids",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.slot_id.duplicate",
+          "target": "fantasy_overworld_tile_safe",
+          "message": "Asset slot ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "empty_invalid_ids",
+      "causalMutation": "blank contract and slot ids",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.candidate.slot_id.unknown",
+          "target": "candidate/humanoid_paperdoll_adult_capable_metadata_only/metadata_only",
+          "message": "Candidate records must reference a known asset slot."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.contract_id.invalid",
+          "target": "contract",
+          "message": "Contract id must be a stable lowercase id."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.slot_id.invalid",
+          "target": "<empty>",
+          "message": "Asset slot id must be a stable lowercase id."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_fallback_when_required",
+      "causalMutation": "required fallback missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.fallback_missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult-enabled slots require a deterministic safe fallback."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.fallback.required_missing",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Slots that require a safe fallback must declare a deterministic safe fallback ref."
+        }
+      ]
+    },
+    {
+      "scenarioId": "non_eligible_body_plan_adult_metadata",
+      "causalMutation": "non-humanoid safe-only adult eligibility",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.body_plan.ineligible",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult metadata requires adult, sapient and humanoid-compatible eligibility."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.non_humanoid",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult metadata rejects non-humanoid or safe-only body plans."
+        }
+      ]
+    },
+    {
+      "scenarioId": "non_sapient_adult_metadata",
+      "causalMutation": "non-sapient adult eligibility",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.body_plan.ineligible",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult metadata requires adult, sapient and humanoid-compatible eligibility."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.adult.non_sapient",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult metadata rejects non-sapient eligibility facts."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_as_source_of_truth",
+      "causalMutation": "prompt source of truth claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.prompt.source_of_truth",
+          "target": "candidate/humanoid_paperdoll_adult_capable_metadata_only/metadata_only",
+          "message": "Prompt text must not be treated as source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_candidate_treated_as_approved",
+      "causalMutation": "quarantined provider candidate marked approved",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.provider_candidate.treated_as_approved",
+          "target": "candidate/humanoid_paperdoll_adult_capable_metadata_only/metadata_only",
+          "message": "Quarantined provider candidates must not be treated as approved assets."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_export_without_safe_ref_or_fallback",
+      "causalMutation": "public export without approved safe ref or fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.public_export.safe_ref_or_fallback_missing",
+          "target": "fantasy_overworld_tile_safe",
+          "message": "Public-safe export requires a safe approved asset ref or deterministic safe fallback."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rating_export_contradiction",
+      "causalMutation": "adult rating exported through public-safe policy",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.rating_export.adult_public_contradiction",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Adult ratings must not be exported through public-safe policy."
+        },
+        {
+          "severity": "error",
+          "code": "visual_contract.rating_export.contradiction",
+          "target": "humanoid_paperdoll_adult_capable_metadata_only",
+          "message": "Public-safe export can only carry safe-rated refs."
+        }
+      ]
+    },
+    {
+      "scenarioId": "strict_unknown_part_pack_ref",
+      "causalMutation": "unknown part-pack ref in strict mode",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.part_pack_ref.unknown",
+          "target": "part_pack/unknown_visual_ref/v1",
+          "message": "Strict mode rejects unknown part-pack refs."
+        }
+      ]
+    },
+    {
+      "scenarioId": "strict_unknown_recipe_ref",
+      "causalMutation": "unknown recipe ref in strict mode",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.recipe_ref.unknown",
+          "target": "recipe/unknown_visual_ref/v1",
+          "message": "Strict mode rejects unknown recipe refs."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unreviewed_rejected_promotion",
+      "causalMutation": "promotion requested before approval",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_contract.promotion.unreviewed_or_rejected",
+          "target": "candidate/humanoid_paperdoll_adult_capable_metadata_only/metadata_only",
+          "message": "Promotion requests require approved review status."
+        }
+      ]
+    }
+  ]
+}

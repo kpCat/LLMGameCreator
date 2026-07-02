@@ -173,6 +173,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/GOAL.md` | Goal 082 task: consume real Goal 080 projected GamePackage and Goal 081 runtime-preview playthrough artifacts into a compact Unity Alpha StreamingAssets handoff, independent Unity probe script, mirrored payload validation, bounded WinForms Unity Handoff tab and final stop at `edit_driven_unity_alpha_streamingassets_handoff_verification`. |
 | `docs/agent-tasks/goal-082a-source-format-physical-line-repair/GOAL.md` | Goal 082A hotfix task: repair the Goal 082 source-format physical-line guard backstop with raw-byte scan metrics, explicit Unity probe / WinForms parent / Application seam coverage, compact Goal 082A evidence and final stop at `source_format_physical_line_repair_verification`, while keeping Goal 082 accepted=false. |
 | `docs/agent-tasks/goal-083-visual-adult-layer-context-integration/GOAL.md` | Goal 083 docs/context task: integrate visual/adult-layer docs into the official context spine, queue, state docs, debt register and compact evidence, with final stop at `visual_adult_layer_context_integration_verification`; no code, Unity, schema, provider, media asset or prompt dump changes. |
+| `docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/GOAL.md` | Goal 084 task: add a BCL-only Application-side visual asset contract/rating metadata validator, metadata-only fixtures, compact evidence and final stop at `visual_asset_contract_rating_metadata_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or prompt-dump changes. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
 | `docs/context/ADULT_VISUAL_LAYER_DOCUMENTATION_MANIFEST.md` | Manifest for the adult-capable visual composition docs; read after the Goal 083 context index when shaping adult-capable visual tasks. |
@@ -403,6 +404,14 @@ zero-LF, CR-only, one-physical-line, raw/logical max line length and explicit Un
 Application seam coverage booleans, rejects synthetic CR-only and zero-LF one-physical-line samples, and keeps Goal
 082 accepted=false. The `21f2525a adult docs` commit is docs context only.
 
+Goal 083 is produced for review with `visual_adult_layer_context_integration_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it indexes/routes the visual/adult docs as policy-bounded context and
+does not start provider/media/runtime/schema implementation. Goal 084 is produced for review with
+`visual_asset_contract_rating_metadata_verification required`, `accepted=false`, `implementationStatus=GREEN`; it adds
+a BCL-only Application metadata contract/validator, focused tests, product smoke and compact metadata-only evidence
+under `.llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/`. Goal 083, Goal 082 and Goal 082A remain
+`accepted=false`.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -447,6 +456,8 @@ Allowed next sequence:
 40. Record Goal 081 runtime-preview playthrough as passed before Goal 082 without rewriting the Goal 081 artifact accepted=false evidence.
 41. Review Goal 082 `edit_driven_unity_alpha_streamingassets_handoff_verification`; do not mark it passed until explicit user acceptance and do not start the next goal from this implementation handoff.
 42. Review Goal 082A `source_format_physical_line_repair_verification`; it repairs the Goal 082 source-format guard backstop, keeps Goal 082 `accepted=false`, and treats `21f2525a adult docs` as docs context only.
+43. Review Goal 083 `visual_adult_layer_context_integration_verification`; it indexes/routes the visual/adult docs as policy-bounded context, keeps Goal 082 and Goal 082A `accepted=false`, and does not start a provider/media/runtime/schema implementation.
+44. Review Goal 084 `visual_asset_contract_rating_metadata_verification`; it adds the metadata contract foundation, keeps Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
 
 Kill criterion:
 

@@ -53,7 +53,8 @@
     ".llmgc/procedural/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/",
     ".llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/",
     ".llmgc/procedural/goal-082a-source-format-physical-line-repair/",
-    ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/"
+    ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/",
+    ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -898,6 +899,24 @@
       "allowedPathPrefixes": [
         ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/",
         "docs/agent-tasks/goal-083-visual-adult-layer-context-integration/"
+      ]
+    },
+    {
+      "scenario": "goal-084-visual-asset-contract-rating-metadata",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualAssetContractRatingMetadataProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/",
+        "docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/",
+        "src/LLMGameCreator.Application/Design/VisualAssetContractRatingMetadata/",
+        "tests/LLMGameCreator.Tests/Application/VisualAssetContractRatingMetadata/"
       ]
     }
   ]
