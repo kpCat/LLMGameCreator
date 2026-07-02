@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "goal_079a_source_format_line_ending_guard_scan_v1",
+  "goalId": "goal_079a_source_format_line_ending_guard",
+  "manualGate": "source_format_line_ending_guard_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "preflight": {
+    "branch": "main",
+    "latestCommitBeforeWork": "b1b0fefff9d22ba0f8b396881ac2f7b6f68784ec",
+    "originMainBeforeWork": "b1b0fefff9d22ba0f8b396881ac2f7b6f68784ec",
+    "goal079CommitPresent": true,
+    "goal079ArtifactsGreenAcceptedFalse": true,
+    "rawByteIssueConfirmedInCurrentHead": false,
+    "rawByteIssueDisposition": "Current working-tree and HEAD blob scans found no CR-only/no-LF C# files in the required scope; the Goal 079 scanner still lacked raw-byte checks and was strengthened."
+  },
+  "rawByteScanBefore": {
+    "scope": "Goal 074-079 edit-driven C# working-tree and HEAD blobs from allowed-files.md",
+    "scannedCSharpFileCount": 88,
+    "zeroLfSourceFileCount": 0,
+    "crOnlySourceFileCount": 0,
+    "rawPhysicalOneLineSourceFileCount": 0,
+    "rawPhysicalMaxLineLength": 223,
+    "logicalMaxLineLength": 223,
+    "filesOver1000LogicalLinesCount": 0
+  },
+  "rawByteScanAfter": {
+    "scope": "Goal 074-079 edit-driven C# scanner scope plus AlphaRuntimeBootstrap read-only hash record",
+    "scannedCSharpFileCount": 90,
+    "zeroLfSourceFileCount": 0,
+    "crOnlySourceFileCount": 0,
+    "rawPhysicalOneLineSourceFileCount": 0,
+    "rawPhysicalMaxLineLength": 251,
+    "logicalMaxLineLength": 251,
+    "filesOver1000LogicalLinesCount": 0,
+    "minifiedSourceFileCount": 0
+  },
+  "sourceNormalization": {
+    "affectedSourceFileCount": 0,
+    "normalizationApplied": false,
+    "normalizationReason": "No current CR-only/no-LF/one-physical-line C# source files were present in the required local scan scope."
+  },
+  "guardBackstop": {
+    "rawByteScannerAdded": true,
+    "zeroLfMetricAdded": true,
+    "crOnlyMetricAdded": true,
+    "rawPhysicalMaxLineMetricAdded": true,
+    "rawPhysicalOneLineMetricAdded": true,
+    "logicalMaxLineMetricAdded": true,
+    "syntheticCrOnlyRejected": true,
+    "syntheticZeroLfOnePhysicalLineRejected": true,
+    "currentRepoScannedFilesPassAfterGuard": true,
+    "goal079WorkspaceBindingIntact": true
+  },
+  "alphaRuntimeBootstrap": {
+    "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+    "lineCount": 3672,
+    "hash": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+    "unchanged": true
+  },
+  "goal079Evidence": {
+    "sourceHealthScanHash": "41ca426eb40a7e0c83a849ba0b359e29fe5b062f84efb461446b8741d63e21c9",
+    "qualityGateScanHash": "1d155da3f98fdd05a8a859ae8922abcbf2631ab9ce97afe9047b96a2de27fab9",
+    "reportHash": "12f8cb0d0614806d6b185955833411e55ee822814efe6310d7ac4300c2502daa"
+  },
+  "diagnostics": []
+}

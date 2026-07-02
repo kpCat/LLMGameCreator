@@ -6,6 +6,7 @@ namespace LLMGameCreator.Application.Design.EditDrivenSpineQualityConsolidation;
 public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
 {
     private const int ParentWorkspaceLineLimit = 275;
+    private const int LargeSourceFileByteThreshold = 1_500;
 
     private static readonly Regex TimestampLikePattern = new(
         @"\b20\d{2}-\d{2}-\d{2}[T ][0-2]\d:[0-5]\d:[0-5]\d",
@@ -20,13 +21,16 @@ public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
         "src/LLMGameCreator.Application/Design/EditDrivenReviewPackagePlayableSession",
         "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation",
         "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace",
+        "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignEditValidateApplyLoop",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenPlayablePreviewRefresh",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenPlayableReviewPackageMaterialization",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenReviewPackagePlayableSession",
         "tests/LLMGameCreator.Tests/Application/EditDrivenSpineQualityConsolidation"
     ];
 
     private static readonly IReadOnlyList<string> ScanFiles =
     [
         "src/LLMGameCreator.WinForms/CompositionRoot.cs",
-        "tests/LLMGameCreator.Tests/ProductSmoke/EditDrivenSpineQualityConsolidationProductSmokeTests.cs",
         "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs"
     ];
 
@@ -109,10 +113,16 @@ public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
             .ToList();
         var diagnostics = new List<EditDrivenSpineQualityConsolidationDiagnostic>();
         var linesOver500 = files.Sum(file => file.LinesOver500Count);
+        var zeroLfWithCr = files.Count(file => file.ZeroLfWithCr);
+        var crOnlyLineEndings = files.Count(file => file.ContainsCrOnlyLineEndings);
+        var rawPhysicalLinesOver500 = files.Sum(file => file.RawPhysicalLinesOver500Count);
+        var rawPhysicalOneLine = files.Count(file => file.RawPhysicalOneLineSourceCandidate);
         var filesOver1000 = files.Count(file =>
             file.FileOver1000Lines
             && file.RelativePath != "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs");
         var minified = files.Count(file => file.MinifiedSourceCandidate);
+        var logicalMaxLineLength = files.Count == 0 ? 0 : files.Max(file => file.LogicalMaxLineLength);
+        var rawPhysicalMaxLineLength = files.Count == 0 ? 0 : files.Max(file => file.RawPhysicalMaxLineLength);
         var parent = files.FirstOrDefault(file => file.RelativePath ==
             "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/"
             + "CampaignAuthoringReviewWorkspacePageControl.cs");
@@ -132,6 +142,38 @@ public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
                 "goal079.source.line_over_500",
                 "sourceHealth.linesOver500Count",
                 "Scanned C# files must not contain lines over 500 characters."));
+        }
+
+        if (zeroLfWithCr > 0)
+        {
+            diagnostics.Add(Error(
+                "goal079.source.zero_lf_with_cr",
+                "sourceHealth.zeroLfSourceFileCount",
+                "Scanned C# files must not contain CR-only/no-LF source bytes."));
+        }
+
+        if (crOnlyLineEndings > 0)
+        {
+            diagnostics.Add(Error(
+                "goal079.source.cr_only_line_endings",
+                "sourceHealth.crOnlySourceFileCount",
+                "Scanned C# files must not contain CR-only line endings."));
+        }
+
+        if (rawPhysicalLinesOver500 > 0)
+        {
+            diagnostics.Add(Error(
+                "goal079.source.raw_physical_line_over_500",
+                "sourceHealth.rawPhysicalMaxLineLength",
+                "Scanned C# files must not contain raw LF-physical lines over 500 bytes."));
+        }
+
+        if (rawPhysicalOneLine > 0)
+        {
+            diagnostics.Add(Error(
+                "goal079.source.raw_physical_one_line_source",
+                "sourceHealth.rawPhysicalOneLineSourceFileCount",
+                "Large C# files must not collapse to one physical line when split only by LF."));
         }
 
         if (filesOver1000 > 0)
@@ -170,8 +212,14 @@ public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
         {
             Passed = diagnostics.Count == 0,
             ScannedFileCount = files.Count,
-            MaxLineLength = files.Count == 0 ? 0 : files.Max(file => file.MaxLineLength),
+            MaxLineLength = logicalMaxLineLength,
+            LogicalMaxLineLength = logicalMaxLineLength,
             LinesOver500Count = linesOver500,
+            ZeroLfSourceFileCount = zeroLfWithCr,
+            CrOnlySourceFileCount = crOnlyLineEndings,
+            RawPhysicalMaxLineLength = rawPhysicalMaxLineLength,
+            RawPhysicalOneLineSourceFileCount = rawPhysicalOneLine,
+            RawPhysicalLinesOver500Count = rawPhysicalLinesOver500,
             FilesOver1000LinesCount = filesOver1000,
             MinifiedSourceFileCount = minified,
             ParentWorkspaceLineCount = parent?.LineCount ?? 0,
@@ -335,6 +383,13 @@ public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
             P1Count = debt.P1Count,
             P2Count = debt.P2Count,
             P3Count = debt.P3Count,
+            ZeroLfSourceFileCount = sourceHealth.ZeroLfSourceFileCount,
+            CrOnlySourceFileCount = sourceHealth.CrOnlySourceFileCount,
+            RawPhysicalMaxLineLength = sourceHealth.RawPhysicalMaxLineLength,
+            RawPhysicalOneLineSourceFileCount = sourceHealth.RawPhysicalOneLineSourceFileCount,
+            LogicalMaxLineLength = sourceHealth.LogicalMaxLineLength,
+            MinifiedSourceFileCount = sourceHealth.MinifiedSourceFileCount,
+            FilesOver1000LinesCount = sourceHealth.FilesOver1000LinesCount,
             Diagnostics = diagnostics
         };
     }
@@ -517,25 +572,119 @@ public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
                 yield return full;
             }
         }
+
+        var productSmokeRoot = Resolve(projectRoot, "tests/LLMGameCreator.Tests/ProductSmoke");
+        if (Directory.Exists(productSmokeRoot))
+        {
+            foreach (var file in Directory.EnumerateFiles(
+                         productSmokeRoot,
+                         "*EditDriven*.cs",
+                         SearchOption.TopDirectoryOnly))
+            {
+                yield return file;
+            }
+        }
     }
 
     private static EditDrivenSpineQualityConsolidationSourceFileScan ScanFile(string projectRoot, string path)
     {
-        var text = File.ReadAllText(path, Encoding.UTF8);
-        var lines = text.Split(["\r\n", "\n"], StringSplitOptions.None);
+        var bytes = File.ReadAllBytes(path);
+        var raw = AnalyzeRawPhysicalLines(bytes);
+        var text = Encoding.UTF8.GetString(bytes);
+        var lines = Regex.Split(text, "\r\n|\n|\r");
         var lengths = lines.Select(line => line.Length).ToList();
         var maxLineLength = lengths.Count == 0 ? 0 : lengths.Max();
         var lineCount = lines.Length;
+        var rawPhysicalOneLine = bytes.Length >= LargeSourceFileByteThreshold && raw.RawPhysicalLineCount <= 3;
         return new EditDrivenSpineQualityConsolidationSourceFileScan
         {
             RelativePath = Relative(projectRoot, path),
             LineCount = lineCount,
-            ByteCount = Encoding.UTF8.GetByteCount(text),
+            ByteCount = bytes.Length,
             MaxLineLength = maxLineLength,
+            LogicalLineCount = lineCount,
+            LogicalMaxLineLength = maxLineLength,
+            LfByteCount = raw.LfByteCount,
+            CrByteCount = raw.CrByteCount,
+            RawPhysicalLineCount = raw.RawPhysicalLineCount,
+            RawPhysicalMaxLineLength = raw.RawPhysicalMaxLineLength,
             LinesOver500Count = lengths.Count(length => length > 500),
+            RawPhysicalLinesOver500Count = raw.RawPhysicalLinesOver500Count,
+            ZeroLfWithCr = raw.LfByteCount == 0 && raw.CrByteCount > 0,
+            ContainsCrOnlyLineEndings = raw.ContainsCrOnlyLineEndings,
+            RawPhysicalOneLineSourceCandidate = rawPhysicalOneLine,
             FileOver1000Lines = lineCount > 1000,
-            MinifiedSourceCandidate = lineCount <= 1 || maxLineLength > 500
+            MinifiedSourceCandidate = lineCount <= 1
+                || maxLineLength > 500
+                || raw.RawPhysicalMaxLineLength > 500
+                || rawPhysicalOneLine
         };
+    }
+
+    private static RawSourceLineMetrics AnalyzeRawPhysicalLines(byte[] bytes)
+    {
+        if (bytes.Length == 0)
+        {
+            return new RawSourceLineMetrics(0, 0, 0, 0, 0, false);
+        }
+
+        var lfCount = 0;
+        var crCount = 0;
+        var currentLength = 0;
+        var maxLength = 0;
+        var over500Count = 0;
+        var containsCrOnlyLineEndings = false;
+
+        for (var index = 0; index < bytes.Length; index++)
+        {
+            var value = bytes[index];
+            if (value == '\n')
+            {
+                lfCount++;
+                if (currentLength > maxLength)
+                {
+                    maxLength = currentLength;
+                }
+
+                if (currentLength > 500)
+                {
+                    over500Count++;
+                }
+
+                currentLength = 0;
+                continue;
+            }
+
+            currentLength++;
+            if (value != '\r')
+            {
+                continue;
+            }
+
+            crCount++;
+            if (index + 1 >= bytes.Length || bytes[index + 1] != '\n')
+            {
+                containsCrOnlyLineEndings = true;
+            }
+        }
+
+        if (currentLength > maxLength)
+        {
+            maxLength = currentLength;
+        }
+
+        if (currentLength > 500)
+        {
+            over500Count++;
+        }
+
+        return new RawSourceLineMetrics(
+            lfCount,
+            crCount,
+            lfCount + 1,
+            maxLength,
+            over500Count,
+            containsCrOnlyLineEndings);
     }
 
     private static string ReadOptional(string projectRoot, string relativePath)
@@ -602,4 +751,12 @@ public sealed class EditDrivenSpineQualityConsolidationQualityGateScanner
         string ServiceName,
         string BuildCall,
         string BindCall);
+
+    private sealed record RawSourceLineMetrics(
+        int LfByteCount,
+        int CrByteCount,
+        int RawPhysicalLineCount,
+        int RawPhysicalMaxLineLength,
+        int RawPhysicalLinesOver500Count,
+        bool ContainsCrOnlyLineEndings);
 }

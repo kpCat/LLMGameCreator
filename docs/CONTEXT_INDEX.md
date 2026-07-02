@@ -167,6 +167,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-077-edit-driven-review-package-materialization/GOAL.md` | Goal 077 task: consume real Goal 076 edit-driven playable preview refresh artifacts from disk into a deterministic review package with concrete target files, package ledger, player-readable index, staged read verification, bounded WinForms review package tab and final stop at `edit_driven_review_package_materialization_verification`. |
 | `docs/agent-tasks/goal-078-edit-driven-review-package-playable-session/GOAL.md` | Goal 078 task: consume real Goal 077 disk-backed review package artifacts into a deterministic headless playable-session proof, package read proof, replay/state-chain proof, player-command index, bounded WinForms play session tab and final stop at `edit_driven_review_package_playable_session_verification`. |
 | `docs/agent-tasks/goal-079-edit-driven-spine-quality-consolidation/GOAL.md` | Goal 079 task: consolidate Goal 074-078 edit-driven spine quality into a BCL-only Application seam, deterministic dashboard artifacts, bounded WinForms dashboard tab and final stop at `edit_driven_spine_quality_consolidation_verification`. |
+| `docs/agent-tasks/goal-079a-source-format-line-ending-guard/GOAL.md` | Goal 079A hotfix task: strengthen the Goal 079 source-health scanner with raw-byte LF/CR metrics and final stop at `source_format_line_ending_guard_verification`, while keeping Goal 079 accepted=false. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -211,7 +212,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-edit_driven_spine_quality_consolidation_verification
+source_format_line_ending_guard_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -335,6 +336,11 @@ Goal 074-078 reports, quality gates, Goal 078 package read/replay/negative proof
 into a deterministic Application consolidation seam and a bounded WinForms dashboard tab without Unity/schema/runtime/
 provider/Lua changes.
 
+Goal 079A is produced for review with `source_format_line_ending_guard_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, zero CR-only/no-LF source files after scan, raw/logical max line
+length 251 and synthetic CR-only plus zero-LF one-physical-line guard tests passing. It updates Goal 079 evidence
+with explicit raw-byte source-health metrics and does not mark Goal 079 accepted.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -373,7 +379,8 @@ Allowed next sequence:
 34. Keep Goal 076 Edit-Driven Playable Preview Refresh recorded as accepted by user handoff before Goal 077, without mutating the Goal 076 artifact's `accepted=false` evidence.
 35. Keep Goal 077 Edit-Driven Review Package Materialization recorded as accepted by user handoff before Goal 078, without mutating the Goal 077 artifact's `accepted=false` evidence.
 36. Keep Goal 078 Edit-Driven Review Package Playable Session recorded as accepted by user handoff before Goal 079, without mutating the Goal 078 artifact's `accepted=false` evidence.
-37. Review Goal 079 `edit_driven_spine_quality_consolidation_verification`; do not mark it passed until user acceptance.
+37. Review Goal 079A `source_format_line_ending_guard_verification`; do not mark Goal 079 passed from this hotfix.
+38. After Goal 079A acceptance, continue reviewing Goal 079 `edit_driven_spine_quality_consolidation_verification`; do not mark it passed until explicit user acceptance.
 
 Kill criterion:
 

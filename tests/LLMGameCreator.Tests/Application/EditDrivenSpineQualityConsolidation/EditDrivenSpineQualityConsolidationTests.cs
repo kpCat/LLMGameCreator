@@ -1,4 +1,5 @@
 using System.Runtime.ExceptionServices;
+using System.Text;
 using LLMGameCreator.Application.Design.EditDrivenSpineQualityConsolidation;
 using LLMGameCreator.WinForms.Pages;
 using Xunit;
@@ -29,8 +30,16 @@ public sealed class EditDrivenSpineQualityConsolidationTests
         Assert.True(result.NegativeProofIndex.Passed);
         Assert.True(result.WorkspaceBindingInventory.Passed);
         Assert.True(result.SourceHealthScan.Passed);
+        Assert.Equal(0, result.SourceHealthScan.ZeroLfSourceFileCount);
+        Assert.Equal(0, result.SourceHealthScan.CrOnlySourceFileCount);
+        Assert.Equal(0, result.SourceHealthScan.RawPhysicalOneLineSourceFileCount);
+        Assert.True(result.SourceHealthScan.RawPhysicalMaxLineLength <= 500);
+        Assert.True(result.SourceHealthScan.LogicalMaxLineLength <= 500);
         Assert.True(result.ArtifactHygieneScan.Passed);
         Assert.True(result.QualityGateScan.Passed);
+        Assert.Equal(0, result.QualityGateScan.ZeroLfSourceFileCount);
+        Assert.Equal(0, result.QualityGateScan.CrOnlySourceFileCount);
+        Assert.Equal(0, result.QualityGateScan.RawPhysicalOneLineSourceFileCount);
         Assert.Equal(5, result.SpineChainManifest.ChainItemCount);
         Assert.Equal(0, result.QualityDebtClassification.P0Count);
         Assert.Equal(0, result.QualityDebtClassification.P1Count);
@@ -38,6 +47,78 @@ public sealed class EditDrivenSpineQualityConsolidationTests
         foreach (var fileName in EditDrivenSpineQualityConsolidationEvidenceService.RequiredArtifactNames())
         {
             Assert.True(File.Exists(Path.Combine(write.OutputDirectoryPath, fileName)), fileName);
+        }
+    }
+
+    [Fact]
+    public void SourceHealthScanRejectsCrOnlyNoLfSourceBytes()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "llmgc-goal079a-cr-only-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            WriteFile(
+                root,
+                "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/"
+                    + "CampaignAuthoringReviewWorkspacePageControl.cs",
+                "public sealed class CampaignAuthoringReviewWorkspacePageControl\n{\n}\n");
+            WriteBytes(
+                root,
+                "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/CrOnly.cs",
+                Encoding.UTF8.GetBytes("public sealed class CrOnly\r{\r    public int Value => 1;\r}\r"));
+
+            var scan = new EditDrivenSpineQualityConsolidationQualityGateScanner().ScanSourceHealth(
+                root,
+                expectedAlphaRuntimeBootstrapHash: "");
+
+            Assert.False(scan.Passed);
+            Assert.Equal(1, scan.ZeroLfSourceFileCount);
+            Assert.Equal(1, scan.CrOnlySourceFileCount);
+            Assert.Contains(scan.Diagnostics, diagnostic => diagnostic.Code == "goal079.source.zero_lf_with_cr");
+            Assert.Contains(scan.Diagnostics, diagnostic => diagnostic.Code == "goal079.source.cr_only_line_endings");
+        }
+        finally
+        {
+            DeleteDirectory(root);
+        }
+    }
+
+    [Fact]
+    public void SourceHealthScanRejectsZeroLfOnePhysicalLineSourceBytes()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "llmgc-goal079a-zero-lf-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            WriteFile(
+                root,
+                "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/"
+                    + "CampaignAuthoringReviewWorkspacePageControl.cs",
+                "public sealed class CampaignAuthoringReviewWorkspacePageControl\n{\n}\n");
+            var compactSource = "public sealed class ZeroLf { public string Value => \""
+                + new string('x', 1_600)
+                + "\"; }";
+            WriteBytes(
+                root,
+                "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/ZeroLf.cs",
+                Encoding.UTF8.GetBytes(compactSource));
+
+            var scan = new EditDrivenSpineQualityConsolidationQualityGateScanner().ScanSourceHealth(
+                root,
+                expectedAlphaRuntimeBootstrapHash: "");
+
+            Assert.False(scan.Passed);
+            Assert.Equal(1, scan.RawPhysicalOneLineSourceFileCount);
+            Assert.True(scan.RawPhysicalMaxLineLength > 500);
+            Assert.True(scan.MinifiedSourceFileCount > 0);
+            Assert.Contains(
+                scan.Diagnostics,
+                diagnostic => diagnostic.Code == "goal079.source.raw_physical_one_line_source");
+            Assert.Contains(
+                scan.Diagnostics,
+                diagnostic => diagnostic.Code == "goal079.source.raw_physical_line_over_500");
+        }
+        finally
+        {
+            DeleteDirectory(root);
         }
     }
 
@@ -283,6 +364,13 @@ public sealed class EditDrivenSpineQualityConsolidationTests
         var path = Path.Combine(root, relativePath.Replace('/', Path.DirectorySeparatorChar));
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         File.WriteAllText(path, contents);
+    }
+
+    private static void WriteBytes(string root, string relativePath, byte[] contents)
+    {
+        var path = Path.Combine(root, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllBytes(path, contents);
     }
 
     private static void DeleteDirectory(string path)

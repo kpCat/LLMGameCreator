@@ -6,50 +6,50 @@
     {
       "goalId": "goal_074_schema_driven_campaign_authoring_review_workspace",
       "goalNumber": 74,
-      "reportHash": "a39e872032da921fbc04dfb0f437a0899ad049c46e6f9762b935c535740157c2",
-      "declaredReportHash": "5b7919a92ac6354b47e0fb1f0682cb74619ca48572f5892cfa509add8803d823",
-      "qualityGateHash": "4a4014a12d873b5ad295ced547ff8cfae422b3f4ab5c120766a4d363b7295cca",
+      "reportHash": "559b3223cde3016b1cebb586191d45d6d06270b38642da5dae756be48abed0ab",
+      "declaredReportHash": "0fb03e68ac37f2b55dd64482fb5ed9b4ef59f8e42e7aca9ffdea857ae48f014e",
+      "qualityGateHash": "7500adc0a553ad12b50f4a2ee756ced856c04ee192a033260abddb109d9daec8",
       "implementationStatus": "GREEN",
       "accepted": "false"
     },
     {
       "goalId": "goal_075_schema_driven_campaign_edit_validate_apply_loop",
       "goalNumber": 75,
-      "reportHash": "8144b3adc67fc2035a1cfe5e2984a899dcbf82cd7370615e481e49e6a48cadc0",
-      "declaredReportHash": "3cf1d7c7dd4fadd0d6fc559420592e3e7dd22b9c6f9da090f071bceb52546331",
-      "qualityGateHash": "c93e9fd99f968882f19a4d699505e58468caaa70b4d1399c05ddd4836e56ab51",
+      "reportHash": "85d36c0821a0827264043b68005e9e346edd9e5d9e9cdac44f9a0f6c0213f4ea",
+      "declaredReportHash": "a80a3cbdfde695c7dfe1b982fb0f95a8cc8d790aae2bca35043d465954c5a1b8",
+      "qualityGateHash": "a73a4cee54f0818db2df2d001aeaac0ed85c74e935df80cc9a788938a47ea923",
       "implementationStatus": "GREEN",
       "accepted": "false"
     },
     {
       "goalId": "goal_076_edit_driven_playable_preview_refresh",
       "goalNumber": 76,
-      "reportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
-      "declaredReportHash": "6794b1cd1eb2c9ad3618e055ae430f8b9fc6cc7f52dbdf01955d7022d248e134",
-      "qualityGateHash": "79d68787ad98fe4b13c58044f2febc5aa6cc8074785e66cc509006f4b561d342",
+      "reportHash": "44e652b00482d831555718363732d3763b4f1671ede257cfb88bd2b337d62115",
+      "declaredReportHash": "7b011e9a01e3390d4a8dd1d88b4e1a5d9c9c35f088829aabc9e27a464ed3b09f",
+      "qualityGateHash": "fe94471e98a897baf5c1c95da4f40e4688791301f5e8841adfa9596b02b11ad5",
       "implementationStatus": "GREEN",
       "accepted": "false"
     },
     {
       "goalId": "goal_077_edit_driven_review_package_materialization",
       "goalNumber": 77,
-      "reportHash": "921c88f432478b315c84a3c4cd05ddad709d569d06408958d8abc06e35475fa4",
-      "declaredReportHash": "ae839969a04572fc330804f531de90e422025c2f1d0ad037084544e4ba7afbaf",
-      "qualityGateHash": "3d1212a200b1b8374fdbdc34b6c26fd220953b272c9e5edd4301349413e8c4c4",
+      "reportHash": "1d5a3ad76ad853307e261efcfe8017fd89041d2ae0cd5f3b063927b0917def4a",
+      "declaredReportHash": "71c4b89e80cc6d05190f6569bb2d4001d7684301d2675050f5116e2bc8834a66",
+      "qualityGateHash": "5493807e5b5068ded1d3087b7bbd900ad80f1defae9b00a466f73547532cc380",
       "implementationStatus": "GREEN",
       "accepted": "false"
     },
     {
       "goalId": "goal_078_edit_driven_review_package_playable_session",
       "goalNumber": 78,
-      "reportHash": "b706a7fbe7ddb9c85cecbcc806a8c36f79af626df3ea295ee3312d7b11fccb12",
-      "declaredReportHash": "2ce9a56f3a868790d9c9a4ba82debc0cf862ad7b56d9236a50b6537a41e6479f",
-      "qualityGateHash": "beea7c8cd18d6abee65de168dd57c7ea0c69e205bd45e4955248398ca757a848",
+      "reportHash": "eabfee54d3dfb0b377211dd7ce6da4983c8f94d5cb2d5bb5a5a52bef920a2ab8",
+      "declaredReportHash": "23101fbc1d2c80fd66733ef60c2e64a1b594909f49bceca24b3bbc11e2be947c",
+      "qualityGateHash": "d55dd3c28fbbf973909ea48ea4e6931ed55e7e75cb9137fb150539575dc27e16",
       "implementationStatus": "GREEN",
       "accepted": "false"
     }
   ],
-  "goal078PackageReadProofHash": "ac88b0c81b4521d52edb9be7c4c4024aa1a042af85a5a5286225679afa048f5d",
-  "goal078ReplayProofHash": "9ed2f05f24b0ed9a4cbf8a275693ca17eb9005db17e1eb99ae01ccdf3dad2406",
+  "goal078PackageReadProofHash": "c1f87227790e7563f56f5bc3eeb1da33e4f0ba1e50ca4953d54586b979dd1ce8",
+  "goal078ReplayProofHash": "9a6761212b6218311d5aa6335fdbb3c1409937551fce532d519c85e684439ba5",
   "goal078NegativeProofHash": "e518d074ec5108375cb4f0e25d561a7cb23a79f3ec45eb899b82c2b8ee82a888"
 }

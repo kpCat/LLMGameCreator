@@ -66,6 +66,7 @@ semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
 generator_spine_quality_consolidation_verification required
 edit_driven_spine_quality_consolidation_verification required
+source_format_line_ending_guard_verification required
 ```
 
 Current capabilities:
@@ -145,6 +146,7 @@ Current capabilities:
 - Goal 077 edit-driven review package materialization consumes real Goal 076 artifacts into a disk-backed review package with 18 concrete target files, a 21-file package ledger, player-readable package index, staged read proof, missing/tampered/player-index negative proof and bounded WinForms review package tab binding;
 - Goal 078 edit-driven review package playable session consumes real Goal 077 review-package artifacts into a deterministic headless playable-session action log, package read proof, state-chain/replay proof, player-command index, negative replay proof and bounded WinForms play session tab binding;
 - Goal 079 edit-driven spine quality consolidation consumes Goal 074-078 reports, quality gates and Goal 078 proofs into deterministic chain/readiness/negative/source-health/debt artifacts plus a bounded WinForms dashboard tab binding;
+- Goal 079A source format line ending guard strengthens the Goal 079 source-health scan with raw-byte LF/CR metrics, proves synthetic CR-only and zero-LF one-physical-line source rejection, and keeps Goal 079 accepted=false;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
@@ -1074,14 +1076,26 @@ Produced for review. The gate remains `edit_driven_spine_quality_consolidation_v
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, 5 consumed chain items, zero P0/P1 blockers, P2/P3 debt counts 8/2 and report hash `3845b0f699ed44b618638bb3e21871fda083551a6d7ad8bdca8ba0e62bbbb8eb`. Artifacts are under `.llmgc/procedural/goal-079-edit-driven-spine-quality-consolidation/`; Goal 078 remains `accepted=false` in its artifact and accepted only by current-state handoff before Goal 079.
 
+### Goal 079A: Source Format Line Ending Guard
+
+Purpose:
+
+Repair the post-Goal 079 source-format guard blind spot by adding raw-byte LF/CR source-health metrics and synthetic CR-only/zero-LF regression coverage without starting a new feature goal.
+
+Status:
+
+Produced for review. The gate remains `source_format_line_ending_guard_verification required`, not passed.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, zero CR-only/no-LF files after scan, raw/logical max line length 251, zero minified source files, synthetic CR-only and zero-LF one-physical-line samples rejected, and AlphaRuntimeBootstrap.cs unchanged with hash `f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce`. Artifacts are under `.llmgc/procedural/goal-079a-source-format-line-ending-guard/`; Goal 079 remains `accepted=false` and is not marked passed by this hotfix.
+
 ## Current Recommended Next Work
 
 ```text
-edit_driven_spine_quality_consolidation_verification
+source_format_line_ending_guard_verification
 ```
 
 Status:
 
 ```text
-goal_079_edit_driven_spine_quality_consolidation_produced_for_review
+goal_079a_source_format_line_ending_guard_produced_for_review
 ```

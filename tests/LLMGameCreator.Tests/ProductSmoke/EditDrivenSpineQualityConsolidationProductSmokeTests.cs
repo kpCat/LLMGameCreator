@@ -33,6 +33,12 @@ public sealed class EditDrivenSpineQualityConsolidationProductSmokeTests
         var debt = ReadArtifact<EditDrivenSpineQualityConsolidationDebtClassification>(
             write.OutputDirectoryPath,
             "quality-debt-classification.json");
+        var sourceHealth = ReadArtifact<EditDrivenSpineQualityConsolidationSourceHealthScan>(
+            write.OutputDirectoryPath,
+            "source-health-scan.json");
+        var quality = ReadArtifact<EditDrivenSpineQualityConsolidationQualityGateScan>(
+            write.OutputDirectoryPath,
+            "quality-gate-scan.json");
 
         Assert.True(dashboard.PackageReadProofPassed);
         Assert.True(dashboard.ReplayProofPassed);
@@ -44,6 +50,16 @@ public sealed class EditDrivenSpineQualityConsolidationProductSmokeTests
         Assert.True(negative.Passed);
         Assert.Contains(debt.Debts, item => item.Severity == "P2");
         Assert.Contains(debt.Debts, item => item.FindingId == "GQ-P3-ADAPTIVE-DOCS-CONTEXT-INDEXING");
+        Assert.Equal(0, sourceHealth.ZeroLfSourceFileCount);
+        Assert.Equal(0, sourceHealth.CrOnlySourceFileCount);
+        Assert.Equal(0, sourceHealth.RawPhysicalOneLineSourceFileCount);
+        Assert.True(sourceHealth.RawPhysicalMaxLineLength <= 500);
+        Assert.True(sourceHealth.LogicalMaxLineLength <= 500);
+        Assert.Equal(0, quality.ZeroLfSourceFileCount);
+        Assert.Equal(0, quality.CrOnlySourceFileCount);
+        Assert.Equal(0, quality.RawPhysicalOneLineSourceFileCount);
+        Assert.True(quality.RawPhysicalMaxLineLength <= 500);
+        Assert.True(quality.LogicalMaxLineLength <= 500);
 
         var proof = File.ReadAllText(Path.Combine(root, Goal078NegativeProofPath));
         var tampered = ReplaceFirst(proof, "\"actualStatus\": \"rejected\"", "\"actualStatus\": \"accepted\"");

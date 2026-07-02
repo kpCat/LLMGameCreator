@@ -3,21 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-02T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 079 edit-driven spine quality consolidation produced for review",
-    "gate_status":  "edit_driven_spine_quality_consolidation_verification",
+    "current_phase_title":  "Goal 079A source format line ending guard produced for review",
+    "gate_status":  "source_format_line_ending_guard_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_078_edit_driven_review_package_playable_session",
-    "active_manual_gate":  "Goal 079 Edit-Driven Spine Quality Consolidation is produced for review: edit_driven_spine_quality_consolidation_verification required, accepted=false.",
-    "current_user_action":  "Review Goal 079 edit-driven spine quality consolidation evidence; Goal 078 is accepted by user handoff before Goal 079, while Goal 072 remains historical BLOCKED evidence.",
-    "recommended_next_decision":  "Review Goal 079 evidence and only mark edit_driven_spine_quality_consolidation_verification passed after explicit user acceptance.",
+    "active_manual_gate":  "Goal 079A Source Format Line Ending Guard is produced for review: source_format_line_ending_guard_verification required, accepted=false. Goal 079 remains accepted=false.",
+    "current_user_action":  "Review Goal 079A source format line ending guard evidence; Goal 079 remains produced for review and accepted=false, while Goal 072 remains historical BLOCKED evidence.",
+    "recommended_next_decision":  "Review Goal 079A evidence and only mark source_format_line_ending_guard_verification passed after explicit user acceptance; do not mark Goal 079 passed from this hotfix.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                     "next_sequence":  [
-                                                          "edit_driven_spine_quality_consolidation_verification"
+                                                          "source_format_line_ending_guard_verification"
                                                       ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
                               },
@@ -96,7 +96,8 @@
                            "goal_076_manual_gate":  "edit_driven_playable_preview_refresh_verification",
                            "goal_077_manual_gate":  "edit_driven_review_package_materialization_verification",
                            "goal_078_manual_gate":  "edit_driven_review_package_playable_session_verification",
-                           "goal_079_manual_gate":  "edit_driven_spine_quality_consolidation_verification"
+                           "goal_079_manual_gate":  "edit_driven_spine_quality_consolidation_verification",
+                           "goal_079a_manual_gate":  "source_format_line_ending_guard_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -386,8 +387,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
-                                          "goal_079_edit_driven_spine_quality_consolidation",
-                                          "edit_driven_spine_quality_consolidation_verification"
+                                          "goal_079a_source_format_line_ending_guard",
+                                          "source_format_line_ending_guard_verification",
+                                          "goal_079_edit_driven_spine_quality_consolidation"
                                       ],
     "blocked_next_milestones_until_gate_passes":  [
                                                       "M5 Lua module executor integration remains Locked until a controlled product vertical slice explicitly selects it and the user approves that unlock.",
@@ -408,11 +410,12 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "edit_driven_spine_quality_consolidation_verification",
-    "recommended_next_work_item_title":  "Review Goal 079 Edit-Driven Spine Quality Consolidation evidence while keeping the manual gate required.",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-079-edit-driven-spine-quality-consolidation/GOAL.md",
+    "recommended_next_work_item":  "source_format_line_ending_guard_verification",
+    "recommended_next_work_item_title":  "Review Goal 079A source format line ending guard evidence while keeping Goal 079 accepted=false.",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-079a-source-format-line-ending-guard/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 079 edit-driven spine quality consolidation dashboard",
+                                              "Review Goal 079A source format line ending guard evidence",
+                                              "Keep Goal 079 accepted=false from this hotfix",
                                               "Keep Goal 079 gate required with accepted=false until user review accepts it",
                                               "Do not start the next goal from this implementation handoff"
                                            ],
@@ -420,6 +423,8 @@
                                                    "AGENTS.md",
                                                    "docs/CONTEXT_INDEX.md",
                                                    "docs/CURRENT_GENERATOR_STATE.md",
+                                                   "docs/agent-tasks/goal-079a-source-format-line-ending-guard/GOAL.md",
+                                                   "docs/agent-tasks/goal-079a-source-format-line-ending-guard/read-first.md",
                                                    "docs/agent-tasks/goal-079-edit-driven-spine-quality-consolidation/GOAL.md",
                                                    "docs/agent-tasks/goal-079-edit-driven-spine-quality-consolidation/read-first.md",
                                                    "docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md",
@@ -1751,6 +1756,20 @@
                                                                                             "WinForms Campaign Authoring Review Workspace includes a separate Goal 079 spine quality dashboard tab/control bound through parent activation."
                                                                                         ],
                                                                     "next_action":  "review_goal_079_edit_driven_spine_quality_consolidation"
+                                                                },
+    "source_format_line_ending_guard_verification":  {
+                                                                    "status":  "produced_for_review",
+                                                                    "accepted":  false,
+                                                                    "evidence_source":  "goal_079a_source_format_line_ending_guard",
+                                                                    "observed_result":  [
+                                                                                            "Goal 079A produces source format line ending guard evidence under .llmgc/procedural/goal-079a-source-format-line-ending-guard with accepted=false.",
+                                                                                            "implementationStatus=GREEN, zeroLfSourceFileCount=0, crOnlySourceFileCount=0, rawPhysicalOneLineSourceFileCount=0, rawPhysicalMaxLineLength=251, logicalMaxLineLength=251, minifiedSourceFileCount=0.",
+                                                                                            "Current working-tree and HEAD blob scans found no CR-only/no-LF/one-physical-line C# files in the required Goal 074-079 scope, so no source normalization was required.",
+                                                                                            "The Goal 079 source-health scanner now records raw-byte LF/CR metrics and rejects synthetic CR-only and zero-LF one-physical-line source samples.",
+                                                                                            "Goal 079 remains produced for review with edit_driven_spine_quality_consolidation_verification required, accepted=false; Goal 079A does not mark Goal 079 passed.",
+                                                                                            "AlphaRuntimeBootstrap.cs remains read-only with lineCount=3672 and hash=f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce."
+                                                                                        ],
+                                                                    "next_action":  "review_goal_079a_source_format_line_ending_guard"
                                                                 },
     "goal_024_rich_package_assembly_coverage_audit":  {
                                                           "slice_id":  "goal_024_rich_package_assembly_coverage_audit",

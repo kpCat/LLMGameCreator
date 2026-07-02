@@ -72,6 +72,11 @@ public sealed partial class CampaignEditDrivenSpineQualityControl : UserControl
             "p3Count=" + result.QualityDebtClassification.P3Count,
             "parentWorkspaceLineCount=" + result.SourceHealthScan.ParentWorkspaceLineCount,
             "maxCSharpLineLength=" + result.SourceHealthScan.MaxLineLength,
+            "logicalMaxLineLength=" + result.SourceHealthScan.LogicalMaxLineLength,
+            "zeroLfSourceFileCount=" + result.SourceHealthScan.ZeroLfSourceFileCount,
+            "crOnlySourceFileCount=" + result.SourceHealthScan.CrOnlySourceFileCount,
+            "rawPhysicalMaxLineLength=" + result.SourceHealthScan.RawPhysicalMaxLineLength,
+            "rawPhysicalOneLineSourceFileCount=" + result.SourceHealthScan.RawPhysicalOneLineSourceFileCount,
             "alphaRuntimeBootstrapLineCount=" + result.SourceHealthScan.AlphaRuntimeBootstrapLineCount,
             "alphaRuntimeBootstrapHash=" + result.SourceHealthScan.AlphaRuntimeBootstrapHash
         };

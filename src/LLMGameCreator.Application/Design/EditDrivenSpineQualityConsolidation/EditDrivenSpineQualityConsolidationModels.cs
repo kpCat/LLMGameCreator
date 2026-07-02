@@ -189,7 +189,13 @@ public sealed record EditDrivenSpineQualityConsolidationSourceHealthScan
     public bool Passed { get; init; }
     public int ScannedFileCount { get; init; }
     public int MaxLineLength { get; init; }
+    public int LogicalMaxLineLength { get; init; }
     public int LinesOver500Count { get; init; }
+    public int ZeroLfSourceFileCount { get; init; }
+    public int CrOnlySourceFileCount { get; init; }
+    public int RawPhysicalMaxLineLength { get; init; }
+    public int RawPhysicalOneLineSourceFileCount { get; init; }
+    public int RawPhysicalLinesOver500Count { get; init; }
     public int FilesOver1000LinesCount { get; init; }
     public int MinifiedSourceFileCount { get; init; }
     public int ParentWorkspaceLineCount { get; init; }
@@ -207,7 +213,17 @@ public sealed record EditDrivenSpineQualityConsolidationSourceFileScan
     public int LineCount { get; init; }
     public int ByteCount { get; init; }
     public int MaxLineLength { get; init; }
+    public int LogicalLineCount { get; init; }
+    public int LogicalMaxLineLength { get; init; }
+    public int LfByteCount { get; init; }
+    public int CrByteCount { get; init; }
+    public int RawPhysicalLineCount { get; init; }
+    public int RawPhysicalMaxLineLength { get; init; }
     public int LinesOver500Count { get; init; }
+    public int RawPhysicalLinesOver500Count { get; init; }
+    public bool ZeroLfWithCr { get; init; }
+    public bool ContainsCrOnlyLineEndings { get; init; }
+    public bool RawPhysicalOneLineSourceCandidate { get; init; }
     public bool FileOver1000Lines { get; init; }
     public bool MinifiedSourceCandidate { get; init; }
 }
@@ -253,6 +269,13 @@ public sealed record EditDrivenSpineQualityConsolidationQualityGateScan
     public bool NegativeProofPassed { get; init; }
     public bool SourceHealthPassed { get; init; }
     public bool ArtifactHygienePassed { get; init; }
+    public int ZeroLfSourceFileCount { get; init; }
+    public int CrOnlySourceFileCount { get; init; }
+    public int RawPhysicalMaxLineLength { get; init; }
+    public int RawPhysicalOneLineSourceFileCount { get; init; }
+    public int LogicalMaxLineLength { get; init; }
+    public int MinifiedSourceFileCount { get; init; }
+    public int FilesOver1000LinesCount { get; init; }
     public int P0Count { get; init; }
     public int P1Count { get; init; }
     public int P2Count { get; init; }
@@ -278,6 +301,11 @@ public sealed record EditDrivenSpineQualityConsolidationReport
     public int BlockerCount { get; init; }
     public int ParentWorkspaceLineCount { get; init; }
     public int MaxCSharpLineLength { get; init; }
+    public int LogicalMaxLineLength { get; init; }
+    public int ZeroLfSourceFileCount { get; init; }
+    public int CrOnlySourceFileCount { get; init; }
+    public int RawPhysicalMaxLineLength { get; init; }
+    public int RawPhysicalOneLineSourceFileCount { get; init; }
     public int MinifiedSourceFileCount { get; init; }
     public int FilesOver1000LinesCount { get; init; }
     public int AlphaRuntimeBootstrapLineCount { get; init; }

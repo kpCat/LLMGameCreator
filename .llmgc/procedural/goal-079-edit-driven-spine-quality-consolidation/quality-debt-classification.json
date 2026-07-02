@@ -27,17 +27,17 @@
       "disposition": "Below Goal 079 hard limit; classify for future extraction."
     },
     {
-      "findingId": "GQ-P2-LONG-BELOW-LIMIT-606",
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-695",
       "severity": "P2",
       "area": "source-size",
-      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/EditDrivenSpineQualityConsolidationQualityGateScanner.cs lines=606",
+      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/EditDrivenSpineQualityConsolidationEvidenceService.cs lines=695",
       "disposition": "Below Goal 079 hard limit; classify for future extraction."
     },
     {
-      "findingId": "GQ-P2-LONG-BELOW-LIMIT-690",
+      "findingId": "GQ-P2-LONG-BELOW-LIMIT-763",
       "severity": "P2",
       "area": "source-size",
-      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/EditDrivenSpineQualityConsolidationEvidenceService.cs lines=690",
+      "evidence": "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/EditDrivenSpineQualityConsolidationQualityGateScanner.cs lines=763",
       "disposition": "Below Goal 079 hard limit; classify for future extraction."
     },
     {
