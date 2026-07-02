@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_review_package_target_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "targetId": "target-017",
+  "sourceRowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+  "familyId": "first_person_grid_dungeon",
+  "seedId": "seed_gamma",
+  "fieldId": "combat_magic_boss_summary.status_pressure",
+  "domainId": "combat_magic_status",
+  "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma",
+  "beforeValue": "freeze",
+  "afterValue": "shock",
+  "beforeHash": "b9c8987094024b52ebd0bd4a01aa5b376545c991a55040e59f346a60ba53c273",
+  "afterHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+  "rollbackHash": "b9c8987094024b52ebd0bd4a01aa5b376545c991a55040e59f346a60ba53c273",
+  "replayHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+  "validationRequirement": "validate-before-preview-apply",
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d"
+}

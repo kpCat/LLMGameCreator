@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_review_package_target_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "targetId": "target-007",
+  "sourceRowId": "matrix-row-survival-sandbox-seed-alpha",
+  "familyId": "survival_sandbox",
+  "seedId": "seed_alpha",
+  "fieldId": "gameplay_consequence_summary.consequence_intensity",
+  "domainId": "gameplay_consequence",
+  "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha",
+  "beforeValue": "high",
+  "afterValue": "low",
+  "beforeHash": "e69fa9b2eb94d63f8315e8363158a9ea0b79b913d17d4786158e1ba15197ef86",
+  "afterHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+  "rollbackHash": "e69fa9b2eb94d63f8315e8363158a9ea0b79b913d17d4786158e1ba15197ef86",
+  "replayHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+  "validationRequirement": "validate-before-preview-apply",
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d"
+}

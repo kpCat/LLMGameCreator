@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_review_package_target_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "targetId": "target-004",
+  "sourceRowId": "matrix-row-map-panel-rpg-seed-beta",
+  "familyId": "map_panel_rpg",
+  "seedId": "seed_beta",
+  "fieldId": "settlement_construction_destruction_production_summary.production_focus",
+  "domainId": "settlement_production",
+  "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta",
+  "beforeValue": "growth",
+  "afterValue": "repair",
+  "beforeHash": "cedb8bbba9840ed30f049059413b32d3b413f42a47f719cea3672ed36352b652",
+  "afterHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+  "rollbackHash": "cedb8bbba9840ed30f049059413b32d3b413f42a47f719cea3672ed36352b652",
+  "replayHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+  "validationRequirement": "validate-before-preview-apply",
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d"
+}

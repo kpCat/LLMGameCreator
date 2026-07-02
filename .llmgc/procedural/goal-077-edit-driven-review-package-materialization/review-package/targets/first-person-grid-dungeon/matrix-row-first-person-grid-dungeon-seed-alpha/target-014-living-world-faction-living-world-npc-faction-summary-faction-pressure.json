@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_review_package_target_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "targetId": "target-014",
+  "sourceRowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+  "familyId": "first_person_grid_dungeon",
+  "seedId": "seed_alpha",
+  "fieldId": "living_world_npc_faction_summary.faction_pressure",
+  "domainId": "living_world_faction",
+  "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha",
+  "beforeValue": "tense",
+  "afterValue": "neutral",
+  "beforeHash": "e5d75d9c8e4b4bc305d3c07aa1fdfed4a94a481fdc97bb6d210fdb27537a55f7",
+  "afterHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+  "rollbackHash": "e5d75d9c8e4b4bc305d3c07aa1fdfed4a94a481fdc97bb6d210fdb27537a55f7",
+  "replayHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+  "validationRequirement": "validate-before-preview-apply",
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d"
+}

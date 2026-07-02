@@ -1,0 +1,318 @@
+{
+  "schemaVersion": "edit_driven_review_package_quality_gate_scan_v1",
+  "passed": true,
+  "scannedFileCount": 37,
+  "maxLineLength": 251,
+  "linesOver500Count": 0,
+  "filesOver1000LinesCount": 0,
+  "minifiedSourceFileCount": 0,
+  "reviewPackageTargetFileCount": 18,
+  "parentUiBindingPassed": true,
+  "reportOnlySmokeDetected": false,
+  "alphaRuntimeBootstrapLineCount": 3672,
+  "alphaRuntimeBootstrapHash": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+  "alphaRuntimeBootstrapNoChangeStatus": "read_only_hash_recorded_no_goal077_write_path",
+  "evidenceContainsAbsoluteLocalPaths": false,
+  "evidenceContainsTimestampLikeValues": false,
+  "evidenceContainsHeavyLogs": false,
+  "evidenceContainsScratchTamperFiles": false,
+  "files": [
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationEvidenceService.cs",
+      "lineCount": 888,
+      "byteCount": 42430,
+      "maxLineLength": 150,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationHash.cs",
+      "lineCount": 54,
+      "byteCount": 1729,
+      "maxLineLength": 91,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationModels.cs",
+      "lineCount": 527,
+      "byteCount": 26377,
+      "maxLineLength": 131,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationQualityGateScanner.cs",
+      "lineCount": 386,
+      "byteCount": 16516,
+      "maxLineLength": 132,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationReadValidator.cs",
+      "lineCount": 287,
+      "byteCount": 12691,
+      "maxLineLength": 157,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+      "lineCount": 349,
+      "byteCount": 24899,
+      "maxLineLength": 154,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignActionPlanControl.Designer.cs",
+      "lineCount": 97,
+      "byteCount": 3588,
+      "maxLineLength": 72,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignActionPlanControl.cs",
+      "lineCount": 30,
+      "byteCount": 987,
+      "maxLineLength": 98,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.Designer.cs",
+      "lineCount": 232,
+      "byteCount": 11118,
+      "maxLineLength": 84,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
+      "lineCount": 194,
+      "byteCount": 7015,
+      "maxLineLength": 108,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignDiagnosticsControl.Designer.cs",
+      "lineCount": 92,
+      "byteCount": 3441,
+      "maxLineLength": 78,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignDiagnosticsControl.cs",
+      "lineCount": 32,
+      "byteCount": 1116,
+      "maxLineLength": 92,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditApplyRollbackControl.Designer.cs",
+      "lineCount": 107,
+      "byteCount": 3895,
+      "maxLineLength": 71,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditApplyRollbackControl.cs",
+      "lineCount": 41,
+      "byteCount": 1528,
+      "maxLineLength": 93,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditFieldSummaryControl.Designer.cs",
+      "lineCount": 97,
+      "byteCount": 3526,
+      "maxLineLength": 73,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditFieldSummaryControl.cs",
+      "lineCount": 38,
+      "byteCount": 1410,
+      "maxLineLength": 99,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditValidateApplyLoopControl.Designer.cs",
+      "lineCount": 126,
+      "byteCount": 5258,
+      "maxLineLength": 91,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditValidateApplyLoopControl.cs",
+      "lineCount": 75,
+      "byteCount": 2214,
+      "maxLineLength": 97,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditValidationControl.Designer.cs",
+      "lineCount": 97,
+      "byteCount": 3601,
+      "maxLineLength": 78,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignEditValidationControl.cs",
+      "lineCount": 44,
+      "byteCount": 1687,
+      "maxLineLength": 122,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignPlayableRefreshControl.Designer.cs",
+      "lineCount": 201,
+      "byteCount": 8227,
+      "maxLineLength": 75,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignPlayableRefreshControl.cs",
+      "lineCount": 76,
+      "byteCount": 3350,
+      "maxLineLength": 108,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignProvenanceControl.Designer.cs",
+      "lineCount": 102,
+      "byteCount": 3934,
+      "maxLineLength": 77,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignProvenanceControl.cs",
+      "lineCount": 32,
+      "byteCount": 1149,
+      "maxLineLength": 102,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignQualityGateControl.Designer.cs",
+      "lineCount": 97,
+      "byteCount": 3583,
+      "maxLineLength": 72,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignQualityGateControl.cs",
+      "lineCount": 43,
+      "byteCount": 1666,
+      "maxLineLength": 101,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackageControl.Designer.cs",
+      "lineCount": 191,
+      "byteCount": 7830,
+      "maxLineLength": 79,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackageControl.cs",
+      "lineCount": 89,
+      "byteCount": 3862,
+      "maxLineLength": 108,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.Designer.cs",
+      "lineCount": 102,
+      "byteCount": 3770,
+      "maxLineLength": 71,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignRowSelectorControl.cs",
+      "lineCount": 53,
+      "byteCount": 1856,
+      "maxLineLength": 106,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignSchemaGroupControl.Designer.cs",
+      "lineCount": 154,
+      "byteCount": 6491,
+      "maxLineLength": 75,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignSchemaGroupControl.cs",
+      "lineCount": 44,
+      "byteCount": 1634,
+      "maxLineLength": 87,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationQualityGateTests.cs",
+      "lineCount": 131,
+      "byteCount": 5511,
+      "maxLineLength": 140,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationServiceTests.cs",
+      "lineCount": 263,
+      "byteCount": 12140,
+      "maxLineLength": 134,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/EditDrivenPlayableReviewPackageMaterialization/EditDrivenPlayableReviewPackageMaterializationWinFormsBindingTests.cs",
+      "lineCount": 92,
+      "byteCount": 3346,
+      "maxLineLength": 125,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/EditDrivenPlayableReviewPackageMaterializationProductSmokeTests.cs",
+      "lineCount": 124,
+      "byteCount": 5553,
+      "maxLineLength": 125,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+      "lineCount": 3672,
+      "byteCount": 169717,
+      "maxLineLength": 251,
+      "linesOver500Count": 0,
+      "minifiedSourceCandidate": false
+    }
+  ],
+  "diagnostics": []
+}

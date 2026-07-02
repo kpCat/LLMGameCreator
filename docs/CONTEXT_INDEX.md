@@ -208,7 +208,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-edit_driven_playable_preview_refresh_verification
+edit_driven_review_package_materialization_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -302,6 +302,15 @@ Goal 075 is accepted by the Goal 076 user handoff:
 deterministic hash `9d68591603cbb108cf6b80e47773bfeb6ce44c85f7cf4722936c9aee55a8cada`. Goal 076 is produced
 for review with `edit_driven_playable_preview_refresh_verification required`, `accepted=false`,
 `implementationStatus=GREEN`, `changedRowCount=9`, `appliedChangeCount=18` and `packageTargetCount=18`.
+Goal 076 is accepted by the Goal 077 user handoff:
+`edit_driven_playable_preview_refresh_verification passed before Goal 077`.
+
+Goal 077 is produced for review with `edit_driven_review_package_materialization_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, 9 rows, 18 materialized targets, 21 review package files
+and report hash `ae839969a04572fc330804f531de90e422025c2f1d0ad037084544e4ba7afbaf`. It consumes the real
+Goal 076 artifacts from disk into `.llmgc/procedural/goal-077-edit-driven-review-package-materialization/`,
+writes a disk-backed `review-package/**`, validates staged package reads and rejects missing/tampered package
+files and broken player-index references without Unity/schema/runtime/provider changes.
 
 Allowed next sequence:
 
@@ -338,8 +347,8 @@ Allowed next sequence:
 31. Keep Goal 073 Source Format P0 Readability Repair recorded as passed by user handoff before Goal 074.
 32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace recorded as accepted by user handoff before Goal 075.
 33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop recorded as accepted by user handoff before Goal 076.
-34. Keep Goal 076 Edit-Driven Playable Preview Refresh produced for review with `edit_driven_playable_preview_refresh_verification required`, `accepted=false` and `implementationStatus=GREEN`.
-35. Do not start the next Goal while Goal 076 remains at its manual review gate.
+34. Keep Goal 076 Edit-Driven Playable Preview Refresh recorded as accepted by user handoff before Goal 077, without mutating the Goal 076 artifact's `accepted=false` evidence.
+35. Review Goal 077 `edit_driven_review_package_materialization_verification`; do not mark it passed until user acceptance.
 
 Kill criterion:
 

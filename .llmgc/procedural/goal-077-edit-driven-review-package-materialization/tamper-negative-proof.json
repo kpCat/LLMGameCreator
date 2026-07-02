@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "edit_driven_review_package_negative_proof_v1",
+  "passed": true,
+  "scenarioCount": 3,
+  "scenarios": [
+    {
+      "scenarioId": "missing_package_target_file",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal077.read.ledger_file_missing",
+          "target": "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-alpha/target-001-gameplay-consequence-gameplay-consequence-summary-consequence-intensity.json",
+          "message": "Ledger file is missing."
+        }
+      ]
+    },
+    {
+      "scenarioId": "player_index_missing_row_or_target",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal077.read.ledger_hash_mismatch",
+          "target": "review-package/player-readable-index.json",
+          "message": "Ledger hash does not match file payload."
+        },
+        {
+          "severity": "error",
+          "code": "goal077.read.player_index_missing_target",
+          "target": "map_panel_rpg/seed_alpha",
+          "message": "Player index references a missing target."
+        },
+        {
+          "severity": "error",
+          "code": "goal077.read.player_marker_missing_target",
+          "target": "edit_driven_review_package_missing_target=true",
+          "message": "Player marker does not resolve to an existing row/target."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_package_target_file",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal077.read.ledger_hash_mismatch",
+          "target": "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-alpha/target-001-gameplay-consequence-gameplay-consequence-summary-consequence-intensity.json",
+          "message": "Ledger hash does not match file payload."
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@ using LLMGameCreator.Application.Abstractions;
 using LLMGameCreator.Application.Composition;
 using LLMGameCreator.Application.Design;
 using LLMGameCreator.Application.Design.EditDrivenPlayablePreviewRefresh;
+using LLMGameCreator.Application.Design.EditDrivenPlayableReviewPackageMaterialization;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
@@ -90,6 +91,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<SchemaDrivenCampaignWorkspaceEvidenceService>(Reuse.Singleton);
         _container.Register<SchemaDrivenCampaignEditEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenPlayablePreviewRefreshEvidenceService>(Reuse.Singleton);
+        _container.Register<EditDrivenPlayableReviewPackageMaterializationEvidenceService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -298,7 +300,8 @@ public sealed class CompositionRoot : IDisposable
             new CampaignAuthoringReviewWorkspacePageControl(
                 resolver.Resolve<SchemaDrivenCampaignWorkspaceEvidenceService>(),
                 resolver.Resolve<SchemaDrivenCampaignEditEvidenceService>(),
-                resolver.Resolve<EditDrivenPlayablePreviewRefreshEvidenceService>()), Reuse.Singleton);
+                resolver.Resolve<EditDrivenPlayablePreviewRefreshEvidenceService>(),
+                resolver.Resolve<EditDrivenPlayableReviewPackageMaterializationEvidenceService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

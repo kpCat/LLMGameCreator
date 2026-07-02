@@ -1,0 +1,42 @@
+# Final report format
+
+Report exactly:
+
+- Final status: GREEN / BLOCKED / FAILED.
+- Latest commit before work and after work.
+- Whether pushed to origin/main.
+- Preflight findings:
+  - current branch
+  - current top commit
+  - Goal 076 present and GREEN
+  - Goal 076 accepted-by-user-handoff recorded before Goal 077
+  - c8343e8 adaptive docs debt handling
+- Changed files.
+- Implemented behavior:
+  - Application seam
+  - real disk-backed review package materialization
+  - package file ledger and hash proof
+  - player-readable package index
+  - WinForms workspace tab/control binding
+- Proof:
+  - source Goal 076 report hash
+  - target count / row count
+  - review package file count
+  - before/after/rollback/replay lineage
+  - staged package read proof
+  - missing/tampered package negative proof
+- Quality gate:
+  - max C# line length
+  - minifiedSourceFileCount
+  - filesOver1000LinesCount
+  - AlphaRuntimeBootstrap.cs line count/hash/no-change status
+  - forbidden areas touched yes/no
+  - absolute paths/timestamps/heavy logs yes/no
+  - mojibake markers yes/no
+- Validation commands with pass/fail counts.
+- check-all result.
+- artifact-scope result.
+- Goal 077 artifacts list and final report hash.
+- Remaining P2/P3 debt.
+- Final git status.
+- Git commands used and why.

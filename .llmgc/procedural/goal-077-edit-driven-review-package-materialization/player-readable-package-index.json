@@ -1,0 +1,520 @@
+{
+  "schemaVersion": "edit_driven_player_readable_package_index_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "passed": true,
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d",
+  "scenarioCount": 9,
+  "rowCount": 9,
+  "targetCount": 18,
+  "allScenarioIdsMapped": true,
+  "allPlayerMarkersResolved": true,
+  "allRowsRepresented": true,
+  "allTargetsRepresented": true,
+  "scenarios": [
+    {
+      "scenarioId": "map_panel_rpg/seed_alpha",
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "targetIds": [
+        "target-001",
+        "target-002"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-alpha/target-001-gameplay-consequence-gameplay-consequence-summary-consequence-intensity.json",
+        "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-alpha/target-002-living-world-faction-living-world-npc-faction-summary-faction-pressure.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetIds": [
+            "target-001",
+            "target-002"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-map-panel-rpg-seed-alpha",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetIds": [
+            "target-001",
+            "target-002"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=map_panel_rpg",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetIds": [
+            "target-001",
+            "target-002"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_alpha",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetIds": [
+            "target-001",
+            "target-002"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetIds": [
+            "target-001",
+            "target-002"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "map_panel_rpg/seed_beta",
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "targetIds": [
+        "target-003",
+        "target-004"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-beta/target-003-narrative-event-intent-narrative-quest-dialogue-event-summary-event-intent.json",
+        "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-beta/target-004-settlement-production-settlement-construction-destruction-production-summary-production-focus.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetIds": [
+            "target-003",
+            "target-004"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-map-panel-rpg-seed-beta",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetIds": [
+            "target-003",
+            "target-004"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=map_panel_rpg",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetIds": [
+            "target-003",
+            "target-004"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_beta",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetIds": [
+            "target-003",
+            "target-004"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetIds": [
+            "target-003",
+            "target-004"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "map_panel_rpg/seed_gamma",
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "targetIds": [
+        "target-005",
+        "target-006"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-gamma/target-005-combat-magic-status-combat-magic-boss-summary-status-pressure.json",
+        "review-package/targets/map-panel-rpg/matrix-row-map-panel-rpg-seed-gamma/target-006-weather-crisis-pressure-weather-daynight-crisis-summary-crisis-pressure.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetIds": [
+            "target-005",
+            "target-006"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-map-panel-rpg-seed-gamma",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetIds": [
+            "target-005",
+            "target-006"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=map_panel_rpg",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetIds": [
+            "target-005",
+            "target-006"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_gamma",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetIds": [
+            "target-005",
+            "target-006"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetIds": [
+            "target-005",
+            "target-006"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "survival_sandbox/seed_alpha",
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "targetIds": [
+        "target-007",
+        "target-008"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/survival-sandbox/matrix-row-survival-sandbox-seed-alpha/target-007-gameplay-consequence-gameplay-consequence-summary-consequence-intensity.json",
+        "review-package/targets/survival-sandbox/matrix-row-survival-sandbox-seed-alpha/target-008-living-world-faction-living-world-npc-faction-summary-faction-pressure.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetIds": [
+            "target-007",
+            "target-008"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-survival-sandbox-seed-alpha",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetIds": [
+            "target-007",
+            "target-008"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=survival_sandbox",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetIds": [
+            "target-007",
+            "target-008"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_alpha",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetIds": [
+            "target-007",
+            "target-008"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetIds": [
+            "target-007",
+            "target-008"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "survival_sandbox/seed_beta",
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "targetIds": [
+        "target-009",
+        "target-010"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/survival-sandbox/matrix-row-survival-sandbox-seed-beta/target-009-narrative-event-intent-narrative-quest-dialogue-event-summary-event-intent.json",
+        "review-package/targets/survival-sandbox/matrix-row-survival-sandbox-seed-beta/target-010-settlement-production-settlement-construction-destruction-production-summary-production-focus.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetIds": [
+            "target-009",
+            "target-010"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-survival-sandbox-seed-beta",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetIds": [
+            "target-009",
+            "target-010"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=survival_sandbox",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetIds": [
+            "target-009",
+            "target-010"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_beta",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetIds": [
+            "target-009",
+            "target-010"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetIds": [
+            "target-009",
+            "target-010"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "survival_sandbox/seed_gamma",
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "targetIds": [
+        "target-011",
+        "target-012"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/survival-sandbox/matrix-row-survival-sandbox-seed-gamma/target-011-combat-magic-status-combat-magic-boss-summary-status-pressure.json",
+        "review-package/targets/survival-sandbox/matrix-row-survival-sandbox-seed-gamma/target-012-weather-crisis-pressure-weather-daynight-crisis-summary-crisis-pressure.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetIds": [
+            "target-011",
+            "target-012"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-survival-sandbox-seed-gamma",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetIds": [
+            "target-011",
+            "target-012"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=survival_sandbox",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetIds": [
+            "target-011",
+            "target-012"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_gamma",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetIds": [
+            "target-011",
+            "target-012"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetIds": [
+            "target-011",
+            "target-012"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "first_person_grid_dungeon/seed_alpha",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "targetIds": [
+        "target-013",
+        "target-014"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/first-person-grid-dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/target-013-gameplay-consequence-gameplay-consequence-summary-consequence-intensity.json",
+        "review-package/targets/first-person-grid-dungeon/matrix-row-first-person-grid-dungeon-seed-alpha/target-014-living-world-faction-living-world-npc-faction-summary-faction-pressure.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetIds": [
+            "target-013",
+            "target-014"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-first-person-grid-dungeon-seed-alpha",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetIds": [
+            "target-013",
+            "target-014"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=first_person_grid_dungeon",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetIds": [
+            "target-013",
+            "target-014"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_alpha",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetIds": [
+            "target-013",
+            "target-014"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetIds": [
+            "target-013",
+            "target-014"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "first_person_grid_dungeon/seed_beta",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "targetIds": [
+        "target-015",
+        "target-016"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/first-person-grid-dungeon/matrix-row-first-person-grid-dungeon-seed-beta/target-015-narrative-event-intent-narrative-quest-dialogue-event-summary-event-intent.json",
+        "review-package/targets/first-person-grid-dungeon/matrix-row-first-person-grid-dungeon-seed-beta/target-016-settlement-production-settlement-construction-destruction-production-summary-production-focus.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetIds": [
+            "target-015",
+            "target-016"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-first-person-grid-dungeon-seed-beta",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetIds": [
+            "target-015",
+            "target-016"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=first_person_grid_dungeon",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetIds": [
+            "target-015",
+            "target-016"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_beta",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetIds": [
+            "target-015",
+            "target-016"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetIds": [
+            "target-015",
+            "target-016"
+          ]
+        }
+      ]
+    },
+    {
+      "scenarioId": "first_person_grid_dungeon/seed_gamma",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "targetIds": [
+        "target-017",
+        "target-018"
+      ],
+      "targetFileRefs": [
+        "review-package/targets/first-person-grid-dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/target-017-combat-magic-status-combat-magic-boss-summary-status-pressure.json",
+        "review-package/targets/first-person-grid-dungeon/matrix-row-first-person-grid-dungeon-seed-gamma/target-018-weather-crisis-pressure-weather-daynight-crisis-summary-crisis-pressure.json"
+      ],
+      "playerMarkers": [
+        {
+          "marker": "edit_driven_playable_preview_refresh_loaded=true",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetIds": [
+            "target-017",
+            "target-018"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_row=matrix-row-first-person-grid-dungeon-seed-gamma",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetIds": [
+            "target-017",
+            "target-018"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_family=first_person_grid_dungeon",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetIds": [
+            "target-017",
+            "target-018"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_seed=seed_gamma",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetIds": [
+            "target-017",
+            "target-018"
+          ]
+        },
+        {
+          "marker": "edit_driven_playable_preview_refresh_after_hash=a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetIds": [
+            "target-017",
+            "target-018"
+          ]
+        }
+      ]
+    }
+  ]
+}

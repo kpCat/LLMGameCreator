@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "edit_driven_review_package_source_artifact_manifest_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "productSmokeRoute": "goal-077-edit-driven-review-package-materialization",
+  "manualGate": "edit_driven_review_package_materialization_verification",
+  "accepted": false,
+  "goal076AcceptedByUserHandoff": true,
+  "goal076ReportWasGreenProducedForReview": true,
+  "goal076ArtifactAcceptedFalse": true,
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d",
+  "sourceArtifactCount": 6,
+  "sourceArtifacts": [
+    {
+      "sourceGoal": "Goal076",
+      "artifactFamily": "edit-driven-playable-preview-refresh-report",
+      "artifactRelativePath": ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/edit-driven-playable-preview-refresh-report.md",
+      "artifactHash": "3c491c1e92f5159a3c5c9ff12ea11011be9a81106db660ad7a35f1da75f38fa5",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal076",
+      "artifactFamily": "gamepackage-refresh-plan",
+      "artifactRelativePath": ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/gamepackage-refresh-plan.json",
+      "artifactHash": "082ff44833804f1651d5e22625c5a1101f9d1a6a8b690cf025889e276d791ceb",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal076",
+      "artifactFamily": "playable-preview-refresh-manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/playable-preview-refresh-manifest.json",
+      "artifactHash": "79faef7cbd3d377a0658eb2a6d8198cf5d4161bcbebeb3da66d6f61af264db1e",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal076",
+      "artifactFamily": "quality-gate-scan",
+      "artifactRelativePath": ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/quality-gate-scan.json",
+      "artifactHash": "da136b2d8e41d5239baa75141076060d2b2ad8b3cb06bc9319199965660fd3c4",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal076",
+      "artifactFamily": "state-transition-proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/state-transition-proof.json",
+      "artifactHash": "c3b4a23497ca5dd4bf47e7cd9ebc93a9c9457d6035145266cc2d0b9c34465b5a",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal076",
+      "artifactFamily": "unity-player-handoff-manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/unity-player-handoff-manifest.json",
+      "artifactHash": "507e469de39c8d908fa593fa920e70dd6ebc342b16a800ee8eb5f9d7560a8311",
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

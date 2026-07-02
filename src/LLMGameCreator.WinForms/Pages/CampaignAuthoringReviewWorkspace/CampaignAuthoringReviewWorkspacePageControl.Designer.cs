@@ -19,6 +19,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _qualityTabPage;
         private TabPage _editLoopTabPage;
         private TabPage _playableRefreshTabPage;
+        private TabPage _reviewPackageTabPage;
         private CampaignRowSelectorControl _rowSelectorControl;
         private CampaignSchemaGroupControl _schemaGroupControl;
         private CampaignDiagnosticsControl _diagnosticsControl;
@@ -27,6 +28,7 @@ namespace LLMGameCreator.WinForms.Pages
         private CampaignQualityGateControl _qualityGateControl;
         private CampaignEditValidateApplyLoopControl _editLoopControl;
         private CampaignPlayableRefreshControl _playableRefreshControl;
+        private CampaignReviewPackageControl _reviewPackageControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -51,6 +53,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._qualityTabPage = new TabPage();
             this._editLoopTabPage = new TabPage();
             this._playableRefreshTabPage = new TabPage();
+            this._reviewPackageTabPage = new TabPage();
             this._rowSelectorControl = new CampaignRowSelectorControl();
             this._schemaGroupControl = new CampaignSchemaGroupControl();
             this._diagnosticsControl = new CampaignDiagnosticsControl();
@@ -59,6 +62,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._qualityGateControl = new CampaignQualityGateControl();
             this._editLoopControl = new CampaignEditValidateApplyLoopControl();
             this._playableRefreshControl = new CampaignPlayableRefreshControl();
+            this._reviewPackageControl = new CampaignReviewPackageControl();
             this._tabs.SuspendLayout();
             this._rowsTabPage.SuspendLayout();
             this._schemaTabPage.SuspendLayout();
@@ -68,6 +72,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._qualityTabPage.SuspendLayout();
             this._editLoopTabPage.SuspendLayout();
             this._playableRefreshTabPage.SuspendLayout();
+            this._reviewPackageTabPage.SuspendLayout();
             this.SuspendLayout();
             //
             // _statusLabel
@@ -90,6 +95,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._qualityTabPage);
             this._tabs.Controls.Add(this._editLoopTabPage);
             this._tabs.Controls.Add(this._playableRefreshTabPage);
+            this._tabs.Controls.Add(this._reviewPackageTabPage);
             this._tabs.Dock = DockStyle.Fill;
             this._tabs.Location = new Point(0, 34);
             this._tabs.Name = "_tabs";
@@ -179,6 +185,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._playableRefreshTabPage.Text = "Playable Refresh";
             this._playableRefreshTabPage.UseVisualStyleBackColor = true;
             //
+            // _reviewPackageTabPage
+            //
+            this._reviewPackageTabPage.Controls.Add(this._reviewPackageControl);
+            this._reviewPackageTabPage.Location = new Point(4, 24);
+            this._reviewPackageTabPage.Name = "_reviewPackageTabPage";
+            this._reviewPackageTabPage.Size = new Size(1092, 658);
+            this._reviewPackageTabPage.TabIndex = 8;
+            this._reviewPackageTabPage.Text = "Review Package";
+            this._reviewPackageTabPage.UseVisualStyleBackColor = true;
+            //
             // child controls
             //
             this._rowSelectorControl.Dock = DockStyle.Fill;
@@ -189,6 +205,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._qualityGateControl.Dock = DockStyle.Fill;
             this._editLoopControl.Dock = DockStyle.Fill;
             this._playableRefreshControl.Dock = DockStyle.Fill;
+            this._reviewPackageControl.Dock = DockStyle.Fill;
             //
             // CampaignAuthoringReviewWorkspacePageControl
             //
@@ -207,6 +224,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._qualityTabPage.ResumeLayout(false);
             this._editLoopTabPage.ResumeLayout(false);
             this._playableRefreshTabPage.ResumeLayout(false);
+            this._reviewPackageTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
         }
     }

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_review_package_target_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "targetId": "target-012",
+  "sourceRowId": "matrix-row-survival-sandbox-seed-gamma",
+  "familyId": "survival_sandbox",
+  "seedId": "seed_gamma",
+  "fieldId": "weather_daynight_crisis_summary.crisis_pressure",
+  "domainId": "weather_crisis_pressure",
+  "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma",
+  "beforeValue": "crisis",
+  "afterValue": "storm",
+  "beforeHash": "ef62ad815d413ed4034b0649773efb879b36ee123bfe73398d738f3d4884f8e7",
+  "afterHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+  "rollbackHash": "ef62ad815d413ed4034b0649773efb879b36ee123bfe73398d738f3d4884f8e7",
+  "replayHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+  "validationRequirement": "validate-before-preview-apply",
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d"
+}

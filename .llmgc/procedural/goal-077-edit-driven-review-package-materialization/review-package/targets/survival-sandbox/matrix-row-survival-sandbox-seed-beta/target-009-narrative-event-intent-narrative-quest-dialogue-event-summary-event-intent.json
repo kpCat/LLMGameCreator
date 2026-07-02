@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_review_package_target_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "targetId": "target-009",
+  "sourceRowId": "matrix-row-survival-sandbox-seed-beta",
+  "familyId": "survival_sandbox",
+  "seedId": "seed_beta",
+  "fieldId": "narrative_quest_dialogue_event_summary.event_intent",
+  "domainId": "narrative_event_intent",
+  "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta",
+  "beforeValue": "trade",
+  "afterValue": "rescue",
+  "beforeHash": "eabb47c0d5fe9e87357043d843cc95f25379e5366cfe18f2159d12b6bece09aa",
+  "afterHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+  "rollbackHash": "eabb47c0d5fe9e87357043d843cc95f25379e5366cfe18f2159d12b6bece09aa",
+  "replayHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+  "validationRequirement": "validate-before-preview-apply",
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d"
+}

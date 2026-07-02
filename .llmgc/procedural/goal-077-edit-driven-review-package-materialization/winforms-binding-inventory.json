@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "edit_driven_review_package_winforms_binding_inventory_v1",
+  "passed": true,
+  "parentPageReviewPackageTabDeclared": true,
+  "parentPageReviewPackageEvidenceServiceLoaded": true,
+  "parentPageReviewPackageControlBound": true,
+  "parentPageActivationBindsGoal077Data": true,
+  "groups": [
+    {
+      "groupId": "review_package_status",
+      "controlName": "CampaignReviewPackageControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackageControl.cs",
+      "separateUserControl": true,
+      "bindsGoal077Data": true
+    }
+  ],
+  "diagnostics": []
+}

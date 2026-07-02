@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "edit_driven_review_package_state_lineage_proof_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "passed": true,
+  "rowCount": 9,
+  "targetCount": 18,
+  "rows": [
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "beforeHash": "179064e9ba218ba5ed48c0e6a1cc0430c5e7938e3269681ed02e0881ae9868c7",
+      "afterHash": "cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+      "rollbackHash": "179064e9ba218ba5ed48c0e6a1cc0430c5e7938e3269681ed02e0881ae9868c7",
+      "replayHash": "cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "beforeHash": "cedb8bbba9840ed30f049059413b32d3b413f42a47f719cea3672ed36352b652",
+      "afterHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+      "rollbackHash": "cedb8bbba9840ed30f049059413b32d3b413f42a47f719cea3672ed36352b652",
+      "replayHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "beforeHash": "96ac3ee447112183b1f807530cdb7731141c30f044ede0eb7090e45d115d5bab",
+      "afterHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+      "rollbackHash": "96ac3ee447112183b1f807530cdb7731141c30f044ede0eb7090e45d115d5bab",
+      "replayHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "beforeHash": "e69fa9b2eb94d63f8315e8363158a9ea0b79b913d17d4786158e1ba15197ef86",
+      "afterHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+      "rollbackHash": "e69fa9b2eb94d63f8315e8363158a9ea0b79b913d17d4786158e1ba15197ef86",
+      "replayHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "beforeHash": "eabb47c0d5fe9e87357043d843cc95f25379e5366cfe18f2159d12b6bece09aa",
+      "afterHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+      "rollbackHash": "eabb47c0d5fe9e87357043d843cc95f25379e5366cfe18f2159d12b6bece09aa",
+      "replayHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "beforeHash": "ef62ad815d413ed4034b0649773efb879b36ee123bfe73398d738f3d4884f8e7",
+      "afterHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+      "rollbackHash": "ef62ad815d413ed4034b0649773efb879b36ee123bfe73398d738f3d4884f8e7",
+      "replayHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "beforeHash": "e5d75d9c8e4b4bc305d3c07aa1fdfed4a94a481fdc97bb6d210fdb27537a55f7",
+      "afterHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+      "rollbackHash": "e5d75d9c8e4b4bc305d3c07aa1fdfed4a94a481fdc97bb6d210fdb27537a55f7",
+      "replayHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "beforeHash": "bf771c72908aef8f3958e3780e73567d358f7f0759eb1a385b6411a1df71b4a7",
+      "afterHash": "b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+      "rollbackHash": "bf771c72908aef8f3958e3780e73567d358f7f0759eb1a385b6411a1df71b4a7",
+      "replayHash": "b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "beforeHash": "b9c8987094024b52ebd0bd4a01aa5b376545c991a55040e59f346a60ba53c273",
+      "afterHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+      "rollbackHash": "b9c8987094024b52ebd0bd4a01aa5b376545c991a55040e59f346a60ba53c273",
+      "replayHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+      "stateChanged": true,
+      "rollbackRestored": true,
+      "replayRestoredAfter": true
+    }
+  ]
+}

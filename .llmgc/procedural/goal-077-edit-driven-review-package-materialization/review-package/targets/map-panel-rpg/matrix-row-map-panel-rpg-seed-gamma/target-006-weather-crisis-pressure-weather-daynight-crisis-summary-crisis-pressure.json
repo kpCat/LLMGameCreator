@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "edit_driven_review_package_target_v1",
+  "goalId": "goal_077_edit_driven_review_package_materialization",
+  "targetId": "target-006",
+  "sourceRowId": "matrix-row-map-panel-rpg-seed-gamma",
+  "familyId": "map_panel_rpg",
+  "seedId": "seed_gamma",
+  "fieldId": "weather_daynight_crisis_summary.crisis_pressure",
+  "domainId": "weather_crisis_pressure",
+  "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma",
+  "beforeValue": "storm",
+  "afterValue": "calm",
+  "beforeHash": "96ac3ee447112183b1f807530cdb7731141c30f044ede0eb7090e45d115d5bab",
+  "afterHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+  "rollbackHash": "96ac3ee447112183b1f807530cdb7731141c30f044ede0eb7090e45d115d5bab",
+  "replayHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+  "validationRequirement": "validate-before-preview-apply",
+  "sourceGoal076ReportHash": "0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed",
+  "sourceGoal076ManifestHash": "86c8fc1469159d10bde607b6f8ee6446bc09c364e6694ef8720298ed4320a7b5",
+  "sourceGoal076RefreshPlanHash": "b34703b0d8a7f566506edbf7d3a900efc02dea4ab5934e654f7d9a1eb44fac6b",
+  "sourceGoal076HandoffManifestHash": "91fa387055c69da99df23e65dcc00379241a398f87708b5a152221cf36ec6c8d"
+}
