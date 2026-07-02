@@ -113,14 +113,31 @@ public sealed class SchemaDrivenCampaignEditQualityGateScanner
             projectRoot,
             "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/"
                 + "CampaignAuthoringReviewWorkspacePageControl.Designer.cs");
+        var pageCode = Resolve(
+            projectRoot,
+            "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/"
+                + "CampaignAuthoringReviewWorkspacePageControl.cs");
         var compositionText = File.Exists(compositionRoot)
             ? File.ReadAllText(compositionRoot, Encoding.UTF8)
             : string.Empty;
         var pageText = File.Exists(pageDesigner) ? File.ReadAllText(pageDesigner, Encoding.UTF8) : string.Empty;
+        var pageCodeText = File.Exists(pageCode) ? File.ReadAllText(pageCode, Encoding.UTF8) : string.Empty;
+        var compactPageCodeText = Compact(pageCodeText);
+        var editLoopTabDeclared = pageText.Contains("_editLoopTabPage", StringComparison.Ordinal)
+            && pageText.Contains("_editLoopControl", StringComparison.Ordinal)
+            && pageText.Contains("CampaignEditValidateApplyLoopControl", StringComparison.Ordinal);
+        var editEvidenceServiceLoaded = pageCodeText.Contains(
+                "SchemaDrivenCampaignEditEvidenceService",
+                StringComparison.Ordinal)
+            && compactPageCodeText.Contains("_editService.Build(root)", StringComparison.Ordinal);
+        var editLoopBound = pageCodeText.Contains("SchemaDrivenCampaignEditBuildResult", StringComparison.Ordinal)
+            && compactPageCodeText.Contains("_editLoopControl.Bind(editResult)", StringComparison.Ordinal);
+        var parentPageActivationBindsGoal075Data =
+            editLoopTabDeclared && editEvidenceServiceLoaded && editLoopBound;
         var navigationRegistered = compositionText.Contains(
             "CampaignAuthoringReviewWorkspacePageControl",
             StringComparison.Ordinal)
-            && pageText.Contains("CampaignEditValidateApplyLoopControl", StringComparison.Ordinal);
+            && editLoopTabDeclared;
         var diagnostics = new List<CampaignEditDiagnostic>();
 
         foreach (var group in groups)
@@ -140,10 +157,46 @@ public sealed class SchemaDrivenCampaignEditQualityGateScanner
                 "Goal 075 edit loop must be reachable from the review workspace page."));
         }
 
+        if (!editLoopTabDeclared)
+        {
+            diagnostics.Add(Error(
+                "goal075.winforms.edit_loop_tab_missing",
+                "CampaignAuthoringReviewWorkspacePageControl.Designer.cs",
+                "Goal 075 edit loop tab and child control must be declared by the parent workspace page."));
+        }
+
+        if (editLoopTabDeclared && !editEvidenceServiceLoaded)
+        {
+            diagnostics.Add(Error(
+                "goal075.winforms.parent_edit_service_missing",
+                "CampaignAuthoringReviewWorkspacePageControl.cs",
+                "Parent workspace activation must load Goal 075 evidence through SchemaDrivenCampaignEditEvidenceService."));
+        }
+
+        if (editLoopTabDeclared && !editLoopBound)
+        {
+            diagnostics.Add(Error(
+                "goal075.winforms.parent_edit_loop_bind_missing",
+                "CampaignAuthoringReviewWorkspacePageControl.cs",
+                "Parent workspace page must bind the Goal 075 build result into _editLoopControl."));
+        }
+
+        if (editLoopTabDeclared && !parentPageActivationBindsGoal075Data)
+        {
+            diagnostics.Add(Error(
+                "goal075.winforms.parent_activation_binding_missing",
+                "CampaignAuthoringReviewWorkspacePageControl.cs",
+                "Edit Loop tab exists, but parent activation does not prove Goal 075 service build plus _editLoopControl.Bind."));
+        }
+
         return new WinFormsEditBindingInventory
         {
             Passed = diagnostics.Count == 0,
             NavigationRegistered = navigationRegistered,
+            ParentPageEditLoopTabDeclared = editLoopTabDeclared,
+            ParentPageEditEvidenceServiceLoaded = editEvidenceServiceLoaded,
+            ParentPageEditLoopBound = editLoopBound,
+            ParentPageActivationBindsGoal075Data = parentPageActivationBindsGoal075Data,
             Groups = groups,
             Diagnostics = diagnostics
         };
@@ -236,6 +289,20 @@ public sealed class SchemaDrivenCampaignEditQualityGateScanner
 
     private static string Relative(string root, string path) =>
         Path.GetRelativePath(root, path).Replace('\\', '/');
+
+    private static string Compact(string text)
+    {
+        var builder = new StringBuilder(text.Length);
+        foreach (var ch in text)
+        {
+            if (!char.IsWhiteSpace(ch))
+            {
+                builder.Append(ch);
+            }
+        }
+
+        return builder.ToString();
+    }
 
     private static void EnsureContained(string root, string path)
     {

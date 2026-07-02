@@ -43,7 +43,7 @@
       "sourceGoal": "Goal074",
       "artifactFamily": "quality-gate-scan",
       "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/quality-gate-scan.json",
-      "artifactHash": "865947f082f46c92a27a995c1356315ef5f93b85f87b544ff7a15d29c65488cb",
+      "artifactHash": "a788fe973e2392694098fe3feacdd03bf72f6e38d1eca134b1404c1ae4f43f35",
       "exists": true
     },
     {
@@ -57,7 +57,7 @@
       "sourceGoal": "Goal074",
       "artifactFamily": "schema-driven-campaign-authoring-review-workspace-report",
       "artifactRelativePath": ".llmgc/procedural/goal-074-schema-driven-campaign-authoring-review-workspace/schema-driven-campaign-authoring-review-workspace-report.md",
-      "artifactHash": "070c8b8c1d4c6232b92bf56dfdeaefd5e7554df462094c11f367f9e9ddc2651a",
+      "artifactHash": "579e8383d7729c7100cbad349f63fcc9b1a8c571bddafc82d35030cd41183376",
       "exists": true
     },
     {

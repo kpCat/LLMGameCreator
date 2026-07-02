@@ -295,6 +295,10 @@ public sealed record WinFormsEditBindingInventory
     public string SchemaVersion { get; init; } = "schema_driven_campaign_edit_winforms_binding_inventory_v1";
     public bool Passed { get; init; }
     public bool NavigationRegistered { get; init; }
+    public bool ParentPageEditLoopTabDeclared { get; init; }
+    public bool ParentPageEditEvidenceServiceLoaded { get; init; }
+    public bool ParentPageEditLoopBound { get; init; }
+    public bool ParentPageActivationBindsGoal075Data { get; init; }
     public IReadOnlyList<WinFormsEditBindingGroup> Groups { get; init; } = [];
     public IReadOnlyList<CampaignEditDiagnostic> Diagnostics { get; init; } = [];
 }

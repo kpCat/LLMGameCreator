@@ -2,6 +2,10 @@
   "schemaVersion": "schema_driven_campaign_edit_winforms_binding_inventory_v1",
   "passed": true,
   "navigationRegistered": true,
+  "parentPageEditLoopTabDeclared": true,
+  "parentPageEditEvidenceServiceLoaded": true,
+  "parentPageEditLoopBound": true,
+  "parentPageActivationBindsGoal075Data": true,
   "groups": [
     {
       "groupId": "row_selector",

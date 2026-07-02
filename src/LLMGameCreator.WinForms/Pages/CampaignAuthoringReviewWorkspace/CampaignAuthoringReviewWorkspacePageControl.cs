@@ -42,14 +42,29 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             return;
         }
 
+        CampaignWorkspaceBuildResult workspaceResult;
         try
         {
-            Bind(_service.Build(root), _editService.Build(root));
+            workspaceResult = _service.Build(root);
         }
         catch (Exception ex)
         {
             _statusLabel.Text = "Workspace load failed: " + ex.Message;
+            return;
         }
+
+        SchemaDrivenCampaignEditBuildResult editResult;
+        try
+        {
+            editResult = _editService.Build(root);
+        }
+        catch (Exception ex)
+        {
+            _statusLabel.Text = "Edit loop load failed: " + ex.Message;
+            return;
+        }
+
+        Bind(workspaceResult, editResult);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result)

@@ -20,6 +20,7 @@ public sealed class SchemaDrivenCampaignEditValidateApplyLoopProductSmokeTests
         Assert.True(write.Result.DiffMatrix.Passed);
         Assert.True(write.Result.PreviewExportRefreshPayload.Passed);
         Assert.True(write.Result.WinFormsBindingInventory.Passed);
+        Assert.True(write.Result.WinFormsBindingInventory.ParentPageActivationBindsGoal075Data);
         Assert.True(write.Result.QualityGateScan.Passed);
         Assert.True(write.Result.InvalidMatrix.Passed);
         Assert.Equal(9, write.Result.Report.RowCount);

@@ -489,10 +489,10 @@ candidateCount=18
 appliedChangeCount=18
 rollbackCount=9
 invalidScenarioCount=16
-deterministicHash=13eaa41bda301d240007106b3c8f77b773cf9e7434bcce54fb929f5c5d420938
+deterministicHash=9d68591603cbb108cf6b80e47773bfeb6ce44c85f7cf4722936c9aee55a8cada
 ```
 
-Goal 075 consumes the accepted Goal 074 authoring/review workspace plus Goal 060-073 evidence into a schema-driven edit/validate/apply loop. Evidence is produced under `.llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/`; validation, apply/rollback, row before/after diffs, preview/export refresh payload, WinForms binding inventory, quality gate scan and invalid edit diagnostics all pass in the compact report. Goal 075 remains `accepted=false` and the manual gate is not marked passed.
+Goal 075 consumes the accepted Goal 074 authoring/review workspace plus Goal 060-073 evidence into a schema-driven edit/validate/apply loop. Evidence is produced under `.llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/`; validation, apply/rollback, row before/after diffs, preview/export refresh payload, WinForms binding inventory including parent-page activation binding, quality gate scan and invalid edit diagnostics all pass in the compact report. Goal 075 remains `accepted=false` and the manual gate is not marked passed.
 
 ## Current Phase
 

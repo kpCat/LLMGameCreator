@@ -44,16 +44,16 @@
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignEditValidateApplyLoop/SchemaDrivenCampaignEditQualityGateScanner.cs",
-      "lineCount": 254,
-      "byteCount": 10381,
-      "maxLineLength": 128,
+      "lineCount": 321,
+      "byteCount": 13620,
+      "maxLineLength": 130,
       "linesOver500Count": 0,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "src/LLMGameCreator.Application/Design/SchemaDrivenCampaignEditValidateApplyLoop/SchemaDrivenCampaignEditValidateApplyModels.cs",
-      "lineCount": 407,
-      "byteCount": 17718,
+      "lineCount": 411,
+      "byteCount": 17969,
       "maxLineLength": 109,
       "linesOver500Count": 0,
       "minifiedSourceCandidate": false
@@ -116,8 +116,8 @@
     },
     {
       "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
-      "lineCount": 103,
-      "byteCount": 3706,
+      "lineCount": 118,
+      "byteCount": 4088,
       "maxLineLength": 113,
       "linesOver500Count": 0,
       "minifiedSourceCandidate": false
@@ -300,16 +300,16 @@
     },
     {
       "relativePath": "tests/LLMGameCreator.Tests/Application/SchemaDrivenCampaignEditValidateApplyLoop/SchemaDrivenCampaignEditValidateApplyWinFormsBindingTests.cs",
-      "lineCount": 91,
-      "byteCount": 3286,
+      "lineCount": 193,
+      "byteCount": 7741,
       "maxLineLength": 120,
       "linesOver500Count": 0,
       "minifiedSourceCandidate": false
     },
     {
       "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/SchemaDrivenCampaignEditValidateApplyLoopProductSmokeTests.cs",
-      "lineCount": 56,
-      "byteCount": 2297,
+      "lineCount": 57,
+      "byteCount": 2394,
       "maxLineLength": 99,
       "linesOver500Count": 0,
       "minifiedSourceCandidate": false
