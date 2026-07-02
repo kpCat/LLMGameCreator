@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_playthrough_source_artifact_manifest_v1",
+  "goalId": "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
+  "productSmokeRoute": "goal-081-edit-driven-gamepackage-runtime-preview-playthrough",
+  "manualGate": "edit_driven_gamepackage_runtime_preview_playthrough_verification",
+  "accepted": false,
+  "goal080AcceptedByHandoff": true,
+  "goal080ReportWasGreenProducedForReview": true,
+  "goal080ArtifactAcceptedFalse": true,
+  "goal080ReportHash": "d4680ff15ecfc6a76fe397dbf71f07ac0788f7be2591a3b2695952b1f6e4a53e",
+  "projectedPackageHash": "d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648",
+  "runtimePreviewBridgeProofHash": "1287782882f1050a7c622b913e498a45afdb9a9b2190e036deb212b0b9b60d2b",
+  "runtimePreviewNegativeProofHash": "4b6e265e8da4a8f4ec19aecb6f58617ecad14610cd1ef1fb995e09d0ee25e02e",
+  "goal078ActionLogHash": "6e33f2f369c34dd4d1827634d312e69f1e8bf73c326b73f90f370719fd30790a",
+  "sourceArtifactCount": 11,
+  "sourceArtifacts": [
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "playable_session_action_log",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/playable-session-action-log.json",
+      "artifactHash": "6e33f2f369c34dd4d1827634d312e69f1e8bf73c326b73f90f370719fd30790a",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "playable_session_replay_proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/playable-session-replay-proof.json",
+      "artifactHash": "c799a3a2c4688ca418ff274746d8499a8f2dfdf0395cf139f5f4ef16900ab496",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "edit_driven_gamepackage_runtime_preview_bridge_report",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/edit-driven-gamepackage-runtime-preview-bridge-report.md",
+      "artifactHash": "d4680ff15ecfc6a76fe397dbf71f07ac0788f7be2591a3b2695952b1f6e4a53e",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "package",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/projected-gamepackage/package.json",
+      "artifactHash": "d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "player_readable_bridge_index",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/projected-gamepackage/player-readable-bridge-index.json",
+      "artifactHash": "c9ca69f4301681126b75ea5629af960832dc74681e2441a28351bed9f0524f65",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "projected_package_index",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/projected-gamepackage/projected-package-index.json",
+      "artifactHash": "5d3455961c968a1de480c1ce185969534b07eec52b9f49e6952da4f433644fc4",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "source_targets",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/projected-gamepackage/source-targets.json",
+      "artifactHash": "53cbe7859ec2a458409761acd246a039adc8fbe0b8aabe2a872159d679576cfb",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "quality_gate_scan",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/quality-gate-scan.json",
+      "artifactHash": "4fd0b310051d240e2416fa8bd9fb25d645943cd31caeb1abe324c43a97214623",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "runtime_preview_bridge_proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/runtime-preview-bridge-proof.json",
+      "artifactHash": "1287782882f1050a7c622b913e498a45afdb9a9b2190e036deb212b0b9b60d2b",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "runtime_preview_negative_proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/runtime-preview-negative-proof.json",
+      "artifactHash": "4b6e265e8da4a8f4ec19aecb6f58617ecad14610cd1ef1fb995e09d0ee25e02e",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal080",
+      "artifactFamily": "source_artifact_manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/source-artifact-manifest.json",
+      "artifactHash": "add361c4d2c383f40909b5ee1149c0913bcd0a00ebe92d09c4c460e70b5f381f",
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_playthrough_winforms_binding_inventory_v1",
+  "passed": true,
+  "parentPagePlaythroughTabDeclared": true,
+  "parentPagePlaythroughServiceLoaded": true,
+  "parentPagePlaythroughControlBound": true,
+  "parentPageActivationBindsGoal081Data": true,
+  "groups": [
+    {
+      "groupId": "goal081_runtime_preview_playthrough_tab",
+      "controlName": "CampaignGamePackageRuntimePreviewPlaythroughControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignGamePackageRuntimePreviewPlaythroughControl.cs",
+      "separateUserControl": true,
+      "bindsGoal081Data": true
+    }
+  ],
+  "diagnostics": []
+}

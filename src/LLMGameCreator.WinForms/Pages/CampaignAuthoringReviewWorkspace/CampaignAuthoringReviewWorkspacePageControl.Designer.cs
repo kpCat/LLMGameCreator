@@ -23,6 +23,7 @@ namespace LLMGameCreator.WinForms.Pages
         private TabPage _playSessionTabPage;
         private TabPage _spineQualityTabPage;
         private TabPage _runtimePreviewBridgeTabPage;
+        private TabPage _runtimePreviewPlaythroughTabPage;
         private CampaignRowSelectorControl _rowSelectorControl;
         private CampaignSchemaGroupControl _schemaGroupControl;
         private CampaignDiagnosticsControl _diagnosticsControl;
@@ -35,6 +36,7 @@ namespace LLMGameCreator.WinForms.Pages
         private CampaignReviewPackagePlaySessionControl _playSessionControl;
         private CampaignEditDrivenSpineQualityControl _spineQualityControl;
         private CampaignGamePackageRuntimePreviewBridgeControl _runtimePreviewBridgeControl;
+        private CampaignGamePackageRuntimePreviewPlaythroughControl _runtimePreviewPlaythroughControl;
 
         protected override void Dispose(bool disposing)
         {
@@ -63,6 +65,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playSessionTabPage = new TabPage();
             this._spineQualityTabPage = new TabPage();
             this._runtimePreviewBridgeTabPage = new TabPage();
+            this._runtimePreviewPlaythroughTabPage = new TabPage();
             this._rowSelectorControl = new CampaignRowSelectorControl();
             this._schemaGroupControl = new CampaignSchemaGroupControl();
             this._diagnosticsControl = new CampaignDiagnosticsControl();
@@ -75,6 +78,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playSessionControl = new CampaignReviewPackagePlaySessionControl();
             this._spineQualityControl = new CampaignEditDrivenSpineQualityControl();
             this._runtimePreviewBridgeControl = new CampaignGamePackageRuntimePreviewBridgeControl();
+            this._runtimePreviewPlaythroughControl = new CampaignGamePackageRuntimePreviewPlaythroughControl();
             this._tabs.SuspendLayout();
             this._rowsTabPage.SuspendLayout();
             this._schemaTabPage.SuspendLayout();
@@ -88,6 +92,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playSessionTabPage.SuspendLayout();
             this._spineQualityTabPage.SuspendLayout();
             this._runtimePreviewBridgeTabPage.SuspendLayout();
+            this._runtimePreviewPlaythroughTabPage.SuspendLayout();
             this.SuspendLayout();
             //
             // _statusLabel
@@ -114,6 +119,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._tabs.Controls.Add(this._playSessionTabPage);
             this._tabs.Controls.Add(this._spineQualityTabPage);
             this._tabs.Controls.Add(this._runtimePreviewBridgeTabPage);
+            this._tabs.Controls.Add(this._runtimePreviewPlaythroughTabPage);
             this._tabs.Dock = DockStyle.Fill;
             this._tabs.Location = new Point(0, 34);
             this._tabs.Name = "_tabs";
@@ -243,6 +249,16 @@ namespace LLMGameCreator.WinForms.Pages
             this._runtimePreviewBridgeTabPage.Text = "Runtime Bridge";
             this._runtimePreviewBridgeTabPage.UseVisualStyleBackColor = true;
             //
+            // _runtimePreviewPlaythroughTabPage
+            //
+            this._runtimePreviewPlaythroughTabPage.Controls.Add(this._runtimePreviewPlaythroughControl);
+            this._runtimePreviewPlaythroughTabPage.Location = new Point(4, 24);
+            this._runtimePreviewPlaythroughTabPage.Name = "_runtimePreviewPlaythroughTabPage";
+            this._runtimePreviewPlaythroughTabPage.Size = new Size(1092, 658);
+            this._runtimePreviewPlaythroughTabPage.TabIndex = 12;
+            this._runtimePreviewPlaythroughTabPage.Text = "Preview Playthrough";
+            this._runtimePreviewPlaythroughTabPage.UseVisualStyleBackColor = true;
+            //
             // child controls
             //
             this._rowSelectorControl.Dock = DockStyle.Fill;
@@ -257,6 +273,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playSessionControl.Dock = DockStyle.Fill;
             this._spineQualityControl.Dock = DockStyle.Fill;
             this._runtimePreviewBridgeControl.Dock = DockStyle.Fill;
+            this._runtimePreviewPlaythroughControl.Dock = DockStyle.Fill;
             //
             // CampaignAuthoringReviewWorkspacePageControl
             //
@@ -279,6 +296,7 @@ namespace LLMGameCreator.WinForms.Pages
             this._playSessionTabPage.ResumeLayout(false);
             this._spineQualityTabPage.ResumeLayout(false);
             this._runtimePreviewBridgeTabPage.ResumeLayout(false);
+            this._runtimePreviewPlaythroughTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
         }
     }

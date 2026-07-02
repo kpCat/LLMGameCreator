@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_playthrough_negative_proof_v1",
+  "passed": true,
+  "scenarioCount": 7,
+  "scenarios": [
+    {
+      "scenarioId": "command_script_nonexistent_target",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal081.replay.target_missing",
+          "target": "inspect_projected_target:illegal:missing-target",
+          "message": "Command references a target outside source-targets.json."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_package_read",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal081.replay.package_payload_not_read",
+          "target": "load_package:d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648",
+          "message": "load_package requires the projected GamePackage payload read from disk."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_player_readable_bridge_index",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal081.read.player_bridge_index_missing",
+          "target": "projected-gamepackage/player-readable-bridge-index.json",
+          "message": "Player-readable bridge index must be read and passed."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_projected_gamepackage_payload",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal081.read.projected_package_missing",
+          "target": "projected-gamepackage/package.json",
+          "message": "Projected GamePackage payload was not read from disk."
+        }
+      ]
+    },
+    {
+      "scenarioId": "replay_order_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal081.replay.command_order_or_identity_mismatch",
+          "target": "inspect_projected_target:map-panel-rpg/seed-alpha:target-002",
+          "message": "Replay command does not match the deterministic package-derived command at this position."
+        }
+      ]
+    },
+    {
+      "scenarioId": "source_goal080_lineage_hash_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal081.read.source_goal080_lineage_hash_mismatch",
+          "target": "source-artifact-manifest.json",
+          "message": "Goal080 source lineage hash mismatch was rejected."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_projected_gamepackage_payload",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal081.read.package_hash_index_mismatch",
+          "target": "projected-gamepackage/package.json",
+          "message": "Tampered package hash no longer matches projected package index."
+        }
+      ]
+    }
+  ]
+}

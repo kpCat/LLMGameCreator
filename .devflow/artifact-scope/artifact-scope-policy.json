@@ -49,7 +49,8 @@
     ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/",
     ".llmgc/procedural/goal-079-edit-driven-spine-quality-consolidation/",
     ".llmgc/procedural/goal-079a-source-format-line-ending-guard/",
-    ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/"
+    ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/",
+    ".llmgc/procedural/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -802,6 +803,29 @@
         "docs/agent-tasks/goal-080-edit-driven-gamepackage-runtime-preview-bridge/",
         "src/LLMGameCreator.Application/Design/EditDrivenGamePackageRuntimePreviewBridge/",
         "tests/LLMGameCreator.Tests/Application/EditDrivenGamePackageRuntimePreviewBridge/"
+      ]
+    },
+    {
+      "scenario": "goal-081-edit-driven-gamepackage-runtime-preview-playthrough",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.Designer.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignGamePackageRuntimePreviewPlaythroughControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignGamePackageRuntimePreviewPlaythroughControl.Designer.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/EditDrivenGamePackageRuntimePreviewPlaythroughProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/",
+        "docs/agent-tasks/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/",
+        "src/LLMGameCreator.Application/Design/EditDrivenGamePackageRuntimePreviewPlaythrough/",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenGamePackageRuntimePreviewPlaythrough/"
       ]
     }
   ]

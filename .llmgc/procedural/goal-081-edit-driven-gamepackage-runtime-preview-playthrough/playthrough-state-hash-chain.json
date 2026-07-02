@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_playthrough_state_hash_chain_v1",
+  "passed": true,
+  "initialPackageReadStateHash": "ad5dfc0e31e69a03ad3a6effae5ec45db2dec26e2ab47a3ca1998bf86085a737",
+  "commandScriptStateHash": "74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf",
+  "replayTranscriptStateHash": "a4141e577243c51ca81a368626d9592a88cd245407357282603bf44efd380dff",
+  "finalCoverageStateHash": "173873e79edceea93efbe7ea8871497ee0caaf0a503cd8586c52a782a7149b5f",
+  "replayRerunFinalStateHash": "f24dad3dd589c6b66a458f2d82fd0e375466a4d8aac86f128e819c01107061f6",
+  "replayRerunFinalHashMatchesFirstRun": true,
+  "entries": [
+    {
+      "stageId": "initial_package_read_state",
+      "hash": "ad5dfc0e31e69a03ad3a6effae5ec45db2dec26e2ab47a3ca1998bf86085a737"
+    },
+    {
+      "stageId": "command_script_state",
+      "hash": "74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf"
+    },
+    {
+      "stageId": "replay_transcript_state",
+      "hash": "a4141e577243c51ca81a368626d9592a88cd245407357282603bf44efd380dff"
+    },
+    {
+      "stageId": "final_coverage_state",
+      "hash": "173873e79edceea93efbe7ea8871497ee0caaf0a503cd8586c52a782a7149b5f"
+    }
+  ],
+  "diagnostics": []
+}

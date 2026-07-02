@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_playthrough_coverage_ledger_v1",
+  "passed": true,
+  "rowCount": 9,
+  "targetCount": 18,
+  "goal078ActionCount": 57,
+  "coveredRowCount": 9,
+  "coveredTargetCount": 18,
+  "coveredGoal078ActionCount": 57,
+  "allGoal077TargetsCovered": true,
+  "allGoal078ActionsCovered": true,
+  "packageReadRequired": true,
+  "rows": [
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "scenarioId": "map-panel-rpg/seed-alpha",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-001",
+        "target-002"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "scenarioId": "map-panel-rpg/seed-beta",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-003",
+        "target-004"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "scenarioId": "map-panel-rpg/seed-gamma",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-005",
+        "target-006"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "scenarioId": "survival-sandbox/seed-alpha",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-007",
+        "target-008"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "scenarioId": "survival-sandbox/seed-beta",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-009",
+        "target-010"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "scenarioId": "survival-sandbox/seed-gamma",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-011",
+        "target-012"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "scenarioId": "first-person-grid-dungeon/seed-alpha",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-013",
+        "target-014"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "scenarioId": "first-person-grid-dungeon/seed-beta",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-015",
+        "target-016"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "scenarioId": "first-person-grid-dungeon/seed-gamma",
+      "targetCount": 2,
+      "coveredTargetCount": 2,
+      "coveredGoal078ActionCount": 9,
+      "targetIds": [
+        "target-017",
+        "target-018"
+      ]
+    }
+  ],
+  "diagnostics": []
+}
