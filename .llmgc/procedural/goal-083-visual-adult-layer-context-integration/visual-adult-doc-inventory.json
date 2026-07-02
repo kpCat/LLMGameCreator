@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "goal_083_visual_adult_doc_inventory_v1",
+  "goalId": "goal_083_visual_adult_layer_context_integration",
+  "manualGate": "visual_adult_layer_context_integration_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "sourceDocuments": [
+    {
+      "path": "docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md",
+      "exists": true,
+      "purposeTags": ["routing", "policy", "rating_boundary", "provider_quarantine", "safe_fallback"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/context/ADULT_VISUAL_LAYER_DOCUMENTATION_MANIFEST.md",
+      "exists": true,
+      "purposeTags": ["manifest", "read_order", "docs_only"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/context/VISUAL_WORLD_GENERATION_CONTEXT_BRIEF.md",
+      "exists": true,
+      "purposeTags": ["visual_world", "visual_recipe", "runtime_provider_firewall"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/context/METAMODULE_CARRIER_VISUAL_NSFW_CONTEXT_BRIEF.md",
+      "exists": true,
+      "purposeTags": ["metamodule_context", "adult_capable_visuals", "policy_boundary"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+      "exists": true,
+      "purposeTags": ["roadmap", "future_gates", "bounded_sequence"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/PROCEDURAL_VISUAL_DETAIL_GENERATOR_STRATEGY.md",
+      "exists": true,
+      "purposeTags": ["visual_detail_generator", "deterministic_generation", "no_large_dump"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/VISUAL_WORLD_GRAMMAR_AND_PSEUDO3D_GENERATION.md",
+      "exists": true,
+      "purposeTags": ["visual_rule_stack", "visual_recipe", "pseudo3d"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/VISUAL_RULE_STACK_AND_DOMAIN_PROFILES.md",
+      "exists": true,
+      "purposeTags": ["domain_profiles", "visual_influence", "visual_rule_stack"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md",
+      "exists": true,
+      "purposeTags": ["visual_part_pack", "deterministic_parts", "adult_extension"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/PSEUDO3D_ASSET_PRESENTATION_CONTRACTS.md",
+      "exists": true,
+      "purposeTags": ["pseudo3d_contracts", "fallbacks", "sidecar_metadata"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/CREATURE_VISUAL_GENOME_AND_PRESENTATION.md",
+      "exists": true,
+      "purposeTags": ["creature_visual_genome", "body_plan", "rating_metadata"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/ADULT_VISUAL_LAYER_STRATEGY.md",
+      "exists": true,
+      "purposeTags": ["adult_visual_strategy", "rating", "export_policy", "review"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/proposals/VISUAL_PART_PACK_ADULT_EXTENSION.md",
+      "exists": true,
+      "purposeTags": ["adult_visual_part_pack", "rating_export_policy", "validation_diagnostics"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/agent-tasks/CODEX_TASK_ADULT_VISUAL_LAYER_DOCS_ONLY.md",
+      "exists": true,
+      "purposeTags": ["source_task", "docs_only", "forbidden_scope"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/agent-tasks/CODEX_TASK_VISUAL_DETAIL_GENERATOR_CORE.md",
+      "exists": true,
+      "purposeTags": ["future_task", "visual_detail_generator", "candidate_owned"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/agent-tasks/CODEX_TASK_PROCEDURAL_VISUAL_PART_PACK_COMPILER.md",
+      "exists": true,
+      "purposeTags": ["future_task", "visual_part_pack_compiler", "candidate_owned"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/agent-tasks/CODEX_TASK_VISUAL_GRAMMAR_RESOLVER.md",
+      "exists": true,
+      "purposeTags": ["future_task", "visual_grammar_resolver", "candidate_owned"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    },
+    {
+      "path": "docs/agent-tasks/CODEX_TASK_PSEUDO3D_VISUAL_RECIPE_PROOF.md",
+      "exists": true,
+      "purposeTags": ["future_task", "pseudo3d_visual_proof", "candidate_owned"],
+      "indexedInContextIndex": true,
+      "routedInFullGeneratorGoalQueue": true,
+      "policyBounded": true,
+      "containsProhibitedImplementationRequests": false
+    }
+  ],
+  "summary": {
+    "sourceDocumentCount": 18,
+    "missingDocumentCount": 0,
+    "indexedDocumentCount": 18,
+    "routedDocumentCount": 18,
+    "policyBoundedDocumentCount": 18,
+    "prohibitedImplementationRequestCount": 0
+  },
+  "notes": [
+    "Inventory uses repository-relative paths only.",
+    "Future implementation task docs are routed as future candidates only and are not started by Goal 083.",
+    "No real media assets, provider outputs or prompt dumps are inventoried as source documents."
+  ]
+}

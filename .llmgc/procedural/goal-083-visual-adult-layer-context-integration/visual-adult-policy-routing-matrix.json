@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "goal_083_visual_adult_policy_routing_matrix_v1",
+  "goalId": "goal_083_visual_adult_layer_context_integration",
+  "manualGate": "visual_adult_layer_context_integration_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "policyFacts": [
+    {
+      "id": "adult_visuals_are_extension_metadata",
+      "status": "recorded",
+      "fact": "Adult-capable visuals are rating-gated extension metadata, asset slots, overlays, candidate records and review decisions inside the shared visual/media pipeline, not a separate generator.",
+      "routedBy": ["docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md", "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md"]
+    },
+    {
+      "id": "runtime_unity_provider_firewall",
+      "status": "recorded",
+      "fact": "Runtime and Unity Player must not call LLMs, RAG, media providers, ComfyUI, Fooocus, InvokeAI or network generation services.",
+      "routedBy": ["docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md", "docs/CONTEXT_INDEX.md"]
+    },
+    {
+      "id": "candidate_quarantine_before_promotion",
+      "status": "recorded",
+      "fact": "Provider output remains candidate media until deterministic validation and human review promote an approved asset reference.",
+      "routedBy": ["docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md", "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md"]
+    },
+    {
+      "id": "safe_public_fallback_required",
+      "status": "recorded",
+      "fact": "Safe/public builds require deterministic safe fallbacks and must fail closed when rating/export metadata is missing or contradictory.",
+      "routedBy": ["docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md", "docs/FULL_GENERATOR_GOAL_QUEUE.md"]
+    },
+    {
+      "id": "gamepackage_manifest_catalog_source_of_truth",
+      "status": "recorded",
+      "fact": "GamePackage data, manifests, catalogs, recipes and reviewed asset bindings are source of truth; prompts and provider job text are not source of truth.",
+      "routedBy": ["docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md", "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md"]
+    },
+    {
+      "id": "no_real_adult_assets_added",
+      "status": "recorded",
+      "fact": "Goal 083 adds no real adult media assets, generated image assets, binary media or provider output.",
+      "routedBy": [".llmgc/procedural/goal-083-visual-adult-layer-context-integration/quality-gate-scan.json"]
+    },
+    {
+      "id": "no_explicit_prompt_generation_added",
+      "status": "recorded",
+      "fact": "Goal 083 adds no explicit prompt recipes, prompt dumps or runtime prompt generation.",
+      "routedBy": [".llmgc/procedural/goal-083-visual-adult-layer-context-integration/quality-gate-scan.json"]
+    }
+  ],
+  "futureGateRouting": [
+    "visual_asset_contract_rating_metadata_verification",
+    "visual_rule_stack_recipe_resolver_verification",
+    "visual_detail_generator_core_verification",
+    "procedural_visual_part_pack_compiler_verification",
+    "pseudo3d_visual_presentation_sidecar_verification",
+    "visual_provider_candidate_quarantine_verification",
+    "visual_safe_fallback_generation_verification",
+    "adult_visual_rating_metadata_verification",
+    "visual_media_review_workspace_verification",
+    "unity_approved_visual_asset_consumption_verification"
+  ],
+  "stopConditions": [
+    "C# source changes required",
+    "Unity changes required",
+    "public GamePackage schema changes required",
+    "provider integration required",
+    "real adult media assets required",
+    "explicit prompt recipes or prompt dumps required",
+    "safe policy boundary cannot be stated honestly"
+  ]
+}

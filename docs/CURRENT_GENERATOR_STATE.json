@@ -3,20 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-02T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 082A source-format physical-line repair produced for review",
-    "gate_status":  "edit_driven_unity_alpha_streamingassets_handoff_verification",
+    "current_phase_title":  "Goal 083 visual/adult layer context integration produced for review",
+    "gate_status":  "visual_adult_layer_context_integration_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 082 remains produced for review: edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false. Goal 082A Source Format Physical-Line Repair is produced for review: source_format_physical_line_repair_verification required, accepted=false.",
-    "current_user_action":  "Review Goal 082A source-format physical-line repair evidence and Goal 082 edit-driven Unity Alpha StreamingAssets handoff evidence; Goal 082 remains produced for review and accepted=false, while adult docs are docs context only.",
-    "recommended_next_decision":  "Review Goal 082A evidence and only mark source_format_physical_line_repair_verification passed after explicit user acceptance; do not mark Goal 082 passed until edit_driven_unity_alpha_streamingassets_handoff_verification is explicitly accepted.",
+    "active_manual_gate":  "Goal 083 Visual Adult Layer Context Integration is produced for review: visual_adult_layer_context_integration_verification required, accepted=false. Goal 082 remains produced for review: edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false. Goal 082A remains produced for review: source_format_physical_line_repair_verification required, accepted=false.",
+    "current_user_action":  "Review Goal 083 visual/adult layer context integration evidence. Goal 082 and Goal 082A remain produced for review and accepted=false; Goal 083 is docs/context/evidence only and does not start provider, media, Runtime, Unity or schema implementation.",
+    "recommended_next_decision":  "Review Goal 083 evidence and only mark visual_adult_layer_context_integration_verification passed after explicit user acceptance; do not mark Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "visual_adult_layer_context_integration_verification",
                                                         "source_format_physical_line_repair_verification",
                                                         "edit_driven_unity_alpha_streamingassets_handoff_verification"
                                                     ],
@@ -102,7 +103,8 @@
                            "goal_080_manual_gate":  "edit_driven_gamepackage_runtime_preview_bridge_verification",
                            "goal_081_manual_gate":  "edit_driven_gamepackage_runtime_preview_playthrough_verification",
                            "goal_082_manual_gate":  "edit_driven_unity_alpha_streamingassets_handoff_verification",
-                           "goal_082a_manual_gate":  "source_format_physical_line_repair_verification"
+                           "goal_082a_manual_gate":  "source_format_physical_line_repair_verification",
+                           "goal_083_manual_gate":  "visual_adult_layer_context_integration_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -393,6 +395,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "visual_adult_layer_context_integration_verification",
+                                          "goal_083_visual_adult_layer_context_integration",
+                                          "manual_review_goal_083_visual_adult_layer_context_integration",
                                           "source_format_physical_line_repair_verification",
                                           "goal_082a_source_format_physical_line_repair",
                                           "manual_review_goal_082a_source_format_physical_line_repair",
@@ -419,14 +424,14 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "source_format_physical_line_repair_verification",
-    "recommended_next_work_item_title":  "Review Goal 082A source-format physical-line repair",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-082a-source-format-physical-line-repair/GOAL.md",
+    "recommended_next_work_item":  "visual_adult_layer_context_integration_verification",
+    "recommended_next_work_item_title":  "Review Goal 083 visual/adult layer context integration",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-083-visual-adult-layer-context-integration/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 080 projected GamePackage runtime-preview bridge evidence",
-                                              "Keep Goal 080 accepted=false until user review accepts it",
-                                              "Keep Goal 079 and Goal 079A historical artifacts unchanged after their Goal080 handoff records",
-                                              "Do not start the next goal from this implementation handoff"
+                                              "Review Goal 083 visual/adult layer context integration evidence",
+                                              "Keep Goal 083 accepted=false until user review accepts it",
+                                              "Keep Goal 082 and Goal 082A accepted=false until their separate manual gates are accepted",
+                                              "Use visual media roadmap entries only as future candidates; do not start provider/media/runtime/schema implementation from this handoff"
                                           ],
     "required_reading_order_for_new_agents":  [
                                                   "AGENTS.md",
@@ -620,7 +625,8 @@
                              "Media-bound playable review package staging, StreamingAssets-compatible manifest, Unity-compatible proof records and invalid matrix sidecars",
                              "Gameplay consequence depth matrix command plans, runtime state delta proof, save/load replay audit and Unity Alpha marker sidecars",
                              "Integrated campaign timeline simulation matrix rows, cascade and arbitration ledgers, save/load replay audit and Unity Alpha campaign_timeline marker sidecars",
-                             "Goal 082 Unity Alpha StreamingAssets handoff payload, Unity probe read proof, negative proof and WinForms Unity Handoff tab sidecars"
+                             "Goal 082 Unity Alpha StreamingAssets handoff payload, Unity probe read proof, negative proof and WinForms Unity Handoff tab sidecars",
+                             "Goal 083 visual/adult layer context index, media pipeline roadmap, policy routing matrix and compact docs-integration evidence"
                          ],
     "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, produced-for-review goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 035 acceptance recommend Goal 036 as next work but do not start Goal 036 implementation without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
@@ -1870,5 +1876,21 @@
                                                                                     "The 21f2525a adult docs commit is preserved as docs context only."
                                                                                 ],
                                                             "next_action":  "review_goal_082a_source_format_physical_line_repair"
-                                                        }
+                                                        },
+    "visual_adult_layer_context_integration_verification":  {
+                                                                "status":  "produced_for_review",
+                                                                "accepted":  false,
+                                                                "evidence_source":  "goal_083_visual_adult_layer_context_integration",
+                                                                "observed_result":  [
+                                                                                        "Goal 083 produces visual/adult layer context integration evidence under .llmgc/procedural/goal-083-visual-adult-layer-context-integration with accepted=false.",
+                                                                                        "implementationStatus=GREEN, docsIndexed=true, docsRouted=true, policyBoundariesRecorded=true, futureVisualMediaSequenceRecorded=true.",
+                                                                                        "The visual/adult source docs are routed through docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md, docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md, docs/CONTEXT_INDEX.md and docs/FULL_GENERATOR_GOAL_QUEUE.md.",
+                                                                                        "Adult-capable visuals are recorded as rating-gated metadata, asset slots, overlays, candidate records and review decisions inside the shared visual/media pipeline, not as a separate generator.",
+                                                                                        "Runtime and Unity Player remain provider-free; provider output remains editor-time candidate media until deterministic validation and human review promote an approved asset reference.",
+                                                                                        "Safe/public builds require deterministic safe fallbacks and fail closed when rating/export metadata is missing or contradictory.",
+                                                                                        "Goal 083 adds no C# source, Unity file, project file, public GamePackage schema change, provider integration, binary media, generated image asset, real adult fixture or prompt dump.",
+                                                                                        "Goal082 remains produced for review with edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false; Goal082A remains produced for review with source_format_physical_line_repair_verification required, accepted=false."
+                                                                                    ],
+                                                                "next_action":  "review_goal_083_visual_adult_layer_context_integration"
+                                                            }
 }

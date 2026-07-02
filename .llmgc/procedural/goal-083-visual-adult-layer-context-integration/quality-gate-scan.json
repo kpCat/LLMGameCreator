@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "goal_083_quality_gate_scan_v1",
+  "goalId": "goal_083_visual_adult_layer_context_integration",
+  "manualGate": "visual_adult_layer_context_integration_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "preflight": {
+    "branch": "main",
+    "latestCommitBeforeWork": "57025434 GREEN Goal 082A source format physical line repair",
+    "requiredCommitsPresent": [
+      "21f2525a adult docs",
+      "2a74a398 GREEN Goal 082 edit-driven Unity Alpha StreamingAssets handoff",
+      "f26309ba GREEN Goal 082 edit-driven Unity Alpha StreamingAssets handoff",
+      "57025434 GREEN Goal 082A source format physical line repair"
+    ],
+    "goal082AcceptedRemainsFalse": true,
+    "goal082aAcceptedRemainsFalse": true,
+    "alphaRuntimeBootstrapTouchedAfterGoal082a": false,
+    "sourceFormatEvidenceNotP0": true,
+    "sourceFormatRawPhysicalMaxLineLength": 315
+  },
+  "changeScope": {
+    "noCSharpChanged": true,
+    "noUnityFilesChanged": true,
+    "noProjectFilesChanged": true,
+    "noPublicGamePackageSchemaChanged": true,
+    "noRuntimeChanged": true,
+    "noProviderIntegrationAdded": true,
+    "noBinaryMediaAdded": true,
+    "noGeneratedImageAssetsAdded": true,
+    "noRealAdultFixturesAdded": true,
+    "noExplicitPromptDumpAdded": true,
+    "noExternalDependenciesAdded": true
+  },
+  "routing": {
+    "adultDocsIndexed": true,
+    "futureGoalsRouted": true,
+    "policyBoundariesExplicit": true,
+    "safeFallbackRulesExplicit": true,
+    "providerQuarantineRulesExplicit": true,
+    "artifactScopeReady": true
+  },
+  "expectedChangedPaths": [
+    ".devflow/artifact-scope/artifact-scope-policy.json",
+    ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/quality-gate-scan.json",
+    ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/visual-adult-doc-inventory.json",
+    ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/visual-adult-layer-context-integration-report.md",
+    ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/visual-adult-policy-routing-matrix.json",
+    "docs/CONTEXT_INDEX.md",
+    "docs/CURRENT_GENERATOR_STATE.json",
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+    "docs/context/ADULT_VISUAL_LAYER_DOCUMENTATION_MANIFEST.md",
+    "docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md",
+    "docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md",
+    "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md"
+  ],
+  "reportHash": "eb903566e615638a9aef5af9d4e9a63ba09571070abcfcd2f32b431bd917c514",
+  "diagnostics": []
+}

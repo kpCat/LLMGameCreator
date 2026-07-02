@@ -71,6 +71,7 @@ dynamic_semantic_feature_system_verification required
 generator_spine_quality_consolidation_verification required
 edit_driven_unity_alpha_streamingassets_handoff_verification required
 source_format_physical_line_repair_verification required
+visual_adult_layer_context_integration_verification required
 ```
 
 Current capabilities:
@@ -155,6 +156,7 @@ Current capabilities:
 - Goal 081 edit-driven GamePackage runtime preview playthrough consumes Goal 080 projected GamePackage and bridge artifacts into a deterministic player command script, transcript, state-hash chain, coverage ledger, negative proof and bounded WinForms Preview Playthrough tab;
 - Goal 082 edit-driven Unity Alpha StreamingAssets handoff consumes Goal 080 projected GamePackage and Goal 081 playthrough artifacts into a compact mirrored StreamingAssets payload, independent Unity probe script, exact payload read/negative proof and bounded WinForms Unity Handoff tab;
 - Goal 082A source format physical-line repair strengthens the Goal 082 source-health scan with raw-byte file counts, raw/logical line metrics, explicit Unity probe / WinForms parent / Application seam coverage and synthetic CR-only plus zero-LF one-physical-line rejection while keeping Goal 082 accepted=false;
+- Goal 083 visual/adult layer context integration indexes and routes the visual/adult documentation set into `CONTEXT_INDEX.md`, this queue, current-state docs, the debt register and deterministic compact evidence without code, Unity, schema, provider, media or prompt-dump changes;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
@@ -1182,14 +1184,60 @@ Produced for review. The gate remains `source_format_physical_line_repair_verifi
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, malformed source before/after 0/0 in direct current HEAD and working-tree raw-byte preflight, zero-LF/CR-only/one-physical-line source counts 0 after repair, raw/logical max line length 315, synthetic CR-only and zero-LF one-physical-line samples rejected, Unity probe / WinForms parent / Goal082 Application scan coverage present and `AlphaRuntimeBootstrap.cs` unchanged with hash `f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce`. Artifacts are under `.llmgc/procedural/goal-082a-source-format-physical-line-repair/`; Goal 082 remains `accepted=false` and is not marked passed by this hotfix. The `21f2525a adult docs` commit is docs context only.
 
+### Goal 083: Visual Adult Layer Context Integration
+
+Purpose:
+
+Integrate the visual-layer and adult-capable visual-layer documents into the official context/navigation spine as policy-bounded project context for future visual/media pipeline goals.
+
+Status:
+
+Produced for review. The gate remains `visual_adult_layer_context_integration_verification required`, not passed. Goal 082 and Goal 082A remain produced-for-review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`; the docs are indexed through `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md`, routed through `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md`, `docs/CONTEXT_INDEX.md`, this queue and current-state docs, with compact evidence under `.llmgc/procedural/goal-083-visual-adult-layer-context-integration/`. This is a documentation, metadata, policy and routing goal only: no C# source, Unity files, project files, public GamePackage schema, provider integration, binary media, generated image assets, real adult fixtures or prompt dumps are added.
+
+Routed visual/adult source documents:
+
+- `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md`
+- `docs/context/ADULT_VISUAL_LAYER_DOCUMENTATION_MANIFEST.md`
+- `docs/context/VISUAL_WORLD_GENERATION_CONTEXT_BRIEF.md`
+- `docs/context/METAMODULE_CARRIER_VISUAL_NSFW_CONTEXT_BRIEF.md`
+- `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md`
+- `docs/proposals/PROCEDURAL_VISUAL_DETAIL_GENERATOR_STRATEGY.md`
+- `docs/proposals/VISUAL_WORLD_GRAMMAR_AND_PSEUDO3D_GENERATION.md`
+- `docs/proposals/VISUAL_RULE_STACK_AND_DOMAIN_PROFILES.md`
+- `docs/proposals/PROCEDURAL_VISUAL_PART_PACKS.md`
+- `docs/proposals/PSEUDO3D_ASSET_PRESENTATION_CONTRACTS.md`
+- `docs/proposals/CREATURE_VISUAL_GENOME_AND_PRESENTATION.md`
+- `docs/proposals/ADULT_VISUAL_LAYER_STRATEGY.md`
+- `docs/proposals/VISUAL_PART_PACK_ADULT_EXTENSION.md`
+- `docs/agent-tasks/CODEX_TASK_ADULT_VISUAL_LAYER_DOCS_ONLY.md`
+- `docs/agent-tasks/CODEX_TASK_VISUAL_DETAIL_GENERATOR_CORE.md`
+- `docs/agent-tasks/CODEX_TASK_PROCEDURAL_VISUAL_PART_PACK_COMPILER.md`
+- `docs/agent-tasks/CODEX_TASK_VISUAL_GRAMMAR_RESOLVER.md`
+- `docs/agent-tasks/CODEX_TASK_PSEUDO3D_VISUAL_RECIPE_PROOF.md`
+
+Future visual/media candidate gates:
+
+1. `visual_asset_contract_rating_metadata_verification`
+2. `visual_rule_stack_recipe_resolver_verification`
+3. `visual_detail_generator_core_verification`
+4. `procedural_visual_part_pack_compiler_verification`
+5. `pseudo3d_visual_presentation_sidecar_verification`
+6. `visual_provider_candidate_quarantine_verification`
+7. `visual_safe_fallback_generation_verification`
+8. `adult_visual_rating_metadata_verification`
+9. `visual_media_review_workspace_verification`
+10. `unity_approved_visual_asset_consumption_verification`
+
 ## Current Recommended Next Work
 
 ```text
-source_format_physical_line_repair_verification
+visual_adult_layer_context_integration_verification
 ```
 
 Status:
 
 ```text
-goal_082a_source_format_physical_line_repair_produced_for_review
+goal_083_visual_adult_layer_context_integration_produced_for_review
 ```
