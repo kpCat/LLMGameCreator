@@ -7,6 +7,12 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
 {
     private const int MaxAllowedLineLength = 500;
     private const int MaxAllowedLineCount = 1000;
+    private const int LargeSourceFileByteThreshold = 1_500;
+    private const string WinFormsParentPath =
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs";
+    private const string Goal082ApplicationSourcePrefix =
+        "src/LLMGameCreator.Application/Design/EditDrivenUnityAlphaStreamingAssetsHandoff/";
+
     private static readonly Regex TimestampLikePattern = new(
         @"\b20\d{2}-\d{2}-\d{2}[T ][0-2]\d:[0-5]\d:[0-5]\d",
         RegexOptions.Compiled);
@@ -28,6 +34,24 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
             item => item.Key,
             item => item.Value,
             StringComparer.Ordinal));
+        var rawByteScannedFileCount = files.Count;
+        var logicalMaxLineLength = files.Count == 0 ? 0 : files.Max(file => file.LogicalMaxLineLength);
+        var rawPhysicalMaxLineLength = files.Count == 0 ? 0 : files.Max(file => file.RawPhysicalMaxLineLength);
+        var rawPhysicalLinesOver500 = files.Sum(file => file.RawPhysicalLinesOver500Count);
+        var zeroLfSourceFileCount = files.Count(file => file.ZeroLfSource);
+        var crOnlySourceFileCount = files.Count(file => file.CrOnlySource);
+        var rawPhysicalOneLineSourceFileCount = files.Count(file => file.RawPhysicalOneLineSource);
+        var filesWithTooFewLinesForSizeCount = files.Count(file => file.TooFewLinesForSizeSourceCandidate);
+        var unityProbeIncludedInRawScan = files.Any(file => string.Equals(
+            file.RelativePath,
+            EditDrivenUnityAlphaStreamingAssetsHandoffVocabulary.UnityProbeScriptPath,
+            StringComparison.Ordinal));
+        var winFormsParentIncludedInRawScan = files.Any(file => string.Equals(
+            file.RelativePath,
+            WinFormsParentPath,
+            StringComparison.Ordinal));
+        var goal082ApplicationFilesIncludedInRawScan = files.Any(file =>
+            file.RelativePath.StartsWith(Goal082ApplicationSourcePrefix, StringComparison.Ordinal));
 
         foreach (var file in files.Where(file => file.LinesOver500Count > 0))
         {
@@ -35,6 +59,14 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
                 "goal082.quality.source_line_too_long",
                 file.RelativePath,
                 "Source line exceeds 500 characters."));
+        }
+
+        foreach (var file in files.Where(file => file.RawPhysicalLinesOver500Count > 0))
+        {
+            diagnostics.Add(Error(
+                "goal082.quality.raw_physical_line_too_long",
+                file.RelativePath,
+                "Raw physical source line exceeds 500 characters."));
         }
 
         foreach (var file in files.Where(file => file.LineCount > MaxAllowedLineCount))
@@ -51,6 +83,38 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
                 "goal082.quality.raw_source_format_rejected",
                 file.RelativePath,
                 "Source file has zero-LF, CR-only, or raw one-physical-line shape."));
+        }
+
+        foreach (var file in files.Where(file => file.MinifiedSourceCandidate || file.TooFewLinesForSizeSourceCandidate))
+        {
+            diagnostics.Add(Error(
+                "goal082.quality.minified_source_shape",
+                file.RelativePath,
+                "Source file has a minified or too-few-lines-for-size shape."));
+        }
+
+        if (!unityProbeIncludedInRawScan)
+        {
+            diagnostics.Add(Error(
+                "goal082.quality.unity_probe_missing_from_raw_scan",
+                EditDrivenUnityAlphaStreamingAssetsHandoffVocabulary.UnityProbeScriptPath,
+                "Raw-byte source scan must include the Unity handoff probe."));
+        }
+
+        if (!winFormsParentIncludedInRawScan)
+        {
+            diagnostics.Add(Error(
+                "goal082.quality.winforms_parent_missing_from_raw_scan",
+                WinFormsParentPath,
+                "Raw-byte source scan must include the WinForms parent workspace page."));
+        }
+
+        if (!goal082ApplicationFilesIncludedInRawScan)
+        {
+            diagnostics.Add(Error(
+                "goal082.quality.application_scope_missing_from_raw_scan",
+                Goal082ApplicationSourcePrefix,
+                "Raw-byte source scan must include the Goal082 Application seam."));
         }
 
         if (!bindingInventory.Passed)
@@ -126,9 +190,9 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
         }
 
         var syntheticCrOnlyRejected = RejectsSuspiciousRawSourceBytes(Encoding.UTF8.GetBytes("public sealed class A\r{\r}\r"));
-        var syntheticZeroLfRejected = RejectsSuspiciousRawSourceBytes(
+        var syntheticZeroLfOnePhysicalLineRejected = RejectsSuspiciousRawSourceBytes(
             Encoding.UTF8.GetBytes("public sealed class A { public string Value => \"" + new string('x', 520) + "\"; }"));
-        if (!syntheticCrOnlyRejected || !syntheticZeroLfRejected)
+        if (!syntheticCrOnlyRejected || !syntheticZeroLfOnePhysicalLineRejected)
         {
             diagnostics.Add(Error(
                 "goal082.quality.synthetic_raw_source_not_rejected",
@@ -142,15 +206,27 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
         {
             Passed = diagnostics.Count == 0,
             ScannedFileCount = files.Count,
-            MaxLineLength = files.Count == 0 ? 0 : files.Max(file => file.MaxLineLength),
+            RawByteScannedFileCount = rawByteScannedFileCount,
+            MaxLineLength = logicalMaxLineLength,
+            LogicalMaxLineLength = logicalMaxLineLength,
+            RawPhysicalMaxLineLength = rawPhysicalMaxLineLength,
             LinesOver500Count = files.Sum(file => file.LinesOver500Count),
+            RawPhysicalLinesOver500Count = rawPhysicalLinesOver500,
             FilesOver1000LinesCount = files.Count(file => file.LineCount > MaxAllowedLineCount),
             MinifiedSourceFileCount = files.Count(file => file.MinifiedSourceCandidate),
-            RawPhysicalOneLineSourceCount = files.Count(file => file.RawPhysicalOneLineSource),
-            ZeroLfSourceCount = files.Count(file => file.ZeroLfSource),
-            CrOnlySourceCount = files.Count(file => file.CrOnlySource),
+            RawPhysicalOneLineSourceCount = rawPhysicalOneLineSourceFileCount,
+            RawPhysicalOneLineSourceFileCount = rawPhysicalOneLineSourceFileCount,
+            ZeroLfSourceCount = zeroLfSourceFileCount,
+            ZeroLfSourceFileCount = zeroLfSourceFileCount,
+            CrOnlySourceCount = crOnlySourceFileCount,
+            CrOnlySourceFileCount = crOnlySourceFileCount,
+            FilesWithTooFewLinesForSizeCount = filesWithTooFewLinesForSizeCount,
+            UnityProbeIncludedInRawScan = unityProbeIncludedInRawScan,
+            WinFormsParentIncludedInRawScan = winFormsParentIncludedInRawScan,
+            Goal082ApplicationFilesIncludedInRawScan = goal082ApplicationFilesIncludedInRawScan,
             SyntheticCrOnlySourceRejected = syntheticCrOnlyRejected,
-            SyntheticZeroLfOneLineSourceRejected = syntheticZeroLfRejected,
+            SyntheticZeroLfOneLineSourceRejected = syntheticZeroLfOnePhysicalLineRejected,
+            SyntheticZeroLfOnePhysicalLineRejected = syntheticZeroLfOnePhysicalLineRejected,
             ParentWorkspaceLineCount = parentWorkspaceLineCount,
             AlphaRuntimeBootstrapBaselineLineCount = 3672,
             AlphaRuntimeBootstrapBaselineHash = EditDrivenUnityAlphaStreamingAssetsHandoffVocabulary.AlphaRuntimeBootstrapExpectedHash,
@@ -261,22 +337,13 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
 
     public static bool RejectsSuspiciousRawSourceBytes(byte[] bytes)
     {
-        var text = Encoding.UTF8.GetString(bytes);
-        var hasLf = text.Contains('\n');
-        var hasCr = text.Contains('\r');
-        if (!hasLf)
-        {
-            return true;
-        }
-
-        if (hasCr && !hasLf)
-        {
-            return true;
-        }
-
-        var lines = text.Split('\n');
-        var maxLineLength = lines.Select(line => line.TrimEnd('\r').Length).DefaultIfEmpty(0).Max();
-        return lines.Length == 1 && maxLineLength > MaxAllowedLineLength;
+        var scan = AnalyzeSourceBytes("synthetic.cs", bytes);
+        return scan.ZeroLfSource
+               || scan.CrOnlySource
+               || scan.RawPhysicalOneLineSource
+               || scan.RawPhysicalLinesOver500Count > 0
+               || scan.MinifiedSourceCandidate
+               || scan.TooFewLinesForSizeSourceCandidate;
     }
 
     public static bool AlphaRuntimeBootstrapMatchesBaseline(byte[] bytes) =>
@@ -354,25 +421,137 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
     private static EditDrivenUnityAlphaStreamingAssetsHandoffQualityFileScan ScanFile(string root, string path)
     {
         var bytes = File.ReadAllBytes(path);
+        var relativePath = Path.GetRelativePath(root, path).Replace(Path.DirectorySeparatorChar, '/');
+        return AnalyzeSourceBytes(relativePath, bytes);
+    }
+
+    private static EditDrivenUnityAlphaStreamingAssetsHandoffQualityFileScan AnalyzeSourceBytes(
+        string relativePath,
+        byte[] bytes)
+    {
         var text = Encoding.UTF8.GetString(bytes);
-        var hasLf = text.Contains('\n');
-        var hasCr = text.Contains('\r');
-        var lines = hasLf ? text.Split('\n') : [text];
-        var maxLineLength = lines.Select(line => line.TrimEnd('\r').Length).DefaultIfEmpty(0).Max();
+        var raw = AnalyzeRawPhysicalLines(bytes);
+        var logicalLines = Regex.Split(text, "\r\n|\n|\r");
+        var logicalLengths = logicalLines.Select(line => line.Length).ToList();
+        var logicalMaxLineLength = logicalLengths.Count == 0 ? 0 : logicalLengths.Max();
+        var logicalLinesOver500 = logicalLengths.Count(length => length > MaxAllowedLineLength);
+        var looksLikeCSharp = LooksLikeCSharpSource(text);
+        var substantialZeroLfSource = looksLikeCSharp
+                                      && raw.LfByteCount == 0
+                                      && (bytes.Length >= LargeSourceFileByteThreshold
+                                          || raw.RawPhysicalMaxLineLength > MaxAllowedLineLength
+                                          || raw.ContainsCrOnlyLineEndings);
+        var crOnlySource = looksLikeCSharp
+                           && raw.LfByteCount == 0
+                           && raw.ContainsCrOnlyLineEndings;
+        var rawPhysicalOneLine = looksLikeCSharp
+                                 && raw.RawPhysicalLineCount <= 1
+                                 && (bytes.Length >= LargeSourceFileByteThreshold
+                                     || raw.RawPhysicalMaxLineLength > MaxAllowedLineLength);
+        var tooFewLinesForSize = looksLikeCSharp
+                                 && bytes.Length >= LargeSourceFileByteThreshold
+                                 && (raw.RawPhysicalLineCount <= 3 || logicalLines.Length <= 3);
+        var minified = logicalMaxLineLength > MaxAllowedLineLength
+                       || raw.RawPhysicalMaxLineLength > MaxAllowedLineLength
+                       || rawPhysicalOneLine
+                       || tooFewLinesForSize;
 
         return new EditDrivenUnityAlphaStreamingAssetsHandoffQualityFileScan
         {
-            RelativePath = Path.GetRelativePath(root, path).Replace(Path.DirectorySeparatorChar, '/'),
-            LineCount = lines.Length,
+            RelativePath = relativePath,
+            LineCount = logicalLines.Length,
+            LogicalLineCount = logicalLines.Length,
             ByteCount = bytes.Length,
-            MaxLineLength = maxLineLength,
-            LinesOver500Count = lines.Count(line => line.TrimEnd('\r').Length > MaxAllowedLineLength),
-            RawPhysicalOneLineSource = lines.Length == 1 && bytes.Length > 200,
-            ZeroLfSource = !hasLf,
-            CrOnlySource = hasCr && !hasLf,
-            MinifiedSourceCandidate = lines.Length <= 2 && maxLineLength > MaxAllowedLineLength
+            MaxLineLength = logicalMaxLineLength,
+            LogicalMaxLineLength = logicalMaxLineLength,
+            LfByteCount = raw.LfByteCount,
+            CrByteCount = raw.CrByteCount,
+            RawPhysicalLineCount = raw.RawPhysicalLineCount,
+            RawPhysicalMaxLineLength = raw.RawPhysicalMaxLineLength,
+            LinesOver500Count = logicalLinesOver500,
+            RawPhysicalLinesOver500Count = raw.RawPhysicalLinesOver500Count,
+            RawPhysicalOneLineSource = rawPhysicalOneLine,
+            ZeroLfSource = substantialZeroLfSource,
+            CrOnlySource = crOnlySource,
+            ContainsCrOnlyLineEndings = raw.ContainsCrOnlyLineEndings,
+            MinifiedSourceCandidate = minified,
+            TooFewLinesForSizeSourceCandidate = tooFewLinesForSize
         };
     }
+
+    private static RawSourceLineMetrics AnalyzeRawPhysicalLines(byte[] bytes)
+    {
+        if (bytes.Length == 0)
+        {
+            return new RawSourceLineMetrics(0, 0, 0, 0, 0, false);
+        }
+
+        var lfCount = 0;
+        var crCount = 0;
+        var currentLength = 0;
+        var maxLength = 0;
+        var over500Count = 0;
+        var containsCrOnlyLineEndings = false;
+
+        for (var index = 0; index < bytes.Length; index++)
+        {
+            var value = bytes[index];
+            if (value == '\n')
+            {
+                lfCount++;
+                if (currentLength > maxLength)
+                {
+                    maxLength = currentLength;
+                }
+
+                if (currentLength > MaxAllowedLineLength)
+                {
+                    over500Count++;
+                }
+
+                currentLength = 0;
+                continue;
+            }
+
+            currentLength++;
+            if (value != '\r')
+            {
+                continue;
+            }
+
+            crCount++;
+            if (index + 1 >= bytes.Length || bytes[index + 1] != '\n')
+            {
+                containsCrOnlyLineEndings = true;
+            }
+        }
+
+        if (currentLength > maxLength)
+        {
+            maxLength = currentLength;
+        }
+
+        if (currentLength > MaxAllowedLineLength)
+        {
+            over500Count++;
+        }
+
+        return new RawSourceLineMetrics(
+            lfCount,
+            crCount,
+            lfCount + 1,
+            maxLength,
+            over500Count,
+            containsCrOnlyLineEndings);
+    }
+
+    private static bool LooksLikeCSharpSource(string text) =>
+        text.Contains("class ", StringComparison.Ordinal)
+        || text.Contains("namespace ", StringComparison.Ordinal)
+        || text.Contains("using ", StringComparison.Ordinal)
+        || text.Contains("public ", StringComparison.Ordinal)
+        || text.Contains("internal ", StringComparison.Ordinal)
+        || text.Contains("private ", StringComparison.Ordinal);
 
     private static EvidencePayloadScan ScanEvidencePayloads(IReadOnlyDictionary<string, string> evidencePayloads)
     {
@@ -468,4 +647,12 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner
         bool ContainsHeavyLogs,
         bool ContainsScratchTamperFiles,
         IReadOnlyList<EditDrivenUnityAlphaStreamingAssetsHandoffDiagnostic> Diagnostics);
+
+    private sealed record RawSourceLineMetrics(
+        int LfByteCount,
+        int CrByteCount,
+        int RawPhysicalLineCount,
+        int RawPhysicalMaxLineLength,
+        int RawPhysicalLinesOver500Count,
+        bool ContainsCrOnlyLineEndings);
 }

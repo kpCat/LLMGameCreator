@@ -51,7 +51,8 @@
     ".llmgc/procedural/goal-079a-source-format-line-ending-guard/",
     ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/",
     ".llmgc/procedural/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/",
-    ".llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/"
+    ".llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/",
+    ".llmgc/procedural/goal-082a-source-format-physical-line-repair/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -849,6 +850,26 @@
       "allowedPathPrefixes": [
         ".llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/",
         "docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/",
+        "src/LLMGameCreator.Application/Design/EditDrivenUnityAlphaStreamingAssetsHandoff/",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenUnityAlphaStreamingAssetsHandoff/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/"
+      ]
+    },
+    {
+      "scenario": "goal-082a-source-format-physical-line-repair",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/EditDrivenUnityAlphaStreamingAssetsHandoffProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/",
+        ".llmgc/procedural/goal-082a-source-format-physical-line-repair/",
+        "docs/agent-tasks/goal-082a-source-format-physical-line-repair/",
         "src/LLMGameCreator.Application/Design/EditDrivenUnityAlphaStreamingAssetsHandoff/",
         "tests/LLMGameCreator.Tests/Application/EditDrivenUnityAlphaStreamingAssetsHandoff/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/"

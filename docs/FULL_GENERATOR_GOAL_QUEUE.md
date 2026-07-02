@@ -70,6 +70,7 @@ semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
 generator_spine_quality_consolidation_verification required
 edit_driven_unity_alpha_streamingassets_handoff_verification required
+source_format_physical_line_repair_verification required
 ```
 
 Current capabilities:
@@ -153,6 +154,7 @@ Current capabilities:
 - Goal 080 edit-driven GamePackage runtime preview bridge consumes Goal 077/078/079/079A artifacts into a disk-backed projected GamePackage, reads it back through existing validation/runtime-preview projection paths, proves 18 target and 57 action coverage, rejects missing/tampered/fake/lineage mismatches and binds a bounded WinForms Runtime Bridge tab;
 - Goal 081 edit-driven GamePackage runtime preview playthrough consumes Goal 080 projected GamePackage and bridge artifacts into a deterministic player command script, transcript, state-hash chain, coverage ledger, negative proof and bounded WinForms Preview Playthrough tab;
 - Goal 082 edit-driven Unity Alpha StreamingAssets handoff consumes Goal 080 projected GamePackage and Goal 081 playthrough artifacts into a compact mirrored StreamingAssets payload, independent Unity probe script, exact payload read/negative proof and bounded WinForms Unity Handoff tab;
+- Goal 082A source format physical-line repair strengthens the Goal 082 source-health scan with raw-byte file counts, raw/logical line metrics, explicit Unity probe / WinForms parent / Application seam coverage and synthetic CR-only plus zero-LF one-physical-line rejection while keeping Goal 082 accepted=false;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
@@ -1168,14 +1170,26 @@ Produced for review. The gate remains `edit_driven_unity_alpha_streamingassets_h
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, 9 rows, 18 targets, 57 Goal 078 actions, 124 commands, 6 mirrored StreamingAssets payload files, handoff manifest hash `08104cd28fac6501d8cd9e4c8329e11ef56b82c17a1b99ea55a4b733d8782a54` and probe read proof hash `18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16`. Artifacts are under `.llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/`; Goal 081 remains `accepted=false` in its artifact and accepted only by current-state handoff before Goal 082.
 
+### Goal 082A: Source Format Physical-Line Repair
+
+Purpose:
+
+Repair the post-Goal 082 source-format guard blind spot by adding raw-byte physical-line metrics, explicit required-scope coverage booleans and synthetic CR-only / zero-LF one-physical-line regression proof before any new feature goal.
+
+Status:
+
+Produced for review. The gate remains `source_format_physical_line_repair_verification required`, not passed.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, malformed source before/after 0/0 in direct current HEAD and working-tree raw-byte preflight, zero-LF/CR-only/one-physical-line source counts 0 after repair, raw/logical max line length 315, synthetic CR-only and zero-LF one-physical-line samples rejected, Unity probe / WinForms parent / Goal082 Application scan coverage present and `AlphaRuntimeBootstrap.cs` unchanged with hash `f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce`. Artifacts are under `.llmgc/procedural/goal-082a-source-format-physical-line-repair/`; Goal 082 remains `accepted=false` and is not marked passed by this hotfix. The `21f2525a adult docs` commit is docs context only.
+
 ## Current Recommended Next Work
 
 ```text
-edit_driven_unity_alpha_streamingassets_handoff_verification
+source_format_physical_line_repair_verification
 ```
 
 Status:
 
 ```text
-goal_082_edit_driven_unity_alpha_streamingassets_handoff_produced_for_review
+goal_082a_source_format_physical_line_repair_produced_for_review
 ```

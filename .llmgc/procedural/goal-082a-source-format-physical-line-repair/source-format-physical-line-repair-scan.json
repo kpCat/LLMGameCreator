@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "goal_082a_source_format_physical_line_repair_scan_v1",
+  "goalId": "goal_082a_source_format_physical_line_repair",
+  "manualGate": "source_format_physical_line_repair_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "preflight": {
+    "branch": "main",
+    "latestCommitBeforeWork": "21f2525a1cc5d1c2af6bae6c76d2e68ef804ce78",
+    "latestOriginMainBeforeWork": "21f2525a1cc5d1c2af6bae6c76d2e68ef804ce78",
+    "adultDocsCommitPresentAboveGoal082": true,
+    "adultDocsCommit": "21f2525a adult docs",
+    "goal082ImplementationCommitsPresent": true,
+    "goal082ImplementationCommits": [
+      "2a74a398 GREEN Goal 082 edit-driven Unity Alpha StreamingAssets handoff",
+      "f26309ba GREEN Goal 082 edit-driven Unity Alpha StreamingAssets handoff"
+    ],
+    "goal082AcceptedRemainsFalse": true,
+    "goal082ManualGateRemainsRequired": true,
+    "alphaRuntimeBootstrapBaselineHash": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce"
+  },
+  "rawByteScanBefore": {
+    "scope": "Goal082 Application seam, WinForms parent/handoff controls, CompositionRoot, Unity probe, Goal082 tests, product smoke and current-state docs test",
+    "rawByteScannedFileCount": 18,
+    "malformedSourceFileCount": 0,
+    "zeroLfSourceFileCount": 0,
+    "crOnlySourceFileCount": 0,
+    "rawPhysicalOneLineSourceFileCount": 0,
+    "rawPhysicalMaxLineLength": 315,
+    "logicalMaxLineLength": 315,
+    "filesOver1000LogicalLinesCount": 0,
+    "minifiedSourceFileCount": 0,
+    "malformedFiles": []
+  },
+  "sourceFormattingRepair": {
+    "filesReformatted": [],
+    "normalizationApplied": false,
+    "disposition": "Direct working-tree and HEAD blob raw-byte preflight found no zero-LF, CR-only, one-physical-line or over-500 physical source files in the required Goal082 scope. The current hotfix therefore repairs the scanner/evidence backstop without source normalization."
+  },
+  "rawByteScanAfter": {
+    "scope": "Goal082 Application seam, WinForms parent/handoff controls, CompositionRoot, Unity probe, Goal082 tests, product smoke and current-state docs test",
+    "rawByteScannedFileCount": 18,
+    "malformedSourceFileCount": 0,
+    "zeroLfSourceFileCount": 0,
+    "crOnlySourceFileCount": 0,
+    "rawPhysicalOneLineSourceFileCount": 0,
+    "rawPhysicalMaxLineLength": 315,
+    "logicalMaxLineLength": 315,
+    "rawPhysicalLinesOver500Count": 0,
+    "filesOver1000LogicalLinesCount": 0,
+    "filesWithTooFewLinesForSizeCount": 0,
+    "minifiedSourceFileCount": 0,
+    "unityProbeIncludedInRawScan": true,
+    "winFormsParentIncludedInRawScan": true,
+    "goal082ApplicationFilesIncludedInRawScan": true,
+    "syntheticCrOnlySourceRejected": true,
+    "syntheticZeroLfOnePhysicalLineRejected": true
+  },
+  "goal082Evidence": {
+    "reportHashBefore": "b40f2d7deeb8a347d577ba02b1435903596987835d4d5a96c3d1bdbd8ed8bcff",
+    "qualityGateScanHashBefore": "6b7b40b12c9f935ee75a309e6afef7901dfd05795f43ff886fd08c9e1e4320d7",
+    "reportHashAfter": "6ef166a2f9872ab0c86b3a6ec8bdc5ed98ded015e65f49cedda81b84e16af0b8",
+    "qualityGateScanHashAfter": "b2565fd113a8ea3e810c98a81b5da60382ade6ffcc3dd352cd611f4b92f51458",
+    "acceptedRemainsFalse": true,
+    "manualGateRemainsRequired": true
+  },
+  "alphaRuntimeBootstrap": {
+    "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AlphaRuntimeBootstrap.cs",
+    "hashBefore": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+    "hashAfter": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+    "unchanged": true
+  },
+  "guardBackstop": {
+    "rawByteScannedFileCountRecorded": true,
+    "zeroLfSourceFileCountRecorded": true,
+    "crOnlySourceFileCountRecorded": true,
+    "rawPhysicalOneLineSourceFileCountRecorded": true,
+    "rawPhysicalMaxLineLengthRecorded": true,
+    "logicalMaxLineLengthRecorded": true,
+    "coverageBooleansRecorded": true,
+    "syntheticCrOnlySourceRejected": true,
+    "syntheticZeroLfOnePhysicalLineRejected": true
+  },
+  "diagnostics": []
+}

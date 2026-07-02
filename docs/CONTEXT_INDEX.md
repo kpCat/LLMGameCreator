@@ -171,6 +171,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-080-edit-driven-gamepackage-runtime-preview-bridge/GOAL.md` | Goal 080 task: consume real Goal 077/078/079/079A edit-driven artifacts into a disk-backed projected public GamePackage, runtime-preview bridge proof, negative proof, bounded WinForms Runtime Bridge tab and final stop at `edit_driven_gamepackage_runtime_preview_bridge_verification`. |
 | `docs/agent-tasks/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/GOAL.md` | Goal 081 task: consume real Goal 080 projected GamePackage and bridge artifacts into a deterministic runtime-preview playthrough command script, replay transcript, state-hash chain, negative proof, bounded WinForms Preview Playthrough tab and final stop at `edit_driven_gamepackage_runtime_preview_playthrough_verification`. |
 | `docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/GOAL.md` | Goal 082 task: consume real Goal 080 projected GamePackage and Goal 081 runtime-preview playthrough artifacts into a compact Unity Alpha StreamingAssets handoff, independent Unity probe script, mirrored payload validation, bounded WinForms Unity Handoff tab and final stop at `edit_driven_unity_alpha_streamingassets_handoff_verification`. |
+| `docs/agent-tasks/goal-082a-source-format-physical-line-repair/GOAL.md` | Goal 082A hotfix task: repair the Goal 082 source-format physical-line guard backstop with raw-byte scan metrics, explicit Unity probe / WinForms parent / Application seam coverage, compact Goal 082A evidence and final stop at `source_format_physical_line_repair_verification`, while keeping Goal 082 accepted=false. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -382,6 +383,13 @@ without touching `AlphaRuntimeBootstrap.cs`, and binds a bounded WinForms Unity 
 `08104cd28fac6501d8cd9e4c8329e11ef56b82c17a1b99ea55a4b733d8782a54`; probe read proof hash:
 `18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16`.
 
+Goal 082A is produced for review with `source_format_physical_line_repair_verification required`,
+`accepted=false`, `implementationStatus=GREEN`. Direct raw-byte preflight found zero current malformed Goal 082
+C# source files, so no source normalization was required. The Goal 082 scanner now records rawByteScannedFileCount,
+zero-LF, CR-only, one-physical-line, raw/logical max line length and explicit Unity probe / WinForms parent /
+Application seam coverage booleans, rejects synthetic CR-only and zero-LF one-physical-line samples, and keeps Goal
+082 accepted=false. The `21f2525a adult docs` commit is docs context only.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -425,6 +433,7 @@ Allowed next sequence:
 39. Record Goal 080 runtime-preview bridge as passed before Goal 081 without rewriting the Goal 080 artifact accepted=false evidence.
 40. Record Goal 081 runtime-preview playthrough as passed before Goal 082 without rewriting the Goal 081 artifact accepted=false evidence.
 41. Review Goal 082 `edit_driven_unity_alpha_streamingassets_handoff_verification`; do not mark it passed until explicit user acceptance and do not start the next goal from this implementation handoff.
+42. Review Goal 082A `source_format_physical_line_repair_verification`; it repairs the Goal 082 source-format guard backstop, keeps Goal 082 `accepted=false`, and treats `21f2525a adult docs` as docs context only.
 
 Kill criterion:
 

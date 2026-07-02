@@ -23,12 +23,25 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateTests
         Assert.False(result.QualityGateScan.EvidenceContainsHeavyLogs);
         Assert.False(result.QualityGateScan.EvidenceContainsScratchTamperFiles);
         Assert.Equal(0, result.QualityGateScan.LinesOver500Count);
+        Assert.Equal(0, result.QualityGateScan.RawPhysicalLinesOver500Count);
         Assert.Equal(0, result.QualityGateScan.FilesOver1000LinesCount);
         Assert.Equal(0, result.QualityGateScan.MinifiedSourceFileCount);
         Assert.Equal(0, result.QualityGateScan.ZeroLfSourceCount);
+        Assert.Equal(0, result.QualityGateScan.ZeroLfSourceFileCount);
         Assert.Equal(0, result.QualityGateScan.CrOnlySourceCount);
+        Assert.Equal(0, result.QualityGateScan.CrOnlySourceFileCount);
+        Assert.Equal(0, result.QualityGateScan.RawPhysicalOneLineSourceCount);
+        Assert.Equal(0, result.QualityGateScan.RawPhysicalOneLineSourceFileCount);
+        Assert.Equal(0, result.QualityGateScan.FilesWithTooFewLinesForSizeCount);
+        Assert.Equal(result.QualityGateScan.ScannedFileCount, result.QualityGateScan.RawByteScannedFileCount);
+        Assert.True(result.QualityGateScan.RawPhysicalMaxLineLength <= 500);
+        Assert.True(result.QualityGateScan.LogicalMaxLineLength <= 500);
+        Assert.True(result.QualityGateScan.UnityProbeIncludedInRawScan);
+        Assert.True(result.QualityGateScan.WinFormsParentIncludedInRawScan);
+        Assert.True(result.QualityGateScan.Goal082ApplicationFilesIncludedInRawScan);
         Assert.True(result.QualityGateScan.SyntheticCrOnlySourceRejected);
         Assert.True(result.QualityGateScan.SyntheticZeroLfOneLineSourceRejected);
+        Assert.True(result.QualityGateScan.SyntheticZeroLfOnePhysicalLineRejected);
         Assert.True(result.QualityGateScan.AlphaRuntimeBootstrapUnchanged);
         Assert.Equal(3672, result.QualityGateScan.AlphaRuntimeBootstrapAfterLineCount);
         Assert.Equal(
@@ -45,7 +58,10 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateTests
         Assert.True(EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner.RejectsSuspiciousRawSourceBytes(
             Encoding.UTF8.GetBytes("public sealed class Broken\r{\r}\r")));
         Assert.True(EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner.RejectsSuspiciousRawSourceBytes(
-            Encoding.UTF8.GetBytes("public sealed class Broken { public string V => \"" + new string('x', 520) + "\"; }")));
+            Encoding.UTF8.GetBytes(
+                "namespace BrokenSource { public sealed class Broken { public string V => \""
+                + new string('x', 520)
+                + "\"; } }")));
         Assert.False(EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScanner.AlphaRuntimeBootstrapMatchesBaseline(
             Encoding.UTF8.GetBytes("public sealed class Changed\n{\n}\n")));
     }

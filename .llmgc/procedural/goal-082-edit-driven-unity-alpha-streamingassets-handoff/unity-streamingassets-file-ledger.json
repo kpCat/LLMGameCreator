@@ -8,37 +8,37 @@
     {
       "relativePath": "README.md",
       "role": "manual_inspection_note",
-      "sha256": "3997fa35d66c7be58bbba7b7da6ad7da1d0f3d95cf3ea868d00c77b6859b0bab",
+      "sha256": "cacd71b854c0653323cc20f543c43194bc4ab1738b2cb69716db04f8bc96cfb0",
       "byteCount": 606
     },
     {
       "relativePath": "expected-hashes.json",
       "role": "expected_hashes",
-      "sha256": "e8bbf65a599606f1a4f629ffaa478d7b51500b81e95a3026fe94596d7a515f0a",
+      "sha256": "029d8272df74058dfbf63755e8f21ad0042d7a7bda2b548828ee915180d9bdd7",
       "byteCount": 1675
     },
     {
       "relativePath": "handoff-manifest.json",
       "role": "manifest",
-      "sha256": "08104cd28fac6501d8cd9e4c8329e11ef56b82c17a1b99ea55a4b733d8782a54",
+      "sha256": "a3c69e2d711fff3c5ec3077d5a894534954c7378aa5610b1b89db62211e74509",
       "byteCount": 990
     },
     {
       "relativePath": "playthrough-command-index.json",
       "role": "command_index",
-      "sha256": "950a46cd15ea9461b73e052615768e817833044a5073a04a5ff57602b563c71c",
+      "sha256": "eb1a4e4aebe587f9296344037c410b8a497f905a8b5f907b3c67c2309f37c8d7",
       "byteCount": 1514
     },
     {
       "relativePath": "playthrough-transcript-index.json",
       "role": "transcript_index",
-      "sha256": "a8fc246e2feebdf656f671706c373101fb533429e64ed086853399534165d667",
+      "sha256": "80b18a8689788fa0f6b9dfdf10b44f2ac2699a9e0924ff306aaccf45a56b51b0",
       "byteCount": 965
     },
     {
       "relativePath": "projected-package-index.json",
       "role": "projected_package_index",
-      "sha256": "6b40be43b7a485ffec92f366c681f04b496892178a709b648e515f45c65da0e9",
+      "sha256": "32b980da16dcaa3d9aa272a4cbf6010999e62b1dbb9a08af0ab972ae85fc846e",
       "byteCount": 829
     }
   ],

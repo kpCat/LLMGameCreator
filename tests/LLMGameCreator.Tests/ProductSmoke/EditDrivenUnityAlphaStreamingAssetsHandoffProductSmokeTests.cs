@@ -65,9 +65,19 @@ public sealed class EditDrivenUnityAlphaStreamingAssetsHandoffProductSmokeTests
         Assert.Equal(
             expected.PlaythroughTranscriptIndexPayloadHash,
             HashFile(Path.Combine(write.StreamingAssetsDirectoryPath, "playthrough-transcript-index.json")));
+        AssertRejected(result, "missing_handoff_manifest");
+        AssertRejected(result, "tampered_projected_package_index");
+        AssertRejected(result, "tampered_expected_hashes");
+        AssertRejected(result, "fake_success_without_payload_read");
+    }
+
+    private static void AssertRejected(
+        EditDrivenUnityAlphaStreamingAssetsHandoffBuildResult result,
+        string scenarioId)
+    {
         Assert.Contains(
             result.NegativeProof.Scenarios,
-            scenario => scenario.ScenarioId == "fake_success_without_payload_read"
+            scenario => scenario.ScenarioId == scenarioId
                         && scenario.ActualStatus == "rejected"
                         && scenario.Diagnostics.Count > 0);
     }

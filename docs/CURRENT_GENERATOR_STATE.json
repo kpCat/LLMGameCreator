@@ -3,20 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-02T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 082 edit-driven Unity Alpha StreamingAssets handoff produced for review",
+    "current_phase_title":  "Goal 082A source-format physical-line repair produced for review",
     "gate_status":  "edit_driven_unity_alpha_streamingassets_handoff_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 082 Edit-Driven Unity Alpha StreamingAssets Handoff is produced for review: edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false. Goal 081 is recorded as passed by handoff before Goal 082 without rewriting its artifact accepted=false evidence.",
-    "current_user_action":  "Review Goal 082 edit-driven Unity Alpha StreamingAssets handoff evidence; Goal 082 remains produced for review and accepted=false, while Goal 072 remains historical BLOCKED evidence.",
-    "recommended_next_decision":  "Review Goal 082 evidence and only mark edit_driven_unity_alpha_streamingassets_handoff_verification passed after explicit user acceptance; do not start the next goal from this handoff.",
+    "active_manual_gate":  "Goal 082 remains produced for review: edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false. Goal 082A Source Format Physical-Line Repair is produced for review: source_format_physical_line_repair_verification required, accepted=false.",
+    "current_user_action":  "Review Goal 082A source-format physical-line repair evidence and Goal 082 edit-driven Unity Alpha StreamingAssets handoff evidence; Goal 082 remains produced for review and accepted=false, while adult docs are docs context only.",
+    "recommended_next_decision":  "Review Goal 082A evidence and only mark source_format_physical_line_repair_verification passed after explicit user acceptance; do not mark Goal 082 passed until edit_driven_unity_alpha_streamingassets_handoff_verification is explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "source_format_physical_line_repair_verification",
                                                         "edit_driven_unity_alpha_streamingassets_handoff_verification"
                                                     ],
                                   "kill_criterion":  "If no generated playable or simulatable loop exists after the next three large product slices, stop and reassess architecture before spending more limit."
@@ -100,7 +101,8 @@
                            "goal_079a_manual_gate":  "source_format_line_ending_guard_verification",
                            "goal_080_manual_gate":  "edit_driven_gamepackage_runtime_preview_bridge_verification",
                            "goal_081_manual_gate":  "edit_driven_gamepackage_runtime_preview_playthrough_verification",
-                           "goal_082_manual_gate":  "edit_driven_unity_alpha_streamingassets_handoff_verification"
+                           "goal_082_manual_gate":  "edit_driven_unity_alpha_streamingassets_handoff_verification",
+                           "goal_082a_manual_gate":  "source_format_physical_line_repair_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -391,6 +393,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "source_format_physical_line_repair_verification",
+                                          "goal_082a_source_format_physical_line_repair",
+                                          "manual_review_goal_082a_source_format_physical_line_repair",
                                           "edit_driven_unity_alpha_streamingassets_handoff_verification",
                                           "goal_082_edit_driven_unity_alpha_streamingassets_handoff",
                                           "manual_review_goal_082_edit_driven_unity_alpha_streamingassets_handoff"
@@ -414,9 +419,9 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "edit_driven_unity_alpha_streamingassets_handoff_verification",
-    "recommended_next_work_item_title":  "Review Goal 082 edit-driven Unity Alpha StreamingAssets handoff",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/GOAL.md",
+    "recommended_next_work_item":  "source_format_physical_line_repair_verification",
+    "recommended_next_work_item_title":  "Review Goal 082A source-format physical-line repair",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-082a-source-format-physical-line-repair/GOAL.md",
     "candidate_product_vertical_slices":  [
                                               "Review Goal 080 projected GamePackage runtime-preview bridge evidence",
                                               "Keep Goal 080 accepted=false until user review accepts it",
@@ -427,6 +432,8 @@
                                                   "AGENTS.md",
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
+                                                  "docs/agent-tasks/goal-082a-source-format-physical-line-repair/GOAL.md",
+                                                  "docs/agent-tasks/goal-082a-source-format-physical-line-repair/read-first.md",
                                                   "docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/GOAL.md",
                                                   "docs/agent-tasks/goal-082-edit-driven-unity-alpha-streamingassets-handoff/read-first.md",
                                                   "docs/agent-tasks/goal-081-edit-driven-gamepackage-runtime-preview-playthrough/GOAL.md",
@@ -1843,9 +1850,25 @@
                                                                                                  "implementationStatus=GREEN, streamingAssetsRelativeRoot=LLMGameCreator/EditDrivenGoal082, payloadFileCount=6, rowCount=9, targetCount=18, actionCount=57, commandCount=124.",
                                                                                                  "projectedPackageHash=d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648, commandScriptHash=74103281b47544d2c30ddd95166b5a1bf19039cfd93c2c519f0337935f928ebf, transcriptHash=a4141e577243c51ca81a368626d9592a88cd245407357282603bf44efd380dff, stateHashChainHash=fa9676a11612ccde02bb37bc433af75054399c721d8e53e17acaff702feca9bf.",
                                                                                                  "handoffManifestHash=08104cd28fac6501d8cd9e4c8329e11ef56b82c17a1b99ea55a4b733d8782a54, fileLedgerHash=e12ef49d7bbb1104e6cf9d0cca880403c4281affc55b84ef9d6836df11eef89d, probeReadProofHash=18ac321d2244a21051a8e9b632904361234018f3d4161267813a5acf76acfa16, negativeProofHash=cc6597b4368af6afa4548658676fd34525ec8843152c3315606d558910338965.",
+                                                                                                 "Goal 082A regenerated Goal 082 quality evidence with rawByteScannedFileCount=18, zeroLfSourceFileCount=0, crOnlySourceFileCount=0, rawPhysicalOneLineSourceFileCount=0, rawPhysicalMaxLineLength=315, logicalMaxLineLength=315, Unity probe / WinForms parent / Application seam coverage present and synthetic raw-source rejection passing.",
                                                                                                  "The handoff mirrors a compact player-facing payload into unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/EditDrivenGoal082/, validates exact mirrored reads, rejects missing/tampered/fake-success cases and keeps AlphaRuntimeBootstrap.cs unchanged.",
                                                                                                  "WinForms Campaign Authoring Review Workspace includes a separate Goal 082 Unity Handoff tab/control bound through parent activation."
                                                                                              ],
                                                                          "next_action":  "review_goal_082_edit_driven_unity_alpha_streamingassets_handoff"
-                                                                     }
+                                                                     },
+    "source_format_physical_line_repair_verification":  {
+                                                            "status":  "produced_for_review",
+                                                            "accepted":  false,
+                                                            "evidence_source":  "goal_082a_source_format_physical_line_repair",
+                                                            "observed_result":  [
+                                                                                    "Goal 082A produces source-format physical-line repair evidence under .llmgc/procedural/goal-082a-source-format-physical-line-repair with accepted=false.",
+                                                                                    "implementationStatus=GREEN, malformedSourceFileCountBefore=0, malformedSourceFileCountAfter=0, zeroLfSourceFileCountAfter=0, crOnlySourceFileCountAfter=0, rawPhysicalOneLineSourceFileCountAfter=0, rawPhysicalMaxLineLengthAfter=315, logicalMaxLineLengthAfter=315.",
+                                                                                    "Direct working-tree and HEAD blob raw-byte preflight found no current malformed Goal082 source files, so no source normalization was required.",
+                                                                                    "The Goal082 quality scanner now records rawByteScannedFileCount, raw/logical max line lengths, zero-LF, CR-only, one-physical-line, too-few-lines-for-size and Unity probe / WinForms parent / Application seam coverage booleans.",
+                                                                                    "Synthetic CR-only and zero-LF one-physical-line C# source samples are rejected.",
+                                                                                    "Goal082 remains produced for review with edit_driven_unity_alpha_streamingassets_handoff_verification required, accepted=false; Goal082A does not mark Goal082 passed.",
+                                                                                    "The 21f2525a adult docs commit is preserved as docs context only."
+                                                                                ],
+                                                            "next_action":  "review_goal_082a_source_format_physical_line_repair"
+                                                        }
 }

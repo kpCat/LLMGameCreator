@@ -377,15 +377,27 @@ public sealed record EditDrivenUnityAlphaStreamingAssetsHandoffQualityGateScan
         "edit_driven_unity_alpha_streamingassets_handoff_quality_gate_scan_v1";
     public bool Passed { get; init; }
     public int ScannedFileCount { get; init; }
+    public int RawByteScannedFileCount { get; init; }
     public int MaxLineLength { get; init; }
+    public int LogicalMaxLineLength { get; init; }
+    public int RawPhysicalMaxLineLength { get; init; }
     public int LinesOver500Count { get; init; }
+    public int RawPhysicalLinesOver500Count { get; init; }
     public int FilesOver1000LinesCount { get; init; }
     public int MinifiedSourceFileCount { get; init; }
     public int RawPhysicalOneLineSourceCount { get; init; }
+    public int RawPhysicalOneLineSourceFileCount { get; init; }
     public int ZeroLfSourceCount { get; init; }
+    public int ZeroLfSourceFileCount { get; init; }
     public int CrOnlySourceCount { get; init; }
+    public int CrOnlySourceFileCount { get; init; }
+    public int FilesWithTooFewLinesForSizeCount { get; init; }
+    public bool UnityProbeIncludedInRawScan { get; init; }
+    public bool WinFormsParentIncludedInRawScan { get; init; }
+    public bool Goal082ApplicationFilesIncludedInRawScan { get; init; }
     public bool SyntheticCrOnlySourceRejected { get; init; }
     public bool SyntheticZeroLfOneLineSourceRejected { get; init; }
+    public bool SyntheticZeroLfOnePhysicalLineRejected { get; init; }
     public int ParentWorkspaceLineCount { get; init; }
     public int AlphaRuntimeBootstrapBaselineLineCount { get; init; }
     public string AlphaRuntimeBootstrapBaselineHash { get; init; } = string.Empty;
@@ -409,13 +421,22 @@ public sealed record EditDrivenUnityAlphaStreamingAssetsHandoffQualityFileScan
 {
     public string RelativePath { get; init; } = string.Empty;
     public int LineCount { get; init; }
+    public int LogicalLineCount { get; init; }
     public long ByteCount { get; init; }
     public int MaxLineLength { get; init; }
+    public int LogicalMaxLineLength { get; init; }
+    public int LfByteCount { get; init; }
+    public int CrByteCount { get; init; }
+    public int RawPhysicalLineCount { get; init; }
+    public int RawPhysicalMaxLineLength { get; init; }
     public int LinesOver500Count { get; init; }
+    public int RawPhysicalLinesOver500Count { get; init; }
     public bool RawPhysicalOneLineSource { get; init; }
     public bool ZeroLfSource { get; init; }
     public bool CrOnlySource { get; init; }
+    public bool ContainsCrOnlyLineEndings { get; init; }
     public bool MinifiedSourceCandidate { get; init; }
+    public bool TooFewLinesForSizeSourceCandidate { get; init; }
 }
 
 public sealed record EditDrivenUnityAlphaStreamingAssetsHandoffReport
