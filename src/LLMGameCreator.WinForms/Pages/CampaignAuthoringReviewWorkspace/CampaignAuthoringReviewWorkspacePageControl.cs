@@ -4,6 +4,7 @@ using LLMGameCreator.Application.Design.EditDrivenPlayablePreviewRefresh;
 using LLMGameCreator.Application.Design.EditDrivenPlayableReviewPackageMaterialization;
 using LLMGameCreator.Application.Design.EditDrivenReviewPackagePlayableSession;
 using LLMGameCreator.Application.Design.EditDrivenSpineQualityConsolidation;
+using LLMGameCreator.Application.Design.EditDrivenGamePackageRuntimePreviewBridge;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -15,6 +16,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
     private readonly EditDrivenPlayableReviewPackageMaterializationEvidenceService _reviewPackageService;
     private readonly EditDrivenReviewPackagePlayableSessionEvidenceService _playSessionService;
     private readonly EditDrivenSpineQualityConsolidationEvidenceService _spineQualityService;
+    private readonly EditDrivenGamePackageRuntimePreviewBridgeEvidenceService _runtimePreviewBridgeService;
 
     public CampaignAuthoringReviewWorkspacePageControl()
         : this(
@@ -23,7 +25,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
             new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
             new EditDrivenReviewPackagePlayableSessionEvidenceService(),
-            new EditDrivenSpineQualityConsolidationEvidenceService())
+            new EditDrivenSpineQualityConsolidationEvidenceService(),
+            new EditDrivenGamePackageRuntimePreviewBridgeEvidenceService())
     {
     }
 
@@ -34,36 +37,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
             new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
             new EditDrivenReviewPackagePlayableSessionEvidenceService(),
-            new EditDrivenSpineQualityConsolidationEvidenceService())
-    {
-    }
-
-    public CampaignAuthoringReviewWorkspacePageControl(
-        SchemaDrivenCampaignWorkspaceEvidenceService service,
-        SchemaDrivenCampaignEditEvidenceService editService)
-        : this(
-            service,
-            editService,
-            new EditDrivenPlayablePreviewRefreshEvidenceService(),
-            new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
-            new EditDrivenReviewPackagePlayableSessionEvidenceService(),
-            new EditDrivenSpineQualityConsolidationEvidenceService())
-    {
-    }
-
-    public CampaignAuthoringReviewWorkspacePageControl(
-        SchemaDrivenCampaignWorkspaceEvidenceService service,
-        SchemaDrivenCampaignEditEvidenceService editService,
-        EditDrivenPlayablePreviewRefreshEvidenceService playableRefreshService,
-        EditDrivenPlayableReviewPackageMaterializationEvidenceService reviewPackageService,
-        EditDrivenReviewPackagePlayableSessionEvidenceService playSessionService)
-        : this(
-            service,
-            editService,
-            playableRefreshService,
-            reviewPackageService,
-            playSessionService,
-            new EditDrivenSpineQualityConsolidationEvidenceService())
+            new EditDrivenSpineQualityConsolidationEvidenceService(),
+            new EditDrivenGamePackageRuntimePreviewBridgeEvidenceService())
     {
     }
 
@@ -73,7 +48,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         EditDrivenPlayablePreviewRefreshEvidenceService playableRefreshService,
         EditDrivenPlayableReviewPackageMaterializationEvidenceService reviewPackageService,
         EditDrivenReviewPackagePlayableSessionEvidenceService playSessionService,
-        EditDrivenSpineQualityConsolidationEvidenceService spineQualityService)
+        EditDrivenSpineQualityConsolidationEvidenceService spineQualityService,
+        EditDrivenGamePackageRuntimePreviewBridgeEvidenceService runtimePreviewBridgeService)
     {
         _service = service;
         _editService = editService;
@@ -81,6 +57,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         _reviewPackageService = reviewPackageService;
         _playSessionService = playSessionService;
         _spineQualityService = spineQualityService;
+        _runtimePreviewBridgeService = runtimePreviewBridgeService;
         InitializeComponent();
         _rowSelectorControl.SelectedRowIdChanged += RowSelectorControlSelectedRowIdChanged;
     }
@@ -165,34 +142,35 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             return;
         }
 
-        Bind(workspaceResult, editResult, refreshResult, reviewPackageResult, playSessionResult, spineQualityResult);
+        EditDrivenGamePackageRuntimePreviewBridgeBuildResult runtimePreviewBridgeResult;
+        try
+        {
+            runtimePreviewBridgeResult = _runtimePreviewBridgeService.BuildAndWriteAsync(root).GetAwaiter().GetResult().Result;
+        }
+        catch (Exception ex)
+        {
+            _statusLabel.Text = "Runtime preview bridge load failed: " + ex.Message;
+            return;
+        }
+
+        Bind(
+            workspaceResult,
+            editResult,
+            refreshResult,
+            reviewPackageResult,
+            playSessionResult,
+            spineQualityResult,
+            runtimePreviewBridgeResult);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result)
     {
-        Bind(result, null, null, null, null, null);
+        Bind(result, null, null, null, null, null, null);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result, SchemaDrivenCampaignEditBuildResult? editResult)
     {
-        Bind(result, editResult, null, null, null, null);
-    }
-
-    public void Bind(
-        CampaignWorkspaceBuildResult result,
-        SchemaDrivenCampaignEditBuildResult? editResult,
-        EditDrivenPlayablePreviewRefreshBuildResult? refreshResult)
-    {
-        Bind(result, editResult, refreshResult, null, null, null);
-    }
-
-    public void Bind(
-        CampaignWorkspaceBuildResult result,
-        SchemaDrivenCampaignEditBuildResult? editResult,
-        EditDrivenPlayablePreviewRefreshBuildResult? refreshResult,
-        EditDrivenPlayableReviewPackageMaterializationBuildResult? reviewPackageResult)
-    {
-        Bind(result, editResult, refreshResult, reviewPackageResult, null, null);
+        Bind(result, editResult, null, null, null, null, null);
     }
 
     public void Bind(
@@ -201,7 +179,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         EditDrivenPlayablePreviewRefreshBuildResult? refreshResult,
         EditDrivenPlayableReviewPackageMaterializationBuildResult? reviewPackageResult,
         EditDrivenReviewPackagePlayableSessionBuildResult? playSessionResult,
-        EditDrivenSpineQualityConsolidationBuildResult? spineQualityResult)
+        EditDrivenSpineQualityConsolidationBuildResult? spineQualityResult,
+        EditDrivenGamePackageRuntimePreviewBridgeBuildResult? runtimePreviewBridgeResult)
     {
         _statusLabel.Text = "Gate: " + result.Report.ManualGate
             + " required | accepted=false | status=" + result.Report.ImplementationStatus
@@ -237,6 +216,11 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         if (spineQualityResult is not null)
         {
             _spineQualityControl.Bind(spineQualityResult);
+        }
+
+        if (runtimePreviewBridgeResult is not null)
+        {
+            _runtimePreviewBridgeControl.Bind(runtimePreviewBridgeResult);
         }
     }
 

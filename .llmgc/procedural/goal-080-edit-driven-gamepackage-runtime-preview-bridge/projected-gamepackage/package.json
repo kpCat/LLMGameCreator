@@ -1,0 +1,3698 @@
+{
+  "manifest": {
+    "packageId": "game/goal080/edit-driven-runtime-preview-bridge",
+    "title": "Goal080 Edit Driven Runtime Preview Bridge",
+    "version": "0.80.0",
+    "formatVersion": "0.1",
+    "startMapId": "map/goal080/runtime-preview-bridge",
+    "description": "Disk-backed GamePackage projection of Goal077 edit targets and Goal078 playable-session actions."
+  },
+  "game": {
+    "tilePrototypes": [
+      {
+        "id": "tile/goal080/review-floor",
+        "name": "Review floor",
+        "walkable": true,
+        "movementCost": 1
+      }
+    ],
+    "entityPrototypes": [
+      {
+        "id": "entity-prototype/goal080/player",
+        "name": "Reviewer",
+        "components": []
+      },
+      {
+        "id": "entity-prototype/goal080/review-node",
+        "name": "Review node",
+        "components": []
+      }
+    ],
+    "maps": [
+      {
+        "id": "map/goal080/runtime-preview-bridge",
+        "name": "Goal080 runtime preview bridge",
+        "width": 8,
+        "height": 8,
+        "defaultTileId": "tile/goal080/review-floor",
+        "startPosition": {
+          "x": 1,
+          "y": 1
+        },
+        "tiles": [],
+        "entities": [
+          {
+            "id": "entity/goal080/player",
+            "prototypeId": "entity-prototype/goal080/player",
+            "position": {
+              "x": 1,
+              "y": 1
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/map-panel-rpg/seed-alpha/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 2,
+              "y": 2
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/map-panel-rpg/seed-beta/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 3,
+              "y": 2
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/map-panel-rpg/seed-gamma/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 4,
+              "y": 2
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/survival-sandbox/seed-alpha/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 2,
+              "y": 3
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/survival-sandbox/seed-beta/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 3,
+              "y": 3
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/survival-sandbox/seed-gamma/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 4,
+              "y": 3
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/first-person-grid-dungeon/seed-alpha/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 2,
+              "y": 4
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/first-person-grid-dungeon/seed-beta/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 3,
+              "y": 4
+            },
+            "components": []
+          },
+          {
+            "id": "entity/goal080/first-person-grid-dungeon/seed-gamma/review-node",
+            "prototypeId": "entity-prototype/goal080/review-node",
+            "position": {
+              "x": 4,
+              "y": 4
+            },
+            "components": []
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "item/goal080/target-001",
+        "name": "target-001 bridge target",
+        "description": "high",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_alpha",
+          "gameplay_consequence"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetId": "target-001",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha",
+          "targetPayloadHash": "0d4380929949c507f93e9a4899f7c522981e8a68fcb9c85967009b7deaa7e543"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-002",
+        "name": "target-002 bridge target",
+        "description": "tense",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_alpha",
+          "living_world_faction"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetId": "target-002",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha",
+          "targetPayloadHash": "250eb0ed8d041e8dfac4f2ac5ef8803105f6f48e599bcc495d113c71d3af6e47"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-003",
+        "name": "target-003 bridge target",
+        "description": "investigate",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_beta",
+          "narrative_event_intent"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetId": "target-003",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta",
+          "targetPayloadHash": "4cd5e4654043932e76a1996414ce6bf8b36f3502ca16cabded52842032548427"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-004",
+        "name": "target-004 bridge target",
+        "description": "repair",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_beta",
+          "settlement_production"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetId": "target-004",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta",
+          "targetPayloadHash": "94a2641a137a1c868f69352290ae76ffd2e88c80baba018f272c4599510b8adc"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-005",
+        "name": "target-005 bridge target",
+        "description": "burn",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_gamma",
+          "combat_magic_status"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetId": "target-005",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma",
+          "targetPayloadHash": "b679c2cc7532a015215f5466b3c99d4a4a05c4303198f161c9b9825971d136f0"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-006",
+        "name": "target-006 bridge target",
+        "description": "calm",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_gamma",
+          "weather_crisis_pressure"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetId": "target-006",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma",
+          "targetPayloadHash": "74b5fe9bf6169de04ca7fd048e129d8a1391979ff1f02a04f7004b706fb715c4"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-007",
+        "name": "target-007 bridge target",
+        "description": "low",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_alpha",
+          "gameplay_consequence"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetId": "target-007",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha",
+          "targetPayloadHash": "3267ad668306ada32acf72f3cab39a1a3656e229a7ccb0e3eff46807222d9694"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-008",
+        "name": "target-008 bridge target",
+        "description": "allied",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_alpha",
+          "living_world_faction"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetId": "target-008",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha",
+          "targetPayloadHash": "43e9481903cfefbd8143753805a14fb17bfde103be72667043e6b3aa56004dec"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-009",
+        "name": "target-009 bridge target",
+        "description": "rescue",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_beta",
+          "narrative_event_intent"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetId": "target-009",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta",
+          "targetPayloadHash": "66131f55b7941daf03fe05eecbf6b2a62fe03eed9930406e40ee146a67e2dc63"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-010",
+        "name": "target-010 bridge target",
+        "description": "defense",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_beta",
+          "settlement_production"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetId": "target-010",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta",
+          "targetPayloadHash": "c639c7b0434a2b31de62cfd7177d4a9355a3bd453f22ddeae837b9bc13875834"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-011",
+        "name": "target-011 bridge target",
+        "description": "freeze",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_gamma",
+          "combat_magic_status"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetId": "target-011",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma",
+          "targetPayloadHash": "8b94a7322d17e450211542462412c50ec0d1134cd096494369835abeb5fd95d3"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-012",
+        "name": "target-012 bridge target",
+        "description": "storm",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_gamma",
+          "weather_crisis_pressure"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetId": "target-012",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma",
+          "targetPayloadHash": "abdc8acd6f611bcade9937eab1b4e6b4de2423603e14873b1b9b5ea7abc0bd5d"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-013",
+        "name": "target-013 bridge target",
+        "description": "medium",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_alpha",
+          "gameplay_consequence"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetId": "target-013",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha",
+          "targetPayloadHash": "7467e07c016e1cb9428ed1b3edef5df142b5bda769392119b7c8d5fce1226e97"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-014",
+        "name": "target-014 bridge target",
+        "description": "neutral",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_alpha",
+          "living_world_faction"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetId": "target-014",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha",
+          "targetPayloadHash": "3679603512679de512f1baa4bc8b049d516f97581224f6f7734cb8e155d4af93"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-015",
+        "name": "target-015 bridge target",
+        "description": "trade",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_beta",
+          "narrative_event_intent"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetId": "target-015",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta",
+          "targetPayloadHash": "6a3fe62332f7dafc0756442d2aa605553a9308f796b02df4a3396ccaee127c4f"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-016",
+        "name": "target-016 bridge target",
+        "description": "growth",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_beta",
+          "settlement_production"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetId": "target-016",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta",
+          "targetPayloadHash": "5d5a88e356658c0766f9084edacdb7050ff9a918070077de291cd5c7013b054a"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-017",
+        "name": "target-017 bridge target",
+        "description": "shock",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_gamma",
+          "combat_magic_status"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetId": "target-017",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma",
+          "targetPayloadHash": "85319bacabb69c9301d0ff4e48a379b80e3be72942944b2f54cab5dc428841c8"
+        },
+        "useConditions": [],
+        "useEffects": []
+      },
+      {
+        "id": "item/goal080/target-018",
+        "name": "target-018 bridge target",
+        "description": "crisis",
+        "kind": "review_target",
+        "questItem": true,
+        "unique": true,
+        "requirements": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_gamma",
+          "weather_crisis_pressure"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetId": "target-018",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma",
+          "targetPayloadHash": "570ab5208e6a8dc7d412d51dd333be5d477c34bc03adb138c21b5cdca8f1aac0"
+        },
+        "useConditions": [],
+        "useEffects": []
+      }
+    ],
+    "resources": [
+      {
+        "id": "resource/goal080/preview-confidence",
+        "name": "Preview confidence",
+        "kind": "score",
+        "description": "",
+        "defaultValue": 0,
+        "maxValue": 100,
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge"
+        }
+      }
+    ],
+    "statuses": [],
+    "recipes": [],
+    "lootTables": [],
+    "transactions": [],
+    "resourceNetworks": [],
+    "resourceNodes": [],
+    "inventories": [],
+    "equipmentSlots": [],
+    "abilities": [
+      {
+        "id": "ability/goal080/target-001",
+        "name": "target-001 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "gameplay_consequence",
+          "gameplay_consequence_summary.consequence_intensity"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-001",
+          "payloadHash": "0d4380929949c507f93e9a4899f7c522981e8a68fcb9c85967009b7deaa7e543"
+        }
+      },
+      {
+        "id": "ability/goal080/target-002",
+        "name": "target-002 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "living_world_faction",
+          "living_world_npc_faction_summary.faction_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-002",
+          "payloadHash": "250eb0ed8d041e8dfac4f2ac5ef8803105f6f48e599bcc495d113c71d3af6e47"
+        }
+      },
+      {
+        "id": "ability/goal080/target-003",
+        "name": "target-003 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "narrative_event_intent",
+          "narrative_quest_dialogue_event_summary.event_intent"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-003",
+          "payloadHash": "4cd5e4654043932e76a1996414ce6bf8b36f3502ca16cabded52842032548427"
+        }
+      },
+      {
+        "id": "ability/goal080/target-004",
+        "name": "target-004 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "settlement_production",
+          "settlement_construction_destruction_production_summary.production_focus"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-004",
+          "payloadHash": "94a2641a137a1c868f69352290ae76ffd2e88c80baba018f272c4599510b8adc"
+        }
+      },
+      {
+        "id": "ability/goal080/target-005",
+        "name": "target-005 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "combat_magic_status",
+          "combat_magic_boss_summary.status_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-005",
+          "payloadHash": "b679c2cc7532a015215f5466b3c99d4a4a05c4303198f161c9b9825971d136f0"
+        }
+      },
+      {
+        "id": "ability/goal080/target-006",
+        "name": "target-006 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "weather_crisis_pressure",
+          "weather_daynight_crisis_summary.crisis_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-006",
+          "payloadHash": "74b5fe9bf6169de04ca7fd048e129d8a1391979ff1f02a04f7004b706fb715c4"
+        }
+      },
+      {
+        "id": "ability/goal080/target-007",
+        "name": "target-007 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "gameplay_consequence",
+          "gameplay_consequence_summary.consequence_intensity"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-007",
+          "payloadHash": "3267ad668306ada32acf72f3cab39a1a3656e229a7ccb0e3eff46807222d9694"
+        }
+      },
+      {
+        "id": "ability/goal080/target-008",
+        "name": "target-008 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "living_world_faction",
+          "living_world_npc_faction_summary.faction_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-008",
+          "payloadHash": "43e9481903cfefbd8143753805a14fb17bfde103be72667043e6b3aa56004dec"
+        }
+      },
+      {
+        "id": "ability/goal080/target-009",
+        "name": "target-009 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "narrative_event_intent",
+          "narrative_quest_dialogue_event_summary.event_intent"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-009",
+          "payloadHash": "66131f55b7941daf03fe05eecbf6b2a62fe03eed9930406e40ee146a67e2dc63"
+        }
+      },
+      {
+        "id": "ability/goal080/target-010",
+        "name": "target-010 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "settlement_production",
+          "settlement_construction_destruction_production_summary.production_focus"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-010",
+          "payloadHash": "c639c7b0434a2b31de62cfd7177d4a9355a3bd453f22ddeae837b9bc13875834"
+        }
+      },
+      {
+        "id": "ability/goal080/target-011",
+        "name": "target-011 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "combat_magic_status",
+          "combat_magic_boss_summary.status_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-011",
+          "payloadHash": "8b94a7322d17e450211542462412c50ec0d1134cd096494369835abeb5fd95d3"
+        }
+      },
+      {
+        "id": "ability/goal080/target-012",
+        "name": "target-012 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "weather_crisis_pressure",
+          "weather_daynight_crisis_summary.crisis_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-012",
+          "payloadHash": "abdc8acd6f611bcade9937eab1b4e6b4de2423603e14873b1b9b5ea7abc0bd5d"
+        }
+      },
+      {
+        "id": "ability/goal080/target-013",
+        "name": "target-013 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "gameplay_consequence",
+          "gameplay_consequence_summary.consequence_intensity"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-013",
+          "payloadHash": "7467e07c016e1cb9428ed1b3edef5df142b5bda769392119b7c8d5fce1226e97"
+        }
+      },
+      {
+        "id": "ability/goal080/target-014",
+        "name": "target-014 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "living_world_faction",
+          "living_world_npc_faction_summary.faction_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-014",
+          "payloadHash": "3679603512679de512f1baa4bc8b049d516f97581224f6f7734cb8e155d4af93"
+        }
+      },
+      {
+        "id": "ability/goal080/target-015",
+        "name": "target-015 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "narrative_event_intent",
+          "narrative_quest_dialogue_event_summary.event_intent"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-015",
+          "payloadHash": "6a3fe62332f7dafc0756442d2aa605553a9308f796b02df4a3396ccaee127c4f"
+        }
+      },
+      {
+        "id": "ability/goal080/target-016",
+        "name": "target-016 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "settlement_production",
+          "settlement_construction_destruction_production_summary.production_focus"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-016",
+          "payloadHash": "5d5a88e356658c0766f9084edacdb7050ff9a918070077de291cd5c7013b054a"
+        }
+      },
+      {
+        "id": "ability/goal080/target-017",
+        "name": "target-017 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "combat_magic_status",
+          "combat_magic_boss_summary.status_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-017",
+          "payloadHash": "85319bacabb69c9301d0ff4e48a379b80e3be72942944b2f54cab5dc428841c8"
+        }
+      },
+      {
+        "id": "ability/goal080/target-018",
+        "name": "target-018 preview marker",
+        "kind": "review_marker",
+        "requirements": [],
+        "costs": [],
+        "targeting": "self",
+        "power": 1,
+        "tags": [
+          "weather_crisis_pressure",
+          "weather_daynight_crisis_summary.crisis_pressure"
+        ],
+        "stages": [],
+        "learnConditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "targetId": "target-018",
+          "payloadHash": "570ab5208e6a8dc7d412d51dd333be5d477c34bc03adb138c21b5cdca8f1aac0"
+        }
+      }
+    ],
+    "stats": [],
+    "progressions": [],
+    "encounters": [
+      {
+        "id": "encounter/goal080/map-panel-rpg/seed-alpha/validation",
+        "name": "map-panel-rpg/seed-alpha preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha"
+        }
+      },
+      {
+        "id": "encounter/goal080/map-panel-rpg/seed-beta/validation",
+        "name": "map-panel-rpg/seed-beta preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta"
+        }
+      },
+      {
+        "id": "encounter/goal080/map-panel-rpg/seed-gamma/validation",
+        "name": "map-panel-rpg/seed-gamma preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma"
+        }
+      },
+      {
+        "id": "encounter/goal080/survival-sandbox/seed-alpha/validation",
+        "name": "survival-sandbox/seed-alpha preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha"
+        }
+      },
+      {
+        "id": "encounter/goal080/survival-sandbox/seed-beta/validation",
+        "name": "survival-sandbox/seed-beta preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-beta"
+        }
+      },
+      {
+        "id": "encounter/goal080/survival-sandbox/seed-gamma/validation",
+        "name": "survival-sandbox/seed-gamma preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma"
+        }
+      },
+      {
+        "id": "encounter/goal080/first-person-grid-dungeon/seed-alpha/validation",
+        "name": "first-person-grid-dungeon/seed-alpha preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha"
+        }
+      },
+      {
+        "id": "encounter/goal080/first-person-grid-dungeon/seed-beta/validation",
+        "name": "first-person-grid-dungeon/seed-beta preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta"
+        }
+      },
+      {
+        "id": "encounter/goal080/first-person-grid-dungeon/seed-gamma/validation",
+        "name": "first-person-grid-dungeon/seed-gamma preview validation",
+        "kind": "review_validation",
+        "participants": [
+          {
+            "id": "participant/reviewer",
+            "name": "Reviewer",
+            "kind": "player",
+            "entityPrototypeId": "entity-prototype/goal080/player",
+            "team": "review",
+            "stats": [],
+            "resources": [],
+            "abilities": [],
+            "tags": [],
+            "metadata": {}
+          }
+        ],
+        "actions": [],
+        "startRequirements": [],
+        "winConditions": [],
+        "loseConditions": [],
+        "rewards": [],
+        "consequences": [],
+        "tags": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma"
+        }
+      }
+    ],
+    "quests": [
+      {
+        "id": "quest/goal080/map-panel-rpg/seed-alpha/bridge",
+        "title": "map-panel-rpg/seed-alpha preview bridge",
+        "description": "Review 2 projected package targets for map-panel-rpg/seed-alpha.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-001",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-001",
+              "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha"
+            }
+          },
+          {
+            "id": "objective/target-002",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-002",
+              "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "map_panel_rpg",
+          "seed_alpha"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "profileId": "map-panel-rpg/seed-alpha"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for map-panel-rpg/seed-alpha.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-001",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-001"
+                }
+              },
+              {
+                "id": "stage-objective/target-002",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-002"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/map-panel-rpg/seed-beta/bridge",
+        "title": "map-panel-rpg/seed-beta preview bridge",
+        "description": "Review 2 projected package targets for map-panel-rpg/seed-beta.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-003",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-003",
+              "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta"
+            }
+          },
+          {
+            "id": "objective/target-004",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-004",
+              "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "map_panel_rpg",
+          "seed_beta"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "profileId": "map-panel-rpg/seed-beta"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for map-panel-rpg/seed-beta.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-003",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-003"
+                }
+              },
+              {
+                "id": "stage-objective/target-004",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-004"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/map-panel-rpg/seed-gamma/bridge",
+        "title": "map-panel-rpg/seed-gamma preview bridge",
+        "description": "Review 2 projected package targets for map-panel-rpg/seed-gamma.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-005",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-005",
+              "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma"
+            }
+          },
+          {
+            "id": "objective/target-006",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-006",
+              "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "map_panel_rpg",
+          "seed_gamma"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "profileId": "map-panel-rpg/seed-gamma"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for map-panel-rpg/seed-gamma.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-005",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-005"
+                }
+              },
+              {
+                "id": "stage-objective/target-006",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-006"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/survival-sandbox/seed-alpha/bridge",
+        "title": "survival-sandbox/seed-alpha preview bridge",
+        "description": "Review 2 projected package targets for survival-sandbox/seed-alpha.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-007",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-007",
+              "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha"
+            }
+          },
+          {
+            "id": "objective/target-008",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-008",
+              "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "survival_sandbox",
+          "seed_alpha"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "profileId": "survival-sandbox/seed-alpha"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for survival-sandbox/seed-alpha.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-007",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-007"
+                }
+              },
+              {
+                "id": "stage-objective/target-008",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-008"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/survival-sandbox/seed-beta/bridge",
+        "title": "survival-sandbox/seed-beta preview bridge",
+        "description": "Review 2 projected package targets for survival-sandbox/seed-beta.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-009",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-009",
+              "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta"
+            }
+          },
+          {
+            "id": "objective/target-010",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-010",
+              "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "survival_sandbox",
+          "seed_beta"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "profileId": "survival-sandbox/seed-beta"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for survival-sandbox/seed-beta.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-009",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-009"
+                }
+              },
+              {
+                "id": "stage-objective/target-010",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-010"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/survival-sandbox/seed-gamma/bridge",
+        "title": "survival-sandbox/seed-gamma preview bridge",
+        "description": "Review 2 projected package targets for survival-sandbox/seed-gamma.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-011",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-011",
+              "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma"
+            }
+          },
+          {
+            "id": "objective/target-012",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-012",
+              "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "survival_sandbox",
+          "seed_gamma"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "profileId": "survival-sandbox/seed-gamma"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for survival-sandbox/seed-gamma.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-011",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-011"
+                }
+              },
+              {
+                "id": "stage-objective/target-012",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-012"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/first-person-grid-dungeon/seed-alpha/bridge",
+        "title": "first-person-grid-dungeon/seed-alpha preview bridge",
+        "description": "Review 2 projected package targets for first-person-grid-dungeon/seed-alpha.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-013",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-013",
+              "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha"
+            }
+          },
+          {
+            "id": "objective/target-014",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-014",
+              "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_alpha"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "profileId": "first-person-grid-dungeon/seed-alpha"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for first-person-grid-dungeon/seed-alpha.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-013",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-013"
+                }
+              },
+              {
+                "id": "stage-objective/target-014",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-014"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/first-person-grid-dungeon/seed-beta/bridge",
+        "title": "first-person-grid-dungeon/seed-beta preview bridge",
+        "description": "Review 2 projected package targets for first-person-grid-dungeon/seed-beta.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-015",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-015",
+              "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta"
+            }
+          },
+          {
+            "id": "objective/target-016",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-016",
+              "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_beta"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "profileId": "first-person-grid-dungeon/seed-beta"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for first-person-grid-dungeon/seed-beta.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-015",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-015"
+                }
+              },
+              {
+                "id": "stage-objective/target-016",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-016"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      },
+      {
+        "id": "quest/goal080/first-person-grid-dungeon/seed-gamma/bridge",
+        "title": "first-person-grid-dungeon/seed-gamma preview bridge",
+        "description": "Review 2 projected package targets for first-person-grid-dungeon/seed-gamma.",
+        "kind": "review_bridge",
+        "startConditions": [],
+        "startEffects": [],
+        "objectives": [
+          {
+            "id": "objective/target-017",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-017",
+              "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma"
+            }
+          },
+          {
+            "id": "objective/target-018",
+            "kind": "custom_counter",
+            "requiredAmount": 1,
+            "currentAmountDefault": 0,
+            "conditions": [],
+            "completionEffects": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {
+              "targetId": "target-018",
+              "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma"
+            }
+          }
+        ],
+        "rewards": [],
+        "failureConditions": [],
+        "failureEffects": [],
+        "repeatable": false,
+        "autoStart": true,
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_gamma"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "profileId": "first-person-grid-dungeon/seed-gamma"
+        },
+        "stages": [
+          {
+            "id": "stage/review",
+            "text": "Inspect projected targets for first-person-grid-dungeon/seed-gamma.",
+            "completeConditions": [],
+            "objectives": [
+              {
+                "id": "stage-objective/target-017",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-017"
+                }
+              },
+              {
+                "id": "stage-objective/target-018",
+                "kind": "custom_counter",
+                "requiredAmount": 1,
+                "currentAmountDefault": 0,
+                "conditions": [],
+                "completionEffects": [],
+                "optional": false,
+                "hidden": false,
+                "tags": [],
+                "metadata": {
+                  "targetId": "target-018"
+                }
+              }
+            ],
+            "enterEffects": [],
+            "completeEffects": [],
+            "rewards": [],
+            "optional": false,
+            "hidden": false,
+            "tags": [],
+            "metadata": {}
+          }
+        ]
+      }
+    ],
+    "dialogues": [
+      {
+        "id": "dialogue/goal080/map-panel-rpg/seed-alpha/briefing",
+        "title": "map-panel-rpg/seed-alpha review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_alpha"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/map-panel-rpg/seed-alpha/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-001, target-002.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/map-panel-rpg/seed-alpha/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/map-panel-rpg/seed-beta/briefing",
+        "title": "map-panel-rpg/seed-beta review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_beta"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/map-panel-rpg/seed-beta/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-003, target-004.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/map-panel-rpg/seed-beta/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/map-panel-rpg/seed-gamma/briefing",
+        "title": "map-panel-rpg/seed-gamma review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "map_panel_rpg",
+          "seed_gamma"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/map-panel-rpg/seed-gamma/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-005, target-006.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/map-panel-rpg/seed-gamma/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/survival-sandbox/seed-alpha/briefing",
+        "title": "survival-sandbox/seed-alpha review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_alpha"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/survival-sandbox/seed-alpha/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-007, target-008.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/survival-sandbox/seed-alpha/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/survival-sandbox/seed-beta/briefing",
+        "title": "survival-sandbox/seed-beta review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_beta"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-beta"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/survival-sandbox/seed-beta/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-009, target-010.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/survival-sandbox/seed-beta/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/survival-sandbox/seed-gamma/briefing",
+        "title": "survival-sandbox/seed-gamma review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "survival_sandbox",
+          "seed_gamma"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/survival-sandbox/seed-gamma/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-011, target-012.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/survival-sandbox/seed-gamma/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/first-person-grid-dungeon/seed-alpha/briefing",
+        "title": "first-person-grid-dungeon/seed-alpha review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_alpha"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/first-person-grid-dungeon/seed-alpha/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-013, target-014.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/first-person-grid-dungeon/seed-alpha/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/first-person-grid-dungeon/seed-beta/briefing",
+        "title": "first-person-grid-dungeon/seed-beta review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_beta"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/first-person-grid-dungeon/seed-beta/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-015, target-016.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/first-person-grid-dungeon/seed-beta/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dialogue/goal080/first-person-grid-dungeon/seed-gamma/briefing",
+        "title": "first-person-grid-dungeon/seed-gamma review briefing",
+        "startNodeId": "node/start",
+        "conditions": [],
+        "enterEffects": [],
+        "exitEffects": [],
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_gamma"
+        ],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma"
+        },
+        "nodes": [
+          {
+            "id": "node/start",
+            "speakerId": "entity/goal080/first-person-grid-dungeon/seed-gamma/review-node",
+            "expression": "neutral",
+            "text": "Projected targets: target-017, target-018.",
+            "conditions": [],
+            "enterEffects": [],
+            "exitEffects": [],
+            "metadata": {},
+            "choices": [
+              {
+                "id": "choice/start-quest",
+                "text": "Open review quest",
+                "conditions": [],
+                "requirements": [],
+                "costs": [],
+                "effects": [],
+                "rewards": [],
+                "closeDialogue": true,
+                "startQuestId": "quest/goal080/first-person-grid-dungeon/seed-gamma/bridge",
+                "tags": [],
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "factions": [
+      {
+        "id": "faction/goal080/reviewers",
+        "name": "Reviewers",
+        "description": "Review-facing bridge actors.",
+        "kind": "faction",
+        "relations": [],
+        "tags": [],
+        "metadata": {}
+      }
+    ],
+    "formulas": [],
+    "interactions": [
+      {
+        "id": "interaction/goal080/target-001",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetId": "target-001",
+          "afterHash": "cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-002",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+          "targetId": "target-002",
+          "afterHash": "cc5159d547e511a5b64a0be589fc08feb05473a0af56caa06ee063bcb2e4721a",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-003",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetId": "target-003",
+          "afterHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-004",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-beta",
+          "targetId": "target-004",
+          "afterHash": "751f3b592a32bd2b72782693ecc1bd2c9679200997c5ad61e1842cb26c4ab38b",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-005",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetId": "target-005",
+          "afterHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-006",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+          "targetId": "target-006",
+          "afterHash": "8ac387419fd797564c5bafa7ab40da1f9efafd4cc485790cf76406e7d46ecbbf",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-007",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetId": "target-007",
+          "afterHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-008",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-alpha",
+          "targetId": "target-008",
+          "afterHash": "fa6d372ec2ea011bed4595c240c5619ca01898965a04e7e4abac96c7e0e114d7",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-009",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetId": "target-009",
+          "afterHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-010",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-beta",
+          "targetId": "target-010",
+          "afterHash": "7d7d64fc90a989714c346957e99dbf087fa1a82cec2f5e1f45d155fe1be39575",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-011",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetId": "target-011",
+          "afterHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-012",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-survival-sandbox-seed-gamma",
+          "targetId": "target-012",
+          "afterHash": "f012f42b5dc98a75f1bd53261540a3aa682bf731731f89323d98759d426bb06c",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-013",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetId": "target-013",
+          "afterHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-014",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+          "targetId": "target-014",
+          "afterHash": "32e2bb95b1ff0513d207249910315e22d9223a78a74daa1604cb9435f1479221",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-015",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetId": "target-015",
+          "afterHash": "b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-016",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+          "targetId": "target-016",
+          "afterHash": "b3c8626ae24e1338aa7c2711c1f420d347bd70f4650ed4c04db33e528e33d39f",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-017",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetId": "target-017",
+          "afterHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      },
+      {
+        "id": "interaction/goal080/target-018",
+        "kind": "inspect",
+        "conditions": [],
+        "effects": [],
+        "metadata": {
+          "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+          "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+          "targetId": "target-018",
+          "afterHash": "a4838666c1497344bb531dbf873674e4862de5d55cdc73d3abfe1645a84f869b",
+          "validationRequirement": "validate-before-preview-apply"
+        }
+      }
+    ]
+  },
+  "assetCatalog": {
+    "assets": [],
+    "contracts": [],
+    "generationRequests": []
+  },
+  "scriptCatalog": {
+    "scripts": [],
+    "generators": []
+  },
+  "generatedContent": {
+    "profile": {
+      "title": "Goal080 runtime preview bridge",
+      "description": "Projection of Goal077 edit targets into a public GamePackage preview path.",
+      "genre": "review",
+      "tone": "deterministic",
+      "presentationMode": "runtime-preview",
+      "worldTopology": "single-map-review-grid",
+      "actorModel": "reviewer-plus-row-nodes",
+      "combatModel": "validation-only",
+      "coreLoop": [
+        "read projected package from disk",
+        "validate package",
+        "project generated content into runtime preview",
+        "cover playable-session action targets"
+      ],
+      "pillars": [
+        "disk backed",
+        "edit driven",
+        "runtime preview compatible"
+      ],
+      "sourceContextJson": "{\r\n  \"sourceGoal077ReportHash\": \"6b20ee6d2aea1e8dcb47527ad24bb50ba52e41a66aff3679fbf4da3051db50aa\",\r\n  \"sourceGoal078ReportHash\": \"920bf44e203cc800e1d2cb2c857b78d2707a64f797ec61ff7c9d4061f801a1a5\",\r\n  \"rowCount\": 9,\r\n  \"targetCount\": 18,\r\n  \"actionCount\": 57\r\n}"
+    },
+    "scenes": [
+      {
+        "sourceId": "scene/goal080/runtime-preview-bridge",
+        "packageMapId": "map/goal080/runtime-preview-bridge",
+        "title": "Runtime preview bridge",
+        "description": "A deterministic scene containing every Goal077 row and target projected for preview.",
+        "purpose": "goal080_proof"
+      }
+    ],
+    "regions": [
+      {
+        "sourceId": "region/goal080/first_person_grid_dungeon",
+        "title": "first_person_grid_dungeon",
+        "description": "Review region for first_person_grid_dungeon.",
+        "sceneIds": [
+          "scene/goal080/runtime-preview-bridge"
+        ]
+      },
+      {
+        "sourceId": "region/goal080/map_panel_rpg",
+        "title": "map_panel_rpg",
+        "description": "Review region for map_panel_rpg.",
+        "sceneIds": [
+          "scene/goal080/runtime-preview-bridge"
+        ]
+      },
+      {
+        "sourceId": "region/goal080/survival_sandbox",
+        "title": "survival_sandbox",
+        "description": "Review region for survival_sandbox.",
+        "sceneIds": [
+          "scene/goal080/runtime-preview-bridge"
+        ]
+      }
+    ],
+    "npcs": [
+      {
+        "sourceId": "entity/goal080/map-panel-rpg/seed-alpha/review-node",
+        "name": "map-panel-rpg/seed-alpha review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/map_panel_rpg",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/map-panel-rpg/seed-beta/review-node",
+        "name": "map-panel-rpg/seed-beta review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/map_panel_rpg",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/map-panel-rpg/seed-gamma/review-node",
+        "name": "map-panel-rpg/seed-gamma review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/map_panel_rpg",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/survival-sandbox/seed-alpha/review-node",
+        "name": "survival-sandbox/seed-alpha review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/survival_sandbox",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/survival-sandbox/seed-beta/review-node",
+        "name": "survival-sandbox/seed-beta review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/survival_sandbox",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/survival-sandbox/seed-gamma/review-node",
+        "name": "survival-sandbox/seed-gamma review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/survival_sandbox",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/first-person-grid-dungeon/seed-alpha/review-node",
+        "name": "first-person-grid-dungeon/seed-alpha review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/first_person_grid_dungeon",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/first-person-grid-dungeon/seed-beta/review-node",
+        "name": "first-person-grid-dungeon/seed-beta review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/first_person_grid_dungeon",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      },
+      {
+        "sourceId": "entity/goal080/first-person-grid-dungeon/seed-gamma/review-node",
+        "name": "first-person-grid-dungeon/seed-gamma review node",
+        "description": "Runtime-preview bridge node for 2 targets.",
+        "regionId": "region/goal080/first_person_grid_dungeon",
+        "sceneId": "scene/goal080/runtime-preview-bridge"
+      }
+    ],
+    "items": [
+      {
+        "sourceId": "item/goal080/target-001",
+        "name": "target-001 package target",
+        "description": "high"
+      },
+      {
+        "sourceId": "item/goal080/target-002",
+        "name": "target-002 package target",
+        "description": "tense"
+      },
+      {
+        "sourceId": "item/goal080/target-003",
+        "name": "target-003 package target",
+        "description": "investigate"
+      },
+      {
+        "sourceId": "item/goal080/target-004",
+        "name": "target-004 package target",
+        "description": "repair"
+      },
+      {
+        "sourceId": "item/goal080/target-005",
+        "name": "target-005 package target",
+        "description": "burn"
+      },
+      {
+        "sourceId": "item/goal080/target-006",
+        "name": "target-006 package target",
+        "description": "calm"
+      },
+      {
+        "sourceId": "item/goal080/target-007",
+        "name": "target-007 package target",
+        "description": "low"
+      },
+      {
+        "sourceId": "item/goal080/target-008",
+        "name": "target-008 package target",
+        "description": "allied"
+      },
+      {
+        "sourceId": "item/goal080/target-009",
+        "name": "target-009 package target",
+        "description": "rescue"
+      },
+      {
+        "sourceId": "item/goal080/target-010",
+        "name": "target-010 package target",
+        "description": "defense"
+      },
+      {
+        "sourceId": "item/goal080/target-011",
+        "name": "target-011 package target",
+        "description": "freeze"
+      },
+      {
+        "sourceId": "item/goal080/target-012",
+        "name": "target-012 package target",
+        "description": "storm"
+      },
+      {
+        "sourceId": "item/goal080/target-013",
+        "name": "target-013 package target",
+        "description": "medium"
+      },
+      {
+        "sourceId": "item/goal080/target-014",
+        "name": "target-014 package target",
+        "description": "neutral"
+      },
+      {
+        "sourceId": "item/goal080/target-015",
+        "name": "target-015 package target",
+        "description": "trade"
+      },
+      {
+        "sourceId": "item/goal080/target-016",
+        "name": "target-016 package target",
+        "description": "growth"
+      },
+      {
+        "sourceId": "item/goal080/target-017",
+        "name": "target-017 package target",
+        "description": "shock"
+      },
+      {
+        "sourceId": "item/goal080/target-018",
+        "name": "target-018 package target",
+        "description": "crisis"
+      }
+    ],
+    "dialogues": [
+      {
+        "sourceId": "dialogue/goal080/map-panel-rpg/seed-alpha/briefing",
+        "title": "map-panel-rpg/seed-alpha review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/map-panel-rpg/seed-alpha/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-001: high",
+          "target-002: tense"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/map-panel-rpg/seed-beta/briefing",
+        "title": "map-panel-rpg/seed-beta review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/map-panel-rpg/seed-beta/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-003: investigate",
+          "target-004: repair"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/map-panel-rpg/seed-gamma/briefing",
+        "title": "map-panel-rpg/seed-gamma review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/map-panel-rpg/seed-gamma/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-005: burn",
+          "target-006: calm"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/survival-sandbox/seed-alpha/briefing",
+        "title": "survival-sandbox/seed-alpha review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/survival-sandbox/seed-alpha/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-007: low",
+          "target-008: allied"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/survival-sandbox/seed-beta/briefing",
+        "title": "survival-sandbox/seed-beta review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/survival-sandbox/seed-beta/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-009: rescue",
+          "target-010: defense"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/survival-sandbox/seed-gamma/briefing",
+        "title": "survival-sandbox/seed-gamma review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/survival-sandbox/seed-gamma/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-011: freeze",
+          "target-012: storm"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/first-person-grid-dungeon/seed-alpha/briefing",
+        "title": "first-person-grid-dungeon/seed-alpha review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/first-person-grid-dungeon/seed-alpha/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-013: medium",
+          "target-014: neutral"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/first-person-grid-dungeon/seed-beta/briefing",
+        "title": "first-person-grid-dungeon/seed-beta review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/first-person-grid-dungeon/seed-beta/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-015: trade",
+          "target-016: growth"
+        ]
+      },
+      {
+        "sourceId": "dialogue/goal080/first-person-grid-dungeon/seed-gamma/briefing",
+        "title": "first-person-grid-dungeon/seed-gamma review dialogue",
+        "description": "Player-facing briefing generated from the projected GamePackage.",
+        "npcId": "entity/goal080/first-person-grid-dungeon/seed-gamma/review-node",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "lines": [
+          "target-017: shock",
+          "target-018: crisis"
+        ]
+      }
+    ],
+    "encounters": [
+      {
+        "sourceId": "encounter/goal080/map-panel-rpg/seed-alpha/validation",
+        "title": "map-panel-rpg/seed-alpha validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/map_panel_rpg",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/map-panel-rpg/seed-alpha/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/map-panel-rpg/seed-beta/validation",
+        "title": "map-panel-rpg/seed-beta validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/map_panel_rpg",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/map-panel-rpg/seed-beta/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/map-panel-rpg/seed-gamma/validation",
+        "title": "map-panel-rpg/seed-gamma validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/map_panel_rpg",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/map-panel-rpg/seed-gamma/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/survival-sandbox/seed-alpha/validation",
+        "title": "survival-sandbox/seed-alpha validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/survival_sandbox",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/survival-sandbox/seed-alpha/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/survival-sandbox/seed-beta/validation",
+        "title": "survival-sandbox/seed-beta validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/survival_sandbox",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/survival-sandbox/seed-beta/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/survival-sandbox/seed-gamma/validation",
+        "title": "survival-sandbox/seed-gamma validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/survival_sandbox",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/survival-sandbox/seed-gamma/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/first-person-grid-dungeon/seed-alpha/validation",
+        "title": "first-person-grid-dungeon/seed-alpha validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/first_person_grid_dungeon",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/first-person-grid-dungeon/seed-alpha/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/first-person-grid-dungeon/seed-beta/validation",
+        "title": "first-person-grid-dungeon/seed-beta validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/first_person_grid_dungeon",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/first-person-grid-dungeon/seed-beta/review-node"
+        ]
+      },
+      {
+        "sourceId": "encounter/goal080/first-person-grid-dungeon/seed-gamma/validation",
+        "title": "first-person-grid-dungeon/seed-gamma validation encounter",
+        "description": "Validation-only encounter for projected target coverage.",
+        "regionId": "region/goal080/first_person_grid_dungeon",
+        "sceneId": "scene/goal080/runtime-preview-bridge",
+        "npcIds": [
+          "entity/goal080/first-person-grid-dungeon/seed-gamma/review-node"
+        ]
+      }
+    ],
+    "quests": [
+      {
+        "sourceId": "quest/goal080/map-panel-rpg/seed-alpha/bridge",
+        "packageQuestId": "quest/goal080/map-panel-rpg/seed-alpha/bridge",
+        "title": "map-panel-rpg/seed-alpha bridge quest",
+        "description": "Review all projected targets for map-panel-rpg/seed-alpha.",
+        "steps": [
+          "Inspect target-001 at gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha.",
+          "Inspect target-002 at gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha."
+        ],
+        "objectives": [
+          "target-001 coverage",
+          "target-002 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/map-panel-rpg/seed-beta/bridge",
+        "packageQuestId": "quest/goal080/map-panel-rpg/seed-beta/bridge",
+        "title": "map-panel-rpg/seed-beta bridge quest",
+        "description": "Review all projected targets for map-panel-rpg/seed-beta.",
+        "steps": [
+          "Inspect target-003 at gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta.",
+          "Inspect target-004 at gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta."
+        ],
+        "objectives": [
+          "target-003 coverage",
+          "target-004 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/map-panel-rpg/seed-gamma/bridge",
+        "packageQuestId": "quest/goal080/map-panel-rpg/seed-gamma/bridge",
+        "title": "map-panel-rpg/seed-gamma bridge quest",
+        "description": "Review all projected targets for map-panel-rpg/seed-gamma.",
+        "steps": [
+          "Inspect target-005 at gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma.",
+          "Inspect target-006 at gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma."
+        ],
+        "objectives": [
+          "target-005 coverage",
+          "target-006 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/survival-sandbox/seed-alpha/bridge",
+        "packageQuestId": "quest/goal080/survival-sandbox/seed-alpha/bridge",
+        "title": "survival-sandbox/seed-alpha bridge quest",
+        "description": "Review all projected targets for survival-sandbox/seed-alpha.",
+        "steps": [
+          "Inspect target-007 at gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha.",
+          "Inspect target-008 at gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha."
+        ],
+        "objectives": [
+          "target-007 coverage",
+          "target-008 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/survival-sandbox/seed-beta/bridge",
+        "packageQuestId": "quest/goal080/survival-sandbox/seed-beta/bridge",
+        "title": "survival-sandbox/seed-beta bridge quest",
+        "description": "Review all projected targets for survival-sandbox/seed-beta.",
+        "steps": [
+          "Inspect target-009 at gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta.",
+          "Inspect target-010 at gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta."
+        ],
+        "objectives": [
+          "target-009 coverage",
+          "target-010 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/survival-sandbox/seed-gamma/bridge",
+        "packageQuestId": "quest/goal080/survival-sandbox/seed-gamma/bridge",
+        "title": "survival-sandbox/seed-gamma bridge quest",
+        "description": "Review all projected targets for survival-sandbox/seed-gamma.",
+        "steps": [
+          "Inspect target-011 at gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma.",
+          "Inspect target-012 at gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma."
+        ],
+        "objectives": [
+          "target-011 coverage",
+          "target-012 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/first-person-grid-dungeon/seed-alpha/bridge",
+        "packageQuestId": "quest/goal080/first-person-grid-dungeon/seed-alpha/bridge",
+        "title": "first-person-grid-dungeon/seed-alpha bridge quest",
+        "description": "Review all projected targets for first-person-grid-dungeon/seed-alpha.",
+        "steps": [
+          "Inspect target-013 at gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha.",
+          "Inspect target-014 at gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha."
+        ],
+        "objectives": [
+          "target-013 coverage",
+          "target-014 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/first-person-grid-dungeon/seed-beta/bridge",
+        "packageQuestId": "quest/goal080/first-person-grid-dungeon/seed-beta/bridge",
+        "title": "first-person-grid-dungeon/seed-beta bridge quest",
+        "description": "Review all projected targets for first-person-grid-dungeon/seed-beta.",
+        "steps": [
+          "Inspect target-015 at gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta.",
+          "Inspect target-016 at gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta."
+        ],
+        "objectives": [
+          "target-015 coverage",
+          "target-016 coverage"
+        ]
+      },
+      {
+        "sourceId": "quest/goal080/first-person-grid-dungeon/seed-gamma/bridge",
+        "packageQuestId": "quest/goal080/first-person-grid-dungeon/seed-gamma/bridge",
+        "title": "first-person-grid-dungeon/seed-gamma bridge quest",
+        "description": "Review all projected targets for first-person-grid-dungeon/seed-gamma.",
+        "steps": [
+          "Inspect target-017 at gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma.",
+          "Inspect target-018 at gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma."
+        ],
+        "objectives": [
+          "target-017 coverage",
+          "target-018 coverage"
+        ]
+      }
+    ],
+    "mechanics": [
+      {
+        "sourceId": "interaction/goal080/target-001",
+        "packageAbilityId": "ability/goal080/target-001",
+        "name": "target-001 bridge mechanic",
+        "description": "gameplay_consequence_summary.consequence_intensity from gameplay_consequence.",
+        "tags": [
+          "map_panel_rpg",
+          "seed_alpha",
+          "target-001"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-002",
+        "packageAbilityId": "ability/goal080/target-002",
+        "name": "target-002 bridge mechanic",
+        "description": "living_world_npc_faction_summary.faction_pressure from living_world_faction.",
+        "tags": [
+          "map_panel_rpg",
+          "seed_alpha",
+          "target-002"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-003",
+        "packageAbilityId": "ability/goal080/target-003",
+        "name": "target-003 bridge mechanic",
+        "description": "narrative_quest_dialogue_event_summary.event_intent from narrative_event_intent.",
+        "tags": [
+          "map_panel_rpg",
+          "seed_beta",
+          "target-003"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-004",
+        "packageAbilityId": "ability/goal080/target-004",
+        "name": "target-004 bridge mechanic",
+        "description": "settlement_construction_destruction_production_summary.production_focus from settlement_production.",
+        "tags": [
+          "map_panel_rpg",
+          "seed_beta",
+          "target-004"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-005",
+        "packageAbilityId": "ability/goal080/target-005",
+        "name": "target-005 bridge mechanic",
+        "description": "combat_magic_boss_summary.status_pressure from combat_magic_status.",
+        "tags": [
+          "map_panel_rpg",
+          "seed_gamma",
+          "target-005"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-006",
+        "packageAbilityId": "ability/goal080/target-006",
+        "name": "target-006 bridge mechanic",
+        "description": "weather_daynight_crisis_summary.crisis_pressure from weather_crisis_pressure.",
+        "tags": [
+          "map_panel_rpg",
+          "seed_gamma",
+          "target-006"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-007",
+        "packageAbilityId": "ability/goal080/target-007",
+        "name": "target-007 bridge mechanic",
+        "description": "gameplay_consequence_summary.consequence_intensity from gameplay_consequence.",
+        "tags": [
+          "survival_sandbox",
+          "seed_alpha",
+          "target-007"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-008",
+        "packageAbilityId": "ability/goal080/target-008",
+        "name": "target-008 bridge mechanic",
+        "description": "living_world_npc_faction_summary.faction_pressure from living_world_faction.",
+        "tags": [
+          "survival_sandbox",
+          "seed_alpha",
+          "target-008"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-009",
+        "packageAbilityId": "ability/goal080/target-009",
+        "name": "target-009 bridge mechanic",
+        "description": "narrative_quest_dialogue_event_summary.event_intent from narrative_event_intent.",
+        "tags": [
+          "survival_sandbox",
+          "seed_beta",
+          "target-009"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-010",
+        "packageAbilityId": "ability/goal080/target-010",
+        "name": "target-010 bridge mechanic",
+        "description": "settlement_construction_destruction_production_summary.production_focus from settlement_production.",
+        "tags": [
+          "survival_sandbox",
+          "seed_beta",
+          "target-010"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-011",
+        "packageAbilityId": "ability/goal080/target-011",
+        "name": "target-011 bridge mechanic",
+        "description": "combat_magic_boss_summary.status_pressure from combat_magic_status.",
+        "tags": [
+          "survival_sandbox",
+          "seed_gamma",
+          "target-011"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-012",
+        "packageAbilityId": "ability/goal080/target-012",
+        "name": "target-012 bridge mechanic",
+        "description": "weather_daynight_crisis_summary.crisis_pressure from weather_crisis_pressure.",
+        "tags": [
+          "survival_sandbox",
+          "seed_gamma",
+          "target-012"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-013",
+        "packageAbilityId": "ability/goal080/target-013",
+        "name": "target-013 bridge mechanic",
+        "description": "gameplay_consequence_summary.consequence_intensity from gameplay_consequence.",
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_alpha",
+          "target-013"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-014",
+        "packageAbilityId": "ability/goal080/target-014",
+        "name": "target-014 bridge mechanic",
+        "description": "living_world_npc_faction_summary.faction_pressure from living_world_faction.",
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_alpha",
+          "target-014"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-015",
+        "packageAbilityId": "ability/goal080/target-015",
+        "name": "target-015 bridge mechanic",
+        "description": "narrative_quest_dialogue_event_summary.event_intent from narrative_event_intent.",
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_beta",
+          "target-015"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-016",
+        "packageAbilityId": "ability/goal080/target-016",
+        "name": "target-016 bridge mechanic",
+        "description": "settlement_construction_destruction_production_summary.production_focus from settlement_production.",
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_beta",
+          "target-016"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-017",
+        "packageAbilityId": "ability/goal080/target-017",
+        "name": "target-017 bridge mechanic",
+        "description": "combat_magic_boss_summary.status_pressure from combat_magic_status.",
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_gamma",
+          "target-017"
+        ]
+      },
+      {
+        "sourceId": "interaction/goal080/target-018",
+        "packageAbilityId": "ability/goal080/target-018",
+        "name": "target-018 bridge mechanic",
+        "description": "weather_daynight_crisis_summary.crisis_pressure from weather_crisis_pressure.",
+        "tags": [
+          "first_person_grid_dungeon",
+          "seed_gamma",
+          "target-018"
+        ]
+      }
+    ],
+    "appliedArtifacts": [
+      {
+        "artifactId": "target-001",
+        "contractId": "gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "map-panel-rpg/seed-alpha",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "0d4380929949c507f93e9a4899f7c522981e8a68fcb9c85967009b7deaa7e543",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-002",
+        "contractId": "gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "map-panel-rpg/seed-alpha",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "250eb0ed8d041e8dfac4f2ac5ef8803105f6f48e599bcc495d113c71d3af6e47",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-003",
+        "contractId": "gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "map-panel-rpg/seed-beta",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "4cd5e4654043932e76a1996414ce6bf8b36f3502ca16cabded52842032548427",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-004",
+        "contractId": "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "map-panel-rpg/seed-beta",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "94a2641a137a1c868f69352290ae76ffd2e88c80baba018f272c4599510b8adc",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-005",
+        "contractId": "gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "map-panel-rpg/seed-gamma",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "b679c2cc7532a015215f5466b3c99d4a4a05c4303198f161c9b9825971d136f0",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-006",
+        "contractId": "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "map-panel-rpg/seed-gamma",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "74b5fe9bf6169de04ca7fd048e129d8a1391979ff1f02a04f7004b706fb715c4",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-007",
+        "contractId": "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "survival-sandbox/seed-alpha",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "3267ad668306ada32acf72f3cab39a1a3656e229a7ccb0e3eff46807222d9694",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-008",
+        "contractId": "gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "survival-sandbox/seed-alpha",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "43e9481903cfefbd8143753805a14fb17bfde103be72667043e6b3aa56004dec",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-009",
+        "contractId": "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "survival-sandbox/seed-beta",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "66131f55b7941daf03fe05eecbf6b2a62fe03eed9930406e40ee146a67e2dc63",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-010",
+        "contractId": "gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "survival-sandbox/seed-beta",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "c639c7b0434a2b31de62cfd7177d4a9355a3bd453f22ddeae837b9bc13875834",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-011",
+        "contractId": "gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "survival-sandbox/seed-gamma",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "8b94a7322d17e450211542462412c50ec0d1134cd096494369835abeb5fd95d3",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-012",
+        "contractId": "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "survival-sandbox/seed-gamma",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "abdc8acd6f611bcade9937eab1b4e6b4de2423603e14873b1b9b5ea7abc0bd5d",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-013",
+        "contractId": "gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "first-person-grid-dungeon/seed-alpha",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "7467e07c016e1cb9428ed1b3edef5df142b5bda769392119b7c8d5fce1226e97",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-014",
+        "contractId": "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "first-person-grid-dungeon/seed-alpha",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "3679603512679de512f1baa4bc8b049d516f97581224f6f7734cb8e155d4af93",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-015",
+        "contractId": "gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "first-person-grid-dungeon/seed-beta",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "6a3fe62332f7dafc0756442d2aa605553a9308f796b02df4a3396ccaee127c4f",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-016",
+        "contractId": "gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "first-person-grid-dungeon/seed-beta",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "5d5a88e356658c0766f9084edacdb7050ff9a918070077de291cd5c7013b054a",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-017",
+        "contractId": "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "first-person-grid-dungeon/seed-gamma",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "85319bacabb69c9301d0ff4e48a379b80e3be72942944b2f54cab5dc428841c8",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      },
+      {
+        "artifactId": "target-018",
+        "contractId": "gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma",
+        "artifactKind": "edit_target_projection",
+        "capabilitySelectionId": "first-person-grid-dungeon/seed-gamma",
+        "generatedAt": "deterministic-goal080",
+        "auditId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+        "appliedAt": "projected-gamepackage",
+        "contentHash": "570ab5208e6a8dc7d412d51dd333be5d477c34bc03adb138c21b5cdca8f1aac0",
+        "mappingResult": "projected_to_public_gamepackage_generated_content"
+      }
+    ],
+    "preservedArtifacts": []
+  }
+}

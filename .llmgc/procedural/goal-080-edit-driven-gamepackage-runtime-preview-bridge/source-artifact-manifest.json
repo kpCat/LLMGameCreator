@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_bridge_source_artifact_manifest_v1",
+  "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+  "productSmokeRoute": "goal-080-edit-driven-gamepackage-runtime-preview-bridge",
+  "manualGate": "edit_driven_gamepackage_runtime_preview_bridge_verification",
+  "accepted": false,
+  "goal079AcceptedForContinuation": true,
+  "goal079ASourceFormatGuardPassedByHandoff": true,
+  "goal079ReportWasGreenProducedForReview": true,
+  "goal079ArtifactAcceptedFalse": true,
+  "goal077ReportHash": "6b20ee6d2aea1e8dcb47527ad24bb50ba52e41a66aff3679fbf4da3051db50aa",
+  "goal078ReportHash": "920bf44e203cc800e1d2cb2c857b78d2707a64f797ec61ff7c9d4061f801a1a5",
+  "goal079ReportHash": "7fb629da0d8e6cca01c41f86536a7b9917fbcdf22fad3873d72cb647b644921e",
+  "goal079AReportHash": "e4a55a52d44fad782ee3341d384484be26fcedc8178dea67eeb516abad8ee36f",
+  "sourceArtifactCount": 15,
+  "sourceArtifacts": [
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "edit_driven_review_package_materialization_report",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/edit-driven-review-package-materialization-report.md",
+      "artifactHash": "6b20ee6d2aea1e8dcb47527ad24bb50ba52e41a66aff3679fbf4da3051db50aa",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "package_file_ledger",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/package-file-ledger.json",
+      "artifactHash": "25497407f6a3ff763e5d4686f0d366b31d7de420ad5d5d63050d738b3b21131f",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/review-package/manifest.json",
+      "artifactHash": "3583646e1f64d5e687030f9bd48294d77e6098bb77545d82c731798db088ed3a",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "package_index",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/review-package/package-index.json",
+      "artifactHash": "55766594c8b101894a8783083c60a3d1aacd5efa5e80ec7927f1099e1575c273",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "player_readable_index",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/review-package/player-readable-index.json",
+      "artifactHash": "140f9000115355db085fb0026ee6d2ffbfc04f92c2fc0d79f13fc28139baa402",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "edit_driven_review_package_playable_session_report",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/edit-driven-review-package-playable-session-report.md",
+      "artifactHash": "920bf44e203cc800e1d2cb2c857b78d2707a64f797ec61ff7c9d4061f801a1a5",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "package_read_proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/package-read-proof.json",
+      "artifactHash": "240a56709081683618c4bcc9fb255e759525470869552dfa02c6bc9ecf081435",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "playable_session_action_log",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/playable-session-action-log.json",
+      "artifactHash": "6e33f2f369c34dd4d1827634d312e69f1e8bf73c326b73f90f370719fd30790a",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "playable_session_replay_proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/playable-session-replay-proof.json",
+      "artifactHash": "c799a3a2c4688ca418ff274746d8499a8f2dfdf0395cf139f5f4ef16900ab496",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "tamper_negative_proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/tamper-negative-proof.json",
+      "artifactHash": "4cacb192e47459240202a684c43be7f77bbacc9be7b5c3295a9fd0e2d1c8aa85",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal078",
+      "artifactFamily": "player_command_index",
+      "artifactRelativePath": ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/player-command-index.json",
+      "artifactHash": "7d1f9229c543d9d623e149ad474266e9853ab1fd4db22888a4864e708f8fe771",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal079",
+      "artifactFamily": "edit_driven_spine_quality_consolidation_report",
+      "artifactRelativePath": ".llmgc/procedural/goal-079-edit-driven-spine-quality-consolidation/edit-driven-spine-quality-consolidation-report.md",
+      "artifactHash": "7fb629da0d8e6cca01c41f86536a7b9917fbcdf22fad3873d72cb647b644921e",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal079",
+      "artifactFamily": "quality_gate_scan",
+      "artifactRelativePath": ".llmgc/procedural/goal-079-edit-driven-spine-quality-consolidation/quality-gate-scan.json",
+      "artifactHash": "12191a273ea1594df344be6dd7bb73ab4903ebd76aac0466fdd77347e39b0535",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal079A",
+      "artifactFamily": "source_format_line_ending_guard_report",
+      "artifactRelativePath": ".llmgc/procedural/goal-079a-source-format-line-ending-guard/source-format-line-ending-guard-report.md",
+      "artifactHash": "e4a55a52d44fad782ee3341d384484be26fcedc8178dea67eeb516abad8ee36f",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal079A",
+      "artifactFamily": "source_format_line_ending_guard_scan",
+      "artifactRelativePath": ".llmgc/procedural/goal-079a-source-format-line-ending-guard/source-format-line-ending-guard-scan.json",
+      "artifactHash": "b84d27c3868432416bbb776725e8928130d3c027f6808e90d820ffa00c8d6520",
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

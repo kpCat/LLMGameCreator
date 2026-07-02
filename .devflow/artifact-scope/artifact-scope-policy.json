@@ -48,7 +48,8 @@
     ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/",
     ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/",
     ".llmgc/procedural/goal-079-edit-driven-spine-quality-consolidation/",
-    ".llmgc/procedural/goal-079a-source-format-line-ending-guard/"
+    ".llmgc/procedural/goal-079a-source-format-line-ending-guard/",
+    ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -778,6 +779,29 @@
         "docs/agent-tasks/goal-079a-source-format-line-ending-guard/",
         "src/LLMGameCreator.Application/Design/EditDrivenSpineQualityConsolidation/",
         "tests/LLMGameCreator.Tests/Application/EditDrivenSpineQualityConsolidation/"
+      ]
+    },
+    {
+      "scenario": "goal-080-edit-driven-gamepackage-runtime-preview-bridge",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.Designer.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignGamePackageRuntimePreviewBridgeControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignGamePackageRuntimePreviewBridgeControl.Designer.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/EditDrivenGamePackageRuntimePreviewBridgeProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-080-edit-driven-gamepackage-runtime-preview-bridge/",
+        "docs/agent-tasks/goal-080-edit-driven-gamepackage-runtime-preview-bridge/",
+        "src/LLMGameCreator.Application/Design/EditDrivenGamePackageRuntimePreviewBridge/",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenGamePackageRuntimePreviewBridge/"
       ]
     }
   ]

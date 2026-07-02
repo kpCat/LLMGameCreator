@@ -6,6 +6,7 @@ using LLMGameCreator.Application.Design.EditDrivenPlayablePreviewRefresh;
 using LLMGameCreator.Application.Design.EditDrivenPlayableReviewPackageMaterialization;
 using LLMGameCreator.Application.Design.EditDrivenReviewPackagePlayableSession;
 using LLMGameCreator.Application.Design.EditDrivenSpineQualityConsolidation;
+using LLMGameCreator.Application.Design.EditDrivenGamePackageRuntimePreviewBridge;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
@@ -96,6 +97,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<EditDrivenPlayableReviewPackageMaterializationEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenReviewPackagePlayableSessionEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenSpineQualityConsolidationEvidenceService>(Reuse.Singleton);
+        _container.Register<EditDrivenGamePackageRuntimePreviewBridgeEvidenceService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -307,7 +309,8 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<EditDrivenPlayablePreviewRefreshEvidenceService>(),
                 resolver.Resolve<EditDrivenPlayableReviewPackageMaterializationEvidenceService>(),
                 resolver.Resolve<EditDrivenReviewPackagePlayableSessionEvidenceService>(),
-                resolver.Resolve<EditDrivenSpineQualityConsolidationEvidenceService>()), Reuse.Singleton);
+                resolver.Resolve<EditDrivenSpineQualityConsolidationEvidenceService>(),
+                resolver.Resolve<EditDrivenGamePackageRuntimePreviewBridgeEvidenceService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

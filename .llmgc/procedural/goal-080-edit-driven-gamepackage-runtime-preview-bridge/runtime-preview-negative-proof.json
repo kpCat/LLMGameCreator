@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_bridge_negative_proof_v1",
+  "passed": true,
+  "scenarioCount": 5,
+  "scenarios": [
+    {
+      "scenarioId": "missing_projected_package_file",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "projected_file_ledger_hash_mismatch",
+          "target": "projected-gamepackage/package.json",
+          "message": "Projected package files do not match the recorded ledger hashes."
+        },
+        {
+          "severity": "error",
+          "code": "projected_package_missing",
+          "target": "projected-gamepackage/package.json",
+          "message": "Projected package payload was not read."
+        },
+        {
+          "severity": "error",
+          "code": "manifest.start_map.empty",
+          "target": "projected-gamepackage/package.json",
+          "message": "StartMapId is not populated."
+        },
+        {
+          "severity": "error",
+          "code": "target_projection_gap",
+          "target": "projected-gamepackage/package.json",
+          "message": "Projected package does not cover all Goal077 targets."
+        },
+        {
+          "severity": "error",
+          "code": "action_projection_gap",
+          "target": "projected-gamepackage/package.json",
+          "message": "Goal078 actions are not fully covered by projected targets."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_projected_package_file",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "projected_file_ledger_hash_mismatch",
+          "target": "projected-gamepackage/package.json",
+          "message": "Projected package files do not match the recorded ledger hashes."
+        }
+      ]
+    },
+    {
+      "scenarioId": "projected_index_missing_target",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "projected_file_ledger_hash_mismatch",
+          "target": "projected-gamepackage/package.json",
+          "message": "Projected package files do not match the recorded ledger hashes."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_projected_package_read",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "fake_success_rejected",
+          "target": "projected-gamepackage/package.json",
+          "message": "Bridge proof requires projected package payload read."
+        }
+      ]
+    },
+    {
+      "scenarioId": "source_lineage_hash_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "source_lineage_mismatch_rejected",
+          "target": "projected-gamepackage/projected-package-index.json",
+          "message": "Projected package lineage hash mismatch was rejected."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_bridge_projected_file_ledger_v1",
+  "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+  "passed": true,
+  "fileCount": 5,
+  "files": [
+    {
+      "relativePath": "projected-gamepackage/package.json",
+      "role": "public_gamepackage_package_json",
+      "sha256": "d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648",
+      "byteCount": 137366,
+      "rowId": "",
+      "targetId": ""
+    },
+    {
+      "relativePath": "projected-gamepackage/player-readable-bridge-index.json",
+      "role": "player_readable_bridge_index",
+      "sha256": "c9ca69f4301681126b75ea5629af960832dc74681e2441a28351bed9f0524f65",
+      "byteCount": 9386,
+      "rowId": "",
+      "targetId": ""
+    },
+    {
+      "relativePath": "projected-gamepackage/projected-package-index.json",
+      "role": "projected_package_index",
+      "sha256": "5d3455961c968a1de480c1ce185969534b07eec52b9f49e6952da4f433644fc4",
+      "byteCount": 5368,
+      "rowId": "",
+      "targetId": ""
+    },
+    {
+      "relativePath": "projected-gamepackage/source-targets.json",
+      "role": "source_target_manifest",
+      "sha256": "53cbe7859ec2a458409761acd246a039adc8fbe0b8aabe2a872159d679576cfb",
+      "byteCount": 13864,
+      "rowId": "",
+      "targetId": ""
+    },
+    {
+      "relativePath": "projected-gamepackage/validation-report.json",
+      "role": "validation_report",
+      "sha256": "1e7fca2d7e2fc311723d59b0d0771e22913b967af6b4af09c0c1c74f1f905518",
+      "byteCount": 224,
+      "rowId": "",
+      "targetId": ""
+    }
+  ],
+  "diagnostics": []
+}

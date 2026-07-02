@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_bridge_projected_index_v1",
+  "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+  "passed": true,
+  "packageFile": "projected-gamepackage/package.json",
+  "packageHash": "d79b6d12b384f32f7c5184e02a47e0c906513dd2f6c8bdb743090e02edffa648",
+  "sourceGoal077ReportHash": "6b20ee6d2aea1e8dcb47527ad24bb50ba52e41a66aff3679fbf4da3051db50aa",
+  "sourceGoal078ReportHash": "920bf44e203cc800e1d2cb2c857b78d2707a64f797ec61ff7c9d4061f801a1a5",
+  "sourceGoal079ReportHash": "7fb629da0d8e6cca01c41f86536a7b9917fbcdf22fad3873d72cb647b644921e",
+  "sourceGoal079AReportHash": "e4a55a52d44fad782ee3341d384484be26fcedc8178dea67eeb516abad8ee36f",
+  "rowCount": 9,
+  "targetCount": 18,
+  "rows": [
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "profileId": "map-panel-rpg/seed-alpha",
+      "questId": "quest/goal080/map-panel-rpg/seed-alpha/bridge",
+      "dialogueId": "dialogue/goal080/map-panel-rpg/seed-alpha/briefing",
+      "encounterId": "encounter/goal080/map-panel-rpg/seed-alpha/validation",
+      "targetIds": [
+        "target-001",
+        "target-002"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "profileId": "map-panel-rpg/seed-beta",
+      "questId": "quest/goal080/map-panel-rpg/seed-beta/bridge",
+      "dialogueId": "dialogue/goal080/map-panel-rpg/seed-beta/briefing",
+      "encounterId": "encounter/goal080/map-panel-rpg/seed-beta/validation",
+      "targetIds": [
+        "target-003",
+        "target-004"
+      ]
+    },
+    {
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "profileId": "map-panel-rpg/seed-gamma",
+      "questId": "quest/goal080/map-panel-rpg/seed-gamma/bridge",
+      "dialogueId": "dialogue/goal080/map-panel-rpg/seed-gamma/briefing",
+      "encounterId": "encounter/goal080/map-panel-rpg/seed-gamma/validation",
+      "targetIds": [
+        "target-005",
+        "target-006"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "profileId": "survival-sandbox/seed-alpha",
+      "questId": "quest/goal080/survival-sandbox/seed-alpha/bridge",
+      "dialogueId": "dialogue/goal080/survival-sandbox/seed-alpha/briefing",
+      "encounterId": "encounter/goal080/survival-sandbox/seed-alpha/validation",
+      "targetIds": [
+        "target-007",
+        "target-008"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "profileId": "survival-sandbox/seed-beta",
+      "questId": "quest/goal080/survival-sandbox/seed-beta/bridge",
+      "dialogueId": "dialogue/goal080/survival-sandbox/seed-beta/briefing",
+      "encounterId": "encounter/goal080/survival-sandbox/seed-beta/validation",
+      "targetIds": [
+        "target-009",
+        "target-010"
+      ]
+    },
+    {
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "profileId": "survival-sandbox/seed-gamma",
+      "questId": "quest/goal080/survival-sandbox/seed-gamma/bridge",
+      "dialogueId": "dialogue/goal080/survival-sandbox/seed-gamma/briefing",
+      "encounterId": "encounter/goal080/survival-sandbox/seed-gamma/validation",
+      "targetIds": [
+        "target-011",
+        "target-012"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "profileId": "first-person-grid-dungeon/seed-alpha",
+      "questId": "quest/goal080/first-person-grid-dungeon/seed-alpha/bridge",
+      "dialogueId": "dialogue/goal080/first-person-grid-dungeon/seed-alpha/briefing",
+      "encounterId": "encounter/goal080/first-person-grid-dungeon/seed-alpha/validation",
+      "targetIds": [
+        "target-013",
+        "target-014"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "profileId": "first-person-grid-dungeon/seed-beta",
+      "questId": "quest/goal080/first-person-grid-dungeon/seed-beta/bridge",
+      "dialogueId": "dialogue/goal080/first-person-grid-dungeon/seed-beta/briefing",
+      "encounterId": "encounter/goal080/first-person-grid-dungeon/seed-beta/validation",
+      "targetIds": [
+        "target-015",
+        "target-016"
+      ]
+    },
+    {
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "profileId": "first-person-grid-dungeon/seed-gamma",
+      "questId": "quest/goal080/first-person-grid-dungeon/seed-gamma/bridge",
+      "dialogueId": "dialogue/goal080/first-person-grid-dungeon/seed-gamma/briefing",
+      "encounterId": "encounter/goal080/first-person-grid-dungeon/seed-gamma/validation",
+      "targetIds": [
+        "target-017",
+        "target-018"
+      ]
+    }
+  ]
+}

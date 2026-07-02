@@ -1,0 +1,46 @@
+# Final report format
+
+Report exactly:
+
+- Final status: GREEN / BLOCKED / FAILED.
+- Latest commit before work.
+- Latest commit after work.
+- Push status to origin/main.
+- Preflight summary:
+  - branch
+  - Goal 079A artifacts GREEN/accepted=false
+  - Goal 079A handoff recorded before Goal 080
+  - Goal 079 quality consolidation accepted/handoff status
+  - current top commit before work
+- Changed files grouped by area.
+- Implemented behavior:
+  - Application seam
+  - disk-backed existing-schema package projection
+  - runtime-preview/player-facing bridge proof
+  - WinForms workspace tab binding
+  - negative proof
+- Proof metrics:
+  - source Goal 077/078/079/079A hashes consumed
+  - projected package file count
+  - existing-schema validation status
+  - runtime-preview bridge status
+  - row/target/action coverage
+  - state hashes / replay hashes
+  - report hash
+- Quality gate:
+  - raw source health metrics
+  - max C# line length
+  - minified count
+  - files over 1000 lines
+  - AlphaRuntimeBootstrap line count/hash/no-change
+  - forbidden areas touched yes/no
+- Validation results with pass counts.
+- Artifact-scope result.
+- Evidence hygiene:
+  - absolute path/timestamp/heavy log scan
+  - mojibake scan
+  - scratch/tamper file scan
+- Remaining P2/P3 debt.
+- Final git status.
+- Git commands used and why.
+- Goal usage if available.

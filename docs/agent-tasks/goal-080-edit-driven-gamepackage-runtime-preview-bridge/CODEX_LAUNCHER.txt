@@ -1,0 +1,12 @@
+/goal
+
+Run the task from the file already unpacked in the repository:
+
+docs/agent-tasks/goal-080-edit-driven-gamepackage-runtime-preview-bridge/GOAL.md
+
+Codex reasoning: very high
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+
+After completion, commit/push to origin/main with GREEN/BLOCKED/FAILED status according to GOAL.md.

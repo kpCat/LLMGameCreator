@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_bridge_winforms_binding_inventory_v1",
+  "passed": true,
+  "parentPageRuntimePreviewBridgeTabDeclared": true,
+  "parentPageRuntimePreviewBridgeServiceLoaded": true,
+  "parentPageRuntimePreviewBridgeControlBound": true,
+  "parentPageActivationBindsGoal080Data": true,
+  "groups": [
+    {
+      "groupId": "goal080_runtime_preview_bridge_tab",
+      "controlName": "CampaignGamePackageRuntimePreviewBridgeControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignGamePackageRuntimePreviewBridgeControl.cs",
+      "separateUserControl": true,
+      "bindsGoal080Data": true
+    }
+  ],
+  "diagnostics": []
+}

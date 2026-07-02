@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "edit_driven_gamepackage_runtime_preview_bridge_player_index_v1",
+  "goalId": "goal_080_edit_driven_gamepackage_runtime_preview_bridge",
+  "passed": true,
+  "scenarioCount": 9,
+  "commandCount": 57,
+  "scenarios": [
+    {
+      "scenarioId": "map-panel-rpg/seed-alpha",
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_alpha",
+      "playerFacingQuest": "quest/goal080/map-panel-rpg/seed-alpha/bridge",
+      "playerFacingDialogue": "dialogue/goal080/map-panel-rpg/seed-alpha/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-001",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/map_panel_rpg/seed_alpha",
+          "projectedItem": "item/goal080/target-001",
+          "projectedInteraction": "interaction/goal080/target-001"
+        },
+        {
+          "targetId": "target-002",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/map_panel_rpg/seed_alpha",
+          "projectedItem": "item/goal080/target-002",
+          "projectedInteraction": "interaction/goal080/target-002"
+        }
+      ]
+    },
+    {
+      "scenarioId": "map-panel-rpg/seed-beta",
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_beta",
+      "playerFacingQuest": "quest/goal080/map-panel-rpg/seed-beta/bridge",
+      "playerFacingDialogue": "dialogue/goal080/map-panel-rpg/seed-beta/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-003",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/map_panel_rpg/seed_beta",
+          "projectedItem": "item/goal080/target-003",
+          "projectedInteraction": "interaction/goal080/target-003"
+        },
+        {
+          "targetId": "target-004",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/map_panel_rpg/seed_beta",
+          "projectedItem": "item/goal080/target-004",
+          "projectedInteraction": "interaction/goal080/target-004"
+        }
+      ]
+    },
+    {
+      "scenarioId": "map-panel-rpg/seed-gamma",
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "familyId": "map_panel_rpg",
+      "seedId": "seed_gamma",
+      "playerFacingQuest": "quest/goal080/map-panel-rpg/seed-gamma/bridge",
+      "playerFacingDialogue": "dialogue/goal080/map-panel-rpg/seed-gamma/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-005",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/map_panel_rpg/seed_gamma",
+          "projectedItem": "item/goal080/target-005",
+          "projectedInteraction": "interaction/goal080/target-005"
+        },
+        {
+          "targetId": "target-006",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/map_panel_rpg/seed_gamma",
+          "projectedItem": "item/goal080/target-006",
+          "projectedInteraction": "interaction/goal080/target-006"
+        }
+      ]
+    },
+    {
+      "scenarioId": "survival-sandbox/seed-alpha",
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_alpha",
+      "playerFacingQuest": "quest/goal080/survival-sandbox/seed-alpha/bridge",
+      "playerFacingDialogue": "dialogue/goal080/survival-sandbox/seed-alpha/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-007",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/survival_sandbox/seed_alpha",
+          "projectedItem": "item/goal080/target-007",
+          "projectedInteraction": "interaction/goal080/target-007"
+        },
+        {
+          "targetId": "target-008",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/survival_sandbox/seed_alpha",
+          "projectedItem": "item/goal080/target-008",
+          "projectedInteraction": "interaction/goal080/target-008"
+        }
+      ]
+    },
+    {
+      "scenarioId": "survival-sandbox/seed-beta",
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_beta",
+      "playerFacingQuest": "quest/goal080/survival-sandbox/seed-beta/bridge",
+      "playerFacingDialogue": "dialogue/goal080/survival-sandbox/seed-beta/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-009",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/survival_sandbox/seed_beta",
+          "projectedItem": "item/goal080/target-009",
+          "projectedInteraction": "interaction/goal080/target-009"
+        },
+        {
+          "targetId": "target-010",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/survival_sandbox/seed_beta",
+          "projectedItem": "item/goal080/target-010",
+          "projectedInteraction": "interaction/goal080/target-010"
+        }
+      ]
+    },
+    {
+      "scenarioId": "survival-sandbox/seed-gamma",
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "familyId": "survival_sandbox",
+      "seedId": "seed_gamma",
+      "playerFacingQuest": "quest/goal080/survival-sandbox/seed-gamma/bridge",
+      "playerFacingDialogue": "dialogue/goal080/survival-sandbox/seed-gamma/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-011",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/survival_sandbox/seed_gamma",
+          "projectedItem": "item/goal080/target-011",
+          "projectedInteraction": "interaction/goal080/target-011"
+        },
+        {
+          "targetId": "target-012",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/survival_sandbox/seed_gamma",
+          "projectedItem": "item/goal080/target-012",
+          "projectedInteraction": "interaction/goal080/target-012"
+        }
+      ]
+    },
+    {
+      "scenarioId": "first-person-grid-dungeon/seed-alpha",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_alpha",
+      "playerFacingQuest": "quest/goal080/first-person-grid-dungeon/seed-alpha/bridge",
+      "playerFacingDialogue": "dialogue/goal080/first-person-grid-dungeon/seed-alpha/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-013",
+          "logicalPackagePath": "gamepackage/generated-content/gameplay/consequence-summary/first_person_grid_dungeon/seed_alpha",
+          "projectedItem": "item/goal080/target-013",
+          "projectedInteraction": "interaction/goal080/target-013"
+        },
+        {
+          "targetId": "target-014",
+          "logicalPackagePath": "gamepackage/generated-content/world/faction-pressure/first_person_grid_dungeon/seed_alpha",
+          "projectedItem": "item/goal080/target-014",
+          "projectedInteraction": "interaction/goal080/target-014"
+        }
+      ]
+    },
+    {
+      "scenarioId": "first-person-grid-dungeon/seed-beta",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_beta",
+      "playerFacingQuest": "quest/goal080/first-person-grid-dungeon/seed-beta/bridge",
+      "playerFacingDialogue": "dialogue/goal080/first-person-grid-dungeon/seed-beta/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-015",
+          "logicalPackagePath": "gamepackage/generated-content/narrative/event-intent/first_person_grid_dungeon/seed_beta",
+          "projectedItem": "item/goal080/target-015",
+          "projectedInteraction": "interaction/goal080/target-015"
+        },
+        {
+          "targetId": "target-016",
+          "logicalPackagePath": "gamepackage/generated-content/settlement/production-focus/first_person_grid_dungeon/seed_beta",
+          "projectedItem": "item/goal080/target-016",
+          "projectedInteraction": "interaction/goal080/target-016"
+        }
+      ]
+    },
+    {
+      "scenarioId": "first-person-grid-dungeon/seed-gamma",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "familyId": "first_person_grid_dungeon",
+      "seedId": "seed_gamma",
+      "playerFacingQuest": "quest/goal080/first-person-grid-dungeon/seed-gamma/bridge",
+      "playerFacingDialogue": "dialogue/goal080/first-person-grid-dungeon/seed-gamma/briefing",
+      "projectedTargets": [
+        {
+          "targetId": "target-017",
+          "logicalPackagePath": "gamepackage/generated-content/combat/status-pressure/first_person_grid_dungeon/seed_gamma",
+          "projectedItem": "item/goal080/target-017",
+          "projectedInteraction": "interaction/goal080/target-017"
+        },
+        {
+          "targetId": "target-018",
+          "logicalPackagePath": "gamepackage/generated-content/world/crisis-pressure/first_person_grid_dungeon/seed_gamma",
+          "projectedItem": "item/goal080/target-018",
+          "projectedInteraction": "interaction/goal080/target-018"
+        }
+      ]
+    }
+  ]
+}
