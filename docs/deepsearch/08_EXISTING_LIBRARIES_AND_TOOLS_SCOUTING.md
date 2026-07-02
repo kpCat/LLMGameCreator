@@ -1,0 +1,141 @@
+# Existing Libraries and Tools Scouting для procedural visual stack в LLMGameCreator
+
+## Архитектурная рамка отбора
+
+У самого проекта уже задана достаточно жёсткая архитектурная рамка: `GamePackage` объявлен источником истины, runtime/player должен только потреблять скомпилированные и провалидированные данные и не должен вызывать live LLM, RAG, media providers, asset generators и прочие сетевые генераторы; визуальный слой в ваших proposal-документах также ориентирован на **deterministic renderer**, **atlas writer**, **metadata writer**, **validators**, **preview output**, без внешних провайдеров, без Unity-зависимости в ядре генератора и без мутации публичной схемы `GamePackage`. Это означает, что лучшие кандидаты для visual stack — не “магические генераторы ассетов”, а библиотеки и инструменты, которые помогают собрать **компилируемый, data-driven, editor-time pipeline** из part packs, правил, масок, палитр, сокетов, сидов и reviewed asset refs. citeturn29view0turn31view0turn31view4
+
+Из этого следуют практические критерии оценки: permissive license предпочтительнее; любая тяжёлая библиотека должна входить только через optional adapter boundary; внешние редакторы и Unity-пакеты допустимы как **editor-time tooling**, но не как источник runtime-зависимости; инструменты, ориентированные на one-off финальные изображения, хуже подходят, чем системы переписывания, геометрии, масок, атласов и tile/recipe synthesis. Отдельно важно не путать лицензию кода и лицензию на sample/input assets: в нескольких кандидатах эти режимы уже расходятся. citeturn31view3turn15view0turn18search1turn19search3
+
+## Кандидаты по constraint generation и map authoring
+
+| Кандидат | Что решает | Стек, лицензия, зрелость | Риск зависимости | Вердикт | Граница интеграции | Идея прототипа | Источник |
+|---|---|---|---|---|---|---|---|
+| **DeBroglie** | WFC для tilemaps/bitmap generation, плюс non-local constraints | C#; MIT; NuGet package таргетит .NET Standard 2.0; latest NuGet 2.1.0, обновлён 2025-12-21 | Низкий–средний: библиотека хороша, но не должна попадать в доменное ядро | **Можно внедрять сейчас** | `Generation.WfcAdapter` в editor/generation pipeline | Генерация локальных adjacency-патчей для дорог, берегов, cliffs и auto-repair после rule-assembly | citeturn37search2turn37search6turn37search10turn37search5 |
+| **mxgmn/WaveFunctionCollapse** | Эталонная reference-реализация WFC; useful as algorithm reference | C#; MIT; очень известный reference repo, но скорее research/reference baseline | Средний: reference code полезен концептуально, но как production dependency уступает DeBroglie | **Нужно прототипировать**, не брать как прямую зависимость | Research/reference branch only | Сверить output semantics с вашими `VisualRecipe`/tile adjacency contracts, но собственную интеграцию строить на DeBroglie или in-house kernel | citeturn0search7turn1view3turn32search7 |
+| **mxgmn/ConvChain** | Пример Markov-chain image synthesis; полезен как pre-sampler перед WFC | C#; public-domain notice в исходнике; старый repo | Средний–высокий: мало production ergonomics, bitmap-first, слабее controllability | **Нужно прототипировать** как research-only component | External experiment only | Проверить связку “ConvChain pre-sample → WFC defect correction” для texture variance и rough masks | citeturn32search0turn32search2turn32search5 |
+| **mxgmn/MarkovJunior** | Rewrite grammar + constraint propagation; ближе к world grammar, settlement grammar, facade grammar | C#; MIT; 37 commits; latest release 2022-06-22 | Средний: мощная модель, но DSL/authoring overhead и нет ощущения готовой библиотечной ergonomics | **Нужно прототипировать** | `Generation.RewriteGrammarAdapter` или отдельный compiler tool | Грамматика для кварталов, фасадных силуэтов, руин, road-block grammar, layout rewrite до финального recipe layer | citeturn2view1turn2view3turn32search3 |
+| **Tiled** | Внешний map editor; orthogonal/isometric/hex; TMX/JSON; arbitrary properties | External editor; repo содержит GPL-2.0 и Apache-2.0 notices; активный, latest release 2025-01-28 | Средний юридический риск, если тащить код внутрь; низкий риск, если использовать как внешний authoring tool | **Можно внедрять сейчас** как внешний редактор | `MapImport.TiledAdapter` только на импорт JSON/TMX → Editor IR → GamePackage | Сборка authoring round-trip: Tiled JSON → neutral intermediate map spec → compiler → package metadata | citeturn6view0turn7search0turn7search2turn34search0turn34search6 |
+| **SuperTiled2Unity** | Editor-time импорт Tiled файлов в Unity через Scripted Importers | C#; MIT; Unity package; активность есть, но есть открытые Unity 6 issues в 2026 | Средний: удобен, но importer не должен становиться source-of-truth | **Нужно прототипировать** | Unity-only optional importer adapter | Проверить editor-only bridge для preview scenes, не для production runtime contract | citeturn6view2turn34search11turn34search17turn34search14 |
+| **LDtk** | JSON-first 2D level editor с schema-driven data | Haxe/Electron external editor; MIT; 7,367 commits; latest stable 1.5.3 | Низкий как внешний tool, но 2D-centric worldview | **Можно внедрять сейчас** как внешний authoring tool | `MapImport.LdtkAdapter` | Импорт `IntGrid`/entity layers в ваш editor IR для 2D/top-down/isometric промежуточного направления | citeturn6view1turn7search1turn7search13turn34search7 |
+| **LDtkToUnity** | Unity importer для LDtk; ScriptedImporters, entity prefab replacement, SpriteAtlas packaging | C#; MIT; latest release 6.12.3 on 2026-04-10 | Средний: хорош для preview/presentation, но не для core truth | **Можно внедрять сейчас** как optional Unity-side adapter | Unity editor presentation adapter only | Быстрый preview of LDtk-authored mock maps inside Unity, затем export back into package-facing contracts | citeturn6view3 |
+
+Итог по этой группе такой: если нужен production-capable constraint/tile generator под ваши ограничения, **DeBroglie выглядит лучшим прямым кандидатом**, а не оригинальный WFC repo; если нужен grammar-first слой для фасадов, кварталов, паттернов застройки и rule-based pseudo-3D раскладки, **MarkovJunior концептуально ближе к вашим `VisualRuleStack` и `VisualRecipe` proposal-документам**, но его лучше сначала держать как prototyping/compiler-track, а не как обязательную библиотеку core. Для map authoring наиболее безопасная схема — использовать Tiled/LDtk как **внешние редакторы**, импортируя их JSON/TMX/LDtk JSON в ваш собственный intermediate spec, не отдавая им роль source-of-truth в runtime. citeturn31view4turn37search2turn2view1turn7search0turn7search1
+
+## Кандидаты по компоновке изображений, атласам, геометрии и solving
+
+| Кандидат | Что решает | Стек, лицензия, зрелость | Риск зависимости | Вердикт | Граница интеграции | Идея прототипа | Источник |
+|---|---|---|---|---|---|---|---|
+| **SkiaSharp** | 2D rendering, text, vector drawing, image processing; удобен для mask/layer/atlas compiler | C#/.NET; MIT; поддерживает .NET Standard 2.0, .NET 6+, Windows.Forms; latest 4.148.0 on 2026-06-23 | Средний: native assets/package complexity, поэтому не в core domain | **Можно внедрять сейчас** | `AssetPipeline.Renderer.SkiaAdapter` | Deterministic renderer для part packs: палитры, векторные cracks, surface layers, decals, preview sheets | citeturn5view0turn4search9turn4search13 |
+| **ImageSharp** | Полностью managed image processing | C#/.NET; built against .NET 8; mature; но split license / commercial license path | Лицензионный риск выше вашей предпочтительной зоны | **Не подходит** как default dependency | Только after legal/business review, и то лучше вне core | Если и трогать — только isolated benchmark against SkiaSharp | citeturn5view1turn4search1turn4search4turn4search11turn4search8 |
+| **RectpackSharp** | Маленькая .NET Standard библиотека для rectangle packing | C#; MIT; small library; latest release 1.2.0 on 2024-01-09 | Низкий: компактна, можно даже вендорить исходники | **Можно внедрять сейчас** | `AssetPipeline.AtlasPacking.RectpackAdapter` | Atlas writer для generated bitmaps, control masks, facade cards, billboard sheets | citeturn9view0 |
+| **Free Texture Packer** | External atlas packing tool с rotation, trimming, multipacking, templates | JavaScript/Electron; MIT; maintainer explicitly says only critical bugs will be fixed; latest release 2021-04-29 | Средний: external tool usable, but stale | **Нужно прототипировать** как external helper | CLI/template-based external pack step only | Проверить export templates под Unity/import metadata, но не вводить в main build chain как hard dependency | citeturn10view0 |
+| **FastNoise Lite** | Noise fields: terrain masks, coastlines, rivers, biome blends, wear/damage fields | Portable multi-language lib incl. C#; MIT; latest v1.1.1 on 2024-03-05 | Низкий: можно вендорить C# file/source | **Можно внедрять сейчас** | `Generation.NoiseAdapter` | Height/wetness/erosion/noise masks для surface recipes и road/cliff variation | citeturn22search1turn22search16turn26search0turn26search1 |
+| **Clipper2** | Polygon clipping, offsetting, booleans, triangulation; полезно для coastlines, footprints, roads, walls, mask unions | C#/C++/Delphi; BSL-1.0; активный repo; 818 commits; C# uses Standard Library 2.0 | Низкий–средний; лучший geometry utility из найденных | **Можно внедрять сейчас** | `Generation.GeometryAdapter` | Parcel/building footprints, wall outlines, road widening, water-body polygon booleans | citeturn33search1turn23view1turn33search2 |
+| **QuikGraph** | Directed/undirected graphs, A*, shortest path, MST, flow | .NET; MS-PL; works under Unity 3D; mature but license is not in your preferred MIT/Apache/BSD set | Средний лицензионный/maintenance risk | **Нужно прототипировать** | `Generation.GraphAdapter` | Road network, caravan routes, settlement graph elaboration; сравнить с in-house minimal graph kernel | citeturn23view2turn22search4 |
+| **Google OR-Tools** | CP-SAT, linear/constraint optimization, flow/graph algorithms | C++ core + C# bindings; Apache-2.0; NuGet compatible with net8.0; release v9.15 on 2026-01-12 | Высокий operational risk: heavyweight native stack | **Нужно прототипировать** | `Generation.ConstraintSolverAdapter` only | Offline solver for settlement zoning, road budgets, building placement constraints, caravan scheduling | citeturn23view3turn22search5turn22search15 |
+| **Triangle.NET** | Triangulation utility | C#; формально в repo гуляет MIT-сигнал, но maintainers сами пишут о license confusion from original Triangle | Высокий юридический риск при коммерческом использовании | **Не подходит** | Не интегрировать | Если нужна triangulation — смотреть на Clipper2 либо другой однозначно licensed option | citeturn22search8turn22search13turn22search18 |
+
+Для вашего конкретного visual compiler здесь выделяется очень чистый стек: **SkiaSharp + RectpackSharp + FastNoise Lite + Clipper2**. Он практически идеально совпадает с вашим proposal о `deterministic renderer`, `atlas writer`, `palette system`, `layer composition`, `metadata writer` и `validators`, при этом не требует ни live providers, ни runtime-LLM. Этот стек лучше держать не в доменных проектах, а в специальном generation/asset-pipeline слое, чтобы сохранить ваши уже прописанные boundaries. citeturn31view0turn29view0turn5view0turn9view0turn26search0turn33search1
+
+Самая важная отрицательная находка этой группы — **ImageSharp**. Технически библиотека зрелая и .NET 8-friendly, но лицензионно она хуже совпадает с вашим критерием “MIT/Apache/BSD предпочтительнее”, потому что использует Six Labors Split License и для части closed-source/commercial use cases предполагает коммерческую лицензию. Для проекта, который явно старается избегать unnecessary legal friction в core toolchain, это плохой default. citeturn5view1turn4search1turn4search4turn4search11
+
+## Unity helpers, procedural world tooling и avatar/paperdoll scouting
+
+| Кандидат | Что решает | Стек, лицензия, зрелость | Риск зависимости | Вердикт | Граница интеграции | Идея прототипа | Источник |
+|---|---|---|---|---|---|---|---|
+| **Unity built-ins: BillboardAsset + LODGroup + SpriteAtlas** | Pseudo-3D/presentation layer: billboards, LOD, sprite atlas packaging | Built into Unity ecosystem; не внешняя OSS-core dependency | Низкий, если держать строго в Unity-side presentation layer | **Можно внедрять сейчас** | `UnityPresentationCompiler` only | Генерация facade/object/actor billboards и упаковка generated sprites в SpriteAtlas, не затрагивая source-of-truth contracts | citeturn19search1turn19search10turn8search2turn8search6 |
+| **Unity Sprite Shape** | Spline-based 2D world building; береговые линии, дороги, органические outlines | Unity package; production-oriented editor helper | Низкий–средний; полезно только на presentation/editor side | **Нужно прототипировать** | Optional Unity editor adapter | Прототип береговых линий/дорог из generated splines и compare с pure atlas workflow | citeturn19search4turn19search20 |
+| **Unity Terrain Tools** | Terrain sculpting/brush workflow | Unity package; latest 5.3.2 on 2026-02-25; Unity Companion License | Средний: лицензия и Unity-dependence нормальны только для Unity-dependent area | **Отложить** для main target, **можно** для long-term terrain R&D | Unity-only editor tooling | Проверить только для дальнего 3D-вектора, не для текущего compact part-pack compiler | citeturn20view0turn21view0turn19search0 |
+| **ProceduralToolkit** | Unity procedural generation library: geometry/noise/helpers/samples | C#; MIT; requires Unity 2022.3 LTS+; активный repo, но latest release dated 2020-03-02 | Средний: хороший toolbox, но Unity-specific и не очень свежий по релизам | **Нужно прототипировать** | Unity-side optional package only | Использовать только для preview/prototyping hills, roads, simple mesh proxies, но не как truth-model dependency | citeturn38view2turn38view0 |
+| **CityGenerator-Unity** | Demo/example procedural city in Unity | C#; MIT; sample project, 39 commits | Средний–высокий: небольшой demo grade | **Research-only** | No integration; algorithm study only | Посмотреть seed/exposed params и идеи parcel/road layout, не брать в продукт как dependency | citeturn12view2 |
+| **Cigen** | Procedural city generator focused on road/path generation | Unity sample repo; README описывает road/pathfinder ideas; явной лицензии не видно | Высокий юридический риск из-за unclear/no visible license | **Не подходит** как dependency | Исследование алгоритма по README максимум | Изучить anisotropic least-cost path ideas и переимплементировать самостоятельно | citeturn12view1turn13view0 |
+| **Universal LPC Spritesheet Character Generator** | Paperdoll/avatar composition from layered sprite parts | JS/TS; GPL-3.0; distributed art requires attribution, credits, and some asset-license nuances | Высокий лиценз./asset-provenance risk | **Research-only** | Не интегрировать в codebase; не ship как base asset source | Использовать только как reference for slot taxonomy, recolor/paperdoll UX и metadata design | citeturn15view0turn14search17turn14search13 |
+| **MakeHuman / MPFB ecosystem** | Offline humanoid character authoring; outputs core assets under CC0, tools themselves GPL/AGPL lineage | Blender-first external tooling; mixed licensing history but current output/core assets are CC0 for closed-source use in core cases | Средний: не прямой code dependency, но stack тяжелее и ближе к authored 3D pipeline | **Отложить** | External authoring research only | Держать только как long-term offline authoring/reference path для humanoid basemeshes, не как foundation для current compact part-pack route | citeturn17view1turn18search0turn18search1turn18search3turn18search19 |
+
+Эта группа хорошо подтверждает ваш стратегический курс в proposal-документах: для текущего этапа проекта намного полезнее **billboard/atlas/pseudo-3D presentation contracts**, чем тяжёлая full-3D authoring-цепочка. В ваших документах pseudo-3D назван главным target, а ожидаемый выход системы — floor/wall/ceiling sets, facade cards, object/actor billboards, atlas metadata и placement hints. Поэтому наиболее практичный Unity-side слой — это не “внешний procedural city framework”, а небольшой presentation compiler поверх **BillboardAsset + LODGroup + SpriteAtlas**, подключённый к уже сгенерированным atlas/metadata outputs. citeturn31view3turn19search1turn19search10turn8search2
+
+По city/building generation серьёзного mature open-source кандидата, который чисто ложится в вашу manifest/recipe/source-of-truth архитектуру, я не нашёл. **ProceduralToolkit** годится как Unity-side utility toolbox и источник идей; **CityGenerator-Unity** и **Cigen** — скорее учебные репозитории по алгоритмам layouts/pathfinding, чем производственные зависимости. Это как раз тот случай, где лучше брать идеи и re-implement локально под ваши recipe contracts, чем тянуть чужой каркас. citeturn38view2turn12view2turn12view1
+
+## Лучшие immediate candidates и проблемные зоны
+
+Если раскладывать по вашим категориям “можно внедрять сейчас / нужно прототипировать / отложить / не подходит”, то лучший immediate shortlist выглядит так:
+
+**Можно внедрять сейчас:** **DeBroglie**, **SkiaSharp**, **RectpackSharp**, **FastNoise Lite**, **Clipper2**, а из tool-side — **Tiled** и **LDtk** как внешние редакторы, плюс **Unity BillboardAsset / LODGroup / SpriteAtlas** на стороне presentation/export в Unity. Этот набор закрывает локальные constraints, deterministic image composition, atlas packing, шумовые поля, polygon operations, editor-time map authoring и pseudo-3D packaging — то есть почти весь костяк procedural visual stack, который вы описали в proposal-документах. citeturn37search2turn5view0turn9view0turn26search0turn33search1turn7search0turn7search1turn19search1turn8search2turn31view0turn31view3
+
+**Нужно прототипировать:** **MarkovJunior**, **mxgmn/WaveFunctionCollapse** как reference baseline, **ConvChain**, **SuperTiled2Unity**, **LDtkToUnity**, **ProceduralToolkit**, **QuikGraph**, **OR-Tools**, **Unity Sprite Shape**. Причина везде одна и та же: инструмент потенциально полезен, но либо задаёт слишком сильную модель поверх вашей архитектуры, либо лучше подходит как isolated adapter/prototype, чем как обязанность core pipeline. У MarkovJunior и OR-Tools главный вопрос — сколько реальной выгоды они дадут поверх собственных data contracts; у Unity importers — не подменят ли они ваш GamePackage truth-model; у QuikGraph — нужен ли вам полноценный graph framework вместо маленького in-house слоя. citeturn2view1turn32search7turn32search0turn6view2turn6view3turn38view2turn23view2turn23view3turn19search4turn29view0
+
+**Отложить:** **Unity Terrain Tools** и **MakeHuman/MPFB**. Оба инструмента сами по себе не бесполезны, но они ведут проект в сторону более тяжёлого Unity/terrain или 3D authoring stack, тогда как ваш текущий roadmap явно предпочитает compact part packs, pseudo-3D presentation packages и deterministic composition. Для future branch это нормально, для текущего visual compiler — преждевременно. citeturn21view0turn31view3turn18search1turn18search3
+
+**Не подходит:** **ImageSharp** как default dependency из-за лицензии, **Triangle.NET** из-за licence confusion, **Cigen** как dependency из-за отсутствия явной лицензии, **Universal LPC Generator** как интегрируемая база ассетов/кода из-за GPL и сложной provenance/attribution модели. Тут риски выше возможной выгоды. citeturn4search1turn4search11turn22search8turn22search13turn12view1turn13view0turn15view0turn14search17
+
+Самая важная практическая мысль: вашему проекту сейчас не нужен один универсальный “procedural world engine”. Ему нужен **тонкий набор компилирующих кирпичей**, каждый из которых решает узкую задачу и сидит за adapter boundary. Это хорошо совпадает с уже существующей разбивкой репозитория на `Generation`, `AssetPipeline`, `Application`, `Infrastructure` и Unity/player consumer. citeturn29view0
+
+## Лицензионные замечания и рекомендуемые optional adapter boundaries
+
+Лицензионно safest path состоит в том, чтобы разделить внешний toolchain, permissive libraries и questionable/research assets. Внешние редакторы вроде **Tiled** и **LDtk** можно использовать как authoring tools без встраивания их кода в ваше приложение; permissive code-libraries вроде **DeBroglie**, **SkiaSharp**, **RectpackSharp**, **FastNoise Lite**, **Clipper2** можно подключать как isolated adapters; mixed-license и share-alike экосистемы вроде **ImageSharp**, **LPC generator**, **MakeHuman ecosystem** нужно держать либо вне main default path, либо под отдельной policy/review gate. citeturn6view0turn6view1turn37search2turn5view0turn9view0turn26search0turn33search1turn4search1turn15view0turn18search19
+
+Практически я бы рекомендовал следующие boundary-слои.
+
+**`IConstraintTileGeneratorAdapter`**  
+Вход: tileset/catalog adjacency rules, seed, optional masks, forbidden zones.  
+Выход: compiled tile assignment / repair patches / contradiction reports.  
+Первая реализация: **DeBroglie**. WFC reference repo и ConvChain оставить как research baselines. citeturn37search6turn32search5turn32search0
+
+**`IRewriteGrammarAdapter`**  
+Вход: semantic features, district/object profiles, seed, rewrite grammar pack.  
+Выход: settlement/facade/block layout IR до texture/atlas stage.  
+Первая реализация: prototype поверх **MarkovJunior**, но offline/editor-time only. Это хорошо совпадает с вашими `VisualRuleStack → VisualRecipe → Procedural composition` документами. citeturn2view1turn31view4
+
+**`IVisualCompositionAdapter`**  
+Вход: `VisualPartPack`, palettes, masks, layer rules, surface recipes.  
+Выход: bitmaps, masks, decals, atlas sources, preview sheets.  
+Первая реализация: **SkiaSharp**. По вашей документации это почти прямое попадание в нужный “compiler”, который делает deterministic renderer, palette system, layer composition и atlas writer. citeturn31view0turn5view0
+
+**`IAtlasPackingAdapter`**  
+Вход: rendered sprites/cards/masks.  
+Выход: atlas rects, atlas textures, metadata.  
+Первая реализация: **RectpackSharp**; опционально внешний **Free Texture Packer** только как comparative benchmark או template generator. На Unity-side упаковку можно завершать через built-in **SpriteAtlas**, но после того как ваш собственный metadata contract уже сформирован. citeturn9view0turn10view0turn8search2
+
+**`IGeometryBooleanAdapter`**  
+Вход: polygons/splines/roads/footprints/coastlines.  
+Выход: clipped/offset/unioned paths and polygons.  
+Первая реализация: **Clipper2**. Это даст вам устойчивую основу для побережий, рек, дорожных обводов, parcel boundaries и building footprints. citeturn33search1turn33search15
+
+**`INoiseFieldAdapter`**  
+Вход: seed, domain config, biome/weather/material profile.  
+Выход: scalar fields и masks.  
+Первая реализация: **FastNoise Lite**, при желании даже как vendored single-source-file dependency. citeturn26search0turn22search16
+
+**`IMapEditorImportAdapter`**  
+Вход: TMX/JSON или LDtk JSON.  
+Выход: neutral `EditorMapImportModel`, затем package-facing transform.  
+Важно: импортёры **SuperTiled2Unity** и **LDtkToUnity** можно держать только как Unity preview adapters; core import должен идти через ваш собственный IR, чтобы source-of-truth не утекал в Unity importer conventions. citeturn7search0turn7search1turn6view2turn6view3turn29view0
+
+**`IUnityPresentationCompiler`**  
+Вход: atlas metadata, billboard descriptors, pseudo-3D placement hints.  
+Выход: Unity-side `BillboardAsset`, `LODGroup`, `SpriteAtlas`, preview prefabs/scenes.  
+Это boundary оптимален именно потому, что ваши docs отделяют generator from Unity/player, а pseudo-3D package уже описан как отдельный выходной слой. citeturn19search1turn19search10turn8search2turn31view3
+
+Отдельная оговорка по sample/input assets: **Universal LPC Generator** прямо требует credits и работает с mixed art licensing, а **MakeHuman/MPFB** различает код инструмента и лицензирование core/output assets; следовательно, любые reference assets, sample atlases, avatar sheets и demo materials надо проводить через отдельный provenance ledger, а не считать автоматически “свободными как код репозитория”. Это полностью согласуется и с вашим adult/rating-gated policy stance, и с общим требованием reviewed asset refs. citeturn15view0turn14search17turn18search1turn18search3turn31view2
+
+## Следующие прототипы для docs/deepsearch и implementation roadmap
+
+Первый прототип, который стоит делать сразу, — **deterministic visual compiler MVP на SkiaSharp + RectpackSharp + FastNoise Lite + Clipper2**. Минимальный scope: три темы из вашего proposal (`fantasy_ruins`, `tech_hull`, `natural_forest`), layer composition, palette slots, output atlas + metadata + preview, без Unity-зависимости и без внешних providers. Это прямо повторяет success-criteria, уже записанные в вашем документе про procedural part packs. citeturn31view0turn5view0turn9view0turn26search0turn33search1
+
+Второй прототип — **DeBroglie-based local repair/generation stage**. Я бы не поручал WFC генерацию всей карты мира; вместо этого его разумнее использовать для “последнего километра” локальной согласованности: береговые переходы, границы cliff/water, дорожные стыки, wall-floor seams, patching дыр после rule-driven assembly. Это лучше соответствует сильным сторонам WFC как local-constraint метода и не конфликтует с вашим notion of `recipeId + semantic features + seed` как source-of-truth для объекта. citeturn37search6turn31view3
+
+Третий прототип — **MarkovJunior spike для settlement/block/facade grammar**. Не надо сразу интегрировать его глубоко. Достаточно выбрать один ограниченный use case: например, генерацию уличных блоков деревни, ruin cluster layout или фасадных silhouette grammars. Если spike даст valuable outputs в виде компактного grammar pack, дальше уже можно решить, нужен ли adapter к MarkovJunior вообще, либо удобнее переписать найденные grammar patterns в собственный JSON DSL. citeturn2view1turn31view4
+
+Четвёртый прототип — **двойной import benchmark: Tiled и LDtk → neutral Editor IR → package compiler**. Задача не в том, чтобы выбрать “единственный редактор”, а в том, чтобы понять, какой набор authoring affordances лучше ложится на ваш data-driven pipeline. У Tiled сильнее general-purpose tile/object/property model и зрелые TMX/JSON форматы; у LDtk сильнее schema/JSON orientation и удобство для 2D-level authoring. Скорее всего, проекту выгодно поддержать оба входа, но за одним и тем же internal IR. citeturn7search0turn7search2turn7search1turn7search13
+
+Пятый прототип — **Unity presentation proof**: generated atlases и metadata связываются в `BillboardAsset`/`LODGroup`/`SpriteAtlas`, а затем выводятся в pseudo-3D preview scene. Это даст вам быстрый answer на вопрос, насколько хорошо ваш part-pack compiler уже сегодня покрывает объектные биллборды, facade cards и actor presentation без полноценного 3D authoring stack. citeturn19search1turn19search10turn8search2turn31view3
+
+Если свести всё исследование к одному практическому решению, то я бы рекомендовал зафиксировать такой стартовый стек:
+
+**Основной immediate stack:** DeBroglie, SkiaSharp, RectpackSharp, FastNoise Lite, Clipper2, Tiled/LDtk как external authoring, Unity built-ins для presentation packaging. citeturn37search2turn5view0turn9view0turn26search0turn33search1turn34search6turn34search7turn19search1turn8search2
+
+**Prototype stack:** MarkovJunior, LDtkToUnity, SuperTiled2Unity, ProceduralToolkit, OR-Tools, QuikGraph. citeturn2view1turn6view3turn6view2turn38view2turn23view3turn23view2
+
+**Deferred / reject:** ImageSharp, Triangle.NET, Cigen as dependency, Universal LPC generator as foundation, MakeHuman/MPFB for current phase. citeturn4search1turn22search8turn12view1turn15view0turn17view1turn18search3
+
+Это лучше всего совпадает и с вашим текущим repo direction, и с требованием не тащить тяжёлые внешние зависимости в core, и с долгосрочной целью построить не prompt-driven генератор картинок, а **data-driven visual compiler** для больших вариативных игр. citeturn29view0turn31view0turn31view4
