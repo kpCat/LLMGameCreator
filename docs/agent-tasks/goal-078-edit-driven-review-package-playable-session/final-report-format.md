@@ -1,0 +1,50 @@
+# Final report format
+
+Return this shape:
+
+- Final status: GREEN / BLOCKED / FAILED.
+- Latest commit before work.
+- Latest commit after work.
+- Pushed to origin/main: yes/no.
+- Final git status.
+- Preflight results:
+  - branch
+  - Goal 077 artifacts present / report GREEN / accepted=false
+  - Goal 077 handoff recorded before Goal 078
+  - c8343e8 adaptive docs debt handling
+  - AlphaRuntimeBootstrap read-only baseline
+- Changed files summary.
+- Implemented behavior:
+  - Application seam
+  - package load and validation
+  - deterministic action replay / state hash chain
+  - player-readable session command/index artifacts
+  - WinForms tab binding
+- Proof:
+  - source Goal 077 report hash
+  - package manifest/ledger/index hashes
+  - action count / row count / target count
+  - before/after/session final hash
+  - replay proof result
+  - tamper/missing/illegal-action negative proof result
+  - final report hash
+- Quality gate:
+  - max C# line length
+  - minifiedSourceFileCount
+  - filesOver1000LinesCount
+  - AlphaRuntimeBootstrap no-change status
+  - forbidden areas touched yes/no
+  - absolute paths/timestamps/heavy logs/scratch files yes/no
+  - mojibake yes/no
+- Validation:
+  - restore
+  - build
+  - Goal 077 regression filter
+  - Goal 078 focused filter
+  - Goal 078 product smoke
+  - CurrentState
+  - check-all
+  - artifact scope
+- Goal 078 artifacts list.
+- Remaining P2/P3 debt.
+- Git commands used.

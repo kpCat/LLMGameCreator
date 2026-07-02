@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "edit_driven_review_package_playable_session_player_command_index_v1",
+  "passed": true,
+  "rowCommandGroupCount": 9,
+  "commandCount": 54,
+  "commandGroups": [
+    {
+      "scenarioId": "first_person_grid_dungeon/seed_alpha",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-alpha",
+      "profileId": "first_person_grid_dungeon/seed_alpha",
+      "commandIds": [
+        "enter_row:first_person_grid_dungeon/seed_alpha",
+        "inspect_target:first_person_grid_dungeon/seed_alpha:target-013",
+        "apply_target_outcome:first_person_grid_dungeon/seed_alpha:target-013",
+        "inspect_target:first_person_grid_dungeon/seed_alpha:target-014",
+        "apply_target_outcome:first_person_grid_dungeon/seed_alpha:target-014",
+        "complete_row:first_person_grid_dungeon/seed_alpha"
+      ]
+    },
+    {
+      "scenarioId": "first_person_grid_dungeon/seed_beta",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-beta",
+      "profileId": "first_person_grid_dungeon/seed_beta",
+      "commandIds": [
+        "enter_row:first_person_grid_dungeon/seed_beta",
+        "inspect_target:first_person_grid_dungeon/seed_beta:target-015",
+        "apply_target_outcome:first_person_grid_dungeon/seed_beta:target-015",
+        "inspect_target:first_person_grid_dungeon/seed_beta:target-016",
+        "apply_target_outcome:first_person_grid_dungeon/seed_beta:target-016",
+        "complete_row:first_person_grid_dungeon/seed_beta"
+      ]
+    },
+    {
+      "scenarioId": "first_person_grid_dungeon/seed_gamma",
+      "rowId": "matrix-row-first-person-grid-dungeon-seed-gamma",
+      "profileId": "first_person_grid_dungeon/seed_gamma",
+      "commandIds": [
+        "enter_row:first_person_grid_dungeon/seed_gamma",
+        "inspect_target:first_person_grid_dungeon/seed_gamma:target-017",
+        "apply_target_outcome:first_person_grid_dungeon/seed_gamma:target-017",
+        "inspect_target:first_person_grid_dungeon/seed_gamma:target-018",
+        "apply_target_outcome:first_person_grid_dungeon/seed_gamma:target-018",
+        "complete_row:first_person_grid_dungeon/seed_gamma"
+      ]
+    },
+    {
+      "scenarioId": "map_panel_rpg/seed_alpha",
+      "rowId": "matrix-row-map-panel-rpg-seed-alpha",
+      "profileId": "map_panel_rpg/seed_alpha",
+      "commandIds": [
+        "enter_row:map_panel_rpg/seed_alpha",
+        "inspect_target:map_panel_rpg/seed_alpha:target-001",
+        "apply_target_outcome:map_panel_rpg/seed_alpha:target-001",
+        "inspect_target:map_panel_rpg/seed_alpha:target-002",
+        "apply_target_outcome:map_panel_rpg/seed_alpha:target-002",
+        "complete_row:map_panel_rpg/seed_alpha"
+      ]
+    },
+    {
+      "scenarioId": "map_panel_rpg/seed_beta",
+      "rowId": "matrix-row-map-panel-rpg-seed-beta",
+      "profileId": "map_panel_rpg/seed_beta",
+      "commandIds": [
+        "enter_row:map_panel_rpg/seed_beta",
+        "inspect_target:map_panel_rpg/seed_beta:target-003",
+        "apply_target_outcome:map_panel_rpg/seed_beta:target-003",
+        "inspect_target:map_panel_rpg/seed_beta:target-004",
+        "apply_target_outcome:map_panel_rpg/seed_beta:target-004",
+        "complete_row:map_panel_rpg/seed_beta"
+      ]
+    },
+    {
+      "scenarioId": "map_panel_rpg/seed_gamma",
+      "rowId": "matrix-row-map-panel-rpg-seed-gamma",
+      "profileId": "map_panel_rpg/seed_gamma",
+      "commandIds": [
+        "enter_row:map_panel_rpg/seed_gamma",
+        "inspect_target:map_panel_rpg/seed_gamma:target-005",
+        "apply_target_outcome:map_panel_rpg/seed_gamma:target-005",
+        "inspect_target:map_panel_rpg/seed_gamma:target-006",
+        "apply_target_outcome:map_panel_rpg/seed_gamma:target-006",
+        "complete_row:map_panel_rpg/seed_gamma"
+      ]
+    },
+    {
+      "scenarioId": "survival_sandbox/seed_alpha",
+      "rowId": "matrix-row-survival-sandbox-seed-alpha",
+      "profileId": "survival_sandbox/seed_alpha",
+      "commandIds": [
+        "enter_row:survival_sandbox/seed_alpha",
+        "inspect_target:survival_sandbox/seed_alpha:target-007",
+        "apply_target_outcome:survival_sandbox/seed_alpha:target-007",
+        "inspect_target:survival_sandbox/seed_alpha:target-008",
+        "apply_target_outcome:survival_sandbox/seed_alpha:target-008",
+        "complete_row:survival_sandbox/seed_alpha"
+      ]
+    },
+    {
+      "scenarioId": "survival_sandbox/seed_beta",
+      "rowId": "matrix-row-survival-sandbox-seed-beta",
+      "profileId": "survival_sandbox/seed_beta",
+      "commandIds": [
+        "enter_row:survival_sandbox/seed_beta",
+        "inspect_target:survival_sandbox/seed_beta:target-009",
+        "apply_target_outcome:survival_sandbox/seed_beta:target-009",
+        "inspect_target:survival_sandbox/seed_beta:target-010",
+        "apply_target_outcome:survival_sandbox/seed_beta:target-010",
+        "complete_row:survival_sandbox/seed_beta"
+      ]
+    },
+    {
+      "scenarioId": "survival_sandbox/seed_gamma",
+      "rowId": "matrix-row-survival-sandbox-seed-gamma",
+      "profileId": "survival_sandbox/seed_gamma",
+      "commandIds": [
+        "enter_row:survival_sandbox/seed_gamma",
+        "inspect_target:survival_sandbox/seed_gamma:target-011",
+        "apply_target_outcome:survival_sandbox/seed_gamma:target-011",
+        "inspect_target:survival_sandbox/seed_gamma:target-012",
+        "apply_target_outcome:survival_sandbox/seed_gamma:target-012",
+        "complete_row:survival_sandbox/seed_gamma"
+      ]
+    }
+  ]
+}

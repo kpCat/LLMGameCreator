@@ -2,6 +2,7 @@ using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorks
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
 using LLMGameCreator.Application.Design.EditDrivenPlayablePreviewRefresh;
 using LLMGameCreator.Application.Design.EditDrivenPlayableReviewPackageMaterialization;
+using LLMGameCreator.Application.Design.EditDrivenReviewPackagePlayableSession;
 
 namespace LLMGameCreator.WinForms.Pages;
 
@@ -11,13 +12,15 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
     private readonly SchemaDrivenCampaignEditEvidenceService _editService;
     private readonly EditDrivenPlayablePreviewRefreshEvidenceService _playableRefreshService;
     private readonly EditDrivenPlayableReviewPackageMaterializationEvidenceService _reviewPackageService;
+    private readonly EditDrivenReviewPackagePlayableSessionEvidenceService _playSessionService;
 
     public CampaignAuthoringReviewWorkspacePageControl()
         : this(
             new SchemaDrivenCampaignWorkspaceEvidenceService(),
             new SchemaDrivenCampaignEditEvidenceService(),
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
-            new EditDrivenPlayableReviewPackageMaterializationEvidenceService())
+            new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
+            new EditDrivenReviewPackagePlayableSessionEvidenceService())
     {
     }
 
@@ -26,7 +29,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             service,
             new SchemaDrivenCampaignEditEvidenceService(),
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
-            new EditDrivenPlayableReviewPackageMaterializationEvidenceService())
+            new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
+            new EditDrivenReviewPackagePlayableSessionEvidenceService())
     {
     }
 
@@ -37,7 +41,8 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             service,
             editService,
             new EditDrivenPlayablePreviewRefreshEvidenceService(),
-            new EditDrivenPlayableReviewPackageMaterializationEvidenceService())
+            new EditDrivenPlayableReviewPackageMaterializationEvidenceService(),
+            new EditDrivenReviewPackagePlayableSessionEvidenceService())
     {
     }
 
@@ -45,12 +50,14 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         SchemaDrivenCampaignWorkspaceEvidenceService service,
         SchemaDrivenCampaignEditEvidenceService editService,
         EditDrivenPlayablePreviewRefreshEvidenceService playableRefreshService,
-        EditDrivenPlayableReviewPackageMaterializationEvidenceService reviewPackageService)
+        EditDrivenPlayableReviewPackageMaterializationEvidenceService reviewPackageService,
+        EditDrivenReviewPackagePlayableSessionEvidenceService playSessionService)
     {
         _service = service;
         _editService = editService;
         _playableRefreshService = playableRefreshService;
         _reviewPackageService = reviewPackageService;
+        _playSessionService = playSessionService;
         InitializeComponent();
         _rowSelectorControl.SelectedRowIdChanged += RowSelectorControlSelectedRowIdChanged;
     }
@@ -113,17 +120,28 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
             return;
         }
 
-        Bind(workspaceResult, editResult, refreshResult, reviewPackageResult);
+        EditDrivenReviewPackagePlayableSessionBuildResult playSessionResult;
+        try
+        {
+            playSessionResult = _playSessionService.Build(root);
+        }
+        catch (Exception ex)
+        {
+            _statusLabel.Text = "Review package play session load failed: " + ex.Message;
+            return;
+        }
+
+        Bind(workspaceResult, editResult, refreshResult, reviewPackageResult, playSessionResult);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result)
     {
-        Bind(result, null, null, null);
+        Bind(result, null, null, null, null);
     }
 
     public void Bind(CampaignWorkspaceBuildResult result, SchemaDrivenCampaignEditBuildResult? editResult)
     {
-        Bind(result, editResult, null, null);
+        Bind(result, editResult, null, null, null);
     }
 
     public void Bind(
@@ -131,7 +149,7 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         SchemaDrivenCampaignEditBuildResult? editResult,
         EditDrivenPlayablePreviewRefreshBuildResult? refreshResult)
     {
-        Bind(result, editResult, refreshResult, null);
+        Bind(result, editResult, refreshResult, null, null);
     }
 
     public void Bind(
@@ -139,6 +157,16 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         SchemaDrivenCampaignEditBuildResult? editResult,
         EditDrivenPlayablePreviewRefreshBuildResult? refreshResult,
         EditDrivenPlayableReviewPackageMaterializationBuildResult? reviewPackageResult)
+    {
+        Bind(result, editResult, refreshResult, reviewPackageResult, null);
+    }
+
+    public void Bind(
+        CampaignWorkspaceBuildResult result,
+        SchemaDrivenCampaignEditBuildResult? editResult,
+        EditDrivenPlayablePreviewRefreshBuildResult? refreshResult,
+        EditDrivenPlayableReviewPackageMaterializationBuildResult? reviewPackageResult,
+        EditDrivenReviewPackagePlayableSessionBuildResult? playSessionResult)
     {
         _statusLabel.Text = "Gate: " + result.Report.ManualGate
             + " required | accepted=false | status=" + result.Report.ImplementationStatus
@@ -164,6 +192,11 @@ public sealed partial class CampaignAuthoringReviewWorkspacePageControl : UserCo
         if (reviewPackageResult is not null)
         {
             _reviewPackageControl.Bind(reviewPackageResult);
+        }
+
+        if (playSessionResult is not null)
+        {
+            _playSessionControl.Bind(playSessionResult);
         }
     }
 

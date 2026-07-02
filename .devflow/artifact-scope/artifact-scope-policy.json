@@ -45,7 +45,8 @@
     ".llmgc/procedural/goal-073-source-format-p0-readability-repair/",
     ".llmgc/procedural/goal-075-schema-driven-campaign-edit-validate-apply-loop/",
     ".llmgc/procedural/goal-076-edit-driven-playable-preview-refresh/",
-    ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/"
+    ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/",
+    ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -706,6 +707,29 @@
         "docs/agent-tasks/goal-077-edit-driven-review-package-materialization/",
         "src/LLMGameCreator.Application/Design/EditDrivenPlayableReviewPackageMaterialization/",
         "tests/LLMGameCreator.Tests/Application/EditDrivenPlayableReviewPackageMaterialization/"
+      ]
+    },
+    {
+      "scenario": "goal-078-edit-driven-review-package-playable-session",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignAuthoringReviewWorkspacePageControl.Designer.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackagePlaySessionControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackagePlaySessionControl.Designer.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/EditDrivenReviewPackagePlayableSessionProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-078-edit-driven-review-package-playable-session/",
+        "docs/agent-tasks/goal-078-edit-driven-review-package-playable-session/",
+        "src/LLMGameCreator.Application/Design/EditDrivenReviewPackagePlayableSession/",
+        "tests/LLMGameCreator.Tests/Application/EditDrivenReviewPackagePlayableSession/"
       ]
     }
   ]

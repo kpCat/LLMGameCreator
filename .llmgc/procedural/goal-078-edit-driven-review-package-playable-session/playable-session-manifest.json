@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "edit_driven_review_package_playable_session_manifest_v1",
+  "goalId": "goal_078_edit_driven_review_package_playable_session",
+  "productSmokeRoute": "goal-078-edit-driven-review-package-playable-session",
+  "manualGate": "edit_driven_review_package_playable_session_verification",
+  "accepted": false,
+  "implementationStatus": "GREEN",
+  "rowCount": 9,
+  "targetCount": 18,
+  "actionCount": 57,
+  "sourceGoal077ReportHash": "921c88f432478b315c84a3c4cd05ddad709d569d06408958d8abc06e35475fa4",
+  "packageManifestHash": "2db1442eac510ce41e1bb5901479c6957a813cf9cc4a944fbd1aa5eb265e14b9",
+  "packageFileLedgerHash": "0a3965720c70be9c2f9e4f4cafb0ce6792a8211fdde3c12d5e0197f6494068fe",
+  "packageIndexHash": "89b48a42948207e079e5b1a2d12517753c31b62338f276cd3b2b653da23fcf3b",
+  "playerReadableIndexHash": "122876ee9e07b35d2abd6439ae8bc7a14b51dfb8e1090379b9ae544ab6421d16",
+  "initialStateHash": "65124a9f66d07e3cdc6e5507e6d5df104a430a55c502e00f494f76c32f3184d8",
+  "savedSessionHash": "fae41ef4248b257a26620bf773023c38c2661ef534af2badf9f34deb2e2e441a",
+  "finalStateHash": "1a970f932464193640b0248255e8c34732966fb0b603a63557903e66ba3cdc09",
+  "replayFinalStateHash": "1a970f932464193640b0248255e8c34732966fb0b603a63557903e66ba3cdc09",
+  "packageReadProofPassed": true,
+  "replayProofPassed": true,
+  "negativeProofPassed": true
+}

@@ -4,6 +4,7 @@ using LLMGameCreator.Application.Composition;
 using LLMGameCreator.Application.Design;
 using LLMGameCreator.Application.Design.EditDrivenPlayablePreviewRefresh;
 using LLMGameCreator.Application.Design.EditDrivenPlayableReviewPackageMaterialization;
+using LLMGameCreator.Application.Design.EditDrivenReviewPackagePlayableSession;
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
@@ -92,6 +93,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<SchemaDrivenCampaignEditEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenPlayablePreviewRefreshEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenPlayableReviewPackageMaterializationEvidenceService>(Reuse.Singleton);
+        _container.Register<EditDrivenReviewPackagePlayableSessionEvidenceService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -301,7 +303,8 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<SchemaDrivenCampaignWorkspaceEvidenceService>(),
                 resolver.Resolve<SchemaDrivenCampaignEditEvidenceService>(),
                 resolver.Resolve<EditDrivenPlayablePreviewRefreshEvidenceService>(),
-                resolver.Resolve<EditDrivenPlayableReviewPackageMaterializationEvidenceService>()), Reuse.Singleton);
+                resolver.Resolve<EditDrivenPlayableReviewPackageMaterializationEvidenceService>(),
+                resolver.Resolve<EditDrivenReviewPackagePlayableSessionEvidenceService>()), Reuse.Singleton);
 
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);

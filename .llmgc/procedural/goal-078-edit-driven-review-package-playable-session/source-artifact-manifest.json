@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "edit_driven_review_package_playable_session_source_artifact_manifest_v1",
+  "goalId": "goal_078_edit_driven_review_package_playable_session",
+  "productSmokeRoute": "goal-078-edit-driven-review-package-playable-session",
+  "manualGate": "edit_driven_review_package_playable_session_verification",
+  "accepted": false,
+  "goal077AcceptedByUserHandoff": true,
+  "goal077ReportWasGreenProducedForReview": true,
+  "goal077ArtifactAcceptedFalse": true,
+  "sourceGoal077ReportHash": "921c88f432478b315c84a3c4cd05ddad709d569d06408958d8abc06e35475fa4",
+  "sourceGoal077ReportDeclaredHash": "ae839969a04572fc330804f531de90e422025c2f1d0ad037084544e4ba7afbaf",
+  "reviewPackageManifestHash": "2db1442eac510ce41e1bb5901479c6957a813cf9cc4a944fbd1aa5eb265e14b9",
+  "packageFileLedgerHash": "0a3965720c70be9c2f9e4f4cafb0ce6792a8211fdde3c12d5e0197f6494068fe",
+  "packageIndexHash": "89b48a42948207e079e5b1a2d12517753c31b62338f276cd3b2b653da23fcf3b",
+  "playerReadableIndexHash": "122876ee9e07b35d2abd6439ae8bc7a14b51dfb8e1090379b9ae544ab6421d16",
+  "sourceArtifactCount": 8,
+  "sourceArtifacts": [
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "edit-driven-review-package-materialization-report",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/edit-driven-review-package-materialization-report.md",
+      "artifactHash": "6b20ee6d2aea1e8dcb47527ad24bb50ba52e41a66aff3679fbf4da3051db50aa",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "package-file-ledger",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/package-file-ledger.json",
+      "artifactHash": "25497407f6a3ff763e5d4686f0d366b31d7de420ad5d5d63050d738b3b21131f",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "quality-gate-scan",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/quality-gate-scan.json",
+      "artifactHash": "8e6216b52e8cd5af9c68c576297bd42d05e8fa80a0688a142e3af23849b8e2f2",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/review-package/manifest.json",
+      "artifactHash": "3583646e1f64d5e687030f9bd48294d77e6098bb77545d82c731798db088ed3a",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "package-index",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/review-package/package-index.json",
+      "artifactHash": "55766594c8b101894a8783083c60a3d1aacd5efa5e80ec7927f1099e1575c273",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "player-readable-index",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/review-package/player-readable-index.json",
+      "artifactHash": "140f9000115355db085fb0026ee6d2ffbfc04f92c2fc0d79f13fc28139baa402",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "source-artifact-manifest",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/source-artifact-manifest.json",
+      "artifactHash": "c237fbd239ccf19e8a73abee7e1a43066866e2d478347dfb2f3cc3e50eb0c2e6",
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal077",
+      "artifactFamily": "tamper-negative-proof",
+      "artifactRelativePath": ".llmgc/procedural/goal-077-edit-driven-review-package-materialization/tamper-negative-proof.json",
+      "artifactHash": "931c9882850c87d05d3070f2d0b8afa01f18e36814286312bdb88cc678b74ad5",
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

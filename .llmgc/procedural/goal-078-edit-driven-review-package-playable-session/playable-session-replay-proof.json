@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "edit_driven_review_package_playable_session_replay_proof_v1",
+  "passed": true,
+  "initialStateHash": "65124a9f66d07e3cdc6e5507e6d5df104a430a55c502e00f494f76c32f3184d8",
+  "originalFinalStateHash": "1a970f932464193640b0248255e8c34732966fb0b603a63557903e66ba3cdc09",
+  "replayFinalStateHash": "1a970f932464193640b0248255e8c34732966fb0b603a63557903e66ba3cdc09",
+  "initialDiffersFromFinal": true,
+  "replayFinalHashMatchesOriginal": true,
+  "replayOrderMismatchRejected": true,
+  "illegalActionTargetRejected": true,
+  "fakeSuccessWithoutPayloadReadRejected": true,
+  "diagnostics": [
+    {
+      "severity": "error",
+      "code": "goal078.replay.action_order_or_identity_mismatch",
+      "target": "inspect_target:illegal:missing-target",
+      "message": "Replay action does not match the deterministic package-derived action at this position."
+    },
+    {
+      "severity": "error",
+      "code": "goal078.replay.action_order_or_identity_mismatch",
+      "target": "inspect_target:map_panel_rpg/seed_alpha:target-001",
+      "message": "Replay action does not match the deterministic package-derived action at this position."
+    },
+    {
+      "severity": "error",
+      "code": "goal078.replay.action_order_or_identity_mismatch",
+      "target": "inspect_target:map_panel_rpg/seed_alpha:target-002",
+      "message": "Replay action does not match the deterministic package-derived action at this position."
+    }
+  ]
+}

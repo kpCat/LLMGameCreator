@@ -55,6 +55,7 @@ source_format_p0_readability_repair_verification passed before Goal 074
 schema_driven_campaign_authoring_review_workspace_verification passed before Goal 075
 schema_driven_campaign_edit_validate_apply_loop_verification passed before Goal 076
 edit_driven_playable_preview_refresh_verification passed before Goal 077
+edit_driven_review_package_materialization_verification passed before Goal 078
 ```
 
 Produced for review:
@@ -63,7 +64,7 @@ Produced for review:
 semantic_pack_composition_blueprint_verification required
 dynamic_semantic_feature_system_verification required
 generator_spine_quality_consolidation_verification required
-edit_driven_review_package_materialization_verification required
+edit_driven_review_package_playable_session_verification required
 ```
 
 Current capabilities:
@@ -141,6 +142,7 @@ Current capabilities:
 - Goal 075 schema-driven campaign edit/validate/apply loop accepted by Goal 076 user handoff, with 18 deterministic applied changes, rollback proof, preview/export refresh payload and parent-page WinForms activation binding;
 - Goal 076 edit-driven playable preview refresh consumes real Goal 075 applied output into sidecar GamePackage refresh targets, before/after/rollback/replay state-transition proof, staged Unity/player handoff manifest validation, missing/tampered manifest rejection and bounded WinForms playable refresh tab binding;
 - Goal 077 edit-driven review package materialization consumes real Goal 076 artifacts into a disk-backed review package with 18 concrete target files, a 21-file package ledger, player-readable package index, staged read proof, missing/tampered/player-index negative proof and bounded WinForms review package tab binding;
+- Goal 078 edit-driven review package playable session consumes real Goal 077 review-package artifacts into a deterministic headless playable-session action log, package read proof, state-chain/replay proof, player-command index, negative replay proof and bounded WinForms play session tab binding;
 - heavy Unity build/log/cache outputs ignored by `.gitignore`.
 
 Current limitation:
@@ -185,6 +187,14 @@ and report hash `ae839969a04572fc330804f531de90e422025c2f1d0ad037084544e4ba7afba
 disk artifacts, writes `.llmgc/procedural/goal-077-edit-driven-review-package-materialization/review-package/**`,
 validates the package ledger hashes from disk and rejects missing/tampered target files plus broken player-index rows
 or targets without changing public schema, Runtime, Unity, providers, Lua, generator-library, solution or project files.
+Goal 077 is accepted by Goal 078 user handoff:
+`edit_driven_review_package_materialization_verification passed before Goal 078`.
+Goal 078 is produced for review with `edit_driven_review_package_playable_session_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, `rowCount=9`, `targetCount=18`, `actionCount=57`
+and report hash `2ce9a56f3a868790d9c9a4ba82debc0cf862ad7b56d9236a50b6537a41e6479f`. It consumes the real Goal 077
+disk-backed review package, validates report/ledger/manifest/index/player-readable index and all 18 target payload
+hashes from disk, proves deterministic save/replay state-chain hashes and rejects missing/tampered/illegal/fake replay
+paths without changing public schema, Runtime, Unity, providers, Lua, generator-library, solution or project files.
 
 Goal 024, the modular contract goal policy adoption gate, Goal 025, Goal 026, Goal 027, Goal 028, Goal 029, Goal 030, Goal 033, Goal 034, Goal 035, Goal 036, Goal 037, Goal 038, Goal 039, Goal 040, Goal 043, Goal 047, Goal 053 and Goal 054 have been accepted by user prompt or handoff. Goal 055 was accepted by the Goal 056 user handoff: `media_bound_playable_review_package_verification passed`. Goal 056 was accepted by the Goal 057 user handoff: `unity_alpha_media_bound_playable_package_verification passed`. Goal 057 was accepted by the Goal 058 user handoff: `unity_alpha_multifamily_playable_loop_verification passed`. Goal 058 was accepted by the Goal 059 user handoff: `full_media_bound_generator_campaign_verification passed`. Goal 059 was accepted by the Goal 060 user handoff: `full_generator_variability_regression_matrix_verification passed`. Goal 060 was accepted by the Goal 061 user handoff: `full_campaign_gamepackage_materialization_matrix_verification passed`. Goal 061 was accepted by the Goal 062 user handoff: `full_campaign_playable_review_package_rc_verification passed before Goal 062`. Goal 062 was accepted by the Goal 063 user handoff: `constrained_spatial_detail_generation_verification passed before Goal 063`. Goal 063 was accepted by the Goal 064 user handoff: `gameplay_consequence_depth_matrix_verification passed before Goal 064`. Goal 064 was accepted by the Goal 065 user handoff: `living_world_npc_faction_simulation_matrix_verification passed before Goal 065`. Goal 065 was accepted by the Goal 066 user handoff: `interlocked_gameplay_systems_depth_matrix_verification passed before Goal 066`. Goal 066 was accepted by the Goal 067 user handoff: `settlement_construction_destruction_production_matrix_verification passed before Goal 067`. Goal 067 was accepted by the Goal 068 user handoff: `programmatic_narrative_quest_dialogue_event_matrix_verification passed before Goal 068`. Goal 068 was accepted by the Goal 069 user handoff: `combat_magic_ability_boss_encounter_matrix_verification passed before Goal 069`. Goal 069 was accepted by the Goal 070 user handoff: `world_event_weather_daynight_crisis_matrix_verification passed before Goal 070`. Goal 070 was accepted by the Goal 071 user handoff: `integrated_campaign_timeline_simulation_matrix_verification passed before Goal 071`. Goal 071 was accepted by the Goal 072 user handoff: `unity_alpha_interactive_campaign_player_verification passed before Goal 072`. Goal 031 produced semantic pack composition blueprint evidence and still waits at its manual verification gate. Goal 032 was started by explicit user handoff after Goal 031 technical completion, without marking Goal 031 passed, and also waits at its own manual verification gate. Goal 033 was started by explicit user handoff after Goal 032 technical completion, without marking Goal 032 passed; the user later accepted `semantic_authoring_intent_resolver_verification passed` before Goal 034. Goal 034 was accepted by user decision: `strict_llm_draft_artifact_loop_verification passed`. Goal 035 was accepted by user decision: `lua_module_manifest_registry_verification passed`. Goal 036 was accepted by user handoff before Goal 037: `lua_sandbox_execution_gate_verification passed`. Goal 037 was accepted by user handoff before Goal 038: `hybrid_llm_draft_lua_deterministic_expansion_verification passed`. Goal 038 was accepted by user handoff before Goal 039: `world_scale_region_map_foundation_verification passed`. Goal 039 was accepted by user handoff before Goal 040: `runtime_chunk_delta_traversal_smoke_verification passed`. Goal 040 was accepted by user handoff before Goal 043: `chunked_runtime_preview_export_multifamily_smoke_verification passed`. Goal 043 was accepted by user handoff before Goal 047: `multi_family_generated_template_vertical_slice_verification passed`. Goal 047 was accepted by user handoff before Goal 053: `full_generator_without_media_verification passed`. Goal 053 was accepted by user handoff before Goal 054: `media_asset_campaign_orchestration_verification passed`. Goal 054 was accepted by Goal 055 preflight user handoff: `media_materialization_review_package_verification passed`.
 
@@ -1026,18 +1036,30 @@ Consume real Goal 076 edit-driven playable preview refresh artifacts from disk i
 
 Status:
 
-Produced for review. The gate remains `edit_driven_review_package_materialization_verification required`, not passed.
+Accepted by Goal 078 user handoff: `edit_driven_review_package_materialization_verification passed before Goal 078`.
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, 9 rows, 18 materialized package targets and 21 review package files. Artifacts are under `.llmgc/procedural/goal-077-edit-driven-review-package-materialization/`; report hash `ae839969a04572fc330804f531de90e422025c2f1d0ad037084544e4ba7afbaf`, source Goal 076 report hash `0295a5291583e296b822abe4dacf41f0ec8c1c0c3b671fe9bf4d3b49f097b5ed`, review package manifest hash `2db1442eac510ce41e1bb5901479c6957a813cf9cc4a944fbd1aa5eb265e14b9`, package file ledger hash `0a3965720c70be9c2f9e4f4cafb0ce6792a8211fdde3c12d5e0197f6494068fe` and player-readable index hash `122876ee9e07b35d2abd6439ae8bc7a14b51dfb8e1090379b9ae544ab6421d16`.
+
+### Goal 078: Edit-Driven Review Package Playable Session
+
+Purpose:
+
+Consume real Goal 077 disk-backed review package artifacts into a deterministic headless playable session with package read proof, action log, state-chain/replay proof, negative replay proof, player-command index and a bounded WinForms play session tab.
+
+Status:
+
+Produced for review. The gate remains `edit_driven_review_package_playable_session_verification required`, not passed.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, 9 rows, 18 targets and 57 deterministic playable-session actions. Artifacts are under `.llmgc/procedural/goal-078-edit-driven-review-package-playable-session/`; report hash `2ce9a56f3a868790d9c9a4ba82debc0cf862ad7b56d9236a50b6537a41e6479f`, source Goal 077 report hash `921c88f432478b315c84a3c4cd05ddad709d569d06408958d8abc06e35475fa4`, package manifest hash `2db1442eac510ce41e1bb5901479c6957a813cf9cc4a944fbd1aa5eb265e14b9`, package file ledger hash `0a3965720c70be9c2f9e4f4cafb0ce6792a8211fdde3c12d5e0197f6494068fe`, package index hash `89b48a42948207e079e5b1a2d12517753c31b62338f276cd3b2b653da23fcf3b`, player-readable index hash `122876ee9e07b35d2abd6439ae8bc7a14b51dfb8e1090379b9ae544ab6421d16`, action log hash `421421a93f90190715202ae43b2e5130af553c11dc45b870e65e64a5f791d192` and final/replay state hash `1a970f932464193640b0248255e8c34732966fb0b603a63557903e66ba3cdc09`.
 
 ## Current Recommended Next Work
 
 ```text
-edit_driven_review_package_materialization_verification
+edit_driven_review_package_playable_session_verification
 ```
 
 Status:
 
 ```text
-goal_077_edit_driven_review_package_materialization_produced_for_review
+goal_078_edit_driven_review_package_playable_session_produced_for_review
 ```

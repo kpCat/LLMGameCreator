@@ -164,6 +164,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP_SPEC.md` | Goal 075 task/spec: schema-driven campaign edit/validate/apply loop consuming accepted Goal 074 workspace and Goal 060-073 evidence into Application edit/change-set/apply/rollback evidence and bounded WinForms review controls, with final stop at `schema_driven_campaign_edit_validate_apply_loop_verification`. |
 | `docs/EXTERNAL_SCOUTING_GOAL_075_SCHEMA_DRIVEN_CAMPAIGN_EDIT_VALIDATE_APPLY_LOOP.md` | Goal 075 scouting: reuse existing Goal 074 workspace contracts and WinForms UserControl patterns; no external editor stack, provider, LLM/RAG, schema, Runtime, Unity or Lua dependency adoption. |
 | `docs/agent-tasks/goal-076-edit-driven-playable-preview-refresh/GOAL.md` | Goal 076 task: consume real Goal 075 applied edit-loop output into an edit-driven playable preview refresh proof, staged player handoff manifest, bounded WinForms playable refresh tab and final stop at `edit_driven_playable_preview_refresh_verification`. |
+| `docs/agent-tasks/goal-077-edit-driven-review-package-materialization/GOAL.md` | Goal 077 task: consume real Goal 076 edit-driven playable preview refresh artifacts from disk into a deterministic review package with concrete target files, package ledger, player-readable index, staged read verification, bounded WinForms review package tab and final stop at `edit_driven_review_package_materialization_verification`. |
+| `docs/agent-tasks/goal-078-edit-driven-review-package-playable-session/GOAL.md` | Goal 078 task: consume real Goal 077 disk-backed review package artifacts into a deterministic headless playable-session proof, package read proof, replay/state-chain proof, player-command index, bounded WinForms play session tab and final stop at `edit_driven_review_package_playable_session_verification`. |
 | `docs/MODULE_CONTRACT_MANIFEST_V1.md` | Goal 029 contract for deterministic repository-local module manifests, ownership roots, dependencies, validators, test filters, scenario ids, forbidden runtime dependencies and hash rules. |
 | `docs/PRODUCT_SMOKE_SCENARIO_MANIFEST_V1.md` | Goal 029 contract for manifest-driven product-smoke scenarios before hardcoded fallback routing. |
 | `docs/PARALLEL_CANDIDATE_DEVELOPMENT_POLICY.md` | Goal 029 policy for candidate-only parallel work, one active state writer, serial adoption and Tier 1-4 verification. |
@@ -208,7 +210,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-edit_driven_review_package_materialization_verification
+edit_driven_review_package_playable_session_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -312,6 +314,16 @@ Goal 076 artifacts from disk into `.llmgc/procedural/goal-077-edit-driven-review
 writes a disk-backed `review-package/**`, validates staged package reads and rejects missing/tampered package
 files and broken player-index references without Unity/schema/runtime/provider changes.
 
+Goal 077 is accepted by the Goal 078 user handoff:
+`edit_driven_review_package_materialization_verification passed before Goal 078`.
+
+Goal 078 is produced for review with `edit_driven_review_package_playable_session_verification required`,
+`accepted=false`, `implementationStatus=GREEN`, 9 rows, 18 targets, 57 deterministic playable-session
+actions and report hash `2ce9a56f3a868790d9c9a4ba82debc0cf862ad7b56d9236a50b6537a41e6479f`. It consumes the
+real Goal 077 disk-backed review package, validates the report/ledger/manifest/index/player-readable index and all
+target payload hashes from disk, proves save/replay determinism with state-chain hashes, rejects missing/tampered/
+illegal/fake replay paths and binds a bounded WinForms play session tab without Unity/schema/runtime/provider changes.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -348,7 +360,8 @@ Allowed next sequence:
 32. Keep Goal 074 Schema-Driven Campaign Authoring And Review Workspace recorded as accepted by user handoff before Goal 075.
 33. Keep Goal 075 Schema-Driven Campaign Edit/Validate/Apply Loop recorded as accepted by user handoff before Goal 076.
 34. Keep Goal 076 Edit-Driven Playable Preview Refresh recorded as accepted by user handoff before Goal 077, without mutating the Goal 076 artifact's `accepted=false` evidence.
-35. Review Goal 077 `edit_driven_review_package_materialization_verification`; do not mark it passed until user acceptance.
+35. Keep Goal 077 Edit-Driven Review Package Materialization recorded as accepted by user handoff before Goal 078, without mutating the Goal 077 artifact's `accepted=false` evidence.
+36. Review Goal 078 `edit_driven_review_package_playable_session_verification`; do not mark it passed until user acceptance.
 
 Kill criterion:
 

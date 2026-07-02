@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "edit_driven_review_package_playable_session_winforms_binding_inventory_v1",
+  "passed": true,
+  "parentPagePlaySessionTabDeclared": true,
+  "parentPagePlaySessionEvidenceServiceLoaded": true,
+  "parentPagePlaySessionControlBound": true,
+  "parentPageActivationBindsGoal078Data": true,
+  "groups": [
+    {
+      "groupId": "review_package_play_session_status",
+      "controlName": "CampaignReviewPackagePlaySessionControl",
+      "relativePath": "src/LLMGameCreator.WinForms/Pages/CampaignAuthoringReviewWorkspace/CampaignReviewPackagePlaySessionControl.cs",
+      "separateUserControl": true,
+      "bindsGoal078Data": true
+    }
+  ],
+  "diagnostics": []
+}
