@@ -116,7 +116,6 @@ LLM выдаёт не длинное описание дома, а нормал�
 
 Тогда система работает для любого лора, а не только для “Носителя метамодулей”.
 
-
 ## Важное дополнение: Codex не генерирует детали, Codex внедряет генератор
 
 Зафиксировано стратегическое решение:
@@ -130,3 +129,59 @@ schema + compact part families + deterministic generators + validators + fixture
 Массовые варианты деталей должны генерироваться локально LLMGameCreator по seed.
 
 Это экономит Codex-лимит, не раздувает репозиторий и лучше соответствует идее LLMGameCreator как комбайна, который сам строит визуальный мир по правилам.
+
+## Важное дополнение: adult/NSFW слой
+
+Некоторые генерируемые игры могут иметь взрослый визуальный слой: suggestive/adult portraits, adult-only reference assets, relationship scene cards and private adult variants.
+
+Этот слой не должен быть отдельным NSFW-генератором. Он должен быть rating-gated extension of the same visual recipe / asset slot / manifest / review pipeline.
+
+Правильная схема:
+
+```text
+CreatureVisualGenome
++ VisualRuleStack
++ SpeciesBodyPlan
++ SexPresentationProfile
++ ClothingState
++ EquipmentState
++ DamageState
++ AdultPresentationPolicy
++ seed
+→ VisualRecipe
+→ safe slots
+→ optional adult-only slots
+→ deterministic fallback/control output
+→ optional offline AI refinement
+→ candidate quarantine
+→ human review
+→ promoted asset binding
+```
+
+Adult visual slots require explicit policy:
+
+- adult project flag;
+- adult character flag;
+- adult/sapient species;
+- humanoid or humanoid-compatible body plan;
+- safe fallback;
+- review and promotion;
+- export filtering.
+
+Reject or quarantine:
+
+- minor, teen-like, childlike, young-looking or age-ambiguous subjects;
+- feral or non-sapient sexualized creatures;
+- non-consensual framing;
+- adult assets leaking into safe/public builds;
+- provider output promoted without review;
+- provider prompt tags as source of truth.
+
+The intended fantasy-species direction is adult relationships and erotic presentation involving adult humans and adult sapient humanoid-compatible fantasy peoples/species, not feral/non-sapient sexualization.
+
+Read together with:
+
+- `docs/proposals/ADULT_VISUAL_LAYER_STRATEGY.md`
+- `docs/proposals/CREATURE_VISUAL_GENOME_AND_PRESENTATION.md`
+- `docs/proposals/VISUAL_PART_PACK_ADULT_EXTENSION.md`
+- `docs/context/METAMODULE_CARRIER_VISUAL_NSFW_CONTEXT_BRIEF.md`

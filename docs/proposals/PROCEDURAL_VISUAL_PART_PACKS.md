@@ -255,6 +255,68 @@ Visual parts применимы не только к окружению.
 
 На раннем этапе это может быть не полноценная анатомия, а 2D billboard/silhouette composition.
 
+## Adult/NSFW extension
+
+Adult-capable visuals should extend this same part-pack system instead of bypassing it.
+
+Adult layer examples:
+
+- mature humanoid body silhouettes;
+- sex-presentation silhouette variants;
+- species-specific body surface/marking variants;
+- clothing coverage/state overlays;
+- torn/wet/damaged clothing overlays;
+- wounds/dirt/exhaustion overlays;
+- adult-only nude/reference slots;
+- adult-only scene masks/control images;
+- safe fallback parts for every adult-only part.
+
+The adult layer must be rating-gated.
+
+Suggested ratings:
+
+- `safe`;
+- `suggestive`;
+- `adult_nude_reference`;
+- `adult_erotic_scene`;
+- `adult_private_explicit`.
+
+Adult-only parts require explicit constraints:
+
+```json
+{
+  "partId": "part/character/adult_reference/body_silhouette_mature_humanoid_01",
+  "role": "adult_body_reference",
+  "shapeKind": "silhouette_mask",
+  "sizeClass": "macro",
+  "compatibleSurfaceRoles": ["character_body"],
+  "compatibleBodyPlans": ["human", "humanoid_variant", "alien_humanoid", "monster_humanoid"],
+  "compatibleSexPresentationProfiles": ["female", "male", "androgynous", "mixed"],
+  "contentRatings": ["adult_nude_reference"],
+  "exportPolicies": ["adult_build_only", "private_local_only"],
+  "requiresFlags": ["adult_project", "adult_character", "sapient", "humanoid_compatible"],
+  "forbiddenTags": ["minor", "young_looking", "feral", "non_sapient", "non_consensual"],
+  "safeFallbackPartId": "part/character/body/safe_clothed_silhouette_01"
+}
+```
+
+Adult extension rules:
+
+- adult visuals are optional slots, not required presentation;
+- adult-only slots must never leak into safe/public builds;
+- adult slots require safe fallbacks;
+- adult parts are allowed only for adult, sapient, humanoid-compatible species/characters;
+- nonhumanoid or feral creatures are safe-only unless a future reviewed policy explicitly says otherwise;
+- ComfyUI/Civitai/provider output remains candidate media until reviewed and promoted;
+- no real NSFW fixtures should be checked into the repository for early MVPs.
+
+Read the dedicated adult extension docs:
+
+- `docs/proposals/ADULT_VISUAL_LAYER_STRATEGY.md`
+- `docs/proposals/CREATURE_VISUAL_GENOME_AND_PRESENTATION.md`
+- `docs/proposals/VISUAL_PART_PACK_ADULT_EXTENSION.md`
+- `docs/context/METAMODULE_CARRIER_VISUAL_NSFW_CONTEXT_BRIEF.md`
+
 ## Как это связано с AI
 
 Procedural output может быть:
@@ -310,4 +372,5 @@ Codex не должен “рисовать красиво”. Он должен
 - не делать production painterly art на первом этапе;
 - не подключать ComfyUI до появления recipes/contracts;
 - не делать editor UI раньше application-layer proof;
-- не мешать surface parts, character identity и creature rigging в один goal.
+- не мешать surface parts, character identity и creature rigging в один goal;
+- не делать adult/NSFW слой отдельным генератором в обход ratings, manifests, review and export policy.
