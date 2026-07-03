@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "visual_chunk_stream_determinism_proof_v1",
+  "goalId": "goal_091_deterministic_visual_chunk_stream_window",
+  "passed": true,
+  "stableChunkKeysAcrossReruns": true,
+  "stableEvidenceAcrossReruns": true,
+  "rows": [
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "firstWindowHash": "ad6b019c13c0f363da88ae76609e7b549b697c8de1bd9d2f6d70f58636a9615c",
+      "secondWindowHash": "ad6b019c13c0f363da88ae76609e7b549b697c8de1bd9d2f6d70f58636a9615c",
+      "stable": true,
+      "chunkCount": 9
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "firstWindowHash": "e7704f37abbdeb3fcbd7dbea23b480e0cedfdb7863040002f3ad394364d5dbe8",
+      "secondWindowHash": "e7704f37abbdeb3fcbd7dbea23b480e0cedfdb7863040002f3ad394364d5dbe8",
+      "stable": true,
+      "chunkCount": 9
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "firstWindowHash": "4f1db42381f17f706ca11e8b8a7da5caa5e3858610fdd0061d04ef4e64163b75",
+      "secondWindowHash": "4f1db42381f17f706ca11e8b8a7da5caa5e3858610fdd0061d04ef4e64163b75",
+      "stable": true,
+      "chunkCount": 36
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "firstWindowHash": "536ac2f551b345dcb4d9efaf4c6630e842b9acb385bffec4f624cb92c2aabf07",
+      "secondWindowHash": "536ac2f551b345dcb4d9efaf4c6630e842b9acb385bffec4f624cb92c2aabf07",
+      "stable": true,
+      "chunkCount": 36
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "firstWindowHash": "1608a86c073c8c694ca743799617d0604e49a95f968e3e7c4c1b8b152705b18d",
+      "secondWindowHash": "1608a86c073c8c694ca743799617d0604e49a95f968e3e7c4c1b8b152705b18d",
+      "stable": true,
+      "chunkCount": 27
+    }
+  ]
+}

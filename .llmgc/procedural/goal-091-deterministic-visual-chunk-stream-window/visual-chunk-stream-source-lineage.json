@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "visual_chunk_stream_source_lineage_v1",
+  "goalId": "goal_091_deterministic_visual_chunk_stream_window",
+  "passed": true,
+  "sourceRecordCount": 12,
+  "goal090LineagePresent": true,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-report.md",
+      "exists": true,
+      "sha256": "640b97e8f0eab7c5689960348e5da056e3c3ffcb1616b524b4d27c5c4ffa0d25",
+      "purposeTags": [
+        "goal090",
+        "report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-catalog.json",
+      "exists": true,
+      "sha256": "8d844459c7aa5f80e06dd4b4b459856f69a6ee3fa62b486c92c5cca155a98dcb",
+      "purposeTags": [
+        "goal090",
+        "catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-size-matrix.json",
+      "exists": true,
+      "sha256": "7851821fc8fd8cc383532db9de1cccf836de896260985188fa00cdf09d542f92",
+      "purposeTags": [
+        "goal090",
+        "finite_size_matrix"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-chunk-address-proof.json",
+      "exists": true,
+      "sha256": "fb984e7ee96046944500ad6b560e51e1d9b898f3a3fc2a54d5ed85a68c70a1e9",
+      "purposeTags": [
+        "goal090",
+        "chunk_address"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-sparse-world-proof.json",
+      "exists": true,
+      "sha256": "0feff62fae3e43f151e18ca0cc19aa71a000ad24d97a128c48e3debae581c817",
+      "purposeTags": [
+        "goal090",
+        "sparse_infinite"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-layer-model-proof.json",
+      "exists": true,
+      "sha256": "10181cadf0bd2b2b469bf264a59321e0541d9f5567aa9eb0f8409155a400e070",
+      "purposeTags": [
+        "goal090",
+        "layer_model"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-quality-gate-scan.json",
+      "exists": true,
+      "sha256": "4f4cbe3213bc4bdc93bfbbdf8b41001253b35386395afb07bf958d2c2ada24ed",
+      "purposeTags": [
+        "goal090",
+        "quality"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-088-deterministic-visual-region-composer/visual-region-composer-report.md",
+      "exists": true,
+      "sha256": "b2f8bb8f51772b9cf683e4bfe8733b58240d1ff6495c02bbd500bc9f23b3c3a0",
+      "purposeTags": [
+        "goal088",
+        "region_composer"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-composer-report.md",
+      "exists": true,
+      "sha256": "6908cd9b8aa2ab5d2821a01e6fa9e9926b05b9c62839766d9a26ea8c78b9b808",
+      "purposeTags": [
+        "goal087",
+        "patch_composer"
+      ]
+    },
+    {
+      "relativePath": "docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md",
+      "exists": true,
+      "sha256": "54e8ba793de8f3b7f9577ae528a460ba42153031532118a922b9e1638874b215",
+      "purposeTags": [
+        "deepsearch",
+        "visual_stack"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+      "exists": true,
+      "sha256": "bd184f47525433f1b73788cb4389b3f648f4d0ef0971c691f85e38ea8e4976e5",
+      "purposeTags": [
+        "deepsearch",
+        "chunked_world"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md",
+      "exists": true,
+      "sha256": "dfc058341964c2996a4559b2b7f609cfad0c612ccb5c4622d23972a684bb6f9d",
+      "purposeTags": [
+        "deepsearch",
+        "sidecar"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "visual_chunk_stream_file_ledger_v1",
+  "goalId": "goal_091_deterministic_visual_chunk_stream_window",
+  "passed": true,
+  "fileCount": 13,
+  "files": [
+    {
+      "relativePath": "visual-chunk-stream-cache-reuse-proof.json",
+      "sha256": "8d9558e536b72b8e84e324962aa2d00a8a3a95dd35c016de34e9becdfc8a59f3",
+      "byteLength": 54198,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-determinism-proof.json",
+      "sha256": "83f39644fc2c1fadec18174c64b3efac3f45db2a69e830882bf61427aad5dbf4",
+      "byteLength": 1791,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-layer-transition-proof.json",
+      "sha256": "61086ac28aeba195c82d1fc5e3990f4e29288296413f163dc08aaf2898d0f622",
+      "byteLength": 3393,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-materialization-manifest.json",
+      "sha256": "8ec6db464be9ba48b44f6cdeb3253f61ee4943611f9ebdcaa4916a0b02f78447",
+      "byteLength": 254560,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-negative-proof.json",
+      "sha256": "2d40315708db5391fabb9564bc5fc8b31c4a09a9a8c3131ce000f704bbe3ac2a",
+      "byteLength": 10103,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-quality-gate-scan.json",
+      "sha256": "e95c92156b504d706044a062a96a973c9ec1e1767f84a5acaa696bb5567a8f2e",
+      "byteLength": 1615,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-seam-proof.json",
+      "sha256": "64f8fe7d90c2390aa71161837e79bbc9e506fa9d323618b08c51183742651d6d",
+      "byteLength": 51886,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-source-lineage.json",
+      "sha256": "b423a018eb69c5d3d4788e99bf1bd44f1ff801f6887d9ea4b56e947b621cf327",
+      "byteLength": 4039,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-stream-window-catalog.json",
+      "sha256": "3ef89f00de1114bc99a72419da9d470c84165116f7c2fdbecbbc4d1533500dc5",
+      "byteLength": 2624,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "stream-overviews/finite_custom_255x257_surface_window.svg",
+      "sha256": "46aa20995f3ae4f72b560c2296ba522a394e0b814a8f2ebd2e67f890f393eef7",
+      "byteLength": 2124,
+      "purposeTags": [
+        "text_svg_overview"
+      ]
+    },
+    {
+      "relativePath": "stream-overviews/huge_sparse_100000x100000_surface_window.svg",
+      "sha256": "dcf10ac978fafa6373df1dbfd325edf6355e368013250659b79af0b93aef373e",
+      "byteLength": 2082,
+      "purposeTags": [
+        "text_svg_overview"
+      ]
+    },
+    {
+      "relativePath": "stream-overviews/infinite_streaming_multilayer_window.svg",
+      "sha256": "dbdfc0e4fcfa33b94148777fb1e667ef0a7358eeb4dd0f2b9ad4b2fb12ff73c5",
+      "byteLength": 12689,
+      "purposeTags": [
+        "text_svg_overview"
+      ]
+    },
+    {
+      "relativePath": "stream-overviews/layer_transition_window_surface_underground_water.svg",
+      "sha256": "695ef1b60b9ffeb34ca8f360b11209e36bad992b70167c7446f80b432da74110",
+      "byteLength": 5679,
+      "purposeTags": [
+        "text_svg_overview"
+      ]
+    }
+  ]
+}

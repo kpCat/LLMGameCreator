@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "visual_chunk_stream_window_catalog_v1",
+  "goalId": "goal_091_deterministic_visual_chunk_stream_window",
+  "manualGate": "deterministic_visual_chunk_stream_window_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "fixtureCount": 4,
+  "windowCount": 5,
+  "fixtures": [
+    {
+      "fixtureId": "finite_custom_255x257_surface_window",
+      "profileId": "finite_custom_sizes_matrix",
+      "mode": "finite",
+      "layerIds": [
+        "terrain"
+      ],
+      "windowIds": [
+        "finite_255x257_clipped_origin_radius2"
+      ],
+      "windowCount": 1,
+      "totalMaterializedChunks": 9,
+      "boundaryClippingExplicit": true,
+      "noRawFullWorldDump": true,
+      "overviewSvgRelativePath": "stream-overviews/finite_custom_255x257_surface_window.svg"
+    },
+    {
+      "fixtureId": "huge_sparse_100000x100000_surface_window",
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "mode": "hugeSparseFinite",
+      "layerIds": [
+        "surface"
+      ],
+      "windowIds": [
+        "huge_sparse_far_surface_radius1"
+      ],
+      "windowCount": 1,
+      "totalMaterializedChunks": 9,
+      "boundaryClippingExplicit": false,
+      "noRawFullWorldDump": true,
+      "overviewSvgRelativePath": "stream-overviews/huge_sparse_100000x100000_surface_window.svg"
+    },
+    {
+      "fixtureId": "infinite_streaming_multilayer_window",
+      "profileId": "infinite_streaming_world_multilayer",
+      "mode": "infinite",
+      "layerIds": [
+        "interior",
+        "sky_overlay",
+        "surface",
+        "underground"
+      ],
+      "windowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ],
+      "windowCount": 2,
+      "totalMaterializedChunks": 72,
+      "boundaryClippingExplicit": false,
+      "noRawFullWorldDump": true,
+      "overviewSvgRelativePath": "stream-overviews/infinite_streaming_multilayer_window.svg"
+    },
+    {
+      "fixtureId": "layer_transition_window_surface_underground_water",
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "mode": "hugeSparseFinite",
+      "layerIds": [
+        "surface",
+        "underground",
+        "underwater"
+      ],
+      "windowIds": [
+        "surface_underground_underwater_transition_radius1"
+      ],
+      "windowCount": 1,
+      "totalMaterializedChunks": 27,
+      "boundaryClippingExplicit": false,
+      "noRawFullWorldDump": true,
+      "overviewSvgRelativePath": "stream-overviews/layer_transition_window_surface_underground_water.svg"
+    }
+  ]
+}

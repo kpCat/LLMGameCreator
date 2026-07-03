@@ -80,6 +80,7 @@ deterministic_visual_region_composer_verification required
 goal_088_check_all_validation_repair_verification required
 tiered_validation_pipeline_verification required
 parameterized_visual_world_profiles_verification required
+deterministic_visual_chunk_stream_window_verification required
 ```
 
 Current capabilities:
@@ -1423,14 +1424,35 @@ Fixture coverage:
 
 Validator coverage rejects fixed-size-only generic claims, invalid finite dimensions, huge raw dumps, infinite finite-only materialization, invalid/duplicate layer ids, hardcoded surface+underground-only requirements, invalid chunk/patch sizes, patch/chunk incompatibility, missing seed/version, absolute output paths, nondeterministic chunk keys, unknown layer links, invalid stream windows, rating metadata without safe fallback and prompt text as source of truth. Goal 090 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, dependency, binary/raster media, generated image asset, real adult fixture or explicit prompt dump changes.
 
+### Goal 091: Deterministic Visual Chunk Stream Window
+
+Purpose:
+
+Add a BCL-only Application-side deterministic visual chunk stream window materializer that consumes Goal 090 parameterized profiles and proves finite, huge sparse and infinite worlds materialize only requested chunk windows around player/camera positions.
+
+Status:
+
+Produced for review. The gate remains `deterministic_visual_chunk_stream_window_verification required`, not passed. Goal 090, Goal 089, Goal 088A and Goal 088 remain produced for review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`; Application models/fixtures/materializer/validator/evidence live under `src/LLMGameCreator.Application/Design/DeterministicVisualChunkStreamWindow/`, focused tests under `tests/LLMGameCreator.Tests/Application/DeterministicVisualChunkStreamWindow/`, product smoke under `tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualChunkStreamWindowProductSmokeTests.cs`, and compact evidence under `.llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/`.
+
+Fixture coverage:
+
+- `finite_custom_255x257_surface_window`: finite Goal 090 non-standard size with explicit clipped origin window.
+- `huge_sparse_100000x100000_surface_window`: far-coordinate huge sparse window with 9 materialized chunks and no raw full-world expansion.
+- `infinite_streaming_multilayer_window`: two overlapping player/camera centers with 72 requested chunks and 24 stable reused chunk keys.
+- `layer_transition_window_surface_underground_water`: data-driven surface, underground and underwater layer links with portal/transition summary metadata.
+
+Validator coverage rejects unknown profile/layer, missing seed/version, invalid radius, raw full-world dumps, finite out-of-bounds windows without clipping policy, chunk key mismatches, seam and water/road connector mismatches, duplicate chunk keys, prompt text as source of truth, absolute paths, delta overlays with raw payloads and adult/rating metadata without safe fallback. Goal 091 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, dependency, binary/raster media, generated image asset, real adult fixture or explicit prompt dump changes.
+
 ## Current Recommended Next Work
 
 ```text
-parameterized_visual_world_profiles_verification
+deterministic_visual_chunk_stream_window_verification
 ```
 
 Status:
 
 ```text
-goal_090_parameterized_visual_world_profiles_produced_for_review
+goal_091_deterministic_visual_chunk_stream_window_produced_for_review
 ```

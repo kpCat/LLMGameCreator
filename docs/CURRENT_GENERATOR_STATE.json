@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T06:18:00Z",
+    "updated_at_utc":  "2026-07-03T07:29:33Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 090 parameterized visual world profiles produced for review",
-    "gate_status":  "parameterized_visual_world_profiles_verification",
+    "current_phase_title":  "Goal 091 deterministic visual chunk stream window produced for review",
+    "gate_status":  "deterministic_visual_chunk_stream_window_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 090 Parameterized Visual World Profiles is produced for review: parameterized_visual_world_profiles_verification required, accepted=false. It adds a BCL-only Application profile/addressing seam for arbitrary finite sizes, huge sparse finite worlds and infinite chunk windows. Goal 089, Goal 088A and Goal 088 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 090 parameterized visual world profile evidence. Goal 090 adds Application-side profile/addressing contracts, validators, fixtures, compact evidence and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 090 remains accepted=false until explicit user review accepts it.",
-    "recommended_next_decision":  "Review Goal 090 parameterized visual world profile evidence and only mark parameterized_visual_world_profiles_verification passed after explicit user acceptance; do not mark Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 091 Deterministic Visual Chunk Stream Window is produced for review: deterministic_visual_chunk_stream_window_verification required, accepted=false. It adds a BCL-only Application stream-window materializer over Goal 090 profiles, proving finite clipping, huge sparse compact windows, overlapping infinite-window cache reuse, seam continuity and layer transitions. Goal 090 remains produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 091 deterministic visual chunk stream window evidence. Goal 091 adds Application-side stream-window contracts, materializer, validator, fixtures, compact evidence and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 091 remains accepted=false until explicit user review accepts it.",
+    "recommended_next_decision":  "Review Goal 091 deterministic visual chunk stream window evidence and only mark deterministic_visual_chunk_stream_window_verification passed after explicit user acceptance; do not mark Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "deterministic_visual_chunk_stream_window_verification",
                                                         "parameterized_visual_world_profiles_verification",
                                                         "tiered_validation_pipeline_verification",
                                                         "goal_088_check_all_validation_repair_verification",
@@ -118,7 +119,8 @@
                            "goal_088_manual_gate":  "deterministic_visual_region_composer_verification",
                            "goal_088a_manual_gate":  "goal_088_check_all_validation_repair_verification",
                            "goal_089_manual_gate":  "tiered_validation_pipeline_verification",
-                           "goal_090_manual_gate":  "parameterized_visual_world_profiles_verification"
+                           "goal_090_manual_gate":  "parameterized_visual_world_profiles_verification",
+                           "goal_091_manual_gate":  "deterministic_visual_chunk_stream_window_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -409,6 +411,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "deterministic_visual_chunk_stream_window_verification",
+                                          "goal_091_deterministic_visual_chunk_stream_window",
+                                          "manual_review_goal_091_deterministic_visual_chunk_stream_window",
                                           "parameterized_visual_world_profiles_verification",
                                           "goal_090_parameterized_visual_world_profiles",
                                           "manual_review_goal_090_parameterized_visual_world_profiles",
@@ -459,10 +464,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "parameterized_visual_world_profiles_verification",
-    "recommended_next_work_item_title":  "Review Goal 090 parameterized visual world profiles",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-090-parameterized-visual-world-profiles/GOAL.md",
+    "recommended_next_work_item":  "deterministic_visual_chunk_stream_window_verification",
+    "recommended_next_work_item_title":  "Review Goal 091 deterministic visual chunk stream window",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-091-deterministic-visual-chunk-stream-window/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal 091 deterministic visual chunk stream window evidence",
+                                              "Keep Goal 091 accepted=false until user review accepts it",
+                                              "Use the Goal 091 Application stream-window materializer for future visual chunk streaming consumers instead of raw full-world cell dumps",
                                               "Review Goal 090 parameterized visual world profile evidence",
                                               "Keep Goal 090 accepted=false until user review accepts it",
                                               "Use the Goal 090 Application profile/addressing seam for future visual consumers instead of assuming fixed 144x144, 256x256 or 100000x100000 sizes",
@@ -2091,5 +2099,21 @@
                                                                                     "The Goal 088 fixed-size concern is resolved at the profile/addressing layer if parameterized_visual_world_profiles_verification is accepted; renderer, atlas, Runtime and Unity consumers remain separate future work."
                                                                                 ],
                                                             "next_action":  "review_goal_090_parameterized_visual_world_profiles"
-                                                        }
+                                                        },
+    "deterministic_visual_chunk_stream_window_verification":  {
+                                                                 "status":  "produced_for_review",
+                                                                 "accepted":  false,
+                                                                 "evidence_source":  "goal_091_deterministic_visual_chunk_stream_window",
+                                                                 "observed_result":  [
+                                                                                         "Goal 091 produces deterministic visual chunk stream window evidence under .llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window with accepted=false.",
+                                                                                         "implementationStatus=GREEN, fixtureCount=4, windowCount=5, totalMaterializedChunks=117, uniqueChunkKeyCount=93, finiteBoundaryClippingPassed=true, hugeSparseNoRawDump=true, infiniteOverlapReusedChunkKeyCount=24, seamProofPassed=true, cacheReuseProofPassed=true, layerTransitionProofPassed=true, negativeProofCount=16, deterministicReportHash=a55aaa74e35d525246af04253ac8c9b77ffc9be26903ad41a2e452e630e0a460.",
+                                                                                         "The BCL-only Application seam defines VisualChunkStreamRequest, VisualChunkStreamWindow, chunk refs, layer refs, seam records, cache records, delta overlay summaries, materialization manifest, validation records, compact evidence and text SVG stream overviews.",
+                                                                                         "Fixtures prove finite_custom_255x257_surface_window with explicit boundary clipping, huge_sparse_100000x100000_surface_window without raw full-world expansion, infinite_streaming_multilayer_window with two overlapping centers and stable reused chunk keys, and layer_transition_window_surface_underground_water with data-driven surface/underground/underwater links.",
+                                                                                         "The validator rejects unknown profile/layer, missing seed/version, invalid radius, raw full-world dumps, finite out-of-bounds windows without clipping policy, chunk key mismatches, seam and water/road connector mismatches, duplicate chunk keys, prompt text as source of truth, absolute paths, delta overlays with raw payloads and adult/rating metadata without safe fallback.",
+                                                                                         "Goal 091 consumes Goal 090 compact evidence as lineage while keeping Goal 090 artifact accepted=false evidence intact.",
+                                                                                         "Goal 091 adds no public GamePackage schema change, Runtime change, Unity change, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, external dependency, binary or raster media, generated image asset, real adult fixture or explicit prompt dump.",
+                                                                                         "Renderer, atlas, Runtime and Unity streaming consumers remain separate future work."
+                                                                                     ],
+                                                                 "next_action":  "review_goal_091_deterministic_visual_chunk_stream_window"
+                                                             }
 }

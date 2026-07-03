@@ -1,0 +1,1415 @@
+{
+  "schemaVersion": "visual_chunk_stream_seam_proof_v1",
+  "goalId": "goal_091_deterministic_visual_chunk_stream_window",
+  "passed": true,
+  "seamCount": 156,
+  "waterContinuityPassed": true,
+  "roadContinuityPassed": true,
+  "biomeContinuityPassed": true,
+  "rows": [
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "east",
+      "seamKey": "1c3405ecfbe4336c8aae714063c920f475fe9e140f3f684c5f3a04ef6e75bf6d",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "south",
+      "seamKey": "4c4b43f491fd4d45f00919ebde3a69b581811d9b5ffecb267b8eac7556f78f65",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "east",
+      "seamKey": "ddf7085f7ddf4e08b6297e37c8f5613bdb7ed44fa37c85eec4ed569e7e733944",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "south",
+      "seamKey": "b33efef909c5498b8f34c5133f5754e4c4db3356014198dd97a21328ec327ddb",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "south",
+      "seamKey": "d12076eeba19e070bf0b93c879e25dc392a4b49d6430863b1a625f1948f8d99f",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "east",
+      "seamKey": "4a1d916537217a296cd7241a00e08d3daa0dd2c91540a686e95b70be3e84b4a5",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "south",
+      "seamKey": "3fd3210a3e62ece99574d52dd13dd2b517faf8cc4cc7ec7d8ec7076ebd771d7d",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "east",
+      "seamKey": "5fd9972b25a0ce2318c1f806f1cc0875479ea917850ef4c1a71aa7379205b26b",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "south",
+      "seamKey": "53755b6aad01efd280f19081ccec732d019368a283a56067ce38b232ec09b10d",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "south",
+      "seamKey": "e5976ae8105de4f675bc16213269e052262395b57cdbcf02af4f13cd4ba11604",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "east",
+      "seamKey": "72f4b0310fc6f31ac1313a398a70c94253c6a0e54ab769daf4d0d6075733aa6e",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "layerId": "terrain",
+      "direction": "east",
+      "seamKey": "ae052a2531733ebaf5015756b3686858386de417f908bfb016debaad86895332",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "6a80e00704948eb7c1b765764f2b609f86cc61b5a293981ff03145e784891253",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "c4721251249a09d2b6d46f980ea0127a1d1941dbd3bfdc04603a3562203002aa",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "22e05df36cd008fd83b155a1c51f7aa08515b6f27877f1e4fb79408de54868fd",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "22f068ef0b4a7662c94dc0b51b15153b34e89bdd4f6e36e98e686c884a542fe3",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "4bbbcc867f0b9c91ea1a4929092558bd30a998a3833d6c245f8af54176f18b0a",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "bbab9512d50a62cde51b24b418cdf0a759f2428441bdb9067e91bb7c80c01b50",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "492cce81f1c92076826094554d396afb606f2fc9fdaccae0427a17cae10be200",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "6bae9f8d8c70fb6c5e1d8555dd89c3541bd6add74321c619f41f36e70f44c1d1",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "ee1f88c214c69e97d3eae2a7e11805ee3693718858936687f2f7a4b5ca58702c",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "79bdda10284a94b0f35ca274147deadeb6c5f0acfba88d78cc94999ed0abfebf",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "2e66a6b07cad9fe3471dff90ad7a6c9dced0a4b7ef8eee5bff556fc4e62837b3",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "8e69d36fa648d6512dd076c4d016aa718431e48834e858cc5dc8650e716bbb1f",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "c5b4edb23d3a36de837b1fc326a04dcc6d1a04f2c8df63f1e9b88975183a852e",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "2f5b6bac21b5fa3af9f7feb068b7a8f40f089ab48a629a5fafb408e33191aadd",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "ba86985fd18d59fe6b8eb55d25851bcface3cc92966e1bc6b66c3c933732b8a8",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "66dc3a546e3f87644b989ecab09f50fc84855c890265eff31996be7322b44724",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "02a705cccb7b0fd5a4851d2a047dcdb0f161ff2ff77385611bfb67a647bd511c",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "886fa5b7cb754ccd91ff9804008f939195003365e6421f708c9755f2f985a520",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "663f293a1eb3ea4cc147c913181dbf6cb6a1bd32cfbd713d7fb99cbd0abe56f2",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "97e4f17c81cd6b19d2b0277a62a8c0d974ebd86d8629b25c40612be5ca52b636",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "3aa83ce68c1c7130e20984cd21bfbcc689fc13162b67bc9a363f419c95cf6928",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "93a23c4c30a2adc24b930dbc80396b10a936f587cf364773026eb116459d7ee6",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "dd45e72085c3cddb7279bd58e031e70e78c5597e756b8f94f1e34aa5b5fb426e",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "3530da75f1d7debf8a9f481014caa38cd78aca9a428dc07c47bb2a7b8144d458",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "88cb9d6f546154c7c66f703752b4181f0165efa499516ac7fdb5f7fe5ce16196",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "92696d6b8d284744ac2bf02650a42f9a5ce38e407d331d2c2d11e7cd11b155e3",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "8896ee1c7e5d18e13d1f99cb004369d266d1300025e4b9870f89ae7bab67e2d4",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "c44d4b50b92cac7096852d84c27bcf77f013e3a11b57a2e840f2921e180c6869",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "efb9dba0a32a81e334e72d9b4a3933d0de7ef71804ea320691bec85f14a420c3",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "1e4f2f16b3b24a4a2fda16419ed398309d8120cd75279ecd8d2ffd7920f0f7e9",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "ab84c1bed588bae7b60f334f5f42e7549f012dbe0930f50173614cbb1842b3fc",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "ea9a9ee63c6a5ac285aa99ef09b8142b6ad808f1ec62d3b666cded61d14faea7",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "85f3c91f4e75dd6adce590e4bdae14c97404705ae91ff189c03e94cb96d73b62",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "2eb8a7134422653e64d46b1214f45e729dc4ed955f88c06196e1ae673aecdb5a",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "e46f4860bb588679551f2c92327dea426a3482fe36de93cca166268c9d075d40",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "c3ec6e4ec41c38bd516918587d9ca0d6a8614b34eb414cf701a6d45c152d2aee",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "6336fa2729c4467355093704e34aea0fae1f95dbdf88b86ef29fe3c74cfe7444",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "d8e7210d7d12a9b7d56d6f5bac788559fb7ee10e4cf4bfc9e9b8691c91fcea15",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "c3fe35e358732f7a1e25517f4cfd3c4ef7fec3647f4baaaa9eee4a9fad9a2294",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "3b10ee01aee019cacae89c56fad000d91c73edb3a6cc906ed9b0a158ca1d22ce",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "1dec46e1c1e984ded632f5d89a85ebca5fb8d7e4b1b8a097cf704e0ed7d51325",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "7f6546b5bd899fc7583f810de5ac0cb5117014ca2a0c011c5bb3eef33d46a675",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "728a6663768d224d4e29c8c895826e92f5d3116dcfd4cd56a3583c3c616212d2",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "15a9dfba4bc080ced4079e25ab1eee907f53727c28ad3d1b34b772176a715ff6",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "41540b20f49df271c44c65cb633bb6ad4b24a472a4dda9b4a292eb6f0e9e4572",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "7fedf8f74483bb07a3317d07210f05d4892588ddde87574bddb215a08535d175",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "96d569665d25a357ca8dfb99e1b3ef6ae42d9a4e19f8c86a7b7277403043673a",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "c919be8f2326e65099c43a1e868b53f968566795a55c4729da4215a2812a0201",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "75cf1bfded69449327cb59ca4b2da769066c22613d812905037a127045fb7f85",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "a9cc4511ed69c4cdf5c853bfff428f34e1d3bf21e479b2133d5991088cd25c03",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "304a63b17840d7cad715f47782a10931605ecced8e85f15629317104c22324d1",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "55d6aac4a85743f70d2c9c0ce6a0a2ebd0cf141deadf29cb4ea774874374f783",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "378c1cd0593733bc17b8a4d490d83b34b7ffff7de9f09b6fa3a7513f97451e06",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "c76449426445f76dc43fd30688453651419bf09605ab0c8acb6809780ea118a8",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "0ea2c0443b4aba02c18deba83591d56bb4c9b06fb2d27d1670382f8198de9dfa",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "591161cfda8421451a88e268abfd747cd0d521647b7c9e272350d7c492d28016",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "30281d60e56bd0e86aea456f30052ab5770fd0d3c3c4ba1cf8ab4ca2e767569b",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "5607026b10fd53d7af5671ee4350c4f0a6f2f36a4186d3d06ef2e2bec7fbb2fa",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "c365600d48cb325f869117e049801cda64513567278bc73f83206c9a7e74cd46",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "4535e93db62642249d5fbce2280f04483a90b00ae317371018a5d3a5b83a6129",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "66bbe27e5660276b602533b063578db7616d3ffc3f2a8c902e65081772bf669e",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "b11f263ba77ae5933768a668a1063756047939b65f28afb16e7a8f12caf61044",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "c5b4edb23d3a36de837b1fc326a04dcc6d1a04f2c8df63f1e9b88975183a852e",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "2f5b6bac21b5fa3af9f7feb068b7a8f40f089ab48a629a5fafb408e33191aadd",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "66dc3a546e3f87644b989ecab09f50fc84855c890265eff31996be7322b44724",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "eae0cd0c864011510ae4f299eb39f55087fd54e8d2ea8c79a7fae31dbed8b842",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "4ec55af683b08c5da24cda2a257dd99d7e796662b9e3fa2aad2ba5d7957a27ea",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "886fa5b7cb754ccd91ff9804008f939195003365e6421f708c9755f2f985a520",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "663f293a1eb3ea4cc147c913181dbf6cb6a1bd32cfbd713d7fb99cbd0abe56f2",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "south",
+      "seamKey": "3aa83ce68c1c7130e20984cd21bfbcc689fc13162b67bc9a363f419c95cf6928",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "f4f83742aa03f21248b587e7f42cfd7259b2745527c8e41ebcdb7bd5a0a45a27",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "interior",
+      "direction": "east",
+      "seamKey": "dd45e72085c3cddb7279bd58e031e70e78c5597e756b8f94f1e34aa5b5fb426e",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "1ed83aef3565750eb50f0ff582d505321cb8fc4a76e4fb85b9bcf4931c11b5ea",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "04bcb75f1bf49bdcfeeea30b86d912019fd71bcbb639ef71d4ea60f086287274",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "88cb9d6f546154c7c66f703752b4181f0165efa499516ac7fdb5f7fe5ce16196",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "92696d6b8d284744ac2bf02650a42f9a5ce38e407d331d2c2d11e7cd11b155e3",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "c44d4b50b92cac7096852d84c27bcf77f013e3a11b57a2e840f2921e180c6869",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "4f0d052732a5acd0701e7ba20d01d3d4782b9c8f3ba81c4f5b8a3799efdacdaa",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "d5cf118b06216ae225cbd40428fa50ce241cc7aeb2c9cc2a3b2c610dba00d1d6",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "1e4f2f16b3b24a4a2fda16419ed398309d8120cd75279ecd8d2ffd7920f0f7e9",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "ab84c1bed588bae7b60f334f5f42e7549f012dbe0930f50173614cbb1842b3fc",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "south",
+      "seamKey": "85f3c91f4e75dd6adce590e4bdae14c97404705ae91ff189c03e94cb96d73b62",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "5cfe2f31a763bc93eacf80e4360029eb94990184f13767e6692dd98062ae1d35",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "sky_overlay",
+      "direction": "east",
+      "seamKey": "e46f4860bb588679551f2c92327dea426a3482fe36de93cca166268c9d075d40",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "6b6c87d73d1f01553a3a78c0169fb430a398930b9232d1521e2b83e8428ffa7d",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "ed8c7d3f20dde7a323dca0aa31b24c900a27d470be3379ba6aa8633656701cd3",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "6336fa2729c4467355093704e34aea0fae1f95dbdf88b86ef29fe3c74cfe7444",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "d8e7210d7d12a9b7d56d6f5bac788559fb7ee10e4cf4bfc9e9b8691c91fcea15",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "3b10ee01aee019cacae89c56fad000d91c73edb3a6cc906ed9b0a158ca1d22ce",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "fb3a310b2ecb29d9c0eba837f7bca6ed9202c36c14bff8c422c34f393340bb57",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "e908ced774c1a0537ef32daef98073b0d58e3de8c5a103d66cd78b3ca33e74e2",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "7f6546b5bd899fc7583f810de5ac0cb5117014ca2a0c011c5bb3eef33d46a675",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "728a6663768d224d4e29c8c895826e92f5d3116dcfd4cd56a3583c3c616212d2",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "41540b20f49df271c44c65cb633bb6ad4b24a472a4dda9b4a292eb6f0e9e4572",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "3ccd653e91c0caf9244834c2fc7d19b1ff95cac57fd099cbdf4642d8e84ef52c",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "96d569665d25a357ca8dfb99e1b3ef6ae42d9a4e19f8c86a7b7277403043673a",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "0547309cd5bac0e4df7b33468966fd9a3c02220a7f1036b3282a36c4d7b53f68",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "fd2ea913b22381cb31ff9eabc395c81a53ada241f72ee82c771519ed4b8e4677",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "75cf1bfded69449327cb59ca4b2da769066c22613d812905037a127045fb7f85",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "a9cc4511ed69c4cdf5c853bfff428f34e1d3bf21e479b2133d5991088cd25c03",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "55d6aac4a85743f70d2c9c0ce6a0a2ebd0cf141deadf29cb4ea774874374f783",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "5bb832ecf99b1a7f421beacffaf9f82b6e91795c5742ac0d13fd471857b28fd1",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "b427a9ed55e9c275c06509a4aa054d762520eba26d185a4c0dddc66b9c006c99",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "c76449426445f76dc43fd30688453651419bf09605ab0c8acb6809780ea118a8",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "0ea2c0443b4aba02c18deba83591d56bb4c9b06fb2d27d1670382f8198de9dfa",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "30281d60e56bd0e86aea456f30052ab5770fd0d3c3c4ba1cf8ab4ca2e767569b",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "ff31210c391c2a4f56945f22d8b40bde50ac276e4cfdbcdeb461d1899e2aed5a",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "c365600d48cb325f869117e049801cda64513567278bc73f83206c9a7e74cd46",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "58a31091b3c0caa30b93082efe94e2d5fb6ea4eba470f45cf50b432a36b44c82",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "88850a34e2232cb77ac4a9f65a86ab8dfbca6ae06f4fd1c92fd70704a7dd0f07",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "efebffa12fc963074c84d152a502ae6bb65dad1fa06646d3b9ebe8629c33e949",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "fa77e4f1365e0cd4b7857384e125acf41bf33ee2e8f12c458e80aa1d0fc44ef8",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "e10f88ab67bbda4e1a827222e93e54bac196f2f9e16bf76abc06c5c91c20d68c",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "8178603cd1bd9708d4ce9c3561fb241b146d98dea8c6e36996e210a69d84bdfb",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "5705e67ef516d3b7e2098dac22de4a9b1dcb74878df2718db309c97cc010ef4d",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "0e0e2eab23733b1d686dbed9a5b4ada3b18186daaf4bafcd939a84cd08361655",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "18de22e464939df8254d2b5b82016cb4ac49382abb3077f1afae159a8f412d85",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "south",
+      "seamKey": "d65212372019ffe2de149e3e2e2bdcb984130b0c320e3a300374698d97cb345d",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "39196bb2c6f5d71820d91f8be80e6a88e861b4fc51f71668f9425560f0e13657",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "surface",
+      "direction": "east",
+      "seamKey": "dcb41316daf2255f24723c1bee2dd93c85bde203612992cb2f0137967464acf6",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "62a638c58bc93f428353ccbdca8596488415005420922caeb521f0ad19ec4fa4",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "3a0cb78335fc361780379413b585cf23699530d9f182a77305f8f173e8022fbe",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "fc12de62ab6985a50d1e0bff867ccd548533d712fb00af171e2c1643fae29886",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "cdb1a91a19521b2ed4423ce16e6953f409bfa3a479856029a04c8b9fb0b35df3",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "c47020b9488fe901c39f5ba7a8ba3e9c0d6b69d9b53d4857ef6a54f3fbed2330",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "3c53feae65eda92be5213261dae660316f50f7fba4f7f36d0ef3ffc24e70432f",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "ca0a862a4ecfbbf2652e0e6b5a839b0f708e6efaeea6391904f7cc51b49e5549",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "083f4ff4a985e0061ad3936bb647e4d175c8646ea9a8a2ac53e9939095bd65ff",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "58f5fe604cba884179b702333e1f8184d0cf91494d0d05bae1d31ff38b286b75",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "south",
+      "seamKey": "89050b4ecf09e4afc0cb6b4ac6d7f9a8e4b351a882acbc97d90d388cfc7bdbc7",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "efc5050377ce17fb1268f3ae6661d5c0bc0b3ce6c8c26454fafdf47f269aef06",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underground",
+      "direction": "east",
+      "seamKey": "21197346a0cb6f17a231ccba12664d8371e057e5e8f8363f2aafb2c75dfb8aa2",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "east",
+      "seamKey": "934e680d0215ae9136a86942ee1755ea2c9c626605a18eec4911d9767c14970c",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "south",
+      "seamKey": "4c0000a1b1f9767fb6b102889fbd1d27ea83980185d34687d7b021ad89270188",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "east",
+      "seamKey": "0a3734401946c85fe9125ce27f3f78ee89ecdc17d3329821d61af5eca3e45dc2",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "south",
+      "seamKey": "e9bcc30dbfbb73961b5a9fb7da0474956e290506345eadc2aa05d29880a2fb49",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "south",
+      "seamKey": "1e363de3d8f103fbd95a63bdc2e41ef81ec2e6af06d3bac7c9fc0131666317d4",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "east",
+      "seamKey": "e3329b6339a7953f8f27a3f7e948c9833866433cde722a61e9c86873c8651812",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "south",
+      "seamKey": "e76ab1b9571bf7da20d6656694aeb383e46251a7a6f6257bd053669884c7cb04",
+      "waterConnector": "water_marsh",
+      "roadConnector": "road_gate",
+      "biomeBand": "biome_band_3"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "east",
+      "seamKey": "d06387f738ce9a30d457c93ecaaff5380853b4b10d51036d935c5acf6b7fca89",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "south",
+      "seamKey": "ce01d55e99fa9270e9a7c8893636a349b8cec068af6da24e223f02c2b430bfa4",
+      "waterConnector": "water_shore",
+      "roadConnector": "road_bridge",
+      "biomeBand": "biome_band_2"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "south",
+      "seamKey": "98b061956361eea38b5f7ea3a0188ac47783063cc88e9859bbe720b21969c4c6",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "east",
+      "seamKey": "34ee460354e53d1c61fef524f0d67cb12b554ebc01e0511234b39b56427b5b2d",
+      "waterConnector": "water_closed",
+      "roadConnector": "road_none",
+      "biomeBand": "biome_band_0"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "layerId": "underwater",
+      "direction": "east",
+      "seamKey": "41b8d842c23e50ace7fb770b4d3cfb06e9e6f5403584908284d9a7effe077c63",
+      "waterConnector": "water_stream",
+      "roadConnector": "road_trail",
+      "biomeBand": "biome_band_1"
+    }
+  ]
+}

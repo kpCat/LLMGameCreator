@@ -1,0 +1,34 @@
+<svg viewBox="0 0 360 164" data-fixture-id="layer_transition_window_surface_underground_water">
+  <title>layer_transition_window_surface_underground_water</title>
+  <rect x="0" y="0" width="360" height="164" fill="#101418" />
+  <text x="12" y="18" fill="#e8eef3" font-size="10" font-family="monospace">layer_transition_window_surface_underground_water</text>
+  <text x="12" y="34" fill="#9fb0bf" font-size="8" font-family="monospace">windows=1; chunks=27</text>
+  <rect x="18" y="44" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="b5d6a74ba388" />
+  <rect x="30" y="44" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="c3f83a690331" />
+  <rect x="42" y="44" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="bd644f0f1e63" />
+  <rect x="18" y="56" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="939a90380fb5" />
+  <rect x="30" y="56" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="31c1c6b7fc29" />
+  <rect x="42" y="56" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="e86d4c5974c8" />
+  <rect x="18" y="68" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="6717d2a8d4a1" />
+  <rect x="30" y="68" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="40311d3ff68e" />
+  <rect x="42" y="68" width="10" height="10" fill="#69a55a" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="surface" data-chunk-key="c48cb5646c13" />
+  <rect x="18" y="44" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="2184f9428fed" />
+  <rect x="30" y="44" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="abc8dfaac971" />
+  <rect x="42" y="44" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="c99c37fa69b6" />
+  <rect x="18" y="56" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="57549c17a8c9" />
+  <rect x="30" y="56" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="23bcf1492c80" />
+  <rect x="42" y="56" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="dcd0a6ef04ec" />
+  <rect x="18" y="68" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="650ae4ba5ce6" />
+  <rect x="30" y="68" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="7b44c91552db" />
+  <rect x="42" y="68" width="10" height="10" fill="#746b84" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underground" data-chunk-key="1143d10a568e" />
+  <rect x="18" y="44" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="ac2c6df03ac1" />
+  <rect x="30" y="44" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="99981284ce2d" />
+  <rect x="42" y="44" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="9324c09004be" />
+  <rect x="18" y="56" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="d6f39e2e8cff" />
+  <rect x="30" y="56" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="630614390749" />
+  <rect x="42" y="56" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="5d301acbd9dd" />
+  <rect x="18" y="68" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="caa03b11ce93" />
+  <rect x="30" y="68" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="40321cb136d1" />
+  <rect x="42" y="68" width="10" height="10" fill="#3d87a5" data-window-id="surface_underground_underwater_transition_radius1" data-layer-id="underwater" data-chunk-key="2dd8e4cd6b8d" />
+  <text x="12" y="132" fill="#d6c890" font-size="7" font-family="monospace">surface_underground_underwater_transition_radius1 r=1 c=24,32</text>
+</svg>

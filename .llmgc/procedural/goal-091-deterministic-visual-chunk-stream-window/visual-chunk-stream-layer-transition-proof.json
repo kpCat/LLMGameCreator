@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "visual_chunk_stream_layer_transition_proof_v1",
+  "goalId": "goal_091_deterministic_visual_chunk_stream_window",
+  "passed": true,
+  "dataDrivenLayerLinksPassed": true,
+  "notHardcodedSurfaceUndergroundOnly": true,
+  "portalOrTransitionLinkCount": 6,
+  "rows": [
+    {
+      "fixtureId": "infinite_streaming_multilayer_window",
+      "windowId": "infinite_east_camera_radius1",
+      "profileId": "infinite_streaming_world_multilayer",
+      "layerIds": [
+        "surface",
+        "underground",
+        "interior",
+        "sky_overlay"
+      ],
+      "layerLinks": [
+        {
+          "linkId": "sky_overlay_to_surface",
+          "fromLayerId": "sky_overlay",
+          "toLayerId": "surface",
+          "linkKind": "Overlay",
+          "summary": "Overlay link from sky_overlay to surface"
+        },
+        {
+          "linkId": "surface_to_interior_door",
+          "fromLayerId": "surface",
+          "toLayerId": "interior",
+          "linkKind": "Portal",
+          "summary": "Portal link from surface to interior"
+        },
+        {
+          "linkId": "surface_to_underground_portal",
+          "fromLayerId": "surface",
+          "toLayerId": "underground",
+          "linkKind": "Portal",
+          "summary": "Portal link from surface to underground"
+        }
+      ],
+      "includesWaterLayer": false
+    },
+    {
+      "fixtureId": "infinite_streaming_multilayer_window",
+      "windowId": "infinite_player_spawn_radius1",
+      "profileId": "infinite_streaming_world_multilayer",
+      "layerIds": [
+        "surface",
+        "underground",
+        "interior",
+        "sky_overlay"
+      ],
+      "layerLinks": [
+        {
+          "linkId": "sky_overlay_to_surface",
+          "fromLayerId": "sky_overlay",
+          "toLayerId": "surface",
+          "linkKind": "Overlay",
+          "summary": "Overlay link from sky_overlay to surface"
+        },
+        {
+          "linkId": "surface_to_interior_door",
+          "fromLayerId": "surface",
+          "toLayerId": "interior",
+          "linkKind": "Portal",
+          "summary": "Portal link from surface to interior"
+        },
+        {
+          "linkId": "surface_to_underground_portal",
+          "fromLayerId": "surface",
+          "toLayerId": "underground",
+          "linkKind": "Portal",
+          "summary": "Portal link from surface to underground"
+        }
+      ],
+      "includesWaterLayer": false
+    },
+    {
+      "fixtureId": "layer_transition_window_surface_underground_water",
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "layerIds": [
+        "surface",
+        "underground",
+        "underwater"
+      ],
+      "layerLinks": [
+        {
+          "linkId": "surface_to_underground_gate",
+          "fromLayerId": "surface",
+          "toLayerId": "underground",
+          "linkKind": "Portal",
+          "summary": "Portal link from surface to underground"
+        },
+        {
+          "linkId": "surface_to_underwater_port",
+          "fromLayerId": "surface",
+          "toLayerId": "underwater",
+          "linkKind": "Transition",
+          "summary": "Transition link from surface to underwater"
+        }
+      ],
+      "includesWaterLayer": true
+    }
+  ]
+}

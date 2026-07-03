@@ -1,0 +1,80 @@
+<svg viewBox="0 0 360 164" data-fixture-id="infinite_streaming_multilayer_window">
+  <title>infinite_streaming_multilayer_window</title>
+  <rect x="0" y="0" width="360" height="164" fill="#101418" />
+  <text x="12" y="18" fill="#e8eef3" font-size="10" font-family="monospace">infinite_streaming_multilayer_window</text>
+  <text x="12" y="34" fill="#9fb0bf" font-size="8" font-family="monospace">windows=2; chunks=72</text>
+  <rect x="30" y="44" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="d3c576a89d95" />
+  <rect x="42" y="44" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="0c416013ef41" />
+  <rect x="54" y="44" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="889e942901a2" />
+  <rect x="30" y="56" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="ab3c44f7fca6" />
+  <rect x="42" y="56" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="84e5bcd86a29" />
+  <rect x="54" y="56" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="60ac70588e19" />
+  <rect x="30" y="68" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="8e4d8a693f7c" />
+  <rect x="42" y="68" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="7ec834b9c43b" />
+  <rect x="54" y="68" width="10" height="10" fill="#d0b15c" data-window-id="infinite_east_camera_radius1" data-layer-id="interior" data-chunk-key="0e65eab05e82" />
+  <rect x="30" y="44" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="6e353fd9105d" />
+  <rect x="42" y="44" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="ab722a165ef3" />
+  <rect x="54" y="44" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="99bbb4a5ce85" />
+  <rect x="30" y="56" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="da627aa3e800" />
+  <rect x="42" y="56" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="31fe934a7a30" />
+  <rect x="54" y="56" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="5da08bdebca3" />
+  <rect x="30" y="68" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="7b1ee894694d" />
+  <rect x="42" y="68" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="a019c63a83ca" />
+  <rect x="54" y="68" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_east_camera_radius1" data-layer-id="sky_overlay" data-chunk-key="80ab08a848b2" />
+  <rect x="30" y="44" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="6edadbe7a82b" />
+  <rect x="42" y="44" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="a73d41f7cbee" />
+  <rect x="54" y="44" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="db3bd3e32a2f" />
+  <rect x="30" y="56" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="fd37b4863c08" />
+  <rect x="42" y="56" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="e7050b626457" />
+  <rect x="54" y="56" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="aab0bb133090" />
+  <rect x="30" y="68" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="0587e7063f95" />
+  <rect x="42" y="68" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="a3a547ef6fa4" />
+  <rect x="54" y="68" width="10" height="10" fill="#69a55a" data-window-id="infinite_east_camera_radius1" data-layer-id="surface" data-chunk-key="25aff6216ffc" />
+  <rect x="30" y="44" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="da223397992c" />
+  <rect x="42" y="44" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="2420945152e4" />
+  <rect x="54" y="44" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="c3c3a8057e3a" />
+  <rect x="30" y="56" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="99f5c1498384" />
+  <rect x="42" y="56" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="825e87578975" />
+  <rect x="54" y="56" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="3ba2ef5c187b" />
+  <rect x="30" y="68" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="755b913d8182" />
+  <rect x="42" y="68" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="c6121fd16117" />
+  <rect x="54" y="68" width="10" height="10" fill="#746b84" data-window-id="infinite_east_camera_radius1" data-layer-id="underground" data-chunk-key="1f7a710c4483" />
+  <rect x="22" y="44" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="79c0257f145c" />
+  <rect x="34" y="44" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="d3c576a89d95" />
+  <rect x="46" y="44" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="0c416013ef41" />
+  <rect x="22" y="56" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="501b396600c0" />
+  <rect x="34" y="56" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="ab3c44f7fca6" />
+  <rect x="46" y="56" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="84e5bcd86a29" />
+  <rect x="22" y="68" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="2646beee7125" />
+  <rect x="34" y="68" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="8e4d8a693f7c" />
+  <rect x="46" y="68" width="10" height="10" fill="#d0b15c" data-window-id="infinite_player_spawn_radius1" data-layer-id="interior" data-chunk-key="7ec834b9c43b" />
+  <rect x="22" y="44" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="b4b180844777" />
+  <rect x="34" y="44" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="6e353fd9105d" />
+  <rect x="46" y="44" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="ab722a165ef3" />
+  <rect x="22" y="56" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="4989949b5dd0" />
+  <rect x="34" y="56" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="da627aa3e800" />
+  <rect x="46" y="56" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="31fe934a7a30" />
+  <rect x="22" y="68" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="9ced9f66fcb8" />
+  <rect x="34" y="68" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="7b1ee894694d" />
+  <rect x="46" y="68" width="10" height="10" fill="#7ba7d1" data-window-id="infinite_player_spawn_radius1" data-layer-id="sky_overlay" data-chunk-key="a019c63a83ca" />
+  <rect x="22" y="44" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="3bf51e9c9963" />
+  <rect x="34" y="44" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="6edadbe7a82b" />
+  <rect x="46" y="44" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="a73d41f7cbee" />
+  <rect x="22" y="56" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="5bf7d1417a92" />
+  <rect x="34" y="56" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="fd37b4863c08" />
+  <rect x="46" y="56" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="e7050b626457" />
+  <rect x="22" y="68" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="d74426c5117f" />
+  <rect x="34" y="68" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="0587e7063f95" />
+  <rect x="46" y="68" width="10" height="10" fill="#69a55a" data-window-id="infinite_player_spawn_radius1" data-layer-id="surface" data-chunk-key="a3a547ef6fa4" />
+  <rect x="22" y="44" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="a3a7c0cd5834" />
+  <rect x="34" y="44" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="da223397992c" />
+  <rect x="46" y="44" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="2420945152e4" />
+  <rect x="22" y="56" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="0cd6755d4f09" />
+  <rect x="34" y="56" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="99f5c1498384" />
+  <rect x="46" y="56" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="825e87578975" />
+  <rect x="22" y="68" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="fc79618302e6" />
+  <rect x="34" y="68" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="755b913d8182" />
+  <rect x="46" y="68" width="10" height="10" fill="#746b84" data-window-id="infinite_player_spawn_radius1" data-layer-id="underground" data-chunk-key="c6121fd16117" />
+  <text x="12" y="132" fill="#d6c890" font-size="7" font-family="monospace">infinite_east_camera_radius1 r=1 c=1,0</text>
+  <text x="12" y="136" fill="#d6c890" font-size="7" font-family="monospace">infinite_player_spawn_radius1 r=1 c=0,0</text>
+</svg>

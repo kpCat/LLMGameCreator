@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "visual_chunk_stream_negative_proof_v1",
+  "goalId": "goal_091_deterministic_visual_chunk_stream_window",
+  "passed": true,
+  "scenarioCount": 16,
+  "rejectedCount": 16,
+  "matchedExpectationCount": 16,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_path_metadata",
+      "causalMutation": "absolute path metadata",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.path.absolute",
+          "target": "finite_255x257_clipped_origin_radius2",
+          "message": "Stream evidence must not use absolute paths as data."
+        }
+      ]
+    },
+    {
+      "scenarioId": "chunk_key_mismatch",
+      "causalMutation": "chunk key does not match formula",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.chunk_key.mismatch",
+          "target": "not_deterministic",
+          "message": "Chunk key must match deterministic profile/seed/version/layer/chunk formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.seam.chunk_missing",
+          "target": "1c3405ecfbe4336c8aae714063c920f475fe9e140f3f684c5f3a04ef6e75bf6d",
+          "message": "Seams must reference materialized chunks."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.seam.chunk_missing",
+          "target": "4c4b43f491fd4d45f00919ebde3a69b581811d9b5ffecb267b8eac7556f78f65",
+          "message": "Seams must reference materialized chunks."
+        }
+      ]
+    },
+    {
+      "scenarioId": "delta_overlay_raw_payload",
+      "causalMutation": "delta overlay carries raw cells",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.delta_overlay.raw_payload",
+          "target": "surface_underwater_portal_overlay",
+          "message": "Delta overlays must be compact summaries, not raw cell payloads."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_chunk_keys",
+      "causalMutation": "duplicate chunk keys inside one window",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.chunk_key.duplicate",
+          "target": "54b6679ce7ed162618fe3dc7a92d53549e7742655b451da7976f34925a7a966f",
+          "message": "Chunk keys must be unique inside one materialized window."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.chunk_key.mismatch",
+          "target": "54b6679ce7ed162618fe3dc7a92d53549e7742655b451da7976f34925a7a966f",
+          "message": "Chunk key must match deterministic profile/seed/version/layer/chunk formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.seam.chunk_missing",
+          "target": "1c3405ecfbe4336c8aae714063c920f475fe9e140f3f684c5f3a04ef6e75bf6d",
+          "message": "Seams must reference materialized chunks."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.seam.chunk_missing",
+          "target": "b33efef909c5498b8f34c5133f5754e4c4db3356014198dd97a21328ec327ddb",
+          "message": "Seams must reference materialized chunks."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.seam.chunk_missing",
+          "target": "ddf7085f7ddf4e08b6297e37c8f5613bdb7ed44fa37c85eec4ed569e7e733944",
+          "message": "Seams must reference materialized chunks."
+        }
+      ]
+    },
+    {
+      "scenarioId": "finite_out_of_bounds_without_clipping",
+      "causalMutation": "finite boundary crosses without clipping policy",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.finite_clipping.required",
+          "target": "finite_255x257_clipped_origin_radius2",
+          "message": "Finite out-of-bounds windows require explicit clipping policy."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_radius",
+      "causalMutation": "radius is negative",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.radius.invalid",
+          "target": "finite_255x257_clipped_origin_radius2",
+          "message": "Radius must be in the supported deterministic proof range."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_generator_version",
+      "causalMutation": "missing generator version",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.generator_version.missing",
+          "target": "finite_custom_255x257_surface_window",
+          "message": "Generator version is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_seed",
+      "causalMutation": "missing world seed",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.seed.missing",
+          "target": "finite_custom_255x257_surface_window",
+          "message": "World seed is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_source_of_truth",
+      "causalMutation": "prompt text as source of truth",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.prompt.source_of_truth",
+          "target": "finite_255x257_clipped_origin_radius2",
+          "message": "Prompt text must not be stream-window source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rating_metadata_without_safe_fallback",
+      "causalMutation": "adult/rating metadata without safe fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.rating.safe_fallback_missing",
+          "target": "infinite_player_spawn_radius1",
+          "message": "Adult/rating metadata requires a safe fallback ref."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_full_world_dump",
+      "causalMutation": "raw full-world cell dump requested",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.raw_full_world_dump.forbidden",
+          "target": "huge_sparse_far_surface_radius1",
+          "message": "Stream windows must not request raw full-world cell dumps."
+        }
+      ]
+    },
+    {
+      "scenarioId": "road_connector_mismatch",
+      "causalMutation": "road connector mismatch across seam",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.road_connector.mismatch",
+          "target": "1c3405ecfbe4336c8aae714063c920f475fe9e140f3f684c5f3a04ef6e75bf6d",
+          "message": "Road connector must be derived from the seam key."
+        }
+      ]
+    },
+    {
+      "scenarioId": "seam_key_mismatch",
+      "causalMutation": "seam key mismatch across boundary",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.biome_band.mismatch",
+          "target": "bad_seam_key",
+          "message": "Biome continuity band must be derived from the seam key."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.road_connector.mismatch",
+          "target": "bad_seam_key",
+          "message": "Road connector must be derived from the seam key."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.seam_key.mismatch",
+          "target": "bad_seam_key",
+          "message": "Adjacent chunks must share the same seam key."
+        },
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.water_connector.mismatch",
+          "target": "bad_seam_key",
+          "message": "Water connector must be derived from the seam key."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_layer",
+      "causalMutation": "unknown layer id",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.layer.unknown",
+          "target": "missing_layer",
+          "message": "Requested layer must exist in the Goal090 profile."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_profile",
+      "causalMutation": "unknown profile id",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.profile.unknown",
+          "target": "missing_profile",
+          "message": "Requested profile must exist in Goal090 profile fixtures."
+        }
+      ]
+    },
+    {
+      "scenarioId": "water_connector_mismatch",
+      "causalMutation": "water connector mismatch across seam",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_stream.water_connector.mismatch",
+          "target": "1c3405ecfbe4336c8aae714063c920f475fe9e140f3f684c5f3a04ef6e75bf6d",
+          "message": "Water connector must be derived from the seam key."
+        }
+      ]
+    }
+  ]
+}
