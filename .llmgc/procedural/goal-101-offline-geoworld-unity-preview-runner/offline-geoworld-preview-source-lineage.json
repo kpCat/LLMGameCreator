@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "offline_geoworld_preview_source_lineage_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "passed": true,
+  "goal100AcceptedFalsePreserved": true,
+  "goal100PayloadConsumed": true,
+  "goal100SimulatedReadProofPassed": true,
+  "goal100AlphaRuntimeBootstrapUnchanged": true,
+  "records": [
+    {
+      "relativePath": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+      "exists": true,
+      "sha256": "cfb3d50677a7d04f02af3e32f0a1e78c1d15ec1a3f29d3b74bae240d1b166741",
+      "purpose": "geoworld pattern study"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+      "exists": true,
+      "sha256": "7f0340599487f826c258fdf8c2378d4adeb5aec16b2bb5d87ce6b8e2dabcea4f",
+      "purpose": "streaming policy"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+      "exists": true,
+      "sha256": "3d5a5e89377eb6cdf617cc1edab0362cd72fb3f70d089b685087e22f70a4f06c",
+      "purpose": "source adapter policy"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-visual-cache-unity-handoff-report.md",
+      "exists": true,
+      "sha256": "f1a7545ea9a32389d08d8eab4d9611a2bd4d6edff3d8b4b85041bae21d8a3c51",
+      "purpose": "Goal100 report"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-visual-cache-catalog.json",
+      "exists": true,
+      "sha256": "c001850ad0ca6903ffbec0798091d74d3db9f2308371d0704567700cf9db0354",
+      "purpose": "Goal100 visual cache"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-feature-chunk-ledger.json",
+      "exists": true,
+      "sha256": "b8ce1b55e77aa976259f5f5c553ff9513686ede4218940fbe32dab63f1a806a1",
+      "purpose": "Goal100 feature ledger"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-handoff-manifest.json",
+      "exists": true,
+      "sha256": "9828bbd5495d3f94ba21004f5ba6e5daf7cf32efdab533241a4b3f6037c8c584",
+      "purpose": "Goal100 manifest"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-simulated-read-proof.json",
+      "exists": true,
+      "sha256": "4aabfb06dea37186ade8a0e9ce25e645f04de549875686e7035e1c3de5589f67",
+      "purpose": "Goal100 read proof"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-negative-proof.json",
+      "exists": true,
+      "sha256": "5b36ba679ae0f716697ef35e2efac37dd119043b389ee2d0a7c381ce40f74d70",
+      "purpose": "Goal100 negative proof"
+    }
+  ],
+  "diagnostics": []
+}

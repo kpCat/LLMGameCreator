@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-04T00:18:00Z",
+    "updated_at_utc":  "2026-07-03T22:51:07Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 100 offline geoworld visual cache Unity handoff produced for review",
-    "gate_status":  "offline_geoworld_visual_cache_unity_handoff_verification",
+    "current_phase_title":  "Goal 101 offline geoworld Unity preview runner produced for review",
+    "gate_status":  "offline_geoworld_unity_preview_runner_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 100 Offline Geoworld Visual Cache Unity Handoff is produced for review: offline_geoworld_visual_cache_unity_handoff_verification required, accepted=false. It consumes real Goal 099 synthetic offline geoworld WorldSourceGraph artifacts, builds compact visual cache records, mirrors metadata-only Unity StreamingAssets payload files, adds a standalone Unity probe and surfaces the handoff in the existing Visual World Stream Preview Workspace. Evidence is under .llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/. Goal 100 changes no LFZ archive/source, live geodata ingestion, network/provider adapter, public tile scraping, Runtime, public GamePackage schema, Lua, generator-library, project files, dependencies, binary/raster media, raw geodata dump or prompt-output work. Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 100 offline geoworld visual cache Unity handoff evidence. Goal 100 is Application-side contract/validation/evidence plus metadata-only Unity handoff/probe work; it represents offline synthetic visual-cache handoff readiness, not live geodata/provider/runtime implementation or live Unity gameplay rendering. Goal 100 remains accepted=false until explicit user review accepts it, and Goal 099, Goal 098 and Goal 097 remain accepted=false.",
-    "recommended_next_decision":  "Review Goal 100 offline geoworld visual cache Unity handoff evidence and only mark offline_geoworld_visual_cache_unity_handoff_verification passed after explicit user acceptance; do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library or media work from this handoff.",
+    "active_manual_gate":  "Goal 101 Offline Geoworld Unity Preview Runner is produced for review: offline_geoworld_unity_preview_runner_verification required, accepted=false. It consumes real Goal 100 metadata-only offline geoworld visual cache Unity handoff artifacts, writes compact preview command payloads, mirrors five Unity StreamingAssets payload files, adds standalone Unity Alpha preview runner scripts and surfaces the preview runner in the existing Visual World Stream Preview Workspace. Evidence is under .llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/. Goal 101 changes no LFZ archive/source, live geodata ingestion, network/provider adapter, public tile scraping, Runtime, public GamePackage schema, Lua, generator-library, project files, dependencies, binary/raster media, raw geodata dump, final art, atlas, scene/prefab production or prompt-output work. Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 101 offline geoworld Unity preview runner evidence. Goal 101 is Application-side contract/validation/evidence plus standalone Unity Alpha preview runner work; it represents metadata-command preview readiness, not final Runtime consumption, full gameplay, real geodata fetching, final art, atlas, scene/prefab production or live Unity gameplay rendering. Goal 101 remains accepted=false until explicit user review accepts it, and Goal 100, Goal 099, Goal 098 and Goal 097 remain accepted=false.",
+    "recommended_next_decision":  "Review Goal 101 offline geoworld Unity preview runner evidence and only mark offline_geoworld_unity_preview_runner_verification passed after explicit user acceptance; do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final art, atlas, scene/prefab or media work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "offline_geoworld_unity_preview_runner_verification",
                                                         "offline_geoworld_visual_cache_unity_handoff_verification",
                                                         "offline_geoworld_worldsourcegraph_streaming_verification",
                                                         "geoworld_source_adapter_streaming_contract_verification",
@@ -140,7 +141,8 @@
                              "goal_097_manual_gate":  "final_roadmap_rebaseline_dream_scope_productivity_verification",
                              "goal_098_manual_gate":  "geoworld_source_adapter_streaming_contract_verification",
                              "goal_099_manual_gate":  "offline_geoworld_worldsourcegraph_streaming_verification",
-                             "goal_100_manual_gate":  "offline_geoworld_visual_cache_unity_handoff_verification"
+                             "goal_100_manual_gate":  "offline_geoworld_visual_cache_unity_handoff_verification",
+                             "goal_101_manual_gate":  "offline_geoworld_unity_preview_runner_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -431,6 +433,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "offline_geoworld_unity_preview_runner_verification",
+                                          "goal_101_offline_geoworld_unity_preview_runner",
+                                          "manual_review_goal_101_offline_geoworld_unity_preview_runner",
                                           "offline_geoworld_visual_cache_unity_handoff_verification",
                                           "goal_100_offline_geoworld_visual_cache_unity_handoff",
                                           "manual_review_goal_100_offline_geoworld_visual_cache_unity_handoff",
@@ -514,10 +519,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "offline_geoworld_visual_cache_unity_handoff_verification",
-    "recommended_next_work_item_title":  "Review Goal 100 offline geoworld visual cache Unity handoff",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-100-offline-geoworld-visual-cache-unity-handoff/GOAL.md",
+    "recommended_next_work_item":  "offline_geoworld_unity_preview_runner_verification",
+    "recommended_next_work_item_title":  "Review Goal 101 offline geoworld Unity preview runner",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-101-offline-geoworld-unity-preview-runner/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal 101 offline geoworld Unity preview runner evidence",
+                                              "Keep Goal 101 accepted=false until user review accepts it",
+                                              "Use Goal 101 metadata command payloads, standalone Unity Alpha preview runner scripts, travel-window script and workspace inspection only as future review handoff input; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
                                               "Review Goal 100 offline geoworld visual cache Unity handoff evidence",
                                               "Keep Goal 100 accepted=false until user review accepts it",
                                               "Use Goal 100 offline synthetic visual cache, metadata-only Unity StreamingAssets payload and standalone probe only as future review handoff input; do not start live geodata ingestion, Runtime consumers, live Unity gameplay rendering, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
@@ -2369,5 +2377,22 @@
                                                                                             "Goal 100 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media or prompt dump."
                                                                                         ],
                                                                     "next_action":  "review_goal_100_offline_geoworld_visual_cache_unity_handoff"
-                                                                }
+                                                                },
+    "offline_geoworld_unity_preview_runner_verification":  {
+                                                               "status":  "produced_for_review",
+                                                               "accepted":  false,
+                                                               "evidence_source":  "goal_101_offline_geoworld_unity_preview_runner",
+                                                               "observed_result":  [
+                                                                                       "Goal 101 produces offline geoworld Unity preview runner evidence under .llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner with accepted=false.",
+                                                                                       "implementationStatus=GREEN, commandCount=18, commandKindCount=10, travelWindowStepCount=4, unityPayloadFileCount=5 and qualityGatePassed=true.",
+                                                                                       "The BCL-only Application seam lives under src/LLMGameCreator.Application/Design/OfflineGeoworldUnityPreviewRunner/ and consumes real Goal 100 metadata-only offline geoworld visual cache Unity handoff artifacts by repository-relative path.",
+                                                                                       "The preview runner maps all required command kinds: administrative_hint_marker, barrier_line, bridge_marker, building_footprint_marker, land_use_area_plane, poi_marker, road_segment_line, terrain_hint_marker, vegetation_area_marker and water_body_plane.",
+                                                                                       "The handoff mirrors five metadata-only payload files into unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/ and adds standalone OfflineGeoworldPreviewRunner, OfflineGeoworldPreviewPrimitiveFactory and OfflineGeoworldPreviewTravelWindow Unity Alpha scripts.",
+                                                                                       "The simulated Unity command execution proof reads the manifest, command file, style legend and travel-window script, counts expected placeholder objects, rejects unsupported command kinds, absolute paths, raw geodata, binary/raster media and network/provider markers, and keeps AlphaRuntimeBootstrap.cs unchanged with hash f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce and line count 3672.",
+                                                                                       "The existing Visual World Stream Preview Workspace surfaces the offline_geoworld_unity_preview group, command coverage, travel-window step count, Unity script readiness, simulated command proof, negative proof and unchanged AlphaRuntimeBootstrap status for Goal 101.",
+                                                                                       "The negative proof rejects missing Goal 100 payload, unsupported feature command kind, raw geodata leaks, missing style legend, missing travel-window script, absolute paths, network/provider markers in Unity scripts, fake success without file reads, AlphaRuntimeBootstrap changed markers, binary/raster media markers and unsafe rating metadata.",
+                                                                                       "Goal 101 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, scene/prefab production or prompt dump."
+                                                                                   ],
+                                                               "next_action":  "review_goal_101_offline_geoworld_unity_preview_runner"
+                                                           }
 }

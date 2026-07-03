@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.OfflineGeoworldVisualCacheUnityHandoff;
+using LLMGameCreator.Application.Design.OfflineGeoworldUnityPreviewRunner;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 
 namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
@@ -84,6 +85,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal095UnityHandoffProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal099GeoworldProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal100OfflineGeoworldHandoffProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal101OfflineGeoworldUnityPreviewProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -337,6 +339,84 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 Goal100SourceGoalId,
                 "goal100.quality_gate",
                 OfflineGeoworldVisualCacheUnityHandoffVocabulary.QualityGateScanFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics)
+        ];
+
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal101OfflineGeoworldUnityPreviewProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        [
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.streamingassets_ledger",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.StreamingAssetsLedgerFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.unity_script_inventory",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.UnityScriptInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.simulated_command",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.SimulatedCommandProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.negative",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.NegativeProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.alpha_runtime_bootstrap_unchanged",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.QualityGateScanFileName,
+                "alphaRuntimeBootstrapUnchanged",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.all_command_kinds_mapped",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.QualityGateScanFileName,
+                "allCommandKindsMapped",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.travel_window_demo",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.QualityGateScanFileName,
+                "travelWindowDemoBuilt",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal101SourceRoot,
+                Goal101SourceGoalId,
+                "goal101.quality_gate",
+                OfflineGeoworldUnityPreviewRunnerVocabulary.QualityGateScanFileName,
                 "passed",
                 new Dictionary<string, string>(StringComparer.Ordinal),
                 diagnostics)

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "offline_geoworld_preview_style_legend_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "accepted": false,
+  "styleCount": 10,
+  "styles": [
+    {
+      "styleKey": "administrative_hint_marker",
+      "commandKind": "administrative_hint_marker",
+      "primitiveHint": "cube",
+      "colorHex": "#8a8a8a",
+      "scaleX": 1.2,
+      "scaleY": 0.2,
+      "scaleZ": 1.2,
+      "lineWidth": 0.02,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "barrier_line",
+      "commandKind": "barrier_line",
+      "primitiveHint": "line",
+      "colorHex": "#6b4a2b",
+      "scaleX": 1.0,
+      "scaleY": 0.08,
+      "scaleZ": 1.0,
+      "lineWidth": 0.08,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "bridge_marker",
+      "commandKind": "bridge_marker",
+      "primitiveHint": "cube",
+      "colorHex": "#a87c45",
+      "scaleX": 1.4,
+      "scaleY": 0.18,
+      "scaleZ": 0.8,
+      "lineWidth": 0.04,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "building_footprint_marker",
+      "commandKind": "building_footprint_marker",
+      "primitiveHint": "cube",
+      "colorHex": "#65737e",
+      "scaleX": 1.2,
+      "scaleY": 0.8,
+      "scaleZ": 1.2,
+      "lineWidth": 0.03,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "land_use_area_plane",
+      "commandKind": "land_use_area_plane",
+      "primitiveHint": "plane",
+      "colorHex": "#9fbf7f",
+      "scaleX": 1.8,
+      "scaleY": 0.04,
+      "scaleZ": 1.8,
+      "lineWidth": 0.03,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "poi_marker",
+      "commandKind": "poi_marker",
+      "primitiveHint": "sphere",
+      "colorHex": "#d6a329",
+      "scaleX": 0.7,
+      "scaleY": 0.7,
+      "scaleZ": 0.7,
+      "lineWidth": 0.03,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "road_segment_line",
+      "commandKind": "road_segment_line",
+      "primitiveHint": "line",
+      "colorHex": "#c9b36a",
+      "scaleX": 1.0,
+      "scaleY": 0.08,
+      "scaleZ": 1.0,
+      "lineWidth": 0.1,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "terrain_hint_marker",
+      "commandKind": "terrain_hint_marker",
+      "primitiveHint": "capsule",
+      "colorHex": "#8d8f63",
+      "scaleX": 0.9,
+      "scaleY": 0.5,
+      "scaleZ": 0.9,
+      "lineWidth": 0.03,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "vegetation_area_marker",
+      "commandKind": "vegetation_area_marker",
+      "primitiveHint": "sphere",
+      "colorHex": "#4f8f4f",
+      "scaleX": 0.8,
+      "scaleY": 0.6,
+      "scaleZ": 0.8,
+      "lineWidth": 0.03,
+      "metadataOnly": true
+    },
+    {
+      "styleKey": "water_body_plane",
+      "commandKind": "water_body_plane",
+      "primitiveHint": "plane",
+      "colorHex": "#4f89b8",
+      "scaleX": 1.8,
+      "scaleY": 0.03,
+      "scaleZ": 1.8,
+      "lineWidth": 0.03,
+      "metadataOnly": true
+    }
+  ]
+}

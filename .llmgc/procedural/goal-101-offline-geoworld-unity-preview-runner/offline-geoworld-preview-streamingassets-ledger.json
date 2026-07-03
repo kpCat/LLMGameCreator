@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "offline_geoworld_preview_streamingassets_ledger_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "passed": true,
+  "payloadFileCount": 5,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-preview-feature-commands.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-feature-commands.json",
+      "role": "feature_commands",
+      "sha256": "bfe993074c86947815146c01fa5888be1270521f0c496efb07f3e3500851f007",
+      "byteCount": 14310,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-preview-readme.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-readme.json",
+      "role": "readme",
+      "sha256": "0d5554ccf38750af1247d51f207e17d3468ea279d32893fd09dce29e1c7952e7",
+      "byteCount": 489,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-preview-runner-manifest.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-runner-manifest.json",
+      "role": "manifest",
+      "sha256": "17cc1c64b90706afbd0136619f6a68fa19e2d3022719818e088e74b264976ada",
+      "byteCount": 1117,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-preview-style-legend.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-style-legend.json",
+      "role": "style_legend",
+      "sha256": "ad2bd6921aff425758660af3773fdfa3d701e75371e76a6883687c4426c0d9e9",
+      "byteCount": 3026,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-preview-travel-window-script.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-travel-window-script.json",
+      "role": "travel_window_script",
+      "sha256": "73fb12782f8af214528c6d52585a285b9b78c7a89649ff73ea888679add2d533",
+      "byteCount": 4158,
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

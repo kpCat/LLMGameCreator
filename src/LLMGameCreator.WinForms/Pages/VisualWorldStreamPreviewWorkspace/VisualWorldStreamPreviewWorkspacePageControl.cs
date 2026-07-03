@@ -47,7 +47,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | geoworldFeatures=" + result.Report.GeoworldNormalizedFeatureCount
             + " | geoworldChunks=" + result.Report.GeoworldWorldSourceGraphChunkCount
             + " | offlineGeoPackages=" + result.Report.OfflineGeoworldHandoffPackageCount
-            + " | offlineGeoRecords=" + result.Report.OfflineGeoworldHandoffVisualCacheRecordCount;
+            + " | offlineGeoRecords=" + result.Report.OfflineGeoworldHandoffVisualCacheRecordCount
+            + " | offlinePreviewCommands="
+            + result.Report.OfflineGeoworldUnityPreviewCommandCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -76,8 +78,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
 
         try
         {
-            var write = _service.BuildAndWriteAsync(root).GetAwaiter().GetResult();
-            Bind(write.Result);
+            Bind(_service.Build(root));
         }
         catch (Exception ex) when (ex is IOException
             or UnauthorizedAccessException
@@ -199,6 +200,28 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + result.Report.OfflineGeoworldHandoffQualityGatePassed.ToString().ToLowerInvariant(),
             "goal100FilesDiscoveredByRelativePaths="
                 + result.Report.Goal100FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewCommandCount="
+                + result.Report.OfflineGeoworldUnityPreviewCommandCount,
+            "offlineGeoworldUnityPreviewCommandKindCount="
+                + result.Report.OfflineGeoworldUnityPreviewCommandKindCount,
+            "offlineGeoworldUnityPreviewTravelWindowStepCount="
+                + result.Report.OfflineGeoworldUnityPreviewTravelWindowStepCount,
+            "offlineGeoworldUnityPreviewUnityPayloadFileCount="
+                + result.Report.OfflineGeoworldUnityPreviewUnityPayloadFileCount,
+            "offlineGeoworldUnityPreviewKindCoverage="
+                + result.Report.OfflineGeoworldUnityPreviewKindCoverageSummary,
+            "offlineGeoworldUnityPreviewUnityScriptsReady="
+                + result.Report.OfflineGeoworldUnityPreviewUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewSimulatedCommandProofPassed="
+                + result.Report.OfflineGeoworldUnityPreviewSimulatedCommandProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewNegativeProofPassed="
+                + result.Report.OfflineGeoworldUnityPreviewNegativeProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewAlphaRuntimeBootstrapUnchanged="
+                + result.Report.OfflineGeoworldUnityPreviewAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewQualityGatePassed="
+                + result.Report.OfflineGeoworldUnityPreviewQualityGatePassed.ToString().ToLowerInvariant(),
+            "goal101FilesDiscoveredByRelativePaths="
+                + result.Report.Goal101FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -321,6 +344,20 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + entry.OfflineGeoworldHandoffFeatureKindCountsSummary,
             "offlineGeoworldHandoffQualityGatePassed: "
                 + entry.OfflineGeoworldHandoffQualityGatePassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewCommandCount: "
+                + entry.OfflineGeoworldUnityPreviewCommandCount,
+            "offlineGeoworldUnityPreviewCommandKindCount: "
+                + entry.OfflineGeoworldUnityPreviewCommandKindCount,
+            "offlineGeoworldUnityPreviewTravelWindowStepCount: "
+                + entry.OfflineGeoworldUnityPreviewTravelWindowStepCount,
+            "offlineGeoworldUnityPreviewKindCoverage: "
+                + entry.OfflineGeoworldUnityPreviewKindCoverageSummary,
+            "offlineGeoworldUnityPreviewUnityScriptsReady: "
+                + entry.OfflineGeoworldUnityPreviewUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewSimulatedCommandProofPassed: "
+                + entry.OfflineGeoworldUnityPreviewSimulatedCommandProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldUnityPreviewQualityGatePassed: "
+                + entry.OfflineGeoworldUnityPreviewQualityGatePassed.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);

@@ -192,6 +192,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-098-geoworld-source-adapter-streaming-contract/GOAL.md` | Goal 098 task: BCL-only Application-side geoworld source adapter/streaming contract foundation using LLMGameCreator LFZ/geoworld docs only; metadata-only fixtures, cache/provenance/license policy, normalized feature taxonomy, streaming window contracts, negative proof and compact evidence; final stop at `geoworld_source_adapter_streaming_contract_verification`; no LFZ source/archive, Runtime, Unity, public schema, provider/network, Lua, generator-library, project-file, dependency, binary/raster media, raw geodata dump or live ingestion changes. |
 | `docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/GOAL.md` | Goal 099 task: BCL-only Application-side synthetic offline geoworld bundle normalization into WorldSourceGraph chunks, no-network stream-window boundary prefetch, compact text-SVG projection and existing Visual World Stream Preview Workspace integration; final stop at `offline_geoworld_worldsourcegraph_streaming_verification`; no LFZ source/archive, live geodata ingestion, Runtime, Unity, public schema, provider/network, Lua, generator-library, project-file, dependency, binary/raster media, raw geodata dump or prompt-dump changes. |
 | `docs/agent-tasks/goal-100-offline-geoworld-visual-cache-unity-handoff/GOAL.md` | Goal 100 task: BCL-only Application-side offline geoworld visual cache over real Goal 099 artifacts, metadata-only Unity StreamingAssets handoff payloads, standalone probe and Visual World Stream Preview Workspace integration; final stop at `offline_geoworld_visual_cache_unity_handoff_verification`; no LFZ source/archive, live geodata ingestion, Runtime consumers, public schema, provider/network, Lua, generator-library, project-file, dependency, binary/raster media, raw geodata dump or prompt-dump changes. |
+| `docs/agent-tasks/goal-101-offline-geoworld-unity-preview-runner/GOAL.md` | Goal 101 task: BCL-only Application-side offline geoworld Unity preview runner payload over real Goal 100 artifacts, metadata-only preview commands, standalone Unity Alpha preview runner scripts, travel-window demo metadata, simulated command execution proof and Visual World Stream Preview Workspace integration; final stop at `offline_geoworld_unity_preview_runner_verification`; no LFZ source/archive, live geodata ingestion, Runtime consumers, public schema, provider/network, Lua, generator-library, project-file, dependency, binary/raster media, raw geodata dump, final art, atlas, scene/prefab or prompt-dump changes. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -269,7 +270,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-offline_geoworld_visual_cache_unity_handoff_verification
+offline_geoworld_unity_preview_runner_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -559,6 +560,15 @@ Visual World Stream Preview Workspace under
 source, performs no live network/provider fetching, scrapes no map tiles, writes no raw geodata dumps and does not change
 Runtime, public schema, Lua, generator-library, project files, dependencies, binary/raster media or prompt-output work.
 Goal 100, Goal 099, Goal 098 and Goal 097 remain `accepted=false`.
+Goal 101 is produced for review with `offline_geoworld_unity_preview_runner_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it consumes real Goal 100 visual cache handoff artifacts into
+metadata-only preview commands, five Unity StreamingAssets payload files, standalone Unity Alpha preview runner scripts,
+travel-window demo metadata, simulated command execution proof and the existing Visual World Stream Preview Workspace
+under `.llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/`. Goal 101 reads no LFZ archive, copies no LFZ
+source, performs no live network/provider fetching, scrapes no map tiles, writes no raw geodata dumps and does not change
+Runtime, public schema, Lua, generator-library, project files, dependencies, binary/raster media, final art, atlas,
+scene/prefab production or prompt-output work. Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain
+`accepted=false`.
 
 Allowed next sequence:
 
@@ -624,6 +634,7 @@ Allowed next sequence:
 60. Review Goal 098 `geoworld_source_adapter_streaming_contract_verification`; it adds BCL-only geoworld source adapter/streaming contracts, metadata-only fixtures, normalized taxonomy and negative proof, keeps Goal 098 and Goal 097 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime, Unity, public schema, Lua or generator-library implementation.
 61. Review Goal 099 `offline_geoworld_worldsourcegraph_streaming_verification`; it adds BCL-only synthetic offline geoworld bundle normalization, immutable WorldSourceGraph chunks, no-network boundary-prefetch stream-window evidence and workspace integration, keeps Goal 099, Goal 098 and Goal 097 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime, Unity, public schema, Lua or generator-library implementation.
 62. Review Goal 100 `offline_geoworld_visual_cache_unity_handoff_verification`; it adds metadata-only visual cache records and Unity StreamingAssets handoff/probe evidence over the Goal 099 synthetic offline bundle, keeps Goal 100, Goal 099, Goal 098 and Goal 097 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime consumers, public schema, Lua or generator-library implementation.
+63. Review Goal 101 `offline_geoworld_unity_preview_runner_verification`; it adds metadata-only preview commands, standalone Unity Alpha preview runner scripts, travel-window metadata and workspace inspection over the Goal 100 visual cache handoff, keeps Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime consumers, public schema, final gameplay, final art, atlas, scene/prefab, Lua or generator-library implementation.
 
 Kill criterion:
 

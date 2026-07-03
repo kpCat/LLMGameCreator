@@ -91,6 +91,7 @@ final_roadmap_rebaseline_dream_scope_productivity_verification required
 geoworld_source_adapter_streaming_contract_verification required
 offline_geoworld_worldsourcegraph_streaming_verification required
 offline_geoworld_visual_cache_unity_handoff_verification required
+offline_geoworld_unity_preview_runner_verification required
 ```
 
 Current capabilities:
@@ -119,6 +120,7 @@ Current capabilities:
 - BCL-only geoworld source adapter/streaming contract foundation with seven metadata-only source fixtures, normalized geofeature taxonomy, cache/provenance/license policy contracts, runtime boundary-prefetch streaming matrix, LFZ pattern lineage and 16-scenario negative proof;
 - BCL-only offline geoworld WorldSourceGraph streaming evidence with a synthetic metadata-only bundle, 10 normalized feature kinds, immutable WorldSourceGraph chunks, no-network 3x3 stream window plus boundary-prefetch band, compact text-SVG projection and Visual World Stream Preview Workspace integration;
 - BCL-only offline geoworld visual cache Unity handoff evidence with 3 metadata-only packages, 18 compact visual cache records over 10 Goal 099 feature kinds, 5 Unity StreamingAssets payload files, standalone probe/read proof and Visual World Stream Preview Workspace integration;
+- BCL-only offline geoworld Unity preview runner evidence with 18 metadata-only preview commands over 10 command kinds, 5 Goal101 Unity StreamingAssets payload files, standalone Unity Alpha preview runner scripts, 4 travel-window demo steps, simulated command proof and Visual World Stream Preview Workspace integration;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1647,14 +1649,34 @@ map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider
 Lua/generator-library, project-file, dependency, binary/raster media, prompt-dump or live Unity gameplay rendering
 changes. Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
 
+### Goal 101: Offline Geoworld Unity Preview Runner
+
+Goal 101 is produced for review with `offline_geoworld_unity_preview_runner_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It adds a BCL-only Application-side offline geoworld Unity preview
+runner payload pipeline under `src/LLMGameCreator.Application/Design/OfflineGeoworldUnityPreviewRunner/`.
+
+Goal 101 writes deterministic evidence under
+`.llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/` and updates source-of-truth routing,
+current state, queue, debt register and artifact-scope policy. It consumes real Goal 100 metadata-only visual cache
+handoff artifacts, maps all 10 required command kinds into 18 compact preview commands, mirrors five Unity
+StreamingAssets payload files, adds `OfflineGeoworldPreviewRunner.cs`, `OfflineGeoworldPreviewPrimitiveFactory.cs` and
+`OfflineGeoworldPreviewTravelWindow.cs`, proves a 4-step travel-window demo, simulated command execution, negative
+cases, unchanged AlphaRuntimeBootstrap hash and Visual World Stream Preview Workspace integration.
+
+Goal 101 is Unity Alpha preview-runner evidence only. It reads no LFZ archive, copies no LFZ source, adds no live
+network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media
+execution, Lua/generator-library, project-file, dependency, binary/raster media, prompt-dump, final gameplay, final
+art, atlas or scene/prefab production changes. Goal 101, Goal 100, Goal 099, Goal 098, Goal 097 and prior
+visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-offline_geoworld_visual_cache_unity_handoff_verification
+offline_geoworld_unity_preview_runner_verification
 ```
 
 Status:
 
 ```text
-goal_100_offline_geoworld_visual_cache_unity_handoff_produced_for_review
+goal_101_offline_geoworld_unity_preview_runner_produced_for_review
 ```

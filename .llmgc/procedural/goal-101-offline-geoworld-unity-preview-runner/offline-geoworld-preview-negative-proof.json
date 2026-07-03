@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "offline_geoworld_preview_negative_proof_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "passed": true,
+  "scenarioCount": 11,
+  "rejectedCount": 11,
+  "matchedExpectationCount": 11,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal100_payload",
+      "causalMutation": "Goal100 command source removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.goal100_missing",
+          "target": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsupported_feature_command_kind",
+      "causalMutation": "command kind changed to unsupported",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.unsupported_command",
+          "target": "preview command",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_geodata_leaked_into_command",
+      "causalMutation": "raw geodata marker added to command",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.raw_geodata",
+          "target": "preview command",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_style_legend",
+      "causalMutation": "style legend payload removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.missing_style",
+          "target": "style legend",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_travel_window_script",
+      "causalMutation": "travel window script payload removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.missing_travel",
+          "target": "travel window",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "absolute_path_in_payload",
+      "causalMutation": "absolute local path inserted into payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.absolute_path",
+          "target": "payload",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "network_provider_marker_in_unity_script",
+      "causalMutation": "Unity script contains external marker",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.script_marker",
+          "target": "Unity preview script",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_file_read",
+      "causalMutation": "proof marked passed without reading payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.fake_success",
+          "target": "simulated command proof",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_changed_marker",
+      "causalMutation": "bootstrap hash changed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.alpha_bootstrap",
+          "target": "AlphaRuntimeBootstrap.cs",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "causalMutation": "binary or raster media added to payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.binary_media",
+          "target": "StreamingAssets",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rating_metadata_missing_safe_fallback",
+      "causalMutation": "rating metadata lacks safe fallback",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal101.negative.rating_safe_fallback",
+          "target": "preview command",
+          "message": "Goal101 negative proof rejected the mutated preview runner payload."
+        }
+      ]
+    }
+  ]
+}

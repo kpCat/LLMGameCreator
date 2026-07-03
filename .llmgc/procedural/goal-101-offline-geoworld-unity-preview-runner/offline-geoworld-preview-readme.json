@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "offline_geoworld_preview_readme_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "offlineSyntheticOnly": true,
+  "metadataOnly": true,
+  "implementsRuntimeConsumption": false,
+  "implementsFinalArt": false,
+  "implementsSceneOrPrefabProduction": false,
+  "implementsNetworkProvider": false,
+  "usesRelativePathsOnly": true,
+  "scopeSummary": "Unity Alpha preview runner reads metadata commands and creates placeholder objects only."
+}

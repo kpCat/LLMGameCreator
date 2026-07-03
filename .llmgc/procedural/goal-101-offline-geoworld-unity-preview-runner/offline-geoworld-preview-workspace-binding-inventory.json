@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "offline_geoworld_preview_workspace_binding_inventory_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "passed": true,
+  "workspaceCatalogIncludesUnityPreviewGroup": true,
+  "workspaceReadsGoal101EvidenceByRelativePath": true,
+  "winFormsPageDisplaysUnityPreviewFields": true,
+  "showsPreviewCommandCount": true,
+  "showsCommandKindCoverage": true,
+  "showsTravelWindowSteps": true,
+  "showsUnityScriptsReady": true,
+  "showsSimulatedCommandProof": true,
+  "showsAlphaRuntimeBootstrapUnchangedStatus": true,
+  "showsNegativeProofStatus": true,
+  "diagnostics": []
+}

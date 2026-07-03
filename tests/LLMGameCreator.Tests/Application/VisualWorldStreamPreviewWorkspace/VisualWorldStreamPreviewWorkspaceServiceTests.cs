@@ -26,8 +26,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("unity_handoff", groupIds);
         Assert.Contains("geoworld", groupIds);
         Assert.Contains("offline_geoworld_handoff", groupIds);
-        Assert.Equal(9, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 94);
+        Assert.Contains("offline_geoworld_unity_preview", groupIds);
+        Assert.Equal(10, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 110);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
@@ -204,6 +205,50 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
     }
 
+    [Fact]
+    public void OfflineGeoworldUnityPreviewGroupSurfacesGoal101CommandsPayloadScriptsAndProofs()
+    {
+        var result = Build();
+        var previewGroup = Assert.Single(
+            result.Catalog.Groups,
+            group => group.GroupId == "offline_geoworld_unity_preview");
+        var summary = Assert.Single(
+            previewGroup.Entries,
+            entry => entry.ArtifactKind == "offline_geoworld_unity_preview_workspace_summary");
+        var payloadFiles = previewGroup.Entries
+            .Where(entry => entry.ArtifactKind == "offline_geoworld_unity_preview_streamingassets_payload")
+            .ToArray();
+        var scripts = previewGroup.Entries
+            .Where(entry => entry.ArtifactKind == "offline_geoworld_unity_preview_script")
+            .ToArray();
+
+        Assert.True(result.QualityGateScan.OfflineGeoworldUnityPreviewGroupPresent);
+        Assert.Equal(18, result.QualityGateScan.OfflineGeoworldUnityPreviewCommandCount);
+        Assert.Equal(10, result.QualityGateScan.OfflineGeoworldUnityPreviewCommandKindCount);
+        Assert.True(result.QualityGateScan.OfflineGeoworldUnityPreviewTravelWindowStepCount >= 4);
+        Assert.Equal(5, result.QualityGateScan.OfflineGeoworldUnityPreviewUnityPayloadFileCount);
+        Assert.True(result.QualityGateScan.OfflineGeoworldUnityPreviewUnityScriptsReady);
+        Assert.True(result.QualityGateScan.OfflineGeoworldUnityPreviewSimulatedCommandProofPassed);
+        Assert.True(result.QualityGateScan.OfflineGeoworldUnityPreviewNegativeProofPassed);
+        Assert.True(result.QualityGateScan.OfflineGeoworldUnityPreviewAlphaRuntimeBootstrapUnchanged);
+        Assert.True(result.QualityGateScan.OfflineGeoworldUnityPreviewQualityGatePassed);
+        Assert.True(result.QualityGateScan.Goal101FilesDiscoveredByRelativePaths);
+        Assert.Equal(5, payloadFiles.Length);
+        Assert.Equal(3, scripts.Length);
+        Assert.Equal(18, summary.OfflineGeoworldUnityPreviewCommandCount);
+        Assert.Equal(10, summary.OfflineGeoworldUnityPreviewCommandKindCount);
+        Assert.True(summary.OfflineGeoworldUnityPreviewTravelWindowStepCount >= 4);
+        Assert.Contains(
+            "building_footprint_marker=1",
+            summary.OfflineGeoworldUnityPreviewKindCoverageSummary,
+            StringComparison.Ordinal);
+        Assert.True(summary.OfflineGeoworldUnityPreviewUnityScriptsReady);
+        Assert.True(summary.OfflineGeoworldUnityPreviewSimulatedCommandProofPassed);
+        Assert.True(summary.OfflineGeoworldUnityPreviewQualityGatePassed);
+        Assert.All(previewGroup.Entries, entry =>
+            Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
+    }
+
 
     [Fact]
     public void SvgEntriesAreRelativeTextSafePreviewPaths()
@@ -259,7 +304,15 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal100.visual_cache_records",
             "goal100.all_feature_kinds_mapped",
             "goal100.workspace_binding",
-            "goal100.quality_gate"
+            "goal100.quality_gate",
+            "goal101.streamingassets_ledger",
+            "goal101.unity_script_inventory",
+            "goal101.simulated_command",
+            "goal101.negative",
+            "goal101.alpha_runtime_bootstrap_unchanged",
+            "goal101.all_command_kinds_mapped",
+            "goal101.travel_window_demo",
+            "goal101.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -461,6 +514,29 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.Contains(
                 "offlineGeoworldHandoffQualityGatePassed: true",
                 handoffDetails,
+                StringComparison.Ordinal);
+            groups.SelectedItem = groups.Items
+                .Cast<object>()
+                .First(item => item.ToString()!.Contains(
+                    "GroupId = offline_geoworld_unity_preview,",
+                    StringComparison.Ordinal));
+            var previewItem = entries.Items
+                .Cast<ListViewItem>()
+                .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
+                               && entry.ArtifactKind
+                                   == "offline_geoworld_unity_preview_workspace_summary");
+            var previewEntry = Assert.IsType<VisualWorldPreviewArtifactEntry>(previewItem.Tag);
+            var previewDetails = InvokePrivateStatic<string>(
+                typeof(VisualWorldStreamPreviewWorkspacePageControl),
+                "BuildEntryDetails",
+                previewEntry);
+
+            Assert.Contains("offlineGeoworldUnityPreviewCommandCount: 18", previewDetails, StringComparison.Ordinal);
+            Assert.Contains("offlineGeoworldUnityPreviewCommandKindCount: 10", previewDetails, StringComparison.Ordinal);
+            Assert.Contains("offlineGeoworldUnityPreviewUnityScriptsReady: true", previewDetails, StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldUnityPreviewQualityGatePassed: true",
+                previewDetails,
                 StringComparison.Ordinal);
             Assert.True(
                 svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)

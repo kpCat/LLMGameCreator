@@ -29,8 +29,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var registryIncludesPage = compositionText.Contains(
             "resolver.Resolve<VisualWorldStreamPreviewWorkspacePageControl>()",
             StringComparison.Ordinal);
-        var activationLoads = pageText.Contains("BuildAndWriteAsync(root)", StringComparison.Ordinal)
-            && pageText.Contains("Bind(write.Result)", StringComparison.Ordinal);
+        var activationLoads =
+            (pageText.Contains("BuildAndWriteAsync(root)", StringComparison.Ordinal)
+             && pageText.Contains("Bind(write.Result)", StringComparison.Ordinal))
+            || pageText.Contains("Bind(_service.Build(root))", StringComparison.Ordinal);
         var bindDisplays = pageText.Contains("_groupsListBox", StringComparison.Ordinal)
             && pageText.Contains("_entriesListView", StringComparison.Ordinal)
             && pageText.Contains("_proofsListView", StringComparison.Ordinal)
@@ -54,6 +56,16 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains("offlineGeoworldHandoffUnityPayloadFileCount", StringComparison.Ordinal)
             && pageText.Contains(
                 "offlineGeoworldHandoffAlphaRuntimeBootstrapUnchanged",
+                StringComparison.Ordinal);
+        var bindDisplaysOfflineGeoworldUnityPreview = pageText.Contains(
+                "offlineGeoworldUnityPreviewCommandCount",
+                StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldUnityPreviewKindCoverage", StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldUnityPreviewTravelWindowStepCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldUnityPreviewUnityScriptsReady",
                 StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
@@ -83,6 +95,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal100.winforms.offline_geoworld_handoff_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysOfflineGeoworldUnityPreview,
+            "goal101.winforms.offline_geoworld_unity_preview_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -98,6 +115,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysUnityHandoff = bindDisplaysUnityHandoff,
             PageBindDisplaysGeoworld = bindDisplaysGeoworld,
             PageBindDisplaysOfflineGeoworldHandoff = bindDisplaysOfflineGeoworldHandoff,
+            PageBindDisplaysOfflineGeoworldUnityPreview =
+                bindDisplaysOfflineGeoworldUnityPreview,
             Diagnostics = diagnostics
         };
     }

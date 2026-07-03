@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "offline_geoworld_preview_travel_window_script_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "accepted": false,
+  "stepCount": 4,
+  "commandCoverageCount": 18,
+  "steps": [
+    {
+      "stepIndex": 0,
+      "stepId": "load_center_window",
+      "action": "load_manifest",
+      "centerChunkKey": "z14/x4210/y6142",
+      "visibleCommandKinds": [
+        "administrative_hint_marker",
+        "barrier_line",
+        "bridge_marker",
+        "building_footprint_marker"
+      ],
+      "visibleCommandIds": [
+        "preview_command/05ed8679f5108505",
+        "preview_command/2276ea94e0340d14",
+        "preview_command/3910b28ce6e01d89",
+        "preview_command/55d73d108fcef19c",
+        "preview_command/6f7ea9b97f3110ac",
+        "preview_command/6fb571ad5cbdfe54"
+      ],
+      "metadataOnly": true
+    },
+    {
+      "stepIndex": 1,
+      "stepId": "spawn_feature_placeholders",
+      "action": "spawn_commands",
+      "centerChunkKey": "z14/x4210/y6142",
+      "visibleCommandKinds": [
+        "administrative_hint_marker",
+        "barrier_line",
+        "bridge_marker",
+        "building_footprint_marker",
+        "land_use_area_plane",
+        "poi_marker",
+        "road_segment_line",
+        "terrain_hint_marker",
+        "vegetation_area_marker",
+        "water_body_plane"
+      ],
+      "visibleCommandIds": [
+        "preview_command/05ed8679f5108505",
+        "preview_command/2276ea94e0340d14",
+        "preview_command/3910b28ce6e01d89",
+        "preview_command/55d73d108fcef19c",
+        "preview_command/6f7ea9b97f3110ac",
+        "preview_command/6fb571ad5cbdfe54",
+        "preview_command/7190a4bf7c808416",
+        "preview_command/863e010a16565f56",
+        "preview_command/865d5a2785f4bbc7",
+        "preview_command/886a712e8ce9ba50",
+        "preview_command/9f3dbc694697d6fc",
+        "preview_command/c1872a5502d4b3f6",
+        "preview_command/c2ab27ef0c033703",
+        "preview_command/de673df37f3e6e13",
+        "preview_command/e35c257499cac8c3",
+        "preview_command/e37f51a0d4e24947",
+        "preview_command/f503f490960eb2ed",
+        "preview_command/f6c97ce05f93c0b5"
+      ],
+      "metadataOnly": true
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "travel_to_boundary_window",
+      "action": "shift_window",
+      "centerChunkKey": "z14/x4211/y6142",
+      "visibleCommandKinds": [
+        "building_footprint_marker",
+        "land_use_area_plane",
+        "poi_marker",
+        "road_segment_line",
+        "terrain_hint_marker",
+        "vegetation_area_marker",
+        "water_body_plane"
+      ],
+      "visibleCommandIds": [
+        "preview_command/7190a4bf7c808416",
+        "preview_command/863e010a16565f56",
+        "preview_command/865d5a2785f4bbc7",
+        "preview_command/886a712e8ce9ba50",
+        "preview_command/9f3dbc694697d6fc",
+        "preview_command/c1872a5502d4b3f6",
+        "preview_command/c2ab27ef0c033703",
+        "preview_command/de673df37f3e6e13"
+      ],
+      "metadataOnly": true
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "reset_preview_window",
+      "action": "reset_and_replay",
+      "centerChunkKey": "z14/x4210/y6142",
+      "visibleCommandKinds": [
+        "administrative_hint_marker",
+        "barrier_line",
+        "bridge_marker",
+        "building_footprint_marker",
+        "land_use_area_plane",
+        "poi_marker",
+        "road_segment_line",
+        "terrain_hint_marker",
+        "vegetation_area_marker",
+        "water_body_plane"
+      ],
+      "visibleCommandIds": [
+        "preview_command/05ed8679f5108505",
+        "preview_command/2276ea94e0340d14",
+        "preview_command/3910b28ce6e01d89",
+        "preview_command/55d73d108fcef19c",
+        "preview_command/6f7ea9b97f3110ac",
+        "preview_command/6fb571ad5cbdfe54",
+        "preview_command/7190a4bf7c808416",
+        "preview_command/863e010a16565f56",
+        "preview_command/865d5a2785f4bbc7",
+        "preview_command/886a712e8ce9ba50"
+      ],
+      "metadataOnly": true
+    }
+  ]
+}

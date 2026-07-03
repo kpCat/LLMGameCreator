@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "offline_geoworld_preview_unity_script_inventory_v1",
+  "goalId": "goal_101_offline_geoworld_unity_preview_runner",
+  "passed": true,
+  "runnerExists": true,
+  "factoryExists": true,
+  "travelWindowExists": true,
+  "runnerUsesApplicationStreamingAssetsPath": true,
+  "runnerReadsGoal101Root": true,
+  "runnerExposesInspectorFields": true,
+  "factoryCreatesPrimitivePlaceholders": true,
+  "travelWindowSupportsDemoSteps": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoProviderLlmNetworkMarkers": true,
+  "files": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewRunner.cs",
+      "exists": true,
+      "sha256": "02796e5268aad7b7fe8772eae8428a5a7473da132b40ea252f916b74824a83f1",
+      "lineCount": 277,
+      "hasNoProviderLlmNetworkMarkers": true
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewPrimitiveFactory.cs",
+      "exists": true,
+      "sha256": "34d7eac0659c28046f0608e542b2d203051ecf1fe3c646afb5d2832238381abf",
+      "lineCount": 135,
+      "hasNoProviderLlmNetworkMarkers": true
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewTravelWindow.cs",
+      "exists": true,
+      "sha256": "bd8d6174adf98c37cffc22311cd92e44d834bce7374be9767d114d0aacec0d74",
+      "lineCount": 81,
+      "hasNoProviderLlmNetworkMarkers": true
+    }
+  ],
+  "diagnostics": []
+}
