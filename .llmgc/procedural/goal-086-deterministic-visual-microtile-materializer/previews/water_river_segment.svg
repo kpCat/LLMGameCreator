@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="water_river_segment" data-part-pack-id="water_coast_river_marsh_part_pack" data-asset-slot-id="water_coast_biome_safe" data-palette-profile-id="palette/water_biome/readable_v1" data-seed="860203">
+  <rect x="0" y="0" width="64" height="64" fill="#195478" />
+  <g id="layer_base" data-order="0" data-role="base_surface">
+    <path d="M 0 26 C 14 18, 28 41, 64 30 L 64 64 L 0 64 Z" fill="#3aa2ba" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="detail_pattern">
+    <path d="M 2 41 C 20 36, 34 44, 62 40" fill="none" stroke="#c7ede9" stroke-width="4" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="transition_or_decor_overlay">
+    <polyline points="8,21 23,30 39,20 56,24" fill="none" stroke="#24533b" stroke-width="3" />
+  </g>
+</svg>

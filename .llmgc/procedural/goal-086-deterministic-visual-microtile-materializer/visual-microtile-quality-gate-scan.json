@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "visual_microtile_quality_gate_scan_v1",
+  "goalId": "goal_086_deterministic_visual_microtile_materializer",
+  "manualGate": "deterministic_visual_microtile_materializer_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "previewCountWithinBounds": true,
+  "svgTextOnlyPreviews": true,
+  "deterministicRerunStable": true,
+  "waterBiomeCoveragePassed": true,
+  "creatureEquipmentStateCoveragePassed": true,
+  "uiEffectWeatherCoveragePassed": true,
+  "adultMetadataOnlyFallbackCoveragePassed": true,
+  "negativeProofPassed": true,
+  "sourceLineagePassed": true,
+  "noForbiddenFilesChanged": true,
+  "noExternalDependenciesAdded": true,
+  "noBinaryMediaAdded": true,
+  "noPromptDumps": true,
+  "noProviderCalls": true,
+  "noExplicitAdultContent": true,
+  "artifactScopeReady": true,
+  "expectedChangedPathPrefixes": [
+    "src/LLMGameCreator.Application/Design/DeterministicVisualMicrotileMaterializer/",
+    "tests/LLMGameCreator.Tests/Application/DeterministicVisualMicrotileMaterializer/",
+    "tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualMicrotileMaterializerProductSmokeTests.cs",
+    ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/",
+    "docs/agent-tasks/goal-086-deterministic-visual-microtile-materializer/"
+  ],
+  "diagnostics": []
+}

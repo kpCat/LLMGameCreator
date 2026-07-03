@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="settlement_wall_gate" data-part-pack-id="settlement_building_facade_part_pack" data-asset-slot-id="settlement_building_safe" data-palette-profile-id="palette/settlement_facade/readable_v1" data-seed="860302">
+  <rect x="0" y="0" width="64" height="64" fill="#444b50" />
+  <g id="layer_base" data-order="0" data-role="facade_mass">
+    <rect x="14" y="20" width="43" height="30" rx="2" fill="#858b8c" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="door_window_trim">
+    <polygon points="12,21 32,11 53,21" fill="#c8c4b8" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="district_marker">
+    <rect x="26" y="38" width="9" height="14" fill="#262b30" />
+  </g>
+</svg>

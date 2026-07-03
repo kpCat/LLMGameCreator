@@ -74,6 +74,7 @@ edit_driven_unity_alpha_streamingassets_handoff_verification required
 source_format_physical_line_repair_verification required
 visual_adult_layer_context_integration_verification required
 visual_part_pack_rule_stack_verification required
+deterministic_visual_microtile_materializer_verification required
 ```
 
 Current capabilities:
@@ -88,6 +89,7 @@ Current capabilities:
 - generated Unity runtime state loop evidence with quest/dialogue/item/inventory/event before-after transitions;
 - BCL-only visual asset contract/rating metadata validator with metadata-only fixtures;
 - BCL-only visual part-pack rule-stack validator with deepsearch lineage, six metadata-only fixture packs, Goal084 binding matrix and water/body-plan/UI/adult boundary proof;
+- BCL-only deterministic visual microtile materializer with 24 text SVG previews and compact catalog/manifest/ledger/proof evidence;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1295,14 +1297,37 @@ Routed deepsearch source documents:
 
 Validator coverage rejects duplicate ids, absolute paths, missing masks/sockets/anchors for layered parts, unknown palette and recipe refs, adult extension without safe fallback or eligible body-plan metadata, water packs without coast/river/lake/marsh coverage, tile packs without transition/autotile rules, creature packs without body-plan compatibility rules, equipment overlays without socket compatibility, UI/effect packs without safe fallback, prompt text as source of truth, provider candidates treated as approved, cyclic recipe dependencies and unsafe export-policy contradictions. Goal 085 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, binary media, generated image asset, real adult fixture or explicit prompt dump changes.
 
+### Goal 086: Deterministic Visual Microtile Materializer
+
+Purpose:
+
+Consume Goal 084 visual asset slots and Goal 085 visual part-pack rule-stack metadata into a BCL-only Application-side deterministic visual microtile materializer that proves tiny text SVG preview generation without adding media/provider/runtime/schema integrations.
+
+Status:
+
+Produced for review. The gate remains `deterministic_visual_microtile_materializer_verification required`, not passed. Goal 085, Goal 083, Goal 082 and Goal 082A remain produced-for-review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `previewCount=24`, `fileLedgerCount=31`, `waterBiomeCoveragePassed=true`, `layeringProofPassed=true`, `negativeProofPassed=true`, `sourceLineagePassed=true`, `qualityGatePassed=true`; Application models/materializer/validator live under `src/LLMGameCreator.Application/Design/DeterministicVisualMicrotileMaterializer/`, focused tests under `tests/LLMGameCreator.Tests/Application/DeterministicVisualMicrotileMaterializer/`, product smoke under `tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualMicrotileMaterializerProductSmokeTests.cs`, and compact evidence under `.llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/`.
+
+Preview coverage:
+
+- terrain biomes: grass overworld, snow tundra, desert dry, lava/ash, forest overlay and mountain rock;
+- water stack: water base, coast transition, river segment, lake edge, marsh/swamp and bridge/dock anchor metadata;
+- settlement structures: small dwelling, wall gate, mine production and caravan camp;
+- creature/NPC visuals: body-plan silhouette, equipment/clothing overlay, damaged/dirty/worn state and neutral paperdoll slot;
+- UI/effect/weather: frame/panel motif, status aura and day-night/weather overlay;
+- adult-capable metadata: one metadata-only safe fallback slot.
+
+Validator coverage rejects unsafe output paths, prompt text as source of truth, missing palette/layer/source lineage, coast previews without water-land adjacency, river previews without deterministic flow connectors, adult metadata slots without safe fallback, provider candidates treated as approved output, missing deterministic seeds, duplicate preview ids and unsafe SVG script/external/base64 content. Goal 086 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, external dependency, binary media, generated raster image asset, real adult fixture or explicit prompt dump changes.
+
 ## Current Recommended Next Work
 
 ```text
-visual_part_pack_rule_stack_verification
+deterministic_visual_microtile_materializer_verification
 ```
 
 Status:
 
 ```text
-goal_085_deepsearch_backed_visual_part_pack_rule_stack_produced_for_review
+goal_086_deterministic_visual_microtile_materializer_produced_for_review
 ```

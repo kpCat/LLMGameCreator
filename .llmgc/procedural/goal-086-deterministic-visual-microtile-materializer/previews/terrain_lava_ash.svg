@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="terrain_lava_ash" data-part-pack-id="fantasy_overworld_tile_part_pack" data-asset-slot-id="fantasy_overworld_tile_safe" data-palette-profile-id="palette/fantasy_overworld/readable_v1" data-seed="860104">
+  <rect x="0" y="0" width="64" height="64" fill="#252324" />
+  <g id="layer_base" data-order="0" data-role="base_surface">
+    <polygon points="0,62 18,35 34,46 64,26 64,64" fill="#6b3530" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="detail_pattern">
+    <circle cx="26" cy="27" r="11" fill="#e25b2d" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="transition_or_decor_overlay">
+    <path d="M 10 16 Q 32 10 58 21" fill="none" stroke="#f4b55c" stroke-width="3" />
+  </g>
+</svg>

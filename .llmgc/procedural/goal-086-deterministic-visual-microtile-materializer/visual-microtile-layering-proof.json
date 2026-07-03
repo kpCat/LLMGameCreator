@@ -1,0 +1,322 @@
+{
+  "schemaVersion": "visual_microtile_layering_proof_v1",
+  "goalId": "goal_086_deterministic_visual_microtile_materializer",
+  "passed": true,
+  "previewCount": 24,
+  "allPreviewLayerOrderingStable": true,
+  "allPreviewsUsePaletteMasksSocketsAndAnchors": true,
+  "rows": [
+    {
+      "previewId": "adult_metadata_only_safe_fallback_slot",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/adult_rating_metadata/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 3
+    },
+    {
+      "previewId": "atmosphere_day_night_weather_overlay",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "creature_bodyplan_silhouette",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 3
+    },
+    {
+      "previewId": "creature_damaged_dirty_worn_state",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 3
+    },
+    {
+      "previewId": "creature_equipment_clothing_overlay",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 3
+    },
+    {
+      "previewId": "creature_paperdoll_neutral_slot",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 3
+    },
+    {
+      "previewId": "effect_status_aura",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "settlement_caravan_camp",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/settlement_facade/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "settlement_mine_production",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/settlement_facade/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "settlement_small_dwelling",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/settlement_facade/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "settlement_wall_gate",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/settlement_facade/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "terrain_desert_dry",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "terrain_forest_overlay",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "terrain_grass_overworld",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "terrain_lava_ash",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "terrain_mountain_rock",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "terrain_snow_tundra",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "ui_frame_panel_motif",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "water_base",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/water_biome/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "water_bridge_dock_anchor",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/water_biome/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "water_coast_transition",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/water_biome/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "water_lake_edge",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/water_biome/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "water_marsh_swamp",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/water_biome/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    },
+    {
+      "previewId": "water_river_segment",
+      "layerCount": 3,
+      "layerOrders": [
+        0,
+        10,
+        20
+      ],
+      "paletteProfileId": "palette/water_biome/readable_v1",
+      "maskCount": 3,
+      "socketCount": 3,
+      "anchorCount": 2
+    }
+  ]
+}

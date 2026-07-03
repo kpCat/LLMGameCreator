@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="effect_status_aura" data-part-pack-id="ui_theme_icon_effect_part_pack" data-asset-slot-id="tech_future_ui_panel_safe" data-palette-profile-id="palette/ui_theme_effect/readable_v1" data-seed="860502">
+  <rect x="0" y="0" width="64" height="64" fill="#231f3a" />
+  <g id="layer_base" data-order="0" data-role="frame_or_aura_base">
+    <rect x="11" y="15" width="43" height="41" rx="4" fill="#5750a8" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="icon_or_status_detail">
+    <rect x="20" y="20" width="31" height="21" rx="2" fill="#96a7ff" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="weather_or_effect_overlay">
+    <circle cx="49" cy="17" r="9" fill="#d9e0ff" />
+  </g>
+</svg>

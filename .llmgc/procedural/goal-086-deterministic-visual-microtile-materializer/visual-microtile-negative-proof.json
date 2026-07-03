@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "visual_microtile_negative_proof_v1",
+  "goalId": "goal_086_deterministic_visual_microtile_materializer",
+  "passed": true,
+  "scenarioCount": 12,
+  "rejectedCount": 12,
+  "matchedExpectationCount": 12,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_output_path",
+      "causalMutation": "absolute output path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.output_path.invalid",
+          "target": "visual_microtile_materializer_goal086",
+          "message": "Output directory must be a safe relative path."
+        }
+      ]
+    },
+    {
+      "scenarioId": "adult_capable_without_safe_fallback",
+      "causalMutation": "adult-capable slot without safe fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.adult.safe_fallback_missing",
+          "target": "adult_metadata_only_safe_fallback_slot",
+          "message": "Adult-capable metadata-only slots require a safe fallback preview."
+        }
+      ]
+    },
+    {
+      "scenarioId": "coast_without_water_land_adjacency",
+      "causalMutation": "coast tile without water/land adjacency",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.water.coast_adjacency_missing",
+          "target": "water_coast_transition",
+          "message": "Coast previews require water and land adjacency metadata."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_preview_id",
+      "causalMutation": "duplicate preview id",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.preview_id.duplicate",
+          "target": "terrain_grass_overworld",
+          "message": "Preview ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal084_085_lineage",
+      "causalMutation": "missing source Goal084/085 lineage",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.source_lineage.missing",
+          "target": "terrain_grass_overworld",
+          "message": "Every preview must trace to Goal084 slot and Goal085 pack lineage."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_layer_stack",
+      "causalMutation": "missing layer stack",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.layer_stack.missing",
+          "target": "terrain_grass_overworld",
+          "message": "A non-empty layer stack is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_palette",
+      "causalMutation": "missing palette profile and swatches",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.palette.invalid",
+          "target": "terrain_grass_overworld",
+          "message": "Palette swatches must include stable ids and #RRGGBB colors."
+        },
+        {
+          "severity": "error",
+          "code": "visual_microtile.palette.missing",
+          "target": "terrain_grass_overworld",
+          "message": "Palette profile id is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_seed",
+      "causalMutation": "non-deterministic or missing seed",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.seed.missing_or_nondeterministic",
+          "target": "terrain_grass_overworld",
+          "message": "A deterministic positive seed is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_as_source_of_truth",
+      "causalMutation": "prompt text as source of truth",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.prompt.source_of_truth",
+          "target": "visual_microtile_materializer_goal086",
+          "message": "Prompt text must not be visual materialization source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_candidate_treated_as_approved_output",
+      "causalMutation": "provider candidate treated as approved output",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.provider_candidate.treated_as_approved",
+          "target": "adult_metadata_only_safe_fallback_slot",
+          "message": "Provider candidates must not be treated as approved output."
+        }
+      ]
+    },
+    {
+      "scenarioId": "river_without_flow_connectors",
+      "causalMutation": "river tile without flow connectors",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.water.river_flow_missing",
+          "target": "water_river_segment",
+          "message": "River previews require at least two deterministic flow connectors."
+        }
+      ]
+    },
+    {
+      "scenarioId": "svg_with_script_external_resource_base64",
+      "causalMutation": "unsafe SVG content",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_microtile.svg.shape_count.invalid",
+          "target": "terrain_grass_overworld",
+          "message": "SVG previews must contain 2-5 generated shapes beyond the background."
+        },
+        {
+          "severity": "error",
+          "code": "visual_microtile.svg.unsafe",
+          "target": "terrain_grass_overworld",
+          "message": "SVG must be script-free, external-resource-free and base64-free."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="creature_damaged_dirty_worn_state" data-part-pack-id="creature_bodyplan_equipment_part_pack" data-asset-slot-id="creature_bodyplan_safe" data-palette-profile-id="palette/creature_bodyplan/readable_v1" data-seed="860403">
+  <rect x="0" y="0" width="64" height="64" fill="#262a2e" />
+  <g id="layer_base" data-order="0" data-role="silhouette">
+    <ellipse cx="31" cy="34" rx="15" ry="20" fill="#695846" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="surface_or_clothing">
+    <circle cx="34" cy="16" r="9" fill="#9c7f60" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="equipment_or_state">
+    <path d="M 19 48 L 34 36 L 46 48" fill="none" stroke="#c9b18a" stroke-width="4" />
+  </g>
+</svg>

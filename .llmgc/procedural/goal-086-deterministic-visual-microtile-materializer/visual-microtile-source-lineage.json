@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "visual_microtile_source_lineage_v1",
+  "goalId": "goal_086_deterministic_visual_microtile_materializer",
+  "passed": true,
+  "goal084ArtifactsGreen": true,
+  "goal084AcceptedFalse": true,
+  "goal085ArtifactsGreen": true,
+  "goal085AcceptedFalse": true,
+  "deepsearchDocsExist": true,
+  "synthesisExists": true,
+  "sourceRecordCount": 16,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/visual-asset-contract-rating-metadata-report.md",
+      "exists": true,
+      "sha256": "779b6caa91091595b6b64874cd55b8c761ea5fe5a94ebd143c581e7759cdd3c4",
+      "purposeTags": [
+        "goal084",
+        "report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/visual-asset-contract-catalog.json",
+      "exists": true,
+      "sha256": "4e7255edf8e6c50466e153de1f0515692209c8ab46c60624e3f1dc17616d1369",
+      "purposeTags": [
+        "goal084",
+        "catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/visual-part-pack-rule-stack-report.md",
+      "exists": true,
+      "sha256": "650315cf065acc6d5adc6bcfdf19e0abc652dd8818de5e8b9f4ac74d2dc31880",
+      "purposeTags": [
+        "goal085",
+        "report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/visual-part-pack-catalog.json",
+      "exists": true,
+      "sha256": "a7d792da666e1551085e134b0d9e5db68ee360a6cb07d7e5ae99ff1aa1470243",
+      "purposeTags": [
+        "goal085",
+        "catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/water-biome-coverage-matrix.json",
+      "exists": true,
+      "sha256": "ba6d0806fd825d834f18683f5e03555e2c9473b77c95d98bcc9fb4149416ba78",
+      "purposeTags": [
+        "goal085",
+        "water"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/visual-part-pack-validation-matrix.json",
+      "exists": true,
+      "sha256": "9b90d9379aec2f50652cd896be98dd13969411e4f29ff6e973ab0b8faf9e923c",
+      "purposeTags": [
+        "goal085",
+        "validation"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/visual-part-pack-negative-proof.json",
+      "exists": true,
+      "sha256": "0dfbf4b51eec7432b597743b09c4a98ee8f29f6d139378af82e23d5c9a2c700b",
+      "purposeTags": [
+        "goal085",
+        "negative_proof"
+      ]
+    },
+    {
+      "relativePath": "docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md",
+      "exists": true,
+      "sha256": "54e8ba793de8f3b7f9577ae528a460ba42153031532118a922b9e1638874b215",
+      "purposeTags": [
+        "deepsearch",
+        "synthesis"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/01_PROCEDURAL_VISUAL_SYNTHESIS_CORE_AND_PART_PACKS.md",
+      "exists": true,
+      "sha256": "6d1b05bcf64f5ff91d584701ab7fe157c615969baec006913245270bee05ce96",
+      "purposeTags": [
+        "deepsearch",
+        "part_pack_core"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+      "exists": true,
+      "sha256": "bd184f47525433f1b73788cb4389b3f648f4d0ef0971c691f85e38ea8e4976e5",
+      "purposeTags": [
+        "deepsearch",
+        "water_biome"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md",
+      "exists": true,
+      "sha256": "dfc058341964c2996a4559b2b7f609cfad0c612ccb5c4622d23972a684bb6f9d",
+      "purposeTags": [
+        "deepsearch",
+        "pseudo3d"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/04_CREATURE_NPC_APPEARANCE_BODYPLAN_PAPERDOLL.md",
+      "exists": true,
+      "sha256": "5cf746793b4ca0c6386740422e0b02655114e01453b796fdbe994c27035ef50d",
+      "purposeTags": [
+        "deepsearch",
+        "creature"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/05_SETTLEMENTS_CITIES_CARAVANS_LIVING_WORLD_VISUALS.md",
+      "exists": true,
+      "sha256": "87b57b37b9645bc32d53b714b313aab633f02afdf33c951339a33be7190a38f1",
+      "purposeTags": [
+        "deepsearch",
+        "settlement"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/06_UI_THEMES_EFFECTS_WEATHER_DAYNIGHT_VFX.md",
+      "exists": true,
+      "sha256": "b92e6a94ab1dad3e31f3a94a3d8df23f884b03dbaa06d3a1c37eaa2ffd05f991",
+      "purposeTags": [
+        "deepsearch",
+        "ui_effect"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/07_MEDIA_PIPELINE_PROVIDER_QUARANTINE_PROVENANCE_RATING_ADULT.md",
+      "exists": true,
+      "sha256": "ec738dfb461ae4891c0ec2d576f2cac04ce5665673d3ec31c40491f3b76bab97",
+      "purposeTags": [
+        "deepsearch",
+        "adult_rating"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/08_EXISTING_LIBRARIES_AND_TOOLS_SCOUTING.md",
+      "exists": true,
+      "sha256": "7631eda5ccac1fd9bc3ed99051d0b61c403b6a270a175ffe47827811b5041eb5",
+      "purposeTags": [
+        "deepsearch",
+        "libraries"
+      ]
+    }
+  ]
+}

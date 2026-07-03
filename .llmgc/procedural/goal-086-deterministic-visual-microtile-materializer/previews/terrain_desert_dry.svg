@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="terrain_desert_dry" data-part-pack-id="fantasy_overworld_tile_part_pack" data-asset-slot-id="fantasy_overworld_tile_safe" data-palette-profile-id="palette/fantasy_overworld/readable_v1" data-seed="860103">
+  <rect x="0" y="0" width="64" height="64" fill="#a16d35" />
+  <g id="layer_base" data-order="0" data-role="base_surface">
+    <polygon points="0,62 18,29 34,48 64,26 64,64" fill="#d7aa62" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="detail_pattern">
+    <circle cx="26" cy="21" r="9" fill="#f0d08a" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="transition_or_decor_overlay">
+    <path d="M 10 18 Q 26 10 56 15" fill="none" stroke="#704522" stroke-width="3" />
+  </g>
+</svg>

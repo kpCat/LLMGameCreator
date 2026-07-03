@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="adult_metadata_only_safe_fallback_slot" data-part-pack-id="adult_rating_gated_extension_metadata_only" data-asset-slot-id="humanoid_paperdoll_adult_capable_metadata_only" data-palette-profile-id="palette/adult_rating_metadata/readable_v1" data-seed="860601">
+  <rect x="0" y="0" width="64" height="64" fill="#243136" />
+  <g id="layer_base" data-order="0" data-role="silhouette">
+    <ellipse cx="32" cy="31" rx="16" ry="23" fill="#60787f" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="surface_or_clothing">
+    <circle cx="29" cy="13" r="8" fill="#c6d6d9" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="equipment_or_state">
+    <path d="M 18 30 L 29 20 L 46 30 L 29 53 Z" fill="none" stroke="#f1f5f5" stroke-width="4" />
+  </g>
+</svg>

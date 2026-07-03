@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" data-preview-id="terrain_snow_tundra" data-part-pack-id="fantasy_overworld_tile_part_pack" data-asset-slot-id="fantasy_overworld_tile_safe" data-palette-profile-id="palette/fantasy_overworld/readable_v1" data-seed="860102">
+  <rect x="0" y="0" width="64" height="64" fill="#dfeef2" />
+  <g id="layer_base" data-order="0" data-role="base_surface">
+    <polygon points="0,63 18,38 34,50 64,29 64,64" fill="#a6c6d8" />
+  </g>
+  <g id="layer_detail" data-order="10" data-role="detail_pattern">
+    <circle cx="23" cy="30" r="11" fill="#f8fbff" />
+  </g>
+  <g id="layer_overlay" data-order="20" data-role="transition_or_decor_overlay">
+    <path d="M 7 20 Q 35 7 54 24" fill="none" stroke="#6e8790" stroke-width="3" />
+  </g>
+</svg>

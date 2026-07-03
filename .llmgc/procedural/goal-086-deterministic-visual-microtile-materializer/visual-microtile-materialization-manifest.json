@@ -1,0 +1,273 @@
+{
+  "schemaVersion": "visual_microtile_materialization_manifest_v1",
+  "goalId": "goal_086_deterministic_visual_microtile_materializer",
+  "generatorVersion": "goal086-microtile-materializer-v1",
+  "outputRelativeDirectory": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer",
+  "previewCount": 24,
+  "previews": [
+    {
+      "previewId": "adult_metadata_only_safe_fallback_slot",
+      "previewRelativePath": "previews/adult_metadata_only_safe_fallback_slot.svg",
+      "svgSha256": "9b7dbee614a843e9c83022f9f891d357826e5264a2e029fe29292827ac96ebf6",
+      "byteLength": 818,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "atmosphere_day_night_weather_overlay",
+      "previewRelativePath": "previews/atmosphere_day_night_weather_overlay.svg",
+      "svgSha256": "7de9e6dbef7a05133e752dcc99f05a8618c59466f0eefd3f1c9b3f6606fefc7c",
+      "byteLength": 778,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "creature_bodyplan_silhouette",
+      "previewRelativePath": "previews/creature_bodyplan_silhouette.svg",
+      "svgSha256": "8dc888ce0997a2e516af4fd94c49120a008db4d03247fa505a91b307c230619c",
+      "byteLength": 766,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "creature_damaged_dirty_worn_state",
+      "previewRelativePath": "previews/creature_damaged_dirty_worn_state.svg",
+      "svgSha256": "fed5d5466b824a6a5b56410dd7b9aab72fe17a6416618eb5954a1ed23f1ca889",
+      "byteLength": 770,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "creature_equipment_clothing_overlay",
+      "previewRelativePath": "previews/creature_equipment_clothing_overlay.svg",
+      "svgSha256": "85a87b14f004dfd7b0406e92b24a0c13d24e7d34ac2ac595efa9c33d071a2aec",
+      "byteLength": 773,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "creature_paperdoll_neutral_slot",
+      "previewRelativePath": "previews/creature_paperdoll_neutral_slot.svg",
+      "svgSha256": "a42f04dc51dcf5ac2d32a8a6298d5217861b8924497daf3d5a48f98100ef1514",
+      "byteLength": 768,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "effect_status_aura",
+      "previewRelativePath": "previews/effect_status_aura.svg",
+      "svgSha256": "4f2d6e44e059cf29de18f2ce18e9a3cccda1d8c55ac7eb502db547511648f0c6",
+      "byteLength": 760,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "settlement_caravan_camp",
+      "previewRelativePath": "previews/settlement_caravan_camp.svg",
+      "svgSha256": "1b50fb035954d25a5d186dce43c9d800d204dacddd032a55fd3ab5bc2ce81692",
+      "byteLength": 745,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "settlement_mine_production",
+      "previewRelativePath": "previews/settlement_mine_production.svg",
+      "svgSha256": "17c9d558bda17dd74a8c75514c030be16aaf99fb7bb6c049054887001a015504",
+      "byteLength": 751,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "settlement_small_dwelling",
+      "previewRelativePath": "previews/settlement_small_dwelling.svg",
+      "svgSha256": "014f8269d33a6a2bb1176e1c69385b166e3f96d55428d99efa796a5b81ac7272",
+      "byteLength": 748,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "settlement_wall_gate",
+      "previewRelativePath": "previews/settlement_wall_gate.svg",
+      "svgSha256": "9bcc3f5a623a8fed029108dbafd42f65de465ff22959036a90f246f13044a617",
+      "byteLength": 745,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "terrain_desert_dry",
+      "previewRelativePath": "previews/terrain_desert_dry.svg",
+      "svgSha256": "e3bd994eea0b16c862c2ccb441a5ef19557c09925384648b967e955913263018",
+      "byteLength": 765,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "terrain_forest_overlay",
+      "previewRelativePath": "previews/terrain_forest_overlay.svg",
+      "svgSha256": "c85813ba542c2f725f21ba5b2726d13c1c03b2a24e7d83d1baddbba23d7ac659",
+      "byteLength": 770,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "terrain_grass_overworld",
+      "previewRelativePath": "previews/terrain_grass_overworld.svg",
+      "svgSha256": "34ce1eedccaca8be43470548b38942917a4874a95cf80a10af97d69f7c1475a1",
+      "byteLength": 770,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "terrain_lava_ash",
+      "previewRelativePath": "previews/terrain_lava_ash.svg",
+      "svgSha256": "a15e374e9a36cb470da71df70c92c0ec0ba3ec222aa26ebc6c423fb930909e58",
+      "byteLength": 764,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "terrain_mountain_rock",
+      "previewRelativePath": "previews/terrain_mountain_rock.svg",
+      "svgSha256": "cfd2dc13e2571aa4594ee9a725d52b8cddf743c5734f0af2a97be28b0ce8bebf",
+      "byteLength": 767,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "terrain_snow_tundra",
+      "previewRelativePath": "previews/terrain_snow_tundra.svg",
+      "svgSha256": "f9fcd961c26f235ae3d8c97afde174d83411bdab622b461c0f00c0003e5abf36",
+      "byteLength": 765,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "ui_frame_panel_motif",
+      "previewRelativePath": "previews/ui_frame_panel_motif.svg",
+      "svgSha256": "f38ea360d13735b95407c5d53a34ad2b284af26aeb86ef337cb5273725d9763d",
+      "byteLength": 761,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "water_base",
+      "previewRelativePath": "previews/water_base.svg",
+      "svgSha256": "2482a27574b5fb2715150df4280fc8f716a9284da606079cdb1fdb6308e4cc87",
+      "byteLength": 807,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "water_bridge_dock_anchor",
+      "previewRelativePath": "previews/water_bridge_dock_anchor.svg",
+      "svgSha256": "eac910b2cadc54d9eea65fc2441019931b7d9d33457474a294b16f6902f63ebf",
+      "byteLength": 821,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "water_coast_transition",
+      "previewRelativePath": "previews/water_coast_transition.svg",
+      "svgSha256": "6d7f344e08eb842373f01eadaaa7929db94fa497b8234aeb4d3bb597b57d0665",
+      "byteLength": 819,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "water_lake_edge",
+      "previewRelativePath": "previews/water_lake_edge.svg",
+      "svgSha256": "3ba16016df51f189242f0cca4425771e811b373bb38e7dee5553afd626232846",
+      "byteLength": 812,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "water_marsh_swamp",
+      "previewRelativePath": "previews/water_marsh_swamp.svg",
+      "svgSha256": "32024407ea75150a5a7d3504ff2d6265e2e88427568e0ae807fdb566c45c9a1f",
+      "byteLength": 814,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    },
+    {
+      "previewId": "water_river_segment",
+      "previewRelativePath": "previews/water_river_segment.svg",
+      "svgSha256": "413cb85e9477876d0529a5d1f3b4e5f00221dba05063f246c7b842001781b304",
+      "byteLength": 815,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "layerCount": 3,
+      "generatedShapeCount": 3
+    }
+  ]
+}

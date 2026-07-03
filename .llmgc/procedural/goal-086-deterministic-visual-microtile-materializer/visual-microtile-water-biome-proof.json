@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "visual_microtile_water_biome_proof_v1",
+  "goalId": "goal_086_deterministic_visual_microtile_materializer",
+  "passed": true,
+  "grassOverworldCovered": true,
+  "snowCovered": true,
+  "desertDryCovered": true,
+  "lavaAshCovered": true,
+  "forestOverlayCovered": true,
+  "mountainRockCovered": true,
+  "waterBaseCovered": true,
+  "coastTransitionCovered": true,
+  "riverSegmentCovered": true,
+  "lakeEdgeCovered": true,
+  "marshSwampCovered": true,
+  "bridgeDockAnchorMetadataCovered": true
+}
