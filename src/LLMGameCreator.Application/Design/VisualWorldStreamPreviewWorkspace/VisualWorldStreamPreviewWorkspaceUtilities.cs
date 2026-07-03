@@ -91,7 +91,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "infiniteOverlapReusedChunkKeyCount",
             "portalOrTransitionLinkCount",
             "scenarioCount",
-            "rejectedCount"
+            "rejectedCount",
+            "packageCount",
+            "exportRecordCount",
+            "recordCount",
+            "ruleCount",
+            "sourceGoal091ReusedChunkKeyCount",
+            "exportReusedChunkKeyCount"
         })
         {
             if (TryGetInt(root, property, out var value))

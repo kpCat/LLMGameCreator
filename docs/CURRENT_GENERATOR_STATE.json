@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T16:50:39Z",
+    "updated_at_utc":  "2026-07-03T17:17:46Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 093 visual chunk cache export contract produced for review",
-    "gate_status":  "visual_chunk_cache_export_contract_verification",
+    "current_phase_title":  "Goal 094 visual chunk cache export inspector produced for review",
+    "gate_status":  "visual_chunk_cache_export_inspector_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 093 Visual Chunk Cache Export Contract is produced for review: visual_chunk_cache_export_contract_verification required, accepted=false. It adds a BCL-only Application cache/export contract over real Goal 091 stream-window artifacts, writes deterministic metadata-only evidence and runtime-handoff sidecar proof, and does not start Runtime, Unity, provider, media, schema, Lua, generator-library, project-file or dependency work. Goal 092A, Goal 092, Goal 091 and Goal 090 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 093 visual chunk cache export contract evidence. Goal 093 adds Application-side cache/export contract models, validator, evidence service, focused tests and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 093 remains accepted=false until explicit user review accepts it, and Goal 092A, Goal 092, Goal 091 and Goal 090 remain accepted=false.",
-    "recommended_next_decision":  "Review Goal 093 visual chunk cache export contract evidence and only mark visual_chunk_cache_export_contract_verification passed after explicit user acceptance; do not mark Goal 092A, Goal 092, Goal 091, Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 094 Visual Chunk Cache Export Inspector is produced for review: visual_chunk_cache_export_inspector_verification required, accepted=false. It extends the existing Application/WinForms Visual World Stream Preview Workspace to inspect real Goal 093 cache/export artifacts, surfaces four packages, 93 records, runtime handoff metadata-only status and readback/overlap/negative/invalidation proof status, and does not start Runtime, Unity, provider, media, schema, Lua, generator-library, project-file or dependency work. Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 094 visual chunk cache export inspector evidence. Goal 094 adds editor/review integration in the existing Visual World Stream Preview Workspace and WinForms page only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 094 remains accepted=false until explicit user review accepts it, and Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain accepted=false.",
+    "recommended_next_decision":  "Review Goal 094 visual chunk cache export inspector evidence and only mark visual_chunk_cache_export_inspector_verification passed after explicit user acceptance; do not mark Goal 093, Goal 092A, Goal 092, Goal 091, Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "visual_chunk_cache_export_inspector_verification",
                                                         "visual_chunk_cache_export_contract_verification",
                                                         "visual_world_preview_service_split_source_health_verification",
                                                         "visual_world_stream_preview_workspace_verification",
@@ -126,7 +127,8 @@
                            "goal_091_manual_gate":  "deterministic_visual_chunk_stream_window_verification",
                            "goal_092_manual_gate":  "visual_world_stream_preview_workspace_verification",
                            "goal_092a_manual_gate":  "visual_world_preview_service_split_source_health_verification",
-                           "goal_093_manual_gate":  "visual_chunk_cache_export_contract_verification"
+                           "goal_093_manual_gate":  "visual_chunk_cache_export_contract_verification",
+                           "goal_094_manual_gate":  "visual_chunk_cache_export_inspector_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -417,6 +419,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "visual_chunk_cache_export_inspector_verification",
+                                          "goal_094_visual_chunk_cache_export_inspector",
+                                          "manual_review_goal_094_visual_chunk_cache_export_inspector",
                                           "visual_chunk_cache_export_contract_verification",
                                           "goal_093_visual_chunk_cache_export_contract",
                                           "manual_review_goal_093_visual_chunk_cache_export_contract",
@@ -479,13 +484,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "visual_chunk_cache_export_contract_verification",
-    "recommended_next_work_item_title":  "Review Goal 093 visual chunk cache export contract",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-093-visual-chunk-cache-export-contract/GOAL.md",
+    "recommended_next_work_item":  "visual_chunk_cache_export_inspector_verification",
+    "recommended_next_work_item_title":  "Review Goal 094 visual chunk cache export inspector",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-094-visual-chunk-cache-export-inspector/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 093 visual chunk cache export contract evidence",
-                                              "Keep Goal 093 accepted=false until user review accepts it",
-                                              "Use the Goal 093 Application cache/export contract as future visual-streaming metadata handoff input, not as Runtime, Unity or provider implementation",
+                                              "Review Goal 094 visual chunk cache export inspector evidence",
+                                              "Keep Goal 094 and Goal 093 accepted=false until user review accepts them",
+                                              "Use the Goal 094 editor/review integration as future visual-streaming inspection input, not as Runtime, Unity or provider implementation",
                                               "Review Goal 092A visual world preview service split source-health evidence",
                                               "Keep Goal 092A accepted=false until user review accepts it",
                                               "Keep Goal 092 accepted=false until its separate user review accepts it",
@@ -2183,5 +2188,20 @@
                                                                                     "Acceptance/rejection/promotion workflow, final renderer, atlas, Runtime and Unity consumers remain separate future work."
                                                                                 ],
                                                             "next_action":  "review_goal_093_visual_chunk_cache_export_contract"
+                                                        },
+    "visual_chunk_cache_export_inspector_verification":  {
+                                                            "status":  "produced_for_review",
+                                                            "accepted":  false,
+                                                            "evidence_source":  "goal_094_visual_chunk_cache_export_inspector",
+                                                            "observed_result":  [
+                                                                                    "Goal 094 produces visual chunk cache export inspector evidence under .llmgc/procedural/goal-094-visual-chunk-cache-export-inspector with accepted=false.",
+                                                                                    "implementationStatus=GREEN, groupCount=6, entryCount=67, cacheExportPackageCount=4, cacheExportRecordCount=93, runtimeHandoffSidecarVisible=true, runtimeHandoffSidecarMetadataOnly=true and qualityGatePassed=true.",
+                                                                                    "The existing Visual World Stream Preview Workspace Application seam reads real Goal 093 manifest, runtime handoff sidecar, invalidation matrix, readback proof, overlap reuse proof and negative proof files by repository-relative path.",
+                                                                                    "The WinForms page surfaces the cache export group through the existing UserControl-based artifact group, entries, proof list, details and diagnostics panels, including package target kind, record/source-chunk/window counts and metadata-only sidecar status.",
+                                                                                    "The source-health scan covers 11 workspace C# files with maxLogicalLineCount=489, filesOver1000LogicalLinesCount=0 and filesOver700LogicalLinesInGoal092NamespaceCount=0.",
+                                                                                    "Goal 094 adds no Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, prompt dump, runtime consumption or Unity consumption.",
+                                                                                    "Goal 094 keeps Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 produced-for-review with accepted=false."
+                                                                                ],
+                                                            "next_action":  "review_goal_094_visual_chunk_cache_export_inspector"
                                                         }
 }

@@ -185,6 +185,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-092-visual-world-stream-preview-workspace/GOAL.md` | Goal 092 task: add a bounded Application/WinForms visual world stream preview workspace that consumes real Goal 086-091 disk artifacts, lists proof status and text SVG previews, writes compact workspace evidence and stops at `visual_world_stream_preview_workspace_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-092a-visual-world-preview-service-split-source-health/GOAL.md` | Goal 092A hotfix task: split the oversized Goal 092 Application service into smaller BCL-only files, add source-health before/after evidence and stop at `visual_world_preview_service_split_source_health_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-093-visual-chunk-cache-export-contract/GOAL.md` | Goal 093 task: add a BCL-only Application visual chunk cache/export contract over real Goal 091 stream-window artifacts, with deterministic manifest/readback/sidecar proofs and final stop at `visual_chunk_cache_export_contract_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-094-visual-chunk-cache-export-inspector/GOAL.md` | Goal 094 task: integrate real Goal 093 cache/export artifacts into the existing Visual World Stream Preview Workspace and WinForms review UI, write compact inspector evidence and stop at `visual_chunk_cache_export_inspector_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/VALIDATION_PIPELINE.md` | Goal 089 validation policy: `check-current-goal.ps1` is the ordinary feature-goal default, `check-spine-fast.ps1` is the medium visual/world/gameplay spine route, and full `check-all.ps1` / `check-all-observed.ps1` is reserved for consolidation, milestone and shared/core-risk work. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
@@ -251,7 +252,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-visual_chunk_cache_export_contract_verification
+visual_chunk_cache_export_inspector_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -484,6 +485,13 @@ manifest, readback proof, overlap reuse proof, negative proof, invalidation matr
 sidecar under `.llmgc/procedural/goal-093-visual-chunk-cache-export-contract/`. Goal 093 does not start Runtime, Unity,
 provider, schema, Lua, generator-library, project-file, dependency, binary/raster media or prompt-output work and keeps
 Goal 092A, Goal 092, Goal 091 and Goal 090 `accepted=false`.
+Goal 094 is produced for review with `visual_chunk_cache_export_inspector_verification required`, `accepted=false`,
+`implementationStatus=GREEN`; it extends the existing Visual World Stream Preview Workspace Application/WinForms seam to
+read real Goal 093 cache/export artifacts, surfaces four packages, 93 records, the metadata-only runtime handoff sidecar
+and readback/overlap/negative/invalidation proof status, and writes compact evidence under
+`.llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/`. Goal 094 does not start Runtime, Unity, provider,
+schema, Lua, generator-library, project-file, dependency, binary/raster media or prompt-output work and keeps Goal 094,
+Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 `accepted=false`.
 
 Allowed next sequence:
 
@@ -542,6 +550,7 @@ Allowed next sequence:
 53. Review Goal 092 `visual_world_stream_preview_workspace_verification`; it adds an Application/WinForms preview workspace over real Goal 086-091 artifacts, keeps Goal 092, Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 54. Review Goal 092A `visual_world_preview_service_split_source_health_verification`; it repairs the Goal 092 source-health regression, keeps Goal 092A and Goal 092 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 55. Review Goal 093 `visual_chunk_cache_export_contract_verification`; it adds the BCL-only Application cache/export contract and metadata-only runtime handoff sidecar over real Goal 091 artifacts, keeps Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
+56. Review Goal 094 `visual_chunk_cache_export_inspector_verification`; it makes Goal 093 cache/export artifacts inspectable in the existing Application/WinForms review workspace, keeps Goal 094 and previous visual gates `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 
 Kill criterion:
 

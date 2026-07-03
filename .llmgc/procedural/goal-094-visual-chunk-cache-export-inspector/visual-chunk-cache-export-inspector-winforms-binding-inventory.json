@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "visual_chunk_cache_export_inspector_winforms_binding_inventory_v1",
+  "goalId": "goal_094_visual_chunk_cache_export_inspector",
+  "passed": true,
+  "pageControlExists": true,
+  "designerExists": true,
+  "compositionRootRegistersService": true,
+  "compositionRootRegistersPage": true,
+  "editorRegistryIncludesPage": true,
+  "pageActivationLoadsApplicationResult": true,
+  "pageBindDisplaysGroupsEntriesProofs": true,
+  "pageBindDisplaysCacheExports": true,
+  "diagnostics": []
+}

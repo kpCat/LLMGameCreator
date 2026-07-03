@@ -10,21 +10,64 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through091Artifacts()
+    public void ServiceLoadsRealGoal086Through093Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
 
         Assert.True(result.QualityGateScan.RequiredArtifactGroupsPresent);
-        Assert.Equal(5, result.Catalog.GroupCount);
         Assert.Contains("microtiles", groupIds);
         Assert.Contains("map_patches", groupIds);
         Assert.Contains("region_composer", groupIds);
         Assert.Contains("world_profiles", groupIds);
         Assert.Contains("chunk_stream_windows", groupIds);
-        Assert.True(result.Catalog.EntryCount >= 54);
+        Assert.Contains("cache_exports", groupIds);
+        Assert.Equal(6, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 67);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 38);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
+    }
+
+    [Fact]
+    public void CacheExportGroupSurfacesGoal093PackagesAndRuntimeHandoffSidecar()
+    {
+        var result = Build();
+        var cacheGroup = Assert.Single(
+            result.Catalog.Groups,
+            group => group.GroupId == "cache_exports");
+        var packages = cacheGroup.Entries
+            .Where(entry => entry.ArtifactKind == "cache_export_package")
+            .ToArray();
+
+        Assert.True(result.QualityGateScan.CacheExportGroupPresent);
+        Assert.Equal(4, packages.Length);
+        Assert.Equal(93, packages.Sum(entry => entry.CacheRecordCount));
+        Assert.Equal(117, packages.Sum(entry => entry.SourceChunkCount));
+        Assert.Equal(5, packages.Sum(entry => entry.StreamWindowCount));
+        Assert.Contains(packages, entry => entry.Id.EndsWith(
+            "finite_custom_255x257_window_cache_export",
+            StringComparison.Ordinal));
+        Assert.Contains(packages, entry => entry.Id.EndsWith(
+            "huge_sparse_100000x100000_window_cache_export",
+            StringComparison.Ordinal));
+        Assert.Contains(packages, entry => entry.Id.EndsWith(
+            "infinite_streaming_overlap_cache_export",
+            StringComparison.Ordinal));
+
+        var runtimeHandoff = Assert.Single(
+            packages,
+            entry => entry.ExportTargetKind == "runtimeHandoff");
+        Assert.EndsWith("layer_transition_runtime_handoff_sidecar", runtimeHandoff.Id);
+        Assert.True(runtimeHandoff.RuntimeHandoffMetadataOnly);
+        Assert.Equal(27, runtimeHandoff.CacheRecordCount);
+        Assert.True(runtimeHandoff.NoRawFullWorldDump);
+        Assert.True(runtimeHandoff.ReadbackProofPassed);
+        Assert.True(runtimeHandoff.OverlapReuseProofPassed);
+        Assert.True(runtimeHandoff.NegativeProofPassed);
+        Assert.True(runtimeHandoff.InvalidationMatrixPassed);
+        Assert.NotEmpty(runtimeHandoff.ChunkKeys);
+        Assert.All(packages, entry =>
+            Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
     }
 
     [Fact]
@@ -48,7 +91,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
     }
 
     [Fact]
-    public void Goal091ProofStatusesSurfaceSeamCacheLayerAndNegativeProofs()
+    public void Goal091AndGoal093ProofStatusesSurfaceRequiredProofs()
     {
         var result = Build();
         var required = new[]
@@ -56,7 +99,12 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal091.seam",
             "goal091.cache_reuse",
             "goal091.layer_transition",
-            "goal091.negative"
+            "goal091.negative",
+            "goal093.readback",
+            "goal093.overlap_reuse",
+            "goal093.negative",
+            "goal093.invalidation_matrix",
+            "goal093.runtime_handoff_metadata_only"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -100,6 +148,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Equal(0, result.QualityGateScan.RawPhysicalOneLineSourceCount);
         Assert.Equal(0, result.QualityGateScan.MinifiedSourceCount);
         Assert.True(result.QualityGateScan.WorkspaceServiceLogicalLineCount < 700);
+        Assert.Equal(0, result.QualityGateScan.FilesOver1000LogicalLinesCount);
+        Assert.All(result.SourceHealthScan.Files, file =>
+            Assert.True(file.LogicalLineCount <= 700, file.RelativePath));
     }
 
     [Fact]
@@ -182,12 +233,24 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             var entries = RequiredPrivateField<ListView>(page, "_entriesListView");
             var proofs = RequiredPrivateField<ListView>(page, "_proofsListView");
             var svgPreview = RequiredPrivateField<TextBox>(page, "_svgPreviewTextBox");
+            var details = RequiredPrivateField<TextBox>(page, "_detailsTextBox");
 
             Assert.Same(result, stored);
-            Assert.True(groups.Items.Count >= 5);
+            Assert.True(groups.Items.Count >= 6);
             Assert.True(entries.Items.Count > 0);
-            Assert.True(proofs.Items.Count >= 4);
-            Assert.Contains("<svg", svgPreview.Text, StringComparison.OrdinalIgnoreCase);
+            Assert.True(proofs.Items.Count >= 9);
+            var cachePackageItem = entries.Items
+                .Cast<ListViewItem>()
+                .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
+                               && entry.ArtifactKind == "cache_export_package");
+            cachePackageItem.Selected = true;
+            cachePackageItem.Focused = true;
+
+            Assert.Contains("cacheRecordCount:", details.Text, StringComparison.Ordinal);
+            Assert.Contains("runtimeHandoffMetadataOnly:", details.Text, StringComparison.Ordinal);
+            Assert.True(
+                svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)
+                || svgPreview.Text.Contains("No text SVG preview", StringComparison.Ordinal));
         });
     }
 

@@ -39,7 +39,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " required | accepted=false | status=" + result.Report.ImplementationStatus
             + " | groups=" + result.Catalog.GroupCount
             + " | entries=" + result.Catalog.EntryCount
-            + " | svg=" + result.Catalog.SvgTextPreviewCount;
+            + " | svg=" + result.Catalog.SvgTextPreviewCount
+            + " | cachePackages=" + result.Report.CacheExportPackageCount
+            + " | cacheRecords=" + result.Report.CacheExportRecordCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -126,6 +128,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "winFormsBindingPassed="
                 + result.WinFormsBindingInventory.Passed.ToString().ToLowerInvariant(),
             "proofStatusPassed=" + result.ProofStatus.Passed.ToString().ToLowerInvariant(),
+            "cacheExportPackageCount=" + result.Report.CacheExportPackageCount,
+            "cacheExportRecordCount=" + result.Report.CacheExportRecordCount,
+            "runtimeHandoffSidecarVisible="
+                + result.Report.RuntimeHandoffSidecarVisible.ToString().ToLowerInvariant(),
+            "runtimeHandoffSidecarMetadataOnly="
+                + result.Report.RuntimeHandoffSidecarMetadataOnly.ToString().ToLowerInvariant(),
+            "cacheReadbackProofPassed="
+                + result.Report.CacheReadbackProofPassed.ToString().ToLowerInvariant(),
+            "cacheOverlapReuseProofPassed="
+                + result.Report.CacheOverlapReuseProofPassed.ToString().ToLowerInvariant(),
+            "cacheNegativeProofPassed="
+                + result.Report.CacheNegativeProofPassed.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -203,7 +217,20 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "status: " + entry.Status,
             "diagnosticSummary: " + entry.DiagnosticSummary,
             "textSvgPreviewPath: " + entry.TextSvgPreviewPath,
-            "safeRatingMetadataSummary: " + entry.SafeRatingMetadataSummary
+            "safeRatingMetadataSummary: " + entry.SafeRatingMetadataSummary,
+            "exportTargetKind: " + entry.ExportTargetKind,
+            "cacheRecordCount: " + entry.CacheRecordCount,
+            "sourceChunkCount: " + entry.SourceChunkCount,
+            "streamWindowCount: " + entry.StreamWindowCount,
+            "runtimeHandoffMetadataOnly: "
+                + entry.RuntimeHandoffMetadataOnly.ToString().ToLowerInvariant(),
+            "invalidationMatrixPassed: "
+                + entry.InvalidationMatrixPassed.ToString().ToLowerInvariant(),
+            "readbackProofPassed: " + entry.ReadbackProofPassed.ToString().ToLowerInvariant(),
+            "overlapReuseProofPassed: " + entry.OverlapReuseProofPassed.ToString().ToLowerInvariant(),
+            "negativeProofPassed: " + entry.NegativeProofPassed.ToString().ToLowerInvariant(),
+            "noRawFullWorldDump: " + entry.NoRawFullWorldDump.ToString().ToLowerInvariant(),
+            "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);
     }

@@ -7,13 +7,14 @@ namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 
 public sealed partial class VisualWorldStreamPreviewWorkspaceService
 {
-    public const string ReportMarkdownFileName = "visual-world-stream-preview-workspace-report.md";
-    public const string CatalogJsonFileName = "visual-world-stream-preview-catalog.json";
-    public const string ProofStatusJsonFileName = "visual-world-stream-preview-proof-status.json";
+    public const string ReportMarkdownFileName = "visual-chunk-cache-export-inspector-report.md";
+    public const string CatalogJsonFileName = "visual-chunk-cache-export-inspector-catalog.json";
+    public const string ProofStatusJsonFileName = "visual-chunk-cache-export-inspector-proof-status.json";
     public const string WinFormsBindingInventoryJsonFileName =
-        "visual-world-stream-preview-winforms-binding-inventory.json";
+        "visual-chunk-cache-export-inspector-winforms-binding-inventory.json";
     public const string QualityGateScanJsonFileName =
-        "visual-world-stream-preview-quality-gate-scan.json";
+        "visual-chunk-cache-export-inspector-quality-gate-scan.json";
+    public const string SourceHealthScanJsonFileName = "source-health-scan.json";
 
     private const int MaxPreviewCharacters = 32000;
     private static readonly UTF8Encoding Utf8WithoutBom = new(false);
@@ -41,7 +42,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildMapPatchGroup(projectRoot, diagnostics, svgEntries),
             BuildRegionGroup(projectRoot, diagnostics, svgEntries),
             BuildWorldProfileGroup(projectRoot, diagnostics, svgEntries),
-            BuildChunkStreamGroup(projectRoot, diagnostics, svgEntries)
+            BuildChunkStreamGroup(projectRoot, diagnostics, svgEntries),
+            BuildCacheExportGroup(projectRoot, diagnostics)
         };
 
         var proofStatus = BuildProofStatus(projectRoot, diagnostics);
@@ -75,6 +77,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var proofStatusJson = Serialize(proofDocument);
         var bindingJson = Serialize(bindingInventory);
         var qualityJson = Serialize(qualityGate);
+        var sourceHealthJson = Serialize(sourceHealth);
         var reportWithoutHash = BuildReport(
             catalog,
             proofDocument,
@@ -83,7 +86,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             catalogJson,
             proofStatusJson,
             bindingJson,
-            qualityJson);
+            qualityJson,
+            sourceHealthJson);
         var reportMarkdownWithoutHash = RenderReport(
             reportWithoutHash,
             catalog,
@@ -109,11 +113,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             ProofStatus = proofDocument,
             WinFormsBindingInventory = bindingInventory,
             QualityGateScan = qualityGate,
+            SourceHealthScan = sourceHealth,
             Report = report,
             CatalogJson = catalogJson,
             ProofStatusJson = proofStatusJson,
             WinFormsBindingInventoryJson = bindingJson,
             QualityGateScanJson = qualityJson,
+            SourceHealthScanJson = sourceHealthJson,
             ReportMarkdown = reportMarkdown,
             Diagnostics = diagnostics
                 .Concat(bindingInventory.Diagnostics)

@@ -389,6 +389,7 @@ public sealed class VisualWorldPreviewServiceSplitSourceHealthEvidenceService
             "VisualWorldStreamPreviewWorkspaceUtilities.cs" => "local JSON, path and hash helpers",
             "VisualWorldStreamPreviewWinFormsBindingScanner.cs" => "WinForms binding inventory scan",
             "VisualWorldStreamPreviewWorkspaceModels.cs" => "DTOs and vocabulary",
+            "VisualWorldStreamPreviewCacheExportInspector.cs" => "Goal093 cache export inspector discovery",
             _ => "Goal092 workspace support file"
         };
     }

@@ -81,6 +81,10 @@ goal_088_check_all_validation_repair_verification required
 tiered_validation_pipeline_verification required
 parameterized_visual_world_profiles_verification required
 deterministic_visual_chunk_stream_window_verification required
+visual_world_stream_preview_workspace_verification required
+visual_world_preview_service_split_source_health_verification required
+visual_chunk_cache_export_contract_verification required
+visual_chunk_cache_export_inspector_verification required
 ```
 
 Current capabilities:
@@ -102,6 +106,7 @@ Current capabilities:
 - Goal 089 tiered validation pipeline with current-goal, spine-fast, full and full-observed validation tiers while keeping full `check-all.ps1` authoritative;
 - BCL-only parameterized visual world profile/addressing seam with `144x144` only as benchmark fixture, arbitrary finite size matrix, huge sparse `100000x100000` profile, infinite chunk windows, deterministic chunk keys and compact metadata/text-SVG evidence;
 - BCL-only visual chunk cache/export contract over real Goal 091 stream-window artifacts, with deterministic manifest/readback/sidecar proofs and metadata-only runtime handoff evidence;
+- BCL-only Visual World Stream Preview Workspace integration for Goal 093 cache/export artifacts, surfacing 4 cache packages, 93 records, the metadata-only runtime handoff sidecar and readback/overlap/negative/invalidation proof status in the existing WinForms review UI;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1503,14 +1508,30 @@ Goal 093 adds no Runtime, Unity, public schema, provider/LLM/RAG/media execution
 project-file, dependency, binary/raster media or prompt-dump changes. Goal 093, Goal 092A, Goal 092, Goal 091 and Goal
 090 remain `accepted=false`.
 
+### Goal 094: Visual Chunk Cache Export Inspector
+
+Goal 094 is produced for review with `visual_chunk_cache_export_inspector_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It integrates real Goal 093 cache/export artifacts into the existing
+Visual World Stream Preview Workspace Application seam and WinForms review page, and writes deterministic evidence under
+`.llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/`.
+
+Goal 094 surfaces six workspace groups, 67 entries, 38 text SVG previews, four Goal 093 cache export package entries,
+93 cache records, 117 source chunks, five stream windows, the metadata-only runtime handoff sidecar, the invalidation
+matrix status and readback/overlap/negative proof status. The source-health scan covers 11 workspace C# files with
+maxLogicalLineCount=489, filesOver1000LogicalLinesCount=0 and filesOver700LogicalLinesInGoal092NamespaceCount=0.
+
+Goal 094 adds no Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file,
+dependency, binary/raster media, prompt-dump, runtime consumption or Unity consumption changes. Goal 094, Goal 093,
+Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-visual_chunk_cache_export_contract_verification
+visual_chunk_cache_export_inspector_verification
 ```
 
 Status:
 
 ```text
-goal_093_visual_chunk_cache_export_contract_produced_for_review
+goal_094_visual_chunk_cache_export_inspector_produced_for_review
 ```

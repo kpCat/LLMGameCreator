@@ -4,18 +4,21 @@ namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 
 public static class VisualWorldStreamPreviewWorkspaceVocabulary
 {
-    public const string GoalId = "goal_092_visual_world_stream_preview_workspace";
-    public const string ProductSmokeRoute = "goal-092-visual-world-stream-preview-workspace";
-    public const string FinalGate = "visual_world_stream_preview_workspace_verification";
+    public const string GoalId = "goal_094_visual_chunk_cache_export_inspector";
+    public const string ProductSmokeRoute = "goal-094-visual-chunk-cache-export-inspector";
+    public const string FinalGate = "visual_chunk_cache_export_inspector_verification";
     public const string RelativeOutputDirectory =
-        ".llmgc/procedural/goal-092-visual-world-stream-preview-workspace";
+        ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector";
 
-    public const string CatalogSchemaVersion = "visual_world_stream_preview_catalog_v1";
-    public const string ProofStatusSchemaVersion = "visual_world_stream_preview_proof_status_v1";
+    public const string CatalogSchemaVersion = "visual_chunk_cache_export_inspector_catalog_v1";
+    public const string ProofStatusSchemaVersion =
+        "visual_chunk_cache_export_inspector_proof_status_v1";
     public const string WinFormsBindingSchemaVersion =
-        "visual_world_stream_preview_winforms_binding_inventory_v1";
+        "visual_chunk_cache_export_inspector_winforms_binding_inventory_v1";
     public const string QualityGateSchemaVersion =
-        "visual_world_stream_preview_quality_gate_scan_v1";
+        "visual_chunk_cache_export_inspector_quality_gate_scan_v1";
+    public const string SourceHealthSchemaVersion =
+        "visual_chunk_cache_export_inspector_source_health_scan_v1";
 }
 
 public static class VisualWorldPreviewServiceSplitSourceHealthVocabulary
@@ -83,6 +86,17 @@ public sealed record VisualWorldPreviewArtifactEntry
     public string DiagnosticSummary { get; init; } = string.Empty;
     public string TextSvgPreviewPath { get; init; } = string.Empty;
     public string SafeRatingMetadataSummary { get; init; } = string.Empty;
+    public string ExportTargetKind { get; init; } = string.Empty;
+    public int CacheRecordCount { get; init; }
+    public int SourceChunkCount { get; init; }
+    public int StreamWindowCount { get; init; }
+    public bool RuntimeHandoffMetadataOnly { get; init; }
+    public bool InvalidationMatrixPassed { get; init; }
+    public bool ReadbackProofPassed { get; init; }
+    public bool OverlapReuseProofPassed { get; init; }
+    public bool NegativeProofPassed { get; init; }
+    public bool NoRawFullWorldDump { get; init; }
+    public IReadOnlyList<string> ChunkKeys { get; init; } = [];
 
     [JsonIgnore]
     public string TextPreview { get; init; } = string.Empty;
@@ -137,6 +151,7 @@ public sealed record VisualWorldPreviewWinFormsBindingInventory
     public bool EditorRegistryIncludesPage { get; init; }
     public bool PageActivationLoadsApplicationResult { get; init; }
     public bool PageBindDisplaysGroupsEntriesProofs { get; init; }
+    public bool PageBindDisplaysCacheExports { get; init; }
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
 
@@ -154,6 +169,19 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public int EntryCount { get; init; }
     public int SvgTextPreviewCount { get; init; }
     public int Goal091StreamWindowEntryCount { get; init; }
+    public bool CacheExportGroupPresent { get; init; }
+    public int CacheExportPackageCount { get; init; }
+    public int CacheExportRecordCount { get; init; }
+    public int CacheExportSourceChunkCount { get; init; }
+    public int CacheExportStreamWindowCount { get; init; }
+    public bool RuntimeHandoffSidecarVisible { get; init; }
+    public bool RuntimeHandoffSidecarMetadataOnly { get; init; }
+    public bool CacheReadbackProofPassed { get; init; }
+    public bool CacheOverlapReuseProofPassed { get; init; }
+    public bool CacheNegativeProofPassed { get; init; }
+    public bool CacheInvalidationMatrixPassed { get; init; }
+    public bool CacheNoRawFullWorldDump { get; init; }
+    public bool Goal093FilesDiscoveredByRelativePaths { get; init; }
     public bool RequiredArtifactGroupsPresent { get; init; }
     public bool Goal091StreamWindowsVisible { get; init; }
     public bool ProofStatusPassed { get; init; }
@@ -162,6 +190,7 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool NoRuntimeUnityProviderSchemaProjectDependencyChanges { get; init; } = true;
     public bool NoPromptDumps { get; init; } = true;
     public bool WinFormsBindingReal { get; init; }
+    public bool WinFormsCacheExportBindingReal { get; init; }
     public bool SourceHealthPassed { get; init; }
     public int ScannedCSharpFileCount { get; init; }
     public int MaxLogicalLineCount { get; init; }
@@ -214,6 +243,17 @@ public sealed record VisualWorldStreamPreviewWorkspaceReport
     public int EntryCount { get; init; }
     public int SvgTextPreviewCount { get; init; }
     public int Goal091StreamWindowEntryCount { get; init; }
+    public int CacheExportPackageCount { get; init; }
+    public int CacheExportRecordCount { get; init; }
+    public int CacheExportSourceChunkCount { get; init; }
+    public int CacheExportStreamWindowCount { get; init; }
+    public bool RuntimeHandoffSidecarVisible { get; init; }
+    public bool RuntimeHandoffSidecarMetadataOnly { get; init; }
+    public bool CacheReadbackProofPassed { get; init; }
+    public bool CacheOverlapReuseProofPassed { get; init; }
+    public bool CacheNegativeProofPassed { get; init; }
+    public bool CacheInvalidationMatrixPassed { get; init; }
+    public bool CacheNoRawFullWorldDump { get; init; }
     public bool ProofStatusPassed { get; init; }
     public bool WinFormsBindingPassed { get; init; }
     public bool QualityGatePassed { get; init; }
@@ -235,11 +275,13 @@ public sealed record VisualWorldStreamPreviewWorkspaceResult
     public VisualWorldStreamPreviewProofStatusDocument ProofStatus { get; init; } = new();
     public VisualWorldPreviewWinFormsBindingInventory WinFormsBindingInventory { get; init; } = new();
     public VisualWorldPreviewWorkspaceQualityGate QualityGateScan { get; init; } = new();
+    public VisualWorldStreamPreviewSourceHealthScan SourceHealthScan { get; init; } = new();
     public VisualWorldStreamPreviewWorkspaceReport Report { get; init; } = new();
     public string CatalogJson { get; init; } = string.Empty;
     public string ProofStatusJson { get; init; } = string.Empty;
     public string WinFormsBindingInventoryJson { get; init; } = string.Empty;
     public string QualityGateScanJson { get; init; } = string.Empty;
+    public string SourceHealthScanJson { get; init; } = string.Empty;
     public string ReportMarkdown { get; init; } = string.Empty;
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
@@ -252,6 +294,7 @@ public sealed record VisualWorldStreamPreviewWorkspaceWriteResult
     public string ProofStatusJsonPath { get; init; } = string.Empty;
     public string WinFormsBindingInventoryJsonPath { get; init; } = string.Empty;
     public string QualityGateScanJsonPath { get; init; } = string.Empty;
+    public string SourceHealthScanJsonPath { get; init; } = string.Empty;
     public VisualWorldStreamPreviewWorkspaceResult Result { get; init; } = new();
 }
 
@@ -277,6 +320,10 @@ public sealed record VisualWorldStreamPreviewSourceFileHealth
 
 public sealed record VisualWorldStreamPreviewSourceHealthScan
 {
+    public string SchemaVersion { get; init; } =
+        VisualWorldStreamPreviewWorkspaceVocabulary.SourceHealthSchemaVersion;
+
+    public string GoalId { get; init; } = VisualWorldStreamPreviewWorkspaceVocabulary.GoalId;
     public bool Passed { get; init; }
     public int ScannedCSharpFileCount { get; init; }
     public int MaxLogicalLineCount { get; init; }

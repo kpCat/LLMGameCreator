@@ -35,6 +35,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains("_entriesListView", StringComparison.Ordinal)
             && pageText.Contains("_proofsListView", StringComparison.Ordinal)
             && pageText.Contains("_svgPreviewTextBox", StringComparison.Ordinal);
+        var bindDisplaysCacheExports = pageText.Contains("CacheRecordCount", StringComparison.Ordinal)
+            && pageText.Contains("ExportTargetKind", StringComparison.Ordinal)
+            && pageText.Contains("RuntimeHandoffMetadataOnly", StringComparison.Ordinal)
+            && pageText.Contains("ReadbackProofPassed", StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -43,6 +47,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(registryIncludesPage, "goal092.winforms.registry_missing", compositionRelativePath, diagnostics);
         AddIfFalse(activationLoads, "goal092.winforms.activation_missing", pageRelativePath, diagnostics);
         AddIfFalse(bindDisplays, "goal092.winforms.bind_missing", pageRelativePath, diagnostics);
+        AddIfFalse(
+            bindDisplaysCacheExports,
+            "goal094.winforms.cache_export_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -54,6 +63,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             EditorRegistryIncludesPage = registryIncludesPage,
             PageActivationLoadsApplicationResult = activationLoads,
             PageBindDisplaysGroupsEntriesProofs = bindDisplays,
+            PageBindDisplaysCacheExports = bindDisplaysCacheExports,
             Diagnostics = diagnostics
         };
     }

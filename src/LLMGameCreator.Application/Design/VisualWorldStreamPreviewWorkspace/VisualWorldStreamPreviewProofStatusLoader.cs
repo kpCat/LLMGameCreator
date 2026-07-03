@@ -77,9 +77,65 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 ledger,
                 proofDiagnostics)
         };
+        proofs.AddRange(BuildGoal093CacheProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
+    }
+
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal093CacheProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics)
+    {
+        var ledger = LoadLedger(projectRoot, Goal093SourceRoot, "visual-chunk-cache-file-ledger.json");
+        return
+        [
+            BuildProof(
+                projectRoot,
+                Goal093SourceRoot,
+                Goal093SourceGoalId,
+                "goal093.readback",
+                "visual-chunk-cache-readback-proof.json",
+                "passed",
+                ledger,
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal093SourceRoot,
+                Goal093SourceGoalId,
+                "goal093.overlap_reuse",
+                "visual-chunk-cache-overlap-reuse-proof.json",
+                "passed",
+                ledger,
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal093SourceRoot,
+                Goal093SourceGoalId,
+                "goal093.negative",
+                "visual-chunk-cache-negative-proof.json",
+                "passed",
+                ledger,
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal093SourceRoot,
+                Goal093SourceGoalId,
+                "goal093.invalidation_matrix",
+                "visual-chunk-cache-invalidation-matrix.json",
+                "passed",
+                ledger,
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal093SourceRoot,
+                Goal093SourceGoalId,
+                "goal093.runtime_handoff_metadata_only",
+                "visual-chunk-cache-runtime-handoff-sidecar.json",
+                "metadataOnly",
+                ledger,
+                diagnostics)
+        ];
     }
 
     private static VisualWorldPreviewProofStatus BuildProof(

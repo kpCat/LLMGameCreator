@@ -65,7 +65,8 @@
     ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/",
     ".llmgc/procedural/goal-092-visual-world-stream-preview-workspace/",
     ".llmgc/procedural/goal-092a-visual-world-preview-service-split-source-health/",
-    ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/"
+    ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/",
+    ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1131,6 +1132,25 @@
         "docs/agent-tasks/goal-093-visual-chunk-cache-export-contract/",
         "src/LLMGameCreator.Application/Design/VisualChunkCacheExportContract/",
         "tests/LLMGameCreator.Tests/Application/VisualChunkCacheExportContract/"
+      ]
+    },
+    {
+      "scenario": "goal-094-visual-chunk-cache-export-inspector",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/",
+        "docs/agent-tasks/goal-094-visual-chunk-cache-export-inspector/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
       ]
     }
   ]
