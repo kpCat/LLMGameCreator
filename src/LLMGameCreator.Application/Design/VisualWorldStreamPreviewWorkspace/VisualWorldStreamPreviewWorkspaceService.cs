@@ -7,14 +7,15 @@ namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 
 public sealed partial class VisualWorldStreamPreviewWorkspaceService
 {
-    public const string ReportMarkdownFileName = "visual-chunk-cache-export-inspector-report.md";
-    public const string CatalogJsonFileName = "visual-chunk-cache-export-inspector-catalog.json";
-    public const string ProofStatusJsonFileName = "visual-chunk-cache-export-inspector-proof-status.json";
+    public const string ReportMarkdownFileName = "unity-handoff-inspector-report.md";
+    public const string CatalogJsonFileName = "unity-handoff-inspector-catalog.json";
+    public const string ProofStatusJsonFileName = "unity-handoff-inspector-proof-status.json";
     public const string WinFormsBindingInventoryJsonFileName =
-        "visual-chunk-cache-export-inspector-winforms-binding-inventory.json";
+        "unity-handoff-inspector-winforms-binding-inventory.json";
     public const string QualityGateScanJsonFileName =
-        "visual-chunk-cache-export-inspector-quality-gate-scan.json";
-    public const string SourceHealthScanJsonFileName = "source-health-scan.json";
+        "unity-handoff-inspector-quality-gate-scan.json";
+    public const string SourceHealthScanJsonFileName =
+        "unity-handoff-inspector-source-health-scan.json";
 
     private const int MaxPreviewCharacters = 32000;
     private static readonly UTF8Encoding Utf8WithoutBom = new(false);
@@ -43,7 +44,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildRegionGroup(projectRoot, diagnostics, svgEntries),
             BuildWorldProfileGroup(projectRoot, diagnostics, svgEntries),
             BuildChunkStreamGroup(projectRoot, diagnostics, svgEntries),
-            BuildCacheExportGroup(projectRoot, diagnostics)
+            BuildCacheExportGroup(projectRoot, diagnostics),
+            BuildUnityHandoffGroup(projectRoot, diagnostics)
         };
 
         var proofStatus = BuildProofStatus(projectRoot, diagnostics);

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "unity_handoff_inspector_proof_status_v1",
+  "goalId": "goal_096_unity_handoff_inspector_probe_readiness",
+  "passed": true,
+  "proofCount": 19,
+  "proofs": [
+    {
+      "proofId": "goal091.cache_reuse",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-cache-reuse-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "8d9558e536b72b8e84e324962aa2d00a8a3a95dd35c016de34e9becdfc8a59f3",
+      "diagnosticSummary": "passed=true; cacheRecordCount=93; reusedChunkKeyCount=24; infiniteOverlapReusedChunkKeyCount=24"
+    },
+    {
+      "proofId": "goal091.finite_boundary_clipping",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e95c92156b504d706044a062a96a973c9ec1e1767f84a5acaa696bb5567a8f2e",
+      "diagnosticSummary": "boundaryClippingExplicit=true"
+    },
+    {
+      "proofId": "goal091.huge_sparse_no_raw_dump",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e95c92156b504d706044a062a96a973c9ec1e1767f84a5acaa696bb5567a8f2e",
+      "diagnosticSummary": "hugeSparseNoRawDump=true"
+    },
+    {
+      "proofId": "goal091.infinite_overlap_reuse",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e95c92156b504d706044a062a96a973c9ec1e1767f84a5acaa696bb5567a8f2e",
+      "diagnosticSummary": "infiniteOverlapReuseProven=true"
+    },
+    {
+      "proofId": "goal091.layer_transition",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-layer-transition-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "61086ac28aeba195c82d1fc5e3990f4e29288296413f163dc08aaf2898d0f622",
+      "diagnosticSummary": "passed=true; portalOrTransitionLinkCount=6"
+    },
+    {
+      "proofId": "goal091.negative",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-negative-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "2d40315708db5391fabb9564bc5fc8b31c4a09a9a8c3131ce000f704bbe3ac2a",
+      "diagnosticSummary": "passed=true; scenarioCount=16; rejectedCount=16"
+    },
+    {
+      "proofId": "goal091.seam",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-seam-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "64f8fe7d90c2390aa71161837e79bbc9e506fa9d323618b08c51183742651d6d",
+      "diagnosticSummary": "passed=true; seamCount=156"
+    },
+    {
+      "proofId": "goal093.invalidation_matrix",
+      "sourceGoalId": "goal_093_visual_chunk_cache_export_contract",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-invalidation-matrix.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "dbe6e0078ac7443cd605784257d779b180c54549ab3ebea10579a7e8b0315a49",
+      "diagnosticSummary": "passed=true; packageCount=4; ruleCount=24"
+    },
+    {
+      "proofId": "goal093.negative",
+      "sourceGoalId": "goal_093_visual_chunk_cache_export_contract",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-negative-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "97c06ee46c2f278f5fc3eaeb73769747db620056cc5285e095a0b6523b6fc38e",
+      "diagnosticSummary": "passed=true; scenarioCount=13; rejectedCount=13"
+    },
+    {
+      "proofId": "goal093.overlap_reuse",
+      "sourceGoalId": "goal_093_visual_chunk_cache_export_contract",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-overlap-reuse-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e0614bca03687ca53abdef9b816cdc1f37649707ed9e2d02f6321ff01ebcac92",
+      "diagnosticSummary": "passed=true; sourceGoal091ReusedChunkKeyCount=24; exportReusedChunkKeyCount=24"
+    },
+    {
+      "proofId": "goal093.readback",
+      "sourceGoalId": "goal_093_visual_chunk_cache_export_contract",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-readback-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "28a8ac976e643d4a291ab9fc9394913d99c37d39b4216fe247ae0cb83876b796",
+      "diagnosticSummary": "passed=true; packageCount=4; exportRecordCount=93"
+    },
+    {
+      "proofId": "goal093.runtime_handoff_metadata_only",
+      "sourceGoalId": "goal_093_visual_chunk_cache_export_contract",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-runtime-handoff-sidecar.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "01f375b1bc5eb114108fff40609eaaf12855cab72ed2abc050f3a504a882b519",
+      "diagnosticSummary": "metadataOnly=true; recordCount=27"
+    },
+    {
+      "proofId": "goal095.alpha_runtime_bootstrap_unchanged",
+      "sourceGoalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "c948c5bf802b820b14c91007b9923cafb86ed736a873cd06980d82ea362d7382",
+      "diagnosticSummary": "alphaRuntimeBootstrapUnchanged=true"
+    },
+    {
+      "proofId": "goal095.forbidden_unity_areas_unchanged",
+      "sourceGoalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "c948c5bf802b820b14c91007b9923cafb86ed736a873cd06980d82ea362d7382",
+      "diagnosticSummary": "noForbiddenUnityAreasChanged=true"
+    },
+    {
+      "proofId": "goal095.metadata_only",
+      "sourceGoalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-handoff-manifest.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "9da5d099e951305c19017f96a98a6604efc221175a9c208b9ea26032d811ddd2",
+      "diagnosticSummary": "runtimeHandoffSidecarMetadataOnly=true; packageCount=4; exportRecordCount=93; payloadFileCount=5; streamWindowCount=5; uniqueChunkKeyCount=93"
+    },
+    {
+      "proofId": "goal095.negative",
+      "sourceGoalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-negative-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "6a0228e0994ce86570cf4de077584e8960d7f0328c7f8cecd8e911388813607e",
+      "diagnosticSummary": "passed=true; scenarioCount=9"
+    },
+    {
+      "proofId": "goal095.probe_source_inventory",
+      "sourceGoalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-probe-source-inventory.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "3780ed690024dc9c51227dd11dfdafd41b30f9dea69e7a97a76577fec8a99c79",
+      "diagnosticSummary": "passed=true"
+    },
+    {
+      "proofId": "goal095.simulated_read",
+      "sourceGoalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-simulated-read-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e8b4976a9353b57e7f93f117b727ba5d6ab42afa6bed52cf2a12e898106fb96a",
+      "diagnosticSummary": "passed=true; packageCount=4; exportRecordCount=93; streamWindowCount=5; uniqueChunkKeyCount=93"
+    },
+    {
+      "proofId": "goal095.streamingassets_ledger",
+      "sourceGoalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-streamingassets-ledger.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "36a569a4e2c73558f8d8258e3ebe8814fdc97e2e57dc7cec394684bf654c0bbb",
+      "diagnosticSummary": "passed=true"
+    }
+  ]
+}

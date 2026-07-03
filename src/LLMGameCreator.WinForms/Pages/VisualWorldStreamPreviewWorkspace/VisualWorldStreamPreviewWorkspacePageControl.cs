@@ -41,7 +41,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | entries=" + result.Catalog.EntryCount
             + " | svg=" + result.Catalog.SvgTextPreviewCount
             + " | cachePackages=" + result.Report.CacheExportPackageCount
-            + " | cacheRecords=" + result.Report.CacheExportRecordCount;
+            + " | cacheRecords=" + result.Report.CacheExportRecordCount
+            + " | unityPayloads=" + result.Report.UnityPayloadFileCount
+            + " | unityRecords=" + result.Report.UnityExportRecordCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -140,6 +142,23 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + result.Report.CacheOverlapReuseProofPassed.ToString().ToLowerInvariant(),
             "cacheNegativeProofPassed="
                 + result.Report.CacheNegativeProofPassed.ToString().ToLowerInvariant(),
+            "unityPayloadFileCount=" + result.Report.UnityPayloadFileCount,
+            "unityPackageCount=" + result.Report.UnityPackageCount,
+            "unityExportRecordCount=" + result.Report.UnityExportRecordCount,
+            "unityStreamWindowCount=" + result.Report.UnityStreamWindowCount,
+            "unityUniqueChunkKeyCount=" + result.Report.UnityUniqueChunkKeyCount,
+            "unitySimulatedReadProofPassed="
+                + result.Report.UnitySimulatedReadProofPassed.ToString().ToLowerInvariant(),
+            "unityNegativeProofPassed="
+                + result.Report.UnityNegativeProofPassed.ToString().ToLowerInvariant(),
+            "unityProbeSourceInventoryPassed="
+                + result.Report.UnityProbeSourceInventoryPassed.ToString().ToLowerInvariant(),
+            "unityAlphaRuntimeBootstrapUnchanged="
+                + result.Report.UnityAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
+            "unityForbiddenAreasUnchanged="
+                + result.Report.UnityForbiddenAreasUnchanged.ToString().ToLowerInvariant(),
+            "noUnityFilesChangedByGoal096="
+                + result.Report.NoUnityFilesChangedByGoal096.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -230,6 +249,21 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "overlapReuseProofPassed: " + entry.OverlapReuseProofPassed.ToString().ToLowerInvariant(),
             "negativeProofPassed: " + entry.NegativeProofPassed.ToString().ToLowerInvariant(),
             "noRawFullWorldDump: " + entry.NoRawFullWorldDump.ToString().ToLowerInvariant(),
+            "payloadFileCount: " + entry.PayloadFileCount,
+            "packageCount: " + entry.PackageCount,
+            "exportRecordCount: " + entry.ExportRecordCount,
+            "uniqueChunkKeyCount: " + entry.UniqueChunkKeyCount,
+            "simulatedUnityReadProofPassed: "
+                + entry.SimulatedUnityReadProofPassed.ToString().ToLowerInvariant(),
+            "probeSourceInventoryPassed: "
+                + entry.ProbeSourceInventoryPassed.ToString().ToLowerInvariant(),
+            "alphaRuntimeBootstrapUnchanged: "
+                + entry.AlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
+            "forbiddenUnityAreasUnchanged: "
+                + entry.ForbiddenUnityAreasUnchanged.ToString().ToLowerInvariant(),
+            "metadataOnly: " + entry.MetadataOnly.ToString().ToLowerInvariant(),
+            "payloadHashesMatchGoal095Ledger: "
+                + entry.PayloadHashesMatchGoal095Ledger.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);

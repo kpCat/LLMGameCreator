@@ -10,7 +10,7 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through093Artifacts()
+    public void ServiceLoadsRealGoal086Through095Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -22,8 +22,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("world_profiles", groupIds);
         Assert.Contains("chunk_stream_windows", groupIds);
         Assert.Contains("cache_exports", groupIds);
-        Assert.Equal(6, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 67);
+        Assert.Contains("unity_handoff", groupIds);
+        Assert.Equal(7, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 81);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 38);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
@@ -71,6 +72,53 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
     }
 
     [Fact]
+    public void UnityHandoffGroupSurfacesGoal095PayloadProbeAndReadinessProof()
+    {
+        var result = Build();
+        var unityGroup = Assert.Single(
+            result.Catalog.Groups,
+            group => group.GroupId == "unity_handoff");
+        var payloadFiles = unityGroup.Entries
+            .Where(entry => entry.RelativePath.StartsWith(
+                "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/",
+                StringComparison.Ordinal))
+            .ToArray();
+
+        Assert.True(result.QualityGateScan.UnityHandoffGroupPresent);
+        Assert.Equal(5, payloadFiles.Length);
+        Assert.Equal(5, result.QualityGateScan.UnityPayloadFileCount);
+        Assert.Equal(4, result.QualityGateScan.UnityPackageCount);
+        Assert.Equal(93, result.QualityGateScan.UnityExportRecordCount);
+        Assert.Equal(5, result.QualityGateScan.UnityStreamWindowCount);
+        Assert.Equal(93, result.QualityGateScan.UnityUniqueChunkKeyCount);
+        Assert.True(result.QualityGateScan.UnityProbeSourceInventoryVisible);
+        Assert.True(result.QualityGateScan.UnityProbeSourceInventoryPassed);
+        Assert.True(result.QualityGateScan.UnitySimulatedReadProofPassed);
+        Assert.True(result.QualityGateScan.UnityNegativeProofPassed);
+        Assert.True(result.QualityGateScan.UnityAlphaRuntimeBootstrapUnchanged);
+        Assert.True(result.QualityGateScan.UnityForbiddenAreasUnchanged);
+        Assert.True(result.QualityGateScan.UnityHandoffMetadataOnly);
+        Assert.True(result.QualityGateScan.UnityPayloadHashesMatchGoal095Ledger);
+        Assert.True(result.QualityGateScan.Goal095FilesDiscoveredByRelativePaths);
+        Assert.True(result.QualityGateScan.NoUnityFilesChangedByGoal096);
+        Assert.All(payloadFiles, entry =>
+        {
+            Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath);
+            Assert.True(entry.PayloadHashesMatchGoal095Ledger, entry.Id);
+            Assert.Equal(5, entry.PayloadFileCount);
+            Assert.Equal(4, entry.PackageCount);
+            Assert.Equal(93, entry.ExportRecordCount);
+            Assert.Equal(5, entry.StreamWindowCount);
+            Assert.Equal(93, entry.UniqueChunkKeyCount);
+            Assert.True(entry.SimulatedUnityReadProofPassed);
+            Assert.True(entry.NegativeProofPassed);
+            Assert.True(entry.ProbeSourceInventoryPassed);
+            Assert.True(entry.AlphaRuntimeBootstrapUnchanged);
+        });
+    }
+
+
+    [Fact]
     public void SvgEntriesAreRelativeTextSafePreviewPaths()
     {
         var result = Build();
@@ -104,7 +152,14 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal093.overlap_reuse",
             "goal093.negative",
             "goal093.invalidation_matrix",
-            "goal093.runtime_handoff_metadata_only"
+            "goal093.runtime_handoff_metadata_only",
+            "goal095.streamingassets_ledger",
+            "goal095.simulated_read",
+            "goal095.negative",
+            "goal095.probe_source_inventory",
+            "goal095.alpha_runtime_bootstrap_unchanged",
+            "goal095.forbidden_unity_areas_unchanged",
+            "goal095.metadata_only"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -238,16 +293,25 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.Same(result, stored);
             Assert.True(groups.Items.Count >= 6);
             Assert.True(entries.Items.Count > 0);
-            Assert.True(proofs.Items.Count >= 9);
-            var cachePackageItem = entries.Items
+            Assert.True(proofs.Items.Count >= 19);
+            groups.SelectedItem = groups.Items
+                .Cast<object>()
+                .First(item => item.ToString()!.Contains("unity_handoff", StringComparison.Ordinal));
+            var unityPayloadItem = entries.Items
                 .Cast<ListViewItem>()
                 .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
-                               && entry.ArtifactKind == "cache_export_package");
-            cachePackageItem.Selected = true;
-            cachePackageItem.Focused = true;
+                               && entry.ArtifactKind.StartsWith(
+                                   "streamingassets_payload_",
+                                   StringComparison.Ordinal));
+            unityPayloadItem.Selected = true;
+            unityPayloadItem.Focused = true;
 
-            Assert.Contains("cacheRecordCount:", details.Text, StringComparison.Ordinal);
-            Assert.Contains("runtimeHandoffMetadataOnly:", details.Text, StringComparison.Ordinal);
+            Assert.Contains("payloadFileCount: 5", details.Text, StringComparison.Ordinal);
+            Assert.Contains("packageCount: 4", details.Text, StringComparison.Ordinal);
+            Assert.Contains("exportRecordCount: 93", details.Text, StringComparison.Ordinal);
+            Assert.Contains("uniqueChunkKeyCount: 93", details.Text, StringComparison.Ordinal);
+            Assert.Contains("simulatedUnityReadProofPassed: true", details.Text, StringComparison.Ordinal);
+            Assert.Contains("alphaRuntimeBootstrapUnchanged: true", details.Text, StringComparison.Ordinal);
             Assert.True(
                 svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)
                 || svgPreview.Text.Contains("No text SVG preview", StringComparison.Ordinal));

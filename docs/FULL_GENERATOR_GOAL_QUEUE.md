@@ -86,6 +86,7 @@ visual_world_preview_service_split_source_health_verification required
 visual_chunk_cache_export_contract_verification required
 visual_chunk_cache_export_inspector_verification required
 visual_chunk_cache_unity_streamingassets_handoff_verification required
+unity_handoff_inspector_probe_readiness_verification required
 ```
 
 Current capabilities:
@@ -109,6 +110,7 @@ Current capabilities:
 - BCL-only visual chunk cache/export contract over real Goal 091 stream-window artifacts, with deterministic manifest/readback/sidecar proofs and metadata-only runtime handoff evidence;
 - BCL-only Visual World Stream Preview Workspace integration for Goal 093 cache/export artifacts, surfacing 4 cache packages, 93 records, the metadata-only runtime handoff sidecar and readback/overlap/negative/invalidation proof status in the existing WinForms review UI;
 - Unity Alpha StreamingAssets handoff/probe for compact Goal 093/094 visual chunk cache metadata, with 5 mirrored payload files, simulated read proof, negative proof and unchanged AlphaRuntimeBootstrap hash;
+- BCL-only Visual World Stream Preview Workspace Unity handoff inspector for Goal 095 payload/probe readiness, with 5 payload files, 4 packages, 93 records, 5 stream windows, 93 unique chunk keys, simulated read proof, negative proof, probe inventory, unchanged AlphaRuntimeBootstrap proof and no Unity file changes;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1545,14 +1547,33 @@ generation, runtime streaming, public schema, provider/LLM/RAG/media execution, 
 dependency, binary/raster media or prompt-dump changes. Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and
 Goal 090 remain `accepted=false`.
 
+### Goal 096: Unity Handoff Inspector Probe Readiness
+
+Goal 096 is produced for review with `unity_handoff_inspector_probe_readiness_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It extends the existing Visual World Stream Preview Workspace
+Application seam and WinForms review page so Goal 095 Unity handoff payload/probe/readiness evidence is visible without
+modifying Unity files.
+
+Goal 096 writes deterministic evidence under
+`.llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/` and proves groupCount=7, entryCount=81,
+unityPayloadFileCount=5, unityPackageCount=4, unityExportRecordCount=93, unityStreamWindowCount=5,
+unityUniqueChunkKeyCount=93, proofCount=19, qualityGatePassed=true, unityProbeSourceInventoryPassed=true,
+unitySimulatedReadProofPassed=true, unityNegativeProofPassed=true, unityAlphaRuntimeBootstrapUnchanged=true and
+noUnityFilesChangedByGoal096=true.
+
+Goal 096 is editor/readiness inspection only. It adds no Unity file mutation, Runtime consumption, live Unity gameplay
+rendering, final atlas generation, runtime streaming, public schema, provider/LLM/RAG/media execution,
+Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 096, Goal 095,
+Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-visual_chunk_cache_unity_streamingassets_handoff_verification
+unity_handoff_inspector_probe_readiness_verification
 ```
 
 Status:
 
 ```text
-goal_095_visual_chunk_cache_unity_streamingassets_handoff_produced_for_review
+goal_096_unity_handoff_inspector_probe_readiness_produced_for_review
 ```

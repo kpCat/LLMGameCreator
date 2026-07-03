@@ -78,6 +78,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 proofDiagnostics)
         };
         proofs.AddRange(BuildGoal093CacheProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal095UnityHandoffProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -138,6 +139,75 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         ];
     }
 
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal095UnityHandoffProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        [
+            BuildProof(
+                projectRoot,
+                Goal095SourceRoot,
+                Goal095SourceGoalId,
+                "goal095.streamingassets_ledger",
+                "visual-chunk-cache-unity-streamingassets-ledger.json",
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal095SourceRoot,
+                Goal095SourceGoalId,
+                "goal095.simulated_read",
+                "visual-chunk-cache-unity-simulated-read-proof.json",
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal095SourceRoot,
+                Goal095SourceGoalId,
+                "goal095.negative",
+                "visual-chunk-cache-unity-negative-proof.json",
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal095SourceRoot,
+                Goal095SourceGoalId,
+                "goal095.probe_source_inventory",
+                "visual-chunk-cache-unity-probe-source-inventory.json",
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal095SourceRoot,
+                Goal095SourceGoalId,
+                "goal095.alpha_runtime_bootstrap_unchanged",
+                "visual-chunk-cache-unity-quality-gate-scan.json",
+                "alphaRuntimeBootstrapUnchanged",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal095SourceRoot,
+                Goal095SourceGoalId,
+                "goal095.forbidden_unity_areas_unchanged",
+                "visual-chunk-cache-unity-quality-gate-scan.json",
+                "noForbiddenUnityAreasChanged",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal095SourceRoot,
+                Goal095SourceGoalId,
+                "goal095.metadata_only",
+                "visual-chunk-cache-unity-handoff-manifest.json",
+                "runtimeHandoffSidecarMetadataOnly",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics)
+        ];
+
     private static VisualWorldPreviewProofStatus BuildProof(
         string projectRoot,
         string sourceRoot,
@@ -163,7 +233,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             diagnostics.Add(VisualWorldPreviewDiagnostic.Error(
                 "goal092.proof.failed",
                 proofId,
-                "Required Goal 091 proof is missing or did not pass."));
+                "Required visual preview proof is missing or did not pass."));
         }
 
         return new VisualWorldPreviewProofStatus

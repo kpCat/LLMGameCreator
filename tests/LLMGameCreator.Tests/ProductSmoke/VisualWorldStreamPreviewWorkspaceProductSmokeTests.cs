@@ -23,7 +23,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
     };
 
     [Fact]
-    public async Task Goal094VisualChunkCacheExportInspectorProductSmoke()
+    public async Task Goal096UnityHandoffInspectorProbeReadinessProductSmoke()
     {
         var repoRoot = FindRepoRoot();
         var projectRoot = ResolveProjectFolder(repoRoot);
@@ -51,7 +51,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         using var sourceHealth = JsonDocument.Parse(await File.ReadAllTextAsync(write.SourceHealthScanJsonPath));
 
         var groups = catalog.RootElement.GetProperty("groups").EnumerateArray().ToArray();
-        Assert.True(catalog.RootElement.GetProperty("groupCount").GetInt32() >= 6);
+        Assert.True(catalog.RootElement.GetProperty("groupCount").GetInt32() >= 7);
         Assert.True(catalog.RootElement.GetProperty("svgTextPreviewCount").GetInt32() >= 4);
         Assert.Contains(groups, item => item.GetProperty("groupId").GetString() == "microtiles");
         Assert.Contains(groups, item => item.GetProperty("groupId").GetString() == "map_patches");
@@ -84,6 +84,34 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
             streamEntries.Count(item =>
                 item.GetProperty("artifactKind").GetString()
                 == "text_svg_chunk_stream_window_overview"));
+        var unityGroup = Assert.Single(
+            groups,
+            item => item.GetProperty("groupId").GetString() == "unity_handoff");
+        var unityEntries = unityGroup.GetProperty("entries").EnumerateArray().ToArray();
+        var unityPayloadFiles = unityEntries
+            .Where(item =>
+                (item.GetProperty("relativePath").GetString() ?? string.Empty).StartsWith(
+                    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/",
+                    StringComparison.Ordinal))
+            .ToArray();
+        Assert.Equal(5, unityPayloadFiles.Length);
+        Assert.Contains(unityEntries, item =>
+            item.GetProperty("artifactKind").GetString() == "unity_probe_source_inventory");
+        Assert.Contains(unityEntries, item =>
+            item.GetProperty("artifactKind").GetString() == "alpha_runtime_bootstrap_unchanged_status");
+        Assert.All(unityPayloadFiles, entry =>
+        {
+            Assert.Equal(5, entry.GetProperty("payloadFileCount").GetInt32());
+            Assert.Equal(4, entry.GetProperty("packageCount").GetInt32());
+            Assert.Equal(93, entry.GetProperty("exportRecordCount").GetInt32());
+            Assert.Equal(5, entry.GetProperty("streamWindowCount").GetInt32());
+            Assert.Equal(93, entry.GetProperty("uniqueChunkKeyCount").GetInt32());
+            Assert.True(entry.GetProperty("payloadHashesMatchGoal095Ledger").GetBoolean());
+            Assert.True(entry.GetProperty("simulatedUnityReadProofPassed").GetBoolean());
+            Assert.True(entry.GetProperty("negativeProofPassed").GetBoolean());
+            Assert.True(entry.GetProperty("probeSourceInventoryPassed").GetBoolean());
+            Assert.True(entry.GetProperty("alphaRuntimeBootstrapUnchanged").GetBoolean());
+        });
 
         var svgEntries = catalog.RootElement.GetProperty("svgEntries").EnumerateArray().ToArray();
         Assert.All(svgEntries, entry =>
@@ -105,8 +133,16 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         AssertProofPassed(proofs, "goal093.negative");
         AssertProofPassed(proofs, "goal093.invalidation_matrix");
         AssertProofPassed(proofs, "goal093.runtime_handoff_metadata_only");
+        AssertProofPassed(proofs, "goal095.streamingassets_ledger");
+        AssertProofPassed(proofs, "goal095.simulated_read");
+        AssertProofPassed(proofs, "goal095.negative");
+        AssertProofPassed(proofs, "goal095.probe_source_inventory");
+        AssertProofPassed(proofs, "goal095.alpha_runtime_bootstrap_unchanged");
+        AssertProofPassed(proofs, "goal095.forbidden_unity_areas_unchanged");
+        AssertProofPassed(proofs, "goal095.metadata_only");
         Assert.True(binding.RootElement.GetProperty("passed").GetBoolean());
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysCacheExports").GetBoolean());
+        Assert.True(binding.RootElement.GetProperty("pageBindDisplaysUnityHandoff").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("passed").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("goal091StreamWindowsVisible").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("cacheExportGroupPresent").GetBoolean());
@@ -120,6 +156,22 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.True(quality.RootElement.GetProperty("cacheInvalidationMatrixPassed").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("cacheNoRawFullWorldDump").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("goal093FilesDiscoveredByRelativePaths").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unityHandoffGroupPresent").GetBoolean());
+        Assert.Equal(5, quality.RootElement.GetProperty("unityPayloadFileCount").GetInt32());
+        Assert.Equal(4, quality.RootElement.GetProperty("unityPackageCount").GetInt32());
+        Assert.Equal(93, quality.RootElement.GetProperty("unityExportRecordCount").GetInt32());
+        Assert.Equal(5, quality.RootElement.GetProperty("unityStreamWindowCount").GetInt32());
+        Assert.Equal(93, quality.RootElement.GetProperty("unityUniqueChunkKeyCount").GetInt32());
+        Assert.True(quality.RootElement.GetProperty("unityProbeSourceInventoryVisible").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unityProbeSourceInventoryPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unitySimulatedReadProofPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unityNegativeProofPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unityAlphaRuntimeBootstrapUnchanged").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unityForbiddenAreasUnchanged").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unityHandoffMetadataOnly").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("unityPayloadHashesMatchGoal095Ledger").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("goal095FilesDiscoveredByRelativePaths").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("noUnityFilesChangedByGoal096").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noAbsolutePaths").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noBinaryOrRasterMediaAdded").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noRuntimeUnityProviderSchemaProjectDependencyChanges").GetBoolean());
@@ -146,9 +198,12 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.Empty(mediaFiles);
 
         var report = await File.ReadAllTextAsync(write.ReportMarkdownPath);
-        Assert.Contains("visual_chunk_cache_export_inspector_verification required", report);
+        Assert.Contains("unity_handoff_inspector_probe_readiness_verification required", report);
         Assert.Contains("goal093.readback", report);
+        Assert.Contains("goal095.simulated_read", report);
         Assert.Contains("cacheExportRecordCount: 93", report);
+        Assert.Contains("unityPayloadFileCount: 5", report);
+        Assert.Contains("noUnityFilesChangedByGoal096: true", report);
         Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
     }
 

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "unity_handoff_inspector_winforms_binding_inventory_v1",
+  "goalId": "goal_096_unity_handoff_inspector_probe_readiness",
+  "passed": true,
+  "pageControlExists": true,
+  "designerExists": true,
+  "compositionRootRegistersService": true,
+  "compositionRootRegistersPage": true,
+  "editorRegistryIncludesPage": true,
+  "pageActivationLoadsApplicationResult": true,
+  "pageBindDisplaysGroupsEntriesProofs": true,
+  "pageBindDisplaysCacheExports": true,
+  "pageBindDisplaysUnityHandoff": true,
+  "diagnostics": []
+}

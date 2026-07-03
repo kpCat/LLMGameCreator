@@ -39,6 +39,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains("ExportTargetKind", StringComparison.Ordinal)
             && pageText.Contains("RuntimeHandoffMetadataOnly", StringComparison.Ordinal)
             && pageText.Contains("ReadbackProofPassed", StringComparison.Ordinal);
+        var bindDisplaysUnityHandoff = pageText.Contains("PayloadFileCount", StringComparison.Ordinal)
+            && pageText.Contains("UniqueChunkKeyCount", StringComparison.Ordinal)
+            && pageText.Contains("SimulatedUnityReadProofPassed", StringComparison.Ordinal)
+            && pageText.Contains("AlphaRuntimeBootstrapUnchanged", StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -50,6 +54,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(
             bindDisplaysCacheExports,
             "goal094.winforms.cache_export_bind_missing",
+            pageRelativePath,
+            diagnostics);
+        AddIfFalse(
+            bindDisplaysUnityHandoff,
+            "goal096.winforms.unity_handoff_bind_missing",
             pageRelativePath,
             diagnostics);
 
@@ -64,6 +73,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageActivationLoadsApplicationResult = activationLoads,
             PageBindDisplaysGroupsEntriesProofs = bindDisplays,
             PageBindDisplaysCacheExports = bindDisplaysCacheExports,
+            PageBindDisplaysUnityHandoff = bindDisplaysUnityHandoff,
             Diagnostics = diagnostics
         };
     }

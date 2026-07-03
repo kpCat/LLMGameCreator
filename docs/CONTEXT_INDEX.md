@@ -187,6 +187,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-093-visual-chunk-cache-export-contract/GOAL.md` | Goal 093 task: add a BCL-only Application visual chunk cache/export contract over real Goal 091 stream-window artifacts, with deterministic manifest/readback/sidecar proofs and final stop at `visual_chunk_cache_export_contract_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-094-visual-chunk-cache-export-inspector/GOAL.md` | Goal 094 task: integrate real Goal 093 cache/export artifacts into the existing Visual World Stream Preview Workspace and WinForms review UI, write compact inspector evidence and stop at `visual_chunk_cache_export_inspector_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-095-visual-chunk-cache-unity-streamingassets-handoff/GOAL.md` | Goal 095 task: mirror a compact metadata-only Goal 093/094 visual chunk cache payload into Unity Alpha StreamingAssets, add standalone probe source, write simulated-read/negative proof evidence and stop at `visual_chunk_cache_unity_streamingassets_handoff_verification`; no Runtime consumption, live Unity gameplay rendering, final atlas, runtime streaming, public schema, provider, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/GOAL.md` | Goal 096 task: surface the real Goal 095 Unity StreamingAssets payload, standalone probe inventory, simulated read, negative proof and no-Unity-file-change readiness in the existing Visual World Stream Preview Workspace and WinForms review UI, write compact inspector evidence and stop at `unity_handoff_inspector_probe_readiness_verification`; no Unity file mutation, Runtime consumption, live Unity gameplay rendering, final atlas, runtime streaming, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/VALIDATION_PIPELINE.md` | Goal 089 validation policy: `check-current-goal.ps1` is the ordinary feature-goal default, `check-spine-fast.ps1` is the medium visual/world/gameplay spine route, and full `check-all.ps1` / `check-all-observed.ps1` is reserved for consolidation, milestone and shared/core-risk work. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
@@ -502,6 +503,14 @@ source `unity/LLMGameCreatorAlpha/Assets/Scripts/VisualChunkCacheHandoffProbe.cs
 consumption, live Unity gameplay rendering, final atlas generation, runtime streaming, provider, schema, Lua,
 generator-library, project-file, dependency, binary/raster media or prompt-output work and keeps Goal 095, Goal 094,
 Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 `accepted=false`.
+Goal 096 is produced for review with `unity_handoff_inspector_probe_readiness_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it extends the existing Visual World Stream Preview Workspace
+Application/WinForms seam to surface the real Goal 095 StreamingAssets payload, probe source inventory, simulated read,
+negative proof, AlphaRuntimeBootstrap unchanged status and no-Unity-file-change proof. Evidence is under
+`.llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/`; Goal 096 changes no Unity files and does not
+start Runtime consumption, live Unity gameplay rendering, final atlas generation, runtime streaming, provider, schema,
+Lua, generator-library, project-file, dependency, binary/raster media or prompt-output work. Goal 096, Goal 095,
+Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
 
 Allowed next sequence:
 
@@ -562,6 +571,7 @@ Allowed next sequence:
 55. Review Goal 093 `visual_chunk_cache_export_contract_verification`; it adds the BCL-only Application cache/export contract and metadata-only runtime handoff sidecar over real Goal 091 artifacts, keeps Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 56. Review Goal 094 `visual_chunk_cache_export_inspector_verification`; it makes Goal 093 cache/export artifacts inspectable in the existing Application/WinForms review workspace, keeps Goal 094 and previous visual gates `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 57. Review Goal 095 `visual_chunk_cache_unity_streamingassets_handoff_verification`; it mirrors compact Goal 093/094 cache/export metadata into Unity Alpha StreamingAssets and adds a standalone probe, keeps Goal 095 and previous visual gates `accepted=false`, and does not start Runtime consumption, live Unity gameplay rendering, final atlas generation, provider, media, schema, Lua or generator-library implementation.
+58. Review Goal 096 `unity_handoff_inspector_probe_readiness_verification`; it makes Goal 095 Unity handoff payload/probe/readiness evidence inspectable in the existing Application/WinForms review workspace, keeps Goal 096 and previous visual gates `accepted=false`, and does not start Runtime consumption, live Unity gameplay rendering, final atlas generation, provider, media, schema, Lua or generator-library implementation.
 
 Kill criterion:
 

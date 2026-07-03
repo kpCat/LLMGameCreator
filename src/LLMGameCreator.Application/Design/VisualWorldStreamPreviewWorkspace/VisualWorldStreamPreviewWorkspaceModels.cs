@@ -4,21 +4,21 @@ namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 
 public static class VisualWorldStreamPreviewWorkspaceVocabulary
 {
-    public const string GoalId = "goal_094_visual_chunk_cache_export_inspector";
-    public const string ProductSmokeRoute = "goal-094-visual-chunk-cache-export-inspector";
-    public const string FinalGate = "visual_chunk_cache_export_inspector_verification";
+    public const string GoalId = "goal_096_unity_handoff_inspector_probe_readiness";
+    public const string ProductSmokeRoute = "goal-096-unity-handoff-inspector-probe-readiness";
+    public const string FinalGate = "unity_handoff_inspector_probe_readiness_verification";
     public const string RelativeOutputDirectory =
-        ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector";
+        ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness";
 
-    public const string CatalogSchemaVersion = "visual_chunk_cache_export_inspector_catalog_v1";
+    public const string CatalogSchemaVersion = "unity_handoff_inspector_catalog_v1";
     public const string ProofStatusSchemaVersion =
-        "visual_chunk_cache_export_inspector_proof_status_v1";
+        "unity_handoff_inspector_proof_status_v1";
     public const string WinFormsBindingSchemaVersion =
-        "visual_chunk_cache_export_inspector_winforms_binding_inventory_v1";
+        "unity_handoff_inspector_winforms_binding_inventory_v1";
     public const string QualityGateSchemaVersion =
-        "visual_chunk_cache_export_inspector_quality_gate_scan_v1";
+        "unity_handoff_inspector_quality_gate_scan_v1";
     public const string SourceHealthSchemaVersion =
-        "visual_chunk_cache_export_inspector_source_health_scan_v1";
+        "unity_handoff_inspector_source_health_scan_v1";
 }
 
 public static class VisualWorldPreviewServiceSplitSourceHealthVocabulary
@@ -96,6 +96,17 @@ public sealed record VisualWorldPreviewArtifactEntry
     public bool OverlapReuseProofPassed { get; init; }
     public bool NegativeProofPassed { get; init; }
     public bool NoRawFullWorldDump { get; init; }
+    public int PayloadFileCount { get; init; }
+    public int PackageCount { get; init; }
+    public int ExportRecordCount { get; init; }
+    public int UniqueChunkKeyCount { get; init; }
+    public bool SimulatedUnityReadProofPassed { get; init; }
+    public bool ProbeSourceInventoryPassed { get; init; }
+    public bool AlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool ForbiddenUnityAreasUnchanged { get; init; }
+    public bool MetadataOnly { get; init; }
+    public bool PayloadHashesMatchGoal095Ledger { get; init; }
+    public bool NoUnityFilesChangedByGoal096 { get; init; }
     public IReadOnlyList<string> ChunkKeys { get; init; } = [];
 
     [JsonIgnore]
@@ -152,6 +163,7 @@ public sealed record VisualWorldPreviewWinFormsBindingInventory
     public bool PageActivationLoadsApplicationResult { get; init; }
     public bool PageBindDisplaysGroupsEntriesProofs { get; init; }
     public bool PageBindDisplaysCacheExports { get; init; }
+    public bool PageBindDisplaysUnityHandoff { get; init; }
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
 
@@ -182,6 +194,22 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool CacheInvalidationMatrixPassed { get; init; }
     public bool CacheNoRawFullWorldDump { get; init; }
     public bool Goal093FilesDiscoveredByRelativePaths { get; init; }
+    public bool UnityHandoffGroupPresent { get; init; }
+    public int UnityPayloadFileCount { get; init; }
+    public int UnityPackageCount { get; init; }
+    public int UnityExportRecordCount { get; init; }
+    public int UnityStreamWindowCount { get; init; }
+    public int UnityUniqueChunkKeyCount { get; init; }
+    public bool UnityProbeSourceInventoryVisible { get; init; }
+    public bool UnityProbeSourceInventoryPassed { get; init; }
+    public bool UnitySimulatedReadProofPassed { get; init; }
+    public bool UnityNegativeProofPassed { get; init; }
+    public bool UnityAlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool UnityForbiddenAreasUnchanged { get; init; }
+    public bool UnityHandoffMetadataOnly { get; init; }
+    public bool UnityPayloadHashesMatchGoal095Ledger { get; init; }
+    public bool Goal095FilesDiscoveredByRelativePaths { get; init; }
+    public bool NoUnityFilesChangedByGoal096 { get; init; }
     public bool RequiredArtifactGroupsPresent { get; init; }
     public bool Goal091StreamWindowsVisible { get; init; }
     public bool ProofStatusPassed { get; init; }
@@ -191,6 +219,7 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool NoPromptDumps { get; init; } = true;
     public bool WinFormsBindingReal { get; init; }
     public bool WinFormsCacheExportBindingReal { get; init; }
+    public bool WinFormsUnityHandoffBindingReal { get; init; }
     public bool SourceHealthPassed { get; init; }
     public int ScannedCSharpFileCount { get; init; }
     public int MaxLogicalLineCount { get; init; }
@@ -254,6 +283,21 @@ public sealed record VisualWorldStreamPreviewWorkspaceReport
     public bool CacheNegativeProofPassed { get; init; }
     public bool CacheInvalidationMatrixPassed { get; init; }
     public bool CacheNoRawFullWorldDump { get; init; }
+    public int UnityPayloadFileCount { get; init; }
+    public int UnityPackageCount { get; init; }
+    public int UnityExportRecordCount { get; init; }
+    public int UnityStreamWindowCount { get; init; }
+    public int UnityUniqueChunkKeyCount { get; init; }
+    public bool UnityProbeSourceInventoryVisible { get; init; }
+    public bool UnityProbeSourceInventoryPassed { get; init; }
+    public bool UnitySimulatedReadProofPassed { get; init; }
+    public bool UnityNegativeProofPassed { get; init; }
+    public bool UnityAlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool UnityForbiddenAreasUnchanged { get; init; }
+    public bool UnityHandoffMetadataOnly { get; init; }
+    public bool UnityPayloadHashesMatchGoal095Ledger { get; init; }
+    public bool Goal095FilesDiscoveredByRelativePaths { get; init; }
+    public bool NoUnityFilesChangedByGoal096 { get; init; }
     public bool ProofStatusPassed { get; init; }
     public bool WinFormsBindingPassed { get; init; }
     public bool QualityGatePassed { get; init; }

@@ -95,7 +95,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "packageCount",
             "exportRecordCount",
             "recordCount",
+            "payloadFileCount",
             "ruleCount",
+            "streamWindowCount",
+            "uniqueChunkKeyCount",
             "sourceGoal091ReusedChunkKeyCount",
             "exportReusedChunkKeyCount"
         })
