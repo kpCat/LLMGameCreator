@@ -107,6 +107,15 @@ public sealed record VisualWorldPreviewArtifactEntry
     public bool MetadataOnly { get; init; }
     public bool PayloadHashesMatchGoal095Ledger { get; init; }
     public bool NoUnityFilesChangedByGoal096 { get; init; }
+    public string OfflineBundleId { get; init; } = string.Empty;
+    public int GeoworldNormalizedFeatureCount { get; init; }
+    public int GeoworldWorldSourceGraphChunkCount { get; init; }
+    public int GeoworldStreamWindowChunkCount { get; init; }
+    public string BoundaryPrefetchStatus { get; init; } = string.Empty;
+    public bool FeatureTaxonomyCoveragePassed { get; init; }
+    public bool GeoworldNegativeProofPassed { get; init; }
+    public bool GeoworldQualityGatePassed { get; init; }
+    public string CompactOverviewEntry { get; init; } = string.Empty;
     public IReadOnlyList<string> ChunkKeys { get; init; } = [];
 
     [JsonIgnore]
@@ -164,6 +173,7 @@ public sealed record VisualWorldPreviewWinFormsBindingInventory
     public bool PageBindDisplaysGroupsEntriesProofs { get; init; }
     public bool PageBindDisplaysCacheExports { get; init; }
     public bool PageBindDisplaysUnityHandoff { get; init; }
+    public bool PageBindDisplaysGeoworld { get; init; }
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
 
@@ -210,6 +220,17 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool UnityPayloadHashesMatchGoal095Ledger { get; init; }
     public bool Goal095FilesDiscoveredByRelativePaths { get; init; }
     public bool NoUnityFilesChangedByGoal096 { get; init; }
+    public bool GeoworldGroupPresent { get; init; }
+    public string GeoworldOfflineBundleId { get; init; } = string.Empty;
+    public int GeoworldNormalizedFeatureCount { get; init; }
+    public int GeoworldWorldSourceGraphChunkCount { get; init; }
+    public int GeoworldStreamWindowChunkCount { get; init; }
+    public bool GeoworldBoundaryPrefetchPassed { get; init; }
+    public bool GeoworldTaxonomyCoveragePassed { get; init; }
+    public bool GeoworldNegativeProofPassed { get; init; }
+    public bool GeoworldQualityGatePassed { get; init; }
+    public bool GeoworldOverviewVisible { get; init; }
+    public bool Goal099FilesDiscoveredByRelativePaths { get; init; }
     public bool RequiredArtifactGroupsPresent { get; init; }
     public bool Goal091StreamWindowsVisible { get; init; }
     public bool ProofStatusPassed { get; init; }
@@ -220,6 +241,7 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool WinFormsBindingReal { get; init; }
     public bool WinFormsCacheExportBindingReal { get; init; }
     public bool WinFormsUnityHandoffBindingReal { get; init; }
+    public bool WinFormsGeoworldBindingReal { get; init; }
     public bool SourceHealthPassed { get; init; }
     public int ScannedCSharpFileCount { get; init; }
     public int MaxLogicalLineCount { get; init; }
@@ -298,6 +320,14 @@ public sealed record VisualWorldStreamPreviewWorkspaceReport
     public bool UnityPayloadHashesMatchGoal095Ledger { get; init; }
     public bool Goal095FilesDiscoveredByRelativePaths { get; init; }
     public bool NoUnityFilesChangedByGoal096 { get; init; }
+    public string GeoworldOfflineBundleId { get; init; } = string.Empty;
+    public int GeoworldNormalizedFeatureCount { get; init; }
+    public int GeoworldWorldSourceGraphChunkCount { get; init; }
+    public int GeoworldStreamWindowChunkCount { get; init; }
+    public bool GeoworldBoundaryPrefetchPassed { get; init; }
+    public bool GeoworldNegativeProofPassed { get; init; }
+    public bool GeoworldQualityGatePassed { get; init; }
+    public bool Goal099FilesDiscoveredByRelativePaths { get; init; }
     public bool ProofStatusPassed { get; init; }
     public bool WinFormsBindingPassed { get; init; }
     public bool QualityGatePassed { get; init; }

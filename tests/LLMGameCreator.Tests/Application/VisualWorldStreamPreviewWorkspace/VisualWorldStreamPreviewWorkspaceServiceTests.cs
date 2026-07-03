@@ -1,6 +1,7 @@
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
+using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.WinForms.Pages;
 using Xunit;
@@ -10,7 +11,7 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through095Artifacts()
+    public void ServiceLoadsRealGoal086Through099Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -23,9 +24,10 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("chunk_stream_windows", groupIds);
         Assert.Contains("cache_exports", groupIds);
         Assert.Contains("unity_handoff", groupIds);
-        Assert.Equal(7, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 81);
-        Assert.True(result.Catalog.SvgTextPreviewCount >= 38);
+        Assert.Contains("geoworld", groupIds);
+        Assert.Equal(8, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 94);
+        Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
 
@@ -117,6 +119,45 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         });
     }
 
+    [Fact]
+    public void GeoworldGroupSurfacesGoal099OfflineBundleGraphAndPrefetch()
+    {
+        var result = Build();
+        var geoworldGroup = Assert.Single(
+            result.Catalog.Groups,
+            group => group.GroupId == "geoworld");
+        var summary = Assert.Single(
+            geoworldGroup.Entries,
+            entry => entry.ArtifactKind == "offline_geoworld_workspace_summary");
+
+        Assert.True(result.QualityGateScan.GeoworldGroupPresent);
+        Assert.Equal(
+            OfflineGeoworldBundleFixtures.SyntheticCityRadiusBundleId,
+            result.QualityGateScan.GeoworldOfflineBundleId);
+        Assert.Equal(10, result.QualityGateScan.GeoworldNormalizedFeatureCount);
+        Assert.True(result.QualityGateScan.GeoworldWorldSourceGraphChunkCount > 0);
+        Assert.Equal(9, result.QualityGateScan.GeoworldStreamWindowChunkCount);
+        Assert.True(result.QualityGateScan.GeoworldBoundaryPrefetchPassed);
+        Assert.True(result.QualityGateScan.GeoworldTaxonomyCoveragePassed);
+        Assert.True(result.QualityGateScan.GeoworldNegativeProofPassed);
+        Assert.True(result.QualityGateScan.GeoworldQualityGatePassed);
+        Assert.True(result.QualityGateScan.GeoworldOverviewVisible);
+        Assert.True(result.QualityGateScan.Goal099FilesDiscoveredByRelativePaths);
+        Assert.Equal(OfflineGeoworldBundleFixtures.SyntheticCityRadiusBundleId, summary.OfflineBundleId);
+        Assert.Equal(10, summary.GeoworldNormalizedFeatureCount);
+        Assert.True(summary.GeoworldWorldSourceGraphChunkCount > 0);
+        Assert.Equal(9, summary.GeoworldStreamWindowChunkCount);
+        Assert.Equal("scheduled_no_network_cache_first", summary.BoundaryPrefetchStatus);
+        Assert.True(summary.FeatureTaxonomyCoveragePassed);
+        Assert.True(summary.GeoworldNegativeProofPassed);
+        Assert.True(summary.GeoworldQualityGatePassed);
+        Assert.Contains(
+            geoworldGroup.Entries,
+            entry => entry.ArtifactKind == "text_svg_geoworld_stream_window_overview");
+        Assert.All(geoworldGroup.Entries, entry =>
+            Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
+    }
+
 
     [Fact]
     public void SvgEntriesAreRelativeTextSafePreviewPaths()
@@ -139,7 +180,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
     }
 
     [Fact]
-    public void Goal091AndGoal093ProofStatusesSurfaceRequiredProofs()
+    public void Goal091Goal093Goal095AndGoal099ProofStatusesSurfaceRequiredProofs()
     {
         var result = Build();
         var required = new[]
@@ -159,7 +200,11 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal095.probe_source_inventory",
             "goal095.alpha_runtime_bootstrap_unchanged",
             "goal095.forbidden_unity_areas_unchanged",
-            "goal095.metadata_only"
+            "goal095.metadata_only",
+            "goal099.boundary_prefetch",
+            "goal099.negative",
+            "goal099.visual_projection",
+            "goal099.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -293,7 +338,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.Same(result, stored);
             Assert.True(groups.Items.Count >= 6);
             Assert.True(entries.Items.Count > 0);
-            Assert.True(proofs.Items.Count >= 19);
+            Assert.True(proofs.Items.Count >= 23);
             groups.SelectedItem = groups.Items
                 .Cast<object>()
                 .First(item => item.ToString()!.Contains("unity_handoff", StringComparison.Ordinal));
@@ -312,6 +357,30 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.Contains("uniqueChunkKeyCount: 93", details.Text, StringComparison.Ordinal);
             Assert.Contains("simulatedUnityReadProofPassed: true", details.Text, StringComparison.Ordinal);
             Assert.Contains("alphaRuntimeBootstrapUnchanged: true", details.Text, StringComparison.Ordinal);
+            groups.SelectedItem = groups.Items
+                .Cast<object>()
+                .First(item => item.ToString()!.Contains("geoworld", StringComparison.Ordinal));
+            var geoworldItem = entries.Items
+                .Cast<ListViewItem>()
+                .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
+                               && entry.ArtifactKind == "offline_geoworld_workspace_summary");
+            var geoworldEntry = Assert.IsType<VisualWorldPreviewArtifactEntry>(geoworldItem.Tag);
+            var geoworldDetails = InvokePrivateStatic<string>(
+                typeof(VisualWorldStreamPreviewWorkspacePageControl),
+                "BuildEntryDetails",
+                geoworldEntry);
+
+            Assert.Contains(
+                "offlineBundleId: " + OfflineGeoworldBundleFixtures.SyntheticCityRadiusBundleId,
+                geoworldDetails,
+                StringComparison.Ordinal);
+            Assert.Contains("geoworldNormalizedFeatureCount: 10", geoworldDetails, StringComparison.Ordinal);
+            Assert.Contains("geoworldStreamWindowChunkCount: 9", geoworldDetails, StringComparison.Ordinal);
+            Assert.Contains(
+                "boundaryPrefetchStatus: scheduled_no_network_cache_first",
+                geoworldDetails,
+                StringComparison.Ordinal);
+            Assert.Contains("geoworldNegativeProofPassed: true", geoworldDetails, StringComparison.Ordinal);
             Assert.True(
                 svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)
                 || svgPreview.Text.Contains("No text SVG preview", StringComparison.Ordinal));
@@ -368,6 +437,17 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
         Assert.NotNull(field);
         var value = field!.GetValue(owner);
+        Assert.NotNull(value);
+        return Assert.IsType<T>(value);
+    }
+
+    private static T InvokePrivateStatic<T>(Type ownerType, string methodName, params object[] arguments)
+    {
+        var method = ownerType.GetMethod(
+            methodName,
+            System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+        Assert.NotNull(method);
+        var value = method!.Invoke(null, arguments);
         Assert.NotNull(value);
         return Assert.IsType<T>(value);
     }

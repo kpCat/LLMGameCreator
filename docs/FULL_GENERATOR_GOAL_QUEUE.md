@@ -89,6 +89,7 @@ visual_chunk_cache_unity_streamingassets_handoff_verification required
 unity_handoff_inspector_probe_readiness_verification required
 final_roadmap_rebaseline_dream_scope_productivity_verification required
 geoworld_source_adapter_streaming_contract_verification required
+offline_geoworld_worldsourcegraph_streaming_verification required
 ```
 
 Current capabilities:
@@ -115,6 +116,7 @@ Current capabilities:
 - BCL-only Visual World Stream Preview Workspace Unity handoff inspector for Goal 095 payload/probe readiness, with 5 payload files, 4 packages, 93 records, 5 stream windows, 93 unique chunk keys, simulated read proof, negative proof, probe inventory, unchanged AlphaRuntimeBootstrap proof and no Unity file changes;
 - Goal 097 final roadmap rebaseline, dream-scope register, realism/geoworld simulator planning track, release risk register, milestone gates and aggressive goal productivity policy, all as docs/evidence-only planning control with no product-code implementation;
 - BCL-only geoworld source adapter/streaming contract foundation with seven metadata-only source fixtures, normalized geofeature taxonomy, cache/provenance/license policy contracts, runtime boundary-prefetch streaming matrix, LFZ pattern lineage and 16-scenario negative proof;
+- BCL-only offline geoworld WorldSourceGraph streaming evidence with a synthetic metadata-only bundle, 10 normalized feature kinds, immutable WorldSourceGraph chunks, no-network 3x3 stream window plus boundary-prefetch band, compact text-SVG projection and Visual World Stream Preview Workspace integration;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1606,14 +1608,32 @@ map tile scraping, raw geodata dumps, Runtime, Unity, public schema, provider/LL
 Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 098, Goal 097,
 Goal 096 and prior visual/geoworld gates remain `accepted=false`.
 
+### Goal 099: Offline Geoworld WorldSourceGraph Streaming
+
+Goal 099 is produced for review with `offline_geoworld_worldsourcegraph_streaming_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It adds a BCL-only Application-side synthetic offline geoworld bundle
+pipeline under `src/LLMGameCreator.Application/Design/OfflineGeoworldWorldSourceGraph/`.
+
+Goal 099 writes deterministic evidence under
+`.llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/` and updates source-of-truth routing,
+current state, queue, debt register and artifact-scope policy. It proves `synthetic_city_radius_offline_bundle`,
+10 normalized geofeature kinds, immutable-base WorldSourceGraph chunks with separate zero gameplay deltas, a 3x3
+stream window, no-network boundary prefetch, compact text-SVG projection and Visual World Stream Preview Workspace
+integration.
+
+Goal 099 is contract/evidence only. It reads no LFZ archive, copies no LFZ source, adds no live network fetching,
+map tile scraping, raw geodata dumps, Runtime, Unity, public schema, provider/LLM/RAG/media execution,
+Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 099, Goal 098,
+Goal 097 and prior visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-geoworld_source_adapter_streaming_contract_verification
+offline_geoworld_worldsourcegraph_streaming_verification
 ```
 
 Status:
 
 ```text
-goal_098_geoworld_source_adapter_streaming_contract_produced_for_review
+goal_099_offline_geoworld_worldsourcegraph_streaming_produced_for_review
 ```

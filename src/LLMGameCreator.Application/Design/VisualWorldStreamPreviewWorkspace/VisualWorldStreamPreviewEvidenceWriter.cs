@@ -149,6 +149,30 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                     || entry.RelativePath == Goal095AlphaRuntimeBootstrapPath));
         var noUnityFilesChanged = unityEntries.Count > 0
             && unityEntries.All(entry => entry.NoUnityFilesChangedByGoal096);
+        var geoworldGroup = groups.FirstOrDefault(group => group.GroupId == "geoworld");
+        var geoworldEntries = geoworldGroup?.Entries.ToList() ?? [];
+        var geoworldSummary = geoworldEntries.FirstOrDefault(entry =>
+            entry.ArtifactKind == "offline_geoworld_workspace_summary");
+        var geoworldOfflineBundleId = geoworldSummary?.OfflineBundleId ?? string.Empty;
+        var geoworldFeatureCount = geoworldSummary?.GeoworldNormalizedFeatureCount ?? 0;
+        var geoworldGraphChunkCount = geoworldSummary?.GeoworldWorldSourceGraphChunkCount ?? 0;
+        var geoworldStreamChunkCount = geoworldSummary?.GeoworldStreamWindowChunkCount ?? 0;
+        var geoworldBoundaryPrefetchPassed = proofs.Any(proof =>
+            proof.ProofId == "goal099.boundary_prefetch" && proof.Passed);
+        var geoworldNegativeProofPassed = proofs.Any(proof =>
+            proof.ProofId == "goal099.negative" && proof.Passed);
+        var geoworldQualityGatePassed = proofs.Any(proof =>
+            proof.ProofId == "goal099.quality_gate" && proof.Passed);
+        var geoworldTaxonomyCoveragePassed =
+            geoworldSummary?.FeatureTaxonomyCoveragePassed == true;
+        var geoworldOverviewVisible = geoworldEntries.Any(entry =>
+            entry.ArtifactKind == "text_svg_geoworld_stream_window_overview"
+            && entry.Status == VisualWorldPreviewArtifactStatus.Passed
+            && !string.IsNullOrWhiteSpace(entry.TextSvgPreviewPath));
+        var goal099RelativePaths = geoworldEntries.Count > 0
+            && geoworldEntries.All(entry =>
+                IsSafeRelativePath(entry.RelativePath)
+                && entry.RelativePath.StartsWith(Goal099SourceRoot + "/", StringComparison.Ordinal));
         var requiredGroups = new[]
         {
             "microtiles",
@@ -157,7 +181,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "world_profiles",
             "chunk_stream_windows",
             "cache_exports",
-            "unity_handoff"
+            "unity_handoff",
+            "geoworld"
         };
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -169,7 +194,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             .Select(entry => entry.RelativePath)
             .Concat(svgEntries.Select(entry => entry.RelativePath))
             .All(path => !IsBinaryOrRasterMedia(path));
-        var proofStatusPassed = proofs.Count >= 19 && proofs.All(item => item.Passed);
+        var proofStatusPassed = proofs.Count >= 23 && proofs.All(item => item.Passed);
 
         AddIfFalse(requiredArtifactGroupsPresent, "goal092.quality.groups_missing", "catalog", diagnostics);
         AddIfFalse(svgEntries.Count >= 4, "goal092.quality.svg_count", "catalog.svgEntries", diagnostics);
@@ -204,6 +229,52 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(unityPayloadHashesMatch, "goal096.quality.payload_hashes", "unity_handoff", diagnostics);
         AddIfFalse(goal095RelativePaths, "goal096.quality.relative_goal095_paths", "unity_handoff", diagnostics);
         AddIfFalse(noUnityFilesChanged, "goal096.quality.unity_files_changed", "unity_handoff", diagnostics);
+        AddIfFalse(geoworldGroup is not null, "goal099.quality.geoworld_group", "geoworld", diagnostics);
+        AddIfFalse(
+            geoworldFeatureCount >= 10,
+            "goal099.quality.normalized_feature_count",
+            "geoworld",
+            diagnostics);
+        AddIfFalse(
+            geoworldGraphChunkCount > 0,
+            "goal099.quality.graph_chunk_count",
+            "geoworld",
+            diagnostics);
+        AddIfFalse(
+            geoworldStreamChunkCount > 0,
+            "goal099.quality.stream_window_count",
+            "geoworld",
+            diagnostics);
+        AddIfFalse(
+            geoworldBoundaryPrefetchPassed,
+            "goal099.quality.boundary_prefetch",
+            "proofStatus",
+            diagnostics);
+        AddIfFalse(
+            geoworldTaxonomyCoveragePassed,
+            "goal099.quality.taxonomy_coverage",
+            "geoworld",
+            diagnostics);
+        AddIfFalse(
+            geoworldNegativeProofPassed,
+            "goal099.quality.negative_proof",
+            "proofStatus",
+            diagnostics);
+        AddIfFalse(
+            geoworldQualityGatePassed,
+            "goal099.quality.quality_gate",
+            "proofStatus",
+            diagnostics);
+        AddIfFalse(
+            geoworldOverviewVisible,
+            "goal099.quality.overview_visible",
+            "geoworld",
+            diagnostics);
+        AddIfFalse(
+            goal099RelativePaths,
+            "goal099.quality.relative_goal099_paths",
+            "geoworld",
+            diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -216,6 +287,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(
             binding.PageBindDisplaysUnityHandoff,
             "goal096.quality.winforms_unity_handoff_binding",
+            "winformsBinding",
+            diagnostics);
+        AddIfFalse(
+            binding.PageBindDisplaysGeoworld,
+            "goal099.quality.winforms_geoworld_binding",
             "winformsBinding",
             diagnostics);
         AddIfFalse(sourceHealth.Passed, "goal092.quality.source_health", "sourceHealth", diagnostics);
@@ -264,6 +340,17 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             UnityPayloadHashesMatchGoal095Ledger = unityPayloadHashesMatch,
             Goal095FilesDiscoveredByRelativePaths = goal095RelativePaths,
             NoUnityFilesChangedByGoal096 = noUnityFilesChanged,
+            GeoworldGroupPresent = geoworldGroup is not null,
+            GeoworldOfflineBundleId = geoworldOfflineBundleId,
+            GeoworldNormalizedFeatureCount = geoworldFeatureCount,
+            GeoworldWorldSourceGraphChunkCount = geoworldGraphChunkCount,
+            GeoworldStreamWindowChunkCount = geoworldStreamChunkCount,
+            GeoworldBoundaryPrefetchPassed = geoworldBoundaryPrefetchPassed,
+            GeoworldTaxonomyCoveragePassed = geoworldTaxonomyCoveragePassed,
+            GeoworldNegativeProofPassed = geoworldNegativeProofPassed,
+            GeoworldQualityGatePassed = geoworldQualityGatePassed,
+            GeoworldOverviewVisible = geoworldOverviewVisible,
+            Goal099FilesDiscoveredByRelativePaths = goal099RelativePaths,
             RequiredArtifactGroupsPresent = requiredArtifactGroupsPresent,
             Goal091StreamWindowsVisible = goal091StreamEntries >= 4,
             ProofStatusPassed = proofStatusPassed,
@@ -272,6 +359,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             WinFormsBindingReal = binding.Passed,
             WinFormsCacheExportBindingReal = binding.PageBindDisplaysCacheExports,
             WinFormsUnityHandoffBindingReal = binding.PageBindDisplaysUnityHandoff,
+            WinFormsGeoworldBindingReal = binding.PageBindDisplaysGeoworld,
             SourceHealthPassed = sourceHealth.Passed,
             ScannedCSharpFileCount = sourceHealth.ScannedCSharpFileCount,
             MaxLogicalLineCount = sourceHealth.MaxLogicalLineCount,
@@ -287,10 +375,15 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             ExpectedChangedPathPrefixes =
             [
                 "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+                "src/LLMGameCreator.Application/Design/OfflineGeoworldWorldSourceGraph/",
                 "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldWorldSourceGraph/",
                 "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
+                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldWorldSourceGraphProductSmokeTests.cs",
                 "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+                ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/",
                 ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/",
+                "docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/",
                 "docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/",
                 "docs/CURRENT_GENERATOR_STATE.md",
                 "docs/CURRENT_GENERATOR_STATE.json",
@@ -351,6 +444,14 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             UnityPayloadHashesMatchGoal095Ledger = qualityGate.UnityPayloadHashesMatchGoal095Ledger,
             Goal095FilesDiscoveredByRelativePaths = qualityGate.Goal095FilesDiscoveredByRelativePaths,
             NoUnityFilesChangedByGoal096 = qualityGate.NoUnityFilesChangedByGoal096,
+            GeoworldOfflineBundleId = qualityGate.GeoworldOfflineBundleId,
+            GeoworldNormalizedFeatureCount = qualityGate.GeoworldNormalizedFeatureCount,
+            GeoworldWorldSourceGraphChunkCount = qualityGate.GeoworldWorldSourceGraphChunkCount,
+            GeoworldStreamWindowChunkCount = qualityGate.GeoworldStreamWindowChunkCount,
+            GeoworldBoundaryPrefetchPassed = qualityGate.GeoworldBoundaryPrefetchPassed,
+            GeoworldNegativeProofPassed = qualityGate.GeoworldNegativeProofPassed,
+            GeoworldQualityGatePassed = qualityGate.GeoworldQualityGatePassed,
+            Goal099FilesDiscoveredByRelativePaths = qualityGate.Goal099FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,
@@ -436,6 +537,17 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             $"- goal095FilesDiscoveredByRelativePaths: {report.Goal095FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
             $"- noUnityFilesChangedByGoal096: {report.NoUnityFilesChangedByGoal096.ToString().ToLowerInvariant()}",
             string.Empty,
+            "## Geoworld Inspector",
+            string.Empty,
+            $"- geoworldOfflineBundleId: {report.GeoworldOfflineBundleId}",
+            $"- geoworldNormalizedFeatureCount: {report.GeoworldNormalizedFeatureCount}",
+            $"- geoworldWorldSourceGraphChunkCount: {report.GeoworldWorldSourceGraphChunkCount}",
+            $"- geoworldStreamWindowChunkCount: {report.GeoworldStreamWindowChunkCount}",
+            $"- geoworldBoundaryPrefetchPassed: {report.GeoworldBoundaryPrefetchPassed.ToString().ToLowerInvariant()}",
+            $"- geoworldNegativeProofPassed: {report.GeoworldNegativeProofPassed.ToString().ToLowerInvariant()}",
+            $"- geoworldQualityGatePassed: {report.GeoworldQualityGatePassed.ToString().ToLowerInvariant()}",
+            $"- goal099FilesDiscoveredByRelativePaths: {report.Goal099FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
+            string.Empty,
             "## Proof Status",
             string.Empty,
             $"- proofStatusPassed: {proofStatus.Passed.ToString().ToLowerInvariant()}",
@@ -459,6 +571,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             $"- pageBindDisplaysGroupsEntriesProofs: {binding.PageBindDisplaysGroupsEntriesProofs.ToString().ToLowerInvariant()}",
             $"- pageBindDisplaysCacheExports: {binding.PageBindDisplaysCacheExports.ToString().ToLowerInvariant()}",
             $"- pageBindDisplaysUnityHandoff: {binding.PageBindDisplaysUnityHandoff.ToString().ToLowerInvariant()}",
+            $"- pageBindDisplaysGeoworld: {binding.PageBindDisplaysGeoworld.ToString().ToLowerInvariant()}",
             string.Empty,
             "## Source Health",
             string.Empty,
@@ -491,6 +604,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             $"- unityPayloadHashesMatchGoal095Ledger: {qualityGate.UnityPayloadHashesMatchGoal095Ledger.ToString().ToLowerInvariant()}",
             $"- goal095FilesDiscoveredByRelativePaths: {qualityGate.Goal095FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
             $"- noUnityFilesChangedByGoal096: {qualityGate.NoUnityFilesChangedByGoal096.ToString().ToLowerInvariant()}",
+            $"- geoworldGroupPresent: {qualityGate.GeoworldGroupPresent.ToString().ToLowerInvariant()}",
+            $"- geoworldBoundaryPrefetchPassed: {qualityGate.GeoworldBoundaryPrefetchPassed.ToString().ToLowerInvariant()}",
+            $"- geoworldTaxonomyCoveragePassed: {qualityGate.GeoworldTaxonomyCoveragePassed.ToString().ToLowerInvariant()}",
+            $"- geoworldNegativeProofPassed: {qualityGate.GeoworldNegativeProofPassed.ToString().ToLowerInvariant()}",
+            $"- geoworldQualityGatePassed: {qualityGate.GeoworldQualityGatePassed.ToString().ToLowerInvariant()}",
+            $"- geoworldOverviewVisible: {qualityGate.GeoworldOverviewVisible.ToString().ToLowerInvariant()}",
+            $"- goal099FilesDiscoveredByRelativePaths: {qualityGate.Goal099FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
             $"- noAbsolutePaths: {qualityGate.NoAbsolutePaths.ToString().ToLowerInvariant()}",
             $"- noBinaryOrRasterMediaAdded: {qualityGate.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()}",
             $"- noRuntimeUnityProviderSchemaProjectDependencyChanges: {qualityGate.NoRuntimeUnityProviderSchemaProjectDependencyChanges.ToString().ToLowerInvariant()}",

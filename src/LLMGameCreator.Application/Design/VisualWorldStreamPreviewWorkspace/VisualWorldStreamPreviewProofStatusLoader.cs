@@ -1,3 +1,5 @@
+using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
+
 namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 
 public sealed partial class VisualWorldStreamPreviewWorkspaceService
@@ -79,6 +81,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         };
         proofs.AddRange(BuildGoal093CacheProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal095UnityHandoffProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal099GeoworldProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -138,6 +141,48 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 diagnostics)
         ];
     }
+
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal099GeoworldProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        [
+            BuildProof(
+                projectRoot,
+                Goal099SourceRoot,
+                Goal099SourceGoalId,
+                "goal099.boundary_prefetch",
+                OfflineGeoworldWorldSourceGraphEvidenceService.BoundaryPrefetchProofJsonFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal099SourceRoot,
+                Goal099SourceGoalId,
+                "goal099.negative",
+                OfflineGeoworldWorldSourceGraphEvidenceService.NegativeProofJsonFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal099SourceRoot,
+                Goal099SourceGoalId,
+                "goal099.visual_projection",
+                OfflineGeoworldWorldSourceGraphEvidenceService.VisualProjectionSummaryJsonFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal099SourceRoot,
+                Goal099SourceGoalId,
+                "goal099.quality_gate",
+                OfflineGeoworldWorldSourceGraphEvidenceService.QualityGateScanJsonFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics)
+        ];
 
     private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal095UnityHandoffProofStatus(
         string projectRoot,

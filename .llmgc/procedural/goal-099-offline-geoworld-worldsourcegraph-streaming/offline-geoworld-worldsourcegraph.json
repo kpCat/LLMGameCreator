@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "offline_geoworld_worldsourcegraph_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "graphId": "world_source_graph/synthetic_city_radius_offline_bundle",
+  "bundleId": "synthetic_city_radius_offline_bundle",
+  "baseDataImmutable": true,
+  "gameplayDeltasSeparate": true,
+  "deltaCount": 0,
+  "noRawFullAreaDump": true,
+  "sourceProvenance": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+  "chunks": [
+    {
+      "chunkId": "geo_chunk/z14_x4209_y6141",
+      "tileKey": {
+        "scheme": "syntheticWebMercator",
+        "zoom": 14,
+        "x": 4209,
+        "y": 6141,
+        "key": "z14/x4209/y6141"
+      },
+      "featureIds": [
+        "normalized/synthetic_city_radius_offline_bundle/administrativeArea/administrative_area_demo_district"
+      ],
+      "crossChunkReferenceIds": [
+        "cross_ref/synthetic_city_radius_offline_bundle_administrativearea_administrative_area_demo_district/x4209_y6141_to_x4209_y6142",
+        "cross_ref/synthetic_city_radius_offline_bundle_administrativearea_administrative_area_demo_district/x4209_y6141_to_x4210_y6141",
+        "cross_ref/synthetic_city_radius_offline_bundle_administrativearea_administrative_area_demo_district/x4209_y6141_to_x4210_y6142"
+      ],
+      "sourceProvenance": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md"
+    },
+    {
+      "chunkId": "geo_chunk/z14_x4209_y6142",
+      "tileKey": {
+        "scheme": "syntheticWebMercator",
+        "zoom": 14,
+        "x": 4209,
+        "y": 6142,
+        "key": "z14/x4209/y6142"
+      },
+      "featureIds": [
+        "normalized/synthetic_city_radius_offline_bundle/administrativeArea/administrative_area_demo_district",
+        "normalized/synthetic_city_radius_offline_bundle/barrier/barrier_service_gate"
+      ],
+      "crossChunkReferenceIds": [
+        "cross_ref/synthetic_city_radius_offline_bundle_barrier_barrier_service_gate/x4209_y6142_to_x4210_y6142"
+      ],
+      "sourceProvenance": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md"
+    },
+    {
+      "chunkId": "geo_chunk/z14_x4210_y6141",
+      "tileKey": {
+        "scheme": "syntheticWebMercator",
+        "zoom": 14,
+        "x": 4210,
+        "y": 6141,
+        "key": "z14/x4210/y6141"
+      },
+      "featureIds": [
+        "normalized/synthetic_city_radius_offline_bundle/administrativeArea/administrative_area_demo_district",
+        "normalized/synthetic_city_radius_offline_bundle/terrainHint/terrain_hint_embankment",
+        "normalized/synthetic_city_radius_offline_bundle/water/water_body_linear_canal"
+      ],
+      "crossChunkReferenceIds": [
+        "cross_ref/synthetic_city_radius_offline_bundle_terrainhint_terrain_hint_embankment/x4210_y6141_to_x4210_y6142",
+        "cross_ref/synthetic_city_radius_offline_bundle_water_water_body_linear_canal/x4210_y6141_to_x4210_y6142"
+      ],
+      "sourceProvenance": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md"
+    },
+    {
+      "chunkId": "geo_chunk/z14_x4210_y6142",
+      "tileKey": {
+        "scheme": "syntheticWebMercator",
+        "zoom": 14,
+        "x": 4210,
+        "y": 6142,
+        "key": "z14/x4210/y6142"
+      },
+      "featureIds": [
+        "normalized/synthetic_city_radius_offline_bundle/administrativeArea/administrative_area_demo_district",
+        "normalized/synthetic_city_radius_offline_bundle/barrier/barrier_service_gate",
+        "normalized/synthetic_city_radius_offline_bundle/bridge/bridge_canal_crossing",
+        "normalized/synthetic_city_radius_offline_bundle/building/building_footprint_residential_block",
+        "normalized/synthetic_city_radius_offline_bundle/landUse/landuse_market_square",
+        "normalized/synthetic_city_radius_offline_bundle/poi/poi_clinic_marker",
+        "normalized/synthetic_city_radius_offline_bundle/road/road_segment_market_axis",
+        "normalized/synthetic_city_radius_offline_bundle/terrainHint/terrain_hint_embankment",
+        "normalized/synthetic_city_radius_offline_bundle/vegetation/vegetation_pocket_park",
+        "normalized/synthetic_city_radius_offline_bundle/water/water_body_linear_canal"
+      ],
+      "crossChunkReferenceIds": [
+        "cross_ref/synthetic_city_radius_offline_bundle_bridge_bridge_canal_crossing/x4210_y6142_to_x4211_y6142",
+        "cross_ref/synthetic_city_radius_offline_bundle_road_road_segment_market_axis/x4210_y6142_to_x4211_y6142"
+      ],
+      "sourceProvenance": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md"
+    },
+    {
+      "chunkId": "geo_chunk/z14_x4211_y6142",
+      "tileKey": {
+        "scheme": "syntheticWebMercator",
+        "zoom": 14,
+        "x": 4211,
+        "y": 6142,
+        "key": "z14/x4211/y6142"
+      },
+      "featureIds": [
+        "normalized/synthetic_city_radius_offline_bundle/bridge/bridge_canal_crossing",
+        "normalized/synthetic_city_radius_offline_bundle/road/road_segment_market_axis"
+      ],
+      "crossChunkReferenceIds": [],
+      "sourceProvenance": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md"
+    }
+  ],
+  "crossChunkReferences": [
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_administrativearea_administrative_area_demo_district/x4209_y6141_to_x4209_y6142",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/administrativeArea/administrative_area_demo_district",
+      "featureKind": "administrativeArea",
+      "fromChunkId": "geo_chunk/z14_x4209_y6141",
+      "toChunkId": "geo_chunk/z14_x4209_y6142",
+      "reason": "administrativeArea crosses a synthetic geoworld chunk boundary"
+    },
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_administrativearea_administrative_area_demo_district/x4209_y6141_to_x4210_y6141",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/administrativeArea/administrative_area_demo_district",
+      "featureKind": "administrativeArea",
+      "fromChunkId": "geo_chunk/z14_x4209_y6141",
+      "toChunkId": "geo_chunk/z14_x4210_y6141",
+      "reason": "administrativeArea crosses a synthetic geoworld chunk boundary"
+    },
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_administrativearea_administrative_area_demo_district/x4209_y6141_to_x4210_y6142",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/administrativeArea/administrative_area_demo_district",
+      "featureKind": "administrativeArea",
+      "fromChunkId": "geo_chunk/z14_x4209_y6141",
+      "toChunkId": "geo_chunk/z14_x4210_y6142",
+      "reason": "administrativeArea crosses a synthetic geoworld chunk boundary"
+    },
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_barrier_barrier_service_gate/x4209_y6142_to_x4210_y6142",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/barrier/barrier_service_gate",
+      "featureKind": "barrier",
+      "fromChunkId": "geo_chunk/z14_x4209_y6142",
+      "toChunkId": "geo_chunk/z14_x4210_y6142",
+      "reason": "barrier crosses a synthetic geoworld chunk boundary"
+    },
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_bridge_bridge_canal_crossing/x4210_y6142_to_x4211_y6142",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/bridge/bridge_canal_crossing",
+      "featureKind": "bridge",
+      "fromChunkId": "geo_chunk/z14_x4210_y6142",
+      "toChunkId": "geo_chunk/z14_x4211_y6142",
+      "reason": "bridge crosses a synthetic geoworld chunk boundary"
+    },
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_road_road_segment_market_axis/x4210_y6142_to_x4211_y6142",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/road/road_segment_market_axis",
+      "featureKind": "road",
+      "fromChunkId": "geo_chunk/z14_x4210_y6142",
+      "toChunkId": "geo_chunk/z14_x4211_y6142",
+      "reason": "road crosses a synthetic geoworld chunk boundary"
+    },
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_terrainhint_terrain_hint_embankment/x4210_y6141_to_x4210_y6142",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/terrainHint/terrain_hint_embankment",
+      "featureKind": "terrainHint",
+      "fromChunkId": "geo_chunk/z14_x4210_y6141",
+      "toChunkId": "geo_chunk/z14_x4210_y6142",
+      "reason": "terrainHint crosses a synthetic geoworld chunk boundary"
+    },
+    {
+      "referenceId": "cross_ref/synthetic_city_radius_offline_bundle_water_water_body_linear_canal/x4210_y6141_to_x4210_y6142",
+      "featureId": "normalized/synthetic_city_radius_offline_bundle/water/water_body_linear_canal",
+      "featureKind": "water",
+      "fromChunkId": "geo_chunk/z14_x4210_y6141",
+      "toChunkId": "geo_chunk/z14_x4210_y6142",
+      "reason": "water crosses a synthetic geoworld chunk boundary"
+    }
+  ]
+}

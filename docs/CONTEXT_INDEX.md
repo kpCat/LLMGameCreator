@@ -190,6 +190,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/GOAL.md` | Goal 096 task: surface the real Goal 095 Unity StreamingAssets payload, standalone probe inventory, simulated read, negative proof and no-Unity-file-change readiness in the existing Visual World Stream Preview Workspace and WinForms review UI, write compact inspector evidence and stop at `unity_handoff_inspector_probe_readiness_verification`; no Unity file mutation, Runtime consumption, live Unity gameplay rendering, final atlas, runtime streaming, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-097-final-roadmap-rebaseline-dream-scope-productivity/GOAL.md` | Goal 097 task: final roadmap rebaseline, dream scope register, realism/geoworld simulator planning track, release risk register, milestone gates and aggressive goal productivity policy; docs/evidence only, final stop at `final_roadmap_rebaseline_dream_scope_productivity_verification`; no product code, Runtime, Unity, public schema, provider, Lua, generator-library, dependency, binary/raster media or prompt-dump changes. |
 | `docs/agent-tasks/goal-098-geoworld-source-adapter-streaming-contract/GOAL.md` | Goal 098 task: BCL-only Application-side geoworld source adapter/streaming contract foundation using LLMGameCreator LFZ/geoworld docs only; metadata-only fixtures, cache/provenance/license policy, normalized feature taxonomy, streaming window contracts, negative proof and compact evidence; final stop at `geoworld_source_adapter_streaming_contract_verification`; no LFZ source/archive, Runtime, Unity, public schema, provider/network, Lua, generator-library, project-file, dependency, binary/raster media, raw geodata dump or live ingestion changes. |
+| `docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/GOAL.md` | Goal 099 task: BCL-only Application-side synthetic offline geoworld bundle normalization into WorldSourceGraph chunks, no-network stream-window boundary prefetch, compact text-SVG projection and existing Visual World Stream Preview Workspace integration; final stop at `offline_geoworld_worldsourcegraph_streaming_verification`; no LFZ source/archive, live geodata ingestion, Runtime, Unity, public schema, provider/network, Lua, generator-library, project-file, dependency, binary/raster media, raw geodata dump or prompt-dump changes. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -267,7 +268,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-geoworld_source_adapter_streaming_contract_verification
+offline_geoworld_worldsourcegraph_streaming_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -541,6 +542,14 @@ negative proof, LFZ/geoworld docs lineage and compact evidence under
 source, does not implement live network/provider fetching, does not scrape map tiles, writes no raw geodata dumps and
 does not change Runtime, Unity, public schema, Lua, generator-library, project files, dependencies, binary/raster media
 or prompt-output work. Goal 098 and Goal 097 remain `accepted=false`.
+Goal 099 is produced for review with `offline_geoworld_worldsourcegraph_streaming_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it adds a BCL-only synthetic offline geoworld bundle, normalized features,
+immutable WorldSourceGraph chunks, no-network boundary-prefetch stream-window evidence, compact text-SVG projection and
+Visual World Stream Preview Workspace integration under
+`.llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/`. Goal 099 reads no LFZ archive, copies no LFZ
+source, performs no live network/provider fetching, scrapes no map tiles, writes no raw geodata dumps and does not change
+Runtime, Unity, public schema, Lua, generator-library, project files, dependencies, binary/raster media or prompt-output
+work. Goal 099, Goal 098 and Goal 097 remain `accepted=false`.
 
 Allowed next sequence:
 
@@ -604,6 +613,7 @@ Allowed next sequence:
 58. Review Goal 096 `unity_handoff_inspector_probe_readiness_verification`; it makes Goal 095 Unity handoff payload/probe/readiness evidence inspectable in the existing Application/WinForms review workspace, keeps Goal 096 and previous visual gates `accepted=false`, and does not start Runtime consumption, live Unity gameplay rendering, final atlas generation, provider, media, schema, Lua or generator-library implementation.
 59. Review Goal 097 `final_roadmap_rebaseline_dream_scope_productivity_verification`; it rebases roadmap/milestone/risk/productivity planning after the Goal 074-096 chain, keeps Goal 096 and prior visual gates `accepted=false`, records realism/geospatial simulator work as future research-only scope and does not start product code, Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 60. Review Goal 098 `geoworld_source_adapter_streaming_contract_verification`; it adds BCL-only geoworld source adapter/streaming contracts, metadata-only fixtures, normalized taxonomy and negative proof, keeps Goal 098 and Goal 097 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime, Unity, public schema, Lua or generator-library implementation.
+61. Review Goal 099 `offline_geoworld_worldsourcegraph_streaming_verification`; it adds BCL-only synthetic offline geoworld bundle normalization, immutable WorldSourceGraph chunks, no-network boundary-prefetch stream-window evidence and workspace integration, keeps Goal 099, Goal 098 and Goal 097 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime, Unity, public schema, Lua or generator-library implementation.
 
 Kill criterion:
 

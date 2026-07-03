@@ -70,7 +70,8 @@
     ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/",
     ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/",
     ".llmgc/procedural/goal-097-final-roadmap-rebaseline-dream-scope-productivity/",
-    ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/"
+    ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/",
+    ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1238,6 +1239,28 @@
         "docs/agent-tasks/goal-098-geoworld-source-adapter-streaming-contract/",
         "src/LLMGameCreator.Application/Design/GeoworldSourceAdapterStreamingContract/",
         "tests/LLMGameCreator.Tests/Application/GeoworldSourceAdapterStreamingContract/"
+      ]
+    },
+    {
+      "scenario": "goal-099-offline-geoworld-worldsourcegraph-streaming",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldWorldSourceGraphProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/",
+        "docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldWorldSourceGraph/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldWorldSourceGraph/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
       ]
     }
   ]

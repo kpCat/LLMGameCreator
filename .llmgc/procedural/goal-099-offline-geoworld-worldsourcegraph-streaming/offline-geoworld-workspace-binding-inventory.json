@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "offline_geoworld_workspace_binding_inventory_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "passed": true,
+  "workspaceServiceReadsGoal099Evidence": true,
+  "workspaceCatalogIncludesGeoworldGroup": true,
+  "winFormsPageDisplaysGeoworldFields": true,
+  "usesRepositoryRelativeGoal099Paths": true,
+  "diagnostics": []
+}

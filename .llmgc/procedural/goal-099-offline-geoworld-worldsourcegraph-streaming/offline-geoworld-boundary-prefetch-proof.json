@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "offline_geoworld_boundary_prefetch_proof_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "passed": true,
+  "centerChunkKey": "z14/x4210/y6142",
+  "requiredChunkCount": 9,
+  "boundaryPrefetchChunkCount": 16,
+  "missingScheduledChunkCount": 20,
+  "boundaryPrefetchEnabled": true,
+  "runtimeTravelModeRequested": true,
+  "noNetworkFetch": true,
+  "diagnosticSummary": "boundary prefetch schedules neighbor chunks without network fetch"
+}

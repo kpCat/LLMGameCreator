@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "offline_geoworld_source_lineage_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "passed": true,
+  "goal098AcceptedFalsePreserved": true,
+  "goal098NoLfzCodeCopiedProven": true,
+  "goal098NoNetworkImplementationProven": true,
+  "goal098TaxonomyExists": true,
+  "records": [
+    {
+      "relativePath": "docs/context/LFZ_ARCHIVE_ANALYSIS_MANIFEST.md",
+      "exists": true,
+      "sha256": "73e45bd941b8711b77a379498092a982f9eb132082922841acc46af0884d0826",
+      "purpose": "LFZ pattern no-code-copy boundary"
+    },
+    {
+      "relativePath": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+      "exists": true,
+      "sha256": "cfb3d50677a7d04f02af3e32f0a1e78c1d15ec1a3f29d3b74bae240d1b166741",
+      "purpose": "source to normalized feature pipeline pattern"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+      "exists": true,
+      "sha256": "7f0340599487f826c258fdf8c2378d4adeb5aec16b2bb5d87ce6b8e2dabcea4f",
+      "purpose": "stream window and boundary prefetch policy"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+      "exists": true,
+      "sha256": "3d5a5e89377eb6cdf617cc1edab0362cd72fb3f70d089b685087e22f70a4f06c",
+      "purpose": "cache provenance license adapter vocabulary"
+    },
+    {
+      "relativePath": "docs/proposals/GEOWORLD_INGESTION_FUTURE_GOAL_SEQUENCE.md",
+      "exists": true,
+      "sha256": "45868e8754d47ec6513f1e07f5da53006d2be3ea4fc67c50e77f76e5c95aa831",
+      "purpose": "future staged geoworld sequence"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/geoworld-source-adapter-streaming-contract-report.md",
+      "exists": true,
+      "sha256": "7d6f145dbb59cf4aa6e4fe9a1cd3b5f3b46b52f4144e11aaf462b60eacb27f8b",
+      "purpose": "Goal098 accepted=false report"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/geoworld-source-adapter-catalog.json",
+      "exists": true,
+      "sha256": "af525168ba7d2956e96ecbf54e2ca309351e6ea7df49bb001331d7ad7bd015aa",
+      "purpose": "Goal098 adapter fixtures"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/geoworld-normalized-feature-taxonomy.json",
+      "exists": true,
+      "sha256": "4b78b7574157c38307181a2fdde109fe3cba9a098346f872fe0f2c19f5d61cad",
+      "purpose": "Goal098 taxonomy"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/geoworld-streaming-policy-matrix.json",
+      "exists": true,
+      "sha256": "eaa4ef144bd82e91487a199b5af616c8679be9a1ed777f32cb38d2bb4545349c",
+      "purpose": "Goal098 stream policy"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/geoworld-negative-proof.json",
+      "exists": true,
+      "sha256": "f0f4bc26d3ee23d988a0a4ace6aacf851413700788d464b19ab05476b4ac69a3",
+      "purpose": "Goal098 negative proof"
+    }
+  ]
+}

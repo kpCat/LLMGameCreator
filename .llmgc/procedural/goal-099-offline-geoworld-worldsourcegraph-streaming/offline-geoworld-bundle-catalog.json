@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "offline_geoworld_bundle_catalog_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "manualGate": "offline_geoworld_worldsourcegraph_streaming_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "bundleCount": 1,
+  "bundleIds": [
+    "synthetic_city_radius_offline_bundle"
+  ],
+  "bundles": [
+    {
+      "bundleId": "synthetic_city_radius_offline_bundle",
+      "displayName": "Synthetic city radius offline bundle",
+      "metadataOnly": true,
+      "syntheticOnly": true,
+      "containsRealMapData": false,
+      "containsRawOsmDump": false,
+      "containsRawFullAreaDump": false,
+      "publicTileScrapingAttempted": false,
+      "runtimeOnlineFetchAttempted": false,
+      "containsLfzCopiedCodeMarker": false,
+      "promptTextIsSourceOfTruth": false,
+      "realGeodataDumpMarkerPresent": false,
+      "containsAdultOrRatingMetadata": false,
+      "safeFallbackPolicyId": "safe_public_geoworld_fallback",
+      "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+      "licenseProvenanceSummary": "synthetic offline fixture; no real map data; Goal098 policy lineage only",
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/building_footprint_residential_block",
+          "normalizedKind": "building",
+          "geometryKind": "polygon",
+          "geometrySummary": "closed synthetic footprint polygon with four corners inside center chunk",
+          "sourceTagFamily": "synthetic_osm:building",
+          "rawTagKeys": [
+            "building",
+            "levels"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6142"
+          ],
+          "crossesChunkBoundary": false,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/road_segment_market_axis",
+          "normalizedKind": "road",
+          "geometryKind": "lineString",
+          "geometrySummary": "east-west synthetic road segment crossing the center chunk boundary",
+          "sourceTagFamily": "synthetic_osm:highway",
+          "rawTagKeys": [
+            "highway",
+            "surface"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6142",
+            "z14/x4211/y6142"
+          ],
+          "crossesChunkBoundary": true,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/water_body_linear_canal",
+          "normalizedKind": "water",
+          "geometryKind": "polygon",
+          "geometrySummary": "synthetic narrow canal area crossing north neighbor seam",
+          "sourceTagFamily": "synthetic_osm:water",
+          "rawTagKeys": [
+            "natural",
+            "water"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6142",
+            "z14/x4210/y6141"
+          ],
+          "crossesChunkBoundary": true,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/landuse_market_square",
+          "normalizedKind": "landUse",
+          "geometryKind": "polygon",
+          "geometrySummary": "synthetic civic land-use area around market square",
+          "sourceTagFamily": "synthetic_osm:landuse",
+          "rawTagKeys": [
+            "landuse"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6142"
+          ],
+          "crossesChunkBoundary": false,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/poi_clinic_marker",
+          "normalizedKind": "poi",
+          "geometryKind": "point",
+          "geometrySummary": "synthetic point of interest marker for clinic",
+          "sourceTagFamily": "synthetic_osm:amenity",
+          "rawTagKeys": [
+            "amenity",
+            "name_class"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6142"
+          ],
+          "crossesChunkBoundary": false,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/bridge_canal_crossing",
+          "normalizedKind": "bridge",
+          "geometryKind": "lineString",
+          "geometrySummary": "synthetic bridge segment connecting road over canal seam",
+          "sourceTagFamily": "synthetic_osm:bridge",
+          "rawTagKeys": [
+            "bridge",
+            "layer"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6142",
+            "z14/x4211/y6142"
+          ],
+          "crossesChunkBoundary": true,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/barrier_service_gate",
+          "normalizedKind": "barrier",
+          "geometryKind": "lineString",
+          "geometrySummary": "synthetic service gate barrier near industrial edge",
+          "sourceTagFamily": "synthetic_osm:barrier",
+          "rawTagKeys": [
+            "barrier"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4209/y6142",
+            "z14/x4210/y6142"
+          ],
+          "crossesChunkBoundary": true,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/vegetation_pocket_park",
+          "normalizedKind": "vegetation",
+          "geometryKind": "polygon",
+          "geometrySummary": "synthetic pocket park vegetation area",
+          "sourceTagFamily": "synthetic_osm:vegetation",
+          "rawTagKeys": [
+            "vegetation",
+            "leaf_type"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6142"
+          ],
+          "crossesChunkBoundary": false,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/terrain_hint_embankment",
+          "normalizedKind": "terrainHint",
+          "geometryKind": "areaHint",
+          "geometrySummary": "synthetic embankment slope hint beside canal",
+          "sourceTagFamily": "synthetic:terrain_hint",
+          "rawTagKeys": [
+            "slope_class"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4210/y6141",
+            "z14/x4210/y6142"
+          ],
+          "crossesChunkBoundary": true,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        },
+        {
+          "rawDescriptorId": "raw/administrative_area_demo_district",
+          "normalizedKind": "administrativeArea",
+          "geometryKind": "polygon",
+          "geometrySummary": "synthetic administrative district boundary summary",
+          "sourceTagFamily": "synthetic_osm:boundary",
+          "rawTagKeys": [
+            "boundary",
+            "admin_level"
+          ],
+          "intersectingChunkKeys": [
+            "z14/x4209/y6141",
+            "z14/x4210/y6141",
+            "z14/x4209/y6142",
+            "z14/x4210/y6142"
+          ],
+          "crossesChunkBoundary": true,
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false,
+          "sourceLineage": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+          "licenseProvenanceSummary": "synthetic offline descriptor; no real geodata"
+        }
+      ]
+    }
+  ]
+}

@@ -43,7 +43,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | cachePackages=" + result.Report.CacheExportPackageCount
             + " | cacheRecords=" + result.Report.CacheExportRecordCount
             + " | unityPayloads=" + result.Report.UnityPayloadFileCount
-            + " | unityRecords=" + result.Report.UnityExportRecordCount;
+            + " | unityRecords=" + result.Report.UnityExportRecordCount
+            + " | geoworldFeatures=" + result.Report.GeoworldNormalizedFeatureCount
+            + " | geoworldChunks=" + result.Report.GeoworldWorldSourceGraphChunkCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -159,6 +161,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + result.Report.UnityForbiddenAreasUnchanged.ToString().ToLowerInvariant(),
             "noUnityFilesChangedByGoal096="
                 + result.Report.NoUnityFilesChangedByGoal096.ToString().ToLowerInvariant(),
+            "geoworldOfflineBundleId=" + result.Report.GeoworldOfflineBundleId,
+            "geoworldNormalizedFeatureCount=" + result.Report.GeoworldNormalizedFeatureCount,
+            "geoworldWorldSourceGraphChunkCount=" + result.Report.GeoworldWorldSourceGraphChunkCount,
+            "geoworldStreamWindowChunkCount=" + result.Report.GeoworldStreamWindowChunkCount,
+            "geoworldBoundaryPrefetchPassed="
+                + result.Report.GeoworldBoundaryPrefetchPassed.ToString().ToLowerInvariant(),
+            "geoworldNegativeProofPassed="
+                + result.Report.GeoworldNegativeProofPassed.ToString().ToLowerInvariant(),
+            "geoworldQualityGatePassed="
+                + result.Report.GeoworldQualityGatePassed.ToString().ToLowerInvariant(),
+            "goal099FilesDiscoveredByRelativePaths="
+                + result.Report.Goal099FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -264,6 +278,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "metadataOnly: " + entry.MetadataOnly.ToString().ToLowerInvariant(),
             "payloadHashesMatchGoal095Ledger: "
                 + entry.PayloadHashesMatchGoal095Ledger.ToString().ToLowerInvariant(),
+            "offlineBundleId: " + entry.OfflineBundleId,
+            "geoworldNormalizedFeatureCount: " + entry.GeoworldNormalizedFeatureCount,
+            "geoworldWorldSourceGraphChunkCount: " + entry.GeoworldWorldSourceGraphChunkCount,
+            "geoworldStreamWindowChunkCount: " + entry.GeoworldStreamWindowChunkCount,
+            "boundaryPrefetchStatus: " + entry.BoundaryPrefetchStatus,
+            "featureTaxonomyCoveragePassed: "
+                + entry.FeatureTaxonomyCoveragePassed.ToString().ToLowerInvariant(),
+            "geoworldNegativeProofPassed: "
+                + entry.GeoworldNegativeProofPassed.ToString().ToLowerInvariant(),
+            "geoworldQualityGatePassed: "
+                + entry.GeoworldQualityGatePassed.ToString().ToLowerInvariant(),
+            "compactOverviewEntry: " + entry.CompactOverviewEntry,
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);

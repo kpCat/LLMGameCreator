@@ -1,4 +1,5 @@
 using System.Text.Json;
+using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using Xunit;
 
@@ -27,6 +28,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
     {
         var repoRoot = FindRepoRoot();
         var projectRoot = ResolveProjectFolder(repoRoot);
+        await new OfflineGeoworldWorldSourceGraphEvidenceService().BuildAndWriteAsync(repoRoot, projectRoot);
         var service = new VisualWorldStreamPreviewWorkspaceService();
         var first = service.Build(repoRoot);
         var second = service.Build(repoRoot);
@@ -51,8 +53,8 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         using var sourceHealth = JsonDocument.Parse(await File.ReadAllTextAsync(write.SourceHealthScanJsonPath));
 
         var groups = catalog.RootElement.GetProperty("groups").EnumerateArray().ToArray();
-        Assert.True(catalog.RootElement.GetProperty("groupCount").GetInt32() >= 7);
-        Assert.True(catalog.RootElement.GetProperty("svgTextPreviewCount").GetInt32() >= 4);
+        Assert.True(catalog.RootElement.GetProperty("groupCount").GetInt32() >= 8);
+        Assert.True(catalog.RootElement.GetProperty("svgTextPreviewCount").GetInt32() >= 5);
         Assert.Contains(groups, item => item.GetProperty("groupId").GetString() == "microtiles");
         Assert.Contains(groups, item => item.GetProperty("groupId").GetString() == "map_patches");
         Assert.Contains(groups, item => item.GetProperty("groupId").GetString() == "region_composer");
@@ -112,6 +114,27 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
             Assert.True(entry.GetProperty("probeSourceInventoryPassed").GetBoolean());
             Assert.True(entry.GetProperty("alphaRuntimeBootstrapUnchanged").GetBoolean());
         });
+        var geoworldGroup = Assert.Single(
+            groups,
+            item => item.GetProperty("groupId").GetString() == "geoworld");
+        var geoworldEntries = geoworldGroup.GetProperty("entries").EnumerateArray().ToArray();
+        var geoworldSummary = Assert.Single(
+            geoworldEntries,
+            item => item.GetProperty("artifactKind").GetString() == "offline_geoworld_workspace_summary");
+        Assert.Equal(
+            OfflineGeoworldBundleFixtures.SyntheticCityRadiusBundleId,
+            geoworldSummary.GetProperty("offlineBundleId").GetString());
+        Assert.Equal(10, geoworldSummary.GetProperty("geoworldNormalizedFeatureCount").GetInt32());
+        Assert.Equal(9, geoworldSummary.GetProperty("geoworldStreamWindowChunkCount").GetInt32());
+        Assert.Equal(
+            "scheduled_no_network_cache_first",
+            geoworldSummary.GetProperty("boundaryPrefetchStatus").GetString());
+        Assert.True(geoworldSummary.GetProperty("featureTaxonomyCoveragePassed").GetBoolean());
+        Assert.True(geoworldSummary.GetProperty("geoworldNegativeProofPassed").GetBoolean());
+        Assert.True(geoworldSummary.GetProperty("geoworldQualityGatePassed").GetBoolean());
+        Assert.Contains(
+            geoworldEntries,
+            item => item.GetProperty("artifactKind").GetString() == "text_svg_geoworld_stream_window_overview");
 
         var svgEntries = catalog.RootElement.GetProperty("svgEntries").EnumerateArray().ToArray();
         Assert.All(svgEntries, entry =>
@@ -140,9 +163,14 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         AssertProofPassed(proofs, "goal095.alpha_runtime_bootstrap_unchanged");
         AssertProofPassed(proofs, "goal095.forbidden_unity_areas_unchanged");
         AssertProofPassed(proofs, "goal095.metadata_only");
+        AssertProofPassed(proofs, "goal099.boundary_prefetch");
+        AssertProofPassed(proofs, "goal099.negative");
+        AssertProofPassed(proofs, "goal099.visual_projection");
+        AssertProofPassed(proofs, "goal099.quality_gate");
         Assert.True(binding.RootElement.GetProperty("passed").GetBoolean());
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysCacheExports").GetBoolean());
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysUnityHandoff").GetBoolean());
+        Assert.True(binding.RootElement.GetProperty("pageBindDisplaysGeoworld").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("passed").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("goal091StreamWindowsVisible").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("cacheExportGroupPresent").GetBoolean());
@@ -172,6 +200,18 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.True(quality.RootElement.GetProperty("unityPayloadHashesMatchGoal095Ledger").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("goal095FilesDiscoveredByRelativePaths").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noUnityFilesChangedByGoal096").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("geoworldGroupPresent").GetBoolean());
+        Assert.Equal(
+            OfflineGeoworldBundleFixtures.SyntheticCityRadiusBundleId,
+            quality.RootElement.GetProperty("geoworldOfflineBundleId").GetString());
+        Assert.Equal(10, quality.RootElement.GetProperty("geoworldNormalizedFeatureCount").GetInt32());
+        Assert.Equal(9, quality.RootElement.GetProperty("geoworldStreamWindowChunkCount").GetInt32());
+        Assert.True(quality.RootElement.GetProperty("geoworldBoundaryPrefetchPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("geoworldTaxonomyCoveragePassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("geoworldNegativeProofPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("geoworldQualityGatePassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("geoworldOverviewVisible").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("goal099FilesDiscoveredByRelativePaths").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noAbsolutePaths").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noBinaryOrRasterMediaAdded").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noRuntimeUnityProviderSchemaProjectDependencyChanges").GetBoolean());
@@ -204,6 +244,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.Contains("cacheExportRecordCount: 93", report);
         Assert.Contains("unityPayloadFileCount: 5", report);
         Assert.Contains("noUnityFilesChangedByGoal096: true", report);
+        Assert.Contains("geoworldOfflineBundleId: " + OfflineGeoworldBundleFixtures.SyntheticCityRadiusBundleId, report);
+        Assert.Contains("geoworldBoundaryPrefetchPassed: true", report);
+        Assert.Contains("goal099FilesDiscoveredByRelativePaths: true", report);
         Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
     }
 

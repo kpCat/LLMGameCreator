@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "offline_geoworld_stream_window_plan_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "request": {
+    "requestId": "stream_window/synthetic_city_radius",
+    "centerChunkKey": "z14/x4210/y6142",
+    "radiusChunks": 1,
+    "boundaryPrefetchBandChunks": 1,
+    "runtimeTravelModeRequested": true,
+    "boundaryPrefetchEnabled": true
+  },
+  "requiredChunkKeys": [
+    "z14/x4209/y6141",
+    "z14/x4209/y6142",
+    "z14/x4209/y6143",
+    "z14/x4210/y6141",
+    "z14/x4210/y6142",
+    "z14/x4210/y6143",
+    "z14/x4211/y6141",
+    "z14/x4211/y6142",
+    "z14/x4211/y6143"
+  ],
+  "boundaryPrefetchChunkKeys": [
+    "z14/x4208/y6140",
+    "z14/x4208/y6141",
+    "z14/x4208/y6142",
+    "z14/x4208/y6143",
+    "z14/x4208/y6144",
+    "z14/x4209/y6140",
+    "z14/x4209/y6144",
+    "z14/x4210/y6140",
+    "z14/x4210/y6144",
+    "z14/x4211/y6140",
+    "z14/x4211/y6144",
+    "z14/x4212/y6140",
+    "z14/x4212/y6141",
+    "z14/x4212/y6142",
+    "z14/x4212/y6143",
+    "z14/x4212/y6144"
+  ],
+  "cacheStates": [
+    {
+      "chunkKey": "z14/x4208/y6140",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4208/y6141",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4208/y6142",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4208/y6143",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4208/y6144",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4209/y6140",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4209/y6141",
+      "state": "loaded_from_offline_bundle",
+      "loadedFromOfflineBundle": true,
+      "scheduledNoNetwork": false
+    },
+    {
+      "chunkKey": "z14/x4209/y6142",
+      "state": "loaded_from_offline_bundle",
+      "loadedFromOfflineBundle": true,
+      "scheduledNoNetwork": false
+    },
+    {
+      "chunkKey": "z14/x4209/y6143",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4209/y6144",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4210/y6140",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4210/y6141",
+      "state": "loaded_from_offline_bundle",
+      "loadedFromOfflineBundle": true,
+      "scheduledNoNetwork": false
+    },
+    {
+      "chunkKey": "z14/x4210/y6142",
+      "state": "loaded_from_offline_bundle",
+      "loadedFromOfflineBundle": true,
+      "scheduledNoNetwork": false
+    },
+    {
+      "chunkKey": "z14/x4210/y6143",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4210/y6144",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4211/y6140",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4211/y6141",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4211/y6142",
+      "state": "loaded_from_offline_bundle",
+      "loadedFromOfflineBundle": true,
+      "scheduledNoNetwork": false
+    },
+    {
+      "chunkKey": "z14/x4211/y6143",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4211/y6144",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4212/y6140",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4212/y6141",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4212/y6142",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4212/y6143",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    },
+    {
+      "chunkKey": "z14/x4212/y6144",
+      "state": "scheduled_for_offline_cache_prefetch",
+      "loadedFromOfflineBundle": false,
+      "scheduledNoNetwork": true
+    }
+  ],
+  "missingScheduledChunkKeys": [
+    "z14/x4208/y6140",
+    "z14/x4208/y6141",
+    "z14/x4208/y6142",
+    "z14/x4208/y6143",
+    "z14/x4208/y6144",
+    "z14/x4209/y6140",
+    "z14/x4209/y6143",
+    "z14/x4209/y6144",
+    "z14/x4210/y6140",
+    "z14/x4210/y6143",
+    "z14/x4210/y6144",
+    "z14/x4211/y6140",
+    "z14/x4211/y6141",
+    "z14/x4211/y6143",
+    "z14/x4211/y6144",
+    "z14/x4212/y6140",
+    "z14/x4212/y6141",
+    "z14/x4212/y6142",
+    "z14/x4212/y6143",
+    "z14/x4212/y6144"
+  ],
+  "networkFetchAttempted": false,
+  "boundaryPrefetchStatus": "scheduled_no_network_cache_first",
+  "cacheStateSummary": "loaded=5; scheduledNoNetwork=20"
+}

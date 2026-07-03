@@ -43,6 +43,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains("UniqueChunkKeyCount", StringComparison.Ordinal)
             && pageText.Contains("SimulatedUnityReadProofPassed", StringComparison.Ordinal)
             && pageText.Contains("AlphaRuntimeBootstrapUnchanged", StringComparison.Ordinal);
+        var bindDisplaysGeoworld = pageText.Contains("OfflineBundleId", StringComparison.Ordinal)
+            && pageText.Contains("GeoworldNormalizedFeatureCount", StringComparison.Ordinal)
+            && pageText.Contains("GeoworldWorldSourceGraphChunkCount", StringComparison.Ordinal)
+            && pageText.Contains("BoundaryPrefetchStatus", StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -61,6 +65,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal096.winforms.unity_handoff_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysGeoworld,
+            "goal099.winforms.geoworld_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -74,6 +83,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysGroupsEntriesProofs = bindDisplays,
             PageBindDisplaysCacheExports = bindDisplaysCacheExports,
             PageBindDisplaysUnityHandoff = bindDisplaysUnityHandoff,
+            PageBindDisplaysGeoworld = bindDisplaysGeoworld,
             Diagnostics = diagnostics
         };
     }

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "offline_geoworld_visual_projection_summary_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "passed": true,
+  "noRasterImages": true,
+  "noUnityOutput": true,
+  "overviewSvgRelativePath": "overviews/synthetic_city_radius_stream_window.svg",
+  "compactOverviewEntry": "bundle=synthetic_city_radius_offline_bundle; features=10; graphChunks=5; streamChunks=9",
+  "chunks": [
+    {
+      "chunkKey": "z14/x4209/y6141",
+      "featureCount": 1,
+      "hasBuildings": false,
+      "hasRoads": false,
+      "hasWater": false,
+      "hasPoi": false,
+      "hasBridge": false,
+      "hasBarrier": false,
+      "hasVegetation": false
+    },
+    {
+      "chunkKey": "z14/x4209/y6142",
+      "featureCount": 2,
+      "hasBuildings": false,
+      "hasRoads": false,
+      "hasWater": false,
+      "hasPoi": false,
+      "hasBridge": false,
+      "hasBarrier": true,
+      "hasVegetation": false
+    },
+    {
+      "chunkKey": "z14/x4210/y6141",
+      "featureCount": 3,
+      "hasBuildings": false,
+      "hasRoads": false,
+      "hasWater": true,
+      "hasPoi": false,
+      "hasBridge": false,
+      "hasBarrier": false,
+      "hasVegetation": false
+    },
+    {
+      "chunkKey": "z14/x4210/y6142",
+      "featureCount": 10,
+      "hasBuildings": true,
+      "hasRoads": true,
+      "hasWater": true,
+      "hasPoi": true,
+      "hasBridge": true,
+      "hasBarrier": true,
+      "hasVegetation": true
+    },
+    {
+      "chunkKey": "z14/x4211/y6142",
+      "featureCount": 2,
+      "hasBuildings": false,
+      "hasRoads": true,
+      "hasWater": false,
+      "hasPoi": false,
+      "hasBridge": true,
+      "hasBarrier": false,
+      "hasVegetation": false
+    }
+  ]
+}

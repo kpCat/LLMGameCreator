@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T20:04:16Z",
+    "updated_at_utc":  "2026-07-03T21:02:21Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 098 geoworld source adapter streaming contract produced for review",
-    "gate_status":  "geoworld_source_adapter_streaming_contract_verification",
+    "current_phase_title":  "Goal 099 offline geoworld WorldSourceGraph streaming produced for review",
+    "gate_status":  "offline_geoworld_worldsourcegraph_streaming_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 098 Geoworld Source Adapter Streaming Contract is produced for review: geoworld_source_adapter_streaming_contract_verification required, accepted=false. It adds a BCL-only Application-side geoworld source adapter, geotile/profile/chunk address, cache/provenance/license, normalized feature taxonomy, streaming window and negative-proof contract foundation using only LLMGameCreator LFZ/geoworld docs. Evidence is under .llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/. Goal 098 changes no LFZ archive/source, Runtime, Unity, public schema, providers/LLM/RAG/media execution, Lua, generator-library, project files, dependencies, binary/raster media, live network fetching, tile scraping or raw geodata dumps. Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 098 geoworld source adapter streaming contract evidence. Goal 098 is Application-side contract/validation/evidence work only; it represents future runtime streaming as contracts, not implementation. Goal 098 remains accepted=false until explicit user review accepts it, and Goal 097 remains accepted=false.",
-    "recommended_next_decision":  "Review Goal 098 geoworld source adapter streaming contract evidence and only mark geoworld_source_adapter_streaming_contract_verification passed after explicit user acceptance; do not start live geodata ingestion, Runtime/Unity streaming consumers, provider/network adapters, public schema, Lua, generator-library or media work from this contract handoff.",
+    "active_manual_gate":  "Goal 099 Offline Geoworld WorldSourceGraph Streaming is produced for review: offline_geoworld_worldsourcegraph_streaming_verification required, accepted=false. It adds a BCL-only Application-side synthetic offline geoworld bundle to normalized feature to WorldSourceGraph to stream-window boundary-prefetch pipeline, compact text-SVG visual projection and existing Visual World Stream Preview Workspace integration. Evidence is under .llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/. Goal 099 changes no LFZ archive/source, live geodata ingestion, network/provider adapter, public tile scraping, Runtime, Unity, public schema, Lua, generator-library, project files, dependencies, binary/raster media, raw geodata dump or prompt-output work. Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 099 offline geoworld WorldSourceGraph streaming evidence. Goal 099 is Application-side contract/validation/evidence work only; it represents offline synthetic bundle streaming and workspace review, not live geodata/provider/runtime implementation. Goal 099 remains accepted=false until explicit user review accepts it, and Goal 098 and Goal 097 remain accepted=false.",
+    "recommended_next_decision":  "Review Goal 099 offline geoworld WorldSourceGraph streaming evidence and only mark offline_geoworld_worldsourcegraph_streaming_verification passed after explicit user acceptance; do not start live geodata ingestion, provider/network adapters, Runtime/Unity consumers, public schema, Lua, generator-library or media work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "offline_geoworld_worldsourcegraph_streaming_verification",
                                                         "geoworld_source_adapter_streaming_contract_verification",
                                                         "final_roadmap_rebaseline_dream_scope_productivity_verification",
                                                         "unity_handoff_inspector_probe_readiness_verification",
@@ -134,9 +135,10 @@
                            "goal_093_manual_gate":  "visual_chunk_cache_export_contract_verification",
                            "goal_094_manual_gate":  "visual_chunk_cache_export_inspector_verification",
                            "goal_095_manual_gate":  "visual_chunk_cache_unity_streamingassets_handoff_verification",
-                           "goal_096_manual_gate":  "unity_handoff_inspector_probe_readiness_verification",
-                            "goal_097_manual_gate":  "final_roadmap_rebaseline_dream_scope_productivity_verification",
-                            "goal_098_manual_gate":  "geoworld_source_adapter_streaming_contract_verification"
+                            "goal_096_manual_gate":  "unity_handoff_inspector_probe_readiness_verification",
+                             "goal_097_manual_gate":  "final_roadmap_rebaseline_dream_scope_productivity_verification",
+                             "goal_098_manual_gate":  "geoworld_source_adapter_streaming_contract_verification",
+                             "goal_099_manual_gate":  "offline_geoworld_worldsourcegraph_streaming_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -427,6 +429,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "offline_geoworld_worldsourcegraph_streaming_verification",
+                                          "goal_099_offline_geoworld_worldsourcegraph_streaming",
+                                          "manual_review_goal_099_offline_geoworld_worldsourcegraph_streaming",
                                           "geoworld_source_adapter_streaming_contract_verification",
                                           "goal_098_geoworld_source_adapter_streaming_contract",
                                           "manual_review_goal_098_geoworld_source_adapter_streaming_contract",
@@ -504,10 +509,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "geoworld_source_adapter_streaming_contract_verification",
-    "recommended_next_work_item_title":  "Review Goal 098 geoworld source adapter streaming contract",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-098-geoworld-source-adapter-streaming-contract/GOAL.md",
+    "recommended_next_work_item":  "offline_geoworld_worldsourcegraph_streaming_verification",
+    "recommended_next_work_item_title":  "Review Goal 099 offline geoworld WorldSourceGraph streaming",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal 099 offline geoworld WorldSourceGraph streaming evidence",
+                                              "Keep Goal 099 accepted=false until user review accepts it",
+                                              "Use Goal 099 offline synthetic bundle, normalized feature, WorldSourceGraph, stream-window boundary-prefetch and workspace integration only as future geoworld review foundation; do not start live geodata ingestion, Runtime/Unity consumers, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
                                               "Review Goal 098 geoworld source adapter streaming contract evidence",
                                               "Keep Goal 098 accepted=false until user review accepts it",
                                               "Use Goal 098 contracts only as a future geoworld adapter/streaming foundation; do not start live geodata ingestion, Runtime/Unity consumers, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
@@ -557,6 +565,7 @@
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
                                                   "docs/VALIDATION_PIPELINE.md",
+                                                  "docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/GOAL.md",
                                                   "docs/agent-tasks/goal-098-geoworld-source-adapter-streaming-contract/GOAL.md",
                                                   "docs/context/LFZ_ARCHIVE_ANALYSIS_MANIFEST.md",
                                                   "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
@@ -2320,5 +2329,21 @@
                                                                                             "Goal 098 adds no live network fetching, map tile scraping, raw geodata dumps, Runtime, Unity, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media or prompt dump."
                                                                                         ],
                                                                     "next_action":  "review_goal_098_geoworld_source_adapter_streaming_contract"
+                                                                },
+    "offline_geoworld_worldsourcegraph_streaming_verification":  {
+                                                                    "status":  "produced_for_review",
+                                                                    "accepted":  false,
+                                                                    "evidence_source":  "goal_099_offline_geoworld_worldsourcegraph_streaming",
+                                                                    "observed_result":  [
+                                                                                            "Goal 099 produces offline geoworld WorldSourceGraph streaming evidence under .llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming with accepted=false.",
+                                                                                            "implementationStatus=GREEN, offlineBundleId=synthetic_city_radius_offline_bundle, normalizedFeatureCount=10, worldSourceGraphChunkCount=5, streamWindowChunkCount=9, boundaryPrefetchPassed=true, negativeProofPassed=true, workspaceBindingPassed=true and qualityGatePassed=true.",
+                                                                                            "The BCL-only Application seam lives under src/LLMGameCreator.Application/Design/OfflineGeoworldWorldSourceGraph/ and builds a synthetic metadata-only offline bundle, normalized geofeatures, immutable-base WorldSourceGraph chunks and separate zero gameplay deltas.",
+                                                                                            "The stream-window scheduler loads a 3x3 required chunk window, schedules the surrounding boundary-prefetch band as cache-first/no-network and records cross-chunk references for road, water and bridge features.",
+                                                                                            "The compact visual projection writes text SVG only and is surfaced by the existing Visual World Stream Preview Workspace geoworld group, proof list, quality gate and WinForms details fields.",
+                                                                                            "The negative proof rejects raw OSM tags direct-to-gameplay, missing license/provenance, runtime online fetch, public tile scraping, full-area/raw geodata dumps, absolute paths, LFZ copied-code markers, unknown feature kind, missing cross-chunk reference, disabled boundary prefetch, prompt source-of-truth, real geodata dump markers, missing safe fallback and raster/Unity projection output.",
+                                                                                            "Goal 099 consumes Goal 098 accepted=false lineage artifacts and LFZ/geoworld docs; it reads no LFZ archive and copies no LFZ source.",
+                                                                                            "Goal 099 adds no live network fetching, map tile scraping, raw geodata dumps, Runtime, Unity, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media or prompt dump."
+                                                                                        ],
+                                                                    "next_action":  "review_goal_099_offline_geoworld_worldsourcegraph_streaming"
                                                                 }
 }

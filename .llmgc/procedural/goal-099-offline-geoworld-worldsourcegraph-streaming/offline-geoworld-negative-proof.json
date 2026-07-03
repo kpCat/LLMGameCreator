@@ -1,0 +1,260 @@
+{
+  "schemaVersion": "offline_geoworld_negative_proof_v1",
+  "goalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+  "passed": true,
+  "scenarioCount": 14,
+  "rejectedCount": 14,
+  "matchedExpectationCount": 14,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_paths",
+      "causalMutation": "absolute path in source lineage",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.path.absolute_or_unsafe",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Source lineage paths must be repository-relative."
+        }
+      ]
+    },
+    {
+      "scenarioId": "boundary_crossing_without_reference",
+      "causalMutation": "road/water crossing chunk boundary without cross-chunk reference",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.cross_chunk_reference.missing",
+          "target": "normalized/synthetic_city_radius_offline_bundle/bridge/bridge_canal_crossing",
+          "message": "Road/water/bridge boundary-crossing feature requires cross-chunk reference."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.cross_chunk_reference.missing",
+          "target": "normalized/synthetic_city_radius_offline_bundle/road/road_segment_market_axis",
+          "message": "Road/water/bridge boundary-crossing feature requires cross-chunk reference."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.cross_chunk_reference.missing",
+          "target": "normalized/synthetic_city_radius_offline_bundle/water/water_body_linear_canal",
+          "message": "Road/water/bridge boundary-crossing feature requires cross-chunk reference."
+        }
+      ]
+    },
+    {
+      "scenarioId": "boundary_prefetch_disabled_runtime_travel",
+      "causalMutation": "boundary prefetch disabled while runtime travel mode requested",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.boundary_prefetch.disabled",
+          "target": "stream_window/synthetic_city_radius",
+          "message": "Runtime travel mode requires boundary prefetch scheduling."
+        }
+      ]
+    },
+    {
+      "scenarioId": "full_area_raw_dump",
+      "causalMutation": "full area raw dump present",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.raw_geodata_dump.forbidden",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Raw OSM/full-area/real geodata dumps are forbidden."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.worldsourcegraph.contract_boundary",
+          "target": "world_source_graph/synthetic_city_radius_offline_bundle",
+          "message": "Graph must keep immutable base data, empty separate deltas and no raw dump."
+        }
+      ]
+    },
+    {
+      "scenarioId": "lfz_copied_code_marker",
+      "causalMutation": "LFZ copied-code marker present",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.lfz_copied_code.marker",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "LFZ copied-code markers are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_license_provenance",
+      "causalMutation": "license and provenance missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.license_or_provenance.missing",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "License and provenance summary are required."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.path.absolute_or_unsafe",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Source lineage paths must be repository-relative."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_source_of_truth",
+      "causalMutation": "prompt text as source of truth",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.prompt.source_of_truth",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Prompt text must not be treated as source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_tile_scraping",
+      "causalMutation": "public tile scraping attempted",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.public_tile_scraping.forbidden",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Public tile scraping is forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raster_or_unity_projection_output",
+      "causalMutation": "projection attempts raster or Unity output",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.visual_projection.output_boundary",
+          "target": "projection",
+          "message": "Projection must remain compact text/SVG summary only."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rating_metadata_without_safe_fallback",
+      "causalMutation": "adult/rating metadata without safe fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.rating.safe_fallback_missing",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Adult/rating metadata requires a safe fallback."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_osm_tags_direct_to_gameplay",
+      "causalMutation": "raw OSM-like tags consumed directly by gameplay",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.normalized_feature.raw_tag_leak",
+          "target": "normalized/synthetic_city_radius_offline_bundle/building/building_footprint_residential_block",
+          "message": "Normalized features must be gameplay-safe and raw-tag free."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.raw_tags.gameplay_leak",
+          "target": "raw/building_footprint_residential_block",
+          "message": "Raw tags must be summarized and must not be consumed by gameplay."
+        }
+      ]
+    },
+    {
+      "scenarioId": "real_geodata_dump_marker",
+      "causalMutation": "real geodata dump marker present",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.bundle.synthetic_metadata_only",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Offline geoworld bundle must be synthetic metadata only."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.raw_geodata_dump.forbidden",
+          "target": "synthetic_city_radius_offline_bundle",
+          "message": "Raw OSM/full-area/real geodata dumps are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_online_fetch_attempted",
+      "causalMutation": "runtime online fetch attempted",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.runtime_online_fetch.forbidden",
+          "target": "stream_window/synthetic_city_radius",
+          "message": "Stream window must not perform online fetch."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_feature_kind",
+      "causalMutation": "unknown feature kind",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal099.feature_kind.unknown",
+          "target": "normalized/synthetic_city_radius_offline_bundle/unknown/building_footprint_residential_block",
+          "message": "Normalized feature kind must be known."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.feature_kind.unknown",
+          "target": "raw/building_footprint_residential_block",
+          "message": "Raw descriptor must map to a known feature kind."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.normalized_feature.raw_tag_leak",
+          "target": "normalized/synthetic_city_radius_offline_bundle/unknown/building_footprint_residential_block",
+          "message": "Normalized features must be gameplay-safe and raw-tag free."
+        },
+        {
+          "severity": "error",
+          "code": "goal099.taxonomy.kind_missing",
+          "target": "building",
+          "message": "Required normalized feature kind is missing."
+        }
+      ]
+    }
+  ]
+}
