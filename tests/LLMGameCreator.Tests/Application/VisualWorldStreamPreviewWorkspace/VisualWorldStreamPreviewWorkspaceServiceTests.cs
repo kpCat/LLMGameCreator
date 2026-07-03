@@ -1,4 +1,5 @@
 using System.Runtime.ExceptionServices;
+using System.Text;
 using System.Windows.Forms;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.WinForms.Pages;
@@ -21,8 +22,8 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("region_composer", groupIds);
         Assert.Contains("world_profiles", groupIds);
         Assert.Contains("chunk_stream_windows", groupIds);
-        Assert.True(result.Catalog.EntryCount >= 25);
-        Assert.True(result.Catalog.SvgTextPreviewCount >= 4);
+        Assert.True(result.Catalog.EntryCount >= 54);
+        Assert.True(result.Catalog.SvgTextPreviewCount >= 38);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
 
@@ -83,6 +84,61 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.All(
             streamGroup.Entries.Where(entry => entry.ArtifactKind == "text_svg_chunk_stream_window_overview"),
             entry => Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
+    }
+
+    [Fact]
+    public void WorkspaceQualityGateRecordsSourceHealthBackstop()
+    {
+        var result = Build();
+
+        Assert.True(result.QualityGateScan.SourceHealthPassed);
+        Assert.True(result.QualityGateScan.ScannedCSharpFileCount >= 5);
+        Assert.Equal(0, result.QualityGateScan.FilesOver1000LogicalLinesCount);
+        Assert.Equal(0, result.QualityGateScan.FilesOver700LogicalLinesInGoal092NamespaceCount);
+        Assert.Equal(0, result.QualityGateScan.ZeroLfSourceCount);
+        Assert.Equal(0, result.QualityGateScan.CrOnlySourceCount);
+        Assert.Equal(0, result.QualityGateScan.RawPhysicalOneLineSourceCount);
+        Assert.Equal(0, result.QualityGateScan.MinifiedSourceCount);
+        Assert.True(result.QualityGateScan.WorkspaceServiceLogicalLineCount < 700);
+    }
+
+    [Fact]
+    public void SourceHealthScannerRejectsSyntheticOver1000LineSource()
+    {
+        var lines = Enumerable.Range(0, 1002)
+            .Select(index => "public sealed class Synthetic" + index + " { }");
+        var text = "namespace Synthetic;" + Environment.NewLine + string.Join(Environment.NewLine, lines);
+        var bytes = Encoding.UTF8.GetBytes(text);
+
+        var scan = VisualWorldStreamPreviewSourceHealthScanner.AnalyzeSourceBytes("synthetic/Oversized.cs", bytes);
+
+        Assert.True(scan.FileOver1000LogicalLines);
+        Assert.True(VisualWorldStreamPreviewSourceHealthScanner.RejectsOver1000LogicalLines(bytes));
+    }
+
+    [Fact]
+    public void SourceHealthScannerRejectsZeroLfCrOnlyAndMinifiedSamples()
+    {
+        Assert.True(VisualWorldStreamPreviewSourceHealthScanner.RejectsSuspiciousRawSourceBytes(
+            Encoding.UTF8.GetBytes("public sealed class Broken { public string Value => \""
+                                   + new string('x', 520)
+                                   + "\"; }")));
+        Assert.True(VisualWorldStreamPreviewSourceHealthScanner.RejectsSuspiciousRawSourceBytes(
+            Encoding.UTF8.GetBytes("public sealed class Broken\r{\r}\r")));
+        Assert.True(VisualWorldStreamPreviewSourceHealthScanner.RejectsSuspiciousRawSourceBytes(
+            Encoding.UTF8.GetBytes("namespace Broken; public sealed class OneLine { }")));
+    }
+
+    [Fact]
+    public void CurrentGoal092NamespaceHasNoFilesOver1000LogicalLines()
+    {
+        var scan = VisualWorldStreamPreviewSourceHealthScanner.ScanGoal092Namespace(ProjectRoot());
+
+        Assert.True(scan.Passed);
+        Assert.Equal(0, scan.FilesOver1000LogicalLinesCount);
+        Assert.Equal(0, scan.FilesOver700LogicalLinesInGoal092NamespaceCount);
+        Assert.All(scan.Files, file => Assert.True(file.LogicalLineCount <= 700, file.RelativePath));
+        Assert.True(scan.WorkspaceServiceLogicalLineCount < 700);
     }
 
     [Fact]

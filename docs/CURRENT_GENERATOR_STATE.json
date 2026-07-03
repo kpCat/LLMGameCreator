@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T15:43:08Z",
+    "updated_at_utc":  "2026-07-03T16:17:54Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 092 visual world stream preview workspace produced for review",
-    "gate_status":  "visual_world_stream_preview_workspace_verification",
+    "current_phase_title":  "Goal 092A visual world preview service split source health produced for review",
+    "gate_status":  "visual_world_preview_service_split_source_health_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 092 Visual World Stream Preview Workspace is produced for review: visual_world_stream_preview_workspace_verification required, accepted=false. It adds a BCL-only Application workspace catalog and separate WinForms preview page over real Goal 086-091 disk artifacts, exposing five artifact groups, 38 text SVG preview entries, seven Goal 091 proof statuses and binding inventory evidence. Goal 091 and Goal 090 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 092 visual world stream preview workspace evidence. Goal 092 adds Application-side review workspace models/service/evidence, a separate WinForms page and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 092 remains accepted=false until explicit user review accepts it.",
-    "recommended_next_decision":  "Review Goal 092 visual world stream preview workspace evidence and only mark visual_world_stream_preview_workspace_verification passed after explicit user acceptance; do not mark Goal 091, Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 092A Visual World Preview Service Split Source Health is produced for review: visual_world_preview_service_split_source_health_verification required, accepted=false. It splits the oversized Goal 092 Application service, records before/after source-health evidence, keeps Goal 092 behavior equivalent and strengthens the Goal 092 quality gate with source-health metrics. Goal 092, Goal 091 and Goal 090 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 092A visual world preview service split source-health evidence. Goal 092A adds Application-side source-health scanner/evidence and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 092A remains accepted=false until explicit user review accepts it, and Goal 092 remains accepted=false.",
+    "recommended_next_decision":  "Review Goal 092A visual world preview service split source-health evidence and only mark visual_world_preview_service_split_source_health_verification passed after explicit user acceptance; do not mark Goal 092, Goal 091, Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "visual_world_preview_service_split_source_health_verification",
                                                         "visual_world_stream_preview_workspace_verification",
                                                         "deterministic_visual_chunk_stream_window_verification",
                                                         "parameterized_visual_world_profiles_verification",
@@ -122,7 +123,8 @@
                            "goal_089_manual_gate":  "tiered_validation_pipeline_verification",
                            "goal_090_manual_gate":  "parameterized_visual_world_profiles_verification",
                            "goal_091_manual_gate":  "deterministic_visual_chunk_stream_window_verification",
-                           "goal_092_manual_gate":  "visual_world_stream_preview_workspace_verification"
+                           "goal_092_manual_gate":  "visual_world_stream_preview_workspace_verification",
+                           "goal_092a_manual_gate":  "visual_world_preview_service_split_source_health_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -413,6 +415,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "visual_world_preview_service_split_source_health_verification",
+                                          "goal_092a_visual_world_preview_service_split_source_health",
+                                          "manual_review_goal_092a_visual_world_preview_service_split_source_health",
                                           "visual_world_stream_preview_workspace_verification",
                                           "goal_092_visual_world_stream_preview_workspace",
                                           "manual_review_goal_092_visual_world_stream_preview_workspace",
@@ -469,12 +474,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "visual_world_stream_preview_workspace_verification",
-    "recommended_next_work_item_title":  "Review Goal 092 visual world stream preview workspace",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-092-visual-world-stream-preview-workspace/GOAL.md",
+    "recommended_next_work_item":  "visual_world_preview_service_split_source_health_verification",
+    "recommended_next_work_item_title":  "Review Goal 092A visual world preview service split source health",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-092a-visual-world-preview-service-split-source-health/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 092 visual world stream preview workspace evidence",
-                                              "Keep Goal 092 accepted=false until user review accepts it",
+                                              "Review Goal 092A visual world preview service split source-health evidence",
+                                              "Keep Goal 092A accepted=false until user review accepts it",
+                                              "Keep Goal 092 accepted=false until its separate user review accepts it",
                                               "Use the Goal 092 Application/WinForms preview workspace to inspect real Goal 086-091 deterministic visual artifacts before future renderer, Runtime, Unity, provider, media, schema, Lua or generator-library work",
                                               "Review Goal 091 deterministic visual chunk stream window evidence",
                                               "Keep Goal 091 accepted=false until user review accepts it",
@@ -2138,5 +2144,21 @@
                                                                                        "Acceptance/rejection/promotion workflow, final renderer, atlas, Runtime and Unity consumers remain separate future work."
                                                                                    ],
                                                                "next_action":  "review_goal_092_visual_world_stream_preview_workspace"
-                                                           }
+                                                           },
+    "visual_world_preview_service_split_source_health_verification":  {
+                                                                         "status":  "produced_for_review",
+                                                                         "accepted":  false,
+                                                                         "evidence_source":  "goal_092a_visual_world_preview_service_split_source_health",
+                                                                         "observed_result":  [
+                                                                                                 "Goal 092A produces visual world preview service split source-health evidence under .llmgc/procedural/goal-092a-visual-world-preview-service-split-source-health with accepted=false.",
+                                                                                                 "implementationStatus=GREEN, oversized service before repair detected with VisualWorldStreamPreviewWorkspaceService.cs logicalLineCount=1295 and filesOver1000LogicalLinesCount=1.",
+                                                                                                 "After repair, the Goal 092 namespace has scannedCSharpFileCount=10, maxLogicalLineCount=442, filesOver1000LogicalLinesCount=0, filesOver700LogicalLinesInGoal092NamespaceCount=0, zeroLfSourceCount=0, crOnlySourceCount=0, rawPhysicalOneLineSourceCount=0 and minifiedSourceCount=0.",
+                                                                                                 "VisualWorldStreamPreviewWorkspaceService.cs now keeps the public service seam and orchestration role at logicalLineCount=145, while artifact discovery, catalog building, proof loading, evidence writing, WinForms binding scan, utilities and source-health scan live in smaller BCL-only files.",
+                                                                                                 "Goal 092 behavior equivalence remains passed: five artifact groups, 54 entries, 38 text SVG previews, four Goal 091 stream-window entries, seven proof statuses, passed WinForms binding, no absolute paths and no binary/raster media.",
+                                                                                                 "Goal 092 quality gate now records source-health metrics and fails the Goal092 namespace if any C# file exceeds 1000 logical lines, with the stricter 700-line target currently met.",
+                                                                                                 "Goal 092A adds no Runtime, Unity, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, generated image asset, real adult fixture or explicit prompt dump.",
+                                                                                                 "Goal 092, Goal 091 and Goal 090 remain produced for review with accepted=false; final renderer, atlas, Runtime and Unity consumers remain separate future work."
+                                                                                             ],
+                                                                         "next_action":  "review_goal_092a_visual_world_preview_service_split_source_health"
+                                                                     }
 }

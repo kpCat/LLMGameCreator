@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "visual_world_preview_service_split_behavior_equivalence_v1",
+  "goalId": "goal_092a_visual_world_preview_service_split_source_health",
+  "passed": true,
+  "artifactGroupCount": 5,
+  "entryCount": 54,
+  "svgTextPreviewCount": 38,
+  "goal091StreamWindowEntryCount": 4,
+  "proofStatusCount": 7,
+  "requiredArtifactGroupsPresent": true,
+  "goal091StreamWindowsVisible": true,
+  "proofStatusPassed": true,
+  "winFormsBindingPassed": true,
+  "noAbsolutePaths": true,
+  "noBinaryOrRasterMediaAdded": true
+}

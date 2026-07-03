@@ -109,6 +109,70 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Fact]
+    public async Task Goal092AVisualWorldPreviewServiceSplitSourceHealthProductSmoke()
+    {
+        var repoRoot = FindRepoRoot();
+        var service = new VisualWorldPreviewServiceSplitSourceHealthEvidenceService();
+        var write = await service.BuildAndWriteAsync(repoRoot);
+
+        Assert.True(File.Exists(write.ReportMarkdownPath));
+        Assert.True(File.Exists(write.SourceHealthBeforeAfterJsonPath));
+        Assert.True(File.Exists(write.RefactorFileInventoryJsonPath));
+        Assert.True(File.Exists(write.BehaviorEquivalenceProofJsonPath));
+        Assert.True(File.Exists(write.QualityGateScanJsonPath));
+
+        using var beforeAfter = JsonDocument.Parse(
+            await File.ReadAllTextAsync(write.SourceHealthBeforeAfterJsonPath));
+        using var inventory = JsonDocument.Parse(
+            await File.ReadAllTextAsync(write.RefactorFileInventoryJsonPath));
+        using var behavior = JsonDocument.Parse(
+            await File.ReadAllTextAsync(write.BehaviorEquivalenceProofJsonPath));
+        using var quality = JsonDocument.Parse(
+            await File.ReadAllTextAsync(write.QualityGateScanJsonPath));
+
+        Assert.True(beforeAfter.RootElement.GetProperty("passed").GetBoolean());
+        Assert.False(beforeAfter.RootElement.GetProperty("accepted").GetBoolean());
+        Assert.True(beforeAfter.RootElement
+            .GetProperty("before")
+            .GetProperty("oversizedWorkspaceServiceDetected")
+            .GetBoolean());
+        Assert.True(beforeAfter.RootElement
+            .GetProperty("before")
+            .GetProperty("workspaceServiceLogicalLineCount")
+            .GetInt32() > 1000);
+        var after = beforeAfter.RootElement.GetProperty("after");
+        Assert.Equal(0, after.GetProperty("filesOver1000LogicalLinesCount").GetInt32());
+        Assert.Equal(0, after.GetProperty("filesOver700LogicalLinesInGoal092NamespaceCount").GetInt32());
+        Assert.Equal(0, after.GetProperty("zeroLfSourceCount").GetInt32());
+        Assert.Equal(0, after.GetProperty("crOnlySourceCount").GetInt32());
+        Assert.Equal(0, after.GetProperty("rawPhysicalOneLineSourceCount").GetInt32());
+        Assert.True(after.GetProperty("workspaceServiceLogicalLineCount").GetInt32() < 700);
+
+        Assert.True(inventory.RootElement.GetProperty("passed").GetBoolean());
+        Assert.True(inventory.RootElement.GetProperty("fileCount").GetInt32() >= 8);
+        Assert.True(behavior.RootElement.GetProperty("passed").GetBoolean());
+        Assert.True(behavior.RootElement.GetProperty("artifactGroupCount").GetInt32() >= 5);
+        Assert.True(behavior.RootElement.GetProperty("entryCount").GetInt32() >= 54);
+        Assert.True(behavior.RootElement.GetProperty("svgTextPreviewCount").GetInt32() >= 38);
+        Assert.True(quality.RootElement.GetProperty("passed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("afterNoFilesOver1000LogicalLines").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("afterNoFilesOver700LogicalLines").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("behaviorEquivalencePassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("noForbiddenAreasRequired").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("noBinaryMediaArtifacts").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("noPromptDumps").GetBoolean());
+
+        var mediaFiles = Directory.EnumerateFiles(write.OutputDirectoryPath, "*", SearchOption.AllDirectories)
+            .Where(path => BinaryOrRasterMediaExtensions.Contains(Path.GetExtension(path)))
+            .ToList();
+        Assert.Empty(mediaFiles);
+
+        var report = await File.ReadAllTextAsync(write.ReportMarkdownPath);
+        Assert.Contains("visual_world_preview_service_split_source_health_verification required", report);
+        Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static void AssertProofPassed(JsonElement[] proofs, string proofId)
     {
         var proof = Assert.Single(proofs, item => item.GetProperty("proofId").GetString() == proofId);

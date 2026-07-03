@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "visual_world_preview_service_split_refactor_inventory_v1",
+  "goalId": "goal_092a_visual_world_preview_service_split_source_health",
+  "passed": true,
+  "fileCount": 10,
+  "maxLogicalLineCount": 442,
+  "workspaceServiceLogicalLineCount": 145,
+  "files": [
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldPreviewServiceSplitSourceHealthEvidenceService.cs",
+      "responsibility": "Goal092A evidence writer",
+      "logicalLineCount": 435,
+      "maxPhysicalLineLength": 224
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewArtifactDiscovery.cs",
+      "responsibility": "Goal086-091 artifact discovery",
+      "logicalLineCount": 304,
+      "maxPhysicalLineLength": 121
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewCatalogBuilder.cs",
+      "responsibility": "catalog entry construction",
+      "logicalLineCount": 145,
+      "maxPhysicalLineLength": 103
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewEvidenceWriter.cs",
+      "responsibility": "Goal092 evidence writer and quality gate",
+      "logicalLineCount": 287,
+      "maxPhysicalLineLength": 336
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewProofStatusLoader.cs",
+      "responsibility": "Goal091 proof status loading",
+      "logicalLineCount": 129,
+      "maxPhysicalLineLength": 97
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewSourceHealthScanner.cs",
+      "responsibility": "raw/logical source-health scanner",
+      "logicalLineCount": 260,
+      "maxPhysicalLineLength": 122
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWinFormsBindingScanner.cs",
+      "responsibility": "WinForms binding inventory scan",
+      "logicalLineCount": 61,
+      "maxPhysicalLineLength": 119
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspaceModels.cs",
+      "responsibility": "DTOs and vocabulary",
+      "logicalLineCount": 442,
+      "maxPhysicalLineLength": 112
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspaceService.cs",
+      "responsibility": "public service orchestration seam",
+      "logicalLineCount": 145,
+      "maxPhysicalLineLength": 105
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspaceUtilities.cs",
+      "responsibility": "local JSON, path and hash helpers",
+      "logicalLineCount": 309,
+      "maxPhysicalLineLength": 107
+    }
+  ]
+}

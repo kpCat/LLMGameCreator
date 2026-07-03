@@ -183,6 +183,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-090-parameterized-visual-world-profiles/GOAL.md` | Goal 090 task: add a BCL-only Application-side parameterized visual world profile/addressing seam for arbitrary finite sizes, huge sparse finite worlds and infinite chunk windows, with final stop at `parameterized_visual_world_profiles_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-091-deterministic-visual-chunk-stream-window/GOAL.md` | Goal 091 task: add a BCL-only Application-side deterministic visual chunk stream window materializer over Goal 090 profiles for finite clipping, huge sparse compact windows, overlapping infinite-window cache reuse and layer transitions, with final stop at `deterministic_visual_chunk_stream_window_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-092-visual-world-stream-preview-workspace/GOAL.md` | Goal 092 task: add a bounded Application/WinForms visual world stream preview workspace that consumes real Goal 086-091 disk artifacts, lists proof status and text SVG previews, writes compact workspace evidence and stops at `visual_world_stream_preview_workspace_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-092a-visual-world-preview-service-split-source-health/GOAL.md` | Goal 092A hotfix task: split the oversized Goal 092 Application service into smaller BCL-only files, add source-health before/after evidence and stop at `visual_world_preview_service_split_source_health_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/VALIDATION_PIPELINE.md` | Goal 089 validation policy: `check-current-goal.ps1` is the ordinary feature-goal default, `check-spine-fast.ps1` is the medium visual/world/gameplay spine route, and full `check-all.ps1` / `check-all-observed.ps1` is reserved for consolidation, milestone and shared/core-risk work. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
@@ -470,6 +471,12 @@ Goal 092 is produced for review with `visual_world_stream_preview_workspace_veri
 and a separate WinForms preview page, exposes five artifact groups, 38 text SVG preview entries, seven Goal 091 proof
 statuses and a binding inventory under `.llmgc/procedural/goal-092-visual-world-stream-preview-workspace/`, without
 Runtime/Unity/provider/schema/project/dependency changes and without marking Goal 091 or Goal 090 accepted.
+Goal 092A is produced for review with `visual_world_preview_service_split_source_health_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it repairs the oversized Goal 092 Application service by splitting it
+into smaller BCL-only files, records before/after source-health evidence with the service moving from 1295 to 145
+logical lines, keeps Goal 092 behavior equivalent and strengthens Goal 092 quality evidence so no Goal092 namespace C#
+file over 1000 logical lines can pass silently. Goal 092A does not start Runtime, Unity, provider, schema, Lua,
+generator-library, project-file, dependency, binary/raster media or prompt-output work.
 
 Allowed next sequence:
 
@@ -526,6 +533,7 @@ Allowed next sequence:
 51. Review Goal 090 `parameterized_visual_world_profiles_verification`; it handles the Goal 088 fixed-size concern at the profile/addressing layer, keeps Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 52. Review Goal 091 `deterministic_visual_chunk_stream_window_verification`; it proves deterministic chunk stream windows over Goal 090 profiles, keeps Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 53. Review Goal 092 `visual_world_stream_preview_workspace_verification`; it adds an Application/WinForms preview workspace over real Goal 086-091 artifacts, keeps Goal 092, Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
+54. Review Goal 092A `visual_world_preview_service_split_source_health_verification`; it repairs the Goal 092 source-health regression, keeps Goal 092A and Goal 092 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 
 Kill criterion:
 

@@ -18,6 +18,26 @@ public static class VisualWorldStreamPreviewWorkspaceVocabulary
         "visual_world_stream_preview_quality_gate_scan_v1";
 }
 
+public static class VisualWorldPreviewServiceSplitSourceHealthVocabulary
+{
+    public const string GoalId = "goal_092a_visual_world_preview_service_split_source_health";
+    public const string ProductSmokeRoute =
+        "goal-092a-visual-world-preview-service-split-source-health";
+    public const string FinalGate =
+        "visual_world_preview_service_split_source_health_verification";
+    public const string RelativeOutputDirectory =
+        ".llmgc/procedural/goal-092a-visual-world-preview-service-split-source-health";
+
+    public const string BeforeAfterSchemaVersion =
+        "visual_world_preview_service_split_source_health_before_after_v1";
+    public const string RefactorInventorySchemaVersion =
+        "visual_world_preview_service_split_refactor_inventory_v1";
+    public const string BehaviorEquivalenceSchemaVersion =
+        "visual_world_preview_service_split_behavior_equivalence_v1";
+    public const string QualityGateSchemaVersion =
+        "visual_world_preview_service_split_quality_gate_scan_v1";
+}
+
 public enum VisualWorldPreviewArtifactStatus
 {
     Unknown = 0,
@@ -142,6 +162,17 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool NoRuntimeUnityProviderSchemaProjectDependencyChanges { get; init; } = true;
     public bool NoPromptDumps { get; init; } = true;
     public bool WinFormsBindingReal { get; init; }
+    public bool SourceHealthPassed { get; init; }
+    public int ScannedCSharpFileCount { get; init; }
+    public int MaxLogicalLineCount { get; init; }
+    public int MaxPhysicalLineLength { get; init; }
+    public int FilesOver1000LogicalLinesCount { get; init; }
+    public int FilesOver700LogicalLinesInGoal092NamespaceCount { get; init; }
+    public int ZeroLfSourceCount { get; init; }
+    public int CrOnlySourceCount { get; init; }
+    public int RawPhysicalOneLineSourceCount { get; init; }
+    public int MinifiedSourceCount { get; init; }
+    public int WorkspaceServiceLogicalLineCount { get; init; }
     public IReadOnlyList<string> ExpectedChangedPathPrefixes { get; init; } = [];
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
@@ -186,6 +217,11 @@ public sealed record VisualWorldStreamPreviewWorkspaceReport
     public bool ProofStatusPassed { get; init; }
     public bool WinFormsBindingPassed { get; init; }
     public bool QualityGatePassed { get; init; }
+    public bool SourceHealthPassed { get; init; }
+    public int WorkspaceServiceLogicalLineCount { get; init; }
+    public int MaxLogicalLineCount { get; init; }
+    public int FilesOver1000LogicalLinesCount { get; init; }
+    public int FilesOver700LogicalLinesInGoal092NamespaceCount { get; init; }
     public string CatalogHash { get; init; } = string.Empty;
     public string ProofStatusHash { get; init; } = string.Empty;
     public string WinFormsBindingInventoryHash { get; init; } = string.Empty;
@@ -217,4 +253,189 @@ public sealed record VisualWorldStreamPreviewWorkspaceWriteResult
     public string WinFormsBindingInventoryJsonPath { get; init; } = string.Empty;
     public string QualityGateScanJsonPath { get; init; } = string.Empty;
     public VisualWorldStreamPreviewWorkspaceResult Result { get; init; } = new();
+}
+
+public sealed record VisualWorldStreamPreviewSourceFileHealth
+{
+    public string RelativePath { get; init; } = string.Empty;
+    public int ByteCount { get; init; }
+    public int LogicalLineCount { get; init; }
+    public int LogicalMaxLineLength { get; init; }
+    public int LfByteCount { get; init; }
+    public int CrByteCount { get; init; }
+    public int RawPhysicalLineCount { get; init; }
+    public int RawPhysicalMaxLineLength { get; init; }
+    public int RawPhysicalLinesOver500Count { get; init; }
+    public bool ZeroLfSource { get; init; }
+    public bool CrOnlySource { get; init; }
+    public bool ContainsCrOnlyLineEndings { get; init; }
+    public bool RawPhysicalOneLineSource { get; init; }
+    public bool MinifiedSourceCandidate { get; init; }
+    public bool FileOver1000LogicalLines { get; init; }
+    public bool FileOver700LogicalLines { get; init; }
+}
+
+public sealed record VisualWorldStreamPreviewSourceHealthScan
+{
+    public bool Passed { get; init; }
+    public int ScannedCSharpFileCount { get; init; }
+    public int MaxLogicalLineCount { get; init; }
+    public int MaxPhysicalLineLength { get; init; }
+    public int RawPhysicalLinesOver500Count { get; init; }
+    public int FilesOver1000LogicalLinesCount { get; init; }
+    public int FilesOver700LogicalLinesInGoal092NamespaceCount { get; init; }
+    public int ZeroLfSourceCount { get; init; }
+    public int CrOnlySourceCount { get; init; }
+    public int RawPhysicalOneLineSourceCount { get; init; }
+    public int MinifiedSourceCount { get; init; }
+    public int WorkspaceServiceLogicalLineCount { get; init; }
+    public int WorkspaceServiceMaxPhysicalLineLength { get; init; }
+    public IReadOnlyList<VisualWorldStreamPreviewSourceFileHealth> Files { get; init; } = [];
+    public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
+}
+
+public sealed record VisualWorldPreviewServiceSplitSourceHealthSnapshot
+{
+    public string Source { get; init; } = string.Empty;
+    public string WorkspaceServiceRelativePath { get; init; } = string.Empty;
+    public int ScannedCSharpFileCount { get; init; }
+    public int WorkspaceServiceLogicalLineCount { get; init; }
+    public int MaxLogicalLineCount { get; init; }
+    public int MaxPhysicalLineLength { get; init; }
+    public int FilesOver1000LogicalLinesCount { get; init; }
+    public int FilesOver700LogicalLinesInGoal092NamespaceCount { get; init; }
+    public int ZeroLfSourceCount { get; init; }
+    public int CrOnlySourceCount { get; init; }
+    public int RawPhysicalOneLineSourceCount { get; init; }
+    public int MinifiedSourceCount { get; init; }
+    public bool OversizedWorkspaceServiceDetected { get; init; }
+}
+
+public sealed record VisualWorldPreviewServiceSplitSourceHealthBeforeAfter
+{
+    public string SchemaVersion { get; init; } =
+        VisualWorldPreviewServiceSplitSourceHealthVocabulary.BeforeAfterSchemaVersion;
+
+    public string GoalId { get; init; } = VisualWorldPreviewServiceSplitSourceHealthVocabulary.GoalId;
+    public string ManualGate { get; init; } =
+        VisualWorldPreviewServiceSplitSourceHealthVocabulary.FinalGate;
+    public string ImplementationStatus { get; init; } = "GREEN";
+    public bool Accepted { get; init; }
+    public bool Passed { get; init; }
+    public VisualWorldPreviewServiceSplitSourceHealthSnapshot Before { get; init; } = new();
+    public VisualWorldStreamPreviewSourceHealthScan After { get; init; } = new();
+}
+
+public sealed record VisualWorldPreviewRefactorInventoryFile
+{
+    public string RelativePath { get; init; } = string.Empty;
+    public string Responsibility { get; init; } = string.Empty;
+    public int LogicalLineCount { get; init; }
+    public int MaxPhysicalLineLength { get; init; }
+}
+
+public sealed record VisualWorldPreviewRefactorFileInventory
+{
+    public string SchemaVersion { get; init; } =
+        VisualWorldPreviewServiceSplitSourceHealthVocabulary.RefactorInventorySchemaVersion;
+
+    public string GoalId { get; init; } = VisualWorldPreviewServiceSplitSourceHealthVocabulary.GoalId;
+    public bool Passed { get; init; }
+    public int FileCount { get; init; }
+    public int MaxLogicalLineCount { get; init; }
+    public int WorkspaceServiceLogicalLineCount { get; init; }
+    public IReadOnlyList<VisualWorldPreviewRefactorInventoryFile> Files { get; init; } = [];
+}
+
+public sealed record VisualWorldPreviewBehaviorEquivalenceProof
+{
+    public string SchemaVersion { get; init; } =
+        VisualWorldPreviewServiceSplitSourceHealthVocabulary.BehaviorEquivalenceSchemaVersion;
+
+    public string GoalId { get; init; } = VisualWorldPreviewServiceSplitSourceHealthVocabulary.GoalId;
+    public bool Passed { get; init; }
+    public int ArtifactGroupCount { get; init; }
+    public int EntryCount { get; init; }
+    public int SvgTextPreviewCount { get; init; }
+    public int Goal091StreamWindowEntryCount { get; init; }
+    public int ProofStatusCount { get; init; }
+    public bool RequiredArtifactGroupsPresent { get; init; }
+    public bool Goal091StreamWindowsVisible { get; init; }
+    public bool ProofStatusPassed { get; init; }
+    public bool WinFormsBindingPassed { get; init; }
+    public bool NoAbsolutePaths { get; init; }
+    public bool NoBinaryOrRasterMediaAdded { get; init; }
+}
+
+public sealed record VisualWorldPreviewServiceSplitQualityGateScan
+{
+    public string SchemaVersion { get; init; } =
+        VisualWorldPreviewServiceSplitSourceHealthVocabulary.QualityGateSchemaVersion;
+
+    public string GoalId { get; init; } = VisualWorldPreviewServiceSplitSourceHealthVocabulary.GoalId;
+    public string ManualGate { get; init; } =
+        VisualWorldPreviewServiceSplitSourceHealthVocabulary.FinalGate;
+    public string ImplementationStatus { get; init; } = "GREEN";
+    public bool Accepted { get; init; }
+    public bool Passed { get; init; }
+    public bool BeforeOversizedServiceDetected { get; init; }
+    public bool AfterNoFilesOver1000LogicalLines { get; init; }
+    public bool AfterNoFilesOver700LogicalLines { get; init; }
+    public bool WorkspaceServiceBelow700Lines { get; init; }
+    public bool Goal092QualityGateCarriesSourceHealthMetrics { get; init; }
+    public bool BehaviorEquivalencePassed { get; init; }
+    public bool RefactorInventoryPassed { get; init; }
+    public bool NoForbiddenAreasRequired { get; init; } = true;
+    public bool NoBinaryMediaArtifacts { get; init; } = true;
+    public bool NoPromptDumps { get; init; } = true;
+    public int ScannedCSharpFileCount { get; init; }
+    public int MaxLogicalLineCountAfterRepair { get; init; }
+    public int WorkspaceServiceLogicalLineCountBeforeRepair { get; init; }
+    public int WorkspaceServiceLogicalLineCountAfterRepair { get; init; }
+    public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
+}
+
+public sealed record VisualWorldPreviewServiceSplitReport
+{
+    public string GoalId { get; init; } = VisualWorldPreviewServiceSplitSourceHealthVocabulary.GoalId;
+    public string ManualGate { get; init; } =
+        VisualWorldPreviewServiceSplitSourceHealthVocabulary.FinalGate;
+    public string ImplementationStatus { get; init; } = "GREEN";
+    public bool Accepted { get; init; }
+    public bool QualityGatePassed { get; init; }
+    public bool BehaviorEquivalencePassed { get; init; }
+    public bool SourceHealthPassed { get; init; }
+    public int WorkspaceServiceLogicalLineCountBeforeRepair { get; init; }
+    public int WorkspaceServiceLogicalLineCountAfterRepair { get; init; }
+    public int MaxLogicalLineCountAfterRepair { get; init; }
+    public string SourceHealthBeforeAfterHash { get; init; } = string.Empty;
+    public string RefactorInventoryHash { get; init; } = string.Empty;
+    public string BehaviorEquivalenceProofHash { get; init; } = string.Empty;
+    public string QualityGateHash { get; init; } = string.Empty;
+    public string DeterministicReportHash { get; init; } = string.Empty;
+}
+
+public sealed record VisualWorldPreviewServiceSplitSourceHealthBuildResult
+{
+    public VisualWorldPreviewServiceSplitSourceHealthBeforeAfter SourceHealthBeforeAfter { get; init; } = new();
+    public VisualWorldPreviewRefactorFileInventory RefactorFileInventory { get; init; } = new();
+    public VisualWorldPreviewBehaviorEquivalenceProof BehaviorEquivalenceProof { get; init; } = new();
+    public VisualWorldPreviewServiceSplitQualityGateScan QualityGateScan { get; init; } = new();
+    public VisualWorldPreviewServiceSplitReport Report { get; init; } = new();
+    public string SourceHealthBeforeAfterJson { get; init; } = string.Empty;
+    public string RefactorFileInventoryJson { get; init; } = string.Empty;
+    public string BehaviorEquivalenceProofJson { get; init; } = string.Empty;
+    public string QualityGateScanJson { get; init; } = string.Empty;
+    public string ReportMarkdown { get; init; } = string.Empty;
+}
+
+public sealed record VisualWorldPreviewServiceSplitSourceHealthWriteResult
+{
+    public string OutputDirectoryPath { get; init; } = string.Empty;
+    public string ReportMarkdownPath { get; init; } = string.Empty;
+    public string SourceHealthBeforeAfterJsonPath { get; init; } = string.Empty;
+    public string RefactorFileInventoryJsonPath { get; init; } = string.Empty;
+    public string BehaviorEquivalenceProofJsonPath { get; init; } = string.Empty;
+    public string QualityGateScanJsonPath { get; init; } = string.Empty;
+    public VisualWorldPreviewServiceSplitSourceHealthBuildResult Result { get; init; } = new();
 }

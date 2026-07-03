@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "visual_world_preview_service_split_quality_gate_scan_v1",
+  "goalId": "goal_092a_visual_world_preview_service_split_source_health",
+  "manualGate": "visual_world_preview_service_split_source_health_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "passed": true,
+  "beforeOversizedServiceDetected": true,
+  "afterNoFilesOver1000LogicalLines": true,
+  "afterNoFilesOver700LogicalLines": true,
+  "workspaceServiceBelow700Lines": true,
+  "goal092QualityGateCarriesSourceHealthMetrics": true,
+  "behaviorEquivalencePassed": true,
+  "refactorInventoryPassed": true,
+  "noForbiddenAreasRequired": true,
+  "noBinaryMediaArtifacts": true,
+  "noPromptDumps": true,
+  "scannedCSharpFileCount": 10,
+  "maxLogicalLineCountAfterRepair": 442,
+  "workspaceServiceLogicalLineCountBeforeRepair": 1295,
+  "workspaceServiceLogicalLineCountAfterRepair": 145,
+  "diagnostics": []
+}

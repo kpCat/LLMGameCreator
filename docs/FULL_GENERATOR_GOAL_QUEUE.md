@@ -1466,14 +1466,31 @@ Workspace coverage:
 
 Quality coverage rejects fake green workspaces by requiring real disk artifacts, relative paths, text-SVG-only preview entries, visible Goal 091 stream-window rows, passed proof status, WinForms binding, expected changed prefixes and no Runtime, Unity, provider, public schema, project-file, dependency, binary/raster media or prompt-dump changes.
 
+Goal 092A repair:
+
+Goal 092A is produced for review with `visual_world_preview_service_split_source_health_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It repairs the Goal 092 source-health regression by splitting
+`VisualWorldStreamPreviewWorkspaceService.cs` from 1295 logical lines to 145 logical lines while preserving the public
+service seam. The Goal092 namespace now has 10 scanned C# files, max logical line count 442, zero files over 1000
+logical lines, zero files over the preferred 700-line target, zero zero-LF sources, zero CR-only sources, zero raw
+one-physical-line sources and zero minified-source candidates. Compact evidence is under
+`.llmgc/procedural/goal-092a-visual-world-preview-service-split-source-health/`.
+
+Goal 092A keeps Goal 092 behavior equivalent: five artifact groups, 54 entries, 38 text SVG previews, four Goal 091
+stream-window entries, seven proof statuses, passed WinForms binding, no absolute paths and no binary/raster media.
+Goal 092 quality evidence now records source-health metrics and rejects any Goal092 namespace C# file over 1000 logical
+lines. Goal 092A adds no Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library,
+project-file, dependency, binary/raster media or prompt-dump changes. Goal 092A, Goal 092, Goal 091 and Goal 090 remain
+`accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-visual_world_stream_preview_workspace_verification
+visual_world_preview_service_split_source_health_verification
 ```
 
 Status:
 
 ```text
-goal_092_visual_world_stream_preview_workspace_produced_for_review
+goal_092a_visual_world_preview_service_split_source_health_produced_for_review
 ```

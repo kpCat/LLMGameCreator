@@ -3,7 +3,7 @@
 - implementationStatus: GREEN
 - accepted: false
 - manualGate: visual_world_stream_preview_workspace_verification required
-- deterministicReportHash: cb159435127c9c27b044a7f08b2144e3d0c5b169bb868b2a9fe0730ce22ed600
+- deterministicReportHash: a83ac07fed3e0f70db1f2b5dfaa45666757e14206c2b367a0f4845b94c9d1436
 
 ## Summary
 
@@ -45,6 +45,20 @@ Goal 092 adds a BCL-only Application review seam and WinForms workspace over the
 - pageActivationLoadsApplicationResult: true
 - pageBindDisplaysGroupsEntriesProofs: true
 
+## Source Health
+
+- sourceHealthPassed: true
+- scannedCSharpFileCount: 10
+- workspaceServiceLogicalLineCount: 145
+- maxLogicalLineCount: 442
+- maxPhysicalLineLength: 336
+- filesOver1000LogicalLinesCount: 0
+- filesOver700LogicalLinesInGoal092NamespaceCount: 0
+- zeroLfSourceCount: 0
+- crOnlySourceCount: 0
+- rawPhysicalOneLineSourceCount: 0
+- minifiedSourceCount: 0
+
 ## Quality Gate
 
 - qualityGatePassed: true
@@ -60,4 +74,4 @@ Goal 092 adds a BCL-only Application review seam and WinForms workspace over the
 - catalogHash: 603247871d95dd19e52fbced89c6d981a649fcc954b1278cd1e922182d78a2f5
 - proofStatusHash: 31b06d989a944bf6cc96a9d6c61655fd608c645bee1f2d63958c2318800abc31
 - winFormsBindingInventoryHash: 3ebffb454d108bb6bc15d459a19ad5d18f279cdf6f4571e8c4bcd1c40aba85b1
-- qualityGateHash: 44f20340a84c508446149dfd968a5c36c6c4b245ae80c5f54ae09d9a68d05030
+- qualityGateHash: 912df6da391d833ca31240e1a42112a3f4d07405d4a422ebc05ffde6feb83a23
