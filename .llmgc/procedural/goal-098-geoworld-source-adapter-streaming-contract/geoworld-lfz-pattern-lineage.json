@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "geoworld_lfz_pattern_lineage_v1",
+  "goalId": "goal_098_geoworld_source_adapter_streaming_contract",
+  "passed": true,
+  "lfzDocsConsumedAsLineage": true,
+  "lfzArchiveNotRequired": true,
+  "lfzSourceCodeNotCopied": true,
+  "records": [
+    {
+      "relativePath": "docs/context/LFZ_ARCHIVE_ANALYSIS_MANIFEST.md",
+      "exists": true,
+      "sha256": "73e45bd941b8711b77a379498092a982f9eb132082922841acc46af0884d0826",
+      "purposeTags": [
+        "lfz_pattern",
+        "archive_manifest",
+        "no_archive_to_codex"
+      ]
+    },
+    {
+      "relativePath": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+      "exists": true,
+      "sha256": "cfb3d50677a7d04f02af3e32f0a1e78c1d15ec1a3f29d3b74bae240d1b166741",
+      "purposeTags": [
+        "lfz_pattern",
+        "geoworld_pipeline",
+        "source_adapter"
+      ]
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+      "exists": true,
+      "sha256": "7f0340599487f826c258fdf8c2378d4adeb5aec16b2bb5d87ce6b8e2dabcea4f",
+      "purposeTags": [
+        "geoworld_streaming",
+        "boundary_prefetch"
+      ]
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+      "exists": true,
+      "sha256": "3d5a5e89377eb6cdf617cc1edab0362cd72fb3f70d089b685087e22f70a4f06c",
+      "purposeTags": [
+        "geoworld_source_adapter",
+        "cache_provenance_license"
+      ]
+    },
+    {
+      "relativePath": "docs/proposals/GEOWORLD_INGESTION_FUTURE_GOAL_SEQUENCE.md",
+      "exists": true,
+      "sha256": "45868e8754d47ec6513f1e07f5da53006d2be3ea4fc67c50e77f76e5c95aa831",
+      "purposeTags": [
+        "future_goal_sequence",
+        "no_network_now"
+      ]
+    },
+    {
+      "relativePath": "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md",
+      "exists": true,
+      "sha256": "9c6cb82bc358b4e9c967f5c98b49ef60ff2a89a75143b3a044ad84e668729803",
+      "purposeTags": [
+        "dream_scope",
+        "geospatial_policy"
+      ]
+    },
+    {
+      "relativePath": "docs/ROADMAP_FINAL_REBASELINE.md",
+      "exists": true,
+      "sha256": "ff6afddd6bffe2378c002e180ce23ebd9109ff5fa528d0cb8a580fcf19ecfee0",
+      "purposeTags": [
+        "goal097",
+        "productivity_boundary"
+      ]
+    },
+    {
+      "relativePath": "docs/RELEASE_RISK_REGISTER.md",
+      "exists": true,
+      "sha256": "c5cb5a229d702b5b9dfeb88d864df961e8522fd1e4f61214fbb49ca256d0016d",
+      "purposeTags": [
+        "release_risk",
+        "geospatial_tos"
+      ]
+    }
+  ]
+}

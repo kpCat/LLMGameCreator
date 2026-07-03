@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "geoworld_streaming_policy_matrix_v1",
+  "goalId": "goal_098_geoworld_source_adapter_streaming_contract",
+  "passed": true,
+  "rows": [
+    {
+      "fixtureId": "earth_radius_stream_window_boundary_prefetch",
+      "radiusTiles": 3,
+      "boundaryPrefetchTiles": 2,
+      "boundaryPrefetchEnabled": true,
+      "materializesOnlyRequestedWindow": true,
+      "runtimeOnlineBlockedByDefault": false,
+      "futureRuntimeStreamingContractOnly": true
+    },
+    {
+      "fixtureId": "licensed_vector_tile_adapter_spec",
+      "radiusTiles": 2,
+      "boundaryPrefetchTiles": 1,
+      "boundaryPrefetchEnabled": true,
+      "materializesOnlyRequestedWindow": true,
+      "runtimeOnlineBlockedByDefault": false,
+      "futureRuntimeStreamingContractOnly": true
+    },
+    {
+      "fixtureId": "ocr_georeference_fallback_future_only",
+      "radiusTiles": 1,
+      "boundaryPrefetchTiles": 1,
+      "boundaryPrefetchEnabled": true,
+      "materializesOnlyRequestedWindow": true,
+      "runtimeOnlineBlockedByDefault": false,
+      "futureRuntimeStreamingContractOnly": true
+    },
+    {
+      "fixtureId": "offline_osm_extract_city_radius",
+      "radiusTiles": 2,
+      "boundaryPrefetchTiles": 1,
+      "boundaryPrefetchEnabled": true,
+      "materializesOnlyRequestedWindow": true,
+      "runtimeOnlineBlockedByDefault": false,
+      "futureRuntimeStreamingContractOnly": true
+    },
+    {
+      "fixtureId": "runtime_online_optional_policy_blocked_by_default",
+      "radiusTiles": 1,
+      "boundaryPrefetchTiles": 1,
+      "boundaryPrefetchEnabled": true,
+      "materializesOnlyRequestedWindow": true,
+      "runtimeOnlineBlockedByDefault": true,
+      "futureRuntimeStreamingContractOnly": true
+    },
+    {
+      "fixtureId": "self_generated_realism_world_source",
+      "radiusTiles": 2,
+      "boundaryPrefetchTiles": 1,
+      "boundaryPrefetchEnabled": true,
+      "materializesOnlyRequestedWindow": true,
+      "runtimeOnlineBlockedByDefault": false,
+      "futureRuntimeStreamingContractOnly": true
+    },
+    {
+      "fixtureId": "user_provided_map_bundle",
+      "radiusTiles": 1,
+      "boundaryPrefetchTiles": 1,
+      "boundaryPrefetchEnabled": true,
+      "materializesOnlyRequestedWindow": true,
+      "runtimeOnlineBlockedByDefault": false,
+      "futureRuntimeStreamingContractOnly": true
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "geoworld_normalized_feature_taxonomy_v1",
+  "goalId": "goal_098_geoworld_source_adapter_streaming_contract",
+  "rows": [
+    {
+      "kind": "building",
+      "neutralFeatureContract": "BuildingFootprintFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "road",
+      "neutralFeatureContract": "RoadSegmentFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "water",
+      "neutralFeatureContract": "WaterBodyFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "landUse",
+      "neutralFeatureContract": "LandUseAreaFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "poi",
+      "neutralFeatureContract": "PoiFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "barrier",
+      "neutralFeatureContract": "BarrierFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "bridge",
+      "neutralFeatureContract": "BridgeFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "vegetation",
+      "neutralFeatureContract": "VegetationFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "terrainHint",
+      "neutralFeatureContract": "TerrainHintFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "transit",
+      "neutralFeatureContract": "TransitFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    },
+    {
+      "kind": "administrativeArea",
+      "neutralFeatureContract": "AdministrativeAreaFeature",
+      "rawSourcePolicy": "raw source tags are normalized before gameplay or visual projection",
+      "gameplayConsumesNormalizedFeatureOnly": true
+    }
+  ]
+}

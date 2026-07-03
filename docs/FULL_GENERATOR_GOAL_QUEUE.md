@@ -88,6 +88,7 @@ visual_chunk_cache_export_inspector_verification required
 visual_chunk_cache_unity_streamingassets_handoff_verification required
 unity_handoff_inspector_probe_readiness_verification required
 final_roadmap_rebaseline_dream_scope_productivity_verification required
+geoworld_source_adapter_streaming_contract_verification required
 ```
 
 Current capabilities:
@@ -113,6 +114,7 @@ Current capabilities:
 - Unity Alpha StreamingAssets handoff/probe for compact Goal 093/094 visual chunk cache metadata, with 5 mirrored payload files, simulated read proof, negative proof and unchanged AlphaRuntimeBootstrap hash;
 - BCL-only Visual World Stream Preview Workspace Unity handoff inspector for Goal 095 payload/probe readiness, with 5 payload files, 4 packages, 93 records, 5 stream windows, 93 unique chunk keys, simulated read proof, negative proof, probe inventory, unchanged AlphaRuntimeBootstrap proof and no Unity file changes;
 - Goal 097 final roadmap rebaseline, dream-scope register, realism/geoworld simulator planning track, release risk register, milestone gates and aggressive goal productivity policy, all as docs/evidence-only planning control with no product-code implementation;
+- BCL-only geoworld source adapter/streaming contract foundation with seven metadata-only source fixtures, normalized geofeature taxonomy, cache/provenance/license policy contracts, runtime boundary-prefetch streaming matrix, LFZ pattern lineage and 16-scenario negative proof;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1587,14 +1589,31 @@ Goal 097 is planning-only. It adds no product code, Runtime, Unity, public schem
 Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 097, Goal 096,
 Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
 
+### Goal 098: Geoworld Source Adapter Streaming Contract
+
+Goal 098 is produced for review with `geoworld_source_adapter_streaming_contract_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It adds a BCL-only Application-side geoworld source adapter and
+runtime streaming contract foundation under `src/LLMGameCreator.Application/Design/GeoworldSourceAdapterStreamingContract/`.
+
+Goal 098 writes deterministic evidence under
+`.llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/` and updates source-of-truth routing,
+current state, queue, debt register and artifact-scope policy. It proves seven metadata-only fixtures, normalized
+feature taxonomy for buildings, roads, water, land use, POI, barriers, bridges, vegetation plus future hints, streaming
+window radius/boundary-prefetch policy and LFZ/geoworld docs lineage.
+
+Goal 098 is contract/evidence only. It reads no LFZ archive, copies no LFZ source, adds no live network fetching,
+map tile scraping, raw geodata dumps, Runtime, Unity, public schema, provider/LLM/RAG/media execution,
+Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 098, Goal 097,
+Goal 096 and prior visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-final_roadmap_rebaseline_dream_scope_productivity_verification
+geoworld_source_adapter_streaming_contract_verification
 ```
 
 Status:
 
 ```text
-goal_097_final_roadmap_rebaseline_dream_scope_productivity_produced_for_review
+goal_098_geoworld_source_adapter_streaming_contract_produced_for_review
 ```

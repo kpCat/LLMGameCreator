@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "geoworld_negative_proof_v1",
+  "goalId": "goal_098_geoworld_source_adapter_streaming_contract",
+  "passed": true,
+  "scenarioCount": 16,
+  "rejectedCount": 16,
+  "matchedExpectationCount": 16,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_source_path",
+      "causalMutation": "absolute source/cache path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.path.absolute_or_unsafe",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Source document/reference must be repository-relative."
+        }
+      ]
+    },
+    {
+      "scenarioId": "bulk_public_tile_archive",
+      "causalMutation": "bulk public tile archive/preseed mode",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.public_tile_bulk_archive.forbidden",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Bulk/preseed public tile archive mode is forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "full_planet_raw_dump",
+      "causalMutation": "full planet raw dump requested",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.full_planet_raw_dump.forbidden",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Full planet raw dumps are forbidden."
+        },
+        {
+          "severity": "error",
+          "code": "geoworld.world_source_graph.contract_boundary",
+          "target": "offline_osm_extract_city_radius",
+          "message": "WorldSourceGraph must keep base data immutable, deltas separate, contract-only and no raw full-planet dump."
+        }
+      ]
+    },
+    {
+      "scenarioId": "hardcoded_provider_api_in_core",
+      "causalMutation": "provider/API hardcoded into core",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.provider_api.hardcoded_core",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Provider/API identity must not be hardcoded into core contracts."
+        }
+      ]
+    },
+    {
+      "scenarioId": "lfz_copied_code_marker",
+      "causalMutation": "LFZ copied source marker present",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.lfz_code_copy.marker",
+          "target": "offline_osm_extract_city_radius",
+          "message": "LFZ source code copy markers are forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_attribution",
+      "causalMutation": "attribution missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.attribution.missing",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Attribution text is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_cache_policy",
+      "causalMutation": "cache policy missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.cache_policy.missing",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Cache policy is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_license_policy",
+      "causalMutation": "license policy missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.license_policy.missing",
+          "target": "offline_osm_extract_city_radius",
+          "message": "License policy is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_provenance",
+      "causalMutation": "provenance missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.provenance.missing",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Provenance is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_stream_radius_boundary_prefetch",
+      "causalMutation": "stream radius and boundary prefetch missing",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.boundary_prefetch.missing",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Boundary prefetch policy is required."
+        },
+        {
+          "severity": "error",
+          "code": "geoworld.stream_radius.missing",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Stream radius must be explicit and positive."
+        }
+      ]
+    },
+    {
+      "scenarioId": "ocr_fallback_primary_path",
+      "causalMutation": "OCR fallback treated as primary path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.ocr_fallback.primary_path_forbidden",
+          "target": "ocr_georeference_fallback_future_only",
+          "message": "OCR/georeference fallback must remain future-only and must not be primary path."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_source_of_truth",
+      "causalMutation": "prompt text used as source of truth",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.prompt.source_of_truth",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Prompt text must not be source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_tile_scraping",
+      "causalMutation": "adapter attempts public tile server scraping",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.public_tile_scraping.forbidden",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Public tile server scraping is forbidden."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rating_metadata_without_safe_fallback",
+      "causalMutation": "adult/rating metadata without safe fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.rating.safe_fallback_missing",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Adult/rating metadata requires safe fallback policy."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_osm_tags_direct_to_gameplay",
+      "causalMutation": "raw OSM tags consumed directly by gameplay",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.raw_tags.gameplay_leak",
+          "target": "raw/building_polygon",
+          "message": "Raw source tags must not be consumed directly by gameplay or preserved as raw payloads."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_online_without_explicit_policy",
+      "causalMutation": "runtime online mode enabled without explicit policy",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "geoworld.runtime_online.policy_required",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Runtime online mode cannot be enabled without explicit policy."
+        },
+        {
+          "severity": "error",
+          "code": "geoworld.runtime_online.policy_required",
+          "target": "offline_osm_extract_city_radius",
+          "message": "Runtime online mode requires explicit policy allowance."
+        }
+      ]
+    }
+  ]
+}

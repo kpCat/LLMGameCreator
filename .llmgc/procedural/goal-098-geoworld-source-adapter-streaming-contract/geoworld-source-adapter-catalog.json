@@ -1,0 +1,1188 @@
+{
+  "schemaVersion": "geoworld_source_adapter_catalog_v1",
+  "goalId": "goal_098_geoworld_source_adapter_streaming_contract",
+  "manualGate": "geoworld_source_adapter_streaming_contract_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "fixtureCount": 7,
+  "fixtureIds": [
+    "earth_radius_stream_window_boundary_prefetch",
+    "licensed_vector_tile_adapter_spec",
+    "ocr_georeference_fallback_future_only",
+    "offline_osm_extract_city_radius",
+    "runtime_online_optional_policy_blocked_by_default",
+    "self_generated_realism_world_source",
+    "user_provided_map_bundle"
+  ],
+  "fixtures": [
+    {
+      "specId": "earth_radius_stream_window_boundary_prefetch",
+      "displayName": "Earth radius stream window boundary prefetch",
+      "adapterKind": "offlineOsmExtract",
+      "metadataOnly": true,
+      "ocrFallbackFutureOnly": false,
+      "licensePolicy": {
+        "policyId": "license/earth_radius_stream_window_boundary_prefetch",
+        "licenseId": "odbl-1.0-reviewed-extract",
+        "attributionText": "OpenStreetMap contributors; boundary prefetch contract fixture only",
+        "redistributionPolicy": "metadata_only_review_fixture_no_raw_geodata_redistribution",
+        "attributionRequired": true,
+        "runtimeOnlineExplicitPolicyAllowed": false,
+        "containsAdultOrRatingMetadata": false,
+        "safeFallbackPolicyId": "safe_public_geoworld_fallback"
+      },
+      "provenance": {
+        "provenanceId": "provenance/earth_radius_stream_window_boundary_prefetch",
+        "sourceDocumentPath": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+        "sourceReference": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+        "contentHash": "8f85fe9e9db2023d569a4d39d14e88c05615c1efd98aa060e8c30a424adc87d6",
+        "adapterVersion": "goal098-contract-v1",
+        "normalizationVersion": "goal098-normalization-v1",
+        "sourceOfTruthKind": "documented_metadata_contract",
+        "promptTextIsSourceOfTruth": false,
+        "containsLfzCopiedCodeMarker": false
+      },
+      "cachePolicy": {
+        "policyId": "cache/earth_radius_stream_window_boundary_prefetch",
+        "mode": "importTimeLocalCache",
+        "relativeCacheRoot": "geoworld/cache/earth-radius-boundary-prefetch",
+        "cacheFirst": true,
+        "hasEvictionPolicy": true,
+        "publicTileBulkArchiveMode": false,
+        "noRawPublicTilePreseed": true
+      },
+      "fetchPlan": {
+        "planId": "fetch_plan/earth_radius_stream_window_boundary_prefetch",
+        "networkIoMode": "none",
+        "performsNetworkIo": false,
+        "runtimeOnlineModeEnabled": false,
+        "runtimeOnlinePolicyExplicitlyEnabled": false,
+        "publicTileServerScrapeAttempted": false,
+        "bulkPublicTileArchiveMode": false,
+        "providerOrApiHardcodedIntoCore": false,
+        "fullPlanetRawDumpRequested": false,
+        "ocrFallbackIsPrimaryPath": false
+      },
+      "fetchResult": {
+        "fixtureId": "earth_radius_stream_window_boundary_prefetch",
+        "metadataOnly": true,
+        "networkIoPerformed": false,
+        "rawGeodataDumpPresent": false,
+        "binaryMediaFileCount": 0,
+        "resultHash": "a9b2d0b7f9968e4d0c43f21e69aba1a0a4da835cdb9f6d90b8535c3491e8f7c0"
+      },
+      "streamingPolicy": {
+        "policyId": "stream_policy/earth_radius_stream_window_boundary_prefetch",
+        "streamWindowRequest": {
+          "windowId": "stream_window/earth_radius_stream_window_boundary_prefetch",
+          "gridRequest": {
+            "requestId": "tile_grid/earth_radius_stream_window_boundary_prefetch",
+            "centerTile": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 9195,
+              "y": 9195
+            },
+            "radiusTiles": 3,
+            "boundaryPrefetchTiles": 2,
+            "bounds": {
+              "southWest": {
+                "latitude": 48.4,
+                "longitude": 30.4
+              },
+              "northEast": {
+                "latitude": 48.6,
+                "longitude": 30.6
+              }
+            }
+          },
+          "boundaryPrefetchEnabled": true,
+          "queuePolicyId": "queue/earth_radius_stream_window_boundary_prefetch/cache_first",
+          "materializesOnlyRequestedWindow": true
+        },
+        "boundaryPrefetchRequired": true,
+        "runtimeOnlineBlockedByDefault": false,
+        "fullPlanetRawDumpForbidden": true,
+        "futureRuntimeStreamingContractOnly": true
+      },
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/boundary_road",
+          "sourceTagFamily": "osm:highway",
+          "rawTagKeys": [
+            "highway"
+          ],
+          "normalizedKind": "road",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/boundary_water",
+          "sourceTagFamily": "osm:water",
+          "rawTagKeys": [
+            "water"
+          ],
+          "normalizedKind": "water",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/boundary_bridge",
+          "sourceTagFamily": "osm:bridge",
+          "rawTagKeys": [
+            "bridge"
+          ],
+          "normalizedKind": "bridge",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        }
+      ],
+      "normalizedFeatures": [
+        {
+          "featureId": "normalized/earth_radius_stream_window_boundary_prefetch/road",
+          "kind": "road",
+          "sourceRawDescriptorId": "raw/boundary_road",
+          "gameSemanticFeature": "game_semantic/road",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/earth_radius_stream_window_boundary_prefetch/water",
+          "kind": "water",
+          "sourceRawDescriptorId": "raw/boundary_water",
+          "gameSemanticFeature": "game_semantic/water",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/earth_radius_stream_window_boundary_prefetch/bridge",
+          "kind": "bridge",
+          "sourceRawDescriptorId": "raw/boundary_bridge",
+          "gameSemanticFeature": "game_semantic/bridge",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        }
+      ],
+      "worldSourceGraph": {
+        "graphId": "world_source_graph/earth_radius_stream_window_boundary_prefetch",
+        "baseDataImmutable": true,
+        "gameplayDeltasSeparate": true,
+        "contractOnly": true,
+        "noFullPlanetRawDump": true,
+        "chunks": [
+          {
+            "chunkId": "geo_chunk/earth_radius_stream_window_boundary_prefetch/center",
+            "tileKey": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 9195,
+              "y": 9195
+            },
+            "featureIds": [
+              "normalized/earth_radius_stream_window_boundary_prefetch/road",
+              "normalized/earth_radius_stream_window_boundary_prefetch/water",
+              "normalized/earth_radius_stream_window_boundary_prefetch/bridge"
+            ],
+            "hasBoundaryPrefetchFeatures": true,
+            "usesRelativeRefsOnly": true
+          }
+        ]
+      }
+    },
+    {
+      "specId": "licensed_vector_tile_adapter_spec",
+      "displayName": "Licensed vector tile adapter spec",
+      "adapterKind": "licensedVectorTileAdapterSpec",
+      "metadataOnly": true,
+      "ocrFallbackFutureOnly": false,
+      "licensePolicy": {
+        "policyId": "license/licensed_vector_tile_adapter_spec",
+        "licenseId": "licensed-vector-policy-reviewed",
+        "attributionText": "Licensed vector source attribution placeholder; legal/provider policy required before implementation",
+        "redistributionPolicy": "metadata_only_review_fixture_no_raw_geodata_redistribution",
+        "attributionRequired": true,
+        "runtimeOnlineExplicitPolicyAllowed": false,
+        "containsAdultOrRatingMetadata": false,
+        "safeFallbackPolicyId": "safe_public_geoworld_fallback"
+      },
+      "provenance": {
+        "provenanceId": "provenance/licensed_vector_tile_adapter_spec",
+        "sourceDocumentPath": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+        "sourceReference": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+        "contentHash": "70dd5b70f417a7c4bb7bf766d3efbb888452a0e2d7ff228b12127bbc73abcbb5",
+        "adapterVersion": "goal098-contract-v1",
+        "normalizationVersion": "goal098-normalization-v1",
+        "sourceOfTruthKind": "documented_metadata_contract",
+        "promptTextIsSourceOfTruth": false,
+        "containsLfzCopiedCodeMarker": false
+      },
+      "cachePolicy": {
+        "policyId": "cache/licensed_vector_tile_adapter_spec",
+        "mode": "licensedVectorCache",
+        "relativeCacheRoot": "geoworld/cache/licensed-vector-adapter",
+        "cacheFirst": true,
+        "hasEvictionPolicy": true,
+        "publicTileBulkArchiveMode": false,
+        "noRawPublicTilePreseed": true
+      },
+      "fetchPlan": {
+        "planId": "fetch_plan/licensed_vector_tile_adapter_spec",
+        "networkIoMode": "none",
+        "performsNetworkIo": false,
+        "runtimeOnlineModeEnabled": false,
+        "runtimeOnlinePolicyExplicitlyEnabled": false,
+        "publicTileServerScrapeAttempted": false,
+        "bulkPublicTileArchiveMode": false,
+        "providerOrApiHardcodedIntoCore": false,
+        "fullPlanetRawDumpRequested": false,
+        "ocrFallbackIsPrimaryPath": false
+      },
+      "fetchResult": {
+        "fixtureId": "licensed_vector_tile_adapter_spec",
+        "metadataOnly": true,
+        "networkIoPerformed": false,
+        "rawGeodataDumpPresent": false,
+        "binaryMediaFileCount": 0,
+        "resultHash": "da682ef58b0f7ea7a836443aa303dbc5637669ed009a8e7cd30a15e69255f75d"
+      },
+      "streamingPolicy": {
+        "policyId": "stream_policy/licensed_vector_tile_adapter_spec",
+        "streamWindowRequest": {
+          "windowId": "stream_window/licensed_vector_tile_adapter_spec",
+          "gridRequest": {
+            "requestId": "tile_grid/licensed_vector_tile_adapter_spec",
+            "centerTile": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 9090,
+              "y": 9090
+            },
+            "radiusTiles": 2,
+            "boundaryPrefetchTiles": 1,
+            "bounds": {
+              "southWest": {
+                "latitude": 48.4,
+                "longitude": 30.4
+              },
+              "northEast": {
+                "latitude": 48.6,
+                "longitude": 30.6
+              }
+            }
+          },
+          "boundaryPrefetchEnabled": true,
+          "queuePolicyId": "queue/licensed_vector_tile_adapter_spec/cache_first",
+          "materializesOnlyRequestedWindow": true
+        },
+        "boundaryPrefetchRequired": true,
+        "runtimeOnlineBlockedByDefault": false,
+        "fullPlanetRawDumpForbidden": true,
+        "futureRuntimeStreamingContractOnly": true
+      },
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/licensed_road",
+          "sourceTagFamily": "vector:road",
+          "rawTagKeys": [
+            "class",
+            "rank"
+          ],
+          "normalizedKind": "road",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/licensed_bridge",
+          "sourceTagFamily": "vector:bridge",
+          "rawTagKeys": [
+            "bridge",
+            "layer"
+          ],
+          "normalizedKind": "bridge",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/licensed_water",
+          "sourceTagFamily": "vector:water",
+          "rawTagKeys": [
+            "kind"
+          ],
+          "normalizedKind": "water",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        }
+      ],
+      "normalizedFeatures": [
+        {
+          "featureId": "normalized/licensed_vector_tile_adapter_spec/road",
+          "kind": "road",
+          "sourceRawDescriptorId": "raw/licensed_road",
+          "gameSemanticFeature": "game_semantic/road",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/licensed_vector_tile_adapter_spec/bridge",
+          "kind": "bridge",
+          "sourceRawDescriptorId": "raw/licensed_bridge",
+          "gameSemanticFeature": "game_semantic/bridge",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/licensed_vector_tile_adapter_spec/water",
+          "kind": "water",
+          "sourceRawDescriptorId": "raw/licensed_water",
+          "gameSemanticFeature": "game_semantic/water",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        }
+      ],
+      "worldSourceGraph": {
+        "graphId": "world_source_graph/licensed_vector_tile_adapter_spec",
+        "baseDataImmutable": true,
+        "gameplayDeltasSeparate": true,
+        "contractOnly": true,
+        "noFullPlanetRawDump": true,
+        "chunks": [
+          {
+            "chunkId": "geo_chunk/licensed_vector_tile_adapter_spec/center",
+            "tileKey": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 9090,
+              "y": 9090
+            },
+            "featureIds": [
+              "normalized/licensed_vector_tile_adapter_spec/road",
+              "normalized/licensed_vector_tile_adapter_spec/bridge",
+              "normalized/licensed_vector_tile_adapter_spec/water"
+            ],
+            "hasBoundaryPrefetchFeatures": true,
+            "usesRelativeRefsOnly": true
+          }
+        ]
+      }
+    },
+    {
+      "specId": "ocr_georeference_fallback_future_only",
+      "displayName": "OCR georeference fallback future-only",
+      "adapterKind": "ocrGeoreferenceFallbackFutureOnly",
+      "metadataOnly": true,
+      "ocrFallbackFutureOnly": true,
+      "licensePolicy": {
+        "policyId": "license/ocr_georeference_fallback_future_only",
+        "licenseId": "user-provided-image-future-research",
+        "attributionText": "User-provided image/OCR fallback is future research only and never primary path",
+        "redistributionPolicy": "metadata_only_review_fixture_no_raw_geodata_redistribution",
+        "attributionRequired": true,
+        "runtimeOnlineExplicitPolicyAllowed": false,
+        "containsAdultOrRatingMetadata": false,
+        "safeFallbackPolicyId": "safe_public_geoworld_fallback"
+      },
+      "provenance": {
+        "provenanceId": "provenance/ocr_georeference_fallback_future_only",
+        "sourceDocumentPath": "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md",
+        "sourceReference": "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md",
+        "contentHash": "0fa9f582e76ad1be79c5d8659b755d4f8699f832d0403d5ad640230930cf44ea",
+        "adapterVersion": "goal098-contract-v1",
+        "normalizationVersion": "goal098-normalization-v1",
+        "sourceOfTruthKind": "documented_metadata_contract",
+        "promptTextIsSourceOfTruth": false,
+        "containsLfzCopiedCodeMarker": false
+      },
+      "cachePolicy": {
+        "policyId": "cache/ocr_georeference_fallback_future_only",
+        "mode": "userProvidedBundle",
+        "relativeCacheRoot": "geoworld/cache/ocr-future-only",
+        "cacheFirst": true,
+        "hasEvictionPolicy": true,
+        "publicTileBulkArchiveMode": false,
+        "noRawPublicTilePreseed": true
+      },
+      "fetchPlan": {
+        "planId": "fetch_plan/ocr_georeference_fallback_future_only",
+        "networkIoMode": "none",
+        "performsNetworkIo": false,
+        "runtimeOnlineModeEnabled": false,
+        "runtimeOnlinePolicyExplicitlyEnabled": false,
+        "publicTileServerScrapeAttempted": false,
+        "bulkPublicTileArchiveMode": false,
+        "providerOrApiHardcodedIntoCore": false,
+        "fullPlanetRawDumpRequested": false,
+        "ocrFallbackIsPrimaryPath": false
+      },
+      "fetchResult": {
+        "fixtureId": "ocr_georeference_fallback_future_only",
+        "metadataOnly": true,
+        "networkIoPerformed": false,
+        "rawGeodataDumpPresent": false,
+        "binaryMediaFileCount": 0,
+        "resultHash": "d48765426909a613aa8d893fdb5d379d2930b94e55e359244b4d8978079f0f6b"
+      },
+      "streamingPolicy": {
+        "policyId": "stream_policy/ocr_georeference_fallback_future_only",
+        "streamWindowRequest": {
+          "windowId": "stream_window/ocr_georeference_fallback_future_only",
+          "gridRequest": {
+            "requestId": "tile_grid/ocr_georeference_fallback_future_only",
+            "centerTile": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 891,
+              "y": 10891
+            },
+            "radiusTiles": 1,
+            "boundaryPrefetchTiles": 1,
+            "bounds": {
+              "southWest": {
+                "latitude": 48.4,
+                "longitude": 30.4
+              },
+              "northEast": {
+                "latitude": 48.6,
+                "longitude": 30.6
+              }
+            }
+          },
+          "boundaryPrefetchEnabled": true,
+          "queuePolicyId": "queue/ocr_georeference_fallback_future_only/cache_first",
+          "materializesOnlyRequestedWindow": true
+        },
+        "boundaryPrefetchRequired": true,
+        "runtimeOnlineBlockedByDefault": false,
+        "fullPlanetRawDumpForbidden": true,
+        "futureRuntimeStreamingContractOnly": true
+      },
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/ocr_georeference_hint",
+          "sourceTagFamily": "ocr:georeference_hint",
+          "rawTagKeys": [
+            "label",
+            "anchor"
+          ],
+          "normalizedKind": "terrainHint",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        }
+      ],
+      "normalizedFeatures": [
+        {
+          "featureId": "normalized/ocr_georeference_fallback_future_only/terrainhint",
+          "kind": "terrainHint",
+          "sourceRawDescriptorId": "raw/ocr_georeference_hint",
+          "gameSemanticFeature": "game_semantic/terrainhint",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        }
+      ],
+      "worldSourceGraph": {
+        "graphId": "world_source_graph/ocr_georeference_fallback_future_only",
+        "baseDataImmutable": true,
+        "gameplayDeltasSeparate": true,
+        "contractOnly": true,
+        "noFullPlanetRawDump": true,
+        "chunks": [
+          {
+            "chunkId": "geo_chunk/ocr_georeference_fallback_future_only/center",
+            "tileKey": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 891,
+              "y": 10891
+            },
+            "featureIds": [
+              "normalized/ocr_georeference_fallback_future_only/terrainhint"
+            ],
+            "hasBoundaryPrefetchFeatures": true,
+            "usesRelativeRefsOnly": true
+          }
+        ]
+      }
+    },
+    {
+      "specId": "offline_osm_extract_city_radius",
+      "displayName": "Offline OSM extract city radius",
+      "adapterKind": "offlineOsmExtract",
+      "metadataOnly": true,
+      "ocrFallbackFutureOnly": false,
+      "licensePolicy": {
+        "policyId": "license/offline_osm_extract_city_radius",
+        "licenseId": "odbl-1.0-reviewed-extract",
+        "attributionText": "OpenStreetMap contributors; metadata-only fixture, no raw geodata redistributed",
+        "redistributionPolicy": "metadata_only_review_fixture_no_raw_geodata_redistribution",
+        "attributionRequired": true,
+        "runtimeOnlineExplicitPolicyAllowed": false,
+        "containsAdultOrRatingMetadata": false,
+        "safeFallbackPolicyId": "safe_public_geoworld_fallback"
+      },
+      "provenance": {
+        "provenanceId": "provenance/offline_osm_extract_city_radius",
+        "sourceDocumentPath": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+        "sourceReference": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+        "contentHash": "12de00ff96f95294cd9c5b4f214cc21b38601d0048cad12fd216463b3ef9c1cb",
+        "adapterVersion": "goal098-contract-v1",
+        "normalizationVersion": "goal098-normalization-v1",
+        "sourceOfTruthKind": "documented_metadata_contract",
+        "promptTextIsSourceOfTruth": false,
+        "containsLfzCopiedCodeMarker": false
+      },
+      "cachePolicy": {
+        "policyId": "cache/offline_osm_extract_city_radius",
+        "mode": "importTimeLocalCache",
+        "relativeCacheRoot": "geoworld/cache/offline-osm-city-radius",
+        "cacheFirst": true,
+        "hasEvictionPolicy": true,
+        "publicTileBulkArchiveMode": false,
+        "noRawPublicTilePreseed": true
+      },
+      "fetchPlan": {
+        "planId": "fetch_plan/offline_osm_extract_city_radius",
+        "networkIoMode": "none",
+        "performsNetworkIo": false,
+        "runtimeOnlineModeEnabled": false,
+        "runtimeOnlinePolicyExplicitlyEnabled": false,
+        "publicTileServerScrapeAttempted": false,
+        "bulkPublicTileArchiveMode": false,
+        "providerOrApiHardcodedIntoCore": false,
+        "fullPlanetRawDumpRequested": false,
+        "ocrFallbackIsPrimaryPath": false
+      },
+      "fetchResult": {
+        "fixtureId": "offline_osm_extract_city_radius",
+        "metadataOnly": true,
+        "networkIoPerformed": false,
+        "rawGeodataDumpPresent": false,
+        "binaryMediaFileCount": 0,
+        "resultHash": "a3b84ce18cf82fb3d79fa0457962899669d01f9119934e059338d359776b748a"
+      },
+      "streamingPolicy": {
+        "policyId": "stream_policy/offline_osm_extract_city_radius",
+        "streamWindowRequest": {
+          "windowId": "stream_window/offline_osm_extract_city_radius",
+          "gridRequest": {
+            "requestId": "tile_grid/offline_osm_extract_city_radius",
+            "centerTile": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 121,
+              "y": 121
+            },
+            "radiusTiles": 2,
+            "boundaryPrefetchTiles": 1,
+            "bounds": {
+              "southWest": {
+                "latitude": 48.4,
+                "longitude": 30.4
+              },
+              "northEast": {
+                "latitude": 48.6,
+                "longitude": 30.6
+              }
+            }
+          },
+          "boundaryPrefetchEnabled": true,
+          "queuePolicyId": "queue/offline_osm_extract_city_radius/cache_first",
+          "materializesOnlyRequestedWindow": true
+        },
+        "boundaryPrefetchRequired": true,
+        "runtimeOnlineBlockedByDefault": false,
+        "fullPlanetRawDumpForbidden": true,
+        "futureRuntimeStreamingContractOnly": true
+      },
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/building_polygon",
+          "sourceTagFamily": "osm:building",
+          "rawTagKeys": [
+            "building",
+            "building:levels"
+          ],
+          "normalizedKind": "building",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/road_way",
+          "sourceTagFamily": "osm:highway",
+          "rawTagKeys": [
+            "highway",
+            "surface"
+          ],
+          "normalizedKind": "road",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/water_area",
+          "sourceTagFamily": "osm:natural_water",
+          "rawTagKeys": [
+            "natural",
+            "water"
+          ],
+          "normalizedKind": "water",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/landuse_area",
+          "sourceTagFamily": "osm:landuse",
+          "rawTagKeys": [
+            "landuse"
+          ],
+          "normalizedKind": "landUse",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        }
+      ],
+      "normalizedFeatures": [
+        {
+          "featureId": "normalized/offline_osm_extract_city_radius/building",
+          "kind": "building",
+          "sourceRawDescriptorId": "raw/building_polygon",
+          "gameSemanticFeature": "game_semantic/building",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/offline_osm_extract_city_radius/road",
+          "kind": "road",
+          "sourceRawDescriptorId": "raw/road_way",
+          "gameSemanticFeature": "game_semantic/road",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/offline_osm_extract_city_radius/water",
+          "kind": "water",
+          "sourceRawDescriptorId": "raw/water_area",
+          "gameSemanticFeature": "game_semantic/water",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/offline_osm_extract_city_radius/landuse",
+          "kind": "landUse",
+          "sourceRawDescriptorId": "raw/landuse_area",
+          "gameSemanticFeature": "game_semantic/landuse",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        }
+      ],
+      "worldSourceGraph": {
+        "graphId": "world_source_graph/offline_osm_extract_city_radius",
+        "baseDataImmutable": true,
+        "gameplayDeltasSeparate": true,
+        "contractOnly": true,
+        "noFullPlanetRawDump": true,
+        "chunks": [
+          {
+            "chunkId": "geo_chunk/offline_osm_extract_city_radius/center",
+            "tileKey": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 121,
+              "y": 121
+            },
+            "featureIds": [
+              "normalized/offline_osm_extract_city_radius/building",
+              "normalized/offline_osm_extract_city_radius/road",
+              "normalized/offline_osm_extract_city_radius/water",
+              "normalized/offline_osm_extract_city_radius/landuse"
+            ],
+            "hasBoundaryPrefetchFeatures": true,
+            "usesRelativeRefsOnly": true
+          }
+        ]
+      }
+    },
+    {
+      "specId": "runtime_online_optional_policy_blocked_by_default",
+      "displayName": "Runtime online optional policy blocked by default",
+      "adapterKind": "runtimeOnlineOptionalPolicy",
+      "metadataOnly": true,
+      "ocrFallbackFutureOnly": false,
+      "licensePolicy": {
+        "policyId": "license/runtime_online_optional_policy_blocked_by_default",
+        "licenseId": "runtime-online-policy-required",
+        "attributionText": "Runtime online mode blocked by default until explicit legal/provider policy exists",
+        "redistributionPolicy": "metadata_only_review_fixture_no_raw_geodata_redistribution",
+        "attributionRequired": true,
+        "runtimeOnlineExplicitPolicyAllowed": false,
+        "containsAdultOrRatingMetadata": false,
+        "safeFallbackPolicyId": "safe_public_geoworld_fallback"
+      },
+      "provenance": {
+        "provenanceId": "provenance/runtime_online_optional_policy_blocked_by_default",
+        "sourceDocumentPath": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+        "sourceReference": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+        "contentHash": "7cec9aaf26bbc4b4e0acc3fdd0420d1a11e34b772a610bcc68b0ea1e899d9506",
+        "adapterVersion": "goal098-contract-v1",
+        "normalizationVersion": "goal098-normalization-v1",
+        "sourceOfTruthKind": "documented_metadata_contract",
+        "promptTextIsSourceOfTruth": false,
+        "containsLfzCopiedCodeMarker": false
+      },
+      "cachePolicy": {
+        "policyId": "cache/runtime_online_optional_policy_blocked_by_default",
+        "mode": "runtimeOnlineBlockedByDefault",
+        "relativeCacheRoot": "geoworld/cache/runtime-online-blocked",
+        "cacheFirst": true,
+        "hasEvictionPolicy": true,
+        "publicTileBulkArchiveMode": false,
+        "noRawPublicTilePreseed": true
+      },
+      "fetchPlan": {
+        "planId": "fetch_plan/runtime_online_optional_policy_blocked_by_default",
+        "networkIoMode": "runtimeOptionalBlockedByDefault",
+        "performsNetworkIo": false,
+        "runtimeOnlineModeEnabled": false,
+        "runtimeOnlinePolicyExplicitlyEnabled": false,
+        "publicTileServerScrapeAttempted": false,
+        "bulkPublicTileArchiveMode": false,
+        "providerOrApiHardcodedIntoCore": false,
+        "fullPlanetRawDumpRequested": false,
+        "ocrFallbackIsPrimaryPath": false
+      },
+      "fetchResult": {
+        "fixtureId": "runtime_online_optional_policy_blocked_by_default",
+        "metadataOnly": true,
+        "networkIoPerformed": false,
+        "rawGeodataDumpPresent": false,
+        "binaryMediaFileCount": 0,
+        "resultHash": "1c63d74cc6373e381ff0fabca0d9eb4618c3ce653d4f1c2b1bf9de7f45c2241d"
+      },
+      "streamingPolicy": {
+        "policyId": "stream_policy/runtime_online_optional_policy_blocked_by_default",
+        "streamWindowRequest": {
+          "windowId": "stream_window/runtime_online_optional_policy_blocked_by_default",
+          "gridRequest": {
+            "requestId": "tile_grid/runtime_online_optional_policy_blocked_by_default",
+            "centerTile": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 4128,
+              "y": 4128
+            },
+            "radiusTiles": 1,
+            "boundaryPrefetchTiles": 1,
+            "bounds": {
+              "southWest": {
+                "latitude": 48.4,
+                "longitude": 30.4
+              },
+              "northEast": {
+                "latitude": 48.6,
+                "longitude": 30.6
+              }
+            }
+          },
+          "boundaryPrefetchEnabled": true,
+          "queuePolicyId": "queue/runtime_online_optional_policy_blocked_by_default/cache_first",
+          "materializesOnlyRequestedWindow": true
+        },
+        "boundaryPrefetchRequired": true,
+        "runtimeOnlineBlockedByDefault": true,
+        "fullPlanetRawDumpForbidden": true,
+        "futureRuntimeStreamingContractOnly": true
+      },
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/online_contract_placeholder",
+          "sourceTagFamily": "policy:runtime_online_future",
+          "rawTagKeys": [
+            "kind"
+          ],
+          "normalizedKind": "terrainHint",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        }
+      ],
+      "normalizedFeatures": [
+        {
+          "featureId": "normalized/runtime_online_optional_policy_blocked_by_default/terrainhint",
+          "kind": "terrainHint",
+          "sourceRawDescriptorId": "raw/online_contract_placeholder",
+          "gameSemanticFeature": "game_semantic/terrainhint",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        }
+      ],
+      "worldSourceGraph": {
+        "graphId": "world_source_graph/runtime_online_optional_policy_blocked_by_default",
+        "baseDataImmutable": true,
+        "gameplayDeltasSeparate": true,
+        "contractOnly": true,
+        "noFullPlanetRawDump": true,
+        "chunks": [
+          {
+            "chunkId": "geo_chunk/runtime_online_optional_policy_blocked_by_default/center",
+            "tileKey": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 4128,
+              "y": 4128
+            },
+            "featureIds": [
+              "normalized/runtime_online_optional_policy_blocked_by_default/terrainhint"
+            ],
+            "hasBoundaryPrefetchFeatures": true,
+            "usesRelativeRefsOnly": true
+          }
+        ]
+      }
+    },
+    {
+      "specId": "self_generated_realism_world_source",
+      "displayName": "Self-generated realism world source",
+      "adapterKind": "selfGeneratedRealismWorldSource",
+      "metadataOnly": true,
+      "ocrFallbackFutureOnly": false,
+      "licensePolicy": {
+        "policyId": "license/self_generated_realism_world_source",
+        "licenseId": "llmgc-self-generated-realism-v1",
+        "attributionText": "LLMGameCreator deterministic self-generated realism source; no external geodata",
+        "redistributionPolicy": "metadata_only_review_fixture_no_raw_geodata_redistribution",
+        "attributionRequired": true,
+        "runtimeOnlineExplicitPolicyAllowed": false,
+        "containsAdultOrRatingMetadata": false,
+        "safeFallbackPolicyId": "safe_public_geoworld_fallback"
+      },
+      "provenance": {
+        "provenanceId": "provenance/self_generated_realism_world_source",
+        "sourceDocumentPath": "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md",
+        "sourceReference": "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md",
+        "contentHash": "3e586228e1d540ff52add5b150b5797ec8b67dbd6278de5566bb94096ac4cb8a",
+        "adapterVersion": "goal098-contract-v1",
+        "normalizationVersion": "goal098-normalization-v1",
+        "sourceOfTruthKind": "documented_metadata_contract",
+        "promptTextIsSourceOfTruth": false,
+        "containsLfzCopiedCodeMarker": false
+      },
+      "cachePolicy": {
+        "policyId": "cache/self_generated_realism_world_source",
+        "mode": "selfGeneratedSeedCache",
+        "relativeCacheRoot": "geoworld/cache/self-generated-realism",
+        "cacheFirst": true,
+        "hasEvictionPolicy": true,
+        "publicTileBulkArchiveMode": false,
+        "noRawPublicTilePreseed": true
+      },
+      "fetchPlan": {
+        "planId": "fetch_plan/self_generated_realism_world_source",
+        "networkIoMode": "none",
+        "performsNetworkIo": false,
+        "runtimeOnlineModeEnabled": false,
+        "runtimeOnlinePolicyExplicitlyEnabled": false,
+        "publicTileServerScrapeAttempted": false,
+        "bulkPublicTileArchiveMode": false,
+        "providerOrApiHardcodedIntoCore": false,
+        "fullPlanetRawDumpRequested": false,
+        "ocrFallbackIsPrimaryPath": false
+      },
+      "fetchResult": {
+        "fixtureId": "self_generated_realism_world_source",
+        "metadataOnly": true,
+        "networkIoPerformed": false,
+        "rawGeodataDumpPresent": false,
+        "binaryMediaFileCount": 0,
+        "resultHash": "b3cfe1bf9ad4a755ce42ca14fce02a3612be8e9e615c6a66c052ee54a28fd528"
+      },
+      "streamingPolicy": {
+        "policyId": "stream_policy/self_generated_realism_world_source",
+        "streamWindowRequest": {
+          "windowId": "stream_window/self_generated_realism_world_source",
+          "gridRequest": {
+            "requestId": "tile_grid/self_generated_realism_world_source",
+            "centerTile": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 8314,
+              "y": 8314
+            },
+            "radiusTiles": 2,
+            "boundaryPrefetchTiles": 1,
+            "bounds": {
+              "southWest": {
+                "latitude": 48.4,
+                "longitude": 30.4
+              },
+              "northEast": {
+                "latitude": 48.6,
+                "longitude": 30.6
+              }
+            }
+          },
+          "boundaryPrefetchEnabled": true,
+          "queuePolicyId": "queue/self_generated_realism_world_source/cache_first",
+          "materializesOnlyRequestedWindow": true
+        },
+        "boundaryPrefetchRequired": true,
+        "runtimeOnlineBlockedByDefault": false,
+        "fullPlanetRawDumpForbidden": true,
+        "futureRuntimeStreamingContractOnly": true
+      },
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/generated_settlement",
+          "sourceTagFamily": "generated:settlement",
+          "rawTagKeys": [
+            "district",
+            "density"
+          ],
+          "normalizedKind": "administrativeArea",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/generated_transit",
+          "sourceTagFamily": "generated:transit",
+          "rawTagKeys": [
+            "route_kind"
+          ],
+          "normalizedKind": "transit",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/generated_vegetation",
+          "sourceTagFamily": "generated:vegetation",
+          "rawTagKeys": [
+            "biome"
+          ],
+          "normalizedKind": "vegetation",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        }
+      ],
+      "normalizedFeatures": [
+        {
+          "featureId": "normalized/self_generated_realism_world_source/administrativearea",
+          "kind": "administrativeArea",
+          "sourceRawDescriptorId": "raw/generated_settlement",
+          "gameSemanticFeature": "game_semantic/administrativearea",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/self_generated_realism_world_source/transit",
+          "kind": "transit",
+          "sourceRawDescriptorId": "raw/generated_transit",
+          "gameSemanticFeature": "game_semantic/transit",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/self_generated_realism_world_source/vegetation",
+          "kind": "vegetation",
+          "sourceRawDescriptorId": "raw/generated_vegetation",
+          "gameSemanticFeature": "game_semantic/vegetation",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        }
+      ],
+      "worldSourceGraph": {
+        "graphId": "world_source_graph/self_generated_realism_world_source",
+        "baseDataImmutable": true,
+        "gameplayDeltasSeparate": true,
+        "contractOnly": true,
+        "noFullPlanetRawDump": true,
+        "chunks": [
+          {
+            "chunkId": "geo_chunk/self_generated_realism_world_source/center",
+            "tileKey": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 8314,
+              "y": 8314
+            },
+            "featureIds": [
+              "normalized/self_generated_realism_world_source/administrativearea",
+              "normalized/self_generated_realism_world_source/transit",
+              "normalized/self_generated_realism_world_source/vegetation"
+            ],
+            "hasBoundaryPrefetchFeatures": true,
+            "usesRelativeRefsOnly": true
+          }
+        ]
+      }
+    },
+    {
+      "specId": "user_provided_map_bundle",
+      "displayName": "User-provided map bundle",
+      "adapterKind": "userProvidedMapBundle",
+      "metadataOnly": true,
+      "ocrFallbackFutureOnly": false,
+      "licensePolicy": {
+        "policyId": "license/user_provided_map_bundle",
+        "licenseId": "user-provided-local-bundle",
+        "attributionText": "User-provided local bundle with explicit attribution supplied by project owner",
+        "redistributionPolicy": "metadata_only_review_fixture_no_raw_geodata_redistribution",
+        "attributionRequired": true,
+        "runtimeOnlineExplicitPolicyAllowed": false,
+        "containsAdultOrRatingMetadata": false,
+        "safeFallbackPolicyId": "safe_public_geoworld_fallback"
+      },
+      "provenance": {
+        "provenanceId": "provenance/user_provided_map_bundle",
+        "sourceDocumentPath": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+        "sourceReference": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+        "contentHash": "2afd6918d02e67a4caa0502ddcfc4faa2ce2aba48201fd726b6791b6f0c15660",
+        "adapterVersion": "goal098-contract-v1",
+        "normalizationVersion": "goal098-normalization-v1",
+        "sourceOfTruthKind": "documented_metadata_contract",
+        "promptTextIsSourceOfTruth": false,
+        "containsLfzCopiedCodeMarker": false
+      },
+      "cachePolicy": {
+        "policyId": "cache/user_provided_map_bundle",
+        "mode": "userProvidedBundle",
+        "relativeCacheRoot": "geoworld/cache/user-map-bundle",
+        "cacheFirst": true,
+        "hasEvictionPolicy": true,
+        "publicTileBulkArchiveMode": false,
+        "noRawPublicTilePreseed": true
+      },
+      "fetchPlan": {
+        "planId": "fetch_plan/user_provided_map_bundle",
+        "networkIoMode": "none",
+        "performsNetworkIo": false,
+        "runtimeOnlineModeEnabled": false,
+        "runtimeOnlinePolicyExplicitlyEnabled": false,
+        "publicTileServerScrapeAttempted": false,
+        "bulkPublicTileArchiveMode": false,
+        "providerOrApiHardcodedIntoCore": false,
+        "fullPlanetRawDumpRequested": false,
+        "ocrFallbackIsPrimaryPath": false
+      },
+      "fetchResult": {
+        "fixtureId": "user_provided_map_bundle",
+        "metadataOnly": true,
+        "networkIoPerformed": false,
+        "rawGeodataDumpPresent": false,
+        "binaryMediaFileCount": 0,
+        "resultHash": "77c02de81862f4f229c636ca9546b174a45b26dbd56bb51f546704f034916edc"
+      },
+      "streamingPolicy": {
+        "policyId": "stream_policy/user_provided_map_bundle",
+        "streamWindowRequest": {
+          "windowId": "stream_window/user_provided_map_bundle",
+          "gridRequest": {
+            "requestId": "tile_grid/user_provided_map_bundle",
+            "centerTile": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 2494,
+              "y": 12494
+            },
+            "radiusTiles": 1,
+            "boundaryPrefetchTiles": 1,
+            "bounds": {
+              "southWest": {
+                "latitude": 48.4,
+                "longitude": 30.4
+              },
+              "northEast": {
+                "latitude": 48.6,
+                "longitude": 30.6
+              }
+            }
+          },
+          "boundaryPrefetchEnabled": true,
+          "queuePolicyId": "queue/user_provided_map_bundle/cache_first",
+          "materializesOnlyRequestedWindow": true
+        },
+        "boundaryPrefetchRequired": true,
+        "runtimeOnlineBlockedByDefault": false,
+        "fullPlanetRawDumpForbidden": true,
+        "futureRuntimeStreamingContractOnly": true
+      },
+      "rawDescriptors": [
+        {
+          "rawDescriptorId": "raw/user_poi",
+          "sourceTagFamily": "bundle:poi",
+          "rawTagKeys": [
+            "poi_class",
+            "label"
+          ],
+          "normalizedKind": "poi",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/user_barrier",
+          "sourceTagFamily": "bundle:barrier",
+          "rawTagKeys": [
+            "barrier_class"
+          ],
+          "normalizedKind": "barrier",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        },
+        {
+          "rawDescriptorId": "raw/user_vegetation",
+          "sourceTagFamily": "bundle:vegetation",
+          "rawTagKeys": [
+            "vegetation_class"
+          ],
+          "normalizedKind": "vegetation",
+          "consumedDirectlyByGameplay": false,
+          "preservedAsRawPayload": false
+        }
+      ],
+      "normalizedFeatures": [
+        {
+          "featureId": "normalized/user_provided_map_bundle/poi",
+          "kind": "poi",
+          "sourceRawDescriptorId": "raw/user_poi",
+          "gameSemanticFeature": "game_semantic/poi",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/user_provided_map_bundle/barrier",
+          "kind": "barrier",
+          "sourceRawDescriptorId": "raw/user_barrier",
+          "gameSemanticFeature": "game_semantic/barrier",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        },
+        {
+          "featureId": "normalized/user_provided_map_bundle/vegetation",
+          "kind": "vegetation",
+          "sourceRawDescriptorId": "raw/user_vegetation",
+          "gameSemanticFeature": "game_semantic/vegetation",
+          "hasNeutralGeometryContract": true,
+          "containsRawSourceTags": false
+        }
+      ],
+      "worldSourceGraph": {
+        "graphId": "world_source_graph/user_provided_map_bundle",
+        "baseDataImmutable": true,
+        "gameplayDeltasSeparate": true,
+        "contractOnly": true,
+        "noFullPlanetRawDump": true,
+        "chunks": [
+          {
+            "chunkId": "geo_chunk/user_provided_map_bundle/center",
+            "tileKey": {
+              "scheme": "webMercatorGoogle",
+              "zoom": 14,
+              "x": 2494,
+              "y": 12494
+            },
+            "featureIds": [
+              "normalized/user_provided_map_bundle/poi",
+              "normalized/user_provided_map_bundle/barrier",
+              "normalized/user_provided_map_bundle/vegetation"
+            ],
+            "hasBoundaryPrefetchFeatures": true,
+            "usesRelativeRefsOnly": true
+          }
+        ]
+      }
+    }
+  ]
+}

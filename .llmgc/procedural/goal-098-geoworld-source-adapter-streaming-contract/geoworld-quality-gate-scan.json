@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "geoworld_quality_gate_scan_v1",
+  "goalId": "goal_098_geoworld_source_adapter_streaming_contract",
+  "manualGate": "geoworld_source_adapter_streaming_contract_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "validFixturesPassed": true,
+  "negativeProofPassed": true,
+  "normalizedTaxonomyPassed": true,
+  "runtimeBoundaryPrefetchContractPresent": true,
+  "lfzDocsConsumedAsLineage": true,
+  "noLfzCodeCopied": true,
+  "noNetworkOrProviderImplementation": true,
+  "noRuntimeUnitySchemaChanges": true,
+  "futureRuntimeStreamingContractsOnly": true,
+  "noRawGeodataDumps": true,
+  "noBinaryOrRasterMedia": true,
+  "artifactScopeReady": true,
+  "expectedChangedPathPrefixes": [
+    "src/LLMGameCreator.Application/Design/GeoworldSourceAdapterStreamingContract/",
+    "tests/LLMGameCreator.Tests/Application/GeoworldSourceAdapterStreamingContract/",
+    "tests/LLMGameCreator.Tests/ProductSmoke/GeoworldSourceAdapterStreamingContractProductSmokeTests.cs",
+    ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/",
+    "docs/agent-tasks/goal-098-geoworld-source-adapter-streaming-contract/"
+  ],
+  "diagnostics": []
+}
