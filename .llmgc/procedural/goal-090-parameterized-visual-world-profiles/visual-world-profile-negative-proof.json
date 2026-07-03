@@ -1,0 +1,352 @@
+{
+  "schemaVersion": "visual_world_profile_negative_proof_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "passed": true,
+  "scenarioCount": 18,
+  "rejectedCount": 18,
+  "matchedExpectationCount": 18,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_output_path",
+      "causalMutation": "absolute output path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.path.absolute",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Output path must be relative and safe."
+        }
+      ]
+    },
+    {
+      "scenarioId": "chunk_size_zero",
+      "causalMutation": "chunk width is zero",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_size.invalid",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Chunk width and height must be positive."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_layer_ids",
+      "causalMutation": "duplicate layer ids",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_address.layer_unknown",
+          "target": "sample_02_interior_2_1",
+          "message": "Chunk sample layer must exist in profile layers."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.layer_id.duplicate",
+          "target": "terrain",
+          "message": "Layer ids must be unique."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.layer_link.unknown_layer",
+          "target": "terrain_to_interior_portal",
+          "message": "Layer links must reference known layers."
+        }
+      ]
+    },
+    {
+      "scenarioId": "finite_invalid_dimensions",
+      "causalMutation": "finite profile width below validation bound",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.dimension.invalid",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Finite width is outside validation bounds."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fixed_size_only_profile_claims_generic",
+      "causalMutation": "fixed-size allowlist pretending to be generic",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.fixed_size_only.forbidden",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Generic profiles must not be backed by a fixed-size allowlist."
+        }
+      ]
+    },
+    {
+      "scenarioId": "hardcoded_surface_underground_only_requirement",
+      "causalMutation": "hardcoded surface and underground layer requirement",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.surface_underground_only.forbidden",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Layer validation must be data-driven and not require only surface plus underground."
+        }
+      ]
+    },
+    {
+      "scenarioId": "huge_attempts_raw_cell_dump",
+      "causalMutation": "huge sparse profile attempts raw cell dump",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.raw_cell_dump.forbidden",
+          "target": "huge_sparse_100000x100000_multilayer",
+          "message": "Huge finite profiles must not allow raw cell dumps."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.raw_cell_dump.forbidden",
+          "target": "huge_sparse_100000x100000_multilayer",
+          "message": "Huge and infinite profiles must not attempt raw cell dumps."
+        }
+      ]
+    },
+    {
+      "scenarioId": "infinite_declares_finite_only_materialization",
+      "causalMutation": "infinite profile declares finite-only materialization",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.infinite.finite_materialization",
+          "target": "infinite_streaming_world_multilayer",
+          "message": "Infinite profiles must not declare finite-only materialization."
+        }
+      ]
+    },
+    {
+      "scenarioId": "invalid_layer_id",
+      "causalMutation": "invalid layer id",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_address.layer_unknown",
+          "target": "sample_00_terrain_0_0",
+          "message": "Chunk sample layer must exist in profile layers."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_address.layer_unknown",
+          "target": "sample_01_terrain_7_5",
+          "message": "Chunk sample layer must exist in profile layers."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.layer_id.invalid",
+          "target": "Surface Bad",
+          "message": "Layer id must be stable lowercase metadata."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.layer_link.unknown_layer",
+          "target": "terrain_to_interior_portal",
+          "message": "Layer links must reference known layers."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.layer_link.unknown_layer",
+          "target": "weather_overlay_to_terrain",
+          "message": "Layer links must reference known layers."
+        }
+      ]
+    },
+    {
+      "scenarioId": "layer_link_unknown_layer",
+      "causalMutation": "layer link references unknown layer",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.layer_link.unknown_layer",
+          "target": "bad_unknown_layer_link",
+          "message": "Layer links must reference known layers."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_generator_version",
+      "causalMutation": "missing generator version",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_00_terrain_0_0",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_01_terrain_7_5",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_02_interior_2_1",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_03_weather_overlay_7_5",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.generator_version.missing",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Generator version is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_world_seed",
+      "causalMutation": "missing world seed",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_00_terrain_0_0",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_01_terrain_7_5",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_02_interior_2_1",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_03_weather_overlay_7_5",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        },
+        {
+          "severity": "error",
+          "code": "visual_world.seed.missing",
+          "target": "finite_custom_sizes_matrix",
+          "message": "World seed is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "non_deterministic_chunk_key",
+      "causalMutation": "chunk key does not match formula",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.chunk_key.nondeterministic",
+          "target": "sample_00_surface_0_0",
+          "message": "Materialized chunk keys must match the deterministic chunk key formula."
+        }
+      ]
+    },
+    {
+      "scenarioId": "patch_chunk_incompatibility",
+      "causalMutation": "patch no longer divides chunk",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.patch_chunk.incompatible",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Patch dimensions must divide chunk dimensions when alignment is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "patch_size_zero",
+      "causalMutation": "patch height is zero",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.patch_size.invalid",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Patch width and height must be positive."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_source_of_truth",
+      "causalMutation": "prompt text as source of truth",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.prompt.source_of_truth",
+          "target": "finite_custom_sizes_matrix",
+          "message": "Prompt text must not be profile source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rating_metadata_without_safe_fallback",
+      "causalMutation": "adult/rating metadata missing safe fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.rating.safe_fallback_missing",
+          "target": "adult_rating_missing_safe_fallback",
+          "message": "Adult/rating metadata requires a safe fallback ref."
+        }
+      ]
+    },
+    {
+      "scenarioId": "stream_window_without_center",
+      "causalMutation": "stream window missing center and radius",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_world.stream_window.invalid",
+          "target": "broken_stream_window",
+          "message": "Stream windows require a center, non-negative radius and positive window size."
+        }
+      ]
+    }
+  ]
+}

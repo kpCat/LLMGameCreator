@@ -1,0 +1,13 @@
+<svg viewBox="0 0 320 120" data-profile-id="benchmark_heroes_144x144_surface_underground">
+  <title>benchmark_heroes_144x144_surface_underground</title>
+  <rect x="0" y="0" width="320" height="120" fill="#12161b" />
+  <text x="12" y="18" fill="#e8eef3" font-size="10" font-family="monospace">benchmark_heroes_144x144_surface_underground</text>
+  <text x="12" y="34" fill="#9fb0bf" font-size="8" font-family="monospace">mode=Finite; chunks=24x16; patch=12x8</text>
+  <rect x="12" y="48" width="40" height="24" fill="#69a55a" stroke="#26313b" stroke-width="1" data-layer-id="surface" />
+  <text x="15" y="63" fill="#0f1317" font-size="6" font-family="monospace">surface</text>
+  <rect x="58" y="48" width="40" height="24" fill="#746b84" stroke="#26313b" stroke-width="1" data-layer-id="underground" />
+  <text x="61" y="63" fill="#0f1317" font-size="6" font-family="monospace">undergroun</text>
+  <rect x="12" y="86" width="14" height="14" fill="#c79d4a" data-chunk-key="028629b81be7" />
+  <rect x="30" y="86" width="14" height="14" fill="#c79d4a" data-chunk-key="9c57ed352f7c" />
+  <rect x="48" y="86" width="14" height="14" fill="#c79d4a" data-chunk-key="62c8c0c45536" />
+</svg>

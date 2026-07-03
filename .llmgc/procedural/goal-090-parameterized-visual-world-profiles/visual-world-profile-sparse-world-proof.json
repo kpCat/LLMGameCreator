@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "visual_world_profile_sparse_world_proof_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "passed": true,
+  "hugeSparseProfilePassed": true,
+  "infiniteProfilePassed": true,
+  "rows": [
+    {
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "isInfinite": false,
+      "logicalCellCount": 30000000000,
+      "estimatedChunkCapacity": 7328907,
+      "materializedChunkCount": 4,
+      "sparseOnly": true,
+      "rawCellDumpAllowed": false
+    },
+    {
+      "profileId": "infinite_streaming_world_multilayer",
+      "isInfinite": true,
+      "logicalCellCount": null,
+      "estimatedChunkCapacity": null,
+      "materializedChunkCount": 5,
+      "sparseOnly": true,
+      "rawCellDumpAllowed": false
+    }
+  ]
+}

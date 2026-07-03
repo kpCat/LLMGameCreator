@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "visual_world_profile_validation_matrix_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "passed": true,
+  "rows": [
+    {
+      "profileId": "benchmark_heroes_144x144_surface_underground",
+      "passed": true,
+      "diagnosticCount": 0,
+      "mode": "Finite",
+      "isBenchmark": true,
+      "rawCellDumpAllowed": false
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "passed": true,
+      "diagnosticCount": 0,
+      "mode": "Finite",
+      "isBenchmark": false,
+      "rawCellDumpAllowed": false
+    },
+    {
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "passed": true,
+      "diagnosticCount": 0,
+      "mode": "HugeSparseFinite",
+      "isBenchmark": false,
+      "rawCellDumpAllowed": false
+    },
+    {
+      "profileId": "infinite_streaming_world_multilayer",
+      "passed": true,
+      "diagnosticCount": 0,
+      "mode": "Infinite",
+      "isBenchmark": false,
+      "rawCellDumpAllowed": false
+    }
+  ]
+}

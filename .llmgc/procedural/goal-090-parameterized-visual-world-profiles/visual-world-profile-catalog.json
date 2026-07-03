@@ -1,0 +1,1529 @@
+{
+  "schemaVersion": "visual_world_profile_catalog_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "manualGate": "parameterized_visual_world_profiles_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "profiles": [
+    {
+      "profileId": "benchmark_heroes_144x144_surface_underground",
+      "worldSeed": "goal090-benchmark-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "coordinateOrigin": "center_zero",
+      "mode": "finite",
+      "finiteWidth": 144,
+      "finiteHeight": 144,
+      "virtualBounds": {
+        "isInfinite": false,
+        "minimumX": 0,
+        "minimumY": 0,
+        "maximumX": 143,
+        "maximumY": 143
+      },
+      "isInfinite": false,
+      "isBenchmarkProfile": true,
+      "benchmarkNote": "Fixture preserves Goal088 Heroes-scale coverage; it is not an architectural size limit.",
+      "validationBounds": {
+        "minimumWidth": 1,
+        "minimumHeight": 1,
+        "maximumWidth": 1000000,
+        "maximumHeight": 1000000
+      },
+      "chunkProfile": {
+        "chunkWidth": 24,
+        "chunkHeight": 16,
+        "requiresPatchAlignment": true,
+        "usesDeterministicChunkKeys": true,
+        "deterministicKeyFormula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)"
+      },
+      "patchProfile": {
+        "patchWidth": 12,
+        "patchHeight": 8
+      },
+      "logicalCellCount": 41472,
+      "rawCellDumpAllowed": false,
+      "claimsGenericButUsesFixedSizeAllowlist": false,
+      "requiresSurfaceUndergroundOnly": false,
+      "promptTextIsSourceOfTruth": false,
+      "sourceOfTruthKind": "metadata_contract",
+      "outputRelativeDirectory": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles",
+      "fixedSizeAllowlist": [],
+      "layers": [
+        {
+          "layerId": "surface",
+          "layerKind": "overworld_surface",
+          "order": 0,
+          "materializationRole": "benchmark_surface_visual_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/surface"
+        },
+        {
+          "layerId": "underground",
+          "layerKind": "subterranean_region",
+          "order": 1,
+          "materializationRole": "benchmark_underground_visual_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/underground"
+        }
+      ],
+      "finiteSizeSamples": [],
+      "sparseRegionIndex": {
+        "sparseOnly": false,
+        "attemptsRawCellDump": false,
+        "finiteOnlyMaterialization": false,
+        "materializedChunks": [
+          {
+            "sampleId": "sample_00_surface_0_0",
+            "address": {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            "chunkKey": {
+              "profileId": "benchmark_heroes_144x144_surface_underground",
+              "worldSeed": "goal090-benchmark-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "028629b81be710084b57df99c6e67f1eba6676c9fd4142bb9b2101300431d836"
+            },
+            "sampleRole": "origin_or_primary_anchor"
+          },
+          {
+            "sampleId": "sample_01_surface_3_4",
+            "address": {
+              "layerId": "surface",
+              "chunkX": 3,
+              "chunkY": 4
+            },
+            "chunkKey": {
+              "profileId": "benchmark_heroes_144x144_surface_underground",
+              "worldSeed": "goal090-benchmark-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "surface",
+              "chunkX": 3,
+              "chunkY": 4,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "9c57ed352f7c523bbe2121d21b7d1e46d1ecdfc59d2a68ad3b2c977aba509dde"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_02_underground_2_3",
+            "address": {
+              "layerId": "underground",
+              "chunkX": 2,
+              "chunkY": 3
+            },
+            "chunkKey": {
+              "profileId": "benchmark_heroes_144x144_surface_underground",
+              "worldSeed": "goal090-benchmark-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "underground",
+              "chunkX": 2,
+              "chunkY": 3,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "62c8c0c45536c34645250113f31f5e9a26d14c13b3dfdc66c9640f2d3bf8aedd"
+            },
+            "sampleRole": "sparse_review_anchor"
+          }
+        ],
+        "anchorIds": []
+      },
+      "streamWindows": [
+        {
+          "windowId": "benchmark_center_window",
+          "centerChunkX": 3,
+          "centerChunkY": 4,
+          "radiusChunks": 1,
+          "windowChunkCount": 18,
+          "sampledAddresses": [
+            {
+              "layerId": "surface",
+              "chunkX": 2,
+              "chunkY": 3
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 2,
+              "chunkY": 3
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 3,
+              "chunkY": 3
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 3,
+              "chunkY": 3
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 4,
+              "chunkY": 3
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 4,
+              "chunkY": 3
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 2,
+              "chunkY": 4
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 2,
+              "chunkY": 4
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 3,
+              "chunkY": 4
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 3,
+              "chunkY": 4
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 4,
+              "chunkY": 4
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 4,
+              "chunkY": 4
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 2,
+              "chunkY": 5
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 2,
+              "chunkY": 5
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 3,
+              "chunkY": 5
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 3,
+              "chunkY": 5
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 4,
+              "chunkY": 5
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 4,
+              "chunkY": 5
+            }
+          ]
+        }
+      ],
+      "layerLinks": [
+        {
+          "linkId": "benchmark_surface_to_underground_gate",
+          "fromLayerId": "surface",
+          "toLayerId": "underground",
+          "linkKind": "portal"
+        }
+      ],
+      "ratingMetadata": [],
+      "sourceLineageGoalIds": [
+        "goal_087",
+        "goal_088"
+      ]
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "worldSeed": "goal090-finite-matrix-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "coordinateOrigin": "center_zero",
+      "mode": "finite",
+      "finiteWidth": 512,
+      "finiteHeight": 384,
+      "virtualBounds": {
+        "isInfinite": false,
+        "minimumX": 0,
+        "minimumY": 0,
+        "maximumX": 511,
+        "maximumY": 383
+      },
+      "isInfinite": false,
+      "isBenchmarkProfile": false,
+      "benchmarkNote": "",
+      "validationBounds": {
+        "minimumWidth": 1,
+        "minimumHeight": 1,
+        "maximumWidth": 1000000,
+        "maximumHeight": 1000000
+      },
+      "chunkProfile": {
+        "chunkWidth": 32,
+        "chunkHeight": 32,
+        "requiresPatchAlignment": true,
+        "usesDeterministicChunkKeys": true,
+        "deterministicKeyFormula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)"
+      },
+      "patchProfile": {
+        "patchWidth": 8,
+        "patchHeight": 8
+      },
+      "logicalCellCount": 589824,
+      "rawCellDumpAllowed": false,
+      "claimsGenericButUsesFixedSizeAllowlist": false,
+      "requiresSurfaceUndergroundOnly": false,
+      "promptTextIsSourceOfTruth": false,
+      "sourceOfTruthKind": "metadata_contract",
+      "outputRelativeDirectory": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles",
+      "fixedSizeAllowlist": [],
+      "layers": [
+        {
+          "layerId": "terrain",
+          "layerKind": "visual_terrain",
+          "order": 0,
+          "materializationRole": "finite_matrix_terrain_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/terrain"
+        },
+        {
+          "layerId": "interior",
+          "layerKind": "local_interior_overlay",
+          "order": 1,
+          "materializationRole": "finite_matrix_interior_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/interior"
+        },
+        {
+          "layerId": "weather_overlay",
+          "layerKind": "weather_effect_overlay",
+          "order": 2,
+          "materializationRole": "finite_matrix_weather_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/weather_overlay"
+        }
+      ],
+      "finiteSizeSamples": [
+        {
+          "sizeId": "sample_1x1",
+          "width": 1,
+          "height": 1,
+          "layerCount": 3,
+          "logicalCellCount": 3
+        },
+        {
+          "sizeId": "sample_17x31",
+          "width": 17,
+          "height": 31,
+          "layerCount": 3,
+          "logicalCellCount": 1581
+        },
+        {
+          "sizeId": "sample_64x96",
+          "width": 64,
+          "height": 96,
+          "layerCount": 3,
+          "logicalCellCount": 18432
+        },
+        {
+          "sizeId": "sample_144x144",
+          "width": 144,
+          "height": 144,
+          "layerCount": 3,
+          "logicalCellCount": 62208
+        },
+        {
+          "sizeId": "sample_255x257",
+          "width": 255,
+          "height": 257,
+          "layerCount": 3,
+          "logicalCellCount": 196605
+        },
+        {
+          "sizeId": "sample_512x384",
+          "width": 512,
+          "height": 384,
+          "layerCount": 3,
+          "logicalCellCount": 589824
+        }
+      ],
+      "sparseRegionIndex": {
+        "sparseOnly": false,
+        "attemptsRawCellDump": false,
+        "finiteOnlyMaterialization": false,
+        "materializedChunks": [
+          {
+            "sampleId": "sample_00_terrain_0_0",
+            "address": {
+              "layerId": "terrain",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            "chunkKey": {
+              "profileId": "finite_custom_sizes_matrix",
+              "worldSeed": "goal090-finite-matrix-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "terrain",
+              "chunkX": 0,
+              "chunkY": 0,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "54b6679ce7ed162618fe3dc7a92d53549e7742655b451da7976f34925a7a966f"
+            },
+            "sampleRole": "origin_or_primary_anchor"
+          },
+          {
+            "sampleId": "sample_01_terrain_7_5",
+            "address": {
+              "layerId": "terrain",
+              "chunkX": 7,
+              "chunkY": 5
+            },
+            "chunkKey": {
+              "profileId": "finite_custom_sizes_matrix",
+              "worldSeed": "goal090-finite-matrix-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "terrain",
+              "chunkX": 7,
+              "chunkY": 5,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "7f9fad6d2759f712a59978befac64fc6d3206913194ab2530f8e68fb735794c2"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_02_interior_2_1",
+            "address": {
+              "layerId": "interior",
+              "chunkX": 2,
+              "chunkY": 1
+            },
+            "chunkKey": {
+              "profileId": "finite_custom_sizes_matrix",
+              "worldSeed": "goal090-finite-matrix-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "interior",
+              "chunkX": 2,
+              "chunkY": 1,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "7cf1011bd9303e4211e10ac71b7d8bcadc5018995f326dd2f18f081e8a0c09e9"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_03_weather_overlay_7_5",
+            "address": {
+              "layerId": "weather_overlay",
+              "chunkX": 7,
+              "chunkY": 5
+            },
+            "chunkKey": {
+              "profileId": "finite_custom_sizes_matrix",
+              "worldSeed": "goal090-finite-matrix-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "weather_overlay",
+              "chunkX": 7,
+              "chunkY": 5,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "ded9feed20b5e821edb8e489ff0d88801e47406d20d263c602618db9686943b0"
+            },
+            "sampleRole": "sparse_review_anchor"
+          }
+        ],
+        "anchorIds": []
+      },
+      "streamWindows": [
+        {
+          "windowId": "finite_matrix_center_window",
+          "centerChunkX": 8,
+          "centerChunkY": 6,
+          "radiusChunks": 1,
+          "windowChunkCount": 27,
+          "sampledAddresses": [
+            {
+              "layerId": "interior",
+              "chunkX": 7,
+              "chunkY": 5
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 7,
+              "chunkY": 5
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 7,
+              "chunkY": 5
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 8,
+              "chunkY": 5
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 8,
+              "chunkY": 5
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 8,
+              "chunkY": 5
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 9,
+              "chunkY": 5
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 9,
+              "chunkY": 5
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 9,
+              "chunkY": 5
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 7,
+              "chunkY": 6
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 7,
+              "chunkY": 6
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 7,
+              "chunkY": 6
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 8,
+              "chunkY": 6
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 8,
+              "chunkY": 6
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 8,
+              "chunkY": 6
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 9,
+              "chunkY": 6
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 9,
+              "chunkY": 6
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 9,
+              "chunkY": 6
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 7,
+              "chunkY": 7
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 7,
+              "chunkY": 7
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 7,
+              "chunkY": 7
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 8,
+              "chunkY": 7
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 8,
+              "chunkY": 7
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 8,
+              "chunkY": 7
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 9,
+              "chunkY": 7
+            },
+            {
+              "layerId": "terrain",
+              "chunkX": 9,
+              "chunkY": 7
+            },
+            {
+              "layerId": "weather_overlay",
+              "chunkX": 9,
+              "chunkY": 7
+            }
+          ]
+        }
+      ],
+      "layerLinks": [
+        {
+          "linkId": "terrain_to_interior_portal",
+          "fromLayerId": "terrain",
+          "toLayerId": "interior",
+          "linkKind": "portal"
+        },
+        {
+          "linkId": "weather_overlay_to_terrain",
+          "fromLayerId": "weather_overlay",
+          "toLayerId": "terrain",
+          "linkKind": "overlay"
+        }
+      ],
+      "ratingMetadata": [],
+      "sourceLineageGoalIds": [
+        "goal_087",
+        "goal_088"
+      ]
+    },
+    {
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "worldSeed": "goal090-huge-sparse-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "coordinateOrigin": "center_zero",
+      "mode": "hugeSparseFinite",
+      "finiteWidth": 100000,
+      "finiteHeight": 100000,
+      "virtualBounds": {
+        "isInfinite": false,
+        "minimumX": 0,
+        "minimumY": 0,
+        "maximumX": 99999,
+        "maximumY": 99999
+      },
+      "isInfinite": false,
+      "isBenchmarkProfile": false,
+      "benchmarkNote": "",
+      "validationBounds": {
+        "minimumWidth": 1,
+        "minimumHeight": 1,
+        "maximumWidth": 1000000,
+        "maximumHeight": 1000000
+      },
+      "chunkProfile": {
+        "chunkWidth": 64,
+        "chunkHeight": 64,
+        "requiresPatchAlignment": true,
+        "usesDeterministicChunkKeys": true,
+        "deterministicKeyFormula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)"
+      },
+      "patchProfile": {
+        "patchWidth": 16,
+        "patchHeight": 16
+      },
+      "logicalCellCount": 30000000000,
+      "rawCellDumpAllowed": false,
+      "claimsGenericButUsesFixedSizeAllowlist": false,
+      "requiresSurfaceUndergroundOnly": false,
+      "promptTextIsSourceOfTruth": false,
+      "sourceOfTruthKind": "metadata_contract",
+      "outputRelativeDirectory": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles",
+      "fixedSizeAllowlist": [],
+      "layers": [
+        {
+          "layerId": "surface",
+          "layerKind": "overworld_surface",
+          "order": 0,
+          "materializationRole": "huge_sparse_surface_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/surface"
+        },
+        {
+          "layerId": "underground",
+          "layerKind": "subterranean_region",
+          "order": 1,
+          "materializationRole": "huge_sparse_underground_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/underground"
+        },
+        {
+          "layerId": "underwater",
+          "layerKind": "water_depth_region",
+          "order": 2,
+          "materializationRole": "huge_sparse_underwater_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/underwater"
+        }
+      ],
+      "finiteSizeSamples": [],
+      "sparseRegionIndex": {
+        "sparseOnly": true,
+        "attemptsRawCellDump": false,
+        "finiteOnlyMaterialization": false,
+        "materializedChunks": [
+          {
+            "sampleId": "sample_00_surface_0_0",
+            "address": {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            "chunkKey": {
+              "profileId": "huge_sparse_100000x100000_multilayer",
+              "worldSeed": "goal090-huge-sparse-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "bc15ba641a4bec15851838f48e8fedd17b2ea7dc86a1d5082296c3666f751d11"
+            },
+            "sampleRole": "origin_or_primary_anchor"
+          },
+          {
+            "sampleId": "sample_01_surface_1562_1562",
+            "address": {
+              "layerId": "surface",
+              "chunkX": 1562,
+              "chunkY": 1562
+            },
+            "chunkKey": {
+              "profileId": "huge_sparse_100000x100000_multilayer",
+              "worldSeed": "goal090-huge-sparse-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "surface",
+              "chunkX": 1562,
+              "chunkY": 1562,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "7feb5452ca8bcea1eecb90ab0c6bd0e570c7eb447c8b607273a0a1b91093ec00"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_02_underground_48_1024",
+            "address": {
+              "layerId": "underground",
+              "chunkX": 48,
+              "chunkY": 1024
+            },
+            "chunkKey": {
+              "profileId": "huge_sparse_100000x100000_multilayer",
+              "worldSeed": "goal090-huge-sparse-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "underground",
+              "chunkX": 48,
+              "chunkY": 1024,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "c230829527f3a7088214b77a46a78a45bf457af2cc0278392d70c153db61186b"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_03_underwater_1400_12",
+            "address": {
+              "layerId": "underwater",
+              "chunkX": 1400,
+              "chunkY": 12
+            },
+            "chunkKey": {
+              "profileId": "huge_sparse_100000x100000_multilayer",
+              "worldSeed": "goal090-huge-sparse-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "underwater",
+              "chunkX": 1400,
+              "chunkY": 12,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "a611516d08d3ad79c10c5418b2abba51801cd290b0c6577e6cecf02bfebef76b"
+            },
+            "sampleRole": "sparse_review_anchor"
+          }
+        ],
+        "anchorIds": [
+          "origin_anchor",
+          "western_coast_anchor",
+          "deep_gate_anchor",
+          "underwater_sample_anchor"
+        ]
+      },
+      "streamWindows": [
+        {
+          "windowId": "huge_sparse_review_window",
+          "centerChunkX": 0,
+          "centerChunkY": 0,
+          "radiusChunks": 1,
+          "windowChunkCount": 27,
+          "sampledAddresses": [
+            {
+              "layerId": "surface",
+              "chunkX": -1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": -1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 0,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": 0,
+              "chunkY": -1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": -1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": 1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": -1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 0,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": 0,
+              "chunkY": 1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underwater",
+              "chunkX": 1,
+              "chunkY": 1
+            }
+          ]
+        }
+      ],
+      "layerLinks": [
+        {
+          "linkId": "surface_to_underground_gate",
+          "fromLayerId": "surface",
+          "toLayerId": "underground",
+          "linkKind": "portal"
+        },
+        {
+          "linkId": "surface_to_underwater_port",
+          "fromLayerId": "surface",
+          "toLayerId": "underwater",
+          "linkKind": "transition"
+        }
+      ],
+      "ratingMetadata": [
+        {
+          "metadataId": "huge_sparse_rating_safe_fallback",
+          "ratingKind": "safe_public",
+          "safeFallbackRefId": "visual_safe_fallback/huge_sparse_public"
+        }
+      ],
+      "sourceLineageGoalIds": [
+        "goal_087",
+        "goal_088"
+      ]
+    },
+    {
+      "profileId": "infinite_streaming_world_multilayer",
+      "worldSeed": "goal090-infinite-stream-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "coordinateOrigin": "center_zero",
+      "mode": "infinite",
+      "finiteWidth": null,
+      "finiteHeight": null,
+      "virtualBounds": {
+        "isInfinite": true,
+        "minimumX": null,
+        "minimumY": null,
+        "maximumX": null,
+        "maximumY": null
+      },
+      "isInfinite": true,
+      "isBenchmarkProfile": false,
+      "benchmarkNote": "",
+      "validationBounds": {
+        "minimumWidth": 1,
+        "minimumHeight": 1,
+        "maximumWidth": 1000000,
+        "maximumHeight": 1000000
+      },
+      "chunkProfile": {
+        "chunkWidth": 64,
+        "chunkHeight": 64,
+        "requiresPatchAlignment": true,
+        "usesDeterministicChunkKeys": true,
+        "deterministicKeyFormula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)"
+      },
+      "patchProfile": {
+        "patchWidth": 16,
+        "patchHeight": 16
+      },
+      "logicalCellCount": null,
+      "rawCellDumpAllowed": false,
+      "claimsGenericButUsesFixedSizeAllowlist": false,
+      "requiresSurfaceUndergroundOnly": false,
+      "promptTextIsSourceOfTruth": false,
+      "sourceOfTruthKind": "metadata_contract",
+      "outputRelativeDirectory": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles",
+      "fixedSizeAllowlist": [],
+      "layers": [
+        {
+          "layerId": "surface",
+          "layerKind": "infinite_surface",
+          "order": 0,
+          "materializationRole": "infinite_surface_stream_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/surface"
+        },
+        {
+          "layerId": "underground",
+          "layerKind": "infinite_underground",
+          "order": 1,
+          "materializationRole": "infinite_underground_stream_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/underground"
+        },
+        {
+          "layerId": "interior",
+          "layerKind": "streamed_interior",
+          "order": 2,
+          "materializationRole": "infinite_interior_stream_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/interior"
+        },
+        {
+          "layerId": "sky_overlay",
+          "layerKind": "weather_sky_overlay",
+          "order": 3,
+          "materializationRole": "infinite_sky_overlay_metadata",
+          "safeFallbackRefId": "visual_safe_fallback/sky_overlay"
+        }
+      ],
+      "finiteSizeSamples": [],
+      "sparseRegionIndex": {
+        "sparseOnly": true,
+        "attemptsRawCellDump": false,
+        "finiteOnlyMaterialization": false,
+        "materializedChunks": [
+          {
+            "sampleId": "sample_00_surface_0_0",
+            "address": {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            "chunkKey": {
+              "profileId": "infinite_streaming_world_multilayer",
+              "worldSeed": "goal090-infinite-stream-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "fd37b4863c0849800224673a73e440e345fcb1a630471ea5a9df7be961c4cb37"
+            },
+            "sampleRole": "origin_or_primary_anchor"
+          },
+          {
+            "sampleId": "sample_01_surface_neg320_511",
+            "address": {
+              "layerId": "surface",
+              "chunkX": -320,
+              "chunkY": 511
+            },
+            "chunkKey": {
+              "profileId": "infinite_streaming_world_multilayer",
+              "worldSeed": "goal090-infinite-stream-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "surface",
+              "chunkX": -320,
+              "chunkY": 511,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "2e9ea611a4f751b9407f6b2a4f6d6eca30288ef7875e88596da59a0d9a962e2d"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_02_underground_neg320_511",
+            "address": {
+              "layerId": "underground",
+              "chunkX": -320,
+              "chunkY": 511
+            },
+            "chunkKey": {
+              "profileId": "infinite_streaming_world_multilayer",
+              "worldSeed": "goal090-infinite-stream-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "underground",
+              "chunkX": -320,
+              "chunkY": 511,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "3d7fe6fb465fa5eb9af56f6d1ae412ae0042228629e5b39db4dd8a7c633f8015"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_03_interior_1_neg1",
+            "address": {
+              "layerId": "interior",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            "chunkKey": {
+              "profileId": "infinite_streaming_world_multilayer",
+              "worldSeed": "goal090-infinite-stream-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "interior",
+              "chunkX": 1,
+              "chunkY": -1,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "0c416013ef416b38f181da24acd14ef8887611bf62f62c04ceec9edd641f989e"
+            },
+            "sampleRole": "sparse_review_anchor"
+          },
+          {
+            "sampleId": "sample_04_sky_overlay_0_0",
+            "address": {
+              "layerId": "sky_overlay",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            "chunkKey": {
+              "profileId": "infinite_streaming_world_multilayer",
+              "worldSeed": "goal090-infinite-stream-seed",
+              "generatorVersion": "visual-profile-seam-v1",
+              "layerId": "sky_overlay",
+              "chunkX": 0,
+              "chunkY": 0,
+              "formula": "sha256(profileId|worldSeed|generatorVersion|layerId|chunkX|chunkY)",
+              "key": "da627aa3e800d00d7e5ccf773de3fe586af47b2b04a87129d47649d5f4b38172"
+            },
+            "sampleRole": "sparse_review_anchor"
+          }
+        ],
+        "anchorIds": [
+          "player_spawn_window",
+          "far_expedition_window"
+        ]
+      },
+      "streamWindows": [
+        {
+          "windowId": "player_spawn_window",
+          "centerChunkX": 0,
+          "centerChunkY": 0,
+          "radiusChunks": 1,
+          "windowChunkCount": 36,
+          "sampledAddresses": [
+            {
+              "layerId": "interior",
+              "chunkX": -1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 0,
+              "chunkY": -1
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": 0,
+              "chunkY": -1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 0,
+              "chunkY": -1
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 1,
+              "chunkY": -1
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 0,
+              "chunkY": 0
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": 1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 1,
+              "chunkY": 0
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 0,
+              "chunkY": 1
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": 0,
+              "chunkY": 1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 0,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 0,
+              "chunkY": 1
+            },
+            {
+              "layerId": "interior",
+              "chunkX": 1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": 1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "surface",
+              "chunkX": 1,
+              "chunkY": 1
+            },
+            {
+              "layerId": "underground",
+              "chunkX": 1,
+              "chunkY": 1
+            }
+          ]
+        },
+        {
+          "windowId": "far_expedition_window",
+          "centerChunkX": -320,
+          "centerChunkY": 511,
+          "radiusChunks": 1,
+          "windowChunkCount": 36,
+          "sampledAddresses": [
+            {
+              "layerId": "interior",
+              "chunkX": -321,
+              "chunkY": 510
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -321,
+              "chunkY": 510
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -321,
+              "chunkY": 510
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -321,
+              "chunkY": 510
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -320,
+              "chunkY": 510
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -320,
+              "chunkY": 510
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -320,
+              "chunkY": 510
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -320,
+              "chunkY": 510
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -319,
+              "chunkY": 510
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -319,
+              "chunkY": 510
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -319,
+              "chunkY": 510
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -319,
+              "chunkY": 510
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -321,
+              "chunkY": 511
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -321,
+              "chunkY": 511
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -321,
+              "chunkY": 511
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -321,
+              "chunkY": 511
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -320,
+              "chunkY": 511
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -320,
+              "chunkY": 511
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -320,
+              "chunkY": 511
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -320,
+              "chunkY": 511
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -319,
+              "chunkY": 511
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -319,
+              "chunkY": 511
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -319,
+              "chunkY": 511
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -319,
+              "chunkY": 511
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -321,
+              "chunkY": 512
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -321,
+              "chunkY": 512
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -321,
+              "chunkY": 512
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -321,
+              "chunkY": 512
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -320,
+              "chunkY": 512
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -320,
+              "chunkY": 512
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -320,
+              "chunkY": 512
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -320,
+              "chunkY": 512
+            },
+            {
+              "layerId": "interior",
+              "chunkX": -319,
+              "chunkY": 512
+            },
+            {
+              "layerId": "sky_overlay",
+              "chunkX": -319,
+              "chunkY": 512
+            },
+            {
+              "layerId": "surface",
+              "chunkX": -319,
+              "chunkY": 512
+            },
+            {
+              "layerId": "underground",
+              "chunkX": -319,
+              "chunkY": 512
+            }
+          ]
+        }
+      ],
+      "layerLinks": [
+        {
+          "linkId": "surface_to_underground_portal",
+          "fromLayerId": "surface",
+          "toLayerId": "underground",
+          "linkKind": "portal"
+        },
+        {
+          "linkId": "surface_to_interior_door",
+          "fromLayerId": "surface",
+          "toLayerId": "interior",
+          "linkKind": "portal"
+        },
+        {
+          "linkId": "sky_overlay_to_surface",
+          "fromLayerId": "sky_overlay",
+          "toLayerId": "surface",
+          "linkKind": "overlay"
+        }
+      ],
+      "ratingMetadata": [
+        {
+          "metadataId": "infinite_rating_safe_fallback",
+          "ratingKind": "safe_public",
+          "safeFallbackRefId": "visual_safe_fallback/infinite_public"
+        }
+      ],
+      "sourceLineageGoalIds": [
+        "goal_087",
+        "goal_088"
+      ]
+    }
+  ]
+}

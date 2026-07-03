@@ -180,6 +180,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-088-deterministic-visual-region-composer/GOAL.md` | Goal 088 task: consume Goal 084 visual asset metadata, Goal 085 visual part-pack metadata, Goal 086 microtile metadata and Goal 087 visual map patches into a BCL-only Application deterministic visual region composer, compact region definition/placement/chunk/proof artifacts, text SVG region overviews and final stop at `deterministic_visual_region_composer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-088a-check-all-hang-triage-validation-repair/GOAL.md` | Goal 088A task: validation-only check-all hang triage and repair after Goal 088, with full `.devflow/scripts/check-all.ps1` proof, compact triage evidence and final stop at `goal_088_check_all_validation_repair_verification`; no feature work, public schema, Runtime, Unity code, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-089-tiered-validation-pipeline/GOAL.md` | Goal 089 task: add tiered devflow validation wrappers, validation tier profile, validation policy docs and compact evidence with final stop at `tiered_validation_pipeline_verification`; `check-all.ps1` remains authoritative and unchanged by default. |
+| `docs/agent-tasks/goal-090-parameterized-visual-world-profiles/GOAL.md` | Goal 090 task: add a BCL-only Application-side parameterized visual world profile/addressing seam for arbitrary finite sizes, huge sparse finite worlds and infinite chunk windows, with final stop at `parameterized_visual_world_profiles_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/VALIDATION_PIPELINE.md` | Goal 089 validation policy: `check-current-goal.ps1` is the ordinary feature-goal default, `check-spine-fast.ps1` is the medium visual/world/gameplay spine route, and full `check-all.ps1` / `check-all-observed.ps1` is reserved for consolidation, milestone and shared/core-risk work. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
@@ -449,6 +450,12 @@ Goal 089 is produced for review with `tiered_validation_pipeline_verification re
 `implementationStatus=GREEN`; it adds tiered validation wrappers, a validation profile, policy docs and compact evidence
 without weakening full `check-all.ps1`, without asking the user to manually run check-all, and without marking Goal 088A
 or Goal 088 accepted.
+Goal 090 is produced for review with `parameterized_visual_world_profiles_verification required`, `accepted=false`,
+`implementationStatus=GREEN`; it adds a BCL-only Application profile/addressing seam with four metadata-only fixtures,
+six arbitrary finite size samples, sparse `100000x100000` finite proof, infinite stream-window proof, deterministic chunk
+keys, 18 rejected negative scenarios and compact text SVG overviews under
+`.llmgc/procedural/goal-090-parameterized-visual-world-profiles/`, without Runtime/Unity/provider/schema/project/dependency
+changes and without marking Goal 088, Goal 088A or Goal 089 accepted.
 
 Allowed next sequence:
 
@@ -502,6 +509,7 @@ Allowed next sequence:
 48. Review Goal 088 `deterministic_visual_region_composer_verification`; it adds deterministic text SVG visual region composer evidence, keeps Goal 085, Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
 49. Review Goal 088A `goal_088_check_all_validation_repair_verification`; it repairs the Goal 088 full check-all blocker, keeps Goal 088 artifacts `accepted=false`, and does not start provider/media/runtime/schema implementation.
 50. Review Goal 089 `tiered_validation_pipeline_verification`; it adds tiered validation policy/wrappers, keeps full check-all authoritative, keeps Goal 088A and Goal 088 `accepted=false`, and does not start product/runtime/provider/media/schema implementation.
+51. Review Goal 090 `parameterized_visual_world_profiles_verification`; it handles the Goal 088 fixed-size concern at the profile/addressing layer, keeps Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 
 Kill criterion:
 

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "visual_world_profile_layer_model_proof_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "passed": true,
+  "dataDrivenLayerSetsPassed": true,
+  "notRestrictedToSurfaceUnderground": true,
+  "rows": [
+    {
+      "profileId": "benchmark_heroes_144x144_surface_underground",
+      "layerIds": [
+        "surface",
+        "underground"
+      ],
+      "layerCount": 2,
+      "usesOnlySurfaceUnderground": true
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "layerIds": [
+        "interior",
+        "terrain",
+        "weather_overlay"
+      ],
+      "layerCount": 3,
+      "usesOnlySurfaceUnderground": false
+    },
+    {
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "layerIds": [
+        "surface",
+        "underground",
+        "underwater"
+      ],
+      "layerCount": 3,
+      "usesOnlySurfaceUnderground": false
+    },
+    {
+      "profileId": "infinite_streaming_world_multilayer",
+      "layerIds": [
+        "interior",
+        "sky_overlay",
+        "surface",
+        "underground"
+      ],
+      "layerCount": 4,
+      "usesOnlySurfaceUnderground": false
+    }
+  ]
+}

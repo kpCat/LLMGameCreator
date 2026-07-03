@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "visual_world_profile_source_lineage_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "passed": true,
+  "goal087LineagePresent": true,
+  "goal088LineagePresent": true,
+  "sourceRecordCount": 9,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-composer-report.md",
+      "exists": true,
+      "sha256": "6908cd9b8aa2ab5d2821a01e6fa9e9926b05b9c62839766d9a26ea8c78b9b808",
+      "purposeTags": [
+        "goal087",
+        "patch_composer_report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-catalog.json",
+      "exists": true,
+      "sha256": "15cd814771b41354904cb73f7a9e614e46636efe58e2624b8039c83418523cb9",
+      "purposeTags": [
+        "goal087",
+        "patch_catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-088-deterministic-visual-region-composer/visual-region-composer-report.md",
+      "exists": true,
+      "sha256": "b2f8bb8f51772b9cf683e4bfe8733b58240d1ff6495c02bbd500bc9f23b3c3a0",
+      "purposeTags": [
+        "goal088",
+        "region_composer_report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-088-deterministic-visual-region-composer/visual-region-quality-gate-scan.json",
+      "exists": true,
+      "sha256": "8df0e66552956186b21ad023de7a2b1cb499cad212c67427f95c4c5a4f708bed",
+      "purposeTags": [
+        "goal088",
+        "quality_gate"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/check-all-hang-triage-report.md",
+      "exists": true,
+      "sha256": "b02f8f65ccd51cd1f963483f83f6cb1fbef380ec74c0939a2e0a64aa339f9e06",
+      "purposeTags": [
+        "goal088a",
+        "full_check_all_baseline"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-089-tiered-validation-pipeline/tiered-validation-pipeline-report.md",
+      "exists": true,
+      "sha256": "5aeee24da550243a447d88dfae1e8972eb654a99edda686b676d058d9f65cb05",
+      "purposeTags": [
+        "goal089",
+        "tiered_validation_policy"
+      ]
+    },
+    {
+      "relativePath": "docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md",
+      "exists": true,
+      "sha256": "54e8ba793de8f3b7f9577ae528a460ba42153031532118a922b9e1638874b215",
+      "purposeTags": [
+        "deepsearch",
+        "visual_stack"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+      "exists": true,
+      "sha256": "bd184f47525433f1b73788cb4389b3f648f4d0ef0971c691f85e38ea8e4976e5",
+      "purposeTags": [
+        "deepsearch",
+        "chunked_world_map"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md",
+      "exists": true,
+      "sha256": "dfc058341964c2996a4559b2b7f609cfad0c612ccb5c4622d23972a684bb6f9d",
+      "purposeTags": [
+        "deepsearch",
+        "pseudo3d_sidecar"
+      ]
+    }
+  ]
+}

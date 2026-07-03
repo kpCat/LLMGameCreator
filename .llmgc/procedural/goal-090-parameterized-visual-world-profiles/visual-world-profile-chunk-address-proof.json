@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "visual_world_profile_chunk_address_proof_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "passed": true,
+  "stableAcrossReruns": true,
+  "differsBySeedLayerChunkAndVersion": true,
+  "rows": [
+    {
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "address": {
+        "layerId": "surface",
+        "chunkX": 0,
+        "chunkY": 0
+      },
+      "firstKey": "bc15ba641a4bec15851838f48e8fedd17b2ea7dc86a1d5082296c3666f751d11",
+      "secondKey": "bc15ba641a4bec15851838f48e8fedd17b2ea7dc86a1d5082296c3666f751d11",
+      "variantSeedKey": "a0c226a70edb01fb0f85052ceec05f03865c3ec2cf9fb82cc16b9f92930d0005",
+      "variantLayerKey": "e58e99cd005d4354fdd8e309333827c2ff67353bd84d9ce0ebf40d13aef987d9",
+      "variantChunkKey": "6d5cc387c4515d4ac5f2583ecc093f145b4f553075947f4af27f2767aacf84e7",
+      "variantVersionKey": "3cd99d8c308b79487301cfa9e819fa91208713fb584d4da612823b08e51bc71e"
+    },
+    {
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "address": {
+        "layerId": "surface",
+        "chunkX": 1562,
+        "chunkY": 1562
+      },
+      "firstKey": "7feb5452ca8bcea1eecb90ab0c6bd0e570c7eb447c8b607273a0a1b91093ec00",
+      "secondKey": "7feb5452ca8bcea1eecb90ab0c6bd0e570c7eb447c8b607273a0a1b91093ec00",
+      "variantSeedKey": "c5d542e0d85c446312323fd4ba8dcc3d34dbae7800090b04d4769ee7cad990e4",
+      "variantLayerKey": "32aa750133a1e2bfbb90d9499e962506dd517dc9a72135645faea81cd8892bc2",
+      "variantChunkKey": "b87b0216c3369a0f823b2f732cef34736cabbd22b1e315594152657f09d2ddc6",
+      "variantVersionKey": "726b14b6e0b09624ee6e85e511dc4ab49dfac3eb2c261f828ec827fdc23f0ca5"
+    },
+    {
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "address": {
+        "layerId": "underground",
+        "chunkX": 48,
+        "chunkY": 1024
+      },
+      "firstKey": "c230829527f3a7088214b77a46a78a45bf457af2cc0278392d70c153db61186b",
+      "secondKey": "c230829527f3a7088214b77a46a78a45bf457af2cc0278392d70c153db61186b",
+      "variantSeedKey": "ac3c379664894daa7f944c399013e4d7a74d1b25b40ec82339b80da71a99bffe",
+      "variantLayerKey": "e6642d1f75d041e5c91f576eef01d9f5add1ab7f491e8f161b5aa9ddfaa7414b",
+      "variantChunkKey": "b0af0b1d381bc1751f566dd485bc91710056499f0f31fca446b12e4e3d5921cd",
+      "variantVersionKey": "58e16d5dfe7f9dad679113243520825f4cedf942da7745b83f92bdb6e8a2475e"
+    },
+    {
+      "profileId": "infinite_streaming_world_multilayer",
+      "address": {
+        "layerId": "surface",
+        "chunkX": 0,
+        "chunkY": 0
+      },
+      "firstKey": "fd37b4863c0849800224673a73e440e345fcb1a630471ea5a9df7be961c4cb37",
+      "secondKey": "fd37b4863c0849800224673a73e440e345fcb1a630471ea5a9df7be961c4cb37",
+      "variantSeedKey": "b17df1c11b4ba41b5750433712782dae899d04db55df51b216b0f7b290c8585f",
+      "variantLayerKey": "99f5c1498384a84320c25698b9504ccc3032f1f9a4fa625da0dd037f2f491a02",
+      "variantChunkKey": "e7050b6264575ad35594f0a0397495376bbabd5bf72edc99e92cad18101c325c",
+      "variantVersionKey": "39c68edf69636bf230eb7b0bd119792035da1e11d7b504417863bd4bfba3b160"
+    },
+    {
+      "profileId": "infinite_streaming_world_multilayer",
+      "address": {
+        "layerId": "surface",
+        "chunkX": -320,
+        "chunkY": 511
+      },
+      "firstKey": "2e9ea611a4f751b9407f6b2a4f6d6eca30288ef7875e88596da59a0d9a962e2d",
+      "secondKey": "2e9ea611a4f751b9407f6b2a4f6d6eca30288ef7875e88596da59a0d9a962e2d",
+      "variantSeedKey": "8c6e87792287d5a40902a8602debb73512079d0a0471e87520c9a7b1aa992de9",
+      "variantLayerKey": "3d7fe6fb465fa5eb9af56f6d1ae412ae0042228629e5b39db4dd8a7c633f8015",
+      "variantChunkKey": "11b7797d97b7ad42b48acbd4f5e3e3a4c74a17d641ef89c29f326aec7d4bc5f1",
+      "variantVersionKey": "4520ad943ac95acc41801f1dc205e1c35805bb4e4a0b50aeb3e41a8271cae364"
+    },
+    {
+      "profileId": "infinite_streaming_world_multilayer",
+      "address": {
+        "layerId": "underground",
+        "chunkX": -320,
+        "chunkY": 511
+      },
+      "firstKey": "3d7fe6fb465fa5eb9af56f6d1ae412ae0042228629e5b39db4dd8a7c633f8015",
+      "secondKey": "3d7fe6fb465fa5eb9af56f6d1ae412ae0042228629e5b39db4dd8a7c633f8015",
+      "variantSeedKey": "56932649c4e7b3a3db24baf0205d813502224f76f24650427aebd8f8b7f0430d",
+      "variantLayerKey": "2e9ea611a4f751b9407f6b2a4f6d6eca30288ef7875e88596da59a0d9a962e2d",
+      "variantChunkKey": "107b6511ef01794afc8870cc8957ff357a13cab75bb93fe271f422124a0515aa",
+      "variantVersionKey": "3f68cfc3b0aa1ae5d04f8cbc38ccb6cf9040875bfb631d1fd7fc69c710546598"
+    }
+  ]
+}

@@ -60,7 +60,8 @@
     ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/",
     ".llmgc/procedural/goal-088-deterministic-visual-region-composer/",
     ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/",
-    ".llmgc/procedural/goal-089-tiered-validation-pipeline/"
+    ".llmgc/procedural/goal-089-tiered-validation-pipeline/",
+    ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1033,6 +1034,24 @@
         ".devflow/validation-profiles/",
         ".llmgc/procedural/goal-089-tiered-validation-pipeline/",
         "docs/agent-tasks/goal-089-tiered-validation-pipeline/"
+      ]
+    },
+    {
+      "scenario": "goal-090-parameterized-visual-world-profiles",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/ParameterizedVisualWorldProfilesProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/",
+        "docs/agent-tasks/goal-090-parameterized-visual-world-profiles/",
+        "src/LLMGameCreator.Application/Design/ParameterizedVisualWorldProfiles/",
+        "tests/LLMGameCreator.Tests/Application/ParameterizedVisualWorldProfiles/"
       ]
     }
   ]

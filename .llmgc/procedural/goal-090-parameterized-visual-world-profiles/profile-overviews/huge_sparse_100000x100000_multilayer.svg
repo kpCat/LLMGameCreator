@@ -1,0 +1,16 @@
+<svg viewBox="0 0 320 120" data-profile-id="huge_sparse_100000x100000_multilayer">
+  <title>huge_sparse_100000x100000_multilayer</title>
+  <rect x="0" y="0" width="320" height="120" fill="#12161b" />
+  <text x="12" y="18" fill="#e8eef3" font-size="10" font-family="monospace">huge_sparse_100000x100000_multilayer</text>
+  <text x="12" y="34" fill="#9fb0bf" font-size="8" font-family="monospace">mode=HugeSparseFinite; chunks=64x64; patch=16x16</text>
+  <rect x="12" y="48" width="40" height="24" fill="#69a55a" stroke="#26313b" stroke-width="1" data-layer-id="surface" />
+  <text x="15" y="63" fill="#0f1317" font-size="6" font-family="monospace">surface</text>
+  <rect x="58" y="48" width="40" height="24" fill="#746b84" stroke="#26313b" stroke-width="1" data-layer-id="underground" />
+  <text x="61" y="63" fill="#0f1317" font-size="6" font-family="monospace">undergroun</text>
+  <rect x="104" y="48" width="40" height="24" fill="#4d8aa1" stroke="#26313b" stroke-width="1" data-layer-id="underwater" />
+  <text x="107" y="63" fill="#0f1317" font-size="6" font-family="monospace">underwater</text>
+  <rect x="12" y="86" width="14" height="14" fill="#c79d4a" data-chunk-key="bc15ba641a4b" />
+  <rect x="30" y="86" width="14" height="14" fill="#c79d4a" data-chunk-key="7feb5452ca8b" />
+  <rect x="48" y="86" width="14" height="14" fill="#c79d4a" data-chunk-key="c230829527f3" />
+  <rect x="66" y="86" width="14" height="14" fill="#c79d4a" data-chunk-key="a611516d08d3" />
+</svg>

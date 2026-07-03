@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "visual_world_profile_size_matrix_v1",
+  "goalId": "goal_090_parameterized_visual_world_profiles",
+  "passed": true,
+  "rows": [
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "sizeId": "sample_1x1",
+      "width": 1,
+      "height": 1,
+      "layerCount": 3,
+      "logicalCellCount": 3,
+      "validatorPassed": true,
+      "diagnostics": []
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "sizeId": "sample_17x31",
+      "width": 17,
+      "height": 31,
+      "layerCount": 3,
+      "logicalCellCount": 1581,
+      "validatorPassed": true,
+      "diagnostics": []
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "sizeId": "sample_64x96",
+      "width": 64,
+      "height": 96,
+      "layerCount": 3,
+      "logicalCellCount": 18432,
+      "validatorPassed": true,
+      "diagnostics": []
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "sizeId": "sample_144x144",
+      "width": 144,
+      "height": 144,
+      "layerCount": 3,
+      "logicalCellCount": 62208,
+      "validatorPassed": true,
+      "diagnostics": []
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "sizeId": "sample_255x257",
+      "width": 255,
+      "height": 257,
+      "layerCount": 3,
+      "logicalCellCount": 196605,
+      "validatorPassed": true,
+      "diagnostics": []
+    },
+    {
+      "profileId": "finite_custom_sizes_matrix",
+      "sizeId": "sample_512x384",
+      "width": 512,
+      "height": 384,
+      "layerCount": 3,
+      "logicalCellCount": 589824,
+      "validatorPassed": true,
+      "diagnostics": []
+    }
+  ]
+}

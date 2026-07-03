@@ -79,6 +79,7 @@ visual_part_pack_rule_stack_verification required
 deterministic_visual_region_composer_verification required
 goal_088_check_all_validation_repair_verification required
 tiered_validation_pipeline_verification required
+parameterized_visual_world_profiles_verification required
 ```
 
 Current capabilities:
@@ -98,6 +99,7 @@ Current capabilities:
 - BCL-only deterministic visual region composer with compact 144x144 surface plus 144x144 underground region definition, 108 patch placements, chunk/proof evidence and text SVG overview artifacts;
 - Goal 088A full check-all validation repair proof with `.devflow/runs/20260703_075027-check-all`, 1235/1235 non-product tests, 0 warnings, no Goal 088 code changes and restored validation side-effect artifacts;
 - Goal 089 tiered validation pipeline with current-goal, spine-fast, full and full-observed validation tiers while keeping full `check-all.ps1` authoritative;
+- BCL-only parameterized visual world profile/addressing seam with `144x144` only as benchmark fixture, arbitrary finite size matrix, huge sparse `100000x100000` profile, infinite chunk windows, deterministic chunk keys and compact metadata/text-SVG evidence;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1400,14 +1402,35 @@ Produced for review. The gate remains `tiered_validation_pipeline_verification r
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`; `.devflow/scripts/check-current-goal.ps1` adds the ordinary-goal route, `.devflow/scripts/check-spine-fast.ps1` adds recent visual spine regression coverage, `.devflow/scripts/check-all-observed.ps1` wraps the unchanged full route with heartbeat/timeout/cleanup diagnostics, `.devflow/validation-profiles/validation-tiers.json` defines current-goal/spine-fast/full/full-observed tiers, and `docs/VALIDATION_PIPELINE.md` records future task policy. Goal 089 adds no product code, Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file, dependency, binary media, heavy raw log or prompt dump changes. Compact evidence is under `.llmgc/procedural/goal-089-tiered-validation-pipeline/`.
 
+### Goal 090: Parameterized Visual World Profiles
+
+Purpose:
+
+Add a BCL-only Application-side visual world profile/addressing seam that proves the visual stack is not architecturally tied to `144x144`, `256x256` or `100000x100000` fixed sizes.
+
+Status:
+
+Produced for review. The gate remains `parameterized_visual_world_profiles_verification required`, not passed. Goal 089, Goal 088A and Goal 088 remain produced for review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`; Application models/fixtures/validator/evidence live under `src/LLMGameCreator.Application/Design/ParameterizedVisualWorldProfiles/`, focused tests under `tests/LLMGameCreator.Tests/Application/ParameterizedVisualWorldProfiles/`, product smoke under `tests/LLMGameCreator.Tests/ProductSmoke/ParameterizedVisualWorldProfilesProductSmokeTests.cs`, and compact evidence under `.llmgc/procedural/goal-090-parameterized-visual-world-profiles/`.
+
+Fixture coverage:
+
+- `benchmark_heroes_144x144_surface_underground`: finite benchmark profile only, explicitly marked as not an architectural limit.
+- `finite_custom_sizes_matrix`: one generic validator/model path for `1x1`, `17x31`, `64x96`, `144x144`, `255x257` and `512x384`.
+- `huge_sparse_100000x100000_multilayer`: finite huge sparse profile with surface, underground and underwater layers, 30,000,000,000 logical cells as summary only and four sampled chunk anchors.
+- `infinite_streaming_world_multilayer`: infinite surface/underground/interior/sky overlay profile with deterministic chunk keys and two stream windows.
+
+Validator coverage rejects fixed-size-only generic claims, invalid finite dimensions, huge raw dumps, infinite finite-only materialization, invalid/duplicate layer ids, hardcoded surface+underground-only requirements, invalid chunk/patch sizes, patch/chunk incompatibility, missing seed/version, absolute output paths, nondeterministic chunk keys, unknown layer links, invalid stream windows, rating metadata without safe fallback and prompt text as source of truth. Goal 090 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, dependency, binary/raster media, generated image asset, real adult fixture or explicit prompt dump changes.
+
 ## Current Recommended Next Work
 
 ```text
-tiered_validation_pipeline_verification
+parameterized_visual_world_profiles_verification
 ```
 
 Status:
 
 ```text
-goal_089_tiered_validation_pipeline_produced_for_review
+goal_090_parameterized_visual_world_profiles_produced_for_review
 ```

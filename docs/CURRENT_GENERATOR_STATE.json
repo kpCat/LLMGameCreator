@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T05:35:00Z",
+    "updated_at_utc":  "2026-07-03T06:18:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 089 tiered validation pipeline produced for review",
-    "gate_status":  "tiered_validation_pipeline_verification",
+    "current_phase_title":  "Goal 090 parameterized visual world profiles produced for review",
+    "gate_status":  "parameterized_visual_world_profiles_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 089 Tiered Validation Pipeline is produced for review: tiered_validation_pipeline_verification required, accepted=false. check-all.ps1 default behavior is preserved; check-current-goal.ps1, check-spine-fast.ps1 and check-all-observed.ps1 add lower-tier and observable validation routes. Goal 088A and Goal 088 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 089 tiered validation pipeline evidence. Goal 089 is devflow/docs/evidence only; it did not modify product code, Unity, Runtime, public schema, providers, Lua, generator-library, project files, dependencies, binary media or prompt output. Goal 089 remains accepted=false until explicit user review accepts it.",
-    "recommended_next_decision":  "Review Goal 089 validation pipeline evidence and only mark tiered_validation_pipeline_verification passed after explicit user acceptance; do not mark Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 090 Parameterized Visual World Profiles is produced for review: parameterized_visual_world_profiles_verification required, accepted=false. It adds a BCL-only Application profile/addressing seam for arbitrary finite sizes, huge sparse finite worlds and infinite chunk windows. Goal 089, Goal 088A and Goal 088 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 090 parameterized visual world profile evidence. Goal 090 adds Application-side profile/addressing contracts, validators, fixtures, compact evidence and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 090 remains accepted=false until explicit user review accepts it.",
+    "recommended_next_decision":  "Review Goal 090 parameterized visual world profile evidence and only mark parameterized_visual_world_profiles_verification passed after explicit user acceptance; do not mark Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "parameterized_visual_world_profiles_verification",
                                                         "tiered_validation_pipeline_verification",
                                                         "goal_088_check_all_validation_repair_verification",
                                                         "deterministic_visual_region_composer_verification",
@@ -116,7 +117,8 @@
                            "goal_087_manual_gate":  "deterministic_visual_map_patch_composer_verification",
                            "goal_088_manual_gate":  "deterministic_visual_region_composer_verification",
                            "goal_088a_manual_gate":  "goal_088_check_all_validation_repair_verification",
-                           "goal_089_manual_gate":  "tiered_validation_pipeline_verification"
+                           "goal_089_manual_gate":  "tiered_validation_pipeline_verification",
+                           "goal_090_manual_gate":  "parameterized_visual_world_profiles_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -407,6 +409,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "parameterized_visual_world_profiles_verification",
+                                          "goal_090_parameterized_visual_world_profiles",
+                                          "manual_review_goal_090_parameterized_visual_world_profiles",
                                           "tiered_validation_pipeline_verification",
                                           "goal_089_tiered_validation_pipeline",
                                           "manual_review_goal_089_tiered_validation_pipeline",
@@ -454,12 +459,16 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "tiered_validation_pipeline_verification",
-    "recommended_next_work_item_title":  "Review Goal 089 tiered validation pipeline",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-089-tiered-validation-pipeline/GOAL.md",
+    "recommended_next_work_item":  "parameterized_visual_world_profiles_verification",
+    "recommended_next_work_item_title":  "Review Goal 090 parameterized visual world profiles",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-090-parameterized-visual-world-profiles/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 089 tiered validation pipeline evidence",
+                                              "Review Goal 090 parameterized visual world profile evidence",
+                                              "Keep Goal 090 accepted=false until user review accepts it",
+                                              "Use the Goal 090 Application profile/addressing seam for future visual consumers instead of assuming fixed 144x144, 256x256 or 100000x100000 sizes",
                                               "Keep Goal 089 accepted=false until user review accepts it",
+                                              "Keep Goal 088A and Goal 088 accepted=false until their separate manual gates are accepted",
+                                              "Review Goal 089 tiered validation pipeline evidence",
                                               "Use check-current-goal.ps1 as the default ordinary-goal validation route",
                                               "Use check-spine-fast.ps1 after visual/world/gameplay spine changes",
                                               "Use check-all.ps1 or check-all-observed.ps1 for consolidation, milestone and shared/core-risk changes",
@@ -480,6 +489,11 @@
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
                                                   "docs/VALIDATION_PIPELINE.md",
+                                                  "docs/agent-tasks/goal-090-parameterized-visual-world-profiles/GOAL.md",
+                                                  "src/LLMGameCreator.Application/Design/ParameterizedVisualWorldProfiles/",
+                                                  "tests/LLMGameCreator.Tests/Application/ParameterizedVisualWorldProfiles/",
+                                                  "tests/LLMGameCreator.Tests/ProductSmoke/ParameterizedVisualWorldProfilesProductSmokeTests.cs",
+                                                  ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/",
                                                   "docs/agent-tasks/goal-089-tiered-validation-pipeline/GOAL.md",
                                                   ".devflow/validation-profiles/validation-tiers.json",
                                                   ".devflow/scripts/check-current-goal.ps1",
@@ -2061,5 +2075,21 @@
                                                                            "Goal 089 adds no product code, Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file, dependency, binary media, heavy raw log or prompt dump changes."
                                                                        ],
                                                    "next_action":  "review_goal_089_tiered_validation_pipeline"
-                                                          }
+                                                          },
+    "parameterized_visual_world_profiles_verification":  {
+                                                            "status":  "produced_for_review",
+                                                            "accepted":  false,
+                                                            "evidence_source":  "goal_090_parameterized_visual_world_profiles",
+                                                            "observed_result":  [
+                                                                                    "Goal 090 produces parameterized visual world profile evidence under .llmgc/procedural/goal-090-parameterized-visual-world-profiles with accepted=false.",
+                                                                                    "implementationStatus=GREEN, profileCount=4, sizeMatrixRows=6, negativeProofCount=18, hugeSparseMaterializedChunks=4, infiniteWindowMaterializedChunks=5, deterministicReportHash=414b6e86043507b52cb42ff00612128564fe25592b1fb39f925f551ecfd551cc.",
+                                                                                    "The BCL-only Application seam defines VisualWorldProfile, layers, finite and virtual bounds, chunk and patch sizes, deterministic chunk key/addressing records, materialization constraints, source lineage, validation records, compact evidence and text SVG profile overviews.",
+                                                                                    "Fixtures prove that 144x144 is only a benchmark profile, arbitrary finite sizes 1x1/17x31/64x96/144x144/255x257/512x384 validate, a huge sparse 100000x100000 multi-layer profile uses compact chunk anchors instead of raw cell dumps, and an infinite streaming profile validates bounded chunk windows.",
+                                                                                    "The validator rejects fixed-size-only generic claims, invalid finite dimensions, huge raw dumps, infinite finite-only materialization, invalid/duplicate layer ids, hardcoded surface+underground-only requirements, invalid chunk/patch sizes, patch/chunk incompatibility, missing seed/version, absolute output paths, nondeterministic chunk keys, unknown layer links, invalid stream windows, rating metadata without safe fallback and prompt text as source of truth.",
+                                                                                    "Goal 090 consumes Goal 087 and Goal 088 compact evidence as lineage while keeping Goal 088, Goal 088A and Goal 089 artifact accepted=false evidence intact.",
+                                                                                    "Goal 090 adds no public GamePackage schema change, Runtime change, Unity change, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, external dependency, binary or raster media, generated image asset, real adult fixture or explicit prompt dump.",
+                                                                                    "The Goal 088 fixed-size concern is resolved at the profile/addressing layer if parameterized_visual_world_profiles_verification is accepted; renderer, atlas, Runtime and Unity consumers remain separate future work."
+                                                                                ],
+                                                            "next_action":  "review_goal_090_parameterized_visual_world_profiles"
+                                                        }
 }
