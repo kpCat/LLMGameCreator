@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_source_lineage_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "passed": true,
+  "goal093LineagePresent": true,
+  "goal094LineagePresent": true,
+  "goal093AcceptedFalse": true,
+  "goal094AcceptedFalse": true,
+  "sourceRecordCount": 8,
+  "records": [
+    {
+      "sourceGoal": "Goal093",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-export-manifest.json",
+      "sha256": "6bf8055aba5fc9efea3f7ff0eed4f7e235bfacc812af20b6449c58161accd156",
+      "byteCount": 655098,
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal093",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-export-report.md",
+      "sha256": "9cd82d61b47405e68bf40cfea4ff9113f5158b5237856dd48f3f8ad6f785f69b",
+      "byteCount": 3244,
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal093",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-negative-proof.json",
+      "sha256": "97c06ee46c2f278f5fc3eaeb73769747db620056cc5285e095a0b6523b6fc38e",
+      "byteCount": 6669,
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal093",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-overlap-reuse-proof.json",
+      "sha256": "e0614bca03687ca53abdef9b816cdc1f37649707ed9e2d02f6321ff01ebcac92",
+      "byteCount": 9437,
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal093",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-readback-proof.json",
+      "sha256": "28a8ac976e643d4a291ab9fc9394913d99c37d39b4216fe247ae0cb83876b796",
+      "byteCount": 386,
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal093",
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-runtime-handoff-sidecar.json",
+      "sha256": "01f375b1bc5eb114108fff40609eaaf12855cab72ed2abc050f3a504a882b519",
+      "byteCount": 3164,
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal094",
+      "relativePath": ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/visual-chunk-cache-export-inspector-quality-gate-scan.json",
+      "sha256": "4c960b89e451284c22944cced486d91d4284c1cca618776c130bf37189a13bcc",
+      "byteCount": 2475,
+      "exists": true
+    },
+    {
+      "sourceGoal": "Goal094",
+      "relativePath": ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/visual-chunk-cache-export-inspector-report.md",
+      "sha256": "6fb49e2ae7e1e40116de77a1a0149176d10e6a162aafdb364ad594084f528228",
+      "byteCount": 5247,
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

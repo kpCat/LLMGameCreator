@@ -66,7 +66,8 @@
     ".llmgc/procedural/goal-092-visual-world-stream-preview-workspace/",
     ".llmgc/procedural/goal-092a-visual-world-preview-service-split-source-health/",
     ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/",
-    ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/"
+    ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/",
+    ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1151,6 +1152,26 @@
         "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
         "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ]
+    },
+    {
+      "scenario": "goal-095-visual-chunk-cache-unity-streamingassets-handoff",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualChunkCacheUnityStreamingAssetsHandoffProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/VisualChunkCacheHandoffProbe.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/",
+        "docs/agent-tasks/goal-095-visual-chunk-cache-unity-streamingassets-handoff/",
+        "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/",
+        "tests/LLMGameCreator.Tests/Application/VisualChunkCacheUnityStreamingAssetsHandoff/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/"
       ]
     }
   ]

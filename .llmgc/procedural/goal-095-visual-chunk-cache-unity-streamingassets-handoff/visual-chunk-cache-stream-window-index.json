@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_stream_window_index_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "streamWindowCount": 5,
+  "streamWindows": [
+    {
+      "windowId": "finite_255x257_clipped_origin_radius2",
+      "fixtureId": "finite_custom_255x257_surface_window",
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "profileId": "finite_custom_sizes_matrix",
+      "layerIds": [
+        "terrain"
+      ],
+      "sourceChunkCount": 9,
+      "exportedRecordCount": 9,
+      "membershipStableHash": "95009b775980510bf9c116312de0cec0e2aa7f30cd3f53c45b5898b0beb40736"
+    },
+    {
+      "windowId": "huge_sparse_far_surface_radius1",
+      "fixtureId": "huge_sparse_100000x100000_surface_window",
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "layerIds": [
+        "surface"
+      ],
+      "sourceChunkCount": 9,
+      "exportedRecordCount": 9,
+      "membershipStableHash": "6b80bba6855ba60793605e367f8de802b1345d356cea7d49419d28c4dc04a760"
+    },
+    {
+      "windowId": "infinite_east_camera_radius1",
+      "fixtureId": "infinite_streaming_multilayer_window",
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "profileId": "infinite_streaming_world_multilayer",
+      "layerIds": [
+        "interior",
+        "sky_overlay",
+        "surface",
+        "underground"
+      ],
+      "sourceChunkCount": 36,
+      "exportedRecordCount": 36,
+      "membershipStableHash": "4d58795feccc460ea274662210ce41ca06f18ca9364bd945e70580619781ab07"
+    },
+    {
+      "windowId": "infinite_player_spawn_radius1",
+      "fixtureId": "infinite_streaming_multilayer_window",
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "profileId": "infinite_streaming_world_multilayer",
+      "layerIds": [
+        "interior",
+        "sky_overlay",
+        "surface",
+        "underground"
+      ],
+      "sourceChunkCount": 36,
+      "exportedRecordCount": 36,
+      "membershipStableHash": "cd1652abd3b05f0ff6f48536815707a4948391d9f1fc16edad7ecd17f603e56c"
+    },
+    {
+      "windowId": "surface_underground_underwater_transition_radius1",
+      "fixtureId": "layer_transition_window_surface_underground_water",
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "layerIds": [
+        "surface",
+        "underground",
+        "underwater"
+      ],
+      "sourceChunkCount": 27,
+      "exportedRecordCount": 27,
+      "membershipStableHash": "25179d7320113aa51ceecd6ea10ca862abe7a11eea724f18f3560648ecf6131b"
+    }
+  ]
+}

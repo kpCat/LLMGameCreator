@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_negative_proof_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "passed": true,
+  "scenarioCount": 9,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_path_in_payload",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.payload.json_invalid",
+          "target": "visual-chunk-cache-runtime-readme.json",
+          "message": "'m' is an invalid escapable character within a JSON string. The string should be correctly escaped. Path: $.summary | LineNumber: 3 | BytePositionInLine: 54."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.absolute_path",
+          "target": "payload",
+          "message": "Payload must not contain absolute paths."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.raw_full_world_dump",
+          "target": "payload",
+          "message": "Payload must not contain raw full-world dump markers."
+        }
+      ]
+    },
+    {
+      "scenarioId": "chunk_key_ledger_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.proof.chunk_key_ledger_mismatch",
+          "target": "chunk-key-ledger",
+          "message": "Chunk key ledger must represent all unique Goal093 keys."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.counts_mismatch",
+          "target": "payload",
+          "message": "Payload counts must match Goal093/094 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_file_read",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.proof.file_read_required",
+          "target": "StreamingAssets",
+          "message": "Unity read proof must read mirrored StreamingAssets files."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_manifest",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.payload.required_file_missing",
+          "target": "visual-chunk-cache-unity-handoff-manifest.json",
+          "message": "Required payload file was not read."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.absolute_path",
+          "target": "payload",
+          "message": "Payload must not contain absolute paths."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.binary_raster_media",
+          "target": "payload",
+          "message": "Payload must not contain binary/raster media references."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.chunk_key_ledger_mismatch",
+          "target": "chunk-key-ledger",
+          "message": "Chunk key ledger must represent all unique Goal093 keys."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.counts_mismatch",
+          "target": "payload",
+          "message": "Payload counts must match Goal093/094 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.package_count_mismatch",
+          "target": "package-index",
+          "message": "Package count must match Goal093 and Goal094."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.raw_full_world_dump",
+          "target": "payload",
+          "message": "Payload must not contain raw full-world dump markers."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.sidecar_metadata_only_missing",
+          "target": "runtime-sidecar",
+          "message": "Runtime handoff sidecar must remain metadata-only."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.stream_window_count_mismatch",
+          "target": "stream-window-index",
+          "message": "Stream windows must be represented."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_package_index",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.payload.required_file_missing",
+          "target": "visual-chunk-cache-package-index.json",
+          "message": "Required payload file was not read."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.counts_mismatch",
+          "target": "payload",
+          "message": "Payload counts must match Goal093/094 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.package_count_mismatch",
+          "target": "package-index",
+          "message": "Package count must match Goal093 and Goal094."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_call_marker",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.provider_marker",
+          "target": "payload",
+          "message": "Payload must not contain provider, LLM, or network call markers."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_full_world_dump_marker",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.raw_full_world_dump",
+          "target": "payload",
+          "message": "Payload must not contain raw full-world dump markers."
+        }
+      ]
+    },
+    {
+      "scenarioId": "stream_window_count_mismatch",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.proof.counts_mismatch",
+          "target": "payload",
+          "message": "Payload counts must match Goal093/094 source evidence."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        },
+        {
+          "severity": "error",
+          "code": "goal095.proof.stream_window_count_mismatch",
+          "target": "stream-window-index",
+          "message": "Stream windows must be represented."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_manifest_hash",
+      "expectedStatus": "rejected",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal095.proof.payload_hash_mismatch",
+          "target": "manifest",
+          "message": "Payload file hashes must match manifest hashes."
+        }
+      ]
+    }
+  ]
+}

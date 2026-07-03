@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_probe_source_inventory_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "passed": true,
+  "probeRelativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/VisualChunkCacheHandoffProbe.cs",
+  "probeExists": true,
+  "probeSha256": "9d7650926d6b12025aed55fe0d5a1a665191f787a7ad796228b80d0492df4497",
+  "probeLineCount": 205,
+  "usesApplicationStreamingAssetsPath": true,
+  "usesExpectedPayloadRoot": true,
+  "exposesInspectorResultFields": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoProviderLlmNetworkMarkers": true,
+  "diagnostics": []
+}

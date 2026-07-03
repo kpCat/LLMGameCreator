@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_runtime_readme_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "summary": "Unity Alpha handoff/probe only; metadata-only payload for cache inspection.",
+  "implementsRuntimeConsumption": false,
+  "implementsLiveUnityRendering": false,
+  "implementsFinalAtlas": false,
+  "implementsRuntimeStreaming": false,
+  "requiresProviderCalls": false,
+  "requiresLlmCalls": false,
+  "requiredPayloadFiles": [
+    "visual-chunk-cache-unity-handoff-manifest.json",
+    "visual-chunk-cache-package-index.json",
+    "visual-chunk-cache-stream-window-index.json",
+    "visual-chunk-cache-chunk-key-ledger.json",
+    "visual-chunk-cache-runtime-readme.json"
+  ]
+}

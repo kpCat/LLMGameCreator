@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_simulated_read_proof_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "passed": true,
+  "payloadReadAttempted": true,
+  "manifestRead": true,
+  "requiredPayloadFilesPresent": true,
+  "payloadHashesMatchManifest": true,
+  "packageCountMatchesGoal093AndGoal094": true,
+  "streamWindowsRepresented": true,
+  "chunkKeysRepresented": true,
+  "runtimeHandoffSidecarMetadataOnly": true,
+  "countsMatch": true,
+  "noRawFullWorldDump": true,
+  "noAbsolutePaths": true,
+  "noBinaryOrRasterMedia": true,
+  "noProviderLlmNetworkMarkers": true,
+  "packageCount": 4,
+  "exportRecordCount": 93,
+  "streamWindowCount": 5,
+  "uniqueChunkKeyCount": 93,
+  "diagnostics": []
+}

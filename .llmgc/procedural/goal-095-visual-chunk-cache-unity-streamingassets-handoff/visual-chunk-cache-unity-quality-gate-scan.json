@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_quality_gate_scan_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "manualGate": "visual_chunk_cache_unity_streamingassets_handoff_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "passed": true,
+  "sourceLineagePassed": true,
+  "streamingAssetsMirrorPassed": true,
+  "simulatedReadProofPassed": true,
+  "negativeProofPassed": true,
+  "unityProbeSourcePassed": true,
+  "alphaRuntimeBootstrapUnchanged": true,
+  "alphaRuntimeBootstrapBeforeHash": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+  "alphaRuntimeBootstrapAfterHash": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+  "alphaRuntimeBootstrapBeforeLineCount": 3672,
+  "alphaRuntimeBootstrapAfterLineCount": 3672,
+  "scannedCSharpFileCount": 9,
+  "maxLogicalLineCount": 695,
+  "filesOver700LogicalLinesCount": 0,
+  "filesOver1000LogicalLinesCount": 0,
+  "noAbsolutePaths": true,
+  "noRawFullWorldDump": true,
+  "noBinaryOrRasterMedia": true,
+  "noPromptDumps": true,
+  "noRuntimeProviderSchemaProjectDependencyChanges": true,
+  "noForbiddenUnityAreasChanged": true,
+  "expectedChangedPathPrefixes": [
+    "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/",
+    "tests/LLMGameCreator.Tests/Application/VisualChunkCacheUnityStreamingAssetsHandoff/",
+    "tests/LLMGameCreator.Tests/ProductSmoke/VisualChunkCacheUnityStreamingAssetsHandoffProductSmokeTests.cs",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/VisualChunkCacheHandoffProbe.cs",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/",
+    ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/",
+    "docs/agent-tasks/goal-095-visual-chunk-cache-unity-streamingassets-handoff/",
+    "docs/CURRENT_GENERATOR_STATE.md",
+    "docs/CURRENT_GENERATOR_STATE.json",
+    "docs/CONTEXT_INDEX.md",
+    "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+    "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+    ".devflow/artifact-scope/artifact-scope-policy.json"
+  ],
+  "sourceFiles": [
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/VisualChunkCacheUnityStreamingAssetsHandoffEvidenceService.cs",
+      "logicalLineCount": 695,
+      "maxLineLength": 187
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/VisualChunkCacheUnityStreamingAssetsHandoffHash.cs",
+      "logicalLineCount": 43,
+      "maxLineLength": 88
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/VisualChunkCacheUnityStreamingAssetsHandoffModels.cs",
+      "logicalLineCount": 516,
+      "maxLineLength": 104
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/VisualChunkCacheUnityStreamingAssetsHandoffQualityGateScanner.cs",
+      "logicalLineCount": 296,
+      "maxLineLength": 233
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/VisualChunkCacheUnityStreamingAssetsHandoffReadValidator.cs",
+      "logicalLineCount": 426,
+      "maxLineLength": 223
+    },
+    {
+      "relativePath": "src/LLMGameCreator.Application/Design/VisualChunkCacheUnityStreamingAssetsHandoff/VisualChunkCacheUnityStreamingAssetsHandoffReportRenderer.cs",
+      "logicalLineCount": 80,
+      "maxLineLength": 261
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/Application/VisualChunkCacheUnityStreamingAssetsHandoff/VisualChunkCacheUnityStreamingAssetsHandoffEvidenceTests.cs",
+      "logicalLineCount": 150,
+      "maxLineLength": 117
+    },
+    {
+      "relativePath": "tests/LLMGameCreator.Tests/ProductSmoke/VisualChunkCacheUnityStreamingAssetsHandoffProductSmokeTests.cs",
+      "logicalLineCount": 131,
+      "maxLineLength": 167
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/VisualChunkCacheHandoffProbe.cs",
+      "logicalLineCount": 205,
+      "maxLineLength": 111
+    }
+  ],
+  "diagnostics": []
+}

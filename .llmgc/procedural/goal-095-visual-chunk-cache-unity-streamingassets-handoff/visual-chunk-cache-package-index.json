@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_package_index_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "packageCount": 4,
+  "exportRecordCount": 93,
+  "packages": [
+    {
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "exportTargetKind": "editorReview",
+      "sourceFixtureId": "finite_custom_255x257_surface_window",
+      "profileId": "finite_custom_sizes_matrix",
+      "worldSeed": "goal090-finite-matrix-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "streamWindowCount": 1,
+      "exportedRecordCount": 9,
+      "sourceMaterializedChunkCount": 9,
+      "estimatedFullWorldChunkCapacity": 216,
+      "metadataOnly": true,
+      "noRawFullWorldDump": true,
+      "onlyMaterializedChunksExported": true,
+      "packageMembershipHash": "95009b775980510bf9c116312de0cec0e2aa7f30cd3f53c45b5898b0beb40736"
+    },
+    {
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "exportTargetKind": "editorReview",
+      "sourceFixtureId": "huge_sparse_100000x100000_surface_window",
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "worldSeed": "goal090-huge-sparse-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "streamWindowCount": 1,
+      "exportedRecordCount": 9,
+      "sourceMaterializedChunkCount": 9,
+      "estimatedFullWorldChunkCapacity": 7328907,
+      "metadataOnly": true,
+      "noRawFullWorldDump": true,
+      "onlyMaterializedChunksExported": true,
+      "packageMembershipHash": "6b80bba6855ba60793605e367f8de802b1345d356cea7d49419d28c4dc04a760"
+    },
+    {
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "exportTargetKind": "editorReview",
+      "sourceFixtureId": "infinite_streaming_multilayer_window",
+      "profileId": "infinite_streaming_world_multilayer",
+      "worldSeed": "goal090-infinite-stream-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "streamWindowCount": 2,
+      "exportedRecordCount": 48,
+      "sourceMaterializedChunkCount": 72,
+      "metadataOnly": true,
+      "noRawFullWorldDump": true,
+      "onlyMaterializedChunksExported": true,
+      "packageMembershipHash": "21b1a61331d81881b9bd0a175a2db560cbd5f43c575656df56e49d284a643173"
+    },
+    {
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "exportTargetKind": "runtimeHandoff",
+      "sourceFixtureId": "layer_transition_window_surface_underground_water",
+      "profileId": "huge_sparse_100000x100000_multilayer",
+      "worldSeed": "goal090-huge-sparse-seed",
+      "generatorVersion": "visual-profile-seam-v1",
+      "streamWindowCount": 1,
+      "exportedRecordCount": 27,
+      "sourceMaterializedChunkCount": 27,
+      "estimatedFullWorldChunkCapacity": 7328907,
+      "metadataOnly": true,
+      "noRawFullWorldDump": true,
+      "onlyMaterializedChunksExported": true,
+      "packageMembershipHash": "25179d7320113aa51ceecd6ea10ca862abe7a11eea724f18f3560648ecf6131b"
+    }
+  ]
+}

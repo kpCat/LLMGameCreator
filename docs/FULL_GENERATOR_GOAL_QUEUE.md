@@ -85,6 +85,7 @@ visual_world_stream_preview_workspace_verification required
 visual_world_preview_service_split_source_health_verification required
 visual_chunk_cache_export_contract_verification required
 visual_chunk_cache_export_inspector_verification required
+visual_chunk_cache_unity_streamingassets_handoff_verification required
 ```
 
 Current capabilities:
@@ -107,6 +108,7 @@ Current capabilities:
 - BCL-only parameterized visual world profile/addressing seam with `144x144` only as benchmark fixture, arbitrary finite size matrix, huge sparse `100000x100000` profile, infinite chunk windows, deterministic chunk keys and compact metadata/text-SVG evidence;
 - BCL-only visual chunk cache/export contract over real Goal 091 stream-window artifacts, with deterministic manifest/readback/sidecar proofs and metadata-only runtime handoff evidence;
 - BCL-only Visual World Stream Preview Workspace integration for Goal 093 cache/export artifacts, surfacing 4 cache packages, 93 records, the metadata-only runtime handoff sidecar and readback/overlap/negative/invalidation proof status in the existing WinForms review UI;
+- Unity Alpha StreamingAssets handoff/probe for compact Goal 093/094 visual chunk cache metadata, with 5 mirrored payload files, simulated read proof, negative proof and unchanged AlphaRuntimeBootstrap hash;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1524,14 +1526,33 @@ Goal 094 adds no Runtime, Unity, public schema, provider/LLM/RAG/media execution
 dependency, binary/raster media, prompt-dump, runtime consumption or Unity consumption changes. Goal 094, Goal 093,
 Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
 
+### Goal 095: Visual Chunk Cache Unity StreamingAssets Handoff
+
+Goal 095 is produced for review with `visual_chunk_cache_unity_streamingassets_handoff_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It reads real Goal 093/094 cache/export artifacts and mirrors a compact
+metadata-only payload into Unity Alpha StreamingAssets under
+`unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/VisualChunkCacheGoal095/`.
+
+Goal 095 writes deterministic evidence under
+`.llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/`, adds standalone Unity probe source at
+`unity/LLMGameCreatorAlpha/Assets/Scripts/VisualChunkCacheHandoffProbe.cs`, and proves packageCount=4,
+exportRecordCount=93, streamWindowCount=5, uniqueChunkKeyCount=93, payloadFileCount=5, simulatedReadProofPassed=true,
+negativeProofPassed=true and qualityGatePassed=true. `AlphaRuntimeBootstrap.cs` remains unchanged with hash
+`f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce` and line count 3672.
+
+Goal 095 is Unity Alpha handoff/probe only. It adds no Runtime consumption, live Unity gameplay rendering, final atlas
+generation, runtime streaming, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file,
+dependency, binary/raster media or prompt-dump changes. Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and
+Goal 090 remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-visual_chunk_cache_export_inspector_verification
+visual_chunk_cache_unity_streamingassets_handoff_verification
 ```
 
 Status:
 
 ```text
-goal_094_visual_chunk_cache_export_inspector_produced_for_review
+goal_095_visual_chunk_cache_unity_streamingassets_handoff_produced_for_review
 ```

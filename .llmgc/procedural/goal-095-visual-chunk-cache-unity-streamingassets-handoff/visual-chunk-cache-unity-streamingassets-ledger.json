@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "visual_chunk_cache_unity_streamingassets_ledger_v1",
+  "goalId": "goal_095_visual_chunk_cache_unity_streamingassets_handoff",
+  "passed": true,
+  "streamingAssetsRelativeRoot": "LLMGameCreator/VisualChunkCacheGoal095",
+  "fileCount": 5,
+  "files": [
+    {
+      "relativePath": "visual-chunk-cache-chunk-key-ledger.json",
+      "role": "chunk_key_ledger",
+      "sha256": "2e8b5bf09d19f76727f7e551455053d950f86d0d2e33fea0f9b22548024b440e",
+      "byteCount": 46892
+    },
+    {
+      "relativePath": "visual-chunk-cache-package-index.json",
+      "role": "package_index",
+      "sha256": "1eaadeccfc1f3c0aea7c62a35f135fd60dbb60ad415c49cef1836d88568289c0",
+      "byteCount": 3048
+    },
+    {
+      "relativePath": "visual-chunk-cache-runtime-readme.json",
+      "role": "runtime_readme",
+      "sha256": "9bbacab225817bd7ab54580e1d9533b15fd30d5b0089c08bcb2c386422833ac6",
+      "byteCount": 744
+    },
+    {
+      "relativePath": "visual-chunk-cache-stream-window-index.json",
+      "role": "stream_window_index",
+      "sha256": "47c514450e0f3c3c3784631b4a6a1a61ad6c18350db120f87950bc294f5ab2f3",
+      "byteCount": 2743
+    },
+    {
+      "relativePath": "visual-chunk-cache-unity-handoff-manifest.json",
+      "role": "manifest",
+      "sha256": "9da5d099e951305c19017f96a98a6604efc221175a9c208b9ea26032d811ddd2",
+      "byteCount": 1629
+    }
+  ],
+  "diagnostics": []
+}
