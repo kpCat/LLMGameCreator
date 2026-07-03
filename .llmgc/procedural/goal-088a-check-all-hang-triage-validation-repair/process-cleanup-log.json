@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "goal_088a_process_cleanup_log_v1",
+  "goalId": "goal_088a_check_all_hang_triage_validation_repair",
+  "status": "GREEN",
+  "processesInspected": [
+    "dotnet.exe",
+    "testhost.exe",
+    "vstest.console.exe"
+  ],
+  "activeBeforeCheckAll": [],
+  "activeAfterCheckAll": [],
+  "orphanedProcessesStopped": 0,
+  "orphanedProcessStopCommandsUsed": [],
+  "historicalArtifactSideEffectsDetected": true,
+  "historicalArtifactSideEffectPathCount": 79,
+  "historicalArtifactsRestoredAfterValidationSideEffects": true,
+  "restoreCommand": "git restore -- <79 exact validation side-effect paths>",
+  "restoreReason": "Full check-all regenerated tracked historical compact artifacts and Goal 082 StreamingAssets mirror files; preflight dirty state had only the Goal 088A task pack.",
+  "unrelatedUserChangesReverted": false
+}

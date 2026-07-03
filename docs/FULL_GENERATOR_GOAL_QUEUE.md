@@ -77,6 +77,7 @@ source_format_physical_line_repair_verification required
 visual_adult_layer_context_integration_verification required
 visual_part_pack_rule_stack_verification required
 deterministic_visual_region_composer_verification required
+goal_088_check_all_validation_repair_verification required
 ```
 
 Current capabilities:
@@ -94,6 +95,7 @@ Current capabilities:
 - BCL-only deterministic visual microtile materializer with 24 text SVG previews and compact catalog/manifest/ledger/proof evidence;
 - BCL-only deterministic visual map patch composer with three 24x16 text SVG patch previews and compact catalog/manifest/ledger/water-flow/reachability/layering/negative/source-lineage proof evidence;
 - BCL-only deterministic visual region composer with compact 144x144 surface plus 144x144 underground region definition, 108 patch placements, chunk/proof evidence and text SVG overview artifacts;
+- Goal 088A full check-all validation repair proof with `.devflow/runs/20260703_075027-check-all`, 1235/1235 non-product tests, 0 warnings, no Goal 088 code changes and restored validation side-effect artifacts;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1372,14 +1374,26 @@ Region coverage:
 
 Validator coverage rejects wrong dimensions, wrong layer count, wrong patch grid, unknown Goal 087 patch ids, out-of-bounds or duplicate patch placements, missing or mismatched water connectors, disconnected roads, unpaired layer gates, invalid settlement terrain, creature metadata gaps, adult metadata without safe fallback, prompt text as source of truth, provider candidates treated as approved output, absolute paths, unsafe SVG script/external/base64 content and heavy raw cell dumps. Goal 088 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, external dependency, binary or raster media, generated image asset, real adult fixture or explicit prompt dump changes.
 
+### Goal 088A: Check-All Hang Triage And Region Composer Validation Repair
+
+Purpose:
+
+Resolve the Goal 088 validation blocker by proving whether the required full `.devflow/scripts/check-all.ps1` route passes when allowed to complete, or by isolating the hang/failure without starting feature work.
+
+Status:
+
+Produced for review. The gate remains `goal_088_check_all_validation_repair_verification required`, not passed. Goal 088 remains produced for review with `deterministic_visual_region_composer_verification required`, `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, full check-all passed in `.devflow/runs/20260703_075027-check-all` with 1235 non-product tests passed, 0 failed, 0 skipped, 0 warnings and 18 m 14 s non-product test duration. Goal 088 focused tests passed 6/6, Goal 088 product smoke passed 1/1 and CurrentState tests passed 16/16. No Goal 088 code/test repair was required; the root cause classification is wrapper-timeout/slow historical suite, not a Goal 088 hang. Full validation regenerated deterministic historical artifacts, so 79 Goal 074-082 compact artifact and Goal 082 StreamingAssets side-effect paths were restored. Compact evidence is under `.llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/`.
+
 ## Current Recommended Next Work
 
 ```text
-deterministic_visual_region_composer_verification
+goal_088_check_all_validation_repair_verification
 ```
 
 Status:
 
 ```text
-goal_088_deterministic_visual_region_composer_produced_for_review
+goal_088a_check_all_validation_repair_produced_for_review
 ```

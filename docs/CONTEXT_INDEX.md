@@ -178,6 +178,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-086-deterministic-visual-microtile-materializer/GOAL.md` | Goal 086 task: consume Goal 084 visual asset slots and Goal 085 visual part-pack rule-stack metadata into a BCL-only Application deterministic visual microtile materializer, text SVG preview catalog/manifest/ledger/proofs and final stop at `deterministic_visual_microtile_materializer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/GOAL.md` | Goal 087 task: consume Goal 084 visual asset metadata, Goal 085 visual part-pack metadata and Goal 086 microtile previews into a BCL-only Application deterministic visual map patch composer, text SVG patch catalog/manifest/ledger/proofs and final stop at `deterministic_visual_map_patch_composer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-088-deterministic-visual-region-composer/GOAL.md` | Goal 088 task: consume Goal 084 visual asset metadata, Goal 085 visual part-pack metadata, Goal 086 microtile metadata and Goal 087 visual map patches into a BCL-only Application deterministic visual region composer, compact region definition/placement/chunk/proof artifacts, text SVG region overviews and final stop at `deterministic_visual_region_composer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-088a-check-all-hang-triage-validation-repair/GOAL.md` | Goal 088A task: validation-only check-all hang triage and repair after Goal 088, with full `.devflow/scripts/check-all.ps1` proof, compact triage evidence and final stop at `goal_088_check_all_validation_repair_verification`; no feature work, public schema, Runtime, Unity code, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
 | `docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md` | Goal 085 implementation-oriented synthesis of the deepsearch visual stack: immediate optional adapters, prototype candidates, rejected/deferred tools and non-negotiable design requirements. |
@@ -243,7 +244,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-deterministic_visual_region_composer_verification
+goal_088_check_all_validation_repair_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -437,6 +438,11 @@ Goal 084/085/086/087 visual lineage into a BCL-only Application deterministic vi
 144x144 surface plus 144x144 underground region definition/placement/chunk/proof evidence and text SVG overviews under
 `.llmgc/procedural/goal-088-deterministic-visual-region-composer/`, and does not start provider/media/runtime/schema
 implementation. Goal 085, Goal 083, Goal 082 and Goal 082A remain `accepted=false`.
+Goal 088A is produced for review with `goal_088_check_all_validation_repair_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it proves the full `.devflow/scripts/check-all.ps1` route passed in
+`.devflow/runs/20260703_075027-check-all` with 1235/1235 non-product tests and 0 warnings, classifies the prior blocker
+as a wrapper-timeout/slow-suite issue rather than a Goal 088 hang, restores 79 historical validation side-effect paths,
+and leaves Goal 088 artifacts `accepted=false`.
 
 Allowed next sequence:
 
@@ -488,6 +494,7 @@ Allowed next sequence:
 46. Keep Goal 086 `deterministic_visual_microtile_materializer_verification` recorded as accepted for continuation before Goal 087 by handoff, without rewriting Goal 086 artifact accepted=false evidence.
 47. Keep Goal 087 `deterministic_visual_map_patch_composer_verification` recorded as accepted for continuation before Goal 088 by handoff, without rewriting Goal 087 artifact accepted=false evidence.
 48. Review Goal 088 `deterministic_visual_region_composer_verification`; it adds deterministic text SVG visual region composer evidence, keeps Goal 085, Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
+49. Review Goal 088A `goal_088_check_all_validation_repair_verification`; it repairs the Goal 088 full check-all blocker, keeps Goal 088 artifacts `accepted=false`, and does not start provider/media/runtime/schema implementation.
 
 Kill criterion:
 

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "goal_088a_test_isolation_matrix_v1",
+  "goalId": "goal_088a_check_all_hang_triage_validation_repair",
+  "status": "GREEN",
+  "rootCauseClassification": "wrapper_timeout_slow_historical_suite_not_goal088_hang",
+  "goal088CodeModified": false,
+  "fullCheckAllPassed": true,
+  "isolationRequired": false,
+  "matrix": [
+    {
+      "scope": "restore",
+      "command": "dotnet restore .\\LLMGameCreator.sln",
+      "result": "passed"
+    },
+    {
+      "scope": "build",
+      "command": "dotnet build .\\LLMGameCreator.sln --no-restore",
+      "result": "passed",
+      "warnings": 6,
+      "warningClassification": "pre_existing_direct_build_warnings"
+    },
+    {
+      "scope": "goal088_focused",
+      "command": "dotnet test tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj --filter DeterministicVisualRegionComposer",
+      "result": "passed",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "scope": "goal088_product_smoke",
+      "command": "dotnet test tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj --filter DeterministicVisualRegionComposerProductSmokeTests",
+      "result": "passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "scope": "current_state",
+      "command": "dotnet test tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj --filter CurrentState",
+      "result": "passed",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "scope": "full_check_all_non_product_leg",
+      "command": ".\\.devflow\\scripts\\check-all.ps1",
+      "result": "passed",
+      "passed": 1235,
+      "failed": 0,
+      "skipped": 0,
+      "duration": "18 m 14 s"
+    }
+  ],
+  "narrowestFailingNamespaceOrTest": "",
+  "narrowestHangingNamespaceOrTest": "",
+  "blameHangUsed": false,
+  "splitIsolationUsed": false,
+  "reasonIsolationStopped": "Full check-all completed successfully when allowed to run to completion."
+}
