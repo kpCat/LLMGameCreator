@@ -188,6 +188,13 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-094-visual-chunk-cache-export-inspector/GOAL.md` | Goal 094 task: integrate real Goal 093 cache/export artifacts into the existing Visual World Stream Preview Workspace and WinForms review UI, write compact inspector evidence and stop at `visual_chunk_cache_export_inspector_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-095-visual-chunk-cache-unity-streamingassets-handoff/GOAL.md` | Goal 095 task: mirror a compact metadata-only Goal 093/094 visual chunk cache payload into Unity Alpha StreamingAssets, add standalone probe source, write simulated-read/negative proof evidence and stop at `visual_chunk_cache_unity_streamingassets_handoff_verification`; no Runtime consumption, live Unity gameplay rendering, final atlas, runtime streaming, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/GOAL.md` | Goal 096 task: surface the real Goal 095 Unity StreamingAssets payload, standalone probe inventory, simulated read, negative proof and no-Unity-file-change readiness in the existing Visual World Stream Preview Workspace and WinForms review UI, write compact inspector evidence and stop at `unity_handoff_inspector_probe_readiness_verification`; no Unity file mutation, Runtime consumption, live Unity gameplay rendering, final atlas, runtime streaming, public schema, provider, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-097-final-roadmap-rebaseline-dream-scope-productivity/GOAL.md` | Goal 097 task: final roadmap rebaseline, dream scope register, realism/geoworld simulator planning track, release risk register, milestone gates and aggressive goal productivity policy; docs/evidence only, final stop at `final_roadmap_rebaseline_dream_scope_productivity_verification`; no product code, Runtime, Unity, public schema, provider, Lua, generator-library, dependency, binary/raster media or prompt-dump changes. |
+| `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
+| `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
+| `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
+| `docs/RELEASE_RISK_REGISTER.md` | Goal 097 P0/P1/P2/P3 release risk register and release gate plan. |
+| `docs/MILESTONE_GATES.md` | Goal 097 acceptance gate definitions for Vertical Slice Final, Strong Alpha, v1 Full Final and Dream Full Final. |
+| `docs/GOAL_PRODUCTIVITY_POLICY.md` | Goal 097 aggressive goal productivity policy for larger composite goals, visible progress cadence and Goal089 tiered validation usage. |
 | `docs/VALIDATION_PIPELINE.md` | Goal 089 validation policy: `check-current-goal.ps1` is the ordinary feature-goal default, `check-spine-fast.ps1` is the medium visual/world/gameplay spine route, and full `check-all.ps1` / `check-all-observed.ps1` is reserved for consolidation, milestone and shared/core-risk work. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
@@ -254,7 +261,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-visual_chunk_cache_unity_streamingassets_handoff_verification
+final_roadmap_rebaseline_dream_scope_productivity_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -511,6 +518,15 @@ negative proof, AlphaRuntimeBootstrap unchanged status and no-Unity-file-change 
 start Runtime consumption, live Unity gameplay rendering, final atlas generation, runtime streaming, provider, schema,
 Lua, generator-library, project-file, dependency, binary/raster media or prompt-output work. Goal 096, Goal 095,
 Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
+Goal 097 is produced for review with `final_roadmap_rebaseline_dream_scope_productivity_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it rebases the roadmap after Goals 074-096, records Vertical Slice
+Final / Strong Alpha / v1 Full Final / Dream Full Final milestone gates and estimates, adds the dream-scope register,
+records realism/geospatial and self-generated realism simulator tracks as future planning only, adds release risk and
+goal-productivity policy docs, and writes compact evidence under
+`.llmgc/procedural/goal-097-final-roadmap-rebaseline-dream-scope-productivity/`. Goal 097 changes no product code,
+Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or
+prompt-output work. Goal 096, Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain
+`accepted=false`.
 
 Allowed next sequence:
 
@@ -572,6 +588,7 @@ Allowed next sequence:
 56. Review Goal 094 `visual_chunk_cache_export_inspector_verification`; it makes Goal 093 cache/export artifacts inspectable in the existing Application/WinForms review workspace, keeps Goal 094 and previous visual gates `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 57. Review Goal 095 `visual_chunk_cache_unity_streamingassets_handoff_verification`; it mirrors compact Goal 093/094 cache/export metadata into Unity Alpha StreamingAssets and adds a standalone probe, keeps Goal 095 and previous visual gates `accepted=false`, and does not start Runtime consumption, live Unity gameplay rendering, final atlas generation, provider, media, schema, Lua or generator-library implementation.
 58. Review Goal 096 `unity_handoff_inspector_probe_readiness_verification`; it makes Goal 095 Unity handoff payload/probe/readiness evidence inspectable in the existing Application/WinForms review workspace, keeps Goal 096 and previous visual gates `accepted=false`, and does not start Runtime consumption, live Unity gameplay rendering, final atlas generation, provider, media, schema, Lua or generator-library implementation.
+59. Review Goal 097 `final_roadmap_rebaseline_dream_scope_productivity_verification`; it rebases roadmap/milestone/risk/productivity planning after the Goal 074-096 chain, keeps Goal 096 and prior visual gates `accepted=false`, records realism/geospatial simulator work as future research-only scope and does not start product code, Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 
 Kill criterion:
 

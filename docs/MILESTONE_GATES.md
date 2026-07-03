@@ -1,0 +1,91 @@
+# Milestone Gates
+
+Status: Goal 097 acceptance-gate plan
+Manual gate: `final_roadmap_rebaseline_dream_scope_productivity_verification required`
+Accepted: false
+
+Each milestone must produce visible product progress. Contract and proof artifacts are required, but they are not sufficient by themselves.
+
+## Vertical Slice Final
+
+Acceptance gate:
+
+- user-visible/editor-visible generated package workflow;
+- one coherent playable or simulatable loop with movement/exploration, interaction/event/quest and reward/cost/state change;
+- generated package export/import proof;
+- Unity/player proof where the selected slice uses Unity/player handoff;
+- validation tiers: restore/build, focused tests, current-state docs guard, scenario artifact scope and selected product/player smoke;
+- manual acceptance checklist with screenshots/log excerpts or direct artifact/player proof;
+- release risk review against P0/P1 register.
+
+Exit statement:
+
+```text
+vertical_slice_final_verification required
+```
+
+## Strong Alpha
+
+Acceptance gate:
+
+- editor-visible generation/review/export workflow for at least three distinct supported family/profile shapes;
+- generated package export/import and replayable validation for each selected family;
+- Unity/player proof for the main presentation target;
+- save/load proof for selected finite/infinite world deltas;
+- rating/adult safe-public export proof when adult metadata exists;
+- validation tiers include spine-fast or full/observed-full for shared/core-risk changes;
+- manual acceptance checklist covers playability, inspectability, exportability and known release risks.
+
+Exit statement:
+
+```text
+strong_alpha_verification required
+```
+
+## v1 Full Final
+
+Acceptance gate:
+
+- clean-machine install/export/player launch proof;
+- supported game-family matrix with explicit non-supported modes;
+- generated package export/import plus player/runtime consumption proof;
+- Unity/player performance budget for selected target;
+- save/load/replay proof for selected gameplay/world modes;
+- provider/provenance/license/rating manifest for shipped assets and sample packages;
+- release docs, sample games and diagnostics;
+- full or observed-full validation plus targeted product/player smoke routes;
+- manual release acceptance checklist and P0/P1 risk closure.
+
+Exit statement:
+
+```text
+v1_full_final_verification required
+```
+
+## Dream Full Final
+
+Acceptance gate:
+
+- explicit track selection from `docs/context/DREAM_SCOPE_REGISTER.md`;
+- dream-track research gate and risk review before implementation;
+- generated or ingested world proof appropriate to the selected track;
+- Unity/player/runtime proof without runtime LLM/provider dependency;
+- licensing/ToS/provider policy proof for geospatial or provider-backed tracks;
+- rating/export/store policy proof for adult-capable tracks;
+- release-grade validation and manual acceptance for the selected dream scope.
+
+Exit statement:
+
+```text
+dream_full_final_verification required
+```
+
+## Manual Checklist Template
+
+- The user can identify what changed without reading raw evidence.
+- The editor or player exposes the result.
+- Export/import or handoff is proven from real files.
+- Runtime/player consumes package data or approved refs only.
+- Validation tier matches milestone risk.
+- Release risk register was reviewed and updated.
+- The next goal is not started until this gate is accepted.

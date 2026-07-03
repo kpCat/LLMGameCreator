@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "goal097_dream_scope_register_summary_v1",
+  "goalId": "goal_097_final_roadmap_rebaseline_dream_scope_productivity",
+  "accepted": false,
+  "manualGate": "final_roadmap_rebaseline_dream_scope_productivity_verification",
+  "tracks": [
+    "fantasy_exploration_heroes_like",
+    "sci_fi_ultra_modern_future",
+    "space_rangers_like",
+    "procedural_visual_media_compiler",
+    "adult_rating_gated_extension",
+    "realism_geospatial_simulator",
+    "self_generated_realism_simulator",
+    "release_packaging_steam_export"
+  ],
+  "realismGeospatialRecorded": true,
+  "selfGeneratedRealismRecorded": true,
+  "arbitraryFiniteHugeSparseAndInfiniteWorldTrackRemains": true,
+  "implementationAuthorized": false,
+  "requiredDocs": [
+    "docs/context/DREAM_SCOPE_REGISTER.md",
+    "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md"
+  ]
+}

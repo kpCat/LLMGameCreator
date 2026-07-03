@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "goal097_goal_productivity_policy_summary_v1",
+  "goalId": "goal_097_final_roadmap_rebaseline_dream_scope_productivity",
+  "accepted": false,
+  "manualGate": "final_roadmap_rebaseline_dream_scope_productivity_verification",
+  "lineCountIsTarget": false,
+  "outcomeSizeIsTarget": true,
+  "futureAggressiveGoalsMustBeComposite": true,
+  "avoidRepeatedIsolatedProofServices": true,
+  "ordinaryGoalShouldCombine": [
+    "contract_or_reuse",
+    "application_seam",
+    "deterministic_evidence",
+    "focused_tests",
+    "ui_export_or_readback_when_product_visible"
+  ],
+  "visibleProgressCadence": {
+    "featureGoalsMin": 3,
+    "featureGoalsMax": 5
+  },
+  "qualityOrReleaseRiskCadence": {
+    "goalsMin": 5,
+    "goalsMax": 8
+  },
+  "useGoal089TieredValidation": true,
+  "noManualCheckAllRequirementFromUser": true,
+  "requiredDoc": "docs/GOAL_PRODUCTIVITY_POLICY.md"
+}

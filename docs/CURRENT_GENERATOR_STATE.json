@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T20:20:00Z",
+    "updated_at_utc":  "2026-07-03T21:10:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 096 Unity handoff inspector probe readiness produced for review",
-    "gate_status":  "unity_handoff_inspector_probe_readiness_verification",
+    "current_phase_title":  "Goal 097 final roadmap rebaseline dream scope productivity produced for review",
+    "gate_status":  "final_roadmap_rebaseline_dream_scope_productivity_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 096 Unity Handoff Inspector Probe Readiness is produced for review: unity_handoff_inspector_probe_readiness_verification required, accepted=false. It extends the existing Visual World Stream Preview Workspace Application/WinForms seam to inspect real Goal 095 Unity StreamingAssets handoff readiness, surfaces five payload files, four packages, 93 records, five stream windows, 93 unique chunk keys, probe source inventory, simulated read proof, negative proof, AlphaRuntimeBootstrap unchanged status and forbidden-area status without launching Unity. Goal 096 does not change Unity files, Runtime, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 096, Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 096 Unity handoff inspector probe readiness evidence. Goal 096 adds editor/readiness inspection only: it reads real Goal 095 evidence and mirrored StreamingAssets payloads by relative path through the existing workspace seam, and it did not modify AlphaRuntimeBootstrap.cs, VisualChunkCacheHandoffProbe.cs, StreamingAssets payload files, Runtime, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 096 remains accepted=false until explicit user review accepts it, and Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain accepted=false.",
-    "recommended_next_decision":  "Review Goal 096 Unity handoff inspector probe readiness evidence and only mark unity_handoff_inspector_probe_readiness_verification passed after explicit user acceptance; do not mark Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091, Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 097 Final Roadmap Rebaseline, Dream Scope Register and Aggressive Goal Productivity Policy is produced for review: final_roadmap_rebaseline_dream_scope_productivity_verification required, accepted=false. It rebases the roadmap after Goals 074-096, adds Vertical Slice Final / Strong Alpha / v1 Full Final / Dream Full Final milestone gates and estimates, records dream scope including realism/geospatial and self-generated realism simulator tracks as future planning only, adds release risk and goal productivity policy docs, and writes compact evidence under .llmgc/procedural/goal-097-final-roadmap-rebaseline-dream-scope-productivity/. Goal 097 changes no product code, Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 096, Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 097 final roadmap rebaseline evidence and the new roadmap/risk/productivity docs. Goal 097 is docs/evidence-only strategic control work; it records realism/geospatial simulator and self-generated realism as future research tracks and does not authorize implementation. Goal 097 remains accepted=false until explicit user review accepts it, and Goal 096, Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain accepted=false.",
+    "recommended_next_decision":  "Review Goal 097 final roadmap rebaseline evidence and only mark final_roadmap_rebaseline_dream_scope_productivity_verification passed after explicit user acceptance; do not start product code, Runtime, Unity, provider, media, schema, Lua, generator-library or geospatial implementation from this planning handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "final_roadmap_rebaseline_dream_scope_productivity_verification",
                                                         "unity_handoff_inspector_probe_readiness_verification",
                                                         "visual_chunk_cache_unity_streamingassets_handoff_verification",
                                                         "visual_chunk_cache_export_inspector_verification",
@@ -132,7 +133,8 @@
                            "goal_093_manual_gate":  "visual_chunk_cache_export_contract_verification",
                            "goal_094_manual_gate":  "visual_chunk_cache_export_inspector_verification",
                            "goal_095_manual_gate":  "visual_chunk_cache_unity_streamingassets_handoff_verification",
-                           "goal_096_manual_gate":  "unity_handoff_inspector_probe_readiness_verification"
+                           "goal_096_manual_gate":  "unity_handoff_inspector_probe_readiness_verification",
+                           "goal_097_manual_gate":  "final_roadmap_rebaseline_dream_scope_productivity_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -423,6 +425,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "final_roadmap_rebaseline_dream_scope_productivity_verification",
+                                          "goal_097_final_roadmap_rebaseline_dream_scope_productivity",
+                                          "manual_review_goal_097_final_roadmap_rebaseline_dream_scope_productivity",
                                           "unity_handoff_inspector_probe_readiness_verification",
                                           "goal_096_unity_handoff_inspector_probe_readiness",
                                           "manual_review_goal_096_unity_handoff_inspector_probe_readiness",
@@ -494,10 +499,14 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "unity_handoff_inspector_probe_readiness_verification",
-    "recommended_next_work_item_title":  "Review Goal 096 Unity handoff inspector probe readiness",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/GOAL.md",
+    "recommended_next_work_item":  "final_roadmap_rebaseline_dream_scope_productivity_verification",
+    "recommended_next_work_item_title":  "Review Goal 097 final roadmap rebaseline dream scope productivity",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-097-final-roadmap-rebaseline-dream-scope-productivity/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal 097 final roadmap rebaseline evidence",
+                                              "Keep Goal 097 accepted=false until user review accepts it",
+                                              "Use docs/ROADMAP_FINAL_REBASELINE.md, docs/context/DREAM_SCOPE_REGISTER.md, docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md, docs/RELEASE_RISK_REGISTER.md, docs/MILESTONE_GATES.md and docs/GOAL_PRODUCTIVITY_POLICY.md to shape future larger composite goals",
+                                              "Do not start realism/geospatial ingestion, product code, Runtime, Unity, provider, media, schema, Lua or generator-library implementation from this planning handoff",
                                               "Review Goal 096 Unity handoff inspector probe readiness evidence",
                                               "Keep Goal 096, Goal 095, Goal 094 and Goal 093 accepted=false until user review accepts them",
                                               "Use the Goal 096 editor/readiness inspection as future Unity handoff review input, not as Runtime consumption, live Unity gameplay rendering, final atlas, runtime streaming or provider implementation",
@@ -540,6 +549,13 @@
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
                                                   "docs/VALIDATION_PIPELINE.md",
+                                                  "docs/agent-tasks/goal-097-final-roadmap-rebaseline-dream-scope-productivity/GOAL.md",
+                                                  "docs/ROADMAP_FINAL_REBASELINE.md",
+                                                  "docs/context/DREAM_SCOPE_REGISTER.md",
+                                                  "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md",
+                                                  "docs/RELEASE_RISK_REGISTER.md",
+                                                  "docs/MILESTONE_GATES.md",
+                                                  "docs/GOAL_PRODUCTIVITY_POLICY.md",
                                                   "docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/GOAL.md",
                                                   "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
                                                   "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
@@ -2258,5 +2274,21 @@
                                                                                          "Goal 096 keeps Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 produced-for-review with accepted=false."
                                                                                      ],
                                                                  "next_action":  "review_goal_096_unity_handoff_inspector_probe_readiness"
-                                                             }
+                                                             },
+    "final_roadmap_rebaseline_dream_scope_productivity_verification":  {
+                                                                          "status":  "produced_for_review",
+                                                                          "accepted":  false,
+                                                                          "evidence_source":  "goal_097_final_roadmap_rebaseline_dream_scope_productivity",
+                                                                          "observed_result":  [
+                                                                                                  "Goal 097 produces final roadmap rebaseline evidence under .llmgc/procedural/goal-097-final-roadmap-rebaseline-dream-scope-productivity with accepted=false.",
+                                                                                                  "implementationStatus=GREEN, roadmapFinalRebaselineExists=true, dreamScopeRegisterExists=true, realismGeospatialSimulatorTrackExists=true, releaseRiskRegisterExists=true, milestoneGatesExist=true, goalProductivityPolicyExists=true and milestoneEstimatesPresent=true.",
+                                                                                                  "The roadmap records current position after Goal 096, what exists now, what is not yet real/playable, Vertical Slice Final, Strong Alpha, v1 Full Final and Dream Full Final milestone ladder, estimated remaining aggressive goals, mandatory end-to-end visible progress rule, deferrals and kill criteria.",
+                                                                                                  "The dream scope register records fantasy/Heroes-like, sci-fi/ultra-modern, Space-Rangers-like, procedural visual/media compiler, adult/rating-gated extension, realism/geospatial simulator, self-generated realism simulator and release/packaging/Steam/export tracks.",
+                                                                                                  "The realism/geoworld track records real-world/geospatial ingestion and self-generated realism as future planning only, with legal/licensing/provider/API gates, no tile scraping by default, no provider ToS violation and no runtime LLM/provider dependency.",
+                                                                                                  "The release risk register classifies P0 release blockers, P1 serious risks, P2 technical debt and P3 deferrable polish, including playable quality versus proof quality, Unity performance, StreamingAssets/platform issues, save/load and infinite world deltas, provider/provenance/licensing, adult/rating leakage, geospatial licensing/ToS/API risk, installer/export/clean-machine risk, source-health/code-size risk and validation noise.",
+                                                                                                  "The goal productivity policy requires larger composite future goals, visible/editor/Unity/export progress every 3-5 feature goals, quality or release-risk passes every 5-8 goals, Goal089 tiered validation and no manual check-all requirement from the user.",
+                                                                                                  "Goal 097 adds no product code, Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media or prompt dump."
+                                                                                              ],
+                                                                          "next_action":  "review_goal_097_final_roadmap_rebaseline_dream_scope_productivity"
+                                                                      }
 }

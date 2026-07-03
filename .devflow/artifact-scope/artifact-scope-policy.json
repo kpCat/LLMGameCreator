@@ -68,7 +68,8 @@
     ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/",
     ".llmgc/procedural/goal-094-visual-chunk-cache-export-inspector/",
     ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/",
-    ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/"
+    ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/",
+    ".llmgc/procedural/goal-097-final-roadmap-rebaseline-dream-scope-productivity/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1192,6 +1193,27 @@
         "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
         "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ]
+    },
+    {
+      "scenario": "goal-097-final-roadmap-rebaseline-dream-scope-productivity",
+      "allowedPaths": [
+        "docs/ROADMAP_FINAL_REBASELINE.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/GOAL_PRODUCTIVITY_POLICY.md",
+        "docs/context/DREAM_SCOPE_REGISTER.md",
+        "docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-097-final-roadmap-rebaseline-dream-scope-productivity/",
+        "docs/agent-tasks/goal-097-final-roadmap-rebaseline-dream-scope-productivity/"
       ]
     }
   ]

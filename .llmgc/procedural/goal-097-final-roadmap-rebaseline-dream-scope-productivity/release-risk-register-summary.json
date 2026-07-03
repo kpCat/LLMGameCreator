@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "goal097_release_risk_register_summary_v1",
+  "goalId": "goal_097_final_roadmap_rebaseline_dream_scope_productivity",
+  "accepted": false,
+  "manualGate": "final_roadmap_rebaseline_dream_scope_productivity_verification",
+  "riskClasses": {
+    "p0ReleaseBlockers": [
+      "playable_quality_vs_proof_quality",
+      "runtime_dependency_boundary_violation",
+      "save_load_and_infinite_world_deltas",
+      "clean_machine_install_export",
+      "provider_provenance_licensing",
+      "adult_rating_leakage",
+      "geospatial_licensing_tos_api"
+    ],
+    "p1SeriousRisks": [
+      "unity_performance",
+      "streamingassets_platform_issues",
+      "visual_consistency",
+      "source_health_code_size",
+      "validation_noise_duration",
+      "runtime_unity_parity"
+    ],
+    "p2TechnicalDebt": [
+      "repeated_proof_helpers",
+      "large_method_file_debt",
+      "artifact_timestamp_like_values",
+      "visual_final_renderer_missing",
+      "provider_quarantine_missing",
+      "release_documentation_gaps"
+    ],
+    "p3DeferrablePolish": [
+      "dashboard_ui_polish",
+      "extra_visual_styles",
+      "advanced_dream_tracks",
+      "broad_refactors"
+    ]
+  },
+  "requiredDoc": "docs/RELEASE_RISK_REGISTER.md"
+}

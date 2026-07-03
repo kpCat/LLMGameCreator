@@ -87,6 +87,7 @@ visual_chunk_cache_export_contract_verification required
 visual_chunk_cache_export_inspector_verification required
 visual_chunk_cache_unity_streamingassets_handoff_verification required
 unity_handoff_inspector_probe_readiness_verification required
+final_roadmap_rebaseline_dream_scope_productivity_verification required
 ```
 
 Current capabilities:
@@ -111,6 +112,7 @@ Current capabilities:
 - BCL-only Visual World Stream Preview Workspace integration for Goal 093 cache/export artifacts, surfacing 4 cache packages, 93 records, the metadata-only runtime handoff sidecar and readback/overlap/negative/invalidation proof status in the existing WinForms review UI;
 - Unity Alpha StreamingAssets handoff/probe for compact Goal 093/094 visual chunk cache metadata, with 5 mirrored payload files, simulated read proof, negative proof and unchanged AlphaRuntimeBootstrap hash;
 - BCL-only Visual World Stream Preview Workspace Unity handoff inspector for Goal 095 payload/probe readiness, with 5 payload files, 4 packages, 93 records, 5 stream windows, 93 unique chunk keys, simulated read proof, negative proof, probe inventory, unchanged AlphaRuntimeBootstrap proof and no Unity file changes;
+- Goal 097 final roadmap rebaseline, dream-scope register, realism/geoworld simulator planning track, release risk register, milestone gates and aggressive goal productivity policy, all as docs/evidence-only planning control with no product-code implementation;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1566,14 +1568,33 @@ rendering, final atlas generation, runtime streaming, public schema, provider/LL
 Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 096, Goal 095,
 Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
 
+### Goal 097: Final Roadmap Rebaseline Dream Scope Productivity
+
+Goal 097 is produced for review with `final_roadmap_rebaseline_dream_scope_productivity_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It adds the final roadmap rebaseline after Goals 074-096, dream-scope
+register, realism/geoworld simulator planning track, release risk register, milestone gates and aggressive goal
+productivity policy.
+
+Goal 097 writes deterministic evidence under
+`.llmgc/procedural/goal-097-final-roadmap-rebaseline-dream-scope-productivity/` and updates source-of-truth routing,
+current state, queue, debt register and artifact-scope policy. It records Vertical Slice Final, Strong Alpha,
+v1 Full Final and Dream Full Final definitions with remaining aggressive-goal estimates; records fantasy/Heroes-like,
+sci-fi, Space-Rangers-like, procedural visual/media compiler, adult/rating, realism/geospatial, self-generated realism
+and release/export dream tracks; and requires future aggressive goals to deliver larger composite outcomes with
+editor-visible, Unity-visible, playable or exportable progress every few goals.
+
+Goal 097 is planning-only. It adds no product code, Runtime, Unity, public schema, provider/LLM/RAG/media execution,
+Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 097, Goal 096,
+Goal 095, Goal 094, Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-unity_handoff_inspector_probe_readiness_verification
+final_roadmap_rebaseline_dream_scope_productivity_verification
 ```
 
 Status:
 
 ```text
-goal_096_unity_handoff_inspector_probe_readiness_produced_for_review
+goal_097_final_roadmap_rebaseline_dream_scope_productivity_produced_for_review
 ```

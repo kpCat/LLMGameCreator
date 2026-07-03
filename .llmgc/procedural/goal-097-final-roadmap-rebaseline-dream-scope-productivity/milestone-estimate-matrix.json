@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "goal097_milestone_estimate_matrix_v1",
+  "goalId": "goal_097_final_roadmap_rebaseline_dream_scope_productivity",
+  "accepted": false,
+  "manualGate": "final_roadmap_rebaseline_dream_scope_productivity_verification",
+  "milestones": [
+    {
+      "id": "vertical_slice_final",
+      "title": "Vertical Slice Final",
+      "estimatedRemainingAggressiveGoals": {
+        "min": 4,
+        "max": 7
+      },
+      "requiredOutcome": "one generated or selected coherent game loop with editor-visible review, export/import proof and player/Unity proof where applicable"
+    },
+    {
+      "id": "strong_alpha",
+      "title": "Strong Alpha",
+      "estimatedRemainingAggressiveGoalsAfterPriorMilestone": {
+        "min": 10,
+        "max": 16
+      },
+      "requiredOutcome": "repeatable multi-family generation with editor workflow, Unity/player path, save/load deltas, rating-safe export behavior and release-risk review"
+    },
+    {
+      "id": "v1_full_final",
+      "title": "v1 Full Final",
+      "estimatedRemainingAggressiveGoalsAfterPriorMilestone": {
+        "min": 18,
+        "max": 28
+      },
+      "requiredOutcome": "clean-machine local-first product loop from idea/profile to validated playable/exportable package"
+    },
+    {
+      "id": "dream_full_final",
+      "title": "Dream Full Final",
+      "estimatedRemainingAggressiveGoalsAfterV1": {
+        "min": 30,
+        "max": 60
+      },
+      "requiredOutcome": "selected long-term dream tracks after v1, including large/infinite living worlds, visual/media compiler, adult/rating extension and realism/geoworld simulator research gates"
+    }
+  ],
+  "progressRule": {
+    "featureGoalsPerVisibleProgressMin": 3,
+    "featureGoalsPerVisibleProgressMax": 5,
+    "goalsPerQualityOrReleaseRiskPassMin": 5,
+    "goalsPerQualityOrReleaseRiskPassMax": 8,
+    "lineCountIsTarget": false,
+    "outcomeSizeIsTarget": true
+  }
+}
