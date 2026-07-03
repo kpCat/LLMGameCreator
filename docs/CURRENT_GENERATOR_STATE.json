@@ -3,20 +3,21 @@
     "state_id":  "current_generator_state",
     "updated_at_utc":  "2026-07-03T00:00:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 087 deterministic visual map patch composer produced for review",
-    "gate_status":  "deterministic_visual_map_patch_composer_verification",
+    "current_phase_title":  "Goal 088 deterministic visual region composer produced for review",
+    "gate_status":  "deterministic_visual_region_composer_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 087 Deterministic Visual Map Patch Composer is produced for review: deterministic_visual_map_patch_composer_verification required, accepted=false. Goal 086 is accepted for continuation before Goal 087 by handoff without rewriting its accepted=false artifacts. Goal 085 remains produced for review: visual_part_pack_rule_stack_verification required, accepted=false. Goal 083, Goal 082 and Goal 082A remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 087 deterministic visual map patch composer evidence. Goal 087 is Application metadata/validator/evidence only and writes text SVG patch previews; it does not start provider, media, Runtime, Unity, public schema, Lua, generator-library or dependency implementation. Goal 085 remains accepted=false until separate user review accepts it.",
-    "recommended_next_decision":  "Review Goal 087 evidence and only mark deterministic_visual_map_patch_composer_verification passed after explicit user acceptance; do not mark Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 088 Deterministic Visual Region Composer is produced for review: deterministic_visual_region_composer_verification required, accepted=false. Goal 087 is accepted for continuation before Goal 088 by handoff without rewriting its accepted=false artifacts. Goal 085 remains produced for review: visual_part_pack_rule_stack_verification required, accepted=false. Goal 083, Goal 082 and Goal 082A remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 088 deterministic visual region composer evidence. Goal 088 is Application metadata/validator/evidence only and writes compact region artifacts plus text SVG overview artifacts; it does not start provider, media, Runtime, Unity, public schema, Lua, generator-library or dependency implementation. Goal 085 remains accepted=false until separate user review accepts it.",
+    "recommended_next_decision":  "Review Goal 088 evidence and only mark deterministic_visual_region_composer_verification passed after explicit user acceptance; do not mark Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "deterministic_visual_region_composer_verification",
                                                         "deterministic_visual_map_patch_composer_verification",
                                                         "visual_part_pack_rule_stack_verification",
                                                         "visual_adult_layer_context_integration_verification",
@@ -110,7 +111,8 @@
                            "goal_084_manual_gate":  "visual_asset_contract_rating_metadata_verification",
                            "goal_085_manual_gate":  "visual_part_pack_rule_stack_verification",
                            "goal_086_manual_gate":  "deterministic_visual_microtile_materializer_verification",
-                           "goal_087_manual_gate":  "deterministic_visual_map_patch_composer_verification"
+                           "goal_087_manual_gate":  "deterministic_visual_map_patch_composer_verification",
+                           "goal_088_manual_gate":  "deterministic_visual_region_composer_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -401,6 +403,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "deterministic_visual_region_composer_verification",
+                                          "goal_088_deterministic_visual_region_composer",
+                                          "manual_review_goal_088_deterministic_visual_region_composer",
                                           "deterministic_visual_map_patch_composer_verification",
                                           "goal_087_deterministic_visual_map_patch_composer",
                                           "manual_review_goal_087_deterministic_visual_map_patch_composer",
@@ -439,12 +444,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "deterministic_visual_map_patch_composer_verification",
-    "recommended_next_work_item_title":  "Review Goal 087 deterministic visual map patch composer",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/GOAL.md",
+    "recommended_next_work_item":  "deterministic_visual_region_composer_verification",
+    "recommended_next_work_item_title":  "Review Goal 088 deterministic visual region composer",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-088-deterministic-visual-region-composer/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 087 deterministic visual map patch composer evidence",
-                                              "Keep Goal 087 accepted=false until user review accepts it",
+                                              "Review Goal 088 deterministic visual region composer evidence",
+                                              "Keep Goal 088 accepted=false until user review accepts it",
+                                              "Keep Goal 087 accepted for continuation before Goal 088 without rewriting Goal 087 artifacts",
                                               "Keep Goal 086 accepted for continuation before Goal 087 without rewriting Goal 086 artifacts",
                                               "Keep Goal 085 accepted=false until separate user review accepts it",
                                               "Keep Goal 084 accepted by handoff before Goal 085 without rewriting Goal 084 artifacts",
@@ -455,6 +461,7 @@
                                                   "AGENTS.md",
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
+                                                  "docs/agent-tasks/goal-088-deterministic-visual-region-composer/GOAL.md",
                                                   "docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/GOAL.md",
                                                   "docs/agent-tasks/goal-086-deterministic-visual-microtile-materializer/GOAL.md",
                                                   "docs/agent-tasks/goal-085-deepsearch-backed-visual-part-pack-rule-stack/GOAL.md",
@@ -1965,10 +1972,11 @@
                                                                     "next_action":  "goal_087_deterministic_visual_map_patch_composer_produced_for_review"
                                                                 },
     "deterministic_visual_map_patch_composer_verification":  {
-                                                                  "status":  "produced_for_review",
-                                                                  "accepted":  false,
+                                                                  "status":  "accepted_for_continuation_before_goal_088",
+                                                                  "accepted":  true,
                                                                   "evidence_source":  "goal_087_deterministic_visual_map_patch_composer",
                                                                   "observed_result":  [
+                                                                                          "Goal 087 is accepted for continuation before Goal 088: deterministic_visual_map_patch_composer_verification accepted for continuation before Goal 088. Goal 087 artifacts remain accepted=false and are not rewritten.",
                                                                                           "Goal 087 produces deterministic visual map patch composer evidence under .llmgc/procedural/goal-087-deterministic-visual-map-patch-composer with accepted=false.",
                                                                                           "implementationStatus=GREEN, patchCount=3, totalCellCount=1152, fileLedgerCount=11, waterFlowProofPassed=true, reachabilityProofPassed=true, layeringProofPassed=true, negativeProofPassed=true, sourceLineagePassed=true, qualityGatePassed=true.",
                                                                                           "The BCL-only Application seam defines VisualMapPatchDefinition, patch cells/layers/tile refs, object anchors, road paths, water flows, biome transitions, settlement anchors, creature markers, overlays, validation records and deterministic text SVG patch previews.",
@@ -1978,6 +1986,22 @@
                                                                                           "Goal 087 adds no public GamePackage schema change, Runtime change, Unity change, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, external dependency, binary or raster media, generated image asset, real adult fixture or explicit prompt dump.",
                                                                                           "Goal085 remains produced for review with visual_part_pack_rule_stack_verification required, accepted=false; Goal083, Goal082 and Goal082A remain produced for review with accepted=false."
                                                                                       ],
-                                                                  "next_action":  "review_goal_087_deterministic_visual_map_patch_composer"
-                                                              }
+                                                                  "next_action":  "goal_088_deterministic_visual_region_composer_produced_for_review"
+                                                              },
+    "deterministic_visual_region_composer_verification":  {
+                                                               "status":  "produced_for_review",
+                                                               "accepted":  false,
+                                                               "evidence_source":  "goal_088_deterministic_visual_region_composer",
+                                                               "observed_result":  [
+                                                                                       "Goal 088 produces deterministic visual region composer evidence under .llmgc/procedural/goal-088-deterministic-visual-region-composer with accepted=false.",
+                                                                                       "implementationStatus=GREEN, regionId=heroes_scale_surface_underground_144x144, patchPlacementCount=108, derivedLogicalCellCount=41472, chunkCount=108, biomeDistributionProofPassed=true, waterNetworkProofPassed=true, roadReachabilityProofPassed=true, layerTransitionProofPassed=true, objectPlacementProofPassed=true, negativeProofPassed=true, sourceLineagePassed=true, qualityGatePassed=true.",
+                                                                                       "The BCL-only Application seam defines VisualRegionDefinition, layers, patch placements, chunk summaries, biome bands, water network, road network, settlement/object/creature anchors, surface-underground gates, overlays, validation records and deterministic text SVG region overviews.",
+                                                                                       "The composer emits compact surface, underground and combined text-only SVG overviews for a 144x144 surface plus 144x144 underground region, while retaining patch placement and RLE-style summaries instead of dumping raw per-cell output.",
+                                                                                       "The validator rejects wrong dimensions, wrong layer count, wrong patch grid, unknown Goal 087 patch ids, out-of-bounds or duplicate patch placements, water connector mismatch, disconnected roads, unpaired gates, invalid settlement terrain, missing creature metadata, adult metadata without safe fallback, prompt text as source of truth, provider candidates treated as approved output, absolute paths, unsafe SVG content and heavy raw cell dumps.",
+                                                                                       "Goal 088 consumes Goal 084, Goal 085, Goal 086 and Goal 087 compact evidence as lineage while keeping their artifact accepted=false evidence intact.",
+                                                                                       "Goal 088 adds no public GamePackage schema change, Runtime change, Unity change, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, external dependency, binary or raster media, generated image asset, real adult fixture or explicit prompt dump.",
+                                                                                       "Goal085 remains produced for review with visual_part_pack_rule_stack_verification required, accepted=false; Goal083, Goal082 and Goal082A remain produced for review with accepted=false."
+                                                                                   ],
+                                                               "next_action":  "review_goal_088_deterministic_visual_region_composer"
+                                                           }
 }

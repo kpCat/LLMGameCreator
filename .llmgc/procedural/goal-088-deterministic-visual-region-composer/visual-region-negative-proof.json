@@ -1,0 +1,442 @@
+{
+  "schemaVersion": "visual_region_negative_proof_v1",
+  "goalId": "goal_088_deterministic_visual_region_composer",
+  "passed": true,
+  "scenarioCount": 18,
+  "rejectedCount": 18,
+  "matchedExpectationCount": 18,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_source_path",
+      "causalMutation": "absolute source path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.path.absolute",
+          "target": "visual_asset_contract_rating_metadata_report",
+          "message": "Source lineage path must be relative and safe."
+        }
+      ]
+    },
+    {
+      "scenarioId": "adult_rating_without_safe_fallback",
+      "causalMutation": "adult/rating metadata without safe fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.adult.safe_fallback_missing",
+          "target": "adult_rating_metadata_only_safe_fallback_route",
+          "message": "Adult/rating metadata-only overlays require a safe fallback."
+        }
+      ]
+    },
+    {
+      "scenarioId": "connector_mismatch",
+      "causalMutation": "river/coast connector mismatch",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.water.connector_mismatch",
+          "target": "surface_p00_04->surface_p01_04",
+          "message": "Water/coast/river/lake/marsh connector metadata must match across patch boundaries."
+        }
+      ]
+    },
+    {
+      "scenarioId": "creature_missing_bodyplan_equipment",
+      "causalMutation": "creature missing bodyplan and equipment metadata",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.creature.metadata.missing",
+          "target": "surface_forest_wolf_pack",
+          "message": "Creature placement requires safe bodyplan, equipment and state metadata."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_patch_coordinate",
+      "causalMutation": "duplicate patch coordinate in same layer",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.chunk_index.invalid",
+          "target": "surface",
+          "message": "Chunk index must mirror patch placements."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.patch_placement_count.invalid",
+          "target": "surface",
+          "message": "Each layer must contain exactly 54 patch placements."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.coordinate.duplicate",
+          "target": "surface/0/0",
+          "message": "Patch coordinates must be unique per layer."
+        }
+      ]
+    },
+    {
+      "scenarioId": "heavy_raw_cell_dump",
+      "causalMutation": "explicit 41,472 raw cell dump mode",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.heavy_raw_cells.forbidden",
+          "target": "heroes_scale_surface_underground_144x144",
+          "message": "Goal 088 must not emit heavy explicit 41,472 raw cell artifacts."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_water_network",
+      "causalMutation": "missing water network when water is declared",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.water_network.lava_boundary_missing",
+          "target": "heroes_scale_surface_underground_144x144",
+          "message": "Underground lava boundary metadata must be declared explicitly."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.water_network.missing",
+          "target": "heroes_scale_surface_underground_144x144",
+          "message": "Declared water, coast, river, marsh or lava boundary metadata requires a water network proof."
+        }
+      ]
+    },
+    {
+      "scenarioId": "placement_outside_bounds",
+      "causalMutation": "patch placement outside bounds",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p00_00",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.water.connector_mismatch",
+          "target": "surface_p05_00->surface_p00_00",
+          "message": "Water/coast/river/lake/marsh connector metadata must match across patch boundaries."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_as_source_of_truth",
+      "causalMutation": "prompt text as source of truth",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.prompt.source_of_truth",
+          "target": "heroes_scale_surface_underground_144x144",
+          "message": "Prompt text must not be visual region source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_candidate_treated_as_approved",
+      "causalMutation": "provider candidate treated as approved",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.provider_candidate.treated_as_approved",
+          "target": "adult_rating_metadata_only_safe_fallback_route",
+          "message": "Provider candidates must not be treated as approved output."
+        }
+      ]
+    },
+    {
+      "scenarioId": "road_not_connected",
+      "causalMutation": "road network disconnected from required anchors",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.road.reachability.disconnected",
+          "target": "surface_caravan_desert",
+          "message": "Road network must connect settlement, castle, garrison, caravan and object anchors."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.road.reachability.disconnected",
+          "target": "surface_object_artifact",
+          "message": "Road network must connect settlement, castle, garrison, caravan and object anchors."
+        }
+      ]
+    },
+    {
+      "scenarioId": "settlement_on_invalid_water",
+      "causalMutation": "settlement/castle on invalid water terrain",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.settlement.terrain.invalid",
+          "target": "greenhill_keep",
+          "message": "Settlement and castle anchors must not be placed on invalid water, lava or impassable terrain."
+        }
+      ]
+    },
+    {
+      "scenarioId": "transition_without_pair",
+      "causalMutation": "surface-underground transition without paired gate",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.gate_transition.pair_missing",
+          "target": "north_cave_gate_pair",
+          "message": "Surface-underground transitions require paired surface and underground gates."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_goal087_patch_id",
+      "causalMutation": "unknown Goal087 patch id",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.patch_id.unknown",
+          "target": "surface_p00_00",
+          "message": "Every region placement must reference a known Goal087 patch id."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsafe_svg_script_external_base64",
+      "causalMutation": "unsafe SVG overview",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.svg.unsafe",
+          "target": "region-overview-surface.svg",
+          "message": "Overview SVG must be text-only, script-free, external-resource-free, base64-free and include patch blocks."
+        }
+      ]
+    },
+    {
+      "scenarioId": "wrong_dimensions",
+      "causalMutation": "wrong 144x144x2 dimensions",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.dimensions.invalid",
+          "target": "heroes_scale_surface_underground_144x144",
+          "message": "Region must prove 144x144x2 logical dimensions and 41,472 derived cells."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.patch_grid.invalid",
+          "target": "surface",
+          "message": "Each layer must be 144x144 with a 6x9 patch grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.patch_grid.invalid",
+          "target": "underground",
+          "message": "Each layer must be 144x144 with a 6x9 patch grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_00",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_01",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_02",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_03",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_04",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_05",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_06",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_07",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "surface_p05_08",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_00",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_01",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_02",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_03",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_04",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_05",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_06",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_07",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.placement.bounds.invalid",
+          "target": "underground_p05_08",
+          "message": "Patch placement must stay inside 144x144 layer bounds and align to 24x16 grid."
+        }
+      ]
+    },
+    {
+      "scenarioId": "wrong_layer_count",
+      "causalMutation": "missing underground layer",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.creature.placement_missing",
+          "target": "underground_cave_spider",
+          "message": "Creature placement must reference a known patch placement."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.creature.placement_missing",
+          "target": "underground_lava_imp",
+          "message": "Creature placement must reference a known patch placement."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.layer_count.invalid",
+          "target": "heroes_scale_surface_underground_144x144",
+          "message": "Region must contain exactly surface and underground layers."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.object.placement_missing",
+          "target": "underground_lava_forge",
+          "message": "Object placement must reference a known patch placement."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.object.placement_missing",
+          "target": "underground_ruin_cache",
+          "message": "Object placement must reference a known patch placement."
+        },
+        {
+          "severity": "error",
+          "code": "visual_region.settlement.placement_missing",
+          "target": "deep_cistern_outpost",
+          "message": "Settlement placement must reference a known patch placement."
+        }
+      ]
+    },
+    {
+      "scenarioId": "wrong_patch_grid",
+      "causalMutation": "wrong patch grid",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_region.patch_grid.invalid",
+          "target": "heroes_scale_surface_underground_144x144",
+          "message": "Region patch grid must be 6x9 placements of 24x16 patches."
+        }
+      ]
+    }
+  ]
+}

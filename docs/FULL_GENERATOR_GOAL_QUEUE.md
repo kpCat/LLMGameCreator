@@ -63,6 +63,7 @@ edit_driven_gamepackage_runtime_preview_bridge_verification passed before Goal 0
 edit_driven_gamepackage_runtime_preview_playthrough_verification passed before Goal 082
 visual_asset_contract_rating_metadata_verification passed before Goal 085
 deterministic_visual_microtile_materializer_verification accepted for continuation before Goal 087
+deterministic_visual_map_patch_composer_verification accepted for continuation before Goal 088
 ```
 
 Produced for review:
@@ -75,7 +76,7 @@ edit_driven_unity_alpha_streamingassets_handoff_verification required
 source_format_physical_line_repair_verification required
 visual_adult_layer_context_integration_verification required
 visual_part_pack_rule_stack_verification required
-deterministic_visual_map_patch_composer_verification required
+deterministic_visual_region_composer_verification required
 ```
 
 Current capabilities:
@@ -92,6 +93,7 @@ Current capabilities:
 - BCL-only visual part-pack rule-stack validator with deepsearch lineage, six metadata-only fixture packs, Goal084 binding matrix and water/body-plan/UI/adult boundary proof;
 - BCL-only deterministic visual microtile materializer with 24 text SVG previews and compact catalog/manifest/ledger/proof evidence;
 - BCL-only deterministic visual map patch composer with three 24x16 text SVG patch previews and compact catalog/manifest/ledger/water-flow/reachability/layering/negative/source-lineage proof evidence;
+- BCL-only deterministic visual region composer with compact 144x144 surface plus 144x144 underground region definition, 108 patch placements, chunk/proof evidence and text SVG overview artifacts;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1334,7 +1336,7 @@ Consume Goal 084 visual asset metadata, Goal 085 visual part-pack rule-stack met
 
 Status:
 
-Produced for review. The gate remains `deterministic_visual_map_patch_composer_verification required`, not passed. Goal 085, Goal 083, Goal 082 and Goal 082A remain produced-for-review with `accepted=false`.
+Accepted for continuation before Goal 088 by handoff. The Goal 087 artifacts remain `accepted=false` and are not rewritten. Goal 085, Goal 083, Goal 082 and Goal 082A remain produced-for-review with `accepted=false`.
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `patchCount=3`, `totalCellCount=1152`, `fileLedgerCount=11`, `waterFlowProofPassed=true`, `reachabilityProofPassed=true`, `layeringProofPassed=true`, `negativeProofPassed=true`, `sourceLineagePassed=true`, `qualityGatePassed=true`, deterministic report hash `e19972eb7407fd1287e96308f5689809a9f3fdc73d9bbf20f4f2724d81bfda69`; Application models/composer/validator live under `src/LLMGameCreator.Application/Design/DeterministicVisualMapPatchComposer/`, focused tests under `tests/LLMGameCreator.Tests/Application/DeterministicVisualMapPatchComposer/`, product smoke under `tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualMapPatchComposerProductSmokeTests.cs`, and compact evidence under `.llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/`.
 
@@ -1346,14 +1348,38 @@ Patch coverage:
 
 Validator coverage rejects unsafe output paths, prompt text as source of truth, unknown Goal 086 microtile refs, missing Goal 084/085/086 source lineage, invalid water/coast/river/lake/marsh composition, disconnected road/bridge paths, unreachable settlements/objects, adult metadata without safe fallback, provider candidates treated as approved output and unsafe SVG script/external/base64 content. Goal 087 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, external dependency, binary or raster media, generated image asset, real adult fixture or explicit prompt dump changes.
 
+Goal 087 is accepted by the Goal 088 handoff:
+`deterministic_visual_map_patch_composer_verification accepted for continuation before Goal 088`.
+The Goal 087 artifact remains `accepted=false` and is not rewritten.
+
+### Goal 088: Deterministic Visual Region Composer
+
+Purpose:
+
+Consume Goal 084 visual asset metadata, Goal 085 visual part-pack rule-stack metadata, Goal 086 deterministic microtile metadata and Goal 087 visual map patches into a BCL-only Application-side deterministic visual region composer that proves compact Heroes-scale surface/underground region composition without adding media/provider/runtime/schema integrations.
+
+Status:
+
+Produced for review. The gate remains `deterministic_visual_region_composer_verification required`, not passed. Goal 085, Goal 083, Goal 082 and Goal 082A remain produced-for-review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, `regionId=heroes_scale_surface_underground_144x144`, `surfaceDimensions=144x144`, `undergroundDimensions=144x144`, `patchPlacementCount=108`, `derivedLogicalCellCount=41472`, `chunkCount=108`, `biomeDistributionProofPassed=true`, `waterNetworkProofPassed=true`, `roadReachabilityProofPassed=true`, `layerTransitionProofPassed=true`, `objectPlacementProofPassed=true`, `negativeProofPassed=true`, `sourceLineagePassed=true`, `qualityGatePassed=true`, deterministic report hash `f68496204c3bf3911a9a7d8852fb7486e641f8dfef28409c63ed7468086ad7c0`; Application models/composer/validator live under `src/LLMGameCreator.Application/Design/DeterministicVisualRegionComposer/`, focused tests under `tests/LLMGameCreator.Tests/Application/DeterministicVisualRegionComposer/`, product smoke under `tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualRegionComposerProductSmokeTests.cs`, and compact evidence under `.llmgc/procedural/goal-088-deterministic-visual-region-composer/`.
+
+Region coverage:
+
+- 144x144 surface and 144x144 underground layers assembled from known Goal 087 patch ids;
+- biome distribution, water/river/lake/marsh/bridge/dock coverage, road reachability and surface-underground gate proof;
+- settlement/castle/garrison/caravan/object/creature placement plus UI/effect/weather overlays and one adult metadata-only safe fallback overlay.
+
+Validator coverage rejects wrong dimensions, wrong layer count, wrong patch grid, unknown Goal 087 patch ids, out-of-bounds or duplicate patch placements, missing or mismatched water connectors, disconnected roads, unpaired layer gates, invalid settlement terrain, creature metadata gaps, adult metadata without safe fallback, prompt text as source of truth, provider candidates treated as approved output, absolute paths, unsafe SVG script/external/base64 content and heavy raw cell dumps. Goal 088 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, external dependency, binary or raster media, generated image asset, real adult fixture or explicit prompt dump changes.
+
 ## Current Recommended Next Work
 
 ```text
-deterministic_visual_map_patch_composer_verification
+deterministic_visual_region_composer_verification
 ```
 
 Status:
 
 ```text
-goal_087_deterministic_visual_map_patch_composer_produced_for_review
+goal_088_deterministic_visual_region_composer_produced_for_review
 ```

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "visual_region_layer_transition_proof_v1",
+  "goalId": "goal_088_deterministic_visual_region_composer",
+  "passed": true,
+  "gatePairCount": 2,
+  "gateTransitions": [
+    {
+      "transitionId": "north_cave_gate_pair",
+      "surfacePlacementId": "surface_p02_01",
+      "undergroundPlacementId": "underground_p01_02",
+      "surfaceGateId": "surface_gate_north",
+      "undergroundGateId": "underground_gate_north",
+      "paired": true
+    },
+    {
+      "transitionId": "southern_lava_gate_pair",
+      "surfacePlacementId": "surface_p04_08",
+      "undergroundPlacementId": "underground_p04_08",
+      "surfaceGateId": "surface_gate_south",
+      "undergroundGateId": "underground_gate_south",
+      "paired": true
+    }
+  ]
+}

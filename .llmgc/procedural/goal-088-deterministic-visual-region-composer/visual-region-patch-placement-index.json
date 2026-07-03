@@ -1,0 +1,876 @@
+{
+  "schemaVersion": "visual_region_patch_placement_index_v1",
+  "goalId": "goal_088_deterministic_visual_region_composer",
+  "passed": true,
+  "patchPlacementCount": 108,
+  "surfacePatchPlacementCount": 54,
+  "undergroundPatchPlacementCount": 54,
+  "derivedLogicalCellCount": 41472,
+  "allPatchIdsKnownGoal087": true,
+  "placements": [
+    {
+      "placementId": "surface_p00_00",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 0,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_00",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 0,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p02_00",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 0,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p03_00",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 3,
+      "gridY": 0,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p04_00",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 4,
+      "gridY": 0,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p05_00",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 5,
+      "gridY": 0,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p00_01",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 1,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_01",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 1,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p02_01",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 1,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p03_01",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 3,
+      "gridY": 1,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p04_01",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 4,
+      "gridY": 1,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p05_01",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 5,
+      "gridY": 1,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_snowline"
+    },
+    {
+      "placementId": "surface_p00_02",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 2,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_02",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 2,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p02_02",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 2,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p03_02",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 3,
+      "gridY": 2,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p04_02",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 4,
+      "gridY": 2,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p05_02",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 5,
+      "gridY": 2,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p00_03",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 3,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_03",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 1,
+      "gridY": 3,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p02_03",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 2,
+      "gridY": 3,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p03_03",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 3,
+      "gridY": 3,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p04_03",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 4,
+      "gridY": 3,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p05_03",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 5,
+      "gridY": 3,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p00_04",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 4,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_04",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 1,
+      "gridY": 4,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_river"
+    },
+    {
+      "placementId": "surface_p02_04",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 2,
+      "gridY": 4,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_river"
+    },
+    {
+      "placementId": "surface_p03_04",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 3,
+      "gridY": 4,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_river"
+    },
+    {
+      "placementId": "surface_p04_04",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 4,
+      "gridY": 4,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_river"
+    },
+    {
+      "placementId": "surface_p05_04",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 5,
+      "gridY": 4,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_river"
+    },
+    {
+      "placementId": "surface_p00_05",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 5,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_05",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 1,
+      "gridY": 5,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p02_05",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 2,
+      "gridY": 5,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p03_05",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 5,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p04_05",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 5,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p05_05",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 5,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p00_06",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 6,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_06",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 6,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p02_06",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 6,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p03_06",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 6,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p04_06",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 6,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/surface_desert_lava"
+    },
+    {
+      "placementId": "surface_p05_06",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 6,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/surface_desert_lava"
+    },
+    {
+      "placementId": "surface_p00_07",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 7,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_07",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 7,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p02_07",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 7,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p03_07",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 7,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p04_07",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 4,
+      "gridY": 7,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_desert_lava"
+    },
+    {
+      "placementId": "surface_p05_07",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 5,
+      "gridY": 7,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_desert_lava"
+    },
+    {
+      "placementId": "surface_p00_08",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 8,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_coast"
+    },
+    {
+      "placementId": "surface_p01_08",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 8,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p02_08",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 8,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p03_08",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 8,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/surface_greenlands"
+    },
+    {
+      "placementId": "surface_p04_08",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 8,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/surface_desert_lava"
+    },
+    {
+      "placementId": "surface_p05_08",
+      "layerId": "surface",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 8,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/surface_desert_lava"
+    },
+    {
+      "placementId": "underground_p00_00",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 0,
+      "gridY": 0,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p01_00",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 0,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p02_00",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 0,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p03_00",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 0,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p04_00",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 0,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p05_00",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 0,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p00_01",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 0,
+      "gridY": 1,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p01_01",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 1,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p02_01",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 1,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p03_01",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 1,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p04_01",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 1,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p05_01",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 1,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p00_02",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 0,
+      "gridY": 2,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p01_02",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 2,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p02_02",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 2,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p03_02",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 2,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p04_02",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 2,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p05_02",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 2,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p00_03",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 0,
+      "gridY": 3,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p01_03",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 3,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p02_03",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 3,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p03_03",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 3,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p04_03",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 3,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p05_03",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 3,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p00_04",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 0,
+      "gridY": 4,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p01_04",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 1,
+      "gridY": 4,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p02_04",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "heroes_like_overworld_24x16",
+      "gridX": 2,
+      "gridY": 4,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p03_04",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 4,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p04_04",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 4,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p05_04",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 4,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p00_05",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 5,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_water"
+    },
+    {
+      "placementId": "underground_p01_05",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 1,
+      "gridY": 5,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_water"
+    },
+    {
+      "placementId": "underground_p02_05",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 2,
+      "gridY": 5,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_water"
+    },
+    {
+      "placementId": "underground_p03_05",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 3,
+      "gridY": 5,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_water"
+    },
+    {
+      "placementId": "underground_p04_05",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 4,
+      "gridY": 5,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_water"
+    },
+    {
+      "placementId": "underground_p05_05",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 5,
+      "gridY": 5,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_water"
+    },
+    {
+      "placementId": "underground_p00_06",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 0,
+      "gridY": 6,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p01_06",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 1,
+      "gridY": 6,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p02_06",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 2,
+      "gridY": 6,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p03_06",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 6,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=true;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p04_06",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 6,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=true;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p05_06",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 6,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=true;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p00_07",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 0,
+      "gridY": 7,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_lava"
+    },
+    {
+      "placementId": "underground_p01_07",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 1,
+      "gridY": 7,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_lava"
+    },
+    {
+      "placementId": "underground_p02_07",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 2,
+      "gridY": 7,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_lava"
+    },
+    {
+      "placementId": "underground_p03_07",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 3,
+      "gridY": 7,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_lava"
+    },
+    {
+      "placementId": "underground_p04_07",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 4,
+      "gridY": 7,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_lava"
+    },
+    {
+      "placementId": "underground_p05_07",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "water_coast_river_lake_marsh_24x16",
+      "gridX": 5,
+      "gridY": 7,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_lava"
+    },
+    {
+      "placementId": "underground_p00_08",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 0,
+      "gridY": 8,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p01_08",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 1,
+      "gridY": 8,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p02_08",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 2,
+      "gridY": 8,
+      "transformSummary": "rot=180;mirrorX=true;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p03_08",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 3,
+      "gridY": 8,
+      "transformSummary": "rot=270;mirrorX=false;mirrorY=false;palette=palette/underground_cave"
+    },
+    {
+      "placementId": "underground_p04_08",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 4,
+      "gridY": 8,
+      "transformSummary": "rot=0;mirrorX=true;mirrorY=false;palette=palette/underground_ruins"
+    },
+    {
+      "placementId": "underground_p05_08",
+      "layerId": "underground",
+      "sourceGoal087PatchId": "mixed_biome_settlement_creature_24x16",
+      "gridX": 5,
+      "gridY": 8,
+      "transformSummary": "rot=90;mirrorX=false;mirrorY=false;palette=palette/underground_ruins"
+    }
+  ]
+}

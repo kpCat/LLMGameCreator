@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "visual_region_road_reachability_proof_v1",
+  "goalId": "goal_088_deterministic_visual_region_composer",
+  "passed": true,
+  "roadsConnected": true,
+  "settlementCastleGarrisonCaravanAnchorsReachable": true,
+  "objectAnchorsReachable": true,
+  "roadNodeCount": 16,
+  "roadEdgeCount": 16,
+  "reachableRequiredAnchorIds": [
+    "surface_bridge_river",
+    "surface_caravan_desert",
+    "surface_castle_greenhill",
+    "surface_dock_west",
+    "surface_garrison_mountain_pass",
+    "surface_gate_north",
+    "surface_gate_south",
+    "surface_mine_northwest",
+    "surface_object_artifact",
+    "surface_settlement_riverbend",
+    "underground_gate_north",
+    "underground_gate_south",
+    "underground_lava_forge",
+    "underground_mushroom_grove",
+    "underground_outpost",
+    "underground_ruin_market"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "visual_region_object_placement_proof_v1",
+  "goalId": "goal_088_deterministic_visual_region_composer",
+  "passed": true,
+  "settlementCount": 5,
+  "objectCount": 6,
+  "creatureCount": 4,
+  "castleSettlementGarrisonCaravanCovered": true,
+  "mineBridgeDockObjectCreatureCovered": true
+}

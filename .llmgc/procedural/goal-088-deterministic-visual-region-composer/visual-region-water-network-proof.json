@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "visual_region_water_network_proof_v1",
+  "goalId": "goal_088_deterministic_visual_region_composer",
+  "passed": true,
+  "seaCovered": true,
+  "lakeCovered": true,
+  "coastCovered": true,
+  "riverCovered": true,
+  "marshCovered": true,
+  "bridgeCovered": true,
+  "dockCovered": true,
+  "undergroundWaterCovered": true,
+  "lavaBoundaryMetadataCovered": true,
+  "connectorMismatchesRejectedByValidator": true,
+  "segmentCount": 6
+}

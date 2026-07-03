@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "visual_region_source_lineage_v1",
+  "goalId": "goal_088_deterministic_visual_region_composer",
+  "passed": true,
+  "goal084ArtifactsGreen": true,
+  "goal085ArtifactsGreen": true,
+  "goal086ArtifactsGreen": true,
+  "goal087ArtifactsGreen": true,
+  "goal087AcceptedFalseArtifactPreserved": true,
+  "goal087CatalogRead": true,
+  "sourceRecordCount": 14,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/visual-asset-contract-rating-metadata-report.md",
+      "exists": true,
+      "sha256": "779b6caa91091595b6b64874cd55b8c761ea5fe5a94ebd143c581e7759cdd3c4",
+      "purposeTags": [
+        "goal084",
+        "visual_asset_contract_rating_metadata_report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/visual-part-pack-rule-stack-report.md",
+      "exists": true,
+      "sha256": "650315cf065acc6d5adc6bcfdf19e0abc652dd8818de5e8b9f4ac74d2dc31880",
+      "purposeTags": [
+        "goal085",
+        "visual_part_pack_rule_stack_report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/visual-microtile-materializer-report.md",
+      "exists": true,
+      "sha256": "a7a4cf97ed72ffa36c7fbccdbc5f9fb922e5ebe4239aeee02e34507f27c133ad",
+      "purposeTags": [
+        "goal086",
+        "deterministic_visual_microtile_materializer_report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-catalog.json",
+      "exists": true,
+      "sha256": "15cd814771b41354904cb73f7a9e614e46636efe58e2624b8039c83418523cb9",
+      "purposeTags": [
+        "goal087",
+        "visual_map_patch_catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-composer-report.md",
+      "exists": true,
+      "sha256": "6908cd9b8aa2ab5d2821a01e6fa9e9926b05b9c62839766d9a26ea8c78b9b808",
+      "purposeTags": [
+        "goal087",
+        "deterministic_visual_map_patch_composer_report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-materialization-manifest.json",
+      "exists": true,
+      "sha256": "cbaef4b343c327750bf9fd66d4983a7e5d84a89d129a4973b83313b2192cb1bd",
+      "purposeTags": [
+        "goal087",
+        "visual_map_patch_materialization_manifest"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-negative-proof.json",
+      "exists": true,
+      "sha256": "bf302f2ab9c183c3f9975b77fd054ec600007323270993d96c76b5e1b551289d",
+      "purposeTags": [
+        "goal087",
+        "visual_map_patch_negative_proof"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-quality-gate-scan.json",
+      "exists": true,
+      "sha256": "489041d463e1467f264323719d2add0ca93f6329cdbe3698ed0624705ad58382",
+      "purposeTags": [
+        "goal087",
+        "visual_map_patch_quality_gate_scan"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-reachability-proof.json",
+      "exists": true,
+      "sha256": "873415a20136a8ee00742cfe20a4e522fe911121fdd7f8da03700f758eb4d56d",
+      "purposeTags": [
+        "goal087",
+        "visual_map_patch_reachability_proof"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-water-flow-proof.json",
+      "exists": true,
+      "sha256": "32849677b9183c0a869b4ae0d853c32d34d62aed5aad4fa3d163659937e1f27d",
+      "purposeTags": [
+        "goal087",
+        "visual_map_patch_water_flow_proof"
+      ]
+    },
+    {
+      "relativePath": "docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md",
+      "exists": true,
+      "sha256": "54e8ba793de8f3b7f9577ae528a460ba42153031532118a922b9e1638874b215",
+      "purposeTags": [
+        "deepsearch",
+        "visual_stack_synthesis"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+      "exists": true,
+      "sha256": "bd184f47525433f1b73788cb4389b3f648f4d0ef0971c691f85e38ea8e4976e5",
+      "purposeTags": [
+        "deepsearch",
+        "tile_biome_water_world_map_generation"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md",
+      "exists": true,
+      "sha256": "dfc058341964c2996a4559b2b7f609cfad0c612ccb5c4622d23972a684bb6f9d",
+      "purposeTags": [
+        "deepsearch",
+        "pseudo3d_first_person_from_2d_assets"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/05_SETTLEMENTS_CITIES_CARAVANS_LIVING_WORLD_VISUALS.md",
+      "exists": true,
+      "sha256": "87b57b37b9645bc32d53b714b313aab633f02afdf33c951339a33be7190a38f1",
+      "purposeTags": [
+        "deepsearch",
+        "settlements_cities_caravans_living_world_visuals"
+      ]
+    }
+  ]
+}

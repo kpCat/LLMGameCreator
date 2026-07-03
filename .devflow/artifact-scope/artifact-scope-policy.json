@@ -57,7 +57,8 @@
     ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/",
     ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/",
     ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/",
-    ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/"
+    ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/",
+    ".llmgc/procedural/goal-088-deterministic-visual-region-composer/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -976,6 +977,24 @@
         "docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/",
         "src/LLMGameCreator.Application/Design/DeterministicVisualMapPatchComposer/",
         "tests/LLMGameCreator.Tests/Application/DeterministicVisualMapPatchComposer/"
+      ]
+    },
+    {
+      "scenario": "goal-088-deterministic-visual-region-composer",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualRegionComposerProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-088-deterministic-visual-region-composer/",
+        "docs/agent-tasks/goal-088-deterministic-visual-region-composer/",
+        "src/LLMGameCreator.Application/Design/DeterministicVisualRegionComposer/",
+        "tests/LLMGameCreator.Tests/Application/DeterministicVisualRegionComposer/"
       ]
     }
   ]

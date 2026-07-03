@@ -1,0 +1,166 @@
+<svg viewBox="0 0 216 216" data-region-id="heroes_scale_surface_underground_144x144" data-layer-id="surface">
+  <title>Goal 088 surface 144x144</title>
+  <rect x="0" y="0" width="216" height="216" fill="#14181d" />
+  <rect x="0" y="0" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_00" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="10" fill="#f0f4f8" font-size="6" font-family="monospace">0,0</text>
+  <text x="3" y="19" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="0" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_00" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="39" y="10" fill="#f0f4f8" font-size="6" font-family="monospace">1,0</text>
+  <text x="39" y="19" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="72" y="0" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_00" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="75" y="10" fill="#f0f4f8" font-size="6" font-family="monospace">2,0</text>
+  <text x="75" y="19" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="108" y="0" width="36" height="24" fill="#dfeef2" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_00" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="111" y="10" fill="#f0f4f8" font-size="6" font-family="monospace">3,0</text>
+  <text x="111" y="19" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="144" y="0" width="36" height="24" fill="#dfeef2" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_00" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="147" y="10" fill="#f0f4f8" font-size="6" font-family="monospace">4,0</text>
+  <text x="147" y="19" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="180" y="0" width="36" height="24" fill="#dfeef2" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_00" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="183" y="10" fill="#f0f4f8" font-size="6" font-family="monospace">5,0</text>
+  <text x="183" y="19" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="0" y="24" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_01" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="34" fill="#f0f4f8" font-size="6" font-family="monospace">0,1</text>
+  <text x="3" y="43" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="24" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_01" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="39" y="34" fill="#f0f4f8" font-size="6" font-family="monospace">1,1</text>
+  <text x="39" y="43" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="72" y="24" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_01" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="75" y="34" fill="#f0f4f8" font-size="6" font-family="monospace">2,1</text>
+  <text x="75" y="43" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="108" y="24" width="36" height="24" fill="#dfeef2" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_01" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="111" y="34" fill="#f0f4f8" font-size="6" font-family="monospace">3,1</text>
+  <text x="111" y="43" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="144" y="24" width="36" height="24" fill="#dfeef2" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_01" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="147" y="34" fill="#f0f4f8" font-size="6" font-family="monospace">4,1</text>
+  <text x="147" y="43" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="180" y="24" width="36" height="24" fill="#dfeef2" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_01" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="183" y="34" fill="#f0f4f8" font-size="6" font-family="monospace">5,1</text>
+  <text x="183" y="43" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="0" y="48" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_02" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="58" fill="#f0f4f8" font-size="6" font-family="monospace">0,2</text>
+  <text x="3" y="67" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="48" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_02" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="39" y="58" fill="#f0f4f8" font-size="6" font-family="monospace">1,2</text>
+  <text x="39" y="67" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="72" y="48" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_02" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="75" y="58" fill="#f0f4f8" font-size="6" font-family="monospace">2,2</text>
+  <text x="75" y="67" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="108" y="48" width="36" height="24" fill="#4c93a8" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_02" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="111" y="58" fill="#f0f4f8" font-size="6" font-family="monospace">3,2</text>
+  <text x="111" y="67" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="144" y="48" width="36" height="24" fill="#4c93a8" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_02" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="147" y="58" fill="#f0f4f8" font-size="6" font-family="monospace">4,2</text>
+  <text x="147" y="67" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="180" y="48" width="36" height="24" fill="#747a7c" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_02" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="183" y="58" fill="#f0f4f8" font-size="6" font-family="monospace">5,2</text>
+  <text x="183" y="67" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="0" y="72" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_03" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="82" fill="#f0f4f8" font-size="6" font-family="monospace">0,3</text>
+  <text x="3" y="91" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="72" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_03" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="39" y="82" fill="#f0f4f8" font-size="6" font-family="monospace">1,3</text>
+  <text x="39" y="91" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="72" y="72" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_03" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="75" y="82" fill="#f0f4f8" font-size="6" font-family="monospace">2,3</text>
+  <text x="75" y="91" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="108" y="72" width="36" height="24" fill="#747a7c" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_03" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="111" y="82" fill="#f0f4f8" font-size="6" font-family="monospace">3,3</text>
+  <text x="111" y="91" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="144" y="72" width="36" height="24" fill="#747a7c" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_03" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="147" y="82" fill="#f0f4f8" font-size="6" font-family="monospace">4,3</text>
+  <text x="147" y="91" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="180" y="72" width="36" height="24" fill="#747a7c" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_03" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="183" y="82" fill="#f0f4f8" font-size="6" font-family="monospace">5,3</text>
+  <text x="183" y="91" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="0" y="96" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_04" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="106" fill="#f0f4f8" font-size="6" font-family="monospace">0,4</text>
+  <text x="3" y="115" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="96" width="36" height="24" fill="#3aa2ba" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_04" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="39" y="106" fill="#f0f4f8" font-size="6" font-family="monospace">1,4</text>
+  <text x="39" y="115" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="72" y="96" width="36" height="24" fill="#3aa2ba" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_04" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="75" y="106" fill="#f0f4f8" font-size="6" font-family="monospace">2,4</text>
+  <text x="75" y="115" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="108" y="96" width="36" height="24" fill="#3aa2ba" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_04" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="111" y="106" fill="#f0f4f8" font-size="6" font-family="monospace">3,4</text>
+  <text x="111" y="115" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="144" y="96" width="36" height="24" fill="#3aa2ba" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_04" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="147" y="106" fill="#f0f4f8" font-size="6" font-family="monospace">4,4</text>
+  <text x="147" y="115" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="180" y="96" width="36" height="24" fill="#3aa2ba" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_04" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="183" y="106" fill="#f0f4f8" font-size="6" font-family="monospace">5,4</text>
+  <text x="183" y="115" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="0" y="120" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_05" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="130" fill="#f0f4f8" font-size="6" font-family="monospace">0,5</text>
+  <text x="3" y="139" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="120" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_05" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="39" y="130" fill="#f0f4f8" font-size="6" font-family="monospace">1,5</text>
+  <text x="39" y="139" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="72" y="120" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_05" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="75" y="130" fill="#f0f4f8" font-size="6" font-family="monospace">2,5</text>
+  <text x="75" y="139" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="108" y="120" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_05" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="111" y="130" fill="#f0f4f8" font-size="6" font-family="monospace">3,5</text>
+  <text x="111" y="139" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="144" y="120" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_05" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="147" y="130" fill="#f0f4f8" font-size="6" font-family="monospace">4,5</text>
+  <text x="147" y="139" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="180" y="120" width="36" height="24" fill="#5f9f47" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_05" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="183" y="130" fill="#f0f4f8" font-size="6" font-family="monospace">5,5</text>
+  <text x="183" y="139" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="0" y="144" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_06" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="154" fill="#f0f4f8" font-size="6" font-family="monospace">0,6</text>
+  <text x="3" y="163" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="144" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_06" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="39" y="154" fill="#f0f4f8" font-size="6" font-family="monospace">1,6</text>
+  <text x="39" y="163" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="72" y="144" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_06" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="75" y="154" fill="#f0f4f8" font-size="6" font-family="monospace">2,6</text>
+  <text x="75" y="163" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="108" y="144" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_06" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="111" y="154" fill="#f0f4f8" font-size="6" font-family="monospace">3,6</text>
+  <text x="111" y="163" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="144" y="144" width="36" height="24" fill="#d7aa62" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_06" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="147" y="154" fill="#f0f4f8" font-size="6" font-family="monospace">4,6</text>
+  <text x="147" y="163" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="180" y="144" width="36" height="24" fill="#d7aa62" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_06" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="183" y="154" fill="#f0f4f8" font-size="6" font-family="monospace">5,6</text>
+  <text x="183" y="163" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="0" y="168" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_07" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="178" fill="#f0f4f8" font-size="6" font-family="monospace">0,7</text>
+  <text x="3" y="187" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="168" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_07" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="39" y="178" fill="#f0f4f8" font-size="6" font-family="monospace">1,7</text>
+  <text x="39" y="187" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="72" y="168" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_07" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="75" y="178" fill="#f0f4f8" font-size="6" font-family="monospace">2,7</text>
+  <text x="75" y="187" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="108" y="168" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_07" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="111" y="178" fill="#f0f4f8" font-size="6" font-family="monospace">3,7</text>
+  <text x="111" y="187" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="144" y="168" width="36" height="24" fill="#4c6f4a" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_07" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="147" y="178" fill="#f0f4f8" font-size="6" font-family="monospace">4,7</text>
+  <text x="147" y="187" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="180" y="168" width="36" height="24" fill="#4c6f4a" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_07" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="183" y="178" fill="#f0f4f8" font-size="6" font-family="monospace">5,7</text>
+  <text x="183" y="187" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="0" y="192" width="36" height="24" fill="#53798b" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p00_08" data-source-goal087-patch-id="water_coast_river_lake_marsh_24x16" />
+  <text x="3" y="202" fill="#f0f4f8" font-size="6" font-family="monospace">0,8</text>
+  <text x="3" y="211" fill="#101418" font-size="5" font-family="monospace">water</text>
+  <rect x="36" y="192" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p01_08" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="39" y="202" fill="#f0f4f8" font-size="6" font-family="monospace">1,8</text>
+  <text x="39" y="211" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="72" y="192" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p02_08" data-source-goal087-patch-id="heroes_like_overworld_24x16" />
+  <text x="75" y="202" fill="#f0f4f8" font-size="6" font-family="monospace">2,8</text>
+  <text x="75" y="211" fill="#101418" font-size="5" font-family="monospace">hero</text>
+  <rect x="108" y="192" width="36" height="24" fill="#346d3d" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p03_08" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="111" y="202" fill="#f0f4f8" font-size="6" font-family="monospace">3,8</text>
+  <text x="111" y="211" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="144" y="192" width="36" height="24" fill="#6b3530" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p04_08" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="147" y="202" fill="#f0f4f8" font-size="6" font-family="monospace">4,8</text>
+  <text x="147" y="211" fill="#101418" font-size="5" font-family="monospace">mix</text>
+  <rect x="180" y="192" width="36" height="24" fill="#6b3530" stroke="#2b3138" stroke-width="1" data-placement-id="surface_p05_08" data-source-goal087-patch-id="mixed_biome_settlement_creature_24x16" />
+  <text x="183" y="202" fill="#f0f4f8" font-size="6" font-family="monospace">5,8</text>
+  <text x="183" y="211" fill="#101418" font-size="5" font-family="monospace">mix</text>
+</svg>
