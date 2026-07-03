@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "offline_geoworld_unity_probe_source_inventory_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "passed": true,
+  "probeExists": true,
+  "probeSha256": "32763ede7de4416ac59f2220c8b7ebe3d3eccad612626c7756dce4676a6f6969",
+  "probeLineCount": 216,
+  "usesApplicationStreamingAssetsPath": true,
+  "usesExpectedPayloadRoot": true,
+  "exposesInspectorResultFields": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoProviderLlmNetworkMarkers": true,
+  "diagnostics": []
+}

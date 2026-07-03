@@ -11,7 +11,7 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through099Artifacts()
+    public void ServiceLoadsRealGoal086Through100Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -25,7 +25,8 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("cache_exports", groupIds);
         Assert.Contains("unity_handoff", groupIds);
         Assert.Contains("geoworld", groupIds);
-        Assert.Equal(8, result.Catalog.GroupCount);
+        Assert.Contains("offline_geoworld_handoff", groupIds);
+        Assert.Equal(9, result.Catalog.GroupCount);
         Assert.True(result.Catalog.EntryCount >= 94);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
@@ -158,6 +159,51 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
     }
 
+    [Fact]
+    public void OfflineGeoworldHandoffGroupSurfacesGoal100PackagesPayloadAndProofs()
+    {
+        var result = Build();
+        var handoffGroup = Assert.Single(
+            result.Catalog.Groups,
+            group => group.GroupId == "offline_geoworld_handoff");
+        var summary = Assert.Single(
+            handoffGroup.Entries,
+            entry => entry.ArtifactKind == "offline_geoworld_handoff_workspace_summary");
+        var payloadFiles = handoffGroup.Entries
+            .Where(entry => entry.ArtifactKind == "offline_geoworld_streamingassets_payload")
+            .ToArray();
+
+        Assert.True(result.QualityGateScan.OfflineGeoworldHandoffGroupPresent);
+        Assert.Equal(3, result.QualityGateScan.OfflineGeoworldHandoffPackageCount);
+        Assert.Equal(10, result.QualityGateScan.OfflineGeoworldHandoffFeatureCount);
+        Assert.Equal(18, result.QualityGateScan.OfflineGeoworldHandoffVisualCacheRecordCount);
+        Assert.Equal(5, result.QualityGateScan.OfflineGeoworldHandoffSourceChunkCount);
+        Assert.Equal(9, result.QualityGateScan.OfflineGeoworldHandoffStreamWindowChunkCount);
+        Assert.Equal(5, result.QualityGateScan.OfflineGeoworldHandoffUnityPayloadFileCount);
+        Assert.True(result.QualityGateScan.OfflineGeoworldHandoffSimulatedReadProofPassed);
+        Assert.True(result.QualityGateScan.OfflineGeoworldHandoffNegativeProofPassed);
+        Assert.True(result.QualityGateScan.OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged);
+        Assert.True(result.QualityGateScan.OfflineGeoworldHandoffQualityGatePassed);
+        Assert.True(result.QualityGateScan.Goal100FilesDiscoveredByRelativePaths);
+        Assert.Equal(5, payloadFiles.Length);
+        Assert.Equal(3, summary.PackageCount);
+        Assert.Equal(10, summary.GeoworldNormalizedFeatureCount);
+        Assert.Equal(18, summary.GeoworldVisualCacheRecordCount);
+        Assert.Equal(5, summary.GeoworldWorldSourceGraphChunkCount);
+        Assert.Equal(9, summary.GeoworldStreamWindowChunkCount);
+        Assert.Equal(5, summary.PayloadFileCount);
+        Assert.True(summary.SimulatedUnityReadProofPassed);
+        Assert.True(summary.NegativeProofPassed);
+        Assert.True(summary.AlphaRuntimeBootstrapUnchanged);
+        Assert.True(summary.OfflineGeoworldHandoffQualityGatePassed);
+        Assert.Contains(
+            "buildingFootprint=1",
+            summary.OfflineGeoworldHandoffFeatureKindCountsSummary,
+            StringComparison.Ordinal);
+        Assert.All(handoffGroup.Entries, entry =>
+            Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
+    }
+
 
     [Fact]
     public void SvgEntriesAreRelativeTextSafePreviewPaths()
@@ -180,7 +226,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
     }
 
     [Fact]
-    public void Goal091Goal093Goal095AndGoal099ProofStatusesSurfaceRequiredProofs()
+    public void Goal091Goal093Goal095Goal099AndGoal100ProofStatusesSurfaceRequiredProofs()
     {
         var result = Build();
         var required = new[]
@@ -204,7 +250,16 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal099.boundary_prefetch",
             "goal099.negative",
             "goal099.visual_projection",
-            "goal099.quality_gate"
+            "goal099.quality_gate",
+            "goal100.streamingassets_ledger",
+            "goal100.simulated_read",
+            "goal100.negative",
+            "goal100.probe_source_inventory",
+            "goal100.alpha_runtime_bootstrap_unchanged",
+            "goal100.visual_cache_records",
+            "goal100.all_feature_kinds_mapped",
+            "goal100.workspace_binding",
+            "goal100.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -338,10 +393,12 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.Same(result, stored);
             Assert.True(groups.Items.Count >= 6);
             Assert.True(entries.Items.Count > 0);
-            Assert.True(proofs.Items.Count >= 23);
+            Assert.True(proofs.Items.Count >= 32);
             groups.SelectedItem = groups.Items
                 .Cast<object>()
-                .First(item => item.ToString()!.Contains("unity_handoff", StringComparison.Ordinal));
+                .First(item => item.ToString()!.Contains(
+                    "GroupId = unity_handoff,",
+                    StringComparison.Ordinal));
             var unityPayloadItem = entries.Items
                 .Cast<ListViewItem>()
                 .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
@@ -359,7 +416,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.Contains("alphaRuntimeBootstrapUnchanged: true", details.Text, StringComparison.Ordinal);
             groups.SelectedItem = groups.Items
                 .Cast<object>()
-                .First(item => item.ToString()!.Contains("geoworld", StringComparison.Ordinal));
+                .First(item => item.ToString()!.Contains(
+                    "GroupId = geoworld,",
+                    StringComparison.Ordinal));
             var geoworldItem = entries.Items
                 .Cast<ListViewItem>()
                 .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
@@ -381,6 +440,28 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
                 geoworldDetails,
                 StringComparison.Ordinal);
             Assert.Contains("geoworldNegativeProofPassed: true", geoworldDetails, StringComparison.Ordinal);
+            groups.SelectedItem = groups.Items
+                .Cast<object>()
+                .First(item => item.ToString()!.Contains(
+                    "GroupId = offline_geoworld_handoff,",
+                    StringComparison.Ordinal));
+            var handoffItem = entries.Items
+                .Cast<ListViewItem>()
+                .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
+                               && entry.ArtifactKind == "offline_geoworld_handoff_workspace_summary");
+            var handoffEntry = Assert.IsType<VisualWorldPreviewArtifactEntry>(handoffItem.Tag);
+            var handoffDetails = InvokePrivateStatic<string>(
+                typeof(VisualWorldStreamPreviewWorkspacePageControl),
+                "BuildEntryDetails",
+                handoffEntry);
+
+            Assert.Contains("packageCount: 3", handoffDetails, StringComparison.Ordinal);
+            Assert.Contains("geoworldNormalizedFeatureCount: 10", handoffDetails, StringComparison.Ordinal);
+            Assert.Contains("geoworldVisualCacheRecordCount: 18", handoffDetails, StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldHandoffQualityGatePassed: true",
+                handoffDetails,
+                StringComparison.Ordinal);
             Assert.True(
                 svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)
                 || svgPreview.Text.Contains("No text SVG preview", StringComparison.Ordinal));

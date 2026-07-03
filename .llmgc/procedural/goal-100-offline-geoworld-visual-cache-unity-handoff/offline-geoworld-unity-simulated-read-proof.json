@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "offline_geoworld_unity_simulated_read_proof_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "passed": true,
+  "payloadReadAttempted": true,
+  "manifestRead": true,
+  "requiredPayloadFilesPresent": true,
+  "payloadHashesMatchManifest": true,
+  "countsMatchVisualCacheCatalog": true,
+  "noRawGeodata": true,
+  "noRawFullWorldDump": true,
+  "noAbsolutePaths": true,
+  "noBinaryOrRasterMedia": true,
+  "noProviderOrNetworkMarkers": true,
+  "payloadFileCount": 5,
+  "packageCount": 3,
+  "featureCount": 10,
+  "featureKindCount": 10,
+  "visualCacheRecordCount": 18,
+  "sourceChunkCount": 5,
+  "streamWindowChunkCount": 9,
+  "diagnostics": []
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "offline_geoworld_goal100_workspace_binding_inventory_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "passed": true,
+  "workspaceCatalogIncludesOfflineGeoworldHandoffGroup": true,
+  "workspaceReadsGoal100EvidenceByRelativePath": true,
+  "winFormsPageDisplaysOfflineGeoworldHandoffFields": true,
+  "showsPackageCount": true,
+  "showsFeatureCountByKind": true,
+  "showsUnityPayloadCount": true,
+  "showsAlphaRuntimeBootstrapUnchangedStatus": true,
+  "diagnostics": []
+}

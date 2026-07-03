@@ -2,7 +2,7 @@
   "schemaVersion": "unity_handoff_inspector_proof_status_v1",
   "goalId": "goal_096_unity_handoff_inspector_probe_readiness",
   "passed": true,
-  "proofCount": 19,
+  "proofCount": 32,
   "proofs": [
     {
       "proofId": "goal091.cache_reuse",
@@ -173,6 +173,123 @@
       "status": "passed",
       "passed": true,
       "sha256": "36a569a4e2c73558f8d8258e3ebe8814fdc97e2e57dc7cec394684bf654c0bbb",
+      "diagnosticSummary": "passed=true"
+    },
+    {
+      "proofId": "goal099.boundary_prefetch",
+      "sourceGoalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-boundary-prefetch-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "3a4a6e916de1a053a6244b77fb7dfa7502f1d851dc0fd133de07f711eabb3c59",
+      "diagnosticSummary": "passed=true"
+    },
+    {
+      "proofId": "goal099.negative",
+      "sourceGoalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-negative-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "a7eed941c3cda324c10982920e6de6dd25293d3e99461a58133eae787552f13d",
+      "diagnosticSummary": "passed=true; scenarioCount=14; rejectedCount=14"
+    },
+    {
+      "proofId": "goal099.quality_gate",
+      "sourceGoalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e3f888a5c108f71b689f39304c9317bfe894104b508c357a5e76b922746497c8",
+      "diagnosticSummary": "passed=true"
+    },
+    {
+      "proofId": "goal099.visual_projection",
+      "sourceGoalId": "goal_099_offline_geoworld_worldsourcegraph_streaming",
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-visual-projection-summary.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "41e530a24c4c34cb713c7bb19b5487cf455f7ab581c12576b243a748cfa801a5",
+      "diagnosticSummary": "passed=true"
+    },
+    {
+      "proofId": "goal100.all_feature_kinds_mapped",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "cba6d769d2ea25cc91be73c23582afa1602f3cebf9d0937e0adb2b2152860a06",
+      "diagnosticSummary": "allFeatureKindsMapped=true; packageCount=3"
+    },
+    {
+      "proofId": "goal100.alpha_runtime_bootstrap_unchanged",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "cba6d769d2ea25cc91be73c23582afa1602f3cebf9d0937e0adb2b2152860a06",
+      "diagnosticSummary": "alphaRuntimeBootstrapUnchanged=true; packageCount=3"
+    },
+    {
+      "proofId": "goal100.negative",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-negative-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "5b36ba679ae0f716697ef35e2efac37dd119043b389ee2d0a7c381ce40f74d70",
+      "diagnosticSummary": "passed=true; scenarioCount=14; rejectedCount=14"
+    },
+    {
+      "proofId": "goal100.probe_source_inventory",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-probe-source-inventory.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "41b7281bb04559bd3607316e9de0abc1230f52082f7223a1ac4cd5ad0598328c",
+      "diagnosticSummary": "passed=true"
+    },
+    {
+      "proofId": "goal100.quality_gate",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "cba6d769d2ea25cc91be73c23582afa1602f3cebf9d0937e0adb2b2152860a06",
+      "diagnosticSummary": "passed=true; packageCount=3"
+    },
+    {
+      "proofId": "goal100.simulated_read",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-simulated-read-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "4aabfb06dea37186ade8a0e9ce25e645f04de549875686e7035e1c3de5589f67",
+      "diagnosticSummary": "passed=true; packageCount=3; payloadFileCount=5"
+    },
+    {
+      "proofId": "goal100.streamingassets_ledger",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-streamingassets-ledger.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "09c6c24540ea0ce521f8184d6d5b7e70cf35046a5dc02ad2c19e4a1dc3fba0ff",
+      "diagnosticSummary": "passed=true; payloadFileCount=5"
+    },
+    {
+      "proofId": "goal100.visual_cache_records",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "cba6d769d2ea25cc91be73c23582afa1602f3cebf9d0937e0adb2b2152860a06",
+      "diagnosticSummary": "visualCacheRecordsBuilt=true; packageCount=3"
+    },
+    {
+      "proofId": "goal100.workspace_binding",
+      "sourceGoalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+      "relativePath": ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-workspace-binding-inventory.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "abdd404c3c6a1e6f674c7115b3355583db8b72be5015b570296bb65d79fc4aba",
       "diagnosticSummary": "passed=true"
     }
   ]

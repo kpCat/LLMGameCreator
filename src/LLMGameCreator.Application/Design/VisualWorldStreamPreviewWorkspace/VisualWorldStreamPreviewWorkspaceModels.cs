@@ -116,6 +116,9 @@ public sealed record VisualWorldPreviewArtifactEntry
     public bool GeoworldNegativeProofPassed { get; init; }
     public bool GeoworldQualityGatePassed { get; init; }
     public string CompactOverviewEntry { get; init; } = string.Empty;
+    public int GeoworldVisualCacheRecordCount { get; init; }
+    public string OfflineGeoworldHandoffFeatureKindCountsSummary { get; init; } = string.Empty;
+    public bool OfflineGeoworldHandoffQualityGatePassed { get; init; }
     public IReadOnlyList<string> ChunkKeys { get; init; } = [];
 
     [JsonIgnore]
@@ -174,6 +177,7 @@ public sealed record VisualWorldPreviewWinFormsBindingInventory
     public bool PageBindDisplaysCacheExports { get; init; }
     public bool PageBindDisplaysUnityHandoff { get; init; }
     public bool PageBindDisplaysGeoworld { get; init; }
+    public bool PageBindDisplaysOfflineGeoworldHandoff { get; init; }
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
 
@@ -231,6 +235,19 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool GeoworldQualityGatePassed { get; init; }
     public bool GeoworldOverviewVisible { get; init; }
     public bool Goal099FilesDiscoveredByRelativePaths { get; init; }
+    public bool OfflineGeoworldHandoffGroupPresent { get; init; }
+    public int OfflineGeoworldHandoffPackageCount { get; init; }
+    public int OfflineGeoworldHandoffFeatureCount { get; init; }
+    public int OfflineGeoworldHandoffVisualCacheRecordCount { get; init; }
+    public int OfflineGeoworldHandoffSourceChunkCount { get; init; }
+    public int OfflineGeoworldHandoffStreamWindowChunkCount { get; init; }
+    public int OfflineGeoworldHandoffUnityPayloadFileCount { get; init; }
+    public string OfflineGeoworldHandoffFeatureKindCountsSummary { get; init; } = string.Empty;
+    public bool OfflineGeoworldHandoffSimulatedReadProofPassed { get; init; }
+    public bool OfflineGeoworldHandoffNegativeProofPassed { get; init; }
+    public bool OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool OfflineGeoworldHandoffQualityGatePassed { get; init; }
+    public bool Goal100FilesDiscoveredByRelativePaths { get; init; }
     public bool RequiredArtifactGroupsPresent { get; init; }
     public bool Goal091StreamWindowsVisible { get; init; }
     public bool ProofStatusPassed { get; init; }
@@ -242,6 +259,7 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool WinFormsCacheExportBindingReal { get; init; }
     public bool WinFormsUnityHandoffBindingReal { get; init; }
     public bool WinFormsGeoworldBindingReal { get; init; }
+    public bool WinFormsOfflineGeoworldHandoffBindingReal { get; init; }
     public bool SourceHealthPassed { get; init; }
     public int ScannedCSharpFileCount { get; init; }
     public int MaxLogicalLineCount { get; init; }
@@ -328,6 +346,18 @@ public sealed record VisualWorldStreamPreviewWorkspaceReport
     public bool GeoworldNegativeProofPassed { get; init; }
     public bool GeoworldQualityGatePassed { get; init; }
     public bool Goal099FilesDiscoveredByRelativePaths { get; init; }
+    public int OfflineGeoworldHandoffPackageCount { get; init; }
+    public int OfflineGeoworldHandoffFeatureCount { get; init; }
+    public int OfflineGeoworldHandoffVisualCacheRecordCount { get; init; }
+    public int OfflineGeoworldHandoffSourceChunkCount { get; init; }
+    public int OfflineGeoworldHandoffStreamWindowChunkCount { get; init; }
+    public int OfflineGeoworldHandoffUnityPayloadFileCount { get; init; }
+    public string OfflineGeoworldHandoffFeatureKindCountsSummary { get; init; } = string.Empty;
+    public bool OfflineGeoworldHandoffSimulatedReadProofPassed { get; init; }
+    public bool OfflineGeoworldHandoffNegativeProofPassed { get; init; }
+    public bool OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool OfflineGeoworldHandoffQualityGatePassed { get; init; }
+    public bool Goal100FilesDiscoveredByRelativePaths { get; init; }
     public bool ProofStatusPassed { get; init; }
     public bool WinFormsBindingPassed { get; init; }
     public bool QualityGatePassed { get; init; }

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "offline_geoworld_unity_streamingassets_ledger_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "passed": true,
+  "streamingAssetsRelativeRoot": "LLMGameCreator/OfflineGeoworldGoal100",
+  "payloadFileCount": 5,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-feature-chunk-ledger.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-feature-chunk-ledger.json",
+      "role": "feature_chunk_ledger",
+      "sha256": "b8ce1b55e77aa976259f5f5c553ff9513686ede4218940fbe32dab63f1a806a1",
+      "byteCount": 18934,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-package-index.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-package-index.json",
+      "role": "package_index",
+      "sha256": "a9f3b45d927aaf26c695ebe3e3b536535d464c54a14adce28ef56551e700602d",
+      "byteCount": 2836,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-runtime-readme.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-runtime-readme.json",
+      "role": "runtime_readme",
+      "sha256": "00969f03c90202c4b0c9e55bf15da62823860e457abfc338c62ee5bac8f7ee15",
+      "byteCount": 387,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-stream-window-index.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-stream-window-index.json",
+      "role": "stream_window_index",
+      "sha256": "ded91577297d0d0501ac6280901067128ea116c1e067e8ade86da349bc9c50f0",
+      "byteCount": 1188,
+      "exists": true
+    },
+    {
+      "relativePath": "offline-geoworld-unity-handoff-manifest.json",
+      "repositoryRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/offline-geoworld-unity-handoff-manifest.json",
+      "role": "manifest",
+      "sha256": "9828bbd5495d3f94ba21004f5ba6e5daf7cf32efdab533241a4b3f6037c8c584",
+      "byteCount": 1219,
+      "exists": true
+    }
+  ],
+  "diagnostics": []
+}

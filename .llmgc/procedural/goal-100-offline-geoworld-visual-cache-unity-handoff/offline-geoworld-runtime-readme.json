@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "offline_geoworld_runtime_readme_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "offlineSyntheticOnly": true,
+  "metadataOnly": true,
+  "implementsRuntimeConsumption": false,
+  "implementsLiveUnityRendering": false,
+  "implementsNetworkProvider": false,
+  "implementsRawGeodataImport": false,
+  "usesRelativePathsOnly": true
+}

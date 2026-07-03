@@ -46,7 +46,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildChunkStreamGroup(projectRoot, diagnostics, svgEntries),
             BuildCacheExportGroup(projectRoot, diagnostics),
             BuildUnityHandoffGroup(projectRoot, diagnostics),
-            BuildGeoworldGroup(projectRoot, diagnostics, svgEntries)
+            BuildGeoworldGroup(projectRoot, diagnostics, svgEntries),
+            BuildOfflineGeoworldHandoffGroup(projectRoot, diagnostics)
         };
 
         var proofStatus = BuildProofStatus(projectRoot, diagnostics);

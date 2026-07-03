@@ -11,5 +11,7 @@
   "pageBindDisplaysGroupsEntriesProofs": true,
   "pageBindDisplaysCacheExports": true,
   "pageBindDisplaysUnityHandoff": true,
+  "pageBindDisplaysGeoworld": true,
+  "pageBindDisplaysOfflineGeoworldHandoff": true,
   "diagnostics": []
 }

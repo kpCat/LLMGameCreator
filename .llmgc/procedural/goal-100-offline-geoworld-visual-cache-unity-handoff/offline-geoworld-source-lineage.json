@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "offline_geoworld_goal100_source_lineage_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "passed": true,
+  "goal099AcceptedFalsePreserved": true,
+  "goal099WorldSourceGraphConsumed": true,
+  "goal099NoNetworkProviderProven": true,
+  "goal099NoLfzCodeCopiedProven": true,
+  "existingVisualCacheHandoffArtifactsObserved": true,
+  "records": [
+    {
+      "relativePath": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+      "exists": true,
+      "sha256": "cfb3d50677a7d04f02af3e32f0a1e78c1d15ec1a3f29d3b74bae240d1b166741",
+      "purpose": "LFZ geoworld pattern study, no source copy"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+      "exists": true,
+      "sha256": "7f0340599487f826c258fdf8c2378d4adeb5aec16b2bb5d87ce6b8e2dabcea4f",
+      "purpose": "boundary stream window policy"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+      "exists": true,
+      "sha256": "3d5a5e89377eb6cdf617cc1edab0362cd72fb3f70d089b685087e22f70a4f06c",
+      "purpose": "offline/cache/provenance policy"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/geoworld-source-adapter-streaming-contract-report.md",
+      "exists": true,
+      "sha256": "7d6f145dbb59cf4aa6e4fe9a1cd3b5f3b46b52f4144e11aaf462b60eacb27f8b",
+      "purpose": "Goal098 source adapter lineage"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-worldsourcegraph-report.md",
+      "exists": true,
+      "sha256": "0947cdf49d2d78e700744096784cad8d9ac84ed22c5716c52400a2491023f359",
+      "purpose": "Goal099 accepted=false report"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-normalized-features.json",
+      "exists": true,
+      "sha256": "cc975cc161101c826106aa9f8869bfbf4d8189a62c9014a360d1296d1b612723",
+      "purpose": "Goal099 normalized features"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-worldsourcegraph.json",
+      "exists": true,
+      "sha256": "646c94debe23c4c4692db93e85970100bb33e398a0fbc029bce3e19d6592fbd7",
+      "purpose": "Goal099 WorldSourceGraph"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-stream-window-plan.json",
+      "exists": true,
+      "sha256": "38813aecabbd5723a152469132d03c16fd570d740ee17522877398a1981d1097",
+      "purpose": "Goal099 stream window"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-negative-proof.json",
+      "exists": true,
+      "sha256": "a7eed941c3cda324c10982920e6de6dd25293d3e99461a58133eae787552f13d",
+      "purpose": "Goal099 negative proof"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-093-visual-chunk-cache-export-contract/visual-chunk-cache-export-report.md",
+      "exists": true,
+      "sha256": "9cd82d61b47405e68bf40cfea4ff9113f5158b5237856dd48f3f8ad6f785f69b",
+      "purpose": "existing visual cache export"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-handoff-report.md",
+      "exists": true,
+      "sha256": "c3d81a6081589cc2b392e5fa2fbf18efdf50e9da7c7fc2e9054cd90a411fa7c8",
+      "purpose": "existing Unity StreamingAssets handoff"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/unity-handoff-inspector-report.md",
+      "exists": true,
+      "sha256": "9da9894773308f60d20695a292187e48ad273e7401ea69fedb7cc1831769d8de",
+      "purpose": "existing workspace Unity handoff inspector"
+    }
+  ],
+  "diagnostics": []
+}

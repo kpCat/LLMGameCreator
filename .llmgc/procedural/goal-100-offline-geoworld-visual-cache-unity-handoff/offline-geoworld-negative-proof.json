@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "offline_geoworld_goal100_negative_proof_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "passed": true,
+  "scenarioCount": 14,
+  "rejectedCount": 14,
+  "matchedExpectationCount": 14,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal099_world_graph",
+      "causalMutation": "Goal099 WorldSourceGraph file removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.goal099_graph_missing",
+          "target": "offline-geoworld-worldsourcegraph.json",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unmapped_feature_kind",
+      "causalMutation": "normalized feature kind has no visual layer mapping",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.feature_kind_unmapped",
+          "target": "normalized feature",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_geodata_leak",
+      "causalMutation": "raw geodata payload is present in cache record",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.raw_geodata_leak",
+          "target": "visual cache record",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_license_provenance",
+      "causalMutation": "license/provenance summary removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.license_provenance",
+          "target": "source feature",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "absolute_path",
+      "causalMutation": "absolute local path inserted into payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.absolute_path",
+          "target": "payload",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "live_network_fetch",
+      "causalMutation": "live network fetch marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.live_network",
+          "target": "payload",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "public_tile_scraping_marker",
+      "causalMutation": "public tile scraping marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.public_tile_scraping",
+          "target": "source lineage",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "lfz_copied_code_marker",
+      "causalMutation": "LFZ copied-code marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.lfz_copied_code",
+          "target": "source lineage",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_full_area_or_planet_dump",
+      "causalMutation": "raw full-area or planet dump marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.raw_full_area_dump",
+          "target": "payload",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_unity_success_without_file_read",
+      "causalMutation": "simulated read marked passed without file read",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.fake_unity_success",
+          "target": "simulated read proof",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_streamingassets_manifest",
+      "causalMutation": "StreamingAssets manifest removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.manifest_missing",
+          "target": "StreamingAssets",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tampered_manifest_hash",
+      "causalMutation": "manifest hash no longer matches payload file",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.manifest_hash",
+          "target": "manifest",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_probe_provider_network_marker",
+      "causalMutation": "Unity probe contains provider/network marker",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.probe_marker",
+          "target": "OfflineGeoworldHandoffProbe.cs",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    },
+    {
+      "scenarioId": "adult_rating_metadata_without_safe_fallback",
+      "causalMutation": "rating metadata lacks safe fallback",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal100.negative.rating_safe_fallback",
+          "target": "visual cache record",
+          "message": "Goal100 negative proof rejected the mutated payload."
+        }
+      ]
+    }
+  ]
+}

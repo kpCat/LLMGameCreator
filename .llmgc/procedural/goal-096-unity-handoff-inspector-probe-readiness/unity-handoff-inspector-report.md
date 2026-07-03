@@ -3,7 +3,7 @@
 - implementationStatus: GREEN
 - accepted: false
 - manualGate: unity_handoff_inspector_probe_readiness_verification required
-- deterministicReportHash: ab02bef416aa9fa12e71592e8eef5b4e5830b179be2774b11f7ee1e33463345f
+- deterministicReportHash: 53a69f054f71fae3e98114509b2f3603786a868fe5c2e5b80b09b86ba1ae520d
 
 ## Summary
 
@@ -11,9 +11,9 @@ Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so 
 
 ## Catalog
 
-- groupCount: 7
-- entryCount: 81
-- svgTextPreviewCount: 38
+- groupCount: 9
+- entryCount: 112
+- svgTextPreviewCount: 39
 - goal091StreamWindowEntryCount: 4
 
 - microtiles: entries=27, svgEntries=24, sourceGoal=goal_086_deterministic_visual_microtile_materializer, status=Passed
@@ -23,6 +23,8 @@ Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so 
 - chunk_stream_windows: entries=8, svgEntries=4, sourceGoal=goal_091_deterministic_visual_chunk_stream_window, status=Passed
 - cache_exports: entries=13, svgEntries=0, sourceGoal=goal_093_visual_chunk_cache_export_contract, status=Passed
 - unity_handoff: entries=14, svgEntries=0, sourceGoal=goal_095_visual_chunk_cache_unity_streamingassets_handoff, status=Passed
+- geoworld: entries=13, svgEntries=1, sourceGoal=goal_099_offline_geoworld_worldsourcegraph_streaming, status=Passed
+- offline_geoworld_handoff: entries=18, svgEntries=0, sourceGoal=goal_100_offline_geoworld_visual_cache_unity_handoff, status=Passed
 
 ## Cache Export Inspector
 
@@ -56,10 +58,36 @@ Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so 
 - goal095FilesDiscoveredByRelativePaths: true
 - noUnityFilesChangedByGoal096: true
 
+## Geoworld Inspector
+
+- geoworldOfflineBundleId: synthetic_city_radius_offline_bundle
+- geoworldNormalizedFeatureCount: 10
+- geoworldWorldSourceGraphChunkCount: 5
+- geoworldStreamWindowChunkCount: 9
+- geoworldBoundaryPrefetchPassed: true
+- geoworldNegativeProofPassed: true
+- geoworldQualityGatePassed: true
+- goal099FilesDiscoveredByRelativePaths: true
+
+## Offline Geoworld Handoff
+
+- offlineGeoworldHandoffPackageCount: 3
+- offlineGeoworldHandoffFeatureCount: 10
+- offlineGeoworldHandoffVisualCacheRecordCount: 18
+- offlineGeoworldHandoffSourceChunkCount: 5
+- offlineGeoworldHandoffStreamWindowChunkCount: 9
+- offlineGeoworldHandoffUnityPayloadFileCount: 5
+- offlineGeoworldHandoffFeatureKindCounts: administrativeHint=1; barrier=1; bridge=1; buildingFootprint=1; landUse=1; poi=1; roadSegment=1; terrainHint=1; vegetation=1; waterBody=1
+- offlineGeoworldHandoffSimulatedReadProofPassed: true
+- offlineGeoworldHandoffNegativeProofPassed: true
+- offlineGeoworldHandoffAlphaRuntimeBootstrapUnchanged: true
+- offlineGeoworldHandoffQualityGatePassed: true
+- goal100FilesDiscoveredByRelativePaths: true
+
 ## Proof Status
 
 - proofStatusPassed: true
-- proofCount: 19
+- proofCount: 32
 - goal091.cache_reuse: passed=true, path=.llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-cache-reuse-proof.json
 - goal091.finite_boundary_clipping: passed=true, path=.llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json
 - goal091.huge_sparse_no_raw_dump: passed=true, path=.llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json
@@ -79,6 +107,19 @@ Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so 
 - goal095.probe_source_inventory: passed=true, path=.llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-probe-source-inventory.json
 - goal095.simulated_read: passed=true, path=.llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-simulated-read-proof.json
 - goal095.streamingassets_ledger: passed=true, path=.llmgc/procedural/goal-095-visual-chunk-cache-unity-streamingassets-handoff/visual-chunk-cache-unity-streamingassets-ledger.json
+- goal099.boundary_prefetch: passed=true, path=.llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-boundary-prefetch-proof.json
+- goal099.negative: passed=true, path=.llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-negative-proof.json
+- goal099.quality_gate: passed=true, path=.llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-quality-gate-scan.json
+- goal099.visual_projection: passed=true, path=.llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/offline-geoworld-visual-projection-summary.json
+- goal100.all_feature_kinds_mapped: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json
+- goal100.alpha_runtime_bootstrap_unchanged: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json
+- goal100.negative: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-negative-proof.json
+- goal100.probe_source_inventory: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-probe-source-inventory.json
+- goal100.quality_gate: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json
+- goal100.simulated_read: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-simulated-read-proof.json
+- goal100.streamingassets_ledger: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-unity-streamingassets-ledger.json
+- goal100.visual_cache_records: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-quality-gate-scan.json
+- goal100.workspace_binding: passed=true, path=.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/offline-geoworld-workspace-binding-inventory.json
 
 ## WinForms Binding
 
@@ -92,13 +133,15 @@ Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so 
 - pageBindDisplaysGroupsEntriesProofs: true
 - pageBindDisplaysCacheExports: true
 - pageBindDisplaysUnityHandoff: true
+- pageBindDisplaysGeoworld: true
+- pageBindDisplaysOfflineGeoworldHandoff: true
 
 ## Source Health
 
 - sourceHealthPassed: true
-- scannedCSharpFileCount: 12
-- workspaceServiceLogicalLineCount: 153
-- maxLogicalLineCount: 533
+- scannedCSharpFileCount: 15
+- workspaceServiceLogicalLineCount: 155
+- maxLogicalLineCount: 631
 - maxPhysicalLineLength: 451
 - filesOver1000LogicalLinesCount: 0
 - filesOver700LogicalLinesInGoal092NamespaceCount: 0
@@ -124,6 +167,21 @@ Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so 
 - unityPayloadHashesMatchGoal095Ledger: true
 - goal095FilesDiscoveredByRelativePaths: true
 - noUnityFilesChangedByGoal096: true
+- geoworldGroupPresent: true
+- geoworldBoundaryPrefetchPassed: true
+- geoworldTaxonomyCoveragePassed: true
+- geoworldNegativeProofPassed: true
+- geoworldQualityGatePassed: true
+- geoworldOverviewVisible: true
+- goal099FilesDiscoveredByRelativePaths: true
+- offlineGeoworldHandoffGroupPresent: true
+- offlineGeoworldHandoffPackageCount: 3
+- offlineGeoworldHandoffVisualCacheRecordCount: 18
+- offlineGeoworldHandoffSimulatedReadProofPassed: true
+- offlineGeoworldHandoffNegativeProofPassed: true
+- offlineGeoworldHandoffAlphaRuntimeBootstrapUnchanged: true
+- offlineGeoworldHandoffQualityGatePassed: true
+- goal100FilesDiscoveredByRelativePaths: true
 - noAbsolutePaths: true
 - noBinaryOrRasterMediaAdded: true
 - noRuntimeUnityProviderSchemaProjectDependencyChanges: true
@@ -131,7 +189,7 @@ Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so 
 
 ## Artifact Hashes
 
-- catalogHash: f7332f4455dd509c509683946dbd4d806d07457862c326adfebbd5f15af00c7e
-- proofStatusHash: f89c76f3538bca12d5d5309af12a57eb8f821735a517b1486f6360714b3c8385
-- winFormsBindingInventoryHash: fa9887f7ebf262d1e3cd69f359d56c6772ef735bbe88efe7d7ac6745f0265cf0
-- qualityGateHash: 25676b7dce2753d75030530b951297651a4a9a6758c801abd9404928240970b5
+- catalogHash: 1cb879f7e2b7a3317bc771e0a63fdf28e7ed8f08461d50c5a0a9b8c8fd8f4caf
+- proofStatusHash: 7f23750a3ebbd7e2da20e7e537d141a0764f88bd7882f534c503af2fc9288a42
+- winFormsBindingInventoryHash: c8f9937e2d02dd4769901a96b03cc886db053e40b534965037bb0a23fc51f429
+- qualityGateHash: b15057888a59787dc225aba4700dfa2a52e0151e5d6bea90249b6172179fa497

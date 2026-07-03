@@ -90,6 +90,7 @@ unity_handoff_inspector_probe_readiness_verification required
 final_roadmap_rebaseline_dream_scope_productivity_verification required
 geoworld_source_adapter_streaming_contract_verification required
 offline_geoworld_worldsourcegraph_streaming_verification required
+offline_geoworld_visual_cache_unity_handoff_verification required
 ```
 
 Current capabilities:
@@ -117,6 +118,7 @@ Current capabilities:
 - Goal 097 final roadmap rebaseline, dream-scope register, realism/geoworld simulator planning track, release risk register, milestone gates and aggressive goal productivity policy, all as docs/evidence-only planning control with no product-code implementation;
 - BCL-only geoworld source adapter/streaming contract foundation with seven metadata-only source fixtures, normalized geofeature taxonomy, cache/provenance/license policy contracts, runtime boundary-prefetch streaming matrix, LFZ pattern lineage and 16-scenario negative proof;
 - BCL-only offline geoworld WorldSourceGraph streaming evidence with a synthetic metadata-only bundle, 10 normalized feature kinds, immutable WorldSourceGraph chunks, no-network 3x3 stream window plus boundary-prefetch band, compact text-SVG projection and Visual World Stream Preview Workspace integration;
+- BCL-only offline geoworld visual cache Unity handoff evidence with 3 metadata-only packages, 18 compact visual cache records over 10 Goal 099 feature kinds, 5 Unity StreamingAssets payload files, standalone probe/read proof and Visual World Stream Preview Workspace integration;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1626,14 +1628,33 @@ map tile scraping, raw geodata dumps, Runtime, Unity, public schema, provider/LL
 Lua/generator-library, project-file, dependency, binary/raster media or prompt-dump changes. Goal 099, Goal 098,
 Goal 097 and prior visual/geoworld gates remain `accepted=false`.
 
+### Goal 100: Offline Geoworld Visual Cache Unity Handoff
+
+Goal 100 is produced for review with `offline_geoworld_visual_cache_unity_handoff_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It adds a BCL-only Application-side offline geoworld visual cache
+handoff pipeline under `src/LLMGameCreator.Application/Design/OfflineGeoworldVisualCacheUnityHandoff/`.
+
+Goal 100 writes deterministic evidence under
+`.llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/` and updates source-of-truth routing,
+current state, queue, debt register and artifact-scope policy. It consumes real Goal 099 synthetic offline geoworld
+artifacts, maps all 10 normalized feature kinds into compact visual cache layers, proves 3 metadata-only packages,
+18 visual cache records, 5 source chunks, 9 stream-window chunks, 5 Unity StreamingAssets payload files, standalone
+probe/read proof, negative proof, unchanged AlphaRuntimeBootstrap hash and Visual World Stream Preview Workspace
+integration.
+
+Goal 100 is handoff/probe evidence only. It reads no LFZ archive, copies no LFZ source, adds no live network fetching,
+map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution,
+Lua/generator-library, project-file, dependency, binary/raster media, prompt-dump or live Unity gameplay rendering
+changes. Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-offline_geoworld_worldsourcegraph_streaming_verification
+offline_geoworld_visual_cache_unity_handoff_verification
 ```
 
 Status:
 
 ```text
-goal_099_offline_geoworld_worldsourcegraph_streaming_produced_for_review
+goal_100_offline_geoworld_visual_cache_unity_handoff_produced_for_review
 ```

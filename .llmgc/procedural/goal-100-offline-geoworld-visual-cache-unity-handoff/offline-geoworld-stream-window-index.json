@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "offline_geoworld_stream_window_index_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "accepted": false,
+  "centerChunkKey": "z14/x4210/y6142",
+  "requiredChunkCount": 9,
+  "boundaryPrefetchChunkCount": 16,
+  "boundaryPrefetchStatus": "scheduled_no_network_cache_first",
+  "networkFetchAttempted": false,
+  "requiredChunkKeys": [
+    "z14/x4209/y6141",
+    "z14/x4209/y6142",
+    "z14/x4209/y6143",
+    "z14/x4210/y6141",
+    "z14/x4210/y6142",
+    "z14/x4210/y6143",
+    "z14/x4211/y6141",
+    "z14/x4211/y6142",
+    "z14/x4211/y6143"
+  ],
+  "boundaryPrefetchChunkKeys": [
+    "z14/x4208/y6140",
+    "z14/x4208/y6141",
+    "z14/x4208/y6142",
+    "z14/x4208/y6143",
+    "z14/x4208/y6144",
+    "z14/x4209/y6140",
+    "z14/x4209/y6144",
+    "z14/x4210/y6140",
+    "z14/x4210/y6144",
+    "z14/x4211/y6140",
+    "z14/x4211/y6144",
+    "z14/x4212/y6140",
+    "z14/x4212/y6141",
+    "z14/x4212/y6142",
+    "z14/x4212/y6143",
+    "z14/x4212/y6144"
+  ],
+  "sourceGraphChunkKeys": [
+    "z14/x4209/y6141",
+    "z14/x4209/y6142",
+    "z14/x4210/y6141",
+    "z14/x4210/y6142",
+    "z14/x4211/y6142"
+  ]
+}

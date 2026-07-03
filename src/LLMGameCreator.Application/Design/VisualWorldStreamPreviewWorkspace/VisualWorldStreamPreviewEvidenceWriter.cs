@@ -1,4 +1,4 @@
-namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
+﻿namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 
 public sealed partial class VisualWorldStreamPreviewWorkspaceService
 {
@@ -173,6 +173,37 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && geoworldEntries.All(entry =>
                 IsSafeRelativePath(entry.RelativePath)
                 && entry.RelativePath.StartsWith(Goal099SourceRoot + "/", StringComparison.Ordinal));
+        var offlineHandoffGroup = groups.FirstOrDefault(group =>
+            group.GroupId == "offline_geoworld_handoff");
+        var offlineHandoffEntries = offlineHandoffGroup?.Entries.ToList() ?? [];
+        var offlineHandoffSummary = offlineHandoffEntries.FirstOrDefault(entry =>
+            entry.ArtifactKind == "offline_geoworld_handoff_workspace_summary");
+        var offlineHandoffPayloadEntries = offlineHandoffEntries
+            .Where(entry => entry.RelativePath.StartsWith(Goal100StreamingAssetsRoot + "/", StringComparison.Ordinal))
+            .ToList();
+        var offlineHandoffPackageCount = offlineHandoffSummary?.PackageCount ?? 0;
+        var offlineHandoffFeatureCount = offlineHandoffSummary?.GeoworldNormalizedFeatureCount ?? 0;
+        var offlineHandoffRecordCount = offlineHandoffSummary?.GeoworldVisualCacheRecordCount ?? 0;
+        var offlineHandoffSourceChunkCount =
+            offlineHandoffSummary?.GeoworldWorldSourceGraphChunkCount ?? 0;
+        var offlineHandoffStreamChunkCount =
+            offlineHandoffSummary?.GeoworldStreamWindowChunkCount ?? 0;
+        var offlineHandoffPayloadFileCount = offlineHandoffPayloadEntries.Count;
+        var offlineHandoffKindSummary =
+            offlineHandoffSummary?.OfflineGeoworldHandoffFeatureKindCountsSummary ?? string.Empty;
+        var offlineHandoffSimulatedReadPassed = proofs.Any(proof =>
+            proof.ProofId == "goal100.simulated_read" && proof.Passed);
+        var offlineHandoffNegativePassed = proofs.Any(proof =>
+            proof.ProofId == "goal100.negative" && proof.Passed);
+        var offlineHandoffAlphaUnchanged = proofs.Any(proof =>
+            proof.ProofId == "goal100.alpha_runtime_bootstrap_unchanged" && proof.Passed);
+        var offlineHandoffQualityPassed = proofs.Any(proof =>
+            proof.ProofId == "goal100.quality_gate" && proof.Passed);
+        var goal100RelativePaths = offlineHandoffEntries.Count > 0
+            && offlineHandoffEntries.All(entry =>
+                IsSafeRelativePath(entry.RelativePath)
+                && (entry.RelativePath.StartsWith(Goal100SourceRoot + "/", StringComparison.Ordinal)
+                    || entry.RelativePath.StartsWith(Goal100StreamingAssetsRoot + "/", StringComparison.Ordinal)));
         var requiredGroups = new[]
         {
             "microtiles",
@@ -182,7 +213,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "chunk_stream_windows",
             "cache_exports",
             "unity_handoff",
-            "geoworld"
+            "geoworld",
+            "offline_geoworld_handoff"
         };
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -194,7 +226,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             .Select(entry => entry.RelativePath)
             .Concat(svgEntries.Select(entry => entry.RelativePath))
             .All(path => !IsBinaryOrRasterMedia(path));
-        var proofStatusPassed = proofs.Count >= 23 && proofs.All(item => item.Passed);
+        var proofStatusPassed = proofs.Count >= 32 && proofs.All(item => item.Passed);
 
         AddIfFalse(requiredArtifactGroupsPresent, "goal092.quality.groups_missing", "catalog", diagnostics);
         AddIfFalse(svgEntries.Count >= 4, "goal092.quality.svg_count", "catalog.svgEntries", diagnostics);
@@ -275,6 +307,71 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal099.quality.relative_goal099_paths",
             "geoworld",
             diagnostics);
+        AddIfFalse(
+            offlineHandoffGroup is not null,
+            "goal100.quality.offline_geoworld_handoff_group",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffPackageCount == 3,
+            "goal100.quality.package_count",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffFeatureCount == 10,
+            "goal100.quality.feature_count",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffRecordCount == 18,
+            "goal100.quality.record_count",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffSourceChunkCount == 5,
+            "goal100.quality.source_chunk_count",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffStreamChunkCount == 9,
+            "goal100.quality.stream_window_count",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffPayloadFileCount == 5,
+            "goal100.quality.payload_file_count",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            !string.IsNullOrWhiteSpace(offlineHandoffKindSummary),
+            "goal100.quality.feature_kind_counts",
+            "offline_geoworld_handoff",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffSimulatedReadPassed,
+            "goal100.quality.simulated_read",
+            "proofStatus",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffNegativePassed,
+            "goal100.quality.negative_proof",
+            "proofStatus",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffAlphaUnchanged,
+            "goal100.quality.alpha_bootstrap",
+            "proofStatus",
+            diagnostics);
+        AddIfFalse(
+            offlineHandoffQualityPassed,
+            "goal100.quality.quality_gate",
+            "proofStatus",
+            diagnostics);
+        AddIfFalse(
+            goal100RelativePaths,
+            "goal100.quality.relative_goal100_paths",
+            "offline_geoworld_handoff",
+            diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -292,6 +389,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(
             binding.PageBindDisplaysGeoworld,
             "goal099.quality.winforms_geoworld_binding",
+            "winformsBinding",
+            diagnostics);
+        AddIfFalse(
+            binding.PageBindDisplaysOfflineGeoworldHandoff,
+            "goal100.quality.winforms_offline_geoworld_handoff_binding",
             "winformsBinding",
             diagnostics);
         AddIfFalse(sourceHealth.Passed, "goal092.quality.source_health", "sourceHealth", diagnostics);
@@ -351,6 +453,19 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             GeoworldQualityGatePassed = geoworldQualityGatePassed,
             GeoworldOverviewVisible = geoworldOverviewVisible,
             Goal099FilesDiscoveredByRelativePaths = goal099RelativePaths,
+            OfflineGeoworldHandoffGroupPresent = offlineHandoffGroup is not null,
+            OfflineGeoworldHandoffPackageCount = offlineHandoffPackageCount,
+            OfflineGeoworldHandoffFeatureCount = offlineHandoffFeatureCount,
+            OfflineGeoworldHandoffVisualCacheRecordCount = offlineHandoffRecordCount,
+            OfflineGeoworldHandoffSourceChunkCount = offlineHandoffSourceChunkCount,
+            OfflineGeoworldHandoffStreamWindowChunkCount = offlineHandoffStreamChunkCount,
+            OfflineGeoworldHandoffUnityPayloadFileCount = offlineHandoffPayloadFileCount,
+            OfflineGeoworldHandoffFeatureKindCountsSummary = offlineHandoffKindSummary,
+            OfflineGeoworldHandoffSimulatedReadProofPassed = offlineHandoffSimulatedReadPassed,
+            OfflineGeoworldHandoffNegativeProofPassed = offlineHandoffNegativePassed,
+            OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged = offlineHandoffAlphaUnchanged,
+            OfflineGeoworldHandoffQualityGatePassed = offlineHandoffQualityPassed,
+            Goal100FilesDiscoveredByRelativePaths = goal100RelativePaths,
             RequiredArtifactGroupsPresent = requiredArtifactGroupsPresent,
             Goal091StreamWindowsVisible = goal091StreamEntries >= 4,
             ProofStatusPassed = proofStatusPassed,
@@ -360,6 +475,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             WinFormsCacheExportBindingReal = binding.PageBindDisplaysCacheExports,
             WinFormsUnityHandoffBindingReal = binding.PageBindDisplaysUnityHandoff,
             WinFormsGeoworldBindingReal = binding.PageBindDisplaysGeoworld,
+            WinFormsOfflineGeoworldHandoffBindingReal =
+                binding.PageBindDisplaysOfflineGeoworldHandoff,
             SourceHealthPassed = sourceHealth.Passed,
             ScannedCSharpFileCount = sourceHealth.ScannedCSharpFileCount,
             MaxLogicalLineCount = sourceHealth.MaxLogicalLineCount,
@@ -385,6 +502,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/",
                 "docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/",
                 "docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/",
+                "docs/agent-tasks/goal-100-offline-geoworld-visual-cache-unity-handoff/",
+                "src/LLMGameCreator.Application/Design/OfflineGeoworldVisualCacheUnityHandoff/",
+                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldVisualCacheUnityHandoff/",
+                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldVisualCacheUnityHandoffProductSmokeTests.cs",
+                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldHandoffProbe.cs",
+                "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/",
+                ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/",
                 "docs/CURRENT_GENERATOR_STATE.md",
                 "docs/CURRENT_GENERATOR_STATE.json",
                 "docs/CONTEXT_INDEX.md",
@@ -452,6 +576,27 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             GeoworldNegativeProofPassed = qualityGate.GeoworldNegativeProofPassed,
             GeoworldQualityGatePassed = qualityGate.GeoworldQualityGatePassed,
             Goal099FilesDiscoveredByRelativePaths = qualityGate.Goal099FilesDiscoveredByRelativePaths,
+            OfflineGeoworldHandoffPackageCount = qualityGate.OfflineGeoworldHandoffPackageCount,
+            OfflineGeoworldHandoffFeatureCount = qualityGate.OfflineGeoworldHandoffFeatureCount,
+            OfflineGeoworldHandoffVisualCacheRecordCount =
+                qualityGate.OfflineGeoworldHandoffVisualCacheRecordCount,
+            OfflineGeoworldHandoffSourceChunkCount =
+                qualityGate.OfflineGeoworldHandoffSourceChunkCount,
+            OfflineGeoworldHandoffStreamWindowChunkCount =
+                qualityGate.OfflineGeoworldHandoffStreamWindowChunkCount,
+            OfflineGeoworldHandoffUnityPayloadFileCount =
+                qualityGate.OfflineGeoworldHandoffUnityPayloadFileCount,
+            OfflineGeoworldHandoffFeatureKindCountsSummary =
+                qualityGate.OfflineGeoworldHandoffFeatureKindCountsSummary,
+            OfflineGeoworldHandoffSimulatedReadProofPassed =
+                qualityGate.OfflineGeoworldHandoffSimulatedReadProofPassed,
+            OfflineGeoworldHandoffNegativeProofPassed =
+                qualityGate.OfflineGeoworldHandoffNegativeProofPassed,
+            OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged =
+                qualityGate.OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldHandoffQualityGatePassed =
+                qualityGate.OfflineGeoworldHandoffQualityGatePassed,
+            Goal100FilesDiscoveredByRelativePaths = qualityGate.Goal100FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,
@@ -474,155 +619,12 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         VisualWorldStreamPreviewProofStatusDocument proofStatus,
         VisualWorldPreviewWinFormsBindingInventory binding,
         VisualWorldPreviewWorkspaceQualityGate qualityGate,
-        string deterministicReportHash)
-    {
-        var lines = new List<string>
-        {
-            "# Goal 096 Unity Handoff Inspector Probe Readiness Report",
-            string.Empty,
-            $"- implementationStatus: {report.ImplementationStatus}",
-            $"- accepted: {report.Accepted.ToString().ToLowerInvariant()}",
-            $"- manualGate: {report.ManualGate} required",
-            $"- deterministicReportHash: {deterministicReportHash}",
-            string.Empty,
-            "## Summary",
-            string.Empty,
-            "Goal 096 extends the existing BCL-only Visual World Stream Preview Workspace so editor review can inspect Goal 095 Unity StreamingAssets handoff readiness without launching Unity. It loads real Goal 095 evidence and mirrored payload files by repository-relative path, compares hashes against the Goal 095 ledgers, and does not change Runtime, Unity behavior, providers, schema, project files, dependencies, binary media or raster media.",
-            string.Empty,
-            "## Catalog",
-            string.Empty,
-            $"- groupCount: {catalog.GroupCount}",
-            $"- entryCount: {catalog.EntryCount}",
-            $"- svgTextPreviewCount: {catalog.SvgTextPreviewCount}",
-            $"- goal091StreamWindowEntryCount: {qualityGate.Goal091StreamWindowEntryCount}",
-            string.Empty
-        };
-        lines.AddRange(catalog.Groups.Select(group =>
-            "- " + group.GroupId + ": entries=" + group.EntryCount
-            + ", svgEntries=" + group.SvgEntryCount
-            + ", sourceGoal=" + group.SourceGoalId
-            + ", status=" + group.Status));
-        lines.AddRange(
-        [
-            string.Empty,
-            "## Cache Export Inspector",
-            string.Empty,
-            $"- cacheExportPackageCount: {report.CacheExportPackageCount}",
-            $"- cacheExportRecordCount: {report.CacheExportRecordCount}",
-            $"- cacheExportSourceChunkCount: {report.CacheExportSourceChunkCount}",
-            $"- cacheExportStreamWindowCount: {report.CacheExportStreamWindowCount}",
-            $"- runtimeHandoffSidecarVisible: {report.RuntimeHandoffSidecarVisible.ToString().ToLowerInvariant()}",
-            $"- runtimeHandoffSidecarMetadataOnly: {report.RuntimeHandoffSidecarMetadataOnly.ToString().ToLowerInvariant()}",
-            $"- cacheReadbackProofPassed: {report.CacheReadbackProofPassed.ToString().ToLowerInvariant()}",
-            $"- cacheOverlapReuseProofPassed: {report.CacheOverlapReuseProofPassed.ToString().ToLowerInvariant()}",
-            $"- cacheNegativeProofPassed: {report.CacheNegativeProofPassed.ToString().ToLowerInvariant()}",
-            $"- cacheInvalidationMatrixPassed: {report.CacheInvalidationMatrixPassed.ToString().ToLowerInvariant()}",
-            $"- cacheNoRawFullWorldDump: {report.CacheNoRawFullWorldDump.ToString().ToLowerInvariant()}",
-            string.Empty,
-            "## Unity Handoff Inspector",
-            string.Empty,
-            $"- unityPayloadFileCount: {report.UnityPayloadFileCount}",
-            $"- unityPackageCount: {report.UnityPackageCount}",
-            $"- unityExportRecordCount: {report.UnityExportRecordCount}",
-            $"- unityStreamWindowCount: {report.UnityStreamWindowCount}",
-            $"- unityUniqueChunkKeyCount: {report.UnityUniqueChunkKeyCount}",
-            $"- unityProbeSourceInventoryVisible: {report.UnityProbeSourceInventoryVisible.ToString().ToLowerInvariant()}",
-            $"- unityProbeSourceInventoryPassed: {report.UnityProbeSourceInventoryPassed.ToString().ToLowerInvariant()}",
-            $"- unitySimulatedReadProofPassed: {report.UnitySimulatedReadProofPassed.ToString().ToLowerInvariant()}",
-            $"- unityNegativeProofPassed: {report.UnityNegativeProofPassed.ToString().ToLowerInvariant()}",
-            $"- unityAlphaRuntimeBootstrapUnchanged: {report.UnityAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant()}",
-            $"- unityForbiddenAreasUnchanged: {report.UnityForbiddenAreasUnchanged.ToString().ToLowerInvariant()}",
-            $"- unityHandoffMetadataOnly: {report.UnityHandoffMetadataOnly.ToString().ToLowerInvariant()}",
-            $"- unityPayloadHashesMatchGoal095Ledger: {report.UnityPayloadHashesMatchGoal095Ledger.ToString().ToLowerInvariant()}",
-            $"- goal095FilesDiscoveredByRelativePaths: {report.Goal095FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
-            $"- noUnityFilesChangedByGoal096: {report.NoUnityFilesChangedByGoal096.ToString().ToLowerInvariant()}",
-            string.Empty,
-            "## Geoworld Inspector",
-            string.Empty,
-            $"- geoworldOfflineBundleId: {report.GeoworldOfflineBundleId}",
-            $"- geoworldNormalizedFeatureCount: {report.GeoworldNormalizedFeatureCount}",
-            $"- geoworldWorldSourceGraphChunkCount: {report.GeoworldWorldSourceGraphChunkCount}",
-            $"- geoworldStreamWindowChunkCount: {report.GeoworldStreamWindowChunkCount}",
-            $"- geoworldBoundaryPrefetchPassed: {report.GeoworldBoundaryPrefetchPassed.ToString().ToLowerInvariant()}",
-            $"- geoworldNegativeProofPassed: {report.GeoworldNegativeProofPassed.ToString().ToLowerInvariant()}",
-            $"- geoworldQualityGatePassed: {report.GeoworldQualityGatePassed.ToString().ToLowerInvariant()}",
-            $"- goal099FilesDiscoveredByRelativePaths: {report.Goal099FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
-            string.Empty,
-            "## Proof Status",
-            string.Empty,
-            $"- proofStatusPassed: {proofStatus.Passed.ToString().ToLowerInvariant()}",
-            $"- proofCount: {proofStatus.ProofCount}"
-        ]);
-        lines.AddRange(proofStatus.Proofs.Select(proof =>
-            "- " + proof.ProofId + ": passed=" + proof.Passed.ToString().ToLowerInvariant()
-            + ", path=" + proof.RelativePath));
-        lines.AddRange(
-        [
-            string.Empty,
-            "## WinForms Binding",
-            string.Empty,
-            $"- bindingPassed: {binding.Passed.ToString().ToLowerInvariant()}",
-            $"- pageControlExists: {binding.PageControlExists.ToString().ToLowerInvariant()}",
-            $"- designerExists: {binding.DesignerExists.ToString().ToLowerInvariant()}",
-            $"- compositionRootRegistersService: {binding.CompositionRootRegistersService.ToString().ToLowerInvariant()}",
-            $"- compositionRootRegistersPage: {binding.CompositionRootRegistersPage.ToString().ToLowerInvariant()}",
-            $"- editorRegistryIncludesPage: {binding.EditorRegistryIncludesPage.ToString().ToLowerInvariant()}",
-            $"- pageActivationLoadsApplicationResult: {binding.PageActivationLoadsApplicationResult.ToString().ToLowerInvariant()}",
-            $"- pageBindDisplaysGroupsEntriesProofs: {binding.PageBindDisplaysGroupsEntriesProofs.ToString().ToLowerInvariant()}",
-            $"- pageBindDisplaysCacheExports: {binding.PageBindDisplaysCacheExports.ToString().ToLowerInvariant()}",
-            $"- pageBindDisplaysUnityHandoff: {binding.PageBindDisplaysUnityHandoff.ToString().ToLowerInvariant()}",
-            $"- pageBindDisplaysGeoworld: {binding.PageBindDisplaysGeoworld.ToString().ToLowerInvariant()}",
-            string.Empty,
-            "## Source Health",
-            string.Empty,
-            $"- sourceHealthPassed: {qualityGate.SourceHealthPassed.ToString().ToLowerInvariant()}",
-            $"- scannedCSharpFileCount: {qualityGate.ScannedCSharpFileCount}",
-            $"- workspaceServiceLogicalLineCount: {qualityGate.WorkspaceServiceLogicalLineCount}",
-            $"- maxLogicalLineCount: {qualityGate.MaxLogicalLineCount}",
-            $"- maxPhysicalLineLength: {qualityGate.MaxPhysicalLineLength}",
-            $"- filesOver1000LogicalLinesCount: {qualityGate.FilesOver1000LogicalLinesCount}",
-            $"- filesOver700LogicalLinesInGoal092NamespaceCount: {qualityGate.FilesOver700LogicalLinesInGoal092NamespaceCount}",
-            $"- zeroLfSourceCount: {qualityGate.ZeroLfSourceCount}",
-            $"- crOnlySourceCount: {qualityGate.CrOnlySourceCount}",
-            $"- rawPhysicalOneLineSourceCount: {qualityGate.RawPhysicalOneLineSourceCount}",
-            $"- minifiedSourceCount: {qualityGate.MinifiedSourceCount}",
-            string.Empty,
-            "## Quality Gate",
-            string.Empty,
-            $"- qualityGatePassed: {qualityGate.Passed.ToString().ToLowerInvariant()}",
-            $"- requiredArtifactGroupsPresent: {qualityGate.RequiredArtifactGroupsPresent.ToString().ToLowerInvariant()}",
-            $"- goal091StreamWindowsVisible: {qualityGate.Goal091StreamWindowsVisible.ToString().ToLowerInvariant()}",
-            $"- cacheExportGroupPresent: {qualityGate.CacheExportGroupPresent.ToString().ToLowerInvariant()}",
-            $"- goal093FilesDiscoveredByRelativePaths: {qualityGate.Goal093FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
-            $"- unityHandoffGroupPresent: {qualityGate.UnityHandoffGroupPresent.ToString().ToLowerInvariant()}",
-            $"- unityProbeSourceInventoryPassed: {qualityGate.UnityProbeSourceInventoryPassed.ToString().ToLowerInvariant()}",
-            $"- unitySimulatedReadProofPassed: {qualityGate.UnitySimulatedReadProofPassed.ToString().ToLowerInvariant()}",
-            $"- unityNegativeProofPassed: {qualityGate.UnityNegativeProofPassed.ToString().ToLowerInvariant()}",
-            $"- unityAlphaRuntimeBootstrapUnchanged: {qualityGate.UnityAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant()}",
-            $"- unityForbiddenAreasUnchanged: {qualityGate.UnityForbiddenAreasUnchanged.ToString().ToLowerInvariant()}",
-            $"- unityHandoffMetadataOnly: {qualityGate.UnityHandoffMetadataOnly.ToString().ToLowerInvariant()}",
-            $"- unityPayloadHashesMatchGoal095Ledger: {qualityGate.UnityPayloadHashesMatchGoal095Ledger.ToString().ToLowerInvariant()}",
-            $"- goal095FilesDiscoveredByRelativePaths: {qualityGate.Goal095FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
-            $"- noUnityFilesChangedByGoal096: {qualityGate.NoUnityFilesChangedByGoal096.ToString().ToLowerInvariant()}",
-            $"- geoworldGroupPresent: {qualityGate.GeoworldGroupPresent.ToString().ToLowerInvariant()}",
-            $"- geoworldBoundaryPrefetchPassed: {qualityGate.GeoworldBoundaryPrefetchPassed.ToString().ToLowerInvariant()}",
-            $"- geoworldTaxonomyCoveragePassed: {qualityGate.GeoworldTaxonomyCoveragePassed.ToString().ToLowerInvariant()}",
-            $"- geoworldNegativeProofPassed: {qualityGate.GeoworldNegativeProofPassed.ToString().ToLowerInvariant()}",
-            $"- geoworldQualityGatePassed: {qualityGate.GeoworldQualityGatePassed.ToString().ToLowerInvariant()}",
-            $"- geoworldOverviewVisible: {qualityGate.GeoworldOverviewVisible.ToString().ToLowerInvariant()}",
-            $"- goal099FilesDiscoveredByRelativePaths: {qualityGate.Goal099FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant()}",
-            $"- noAbsolutePaths: {qualityGate.NoAbsolutePaths.ToString().ToLowerInvariant()}",
-            $"- noBinaryOrRasterMediaAdded: {qualityGate.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()}",
-            $"- noRuntimeUnityProviderSchemaProjectDependencyChanges: {qualityGate.NoRuntimeUnityProviderSchemaProjectDependencyChanges.ToString().ToLowerInvariant()}",
-            $"- noPromptDumps: {qualityGate.NoPromptDumps.ToString().ToLowerInvariant()}",
-            string.Empty,
-            "## Artifact Hashes",
-            string.Empty,
-            $"- catalogHash: {report.CatalogHash}",
-            $"- proofStatusHash: {report.ProofStatusHash}",
-            $"- winFormsBindingInventoryHash: {report.WinFormsBindingInventoryHash}",
-            $"- qualityGateHash: {report.QualityGateHash}"
-        ]);
-        return string.Join(Environment.NewLine, lines) + Environment.NewLine;
-    }
+        string deterministicReportHash) =>
+        RenderWorkspaceReport(
+            report,
+            catalog,
+            proofStatus,
+            binding,
+            qualityGate,
+            deterministicReportHash);
 }

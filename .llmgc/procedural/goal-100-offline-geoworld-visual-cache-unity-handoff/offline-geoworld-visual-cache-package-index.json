@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "offline_geoworld_visual_cache_package_index_v1",
+  "goalId": "goal_100_offline_geoworld_visual_cache_unity_handoff",
+  "accepted": false,
+  "packageCount": 3,
+  "featureCount": 10,
+  "visualCacheRecordCount": 18,
+  "packages": [
+    {
+      "packageId": "geoworld_editor_review_package",
+      "targetKind": "editorReview",
+      "metadataOnly": true,
+      "containsRawGeodata": false,
+      "containsRuntimeExecution": false,
+      "containsProviderCalls": false,
+      "featureCount": 10,
+      "visualCacheRecordCount": 18,
+      "sourceChunkCount": 5,
+      "streamWindowChunkCount": 9,
+      "packageHash": "6078ab49a904b1abfda9a31bf947a44c42dd5a39a3aa8a73c2dbe14025d0cb00",
+      "includedVisualLayerIds": [
+        "geoworld_administrative_hints",
+        "geoworld_barriers",
+        "geoworld_bridges",
+        "geoworld_building_footprints",
+        "geoworld_land_use",
+        "geoworld_poi",
+        "geoworld_road_segments",
+        "geoworld_terrain_hints",
+        "geoworld_vegetation",
+        "geoworld_water_bodies"
+      ]
+    },
+    {
+      "packageId": "geoworld_unity_handoff_package",
+      "targetKind": "unityHandoff",
+      "metadataOnly": true,
+      "containsRawGeodata": false,
+      "containsRuntimeExecution": false,
+      "containsProviderCalls": false,
+      "featureCount": 10,
+      "visualCacheRecordCount": 18,
+      "sourceChunkCount": 5,
+      "streamWindowChunkCount": 9,
+      "packageHash": "07ff39b4a64e837baaabba52472b4ff74ac25ccc0ae210cd692b613385717ade",
+      "includedVisualLayerIds": [
+        "geoworld_administrative_hints",
+        "geoworld_barriers",
+        "geoworld_bridges",
+        "geoworld_building_footprints",
+        "geoworld_land_use",
+        "geoworld_poi",
+        "geoworld_road_segments",
+        "geoworld_terrain_hints",
+        "geoworld_vegetation",
+        "geoworld_water_bodies"
+      ]
+    },
+    {
+      "packageId": "geoworld_stream_window_runtime_preview_package",
+      "targetKind": "runtimePreviewMetadata",
+      "metadataOnly": true,
+      "containsRawGeodata": false,
+      "containsRuntimeExecution": false,
+      "containsProviderCalls": false,
+      "featureCount": 10,
+      "visualCacheRecordCount": 18,
+      "sourceChunkCount": 5,
+      "streamWindowChunkCount": 9,
+      "packageHash": "b3c04cfe4733b36fc6fe0c2f804862aa05852c2ddf739a1db511c1a861efc16a",
+      "includedVisualLayerIds": [
+        "geoworld_administrative_hints",
+        "geoworld_barriers",
+        "geoworld_bridges",
+        "geoworld_building_footprints",
+        "geoworld_land_use",
+        "geoworld_poi",
+        "geoworld_road_segments",
+        "geoworld_terrain_hints",
+        "geoworld_vegetation",
+        "geoworld_water_bodies"
+      ]
+    }
+  ]
+}

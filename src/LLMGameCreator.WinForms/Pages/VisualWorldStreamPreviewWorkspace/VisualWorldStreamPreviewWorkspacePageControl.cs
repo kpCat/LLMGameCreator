@@ -45,7 +45,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | unityPayloads=" + result.Report.UnityPayloadFileCount
             + " | unityRecords=" + result.Report.UnityExportRecordCount
             + " | geoworldFeatures=" + result.Report.GeoworldNormalizedFeatureCount
-            + " | geoworldChunks=" + result.Report.GeoworldWorldSourceGraphChunkCount;
+            + " | geoworldChunks=" + result.Report.GeoworldWorldSourceGraphChunkCount
+            + " | offlineGeoPackages=" + result.Report.OfflineGeoworldHandoffPackageCount
+            + " | offlineGeoRecords=" + result.Report.OfflineGeoworldHandoffVisualCacheRecordCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -173,6 +175,30 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + result.Report.GeoworldQualityGatePassed.ToString().ToLowerInvariant(),
             "goal099FilesDiscoveredByRelativePaths="
                 + result.Report.Goal099FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
+            "offlineGeoworldHandoffPackageCount="
+                + result.Report.OfflineGeoworldHandoffPackageCount,
+            "offlineGeoworldHandoffFeatureCount="
+                + result.Report.OfflineGeoworldHandoffFeatureCount,
+            "offlineGeoworldHandoffVisualCacheRecordCount="
+                + result.Report.OfflineGeoworldHandoffVisualCacheRecordCount,
+            "offlineGeoworldHandoffSourceChunkCount="
+                + result.Report.OfflineGeoworldHandoffSourceChunkCount,
+            "offlineGeoworldHandoffStreamWindowChunkCount="
+                + result.Report.OfflineGeoworldHandoffStreamWindowChunkCount,
+            "offlineGeoworldHandoffUnityPayloadFileCount="
+                + result.Report.OfflineGeoworldHandoffUnityPayloadFileCount,
+            "offlineGeoworldHandoffFeatureKindCounts="
+                + result.Report.OfflineGeoworldHandoffFeatureKindCountsSummary,
+            "offlineGeoworldHandoffSimulatedReadProofPassed="
+                + result.Report.OfflineGeoworldHandoffSimulatedReadProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldHandoffNegativeProofPassed="
+                + result.Report.OfflineGeoworldHandoffNegativeProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldHandoffAlphaRuntimeBootstrapUnchanged="
+                + result.Report.OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
+            "offlineGeoworldHandoffQualityGatePassed="
+                + result.Report.OfflineGeoworldHandoffQualityGatePassed.ToString().ToLowerInvariant(),
+            "goal100FilesDiscoveredByRelativePaths="
+                + result.Report.Goal100FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -290,6 +316,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "geoworldQualityGatePassed: "
                 + entry.GeoworldQualityGatePassed.ToString().ToLowerInvariant(),
             "compactOverviewEntry: " + entry.CompactOverviewEntry,
+            "geoworldVisualCacheRecordCount: " + entry.GeoworldVisualCacheRecordCount,
+            "offlineGeoworldHandoffFeatureKindCounts: "
+                + entry.OfflineGeoworldHandoffFeatureKindCountsSummary,
+            "offlineGeoworldHandoffQualityGatePassed: "
+                + entry.OfflineGeoworldHandoffQualityGatePassed.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);

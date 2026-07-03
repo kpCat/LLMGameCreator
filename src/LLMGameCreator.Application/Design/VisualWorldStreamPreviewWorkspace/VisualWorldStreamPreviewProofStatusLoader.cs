@@ -1,3 +1,4 @@
+using LLMGameCreator.Application.Design.OfflineGeoworldVisualCacheUnityHandoff;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 
 namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
@@ -82,6 +83,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal093CacheProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal095UnityHandoffProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal099GeoworldProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal100OfflineGeoworldHandoffProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -249,6 +251,93 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 "goal095.metadata_only",
                 "visual-chunk-cache-unity-handoff-manifest.json",
                 "runtimeHandoffSidecarMetadataOnly",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics)
+        ];
+
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal100OfflineGeoworldHandoffProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        [
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.streamingassets_ledger",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.UnityStreamingAssetsLedgerFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.simulated_read",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.UnitySimulatedReadProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.negative",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.NegativeProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.probe_source_inventory",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.UnityProbeSourceInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.alpha_runtime_bootstrap_unchanged",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.QualityGateScanFileName,
+                "alphaRuntimeBootstrapUnchanged",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.visual_cache_records",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.QualityGateScanFileName,
+                "visualCacheRecordsBuilt",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.all_feature_kinds_mapped",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.QualityGateScanFileName,
+                "allFeatureKindsMapped",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.workspace_binding",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.WorkspaceBindingInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal100SourceRoot,
+                Goal100SourceGoalId,
+                "goal100.quality_gate",
+                OfflineGeoworldVisualCacheUnityHandoffVocabulary.QualityGateScanFileName,
+                "passed",
                 new Dictionary<string, string>(StringComparer.Ordinal),
                 diagnostics)
         ];
