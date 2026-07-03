@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T07:29:33Z",
+    "updated_at_utc":  "2026-07-03T15:43:08Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 091 deterministic visual chunk stream window produced for review",
-    "gate_status":  "deterministic_visual_chunk_stream_window_verification",
+    "current_phase_title":  "Goal 092 visual world stream preview workspace produced for review",
+    "gate_status":  "visual_world_stream_preview_workspace_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 091 Deterministic Visual Chunk Stream Window is produced for review: deterministic_visual_chunk_stream_window_verification required, accepted=false. It adds a BCL-only Application stream-window materializer over Goal 090 profiles, proving finite clipping, huge sparse compact windows, overlapping infinite-window cache reuse, seam continuity and layer transitions. Goal 090 remains produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 091 deterministic visual chunk stream window evidence. Goal 091 adds Application-side stream-window contracts, materializer, validator, fixtures, compact evidence and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 091 remains accepted=false until explicit user review accepts it.",
-    "recommended_next_decision":  "Review Goal 091 deterministic visual chunk stream window evidence and only mark deterministic_visual_chunk_stream_window_verification passed after explicit user acceptance; do not mark Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 092 Visual World Stream Preview Workspace is produced for review: visual_world_stream_preview_workspace_verification required, accepted=false. It adds a BCL-only Application workspace catalog and separate WinForms preview page over real Goal 086-091 disk artifacts, exposing five artifact groups, 38 text SVG preview entries, seven Goal 091 proof statuses and binding inventory evidence. Goal 091 and Goal 090 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 092 visual world stream preview workspace evidence. Goal 092 adds Application-side review workspace models/service/evidence, a separate WinForms page and product smoke only; it did not modify Runtime, Unity, public schema, providers, Lua, generator-library, project files, dependencies, binary/raster media or prompt output. Goal 092 remains accepted=false until explicit user review accepts it.",
+    "recommended_next_decision":  "Review Goal 092 visual world stream preview workspace evidence and only mark visual_world_stream_preview_workspace_verification passed after explicit user acceptance; do not mark Goal 091, Goal 090, Goal 089, Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "visual_world_stream_preview_workspace_verification",
                                                         "deterministic_visual_chunk_stream_window_verification",
                                                         "parameterized_visual_world_profiles_verification",
                                                         "tiered_validation_pipeline_verification",
@@ -120,7 +121,8 @@
                            "goal_088a_manual_gate":  "goal_088_check_all_validation_repair_verification",
                            "goal_089_manual_gate":  "tiered_validation_pipeline_verification",
                            "goal_090_manual_gate":  "parameterized_visual_world_profiles_verification",
-                           "goal_091_manual_gate":  "deterministic_visual_chunk_stream_window_verification"
+                           "goal_091_manual_gate":  "deterministic_visual_chunk_stream_window_verification",
+                           "goal_092_manual_gate":  "visual_world_stream_preview_workspace_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -411,6 +413,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "visual_world_stream_preview_workspace_verification",
+                                          "goal_092_visual_world_stream_preview_workspace",
+                                          "manual_review_goal_092_visual_world_stream_preview_workspace",
                                           "deterministic_visual_chunk_stream_window_verification",
                                           "goal_091_deterministic_visual_chunk_stream_window",
                                           "manual_review_goal_091_deterministic_visual_chunk_stream_window",
@@ -464,10 +469,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "deterministic_visual_chunk_stream_window_verification",
-    "recommended_next_work_item_title":  "Review Goal 091 deterministic visual chunk stream window",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-091-deterministic-visual-chunk-stream-window/GOAL.md",
+    "recommended_next_work_item":  "visual_world_stream_preview_workspace_verification",
+    "recommended_next_work_item_title":  "Review Goal 092 visual world stream preview workspace",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-092-visual-world-stream-preview-workspace/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal 092 visual world stream preview workspace evidence",
+                                              "Keep Goal 092 accepted=false until user review accepts it",
+                                              "Use the Goal 092 Application/WinForms preview workspace to inspect real Goal 086-091 deterministic visual artifacts before future renderer, Runtime, Unity, provider, media, schema, Lua or generator-library work",
                                               "Review Goal 091 deterministic visual chunk stream window evidence",
                                               "Keep Goal 091 accepted=false until user review accepts it",
                                               "Use the Goal 091 Application stream-window materializer for future visual chunk streaming consumers instead of raw full-world cell dumps",
@@ -2115,5 +2123,20 @@
                                                                                          "Renderer, atlas, Runtime and Unity streaming consumers remain separate future work."
                                                                                      ],
                                                                  "next_action":  "review_goal_091_deterministic_visual_chunk_stream_window"
-                                                             }
+                                                             },
+    "visual_world_stream_preview_workspace_verification":  {
+                                                               "status":  "produced_for_review",
+                                                               "accepted":  false,
+                                                               "evidence_source":  "goal_092_visual_world_stream_preview_workspace",
+                                                               "observed_result":  [
+                                                                                       "Goal 092 produces visual world stream preview workspace evidence under .llmgc/procedural/goal-092-visual-world-stream-preview-workspace with accepted=false.",
+                                                                                       "implementationStatus=GREEN, artifactGroupCount=5, svgTextPreviewCount=38, goal091StreamWindowEntryCount=4, proofStatusCount=7, proofStatusPassed=true, winFormsBindingPassed=true, qualityGatePassed=true.",
+                                                                                       "The BCL-only Application seam loads real Goal 086-091 disk artifacts by repository-relative path into a review catalog with microtiles, map patches, region composer, world profiles and chunk stream windows.",
+                                                                                       "The separate WinForms page is registered through CompositionRoot and binds artifact groups, entries, text SVG previews, Goal 091 proof status and diagnostics during activation.",
+                                                                                       "The product smoke verifies real artifact reads, deterministic evidence writing, visible Goal 091 stream-window entries, safe text SVG previews, WinForms binding inventory, expected changed path prefixes and no Runtime, Unity, public schema, provider, Lua, generator-library, project-file, dependency, binary/raster media or prompt-dump changes.",
+                                                                                       "Goal 092 keeps Goal 091 and Goal 090 artifact accepted=false evidence intact.",
+                                                                                       "Acceptance/rejection/promotion workflow, final renderer, atlas, Runtime and Unity consumers remain separate future work."
+                                                                                   ],
+                                                               "next_action":  "review_goal_092_visual_world_stream_preview_workspace"
+                                                           }
 }

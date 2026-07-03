@@ -1445,14 +1445,35 @@ Fixture coverage:
 
 Validator coverage rejects unknown profile/layer, missing seed/version, invalid radius, raw full-world dumps, finite out-of-bounds windows without clipping policy, chunk key mismatches, seam and water/road connector mismatches, duplicate chunk keys, prompt text as source of truth, absolute paths, delta overlays with raw payloads and adult/rating metadata without safe fallback. Goal 091 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, dependency, binary/raster media, generated image asset, real adult fixture or explicit prompt dump changes.
 
+### Goal 092: Visual World Stream Preview Workspace
+
+Purpose:
+
+Add a bounded Application/WinForms visual world stream preview workspace that consumes real Goal 086-091 disk artifacts and makes the current deterministic visual stack inspectable without starting renderer, Runtime, Unity, provider, schema or media work.
+
+Status:
+
+Produced for review. The gate remains `visual_world_stream_preview_workspace_verification required`, not passed. Goal 092, Goal 091, Goal 090, Goal 089, Goal 088A and Goal 088 remain produced for review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`; Application models/service/evidence live under `src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/`, the separate WinForms page lives under `src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/`, focused tests live under `tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/`, product smoke lives under `tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs`, and compact evidence is under `.llmgc/procedural/goal-092-visual-world-stream-preview-workspace/`.
+
+Workspace coverage:
+
+- Five artifact groups: Goal 086 microtiles, Goal 087 map patches, Goal 088 region composer, Goal 090 world profiles and Goal 091 chunk stream windows.
+- Thirty-eight text SVG preview entries loaded by repository-relative path, with no binary or raster media output.
+- Seven Goal 091 proof statuses for seam, cache reuse, layer transition, negative scenarios, finite boundary clipping, huge sparse no-raw-dump and infinite overlap reuse.
+- WinForms binding inventory proving separate page/control, Designer split, CompositionRoot registration, editor registry inclusion and activation-time Application evidence load/bind behavior.
+
+Quality coverage rejects fake green workspaces by requiring real disk artifacts, relative paths, text-SVG-only preview entries, visible Goal 091 stream-window rows, passed proof status, WinForms binding, expected changed prefixes and no Runtime, Unity, provider, public schema, project-file, dependency, binary/raster media or prompt-dump changes.
+
 ## Current Recommended Next Work
 
 ```text
-deterministic_visual_chunk_stream_window_verification
+visual_world_stream_preview_workspace_verification
 ```
 
 Status:
 
 ```text
-goal_091_deterministic_visual_chunk_stream_window_produced_for_review
+goal_092_visual_world_stream_preview_workspace_produced_for_review
 ```

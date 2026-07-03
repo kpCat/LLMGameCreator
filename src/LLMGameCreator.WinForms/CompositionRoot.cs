@@ -12,6 +12,7 @@ using LLMGameCreator.Application.Design.EditDrivenUnityAlphaStreamingAssetsHando
 using LLMGameCreator.Application.Design.GeneratorPlans;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignAuthoringReviewWorkspace;
 using LLMGameCreator.Application.Design.SchemaDrivenCampaignEditValidateApplyLoop;
+using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.Application.Editing;
 using LLMGameCreator.Application.Generation;
 using LLMGameCreator.Application.Projects;
@@ -102,6 +103,7 @@ public sealed class CompositionRoot : IDisposable
         _container.Register<EditDrivenGamePackageRuntimePreviewBridgeEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService>(Reuse.Singleton);
         _container.Register<EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService>(Reuse.Singleton);
+        _container.Register<VisualWorldStreamPreviewWorkspaceService>(Reuse.Singleton);
         _container.RegisterDelegate<GeneratorPlanDraftArtifactProductionService>(_ => new GeneratorPlanDraftArtifactProductionService(), Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalValidator>(Reuse.Singleton);
         _container.Register<GeneratorPlanDraftArtifactApprovalMarkdownRenderer>(Reuse.Singleton);
@@ -318,6 +320,10 @@ public sealed class CompositionRoot : IDisposable
                 resolver.Resolve<EditDrivenGamePackageRuntimePreviewPlaythroughEvidenceService>(),
                 resolver.Resolve<EditDrivenUnityAlphaStreamingAssetsHandoffEvidenceService>()), Reuse.Singleton);
 
+        _container.RegisterDelegate<VisualWorldStreamPreviewWorkspacePageControl>(resolver =>
+            new VisualWorldStreamPreviewWorkspacePageControl(
+                resolver.Resolve<VisualWorldStreamPreviewWorkspaceService>()), Reuse.Singleton);
+
         _container.RegisterDelegate<AssetsPageControl>(resolver => new AssetsPageControl(
             resolver.Resolve<ICurrentGamePackageService>()), Reuse.Singleton);
 
@@ -334,6 +340,7 @@ public sealed class CompositionRoot : IDisposable
             resolver.Resolve<StrictLlmArtifactsPageControl>(),
             resolver.Resolve<StrictLlmEvaluationPageControl>(),
             resolver.Resolve<CampaignAuthoringReviewWorkspacePageControl>(),
+            resolver.Resolve<VisualWorldStreamPreviewWorkspacePageControl>(),
             resolver.Resolve<ArtifactReviewPageControl>(),
             resolver.Resolve<CompositionWorkbenchPageControl>(),
             resolver.Resolve<ValidationPageControl>(),

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "visual_world_stream_preview_proof_status_v1",
+  "goalId": "goal_092_visual_world_stream_preview_workspace",
+  "passed": true,
+  "proofCount": 7,
+  "proofs": [
+    {
+      "proofId": "goal091.cache_reuse",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-cache-reuse-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "8d9558e536b72b8e84e324962aa2d00a8a3a95dd35c016de34e9becdfc8a59f3",
+      "diagnosticSummary": "passed=true; cacheRecordCount=93; reusedChunkKeyCount=24; infiniteOverlapReusedChunkKeyCount=24"
+    },
+    {
+      "proofId": "goal091.finite_boundary_clipping",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e95c92156b504d706044a062a96a973c9ec1e1767f84a5acaa696bb5567a8f2e",
+      "diagnosticSummary": "boundaryClippingExplicit=true"
+    },
+    {
+      "proofId": "goal091.huge_sparse_no_raw_dump",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e95c92156b504d706044a062a96a973c9ec1e1767f84a5acaa696bb5567a8f2e",
+      "diagnosticSummary": "hugeSparseNoRawDump=true"
+    },
+    {
+      "proofId": "goal091.infinite_overlap_reuse",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-quality-gate-scan.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "e95c92156b504d706044a062a96a973c9ec1e1767f84a5acaa696bb5567a8f2e",
+      "diagnosticSummary": "infiniteOverlapReuseProven=true"
+    },
+    {
+      "proofId": "goal091.layer_transition",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-layer-transition-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "61086ac28aeba195c82d1fc5e3990f4e29288296413f163dc08aaf2898d0f622",
+      "diagnosticSummary": "passed=true; portalOrTransitionLinkCount=6"
+    },
+    {
+      "proofId": "goal091.negative",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-negative-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "2d40315708db5391fabb9564bc5fc8b31c4a09a9a8c3131ce000f704bbe3ac2a",
+      "diagnosticSummary": "passed=true; scenarioCount=16; rejectedCount=16"
+    },
+    {
+      "proofId": "goal091.seam",
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-seam-proof.json",
+      "status": "passed",
+      "passed": true,
+      "sha256": "64f8fe7d90c2390aa71161837e79bbc9e506fa9d323618b08c51183742651d6d",
+      "diagnosticSummary": "passed=true; seamCount=156"
+    }
+  ]
+}

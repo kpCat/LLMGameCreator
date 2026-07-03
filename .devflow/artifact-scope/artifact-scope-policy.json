@@ -62,7 +62,8 @@
     ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/",
     ".llmgc/procedural/goal-089-tiered-validation-pipeline/",
     ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/",
-    ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/"
+    ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/",
+    ".llmgc/procedural/goal-092-visual-world-stream-preview-workspace/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1071,6 +1072,26 @@
         "docs/agent-tasks/goal-091-deterministic-visual-chunk-stream-window/",
         "src/LLMGameCreator.Application/Design/DeterministicVisualChunkStreamWindow/",
         "tests/LLMGameCreator.Tests/Application/DeterministicVisualChunkStreamWindow/"
+      ]
+    },
+    {
+      "scenario": "goal-092-visual-world-stream-preview-workspace",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "src/LLMGameCreator.WinForms/CompositionRoot.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-092-visual-world-stream-preview-workspace/",
+        "docs/agent-tasks/goal-092-visual-world-stream-preview-workspace/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
       ]
     }
   ]
