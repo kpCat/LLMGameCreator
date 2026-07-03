@@ -73,7 +73,8 @@
     ".llmgc/procedural/goal-098-geoworld-source-adapter-streaming-contract/",
     ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/",
     ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/",
-    ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/"
+    ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/",
+    ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1316,6 +1317,30 @@
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityPreviewRunner/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/"
+      ]
+    },
+    {
+      "scenario": "goal-102-offline-geoworld-unity-editor-preview-tool",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldUnityEditorPreviewToolProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/",
+        "docs/agent-tasks/goal-102-offline-geoworld-unity-editor-preview-tool/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityEditorPreviewTool/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
       ]
     }
   ]

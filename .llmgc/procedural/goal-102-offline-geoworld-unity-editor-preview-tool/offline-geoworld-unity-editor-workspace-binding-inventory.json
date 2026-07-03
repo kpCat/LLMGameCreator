@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "offline_geoworld_unity_editor_workspace_binding_inventory_v1",
+  "goalId": "goal_102_offline_geoworld_unity_editor_preview_tool",
+  "passed": true,
+  "workspaceCatalogIncludesEditorPreviewGroup": true,
+  "workspaceReadsGoal102EvidenceByRelativePath": true,
+  "winFormsPageDisplaysEditorPreviewFields": true,
+  "showsEditorWindowScriptPath": true,
+  "showsMenuItemMarker": true,
+  "showsGoal101PayloadPath": true,
+  "showsPreviewCommandCount": true,
+  "showsTravelWindowSteps": true,
+  "showsSimulatedEditorActionProof": true,
+  "showsClearCleanupProof": true,
+  "showsAlphaRuntimeBootstrapUnchangedStatus": true,
+  "showsManualLaunchInstructions": true,
+  "diagnostics": []
+}

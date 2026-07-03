@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "offline_geoworld_unity_editor_tool_inventory_v1",
+  "goalId": "goal_102_offline_geoworld_unity_editor_preview_tool",
+  "passed": true,
+  "editorWindowScriptExists": true,
+  "menuItemMarkerPresent": true,
+  "streamingAssetsPathMarkerPresent": true,
+  "goal101PayloadPathMarkerPresent": true,
+  "createPreviewObjectsMethodPresent": true,
+  "clearPreviewObjectsMethodPresent": true,
+  "payloadStatusUiPresent": true,
+  "manualButtonOnly": true,
+  "hasNoProviderNetworkMarkers": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoScenePrefabSettingsMutationMarkers": true,
+  "hasNoAutoRunImportMarker": true,
+  "sourceFile": {
+    "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs",
+    "exists": true,
+    "sha256": "e9a2f5978c57962d986e0ab64c69e7322f90cccfc10b8e2311410b677bf3e8e5",
+    "lineCount": 154,
+    "hasNoProviderNetworkMarkers": true,
+    "doesNotReferenceAlphaRuntimeBootstrap": true,
+    "hasNoScenePrefabSettingsMutationMarkers": true
+  },
+  "diagnostics": []
+}

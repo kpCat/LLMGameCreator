@@ -126,6 +126,21 @@ public sealed record VisualWorldPreviewArtifactEntry
     public bool OfflineGeoworldUnityPreviewUnityScriptsReady { get; init; }
     public bool OfflineGeoworldUnityPreviewSimulatedCommandProofPassed { get; init; }
     public bool OfflineGeoworldUnityPreviewQualityGatePassed { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewCommandCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewCommandKindCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewTravelWindowStepCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewExpectedObjectCount { get; init; }
+    public string OfflineGeoworldUnityEditorPreviewEditorWindowScriptPath { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewMenuItemMarker { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewPayloadPath { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewManualInstructions { get; init; } = string.Empty;
+    public bool OfflineGeoworldUnityEditorPreviewToolInventoryPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewEditorWindowScriptReady { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewSimulatedActionProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewClearOperationProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewNegativeProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewAlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewQualityGatePassed { get; init; }
     public IReadOnlyList<string> ChunkKeys { get; init; } = [];
 
     [JsonIgnore]
@@ -186,6 +201,7 @@ public sealed record VisualWorldPreviewWinFormsBindingInventory
     public bool PageBindDisplaysGeoworld { get; init; }
     public bool PageBindDisplaysOfflineGeoworldHandoff { get; init; }
     public bool PageBindDisplaysOfflineGeoworldUnityPreview { get; init; }
+    public bool PageBindDisplaysOfflineGeoworldUnityEditorPreview { get; init; }
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
 
@@ -268,6 +284,23 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool OfflineGeoworldUnityPreviewAlphaRuntimeBootstrapUnchanged { get; init; }
     public bool OfflineGeoworldUnityPreviewQualityGatePassed { get; init; }
     public bool Goal101FilesDiscoveredByRelativePaths { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewGroupPresent { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewCommandCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewCommandKindCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewTravelWindowStepCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewExpectedObjectCount { get; init; }
+    public string OfflineGeoworldUnityEditorPreviewEditorWindowScriptPath { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewMenuItemMarker { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewPayloadPath { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewManualInstructions { get; init; } = string.Empty;
+    public bool OfflineGeoworldUnityEditorPreviewToolInventoryPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewEditorWindowScriptReady { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewSimulatedActionProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewClearOperationProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewNegativeProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewAlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewQualityGatePassed { get; init; }
+    public bool Goal102FilesDiscoveredByRelativePaths { get; init; }
     public bool RequiredArtifactGroupsPresent { get; init; }
     public bool Goal091StreamWindowsVisible { get; init; }
     public bool ProofStatusPassed { get; init; }
@@ -281,6 +314,7 @@ public sealed record VisualWorldPreviewWorkspaceQualityGate
     public bool WinFormsGeoworldBindingReal { get; init; }
     public bool WinFormsOfflineGeoworldHandoffBindingReal { get; init; }
     public bool WinFormsOfflineGeoworldUnityPreviewBindingReal { get; init; }
+    public bool WinFormsOfflineGeoworldUnityEditorPreviewBindingReal { get; init; }
     public bool SourceHealthPassed { get; init; }
     public int ScannedCSharpFileCount { get; init; }
     public int MaxLogicalLineCount { get; init; }
@@ -390,6 +424,22 @@ public sealed record VisualWorldStreamPreviewWorkspaceReport
     public bool OfflineGeoworldUnityPreviewAlphaRuntimeBootstrapUnchanged { get; init; }
     public bool OfflineGeoworldUnityPreviewQualityGatePassed { get; init; }
     public bool Goal101FilesDiscoveredByRelativePaths { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewCommandCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewCommandKindCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewTravelWindowStepCount { get; init; }
+    public int OfflineGeoworldUnityEditorPreviewExpectedObjectCount { get; init; }
+    public string OfflineGeoworldUnityEditorPreviewEditorWindowScriptPath { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewMenuItemMarker { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewPayloadPath { get; init; } = string.Empty;
+    public string OfflineGeoworldUnityEditorPreviewManualInstructions { get; init; } = string.Empty;
+    public bool OfflineGeoworldUnityEditorPreviewToolInventoryPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewEditorWindowScriptReady { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewSimulatedActionProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewClearOperationProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewNegativeProofPassed { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewAlphaRuntimeBootstrapUnchanged { get; init; }
+    public bool OfflineGeoworldUnityEditorPreviewQualityGatePassed { get; init; }
+    public bool Goal102FilesDiscoveredByRelativePaths { get; init; }
     public bool ProofStatusPassed { get; init; }
     public bool WinFormsBindingPassed { get; init; }
     public bool QualityGatePassed { get; init; }

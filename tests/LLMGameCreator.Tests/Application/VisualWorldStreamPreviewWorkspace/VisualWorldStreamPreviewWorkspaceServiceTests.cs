@@ -1,6 +1,7 @@
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
+using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.WinForms.Pages;
@@ -8,10 +9,10 @@ using Xunit;
 
 namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 
-public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
+public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through100Artifacts()
+    public void ServiceLoadsRealGoal086Through102Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -27,8 +28,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("geoworld", groupIds);
         Assert.Contains("offline_geoworld_handoff", groupIds);
         Assert.Contains("offline_geoworld_unity_preview", groupIds);
-        Assert.Equal(10, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 110);
+        Assert.Contains("offline_geoworld_unity_editor_preview", groupIds);
+        Assert.Equal(11, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 118);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
@@ -249,7 +251,6 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.False(Path.IsPathFullyQualified(entry.RelativePath), entry.RelativePath));
     }
 
-
     [Fact]
     public void SvgEntriesAreRelativeTextSafePreviewPaths()
     {
@@ -271,7 +272,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
     }
 
     [Fact]
-    public void Goal091Goal093Goal095Goal099AndGoal100ProofStatusesSurfaceRequiredProofs()
+    public void Goal091Goal093Goal095Goal099Goal100Goal101AndGoal102ProofStatusesSurfaceRequiredProofs()
     {
         var result = Build();
         var required = new[]
@@ -312,7 +313,14 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal101.alpha_runtime_bootstrap_unchanged",
             "goal101.all_command_kinds_mapped",
             "goal101.travel_window_demo",
-            "goal101.quality_gate"
+            "goal101.quality_gate",
+            "goal102.tool_inventory",
+            "goal102.editor_window_menu",
+            "goal102.simulated_action",
+            "goal102.clear_operation",
+            "goal102.negative",
+            "goal102.alpha_runtime_bootstrap_unchanged",
+            "goal102.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -538,6 +546,32 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
                 "offlineGeoworldUnityPreviewQualityGatePassed: true",
                 previewDetails,
                 StringComparison.Ordinal);
+            groups.SelectedItem = groups.Items
+                .Cast<object>()
+                .First(item => item.ToString()!.Contains(
+                    "GroupId = offline_geoworld_unity_editor_preview,",
+                    StringComparison.Ordinal));
+            var editorItem = entries.Items
+                .Cast<ListViewItem>()
+                .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
+                               && entry.ArtifactKind
+                                   == "offline_geoworld_unity_editor_preview_workspace_summary");
+            var editorEntry = Assert.IsType<VisualWorldPreviewArtifactEntry>(editorItem.Tag);
+            var editorDetails = InvokePrivateStatic<string>(
+                typeof(VisualWorldStreamPreviewWorkspacePageControl),
+                "BuildEntryDetails",
+                editorEntry);
+
+            Assert.Contains("offlineGeoworldUnityEditorPreviewCommandCount: 18", editorDetails, StringComparison.Ordinal);
+            Assert.Contains("offlineGeoworldUnityEditorPreviewExpectedObjectCount: 18", editorDetails, StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldUnityEditorPreviewEditorWindowScriptReady: true",
+                editorDetails,
+                StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldUnityEditorPreviewClearOperationProofPassed: true",
+                editorDetails,
+                StringComparison.Ordinal);
             Assert.True(
                 svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)
                 || svgPreview.Text.Contains("No text SVG preview", StringComparison.Ordinal));
@@ -561,8 +595,15 @@ public sealed class VisualWorldStreamPreviewWorkspaceServiceTests
         });
     }
 
-    private static VisualWorldStreamPreviewWorkspaceResult Build() =>
-        new VisualWorldStreamPreviewWorkspaceService().Build(ProjectRoot());
+    private static VisualWorldStreamPreviewWorkspaceResult Build()
+    {
+        var root = ProjectRoot();
+        new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
+            .BuildAndWriteAsync(root)
+            .GetAwaiter()
+            .GetResult();
+        return new VisualWorldStreamPreviewWorkspaceService().Build(root);
+    }
 
     private static void RunSta(Action action)
     {

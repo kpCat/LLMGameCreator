@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "offline_geoworld_unity_editor_simulated_action_proof_v1",
+  "goalId": "goal_102_offline_geoworld_unity_editor_preview_tool",
+  "passed": true,
+  "payloadReadAttempted": true,
+  "manifestRead": true,
+  "commandCatalogRead": true,
+  "travelWindowScriptRead": true,
+  "editorWindowScriptRead": true,
+  "payloadCountsMatchGoal101": true,
+  "allRequiredCommandKindsRepresented": true,
+  "noUnsupportedCommandKind": true,
+  "previewObjectPlanBuilt": true,
+  "createOperationModelPassed": true,
+  "clearOperationModelPassed": true,
+  "noAbsolutePaths": true,
+  "noRawGeodata": true,
+  "noBinaryOrRasterMedia": true,
+  "noProviderOrNetworkMarkers": true,
+  "noScenePrefabSettingsChangeMarkers": true,
+  "commandCount": 18,
+  "commandKindCount": 10,
+  "travelWindowStepCount": 4,
+  "expectedObjectCount": 18,
+  "clearOperationRemovedObjectCount": 18,
+  "commandCountByKind": {
+    "administrative_hint_marker": 4,
+    "barrier_line": 2,
+    "bridge_marker": 2,
+    "building_footprint_marker": 1,
+    "land_use_area_plane": 1,
+    "poi_marker": 1,
+    "road_segment_line": 2,
+    "terrain_hint_marker": 2,
+    "vegetation_area_marker": 1,
+    "water_body_plane": 2
+  },
+  "previewObjects": [
+    {
+      "commandId": "preview_command/05ed8679f5108505",
+      "commandKind": "bridge_marker",
+      "objectKind": "cube",
+      "objectName": "editor_preview_bridge_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/2276ea94e0340d14",
+      "commandKind": "barrier_line",
+      "objectKind": "line",
+      "objectName": "editor_preview_barrier_line",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/3910b28ce6e01d89",
+      "commandKind": "land_use_area_plane",
+      "objectKind": "plane",
+      "objectName": "editor_preview_land_use_area_plane",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/55d73d108fcef19c",
+      "commandKind": "terrain_hint_marker",
+      "objectKind": "capsule",
+      "objectName": "editor_preview_terrain_hint_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/6f7ea9b97f3110ac",
+      "commandKind": "administrative_hint_marker",
+      "objectKind": "cube",
+      "objectName": "editor_preview_administrative_hint_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/6fb571ad5cbdfe54",
+      "commandKind": "terrain_hint_marker",
+      "objectKind": "capsule",
+      "objectName": "editor_preview_terrain_hint_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/7190a4bf7c808416",
+      "commandKind": "building_footprint_marker",
+      "objectKind": "cube",
+      "objectName": "editor_preview_building_footprint_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/863e010a16565f56",
+      "commandKind": "administrative_hint_marker",
+      "objectKind": "cube",
+      "objectName": "editor_preview_administrative_hint_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/865d5a2785f4bbc7",
+      "commandKind": "road_segment_line",
+      "objectKind": "line",
+      "objectName": "editor_preview_road_segment_line",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/886a712e8ce9ba50",
+      "commandKind": "vegetation_area_marker",
+      "objectKind": "sphere",
+      "objectName": "editor_preview_vegetation_area_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/9f3dbc694697d6fc",
+      "commandKind": "bridge_marker",
+      "objectKind": "cube",
+      "objectName": "editor_preview_bridge_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/c1872a5502d4b3f6",
+      "commandKind": "administrative_hint_marker",
+      "objectKind": "cube",
+      "objectName": "editor_preview_administrative_hint_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/c2ab27ef0c033703",
+      "commandKind": "poi_marker",
+      "objectKind": "sphere",
+      "objectName": "editor_preview_poi_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/de673df37f3e6e13",
+      "commandKind": "administrative_hint_marker",
+      "objectKind": "cube",
+      "objectName": "editor_preview_administrative_hint_marker",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/e35c257499cac8c3",
+      "commandKind": "water_body_plane",
+      "objectKind": "plane",
+      "objectName": "editor_preview_water_body_plane",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/e37f51a0d4e24947",
+      "commandKind": "road_segment_line",
+      "objectKind": "line",
+      "objectName": "editor_preview_road_segment_line",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/f503f490960eb2ed",
+      "commandKind": "water_body_plane",
+      "objectKind": "plane",
+      "objectName": "editor_preview_water_body_plane",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    },
+    {
+      "commandId": "preview_command/f6c97ce05f93c0b5",
+      "commandKind": "barrier_line",
+      "objectKind": "line",
+      "objectName": "editor_preview_barrier_line",
+      "expectedObjectCount": 1,
+      "metadataOnly": true
+    }
+  ],
+  "diagnostics": []
+}

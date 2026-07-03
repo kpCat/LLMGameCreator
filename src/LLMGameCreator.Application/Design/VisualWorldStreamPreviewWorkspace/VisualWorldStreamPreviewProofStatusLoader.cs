@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.OfflineGeoworldVisualCacheUnityHandoff;
+using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityPreviewRunner;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 
@@ -86,6 +87,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal099GeoworldProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal100OfflineGeoworldHandoffProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal101OfflineGeoworldUnityPreviewProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal102OfflineGeoworldUnityEditorPreviewProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -417,6 +419,75 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 Goal101SourceGoalId,
                 "goal101.quality_gate",
                 OfflineGeoworldUnityPreviewRunnerVocabulary.QualityGateScanFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics)
+        ];
+
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal102OfflineGeoworldUnityEditorPreviewProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        [
+            BuildProof(
+                projectRoot,
+                Goal102SourceRoot,
+                Goal102SourceGoalId,
+                "goal102.tool_inventory",
+                OfflineGeoworldUnityEditorPreviewToolVocabulary.ToolInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal102SourceRoot,
+                Goal102SourceGoalId,
+                "goal102.editor_window_menu",
+                OfflineGeoworldUnityEditorPreviewToolVocabulary.ToolInventoryFileName,
+                "menuItemMarkerPresent",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal102SourceRoot,
+                Goal102SourceGoalId,
+                "goal102.simulated_action",
+                OfflineGeoworldUnityEditorPreviewToolVocabulary.SimulatedActionProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal102SourceRoot,
+                Goal102SourceGoalId,
+                "goal102.clear_operation",
+                OfflineGeoworldUnityEditorPreviewToolVocabulary.SimulatedActionProofFileName,
+                "clearOperationModelPassed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal102SourceRoot,
+                Goal102SourceGoalId,
+                "goal102.negative",
+                OfflineGeoworldUnityEditorPreviewToolVocabulary.NegativeProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal102SourceRoot,
+                Goal102SourceGoalId,
+                "goal102.alpha_runtime_bootstrap_unchanged",
+                OfflineGeoworldUnityEditorPreviewToolVocabulary.QualityGateScanFileName,
+                "alphaRuntimeBootstrapUnchanged",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal102SourceRoot,
+                Goal102SourceGoalId,
+                "goal102.quality_gate",
+                OfflineGeoworldUnityEditorPreviewToolVocabulary.QualityGateScanFileName,
                 "passed",
                 new Dictionary<string, string>(StringComparer.Ordinal),
                 diagnostics)

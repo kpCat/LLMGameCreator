@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "offline_geoworld_unity_editor_negative_proof_v1",
+  "goalId": "goal_102_offline_geoworld_unity_editor_preview_tool",
+  "passed": true,
+  "scenarioCount": 13,
+  "rejectedCount": 13,
+  "matchedExpectationCount": 13,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal101_payload",
+      "causalMutation": "Goal101 StreamingAssets payload removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.goal101_missing",
+          "target": "Goal101 payload",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_editor_window_script",
+      "causalMutation": "Editor window source removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.editor_script_missing",
+          "target": "editor script",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_menu_marker",
+      "causalMutation": "MenuItem marker removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.menu_marker",
+          "target": "editor script",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_clear_method",
+      "causalMutation": "ClearPreviewObjects method removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.clear_missing",
+          "target": "editor script",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsupported_command_kind",
+      "causalMutation": "command kind changed to unsupported",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.unsupported_command",
+          "target": "preview command",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "network_provider_marker_in_editor_script",
+      "causalMutation": "editor script contains external marker",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.provider_network",
+          "target": "editor script",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency_marker",
+      "causalMutation": "editor script references AlphaRuntimeBootstrap",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.alpha_bootstrap",
+          "target": "editor script",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "scene_prefab_project_settings_change_marker",
+      "causalMutation": "scene/prefab/settings mutation marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.scene_prefab_settings",
+          "target": "editor script",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_payload_read",
+      "causalMutation": "proof marked passed without reading payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.fake_success",
+          "target": "simulated action proof",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "absolute_path_in_payload",
+      "causalMutation": "absolute local path inserted into payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.absolute_path",
+          "target": "payload",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_geodata_leaked_into_command",
+      "causalMutation": "raw geodata marker added to command",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.raw_geodata",
+          "target": "preview command",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "causalMutation": "binary or raster media added to payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.binary_media",
+          "target": "payload",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_create_method",
+      "causalMutation": "CreatePreviewObjects method removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102.negative.create_missing",
+          "target": "editor script",
+          "message": "Goal102 negative proof rejected the mutated editor preview input."
+        }
+      ]
+    }
+  ]
+}

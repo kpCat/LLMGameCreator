@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "offline_geoworld_unity_editor_source_lineage_v1",
+  "goalId": "goal_102_offline_geoworld_unity_editor_preview_tool",
+  "passed": true,
+  "goal101AcceptedFalsePreserved": true,
+  "goal101PayloadConsumed": true,
+  "goal101SimulatedCommandProofPassed": true,
+  "goal101NegativeProofPassed": true,
+  "goal101AlphaRuntimeBootstrapUnchanged": true,
+  "records": [
+    {
+      "relativePath": "docs/context/LFZ_GEOWORLD_PATTERN_STUDY.md",
+      "exists": true,
+      "sha256": "cfb3d50677a7d04f02af3e32f0a1e78c1d15ec1a3f29d3b74bae240d1b166741",
+      "purpose": "geoworld pattern study"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_RUNTIME_STREAMING_DESIGN_NOTES.md",
+      "exists": true,
+      "sha256": "7f0340599487f826c258fdf8c2378d4adeb5aec16b2bb5d87ce6b8e2dabcea4f",
+      "purpose": "streaming policy"
+    },
+    {
+      "relativePath": "docs/context/GEOWORLD_SOURCE_ADAPTER_ARCHITECTURE.md",
+      "exists": true,
+      "sha256": "3d5a5e89377eb6cdf617cc1edab0362cd72fb3f70d089b685087e22f70a4f06c",
+      "purpose": "source adapter policy"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-unity-preview-runner-report.md",
+      "exists": true,
+      "sha256": "d8a55d6a4468f93e2e7b6112d7085e2806a3b54fb89aceda738872bec4491199",
+      "purpose": "Goal101 report"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-command-catalog.json",
+      "exists": true,
+      "sha256": "bfe993074c86947815146c01fa5888be1270521f0c496efb07f3e3500851f007",
+      "purpose": "Goal101 command catalog"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-travel-window-script.json",
+      "exists": true,
+      "sha256": "73fb12782f8af214528c6d52585a285b9b78c7a89649ff73ea888679add2d533",
+      "purpose": "Goal101 travel window script"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-simulated-command-proof.json",
+      "exists": true,
+      "sha256": "f917128833f43c04948efe4c29b2058b59a47de5c1214109bb2f84f2039d5583",
+      "purpose": "Goal101 simulated command proof"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-negative-proof.json",
+      "exists": true,
+      "sha256": "46c0e86a426aa54de922d9444f58efce2187be9a04fc8eb3dc3eb06ee9f54fd6",
+      "purpose": "Goal101 negative proof"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs",
+      "exists": true,
+      "sha256": "e9a2f5978c57962d986e0ab64c69e7322f90cccfc10b8e2311410b677bf3e8e5",
+      "purpose": "Goal102 Unity Editor preview window"
+    }
+  ],
+  "diagnostics": []
+}

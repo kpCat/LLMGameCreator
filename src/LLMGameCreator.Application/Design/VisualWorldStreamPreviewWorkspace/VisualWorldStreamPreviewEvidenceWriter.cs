@@ -205,6 +205,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 && (entry.RelativePath.StartsWith(Goal100SourceRoot + "/", StringComparison.Ordinal)
                     || entry.RelativePath.StartsWith(Goal100StreamingAssetsRoot + "/", StringComparison.Ordinal)));
         var unityPreview = BuildGoal101UnityPreviewQuality(groups, proofs);
+        var unityEditorPreview = BuildGoal102UnityEditorPreviewQuality(groups, proofs);
         var requiredGroups = new[]
         {
             "microtiles",
@@ -216,7 +217,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "unity_handoff",
             "geoworld",
             "offline_geoworld_handoff",
-            "offline_geoworld_unity_preview"
+            "offline_geoworld_unity_preview",
+            "offline_geoworld_unity_editor_preview"
         };
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -375,6 +377,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "offline_geoworld_handoff",
             diagnostics);
         AddGoal101UnityPreviewQualityDiagnostics(unityPreview, diagnostics);
+        AddGoal102UnityEditorPreviewQualityDiagnostics(unityEditorPreview, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -402,6 +405,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(
             binding.PageBindDisplaysOfflineGeoworldUnityPreview,
             "goal101.quality.winforms_offline_geoworld_unity_preview_binding",
+            "winformsBinding",
+            diagnostics);
+        AddIfFalse(
+            binding.PageBindDisplaysOfflineGeoworldUnityEditorPreview,
+            "goal102.quality.winforms_offline_geoworld_unity_editor_preview_binding",
             "winformsBinding",
             diagnostics);
         AddIfFalse(sourceHealth.Passed, "goal092.quality.source_health", "sourceHealth", diagnostics);
@@ -490,6 +498,34 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 unityPreview.AlphaRuntimeBootstrapUnchanged,
             OfflineGeoworldUnityPreviewQualityGatePassed = unityPreview.QualityGatePassed,
             Goal101FilesDiscoveredByRelativePaths = unityPreview.RelativePaths,
+            OfflineGeoworldUnityEditorPreviewGroupPresent = unityEditorPreview.GroupPresent,
+            OfflineGeoworldUnityEditorPreviewCommandCount = unityEditorPreview.CommandCount,
+            OfflineGeoworldUnityEditorPreviewCommandKindCount = unityEditorPreview.CommandKindCount,
+            OfflineGeoworldUnityEditorPreviewTravelWindowStepCount =
+                unityEditorPreview.TravelWindowStepCount,
+            OfflineGeoworldUnityEditorPreviewExpectedObjectCount =
+                unityEditorPreview.ExpectedObjectCount,
+            OfflineGeoworldUnityEditorPreviewEditorWindowScriptPath =
+                unityEditorPreview.EditorWindowScriptPath,
+            OfflineGeoworldUnityEditorPreviewMenuItemMarker = unityEditorPreview.MenuItemMarker,
+            OfflineGeoworldUnityEditorPreviewPayloadPath = unityEditorPreview.PayloadPath,
+            OfflineGeoworldUnityEditorPreviewManualInstructions =
+                unityEditorPreview.ManualInstructions,
+            OfflineGeoworldUnityEditorPreviewToolInventoryPassed =
+                unityEditorPreview.ToolInventoryPassed,
+            OfflineGeoworldUnityEditorPreviewEditorWindowScriptReady =
+                unityEditorPreview.EditorWindowScriptReady,
+            OfflineGeoworldUnityEditorPreviewSimulatedActionProofPassed =
+                unityEditorPreview.SimulatedActionProofPassed,
+            OfflineGeoworldUnityEditorPreviewClearOperationProofPassed =
+                unityEditorPreview.ClearOperationProofPassed,
+            OfflineGeoworldUnityEditorPreviewNegativeProofPassed =
+                unityEditorPreview.NegativeProofPassed,
+            OfflineGeoworldUnityEditorPreviewAlphaRuntimeBootstrapUnchanged =
+                unityEditorPreview.AlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldUnityEditorPreviewQualityGatePassed =
+                unityEditorPreview.QualityGatePassed,
+            Goal102FilesDiscoveredByRelativePaths = unityEditorPreview.RelativePaths,
             RequiredArtifactGroupsPresent = requiredArtifactGroupsPresent,
             Goal091StreamWindowsVisible = goal091StreamEntries >= 4,
             ProofStatusPassed = proofStatusPassed,
@@ -503,6 +539,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 binding.PageBindDisplaysOfflineGeoworldHandoff,
             WinFormsOfflineGeoworldUnityPreviewBindingReal =
                 binding.PageBindDisplaysOfflineGeoworldUnityPreview,
+            WinFormsOfflineGeoworldUnityEditorPreviewBindingReal =
+                binding.PageBindDisplaysOfflineGeoworldUnityEditorPreview,
             SourceHealthPassed = sourceHealth.Passed,
             ScannedCSharpFileCount = sourceHealth.ScannedCSharpFileCount,
             MaxLogicalLineCount = sourceHealth.MaxLogicalLineCount,
@@ -544,6 +582,12 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewTravelWindow.cs",
                 "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/",
                 ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/",
+                "docs/agent-tasks/goal-102-offline-geoworld-unity-editor-preview-tool/",
+                "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/",
+                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityEditorPreviewTool/",
+                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldUnityEditorPreviewToolProductSmokeTests.cs",
+                "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs",
+                ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/",
                 "docs/CURRENT_GENERATOR_STATE.md",
                 "docs/CURRENT_GENERATOR_STATE.json",
                 "docs/CONTEXT_INDEX.md",
@@ -559,115 +603,6 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 .ToList()
         };
     }
-
-    private static VisualWorldStreamPreviewWorkspaceReport BuildReport(
-        VisualWorldStreamPreviewCatalog catalog,
-        VisualWorldStreamPreviewProofStatusDocument proofStatus,
-        VisualWorldPreviewWinFormsBindingInventory binding,
-        VisualWorldPreviewWorkspaceQualityGate qualityGate,
-        string catalogJson,
-        string proofStatusJson,
-        string bindingJson,
-        string qualityJson,
-        string sourceHealthJson) =>
-        new()
-        {
-            Accepted = false,
-            GroupCount = catalog.GroupCount,
-            EntryCount = catalog.EntryCount,
-            SvgTextPreviewCount = catalog.SvgTextPreviewCount,
-            Goal091StreamWindowEntryCount = qualityGate.Goal091StreamWindowEntryCount,
-            CacheExportPackageCount = qualityGate.CacheExportPackageCount,
-            CacheExportRecordCount = qualityGate.CacheExportRecordCount,
-            CacheExportSourceChunkCount = qualityGate.CacheExportSourceChunkCount,
-            CacheExportStreamWindowCount = qualityGate.CacheExportStreamWindowCount,
-            RuntimeHandoffSidecarVisible = qualityGate.RuntimeHandoffSidecarVisible,
-            RuntimeHandoffSidecarMetadataOnly = qualityGate.RuntimeHandoffSidecarMetadataOnly,
-            CacheReadbackProofPassed = qualityGate.CacheReadbackProofPassed,
-            CacheOverlapReuseProofPassed = qualityGate.CacheOverlapReuseProofPassed,
-            CacheNegativeProofPassed = qualityGate.CacheNegativeProofPassed,
-            CacheInvalidationMatrixPassed = qualityGate.CacheInvalidationMatrixPassed,
-            CacheNoRawFullWorldDump = qualityGate.CacheNoRawFullWorldDump,
-            UnityPayloadFileCount = qualityGate.UnityPayloadFileCount,
-            UnityPackageCount = qualityGate.UnityPackageCount,
-            UnityExportRecordCount = qualityGate.UnityExportRecordCount,
-            UnityStreamWindowCount = qualityGate.UnityStreamWindowCount,
-            UnityUniqueChunkKeyCount = qualityGate.UnityUniqueChunkKeyCount,
-            UnityProbeSourceInventoryVisible = qualityGate.UnityProbeSourceInventoryVisible,
-            UnityProbeSourceInventoryPassed = qualityGate.UnityProbeSourceInventoryPassed,
-            UnitySimulatedReadProofPassed = qualityGate.UnitySimulatedReadProofPassed,
-            UnityNegativeProofPassed = qualityGate.UnityNegativeProofPassed,
-            UnityAlphaRuntimeBootstrapUnchanged = qualityGate.UnityAlphaRuntimeBootstrapUnchanged,
-            UnityForbiddenAreasUnchanged = qualityGate.UnityForbiddenAreasUnchanged,
-            UnityHandoffMetadataOnly = qualityGate.UnityHandoffMetadataOnly,
-            UnityPayloadHashesMatchGoal095Ledger = qualityGate.UnityPayloadHashesMatchGoal095Ledger,
-            Goal095FilesDiscoveredByRelativePaths = qualityGate.Goal095FilesDiscoveredByRelativePaths,
-            NoUnityFilesChangedByGoal096 = qualityGate.NoUnityFilesChangedByGoal096,
-            GeoworldOfflineBundleId = qualityGate.GeoworldOfflineBundleId,
-            GeoworldNormalizedFeatureCount = qualityGate.GeoworldNormalizedFeatureCount,
-            GeoworldWorldSourceGraphChunkCount = qualityGate.GeoworldWorldSourceGraphChunkCount,
-            GeoworldStreamWindowChunkCount = qualityGate.GeoworldStreamWindowChunkCount,
-            GeoworldBoundaryPrefetchPassed = qualityGate.GeoworldBoundaryPrefetchPassed,
-            GeoworldNegativeProofPassed = qualityGate.GeoworldNegativeProofPassed,
-            GeoworldQualityGatePassed = qualityGate.GeoworldQualityGatePassed,
-            Goal099FilesDiscoveredByRelativePaths = qualityGate.Goal099FilesDiscoveredByRelativePaths,
-            OfflineGeoworldHandoffPackageCount = qualityGate.OfflineGeoworldHandoffPackageCount,
-            OfflineGeoworldHandoffFeatureCount = qualityGate.OfflineGeoworldHandoffFeatureCount,
-            OfflineGeoworldHandoffVisualCacheRecordCount =
-                qualityGate.OfflineGeoworldHandoffVisualCacheRecordCount,
-            OfflineGeoworldHandoffSourceChunkCount =
-                qualityGate.OfflineGeoworldHandoffSourceChunkCount,
-            OfflineGeoworldHandoffStreamWindowChunkCount =
-                qualityGate.OfflineGeoworldHandoffStreamWindowChunkCount,
-            OfflineGeoworldHandoffUnityPayloadFileCount =
-                qualityGate.OfflineGeoworldHandoffUnityPayloadFileCount,
-            OfflineGeoworldHandoffFeatureKindCountsSummary =
-                qualityGate.OfflineGeoworldHandoffFeatureKindCountsSummary,
-            OfflineGeoworldHandoffSimulatedReadProofPassed =
-                qualityGate.OfflineGeoworldHandoffSimulatedReadProofPassed,
-            OfflineGeoworldHandoffNegativeProofPassed =
-                qualityGate.OfflineGeoworldHandoffNegativeProofPassed,
-            OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged =
-                qualityGate.OfflineGeoworldHandoffAlphaRuntimeBootstrapUnchanged,
-            OfflineGeoworldHandoffQualityGatePassed =
-                qualityGate.OfflineGeoworldHandoffQualityGatePassed,
-            Goal100FilesDiscoveredByRelativePaths = qualityGate.Goal100FilesDiscoveredByRelativePaths,
-            OfflineGeoworldUnityPreviewCommandCount =
-                qualityGate.OfflineGeoworldUnityPreviewCommandCount,
-            OfflineGeoworldUnityPreviewCommandKindCount =
-                qualityGate.OfflineGeoworldUnityPreviewCommandKindCount,
-            OfflineGeoworldUnityPreviewTravelWindowStepCount =
-                qualityGate.OfflineGeoworldUnityPreviewTravelWindowStepCount,
-            OfflineGeoworldUnityPreviewUnityPayloadFileCount =
-                qualityGate.OfflineGeoworldUnityPreviewUnityPayloadFileCount,
-            OfflineGeoworldUnityPreviewKindCoverageSummary =
-                qualityGate.OfflineGeoworldUnityPreviewKindCoverageSummary,
-            OfflineGeoworldUnityPreviewUnityScriptsReady =
-                qualityGate.OfflineGeoworldUnityPreviewUnityScriptsReady,
-            OfflineGeoworldUnityPreviewSimulatedCommandProofPassed =
-                qualityGate.OfflineGeoworldUnityPreviewSimulatedCommandProofPassed,
-            OfflineGeoworldUnityPreviewNegativeProofPassed =
-                qualityGate.OfflineGeoworldUnityPreviewNegativeProofPassed,
-            OfflineGeoworldUnityPreviewAlphaRuntimeBootstrapUnchanged =
-                qualityGate.OfflineGeoworldUnityPreviewAlphaRuntimeBootstrapUnchanged,
-            OfflineGeoworldUnityPreviewQualityGatePassed =
-                qualityGate.OfflineGeoworldUnityPreviewQualityGatePassed,
-            Goal101FilesDiscoveredByRelativePaths = qualityGate.Goal101FilesDiscoveredByRelativePaths,
-            ProofStatusPassed = proofStatus.Passed,
-            WinFormsBindingPassed = binding.Passed,
-            QualityGatePassed = qualityGate.Passed,
-            SourceHealthPassed = qualityGate.SourceHealthPassed,
-            WorkspaceServiceLogicalLineCount = qualityGate.WorkspaceServiceLogicalLineCount,
-            MaxLogicalLineCount = qualityGate.MaxLogicalLineCount,
-            FilesOver1000LogicalLinesCount = qualityGate.FilesOver1000LogicalLinesCount,
-            FilesOver700LogicalLinesInGoal092NamespaceCount =
-                qualityGate.FilesOver700LogicalLinesInGoal092NamespaceCount,
-            CatalogHash = Sha256Text(catalogJson),
-            ProofStatusHash = Sha256Text(proofStatusJson),
-            WinFormsBindingInventoryHash = Sha256Text(bindingJson),
-            QualityGateHash = Sha256Text(qualityJson),
-            DeterministicReportHash = Sha256Text(sourceHealthJson)
-        };
 
     private static string RenderReport(
         VisualWorldStreamPreviewWorkspaceReport report,

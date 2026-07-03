@@ -67,6 +67,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "offlineGeoworldUnityPreviewUnityScriptsReady",
                 StringComparison.Ordinal);
+        var bindDisplaysOfflineGeoworldUnityEditorPreview = pageText.Contains(
+                "offlineGeoworldUnityEditorPreviewCommandCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldUnityEditorPreviewEditorWindowScriptPath",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldUnityEditorPreviewMenuItemMarker",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldUnityEditorPreviewManualInstructions",
+                StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -100,6 +112,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal101.winforms.offline_geoworld_unity_preview_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysOfflineGeoworldUnityEditorPreview,
+            "goal102.winforms.offline_geoworld_unity_editor_preview_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -117,6 +134,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             PageBindDisplaysOfflineGeoworldHandoff = bindDisplaysOfflineGeoworldHandoff,
             PageBindDisplaysOfflineGeoworldUnityPreview =
                 bindDisplaysOfflineGeoworldUnityPreview,
+            PageBindDisplaysOfflineGeoworldUnityEditorPreview =
+                bindDisplaysOfflineGeoworldUnityEditorPreview,
             Diagnostics = diagnostics
         };
     }
