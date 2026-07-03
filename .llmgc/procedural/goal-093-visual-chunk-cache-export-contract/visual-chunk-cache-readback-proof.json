@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "visual_chunk_cache_readback_proof_v1",
+  "goalId": "goal_093_visual_chunk_cache_export_contract",
+  "passed": true,
+  "manifestRoundTripPassed": true,
+  "runtimeHandoffSidecarRoundTripPassed": true,
+  "manifestValidationPassed": true,
+  "runtimeHandoffSidecarValidationPassed": true,
+  "packageCount": 4,
+  "exportRecordCount": 93,
+  "diagnostics": []
+}

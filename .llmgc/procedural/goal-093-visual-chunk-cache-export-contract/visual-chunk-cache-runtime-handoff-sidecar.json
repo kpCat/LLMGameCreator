@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "visual_chunk_cache_runtime_handoff_sidecar_v1",
+  "goalId": "goal_093_visual_chunk_cache_export_contract",
+  "manualGate": "visual_chunk_cache_export_contract_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "sidecarId": "goal093_runtime_handoff_sidecar",
+  "packageId": "layer_transition_runtime_handoff_sidecar",
+  "exportTargetKind": "runtimeHandoff",
+  "metadataOnly": true,
+  "containsRuntimeExecution": false,
+  "containsProviderCalls": false,
+  "containsUnityImplementation": false,
+  "containsPromptText": false,
+  "recordCount": 27,
+  "streamWindowIds": [
+    "surface_underground_underwater_transition_radius1"
+  ],
+  "layerIds": [
+    "surface",
+    "underground",
+    "underwater"
+  ],
+  "artifactRefs": [
+    {
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-materialization-manifest.json",
+      "artifactKind": "source_materialization_manifest_json",
+      "sha256": "8ec6db464be9ba48b44f6cdeb3253f61ee4943611f9ebdcaa4916a0b02f78447",
+      "purposeTags": [
+        "goal091",
+        "json_evidence"
+      ],
+      "isPreviewTextSvg": false,
+      "isBinaryOrRaster": false,
+      "isPromptDump": false
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-window-catalog.json",
+      "artifactKind": "source_catalog_json",
+      "sha256": "3ef89f00de1114bc99a72419da9d470c84165116f7c2fdbecbbc4d1533500dc5",
+      "purposeTags": [
+        "goal091",
+        "json_evidence"
+      ],
+      "isPreviewTextSvg": false,
+      "isBinaryOrRaster": false,
+      "isPromptDump": false
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-file-ledger.json",
+      "artifactKind": "source_file_ledger_json",
+      "sha256": "93bbadae8765ca231139ea8e7df1e8ed5d04f4a636a893a8f3f5462fbf11d042",
+      "purposeTags": [
+        "goal091",
+        "json_evidence"
+      ],
+      "isPreviewTextSvg": false,
+      "isBinaryOrRaster": false,
+      "isPromptDump": false
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/stream-overviews/layer_transition_window_surface_underground_water.svg",
+      "artifactKind": "source_text_svg_preview",
+      "sha256": "695ef1b60b9ffeb34ca8f360b11209e36bad992b70167c7446f80b432da74110",
+      "purposeTags": [
+        "goal091",
+        "text_svg_preview"
+      ],
+      "isPreviewTextSvg": true,
+      "isBinaryOrRaster": false,
+      "isPromptDump": false
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-layer-transition-proof.json",
+      "artifactKind": "source_layer_transition_proof_json",
+      "sha256": "61086ac28aeba195c82d1fc5e3990f4e29288296413f163dc08aaf2898d0f622",
+      "purposeTags": [
+        "goal091",
+        "layer_transition"
+      ],
+      "isPreviewTextSvg": false,
+      "isBinaryOrRaster": false,
+      "isPromptDump": false
+    }
+  ]
+}

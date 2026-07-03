@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "visual_chunk_cache_negative_proof_v1",
+  "goalId": "goal_093_visual_chunk_cache_export_contract",
+  "passed": true,
+  "scenarioCount": 13,
+  "rejectedCount": 13,
+  "matchedExpectationCount": 13,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_artifact_path",
+      "causalMutation": "absolute artifact path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.artifact_ref.absolute_path",
+          "target": "22da7e533db91b0f57d4e482bea5ffad788d95dbc1c687eba3eea54a9f1c5475",
+          "message": "Artifact refs must use safe repository-relative paths."
+        }
+      ]
+    },
+    {
+      "scenarioId": "binary_raster_artifact_ref",
+      "causalMutation": "binary/raster artifact ref",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.artifact_ref.binary_raster",
+          "target": "cache-preview.png",
+          "message": "Binary or raster artifact refs are forbidden in Goal 093."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_chunk_key_conflicting_hash",
+      "causalMutation": "duplicate chunk key with conflicting hash",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.chunk_key.conflicting_hash",
+          "target": "22da7e533db91b0f57d4e482bea5ffad788d95dbc1c687eba3eea54a9f1c5475",
+          "message": "Duplicate chunk keys must not carry conflicting chunk hashes."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_chunk_hash",
+      "causalMutation": "missing chunk hash",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.chunk_hash.missing",
+          "target": "22da7e533db91b0f57d4e482bea5ffad788d95dbc1c687eba3eea54a9f1c5475",
+          "message": "Cache record chunk hash is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal090_lineage",
+      "causalMutation": "missing source lineage to Goal090",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.source_lineage.goal090.missing",
+          "target": "goal_093_visual_chunk_cache_export_contract",
+          "message": "Goal090 profile lineage is required."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_source_of_truth",
+      "causalMutation": "prompt text as source of truth",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.prompt.source_of_truth",
+          "target": "22da7e533db91b0f57d4e482bea5ffad788d95dbc1c687eba3eea54a9f1c5475",
+          "message": "Prompt text must not be cache export source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "rating_metadata_without_safe_fallback",
+      "causalMutation": "adult/rating metadata without safe fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.rating.safe_fallback_missing",
+          "target": "22da7e533db91b0f57d4e482bea5ffad788d95dbc1c687eba3eea54a9f1c5475",
+          "message": "Adult/rating metadata requires safe fallback metadata."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_full_world_dump",
+      "causalMutation": "huge export attempts raw dump",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.raw_full_world_dump.forbidden",
+          "target": "huge_sparse_100000x100000_window_cache_export",
+          "message": "Cache export must not include raw full-world cell dumps."
+        }
+      ]
+    },
+    {
+      "scenarioId": "runtime_handoff_provider_call",
+      "causalMutation": "runtime handoff sidecar with provider call instructions",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.sidecar.provider_call.forbidden",
+          "target": "goal093_runtime_handoff_sidecar",
+          "message": "Provider call instructions are forbidden in Goal 093."
+        }
+      ]
+    },
+    {
+      "scenarioId": "stale_generator_version",
+      "causalMutation": "stale generator version mismatch",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.generator_version.stale",
+          "target": "22da7e533db91b0f57d4e482bea5ffad788d95dbc1c687eba3eea54a9f1c5475",
+          "message": "Cache record generator version must match source."
+        }
+      ]
+    },
+    {
+      "scenarioId": "stream_window_membership_mismatch",
+      "causalMutation": "stream window membership mismatch",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.stream_window_membership.mismatch",
+          "target": "22da7e533db91b0f57d4e482bea5ffad788d95dbc1c687eba3eea54a9f1c5475",
+          "message": "Cache record stream-window membership must match source windows."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_invalidation_key",
+      "causalMutation": "cache invalidation rule with unknown key",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.invalidation_key.unknown",
+          "target": "unknown_invalidation_key",
+          "message": "Cache invalidation rules must use known keys."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_source_chunk_key",
+      "causalMutation": "unknown source chunk key",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_chunk_cache.chunk_key.unknown_source",
+          "target": "unknown_source_chunk_key",
+          "message": "Cache record must reference a known Goal091 source chunk key."
+        }
+      ]
+    }
+  ]
+}

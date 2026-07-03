@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "visual_chunk_cache_file_ledger_v1",
+  "goalId": "goal_093_visual_chunk_cache_export_contract",
+  "passed": true,
+  "fileCount": 8,
+  "files": [
+    {
+      "relativePath": "visual-chunk-cache-export-manifest.json",
+      "sha256": "6bf8055aba5fc9efea3f7ff0eed4f7e235bfacc812af20b6449c58161accd156",
+      "byteLength": 655098,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-cache-invalidation-matrix.json",
+      "sha256": "dbe6e0078ac7443cd605784257d779b180c54549ab3ebea10579a7e8b0315a49",
+      "byteLength": 7333,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-cache-negative-proof.json",
+      "sha256": "97c06ee46c2f278f5fc3eaeb73769747db620056cc5285e095a0b6523b6fc38e",
+      "byteLength": 6669,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-cache-overlap-reuse-proof.json",
+      "sha256": "e0614bca03687ca53abdef9b816cdc1f37649707ed9e2d02f6321ff01ebcac92",
+      "byteLength": 9437,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-cache-quality-gate-scan.json",
+      "sha256": "f6788ce69b448fc35bd8d5a48fb9ac5bcff4d18edcde974d17cbbfe63b6dde99",
+      "byteLength": 1565,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-cache-readback-proof.json",
+      "sha256": "28a8ac976e643d4a291ab9fc9394913d99c37d39b4216fe247ae0cb83876b796",
+      "byteLength": 386,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-cache-runtime-handoff-sidecar.json",
+      "sha256": "01f375b1bc5eb114108fff40609eaaf12855cab72ed2abc050f3a504a882b519",
+      "byteLength": 3164,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    },
+    {
+      "relativePath": "visual-chunk-cache-source-lineage.json",
+      "sha256": "2c13e4438b3e04b9ede56ccfb2f221b58f8a6531ac7bcb76d6d6a24079c085ae",
+      "byteLength": 4913,
+      "purposeTags": [
+        "json_evidence"
+      ]
+    }
+  ]
+}

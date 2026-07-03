@@ -101,6 +101,7 @@ Current capabilities:
 - Goal 088A full check-all validation repair proof with `.devflow/runs/20260703_075027-check-all`, 1235/1235 non-product tests, 0 warnings, no Goal 088 code changes and restored validation side-effect artifacts;
 - Goal 089 tiered validation pipeline with current-goal, spine-fast, full and full-observed validation tiers while keeping full `check-all.ps1` authoritative;
 - BCL-only parameterized visual world profile/addressing seam with `144x144` only as benchmark fixture, arbitrary finite size matrix, huge sparse `100000x100000` profile, infinite chunk windows, deterministic chunk keys and compact metadata/text-SVG evidence;
+- BCL-only visual chunk cache/export contract over real Goal 091 stream-window artifacts, with deterministic manifest/readback/sidecar proofs and metadata-only runtime handoff evidence;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1483,14 +1484,33 @@ lines. Goal 092A adds no Runtime, Unity, public schema, provider/LLM/RAG/media e
 project-file, dependency, binary/raster media or prompt-dump changes. Goal 092A, Goal 092, Goal 091 and Goal 090 remain
 `accepted=false`.
 
+### Goal 093: Visual Chunk Cache Export Contract
+
+Goal 093 is produced for review with `visual_chunk_cache_export_contract_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It adds a BCL-only Application cache/export contract over real Goal
+091 stream-window artifacts and writes deterministic evidence under
+`.llmgc/procedural/goal-093-visual-chunk-cache-export-contract/`.
+
+Goal 093 produces four metadata-only export packages: finite custom 255x257, huge sparse 100000x100000, overlapping
+infinite streaming windows and a layer-transition runtime handoff sidecar. The evidence records packageCount=4,
+exportRecordCount=93, readbackProofPassed=true, manifestRoundTripPassed=true,
+runtimeHandoffSidecarRoundTripPassed=true, overlapReuseProofPassed=true, negativeProofPassed=true and
+qualityGatePassed=true. The runtime handoff sidecar records `containsRuntimeExecution=false`,
+`containsProviderCalls=false`, `containsUnityImplementation=false`, `recordCount=27` and layers surface,
+underground and underwater.
+
+Goal 093 adds no Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library,
+project-file, dependency, binary/raster media or prompt-dump changes. Goal 093, Goal 092A, Goal 092, Goal 091 and Goal
+090 remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-visual_world_preview_service_split_source_health_verification
+visual_chunk_cache_export_contract_verification
 ```
 
 Status:
 
 ```text
-goal_092a_visual_world_preview_service_split_source_health_produced_for_review
+goal_093_visual_chunk_cache_export_contract_produced_for_review
 ```

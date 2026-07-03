@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "visual_chunk_cache_overlap_reuse_proof_v1",
+  "goalId": "goal_093_visual_chunk_cache_export_contract",
+  "passed": true,
+  "packageId": "infinite_streaming_overlap_cache_export",
+  "sourceGoal091ReusedChunkKeyCount": 24,
+  "exportReusedChunkKeyCount": 24,
+  "rows": [
+    {
+      "chunkKey": "0587e7063f9596d7515cfd12c79c7ea17967b2734e864d79cf1c1bff0577fb35",
+      "chunkHash": "9fb76abbc810c08d1e35535289e5e25a136f2abb6f137a9011e7b07596c57a3e",
+      "layerId": "surface",
+      "chunkX": 0,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "0c416013ef416b38f181da24acd14ef8887611bf62f62c04ceec9edd641f989e",
+      "chunkHash": "134b5e2e0271de350eb78eae11cf3c188019dab8f67d53fe6b5627b10e963a97",
+      "layerId": "interior",
+      "chunkX": 1,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "2420945152e461aed3988195f129734eb7e920f82465b15e2dd5995b87bce0fc",
+      "chunkHash": "98b2f989d7b987b78b5f93010d8810be73c14599146f5059894c8c183356d162",
+      "layerId": "underground",
+      "chunkX": 1,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "31fe934a7a30ab0a42c3de63e2aa4ba65b9047d5b7acc112aec3d68be3f357df",
+      "chunkHash": "0b84461c8743ae746c690b1001ceb0a3d75354f4c7a5b192782a30793ffac901",
+      "layerId": "sky_overlay",
+      "chunkX": 1,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "6e353fd9105da8495ff7bcced761b4e15299511c19f32bc34b876ff6f6d827a3",
+      "chunkHash": "b4fe9e12358bc86eed49d51ca003f015976df87102f188ea16aa2be9c54a3316",
+      "layerId": "sky_overlay",
+      "chunkX": 0,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "6edadbe7a82b734617b683c2f4b3d093de25c5c0c73c953fba4853eb609c6df4",
+      "chunkHash": "9ae24cdd98f80a78f03fd2811ea40b17c0c7239df8d2009f7fdaadfb2ad58326",
+      "layerId": "surface",
+      "chunkX": 0,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "755b913d81822274665088012c367e9e56ee26caa853a76691623a432efbc6f2",
+      "chunkHash": "cf968606c14b2436733c135b05eddf18a477bf06fe8bae84c65b885074b4b87b",
+      "layerId": "underground",
+      "chunkX": 0,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "7b1ee894694df0d0a1144b1919fc5fbca9864306078a6f6c6cb598e3a21f1740",
+      "chunkHash": "8e5336b603313cc5dfe3e2767c95f4cbacdcc16a8e6c2630ef9b7bcf79e8cf1c",
+      "layerId": "sky_overlay",
+      "chunkX": 0,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "7ec834b9c43bfb88c30e5f3d0e6ae9be3f398d5b2cca8bb534cd70a810b37444",
+      "chunkHash": "6a486e85b491ca64ceffd26e8c2289ad192643887ff96f31dc330e2a7aac86c3",
+      "layerId": "interior",
+      "chunkX": 1,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "825e87578975218b52b88c4d4d193b63f6e9491b65204aedae9bf2820855fccd",
+      "chunkHash": "64162665c49c3530075b84828826639dbac62d18faa55339ef860dad561d2121",
+      "layerId": "underground",
+      "chunkX": 1,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "84e5bcd86a295276c089145dfe3321e6e1c2f8720b0d1d40d8b74c17bd489bac",
+      "chunkHash": "2c9783d7adf0f0d82e79bfdafba0ac300143198523947d041598f6708cdc4462",
+      "layerId": "interior",
+      "chunkX": 1,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "8e4d8a693f7cb7617fb531e229a6587728052f5fe5b6e5ee3a8cff67214af474",
+      "chunkHash": "ad3e92b838d617ca40c57a394b4a97614d3fd3ceb889ac370a3d3466db8dfda5",
+      "layerId": "interior",
+      "chunkX": 0,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "99f5c1498384a84320c25698b9504ccc3032f1f9a4fa625da0dd037f2f491a02",
+      "chunkHash": "4929cd8613a067490093c248be108f1152782f054a3e61cebd69c818ae4a3905",
+      "layerId": "underground",
+      "chunkX": 0,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "a019c63a83cac0ecd6a6081721f00f4c19668286779c14d41e2d29195f515247",
+      "chunkHash": "822bd1a27a3b8c0a5968dd709b09ce67b38953d1daf9aa47dbe9be991f78350b",
+      "layerId": "sky_overlay",
+      "chunkX": 1,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "a3a547ef6fa48f0c8faf4a43196c5449cd2fac628942b9272702e1304e5fb7c3",
+      "chunkHash": "f30b668c3c0177aaf0706873f92e16b81dce681d70f8c878b994ff0f836ef259",
+      "layerId": "surface",
+      "chunkX": 1,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "a73d41f7cbee1fab6d260b4ea743bb2e5f105bbd57cad218b991f5c7f1659e80",
+      "chunkHash": "1684fd92e0fb1d0381664248e8d0ab44400beb500a6a7c1e74813b11ba2373e8",
+      "layerId": "surface",
+      "chunkX": 1,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "ab3c44f7fca640dcdfe2edad19fed37fd0ccf6354c892ff1eed5eb90cfeb313d",
+      "chunkHash": "1597b4b452e1b18c032756927d8664d5a7411b7ad62c3567aaa9c79444c48798",
+      "layerId": "interior",
+      "chunkX": 0,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "ab722a165ef3e972ab5c99700dc5e63da96c0d462d0441355dad7ca29129cd3e",
+      "chunkHash": "513a25e7d046d1d04ccfcd1b2bb88ad48177450099c870ac61fc5a7ed4c61779",
+      "layerId": "sky_overlay",
+      "chunkX": 1,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "c6121fd1611763c64fa3b2f9e3f9d8f553d859c9d383ab1f6fd3cb8dcffeef7b",
+      "chunkHash": "61fc1a2a8cc826721fb79a71973fe48e84148361ced3bcaec07a83d05671d950",
+      "layerId": "underground",
+      "chunkX": 1,
+      "chunkY": 1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "d3c576a89d95bc391e7844844f3df034b4f29a54e9a2a0670b304ec779bb491f",
+      "chunkHash": "fbc71cf9148e953eb3e40749da26f328e832e436432bbe990a2407ba964009c3",
+      "layerId": "interior",
+      "chunkX": 0,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "da223397992c25a74c2a3739bd2de562e26bfcd5387cd6de741b88d166a4d9c5",
+      "chunkHash": "b181c9b7b54ee41d61873555b8b25331ddf846bdfceff4b0998109169cf5e281",
+      "layerId": "underground",
+      "chunkX": 0,
+      "chunkY": -1,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "da627aa3e800d00d7e5ccf773de3fe586af47b2b04a87129d47649d5f4b38172",
+      "chunkHash": "0ddcb2ad8c6f536d77beabf3ab9e70e673fb5521873e461d1ad7e0b0e065a093",
+      "layerId": "sky_overlay",
+      "chunkX": 0,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "e7050b6264575ad35594f0a0397495376bbabd5bf72edc99e92cad18101c325c",
+      "chunkHash": "faea86b9dbc129b5237f648710de2252e0c937384f933af8e49e5cf473a3f07f",
+      "layerId": "surface",
+      "chunkX": 1,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    },
+    {
+      "chunkKey": "fd37b4863c0849800224673a73e440e345fcb1a630471ea5a9df7be961c4cb37",
+      "chunkHash": "e189483eac76cf74a5dcfd5a1b6b92de99a46f8fa78cad4d5703889a79161155",
+      "layerId": "surface",
+      "chunkX": 0,
+      "chunkY": 0,
+      "streamWindowIds": [
+        "infinite_east_camera_radius1",
+        "infinite_player_spawn_radius1"
+      ]
+    }
+  ]
+}

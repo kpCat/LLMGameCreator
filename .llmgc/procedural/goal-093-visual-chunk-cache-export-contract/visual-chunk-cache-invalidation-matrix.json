@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "visual_chunk_cache_invalidation_matrix_v1",
+  "goalId": "goal_093_visual_chunk_cache_export_contract",
+  "passed": true,
+  "packageCount": 4,
+  "ruleCount": 24,
+  "rows": [
+    {
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "ruleId": "invalidate_on_goal090_source_hash",
+      "invalidationKey": "goal090_source_hash",
+      "sourceValueHash": "640b97e8f0eab7c5689960348e5da056e3c3ffcb1616b524b4d27c5c4ffa0d25",
+      "knownKey": true
+    },
+    {
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "ruleId": "invalidate_on_goal091_manifest_hash",
+      "invalidationKey": "goal091_manifest_hash",
+      "sourceValueHash": "8ec6db464be9ba48b44f6cdeb3253f61ee4943611f9ebdcaa4916a0b02f78447",
+      "knownKey": true
+    },
+    {
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "ruleId": "invalidate_on_generator_version",
+      "invalidationKey": "generator_version",
+      "sourceValueHash": "0f99a8bea4f33107caf2494572c49286ddac9ab62ae61974890d35d9c988c65b",
+      "knownKey": true
+    },
+    {
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "ruleId": "invalidate_on_profile_id",
+      "invalidationKey": "profile_id",
+      "sourceValueHash": "3fea5c25d65ca56ca7671a1f1cca7947b2059b1838e1ab2069d140664d761884",
+      "knownKey": true
+    },
+    {
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "ruleId": "invalidate_on_world_seed",
+      "invalidationKey": "world_seed",
+      "sourceValueHash": "a627276987ae9974a3ed782a16ddb7482c29a83127b15aaa9c4644820af1c0f9",
+      "knownKey": true
+    },
+    {
+      "packageId": "finite_custom_255x257_window_cache_export",
+      "ruleId": "invalidate_on_stream_window_membership",
+      "invalidationKey": "stream_window_membership",
+      "sourceValueHash": "3637debea8875e2779e158b2f7f26af4282f65c2ce9bcd4ed2cb6d56773633c0",
+      "knownKey": true
+    },
+    {
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "ruleId": "invalidate_on_goal090_source_hash",
+      "invalidationKey": "goal090_source_hash",
+      "sourceValueHash": "640b97e8f0eab7c5689960348e5da056e3c3ffcb1616b524b4d27c5c4ffa0d25",
+      "knownKey": true
+    },
+    {
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "ruleId": "invalidate_on_goal091_manifest_hash",
+      "invalidationKey": "goal091_manifest_hash",
+      "sourceValueHash": "8ec6db464be9ba48b44f6cdeb3253f61ee4943611f9ebdcaa4916a0b02f78447",
+      "knownKey": true
+    },
+    {
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "ruleId": "invalidate_on_generator_version",
+      "invalidationKey": "generator_version",
+      "sourceValueHash": "0f99a8bea4f33107caf2494572c49286ddac9ab62ae61974890d35d9c988c65b",
+      "knownKey": true
+    },
+    {
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "ruleId": "invalidate_on_profile_id",
+      "invalidationKey": "profile_id",
+      "sourceValueHash": "5bd186e2dda9b56d0619896d2fe510872fd1b4a7b06dfd0a32c5936e5e492a28",
+      "knownKey": true
+    },
+    {
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "ruleId": "invalidate_on_world_seed",
+      "invalidationKey": "world_seed",
+      "sourceValueHash": "bdea1b7cd2e1150f67d1b60818dd4161dc5462a4e993101bca114d26bc64a5af",
+      "knownKey": true
+    },
+    {
+      "packageId": "huge_sparse_100000x100000_window_cache_export",
+      "ruleId": "invalidate_on_stream_window_membership",
+      "invalidationKey": "stream_window_membership",
+      "sourceValueHash": "d70a5ac7e794daa65bc57ccb35730fc354401ccc7ffd116986c9a2f39caf4554",
+      "knownKey": true
+    },
+    {
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "ruleId": "invalidate_on_goal090_source_hash",
+      "invalidationKey": "goal090_source_hash",
+      "sourceValueHash": "640b97e8f0eab7c5689960348e5da056e3c3ffcb1616b524b4d27c5c4ffa0d25",
+      "knownKey": true
+    },
+    {
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "ruleId": "invalidate_on_goal091_manifest_hash",
+      "invalidationKey": "goal091_manifest_hash",
+      "sourceValueHash": "8ec6db464be9ba48b44f6cdeb3253f61ee4943611f9ebdcaa4916a0b02f78447",
+      "knownKey": true
+    },
+    {
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "ruleId": "invalidate_on_generator_version",
+      "invalidationKey": "generator_version",
+      "sourceValueHash": "0f99a8bea4f33107caf2494572c49286ddac9ab62ae61974890d35d9c988c65b",
+      "knownKey": true
+    },
+    {
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "ruleId": "invalidate_on_profile_id",
+      "invalidationKey": "profile_id",
+      "sourceValueHash": "7fdbb88ec4ff96d2c3a7f59e1ead973b348e1a30de23616de8a8be5a1bae9ba5",
+      "knownKey": true
+    },
+    {
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "ruleId": "invalidate_on_world_seed",
+      "invalidationKey": "world_seed",
+      "sourceValueHash": "0a55d85830f07dfa7aa7eb0873e51a34818544c08ec0ccdea33e1b5aeccbf048",
+      "knownKey": true
+    },
+    {
+      "packageId": "infinite_streaming_overlap_cache_export",
+      "ruleId": "invalidate_on_stream_window_membership",
+      "invalidationKey": "stream_window_membership",
+      "sourceValueHash": "6f971f703c5f59a776d913bd10896cf93d4eb917c3496c0b2e316c27a60a1822",
+      "knownKey": true
+    },
+    {
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "ruleId": "invalidate_on_goal090_source_hash",
+      "invalidationKey": "goal090_source_hash",
+      "sourceValueHash": "640b97e8f0eab7c5689960348e5da056e3c3ffcb1616b524b4d27c5c4ffa0d25",
+      "knownKey": true
+    },
+    {
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "ruleId": "invalidate_on_goal091_manifest_hash",
+      "invalidationKey": "goal091_manifest_hash",
+      "sourceValueHash": "8ec6db464be9ba48b44f6cdeb3253f61ee4943611f9ebdcaa4916a0b02f78447",
+      "knownKey": true
+    },
+    {
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "ruleId": "invalidate_on_generator_version",
+      "invalidationKey": "generator_version",
+      "sourceValueHash": "0f99a8bea4f33107caf2494572c49286ddac9ab62ae61974890d35d9c988c65b",
+      "knownKey": true
+    },
+    {
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "ruleId": "invalidate_on_profile_id",
+      "invalidationKey": "profile_id",
+      "sourceValueHash": "5bd186e2dda9b56d0619896d2fe510872fd1b4a7b06dfd0a32c5936e5e492a28",
+      "knownKey": true
+    },
+    {
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "ruleId": "invalidate_on_world_seed",
+      "invalidationKey": "world_seed",
+      "sourceValueHash": "bdea1b7cd2e1150f67d1b60818dd4161dc5462a4e993101bca114d26bc64a5af",
+      "knownKey": true
+    },
+    {
+      "packageId": "layer_transition_runtime_handoff_sidecar",
+      "ruleId": "invalidate_on_stream_window_membership",
+      "invalidationKey": "stream_window_membership",
+      "sourceValueHash": "45b7ac29e5827688facb9200cecbd091287342788fa0a884f3d50b45b7aa12cd",
+      "knownKey": true
+    }
+  ]
+}

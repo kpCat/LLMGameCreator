@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "visual_chunk_cache_source_lineage_v1",
+  "goalId": "goal_093_visual_chunk_cache_export_contract",
+  "passed": true,
+  "goal090LineagePresent": true,
+  "goal091LineagePresent": true,
+  "goal092PreviewLineagePresent": true,
+  "sourceRecordCount": 12,
+  "records": [
+    {
+      "sourceGoalId": "goal_090_parameterized_visual_world_profiles",
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-report.md",
+      "sha256": "640b97e8f0eab7c5689960348e5da056e3c3ffcb1616b524b4d27c5c4ffa0d25",
+      "purposeTags": [
+        "goal090",
+        "report"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_090_parameterized_visual_world_profiles",
+      "relativePath": ".llmgc/procedural/goal-090-parameterized-visual-world-profiles/visual-world-profile-catalog.json",
+      "sha256": "8d844459c7aa5f80e06dd4b4b459856f69a6ee3fa62b486c92c5cca155a98dcb",
+      "purposeTags": [
+        "goal090",
+        "catalog"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-window-report.md",
+      "sha256": "1eaf411e1ad149034198eb88f04926ca220247c335c170f133f0d9d566615a1b",
+      "purposeTags": [
+        "goal091",
+        "report"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-window-catalog.json",
+      "sha256": "3ef89f00de1114bc99a72419da9d470c84165116f7c2fdbecbbc4d1533500dc5",
+      "purposeTags": [
+        "goal091",
+        "catalog"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-materialization-manifest.json",
+      "sha256": "8ec6db464be9ba48b44f6cdeb3253f61ee4943611f9ebdcaa4916a0b02f78447",
+      "purposeTags": [
+        "goal091",
+        "manifest"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-file-ledger.json",
+      "sha256": "6605a9cc510aeaf726c448d0ffe912328c4a669d49c0ccb53bb79c88eaf6dabd",
+      "purposeTags": [
+        "goal091",
+        "ledger"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-determinism-proof.json",
+      "sha256": "83f39644fc2c1fadec18174c64b3efac3f45db2a69e830882bf61427aad5dbf4",
+      "purposeTags": [
+        "goal091",
+        "determinism"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-cache-reuse-proof.json",
+      "sha256": "8d9558e536b72b8e84e324962aa2d00a8a3a95dd35c016de34e9becdfc8a59f3",
+      "purposeTags": [
+        "goal091",
+        "cache_reuse"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_091_deterministic_visual_chunk_stream_window",
+      "relativePath": ".llmgc/procedural/goal-091-deterministic-visual-chunk-stream-window/visual-chunk-stream-layer-transition-proof.json",
+      "sha256": "61086ac28aeba195c82d1fc5e3990f4e29288296413f163dc08aaf2898d0f622",
+      "purposeTags": [
+        "goal091",
+        "layer_transition"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_092_visual_world_stream_preview_workspace",
+      "relativePath": ".llmgc/procedural/goal-092-visual-world-stream-preview-workspace/visual-world-stream-preview-workspace-report.md",
+      "sha256": "b1ff52890af42f154635e8d918ddc6baa81f40672303cf89dc743a15717b28f4",
+      "purposeTags": [
+        "goal092",
+        "preview_workspace"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_092a_visual_world_preview_service_split_source_health",
+      "relativePath": ".llmgc/procedural/goal-092a-visual-world-preview-service-split-source-health/source-health-before-after.json",
+      "sha256": "5ebf157a8e3ba4e093e89873f9863305e7e0253ecd5d11a4ec9adc3aa564a7e4",
+      "purposeTags": [
+        "goal092a",
+        "source_health"
+      ]
+    },
+    {
+      "sourceGoalId": "goal_092a_visual_world_preview_service_split_source_health",
+      "relativePath": ".llmgc/procedural/goal-092a-visual-world-preview-service-split-source-health/quality-gate-scan.json",
+      "sha256": "ae60e0b2b8549c9956c2a656cfc9ffad660f559911846942d47d662739893288",
+      "purposeTags": [
+        "goal092a",
+        "quality"
+      ]
+    }
+  ]
+}

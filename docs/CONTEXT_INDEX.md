@@ -184,6 +184,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-091-deterministic-visual-chunk-stream-window/GOAL.md` | Goal 091 task: add a BCL-only Application-side deterministic visual chunk stream window materializer over Goal 090 profiles for finite clipping, huge sparse compact windows, overlapping infinite-window cache reuse and layer transitions, with final stop at `deterministic_visual_chunk_stream_window_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-092-visual-world-stream-preview-workspace/GOAL.md` | Goal 092 task: add a bounded Application/WinForms visual world stream preview workspace that consumes real Goal 086-091 disk artifacts, lists proof status and text SVG previews, writes compact workspace evidence and stops at `visual_world_stream_preview_workspace_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-092a-visual-world-preview-service-split-source-health/GOAL.md` | Goal 092A hotfix task: split the oversized Goal 092 Application service into smaller BCL-only files, add source-health before/after evidence and stop at `visual_world_preview_service_split_source_health_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-093-visual-chunk-cache-export-contract/GOAL.md` | Goal 093 task: add a BCL-only Application visual chunk cache/export contract over real Goal 091 stream-window artifacts, with deterministic manifest/readback/sidecar proofs and final stop at `visual_chunk_cache_export_contract_verification`; no Runtime, Unity, public schema, provider, Lua, generator-library, project-file or dependency changes. |
 | `docs/VALIDATION_PIPELINE.md` | Goal 089 validation policy: `check-current-goal.ps1` is the ordinary feature-goal default, `check-spine-fast.ps1` is the medium visual/world/gameplay spine route, and full `check-all.ps1` / `check-all-observed.ps1` is reserved for consolidation, milestone and shared/core-risk work. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
@@ -250,7 +251,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-tiered_validation_pipeline_verification
+visual_chunk_cache_export_contract_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -477,6 +478,12 @@ into smaller BCL-only files, records before/after source-health evidence with th
 logical lines, keeps Goal 092 behavior equivalent and strengthens Goal 092 quality evidence so no Goal092 namespace C#
 file over 1000 logical lines can pass silently. Goal 092A does not start Runtime, Unity, provider, schema, Lua,
 generator-library, project-file, dependency, binary/raster media or prompt-output work.
+Goal 093 is produced for review with `visual_chunk_cache_export_contract_verification required`, `accepted=false`,
+`implementationStatus=GREEN`; it consumes real Goal 091 stream-window artifacts into a BCL-only Application cache/export
+manifest, readback proof, overlap reuse proof, negative proof, invalidation matrix and metadata-only runtime handoff
+sidecar under `.llmgc/procedural/goal-093-visual-chunk-cache-export-contract/`. Goal 093 does not start Runtime, Unity,
+provider, schema, Lua, generator-library, project-file, dependency, binary/raster media or prompt-output work and keeps
+Goal 092A, Goal 092, Goal 091 and Goal 090 `accepted=false`.
 
 Allowed next sequence:
 
@@ -534,6 +541,7 @@ Allowed next sequence:
 52. Review Goal 091 `deterministic_visual_chunk_stream_window_verification`; it proves deterministic chunk stream windows over Goal 090 profiles, keeps Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 53. Review Goal 092 `visual_world_stream_preview_workspace_verification`; it adds an Application/WinForms preview workspace over real Goal 086-091 artifacts, keeps Goal 092, Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 54. Review Goal 092A `visual_world_preview_service_split_source_health_verification`; it repairs the Goal 092 source-health regression, keeps Goal 092A and Goal 092 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
+55. Review Goal 093 `visual_chunk_cache_export_contract_verification`; it adds the BCL-only Application cache/export contract and metadata-only runtime handoff sidecar over real Goal 091 artifacts, keeps Goal 093, Goal 092A, Goal 092, Goal 091 and Goal 090 `accepted=false`, and does not start Runtime, Unity, provider, media, schema, Lua or generator-library implementation.
 
 Kill criterion:
 
