@@ -176,6 +176,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/GOAL.md` | Goal 084 task: add a BCL-only Application-side visual asset contract/rating metadata validator, metadata-only fixtures, compact evidence and final stop at `visual_asset_contract_rating_metadata_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or prompt-dump changes. |
 | `docs/agent-tasks/goal-085-deepsearch-backed-visual-part-pack-rule-stack/GOAL.md` | Goal 085 task: consume the eight deepsearch visual stack docs into a BCL-only Application-side visual part-pack contract/rule-stack validator, metadata-only fixture packs, compact evidence and final stop at `visual_part_pack_rule_stack_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-086-deterministic-visual-microtile-materializer/GOAL.md` | Goal 086 task: consume Goal 084 visual asset slots and Goal 085 visual part-pack rule-stack metadata into a BCL-only Application deterministic visual microtile materializer, text SVG preview catalog/manifest/ledger/proofs and final stop at `deterministic_visual_microtile_materializer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/GOAL.md` | Goal 087 task: consume Goal 084 visual asset metadata, Goal 085 visual part-pack metadata and Goal 086 microtile previews into a BCL-only Application deterministic visual map patch composer, text SVG patch catalog/manifest/ledger/proofs and final stop at `deterministic_visual_map_patch_composer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
 | `docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md` | Goal 085 implementation-oriented synthesis of the deepsearch visual stack: immediate optional adapters, prototype candidates, rejected/deferred tools and non-negotiable design requirements. |
@@ -425,11 +426,14 @@ under `.llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/`. Goal 
 Goal 085 is produced for review with `visual_part_pack_rule_stack_verification required`, `accepted=false`,
 `implementationStatus=GREEN`; it consumes all eight deepsearch docs into a BCL-only Application visual part-pack
 rule-stack contract/validator/evidence seam under `.llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/`.
-Goal 086 is produced for review with `deterministic_visual_microtile_materializer_verification required`,
-`accepted=false`, `implementationStatus=GREEN`; it consumes Goal 084/085 metadata lineage into a BCL-only
-Application deterministic visual microtile materializer, writes 24 text SVG previews and compact catalog/manifest/ledger/proof
-evidence under `.llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/`, and does not start
-provider/media/runtime/schema implementation. Goal 085, Goal 083, Goal 082 and Goal 082A remain `accepted=false`.
+Goal 086 is accepted for continuation before Goal 087:
+`deterministic_visual_microtile_materializer_verification accepted for continuation before Goal 087`, without rewriting
+Goal 086 artifact accepted=false evidence. Goal 087 is produced for review with
+`deterministic_visual_map_patch_composer_verification required`, `accepted=false`, `implementationStatus=GREEN`; it consumes
+Goal 084/085/086 visual lineage into a BCL-only Application deterministic visual map patch composer, writes three 24x16
+text SVG patch previews and compact catalog/manifest/ledger/proof evidence under
+`.llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/`, and does not start provider/media/runtime/schema
+implementation. Goal 085, Goal 083, Goal 082 and Goal 082A remain `accepted=false`.
 
 Allowed next sequence:
 
@@ -478,7 +482,8 @@ Allowed next sequence:
 43. Review Goal 083 `visual_adult_layer_context_integration_verification`; it indexes/routes the visual/adult docs as policy-bounded context, keeps Goal 082 and Goal 082A `accepted=false`, and does not start a provider/media/runtime/schema implementation.
 44. Keep Goal 084 `visual_asset_contract_rating_metadata_verification` recorded as passed before Goal 085 by handoff, without rewriting Goal 084 artifact accepted=false evidence.
 45. Review Goal 085 `visual_part_pack_rule_stack_verification`; it adds the deepsearch-backed visual part-pack rule-stack foundation, keeps Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
-46. Review Goal 086 `deterministic_visual_microtile_materializer_verification`; it adds deterministic text SVG visual microtile materializer evidence, keeps Goal 085, Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
+46. Keep Goal 086 `deterministic_visual_microtile_materializer_verification` recorded as accepted for continuation before Goal 087 by handoff, without rewriting Goal 086 artifact accepted=false evidence.
+47. Review Goal 087 `deterministic_visual_map_patch_composer_verification`; it adds deterministic text SVG visual map patch composer evidence, keeps Goal 085, Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
 
 Kill criterion:
 

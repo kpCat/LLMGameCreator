@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "visual_map_patch_source_lineage_v1",
+  "goalId": "goal_087_deterministic_visual_map_patch_composer",
+  "passed": true,
+  "goal084ArtifactsGreen": true,
+  "goal084AcceptedFalse": true,
+  "goal085ArtifactsGreen": true,
+  "goal085AcceptedFalse": true,
+  "goal086ArtifactsGreen": true,
+  "goal086AcceptedFalse": true,
+  "goal086CatalogRead": true,
+  "sourceRecordCount": 15,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/visual-asset-contract-rating-metadata-report.md",
+      "exists": true,
+      "sha256": "779b6caa91091595b6b64874cd55b8c761ea5fe5a94ebd143c581e7759cdd3c4",
+      "purposeTags": [
+        "goal084",
+        "report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/visual-asset-contract-catalog.json",
+      "exists": true,
+      "sha256": "4e7255edf8e6c50466e153de1f0515692209c8ab46c60624e3f1dc17616d1369",
+      "purposeTags": [
+        "goal084",
+        "catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/visual-part-pack-rule-stack-report.md",
+      "exists": true,
+      "sha256": "650315cf065acc6d5adc6bcfdf19e0abc652dd8818de5e8b9f4ac74d2dc31880",
+      "purposeTags": [
+        "goal085",
+        "report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/visual-part-pack-catalog.json",
+      "exists": true,
+      "sha256": "a7d792da666e1551085e134b0d9e5db68ee360a6cb07d7e5ae99ff1aa1470243",
+      "purposeTags": [
+        "goal085",
+        "catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/water-biome-coverage-matrix.json",
+      "exists": true,
+      "sha256": "ba6d0806fd825d834f18683f5e03555e2c9473b77c95d98bcc9fb4149416ba78",
+      "purposeTags": [
+        "goal085",
+        "water"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/visual-microtile-materializer-report.md",
+      "exists": true,
+      "sha256": "a7a4cf97ed72ffa36c7fbccdbc5f9fb922e5ebe4239aeee02e34507f27c133ad",
+      "purposeTags": [
+        "goal086",
+        "report"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/visual-microtile-preview-catalog.json",
+      "exists": true,
+      "sha256": "87573c99c0fc6948b150c934bed099f74f33290644032c7414c803b8f1eb4866",
+      "purposeTags": [
+        "goal086",
+        "catalog"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/visual-microtile-materialization-manifest.json",
+      "exists": true,
+      "sha256": "96f8d13405eb633ffe2f38dd078a472e5c4bf71d09bef5b9a74d138511525142",
+      "purposeTags": [
+        "goal086",
+        "manifest"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/visual-microtile-water-biome-proof.json",
+      "exists": true,
+      "sha256": "f08b24f1a72734a37f74168b0ebc4ddf76497aae26456f025bc98ec8a8f570b4",
+      "purposeTags": [
+        "goal086",
+        "water"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/visual-microtile-negative-proof.json",
+      "exists": true,
+      "sha256": "11e093867934bf239b0611ba7f48847c32175071eaf2e1f1a168b354756e4926",
+      "purposeTags": [
+        "goal086",
+        "negative"
+      ]
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/visual-microtile-quality-gate-scan.json",
+      "exists": true,
+      "sha256": "63a66685eb3e33b423b339eb5aecf63c2a8ffa0d9faa2143d35dd88112c414db",
+      "purposeTags": [
+        "goal086",
+        "quality"
+      ]
+    },
+    {
+      "relativePath": "docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md",
+      "exists": true,
+      "sha256": "54e8ba793de8f3b7f9577ae528a460ba42153031532118a922b9e1638874b215",
+      "purposeTags": [
+        "deepsearch",
+        "synthesis"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+      "exists": true,
+      "sha256": "bd184f47525433f1b73788cb4389b3f648f4d0ef0971c691f85e38ea8e4976e5",
+      "purposeTags": [
+        "deepsearch",
+        "water_biome"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md",
+      "exists": true,
+      "sha256": "dfc058341964c2996a4559b2b7f609cfad0c612ccb5c4622d23972a684bb6f9d",
+      "purposeTags": [
+        "deepsearch",
+        "pseudo3d"
+      ]
+    },
+    {
+      "relativePath": "docs/deepsearch/05_SETTLEMENTS_CITIES_CARAVANS_LIVING_WORLD_VISUALS.md",
+      "exists": true,
+      "sha256": "87b57b37b9645bc32d53b714b313aab633f02afdf33c951339a33be7190a38f1",
+      "purposeTags": [
+        "deepsearch",
+        "settlement"
+      ]
+    }
+  ]
+}

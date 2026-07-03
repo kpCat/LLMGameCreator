@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "visual_map_patch_quality_gate_scan_v1",
+  "goalId": "goal_087_deterministic_visual_map_patch_composer",
+  "manualGate": "deterministic_visual_map_patch_composer_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "patchCountPassed": true,
+  "deterministicRerunStable": true,
+  "svgTextOnlyPreviews": true,
+  "allReferencesKnownGoal086Microtiles": true,
+  "waterFlowProofPassed": true,
+  "reachabilityProofPassed": true,
+  "layeringProofPassed": true,
+  "negativeProofPassed": true,
+  "sourceLineagePassed": true,
+  "noForbiddenFilesChanged": true,
+  "noExternalDependenciesAdded": true,
+  "noBinaryOrRasterMediaAdded": true,
+  "noPromptDumps": true,
+  "noProviderCalls": true,
+  "noExplicitAdultContent": true,
+  "artifactScopeReady": true,
+  "expectedChangedPathPrefixes": [
+    "src/LLMGameCreator.Application/Design/DeterministicVisualMapPatchComposer/",
+    "tests/LLMGameCreator.Tests/Application/DeterministicVisualMapPatchComposer/",
+    "tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualMapPatchComposerProductSmokeTests.cs",
+    ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/",
+    "docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/"
+  ],
+  "diagnostics": []
+}

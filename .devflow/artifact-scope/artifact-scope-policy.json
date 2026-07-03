@@ -56,7 +56,8 @@
     ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/",
     ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/",
     ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/",
-    ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/"
+    ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/",
+    ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -957,6 +958,24 @@
         "docs/agent-tasks/goal-086-deterministic-visual-microtile-materializer/",
         "src/LLMGameCreator.Application/Design/DeterministicVisualMicrotileMaterializer/",
         "tests/LLMGameCreator.Tests/Application/DeterministicVisualMicrotileMaterializer/"
+      ]
+    },
+    {
+      "scenario": "goal-087-deterministic-visual-map-patch-composer",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/DeterministicVisualMapPatchComposerProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/",
+        "docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/",
+        "src/LLMGameCreator.Application/Design/DeterministicVisualMapPatchComposer/",
+        "tests/LLMGameCreator.Tests/Application/DeterministicVisualMapPatchComposer/"
       ]
     }
   ]

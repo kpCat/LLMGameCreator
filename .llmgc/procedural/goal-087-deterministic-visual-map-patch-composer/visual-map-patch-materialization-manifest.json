@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "visual_map_patch_materialization_manifest_v1",
+  "goalId": "goal_087_deterministic_visual_map_patch_composer",
+  "generatorVersion": "goal087-map-patch-composer-v1",
+  "outputRelativeDirectory": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer",
+  "patchCount": 3,
+  "patches": [
+    {
+      "patchId": "heroes_like_overworld_24x16",
+      "patchSvgRelativePath": "patches/heroes_like_overworld_24x16.svg",
+      "svgSha256": "79f8483b8478db75ea64d43867f38918746f35c077226da94298824fc8808914",
+      "byteLength": 51564,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "rectCount": 392
+    },
+    {
+      "patchId": "mixed_biome_settlement_creature_24x16",
+      "patchSvgRelativePath": "patches/mixed_biome_settlement_creature_24x16.svg",
+      "svgSha256": "7b35bb252b3c3c9acce90e0d62c27e86ef42cacdcb2197b01385509ade68e9a0",
+      "byteLength": 51419,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "rectCount": 391
+    },
+    {
+      "patchId": "water_coast_river_lake_marsh_24x16",
+      "patchSvgRelativePath": "patches/water_coast_river_lake_marsh_24x16.svg",
+      "svgSha256": "0b336037d0ef7c5f95c92702ca13a9b50af7630b2f6aec5bbfa61444ae889f9b",
+      "byteLength": 50501,
+      "containsViewBox": true,
+      "externalResourceFree": true,
+      "scriptFree": true,
+      "rectCount": 389
+    }
+  ]
+}

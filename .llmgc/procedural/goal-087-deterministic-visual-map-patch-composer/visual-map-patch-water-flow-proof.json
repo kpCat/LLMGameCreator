@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "visual_map_patch_water_flow_proof_v1",
+  "goalId": "goal_087_deterministic_visual_map_patch_composer",
+  "passed": true,
+  "seaCovered": true,
+  "coastCovered": true,
+  "riverCovered": true,
+  "lakeCovered": true,
+  "marshCovered": true,
+  "bridgeCovered": true,
+  "dockCovered": true,
+  "flowConnectorCount": 30,
+  "rows": [
+    {
+      "patchId": "heroes_like_overworld_24x16",
+      "waterCellCount": 0,
+      "coastCellCount": 0,
+      "riverNodeCount": 0,
+      "lakeCellCount": 0,
+      "marshCellCount": 0
+    },
+    {
+      "patchId": "mixed_biome_settlement_creature_24x16",
+      "waterCellCount": 48,
+      "coastCellCount": 12,
+      "riverNodeCount": 0,
+      "lakeCellCount": 0,
+      "marshCellCount": 0
+    },
+    {
+      "patchId": "water_coast_river_lake_marsh_24x16",
+      "waterCellCount": 161,
+      "coastCellCount": 15,
+      "riverNodeCount": 16,
+      "lakeCellCount": 20,
+      "marshCellCount": 30
+    }
+  ]
+}

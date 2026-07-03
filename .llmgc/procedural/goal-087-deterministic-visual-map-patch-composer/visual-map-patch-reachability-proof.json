@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "visual_map_patch_reachability_proof_v1",
+  "goalId": "goal_087_deterministic_visual_map_patch_composer",
+  "passed": true,
+  "roadsConnected": true,
+  "settlementsReachable": true,
+  "objectsReachable": true,
+  "roadNodeCount": 71,
+  "settlementAnchorCount": 4,
+  "objectAnchorCount": 9,
+  "rows": [
+    {
+      "patchId": "heroes_like_overworld_24x16",
+      "roadPathCount": 2,
+      "roadNodeCount": 34,
+      "settlementAnchorCount": 2,
+      "objectAnchorCount": 4
+    },
+    {
+      "patchId": "mixed_biome_settlement_creature_24x16",
+      "roadPathCount": 2,
+      "roadNodeCount": 20,
+      "settlementAnchorCount": 1,
+      "objectAnchorCount": 3
+    },
+    {
+      "patchId": "water_coast_river_lake_marsh_24x16",
+      "roadPathCount": 1,
+      "roadNodeCount": 17,
+      "settlementAnchorCount": 1,
+      "objectAnchorCount": 2
+    }
+  ]
+}

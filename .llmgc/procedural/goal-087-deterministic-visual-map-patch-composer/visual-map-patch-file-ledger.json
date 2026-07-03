@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "visual_map_patch_file_ledger_v1",
+  "goalId": "goal_087_deterministic_visual_map_patch_composer",
+  "passed": true,
+  "excludesSelfAndReportByDesign": true,
+  "fileCount": 11,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-catalog.json",
+      "role": "json_manifest",
+      "sha256": "15cd814771b41354904cb73f7a9e614e46636efe58e2624b8039c83418523cb9",
+      "byteLength": 669391
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-layering-proof.json",
+      "role": "json_manifest",
+      "sha256": "1e27ae2ddc66fe2814a265cef02a6af4013a2bde9f137537deb661d26532cfb8",
+      "byteLength": 1311
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-materialization-manifest.json",
+      "role": "json_manifest",
+      "sha256": "cbaef4b343c327750bf9fd66d4983a7e5d84a89d129a4973b83313b2192cb1bd",
+      "byteLength": 1489
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-negative-proof.json",
+      "role": "json_manifest",
+      "sha256": "bf302f2ab9c183c3f9975b77fd054ec600007323270993d96c76b5e1b551289d",
+      "byteLength": 14382
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-quality-gate-scan.json",
+      "role": "json_manifest",
+      "sha256": "489041d463e1467f264323719d2add0ca93f6329cdbe3698ed0624705ad58382",
+      "byteLength": 1291
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-reachability-proof.json",
+      "role": "json_manifest",
+      "sha256": "873415a20136a8ee00742cfe20a4e522fe911121fdd7f8da03700f758eb4d56d",
+      "byteLength": 907
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-source-lineage.json",
+      "role": "json_manifest",
+      "sha256": "4a1894caab1bda032dfc608dad0ae1d960aa23cf606367d5230b44237c52879e",
+      "byteLength": 5199
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/visual-map-patch-water-flow-proof.json",
+      "role": "json_manifest",
+      "sha256": "32849677b9183c0a869b4ae0d853c32d34d62aed5aad4fa3d163659937e1f27d",
+      "byteLength": 997
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/patches/heroes_like_overworld_24x16.svg",
+      "role": "patch_svg",
+      "sha256": "79f8483b8478db75ea64d43867f38918746f35c077226da94298824fc8808914",
+      "byteLength": 51564
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/patches/mixed_biome_settlement_creature_24x16.svg",
+      "role": "patch_svg",
+      "sha256": "7b35bb252b3c3c9acce90e0d62c27e86ef42cacdcb2197b01385509ade68e9a0",
+      "byteLength": 51419
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/patches/water_coast_river_lake_marsh_24x16.svg",
+      "role": "patch_svg",
+      "sha256": "0b336037d0ef7c5f95c92702ca13a9b50af7630b2f6aec5bbfa61444ae889f9b",
+      "byteLength": 50501
+    }
+  ]
+}

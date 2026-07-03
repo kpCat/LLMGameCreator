@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "visual_map_patch_layering_proof_v1",
+  "goalId": "goal_087_deterministic_visual_map_patch_composer",
+  "passed": true,
+  "layerOrderingStable": true,
+  "terrainWaterRoadObjectSettlementCreatureOverlayLayersCovered": true,
+  "adultMetadataFallbackBound": true,
+  "rows": [
+    {
+      "patchId": "heroes_like_overworld_24x16",
+      "layerKinds": [
+        "terrain",
+        "water",
+        "road",
+        "object",
+        "settlement",
+        "creature",
+        "overlay",
+        "ratingFallback"
+      ],
+      "overlayCount": 1,
+      "adultMetadataOnlyOverlayCount": 0
+    },
+    {
+      "patchId": "mixed_biome_settlement_creature_24x16",
+      "layerKinds": [
+        "terrain",
+        "water",
+        "road",
+        "object",
+        "settlement",
+        "creature",
+        "overlay",
+        "ratingFallback"
+      ],
+      "overlayCount": 2,
+      "adultMetadataOnlyOverlayCount": 1
+    },
+    {
+      "patchId": "water_coast_river_lake_marsh_24x16",
+      "layerKinds": [
+        "terrain",
+        "water",
+        "road",
+        "object",
+        "settlement",
+        "creature",
+        "overlay",
+        "ratingFallback"
+      ],
+      "overlayCount": 1,
+      "adultMetadataOnlyOverlayCount": 0
+    }
+  ]
+}
