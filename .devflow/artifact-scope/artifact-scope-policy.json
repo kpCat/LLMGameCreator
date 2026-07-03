@@ -59,7 +59,8 @@
     ".llmgc/procedural/goal-086-deterministic-visual-microtile-materializer/",
     ".llmgc/procedural/goal-087-deterministic-visual-map-patch-composer/",
     ".llmgc/procedural/goal-088-deterministic-visual-region-composer/",
-    ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/"
+    ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/",
+    ".llmgc/procedural/goal-089-tiered-validation-pipeline/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1011,6 +1012,27 @@
       "allowedPathPrefixes": [
         ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/",
         "docs/agent-tasks/goal-088a-check-all-hang-triage-validation-repair/"
+      ]
+    },
+    {
+      "scenario": "goal-089-tiered-validation-pipeline",
+      "allowedPaths": [
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".devflow/scripts/check-current-goal.ps1",
+        ".devflow/scripts/check-spine-fast.ps1",
+        ".devflow/scripts/check-all-observed.ps1",
+        ".devflow/validation-profiles/validation-tiers.json",
+        "docs/VALIDATION_PIPELINE.md",
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md"
+      ],
+      "allowedPathPrefixes": [
+        ".devflow/validation-profiles/",
+        ".llmgc/procedural/goal-089-tiered-validation-pipeline/",
+        "docs/agent-tasks/goal-089-tiered-validation-pipeline/"
       ]
     }
   ]

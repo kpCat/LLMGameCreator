@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "llmgc_validation_tiers_v1",
+  "baselineEvidence": {
+    "source": ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/check-all-run-summary.json",
+    "fullCheckAllPassed": true,
+    "nonProductPassedCount": 1235,
+    "nonProductFailedCount": 0,
+    "warningsUnexpected": 0,
+    "wrapperWallClockSeconds": 1110.7,
+    "classification": "long_running_historical_suite_not_goal088_hang"
+  },
+  "tiers": [
+    {
+      "id": "current-goal",
+      "intendedUse": "Default per-goal validation for ordinary bounded feature, docs, process and artifact-policy goals.",
+      "requiredForTaskTypes": [
+        "ordinary_feature_goal",
+        "docs_or_policy_goal",
+        "current_goal_artifact_goal",
+        "narrow_validator_or_contract_goal"
+      ],
+      "expectedCommands": [
+        ".\\.devflow\\scripts\\check-current-goal.ps1 -Scenario <scenario> -FocusedFilter <filter> -ProductSmokeFilter <filter>",
+        "dotnet test tests\\LLMGameCreator.Tests\\LLMGameCreator.Tests.csproj --filter CurrentState",
+        ".\\.devflow\\scripts\\check-artifact-scope.ps1 -Scenario <scenario>",
+        "git diff --check"
+      ],
+      "mandatoryForEveryCodexGoal": true,
+      "mayReplaceFullCheckAll": false,
+      "runtimeGuidance": "Usually minutes; it is intended to avoid blindly waiting for the full historical route on every small goal."
+    },
+    {
+      "id": "spine-fast",
+      "intendedUse": "Medium regression tier for recent visual/world/gameplay spine seams and shared handoff docs.",
+      "requiredForTaskTypes": [
+        "visual_spine_change",
+        "world_or_gameplay_spine_change",
+        "shared_validation_policy_change",
+        "recent_high_value_regression_check"
+      ],
+      "expectedCommands": [
+        ".\\.devflow\\scripts\\check-spine-fast.ps1",
+        "focused filters: VisualAssetContractRatingMetadata, VisualPartPackRuleStack, DeterministicVisualMicrotileMaterializer, DeterministicVisualMapPatchComposer, DeterministicVisualRegionComposer",
+        "corresponding product smoke filters when practical"
+      ],
+      "mandatoryForEveryCodexGoal": false,
+      "mayReplaceFullCheckAll": false,
+      "runtimeGuidance": "Medium tier; broader than current-goal and much cheaper than Goal 088A full-route wall clock."
+    },
+    {
+      "id": "full",
+      "intendedUse": "Authoritative historical validation route for consolidation, milestone, shared/core-risk and release-like work.",
+      "requiredForTaskTypes": [
+        "milestone_consolidation",
+        "shared_core_risk",
+        "validation_infrastructure_change_that_may_affect_full_route",
+        "release_or_pre_release_gate"
+      ],
+      "expectedCommands": [
+        ".\\.devflow\\scripts\\check-all.ps1"
+      ],
+      "mandatoryForEveryCodexGoal": false,
+      "mayReplaceFullCheckAll": true,
+      "runtimeGuidance": "Goal 088A baseline observed 1235 non-product tests and about 1110.7 seconds wrapper wall clock."
+    },
+    {
+      "id": "full-observed",
+      "intendedUse": "Observable wrapper for the unchanged full check-all route when a long full run is required.",
+      "requiredForTaskTypes": [
+        "same_as_full_when_timeout_or_silent_hang_risk_matters",
+        "full_run_monitoring",
+        "check_all_hang_or_timeout_triage"
+      ],
+      "expectedCommands": [
+        ".\\.devflow\\scripts\\check-all-observed.ps1 -TimeoutMinutes 45 -HeartbeatSeconds 60"
+      ],
+      "mandatoryForEveryCodexGoal": false,
+      "mayReplaceFullCheckAll": false,
+      "runtimeGuidance": "Does not make check-all faster; it adds heartbeat, timeout and cleanup diagnostics around the full route."
+    }
+  ]
+}

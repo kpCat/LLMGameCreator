@@ -1,0 +1,12 @@
+/goal
+
+Выполни задачу из файла, который уже распакован в репозиторий:
+
+docs/agent-tasks/goal-089-tiered-validation-pipeline/GOAL.md
+
+Codex reasoning: very high
+Repo: https://github.com/kpCat/LLMGameCreator
+Working copy: C:\Users\endim\LLMGameCreator\
+Branch: main
+
+После выполнения обязательно commit/push в origin/main со статусом GREEN/BLOCKED/FAILED согласно инструкции в GOAL.md.

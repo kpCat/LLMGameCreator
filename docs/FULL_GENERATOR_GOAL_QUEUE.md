@@ -78,6 +78,7 @@ visual_adult_layer_context_integration_verification required
 visual_part_pack_rule_stack_verification required
 deterministic_visual_region_composer_verification required
 goal_088_check_all_validation_repair_verification required
+tiered_validation_pipeline_verification required
 ```
 
 Current capabilities:
@@ -96,6 +97,7 @@ Current capabilities:
 - BCL-only deterministic visual map patch composer with three 24x16 text SVG patch previews and compact catalog/manifest/ledger/water-flow/reachability/layering/negative/source-lineage proof evidence;
 - BCL-only deterministic visual region composer with compact 144x144 surface plus 144x144 underground region definition, 108 patch placements, chunk/proof evidence and text SVG overview artifacts;
 - Goal 088A full check-all validation repair proof with `.devflow/runs/20260703_075027-check-all`, 1235/1235 non-product tests, 0 warnings, no Goal 088 code changes and restored validation side-effect artifacts;
+- Goal 089 tiered validation pipeline with current-goal, spine-fast, full and full-observed validation tiers while keeping full `check-all.ps1` authoritative;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1386,14 +1388,26 @@ Produced for review. The gate remains `goal_088_check_all_validation_repair_veri
 
 Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, full check-all passed in `.devflow/runs/20260703_075027-check-all` with 1235 non-product tests passed, 0 failed, 0 skipped, 0 warnings and 18 m 14 s non-product test duration. Goal 088 focused tests passed 6/6, Goal 088 product smoke passed 1/1 and CurrentState tests passed 16/16. No Goal 088 code/test repair was required; the root cause classification is wrapper-timeout/slow historical suite, not a Goal 088 hang. Full validation regenerated deterministic historical artifacts, so 79 Goal 074-082 compact artifact and Goal 082 StreamingAssets side-effect paths were restored. Compact evidence is under `.llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/`.
 
+### Goal 089: Tiered Validation Pipeline
+
+Purpose:
+
+Add practical validation tiers so ordinary future Codex goals can run current-goal validation without blindly waiting for the full historical `check-all.ps1` route, while preserving full check-all as the authoritative full route.
+
+Status:
+
+Produced for review. The gate remains `tiered_validation_pipeline_verification required`, not passed. Goal 088A remains produced for review with `goal_088_check_all_validation_repair_verification required`, `accepted=false`; Goal 088 remains produced for review with `deterministic_visual_region_composer_verification required`, `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`; `.devflow/scripts/check-current-goal.ps1` adds the ordinary-goal route, `.devflow/scripts/check-spine-fast.ps1` adds recent visual spine regression coverage, `.devflow/scripts/check-all-observed.ps1` wraps the unchanged full route with heartbeat/timeout/cleanup diagnostics, `.devflow/validation-profiles/validation-tiers.json` defines current-goal/spine-fast/full/full-observed tiers, and `docs/VALIDATION_PIPELINE.md` records future task policy. Goal 089 adds no product code, Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file, dependency, binary media, heavy raw log or prompt dump changes. Compact evidence is under `.llmgc/procedural/goal-089-tiered-validation-pipeline/`.
+
 ## Current Recommended Next Work
 
 ```text
-goal_088_check_all_validation_repair_verification
+tiered_validation_pipeline_verification
 ```
 
 Status:
 
 ```text
-goal_088a_check_all_validation_repair_produced_for_review
+goal_089_tiered_validation_pipeline_produced_for_review
 ```

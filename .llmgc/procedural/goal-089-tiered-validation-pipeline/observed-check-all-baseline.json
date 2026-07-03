@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "goal_089_observed_check_all_baseline_v1",
+  "baselineSource": ".llmgc/procedural/goal-088a-check-all-hang-triage-validation-repair/check-all-run-summary.json",
+  "checkAllPassedInBaseline": true,
+  "checkAllCommand": ".\\.devflow\\scripts\\check-all.ps1",
+  "checkAllRunDirectory": ".devflow/runs/20260703_075027-check-all",
+  "nonProductPassedCount": 1235,
+  "nonProductFailedCount": 0,
+  "nonProductSkippedCount": 0,
+  "warningsUnexpected": 0,
+  "wrapperWallClockSeconds": 1110.7,
+  "rootCauseClassification": "wrapper_timeout_slow_historical_suite_not_goal088_hang",
+  "goal089ObservedWrapperDryRun": ".devflow/runs/goal-089-check-all-observed-dry-run-check-all-observed/summary.json",
+  "goal089FullObservedRunStatus": "not_rerun",
+  "goal089FullObservedRunReason": "Skipped to keep this process goal within bounded wall-clock; Goal 089 does not claim a fresh full check-all pass and relies on the Goal 088A baseline plus unchanged check-all.ps1 default behavior."
+}

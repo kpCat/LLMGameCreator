@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T05:30:00Z",
+    "updated_at_utc":  "2026-07-03T05:35:00Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 088A check-all validation repair produced for review",
-    "gate_status":  "goal_088_check_all_validation_repair_verification",
+    "current_phase_title":  "Goal 089 tiered validation pipeline produced for review",
+    "gate_status":  "tiered_validation_pipeline_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 088A Check-All Hang Triage Validation Repair is produced for review: goal_088_check_all_validation_repair_verification required, accepted=false. Full check-all passed in run .devflow/runs/20260703_075027-check-all with 1235 non-product tests and 0 warnings, repairing the Goal 088 validation blocker. Goal 088 remains produced for review: deterministic_visual_region_composer_verification required, accepted=false.",
-    "current_user_action":  "Review Goal 088A check-all validation repair evidence. Goal 088A is validation/evidence/docs only; it did not modify Goal 088 code, Unity, Runtime, public schema, providers, Lua, generator-library, project files, dependencies, binary media or prompt output. Goal 088 remains accepted=false until separate user review accepts it.",
-    "recommended_next_decision":  "Review Goal 088A validation repair evidence and only mark goal_088_check_all_validation_repair_verification passed after explicit user acceptance; do not mark Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
+    "active_manual_gate":  "Goal 089 Tiered Validation Pipeline is produced for review: tiered_validation_pipeline_verification required, accepted=false. check-all.ps1 default behavior is preserved; check-current-goal.ps1, check-spine-fast.ps1 and check-all-observed.ps1 add lower-tier and observable validation routes. Goal 088A and Goal 088 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 089 tiered validation pipeline evidence. Goal 089 is devflow/docs/evidence only; it did not modify product code, Unity, Runtime, public schema, providers, Lua, generator-library, project files, dependencies, binary media or prompt output. Goal 089 remains accepted=false until explicit user review accepts it.",
+    "recommended_next_decision":  "Review Goal 089 validation pipeline evidence and only mark tiered_validation_pipeline_verification passed after explicit user acceptance; do not mark Goal 088A, Goal 088, Goal 085, Goal 083, Goal 082 or Goal 082A passed until their separate manual gates are explicitly accepted.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "tiered_validation_pipeline_verification",
                                                         "goal_088_check_all_validation_repair_verification",
                                                         "deterministic_visual_region_composer_verification",
                                                         "deterministic_visual_map_patch_composer_verification",
@@ -114,7 +115,8 @@
                            "goal_086_manual_gate":  "deterministic_visual_microtile_materializer_verification",
                            "goal_087_manual_gate":  "deterministic_visual_map_patch_composer_verification",
                            "goal_088_manual_gate":  "deterministic_visual_region_composer_verification",
-                           "goal_088a_manual_gate":  "goal_088_check_all_validation_repair_verification"
+                           "goal_088a_manual_gate":  "goal_088_check_all_validation_repair_verification",
+                           "goal_089_manual_gate":  "tiered_validation_pipeline_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -405,6 +407,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "tiered_validation_pipeline_verification",
+                                          "goal_089_tiered_validation_pipeline",
+                                          "manual_review_goal_089_tiered_validation_pipeline",
                                           "goal_088_check_all_validation_repair_verification",
                                           "goal_088a_check_all_hang_triage_validation_repair",
                                           "manual_review_goal_088a_check_all_validation_repair",
@@ -449,10 +454,15 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "goal_088_check_all_validation_repair_verification",
-    "recommended_next_work_item_title":  "Review Goal 088A check-all validation repair",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-088a-check-all-hang-triage-validation-repair/GOAL.md",
+    "recommended_next_work_item":  "tiered_validation_pipeline_verification",
+    "recommended_next_work_item_title":  "Review Goal 089 tiered validation pipeline",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-089-tiered-validation-pipeline/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal 089 tiered validation pipeline evidence",
+                                              "Keep Goal 089 accepted=false until user review accepts it",
+                                              "Use check-current-goal.ps1 as the default ordinary-goal validation route",
+                                              "Use check-spine-fast.ps1 after visual/world/gameplay spine changes",
+                                              "Use check-all.ps1 or check-all-observed.ps1 for consolidation, milestone and shared/core-risk changes",
                                               "Review Goal 088A check-all validation repair evidence",
                                               "Keep Goal 088A accepted=false until user review accepts it",
                                               "Goal 088 full check-all blocker is repaired by .devflow/runs/20260703_075027-check-all",
@@ -469,6 +479,12 @@
                                                   "AGENTS.md",
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
+                                                  "docs/VALIDATION_PIPELINE.md",
+                                                  "docs/agent-tasks/goal-089-tiered-validation-pipeline/GOAL.md",
+                                                  ".devflow/validation-profiles/validation-tiers.json",
+                                                  ".devflow/scripts/check-current-goal.ps1",
+                                                  ".devflow/scripts/check-spine-fast.ps1",
+                                                  ".devflow/scripts/check-all-observed.ps1",
                                                   "docs/agent-tasks/goal-088-deterministic-visual-region-composer/GOAL.md",
                                                   "docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/GOAL.md",
                                                   "docs/agent-tasks/goal-086-deterministic-visual-microtile-materializer/GOAL.md",
@@ -664,7 +680,8 @@
                              "Gameplay consequence depth matrix command plans, runtime state delta proof, save/load replay audit and Unity Alpha marker sidecars",
                              "Integrated campaign timeline simulation matrix rows, cascade and arbitration ledgers, save/load replay audit and Unity Alpha campaign_timeline marker sidecars",
                              "Goal 082 Unity Alpha StreamingAssets handoff payload, Unity probe read proof, negative proof and WinForms Unity Handoff tab sidecars",
-                             "Goal 083 visual/adult layer context index, media pipeline roadmap, policy routing matrix and compact docs-integration evidence"
+                             "Goal 083 visual/adult layer context index, media pipeline roadmap, policy routing matrix and compact docs-integration evidence",
+                             "Goal 089 tiered validation wrappers, validation tier profile, validation policy doc and compact process evidence"
                          ],
     "state_update_rule":  "Update this file pair after every accepted product slice, accepted hotfix, accepted goal, produced-for-review goal, process-gate adoption or real environment blocker; preserve M5/M6 Locked semantics until explicitly unlocked by the user; after Goal 035 acceptance recommend Goal 036 as next work but do not start Goal 036 implementation without a new explicit user request.",
     "content_generation_at_scale_artifact_verification":  {
@@ -2027,5 +2044,22 @@
                                                                                       "Goal 088A adds no public GamePackage schema change, Runtime change, Unity code change, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary or raster media, generated image asset, real adult fixture, heavy raw log or prompt dump."
                                                                                   ],
                                                               "next_action":  "review_goal_088a_check_all_validation_repair"
+                                                          },
+    "tiered_validation_pipeline_verification":  {
+                                                   "status":  "produced_for_review",
+                                                   "accepted":  false,
+                                                   "evidence_source":  "goal_089_tiered_validation_pipeline",
+                                                   "observed_result":  [
+                                                                           "Goal 089 produces tiered validation pipeline evidence under .llmgc/procedural/goal-089-tiered-validation-pipeline with accepted=false.",
+                                                                           "check-all.ps1 default behavior is preserved; Goal 089 does not remove, skip or weaken the full route.",
+                                                                           "check-current-goal.ps1 adds the default ordinary-goal validation route with restore/build, focused tests, optional product smoke, CurrentState, optional artifact scope, git diff --check, heartbeat and summary JSON.",
+                                                                           "check-spine-fast.ps1 adds a medium regression route for the latest visual spine filters and matching product smoke filters while isolating product-smoke output under .devflow/runs.",
+                                                                           "check-all-observed.ps1 wraps the unchanged full check-all route with timeout, heartbeat, process cleanup diagnostics and summary JSON.",
+                                                                           ".devflow/validation-profiles/validation-tiers.json defines current-goal, spine-fast, full and full-observed tiers.",
+                                                                           "docs/VALIDATION_PIPELINE.md documents that ordinary goals use current-goal by default, spine-fast is recommended for visual/world/gameplay spine changes, and full check-all remains required for consolidation, milestone and shared/core-risk work.",
+                                                                           "Goal 088A remains the full-run baseline: 1235 non-product tests passed, 0 warnings and wrapper_timeout_slow_historical_suite_not_goal088_hang.",
+                                                                           "Goal 089 adds no product code, Runtime, Unity, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file, dependency, binary media, heavy raw log or prompt dump changes."
+                                                                       ],
+                                                   "next_action":  "review_goal_089_tiered_validation_pipeline"
                                                           }
 }

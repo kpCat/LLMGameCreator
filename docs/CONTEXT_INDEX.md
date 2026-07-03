@@ -179,6 +179,8 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-087-deterministic-visual-map-patch-composer/GOAL.md` | Goal 087 task: consume Goal 084 visual asset metadata, Goal 085 visual part-pack metadata and Goal 086 microtile previews into a BCL-only Application deterministic visual map patch composer, text SVG patch catalog/manifest/ledger/proofs and final stop at `deterministic_visual_map_patch_composer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-088-deterministic-visual-region-composer/GOAL.md` | Goal 088 task: consume Goal 084 visual asset metadata, Goal 085 visual part-pack metadata, Goal 086 microtile metadata and Goal 087 visual map patches into a BCL-only Application deterministic visual region composer, compact region definition/placement/chunk/proof artifacts, text SVG region overviews and final stop at `deterministic_visual_region_composer_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/agent-tasks/goal-088a-check-all-hang-triage-validation-repair/GOAL.md` | Goal 088A task: validation-only check-all hang triage and repair after Goal 088, with full `.devflow/scripts/check-all.ps1` proof, compact triage evidence and final stop at `goal_088_check_all_validation_repair_verification`; no feature work, public schema, Runtime, Unity code, provider, media, Lua, generator-library, project-file or dependency changes. |
+| `docs/agent-tasks/goal-089-tiered-validation-pipeline/GOAL.md` | Goal 089 task: add tiered devflow validation wrappers, validation tier profile, validation policy docs and compact evidence with final stop at `tiered_validation_pipeline_verification`; `check-all.ps1` remains authoritative and unchanged by default. |
+| `docs/VALIDATION_PIPELINE.md` | Goal 089 validation policy: `check-current-goal.ps1` is the ordinary feature-goal default, `check-spine-fast.ps1` is the medium visual/world/gameplay spine route, and full `check-all.ps1` / `check-all-observed.ps1` is reserved for consolidation, milestone and shared/core-risk work. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
 | `docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md` | Goal 085 implementation-oriented synthesis of the deepsearch visual stack: immediate optional adapters, prototype candidates, rejected/deferred tools and non-negotiable design requirements. |
@@ -244,7 +246,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-goal_088_check_all_validation_repair_verification
+tiered_validation_pipeline_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -443,6 +445,10 @@ Goal 088A is produced for review with `goal_088_check_all_validation_repair_veri
 `.devflow/runs/20260703_075027-check-all` with 1235/1235 non-product tests and 0 warnings, classifies the prior blocker
 as a wrapper-timeout/slow-suite issue rather than a Goal 088 hang, restores 79 historical validation side-effect paths,
 and leaves Goal 088 artifacts `accepted=false`.
+Goal 089 is produced for review with `tiered_validation_pipeline_verification required`, `accepted=false`,
+`implementationStatus=GREEN`; it adds tiered validation wrappers, a validation profile, policy docs and compact evidence
+without weakening full `check-all.ps1`, without asking the user to manually run check-all, and without marking Goal 088A
+or Goal 088 accepted.
 
 Allowed next sequence:
 
@@ -495,6 +501,7 @@ Allowed next sequence:
 47. Keep Goal 087 `deterministic_visual_map_patch_composer_verification` recorded as accepted for continuation before Goal 088 by handoff, without rewriting Goal 087 artifact accepted=false evidence.
 48. Review Goal 088 `deterministic_visual_region_composer_verification`; it adds deterministic text SVG visual region composer evidence, keeps Goal 085, Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
 49. Review Goal 088A `goal_088_check_all_validation_repair_verification`; it repairs the Goal 088 full check-all blocker, keeps Goal 088 artifacts `accepted=false`, and does not start provider/media/runtime/schema implementation.
+50. Review Goal 089 `tiered_validation_pipeline_verification`; it adds tiered validation policy/wrappers, keeps full check-all authoritative, keeps Goal 088A and Goal 088 `accepted=false`, and does not start product/runtime/provider/media/schema implementation.
 
 Kill criterion:
 

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "goal_089_current_goal_dry_run_summary_v1",
+  "sourceRunSummary": ".devflow/runs/goal-089-current-goal-dry-run-check-current-goal/summary.json",
+  "status": "passed",
+  "dryRun": true,
+  "runId": "goal-089-current-goal-dry-run-check-current-goal",
+  "scenario": "goal-089-tiered-validation-pipeline",
+  "focusedFilter": "CurrentState",
+  "productSmokeFilter": "",
+  "timeoutMinutes": 45,
+  "heartbeatSeconds": 60,
+  "plannedSteps": [
+    "dotnet restore LLMGameCreator.sln",
+    "dotnet build LLMGameCreator.sln --configuration Debug --no-restore /p:EnableWindowsTargeting=true",
+    "dotnet test tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj --configuration Debug --no-build --filter CurrentState /p:EnableWindowsTargeting=true",
+    "dotnet test tests/LLMGameCreator.Tests/LLMGameCreator.Tests.csproj --configuration Debug --no-build --filter CurrentState /p:EnableWindowsTargeting=true",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File ./.devflow/scripts/check-artifact-scope.ps1 -Scenario goal-089-tiered-validation-pipeline",
+    "git diff --check"
+  ],
+  "skippedSteps": [
+    {
+      "name": "product-smoke-tests",
+      "reason": "ProductSmokeFilter not provided"
+    }
+  ],
+  "writesTrackedEvidence": false
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "goal_089_spine_fast_dry_run_summary_v1",
+  "sourceRunSummary": ".devflow/runs/goal-089-spine-fast-dry-run-check-spine-fast/summary.json",
+  "status": "passed",
+  "dryRun": true,
+  "runId": "goal-089-spine-fast-dry-run-check-spine-fast",
+  "timeoutMinutes": 45,
+  "heartbeatSeconds": 60,
+  "focusedFilters": [
+    "VisualAssetContractRatingMetadata",
+    "VisualPartPackRuleStack",
+    "DeterministicVisualMicrotileMaterializer",
+    "DeterministicVisualMapPatchComposer",
+    "DeterministicVisualRegionComposer"
+  ],
+  "productSmokeFilters": [
+    "VisualAssetContractRatingMetadataProductSmoke",
+    "VisualPartPackRuleStackProductSmoke",
+    "DeterministicVisualMicrotileMaterializerProductSmoke",
+    "DeterministicVisualMapPatchComposerProductSmoke",
+    "DeterministicVisualRegionComposerProductSmoke"
+  ],
+  "isolatedProductSmokeProjectDir": ".devflow/runs/goal-089-spine-fast-dry-run-check-spine-fast/test-artifacts/project-root",
+  "isolatedProductSmokePackageOutputDir": ".devflow/runs/goal-089-spine-fast-dry-run-check-spine-fast/test-artifacts/package-output",
+  "plannedStepCount": 14,
+  "writesTrackedEvidence": false
+}

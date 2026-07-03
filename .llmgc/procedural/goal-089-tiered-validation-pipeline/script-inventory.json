@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "goal_089_script_inventory_v1",
+  "checkAllDefaultBehaviorPreserved": true,
+  "checkAllEdited": false,
+  "scripts": [
+    {
+      "path": ".devflow/scripts/check-all.ps1",
+      "role": "authoritative full route",
+      "sha256": "7ed1cf0aac5c8d2a5f3ad777a4f8f295dd8781f361dd7bd4fdb3e28171ebcd12",
+      "changedByGoal089": false
+    },
+    {
+      "path": ".devflow/scripts/check-current-goal.ps1",
+      "role": "default ordinary-goal validation wrapper",
+      "sha256": "49b14052c6400221ab99fe4b4f920bee23964b4464fb50df4e2c990d4e25498d",
+      "changedByGoal089": true
+    },
+    {
+      "path": ".devflow/scripts/check-spine-fast.ps1",
+      "role": "medium visual/world/gameplay spine validation wrapper",
+      "sha256": "d49fc8941d272943f4615c68204253872e597726f39a9890618bc9debae33a26",
+      "changedByGoal089": true
+    },
+    {
+      "path": ".devflow/scripts/check-all-observed.ps1",
+      "role": "observable wrapper for unchanged full check-all",
+      "sha256": "0fd2770bd0f65bbaa7376dc25912914a2cdc9c88decbd18ae60115def8a4465e",
+      "changedByGoal089": true
+    },
+    {
+      "path": ".devflow/validation-profiles/validation-tiers.json",
+      "role": "tier policy profile",
+      "sha256": "0dff949b11924ddf5793a3961f1da02845c920ba1b69bd33ac477651f169ee39",
+      "changedByGoal089": true
+    },
+    {
+      "path": "docs/VALIDATION_PIPELINE.md",
+      "role": "human validation policy",
+      "sha256": "1b5a0fef71c5f3081cc5db8cc548e4bc769f85fd2c7b66272553fb631b4f3653",
+      "changedByGoal089": true
+    }
+  ]
+}

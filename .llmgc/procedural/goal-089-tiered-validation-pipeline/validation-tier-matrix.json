@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "goal_089_validation_tier_matrix_v1",
+  "manualGate": "tiered_validation_pipeline_verification",
+  "accepted": false,
+  "tiers": [
+    {
+      "id": "current-goal",
+      "mandatoryForEveryCodexGoal": true,
+      "mayReplaceFullCheckAll": false,
+      "command": ".\\.devflow\\scripts\\check-current-goal.ps1 -Scenario <scenario> -FocusedFilter <filter> -ProductSmokeFilter <filter>",
+      "requiredFor": [
+        "ordinary_feature_goal",
+        "docs_or_policy_goal",
+        "current_goal_artifact_goal",
+        "narrow_validator_or_contract_goal"
+      ]
+    },
+    {
+      "id": "spine-fast",
+      "mandatoryForEveryCodexGoal": false,
+      "mayReplaceFullCheckAll": false,
+      "command": ".\\.devflow\\scripts\\check-spine-fast.ps1",
+      "requiredFor": [
+        "visual_spine_change",
+        "world_or_gameplay_spine_change",
+        "shared_validation_policy_change"
+      ]
+    },
+    {
+      "id": "full",
+      "mandatoryForEveryCodexGoal": false,
+      "mayReplaceFullCheckAll": true,
+      "command": ".\\.devflow\\scripts\\check-all.ps1",
+      "requiredFor": [
+        "milestone_consolidation",
+        "shared_core_risk",
+        "release_or_pre_release_gate"
+      ]
+    },
+    {
+      "id": "full-observed",
+      "mandatoryForEveryCodexGoal": false,
+      "mayReplaceFullCheckAll": false,
+      "command": ".\\.devflow\\scripts\\check-all-observed.ps1 -TimeoutMinutes 45 -HeartbeatSeconds 60",
+      "requiredFor": [
+        "full_run_monitoring",
+        "check_all_hang_or_timeout_triage"
+      ]
+    }
+  ],
+  "policyDoc": "docs/VALIDATION_PIPELINE.md",
+  "profileDoc": ".devflow/validation-profiles/validation-tiers.json"
+}
