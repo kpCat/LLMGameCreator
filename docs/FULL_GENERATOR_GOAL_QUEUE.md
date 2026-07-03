@@ -61,6 +61,7 @@ edit_driven_spine_quality_consolidation_verification accepted for continuation b
 source_format_line_ending_guard_verification passed before Goal 080
 edit_driven_gamepackage_runtime_preview_bridge_verification passed before Goal 081
 edit_driven_gamepackage_runtime_preview_playthrough_verification passed before Goal 082
+visual_asset_contract_rating_metadata_verification passed before Goal 085
 ```
 
 Produced for review:
@@ -72,7 +73,7 @@ generator_spine_quality_consolidation_verification required
 edit_driven_unity_alpha_streamingassets_handoff_verification required
 source_format_physical_line_repair_verification required
 visual_adult_layer_context_integration_verification required
-visual_asset_contract_rating_metadata_verification required
+visual_part_pack_rule_stack_verification required
 ```
 
 Current capabilities:
@@ -86,6 +87,7 @@ Current capabilities:
 - generated scene projection derived from package/config/asset refs;
 - generated Unity runtime state loop evidence with quest/dialogue/item/inventory/event before-after transitions;
 - BCL-only visual asset contract/rating metadata validator with metadata-only fixtures;
+- BCL-only visual part-pack rule-stack validator with deepsearch lineage, six metadata-only fixture packs, Goal084 binding matrix and water/body-plan/UI/adult boundary proof;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1255,14 +1257,52 @@ Metadata fixtures:
 
 Validator coverage rejects invalid ids, absolute paths, prompt text as source of truth, safe/public export without safe-approved refs or deterministic fallback, adult-enabled metadata without explicit rating/export policy, adult-enabled public export without fallback, provider candidate promotion, unreviewed/rejected promotion, approved refs missing hash/path/provenance, missing required fallback, rating/export contradictions, age-ambiguous/non-sapient/non-eligible adult eligibility flags, duplicate slot ids and unknown strict recipe/part-pack refs. Goal 084 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, binary media, generated image asset, real adult fixture or explicit prompt dump changes.
 
+Goal 084 is accepted by the Goal 085 handoff:
+`visual_asset_contract_rating_metadata_verification passed before Goal 085`.
+The Goal 084 artifact remains `accepted=false` and is not rewritten.
+
+### Goal 085: Deepsearch-Backed Visual Part-Pack Rule Stack
+
+Purpose:
+
+Consume the eight `docs/deepsearch/*.md` visual-stack research files into a BCL-only Application-side visual part-pack contract and rule-stack validator. The goal bridges the Goal 083 visual/adult routing context, the accepted Goal 084 metadata contract foundation and the future procedural visual stack without adding media generation, providers, Runtime/Unity consumers, public GamePackage schema changes or external dependencies.
+
+Status:
+
+Produced for review. The gate remains `visual_part_pack_rule_stack_verification required`, not passed. Goal 083, Goal 082 and Goal 082A remain produced-for-review with `accepted=false`.
+
+Implementation evidence: `implementationStatus=GREEN`, `accepted=false`, six metadata-only fixture packs, all valid fixtures passing, negative proof passing, all eight deepsearch docs consumed as lineage, Goal084 slot bindings passing, water/coast/river/lake/marsh coverage passing, creature body-plan/equipment grammar capacity represented as metadata and adult/rating extension kept metadata-only plus safe-fallback-bound. Application models and validators live under `src/LLMGameCreator.Application/Design/VisualPartPackRuleStack/`, focused tests under `tests/LLMGameCreator.Tests/Application/VisualPartPackRuleStack/`, product smoke under `tests/LLMGameCreator.Tests/ProductSmoke/VisualPartPackRuleStackProductSmokeTests.cs`, and compact evidence under `.llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/`.
+
+Fixture packs:
+
+- `fantasy_overworld_tile_part_pack`
+- `water_coast_river_marsh_part_pack`
+- `settlement_building_facade_part_pack`
+- `creature_bodyplan_equipment_part_pack`
+- `ui_theme_icon_effect_part_pack`
+- `adult_rating_gated_extension_metadata_only`
+
+Routed deepsearch source documents:
+
+- `docs/deepsearch/01_PROCEDURAL_VISUAL_SYNTHESIS_CORE_AND_PART_PACKS.md`
+- `docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md`
+- `docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md`
+- `docs/deepsearch/04_CREATURE_NPC_APPEARANCE_BODYPLAN_PAPERDOLL.md`
+- `docs/deepsearch/05_SETTLEMENTS_CITIES_CARAVANS_LIVING_WORLD_VISUALS.md`
+- `docs/deepsearch/06_UI_THEMES_EFFECTS_WEATHER_DAYNIGHT_VFX.md`
+- `docs/deepsearch/07_MEDIA_PIPELINE_PROVIDER_QUARANTINE_PROVENANCE_RATING_ADULT.md`
+- `docs/deepsearch/08_EXISTING_LIBRARIES_AND_TOOLS_SCOUTING.md`
+
+Validator coverage rejects duplicate ids, absolute paths, missing masks/sockets/anchors for layered parts, unknown palette and recipe refs, adult extension without safe fallback or eligible body-plan metadata, water packs without coast/river/lake/marsh coverage, tile packs without transition/autotile rules, creature packs without body-plan compatibility rules, equipment overlays without socket compatibility, UI/effect packs without safe fallback, prompt text as source of truth, provider candidates treated as approved, cyclic recipe dependencies and unsafe export-policy contradictions. Goal 085 adds no public GamePackage schema, Runtime, Unity, provider, LLM/RAG/media execution, Lua, generator-library, project-file, binary media, generated image asset, real adult fixture or explicit prompt dump changes.
+
 ## Current Recommended Next Work
 
 ```text
-visual_asset_contract_rating_metadata_verification
+visual_part_pack_rule_stack_verification
 ```
 
 Status:
 
 ```text
-goal_084_visual_asset_contract_rating_metadata_produced_for_review
+goal_085_deepsearch_backed_visual_part_pack_rule_stack_produced_for_review
 ```

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "water_biome_coverage_matrix_v1",
+  "goalId": "goal_085_deepsearch_backed_visual_part_pack_rule_stack",
+  "passed": true,
+  "packId": "water_coast_river_marsh_part_pack",
+  "seaCovered": true,
+  "lakeCovered": true,
+  "riverCovered": true,
+  "coastCovered": true,
+  "marshCovered": true,
+  "bridgeCovered": true,
+  "dockCovered": true,
+  "waterObjectCovered": true
+}

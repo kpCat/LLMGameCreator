@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "visual_part_pack_validation_matrix_v1",
+  "goalId": "goal_085_deepsearch_backed_visual_part_pack_rule_stack",
+  "passed": true,
+  "fixturePackCount": 6,
+  "rows": [
+    {
+      "packId": "adult_rating_gated_extension_metadata_only",
+      "kind": "adultRatingExtension",
+      "passed": true,
+      "partCount": 2,
+      "recipeCount": 1,
+      "hasSafeFallback": true,
+      "diagnostics": []
+    },
+    {
+      "packId": "creature_bodyplan_equipment_part_pack",
+      "kind": "creatureBodyPlanEquipment",
+      "passed": true,
+      "partCount": 6,
+      "recipeCount": 1,
+      "hasSafeFallback": true,
+      "diagnostics": []
+    },
+    {
+      "packId": "fantasy_overworld_tile_part_pack",
+      "kind": "tileTerrain",
+      "passed": true,
+      "partCount": 6,
+      "recipeCount": 1,
+      "hasSafeFallback": true,
+      "diagnostics": []
+    },
+    {
+      "packId": "settlement_building_facade_part_pack",
+      "kind": "settlementFacade",
+      "passed": true,
+      "partCount": 6,
+      "recipeCount": 1,
+      "hasSafeFallback": true,
+      "diagnostics": []
+    },
+    {
+      "packId": "ui_theme_icon_effect_part_pack",
+      "kind": "uiThemeEffect",
+      "passed": true,
+      "partCount": 6,
+      "recipeCount": 1,
+      "hasSafeFallback": true,
+      "diagnostics": []
+    },
+    {
+      "packId": "water_coast_river_marsh_part_pack",
+      "kind": "waterBiome",
+      "passed": true,
+      "partCount": 6,
+      "recipeCount": 1,
+      "hasSafeFallback": true,
+      "diagnostics": []
+    }
+  ]
+}

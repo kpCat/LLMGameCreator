@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "visual_part_pack_quality_gate_scan_v1",
+  "goalId": "goal_085_deepsearch_backed_visual_part_pack_rule_stack",
+  "manualGate": "visual_part_pack_rule_stack_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "allDeepsearchDocsConsumed": true,
+  "goal084ContractLineagePassed": true,
+  "validFixturesPassed": true,
+  "negativeProofPassed": true,
+  "waterBiomeCoveragePassed": true,
+  "creatureBodyPlanEquipmentCoveragePassed": true,
+  "uiEffectWeatherDayNightCoveragePassed": true,
+  "adultMetadataOnlyFallbackBound": true,
+  "noForbiddenFilesChanged": true,
+  "noExternalDependenciesAdded": true,
+  "noImagesMediaBinaryAssetsAdded": true,
+  "noProviderIntegrationAdded": true,
+  "noRuntimeOrUnityChanged": true,
+  "noPublicGamePackageSchemaChanged": true,
+  "noProjectFilesChanged": true,
+  "artifactScopeReady": true,
+  "expectedChangedPathPrefixes": [
+    "src/LLMGameCreator.Application/Design/VisualPartPackRuleStack/",
+    "tests/LLMGameCreator.Tests/Application/VisualPartPackRuleStack/",
+    "tests/LLMGameCreator.Tests/ProductSmoke/VisualPartPackRuleStackProductSmokeTests.cs",
+    ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/",
+    "docs/agent-tasks/goal-085-deepsearch-backed-visual-part-pack-rule-stack/"
+  ],
+  "diagnostics": []
+}

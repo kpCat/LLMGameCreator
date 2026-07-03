@@ -174,8 +174,18 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-082a-source-format-physical-line-repair/GOAL.md` | Goal 082A hotfix task: repair the Goal 082 source-format physical-line guard backstop with raw-byte scan metrics, explicit Unity probe / WinForms parent / Application seam coverage, compact Goal 082A evidence and final stop at `source_format_physical_line_repair_verification`, while keeping Goal 082 accepted=false. |
 | `docs/agent-tasks/goal-083-visual-adult-layer-context-integration/GOAL.md` | Goal 083 docs/context task: integrate visual/adult-layer docs into the official context spine, queue, state docs, debt register and compact evidence, with final stop at `visual_adult_layer_context_integration_verification`; no code, Unity, schema, provider, media asset or prompt dump changes. |
 | `docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/GOAL.md` | Goal 084 task: add a BCL-only Application-side visual asset contract/rating metadata validator, metadata-only fixtures, compact evidence and final stop at `visual_asset_contract_rating_metadata_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or prompt-dump changes. |
+| `docs/agent-tasks/goal-085-deepsearch-backed-visual-part-pack-rule-stack/GOAL.md` | Goal 085 task: consume the eight deepsearch visual stack docs into a BCL-only Application-side visual part-pack contract/rule-stack validator, metadata-only fixture packs, compact evidence and final stop at `visual_part_pack_rule_stack_verification`; no public schema, Runtime, Unity, provider, media, Lua, generator-library, project-file or dependency changes. |
 | `docs/context/VISUAL_ADULT_LAYER_CONTEXT_INDEX.md` | Goal 083 visual/adult routing index: source docs, architecture rules, rating boundary, safe fallback rules, provider quarantine/promotion and stop conditions for future visual/media tasks. |
 | `docs/proposals/VISUAL_MEDIA_PIPELINE_IMPLEMENTATION_ROADMAP.md` | Goal 083 future visual/media roadmap: bounded stages from visual asset contract/rating metadata through approved asset consumption, keeping providers editor-side and Runtime/Unity provider-free. |
+| `docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md` | Goal 085 implementation-oriented synthesis of the deepsearch visual stack: immediate optional adapters, prototype candidates, rejected/deferred tools and non-negotiable design requirements. |
+| `docs/deepsearch/01_PROCEDURAL_VISUAL_SYNTHESIS_CORE_AND_PART_PACKS.md` | Deepsearch source: visual synthesis core, part packs, metadata contracts, adapter boundaries and provenance/review direction. |
+| `docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md` | Deepsearch source: tile, biome, water, coast, river, lake, marsh and large-map generation constraints. |
+| `docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md` | Deepsearch source: pseudo-3D and first-person presentation from 2D assets through sidecar contracts. |
+| `docs/deepsearch/04_CREATURE_NPC_APPEARANCE_BODYPLAN_PAPERDOLL.md` | Deepsearch source: creature/NPC body-plan grammar, equipment sockets, paperdoll layering and 100+ species scalability. |
+| `docs/deepsearch/05_SETTLEMENTS_CITIES_CARAVANS_LIVING_WORLD_VISUALS.md` | Deepsearch source: settlement, city, caravan, facade and living-world visual layout contracts. |
+| `docs/deepsearch/06_UI_THEMES_EFFECTS_WEATHER_DAYNIGHT_VFX.md` | Deepsearch source: UI themes, icon/effect profiles, weather and day-night visual layers. |
+| `docs/deepsearch/07_MEDIA_PIPELINE_PROVIDER_QUARANTINE_PROVENANCE_RATING_ADULT.md` | Deepsearch source: editor-only provider quarantine, provenance, rating, export policy and adult metadata boundary. |
+| `docs/deepsearch/08_EXISTING_LIBRARIES_AND_TOOLS_SCOUTING.md` | Deepsearch source: optional library/tool scouting, immediate adapters, prototype candidates and rejected/deferred dependencies. |
 | `docs/context/ADULT_VISUAL_LAYER_DOCUMENTATION_MANIFEST.md` | Manifest for the adult-capable visual composition docs; read after the Goal 083 context index when shaping adult-capable visual tasks. |
 | `docs/context/VISUAL_WORLD_GENERATION_CONTEXT_BRIEF.md` | Visual world generation context: GamePackage/manifests remain source of truth, visual recipes are deterministic, and Runtime/Unity do not call LLM/media providers. |
 | `docs/proposals/PROCEDURAL_VISUAL_DETAIL_GENERATOR_STRATEGY.md` | Strategy for implementing a generator/validator instead of dumping thousands of visual detail records or media assets. |
@@ -409,8 +419,12 @@ Goal 083 is produced for review with `visual_adult_layer_context_integration_ver
 does not start provider/media/runtime/schema implementation. Goal 084 is produced for review with
 `visual_asset_contract_rating_metadata_verification required`, `accepted=false`, `implementationStatus=GREEN`; it adds
 a BCL-only Application metadata contract/validator, focused tests, product smoke and compact metadata-only evidence
-under `.llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/`. Goal 083, Goal 082 and Goal 082A remain
-`accepted=false`.
+under `.llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/`. Goal 084 is accepted by the Goal 085 handoff:
+`visual_asset_contract_rating_metadata_verification passed before Goal 085`, without rewriting Goal 084 artifacts.
+Goal 085 is produced for review with `visual_part_pack_rule_stack_verification required`, `accepted=false`,
+`implementationStatus=GREEN`; it consumes all eight deepsearch docs into a BCL-only Application visual part-pack
+rule-stack contract/validator/evidence seam under `.llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/`.
+Goal 083, Goal 082 and Goal 082A remain `accepted=false`.
 
 Allowed next sequence:
 
@@ -457,7 +471,8 @@ Allowed next sequence:
 41. Review Goal 082 `edit_driven_unity_alpha_streamingassets_handoff_verification`; do not mark it passed until explicit user acceptance and do not start the next goal from this implementation handoff.
 42. Review Goal 082A `source_format_physical_line_repair_verification`; it repairs the Goal 082 source-format guard backstop, keeps Goal 082 `accepted=false`, and treats `21f2525a adult docs` as docs context only.
 43. Review Goal 083 `visual_adult_layer_context_integration_verification`; it indexes/routes the visual/adult docs as policy-bounded context, keeps Goal 082 and Goal 082A `accepted=false`, and does not start a provider/media/runtime/schema implementation.
-44. Review Goal 084 `visual_asset_contract_rating_metadata_verification`; it adds the metadata contract foundation, keeps Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
+44. Keep Goal 084 `visual_asset_contract_rating_metadata_verification` recorded as passed before Goal 085 by handoff, without rewriting Goal 084 artifact accepted=false evidence.
+45. Review Goal 085 `visual_part_pack_rule_stack_verification`; it adds the deepsearch-backed visual part-pack rule-stack foundation, keeps Goal 083, Goal 082 and Goal 082A `accepted=false`, and does not start provider/media/runtime/schema implementation.
 
 Kill criterion:
 

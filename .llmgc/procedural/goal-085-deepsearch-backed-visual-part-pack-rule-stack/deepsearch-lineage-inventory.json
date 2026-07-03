@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "deepsearch_lineage_inventory_v1",
+  "goalId": "goal_085_deepsearch_backed_visual_part_pack_rule_stack",
+  "passed": true,
+  "indexedInContextIndex": true,
+  "routedInFullGeneratorGoalQueue": true,
+  "documentCount": 8,
+  "records": [
+    {
+      "path": "docs/deepsearch/01_PROCEDURAL_VISUAL_SYNTHESIS_CORE_AND_PART_PACKS.md",
+      "exists": true,
+      "sha256": "6d1b05bcf64f5ff91d584701ab7fe157c615969baec006913245270bee05ce96",
+      "purposeTags": [
+        "part_pack_core",
+        "adapter_boundary",
+        "metadata_contract"
+      ]
+    },
+    {
+      "path": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+      "exists": true,
+      "sha256": "bd184f47525433f1b73788cb4389b3f648f4d0ef0971c691f85e38ea8e4976e5",
+      "purposeTags": [
+        "tile_biome",
+        "water",
+        "world_map"
+      ]
+    },
+    {
+      "path": "docs/deepsearch/03_PSEUDO3D_FIRST_PERSON_FROM_2D_ASSETS.md",
+      "exists": true,
+      "sha256": "dfc058341964c2996a4559b2b7f609cfad0c612ccb5c4622d23972a684bb6f9d",
+      "purposeTags": [
+        "pseudo3d",
+        "first_person",
+        "presentation_sidecar"
+      ]
+    },
+    {
+      "path": "docs/deepsearch/04_CREATURE_NPC_APPEARANCE_BODYPLAN_PAPERDOLL.md",
+      "exists": true,
+      "sha256": "5cf746793b4ca0c6386740422e0b02655114e01453b796fdbe994c27035ef50d",
+      "purposeTags": [
+        "creature",
+        "body_plan",
+        "paperdoll"
+      ]
+    },
+    {
+      "path": "docs/deepsearch/05_SETTLEMENTS_CITIES_CARAVANS_LIVING_WORLD_VISUALS.md",
+      "exists": true,
+      "sha256": "87b57b37b9645bc32d53b714b313aab633f02afdf33c951339a33be7190a38f1",
+      "purposeTags": [
+        "settlement",
+        "city",
+        "living_world_visuals"
+      ]
+    },
+    {
+      "path": "docs/deepsearch/06_UI_THEMES_EFFECTS_WEATHER_DAYNIGHT_VFX.md",
+      "exists": true,
+      "sha256": "b92e6a94ab1dad3e31f3a94a3d8df23f884b03dbaa06d3a1c37eaa2ffd05f991",
+      "purposeTags": [
+        "ui_theme",
+        "weather",
+        "day_night",
+        "vfx"
+      ]
+    },
+    {
+      "path": "docs/deepsearch/07_MEDIA_PIPELINE_PROVIDER_QUARANTINE_PROVENANCE_RATING_ADULT.md",
+      "exists": true,
+      "sha256": "ec738dfb461ae4891c0ec2d576f2cac04ce5665673d3ec31c40491f3b76bab97",
+      "purposeTags": [
+        "provider_quarantine",
+        "provenance",
+        "rating",
+        "adult_metadata"
+      ]
+    },
+    {
+      "path": "docs/deepsearch/08_EXISTING_LIBRARIES_AND_TOOLS_SCOUTING.md",
+      "exists": true,
+      "sha256": "7631eda5ccac1fd9bc3ed99051d0b61c403b6a270a175ffe47827811b5041eb5",
+      "purposeTags": [
+        "libraries",
+        "optional_adapters",
+        "licensing"
+      ]
+    }
+  ]
+}

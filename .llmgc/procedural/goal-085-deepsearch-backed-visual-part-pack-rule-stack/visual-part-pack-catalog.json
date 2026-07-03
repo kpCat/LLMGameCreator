@@ -1,0 +1,2154 @@
+{
+  "schemaVersion": "visual_part_pack_catalog_v1",
+  "goalId": "goal_085_deepsearch_backed_visual_part_pack_rule_stack",
+  "manualGate": "visual_part_pack_rule_stack_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "fixturePackCount": 6,
+  "fixturePackIds": [
+    "adult_rating_gated_extension_metadata_only",
+    "creature_bodyplan_equipment_part_pack",
+    "fantasy_overworld_tile_part_pack",
+    "settlement_building_facade_part_pack",
+    "ui_theme_icon_effect_part_pack",
+    "water_coast_river_marsh_part_pack"
+  ],
+  "manifest": {
+    "schemaVersion": "visual_part_pack_rule_stack_manifest_v1",
+    "manifestId": "visual_part_pack_rule_stack_goal085",
+    "generatorVersion": "goal085-rule-stack-v1",
+    "strictReferenceValidation": true,
+    "sourceOfTruthKind": "metadata_contract",
+    "promptTextIsSourceOfTruth": false,
+    "partPacks": [
+      {
+        "packId": "fantasy_overworld_tile_part_pack",
+        "kind": "tileTerrain",
+        "rating": "safe",
+        "exportPolicy": "publicSafe",
+        "reviewStatus": "approvedMetadata",
+        "providerState": "metadataOnly",
+        "isAdultRatingExtension": false,
+        "safeFallbackPackId": "fantasy_overworld_tile_part_pack",
+        "metadataRelativePath": "visual/part-packs/fantasy_overworld_tile_part_pack/manifest.metadata.json",
+        "sha256": "4b3750085c0957da641b122c467c4ddb37035478f3d636fea33e70697ca05078",
+        "provenanceRef": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+        "promptTextIsSourceOfTruth": false,
+        "featureTags": [
+          "tile",
+          "terrain",
+          "grass",
+          "dirt",
+          "snow",
+          "lava",
+          "rough",
+          "forest"
+        ],
+        "parts": [
+          {
+            "partId": "part/fantasy_overworld_tile_part_pack/grass_base",
+            "role": "terrain_base",
+            "relativePath": "visual/part-packs/fantasy_overworld_tile_part_pack/parts/grass_base.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "grass"
+            ]
+          },
+          {
+            "partId": "part/fantasy_overworld_tile_part_pack/dirt_transition",
+            "role": "terrain_transition",
+            "relativePath": "visual/part-packs/fantasy_overworld_tile_part_pack/parts/dirt_transition.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "dirt"
+            ]
+          },
+          {
+            "partId": "part/fantasy_overworld_tile_part_pack/snow_cap",
+            "role": "weather_overlay",
+            "relativePath": "visual/part-packs/fantasy_overworld_tile_part_pack/parts/snow_cap.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "snow"
+            ]
+          },
+          {
+            "partId": "part/fantasy_overworld_tile_part_pack/lava_edge",
+            "role": "hazard_transition",
+            "relativePath": "visual/part-packs/fantasy_overworld_tile_part_pack/parts/lava_edge.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "lava"
+            ]
+          },
+          {
+            "partId": "part/fantasy_overworld_tile_part_pack/rough_rock",
+            "role": "rough_ground",
+            "relativePath": "visual/part-packs/fantasy_overworld_tile_part_pack/parts/rough_rock.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "rough"
+            ]
+          },
+          {
+            "partId": "part/fantasy_overworld_tile_part_pack/forest_canopy",
+            "role": "forest_overlay",
+            "relativePath": "visual/part-packs/fantasy_overworld_tile_part_pack/parts/forest_canopy.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "forest"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "layerId": "layer/base",
+            "order": 0,
+            "role": "base_surface"
+          },
+          {
+            "layerId": "layer/detail",
+            "order": 10,
+            "role": "terrain_detail"
+          },
+          {
+            "layerId": "layer/overlay",
+            "order": 20,
+            "role": "transition_overlay"
+          }
+        ],
+        "masks": [
+          {
+            "maskId": "mask/tile/base",
+            "maskKind": "base_fill",
+            "relativePath": "visual/masks/mask_tile_base.metadata.json"
+          },
+          {
+            "maskId": "mask/tile/edge",
+            "maskKind": "edge_transition",
+            "relativePath": "visual/masks/mask_tile_edge.metadata.json"
+          },
+          {
+            "maskId": "mask/tile/detail",
+            "maskKind": "detail_noise",
+            "relativePath": "visual/masks/mask_tile_detail.metadata.json"
+          }
+        ],
+        "sockets": [
+          {
+            "socketId": "socket/tile/center",
+            "socketKind": "tile_center",
+            "compatibleRoles": [
+              "terrain_base",
+              "water_surface"
+            ]
+          },
+          {
+            "socketId": "socket/tile/edge",
+            "socketKind": "tile_edge",
+            "compatibleRoles": [
+              "terrain_transition",
+              "coast_transition"
+            ]
+          },
+          {
+            "socketId": "socket/tile/object",
+            "socketKind": "tile_object",
+            "compatibleRoles": [
+              "water_object"
+            ]
+          }
+        ],
+        "anchors": [
+          {
+            "anchorId": "anchor/tile/center",
+            "anchorKind": "center",
+            "normalizedX": 0.5,
+            "normalizedY": 0.5
+          },
+          {
+            "anchorId": "anchor/tile/edge",
+            "anchorKind": "edge",
+            "normalizedX": 0.5,
+            "normalizedY": 0
+          }
+        ],
+        "paletteProfiles": [
+          {
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "colorSlots": [
+              "grass",
+              "dirt",
+              "snow",
+              "lava",
+              "rough",
+              "forest",
+              "edge_shadow"
+            ]
+          }
+        ],
+        "paletteSwapRules": [
+          {
+            "ruleId": "palette_swap/fantasy_overworld/seasonal",
+            "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+            "allowedTargetTags": [
+              "grass",
+              "snow",
+              "forest"
+            ]
+          }
+        ],
+        "overlayRules": [
+          {
+            "ruleId": "overlay/fantasy_overworld/damage_dirt",
+            "overlayKind": "damage_dirt",
+            "compatibleLayerIds": [
+              "layer/detail",
+              "layer/overlay"
+            ]
+          }
+        ],
+        "biomeProfiles": [
+          {
+            "biomeProfileId": "biome/fantasy_overworld/core",
+            "biomeKinds": [
+              "grass",
+              "dirt",
+              "snow",
+              "lava",
+              "rough",
+              "forest"
+            ]
+          }
+        ],
+        "waterProfiles": [],
+        "terrainTransitionRules": [
+          {
+            "ruleId": "transition/grass_dirt",
+            "fromTerrain": "grass",
+            "toTerrain": "dirt",
+            "maskId": "mask/tile/edge"
+          },
+          {
+            "ruleId": "transition/grass_snow",
+            "fromTerrain": "grass",
+            "toTerrain": "snow",
+            "maskId": "mask/tile/edge"
+          },
+          {
+            "ruleId": "transition/rough_lava",
+            "fromTerrain": "rough",
+            "toTerrain": "lava",
+            "maskId": "mask/tile/edge"
+          },
+          {
+            "ruleId": "transition/forest_grass",
+            "fromTerrain": "forest",
+            "toTerrain": "grass",
+            "maskId": "mask/tile/edge"
+          }
+        ],
+        "autoTileRules": [
+          {
+            "ruleId": "autotile/fantasy_overworld/terrain_edges",
+            "terrainKinds": [
+              "grass",
+              "dirt",
+              "snow",
+              "lava",
+              "rough",
+              "forest"
+            ],
+            "edgeMaskId": "mask/tile/edge"
+          }
+        ],
+        "objectPlacementRules": [],
+        "creatureBodyPlanProfiles": [],
+        "equipmentOverlayProfiles": [],
+        "uiThemeProfiles": [],
+        "effectProfiles": [],
+        "bodyPlanGrammarCapacity": 0,
+        "handAuthoredSpeciesAssetCount": 0
+      },
+      {
+        "packId": "water_coast_river_marsh_part_pack",
+        "kind": "waterBiome",
+        "rating": "safe",
+        "exportPolicy": "publicSafe",
+        "reviewStatus": "approvedMetadata",
+        "providerState": "metadataOnly",
+        "isAdultRatingExtension": false,
+        "safeFallbackPackId": "water_coast_river_marsh_part_pack",
+        "metadataRelativePath": "visual/part-packs/water_coast_river_marsh_part_pack/manifest.metadata.json",
+        "sha256": "9e2b50f54d0c96fed116f353a95702849c7fca7199daeccd2e03da3c95ce7a0d",
+        "provenanceRef": "docs/deepsearch/02_TILE_BIOME_WATER_WORLD_MAP_GENERATION.md",
+        "promptTextIsSourceOfTruth": false,
+        "featureTags": [
+          "water",
+          "coast",
+          "river",
+          "lake",
+          "marsh",
+          "bridge",
+          "dock",
+          "water_object"
+        ],
+        "parts": [
+          {
+            "partId": "part/water_coast_river_marsh_part_pack/sea_surface",
+            "role": "water_surface",
+            "relativePath": "visual/part-packs/water_coast_river_marsh_part_pack/parts/sea_surface.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/water_biome/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "sea"
+            ]
+          },
+          {
+            "partId": "part/water_coast_river_marsh_part_pack/lake_surface",
+            "role": "water_surface",
+            "relativePath": "visual/part-packs/water_coast_river_marsh_part_pack/parts/lake_surface.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/water_biome/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "lake"
+            ]
+          },
+          {
+            "partId": "part/water_coast_river_marsh_part_pack/river_channel",
+            "role": "river",
+            "relativePath": "visual/part-packs/water_coast_river_marsh_part_pack/parts/river_channel.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/water_biome/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "river"
+            ]
+          },
+          {
+            "partId": "part/water_coast_river_marsh_part_pack/coast_edge",
+            "role": "coast_transition",
+            "relativePath": "visual/part-packs/water_coast_river_marsh_part_pack/parts/coast_edge.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/water_biome/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "coast"
+            ]
+          },
+          {
+            "partId": "part/water_coast_river_marsh_part_pack/marsh_patch",
+            "role": "marsh_transition",
+            "relativePath": "visual/part-packs/water_coast_river_marsh_part_pack/parts/marsh_patch.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/water_biome/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "marsh"
+            ]
+          },
+          {
+            "partId": "part/water_coast_river_marsh_part_pack/bridge_dock_marker",
+            "role": "water_object",
+            "relativePath": "visual/part-packs/water_coast_river_marsh_part_pack/parts/bridge_dock_marker.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/water_biome/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/tile/base",
+              "mask/tile/edge"
+            ],
+            "socketIds": [
+              "socket/tile/center",
+              "socket/tile/edge"
+            ],
+            "anchorIds": [
+              "anchor/tile/center",
+              "anchor/tile/edge"
+            ],
+            "compatibleTags": [
+              "bridge",
+              "dock"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "layerId": "layer/base",
+            "order": 0,
+            "role": "base_surface"
+          },
+          {
+            "layerId": "layer/detail",
+            "order": 10,
+            "role": "terrain_detail"
+          },
+          {
+            "layerId": "layer/overlay",
+            "order": 20,
+            "role": "transition_overlay"
+          }
+        ],
+        "masks": [
+          {
+            "maskId": "mask/tile/base",
+            "maskKind": "base_fill",
+            "relativePath": "visual/masks/mask_tile_base.metadata.json"
+          },
+          {
+            "maskId": "mask/tile/edge",
+            "maskKind": "edge_transition",
+            "relativePath": "visual/masks/mask_tile_edge.metadata.json"
+          },
+          {
+            "maskId": "mask/tile/detail",
+            "maskKind": "detail_noise",
+            "relativePath": "visual/masks/mask_tile_detail.metadata.json"
+          }
+        ],
+        "sockets": [
+          {
+            "socketId": "socket/tile/center",
+            "socketKind": "tile_center",
+            "compatibleRoles": [
+              "terrain_base",
+              "water_surface"
+            ]
+          },
+          {
+            "socketId": "socket/tile/edge",
+            "socketKind": "tile_edge",
+            "compatibleRoles": [
+              "terrain_transition",
+              "coast_transition"
+            ]
+          },
+          {
+            "socketId": "socket/tile/object",
+            "socketKind": "tile_object",
+            "compatibleRoles": [
+              "water_object"
+            ]
+          }
+        ],
+        "anchors": [
+          {
+            "anchorId": "anchor/tile/center",
+            "anchorKind": "center",
+            "normalizedX": 0.5,
+            "normalizedY": 0.5
+          },
+          {
+            "anchorId": "anchor/tile/edge",
+            "anchorKind": "edge",
+            "normalizedX": 0.5,
+            "normalizedY": 0
+          }
+        ],
+        "paletteProfiles": [
+          {
+            "paletteProfileId": "palette/water_biome/readable_v1",
+            "colorSlots": [
+              "sea",
+              "lake",
+              "river",
+              "coast",
+              "marsh",
+              "foam",
+              "wood"
+            ]
+          }
+        ],
+        "paletteSwapRules": [],
+        "overlayRules": [],
+        "biomeProfiles": [],
+        "waterProfiles": [
+          {
+            "waterProfileId": "water_profile/sea_lake_river_coast_marsh",
+            "waterKinds": [
+              "sea",
+              "lake",
+              "river",
+              "coast",
+              "marsh"
+            ],
+            "coastAware": true,
+            "riverAware": true,
+            "lakeAware": true,
+            "marshAware": true
+          }
+        ],
+        "terrainTransitionRules": [
+          {
+            "ruleId": "transition/water_coast",
+            "fromTerrain": "water",
+            "toTerrain": "coast",
+            "maskId": "mask/tile/edge"
+          }
+        ],
+        "autoTileRules": [
+          {
+            "ruleId": "autotile/water/coast_river_marsh_edges",
+            "terrainKinds": [
+              "sea",
+              "lake",
+              "river",
+              "coast",
+              "marsh"
+            ],
+            "edgeMaskId": "mask/tile/edge"
+          }
+        ],
+        "objectPlacementRules": [
+          {
+            "ruleId": "placement/water/bridge",
+            "objectKind": "bridge",
+            "requiredTags": [
+              "river",
+              "coast"
+            ]
+          },
+          {
+            "ruleId": "placement/water/dock",
+            "objectKind": "dock",
+            "requiredTags": [
+              "lake",
+              "coast"
+            ]
+          },
+          {
+            "ruleId": "placement/water/water_object",
+            "objectKind": "water_object",
+            "requiredTags": [
+              "sea",
+              "lake",
+              "river"
+            ]
+          }
+        ],
+        "creatureBodyPlanProfiles": [],
+        "equipmentOverlayProfiles": [],
+        "uiThemeProfiles": [],
+        "effectProfiles": [],
+        "bodyPlanGrammarCapacity": 0,
+        "handAuthoredSpeciesAssetCount": 0
+      },
+      {
+        "packId": "settlement_building_facade_part_pack",
+        "kind": "settlementFacade",
+        "rating": "safe",
+        "exportPolicy": "publicSafe",
+        "reviewStatus": "approvedMetadata",
+        "providerState": "metadataOnly",
+        "isAdultRatingExtension": false,
+        "safeFallbackPackId": "settlement_building_facade_part_pack",
+        "metadataRelativePath": "visual/part-packs/settlement_building_facade_part_pack/manifest.metadata.json",
+        "sha256": "1fbd5b66290abc24de522dc6b36c1adf1bfadfece17e1b80763997e2a9a6e07a",
+        "provenanceRef": "docs/deepsearch/05_SETTLEMENTS_CITIES_CARAVANS_LIVING_WORLD_VISUALS.md",
+        "promptTextIsSourceOfTruth": false,
+        "featureTags": [
+          "house",
+          "castle",
+          "wall",
+          "gate",
+          "market",
+          "farm",
+          "mine",
+          "district"
+        ],
+        "parts": [
+          {
+            "partId": "part/settlement_building_facade_part_pack/house_front",
+            "role": "house_facade",
+            "relativePath": "visual/part-packs/settlement_building_facade_part_pack/parts/house_front.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/settlement_facade/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/facade/base",
+              "mask/facade/openings"
+            ],
+            "socketIds": [
+              "socket/facade/base",
+              "socket/facade/opening"
+            ],
+            "anchorIds": [
+              "anchor/facade/bottom",
+              "anchor/facade/door"
+            ],
+            "compatibleTags": [
+              "house"
+            ]
+          },
+          {
+            "partId": "part/settlement_building_facade_part_pack/castle_tower",
+            "role": "castle_facade",
+            "relativePath": "visual/part-packs/settlement_building_facade_part_pack/parts/castle_tower.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/settlement_facade/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/facade/base",
+              "mask/facade/openings"
+            ],
+            "socketIds": [
+              "socket/facade/base",
+              "socket/facade/opening"
+            ],
+            "anchorIds": [
+              "anchor/facade/bottom",
+              "anchor/facade/door"
+            ],
+            "compatibleTags": [
+              "castle"
+            ]
+          },
+          {
+            "partId": "part/settlement_building_facade_part_pack/wall_segment",
+            "role": "wall",
+            "relativePath": "visual/part-packs/settlement_building_facade_part_pack/parts/wall_segment.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/settlement_facade/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/facade/base",
+              "mask/facade/openings"
+            ],
+            "socketIds": [
+              "socket/facade/base",
+              "socket/facade/opening"
+            ],
+            "anchorIds": [
+              "anchor/facade/bottom",
+              "anchor/facade/door"
+            ],
+            "compatibleTags": [
+              "wall"
+            ]
+          },
+          {
+            "partId": "part/settlement_building_facade_part_pack/gate_house",
+            "role": "gate",
+            "relativePath": "visual/part-packs/settlement_building_facade_part_pack/parts/gate_house.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/settlement_facade/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/facade/base",
+              "mask/facade/openings"
+            ],
+            "socketIds": [
+              "socket/facade/base",
+              "socket/facade/opening"
+            ],
+            "anchorIds": [
+              "anchor/facade/bottom",
+              "anchor/facade/door"
+            ],
+            "compatibleTags": [
+              "gate"
+            ]
+          },
+          {
+            "partId": "part/settlement_building_facade_part_pack/market_awning",
+            "role": "market",
+            "relativePath": "visual/part-packs/settlement_building_facade_part_pack/parts/market_awning.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/settlement_facade/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/facade/base",
+              "mask/facade/openings"
+            ],
+            "socketIds": [
+              "socket/facade/base",
+              "socket/facade/opening"
+            ],
+            "anchorIds": [
+              "anchor/facade/bottom",
+              "anchor/facade/door"
+            ],
+            "compatibleTags": [
+              "market"
+            ]
+          },
+          {
+            "partId": "part/settlement_building_facade_part_pack/farm_mine_marker",
+            "role": "production_site",
+            "relativePath": "visual/part-packs/settlement_building_facade_part_pack/parts/farm_mine_marker.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/settlement_facade/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/facade/base",
+              "mask/facade/openings"
+            ],
+            "socketIds": [
+              "socket/facade/base",
+              "socket/facade/opening"
+            ],
+            "anchorIds": [
+              "anchor/facade/bottom",
+              "anchor/facade/door"
+            ],
+            "compatibleTags": [
+              "farm",
+              "mine",
+              "district"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "layerId": "layer/base",
+            "order": 0,
+            "role": "facade_mass"
+          },
+          {
+            "layerId": "layer/detail",
+            "order": 10,
+            "role": "door_window_trim"
+          },
+          {
+            "layerId": "layer/overlay",
+            "order": 20,
+            "role": "district_marker"
+          }
+        ],
+        "masks": [
+          {
+            "maskId": "mask/facade/base",
+            "maskKind": "base_shape",
+            "relativePath": "visual/masks/mask_facade_base.metadata.json"
+          },
+          {
+            "maskId": "mask/facade/openings",
+            "maskKind": "door_window",
+            "relativePath": "visual/masks/mask_facade_openings.metadata.json"
+          },
+          {
+            "maskId": "mask/facade/detail",
+            "maskKind": "trim_detail",
+            "relativePath": "visual/masks/mask_facade_detail.metadata.json"
+          }
+        ],
+        "sockets": [
+          {
+            "socketId": "socket/facade/base",
+            "socketKind": "facade_base",
+            "compatibleRoles": [
+              "house_facade",
+              "castle_facade"
+            ]
+          },
+          {
+            "socketId": "socket/facade/opening",
+            "socketKind": "facade_opening",
+            "compatibleRoles": [
+              "gate",
+              "market"
+            ]
+          },
+          {
+            "socketId": "socket/facade/roof",
+            "socketKind": "facade_roof",
+            "compatibleRoles": [
+              "wall",
+              "production_site"
+            ]
+          }
+        ],
+        "anchors": [
+          {
+            "anchorId": "anchor/facade/bottom",
+            "anchorKind": "bottom_center",
+            "normalizedX": 0.5,
+            "normalizedY": 1
+          },
+          {
+            "anchorId": "anchor/facade/door",
+            "anchorKind": "door_center",
+            "normalizedX": 0.5,
+            "normalizedY": 0.72
+          }
+        ],
+        "paletteProfiles": [
+          {
+            "paletteProfileId": "palette/settlement_facade/readable_v1",
+            "colorSlots": [
+              "stone",
+              "wood",
+              "cloth",
+              "roof",
+              "gate",
+              "market",
+              "field"
+            ]
+          }
+        ],
+        "paletteSwapRules": [],
+        "overlayRules": [],
+        "biomeProfiles": [],
+        "waterProfiles": [],
+        "terrainTransitionRules": [],
+        "autoTileRules": [],
+        "objectPlacementRules": [
+          {
+            "ruleId": "placement/settlement/house",
+            "objectKind": "house",
+            "requiredTags": [
+              "district",
+              "road"
+            ]
+          },
+          {
+            "ruleId": "placement/settlement/castle_wall_gate",
+            "objectKind": "castle_wall_gate",
+            "requiredTags": [
+              "defense",
+              "district"
+            ]
+          },
+          {
+            "ruleId": "placement/settlement/market_farm_mine",
+            "objectKind": "market_farm_mine",
+            "requiredTags": [
+              "economy",
+              "district"
+            ]
+          }
+        ],
+        "creatureBodyPlanProfiles": [],
+        "equipmentOverlayProfiles": [],
+        "uiThemeProfiles": [],
+        "effectProfiles": [],
+        "bodyPlanGrammarCapacity": 0,
+        "handAuthoredSpeciesAssetCount": 0
+      },
+      {
+        "packId": "creature_bodyplan_equipment_part_pack",
+        "kind": "creatureBodyPlanEquipment",
+        "rating": "safe",
+        "exportPolicy": "publicSafe",
+        "reviewStatus": "approvedMetadata",
+        "providerState": "metadataOnly",
+        "isAdultRatingExtension": false,
+        "safeFallbackPackId": "creature_bodyplan_equipment_part_pack",
+        "metadataRelativePath": "visual/part-packs/creature_bodyplan_equipment_part_pack/manifest.metadata.json",
+        "sha256": "86477612a05eadc8f67ec359edcaf3266a1b9935da897b6b07dc887595e61062",
+        "provenanceRef": "docs/deepsearch/04_CREATURE_NPC_APPEARANCE_BODYPLAN_PAPERDOLL.md",
+        "promptTextIsSourceOfTruth": false,
+        "featureTags": [
+          "humanoid",
+          "beast",
+          "reptilian",
+          "insectoid",
+          "undead",
+          "mechanical",
+          "equipment",
+          "clothing",
+          "state_overlay"
+        ],
+        "parts": [
+          {
+            "partId": "part/creature_bodyplan_equipment_part_pack/humanoid_silhouette",
+            "role": "body_plan",
+            "relativePath": "visual/part-packs/creature_bodyplan_equipment_part_pack/parts/humanoid_silhouette.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "humanoid"
+            ]
+          },
+          {
+            "partId": "part/creature_bodyplan_equipment_part_pack/beast_silhouette",
+            "role": "body_plan",
+            "relativePath": "visual/part-packs/creature_bodyplan_equipment_part_pack/parts/beast_silhouette.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "beast"
+            ]
+          },
+          {
+            "partId": "part/creature_bodyplan_equipment_part_pack/reptilian_scale_surface",
+            "role": "surface_plan",
+            "relativePath": "visual/part-packs/creature_bodyplan_equipment_part_pack/parts/reptilian_scale_surface.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "reptilian"
+            ]
+          },
+          {
+            "partId": "part/creature_bodyplan_equipment_part_pack/insectoid_chitin_surface",
+            "role": "surface_plan",
+            "relativePath": "visual/part-packs/creature_bodyplan_equipment_part_pack/parts/insectoid_chitin_surface.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "insectoid"
+            ]
+          },
+          {
+            "partId": "part/creature_bodyplan_equipment_part_pack/undead_state_overlay",
+            "role": "state_overlay",
+            "relativePath": "visual/part-packs/creature_bodyplan_equipment_part_pack/parts/undead_state_overlay.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "undead"
+            ]
+          },
+          {
+            "partId": "part/creature_bodyplan_equipment_part_pack/mechanical_plate_overlay",
+            "role": "equipment_overlay",
+            "relativePath": "visual/part-packs/creature_bodyplan_equipment_part_pack/parts/mechanical_plate_overlay.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "mechanical"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "layerId": "layer/base",
+            "order": 0,
+            "role": "silhouette"
+          },
+          {
+            "layerId": "layer/detail",
+            "order": 10,
+            "role": "surface_or_clothing"
+          },
+          {
+            "layerId": "layer/overlay",
+            "order": 20,
+            "role": "equipment_or_state"
+          },
+          {
+            "layerId": "layer/body",
+            "order": 1,
+            "role": "body_plan"
+          },
+          {
+            "layerId": "layer/clothing",
+            "order": 11,
+            "role": "clothing"
+          }
+        ],
+        "masks": [
+          {
+            "maskId": "mask/creature/body",
+            "maskKind": "body_silhouette",
+            "relativePath": "visual/masks/mask_creature_body.metadata.json"
+          },
+          {
+            "maskId": "mask/creature/clothing",
+            "maskKind": "clothing",
+            "relativePath": "visual/masks/mask_creature_clothing.metadata.json"
+          },
+          {
+            "maskId": "mask/creature/equipment",
+            "maskKind": "equipment",
+            "relativePath": "visual/masks/mask_creature_equipment.metadata.json"
+          }
+        ],
+        "sockets": [
+          {
+            "socketId": "socket/creature/head",
+            "socketKind": "head",
+            "compatibleRoles": [
+              "headgear",
+              "body_plan"
+            ]
+          },
+          {
+            "socketId": "socket/creature/torso",
+            "socketKind": "torso",
+            "compatibleRoles": [
+              "torso_clothing",
+              "surface_plan"
+            ]
+          },
+          {
+            "socketId": "socket/creature/hand_main",
+            "socketKind": "hand_main",
+            "compatibleRoles": [
+              "weapon"
+            ]
+          },
+          {
+            "socketId": "socket/creature/hand_off",
+            "socketKind": "hand_off",
+            "compatibleRoles": [
+              "shield"
+            ]
+          },
+          {
+            "socketId": "socket/creature/back",
+            "socketKind": "back",
+            "compatibleRoles": [
+              "back_item"
+            ]
+          }
+        ],
+        "anchors": [
+          {
+            "anchorId": "anchor/creature/head",
+            "anchorKind": "head",
+            "normalizedX": 0.5,
+            "normalizedY": 0.16
+          },
+          {
+            "anchorId": "anchor/creature/torso",
+            "anchorKind": "torso",
+            "normalizedX": 0.5,
+            "normalizedY": 0.45
+          },
+          {
+            "anchorId": "anchor/creature/feet",
+            "anchorKind": "feet",
+            "normalizedX": 0.5,
+            "normalizedY": 0.96
+          }
+        ],
+        "paletteProfiles": [
+          {
+            "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+            "colorSlots": [
+              "skin",
+              "fur",
+              "scale",
+              "chitin",
+              "cloth",
+              "metal",
+              "bone",
+              "glow"
+            ]
+          }
+        ],
+        "paletteSwapRules": [],
+        "overlayRules": [],
+        "biomeProfiles": [],
+        "waterProfiles": [],
+        "terrainTransitionRules": [],
+        "autoTileRules": [],
+        "objectPlacementRules": [],
+        "creatureBodyPlanProfiles": [
+          {
+            "bodyPlanProfileId": "bodyplan/humanoid",
+            "bodyPlanKind": "humanoid",
+            "adultEligible": true,
+            "ageKnownAdult": true,
+            "sapient": true,
+            "humanoidCompatible": true,
+            "ageAmbiguous": false,
+            "nonSapient": false,
+            "compatibleSocketIds": [
+              "socket/creature/head",
+              "socket/creature/torso",
+              "socket/creature/hand_main",
+              "socket/creature/back"
+            ]
+          },
+          {
+            "bodyPlanProfileId": "bodyplan/beast_safe",
+            "bodyPlanKind": "beast",
+            "adultEligible": false,
+            "ageKnownAdult": false,
+            "sapient": false,
+            "humanoidCompatible": false,
+            "ageAmbiguous": false,
+            "nonSapient": false,
+            "compatibleSocketIds": [
+              "socket/creature/head",
+              "socket/creature/torso",
+              "socket/creature/hand_main",
+              "socket/creature/back"
+            ]
+          },
+          {
+            "bodyPlanProfileId": "bodyplan/reptilian",
+            "bodyPlanKind": "reptilian",
+            "adultEligible": false,
+            "ageKnownAdult": false,
+            "sapient": false,
+            "humanoidCompatible": false,
+            "ageAmbiguous": false,
+            "nonSapient": false,
+            "compatibleSocketIds": [
+              "socket/creature/head",
+              "socket/creature/torso",
+              "socket/creature/hand_main",
+              "socket/creature/back"
+            ]
+          },
+          {
+            "bodyPlanProfileId": "bodyplan/insectoid",
+            "bodyPlanKind": "insectoid",
+            "adultEligible": false,
+            "ageKnownAdult": false,
+            "sapient": false,
+            "humanoidCompatible": false,
+            "ageAmbiguous": false,
+            "nonSapient": false,
+            "compatibleSocketIds": [
+              "socket/creature/head",
+              "socket/creature/torso",
+              "socket/creature/hand_main",
+              "socket/creature/back"
+            ]
+          },
+          {
+            "bodyPlanProfileId": "bodyplan/undead",
+            "bodyPlanKind": "undead",
+            "adultEligible": false,
+            "ageKnownAdult": false,
+            "sapient": false,
+            "humanoidCompatible": false,
+            "ageAmbiguous": false,
+            "nonSapient": false,
+            "compatibleSocketIds": [
+              "socket/creature/head",
+              "socket/creature/torso",
+              "socket/creature/hand_main",
+              "socket/creature/back"
+            ]
+          },
+          {
+            "bodyPlanProfileId": "bodyplan/mechanical",
+            "bodyPlanKind": "mechanical",
+            "adultEligible": false,
+            "ageKnownAdult": false,
+            "sapient": false,
+            "humanoidCompatible": false,
+            "ageAmbiguous": false,
+            "nonSapient": false,
+            "compatibleSocketIds": [
+              "socket/creature/head",
+              "socket/creature/torso",
+              "socket/creature/hand_main",
+              "socket/creature/back"
+            ]
+          }
+        ],
+        "equipmentOverlayProfiles": [
+          {
+            "equipmentOverlayProfileId": "equipment_overlay/headgear",
+            "overlayKind": "headgear",
+            "compatibleSocketIds": [
+              "socket/creature/head"
+            ],
+            "compatibleBodyPlanProfileIds": [
+              "bodyplan/humanoid",
+              "bodyplan/reptilian"
+            ]
+          },
+          {
+            "equipmentOverlayProfileId": "equipment_overlay/torso_clothing",
+            "overlayKind": "torso_clothing",
+            "compatibleSocketIds": [
+              "socket/creature/torso"
+            ],
+            "compatibleBodyPlanProfileIds": [
+              "bodyplan/humanoid"
+            ]
+          },
+          {
+            "equipmentOverlayProfileId": "equipment_overlay/weapon_main",
+            "overlayKind": "weapon",
+            "compatibleSocketIds": [
+              "socket/creature/hand_main"
+            ],
+            "compatibleBodyPlanProfileIds": [
+              "bodyplan/humanoid",
+              "bodyplan/mechanical"
+            ]
+          },
+          {
+            "equipmentOverlayProfileId": "equipment_overlay/back_item",
+            "overlayKind": "back_item",
+            "compatibleSocketIds": [
+              "socket/creature/back"
+            ],
+            "compatibleBodyPlanProfileIds": [
+              "bodyplan/humanoid",
+              "bodyplan/beast_safe"
+            ]
+          }
+        ],
+        "uiThemeProfiles": [],
+        "effectProfiles": [],
+        "bodyPlanGrammarCapacity": 128,
+        "handAuthoredSpeciesAssetCount": 0
+      },
+      {
+        "packId": "ui_theme_icon_effect_part_pack",
+        "kind": "uiThemeEffect",
+        "rating": "safe",
+        "exportPolicy": "publicSafe",
+        "reviewStatus": "approvedMetadata",
+        "providerState": "metadataOnly",
+        "isAdultRatingExtension": false,
+        "safeFallbackPackId": "ui_theme_icon_effect_part_pack",
+        "metadataRelativePath": "visual/part-packs/ui_theme_icon_effect_part_pack/manifest.metadata.json",
+        "sha256": "6b699e02e69a767db0fcc928d9602829816a5a2b87beaf63f5c24b262c2ce180",
+        "provenanceRef": "docs/deepsearch/06_UI_THEMES_EFFECTS_WEATHER_DAYNIGHT_VFX.md",
+        "promptTextIsSourceOfTruth": false,
+        "featureTags": [
+          "panel",
+          "button",
+          "icon",
+          "status",
+          "weather",
+          "day_night",
+          "effect_overlay"
+        ],
+        "parts": [
+          {
+            "partId": "part/ui_theme_icon_effect_part_pack/panel_frame",
+            "role": "ui_panel",
+            "relativePath": "visual/part-packs/ui_theme_icon_effect_part_pack/parts/panel_frame.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/ui/frame",
+              "mask/ui/icon"
+            ],
+            "socketIds": [
+              "socket/ui/frame",
+              "socket/ui/icon"
+            ],
+            "anchorIds": [
+              "anchor/ui/center",
+              "anchor/ui/status"
+            ],
+            "compatibleTags": [
+              "panel"
+            ]
+          },
+          {
+            "partId": "part/ui_theme_icon_effect_part_pack/button_frame",
+            "role": "ui_button",
+            "relativePath": "visual/part-packs/ui_theme_icon_effect_part_pack/parts/button_frame.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/ui/frame",
+              "mask/ui/icon"
+            ],
+            "socketIds": [
+              "socket/ui/frame",
+              "socket/ui/icon"
+            ],
+            "anchorIds": [
+              "anchor/ui/center",
+              "anchor/ui/status"
+            ],
+            "compatibleTags": [
+              "button"
+            ]
+          },
+          {
+            "partId": "part/ui_theme_icon_effect_part_pack/resource_icon",
+            "role": "icon",
+            "relativePath": "visual/part-packs/ui_theme_icon_effect_part_pack/parts/resource_icon.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/ui/frame",
+              "mask/ui/icon"
+            ],
+            "socketIds": [
+              "socket/ui/frame",
+              "socket/ui/icon"
+            ],
+            "anchorIds": [
+              "anchor/ui/center",
+              "anchor/ui/status"
+            ],
+            "compatibleTags": [
+              "icon"
+            ]
+          },
+          {
+            "partId": "part/ui_theme_icon_effect_part_pack/status_badge",
+            "role": "status",
+            "relativePath": "visual/part-packs/ui_theme_icon_effect_part_pack/parts/status_badge.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/ui/frame",
+              "mask/ui/icon"
+            ],
+            "socketIds": [
+              "socket/ui/frame",
+              "socket/ui/icon"
+            ],
+            "anchorIds": [
+              "anchor/ui/center",
+              "anchor/ui/status"
+            ],
+            "compatibleTags": [
+              "status"
+            ]
+          },
+          {
+            "partId": "part/ui_theme_icon_effect_part_pack/weather_overlay",
+            "role": "weather",
+            "relativePath": "visual/part-packs/ui_theme_icon_effect_part_pack/parts/weather_overlay.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/ui/frame",
+              "mask/ui/icon"
+            ],
+            "socketIds": [
+              "socket/ui/frame",
+              "socket/ui/icon"
+            ],
+            "anchorIds": [
+              "anchor/ui/center",
+              "anchor/ui/status"
+            ],
+            "compatibleTags": [
+              "weather"
+            ]
+          },
+          {
+            "partId": "part/ui_theme_icon_effect_part_pack/day_night_effect",
+            "role": "day_night_effect",
+            "relativePath": "visual/part-packs/ui_theme_icon_effect_part_pack/parts/day_night_effect.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/ui/frame",
+              "mask/ui/icon"
+            ],
+            "socketIds": [
+              "socket/ui/frame",
+              "socket/ui/icon"
+            ],
+            "anchorIds": [
+              "anchor/ui/center",
+              "anchor/ui/status"
+            ],
+            "compatibleTags": [
+              "day_night",
+              "effect_overlay"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "layerId": "layer/base",
+            "order": 0,
+            "role": "frame"
+          },
+          {
+            "layerId": "layer/detail",
+            "order": 10,
+            "role": "icon_detail"
+          },
+          {
+            "layerId": "layer/overlay",
+            "order": 20,
+            "role": "effect_overlay"
+          }
+        ],
+        "masks": [
+          {
+            "maskId": "mask/ui/frame",
+            "maskKind": "frame",
+            "relativePath": "visual/masks/mask_ui_frame.metadata.json"
+          },
+          {
+            "maskId": "mask/ui/icon",
+            "maskKind": "icon",
+            "relativePath": "visual/masks/mask_ui_icon.metadata.json"
+          },
+          {
+            "maskId": "mask/ui/effect",
+            "maskKind": "effect",
+            "relativePath": "visual/masks/mask_ui_effect.metadata.json"
+          }
+        ],
+        "sockets": [
+          {
+            "socketId": "socket/ui/frame",
+            "socketKind": "frame",
+            "compatibleRoles": [
+              "ui_panel",
+              "ui_button"
+            ]
+          },
+          {
+            "socketId": "socket/ui/icon",
+            "socketKind": "icon",
+            "compatibleRoles": [
+              "icon",
+              "status"
+            ]
+          },
+          {
+            "socketId": "socket/ui/effect",
+            "socketKind": "effect",
+            "compatibleRoles": [
+              "weather",
+              "day_night_effect"
+            ]
+          }
+        ],
+        "anchors": [
+          {
+            "anchorId": "anchor/ui/center",
+            "anchorKind": "center",
+            "normalizedX": 0.5,
+            "normalizedY": 0.5
+          },
+          {
+            "anchorId": "anchor/ui/status",
+            "anchorKind": "status_corner",
+            "normalizedX": 0.92,
+            "normalizedY": 0.12
+          }
+        ],
+        "paletteProfiles": [
+          {
+            "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+            "colorSlots": [
+              "panel",
+              "button",
+              "icon",
+              "status",
+              "weather",
+              "day",
+              "night",
+              "effect"
+            ]
+          }
+        ],
+        "paletteSwapRules": [],
+        "overlayRules": [],
+        "biomeProfiles": [],
+        "waterProfiles": [],
+        "terrainTransitionRules": [],
+        "autoTileRules": [],
+        "objectPlacementRules": [],
+        "creatureBodyPlanProfiles": [],
+        "equipmentOverlayProfiles": [],
+        "uiThemeProfiles": [
+          {
+            "uiThemeProfileId": "ui_theme/tech_future_safe",
+            "uiElementKinds": [
+              "panel",
+              "button",
+              "icon",
+              "status"
+            ],
+            "safeFallbackThemeId": "ui_theme/generic_safe"
+          }
+        ],
+        "effectProfiles": [
+          {
+            "effectProfileId": "effect/status_safe",
+            "effectKind": "status",
+            "hasSafeFallback": true
+          },
+          {
+            "effectProfileId": "effect/weather_safe",
+            "effectKind": "weather",
+            "hasSafeFallback": true
+          },
+          {
+            "effectProfileId": "effect/day_night_safe",
+            "effectKind": "day_night",
+            "hasSafeFallback": true
+          },
+          {
+            "effectProfileId": "effect/vfx_overlay_safe",
+            "effectKind": "effect_overlay",
+            "hasSafeFallback": true
+          }
+        ],
+        "bodyPlanGrammarCapacity": 0,
+        "handAuthoredSpeciesAssetCount": 0
+      },
+      {
+        "packId": "adult_rating_gated_extension_metadata_only",
+        "kind": "adultRatingExtension",
+        "rating": "suggestiveMetadata",
+        "exportPolicy": "matureOptional",
+        "reviewStatus": "candidateQuarantined",
+        "providerState": "candidateQuarantine",
+        "isAdultRatingExtension": true,
+        "safeFallbackPackId": "creature_bodyplan_equipment_part_pack",
+        "metadataRelativePath": "visual/part-packs/adult_rating_gated_extension_metadata_only/manifest.metadata.json",
+        "sha256": "253a6026eed28f39b4a7b06e4769916b119af88cabfb028df8515720c4da0d0c",
+        "provenanceRef": "docs/deepsearch/07_MEDIA_PIPELINE_PROVIDER_QUARANTINE_PROVENANCE_RATING_ADULT.md",
+        "promptTextIsSourceOfTruth": false,
+        "featureTags": [
+          "rating_metadata",
+          "adult_policy",
+          "safe_fallback",
+          "candidate_quarantine",
+          "metadata_only"
+        ],
+        "parts": [
+          {
+            "partId": "part/adult_rating_gated_extension_metadata_only/neutral_policy_marker",
+            "role": "rating_policy_metadata",
+            "relativePath": "visual/part-packs/adult_rating_gated_extension_metadata_only/parts/neutral_policy_marker.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/adult_rating_metadata/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "metadata_only"
+            ]
+          },
+          {
+            "partId": "part/adult_rating_gated_extension_metadata_only/safe_fallback_binding",
+            "role": "safe_fallback_metadata",
+            "relativePath": "visual/part-packs/adult_rating_gated_extension_metadata_only/parts/safe_fallback_binding.metadata.json",
+            "requiresLayeredComposition": true,
+            "paletteProfileId": "palette/adult_rating_metadata/readable_v1",
+            "layerIds": [
+              "layer/base",
+              "layer/detail",
+              "layer/overlay"
+            ],
+            "maskIds": [
+              "mask/creature/body",
+              "mask/creature/clothing"
+            ],
+            "socketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ],
+            "anchorIds": [
+              "anchor/creature/head",
+              "anchor/creature/torso"
+            ],
+            "compatibleTags": [
+              "safe_fallback"
+            ]
+          }
+        ],
+        "layers": [
+          {
+            "layerId": "layer/base",
+            "order": 0,
+            "role": "silhouette"
+          },
+          {
+            "layerId": "layer/detail",
+            "order": 10,
+            "role": "surface_or_clothing"
+          },
+          {
+            "layerId": "layer/overlay",
+            "order": 20,
+            "role": "equipment_or_state"
+          },
+          {
+            "layerId": "layer/body",
+            "order": 1,
+            "role": "body_plan"
+          },
+          {
+            "layerId": "layer/clothing",
+            "order": 11,
+            "role": "clothing"
+          }
+        ],
+        "masks": [
+          {
+            "maskId": "mask/creature/body",
+            "maskKind": "body_silhouette",
+            "relativePath": "visual/masks/mask_creature_body.metadata.json"
+          },
+          {
+            "maskId": "mask/creature/clothing",
+            "maskKind": "clothing",
+            "relativePath": "visual/masks/mask_creature_clothing.metadata.json"
+          },
+          {
+            "maskId": "mask/creature/equipment",
+            "maskKind": "equipment",
+            "relativePath": "visual/masks/mask_creature_equipment.metadata.json"
+          }
+        ],
+        "sockets": [
+          {
+            "socketId": "socket/creature/head",
+            "socketKind": "head",
+            "compatibleRoles": [
+              "headgear",
+              "body_plan"
+            ]
+          },
+          {
+            "socketId": "socket/creature/torso",
+            "socketKind": "torso",
+            "compatibleRoles": [
+              "torso_clothing",
+              "surface_plan"
+            ]
+          },
+          {
+            "socketId": "socket/creature/hand_main",
+            "socketKind": "hand_main",
+            "compatibleRoles": [
+              "weapon"
+            ]
+          },
+          {
+            "socketId": "socket/creature/hand_off",
+            "socketKind": "hand_off",
+            "compatibleRoles": [
+              "shield"
+            ]
+          },
+          {
+            "socketId": "socket/creature/back",
+            "socketKind": "back",
+            "compatibleRoles": [
+              "back_item"
+            ]
+          }
+        ],
+        "anchors": [
+          {
+            "anchorId": "anchor/creature/head",
+            "anchorKind": "head",
+            "normalizedX": 0.5,
+            "normalizedY": 0.16
+          },
+          {
+            "anchorId": "anchor/creature/torso",
+            "anchorKind": "torso",
+            "normalizedX": 0.5,
+            "normalizedY": 0.45
+          },
+          {
+            "anchorId": "anchor/creature/feet",
+            "anchorKind": "feet",
+            "normalizedX": 0.5,
+            "normalizedY": 0.96
+          }
+        ],
+        "paletteProfiles": [
+          {
+            "paletteProfileId": "palette/adult_rating_metadata/readable_v1",
+            "colorSlots": [
+              "safe_fallback",
+              "policy_marker",
+              "review_state"
+            ]
+          }
+        ],
+        "paletteSwapRules": [],
+        "overlayRules": [
+          {
+            "ruleId": "overlay/adult_metadata/safe_fallback_required",
+            "overlayKind": "metadata_only_safe_fallback",
+            "compatibleLayerIds": [
+              "layer/body",
+              "layer/clothing"
+            ]
+          }
+        ],
+        "biomeProfiles": [],
+        "waterProfiles": [],
+        "terrainTransitionRules": [],
+        "autoTileRules": [],
+        "objectPlacementRules": [],
+        "creatureBodyPlanProfiles": [
+          {
+            "bodyPlanProfileId": "bodyplan/adult_eligible_humanoid_metadata",
+            "bodyPlanKind": "humanoid_metadata_only",
+            "adultEligible": true,
+            "ageKnownAdult": true,
+            "sapient": true,
+            "humanoidCompatible": true,
+            "ageAmbiguous": false,
+            "nonSapient": false,
+            "compatibleSocketIds": [
+              "socket/creature/head",
+              "socket/creature/torso"
+            ]
+          }
+        ],
+        "equipmentOverlayProfiles": [],
+        "uiThemeProfiles": [],
+        "effectProfiles": [],
+        "bodyPlanGrammarCapacity": 0,
+        "handAuthoredSpeciesAssetCount": 0
+      }
+    ],
+    "recipes": [
+      {
+        "recipeId": "recipe/fantasy_overworld_tile_part_pack/v1",
+        "packId": "fantasy_overworld_tile_part_pack",
+        "paletteProfileId": "palette/fantasy_overworld/readable_v1",
+        "partIds": [
+          "part/fantasy_overworld_tile_part_pack/grass_base",
+          "part/fantasy_overworld_tile_part_pack/dirt_transition",
+          "part/fantasy_overworld_tile_part_pack/snow_cap",
+          "part/fantasy_overworld_tile_part_pack/lava_edge",
+          "part/fantasy_overworld_tile_part_pack/rough_rock",
+          "part/fantasy_overworld_tile_part_pack/forest_canopy"
+        ],
+        "dependsOnRecipeIds": [],
+        "safeFallbackRecipeId": "recipe/fantasy_overworld_tile_part_pack/v1",
+        "goal084SlotId": "fantasy_overworld_tile_safe"
+      },
+      {
+        "recipeId": "recipe/water_coast_river_marsh_part_pack/v1",
+        "packId": "water_coast_river_marsh_part_pack",
+        "paletteProfileId": "palette/water_biome/readable_v1",
+        "partIds": [
+          "part/water_coast_river_marsh_part_pack/sea_surface",
+          "part/water_coast_river_marsh_part_pack/lake_surface",
+          "part/water_coast_river_marsh_part_pack/river_channel",
+          "part/water_coast_river_marsh_part_pack/coast_edge",
+          "part/water_coast_river_marsh_part_pack/marsh_patch",
+          "part/water_coast_river_marsh_part_pack/bridge_dock_marker"
+        ],
+        "dependsOnRecipeIds": [],
+        "safeFallbackRecipeId": "recipe/water_coast_river_marsh_part_pack/v1",
+        "goal084SlotId": "water_coast_biome_safe"
+      },
+      {
+        "recipeId": "recipe/settlement_building_facade_part_pack/v1",
+        "packId": "settlement_building_facade_part_pack",
+        "paletteProfileId": "palette/settlement_facade/readable_v1",
+        "partIds": [
+          "part/settlement_building_facade_part_pack/house_front",
+          "part/settlement_building_facade_part_pack/castle_tower",
+          "part/settlement_building_facade_part_pack/wall_segment",
+          "part/settlement_building_facade_part_pack/gate_house",
+          "part/settlement_building_facade_part_pack/market_awning",
+          "part/settlement_building_facade_part_pack/farm_mine_marker"
+        ],
+        "dependsOnRecipeIds": [],
+        "safeFallbackRecipeId": "recipe/settlement_building_facade_part_pack/v1",
+        "goal084SlotId": "settlement_building_safe"
+      },
+      {
+        "recipeId": "recipe/creature_bodyplan_equipment_part_pack/v1",
+        "packId": "creature_bodyplan_equipment_part_pack",
+        "paletteProfileId": "palette/creature_bodyplan/readable_v1",
+        "partIds": [
+          "part/creature_bodyplan_equipment_part_pack/humanoid_silhouette",
+          "part/creature_bodyplan_equipment_part_pack/beast_silhouette",
+          "part/creature_bodyplan_equipment_part_pack/reptilian_scale_surface",
+          "part/creature_bodyplan_equipment_part_pack/insectoid_chitin_surface",
+          "part/creature_bodyplan_equipment_part_pack/undead_state_overlay",
+          "part/creature_bodyplan_equipment_part_pack/mechanical_plate_overlay"
+        ],
+        "dependsOnRecipeIds": [],
+        "safeFallbackRecipeId": "recipe/creature_bodyplan_equipment_part_pack/v1",
+        "goal084SlotId": "creature_bodyplan_safe"
+      },
+      {
+        "recipeId": "recipe/ui_theme_icon_effect_part_pack/v1",
+        "packId": "ui_theme_icon_effect_part_pack",
+        "paletteProfileId": "palette/ui_theme_effect/readable_v1",
+        "partIds": [
+          "part/ui_theme_icon_effect_part_pack/panel_frame",
+          "part/ui_theme_icon_effect_part_pack/button_frame",
+          "part/ui_theme_icon_effect_part_pack/resource_icon",
+          "part/ui_theme_icon_effect_part_pack/status_badge",
+          "part/ui_theme_icon_effect_part_pack/weather_overlay",
+          "part/ui_theme_icon_effect_part_pack/day_night_effect"
+        ],
+        "dependsOnRecipeIds": [],
+        "safeFallbackRecipeId": "recipe/ui_theme_icon_effect_part_pack/v1",
+        "goal084SlotId": "tech_future_ui_panel_safe"
+      },
+      {
+        "recipeId": "recipe/adult_rating_gated_extension_metadata_only/v1",
+        "packId": "adult_rating_gated_extension_metadata_only",
+        "paletteProfileId": "palette/adult_rating_metadata/readable_v1",
+        "partIds": [
+          "part/adult_rating_gated_extension_metadata_only/neutral_policy_marker",
+          "part/adult_rating_gated_extension_metadata_only/safe_fallback_binding"
+        ],
+        "dependsOnRecipeIds": [
+          "recipe/creature_bodyplan_equipment_part_pack/v1"
+        ],
+        "safeFallbackRecipeId": "recipe/creature_bodyplan_equipment_part_pack/v1",
+        "goal084SlotId": "humanoid_paperdoll_adult_capable_metadata_only"
+      }
+    ]
+  }
+}

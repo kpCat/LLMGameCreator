@@ -54,7 +54,8 @@
     ".llmgc/procedural/goal-082-edit-driven-unity-alpha-streamingassets-handoff/",
     ".llmgc/procedural/goal-082a-source-format-physical-line-repair/",
     ".llmgc/procedural/goal-083-visual-adult-layer-context-integration/",
-    ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/"
+    ".llmgc/procedural/goal-084-visual-asset-contract-rating-metadata/",
+    ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -917,6 +918,25 @@
         "docs/agent-tasks/goal-084-visual-asset-contract-rating-metadata/",
         "src/LLMGameCreator.Application/Design/VisualAssetContractRatingMetadata/",
         "tests/LLMGameCreator.Tests/Application/VisualAssetContractRatingMetadata/"
+      ]
+    },
+    {
+      "scenario": "goal-085-deepsearch-backed-visual-part-pack-rule-stack",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        "docs/context/DEEPSEARCH_VISUAL_STACK_SYNTHESIS.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualPartPackRuleStackProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-085-deepsearch-backed-visual-part-pack-rule-stack/",
+        "docs/agent-tasks/goal-085-deepsearch-backed-visual-part-pack-rule-stack/",
+        "src/LLMGameCreator.Application/Design/VisualPartPackRuleStack/",
+        "tests/LLMGameCreator.Tests/Application/VisualPartPackRuleStack/"
       ]
     }
   ]

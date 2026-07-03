@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "visual_part_pack_negative_proof_v1",
+  "goalId": "goal_085_deepsearch_backed_visual_part_pack_rule_stack",
+  "passed": true,
+  "scenarioCount": 16,
+  "rejectedCount": 16,
+  "matchedExpectationCount": 16,
+  "scenarios": [
+    {
+      "scenarioId": "absolute_path_rejected",
+      "causalMutation": "absolute metadata path",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.path.invalid",
+          "target": "fantasy_overworld_tile_part_pack",
+          "message": "Part-pack metadata path must be relative and safe."
+        }
+      ]
+    },
+    {
+      "scenarioId": "adult_without_eligible_body_plan",
+      "causalMutation": "adult extension lacks eligible body-plan metadata",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.adult.body_plan.ineligible",
+          "target": "adult_rating_gated_extension_metadata_only",
+          "message": "Adult metadata requires adult, sapient and humanoid-compatible body-plan metadata."
+        }
+      ]
+    },
+    {
+      "scenarioId": "creature_without_body_plan_rules",
+      "causalMutation": "creature pack missing body-plan rules",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.creature.body_plan_rules_missing",
+          "target": "creature_bodyplan_equipment_part_pack",
+          "message": "Creature packs require body-plan compatibility rules."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.body_plan_ref.unknown",
+          "target": "bodyplan/beast_safe",
+          "message": "Equipment overlays must reference known body plans."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.body_plan_ref.unknown",
+          "target": "bodyplan/humanoid",
+          "message": "Equipment overlays must reference known body plans."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.body_plan_ref.unknown",
+          "target": "bodyplan/humanoid",
+          "message": "Equipment overlays must reference known body plans."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.body_plan_ref.unknown",
+          "target": "bodyplan/humanoid",
+          "message": "Equipment overlays must reference known body plans."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.body_plan_ref.unknown",
+          "target": "bodyplan/humanoid",
+          "message": "Equipment overlays must reference known body plans."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.body_plan_ref.unknown",
+          "target": "bodyplan/mechanical",
+          "message": "Equipment overlays must reference known body plans."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.body_plan_ref.unknown",
+          "target": "bodyplan/reptilian",
+          "message": "Equipment overlays must reference known body plans."
+        }
+      ]
+    },
+    {
+      "scenarioId": "cyclic_recipe_dependencies",
+      "causalMutation": "cyclic recipe dependencies",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.recipe_dependency.cycle",
+          "target": "recipe/fantasy_overworld_tile_part_pack/v1",
+          "message": "Recipe dependencies must be acyclic."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.recipe_dependency.cycle",
+          "target": "recipe/water_coast_river_marsh_part_pack/v1",
+          "message": "Recipe dependencies must be acyclic."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_ids",
+      "causalMutation": "duplicate pack ids",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.pack_id.duplicate",
+          "target": "fantasy_overworld_tile_part_pack",
+          "message": "Part-pack ids must be unique."
+        }
+      ]
+    },
+    {
+      "scenarioId": "equipment_overlay_without_socket",
+      "causalMutation": "equipment overlay missing socket compatibility",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.equipment.socket_compatibility_missing",
+          "target": "equipment_overlay/headgear",
+          "message": "Equipment overlays require compatible socket ids."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_adult_safe_fallback",
+      "causalMutation": "adult extension missing fallback pack",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.adult.fallback_missing",
+          "target": "adult_rating_gated_extension_metadata_only",
+          "message": "Rating-gated adult metadata extensions require a safe fallback pack."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_layered_masks_sockets_anchors",
+      "causalMutation": "layered part missing required refs",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.layered_part.binding_missing",
+          "target": "part/fantasy_overworld_tile_part_pack/grass_base",
+          "message": "Layered parts require mask, socket and anchor refs."
+        }
+      ]
+    },
+    {
+      "scenarioId": "prompt_text_as_source_of_truth",
+      "causalMutation": "prompt source-of-truth claim",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.prompt.source_of_truth",
+          "target": "visual_part_pack_rule_stack_goal085",
+          "message": "Prompt text must not be treated as visual source of truth."
+        }
+      ]
+    },
+    {
+      "scenarioId": "provider_candidate_treated_as_approved",
+      "causalMutation": "provider candidate marked approved",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.provider_candidate.treated_as_approved",
+          "target": "adult_rating_gated_extension_metadata_only",
+          "message": "Quarantined provider candidates must not be treated as approved metadata."
+        }
+      ]
+    },
+    {
+      "scenarioId": "tile_without_transition_autotile",
+      "causalMutation": "tile pack missing transition and autotile rules",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.tile.transition_autotile_missing",
+          "target": "fantasy_overworld_tile_part_pack",
+          "message": "Tile packs require transition and autotile rules."
+        }
+      ]
+    },
+    {
+      "scenarioId": "ui_effect_without_safe_fallback",
+      "causalMutation": "UI/effect pack missing fallback",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.ui_effect.fallback_missing",
+          "target": "ui_theme_icon_effect_part_pack",
+          "message": "UI/effect packs require safe fallback metadata."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_palette_ref",
+      "causalMutation": "unknown recipe palette ref",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.recipe.palette_ref.unknown",
+          "target": "palette/unknown_visual_ref",
+          "message": "Recipes must reference a known palette profile."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown_recipe_ref",
+      "causalMutation": "unknown dependency recipe ref",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.recipe_ref.unknown",
+          "target": "recipe/unknown_visual_ref/v1",
+          "message": "Recipes must reference known recipe dependencies."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsafe_export_policy_contradiction",
+      "causalMutation": "adult metadata exported public-safe",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.export_policy.contradiction",
+          "target": "adult_rating_gated_extension_metadata_only",
+          "message": "Adult or rating-gated metadata must not be exported through public-safe policy."
+        },
+        {
+          "severity": "error",
+          "code": "visual_part_pack.export_policy.contradiction",
+          "target": "adult_rating_gated_extension_metadata_only",
+          "message": "Adult metadata must not use public-safe export policy."
+        }
+      ]
+    },
+    {
+      "scenarioId": "water_without_coast_river_lake",
+      "causalMutation": "water pack missing coast river lake marsh coverage",
+      "expectedValid": false,
+      "actualValid": false,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "visual_part_pack.water.coverage_missing",
+          "target": "water_coast_river_marsh_part_pack",
+          "message": "Water/coast packs require coast, river, lake and marsh coverage."
+        }
+      ]
+    }
+  ]
+}

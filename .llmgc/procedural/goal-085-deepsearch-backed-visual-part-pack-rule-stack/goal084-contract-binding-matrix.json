@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "goal084_contract_binding_matrix_v1",
+  "goalId": "goal_085_deepsearch_backed_visual_part_pack_rule_stack",
+  "passed": true,
+  "goal084ArtifactExists": true,
+  "goal084AcceptedFalse": true,
+  "goal084CatalogHash": "4e7255edf8e6c50466e153de1f0515692209c8ab46c60624e3f1dc17616d1369",
+  "rows": [
+    {
+      "packId": "adult_rating_gated_extension_metadata_only",
+      "goal084SlotId": "humanoid_paperdoll_adult_capable_metadata_only",
+      "slotExistsInGoal084Catalog": true,
+      "bindingKind": "metadata_contract_lineage"
+    },
+    {
+      "packId": "creature_bodyplan_equipment_part_pack",
+      "goal084SlotId": "creature_bodyplan_safe",
+      "slotExistsInGoal084Catalog": true,
+      "bindingKind": "metadata_contract_lineage"
+    },
+    {
+      "packId": "fantasy_overworld_tile_part_pack",
+      "goal084SlotId": "fantasy_overworld_tile_safe",
+      "slotExistsInGoal084Catalog": true,
+      "bindingKind": "metadata_contract_lineage"
+    },
+    {
+      "packId": "settlement_building_facade_part_pack",
+      "goal084SlotId": "settlement_building_safe",
+      "slotExistsInGoal084Catalog": true,
+      "bindingKind": "metadata_contract_lineage"
+    },
+    {
+      "packId": "ui_theme_icon_effect_part_pack",
+      "goal084SlotId": "tech_future_ui_panel_safe",
+      "slotExistsInGoal084Catalog": true,
+      "bindingKind": "metadata_contract_lineage"
+    },
+    {
+      "packId": "water_coast_river_marsh_part_pack",
+      "goal084SlotId": "water_coast_biome_safe",
+      "slotExistsInGoal084Catalog": true,
+      "bindingKind": "metadata_contract_lineage"
+    }
+  ]
+}
