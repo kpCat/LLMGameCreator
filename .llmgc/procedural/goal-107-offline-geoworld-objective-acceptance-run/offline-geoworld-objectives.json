@@ -1,0 +1,231 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "accepted": false,
+  "objectiveCount": 6,
+  "objectives": [
+    {
+      "objectiveId": "objective_001_inspect_target",
+      "objectiveKind": "inspect_poi_or_building_target",
+      "title": "Inspect a visible offline geoworld point-of-interest target.",
+      "sequenceIndex": 1,
+      "prerequisiteObjectiveIds": [],
+      "linkedActionIds": [
+        "interaction_action/4043aa856b4f/inspect"
+      ],
+      "linkedTargetIds": [
+        "interaction_target/4043aa856b4f"
+      ],
+      "linkedEventIds": [
+        "goal105_scripted_interaction_00"
+      ],
+      "expectedStateDeltaKeys": [
+        "interaction_target/4043aa856b4f/inspect"
+      ],
+      "expectedStateDeltaKinds": [
+        "inspection_log"
+      ],
+      "visibleDiagnostics": [
+        "objective=objective_001_inspect_target",
+        "actions=interaction_action/4043aa856b4f/inspect",
+        "deltaKinds=inspection_log",
+        "checkpointStep=not_required"
+      ],
+      "completionCondition": "selected target inspection delta must be present",
+      "completionState": "completed",
+      "requiresCheckpoint": false,
+      "requiredCheckpointStepIndex": 0,
+      "expectedStateHashAfter": "1ecb1c5a707aabcb6f8da6fd7d976fb1778ceeb6607bbf653f7b49a1a83e5769",
+      "deterministicHashContribution": "39df794c8b13184bdd8cd7e1537980ab9459e2f3401b7e98e98561c1ae700ba1"
+    },
+    {
+      "objectiveId": "objective_002_mark_target_visited",
+      "objectiveKind": "mark_target_visited",
+      "title": "Mark one offline geoworld target as visited.",
+      "sequenceIndex": 2,
+      "prerequisiteObjectiveIds": [
+        "objective_001_inspect_target"
+      ],
+      "linkedActionIds": [
+        "interaction_action/f57703787317/mark_visited"
+      ],
+      "linkedTargetIds": [
+        "interaction_target/f57703787317"
+      ],
+      "linkedEventIds": [
+        "goal105_scripted_interaction_02"
+      ],
+      "expectedStateDeltaKeys": [
+        "interaction_target/f57703787317/mark_visited"
+      ],
+      "expectedStateDeltaKinds": [
+        "visited_flag"
+      ],
+      "visibleDiagnostics": [
+        "objective=objective_002_mark_target_visited",
+        "actions=interaction_action/f57703787317/mark_visited",
+        "deltaKinds=visited_flag",
+        "checkpointStep=not_required"
+      ],
+      "completionCondition": "visited flag delta must be present",
+      "completionState": "completed",
+      "requiresCheckpoint": false,
+      "requiredCheckpointStepIndex": 0,
+      "expectedStateHashAfter": "a5ba82ccce171c6027159622b8c39e8b58e9c7a58bdaa3d684ea508e5931ab45",
+      "deterministicHashContribution": "8af4b83bd20f94ceae012b7295939ccbd268ac6ccd62cdcecafe74c374fcd5f5"
+    },
+    {
+      "objectiveId": "objective_003_save_load_checkpoint_resume",
+      "objectiveKind": "save_load_checkpoint_resume",
+      "title": "Save, load and resume from the Goal106 checkpoint.",
+      "sequenceIndex": 3,
+      "prerequisiteObjectiveIds": [
+        "objective_002_mark_target_visited"
+      ],
+      "linkedActionIds": [
+        "interaction_action/4043aa856b4f/inspect",
+        "interaction_action/ea90e067a16e/enter_or_focus",
+        "interaction_action/f57703787317/mark_visited"
+      ],
+      "linkedTargetIds": [
+        "interaction_target/4043aa856b4f",
+        "interaction_target/ea90e067a16e",
+        "interaction_target/f57703787317"
+      ],
+      "linkedEventIds": [
+        "goal105_scripted_interaction_00",
+        "goal105_scripted_interaction_01",
+        "goal105_scripted_interaction_02"
+      ],
+      "expectedStateDeltaKeys": [
+        "interaction_target/4043aa856b4f/inspect",
+        "interaction_target/ea90e067a16e/enter_or_focus",
+        "interaction_target/f57703787317/mark_visited"
+      ],
+      "expectedStateDeltaKinds": [
+        "inspection_log",
+        "focus_target",
+        "visited_flag"
+      ],
+      "visibleDiagnostics": [
+        "objective=objective_003_save_load_checkpoint_resume",
+        "actions=interaction_action/4043aa856b4f/inspect,interaction_action/ea90e067a16e/enter_or_focus,interaction_action/f57703787317/mark_visited",
+        "deltaKinds=inspection_log,focus_target,visited_flag",
+        "checkpointStep=3"
+      ],
+      "completionCondition": "Goal106 checkpoint snapshot must resume at checkpoint state hash",
+      "completionState": "completed",
+      "requiresCheckpoint": true,
+      "requiredCheckpointStepIndex": 3,
+      "expectedStateHashAfter": "a5ba82ccce171c6027159622b8c39e8b58e9c7a58bdaa3d684ea508e5931ab45",
+      "deterministicHashContribution": "43dec2a1714f28991653588d57373e75e6c7d48df9c2e670714fbd0edc1001d4"
+    },
+    {
+      "objectiveId": "objective_004_clear_blocked_route",
+      "objectiveKind": "toggle_or_clear_blocked_route",
+      "title": "Toggle or clear the blocked route/barrier state.",
+      "sequenceIndex": 4,
+      "prerequisiteObjectiveIds": [
+        "objective_003_save_load_checkpoint_resume"
+      ],
+      "linkedActionIds": [
+        "interaction_action/aec8482c9f7b/toggle_blocked"
+      ],
+      "linkedTargetIds": [
+        "interaction_target/aec8482c9f7b"
+      ],
+      "linkedEventIds": [
+        "goal105_scripted_interaction_03"
+      ],
+      "expectedStateDeltaKeys": [
+        "interaction_target/aec8482c9f7b/toggle_blocked"
+      ],
+      "expectedStateDeltaKinds": [
+        "blocked_flag"
+      ],
+      "visibleDiagnostics": [
+        "objective=objective_004_clear_blocked_route",
+        "actions=interaction_action/aec8482c9f7b/toggle_blocked",
+        "deltaKinds=blocked_flag",
+        "checkpointStep=not_required"
+      ],
+      "completionCondition": "blocked route state delta must be present",
+      "completionState": "completed",
+      "requiresCheckpoint": false,
+      "requiredCheckpointStepIndex": 0,
+      "expectedStateHashAfter": "8fd940d99cc08419731601d8482c023915da9ddcdfbbd25e5944d2d8808e6d31",
+      "deterministicHashContribution": "a5378b0e23a76443e45da472dd16b7b4789725e2593a8e9064877db4e6e1010d"
+    },
+    {
+      "objectiveId": "objective_005_collect_sample",
+      "objectiveKind": "collect_sample",
+      "title": "Collect one sample from an offline geoworld interaction target.",
+      "sequenceIndex": 5,
+      "prerequisiteObjectiveIds": [
+        "objective_004_clear_blocked_route"
+      ],
+      "linkedActionIds": [
+        "interaction_action/d73a4a060831/collect_sample"
+      ],
+      "linkedTargetIds": [
+        "interaction_target/d73a4a060831"
+      ],
+      "linkedEventIds": [
+        "goal105_scripted_interaction_04"
+      ],
+      "expectedStateDeltaKeys": [
+        "interaction_target/d73a4a060831/collect_sample"
+      ],
+      "expectedStateDeltaKinds": [
+        "sample_collected"
+      ],
+      "visibleDiagnostics": [
+        "objective=objective_005_collect_sample",
+        "actions=interaction_action/d73a4a060831/collect_sample",
+        "deltaKinds=sample_collected",
+        "checkpointStep=not_required"
+      ],
+      "completionCondition": "sample collection state delta must be present",
+      "completionState": "completed",
+      "requiresCheckpoint": false,
+      "requiredCheckpointStepIndex": 0,
+      "expectedStateHashAfter": "0f699ae615a2627e1532793f1ee7f690721633af70f00139c2129447ba84a64b",
+      "deterministicHashContribution": "8329062b3461df5fa4b42a99e03599d4debaeaa3209bf23406ac16458095c577"
+    },
+    {
+      "objectiveId": "objective_006_finalize_acceptance_run",
+      "objectiveKind": "finalize_acceptance_run",
+      "title": "Finalize the objective acceptance run after replay completion.",
+      "sequenceIndex": 6,
+      "prerequisiteObjectiveIds": [
+        "objective_005_collect_sample"
+      ],
+      "linkedActionIds": [
+        "interaction_action/69dd05489882/inspect"
+      ],
+      "linkedTargetIds": [
+        "interaction_target/69dd05489882"
+      ],
+      "linkedEventIds": [
+        "goal105_scripted_interaction_05"
+      ],
+      "expectedStateDeltaKeys": [
+        "interaction_target/69dd05489882/inspect"
+      ],
+      "expectedStateDeltaKinds": [
+        "inspection_log"
+      ],
+      "visibleDiagnostics": [
+        "objective=objective_006_finalize_acceptance_run",
+        "actions=interaction_action/69dd05489882/inspect",
+        "deltaKinds=inspection_log",
+        "checkpointStep=not_required"
+      ],
+      "completionCondition": "final state hash must match Goal106 replay final hash",
+      "completionState": "completed",
+      "requiresCheckpoint": false,
+      "requiredCheckpointStepIndex": 0,
+      "expectedStateHashAfter": "a095b977d266b1b4fa15f30331fa340c414d8bc6a33775dd55e7d3cd65903e32",
+      "deterministicHashContribution": "894bda7401f8f1586232fa6c9cc4f0ef69daaa50c2ad3ae96bcad9ec31223e84"
+    }
+  ]
+}

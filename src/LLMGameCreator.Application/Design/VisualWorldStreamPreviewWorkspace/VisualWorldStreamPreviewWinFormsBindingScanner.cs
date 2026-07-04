@@ -208,6 +208,17 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "offlineGeoworldSessionQualityGatePassed",
                 StringComparison.Ordinal);
+        var bindDisplaysOfflineGeoworldObjectiveAcceptance = pageText.Contains(
+                "offlineGeoworldObjectiveCount",
+                StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveCompletedCount", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveFinalStatus", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveReplaySaveLoadLinkage", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveUnityScriptsReady", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveEditorWindowReady", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveAlphaQualityConsolidationPassed", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveManualChecklistSummary", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged", StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -266,6 +277,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal106.winforms.offline_geoworld_session_replay_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysOfflineGeoworldObjectiveAcceptance,
+            "goal107.winforms.offline_geoworld_objective_acceptance_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -293,6 +309,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysOfflineGeoworldInteractions,
             PageBindDisplaysOfflineGeoworldSessionReplay =
                 bindDisplaysOfflineGeoworldSessionReplay,
+            PageBindDisplaysOfflineGeoworldObjectiveAcceptance =
+                bindDisplaysOfflineGeoworldObjectiveAcceptance,
             Diagnostics = diagnostics
         };
     }

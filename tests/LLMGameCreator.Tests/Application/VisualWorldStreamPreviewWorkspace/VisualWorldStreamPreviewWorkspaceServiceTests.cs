@@ -1,8 +1,7 @@
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
-using LLMGameCreator.Application.Design.OfflineGeoworldInteractionPlayableProbe;
-using LLMGameCreator.Application.Design.OfflineGeoworldSessionPersistenceReplay;
+using LLMGameCreator.Application.Design.OfflineGeoworldObjectiveAcceptanceRun;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.WinForms.Pages;
@@ -13,7 +12,7 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through105Artifacts()
+    public void ServiceLoadsRealGoal086Through107Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -34,8 +33,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("offline_geoworld_interactive_travel", groupIds);
         Assert.Contains("offline_geoworld_interactions", groupIds);
         Assert.Contains("offline_geoworld_session_replay", groupIds);
-        Assert.Equal(15, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 140);
+        Assert.Contains("offline_geoworld_objective_acceptance", groupIds);
+        Assert.Equal(16, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 166);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
@@ -341,7 +341,16 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal106.alpha_runtime_bootstrap_unchanged",
             "goal106.checkpoint_resume",
             "goal106.final_hash",
-            "goal106.quality_gate"
+            "goal106.quality_gate",
+            "goal107.unity_script_inventory",
+            "goal107.editor_window_inventory",
+            "goal107.replay_acceptance",
+            "goal107.negative",
+            "goal107.checkpoint_resume",
+            "goal107.completion_transitions",
+            "goal107.alpha_quality_consolidation",
+            "goal107.alpha_runtime_bootstrap_unchanged",
+            "goal107.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -644,11 +653,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
     private static VisualWorldStreamPreviewWorkspaceResult Build()
     {
         var root = ProjectRoot();
-        new OfflineGeoworldInteractionPlayableProbeEvidenceService()
-            .BuildAndWriteAsync(root)
-            .GetAwaiter()
-            .GetResult();
-        new OfflineGeoworldSessionPersistenceReplayEvidenceService()
+        new OfflineGeoworldObjectiveAcceptanceRunEvidenceService()
             .BuildAndWriteAsync(root)
             .GetAwaiter()
             .GetResult();

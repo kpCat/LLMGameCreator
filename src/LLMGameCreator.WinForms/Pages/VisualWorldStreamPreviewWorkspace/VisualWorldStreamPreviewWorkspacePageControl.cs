@@ -65,7 +65,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | interactionEvents="
             + result.Report.OfflineGeoworldInteractionScriptedEventCount
             + " | sessionReplaySteps="
-            + result.Report.OfflineGeoworldSessionReplayStepCount;
+            + result.Report.OfflineGeoworldSessionReplayStepCount
+            + " | objectiveCount="
+            + result.Report.OfflineGeoworldObjectiveCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -382,6 +384,15 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + result.Report.OfflineGeoworldSessionQualityGatePassed.ToString().ToLowerInvariant(),
             "goal106FilesDiscoveredByRelativePaths="
                 + result.Report.Goal106FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveCount=" + result.Report.OfflineGeoworldObjectiveCount,
+            "offlineGeoworldObjectiveCompletedCount=" + result.Report.OfflineGeoworldObjectiveCompletedCount,
+            "offlineGeoworldObjectiveFinalStatus=" + result.Report.OfflineGeoworldObjectiveFinalStatus,
+            "offlineGeoworldObjectiveReplaySaveLoadLinkage=" + result.Report.OfflineGeoworldObjectiveReplayAcceptanceProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveUnityScriptsReady=" + result.Report.OfflineGeoworldObjectiveUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveEditorWindowReady=" + result.Report.OfflineGeoworldObjectiveEditorWindowReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveAlphaQualityConsolidationPassed=" + result.Report.OfflineGeoworldObjectiveAlphaQualityConsolidationPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveManualChecklistSummary=" + result.Report.Goal107FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged=" + result.Report.OfflineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -628,29 +639,28 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                     .ToString().ToLowerInvariant(),
             "offlineGeoworldInteractionQualityGatePassed: "
                 + entry.OfflineGeoworldInteractionQualityGatePassed.ToString().ToLowerInvariant(),
-            "offlineGeoworldSessionReplayStepCount: "
-                + entry.OfflineGeoworldSessionReplayStepCount,
-            "offlineGeoworldSessionStateDeltaCount: "
-                + entry.OfflineGeoworldSessionStateDeltaCount,
-            "offlineGeoworldSessionCheckpointStepIndex: "
-                + entry.OfflineGeoworldSessionCheckpointStepIndex,
-            "offlineGeoworldSessionAcceptanceChecklistStepCount: "
-                + entry.OfflineGeoworldSessionAcceptanceChecklistStepCount,
-            "offlineGeoworldSessionFinalStateHash: "
-                + entry.OfflineGeoworldSessionFinalStateHash,
-            "offlineGeoworldSessionUnityScriptsReady: "
-                + entry.OfflineGeoworldSessionUnityScriptsReady.ToString().ToLowerInvariant(),
-            "offlineGeoworldSessionEditorWindowReady: "
-                + entry.OfflineGeoworldSessionEditorWindowReady.ToString().ToLowerInvariant(),
-            "offlineGeoworldSessionSimulatedReplayProofPassed: "
-                + entry.OfflineGeoworldSessionSimulatedReplayProofPassed.ToString().ToLowerInvariant(),
-            "offlineGeoworldSessionNegativeProofPassed: "
-                + entry.OfflineGeoworldSessionNegativeProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldSessionReplayStepCount: " + entry.OfflineGeoworldSessionReplayStepCount,
+            "offlineGeoworldSessionStateDeltaCount: " + entry.OfflineGeoworldSessionStateDeltaCount,
+            "offlineGeoworldSessionCheckpointStepIndex: " + entry.OfflineGeoworldSessionCheckpointStepIndex,
+            "offlineGeoworldSessionAcceptanceChecklistStepCount: " + entry.OfflineGeoworldSessionAcceptanceChecklistStepCount,
+            "offlineGeoworldSessionFinalStateHash: " + entry.OfflineGeoworldSessionFinalStateHash,
+            "offlineGeoworldSessionUnityScriptsReady: " + entry.OfflineGeoworldSessionUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldSessionEditorWindowReady: " + entry.OfflineGeoworldSessionEditorWindowReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldSessionSimulatedReplayProofPassed: " + entry.OfflineGeoworldSessionSimulatedReplayProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldSessionNegativeProofPassed: " + entry.OfflineGeoworldSessionNegativeProofPassed.ToString().ToLowerInvariant(),
             "offlineGeoworldSessionAlphaRuntimeBootstrapUnchanged: "
                 + entry.OfflineGeoworldSessionAlphaRuntimeBootstrapUnchanged
                     .ToString().ToLowerInvariant(),
-            "offlineGeoworldSessionQualityGatePassed: "
-                + entry.OfflineGeoworldSessionQualityGatePassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldSessionQualityGatePassed: " + entry.OfflineGeoworldSessionQualityGatePassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveCount: " + entry.OfflineGeoworldObjectiveCount,
+            "offlineGeoworldObjectiveCompletedCount: " + entry.OfflineGeoworldObjectiveCompletedCount,
+            "offlineGeoworldObjectiveFinalStatus: " + entry.OfflineGeoworldObjectiveFinalStatus,
+            "offlineGeoworldObjectiveReplaySaveLoadLinkage: " + entry.OfflineGeoworldObjectiveReplayAcceptanceProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveUnityScriptsReady: " + entry.OfflineGeoworldObjectiveUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveEditorWindowReady: " + entry.OfflineGeoworldObjectiveEditorWindowReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveAlphaQualityConsolidationPassed: " + entry.OfflineGeoworldObjectiveAlphaQualityConsolidationPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveManualChecklistSummary: " + entry.OfflineGeoworldObjectiveQualityGatePassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged: " + entry.OfflineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);

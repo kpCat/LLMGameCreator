@@ -210,6 +210,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var interactiveTravel = BuildGoal104InteractiveTravelQuality(groups, proofs);
         var interactions = BuildGoal105InteractionQuality(groups, proofs);
         var sessionReplay = BuildGoal106SessionQuality(groups, proofs);
+        var objectiveAcceptance = BuildGoal107ObjectiveQuality(groups, proofs);
         var requiredGroups = new[]
         {
             "microtiles",
@@ -226,7 +227,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "offline_geoworld_playmode_travel",
             "offline_geoworld_interactive_travel",
             "offline_geoworld_interactions",
-            "offline_geoworld_session_replay"
+            "offline_geoworld_session_replay",
+            "offline_geoworld_objective_acceptance"
         };
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -390,60 +392,22 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal104InteractiveTravelQualityDiagnostics(interactiveTravel, diagnostics);
         AddGoal105InteractionQualityDiagnostics(interactions, diagnostics);
         AddGoal106SessionQualityDiagnostics(sessionReplay, diagnostics);
+        AddGoal107ObjectiveQualityDiagnostics(objectiveAcceptance, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
         AddIfFalse(binding.Passed, "goal092.quality.winforms_binding", "winformsBinding", diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysCacheExports,
-            "goal094.quality.winforms_cache_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysUnityHandoff,
-            "goal096.quality.winforms_unity_handoff_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysGeoworld,
-            "goal099.quality.winforms_geoworld_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysOfflineGeoworldHandoff,
-            "goal100.quality.winforms_offline_geoworld_handoff_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysOfflineGeoworldUnityPreview,
-            "goal101.quality.winforms_offline_geoworld_unity_preview_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysOfflineGeoworldUnityEditorPreview,
-            "goal102.quality.winforms_offline_geoworld_unity_editor_preview_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysOfflineGeoworldPlayModeTravel,
-            "goal103.quality.winforms_offline_geoworld_playmode_travel_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysOfflineGeoworldInteractiveTravel,
-            "goal104.quality.winforms_offline_geoworld_interactive_travel_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysOfflineGeoworldInteractions,
-            "goal105.quality.winforms_offline_geoworld_interaction_binding",
-            "winformsBinding",
-            diagnostics);
-        AddIfFalse(
-            binding.PageBindDisplaysOfflineGeoworldSessionReplay,
-            "goal106.quality.winforms_offline_geoworld_session_replay_binding",
-            "winformsBinding",
-            diagnostics);
+        AddIfFalse(binding.PageBindDisplaysCacheExports, "goal094.quality.winforms_cache_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysUnityHandoff, "goal096.quality.winforms_unity_handoff_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysGeoworld, "goal099.quality.winforms_geoworld_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldHandoff, "goal100.quality.winforms_offline_geoworld_handoff_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldUnityPreview, "goal101.quality.winforms_offline_geoworld_unity_preview_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldUnityEditorPreview, "goal102.quality.winforms_offline_geoworld_unity_editor_preview_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldPlayModeTravel, "goal103.quality.winforms_offline_geoworld_playmode_travel_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldInteractiveTravel, "goal104.quality.winforms_offline_geoworld_interactive_travel_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldInteractions, "goal105.quality.winforms_offline_geoworld_interaction_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldSessionReplay, "goal106.quality.winforms_offline_geoworld_session_replay_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldObjectiveAcceptance, "goal107.quality.winforms_offline_geoworld_objective_acceptance_binding", "winformsBinding", diagnostics);
         AddIfFalse(sourceHealth.Passed, "goal092.quality.source_health", "sourceHealth", diagnostics);
         foreach (var diagnostic in sourceDiagnostics
                      .Concat(sourceHealth.Diagnostics)
@@ -637,6 +601,25 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             OfflineGeoworldSessionAlphaRuntimeBootstrapUnchanged = sessionReplay.AlphaRuntimeBootstrapUnchanged,
             OfflineGeoworldSessionQualityGatePassed = sessionReplay.QualityGatePassed,
             Goal106FilesDiscoveredByRelativePaths = sessionReplay.RelativePaths,
+            OfflineGeoworldObjectiveAcceptanceGroupPresent = objectiveAcceptance.GroupPresent,
+            OfflineGeoworldObjectiveCount = objectiveAcceptance.ObjectiveCount,
+            OfflineGeoworldObjectiveCompletedCount = objectiveAcceptance.CompletedObjectiveCount,
+            OfflineGeoworldObjectivePayloadFileCount = objectiveAcceptance.PayloadFileCount,
+            OfflineGeoworldObjectiveReplayStepCount = objectiveAcceptance.ReplayStepCount,
+            OfflineGeoworldObjectiveStateDeltaCount = objectiveAcceptance.StateDeltaCount,
+            OfflineGeoworldObjectiveCheckpointStepIndex = objectiveAcceptance.CheckpointStepIndex,
+            OfflineGeoworldObjectiveFinalStatus = objectiveAcceptance.FinalStatus,
+            OfflineGeoworldObjectiveFinalStateHash = objectiveAcceptance.FinalStateHash,
+            OfflineGeoworldObjectiveUnityScriptsReady = objectiveAcceptance.UnityScriptsReady,
+            OfflineGeoworldObjectiveEditorWindowReady = objectiveAcceptance.EditorWindowReady,
+            OfflineGeoworldObjectiveReplayAcceptanceProofPassed = objectiveAcceptance.ReplayAcceptanceProofPassed,
+            OfflineGeoworldObjectiveNegativeProofPassed = objectiveAcceptance.NegativeProofPassed,
+            OfflineGeoworldObjectiveAlphaQualityConsolidationPassed =
+                objectiveAcceptance.AlphaQualityConsolidationPassed,
+            OfflineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged =
+                objectiveAcceptance.AlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldObjectiveQualityGatePassed = objectiveAcceptance.QualityGatePassed,
+            Goal107FilesDiscoveredByRelativePaths = objectiveAcceptance.RelativePaths,
             RequiredArtifactGroupsPresent = requiredArtifactGroupsPresent,
             Goal091StreamWindowsVisible = goal091StreamEntries >= 4,
             ProofStatusPassed = proofStatusPassed,
@@ -659,6 +642,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             WinFormsOfflineGeoworldInteractionBindingReal =
                 binding.PageBindDisplaysOfflineGeoworldInteractions,
             WinFormsOfflineGeoworldSessionReplayBindingReal = binding.PageBindDisplaysOfflineGeoworldSessionReplay,
+            WinFormsOfflineGeoworldObjectiveAcceptanceBindingReal =
+                binding.PageBindDisplaysOfflineGeoworldObjectiveAcceptance,
             SourceHealthPassed = sourceHealth.Passed,
             ScannedCSharpFileCount = sourceHealth.ScannedCSharpFileCount,
             MaxLogicalLineCount = sourceHealth.MaxLogicalLineCount,

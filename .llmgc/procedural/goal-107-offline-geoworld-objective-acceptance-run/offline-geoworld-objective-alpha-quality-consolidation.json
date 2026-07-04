@@ -1,0 +1,25 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "passed": true,
+  "travelPreviewReady": true,
+  "editorPreviewReady": true,
+  "playModeTravelReady": true,
+  "interactiveTravelReady": true,
+  "interactionProbeReady": true,
+  "sessionReplayReady": true,
+  "objectiveAcceptanceRunReady": true,
+  "manualAcceptanceChecklistReady": true,
+  "sourceReadableNotMinified": true,
+  "noNetworkProviderLlmMarkers": true,
+  "noAlphaRuntimeBootstrapDependency": true,
+  "noExternalPackageOrNewInputSystemMarkers": true,
+  "noScenePrefabSettingsBuildPackageMutation": true,
+  "noBinaryRasterMedia": true,
+  "scannedUnitySourceFileCount": 25,
+  "maxUnitySourceLineCount": 394,
+  "remainingNotFinalWarnings": [
+    "Manual gate offline_geoworld_objective_acceptance_run_verification remains required.",
+    "Unity Alpha geoworld objective acceptance is an offline proof path, not a final runtime build."
+  ],
+  "diagnostics": []
+}

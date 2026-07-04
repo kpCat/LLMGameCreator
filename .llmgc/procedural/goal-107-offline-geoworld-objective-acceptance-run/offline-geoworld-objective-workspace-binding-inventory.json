@@ -1,0 +1,17 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "passed": true,
+  "workspaceCatalogIncludesObjectiveAcceptanceGroup": true,
+  "workspaceReadsGoal107EvidenceByRelativePath": true,
+  "winFormsPageDisplaysObjectiveFields": true,
+  "showsObjectiveCount": true,
+  "showsCompletedObjectiveCount": true,
+  "showsFinalStatus": true,
+  "showsReplaySaveLoadLinkage": true,
+  "showsUnityScriptReadiness": true,
+  "showsEditorHelperReadiness": true,
+  "showsAlphaQualityConsolidationStatus": true,
+  "showsManualChecklistSummary": true,
+  "showsAlphaRuntimeBootstrapUnchangedStatus": true,
+  "diagnostics": []
+}

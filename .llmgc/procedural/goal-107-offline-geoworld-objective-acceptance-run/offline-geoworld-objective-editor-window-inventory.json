@@ -1,0 +1,29 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "passed": true,
+  "editorWindowScriptExists": true,
+  "menuItemMarkerPresent": true,
+  "streamingAssetsPathMarkerPresent": true,
+  "goal107PayloadPathMarkerPresent": true,
+  "createRigMethodPresent": true,
+  "clearRigMethodPresent": true,
+  "acceptanceInstructionsPresent": true,
+  "manualButtonOnly": true,
+  "hasNoProviderNetworkMarkers": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoScenePrefabSettingsMutationMarkers": true,
+  "hasNoAutoRunImportMarker": true,
+  "sourceFile": {
+    "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldObjectiveAcceptanceWindow.cs",
+    "exists": true,
+    "sha256": "5ba3b1bd5aec09b099861cd88f99aae9c976787b92054d7264804fdf8165d563",
+    "lineCount": 156,
+    "maxLineLength": 132,
+    "notMinified": true,
+    "hasNoProviderNetworkMarkers": true,
+    "doesNotReferenceAlphaRuntimeBootstrap": true,
+    "hasNoScenePrefabSettingsMutationMarkers": true,
+    "hasNoExternalDependencyMarkers": true
+  },
+  "diagnostics": []
+}

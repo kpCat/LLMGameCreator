@@ -1,0 +1,70 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "passed": true,
+  "goal106AcceptedFalsePreserved": true,
+  "goal106PayloadConsumed": true,
+  "goal106UnityEvidenceConsumed": true,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-manifest.json",
+      "exists": true,
+      "sha256": "f42d85ace8dac47bc07ab6e0583700af1ad9626b3b126286e2ac09d3a40c57cd",
+      "purpose": "Goal106 session replay manifest"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-initial-state.json",
+      "exists": true,
+      "sha256": "11b690fc1a846f61dcad7cbd387242f4071953b589636afabc694c483565c9de",
+      "purpose": "Goal106 initial state"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-delta-log.json",
+      "exists": true,
+      "sha256": "42b0342175ead2b9e5c0bd3fa348a35fe6b3293b851dc806e2b9e86a2e3d9b53",
+      "purpose": "Goal106 state delta log"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-replay-script.json",
+      "exists": true,
+      "sha256": "5c21ecde1557f16d68f661e1fd82eff0307c4e753cf934beea48dbd23cb559b8",
+      "purpose": "Goal106 replay script"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-simulated-save-load-replay-proof.json",
+      "exists": true,
+      "sha256": "596677c4970e805415d0f3acff2c0dd468e5dec2d4253bc65f2be68a70a9330b",
+      "purpose": "Goal106 simulated save/load/replay proof"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-unity-script-inventory.json",
+      "exists": true,
+      "sha256": "af4b878c45eec0f42c4e548b54c3799755e5d5c3ddeaf66f631578f5a6c21b42",
+      "purpose": "Goal106 Unity script inventory"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-editor-window-inventory.json",
+      "exists": true,
+      "sha256": "e00382f982f4f61478617738520a32fd84674d95d1721e88e9a0561c56f356d3",
+      "purpose": "Goal106 Unity editor helper inventory"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSaveLoadController.cs",
+      "exists": true,
+      "sha256": "1bc58851a5c73304fc85d8da4dccda614c245fc9958f069fef0acb81d341f994",
+      "purpose": "Goal106 Unity save/load controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionReplayController.cs",
+      "exists": true,
+      "sha256": "e550cc594d75c476aad265e2c66c91ccab054cefa0dce7b07eecd6f96c833fb0",
+      "purpose": "Goal106 Unity replay controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldObjectiveAcceptanceController.cs",
+      "exists": true,
+      "sha256": "5e5fa4e52ccc5613b63e1c523b83f9a12460be0dbecbac7bffa623dd189cd920",
+      "purpose": "Goal107 Unity objective acceptance controller"
+    }
+  ],
+  "diagnostics": []
+}

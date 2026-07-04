@@ -1,0 +1,109 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "accepted": false,
+  "sourceGoalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "replayStepCount": 6,
+  "stateDeltaCount": 6,
+  "checkpointStepIndex": 3,
+  "saveLoadResumeRequired": true,
+  "initialStateHash": "73ab913660463dcd79bfd79e004fea74988193bf90ffd6bf4c1a1525c9be9e92",
+  "checkpointStateHash": "a5ba82ccce171c6027159622b8c39e8b58e9c7a58bdaa3d684ea508e5931ab45",
+  "finalStateHash": "a095b977d266b1b4fa15f30331fa340c414d8bc6a33775dd55e7d3cd65903e32",
+  "finalObjectiveId": "objective_006_finalize_acceptance_run",
+  "steps": [
+    {
+      "stepIndex": 1,
+      "objectiveId": "objective_001_inspect_target",
+      "objectiveKind": "inspect_poi_or_building_target",
+      "appliedReplayEventIds": [
+        "goal105_scripted_interaction_00"
+      ],
+      "appliedActionIds": [
+        "interaction_action/4043aa856b4f/inspect"
+      ],
+      "stateHashBefore": "73ab913660463dcd79bfd79e004fea74988193bf90ffd6bf4c1a1525c9be9e92",
+      "stateHashAfter": "1ecb1c5a707aabcb6f8da6fd7d976fb1778ceeb6607bbf653f7b49a1a83e5769",
+      "checkpointLoadedBeforeCompletion": false,
+      "completionHash": "2dc06d530b297e6dfae757c3c5440be0ee452f35a264da5039d7469c294bcb8f"
+    },
+    {
+      "stepIndex": 2,
+      "objectiveId": "objective_002_mark_target_visited",
+      "objectiveKind": "mark_target_visited",
+      "appliedReplayEventIds": [
+        "goal105_scripted_interaction_02"
+      ],
+      "appliedActionIds": [
+        "interaction_action/f57703787317/mark_visited"
+      ],
+      "stateHashBefore": "2dc06d530b297e6dfae757c3c5440be0ee452f35a264da5039d7469c294bcb8f",
+      "stateHashAfter": "a5ba82ccce171c6027159622b8c39e8b58e9c7a58bdaa3d684ea508e5931ab45",
+      "checkpointLoadedBeforeCompletion": false,
+      "completionHash": "5f6f9cb4bdee3359d2c4991bff4edb2b4d29486dbce90b22d764e0c5474b718c"
+    },
+    {
+      "stepIndex": 3,
+      "objectiveId": "objective_003_save_load_checkpoint_resume",
+      "objectiveKind": "save_load_checkpoint_resume",
+      "appliedReplayEventIds": [
+        "goal105_scripted_interaction_00",
+        "goal105_scripted_interaction_01",
+        "goal105_scripted_interaction_02"
+      ],
+      "appliedActionIds": [
+        "interaction_action/4043aa856b4f/inspect",
+        "interaction_action/ea90e067a16e/enter_or_focus",
+        "interaction_action/f57703787317/mark_visited"
+      ],
+      "stateHashBefore": "5f6f9cb4bdee3359d2c4991bff4edb2b4d29486dbce90b22d764e0c5474b718c",
+      "stateHashAfter": "a5ba82ccce171c6027159622b8c39e8b58e9c7a58bdaa3d684ea508e5931ab45",
+      "checkpointLoadedBeforeCompletion": true,
+      "completionHash": "0c1f3eb33bd7dccda1d8985b8387ad5421419589c976b099ce661af4483e6fe5"
+    },
+    {
+      "stepIndex": 4,
+      "objectiveId": "objective_004_clear_blocked_route",
+      "objectiveKind": "toggle_or_clear_blocked_route",
+      "appliedReplayEventIds": [
+        "goal105_scripted_interaction_03"
+      ],
+      "appliedActionIds": [
+        "interaction_action/aec8482c9f7b/toggle_blocked"
+      ],
+      "stateHashBefore": "0c1f3eb33bd7dccda1d8985b8387ad5421419589c976b099ce661af4483e6fe5",
+      "stateHashAfter": "8fd940d99cc08419731601d8482c023915da9ddcdfbbd25e5944d2d8808e6d31",
+      "checkpointLoadedBeforeCompletion": false,
+      "completionHash": "79a75e5baf171be7813652c9a0c8f32e654f0fecde6ebb6f2769d7f1b33b8212"
+    },
+    {
+      "stepIndex": 5,
+      "objectiveId": "objective_005_collect_sample",
+      "objectiveKind": "collect_sample",
+      "appliedReplayEventIds": [
+        "goal105_scripted_interaction_04"
+      ],
+      "appliedActionIds": [
+        "interaction_action/d73a4a060831/collect_sample"
+      ],
+      "stateHashBefore": "79a75e5baf171be7813652c9a0c8f32e654f0fecde6ebb6f2769d7f1b33b8212",
+      "stateHashAfter": "0f699ae615a2627e1532793f1ee7f690721633af70f00139c2129447ba84a64b",
+      "checkpointLoadedBeforeCompletion": false,
+      "completionHash": "dc42516f00fe10ac4e3dea10aafe7a1b4662e04c86fdf4dad275eb4a6283fe6f"
+    },
+    {
+      "stepIndex": 6,
+      "objectiveId": "objective_006_finalize_acceptance_run",
+      "objectiveKind": "finalize_acceptance_run",
+      "appliedReplayEventIds": [
+        "goal105_scripted_interaction_05"
+      ],
+      "appliedActionIds": [
+        "interaction_action/69dd05489882/inspect"
+      ],
+      "stateHashBefore": "dc42516f00fe10ac4e3dea10aafe7a1b4662e04c86fdf4dad275eb4a6283fe6f",
+      "stateHashAfter": "a095b977d266b1b4fa15f30331fa340c414d8bc6a33775dd55e7d3cd65903e32",
+      "checkpointLoadedBeforeCompletion": false,
+      "completionHash": "eeebddc5d8e8b41d137a03b3ba63b6c8e6484b9fe82b17cbf993bbaa91ff8bb4"
+    }
+  ]
+}

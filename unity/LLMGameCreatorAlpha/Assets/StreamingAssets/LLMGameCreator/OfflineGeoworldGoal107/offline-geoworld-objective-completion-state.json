@@ -1,0 +1,28 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "accepted": false,
+  "completed": true,
+  "finalStatus": "completed",
+  "completedObjectiveCount": 6,
+  "currentObjectiveId": "",
+  "completedObjectiveIds": [
+    "objective_001_inspect_target",
+    "objective_002_mark_target_visited",
+    "objective_003_save_load_checkpoint_resume",
+    "objective_004_clear_blocked_route",
+    "objective_005_collect_sample",
+    "objective_006_finalize_acceptance_run"
+  ],
+  "objectiveHashChain": [
+    "73ab913660463dcd79bfd79e004fea74988193bf90ffd6bf4c1a1525c9be9e92",
+    "2dc06d530b297e6dfae757c3c5440be0ee452f35a264da5039d7469c294bcb8f",
+    "5f6f9cb4bdee3359d2c4991bff4edb2b4d29486dbce90b22d764e0c5474b718c",
+    "0c1f3eb33bd7dccda1d8985b8387ad5421419589c976b099ce661af4483e6fe5",
+    "79a75e5baf171be7813652c9a0c8f32e654f0fecde6ebb6f2769d7f1b33b8212",
+    "dc42516f00fe10ac4e3dea10aafe7a1b4662e04c86fdf4dad275eb4a6283fe6f",
+    "eeebddc5d8e8b41d137a03b3ba63b6c8e6484b9fe82b17cbf993bbaa91ff8bb4"
+  ],
+  "finalObjectiveAcceptanceHash": "eeebddc5d8e8b41d137a03b3ba63b6c8e6484b9fe82b17cbf993bbaa91ff8bb4",
+  "replayLinked": true,
+  "saveLoadResumeLinked": true
+}

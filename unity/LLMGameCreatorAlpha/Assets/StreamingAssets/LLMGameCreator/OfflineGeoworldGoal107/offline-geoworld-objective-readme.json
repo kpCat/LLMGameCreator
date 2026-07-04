@@ -1,0 +1,10 @@
+{
+  "goalId": "goal_107_offline_geoworld_objective_acceptance_run",
+  "offlineSyntheticOnly": true,
+  "metadataOnly": true,
+  "alphaToolingOnly": true,
+  "implementsFinalRuntimeQuestSystem": false,
+  "usesRealGeodata": false,
+  "usesProviderOrNetworkCalls": false,
+  "scopeSummary": "Unity Alpha objective tracker payload over Goal106 offline geoworld replay/save-load metadata."
+}
