@@ -83,7 +83,9 @@
     ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/",
     ".llmgc/procedural/goal-108a-alpha-slice-source-split-immutability-audit/",
     ".llmgc/procedural/goal-109-offline-geoworld-alpha-slice-export-package/",
-    ".llmgc/exports/goal-109-offline-geoworld-alpha-slice/"
+    ".llmgc/exports/goal-109-offline-geoworld-alpha-slice/",
+    ".llmgc/procedural/goal-110-offline-geoworld-alpha-manual-acceptance-gate/",
+    ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1602,6 +1604,37 @@
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaSliceExportPackage/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/"
+      ]
+    },
+    {
+      "scenario": "goal-110-offline-geoworld-alpha-manual-acceptance-gate",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldAlphaSliceManualAcceptanceGateProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal110.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResult.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResultStore.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldAlphaAcceptanceRunnerWindow.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-110-offline-geoworld-alpha-manual-acceptance-gate/",
+        ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/",
+        "docs/agent-tasks/goal-110-offline-geoworld-alpha-manual-acceptance-gate/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceManualAcceptanceGate/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaSliceManualAcceptanceGate/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/"
       ]
     }
   ]

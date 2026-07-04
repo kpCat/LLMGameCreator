@@ -101,6 +101,8 @@ offline_geoworld_interaction_playable_probe_verification required
 offline_geoworld_session_persistence_replay_verification required
 offline_geoworld_objective_acceptance_run_verification required
 offline_geoworld_alpha_slice_orchestrator_verification required
+offline_geoworld_alpha_slice_export_package_verification required
+offline_geoworld_alpha_manual_acceptance_verification required
 ```
 
 Current capabilities:
@@ -141,6 +143,7 @@ Current capabilities:
 - Goal 108 offline geoworld Alpha Slice orchestrator evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets Alpha Slice payload, manual Unity Editor one-click setup/clear/verify window, small coordinator script, acceptance runbook, full-slice simulated proof, negative proof and workspace inspection;
 - Goal 108A alpha slice source split and immutability audit evidence with the Goal108 orchestrator Application source split below 700 physical/logical lines, actual `14ad9f38..989a79ab` git diff/blob audit, 17 Goal108 evidence/payload additions, zero Goal101-107 artifact modifications, matching Goal108 `historicalArtifactsUnchanged=true`, no evidence-trust debt and unchanged AlphaRuntimeBootstrap;
 - Goal 109 portable offline geoworld Alpha Slice export package evidence with a BCL-only Application package service, deterministic directory package, clean-import proof, 16-case negative proof, standalone Unity package verifier/editor window, StreamingAssets metadata mirror and Visual World Stream Preview Workspace inspection;
+- Goal 110 offline geoworld Alpha manual acceptance gate evidence with a BCL-only Application acceptance service, checklist/result-template/dashboard payloads, simulated result readback proof, 13-case negative proof, standalone Unity result/store scripts, Editor acceptance runner window, StreamingAssets metadata mirror and Visual World Stream Preview Workspace inspection;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1914,14 +1917,37 @@ fetching, raw geodata dump, binary/raster media, prompt-dump, final gameplay, fi
 scene/prefab/settings/packages/build-settings files or historical Goal101-108 artifacts. Goal109, Goal108A, Goal108
 and prior geoworld gates remain `accepted=false`.
 
+### Goal 110: Offline Geoworld Alpha Manual Acceptance Gate
+
+Goal 110 is produced for review with `offline_geoworld_alpha_manual_acceptance_verification required`,
+`accepted=false`, `implementationStatus=GREEN`.
+
+Goal 110 writes deterministic evidence under
+`.llmgc/procedural/goal-110-offline-geoworld-alpha-manual-acceptance-gate/`, writes the portable acceptance package
+under `.llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/` and mirrors metadata-only payload files into
+`unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/`. The package contains
+manifest, checklist, result template, release gate dashboard and readme payloads, plus file index and checksums in the
+export package. Evidence records `checklistStepCount=12`, `payloadFileCount=5`, `exportFileCount=7`,
+`automatedGatePassed=true`, `manualAcceptancePending=true`, `simulatedProofPassed=true`, `negativeRejectedCount=13`,
+`workspaceBindingPassed=true`, `alphaRuntimeBootstrapUnchanged=true` and `qualityGatePassed=true`.
+
+Goal 110 consumes the real Goal109 export package by repository-relative path, adds standalone Unity Alpha
+result/result-store scripts and an Editor acceptance runner window, and surfaces
+`offline_geoworld_alpha_manual_acceptance` in the existing Visual World Stream Preview Workspace. It is manual
+acceptance tooling only, not a final release, final Runtime build or manual gate pass. Goal 110 changes no Runtime,
+public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file, dependency, LFZ source/archive,
+live network fetching, raw geodata dump, binary/raster media, prompt-dump, final gameplay, final art, atlas, Unity
+scene/prefab/settings/packages/build-settings files or historical Goal101-109 artifacts. Goal110, Goal109, Goal108A,
+Goal108 and prior geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-offline_geoworld_alpha_slice_export_package_verification
+offline_geoworld_alpha_manual_acceptance_verification
 ```
 
 Status:
 
 ```text
-goal_109_offline_geoworld_alpha_slice_export_package_produced_for_review
+goal_110_offline_geoworld_alpha_manual_acceptance_gate_produced_for_review
 ```

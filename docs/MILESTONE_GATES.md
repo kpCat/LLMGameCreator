@@ -8,6 +8,8 @@ Each milestone must produce visible product progress. Contract and proof artifac
 
 ## Vertical Slice Final
 
+Goal 110 note: `offline_geoworld_alpha_manual_acceptance_verification` now packages the offline geoworld Alpha manual checklist, result template and release-risk/milestone links for review, but it remains `accepted=false` and does not by itself close `vertical_slice_final_verification`.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

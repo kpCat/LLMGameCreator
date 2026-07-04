@@ -213,6 +213,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var objectiveAcceptance = BuildGoal107ObjectiveQuality(groups, proofs);
         var alphaSlice = BuildGoal108AlphaSliceQuality(groups, proofs);
         var alphaExport = BuildGoal109AlphaExportPackageQuality(groups, proofs);
+        var manualAcceptance = BuildGoal110AlphaManualAcceptanceQuality(groups, proofs);
         var requiredGroups = new[]
         {
             "microtiles",
@@ -232,7 +233,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "offline_geoworld_session_replay",
             "offline_geoworld_objective_acceptance",
             "offline_geoworld_alpha_slice",
-            "offline_geoworld_alpha_export_package"
+            "offline_geoworld_alpha_export_package",
+            "offline_geoworld_alpha_manual_acceptance"
         };
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -399,6 +401,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal107ObjectiveQualityDiagnostics(objectiveAcceptance, diagnostics);
         AddGoal108AlphaSliceQualityDiagnostics(alphaSlice, diagnostics);
         AddGoal109AlphaExportPackageQualityDiagnostics(alphaExport, diagnostics);
+        AddGoal110AlphaManualAcceptanceQualityDiagnostics(manualAcceptance, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -416,6 +419,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(binding.PageBindDisplaysOfflineGeoworldObjectiveAcceptance, "goal107.quality.winforms_offline_geoworld_objective_acceptance_binding", "winformsBinding", diagnostics);
         AddIfFalse(binding.PageBindDisplaysOfflineGeoworldAlphaSlice, "goal108.quality.winforms_offline_geoworld_alpha_slice_binding", "winformsBinding", diagnostics);
         AddIfFalse(binding.PageBindDisplaysOfflineGeoworldAlphaExportPackage, "goal109.quality.winforms_offline_geoworld_alpha_export_package_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldAlphaManualAcceptance, "goal110.quality.winforms_offline_geoworld_alpha_manual_acceptance_binding", "winformsBinding", diagnostics);
         AddIfFalse(sourceHealth.Passed, "goal092.quality.source_health", "sourceHealth", diagnostics);
         foreach (var diagnostic in sourceDiagnostics
                      .Concat(sourceHealth.Diagnostics)
@@ -425,7 +429,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         }
 
         var passed = diagnostics.All(item => item.Severity != "error");
-        return ApplyGoal109AlphaExportPackageQuality(new VisualWorldPreviewWorkspaceQualityGate
+        var baseQualityGate = new VisualWorldPreviewWorkspaceQualityGate
         {
             Accepted = false,
             Passed = passed,
@@ -687,7 +691,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 .OrderBy(item => item.Code, StringComparer.Ordinal)
                 .ThenBy(item => item.Target, StringComparer.Ordinal)
                 .ToList()
-        }, alphaExport, binding);
+        };
+        var withGoal109 = ApplyGoal109AlphaExportPackageQuality(baseQualityGate, alphaExport, binding);
+        return ApplyGoal110AlphaManualAcceptanceQuality(withGoal109, manualAcceptance, binding);
     }
 
 }

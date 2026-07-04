@@ -1,0 +1,73 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "accepted": false,
+  "manualAcceptancePending": true,
+  "automatedGatePassed": true,
+  "resultStatus": "synthetic_walkthrough_complete_manual_acceptance_pending",
+  "checklistHash": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "templateHash": "b75bee4c9853182bee19ec94b7799ae45eb500e63ee46e106f24cbd77c19a1ac",
+  "stepResults": [
+    {
+      "stepId": "complete_objectives",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "load_snapshot",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "open_alpha_slice_window",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "open_unity_project",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "record_diagnostics",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "replay",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "run_interaction",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "run_package_verifier",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "run_travel",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "save_snapshot",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "setup_rig",
+      "status": "completed_simulated",
+      "fileRead": true
+    },
+    {
+      "stepId": "verify_package",
+      "status": "completed_simulated",
+      "fileRead": true
+    }
+  ],
+  "resultHash": "3b371310660284f36f7e0fda462e38c1f47bbd2aeced353c655a5f91c981c3e1"
+}

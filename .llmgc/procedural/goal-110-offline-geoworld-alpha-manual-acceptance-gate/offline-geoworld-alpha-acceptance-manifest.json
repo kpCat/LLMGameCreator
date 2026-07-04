@@ -1,0 +1,42 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "implementationStatus": "GREEN",
+  "accepted": false,
+  "metadataOnly": true,
+  "manualAcceptanceRunner": true,
+  "releaseGateDashboard": true,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "manualAcceptancePending": true,
+  "automatedGatePassed": true,
+  "payloadFileCount": 5,
+  "exportFileCount": 7,
+  "checklistStepCount": 12,
+  "goal109PackageFileCount": 6,
+  "goal109IndexedFileCount": 5,
+  "goal109SourceComponentCount": 7,
+  "goal109AcceptedFalse": true,
+  "goal109CleanImportProofPassed": true,
+  "goal109NegativeProofPassed": true,
+  "goal109UnityVerifierReady": true,
+  "unityAcceptanceRunnerReady": true,
+  "resultTemplateRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-result-template.json",
+  "alphaRuntimeBootstrapHash": "f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce",
+  "alphaRuntimeBootstrapLineCount": 3672,
+  "alphaRuntimeBootstrapUnchanged": true,
+  "releaseRiskLinks": [
+    "playable_quality_vs_proof_quality",
+    "streamingassets_platform_issues",
+    "clean_machine_install_export",
+    "geospatial_licensing_tos_api"
+  ],
+  "milestoneGateLinks": [
+    "vertical_slice_final_verification",
+    "strong_alpha_verification"
+  ],
+  "notFinalWarnings": [
+    "Manual gate offline_geoworld_alpha_manual_acceptance_verification remains required.",
+    "Goal110 is a manual acceptance runner and release-gate dashboard, not final release packaging.",
+    "Real geodata, provider/network work, final art and Runtime consumers remain separate future gates."
+  ]
+}

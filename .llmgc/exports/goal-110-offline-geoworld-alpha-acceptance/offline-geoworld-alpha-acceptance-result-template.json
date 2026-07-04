@@ -1,0 +1,86 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "accepted": false,
+  "manualAcceptancePending": true,
+  "automatedGatePassed": true,
+  "resultSchema": "offline_geoworld_alpha_acceptance_result_v1",
+  "resultStatus": "manual_result_required",
+  "operatorNotes": "",
+  "checklistHash": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "resultHashField": "resultHash",
+  "steps": [
+    {
+      "stepId": "open_unity_project",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "open_unity_projectEvidence"
+    },
+    {
+      "stepId": "open_alpha_slice_window",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "open_alpha_slice_windowEvidence"
+    },
+    {
+      "stepId": "setup_rig",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "setup_rigEvidence"
+    },
+    {
+      "stepId": "verify_package",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "verify_packageEvidence"
+    },
+    {
+      "stepId": "run_travel",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "run_travelEvidence"
+    },
+    {
+      "stepId": "run_interaction",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "run_interactionEvidence"
+    },
+    {
+      "stepId": "save_snapshot",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "save_snapshotEvidence"
+    },
+    {
+      "stepId": "load_snapshot",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "load_snapshotEvidence"
+    },
+    {
+      "stepId": "replay",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "replayEvidence"
+    },
+    {
+      "stepId": "complete_objectives",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "complete_objectivesEvidence"
+    },
+    {
+      "stepId": "run_package_verifier",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "run_package_verifierEvidence"
+    },
+    {
+      "stepId": "record_diagnostics",
+      "status": "pending",
+      "notes": "",
+      "evidenceRef": "record_diagnosticsEvidence"
+    }
+  ]
+}

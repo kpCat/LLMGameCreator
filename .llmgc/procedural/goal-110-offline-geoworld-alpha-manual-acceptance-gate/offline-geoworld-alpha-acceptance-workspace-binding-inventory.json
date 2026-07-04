@@ -1,0 +1,9 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "accepted": false,
+  "passed": true,
+  "workspaceGroupPresent": true,
+  "proofStatusPresent": true,
+  "pageBindDisplaysManualAcceptance": true,
+  "pageRelativePath": "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs"
+}

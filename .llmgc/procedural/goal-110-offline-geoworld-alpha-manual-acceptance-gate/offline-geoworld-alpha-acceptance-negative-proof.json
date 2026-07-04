@@ -1,0 +1,74 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "accepted": false,
+  "passed": true,
+  "scenarioCount": 13,
+  "rejectedCount": 13,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal109_package",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects missing_goal109_package."
+    },
+    {
+      "scenarioId": "missing_checklist_step",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects missing_checklist_step."
+    },
+    {
+      "scenarioId": "accepted_true_without_manual_result",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects accepted_true_without_manual_result."
+    },
+    {
+      "scenarioId": "fake_manual_result_without_file_read",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects fake_manual_result_without_file_read."
+    },
+    {
+      "scenarioId": "tampered_result_hash",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects tampered_result_hash."
+    },
+    {
+      "scenarioId": "absolute_path_in_payload",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects absolute_path_in_payload."
+    },
+    {
+      "scenarioId": "raw_geodata_leak",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects raw_geodata_leak."
+    },
+    {
+      "scenarioId": "network_provider_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects network_provider_marker."
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects alpha_runtime_bootstrap_dependency."
+    },
+    {
+      "scenarioId": "scene_prefab_settings_mutation_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects scene_prefab_settings_mutation_marker."
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects binary_raster_media_marker."
+    },
+    {
+      "scenarioId": "external_dependency_new_input_system_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects external_dependency_new_input_system_marker."
+    },
+    {
+      "scenarioId": "historical_goal101_to_109_artifact_rewrite",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal110 manual acceptance gate rejects historical_goal101_to_109_artifact_rewrite."
+    }
+  ]
+}

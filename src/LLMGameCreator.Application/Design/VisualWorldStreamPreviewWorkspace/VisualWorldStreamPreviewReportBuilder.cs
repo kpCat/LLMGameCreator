@@ -303,6 +303,36 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaExportQualityGatePassed,
             Goal109FilesDiscoveredByRelativePaths =
                 qualityGate.Goal109FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaManualAcceptanceChecklistStepCount =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceChecklistStepCount,
+            OfflineGeoworldAlphaManualAcceptancePayloadFileCount =
+                qualityGate.OfflineGeoworldAlphaManualAcceptancePayloadFileCount,
+            OfflineGeoworldAlphaManualAcceptanceExportFileCount =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceExportFileCount,
+            OfflineGeoworldAlphaManualAcceptanceAutomatedGatePassed =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceAutomatedGatePassed,
+            OfflineGeoworldAlphaManualAcceptanceManualPending =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceManualPending,
+            OfflineGeoworldAlphaManualAcceptanceUnityRunnerReady =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceUnityRunnerReady,
+            OfflineGeoworldAlphaManualAcceptanceSimulatedProofPassed =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceSimulatedProofPassed,
+            OfflineGeoworldAlphaManualAcceptanceNegativeProofPassed =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceNegativeProofPassed,
+            OfflineGeoworldAlphaManualAcceptanceWorkspaceBindingPassed =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceWorkspaceBindingPassed,
+            OfflineGeoworldAlphaManualAcceptanceAlphaRuntimeBootstrapUnchanged =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceAlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldAlphaManualAcceptanceQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceQualityGatePassed,
+            OfflineGeoworldAlphaManualAcceptanceResultTemplatePath =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceResultTemplatePath,
+            OfflineGeoworldAlphaManualAcceptanceReleaseRiskLinks =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceReleaseRiskLinks,
+            OfflineGeoworldAlphaManualAcceptanceMilestoneGateLinks =
+                qualityGate.OfflineGeoworldAlphaManualAcceptanceMilestoneGateLinks,
+            Goal110FilesDiscoveredByRelativePaths =
+                qualityGate.Goal110FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

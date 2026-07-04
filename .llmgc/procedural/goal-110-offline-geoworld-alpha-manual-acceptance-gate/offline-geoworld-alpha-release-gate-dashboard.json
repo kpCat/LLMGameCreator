@@ -1,0 +1,39 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "accepted": false,
+  "releaseReadinessStatus": "manual_acceptance_pending",
+  "packageReady": true,
+  "cleanImportProofPassed": true,
+  "manualAcceptancePending": true,
+  "automatedGatePassed": true,
+  "unityRunnerReady": true,
+  "resultTemplateReady": true,
+  "alphaRuntimeBootstrapUnchanged": true,
+  "resultTemplateRelativePath": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-result-template.json",
+  "releaseRiskLinks": [
+    "playable_quality_vs_proof_quality",
+    "streamingassets_platform_issues",
+    "clean_machine_install_export",
+    "geospatial_licensing_tos_api"
+  ],
+  "milestoneGateLinks": [
+    "vertical_slice_final_verification",
+    "strong_alpha_verification"
+  ],
+  "diagnostics": [
+    "Goal109 package accepted=false: true",
+    "Goal109 clean import proof: true",
+    "Unity runner ready: true",
+    "Manual acceptance remains pending until a human result is captured."
+  ],
+  "manualInstructions": [
+    "Open Unity project.",
+    "Open LLMGameCreator/Offline Geoworld Alpha Acceptance Runner.",
+    "Create runner object only on demand.",
+    "Walk every checklist step.",
+    "Save and load the Alpha-only result JSON.",
+    "Run package verifier and record diagnostics.",
+    "Keep accepted=false until human verification passes."
+  ]
+}

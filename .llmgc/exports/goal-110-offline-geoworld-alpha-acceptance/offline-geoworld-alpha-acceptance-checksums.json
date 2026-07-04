@@ -1,0 +1,15 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "accepted": false,
+  "algorithm": "SHA-256",
+  "checksumsFileSelfExcluded": true,
+  "hashedFileCount": 6,
+  "sha256ByRelativePath": {
+    "offline-geoworld-alpha-acceptance-checklist.json": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+    "offline-geoworld-alpha-acceptance-file-index.json": "b1d018620d1d582ed8c1a64a3c7e75326c2b1fe5ba86de8d3c803c926b499a73",
+    "offline-geoworld-alpha-acceptance-manifest.json": "e8db331ac353e00d999c1696086a26fa10c148a2018132d1d2cece8e760f63c1",
+    "offline-geoworld-alpha-acceptance-readme.md": "33550067aaa209bb0f6c20ab248c781cc754a04ed1556763ec20ced91c43e2f1",
+    "offline-geoworld-alpha-acceptance-result-template.json": "b75bee4c9853182bee19ec94b7799ae45eb500e63ee46e106f24cbd77c19a1ac",
+    "offline-geoworld-alpha-release-gate-dashboard.json": "c98a19e5af637f17265fc01446221b4fe606d545ea9c6e74a8a999986c616641"
+  }
+}

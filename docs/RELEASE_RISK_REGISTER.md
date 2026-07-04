@@ -6,6 +6,8 @@ Accepted: false
 
 ## P0 Release Blockers
 
+Goal 110 review note: the offline geoworld Alpha manual acceptance gate supplies a deterministic checklist, result template and release gate dashboard for the existing Goal109 export package. It keeps manual acceptance pending and does not close P0 release blockers until user acceptance and later player/export release proof are completed.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

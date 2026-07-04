@@ -1,0 +1,105 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "accepted": false,
+  "manualAcceptancePending": true,
+  "stepCount": 12,
+  "steps": [
+    {
+      "stepId": "open_unity_project",
+      "order": 1,
+      "title": "Open Unity project",
+      "expectedResult": "manual evidence recorded for open_unity_project",
+      "evidenceField": "open_unity_projectEvidence",
+      "required": true
+    },
+    {
+      "stepId": "open_alpha_slice_window",
+      "order": 2,
+      "title": "Open Alpha Slice window",
+      "expectedResult": "manual evidence recorded for open_alpha_slice_window",
+      "evidenceField": "open_alpha_slice_windowEvidence",
+      "required": true
+    },
+    {
+      "stepId": "setup_rig",
+      "order": 3,
+      "title": "Setup rig",
+      "expectedResult": "manual evidence recorded for setup_rig",
+      "evidenceField": "setup_rigEvidence",
+      "required": true
+    },
+    {
+      "stepId": "verify_package",
+      "order": 4,
+      "title": "Verify package",
+      "expectedResult": "manual evidence recorded for verify_package",
+      "evidenceField": "verify_packageEvidence",
+      "required": true
+    },
+    {
+      "stepId": "run_travel",
+      "order": 5,
+      "title": "Run travel",
+      "expectedResult": "manual evidence recorded for run_travel",
+      "evidenceField": "run_travelEvidence",
+      "required": true
+    },
+    {
+      "stepId": "run_interaction",
+      "order": 6,
+      "title": "Run interaction",
+      "expectedResult": "manual evidence recorded for run_interaction",
+      "evidenceField": "run_interactionEvidence",
+      "required": true
+    },
+    {
+      "stepId": "save_snapshot",
+      "order": 7,
+      "title": "Save snapshot",
+      "expectedResult": "manual evidence recorded for save_snapshot",
+      "evidenceField": "save_snapshotEvidence",
+      "required": true
+    },
+    {
+      "stepId": "load_snapshot",
+      "order": 8,
+      "title": "Load snapshot",
+      "expectedResult": "manual evidence recorded for load_snapshot",
+      "evidenceField": "load_snapshotEvidence",
+      "required": true
+    },
+    {
+      "stepId": "replay",
+      "order": 9,
+      "title": "Replay",
+      "expectedResult": "manual evidence recorded for replay",
+      "evidenceField": "replayEvidence",
+      "required": true
+    },
+    {
+      "stepId": "complete_objectives",
+      "order": 10,
+      "title": "Complete objectives",
+      "expectedResult": "manual evidence recorded for complete_objectives",
+      "evidenceField": "complete_objectivesEvidence",
+      "required": true
+    },
+    {
+      "stepId": "run_package_verifier",
+      "order": 11,
+      "title": "Run package verifier",
+      "expectedResult": "manual evidence recorded for run_package_verifier",
+      "evidenceField": "run_package_verifierEvidence",
+      "required": true
+    },
+    {
+      "stepId": "record_diagnostics",
+      "order": 12,
+      "title": "Record diagnostics",
+      "expectedResult": "manual evidence recorded for record_diagnostics",
+      "evidenceField": "record_diagnosticsEvidence",
+      "required": true
+    }
+  ]
+}

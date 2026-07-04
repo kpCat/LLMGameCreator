@@ -35,43 +35,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
     public void Bind(VisualWorldStreamPreviewWorkspaceResult result)
     {
         _result = result ?? throw new ArgumentNullException(nameof(result));
-        _statusLabel.Text = "Gate: " + result.Report.ManualGate
-            + " required | accepted=false | status=" + result.Report.ImplementationStatus
-            + " | groups=" + result.Catalog.GroupCount
-            + " | entries=" + result.Catalog.EntryCount
-            + " | svg=" + result.Catalog.SvgTextPreviewCount
-            + " | cachePackages=" + result.Report.CacheExportPackageCount
-            + " | cacheRecords=" + result.Report.CacheExportRecordCount
-            + " | unityPayloads=" + result.Report.UnityPayloadFileCount
-            + " | unityRecords=" + result.Report.UnityExportRecordCount
-            + " | geoworldFeatures=" + result.Report.GeoworldNormalizedFeatureCount
-            + " | geoworldChunks=" + result.Report.GeoworldWorldSourceGraphChunkCount
-            + " | offlineGeoPackages=" + result.Report.OfflineGeoworldHandoffPackageCount
-            + " | offlineGeoRecords=" + result.Report.OfflineGeoworldHandoffVisualCacheRecordCount
-            + " | offlinePreviewCommands="
-            + result.Report.OfflineGeoworldUnityPreviewCommandCount
-            + " | offlineEditorObjects="
-            + result.Report.OfflineGeoworldUnityEditorPreviewExpectedObjectCount
-            + " | playModeSteps="
-            + result.Report.OfflineGeoworldPlayModeTravelStepCount
-            + " | playModeObjects="
-            + result.Report.OfflineGeoworldPlayModeTravelObjectCount
-            + " | interactiveSamples="
-            + result.Report.OfflineGeoworldInteractiveTravelMovementSampleCount
-            + " | interactiveCrossings="
-            + result.Report.OfflineGeoworldInteractiveTravelBoundaryCrossingCount
-            + " | interactionTargets="
-            + result.Report.OfflineGeoworldInteractionTargetCount
-            + " | interactionEvents="
-            + result.Report.OfflineGeoworldInteractionScriptedEventCount
-            + " | sessionReplaySteps="
-            + result.Report.OfflineGeoworldSessionReplayStepCount
-            + " | objectiveCount="
-            + result.Report.OfflineGeoworldObjectiveCount
-            + " | alphaSliceComponents="
-            + result.Report.OfflineGeoworldAlphaSliceReadyComponentCount
-            + "/"
-            + result.Report.OfflineGeoworldAlphaSliceComponentCount;
+        _statusLabel.Text = BuildStatusText(result);
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -401,7 +365,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
         };
-        lines.AddRange(BuildOfflineGeoworldAlphaSliceDiagnosticLines(result)); lines.AddRange(BuildOfflineGeoworldAlphaExportPackageDiagnosticLines(result));
+        lines.AddRange(BuildOfflineGeoworldAlphaSliceDiagnosticLines(result));
+        lines.AddRange(BuildOfflineGeoworldAlphaExportPackageDiagnosticLines(result));
+        lines.AddRange(BuildOfflineGeoworldAlphaManualAcceptanceDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -668,7 +634,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "offlineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged: " + entry.OfflineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
-        lines.AddRange(BuildOfflineGeoworldAlphaSliceEntryLines(entry)); lines.AddRange(BuildOfflineGeoworldAlphaExportPackageEntryLines(entry));
+        lines.AddRange(BuildOfflineGeoworldAlphaSliceEntryLines(entry));
+        lines.AddRange(BuildOfflineGeoworldAlphaExportPackageEntryLines(entry));
+        lines.AddRange(BuildOfflineGeoworldAlphaManualAcceptanceEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

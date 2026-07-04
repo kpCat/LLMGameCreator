@@ -1,0 +1,44 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "accepted": false,
+  "indexedFileCount": 6,
+  "packageRelativePathsOnly": true,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-manifest.json",
+      "role": "manual_acceptance_metadata",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-checklist.json",
+      "role": "manual_acceptance_metadata",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-result-template.json",
+      "role": "manual_acceptance_metadata",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-release-gate-dashboard.json",
+      "role": "manual_acceptance_metadata",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-readme.md",
+      "role": "manual_acceptance_readme",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-file-index.json",
+      "role": "manual_acceptance_metadata",
+      "required": true,
+      "packageRelativePath": true
+    }
+  ]
+}

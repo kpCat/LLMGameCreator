@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "accepted": false,
+  "passed": true,
+  "resultModelExists": true,
+  "resultStoreExists": true,
+  "readsApplicationPersistentDataPath": true,
+  "savesJsonResult": true,
+  "loadsJsonResult": true,
+  "clearsJsonResult": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoProviderNetworkMarkers": true,
+  "hasNoExternalDependencyMarkers": true,
+  "scriptCount": 2,
+  "totalLineCount": 174,
+  "sha256ByRelativePath": {
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResult.cs": "56557e28502d8c2a654ad6e15376ffa0c95ac391afe542f57583defa2a9c5d9d",
+    "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResultStore.cs": "bee7c8ac1c0baec673c0bcff9b0f40532f6fa21bd1f5e7c68ac874daea84d322"
+  }
+}

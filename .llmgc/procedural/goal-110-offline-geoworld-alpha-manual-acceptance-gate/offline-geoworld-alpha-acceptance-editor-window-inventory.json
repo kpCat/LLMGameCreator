@@ -1,0 +1,20 @@
+{
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "accepted": false,
+  "passed": true,
+  "editorWindowExists": true,
+  "editorWindowRelativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldAlphaAcceptanceRunnerWindow.cs",
+  "menuItemMarkerPresent": true,
+  "readsApplicationStreamingAssetsPath": true,
+  "readsGoal110Root": true,
+  "showsChecklistStatusFields": true,
+  "showsPackagePaths": true,
+  "createRunnerButtonPresent": true,
+  "clearRunnerButtonPresent": true,
+  "saveLoadResultButtonsPresent": true,
+  "doesNotAutoMutateScenesOnImport": true,
+  "hasNoProviderNetworkMarkers": true,
+  "hasNoExternalDependencyMarkers": true,
+  "lineCount": 216,
+  "sha256": "e25ded8b96d35b35c64c3afec2f3021e16dc51262e3e1670b79eb7c8f6cd70f8"
+}

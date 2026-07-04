@@ -1,6 +1,7 @@
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
+using LLMGameCreator.Application.Design.OfflineGeoworldAlphaSliceManualAcceptanceGate;
 using LLMGameCreator.Application.Design.OfflineGeoworldAlphaSliceExportPackage;
 using LLMGameCreator.Application.Design.OfflineGeoworldAlphaSliceOrchestrator;
 using LLMGameCreator.Application.Design.OfflineGeoworldObjectiveAcceptanceRun;
@@ -38,7 +39,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("offline_geoworld_objective_acceptance", groupIds);
         Assert.Contains("offline_geoworld_alpha_slice", groupIds);
         Assert.Contains("offline_geoworld_alpha_export_package", groupIds);
-        Assert.Equal(18, result.Catalog.GroupCount);
+        Assert.Contains("offline_geoworld_alpha_manual_acceptance", groupIds);
+        Assert.Equal(19, result.Catalog.GroupCount);
         Assert.True(result.Catalog.EntryCount >= 200);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
@@ -370,7 +372,17 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal109.alpha_export.editor_window",
             "goal109.alpha_export.workspace_binding",
             "goal109.alpha_export.source_lineage",
-            "goal109.alpha_export.quality_gate"
+            "goal109.alpha_export.quality_gate",
+            "goal110.manual_acceptance.manifest",
+            "goal110.manual_acceptance.checklist",
+            "goal110.manual_acceptance.result_template",
+            "goal110.manual_acceptance.dashboard",
+            "goal110.manual_acceptance.unity_scripts",
+            "goal110.manual_acceptance.editor_window",
+            "goal110.manual_acceptance.simulated_proof",
+            "goal110.manual_acceptance.negative_proof",
+            "goal110.manual_acceptance.workspace_binding",
+            "goal110.manual_acceptance.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -647,6 +659,35 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
                 "offlineGeoworldInteractionUnitySafetyScanPassed: true",
                 interactionDetails,
                 StringComparison.Ordinal);
+            groups.SelectedItem = groups.Items
+                .Cast<object>()
+                .First(item => item.ToString()!.Contains(
+                    "GroupId = offline_geoworld_alpha_manual_acceptance,",
+                    StringComparison.Ordinal));
+            var manualAcceptanceItem = entries.Items
+                .Cast<ListViewItem>()
+                .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
+                               && entry.ArtifactKind
+                                   == "offline_geoworld_alpha_manual_acceptance_workspace_summary");
+            var manualAcceptanceEntry = Assert.IsType<VisualWorldPreviewArtifactEntry>(
+                manualAcceptanceItem.Tag);
+            var manualAcceptanceDetails = InvokePrivateStatic<string>(
+                typeof(VisualWorldStreamPreviewWorkspacePageControl),
+                "BuildEntryDetails",
+                manualAcceptanceEntry);
+
+            Assert.Contains(
+                "offlineGeoworldAlphaManualAcceptanceChecklistStepCount: 12",
+                manualAcceptanceDetails,
+                StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldAlphaManualAcceptanceManualPending: true",
+                manualAcceptanceDetails,
+                StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldAlphaManualAcceptanceUnityRunnerReady: true",
+                manualAcceptanceDetails,
+                StringComparison.Ordinal);
             Assert.True(
                 svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)
                 || svgPreview.Text.Contains("No text SVG preview", StringComparison.Ordinal));
@@ -682,6 +723,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             .GetAwaiter()
             .GetResult();
         new OfflineGeoworldAlphaSliceExportPackageEvidenceService()
+            .BuildAndWriteAsync(root)
+            .GetAwaiter()
+            .GetResult();
+        new OfflineGeoworldAlphaSliceManualAcceptanceGateEvidenceService()
             .BuildAndWriteAsync(root)
             .GetAwaiter()
             .GetResult();
