@@ -401,7 +401,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
         };
-        lines.AddRange(BuildOfflineGeoworldAlphaSliceDiagnosticLines(result));
+        lines.AddRange(BuildOfflineGeoworldAlphaSliceDiagnosticLines(result)); lines.AddRange(BuildOfflineGeoworldAlphaExportPackageDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -668,7 +668,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "offlineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged: " + entry.OfflineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
-        lines.AddRange(BuildOfflineGeoworldAlphaSliceEntryLines(entry));
+        lines.AddRange(BuildOfflineGeoworldAlphaSliceEntryLines(entry)); lines.AddRange(BuildOfflineGeoworldAlphaExportPackageEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

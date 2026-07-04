@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-04T19:09:50Z",
+    "updated_at_utc":  "2026-07-04T20:00:11Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 108A alpha slice source split immutability audit hotfix produced for review",
-    "gate_status":  "offline_geoworld_alpha_slice_orchestrator_verification",
+    "current_phase_title":  "Goal 109 offline geoworld Alpha Slice export package produced for review",
+    "gate_status":  "offline_geoworld_alpha_slice_export_package_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 108A Alpha Slice Source Split and Immutability Audit is produced for review as GREEN, accepted=false, while preserving the Goal 108 manual gate: offline_geoworld_alpha_slice_orchestrator_verification required, accepted=false. Goal 108A splits the Goal108 orchestrator Application service below the 700-line source-health ceiling and writes only new audit evidence under .llmgc/procedural/goal-108a-alpha-slice-source-split-immutability-audit/. Actual git diff audit of 14ad9f38..989a79ab records 17 Goal108 evidence/payload additions, zero Goal101-107 evidence/payload modifications, and confirms Goal108 historicalArtifactsUnchanged=true matches actual git evidence. AlphaRuntimeBootstrap remains unchanged. Goal108A changes no Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library, project files, dependencies, LFZ archive/source, live network fetching, map tile scraping, raw geodata dump, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt-output work. Goal 108A, Goal 108, Goal 107, Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 108A source split and immutability audit evidence together with Goal 108 offline geoworld Alpha Slice orchestrator evidence. Do not mark offline_geoworld_alpha_slice_orchestrator_verification passed until user acceptance. Keep Goal108A, Goal108, Goal107, Goal106, Goal105, Goal104, Goal103, Goal102B and previous geoworld gates accepted=false as historical produced-for-review evidence.",
-    "recommended_next_decision":  "Review Goal 108A audit evidence and Goal 108 one-click offline geoworld Alpha Slice evidence, then decide whether to accept offline_geoworld_alpha_slice_orchestrator_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings or media work from this handoff.",
+    "active_manual_gate":  "Goal 109 Offline Geoworld Alpha Slice Export Package is produced for review as GREEN with offline_geoworld_alpha_slice_export_package_verification required and accepted=false. Goal 109 packages the real Goal101-108/108A Alpha evidence into a portable deterministic directory package under .llmgc/exports/goal-109-offline-geoworld-alpha-slice/, mirrors metadata-only package files to unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/, and writes review evidence under .llmgc/procedural/goal-109-offline-geoworld-alpha-slice-export-package/. It includes manifest, file index, checksums, runbook, acceptance gate, clean-import proof, negative proof, Unity verifier/editor-window inventories, workspace binding inventory, source lineage and quality gate scan. Package metrics are packageFileCount=6, indexedFileCount=5, sourceComponentCount=7, readySourceComponentCount=7, manualGateCount=9, negativeRejectedCount=16, alphaRuntimeBootstrapUnchanged=true and qualityGatePassed=true. Goal 109 is portable Alpha review/export tooling, not a final Runtime or release build. Goal 109, Goal 108A, Goal 108, Goal 107, Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 109 portable Alpha Slice export package, clean-import proof, negative proof, Unity package verifier/window and Visual World Stream Preview Workspace integration. Do not mark offline_geoworld_alpha_slice_export_package_verification passed until explicit user acceptance. Keep Goal109, Goal108A, Goal108, Goal107, Goal106, Goal105, Goal104, Goal103, Goal102B and previous geoworld gates accepted=false as historical produced-for-review evidence.",
+    "recommended_next_decision":  "Review Goal 109 export package evidence and decide whether to accept offline_geoworld_alpha_slice_export_package_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings, binary media or release packaging work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "offline_geoworld_alpha_slice_export_package_verification",
                                                         "offline_geoworld_alpha_slice_orchestrator_verification",
                                                         "offline_geoworld_objective_acceptance_run_verification",
                                                         "offline_geoworld_session_persistence_replay_verification",
@@ -160,7 +161,8 @@
                            "goal_105_manual_gate":  "offline_geoworld_interaction_playable_probe_verification",
                            "goal_106_manual_gate":  "offline_geoworld_session_persistence_replay_verification",
                            "goal_107_manual_gate":  "offline_geoworld_objective_acceptance_run_verification",
-                           "goal_108_manual_gate":  "offline_geoworld_alpha_slice_orchestrator_verification"
+                           "goal_108_manual_gate":  "offline_geoworld_alpha_slice_orchestrator_verification",
+                           "goal_109_manual_gate":  "offline_geoworld_alpha_slice_export_package_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -2583,5 +2585,20 @@
                                                                                           "Goal 108 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings mutation or prompt dump."
                                                                                       ],
                                                                   "next_action":  "review_goal_108_offline_geoworld_alpha_slice_orchestrator"
-                                                              }
+                                                              },
+    "offline_geoworld_alpha_slice_export_package_verification":  {
+                                                                    "status":  "produced_for_review",
+                                                                    "accepted":  false,
+                                                                    "evidence_source":  "goal_109_offline_geoworld_alpha_slice_export_package",
+                                                                    "observed_result":  [
+                                                                                            "Goal 109 produces a portable offline geoworld Alpha Slice export package under .llmgc/procedural/goal-109-offline-geoworld-alpha-slice-export-package, .llmgc/exports/goal-109-offline-geoworld-alpha-slice and unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109 with accepted=false.",
+                                                                                            "implementationStatus=GREEN, packageFileCount=6, indexedFileCount=5, sourceComponentCount=7, readySourceComponentCount=7, manualGateCount=9, cleanImportProofPassed=true, negativeProofPassed=true, workspaceBindingPassed=true, sourceLineagePassed=true, alphaRuntimeBootstrapUnchanged=true and qualityGatePassed=true.",
+                                                                                            "The BCL-only Application seam lives under src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceExportPackage/ and consumes real Goal108 Alpha Slice artifacts plus Goal108A source split/immutability audit by repository-relative path.",
+                                                                                            "The export package contains manifest, file index, checksums, runbook, acceptance gate and readme files, and the evidence records clean-import proof, 16 rejected negative cases, Unity verifier/editor-window inventories, workspace binding inventory, source lineage and quality gate scan.",
+                                                                                            "Unity Alpha adds a standalone StreamingAssets package verifier and an Editor package window without depending on AlphaRuntimeBootstrap and without mutating scenes, prefabs, project settings, packages or build settings.",
+                                                                                            "The existing Visual World Stream Preview Workspace surfaces the offline_geoworld_alpha_export_package group, package counts, checksum status, clean-import proof, Unity verifier readiness, runbook summary, acceptance gate status, unchanged AlphaRuntimeBootstrap status, diagnostics and manual instructions.",
+                                                                                            "Goal 109 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings mutation, final release build or prompt dump."
+                                                                                        ],
+                                                                    "next_action":  "review_goal_109_offline_geoworld_alpha_slice_export_package"
+                                                                }
 }

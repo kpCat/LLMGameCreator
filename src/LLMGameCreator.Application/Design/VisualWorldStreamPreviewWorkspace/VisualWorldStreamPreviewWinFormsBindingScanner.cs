@@ -12,13 +12,18 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var pageGoal108RelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Goal108.cs";
+        var pageGoal109RelativePath =
+            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
+            + "VisualWorldStreamPreviewWorkspacePageControl.Goal109.cs";
         var designerRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Designer.cs";
         var compositionRelativePath = "src/LLMGameCreator.WinForms/CompositionRoot.cs";
         var pageText = ReadOptionalText(projectRoot, pageRelativePath)
                        + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal108RelativePath);
+                       + ReadOptionalText(projectRoot, pageGoal108RelativePath)
+                       + "\n"
+                       + ReadOptionalText(projectRoot, pageGoal109RelativePath);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -231,6 +236,16 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains("offlineGeoworldAlphaSliceAcceptanceRunbookReady", StringComparison.Ordinal)
             && pageText.Contains("offlineGeoworldAlphaSliceFinalProofPassed", StringComparison.Ordinal)
             && pageText.Contains("offlineGeoworldAlphaSliceAlphaRuntimeBootstrapUnchanged", StringComparison.Ordinal);
+        var bindDisplaysOfflineGeoworldAlphaExportPackage = pageText.Contains(
+                "offlineGeoworldAlphaExportPackageFileCount",
+                StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldAlphaExportChecksumStatus", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldAlphaExportCleanImportProofPassed", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldAlphaExportUnityVerifierReady", StringComparison.Ordinal)
+            && pageText.Contains("offlineGeoworldAlphaExportAcceptanceGateStatus", StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldAlphaExportAlphaRuntimeBootstrapUnchanged",
+                StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -299,6 +314,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal108.winforms.offline_geoworld_alpha_slice_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysOfflineGeoworldAlphaExportPackage,
+            "goal109.winforms.offline_geoworld_alpha_export_package_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -330,6 +350,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysOfflineGeoworldObjectiveAcceptance,
             PageBindDisplaysOfflineGeoworldAlphaSlice =
                 bindDisplaysOfflineGeoworldAlphaSlice,
+            PageBindDisplaysOfflineGeoworldAlphaExportPackage =
+                bindDisplaysOfflineGeoworldAlphaExportPackage,
             Diagnostics = diagnostics
         };
     }

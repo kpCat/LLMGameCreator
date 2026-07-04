@@ -1,6 +1,7 @@
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
+using LLMGameCreator.Application.Design.OfflineGeoworldAlphaSliceExportPackage;
 using LLMGameCreator.Application.Design.OfflineGeoworldAlphaSliceOrchestrator;
 using LLMGameCreator.Application.Design.OfflineGeoworldObjectiveAcceptanceRun;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
@@ -36,8 +37,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("offline_geoworld_session_replay", groupIds);
         Assert.Contains("offline_geoworld_objective_acceptance", groupIds);
         Assert.Contains("offline_geoworld_alpha_slice", groupIds);
-        Assert.Equal(17, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 183);
+        Assert.Contains("offline_geoworld_alpha_export_package", groupIds);
+        Assert.Equal(18, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 200);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
@@ -358,7 +360,17 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal108.alpha_slice.full_slice_simulated_proof",
             "goal108.alpha_slice.negative_proof",
             "goal108.alpha_slice.alpha_runtime_bootstrap_unchanged",
-            "goal108.alpha_slice.quality_gate"
+            "goal108.alpha_slice.quality_gate",
+            "goal109.alpha_export.manifest",
+            "goal109.alpha_export.file_index",
+            "goal109.alpha_export.checksums",
+            "goal109.alpha_export.clean_import",
+            "goal109.alpha_export.negative_proof",
+            "goal109.alpha_export.unity_verifier",
+            "goal109.alpha_export.editor_window",
+            "goal109.alpha_export.workspace_binding",
+            "goal109.alpha_export.source_lineage",
+            "goal109.alpha_export.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -492,7 +504,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             Assert.Same(result, stored);
             Assert.True(groups.Items.Count >= 6);
             Assert.True(entries.Items.Count > 0);
-            Assert.True(proofs.Items.Count >= 32);
+            Assert.True(proofs.Items.Count >= 42);
             groups.SelectedItem = groups.Items
                 .Cast<object>()
                 .First(item => item.ToString()!.Contains(
@@ -666,6 +678,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             .GetAwaiter()
             .GetResult();
         new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
+            .BuildAndWriteAsync(root)
+            .GetAwaiter()
+            .GetResult();
+        new OfflineGeoworldAlphaSliceExportPackageEvidenceService()
             .BuildAndWriteAsync(root)
             .GetAwaiter()
             .GetResult();

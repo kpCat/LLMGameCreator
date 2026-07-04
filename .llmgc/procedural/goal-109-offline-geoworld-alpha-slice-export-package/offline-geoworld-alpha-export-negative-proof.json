@@ -1,0 +1,89 @@
+{
+  "goalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+  "accepted": false,
+  "passed": true,
+  "scenarioCount": 16,
+  "rejectedCount": 16,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal108_manifest",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects missing_goal108_manifest."
+    },
+    {
+      "scenarioId": "missing_goal108a_audit",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects missing_goal108a_audit."
+    },
+    {
+      "scenarioId": "missing_export_manifest",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects missing_export_manifest."
+    },
+    {
+      "scenarioId": "missing_indexed_file",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects missing_indexed_file."
+    },
+    {
+      "scenarioId": "checksum_mismatch",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects checksum_mismatch."
+    },
+    {
+      "scenarioId": "absolute_path",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects absolute_path."
+    },
+    {
+      "scenarioId": "raw_geodata_leak",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects raw_geodata_leak."
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects binary_raster_media_marker."
+    },
+    {
+      "scenarioId": "network_provider_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects network_provider_marker."
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects alpha_runtime_bootstrap_dependency_marker."
+    },
+    {
+      "scenarioId": "unity_scene_settings_mutation_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects unity_scene_settings_mutation_marker."
+    },
+    {
+      "scenarioId": "accepted_true_fake_promotion",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects accepted_true_fake_promotion."
+    },
+    {
+      "scenarioId": "missing_manual_gate",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects missing_manual_gate."
+    },
+    {
+      "scenarioId": "missing_not_final_warning",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects missing_not_final_warning."
+    },
+    {
+      "scenarioId": "historical_artifact_rewrite_attempt",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects historical_artifact_rewrite_attempt."
+    },
+    {
+      "scenarioId": "fake_clean_import_without_reading_files",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal109 export verifier rejects fake_clean_import_without_reading_files."
+    }
+  ]
+}

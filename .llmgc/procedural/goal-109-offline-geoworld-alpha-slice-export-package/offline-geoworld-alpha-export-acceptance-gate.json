@@ -1,0 +1,29 @@
+{
+  "goalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+  "manualGate": "offline_geoworld_alpha_slice_export_package_verification",
+  "accepted": false,
+  "packageReadyForManualReview": true,
+  "cleanImportRequired": true,
+  "unityVerifierRequired": true,
+  "workspaceInspectionRequired": true,
+  "notFinalRelease": true,
+  "requiredManualGates": [
+    "offline_geoworld_unity_preview_runner_verification",
+    "offline_geoworld_unity_editor_preview_tool_verification",
+    "offline_geoworld_playmode_travel_preview_verification",
+    "offline_geoworld_interactive_travel_preview_verification",
+    "offline_geoworld_interaction_playable_probe_verification",
+    "offline_geoworld_session_persistence_replay_verification",
+    "offline_geoworld_objective_acceptance_run_verification",
+    "offline_geoworld_alpha_slice_orchestrator_verification",
+    "offline_geoworld_alpha_slice_export_package_verification"
+  ],
+  "manualChecklist": [
+    "Open the deterministic directory package, not a binary zip.",
+    "Verify manifest, file index and checksums.",
+    "Run clean-import verifier from the package root.",
+    "Open Unity menu LLMGameCreator/Offline Geoworld Alpha Slice Package.",
+    "Verify package readiness and runbook summary.",
+    "Keep accepted=false until manual review explicitly passes."
+  ]
+}

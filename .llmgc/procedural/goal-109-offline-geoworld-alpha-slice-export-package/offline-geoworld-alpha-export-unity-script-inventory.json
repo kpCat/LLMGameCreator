@@ -1,0 +1,17 @@
+{
+  "goalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+  "accepted": false,
+  "passed": true,
+  "verifierExists": true,
+  "verifierRelativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaSlicePackageVerifier.cs",
+  "readsApplicationStreamingAssetsPath": true,
+  "readsGoal109Root": true,
+  "exposesStatusFields": true,
+  "verifyPackageMethodPresent": true,
+  "checksumVerificationMarkerPresent": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoProviderNetworkMarkers": true,
+  "hasNoExternalDependencyMarkers": true,
+  "lineCount": 220,
+  "sha256": "db0d5a544a7088e6b6f1105f384bbe3976e1718651e72fa8bbab3985b3d2025e"
+}

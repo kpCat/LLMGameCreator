@@ -1,0 +1,14 @@
+{
+  "goalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+  "accepted": false,
+  "algorithm": "SHA-256",
+  "checksumsFileSelfExcluded": true,
+  "hashedFileCount": 5,
+  "sha256ByRelativePath": {
+    "offline-geoworld-alpha-export-acceptance-gate.json": "e721075d94b671a7fc46868bf5ef57edb303efadef93b50d67679429b785c97b",
+    "offline-geoworld-alpha-export-file-index.json": "64532bc5fc76f10663b47c75d9ae4e1ef426ed51f12bd745092098309330e8e1",
+    "offline-geoworld-alpha-export-manifest.json": "619f0f71f78f56cb4d8594553b2cb2d5078f8005ce23af3f04caab64d2778ef7",
+    "offline-geoworld-alpha-export-readme.md": "cb784ccbe9ee8462eaa675e0e4a977d8beb6f96c523c6b8acc2d51f44f8fb1ef",
+    "offline-geoworld-alpha-export-runbook.md": "dd42209fa72eb480378f0be07079126492ce67db3f9d5cc9112d51c5102ad0de"
+  }
+}

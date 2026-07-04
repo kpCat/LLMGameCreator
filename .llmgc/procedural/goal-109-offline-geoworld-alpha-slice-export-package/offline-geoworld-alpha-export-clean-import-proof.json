@@ -1,0 +1,22 @@
+{
+  "goalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+  "accepted": false,
+  "passed": true,
+  "packageRootReadAttempted": true,
+  "manifestPresent": true,
+  "fileIndexPresent": true,
+  "checksumsPresent": true,
+  "allRequiredFilesPresent": true,
+  "allIndexedFilesPresent": true,
+  "checksumsMatch": true,
+  "noAbsolutePaths": true,
+  "noRawGeodata": true,
+  "noNetworkProviderMarkers": true,
+  "noBinaryOrRasterMedia": true,
+  "manualGatesListed": true,
+  "goal107FinalObjectiveAcceptanceIncluded": true,
+  "goal108ASourceSplitImmutabilityAuditIncluded": true,
+  "indexedFileCount": 5,
+  "readFileCount": 5,
+  "diagnostics": []
+}

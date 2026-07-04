@@ -1,0 +1,9 @@
+{
+  "goalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+  "accepted": false,
+  "passed": true,
+  "workspaceGroupPresent": true,
+  "proofStatusPresent": true,
+  "pageBindDisplaysExportPackage": true,
+  "pageRelativePath": "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs"
+}

@@ -1,0 +1,38 @@
+{
+  "goalId": "goal_109_offline_geoworld_alpha_slice_export_package",
+  "accepted": false,
+  "indexedFileCount": 5,
+  "packageRelativePathsOnly": true,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-alpha-export-manifest.json",
+      "role": "package_metadata",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-export-file-index.json",
+      "role": "package_metadata",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-export-runbook.md",
+      "role": "review_markdown",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-export-acceptance-gate.json",
+      "role": "package_metadata",
+      "required": true,
+      "packageRelativePath": true
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-export-readme.md",
+      "role": "review_markdown",
+      "required": true,
+      "packageRelativePath": true
+    }
+  ]
+}

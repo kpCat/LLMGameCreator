@@ -81,7 +81,9 @@
     ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/",
     ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/",
     ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/",
-    ".llmgc/procedural/goal-108a-alpha-slice-source-split-immutability-audit/"
+    ".llmgc/procedural/goal-108a-alpha-slice-source-split-immutability-audit/",
+    ".llmgc/procedural/goal-109-offline-geoworld-alpha-slice-export-package/",
+    ".llmgc/exports/goal-109-offline-geoworld-alpha-slice/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1571,6 +1573,35 @@
         "docs/agent-tasks/goal-108a-alpha-slice-source-split-immutability-audit/",
         "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/",
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaSliceOrchestrator/"
+      ]
+    },
+    {
+      "scenario": "goal-109-offline-geoworld-alpha-slice-export-package",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        ".llmgc/exports/",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldAlphaSliceExportPackageProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal109.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaSlicePackageVerifier.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldAlphaSlicePackageWindow.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-109-offline-geoworld-alpha-slice-export-package/",
+        ".llmgc/exports/goal-109-offline-geoworld-alpha-slice/",
+        "docs/agent-tasks/goal-109-offline-geoworld-alpha-slice-export-package/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceExportPackage/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaSliceExportPackage/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal109/"
       ]
     }
   ]

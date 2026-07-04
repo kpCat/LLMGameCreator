@@ -275,6 +275,34 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaSliceQualityGatePassed,
             Goal108FilesDiscoveredByRelativePaths =
                 qualityGate.Goal108FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaExportPackageFileCount =
+                qualityGate.OfflineGeoworldAlphaExportPackageFileCount,
+            OfflineGeoworldAlphaExportIndexedFileCount =
+                qualityGate.OfflineGeoworldAlphaExportIndexedFileCount,
+            OfflineGeoworldAlphaExportChecksumStatus =
+                qualityGate.OfflineGeoworldAlphaExportChecksumStatus,
+            OfflineGeoworldAlphaExportCleanImportProofPassed =
+                qualityGate.OfflineGeoworldAlphaExportCleanImportProofPassed,
+            OfflineGeoworldAlphaExportNegativeProofPassed =
+                qualityGate.OfflineGeoworldAlphaExportNegativeProofPassed,
+            OfflineGeoworldAlphaExportUnityVerifierReady =
+                qualityGate.OfflineGeoworldAlphaExportUnityVerifierReady,
+            OfflineGeoworldAlphaExportEditorWindowReady =
+                qualityGate.OfflineGeoworldAlphaExportEditorWindowReady,
+            OfflineGeoworldAlphaExportWorkspaceBindingPassed =
+                qualityGate.OfflineGeoworldAlphaExportWorkspaceBindingPassed,
+            OfflineGeoworldAlphaExportSourceLineagePassed =
+                qualityGate.OfflineGeoworldAlphaExportSourceLineagePassed,
+            OfflineGeoworldAlphaExportRunbookSummary =
+                qualityGate.OfflineGeoworldAlphaExportRunbookSummary,
+            OfflineGeoworldAlphaExportAcceptanceGateStatus =
+                qualityGate.OfflineGeoworldAlphaExportAcceptanceGateStatus,
+            OfflineGeoworldAlphaExportAlphaRuntimeBootstrapUnchanged =
+                qualityGate.OfflineGeoworldAlphaExportAlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldAlphaExportQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaExportQualityGatePassed,
+            Goal109FilesDiscoveredByRelativePaths =
+                qualityGate.Goal109FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,
