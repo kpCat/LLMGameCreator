@@ -1,0 +1,10 @@
+{
+  "goalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "offlineSyntheticOnly": true,
+  "metadataOnly": true,
+  "alphaToolingOnly": true,
+  "implementsFinalRuntimeSaveSystem": false,
+  "usesRealGeodata": false,
+  "usesProviderOrNetworkCalls": false,
+  "scopeSummary": "Unity Alpha save/load/replay harness over Goal105 metadata-only interaction deltas."
+}

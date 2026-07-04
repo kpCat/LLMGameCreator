@@ -1,0 +1,54 @@
+{
+  "goalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "manualGate": "offline_geoworld_session_persistence_replay_verification",
+  "accepted": false,
+  "unityMenuPath": "LLMGameCreator/Offline Geoworld Session Replay",
+  "stepCount": 9,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "instruction": "Open the Unity Alpha project and load the existing offline geoworld review scene.",
+      "expectedResult": "Unity opens without changing project settings, packages, scenes or prefabs."
+    },
+    {
+      "stepIndex": 2,
+      "instruction": "Confirm the Goal106 StreamingAssets payload is present under LLMGameCreator/OfflineGeoworldGoal106.",
+      "expectedResult": "Manifest, initial state, delta log, replay script, checklist and readme are readable."
+    },
+    {
+      "stepIndex": 3,
+      "instruction": "Open LLMGameCreator/Offline Geoworld Session Replay and press Refresh.",
+      "expectedResult": "The editor helper shows payload ready, replay steps and checkpoint state hash."
+    },
+    {
+      "stepIndex": 4,
+      "instruction": "Press Create Rig.",
+      "expectedResult": "A manual save-load/replay rig is created with save/load and replay controllers."
+    },
+    {
+      "stepIndex": 5,
+      "instruction": "Run or inspect the first 3 replay steps and save a session snapshot.",
+      "expectedResult": "Snapshot hash matches the checkpoint state hash from the replay script."
+    },
+    {
+      "stepIndex": 6,
+      "instruction": "Clear the in-memory rig state, then load the saved snapshot.",
+      "expectedResult": "Loaded state resumes from checkpoint step 3."
+    },
+    {
+      "stepIndex": 7,
+      "instruction": "Continue replay through 6 total steps.",
+      "expectedResult": "Final state hash matches the manifest final state hash."
+    },
+    {
+      "stepIndex": 8,
+      "instruction": "Attempt duplicate/corrupted snapshot handling from the helper controls.",
+      "expectedResult": "Duplicate replay is rejected or deterministic no-op, and corrupted snapshot is rejected."
+    },
+    {
+      "stepIndex": 9,
+      "instruction": "Press Clear Rig after review.",
+      "expectedResult": "Only the manual rig objects are removed; no scene or project settings are saved."
+    }
+  ]
+}

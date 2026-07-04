@@ -1469,6 +1469,34 @@
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/"
       ]
+    },
+    {
+      "scenario": "goal-106-offline-geoworld-session-persistence-replay",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldSessionPersistenceReplayProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldSessionReplayWindow.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionReplayController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSaveLoadController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSnapshot.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/",
+        "docs/agent-tasks/goal-106-offline-geoworld-session-persistence-replay/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldSessionPersistenceReplay/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldSessionPersistenceReplay/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/"
+      ]
     }
   ]
 }

@@ -1,0 +1,191 @@
+{
+  "goalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "passed": true,
+  "scenarioCount": 14,
+  "rejectedCount": 14,
+  "matchedExpectationCount": 14,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal105_payload",
+      "causalMutation": "Goal105 source payload removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.goal105_missing",
+          "target": "Goal105 payload",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_delta_log",
+      "causalMutation": "session delta log removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.delta_log_missing",
+          "target": "delta log",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "checkpoint_without_prior_deltas",
+      "causalMutation": "checkpoint index is zero",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.checkpoint_prior",
+          "target": "checkpoint",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "load_snapshot_hash_mismatch",
+      "causalMutation": "snapshot state hash differs from checkpoint",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.snapshot_hash",
+          "target": "snapshot",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "corrupted_snapshot_accepted",
+      "causalMutation": "corrupted snapshot accepted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.corrupted_snapshot",
+          "target": "snapshot",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "replay_final_hash_mismatch",
+      "causalMutation": "final replay hash differs from manifest",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.final_hash",
+          "target": "replay",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "duplicate_replay_mutates_state_non_deterministically",
+      "causalMutation": "duplicate replay mutates state",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.duplicate_replay",
+          "target": "replay",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "absolute_path",
+      "causalMutation": "absolute local path inserted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.absolute_path",
+          "target": "payload",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_geodata_leak",
+      "causalMutation": "raw geodata marker inserted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.raw_geodata",
+          "target": "payload",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "network_provider_marker",
+      "causalMutation": "network/provider marker inserted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.provider_network",
+          "target": "Unity scripts",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency_marker",
+      "causalMutation": "Unity script references AlphaRuntimeBootstrap",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.alpha_bootstrap",
+          "target": "Unity scripts",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "scene_prefab_settings_mutation_marker",
+      "causalMutation": "editor helper mutates scene/settings on import",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.scene_settings",
+          "target": "Unity editor helper",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "causalMutation": "binary or raster media added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.binary_media",
+          "target": "payload",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "external_dependency_new_input_system_marker",
+      "causalMutation": "external dependency marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal106.negative.external_dependency",
+          "target": "Unity scripts",
+          "message": "Goal106 negative proof rejected the mutated save/load/replay input."
+        }
+      ]
+    }
+  ]
+}

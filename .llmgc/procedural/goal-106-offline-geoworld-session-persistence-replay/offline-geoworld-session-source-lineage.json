@@ -1,0 +1,76 @@
+{
+  "goalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "passed": true,
+  "goal105AcceptedFalsePreserved": true,
+  "goal105PayloadConsumed": true,
+  "goal105UnityEvidenceConsumed": true,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-manifest.json",
+      "exists": true,
+      "sha256": "7f57e46544f4a1638777586be720929e400edcf8b8bc35f5c1a709f7c72ec562",
+      "purpose": "Goal105 interaction manifest"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-targets.json",
+      "exists": true,
+      "sha256": "71add6a545305ce2f1d52e7f82824b0b7bb03cc72831c60745980b9fedd97aba",
+      "purpose": "Goal105 targets"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-actions.json",
+      "exists": true,
+      "sha256": "d3f87b6316b7b361a8378bc6b6fb2500801ef440784613d161bf2ba164d6887a",
+      "purpose": "Goal105 actions"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-session-script.json",
+      "exists": true,
+      "sha256": "63922e097a1af583c03bb47f09ee591663aeef7b77bfc250f553ffe230785668",
+      "purpose": "Goal105 session script"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-state-delta-plan.json",
+      "exists": true,
+      "sha256": "02d0e57770e87a2ebfbf4f9ba32e5beb827560c4a84ac3428445ccff6ae7befc",
+      "purpose": "Goal105 state delta plan"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-unity-script-inventory.json",
+      "exists": true,
+      "sha256": "774c76a87424aee3b70a96a334535815a5fc71c2c4f42c9e732600393d486cab",
+      "purpose": "Goal105 Unity script inventory"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionController.cs",
+      "exists": true,
+      "sha256": "7ea0a990b70f28cb76f67eab12b90f6a44ff3385781c396d5e8439593887685e",
+      "purpose": "Goal105 Unity interaction controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldStateDeltaLog.cs",
+      "exists": true,
+      "sha256": "b98025b6bc70178d542b229ffb4bb9d89ab4a9b1d97235bacaf649911d9ec393",
+      "purpose": "Goal105 state delta log"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSaveLoadController.cs",
+      "exists": true,
+      "sha256": "1bc58851a5c73304fc85d8da4dccda614c245fc9958f069fef0acb81d341f994",
+      "purpose": "Goal106 Unity save-load controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionReplayController.cs",
+      "exists": true,
+      "sha256": "e550cc594d75c476aad265e2c66c91ccab054cefa0dce7b07eecd6f96c833fb0",
+      "purpose": "Goal106 Unity replay controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldSessionReplayWindow.cs",
+      "exists": true,
+      "sha256": "84563cef89da7dcf173d5f034dacd16aa5017943c3746339f33d51189562c0d7",
+      "purpose": "Goal106 Unity editor helper"
+    }
+  ],
+  "diagnostics": []
+}

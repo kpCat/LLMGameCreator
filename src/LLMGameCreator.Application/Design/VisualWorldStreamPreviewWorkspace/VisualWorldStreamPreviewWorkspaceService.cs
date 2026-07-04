@@ -52,7 +52,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             BuildOfflineGeoworldUnityEditorPreviewGroup(projectRoot, diagnostics),
             BuildOfflineGeoworldPlayModeTravelGroup(projectRoot, diagnostics),
             BuildOfflineGeoworldInteractiveTravelGroup(projectRoot, diagnostics),
-            BuildOfflineGeoworldInteractionGroup(projectRoot, diagnostics)
+            BuildOfflineGeoworldInteractionGroup(projectRoot, diagnostics),
+            BuildOfflineGeoworldSessionReplayGroup(projectRoot, diagnostics)
         };
 
         var proofStatus = BuildProofStatus(projectRoot, diagnostics);

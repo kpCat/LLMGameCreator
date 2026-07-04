@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-04T10:57:17Z",
+    "updated_at_utc":  "2026-07-04T15:54:12Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 105 offline geoworld interaction playable probe produced for review",
-    "gate_status":  "offline_geoworld_interaction_playable_probe_verification",
+    "current_phase_title":  "Goal 106 offline geoworld session persistence replay produced for review",
+    "gate_status":  "offline_geoworld_session_persistence_replay_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 105 Offline Geoworld Interaction Playable Probe is produced for review as GREEN: offline_geoworld_interaction_playable_probe_verification required, accepted=false. Goal 105 consumes real Goal104 interactive travel evidence by repository-relative path, writes six metadata-only interaction payload files into Unity Alpha StreamingAssets, adds standalone proximity/selection/interaction controller, target binding, state-delta log and manual Unity Editor probe helper, and surfaces target count, action kinds, scripted events, state deltas, deterministic hash chain, Unity script inventory, simulated proof, negative proof and quality status in the existing Visual World Stream Preview Workspace. Goal 105 changes no Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library, project files, dependencies, LFZ archive/source, live network fetching, map tile scraping, raw geodata dump, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt-output work. Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 105 offline geoworld interaction playable probe evidence. Do not mark offline_geoworld_interaction_playable_probe_verification passed until user acceptance. Keep Goal104, Goal103, Goal102B and previous geoworld gates accepted=false as historical produced-for-review evidence.",
-    "recommended_next_decision":  "Review Goal 105 interaction playable probe evidence and decide whether to accept offline_geoworld_interaction_playable_probe_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings or media work from this handoff.",
+    "active_manual_gate":  "Goal 106 Offline Geoworld Session Persistence Replay is produced for review as GREEN: offline_geoworld_session_persistence_replay_verification required, accepted=false. Goal 106 consumes real Goal105 interaction targets/actions/session/deltas by repository-relative path, writes six metadata-only session persistence/replay payload files into Unity Alpha StreamingAssets, adds standalone Alpha-only save/load, snapshot and replay controllers plus a manual Unity Editor replay helper, and surfaces replay step count, delta count, checkpoint, final hash, Unity script inventory, simulated save/load/replay proof, negative proof and quality status in the existing Visual World Stream Preview Workspace. Goal 106 changes no Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library, project files, dependencies, LFZ archive/source, live network fetching, map tile scraping, raw geodata dump, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt-output work. Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 106 offline geoworld session persistence replay evidence. Do not mark offline_geoworld_session_persistence_replay_verification passed until user acceptance. Keep Goal105, Goal104, Goal103, Goal102B and previous geoworld gates accepted=false as historical produced-for-review evidence.",
+    "recommended_next_decision":  "Review Goal 106 session persistence replay evidence and decide whether to accept offline_geoworld_session_persistence_replay_verification. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final gameplay, final art, atlas, scene/prefab, project settings or media work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "offline_geoworld_session_persistence_replay_verification",
                                                         "offline_geoworld_interaction_playable_probe_verification",
                                                         "offline_geoworld_interactive_travel_preview_verification",
                                                         "offline_geoworld_playmode_travel_preview_verification",
@@ -154,7 +155,8 @@
                              "goal_102b_manual_gate":  "actual_unity_editor_source_reformat_verification",
                              "goal_103_manual_gate":  "offline_geoworld_playmode_travel_preview_verification",
                              "goal_104_manual_gate":  "offline_geoworld_interactive_travel_preview_verification",
-                             "goal_105_manual_gate":  "offline_geoworld_interaction_playable_probe_verification"
+                             "goal_105_manual_gate":  "offline_geoworld_interaction_playable_probe_verification",
+                             "goal_106_manual_gate":  "offline_geoworld_session_persistence_replay_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -2518,5 +2520,19 @@
                                                                                             "Goal 105 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings mutation or prompt dump."
                                                                                         ],
                                                                     "next_action":  "review_goal_105_offline_geoworld_interaction_playable_probe"
+                                                                },
+    "offline_geoworld_session_persistence_replay_verification":  {
+                                                                    "status":  "produced_for_review",
+                                                                    "accepted":  false,
+                                                                    "evidence_source":  "goal_106_offline_geoworld_session_persistence_replay",
+                                                                    "observed_result":  [
+                                                                                            "Goal 106 produces offline geoworld session persistence/replay evidence under .llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay with accepted=false.",
+                                                                                            "implementationStatus=GREEN, replayStepCount=6, stateDeltaCount=6, checkpointStepIndex=3, unityScriptsReady=true, editorWindowReady=true, saveLoadReplayProofPassed=true, negativeProofPassed=true, workspaceBindingPassed=true and qualityGatePassed=true.",
+                                                                                            "The BCL-only Application seam lives under src/LLMGameCreator.Application/Design/OfflineGeoworldSessionPersistenceReplay/ and consumes real Goal105 interaction targets/actions/session/deltas by repository-relative path.",
+                                                                                            "The handoff mirrors six metadata-only session payload files into unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/ and adds standalone Alpha-only snapshot, save-load and replay controllers plus a manual Unity Editor replay helper.",
+                                                                                            "The existing Visual World Stream Preview Workspace surfaces the offline_geoworld_session_replay group, replay step count, state delta count, checkpoint step, final state hash, Unity script inventory, editor helper readiness, simulated save/load/replay proof, negative proof and unchanged AlphaRuntimeBootstrap status.",
+                                                                                            "Goal 106 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime consumers, public schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings mutation or prompt dump."
+                                                                                        ],
+                                                                    "next_action":  "review_goal_106_offline_geoworld_session_persistence_replay"
                                                                 }
 }

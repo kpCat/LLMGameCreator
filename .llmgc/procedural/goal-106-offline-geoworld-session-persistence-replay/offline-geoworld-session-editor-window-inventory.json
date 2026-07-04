@@ -1,0 +1,29 @@
+{
+  "goalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "passed": true,
+  "editorWindowScriptExists": true,
+  "menuItemMarkerPresent": true,
+  "streamingAssetsPathMarkerPresent": true,
+  "goal106PayloadPathMarkerPresent": true,
+  "createRigMethodPresent": true,
+  "clearRigMethodPresent": true,
+  "acceptanceChecklistUiPresent": true,
+  "manualButtonOnly": true,
+  "hasNoProviderNetworkMarkers": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoScenePrefabSettingsMutationMarkers": true,
+  "hasNoAutoRunImportMarker": true,
+  "sourceFile": {
+    "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldSessionReplayWindow.cs",
+    "exists": true,
+    "sha256": "84563cef89da7dcf173d5f034dacd16aa5017943c3746339f33d51189562c0d7",
+    "lineCount": 142,
+    "maxLineLength": 114,
+    "notMinified": true,
+    "hasNoProviderNetworkMarkers": true,
+    "doesNotReferenceAlphaRuntimeBootstrap": true,
+    "hasNoScenePrefabSettingsMutationMarkers": true,
+    "hasNoExternalDependencyMarkers": true
+  },
+  "diagnostics": []
+}

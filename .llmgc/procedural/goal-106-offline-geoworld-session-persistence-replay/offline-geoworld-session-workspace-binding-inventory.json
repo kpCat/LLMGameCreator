@@ -1,0 +1,17 @@
+{
+  "goalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "passed": true,
+  "workspaceCatalogIncludesSessionReplayGroup": true,
+  "workspaceReadsGoal106EvidenceByRelativePath": true,
+  "winFormsPageDisplaysSessionReplayFields": true,
+  "showsDeltaCount": true,
+  "showsReplayStepCount": true,
+  "showsCheckpointStep": true,
+  "showsFinalHash": true,
+  "showsUnityScriptReadiness": true,
+  "showsEditorHelperReadiness": true,
+  "showsSimulatedReplayProofStatus": true,
+  "showsAcceptanceChecklistSummary": true,
+  "showsAlphaRuntimeBootstrapUnchangedStatus": true,
+  "diagnostics": []
+}

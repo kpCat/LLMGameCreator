@@ -1,0 +1,180 @@
+{
+  "goalId": "goal_106_offline_geoworld_session_persistence_replay",
+  "sourceGoalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "accepted": false,
+  "metadataOnly": true,
+  "immutableBaseData": true,
+  "noRawGeodata": true,
+  "targetCount": 8,
+  "actionCount": 8,
+  "scriptedEventCount": 6,
+  "stateDeltaCount": 6,
+  "initialStateHash": "73ab913660463dcd79bfd79e004fea74988193bf90ffd6bf4c1a1525c9be9e92",
+  "sourceFinalStateHash": "a095b977d266b1b4fa15f30331fa340c414d8bc6a33775dd55e7d3cd65903e32",
+  "targets": [
+    {
+      "targetId": "interaction_target/4043aa856b4f",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_terrain_hint_marker_4043aa856b4f",
+      "sourceObjectId": "interactive_object/07d19620806e",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_terrain_hint_marker_07d19620806e",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "rawGeodataIncluded": false
+    },
+    {
+      "targetId": "interaction_target/ea90e067a16e",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_terrain_hint_marker_ea90e067a16e",
+      "sourceObjectId": "interactive_object/08c7b72467f4",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_terrain_hint_marker_08c7b72467f4",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "rawGeodataIncluded": false
+    },
+    {
+      "targetId": "interaction_target/f57703787317",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_administrative_hint_marker_f57703787317",
+      "sourceObjectId": "interactive_object/12773e0efec7",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_12773e0efec7",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "rawGeodataIncluded": false
+    },
+    {
+      "targetId": "interaction_target/aec8482c9f7b",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_administrative_hint_marker_aec8482c9f7b",
+      "sourceObjectId": "interactive_object/1a8a631eb0dd",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_1a8a631eb0dd",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "rawGeodataIncluded": false
+    },
+    {
+      "targetId": "interaction_target/d73a4a060831",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_barrier_line_d73a4a060831",
+      "sourceObjectId": "interactive_object/27ffbfa8a3ed",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_barrier_line_27ffbfa8a3ed",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "rawGeodataIncluded": false
+    },
+    {
+      "targetId": "interaction_target/69dd05489882",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_bridge_marker_69dd05489882",
+      "sourceObjectId": "interactive_object/2ac3b5b60b9a",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_bridge_marker_2ac3b5b60b9a",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "rawGeodataIncluded": false
+    },
+    {
+      "targetId": "interaction_target/bb3a303c471f",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_administrative_hint_marker_bb3a303c471f",
+      "sourceObjectId": "interactive_object/6ca2ae81e33a",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_6ca2ae81e33a",
+      "sourceChunkKey": "z14/x4209/y6141",
+      "rawGeodataIncluded": false
+    },
+    {
+      "targetId": "interaction_target/941dde1b7eda",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_vegetation_area_marker_941dde1b7eda",
+      "sourceObjectId": "interactive_object/6ceaebb0326e",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_vegetation_area_marker_6ceaebb0326e",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "rawGeodataIncluded": false
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "interaction_action/4043aa856b4f/inspect",
+      "targetId": "interaction_target/4043aa856b4f",
+      "actionKind": "inspect",
+      "stateDeltaKind": "inspection_log"
+    },
+    {
+      "actionId": "interaction_action/ea90e067a16e/enter_or_focus",
+      "targetId": "interaction_target/ea90e067a16e",
+      "actionKind": "enter_or_focus",
+      "stateDeltaKind": "focus_target"
+    },
+    {
+      "actionId": "interaction_action/f57703787317/mark_visited",
+      "targetId": "interaction_target/f57703787317",
+      "actionKind": "mark_visited",
+      "stateDeltaKind": "visited_flag"
+    },
+    {
+      "actionId": "interaction_action/aec8482c9f7b/toggle_blocked",
+      "targetId": "interaction_target/aec8482c9f7b",
+      "actionKind": "toggle_blocked",
+      "stateDeltaKind": "blocked_flag"
+    },
+    {
+      "actionId": "interaction_action/d73a4a060831/collect_sample",
+      "targetId": "interaction_target/d73a4a060831",
+      "actionKind": "collect_sample",
+      "stateDeltaKind": "sample_collected"
+    },
+    {
+      "actionId": "interaction_action/69dd05489882/inspect",
+      "targetId": "interaction_target/69dd05489882",
+      "actionKind": "inspect",
+      "stateDeltaKind": "inspection_log"
+    },
+    {
+      "actionId": "interaction_action/bb3a303c471f/inspect",
+      "targetId": "interaction_target/bb3a303c471f",
+      "actionKind": "inspect",
+      "stateDeltaKind": "inspection_log"
+    },
+    {
+      "actionId": "interaction_action/941dde1b7eda/inspect",
+      "targetId": "interaction_target/941dde1b7eda",
+      "actionKind": "inspect",
+      "stateDeltaKind": "inspection_log"
+    }
+  ],
+  "sessionEvents": [
+    {
+      "eventIndex": 0,
+      "eventId": "goal105_scripted_interaction_00",
+      "targetId": "interaction_target/4043aa856b4f",
+      "actionId": "interaction_action/4043aa856b4f/inspect",
+      "expectedStateHashBefore": "73ab913660463dcd79bfd79e004fea74988193bf90ffd6bf4c1a1525c9be9e92",
+      "expectedStateHashAfter": "1ecb1c5a707aabcb6f8da6fd7d976fb1778ceeb6607bbf653f7b49a1a83e5769"
+    },
+    {
+      "eventIndex": 1,
+      "eventId": "goal105_scripted_interaction_01",
+      "targetId": "interaction_target/ea90e067a16e",
+      "actionId": "interaction_action/ea90e067a16e/enter_or_focus",
+      "expectedStateHashBefore": "1ecb1c5a707aabcb6f8da6fd7d976fb1778ceeb6607bbf653f7b49a1a83e5769",
+      "expectedStateHashAfter": "d3215d45a74c216a79a1dbb1f6549cb73dce830c8d78ec5c9eb18c2e48801abd"
+    },
+    {
+      "eventIndex": 2,
+      "eventId": "goal105_scripted_interaction_02",
+      "targetId": "interaction_target/f57703787317",
+      "actionId": "interaction_action/f57703787317/mark_visited",
+      "expectedStateHashBefore": "d3215d45a74c216a79a1dbb1f6549cb73dce830c8d78ec5c9eb18c2e48801abd",
+      "expectedStateHashAfter": "a5ba82ccce171c6027159622b8c39e8b58e9c7a58bdaa3d684ea508e5931ab45"
+    },
+    {
+      "eventIndex": 3,
+      "eventId": "goal105_scripted_interaction_03",
+      "targetId": "interaction_target/aec8482c9f7b",
+      "actionId": "interaction_action/aec8482c9f7b/toggle_blocked",
+      "expectedStateHashBefore": "a5ba82ccce171c6027159622b8c39e8b58e9c7a58bdaa3d684ea508e5931ab45",
+      "expectedStateHashAfter": "8fd940d99cc08419731601d8482c023915da9ddcdfbbd25e5944d2d8808e6d31"
+    },
+    {
+      "eventIndex": 4,
+      "eventId": "goal105_scripted_interaction_04",
+      "targetId": "interaction_target/d73a4a060831",
+      "actionId": "interaction_action/d73a4a060831/collect_sample",
+      "expectedStateHashBefore": "8fd940d99cc08419731601d8482c023915da9ddcdfbbd25e5944d2d8808e6d31",
+      "expectedStateHashAfter": "0f699ae615a2627e1532793f1ee7f690721633af70f00139c2129447ba84a64b"
+    },
+    {
+      "eventIndex": 5,
+      "eventId": "goal105_scripted_interaction_05",
+      "targetId": "interaction_target/69dd05489882",
+      "actionId": "interaction_action/69dd05489882/inspect",
+      "expectedStateHashBefore": "0f699ae615a2627e1532793f1ee7f690721633af70f00139c2129447ba84a64b",
+      "expectedStateHashAfter": "a095b977d266b1b4fa15f30331fa340c414d8bc6a33775dd55e7d3cd65903e32"
+    }
+  ]
+}

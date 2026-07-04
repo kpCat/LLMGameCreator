@@ -2,6 +2,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
 using LLMGameCreator.Application.Design.OfflineGeoworldInteractionPlayableProbe;
+using LLMGameCreator.Application.Design.OfflineGeoworldSessionPersistenceReplay;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.WinForms.Pages;
@@ -32,7 +33,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("offline_geoworld_playmode_travel", groupIds);
         Assert.Contains("offline_geoworld_interactive_travel", groupIds);
         Assert.Contains("offline_geoworld_interactions", groupIds);
-        Assert.Equal(14, result.Catalog.GroupCount);
+        Assert.Contains("offline_geoworld_session_replay", groupIds);
+        Assert.Equal(15, result.Catalog.GroupCount);
         Assert.True(result.Catalog.EntryCount >= 140);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
@@ -331,7 +333,15 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal103.goal102b_closure",
             "goal103.alpha_runtime_bootstrap_unchanged",
             "goal103.boundary_prefetch",
-            "goal103.quality_gate"
+            "goal103.quality_gate",
+            "goal106.unity_script_inventory",
+            "goal106.editor_window_inventory",
+            "goal106.simulated_save_load_replay",
+            "goal106.negative",
+            "goal106.alpha_runtime_bootstrap_unchanged",
+            "goal106.checkpoint_resume",
+            "goal106.final_hash",
+            "goal106.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -635,6 +645,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
     {
         var root = ProjectRoot();
         new OfflineGeoworldInteractionPlayableProbeEvidenceService()
+            .BuildAndWriteAsync(root)
+            .GetAwaiter()
+            .GetResult();
+        new OfflineGeoworldSessionPersistenceReplayEvidenceService()
             .BuildAndWriteAsync(root)
             .GetAwaiter()
             .GetResult();

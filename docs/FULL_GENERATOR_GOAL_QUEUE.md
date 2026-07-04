@@ -98,6 +98,7 @@ actual_unity_editor_source_reformat_verification required
 offline_geoworld_playmode_travel_preview_verification required
 offline_geoworld_interactive_travel_preview_verification required
 offline_geoworld_interaction_playable_probe_verification required
+offline_geoworld_session_persistence_replay_verification required
 ```
 
 Current capabilities:
@@ -133,6 +134,7 @@ Current capabilities:
 - Goal 103 offline geoworld play-mode travel preview evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets handoff, standalone play-mode travel controller/state/chunk-visibility scripts, manual Unity Editor launch helper, simulated proof, workspace inspection and Goal102B false-positive proceed closure while keeping Goal102B BLOCKED;
 - Goal 104 offline geoworld interactive travel preview evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets handoff, standalone interactive travel controller/player-motor/boundary-prefetch-state scripts, manual Unity Editor launch helper, simulated movement/boundary/prefetch proof and workspace inspection;
 - Goal 105 offline geoworld interaction playable probe evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets interaction payload, standalone interaction controller/target/state-delta-log scripts, manual Unity Editor probe helper, simulated interaction/state-delta hash proof and workspace inspection;
+- Goal 106 offline geoworld session persistence/replay evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets session payload, standalone snapshot/save-load/replay scripts, manual Unity Editor replay helper, simulated save-load replay proof and workspace inspection;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1810,14 +1812,36 @@ final art, atlas or Unity scene/prefab/settings/packages/build-settings files. G
 Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain
 `accepted=false`.
 
+### Goal 106: Offline Geoworld Session Persistence Replay
+
+Goal 106 is produced for review with `offline_geoworld_session_persistence_replay_verification required`,
+`accepted=false` and `implementationStatus=GREEN`.
+
+Goal 106 writes deterministic evidence under
+`.llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/`. It consumes real Goal105 interaction
+targets/actions/session/deltas by repository-relative path, mirrors six metadata-only session persistence/replay payload
+files into `unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/`, adds standalone
+snapshot/save-load/replay scripts and a manual Unity Editor replay helper, and surfaces the
+`offline_geoworld_session_replay` group in the existing Visual World Stream Preview Workspace.
+
+The evidence records `replayStepCount=6`, `stateDeltaCount=6`, `checkpointStepIndex=3`, `unityScriptsReady=true`,
+`editorWindowReady=true`, `saveLoadReplayProofPassed=true`, `negativeProofPassed=true`, `workspaceBindingPassed=true`,
+`alphaRuntimeBootstrapUnchanged=true` and `qualityGatePassed=true`.
+
+Goal 106 changes no Runtime, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file,
+dependency, LFZ source/archive, live network fetching, map tile scraping, raw geodata dump, binary/raster media,
+prompt-dump, final gameplay, final art, atlas or Unity scene/prefab/settings/packages/build-settings files. Goal 106,
+Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098, Goal 097 and
+prior visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-offline_geoworld_interaction_playable_probe_verification
+offline_geoworld_session_persistence_replay_verification
 ```
 
 Status:
 
 ```text
-goal_105_offline_geoworld_interaction_playable_probe_produced_for_review
+goal_106_offline_geoworld_session_persistence_replay_produced_for_review
 ```

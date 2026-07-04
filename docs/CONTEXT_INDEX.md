@@ -199,6 +199,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-103-offline-geoworld-playmode-travel-preview/GOAL.md` | Goal 103 task: offline geoworld play-mode travel preview over real Goal101 command/travel metadata plus Goal102/Goal102B evidence. Produces a BCL-only Application evidence seam, metadata-only Unity StreamingAssets handoff, standalone play-mode travel controller/state/chunk-visibility scripts, manual Unity Editor launch helper, workspace inspection and final stop at `offline_geoworld_playmode_travel_preview_verification`; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final art, atlas or Unity scene/prefab/settings/packages/build-settings changes. |
 | `docs/agent-tasks/goal-104-offline-geoworld-interactive-travel-preview/GOAL.md` | Goal 104 task: offline geoworld interactive travel preview over real Goal103 play-mode travel evidence. Produces a BCL-only Application evidence seam, metadata-only Unity StreamingAssets handoff, standalone interactive travel controller/player-motor/boundary-prefetch-state scripts, manual Unity Editor launch helper, workspace inspection and final stop at `offline_geoworld_interactive_travel_preview_verification`; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final art, atlas or Unity scene/prefab/settings/packages/build-settings changes. |
 | `docs/agent-tasks/goal-105-offline-geoworld-interaction-playable-probe/GOAL.md` | Goal 105 task: offline geoworld interaction playable probe over real Goal104 interactive travel evidence. Produces a BCL-only Application evidence seam, metadata-only Unity StreamingAssets interaction payload, standalone interaction controller/target/state-delta-log scripts, manual Unity Editor probe helper, workspace inspection and final stop at `offline_geoworld_interaction_playable_probe_verification`; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final art, atlas or Unity scene/prefab/settings/packages/build-settings changes. |
+| `docs/agent-tasks/goal-106-offline-geoworld-session-persistence-replay/GOAL.md` | Goal 106 task: offline geoworld session persistence/replay over real Goal105 interaction evidence. Produces a BCL-only Application evidence seam, metadata-only Unity StreamingAssets session payload, standalone snapshot/save-load/replay scripts, manual Unity Editor replay helper, workspace inspection and final stop at `offline_geoworld_session_persistence_replay_verification`; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final art, atlas or Unity scene/prefab/settings/packages/build-settings changes. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -276,7 +277,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-offline_geoworld_interaction_playable_probe_verification
+offline_geoworld_session_persistence_replay_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -628,6 +629,15 @@ Workspace, and changes no Runtime, public schema, Lua, generator-library, projec
 live network/provider/geodata, binary/raster media, final art, atlas, Unity scene/prefab/settings/packages or
 build-settings files. Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099,
 Goal 098 and Goal 097 remain `accepted=false`.
+Goal 106 is produced for review with `offline_geoworld_session_persistence_replay_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it consumes real Goal105 interaction targets/actions/session/deltas by
+repository-relative path, mirrors six metadata-only session persistence/replay payload files into Unity Alpha
+StreamingAssets, adds standalone snapshot/save-load/replay scripts and a manual Unity Editor replay helper, surfaces replay
+step count, state delta count, checkpoint, final hash, save-load proof and Unity script inventory in the existing Visual
+World Stream Preview Workspace, and changes no Runtime, public schema, Lua, generator-library, project files,
+dependencies, LFZ source/archive, live network/provider/geodata, binary/raster media, final art, atlas, Unity
+scene/prefab/settings/packages or build-settings files. Goal 106, Goal 105, Goal 104, Goal 103, Goal 102B, Goal 102A,
+Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain `accepted=false`.
 
 Allowed next sequence:
 
@@ -700,6 +710,7 @@ Allowed next sequence:
 67. Review Goal 103 `offline_geoworld_playmode_travel_preview_verification`; it produces metadata-only play-mode travel preview evidence over Goal101/102/102B with standalone Unity scripts/editor helper and workspace inspection while keeping Goal103 and prior geoworld gates `accepted=false`.
 68. Review Goal 104 `offline_geoworld_interactive_travel_preview_verification`; it produces metadata-only interactive travel preview evidence over real Goal103 payloads with standalone Unity scripts/editor helper and workspace inspection while keeping Goal104 and prior geoworld gates `accepted=false`.
 69. Review Goal 105 `offline_geoworld_interaction_playable_probe_verification`; it produces metadata-only interaction playable probe evidence over real Goal104 payloads with standalone Unity scripts/editor helper, state-delta proof and workspace inspection while keeping Goal105 and prior geoworld gates `accepted=false`.
+70. Review Goal 106 `offline_geoworld_session_persistence_replay_verification`; it produces metadata-only session persistence/replay evidence over real Goal105 payloads with standalone Unity scripts/editor helper, save-load proof and workspace inspection while keeping Goal106 and prior geoworld gates `accepted=false`.
 
 Kill criterion:
 

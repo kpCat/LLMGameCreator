@@ -92,6 +92,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal103OfflineGeoworldPlayModeTravelProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal104OfflineGeoworldInteractiveTravelProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal105OfflineGeoworldInteractionProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal106OfflineGeoworldSessionProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
