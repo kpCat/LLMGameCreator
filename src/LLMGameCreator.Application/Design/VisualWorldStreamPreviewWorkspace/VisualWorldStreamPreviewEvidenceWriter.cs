@@ -211,6 +211,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var interactions = BuildGoal105InteractionQuality(groups, proofs);
         var sessionReplay = BuildGoal106SessionQuality(groups, proofs);
         var objectiveAcceptance = BuildGoal107ObjectiveQuality(groups, proofs);
+        var alphaSlice = BuildGoal108AlphaSliceQuality(groups, proofs);
         var requiredGroups = new[]
         {
             "microtiles",
@@ -228,7 +229,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "offline_geoworld_interactive_travel",
             "offline_geoworld_interactions",
             "offline_geoworld_session_replay",
-            "offline_geoworld_objective_acceptance"
+            "offline_geoworld_objective_acceptance",
+            "offline_geoworld_alpha_slice"
         };
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -393,6 +395,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal105InteractionQualityDiagnostics(interactions, diagnostics);
         AddGoal106SessionQualityDiagnostics(sessionReplay, diagnostics);
         AddGoal107ObjectiveQualityDiagnostics(objectiveAcceptance, diagnostics);
+        AddGoal108AlphaSliceQualityDiagnostics(alphaSlice, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -408,6 +411,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(binding.PageBindDisplaysOfflineGeoworldInteractions, "goal105.quality.winforms_offline_geoworld_interaction_binding", "winformsBinding", diagnostics);
         AddIfFalse(binding.PageBindDisplaysOfflineGeoworldSessionReplay, "goal106.quality.winforms_offline_geoworld_session_replay_binding", "winformsBinding", diagnostics);
         AddIfFalse(binding.PageBindDisplaysOfflineGeoworldObjectiveAcceptance, "goal107.quality.winforms_offline_geoworld_objective_acceptance_binding", "winformsBinding", diagnostics);
+        AddIfFalse(binding.PageBindDisplaysOfflineGeoworldAlphaSlice, "goal108.quality.winforms_offline_geoworld_alpha_slice_binding", "winformsBinding", diagnostics);
         AddIfFalse(sourceHealth.Passed, "goal092.quality.source_health", "sourceHealth", diagnostics);
         foreach (var diagnostic in sourceDiagnostics
                      .Concat(sourceHealth.Diagnostics)
@@ -620,6 +624,20 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 objectiveAcceptance.AlphaRuntimeBootstrapUnchanged,
             OfflineGeoworldObjectiveQualityGatePassed = objectiveAcceptance.QualityGatePassed,
             Goal107FilesDiscoveredByRelativePaths = objectiveAcceptance.RelativePaths,
+            OfflineGeoworldAlphaSliceGroupPresent = alphaSlice.GroupPresent,
+            OfflineGeoworldAlphaSliceComponentCount = alphaSlice.ComponentCount,
+            OfflineGeoworldAlphaSliceReadyComponentCount = alphaSlice.ReadyComponentCount,
+            OfflineGeoworldAlphaSliceObjectiveCount = alphaSlice.ObjectiveCount,
+            OfflineGeoworldAlphaSliceCompletedObjectiveCount = alphaSlice.CompletedObjectiveCount,
+            OfflineGeoworldAlphaSliceFinalStatus = alphaSlice.FinalStatus,
+            OfflineGeoworldAlphaSliceUnityToolReady = alphaSlice.UnityToolReady,
+            OfflineGeoworldAlphaSliceAcceptanceRunbookReady = alphaSlice.AcceptanceRunbookReady,
+            OfflineGeoworldAlphaSliceFinalProofPassed = alphaSlice.FinalProofPassed,
+            OfflineGeoworldAlphaSliceNegativeProofPassed = alphaSlice.NegativeProofPassed,
+            OfflineGeoworldAlphaSliceAlphaRuntimeBootstrapUnchanged =
+                alphaSlice.AlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldAlphaSliceQualityGatePassed = alphaSlice.QualityGatePassed,
+            Goal108FilesDiscoveredByRelativePaths = alphaSlice.RelativePaths,
             RequiredArtifactGroupsPresent = requiredArtifactGroupsPresent,
             Goal091StreamWindowsVisible = goal091StreamEntries >= 4,
             ProofStatusPassed = proofStatusPassed,
@@ -644,6 +662,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             WinFormsOfflineGeoworldSessionReplayBindingReal = binding.PageBindDisplaysOfflineGeoworldSessionReplay,
             WinFormsOfflineGeoworldObjectiveAcceptanceBindingReal =
                 binding.PageBindDisplaysOfflineGeoworldObjectiveAcceptance,
+            WinFormsOfflineGeoworldAlphaSliceBindingReal =
+                binding.PageBindDisplaysOfflineGeoworldAlphaSlice,
             SourceHealthPassed = sourceHealth.Passed,
             ScannedCSharpFileCount = sourceHealth.ScannedCSharpFileCount,
             MaxLogicalLineCount = sourceHealth.MaxLogicalLineCount,
@@ -666,18 +686,4 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         };
     }
 
-    private static string RenderReport(
-        VisualWorldStreamPreviewWorkspaceReport report,
-        VisualWorldStreamPreviewCatalog catalog,
-        VisualWorldStreamPreviewProofStatusDocument proofStatus,
-        VisualWorldPreviewWinFormsBindingInventory binding,
-        VisualWorldPreviewWorkspaceQualityGate qualityGate,
-        string deterministicReportHash) =>
-        RenderWorkspaceReport(
-            report,
-            catalog,
-            proofStatus,
-            binding,
-            qualityGate,
-            deterministicReportHash);
 }

@@ -1,0 +1,14 @@
+{
+  "goalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+  "accepted": false,
+  "summary": "Offline geoworld Alpha Slice aggregate over real Goal101-107 proof artifacts.",
+  "componentCount": 7,
+  "readyComponentCount": 7,
+  "manualGate": "offline_geoworld_alpha_slice_orchestrator_verification",
+  "streamingAssetsRoot": "LLMGameCreator/OfflineGeoworldGoal108",
+  "notFinalWarnings": [
+    "Manual gate offline_geoworld_alpha_slice_orchestrator_verification remains required.",
+    "Offline geoworld Alpha Slice is one-click Alpha tooling, not final Runtime or release build.",
+    "Real geodata, providers, final art, scene/prefab changes and public schema changes remain separate future gates."
+  ]
+}

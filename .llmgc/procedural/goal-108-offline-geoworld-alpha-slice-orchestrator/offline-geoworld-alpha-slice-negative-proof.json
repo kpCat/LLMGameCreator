@@ -1,0 +1,84 @@
+{
+  "goalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+  "accepted": false,
+  "passed": true,
+  "scenarioCount": 15,
+  "rejectedCount": 15,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal107_payload",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects missing_goal107_payload."
+    },
+    {
+      "scenarioId": "missing_component",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects missing_component."
+    },
+    {
+      "scenarioId": "accepted_true_fake_promotion",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects accepted_true_fake_promotion."
+    },
+    {
+      "scenarioId": "historical_artifact_rewrite_attempt",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects historical_artifact_rewrite_attempt."
+    },
+    {
+      "scenarioId": "component_hash_mismatch",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects component_hash_mismatch."
+    },
+    {
+      "scenarioId": "one_click_setup_without_file_reads",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects one_click_setup_without_file_reads."
+    },
+    {
+      "scenarioId": "missing_clear_method",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects missing_clear_method."
+    },
+    {
+      "scenarioId": "objective_final_status_not_completed",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects objective_final_status_not_completed."
+    },
+    {
+      "scenarioId": "absolute_path_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects absolute_path_marker."
+    },
+    {
+      "scenarioId": "raw_geodata_leak",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects raw_geodata_leak."
+    },
+    {
+      "scenarioId": "network_provider_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects network_provider_marker."
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects alpha_runtime_bootstrap_dependency."
+    },
+    {
+      "scenarioId": "scene_prefab_settings_mutation_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects scene_prefab_settings_mutation_marker."
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects binary_raster_media_marker."
+    },
+    {
+      "scenarioId": "external_dependency_new_input_system_marker",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108 aggregate proof rejects external_dependency_new_input_system_marker."
+    }
+  ]
+}

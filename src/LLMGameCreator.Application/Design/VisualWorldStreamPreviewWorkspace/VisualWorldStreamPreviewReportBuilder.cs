@@ -251,6 +251,30 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged,
             OfflineGeoworldObjectiveQualityGatePassed = qualityGate.OfflineGeoworldObjectiveQualityGatePassed,
             Goal107FilesDiscoveredByRelativePaths = qualityGate.Goal107FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaSliceComponentCount =
+                qualityGate.OfflineGeoworldAlphaSliceComponentCount,
+            OfflineGeoworldAlphaSliceReadyComponentCount =
+                qualityGate.OfflineGeoworldAlphaSliceReadyComponentCount,
+            OfflineGeoworldAlphaSliceObjectiveCount =
+                qualityGate.OfflineGeoworldAlphaSliceObjectiveCount,
+            OfflineGeoworldAlphaSliceCompletedObjectiveCount =
+                qualityGate.OfflineGeoworldAlphaSliceCompletedObjectiveCount,
+            OfflineGeoworldAlphaSliceFinalStatus =
+                qualityGate.OfflineGeoworldAlphaSliceFinalStatus,
+            OfflineGeoworldAlphaSliceUnityToolReady =
+                qualityGate.OfflineGeoworldAlphaSliceUnityToolReady,
+            OfflineGeoworldAlphaSliceAcceptanceRunbookReady =
+                qualityGate.OfflineGeoworldAlphaSliceAcceptanceRunbookReady,
+            OfflineGeoworldAlphaSliceFinalProofPassed =
+                qualityGate.OfflineGeoworldAlphaSliceFinalProofPassed,
+            OfflineGeoworldAlphaSliceNegativeProofPassed =
+                qualityGate.OfflineGeoworldAlphaSliceNegativeProofPassed,
+            OfflineGeoworldAlphaSliceAlphaRuntimeBootstrapUnchanged =
+                qualityGate.OfflineGeoworldAlphaSliceAlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldAlphaSliceQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaSliceQualityGatePassed,
+            Goal108FilesDiscoveredByRelativePaths =
+                qualityGate.Goal108FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

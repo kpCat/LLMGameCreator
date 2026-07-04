@@ -1,0 +1,18 @@
+{
+  "goalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+  "accepted": false,
+  "passed": true,
+  "editorWindowExists": true,
+  "editorWindowRelativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldAlphaSliceWindow.cs",
+  "menuItemMarkerPresent": true,
+  "readsManifestBeforeSetup": true,
+  "createRigMethodPresent": true,
+  "clearRigMethodPresent": true,
+  "verifyMethodPresent": true,
+  "manualButtonOnly": true,
+  "hasNoAutoRunImportMarker": true,
+  "hasNoProviderNetworkMarkers": true,
+  "hasNoExternalDependencyMarkers": true,
+  "lineCount": 215,
+  "sha256": "d937ac66098c1a3bf51bd8a94666eb2c822c53538e9ac89e53ad1beea25876fb"
+}

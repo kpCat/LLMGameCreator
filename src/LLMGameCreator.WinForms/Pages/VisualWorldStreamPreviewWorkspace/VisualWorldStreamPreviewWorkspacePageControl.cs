@@ -67,7 +67,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | sessionReplaySteps="
             + result.Report.OfflineGeoworldSessionReplayStepCount
             + " | objectiveCount="
-            + result.Report.OfflineGeoworldObjectiveCount;
+            + result.Report.OfflineGeoworldObjectiveCount
+            + " | alphaSliceComponents="
+            + result.Report.OfflineGeoworldAlphaSliceReadyComponentCount
+            + "/"
+            + result.Report.OfflineGeoworldAlphaSliceComponentCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -397,6 +401,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
         };
+        lines.AddRange(BuildOfflineGeoworldAlphaSliceDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -460,7 +465,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
 
     private static string BuildEntryDetails(VisualWorldPreviewArtifactEntry entry)
     {
-        var lines = new[]
+        var lines = new List<string>
         {
             "id: " + entry.Id,
             "kind: " + entry.ArtifactKind,
@@ -663,6 +668,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             "offlineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged: " + entry.OfflineGeoworldObjectiveAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
+        lines.AddRange(BuildOfflineGeoworldAlphaSliceEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

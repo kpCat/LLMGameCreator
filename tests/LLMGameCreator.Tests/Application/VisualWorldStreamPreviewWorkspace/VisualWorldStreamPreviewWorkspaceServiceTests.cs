@@ -1,6 +1,7 @@
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
+using LLMGameCreator.Application.Design.OfflineGeoworldAlphaSliceOrchestrator;
 using LLMGameCreator.Application.Design.OfflineGeoworldObjectiveAcceptanceRun;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
@@ -12,7 +13,7 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through107Artifacts()
+    public void ServiceLoadsRealGoal086Through108Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -34,8 +35,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("offline_geoworld_interactions", groupIds);
         Assert.Contains("offline_geoworld_session_replay", groupIds);
         Assert.Contains("offline_geoworld_objective_acceptance", groupIds);
-        Assert.Equal(16, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 166);
+        Assert.Contains("offline_geoworld_alpha_slice", groupIds);
+        Assert.Equal(17, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 183);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
@@ -350,7 +352,13 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal107.completion_transitions",
             "goal107.alpha_quality_consolidation",
             "goal107.alpha_runtime_bootstrap_unchanged",
-            "goal107.quality_gate"
+            "goal107.quality_gate",
+            "goal108.alpha_slice.unity_script_inventory",
+            "goal108.alpha_slice.editor_window_inventory",
+            "goal108.alpha_slice.full_slice_simulated_proof",
+            "goal108.alpha_slice.negative_proof",
+            "goal108.alpha_slice.alpha_runtime_bootstrap_unchanged",
+            "goal108.alpha_slice.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -654,6 +662,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
     {
         var root = ProjectRoot();
         new OfflineGeoworldObjectiveAcceptanceRunEvidenceService()
+            .BuildAndWriteAsync(root)
+            .GetAwaiter()
+            .GetResult();
+        new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
             .BuildAndWriteAsync(root)
             .GetAwaiter()
             .GetResult();

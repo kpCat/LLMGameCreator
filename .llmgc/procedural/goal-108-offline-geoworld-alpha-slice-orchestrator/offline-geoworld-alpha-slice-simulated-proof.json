@@ -1,0 +1,32 @@
+{
+  "goalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+  "accepted": false,
+  "passed": true,
+  "payloadReadAttempted": true,
+  "sourceGoal101To107PayloadsRead": true,
+  "setupPreviewPassed": true,
+  "travelPassed": true,
+  "interactionPassed": true,
+  "savePassed": true,
+  "loadPassed": true,
+  "replayPassed": true,
+  "completeObjectivesPassed": true,
+  "finalHashPropagationPassed": true,
+  "historicalArtifactsUnchanged": true,
+  "alphaRuntimeBootstrapUnchanged": true,
+  "noAbsolutePaths": true,
+  "noRawGeodata": true,
+  "noBinaryOrRasterMedia": true,
+  "noNetworkProviderMarkers": true,
+  "sequence": [
+    "setup_preview",
+    "travel",
+    "interact",
+    "save",
+    "load",
+    "replay",
+    "complete_objectives"
+  ],
+  "finalStateHash": "a095b977d266b1b4fa15f30331fa340c414d8bc6a33775dd55e7d3cd65903e32",
+  "finalAcceptanceHash": "eeebddc5d8e8b41d137a03b3ba63b6c8e6484b9fe82b17cbf993bbaa91ff8bb4"
+}

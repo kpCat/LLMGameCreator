@@ -1,0 +1,30 @@
+{
+  "goalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+  "manualGate": "offline_geoworld_alpha_slice_orchestrator_verification",
+  "accepted": false,
+  "stepCount": 8,
+  "steps": [
+    "Open Unity project unity/LLMGameCreatorAlpha.",
+    "Open menu LLMGameCreator/Offline Geoworld Alpha Slice.",
+    "Refresh manifest and verify all seven components are ready.",
+    "Create the Alpha Slice rig; no scene mutation occurs before the button is pressed.",
+    "Verify preview, travel, interaction, save, load, replay and objective readiness statuses.",
+    "Run Verify Slice from the editor window or coordinator context menu.",
+    "Clear the Alpha Slice rig before saving or closing the scene.",
+    "Keep manual gate offline_geoworld_alpha_slice_orchestrator_verification required until user acceptance."
+  ],
+  "componentIds": [
+    "preview",
+    "editor_preview",
+    "play_mode_travel",
+    "interactive_travel",
+    "interactions",
+    "session_replay",
+    "objective_acceptance"
+  ],
+  "notFinalWarnings": [
+    "Manual gate offline_geoworld_alpha_slice_orchestrator_verification remains required.",
+    "Offline geoworld Alpha Slice is one-click Alpha tooling, not final Runtime or release build.",
+    "Real geodata, providers, final art, scene/prefab changes and public schema changes remain separate future gates."
+  ]
+}

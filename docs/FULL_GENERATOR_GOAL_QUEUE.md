@@ -100,6 +100,7 @@ offline_geoworld_interactive_travel_preview_verification required
 offline_geoworld_interaction_playable_probe_verification required
 offline_geoworld_session_persistence_replay_verification required
 offline_geoworld_objective_acceptance_run_verification required
+offline_geoworld_alpha_slice_orchestrator_verification required
 ```
 
 Current capabilities:
@@ -137,6 +138,7 @@ Current capabilities:
 - Goal 105 offline geoworld interaction playable probe evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets interaction payload, standalone interaction controller/target/state-delta-log scripts, manual Unity Editor probe helper, simulated interaction/state-delta hash proof and workspace inspection;
 - Goal 106 offline geoworld session persistence/replay evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets session payload, standalone snapshot/save-load/replay scripts, manual Unity Editor replay helper, simulated save-load replay proof and workspace inspection;
 - Goal 107 offline geoworld objective acceptance run evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets objective payload, standalone objective tracker/state/acceptance controller scripts, manual Unity Editor acceptance helper, simulated acceptance proof and Unity Alpha quality consolidation workspace inspection;
+- Goal 108 offline geoworld Alpha Slice orchestrator evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets Alpha Slice payload, manual Unity Editor one-click setup/clear/verify window, small coordinator script, acceptance runbook, full-slice simulated proof, negative proof and workspace inspection;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;

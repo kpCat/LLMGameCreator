@@ -1,0 +1,356 @@
+{
+  "goalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+  "accepted": false,
+  "componentCount": 7,
+  "readyComponentCount": 7,
+  "missingComponentCount": 0,
+  "components": [
+    {
+      "componentId": "preview",
+      "displayName": "Goal101 Preview Commands",
+      "sourceGoalId": "goal_101_offline_geoworld_unity_preview_runner",
+      "sourceArtifactRoot": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner",
+      "streamingAssetsRoot": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101",
+      "manualGate": "offline_geoworld_unity_preview_runner_verification",
+      "implementationStatus": "GREEN",
+      "accepted": false,
+      "ready": true,
+      "requiredArtifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "unityScriptsReady": true,
+      "unityPayloadPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-feature-commands.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-readme.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-runner-manifest.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-style-legend.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-travel-window-script.json"
+      ],
+      "unityScriptPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewRunner.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewPrimitiveFactory.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewTravelWindow.cs"
+      ],
+      "sourceArtifactHashes": {
+        ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-negative-proof.json": "46c0e86a426aa54de922d9444f58efce2187be9a04fc8eb3dc3eb06ee9f54fd6",
+        ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-quality-gate-scan.json": "7c9fd37e223a2507b5163634ade25e12a2580ee8e495a228129fb099bf7dfa3f",
+        ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-runner-manifest.json": "17cc1c64b90706afbd0136619f6a68fa19e2d3022719818e088e74b264976ada",
+        ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-simulated-command-proof.json": "f917128833f43c04948efe4c29b2058b59a47de5c1214109bb2f84f2039d5583",
+        ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-unity-script-inventory.json": "abea67db73efc1fc7142b7ecd2eb30e3c8f6a9fca3cf64b710b549526c2f9725",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-feature-commands.json": "bfe993074c86947815146c01fa5888be1270521f0c496efb07f3e3500851f007",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-readme.json": "0d5554ccf38750af1247d51f207e17d3468ea279d32893fd09dce29e1c7952e7",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-runner-manifest.json": "17cc1c64b90706afbd0136619f6a68fa19e2d3022719818e088e74b264976ada",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-style-legend.json": "ad2bd6921aff425758660af3773fdfa3d701e75371e76a6883687c4426c0d9e9",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/offline-geoworld-preview-travel-window-script.json": "73fb12782f8af214528c6d52585a285b9b78c7a89649ff73ea888679add2d533"
+      },
+      "aggregateHash": "d2fca57d1e16a3d2aeac99492efe706603508679cc505af3f7a28be17d530edc",
+      "objectiveCount": 0,
+      "completedObjectiveCount": 0,
+      "finalStatus": "",
+      "finalStateHash": "",
+      "finalAcceptanceHash": "",
+      "notFinalWarnings": [
+        "Alpha tooling only.",
+        "accepted=false until manual gate review.",
+        "No Runtime, provider, schema, scene, prefab, project settings, final art or real geodata promotion."
+      ]
+    },
+    {
+      "componentId": "editor_preview",
+      "displayName": "Goal102 Unity Editor Preview",
+      "sourceGoalId": "goal_102_offline_geoworld_unity_editor_preview_tool",
+      "sourceArtifactRoot": ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool",
+      "streamingAssetsRoot": "",
+      "manualGate": "offline_geoworld_unity_editor_preview_tool_verification",
+      "implementationStatus": "GREEN",
+      "accepted": false,
+      "ready": true,
+      "requiredArtifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "unityScriptsReady": true,
+      "unityPayloadPaths": [],
+      "unityScriptPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs"
+      ],
+      "sourceArtifactHashes": {
+        ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/offline-geoworld-unity-editor-negative-proof.json": "15fc45e2c32b82fd226e59ead967e886902edd4f3bbb3b575e2dfdb275abfa94",
+        ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/offline-geoworld-unity-editor-quality-gate-scan.json": "60f51bdaf72f6ef1085c8387d378bd1f83041aac8dd2dd93e199d9a0a1a5ddaa",
+        ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/offline-geoworld-unity-editor-simulated-action-proof.json": "9dc40015a5a91eecc539d1b7ebd614411f43a6eca8c0dcd4327a2aa3590ec517",
+        ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/offline-geoworld-unity-editor-tool-inventory.json": "86cbe4b738808f81c10f20ff0da7667e62f3bd8304216cd3bbcf6bf578710458"
+      },
+      "aggregateHash": "f262822fafc9c5cfa72129571fe50b30ca54f52eb8e0db4e97907d32e8987627",
+      "objectiveCount": 0,
+      "completedObjectiveCount": 0,
+      "finalStatus": "",
+      "finalStateHash": "",
+      "finalAcceptanceHash": "",
+      "notFinalWarnings": [
+        "Alpha tooling only.",
+        "accepted=false until manual gate review.",
+        "No Runtime, provider, schema, scene, prefab, project settings, final art or real geodata promotion."
+      ]
+    },
+    {
+      "componentId": "play_mode_travel",
+      "displayName": "Goal103 Play Mode Travel",
+      "sourceGoalId": "goal_103_offline_geoworld_playmode_travel_preview",
+      "sourceArtifactRoot": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview",
+      "streamingAssetsRoot": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103",
+      "manualGate": "offline_geoworld_playmode_travel_preview_verification",
+      "implementationStatus": "GREEN",
+      "accepted": false,
+      "ready": true,
+      "requiredArtifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "unityScriptsReady": true,
+      "unityPayloadPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-chunk-visibility.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-object-state-index.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-readme.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-steps.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-travel-manifest.json"
+      ],
+      "unityScriptPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelState.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeChunkVisibility.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPlayModeTravelWindow.cs"
+      ],
+      "sourceArtifactHashes": {
+        ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-editor-window-inventory.json": "d6f432dbf6f2007d04f34fe26f29df35f5dc5f17bb9dcabeb8b5da40f11ab800",
+        ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-negative-proof.json": "127cc29ec9fd64233a73527605306343992d9773bea7aafd72bff3caacc6752f",
+        ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-quality-gate-scan.json": "aa814a74e4f55db123575fcd19970466fd7f2fec876c0c017060f220d6d62d65",
+        ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-simulated-execution-proof.json": "26c2383829ab6782b63ba386dfa86f8c9093e96b56fac973175845586cdcf9c9",
+        ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-travel-manifest.json": "909b8f6b7f996b60b2c1759e2787b4f5140d7e8b1b85d05ce41dfc2874fd893a",
+        ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-unity-script-inventory.json": "dd90132a85fb5d074f56b8e3d150ff6180d76d91b5d506cbdce23581f42e3a03",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-chunk-visibility.json": "18b65fb3c947f354645c4e734b0ea37abb17588126be371ad480d56b4cf3d7b7",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-object-state-index.json": "630413e2f9049c22694e85244d20170073c852f6d3605906386a18517db1cccc",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-readme.json": "ebbc9f2e617134f471d17c778557af9ad2c9784f660116789adba2cab964ec8b",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-steps.json": "310d33f1fcf5c4eb28909842a28bf7778306e56784c84ab83c4748926dddda26",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/offline-geoworld-playmode-travel-manifest.json": "909b8f6b7f996b60b2c1759e2787b4f5140d7e8b1b85d05ce41dfc2874fd893a"
+      },
+      "aggregateHash": "e8112848e18c8464e20a62fe169a83dcf189976c659c5c60fe289d1095f8ea9a",
+      "objectiveCount": 0,
+      "completedObjectiveCount": 0,
+      "finalStatus": "",
+      "finalStateHash": "",
+      "finalAcceptanceHash": "",
+      "notFinalWarnings": [
+        "Alpha tooling only.",
+        "accepted=false until manual gate review.",
+        "No Runtime, provider, schema, scene, prefab, project settings, final art or real geodata promotion."
+      ]
+    },
+    {
+      "componentId": "interactive_travel",
+      "displayName": "Goal104 Interactive Travel",
+      "sourceGoalId": "goal_104_offline_geoworld_interactive_travel_preview",
+      "sourceArtifactRoot": ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview",
+      "streamingAssetsRoot": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104",
+      "manualGate": "offline_geoworld_interactive_travel_preview_verification",
+      "implementationStatus": "GREEN",
+      "accepted": false,
+      "ready": true,
+      "requiredArtifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "unityScriptsReady": true,
+      "unityPayloadPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-boundary-zones.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-movement-path.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-prefetch-plan.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-readme.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-travel-manifest.json"
+      ],
+      "unityScriptPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractiveTravelController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewPlayerMotor.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldBoundaryPrefetchState.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractiveTravelWindow.cs"
+      ],
+      "sourceArtifactHashes": {
+        ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-editor-window-inventory.json": "dee7ed86725b71055d03bb7ac4b1e79606a27a9cdd38dbd6725025176aa9532a",
+        ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-negative-proof.json": "8b1c532544ee495b59c3353dc28fdceb2adb6ae1e6e74deacc8bbf00cb473f3f",
+        ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-quality-gate-scan.json": "6c3ba2959071c02ca989fc5690e6fc8b7c860eaf4098e2e0c7b62e188e0ecb5b",
+        ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-simulated-execution-proof.json": "d3118542458a495ee5e2b17293a039d3bd4ea28c5f39815b4be6ede4e8239ccc",
+        ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-travel-manifest.json": "ff29eb94a779fcca123e086f572670ef39e168376b305e67292797372cb7d5e0",
+        ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-unity-script-inventory.json": "464f8b0c29ab61f6cd77d0a12e0a2513195fe6bacb6a6debd4528028fba4cc15",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-boundary-zones.json": "f08d560fbfa2f189bb9a580137a922a3dcf47589f3d37bab61b18ca9d9515401",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-movement-path.json": "1ff2a0911c0df89b70aef49c637387ab724e35398ccff33bcbba066d58900c4b",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-prefetch-plan.json": "f452d19fcc8d09b484ce75872731ef32f4b089fa1856c05c973054c5ea6cd976",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-readme.json": "482f963da8cfa4fbfc8060bcdeedea415abde1499da556c55fc231b6ccdd0b61",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/offline-geoworld-interactive-travel-manifest.json": "ff29eb94a779fcca123e086f572670ef39e168376b305e67292797372cb7d5e0"
+      },
+      "aggregateHash": "a659a214888da529d276f7fca4a709b1723af07bc9060e8f7031eb561dfe7909",
+      "objectiveCount": 0,
+      "completedObjectiveCount": 0,
+      "finalStatus": "",
+      "finalStateHash": "",
+      "finalAcceptanceHash": "",
+      "notFinalWarnings": [
+        "Alpha tooling only.",
+        "accepted=false until manual gate review.",
+        "No Runtime, provider, schema, scene, prefab, project settings, final art or real geodata promotion."
+      ]
+    },
+    {
+      "componentId": "interactions",
+      "displayName": "Goal105 Interactions",
+      "sourceGoalId": "goal_105_offline_geoworld_interaction_playable_probe",
+      "sourceArtifactRoot": ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe",
+      "streamingAssetsRoot": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105",
+      "manualGate": "offline_geoworld_interaction_playable_probe_verification",
+      "implementationStatus": "GREEN",
+      "accepted": false,
+      "ready": true,
+      "requiredArtifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "unityScriptsReady": true,
+      "unityPayloadPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-actions.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-manifest.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-readme.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-session-script.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-state-delta-plan.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-targets.json"
+      ],
+      "unityScriptPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionTarget.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldStateDeltaLog.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractionProbeWindow.cs"
+      ],
+      "sourceArtifactHashes": {
+        ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-editor-window-inventory.json": "1ae47c3a211cd4a8cde25b84eb2a111ee3ea3b09bd9a03ffc25e669538686db2",
+        ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-manifest.json": "7f57e46544f4a1638777586be720929e400edcf8b8bc35f5c1a709f7c72ec562",
+        ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-negative-proof.json": "a499302b16c48749d8a1a499fc66ed5cccb6ee7b6fc98f91e641f6c92a4a8fc9",
+        ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-quality-gate-scan.json": "3f233f5fc9fc426338795c4fb355047bc740b0eaee41863f8a7aedca9c5c38e5",
+        ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-simulated-session-proof.json": "a4391bc241f1c08ba9e11bcae5b9cabbe7e627beafea3934d26a99fbdf2cc626",
+        ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/offline-geoworld-interaction-unity-script-inventory.json": "774c76a87424aee3b70a96a334535815a5fc71c2c4f42c9e732600393d486cab",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-actions.json": "d3f87b6316b7b361a8378bc6b6fb2500801ef440784613d161bf2ba164d6887a",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-manifest.json": "7f57e46544f4a1638777586be720929e400edcf8b8bc35f5c1a709f7c72ec562",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-readme.json": "5833810f04f9fe50b263b98d3d6c2f7d457f99999520272b834bd5cc1354d5e9",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-session-script.json": "63922e097a1af583c03bb47f09ee591663aeef7b77bfc250f553ffe230785668",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-state-delta-plan.json": "02d0e57770e87a2ebfbf4f9ba32e5beb827560c4a84ac3428445ccff6ae7befc",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/offline-geoworld-interaction-targets.json": "71add6a545305ce2f1d52e7f82824b0b7bb03cc72831c60745980b9fedd97aba"
+      },
+      "aggregateHash": "7fd3e7e6344dd83246c5be3ad064c98d09168d097396902575830cddaecfcbf1",
+      "objectiveCount": 0,
+      "completedObjectiveCount": 0,
+      "finalStatus": "",
+      "finalStateHash": "",
+      "finalAcceptanceHash": "",
+      "notFinalWarnings": [
+        "Alpha tooling only.",
+        "accepted=false until manual gate review.",
+        "No Runtime, provider, schema, scene, prefab, project settings, final art or real geodata promotion."
+      ]
+    },
+    {
+      "componentId": "session_replay",
+      "displayName": "Goal106 Session Replay",
+      "sourceGoalId": "goal_106_offline_geoworld_session_persistence_replay",
+      "sourceArtifactRoot": ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay",
+      "streamingAssetsRoot": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106",
+      "manualGate": "offline_geoworld_session_persistence_replay_verification",
+      "implementationStatus": "GREEN",
+      "accepted": false,
+      "ready": true,
+      "requiredArtifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "unityScriptsReady": true,
+      "unityPayloadPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-acceptance-checklist.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-delta-log.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-initial-state.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-manifest.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-readme.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-replay-script.json"
+      ],
+      "unityScriptPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSnapshot.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionSaveLoadController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldSessionReplayController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldSessionReplayWindow.cs"
+      ],
+      "sourceArtifactHashes": {
+        ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-editor-window-inventory.json": "e00382f982f4f61478617738520a32fd84674d95d1721e88e9a0561c56f356d3",
+        ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-manifest.json": "f42d85ace8dac47bc07ab6e0583700af1ad9626b3b126286e2ac09d3a40c57cd",
+        ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-negative-proof.json": "60be6e37c190accf236687fc782f2ecf6651a7db4945a4c6edfb984666075d98",
+        ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-quality-gate-scan.json": "25c093c0fbec7f9cd1c84d48637f5327dd19ea47c880744facc3300c974f3578",
+        ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-simulated-save-load-replay-proof.json": "596677c4970e805415d0f3acff2c0dd468e5dec2d4253bc65f2be68a70a9330b",
+        ".llmgc/procedural/goal-106-offline-geoworld-session-persistence-replay/offline-geoworld-session-unity-script-inventory.json": "af4b878c45eec0f42c4e548b54c3799755e5d5c3ddeaf66f631578f5a6c21b42",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-acceptance-checklist.json": "113747efacc8de43466bcc1c25fb46d4e9b20d7afd821ea331ec72da4e20dd08",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-delta-log.json": "42b0342175ead2b9e5c0bd3fa348a35fe6b3293b851dc806e2b9e86a2e3d9b53",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-initial-state.json": "11b690fc1a846f61dcad7cbd387242f4071953b589636afabc694c483565c9de",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-manifest.json": "f42d85ace8dac47bc07ab6e0583700af1ad9626b3b126286e2ac09d3a40c57cd",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-readme.json": "201619d94b24b521ad730a00e91a5efc09ea2e4d58f3b29d1336ef2cc190f52a",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal106/offline-geoworld-session-replay-script.json": "5c21ecde1557f16d68f661e1fd82eff0307c4e753cf934beea48dbd23cb559b8"
+      },
+      "aggregateHash": "4ff5e0a411fdcdf57df8bbd9fc75e2e36e3e8a392a4ef084a82310d0df5fc0e9",
+      "objectiveCount": 0,
+      "completedObjectiveCount": 0,
+      "finalStatus": "",
+      "finalStateHash": "",
+      "finalAcceptanceHash": "",
+      "notFinalWarnings": [
+        "Alpha tooling only.",
+        "accepted=false until manual gate review.",
+        "No Runtime, provider, schema, scene, prefab, project settings, final art or real geodata promotion."
+      ]
+    },
+    {
+      "componentId": "objective_acceptance",
+      "displayName": "Goal107 Objective Acceptance",
+      "sourceGoalId": "goal_107_offline_geoworld_objective_acceptance_run",
+      "sourceArtifactRoot": ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run",
+      "streamingAssetsRoot": "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107",
+      "manualGate": "offline_geoworld_objective_acceptance_run_verification",
+      "implementationStatus": "GREEN",
+      "accepted": false,
+      "ready": true,
+      "requiredArtifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "unityScriptsReady": true,
+      "unityPayloadPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-acceptance-run.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-completion-state.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-manifest.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-readme.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-replay-acceptance-proof.json",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objectives.json"
+      ],
+      "unityScriptPaths": [
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldObjectiveState.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldObjectiveTracker.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldObjectiveAcceptanceController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldObjectiveAcceptanceWindow.cs"
+      ],
+      "sourceArtifactHashes": {
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-alpha-quality-consolidation.json": "6c11bd0d4fbd1ed636a9ac6b4b75149d180f2e33422d7a0301d8ea61c1cc899c",
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-completion-state.json": "96d8560ddbff40b882869318ed1459cc22252ce6d019f4f7f0a10e3beb6f4e2e",
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-editor-window-inventory.json": "1e869897ab28870e8a0c7049c632b5f2be93901040f4707240a2f7ef498ce706",
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-manifest.json": "15b6a5f2066dcc1882883ed4afdc4af5076425efb90e46ffc90d7d3e445cd1d2",
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-negative-proof.json": "8cdc1081ecb2b8bfb9a4303ea637e5699ac707bad97e6150779e80cfca2d8df1",
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-quality-gate-scan.json": "fbea11f54a35ca5150a987d911890e92352777ab79749fd97eaabff5c53c4e3e",
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-simulated-acceptance-proof.json": "e01a890c2390aa56f30dd4bd4bf7f181c58032db120d04f5cea1f078c0362404",
+        ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/offline-geoworld-objective-unity-script-inventory.json": "f2785bf1888e200900b06f7a6a19bc9456fa35cdab61cfab9846560a3dec084a",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-acceptance-run.json": "e6d3a6e9cd965b924ff9e31d9491a78ae45253d751ec08518413e9bad8484d73",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-completion-state.json": "96d8560ddbff40b882869318ed1459cc22252ce6d019f4f7f0a10e3beb6f4e2e",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-manifest.json": "15b6a5f2066dcc1882883ed4afdc4af5076425efb90e46ffc90d7d3e445cd1d2",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-readme.json": "2c9a9fb3bfa28b9337f07749f0d9b653ac5c12a49f0097a201591a41de2b8710",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objective-replay-acceptance-proof.json": "e01a890c2390aa56f30dd4bd4bf7f181c58032db120d04f5cea1f078c0362404",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal107/offline-geoworld-objectives.json": "85c0140be4a252c551629f1c6f1475e51498bbd97da050383861c674d143bec9"
+      },
+      "aggregateHash": "b75f10fce0e5efca23f77c2e44b09bcb9c4336640f603fb06a1cb4350c3f4452",
+      "objectiveCount": 6,
+      "completedObjectiveCount": 6,
+      "finalStatus": "completed",
+      "finalStateHash": "a095b977d266b1b4fa15f30331fa340c414d8bc6a33775dd55e7d3cd65903e32",
+      "finalAcceptanceHash": "eeebddc5d8e8b41d137a03b3ba63b6c8e6484b9fe82b17cbf993bbaa91ff8bb4",
+      "notFinalWarnings": [
+        "Alpha tooling only.",
+        "accepted=false until manual gate review.",
+        "No Runtime, provider, schema, scene, prefab, project settings, final art or real geodata promotion."
+      ]
+    }
+  ]
+}

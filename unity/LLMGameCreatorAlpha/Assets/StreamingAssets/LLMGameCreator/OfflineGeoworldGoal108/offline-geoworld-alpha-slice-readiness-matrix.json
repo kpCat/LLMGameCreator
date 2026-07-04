@@ -1,0 +1,77 @@
+{
+  "goalId": "goal_108_offline_geoworld_alpha_slice_orchestrator",
+  "accepted": false,
+  "passed": true,
+  "rows": [
+    {
+      "componentId": "preview",
+      "ready": true,
+      "artifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "acceptedFalse": true,
+      "unityPayloadFileCount": 5,
+      "unityScriptsReady": true,
+      "manualGate": "offline_geoworld_unity_preview_runner_verification"
+    },
+    {
+      "componentId": "editor_preview",
+      "ready": true,
+      "artifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "acceptedFalse": true,
+      "unityPayloadFileCount": 0,
+      "unityScriptsReady": true,
+      "manualGate": "offline_geoworld_unity_editor_preview_tool_verification"
+    },
+    {
+      "componentId": "play_mode_travel",
+      "ready": true,
+      "artifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "acceptedFalse": true,
+      "unityPayloadFileCount": 5,
+      "unityScriptsReady": true,
+      "manualGate": "offline_geoworld_playmode_travel_preview_verification"
+    },
+    {
+      "componentId": "interactive_travel",
+      "ready": true,
+      "artifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "acceptedFalse": true,
+      "unityPayloadFileCount": 5,
+      "unityScriptsReady": true,
+      "manualGate": "offline_geoworld_interactive_travel_preview_verification"
+    },
+    {
+      "componentId": "interactions",
+      "ready": true,
+      "artifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "acceptedFalse": true,
+      "unityPayloadFileCount": 6,
+      "unityScriptsReady": true,
+      "manualGate": "offline_geoworld_interaction_playable_probe_verification"
+    },
+    {
+      "componentId": "session_replay",
+      "ready": true,
+      "artifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "acceptedFalse": true,
+      "unityPayloadFileCount": 6,
+      "unityScriptsReady": true,
+      "manualGate": "offline_geoworld_session_persistence_replay_verification"
+    },
+    {
+      "componentId": "objective_acceptance",
+      "ready": true,
+      "artifactFilesPresent": true,
+      "qualityGatePassed": true,
+      "acceptedFalse": true,
+      "unityPayloadFileCount": 6,
+      "unityScriptsReady": true,
+      "manualGate": "offline_geoworld_objective_acceptance_run_verification"
+    }
+  ]
+}
