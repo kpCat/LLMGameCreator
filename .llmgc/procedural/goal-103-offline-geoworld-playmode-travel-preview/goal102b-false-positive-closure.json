@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "goal102b_false_positive_closure_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "passed": true,
+  "goal102BRemainsBlocked": true,
+  "productSourceBlockerClosed": true,
+  "goal102ANotMarkedGreenByThisGoal": true,
+  "goal102BNotMarkedGreen": true,
+  "actualHeadBeforeEvidenceRead": true,
+  "actualHeadBeforeMalformedDetected": false,
+  "workingTreeSourceReadable": true,
+  "actualHeadRawPhysicalLineCount": 154,
+  "actualHeadMaxPhysicalLineLength": 115,
+  "futureGatesRequireActualTargetBytes": true,
+  "decisionSummary": "Goal102B remains BLOCKED, but the product/source blocker is closed as a false-positive because actual target source bytes are already readable.",
+  "diagnostics": []
+}

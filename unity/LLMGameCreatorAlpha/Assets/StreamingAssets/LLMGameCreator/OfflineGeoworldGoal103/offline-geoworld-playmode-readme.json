@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "offline_geoworld_playmode_readme_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "offlineSyntheticOnly": true,
+  "metadataOnly": true,
+  "implementsFinalRuntimeGameplay": false,
+  "implementsFinalArt": false,
+  "implementsRealGeodataFetching": false,
+  "implementsReleaseBuildBehavior": false,
+  "usesRelativePathsOnly": true,
+  "scopeSummary": "Unity Alpha play-mode travel preview tooling over Goal101 metadata only."
+}

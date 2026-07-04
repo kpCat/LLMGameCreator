@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "offline_geoworld_playmode_simulated_execution_proof_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "passed": true,
+  "payloadReadAttempted": true,
+  "manifestRead": true,
+  "stepsFileRead": true,
+  "chunkVisibilityFileRead": true,
+  "objectStateIndexRead": true,
+  "payloadHashesMatchManifest": true,
+  "stepByStepVisibleCountsPassed": true,
+  "boundaryPrefetchProgressionRepresented": true,
+  "deterministicStateHashChainPassed": true,
+  "noUnsupportedStep": true,
+  "noAbsolutePaths": true,
+  "noRawGeodata": true,
+  "noBinaryOrRasterMedia": true,
+  "noProviderOrNetworkMarkers": true,
+  "stepCount": 4,
+  "objectCount": 18,
+  "expectedVisibleObjectCountsByStep": [
+    6,
+    18,
+    8,
+    10
+  ],
+  "stateHashChain": [
+    "a7d916306e3731fb42a171abb6261a2cea827e51d1672ae9423a14d2d10f94d3",
+    "d938ca9a57fe0f46fc8be2e918806508f8069cc7c8d73add5bdca614f0e31c0a",
+    "8452efac29104942735efeb3d5de836e0c2a22d6b82bb775f024d4cc618cef22",
+    "b73b565cdde232f6ebb23259566f3eeb81dc963848187e624cfca549eca18e7c"
+  ],
+  "diagnostics": []
+}

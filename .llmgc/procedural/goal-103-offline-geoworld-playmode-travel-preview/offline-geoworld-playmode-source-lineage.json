@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "offline_geoworld_playmode_source_lineage_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "passed": true,
+  "goal101AcceptedFalsePreserved": true,
+  "goal101PayloadConsumed": true,
+  "goal102EvidenceConsumed": true,
+  "goal102BBlockedStatusPreserved": true,
+  "goal102BActualEvidenceConsumed": true,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-command-catalog.json",
+      "exists": true,
+      "sha256": "bfe993074c86947815146c01fa5888be1270521f0c496efb07f3e3500851f007",
+      "purpose": "Goal101 command catalog"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-travel-window-script.json",
+      "exists": true,
+      "sha256": "73fb12782f8af214528c6d52585a285b9b78c7a89649ff73ea888679add2d533",
+      "purpose": "Goal101 travel window script"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/offline-geoworld-preview-quality-gate-scan.json",
+      "exists": true,
+      "sha256": "7cc1951f00dc2d0b6b3d73a259647de90269911a7dcfc69c7dfe5efd94c29e7b",
+      "purpose": "Goal101 quality gate"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/offline-geoworld-unity-editor-quality-gate-scan.json",
+      "exists": true,
+      "sha256": "e38e6b36005c0b7ec8e9f365de8358529245d279d8e395af4f86e1b1f7b3b32f",
+      "purpose": "Goal102 editor preview quality gate"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/actual-unity-editor-source-before-after.json",
+      "exists": true,
+      "sha256": "f7082bbb91baf5b0d2b842a293842f3fa4e79860fcdc983693a34c240da1d2d8",
+      "purpose": "Goal102B actual before/after evidence"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/actual-unity-editor-source-trust-audit.json",
+      "exists": true,
+      "sha256": "c4dd09184a397305d4703d18997cb014a69e12bef2a00066f1c479f849893737",
+      "purpose": "Goal102B trust audit"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelController.cs",
+      "exists": true,
+      "sha256": "7860dd33c9a363c5d6c97ddc9d6bb5b19b99eda520da933fab94ceed0edcdf1f",
+      "purpose": "Goal103 Unity play-mode controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPlayModeTravelWindow.cs",
+      "exists": true,
+      "sha256": "b30ec127bb00853dffdf0a6d94cbe4fff8fbb2e7a803838aac2a5c2d39297c1e",
+      "purpose": "Goal103 Unity editor helper"
+    }
+  ],
+  "diagnostics": []
+}

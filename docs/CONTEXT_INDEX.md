@@ -196,6 +196,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-102-offline-geoworld-unity-editor-preview-tool/GOAL.md` | Goal 102 task: Unity Editor-only offline geoworld preview window and BCL-only Application evidence over real Goal 101 payloads, simulated manual create/clear action proof, negative proof and Visual World Stream Preview Workspace integration; final stop at `offline_geoworld_unity_editor_preview_tool_verification`; no LFZ source/archive, live geodata ingestion, Runtime consumers, public schema, provider/network, Lua, generator-library, project-file, dependency, binary/raster media, raw geodata dump, final art, atlas, Unity scene/prefab/settings/packages/build-settings or prompt-dump changes. |
 | `docs/agent-tasks/goal-102a-unity-editor-source-format-guard/GOAL.md` | Goal 102A hotfix task: raw-byte Unity Editor source-format guard over the Goal 102 preview tool scope, synthetic before/minified proof for `OfflineGeoworldPreviewWindow.cs`, after scan over relevant Goal102 Unity/Application sources, negative proof and final stop at `unity_editor_source_format_guard_verification`; no behavior change, Runtime, public schema, provider/network, Lua, generator-library, project-file/dependency, StreamingAssets, binary/raster media, final art, atlas, Unity scene/prefab/settings/packages/build-settings or prompt-dump changes. |
 | `docs/agent-tasks/goal-102b-actual-unity-editor-source-reformat/GOAL.md` | Goal 102B hotfix task: actual Unity Editor source reformat/trust audit. Current evidence is BLOCKED because raw `HEAD:unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs` bytes are already multi-line/readable, so the required one-line HEAD-before proof cannot be produced honestly. It supersedes Goal102A source-format trust because Goal102A used synthetic-before evidence instead of actual target-file HEAD bytes. |
+| `docs/agent-tasks/goal-103-offline-geoworld-playmode-travel-preview/GOAL.md` | Goal 103 task: offline geoworld play-mode travel preview over real Goal101 command/travel metadata plus Goal102/Goal102B evidence. Produces a BCL-only Application evidence seam, metadata-only Unity StreamingAssets handoff, standalone play-mode travel controller/state/chunk-visibility scripts, manual Unity Editor launch helper, workspace inspection and final stop at `offline_geoworld_playmode_travel_preview_verification`; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final art, atlas or Unity scene/prefab/settings/packages/build-settings changes. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -273,7 +274,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-offline_geoworld_unity_preview_runner_verification
+offline_geoworld_playmode_travel_preview_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -598,6 +599,15 @@ instead of actual target-file HEAD bytes. Goal 102B changes no Runtime, public s
 files, dependencies, StreamingAssets payloads, binary/raster media, final art, atlas, Unity scene/prefab/settings/packages
 or build-settings files. Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain
 `accepted=false`.
+Goal 103 is produced for review with `offline_geoworld_playmode_travel_preview_verification required`,
+`accepted=false`, `implementationStatus=GREEN`; it consumes real Goal101 command/travel metadata plus Goal102/Goal102B
+evidence by repository-relative path, mirrors five metadata-only payload files into Unity Alpha StreamingAssets, adds
+standalone play-mode travel controller/state/chunk-visibility scripts and a manual Unity Editor launch helper, surfaces
+the group in the existing Visual World Stream Preview Workspace, records Goal102B's product/source blocker as closed
+false-positive proceed while leaving Goal102B BLOCKED, and changes no Runtime, public schema, Lua, generator-library,
+project files, dependencies, LFZ source/archive, live network/provider/geodata, binary/raster media, final art, atlas,
+Unity scene/prefab/settings/packages or build-settings files. Goal 103, Goal 102B, Goal 102A, Goal 102, Goal 101,
+Goal 100, Goal 099, Goal 098 and Goal 097 remain `accepted=false`.
 
 Allowed next sequence:
 
@@ -667,6 +677,7 @@ Allowed next sequence:
 64. Review Goal 102 `offline_geoworld_unity_editor_preview_tool_verification`; it adds a Unity Editor-only manual preview window, simulated create/clear action proof and workspace inspection over the Goal 101 metadata payload, keeps Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime consumers, public schema, final gameplay, final art, atlas, scene/prefab/settings/packages/build-settings, Lua or generator-library implementation.
 65. Review Goal 102A `unity_editor_source_format_guard_verification`; it repairs the Goal 102 Unity Editor source-format guard backstop, keeps Goal 102A and Goal 102 `accepted=false`, and does not start LFZ source/archive consumption, live network/provider/geodata ingestion, Runtime consumers, public schema, final gameplay, final art, atlas, scene/prefab/settings/packages/build-settings, Lua or generator-library implementation.
 66. Review Goal 102B `actual_unity_editor_source_reformat_verification`; it is BLOCKED because actual target-file HEAD bytes are already readable, and it supersedes Goal102A source-format trust until a corrected actual-before proof exists.
+67. Review Goal 103 `offline_geoworld_playmode_travel_preview_verification`; it produces metadata-only play-mode travel preview evidence over Goal101/102/102B with standalone Unity scripts/editor helper and workspace inspection while keeping Goal103 and prior geoworld gates `accepted=false`.
 
 Kill criterion:
 

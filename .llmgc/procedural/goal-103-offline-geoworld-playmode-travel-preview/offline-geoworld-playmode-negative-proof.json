@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "offline_geoworld_playmode_negative_proof_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "passed": true,
+  "scenarioCount": 13,
+  "rejectedCount": 13,
+  "matchedExpectationCount": 13,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal101_travel_payload",
+      "causalMutation": "Goal101 travel payload removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.goal101_travel_missing",
+          "target": "Goal101 travel payload",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal103_manifest",
+      "causalMutation": "Goal103 manifest removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.manifest_missing",
+          "target": "Goal103 manifest",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unsupported_travel_step",
+      "causalMutation": "travel action changed to unsupported",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.unsupported_step",
+          "target": "steps",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "active_chunk_missing_from_chunk_visibility",
+      "causalMutation": "active chunk removed from chunk visibility",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.active_chunk_missing",
+          "target": "chunk visibility",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "object_state_references_unknown_object",
+      "causalMutation": "step references an unknown object id",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.unknown_object",
+          "target": "object index",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_reading_files",
+      "causalMutation": "proof marked passed without reading payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.fake_success",
+          "target": "simulated proof",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "absolute_path_in_payload",
+      "causalMutation": "absolute local path inserted into payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.absolute_path",
+          "target": "payload",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_geodata_leaked_into_playmode_plan",
+      "causalMutation": "raw geodata marker added to play-mode plan",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.raw_geodata",
+          "target": "payload",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "network_provider_marker_in_unity_scripts",
+      "causalMutation": "Unity script contains external marker",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.provider_network",
+          "target": "Unity scripts",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency_marker",
+      "causalMutation": "Unity script references AlphaRuntimeBootstrap",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.alpha_bootstrap",
+          "target": "Unity scripts",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "scene_prefab_project_settings_mutation_marker",
+      "causalMutation": "Unity editor helper mutates saved scene or settings",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.scene_settings",
+          "target": "Unity editor helper",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "causalMutation": "binary or raster media added to payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.binary_media",
+          "target": "payload",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "goal102b_closure_without_actual_evidence",
+      "causalMutation": "closure claimed without Goal102B actual before/after evidence",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal103.negative.goal102b_actual_evidence",
+          "target": "Goal102B closure",
+          "message": "Goal103 negative proof rejected the mutated play-mode travel input."
+        }
+      ]
+    }
+  ]
+}

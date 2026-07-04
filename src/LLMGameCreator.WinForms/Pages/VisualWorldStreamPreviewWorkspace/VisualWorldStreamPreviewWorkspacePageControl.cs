@@ -51,7 +51,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | offlinePreviewCommands="
             + result.Report.OfflineGeoworldUnityPreviewCommandCount
             + " | offlineEditorObjects="
-            + result.Report.OfflineGeoworldUnityEditorPreviewExpectedObjectCount;
+            + result.Report.OfflineGeoworldUnityEditorPreviewExpectedObjectCount
+            + " | playModeSteps="
+            + result.Report.OfflineGeoworldPlayModeTravelStepCount
+            + " | playModeObjects="
+            + result.Report.OfflineGeoworldPlayModeTravelObjectCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -256,6 +260,32 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + result.Report.OfflineGeoworldUnityEditorPreviewQualityGatePassed.ToString().ToLowerInvariant(),
             "goal102FilesDiscoveredByRelativePaths="
                 + result.Report.Goal102FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelStepCount="
+                + result.Report.OfflineGeoworldPlayModeTravelStepCount,
+            "offlineGeoworldPlayModeTravelObjectCount="
+                + result.Report.OfflineGeoworldPlayModeTravelObjectCount,
+            "offlineGeoworldPlayModeTravelActiveChunkCounts="
+                + result.Report.OfflineGeoworldPlayModeTravelActiveChunkCounts,
+            "offlineGeoworldPlayModeTravelBoundaryPrefetchCounts="
+                + result.Report.OfflineGeoworldPlayModeTravelBoundaryPrefetchCounts,
+            "offlineGeoworldPlayModeTravelExpectedVisibleObjectCounts="
+                + result.Report.OfflineGeoworldPlayModeTravelExpectedVisibleObjectCounts,
+            "offlineGeoworldPlayModeTravelUnityScriptsReady="
+                + result.Report.OfflineGeoworldPlayModeTravelUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelEditorWindowReady="
+                + result.Report.OfflineGeoworldPlayModeTravelEditorWindowReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelSimulatedExecutionProofPassed="
+                + result.Report.OfflineGeoworldPlayModeTravelSimulatedExecutionProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelNegativeProofPassed="
+                + result.Report.OfflineGeoworldPlayModeTravelNegativeProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelGoal102BClosureRecorded="
+                + result.Report.OfflineGeoworldPlayModeTravelGoal102BClosureRecorded.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelAlphaRuntimeBootstrapUnchanged="
+                + result.Report.OfflineGeoworldPlayModeTravelAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelQualityGatePassed="
+                + result.Report.OfflineGeoworldPlayModeTravelQualityGatePassed.ToString().ToLowerInvariant(),
+            "goal103FilesDiscoveredByRelativePaths="
+                + result.Report.Goal103FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -422,6 +452,30 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + entry.OfflineGeoworldUnityEditorPreviewAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
             "offlineGeoworldUnityEditorPreviewQualityGatePassed: "
                 + entry.OfflineGeoworldUnityEditorPreviewQualityGatePassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelStepCount: "
+                + entry.OfflineGeoworldPlayModeTravelStepCount,
+            "offlineGeoworldPlayModeTravelObjectCount: "
+                + entry.OfflineGeoworldPlayModeTravelObjectCount,
+            "offlineGeoworldPlayModeTravelActiveChunkCounts: "
+                + entry.OfflineGeoworldPlayModeTravelActiveChunkCounts,
+            "offlineGeoworldPlayModeTravelBoundaryPrefetchCounts: "
+                + entry.OfflineGeoworldPlayModeTravelBoundaryPrefetchCounts,
+            "offlineGeoworldPlayModeTravelExpectedVisibleObjectCounts: "
+                + entry.OfflineGeoworldPlayModeTravelExpectedVisibleObjectCounts,
+            "offlineGeoworldPlayModeTravelUnityScriptsReady: "
+                + entry.OfflineGeoworldPlayModeTravelUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelEditorWindowReady: "
+                + entry.OfflineGeoworldPlayModeTravelEditorWindowReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelSimulatedExecutionProofPassed: "
+                + entry.OfflineGeoworldPlayModeTravelSimulatedExecutionProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelNegativeProofPassed: "
+                + entry.OfflineGeoworldPlayModeTravelNegativeProofPassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelGoal102BClosureRecorded: "
+                + entry.OfflineGeoworldPlayModeTravelGoal102BClosureRecorded.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelAlphaRuntimeBootstrapUnchanged: "
+                + entry.OfflineGeoworldPlayModeTravelAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
+            "offlineGeoworldPlayModeTravelQualityGatePassed: "
+                + entry.OfflineGeoworldPlayModeTravelQualityGatePassed.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);

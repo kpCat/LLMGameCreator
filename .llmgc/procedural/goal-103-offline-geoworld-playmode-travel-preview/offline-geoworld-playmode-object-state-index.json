@@ -1,0 +1,302 @@
+{
+  "schemaVersion": "offline_geoworld_playmode_object_state_index_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "accepted": false,
+  "objectCount": 18,
+  "objects": [
+    {
+      "objectId": "playmode_object/44982d9e647d",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_bridge_marker_44982d9e647d",
+      "sourceCommandId": "preview_command/05ed8679f5108505",
+      "commandKind": "bridge_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 9,
+      "gridZ": 6,
+      "elevation": 2,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/587802cf379b",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_barrier_line_587802cf379b",
+      "sourceCommandId": "preview_command/2276ea94e0340d14",
+      "commandKind": "barrier_line",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 3,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/a84789be4ac5",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_land_use_area_plane_a84789be4ac5",
+      "sourceCommandId": "preview_command/3910b28ce6e01d89",
+      "commandKind": "land_use_area_plane",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 9,
+      "gridZ": 3,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/12791a0f73d0",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_terrain_hint_marker_12791a0f73d0",
+      "sourceCommandId": "preview_command/55d73d108fcef19c",
+      "commandKind": "terrain_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 12,
+      "gridZ": 3,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/43ddd82c36f4",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_administrative_hint_marker_43ddd82c36f4",
+      "sourceCommandId": "preview_command/6f7ea9b97f3110ac",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 12,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/1e4cbd84d666",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_terrain_hint_marker_1e4cbd84d666",
+      "sourceCommandId": "preview_command/6fb571ad5cbdfe54",
+      "commandKind": "terrain_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 3,
+      "gridZ": 3,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/2d16a3409b07",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_building_footprint_marker_2d16a3409b07",
+      "sourceCommandId": "preview_command/7190a4bf7c808416",
+      "commandKind": "building_footprint_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 0,
+      "gridZ": 0,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/14f8a8587651",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_administrative_hint_marker_14f8a8587651",
+      "sourceCommandId": "preview_command/863e010a16565f56",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 6,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/960884a83013",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_road_segment_line_960884a83013",
+      "sourceCommandId": "preview_command/865d5a2785f4bbc7",
+      "commandKind": "road_segment_line",
+      "sourceChunkKey": "z14/x4211/y6142",
+      "gridX": 3,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/ce8525fa40ef",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_vegetation_area_marker_ce8525fa40ef",
+      "sourceCommandId": "preview_command/886a712e8ce9ba50",
+      "commandKind": "vegetation_area_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 0,
+      "gridZ": 3,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/1ba24319f4fe",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_bridge_marker_1ba24319f4fe",
+      "sourceCommandId": "preview_command/9f3dbc694697d6fc",
+      "commandKind": "bridge_marker",
+      "sourceChunkKey": "z14/x4211/y6142",
+      "gridX": 6,
+      "gridZ": 3,
+      "elevation": 2,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/80356419a5dc",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_administrative_hint_marker_80356419a5dc",
+      "sourceCommandId": "preview_command/c1872a5502d4b3f6",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "gridX": 0,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/6f742aa6dab8",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_poi_marker_6f742aa6dab8",
+      "sourceCommandId": "preview_command/c2ab27ef0c033703",
+      "commandKind": "poi_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 15,
+      "gridZ": 3,
+      "elevation": 2,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/5497cf0c69e3",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_administrative_hint_marker_5497cf0c69e3",
+      "sourceCommandId": "preview_command/de673df37f3e6e13",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4209/y6141",
+      "gridX": 9,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/bfe2d395a430",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_water_body_plane_bfe2d395a430",
+      "sourceCommandId": "preview_command/e35c257499cac8c3",
+      "commandKind": "water_body_plane",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 15,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/8d541366aafa",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_road_segment_line_8d541366aafa",
+      "sourceCommandId": "preview_command/e37f51a0d4e24947",
+      "commandKind": "road_segment_line",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 15,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/7498d1ca3970",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_water_body_plane_7498d1ca3970",
+      "sourceCommandId": "preview_command/f503f490960eb2ed",
+      "commandKind": "water_body_plane",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 6,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "playmode_object/fa6a04acc5b3",
+      "objectName": "__LLMGC_OfflineGeoworldPlayMode_barrier_line_fa6a04acc5b3",
+      "sourceCommandId": "preview_command/f6c97ce05f93c0b5",
+      "commandKind": "barrier_line",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "gridX": 12,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    }
+  ]
+}

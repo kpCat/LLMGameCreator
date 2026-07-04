@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "offline_geoworld_playmode_travel_steps_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "accepted": false,
+  "stepCount": 4,
+  "steps": [
+    {
+      "stepIndex": 0,
+      "stepId": "goal103_load_center_window",
+      "sourceGoal101StepId": "load_center_window",
+      "action": "load_manifest",
+      "centerChunkKey": "z14/x4210/y6142",
+      "activeChunkKeys": [
+        "z14/x4210/y6141",
+        "z14/x4210/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4209/y6140",
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6142",
+        "z14/x4211/y6143"
+      ],
+      "visibleObjectIds": [
+        "playmode_object/12791a0f73d0",
+        "playmode_object/1e4cbd84d666",
+        "playmode_object/43ddd82c36f4",
+        "playmode_object/44982d9e647d",
+        "playmode_object/587802cf379b",
+        "playmode_object/a84789be4ac5"
+      ],
+      "hiddenObjectIds": [
+        "playmode_object/14f8a8587651",
+        "playmode_object/1ba24319f4fe",
+        "playmode_object/2d16a3409b07",
+        "playmode_object/5497cf0c69e3",
+        "playmode_object/6f742aa6dab8",
+        "playmode_object/7498d1ca3970",
+        "playmode_object/80356419a5dc",
+        "playmode_object/8d541366aafa",
+        "playmode_object/960884a83013",
+        "playmode_object/bfe2d395a430",
+        "playmode_object/ce8525fa40ef",
+        "playmode_object/fa6a04acc5b3"
+      ],
+      "newlyVisibleObjectIds": [
+        "playmode_object/12791a0f73d0",
+        "playmode_object/1e4cbd84d666",
+        "playmode_object/43ddd82c36f4",
+        "playmode_object/44982d9e647d",
+        "playmode_object/587802cf379b",
+        "playmode_object/a84789be4ac5"
+      ],
+      "newlyHiddenObjectIds": [],
+      "expectedVisibleObjectCount": 6,
+      "previousStateHash": "",
+      "deterministicStateHash": "a7d916306e3731fb42a171abb6261a2cea827e51d1672ae9423a14d2d10f94d3",
+      "metadataOnly": true
+    },
+    {
+      "stepIndex": 1,
+      "stepId": "goal103_spawn_feature_placeholders",
+      "sourceGoal101StepId": "spawn_feature_placeholders",
+      "action": "spawn_commands",
+      "centerChunkKey": "z14/x4210/y6142",
+      "activeChunkKeys": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143",
+        "z14/x4209/y6140",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "visibleObjectIds": [
+        "playmode_object/12791a0f73d0",
+        "playmode_object/14f8a8587651",
+        "playmode_object/1ba24319f4fe",
+        "playmode_object/1e4cbd84d666",
+        "playmode_object/2d16a3409b07",
+        "playmode_object/43ddd82c36f4",
+        "playmode_object/44982d9e647d",
+        "playmode_object/5497cf0c69e3",
+        "playmode_object/587802cf379b",
+        "playmode_object/6f742aa6dab8",
+        "playmode_object/7498d1ca3970",
+        "playmode_object/80356419a5dc",
+        "playmode_object/8d541366aafa",
+        "playmode_object/960884a83013",
+        "playmode_object/a84789be4ac5",
+        "playmode_object/bfe2d395a430",
+        "playmode_object/ce8525fa40ef",
+        "playmode_object/fa6a04acc5b3"
+      ],
+      "hiddenObjectIds": [],
+      "newlyVisibleObjectIds": [
+        "playmode_object/14f8a8587651",
+        "playmode_object/1ba24319f4fe",
+        "playmode_object/2d16a3409b07",
+        "playmode_object/5497cf0c69e3",
+        "playmode_object/6f742aa6dab8",
+        "playmode_object/7498d1ca3970",
+        "playmode_object/80356419a5dc",
+        "playmode_object/8d541366aafa",
+        "playmode_object/960884a83013",
+        "playmode_object/bfe2d395a430",
+        "playmode_object/ce8525fa40ef",
+        "playmode_object/fa6a04acc5b3"
+      ],
+      "newlyHiddenObjectIds": [],
+      "expectedVisibleObjectCount": 18,
+      "previousStateHash": "a7d916306e3731fb42a171abb6261a2cea827e51d1672ae9423a14d2d10f94d3",
+      "deterministicStateHash": "d938ca9a57fe0f46fc8be2e918806508f8069cc7c8d73add5bdca614f0e31c0a",
+      "metadataOnly": true
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "goal103_travel_to_boundary_window",
+      "sourceGoal101StepId": "travel_to_boundary_window",
+      "action": "shift_window",
+      "centerChunkKey": "z14/x4211/y6142",
+      "activeChunkKeys": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143",
+        "z14/x4209/y6140",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "visibleObjectIds": [
+        "playmode_object/14f8a8587651",
+        "playmode_object/1ba24319f4fe",
+        "playmode_object/2d16a3409b07",
+        "playmode_object/5497cf0c69e3",
+        "playmode_object/6f742aa6dab8",
+        "playmode_object/80356419a5dc",
+        "playmode_object/960884a83013",
+        "playmode_object/ce8525fa40ef"
+      ],
+      "hiddenObjectIds": [
+        "playmode_object/12791a0f73d0",
+        "playmode_object/1e4cbd84d666",
+        "playmode_object/43ddd82c36f4",
+        "playmode_object/44982d9e647d",
+        "playmode_object/587802cf379b",
+        "playmode_object/7498d1ca3970",
+        "playmode_object/8d541366aafa",
+        "playmode_object/a84789be4ac5",
+        "playmode_object/bfe2d395a430",
+        "playmode_object/fa6a04acc5b3"
+      ],
+      "newlyVisibleObjectIds": [],
+      "newlyHiddenObjectIds": [
+        "playmode_object/12791a0f73d0",
+        "playmode_object/1e4cbd84d666",
+        "playmode_object/43ddd82c36f4",
+        "playmode_object/44982d9e647d",
+        "playmode_object/587802cf379b",
+        "playmode_object/7498d1ca3970",
+        "playmode_object/8d541366aafa",
+        "playmode_object/a84789be4ac5",
+        "playmode_object/bfe2d395a430",
+        "playmode_object/fa6a04acc5b3"
+      ],
+      "expectedVisibleObjectCount": 8,
+      "previousStateHash": "d938ca9a57fe0f46fc8be2e918806508f8069cc7c8d73add5bdca614f0e31c0a",
+      "deterministicStateHash": "8452efac29104942735efeb3d5de836e0c2a22d6b82bb775f024d4cc618cef22",
+      "metadataOnly": true
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "goal103_reset_preview_window",
+      "sourceGoal101StepId": "reset_preview_window",
+      "action": "reset_and_replay",
+      "centerChunkKey": "z14/x4210/y6142",
+      "activeChunkKeys": [
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4209/y6140",
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "visibleObjectIds": [
+        "playmode_object/12791a0f73d0",
+        "playmode_object/14f8a8587651",
+        "playmode_object/1e4cbd84d666",
+        "playmode_object/2d16a3409b07",
+        "playmode_object/43ddd82c36f4",
+        "playmode_object/44982d9e647d",
+        "playmode_object/587802cf379b",
+        "playmode_object/960884a83013",
+        "playmode_object/a84789be4ac5",
+        "playmode_object/ce8525fa40ef"
+      ],
+      "hiddenObjectIds": [
+        "playmode_object/1ba24319f4fe",
+        "playmode_object/5497cf0c69e3",
+        "playmode_object/6f742aa6dab8",
+        "playmode_object/7498d1ca3970",
+        "playmode_object/80356419a5dc",
+        "playmode_object/8d541366aafa",
+        "playmode_object/bfe2d395a430",
+        "playmode_object/fa6a04acc5b3"
+      ],
+      "newlyVisibleObjectIds": [
+        "playmode_object/12791a0f73d0",
+        "playmode_object/1e4cbd84d666",
+        "playmode_object/43ddd82c36f4",
+        "playmode_object/44982d9e647d",
+        "playmode_object/587802cf379b",
+        "playmode_object/a84789be4ac5"
+      ],
+      "newlyHiddenObjectIds": [
+        "playmode_object/1ba24319f4fe",
+        "playmode_object/5497cf0c69e3",
+        "playmode_object/6f742aa6dab8",
+        "playmode_object/80356419a5dc"
+      ],
+      "expectedVisibleObjectCount": 10,
+      "previousStateHash": "8452efac29104942735efeb3d5de836e0c2a22d6b82bb775f024d4cc618cef22",
+      "deterministicStateHash": "b73b565cdde232f6ebb23259566f3eeb81dc963848187e624cfca549eca18e7c",
+      "metadataOnly": true
+    }
+  ]
+}

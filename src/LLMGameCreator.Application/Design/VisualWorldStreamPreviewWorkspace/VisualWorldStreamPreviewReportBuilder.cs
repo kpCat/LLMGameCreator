@@ -126,6 +126,31 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             OfflineGeoworldUnityEditorPreviewQualityGatePassed =
                 qualityGate.OfflineGeoworldUnityEditorPreviewQualityGatePassed,
             Goal102FilesDiscoveredByRelativePaths = qualityGate.Goal102FilesDiscoveredByRelativePaths,
+            OfflineGeoworldPlayModeTravelStepCount =
+                qualityGate.OfflineGeoworldPlayModeTravelStepCount,
+            OfflineGeoworldPlayModeTravelObjectCount =
+                qualityGate.OfflineGeoworldPlayModeTravelObjectCount,
+            OfflineGeoworldPlayModeTravelActiveChunkCounts =
+                qualityGate.OfflineGeoworldPlayModeTravelActiveChunkCounts,
+            OfflineGeoworldPlayModeTravelBoundaryPrefetchCounts =
+                qualityGate.OfflineGeoworldPlayModeTravelBoundaryPrefetchCounts,
+            OfflineGeoworldPlayModeTravelExpectedVisibleObjectCounts =
+                qualityGate.OfflineGeoworldPlayModeTravelExpectedVisibleObjectCounts,
+            OfflineGeoworldPlayModeTravelUnityScriptsReady =
+                qualityGate.OfflineGeoworldPlayModeTravelUnityScriptsReady,
+            OfflineGeoworldPlayModeTravelEditorWindowReady =
+                qualityGate.OfflineGeoworldPlayModeTravelEditorWindowReady,
+            OfflineGeoworldPlayModeTravelSimulatedExecutionProofPassed =
+                qualityGate.OfflineGeoworldPlayModeTravelSimulatedExecutionProofPassed,
+            OfflineGeoworldPlayModeTravelNegativeProofPassed =
+                qualityGate.OfflineGeoworldPlayModeTravelNegativeProofPassed,
+            OfflineGeoworldPlayModeTravelGoal102BClosureRecorded =
+                qualityGate.OfflineGeoworldPlayModeTravelGoal102BClosureRecorded,
+            OfflineGeoworldPlayModeTravelAlphaRuntimeBootstrapUnchanged =
+                qualityGate.OfflineGeoworldPlayModeTravelAlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldPlayModeTravelQualityGatePassed =
+                qualityGate.OfflineGeoworldPlayModeTravelQualityGatePassed,
+            Goal103FilesDiscoveredByRelativePaths = qualityGate.Goal103FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

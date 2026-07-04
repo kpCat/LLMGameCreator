@@ -76,7 +76,8 @@
     ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/",
     ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/",
     ".llmgc/procedural/goal-102a-unity-editor-source-format-guard/",
-    ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/"
+    ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/",
+    ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1382,6 +1383,33 @@
         "docs/agent-tasks/goal-102b-actual-unity-editor-source-reformat/",
         "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/",
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityEditorPreviewTool/"
+      ]
+    },
+    {
+      "scenario": "goal-103-offline-geoworld-playmode-travel-preview",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldUnityPlayModeTravelPreviewProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPlayModeTravelWindow.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeChunkVisibility.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelState.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/",
+        "docs/agent-tasks/goal-103-offline-geoworld-playmode-travel-preview/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityPlayModeTravelPreview/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityPlayModeTravelPreview/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/"
       ]
     }
   ]

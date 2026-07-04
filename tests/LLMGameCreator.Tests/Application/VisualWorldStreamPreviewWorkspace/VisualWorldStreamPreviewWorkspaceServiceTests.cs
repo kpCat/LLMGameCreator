@@ -2,6 +2,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
+using LLMGameCreator.Application.Design.OfflineGeoworldUnityPlayModeTravelPreview;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.WinForms.Pages;
@@ -12,7 +13,7 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through102Artifacts()
+    public void ServiceLoadsRealGoal086Through103Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -29,8 +30,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("offline_geoworld_handoff", groupIds);
         Assert.Contains("offline_geoworld_unity_preview", groupIds);
         Assert.Contains("offline_geoworld_unity_editor_preview", groupIds);
-        Assert.Equal(11, result.Catalog.GroupCount);
-        Assert.True(result.Catalog.EntryCount >= 118);
+        Assert.Contains("offline_geoworld_playmode_travel", groupIds);
+        Assert.Equal(12, result.Catalog.GroupCount);
+        Assert.True(result.Catalog.EntryCount >= 140);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
     }
@@ -272,7 +274,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
     }
 
     [Fact]
-    public void Goal091Goal093Goal095Goal099Goal100Goal101AndGoal102ProofStatusesSurfaceRequiredProofs()
+    public void Goal091Goal093Goal095Goal099Goal100Goal101Goal102AndGoal103ProofStatusesSurfaceRequiredProofs()
     {
         var result = Build();
         var required = new[]
@@ -320,7 +322,15 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
             "goal102.clear_operation",
             "goal102.negative",
             "goal102.alpha_runtime_bootstrap_unchanged",
-            "goal102.quality_gate"
+            "goal102.quality_gate",
+            "goal103.unity_script_inventory",
+            "goal103.editor_window_inventory",
+            "goal103.simulated_execution",
+            "goal103.negative",
+            "goal103.goal102b_closure",
+            "goal103.alpha_runtime_bootstrap_unchanged",
+            "goal103.boundary_prefetch",
+            "goal103.quality_gate"
         };
 
         Assert.True(result.ProofStatus.Passed);
@@ -599,6 +609,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
     {
         var root = ProjectRoot();
         new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
+            .BuildAndWriteAsync(root)
+            .GetAwaiter()
+            .GetResult();
+        new OfflineGeoworldPlayModeTravelPreviewEvidenceService()
             .BuildAndWriteAsync(root)
             .GetAwaiter()
             .GetResult();

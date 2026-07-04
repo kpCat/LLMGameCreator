@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.OfflineGeoworldVisualCacheUnityHandoff;
+using LLMGameCreator.Application.Design.OfflineGeoworldUnityPlayModeTravelPreview;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityPreviewRunner;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
@@ -88,6 +89,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal100OfflineGeoworldHandoffProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal101OfflineGeoworldUnityPreviewProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal102OfflineGeoworldUnityEditorPreviewProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal103OfflineGeoworldPlayModeTravelProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -488,6 +490,84 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 Goal102SourceGoalId,
                 "goal102.quality_gate",
                 OfflineGeoworldUnityEditorPreviewToolVocabulary.QualityGateScanFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics)
+        ];
+
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal103OfflineGeoworldPlayModeTravelProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        [
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.unity_script_inventory",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.UnityScriptInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.editor_window_inventory",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.EditorWindowInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.simulated_execution",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.SimulatedExecutionProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.negative",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.NegativeProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.goal102b_closure",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.Goal102BClosureFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.alpha_runtime_bootstrap_unchanged",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.QualityGateScanFileName,
+                "alphaRuntimeBootstrapUnchanged",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.boundary_prefetch",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.QualityGateScanFileName,
+                "boundaryPrefetchRepresented",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal103PlayModeTravelSourceRoot,
+                Goal103PlayModeTravelSourceGoalId,
+                "goal103.quality_gate",
+                OfflineGeoworldPlayModeTravelPreviewVocabulary.QualityGateScanFileName,
                 "passed",
                 new Dictionary<string, string>(StringComparer.Ordinal),
                 diagnostics)

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "offline_geoworld_playmode_workspace_binding_inventory_v1",
+  "goalId": "goal_103_offline_geoworld_playmode_travel_preview",
+  "passed": true,
+  "workspaceCatalogIncludesPlayModeTravelGroup": true,
+  "workspaceReadsGoal103EvidenceByRelativePath": true,
+  "winFormsPageDisplaysPlayModeTravelFields": true,
+  "showsTravelStepCount": true,
+  "showsActiveChunkCounts": true,
+  "showsBoundaryPrefetchCounts": true,
+  "showsExpectedVisibleObjectCounts": true,
+  "showsUnityScriptReadiness": true,
+  "showsEditorLaunchHelperReadiness": true,
+  "showsSimulatedPlayModeProofStatus": true,
+  "showsGoal102BFalsePositiveClosureStatus": true,
+  "showsAlphaRuntimeBootstrapUnchangedStatus": true,
+  "diagnostics": []
+}
