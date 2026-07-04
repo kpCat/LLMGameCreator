@@ -151,6 +151,31 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             OfflineGeoworldPlayModeTravelQualityGatePassed =
                 qualityGate.OfflineGeoworldPlayModeTravelQualityGatePassed,
             Goal103FilesDiscoveredByRelativePaths = qualityGate.Goal103FilesDiscoveredByRelativePaths,
+            OfflineGeoworldInteractiveTravelMovementSampleCount =
+                qualityGate.OfflineGeoworldInteractiveTravelMovementSampleCount,
+            OfflineGeoworldInteractiveTravelBoundaryCrossingCount =
+                qualityGate.OfflineGeoworldInteractiveTravelBoundaryCrossingCount,
+            OfflineGeoworldInteractiveTravelObjectCount =
+                qualityGate.OfflineGeoworldInteractiveTravelObjectCount,
+            OfflineGeoworldInteractiveTravelActiveChunkCounts =
+                qualityGate.OfflineGeoworldInteractiveTravelActiveChunkCounts,
+            OfflineGeoworldInteractiveTravelBoundaryPrefetchCounts =
+                qualityGate.OfflineGeoworldInteractiveTravelBoundaryPrefetchCounts,
+            OfflineGeoworldInteractiveTravelExpectedVisibleObjectCounts =
+                qualityGate.OfflineGeoworldInteractiveTravelExpectedVisibleObjectCounts,
+            OfflineGeoworldInteractiveTravelUnityScriptsReady =
+                qualityGate.OfflineGeoworldInteractiveTravelUnityScriptsReady,
+            OfflineGeoworldInteractiveTravelEditorWindowReady =
+                qualityGate.OfflineGeoworldInteractiveTravelEditorWindowReady,
+            OfflineGeoworldInteractiveTravelSimulatedExecutionProofPassed =
+                qualityGate.OfflineGeoworldInteractiveTravelSimulatedExecutionProofPassed,
+            OfflineGeoworldInteractiveTravelNegativeProofPassed =
+                qualityGate.OfflineGeoworldInteractiveTravelNegativeProofPassed,
+            OfflineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged =
+                qualityGate.OfflineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldInteractiveTravelQualityGatePassed =
+                qualityGate.OfflineGeoworldInteractiveTravelQualityGatePassed,
+            Goal104FilesDiscoveredByRelativePaths = qualityGate.Goal104FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "offline_geoworld_interactive_negative_proof_v1",
+  "goalId": "goal_104_offline_geoworld_interactive_travel_preview",
+  "passed": true,
+  "scenarioCount": 13,
+  "rejectedCount": 13,
+  "matchedExpectationCount": 13,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal103_payload",
+      "causalMutation": "Goal103 interactive source payload removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.goal103_missing",
+          "target": "Goal103 payload",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "missing_goal104_manifest",
+      "causalMutation": "Goal104 manifest removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.manifest_missing",
+          "target": "Goal104 manifest",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "movement_path_without_boundary_crossings",
+      "causalMutation": "movement path has no crossing samples",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.boundary_crossings_missing",
+          "target": "movement path",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "boundary_crossing_without_prefetch_plan",
+      "causalMutation": "boundary crossing has no prefetch plan",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.prefetch_missing",
+          "target": "prefetch plan",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "object_visibility_diff_references_unknown_object",
+      "causalMutation": "visibility diff references an unknown object id",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.unknown_object",
+          "target": "visibility diff",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_reading_files",
+      "causalMutation": "proof marked passed without reading payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.fake_success",
+          "target": "simulated proof",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "absolute_path_in_payload",
+      "causalMutation": "absolute local path inserted into payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.absolute_path",
+          "target": "payload",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_geodata_leak",
+      "causalMutation": "raw geodata marker added to interactive plan",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.raw_geodata",
+          "target": "payload",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "network_provider_marker_in_unity_scripts",
+      "causalMutation": "Unity script contains external marker",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.provider_network",
+          "target": "Unity scripts",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency_marker",
+      "causalMutation": "Unity script references AlphaRuntimeBootstrap",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.alpha_bootstrap",
+          "target": "Unity scripts",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "scene_prefab_project_settings_mutation_marker",
+      "causalMutation": "Unity editor helper mutates saved scene or settings",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.scene_settings",
+          "target": "Unity editor helper",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "causalMutation": "binary or raster media added to payload",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.binary_media",
+          "target": "payload",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "new_input_system_or_external_dependency_marker",
+      "causalMutation": "new input system or external dependency marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal104.negative.external_dependency",
+          "target": "Unity scripts",
+          "message": "Goal104 negative proof rejected the mutated interactive travel input."
+        }
+      ]
+    }
+  ]
+}

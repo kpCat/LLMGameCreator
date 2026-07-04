@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "offline_geoworld_interactive_readme_v1",
+  "goalId": "goal_104_offline_geoworld_interactive_travel_preview",
+  "offlineSyntheticOnly": true,
+  "metadataOnly": true,
+  "implementsFinalRuntimeGameplay": false,
+  "implementsFinalArt": false,
+  "implementsRealGeodataFetching": false,
+  "implementsReleaseBuildBehavior": false,
+  "usesRelativePathsOnly": true,
+  "scopeSummary": "Unity Alpha interactive travel preview tooling over real Goal103 metadata only."
+}

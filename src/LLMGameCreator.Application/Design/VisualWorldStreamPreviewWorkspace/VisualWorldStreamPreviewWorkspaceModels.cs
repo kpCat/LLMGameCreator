@@ -75,7 +75,7 @@ public sealed record VisualWorldPreviewArtifactGroup
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
 
-public sealed record VisualWorldPreviewArtifactEntry
+public sealed partial record VisualWorldPreviewArtifactEntry
 {
     public string Id { get; init; } = string.Empty;
     public string RelativePath { get; init; } = string.Empty;
@@ -189,7 +189,7 @@ public sealed record VisualWorldPreviewSelection
     public string ProofSummary { get; init; } = string.Empty;
 }
 
-public sealed record VisualWorldPreviewWinFormsBindingInventory
+public sealed partial record VisualWorldPreviewWinFormsBindingInventory
 {
     public string SchemaVersion { get; init; } =
         VisualWorldStreamPreviewWorkspaceVocabulary.WinFormsBindingSchemaVersion;
@@ -213,7 +213,7 @@ public sealed record VisualWorldPreviewWinFormsBindingInventory
     public IReadOnlyList<VisualWorldPreviewDiagnostic> Diagnostics { get; init; } = [];
 }
 
-public sealed record VisualWorldPreviewWorkspaceQualityGate
+public sealed partial record VisualWorldPreviewWorkspaceQualityGate
 {
     public string SchemaVersion { get; init; } =
         VisualWorldStreamPreviewWorkspaceVocabulary.QualityGateSchemaVersion;
@@ -374,7 +374,7 @@ public sealed record VisualWorldStreamPreviewProofStatusDocument
     public IReadOnlyList<VisualWorldPreviewProofStatus> Proofs { get; init; } = [];
 }
 
-public sealed record VisualWorldStreamPreviewWorkspaceReport
+public sealed partial record VisualWorldStreamPreviewWorkspaceReport
 {
     public string GoalId { get; init; } = VisualWorldStreamPreviewWorkspaceVocabulary.GoalId;
     public string ManualGate { get; init; } = VisualWorldStreamPreviewWorkspaceVocabulary.FinalGate;

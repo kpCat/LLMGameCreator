@@ -55,7 +55,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
             + " | playModeSteps="
             + result.Report.OfflineGeoworldPlayModeTravelStepCount
             + " | playModeObjects="
-            + result.Report.OfflineGeoworldPlayModeTravelObjectCount;
+            + result.Report.OfflineGeoworldPlayModeTravelObjectCount
+            + " | interactiveSamples="
+            + result.Report.OfflineGeoworldInteractiveTravelMovementSampleCount
+            + " | interactiveCrossings="
+            + result.Report.OfflineGeoworldInteractiveTravelBoundaryCrossingCount;
         BindGroups(result);
         BindProofs(result);
         BindDiagnostics(result);
@@ -286,6 +290,36 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + result.Report.OfflineGeoworldPlayModeTravelQualityGatePassed.ToString().ToLowerInvariant(),
             "goal103FilesDiscoveredByRelativePaths="
                 + result.Report.Goal103FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelMovementSampleCount="
+                + result.Report.OfflineGeoworldInteractiveTravelMovementSampleCount,
+            "offlineGeoworldInteractiveTravelBoundaryCrossingCount="
+                + result.Report.OfflineGeoworldInteractiveTravelBoundaryCrossingCount,
+            "offlineGeoworldInteractiveTravelObjectCount="
+                + result.Report.OfflineGeoworldInteractiveTravelObjectCount,
+            "offlineGeoworldInteractiveTravelActiveChunkCounts="
+                + result.Report.OfflineGeoworldInteractiveTravelActiveChunkCounts,
+            "offlineGeoworldInteractiveTravelBoundaryPrefetchCounts="
+                + result.Report.OfflineGeoworldInteractiveTravelBoundaryPrefetchCounts,
+            "offlineGeoworldInteractiveTravelExpectedVisibleObjectCounts="
+                + result.Report.OfflineGeoworldInteractiveTravelExpectedVisibleObjectCounts,
+            "offlineGeoworldInteractiveTravelUnityScriptsReady="
+                + result.Report.OfflineGeoworldInteractiveTravelUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelEditorWindowReady="
+                + result.Report.OfflineGeoworldInteractiveTravelEditorWindowReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelSimulatedExecutionProofPassed="
+                + result.Report.OfflineGeoworldInteractiveTravelSimulatedExecutionProofPassed
+                    .ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelNegativeProofPassed="
+                + result.Report.OfflineGeoworldInteractiveTravelNegativeProofPassed
+                    .ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged="
+                + result.Report.OfflineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged
+                    .ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelQualityGatePassed="
+                + result.Report.OfflineGeoworldInteractiveTravelQualityGatePassed
+                    .ToString().ToLowerInvariant(),
+            "goal104FilesDiscoveredByRelativePaths="
+                + result.Report.Goal104FilesDiscoveredByRelativePaths.ToString().ToLowerInvariant(),
             "noAbsolutePaths=" + result.QualityGateScan.NoAbsolutePaths.ToString().ToLowerInvariant(),
             "noBinaryOrRasterMediaAdded="
                 + result.QualityGateScan.NoBinaryOrRasterMediaAdded.ToString().ToLowerInvariant()
@@ -476,6 +510,33 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
                 + entry.OfflineGeoworldPlayModeTravelAlphaRuntimeBootstrapUnchanged.ToString().ToLowerInvariant(),
             "offlineGeoworldPlayModeTravelQualityGatePassed: "
                 + entry.OfflineGeoworldPlayModeTravelQualityGatePassed.ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelMovementSampleCount: "
+                + entry.OfflineGeoworldInteractiveTravelMovementSampleCount,
+            "offlineGeoworldInteractiveTravelBoundaryCrossingCount: "
+                + entry.OfflineGeoworldInteractiveTravelBoundaryCrossingCount,
+            "offlineGeoworldInteractiveTravelObjectCount: "
+                + entry.OfflineGeoworldInteractiveTravelObjectCount,
+            "offlineGeoworldInteractiveTravelActiveChunkCounts: "
+                + entry.OfflineGeoworldInteractiveTravelActiveChunkCounts,
+            "offlineGeoworldInteractiveTravelBoundaryPrefetchCounts: "
+                + entry.OfflineGeoworldInteractiveTravelBoundaryPrefetchCounts,
+            "offlineGeoworldInteractiveTravelExpectedVisibleObjectCounts: "
+                + entry.OfflineGeoworldInteractiveTravelExpectedVisibleObjectCounts,
+            "offlineGeoworldInteractiveTravelUnityScriptsReady: "
+                + entry.OfflineGeoworldInteractiveTravelUnityScriptsReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelEditorWindowReady: "
+                + entry.OfflineGeoworldInteractiveTravelEditorWindowReady.ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelSimulatedExecutionProofPassed: "
+                + entry.OfflineGeoworldInteractiveTravelSimulatedExecutionProofPassed
+                    .ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelNegativeProofPassed: "
+                + entry.OfflineGeoworldInteractiveTravelNegativeProofPassed
+                    .ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged: "
+                + entry.OfflineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged
+                    .ToString().ToLowerInvariant(),
+            "offlineGeoworldInteractiveTravelQualityGatePassed: "
+                + entry.OfflineGeoworldInteractiveTravelQualityGatePassed.ToString().ToLowerInvariant(),
             "chunkKeys: " + string.Join(",", entry.ChunkKeys)
         };
         return string.Join(Environment.NewLine, lines);

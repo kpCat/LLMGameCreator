@@ -1,0 +1,434 @@
+{
+  "schemaVersion": "offline_geoworld_interactive_boundary_zones_v1",
+  "goalId": "goal_104_offline_geoworld_interactive_travel_preview",
+  "accepted": false,
+  "stepCount": 6,
+  "boundaryCrossingCount": 2,
+  "steps": [
+    {
+      "stepIndex": 0,
+      "stepId": "goal104_load_center",
+      "activeChunkKeys": [
+        "z14/x4210/y6141",
+        "z14/x4210/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4209/y6140",
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6142",
+        "z14/x4211/y6143"
+      ],
+      "activeChunkCount": 2,
+      "boundaryPrefetchChunkCount": 10,
+      "visibleObjectIdsByChunk": {
+        "z14/x4210/y6141": [
+          "interactive_object/07d19620806e"
+        ],
+        "z14/x4210/y6142": [
+          "interactive_object/08c7b72467f4",
+          "interactive_object/2ac3b5b60b9a",
+          "interactive_object/78a8cfbcea61",
+          "interactive_object/9c6911a75bf1",
+          "interactive_object/e8fd74d03a17"
+        ]
+      }
+    },
+    {
+      "stepIndex": 1,
+      "stepId": "goal104_manual_move_east_band",
+      "activeChunkKeys": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143",
+        "z14/x4209/y6140",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "activeChunkCount": 5,
+      "boundaryPrefetchChunkCount": 14,
+      "visibleObjectIdsByChunk": {
+        "z14/x4209/y6141": [
+          "interactive_object/6ca2ae81e33a"
+        ],
+        "z14/x4209/y6142": [
+          "interactive_object/12773e0efec7",
+          "interactive_object/27ffbfa8a3ed"
+        ],
+        "z14/x4210/y6141": [
+          "interactive_object/07d19620806e",
+          "interactive_object/1a8a631eb0dd",
+          "interactive_object/bc2db88430dc"
+        ],
+        "z14/x4210/y6142": [
+          "interactive_object/08c7b72467f4",
+          "interactive_object/2ac3b5b60b9a",
+          "interactive_object/6ceaebb0326e",
+          "interactive_object/78a8cfbcea61",
+          "interactive_object/7bdd8a59b95c",
+          "interactive_object/8cebdcd66c22",
+          "interactive_object/9c6911a75bf1",
+          "interactive_object/d4c52fc4dbcb",
+          "interactive_object/e8fd74d03a17",
+          "interactive_object/f2fbfbaa9c0a"
+        ],
+        "z14/x4211/y6142": [
+          "interactive_object/7c7a0c4639d1",
+          "interactive_object/90ad96b6dcdb"
+        ]
+      }
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "goal104_cross_east_boundary",
+      "activeChunkKeys": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143",
+        "z14/x4209/y6140",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "activeChunkCount": 5,
+      "boundaryPrefetchChunkCount": 14,
+      "visibleObjectIdsByChunk": {
+        "z14/x4209/y6141": [
+          "interactive_object/6ca2ae81e33a"
+        ],
+        "z14/x4209/y6142": [
+          "interactive_object/12773e0efec7"
+        ],
+        "z14/x4210/y6141": [
+          "interactive_object/1a8a631eb0dd"
+        ],
+        "z14/x4210/y6142": [
+          "interactive_object/6ceaebb0326e",
+          "interactive_object/7bdd8a59b95c",
+          "interactive_object/8cebdcd66c22"
+        ],
+        "z14/x4211/y6142": [
+          "interactive_object/7c7a0c4639d1",
+          "interactive_object/90ad96b6dcdb"
+        ]
+      }
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "goal104_prefetch_settle_east",
+      "activeChunkKeys": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143",
+        "z14/x4209/y6140",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "activeChunkCount": 5,
+      "boundaryPrefetchChunkCount": 14,
+      "visibleObjectIdsByChunk": {
+        "z14/x4209/y6141": [
+          "interactive_object/6ca2ae81e33a"
+        ],
+        "z14/x4209/y6142": [
+          "interactive_object/12773e0efec7"
+        ],
+        "z14/x4210/y6141": [
+          "interactive_object/1a8a631eb0dd"
+        ],
+        "z14/x4210/y6142": [
+          "interactive_object/6ceaebb0326e",
+          "interactive_object/7bdd8a59b95c",
+          "interactive_object/8cebdcd66c22"
+        ],
+        "z14/x4211/y6142": [
+          "interactive_object/7c7a0c4639d1",
+          "interactive_object/90ad96b6dcdb"
+        ]
+      }
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "goal104_cross_west_return",
+      "activeChunkKeys": [
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4209/y6140",
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "activeChunkCount": 3,
+      "boundaryPrefetchChunkCount": 12,
+      "visibleObjectIdsByChunk": {
+        "z14/x4210/y6141": [
+          "interactive_object/07d19620806e",
+          "interactive_object/1a8a631eb0dd"
+        ],
+        "z14/x4210/y6142": [
+          "interactive_object/08c7b72467f4",
+          "interactive_object/2ac3b5b60b9a",
+          "interactive_object/6ceaebb0326e",
+          "interactive_object/78a8cfbcea61",
+          "interactive_object/8cebdcd66c22",
+          "interactive_object/9c6911a75bf1",
+          "interactive_object/e8fd74d03a17"
+        ],
+        "z14/x4211/y6142": [
+          "interactive_object/90ad96b6dcdb"
+        ]
+      }
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "goal104_manual_reset_center",
+      "activeChunkKeys": [
+        "z14/x4210/y6141",
+        "z14/x4210/y6142"
+      ],
+      "boundaryPrefetchChunkKeys": [
+        "z14/x4209/y6140",
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6142",
+        "z14/x4211/y6143"
+      ],
+      "activeChunkCount": 2,
+      "boundaryPrefetchChunkCount": 10,
+      "visibleObjectIdsByChunk": {
+        "z14/x4210/y6141": [
+          "interactive_object/07d19620806e"
+        ],
+        "z14/x4210/y6142": [
+          "interactive_object/08c7b72467f4",
+          "interactive_object/2ac3b5b60b9a",
+          "interactive_object/78a8cfbcea61",
+          "interactive_object/9c6911a75bf1",
+          "interactive_object/e8fd74d03a17"
+        ]
+      }
+    }
+  ],
+  "boundaryZones": [
+    {
+      "crossingIndex": 0,
+      "crossingId": "goal104_boundary_crossing_00",
+      "fromMovementSampleIndex": 1,
+      "toMovementSampleIndex": 2,
+      "fromChunkKey": "z14/x4210/y6142",
+      "toChunkKey": "z14/x4211/y6142",
+      "boundaryAxis": "x+",
+      "activeChunkKeysBefore": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "activeChunkKeysAfter": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "prefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143",
+        "z14/x4209/y6140",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "visibleObjectIdsBefore": [
+        "interactive_object/07d19620806e",
+        "interactive_object/08c7b72467f4",
+        "interactive_object/12773e0efec7",
+        "interactive_object/1a8a631eb0dd",
+        "interactive_object/27ffbfa8a3ed",
+        "interactive_object/2ac3b5b60b9a",
+        "interactive_object/6ca2ae81e33a",
+        "interactive_object/6ceaebb0326e",
+        "interactive_object/78a8cfbcea61",
+        "interactive_object/7bdd8a59b95c",
+        "interactive_object/7c7a0c4639d1",
+        "interactive_object/8cebdcd66c22",
+        "interactive_object/90ad96b6dcdb",
+        "interactive_object/9c6911a75bf1",
+        "interactive_object/bc2db88430dc",
+        "interactive_object/d4c52fc4dbcb",
+        "interactive_object/e8fd74d03a17",
+        "interactive_object/f2fbfbaa9c0a"
+      ],
+      "visibleObjectIdsAfter": [
+        "interactive_object/12773e0efec7",
+        "interactive_object/1a8a631eb0dd",
+        "interactive_object/6ca2ae81e33a",
+        "interactive_object/6ceaebb0326e",
+        "interactive_object/7bdd8a59b95c",
+        "interactive_object/7c7a0c4639d1",
+        "interactive_object/8cebdcd66c22",
+        "interactive_object/90ad96b6dcdb"
+      ],
+      "newlyVisibleObjectIds": [],
+      "newlyHiddenObjectIds": [
+        "interactive_object/07d19620806e",
+        "interactive_object/08c7b72467f4",
+        "interactive_object/27ffbfa8a3ed",
+        "interactive_object/2ac3b5b60b9a",
+        "interactive_object/78a8cfbcea61",
+        "interactive_object/9c6911a75bf1",
+        "interactive_object/bc2db88430dc",
+        "interactive_object/d4c52fc4dbcb",
+        "interactive_object/e8fd74d03a17",
+        "interactive_object/f2fbfbaa9c0a"
+      ],
+      "metadataOnly": true
+    },
+    {
+      "crossingIndex": 1,
+      "crossingId": "goal104_boundary_crossing_01",
+      "fromMovementSampleIndex": 3,
+      "toMovementSampleIndex": 4,
+      "fromChunkKey": "z14/x4211/y6142",
+      "toChunkKey": "z14/x4210/y6142",
+      "boundaryAxis": "x-",
+      "activeChunkKeysBefore": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "activeChunkKeysAfter": [
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "prefetchChunkKeys": [
+        "z14/x4209/y6140",
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "visibleObjectIdsBefore": [
+        "interactive_object/12773e0efec7",
+        "interactive_object/1a8a631eb0dd",
+        "interactive_object/6ca2ae81e33a",
+        "interactive_object/6ceaebb0326e",
+        "interactive_object/7bdd8a59b95c",
+        "interactive_object/7c7a0c4639d1",
+        "interactive_object/8cebdcd66c22",
+        "interactive_object/90ad96b6dcdb"
+      ],
+      "visibleObjectIdsAfter": [
+        "interactive_object/07d19620806e",
+        "interactive_object/08c7b72467f4",
+        "interactive_object/1a8a631eb0dd",
+        "interactive_object/2ac3b5b60b9a",
+        "interactive_object/6ceaebb0326e",
+        "interactive_object/78a8cfbcea61",
+        "interactive_object/8cebdcd66c22",
+        "interactive_object/90ad96b6dcdb",
+        "interactive_object/9c6911a75bf1",
+        "interactive_object/e8fd74d03a17"
+      ],
+      "newlyVisibleObjectIds": [
+        "interactive_object/07d19620806e",
+        "interactive_object/08c7b72467f4",
+        "interactive_object/2ac3b5b60b9a",
+        "interactive_object/78a8cfbcea61",
+        "interactive_object/9c6911a75bf1",
+        "interactive_object/e8fd74d03a17"
+      ],
+      "newlyHiddenObjectIds": [
+        "interactive_object/12773e0efec7",
+        "interactive_object/6ca2ae81e33a",
+        "interactive_object/7bdd8a59b95c",
+        "interactive_object/7c7a0c4639d1"
+      ],
+      "metadataOnly": true
+    }
+  ]
+}

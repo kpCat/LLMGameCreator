@@ -1,0 +1,410 @@
+{
+  "schemaVersion": "offline_geoworld_interactive_prefetch_plan_v1",
+  "goalId": "goal_104_offline_geoworld_interactive_travel_preview",
+  "accepted": false,
+  "objectCount": 18,
+  "prefetchPlanCount": 2,
+  "objects": [
+    {
+      "objectId": "interactive_object/08c7b72467f4",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_terrain_hint_marker_08c7b72467f4",
+      "sourceCommandId": "preview_command/55d73d108fcef19c",
+      "commandKind": "terrain_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 12,
+      "gridZ": 3,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/1a8a631eb0dd",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_1a8a631eb0dd",
+      "sourceCommandId": "preview_command/863e010a16565f56",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 6,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/7c7a0c4639d1",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_bridge_marker_7c7a0c4639d1",
+      "sourceCommandId": "preview_command/9f3dbc694697d6fc",
+      "commandKind": "bridge_marker",
+      "sourceChunkKey": "z14/x4211/y6142",
+      "gridX": 6,
+      "gridZ": 3,
+      "elevation": 2,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/07d19620806e",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_terrain_hint_marker_07d19620806e",
+      "sourceCommandId": "preview_command/6fb571ad5cbdfe54",
+      "commandKind": "terrain_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 3,
+      "gridZ": 3,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/8cebdcd66c22",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_building_footprint_marker_8cebdcd66c22",
+      "sourceCommandId": "preview_command/7190a4bf7c808416",
+      "commandKind": "building_footprint_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 0,
+      "gridZ": 0,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/9c6911a75bf1",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_9c6911a75bf1",
+      "sourceCommandId": "preview_command/6f7ea9b97f3110ac",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 12,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/2ac3b5b60b9a",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_bridge_marker_2ac3b5b60b9a",
+      "sourceCommandId": "preview_command/05ed8679f5108505",
+      "commandKind": "bridge_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 9,
+      "gridZ": 6,
+      "elevation": 2,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/6ca2ae81e33a",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_6ca2ae81e33a",
+      "sourceCommandId": "preview_command/de673df37f3e6e13",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4209/y6141",
+      "gridX": 9,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/e8fd74d03a17",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_barrier_line_e8fd74d03a17",
+      "sourceCommandId": "preview_command/2276ea94e0340d14",
+      "commandKind": "barrier_line",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 3,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/7bdd8a59b95c",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_poi_marker_7bdd8a59b95c",
+      "sourceCommandId": "preview_command/c2ab27ef0c033703",
+      "commandKind": "poi_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 15,
+      "gridZ": 3,
+      "elevation": 2,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/f2fbfbaa9c0a",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_water_body_plane_f2fbfbaa9c0a",
+      "sourceCommandId": "preview_command/f503f490960eb2ed",
+      "commandKind": "water_body_plane",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 6,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/12773e0efec7",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_12773e0efec7",
+      "sourceCommandId": "preview_command/c1872a5502d4b3f6",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "gridX": 0,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/d4c52fc4dbcb",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_road_segment_line_d4c52fc4dbcb",
+      "sourceCommandId": "preview_command/e37f51a0d4e24947",
+      "commandKind": "road_segment_line",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 15,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/90ad96b6dcdb",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_road_segment_line_90ad96b6dcdb",
+      "sourceCommandId": "preview_command/865d5a2785f4bbc7",
+      "commandKind": "road_segment_line",
+      "sourceChunkKey": "z14/x4211/y6142",
+      "gridX": 3,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/78a8cfbcea61",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_land_use_area_plane_78a8cfbcea61",
+      "sourceCommandId": "preview_command/3910b28ce6e01d89",
+      "commandKind": "land_use_area_plane",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 9,
+      "gridZ": 3,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/bc2db88430dc",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_water_body_plane_bc2db88430dc",
+      "sourceCommandId": "preview_command/e35c257499cac8c3",
+      "commandKind": "water_body_plane",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 15,
+      "gridZ": 0,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/6ceaebb0326e",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_vegetation_area_marker_6ceaebb0326e",
+      "sourceCommandId": "preview_command/886a712e8ce9ba50",
+      "commandKind": "vegetation_area_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 0,
+      "gridZ": 3,
+      "elevation": 1,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    },
+    {
+      "objectId": "interactive_object/27ffbfa8a3ed",
+      "objectName": "__LLMGC_OfflineGeoworldInteractive_barrier_line_27ffbfa8a3ed",
+      "sourceCommandId": "preview_command/f6c97ce05f93c0b5",
+      "commandKind": "barrier_line",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "gridX": 12,
+      "gridZ": 6,
+      "elevation": 0,
+      "visibleStepIndexes": [
+        1
+      ],
+      "metadataOnly": true,
+      "rawGeodataIncluded": false
+    }
+  ],
+  "plans": [
+    {
+      "crossingIndex": 0,
+      "crossingId": "goal104_boundary_crossing_00",
+      "activeChunkKeysBefore": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "activeChunkKeysAfter": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "prefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143",
+        "z14/x4209/y6140",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "addedPrefetchChunkKeys": [],
+      "removedPrefetchChunkKeys": [],
+      "newlyVisibleObjectIds": [],
+      "newlyHiddenObjectIds": [
+        "interactive_object/07d19620806e",
+        "interactive_object/08c7b72467f4",
+        "interactive_object/27ffbfa8a3ed",
+        "interactive_object/2ac3b5b60b9a",
+        "interactive_object/78a8cfbcea61",
+        "interactive_object/9c6911a75bf1",
+        "interactive_object/bc2db88430dc",
+        "interactive_object/d4c52fc4dbcb",
+        "interactive_object/e8fd74d03a17",
+        "interactive_object/f2fbfbaa9c0a"
+      ],
+      "metadataOnly": true
+    },
+    {
+      "crossingIndex": 1,
+      "crossingId": "goal104_boundary_crossing_01",
+      "activeChunkKeysBefore": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "activeChunkKeysAfter": [
+        "z14/x4210/y6141",
+        "z14/x4210/y6142",
+        "z14/x4211/y6142"
+      ],
+      "prefetchChunkKeys": [
+        "z14/x4209/y6140",
+        "z14/x4209/y6141",
+        "z14/x4209/y6142",
+        "z14/x4209/y6143",
+        "z14/x4210/y6140",
+        "z14/x4210/y6143",
+        "z14/x4211/y6140",
+        "z14/x4211/y6141",
+        "z14/x4211/y6143",
+        "z14/x4212/y6141",
+        "z14/x4212/y6142",
+        "z14/x4212/y6143"
+      ],
+      "addedPrefetchChunkKeys": [
+        "z14/x4209/y6141",
+        "z14/x4209/y6142"
+      ],
+      "removedPrefetchChunkKeys": [
+        "z14/x4208/y6140",
+        "z14/x4208/y6141",
+        "z14/x4208/y6142",
+        "z14/x4208/y6143"
+      ],
+      "newlyVisibleObjectIds": [
+        "interactive_object/07d19620806e",
+        "interactive_object/08c7b72467f4",
+        "interactive_object/2ac3b5b60b9a",
+        "interactive_object/78a8cfbcea61",
+        "interactive_object/9c6911a75bf1",
+        "interactive_object/e8fd74d03a17"
+      ],
+      "newlyHiddenObjectIds": [
+        "interactive_object/12773e0efec7",
+        "interactive_object/6ca2ae81e33a",
+        "interactive_object/7bdd8a59b95c",
+        "interactive_object/7c7a0c4639d1"
+      ],
+      "metadataOnly": true
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 using LLMGameCreator.Application.Design.OfflineGeoworldVisualCacheUnityHandoff;
+using LLMGameCreator.Application.Design.OfflineGeoworldInteractiveTravelPreview;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityPlayModeTravelPreview;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityPreviewRunner;
@@ -90,6 +91,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal101OfflineGeoworldUnityPreviewProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal102OfflineGeoworldUnityEditorPreviewProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal103OfflineGeoworldPlayModeTravelProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal104OfflineGeoworldInteractiveTravelProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -568,6 +570,84 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 Goal103PlayModeTravelSourceGoalId,
                 "goal103.quality_gate",
                 OfflineGeoworldPlayModeTravelPreviewVocabulary.QualityGateScanFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics)
+        ];
+
+    private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildGoal104OfflineGeoworldInteractiveTravelProofStatus(
+        string projectRoot,
+        List<VisualWorldPreviewDiagnostic> diagnostics) =>
+        [
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.unity_script_inventory",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.UnityScriptInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.editor_window_inventory",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.EditorWindowInventoryFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.simulated_execution",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.SimulatedExecutionProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.negative",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.NegativeProofFileName,
+                "passed",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.alpha_runtime_bootstrap_unchanged",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.QualityGateScanFileName,
+                "alphaRuntimeBootstrapUnchanged",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.boundary_crossings",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.QualityGateScanFileName,
+                "boundaryZonesBuilt",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.prefetch_plan",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.QualityGateScanFileName,
+                "prefetchPlanBuilt",
+                new Dictionary<string, string>(StringComparer.Ordinal),
+                diagnostics),
+            BuildProof(
+                projectRoot,
+                Goal104InteractiveTravelSourceRoot,
+                Goal104InteractiveTravelSourceGoalId,
+                "goal104.quality_gate",
+                OfflineGeoworldInteractiveTravelPreviewVocabulary.QualityGateScanFileName,
                 "passed",
                 new Dictionary<string, string>(StringComparer.Ordinal),
                 diagnostics)

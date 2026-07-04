@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "offline_geoworld_interactive_source_lineage_v1",
+  "goalId": "goal_104_offline_geoworld_interactive_travel_preview",
+  "passed": true,
+  "goal103AcceptedFalsePreserved": true,
+  "goal103PayloadConsumed": true,
+  "goal103UnityScriptEvidenceConsumed": true,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-travel-manifest.json",
+      "exists": true,
+      "sha256": "909b8f6b7f996b60b2c1759e2787b4f5140d7e8b1b85d05ce41dfc2874fd893a",
+      "purpose": "Goal103 manifest"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-steps.json",
+      "exists": true,
+      "sha256": "310d33f1fcf5c4eb28909842a28bf7778306e56784c84ab83c4748926dddda26",
+      "purpose": "Goal103 travel steps"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-chunk-visibility.json",
+      "exists": true,
+      "sha256": "18b65fb3c947f354645c4e734b0ea37abb17588126be371ad480d56b4cf3d7b7",
+      "purpose": "Goal103 chunk visibility"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-object-state-index.json",
+      "exists": true,
+      "sha256": "630413e2f9049c22694e85244d20170073c852f6d3605906386a18517db1cccc",
+      "purpose": "Goal103 object state index"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-simulated-execution-proof.json",
+      "exists": true,
+      "sha256": "26c2383829ab6782b63ba386dfa86f8c9093e96b56fac973175845586cdcf9c9",
+      "purpose": "Goal103 simulated execution proof"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/offline-geoworld-playmode-quality-gate-scan.json",
+      "exists": true,
+      "sha256": "39b000ae6f914026fb542c1bbdc253e9ae4c3193c35f3ee10ee567361162aae4",
+      "purpose": "Goal103 quality gate"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelController.cs",
+      "exists": true,
+      "sha256": "7860dd33c9a363c5d6c97ddc9d6bb5b19b99eda520da933fab94ceed0edcdf1f",
+      "purpose": "Goal103 Unity play-mode controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPlayModeTravelWindow.cs",
+      "exists": true,
+      "sha256": "b30ec127bb00853dffdf0a6d94cbe4fff8fbb2e7a803838aac2a5c2d39297c1e",
+      "purpose": "Goal103 Unity editor helper"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractiveTravelController.cs",
+      "exists": true,
+      "sha256": "192fd0efb945aa69dac0819e506ea23fe3bf5ad8db9f430a218fd7c2a3013e70",
+      "purpose": "Goal104 Unity interactive controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractiveTravelWindow.cs",
+      "exists": true,
+      "sha256": "e98dbf737eab32ec50995d66f3d5c68b7971c0de672160291b80c7d31384281e",
+      "purpose": "Goal104 Unity editor helper"
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "offline_geoworld_interactive_unity_script_inventory_v1",
+  "goalId": "goal_104_offline_geoworld_interactive_travel_preview",
+  "passed": true,
+  "controllerExists": true,
+  "stateExists": true,
+  "chunkVisibilityExists": true,
+  "controllerUsesApplicationStreamingAssetsPath": true,
+  "controllerReadsGoal104Root": true,
+  "controllerExposesInspectorFields": true,
+  "controllerSupportsManualAndTimerSteps": true,
+  "controllerActivatesObjectsByMetadata": true,
+  "controllerToleratesMissingObjects": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoProviderNetworkMarkers": true,
+  "files": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractiveTravelController.cs",
+      "exists": true,
+      "sha256": "192fd0efb945aa69dac0819e506ea23fe3bf5ad8db9f430a218fd7c2a3013e70",
+      "lineCount": 364,
+      "hasNoProviderNetworkMarkers": true,
+      "doesNotReferenceAlphaRuntimeBootstrap": true,
+      "hasNoScenePrefabSettingsMutationMarkers": true
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewPlayerMotor.cs",
+      "exists": true,
+      "sha256": "276c514968ede519cb080bc27f9860964ccb23501e5493f3b6f4f6b1a5a492fe",
+      "lineCount": 59,
+      "hasNoProviderNetworkMarkers": true,
+      "doesNotReferenceAlphaRuntimeBootstrap": true,
+      "hasNoScenePrefabSettingsMutationMarkers": true
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldBoundaryPrefetchState.cs",
+      "exists": true,
+      "sha256": "fcd6bb5b545349f03e5dd4750734abc1678dc6751d3aada47f48a74fa53a1f42",
+      "lineCount": 43,
+      "hasNoProviderNetworkMarkers": true,
+      "doesNotReferenceAlphaRuntimeBootstrap": true,
+      "hasNoScenePrefabSettingsMutationMarkers": true
+    }
+  ],
+  "diagnostics": []
+}

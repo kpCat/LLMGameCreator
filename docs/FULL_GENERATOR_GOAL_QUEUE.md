@@ -96,6 +96,7 @@ offline_geoworld_unity_editor_preview_tool_verification required
 unity_editor_source_format_guard_verification required
 actual_unity_editor_source_reformat_verification required
 offline_geoworld_playmode_travel_preview_verification required
+offline_geoworld_interactive_travel_preview_verification required
 ```
 
 Current capabilities:
@@ -129,6 +130,7 @@ Current capabilities:
 - raw-byte Unity Editor source-format guard backstop for Goal 102, with synthetic before/minified editor-window proof, after scan over Goal102 Unity/Application sources, negative proof and unchanged AlphaRuntimeBootstrap evidence;
 - Goal 102B actual Unity editor source-format trust audit is BLOCKED because raw HEAD target-file bytes are already multi-line/readable, so the requested one-line HEAD-before proof cannot be produced honestly; it supersedes Goal102A source-format trust until a corrected actual-before proof exists;
 - Goal 103 offline geoworld play-mode travel preview evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets handoff, standalone play-mode travel controller/state/chunk-visibility scripts, manual Unity Editor launch helper, simulated proof, workspace inspection and Goal102B false-positive proceed closure while keeping Goal102B BLOCKED;
+- Goal 104 offline geoworld interactive travel preview evidence with a BCL-only Application seam, metadata-only Unity StreamingAssets handoff, standalone interactive travel controller/player-motor/boundary-prefetch-state scripts, manual Unity Editor launch helper, simulated movement/boundary/prefetch proof and workspace inspection;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1762,14 +1764,35 @@ dependency, LFZ source/archive, live network fetching, raw geodata dump, binary/
 final art, atlas or Unity scene/prefab/settings/packages/build-settings files. Goal 103, Goal 102B, Goal 102A, Goal 102,
 Goal 101, Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
 
+### Goal 104: Offline Geoworld Interactive Travel Preview
+
+Goal 104 is produced for review with `offline_geoworld_interactive_travel_preview_verification required`,
+`accepted=false` and `implementationStatus=GREEN`.
+
+Goal 104 writes deterministic evidence under
+`.llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/`. It consumes real Goal103 play-mode travel
+evidence by repository-relative path, mirrors five metadata-only interactive payload files into
+`unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/`, adds standalone interactive
+travel controller/player-motor/boundary-prefetch-state scripts and a manual Unity Editor launch helper, and surfaces the
+`offline_geoworld_interactive_travel` group in the existing Visual World Stream Preview Workspace.
+
+The evidence records `movementSampleCount=6`, `boundaryCrossingCount=2`, `prefetchPlanCount=2`, `objectCount=18`,
+`unityScriptsReady=true`, `editorWindowReady=true`, `simulatedExecutionProofPassed=true`, `negativeProofPassed=true`,
+`workspaceBindingPassed=true`, `alphaRuntimeBootstrapUnchanged=true` and `qualityGatePassed=true`.
+
+Goal 104 changes no Runtime, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file,
+dependency, LFZ source/archive, live network fetching, raw geodata dump, binary/raster media, prompt-dump, final gameplay,
+final art, atlas or Unity scene/prefab/settings/packages/build-settings files. Goal 104, Goal 103, Goal 102B, Goal 102A,
+Goal 102, Goal 101, Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-offline_geoworld_playmode_travel_preview_verification
+offline_geoworld_interactive_travel_preview_verification
 ```
 
 Status:
 
 ```text
-goal_103_offline_geoworld_playmode_travel_preview_produced_for_review
+goal_104_offline_geoworld_interactive_travel_preview_produced_for_review
 ```

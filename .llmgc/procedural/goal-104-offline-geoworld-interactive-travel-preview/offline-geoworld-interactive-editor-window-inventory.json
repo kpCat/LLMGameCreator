@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "offline_geoworld_interactive_editor_window_inventory_v1",
+  "goalId": "goal_104_offline_geoworld_interactive_travel_preview",
+  "passed": true,
+  "editorWindowScriptExists": true,
+  "menuItemMarkerPresent": true,
+  "streamingAssetsPathMarkerPresent": true,
+  "goal104PayloadPathMarkerPresent": true,
+  "createControllerMethodPresent": true,
+  "clearControllerMethodPresent": true,
+  "payloadReadinessUiPresent": true,
+  "manualButtonOnly": true,
+  "hasNoProviderNetworkMarkers": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoScenePrefabSettingsMutationMarkers": true,
+  "hasNoAutoRunImportMarker": true,
+  "sourceFile": {
+    "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractiveTravelWindow.cs",
+    "exists": true,
+    "sha256": "e98dbf737eab32ec50995d66f3d5c68b7971c0de672160291b80c7d31384281e",
+    "lineCount": 114,
+    "hasNoProviderNetworkMarkers": true,
+    "doesNotReferenceAlphaRuntimeBootstrap": true,
+    "hasNoScenePrefabSettingsMutationMarkers": true
+  },
+  "diagnostics": []
+}

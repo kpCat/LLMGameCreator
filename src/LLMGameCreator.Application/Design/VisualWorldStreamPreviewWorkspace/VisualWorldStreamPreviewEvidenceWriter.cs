@@ -207,6 +207,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var unityPreview = BuildGoal101UnityPreviewQuality(groups, proofs);
         var unityEditorPreview = BuildGoal102UnityEditorPreviewQuality(groups, proofs);
         var playModeTravel = BuildGoal103PlayModeTravelQuality(groups, proofs);
+        var interactiveTravel = BuildGoal104InteractiveTravelQuality(groups, proofs);
         var requiredGroups = new[]
         {
             "microtiles",
@@ -220,7 +221,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "offline_geoworld_handoff",
             "offline_geoworld_unity_preview",
             "offline_geoworld_unity_editor_preview",
-            "offline_geoworld_playmode_travel"
+            "offline_geoworld_playmode_travel",
+            "offline_geoworld_interactive_travel"
         };
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -381,6 +383,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal101UnityPreviewQualityDiagnostics(unityPreview, diagnostics);
         AddGoal102UnityEditorPreviewQualityDiagnostics(unityEditorPreview, diagnostics);
         AddGoal103PlayModeTravelQualityDiagnostics(playModeTravel, diagnostics);
+        AddGoal104InteractiveTravelQualityDiagnostics(interactiveTravel, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -418,6 +421,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddIfFalse(
             binding.PageBindDisplaysOfflineGeoworldPlayModeTravel,
             "goal103.quality.winforms_offline_geoworld_playmode_travel_binding",
+            "winformsBinding",
+            diagnostics);
+        AddIfFalse(
+            binding.PageBindDisplaysOfflineGeoworldInteractiveTravel,
+            "goal104.quality.winforms_offline_geoworld_interactive_travel_binding",
             "winformsBinding",
             diagnostics);
         AddIfFalse(sourceHealth.Passed, "goal092.quality.source_health", "sourceHealth", diagnostics);
@@ -553,6 +561,31 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 playModeTravel.AlphaRuntimeBootstrapUnchanged,
             OfflineGeoworldPlayModeTravelQualityGatePassed = playModeTravel.QualityGatePassed,
             Goal103FilesDiscoveredByRelativePaths = playModeTravel.RelativePaths,
+            OfflineGeoworldInteractiveTravelGroupPresent = interactiveTravel.GroupPresent,
+            OfflineGeoworldInteractiveTravelMovementSampleCount =
+                interactiveTravel.MovementSampleCount,
+            OfflineGeoworldInteractiveTravelBoundaryCrossingCount =
+                interactiveTravel.BoundaryCrossingCount,
+            OfflineGeoworldInteractiveTravelObjectCount = interactiveTravel.ObjectCount,
+            OfflineGeoworldInteractiveTravelActiveChunkCounts =
+                interactiveTravel.ActiveChunkCounts,
+            OfflineGeoworldInteractiveTravelBoundaryPrefetchCounts =
+                interactiveTravel.BoundaryPrefetchCounts,
+            OfflineGeoworldInteractiveTravelExpectedVisibleObjectCounts =
+                interactiveTravel.ExpectedVisibleObjectCounts,
+            OfflineGeoworldInteractiveTravelUnityScriptsReady =
+                interactiveTravel.UnityScriptsReady,
+            OfflineGeoworldInteractiveTravelEditorWindowReady =
+                interactiveTravel.EditorWindowReady,
+            OfflineGeoworldInteractiveTravelSimulatedExecutionProofPassed =
+                interactiveTravel.SimulatedExecutionProofPassed,
+            OfflineGeoworldInteractiveTravelNegativeProofPassed =
+                interactiveTravel.NegativeProofPassed,
+            OfflineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged =
+                interactiveTravel.AlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldInteractiveTravelQualityGatePassed =
+                interactiveTravel.QualityGatePassed,
+            Goal104FilesDiscoveredByRelativePaths = interactiveTravel.RelativePaths,
             RequiredArtifactGroupsPresent = requiredArtifactGroupsPresent,
             Goal091StreamWindowsVisible = goal091StreamEntries >= 4,
             ProofStatusPassed = proofStatusPassed,
@@ -570,6 +603,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 binding.PageBindDisplaysOfflineGeoworldUnityEditorPreview,
             WinFormsOfflineGeoworldPlayModeTravelBindingReal =
                 binding.PageBindDisplaysOfflineGeoworldPlayModeTravel,
+            WinFormsOfflineGeoworldInteractiveTravelBindingReal =
+                binding.PageBindDisplaysOfflineGeoworldInteractiveTravel,
             SourceHealthPassed = sourceHealth.Passed,
             ScannedCSharpFileCount = sourceHealth.ScannedCSharpFileCount,
             MaxLogicalLineCount = sourceHealth.MaxLogicalLineCount,
@@ -582,58 +617,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             RawPhysicalOneLineSourceCount = sourceHealth.RawPhysicalOneLineSourceCount,
             MinifiedSourceCount = sourceHealth.MinifiedSourceCount,
             WorkspaceServiceLogicalLineCount = sourceHealth.WorkspaceServiceLogicalLineCount,
-            ExpectedChangedPathPrefixes =
-            [
-                "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
-                "src/LLMGameCreator.Application/Design/OfflineGeoworldWorldSourceGraph/",
-                "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
-                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldWorldSourceGraph/",
-                "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
-                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldWorldSourceGraphProductSmokeTests.cs",
-                "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
-                ".llmgc/procedural/goal-099-offline-geoworld-worldsourcegraph-streaming/",
-                ".llmgc/procedural/goal-096-unity-handoff-inspector-probe-readiness/",
-                "docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/",
-                "docs/agent-tasks/goal-096-unity-handoff-inspector-probe-readiness/",
-                "docs/agent-tasks/goal-100-offline-geoworld-visual-cache-unity-handoff/",
-                "src/LLMGameCreator.Application/Design/OfflineGeoworldVisualCacheUnityHandoff/",
-                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldVisualCacheUnityHandoff/",
-                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldVisualCacheUnityHandoffProductSmokeTests.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldHandoffProbe.cs",
-                "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/",
-                ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/",
-                "docs/agent-tasks/goal-101-offline-geoworld-unity-preview-runner/",
-                "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityPreviewRunner/",
-                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityPreviewRunner/",
-                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldUnityPreviewRunnerProductSmokeTests.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewRunner.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewPrimitiveFactory.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewTravelWindow.cs",
-                "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal101/",
-                ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/",
-                "docs/agent-tasks/goal-102-offline-geoworld-unity-editor-preview-tool/",
-                "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/",
-                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityEditorPreviewTool/",
-                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldUnityEditorPreviewToolProductSmokeTests.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs",
-                ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/",
-                "docs/agent-tasks/goal-103-offline-geoworld-playmode-travel-preview/",
-                "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityPlayModeTravelPreview/",
-                "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityPlayModeTravelPreview/",
-                "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldUnityPlayModeTravelPreviewProductSmokeTests.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelController.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeTravelState.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPlayModeChunkVisibility.cs",
-                "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPlayModeTravelWindow.cs",
-                "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/",
-                ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/",
-                "docs/CURRENT_GENERATOR_STATE.md",
-                "docs/CURRENT_GENERATOR_STATE.json",
-                "docs/CONTEXT_INDEX.md",
-                "docs/FULL_GENERATOR_GOAL_QUEUE.md",
-                "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
-                ".devflow/artifact-scope/artifact-scope-policy.json"
-            ],
+            ExpectedChangedPathPrefixes = BuildWorkspaceExpectedChangedPathPrefixes(),
             Diagnostics = diagnostics
                 .GroupBy(item => item.Code + "|" + item.Target + "|" + item.Message, StringComparer.Ordinal)
                 .Select(group => group.First())

@@ -77,7 +77,8 @@
     ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/",
     ".llmgc/procedural/goal-102a-unity-editor-source-format-guard/",
     ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/",
-    ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/"
+    ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/",
+    ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1410,6 +1411,34 @@
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityPlayModeTravelPreview/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal103/"
+      ]
+    },
+    {
+      "scenario": "goal-104-offline-geoworld-interactive-travel-preview",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldInteractiveTravelPreviewProductSmokeTests.cs",
+        "tests/LLMGameCreator.Tests/ProductSmoke/VisualWorldStreamPreviewWorkspaceProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractiveTravelWindow.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldBoundaryPrefetchState.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractiveTravelController.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldPreviewPlayerMotor.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/",
+        "docs/agent-tasks/goal-104-offline-geoworld-interactive-travel-preview/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldInteractiveTravelPreview/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldInteractiveTravelPreview/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
+        "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/"
       ]
     }
   ]
