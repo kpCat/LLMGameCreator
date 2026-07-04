@@ -93,6 +93,7 @@ offline_geoworld_worldsourcegraph_streaming_verification required
 offline_geoworld_visual_cache_unity_handoff_verification required
 offline_geoworld_unity_preview_runner_verification required
 offline_geoworld_unity_editor_preview_tool_verification required
+unity_editor_source_format_guard_verification required
 ```
 
 Current capabilities:
@@ -123,6 +124,7 @@ Current capabilities:
 - BCL-only offline geoworld visual cache Unity handoff evidence with 3 metadata-only packages, 18 compact visual cache records over 10 Goal 099 feature kinds, 5 Unity StreamingAssets payload files, standalone probe/read proof and Visual World Stream Preview Workspace integration;
 - BCL-only offline geoworld Unity preview runner evidence with 18 metadata-only preview commands over 10 command kinds, 5 Goal101 Unity StreamingAssets payload files, standalone Unity Alpha preview runner scripts, 4 travel-window demo steps, simulated command proof and Visual World Stream Preview Workspace integration;
 - Unity Editor-only offline geoworld preview tool with manual Goal101 payload refresh/create/clear actions, simulated action proof, clear cleanup proof, negative proof, quality scan and Visual World Stream Preview Workspace integration;
+- raw-byte Unity Editor source-format guard backstop for Goal 102, with synthetic before/minified editor-window proof, after scan over Goal102 Unity/Application sources, negative proof and unchanged AlphaRuntimeBootstrap evidence;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1691,14 +1693,33 @@ Lua/generator-library, project-file, dependency, binary/raster media, prompt-dum
 Unity scene/prefab/settings/packages/build-settings changes or live Unity gameplay rendering. Goal 102, Goal 101,
 Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
 
+### Goal 102A: Unity Editor Source Format Guard
+
+Goal 102A is produced for review with `unity_editor_source_format_guard_verification required`,
+`accepted=false` and `implementationStatus=GREEN`. It repairs the post-Goal102 source-health backstop by adding a
+raw-byte scanner/evidence path under `src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/`.
+
+Goal 102A writes deterministic evidence under
+`.llmgc/procedural/goal-102a-unity-editor-source-format-guard/`. It proves the audited one-line/minified
+`OfflineGeoworldPreviewWindow.cs` failure class with a synthetic before sample, verifies the current after scan over
+Goal102 Unity editor/runner scripts, the Goal102 Application namespace and the Visual World Stream Preview Workspace
+files, rejects zero-LF, CR-only, one-line multi-statement, extreme-line, fake-read, AlphaRuntimeBootstrap mutation and
+Unity scene/project-setting mutation cases, and keeps `AlphaRuntimeBootstrap.cs` unchanged with hash
+`f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce` and line count 3672.
+
+Goal 102A is source-health repair evidence only. It changes no behavior, Runtime, public schema, provider/LLM/RAG/media
+execution, Lua/generator-library, project-file, dependency, StreamingAssets payload, binary/raster media, prompt-dump,
+final gameplay, final art, atlas or Unity scene/prefab/settings/packages/build-settings files. Goal 102A, Goal 102,
+Goal 101, Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-offline_geoworld_unity_editor_preview_tool_verification
+unity_editor_source_format_guard_verification
 ```
 
 Status:
 
 ```text
-goal_102_offline_geoworld_unity_editor_preview_tool_produced_for_review
+goal_102a_unity_editor_source_format_guard_produced_for_review
 ```

@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-03T23:41:02Z",
+    "updated_at_utc":  "2026-07-04T00:37:23Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 102 offline geoworld Unity editor preview tool produced for review",
-    "gate_status":  "offline_geoworld_unity_editor_preview_tool_verification",
+    "current_phase_title":  "Goal 102A Unity editor source format guard produced for review",
+    "gate_status":  "unity_editor_source_format_guard_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 102 Offline Geoworld Unity Editor Preview Tool is produced for review: offline_geoworld_unity_editor_preview_tool_verification required, accepted=false. It consumes real Goal 101 metadata-only offline geoworld Unity preview runner payloads, adds a Unity Editor-only window for manual payload refresh/create/clear actions, surfaces the editor preview status in the existing Visual World Stream Preview Workspace and writes compact proof artifacts. Evidence is under .llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/. Goal 102 changes no LFZ archive/source, live geodata ingestion, network/provider adapter, public tile scraping, Runtime, public GamePackage schema, Lua, generator-library, project files, dependencies, binary/raster media, raw geodata dump, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt-output work. Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 102 offline geoworld Unity editor preview tool evidence. Goal 102 is an editor-only inspection tool and Application/WinForms evidence surface over Goal 101 metadata payloads; it represents manual Unity Editor preview readiness, not final Runtime consumption, full gameplay, real geodata fetching, final art, atlas, scene/prefab production or live Unity gameplay rendering. Goal 102 remains accepted=false until explicit user review accepts it, and Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain accepted=false.",
-    "recommended_next_decision":  "Review Goal 102 offline geoworld Unity editor preview tool evidence and only mark offline_geoworld_unity_editor_preview_tool_verification passed after explicit user acceptance; do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final art, atlas, scene/prefab or media work from this handoff.",
+    "active_manual_gate":  "Goal 102A Unity Editor Source Format Guard is produced for review: unity_editor_source_format_guard_verification required, accepted=false. It repairs the post-Goal102 source-health backstop by adding a reusable raw-byte scanner, synthetic before/minified proof for OfflineGeoworldPreviewWindow.cs, after scan over Goal102 Unity/Application sources, negative proof and compact evidence under .llmgc/procedural/goal-102a-unity-editor-source-format-guard/. Goal 102A changes no behavior, Runtime, public GamePackage schema, Lua, generator-library, project files, dependencies, StreamingAssets payloads, binary/raster media, raw geodata dump, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt-output work. Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 102A Unity editor source-format guard evidence. Goal 102A is a source-health repair/backstop over the Goal 102 Unity Editor preview tool scope; it represents raw source-format guard readiness, not acceptance of Goal 102 and not final Runtime consumption, full gameplay, real geodata fetching, final art, atlas, scene/prefab production or live Unity gameplay rendering. Goal 102A remains accepted=false until explicit user review accepts it, and Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain accepted=false.",
+    "recommended_next_decision":  "Review Goal 102A Unity editor source-format guard evidence and only mark unity_editor_source_format_guard_verification passed after explicit user acceptance; do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final art, atlas, scene/prefab or media work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "unity_editor_source_format_guard_verification",
                                                         "offline_geoworld_unity_editor_preview_tool_verification",
                                                         "offline_geoworld_unity_preview_runner_verification",
                                                         "offline_geoworld_visual_cache_unity_handoff_verification",
@@ -144,7 +145,8 @@
                              "goal_099_manual_gate":  "offline_geoworld_worldsourcegraph_streaming_verification",
                              "goal_100_manual_gate":  "offline_geoworld_visual_cache_unity_handoff_verification",
                              "goal_101_manual_gate":  "offline_geoworld_unity_preview_runner_verification",
-                             "goal_102_manual_gate":  "offline_geoworld_unity_editor_preview_tool_verification"
+                             "goal_102_manual_gate":  "offline_geoworld_unity_editor_preview_tool_verification",
+                             "goal_102a_manual_gate":  "unity_editor_source_format_guard_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -435,6 +437,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "unity_editor_source_format_guard_verification",
+                                          "goal_102a_unity_editor_source_format_guard",
+                                          "manual_review_goal_102a_unity_editor_source_format_guard",
                                           "offline_geoworld_unity_editor_preview_tool_verification",
                                           "goal_102_offline_geoworld_unity_editor_preview_tool",
                                           "manual_review_goal_102_offline_geoworld_unity_editor_preview_tool",
@@ -524,10 +529,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "offline_geoworld_unity_editor_preview_tool_verification",
-    "recommended_next_work_item_title":  "Review Goal 102 offline geoworld Unity editor preview tool",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-102-offline-geoworld-unity-editor-preview-tool/GOAL.md",
+    "recommended_next_work_item":  "unity_editor_source_format_guard_verification",
+    "recommended_next_work_item_title":  "Review Goal 102A Unity editor source format guard",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-102a-unity-editor-source-format-guard/GOAL.md",
     "candidate_product_vertical_slices":  [
+                                              "Review Goal 102A Unity editor source-format guard evidence",
+                                              "Keep Goal 102A accepted=false until user review accepts it",
+                                              "Use Goal 102A raw-byte source-format scanner and evidence only as a source-health backstop; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
                                               "Review Goal 102 offline geoworld Unity editor preview tool evidence",
                                               "Keep Goal 102 accepted=false until user review accepts it",
                                               "Use Goal 102 Unity Editor-only preview window, simulated action proofs and workspace inspection only as future review handoff input; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
@@ -589,6 +597,7 @@
                                                   "docs/CONTEXT_INDEX.md",
                                                   "docs/CURRENT_GENERATOR_STATE.md",
                                                   "docs/VALIDATION_PIPELINE.md",
+                                                  "docs/agent-tasks/goal-102a-unity-editor-source-format-guard/GOAL.md",
                                                   "docs/agent-tasks/goal-099-offline-geoworld-worldsourcegraph-streaming/GOAL.md",
                                                   "docs/agent-tasks/goal-098-geoworld-source-adapter-streaming-contract/GOAL.md",
                                                   "docs/context/LFZ_ARCHIVE_ANALYSIS_MANIFEST.md",
@@ -2418,5 +2427,20 @@
                                                                                             "Goal 102 reads no LFZ archive, copies no LFZ source, adds no live network fetching, map tile scraping, raw geodata dumps, Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file change, dependency change, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings file mutation or prompt dump."
                                                                                         ],
                                                                     "next_action":  "review_goal_102_offline_geoworld_unity_editor_preview_tool"
-                                                                }
+                                                                },
+    "unity_editor_source_format_guard_verification":  {
+                                                          "status":  "produced_for_review",
+                                                          "accepted":  false,
+                                                          "evidence_source":  "goal_102a_unity_editor_source_format_guard",
+                                                          "observed_result":  [
+                                                                                  "Goal 102A produces Unity editor source-format guard evidence under .llmgc/procedural/goal-102a-unity-editor-source-format-guard with accepted=false.",
+                                                                                  "implementationStatus=GREEN, beforeEditorWindowMalformedDetected=true, afterSourceFormatPassed=true, negativeProofPassed=true, alphaRuntimeBootstrapUnchanged=true and qualityGatePassed=true.",
+                                                                                  "The BCL-only Application scanner lives under src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/ and scans raw bytes for Goal102 Unity editor/runner scripts, the Goal102 Application namespace and the Visual World Stream Preview Workspace source files.",
+                                                                                  "The before proof models the audited one-line/minified OfflineGeoworldPreviewWindow.cs failure class with zero LF bytes, one physical line, multiple statements and minified markers; the after scan verifies the current editor window source is multi-line and all scanned Goal102 relevant C# files pass.",
+                                                                                  "The negative proof rejects one-line multi-statement C#, zero-LF C#, CR-only C#, extreme physical line length, fake pass without byte reads, AlphaRuntimeBootstrap mutation and Unity scene/project-setting mutation markers.",
+                                                                                  "AlphaRuntimeBootstrap.cs remains unchanged with hash f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce and line count 3672.",
+                                                                                  "Goal 102A changes no behavior, Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file/dependency change, StreamingAssets payload, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings file mutation or prompt dump."
+                                                                              ],
+                                                          "next_action":  "review_goal_102a_unity_editor_source_format_guard"
+                                                      }
 }

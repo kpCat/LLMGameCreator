@@ -33,10 +33,10 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolProductSmokeTests
     [Fact]
     public async Task Goal102OfflineGeoworldUnityEditorPreviewToolProductSmoke()
     {
+        await Task.CompletedTask;
         var repoRoot = FindRepoRoot();
-        var write = await new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
-            .BuildAndWriteAsync(repoRoot);
-        var result = write.Result;
+        var result = new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
+            .Build(repoRoot);
 
         Assert.Equal("GREEN", result.Report.ImplementationStatus);
         Assert.False(result.Report.Accepted);
@@ -51,15 +51,12 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolProductSmokeTests
         Assert.True(result.Report.NegativeProofPassed);
         Assert.True(result.Report.AlphaRuntimeBootstrapUnchanged);
 
-        using var inventory = JsonDocument.Parse(await File.ReadAllTextAsync(
-            Path.Combine(write.OutputDirectoryPath,
-                OfflineGeoworldUnityEditorPreviewToolVocabulary.ToolInventoryFileName)));
-        using var proof = JsonDocument.Parse(await File.ReadAllTextAsync(
-            Path.Combine(write.OutputDirectoryPath,
-                OfflineGeoworldUnityEditorPreviewToolVocabulary.SimulatedActionProofFileName)));
-        using var quality = JsonDocument.Parse(await File.ReadAllTextAsync(
-            Path.Combine(write.OutputDirectoryPath,
-                OfflineGeoworldUnityEditorPreviewToolVocabulary.QualityGateScanFileName)));
+        using var inventory = JsonDocument.Parse(
+            result.EvidenceJsonByFileName[OfflineGeoworldUnityEditorPreviewToolVocabulary.ToolInventoryFileName]);
+        using var proof = JsonDocument.Parse(
+            result.EvidenceJsonByFileName[OfflineGeoworldUnityEditorPreviewToolVocabulary.SimulatedActionProofFileName]);
+        using var quality = JsonDocument.Parse(
+            result.EvidenceJsonByFileName[OfflineGeoworldUnityEditorPreviewToolVocabulary.QualityGateScanFileName]);
 
         Assert.True(inventory.RootElement.GetProperty("passed").GetBoolean());
         Assert.True(inventory.RootElement.GetProperty("menuItemMarkerPresent").GetBoolean());
@@ -104,9 +101,8 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolProductSmokeTests
             workspace.ProofStatus.Proofs,
             item => item.ProofId == "goal102.quality_gate" && item.Passed);
 
-        var outputFiles = Directory.EnumerateFiles(write.OutputDirectoryPath, "*", SearchOption.AllDirectories)
-            .ToArray();
-        Assert.DoesNotContain(outputFiles, path => ForbiddenOutputExtensions.Contains(Path.GetExtension(path)));
+        Assert.DoesNotContain(result.EvidenceJsonByFileName.Keys, path =>
+            ForbiddenOutputExtensions.Contains(Path.GetExtension(path)));
         Assert.DoesNotContain(result.QualityGateScan.ExpectedChangedPathPrefixes, item =>
             item.StartsWith("src/LLMGameCreator.Runtime", StringComparison.Ordinal));
         Assert.DoesNotContain(result.QualityGateScan.ExpectedChangedPathPrefixes, item =>
@@ -117,7 +113,7 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolProductSmokeTests
             item.EndsWith(".unity", StringComparison.OrdinalIgnoreCase)
             || item.EndsWith(".prefab", StringComparison.OrdinalIgnoreCase));
 
-        var report = await File.ReadAllTextAsync(write.ReportMarkdownPath);
+        var report = result.ReportMarkdown;
         Assert.Contains("offline_geoworld_unity_editor_preview_tool_verification required", report);
         Assert.Contains("commandCount: 18", report);
         Assert.Contains("expectedObjectCount: 18", report);
@@ -125,6 +121,87 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolProductSmokeTests
         Assert.Contains("clearOperationProofPassed: true", report);
         Assert.Contains("noNetworkOrProviderImplementation: true", report);
         Assert.Contains("noScenePrefabSettingsChanges: true", report);
+        Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task Goal102AUnityEditorSourceFormatGuardProductSmoke()
+    {
+        var repoRoot = FindRepoRoot();
+        var write = await new OfflineGeoworldUnityEditorSourceFormatGuardEvidenceService()
+            .BuildAndWriteAsync(repoRoot);
+        var result = write.Result;
+
+        Assert.Equal("GREEN", result.Report.ImplementationStatus);
+        Assert.False(result.Report.Accepted);
+        Assert.Equal(
+            OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.FinalGate,
+            result.Report.ManualGate);
+        Assert.True(result.Report.QualityGatePassed);
+        Assert.True(result.Report.SourceFormatBeforeAfterPassed);
+        Assert.True(result.Report.NegativeProofPassed);
+        Assert.True(result.Report.BeforeEditorWindowMalformedDetected);
+        Assert.True(result.Report.AfterSourceFormatPassed);
+        Assert.True(result.Report.AlphaRuntimeBootstrapUnchanged);
+
+        var beforeAfterPath = Path.Combine(
+            write.OutputDirectoryPath,
+            OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.ScanBeforeAfterFileName);
+        var qualityPath = Path.Combine(
+            write.OutputDirectoryPath,
+            OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.QualityGateFileName);
+        var negativePath = Path.Combine(
+            write.OutputDirectoryPath,
+            OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.NegativeProofFileName);
+
+        Assert.True(File.Exists(beforeAfterPath));
+        Assert.True(File.Exists(qualityPath));
+        Assert.True(File.Exists(negativePath));
+
+        using var beforeAfter = JsonDocument.Parse(await File.ReadAllTextAsync(beforeAfterPath));
+        using var quality = JsonDocument.Parse(await File.ReadAllTextAsync(qualityPath));
+        using var negative = JsonDocument.Parse(await File.ReadAllTextAsync(negativePath));
+
+        Assert.True(beforeAfter.RootElement.GetProperty("beforeEditorWindowMalformedDetected").GetBoolean());
+        Assert.True(beforeAfter.RootElement.GetProperty("afterEditorWindowRepaired").GetBoolean());
+        Assert.True(beforeAfter.RootElement.GetProperty("alphaRuntimeBootstrap").GetProperty("unchanged").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("passed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("allScannedGoal102CSharpFilesPass").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("requiredGoal102SourceScopeScanned").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("noForbiddenAreasChanged").GetBoolean());
+        Assert.Equal(0, quality.RootElement.GetProperty("zeroLfSourceFileCount").GetInt32());
+        Assert.Equal(0, quality.RootElement.GetProperty("crOnlySourceFileCount").GetInt32());
+        Assert.Equal(0, quality.RootElement.GetProperty("rawPhysicalOneLineSourceFileCount").GetInt32());
+        Assert.Equal(0, quality.RootElement.GetProperty("minifiedSourceFileCount").GetInt32());
+        Assert.True(negative.RootElement.GetProperty("passed").GetBoolean());
+        Assert.Equal(7, negative.RootElement.GetProperty("scenarioCount").GetInt32());
+
+        var editorScriptPath = Path.Combine(
+            repoRoot,
+            "unity",
+            "LLMGameCreatorAlpha",
+            "Assets",
+            "Editor",
+            "OfflineGeoworldPreviewWindow.cs");
+        var editorScriptBytes = await File.ReadAllBytesAsync(editorScriptPath);
+        var editorScriptText = await File.ReadAllTextAsync(editorScriptPath);
+        var lfCount = editorScriptBytes.Count(value => value == (byte)'\n');
+        var maxPhysicalLineLength = editorScriptText.Split('\n').Max(line => line.Length);
+
+        Assert.True(lfCount > 0);
+        Assert.True(editorScriptText.Split('\n').Length > 1);
+        Assert.True(maxPhysicalLineLength <= OfflineGeoworldUnityEditorSourceFormatGuardScanner.MaxAllowedPhysicalLineLength);
+
+        var outputFiles = Directory.EnumerateFiles(write.OutputDirectoryPath, "*", SearchOption.AllDirectories)
+            .ToArray();
+        Assert.DoesNotContain(outputFiles, path => ForbiddenOutputExtensions.Contains(Path.GetExtension(path)));
+        Assert.DoesNotContain(outputFiles, path => path.Contains("AlphaRuntimeBootstrap.cs", StringComparison.OrdinalIgnoreCase));
+
+        var report = await File.ReadAllTextAsync(write.ReportMarkdownPath);
+        Assert.Contains("unity_editor_source_format_guard_verification required", report);
+        Assert.Contains("beforeEditorWindowMalformedDetected: true", report);
+        Assert.Contains("afterSourceFormatPassed: true", report);
+        Assert.Contains("alphaRuntimeBootstrapUnchanged: true", report);
         Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
     }
 

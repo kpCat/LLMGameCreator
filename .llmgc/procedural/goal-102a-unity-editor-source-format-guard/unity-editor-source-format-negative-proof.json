@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "unity_editor_source_format_negative_proof_v1",
+  "goalId": "goal_102a_unity_editor_source_format_guard",
+  "accepted": false,
+  "passed": true,
+  "scenarioCount": 7,
+  "rejectedCount": 7,
+  "scenarios": [
+    {
+      "scenarioId": "one_line_multi_statement_csharp_file",
+      "causalMutation": "C# file collapsed onto one raw physical line with multiple statements",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102a.negative.one_line_multi_statement",
+          "target": "one_line_multi_statement_csharp_file",
+          "message": "Goal102A source-format guard rejected the mutated source-health input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "zero_lf_csharp_file",
+      "causalMutation": "C# source contains no LF byte separators",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102a.negative.zero_lf",
+          "target": "zero_lf_csharp_file",
+          "message": "Goal102A source-format guard rejected the mutated source-health input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "cr_only_csharp_file",
+      "causalMutation": "C# source uses CR-only separators",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102a.negative.cr_only",
+          "target": "cr_only_csharp_file",
+          "message": "Goal102A source-format guard rejected the mutated source-health input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "extreme_physical_line_length",
+      "causalMutation": "C# source contains a raw physical line over 500 bytes",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102a.negative.extreme_line",
+          "target": "extreme_physical_line_length",
+          "message": "Goal102A source-format guard rejected the mutated source-health input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_pass_without_reading_file_bytes",
+      "causalMutation": "scan result claims pass without byte reads",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102a.negative.fake_pass",
+          "target": "fake_pass_without_reading_file_bytes",
+          "message": "Goal102A source-format guard rejected the mutated source-health input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "attempt_to_modify_alpha_runtime_bootstrap",
+      "causalMutation": "AlphaRuntimeBootstrap hash differs from expected immutable baseline",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102a.negative.alpha_bootstrap_changed",
+          "target": "attempt_to_modify_alpha_runtime_bootstrap",
+          "message": "Goal102A source-format guard rejected the mutated source-health input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_scene_project_setting_changed_marker",
+      "causalMutation": "Unity scene, prefab, ProjectSettings or build-settings mutation marker appears",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102a.negative.scene_project_marker",
+          "target": "unity_scene_project_setting_changed_marker",
+          "message": "Goal102A source-format guard rejected the mutated source-health input."
+        }
+      ]
+    }
+  ]
+}

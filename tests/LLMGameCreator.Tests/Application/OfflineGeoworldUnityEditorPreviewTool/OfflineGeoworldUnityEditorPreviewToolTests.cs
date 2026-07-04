@@ -1,3 +1,4 @@
+using System.Text;
 using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using Xunit;
@@ -9,9 +10,9 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolTests
     [Fact]
     public async Task ServiceBuildsEditorToolReadinessEvidenceFromGoal101Payload()
     {
-        var write = await new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
-            .BuildAndWriteAsync(ProjectRoot());
-        var result = write.Result;
+        await Task.CompletedTask;
+        var result = new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
+            .Build(ProjectRoot());
 
         Assert.Equal("GREEN", result.Report.ImplementationStatus);
         Assert.False(result.Report.Accepted);
@@ -36,15 +37,22 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolTests
 
         foreach (var fileName in OfflineGeoworldUnityEditorPreviewToolVocabulary.RequiredEvidenceFileNames)
         {
-            Assert.True(File.Exists(Path.Combine(write.OutputDirectoryPath, fileName)), fileName);
+            if (fileName == OfflineGeoworldUnityEditorPreviewToolVocabulary.ReportMarkdownFileName)
+            {
+                Assert.False(string.IsNullOrWhiteSpace(result.ReportMarkdown));
+                continue;
+            }
+
+            Assert.True(result.EvidenceJsonByFileName.ContainsKey(fileName), fileName);
         }
     }
 
     [Fact]
     public async Task SimulatedActionProofAndNegativeProofCoverRequiredRisks()
     {
-        var result = (await new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
-            .BuildAndWriteAsync(ProjectRoot())).Result;
+        await Task.CompletedTask;
+        var result = new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
+            .Build(ProjectRoot());
 
         Assert.True(result.SimulatedActionProof.PayloadReadAttempted);
         Assert.True(result.SimulatedActionProof.ManifestRead);
@@ -85,8 +93,9 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolTests
     [Fact]
     public async Task WorkspaceGroupSurfacesEditorToolReadiness()
     {
-        await new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
-            .BuildAndWriteAsync(ProjectRoot());
+        await Task.CompletedTask;
+        new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
+            .Build(ProjectRoot());
         var result = new VisualWorldStreamPreviewWorkspaceService().Build(ProjectRoot());
         var group = Assert.Single(
             result.Catalog.Groups,
@@ -128,15 +137,106 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolTests
     public async Task EvidenceIsDeterministicAndSourceHealthClean()
     {
         var service = new OfflineGeoworldUnityEditorPreviewToolEvidenceService();
+        await Task.CompletedTask;
+        var first = service.Build(ProjectRoot());
+        var second = service.Build(ProjectRoot());
+
+        Assert.Equal(first.EvidenceJsonByFileName, second.EvidenceJsonByFileName);
+        Assert.Equal(first.Report.DeterministicReportHash, second.Report.DeterministicReportHash);
+        Assert.True(second.QualityGateScan.Passed);
+        Assert.Equal(0, second.QualityGateScan.FilesOver1000LogicalLinesCount);
+        Assert.Equal(0, second.QualityGateScan.FilesOver700LogicalLinesCount);
+        Assert.True(second.QualityGateScan.MaxLogicalLineCount <= 700);
+    }
+
+    [Fact]
+    public void SourceFormatGuardRejectsSyntheticOneLineCSharp()
+    {
+        var bytes = Encoding.UTF8.GetBytes(
+            "using System; using UnityEngine; namespace Broken; public sealed class BrokenWindow { public void A() { } public void B() { } }");
+        var scan = OfflineGeoworldUnityEditorSourceFormatGuardScanner.AnalyzeSourceBytes(
+            "synthetic/BrokenWindow.cs",
+            bytes);
+
+        Assert.True(scan.ZeroLfSource);
+        Assert.True(scan.OnePhysicalLineMultiStatementSource);
+        Assert.True(scan.MinifiedSourceCandidate);
+        Assert.False(scan.Passed);
+        Assert.True(OfflineGeoworldUnityEditorSourceFormatGuardScanner.RejectsSuspiciousRawSourceBytes(bytes));
+    }
+
+    [Fact]
+    public void SourceFormatGuardRejectsZeroLfCrOnlyAndExtremeLine()
+    {
+        var zeroLf = Encoding.UTF8.GetBytes("public sealed class BrokenZeroLf { public void Run() { } }");
+        var crOnly = Encoding.UTF8.GetBytes("public sealed class BrokenCrOnly\r{\r    public void Run() { }\r}\r");
+        var extreme = Encoding.UTF8.GetBytes(
+            "namespace Broken;\npublic sealed class ExtremeLine\n{\n    private const string Value = \""
+            + new string('x', 520)
+            + "\";\n}\n");
+
+        Assert.True(OfflineGeoworldUnityEditorSourceFormatGuardScanner
+            .AnalyzeSourceBytes("synthetic/ZeroLf.cs", zeroLf)
+            .ZeroLfSource);
+        Assert.True(OfflineGeoworldUnityEditorSourceFormatGuardScanner
+            .AnalyzeSourceBytes("synthetic/CrOnly.cs", crOnly)
+            .CrOnlySource);
+        Assert.True(OfflineGeoworldUnityEditorSourceFormatGuardScanner
+            .AnalyzeSourceBytes("synthetic/Extreme.cs", extreme)
+            .RawPhysicalLinesOver500Count > 0);
+        Assert.True(OfflineGeoworldUnityEditorSourceFormatGuardScanner.RejectsSuspiciousRawSourceBytes(zeroLf));
+        Assert.True(OfflineGeoworldUnityEditorSourceFormatGuardScanner.RejectsSuspiciousRawSourceBytes(crOnly));
+        Assert.True(OfflineGeoworldUnityEditorSourceFormatGuardScanner.RejectsSuspiciousRawSourceBytes(extreme));
+    }
+
+    [Fact]
+    public void SourceFormatGuardAcceptsRepairedEditorWindow()
+    {
+        var root = ProjectRoot();
+        var scan = OfflineGeoworldUnityEditorSourceFormatGuardScanner.AnalyzeSourceFile(
+            root,
+            OfflineGeoworldUnityEditorPreviewToolVocabulary.UnityEditorWindowScriptPath);
+
+        Assert.True(scan.Passed);
+        Assert.True(scan.LfByteCount > 0);
+        Assert.True(scan.RawPhysicalLineCount > 1);
+        Assert.True(scan.RawPhysicalMaxLineLength <= OfflineGeoworldUnityEditorSourceFormatGuardScanner.MaxAllowedPhysicalLineLength);
+        Assert.False(scan.ZeroLfSource);
+        Assert.False(scan.CrOnlySource);
+        Assert.False(scan.OnePhysicalLineMultiStatementSource);
+        Assert.False(scan.MinifiedSourceCandidate);
+    }
+
+    [Fact]
+    public async Task SourceFormatGuardEvidenceIsDeterministicAndKeepsAlphaRuntimeBootstrapUnchanged()
+    {
+        var service = new OfflineGeoworldUnityEditorSourceFormatGuardEvidenceService();
         var first = await service.BuildAndWriteAsync(ProjectRoot());
         var second = await service.BuildAndWriteAsync(ProjectRoot());
 
-        Assert.Equal(first.Result.EvidenceJsonByFileName, second.Result.EvidenceJsonByFileName);
+        Assert.Equal(first.Result.ScanBeforeAfterJson, second.Result.ScanBeforeAfterJson);
+        Assert.Equal(first.Result.NegativeProofJson, second.Result.NegativeProofJson);
+        Assert.Equal(first.Result.QualityGateJson, second.Result.QualityGateJson);
         Assert.Equal(first.Result.Report.DeterministicReportHash, second.Result.Report.DeterministicReportHash);
-        Assert.True(second.Result.QualityGateScan.Passed);
-        Assert.Equal(0, second.Result.QualityGateScan.FilesOver1000LogicalLinesCount);
-        Assert.Equal(0, second.Result.QualityGateScan.FilesOver700LogicalLinesCount);
-        Assert.True(second.Result.QualityGateScan.MaxLogicalLineCount <= 700);
+        Assert.Equal("GREEN", second.Result.Report.ImplementationStatus);
+        Assert.False(second.Result.Report.Accepted);
+        Assert.Equal(
+            OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.FinalGate,
+            second.Result.Report.ManualGate);
+        Assert.True(second.Result.BeforeAfter.BeforeEditorWindowMalformedDetected);
+        Assert.True(second.Result.BeforeAfter.AfterEditorWindowRepaired);
+        Assert.True(second.Result.BeforeAfter.AlphaRuntimeBootstrap.Unchanged);
+        Assert.True(second.Result.NegativeProof.Passed);
+        Assert.True(second.Result.QualityGate.Passed);
+        Assert.Equal(0, second.Result.QualityGate.ZeroLfSourceFileCount);
+        Assert.Equal(0, second.Result.QualityGate.CrOnlySourceFileCount);
+        Assert.Equal(0, second.Result.QualityGate.RawPhysicalOneLineSourceFileCount);
+        Assert.Equal(0, second.Result.QualityGate.MinifiedSourceFileCount);
+
+        foreach (var fileName in OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.RequiredEvidenceFileNames)
+        {
+            Assert.True(File.Exists(Path.Combine(second.OutputDirectoryPath, fileName)), fileName);
+        }
     }
 
     private static void AssertProofPassed(
