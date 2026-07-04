@@ -166,6 +166,22 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolTests
     }
 
     [Fact]
+    public void SourceFormatGuardRejectsActualEditorWindowOneLineSample()
+    {
+        var bytes = Encoding.UTF8.GetBytes(
+            "using UnityEditor; using UnityEngine; namespace LLMGameCreatorAlpha; public sealed class OfflineGeoworldPreviewWindow : EditorWindow { public void RefreshPayloadStatus() { } public void CreatePreviewObjects() { } public void ClearPreviewObjects() { } }");
+
+        var scan = OfflineGeoworldUnityEditorSourceFormatGuardScanner.AnalyzeSourceBytes(
+            OfflineGeoworldUnityEditorPreviewToolVocabulary.UnityEditorWindowScriptPath,
+            bytes);
+
+        Assert.True(scan.ZeroLfSource);
+        Assert.True(scan.OnePhysicalLineMultiStatementSource);
+        Assert.True(scan.MinifiedSourceCandidate);
+        Assert.False(scan.Passed);
+    }
+
+    [Fact]
     public void SourceFormatGuardRejectsZeroLfCrOnlyAndExtremeLine()
     {
         var zeroLf = Encoding.UTF8.GetBytes("public sealed class BrokenZeroLf { public void Run() { } }");
@@ -237,6 +253,35 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolTests
         {
             Assert.True(File.Exists(Path.Combine(second.OutputDirectoryPath, fileName)), fileName);
         }
+    }
+
+    [Fact]
+    public void ActualUnityEditorSourceReformatEvidenceBlocksWhenActualHeadBlobIsAlreadyReadable()
+    {
+        var result = new OfflineGeoworldActualUnityEditorSourceReformatEvidenceService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("BLOCKED", result.Report.ImplementationStatus);
+        Assert.False(result.Report.Accepted);
+        Assert.Equal(
+            OfflineGeoworldActualUnityEditorSourceReformatVocabulary.FinalGate,
+            result.Report.ManualGate);
+        Assert.True(result.BeforeAfter.ActualHeadBeforeBlobRead);
+        Assert.False(result.BeforeAfter.ActualHeadBeforeMalformedDetected);
+        Assert.True(result.BeforeAfter.WorkingTreeSourceReadable);
+        Assert.False(result.BeforeAfter.TargetFileChanged);
+        Assert.True(result.BeforeAfter.AlphaRuntimeBootstrap.Unchanged);
+        Assert.True(result.TrustAudit.Goal102AEvidenceTrustDefectRecorded);
+        Assert.True(result.TrustAudit.Goal102AUsedSyntheticBeforeSample);
+        Assert.True(result.TrustAudit.Goal102AEvidenceConflictsWithActualHead);
+        Assert.True(result.NegativeProof.Passed);
+        Assert.False(result.QualityGate.Passed);
+        Assert.Contains(
+            result.QualityGate.Diagnostics,
+            item => item.Code == "goal102b.quality.before_not_malformed");
+        Assert.Contains(
+            result.QualityGate.Diagnostics,
+            item => item.Code == "goal102b.quality.target_not_changed");
     }
 
     private static void AssertProofPassed(

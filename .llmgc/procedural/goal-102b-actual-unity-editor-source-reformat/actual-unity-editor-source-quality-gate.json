@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "actual_unity_editor_source_quality_gate_v1",
+  "goalId": "goal_102b_actual_unity_editor_source_reformat",
+  "manualGate": "actual_unity_editor_source_reformat_verification",
+  "implementationStatus": "BLOCKED",
+  "accepted": false,
+  "passed": false,
+  "blockedReason": "actual HEAD target blob is already readable, so Goal102B cannot honestly prove the required one-line HEAD-before precondition",
+  "actualHeadBeforeBlobRead": true,
+  "actualHeadBeforeMalformedDetected": false,
+  "workingTreeSourceReadable": true,
+  "targetFileChanged": false,
+  "goal102AEvidenceTrustDefectRecorded": true,
+  "goal102AEvidenceConflictsWithActualHead": true,
+  "negativeProofPassed": true,
+  "alphaRuntimeBootstrapUnchanged": true,
+  "noForbiddenAreasChanged": true,
+  "workingTreePhysicalLineCount": 154,
+  "workingTreeMaxPhysicalLineLength": 115,
+  "changedPathCount": 16,
+  "forbiddenChangedPaths": [],
+  "diagnostics": [
+    {
+      "severity": "error",
+      "code": "goal102b.quality.before_not_malformed",
+      "target": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs",
+      "message": "Goal102B actual Unity editor source trust gate did not pass."
+    },
+    {
+      "severity": "error",
+      "code": "goal102b.quality.target_not_changed",
+      "target": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs",
+      "message": "Goal102B actual Unity editor source trust gate did not pass."
+    }
+  ]
+}

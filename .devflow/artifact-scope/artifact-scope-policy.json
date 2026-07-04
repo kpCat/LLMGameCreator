@@ -75,7 +75,8 @@
     ".llmgc/procedural/goal-100-offline-geoworld-visual-cache-unity-handoff/",
     ".llmgc/procedural/goal-101-offline-geoworld-unity-preview-runner/",
     ".llmgc/procedural/goal-102-offline-geoworld-unity-editor-preview-tool/",
-    ".llmgc/procedural/goal-102a-unity-editor-source-format-guard/"
+    ".llmgc/procedural/goal-102a-unity-editor-source-format-guard/",
+    ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1359,6 +1360,26 @@
       "allowedPathPrefixes": [
         ".llmgc/procedural/goal-102a-unity-editor-source-format-guard/",
         "docs/agent-tasks/goal-102a-unity-editor-source-format-guard/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityEditorPreviewTool/"
+      ]
+    },
+    {
+      "scenario": "goal-102b-actual-unity-editor-source-reformat",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldUnityEditorPreviewToolProductSmokeTests.cs",
+        "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-102a-unity-editor-source-format-guard/",
+        ".llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/",
+        "docs/agent-tasks/goal-102b-actual-unity-editor-source-reformat/",
         "src/LLMGameCreator.Application/Design/OfflineGeoworldUnityEditorPreviewTool/",
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldUnityEditorPreviewTool/"
       ]

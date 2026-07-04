@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "actual_unity_editor_source_trust_audit_v1",
+  "goalId": "goal_102b_actual_unity_editor_source_reformat",
+  "accepted": false,
+  "passed": true,
+  "goal102ABeforeAfterExists": true,
+  "goal102AQualityGateExists": true,
+  "goal102AReportExists": true,
+  "goal102AUsedSyntheticBeforeSample": true,
+  "goal102AClaimedBeforeMalformedDetected": true,
+  "goal102AClaimedQualityGreen": true,
+  "actualHeadBlobRead": true,
+  "actualHeadBeforeMalformedDetected": false,
+  "goal102AEvidenceTrustDefectRecorded": true,
+  "goal102AEvidenceConflictsWithActualHead": true,
+  "supersededByGoal102B": true,
+  "rootCause": "Goal102A trusted a synthetic before sample and did not require actual target-file HEAD bytes as the before proof."
+}

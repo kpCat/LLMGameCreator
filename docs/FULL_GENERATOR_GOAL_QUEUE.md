@@ -94,6 +94,7 @@ offline_geoworld_visual_cache_unity_handoff_verification required
 offline_geoworld_unity_preview_runner_verification required
 offline_geoworld_unity_editor_preview_tool_verification required
 unity_editor_source_format_guard_verification required
+actual_unity_editor_source_reformat_verification required
 ```
 
 Current capabilities:
@@ -125,6 +126,7 @@ Current capabilities:
 - BCL-only offline geoworld Unity preview runner evidence with 18 metadata-only preview commands over 10 command kinds, 5 Goal101 Unity StreamingAssets payload files, standalone Unity Alpha preview runner scripts, 4 travel-window demo steps, simulated command proof and Visual World Stream Preview Workspace integration;
 - Unity Editor-only offline geoworld preview tool with manual Goal101 payload refresh/create/clear actions, simulated action proof, clear cleanup proof, negative proof, quality scan and Visual World Stream Preview Workspace integration;
 - raw-byte Unity Editor source-format guard backstop for Goal 102, with synthetic before/minified editor-window proof, after scan over Goal102 Unity/Application sources, negative proof and unchanged AlphaRuntimeBootstrap evidence;
+- Goal 102B actual Unity editor source-format trust audit is BLOCKED because raw HEAD target-file bytes are already multi-line/readable, so the requested one-line HEAD-before proof cannot be produced honestly; it supersedes Goal102A source-format trust until a corrected actual-before proof exists;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1712,14 +1714,37 @@ execution, Lua/generator-library, project-file, dependency, StreamingAssets payl
 final gameplay, final art, atlas or Unity scene/prefab/settings/packages/build-settings files. Goal 102A, Goal 102,
 Goal 101, Goal 100, Goal 099, Goal 098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
 
+### Goal 102B: Actual Unity Editor Source Reformat
+
+Goal 102B is produced for review with `actual_unity_editor_source_reformat_verification required`,
+`accepted=false` and `implementationStatus=BLOCKED`.
+
+Goal 102B writes deterministic blocked/trust-audit evidence under
+`.llmgc/procedural/goal-102b-actual-unity-editor-source-reformat/`. It reads actual raw git object bytes for
+`HEAD:unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs` and records that the source is already
+multi-line/readable, so the required one-line/minified HEAD-before preflight cannot be proven honestly. The working-tree
+target source is also readable, and `AlphaRuntimeBootstrap.cs` remains unchanged with hash
+`f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce` and line count 3672.
+
+Goal 102B supersedes Goal102A for source-format trust because Goal102A used a synthetic before sample instead of actual
+target-file HEAD bytes. Its negative proof rejects actual one-line target source, target-file-not-in-diff evidence,
+synthetic-before-only evidence, fake repaired claims while raw file remains one-line, fake pass without byte reads,
+CR-only/zero-LF/extreme-line samples, AlphaRuntimeBootstrap mutation, Unity scene/project-setting mutation and
+StreamingAssets payload mutation.
+
+Goal 102B changes no Runtime, public schema, provider/LLM/RAG/media execution, Lua/generator-library, project-file,
+dependency, StreamingAssets payload, binary/raster media, prompt-dump, final gameplay, final art, atlas or Unity
+scene/prefab/settings/packages/build-settings files. Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal
+098, Goal 097 and prior visual/geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
-unity_editor_source_format_guard_verification
+actual_unity_editor_source_reformat_verification
 ```
 
 Status:
 
 ```text
-goal_102a_unity_editor_source_format_guard_produced_for_review
+goal_102b_actual_unity_editor_source_reformat_blocked_clean_head_preflight
 ```

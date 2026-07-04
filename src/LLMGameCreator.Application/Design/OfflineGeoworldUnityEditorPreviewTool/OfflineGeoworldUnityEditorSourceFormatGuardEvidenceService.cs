@@ -376,6 +376,12 @@ public sealed class OfflineGeoworldUnityEditorSourceFormatGuardEvidenceService
             string.Empty,
             "Goal102A adds a raw-byte source-format guard for the Goal102 Unity Editor preview tool scope. The current editor source is physically readable; the guard proves the original one-line/minified failure class with a synthetic before sample for the same file and verifies the current after scan over Goal102 Unity/Application sources.",
             string.Empty,
+            "## Superseded Trust Note",
+            string.Empty,
+            "- supersededByGoal102B: " + report.SupersededByGoal102B.ToString().ToLowerInvariant(),
+            "- trustStatus: " + report.TrustStatus,
+            "- trustRootCause: synthetic-before evidence is not actual target-file HEAD byte proof",
+            string.Empty,
             "## Source Format",
             string.Empty,
             "- sourceFormatBeforeAfterPassed: " + report.SourceFormatBeforeAfterPassed.ToString().ToLowerInvariant(),
@@ -482,6 +488,9 @@ public sealed record OfflineGeoworldUnityEditorSourceFormatBeforeAfter
         OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.GoalId;
     public bool Accepted { get; init; }
     public bool Passed { get; init; }
+    public bool SupersededByGoal102B { get; init; } = true;
+    public string TrustStatus { get; init; } =
+        "superseded_by_goal102b_actual_head_audit";
     public string BeforeSource { get; init; } = string.Empty;
     public bool BeforeEditorWindowMalformedDetected { get; init; }
     public bool AfterEditorWindowRepaired { get; init; }
@@ -532,6 +541,9 @@ public sealed record OfflineGeoworldUnityEditorSourceFormatQualityGate
     public string ImplementationStatus { get; init; } = "GREEN";
     public bool Accepted { get; init; }
     public bool Passed { get; init; }
+    public bool SupersededByGoal102B { get; init; } = true;
+    public string TrustStatus { get; init; } =
+        "superseded_by_goal102b_actual_head_audit";
     public bool BeforeEditorWindowMalformedDetected { get; init; }
     public bool AfterEditorWindowRepaired { get; init; }
     public bool AfterSourceFormatScanPassed { get; init; }
@@ -560,6 +572,9 @@ public sealed record OfflineGeoworldUnityEditorSourceFormatGuardReport
         OfflineGeoworldUnityEditorSourceFormatGuardVocabulary.FinalGate;
     public string ImplementationStatus { get; init; } = "GREEN";
     public bool Accepted { get; init; }
+    public bool SupersededByGoal102B { get; init; } = true;
+    public string TrustStatus { get; init; } =
+        "superseded_by_goal102b_actual_head_audit";
     public bool QualityGatePassed { get; init; }
     public bool SourceFormatBeforeAfterPassed { get; init; }
     public bool NegativeProofPassed { get; init; }

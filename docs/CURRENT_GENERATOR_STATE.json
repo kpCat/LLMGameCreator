@@ -1,22 +1,23 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-04T00:37:23Z",
+    "updated_at_utc":  "2026-07-04T01:10:21Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 102A Unity editor source format guard produced for review",
-    "gate_status":  "unity_editor_source_format_guard_verification",
+    "current_phase_title":  "Goal 102B actual Unity editor source reformat blocked by clean HEAD preflight",
+    "gate_status":  "actual_unity_editor_source_reformat_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
-    "active_manual_gate":  "Goal 102A Unity Editor Source Format Guard is produced for review: unity_editor_source_format_guard_verification required, accepted=false. It repairs the post-Goal102 source-health backstop by adding a reusable raw-byte scanner, synthetic before/minified proof for OfflineGeoworldPreviewWindow.cs, after scan over Goal102 Unity/Application sources, negative proof and compact evidence under .llmgc/procedural/goal-102a-unity-editor-source-format-guard/. Goal 102A changes no behavior, Runtime, public GamePackage schema, Lua, generator-library, project files, dependencies, StreamingAssets payloads, binary/raster media, raw geodata dump, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt-output work. Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
-    "current_user_action":  "Review Goal 102A Unity editor source-format guard evidence. Goal 102A is a source-health repair/backstop over the Goal 102 Unity Editor preview tool scope; it represents raw source-format guard readiness, not acceptance of Goal 102 and not final Runtime consumption, full gameplay, real geodata fetching, final art, atlas, scene/prefab production or live Unity gameplay rendering. Goal 102A remains accepted=false until explicit user review accepts it, and Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain accepted=false.",
-    "recommended_next_decision":  "Review Goal 102A Unity editor source-format guard evidence and only mark unity_editor_source_format_guard_verification passed after explicit user acceptance; do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final art, atlas, scene/prefab or media work from this handoff.",
+    "active_manual_gate":  "Goal 102B Actual Unity Editor Source Reformat is produced for review as BLOCKED: actual_unity_editor_source_reformat_verification required, accepted=false. Raw git HEAD bytes for unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs were read from the repository object and are already multi-line/readable, so the required one-line HEAD-before preflight could not be proven honestly. Goal 102B records the Goal102A evidence-trust defect: Goal102A used a synthetic before sample instead of actual HEAD target-file bytes. Goal 102B changes no Runtime, public GamePackage schema, Lua, generator-library, project files, dependencies, StreamingAssets payloads, binary/raster media, raw geodata dump, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt-output work. Goal 102B, Goal 102A, Goal 102, Goal 101, Goal 100, Goal 099, Goal 098 and Goal 097 remain produced for review and accepted=false.",
+    "current_user_action":  "Review Goal 102B BLOCKED evidence. The actual repository HEAD target source is already readable, so do not mark actual_unity_editor_source_reformat_verification passed unless a future task provides a real malformed before blob or a corrected task scope. Treat Goal102A source-format trust as superseded by Goal102B; Goal102B remains accepted=false and does not accept Goal102A, Goal102, Goal101, Goal100, Goal099, Goal098 or Goal097.",
+    "recommended_next_decision":  "Review Goal 102B blocked trust-audit evidence for actual_unity_editor_source_reformat_verification and decide whether to close the false external-audit premise or issue a corrected task. Do not start live geodata ingestion, provider/network adapters, Runtime consumers, public schema, Lua, generator-library, final art, atlas, scene/prefab or media work from this handoff.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "actual_unity_editor_source_reformat_verification",
                                                         "unity_editor_source_format_guard_verification",
                                                         "offline_geoworld_unity_editor_preview_tool_verification",
                                                         "offline_geoworld_unity_preview_runner_verification",
@@ -146,7 +147,8 @@
                              "goal_100_manual_gate":  "offline_geoworld_visual_cache_unity_handoff_verification",
                              "goal_101_manual_gate":  "offline_geoworld_unity_preview_runner_verification",
                              "goal_102_manual_gate":  "offline_geoworld_unity_editor_preview_tool_verification",
-                             "goal_102a_manual_gate":  "unity_editor_source_format_guard_verification"
+                             "goal_102a_manual_gate":  "unity_editor_source_format_guard_verification",
+                             "goal_102b_manual_gate":  "actual_unity_editor_source_reformat_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -437,6 +439,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "actual_unity_editor_source_reformat_verification",
+                                          "goal_102b_actual_unity_editor_source_reformat",
+                                          "manual_review_goal_102b_actual_unity_editor_source_reformat",
                                           "unity_editor_source_format_guard_verification",
                                           "goal_102a_unity_editor_source_format_guard",
                                           "manual_review_goal_102a_unity_editor_source_format_guard",
@@ -529,13 +534,15 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "unity_editor_source_format_guard_verification",
-    "recommended_next_work_item_title":  "Review Goal 102A Unity editor source format guard",
-    "recommended_next_task_file":  "docs/agent-tasks/goal-102a-unity-editor-source-format-guard/GOAL.md",
+    "recommended_next_work_item":  "actual_unity_editor_source_reformat_verification",
+    "recommended_next_work_item_title":  "Review Goal 102B actual Unity editor source reformat blocked evidence",
+    "recommended_next_task_file":  "docs/agent-tasks/goal-102b-actual-unity-editor-source-reformat/GOAL.md",
     "candidate_product_vertical_slices":  [
-                                              "Review Goal 102A Unity editor source-format guard evidence",
-                                              "Keep Goal 102A accepted=false until user review accepts it",
-                                              "Use Goal 102A raw-byte source-format scanner and evidence only as a source-health backstop; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
+                                              "Review Goal 102B blocked actual Unity editor source reformat evidence",
+                                              "Keep Goal 102B accepted=false until user review decides how to handle the clean-HEAD preflight mismatch",
+                                              "Treat Goal102A source-format trust as superseded by Goal102B until a corrected actual-before proof exists; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
+                                              "Review Goal 102A Unity editor source-format guard evidence as historical/superseded trust evidence",
+                                              "Keep Goal 102A accepted=false until user review accepts or replaces it",
                                               "Review Goal 102 offline geoworld Unity editor preview tool evidence",
                                               "Keep Goal 102 accepted=false until user review accepts it",
                                               "Use Goal 102 Unity Editor-only preview window, simulated action proofs and workspace inspection only as future review handoff input; do not start live geodata ingestion, Runtime consumers, final gameplay, final art, atlas, scene/prefab production, provider/network adapters, public schema, Lua, generator-library or media work from this handoff",
@@ -2442,5 +2449,19 @@
                                                                                   "Goal 102A changes no behavior, Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library change, project-file/dependency change, StreamingAssets payload, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings file mutation or prompt dump."
                                                                               ],
                                                           "next_action":  "review_goal_102a_unity_editor_source_format_guard"
-                                                      }
+                                                      },
+    "actual_unity_editor_source_reformat_verification":  {
+                                                            "status":  "produced_for_review",
+                                                            "accepted":  false,
+                                                            "evidence_source":  "goal_102b_actual_unity_editor_source_reformat",
+                                                            "observed_result":  [
+                                                                                    "Goal 102B produces actual Unity editor source reformat/trust-audit evidence under .llmgc/procedural/goal-102b-actual-unity-editor-source-reformat with accepted=false.",
+                                                                                    "implementationStatus=BLOCKED because raw git object bytes for HEAD:unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldPreviewWindow.cs were read and found already multi-line/readable, so the required one-line HEAD-before preflight could not be proven honestly.",
+                                                                                    "The actual HEAD target scan records LF-backed physical lines, not a one-line/minified source. The working-tree target source is also readable, and AlphaRuntimeBootstrap.cs remains unchanged with hash f40aa86e269561419fc6ef30fe456d284c5b8c8857de00671269b2b6bb6ccbce and line count 3672.",
+                                                                                    "Goal102A is superseded for source-format trust because its before proof used a synthetic one-line/minified sample instead of actual repository HEAD target-file bytes. Goal102B records this as the root cause and adds a trust audit/negative proof around synthetic-before-only evidence.",
+                                                                                    "The negative proof rejects actual one-line target source, missing target-file diff, synthetic-before-only evidence, fake repaired claims while raw file remains one-line, fake pass without byte reads, CR-only/zero-LF/extreme-line samples, AlphaRuntimeBootstrap mutation, Unity scene/project-setting mutation and StreamingAssets payload mutation.",
+                                                                                    "Goal 102B does not change Runtime, public GamePackage schema, provider/LLM/RAG/media execution, Lua/generator-library, project files, dependencies, StreamingAssets payload, binary/raster media, final art, atlas, Unity scene/prefab/settings/package/build-settings files or prompt dump."
+                                                                                ],
+                                                            "next_action":  "review_goal_102b_blocked_clean_head_preflight"
+                                                        }
 }

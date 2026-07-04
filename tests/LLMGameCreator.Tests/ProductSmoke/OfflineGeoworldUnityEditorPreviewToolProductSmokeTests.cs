@@ -205,6 +205,72 @@ public sealed class OfflineGeoworldUnityEditorPreviewToolProductSmokeTests
         Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Fact]
+    public async Task Goal102BActualUnityEditorSourceReformatProductSmoke()
+    {
+        var repoRoot = FindRepoRoot();
+        var write = await new OfflineGeoworldActualUnityEditorSourceReformatEvidenceService()
+            .BuildAndWriteAsync(repoRoot);
+        var result = write.Result;
+
+        Assert.Equal("BLOCKED", result.Report.ImplementationStatus);
+        Assert.False(result.Report.Accepted);
+        Assert.Equal(
+            OfflineGeoworldActualUnityEditorSourceReformatVocabulary.FinalGate,
+            result.Report.ManualGate);
+        Assert.False(result.Report.QualityGatePassed);
+        Assert.True(result.Report.NegativeProofPassed);
+        Assert.True(result.Report.TrustAuditPassed);
+        Assert.True(result.Report.AlphaRuntimeBootstrapUnchanged);
+        Assert.True(result.BeforeAfter.ActualHeadBeforeBlobRead);
+        Assert.False(result.BeforeAfter.ActualHeadBeforeMalformedDetected);
+        Assert.True(result.BeforeAfter.WorkingTreeSourceReadable);
+        Assert.False(result.BeforeAfter.TargetFileChanged);
+        Assert.True(result.TrustAudit.Goal102AEvidenceTrustDefectRecorded);
+        Assert.True(result.TrustAudit.Goal102AEvidenceConflictsWithActualHead);
+        Assert.True(result.QualityGate.NoForbiddenAreasChanged);
+        Assert.Empty(result.QualityGate.ForbiddenChangedPaths);
+        Assert.Contains(
+            result.NegativeProof.Scenarios,
+            item => item.ScenarioId == "before_scan_uses_only_synthetic_sample"
+                    && item.ActualStatus == "rejected");
+        Assert.Contains(
+            result.NegativeProof.Scenarios,
+            item => item.ScenarioId == "streamingassets_payload_changed_marker"
+                    && item.ActualStatus == "rejected");
+
+        foreach (var fileName in OfflineGeoworldActualUnityEditorSourceReformatVocabulary.RequiredEvidenceFileNames)
+        {
+            Assert.True(File.Exists(Path.Combine(write.OutputDirectoryPath, fileName)), fileName);
+        }
+
+        using var beforeAfter = JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(
+            write.OutputDirectoryPath,
+            OfflineGeoworldActualUnityEditorSourceReformatVocabulary.BeforeAfterFileName)));
+        using var quality = JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(
+            write.OutputDirectoryPath,
+            OfflineGeoworldActualUnityEditorSourceReformatVocabulary.QualityGateFileName)));
+        using var trustAudit = JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(
+            write.OutputDirectoryPath,
+            OfflineGeoworldActualUnityEditorSourceReformatVocabulary.TrustAuditFileName)));
+
+        Assert.Equal("actual_git_head_blob", beforeAfter.RootElement.GetProperty("beforeSource").GetString());
+        Assert.True(beforeAfter.RootElement.GetProperty("actualHeadBeforeBlobRead").GetBoolean());
+        Assert.False(beforeAfter.RootElement.GetProperty("actualHeadBeforeMalformedDetected").GetBoolean());
+        Assert.True(beforeAfter.RootElement.GetProperty("workingTreeSourceReadable").GetBoolean());
+        Assert.Equal("BLOCKED", quality.RootElement.GetProperty("implementationStatus").GetString());
+        Assert.False(quality.RootElement.GetProperty("passed").GetBoolean());
+        Assert.True(trustAudit.RootElement.GetProperty("goal102AEvidenceTrustDefectRecorded").GetBoolean());
+        Assert.True(trustAudit.RootElement.GetProperty("supersededByGoal102B").GetBoolean());
+
+        var report = await File.ReadAllTextAsync(write.ReportMarkdownPath);
+        Assert.Contains("actual_unity_editor_source_reformat_verification required", report);
+        Assert.Contains("implementationStatus: BLOCKED", report);
+        Assert.Contains("actualHeadBeforeMalformedDetected: false", report);
+        Assert.Contains("goal102aEvidenceTrustDefectRecorded: true", report);
+        Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static string FindRepoRoot()
     {
         var current = new DirectoryInfo(Directory.GetCurrentDirectory());

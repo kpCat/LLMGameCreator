@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "actual_unity_editor_source_negative_proof_v1",
+  "goalId": "goal_102b_actual_unity_editor_source_reformat",
+  "accepted": false,
+  "passed": true,
+  "scenarioCount": 11,
+  "rejectedCount": 11,
+  "scenarios": [
+    {
+      "scenarioId": "actual_file_remains_one_line",
+      "causalMutation": "Actual target source is still one physical line.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.actual_one_line",
+          "target": "actual_file_remains_one_line",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "target_file_not_in_changed_paths",
+      "causalMutation": "Quality gate must reject evidence when the target source is not changed.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.target_not_changed",
+          "target": "target_file_not_in_changed_paths",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "before_scan_uses_only_synthetic_sample",
+      "causalMutation": "Before proof must come from actual git HEAD bytes, not synthetic-only source.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.synthetic_before_only",
+          "target": "before_scan_uses_only_synthetic_sample",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "evidence_claims_repaired_but_raw_file_one_line",
+      "causalMutation": "Evidence must not claim repaired while the raw working-tree file has one physical line.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.fake_repaired_one_line",
+          "target": "evidence_claims_repaired_but_raw_file_one_line",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_pass_without_reading_file_bytes",
+      "causalMutation": "Scan result claims pass without byte reads.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.fake_pass",
+          "target": "fake_pass_without_reading_file_bytes",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "synthetic_one_line_zero_lf_sample",
+      "causalMutation": "Synthetic one-line and zero-LF samples still must be rejected.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.synthetic_one_line",
+          "target": "synthetic_one_line_zero_lf_sample",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "cr_only_sample",
+      "causalMutation": "CR-only C# source must be rejected.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.cr_only",
+          "target": "cr_only_sample",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "extreme_line_sample",
+      "causalMutation": "Extreme physical lines must be rejected.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.extreme_line",
+          "target": "extreme_line_sample",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "attempt_to_modify_alpha_runtime_bootstrap",
+      "causalMutation": "AlphaRuntimeBootstrap hash/line-count drift must be rejected.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.alpha_bootstrap_changed",
+          "target": "attempt_to_modify_alpha_runtime_bootstrap",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unity_scene_project_setting_changed_marker",
+      "causalMutation": "Unity scene, prefab, ProjectSettings or build-settings mutation marker appears.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.scene_project_marker",
+          "target": "unity_scene_project_setting_changed_marker",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "streamingassets_payload_changed_marker",
+      "causalMutation": "Goal102B must reject StreamingAssets payload mutation.",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal102b.negative.streamingassets_changed",
+          "target": "streamingassets_payload_changed_marker",
+          "message": "Goal102B actual-source trust guard rejected the mutated evidence input."
+        }
+      ]
+    }
+  ]
+}
