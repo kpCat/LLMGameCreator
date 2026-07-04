@@ -96,7 +96,11 @@ public static class OfflineGeoworldAlphaSliceVocabulary
     public static IReadOnlyList<string> SourceHealthFiles =>
     [
         "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorEvidenceService.cs",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorEvidenceService.Components.cs",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorEvidenceService.Utilities.cs",
         "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorModels.cs",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditService.cs",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditModels.cs",
         "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaSliceCoordinator.cs",
         "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldAlphaSliceWindow.cs",
         "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs"

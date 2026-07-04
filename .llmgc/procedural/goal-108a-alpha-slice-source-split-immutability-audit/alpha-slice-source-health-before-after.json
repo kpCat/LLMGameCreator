@@ -1,0 +1,83 @@
+{
+  "goalId": "goal_108a_alpha_slice_source_split_immutability_audit",
+  "accepted": false,
+  "passed": true,
+  "beforeSource": "git_commit_989a79ab",
+  "afterSource": "working_tree_after_source_split",
+  "beforeScanReadActualGitBlob": true,
+  "sourceSplitCompleted": true,
+  "beforeHadFileOver700Lines": true,
+  "allAfterFilesBelow700Lines": true,
+  "before": {
+    "passed": false,
+    "fileCount": 2,
+    "maxPhysicalLineCount": 988,
+    "maxLogicalLineCount": 988,
+    "files": [
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorEvidenceService.cs",
+        "exists": true,
+        "physicalLineCount": 988,
+        "logicalLineCount": 988,
+        "sha256": "e21e583596786c1dd412b8364ac1e48acfbdb55ecd5bb0e9d1bd105661e151be"
+      },
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorModels.cs",
+        "exists": true,
+        "physicalLineCount": 428,
+        "logicalLineCount": 428,
+        "sha256": "fd03c3249e9899da5a09c3d1aa346a8d39a48ce158f2c2920f10d6c4e51fea2b"
+      }
+    ]
+  },
+  "after": {
+    "passed": true,
+    "fileCount": 6,
+    "maxPhysicalLineCount": 643,
+    "maxLogicalLineCount": 643,
+    "files": [
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorEvidenceService.Components.cs",
+        "exists": true,
+        "physicalLineCount": 269,
+        "logicalLineCount": 269,
+        "sha256": "39fc0d77fe6203c45b142ed67562a5bf4ec9b352539da26997b54ea23fba41e1"
+      },
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorEvidenceService.Utilities.cs",
+        "exists": true,
+        "physicalLineCount": 118,
+        "logicalLineCount": 118,
+        "sha256": "55154ce50f65d93b364e0c44a9fc22f9331d4c5c793cc01d88fe092b312dd381"
+      },
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorEvidenceService.cs",
+        "exists": true,
+        "physicalLineCount": 617,
+        "logicalLineCount": 617,
+        "sha256": "786a8404cf1931e6b47a68f88e77c4851d955abb88215a9f7b5edcc8e1aefe38"
+      },
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceOrchestratorModels.cs",
+        "exists": true,
+        "physicalLineCount": 432,
+        "logicalLineCount": 432,
+        "sha256": "34afa5f168b19a186422e2841d6d63180e96cc6e759f7cce404c798e2c7ec970"
+      },
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditModels.cs",
+        "exists": true,
+        "physicalLineCount": 208,
+        "logicalLineCount": 208,
+        "sha256": "c04d6105da50cb0f7e8c490a3abbe61993eae5aafea0d20115a2efe2773fd1db"
+      },
+      {
+        "relativePath": "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditService.cs",
+        "exists": true,
+        "physicalLineCount": 643,
+        "logicalLineCount": 643,
+        "sha256": "b5376eb98b489b66adda314a0650083e8ed8bc172668ca662ab42efd3e486c18"
+      }
+    ]
+  }
+}

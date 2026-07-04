@@ -1,0 +1,39 @@
+{
+  "goalId": "goal_108a_alpha_slice_source_split_immutability_audit",
+  "accepted": false,
+  "passed": true,
+  "scenarioCount": 6,
+  "rejectedCount": 6,
+  "scenarios": [
+    {
+      "scenarioId": "service_file_still_over_700_lines",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108A audit rejects service_file_still_over_700_lines."
+    },
+    {
+      "scenarioId": "actual_git_diff_not_read",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108A audit rejects actual_git_diff_not_read."
+    },
+    {
+      "scenarioId": "fake_historical_unchanged_claim_without_parent_head_comparison",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108A audit rejects fake_historical_unchanged_claim_without_parent_head_comparison."
+    },
+    {
+      "scenarioId": "goal108a_historical_artifact_mutation_attempt",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108A audit rejects goal108a_historical_artifact_mutation_attempt."
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_changed",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108A audit rejects alpha_runtime_bootstrap_changed."
+    },
+    {
+      "scenarioId": "runtime_schema_provider_unity_scene_settings_changed",
+      "actualStatus": "rejected",
+      "diagnostic": "Goal108A audit rejects runtime_schema_provider_unity_scene_settings_changed."
+    }
+  ]
+}

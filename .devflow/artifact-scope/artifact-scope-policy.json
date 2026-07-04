@@ -80,7 +80,8 @@
     ".llmgc/procedural/goal-103-offline-geoworld-playmode-travel-preview/",
     ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/",
     ".llmgc/procedural/goal-105-offline-geoworld-interaction-playable-probe/",
-    ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/"
+    ".llmgc/procedural/goal-107-offline-geoworld-objective-acceptance-run/",
+    ".llmgc/procedural/goal-108a-alpha-slice-source-split-immutability-audit/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1552,6 +1553,24 @@
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaSliceOrchestrator/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/",
         "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal108/"
+      ]
+    },
+    {
+      "scenario": "goal-108a-alpha-slice-source-split-immutability-audit",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldAlphaSliceOrchestratorProductSmokeTests.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-108a-alpha-slice-source-split-immutability-audit/",
+        "docs/agent-tasks/goal-108a-alpha-slice-source-split-immutability-audit/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaSliceOrchestrator/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaSliceOrchestrator/"
       ]
     }
   ]

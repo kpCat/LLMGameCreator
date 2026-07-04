@@ -7,12 +7,17 @@ namespace LLMGameCreator.Tests.Application.OfflineGeoworldAlphaSliceOrchestrator
 public sealed class OfflineGeoworldAlphaSliceOrchestratorTests
 {
     [Fact]
-    public async Task ServiceBuildsAlphaSliceAggregatePayloadAndEvidence()
+    public void ServiceBuildsAlphaSliceAggregatePayloadAndEvidence()
     {
         var root = ProjectRoot();
-        var write = await new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
-            .BuildAndWriteAsync(root);
-        var result = write.Result;
+        var result = new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
+            .Build(root);
+        var streamingAssetsDirectoryPath = Path.Combine(
+            root,
+            OfflineGeoworldAlphaSliceVocabulary.StreamingAssetsRelativeRoot);
+        var outputDirectoryPath = Path.Combine(
+            root,
+            OfflineGeoworldAlphaSliceVocabulary.RelativeOutputDirectory);
 
         Assert.Equal("GREEN", result.Report.ImplementationStatus);
         Assert.False(result.Report.Accepted);
@@ -38,22 +43,22 @@ public sealed class OfflineGeoworldAlphaSliceOrchestratorTests
 
         foreach (var fileName in OfflineGeoworldAlphaSliceVocabulary.RequiredPayloadFileNames)
         {
-            Assert.True(File.Exists(Path.Combine(write.StreamingAssetsDirectoryPath, fileName)), fileName);
-            Assert.True(File.Exists(Path.Combine(write.OutputDirectoryPath, fileName)), fileName);
+            Assert.True(File.Exists(Path.Combine(streamingAssetsDirectoryPath, fileName)), fileName);
+            Assert.True(File.Exists(Path.Combine(outputDirectoryPath, fileName)), fileName);
         }
 
         foreach (var fileName in OfflineGeoworldAlphaSliceVocabulary.RequiredEvidenceFileNames)
         {
-            Assert.True(File.Exists(Path.Combine(write.OutputDirectoryPath, fileName)), fileName);
+            Assert.True(File.Exists(Path.Combine(outputDirectoryPath, fileName)), fileName);
         }
     }
 
     [Fact]
-    public async Task FullSliceProofAndNegativeProofCoverRequiredRisks()
+    public void FullSliceProofAndNegativeProofCoverRequiredRisks()
     {
         var root = ProjectRoot();
-        var result = (await new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
-            .BuildAndWriteAsync(root)).Result;
+        var result = new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
+            .Build(root);
 
         Assert.True(result.SimulatedProof.PayloadReadAttempted);
         Assert.True(result.SimulatedProof.SourceGoal101To107PayloadsRead);
@@ -86,10 +91,10 @@ public sealed class OfflineGeoworldAlphaSliceOrchestratorTests
     }
 
     [Fact]
-    public async Task WorkspaceGroupSurfacesAlphaSliceReadiness()
+    public void WorkspaceGroupSurfacesAlphaSliceReadiness()
     {
         var root = ProjectRoot();
-        await new OfflineGeoworldAlphaSliceOrchestratorEvidenceService().BuildAndWriteAsync(root);
+        new OfflineGeoworldAlphaSliceOrchestratorEvidenceService().Build(root);
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         var group = Assert.Single(
             workspace.Catalog.Groups,
@@ -133,6 +138,80 @@ public sealed class OfflineGeoworldAlphaSliceOrchestratorTests
         var proof = Assert.Single(proofs, item => item.ProofId == proofId);
         Assert.True(proof.Passed, proof.DiagnosticSummary);
         Assert.False(Path.IsPathFullyQualified(proof.RelativePath), proof.RelativePath);
+    }
+
+    [Fact]
+    public async Task Goal108ASourceSplitAuditReadsActualGitDiffAndRecordsTrust()
+    {
+        var root = ProjectRoot();
+        var write = await new OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditService()
+            .BuildAndWriteAsync(root);
+        var result = write.Result;
+
+        Assert.True(result.QualityGate.Passed, string.Join(Environment.NewLine, result.QualityGate.Diagnostics));
+        Assert.True(result.SourceHealthBeforeAfter.BeforeScanReadActualGitBlob);
+        Assert.True(result.SourceHealthBeforeAfter.BeforeHadFileOver700Lines);
+        Assert.True(result.SourceHealthBeforeAfter.SourceSplitCompleted);
+        Assert.True(result.SourceHealthBeforeAfter.AllAfterFilesBelow700Lines);
+        Assert.Contains(
+            result.SourceHealthBeforeAfter.Before.Files,
+            file => file.RelativePath.EndsWith(
+                        "OfflineGeoworldAlphaSliceOrchestratorEvidenceService.cs",
+                        StringComparison.Ordinal)
+                    && file.PhysicalLineCount > 700);
+        Assert.All(result.SourceHealthBeforeAfter.After.Files, file =>
+        {
+            Assert.True(file.PhysicalLineCount <= 700, file.RelativePath);
+            Assert.True(file.LogicalLineCount <= 700, file.RelativePath);
+        });
+
+        Assert.True(result.HistoricalArtifactDiffAudit.GitDiffRead);
+        Assert.True(result.HistoricalArtifactDiffAudit.Goal108ChangedPathCount > 0);
+        Assert.Equal(0, result.HistoricalArtifactDiffAudit.Goal101To107ChangedPathCount);
+        Assert.False(result.HistoricalArtifactDiffAudit.Goal101To107ArtifactsModified);
+        Assert.All(result.HistoricalArtifactDiffAudit.ChangedPaths, record =>
+        {
+            if (record.Status != "D")
+            {
+                Assert.False(string.IsNullOrWhiteSpace(record.NewBlobSha), record.RelativePath);
+            }
+        });
+
+        Assert.True(result.ImmutabilityTrustAudit.Passed);
+        Assert.True(result.ImmutabilityTrustAudit.Goal108ClaimRead);
+        Assert.True(result.ImmutabilityTrustAudit.Goal108HistoricalArtifactsUnchangedClaim);
+        Assert.True(result.ImmutabilityTrustAudit.ActualGoal101To107ArtifactsUnchanged);
+        Assert.True(result.ImmutabilityTrustAudit.Goal108ClaimMatchesActualGitDiff);
+        Assert.False(result.ImmutabilityTrustAudit.EvidenceTrustDebtRecorded);
+        Assert.True(result.ImmutabilityTrustAudit.Goal108AdditionsClassifiedAsCurrentGoalOutput);
+
+        foreach (var fileName in OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditVocabulary.RequiredEvidenceFileNames)
+        {
+            Assert.True(File.Exists(Path.Combine(write.OutputDirectoryPath, fileName)), fileName);
+        }
+
+        Assert.True(File.Exists(write.ReportMarkdownPath));
+    }
+
+    [Fact]
+    public void Goal108ANegativeProofRejectsRequiredFailureClasses()
+    {
+        var result = new OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditService()
+            .Build(ProjectRoot());
+
+        Assert.True(result.NegativeProof.Passed);
+        Assert.Equal(
+            OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditVocabulary.RequiredNegativeScenarioIds.Count,
+            result.NegativeProof.ScenarioCount);
+        Assert.Equal(result.NegativeProof.ScenarioCount, result.NegativeProof.RejectedCount);
+        foreach (var scenarioId in OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditVocabulary.RequiredNegativeScenarioIds)
+        {
+            Assert.Contains(
+                result.NegativeProof.Scenarios,
+                scenario => scenario.ScenarioId == scenarioId
+                            && scenario.ActualStatus == "rejected"
+                            && scenario.Diagnostic.Length > 0);
+        }
     }
 
     private static string ProjectRoot()

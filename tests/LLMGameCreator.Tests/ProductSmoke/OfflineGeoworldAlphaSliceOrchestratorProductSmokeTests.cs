@@ -24,12 +24,17 @@ public sealed class OfflineGeoworldAlphaSliceOrchestratorProductSmokeTests
     };
 
     [Fact]
-    public async Task Goal108OfflineGeoworldAlphaSliceOrchestratorProductSmoke()
+    public void Goal108OfflineGeoworldAlphaSliceOrchestratorProductSmoke()
     {
         var repoRoot = FindRepoRoot();
-        var write = await new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
-            .BuildAndWriteAsync(repoRoot);
-        var result = write.Result;
+        var result = new OfflineGeoworldAlphaSliceOrchestratorEvidenceService()
+            .Build(repoRoot);
+        var outputDirectoryPath = Path.Combine(
+            repoRoot,
+            OfflineGeoworldAlphaSliceVocabulary.RelativeOutputDirectory);
+        var streamingAssetsDirectoryPath = Path.Combine(
+            repoRoot,
+            OfflineGeoworldAlphaSliceVocabulary.StreamingAssetsRelativeRoot);
 
         Assert.Equal("GREEN", result.Report.ImplementationStatus);
         Assert.False(result.Report.Accepted);
@@ -51,15 +56,15 @@ public sealed class OfflineGeoworldAlphaSliceOrchestratorProductSmokeTests
         Assert.True(result.SimulatedProof.HistoricalArtifactsUnchanged);
         Assert.True(result.NegativeProof.Passed);
 
-        AssertFilesExist(write.OutputDirectoryPath, OfflineGeoworldAlphaSliceVocabulary.RequiredPayloadFileNames);
-        AssertFilesExist(write.StreamingAssetsDirectoryPath, OfflineGeoworldAlphaSliceVocabulary.RequiredPayloadFileNames);
+        AssertFilesExist(outputDirectoryPath, OfflineGeoworldAlphaSliceVocabulary.RequiredPayloadFileNames);
+        AssertFilesExist(streamingAssetsDirectoryPath, OfflineGeoworldAlphaSliceVocabulary.RequiredPayloadFileNames);
         Assert.Equal(
             OfflineGeoworldAlphaSliceVocabulary.RequiredPayloadFileNames.Count,
-            Directory.EnumerateFiles(write.StreamingAssetsDirectoryPath, "*.json", SearchOption.TopDirectoryOnly).Count());
+            Directory.EnumerateFiles(streamingAssetsDirectoryPath, "*.json", SearchOption.TopDirectoryOnly).Count());
 
         var changedFiles = Directory
-            .EnumerateFiles(write.OutputDirectoryPath, "*", SearchOption.AllDirectories)
-            .Concat(Directory.EnumerateFiles(write.StreamingAssetsDirectoryPath, "*", SearchOption.AllDirectories))
+            .EnumerateFiles(outputDirectoryPath, "*", SearchOption.AllDirectories)
+            .Concat(Directory.EnumerateFiles(streamingAssetsDirectoryPath, "*", SearchOption.AllDirectories))
             .ToList();
         Assert.DoesNotContain(
             changedFiles,
@@ -74,13 +79,13 @@ public sealed class OfflineGeoworldAlphaSliceOrchestratorProductSmokeTests
         Assert.DoesNotContain(".geojson", combinedText, StringComparison.OrdinalIgnoreCase);
 
         using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(
-            write.StreamingAssetsDirectoryPath,
+            streamingAssetsDirectoryPath,
             OfflineGeoworldAlphaSliceVocabulary.ManifestFileName)));
         using var components = JsonDocument.Parse(File.ReadAllText(Path.Combine(
-            write.StreamingAssetsDirectoryPath,
+            streamingAssetsDirectoryPath,
             OfflineGeoworldAlphaSliceVocabulary.ComponentsFileName)));
         using var quality = JsonDocument.Parse(File.ReadAllText(Path.Combine(
-            write.OutputDirectoryPath,
+            outputDirectoryPath,
             OfflineGeoworldAlphaSliceVocabulary.QualityGateScanFileName)));
 
         Assert.Equal("GREEN", manifest.RootElement.GetProperty("implementationStatus").GetString());
@@ -121,6 +126,45 @@ public sealed class OfflineGeoworldAlphaSliceOrchestratorProductSmokeTests
         Assert.DoesNotContain(
             result.QualityGateScan.ExpectedChangedPathPrefixes,
             path => path.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
+    public async Task Goal108AAlphaSliceSourceSplitImmutabilityAuditProductSmoke()
+    {
+        var repoRoot = FindRepoRoot();
+        var write = await new OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditService()
+            .BuildAndWriteAsync(repoRoot);
+        var result = write.Result;
+
+        Assert.Equal("GREEN", result.QualityGate.ImplementationStatus);
+        Assert.True(result.QualityGate.Passed, string.Join(Environment.NewLine, result.QualityGate.Diagnostics));
+        Assert.True(result.SourceHealthBeforeAfter.SourceSplitCompleted);
+        Assert.True(result.QualityGate.LargestGoal108OrchestratorFileBelow700Lines);
+        Assert.True(result.QualityGate.ActualGitDiffAuditPerformed);
+        Assert.False(result.QualityGate.Goal101To107ArtifactsModified);
+        Assert.True(result.QualityGate.Goal108ClaimMatchesActualGitDiff);
+        Assert.True(result.QualityGate.EvidenceTrustDebtStatusHonest);
+        Assert.True(result.QualityGate.AlphaRuntimeBootstrapUnchanged);
+        Assert.True(result.QualityGate.NoForbiddenAreasChanged);
+        Assert.Empty(result.QualityGate.ForbiddenChangedPaths);
+
+        Assert.True(result.HistoricalArtifactDiffAudit.Goal108ChangedPathCount > 0);
+        Assert.Empty(result.HistoricalArtifactDiffAudit.Goal101To107ChangedPaths);
+        Assert.All(result.HistoricalArtifactDiffAudit.Goal108ChangedPaths, path =>
+            Assert.True(
+                path.Contains("goal-108", StringComparison.OrdinalIgnoreCase)
+                || path.Contains("Goal108", StringComparison.Ordinal),
+                path));
+        Assert.True(result.ImmutabilityTrustAudit.Goal108ClaimRead);
+        Assert.True(result.ImmutabilityTrustAudit.Goal108HistoricalArtifactsUnchangedClaim);
+        Assert.True(result.ImmutabilityTrustAudit.Goal108ClaimMatchesActualGitDiff);
+        Assert.False(result.ImmutabilityTrustAudit.EvidenceTrustDebtRecorded);
+        Assert.True(result.NegativeProof.Passed);
+
+        AssertFilesExist(
+            write.OutputDirectoryPath,
+            OfflineGeoworldAlphaSliceSourceSplitImmutabilityAuditVocabulary.RequiredEvidenceFileNames);
+        Assert.True(File.Exists(write.ReportMarkdownPath));
     }
 
     private static void AssertFilesExist(string directory, IReadOnlyList<string> fileNames)
