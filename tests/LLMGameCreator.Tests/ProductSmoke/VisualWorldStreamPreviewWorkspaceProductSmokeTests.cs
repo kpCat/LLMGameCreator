@@ -1,8 +1,5 @@
 using System.Text.Json;
-using LLMGameCreator.Application.Design.OfflineGeoworldInteractiveTravelPreview;
-using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
-using LLMGameCreator.Application.Design.OfflineGeoworldUnityPlayModeTravelPreview;
-using LLMGameCreator.Application.Design.OfflineGeoworldUnityPreviewRunner;
+using LLMGameCreator.Application.Design.OfflineGeoworldInteractionPlayableProbe;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using Xunit;
@@ -31,13 +28,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
     public async Task Goal096UnityHandoffInspectorProbeReadinessProductSmoke()
     {
         var repoRoot = FindRepoRoot();
-        await new OfflineGeoworldUnityPreviewRunnerEvidenceService()
-            .BuildAndWriteAsync(repoRoot);
-        await new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
-            .BuildAndWriteAsync(repoRoot);
-        await new OfflineGeoworldPlayModeTravelPreviewEvidenceService()
-            .BuildAndWriteAsync(repoRoot);
-        await new OfflineGeoworldInteractiveTravelPreviewEvidenceService()
+        await new OfflineGeoworldInteractionPlayableProbeEvidenceService()
             .BuildAndWriteAsync(repoRoot);
         var service = new VisualWorldStreamPreviewWorkspaceService();
         var first = service.Build(repoRoot);
@@ -269,6 +260,43 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.True(interactiveSummary.GetProperty("offlineGeoworldInteractiveTravelSimulatedExecutionProofPassed").GetBoolean());
         Assert.True(interactiveSummary.GetProperty("offlineGeoworldInteractiveTravelNegativeProofPassed").GetBoolean());
         Assert.True(interactiveSummary.GetProperty("offlineGeoworldInteractiveTravelQualityGatePassed").GetBoolean());
+        var interactionGroup = Assert.Single(
+            groups,
+            item => item.GetProperty("groupId").GetString() == "offline_geoworld_interactions");
+        var interactionEntries = interactionGroup.GetProperty("entries").EnumerateArray().ToArray();
+        var interactionSummary = Assert.Single(
+            interactionEntries,
+            item => item.GetProperty("artifactKind").GetString()
+                    == "offline_geoworld_interaction_workspace_summary");
+        var interactionPayloads = interactionEntries
+            .Where(item =>
+                item.GetProperty("artifactKind").GetString()
+                == "offline_geoworld_interaction_streamingassets_payload")
+            .ToArray();
+        var interactionScripts = interactionEntries
+            .Where(item =>
+                item.GetProperty("artifactKind").GetString()
+                == "offline_geoworld_interaction_unity_script")
+            .ToArray();
+        var interactionEditorScript = Assert.Single(
+            interactionEntries,
+            item => item.GetProperty("artifactKind").GetString()
+                    == "offline_geoworld_interaction_editor_window_script");
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionTargetCount").GetInt32() >= 8);
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionActionKindCount").GetInt32() >= 5);
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionScriptedEventCount").GetInt32() >= 6);
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionStateDeltaCount").GetInt32() >= 6);
+        Assert.Equal(6, interactionPayloads.Length);
+        Assert.Equal(3, interactionScripts.Length);
+        Assert.True(interactionEditorScript.GetProperty("offlineGeoworldInteractionEditorWindowReady").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionStateHashChainPassed").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionUnityScriptsReady").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionEditorWindowReady").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionUnitySafetyScanPassed").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionSimulatedSessionProofPassed").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionNegativeProofPassed").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionAlphaRuntimeBootstrapUnchanged").GetBoolean());
+        Assert.True(interactionSummary.GetProperty("offlineGeoworldInteractionQualityGatePassed").GetBoolean());
 
         var svgEntries = catalog.RootElement.GetProperty("svgEntries").EnumerateArray().ToArray();
         Assert.All(svgEntries, entry =>
@@ -341,6 +369,13 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         AssertProofPassed(proofs, "goal104.boundary_crossings");
         AssertProofPassed(proofs, "goal104.prefetch_plan");
         AssertProofPassed(proofs, "goal104.quality_gate");
+        AssertProofPassed(proofs, "goal105.unity_script_inventory");
+        AssertProofPassed(proofs, "goal105.editor_window_inventory");
+        AssertProofPassed(proofs, "goal105.simulated_session");
+        AssertProofPassed(proofs, "goal105.negative");
+        AssertProofPassed(proofs, "goal105.alpha_runtime_bootstrap_unchanged");
+        AssertProofPassed(proofs, "goal105.state_hash_chain");
+        AssertProofPassed(proofs, "goal105.quality_gate");
         Assert.True(binding.RootElement.GetProperty("passed").GetBoolean());
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysCacheExports").GetBoolean());
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysUnityHandoff").GetBoolean());
@@ -350,6 +385,7 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysOfflineGeoworldUnityEditorPreview").GetBoolean());
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysOfflineGeoworldPlayModeTravel").GetBoolean());
         Assert.True(binding.RootElement.GetProperty("pageBindDisplaysOfflineGeoworldInteractiveTravel").GetBoolean());
+        Assert.True(binding.RootElement.GetProperty("pageBindDisplaysOfflineGeoworldInteractions").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("passed").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("goal091StreamWindowsVisible").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("cacheExportGroupPresent").GetBoolean());
@@ -451,6 +487,21 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractiveTravelAlphaRuntimeBootstrapUnchanged").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractiveTravelQualityGatePassed").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("goal104FilesDiscoveredByRelativePaths").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionGroupPresent").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionTargetCount").GetInt32() >= 8);
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionActionKindCount").GetInt32() >= 5);
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionActionCount").GetInt32() >= 8);
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionScriptedEventCount").GetInt32() >= 6);
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionStateDeltaCount").GetInt32() >= 6);
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionStateHashChainPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionUnityScriptsReady").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionEditorWindowReady").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionUnitySafetyScanPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionSimulatedSessionProofPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionNegativeProofPassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionAlphaRuntimeBootstrapUnchanged").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("offlineGeoworldInteractionQualityGatePassed").GetBoolean());
+        Assert.True(quality.RootElement.GetProperty("goal105FilesDiscoveredByRelativePaths").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noAbsolutePaths").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noBinaryOrRasterMediaAdded").GetBoolean());
         Assert.True(quality.RootElement.GetProperty("noRuntimeUnityProviderSchemaProjectDependencyChanges").GetBoolean());
@@ -497,6 +548,18 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
                 "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractiveTravelWindow.cs",
                 StringComparison.Ordinal)
             && !item.StartsWith(
+                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionController.cs",
+                StringComparison.Ordinal)
+            && !item.StartsWith(
+                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionTarget.cs",
+                StringComparison.Ordinal)
+            && !item.StartsWith(
+                "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldStateDeltaLog.cs",
+                StringComparison.Ordinal)
+            && !item.StartsWith(
+                "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractionProbeWindow.cs",
+                StringComparison.Ordinal)
+            && !item.StartsWith(
                 "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal100/",
                 StringComparison.Ordinal)
             && !item.StartsWith(
@@ -507,6 +570,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
                 StringComparison.Ordinal)
             && !item.StartsWith(
                 "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal104/",
+                StringComparison.Ordinal)
+            && !item.StartsWith(
+                "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal105/",
                 StringComparison.Ordinal));
         Assert.DoesNotContain(expectedPrefixes, item => item.StartsWith("src/LLMGameCreator.GamePackage", StringComparison.Ordinal));
         Assert.DoesNotContain(expectedPrefixes, item => item.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase));
@@ -555,6 +621,19 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
             "StreamingAssets",
             "LLMGameCreator",
             "OfflineGeoworldGoal104");
+        var goal105ArtifactRoot = Path.Combine(
+            repoRoot,
+            ".llmgc",
+            "procedural",
+            "goal-105-offline-geoworld-interaction-playable-probe");
+        var goal105StreamingRoot = Path.Combine(
+            repoRoot,
+            "unity",
+            "LLMGameCreatorAlpha",
+            "Assets",
+            "StreamingAssets",
+            "LLMGameCreator",
+            "OfflineGeoworldGoal105");
         var mediaFiles = new[]
             {
                 goal101ArtifactRoot,
@@ -563,7 +642,9 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
                 goal103ArtifactRoot,
                 goal103StreamingRoot,
                 goal104ArtifactRoot,
-                goal104StreamingRoot
+                goal104StreamingRoot,
+                goal105ArtifactRoot,
+                goal105StreamingRoot
             }
             .SelectMany(path => Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories))
             .Where(path => BinaryOrRasterMediaExtensions.Contains(Path.GetExtension(path)))
@@ -606,6 +687,19 @@ public sealed class VisualWorldStreamPreviewWorkspaceProductSmokeTests
         Assert.Contains("offlineGeoworldInteractiveTravelEditorWindowReady: true", report);
         Assert.Contains("offlineGeoworldInteractiveTravelQualityGatePassed: true", report);
         Assert.Contains("goal104FilesDiscoveredByRelativePaths: true", report);
+        Assert.Contains("offlineGeoworldInteractionTargetCount:", report);
+        Assert.Contains("offlineGeoworldInteractionActionKindCount:", report);
+        Assert.Contains("offlineGeoworldInteractionScriptedEventCount:", report);
+        Assert.Contains("offlineGeoworldInteractionStateDeltaCount:", report);
+        Assert.Contains("offlineGeoworldInteractionStateHashChainPassed: true", report);
+        Assert.Contains("offlineGeoworldInteractionUnityScriptsReady: true", report);
+        Assert.Contains("offlineGeoworldInteractionEditorWindowReady: true", report);
+        Assert.Contains("offlineGeoworldInteractionUnitySafetyScanPassed: true", report);
+        Assert.Contains("offlineGeoworldInteractionSimulatedSessionProofPassed: true", report);
+        Assert.Contains("offlineGeoworldInteractionNegativeProofPassed: true", report);
+        Assert.Contains("offlineGeoworldInteractionAlphaRuntimeBootstrapUnchanged: true", report);
+        Assert.Contains("offlineGeoworldInteractionQualityGatePassed: true", report);
+        Assert.Contains("goal105FilesDiscoveredByRelativePaths: true", report);
         Assert.DoesNotContain(repoRoot, report, StringComparison.OrdinalIgnoreCase);
     }
 

@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "offline_geoworld_interaction_targets_v1",
+  "goalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "accepted": false,
+  "targetCount": 8,
+  "sourceGoal104VisibleObjectCount": 18,
+  "targets": [
+    {
+      "targetId": "interaction_target/4043aa856b4f",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_terrain_hint_marker_4043aa856b4f",
+      "sourceObjectId": "interactive_object/07d19620806e",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_terrain_hint_marker_07d19620806e",
+      "sourceCommandId": "preview_command/6fb571ad5cbdfe54",
+      "commandKind": "terrain_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 3,
+      "gridZ": 3,
+      "elevation": 1,
+      "interactionRadius": 2.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "actionIds": [
+        "interaction_action/4043aa856b4f/inspect"
+      ]
+    },
+    {
+      "targetId": "interaction_target/ea90e067a16e",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_terrain_hint_marker_ea90e067a16e",
+      "sourceObjectId": "interactive_object/08c7b72467f4",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_terrain_hint_marker_08c7b72467f4",
+      "sourceCommandId": "preview_command/55d73d108fcef19c",
+      "commandKind": "terrain_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 12,
+      "gridZ": 3,
+      "elevation": 1,
+      "interactionRadius": 3.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "actionIds": [
+        "interaction_action/ea90e067a16e/enter_or_focus"
+      ]
+    },
+    {
+      "targetId": "interaction_target/f57703787317",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_administrative_hint_marker_f57703787317",
+      "sourceObjectId": "interactive_object/12773e0efec7",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_12773e0efec7",
+      "sourceCommandId": "preview_command/c1872a5502d4b3f6",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "gridX": 0,
+      "gridZ": 6,
+      "elevation": 0,
+      "interactionRadius": 4.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "actionIds": [
+        "interaction_action/f57703787317/mark_visited"
+      ]
+    },
+    {
+      "targetId": "interaction_target/aec8482c9f7b",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_administrative_hint_marker_aec8482c9f7b",
+      "sourceObjectId": "interactive_object/1a8a631eb0dd",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_1a8a631eb0dd",
+      "sourceCommandId": "preview_command/863e010a16565f56",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4210/y6141",
+      "gridX": 6,
+      "gridZ": 0,
+      "elevation": 0,
+      "interactionRadius": 2.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "actionIds": [
+        "interaction_action/aec8482c9f7b/toggle_blocked"
+      ]
+    },
+    {
+      "targetId": "interaction_target/d73a4a060831",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_barrier_line_d73a4a060831",
+      "sourceObjectId": "interactive_object/27ffbfa8a3ed",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_barrier_line_27ffbfa8a3ed",
+      "sourceCommandId": "preview_command/f6c97ce05f93c0b5",
+      "commandKind": "barrier_line",
+      "sourceChunkKey": "z14/x4209/y6142",
+      "gridX": 12,
+      "gridZ": 6,
+      "elevation": 0,
+      "interactionRadius": 3.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        1
+      ],
+      "actionIds": [
+        "interaction_action/d73a4a060831/collect_sample"
+      ]
+    },
+    {
+      "targetId": "interaction_target/69dd05489882",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_bridge_marker_69dd05489882",
+      "sourceObjectId": "interactive_object/2ac3b5b60b9a",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_bridge_marker_2ac3b5b60b9a",
+      "sourceCommandId": "preview_command/05ed8679f5108505",
+      "commandKind": "bridge_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 9,
+      "gridZ": 6,
+      "elevation": 2,
+      "interactionRadius": 4.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        0,
+        1,
+        3
+      ],
+      "actionIds": [
+        "interaction_action/69dd05489882/inspect"
+      ]
+    },
+    {
+      "targetId": "interaction_target/bb3a303c471f",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_administrative_hint_marker_bb3a303c471f",
+      "sourceObjectId": "interactive_object/6ca2ae81e33a",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_administrative_hint_marker_6ca2ae81e33a",
+      "sourceCommandId": "preview_command/de673df37f3e6e13",
+      "commandKind": "administrative_hint_marker",
+      "sourceChunkKey": "z14/x4209/y6141",
+      "gridX": 9,
+      "gridZ": 0,
+      "elevation": 0,
+      "interactionRadius": 2.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        1,
+        2
+      ],
+      "actionIds": [
+        "interaction_action/bb3a303c471f/inspect"
+      ]
+    },
+    {
+      "targetId": "interaction_target/941dde1b7eda",
+      "targetName": "__LLMGC_OfflineGeoworldInteraction_vegetation_area_marker_941dde1b7eda",
+      "sourceObjectId": "interactive_object/6ceaebb0326e",
+      "sourceObjectName": "__LLMGC_OfflineGeoworldInteractive_vegetation_area_marker_6ceaebb0326e",
+      "sourceCommandId": "preview_command/886a712e8ce9ba50",
+      "commandKind": "vegetation_area_marker",
+      "sourceChunkKey": "z14/x4210/y6142",
+      "gridX": 0,
+      "gridZ": 3,
+      "elevation": 1,
+      "interactionRadius": 3.5,
+      "bindById": true,
+      "bindByName": true,
+      "metadataOnly": true,
+      "rawGeodataIncluded": false,
+      "visibleStepIndexes": [
+        1,
+        2,
+        3
+      ],
+      "actionIds": [
+        "interaction_action/941dde1b7eda/inspect"
+      ]
+    }
+  ]
+}

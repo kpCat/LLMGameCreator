@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "offline_geoworld_interaction_readme_v1",
+  "goalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "offlineSyntheticOnly": true,
+  "metadataOnly": true,
+  "stateDeltasInMemoryOnlyInUnity": true,
+  "implementsFinalRuntimeGameplay": false,
+  "implementsFinalArt": false,
+  "implementsRealGeodataFetching": false,
+  "implementsReleaseBuildBehavior": false,
+  "usesRelativePathsOnly": true,
+  "scopeSummary": "Unity Alpha interaction probe over real Goal104 metadata with separate state deltas."
+}

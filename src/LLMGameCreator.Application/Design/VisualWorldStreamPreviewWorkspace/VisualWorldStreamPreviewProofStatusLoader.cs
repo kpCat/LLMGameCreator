@@ -6,7 +6,6 @@ using LLMGameCreator.Application.Design.OfflineGeoworldUnityPreviewRunner;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 
 namespace LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
-
 public sealed partial class VisualWorldStreamPreviewWorkspaceService
 {
     private static IReadOnlyList<VisualWorldPreviewProofStatus> BuildProofStatus(
@@ -92,6 +91,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal102OfflineGeoworldUnityEditorPreviewProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal103OfflineGeoworldPlayModeTravelProofStatus(projectRoot, proofDiagnostics));
         proofs.AddRange(BuildGoal104OfflineGeoworldInteractiveTravelProofStatus(projectRoot, proofDiagnostics));
+        proofs.AddRange(BuildGoal105OfflineGeoworldInteractionProofStatus(projectRoot, proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();
@@ -672,7 +672,6 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             passed = TryGetBool(doc.RootElement, booleanProperty);
             summary = BuildProofSummary(doc.RootElement, booleanProperty, passed);
         }
-
         if (!passed)
         {
             diagnostics.Add(VisualWorldPreviewDiagnostic.Error(

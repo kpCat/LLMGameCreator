@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "offline_geoworld_interaction_actions_v1",
+  "goalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "accepted": false,
+  "actionCount": 8,
+  "actionKindCount": 5,
+  "actionKinds": [
+    "collect_sample",
+    "enter_or_focus",
+    "inspect",
+    "mark_visited",
+    "toggle_blocked"
+  ],
+  "actions": [
+    {
+      "actionId": "interaction_action/4043aa856b4f/inspect",
+      "targetId": "interaction_target/4043aa856b4f",
+      "actionKind": "inspect",
+      "displayLabel": "inspect terrain_hint_marker",
+      "requiredRadius": 2.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "inspection_log"
+    },
+    {
+      "actionId": "interaction_action/ea90e067a16e/enter_or_focus",
+      "targetId": "interaction_target/ea90e067a16e",
+      "actionKind": "enter_or_focus",
+      "displayLabel": "enter or focus terrain_hint_marker",
+      "requiredRadius": 3.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "focus_target"
+    },
+    {
+      "actionId": "interaction_action/f57703787317/mark_visited",
+      "targetId": "interaction_target/f57703787317",
+      "actionKind": "mark_visited",
+      "displayLabel": "mark visited administrative_hint_marker",
+      "requiredRadius": 3.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "visited_flag"
+    },
+    {
+      "actionId": "interaction_action/aec8482c9f7b/toggle_blocked",
+      "targetId": "interaction_target/aec8482c9f7b",
+      "actionKind": "toggle_blocked",
+      "displayLabel": "toggle blocked administrative_hint_marker",
+      "requiredRadius": 2.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "blocked_flag"
+    },
+    {
+      "actionId": "interaction_action/d73a4a060831/collect_sample",
+      "targetId": "interaction_target/d73a4a060831",
+      "actionKind": "collect_sample",
+      "displayLabel": "collect sample barrier_line",
+      "requiredRadius": 2.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "sample_collected"
+    },
+    {
+      "actionId": "interaction_action/69dd05489882/inspect",
+      "targetId": "interaction_target/69dd05489882",
+      "actionKind": "inspect",
+      "displayLabel": "inspect bridge_marker",
+      "requiredRadius": 3.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "inspection_log"
+    },
+    {
+      "actionId": "interaction_action/bb3a303c471f/inspect",
+      "targetId": "interaction_target/bb3a303c471f",
+      "actionKind": "inspect",
+      "displayLabel": "inspect administrative_hint_marker",
+      "requiredRadius": 2.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "inspection_log"
+    },
+    {
+      "actionId": "interaction_action/941dde1b7eda/inspect",
+      "targetId": "interaction_target/941dde1b7eda",
+      "actionKind": "inspect",
+      "displayLabel": "inspect vegetation_area_marker",
+      "requiredRadius": 3.5,
+      "requiresProximity": true,
+      "producesStateDelta": true,
+      "stateDeltaKind": "inspection_log"
+    }
+  ]
+}

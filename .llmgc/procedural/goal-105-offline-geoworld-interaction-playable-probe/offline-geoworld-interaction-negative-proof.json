@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "offline_geoworld_interaction_negative_proof_v1",
+  "goalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "passed": true,
+  "scenarioCount": 13,
+  "rejectedCount": 13,
+  "matchedExpectationCount": 13,
+  "scenarios": [
+    {
+      "scenarioId": "missing_goal104_payload",
+      "causalMutation": "Goal104 source payload removed",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.goal104_missing",
+          "target": "Goal104 payload",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "interaction_target_referencing_unknown_object",
+      "causalMutation": "target source object id is unknown",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.unknown_target_object",
+          "target": "targets",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "action_missing_target",
+      "causalMutation": "action references a missing target",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.action_missing_target",
+          "target": "actions",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "unavailable_action_accepted_outside_radius",
+      "causalMutation": "outside-radius action accepted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.radius",
+          "target": "actions",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "state_delta_mutates_base_data_directly",
+      "causalMutation": "state delta mutates immutable base target",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.base_mutation",
+          "target": "state deltas",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "fake_success_without_file_reads",
+      "causalMutation": "proof marked passed without file reads",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.fake_success",
+          "target": "simulated proof",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "absolute_path",
+      "causalMutation": "absolute local path inserted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.absolute_path",
+          "target": "payload",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "raw_geodata_leak",
+      "causalMutation": "raw geodata marker inserted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.raw_geodata",
+          "target": "payload",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "network_provider_marker",
+      "causalMutation": "network/provider marker inserted",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.provider_network",
+          "target": "Unity scripts",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "alpha_runtime_bootstrap_dependency_marker",
+      "causalMutation": "Unity script references AlphaRuntimeBootstrap",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.alpha_bootstrap",
+          "target": "Unity scripts",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "scene_prefab_settings_mutation_marker",
+      "causalMutation": "editor helper mutates scene/settings on import",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.scene_settings",
+          "target": "Unity editor helper",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "binary_raster_media_marker",
+      "causalMutation": "binary or raster media added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.binary_media",
+          "target": "payload",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    },
+    {
+      "scenarioId": "external_dependency_new_input_system_marker",
+      "causalMutation": "external dependency or new input-system marker added",
+      "actualStatus": "rejected",
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "goal105.negative.external_dependency",
+          "target": "Unity scripts",
+          "message": "Goal105 negative proof rejected the mutated interaction probe input."
+        }
+      ]
+    }
+  ]
+}

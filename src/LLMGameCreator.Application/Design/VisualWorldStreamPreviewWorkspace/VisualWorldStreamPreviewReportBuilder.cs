@@ -176,6 +176,36 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             OfflineGeoworldInteractiveTravelQualityGatePassed =
                 qualityGate.OfflineGeoworldInteractiveTravelQualityGatePassed,
             Goal104FilesDiscoveredByRelativePaths = qualityGate.Goal104FilesDiscoveredByRelativePaths,
+            OfflineGeoworldInteractionTargetCount =
+                qualityGate.OfflineGeoworldInteractionTargetCount,
+            OfflineGeoworldInteractionActionKindCount =
+                qualityGate.OfflineGeoworldInteractionActionKindCount,
+            OfflineGeoworldInteractionActionCount =
+                qualityGate.OfflineGeoworldInteractionActionCount,
+            OfflineGeoworldInteractionScriptedEventCount =
+                qualityGate.OfflineGeoworldInteractionScriptedEventCount,
+            OfflineGeoworldInteractionStateDeltaCount =
+                qualityGate.OfflineGeoworldInteractionStateDeltaCount,
+            OfflineGeoworldInteractionFinalStateHash =
+                qualityGate.OfflineGeoworldInteractionFinalStateHash,
+            OfflineGeoworldInteractionStateHashChainPassed =
+                qualityGate.OfflineGeoworldInteractionStateHashChainPassed,
+            OfflineGeoworldInteractionUnityScriptsReady =
+                qualityGate.OfflineGeoworldInteractionUnityScriptsReady,
+            OfflineGeoworldInteractionEditorWindowReady =
+                qualityGate.OfflineGeoworldInteractionEditorWindowReady,
+            OfflineGeoworldInteractionUnitySafetyScanPassed =
+                qualityGate.OfflineGeoworldInteractionUnitySafetyScanPassed,
+            OfflineGeoworldInteractionSimulatedSessionProofPassed =
+                qualityGate.OfflineGeoworldInteractionSimulatedSessionProofPassed,
+            OfflineGeoworldInteractionNegativeProofPassed =
+                qualityGate.OfflineGeoworldInteractionNegativeProofPassed,
+            OfflineGeoworldInteractionAlphaRuntimeBootstrapUnchanged =
+                qualityGate.OfflineGeoworldInteractionAlphaRuntimeBootstrapUnchanged,
+            OfflineGeoworldInteractionQualityGatePassed =
+                qualityGate.OfflineGeoworldInteractionQualityGatePassed,
+            Goal105FilesDiscoveredByRelativePaths =
+                qualityGate.Goal105FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

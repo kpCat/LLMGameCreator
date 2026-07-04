@@ -1,8 +1,7 @@
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Windows.Forms;
-using LLMGameCreator.Application.Design.OfflineGeoworldUnityEditorPreviewTool;
-using LLMGameCreator.Application.Design.OfflineGeoworldUnityPlayModeTravelPreview;
+using LLMGameCreator.Application.Design.OfflineGeoworldInteractionPlayableProbe;
 using LLMGameCreator.Application.Design.OfflineGeoworldWorldSourceGraph;
 using LLMGameCreator.Application.Design.VisualWorldStreamPreviewWorkspace;
 using LLMGameCreator.WinForms.Pages;
@@ -13,7 +12,7 @@ namespace LLMGameCreator.Tests.Application.VisualWorldStreamPreviewWorkspace;
 public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
 {
     [Fact]
-    public void ServiceLoadsRealGoal086Through103Artifacts()
+    public void ServiceLoadsRealGoal086Through105Artifacts()
     {
         var result = Build();
         var groupIds = result.Catalog.Groups.Select(group => group.GroupId).ToArray();
@@ -31,7 +30,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
         Assert.Contains("offline_geoworld_unity_preview", groupIds);
         Assert.Contains("offline_geoworld_unity_editor_preview", groupIds);
         Assert.Contains("offline_geoworld_playmode_travel", groupIds);
-        Assert.Equal(12, result.Catalog.GroupCount);
+        Assert.Contains("offline_geoworld_interactive_travel", groupIds);
+        Assert.Contains("offline_geoworld_interactions", groupIds);
+        Assert.Equal(14, result.Catalog.GroupCount);
         Assert.True(result.Catalog.EntryCount >= 140);
         Assert.True(result.Catalog.SvgTextPreviewCount >= 39);
         Assert.DoesNotContain(result.Diagnostics, item => item.Severity == "error");
@@ -582,6 +583,31 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
                 "offlineGeoworldUnityEditorPreviewClearOperationProofPassed: true",
                 editorDetails,
                 StringComparison.Ordinal);
+            groups.SelectedItem = groups.Items
+                .Cast<object>()
+                .First(item => item.ToString()!.Contains(
+                    "GroupId = offline_geoworld_interactions,",
+                    StringComparison.Ordinal));
+            var interactionItem = entries.Items
+                .Cast<ListViewItem>()
+                .First(item => item.Tag is VisualWorldPreviewArtifactEntry entry
+                               && entry.ArtifactKind
+                                   == "offline_geoworld_interaction_workspace_summary");
+            var interactionEntry = Assert.IsType<VisualWorldPreviewArtifactEntry>(interactionItem.Tag);
+            var interactionDetails = InvokePrivateStatic<string>(
+                typeof(VisualWorldStreamPreviewWorkspacePageControl),
+                "BuildEntryDetails",
+                interactionEntry);
+
+            Assert.Contains("offlineGeoworldInteractionTargetCount: ", interactionDetails, StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldInteractionStateHashChainPassed: true",
+                interactionDetails,
+                StringComparison.Ordinal);
+            Assert.Contains(
+                "offlineGeoworldInteractionUnitySafetyScanPassed: true",
+                interactionDetails,
+                StringComparison.Ordinal);
             Assert.True(
                 svgPreview.Text.Contains("<svg", StringComparison.OrdinalIgnoreCase)
                 || svgPreview.Text.Contains("No text SVG preview", StringComparison.Ordinal));
@@ -608,11 +634,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceServiceTests
     private static VisualWorldStreamPreviewWorkspaceResult Build()
     {
         var root = ProjectRoot();
-        new OfflineGeoworldUnityEditorPreviewToolEvidenceService()
-            .BuildAndWriteAsync(root)
-            .GetAwaiter()
-            .GetResult();
-        new OfflineGeoworldPlayModeTravelPreviewEvidenceService()
+        new OfflineGeoworldInteractionPlayableProbeEvidenceService()
             .BuildAndWriteAsync(root)
             .GetAwaiter()
             .GetResult();

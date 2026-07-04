@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "offline_geoworld_interaction_workspace_binding_inventory_v1",
+  "goalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "passed": true,
+  "workspaceCatalogIncludesInteractionGroup": true,
+  "workspaceReadsGoal105EvidenceByRelativePath": true,
+  "winFormsPageDisplaysInteractionFields": true,
+  "showsTargetCount": true,
+  "showsActionKindCount": true,
+  "showsScriptedEventCount": true,
+  "showsStateDeltaCount": true,
+  "showsDeterministicHashChainStatus": true,
+  "showsUnityScriptReadiness": true,
+  "showsEditorHelperReadiness": true,
+  "showsUnitySafetyScanStatus": true,
+  "showsSimulatedSessionProofStatus": true,
+  "showsAlphaRuntimeBootstrapUnchangedStatus": true,
+  "diagnostics": []
+}

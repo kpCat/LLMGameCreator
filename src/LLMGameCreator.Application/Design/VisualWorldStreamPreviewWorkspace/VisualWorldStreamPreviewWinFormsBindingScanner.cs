@@ -139,6 +139,42 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "offlineGeoworldInteractiveTravelQualityGatePassed",
                 StringComparison.Ordinal);
+        var bindDisplaysOfflineGeoworldInteractions = pageText.Contains(
+                "offlineGeoworldInteractionTargetCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionActionKindCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionScriptedEventCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionStateDeltaCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionStateHashChainPassed",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionUnityScriptsReady",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionEditorWindowReady",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionUnitySafetyScanPassed",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionSimulatedSessionProofPassed",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionNegativeProofPassed",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionAlphaRuntimeBootstrapUnchanged",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "offlineGeoworldInteractionQualityGatePassed",
+                StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -187,6 +223,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal104.winforms.offline_geoworld_interactive_travel_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysOfflineGeoworldInteractions,
+            "goal105.winforms.offline_geoworld_interaction_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -210,6 +251,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysOfflineGeoworldPlayModeTravel,
             PageBindDisplaysOfflineGeoworldInteractiveTravel =
                 bindDisplaysOfflineGeoworldInteractiveTravel,
+            PageBindDisplaysOfflineGeoworldInteractions =
+                bindDisplaysOfflineGeoworldInteractions,
             Diagnostics = diagnostics
         };
     }

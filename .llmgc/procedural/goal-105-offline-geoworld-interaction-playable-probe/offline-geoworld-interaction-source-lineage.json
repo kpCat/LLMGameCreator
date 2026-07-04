@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "offline_geoworld_interaction_source_lineage_v1",
+  "goalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "passed": true,
+  "goal104AcceptedFalsePreserved": true,
+  "goal104PayloadConsumed": true,
+  "goal104UnityScriptEvidenceConsumed": true,
+  "records": [
+    {
+      "relativePath": ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-travel-manifest.json",
+      "exists": true,
+      "sha256": "ff29eb94a779fcca123e086f572670ef39e168376b305e67292797372cb7d5e0",
+      "purpose": "Goal104 manifest"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-movement-path.json",
+      "exists": true,
+      "sha256": "1ff2a0911c0df89b70aef49c637387ab724e35398ccff33bcbba066d58900c4b",
+      "purpose": "Goal104 movement path"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-prefetch-plan.json",
+      "exists": true,
+      "sha256": "f452d19fcc8d09b484ce75872731ef32f4b089fa1856c05c973054c5ea6cd976",
+      "purpose": "Goal104 visible object index"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-simulated-execution-proof.json",
+      "exists": true,
+      "sha256": "d3118542458a495ee5e2b17293a039d3bd4ea28c5f39815b4be6ede4e8239ccc",
+      "purpose": "Goal104 simulated execution proof"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-104-offline-geoworld-interactive-travel-preview/offline-geoworld-interactive-unity-script-inventory.json",
+      "exists": true,
+      "sha256": "464f8b0c29ab61f6cd77d0a12e0a2513195fe6bacb6a6debd4528028fba4cc15",
+      "purpose": "Goal104 Unity script inventory"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractiveTravelController.cs",
+      "exists": true,
+      "sha256": "192fd0efb945aa69dac0819e506ea23fe3bf5ad8db9f430a218fd7c2a3013e70",
+      "purpose": "Goal104 Unity interactive controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldInteractionController.cs",
+      "exists": true,
+      "sha256": "7ea0a990b70f28cb76f67eab12b90f6a44ff3385781c396d5e8439593887685e",
+      "purpose": "Goal105 Unity interaction controller"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractionProbeWindow.cs",
+      "exists": true,
+      "sha256": "eb0bbebc4f48b8139b30412ed5d5157179ec00de6e9cb7b3a37ec2251729f815",
+      "purpose": "Goal105 Unity editor helper"
+    }
+  ],
+  "diagnostics": []
+}

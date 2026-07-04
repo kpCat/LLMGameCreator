@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "offline_geoworld_interaction_editor_window_inventory_v1",
+  "goalId": "goal_105_offline_geoworld_interaction_playable_probe",
+  "passed": true,
+  "editorWindowScriptExists": true,
+  "menuItemMarkerPresent": true,
+  "streamingAssetsPathMarkerPresent": true,
+  "goal105PayloadPathMarkerPresent": true,
+  "createRigMethodPresent": true,
+  "clearRigMethodPresent": true,
+  "payloadReadinessUiPresent": true,
+  "manualButtonOnly": true,
+  "hasNoProviderNetworkMarkers": true,
+  "doesNotReferenceAlphaRuntimeBootstrap": true,
+  "hasNoScenePrefabSettingsMutationMarkers": true,
+  "hasNoAutoRunImportMarker": true,
+  "sourceFile": {
+    "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldInteractionProbeWindow.cs",
+    "exists": true,
+    "sha256": "eb0bbebc4f48b8139b30412ed5d5157179ec00de6e9cb7b3a37ec2251729f815",
+    "lineCount": 119,
+    "maxLineLength": 114,
+    "notMinified": true,
+    "hasNoProviderNetworkMarkers": true,
+    "doesNotReferenceAlphaRuntimeBootstrap": true,
+    "hasNoScenePrefabSettingsMutationMarkers": true,
+    "hasNoExternalDependencyMarkers": true
+  },
+  "diagnostics": []
+}
