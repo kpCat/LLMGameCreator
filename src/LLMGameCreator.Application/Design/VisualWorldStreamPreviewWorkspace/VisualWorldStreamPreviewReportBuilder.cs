@@ -383,6 +383,28 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaAcceptanceOperatorQualityGatePassed,
             Goal112FilesDiscoveredByRelativePaths =
                 qualityGate.Goal112FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaManualResultWorkbenchStatus =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchStatus,
+            OfflineGeoworldAlphaManualResultWorkbenchGoal111DecisionStatus =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchGoal111DecisionStatus,
+            OfflineGeoworldAlphaManualResultWorkbenchGoal112OperatorStatus =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchGoal112OperatorStatus,
+            OfflineGeoworldAlphaManualResultWorkbenchManualResultPresent =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchManualResultPresent,
+            OfflineGeoworldAlphaManualResultWorkbenchAcceptedByCodex =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchAcceptedByCodex,
+            OfflineGeoworldAlphaManualResultWorkbenchHumanAcceptanceStillRequired =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchHumanAcceptanceStillRequired,
+            OfflineGeoworldAlphaManualResultWorkbenchDraftTemplateOnly =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchDraftTemplateOnly,
+            OfflineGeoworldAlphaManualResultWorkbenchChecklistStepCount =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchChecklistStepCount,
+            OfflineGeoworldAlphaManualResultWorkbenchChecklistHashPresent =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchChecklistHashPresent,
+            OfflineGeoworldAlphaManualResultWorkbenchQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaManualResultWorkbenchQualityGatePassed,
+            Goal113FilesDiscoveredByRelativePaths =
+                qualityGate.Goal113FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

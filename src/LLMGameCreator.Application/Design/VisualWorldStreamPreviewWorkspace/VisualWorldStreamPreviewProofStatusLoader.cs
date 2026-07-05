@@ -104,6 +104,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal112OfflineGeoworldAlphaAcceptanceOperatorPackProofStatus(
             projectRoot,
             proofDiagnostics));
+        proofs.AddRange(BuildGoal113OfflineGeoworldAlphaManualResultWorkbenchProofStatus(
+            projectRoot,
+            proofDiagnostics));
 
         diagnostics.AddRange(proofDiagnostics);
         return proofs.OrderBy(item => item.ProofId, StringComparer.Ordinal).ToList();

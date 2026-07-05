@@ -105,6 +105,7 @@ offline_geoworld_alpha_slice_export_package_verification required
 offline_geoworld_alpha_manual_acceptance_verification required
 offline_geoworld_alpha_manual_result_intake_verification produced, blocked pending real manual result
 offline_geoworld_alpha_acceptance_operator_pack_verification produced, operator ready pending human run
+offline_geoworld_alpha_manual_result_workbench_verification produced, workbench ready pending human result
 ```
 
 Current capabilities:
@@ -148,6 +149,7 @@ Current capabilities:
 - Goal 110 offline geoworld Alpha manual acceptance gate evidence with a BCL-only Application acceptance service, checklist/result-template/dashboard payloads, simulated result readback proof, 13-case negative proof, standalone Unity result/store scripts, Editor acceptance runner window, StreamingAssets metadata mirror and Visual World Stream Preview Workspace inspection;
 - Goal 111 offline geoworld Alpha manual-result intake evidence with a BCL-only Application verifier, deterministic decision/report/index/quality/negative-proof artifacts, export dashboard/readme/index metadata and Visual World Stream Preview Workspace decision visibility; current decision is `BLOCKED_PENDING_MANUAL_RESULT` because no real human result JSON exists yet;
 - Goal 112 offline geoworld Alpha acceptance operator pack evidence with a BCL-only Application operator service, deterministic dashboard/runbook/path-map/preflight/notary/quality/negative-proof artifacts, export metadata, short manual-acceptance runbook and Visual World Stream Preview Workspace RC readiness visibility; current operator status is `OPERATOR_READY_PENDING_HUMAN_RUN` because no real human result JSON exists yet;
+- Goal 113 offline geoworld Alpha manual-result workbench evidence with a BCL-only Application workbench service, deterministic dashboard/runbook/field-map/draft-template/quality/negative-proof artifacts, export metadata, short manual-result guide and Visual World Stream Preview Workspace workbench visibility; current workbench status is `WORKBENCH_READY_PENDING_HUMAN_RESULT` because no real human result JSON exists yet;
 - generated Unity quest completion loop evidence with ordered phases, objective checklist, completion and reward proof;
 - generated Unity multi-variant playable scenario evidence for frontier, gothic and caravan styles through the same Alpha pipeline;
 - readable Unity Alpha presentation evidence with scenario, quest, objective checklist, selected target, inventory, reward, event log and controls panels;
@@ -1988,6 +1990,32 @@ decides the manual acceptance gate. Goal 112 is not Alpha acceptance, not final 
 final art/final gameplay, and not live geodata/provider/network/runtime/schema/Lua or generator-library work. Goal112,
 Goal111, Goal110, Goal109, Goal108A, Goal108 and prior geoworld gates remain `accepted=false`.
 
+### Goal 113: Offline Geoworld Alpha Manual Result Workbench
+
+Goal 113 is produced for review as a GREEN manual-result workbench over Goal110, Goal111 and Goal112, while the active
+human gate remains `offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`.
+
+Goal 113 writes deterministic evidence under
+`.llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/`, export metadata under
+`.llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench/`, and the short workbench guide at
+`docs/manual-acceptance/offline-geoworld-alpha-manual-result-workbench.md`. It records
+`workbenchStatus=WORKBENCH_READY_PENDING_HUMAN_RESULT`, `goal111DecisionStatus=BLOCKED_PENDING_MANUAL_RESULT`,
+`goal112OperatorStatus=OPERATOR_READY_PENDING_HUMAN_RUN`, `manualResultPresent=false`, `acceptedByCodex=false`,
+`humanAcceptanceStillRequired=true`, `checklistStepCount=12`, `doesNotWritePreferredManualResultPath=true`,
+`draftTemplateOnly=true`, `notFinalReleaseOrRuntimeBuild=true`, `noRuntimeProviderOrNetworkChanges=true` and
+`noUnityFileChangesRequired=true`.
+
+Goal 113 consumes the real Goal110 acceptance package, Goal111 decision bridge and Goal112 operator pack by
+repository-relative path and surfaces `offline_geoworld_alpha_manual_result_workbench` in the existing Visual World
+Stream Preview Workspace. It is manual-result authoring/review visibility only: no real manual result JSON currently
+exists, so the state remains pending until a human runs the Goal110 Unity checklist, uses the Goal113 draft only as a
+copy/edit starting point, places the real human-created result JSON at
+`.llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json`, re-runs
+Goal111/Goal112/Goal113 validation and explicitly decides the manual acceptance gate. Goal 113 is not Alpha acceptance,
+not final release, not final Runtime build, not final art/final gameplay, and not live geodata/provider/network/runtime,
+schema/Lua or generator-library work. Goal113, Goal112, Goal111, Goal110, Goal109, Goal108A, Goal108 and prior
+geoworld gates remain `accepted=false`.
+
 ## Current Recommended Next Work
 
 ```text
@@ -1997,5 +2025,5 @@ offline_geoworld_alpha_manual_acceptance_verification
 Status:
 
 ```text
-goal_112_offline_geoworld_alpha_acceptance_operator_pack_produced_for_review_operator_ready_pending_human_run
+goal_113_offline_geoworld_alpha_manual_result_workbench_produced_for_review_workbench_ready_pending_human_result
 ```

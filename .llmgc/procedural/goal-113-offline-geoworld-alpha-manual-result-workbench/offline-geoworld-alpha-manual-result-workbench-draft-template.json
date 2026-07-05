@@ -1,0 +1,93 @@
+{
+  "draftTemplateOnly": true,
+  "templateCopyOnly": true,
+  "notRealHumanResult": true,
+  "humanMustFillRealResultSeparately": true,
+  "doNotPlaceUnderManualResultPath": true,
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "workbenchGoalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "resultSchema": "offline_geoworld_alpha_acceptance_result_v1",
+  "accepted": false,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "manualAcceptancePending": true,
+  "resultStatus": "draft_template_only",
+  "checklistHash": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "preferredManualResultPath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "notes": "Copy this draft only after a human run, fill real evidence, and save the real result at the preferred manual path.",
+  "steps": [
+    {
+      "stepId": "open_unity_project",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "open_unity_projectEvidence"
+    },
+    {
+      "stepId": "open_alpha_slice_window",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "open_alpha_slice_windowEvidence"
+    },
+    {
+      "stepId": "setup_rig",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "setup_rigEvidence"
+    },
+    {
+      "stepId": "verify_package",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "verify_packageEvidence"
+    },
+    {
+      "stepId": "run_travel",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "run_travelEvidence"
+    },
+    {
+      "stepId": "run_interaction",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "run_interactionEvidence"
+    },
+    {
+      "stepId": "save_snapshot",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "save_snapshotEvidence"
+    },
+    {
+      "stepId": "load_snapshot",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "load_snapshotEvidence"
+    },
+    {
+      "stepId": "replay",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "replayEvidence"
+    },
+    {
+      "stepId": "complete_objectives",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "complete_objectivesEvidence"
+    },
+    {
+      "stepId": "run_package_verifier",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "run_package_verifierEvidence"
+    },
+    {
+      "stepId": "record_diagnostics",
+      "status": "pending",
+      "notes": "replace with real human observation from the Unity runner",
+      "evidenceRef": "record_diagnosticsEvidence"
+    }
+  ]
+}

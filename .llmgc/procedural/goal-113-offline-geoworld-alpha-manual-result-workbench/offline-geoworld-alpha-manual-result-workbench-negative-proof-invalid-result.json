@@ -1,0 +1,10 @@
+{
+  "goalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "scenarioId": "malformed_manual_result_json_does_not_accept_alpha",
+  "passed": true,
+  "manualResultPresent": true,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "workbenchStatus": "WORKBENCH_RESULT_INVALID",
+  "diagnostic": "Malformed manual result JSON is rejected and cannot become Codex acceptance."
+}

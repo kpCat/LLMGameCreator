@@ -1,0 +1,19 @@
+{
+  "goalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "workbenchStatus": "WORKBENCH_READY_PENDING_HUMAN_RESULT",
+  "goal111DecisionStatus": "BLOCKED_PENDING_MANUAL_RESULT",
+  "goal112OperatorStatus": "OPERATOR_READY_PENDING_HUMAN_RUN",
+  "manualResultPresent": false,
+  "preferredManualResultPath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "draftTemplatePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-draft-template.json",
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "doesNotWritePreferredManualResultPath": true,
+  "draftTemplateOnly": true,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "noUnityFileChangesRequired": true,
+  "checklistStepCount": 12,
+  "qualityGatePassed": true
+}

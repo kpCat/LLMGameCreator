@@ -1,0 +1,212 @@
+{
+  "goalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "sourceGoalIds": [
+    "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+    "goal_111_offline_geoworld_alpha_manual_result_intake",
+    "goal_112_offline_geoworld_alpha_acceptance_operator_pack"
+  ],
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "workbenchStatus": "WORKBENCH_READY_PENDING_HUMAN_RESULT",
+  "goal111DecisionStatus": "BLOCKED_PENDING_MANUAL_RESULT",
+  "goal112OperatorStatus": "OPERATOR_READY_PENDING_HUMAN_RUN",
+  "manualResultPresent": false,
+  "preferredManualResultPath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "candidateManualResultPaths": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    ".llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake/input/offline-geoworld-alpha-acceptance-result.json",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-result.json"
+  ],
+  "realManualResultPath": "",
+  "draftTemplatePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-draft-template.json",
+  "doesNotWritePreferredManualResultPath": true,
+  "draftTemplateOnly": true,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "noUnityFileChangesRequired": true,
+  "checklistHash": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "checklistStepCount": 12,
+  "requiredSteps": [
+    {
+      "order": 1,
+      "stepId": "open_unity_project",
+      "title": "Open Unity project",
+      "evidenceField": "open_unity_projectEvidence",
+      "required": true
+    },
+    {
+      "order": 2,
+      "stepId": "open_alpha_slice_window",
+      "title": "Open Alpha Slice window",
+      "evidenceField": "open_alpha_slice_windowEvidence",
+      "required": true
+    },
+    {
+      "order": 3,
+      "stepId": "setup_rig",
+      "title": "Setup rig",
+      "evidenceField": "setup_rigEvidence",
+      "required": true
+    },
+    {
+      "order": 4,
+      "stepId": "verify_package",
+      "title": "Verify package",
+      "evidenceField": "verify_packageEvidence",
+      "required": true
+    },
+    {
+      "order": 5,
+      "stepId": "run_travel",
+      "title": "Run travel",
+      "evidenceField": "run_travelEvidence",
+      "required": true
+    },
+    {
+      "order": 6,
+      "stepId": "run_interaction",
+      "title": "Run interaction",
+      "evidenceField": "run_interactionEvidence",
+      "required": true
+    },
+    {
+      "order": 7,
+      "stepId": "save_snapshot",
+      "title": "Save snapshot",
+      "evidenceField": "save_snapshotEvidence",
+      "required": true
+    },
+    {
+      "order": 8,
+      "stepId": "load_snapshot",
+      "title": "Load snapshot",
+      "evidenceField": "load_snapshotEvidence",
+      "required": true
+    },
+    {
+      "order": 9,
+      "stepId": "replay",
+      "title": "Replay",
+      "evidenceField": "replayEvidence",
+      "required": true
+    },
+    {
+      "order": 10,
+      "stepId": "complete_objectives",
+      "title": "Complete objectives",
+      "evidenceField": "complete_objectivesEvidence",
+      "required": true
+    },
+    {
+      "order": 11,
+      "stepId": "run_package_verifier",
+      "title": "Run package verifier",
+      "evidenceField": "run_package_verifierEvidence",
+      "required": true
+    },
+    {
+      "order": 12,
+      "stepId": "record_diagnostics",
+      "title": "Record diagnostics",
+      "evidenceField": "record_diagnosticsEvidence",
+      "required": true
+    }
+  ],
+  "validation": {
+    "validationStatus": "WORKBENCH_READY_PENDING_HUMAN_RESULT",
+    "acceptedByCodex": false,
+    "humanAcceptanceStillRequired": true,
+    "manualResultPresent": false,
+    "readyForHumanReview": false,
+    "resultFilePath": "",
+    "checklistHashExpected": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+    "checklistHashActual": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+    "stepSummary": {
+      "requiredStepCount": 12,
+      "resultStepCount": 0,
+      "passedCount": 0,
+      "failedCount": 0,
+      "pendingCount": 0,
+      "skippedCount": 0,
+      "missingCount": 0,
+      "duplicateCount": 0,
+      "unknownCount": 0,
+      "invalidStatusCount": 0,
+      "missingStatusCount": 0,
+      "requiredStepsPresentExactlyOnce": false,
+      "missingStepIds": [],
+      "duplicateStepIds": [],
+      "unknownStepIds": []
+    },
+    "errors": [],
+    "warnings": [
+      "manual result file is missing from deterministic candidate paths"
+    ]
+  },
+  "sourceLineage": {
+    "goal110PackagePresent": true,
+    "goal110ChecklistRead": true,
+    "goal110ResultTemplateRead": true,
+    "goal110DashboardRead": true,
+    "goal111DecisionPresent": true,
+    "goal111DecisionValid": true,
+    "goal112DashboardPresent": true,
+    "goal112PathMapPresent": true,
+    "goal112RunbookPresent": true,
+    "goal112ArtifactsPresent": true,
+    "goal110ChecklistStepCount": 12,
+    "goal111DecisionStatus": "BLOCKED_PENDING_MANUAL_RESULT",
+    "goal112OperatorStatus": "OPERATOR_READY_PENDING_HUMAN_RUN",
+    "sha256ByRelativePath": {
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-checklist.json": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-checksums.json": "ed83e6c8e55ea5dc93e738747ec50fa8e99503584515f53b88e5478f55cae5e1",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-file-index.json": "b1d018620d1d582ed8c1a64a3c7e75326c2b1fe5ba86de8d3c803c926b499a73",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-manifest.json": "e8db331ac353e00d999c1696086a26fa10c148a2018132d1d2cece8e760f63c1",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result-template.json": "b75bee4c9853182bee19ec94b7799ae45eb500e63ee46e106f24cbd77c19a1ac",
+      ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-release-gate-dashboard.json": "c98a19e5af637f17265fc01446221b4fe606d545ea9c6e74a8a999986c616641"
+    }
+  },
+  "nextHumanActions": [
+    "Open unity/LLMGameCreatorAlpha in Unity.",
+    "Open LLMGameCreator/Offline Geoworld Alpha Acceptance Runner.",
+    "Use the Goal113 draft template only as a copy/edit starting point.",
+    "Run every Goal110 checklist step manually and record real evidence.",
+    "Write the real result JSON to .llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    "Re-run Goal111, Goal112 and Goal113 validation before deciding the manual gate."
+  ],
+  "doNotStartYet": [
+    "live geodata",
+    "providers",
+    "Runtime consumer",
+    "public schema",
+    "Lua",
+    "generator-library",
+    "final art",
+    "atlas",
+    "scene/prefab/project settings",
+    "release packaging"
+  ],
+  "proceduralArtifactPaths": [
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-dashboard.json",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-file-index.json",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-report.md",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-runbook.md",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-draft-template.json",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-field-map.json",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-quality-gate-scan.json",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-negative-proof-no-result-no-acceptance.json",
+    ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-negative-proof-invalid-result.json"
+  ],
+  "exportArtifactPaths": [
+    ".llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-dashboard.json",
+    ".llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-file-index.json",
+    ".llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-readme.md"
+  ],
+  "runbookPath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-runbook.md",
+  "errors": [],
+  "warnings": [
+    "No real manual result JSON is present in deterministic candidate paths.",
+    "manual result file is missing from deterministic candidate paths"
+  ]
+}

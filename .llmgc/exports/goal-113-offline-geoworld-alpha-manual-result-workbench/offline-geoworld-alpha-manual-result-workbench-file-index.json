@@ -1,0 +1,21 @@
+{
+  "goalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 2,
+  "selfHashExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-dashboard.json",
+      "role": "goal113_manual_result_workbench_export",
+      "required": true,
+      "sha256": "6fc67391c01860db6b0f71045bcf476b9981e4ff892ee03fdfbc6b10f7240f5a"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-readme.md",
+      "role": "goal113_manual_result_workbench_export",
+      "required": true,
+      "sha256": "8c8c105eca751e826a1353abbce65a545075854254bd4954eecad69bacaf9487"
+    }
+  ]
+}

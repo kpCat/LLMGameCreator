@@ -12,6 +12,8 @@ Goal 111 review note: the manual-result intake bridge reads the Goal110 package 
 
 Goal 112 review note: the acceptance operator pack and RC readiness dashboard expose `OPERATOR_READY_PENDING_HUMAN_RUN` over Goal110/Goal111 and tell the human where to place the real result JSON. It does not close release blockers, does not fabricate acceptance, and does not start live geodata/provider/network/runtime/schema/Lua/generator-library/final-art/final-release work.
 
+Goal 113 review note: the manual-result workbench exposes `WORKBENCH_READY_PENDING_HUMAN_RESULT`, the Goal110 required steps, Goal111/Goal112 statuses, the preferred `.llmgc/manual` result path and a safe draft/template outside `.llmgc/manual/**`. It does not close release blockers, does not fabricate or commit a real manual result, and does not start live geodata/provider/network/runtime/schema/Lua/generator-library/final-art/final-release work.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

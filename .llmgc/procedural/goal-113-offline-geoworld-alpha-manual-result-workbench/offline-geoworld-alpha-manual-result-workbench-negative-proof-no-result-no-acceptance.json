@@ -1,0 +1,10 @@
+{
+  "goalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "scenarioId": "missing_manual_result_does_not_accept_alpha",
+  "passed": true,
+  "manualResultPresent": false,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "workbenchStatus": "WORKBENCH_READY_PENDING_HUMAN_RESULT",
+  "diagnostic": "Missing real manual result keeps the workbench pending and cannot accept Alpha."
+}

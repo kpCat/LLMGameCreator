@@ -1,0 +1,99 @@
+{
+  "goalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "draftTemplatePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-draft-template.json",
+  "preferredManualResultPath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "draftTemplateOnly": true,
+  "fields": [
+    {
+      "jsonPath": "$.accepted",
+      "requiredHumanAction": "Set true only after the human completes every required checklist step.",
+      "source": "Goal110 result template"
+    },
+    {
+      "jsonPath": "$.operatorNotes",
+      "requiredHumanAction": "Summarize real manual observations from the Unity runner.",
+      "source": "Goal110 result template"
+    },
+    {
+      "jsonPath": "$.checklistHash",
+      "requiredHumanAction": "Keep the Goal110 checklist hash unchanged.",
+      "source": "Goal110 checklist"
+    },
+    {
+      "jsonPath": "$.steps[*].status",
+      "requiredHumanAction": "Use passed only for real completed steps; failed/pending/skipped are not acceptance.",
+      "source": "Goal110 checklist"
+    },
+    {
+      "jsonPath": "$.steps[*].notes",
+      "requiredHumanAction": "Record concise real human notes for each step.",
+      "source": "Goal110 checklist"
+    },
+    {
+      "jsonPath": "$.steps[*].evidenceRef",
+      "requiredHumanAction": "Point to the matching real evidence field or artifact note.",
+      "source": "Goal110 checklist"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='open_unity_project')]",
+      "requiredHumanAction": "Complete and record real evidence for: Open Unity project",
+      "source": "Goal110 checklist step 1"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='open_alpha_slice_window')]",
+      "requiredHumanAction": "Complete and record real evidence for: Open Alpha Slice window",
+      "source": "Goal110 checklist step 2"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='setup_rig')]",
+      "requiredHumanAction": "Complete and record real evidence for: Setup rig",
+      "source": "Goal110 checklist step 3"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='verify_package')]",
+      "requiredHumanAction": "Complete and record real evidence for: Verify package",
+      "source": "Goal110 checklist step 4"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='run_travel')]",
+      "requiredHumanAction": "Complete and record real evidence for: Run travel",
+      "source": "Goal110 checklist step 5"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='run_interaction')]",
+      "requiredHumanAction": "Complete and record real evidence for: Run interaction",
+      "source": "Goal110 checklist step 6"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='save_snapshot')]",
+      "requiredHumanAction": "Complete and record real evidence for: Save snapshot",
+      "source": "Goal110 checklist step 7"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='load_snapshot')]",
+      "requiredHumanAction": "Complete and record real evidence for: Load snapshot",
+      "source": "Goal110 checklist step 8"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='replay')]",
+      "requiredHumanAction": "Complete and record real evidence for: Replay",
+      "source": "Goal110 checklist step 9"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='complete_objectives')]",
+      "requiredHumanAction": "Complete and record real evidence for: Complete objectives",
+      "source": "Goal110 checklist step 10"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='run_package_verifier')]",
+      "requiredHumanAction": "Complete and record real evidence for: Run package verifier",
+      "source": "Goal110 checklist step 11"
+    },
+    {
+      "jsonPath": "$.steps[?(@.stepId=='record_diagnostics')]",
+      "requiredHumanAction": "Complete and record real evidence for: Record diagnostics",
+      "source": "Goal110 checklist step 12"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "goalId": "goal_113_offline_geoworld_alpha_manual_result_workbench",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 8,
+  "selfHashExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-dashboard.json",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "ae7884dad083e49f4f07072c25644c4cb78ef2c732baf076fcd9128db99f87bc"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-draft-template.json",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "f547b0ef6f1944d9e82b224d19d7def5efd810891eceb9c3b31fe5f41ad35a0e"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-field-map.json",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "d0d6307960ce650b4042331a34652125b31d678756b9830e18b5b4e1a97eb9ee"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-negative-proof-invalid-result.json",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "060ef85af669308f1f85a71ee6dda788aa4e1a1fbf505d47f3e351956b66a2df"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-negative-proof-no-result-no-acceptance.json",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "c1f278797ca5befc41b51d2990f62c454fcf3098de1d4d378e204420b5636f19"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-quality-gate-scan.json",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "29273991ab4b014a33a1db99324b633ba479dad4ae46ae18afd64350f2ba83c9"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-report.md",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "7b975e9dfc909c424f2ad02952fe8f9533a373f3a8125f9334b924e72bc4f4b2"
+    },
+    {
+      "relativePath": ".llmgc/procedural/goal-113-offline-geoworld-alpha-manual-result-workbench/offline-geoworld-alpha-manual-result-workbench-runbook.md",
+      "role": "goal113_manual_result_workbench_evidence",
+      "required": true,
+      "sha256": "5c93b8ded857e7fbef054a4a9a83ae21885a205516fc7ca0ba5af41d2da0897c"
+    }
+  ]
+}

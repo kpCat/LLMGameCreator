@@ -207,6 +207,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-110-offline-geoworld-alpha-manual-acceptance-gate/GOAL.md` | Goal 110 task: add the offline geoworld Alpha manual acceptance gate over the real Goal109 export package. Produces a BCL-only Application acceptance seam, manifest/checklist/result-template/dashboard/readme payloads, export file-index/checksums, simulated result readback proof, negative proof, Unity StreamingAssets metadata mirror, standalone Unity result/store scripts, Editor acceptance runner window, Visual World Stream Preview Workspace inspection and final stop at `offline_geoworld_alpha_manual_acceptance_verification`; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final release, final art, atlas or Unity scene/prefab/settings/packages/build-settings changes. |
 | `docs/agent-tasks/goal-111-offline-geoworld-alpha-manual-result-intake/GOAL.md` | Goal 111 task: add the offline geoworld Alpha manual-result intake and decision bridge over the real Goal110 package. Produces a BCL-only Application verifier, deterministic decision/report/file-index/quality/negative-proof evidence, export dashboard/readme/index metadata, Visual World Stream Preview Workspace/WinForms decision visibility and final status `BLOCKED_PENDING_MANUAL_RESULT` until a real human result JSON is supplied; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final release, final art, atlas or Unity scene/prefab/settings/packages/build-settings changes. |
 | `docs/agent-tasks/goal-112-offline-geoworld-alpha-acceptance-operator-pack/GOAL.md` | Goal 112 task: add the offline geoworld Alpha acceptance operator pack and RC readiness dashboard over the real Goal110 package and Goal111 decision bridge. Produces a BCL-only Application operator service, deterministic dashboard/runbook/path-map/preflight/notary/quality/negative-proof evidence, export metadata, short manual-acceptance runbook, Visual World Stream Preview Workspace/WinForms operator status visibility and final status `OPERATOR_READY_PENDING_HUMAN_RUN` until a real human result JSON is supplied; no LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final release, final art, atlas, Unity files or Unity scene/prefab/settings/packages/build-settings changes. |
+| `docs/agent-tasks/goal-113-offline-geoworld-alpha-manual-result-workbench/GOAL.md` | Goal 113 task: add the offline geoworld Alpha manual-result workbench over the real Goal110 package, Goal111 decision bridge and Goal112 operator pack. Produces a BCL-only Application workbench, deterministic dashboard/runbook/field-map/draft-template/quality/negative-proof evidence, export metadata, short manual-result workbench guide, Visual World Stream Preview Workspace/WinForms workbench visibility and final status `WORKBENCH_READY_PENDING_HUMAN_RESULT` until a real human result JSON is supplied; no `.llmgc/manual/**` real result, LFZ source/archive, live network/provider/geodata, Runtime, public schema, Lua, generator-library, project-file/dependency, binary/raster media, final release, final art, atlas, Unity files or Unity scene/prefab/settings/packages/build-settings changes. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -284,7 +285,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 Recommended next work:
 
 ```text
-offline_geoworld_session_persistence_replay_verification
+offline_geoworld_alpha_manual_acceptance_verification
 ```
 
 Goal 033 semantic authoring intent resolver has been accepted by the user's manual decision:
@@ -699,6 +700,15 @@ the Alpha accepted, create a real manual result, or start live geodata/provider/
 or final-art/final-release work. The next human action remains running the Goal110 Unity checklist and placing the real
 result JSON at `.llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json`.
 Goal112, Goal111, Goal110, Goal109, Goal108A, Goal108 and prior geoworld gates remain `accepted=false`.
+Goal 113 is produced for review as a GREEN manual-result workbench over Goal110, Goal111 and Goal112 with
+`workbenchStatus=WORKBENCH_READY_PENDING_HUMAN_RESULT`, `manualResultPresent=false`, `acceptedByCodex=false` and
+`humanAcceptanceStillRequired=true`. It surfaces `offline_geoworld_alpha_manual_result_workbench` in the existing Visual
+World Stream Preview Workspace and writes only a Goal113 draft/template outside `.llmgc/manual/**`; the active gate
+remains `offline_geoworld_alpha_manual_acceptance_verification required`, `accepted=false`. The next human action is to
+run the Goal110 Unity checklist, copy/edit the Goal113 draft only as a starting point, place the real human-created
+result JSON at `.llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json`,
+re-run Goal111/Goal112/Goal113 validation and explicitly decide the manual gate. Goal113, Goal112, Goal111, Goal110,
+Goal109, Goal108A, Goal108 and prior geoworld gates remain `accepted=false`.
 
 Allowed next sequence:
 
@@ -776,6 +786,7 @@ Allowed next sequence:
 72. Review Goal 108 `offline_geoworld_alpha_slice_orchestrator_verification`; it produces metadata-only Alpha Slice orchestrator evidence over real Goal101-107 payloads with Unity Alpha StreamingAssets payloads, one-click Editor setup/clear/verify helper, coordinator script, acceptance runbook, full-slice proof and workspace inspection while keeping Goal108 and prior geoworld gates `accepted=false`.
 73. Review Goal 109 `offline_geoworld_alpha_slice_export_package_verification`; it produces a portable deterministic Alpha Slice export package, clean-import proof, negative proof, standalone Unity verifier/editor window, StreamingAssets metadata mirror and workspace inspection while keeping Goal109 and prior geoworld gates `accepted=false`.
 74. Review Goal 112 operator pack while keeping the active human gate at `offline_geoworld_alpha_manual_acceptance_verification`; it packages Goal110/Goal111 into visible run instructions and readiness status, but acceptance still requires a real human result JSON at the preferred `.llmgc/manual` path.
+75. Review Goal 113 manual-result workbench while keeping the active human gate at `offline_geoworld_alpha_manual_acceptance_verification`; it packages Goal110/Goal111/Goal112 into visible authoring/review status, writes only a draft/template outside `.llmgc/manual/**`, and acceptance still requires a real human-created result JSON at the preferred `.llmgc/manual` path plus explicit human gate decision.
 
 Kill criterion:
 
