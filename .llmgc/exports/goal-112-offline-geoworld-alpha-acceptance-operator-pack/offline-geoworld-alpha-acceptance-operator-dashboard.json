@@ -1,0 +1,19 @@
+{
+  "goalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+  "sourceGoalIds": [
+    "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+    "goal_111_offline_geoworld_alpha_manual_result_intake"
+  ],
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "operatorStatus": "OPERATOR_READY_PENDING_HUMAN_RUN",
+  "decisionStatusFromGoal111": "BLOCKED_PENDING_MANUAL_RESULT",
+  "preferredManualResultPath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "manualResultPresent": false,
+  "manualResultAvailableForHumanReview": false,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "qualityGatePassed": true,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "noUnityFileChangesRequired": true
+}

@@ -43,5 +43,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl
         + "/"
         + result.Report.OfflineGeoworldAlphaSliceComponentCount
         + " | manualAcceptanceSteps="
-        + result.Report.OfflineGeoworldAlphaManualAcceptanceChecklistStepCount;
+        + result.Report.OfflineGeoworldAlphaManualAcceptanceChecklistStepCount
+        + " | operatorStatus="
+        + result.Report.OfflineGeoworldAlphaAcceptanceOperatorStatus
+        + " | manualResultPresent="
+        + result.Report.OfflineGeoworldAlphaAcceptanceOperatorManualResultPresent
+            .ToString().ToLowerInvariant();
 }

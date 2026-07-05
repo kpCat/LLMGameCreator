@@ -1,0 +1,91 @@
+{
+  "templateCopyOnly": true,
+  "sampleOnly": true,
+  "pendingOnly": true,
+  "notRealHumanResult": true,
+  "humanMustFillRealResultSeparately": true,
+  "doNotPlaceUnderManualResultPath": true,
+  "goalId": "goal_110_offline_geoworld_alpha_manual_acceptance_gate",
+  "operatorPackGoalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "accepted": false,
+  "manualAcceptancePending": true,
+  "resultStatus": "pending_template_copy_only",
+  "checklistHash": "106b43dad61c0bf9dafde965a712cf8e370402b6f9d5664352bcac549ebeae41",
+  "preferredManualResultPath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "notes": "This Goal112 artifact is a pending template copy only. It is not a real human result and must not be used as acceptance evidence.",
+  "steps": [
+    {
+      "stepId": "open_unity_project",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "open_unity_projectEvidence"
+    },
+    {
+      "stepId": "open_alpha_slice_window",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "open_alpha_slice_windowEvidence"
+    },
+    {
+      "stepId": "setup_rig",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "setup_rigEvidence"
+    },
+    {
+      "stepId": "verify_package",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "verify_packageEvidence"
+    },
+    {
+      "stepId": "run_travel",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "run_travelEvidence"
+    },
+    {
+      "stepId": "run_interaction",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "run_interactionEvidence"
+    },
+    {
+      "stepId": "save_snapshot",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "save_snapshotEvidence"
+    },
+    {
+      "stepId": "load_snapshot",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "load_snapshotEvidence"
+    },
+    {
+      "stepId": "replay",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "replayEvidence"
+    },
+    {
+      "stepId": "complete_objectives",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "complete_objectivesEvidence"
+    },
+    {
+      "stepId": "run_package_verifier",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "run_package_verifierEvidence"
+    },
+    {
+      "stepId": "record_diagnostics",
+      "status": "pending",
+      "notes": "human must complete this step in a real manual run",
+      "evidenceRef": "record_diagnosticsEvidence"
+    }
+  ]
+}

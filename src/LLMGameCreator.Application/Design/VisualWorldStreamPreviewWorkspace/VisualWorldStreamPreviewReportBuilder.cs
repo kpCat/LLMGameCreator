@@ -363,6 +363,26 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAlphaManualResultIntakeQualityGatePassed,
             Goal111FilesDiscoveredByRelativePaths =
                 qualityGate.Goal111FilesDiscoveredByRelativePaths,
+            OfflineGeoworldAlphaAcceptanceOperatorStatus =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorStatus,
+            OfflineGeoworldAlphaAcceptanceOperatorGoal111DecisionStatus =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorGoal111DecisionStatus,
+            OfflineGeoworldAlphaAcceptanceOperatorManualResultPresent =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorManualResultPresent,
+            OfflineGeoworldAlphaAcceptanceOperatorManualResultAvailableForHumanReview =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorManualResultAvailableForHumanReview,
+            OfflineGeoworldAlphaAcceptanceOperatorAcceptedByCodex =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorAcceptedByCodex,
+            OfflineGeoworldAlphaAcceptanceOperatorHumanAcceptanceStillRequired =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorHumanAcceptanceStillRequired,
+            OfflineGeoworldAlphaAcceptanceOperatorChecklistStepCount =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorChecklistStepCount,
+            OfflineGeoworldAlphaAcceptanceOperatorChecklistHashPresent =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorChecklistHashPresent,
+            OfflineGeoworldAlphaAcceptanceOperatorQualityGatePassed =
+                qualityGate.OfflineGeoworldAlphaAcceptanceOperatorQualityGatePassed,
+            Goal112FilesDiscoveredByRelativePaths =
+                qualityGate.Goal112FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

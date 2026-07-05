@@ -1,0 +1,1 @@
+Run restore/build, focused Goal112 tests, VisualWorld workspace tests, product smoke, check-current-goal, check-spine-fast, check-artifact-scope for Goal112, git diff checks, source-health scan, and mojibake/escaped-Cyrillic scan as specified in GOAL.md.

@@ -12,6 +12,8 @@ Goal 110 note: `offline_geoworld_alpha_manual_acceptance_verification` now packa
 
 Goal 111 note: the manual-result intake bridge can classify a real Goal110 result as pending, invalid, incomplete, accepted-false or a valid candidate for the human gate. Current repository state is `BLOCKED_PENDING_MANUAL_RESULT` because no real manual result JSON exists; this does not close `vertical_slice_final_verification` and does not start final release, Runtime, provider/network/geodata, schema or final-art work.
 
+Goal 112 note: the acceptance operator pack surfaces Goal110 checklist instructions and Goal111 decision status as RC readiness visibility. Current repository state is `OPERATOR_READY_PENDING_HUMAN_RUN` because no real manual result JSON exists; this does not mean Alpha accepted, does not close `vertical_slice_final_verification`, and does not start live geodata/provider/network/runtime/schema/Lua/generator-library/final-art/final-release work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

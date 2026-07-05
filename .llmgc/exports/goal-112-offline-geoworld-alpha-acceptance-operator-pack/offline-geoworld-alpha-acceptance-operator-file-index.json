@@ -1,0 +1,21 @@
+{
+  "goalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 2,
+  "selfHashExcluded": true,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-operator-dashboard.json",
+      "role": "goal112_operator_pack_export",
+      "required": true,
+      "sha256": "04c7f2de52af8c317a45fbb875247262bc0ae60e93f6d9f338a4ea3252896018"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-operator-readme.md",
+      "role": "goal112_operator_pack_export",
+      "required": true,
+      "sha256": "729da3ba05be9f546e366f4d18d2b73b804cda4c3bef51936979dcfff60551f6"
+    }
+  ]
+}

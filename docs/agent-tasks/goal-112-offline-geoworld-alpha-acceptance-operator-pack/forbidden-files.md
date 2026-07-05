@@ -1,0 +1,1 @@
+Forbidden zones include Runtime, Runtime.Abstractions, public GamePackage schema, providers/LLM/RAG/media provider code, Lua/Scripting, generator-library, project/dependency files, AlphaRuntimeBootstrap.cs, all Unity files, Unity scenes/prefabs/settings/packages/build settings, network/provider/runtime geodata fetching, and LFZ source/code/archive usage.

@@ -1,0 +1,1 @@
+Allowed roots are defined in GOAL.md. Keep changes bounded to Goal112 docs/artifacts, the new Application operator-pack service, VisualWorldStreamPreviewWorkspace integration, WinForms workspace display, tests, current-state/risk/debt docs, and artifact-scope policy.

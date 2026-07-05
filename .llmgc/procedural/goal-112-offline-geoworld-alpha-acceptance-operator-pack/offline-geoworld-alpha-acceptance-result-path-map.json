@@ -1,0 +1,16 @@
+{
+  "goalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+  "manualGate": "offline_geoworld_alpha_manual_acceptance_verification",
+  "preferredManualResultPath": ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+  "candidateManualResultPaths": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    ".llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake/input/offline-geoworld-alpha-acceptance-result.json",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal110/offline-geoworld-alpha-acceptance-result.json"
+  ],
+  "unityProjectPath": "unity/LLMGameCreatorAlpha",
+  "unityRunnerPath": "unity/LLMGameCreatorAlpha/Assets/Editor/OfflineGeoworldAlphaAcceptanceRunnerWindow.cs",
+  "unityResultModelPath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResult.cs",
+  "unityResultStorePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/OfflineGeoworldAlphaAcceptanceResultStore.cs",
+  "preferredPathIsManualResultTarget": true,
+  "templateCopyIsNotManualResult": true
+}

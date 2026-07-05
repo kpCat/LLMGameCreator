@@ -87,7 +87,9 @@
     ".llmgc/procedural/goal-110-offline-geoworld-alpha-manual-acceptance-gate/",
     ".llmgc/exports/goal-110-offline-geoworld-alpha-acceptance/",
     ".llmgc/procedural/goal-111-offline-geoworld-alpha-manual-result-intake/",
-    ".llmgc/exports/goal-111-offline-geoworld-alpha-manual-result-intake/"
+    ".llmgc/exports/goal-111-offline-geoworld-alpha-manual-result-intake/",
+    ".llmgc/procedural/goal-112-offline-geoworld-alpha-acceptance-operator-pack/",
+    ".llmgc/exports/goal-112-offline-geoworld-alpha-acceptance-operator-pack/"
   ],
   "historicalArtifactRoots": [
     ".llmgc/procedural/generated-game-profile-contract/",
@@ -1663,6 +1665,35 @@
         "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
         "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
         "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaManualResultIntake/",
+        "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
+      ]
+    },
+    {
+      "scenario": "goal-112-offline-geoworld-alpha-acceptance-operator-pack",
+      "allowedPaths": [
+        "docs/CURRENT_GENERATOR_STATE.json",
+        "docs/CURRENT_GENERATOR_STATE.md",
+        "docs/CONTEXT_INDEX.md",
+        "docs/FULL_GENERATOR_GOAL_QUEUE.md",
+        "docs/MILESTONE_GATES.md",
+        "docs/RELEASE_RISK_REGISTER.md",
+        "docs/technical-debt/GENERATOR_SPINE_QUALITY_DEBT_REGISTER.md",
+        ".devflow/artifact-scope/artifact-scope-policy.json",
+        "docs/manual-acceptance/offline-geoworld-alpha-manual-acceptance-operator-pack.md",
+        "tests/LLMGameCreator.Tests/ProductSmoke/OfflineGeoworldAlphaAcceptanceOperatorPackProductSmokeTests.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Status.cs",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/VisualWorldStreamPreviewWorkspacePageControl.Goal112.cs"
+      ],
+      "allowedPathPrefixes": [
+        ".llmgc/procedural/goal-112-offline-geoworld-alpha-acceptance-operator-pack/",
+        ".llmgc/exports/goal-112-offline-geoworld-alpha-acceptance-operator-pack/",
+        "docs/agent-tasks/goal-112-offline-geoworld-alpha-acceptance-operator-pack/",
+        "docs/manual-acceptance/",
+        "src/LLMGameCreator.Application/Design/OfflineGeoworldAlphaAcceptanceOperatorPack/",
+        "src/LLMGameCreator.Application/Design/VisualWorldStreamPreviewWorkspace/",
+        "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/",
+        "tests/LLMGameCreator.Tests/Application/OfflineGeoworldAlphaAcceptanceOperatorPack/",
         "tests/LLMGameCreator.Tests/Application/VisualWorldStreamPreviewWorkspace/"
       ]
     }

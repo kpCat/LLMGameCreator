@@ -369,6 +369,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildOfflineGeoworldAlphaExportPackageDiagnosticLines(result));
         lines.AddRange(BuildOfflineGeoworldAlphaManualAcceptanceDiagnosticLines(result));
         lines.AddRange(BuildOfflineGeoworldAlphaManualResultIntakeDiagnosticLines(result));
+        lines.AddRange(BuildOfflineGeoworldAlphaAcceptanceOperatorDiagnosticLines(result));
         lines.AddRange(result.Diagnostics.Select(diagnostic =>
             diagnostic.Severity + ": " + diagnostic.Code
             + " [" + diagnostic.Target + "] " + diagnostic.Message));
@@ -639,6 +640,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspacePageControl : UserC
         lines.AddRange(BuildOfflineGeoworldAlphaExportPackageEntryLines(entry));
         lines.AddRange(BuildOfflineGeoworldAlphaManualAcceptanceEntryLines(entry));
         lines.AddRange(BuildOfflineGeoworldAlphaManualResultIntakeEntryLines(entry));
+        lines.AddRange(BuildOfflineGeoworldAlphaAcceptanceOperatorEntryLines(entry));
         return string.Join(Environment.NewLine, lines);
     }
 

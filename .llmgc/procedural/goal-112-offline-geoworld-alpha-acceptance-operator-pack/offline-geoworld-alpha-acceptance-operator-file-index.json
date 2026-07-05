@@ -1,0 +1,57 @@
+{
+  "goalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+  "accepted": false,
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 8,
+  "selfHashExcluded": true,
+  "files": [
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-negative-proof-no-result-no-acceptance.json",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "016c64ee8961a42feb8497a06f43e1749c0010010a7bbdb11c40ceec3e6d4205"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-notary-boundary.json",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "c4341c0140fad606858889205daab6c09f2244e05419cf27324bdcffb75f17f9"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-operator-dashboard.json",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "dc0d960f0acae20731ae39d9a7627f5753ce6e20f90f727ff6b2b3afbcda9afd"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-operator-preflight-report.md",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "b92b0b8faa3cecb0437921d77a23bf982b27f87d82dbb76d88dceb6fdf45dc3b"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-operator-runbook.md",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "417fe22b0aef60a8f1824c4faaae1b006f9bdd5c020c4fb41b0dafa052f51c9e"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-quality-gate-scan.json",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "6ff1b3a65b94598c49a7c69a5cb21d7d5209c3033b2f815a7c5686c654bd0fc3"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-acceptance-result-path-map.json",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "7367737c66bf58e03d0fa03ecefa5ad92fc158bfeb70b008d83ece76ea34acc9"
+    },
+    {
+      "relativePath": "offline-geoworld-alpha-pending-result-template-copy.json",
+      "role": "goal112_operator_pack_evidence",
+      "required": true,
+      "sha256": "c77098ecaad42a78bede05044abfdf813f294c34fbff059fa6f24d5f38b7f9c5"
+    }
+  ]
+}

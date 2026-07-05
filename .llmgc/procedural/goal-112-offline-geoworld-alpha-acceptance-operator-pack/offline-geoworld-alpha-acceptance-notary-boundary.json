@@ -1,0 +1,23 @@
+{
+  "goalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+  "accepted": false,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "doesNotWriteManualResultPath": true,
+  "pendingTemplateCopyOnly": true,
+  "noUnityFileChangesRequired": true,
+  "noRuntimeProviderOrNetworkChanges": true,
+  "notFinalReleaseOrRuntimeBuild": true,
+  "forbiddenStarts": [
+    "live geodata",
+    "providers",
+    "Runtime consumer",
+    "public schema",
+    "Lua",
+    "generator-library",
+    "final art",
+    "atlas",
+    "scene/prefab/project settings",
+    "release packaging"
+  ]
+}

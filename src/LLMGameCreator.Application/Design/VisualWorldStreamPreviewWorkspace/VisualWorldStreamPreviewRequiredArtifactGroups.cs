@@ -23,6 +23,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         "offline_geoworld_alpha_slice",
         "offline_geoworld_alpha_export_package",
         "offline_geoworld_alpha_manual_acceptance",
-        "offline_geoworld_alpha_manual_result_intake"
+        "offline_geoworld_alpha_manual_result_intake",
+        "offline_geoworld_alpha_acceptance_operator_pack"
     ];
 }

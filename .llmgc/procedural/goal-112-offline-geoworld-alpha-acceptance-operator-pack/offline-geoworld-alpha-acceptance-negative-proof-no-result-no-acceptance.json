@@ -1,0 +1,10 @@
+{
+  "goalId": "goal_112_offline_geoworld_alpha_acceptance_operator_pack",
+  "scenarioId": "missing_manual_result_does_not_accept_alpha",
+  "passed": true,
+  "manualResultPresent": false,
+  "acceptedByCodex": false,
+  "humanAcceptanceStillRequired": true,
+  "operatorStatus": "OPERATOR_READY_PENDING_HUMAN_RUN",
+  "diagnostic": "No real manual result means no Alpha acceptance by Codex."
+}

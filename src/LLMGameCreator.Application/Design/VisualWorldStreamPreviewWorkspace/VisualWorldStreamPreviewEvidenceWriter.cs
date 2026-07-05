@@ -215,6 +215,7 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var alphaExport = BuildGoal109AlphaExportPackageQuality(groups, proofs);
         var manualAcceptance = BuildGoal110AlphaManualAcceptanceQuality(groups, proofs);
         var manualResultIntake = BuildGoal111AlphaManualResultIntakeQuality(groups, proofs);
+        var operatorPack = BuildGoal112AlphaAcceptanceOperatorQuality(groups, proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -384,6 +385,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal110AlphaManualAcceptanceQualityDiagnostics(manualAcceptance, diagnostics);
         AddGoal111AlphaManualResultIntakeQualityDiagnostics(
             manualResultIntake,
+            binding,
+            diagnostics);
+        AddGoal112AlphaAcceptanceOperatorQualityDiagnostics(
+            operatorPack,
             binding,
             diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
@@ -678,7 +683,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         };
         var withGoal109 = ApplyGoal109AlphaExportPackageQuality(baseQualityGate, alphaExport, binding);
         var withGoal110 = ApplyGoal110AlphaManualAcceptanceQuality(withGoal109, manualAcceptance, binding);
-        return ApplyGoal111AlphaManualResultIntakeQuality(withGoal110, manualResultIntake, binding);
+        var withGoal111 = ApplyGoal111AlphaManualResultIntakeQuality(
+            withGoal110,
+            manualResultIntake,
+            binding);
+        return ApplyGoal112AlphaAcceptanceOperatorQuality(withGoal111, operatorPack, binding);
     }
 
 }
