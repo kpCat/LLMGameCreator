@@ -123,6 +123,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         proofs.AddRange(BuildGoal119AcceptedAlphaUnityPlayableProjectionProofStatus(
             projectRoot,
             proofDiagnostics));
+        proofs.AddRange(BuildGoal120AcceptedAlphaProjectionUsabilityProofStatus(
+            projectRoot,
+            proofDiagnostics));
 
         proofs = NormalizeHistoricalManualResultNegativeProofs(proofs, proofDiagnostics).ToList();
         diagnostics.AddRange(proofDiagnostics);

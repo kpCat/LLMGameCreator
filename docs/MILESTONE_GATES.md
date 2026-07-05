@@ -30,6 +30,8 @@ Goal 119 note: the accepted Alpha Unity playable projection entrypoint is GREEN 
 
 Goal 119A note: the accepted Alpha Unity material warning hotfix keeps the Goal119 route and removes the edit-mode marker material-instantiation warning from the projection. The next manual check is still the Goal119 Unity menu route, now with the expected Console result that no material-leak warning is emitted. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 120 note: the accepted Alpha projection usability and cleanup pass keeps the Goal119 route, adds descriptor-backed selection controls, a visible legend and bounded Unity editor-noise cleanup commands. The next manual check is still the accepted Alpha Unity menu route, now with focus/select/legend controls and cleanup dry-run/apply proof. This does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

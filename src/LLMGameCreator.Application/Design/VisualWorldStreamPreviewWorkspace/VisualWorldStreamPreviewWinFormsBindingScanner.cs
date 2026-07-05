@@ -68,7 +68,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                         + "\n"
                         + ReadOptionalText(projectRoot, pageGoal118RelativePath)
                         + "\n"
-                        + ReadOptionalText(projectRoot, pageGoal119RelativePath);
+                        + ReadOptionalText(projectRoot, pageGoal119RelativePath)
+                        + "\n"
+                        + ReadGoal120WinFormsPageText(projectRoot);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -497,6 +499,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "acceptedAlphaUnityPlayableProjectionExportPath",
                 StringComparison.Ordinal);
+        var bindDisplaysAcceptedAlphaProjectionUsability =
+            PageBindsGoal120AcceptedAlphaProjectionUsability(pageText);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -615,6 +619,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal119.winforms.accepted_alpha_unity_playable_projection_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysAcceptedAlphaProjectionUsability,
+            "goal120.winforms.accepted_alpha_projection_usability_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -666,6 +675,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysOfflineGeoworldAcceptedAlphaBaseline,
             PageBindDisplaysAcceptedAlphaUnityPlayableProjection =
                 bindDisplaysAcceptedAlphaUnityPlayableProjection,
+            PageBindDisplaysAcceptedAlphaProjectionUsability =
+                bindDisplaysAcceptedAlphaProjectionUsability,
             Diagnostics = diagnostics
         };
     }

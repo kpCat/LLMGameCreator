@@ -1,0 +1,17 @@
+{
+  "goalId": "goal_120_accepted_alpha_projection_usability_and_cleanup",
+  "passed": true,
+  "powerShellScriptExists": true,
+  "cmdWrapperExists": true,
+  "dryRunDefaultPresent": true,
+  "applySwitchPresent": true,
+  "allowStagedSwitchPresent": true,
+  "gitStatusPorcelainAllPresent": true,
+  "refusesStagedByDefault": true,
+  "removesOnlyAllowedUnityNoise": true,
+  "restoresOnlyProjectVersion": true,
+  "neverRemoveSourceOrPayloadExtensions": true,
+  "noBroadGitClean": true,
+  "powerShellSha256": "007235ab6e0c88b50d7ada856f3d858df771a1154b09826170efd739f652d915",
+  "cmdSha256": "5b82bff36003d4e93a9c864afbedf42cf3d3dae8e81b7656adc94d6a5cb09630"
+}

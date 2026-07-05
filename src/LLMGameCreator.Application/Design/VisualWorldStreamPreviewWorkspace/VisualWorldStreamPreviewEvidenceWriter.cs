@@ -224,6 +224,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var acceptedAlphaUnityPlayableProjection = BuildGoal119AcceptedAlphaUnityPlayableProjectionQuality(
             groups,
             proofs);
+        var acceptedAlphaProjectionUsability = BuildGoal120AcceptedAlphaProjectionUsabilityQuality(
+            groups,
+            proofs);
         var requiredGroups = BuildRequiredArtifactGroupIds();
         var requiredArtifactGroupsPresent = requiredGroups.All(required =>
             groups.Any(group => group.GroupId == required && group.EntryCount > 0));
@@ -400,6 +403,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         AddGoal118AcceptedAlphaBaselineQualityDiagnostics(acceptedAlphaBaseline, binding, diagnostics);
         AddGoal119AcceptedAlphaUnityPlayableProjectionQualityDiagnostics(
             acceptedAlphaUnityPlayableProjection, binding, diagnostics);
+        AddGoal120AcceptedAlphaProjectionUsabilityQualityDiagnostics(
+            acceptedAlphaProjectionUsability, binding, diagnostics);
         AddIfFalse(proofStatusPassed, "goal092.quality.proofs_failed", "proofStatus", diagnostics);
         AddIfFalse(noAbsolutePaths, "goal092.quality.absolute_path", "catalog", diagnostics);
         AddIfFalse(noBinaryMedia, "goal092.quality.binary_media", "catalog", diagnostics);
@@ -681,7 +686,14 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var withGoal117 = ApplyGoal117AlphaPostAcceptanceContinuationQuality(
             withGoal116, postAcceptanceContinuation, binding);
         var withGoal118 = ApplyGoal118AcceptedAlphaBaselineQuality(withGoal117, acceptedAlphaBaseline, binding);
-        return ApplyGoal119AcceptedAlphaUnityPlayableProjectionQuality(withGoal118, acceptedAlphaUnityPlayableProjection, binding);
+        var withGoal119 = ApplyGoal119AcceptedAlphaUnityPlayableProjectionQuality(
+            withGoal118,
+            acceptedAlphaUnityPlayableProjection,
+            binding);
+        return ApplyGoal120AcceptedAlphaProjectionUsabilityQuality(
+            withGoal119,
+            acceptedAlphaProjectionUsability,
+            binding);
     }
 
 }

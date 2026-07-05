@@ -1,0 +1,56 @@
+{
+  "goalId": "goal_120_accepted_alpha_projection_usability_and_cleanup",
+  "passed": true,
+  "scriptCount": 5,
+  "unityMenuPathPresent": true,
+  "batchmodeMethodPresent": true,
+  "batchmodePassMarkerPresent": true,
+  "legendPresent": true,
+  "markerDescriptorPresent": true,
+  "selectionControlsPresent": true,
+  "focusCameraControlPresent": true,
+  "materialWarningGuardPresent": true,
+  "materialWarningSourceClean": true,
+  "scripts": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs",
+      "role": "unity_editor_window",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "RunBatchmodeProjectionUsabilitySmoke",
+      "sha256": "f82fe0365b1dd252c19b48c3d2443e2360f85260b84f760b37be5c422217c8db"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionController.cs",
+      "role": "unity_projection_controller",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "goal120_legend",
+      "sha256": "b6de86ec4058cd9344bc0e91080208defa44db7a2fb1ad77f4df7c7fff46f304"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDiagnostics.cs",
+      "role": "unity_projection_diagnostics",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "AcceptedAlphaPlayableProjectionDiagnostics",
+      "sha256": "bc7008dcd0484f7ea9884a4e97df7d485efa247fde084ed7756bee5c4b0e2f9d"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionModels.cs",
+      "role": "unity_projection_models",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "AcceptedAlphaPlayableProjectionMarkerDescriptor",
+      "sha256": "50870073a176fba5bd77e104590d89393219238982c0c5a7a5c0f4980f8bad06"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionPrimitiveFactory.cs",
+      "role": "unity_projection_primitive_factory",
+      "exists": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "MaterialWarningGuardPresent",
+      "sha256": "3599c25f9290919a417cf5f3d4a41d8d828a364d9f0e9a747a66e3be4ddb19bc"
+    }
+  ]
+}

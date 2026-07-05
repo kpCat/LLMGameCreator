@@ -14,6 +14,8 @@ namespace LLMGameCreatorAlpha
         private string statusLine = "Not loaded";
         private string diagnostics = string.Empty;
         private string smokeDiagnostics = string.Empty;
+        private int interactionSelectionIndex;
+        private int objectiveSelectionIndex;
 
         [MenuItem(MenuPath)]
         public static void Open()
@@ -65,6 +67,54 @@ namespace LLMGameCreatorAlpha
             }
         }
 
+        public static void RunBatchmodeProjectionUsabilitySmoke()
+        {
+            var exitCode = 0;
+            try
+            {
+                var controller = EnsureController();
+                controller.RefreshAcceptedBaseline();
+                controller.BuildOrRefreshProjection();
+                SelectAndFrame(controller.FindPlayerProxy());
+                SelectAndFrame(controller.FindNextMarkerByKind("interaction", 0));
+                SelectAndFrame(controller.FindNextMarkerByKind("objective", 0));
+                SelectAndFrame(controller.FindDiagnosticsMarker());
+                var passed = controller.RunLocalProjectionSmoke();
+                var diagnostics = controller.LastDiagnostics + "\n" + controller.LastSmokeDiagnostics;
+                if (passed)
+                {
+                    Debug.Log("GOAL120_PROJECTION_USABILITY_SMOKE_PASS\n" + diagnostics);
+                }
+                else
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL120_PROJECTION_USABILITY_SMOKE_FAIL\n" + diagnostics);
+                }
+            }
+            catch (Exception ex)
+            {
+                exitCode = 1;
+                Debug.LogError("GOAL120_PROJECTION_USABILITY_SMOKE_FAIL\n" + ex);
+            }
+            finally
+            {
+                try
+                {
+                    ClearProjectionRootImmediate();
+                }
+                catch (Exception ex)
+                {
+                    exitCode = 1;
+                    Debug.LogError("GOAL120_PROJECTION_USABILITY_SMOKE_FAIL\ncleanup_failed\n" + ex);
+                }
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(exitCode);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             RefreshAcceptedBaseline();
@@ -92,6 +142,36 @@ namespace LLMGameCreatorAlpha
             if (GUILayout.Button("Build/Refresh Playable Projection"))
             {
                 BuildOrRefreshPlayableProjection();
+            }
+
+            if (GUILayout.Button("Focus Projection Camera"))
+            {
+                FocusProjectionCamera();
+            }
+
+            if (GUILayout.Button("Select Player Proxy"))
+            {
+                SelectPlayerProxy();
+            }
+
+            if (GUILayout.Button("Select Next Interaction Target"))
+            {
+                SelectNextInteractionTarget();
+            }
+
+            if (GUILayout.Button("Select Next Objective"))
+            {
+                SelectNextObjective();
+            }
+
+            if (GUILayout.Button("Select Diagnostics Marker"))
+            {
+                SelectDiagnosticsMarker();
+            }
+
+            if (GUILayout.Button("Toggle/Refresh Legend"))
+            {
+                ToggleOrRefreshLegend();
             }
 
             if (GUILayout.Button("Run Local Projection Smoke"))
@@ -124,6 +204,59 @@ namespace LLMGameCreatorAlpha
             var controller = EnsureController();
             controller.BuildOrRefreshProjection();
             Selection.activeGameObject = controller.gameObject;
+            interactionSelectionIndex = 0;
+            objectiveSelectionIndex = 0;
+            SceneView.FrameLastActiveSceneView();
+            Capture(controller);
+        }
+
+        private void FocusProjectionCamera()
+        {
+            var controller = EnsureController();
+            SelectAndFrame(controller.gameObject);
+            statusLine = "Focused projection camera on generated root.";
+            Capture(controller);
+        }
+
+        private void SelectPlayerProxy()
+        {
+            var controller = EnsureController();
+            SelectAndFrame(controller.FindPlayerProxy());
+            statusLine = "Selected player proxy.";
+            Capture(controller);
+        }
+
+        private void SelectNextInteractionTarget()
+        {
+            var controller = EnsureController();
+            SelectAndFrame(controller.FindNextMarkerByKind("interaction", interactionSelectionIndex));
+            interactionSelectionIndex++;
+            statusLine = "Selected next interaction target.";
+            Capture(controller);
+        }
+
+        private void SelectNextObjective()
+        {
+            var controller = EnsureController();
+            SelectAndFrame(controller.FindNextMarkerByKind("objective", objectiveSelectionIndex));
+            objectiveSelectionIndex++;
+            statusLine = "Selected next objective.";
+            Capture(controller);
+        }
+
+        private void SelectDiagnosticsMarker()
+        {
+            var controller = EnsureController();
+            SelectAndFrame(controller.FindDiagnosticsMarker());
+            statusLine = "Selected diagnostics marker.";
+            Capture(controller);
+        }
+
+        private void ToggleOrRefreshLegend()
+        {
+            var controller = EnsureController();
+            controller.ToggleOrRefreshLegend();
+            SelectAndFrame(controller.gameObject);
             Capture(controller);
         }
 
@@ -153,6 +286,20 @@ namespace LLMGameCreatorAlpha
             if (root != null)
             {
                 DestroyImmediate(root);
+            }
+        }
+
+        private static void SelectAndFrame(GameObject obj)
+        {
+            if (obj == null)
+            {
+                return;
+            }
+
+            Selection.activeGameObject = obj;
+            if (!Application.isBatchMode)
+            {
+                SceneView.FrameLastActiveSceneView();
             }
         }
 

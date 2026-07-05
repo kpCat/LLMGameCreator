@@ -14,6 +14,8 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             .BuildAndWriteAsync(root);
         var hotfix = await new AcceptedAlphaUnityMaterialWarningHotfixService()
             .BuildAndWriteAsync(root);
+        var usability = await new AcceptedAlphaProjectionUsabilityService()
+            .BuildAndWriteAsync(root);
 
         Assert.Equal("GREEN", write.Result.QualityGateScan.ImplementationStatus);
         Assert.True(write.Result.QualityGateScan.Passed);
@@ -56,17 +58,48 @@ public sealed class AcceptedAlphaUnityPlayableProjectionProductSmokeTests
             + AcceptedAlphaUnityMaterialWarningHotfixVocabulary.LogScanFileName);
         Assert.DoesNotContain(hotfix.WrittenFiles, path =>
             path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
+        Assert.Equal("GREEN", usability.Result.Dashboard.UsabilityStatus);
+        Assert.True(usability.Result.Dashboard.LegendPresent);
+        Assert.True(usability.Result.Dashboard.MarkerDescriptorPresent);
+        Assert.True(usability.Result.Dashboard.SelectionControlsPresent);
+        Assert.True(usability.Result.Dashboard.FocusCameraControlPresent);
+        Assert.True(usability.Result.Dashboard.CleanupScriptContractPassed);
+        Assert.Contains(usability.WrittenFiles, path =>
+            path == AcceptedAlphaProjectionUsabilityVocabulary
+                .ProceduralOutputDirectory
+            + "/"
+            + AcceptedAlphaProjectionUsabilityVocabulary.DashboardFileName);
+        Assert.Contains(usability.WrittenFiles, path =>
+            path == AcceptedAlphaProjectionUsabilityVocabulary
+                .ExportPackageDirectory
+            + "/"
+            + AcceptedAlphaProjectionUsabilityVocabulary.CleanupScriptScanFileName);
+        Assert.Contains(usability.WrittenFiles, path =>
+            path == AcceptedAlphaProjectionUsabilityVocabulary.DocumentationPath);
+        Assert.DoesNotContain(usability.WrittenFiles, path =>
+            path.StartsWith(".llmgc/manual/", StringComparison.Ordinal));
 
         var workspace = new VisualWorldStreamPreviewWorkspaceService().Build(root);
         Assert.True(workspace.WinFormsBindingInventory
             .PageBindDisplaysAcceptedAlphaUnityPlayableProjection);
+        Assert.True(workspace.WinFormsBindingInventory
+            .PageBindDisplaysAcceptedAlphaProjectionUsability);
         Assert.Contains(workspace.Catalog.Groups, group =>
             group.GroupId == "accepted_alpha_unity_playable_projection");
+        Assert.Contains(workspace.Catalog.Groups, group =>
+            group.GroupId == "accepted_alpha_projection_usability");
         Assert.True(workspace.QualityGateScan.AcceptedAlphaUnityPlayableProjectionQualityGatePassed);
         Assert.True(workspace.QualityGateScan.Goal119FilesDiscoveredByRelativePaths);
+        Assert.True(workspace.QualityGateScan.AcceptedAlphaProjectionUsabilityQualityGatePassed);
+        Assert.True(workspace.QualityGateScan.Goal120FilesDiscoveredByRelativePaths);
         Assert.Contains(
             "acceptedAlphaUnityPlayableProjectionGeneratedRootName: "
             + AcceptedAlphaUnityPlayableProjectionVocabulary.GeneratedRootName,
+            workspace.ReportMarkdown,
+            StringComparison.Ordinal);
+        Assert.Contains(
+            "acceptedAlphaProjectionUsabilityCleanupScriptPath: "
+            + AcceptedAlphaProjectionUsabilityVocabulary.CleanupScriptPath,
             workspace.ReportMarkdown,
             StringComparison.Ordinal);
     }

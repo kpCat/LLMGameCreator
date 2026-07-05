@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace LLMGameCreatorAlpha
 {
@@ -55,11 +56,17 @@ namespace LLMGameCreatorAlpha
     [Serializable]
     public sealed class AcceptedAlphaProjectionSmokeResult
     {
+        public bool RootPresent;
         public bool BaselineLoaded;
         public bool PlayerProxyPresent;
         public bool ChunkWindowMarkerPresent;
         public bool InteractionOrObjectiveMarkerPresent;
         public bool DiagnosticsStatusPresent;
+        public bool LegendPresent;
+        public bool MarkerDescriptorPresent;
+        public bool SelectableInteractionTargetPresent;
+        public bool SelectableObjectivePresent;
+        public bool MaterialWarningGuardPresent;
         public bool ZeroFatalErrors;
         public string StatusLine = string.Empty;
 
@@ -67,11 +74,17 @@ namespace LLMGameCreatorAlpha
         {
             get
             {
-                return BaselineLoaded
+                return RootPresent
+                       && BaselineLoaded
                        && PlayerProxyPresent
                        && ChunkWindowMarkerPresent
                        && InteractionOrObjectiveMarkerPresent
                        && DiagnosticsStatusPresent
+                       && LegendPresent
+                       && MarkerDescriptorPresent
+                       && SelectableInteractionTargetPresent
+                       && SelectableObjectivePresent
+                       && MaterialWarningGuardPresent
                        && ZeroFatalErrors;
             }
         }
@@ -79,13 +92,61 @@ namespace LLMGameCreatorAlpha
         public string ToDiagnosticText()
         {
             return "passed=" + Passed
+                   + "\nrootPresent=" + RootPresent
                    + "\nbaselineLoaded=" + BaselineLoaded
                    + "\nplayerProxyPresent=" + PlayerProxyPresent
                    + "\nchunkWindowMarkerPresent=" + ChunkWindowMarkerPresent
                    + "\ninteractionOrObjectiveMarkerPresent=" + InteractionOrObjectiveMarkerPresent
                    + "\ndiagnosticsStatusPresent=" + DiagnosticsStatusPresent
+                   + "\nlegendPresent=" + LegendPresent
+                   + "\nmarkerDescriptorPresent=" + MarkerDescriptorPresent
+                   + "\nselectableInteractionTargetPresent=" + SelectableInteractionTargetPresent
+                   + "\nselectableObjectivePresent=" + SelectableObjectivePresent
+                   + "\nmaterialWarningGuardPresent=" + MaterialWarningGuardPresent
                    + "\nzeroFatalErrors=" + ZeroFatalErrors
                    + "\nstatusLine=" + StatusLine;
+        }
+    }
+
+    public sealed class AcceptedAlphaPlayableProjectionMarkerDescriptor : MonoBehaviour
+    {
+        public string MarkerId = string.Empty;
+        public string MarkerName = string.Empty;
+        public string MarkerKind = string.Empty;
+        public string SourceGoal = string.Empty;
+        public string SourceFile = string.Empty;
+        public string DisplayLabel = string.Empty;
+        public string Status = string.Empty;
+        public string Details = string.Empty;
+
+        public void Configure(
+            string markerId,
+            string markerName,
+            string markerKind,
+            string sourceGoal,
+            string sourceFile,
+            string displayLabel,
+            string status,
+            string details)
+        {
+            MarkerId = markerId ?? string.Empty;
+            MarkerName = markerName ?? string.Empty;
+            MarkerKind = markerKind ?? string.Empty;
+            SourceGoal = sourceGoal ?? string.Empty;
+            SourceFile = sourceFile ?? string.Empty;
+            DisplayLabel = displayLabel ?? string.Empty;
+            Status = status ?? string.Empty;
+            Details = details ?? string.Empty;
+        }
+    }
+
+    public sealed class AcceptedAlphaPlayableProjectionLegend : MonoBehaviour
+    {
+        public string[] Entries = Array.Empty<string>();
+
+        public void Configure(params string[] entries)
+        {
+            Entries = entries ?? Array.Empty<string>();
         }
     }
 }

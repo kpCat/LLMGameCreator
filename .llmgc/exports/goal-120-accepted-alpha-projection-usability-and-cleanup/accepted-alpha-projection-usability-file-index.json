@@ -1,0 +1,44 @@
+{
+  "goalId": "goal_120_accepted_alpha_projection_usability_and_cleanup",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 6,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/accepted-alpha-projection-cleanup-script-scan.json",
+      "role": "goal120_accepted_alpha_projection_usability_export",
+      "required": true,
+      "sha256": "e2bbd7dc0ae899eb0430375e5d37b90142300201adde2a6dd9b31c4c79071865"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/accepted-alpha-projection-usability-dashboard.json",
+      "role": "goal120_accepted_alpha_projection_usability_export",
+      "required": true,
+      "sha256": "b8efce46f31b0610184fd316bbfc35fe317efdeb20ba063d95bc71e8ef21a746"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/accepted-alpha-projection-usability-negative-proof.json",
+      "role": "goal120_accepted_alpha_projection_usability_export",
+      "required": true,
+      "sha256": "3b6f5801649edb1824602dfd3d90737c9f2f96ffa2be0e4dbdaefd28f6a2147c"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/accepted-alpha-projection-usability-report.md",
+      "role": "goal120_accepted_alpha_projection_usability_export",
+      "required": true,
+      "sha256": "44c311a03f0e2a518820d309084ad62c38f5c91387be8209cf9d6860232bf362"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/accepted-alpha-projection-usability-script-inventory.json",
+      "role": "goal120_accepted_alpha_projection_usability_export",
+      "required": true,
+      "sha256": "333074561d2bf8912766e2961e003e0042700577b1041d5128723bc2bca6e9ce"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/accepted-alpha-projection-usability-smoke-plan.json",
+      "role": "goal120_accepted_alpha_projection_usability_export",
+      "required": true,
+      "sha256": "d445d0a5e6293b3478166eed37594bf0f3cc01d28dcb96a59ba0e8de8f1f7379"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 119A accepted Alpha Unity material warning hotfix
+Updated by: Goal 120 accepted Alpha projection usability and cleanup
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
 
 Goal 119 produced for review:
@@ -31,6 +31,24 @@ unityBatchmodeSmoke=GOAL119A_PROJECTION_SMOKE_PASS required
 Goal119 remains the product deliverable and manual Unity route. The next manual check is still
 `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, but the expected Console result is no
 edit-mode material-leak warning from the accepted Alpha projection scripts.
+
+Goal 120 improves that same accepted Alpha projection route for hands-on usability and cleanup:
+
+```text
+accepted_alpha_projection_usability_and_cleanup_verification required
+implementationStatus=GREEN
+accepted=false
+unityBatchmodeSmoke=GOAL120_PROJECTION_USABILITY_SMOKE_PASS required
+cleanupDryRun=.devflow/scripts/clean-unity-editor-noise.ps1 -DryRun
+cleanupApply=.devflow/scripts/clean-unity-editor-noise.ps1 -Apply
+```
+
+Goal120 keeps the manual route at `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, adds
+descriptor-backed markers, a visible legend, Focus Projection Camera, Select Player Proxy, Select Next Interaction
+Target, Select Next Objective, Select Diagnostics Marker and Toggle/Refresh Legend controls. Evidence lives under
+`.llmgc/procedural/goal-120-accepted-alpha-projection-usability-and-cleanup/`, export metadata under
+`.llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/`, and the short manual note at
+`docs/manual-acceptance/accepted-alpha-projection-usability-and-cleanup.md`.
 
 This is not final release and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library,
 final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.

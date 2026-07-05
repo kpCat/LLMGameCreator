@@ -2142,6 +2142,19 @@ The expected next manual Console result is no edit-mode material-leak warning fr
 hotfix does not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final
 renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+### Goal 120: Accepted Alpha Projection Usability And Cleanup
+
+Goal 120 is produced for review as a GREEN usability and cleanup pass for the accepted Alpha Unity projection.
+It keeps the same menu route, adds descriptor metadata, visible legend, scene-selection controls and
+`RunBatchmodeProjectionUsabilitySmoke`, then records cleanup-script contract evidence under
+`.llmgc/procedural/goal-120-accepted-alpha-projection-usability-and-cleanup/` plus export metadata under
+`.llmgc/exports/goal-120-accepted-alpha-projection-usability-and-cleanup/`.
+
+Use `.devflow/scripts/clean-unity-editor-noise.ps1 -DryRun` before applying cleanup, and use
+`.devflow/scripts/clean-unity-editor-noise.ps1 -Apply` only for the bounded Unity editor noise listed in the Goal120
+task. This does not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library,
+final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text

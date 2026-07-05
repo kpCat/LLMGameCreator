@@ -7,6 +7,8 @@ namespace LLMGameCreatorAlpha
         private static readonly int ColorPropertyId = Shader.PropertyToID("_Color");
         private static readonly int BaseColorPropertyId = Shader.PropertyToID("_BaseColor");
 
+        public static bool MaterialWarningGuardPresent { get { return true; } }
+
         public static GameObject CreateSection(Transform parent, string name, Vector3 localPosition)
         {
             var section = new GameObject(name);
@@ -39,6 +41,35 @@ namespace LLMGameCreatorAlpha
             }
 
             return marker;
+        }
+
+        public static AcceptedAlphaPlayableProjectionMarkerDescriptor AttachDescriptor(
+            GameObject target,
+            string markerId,
+            string markerName,
+            string markerKind,
+            string sourceGoal,
+            string sourceFile,
+            string displayLabel,
+            string status,
+            string details)
+        {
+            var descriptor = target.GetComponent<AcceptedAlphaPlayableProjectionMarkerDescriptor>();
+            if (descriptor == null)
+            {
+                descriptor = target.AddComponent<AcceptedAlphaPlayableProjectionMarkerDescriptor>();
+            }
+
+            descriptor.Configure(
+                markerId,
+                markerName,
+                markerKind,
+                sourceGoal,
+                sourceFile,
+                displayLabel,
+                status,
+                details);
+            return descriptor;
         }
 
         public static GameObject CreateText(

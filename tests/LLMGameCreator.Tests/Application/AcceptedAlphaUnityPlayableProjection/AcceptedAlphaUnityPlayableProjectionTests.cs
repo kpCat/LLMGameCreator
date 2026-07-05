@@ -79,6 +79,29 @@ public sealed class AcceptedAlphaUnityPlayableProjectionTests
         Assert.True(result.NegativeProof.Passed);
     }
 
+    [Fact]
+    public void Goal120UsabilitySourceScanFindsLegendDescriptorsSelectionAndCleanupContract()
+    {
+        var result = new AcceptedAlphaProjectionUsabilityService()
+            .Build(ProjectRoot());
+
+        Assert.Equal("GREEN", result.Dashboard.UsabilityStatus);
+        Assert.True(result.Dashboard.Goal119ARemainsGreen);
+        Assert.True(result.Dashboard.LegendPresent);
+        Assert.True(result.Dashboard.MarkerDescriptorPresent);
+        Assert.True(result.Dashboard.SelectionControlsPresent);
+        Assert.True(result.Dashboard.FocusCameraControlPresent);
+        Assert.True(result.Dashboard.MaterialWarningGuardPresent);
+        Assert.True(result.Dashboard.CleanupScriptContractPassed);
+        Assert.True(result.Dashboard.DoNotStartAutomatically);
+        Assert.True(result.ScriptInventory.Passed);
+        Assert.True(result.ScriptInventory.BatchmodeMethodPresent);
+        Assert.True(result.ScriptInventory.BatchmodePassMarkerPresent);
+        Assert.True(result.CleanupScriptScan.Passed);
+        Assert.True(result.SmokePlan.StepCount >= 8);
+        Assert.True(result.NegativeProof.Passed);
+    }
+
     private static string ProjectRoot()
     {
         var current = AppContext.BaseDirectory;

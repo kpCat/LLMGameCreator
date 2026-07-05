@@ -28,6 +28,8 @@ Goal 119 review note: the accepted Alpha Unity playable projection entrypoint re
 
 Goal 119A review note: the accepted Alpha Unity material warning hotfix removes the edit-mode projection marker material-instantiation warning and adds batchmode/source/log guard evidence for the same Goal119 menu route. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 120 review note: the accepted Alpha projection usability and cleanup pass adds descriptor-backed selection, a visible legend, a Goal120 batchmode usability smoke and a bounded Unity editor-noise cleanup script for the same accepted Alpha route. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |

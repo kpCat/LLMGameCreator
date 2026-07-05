@@ -1,0 +1,54 @@
+{
+  "goalId": "goal_120_accepted_alpha_projection_usability_and_cleanup",
+  "rootPresentCheck": true,
+  "playerProxySelectionCheck": true,
+  "legendCheck": true,
+  "markerDescriptorCheck": true,
+  "interactionSelectionCheck": true,
+  "objectiveSelectionCheck": true,
+  "diagnosticsMarkerSelectionCheck": true,
+  "materialWarningGuardCheck": true,
+  "stepCount": 8,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "root_present",
+      "expectedResult": "Generated root is found by exact name."
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "player_proxy_selectable",
+      "expectedResult": "Select Player Proxy selects a descriptor-backed player object."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "legend_visible",
+      "expectedResult": "Legend is present under the generated root."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "marker_descriptor_present",
+      "expectedResult": "At least one marker descriptor is attached."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "interaction_target_selectable",
+      "expectedResult": "Select Next Interaction Target resolves a marker."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "objective_selectable",
+      "expectedResult": "Select Next Objective resolves a marker."
+    },
+    {
+      "stepIndex": 7,
+      "stepId": "diagnostics_marker_selectable",
+      "expectedResult": "Select Diagnostics Marker resolves diagnostics text."
+    },
+    {
+      "stepIndex": 8,
+      "stepId": "material_warning_guard",
+      "expectedResult": "Material property blocks remain the color path."
+    }
+  ]
+}
