@@ -213,6 +213,7 @@ Read these before broad generation, capability, prompt, Lua integration, artifac
 | `docs/agent-tasks/goal-116-offline-geoworld-alpha-manual-gate-acceptance-record/GOAL.md` | Goal 116 task: record explicit human acceptance of `offline_geoworld_alpha_manual_acceptance_verification` from Goal115 GREEN candidate evidence without committing `.llmgc/manual/**`. Produces a BCL-only Application acceptance-record service, deterministic acceptance/dashboard/report/file-index/quality/negative-proof evidence, export metadata, short acceptance note and Visual World Stream Preview Workspace/WinForms visibility. Current result is `ACCEPTED_BY_HUMAN`, humanAccepted=true, acceptedByCodex=false, manualInputNotCommitted=true, rawManualResultEmbeddedInArtifacts=false and recommendedNextDecision=`POST_ACCEPTANCE_CONTINUATION_SELECTION`. |
 | `docs/agent-tasks/goal-117-offline-geoworld-alpha-post-acceptance-continuation-selection/GOAL.md` | Goal 117 task: create the post-acceptance continuation-selection matrix after Goal116. Current result is `GREEN`, recommendedNextLane=`accepted_alpha_baseline_review`, recommendedNextGoalId=`goal-118-offline-geoworld-accepted-alpha-baseline-review`, doNotStartAutomatically=true and no Goal118 task files created. |
 | `docs/agent-tasks/goal-118-offline-geoworld-accepted-alpha-baseline-review/GOAL.md` | Goal 118 task: create the accepted offline geoworld Alpha baseline review package after Goal116 human acceptance. Current result is `GREEN`, baselineId=`offline_geoworld_alpha_accepted_baseline_v1`, acceptedBaselineReady=true, manualGateStatus=`ACCEPTED_BY_HUMAN`, sourceGoalRange=`Goal098-Goal117`, includedSourceGoalCount=23, acceptedEvidenceRootCount=6, producedOnlyRootCount=17 and recommendedNextDecision=`EXPLICIT_NEXT_LANE_SELECTION`; it embeds no `.llmgc/manual/**` input and starts no live geodata/provider/network, Runtime/schema, Lua, generator-library, Unity scene/prefab/settings/StreamingAssets or release packaging work. |
+| `docs/agent-tasks/goal-119-accepted-alpha-unity-playable-projection/GOAL.md` | Goal 119 task: create the accepted Alpha Unity playable projection entrypoint over the Goal118 accepted baseline. Current result is `GREEN`, Unity menu path=`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, generated root=`__LLMGC_AcceptedAlphaPlayableProjection__`, evidence under `.llmgc/procedural/goal-119-accepted-alpha-unity-playable-projection/`, export metadata under `.llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/`, and manual gate=`accepted_alpha_unity_playable_projection_verification`; it embeds no `.llmgc/manual/**` input and starts no live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/settings/StreamingAssets or release packaging work. |
 | `docs/ROADMAP_FINAL_REBASELINE.md` | Goal 097 final roadmap rebaseline after Goals 074-096, including current position, milestone ladder, estimates, end-to-end progress rule, deferrals and kill criteria. |
 | `docs/context/DREAM_SCOPE_REGISTER.md` | Goal 097 dream-scope register covering fantasy/Heroes-like, sci-fi, Space-Rangers-like, visual/media compiler, adult/rating, realism/geospatial, self-generated realism and release/export tracks. |
 | `docs/context/REALISM_GEOWORLD_SIMULATOR_TRACK.md` | Goal 097 future planning track for optional real-world/geospatial ingestion and fully self-generated realism simulation; no implementation authority. |
@@ -761,6 +762,16 @@ sourceGoalRange=`Goal098-Goal117`, includedSourceGoalCount=23 and recommendedNex
 This is not final release and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library,
 final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal119 records the accepted Alpha Unity playable projection entrypoint over the Goal118 accepted baseline. It writes
+deterministic evidence under `.llmgc/procedural/goal-119-accepted-alpha-unity-playable-projection/`, export metadata
+under `.llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/`, and the short manual note
+`docs/manual-acceptance/accepted-alpha-unity-playable-projection.md`. It adds the Unity Editor menu path
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, generated root
+`__LLMGC_AcceptedAlphaPlayableProjection__`, script inventory, smoke plan, negative proof, quality gate scan and
+Visual World Stream Preview Workspace visibility. This is not final release and does not authorize live
+geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity
+scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Allowed next sequence:
 
 1. Keep Goal 034 `strict_llm_draft_artifact_loop_verification` recorded as passed by the user.
@@ -843,6 +854,7 @@ Allowed next sequence:
 78. Use Goal 116 as the accepted manual gate record for `offline_geoworld_alpha_manual_acceptance_verification`; select the post-acceptance continuation explicitly and do not start Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/release-packaging work without a separate task.
 79. Use Goal117 as the GREEN continuation-selection matrix: recommended next lane is `accepted_alpha_baseline_review` and recommended next goal id is `goal-118-offline-geoworld-accepted-alpha-baseline-review`; do not create/start Goal118 without a separate explicit task.
 80. Use Goal118 as the accepted Alpha baseline review package: baseline id `offline_geoworld_alpha_accepted_baseline_v1`, acceptedBaselineReady=true and recommendedNextDecision=`EXPLICIT_NEXT_LANE_SELECTION`; do not start live geodata/provider, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/StreamingAssets or release packaging without a separate explicit task.
+81. Use Goal119 as the accepted Alpha Unity playable projection entrypoint: run hands-on verification through `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, review the generated root `__LLMGC_AcceptedAlphaPlayableProjection__`, and do not start live geodata/provider, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/StreamingAssets or release packaging without a separate explicit task.
 
 Kill criterion:
 

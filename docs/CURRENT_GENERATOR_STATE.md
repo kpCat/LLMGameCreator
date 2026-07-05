@@ -1,8 +1,26 @@
 # Current Generator State
 
 Status: source-of-truth handoff  
-Updated by: Goal 118 offline geoworld accepted Alpha baseline review
+Updated by: Goal 119 accepted Alpha Unity playable projection
 State file pair: `docs/CURRENT_GENERATOR_STATE.json`
+
+Goal 119 produced for review:
+
+```text
+accepted_alpha_unity_playable_projection_verification required
+implementationStatus=GREEN
+accepted=false
+unityMenuPath=LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection
+generatedRootName=__LLMGC_AcceptedAlphaPlayableProjection__
+```
+
+Goal 119 creates a hands-on Unity Editor entrypoint over the Goal118 accepted Alpha baseline. Evidence lives under
+`.llmgc/procedural/goal-119-accepted-alpha-unity-playable-projection/`, export metadata under
+`.llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/`, and the short manual note at
+`docs/manual-acceptance/accepted-alpha-unity-playable-projection.md`.
+
+This is not final release and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library,
+final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
 Goal 053 handoff acceptance recorded before Goal 054:
 

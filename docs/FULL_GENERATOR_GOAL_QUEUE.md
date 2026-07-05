@@ -2111,18 +2111,35 @@ It records `baselineId=offline_geoworld_alpha_accepted_baseline_v1`, `manualGate
 generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or
 release-packaging work.
 
+### Goal 119: Accepted Alpha Unity Playable Projection
+
+Goal 119 is produced for review as a GREEN accepted Alpha Unity playable projection entrypoint over the Goal118
+accepted baseline.
+It writes deterministic evidence under
+`.llmgc/procedural/goal-119-accepted-alpha-unity-playable-projection/`, export metadata under
+`.llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/`, and the short manual note at
+`docs/manual-acceptance/accepted-alpha-unity-playable-projection.md`.
+
+It records the Unity Editor menu path
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, generated root
+`__LLMGC_AcceptedAlphaPlayableProjection__`, a source-safe script inventory, smoke plan, negative proof, quality
+gate scan and Visual World Stream Preview Workspace visibility. It embeds no raw `.llmgc/manual/**` input and does
+not authorize final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final
+renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 ## Current Recommended Next Work
 
 ```text
-EXPLICIT_NEXT_LANE_SELECTION
+accepted_alpha_unity_playable_projection_verification
 ```
 
-Review the Goal118 accepted baseline package, then explicitly select the next lane. Do not start live geodata/provider,
-Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/settings/packages,
-StreamingAssets or release packaging work from this handoff.
+Run hands-on Unity verification for Goal119 through
+`LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, then explicitly decide the manual gate. Do not start
+live geodata/provider, Runtime, schema, Lua, generator-library, final gameplay, final art, atlas, Unity
+scene/prefab/settings/packages, StreamingAssets or release packaging work from this handoff.
 
 Status:
 
 ```text
-goal_118_offline_geoworld_accepted_alpha_baseline_review_green_next_lane_selection_required
+goal_119_accepted_alpha_unity_playable_projection_green_manual_verification_required
 ```

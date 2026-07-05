@@ -1,0 +1,45 @@
+{
+  "goalId": "goal_119_accepted_alpha_unity_playable_projection",
+  "packageRelativePathsOnly": true,
+  "indexedFileCount": 6,
+  "selfHashExcluded": true,
+  "manualInputExcluded": true,
+  "files": [
+    {
+      "relativePath": ".llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/accepted-alpha-unity-playable-projection-dashboard.json",
+      "role": "goal119_accepted_alpha_unity_playable_projection_export",
+      "required": true,
+      "sha256": "1ccdc0ae096a35d0152bcb4c3aab4322fe309809da1b19268bbac6a105f57a71"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/accepted-alpha-unity-playable-projection-negative-proof.json",
+      "role": "goal119_accepted_alpha_unity_playable_projection_export",
+      "required": true,
+      "sha256": "83ecb904d30870ad5e2e6a7e40a3a06d4cdd73b7a143b389f4237655cd41a90b"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/accepted-alpha-unity-playable-projection-quality-gate-scan.json",
+      "role": "goal119_accepted_alpha_unity_playable_projection_export",
+      "required": true,
+      "sha256": "d329e55e994ccd7bed40421f4ddcc5f36207e585b95c7bd2250ad045fc404383"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/accepted-alpha-unity-playable-projection-report.md",
+      "role": "goal119_accepted_alpha_unity_playable_projection_export",
+      "required": true,
+      "sha256": "e43f5c28b09401451fdd67a58edf02049cecb6a8e94a4104886bd4ad099df5b3"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/accepted-alpha-unity-playable-projection-script-inventory.json",
+      "role": "goal119_accepted_alpha_unity_playable_projection_export",
+      "required": true,
+      "sha256": "3dd909f4d55cfd3f80142c7c50990337d868119d5e99626c7ad29e6ef9c768ec"
+    },
+    {
+      "relativePath": ".llmgc/exports/goal-119-accepted-alpha-unity-playable-projection/accepted-alpha-unity-playable-projection-smoke-plan.json",
+      "role": "goal119_accepted_alpha_unity_playable_projection_export",
+      "required": true,
+      "sha256": "238101d6c18a44378829c204426ce3f11998608dbf5caf78c4b4729424c5e55f"
+    }
+  ]
+}

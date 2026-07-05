@@ -39,6 +39,9 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
         var pageGoal118RelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Goal118.cs";
+        var pageGoal119RelativePath =
+            "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
+            + "VisualWorldStreamPreviewWorkspacePageControl.Goal119.cs";
         var designerRelativePath =
             "src/LLMGameCreator.WinForms/Pages/VisualWorldStreamPreviewWorkspace/"
             + "VisualWorldStreamPreviewWorkspacePageControl.Designer.cs";
@@ -62,8 +65,10 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                        + ReadOptionalText(projectRoot, pageGoal116RelativePath)
                        + "\n"
                        + ReadOptionalText(projectRoot, pageGoal117RelativePath)
-                       + "\n"
-                       + ReadOptionalText(projectRoot, pageGoal118RelativePath);
+                        + "\n"
+                        + ReadOptionalText(projectRoot, pageGoal118RelativePath)
+                        + "\n"
+                        + ReadOptionalText(projectRoot, pageGoal119RelativePath);
         var designerText = ReadOptionalText(projectRoot, designerRelativePath);
         var compositionText = ReadOptionalText(projectRoot, compositionRelativePath);
         var diagnostics = new List<VisualWorldPreviewDiagnostic>();
@@ -462,6 +467,36 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             && pageText.Contains(
                 "offlineGeoworldAcceptedAlphaExportPath",
                 StringComparison.Ordinal);
+        var bindDisplaysAcceptedAlphaUnityPlayableProjection = pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionStatus",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionUnityMenuPath",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionBaselineId",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionAcceptedBaselineReady",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionGeneratedRootName",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionScriptInventoryCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionSmokePlanStepCount",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionForbiddenUnitySurfaceClean",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionEvidencePath",
+                StringComparison.Ordinal)
+            && pageText.Contains(
+                "acceptedAlphaUnityPlayableProjectionExportPath",
+                StringComparison.Ordinal);
 
         AddIfFalse(pageExists, "goal092.winforms.page_missing", pageRelativePath, diagnostics);
         AddIfFalse(designerExists, "goal092.winforms.designer_missing", designerRelativePath, diagnostics);
@@ -575,6 +610,11 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             "goal118.winforms.offline_geoworld_accepted_alpha_baseline_bind_missing",
             pageRelativePath,
             diagnostics);
+        AddIfFalse(
+            bindDisplaysAcceptedAlphaUnityPlayableProjection,
+            "goal119.winforms.accepted_alpha_unity_playable_projection_bind_missing",
+            pageRelativePath,
+            diagnostics);
 
         return new VisualWorldPreviewWinFormsBindingInventory
         {
@@ -624,6 +664,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 bindDisplaysOfflineGeoworldAlphaPostAcceptanceContinuation,
             PageBindDisplaysOfflineGeoworldAcceptedAlphaBaselineReview =
                 bindDisplaysOfflineGeoworldAcceptedAlphaBaseline,
+            PageBindDisplaysAcceptedAlphaUnityPlayableProjection =
+                bindDisplaysAcceptedAlphaUnityPlayableProjection,
             Diagnostics = diagnostics
         };
     }

@@ -513,6 +513,28 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
                 qualityGate.OfflineGeoworldAcceptedAlphaQualityGatePassed,
             Goal118FilesDiscoveredByRelativePaths =
                 qualityGate.Goal118FilesDiscoveredByRelativePaths,
+            AcceptedAlphaUnityPlayableProjectionStatus =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionStatus,
+            AcceptedAlphaUnityPlayableProjectionUnityMenuPath =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionUnityMenuPath,
+            AcceptedAlphaUnityPlayableProjectionBaselineId =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionBaselineId,
+            AcceptedAlphaUnityPlayableProjectionAcceptedBaselineReady =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionAcceptedBaselineReady,
+            AcceptedAlphaUnityPlayableProjectionGeneratedRootName =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionGeneratedRootName,
+            AcceptedAlphaUnityPlayableProjectionScriptInventoryCount =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionScriptInventoryCount,
+            AcceptedAlphaUnityPlayableProjectionSmokePlanStepCount =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionSmokePlanStepCount,
+            AcceptedAlphaUnityPlayableProjectionForbiddenUnitySurfaceClean =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionForbiddenUnitySurfaceClean,
+            AcceptedAlphaUnityPlayableProjectionDoNotStartAutomatically =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionDoNotStartAutomatically,
+            AcceptedAlphaUnityPlayableProjectionQualityGatePassed =
+                qualityGate.AcceptedAlphaUnityPlayableProjectionQualityGatePassed,
+            Goal119FilesDiscoveredByRelativePaths =
+                qualityGate.Goal119FilesDiscoveredByRelativePaths,
             ProofStatusPassed = proofStatus.Passed,
             WinFormsBindingPassed = binding.Passed,
             QualityGatePassed = qualityGate.Passed,

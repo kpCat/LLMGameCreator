@@ -1,22 +1,24 @@
 ﻿{
     "schema_version":  "0.1",
     "state_id":  "current_generator_state",
-    "updated_at_utc":  "2026-07-05T07:50:28Z",
+    "updated_at_utc":  "2026-07-05T19:50:56Z",
     "current_phase":  "strategy_reset_playable_procedural_generator",
-    "current_phase_title":  "Goal 118 produced offline geoworld accepted Alpha baseline review package after Goal116 manual gate acceptance",
-    "gate_status":  "offline_geoworld_alpha_manual_acceptance_verification",
+    "current_phase_title":  "Goal 119 produced accepted Alpha Unity playable projection entrypoint over the Goal118 baseline",
+    "gate_status":  "accepted_alpha_unity_playable_projection_verification",
     "last_completed_milestone":  "M4.1",
     "last_completed_milestone_title":  "Strict LLM Generation Evaluation Pack",
     "last_completed_product_slice_id":  "goal_081_edit_driven_gamepackage_runtime_preview_playthrough",
     "active_manual_gate":  "Goal 116 records the repository owner's explicit human decision for offline_geoworld_alpha_manual_acceptance_verification: Я принимаю offline_geoworld_alpha_manual_acceptance_verification по Goal115 GREEN_ACCEPTABLE_CANDIDATE. The accepted source is Goal115 GREEN_ACCEPTABLE_CANDIDATE over the real local human result hash 8c2ad299d241d4315248b642b723ae8cf33ecabaa42a46462985ea5dc8335aeb, with all 12 required steps passed, acceptedByCodex=false, manualInputNotCommitted=true and rawManualResultEmbeddedInArtifacts=false. The local .llmgc/manual/** input remains human input and must not be committed. Goal116 is not final release, not Runtime approval, not provider/live geodata/network approval, not public schema/Lua/generator-library approval, not final art/atlas approval and not Unity scene/prefab/project-settings/release-packaging approval.",
-    "current_user_action":  "Review the Goal118 accepted Alpha baseline package, then explicitly select the next lane. Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
-    "recommended_next_decision":  "EXPLICIT_NEXT_LANE_SELECTION after reviewing offline_geoworld_alpha_accepted_baseline_v1 for offline_geoworld_alpha_manual_acceptance_verification. Goal118 is a baseline review package only; no automatic Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work is authorized.",
+    "current_user_action":  "Review Goal119 accepted Alpha Unity playable projection evidence and run hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection. Codex must not automatically start live geodata ingestion, Runtime consumers, provider/network adapters, public schema, Lua, generator-library, final gameplay, final art, atlas, Unity scene/prefab/project settings, StreamingAssets or release packaging work.",
+    "recommended_next_decision":  "accepted_alpha_unity_playable_projection_verification after reviewing Goal119 artifacts and using the Unity Editor menu entry over offline_geoworld_alpha_accepted_baseline_v1. Goal119 is a manual playable projection entrypoint only; no automatic Runtime/provider/schema/Lua/generator-library/final-art/atlas/Unity scene/prefab/project-settings/StreamingAssets/release-packaging work is authorized.",
     "active_strategy_reset":  {
                                   "document":  "docs/GENERATOR_STRATEGY_RESET_PLAYABLE_PROCEDURAL_GENERATOR.md",
                                   "freeze_infrastructure_only_work":  true,
                                   "required_outcome_within_large_slices":  3,
                                   "required_outcome":  "generated_playable_or_simulatable_loop",
                                   "next_sequence":  [
+                                                        "accepted_alpha_unity_playable_projection_verification",
+                                                        "hands_on_unity_verification_after_goal119",
                                                         "explicit_next_lane_selection_after_accepted_alpha_baseline_review",
                                                         "offline_geoworld_accepted_alpha_baseline_review_verification",
                                                         "offline_geoworld_alpha_slice_export_package_verification",
@@ -171,7 +173,8 @@
                            "goal_113_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
                            "goal_115_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
                            "goal_116_manual_gate":  "offline_geoworld_alpha_manual_acceptance_verification",
-                           "goal_118_manual_gate":  "offline_geoworld_accepted_alpha_baseline_review_verification"
+                           "goal_118_manual_gate":  "offline_geoworld_accepted_alpha_baseline_review_verification",
+                           "goal_119_manual_gate":  "accepted_alpha_unity_playable_projection_verification"
                        },
     "gate_evidence":  {
                           "evaluation_id":  "strict_llm_evaluation/58df49dadbff5598",
@@ -462,6 +465,9 @@
                                                                                 ]
                                         },
     "allowed_next_codex_task_types":  [
+                                          "accepted_alpha_unity_playable_projection_verification",
+                                          "goal_119_accepted_alpha_unity_playable_projection",
+                                          "manual_review_goal_119_accepted_alpha_unity_playable_projection",
                                           "explicit_next_lane_selection_after_accepted_alpha_baseline_review",
                                           "offline_geoworld_accepted_alpha_baseline_review_verification",
                                           "goal_118_offline_geoworld_accepted_alpha_baseline_review",
@@ -584,10 +590,13 @@
                                  "broad Lua executor unlock",
                                  "C# code generation for mechanics"
                              ],
-    "recommended_next_work_item":  "explicit_next_lane_selection_after_accepted_alpha_baseline_review",
-    "recommended_next_work_item_title":  "Review Goal118 accepted Alpha baseline package and explicitly select the next lane",
-    "recommended_next_task_file":  "docs/manual-acceptance/offline-geoworld-accepted-alpha-baseline-review.md",
+    "recommended_next_work_item":  "accepted_alpha_unity_playable_projection_verification",
+    "recommended_next_work_item_title":  "Verify the Goal119 accepted Alpha Unity playable projection entrypoint",
+    "recommended_next_task_file":  "docs/manual-acceptance/accepted-alpha-unity-playable-projection.md",
     "candidate_product_vertical_slices":  [
+                                              "Run Goal119 hands-on Unity verification through LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection before selecting the next lane explicitly",
+                                              "Keep Goal119 limits in force: this is not final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art, atlas, Unity scene/prefab/project-settings/StreamingAssets or release-packaging approval",
+                                              "Use Goal119 accepted Alpha Unity playable projection evidence only as a manual verification entrypoint until accepted_alpha_unity_playable_projection_verification is reviewed",
                                               "Review Goal118 accepted Alpha baseline package offline_geoworld_alpha_accepted_baseline_v1 before selecting the next lane explicitly",
                                               "Keep Goal118 limits in force: this is not final release, Runtime, provider/live geodata/network, public schema, Lua, generator-library, final art, atlas, Unity scene/prefab/project-settings/StreamingAssets or release-packaging approval",
                                               "Use Goal118 baseline evidence only as a review/handoff package until a separate explicit task selects the next implementation lane",
@@ -2653,6 +2662,19 @@
                                                                                              ],
                                                                          "next_action":  "review_goal_118_baseline_and_select_next_lane_explicitly"
                                                                      },
+    "accepted_alpha_unity_playable_projection_verification":  {
+                                                                 "status":  "produced_for_review",
+                                                                 "accepted":  false,
+                                                                 "evidence_source":  "goal_119_accepted_alpha_unity_playable_projection",
+                                                                 "observed_result":  [
+                                                                                         "Goal 119 produces an accepted Alpha Unity playable projection entrypoint over the Goal118 accepted baseline package.",
+                                                                                         "Evidence is under .llmgc/procedural/goal-119-accepted-alpha-unity-playable-projection and export metadata is under .llmgc/exports/goal-119-accepted-alpha-unity-playable-projection.",
+                                                                                         "The Unity Editor menu path is LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection and the temporary scene root is __LLMGC_AcceptedAlphaPlayableProjection__.",
+                                                                                         "The existing Visual World Stream Preview Workspace surfaces the accepted_alpha_unity_playable_projection group with dashboard, script inventory, smoke plan, negative proof, quality gate, evidence path and export path.",
+                                                                                         "Goal119 does not embed, stage or commit .llmgc/manual/** and does not authorize live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work."
+                                                                                     ],
+                                                                 "next_action":  "run_hands_on_unity_verification_for_goal119_projection_entrypoint"
+                                                             },
     "offline_geoworld_alpha_manual_result_intake_verification":  {
                                                                      "status":  "produced_for_review",
                                                                      "accepted":  false,

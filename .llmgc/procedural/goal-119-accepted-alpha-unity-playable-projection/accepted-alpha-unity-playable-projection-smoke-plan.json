@@ -1,0 +1,44 @@
+{
+  "goalId": "goal_119_accepted_alpha_unity_playable_projection",
+  "unityMenuPath": "LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection",
+  "expectedGeneratedRootName": "__LLMGC_AcceptedAlphaPlayableProjection__",
+  "baselineLoaded": true,
+  "hasPlayerProxyStep": true,
+  "hasChunkWindowStep": true,
+  "hasInteractionOrObjectiveStep": true,
+  "hasDiagnosticsStatusStep": true,
+  "zeroFatalErrorsExpected": true,
+  "stepCount": 6,
+  "steps": [
+    {
+      "stepIndex": 1,
+      "stepId": "refresh_accepted_baseline",
+      "expectedResult": "Goal118 baseline loaded as offline_geoworld_alpha_accepted_baseline_v1"
+    },
+    {
+      "stepIndex": 2,
+      "stepId": "create_player_proxy",
+      "expectedResult": "Projection root contains at least one player proxy primitive."
+    },
+    {
+      "stepIndex": 3,
+      "stepId": "render_chunk_window_and_prefetch_markers",
+      "expectedResult": "Projection contains chunk/window and boundary/prefetch markers."
+    },
+    {
+      "stepIndex": 4,
+      "stepId": "render_interactions_and_objectives",
+      "expectedResult": "Projection contains interaction target markers and objective checklist entries."
+    },
+    {
+      "stepIndex": 5,
+      "stepId": "show_save_load_replay_status",
+      "expectedResult": "Projection shows Goal106 replay/checkpoint status."
+    },
+    {
+      "stepIndex": 6,
+      "stepId": "show_diagnostics_status",
+      "expectedResult": "Projection contains diagnostics status and zero fatal errors."
+    }
+  ]
+}

@@ -675,6 +675,8 @@ public sealed partial class VisualWorldStreamPreviewWorkspaceService
             $"- winFormsBindingInventoryHash: {report.WinFormsBindingInventoryHash}",
             $"- qualityGateHash: {report.QualityGateHash}"
         ]);
+        AddGoal119ReportLines(lines, report);
+        AddGoal119QualityLines(lines, qualityGate);
         return string.Join(Environment.NewLine, lines) + Environment.NewLine;
     }
 }

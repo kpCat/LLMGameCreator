@@ -26,6 +26,8 @@ Goal 117 note: the post-acceptance continuation matrix is GREEN and recommends `
 
 Goal 118 note: the accepted Alpha baseline review package is GREEN with baselineId `offline_geoworld_alpha_accepted_baseline_v1`, acceptedBaselineReady=true and recommendedNextDecision=`EXPLICIT_NEXT_LANE_SELECTION`. This packages the accepted evidence chain for review only; it does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
 
+Goal 119 note: the accepted Alpha Unity playable projection entrypoint is GREEN with Unity menu path `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection` and generated root `__LLMGC_AcceptedAlphaPlayableProjection__`. This creates a hands-on Unity verification route over the Goal118 accepted baseline only; it does not close `vertical_slice_final_verification`, does not commit `.llmgc/manual/**`, and does not approve final release, live geodata/provider/network, Runtime/schema, Lua, generator-library, final renderer/atlas, Unity scene/prefab/project-settings/packages/StreamingAssets or release-packaging work.
+
 Acceptance gate:
 
 - user-visible/editor-visible generated package workflow;

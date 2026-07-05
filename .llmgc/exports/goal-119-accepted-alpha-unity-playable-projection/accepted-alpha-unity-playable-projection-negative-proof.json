@@ -1,0 +1,26 @@
+{
+  "goalId": "goal_119_accepted_alpha_unity_playable_projection",
+  "passed": true,
+  "manualInputRejected": true,
+  "runtimeSchemaProviderLuaGeneratorLibraryRejected": true,
+  "unityScenesPrefabsSettingsPackagesStreamingAssetsRejected": true,
+  "finalReleasePackagingRejected": true,
+  "liveGeodataProviderNetworkRejected": true,
+  "manualInputExcluded": true,
+  "rejectedPathSamples": [
+    ".llmgc/manual/goal-110-offline-geoworld-alpha-acceptance/offline-geoworld-alpha-acceptance-result.json",
+    "src/LLMGameCreator.Runtime/GameRuntime.cs",
+    "src/LLMGameCreator.Runtime.Abstractions/IGameRuntime.cs",
+    "src/LLMGameCreator.GamePackage/GamePackageDefinition.cs",
+    "src/LLMGameCreator.Scripting/LuaSandbox.cs",
+    "generator-library/example.json",
+    "unity/LLMGameCreatorAlpha/Assets/Scenes/Main.unity",
+    "unity/LLMGameCreatorAlpha/Assets/Prefabs/AcceptedAlpha.prefab",
+    "unity/LLMGameCreatorAlpha/ProjectSettings/ProjectSettings.asset",
+    "unity/LLMGameCreatorAlpha/Packages/manifest.json",
+    "unity/LLMGameCreatorAlpha/Assets/StreamingAssets/LLMGameCreator/OfflineGeoworldGoal119/example.json",
+    ".llmgc/exports/final-release/package.zip",
+    "provider/live-geodata/Adapter.cs"
+  ],
+  "diagnostic": "Goal119 is a temporary Unity Editor projection over accepted Alpha evidence, not release/runtime/provider/schema work."
+}

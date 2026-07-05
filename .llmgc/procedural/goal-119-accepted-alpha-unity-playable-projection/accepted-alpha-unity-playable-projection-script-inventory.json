@@ -1,0 +1,54 @@
+{
+  "goalId": "goal_119_accepted_alpha_unity_playable_projection",
+  "menuPathExistsExactly": true,
+  "scriptCount": 5,
+  "allScriptsPresent": true,
+  "noForbiddenUnityPathsExpected": true,
+  "scripts": [
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Editor/AcceptedAlphaPlayableProjectionWindow.cs",
+      "role": "unity_editor_window",
+      "exists": true,
+      "required": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection",
+      "sha256": "5f5e5bbc65e370015ad9388056a33283650640e2659e592e2aefc3b67e8fe373"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionController.cs",
+      "role": "unity_projection_controller",
+      "exists": true,
+      "required": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "__LLMGC_AcceptedAlphaPlayableProjection__",
+      "sha256": "029b5b81d24f7ef959df442c56d37764a922826d97fc503b2c0d27bb49a8e4bd"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionDiagnostics.cs",
+      "role": "unity_projection_diagnostics",
+      "exists": true,
+      "required": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "AcceptedAlphaPlayableProjectionDiagnostics",
+      "sha256": "bc7008dcd0484f7ea9884a4e97df7d485efa247fde084ed7756bee5c4b0e2f9d"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionModels.cs",
+      "role": "unity_projection_models",
+      "exists": true,
+      "required": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "AcceptedAlphaProjectionSmokeResult",
+      "sha256": "2eb010c1a1240821718dd7609d68a0bc1ceeb78f0e77b6aeeb77af1a756ca256"
+    },
+    {
+      "relativePath": "unity/LLMGameCreatorAlpha/Assets/Scripts/AcceptedAlphaPlayableProjectionPrimitiveFactory.cs",
+      "role": "unity_projection_primitive_factory",
+      "exists": true,
+      "required": true,
+      "containsRequiredMarker": true,
+      "requiredMarker": "AcceptedAlphaPlayableProjectionPrimitiveFactory",
+      "sha256": "d3230bef0fe28c2a7889216b33e5ae19f7c061cb2921bef7a28941f72da9a9a1"
+    }
+  ]
+}

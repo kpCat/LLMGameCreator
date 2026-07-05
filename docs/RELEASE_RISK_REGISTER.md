@@ -24,6 +24,8 @@ Goal 117 review note: the continuation matrix recommends `accepted_alpha_baselin
 
 Goal 118 review note: the accepted Alpha baseline review package records baselineId `offline_geoworld_alpha_accepted_baseline_v1`, acceptedBaselineReady=true and recommendedNextDecision=`EXPLICIT_NEXT_LANE_SELECTION` over Goal098-117 evidence. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
 
+Goal 119 review note: the accepted Alpha Unity playable projection entrypoint records Unity menu path `LLMGameCreator/Accepted Alpha/Build/Refresh Playable Projection`, generated root `__LLMGC_AcceptedAlphaPlayableProjection__`, script inventory, smoke plan and negative proof over the Goal118 accepted baseline. Release blockers remain open for final release, Runtime/player proof, provider/live geodata/network policy, public schema, Lua, generator-library, final art/atlas and Unity scene/prefab/project-settings/StreamingAssets/release-packaging approval.
+
 | Risk | Why it blocks release | Required gate |
 |---|---|---|
 | Playable quality vs proof quality | Existing evidence can pass while the player experience remains inspection-only or debug-like. | Vertical Slice Final manual checklist with player-visible loop and package export/import proof. |
